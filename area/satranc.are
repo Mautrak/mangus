@@ -1,0 +1,2747 @@
+#AREADATA
+Filename satranc.are~
+Name Satranç Tahtasý~
+Builder Exxon~
+Translator Bilinmiyor~
+Language Türkçe~
+Lowlevel 10
+Highlevel 35
+Minvnum 4200
+Maxvnum 4299
+Path 3g 4b~
+Yonelim_iyi 33
+Yonelim_yansiz 34
+Yonelim_kem 33
+END
+
+#HELPS
+-1 chess chessboard~
+Converted to standard Envy 1.x by Jason Huang (god@sure.net)
+Further conversion to Rom 2.4 by Jaceks and Chicken's Den Staff~
+0 $~
+
+
+#NEW_MOBILES
+#4200
+siyah piyon~
+Siyah Piyon~
+Siyah bir piyon burada.
+~
+Kýsa boylu bir savaþçý. Zýrhý parlak ve siyah. Canýný vermeye
+hazýr bekliyor.
+~
+human~
+ACF D 10
+#4201
+beyaz piyon~
+Beyaz Piyon~
+Beyaz bir piyon burada.
+~
+Kýsa boylu bir savaþçý. Zýrhý parlak ve beyaz. Canýný vermeye
+hazýr bekliyor.
+~
+human~
+AC D 10
+#4202
+siyah kale~
+Siyah Kale~
+Siyah bir kale burada.
+~
+Büyük ve tekerlekli bir yapý. Görünüþe göre rakiplerini
+tek gönderdiði yer birer MEZAR.
+~
+human~
+AFH 0 27
+#4203
+beyaz kale~
+Beyaz Kale~
+Beyaz bir kale burada.
+~
+Büyük ve tekerlekli bir yapý. Görünüþe göre rakiplerini
+tek gönderdiði yer birer MEZAR.
+~
+human~
+AH D 27
+#4204
+siyah at~
+Siyah At~
+Siyah bir at burada.
+~
+Siyah bir savaþ atý. Gözlerinden ateþ çýkýyor.
+~
+human~
+AH 0 18
+#4205
+beyaz at~
+Beyaz At~
+Beyaz bir at burada.
+~
+Beyaz bir savaþ atý. Gözlerinden ateþ çýkýyor.
+~
+human~
+AH 0 18
+#4206
+siyah fil~
+Siyah Fil~
+Siyah bir fil burada.
+~
+Ýþte siyah ordunun fillerinden birisi. Ne kadar da
+iri ve güçlü görünüyor.
+~
+human~
+AH 0 24
+#4207
+beyaz fil~
+Beyaz Fil~
+Beyaz bir fil burada.
+~
+Ýþte beyaz ordunun fillerinden birisi. Ne kadar da
+iri ve güçlü görünüyor.
+~
+human~
+A DN 24
+#4208
+siyah vezir~
+Siyah Vezir~
+Siyah vezir burada.
+~
+Simsiyah cüppesi içinde bir vezir. Kralýn ordusunun
+en güçlü üyesi. Seni izliyor... Ne o, korktun mu?
+~
+human~
+ABFH DFH 32
+#4209
+beyaz vezir~
+Beyaz Vezir~
+Beyaz vezir burada.
+~
+Bembeyaz cüppesi içinde bir vezir. Kralýn ordusunun
+en güçlü üyesi. Seni izliyor... Ne o, korktun mu?
+~
+human~
+ABH DFHN 32
+#4210
+siyah kral~
+Siyah Kral~
+Siyah kral burada.
+~
+Ýþte siyah incilerle iþlenmiþ tacý ile bir hükümdar.
+Neden sen deðil de o bir kral? Ýþte sorunun cevabý,
+ne kadar da yüce bir görünüþ.
+~
+human~
+ABH DFHU 36
+#4211
+beyaz kral~
+Beyaz Kral~
+Beyaz kral burada.
+~
+Ýþte beyaz incilerle iþlenmiþ tacý ile bir hükümdar.
+Neden sen deðil de o bir kral? Ýþte sorunun cevabý,
+ne kadar da yüce bir görünüþ.
+~
+human~
+ABH DFHNU 36
+#4212
+halife omar hayalet~
+Omar'ýn hayaleti~
+Halife Omar'ýn hayaleti burada.
+~
+Halife Omar din kardeþlerine satranç oynamayý
+öðütleyen bir yüce adamdý. Ruhu hala burada,
+tahtanýn boþ olduðu vakitlerde dolaþýr karelerin
+üstünde.
+~
+human~
+AHT BDFHPQTUV 60
+#0
+
+
+#OBJECTS
+#4200
+zýrh siyah piyon~
+bir siyah piyon zýrhý~
+Bir siyah piyon zýrhý burada.~
+steel~
+armor J AD
+5 5 5 0 2
+10 75 600 G
+#4201
+zýrh beyaz piyon~
+bir beyaz piyon zýrhý~
+Bir beyaz piyon zýrhý burada.~
+steel~
+armor K AD
+5 5 5 0 2
+10 75 600 G
+#4202
+balta siyah piyon~
+bir siyah piyon baltasý~
+Bir siyah piyon baltasý burada.~
+steel~
+weapon J AN
+axe 2 7 chomp 0
+10 100 750 G
+#4203
+balta beyaz piyon~
+bir beyaz piyon baltasý~
+Bir beyaz piyon baltasý burada.~
+steel~
+weapon K AN
+axe 2 7 chomp 0
+10 100 750 G
+#4204
+zýrh siyah kale~
+bir siyah kale zýrhý~
+Bir siyah kale zýrhý burada.~
+stone~
+armor J AD
+8 8 8 0 5
+25 70 1250 G
+A
+17 2
+A
+5 1
+#4205
+zýrh beyaz kale~
+bir beyaz kale zýrhý~
+Bir beyaz kale zýrhý burada.~
+stone~
+armor K AD
+8 8 8 0 5
+25 70 1250 G
+A
+17 2
+A
+5 1
+#4206
+kargý siyah at~
+bir siyah at kargýsý~
+Bir siyah at kargýsý burada.~
+bronze~
+weapon BJ AN
+lance 5 5 pierce D
+17 50 2250 P
+A
+19 3
+A
+23 5
+#4207
+kargý beyaz þövalye~
+bir beyaz at kargýsý~
+Bir beyaz at kargýsý burada.~
+bronze~
+weapon BK AN
+lance 5 5 pierce D
+17 50 2300 P
+A
+19 3
+A
+23 5
+#4208
+asa siyah fil~
+bir siyah fil asasý~
+Bir siyah fil asasý burada.~
+wood~
+staff GJL AO
+20 5 5 'energy drain' 0
+23 20 3523 P
+#4209
+beyaz vezir taç~
+bir beyaz vezir tacý~
+Bir beyaz vezir tacý burada.~
+wood~
+staff GKL AO
+20 5 5 'sanctuary' 0
+23 20 3879 P
+#4210
+siyah vezir taç~
+bir siyah vezir tacý~
+Bir siyah vezir tacý burada.~
+gold~
+armor AGJL AE
+9 9 9 1 1
+32 50 5000 G
+A
+3 1
+A
+4 1
+#4211
+beyaz vezir taç~
+bir beyaz vezir tacý~
+Bir beyaz vezir tacý burada.~
+gold~
+armor AGKL AE
+9 9 9 1 1
+32 50 5000 G
+A
+3 1
+A
+4 1
+#4212
+hükümdar siyah asa kral~
+bir siyah kral hükümdar asasý~
+Siyah kralýn hükümdar asasý burada.~
+gold~
+treasure JL AO
+0 0 0 0 0
+32 10 7900 P
+A
+1 1
+A
+18 1
+#4213
+hükümdar beyaz asa kral~
+bir beyaz kral hükümdar asasý~
+Beyaz kralýn hükümdar asasý burada.~
+gold~
+treasure KL AO
+0 0 0 0 0
+32 10 7900 P
+A
+1 1
+A
+18 1
+#4214
+anahtar siyah hazine~
+siyah hazine anahtarý~
+Siyah bir anahtar burada duruyor.~
+metal~
+key FH AO
+0 0 0 0 0
+6 20 1 G
+#4215
+anahtar beyaz hazine~
+beyaz hazine anahtarý~
+Beyaz bir anahtar burada duruyor.~
+metal~
+key FH AO
+0 0 0 0 0
+6 20 1 G
+#4216
+siyah kraliyet hazine~
+siyah kraliyet hazinesi~
+Bir hazine görüyorsun.~
+silver~
+money 0 A
+10000 0 0 0 0
+0 0 0 P
+#4217
+beyaz kraliyet hazine~
+beyaz kraliyet hazinesi~
+Bir hazine görüyorsun.~
+silver~
+money 0 A
+10000 0 0 0 0
+0 0 0 P
+
+#4218
+döven siyah piyon~
+bir siyah piyon döveni~
+Bir siyah piyon döveni burada duruyor.~
+steel~
+weapon J AN
+flail 2 7 blast 0
+10 100 750 G
+#4219
+döven beyaz piyon~
+bir beyaz piyon döveni~
+Bir beyaz piyon döveni burada duruyor.~
+steel~
+weapon K AN
+flail 2 6 blast 0
+10 100 750 G
+
+#4220
+kýrbaç siyah piyon~
+bir siyah piyon kýrbacý~
+Bir siyah piyon kýrbacý burada duruyor.~
+steel~
+weapon J AN
+whip 2 7 whip 0
+10 100 750 G
+#4221
+kýrbaç beyaz piyon~
+bir beyaz piyon kýrbacý~
+Bir beyaz piyon kýrbacý burada duruyor.~
+steel~
+weapon K AN
+whip 2 6 whip 0
+10 100 750 G
+
+#4222
+asa siyah piyon~
+bir siyah piyon asasý~
+Bir siyah piyon asasý burada duruyor.~
+steel~
+weapon J AN
+staff 2 7 thrust 0
+10 100 750 G
+#4223
+asa beyaz piyon~
+bir beyaz piyon asasý~
+Bir beyaz piyon asasý burada duruyor.~
+steel~
+weapon K AN
+staff 2 7 thrust 0
+10 100 750 G
+
+#4224
+teber siyah piyon~
+bir siyah piyon teberi~
+Bir siyah piyon teberi burada duruyor.~
+steel~
+weapon J AN
+polear 2 7 pierce 0
+10 100 750 G
+#4225
+teber beyaz piyon~
+bir beyaz piyon teberi~
+Bir beyaz piyon teberi burada duruyor.~
+steel~
+weapon K AN
+polearm 2 7 pierce 0
+10 100 750 G
+
+#4226
+kýlýç siyah piyon~
+bir siyah piyon kýlýcý~
+Bir siyah piyon kýlýcý burada duruyor.~
+steel~
+weapon J AN
+sword 2 7 pierce 0
+10 100 750 G
+#4227
+kýlýç beyaz piyon~
+bir beyaz piyon kýlýcý~
+Bir beyaz piyon kýlýcý burada duruyor.~
+steel~
+weapon K AN
+sword 2 7 pierce 0
+10 100 750 G#
+
+4228
+kama siyah piyon~
+bir siyah piyon kamasý~
+Bir siyah piyon kamasý burada duruyor.~
+steel~
+weapon J AN
+dagger 2 7 pierce 0
+10 100 750 G
+#4229
+kama beyaz piyon~
+bir beyaz piyon kamasý~
+Bir beyaz piyon kamasý burada duruyor.~
+steel~
+weapon K AN
+dagger 2 7 pierce 0
+10 100 750 G
+
+#4230
+tataryayý siyah piyon~
+bir siyah piyon tataryayý~
+Bir siyah piyon tataryayý burada duruyor.~
+steel~
+weapon J AN
+exotic 2 7 blast 0
+10 100 750 G
+#4231
+tataryay beyaz piyon~
+bir beyaz piyon tataryayý~
+Bir beyaz piyon tataryayý burada duruyor.~
+steel~
+weapon K AN
+exotic 2 7 blast 0
+10 100 750 G
+
+#4232
+kalkan siyah piyon~
+bir siyah piyon kalkaný~
+Bir siyah piyon kalkaný burada duruyor.~
+steel~
+armor J AJ
+8 7 7 2 2
+10 30 1210 P
+#4233
+kalkan beyaz piyon~
+bir beyaz piyon kalkaný~
+Bir beyaz piyon kalkaný burada duruyor.~
+steel~
+armor K AJ
+8 7 7 2 2
+10 30 1210 P
+
+#4234
+fular siyah piyon~
+bir siyah piyon fularý~
+Bir siyah piyon fularý burada duruyor.~
+cloth~
+armor J AC
+5 7 7 1 1
+10 40 1510 P
+#4235
+fular beyaz piyon~
+bir beyaz piyon fularý~
+Bir beyaz piyon fularý burada duruyor.~
+cloth~
+armor K AC
+5 7 7 1 1
+10 40 1510 P
+
+#4236
+miðfer siyah piyon~
+bir siyah piyon miðferi~
+Bir siyah piyon miðferi burada duruyor.~
+leather~
+armor J AE
+6 6 7 1 1
+10 50 1150 P
+#4237
+miðfer beyaz piyon~
+bir beyaz piyon miðferi~
+Bir beyaz piyon miðferi burada duruyor.~
+leather~
+armor K AE
+6 6 7 1 1
+10 50 1150 P
+
+#4238
+bacaklýk siyah piyon~
+bir çift siyah piyon bacaklýðý~
+Bir çift siyah piyon bacaklýðý burada duruyor.~
+leather~
+armor J AF
+6 6 6 1 1
+10 30 1350 P
+#4239
+bacaklýk beyaz piyon~
+bir çift beyaz piyon bacaklýðý~
+Bir çift beyaz piyon bacaklýðý burada duruyor.~
+leather~
+armor K AF
+6 6 6 1 1
+10 30 1350 P
+
+#4240
+ayakkabý siyah piyon~
+bir çift siyah piyon ayakkabýsý~
+Bir çift siyah piyon ayakkabýsý burada duruyor.~
+leather~
+armor J AG
+7 6 7 1 1
+10 130 1450 P
+#4241
+ayakkabý beyaz piyon~
+bir çift beyaz piyon ayakkabýsý~
+Bir çift beyaz piyon ayakkabýsý burada duruyor.~
+leather~
+armor K AG
+7 6 7 1 1
+10 130 1450 P
+
+#4242
+eldiven siyah piyon~
+bir çift siyah piyon eldiveni~
+Bir çift siyah piyon eldiveni burada duruyor.~
+leather~
+armor J AH
+6 6 5 1 1
+10 80 950 P
+#4243
+eldiven beyaz piyon~
+bir çift beyaz piyon eldiveni~
+Bir çift beyaz piyon eldiveni burada duruyor.~
+leather~
+armor K AH
+6 6 5 1 1
+10 80 950 P
+
+#4244
+kolluk siyah piyon~
+bir çift siyah piyon kolluðu~
+Bir çift siyah piyon kolluðu burada duruyor.~
+leather~
+armor J AI
+6 5 6 1 1
+10 90 1150 P
+#4245
+kolluk beyaz piyon~
+bir çift beyaz piyon kolluðu~
+Bir çift beyaz piyon kolluðu burada duruyor.~
+leather~
+armor K AI
+6 5 6 1 1
+10 90 1150 P
+
+#4246
+pelerin siyah piyon~
+bir siyah piyon pelerini~
+Bir siyah piyon pelerini burada duruyo~
+cloth~
+armor J AK
+7 5 7 1 1
+10 80 1380 P
+#4247
+pelerin beyaz piyon~
+bir beyaz piyon pelerini~
+Bir beyaz piyon pelerini burada duruyor.~
+cloth~
+armor K AK
+7 5 7 1 1
+10 80 1380 P
+
+#4248
+kemer siyah piyon~
+bir siyah piyon kemeri~
+Bir siyah piyon kemeri burada duruyor.~
+bronze~
+armor J AL
+4 6 6 1 1
+10 70 990 P
+#4249
+kemer beyaz piyon~
+bir beyaz piyon kemeri~
+Bir beyaz piyon kemeri burada duruyor.~
+bronze~
+armor K AL
+4 6 6 1 1
+10 20 990 P
+
+#4250
+bileklik siyah piyon~
+bir siyah piyon bilekliði~
+Bir siyah piyon bilekliði burada duruyor.~
+bronze~
+armor J AM
+7 5 5 1 0
+10 60 1390 P
+#4251
+bileklik beyaz piyon~
+bir beyaz piyon bilekliði~
+Bir beyaz piyon bilekliði burada duruyor.~
+bronze~
+armor K AM
+7 5 5 1 0
+10 60 1390 P
+
+#4260
+satranç tahtasý~
+satranç tahtasý~
+Küçük bir satranç tahtasý görüyorsun.~
+wood~
+armor ABFJK AQ
+17 17 17 33 0
+51 60 55390 P
+F
+A 13 95 AT
+
+
+#4261
+kalkan siyah at~
+siyah at kalkaný~
+Bir siyah at kalkaný burada duruyor.~
+steel~
+armor J AJ
+8 9 9 2 2
+18 90 2210 P
+#4262
+kalkan beyaz at~
+beyaz at kalkaný~
+Bir beyaz at kalkaný burada duruyor.~
+steel~
+armor K AJ
+8 9 9 2 2
+18 90 2210 P
+
+#4263
+pelerin siyah at~
+bir siyah at pelerini~
+Bir siyah at pelerini burada duruyor.~
+cloth~
+armor J AC
+6 8 7 1 1
+18 70 2610 P
+#4264
+pelerin beyaz at~
+bir beyaz at pelerini~
+Bir beyaz at pelerini burada duruyor.~
+cloth~
+armor K AC
+6 8 7 1 1
+18 70 2610 P
+
+#4265
+miðfer siyah at~
+bir siyah at miðferi~
+Bir siyah at miðferi burada duruyor.~
+leather~
+armor J AE
+7 7 8 1 1
+18 70 1950 P
+#4266
+miðfer beyaz at~
+bir beyaz at miðferi~
+Bir beyaz at miðferi burada duruyor.~
+leather~
+armor K AE
+7 7 8 1 1
+18 70 1950 P
+
+#4267
+bacaklýk siyah at~
+bir çift siyah at bacaklýðý~
+Bir çift siyah at bacaklýðý burada duruyor.~
+leather~
+armor J AF
+7 7 7 1 1
+18 80 1350 P
+#4268
+bacaklýk beyaz at~
+bir çift beyaz at bacaklýðý~
+Bir çift beyaz at bacaklýðý burada duruyor.~
+leather~
+armor K AF
+7 7 7 1 1
+18 80 1350 P
+
+#4269
+ayakkabý siyah at~
+bir çift siyah at ayakkabýsý~
+Bir çift siyah at ayakkabýsý burada duruyor.~
+leather~
+armor J AG
+8 7 7 1 1
+18 110 2850 P
+#4270
+ayakkabý beyaz at~
+bir çift beyaz at ayakkabýsý~
+Bir çift beyaz at ayakkabýsý burada duruyor.~
+leather~
+armor K AG
+8 7 7 1 1
+18 110 2850 P
+
+#4271
+eldiven siyah at~
+bir çift siyah at eldiveni~
+Bir çift siyah at eldiveni burada duruyor.~
+leather~
+armor J AH
+6 7 6 1 1
+18 80 2250 P
+#4272
+eldiven beyaz at~
+bir çift beyaz at eldiveni~
+Bir çift beyaz at eldiveni burada duruyor.~
+leather~
+armor K AH
+6 7 6 1 1
+18 80 2250 P
+
+#4273
+kolluk siyah at~
+bir çift siyah at kolluðu~
+Bir çift siyah at kolluðu burada duruyor.~
+leather~
+armor J AI
+7 6 7 1 1
+18 100 2150 P
+#4274
+kolluk beyaz at~
+bir çift beyaz at kolluðu~
+Bir çift beyaz at kolluðu burada duruyor.~
+leather~
+armor K AI
+7 6 7 1 1
+18 100 2150 P
+
+#4275
+pelerin siyah at~
+bir siyah at pelerini~
+Bir siyah at pelerini burada duruyor.~
+cloth~
+armor J AK
+7 7 7 1 1
+18 70 1380 P
+#4276
+pelerin beyaz at~
+bir beyaz at pelerini~
+Bir beyaz at pelerini burada duruyor.~
+cloth~
+armor K AK
+7 7 7 1 1
+18 70 1380 P
+
+#4277
+kemer siyah at~
+bir siyah at kemeri~
+Bir siyah at kemeri burada duruyor.~
+bronze~
+armor J AL
+6 6 6 1 1
+18 60 1990 P
+#4278
+kemer beyaz at~
+bir beyaz at kemeri~
+Bir beyaz at kemeri burada duruyor.~
+bronze~
+armor K AL
+6 6 6 1 1
+18 60 1990 P
+
+#4279
+bileklik siyah at~
+bir siyah at bilekliði~
+Bir siyah at bilekliði burada duruyor.~
+bronze~
+armor J AM
+7 7 6 1 0
+18 40 2390 P
+#4280
+bileklik beyaz at~
+bir beyaz at bilekliði~
+Bir beyaz at bilekliði burada duruyor.~
+bronze~
+armor K AM
+7 7 6 1 0
+18 40 2390 P
+
+
+
+
+#0
+
+
+#ROOMS
+#4200
+Tanrýlarýn Satranç Tahtasý~
+Tanrýlara adanmýþ yaþayan heykellerden oluþan bir alanýn önündesin.
+Büyük paslý kapý ardýna kadar açýlmýþ. Eski ihtiþamýný çoktan
+yitirmiþ olan bu kadim yer artýk yalnýzca genç maceraperestlerin
+pratik yaptýðý bir okul gibi. Duvarda bir tablet var.
+~
+0 C 1
+D1
+Selenge Mahzenleri...
+~
+~
+0 -1 3043
+D3
+Büyük satranç tahtasýný görüyorsun.
+~
+~
+0 -1 4232
+E
+tablet~
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++                                                                  +
++            This area has been converted and adapted by           +
++                              Kane                                +
++                                                                  +
++                               &                                  +
++                                                                  +
++    modified, debugged (?:), strongly enhanced and balanced by    +
++                             jaceks                               +
++                                                          july'96 +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+~
+S
+#4201
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4202
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4209
+S
+#4202
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4203
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4210
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4201
+S
+#4203
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4204
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4211
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4202
+S
+#4204
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4205
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4212
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4203
+D5
+~
+mermer kare~
+1 4214 4265
+S
+#4205
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4206
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4213
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4204
+S
+#4206
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4207
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4214
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4205
+S
+#4207
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4208
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4215
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4206
+S
+#4208
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4216
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4207
+S
+#4209
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4201
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4210
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4217
+S
+#4210
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4202
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4211
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4218
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4209
+S
+#4211
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4203
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4212
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4219
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4210
+S
+#4212
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4204
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4213
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4220
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4211
+S
+#4213
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4205
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4214
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4221
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4212
+S
+#4214
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4206
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4215
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4222
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4213
+S
+#4215
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4207
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4216
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4223
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4214
+S
+#4216
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4208
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4224
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4215
+S
+#4217
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4209
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4218
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4225
+S
+#4218
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4210
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4219
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4226
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4217
+S
+#4219
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4211
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4220
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4227
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4218
+S
+#4220
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4212
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4221
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4228
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4219
+S
+#4221
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4213
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4222
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4229
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4220
+S
+#4222
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4214
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4223
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4230
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4221
+S
+#4223
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4215
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4224
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4231
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4222
+S
+#4224
+Siyah Kare~
+Siyah mermer bir karedesin. Güneyde paslanmýþ kapýyý görüyorsun.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4216
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4232
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4223
+S
+#4225
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4217
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4226
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4233
+S
+#4226
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4218
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4227
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4234
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4225
+S
+#4227
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4219
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4228
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4235
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4226
+S
+#4228
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4220
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4229
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4236
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4227
+S
+#4229
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4221
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4230
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4237
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4228
+S
+#4230
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4222
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4231
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4238
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4229
+S
+#4231
+Siyah Kare~
+Siyah mermer bir karedesin. Doðuda kýsa mesafede paslanmýþ kapýyý
+görüyorsun.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4223
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4232
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4239
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4230
+S
+#4232
+Beyaz Kare~
+Beyaz mermer bir karedesin. Doðuda büyük paslanmýþ bir kapý var.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4224
+D1
+Satranç Tahtasý'nýn kapýsý doðuda.
+~
+~
+0 -1 4200
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4240
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4231
+S
+#4233
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4225
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4234
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4241
+S
+#4234
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4226
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4235
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4242
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4233
+S
+#4235
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4227
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4236
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4243
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4234
+S
+#4236
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4228
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4237
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4244
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4235
+S
+#4237
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4229
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4238
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4245
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4236
+S
+#4238
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4230
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4239
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4246
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4237
+S
+#4239
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4231
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4240
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4247
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4238
+S
+#4240
+Siyah Kare~
+Siyah mermer bir karedesin. Kuzeyde paslanmýþ bir kapý var.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4232
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4248
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4239
+S
+#4241
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4233
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4242
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4249
+S
+#4242
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4234
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4243
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4250
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4241
+S
+#4243
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4235
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4244
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4251
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4242
+S
+#4244
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4236
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4245
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4252
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4243
+S
+#4245
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4237
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4246
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4253
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4244
+S
+#4246
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4238
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4247
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4254
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4245
+S
+#4247
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4239
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4248
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4255
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4246
+S
+#4248
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4240
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4256
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4247
+S
+#4249
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4241
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4250
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4257
+S
+#4250
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4242
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4251
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4258
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4249
+S
+#4251
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4243
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4252
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4259
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4250
+S
+#4252
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4244
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4253
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4260
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4251
+S
+#4253
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4245
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4254
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4261
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4252
+S
+#4254
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4246
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4255
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4262
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4253
+S
+#4255
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4247
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4256
+D2
+Güneyde siyah bir kare var.
+~
+~
+0 -1 4263
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4254
+S
+#4256
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4248
+D2
+Güneyde beyaz bir kare var.
+~
+~
+0 -1 4264
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4255
+S
+#4257
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4249
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4258
+S
+#4258
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4250
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4259
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4257
+S
+#4259
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4251
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4260
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4258
+S
+#4260
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4252
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4261
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4259
+D5
+~
+mermer kare~
+1 4215 4266
+S
+#4261
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4253
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4262
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4260
+S
+#4262
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4254
+D1
+Doðuda siyah bir kare var.
+~
+~
+0 -1 4263
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4261
+S
+#4263
+Siyah Kare~
+Siyah mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde beyaz bir kare var.
+~
+~
+0 -1 4255
+D1
+Doðuda beyaz bir kare var.
+~
+~
+0 -1 4264
+D3
+Batýda beyaz bir kare var.
+~
+~
+0 -1 4262
+S
+#4264
+Beyaz Kare~
+Beyaz mermer bir karedesin.
+~
+0 0 1
+D0
+Kuzeyde siyah bir kare var.
+~
+~
+0 -1 4256
+D3
+Batýda siyah bir kare var.
+~
+~
+0 -1 4263
+S
+#4265
+Siyah Hazine Odasý~
+Siyah Hazine Odasý'ndasýn. Neyse ki halifenin hazinesi yaðmalanmamýþ.
+~
+0 ADJ 0
+D4
+Yukarý çýkan bir merdiven görüyorsun.
+~
+mermer kare~
+1 4214 4204
+S
+#4266
+Beyaz Hazine Odasý~
+Beyaz Hazine Odasý'ndasýn. Neyse ki halifenin hazinesi yaðmalanmamýþ.
+~
+0 ADJ 0
+D4
+Yukarý çýkan bir merdiven görüyorsun.
+~
+mermer kare~
+1 4215 4260
+S
+#0
+
+
+#RESETS
+* Mobiles
+M 0 4200 8 4209 1   Black Pawn (10)
+E 0 4200 -1 5               Black Pawn Armour
+E 0 4202 -1 16              Black Pawn Axe
+E 0 4232 -1 11              Black Pawn's Shield
+E 0 4234 -1  3              Black Pawn's Cloak
+E 0 4236 -1  6              Black Pawn's Helmet
+E 0 4238 -1  7              pair of Black Pawn's Leggings
+E 0 4240 -1  8              pair of Black Pawn's Boots
+E 0 4242 -1  9              pair of Black Pawn's Gloves
+E 0 4244 -1 10              pair of Black Pawn's Sleeves
+E 0 4246 -1 12              Black Pawn's Cape
+E 0 4248 -1 13              Black Pawn's Belt
+E 0 4250 -1 14              Black Pawn's Bracer
+E 0 4250 -1 15              Black Pawn's Bracer
+*
+M 0 4200 8 4210 1   Black Pawn
+E 0 4200 -1 5               Black Pawn Armour
+E 0 4230 -1 16              Black Pawn Crossbow
+E 0 4232 -1 11              Black Pawn's Shield
+E 0 4234 -1  3              Black Pawn's Cloak
+E 0 4236 -1  6              Black Pawn's Helmet
+E 0 4238 -1  7              pair of Black Pawn's Leggings
+E 0 4240 -1  8              pair of Black Pawn's Boots
+E 0 4242 -1  9              pair of Black Pawn's Gloves
+E 0 4244 -1 10              pair of Black Pawn's Sleeves
+E 0 4246 -1 12              Black Pawn's Cape
+E 0 4248 -1 13              Black Pawn's Belt
+E 0 4250 -1 14              Black Pawn's Bracer
+E 0 4250 -1 15              Black Pawn's Bracer
+*
+M 0 4200 8 4211 1   Black Pawn
+E 0 4200 -1 5               Black Pawn Armour
+E 0 4218 -1 16              Black Pawn Flail
+E 0 4232 -1 11              Black Pawn's Shield
+E 0 4234 -1  3              Black Pawn's Cloak
+E 0 4236 -1  6              Black Pawn's Helmet
+E 0 4238 -1  7              pair of Black Pawn's Leggings
+E 0 4240 -1  8              pair of Black Pawn's Boots
+E 0 4242 -1  9              pair of Black Pawn's Gloves
+E 0 4244 -1 10              pair of Black Pawn's Sleeves
+E 0 4246 -1 12              Black Pawn's Cape
+E 0 4248 -1 13              Black Pawn's Belt
+E 0 4250 -1 14              Black Pawn's Bracer
+E 0 4250 -1 15              Black Pawn's Bracer
+*
+M 0 4200 8 4212 1   Black Pawn
+E 0 4200 -1 5               Black Pawn Armour
+E 0 4226 -1 16              Black Pawn Rapier
+E 0 4232 -1 11              Black Pawn's Shield
+E 0 4234 -1  3              Black Pawn's Cloak
+E 0 4236 -1  6              Black Pawn's Helmet
+E 0 4238 -1  7              pair of Black Pawn's Leggings
+E 0 4240 -1  8              pair of Black Pawn's Boots
+E 0 4242 -1  9              pair of Black Pawn's Gloves
+E 0 4244 -1 10              pair of Black Pawn's Sleeves
+E 0 4246 -1 12              Black Pawn's Cape
+E 0 4248 -1 13              Black Pawn's Belt
+E 0 4250 -1 14              Black Pawn's Bracer
+E 0 4250 -1 15              Black Pawn's Bracer
+*
+M 0 4200 8 4213 1   Black Pawn
+E 0 4200 -1 5               Black Pawn Armour
+E 0 4220 -1 16              Black Pawn Whip
+E 0 4232 -1 11              Black Pawn's Shield
+E 0 4234 -1  3              Black Pawn's Cloak
+E 0 4236 -1  6              Black Pawn's Helmet
+E 0 4238 -1  7              pair of Black Pawn's Leggings
+E 0 4240 -1  8              pair of Black Pawn's Boots
+E 0 4242 -1  9              pair of Black Pawn's Gloves
+E 0 4244 -1 10              pair of Black Pawn's Sleeves
+E 0 4246 -1 12              Black Pawn's Cape
+E 0 4248 -1 13              Black Pawn's Belt
+E 0 4250 -1 14              Black Pawn's Bracer
+E 0 4250 -1 15              Black Pawn's Bracer
+*
+M 0 4200 8 4214 1   Black Pawn
+E 0 4200 -1 5               Black Pawn Armour
+E 0 4228 -1 16              Black Pawn Kris
+E 0 4232 -1 11              Black Pawn's Shield
+E 0 4234 -1  3              Black Pawn's Cloak
+E 0 4236 -1  6              Black Pawn's Helmet
+E 0 4238 -1  7              pair of Black Pawn's Leggings
+E 0 4240 -1  8              pair of Black Pawn's Boots
+E 0 4242 -1  9              pair of Black Pawn's Gloves
+E 0 4244 -1 10              pair of Black Pawn's Sleeves
+E 0 4246 -1 12              Black Pawn's Cape
+E 0 4248 -1 13              Black Pawn's Belt
+E 0 4250 -1 14              Black Pawn's Bracer
+E 0 4250 -1 15              Black Pawn's Bracer
+*
+M 0 4200 8 4215 1   Black Pawn
+E 0 4200 -1 5               Black Pawn Armour
+E 0 4222 -1 16              Black Pawn Spear
+E 0 4232 -1 11              Black Pawn's Shield
+E 0 4234 -1  3              Black Pawn's Cloak
+E 0 4236 -1  6              Black Pawn's Helmet
+E 0 4238 -1  7              pair of Black Pawn's Leggings
+E 0 4240 -1  8              pair of Black Pawn's Boots
+E 0 4242 -1  9              pair of Black Pawn's Gloves
+E 0 4244 -1 10              pair of Black Pawn's Sleeves
+E 0 4246 -1 12              Black Pawn's Cape
+E 0 4248 -1 13              Black Pawn's Belt
+E 0 4250 -1 14              Black Pawn's Bracer
+E 0 4250 -1 15              Black Pawn's Bracer
+*
+M 0 4200 8 4216 1   Black Pawn
+E 0 4200 -1 5               Black Pawn Armour
+E 0 4224 -1 16              Black Pawn Halberd
+E 0 4232 -1 11              Black Pawn's Shield
+E 0 4234 -1  3              Black Pawn's Cloak
+E 0 4236 -1  6              Black Pawn's Helmet
+E 0 4238 -1  7              pair of Black Pawn's Leggings
+E 0 4240 -1  8              pair of Black Pawn's Boots
+E 0 4242 -1  9              pair of Black Pawn's Gloves
+E 0 4244 -1 10              pair of Black Pawn's Sleeves
+E 0 4246 -1 12              Black Pawn's Cape
+E 0 4248 -1 13              Black Pawn's Belt
+E 0 4250 -1 14              Black Pawn's Bracer
+E 0 4250 -1 15              Black Pawn's Bracer
+*
+M 0 4201 8 4249 1   White Pawn
+E 0 4201 -1 5               White Pawn Armour
+E 0 4203 -1 16              White Pawn Axe
+E 0 4233 -1 11              White Pawn's Shield
+E 0 4235 -1  3              White Pawn's Cloak
+E 0 4237 -1  6              White Pawn's Helmet
+E 0 4239 -1  7              pair of White Pawn's Leggings
+E 0 4241 -1  8              pair of White Pawn's Boots
+E 0 4243 -1  9              pair of White Pawn's Gloves
+E 0 4245 -1 10              pair of White Pawn's Sleeves
+E 0 4247 -1 12              White Pawn's Cape
+E 0 4249 -1 13              White Pawn's Belt
+E 0 4251 -1 14              White Pawn's Bracer
+E 0 4251 -1 15              White Pawn's Bracer
+*
+M 0 4201 8 4250 1   White Pawn
+E 0 4201 -1 5               White Pawn Armour
+E 0 4231 -1 16              White Pawn Crossbow
+E 0 4233 -1 11              White Pawn's Shield
+E 0 4235 -1  3              White Pawn's Cloak
+E 0 4237 -1  6              White Pawn's Helmet
+E 0 4239 -1  7              pair of White Pawn's Leggings
+E 0 4241 -1  8              pair of White Pawn's Boots
+E 0 4243 -1  9              pair of White Pawn's Gloves
+E 0 4245 -1 10              pair of White Pawn's Sleeves
+E 0 4247 -1 12              White Pawn's Cape
+E 0 4249 -1 13              White Pawn's Belt
+E 0 4251 -1 14              White Pawn's Bracer
+E 0 4251 -1 15              White Pawn's Bracer
+*
+M 0 4201 8 4251 1   White Pawn
+E 0 4201 -1 5               White Pawn Armour
+E 0 4227 -1 16              White Pawn Rapier
+E 0 4233 -1 11              White Pawn's Shield
+E 0 4235 -1  3              White Pawn's Cloak
+E 0 4237 -1  6              White Pawn's Helmet
+E 0 4239 -1  7              pair of White Pawn's Leggings
+E 0 4241 -1  8              pair of White Pawn's Boots
+E 0 4243 -1  9              pair of White Pawn's Gloves
+E 0 4245 -1 10              pair of White Pawn's Sleeves
+E 0 4247 -1 12              White Pawn's Cape
+E 0 4249 -1 13              White Pawn's Belt
+E 0 4251 -1 14              White Pawn's Bracer
+E 0 4251 -1 15              White Pawn's Bracer
+*
+M 0 4201 8 4252 1   White Pawn
+E 0 4201 -1 5               White Pawn Armour
+E 0 4219 -1 16              White Pawn Flail
+E 0 4233 -1 11              White Pawn's Shield
+E 0 4235 -1  3              White Pawn's Cloak
+E 0 4237 -1  6              White Pawn's Helmet
+E 0 4239 -1  7              pair of White Pawn's Leggings
+E 0 4241 -1  8              pair of White Pawn's Boots
+E 0 4243 -1  9              pair of White Pawn's Gloves
+E 0 4245 -1 10              pair of White Pawn's Sleeves
+E 0 4247 -1 12              White Pawn's Cape
+E 0 4249 -1 13              White Pawn's Belt
+E 0 4251 -1 14              White Pawn's Bracer
+E 0 4251 -1 15              White Pawn's Bracer
+*
+M 0 4201 8 4253 1   White Pawn
+E 0 4201 -1 5               White Pawn Armour
+E 0 4221 -1 16              White Pawn Whip
+E 0 4233 -1 11              White Pawn's Shield
+E 0 4235 -1  3              White Pawn's Cloak
+E 0 4237 -1  6              White Pawn's Helmet
+E 0 4239 -1  7              pair of White Pawn's Leggings
+E 0 4241 -1  8              pair of White Pawn's Boots
+E 0 4243 -1  9              pair of White Pawn's Gloves
+E 0 4245 -1 10              pair of White Pawn's Sleeves
+E 0 4247 -1 12              White Pawn's Cape
+E 0 4249 -1 13              White Pawn's Belt
+E 0 4251 -1 14              White Pawn's Bracer
+E 0 4251 -1 15              White Pawn's Bracer
+*
+M 0 4201 8 4254 1   White Pawn
+E 0 4201 -1 5               White Pawn Armour
+E 0 4229 -1 16              White Pawn Kris
+E 0 4233 -1 11              White Pawn's Shield
+E 0 4235 -1  3              White Pawn's Cloak
+E 0 4237 -1  6              White Pawn's Helmet
+E 0 4239 -1  7              pair of White Pawn's Leggings
+E 0 4241 -1  8              pair of White Pawn's Boots
+E 0 4243 -1  9              pair of White Pawn's Gloves
+E 0 4245 -1 10              pair of White Pawn's Sleeves
+E 0 4247 -1 12              White Pawn's Cape
+E 0 4249 -1 13              White Pawn's Belt
+E 0 4251 -1 14              White Pawn's Bracer
+E 0 4251 -1 15              White Pawn's Bracer
+*
+M 0 4201 8 4255 1   White Pawn
+E 0 4201 -1 5               White Pawn Armour
+E 0 4223 -1 16              White Pawn Spear
+E 0 4233 -1 11              White Pawn's Shield
+E 0 4235 -1  3              White Pawn's Cloak
+E 0 4237 -1  6              White Pawn's Helmet
+E 0 4239 -1  7              pair of White Pawn's Leggings
+E 0 4241 -1  8              pair of White Pawn's Boots
+E 0 4243 -1  9              pair of White Pawn's Gloves
+E 0 4245 -1 10              pair of White Pawn's Sleeves
+E 0 4247 -1 12              White Pawn's Cape
+E 0 4249 -1 13              White Pawn's Belt
+E 0 4251 -1 14              White Pawn's Bracer
+E 0 4251 -1 15              White Pawn's Bracer
+*
+M 0 4201 8 4256 1   White Pawn
+E 0 4201 -1 5               White Pawn Armour
+E 0 4225 -1 16              White Pawn Halberd
+E 0 4233 -1 11              White Pawn's Shield
+E 0 4235 -1  3              White Pawn's Cloak
+E 0 4237 -1  6              White Pawn's Helmet
+E 0 4239 -1  7              pair of White Pawn's Leggings
+E 0 4241 -1  8              pair of White Pawn's Boots
+E 0 4243 -1  9              pair of White Pawn's Gloves
+E 0 4245 -1 10              pair of White Pawn's Sleeves
+E 0 4247 -1 12              White Pawn's Cape
+E 0 4249 -1 13              White Pawn's Belt
+E 0 4251 -1 14              White Pawn's Bracer
+E 0 4251 -1 15              White Pawn's Bracer
+*
+M 0 4202 2 4201 1   Black Rook (27)
+E 0 4204 -1 5               Black Rook Armour
+*
+M 0 4202 2 4208 1   Black Rook (27)
+E 0 4204 -1 5               Black Rook Armour
+*
+M 0 4203 2 4257 1   White Rook  (27)
+E 0 4205 -1 5               White Rook Armour
+*
+M 0 4203 2 4264 1   White Rook  (27)
+E 0 4205 -1 5               White Rook Armour
+*
+M 0 4204 2 4202 1   Black Knight (18)
+E 0 4206 -1 16              Black Knight Lance
+E 0 4261 -1 11              Black Knight's Shield
+E 0 4263 -1  3              Black Knight's Cloak
+E 0 4265 -1  6              Black Knight's Helmet
+E 0 4267 -1  7              pair of Black Knight's Leggings
+E 0 4269 -1  8              pair of Black Knight's Boots
+E 0 4271 -1  9              pair of Black Knight's Gloves
+E 0 4273 -1 10              pair of Black Knight's Sleeves
+E 0 4275 -1 12              Black Knight's Cape
+E 0 4277 -1 13              Black Knight's Belt
+E 0 4279 -1 14              Black Knight's Bracer
+E 0 4279 -1 15              Black Knight's Bracer
+*
+M 0 4204 2 4207 1   Black Knight (18)
+E 0 4206 -1 16              Black Knight Lance
+E 0 4261 -1 11              Black Knight's Shield
+E 0 4263 -1  3              Black Knight's Cloak
+E 0 4265 -1  6              Black Knight's Helmet
+E 0 4267 -1  7              pair of Black Knight's Leggings
+E 0 4269 -1  8              pair of Black Knight's Boots
+E 0 4271 -1  9              pair of Black Knight's Gloves
+E 0 4273 -1 10              pair of Black Knight's Sleeves
+E 0 4275 -1 12              Black Knight's Cape
+E 0 4277 -1 13              Black Knight's Belt
+E 0 4279 -1 14              Black Knight's Bracer
+E 0 4279 -1 15              Black Knight's Bracer
+*
+M 0 4205 2 4258 1   White Knight (18)
+E 0 4207 -1 16              White Knight Lance
+E 0 4262 -1 11              White Knight's Shield
+E 0 4264 -1  3              White Knight's Cloak
+E 0 4266 -1  6              White Knight's Helmet
+E 0 4268 -1  7              pair of White Knight's Leggings
+E 0 4270 -1  8              pair of White Knight's Boots
+E 0 4272 -1  9              pair of White Knight's Gloves
+E 0 4274 -1 10              pair of White Knight's Sleeves
+E 0 4276 -1 12              White Knight's Cape
+E 0 4278 -1 13              White Knight's Belt
+E 0 4280 -1 14              White Knight's Bracer
+E 0 4280 -1 15              White Knight's Bracer
+*
+M 0 4205 2 4263 1   White Knight (18)
+E 0 4207 -1 16              White Knight Lance
+E 0 4262 -1 11              White Knight's Shield
+E 0 4264 -1  3              White Knight's Cloak
+E 0 4266 -1  6              White Knight's Helmet
+E 0 4268 -1  7              pair of White Knight's Leggings
+E 0 4270 -1  8              pair of White Knight's Boots
+E 0 4272 -1  9              pair of White Knight's Gloves
+E 0 4274 -1 10              pair of White Knight's Sleeves
+E 0 4276 -1 12              White Knight's Cape
+E 0 4278 -1 13              White Knight's Belt
+E 0 4280 -1 14              White Knight's Bracer
+E 0 4280 -1 15              White Knight's Bracer
+*
+M 0 4206 2 4203 1   Black Bishop (24)
+E 0 4208 -1 17              Black Bishop Staff
+*
+M 0 4206 2 4206 1   Black Bishop (24)
+E 0 4208 -1 17              Black Bishop Staff
+*
+M 0 4207 2 4259 1   White Bishop (24)
+E 0 4209 -1 17              White Bishop Staff
+*
+M 0 4207 2 4262 1   White Bishop (24)
+E 0 4209 -1 17              White Bishop Staff
+*
+M 0 4208 1 4204 1   Black Queen  (32)
+E 0 4210 99 6               Black Queen Crown
+*
+M 0 4209 1 4260 1   White Queen  (32)
+E 0 4211 99 6               White Queen Crown
+*
+M 0 4210 1 4205 1   Black King   (36)
+E 0 4212 -1 17              Black King Sceptre
+G 0 4214 -1                 Black Treasury Key
+*
+M 0 4211 1 4261 1   White King   (36)
+E 0 4213 -1 17              White King Sceptre
+G 0 4215 -1                 White Treasury Key
+*
+M 0 4212 1 4233 1   Ghost of Caliph Omar (60)
+E 0 4260 16 18
+*
+* Objects
+O 0 4216 1 4265    Black Treasury Gold
+O 0 4217 1 4266    White Treasury Gold
+* Doors
+D 0 4204 5 2       Black Treasury Door
+D 0 4265 4 2
+D 0 4260 5 2       White Treasury Door
+D 0 4266 4 2
+*
+S
+
+#OLIMITS
+O 4209 10 * sanctuary potion
+
+S
+
+#$

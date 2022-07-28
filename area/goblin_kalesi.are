@@ -1,0 +1,1229 @@
+#AREADATA
+Filename goblin_kalesi.are~
+Name Goblin Kalesi~
+Builder Badaxe~
+Translator Bilinmiyor~
+Language Türkçe~
+Lowlevel 10
+Highlevel 20
+Minvnum 29000
+Maxvnum 29000
+Path 3g 2b y~
+Yonelim_iyi 10
+Yonelim_yansiz 20
+Yonelim_kem 70
+END
+
+#NEW_MOBILES
+#29001
+goblin kralý grumm~
+grumm~
+Goblin Kralý Grumm seni gördüðü için pek mutlu deðil!
+~
+Kel, kilolu bir goblin görüyorsun fakat çokda güçlü olsa gerek.
+~
+goblin~
+ABFHT Jb 19
+#29002
+goblin þamaný~
+þaman~
+Yazýsýndan kalkýp odaya girip onu bölmeye cürret eden kiþiye(Sana)
+sinirle bakýyor.
+~
+Yüzü ekþi ve soluk bir goblin. Ýþine kendini çok verdiðini düþündürüyor.
+~
+goblin~
+ABFHQ J 15
+#29003
+goblin büyücü~
+goblin~
+Goblin büyücüsü onu rahatsýz etmenden dolayý bir hayli sinirli.
+~
+Goblin büyücüsü uzun süredir bu an için çalýþmaktaydý, ve SEN bu aný
+MAHFETTÝN! GERÇEKTENDE çok sinirli bir þekilde sana bakýyor! Goblin
+kalesindeki diðer goblinlerden oldukça kýsa olduðunu görüyorsun.
+~
+goblin~
+ABFHR BCDEFJVd 15
+#29004
+þampiyon goblin knarl~
+knarl~
+Önünde gördüðün en güçlü goblin duruyor.
+~
+Knarl sana sinsice sýrýtýyor.
+~
+goblin~
+ABFT FJPVb 20
+#29005
+goblin muhafýz~
+muhafýz goblin~
+Goblin muhafýzý þüpheli bir þekilde seni süzüyor.
+~
+Averaj goblinlerden daha geniþ bir gobline bakýyorsun. Etrafýndaki diðer
+goblinlere kabadayýlýk ediyor.
+~
+goblin~
+ABFT J 12
+#29006
+muhafýz goblin~
+goblin muhafýzý~
+Goblin muhafýzý burada sana þüpheli bir þekilde bakýyor.
+~
+Averaj goblinlerden daha geniþ bir gobline bakýyorsun. Etrafýndaki diðer
+goblinlere kabadayýlýk ediyor.
+~
+goblin~
+AFT J 13
+#29007
+goblin~
+goblin~
+Goblin burada boþ boþ dolanýyor.
+~
+Çirkin, yeþil ve iðrenç bir þekilde kokan birisi. Daha ne söylenebilirki?
+~
+goblin~
+AFT J 12
+#29008
+goblin mahkum~
+goblin mahkum~
+Goblin burada duvara zincirlenmiþ duruyor.
+~
+Derisinin daha mavimsi olduðunu görüyorsun, belkide baþka bir kabileye
+baðlý.
+~
+goblin~
+AT J 3
+#29009
+cüzzamlý goblin~
+goblin~
+Bu goblin çok hasta gözüküyor.
+~
+Sana baðýrýyor! Bana bakma! ! Aaargh... Dýþlanmýþ cüzzamlý ve pis...
+~
+goblin~
+ACFGS FJPQXbd 15
+#29010
+goblin~
+goblin~
+Goblin burada, patates doðruyor.
+~
+Çirkin, yeþil ve iðrenç bir þekilde kokan birisi. Daha ne söylenebilirki?
+~
+goblin~
+ABFT J 14
+#29011
+zayýf iblis~
+zayýf iblis~
+Karanlýk, boynuzlu bir figür pentagramýn içinde hapsolmuþ.
+~
+Gerçektende pentagramdan çýkmak istiyor; belkide yardým etmelisin ona?
+~
+human~
+ABG Hb 20
+#29012
+dansöz goblin britta~
+danseden bir kýz~
+Güzel diþi goblin etrafýndakileri etkilemeye çalýþýyor.
+~
+Bu kýz gerçektende güzel, goblin olsa bile.
+~
+goblin~
+ABFT J 9
+#29013
+soytarý goblin~
+soytarý goblin~
+Tiksindirici bu küçük goblin seninle dalga geçmeye çalýþýyor.
+~
+Üzerinde ziller olan,aptal, yeþil bir kostüm giyiyor. Ondan nefret
+ediyorsun.
+~
+goblin~
+AFT J 11
+#0
+
+
+
+#OBJECTS
+#29001
+zýrhlý goblin ceketi~
+zýrhlý goblin ceketi~
+bir zýrhlý goblin ceketi yerde duruyor.~
+bone~
+armor 0 AD
+3 4 4 0 0
+10 100 849 G
+#29002
+zýrhlý goblin yeleði~
+zýrhlý goblin yeleði~
+bir zýrhlý goblin yeleði yerde duruyor~
+bone~
+armor 0 AD
+3 4 4 0 0
+9 90 530 G
+#29003
+zýrhlý goblin eteði~
+zýrhlý ve uzun goblin eteði~
+zýrhlý ve uzun bir goblin eteði yerde duruyor~
+bone~
+armor 0 AF
+3 5 4 0 0
+11 120 500 G
+#29004
+zýrhlý giysi kolu~
+bir çift zýrhlý giysi kolu~
+bir çift zýrhlý giysi kolu yerde duruyor~
+bone~
+armor 0 AI
+3 4 4 0 0
+8 60 400 G
+#29005
+zýrhlý goblin gömleði~
+zýrhlý goblin gömleði~
+zýrhlý goblin gömleði yerde duruyor.~
+steel~
+armor 0 AD
+5 4 5 0 0
+12 180 800 G
+#29006
+saðlam zýrhlý goblin eteði~
+saðlam zýrhlý goblin eteði~
+saðlam zýrhlý goblin eteði yerde duruyor~
+steel~
+armor 0 AF
+5 4 5 0 0
+12 100 800 G
+#29007
+saðlam zýrhlý goblin eldiveni~
+bir çift saðlam zýrhlý goblin eldiveni~
+bir çift saðlam zýrhlý goblin eldiveni yerde duruyor.~
+steel~
+armor 0 AH
+5 4 5 0 0
+10 40 700 P
+#29008
+saðlam zýrhlý goblin giysi kolu~
+bir çift saðlam zýrhlý goblin giysi kolu~
+bir çift saðlam zýrhlý goblin giysi kolu yerde duruyor.~
+steel~
+armor 0 AI
+5 4 5 0 0
+10 80 390 P
+#29009
+goblin kral tacý~
+Goblin kralýnýn muhteþem tacý~
+Sýradan gümüþ bir tac burada duruyor. Oldukça eski görünüyor.~
+silver~
+armor G AE
+4 6 5 3 0
+16 100 2000 P
+A
+13 21
+#29010
+grumm balta~
+Grumm ýn muhteþem savaþ baltasý~
+oldukça geniþ, iki elli ve çift býçaklý balta önünde duruyor~
+iron~
+weapon ABEGLRY AN
+axe 5 5 slash CDF
+18 140 5000 G
+A
+18 3
+A
+19 4
+#29011
+boynuzlu siyah goblin miðferi~
+boynuzlu siyah goblin miðferi~
+boynuzlu siyah goblin miðferi burada duruyor~
+iron~
+armor 0 AE
+3 5 4 0 0
+9 30 450 P
+A
+3 -1
+A
+19 1
+#29012
+granit kolluk~
+bir çift keskin granit kolluk~
+bir çift keskin granit kolluk görüyorsun~
+stone~
+armor GM AI
+6 6 9 2 0
+15 251 1900 P
+A
+5 1
+E
+arm guards armguards granite~
+These heavy armguards have been carved from the rock of these caverns.
+~
+#29013
+kirli yeþil pelerin~
+kirli yeþil pelerin~
+kirli yeþil pelerin yerde duruyor.~
+cloth~
+armor G AK
+1 2 1 1 0
+10 30 1650 P
+A
+3 1
+A
+2 -1
+A
+12 28
+E
+Filthy green cape.~
+You see a cape ridden with filth and vermin. You're not going to WEAR it are
+you?
+~
+#29014
+kýrýk taþlý hançer~
+kýrýk taþ~
+sivri uçlu kýrýk bir taþ yerde duruyor~
+stone~
+weapon AG AN
+dagger 4 4 stab D
+12 10 1100 G
+A
+19 3
+A
+18 -1
+E
+A stone shard~
+Looks like it would make a good weapon.
+~
+#29015
+kýsa goblin kýlýç~
+kýsa goblin kýlýcý~
+normal bir kýsa kýlýçtan daha aðýr görünüyor, ama yinede biraz yaðlanma yapýlabilinir.~
+iron~
+weapon G AN
+sword 4 4 slash D
+12 50 900 G
+A
+19 1
+#29016
+köpüren siyah iksir~
+köpüren siyah iksir~
+köpüren siyah iksir görüyorsun~
+glass~
+potion BG AO
+15 'heal' 'curse' 'heal' 'remove curse'
+10 20 10000 G
+E
+frothing black potion~
+It's moving. You can see little bugs and other chunks floating in it.
+~
+#29017
+çift-elli uzun kýlýç~
+çift-elli uzun kýlýç~
+çift-elli uzun bir kýlýç burada býrakýlmýþ~
+iron~
+weapon AG AN
+sword 4 6 slash DF
+20 50 7900 G
+A
+18 2
+A
+19 5
+A
+4 -2
+A
+5 -2
+#29018
+þaman goblinin anahtarý~
+þaman goblinin anahtarý~
+eski püskü bir anahtar burada unutulmuþ.~
+iron~
+key 0 AN
+0 0 0 0 0
+5 10 0 G
+#29019
+goblin kral anahtar~
+goblin kral'ýnýn anahtarý~
+eski püskü bir anahtar burada býrakýlmýþ~
+iron~
+key 0 AN
+0 0 0 0 0
+5 10 0 G
+#29020
+anahtar büyücü goblin~
+goblin büyücüsü'nün anahtarý~
+eski püskü bir anahtar burada duruyor.~
+iron~
+key 0 AN
+0 0 0 0 0
+5 10 0 G
+#29021
+anahtar zindan goblin~
+goblin zindanýnýn anahtarý~
+Eski bir anahtar burada býrakýlmýþ.~
+iron~
+key 0 AN
+0 0 0 0 0
+5 10 0 G
+#29022
+wardamir kayýp kaya~
+Wardamir'in kayýp kayasý~
+Müthiþ! Türlü destanlarda bahsi geçen kayýp kaya odanýn ortasýnda duruyor.~
+stone~
+container ABGLRY AQ
+600 0 0 100 10
+20 20 12300 G
+A
+24 -2
+A
+23 -2
+A
+22 -2
+A
+21 -2
+A
+20 -2
+A
+17 -2
+#29023
+yüzük britta~
+Britta'nýn yüzüðü~
+Neredeyse farketmediðin altýn küçük bir yüzük.~
+gold~
+treasure G AB
+0 0 0 0 0
+9 10 1100 G
+A
+12 21
+A
+3 2
+#29024
+kitaplýk~
+kitaplýk~
+geniþ ahþap kitaplýk~
+wood~
+container 0 0
+100 0 0 50 72
+0 0 0 G
+E
+Bookcase~
+Its a rather large wooden bookcase. There are many books in it, but they
+are all written in GOBLIN!
+~
+#29025
+masa~
+mahun aðacýndan yapýlmýþ bir masa~
+mahun aðacýndan yapýlmýþ bir masa burada duruyor.~
+wood~
+container 0 0
+100 0 0 50 72
+0 0 0 G
+E
+Desk~
+This is a beautiful desk.
+~
+#29026
+taht~
+Kral Grumm'ýn Tahtý~
+Kral Grumm'ýn Tahtý burada~
+wood~
+furniture A 0
+2 200 ABCDEFGHIJKL 200 200
+0 0 0 P
+E
+Throne~
+This throne must have been left behind by the dwarves. It's inlaid with
+many fine gems and precious metals. Unfortunately, the largest of these have
+long since been scavenged.
+~
+#29027
+masa~
+yemek masasý~
+Yemek masasý burada~
+wood~
+furniture 0 0
+0 0 0 0 0
+0 0 0 P
+E
+table~
+This is by far the finest table you have ever seen. It stretches clear into
+the north end of the Great Hall.
+~
+#29028
+masa~
+yemek masasý~
+Yemek masasý burada~
+wood~
+furniture 0 0
+0 0 0 0 0
+0 0 0 P
+E
+table~
+This is by far the finest table you have ever seen. It stretches clear into
+the south end of the Great Hall.
+~
+#29029
+altýn~
+altýn yýðýný~
+altýn yýðýný burada parýldýyor.~
+gold~
+money 0 A
+0 75 0 0 0
+0 0 0 P
+#29030
+aðýr demir topuz~
+aðýr demirle dövülmüþ topuz~
+aðýr demirle dövülmüþ topuz burada duruyor.~
+iron~
+weapon 0 AN
+mace 4 5 pound 0
+11 150 790 G
+#0
+
+
+
+#ROOMS
+#29001
+Goblin Kalesinin Giriþi~
+Katý granitlerin keskinleþtirdiði büyük bir maðaraya adýmýný atýyorsun.
+Ýlk farkettiðin þey bulunduðun yerde etkisini süren pis koku oluyor. Savaþ
+zýrhlarýný kuþanmýþ goblinler her taraftalar. Ýçinden bir düþünce belkide
+goblinlerin yakýnda Selenge'ye saldýrabileceðini söylüyor, belkide güney
+kapýsýnýn dýþýnda gördüðün goblinlerinde bir etkisi olabilir bu düþünceye
+varmanda. Her ne amaç güderlerse gütsünler, senin buna bir son vermen
+gerekiyor. Doðuya, batýya uzanan koridorlar vede güneye doðru geniþ kapýlar
+görmektesin. Burada parlayan küçük bir tablet bulunmakta.
+~
+0 D 0
+D5
+Arka sokak
+~
+~
+0 -1 3044
+D1
+Kalede bir koridor.
+~
+~
+0 -1 29019
+D2
+Geniþ hol'ün Kuzey ucu
+~
+Geniþ Kapý~
+1 -1 29002
+D3
+Kalede bir koridor.
+~
+~
+0 -1 29018
+E
+küçük tablet~
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Bu bölge 96 yýlýnýn haziran ayýnýn sýcak bir gecesi düzeltildi, onarýldý ve
+uyarlandý + ++++++++ + + DN. Ölmeye hazýrlan ++ Bu harita Siradril
+tarafýndan türkçeye çevrilmiþtir. + + +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+~
+S
+#29002
+Geniþ Hol'ün Kuzey Ucu~
+Bu kubbeli maðara etrafýnda gördüðün goblin türünün muazzam bir eseridir.
+Keskin granit bloklarýndan yapýlmýþ duvarlar her blok baþý 1 ton dan daha
+aðýr olsa gerek. Kaygan kaya yukarýdaki mükemmel yarý daire þeklindeki savaþ
+resmini aydýnlatýyor. Duvarlarda çeþitli resimler ve çizimler duruyor, fakat
+goblinlerin ellerine geçtiðinden beri onarýlmadýðýda apaçýk ortada olsa
+gerek. Mahun aðacýndan yapýlmýþ uzun bir yemek masasý yaklaþýk 20 metrelik
+uzunluðuyla karþýnda duruyor. Güneh tarafta Geniþ Hol'ün sonu bulunmakta.
+Buradaki sanat eserlerinin goblinler tarafýndan deðilde cüceler tarafýndan
+yapýldýðýný anlýyorsun. Belkide goblin ordularý buraya bir baskýn verip
+cüceleri buradan dýþarý sürmüþlerdir. Burada ne olmuþ olursa görevin daha
+yeni baþladý. Muhafýzlar seni farketti. Hazýr olan iyi olur. Geniþ Hol
+güneye doðru devam ediyor, ayný zamanda batý ve doðu duvarlarýndaki kapýlarý
+farkediyorsun.
+~
+0 D 0
+D0
+Goblin Kale'sinin Giriþi
+~
+Geniþ kapý~
+1 -1 29001
+D1
+Mutfak
+~
+~
+0 -1 29023
+D2
+Geniþ Hol'ün güney ucu.
+~
+~
+0 -1 29003
+D3
+Eðitim odasý.
+~
+~
+1 -1 29021
+S
+#29003
+Geniþ Hol'ün Güney Ucu~
+Bu kubbeli maðara etrafýnda gördüðün goblin türünün muazzam bir eseridir.
+Keskin granit bloklarýndan yapýlmýþ duvarlar her blok baþý 1 ton dan daha
+aðýr olsa gerek. Kaygan kaya yukarýdaki mükemmel yarý daire þeklindeki savaþ
+resmini aydýnlatýyor. Duvarlarda çeþitli resimler ve çizimler duruyor, fakat
+goblinlerin ellerine geçtiðinden beri onarýlmadýðýda apaçýk ortada olsa
+gerek. Mahun aðacýndan yapýlmýþ uzun bir yemek masasý yaklaþýk 20 metrelik
+uzunluðuyla karþýnda duruyor. Kuzey taraftaki Geniþ Hol'e uzanmakta. Güneye
+doðru büyük kemerli bir geçit bulunmakta, dikkatlice bakýnca güneyde taht'ý
+görmektesin.
+~
+0 D 0
+D0
+Geniþ Hol'ün kuzey ucu
+~
+~
+0 -1 29002
+D2
+Kral Grumm'un Taht Odasý
+~
+~
+0 -1 29004
+S
+#29004
+Kral Grumm'un Taht Odasý~
+Kral Grumm'un odasýnda kaos hükmetmekte. Soytarýlar, danseden kadýnlar,
+iþgüzar görünümlü goblinler, ve çok büyük sayýda dikkat daðýtan kiþiler
+kralýn vakti için yarýþmakta. Taht odasý mükkemmel daire þeklinde bir saray
+odasýný andýrýyor, odanýn ortasýnda kahramanvari görünümlü bir cüce heykeli
+bulunmakta. Bir kez daha duvarlarda çizimler görüyorsun; savaþlarý ve
+zaferleri portreleyen. Eðer kaosun daha fazla hükmetmesi mümkündü ise
+buradaki karnaval atmosferinde bunu baþardýn. Kral ayaða kalkýyor, ve goblin
+muhafýzlarý güney tarafýndaki kapýya yönelerek kapýyý kaplýyor. Grumm'un
+konuþmaya tenezzül edecek gibi bir havasý yok! Doðuya ve batýya doðru
+kapýlar bulunmakta.
+~
+0 D 0
+D0
+Geniþ Hol'ün Güney Ucu
+~
+~
+0 -1 29003
+D1
+Goblin Büyücüsünün Odasý
+~
+~
+1 -1 29006
+D2
+Gizli Pasaj
+~
+Perde~
+1 -1 29007
+D3
+Goblin Þaman'ýnýn Odasý
+~
+~
+1 -1 29005
+S
+#29005
+Goblin Þaman'ýnýn Odasý~
+Bu odada kalenin diðer kýsýmlarýndaki kaos hükmetmemekte. Havada güzel
+bir koku var, odada oldukça temiz görünmekte(goblin standarlarýna göre).
+Kuzeydeki duvarda geniþ bir kitaplýk var, ve onun hemen önündede bir masa
+ile sandalye.
+~
+0 D 0
+D1
+Kral Grumm'un Taht odasý.
+~
+~
+1 -1 29004
+S
+#29006
+Goblin Büyücüsünün Odasý~
+Çok aðýr bir sis hemen zeminin üstünde odaya yayýlmakta. Görüþünü
+kapamakta yeterli olmadýðý ortada bu sisin, daha yakýndan baktýðýnda ,
+granit iþlemenin üstüne bir pentagram kakýlmýþ. Bunlarýn dýþýnda yalýn bir
+oda, küçük bir karyola, masa görmektesin. Bunlarýn dýþýnda oda çok anlamsýz.
+~
+0 ADN 0
+D3
+Kral Grumm'un Taht Odasý.
+~
+~
+1 -1 29004
+S
+#29007
+Gizli Pasaj~
+Bu pasaj bir perdenin arkasýnda saklanmakta. Kuzeydeki Taht odasýna ve
+güneydeki bir kapýya koridor görevi yapýyor.
+~
+0 D 0
+D0
+Kral Grumm'un Taht Odasý
+~
+Perde~
+1 -1 29004
+D2
+Gizli Pasaj
+~
+~
+1 29020 29008
+S
+#29008
+Gizli Pasaj~
+Ýlk kapýyý açtýktan sonra, korkmamak için bir kaç saniyeliðine kendini
+toparlýyorsun. Güneyde ve kuzeyde kapý bulunmakta.
+~
+0 D 0
+D0
+Gizli Pasaj
+~
+~
+1 29020 29007
+D2
+Gizli Pasaj
+~
+~
+1 29018 29009
+S
+#29009
+Gizli Pasaj~
+Ýkinci kapýyý açtýktan sonra, korkmamak için bir kaç saniyeliðine kendini
+toparlýyorsun. Güneyde ve kuzeyde kapý bulunmakta.
+~
+0 D 0
+D0
+Gizli Pasaj
+~
+~
+1 29018 29008
+D2
+Goblin Kalesinin Hazine Odasý
+~
+~
+1 29019 29010
+S
+#29010
+Goblin Kalesinin Hazine Odasý~
+Üçüncü Kapýyý açtýktan sonra, altýn ve mücevher yýðýnýnýn arasýnda
+buluyorsun kendini. Geldiðin kapý dýþýnda odadan baþka bir çýkýþ yok.
+~
+0 D 0
+D0
+Gizli Pasaj
+~
+~
+1 29019 29009
+S
+#29011
+Zindanda küçük bir hücre~
+Bu odanýn kapýsýndan içeri girdiðinde, bir çarpma ve klik sesi
+duyuyorsun. Hemen arkana dönüp baktýðýnda kapýnýn kapatýlmýþ ve kilitlenmiþ
+olduðunu farkediyorsun. Kapýnýn dýþýndan iðrenç bir kahkaha duymaktasýn.
+Kaçmanýn yolu yok. Zamanýný bu goblin hücresinde çürüyerek geçireceksin
+artýk.
+~
+0 D 0
+D5
+Minik iþçilik alaný
+~
+~
+1 -1 29024
+S
+#29012
+Zindanda küçük bir hücre~
+Burasý 6 metrekarelik bir hücre, ayaklarýnýn altýnda saman var. Odanýn
+havasý nemli ve rutubetli. Uzaktaki duvarda duran pranga seti gözüne
+çarpýyor. Ziyaret etmek için güzel fakat yaþamak için çok kötü bir yer
+olduðunu düþünüyorsun buranýn.
+~
+0 D 0
+D2
+Zindanda bir hol
+~
+~
+1 29021 29025
+S
+#29013
+Zindanda küçük bir hücre~
+Burasý 6 metrekarelik bir hücre, ayaklarýnýn altýnda saman var. Odanýn
+havasý nemli ve rutubetli. Uzaktaki duvarda duran pranga seti gözüne
+çarpýyor. Ziyaret etmek için güzel fakat yaþamak için çok kötü bir yer
+olduðunu düþünüyorsun buranýn.
+~
+0 D 0
+D0
+Zindanda bir hol
+~
+~
+1 29021 29025
+S
+#29014
+Zindanda küçük bir hücre~
+Burasý 6 metrekarelik bir hücre, ayaklarýnýn altýnda saman var. Odanýn
+havasý nemli ve rutubetli. Uzaktaki duvarda duran pranga seti gözüne
+çarpýyor. Ziyaret etmek için güzel fakat yaþamak için çok kötü bir yer
+olduðunu düþünüyorsun buranýn.
+~
+0 D 0
+D2
+Zindanda bir hol
+~
+~
+1 29021 29026
+S
+#29015
+Zindanda küçük bir hücre~
+Burasý 6 metrekarelik bir hücre, ayaklarýnýn altýnda saman var. Odanýn
+havasý nemli ve rutubetli. Uzaktaki duvarda duran pranga seti gözüne
+çarpýyor. Ziyaret etmek için güzel fakat yaþamak için çok kötü bir yer
+olduðunu düþünüyorsun buranýn.
+~
+0 D 0
+D0
+Zindanda bir hol
+~
+~
+1 29021 29026
+S
+#29016
+Zindan~
+Demir kapýnýn ardýnda küçük bir muhafýz odasý bulunmakta. Odada bir masa
+ve bir kaç sandalye bulunmakta, baþka dikkatini çeken birþey yok. Batýya
+doðru uzanan bir koridor ile yukarýya çýkan demir kapý etraftaki tek çýkýþ
+yollarý.
+~
+0 D 0
+D3
+Zindanda bir hol
+~
+~
+0 -1 29026
+D4
+Kalede bir koridor.
+~
+~
+1 -1 29017
+S
+#29017
+Kalede bir koridor~
+Duvara tutturulmuþ meþalelerle aydýnlanýyor bu oda. Yerde demir bir kapý
+görüyorsun, buradan inlemeler ve çýðlýklar duyuyorsun. Koridor doðuya ve
+güneydeki geniþ bir odaya doðru uzanýyor.
+~
+0 D 0
+D1
+Kalede bir koridor
+~
+~
+0 -1 29018
+D2
+Goblin Barakalarý
+~
+~
+0 -1 29027
+D5
+Demir kapý
+~
+demir kapý~
+1 -1 29016
+S
+#29018
+Kalede bir koridor~
+Duvara tutturulmuþ meþalelerle aydýnlanýyor bu oda. Koridor batýya doðru
+devam ediyor, Giriþ Holü doðuda kalýyor. Ayný zamanda güney tarafýnda bir
+oda görüyorsun. Güney tarafýndan kýlýç,balta sesleri geliyor.
+~
+0 D 0
+D1
+Goblin Kalesinin Giriþi
+~
+~
+0 -1 29001
+D2
+Goblin Eðitim Odasý
+~
+~
+0 -1 29021
+D3
+Kalede bir koridor
+~
+~
+0 -1 29017
+S
+#29019
+Kalede bir koridor~
+Duvara tutturulmuþ meþalelerle aydýnlanýyor bu oda. Koridor doðuya doðru
+devam ediyor, Giriþ Holü batýda kalýyor. Ayný zamanda güney tarafýnda bir
+oda görüyorsun. Burnuna garip kokular geliyor...
+~
+0 D 0
+D1
+Kalede bir koridor
+~
+~
+0 -1 29020
+D2
+Mutfak
+~
+~
+0 -1 29023
+D3
+Goblin Kalesinin Giriþi
+~
+~
+0 -1 29001
+S
+#29020
+Kalede bir koridor~
+Duvara tutturulmuþ meþalelerle aydýnlanýyor bu oda. Koridor batýya doðru
+devam ediyor. Ayný zamanda güney tarafýnda bir oda görüyorsun.
+~
+0 D 0
+D2
+Goblin Barakalarý.
+~
+~
+0 -1 29022
+D3
+Kalede bir koridor
+~
+~
+0 -1 29019
+S
+#29021
+Goblin Eðitim Odasý~
+Goblinler burada savaþçý eðitimi görüp savaþçý olma yetisi kazanýyorlar.
+Çeþitli manken hedefler, ve bir sürü eðitim eþyasý etrafta duruyor. Yerde
+yapýþkan hale gelmiþ kan duruyor. Görünüþe göre goblinler cücelerin savaþ
+eðitimi teorisine katýlmaktalar.
+~
+0 D 0
+D0
+Kalede bir koridor
+~
+~
+0 -1 29018
+D1
+Geniþ Hol'ün güney ucu
+~
+~
+1 -1 29002
+S
+#29022
+Goblin Barakalarý~
+Bu oda goblin askerlerinin uyumasý için. 20 metrekarelik geniþliðe sahip,
+bir sürü ranzanýn içinde bulunduðu bir odadasýn. Burada duvarlara kazýnmýþ
+çeþitli çizimler görüyorsun, fakat bu goblin eliþine daha çok benziyor, ve
+gördüðün çizimler goblin diþilerine ait. Kuzeye doðru bir kapý görüyorsun.
+~
+0 D 0
+D0
+Kalede bir koridor
+~
+~
+0 -1 29020
+S
+#29023
+Mutfak~
+Geniþ bir mutfaktasýn, fokurdayan tencereler, ve çok kötü koku odada
+dikkat ettiðin tek þey. Batýda ve kuzeyde kapýlar duruyor.
+~
+0 D 0
+D0
+Kalede bir Koridor
+~
+~
+0 -1 29019
+D3
+Geniþ Hol'ün güney ucu
+~
+~
+1 -1 29002
+S
+#29024
+Minik iþçilik alaný~
+Hücrenin altýnda minik bir iþçilik alaný bulunmakta. Alanýn içinde bir
+tane geçit görüyorsun.
+~
+0 D 0
+D4
+Zindanda küçük bir hücre
+~
+~
+1 -1 29011
+S
+#29025
+Zindanda bir Koridor~
+Burasý kaleye daha sonradan monte edilmiþ bir alana benziyor. Koridor
+daha çok küçük bir tünele benziyor. Koridor doðuya devam ediyor, kuzeyde
+güneyde ve batýda kapýlar var.
+~
+0 D 0
+D0
+Zindanda küçük bir hücre
+~
+~
+1 29021 29012
+D1
+Zindanda bir koridor
+~
+~
+0 -1 29026
+D2
+Zindanda küçük bir hücre
+~
+~
+1 29021 29013
+D3
+Zindanda küçük bir hücre
+~
+~
+1 29021 29011
+S
+#29026
+Zindanda bir koridor~
+Burasý kaleye daha sonradan monte edilmiþ bir alana benziyor. Koridor
+daha çok küçük bir tünele benziyor. Koridor batýya doðru devam ediyor,
+kuzeyde güneyde ve doðuda kapýlar var.
+~
+0 D 0
+D0
+Zindanda küçük bir hücre
+~
+~
+1 29021 29014
+D1
+Zindan
+~
+~
+0 -1 29016
+D2
+Zindanda küçük bir hücre
+~
+~
+1 29021 29015
+D3
+Zindanda küçük bir hücre
+~
+~
+0 -1 29025
+S
+#29027
+Goblin Barakalarý~
+Bu oda goblin askerlerinin uyumasý için. 20 metrekarelik geniþliðe sahip,
+bir sürü ranzanýn içinde bulunduðu bir odadasýn. Burada duvarlara kazýnmýþ
+çeþitli çizimler görüyorsun, fakat bu goblin eliþine daha çok benziyor, ve
+gördüðün çizimler goblin diþilerine ait. Kuzeye doðru bir kapý görüyorsun.
+~
+0 D 0
+D0
+Kalede bir koridor
+~
+~
+0 -1 29017
+S
+#0
+
+
+
+#SPECIALS
+S
+
+
+
+#RESETS
+*D 0 29001 0 1        * The north door of The Entry Hall to the Goblin Stronghold is closed
+D 0 29001 2 1        * The south door of The Entry Hall to the Goblin Stronghold is closed
+D 0 29002 0 1        * The north door of North End of the Great Hall is closed
+D 0 29002 3 1        * The west door of North End of the Great Hall is closed
+D 0 29004 1 1        * The east door of King Grumm's Throne Room is closed
+D 0 29004 2 1        * The south door of King Grumm's Throne Room is closed
+D 0 29004 3 1        * The west door of King Grumm's Throne Room is closed
+D 0 29005 1 1        * The east door of Goblin Shaman's Quarters is closed
+D 0 29006 3 1        * The west door of Goblin Mage's Quarters is closed
+D 0 29007 0 1        * The north door of Hidden Passage is closed
+D 0 29007 2 2        * The south door of Hidden Passage is closed and locked
+D 0 29008 0 2        * The north door of Hidden Passage is closed and locked
+D 0 29008 2 2        * The south door of Hidden Passage is closed and locked
+D 0 29009 0 2        * The north door of Hidden Passage is closed and locked
+D 0 29009 2 2        * The south door of Hidden Passage is closed and locked
+D 0 29010 0 2        * The north door of The Treasure Chamber of the Goblin Stronghold is closed and locked
+D 0 29012 2 2        * The south door of A Small Cell in the Dungeon is closed and locked
+D 0 29013 0 2        * The north door of A Small Cell in the Dungeon is closed and locked
+D 0 29014 2 2        * The south door of A Small Cell in the Dungeon is closed and locked
+D 0 29015 0 2        * The north door of A Small Cell in the Dungeon is closed and locked
+D 0 29016 4 1        * The up door of The Dungeon is closed
+D 0 29017 5 1        * The down door of A Hallway in the Stronghold is closed
+D 0 29021 1 1        * The east door of Goblin Training Room is closed
+D 0 29023 3 1        * The west door of The Kitchen is closed
+D 0 29024 4 2        * The up door of A Tiny Crawlspace is closed and locked
+D 0 29025 0 2        * The north door of A Hall in the Dungeon is closed and locked
+D 0 29025 2 2        * The south door of A Hall in the Dungeon is closed and locked
+D 0 29025 3 2        * The west door of A Hall in the Dungeon is closed and locked
+M 0 29005 10 29001 1 * Load Goblin guard
+E 0 29001 -1 5       * A scale mail jacket is loaded on the body of Goblin guard
+E 0 29003 -1 7       * A long scale mail skirt is loaded on the legs of Goblin guard
+E 0 29004 -1 10      * A pair of scale mail sleeves is loaded on the arms of Goblin guard
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of Goblin guard
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of Goblin guard
+M 0 29005 10 29001 1 * Load Goblin guard
+E 0 29001 -1 5       * A scale mail jacket is loaded on the body of Goblin guard
+E 0 29003 -1 7       * A long scale mail skirt is loaded on the legs of Goblin guard
+E 0 29004 -1 10      * A pair of scale mail sleeves is loaded on the arms of Goblin guard
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of Goblin guard
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of Goblin guard
+M 0 29007 20 29001 1 * Load The goblin
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of The goblin
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of The goblin
+M 0 29005 10 29002 1 * Load Goblin guard
+E 0 29001 -1 5       * A scale mail jacket is loaded on the body of Goblin guard
+E 0 29003 -1 7       * A long scale mail skirt is loaded on the legs of Goblin guard
+E 0 29004 -1 10      * A pair of scale mail sleeves is loaded on the arms of Goblin guard
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of Goblin guard
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of Goblin guard
+M 0 29007 20 29002 1 * Load The goblin
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of The goblin
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of The goblin
+O 0 29027 0 29002    * A large mahogany feast table loaded to North End of the Great Hall
+M 0 29005 10 29003 1 * Load Goblin guard
+E 0 29001 -1 5       * A scale mail jacket is loaded on the body of Goblin guard
+E 0 29003 -1 7       * A long scale mail skirt is loaded on the legs of Goblin guard
+E 0 29004 -1 10      * A pair of scale mail sleeves is loaded on the arms of Goblin guard
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of Goblin guard
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of Goblin guard
+M 0 29007 20 29003 1 * Load The goblin
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of The goblin
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of The goblin
+O 0 29028 0 29003    * A large mahogany feast table loaded to South End of the Great Hall
+M 0 29001 1 29004  1 * Load Grumm
+E 0 29010 -1 16      * The great war axe of grumm is loaded wielded of Grumm
+E 0 29009 -1 6       * The great crown of the goblin king is loaded over the head of Grumm
+E 0 29005 -1 5       * A chain mail shirt is loaded on the body of Grumm
+E 0 29006 -1 7       * A long chain mail skirt is loaded on the legs of Grumm
+E 0 29007 -1 9       * A pair of chain mail gauntlets is loaded on the hands of Grumm
+E 0 29008 -1 10      * A pair of chain mail sleeves is loaded on the arms of Grumm
+G 0 29019 1          * a the goblin king's key is loaded in inventory og Grumm
+M 0 29005 10 29004 1 * Load Goblin guard
+E 0 29001 -1 5       * A scale mail jacket is loaded on the body of Goblin guard
+E 0 29003 -1 7       * A long scale mail skirt is loaded on the legs of Goblin guard
+E 0 29004 -1 10      * A pair of scale mail sleeves is loaded on the arms of Goblin guard
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of Goblin guard
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of Goblin guard
+M 0 29005 10 29004 1 * Load Goblin guard
+E 0 29001 -1 5       * A scale mail jacket is loaded on the body of Goblin guard
+E 0 29003 -1 7       * A long scale mail skirt is loaded on the legs of Goblin guard
+E 0 29004 -1 10      * A pair of scale mail sleeves is loaded on the arms of Goblin guard
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of Goblin guard
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of Goblin guard
+M 0 29007 20 29004 1 * Load The goblin
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of The goblin
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of The goblin
+M 0 29012 1 29004 1  * Load The dancing girl
+E 0 29023 -1 1       * Britta's ring is loaded on the left finger of The dancing girl
+M 0 29013 1 29004  1 * Load The goblin jester
+O 0 29026 0 29004    * King grumm's throne loaded to King Grumm's Throne Room
+M 0 29002 1 29005  1 * Load The goblin shaman
+E 0 29005 -1 5       * A chain mail shirt is loaded on the body of The goblin shaman
+E 0 29006 -1 7       * A long chain mail skirt is loaded on the legs of The goblin shaman
+E 0 29007 -1 9       * A pair of chain mail gauntlets is loaded on the hands of The goblin shaman
+E 0 29008 -1 10      * A pair of chain mail sleeves is loaded on the arms of The goblin shaman
+E 0 29016 -1 17       * A frothing black potion is loaded held in the hands of The goblin shaman
+E 0 29030 -1 16      * A heavy iron mace is loaded wielded of The goblin shaman
+G 0 29018 1          * shaman key is loaded in inventory of The goblin shaman
+O 0 29024 0 29005    * Bookcase loaded to Goblin Shaman's Quarters
+P 0 29022 1 29024 10 * A big rock. put inside bookcase
+O 0 29025 0 29005    * A large mahogany desk loaded to Goblin Shaman's Quarters
+M 0 29003 1 29006  1 * Load Goblin Mage
+G 0 29020 1          * the goblin mage's key is loaded in inventory of Goblin Mage
+E 0 29013 -1 12      * A filthy green cape is loaded wielded of Goblin Mage
+E 0 29014 -1 16      * stone dagger is loaded wielded of Goblin Mage
+M 0 29011 1 29006  1 * Load The Lesser Demon
+O 0 29029 0 29010    * A small pile of gold loaded to The Treasure Chamber of the Goblin Stronghold
+M 0 29009 1 29011  1 * Load The goblin
+M 0 29008 4 29012  1 * Load the goblin prisoner
+M 0 29008 4 29013  1 * Load the goblin prisoner
+M 0 29008 4 29014  1 * Load the goblin prisoner
+M 0 29008 4 29015  1 * Load the goblin prisoner
+M 0 29005 10 29016 2 * Load Goblin guard
+E 0 29001 -1 5       * A scale mail jacket is loaded on the body of Goblin guard
+E 0 29003 -1 7       * A long scale mail skirt is loaded on the legs of Goblin guard
+E 0 29004 -1 10      * A pair of scale mail sleeves is loaded on the arms of Goblin guard
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of Goblin guard
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of Goblin guard
+G 0 29021 1          * the goblin dungeon key is loades in inventory of guard goblin
+M 0 29005 10 29016 2 * Load Goblin guard
+E 0 29001 -1 5       * A scale mail jacket is loaded on the body of Goblin guard
+E 0 29003 -1 7       * A long scale mail skirt is loaded on the legs of Goblin guard
+E 0 29004 -1 10      * A pair of scale mail sleeves is loaded on the arms of Goblin guard
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of Goblin guard
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of Goblin guard
+M 0 29007 20 29017 1 * Load The goblin
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of The goblin
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of The goblin
+M 0 29007 20 29018 1 * Load The goblin
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of The goblin
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of The goblin
+M 0 29007 20 29019 1 * Load The goblin
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of The goblin
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of The goblin
+M 0 29007 20 29020 1 * Load The goblin
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of The goblin
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of The goblin
+M 0 29004 1 29021  1 * Load Knarl
+E 0 29017 -1 16      * A long sword is loaded wielded of Knarl
+E 0 29012 -1 10      * A pair of carved granite armguards. is loaded on the arms of Knarl
+E 0 29005 -1 5       * A chain mail shirt is loaded on the body of Knarl
+E 0 29006 -1 7       * A long chain mail skirt is loaded on the legs of Knarl
+E 0 29007 -1 9       * A pair of chain mail gauntlets is loaded on the hands of Knarl
+M 0 29005 10 29021 1 * Load Goblin guard
+E 0 29001 -1 5       * A scale mail jacket is loaded on the body of Goblin guard
+E 0 29003 -1 7       * A long scale mail skirt is loaded on the legs of Goblin guard
+E 0 29004 -1 10      * A pair of scale mail sleeves is loaded on the arms of Goblin guard
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of Goblin guard
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of Goblin guard
+M 0 29005 10 29021 1 * Load Goblin guard
+E 0 29001 -1 5       * A scale mail jacket is loaded on the body of Goblin guard
+E 0 29003 -1 7       * A long scale mail skirt is loaded on the legs of Goblin guard
+E 0 29004 -1 10      * A pair of scale mail sleeves is loaded on the arms of Goblin guard
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of Goblin guard
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of Goblin guard
+M 0 29007 20 29021 1 * Load The goblin
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of The goblin
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of The goblin
+M 0 29007 20 29021 1 * Load The goblin
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of The goblin
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of The goblin
+M 0 29005 10 29022 1 * Load Goblin guard
+E 0 29001 -1 5       * A scale mail jacket is loaded on the body of Goblin guard
+E 0 29003 -1 7       * A long scale mail skirt is loaded on the legs of Goblin guard
+E 0 29004 -1 10      * A pair of scale mail sleeves is loaded on the arms of Goblin guard
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of Goblin guard
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of Goblin guard
+M 0 29005 10 29022 1 * Load Goblin guard
+E 0 29001 -1 5       * A scale mail jacket is loaded on the body of Goblin guard
+E 0 29003 -1 7       * A long scale mail skirt is loaded on the legs of Goblin guard
+E 0 29004 -1 10      * A pair of scale mail sleeves is loaded on the arms of Goblin guard
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of Goblin guard
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of Goblin guard
+M 0 29007 20 29023 1 * Load The goblin
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of The goblin
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of The goblin
+M 0 29007 20 29023 1 * Load The goblin
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of The goblin
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of The goblin
+M 0 29010 2 29023  1 * Load The goblin
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of The goblin
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of The goblin
+M 0 29010 2 29023  1 * Load The goblin
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of The goblin
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of The goblin
+M 0 29007 20 29027 1 * Load The goblin
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of The goblin
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of The goblin
+M 0 29007 20 29027 1 * Load The goblin
+E 0 29011 -1 6       * Dark horned helmet is loaded over the head of The goblin
+E 0 29015 -1 16      * A goblin's shortsword is loaded wielded of The goblin
+S
+
+
+
+#SHOPS
+0
+
+
+
+#$

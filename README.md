@@ -1,1 +1,1 @@
-# mangus
+Mangus, Uzak Diyarlar 2.1b2 tabanlı bir fantezi rol kesme oyunudur.
