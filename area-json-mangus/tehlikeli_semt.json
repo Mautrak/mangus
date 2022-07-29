@@ -1,0 +1,3984 @@
+{
+    "area": {
+        "file": "tehlikeli_semt.are",
+        "name": "Türkçe",
+        "low_range": "5",
+        "high_range": "15",
+        "min_vnum": "2100",
+        "max_vnum": "2199",
+        "path": "6g d 3g d",
+        "yonelim_iyi": "10",
+        "yonelim_yansiz": "20",
+        "yonelim_kem": "70"
+    },
+    "mobiles": [
+        {
+            "vnum": "2101",
+            "name": "asura çete üyesi",
+            "short_description": "bir asura çete üyesi",
+            "long_description": "asura çetesinin bir üyesi burada.\n",
+            "description": "Küçüklükten beri hep þiddet dolu bir yaþamý olmuþ.\n",
+            "race": "asura",
+            "act": "ACEG",
+            "affected_by": "0",
+            "level": "5"
+        },
+        {
+            "vnum": "2102",
+            "name": "umacý çete üyesi",
+            "short_description": "bir umacý çete üyesi",
+            "long_description": "Bir umacý  çete üyesi burada.\n",
+            "description": "Dünyayý bütün arbalardan temizlemek istiyor.\n",
+            "race": "human",
+            "act": "ACEG",
+            "affected_by": "0",
+            "level": "5"
+        },
+        {
+            "vnum": "2103",
+            "name": "asura çete lideri",
+            "short_description": "asura çete lideri",
+            "long_description": "asura çete lideri burada. Yerini bulmandan memnun olmadý!\n",
+            "description": "Liderliðini ayý gibi güçlü olmasýna ve kurnazlýðýna borçlu.\nKaslarýndan oldukça kuvvetli olduðunu anlýyorsun.\n",
+            "race": "asura",
+            "act": "ABFGT",
+            "affected_by": "0",
+            "level": "13"
+        },
+        {
+            "vnum": "2104",
+            "name": "çürütücü asura",
+            "short_description": "bir çürütücü",
+            "long_description": "Oldukça iri bir çürütücü burada kýracak kemik bekliyor.\n",
+            "description": "Oldukça uzun ve aðýr. Kafaný parçalamak için yeterli güce\nsahip gibi. Bu ne biçim bir asura ! !\n",
+            "race": "asura",
+            "act": "ACFGHT",
+            "affected_by": "D",
+            "level": "11"
+        },
+        {
+            "vnum": "2105",
+            "name": "bebek kýz",
+            "short_description": "bir kýz",
+            "long_description": "Bebek gibi bir kýz burada duruyor.\n",
+            "description": "Çok güzel ( tamam GÖRECELÝ). Sen yine de dokunmaya kalkma!\n",
+            "race": "human",
+            "act": "ACGHS",
+            "affected_by": "0",
+            "level": "7"
+        },
+        {
+            "vnum": "2106",
+            "name": "devriye",
+            "short_description": "bir devriye",
+            "long_description": "Bir devriye barýþý korumaya çalýþýyor.\n",
+            "description": "Bu pisliklerle birlikte olmaktansa bir tavernada olmalýydý.\n",
+            "race": "human",
+            "act": "AGT",
+            "affected_by": "0",
+            "level": "8"
+        },
+        {
+            "vnum": "2107",
+            "name": "zararcý umacý",
+            "short_description": "bir zararcý",
+            "long_description": "Bir Umacý burada spreyle duvarlara çetenin sloganlarýný yazýyor.\n",
+            "description": "Tedbirli gözlere ve bir sanatçýnýn ellerine sahip.\n",
+            "race": "human",
+            "act": "AGHS",
+            "affected_by": "P",
+            "level": "10"
+        },
+        {
+            "vnum": "2108",
+            "name": "pitbul",
+            "short_description": "bir pitbul",
+            "long_description": "Saldýrgan bir pitbul aðzýndan köpükler saçýyor. Bu kuduz hastalýðýnýn bir\nbelirtisi.\n",
+            "description": "Senin gýrtlaðýný parçalarken ona yakýndan bakma þansý buldun. Diþleri kan\niçinde. Senden önce kanlý bir biftek yemiþ olabilir! ! !\n",
+            "race": "dog",
+            "act": "ABFG",
+            "affected_by": "DQ",
+            "level": "5"
+        },
+        {
+            "vnum": "2109",
+            "name": "pank asura",
+            "short_description": "bir pank asura",
+            "long_description": "Bir pank burada duvara birþeyler oymakla meþgul.\n",
+            "description": "Ýþ yaparken rehabilite olmanýn tipik bir örneði. Güzel deðil.\n",
+            "race": "asura",
+            "act": "AFHS",
+            "affected_by": "P",
+            "level": "10"
+        },
+        {
+            "vnum": "2110",
+            "name": "umacý çete lideri",
+            "short_description": "umacý çete lideri",
+            "long_description": "Umacý çete lideri býçaðýný þaklatýyor.\n",
+            "description": "asura liderden daha küçük fakat kuþkusuz daha akýllý.\n",
+            "race": "human",
+            "act": "ABFGS",
+            "affected_by": "0",
+            "level": "13"
+        },
+        {
+            "vnum": "2111",
+            "name": "katil",
+            "short_description": "bir katil",
+            "long_description": "Çirkin ve ürkütücü bir katil burada. Tekmeleyecek köpek arýyor.\n",
+            "description": "Bu kiþi asura çürütücüler kadar büyük deðil fakat umacý ler için yine de\nbir þef.\n",
+            "race": "human",
+            "act": "ACFGHT",
+            "affected_by": "D",
+            "level": "11"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "2101",
+            "name": "asura ceketi",
+            "short_description": "bir asura çete ceketi",
+            "description": "Bir asura çete ceketi düþüncesizce buraya býrakýlmýþ.",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AD",
+            "values": "3 5 4 0 0",
+            "level": "5",
+            "weight": "20",
+            "cost": "970",
+            "condition": "A"
+        },
+        {
+            "vnum": "2102",
+            "name": "umacý çete ceketi",
+            "short_description": "bir Umacý çete ceketi",
+            "description": "Bir Umacý çete ceketi düþüncesizce buraya býrakýlmýþ.",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AD",
+            "values": "5 4 3 0 0",
+            "level": "5",
+            "weight": "20",
+            "cost": "970",
+            "condition": "A"
+        },
+        {
+            "vnum": "2103",
+            "name": "kýrbaç",
+            "short_description": "bir uzun kýrbaç",
+            "description": "Bir uzun kýrbaç yerde yatýyor.",
+            "material": "iron",
+            "type": "weapon",
+            "extra_flags": "A",
+            "wear_flags": "AN",
+            "values": "whip 2 6 whip 0",
+            "level": "12",
+            "weight": "100",
+            "cost": "960",
+            "condition": "A",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "18",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "2104",
+            "name": "metal kalkan",
+            "short_description": "bir metal kalkan",
+            "description": "Bir çöp kutusu kapaðý yere düþmüþ.",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AJ",
+            "values": "3 3 3 1 0",
+            "level": "3",
+            "weight": "80",
+            "cost": "500",
+            "condition": "A"
+        },
+        {
+            "vnum": "2105",
+            "name": "sprey kutusu",
+            "short_description": "bir sprey kutusu",
+            "description": "Bir sprey kutusu buraya býrakýlmýþ.",
+            "material": "aluminum",
+            "type": "wand",
+            "extra_flags": "B",
+            "wear_flags": "AO",
+            "values": "11 2 2 'colour spray' 0",
+            "level": "12",
+            "weight": "10",
+            "cost": "2200",
+            "condition": "G"
+        },
+        {
+            "vnum": "2106",
+            "name": "ufak kama",
+            "short_description": "bir ufak kama",
+            "description": "Öldürücü bir ufak kama burada unutulmuþ.",
+            "material": "steel",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "dagger 5 2 pierce 0",
+            "level": "9",
+            "weight": "20",
+            "cost": "1090",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "4"
+                },
+                {
+                    "location": "17",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "2107",
+            "name": "demir topuklu bot",
+            "short_description": "bir çift demir topuklu bot",
+            "description": "Siyah deriden yapýlmýþ bir çift bot burada.",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AG",
+            "values": "3 3 3 0 0",
+            "level": "5",
+            "weight": "40",
+            "cost": "260",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "-1"
+                },
+                {
+                    "location": "19",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "2108",
+            "name": "deðnek",
+            "short_description": "bir deðnek",
+            "description": "Küçük bir deðnek burada býrakýlmýþ.",
+            "material": "glass",
+            "type": "wand",
+            "extra_flags": "AG",
+            "wear_flags": "AO",
+            "values": "20 10 10 'blindness' 0",
+            "level": "8",
+            "weight": "10",
+            "cost": "1910",
+            "condition": "P"
+        },
+        {
+            "vnum": "2109",
+            "name": "eldiven",
+            "short_description": "rahat deri eldiven",
+            "description": "Bir çift deri eldiven burada býrakýlmýþ.",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AH",
+            "values": "4 3 4 0 0",
+            "level": "7",
+            "weight": "20",
+            "cost": "1010",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "2110",
+            "name": "devriye topuzu",
+            "short_description": "bir devriye topuzu",
+            "description": "Bir devriye topuzu dikkatsizlikten burada unutulmuþ.",
+            "material": "wood",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "mace 1 10 pound 0",
+            "level": "9",
+            "weight": "10",
+            "cost": "980",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "3"
+                },
+                {
+                    "location": "14",
+                    "modifier": "5"
+                }
+            ]
+        },
+        {
+            "vnum": "2111",
+            "name": "mühürlü yüzük",
+            "short_description": "bir asura mühürlü yüzüðü",
+            "description": "Üzerinde asura iþareti taþýyan bir yüzük tozun içinde kaybolmuþ.",
+            "material": "bronze",
+            "type": "jewelry",
+            "extra_flags": "0",
+            "wear_flags": "AB",
+            "values": "0 0 0 0 0",
+            "level": "10",
+            "weight": "10",
+            "cost": "1090",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "1",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "2112",
+            "name": "pirinç mafsal",
+            "short_description": "pirinç mafsal",
+            "description": "Bir savaþtan arta kalan bir mafsal takýmý yerde duruyor.",
+            "material": "brass",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AH",
+            "values": "1 1 1 0 0",
+            "level": "5",
+            "weight": "10",
+            "cost": "300",
+            "condition": "A",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "2113",
+            "name": "uzun kurþun topuz",
+            "short_description": "bir kurþun topuz",
+            "description": "Uzun bir kurþun topuz burada, kafa kýrmak için alýnmayý bekliyor.",
+            "material": "lead",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "mace 2 6 pound 0",
+            "level": "11",
+            "weight": "60",
+            "cost": "0",
+            "condition": "A",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "-1"
+                },
+                {
+                    "location": "19",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "2114",
+            "name": "çivili çete asura ceket",
+            "short_description": "bir çivili asura çete ceketi",
+            "description": "Bir asura çivili ceket burada yeni sahibini bekliyor.",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AD",
+            "values": "4 6 5 0 0",
+            "level": "10",
+            "weight": "30",
+            "cost": "1470",
+            "condition": "G"
+        },
+        {
+            "vnum": "2115",
+            "name": "çivili çete umacý ceketi",
+            "short_description": "bir çivili umacý  çete ceketi",
+            "description": "Bir çivili umacý  çete ceketi burada yeni sahibini bekliyor.",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AD",
+            "values": "6 5 4 0 0",
+            "level": "10",
+            "weight": "30",
+            "cost": "1470",
+            "condition": "P"
+        },
+        {
+            "vnum": "2116",
+            "name": "polis düdük",
+            "short_description": "bir polis düdüðü",
+            "description": "Gümüþ bir zincire baðlanmýþ bir düdük burada.",
+            "material": "steel",
+            "type": "clothing",
+            "extra_flags": "0",
+            "wear_flags": "AC",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "2",
+            "cost": "100",
+            "condition": "G"
+        },
+        {
+            "vnum": "2117",
+            "name": "siyah deri pantalon",
+            "short_description": "bir siyah deri pantalon",
+            "description": "Yerde bacaklarý saran bir siyah deri pantalon görüyorsun.",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AF",
+            "values": "3 4 4 0 0",
+            "level": "5",
+            "weight": "0",
+            "cost": "420",
+            "condition": "G",
+            "extra_descriptions": [
+                {
+                    "keyword": "deri pantalon",
+                    "description": "Kullanýlmýþ fakat hala saðlam.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2118",
+            "name": "keskin kama",
+            "short_description": "bir keskin kama",
+            "description": "Garip görünüþlü bir kama burada.",
+            "material": "steel",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "dagger 1 12 stab 0",
+            "level": "9",
+            "weight": "5",
+            "cost": "760",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "2119",
+            "name": "kýrýk kama",
+            "short_description": "bir kýrýk kama",
+            "description": "Arrgg! Kýrýk bir kama ayaðýný kesti.",
+            "material": "glass",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "dagger 2 7 slash 0",
+            "level": "11",
+            "weight": "10",
+            "cost": "0",
+            "condition": "W",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "-2"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "kýrýk þiþe",
+                    "description": "Ucu oldukça kesici kýrýk bir þiþe.\n"
+                }
+            ]
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "2101",
+            "name": "Bir Karanlýk ve Dar Yol",
+            "description": "Yolun duvarlarý spray boyalarla defalarca boyanmýþ. Grafitilerden birisi\nþöyle diyor: \"Bu bölüm 5-10 levellar arasý olanlar için dizayn edilmiþtir.\nLeveliniz 15'den yüksekse çok birþey ummayýn. Eðer leveliniz 5'den küçükse\nrisk alýyorsunuz demektir. Duvarda bir plaket var.\n",
+            "flags": "AC",
+            "sector": "1",
+            "extra_descriptions": [
+                {
+                    "keyword": "plaket",
+                    "description": "Bu bölgenin Türkçe çevirisi Uzak Diyarlar için Jai tarafýndan yapýlmýþtýr.\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2102"
+                },
+                {
+                    "door": "D3",
+                    "description": "You can see Emerald Avenue, a much nicer place to be.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3119"
+                }
+            ]
+        },
+        {
+            "vnum": "2102",
+            "name": "Beyaz Ejder Bulvarýnýn Baþlangýcý",
+            "description": "Þehrin bu bölümü bir asura Çetesi tarafýndan istila edilmiþ. Poliste bile\nburada bulunmaktan dolayý bir korku var. Burasý eskiden orta sýnýfýn güzel\nbir mekanýymýþ; þimdi ise caddelerini çeteciler yönetiyor. Bütün ev ve\niþyerleri terkedilmiþ. Batýda dar bir sokak var. Cadde ise doðuya doðru\ndevam ediyor. Güneyde bir þantiye var.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2103"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2109"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2101"
+                }
+            ]
+        },
+        {
+            "vnum": "2103",
+            "name": "Beyaz Ejder Bulvarý Boyunca",
+            "description": "Heryerde süregiden þiddetin izlerini görüyorsun. Heryere kan bulaþmýþ ve\netrafta kýrýk asalar, býçaklar var. Güneyde bir þantiye görüyorsun. Beyaz\nEjder Bulvarý doðuya ve batýya devam ediyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2104"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2110"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2102"
+                }
+            ]
+        },
+        {
+            "vnum": "2104",
+            "name": "White Dragon Boulevard at zýrhy",
+            "description": "Burada sadece çete üyeleri caddeleri dolaþýr. Zýrh dükkaný olmasý gereken\nyer güneyde. Beyaz Ejder Bulvarý doðuya ve batýya devam ediyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2105"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2111"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2103"
+                }
+            ]
+        },
+        {
+            "vnum": "2105",
+            "name": "Beyaz Ejder Bulvarý",
+            "description": "Beyaz Ejder Bulvarý'nýn buradan güneye de devam ediyor fakat devrilen bir\nbina yolu týkamýþ. Beyaz Ejder Bulvarý doðu ve batýya devam ediyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2106"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2104"
+                }
+            ]
+        },
+        {
+            "vnum": "2106",
+            "name": "Buz Ejderle Beyaz Ejderin Kesiþimi",
+            "description": "Buz Ejder Yolu buradan güneye devam ediyor. Yol güzel kristal heykellerle\ndonatýlmýþ. Beyaz Ejder Bulvarý doðuya ve batýya devam ediyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2107"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2113"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2105"
+                }
+            ]
+        },
+        {
+            "vnum": "2107",
+            "name": "Beyaz Ejder Bulvarý",
+            "description": "Önyüzü beyaz mermerden yapýlmýþ görkemli bir han güneyde kalýyor. Ne\nyazýk ki þimdilerde sadece bir harabe. Doðuya ve batýya devam edebilirsin.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2108"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2106"
+                }
+            ]
+        },
+        {
+            "vnum": "2108",
+            "name": "tunç Ejder ve Beyaz Ejder Kesiþimi",
+            "description": "Burasý bölgenin kuzey-doðu köþesi. Beyaz Ejder Bulvarý batýya yöneliyor.\ntunç Ejder caddesi ise güneyde. This is the north-east corner of the\nneighborhood. White Dragon boulevard heads west and tunçe Dragon street\nheads south.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2115"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2107"
+                }
+            ]
+        },
+        {
+            "vnum": "2109",
+            "name": "Þantiye",
+            "description": "Bir zamanlar buraya kocaman bir bina dikilecekmiþ fakat þehirdeki þiddet\nyüzünden proje iptal edilmiþ. Þimdi burasý yabani otlarla dolu bir yer.\nÞantiye doðuya devam ediyor. Kuzeyde ise bir yol var.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2102"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2110"
+                }
+            ]
+        },
+        {
+            "vnum": "2110",
+            "name": "Þantiyenin doðu sonu",
+            "description": "Burasý plana göre bir park olacakmýþ. Fakat müteahhit þehirdeki çeteden\nkorkup iþi iptal etmiþ. Þimdi burasý tozdan bir alan. Park güneye yöneliyor.\nÞantiye batýya devam ediyor ve kuzeyde bir cadde var.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2103"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2116"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2109"
+                }
+            ]
+        },
+        {
+            "vnum": "2111",
+            "name": "Zýrh Dükkaný",
+            "description": "Burasý eskiden bir zýrh dükkanýymýþ. Bütün ekipmanlar çalýnmýþ veya tamir\nedilemeyecek kadar zarar görmüþ. Binanýn arka duvarý güneye gitmene izin\nverecek biçimde yýkýlmýþ. Beyaz Ejder Bulvarý kuzeyde.\n",
+            "flags": "D",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2104"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2117"
+                }
+            ]
+        },
+        {
+            "vnum": "2112",
+            "name": "Yolda bir dönüþ",
+            "description": "Buz Ejder Yolu doðuya ve güneye yöneliyor. Etrafta çýk fazla kan lekesi\nvar.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2113"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2118"
+                }
+            ]
+        },
+        {
+            "vnum": "2113",
+            "name": "Buz Ejder Dönüþü",
+            "description": "Buz Ejder Yolu kuzeye ve batýya dönüyor. Yerde ayak izleri var. Yakýn\nzamanda burada büyük bir çatýþma olmuþ. Þehrin büyü dükkaný doðuda.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2106"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2114"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2112"
+                }
+            ]
+        },
+        {
+            "vnum": "2114",
+            "name": "Büyü dükkanýndan arta kalanlar",
+            "description": "Büyücü kuvvetliymiþ ama ellisiyle birden baþ edememiþ. Ölünce de\nmalzemeleri alýnmýþ. Batýdaki kapý tekrar caddeye dönüyor. Doðudaki kapý ise\nbir baþka caddeye açýlýyor.\n",
+            "flags": "D",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2115"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2113"
+                }
+            ]
+        },
+        {
+            "vnum": "2115",
+            "name": "tunç Ejder Yolu",
+            "description": "tunç Ejder Yolu kuzeye ve güneye ilerliyor. Batýda ise büyü dükkanýndan\nkalanlar var.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2108"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2120"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2114"
+                }
+            ]
+        },
+        {
+            "vnum": "2116",
+            "name": "Ejder Plaza",
+            "description": "Burada güzel bir alýþ-veriþ merkezi yapýlacakmýþ. Ben sana söylemeseydim\nbilemezdin çünkü burasý çetenin idolü olan Ejder ismiyle anýlmaya baþlanmýþ.\nArtýk bir eðitim merkezi. Doðuda bir çýkýþ, kuzeyde ise þantiye var.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2110"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2117"
+                }
+            ]
+        },
+        {
+            "vnum": "2117",
+            "name": "Kestirme",
+            "description": "Burasý Ejder Plaza ile þehir merkezini birleþtiren bir yol. Batýda Ejder\nPlaza var ve kestirme güneye devam ediyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2111"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2121"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2116"
+                }
+            ]
+        },
+        {
+            "vnum": "2118",
+            "name": "Buz Ejder Yolu",
+            "description": "Birçok kristal heykel parçalanmýþ. Bunu kimin neyle yaptýðýn merak\nediyorsun. Yol kuzeye kývrýlýyor ve güneye devam ediyor. Doðuda ise bir avlu\nvar.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2112"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2119"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2122"
+                }
+            ]
+        },
+        {
+            "vnum": "2119",
+            "name": "Kuzey Avlusu",
+            "description": "Burasý bir zamanlar güzel bir binanýn avlusuymuþ. Fakat biri bitkileri\nsulamayý unutmuþ ve hepsi kuruyup ölmüþ. Bunu düþününce burada ölenlerin\nsayýsýný da merak ediyorsun. Yol güneye ve batýya devam ediyor.\n",
+            "flags": "D",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2123"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2118"
+                }
+            ]
+        },
+        {
+            "vnum": "2120",
+            "name": "tunç Ejder Caddesi",
+            "description": "Burada Vispa'ya açýlan bir kapý varmýþ. Fakat kapý artýk o kadar\npaslanmýþ ki, tamamen kapanmýþ. Cadde kuzeye ve güneye devam ediyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2115"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2125"
+                }
+            ]
+        },
+        {
+            "vnum": "2121",
+            "name": "Kestirme",
+            "description": "Kestirme kuzeye doðru geniþliyor. Doðuda ise bir cadde var.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2117"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2122"
+                }
+            ]
+        },
+        {
+            "vnum": "2122",
+            "name": "Buz Dragon Yolu",
+            "description": "Yol kuzeye devam ediyor, güneyde ise Sarý Dragon Caddesiyle kesiþiyor.\nBir þekilde batýda Ejder Plaza'ya yönelen bir kestirme olduðunu\ndüþünüyorsun.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2118"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2127"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2121"
+                }
+            ]
+        },
+        {
+            "vnum": "2123",
+            "name": "Güney Avlusu",
+            "description": "Eskiden yemyeþil olan bu yer þimdi kurak bir alan. Yukarýdaki odalara\nçýkan bir merdiven görüyorsun fakat merdivenin 3. Ve 15. Basamaklarý eksik.\nAvlu kuzeye yöneliyor ve güneyde bir cadde var.\n",
+            "flags": "D",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2119"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2128"
+                }
+            ]
+        },
+        {
+            "vnum": "2124",
+            "name": "Terkedilmiþ Depo",
+            "description": "Burasý bir zamanlar iyi kar býrakan bir maðazaymýþ. Heryerde olduðu gibi\nburada kalanlar da tamir edilemeyecek kadar zarar görmüþ. Þimdilerde burasý\nçetenin karargahý. Çete lideri çetesini buradan yönetiyor. Doðuda\nmenteþeleri üzerinde ancak durabilen tahta bir kapý var.\n",
+            "flags": "AD",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "doðu tahta kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "2125"
+                }
+            ]
+        },
+        {
+            "vnum": "2125",
+            "name": "tunç Ejder Caddesi",
+            "description": "Cadde kuzeye ve güneye devam ediyor. Batýda depoya açýlan tahta bir kapý\nvar. Depo TERKEDÝLMÝÞ görünüyor...\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2120"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2130"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "batý tahta kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "2124"
+                }
+            ]
+        },
+        {
+            "vnum": "2126",
+            "name": "Sarý Ejder Yolu",
+            "description": "Sarý Ejder Yolu asura terörünün güney sýnýrýdýr. Yol doðuya geniþliyor.\nGüneyde ise \"sahipsiz\" diyar.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2127"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2131"
+                }
+            ]
+        },
+        {
+            "vnum": "2127",
+            "name": "Sarý Ejder Yolu",
+            "description": "Yol doðuya ve batýya ilerliyor. Buz Ejder Yolu buraya kuzeyden geliyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2122"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2128"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2126"
+                }
+            ]
+        },
+        {
+            "vnum": "2128",
+            "name": "Sarý Ejder Yolu",
+            "description": "Yol doðuya ve batýya devam ediyor. Kuzeyde bir avlu var. Güneyden\n\"kimsenin\" diyarýna yönelebilirsin.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2123"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2129"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2133"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2127"
+                }
+            ]
+        },
+        {
+            "vnum": "2129",
+            "name": "Sarý Ejder Yolu",
+            "description": "Kuzeyde bir pencere var. Kýrýklarýndan içeri ýþýk geliyor. Yol doðuya ve\nbatýya ilerliyor. Ya da güneyden \"kimsenin\" diyarýna yönelebilirin.\n",
+            "flags": "0",
+            "sector": "1",
+            "extra_descriptions": [
+                {
+                    "keyword": "pencere",
+                    "description": "Pencereden bakýnca çetenin liderini görüyorsun. umacý lerin ölümünü iþaret\nediyor.\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2130"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2134"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2128"
+                }
+            ]
+        },
+        {
+            "vnum": "2130",
+            "name": "Sarý Ejder Yolu",
+            "description": "tunç Ejder Caddesi burada ve kuzeye yöneliyor. Burasý Sarý Ejder\nYolu'nun sonu, yol batýya devam ediyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2125"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2129"
+                }
+            ]
+        },
+        {
+            "vnum": "2131",
+            "name": "KÝMSENÝN DÝYARI",
+            "description": "Burasý þehirdeki iki çeteyi ayýran bölge. Burasý genelde þiddetin\nbaþladýðý yerdir. Kimsenin diyarý güneye ve doðuya devam ediyor, kuzeyde ise\nbir cadde var.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2126"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2132"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2136"
+                }
+            ]
+        },
+        {
+            "vnum": "2132",
+            "name": "KÝMSENÝN DÝYARI",
+            "description": "Burasý þehirdeki iki çeteyi ayýran bölge. Burasý genelde þiddetin\nbaþladýðý yerdir. Kimsenin diyarý doðu ve batýya devam ediyor.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2133"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2137"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2131"
+                }
+            ]
+        },
+        {
+            "vnum": "2133",
+            "name": "KÝMSENÝN DÝYARI",
+            "description": "Burasý þehirdeki iki çeteyi ayýran bölge. Burasý genelde þiddetin\nbaþladýðý yerdir. Kimsenin diyarý güneye, doðuya ve batýya devam ediyor.\nKuzeyde ise bir cadde var.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2128"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2134"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2138"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2132"
+                }
+            ]
+        },
+        {
+            "vnum": "2134",
+            "name": "KÝMSENÝN DÝYARI",
+            "description": "Burasý þehirdeki iki çeteyi ayýran bölge. Burasý genelde þiddetin\nbaþladýðý yerdir. Kimsenin diyarý güneye, doðuya ve batýya devam ediyor.\nKuzeyde ise bir cadde var.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2129"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2135"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2139"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2133"
+                }
+            ]
+        },
+        {
+            "vnum": "2135",
+            "name": "KÝMSENÝN DÝYARI",
+            "description": "Burasý þehirdeki iki çeteyi ayýran bölge. Burasý genelde þiddetin\nbaþladýðý yerdir. Kimsenin diyarý güneye ve batýya devam ediyor.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2140"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2134"
+                }
+            ]
+        },
+        {
+            "vnum": "2136",
+            "name": "KÝMSENÝN DÝYARI",
+            "description": "Burasý þehirdeki iki çeteyi ayýran bölge. Burasý genelde þiddetin\nbaþladýðý yerdir. Kimsenin diyarý kuzeye ve doðuya devam ediyor. Güneyde ise\nbir cadde var.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2131"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2137"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2141"
+                }
+            ]
+        },
+        {
+            "vnum": "2137",
+            "name": "KÝMSENÝN DÝYARI",
+            "description": "Burasý þehirdeki iki çeteyi ayýran bölge. Burasý genelde þiddetin\nbaþladýðý yerdir. Kimsenin diyarý kuzeye, doðuya ve batýya devam ediyor.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2132"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2138"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2136"
+                }
+            ]
+        },
+        {
+            "vnum": "2138",
+            "name": "KÝMSENÝN DÝYARI",
+            "description": "Burasý þehirdeki iki çeteyi ayýran bölge. Burasý genelde þiddetin\nbaþladýðý yerdir. Kimsenin diyarý kuzeye, doðuya ve batýya devam ediyor.\nGüneyde ise bir cadde var.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2133"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2139"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2143"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2137"
+                }
+            ]
+        },
+        {
+            "vnum": "2139",
+            "name": "KÝMSENÝN DÝYARI",
+            "description": "Burasý þehirdeki iki çeteyi ayýran bölge. Burasý genelde þiddetin\nbaþladýðý yerdir. Kimsenin diyarý kuzeye, doðuya ve batýya devam ediyor.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2134"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2140"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2138"
+                }
+            ]
+        },
+        {
+            "vnum": "2140",
+            "name": "KÝMSENÝN DÝYARI",
+            "description": "Burasý þehirdeki iki çeteyi ayýran bölge. Burasý genelde þiddetin\nbaþladýðý yerdir. Kimsenin diyarý kuzeye ve batýya devam ediyor. Güneyde ise\nbir cadde var.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2135"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2145"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2139"
+                }
+            ]
+        },
+        {
+            "vnum": "2141",
+            "name": "Hektor Caddesinde bir dönüþ",
+            "description": "Hektor caddesi güneye ve doðuya devam ediyor. \"Kimsenin diyarý\" giriþi\nkuzeyde.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2136"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2142"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2146"
+                }
+            ]
+        },
+        {
+            "vnum": "2142",
+            "name": "Hektor Caddesindeki Fýrýn",
+            "description": "Hektor caddesi doðuya ve batýya ilerliyor. Fýrýn güneyde fakat kapýsý\nmühürlenmiþ. Muhtemelen bayat çörek satmaktan.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2143"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2141"
+                }
+            ]
+        },
+        {
+            "vnum": "2143",
+            "name": "Baþka Bir Açhil ve Hektor Kesiþimi",
+            "description": "Açhil caddesi güneye, Hektor ise doðu ve batýya yöneliyor. Kuzeyde\n\"Kimsenin diyarý\" giriþi var. Kesiþimin güney-batý köþesinde yanmýþ bir bina\nvar.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2138"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2144"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2147"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2142"
+                }
+            ]
+        },
+        {
+            "vnum": "2144",
+            "name": "Hektor Caddesi Mücevhercisi",
+            "description": "Þehrin bir zamanalr en parlak yeri. Þiddetten en büyük darbeyi bu yapý\nyemiþ. Her an çökebilir. Cadde doðuya ve batýya devam ediyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2145"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2143"
+                }
+            ]
+        },
+        {
+            "vnum": "2145",
+            "name": "Ayaks ve Hektor kesiþimi",
+            "description": "Doðuda büyük bir çeþme var fakat suyunun içilebilir olduðundan emin\ndeðilsin. Ayaks Caddesi güneye, Hektor ise batýya yöneliyor. \"Kimsenin\ndiyarý\" kuzeyde.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2140"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2149"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2144"
+                }
+            ]
+        },
+        {
+            "vnum": "2146",
+            "name": "Hektor Caddesi",
+            "description": "Cadde çöp ve atýk dolu. Batýda hala ayakta kalan bir bina var ama ona\ndoðru bir yol bulabilmen olasý görünmüyor. Cadde kuzeye ve güneye ilerliyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2141"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2150"
+                }
+            ]
+        },
+        {
+            "vnum": "2147",
+            "name": "Açil Caddesi",
+            "description": "Burasý eskiden þehrin merkezine giden en önemli yolmuþ. Þehir ozanlarý\nburalarda yürüyerek zafer þarkýlarý söylermiþ. Cadde güneyde bir dönüþe ve\nkuzeyde bir kesiþime yöneliyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2143"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2152"
+                }
+            ]
+        },
+        {
+            "vnum": "2148",
+            "name": "Bir küçük kilise harabesi",
+            "description": "Burasý zamanýnda tanrýlara ibadet etmek için kurulmuþ küçük bir\ntapýnakmýþ. Þimdi ise þiddetin spray izlerini taþýyor. Burayý en çok\nkirleten umacý lerin daraðacý. Doðuda paslý metal kapýnýn ardýnda bir cadde\nvar.\n",
+            "flags": "AD",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "paslý metal kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "2149"
+                }
+            ]
+        },
+        {
+            "vnum": "2149",
+            "name": "Ayaks Caddesi",
+            "description": "Batýda minör tanrýlara ibadet için kullanýlmýþ bir kiliseye açýlan paslý\nmetal kapý var. Cadde kuzeye ve güneye devam ediyor. Kiliseden gelen boðuk\nsesler duyuyorsun.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2145"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2154"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "paslý metal kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "2148"
+                }
+            ]
+        },
+        {
+            "vnum": "2150",
+            "name": "Hektor ve Açil'in ilk kesiþimi",
+            "description": "Burada iki yüce savaþçýnýn dövüþünü gösteren bir heykel var. Bu heykelin\nkirlenmemesi sana garip geliyor fakat sonra onu koruyan bir hale\nfarkediyorsun. Açil doðuya ve güneye, Hektor ise kuzeye devam ediyor. There\nis a large statue here depicting a battle between two great warriors. You\nthink it's odd that it has not been defiled, but then you sense a aura\nprotecting it. Achilles runs east and south, while Hector heads out to the\nnorth.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2146"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2151"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2156"
+                }
+            ]
+        },
+        {
+            "vnum": "2151",
+            "name": "Açil Caddesi",
+            "description": "Güneyde büyük ve açýk bir alan var, muhtemelen mezarlýk. Senin alana\ngirmeni engelleyen tepeleri sivri, burgulu demirlerden yapýlmýþ bir çit\ngörüyorsun. Cadde doðuya ve batýya devam ediyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2152"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2150"
+                }
+            ]
+        },
+        {
+            "vnum": "2152",
+            "name": "Yolda bir dönüþ",
+            "description": "Açil Caddesi burada kuzeye ve batýya yöneliyor. Güneyde ise dar bir yol\nvar.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2147"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2157"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2151"
+                }
+            ]
+        },
+        {
+            "vnum": "2153",
+            "name": "Silah dükkanýndan kalanlar",
+            "description": "Bu acýmasýzlar silah dükkanýnýn sahibine de huzurlu bir ölüm vermemiþler.\nDuvarlarý boyayan kan çoktan kurumuþ. Burada büyük bir kýyým yaþanmýþ.\nDoðuda cadde uzanýyor.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2154"
+                }
+            ]
+        },
+        {
+            "vnum": "2154",
+            "name": "Ayaks Caddesi",
+            "description": "Cadde kuzeye ve güneye devam ediyor. Ahýrlar doðuda ama emin ol bütün\natlar ya öldürülmüþtür ya da gitmiþtir.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2149"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2159"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2153"
+                }
+            ]
+        },
+        {
+            "vnum": "2155",
+            "name": "Kaðan Parký",
+            "description": "Ýkimizin de düþündüðü gibi bir park çýkmadý ama yine de bölgenin geri\nkalanýna göre daha güvenli bir hava var burada. Bu park büyük Moðol Kaðanýna\natfedilmiþ olabilir. Cadde doðuya ve güneye devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2156"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2162"
+                }
+            ]
+        },
+        {
+            "vnum": "2156",
+            "name": "Açil Caddesi (Park Giriþi)",
+            "description": "Bu bir park mý? Batýda. Cadde güneyde kesiþime, kuzeydeyse virajlara\nuzanýyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2150"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2163"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2155"
+                }
+            ]
+        },
+        {
+            "vnum": "2157",
+            "name": "Ayaks'ta bir dönüþ",
+            "description": "Yol güneye ve doðuya devam ediyor. Kuzeye giden bir sokak farkediyorsun.\nBatýda bir çeþit tünel giriþi var fakat kendi aðýrlýðý altýnda kalmýþ.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2152"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2158"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2164"
+                }
+            ]
+        },
+        {
+            "vnum": "2158",
+            "name": "Ayaks Caddesi",
+            "description": "Bu kavþaðýn kuzey doðusunda bir zamanlarýn gurur ve onur dolu lonca evi\nvarmýþ. Duvarlarýn çoðu ve tavan hasarlý. Güneyde bir han var. Yol doðuya ve\nbatýya devam ediyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2159"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2165"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2157"
+                }
+            ]
+        },
+        {
+            "vnum": "2159",
+            "name": "Viraj",
+            "description": "Cadde kuzeye ve batýya gidiyor. Bir zamanlar süney-doðuya giden dar bir\nyol varmýþ.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2154"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2158"
+                }
+            ]
+        },
+        {
+            "vnum": "2160",
+            "name": "Geniþ bir sokak",
+            "description": "Sokaðýn iki tarafýna da defalarca zarar verilmiþ. Duvarda spreyle\nyazýlmýþ bir yazý oldukça okunaklý: \"Burasý 5-10 levellar içindir. Leveliniz\n10'dan fazlaysa umutlanmayýn. 5'ten düþükse de risk sizindir.\" Baþka bir\nyazýda da \"umacý  bölgesine giriyorsunuz ! ! !\" Diyor. Batýya devam eden bir\ncadde ve doðuya devam eden bir anayol var. ---Bu bölgenin Türkçe çevirisi,\n\"ilk Türkçe Mud\" için LaNcAsTeR tarafýndan yapýlmýþtýr. 02/10/02---\n",
+            "flags": "AC",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2161"
+                },
+                {
+                    "door": "D3",
+                    "description": "You see the end of Elm street. Looks much safer.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3144"
+                }
+            ]
+        },
+        {
+            "vnum": "2161",
+            "name": "Aleksander Yolu",
+            "description": "Etrafta kavga çýkarmak ve kýrýp dökmek için dolaþan çete üyeleri\ngörüyorsun. Görünüþe göre bütün vatandaþlar buralarý terketmiþ. Eskiden\nkalma evler artýk kulanýlamayacak durumda. Yol doðuya ve batýya devam\nediyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2162"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2160"
+                }
+            ]
+        },
+        {
+            "vnum": "2162",
+            "name": "Park Giriþindeki Aleksandar Yolu",
+            "description": "Parka benzeyen bir alan kuzeyde ve iki bina arasýndan geçip bir caddeye\nbaðlanan dokak güneyde.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2155"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2166"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2161"
+                }
+            ]
+        },
+        {
+            "vnum": "2163",
+            "name": "Açil Caddesi",
+            "description": "Cadde kuzeye ve güneye devam ediyor. Artýk umacý  terörünün\nderinliklerindesin ve bu sende bir üþüme yaratýyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2156"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2167"
+                }
+            ]
+        },
+        {
+            "vnum": "2164",
+            "name": "Ayaks Caddesi",
+            "description": "Batýda uðursuz bir siyah burgulu demirden çit görüyorsun. Ýçeride\ncinlerin olup olmadýðýný ve eðer varsalar bu çitin onlarý engelleyip\nengellemeyeceðini düþünüyorsun.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2157"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2169"
+                }
+            ]
+        },
+        {
+            "vnum": "2165",
+            "name": "Han/Pub",
+            "description": "Onarýma ihtiyazý olduðu halde hala iþ görür durumda. Çete üyeleri burayý\nkendileri için kullanýyor olmalýlar. Fýçýda hala bira olabilir çünkü\nmusluktan damlýyor. Koridor güneye devam ediyor ve sen kuzeyde kapýnýn\nardýndaki caddeyi gözlüyorsun.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2158"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2170"
+                }
+            ]
+        },
+        {
+            "vnum": "2166",
+            "name": "Solomon Caddesi",
+            "description": "Bu cadde umacý  bölgesinin güney sýnýrýný oluþturuyor. Cadde doðuya devam\nediyor. Binalar arasýndan baþka bir caddeye açýlan yol ise kuzeyde.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2162"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2167"
+                }
+            ]
+        },
+        {
+            "vnum": "2167",
+            "name": "Açil ve Solomon Kesiþimi",
+            "description": "Solomon Caddesi doðuya ve batýya yöneliyor. Kuzeyde ise Açil Caddesi var.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2163"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2168"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2166"
+                }
+            ]
+        },
+        {
+            "vnum": "2168",
+            "name": "Solomon Caddesi",
+            "description": "Burgulu demir parmaklýklarla çevrili mezarlýðýn giriþi kuzeyde. Ýçerideki\nþeytanlýk girme konusunda kararsýz býrakacak kadar güçlü. Doðu batý yolu\nboyunca küçük þeytanlar tarafýndan farkedilebilirsin.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2169"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2167"
+                }
+            ]
+        },
+        {
+            "vnum": "2169",
+            "name": "Ayaks ve Solomon Kesiþimi",
+            "description": "Ýki yol burada kesiþiyorlar. Ayaks kuzeye, Solomon ise batýya yöneliyor.\nDoðudaki kapýnýn ardýnda ise bir han var.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2164"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2170"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2168"
+                }
+            ]
+        },
+        {
+            "vnum": "2170",
+            "name": "Koridor",
+            "description": "Koridor kuzeyde hanýn içine yöneliyor. Merdivenler konuk odalarýna\nçýkýyor ama denemeni önermem. Batýda kapýnýn ardýnda ise Solomon Caddesi\nvar.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2165"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2169"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "D",
+            "arg1": "2124",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "2125",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "2148",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "2149",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2103",
+            "arg2": "1",
+            "arg3": "2124",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2119",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2111",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2114",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2108",
+            "arg2": "12",
+            "arg3": "2124",
+            "arg4": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "2108",
+            "arg2": "12",
+            "arg3": "2124",
+            "arg4": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "2108",
+            "arg2": "12",
+            "arg3": "2124",
+            "arg4": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "2108",
+            "arg2": "12",
+            "arg3": "2124",
+            "arg4": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "2104",
+            "arg2": "5",
+            "arg3": "2116",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2114",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2104",
+            "arg2": "10",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "2103",
+            "arg2": "10",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2104",
+            "arg2": "5",
+            "arg3": "2114",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2114",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2111",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2103",
+            "arg2": "10",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2104",
+            "arg2": "5",
+            "arg3": "2108",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2114",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2109",
+            "arg2": "5",
+            "arg3": "9"
+        },
+        {
+            "command": "E",
+            "arg1": "2113",
+            "arg2": "10",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2104",
+            "arg2": "5",
+            "arg3": "2135",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2114",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2104",
+            "arg2": "10",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "2111",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2104",
+            "arg2": "5",
+            "arg3": "2123",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2114",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2113",
+            "arg2": "10",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2117",
+            "arg2": "10",
+            "arg3": "7"
+        },
+        {
+            "command": "M",
+            "arg1": "2109",
+            "arg2": "3",
+            "arg3": "2102",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2105",
+            "arg2": "8",
+            "arg3": "17"
+        },
+        {
+            "command": "E",
+            "arg1": "2114",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2109",
+            "arg2": "3",
+            "arg3": "2114",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2114",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2118",
+            "arg2": "10",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2109",
+            "arg2": "3",
+            "arg3": "2128",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2114",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2105",
+            "arg2": "8",
+            "arg3": "17"
+        },
+        {
+            "command": "E",
+            "arg1": "2118",
+            "arg2": "10",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2102",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2103",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2104",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2105",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2106",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2107",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2108",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2109",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2110",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2111",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2112",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2113",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2114",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2115",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2116",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2117",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2118",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2119",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2120",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2121",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2122",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2128",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2130",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2131",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2101",
+            "arg2": "25",
+            "arg3": "2134",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2101",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2110",
+            "arg2": "1",
+            "arg3": "2148",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2115",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2106",
+            "arg2": "5",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2112",
+            "arg2": "6",
+            "arg3": "9"
+        },
+        {
+            "command": "M",
+            "arg1": "2108",
+            "arg2": "12",
+            "arg3": "2148",
+            "arg4": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "2108",
+            "arg2": "12",
+            "arg3": "2148",
+            "arg4": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "2108",
+            "arg2": "12",
+            "arg3": "2148",
+            "arg4": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "2108",
+            "arg2": "12",
+            "arg3": "2148",
+            "arg4": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "2111",
+            "arg2": "5",
+            "arg3": "2155",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2115",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2104",
+            "arg2": "10",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "2109",
+            "arg2": "3",
+            "arg3": "9"
+        },
+        {
+            "command": "M",
+            "arg1": "2111",
+            "arg2": "5",
+            "arg3": "2170",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2115",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2104",
+            "arg2": "10",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "2117",
+            "arg2": "10",
+            "arg3": "7"
+        },
+        {
+            "command": "M",
+            "arg1": "2111",
+            "arg2": "5",
+            "arg3": "2138",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2115",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2103",
+            "arg2": "10",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2109",
+            "arg2": "3",
+            "arg3": "9"
+        },
+        {
+            "command": "M",
+            "arg1": "2111",
+            "arg2": "5",
+            "arg3": "2153",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2115",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2113",
+            "arg2": "10",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2117",
+            "arg2": "10",
+            "arg3": "7"
+        },
+        {
+            "command": "M",
+            "arg1": "2111",
+            "arg2": "5",
+            "arg3": "2147",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2115",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2103",
+            "arg2": "10",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2112",
+            "arg2": "6",
+            "arg3": "9"
+        },
+        {
+            "command": "M",
+            "arg1": "2107",
+            "arg2": "3",
+            "arg3": "2165",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2105",
+            "arg2": "8",
+            "arg3": "17"
+        },
+        {
+            "command": "E",
+            "arg1": "2118",
+            "arg2": "10",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2115",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2107",
+            "arg2": "3",
+            "arg3": "2161",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2105",
+            "arg2": "8",
+            "arg3": "17"
+        },
+        {
+            "command": "E",
+            "arg1": "2115",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2107",
+            "arg2": "3",
+            "arg3": "2143",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2118",
+            "arg2": "10",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2115",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2142",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2145",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2146",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2150",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2151",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2152",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2153",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2154",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2155",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2156",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2157",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2158",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2159",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2160",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2161",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2162",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2163",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2164",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2165",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2170",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2166",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2167",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2169",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2137",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2102",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2102",
+            "arg2": "25",
+            "arg3": "2140",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2105",
+            "arg2": "10",
+            "arg3": "2125",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "2108",
+            "arg2": "20",
+            "arg3": "17"
+        },
+        {
+            "command": "E",
+            "arg1": "2107",
+            "arg2": "10",
+            "arg3": "8"
+        },
+        {
+            "command": "M",
+            "arg1": "2105",
+            "arg2": "10",
+            "arg3": "2149",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "2107",
+            "arg2": "10",
+            "arg3": "8"
+        },
+        {
+            "command": "E",
+            "arg1": "2108",
+            "arg2": "20",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "2105",
+            "arg2": "10",
+            "arg3": "2152",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "2108",
+            "arg2": "20",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "2105",
+            "arg2": "10",
+            "arg3": "2123",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "2108",
+            "arg2": "20",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "2105",
+            "arg2": "10",
+            "arg3": "2132",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "2107",
+            "arg2": "10",
+            "arg3": "8"
+        },
+        {
+            "command": "M",
+            "arg1": "2106",
+            "arg2": "10",
+            "arg3": "2131",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2110",
+            "arg2": "15",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2116",
+            "arg2": "10",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "2106",
+            "arg2": "10",
+            "arg3": "2132",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2110",
+            "arg2": "15",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2106",
+            "arg2": "10",
+            "arg3": "2133",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2110",
+            "arg2": "15",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2116",
+            "arg2": "10",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "2106",
+            "arg2": "10",
+            "arg3": "2134",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2110",
+            "arg2": "15",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2106",
+            "arg2": "10",
+            "arg3": "2135",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2110",
+            "arg2": "15",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2106",
+            "arg2": "10",
+            "arg3": "2136",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2110",
+            "arg2": "15",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2116",
+            "arg2": "10",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "2106",
+            "arg2": "10",
+            "arg3": "2137",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2110",
+            "arg2": "15",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2106",
+            "arg2": "10",
+            "arg3": "2138",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2110",
+            "arg2": "15",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2116",
+            "arg2": "10",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "2106",
+            "arg2": "10",
+            "arg3": "2139",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2110",
+            "arg2": "15",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2116",
+            "arg2": "10",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "2106",
+            "arg2": "10",
+            "arg3": "2140",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2110",
+            "arg2": "15",
+            "arg3": "16"
+        }
+    ],
+    "shops": [],
+    "specials": [
+        {
+            "vnum": "2106",
+            "spec_fun": "spec_patrolman"
+        }
+    ]
+}

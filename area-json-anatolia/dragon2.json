@@ -1,0 +1,5090 @@
+{
+    "area": {
+        "file": "dragon2.are",
+        "name": "Dragon Spyre",
+        "low_range": "30",
+        "high_range": "65",
+        "writer": "Anon",
+        "credits": "DragonSpyre",
+        "min_vnum": "2400",
+        "max_vnum": "2499"
+    },
+    "mobiles": [
+        {
+            "vnum": "2400",
+            "name": "Copper Dragon",
+            "short_description": "The Copper Dragon",
+            "long_description": "The Copper Dragon of Time stands before you.\n",
+            "description": "A majestic Dragon stands before you in all its glory.  The gleam from its \ncopper scales seems to stop time.  The Dragon does not seem happy that you are \nhere. It ATTACKS.\n",
+            "race": "copper dragon",
+            "act": "ABFGHTZ",
+            "affected_by": "DFHZ",
+            "alignment": "350",
+            "group": "0",
+            "level": "40",
+            "hitroll": "0",
+            "hit_dice": "15d10+1850",
+            "mana_dice": "5d5+1000",
+            "dam_dice": "4d8+13",
+            "dam_type": "charge",
+            "ac_pierce": "-13",
+            "ac_bash": "-13",
+            "ac_slash": "-13",
+            "ac_exotic": "-2",
+            "off_flags": "CFM",
+            "imm_flags": "AB",
+            "res_flags": "0",
+            "vuln_flags": "I",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "4999",
+            "form": "0",
+            "parts": "0",
+            "size": "huge",
+            "material": "0"
+        },
+        {
+            "vnum": "2401",
+            "name": "White Dragon",
+            "short_description": "The White Dragon",
+            "long_description": "The White Dragon of Ice stands before you.\n",
+            "description": "A intimidating Dragon stands before you.  The icy glare blinds you long enough\nfor the Ice Dragon to devour you.\n",
+            "race": "white dragon",
+            "act": "ABFGHT",
+            "affected_by": "DFHZ",
+            "alignment": "-350",
+            "group": "0",
+            "level": "40",
+            "hitroll": "0",
+            "hit_dice": "15d10+1850",
+            "mana_dice": "5d5+1000",
+            "dam_dice": "4d8+13",
+            "dam_type": "charge",
+            "ac_pierce": "-13",
+            "ac_bash": "-13",
+            "ac_slash": "-13",
+            "ac_exotic": "-2",
+            "off_flags": "CFM",
+            "imm_flags": "AB",
+            "res_flags": "0",
+            "vuln_flags": "I",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "4999",
+            "form": "0",
+            "parts": "0",
+            "size": "huge",
+            "material": "0"
+        },
+        {
+            "vnum": "2402",
+            "name": "Pixie",
+            "short_description": "A Pixie",
+            "long_description": "A Pixie flits about the room.\n",
+            "description": "This winged creature is the epitome of mischief. He loves to pick on travelers,\nand guess what....   It's your turn :).\n",
+            "race": "elf",
+            "act": "AFGH",
+            "affected_by": "0",
+            "alignment": "-360",
+            "group": "0",
+            "level": "36",
+            "hitroll": "0",
+            "hit_dice": "10d10+1400",
+            "mana_dice": "15d5+25",
+            "dam_dice": "3d10+11",
+            "dam_type": "punch",
+            "ac_pierce": "-12",
+            "ac_bash": "-12",
+            "ac_slash": "-12",
+            "ac_exotic": "0",
+            "off_flags": "FHKN",
+            "imm_flags": "AB",
+            "res_flags": "0",
+            "vuln_flags": "D",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1499",
+            "form": "0",
+            "parts": "0",
+            "size": "small",
+            "material": "0"
+        },
+        {
+            "vnum": "2414",
+            "name": "Pixie",
+            "short_description": "A Pixie",
+            "long_description": "A small Pixie flits about the room.\n",
+            "description": "This winged creature is the epitome of mischief. He loves to pick on travelers,\nand guess what....   It's your turn :).\n",
+            "race": "elf",
+            "act": "AFGH",
+            "affected_by": "0",
+            "alignment": "-360",
+            "group": "0",
+            "level": "33",
+            "hitroll": "0",
+            "hit_dice": "10d10+1100",
+            "mana_dice": "15d5+25",
+            "dam_dice": "6d4+10",
+            "dam_type": "punch",
+            "ac_pierce": "-10",
+            "ac_bash": "-10",
+            "ac_slash": "-10",
+            "ac_exotic": "0",
+            "off_flags": "FHKN",
+            "imm_flags": "AB",
+            "res_flags": "0",
+            "vuln_flags": "D",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1499",
+            "form": "0",
+            "parts": "0",
+            "size": "small",
+            "material": "0"
+        },
+        {
+            "vnum": "2403",
+            "name": "Time Dragon Spirit",
+            "short_description": "The Spirit of the Time Dragon",
+            "long_description": "The translucent Spirit of the Dragon stares at you through uncaring eyes.\n",
+            "description": "The Spirit of the Time Dragon guards the hoard gathered by the copper dragons \nwho have stood sentinel over this spot. The Spirit lunges for your SOUL!!!!!!!\n",
+            "race": "dragon",
+            "act": "ABFGT",
+            "affected_by": "DFHU",
+            "alignment": "0",
+            "group": "0",
+            "level": "55",
+            "hitroll": "0",
+            "hit_dice": "50d10+5500",
+            "mana_dice": "20d12+100",
+            "dam_dice": "10d4+23",
+            "dam_type": "charge",
+            "ac_pierce": "-25",
+            "ac_bash": "-25",
+            "ac_slash": "-25",
+            "ac_exotic": "-7",
+            "off_flags": "CFM",
+            "imm_flags": "AB",
+            "res_flags": "0",
+            "vuln_flags": "I",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "6499",
+            "form": "0",
+            "parts": "0",
+            "size": "huge",
+            "material": "0"
+        },
+        {
+            "vnum": "2404",
+            "name": "Ice Dragon Spirit",
+            "short_description": "The Spirit of the Ice Dragon",
+            "long_description": "The shimmering Spirit of the Dragon freezes you in your steps.\n",
+            "description": "The Spirit of the Ice Dragon Stands over the hoard of the previous white dragon\nguardians. The Spirit attempts to leech you life blood from your body.\n",
+            "race": "dragon",
+            "act": "ABFGT",
+            "affected_by": "DFHU",
+            "alignment": "0",
+            "group": "0",
+            "level": "55",
+            "hitroll": "0",
+            "hit_dice": "50d10+5500",
+            "mana_dice": "20d12+100",
+            "dam_dice": "10d4+23",
+            "dam_type": "charge",
+            "ac_pierce": "-25",
+            "ac_bash": "-25",
+            "ac_slash": "-25",
+            "ac_exotic": "-7",
+            "off_flags": "CFM",
+            "imm_flags": "AB",
+            "res_flags": "0",
+            "vuln_flags": "I",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "6999",
+            "form": "0",
+            "parts": "0",
+            "size": "huge",
+            "material": "0"
+        },
+        {
+            "vnum": "2405",
+            "name": "Pixie King",
+            "short_description": "The Pixie King",
+            "long_description": "The Pixie King looks at you with a merry glint in his eyes and nods.\n",
+            "description": "The Pixe King is slightly bigger than other pixies.  He is really cool.\nThe King loves to frolic and play, especially with new friends.\nHe asks you \"Will you be my friend?\".\n",
+            "race": "elf",
+            "act": "ABFG",
+            "affected_by": "DF",
+            "alignment": "1000",
+            "group": "0",
+            "level": "48",
+            "hitroll": "0",
+            "hit_dice": "25d10+3500",
+            "mana_dice": "23d8+100",
+            "dam_dice": "6d6+18",
+            "dam_type": "charge",
+            "ac_pierce": "-16",
+            "ac_bash": "-16",
+            "ac_slash": "-16",
+            "ac_exotic": "-3",
+            "off_flags": "EN",
+            "imm_flags": "AB",
+            "res_flags": "0",
+            "vuln_flags": "D",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "2499",
+            "form": "0",
+            "parts": "0",
+            "size": "small",
+            "material": "0"
+        },
+        {
+            "vnum": "2406",
+            "name": "gate keeper gatekeeper",
+            "short_description": "The GateKeeper",
+            "long_description": "The GateKeeper appears to look right through you as he stands at his post.\n",
+            "description": "The GateKeeper is a grim staunch figure.  He looks as if he has been\ncarrying a large burden for some time.  You feel sorry for him, but\nhe does have the key that you need to continue on through the cave.\n",
+            "race": "elf",
+            "act": "ABFGT",
+            "affected_by": "DF",
+            "alignment": "0",
+            "group": "0",
+            "level": "45",
+            "hitroll": "0",
+            "hit_dice": "25d10+2750",
+            "mana_dice": "24d7+100",
+            "dam_dice": "8d4+16",
+            "dam_type": "pound",
+            "ac_pierce": "-15",
+            "ac_bash": "-15",
+            "ac_slash": "-15",
+            "ac_exotic": "2",
+            "off_flags": "EFHIKN",
+            "imm_flags": "AB",
+            "res_flags": "0",
+            "vuln_flags": "D",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "2799",
+            "form": "0",
+            "parts": "0",
+            "size": "small",
+            "material": "0"
+        },
+        {
+            "vnum": "2407",
+            "name": "eternity dragon",
+            "short_description": "The Eternity Dragon",
+            "long_description": "The Eternity Dragon stands before you, \nit pays you no heed as it stays its everlasting vigil.\n",
+            "description": "The Eternity Dragon is by far the largest dragon you have ever seen or heard \nof. Its body easily stretching 300 feet from nose to tail.  This entire cavern,\nwhich seems to span the distance of about three levels of this mountain, is\ncompletely filled by the dragon.  At the time it seems peaceful, but you\ncan tell that attacking it would be the dumbest, and last thing you ever did.\n",
+            "race": "dragon",
+            "act": "AT",
+            "affected_by": "BDFHU",
+            "alignment": "0",
+            "group": "0",
+            "level": "65",
+            "hitroll": "0",
+            "hit_dice": "50d15+8250",
+            "mana_dice": "52d12+100",
+            "dam_dice": "11d5+35",
+            "dam_type": "charge",
+            "ac_pierce": "-37",
+            "ac_bash": "-37",
+            "ac_slash": "-37",
+            "ac_exotic": "-20",
+            "off_flags": "CFM",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "I",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "14999",
+            "form": "0",
+            "parts": "0",
+            "size": "huge",
+            "material": "0"
+        },
+        {
+            "vnum": "2408",
+            "name": "pixie guard",
+            "short_description": "A Pixie Guard",
+            "long_description": "The Pixie Guard stands here, prepared to loose his life for the king.\n",
+            "description": "The Pixie Guard doesn't really do much to inspire fear in your heart, but you\nsuppose that if pressed, he could fight quite visciously compared to most\nPixies.\n",
+            "race": "elf",
+            "act": "ABGMT",
+            "affected_by": "0",
+            "alignment": "1000",
+            "group": "2405",
+            "level": "39",
+            "hitroll": "0",
+            "hit_dice": "10d10+1700",
+            "mana_dice": "5d10+50",
+            "dam_dice": "5d6+13",
+            "dam_type": "pound",
+            "ac_pierce": "-13",
+            "ac_bash": "-13",
+            "ac_slash": "-13",
+            "ac_exotic": "0",
+            "off_flags": "EIN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "D",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1799",
+            "form": "0",
+            "parts": "0",
+            "size": "small",
+            "material": "0"
+        },
+        {
+            "vnum": "2409",
+            "name": "mage pixie master",
+            "short_description": "The Master Pixie Mage",
+            "long_description": "The Master Pixie Mage is here ruffling through the King's belongings.\n",
+            "description": "The Master Pixie Mage does not look like any of the other Pixies you have\nencountered.  His glow has taken on a pale green color, and he is staring\nat you maliciously.  The Staff he carries seems familiar, but you are not\nsure from where you remember it.\n",
+            "race": "elf",
+            "act": "ACGHR",
+            "affected_by": "DH",
+            "alignment": "-500",
+            "group": "0",
+            "level": "58",
+            "hitroll": "0",
+            "hit_dice": "50d10+6000",
+            "mana_dice": "34d10+100",
+            "dam_dice": "5d10+25",
+            "dam_type": "pound",
+            "ac_pierce": "-27",
+            "ac_bash": "-27",
+            "ac_slash": "-27",
+            "ac_exotic": "-10",
+            "off_flags": "FHN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "D",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "4499",
+            "form": "0",
+            "parts": "0",
+            "size": "small",
+            "material": "0"
+        },
+        {
+            "vnum": "2410",
+            "name": "pixie guard",
+            "short_description": "A Pixie Guard",
+            "long_description": "The Pixie Guard stands here, prepared to loose her life for the king.\n",
+            "description": "The Pixie Guard doesn't really do much to inspire fear in your heart, but you\nsuppose that if pressed, she could fight quite visciously compared to most\nPixies.\n",
+            "race": "elf",
+            "act": "ABGMT",
+            "affected_by": "0",
+            "alignment": "1000",
+            "group": "2405",
+            "level": "39",
+            "hitroll": "0",
+            "hit_dice": "15d9+1700",
+            "mana_dice": "5d10+50",
+            "dam_dice": "3d10+11",
+            "dam_type": "scratch",
+            "ac_pierce": "-13",
+            "ac_bash": "-13",
+            "ac_slash": "-13",
+            "ac_exotic": "0",
+            "off_flags": "E",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "CD",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "female",
+            "wealth": "1899",
+            "form": "0",
+            "parts": "0",
+            "size": "small",
+            "material": "0"
+        },
+        {
+            "vnum": "2411",
+            "name": "Pixie",
+            "short_description": "A Pixie",
+            "long_description": "A Pixie flits about the room.\n",
+            "description": "This winged creature is the epitome of mischief. He loves to pick on \ntravelers, and guess what.... It's your turn :).\n",
+            "race": "elf",
+            "act": "AHS",
+            "affected_by": "DEPQZ",
+            "alignment": "-500",
+            "group": "0",
+            "level": "36",
+            "hitroll": "0",
+            "hit_dice": "10d30+1400",
+            "mana_dice": "100d10+100",
+            "dam_dice": "3d10+11",
+            "dam_type": "pound",
+            "ac_pierce": "-11",
+            "ac_bash": "-11",
+            "ac_slash": "-11",
+            "ac_exotic": "0",
+            "off_flags": "FHKN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "D",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1499",
+            "form": "0",
+            "parts": "0",
+            "size": "small",
+            "material": "0"
+        },
+        {
+            "vnum": "2412",
+            "name": "Keeper",
+            "short_description": "A Keeper",
+            "long_description": "A Keeper is waiting and guarding the leader of dragons.\n",
+            "description": "He is a well-trained guard. He was trained with the knights of Anatolia\nfor many years and in working for three years in midgaard he retired. And\nfound this job.\n",
+            "race": "human",
+            "act": "AHS",
+            "affected_by": "DEHPZ",
+            "alignment": "-500",
+            "group": "2402",
+            "level": "91",
+            "hitroll": "0",
+            "hit_dice": "10d30+19000",
+            "mana_dice": "100d10+100",
+            "dam_dice": "15d15+10",
+            "dam_type": "pound",
+            "ac_pierce": "-81",
+            "ac_bash": "-81",
+            "ac_slash": "-81",
+            "ac_exotic": "-30",
+            "off_flags": "FHKN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "D",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1499",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "2413",
+            "name": "Fireflash",
+            "short_description": "Fireflash",
+            "long_description": "The over lord of dragons is here , resting.\n",
+            "description": "He is , the old dragon, resting and getting off tired of years.\n",
+            "race": "gold dragon",
+            "act": "AHS",
+            "affected_by": "DEPZ",
+            "alignment": "1000",
+            "group": "2402",
+            "level": "91",
+            "hitroll": "50",
+            "hit_dice": "10d30+20400",
+            "mana_dice": "100d10+100",
+            "dam_dice": "5d35+60",
+            "dam_type": "punch",
+            "ac_pierce": "-75",
+            "ac_bash": "-75",
+            "ac_slash": "-75",
+            "ac_exotic": "-30",
+            "off_flags": "FHKN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "D",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1499",
+            "form": "0",
+            "parts": "0",
+            "size": "small",
+            "material": "0"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "2400",
+            "name": "sword",
+            "short_description": "a tiny sword",
+            "description": "A petite sword of dragons lies here on the ground, you almost didn't see it.",
+            "material": "steel",
+            "type": "weapon",
+            "extra_flags": "AGL",
+            "wear_flags": "AN",
+            "values": "sword 4 8 slice 0",
+            "level": "36",
+            "weight": "20",
+            "cost": "2700",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "2"
+                },
+                {
+                    "location": "14",
+                    "modifier": "30"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "pixie",
+                    "description": "This elegant sword appears to have served its previous owner very well, but\nyou aren't sure how well a weapon this small would serve you.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2401",
+            "name": "white dragon claw key",
+            "short_description": "a small white key shaped like a claw",
+            "description": "A small white claw is sitting here, lost.",
+            "material": "steel",
+            "type": "key",
+            "extra_flags": "M",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "18",
+            "weight": "10",
+            "cost": "0",
+            "condition": "G",
+            "extra_descriptions": [
+                {
+                    "keyword": "key claw white dragon",
+                    "description": "This key appears to have been fashioned from the claw of a dragon.  You are\nglad you weren't the locksmith assigned to getting the materials.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2402",
+            "name": "door key",
+            "short_description": "a door key",
+            "description": "There is a door key sitting here.",
+            "material": "steel",
+            "type": "key",
+            "extra_flags": "M",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0 ",
+            "level": "0",
+            "weight": "10",
+            "cost": "0",
+            "condition": "G",
+            "extra_descriptions": [
+                {
+                    "keyword": "key door",
+                    "description": "This is a small nondescript key, with nothing special about it.\nbronze"
+                }
+            ]
+        },
+        {
+            "vnum": "2403",
+            "name": "gate keeper key",
+            "short_description": "the gatekeeper's key",
+            "description": "A large bronze key sits upon the ground, covered with dust.",
+            "material": "silver",
+            "type": "key",
+            "extra_flags": "M",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "25",
+            "weight": "10",
+            "cost": "0",
+            "condition": "G",
+            "extra_descriptions": [
+                {
+                    "keyword": "gate keeper key",
+                    "description": "This is the key to the gate.  It belongs to the gatekeeper, and he is probably\nlooking for it.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2404",
+            "name": "copper dragon claw key",
+            "short_description": "a small copper key shaped like a claw",
+            "description": "A small copper claw lies here, abonded by everyone",
+            "material": "bone",
+            "type": "key",
+            "extra_flags": "M",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "19",
+            "weight": "10",
+            "cost": "0",
+            "condition": "G",
+            "extra_descriptions": [
+                {
+                    "keyword": "copper dragon claw key",
+                    "description": "This key appears to have been fashioned from a dragon's claw.  It is quite\nlarge.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2405",
+            "name": "pixie king key",
+            "short_description": "a very small key",
+            "description": "The key to the Pixie King's bedroom is here, it is almost impossible find.",
+            "material": "steel",
+            "type": "key",
+            "extra_flags": "M",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "22",
+            "weight": "10",
+            "cost": "0",
+            "condition": "G",
+            "extra_descriptions": [
+                {
+                    "keyword": "pixie king key",
+                    "description": "This is a very small key, you cannot imagine what door this would go to.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2406",
+            "name": "white pendant dragon scale",
+            "short_description": "a white dragon scale pendant",
+            "description": "Upon the ground lies a solid white pendant, it issues forth an aura of cold.",
+            "material": "silver",
+            "type": "armor",
+            "extra_flags": "AGI",
+            "wear_flags": "AC",
+            "values": "18 18 18 9 0",
+            "level": "40",
+            "weight": "120",
+            "cost": "3500",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "1"
+                },
+                {
+                    "location": "18",
+                    "modifier": "5"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-10"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "white pendant dragon scale",
+                    "description": "This pendant appears to be very ancient.  It is solid white, with a blue \ndiamond set in the center.  You feel chilled whenever it touches open flesh.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2407",
+            "name": "copper pendant dragon scale",
+            "short_description": "a copper dragon scale pendant",
+            "description": "Upon the ground lies a solid copper pendant, as you reach for it, time seems\nto slow.",
+            "material": "bone",
+            "type": "armor",
+            "extra_flags": "AGI",
+            "wear_flags": "AC",
+            "values": "18 18 18 9 0",
+            "level": "40",
+            "weight": "120",
+            "cost": "3500",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "2"
+                },
+                {
+                    "location": "18",
+                    "modifier": "5"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-10"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "copper pendant dragon scale",
+                    "description": "The pendant you now own appears to be very new, in fact it looks freshly\nforged. It is solid copper, white a streak of gold shaped like an hourglass\nin the center.  When you look back up, hours have passed.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2408",
+            "name": "pixie wings",
+            "short_description": "a pair of pixie wings",
+            "description": "A pair of translucent wings lie upon the ground, their is an eerie glow about\nthem.",
+            "material": "fire",
+            "type": "light",
+            "extra_flags": "AG",
+            "wear_flags": "A",
+            "values": "0 0 -1 0 0",
+            "level": "48",
+            "weight": "60",
+            "cost": "7500",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "14",
+                    "modifier": "125"
+                },
+                {
+                    "location": "13",
+                    "modifier": "125"
+                },
+                {
+                    "location": "12",
+                    "modifier": "100"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "pixie wings",
+                    "description": "Just what they are called.  You feel sorry for the pixie who used to own these.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2409",
+            "name": "pendant eternity",
+            "short_description": "the pendant of eternity",
+            "description": "A small pendant is here on the ground, you almost ignore it, til it calls out \nyour name.",
+            "material": "energy",
+            "type": "armor",
+            "extra_flags": "AGIF",
+            "wear_flags": "AC",
+            "values": "20 20 20 9 0",
+            "level": "51",
+            "weight": "1",
+            "cost": "31970",
+            "condition": "G",
+            "affects_f": [
+                {
+                    "where": "A",
+                    "location": "17",
+                    "modifier": "-60",
+                    "bitvector": "U"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "pendant eternity",
+                    "description": "As you stare at the pendant, you begin to feel as if you are being sucked in.\nIt is all you can do to look away.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2410",
+            "name": "white dragon scale breast plate",
+            "short_description": "a white dragonscale breast plate",
+            "description": "A shimmering white breast plate lies here, it is cold to the touch.",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "GJ",
+            "wear_flags": "AD",
+            "values": "16 16 16 7 0",
+            "level": "40",
+            "weight": "190",
+            "cost": "6430",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "24",
+                    "modifier": "-10"
+                },
+                {
+                    "location": "9",
+                    "modifier": "5"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "white dragon scale breast plate",
+                    "description": "This is a very quickly strewn together breast plate.  It looks like it was\nfashioned from the breast of a real dragon, minutes after it was slain.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2411",
+            "name": "copper dragon scale breast plate",
+            "short_description": "a copper dragonscale breast plate",
+            "description": "An elegant copper breast plate lies here, it looks very new.",
+            "material": "bone",
+            "type": "armor",
+            "extra_flags": "GK",
+            "wear_flags": "AD",
+            "values": "18 18 18 8 0",
+            "level": "40",
+            "weight": "200",
+            "cost": "6230",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "9",
+                    "modifier": "2"
+                },
+                {
+                    "location": "18",
+                    "modifier": "5"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-10"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "copper dragon scale breast plate",
+                    "description": "This is a very hastely strewn together breast plate.  It looks like it was\nmade from the breast of a real dragon, minutes after it was slain.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2412",
+            "name": "corpse",
+            "short_description": "a corpse",
+            "description": "A corpse is lying on the ground, mangled beyond recognition.",
+            "material": "meat",
+            "type": "furniture",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "G",
+            "extra_descriptions": [
+                {
+                    "keyword": "corpse ground",
+                    "description": "This corpse appears to be that of an adventurer who wasn't as lucky as you.\nLooking around, you can't see anything that could have destroyed his body\nthis badly, but then again, you probably wouldn't want to.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2413",
+            "name": "spray paint can",
+            "short_description": "a can of spraypaint",
+            "description": "A can of spraypaint is sitting here.",
+            "material": "metal",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "exotic 1 1 pierce 0",
+            "level": "1",
+            "weight": "1",
+            "cost": "1",
+            "condition": "G"
+        },
+        {
+            "vnum": "2414",
+            "name": "pixie stick",
+            "short_description": "a Pixie Stick",
+            "description": "A Pixie Stick lies here on the ground, it looks tasty.",
+            "material": "crystal",
+            "type": "weapon",
+            "extra_flags": "AL",
+            "wear_flags": "AN",
+            "values": "mace 5 7 pound D",
+            "level": "35",
+            "weight": "20",
+            "cost": "1700",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "3"
+                },
+                {
+                    "location": "19",
+                    "modifier": "3"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "pixie stick",
+                    "description": "This is a Pixie Stick.  While you may be used to eating these \"sugar sticks\",\nthe Pixies use them, quite well, as weapons."
+                }
+            ]
+        },
+        {
+            "vnum": "2415",
+            "name": "pixie plate breast",
+            "short_description": "a Pixie breast plate",
+            "description": "There is a very small piece of metal lying here.",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "A",
+            "wear_flags": "AD",
+            "values": "15 15 15 7 0",
+            "level": "37",
+            "weight": "30",
+            "cost": "2230",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "-1"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-7"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "plate pixie breast",
+                    "description": "This is a piece of Pixie armor.  It looks very well crafted, but has an odd\naura about it."
+                }
+            ]
+        },
+        {
+            "vnum": "2416",
+            "name": "pixie greaves",
+            "short_description": "a pair of Pixie greaves",
+            "description": "A pair of very small metallic pants lie here.",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "AG",
+            "wear_flags": "AF",
+            "values": "15 15 15 7 0",
+            "level": "32",
+            "weight": "14",
+            "cost": "1900",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "5",
+                    "modifier": "-1"
+                },
+                {
+                    "location": "3",
+                    "modifier": "4"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "pixie greaves",
+                    "description": "These are VERY small pants....although they do seem fairly stretchy.....\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2417",
+            "name": "pixie arm plates",
+            "short_description": "a pair of Pixie armplates",
+            "description": "A pair of small metal sleeves lie here, glowing.",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "AG",
+            "wear_flags": "AI",
+            "values": "16 16 16 7 0",
+            "level": "35",
+            "weight": "19",
+            "cost": "2077",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-30"
+                },
+                {
+                    "location": "2",
+                    "modifier": "3"
+                },
+                {
+                    "location": "19",
+                    "modifier": "2"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "pixie arm plates",
+                    "description": "These arm plates would be a tad bit to small for you.....IF YOU WERE A\nFREAKING SMURF!!!!"
+                }
+            ]
+        },
+        {
+            "vnum": "2418",
+            "name": "wisp dragon fire",
+            "short_description": "a wisp of DragonFyre",
+            "description": "There is a nice flame sitting here.",
+            "material": "fire",
+            "type": "light",
+            "extra_flags": "AL",
+            "wear_flags": "A",
+            "values": "0 0 -1 0 0",
+            "level": "38",
+            "weight": "20",
+            "cost": "2300",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "3"
+                },
+                {
+                    "location": "18",
+                    "modifier": "3"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "flame wisp dragon fyre fire",
+                    "description": "You aren't quite sure how it is, but the DragonFyre is existing without its\ndragon."
+                }
+            ]
+        },
+        {
+            "vnum": "2419",
+            "name": "helm dragon",
+            "short_description": "a white dragon scale helm",
+            "description": "A white dragon scale helm with a plume of dragon mane lies here.",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "AGJ",
+            "wear_flags": "AE",
+            "values": "16 16 16 8 0",
+            "level": "38",
+            "weight": "230",
+            "cost": "2460",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "3"
+                },
+                {
+                    "location": "2",
+                    "modifier": "-1"
+                },
+                {
+                    "location": "4",
+                    "modifier": "2"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "helm dragon",
+                    "description": "This helm appears to have been created from the scales of a freshly dead dragon.\nThe plume is made from the mane of said dragon."
+                }
+            ]
+        },
+        {
+            "vnum": "2420",
+            "name": "helm dragon",
+            "short_description": "a copper dragon scale helm",
+            "description": "A copper helm made from the scales of a dragon is here.",
+            "material": "bone",
+            "type": "armor",
+            "extra_flags": "AGK",
+            "wear_flags": "AE",
+            "values": "16 16 16 9 0",
+            "level": "38",
+            "weight": "250",
+            "cost": "2960",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "5",
+                    "modifier": "2"
+                },
+                {
+                    "location": "2",
+                    "modifier": "-1"
+                },
+                {
+                    "location": "4",
+                    "modifier": "2"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "helm dragon",
+                    "description": "This helm appears to be made from the scales of a recently dead dragon.\nThe plume appears to be made from the plume of said dragon.  It has a\ncopper sheen to it.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2421",
+            "name": "staff magius",
+            "short_description": "the Staff of the Magius",
+            "description": "A gnarled wooden shaft lies here, pulsing slightly.",
+            "material": "wood",
+            "type": "weapon",
+            "extra_flags": "ABCGFHM",
+            "wear_flags": "AN",
+            "values": "staff 5 11 pound D",
+            "level": "52",
+            "weight": "400",
+            "cost": "45780",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "-50"
+                },
+                {
+                    "location": "12",
+                    "modifier": "250"
+                },
+                {
+                    "location": "18",
+                    "modifier": "6"
+                },
+                {
+                    "location": "19",
+                    "modifier": "6"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "staff magius",
+                    "description": "This is the Staff of the Magius.  Rumored to bring untold mystical \npower to the one who owns it, it is also rumored to completely destroy \nthe person physically.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2422",
+            "name": "dagger",
+            "short_description": "a Pixie dagger",
+            "description": "A petite dagger lies here on the ground, you almost didn't see it.",
+            "material": "steel",
+            "type": "weapon",
+            "extra_flags": "AGL",
+            "wear_flags": "AN",
+            "values": "dagger 4 8 stab 0",
+            "level": "33",
+            "weight": "5",
+            "cost": "647",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "4"
+                },
+                {
+                    "location": "14",
+                    "modifier": "20"
+                }
+            ]
+        },
+        {
+            "vnum": "2423",
+            "name": "diamond gem",
+            "short_description": "a large diamond",
+            "description": "A large diamond catches and reflects the lighting.",
+            "material": "gem",
+            "type": "gem",
+            "extra_flags": "W",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "1",
+            "cost": "25000",
+            "condition": "P"
+        },
+        {
+            "vnum": "2424",
+            "name": "red ruby gem",
+            "short_description": "a red ruby",
+            "description": "A beautiful, bloody red ruby is here.",
+            "material": "gem",
+            "type": "gem",
+            "extra_flags": "W",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "1",
+            "cost": "22000",
+            "condition": "P"
+        },
+        {
+            "vnum": "2425",
+            "name": "flaming quartz gem",
+            "short_description": "a flaming quartz",
+            "description": "A large piece of flaming quartz lies on the ground.",
+            "material": "gem",
+            "type": "gem",
+            "extra_flags": "AW",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "1",
+            "cost": "19000",
+            "condition": "P"
+        },
+        {
+            "vnum": "2426",
+            "name": "bar platinum",
+            "short_description": "a bar of platinum",
+            "description": "A bar of platinum has been left here.",
+            "material": "platinum",
+            "type": "treasure",
+            "extra_flags": "AW",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "500",
+            "cost": "12000",
+            "condition": "P"
+        },
+        {
+            "vnum": "2427",
+            "name": "piece duranium",
+            "short_description": "a piece of duranium",
+            "description": "A piece of duranium is here.",
+            "material": "gem",
+            "type": "gem",
+            "extra_flags": "AW",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "1",
+            "cost": "300",
+            "condition": "P"
+        },
+        {
+            "vnum": "2428",
+            "name": "piece neutronium",
+            "short_description": "a piece of neutronium",
+            "description": "A piece of neutronium is here.",
+            "material": "gem",
+            "type": "gem",
+            "extra_flags": "AW",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "1",
+            "cost": "500",
+            "condition": "P"
+        },
+        {
+            "vnum": "2429",
+            "name": "black pearl",
+            "short_description": "a black pearl",
+            "description": "A black pearl lies here on the ground.",
+            "material": "gem",
+            "type": "gem",
+            "extra_flags": "AW",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "1",
+            "cost": "5000",
+            "condition": "P"
+        },
+        {
+            "vnum": "2430",
+            "name": "blue pearl",
+            "short_description": "a blue pearl",
+            "description": "A blue pearl lies here on the ground.",
+            "material": "gem",
+            "type": "gem",
+            "extra_flags": "AW",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "1",
+            "cost": "5000",
+            "condition": "P"
+        },
+        {
+            "vnum": "2431",
+            "name": "scarlet ribbon",
+            "short_description": "scarlet ribbon",
+            "description": "A scarlet ribbon is lying here, it is hot to touch.",
+            "material": "fire",
+            "type": "armor",
+            "extra_flags": "AG",
+            "wear_flags": "AQ",
+            "values": "18 18 18 7 0",
+            "level": "45",
+            "weight": "20",
+            "cost": "4717",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-30"
+                }
+            ]
+        },
+        {
+            "vnum": "2432",
+            "name": "rabbit's foot magic",
+            "short_description": "rabbit's foot",
+            "description": "Magic rabbit's foot is floating here.",
+            "material": "meat",
+            "type": "armor",
+            "extra_flags": "AG",
+            "wear_flags": "AQ",
+            "values": "11 11 11 5 0",
+            "level": "33",
+            "weight": "20",
+            "cost": "617",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-20"
+                }
+            ]
+        },
+        {
+            "vnum": "2433",
+            "name": "pixie shield",
+            "short_description": "a Pixie shield",
+            "description": "Very small shield lies here on the ground.",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "A",
+            "wear_flags": "AJ",
+            "values": "10 10 10 6 0",
+            "level": "30",
+            "weight": "30",
+            "cost": "981",
+            "condition": "G"
+        },
+        {
+            "vnum": "2434",
+            "name": "old dragon captain key",
+            "short_description": "a small white finger",
+            "description": "A small white finger is left here, lost.",
+            "material": "steel",
+            "type": "key",
+            "extra_flags": "M",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "18",
+            "weight": "10",
+            "cost": "0",
+            "condition": "G"
+        },
+        {
+            "vnum": "2435",
+            "name": "key",
+            "short_description": "an old seal",
+            "description": "A small, engraved treasure seal is here.",
+            "material": "stone",
+            "type": "key",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "30 0 0 0 0",
+            "level": "0",
+            "weight": "20",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "2436",
+            "name": "box",
+            "short_description": "box",
+            "description": "A old, trashed box is here.",
+            "material": "wood",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "100 ACD 2435 100 100",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "2437",
+            "name": "paper papers",
+            "short_description": "abridged papers",
+            "description": "A unknown old part of a book is here.",
+            "material": "paper",
+            "type": "map",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "1 0 0 0 0",
+            "level": "0",
+            "weight": "10",
+            "cost": "500",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "paper papers",
+                    "description": ".\n        This is a part from the story of old retired dragon, FireFlash. He\nliked comfort all the times but he had never been able to rest for a while.\nNow he retired and needs something that will comfort him. And  that is an\neastern rug used by Turkish woman.\n\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2438",
+            "name": "xxx",
+            "short_description": "an old key carved on 'xxx'",
+            "description": "A small unknown key that resulted in old treasures, is here.",
+            "material": "stone",
+            "type": "key",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "30 0 0 0 0",
+            "level": "0",
+            "weight": "20",
+            "cost": "0",
+            "condition": "P"
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "2400",
+            "name": "An Ancient Path through the dense forest",
+            "description": "This path appears to be very old, and well travelled. It amazes you that you\nhave never noticed it was here before.  That is until you look back and\nrealize that the clay road is completely invisible to you from here.  To the\neast, the path continues.  It appears that the western opening you entered\nthrough is now impassible.  You are here whether you like it or not....\n     There is a small (Glowing) (Humming) tablet.\n",
+            "flags": "C",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "An Ancient Path through the dense forest\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2401"
+                },
+                {
+                    "door": "D5",
+                    "description": "The ancient path\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "332"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "tablet small",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n+                                                                    +\n+   This area has been groked, strongly modified, debugged (?:)      +\n+             and adapted in monday's night, july'96                 +\n+                          by jaceks                                 +\n+                                                                    +\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2401",
+            "name": "An Ancient Path through the dense forest",
+            "description": "The path is becoming more and more difficult to traverse now, as the trees seem\nto reach out to strangle you.  You feel like you are utterly alone, and, if not\nfor the mountain you can now see in the distance, would probably just recall to\nMidgaard.  But then again, who ever said that adventuring was easy?\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "End of the Ancient Path\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2402"
+                },
+                {
+                    "door": "D3",
+                    "description": "An Ancient Path through the dense forest\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2400"
+                }
+            ]
+        },
+        {
+            "vnum": "2402",
+            "name": "The End of the Ancient Path",
+            "description": "You finally burst free from the grasp of the wood, only to find yourself at\nthe foot of a path.  The path leads north, to the mountain which has, until\nnow been your only beacon.  Now that you can better see the ominous mountain\nlooming before you,  you begin to rethink the idea of recalling to Midgaard.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Path to the Mountain\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2403"
+                },
+                {
+                    "door": "D3",
+                    "description": "An Ancient Path through the dense forest\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2401"
+                }
+            ]
+        },
+        {
+            "vnum": "2403",
+            "name": "Path to the Mountain",
+            "description": "You are on a small nondescript path leading northward to the mountain.\nThe closer you get to the mountain, the worse you feel about the whole thing.\nYou begin to remember hearing old stories about a hidden mountain, which\nwas, for some unknown reason, named DragonSpyre.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Path to the Mountain\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2404"
+                },
+                {
+                    "door": "D2",
+                    "description": "End of the Anicient Path\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2402"
+                }
+            ]
+        },
+        {
+            "vnum": "2404",
+            "name": "Path to the Mountain",
+            "description": "You are on a small nondescript path leading northward to the mountain.\nThe closer you get to the mountain, the worse you feel about the whole thing.\nThe deep stench of dragon is wafting through the air now, and you are starting\nto feel the first tinges of dragon fear stir within you.  Maybe you should go\nback while you still have that option.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "At the foot of the Mountain\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2405"
+                },
+                {
+                    "door": "D2",
+                    "description": "Path to the Mountain\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2403"
+                }
+            ]
+        },
+        {
+            "vnum": "2405",
+            "name": "At the foot of the Mountain",
+            "description": "You have reached the foot of the great mountain.  Here, the dragon stench\nis almost strong enough to disable you.  The only way you are able to stand it\nis by ripping of a piece of cloth, and covering your mouth and nose with it as\nyou walk.  Far above you, you see what must be the entrance to the cave.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Path to the Mountain\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2404"
+                },
+                {
+                    "door": "D4",
+                    "description": "Climbing the Mountain\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2406"
+                }
+            ]
+        },
+        {
+            "vnum": "2406",
+            "name": "Climbing the Mountain",
+            "description": "Now that you have something to somthing to concentrate upon, scaling the\nmountain, you are actually able to think more clearly.  You have encountered\ndragons before, and vanquished them, why should these be any different.\nThis thought continues rolling through your mind, but as you reach the next\nlevel of the cliff, it does little to ease your fear.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "Climbing the Mountain\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2407"
+                },
+                {
+                    "door": "D5",
+                    "description": "At the foot of the Mountain\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2405"
+                }
+            ]
+        },
+        {
+            "vnum": "2407",
+            "name": "Climbing the Mountain",
+            "description": "You are now close enough to the entrance to hear the sounds from within.\nThe first thing you are aware of is that the mountain itself seems to breathe.\nIn and out goes its breath, constantly in and out.  You suddenly hear footsteps\napproaching from all around you, and brace for combat.  It takes you a few\nmoments to realize that the sound was your heart beating.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "The ledge on the Mountain\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2408"
+                },
+                {
+                    "door": "D5",
+                    "description": "Climbing the Mountain\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2406"
+                }
+            ]
+        },
+        {
+            "vnum": "2408",
+            "name": "The ledge on the Mountain",
+            "description": "You have reached a small ledge about one fourth of the way up the mountain.\nTo the east is the entrance to what seems to be a small cave.  The only hint\nas to the size of the cave are the screams that are echoing from within it,\nwhich seem to last an eternity.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Entrance to the Cave\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2409"
+                },
+                {
+                    "door": "D5",
+                    "description": "Climbing the Mountain\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2407"
+                }
+            ]
+        },
+        {
+            "vnum": "2409",
+            "name": "Entrance to the Cave",
+            "description": "Once inside the cave you feel completely lost to the outside world.  All\naround you are horrific sounds of death and fear.  The walls are all stained\nwith many differing shades of red or brown, with a few frost particles\nglittering on one of the walls.  Even with the cloth, the smell of the dragons\nis almost unbearable.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2410"
+                },
+                {
+                    "door": "D3",
+                    "description": "A ledge on the Mountain\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2408"
+                }
+            ]
+        },
+        {
+            "vnum": "2410",
+            "name": "Walking through DragonSpyre",
+            "description": "Within the realm of the DragonSpyres, everything seems different.  The walls\nappear to reach out towards you, while the floor and ceiling struggle to crush\nthe life from you.  The further you proceed into the Mountain, the more you\nwish you hadn't come here in the first place.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2411"
+                },
+                {
+                    "door": "D3",
+                    "description": "Entrance to the Cave\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2409"
+                }
+            ]
+        },
+        {
+            "vnum": "2411",
+            "name": "Walking through DragonSpyre",
+            "description": "Within the realm of the DragonSpyres, everything seems different.  The walls\nappear to reach out towards you, while the floor and ceiling struggle to crush\nthe life from you.  The further you proceed into the Mountain, the more you\nwish you hadn't come here in the first place.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2412"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2410"
+                }
+            ]
+        },
+        {
+            "vnum": "2412",
+            "name": "Walking through DragonSpyre",
+            "description": "Within the realm of the DragonSpyres, everything seems different.  The wall\nappear to reach out towards you, while the floor and ceiling struggle to crush\nthe life from you.  The further you proceed into the Mountain, the more you\nwish you hadn't come here in the first place.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2413"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2411"
+                }
+            ]
+        },
+        {
+            "vnum": "2413",
+            "name": "Walking through DragonSpyre",
+            "description": "Within the realm of the DragonSpyres, everything seems different.  The walls\nappear to reach out towards you, while the floor and ceiling struggle to crush\nthe life from you.  The further you proceed into the Mountain, the more you\nwish you hadn't come here in the first place.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2414"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2412"
+                }
+            ]
+        },
+        {
+            "vnum": "2414",
+            "name": "Walking through DragonSpyre",
+            "description": "Within the realm of the DragonSpyres, everything seems different.  The walls\nappear to reach out towards you, while the floor and ceiling struggle to crush\nthe life from you.  The further you proceed into the Mountain, the more you\nwish you hadn't come here in the first place.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2415"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2413"
+                }
+            ]
+        },
+        {
+            "vnum": "2415",
+            "name": "Walking through DragonSpyre",
+            "description": "Within the realm of the DragonSpyres, everything seems different.  The walls\nappear to reach out towards you, while the floor and ceiling struggle to crush\nthe life from you.  The further you proceed into the Mountain, the more you\nwish you hadn't come here in the first place.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2416"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2419"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2414"
+                }
+            ]
+        },
+        {
+            "vnum": "2416",
+            "name": "Walking through DragonSpyre",
+            "description": "Within the realm of the DragonSpyres, everything seems different.  The walls\nappear to reach out towards you, while the floor and ceiling struggle to crush\nthe life from you.  The further you proceed into the Mountain, the more you\nwish you hadn't come here in the first place.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2417"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2415"
+                }
+            ]
+        },
+        {
+            "vnum": "2417",
+            "name": "Walking through DragonSpyre",
+            "description": "Within the realm of the DragonSpyres, everything seems different.  The walls\nappear to reach out towards you, while the floor and ceiling struggle to crush\nthe life from you.  The further you proceed into the Mountain, the more you\nwish you hadn't come here in the first place.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2418"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2416"
+                }
+            ]
+        },
+        {
+            "vnum": "2418",
+            "name": "Walking through DragonSpyre",
+            "description": "Within the realm of the DragonSpyres, everything seems different.  The walls\nappear to reach out towards you, while the floor and ceiling struggle to crush\nthe life from you.  The further you proceed into the Mountain, the more you\nwish you hadn't come here in the first place.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2439"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2417"
+                }
+            ]
+        },
+        {
+            "vnum": "2419",
+            "name": "Walking through DragonSpyre",
+            "description": "Within the realm of the DragonSpyres, everything seems different.  The walls\nappear to reach out towards you, while the floor and ceiling struggle to crush\nthe life from you.  The further you proceed into the Mountain, the more you\nwish you hadn't come here in the first place.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2415"
+                },
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2420"
+                }
+            ]
+        },
+        {
+            "vnum": "2420",
+            "name": "Walking through DragonSpyre",
+            "description": "Within the realm of the DragonSpyres, everything seems different.  The walls\nappear to reach out towards you, while the floor and ceiling struggle to crush\nthe life from you.  The further you proceed into the Mountain, the more you\nwish you hadn't come here in the first place.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2421"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2419"
+                }
+            ]
+        },
+        {
+            "vnum": "2421",
+            "name": "Walking through DragonSpyre",
+            "description": "Within the realm of the DragonSpyres, everything seems different.  The walls\nappear to reach out towards you, while the floor and ceiling struggle to crush\nthe life from you.  The further you proceed into the Mountain, the more you\nwish you hadn't come here in the first place.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2422"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2420"
+                }
+            ]
+        },
+        {
+            "vnum": "2422",
+            "name": "Walking through DragonSpyre",
+            "description": "You are beginning to feel very unnerved.  Since you have been walking through\nDragonSpyre, the screams had been slowly dying off, and now they are no more.\nNormally the lack of death cries would be a welcome change, only now they\nhave been replaced by a very eerie silence.  You don't like this one bit.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2423"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2421"
+                }
+            ]
+        },
+        {
+            "vnum": "2423",
+            "name": "Walking through DragonSpyre",
+            "description": "This cave is really starting to get on your nerves.  With each new step, you\nhear what sounds like giggling coming from all sides, goading you onward.\nDaring you to learn the secrets that DragonSpyre has held for the past three\nhundred years.  \"They are only dragons.\"\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2424"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2422"
+                }
+            ]
+        },
+        {
+            "vnum": "2424",
+            "name": "Walking through DragonSpyre",
+            "description": "This cave is really starting to get on your nerves.  With each new step, you\nhear what sounds like giggling coming from all sides, goading you onward.\nDaring you to learn the secrets that DragonSpyre has held for the past three\nhundred years.  \"They are only dragons.\"  To the north, the path forks.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2425"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2423"
+                }
+            ]
+        },
+        {
+            "vnum": "2425",
+            "name": "Walking through DragonSpyre",
+            "description": "You have reached a fork in the path through DragonSpyre.  You can't be sure\nwhich way you should go, but the odd scraching sound to the east makes\nyou want to go west.  The giggling that has been following you around has\nnow become a full blown laugh.   \"They are ONLY dragons.\"\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2428"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2424"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2426"
+                }
+            ]
+        },
+        {
+            "vnum": "2426",
+            "name": "Walking through DragonSpyre",
+            "description": "The walls are blank and featureless, solid rock that has not been touched\nfor unknown centuries.  The floor is scuffed and scraped from thousands\nof claws passing over it.  The ceiling is out of sight, the cave is obviously\nmade for something well beyond human size.  \"They are only dragons.\"\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2425"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2427"
+                }
+            ]
+        },
+        {
+            "vnum": "2427",
+            "name": "Walking through DragonSpyre",
+            "description": "The walls are blank and featureless, solid rock that has not been touched\nfor unknown centuries.  The floor is scuffed and scraped from thousands\nof claws passing over it.  The ceiling is out of sight, the cave is obviously\nmade for something well beyond human size.  To the west is a small crevice\nthat you could just barely squeeze through.  \"They are only dragons.\"\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2426"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2417"
+                }
+            ]
+        },
+        {
+            "vnum": "2428",
+            "name": "Walking through DragonSpyre",
+            "description": "The walls are blank and featureless, solid rock that has not been touched\nfor unknown centuries.  The floor is scuffed and scraped from thousands\nof claws passing over it.  The ceiling is out of sight, the cave is obviously\nmade for something well beyond human size.  \"They are only dragons?\"\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2429"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2425"
+                }
+            ]
+        },
+        {
+            "vnum": "2429",
+            "name": "Walking through DragonSpyre",
+            "description": "The walls are blank and featureless, solid rock that has not been touched\nfor unknown centuries.  The floor is scuffed and scraped from thousands\nof claws passing over it.  The ceiling is out of sight, the cave is obviously\nmade for something well beyond human size.  \"They are only dragons?\"\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2430"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2428"
+                }
+            ]
+        },
+        {
+            "vnum": "2430",
+            "name": "Walking through DragonSpyre",
+            "description": "The walls are blank and featureless, solid rock that has not been touched\nfor unknown centuries.  The floor is scuffed and scraped from thousands\nof claws passing over it.  The ceiling is out of sight, the cave is obviously\nmade for something well beyond human size.  To the north you can hear a\nlow rumbling sound.  \"They are only DRAGONS!\"\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2431"
+                },
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2433"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2429"
+                }
+            ]
+        },
+        {
+            "vnum": "2431",
+            "name": "Walking through DragonSpyre",
+            "description": "The walls are blank and featureless, solid rock that has not been touched\nfor unknown centuries.  The floor is scuffed and scraped from thousands\nof claws passing over it.  The ceiling is out of sight, the cave is obviously\nmade for something well beyond human size.  To the north you can hear a\nlow rumbling sound.  \"They are only DRAGONS!\"\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "The Lair of the White Dragon\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2432"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2430"
+                }
+            ]
+        },
+        {
+            "vnum": "2432",
+            "name": "The Lair of the White Dragon",
+            "description": "You have managed, through luck(?), to find the lair of the white dragon.  It\nstands before you, glaring at you with its pale blue eyes.  All around, the\nwalls are coated with a thick layer of ice.  You slip several times before\ngaining your balance enough to face the fearsome beast.  Will you fight it,\nor flee?  \"It is JUST a dragon.\"\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "wall",
+                    "locks": "2",
+                    "key": "2401",
+                    "u1_vnum": "2444"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2431"
+                }
+            ]
+        },
+        {
+            "vnum": "2433",
+            "name": "Walking through DragonSpyre",
+            "description": "The ground is damp here, and the air is so thick that it is almost hard to\nbreathe.  It still is not to late to go back.  Far ahead, you think you can see\nwhat looks like a large door.  \"They are only dragons.\"\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2434"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2430"
+                }
+            ]
+        },
+        {
+            "vnum": "2434",
+            "name": "Walking through DragonSpyre",
+            "description": "The ground is damp here, and the air is so thick that it is almost hard to\nbreathe.  It still is not to late to go back.  Now that you are closer to the\nwall, you are sure that there is a door ahead and on the far eastern wall.\n\"They are only dragons.  I have killed many dragons before!\"\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2435"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2433"
+                }
+            ]
+        },
+        {
+            "vnum": "2435",
+            "name": "Walking through DragonSpyre",
+            "description": "The ground is damp here, and the air is so thick that it is almost hard to\nbreathe.  It still is not to late to go back.  Now that you are closer to the\nwall, you are sure that there is a door ahead and on the far eastern wall.\n\"They are only dragons.  I have killed many dragons before!\"\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2436"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2434"
+                }
+            ]
+        },
+        {
+            "vnum": "2436",
+            "name": "Walking through DragonSpyre",
+            "description": "The ground is damp here, and the air is so thick that it is almost hard to\nbreathe.  It still is not to late to go back.  Now that you are closer to the\nwall, you are sure that there is a door ahead and on the far eastern wall.\n\"They are only dragons.  I have killed many dragons before!\"\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2437"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2435"
+                }
+            ]
+        },
+        {
+            "vnum": "2437",
+            "name": "Walking through DragonSpyre",
+            "description": "The ground is damp here, and the air is so thick that it is almost hard to\nbreathe.  It still is not to late to go back.  On the eastern wall is a large\noaken door.  \"Surely i can kill a dragon.\"\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "door oaken",
+                    "locks": "2",
+                    "key": "2402",
+                    "u1_vnum": "2438"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2436"
+                }
+            ]
+        },
+        {
+            "vnum": "2438",
+            "name": "Walking through DragonSpyre",
+            "description": "The ground is damp here, and the air is so thick that it is almost hard to\nbreathe.  It still is not to late to go back.  On the western wall is a large\noaken door. \"Dragons aren't THAT scary.\"\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "door oaken",
+                    "locks": "2",
+                    "key": "2402",
+                    "u1_vnum": "2437"
+                }
+            ]
+        },
+        {
+            "vnum": "2439",
+            "name": "Walking through DragonSpyre",
+            "description": "Within the realm of DragonSpyre, everything seems different.  The wall\nappear to reach out towards you, while the floor and ceiling struggle to crush\nthe life from you.  The further you proceed into the Mountain, the more you\nwish you hadn't come here in the first place.  You can hear the sound of\nrunning water somewhere to the north.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2440"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2418"
+                }
+            ]
+        },
+        {
+            "vnum": "2440",
+            "name": "Walking through DragonSpyre",
+            "description": "Within the realm of DragonSpyre, everything seems different.  The walls\nappear to reach out towards you, while the floor and ceiling struggle to crush\nthe life from you.  The further you proceed into the Mountain, the more you\nwish you hadn't come here in the first place. To the north, the sound of\nwater flowing is quite loud.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2441"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2439"
+                }
+            ]
+        },
+        {
+            "vnum": "2441",
+            "name": "Walking through DragonSpyre",
+            "description": "Within the realm of DragonSpyre, everything seems different.  The walls\nappear to reach out towards you, while the floor and ceiling struggle to crush\nthe life from you.  The further you proceed into the Mountain, the more you\nwish you hadn't come here in the first place. To the east, there is room that\nis continually being flushed with boiling acid from one of the higher levels.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "door",
+                    "locks": "2",
+                    "key": "2402",
+                    "u1_vnum": "2443"
+                },
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2442"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2440"
+                },
+                {
+                    "door": "D3",
+                    "description": "The retired dragons office.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2500"
+                }
+            ]
+        },
+        {
+            "vnum": "2442",
+            "name": "Walking through DragonSpyre",
+            "description": "You should read room descriptions more often.\nThe acid cascades over your body, and burns the skin from the muscle,\nthen the muscle from the bone.  You have never experienced this much\npain in your entire life.\n",
+            "flags": "ACDJ",
+            "sector": "0"
+        },
+        {
+            "vnum": "2443",
+            "name": "Walking through DragonSpyre",
+            "description": "You are at the end of the tunnel.  You feel like there should be another door\naround here somewhere... This area eminates a feeling of dread, but you aren't\nafraid of a little challenge, now are you?  Just remember the fame and fortune\nyou will gain!\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "door",
+                    "locks": "2",
+                    "key": "2402",
+                    "u1_vnum": "2441"
+                }
+            ]
+        },
+        {
+            "vnum": "2444",
+            "name": "Walking through DragonSpyre",
+            "description": "You have made it passed the white dragon, the first of your challenges.\nNow, you are entitled to his treasure...if you can find it.\nThe hallway here is colder than the rest of the cave.  You assume that the\nwhite dragon made frequent passes through here to make sure his gold\nwas still intact.  You begin to hope that it wasn't a baby....\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2445"
+                },
+                {
+                    "door": "D3",
+                    "description": "Lair of the White Dragon\n",
+                    "keyword": "wall",
+                    "locks": "2",
+                    "key": "2401",
+                    "u1_vnum": "2432"
+                }
+            ]
+        },
+        {
+            "vnum": "2445",
+            "name": "Walking through DragonSpyre",
+            "description": "You have made it passed the white dragon, the first of your challenges.\nNow, you are entitled to his treasure...if you can find it.\nThe hallway here is colder than the rest of the cave.  You assume that the\nwhite dragon made frequent passes through here to make sure his gold\nwas still intact.  You begin to hope that it wasn't a baby....\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2446"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2444"
+                }
+            ]
+        },
+        {
+            "vnum": "2446",
+            "name": "Walking through DragonSpyre",
+            "description": "You have made it passed the white dragon, the first of your challenges.\nNow, you are entitled to his treasure...if you can find it.\nThe hallway here is colder than the rest of the cave.  You assume that the\nwhite dragon made frequent passes through here to make sure his gold\nwas still intact.  You begin to hope that it wasn't a baby....\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2447"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2445"
+                }
+            ]
+        },
+        {
+            "vnum": "2447",
+            "name": "Walking through DragonSpyre",
+            "description": "You have made it passed the white dragon, the first of your challenges.\nNow, you are entitled to his treasure...if you can find it.\nThe hallway here is colder than the rest of the cave.  You assume that the\nwhite dragon made frequent passes through here to make sure his gold\nwas still intact.  You begin to hope that it wasn't a baby....\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "2",
+                    "key": "0",
+                    "u1_vnum": "2448"
+                },
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2451"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2446"
+                }
+            ]
+        },
+        {
+            "vnum": "2448",
+            "name": "Walking through DragonSpyre",
+            "description": "You have made it passed the white dragon, the first of your challenges.\nNow, you are entitled to his treasure...if you can find it.\nThe hallway here is colder than the rest of the cave.  You assume that the\nwhite dragon made frequent passes through here to make sure his gold\nwas still intact.  You begin to hope that it wasn't a baby....\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "2",
+                    "key": "0",
+                    "u1_vnum": "2449"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2447"
+                }
+            ]
+        },
+        {
+            "vnum": "2449",
+            "name": "Walking through DragonSpyre",
+            "description": "You have made it passed the white dragon, the first of your challenges.\nNow, you are entitled to his treasure...if you can find it.\nThe hallway here is colder than the rest of the cave.  You assume that the\nwhite dragon made frequent passes through here to make sure his gold\nwas still intact.  You begin to hope that it wasn't a baby....\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "door",
+                    "locks": "2",
+                    "key": "2401",
+                    "u1_vnum": "2450"
+                },
+                {
+                    "door": "D2",
+                    "description": "Treasure Room\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2448"
+                }
+            ]
+        },
+        {
+            "vnum": "2450",
+            "name": "Treasure Room",
+            "description": "All alround the horde of the white dragon glimmers.  It appears that he\nhass been collecting for quite some time.  There are little bits of everything\nhere, from broken swords, to the leg bone of a dracolich.  The main thing\nthat catches your eye is the large pile of gold resting all around the room.\nYou are about to claim it as your own, when you are struck from behind...\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "door",
+                    "locks": "2",
+                    "key": "2401",
+                    "u1_vnum": "2449"
+                }
+            ]
+        },
+        {
+            "vnum": "2451",
+            "name": "Walking through DragonSpyre",
+            "description": "You have made it past the white dragon, the first of your challenges.\nNow,  you are entitled to his treasure...if you can find it.\nThe hallway here is colder than the rest of the cave.  You assume that\nthe white dragon made frequent passes through here to make sure his\ngold was intact.  You begin to hope that it wasn't a baby....\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2452"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2447"
+                }
+            ]
+        },
+        {
+            "vnum": "2452",
+            "name": "Walking through DragonSpyre",
+            "description": "You have made it past the white dragon, the first of your challenges.\nNow,  you are entitled to his treasure...if you can find it.\nThe hallway here is colder than the rest of the cave.  You assume that\nthe white dragon made frequent passes through here to make sure his\ngold was intact.  You begin to hope that it wasn't a baby....\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2453"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2451"
+                }
+            ]
+        },
+        {
+            "vnum": "2453",
+            "name": "Walking through DragonSpyre",
+            "description": "You have made it past the white dragon, the first of your challenges.\nNow,  you are entitled to his treasure...if you can find it.\nThe hallway here is colder than the rest of the cave.  You assume that\nthe white dragon made frequent passes through here to make sure his\ngold was intact.  You begin to hope that it wasn't a baby....\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2454"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2452"
+                }
+            ]
+        },
+        {
+            "vnum": "2454",
+            "name": "Walking through DragonSpyre",
+            "description": "You have made it past the white dragon, the first of your challenges.\nNow,  you are entitled to his treasure...if you can find it.\nThe hallway here is colder than the rest of the cave.  You assume that\nthe white dragon made frequent passes through here to make sure his\ngold was intact.  You begin to hope that it wasn't a baby....\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2455"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2453"
+                }
+            ]
+        },
+        {
+            "vnum": "2455",
+            "name": "Walking through DragonSpyre",
+            "description": "You have made it past the white dragon, the first of your challenges.\nNow,  you are entitled to his treasure...if you can find it.\nThe hallway here is colder than the rest of the cave.  You assume that\nthe white dragon made frequent passes through here to make sure his\ngold was intact.  You begin to hope that it wasn't a baby....\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2456"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2454"
+                }
+            ]
+        },
+        {
+            "vnum": "2456",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "2",
+                    "key": "0",
+                    "u1_vnum": "2455"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2457"
+                }
+            ]
+        },
+        {
+            "vnum": "2457",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "2",
+                    "key": "0",
+                    "u1_vnum": "2456"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2458"
+                }
+            ]
+        },
+        {
+            "vnum": "2458",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "2",
+                    "key": "0",
+                    "u1_vnum": "2457"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2459"
+                }
+            ]
+        },
+        {
+            "vnum": "2459",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2458"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2460"
+                }
+            ]
+        },
+        {
+            "vnum": "2460",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2459"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2461"
+                }
+            ]
+        },
+        {
+            "vnum": "2461",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2460"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2462"
+                }
+            ]
+        },
+        {
+            "vnum": "2462",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "2",
+                    "key": "0",
+                    "u1_vnum": "2461"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2463"
+                }
+            ]
+        },
+        {
+            "vnum": "2463",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radcial change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "2",
+                    "key": "0",
+                    "u1_vnum": "2462"
+                },
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2464"
+                }
+            ]
+        },
+        {
+            "vnum": "2464",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2465"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2463"
+                }
+            ]
+        },
+        {
+            "vnum": "2465",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "wall",
+                    "locks": "2",
+                    "key": "2403",
+                    "u1_vnum": "2466"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2464"
+                }
+            ]
+        },
+        {
+            "vnum": "2466",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "wall",
+                    "locks": "2",
+                    "key": "2403",
+                    "u1_vnum": "2465"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2467"
+                }
+            ]
+        },
+        {
+            "vnum": "2467",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2466"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2468"
+                }
+            ]
+        },
+        {
+            "vnum": "2468",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2467"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2469"
+                }
+            ]
+        },
+        {
+            "vnum": "2469",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2468"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2470"
+                }
+            ]
+        },
+        {
+            "vnum": "2470",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.  To the west is a large gate.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2469"
+                },
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2471"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "gate",
+                    "locks": "2",
+                    "key": "2404",
+                    "u1_vnum": "2474"
+                }
+            ]
+        },
+        {
+            "vnum": "2471",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2472"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2470"
+                }
+            ]
+        },
+        {
+            "vnum": "2472",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Lair of the Copper Dragon\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2473"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2471"
+                }
+            ]
+        },
+        {
+            "vnum": "2473",
+            "name": "Lair of the Copper Dragon",
+            "description": "Within the bounds of this room, time has seemed to stop.  There is no\nmovement, save for the large mass at the back of the room.  Out of the\ncorner of you eye, you manage to catch a glimpse of a droplet of water\n\"falling\" from a stalagtite...it appears to have been in the same position\nfor the past century.  You have no chance to move before the Dragon strikes.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2472"
+                }
+            ]
+        },
+        {
+            "vnum": "2474",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.  To the east is a large gate.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "gate",
+                    "locks": "2",
+                    "key": "0",
+                    "u1_vnum": "2470"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2475"
+                }
+            ]
+        },
+        {
+            "vnum": "2475",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2474"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2476"
+                }
+            ]
+        },
+        {
+            "vnum": "2476",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2475"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2477"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2479"
+                }
+            ]
+        },
+        {
+            "vnum": "2477",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2476"
+                },
+                {
+                    "door": "D2",
+                    "description": "Treasure Room\n",
+                    "keyword": "door",
+                    "locks": "2",
+                    "key": "2404",
+                    "u1_vnum": "2478"
+                }
+            ]
+        },
+        {
+            "vnum": "2478",
+            "name": "Treasure Room",
+            "description": "All about you are the untold fortunes of many generations of families.\nNothing here seems to be touched by age, it is all in perfect condition.        It has remained as it was many years ago when it was taken.  Although the       Dragon and the original families considered these items \"treasure\", you\nmanage to find little of value beside a pile of gold coins you collect.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "door",
+                    "locks": "2",
+                    "key": "2404",
+                    "u1_vnum": "2477"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "door",
+                    "locks": "2",
+                    "key": "2404",
+                    "u1_vnum": "2483"
+                }
+            ]
+        },
+        {
+            "vnum": "2479",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2476"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2480"
+                }
+            ]
+        },
+        {
+            "vnum": "2480",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2479"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2481"
+                }
+            ]
+        },
+        {
+            "vnum": "2481",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2480"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2482"
+                }
+            ]
+        },
+        {
+            "vnum": "2482",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes o\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.  You have reached a dead end.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2481"
+                }
+            ]
+        },
+        {
+            "vnum": "2483",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Treasure Room\n",
+                    "keyword": "door",
+                    "locks": "2",
+                    "key": "2404",
+                    "u1_vnum": "2478"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "2",
+                    "key": "2404",
+                    "u1_vnum": "2484"
+                }
+            ]
+        },
+        {
+            "vnum": "2484",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2483"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2485"
+                }
+            ]
+        },
+        {
+            "vnum": "2485",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2484"
+                },
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2491"
+                },
+                {
+                    "door": "D2",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2495"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2486"
+                }
+            ]
+        },
+        {
+            "vnum": "2486",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were i.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2485"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2487"
+                }
+            ]
+        },
+        {
+            "vnum": "2487",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2486"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2488"
+                }
+            ]
+        },
+        {
+            "vnum": "2488",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2487"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2489"
+                }
+            ]
+        },
+        {
+            "vnum": "2489",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2488"
+                },
+                {
+                    "door": "D3",
+                    "description": "Pixie King's Bedroom\n",
+                    "keyword": "door",
+                    "locks": "2",
+                    "key": "2405",
+                    "u1_vnum": "2490"
+                }
+            ]
+        },
+        {
+            "vnum": "2490",
+            "name": "Pixie King's Bedroom",
+            "description": "You have entered into the private quarters of the Pixie King.\nYou can just imagine a horde of guards walking in on you,\nbut luckily they never do.  Even so, you better make your\nstay here a short one.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "door",
+                    "locks": "2",
+                    "key": "2405",
+                    "u1_vnum": "2489"
+                }
+            ]
+        },
+        {
+            "vnum": "2491",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2492"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2485"
+                }
+            ]
+        },
+        {
+            "vnum": "2492",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2493"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2491"
+                }
+            ]
+        },
+        {
+            "vnum": "2493",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Throne room of the Pixie King\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "2494"
+                },
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2492"
+                }
+            ]
+        },
+        {
+            "vnum": "2494",
+            "name": "Throne room of the Pixie King",
+            "description": "The throne room is remarkably well kempt considering the anarchy\nof the Pixie hierarchy.  The power of the time dragon does not seem\nto affect this room in the least bit.  There is a humongous throne\nsitting at the far end of the room.  There appears to be a Pixie\nengulfed in it.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "door",
+                    "locks": "2",
+                    "key": "-1",
+                    "u1_vnum": "2493"
+                }
+            ]
+        },
+        {
+            "vnum": "2495",
+            "name": "Walking through DragonSpyre",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2485"
+                },
+                {
+                    "door": "D2",
+                    "description": "Approaching the end of the Hallway\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2496"
+                }
+            ]
+        },
+        {
+            "vnum": "2496",
+            "name": "Approaching the end of the Hallway",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Walking through DragonSpyre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2495"
+                },
+                {
+                    "door": "D2",
+                    "description": "Approaching the end of the Hallway\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2497"
+                }
+            ]
+        },
+        {
+            "vnum": "2497",
+            "name": "Approaching the end of the Hallway",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Approaching the end of the Hallway\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2496"
+                },
+                {
+                    "door": "D2",
+                    "description": "Approaching the end of the Hallway\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2498"
+                }
+            ]
+        },
+        {
+            "vnum": "2498",
+            "name": "Approaching the end of the Hallway",
+            "description": "The hallway here is a radical change from where you just where.  Here,\nthe walls look much more undeveloped than the last hallway you were in.\nIt feels like time itself is slowing down.  The hallway looks like it goes on\nfor all eternity, but at the sluggish pace you are moving, eternity might\nnot be that long of a distance.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Approaching the end of the Hallway\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2497"
+                },
+                {
+                    "door": "D2",
+                    "description": "The end of the Hallway\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2499"
+                }
+            ]
+        },
+        {
+            "vnum": "2499",
+            "name": "The End of the Hallway",
+            "description": "You have come to the end of the hallway.  As you enter the room,\nyou hear a slight rumbling coming from the eastern wall.  You look,\nand see that the wall has opened to reveal a safe passage to the\nbeginning of the cavern.  There is also an exit to the north.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Approaching the end of the Hallway\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2498"
+                },
+                {
+                    "door": "D1",
+                    "description": "The Beginning of the Cavern\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2408"
+                }
+            ]
+        },
+        {
+            "vnum": "2500",
+            "name": "Before the office of retired dragon",
+            "description": "You should read room descriptions more often.\nThe acid cascades over your body, and burns the skin from the muscle,\nthen the muscle from the bone.  You have never experienced this much\npain in your entire life.\n",
+            "flags": "ACD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "dragonspyre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2441"
+                },
+                {
+                    "door": "D0",
+                    "description": "old dragon's office\n",
+                    "keyword": "door",
+                    "locks": "4",
+                    "key": "2434",
+                    "u1_vnum": "2501"
+                }
+            ]
+        },
+        {
+            "vnum": "2501",
+            "name": "Before the office of retired dragon",
+            "description": "You should read room descriptions more often.\nThe acid cascades over your body, and burns the skin from the muscle,\nthen the muscle from the bone.  You have never experienced this much\npain in your entire life.\n",
+            "flags": "ACDJ",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "old dragon's office\n",
+                    "keyword": "door",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2500"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "2412",
+            "arg2": "1",
+            "arg3": "2500",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2434",
+            "arg2": "30",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "2413",
+            "arg2": "1",
+            "arg3": "2501",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2435",
+            "arg2": "30",
+            "arg3": "17"
+        },
+        {
+            "command": "O",
+            "arg1": "2436",
+            "arg2": "1",
+            "arg3": "2501"
+        },
+        {
+            "command": "P",
+            "arg1": "2437",
+            "arg2": "4",
+            "arg3": "2436",
+            "arg4": "100"
+        },
+        {
+            "command": "D",
+            "arg1": "2500",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "2400",
+            "arg2": "1",
+            "arg3": "2473",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2404",
+            "arg2": "30",
+            "arg3": "17"
+        },
+        {
+            "command": "E",
+            "arg1": "2411",
+            "arg2": "30",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2420",
+            "arg2": "30",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "2418",
+            "arg2": "30",
+            "arg3": "0"
+        },
+        {
+            "command": "E",
+            "arg1": "2407",
+            "arg2": "30",
+            "arg3": "3"
+        },
+        {
+            "command": "G",
+            "arg1": "2429",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2401",
+            "arg2": "1",
+            "arg3": "2432",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2401",
+            "arg2": "30",
+            "arg3": "17"
+        },
+        {
+            "command": "E",
+            "arg1": "2410",
+            "arg2": "30",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2419",
+            "arg2": "30",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "2418",
+            "arg2": "30",
+            "arg3": "0"
+        },
+        {
+            "command": "E",
+            "arg1": "2406",
+            "arg2": "30",
+            "arg3": "3"
+        },
+        {
+            "command": "G",
+            "arg1": "2430",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2402",
+            "arg2": "30",
+            "arg3": "2412",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2400",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "2428",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2402",
+            "arg2": "30",
+            "arg3": "2416",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2400",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2402",
+            "arg2": "30",
+            "arg3": "2416",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2400",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2402",
+            "arg2": "30",
+            "arg3": "2420",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2400",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2402",
+            "arg2": "30",
+            "arg3": "2420",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2400",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2414",
+            "arg2": "12",
+            "arg3": "2410",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2414",
+            "arg2": "12",
+            "arg3": "2412",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2414",
+            "arg2": "12",
+            "arg3": "2415",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2414",
+            "arg2": "12",
+            "arg3": "2417",
+            "arg4": "4"
+        },
+        {
+            "command": "M",
+            "arg1": "2414",
+            "arg2": "12",
+            "arg3": "2419",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2414",
+            "arg2": "12",
+            "arg3": "2420",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2414",
+            "arg2": "12",
+            "arg3": "2421",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2414",
+            "arg2": "12",
+            "arg3": "2422",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2414",
+            "arg2": "12",
+            "arg3": "2424",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2414",
+            "arg2": "12",
+            "arg3": "2425",
+            "arg4": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "2414",
+            "arg2": "12",
+            "arg3": "2427",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2414",
+            "arg2": "12",
+            "arg3": "2429",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2402",
+            "arg2": "30",
+            "arg3": "2420",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2400",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "2428",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2402",
+            "arg2": "30",
+            "arg3": "2424",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2400",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "2428",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2402",
+            "arg2": "30",
+            "arg3": "2428",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2400",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "2428",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2402",
+            "arg2": "30",
+            "arg3": "2434",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2400",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "2428",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2402",
+            "arg2": "30",
+            "arg3": "2438",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2400",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "2428",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2402",
+            "arg2": "30",
+            "arg3": "2440",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2400",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "2428",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2402",
+            "arg2": "30",
+            "arg3": "2450",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2400",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "2428",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2402",
+            "arg2": "30",
+            "arg3": "2460",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2400",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "2428",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2402",
+            "arg2": "30",
+            "arg3": "2470",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2400",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "2428",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2403",
+            "arg2": "1",
+            "arg3": "2478",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "2424",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2404",
+            "arg2": "1",
+            "arg3": "2450",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "2425",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2405",
+            "arg2": "1",
+            "arg3": "2494",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2405",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "G",
+            "arg1": "2426",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2406",
+            "arg2": "1",
+            "arg3": "2465",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2403",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "2407",
+            "arg2": "1",
+            "arg3": "2499",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2409",
+            "arg2": "30",
+            "arg3": "3"
+        },
+        {
+            "command": "G",
+            "arg1": "2423",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2408",
+            "arg2": "2",
+            "arg3": "2494",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2416",
+            "arg2": "30",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "2417",
+            "arg2": "30",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "2414",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2433",
+            "arg2": "30",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "2432",
+            "arg2": "30",
+            "arg3": "18"
+        },
+        {
+            "command": "M",
+            "arg1": "2408",
+            "arg2": "2",
+            "arg3": "2414",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2415",
+            "arg2": "30",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2416",
+            "arg2": "30",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "2417",
+            "arg2": "30",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "2414",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2409",
+            "arg2": "1",
+            "arg3": "2490",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2421",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2408",
+            "arg2": "30",
+            "arg3": "0"
+        },
+        {
+            "command": "E",
+            "arg1": "2431",
+            "arg2": "30",
+            "arg3": "18"
+        },
+        {
+            "command": "M",
+            "arg1": "2410",
+            "arg2": "2",
+            "arg3": "2494",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2415",
+            "arg2": "30",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2416",
+            "arg2": "30",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "2417",
+            "arg2": "30",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "2414",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2433",
+            "arg2": "30",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "2432",
+            "arg2": "30",
+            "arg3": "18"
+        },
+        {
+            "command": "M",
+            "arg1": "2410",
+            "arg2": "2",
+            "arg3": "2414",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2415",
+            "arg2": "30",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2416",
+            "arg2": "30",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "2417",
+            "arg2": "30",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "2414",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2433",
+            "arg2": "30",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "2432",
+            "arg2": "30",
+            "arg3": "18"
+        },
+        {
+            "command": "M",
+            "arg1": "2411",
+            "arg2": "11",
+            "arg3": "2414",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2422",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "2427",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2411",
+            "arg2": "11",
+            "arg3": "2418",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2422",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "2427",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2411",
+            "arg2": "11",
+            "arg3": "2422",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2422",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "2427",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2411",
+            "arg2": "11",
+            "arg3": "2426",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2422",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "2427",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2411",
+            "arg2": "11",
+            "arg3": "2430",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2422",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "2427",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2411",
+            "arg2": "11",
+            "arg3": "2436",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2422",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "2427",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2411",
+            "arg2": "11",
+            "arg3": "2444",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2422",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "2427",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2411",
+            "arg2": "11",
+            "arg3": "2455",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2422",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "2427",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2411",
+            "arg2": "11",
+            "arg3": "2465",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2422",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "2427",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "2411",
+            "arg2": "11",
+            "arg3": "2480",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2422",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "2427",
+            "arg2": "-1"
+        },
+        {
+            "command": "O",
+            "arg1": "2412",
+            "arg2": "4",
+            "arg3": "2413"
+        },
+        {
+            "command": "O",
+            "arg1": "2412",
+            "arg2": "4",
+            "arg3": "2442"
+        },
+        {
+            "command": "O",
+            "arg1": "2412",
+            "arg2": "4",
+            "arg3": "2447"
+        },
+        {
+            "command": "O",
+            "arg1": "2412",
+            "arg2": "4",
+            "arg3": "2467"
+        },
+        {
+            "command": "D",
+            "arg1": "2441",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "2443",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "2432",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "2444",
+            "arg2": "3",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "2449",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "2450",
+            "arg2": "3",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "2437",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "2438",
+            "arg2": "3",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "2465",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "2466",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "2470",
+            "arg2": "3",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "2474",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "2477",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "2478",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "2483",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "2493",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "2494",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "2489",
+            "arg2": "3",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "2490",
+            "arg2": "1",
+            "arg3": "2"
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "2402",
+            "spec_fun": "spec_thief"
+        },
+        {
+            "vnum": "2405",
+            "spec_fun": "spec_cast_cleric"
+        },
+        {
+            "vnum": "2409",
+            "spec_fun": "spec_cast_mage"
+        },
+        {
+            "vnum": "2411",
+            "spec_fun": "spec_thief"
+        },
+        {
+            "vnum": "2400",
+            "spec_fun": "spec_breath_any"
+        },
+        {
+            "vnum": "2401",
+            "spec_fun": "spec_breath_any"
+        },
+        {
+            "vnum": "2403",
+            "spec_fun": "spec_breath_any"
+        },
+        {
+            "vnum": "2407",
+            "spec_fun": "spec_breath_any"
+        },
+        {
+            "vnum": "2413",
+            "spec_fun": "spec_breath_any"
+        },
+        {
+            "vnum": "2412",
+            "spec_fun": "spec_cast_mage"
+        }
+    ],
+    "omprogs": [
+        {
+            "command": "M",
+            "vnum": "2412",
+            "progtype": "give_prog",
+            "progname": "give_prog_keeper"
+        },
+        {
+            "command": "M",
+            "vnum": "2412",
+            "progtype": "greet_prog",
+            "progname": "greet_prog_keeper"
+        },
+        {
+            "command": "M",
+            "vnum": "2413",
+            "progtype": "greet_prog",
+            "progname": "greet_prog_fireflash"
+        },
+        {
+            "command": "M",
+            "vnum": "2413",
+            "progtype": "give_prog",
+            "progname": "give_prog_fireflash"
+        }
+    ]
+}

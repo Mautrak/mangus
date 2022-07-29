@@ -1,0 +1,5003 @@
+{
+    "area": {
+        "file": "hayalet_sehir.are",
+        "name": "Türkçe",
+        "low_range": "45",
+        "high_range": "65",
+        "min_vnum": "8100",
+        "max_vnum": "8200",
+        "path": "21d 5g a d k",
+        "yonelim_iyi": "10",
+        "yonelim_yansiz": "20",
+        "yonelim_kem": "70"
+    },
+    "helps": [
+        {
+            "level": "0",
+            "keyword": "'HAYALET ÞEHÝR'",
+            "text": "This is purely a simple hack-n-slash area with the interesting added feature\nthat you can't recall... You have to fight your way through the many powerful\nhigh level undead that populate this place. To a good mudder its heaven. To\nsomeone who flees when fighting the children in Mud School, its probably gonna\nbe considered impossible. Either way, have fun.\n\n\n"
+        }
+    ],
+    "mobiles": [
+        {
+            "vnum": "8100",
+            "name": "hortlak",
+            "short_description": "bir hortlak",
+            "long_description": "Bir hortlak çýðlýk atarak sana saldýrdý!\n",
+            "description": "Buranýn eski muhafýzlarýndan birinin ruhu, bu pis hortlak. Senin de bu\nlanetli araziye gelen önceki davetsiz misafirlerle ayný kaderi paylaþman\niçin elinden geleni yapacak.- ÖLÜM!.\n",
+            "race": "undead",
+            "act": "AFGO",
+            "affected_by": "DFHT",
+            "level": "60"
+        },
+        {
+            "vnum": "8101",
+            "name": "ruh",
+            "short_description": "bir ruh",
+            "long_description": "Bir ruh sana doðru uzun, sessiz adýmlarla geliyor. Kýrmýzý parýldayan\ngözlerinde ölüm var.\n",
+            "description": "Buranýn eski muhafýzlarýndan birinin ruhu, bu pis hortlak. Senin de bu\nlanetli araziye gelen önceki davetsiz misafirlerle ayný kaderi paylaþman\niçin elinden geleni yapacak.- ÖLÜM!.\n",
+            "race": "undead",
+            "act": "AFGO",
+            "affected_by": "DFT",
+            "level": "47"
+        },
+        {
+            "vnum": "8102",
+            "name": "gulyabani",
+            "short_description": "bir gulyabani",
+            "long_description": "Sarý benizli bir gulyabani, hala üzerinde yaþarken giydiði zýrhýyla, sana\nsaldýrýyor.\n",
+            "description": "Buranýn eski muhafýzlarýndan birinin ruhu, bu pis hortlak. Senin de bu\nlanetli araziye gelen önceki davetsiz misafirlerle ayný kaderi paylaþman\niçin elinden geleni yapacak.- ÖLÜM!.\n",
+            "race": "undead",
+            "act": "AFGO",
+            "affected_by": "DF",
+            "level": "45"
+        },
+        {
+            "vnum": "8103",
+            "name": "hayalet",
+            "short_description": "bir hayalet",
+            "long_description": "Uzun süredir ölü bir maceracýnýn hayaleti sana doðru çýlgýnca uluyor.\n",
+            "description": "Buranýn eski muhafýzlarýndan birinin ruhu, bu pis hortlak. Senin de bu\nlanetli araziye gelen önceki davetsiz misafirlerle ayný kaderi paylaþman\niçin elinden geleni yapacak.- ÖLÜM!.\n",
+            "race": "undead",
+            "act": "AFGO",
+            "affected_by": "DFTU",
+            "level": "48"
+        },
+        {
+            "vnum": "8104",
+            "name": "vampir",
+            "short_description": "bir vampir",
+            "long_description": "Þeytani bir vampir tabutundan kalkýyor ve saldýrýyor.!\n",
+            "description": "Þeytani Baron ve iki kardeþi, onlarý tamamiyle yokedecek güce sahip olmayan\nXanan tarafýndan buraya hapsedilmiþ vampirlerdiler. Ve þimdi onlarý tekrar\ndirilttiðin için sana müteþekkirler.!\n",
+            "race": "undead",
+            "act": "ABFGO",
+            "affected_by": "DFN",
+            "level": "54"
+        },
+        {
+            "vnum": "8105",
+            "name": "büyücü",
+            "short_description": "bir büyücü",
+            "long_description": "Çýldýrmýþ bir büyücü üzerine doðru bir sürü büyü yolluyor.\n",
+            "description": "Bu kudretli hortlak, daha önceden ihanete uðrayarak öldürülmüþ olan\nXantharus'un efendisi olmalý. Ama durumu tahmin etti ve bir büyücü\nolarak geri döndü. Þimdi intikam arýyor.\n",
+            "race": "human",
+            "act": "ABFGO",
+            "affected_by": "DF",
+            "level": "58"
+        },
+        {
+            "vnum": "8106",
+            "name": "zebani",
+            "short_description": "bir zebani",
+            "long_description": "Bir zebani aðzýný þapýrdatarak, çýlgýnca kýkýrdýyor!\n",
+            "description": "Bu tuhaf yaratýk, buranýn negatif enerjiyle yasýçanýlmýþ alt alemlerinin bir\nmuhafýzý.\n",
+            "race": "undead",
+            "act": "AFGHO",
+            "affected_by": "DF",
+            "level": "52"
+        },
+        {
+            "vnum": "8107",
+            "name": "geri dönmüþ",
+            "short_description": "bir geri dönmüþ",
+            "long_description": "Bir geri dönmüþ burada, eskinin hesabýný soracak birilerini arýyor.\n",
+            "description": "Bu zavallý ruh, bir zamanlar Soleil'in güçlü ve iyi bir rahibiydi. Ama\nþeytani Gomez'in adamlarý tarafýndan yakalanýp, iþkence edilerek öldürüldü.\nOnun ruhu buraya döndü ve uzun süredir ölü olan katillerini arýyor. Amacýnýn\ndýþýndaki herþeyi görmezden gelir ama yoluna çýkarsan saldýrmaktan çekinmez.\n",
+            "race": "undead",
+            "act": "AGO",
+            "affected_by": "DFN",
+            "level": "57"
+        },
+        {
+            "vnum": "8108",
+            "name": "karabasan",
+            "short_description": "bir karabasan",
+            "long_description": "Bir karabasan burada, rüyalara sýzmayý bekliyor.\n",
+            "description": "Bu ruh, bir zamanlar Hayalet Þehir'e bir bahis sonucu giren kudretli bir\nsavaþçýydý. Buranýn sakinleri tarafýndan hemen avlandý, ama ölürken ne kadar\nýstýrap çekmiþ ki, ruhu sonunu yaþadýðý bu bölgeyi lanetlemek için burada\nkalmýþ.\n",
+            "race": "undead",
+            "act": "ABGO",
+            "affected_by": "DFTU",
+            "level": "48"
+        },
+        {
+            "vnum": "8109",
+            "name": "mezar mahluk",
+            "short_description": "bir mezar mahluðu",
+            "long_description": "Bir mezar mahluðu þeytanice kýkýrdayýp sana sataþýyor.\n",
+            "description": "Bu yaratýk, þeytanlýðýna raðmen sana saldýrmayacak; sadece sataþacak. Buna\nraðmen kendini korumaktan da çekinmez.\n",
+            "race": "undead",
+            "act": "ABGO",
+            "affected_by": "DF",
+            "level": "55"
+        },
+        {
+            "vnum": "8110",
+            "name": "güçlü zebani",
+            "short_description": "güçlü bir zebani",
+            "long_description": "Güçlü bir Zebani ileriye doðru ateþ ve gaz kusuyor!\n",
+            "description": "Bu tuhaf yaratýk, buranýn negatif enerjiyle yasýçanýlmýþ alt alemlerinin bir\nmuhafýzý.\n",
+            "race": "undead",
+            "act": "ABFGO",
+            "affected_by": "DFT",
+            "level": "58"
+        },
+        {
+            "vnum": "8111",
+            "name": "hortlak ejderha",
+            "short_description": "bir hortlak ejderha",
+            "long_description": "Bir hortlak Ejderha ileriye doðru zehirli buhar püskürtüyor!\n",
+            "description": "Bu iðrenç yaratýk, yaþarken Xantharus'a en iyi þekilde hizmet etmiþ bir\nejderhanýn ruhu. Öyle ki Xantharus onu öldükten sonra da hizmet etmesi için\ncanladýrmýþ.\n",
+            "race": "undead",
+            "act": "ABFGO",
+            "affected_by": "DFT",
+            "level": "62"
+        },
+        {
+            "vnum": "8112",
+            "name": "hortlak canavar",
+            "short_description": "hortlak canavar",
+            "long_description": "Bir hortlak canavar ayaklarýný sürterek saldýrýyor!\n",
+            "description": "Buranýn eski muhafýzlarýndan birinin ruhu, bu pis hortlak yaratýk , senin de\nbu lanetli araziye gelen önceki davetsiz misafirlerle ayný kaderi paylaþman\niçin elinden geleni yapacak.- ÖLÜM!.\n",
+            "race": "undead",
+            "act": "AFGO",
+            "affected_by": "DF",
+            "level": "45"
+        },
+        {
+            "vnum": "8113",
+            "name": "dev sýçan",
+            "short_description": "dev sýçan",
+            "long_description": "Dev bir sýçan vahþice saldýrýyor!\n",
+            "description": "Dev derken, 10 adým boydan bahsettim!...\n",
+            "race": "lizard",
+            "act": "ACFGHO",
+            "affected_by": "DFQ",
+            "level": "40"
+        },
+        {
+            "vnum": "8114",
+            "name": "dev örümcek",
+            "short_description": "dev örümcek",
+            "long_description": "Dev bir örümcek üzerine geliyor!\n",
+            "description": "Örümcekler istediklerinde iyi sýçrayan canlýlardýr.\n",
+            "race": "undead",
+            "act": "ACFGHO",
+            "affected_by": "DFQ",
+            "level": "45"
+        },
+        {
+            "vnum": "8115",
+            "name": "pusucu",
+            "short_description": "pusucu",
+            "long_description": "Tependeki bir pusucu seni boðmak için fýrsat kolluyor!\n",
+            "description": "Bu sapkýn iðrenç yaratýk, inine giren misafirlerle besleniyor-\n",
+            "race": "undead",
+            "act": "ABFGHO",
+            "affected_by": "T",
+            "level": "52"
+        },
+        {
+            "vnum": "8116",
+            "name": "vampirella",
+            "short_description": "bir vampirella",
+            "long_description": "Güzel bir diþi etkileyici þekilde bakýyor, keskin diþlerini göstererek...\n",
+            "description": "Bu bir vampirella, Seni etkileyecek ve harcayacak, DÖVÜÞ!\n",
+            "race": "undead",
+            "act": "ABGO",
+            "affected_by": "DFHT",
+            "level": "50"
+        },
+        {
+            "vnum": "8117",
+            "name": "xantharus",
+            "short_description": "Xantharus",
+            "long_description": "Xantharus burada, özgür kalmayý bekliyor.\n",
+            "description": "Bu acýnasý zavallý kimse Xantharus'tan baþkasý deðil, bu þehre hortlakleri\ngetirerek burayý yokeden ve daha sonra kontrolu elinde tututamayan güçlü\nbüyücü. Büyük Hata'sý O'nu bulmadan bir çýkýþ yolu bulmak umuduyla buraya\nkaçmýþ.\n",
+            "race": "undead",
+            "act": "ABGHO",
+            "affected_by": "0",
+            "level": "50"
+        },
+        {
+            "vnum": "8118",
+            "name": "çürümüþ ceset",
+            "short_description": "bir çürümüþ ceset",
+            "long_description": "Çürümüþ bir ceset sana doðru sendeliyor.\n",
+            "description": "Bu þey ve yandaþlarý bir zamanlar güzel olan bu þehrin sakinlerinden olmalý.\nOnlarý öldürmek, onlar için yapabileceðin en iyi þey...\n",
+            "race": "undead",
+            "act": "AGO",
+            "affected_by": "0",
+            "level": "40"
+        },
+        {
+            "vnum": "8119",
+            "name": "efendi",
+            "short_description": "efendi",
+            "long_description": "Efendi, arazisini inceliyor, ve þeytanca kahkahalar atýyor.\n",
+            "description": "Zayýf Xantharus'un yaratýklarýn kontrolünü kaybetmesinden sonra burayý ele\ngeçiren Efendi hakkýnda çok az þey biliniyor. Ama þu kesin ki çok kudretli\ngörünen bu þeytani büyücü seni yoketmekten çekinmeyecek.\n",
+            "race": "human",
+            "act": "ABFGHO",
+            "affected_by": "CDEFH",
+            "level": "60"
+        },
+        {
+            "vnum": "8120",
+            "name": "sürünen tepecik",
+            "short_description": "sürünen tepecik",
+            "long_description": "Sürünen bir tepecik... þeyy ýý... üzerine doðru sürünüyor.\n",
+            "description": "KOÞ! 12 ayak yüksekliðindeki bir çöp yýðýný sana saldýrýyor!\n",
+            "race": "unique",
+            "act": "AFGO",
+            "affected_by": "N",
+            "level": "45"
+        },
+        {
+            "vnum": "8121",
+            "name": "kampflut",
+            "short_description": "bir kampflut",
+            "long_description": "Bir Kampflut burada, sana saldýrýyor!\n",
+            "description": "Bu çirkin diriltilmiþ aðaç, dokunaca benzer çirkin dallarý ve büyük diþli\nbir aðzý olan antik bir meþe aðacýna benziyor. Kötü tavýrlarýna raðmen,\nkötü niyetli deðil, sadece basitçe... AÇ!\n",
+            "race": "undead",
+            "act": "AFGO",
+            "affected_by": "N",
+            "level": "50"
+        },
+        {
+            "vnum": "8122",
+            "name": "siyah puding",
+            "short_description": "siyah puding",
+            "long_description": "Siyah bir puding sana doðru pörtleyerek geliyor.\n",
+            "description": "Bu siyah dev kütle, silah ve zýrhlarý eritiyor, eðer fýrsat bulursa,seni\nde iþtahla silip süpürecek!\n",
+            "race": "undead",
+            "act": "AFGO",
+            "affected_by": "N",
+            "level": "52"
+        },
+        {
+            "vnum": "8123",
+            "name": "yeþil balçýk",
+            "short_description": "yeþil balçýk",
+            "long_description": "Bir parça yeþil balçýk üzerine damlayarak, cildini yakýyor.\n",
+            "description": "Yeþil Balçýk metali bile eritebilir, derinin üzerindeki etkisini hayal et!\n",
+            "race": "undead",
+            "act": "ABFGO",
+            "affected_by": "0",
+            "level": "40"
+        },
+        {
+            "vnum": "8124",
+            "name": "gri çamur",
+            "short_description": "gri çamur",
+            "long_description": "Gri bir çamur yýðýntýsý sana doðru sýzýyor.\n",
+            "description": "\"Ah,\" \"Ne kadar korktum!\" dediðini duyar gibiyim. O zaman bekle ve gör!\n",
+            "race": "undead",
+            "act": "AFGO",
+            "affected_by": "N",
+            "level": "58"
+        },
+        {
+            "vnum": "8125",
+            "name": "hareketli aðaç",
+            "short_description": "hareketli aðaç",
+            "long_description": "Hareketli bir aðaç sana dallarý ile saldýrýyor.\n",
+            "description": "Bu aðaç kötü ve þeytani, yani pek dost sayýlmaz...\n",
+            "race": "undead",
+            "act": "AFGO",
+            "affected_by": "0",
+            "level": "45"
+        },
+        {
+            "vnum": "8126",
+            "name": "aðaç ruhu",
+            "short_description": "Bir aðacýn ruhu",
+            "long_description": "Bir aðacýn ruhu bu þeytani yerde sana bir sýðýnak saðlýyor.\n",
+            "description": "Bu Ruh, bu mekandaki tek iyi yaratýk. Sen dinlenirken seni koruyabilir,\nhatta yeterince ödeme yaparsan yaralarýný bile iyileþtirebilir...\n\n",
+            "race": "undead",
+            "act": "ABGO",
+            "affected_by": "BCDFN",
+            "level": "65"
+        },
+        {
+            "vnum": "8127",
+            "name": "ölü þövalye",
+            "short_description": "ölü þövalye",
+            "long_description": "Ölü bir þövalye sana meydan okuyor ve saldýrýyor!\n",
+            "description": "Bu ruh, Efendi'nin þeytanlýðýyla, hortlak bir hizmetkar olarak, sonsuzluðun\niçine çekilmiþ bir Paladin'in ruhu. Süslere bezenmiþ, antik bir zýrh ve\nparlak, gümüþ bir kýlýçla, çürüyen yüzü haricinde ayný yaþarkenki kadar\nkarizmatik görünüyor...\n",
+            "race": "undead",
+            "act": "ABFGO",
+            "affected_by": "DF",
+            "level": "60"
+        },
+        {
+            "vnum": "8128",
+            "name": "kabus",
+            "short_description": "bir kabus",
+            "long_description": "Bir kabus, alt düzlemlerin sadýk bir yerlisi, burada dinleniyor.\n",
+            "description": "Kanatlý bir ata binen bu kara varlýk, iþini bitirmiþ efendisinin onu\ngörevlendireceði yere gitmek için bekliyor.\n",
+            "race": "undead",
+            "act": "ABGO",
+            "affected_by": "FT",
+            "level": "45"
+        },
+        {
+            "vnum": "8129",
+            "name": "avcý",
+            "short_description": "bir avcý",
+            "long_description": "Bir avcý dört ayaðýnýn üzerinde þahlanarak saldýrýyor.\n",
+            "description": "Bu iblisimsi varlýk, bacaklar yerini keskin kýlýçlar, gözler yerine de\nparýldayan elmaslara sahip olan dev bir örümceðe benziyor.\n",
+            "race": "undead",
+            "act": "ABFGO",
+            "affected_by": "DF",
+            "level": "58"
+        },
+        {
+            "vnum": "8130",
+            "name": "cambiyon gözcüsü",
+            "short_description": "Orcus'un gözcüsü",
+            "long_description": "Orcus'un bir gözcüsü sana dikkatlice göz atýyor.\n",
+            "description": "Bu yarý-insan, yarý-iblis yaratýk hortlaklerýn Prensi olan Orcus'un\ngözcülerinden. Gizli bir görevde ve dolayýsýyla belayý mümkün olduðunca\nönlemek istiyor. Efendi'nin gücününün boyutunu araþtýrýp, bu tuhaf adamýn\nvarlýklarý için tehdit olup olmadýðý konusunda Orcus'u uyarmakla yükümlü.\n",
+            "race": "undead",
+            "act": "ACGHO",
+            "affected_by": "DEFQV",
+            "level": "50"
+        },
+        {
+            "vnum": "8131",
+            "name": "orcus",
+            "short_description": "Orcus",
+            "long_description": "Orcus, hortlak Prensi, sana tehditkar gözlerle bakýyor.\n",
+            "description": "Orcus'un karþýsýnda duruyorsun. Bir boðanýn göz ve burnuna, bir keçinin\nboynuz ve toynaklarýna sahip, þiþkin bir adama benziyor. Bir toynaðýnda\ntepesinde keçi baþý olan bir deðnek tutarken, sana þüphe dolu gözlerle\nbakýyor. Burada olmak istemiyor, dolayýsýyla Birincil Maddesel Düzlem'in\nsaldýrýlarýyla uðraþmak yanlýsý deðil.\n",
+            "race": "undead",
+            "act": "ABGHO",
+            "affected_by": "BCDEFHN",
+            "level": "65"
+        },
+        {
+            "vnum": "8132",
+            "name": "su mahluku",
+            "short_description": "su mahluku",
+            "long_description": "Bir su mahluku sana doðru hamle yapýyor!\n",
+            "description": "Bu sudan oluþan yýlan, dövüþerek savunacaðý kuyusunun içinde duruyor.\n",
+            "race": "snake",
+            "act": "ABFGO",
+            "affected_by": "N",
+            "level": "51"
+        },
+        {
+            "vnum": "8133",
+            "name": "dev örümcek",
+            "short_description": "dev bir örümcek",
+            "long_description": "Dev bir örümcek sana doðru iniyor!\n",
+            "description": "Dev derken, 10 feet boydan bahsettim!...\n",
+            "race": "undead",
+            "act": "ABCFGHO",
+            "affected_by": "DFQ",
+            "level": "48"
+        },
+        {
+            "vnum": "8134",
+            "name": "baron vampir",
+            "short_description": "bir baron vampir",
+            "long_description": "Baron vampir tabutundan kalkýyor ve diþlerini göstererek saldýrýyor!\n",
+            "description": "Þeytani Baron ve iki kardeþi, onlarý tamamiyle yokedecek güce sahip olmayan\nXanan tarafýndan buraya hapsedilmiþ vampirlerdiler. Ve þimdi sana onlarý\nrahatsýz ederek tekrar dirilttiðin için müteþekkirler.!\n",
+            "race": "undead",
+            "act": "ABFGO",
+            "affected_by": "DF",
+            "level": "60"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "8100",
+            "name": "asa ciblll",
+            "short_description": "Ciblll'in fýsýldayan asasý",
+            "description": "Kadim bir asa burada, unutmadýðý efendisinin adýný fýsýldýyor.\n",
+            "material": "wood",
+            "type": "staff",
+            "extra_flags": "BEGH",
+            "wear_flags": "AO",
+            "values": "60 100 100 'pass door' 0",
+            "level": "55",
+            "weight": "50",
+            "cost": "30000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "2"
+                },
+                {
+                    "location": "2",
+                    "modifier": "2"
+                },
+                {
+                    "location": "3",
+                    "modifier": "2"
+                },
+                {
+                    "location": "4",
+                    "modifier": "2"
+                },
+                {
+                    "location": "5",
+                    "modifier": "2"
+                },
+                {
+                    "location": "12",
+                    "modifier": "250"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-50"
+                },
+                {
+                    "location": "18",
+                    "modifier": "25"
+                },
+                {
+                    "location": "19",
+                    "modifier": "25"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-10"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-10"
+                }
+            ]
+        },
+        {
+            "vnum": "8101",
+            "name": "el vecna",
+            "short_description": "Vecna'nýn Eli",
+            "description": "Vecna'nýn Eli burada duruyor.\n",
+            "material": "leather steel",
+            "type": "armor",
+            "extra_flags": "EHJMQ",
+            "wear_flags": "AH",
+            "values": "18 19 18 10 0",
+            "level": "56",
+            "weight": "5",
+            "cost": "10000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "3"
+                },
+                {
+                    "location": "3",
+                    "modifier": "3"
+                },
+                {
+                    "location": "12",
+                    "modifier": "100"
+                },
+                {
+                    "location": "18",
+                    "modifier": "3"
+                },
+                {
+                    "location": "19",
+                    "modifier": "3"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-3"
+                }
+            ]
+        },
+        {
+            "vnum": "8102",
+            "name": "göz vecna",
+            "short_description": "Vecna'nýn Gözü",
+            "description": "Vecna'nýn Gözü burada, þeytanice parýldýyor.\n",
+            "material": "leather steel",
+            "type": "armor",
+            "extra_flags": "AEJM",
+            "wear_flags": "AE",
+            "values": "18 18 18 10 0",
+            "level": "56",
+            "weight": "1",
+            "cost": "10000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "3",
+                    "modifier": "3"
+                },
+                {
+                    "location": "4",
+                    "modifier": "3"
+                },
+                {
+                    "location": "12",
+                    "modifier": "50"
+                }
+            ]
+        },
+        {
+            "vnum": "8103",
+            "name": "kýlýç kas",
+            "short_description": "Kas'ýn kýlýcý",
+            "description": "Kas'ýn kýlýcý seni çaðýrýyor!\n",
+            "material": "steel",
+            "type": "weapon",
+            "extra_flags": "BEGJM",
+            "wear_flags": "AN",
+            "values": "sword 5 10 pierce D",
+            "level": "47",
+            "weight": "20",
+            "cost": "17000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "20"
+                },
+                {
+                    "location": "18",
+                    "modifier": "5"
+                },
+                {
+                    "location": "19",
+                    "modifier": "5"
+                }
+            ]
+        },
+        {
+            "vnum": "8104",
+            "name": "bilezik",
+            "short_description": "bilezik",
+            "description": "Bir bilezik tozlanmýþ þekilde burada duruyor.\n",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "GM",
+            "wear_flags": "AE",
+            "values": "17 17 17 10 0",
+            "level": "54",
+            "weight": "25",
+            "cost": "18000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "3",
+                    "modifier": "-3"
+                },
+                {
+                    "location": "4",
+                    "modifier": "-3"
+                }
+            ]
+        },
+        {
+            "vnum": "8105",
+            "name": "hazine",
+            "short_description": "bir hazine yýðýný",
+            "description": "Bir hazine yýðýný buraya serpilmiþ.\n",
+            "material": "leather",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "400 0 0 50 50",
+            "level": "1",
+            "weight": "150",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "8106",
+            "name": "sandýk",
+            "short_description": "bir sandýk",
+            "description": "Bir sandýk burada duruyor.\n",
+            "material": "steel",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "1",
+            "values": "150 0 0 20 100",
+            "level": "48",
+            "weight": "100",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "8107",
+            "name": "cüppe et",
+            "short_description": "Etten cüppe",
+            "description": "Ýnsan etinden yapýlmýþ bir cüppe burada býrakýlmýþ.\n",
+            "material": "human flesh",
+            "type": "armor",
+            "extra_flags": "EJ",
+            "wear_flags": "AK",
+            "values": "15 15 15 6 0",
+            "level": "58",
+            "weight": "25",
+            "cost": "13000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "150"
+                },
+                {
+                    "location": "13",
+                    "modifier": "25"
+                }
+            ]
+        },
+        {
+            "vnum": "8108",
+            "name": "deðnek kemik",
+            "short_description": "bir kemik deðnek",
+            "description": "Bir insan kemiðinden yapýlmýþ deðnek burada duruyor.\n",
+            "material": "human femur",
+            "type": "weapon",
+            "extra_flags": "EJ",
+            "wear_flags": "AN",
+            "values": "exotic 6 9 crush 0",
+            "level": "58",
+            "weight": "25",
+            "cost": "13000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "15"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-10"
+                },
+                {
+                    "location": "18",
+                    "modifier": "4"
+                },
+                {
+                    "location": "19",
+                    "modifier": "4"
+                }
+            ]
+        },
+        {
+            "vnum": "8109",
+            "name": "kemik",
+            "short_description": "bir kemik",
+            "description": "Bir kemik burada duruyor.\n",
+            "material": "silver",
+            "type": "trash",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "1",
+            "weight": "50",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "8110",
+            "name": "elmas asa",
+            "short_description": "bir elmas asa",
+            "description": "Bir elmas asa burada kudretle parlýyor.\n",
+            "material": "wood",
+            "type": "staff",
+            "extra_flags": "AG",
+            "wear_flags": "AO",
+            "values": "50 20 20 'sanctuary' 0",
+            "level": "58",
+            "weight": "10",
+            "cost": "40000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "50"
+                }
+            ]
+        },
+        {
+            "vnum": "8111",
+            "name": "pelerin",
+            "short_description": "Kara Pelerin",
+            "description": "Kara bir pelerin burada duruyor.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AK",
+            "values": "17 17 17 11 0",
+            "level": "51",
+            "weight": "10",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "8112",
+            "name": "kýlýç",
+            "short_description": "Kara Kýlýç",
+            "description": "Kapkara bir kýlýç burada þeytanca duruyor.\n",
+            "material": "steel",
+            "type": "weapon",
+            "extra_flags": "BCEJ",
+            "wear_flags": "AN",
+            "values": "sword 6 10 slash 0",
+            "level": "55",
+            "weight": "35",
+            "cost": "30000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "1"
+                },
+                {
+                    "location": "5",
+                    "modifier": "1"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-20"
+                },
+                {
+                    "location": "18",
+                    "modifier": "2"
+                },
+                {
+                    "location": "19",
+                    "modifier": "4"
+                }
+            ]
+        },
+        {
+            "vnum": "8113",
+            "name": "zýrh",
+            "short_description": "Kara Zýrh",
+            "description": "Bir Kara Zýrh burada duruyor.\n",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "CEJ",
+            "wear_flags": "AE",
+            "values": "16 16 17 10 0",
+            "level": "50",
+            "weight": "25",
+            "cost": "15000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-10"
+                },
+                {
+                    "location": "18",
+                    "modifier": "4"
+                },
+                {
+                    "location": "19",
+                    "modifier": "7"
+                }
+            ]
+        },
+        {
+            "vnum": "8114",
+            "name": "miðfer",
+            "short_description": "Kara Miðfer",
+            "description": "Bir Kara Miðfer sana sahip olmak için duruyor\n",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "CHM",
+            "wear_flags": "AE",
+            "values": "18 18 18 12 0",
+            "level": "55",
+            "weight": "75",
+            "cost": "15000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "3",
+                    "modifier": "-3"
+                },
+                {
+                    "location": "4",
+                    "modifier": "-3"
+                }
+            ]
+        },
+        {
+            "vnum": "8115",
+            "name": "kavanoz",
+            "short_description": "kavanoz",
+            "description": "Cam bir kavanoz burada duruyor.\n",
+            "material": "glass",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "25 0 0 10 100",
+            "level": "48",
+            "weight": "10",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "8116",
+            "name": "zehir",
+            "short_description": "bir miktar zehir",
+            "description": "Bir miktar zehir burada duruyor.\n",
+            "material": "food",
+            "type": "food",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "1 0 0 A 0",
+            "level": "1",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "8117",
+            "name": "Lanetli Sembol",
+            "short_description": "Lanetli Sembol",
+            "description": "Þeytana teslim olmuþ bir rahibe ait Lanetli bir Sembol burada duruyor.\n",
+            "material": "unknown",
+            "type": "light",
+            "extra_flags": "EJ",
+            "wear_flags": "A",
+            "values": "0 0 -1 0 0",
+            "level": "48",
+            "weight": "5",
+            "cost": "500",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "3"
+                }
+            ]
+        },
+        {
+            "vnum": "8118",
+            "name": "Kutsal Sembol",
+            "short_description": "Kutsal Sembol",
+            "description": "Ýyiliðe hizmet eden bir rahibe ait Kutsal bir Sembol burada duruyor.\n",
+            "material": "unknown",
+            "type": "light",
+            "extra_flags": "AK",
+            "wear_flags": "A",
+            "values": "0 0 -1 0 0",
+            "level": "48",
+            "weight": "5",
+            "cost": "500",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "5",
+                    "modifier": "3"
+                }
+            ]
+        },
+        {
+            "vnum": "8119",
+            "name": "ceset",
+            "short_description": "ceset",
+            "description": "Zavallý bir maceracýya ait olan ceset burada duruyor.\n",
+            "material": "meat",
+            "type": "furniture",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "75",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "8120",
+            "name": "anahtar",
+            "short_description": "siyah anahtar",
+            "description": "Siyah bir anahtar burada duruyor.\n",
+            "material": "iron",
+            "type": "key",
+            "extra_flags": "B",
+            "wear_flags": "AO",
+            "values": "2 0 0 0 0",
+            "level": "0",
+            "weight": "5",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "8121",
+            "name": "kavanoz kan",
+            "short_description": "bir kavanoz insan kaný",
+            "description": "Ýçinde insan kaný olan bir kavanoz burada duruyor.\n",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "BEJ",
+            "wear_flags": "AO",
+            "values": "60 'poison' 'weaken' 'curse' ''",
+            "level": "45",
+            "weight": "10",
+            "cost": "300",
+            "condition": "P"
+        },
+        {
+            "vnum": "8122",
+            "name": "miðfer hayalet",
+            "short_description": "Hayalet Miðferi",
+            "description": "Tepesinde birþey oyulmuþ olan dev bir miðfer yerde duruyor...",
+            "material": "adamantite",
+            "type": "armor",
+            "extra_flags": "ACY",
+            "wear_flags": "AE",
+            "values": "39 39 39 37 30",
+            "level": "57",
+            "weight": "20",
+            "cost": "99000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "3",
+                    "modifier": "2"
+                },
+                {
+                    "location": "13",
+                    "modifier": "50"
+                },
+                {
+                    "location": "18",
+                    "modifier": "5"
+                },
+                {
+                    "location": "19",
+                    "modifier": "5"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-5"
+                }
+            ]
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "8100",
+            "name": "Tozlu bir Patika",
+            "description": "Ýlerideki þehre doðru giden tozlu bir patikadasýn. Ýðrenç bir koku\nfarkediyorsun. Önünde bir levha gördün.\n",
+            "flags": "4",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8101"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "9584"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "levha",
+                    "description": "H A Y A L E T  Þ E H R E  H O Þ G E L D Ý N !\nBu bölge Randalin tarafýndan Türkçeleþtirilmiþtir.\n                                Nüfus : 0\n\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8101",
+            "name": "Þehir",
+            "description": "En lanetli hortlaklarýn ve muhafýzlarýn doldurduðu söylenen Hayalet Þehire\nulaþtýn. Devam etmeli misin? Bir daha evine dönemeyebilirsin! Ya da baþka\nkaçýþlar arayabilirsin... Senin seçimin!\n",
+            "flags": "4",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8102"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8100"
+                }
+            ]
+        },
+        {
+            "vnum": "8102",
+            "name": "Ana Cadde",
+            "description": "Bu caddeye adým attýðýnda, tamamiyle bir korku ve dehþet dalgasýnýn içinden\ngeçtiðini hissediyorsun. Titreyerek, Tanrýlar tarafýndan yasaklanmýþ bu\nbölgeye girmek için kendini toparlýyorsun. Caddenin saðýnda ve solunda evler\nsýralanmýþ. Ýlerde küçük bir þehir meydaný var..\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8106"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8104"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8103"
+                }
+            ]
+        },
+        {
+            "vnum": "8103",
+            "name": "Harabe Bir Ev",
+            "description": "Bu evin içi buram buram ölüm kokuyor. Buranýn eski sakinlerinin kaderi\nduvarlara sürünmüþ, kurumuþ kan ve yerlerdeki kemiklerden açýkça belli\noluyor. Þimdiki sakinleri ise kolay öldürülebilen cinsten olmayabilirler...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8102"
+                }
+            ]
+        },
+        {
+            "vnum": "8104",
+            "name": "Harabe Bir Ev",
+            "description": "Bu evin içi buram buram ölüm kokuyor. Buranýn eski sakinlerinin kaderi\nduvarlara sürünmüþ, kurumuþ kan ve yerlerdeki kemiklerden açýkça belli\noluyor. Þimdiki sakinleri ise kolay öldürülebilen cinsten olmayabilirler...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8102"
+                }
+            ]
+        },
+        {
+            "vnum": "8105",
+            "name": "Þehir Meydaný",
+            "description": "Þehir Meydaný'na geldin. Artýk dümdüz, ýssýz, kavrulmuþ ve harap edilmiþ bu\nmeydandan çýkan birkaç yöne doðru devam edebilirsin. Ya da aþaðý doðru uzanan\nsokaklara gidebilirsin. Meydanýn tam ortasýnda bir havuz var.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8108"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8106"
+                }
+            ]
+        },
+        {
+            "vnum": "8106",
+            "name": "Þehir Meydaný",
+            "description": "Þehir Meydaný'na geldin. Artýk dümdüz, ýssýz, kavrulmuþ ve harap edilmiþ bu\nmeydandan çýkan birkaç yöne doðru devam edebilirsin. Ya da aþaðý doðru uzanan\nsokaklara gidebilirsin. Meydanýn tam ortasýnda bir havuz var.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8109"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8107"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8102"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8105"
+                }
+            ]
+        },
+        {
+            "vnum": "8107",
+            "name": "Þehir Meydaný",
+            "description": "Þehir Meydaný'na geldin. Artýk dümdüz, ýssýz, kavrulmuþ ve harap edilmiþ bu\nmeydandan çýkan birkaç yöne doðru devam edebilirsin. Ya da aþaðý doðru uzanan\nsokaklara gidebilirsin. Meydanýn tam ortasýnda bir havuz var.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8110"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8106"
+                }
+            ]
+        },
+        {
+            "vnum": "8108",
+            "name": "Þehir Meydaný",
+            "description": "Þehir Meydaný'na geldin. Artýk dümdüz, ýssýz, kavrulmuþ ve harap edilmiþ bu\nmeydandan çýkan birkaç yöne doðru devam edebilirsin. Ya da aþaðý doðru uzanan\nsokaklara gidebilirsin. Meydanýn tam ortasýnda bir havuz var.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8111"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8109"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8105"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8114"
+                }
+            ]
+        },
+        {
+            "vnum": "8109",
+            "name": "Meydandaki Havuz",
+            "description": "Meydanýn tam ortasýnda, havuzun yanýnda duruyorsun. Her yönde evlerin ve\ndükkanlarýn bulunduðu yollar var. Etrafýnda az miktarda çimen yetiþtiðine\ngöre havuzun içinde hala bir miktar su bulunuyor olmalý.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8112"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8110"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8106"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8108"
+                }
+            ]
+        },
+        {
+            "vnum": "8110",
+            "name": "Þehir Meydaný",
+            "description": "Þehir Meydaný'na geldin. Artýk dümdüz, ýssýz, kavrulmuþ ve harap edilmiþ bu\nmeydandan çýkan birkaç yöne doðru devam edebilirsin. Ya da aþaðý doðru uzanan\nsokaklara gidebilirsin. Meydanýn tam ortasýnda bir havuz var.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8113"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8124"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8107"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8109"
+                }
+            ]
+        },
+        {
+            "vnum": "8111",
+            "name": "Þehir Meydaný",
+            "description": "Þehir Meydaný'na geldin. Artýk dümdüz, ýssýz, kavrulmuþ ve harap edilmiþ bu\nmeydandan çýkan birkaç yöne doðru devam edebilirsin. Ya da aþaðý doðru uzanan\nsokaklara gidebilirsin. Meydanýn tam ortasýnda bir havuz var.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8112"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8108"
+                }
+            ]
+        },
+        {
+            "vnum": "8112",
+            "name": "Þehir Meydaný",
+            "description": "Þehir Meydaný'na geldin. Artýk dümdüz, ýssýz, kavrulmuþ ve harap edilmiþ bu\nmeydandan çýkan birkaç yöne doðru devam edebilirsin. Ya da aþaðý doðru uzanan\nsokaklara gidebilirsin. Meydanýn tam ortasýnda bir havuz var.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8134"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8113"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8109"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8111"
+                }
+            ]
+        },
+        {
+            "vnum": "8113",
+            "name": "Þehir Meydaný",
+            "description": "Þehir Meydaný'na geldin. Artýk dümdüz, ýssýz, kavrulmuþ ve harap edilmiþ bu\nmeydandan çýkan birkaç yöne doðru devam edebilirsin. Ya da aþaðý doðru uzanan\nsokaklara gidebilirsin. Meydanýn tam ortasýnda bir havuz var.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8110"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8112"
+                }
+            ]
+        },
+        {
+            "vnum": "8114",
+            "name": "Bir Ara sokak",
+            "description": "Meydanýn batýsýndaki bir ara sokaktasýn. Kuzeye ve güneye doðru evler\nuzanýyor.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8115"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8108"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8116"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8117"
+                }
+            ]
+        },
+        {
+            "vnum": "8115",
+            "name": "Harabe Bir Ev",
+            "description": "Bu evin içi buram buram ölüm kokuyor. Buranýn eski sakinlerinin kaderi\nduvarlara sürünmüþ, kurumuþ kan ve yerlerdeki kemiklerden açýkça belli\noluyor. Þimdiki sakinleri ise kolay öldürülebilen cinsten olmayabilirler...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8114"
+                }
+            ]
+        },
+        {
+            "vnum": "8116",
+            "name": "Harabe Bir Ev",
+            "description": "Bu evin içi buram buram ölüm kokuyor. Buranýn eski sakinlerinin kaderi\nduvarlara sürünmüþ, kurumuþ kan ve yerlerdeki kemiklerden açýkça belli\noluyor. Þimdiki sakinleri ise kolay öldürülebilen cinsten olmayabilirler...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8114"
+                }
+            ]
+        },
+        {
+            "vnum": "8117",
+            "name": "Bir Ara sokak",
+            "description": "Meydanýn batýsýndaki bir ara sokaktasýn. Kuzeye ve güneye doðru evler\nuzanýyor.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8118"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8114"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8119"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8120"
+                }
+            ]
+        },
+        {
+            "vnum": "8118",
+            "name": "Harabe Bir Ev",
+            "description": "Bu evin içi buram buram ölüm kokuyor. Buranýn eski sakinlerinin kaderi\nduvarlara sürünmüþ, kurumuþ kan ve yerlerdeki kemiklerden açýkça belli\noluyor. Þimdiki sakinleri ise kolay öldürülebilen cinsten olmayabilirler...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8117"
+                }
+            ]
+        },
+        {
+            "vnum": "8119",
+            "name": "Harabe Bir Ev",
+            "description": "Bu evin içi buram buram ölüm kokuyor. Buranýn eski sakinlerinin kaderi\nduvarlara sürünmüþ, kurumuþ kan ve yerlerdeki kemiklerden açýkça belli\noluyor. Þimdiki sakinleri ise kolay öldürülebilen cinsten olmayabilirler...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8117"
+                }
+            ]
+        },
+        {
+            "vnum": "8120",
+            "name": "Bir Ara sokak",
+            "description": "Meydanýn batýsýndaki bir ara sokaktasýn. Kuzeye ve güneye doðru evler\nuzanýyor.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8121"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8117"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8122"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8123"
+                }
+            ]
+        },
+        {
+            "vnum": "8121",
+            "name": "Harabe Bir Ev",
+            "description": "Bu evin içi buram buram ölüm kokuyor. Buranýn eski sakinlerinin kaderi\nduvarlara sürünmüþ, kurumuþ kan ve yerlerdeki kemiklerden açýkça belli\noluyor. Þimdiki sakinleri ise kolay öldürülebilen cinsten olmayabilirler...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8120"
+                }
+            ]
+        },
+        {
+            "vnum": "8122",
+            "name": "Harabe Bir Ev",
+            "description": "Bu evin içi buram buram ölüm kokuyor. Buranýn eski sakinlerinin kaderi\nduvarlara sürünmüþ, kurumuþ kan ve yerlerdeki kemiklerden açýkça belli\noluyor. Þimdiki sakinleri ise kolay öldürülebilen cinsten olmayabilirler...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8120"
+                }
+            ]
+        },
+        {
+            "vnum": "8123",
+            "name": "Harabe Bir Ev",
+            "description": "Bu evin içi buram buram ölüm kokuyor. Buranýn eski sakinlerinin kaderi\nduvarlara sürünmüþ, kurumuþ kan ve yerlerdeki kemiklerden açýkça belli\noluyor. Þimdiki sakinleri ise kolay öldürülebilen cinsten olmayabilirler...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8120"
+                }
+            ]
+        },
+        {
+            "vnum": "8124",
+            "name": "Bir Ara sokak",
+            "description": "Meydanýn doðusundaki bir ara sokaktasýn. Kuzeye ve güneye doðru evler\nuzanýyor.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8125"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8127"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8126"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8110"
+                }
+            ]
+        },
+        {
+            "vnum": "8125",
+            "name": "Harabe Bir Ev",
+            "description": "Bu evin içi buram buram ölüm kokuyor. Buranýn eski sakinlerinin kaderi\nduvarlara sürünmüþ, kurumuþ kan ve yerlerdeki kemiklerden açýkça belli\noluyor. Þimdiki sakinleri ise kolay öldürülebilen cinsten olmayabilirler...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8124"
+                }
+            ]
+        },
+        {
+            "vnum": "8126",
+            "name": "Harabe Bir Ev",
+            "description": "Bu evin içi buram buram ölüm kokuyor. Buranýn eski sakinlerinin kaderi\nduvarlara sürünmüþ, kurumuþ kan ve yerlerdeki kemiklerden açýkça belli\noluyor. Þimdiki sakinleri ise kolay öldürülebilen cinsten olmayabilirler...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8124"
+                }
+            ]
+        },
+        {
+            "vnum": "8127",
+            "name": "Bir Ara sokak",
+            "description": "Meydanýn doðusundaki bir ara sokaktasýn. Kuzeye ve güneye doðru evler\nuzanýyor.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8128"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8130"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8129"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8124"
+                }
+            ]
+        },
+        {
+            "vnum": "8128",
+            "name": "Harabe Bir Ev",
+            "description": "Bu evin içi buram buram ölüm kokuyor. Buranýn eski sakinlerinin kaderi\nduvarlara sürünmüþ, kurumuþ kan ve yerlerdeki kemiklerden açýkça belli\noluyor. Þimdiki sakinleri ise kolay öldürülebilen cinsten olmayabilirler...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8127"
+                }
+            ]
+        },
+        {
+            "vnum": "8129",
+            "name": "Harabe Bir Ev",
+            "description": "Bu evin içi buram buram ölüm kokuyor. Buranýn eski sakinlerinin kaderi\nduvarlara sürünmüþ, kurumuþ kan ve yerlerdeki kemiklerden açýkça belli\noluyor. Þimdiki sakinleri ise kolay öldürülebilen cinsten olmayabilirler...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8127"
+                }
+            ]
+        },
+        {
+            "vnum": "8130",
+            "name": "Bir Ara sokak",
+            "description": "Meydanýn doðusundaki bir ara sokaðýn sonundasýn. Kuzeye,doðuya ve güneye doðru\nevler uzanýyor.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8131"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8133"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8132"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8127"
+                }
+            ]
+        },
+        {
+            "vnum": "8131",
+            "name": "Harabe Bir Ev",
+            "description": "Bu evin içi buram buram ölüm kokuyor. Buranýn eski sakinlerinin kaderi\nduvarlara sürünmüþ, kurumuþ kan ve yerlerdeki kemiklerden açýkça belli\noluyor. Þimdiki sakinleri ise kolay öldürülebilen cinsten olmayabilirler...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8130"
+                }
+            ]
+        },
+        {
+            "vnum": "8132",
+            "name": "Harabe Bir Ev",
+            "description": "Bu evin içi buram buram ölüm kokuyor. Buranýn eski sakinlerinin kaderi\nduvarlara sürünmüþ, kurumuþ kan ve yerlerdeki kemiklerden açýkça belli\noluyor. Þimdiki sakinleri ise kolay öldürülebilen cinsten olmayabilirler...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8130"
+                }
+            ]
+        },
+        {
+            "vnum": "8133",
+            "name": "Harabe Bir Ev",
+            "description": "Bu evin içi buram buram ölüm kokuyor. Buranýn eski sakinlerinin kaderi\nduvarlara sürünmüþ, kurumuþ kan ve yerlerdeki kemiklerden açýkça belli\noluyor. Þimdiki sakinleri ise kolay öldürülebilen cinsten olmayabilirler...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8130"
+                }
+            ]
+        },
+        {
+            "vnum": "8134",
+            "name": "Ana Cadde",
+            "description": "Güneye doðu Þehir Meydaný, kuzeyde ise bir kesiþmenin bulunduðu\nAna Caddedesin. Evler caddenin iki yanýnda sýralanmýþ.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8137"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8136"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8112"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8135"
+                }
+            ]
+        },
+        {
+            "vnum": "8135",
+            "name": "Harabe Bir Ev",
+            "description": "Bu evin içi buram buram ölüm kokuyor. Buranýn eski sakinlerinin kaderi\nduvarlara sürünmüþ, kurumuþ kan ve yerlerdeki kemiklerden açýkça belli\noluyor. Þimdiki sakinleri ise kolay öldürülebilen cinsten olmayabilirler...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8134"
+                }
+            ]
+        },
+        {
+            "vnum": "8136",
+            "name": "Harabe Bir Ev",
+            "description": "Bu evin içi buram buram ölüm kokuyor. Buranýn eski sakinlerinin kaderi\nduvarlara sürünmüþ, kurumuþ kan ve yerlerdeki kemiklerden açýkça belli\noluyor. Þimdiki sakinleri ise kolay öldürülebilen cinsten olmayabilirler...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8134"
+                }
+            ]
+        },
+        {
+            "vnum": "8137",
+            "name": "Bir kesiþme",
+            "description": "Evlerden yoksun bir yol kesiþmesinde duruyorsun. Buranýn kuzey batýsýnda\nbir park, batýda ise eski belediye baþkanýnýn yerleþim yeri duruyor. Kuzeye\ndoðru giden patikanýn nereye vardýðýndan emin deðilsin çünkü o bölge kara\nbir sisle örtülmüþ...\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8155"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8134"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8138"
+                }
+            ]
+        },
+        {
+            "vnum": "8138",
+            "name": "Belediye Baþkaný'nýn Evi'ne Giden Yol",
+            "description": "Bu yol bir zamanlar bakýmlý ve güzeldi. Þimdi ise yýkýntýlarla dolu ve\nözenle dizilmiþ kaldýrým taþlarýnýn arasýnda gri pis otlarýn türediði\nlanetli bir yer haline gelmiþ. Batýda ve doðuda kavþaklar var.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8137"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8139"
+                }
+            ]
+        },
+        {
+            "vnum": "8139",
+            "name": "Bir Kavþak",
+            "description": "Bu noktada, pislik patikasý kuzeye, bir zamanlar kýtadaki en güzel\nçiçeklerin bulunduðu, oldukça kasvetli görünen bir bahçeye doðru devam\nediyor. Ama artýk burasý uðursuz aðaçlar ve patika boyunca türemiþ gri\nyabani otlarýn evi olmuþ.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8171"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8138"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8140"
+                }
+            ]
+        },
+        {
+            "vnum": "8140",
+            "name": "Belediye Baþkaný'nýn Evi'nin Dýþý",
+            "description": "Yol, bir zamanlar Belediye Baþkaný'nýn evi olan yýpranmýþ bir konaðýn önünde\nsona eriyor. Hortlaklerin baskýnýndan bu yana, oldukça bakýmsýzlaþmasýna\nraðmen, diðer konutlarla karþýlaþtýrdýðýnda durumu senin içine burada önemli\nbir kiþi (ya da þeyin) hala yaþadýðý þüphesini düþürüyor.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8139"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8141"
+                }
+            ]
+        },
+        {
+            "vnum": "8141",
+            "name": "Koridor",
+            "description": "Duvarlarýnda gözden düþmüþ, berbat görünüþlü bir ailenin tablolarýnýn\nbulunduðu, loþ ýþýklý bir koridora geldin. Batýda bir sonraki kata giden\nyamuk bir merdiven yolu bulunuyor. Kuzey ve güneye doðru ise kapýlar var.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8143"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8140"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8142"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8144"
+                }
+            ]
+        },
+        {
+            "vnum": "8142",
+            "name": "Baþkan'ýn Konaðýndaki Bir Oda",
+            "description": "Bu oda buram buram leþ kokuyor, nedeni etraftaki cesetler olmalý. Bütün\nduvarlara kan sürülmüþ ve berbat görünüþlü bir sarmaþýk pencerelerin kýrýk\ncamlarýnýn arasýna sarýlmýþ. Kusmamak için aðzýný kapatýyorsun.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8141"
+                }
+            ]
+        },
+        {
+            "vnum": "8143",
+            "name": "Baþkan'ýn Konaðýndaki Bir Oda",
+            "description": "Bu oda buram buram leþ kokuyor, nedeni etraftaki cesetler olmalý. Bütün\nduvarlara kan sürülmüþ ve berbat görünüþlü bir sarmaþýk pencerelerin kýrýk\ncamlarýnýn arasýna sarýlmýþ. Kusmamak için aðzýný kapatýyorsun.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8141"
+                }
+            ]
+        },
+        {
+            "vnum": "8144",
+            "name": "Koridor",
+            "description": "Duvarlarýnda gözden düþmüþ, berbat görünüþlü bir ailenin tablolarýnýn\nbulunduðu, loþ ýþýklý bir koridora geldin. Batýda bir sonraki kata giden\nyamuk bir merdiven yolu bulunuyor. Kuzey ve güneye doðru ise kapýlar var.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8146"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "8141"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8145"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8147"
+                }
+            ]
+        },
+        {
+            "vnum": "8145",
+            "name": "Baþkan'ýn Konaðýndaki Bir Oda",
+            "description": "Bu oda buram buram leþ kokuyor, nedeni etraftaki cesetler olmalý. Bütün\nduvarlara kan sürülmüþ ve berbat görünüþlü bir sarmaþýk pencerelerin kýrýk\ncamlarýnýn arasýna sarýlmýþ. Kusmamak için aðzýný kapatýyorsun.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8144"
+                }
+            ]
+        },
+        {
+            "vnum": "8146",
+            "name": "Baþkan'ýn Konaðýndaki Bir Oda",
+            "description": "Bu oda buram buram leþ kokuyor, nedeni etraftaki cesetler olmalý. Bütün\nduvarlara kan sürülmüþ ve berbat görünüþlü bir sarmaþýk pencerelerin kýrýk\ncamlarýnýn arasýna sarýlmýþ. Kusmamak için aðzýný kapatýyorsun.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8144"
+                }
+            ]
+        },
+        {
+            "vnum": "8147",
+            "name": "Merdivenler",
+            "description": "Bu eðri büðrü merdivenler oldukça dengesiz görünüyor ve bununla beraber üst\nkattan gelen dehþet verici koku, devam etme konusunda cesaretini kýrýyor...\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8144"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8148"
+                }
+            ]
+        },
+        {
+            "vnum": "8148",
+            "name": "Merdivenler",
+            "description": "Merdivenlerin tepesinde, nefesini tutmak için duruyorsun ve iðrenç kokulu\nhava ciðerlerine doluyor. Öksürerek nefes almak için mücadele ediyorsun ve\ndevam etmek için kendini zorluyorsun.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8149"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8147"
+                }
+            ]
+        },
+        {
+            "vnum": "8149",
+            "name": "Koridor",
+            "description": "Duvarlarýnda gözden düþmüþ, berbat görünüþlü bir ailenin tablolarýnýn\nbulunduðu, loþ ýþýklý bir koridora geldin. Kuzey ve güneye doðru kapýlar\nvar. Koridor doðuda göz alýcý bir giriþ kapýsýyla bitiyor.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8150"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8152"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8151"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8148"
+                }
+            ]
+        },
+        {
+            "vnum": "8150",
+            "name": "Baþkan'ýn Konaðýndaki Bir Oda",
+            "description": "Bu oda buram buram leþ kokuyor, muhtemelen etrafta yatan çürüyen cesetlerden dolayý..\nBütün duvarlara kan sürülmüþ ve berbat görünüþlü bir sarmaþýk pencerelerin kýrýk\ncamlarýnýn arasýna sarýlmýþ. Kusmamak için aðzýný kapatýyorsun.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8149"
+                }
+            ]
+        },
+        {
+            "vnum": "8151",
+            "name": "Baþkan'ýn Konaðýndaki Bir Oda",
+            "description": "Bu oda buram buram leþ kokuyor, nedeni etraftaki cesetler olmalý. Bütün\nduvarlara kan sürülmüþ ve berbat görünüþlü bir sarmaþýk pencerelerin kýrýk\ncamlarýnýn arasýna sarýlmýþ. Kusmamak için aðzýný kapatýyorsun.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8149"
+                }
+            ]
+        },
+        {
+            "vnum": "8152",
+            "name": "Baþkan'ýn çalýþma odasý",
+            "description": "Bu odaya girdiðin anda, etrafta koku olmamasýna oldukça þaþýrýyorsun. Bunun\nyanýnda diðer odalardan farklý olarak, bu çalýþma odasýnýn durumunun iyiliði\nde seni þaþýrtýyor. Üzerinde antik yazýlar bulunan raflarla çevrili rahat\nbir mekan burasý. Geniþ meþeden yapýlmýþ bir masa odayý dolduruyor ve onun\narkasýnda da rahat, deri bir koltuk var. Burasý kimin yeri olabilir acaba?\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8153"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8154"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8149"
+                }
+            ]
+        },
+        {
+            "vnum": "8153",
+            "name": "Bir Yatakodasý",
+            "description": "Bu odada süslüce oyulmuþ, üzerinde saten örtüler bulunan geniþ bir yatak\nvar. Onun karþýsýnda ise buranýn efendisinin bakirelerinin yaslandýðý rahat\nbir divan duruyor. Duvardaki bir tablo dikkatini çekiyor.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8152"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "tablo",
+                    "description": "Bu yakýþýklý ama þeytani görünen Kont Philippe Gaspar duGascoigne'in\nortayaþlardaki halini resmediyor.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8154",
+            "name": "Bir Yatakodasý",
+            "description": "Kuzeydeki kopyasý ne kadar güzel, rahat ve cömertçe yapýlmýþsa, bu yatak\nodasý da o kadar yýkýk dökük ve kokulu. Duvarlara kan bulanmýþ ve ortadaki\navizeden iple bir ceset sarkýtýlmýþ. Burada her kim yaþýyorsa kabul edilemez\nbir kiþilikte olmalý...\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8152"
+                }
+            ]
+        },
+        {
+            "vnum": "8155",
+            "name": "Karanlýk Sis",
+            "description": "Yolu aniden kaplayan kalýn bir sis tabakasýnýn içinden geçiyorsun.\nAyaklarýný ancak görebiliyorsun. Uðulamalar, çýðlýklar, öfke dolu\nhaykýrýþlar ve dehþet her yönden yaklaþýyor ve kalbini saran korkuyu\nhissedebiliyorsun.\n",
+            "flags": "1|8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8156"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8137"
+                }
+            ]
+        },
+        {
+            "vnum": "8156",
+            "name": "Karanlýk Sis",
+            "description": "Yolu aniden kaplayan kalýn bir sis tabakasýnýn içinden geçiyorsun.\nAyaklarýný ancak görebiliyorsun. Uðulamalar, çýðlýklar, öfke dolu\nhaykýrýþlar ve dehþet her yönden yaklaþýyor ve kalbini saran korkuyu\nhissedebiliyorsun.\n",
+            "flags": "1|8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8159"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8157"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8155"
+                }
+            ]
+        },
+        {
+            "vnum": "8157",
+            "name": "Küçük bir ev",
+            "description": "Sis aniden kayboluyor ve kendini küçük taþ bir binanýn dýþýnda dururken\nbuluyorsun. Pencereleri yok ama kalýn, meþeden bir kapý doðusunda duruyor.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8156"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8158"
+                }
+            ]
+        },
+        {
+            "vnum": "8158",
+            "name": "Bir Ýblisin geçici konutu",
+            "description": "O HAYIR!\nYanlýþlýkla ORCUS'un Birincil Maddesel Düzlem'deki geçici mabedine düþtün!\nEðer burada deðilse hemen KAÇ! Eðer buradaysa...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8157"
+                }
+            ]
+        },
+        {
+            "vnum": "8159",
+            "name": "Karanlýk Sis",
+            "description": "Yolu aniden kaplayan kalýn bir sis tabakasýnýn içinden geçiyorsun.\nAyaklarýný ancak görebiliyorsun. Uðulamalar, çýðlýklar, öfke dolu\nhaykýrýþlar ve dehþet her yönden yaklaþýyor ve kalbini saran korkuyu\nhissedebiliyorsun.\n",
+            "flags": "1|8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8163"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8160"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8156"
+                }
+            ]
+        },
+        {
+            "vnum": "8160",
+            "name": "Açýklýk bir alan",
+            "description": "Sisten yoksun, doðuda bir kapýsý olan , harabe bir kulubenin ön bahçesini\noluþturan açýklýk bir alandasýn. Pencerelere baktýðýnda hayal meyal bazý\nþekillerin kýpýrdadýðýný görüyorsun.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8161"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8159"
+                }
+            ]
+        },
+        {
+            "vnum": "8161",
+            "name": "Kulübe'nin Ýçi",
+            "description": "Bu kulübe de týpký diðer konutlar gibi yýkýntýdan ibaret. Yerleri kýrýlmýþ\nmobilyalar ve çürüyen cesetler doldurmuþ. Doðuya doðru, aþaðýya inen bir\nmerdiven görüyorsun.\n",
+            "flags": "1|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8162"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8160"
+                }
+            ]
+        },
+        {
+            "vnum": "8162",
+            "name": "Merdivenler",
+            "description": "Bu merdivenler, kasabadaki diðer yapýlardan daha eski görünüyor ve antik\ntaþlardan yapýlmýþlar. Aþaðýda ne olduðunu görmek için dikkatle bakýyorsun\nama gördüðün tek þey karanlýk...\n",
+            "flags": "1|4|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8161"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "8163",
+            "name": "Karanlýk Sis",
+            "description": "Yolu aniden kaplayan kalýn bir sis tabakasýnýn içinden geçiyorsun.\nAyaklarýný ancak görebiliyorsun. Uðulamalar, çýðlýklar, öfke dolu\nhaykýrýþlar ve dehþet her yönden yaklaþýyor ve kalbini saran korkuyu\nhissedebiliyorsun.\n",
+            "flags": "1|8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8164"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8159"
+                }
+            ]
+        },
+        {
+            "vnum": "8164",
+            "name": "Karanlýk Sis",
+            "description": "Yolu aniden kaplayan kalýn bir sis tabakasýnýn içinden geçiyorsun.\nAyaklarýný ancak görebiliyorsun. Uðulamalar, çýðlýklar, öfke dolu\nhaykýrýþlar ve dehþet her yönden yaklaþýyor ve kalbini saran korkuyu\nhissedebiliyorsun. Doðuya doðru taþ bir binayý seçer gibisin...\n",
+            "flags": "1|8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8195"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8165"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8163"
+                }
+            ]
+        },
+        {
+            "vnum": "8165",
+            "name": "Türbenin Dýþý",
+            "description": "Bu küçük taþ yapý, muhtemelen bir türbe. Oldukça iyi durumda olmasý,\nbu hortlak kentin yeni sakinlerini düþününce seni þaþýrtmýyor. Geniþ,\ndemir bir kapý doðuda, ve yüzeyinde gümüþ rünler olduðunu görüyorsun.\n",
+            "flags": "4|8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8166"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8164"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "rünler kapý",
+                    "description": "Kapýdaki rünlerde þöyle yazýyor:-\n\n  \"Burasý Palem Baronluðu'nun eski tiraný Þeytani Baron Shereck ve\n   O'nun iki kardeþinin ebedi uyku mekanýdýr. Anon'un Baþbüyücüsü\n   Xanad'ýn kudretli büyüsünün hapsinde, Baron'un hortlak müttefikleri\n   bu uykuyu bozamazlar. Dua et! Bunu her kim okuyorsa! Bu kapýyý\n   çiðneme! Eðer yaparsan onlarýn hortlak çýlgýnlýðýný dünyaya tekrar\n   salýverirsin!\"\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8166",
+            "name": "Türbenin Ýçi",
+            "description": "Türbe'nin içi karanlýk, rutubetli ve sýkýþýk. Asýrlardýr buraya kimse\ngelmemiþ gibi görünüyor. Bileðin derinliðinde bir toz tabakasý ve\nbileklerinin kalýnlýðýndaki örümcek aðlarý yürümeni zorlaþtýrýyor. Bu\naðlarý ören þeyle karþýlaþmamayý umuyorsun.\n",
+            "flags": "1|128|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8165"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8167"
+                }
+            ]
+        },
+        {
+            "vnum": "8167",
+            "name": "Türbe",
+            "description": "Üç kapý ve bir merdiven buradan kaçýþý saðlýyor. Duvarlardaki resimler ve\ntavandaki çerçevelere asýlmýþ çürüyen cesetler, sende bu kaçýþlarý kullanma\nisteði uyandýrýyor.\n",
+            "flags": "1|128|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8168"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8170"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8169"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8166"
+                }
+            ]
+        },
+        {
+            "vnum": "8168",
+            "name": "Türbedeki Bir Oda",
+            "description": "Türbenin ana çemberindeki bu üç inziva yeri hemen hemen ayný. Kapaðýnda\nsahibinin görünüþünün kabartma halinde resmedildiði taþtan tabutlar var.\nBunun dýþýnda mekan oldukça yalýn, ya da?\n",
+            "flags": "1|128|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8167"
+                }
+            ]
+        },
+        {
+            "vnum": "8169",
+            "name": "Türbedeki Bir Oda",
+            "description": "Türbenin ana çemberindeki bu üç inziva yeri hemen hemen ayný. Kapaðýnda\nsahibinin görünüþünün kabartma halinde resmedildiði taþtan tabutlar var.\nBunun dýþýnda mekan oldukça yalýn, ya da?\n",
+            "flags": "1|128|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8167"
+                }
+            ]
+        },
+        {
+            "vnum": "8170",
+            "name": "Türbedeki Bir Oda",
+            "description": "Türbenin ana çemberindeki bu üç inziva yeri hemen hemen ayný. Kapaðýnda\nsahibinin görünüþünün kabartma halinde resmedildiði taþtan tabutlar var.\nBunun dýþýnda mekan oldukça yalýn, ya da?\n",
+            "flags": "1|128|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8167"
+                }
+            ]
+        },
+        {
+            "vnum": "8171",
+            "name": "Bahçeye giden patika",
+            "description": "Patikanýn içi çirkin ve ölü görünen bitkilerle dolu. Sanki onlarýn yaþamý\nyanlarýnda duran diþe benzeyen dikenleriyle daha canlý gözüken baþka\nbitkiler tarafýndan emilmiþ gibi görünüyor...\n",
+            "flags": "8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8172"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8139"
+                }
+            ]
+        },
+        {
+            "vnum": "8172",
+            "name": "Bahçeye giden patika",
+            "description": "Patikanýn içi çirkin ve ölü görünen bitkilerle dolu. Sanki onlarýn yaþamý\nyanlarýnda duran diþe benzeyen dikenleriyle daha canlý gözüken baþka\nbitkiler tarafýndan emilmiþ gibi görünüyor. Ve aniden küfrederek, patikanýn\nortasýna açýlmýþ ve dallarla örtülmüþ küçük bir deliðe düþüyorsun.\n",
+            "flags": "4|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8173"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8171"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8174"
+                }
+            ]
+        },
+        {
+            "vnum": "8173",
+            "name": "Bahçeye giden patika",
+            "description": "Patikanýn içi çirkin ve ölü görünen bitkilerle dolu. Sanki onlarýn yaþamý\nyanlarýnda duran diþe benzeyen dikenleriyle daha canlý gözüken baþka\nbitkiler tarafýndan emilmiþ gibi görünüyor. Bahçe kapýlarý tam karþýnda...\nÝçeri gönülsüzce giriyorsun. Burasý gerçek bir labirente benziyor...\n",
+            "flags": "4|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8177"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8172"
+                }
+            ]
+        },
+        {
+            "vnum": "8174",
+            "name": "Bir Kaçýþ Oyuðu",
+            "description": "Burasý þehre getirdiði þeytanlarca korkutulan, Ölüm Büyücüsü Xantharus'un\nkorkakça gizlendiði yer. Kaçmak için herþeyi yapardý ama þu an deliðinden\nçýkmak için fazla þoke olmuþ görünüyor.\n",
+            "flags": "1|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8172"
+                }
+            ]
+        },
+        {
+            "vnum": "8175",
+            "name": "Bahçe",
+            "description": "Kendini dikenli dallar ve hayatlarý kendilerinden çalýnmýþ çürük\naðaçlarýn oluþturduðu bir labirentte kaybolmuþ buluyorsun. Ýyi ki\nulumalar ve çýðlýklar ortamdaki donuk havayý zaman zaman daðýtýyor.\nAksi takdirde etrafýnýn ürkütücülüðünü arttýrmaktan baþka bir iþe\nyaramayan bu donukluk içinde yutulabilirdin.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8180"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8176"
+                }
+            ]
+        },
+        {
+            "vnum": "8176",
+            "name": "Bahçe",
+            "description": "Kendini dikenli dallar ve hayatlarý kendilerinden çalýnmýþ çürük\naðaçlarýn oluþturduðu bir labirentte kaybolmuþ buluyorsun. Ýyi ki\nulumalar ve çýðlýklar ortamdaki donuk havayý zaman zaman daðýtýyor.\nAksi takdirde etrafýnýn ürkütücülüðünü arttýrmaktan baþka bir iþe\nyaramayan bu donukluk içinde yutulabilirdin.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8181"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8177"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8175"
+                }
+            ]
+        },
+        {
+            "vnum": "8177",
+            "name": "Bahçe",
+            "description": "Kendini dikenli dallar ve hayatlarý kendilerinden çalýnmýþ çürük\naðaçlarýn oluþturduðu bir labirentte kaybolmuþ buluyorsun. Ýyi ki\nulumalar ve çýðlýklar ortamdaki donuk havayý zaman zaman daðýtýyor.\nAksi takdirde etrafýnýn ürkütücülüðünü arttýrmaktan baþka bir iþe\nyaramayan bu donukluk içinde yutulabilirdin.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8182"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8178"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8176"
+                }
+            ]
+        },
+        {
+            "vnum": "8178",
+            "name": "Bahçe",
+            "description": "Kendini dikenli dallar ve hayatlarý kendilerinden çalýnmýþ çürük\naðaçlarýn oluþturduðu bir labirentte kaybolmuþ buluyorsun. Ýyi ki\nulumalar ve çýðlýklar ortamdaki donuk havayý zaman zaman daðýtýyor.\nAksi takdirde etrafýnýn ürkütücülüðünü arttýrmaktan baþka bir iþe\nyaramayan bu donukluk içinde yutulabilirdin.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8183"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8179"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8177"
+                }
+            ]
+        },
+        {
+            "vnum": "8179",
+            "name": "Bahçe",
+            "description": "Kendini dikenli dallar ve hayatlarý kendilerinden çalýnmýþ çürük\naðaçlarýn oluþturduðu bir labirentte kaybolmuþ buluyorsun. Ýyi ki\nulumalar ve çýðlýklar ortamdaki donuk havayý zaman zaman daðýtýyor.\nAksi takdirde etrafýnýn ürkütücülüðünü arttýrmaktan baþka bir iþe\nyaramayan bu donukluk içinde yutulabilirdin.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8184"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8178"
+                }
+            ]
+        },
+        {
+            "vnum": "8180",
+            "name": "Bahçe",
+            "description": "Kendini dikenli dallar ve hayatlarý kendilerinden çalýnmýþ çürük\naðaçlarýn oluþturduðu bir labirentte kaybolmuþ buluyorsun. Ýyi ki\nulumalar ve çýðlýklar ortamdaki donuk havayý zaman zaman daðýtýyor.\nAksi takdirde etrafýnýn ürkütücülüðünü arttýrmaktan baþka bir iþe\nyaramayan bu donukluk içinde yutulabilirdin.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8185"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8181"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8175"
+                }
+            ]
+        },
+        {
+            "vnum": "8181",
+            "name": "Bahçe",
+            "description": "Kendini dikenli dallar ve hayatlarý kendilerinden çalýnmýþ çürük\naðaçlarýn oluþturduðu bir labirentte kaybolmuþ buluyorsun. Ýyi ki\nulumalar ve çýðlýklar ortamdaki donuk havayý zaman zaman daðýtýyor.\nAksi takdirde etrafýnýn ürkütücülüðünü arttýrmaktan baþka bir iþe\nyaramayan bu donukluk içinde yutulabilirdin.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8186"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8182"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8176"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8180"
+                }
+            ]
+        },
+        {
+            "vnum": "8182",
+            "name": "Bahçe",
+            "description": "Kendini dikenli dallar ve hayatlarý kendilerinden çalýnmýþ çürük\naðaçlarýn oluþturduðu bir labirentte kaybolmuþ buluyorsun. Ýyi ki\nulumalar ve çýðlýklar ortamdaki donuk havayý zaman zaman daðýtýyor.\nAksi takdirde etrafýnýn ürkütücülüðünü arttýrmaktan baþka bir iþe\nyaramayan bu donukluk içinde yutulabilirdin.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8187"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8183"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8177"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8181"
+                }
+            ]
+        },
+        {
+            "vnum": "8183",
+            "name": "Bahçe",
+            "description": "Kendini dikenli dallar ve hayatlarý kendilerinden çalýnmýþ çürük\naðaçlarýn oluþturduðu bir labirentte kaybolmuþ buluyorsun. Ýyi ki\nulumalar ve çýðlýklar ortamdaki donuk havayý zaman zaman daðýtýyor.\nAksi takdirde etrafýnýn ürkütücülüðünü arttýrmaktan baþka bir iþe\nyaramayan bu donukluk içinde yutulabilirdin.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8188"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8184"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8178"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8182"
+                }
+            ]
+        },
+        {
+            "vnum": "8184",
+            "name": "Bahçe",
+            "description": "Kendini dikenli dallar ve hayatlarý kendilerinden çalýnmýþ çürük\naðaçlarýn oluþturduðu bir labirentte kaybolmuþ buluyorsun. Ýyi ki\nulumalar ve çýðlýklar ortamdaki donuk havayý zaman zaman daðýtýyor.\nAksi takdirde etrafýnýn ürkütücülüðünü arttýrmaktan baþka bir iþe\nyaramayan bu donukluk içinde yutulabilirdin.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8189"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8179"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8183"
+                }
+            ]
+        },
+        {
+            "vnum": "8185",
+            "name": "Bahçe",
+            "description": "Kendini dikenli dallar ve hayatlarý kendilerinden çalýnmýþ çürük\naðaçlarýn oluþturduðu bir labirentte kaybolmuþ buluyorsun. Ýyi ki\nulumalar ve çýðlýklar ortamdaki donuk havayý zaman zaman daðýtýyor.\nAksi takdirde etrafýnýn ürkütücülüðünü arttýrmaktan baþka bir iþe\nyaramayan bu donukluk içinde yutulabilirdin.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8190"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8186"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8180"
+                }
+            ]
+        },
+        {
+            "vnum": "8186",
+            "name": "Bahçe",
+            "description": "Kendini dikenli dallar ve hayatlarý kendilerinden çalýnmýþ çürük\naðaçlarýn oluþturduðu bir labirentte kaybolmuþ buluyorsun. Ýyi ki\nulumalar ve çýðlýklar ortamdaki donuk havayý zaman zaman daðýtýyor.\nAksi takdirde etrafýnýn ürkütücülüðünü arttýrmaktan baþka bir iþe\nyaramayan bu donukluk içinde yutulabilirdin.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8191"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8187"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8181"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8185"
+                }
+            ]
+        },
+        {
+            "vnum": "8187",
+            "name": "Bahçe",
+            "description": "Kendini dikenli dallar ve hayatlarý kendilerinden çalýnmýþ çürük\naðaçlarýn oluþturduðu bir labirentte kaybolmuþ buluyorsun. Ýyi ki\nulumalar ve çýðlýklar ortamdaki donuk havayý zaman zaman daðýtýyor.\nAksi takdirde etrafýnýn ürkütücülüðünü arttýrmaktan baþka bir iþe\nyaramayan bu donukluk içinde yutulabilirdin.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8192"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8188"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8182"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8186"
+                }
+            ]
+        },
+        {
+            "vnum": "8188",
+            "name": "Bahçe",
+            "description": "Kendini dikenli dallar ve hayatlarý kendilerinden çalýnmýþ çürük\naðaçlarýn oluþturduðu bir labirentte kaybolmuþ buluyorsun. Ýyi ki\nulumalar ve çýðlýklar ortamdaki donuk havayý zaman zaman daðýtýyor.\nAksi takdirde etrafýnýn ürkütücülüðünü arttýrmaktan baþka bir iþe\nyaramayan bu donukluk içinde yutulabilirdin.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8193"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8189"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8183"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8187"
+                }
+            ]
+        },
+        {
+            "vnum": "8189",
+            "name": "Bahçe",
+            "description": "Kendini dikenli dallar ve hayatlarý kendilerinden çalýnmýþ çürük\naðaçlarýn oluþturduðu bir labirentte kaybolmuþ buluyorsun. Ýyi ki\nulumalar ve çýðlýklar ortamdaki donuk havayý zaman zaman daðýtýyor.\nAksi takdirde etrafýnýn ürkütücülüðünü arttýrmaktan baþka bir iþe\nyaramayan bu donukluk içinde yutulabilirdin.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8194"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8184"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8188"
+                }
+            ]
+        },
+        {
+            "vnum": "8190",
+            "name": "Bahçe",
+            "description": "Kendini dikenli dallar ve hayatlarý kendilerinden çalýnmýþ çürük\naðaçlarýn oluþturduðu bir labirentte kaybolmuþ buluyorsun. Ýyi ki\nulumalar ve çýðlýklar ortamdaki donuk havayý zaman zaman daðýtýyor.\nAksi takdirde etrafýnýn ürkütücülüðünü arttýrmaktan baþka bir iþe\nyaramayan bu donukluk içinde yutulabilirdin.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8191"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8185"
+                }
+            ]
+        },
+        {
+            "vnum": "8191",
+            "name": "Bahçe",
+            "description": "Kendini dikenli dallar ve hayatlarý kendilerinden çalýnmýþ çürük\naðaçlarýn oluþturduðu bir labirentte kaybolmuþ buluyorsun. Ýyi ki\nulumalar ve çýðlýklar ortamdaki donuk havayý zaman zaman daðýtýyor.\nAksi takdirde etrafýnýn ürkütücülüðünü arttýrmaktan baþka bir iþe\nyaramayan bu donukluk içinde yutulabilirdin.\n\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8192"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8186"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8190"
+                }
+            ]
+        },
+        {
+            "vnum": "8192",
+            "name": "Bahçe",
+            "description": "Aniden aydýnlýk, uzun meþeler ve taze, yeþil çimenlerin doldurduðu bir\nalana geldin. Ýyiliðin güçleri, burada sýkýþan ya da tuzaða düþenler için\nbu karanlýklar diyarýnda ayak basacak bir yer yapmayý baþarmýþ. Huzur içinde\nyatabilirsin, hem de istediðin kadar.\n",
+            "flags": "4|1024",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8193"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8187"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8191"
+                }
+            ]
+        },
+        {
+            "vnum": "8193",
+            "name": "Bahçe",
+            "description": "Kendini dikenli dallar ve hayatlarý kendilerinden çalýnmýþ çürük\naðaçlarýn oluþturduðu bir labirentte kaybolmuþ buluyorsun. Ýyi ki\nulumalar ve çýðlýklar ortamdaki donuk havayý zaman zaman daðýtýyor.\nAksi takdirde etrafýnýn ürkütücülüðünü arttýrmaktan baþka bir iþe\nyaramayan bu donukluk içinde yutulabilirdin.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8194"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8188"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8192"
+                }
+            ]
+        },
+        {
+            "vnum": "8194",
+            "name": "Bahçe",
+            "description": "Kendini dikenli dallar ve hayatlarý kendilerinden çalýnmýþ çürük\naðaçlarýn oluþturduðu bir labirentte kaybolmuþ buluyorsun. Ýyi ki\nulumalar ve çýðlýklar ortamdaki donuk havayý zaman zaman daðýtýyor.\nAksi takdirde etrafýnýn ürkütücülüðünü arttýrmaktan baþka bir iþe\nyaramayan bu donukluk içinde yutulabilirdin.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8189"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8193"
+                }
+            ]
+        },
+        {
+            "vnum": "8195",
+            "name": "Karanlýk Sis",
+            "description": "Yolu aniden kaplayan kalýn bir sis tabakasýnýn içinden geçiyorsun.\nAyaklarýný ancak görebiliyorsun. Uðulamalar, çýðlýklar, öfke dolu\nhaykýrýþlar ve dehþet her yönden yaklaþýyor ve kalbini saran korkuyu\nhissedebiliyorsun. Doðuya doðru taþ bir binayý seçer gibisin. Saðýnda\nzeminden sisin içine doðru uzanan bir delik var.\n",
+            "flags": "1|8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8197"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8164"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8196"
+                }
+            ]
+        },
+        {
+            "vnum": "8196",
+            "name": "Ejderha'nýn Ýni",
+            "description": "Her ejderha türü, canlý ya da hortlak, ayný alýþkanlýklara sahiptir.\nBunlardan biri de inlerini dekore etme þekilleridir. Bu sebepten eðer\ngirdiðinizde etrafa saçýlmýþ dev bir hazine, kan ve kýzarmýþ cesetler\ngörürseniz, en azýndan buranýn onlardan birinin ini olduðundan %90 emin\nolabilirsiniz...\n",
+            "flags": "1|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8195"
+                }
+            ]
+        },
+        {
+            "vnum": "8197",
+            "name": "Karanlýk Sis",
+            "description": "Yolu aniden kaplayan kalýn bir sis tabakasýnýn içinden geçiyorsun.\nAyaklarýný ancak görebiliyorsun. Uðulamalar, çýðlýklar, öfke dolu\nhaykýrýþlar ve dehþet her yönden yaklaþýyor ve kalbini saran korkuyu\nhissedebiliyorsun. Doðuya doðru taþ bir binayý seçer gibisin.\n",
+            "flags": "1|8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8198"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8195"
+                }
+            ]
+        },
+        {
+            "vnum": "8198",
+            "name": "Karanlýk Sis",
+            "description": "Yolu aniden kaplayan kalýn bir sis tabakasýnýn içinden geçiyorsun.\nAyaklarýný ancak görebiliyorsun. Uðulamalar, çýðlýklar, öfke dolu\nhaykýrýþlar ve dehþet her yönden yaklaþýyor ve kalbini saran korkuyu\nhissedebiliyorsun. Doðuya doðru taþ bir binayý seçer gibisin. Emin\ndeðilsin ama ilerde, yukarda karanlýk bir tünel gördüðünü sanýyorsun.\n",
+            "flags": "1|8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8199"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8197"
+                }
+            ]
+        },
+        {
+            "vnum": "8199",
+            "name": "Karanlýk Bir Tünel",
+            "description": "Bu olabilirmi? EVET!! Bir kaçýþ yolu!! Bu tünelden temiz hava ve taze çimen\nkokusu geliyor. Týrmanýp kaçabilsen bile tünel o kadar dar ki tekrar geri\ninebileceðinden þüphelisin. Yine de bu odanýn tanrýlarca kutsanmýþ olduðunu\nhissediyorsun, bu nedenle kaçabileceðinden eminsin...\n",
+            "flags": "1|4",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8198"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "D",
+            "arg1": "8102",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8102",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8103",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8104",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8114",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8114",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8115",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8116",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8117",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8117",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8118",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8119",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8120",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8120",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8120",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8121",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8122",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8123",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8124",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8124",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8125",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8126",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8127",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8127",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8128",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8129",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8130",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8130",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8130",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8131",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8132",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8133",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8134",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8134",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8135",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8136",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8140",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8141",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8141",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8141",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8142",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8143",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8144",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8144",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8145",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8146",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8149",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8149",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8149",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8150",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8151",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8152",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8152",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8152",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8153",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8154",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8157",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8158",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8160",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8161",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8165",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8166",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8167",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8167",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8167",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8168",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8169",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8170",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8103"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8104"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8115"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8116"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8118"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8119"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8121"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8122"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8123"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8125"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8126"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8128"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8129"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8131"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8132"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8133"
+        },
+        {
+            "command": "M",
+            "arg1": "8102",
+            "arg2": "1",
+            "arg3": "8104",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8102",
+            "arg2": "1",
+            "arg3": "8119",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8102",
+            "arg2": "1",
+            "arg3": "8121",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8132",
+            "arg2": "1",
+            "arg3": "8108",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8132",
+            "arg2": "1",
+            "arg3": "8109",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "8132",
+            "arg2": "1",
+            "arg3": "8110",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8108",
+            "arg2": "1",
+            "arg3": "8131",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "8119",
+            "arg2": "0",
+            "arg3": "8131"
+        },
+        {
+            "command": "M",
+            "arg1": "8114",
+            "arg2": "6",
+            "arg3": "8115",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8114",
+            "arg2": "6",
+            "arg3": "8119",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8113",
+            "arg2": "6",
+            "arg3": "8121",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8113",
+            "arg2": "6",
+            "arg3": "8116",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8114",
+            "arg2": "6",
+            "arg3": "8132",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8114",
+            "arg2": "6",
+            "arg3": "8122",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8113",
+            "arg2": "6",
+            "arg3": "8103",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8113",
+            "arg2": "6",
+            "arg3": "8118",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8114",
+            "arg2": "6",
+            "arg3": "8129",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8114",
+            "arg2": "6",
+            "arg3": "8129",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8113",
+            "arg2": "6",
+            "arg3": "8125",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8113",
+            "arg2": "6",
+            "arg3": "8125",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8106",
+            "arg2": "2",
+            "arg3": "8123",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8106",
+            "arg2": "2",
+            "arg3": "8133",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8101",
+            "arg2": "2",
+            "arg3": "8126",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8101",
+            "arg2": "2",
+            "arg3": "8128",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8101",
+            "arg2": "2",
+            "arg3": "8132",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8118",
+            "arg2": "10",
+            "arg3": "8106",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8118",
+            "arg2": "10",
+            "arg3": "8113",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8118",
+            "arg2": "10",
+            "arg3": "8120",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8112",
+            "arg2": "8",
+            "arg3": "8112",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8112",
+            "arg2": "8",
+            "arg3": "8130",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8112",
+            "arg2": "8",
+            "arg3": "8137",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8103",
+            "arg2": "6",
+            "arg3": "8198",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8103",
+            "arg2": "6",
+            "arg3": "8195",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8103",
+            "arg2": "6",
+            "arg3": "8159",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8103",
+            "arg2": "6",
+            "arg3": "8155",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8103",
+            "arg2": "6",
+            "arg3": "8156",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8103",
+            "arg2": "6",
+            "arg3": "8164",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8100",
+            "arg2": "2",
+            "arg3": "8135",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8122",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "8100",
+            "arg2": "2",
+            "arg3": "8136",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8122",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "8130",
+            "arg2": "1",
+            "arg3": "8139",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8103",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "8117",
+            "arg2": "0",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "8128",
+            "arg2": "3",
+            "arg3": "8142",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8128",
+            "arg2": "3",
+            "arg3": "8143",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8128",
+            "arg2": "3",
+            "arg3": "8140",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8129",
+            "arg2": "1",
+            "arg3": "8143",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8127",
+            "arg2": "1",
+            "arg3": "8145",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8112",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "8113",
+            "arg2": "0",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "8114",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "8115",
+            "arg2": "1",
+            "arg3": "8145",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8115",
+            "arg2": "1",
+            "arg3": "8146",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8115",
+            "arg2": "1",
+            "arg3": "8147",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8109",
+            "arg2": "1",
+            "arg3": "8150",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8104",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "8110",
+            "arg2": "1",
+            "arg3": "8151",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8119",
+            "arg2": "1",
+            "arg3": "8152",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8107",
+            "arg2": "0",
+            "arg3": "12"
+        },
+        {
+            "command": "E",
+            "arg1": "8108",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "8110",
+            "arg2": "0",
+            "arg3": "17"
+        },
+        {
+            "command": "G",
+            "arg1": "8120",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "8116",
+            "arg2": "1",
+            "arg3": "8153",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "8115",
+            "arg2": "0",
+            "arg3": "8153"
+        },
+        {
+            "command": "P",
+            "arg1": "8116",
+            "arg2": "0",
+            "arg3": "8115",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "8106",
+            "arg2": "0",
+            "arg3": "8153"
+        },
+        {
+            "command": "P",
+            "arg1": "8105",
+            "arg2": "0",
+            "arg3": "8106",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8105",
+            "arg2": "1",
+            "arg3": "8154",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8101",
+            "arg2": "0",
+            "arg3": "9"
+        },
+        {
+            "command": "E",
+            "arg1": "8102",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "8131",
+            "arg2": "1",
+            "arg3": "8158",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8100",
+            "arg2": "0",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "8123",
+            "arg2": "2",
+            "arg3": "8165",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8133",
+            "arg2": "2",
+            "arg3": "8166",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8123",
+            "arg2": "2",
+            "arg3": "8167",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8104",
+            "arg2": "2",
+            "arg3": "8168",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "8111",
+            "arg2": "0",
+            "arg3": "12"
+        },
+        {
+            "command": "G",
+            "arg1": "8121",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "8104",
+            "arg2": "2",
+            "arg3": "8168",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "8111",
+            "arg2": "0",
+            "arg3": "12"
+        },
+        {
+            "command": "G",
+            "arg1": "8121",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "8134",
+            "arg2": "1",
+            "arg3": "8170",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8111",
+            "arg2": "0",
+            "arg3": "12"
+        },
+        {
+            "command": "G",
+            "arg1": "8121",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "8117",
+            "arg2": "1",
+            "arg3": "8174",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "8118",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "8120",
+            "arg2": "4",
+            "arg3": "8175",
+            "arg4": "4"
+        },
+        {
+            "command": "M",
+            "arg1": "8121",
+            "arg2": "4",
+            "arg3": "8178",
+            "arg4": "4"
+        },
+        {
+            "command": "M",
+            "arg1": "8122",
+            "arg2": "2",
+            "arg3": "8181",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "8124",
+            "arg2": "2",
+            "arg3": "8184",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "8125",
+            "arg2": "8",
+            "arg3": "8187",
+            "arg4": "8"
+        },
+        {
+            "command": "M",
+            "arg1": "8126",
+            "arg2": "1",
+            "arg3": "8192",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8107",
+            "arg2": "1",
+            "arg3": "8190",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8111",
+            "arg2": "1",
+            "arg3": "8196",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "8105",
+            "arg2": "0",
+            "arg3": "8196"
+        },
+        {
+            "command": "R",
+            "arg1": "8175",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8176",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8177",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8178",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8179",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8180",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8181",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8182",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8183",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8184",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8185",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8186",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8187",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8188",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8189",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8190",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8191",
+            "arg2": "4"
+        }
+    ],
+    "olimits": [
+        {
+            "vnum": "8100",
+            "limit": "1"
+        },
+        {
+            "vnum": "8113",
+            "limit": "1"
+        },
+        {
+            "vnum": "8110",
+            "limit": "10"
+        },
+        {
+            "vnum": "8122",
+            "limit": "2"
+        }
+    ],
+    "omprogs": [
+        {
+            "command": "O",
+            "vnum": "8122",
+            "progtype": "wear_prog",
+            "progname": "wear_prog_headguard"
+        },
+        {
+            "command": "O",
+            "vnum": "8122",
+            "progtype": "remove_prog",
+            "progname": "remove_prog_headguard"
+        }
+    ]
+}

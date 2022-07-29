@@ -1,0 +1,4570 @@
+{
+    "area": {
+        "file": "dark2.are",
+        "name": "Dark Continent",
+        "low_range": "5",
+        "high_range": "35",
+        "writer": "Mort",
+        "credits": "Dark Continent",
+        "min_vnum": "14500",
+        "max_vnum": "14599"
+    },
+    "helps": [
+        {
+            "level": "0",
+            "keyword": "DARK CONTINENT",
+            "text": "Created by Mort for 5-35 level players. Converted to ROM 2.4 format by Gapcio.\nEnhanced and balanced by jaceks.Checked and beta tested by Quartz.\nAfter them by Asena.\n"
+        }
+    ],
+    "mobiles": [
+        {
+            "vnum": "14501",
+            "name": "monkey big",
+            "short_description": "the BIG monkey",
+            "long_description": "A BIG monkey looks at you with interest.\n",
+            "description": "This BIG monkey must weigh at least 200 pounds. It is covered with black\nfur and has the ugliest teeth you have ever seen.\n",
+            "race": "human",
+            "act": "AF",
+            "affected_by": "c",
+            "alignment": "-500",
+            "group": "0",
+            "level": "10",
+            "hitroll": "0",
+            "hit_dice": "2d7+121",
+            "mana_dice": "99d1+1",
+            "dam_dice": "2d4+2",
+            "dam_type": "pound",
+            "ac_pierce": "1",
+            "ac_bash": "1",
+            "ac_slash": "1",
+            "ac_exotic": "8",
+            "off_flags": "BKP",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "C",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "female",
+            "wealth": "0",
+            "form": "AB",
+            "parts": "ACBCDH",
+            "size": "large",
+            "material": "0"
+        },
+        {
+            "vnum": "14502",
+            "name": "merchant elf elven",
+            "short_description": "the Elven Merchant",
+            "long_description": "An Elven merchant checks his wares.\n",
+            "description": "This Elf does not appear to be very prosperous. His violet eyes look you\nover as he tries to decide if you are a client or a salesman.\n",
+            "race": "elf",
+            "act": "BG",
+            "affected_by": "J",
+            "alignment": "-1",
+            "group": "0",
+            "level": "12",
+            "hitroll": "0",
+            "hit_dice": "2d10+150",
+            "mana_dice": "119d1+1",
+            "dam_dice": "1d10+3",
+            "dam_type": "pound",
+            "ac_pierce": "0",
+            "ac_bash": "0",
+            "ac_slash": "0",
+            "ac_exotic": "8",
+            "off_flags": "DE",
+            "imm_flags": "0",
+            "res_flags": "B",
+            "vuln_flags": "Z",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "300000",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJ",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "14503",
+            "name": "merchant dwarven",
+            "short_description": "the Dwarven Merchant",
+            "long_description": "The Dwarven Merchant greets you, \"Welcome!\"\n",
+            "description": "This merchant has the Eye of the Tiger. \"Welcome my friend,\" he says.\n",
+            "race": "dwarf",
+            "act": "BG",
+            "affected_by": "J",
+            "alignment": "-1",
+            "group": "0",
+            "level": "12",
+            "hitroll": "0",
+            "hit_dice": "2d10+150",
+            "mana_dice": "119d1+1",
+            "dam_dice": "1d10+3",
+            "dam_type": "pound",
+            "ac_pierce": "0",
+            "ac_bash": "0",
+            "ac_slash": "0",
+            "ac_exotic": "8",
+            "off_flags": "DE",
+            "imm_flags": "0",
+            "res_flags": "LQ",
+            "vuln_flags": "R",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "300000",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJ",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "14504",
+            "name": "merchant halfdwarf",
+            "short_description": "the Halfdwarf Merchant",
+            "long_description": "The Halfdwarf Merchant looks at you.\n",
+            "description": "This man is only four feet tall but has a powerful body.  His arms reach\nalmost to his calves.\n",
+            "race": "human",
+            "act": "AGH",
+            "affected_by": "0",
+            "alignment": "90",
+            "group": "0",
+            "level": "12",
+            "hitroll": "0",
+            "hit_dice": "2d10+150",
+            "mana_dice": "119d1+1",
+            "dam_dice": "1d10+3",
+            "dam_type": "pound",
+            "ac_pierce": "0",
+            "ac_bash": "0",
+            "ac_slash": "0",
+            "ac_exotic": "8",
+            "off_flags": "NU",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "C",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "either",
+            "wealth": "300000",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJ",
+            "size": "small",
+            "material": "0"
+        },
+        {
+            "vnum": "14505",
+            "name": "merchant human",
+            "short_description": "the Human Merchant",
+            "long_description": "A large Human Merchant stands ready to sell you.\n",
+            "description": "Many of the merchants you have seen throughout your life resemble this man.\n",
+            "race": "human",
+            "act": "ACS",
+            "affected_by": "0",
+            "alignment": "-200",
+            "group": "0",
+            "level": "5",
+            "hitroll": "1",
+            "hit_dice": "2d6+60",
+            "mana_dice": "1d1+99",
+            "dam_dice": "1d6+1",
+            "dam_type": "punch",
+            "ac_pierce": "7",
+            "ac_bash": "5",
+            "ac_slash": "5",
+            "ac_exotic": "10",
+            "off_flags": "BJNQ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "C",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "300000",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJ",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "14506",
+            "name": "adventurer madboy",
+            "short_description": "Madboy the Adventurer",
+            "long_description": "Madboy the Adventurer sneers at you.\n",
+            "description": "This adventurer is a largish, oafish, boy with the largest ego you've ever\nseen.  His ego is writing checks his character will never be able to cash.\n",
+            "race": "human",
+            "act": "ACHS",
+            "affected_by": "0",
+            "alignment": "-200",
+            "group": "0",
+            "level": "7",
+            "hitroll": "0",
+            "hit_dice": "2d6+85",
+            "mana_dice": "69d1+1",
+            "dam_dice": "1d8+1",
+            "dam_type": "punch",
+            "ac_pierce": "4",
+            "ac_bash": "4",
+            "ac_slash": "4",
+            "ac_exotic": "9",
+            "off_flags": "BJNQ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "C",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "140",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJ",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "14507",
+            "name": "soldier bearded",
+            "short_description": "the Bearded Soldier",
+            "long_description": "The Bearded Soldier stand alert.\n",
+            "description": "This soldier has an alert look about him.  With his pointed beard and\nsharp sword the security he provides comes mostly from his presence.\n",
+            "race": "human",
+            "act": "ABT",
+            "affected_by": "0",
+            "alignment": "1000",
+            "group": "3000",
+            "level": "15",
+            "hitroll": "3",
+            "hit_dice": "15d15+160",
+            "mana_dice": "1d1+149",
+            "dam_dice": "2d4+4",
+            "dam_type": "stab",
+            "ac_pierce": "0",
+            "ac_bash": "0",
+            "ac_slash": "0",
+            "ac_exotic": "8",
+            "off_flags": "CDELU",
+            "imm_flags": "0",
+            "res_flags": "C",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "2200",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJ",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "14508",
+            "name": "soldier alert",
+            "short_description": "the Alert Soldier",
+            "long_description": "The Alert Soldier glares at you suspiciously.\n",
+            "description": "This soldier greets you with a bared blade. I don't think you'll be\nsneaking up on him.\n",
+            "race": "human",
+            "act": "ABT",
+            "affected_by": "0",
+            "alignment": "1000",
+            "group": "3000",
+            "level": "15",
+            "hitroll": "3",
+            "hit_dice": "15d15+160",
+            "mana_dice": "1d1+149",
+            "dam_dice": "2d4+4",
+            "dam_type": "slash",
+            "ac_pierce": "0",
+            "ac_bash": "0",
+            "ac_slash": "0",
+            "ac_exotic": "8",
+            "off_flags": "CDEKLTU",
+            "imm_flags": "0",
+            "res_flags": "C",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1530",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJ",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "14509",
+            "name": "soldier sleepy",
+            "short_description": "the Sleepy Soldier",
+            "long_description": "This Sleepy Soldier doesn't see you.\n",
+            "description": "Without looking in his eye you have no idea how tough he would be.\n",
+            "race": "human",
+            "act": "ABT",
+            "affected_by": "0",
+            "alignment": "1000",
+            "group": "3000",
+            "level": "17",
+            "hitroll": "0",
+            "hit_dice": "3d9+258",
+            "mana_dice": "169d1+1",
+            "dam_dice": "3d4+4",
+            "dam_type": "pierce",
+            "ac_pierce": "-3",
+            "ac_bash": "-3",
+            "ac_slash": "-3",
+            "ac_exotic": "7",
+            "off_flags": "CDEKLTU",
+            "imm_flags": "0",
+            "res_flags": "C",
+            "vuln_flags": "0",
+            "start_pos": "sleep",
+            "default_pos": "sleep",
+            "sex": "male",
+            "wealth": "2502",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJ",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "14510",
+            "name": "Watcher",
+            "short_description": "the Watcher",
+            "long_description": "The Watcher is looking for evil.\n",
+            "description": "This female Watcher is one of those cultist who protect the rest of the\nworld from those they determine are evil.\n",
+            "race": "human",
+            "act": "ABT",
+            "affected_by": "JN",
+            "alignment": "1000",
+            "group": "3000",
+            "level": "20",
+            "hitroll": "4",
+            "hit_dice": "20d20+200",
+            "mana_dice": "1d1+199",
+            "dam_dice": "2d4+7",
+            "dam_type": "punch",
+            "ac_pierce": "-4",
+            "ac_bash": "-6",
+            "ac_slash": "-6",
+            "ac_exotic": "0",
+            "off_flags": "CDEHKLTU",
+            "imm_flags": "0",
+            "res_flags": "C",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "female",
+            "wealth": "3200",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJ",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "14511",
+            "name": "pig fat",
+            "short_description": "the fat pig",
+            "long_description": "A fat pig is rooting around for food.\n",
+            "description": "This fat pig is very hungry. He eats just about ANYTHING.\n",
+            "race": "pig",
+            "act": "ACGH",
+            "affected_by": "Gb",
+            "alignment": "500",
+            "group": "0",
+            "level": "5",
+            "hitroll": "0",
+            "hit_dice": "2d6+60",
+            "mana_dice": "49d1+1",
+            "dam_dice": "1d6+1",
+            "dam_type": "bite",
+            "ac_pierce": "5",
+            "ac_bash": "5",
+            "ac_slash": "5",
+            "ac_exotic": "9",
+            "off_flags": "BDEI",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "either",
+            "wealth": "35",
+            "form": "ABGV",
+            "parts": "ACDEFJKV",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "14512",
+            "name": "dog",
+            "short_description": "the dog",
+            "long_description": "A dog sits here wagging it's tail.\n",
+            "description": "The dog looks back at you.  After a few moments it sits up..\nputs a cigar in it's mouth, lights it, and asks, \"So..what's up bub?\"\n",
+            "race": "dog",
+            "act": "AB",
+            "affected_by": "F",
+            "alignment": "400",
+            "group": "0",
+            "level": "7",
+            "hitroll": "3",
+            "hit_dice": "6d10+60",
+            "mana_dice": "1d1+149",
+            "dam_dice": "2d4+1",
+            "dam_type": "bite",
+            "ac_pierce": "4",
+            "ac_bash": "4",
+            "ac_slash": "4",
+            "ac_exotic": "8",
+            "off_flags": "CDL",
+            "imm_flags": "0",
+            "res_flags": "C",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "either",
+            "wealth": "0",
+            "form": "0",
+            "parts": "ACDEFHJKUVo",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "14513",
+            "name": "chicken",
+            "short_description": "the chicken",
+            "long_description": "A scrawny chicken is scratching for something.\n",
+            "description": "This chicken is so skinny it WOULDN'T provide enough meat for a soup.\n        ************ IT ESCAPE FROM KFC BAR !!! *************\n",
+            "race": "song bird",
+            "act": "CG",
+            "affected_by": "NOT",
+            "alignment": "0",
+            "group": "0",
+            "level": "35",
+            "hitroll": "0",
+            "hit_dice": "10d10+1300",
+            "mana_dice": "349d1+1",
+            "dam_dice": "4d7+11",
+            "dam_type": "peck",
+            "ac_pierce": "-11",
+            "ac_bash": "-11",
+            "ac_slash": "-11",
+            "ac_exotic": "5",
+            "off_flags": "ADIJ",
+            "imm_flags": "C",
+            "res_flags": "C",
+            "vuln_flags": "GL",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "female",
+            "wealth": "5000",
+            "form": "AW",
+            "parts": "ACDFKP",
+            "size": "small",
+            "material": "0"
+        },
+        {
+            "vnum": "14514",
+            "name": "human man",
+            "short_description": "the Human Man",
+            "long_description": "A Human Man goes about his business.\n",
+            "description": "This guy looks like an advertisement for a wilderness clothing company.\nFrom his buckskins to his fur cap he fits the part.\n",
+            "race": "human",
+            "act": "ACS",
+            "affected_by": "0",
+            "alignment": "-200",
+            "group": "0",
+            "level": "5",
+            "hitroll": "1",
+            "hit_dice": "2d6+60",
+            "mana_dice": "1d1+99",
+            "dam_dice": "1d6+1",
+            "dam_type": "punch",
+            "ac_pierce": "7",
+            "ac_bash": "5",
+            "ac_slash": "5",
+            "ac_exotic": "10",
+            "off_flags": "BJNQ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "C",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "181",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJ",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "14515",
+            "name": "woman human",
+            "short_description": "the Human Woman",
+            "long_description": "A Human Woman walks by.\n",
+            "description": "She appears to be distracted by some inner thought. Although she seems\nto be in good health, her eyes are puffy and red.\n",
+            "race": "human",
+            "act": "ACS",
+            "affected_by": "0",
+            "alignment": "-200",
+            "group": "0",
+            "level": "8",
+            "hitroll": "0",
+            "hit_dice": "2d7+96",
+            "mana_dice": "79d1+1",
+            "dam_dice": "1d7+2",
+            "dam_type": "punch",
+            "ac_pierce": "3",
+            "ac_bash": "3",
+            "ac_slash": "3",
+            "ac_exotic": "9",
+            "off_flags": "BJNQ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "C",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "female",
+            "wealth": "223",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJ",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "14516",
+            "name": "man elven",
+            "short_description": "the Elven Man",
+            "long_description": "An Elven Man is here, looking for something.\n",
+            "description": "The Elven Man looks at you intently before continuing on his way.\n",
+            "race": "elf",
+            "act": "ABR",
+            "affected_by": "DEFZ",
+            "alignment": "500",
+            "group": "0",
+            "level": "13",
+            "hitroll": "0",
+            "hit_dice": "2d10+170",
+            "mana_dice": "129d1+1",
+            "dam_dice": "2d5+3",
+            "dam_type": "magic",
+            "ac_pierce": "-1",
+            "ac_bash": "-1",
+            "ac_slash": "-1",
+            "ac_exotic": "8",
+            "off_flags": "FG",
+            "imm_flags": "A",
+            "res_flags": "B",
+            "vuln_flags": "Z",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "513",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJ",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "14517",
+            "name": "woman elven",
+            "short_description": "the Elven Woman",
+            "long_description": "A beautiful Elven Woman paces back and forth before you.\n",
+            "description": "Looking into her eyes causes you great fear.\n",
+            "race": "elf",
+            "act": "ABR",
+            "affected_by": "DEFZ",
+            "alignment": "500",
+            "group": "0",
+            "level": "16",
+            "hitroll": "0",
+            "hit_dice": "3d9+233",
+            "mana_dice": "159d1+1",
+            "dam_dice": "2d6+4",
+            "dam_type": "magic",
+            "ac_pierce": "-2",
+            "ac_bash": "-2",
+            "ac_slash": "-2",
+            "ac_exotic": "7",
+            "off_flags": "FG",
+            "imm_flags": "A",
+            "res_flags": "B",
+            "vuln_flags": "Z",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "female",
+            "wealth": "300",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJ",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "14518",
+            "name": "woman dwarven",
+            "short_description": "the Dwarven Woman",
+            "long_description": "The Dwarven Woman is smacking her fist in her hand.\n",
+            "description": "Stand back!  She's about to blow!!!\n",
+            "race": "dwarven",
+            "act": "ABT",
+            "affected_by": "DF",
+            "alignment": "900",
+            "group": "0",
+            "level": "16",
+            "hitroll": "0",
+            "hit_dice": "3d9+233",
+            "mana_dice": "159d1+1",
+            "dam_dice": "2d6+4",
+            "dam_type": "beating",
+            "ac_pierce": "-2",
+            "ac_bash": "-2",
+            "ac_slash": "-2",
+            "ac_exotic": "7",
+            "off_flags": "CDEIK",
+            "imm_flags": "A",
+            "res_flags": "LQ",
+            "vuln_flags": "R",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "female",
+            "wealth": "122",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJ",
+            "size": "medium",
+            "material": "930"
+        },
+        {
+            "vnum": "14519",
+            "name": "man dwarven",
+            "short_description": "the Dwarven Man",
+            "long_description": "A large Dwarven Man walks by you.\n",
+            "description": "He looks back at you, then dismisses you as unimportant.\n",
+            "race": "dwarven",
+            "act": "ABT",
+            "affected_by": "DF",
+            "alignment": "900",
+            "group": "0",
+            "level": "19",
+            "hitroll": "0",
+            "hit_dice": "3d9+308",
+            "mana_dice": "189d1+1",
+            "dam_dice": "2d7+5",
+            "dam_type": "punch",
+            "ac_pierce": "-4",
+            "ac_bash": "-4",
+            "ac_slash": "-4",
+            "ac_exotic": "7",
+            "off_flags": "CDEIK",
+            "imm_flags": "A",
+            "res_flags": "LQ",
+            "vuln_flags": "R",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "444",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJ",
+            "size": "medium",
+            "material": "348"
+        },
+        {
+            "vnum": "14520",
+            "name": "warrior goblin",
+            "short_description": "the Goblin Warrior",
+            "long_description": "The Goblin Warrior raises his hand to strike you.\n",
+            "description": "This goblin must be a shock troop.  He is HUGE. Standing 6' tall and weighing\nabout 250 pounds his bite will be worse than you would think. He is lightly\narmed and armored, doesn't wear boots, and has claws and talons with which\nto fight.\n",
+            "race": "goblin",
+            "act": "AFG",
+            "affected_by": "J",
+            "alignment": "-300",
+            "group": "0",
+            "level": "12",
+            "hitroll": "0",
+            "hit_dice": "2d10+150",
+            "mana_dice": "119d1+1",
+            "dam_dice": "1d10+3",
+            "dam_type": "slash",
+            "ac_pierce": "0",
+            "ac_bash": "0",
+            "ac_slash": "0",
+            "ac_exotic": "8",
+            "off_flags": "CI",
+            "imm_flags": "0",
+            "res_flags": "LQ",
+            "vuln_flags": "C",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "123",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJ",
+            "size": "huge",
+            "material": "666"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "14501",
+            "name": "paw monkey",
+            "short_description": "a monkey paw",
+            "description": "A monkey paw lies here.",
+            "material": "silver",
+            "type": "treasure",
+            "extra_flags": "A",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "5",
+            "weight": "2",
+            "cost": "400",
+            "condition": "P"
+        },
+        {
+            "vnum": "14502",
+            "name": "elven necklace",
+            "short_description": "an Elven Necklace",
+            "description": "An Elven Necklace has been dropped here.",
+            "material": "steal",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AC",
+            "values": "7 7 7 0 2",
+            "level": "19",
+            "weight": "50",
+            "cost": "4700",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "necklace elven",
+                    "description": "Engraved on the back are the words: \"Protect that which is important\""
+                }
+            ],
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-10"
+                }
+            ]
+        },
+        {
+            "vnum": "14503",
+            "name": "potion elven",
+            "short_description": "an Elven potion",
+            "description": "An Elven potion has been dropped here.",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "G",
+            "wear_flags": "AO",
+            "values": "10 'bless' 'cure critical' 'cure poison' 'heal'",
+            "level": "5",
+            "weight": "300",
+            "cost": "3000",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "potion",
+                    "description": "Written on the seal of the bottle is a glyph. You believe that the glyph\nstands for \"POISON\"\n"
+                }
+            ]
+        },
+        {
+            "vnum": "14504",
+            "name": "water walking boots elven",
+            "short_description": "elven Water Walking Boots",
+            "description": "A pair of Elven Water Walking Boots lie here.",
+            "material": "ash",
+            "type": "boat",
+            "extra_flags": "A",
+            "wear_flags": "AG",
+            "values": "0 0 0 0 0",
+            "level": "20",
+            "weight": "150",
+            "cost": "2000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "14",
+                    "modifier": "-25"
+                }
+            ]
+        },
+        {
+            "vnum": "14505",
+            "name": "dwarven keg go juice",
+            "short_description": "a keg of Dwarven Go Juice",
+            "description": "A keg of Dwarven Go Juice has been discarded here.",
+            "material": "glass",
+            "type": "drink",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "20 20 'local specialty' 0 0",
+            "level": "1",
+            "weight": "30",
+            "cost": "90",
+            "condition": "G"
+        },
+        {
+            "vnum": "14506",
+            "name": "everlasting lantern dwarven",
+            "short_description": "a Dwarven Everlasting Lantern",
+            "description": "A Dwarven Everlasting Lantern sits here.",
+            "material": "brass",
+            "type": "light",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "0 0 99 0 0",
+            "level": "1",
+            "weight": "50",
+            "cost": "150",
+            "condition": "P"
+        },
+        {
+            "vnum": "14507",
+            "name": "dwarven adventurer bread",
+            "short_description": "Dwarven Adventurer Bread",
+            "description": "A fine example of Dwarven Adventurer Bread lies here.",
+            "material": "food",
+            "type": "food",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "48 20 0 0 0",
+            "level": "1",
+            "weight": "1",
+            "cost": "50",
+            "condition": "P"
+        },
+        {
+            "vnum": "14508",
+            "name": "hip pack alligator skin",
+            "short_description": "an Alligator skin hip pack",
+            "description": "An Alligator skin hip pack has been dropped here.",
+            "material": "leather",
+            "type": "container",
+            "extra_flags": "G",
+            "wear_flags": "AM",
+            "values": "100 0 0 20 80",
+            "level": "1",
+            "weight": "10",
+            "cost": "1200",
+            "condition": "G"
+        },
+        {
+            "vnum": "14509",
+            "name": "magical emergency wafer",
+            "short_description": "a magical emergency wafer",
+            "description": "A magical emergency wafer lies here.",
+            "material": "bread",
+            "type": "potion",
+            "extra_flags": "G",
+            "wear_flags": "AO",
+            "values": "15 'teleport' 'curse' 'teleport' 'curse'",
+            "level": "25",
+            "weight": "10",
+            "cost": "17900",
+            "condition": "P"
+        },
+        {
+            "vnum": "14510",
+            "name": "map treasure",
+            "short_description": "a Treasure Map",
+            "description": "A Treasure Map has been dropped here.",
+            "material": "paper",
+            "type": "map",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "1 0 0 0 0",
+            "level": "1",
+            "weight": "10",
+            "cost": "500",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "map",
+                    "description": "The golden talent a large is at tree step then twenty plus twenty step south.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "14511",
+            "name": "candlestick",
+            "short_description": "a candlestick",
+            "description": "A candlestick is lying here.",
+            "material": "silver",
+            "type": "treasure",
+            "extra_flags": "G",
+            "wear_flags": "AB",
+            "values": "0 0 0 0 0",
+            "level": "1",
+            "weight": "10",
+            "cost": "1000",
+            "condition": "P"
+        },
+        {
+            "vnum": "14512",
+            "name": "quest note ",
+            "short_description": "a Quest Note ",
+            "description": "A Quest Note lies here.",
+            "material": "paper",
+            "type": "trash",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "1",
+            "cost": "0",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "note quest",
+                    "description": "Find what is missing and tell someone on the wizlist what is missing and who\nhas it.  DO NOT TELL ANYONE ELSE!!\n"
+                }
+            ]
+        },
+        {
+            "vnum": "14513",
+            "name": "water urn",
+            "short_description": "a Water Urn",
+            "description": "A Water Urn lies here.",
+            "material": "glass",
+            "type": "drink",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "15 15 'water' 0 0",
+            "level": "1",
+            "weight": "1",
+            "cost": "30",
+            "condition": "G"
+        },
+        {
+            "vnum": "14514",
+            "name": "head madboy",
+            "short_description": "madboy's Head",
+            "description": "Madboy's head is lying here.",
+            "material": "meat",
+            "type": "light",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "0 0 -1 0 0",
+            "level": "7",
+            "weight": "10",
+            "cost": "200",
+            "condition": "P"
+        },
+        {
+            "vnum": "14515",
+            "name": "sword madboy",
+            "short_description": "madboy's sword",
+            "description": "Madboy's sword has been dropped here.",
+            "material": "iron",
+            "type": "weapon",
+            "extra_flags": "BIG",
+            "wear_flags": "AN",
+            "values": "sword 1 12 slash 0",
+            "level": "7",
+            "weight": "50",
+            "cost": "500",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "3",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "4",
+                    "modifier": "-8"
+                }
+            ]
+        },
+        {
+            "vnum": "14516",
+            "name": "island sword",
+            "short_description": "an Island Sword",
+            "description": "An Island Sword has been dropped here.",
+            "material": "iron",
+            "type": "weapon",
+            "extra_flags": "BI",
+            "wear_flags": "AN",
+            "values": "sword 5 5 slash 0",
+            "level": "15",
+            "weight": "150",
+            "cost": "1500",
+            "condition": "P"
+        },
+        {
+            "vnum": "14517",
+            "name": "island helmet",
+            "short_description": "an Island Helmet",
+            "description": "An Island Helmet is lying here.",
+            "material": "silver",
+            "type": "armor",
+            "extra_flags": "AGK",
+            "wear_flags": "AE",
+            "values": "6 6 6 1 4",
+            "level": "15",
+            "weight": "5",
+            "cost": "1500",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "3",
+                    "modifier": "2"
+                },
+                {
+                    "location": "4",
+                    "modifier": "1"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "helmet",
+                    "description": "You see an Island Helmet.  Imprinted on the side is: Gapcio Industries\n"
+                }
+            ]
+        },
+        {
+            "vnum": "14518",
+            "name": "shield island",
+            "short_description": "an Island Shield",
+            "description": "An Island Shield has been dropped here.",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AJ",
+            "values": "6 6 6 1 5",
+            "level": "15",
+            "weight": "100",
+            "cost": "2000",
+            "condition": "G",
+            "extra_descriptions": [
+                {
+                    "keyword": "shield island",
+                    "description": "You see an Island Shield.  Imprinted on the side is: Gapcio Industries\n"
+                }
+            ]
+        },
+        {
+            "vnum": "14519",
+            "name": "island mace",
+            "short_description": "an Island Mace",
+            "description": "An Island Mace is lying here.",
+            "material": "mithril",
+            "type": "weapon",
+            "extra_flags": "G",
+            "wear_flags": "AN",
+            "values": "mace 5 5 pound 0",
+            "level": "17",
+            "weight": "300",
+            "cost": "2620",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "5"
+                },
+                {
+                    "location": "18",
+                    "modifier": "5"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "island mace",
+                    "description": "You see a island mace.  Imprinted on the side is: Gapcio Industries\n"
+                }
+            ]
+        },
+        {
+            "vnum": "14520",
+            "name": "scroll glowing",
+            "short_description": "a Glowing Scroll",
+            "description": "A Glowing Scroll is lying here.",
+            "material": "vellum",
+            "type": "scroll",
+            "extra_flags": "G",
+            "wear_flags": "AO",
+            "values": "20 'earthquake' 'earthquake' 'earthquake' 'earthquake'",
+            "level": "17",
+            "weight": "300",
+            "cost": "5313",
+            "condition": "G"
+        },
+        {
+            "vnum": "14521",
+            "name": "watcher cape black",
+            "short_description": "a Watcher's Black Cape",
+            "description": "A Watcher's Black Cape has been dropped onto the floor.",
+            "material": "cloth",
+            "type": "armor",
+            "extra_flags": "GK",
+            "wear_flags": "AK",
+            "values": "6 8 7 1 3",
+            "level": "20",
+            "weight": "200",
+            "cost": "4600",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "24",
+                    "modifier": "3"
+                },
+                {
+                    "location": "23",
+                    "modifier": "3"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-20"
+                }
+            ]
+        },
+        {
+            "vnum": "14522",
+            "name": "watcher thrusting dagger",
+            "short_description": "a Watcher's Thrusting Dagger",
+            "description": "A Watcher's Thrusting Dagger is sticking in the floor.",
+            "material": "corundum",
+            "type": "weapon",
+            "extra_flags": "GK",
+            "wear_flags": "AN",
+            "values": "dagger 5 6 thrust 0",
+            "level": "20",
+            "weight": "50",
+            "cost": "3100",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "3"
+                },
+                {
+                    "location": "12",
+                    "modifier": "15"
+                }
+            ]
+        },
+        {
+            "vnum": "14523",
+            "name": "watcher signet ring",
+            "short_description": "a Watcher Signet Ring",
+            "description": "A Watcher Signet Ring lies here discarded.",
+            "material": "bone",
+            "type": "treasure",
+            "extra_flags": "GK",
+            "wear_flags": "AB",
+            "values": "0 0 0 0 0",
+            "level": "20",
+            "weight": "1",
+            "cost": "4567",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "5"
+                }
+            ]
+        },
+        {
+            "vnum": "14524",
+            "name": "reed basket",
+            "short_description": "a reed basket",
+            "description": "A reed basket rests here.",
+            "material": "softwood",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "50 1 0 10 100",
+            "level": "1",
+            "weight": "10",
+            "cost": "40",
+            "condition": "G"
+        },
+        {
+            "vnum": "14525",
+            "name": "chair woven",
+            "short_description": "a woven chair",
+            "description": "A woven chair sits here.",
+            "material": "wool",
+            "type": "furniture",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "1 40 BEHKN 250 250",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "14526",
+            "name": "basket fruit",
+            "short_description": "a basket of fruit",
+            "description": "A basket full of fruit lies here.",
+            "material": "food",
+            "type": "food",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "24 12 0 0 0",
+            "level": "15",
+            "weight": "50",
+            "cost": "200",
+            "condition": "P"
+        },
+        {
+            "vnum": "14527",
+            "name": "hat straw",
+            "short_description": "a straw hat",
+            "description": "A straw hat has been dropped here.",
+            "material": "bamboo",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AE",
+            "values": "6 6 6 0 1",
+            "level": "16",
+            "weight": "10",
+            "cost": "700",
+            "condition": "G"
+        },
+        {
+            "vnum": "14528",
+            "name": "stone well",
+            "short_description": "a stone well",
+            "description": "A stone well sits here.",
+            "material": "stone",
+            "type": "fountain",
+            "extra_flags": "G",
+            "wear_flags": "0",
+            "values": "100000 100000 'water' 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "14529",
+            "name": "featherbed",
+            "short_description": "a featherbed",
+            "description": "A featherbed sits here.",
+            "material": "feathers",
+            "type": "furniture",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "2 40 CFILO 400 400",
+            "level": "0",
+            "weight": "500",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "14530",
+            "name": "wooden table",
+            "short_description": "a wooden table",
+            "description": "A wooden table sits here.",
+            "material": "wood",
+            "type": "furniture",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "10 40 BEHN 400 400",
+            "level": "0",
+            "weight": "500",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "14531",
+            "name": "portrait",
+            "short_description": "a portrait",
+            "description": "A portrait of a beautiful woman lies here.",
+            "material": "canvas",
+            "type": "furniture",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "portrait",
+                    "description": "This portrait is of a sandy haired woman with penetrating wise eyes.\nThe upturned lips signifies the possession of secret knowledge.\n"
+                },
+                {
+                    "keyword": "secret knowledge",
+                    "description": "This portrait is of Siren, the Goddess of the Mist.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "14532",
+            "name": "toy bow",
+            "short_description": "a toy bow",
+            "description": "A toy bow has been dropped here.",
+            "material": "wood",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "bow 1 1 hit 0",
+            "level": "5",
+            "weight": "10",
+            "cost": "100",
+            "condition": "P"
+        },
+        {
+            "vnum": "14533",
+            "name": "wheelbarrow",
+            "short_description": "a wheelbarrow",
+            "description": "A wheelbarrow rests here.",
+            "material": "steel",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "1000 1 0 200 50",
+            "level": "35",
+            "weight": "50",
+            "cost": "4000",
+            "condition": "G"
+        },
+        {
+            "vnum": "14534",
+            "name": "chest",
+            "short_description": "a chest",
+            "description": "A chest is sitting on the floor.",
+            "material": "wood",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "150 0 0 100 100",
+            "level": "0",
+            "weight": "50",
+            "cost": "50",
+            "condition": "G"
+        },
+        {
+            "vnum": "14535",
+            "name": "spear goblin",
+            "short_description": "a Goblin Spear",
+            "description": "A Goblin Spear is lying on the floor.",
+            "material": "wood",
+            "type": "weapon",
+            "extra_flags": "AG",
+            "wear_flags": "AN",
+            "values": "staff 4 5 pierce D",
+            "level": "12",
+            "weight": "50",
+            "cost": "1700",
+            "condition": "P"
+        },
+        {
+            "vnum": "14536",
+            "name": "goblin loincloth",
+            "short_description": "a Goblin Loincloth",
+            "description": "A Goblin Loincloth has been discarded here.",
+            "material": "snakeskin",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AD",
+            "values": "7 7 7 0 2",
+            "level": "12",
+            "weight": "20",
+            "cost": "2456",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "-1"
+                },
+                {
+                    "location": "3",
+                    "modifier": "-1"
+                },
+                {
+                    "location": "4",
+                    "modifier": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "14537",
+            "name": "dwarwen flail",
+            "short_description": "a Dwarwen Flail",
+            "description": "A Dwarwen Flail is lying on the floor.",
+            "material": "wood",
+            "type": "weapon",
+            "extra_flags": "AG",
+            "wear_flags": "AN",
+            "values": "flail 5 5 pound D",
+            "level": "17",
+            "weight": "250",
+            "cost": "3400",
+            "condition": "P"
+        },
+        {
+            "vnum": "14538",
+            "name": "dwarwen shield",
+            "short_description": "an Dwarwen Shield",
+            "description": "A Dwarwen Shield has been dropped here.",
+            "material": "wood",
+            "type": "armor",
+            "extra_flags": "AG",
+            "wear_flags": "AJ",
+            "values": "6 6 6 1 5",
+            "level": "17",
+            "weight": "190",
+            "cost": "4500",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "5",
+                    "modifier": "4"
+                }
+            ]
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "14501",
+            "name": "Land Ho!!",
+            "description": "At long last....land hoooo!  To the south, the pinacle of a large\nmountain has attracted your attention.  A sandy beach awaits your\nlanding...trees wave in the wind and birds of many colors fly\nhigh above the land beyond the beach.\n     There is a small (Glowing) (Humming) tablet.\n",
+            "flags": "C",
+            "sector": "7",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29201"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14502"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "9797"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n+                                                                  + \n+            This area has been converted and adapted by           +\n+                             Gapcio                               +\n+                                                                  + \n+                               &                                  +\n+                                                                  +  \n+    modified, debugged (?:) slightly enhanced and balanced by     +\n+                             jaceks                               + \n+                                                          july'96 +\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "14502",
+            "name": "Approaching land",
+            "description": "The beach is quickly approaching and you had better take in\nyour sail or you'll run aground.  From here you can see three\nhuge mountaintops and a few trees next to two or three buildings.\n",
+            "flags": "C",
+            "sector": "7",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14501"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14503"
+                }
+            ]
+        },
+        {
+            "vnum": "14503",
+            "name": "Rough waters at the beach",
+            "description": "The water rushes toward the beach causing large waves and\na riptide which threatens to pull your vessel towards the west.\n",
+            "flags": "C",
+            "sector": "7",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14502"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14504"
+                }
+            ]
+        },
+        {
+            "vnum": "14504",
+            "name": "The beach",
+            "description": "You are standing on a sandy beach complete with seashells,\npalm trees and sand crabs.  To the south you see a line of\npalm trees standing next to and before two huge mountains.\n",
+            "flags": "0",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14503"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14505"
+                }
+            ]
+        },
+        {
+            "vnum": "14505",
+            "name": "Sandy beach",
+            "description": "The yellow sand is deep and makes walking hard.  Several large\nbiting flies have found their dinner by lunching on your exposed\nskin.  The palm trees wave gently in the wind..their brown husks\nscraping a lovely tune.\n",
+            "flags": "0",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14504"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14506"
+                }
+            ]
+        },
+        {
+            "vnum": "14506",
+            "name": "Water's Edge",
+            "description": "You have walked quite a distance from your vessel.  If you\nlook backwards you can see your anchored ship bobbing in the\nsurf.  The path you are following begins to curve into the\npalms and toward the mountains.\n",
+            "flags": "0",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14505"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14507"
+                }
+            ]
+        },
+        {
+            "vnum": "14507",
+            "name": "Sandy path",
+            "description": "The sandy path you are following is slowly curving towards the\nbeach and the palm trees.  Past the palms, to your west, are\nthe tops of several buildings.  Smoke spirals into the air\nand you can almost smell grilled fish.\n",
+            "flags": "0",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14506"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14508"
+                }
+            ]
+        },
+        {
+            "vnum": "14508",
+            "name": "Palm path",
+            "description": "You are walking between the palm trees when you notice several\nlarge monkeys..weighing about 200 pounds each glancing down\nat you from their perches.  They appear to be sizing you up.\n",
+            "flags": "0",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14507"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14509"
+                }
+            ]
+        },
+        {
+            "vnum": "14509",
+            "name": "Palm trail",
+            "description": "The trail you are following is covered with palm fronds and\nmonkey droppings.  To the south of you a huge mountain dominates\nthe view.  The glare is terrific at the mountain's peak from the\nsun beating down upon the snow.\n",
+            "flags": "0",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14508"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14510"
+                }
+            ]
+        },
+        {
+            "vnum": "14510",
+            "name": "Cross Trail",
+            "description": "The sandy trail leads west and east.  You are standing at the\nbase of a huge mountain.  If you listen closely you can hear\nthe crashing of the waves upon the beach to the north of you.\n",
+            "flags": "C",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14509"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14514"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14511"
+                }
+            ]
+        },
+        {
+            "vnum": "14511",
+            "name": "Palm trail",
+            "description": "The trail you are following travels alongside a row of palms\ngrowing on the beach.  The palms provide shade and relief from\nthe sun's warm rays.\n",
+            "flags": "0",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14510"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14512"
+                }
+            ]
+        },
+        {
+            "vnum": "14512",
+            "name": "Sandy palm trail",
+            "description": "This trail has had recent traffic.  You can see indentions in\nthe sand from someone's footsteps.  Two small running grooves\nindicates that the previous traveller had a small cart.\n",
+            "flags": "0",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14511"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14513"
+                }
+            ]
+        },
+        {
+            "vnum": "14513",
+            "name": "Near the end",
+            "description": "The trail is coming to an end.  To the northwest you can see\nthree or four buildings nestled within the palms of the beach.\nAt least one of the buildings is a warehouse.\n",
+            "flags": "C",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14512"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14573"
+                }
+            ]
+        },
+        {
+            "vnum": "14514",
+            "name": "Sandy trail",
+            "description": "This trail is heavily travelled.  You can easily see signs of\nothers who have made this trip before you.  The sand is a\nglistening white with brown smears from mountain dirt.\n",
+            "flags": "0",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14515"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14510"
+                }
+            ]
+        },
+        {
+            "vnum": "14515",
+            "name": "Palm view",
+            "description": "Hundreds of palms block your sight of the ocean.  Their graceful\nheight and delicate fronds make a wonderful screen to the sun's\nhot rays.\n",
+            "flags": "0",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14516"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14514"
+                }
+            ]
+        },
+        {
+            "vnum": "14516",
+            "name": "Mountain trail",
+            "description": "The sandy trail you have been following leaves the beach and\nenters the mountains.  Well maintained, the mountain trail is\neasy to follow and has obviously been smoothed to make your\ntravel easier.\n",
+            "flags": "0",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14515"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14517"
+                }
+            ]
+        },
+        {
+            "vnum": "14517",
+            "name": "Mountain trail",
+            "description": "The steep trail you are following cuts between a huge mountain\nto the west and two smaller mountains to the east.  A little\nfurther down the trail you can see a clearing of some kind.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14518"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14516"
+                }
+            ]
+        },
+        {
+            "vnum": "14518",
+            "name": "Steep trail",
+            "description": "Climbing high into the mountains you approach a clearing, encircled\nby bushes your avenues of retreat are limited.  Either go forward\nor back down the mountain.\n",
+            "flags": "C",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14519"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14517"
+                }
+            ]
+        },
+        {
+            "vnum": "14519",
+            "name": "Mountain clearing",
+            "description": "The trail has led you to a mountain clearing.  Circled by bushes\nand a few shrubs this grassy clearing shows several signs of\nrecent travel by a great number of people.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14524"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14520"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14518"
+                }
+            ]
+        },
+        {
+            "vnum": "14520",
+            "name": "Clearing",
+            "description": "The grassy mountain clearing is open to the sun and is full of\nthe smells of a high mountain meadow.  A large swath of purple\nflowers carpets this side of the clearing.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14519"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14523"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14521"
+                }
+            ]
+        },
+        {
+            "vnum": "14521",
+            "name": "Mountain meadow",
+            "description": "The mountain meadow where you are standing has knee high grass,\nyellow flowers and is surrounded by the short shrubs of the area.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14520"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14522"
+                }
+            ]
+        },
+        {
+            "vnum": "14522",
+            "name": "Mountain view",
+            "description": "You are standing at the edge of a high mountain clearing.  You\nare completely surrounded by mountains, some of which are capped\nby white snow.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14523"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14521"
+                }
+            ]
+        },
+        {
+            "vnum": "14523",
+            "name": "Clearing's Center",
+            "description": "The mountain clearing is all about you.  You are standing in\nthe middle of a mountain meadow surrounded by snow capped\nmountain peaks.  Flowers of every color brighten the area.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14524"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14526"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14522"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14520"
+                }
+            ]
+        },
+        {
+            "vnum": "14524",
+            "name": "Flowers everywhere",
+            "description": "The mountain clearing is carpeted with flowers of every color.\nSome of the flowers are extremely rare, however, all of them\nare beautiful and would make a wonderful addition to any home.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14525"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14523"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14519"
+                }
+            ]
+        },
+        {
+            "vnum": "14525",
+            "name": "Mountain clearing",
+            "description": "The beautiful mountain clearing you are standing in is surrounded\nby extremely high mountains...some of which are covered with snow.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14526"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14524"
+                }
+            ]
+        },
+        {
+            "vnum": "14526",
+            "name": "Opening to the sky",
+            "description": "The mountain field you are standing in is open to the sky\nand is framed by tall mountains.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14525"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14527"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14523"
+                }
+            ]
+        },
+        {
+            "vnum": "14527",
+            "name": "Mountain trail",
+            "description": "This trail leads from a mountain field to the bottom of a valley.\nThe rich dirt of the trail is smooth and regular..signs that\nsomeone is maintaining the trail.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14526"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14528"
+                }
+            ]
+        },
+        {
+            "vnum": "14528",
+            "name": "Cross trails",
+            "description": "You are standing at a crossing of two different trails.  The\ntrail to the east climbs a short mountain and ends at a lookout.\nThe trail going down to the valley floor appears to be the most\ntravelled route.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14527"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14533"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14529"
+                }
+            ]
+        },
+        {
+            "vnum": "14529",
+            "name": "Down trail",
+            "description": "This trail is cutting between several mountains and is very steep.\nA few shrubs line the trail as well as some beautiful flowers.\n",
+            "flags": "C",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14528"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14530"
+                }
+            ]
+        },
+        {
+            "vnum": "14530",
+            "name": "Slippery trail",
+            "description": "The trail is passing over exposed bedrock and is very slippery.\nBe careful or you could slide to the bottom and get some nasty\ntrail burns.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14529"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14531"
+                }
+            ]
+        },
+        {
+            "vnum": "14531",
+            "name": "Village view",
+            "description": "To the west is a small village composed of six or seven buildings\nand to the south of the village you see a garden, however, it's the\nriver which attracts your attention.  You'll have to get a better\nview down the trail.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14530"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14532"
+                }
+            ]
+        },
+        {
+            "vnum": "14532",
+            "name": "The Valley",
+            "description": "You are standing at the beginning of a long valley.  Snowy\nmountains surround this lush valley and low clouds help reduce\nthe temperature to a chill.  To the west of you is a small village.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14537"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14531"
+                }
+            ]
+        },
+        {
+            "vnum": "14533",
+            "name": "Small trail",
+            "description": "This small trail travels into the mountains and the wilderness\nwhich surrounds it.  The rocky trail shows no signs of recent travel.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14534"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14528"
+                }
+            ]
+        },
+        {
+            "vnum": "14534",
+            "name": "The Wilderness",
+            "description": "The wilderness is so disorganized.  Trails are rough and rocky,\nbushes with thorns crowd the trail and even the flowers are not\nas soft and lovely as the ones along the main trail.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14535"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14533"
+                }
+            ]
+        },
+        {
+            "vnum": "14535",
+            "name": "Wilderness trail",
+            "description": "This wilderness trail has none of the comforts of home.  Strange\nnoises and unseen movement has begun to work on your nerves.\nYou are approaching the end of the trail...at the top of a snow\ncapped mountain.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14534"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14536"
+                }
+            ]
+        },
+        {
+            "vnum": "14536",
+            "name": "Mountain top",
+            "description": "The view from this small mountaintop is very special.  You are\ncloser to the heavens than you'll ever get.  The view from here\nreveals much about the valley far below.  Below you a river can\nbe seen bisecting the valley floor.  A small valley and garden\nas well as the bridge crossing the river are completely surrounded\nby a ten or twelve foot high wall.  Two towers protect the valley\nentrance to the enclosure.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14535"
+                }
+            ]
+        },
+        {
+            "vnum": "14537",
+            "name": "Village entrance",
+            "description": "The wide trail leads into a small village of seven buildings.\nMade from natural stone, the one story buildings are simple yet\neffective.  A large garden area borders the river bisecting\nthe valley to the south.  Two huge towers on the other side of\nthe river appear to be guarding a gate leading to the valley.\n",
+            "flags": "C",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14532"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14551"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14538"
+                }
+            ]
+        },
+        {
+            "vnum": "14538",
+            "name": "Malo Village",
+            "description": "You are standing at the entrance to Malo Village.  A small\nvalley community of Humans, Dwarves, and Elves living together\nin wilderness harmony.  The village is alive with movement,\neveryone going about their business while the farm animals do\nwhat comes natural.\n",
+            "flags": "C",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14537"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14539"
+                }
+            ]
+        },
+        {
+            "vnum": "14539",
+            "name": "Malo Main",
+            "description": "Malo Main goes down the middle of the village.  It is covered\nwith native stones and although short, it has the makings of\na Better Streets entry.  The stone buildings on each side of the\nstreet are warm and toasty..with smoke pouring from the smoke\nstacks and yellow light coming from the shuttered windows.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "This wooden door has a circle with a large\nletter M in the middle of it.",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "14540"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14538"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "14541"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14542"
+                }
+            ]
+        },
+        {
+            "vnum": "14540",
+            "name": "Stone house",
+            "description": "The stone house is warm and cozy.  Several thick blankets\nhang on the walls and a small fire is burning in the fireplace.\nYellow candles light the room.  The room does not have anything\nof value in it.\n",
+            "flags": "DS",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "The door is solid as a rock.  It has triple\nlocks and should give you safety to the world.",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "14539"
+                }
+            ]
+        },
+        {
+            "vnum": "14541",
+            "name": "Gray Stone house",
+            "description": "A loving hand has created this home.  Fine detail has been given\nto all wooden items and the furniture was made by a master.\n",
+            "flags": "DS",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "This wooden door has a circle with a large\nletter M in the middle of it.",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "14539"
+                }
+            ]
+        },
+        {
+            "vnum": "14542",
+            "name": "Malo main",
+            "description": "The stones you are walking on were gathered from local sites\nabout the village.  Laid by Dwarves, the stones are almost\nseamless.  The air is very cool here between the houses.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14539"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14543"
+                }
+            ]
+        },
+        {
+            "vnum": "14543",
+            "name": "Village street",
+            "description": "To the west is the village well, while all about you the native\nstone buildings create a wonderful setting for this family life.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "14544"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14542"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "14545"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14546"
+                }
+            ]
+        },
+        {
+            "vnum": "14544",
+            "name": "Brown House",
+            "description": "This beautiful brown house has columns on each side of the\ndoor and it has a tile roof.  A large picture window at the\nrear of the house reveals a stunning view of the large\nmountain to the north of you.\n",
+            "flags": "DS",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "14543"
+                }
+            ]
+        },
+        {
+            "vnum": "14545",
+            "name": "Green house",
+            "description": "In an obvious effort to overshadow the brown house nearby,\nthe owners of this home have applied an expensive dye to\ntheir home, turning it a brilliant green color.\n",
+            "flags": "DS",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "14543"
+                }
+            ]
+        },
+        {
+            "vnum": "14546",
+            "name": "Village well",
+            "description": "The village well is covered by a small awning and has a very\nlong rope to reach to the bottom of the well.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14543"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14547"
+                }
+            ]
+        },
+        {
+            "vnum": "14547",
+            "name": "End of the street",
+            "description": "You have reached the end of the street.  Several lovely houses\nsurround you and prevent you from travelling further in this\ndirection.  Looking past the homes you see a twenty foot tall\nwall ringing the village proper.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "14548"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14546"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "14550"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "14549"
+                }
+            ]
+        },
+        {
+            "vnum": "14548",
+            "name": "Simple home",
+            "description": "Nothing special about this home except the fact that it's not\nspecial.  Even the fireplace is bare.  Where you might expect\nto see a display you see instead blank wall.\n",
+            "flags": "DS",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "14547"
+                }
+            ]
+        },
+        {
+            "vnum": "14549",
+            "name": "Last house",
+            "description": "The last house of this village has a large porch and a huge fireplace.\nIt appears to be large enough to hold several people at the same time.\n",
+            "flags": "DS",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "14547"
+                }
+            ]
+        },
+        {
+            "vnum": "14550",
+            "name": "A general store",
+            "description": "You have entered a general store laden with wilderness supplies\nand everyday items necessary for survival.  If you look closely,\nyou'll find a little of everything.\n",
+            "flags": "DS",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "14547"
+                }
+            ]
+        },
+        {
+            "vnum": "14551",
+            "name": "A very old road",
+            "description": "This ancient, overgrown road was made years before the village\nwas constructed.  It's age is so great you can see where trees\ngrew through it's center, were cut down and made into firewood.\n",
+            "flags": "C",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14537"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14552"
+                }
+            ]
+        },
+        {
+            "vnum": "14552",
+            "name": "Garden and Old Road",
+            "description": "The old road leads south while a small path leads westward\ninto a large garden patch.  To the south the road crosses\na river with an ancient bridge.  Two towers can be seen on\nthe other side...near the gated wall surrounding the village.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14551"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14553"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14581"
+                }
+            ]
+        },
+        {
+            "vnum": "14553",
+            "name": "The Bridge",
+            "description": "The bridge is made of local material finely worked with artistic\ndesigns of flying creatures.  Gargoyles and flying lions decorate\nthe entire bridge.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14552"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14554"
+                }
+            ]
+        },
+        {
+            "vnum": "14554",
+            "name": "Middle of bridge",
+            "description": "From this vantage point you see the river running west and east. Very cold \nwater hits the side of the bridge and throws cold spray into your face.  \nThe wall encircling the village proper also encircles a long stretch of \nthe river.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14553"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14555"
+                }
+            ]
+        },
+        {
+            "vnum": "14555",
+            "name": "South side of bridge",
+            "description": "The bridge you are travelling on appears to have been constructed\nusing the same material and methods used to build the ancient\nroad you are travelling upon.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14554"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14556"
+                }
+            ]
+        },
+        {
+            "vnum": "14556",
+            "name": "Ancient road",
+            "description": "The ancient road widens as it drives straight as an arrow in a\nsouthern direction.  Although the road is cracked and crumbling\nat the edges it still provides the best travelling surface you\nhave ever seen.\n",
+            "flags": "C",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14555"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14557"
+                }
+            ]
+        },
+        {
+            "vnum": "14557",
+            "name": "Red stained road",
+            "description": "Several large red stains appear along this area of the ancient\nroadway.  Upon closer examination you are able to determine that\nthe stains are old blood.  Surely a battle has been fought here!\nTo your right and left short squat towers flank the road.  Small\ndoors, low to the ground, provide entrance to the towers.  The\ntower construction is as ancient as the road.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14556"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14561"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14564"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14558"
+                }
+            ]
+        },
+        {
+            "vnum": "14558",
+            "name": "Before the West Tower",
+            "description": "The West Tower is a dark gray color.  Several gargoyles are\ncrouching along the rim of the tower..protecting the residents\nfrom danger.  Stooping down you can see into the tower and out\nthe other side.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14557"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14559"
+                }
+            ]
+        },
+        {
+            "vnum": "14559",
+            "name": "West Tower",
+            "description": "This tower is rather small and has a dark, ominous feel about it.\nThe roof has caved in, allowing the fresh mountain air to\npenetrate into every secret corner.  The entrance is to the east.\nThe west wall has a large gaping hole in it's center.\n",
+            "flags": "DS",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14558"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14560"
+                }
+            ]
+        },
+        {
+            "vnum": "14560",
+            "name": "West Tower",
+            "description": "Scattered about the fallen bricks and timbers from the roof are\nbones and broken furniture.  The huge hole in the west wall shows\nsigns of fire.  The bricks scattered about the room appear to have\nbeen caused by a very large explosion.\n",
+            "flags": "DS",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14559"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14589"
+                }
+            ]
+        },
+        {
+            "vnum": "14561",
+            "name": "Before East Tower",
+            "description": "You are standing before the slim East Tower.  Unlike the West\nTower this tower has been whitewashed.  Painted every three feet\nare red stylized crosses.  Again, unlike the West Tower this\ntower does not have gargoyles about it's rim.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14562"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14557"
+                }
+            ]
+        },
+        {
+            "vnum": "14562",
+            "name": "Inside the East Tower",
+            "description": "A thin layer of dust covers the floor of this tower.  The markings\nin the dust indicate that someone, or something, has passed this\nway recently.  The room is mostly bare.\n",
+            "flags": "DS",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14563"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14561"
+                }
+            ]
+        },
+        {
+            "vnum": "14563",
+            "name": "East Tower",
+            "description": "A large tapestry is hanging on the east wall.  The tapestry\nshows a mountain scene, with a river running through a valley\nand into a large cave mouth.  Several arrow slits provide access\nfor both air and light.\n",
+            "flags": "DS",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "A very large tapestry covers a hole in the wall.",
+                    "keyword": "tapestry",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "14596"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14562"
+                }
+            ]
+        },
+        {
+            "vnum": "14564",
+            "name": "Ancient road",
+            "description": "Near the twin towers you have a really good view of the city\nwall and it's southern gate.  The wall is approximately 12 feet\ntall.  The gate is made of metal and has large spears protruding\nfrom the top to stop \"wild animals\" from climbing the barrier.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14557"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14565"
+                }
+            ]
+        },
+        {
+            "vnum": "14565",
+            "name": "Before the gate",
+            "description": "This huge metal gate appears to have been built much later than\nthe ancient road it guards.  A close look at the door reveals\na tiny, hand written sign attached to the gate.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14564"
+                },
+                {
+                    "door": "D2",
+                    "description": "This massive steel gate has spears along it's top.",
+                    "keyword": "gate",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "14566"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "sign",
+                    "description": "BEWARE.  This gate is to remain closed at all times.  The evil must be\ncontrolled.  The evil must be contained."
+                }
+            ]
+        },
+        {
+            "vnum": "14566",
+            "name": "Other side of the gate",
+            "description": "You are standing on the south side of the gate leading to\nMalo Village.  The ancient road continues to the south but is\nblocked by a rough wall of ill placed boulders.  On each side of\nthe road are sharpened stakes driven at an angle into the ground.\nThe stakes are obviously meant to keep travellers on the road.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "This massive steel gate has sharpened spears along it's summit.",
+                    "keyword": "gate",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "14565"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14567"
+                }
+            ]
+        },
+        {
+            "vnum": "14567",
+            "name": "Ancient way",
+            "description": "The ancient road you are on is buried under a huge pile of\nboulders placed strategically across the road to block travel.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14566"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14568"
+                }
+            ]
+        },
+        {
+            "vnum": "14568",
+            "name": "Base of Boulders",
+            "description": "The boulders have been stacked to block travel on the ancient\nroad.  Large stakes, sharpened and pointed toward the wall,\nkeep travellers on the road.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14567"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14571"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14569"
+                }
+            ]
+        },
+        {
+            "vnum": "14569",
+            "name": "Path along boulders",
+            "description": "A small path travels along the roadblock to the west.  Skirting\nalong sharpened stakes the path meanders amoungst and besides\nthe huge boulders stacked precariously across the ancient road.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14568"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14570"
+                }
+            ]
+        },
+        {
+            "vnum": "14570",
+            "name": "A path",
+            "description": "The path comes to an abrupt halt.  The boulders curve inward,\ntowards the city, and with the aid of the sharpened stakes all\nabout you travel in this direction has been effectively cut off.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14569"
+                }
+            ]
+        },
+        {
+            "vnum": "14571",
+            "name": "A small path",
+            "description": "This small path leads you away from the ancient road, along\nthe boulders and into the sharpened stakes set to keep you on\nthe road.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14572"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14568"
+                }
+            ]
+        },
+        {
+            "vnum": "14572",
+            "name": "End of path",
+            "description": "The path has come to an end.  The high wall of boulders curves\ninward and effectively traps you against the sharpened stakes.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14571"
+                }
+            ]
+        },
+        {
+            "vnum": "14573",
+            "name": "Path's end",
+            "description": "You are approaching the end of the palm path.  Several buildings\nto the north of you appear to be both warehouses and living\nquarters.  The smell of drying fish is evident and a small fishing\nboat has been drydocked for repair.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14574"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14513"
+                }
+            ]
+        },
+        {
+            "vnum": "14574",
+            "name": "Entrance to Land's End",
+            "description": "Land's End is a small fishing village with such a small population it doesn't\nappear on any maps.  Two large warehouses and two homes are the only standing\nbuildings.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14575"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14573"
+                }
+            ]
+        },
+        {
+            "vnum": "14575",
+            "name": "Land's End Road",
+            "description": "This is the only \"road\" in Land's End.  The most accurate\ndescription would be a path.  On both sides of you stand large\nwarehouses where tradegoods are stored.  A few fishing nets\nhang from nearby trees and a drying rack produces that strong\nfish smell which spreads through the air.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14576"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14578"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14574"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14579"
+                }
+            ]
+        },
+        {
+            "vnum": "14576",
+            "name": "Ocean View",
+            "description": "From here you can see the ocean and any incoming vessels.\nTwo homes stand nearby as well as a rowboat and three fishing\nvessels drydocked for the season.  Perhaps the fishing is bad.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14577"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14575"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14580"
+                }
+            ]
+        },
+        {
+            "vnum": "14577",
+            "name": "Oceanview Home",
+            "description": "This lovely wooden home stands so near the water that it's\noccupants have the most beautiful view you've ever seen.  Several\ncrabs have made their home outside the seaward window.\n",
+            "flags": "DS",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14576"
+                }
+            ]
+        },
+        {
+            "vnum": "14578",
+            "name": "Large Warehouse",
+            "description": "This large warehouse was built to contain tradegoods for all\nof the sailors and merchants expected to use Ocean View as a\nport of call.  Unfortunately, no one seems to know exactly\nwhere Ocean View is.\n",
+            "flags": "DS",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14575"
+                }
+            ]
+        },
+        {
+            "vnum": "14579",
+            "name": "Largest Warehouse",
+            "description": "You are standing in the largest warehouse on this side of the\nocean.  The echo of your steps bounces back to you very quickly.\nWhen the weather turns incliment the local fishermen drag their\nvessels into this warehouse for safety.\n",
+            "flags": "DS",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14575"
+                }
+            ]
+        },
+        {
+            "vnum": "14580",
+            "name": "Small home",
+            "description": "This small home has been built from the bones of whales and\nother small sea animals.  Barnacles would feel right at home\nhere...if the home were under water of course.\n",
+            "flags": "DS",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14576"
+                }
+            ]
+        },
+        {
+            "vnum": "14581",
+            "name": "Garden way",
+            "description": "Garden way is simply a path leading through or near the vegatables\nplanted by the villagers.  All about you are sprouting plants.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14552"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14582"
+                }
+            ]
+        },
+        {
+            "vnum": "14582",
+            "name": "Garden path",
+            "description": "All about you are growing tiny little plants that will one day\nfeed the population of the village.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14581"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14583"
+                }
+            ]
+        },
+        {
+            "vnum": "14583",
+            "name": "Garden alley",
+            "description": "The path has now led you through several rows of beans, squash, and melons.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14582"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14584"
+                }
+            ]
+        },
+        {
+            "vnum": "14584",
+            "name": "Garden along the river",
+            "description": "The garden continues to parallel the mountain river.  While walking\nthrough the carrots you glance south into the river and see the\nremains of a wooden bridge washed ashore.  The bridge is flimsy\nand ill made and obviously was not meant to be permanent.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14583"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14585"
+                }
+            ]
+        },
+        {
+            "vnum": "14585",
+            "name": "Along the river",
+            "description": "The rushing water to your south has been used to irrigate the garden. Several\nlarge clay containers are gathered along the river for this very purpose.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14584"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14586"
+                }
+            ]
+        },
+        {
+            "vnum": "14586",
+            "name": "Behind the buildings",
+            "description": "You are walking behind the homes and quite by accident have\ndiscovered a child's toy.  The toy is a wooden doll, complete\nwith dress and straw hair.  It is lying in the mud and appears\nto have been trampled.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14585"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14587"
+                }
+            ]
+        },
+        {
+            "vnum": "14587",
+            "name": "River View",
+            "description": "From this part of the garden you have an excellent view of the\nriver as it passes through the fence.  A huge section of the\n12 foot high fence is missing above the river.  Perhaps a massive\nrain washed that section of the fence away?\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14586"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14588"
+                }
+            ]
+        },
+        {
+            "vnum": "14588",
+            "name": "Garden's end",
+            "description": "The garden ends here at the village wall.  The crops have been\ntrampled and there's nothing here but a large mud patch.  A large\nmud patch with scores of tracks.\n",
+            "flags": "C",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14587"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "9901"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "tracks track",
+                    "description": "The tracks you see are well defined and\nwere obviously made by an unshod foot.\nThe toes are extremely long and end with\ncurved talons."
+                }
+            ]
+        },
+        {
+            "vnum": "14589",
+            "name": "Outside the West Tower",
+            "description": "The soft ground here shows evidence of recent travel.  Some of\nthe many marks in the ground were obviously made by booted\nsoldiers while the unshod footprints appear to have been made\nby nonhuman feet.  The prints are elongated and end in talons.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14560"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14590"
+                }
+            ]
+        },
+        {
+            "vnum": "14590",
+            "name": "Path near fence",
+            "description": "This tiny path goes to the fence then parallels it.  Following\nthe path would take you near the river.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14591"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14589"
+                }
+            ]
+        },
+        {
+            "vnum": "14591",
+            "name": "Slaughter site",
+            "description": "Unexpectedly you have come across several skeletons and what\nwould appear to be the site where several people were killed.\nStrips of cloth are embedded in the mud and stuck to bushes\nand the yellowing bones of two or three skeletons are scattered\neverywhere.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14592"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14590"
+                }
+            ]
+        },
+        {
+            "vnum": "14592",
+            "name": "Bushy path",
+            "description": "The closer you get to the river the bushier it becomes.  Squeezing\npast some of the bushes along this path is a sticky situation.\nThere are 1 inch thorns on some of them.  Be careful.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14591"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14593"
+                }
+            ]
+        },
+        {
+            "vnum": "14593",
+            "name": "Near the fence",
+            "description": "Once again the path has come close to the fence.  Looking closely\nyou discover several large holes dug under the fence.  If you\nwere a little smaller you could have squeezed through those\nholes and gotten to the other side.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14594"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14592"
+                }
+            ]
+        },
+        {
+            "vnum": "14594",
+            "name": "Near the river",
+            "description": "The rushing water of the river drowns out nearly all sounds.\nYou are alone with one of the forces of nature.  Looking across\nthe river you can make out the vague outlines of village homes.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14593"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14595"
+                }
+            ]
+        },
+        {
+            "vnum": "14595",
+            "name": "River's edge",
+            "description": "You are standing at the edge of the river.  Several markings on\nthe ground show where boats have been pulled ashore, however,\nyou see no signs of them now.  The river passes through the 12 foot\ntall fence to your west.  A large section of the fence is gone,\nallowing passage into the countryside.\n",
+            "flags": "C",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14594"
+                }
+            ]
+        },
+        {
+            "vnum": "14596",
+            "name": "Outside the East Tower",
+            "description": "You are standing along the east wall of the East Tower.  Tracks\nin the soft earth lead to the wall nearby and towards the river.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14597"
+                },
+                {
+                    "door": "D3",
+                    "description": "A very large tapestry covers a hole in the wall.",
+                    "keyword": "tapestry",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "14563"
+                }
+            ]
+        },
+        {
+            "vnum": "14597",
+            "name": "Small path at river's edge",
+            "description": "This small path has seen little traffic in recent times.  There\nare obvious signs of use by small animals, tracks, droppings, etc..\nhowever, no man sized creatures have passed this way for years.\nThe river is rushing past you and flows through the large hole in\nthe fence to your right.  Perhaps a large rain washed it away?\n",
+            "flags": "C",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14598"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14596"
+                }
+            ]
+        },
+        {
+            "vnum": "14598",
+            "name": "On the river",
+            "description": "You are on the river which flows south of Malo Village.  To\nthe south of you are two short towers and of course the wall which\nsurrounds the village.  To the east is a large hole in the fence.\nThe river runs through that hole.\n",
+            "flags": "C",
+            "sector": "7",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14599"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14597"
+                }
+            ]
+        },
+        {
+            "vnum": "14599",
+            "name": "Hole in wall",
+            "description": "You are passing through the hole in the wall which surrounds the\nvillage.  At first you thought that the river had created this\nhole but upon closer inspection it is obviously the work of man.\n",
+            "flags": "C",
+            "sector": "7",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14598"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "D",
+            "arg1": "14539",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "14540",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "14541",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "14539",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "14544",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "14543",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "14545",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "14543",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "14548",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "14547",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "14549",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "14547",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "14550",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "14547",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "14566",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "14565",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "14596",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "14563",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "14501",
+            "arg2": "3",
+            "arg3": "14508",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "14501",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "14502",
+            "arg2": "1",
+            "arg3": "14578",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "14502",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "14503",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "14504",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "14503",
+            "arg2": "1",
+            "arg3": "14577",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "14505",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "14506",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "14507",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "14504",
+            "arg2": "1",
+            "arg3": "14580",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "14508",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "14509",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "14505",
+            "arg2": "1",
+            "arg3": "14579",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "14510",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "14511",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "14512",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "14513",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "14506",
+            "arg2": "1",
+            "arg3": "14574",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "14515",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "14514",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "14507",
+            "arg2": "3",
+            "arg3": "14520",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "14517",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "14518",
+            "arg2": "-1",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "14516",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "14508",
+            "arg2": "4",
+            "arg3": "14523",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "14517",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "14518",
+            "arg2": "-1",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "14516",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "14509",
+            "arg2": "2",
+            "arg3": "14527",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "14520",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "14519",
+            "arg2": "-1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "14510",
+            "arg2": "1",
+            "arg3": "14536",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "14523",
+            "arg2": "-1",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "14521",
+            "arg2": "-1",
+            "arg3": "12"
+        },
+        {
+            "command": "E",
+            "arg1": "14522",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "14511",
+            "arg2": "3",
+            "arg3": "14538",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "14512",
+            "arg2": "2",
+            "arg3": "14543",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "14514",
+            "arg2": "4",
+            "arg3": "14547",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "14515",
+            "arg2": "5",
+            "arg3": "14547",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "14516",
+            "arg2": "4",
+            "arg3": "14543",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "14517",
+            "arg2": "4",
+            "arg3": "14543",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "14518",
+            "arg2": "5",
+            "arg3": "14582",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "14527",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "G",
+            "arg1": "14526",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "14519",
+            "arg2": "4",
+            "arg3": "14582",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "14537",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "14538",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "14520",
+            "arg2": "10",
+            "arg3": "14570",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "14536",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "14535",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "O",
+            "arg1": "14528",
+            "arg2": "1",
+            "arg3": "14546"
+        },
+        {
+            "command": "O",
+            "arg1": "14528",
+            "arg2": "1",
+            "arg3": "14537"
+        },
+        {
+            "command": "O",
+            "arg1": "14524",
+            "arg2": "1",
+            "arg3": "14539"
+        },
+        {
+            "command": "O",
+            "arg1": "14533",
+            "arg2": "1",
+            "arg3": "14539"
+        },
+        {
+            "command": "O",
+            "arg1": "14525",
+            "arg2": "1",
+            "arg3": "14540"
+        },
+        {
+            "command": "O",
+            "arg1": "14529",
+            "arg2": "1",
+            "arg3": "14540"
+        },
+        {
+            "command": "O",
+            "arg1": "14530",
+            "arg2": "1",
+            "arg3": "14540"
+        },
+        {
+            "command": "O",
+            "arg1": "14529",
+            "arg2": "1",
+            "arg3": "14541"
+        },
+        {
+            "command": "O",
+            "arg1": "14534",
+            "arg2": "1",
+            "arg3": "14541"
+        },
+        {
+            "command": "O",
+            "arg1": "14532",
+            "arg2": "1",
+            "arg3": "14541"
+        },
+        {
+            "command": "O",
+            "arg1": "14525",
+            "arg2": "1",
+            "arg3": "14544"
+        },
+        {
+            "command": "O",
+            "arg1": "14529",
+            "arg2": "1",
+            "arg3": "14544"
+        },
+        {
+            "command": "O",
+            "arg1": "14531",
+            "arg2": "1",
+            "arg3": "14545"
+        },
+        {
+            "command": "O",
+            "arg1": "14530",
+            "arg2": "1",
+            "arg3": "14545"
+        },
+        {
+            "command": "O",
+            "arg1": "14534",
+            "arg2": "1",
+            "arg3": "14545"
+        },
+        {
+            "command": "O",
+            "arg1": "14529",
+            "arg2": "1",
+            "arg3": "14548"
+        },
+        {
+            "command": "O",
+            "arg1": "14530",
+            "arg2": "1",
+            "arg3": "14548"
+        },
+        {
+            "command": "O",
+            "arg1": "14525",
+            "arg2": "1",
+            "arg3": "14549"
+        },
+        {
+            "command": "O",
+            "arg1": "14529",
+            "arg2": "1",
+            "arg3": "14549"
+        },
+        {
+            "command": "O",
+            "arg1": "14524",
+            "arg2": "1",
+            "arg3": "14550"
+        },
+        {
+            "command": "O",
+            "arg1": "14534",
+            "arg2": "1",
+            "arg3": "14550"
+        }
+    ],
+    "shops": [
+        {
+            "keeper": "14502",
+            "buy_type_0": "8",
+            "buy_type_1": "9",
+            "buy_type_2": "10",
+            "buy_type_3": "22",
+            "buy_type_4": "0",
+            "profit_buy": "50",
+            "profit_sell": "150",
+            "open_hour": "8",
+            "close_hour": "21"
+        },
+        {
+            "keeper": "14503",
+            "buy_type_0": "17",
+            "buy_type_1": "1",
+            "buy_type_2": "19",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "50",
+            "profit_sell": "175",
+            "open_hour": "8",
+            "close_hour": "20"
+        },
+        {
+            "keeper": "14504",
+            "buy_type_0": "15",
+            "buy_type_1": "26",
+            "buy_type_2": "0",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "25",
+            "profit_sell": "175",
+            "open_hour": "9",
+            "close_hour": "18"
+        },
+        {
+            "keeper": "14505",
+            "buy_type_0": "8",
+            "buy_type_1": "17",
+            "buy_type_2": "0",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "50",
+            "profit_sell": "175",
+            "open_hour": "8",
+            "close_hour": "21"
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "14510",
+            "spec_fun": "spec_cast_mage"
+        }
+    ]
+}

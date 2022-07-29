@@ -1,0 +1,989 @@
+{
+    "area": {
+        "file": "peri_cemberi.are",
+        "name": "Türkçe",
+        "low_range": "10",
+        "high_range": "15",
+        "min_vnum": "29101",
+        "max_vnum": "29114",
+        "path": "3d 8g 2b 2g 2d 2g d",
+        "yonelim_iyi": "33",
+        "yonelim_yansiz": "34",
+        "yonelim_kem": "33"
+    },
+    "mobiles": [
+        {
+            "vnum": "29101",
+            "name": "piksi",
+            "short_description": "piksi",
+            "long_description": "Bir piksi burada, seni kýlýcýyla dürtüklüyor.\n",
+            "description": "Kanatlarýyla bir ejderhayý andýran insansý bir varlýk.\n",
+            "race": "sprite",
+            "act": "ACEH",
+            "affected_by": "T",
+            "level": "10"
+        },
+        {
+            "vnum": "29102",
+            "name": "niksi",
+            "short_description": "kanat çýrpan niksi",
+            "long_description": "Kanat çýrpan bir niksi görüyorsun.\n",
+            "description": "Piksi gibi ejderha kanatlarýna sahip, fakat ondan biraz daha uzun.\n",
+            "race": "sprite",
+            "act": "ACEH",
+            "affected_by": "T",
+            "level": "12"
+        },
+        {
+            "vnum": "29103",
+            "name": "peri",
+            "short_description": "danseden peri",
+            "long_description": "Güzel, danseden bir peri görüyorsun.\n",
+            "description": "Niksi ve piksi gibi kanatlara sahip fakat iksinden de daha uzun.\n",
+            "race": "sprite",
+            "act": "ACEH",
+            "affected_by": "BT",
+            "level": "11"
+        },
+        {
+            "vnum": "29104",
+            "name": "cin",
+            "short_description": "haþin cin",
+            "long_description": "Haþin bir cin burada, muhafýzlýk yapýyor.\n",
+            "description": "Toprak rengi giysiler içinde bir cin görüyorsun. Görevinde oldukça iyi.\n",
+            "race": "sprite",
+            "act": "ABCE",
+            "affected_by": "V",
+            "level": "13"
+        },
+        {
+            "vnum": "29105",
+            "name": "puk",
+            "short_description": "Puk",
+            "long_description": "Aman tamrým! Bu bir Puk!\n",
+            "description": "Oldukça uzun boylu. Bir o yana, bir bu yana bakarak ganimetlerine göz kulak\noluyor.\n",
+            "race": "sprite",
+            "act": "ABCES",
+            "affected_by": "QV",
+            "level": "14"
+        },
+        {
+            "vnum": "29106",
+            "name": "peri kraliçe",
+            "short_description": "Peri Kraliçe",
+            "long_description": "Peri Kraliçe burada, muhteþem bir ezgiyle dans ediyor.\n",
+            "description": "Uzun boylu bir adaril. Oldukça da güzel bir yüze sahip. Onu izlemek sana\nbüyük bir zevk veriyor.\n",
+            "race": "çora",
+            "act": "ABCER",
+            "affected_by": "DHJT",
+            "level": "15"
+        },
+        {
+            "vnum": "29107",
+            "name": "þans peri",
+            "short_description": "Þans Perisi",
+            "long_description": "Bir þans perisi görüyorsun, elindeki zarlarý sallýyor.\n",
+            "description": "Elmas iþlemeli yeiþl bir giysi giyiyor.\n",
+            "race": "sprite",
+            "act": "ACEH",
+            "affected_by": "QUV",
+            "level": "13"
+        },
+        {
+            "vnum": "29108",
+            "name": "sarhoþ peri",
+            "short_description": "sarhoþ peri",
+            "long_description": "Sarhoþ bir peri görüyorsun, dans ediyor.\n",
+            "description": "Düþe kalka dans etmeye çalýþan bir peri. Ne kadar da eðlenceli...\n",
+            "race": "sprite",
+            "act": "ABCE",
+            "affected_by": "RT",
+            "level": "10"
+        },
+        {
+            "vnum": "29109",
+            "name": "garson peri",
+            "short_description": "garson peri",
+            "long_description": "Ýþi garsonluk olan bir peri görüyorsun, yiyecek ve içecek servisi yapýyor.\n",
+            "description": "Oldukça yaþlý. Belki de büyü gücünü kaybettiði için bu iþi yapýyordur...\n",
+            "race": "sprite",
+            "act": "ABCEb",
+            "affected_by": "V",
+            "level": "45"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "29101",
+            "name": "kafiyeli parþömen",
+            "short_description": "kafiyeli parþömen",
+            "description": "Yerde rulolanmýþ bir parþömen görüyorsun.\n",
+            "material": "paper",
+            "type": "scroll",
+            "extra_flags": "AG",
+            "wear_flags": "AO",
+            "values": "15 'faerie fog' '' '' ''",
+            "level": "10",
+            "weight": "1",
+            "cost": "200",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "parþömen kafiyeli",
+                    "description": "Giysilerini çýkar, ters yüz et\nÜç kere baðýr, gülerek dans et\nDemir ve çelik seni izlesin\nHerþey önünde apaçýk serilsin\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29102",
+            "name": "ýþýk parýltý top",
+            "short_description": "parýltýlý ýþýk topu",
+            "description": "Parýltýlý bir ýþýk topu görüyorsun.\n",
+            "material": "unknown",
+            "type": "light",
+            "extra_flags": "AGI",
+            "wear_flags": "AO",
+            "values": "0 0 999 0 0",
+            "level": "15",
+            "weight": "0",
+            "cost": "1000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "4",
+                    "modifier": "1"
+                },
+                {
+                    "location": "3",
+                    "modifier": "1"
+                },
+                {
+                    "location": "18",
+                    "modifier": "1"
+                },
+                {
+                    "location": "19",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "29103",
+            "name": "kemer peri",
+            "short_description": "peri kemeri",
+            "description": "Gökkuþaðý renklerinde bir kemer burada býrakýlmýþ.\n",
+            "material": "mithril",
+            "type": "armor",
+            "extra_flags": "FM",
+            "wear_flags": "AL",
+            "values": "5 5 5 5 0",
+            "level": "11",
+            "weight": "1",
+            "cost": "500",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "24",
+                    "modifier": "-3"
+                }
+            ]
+        },
+        {
+            "vnum": "29104",
+            "name": "cin bileklik toprak",
+            "short_description": "cin bilekliði",
+            "description": "Toprak renginde bir bileklik burada býrakýlmýþ.\n\n",
+            "material": "mithril",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AM",
+            "values": "5 5 5 5 0",
+            "level": "13",
+            "weight": "1",
+            "cost": "700",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "1"
+                },
+                {
+                    "location": "13",
+                    "modifier": "8"
+                }
+            ]
+        },
+        {
+            "vnum": "29105",
+            "name": "ay ýþýk iksir þiþe",
+            "short_description": "ay ýþýðý iksiri",
+            "description": "Bir iksir þiþesi burada, yudumlanmayý bekliyor.\n",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "AG",
+            "wear_flags": "AO",
+            "values": "15 'fly' 'cure poison' 'cure critical' ''",
+            "level": "12",
+            "weight": "1",
+            "cost": "700",
+            "condition": "P"
+        },
+        {
+            "vnum": "29106",
+            "name": "örümcek að kaftan",
+            "short_description": "örümcek aðý kaftaný",
+            "description": "Bir örümcek aðý kaftaný görüyorsun, alýnmayý bekliyor.\n",
+            "material": "cloth",
+            "type": "armor",
+            "extra_flags": "IM",
+            "wear_flags": "AK",
+            "values": "6 6 6 6 0",
+            "level": "15",
+            "weight": "1",
+            "cost": "1500",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "10"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-2"
+                }
+            ]
+        },
+        {
+            "vnum": "29107",
+            "name": "ay ýþýk",
+            "short_description": "ay ýþýðý",
+            "description": "Iþýk saçan bir silah görüyorsun.\n",
+            "material": "unknown",
+            "type": "weapon",
+            "extra_flags": "AF",
+            "wear_flags": "AN",
+            "values": "exotic 4 4 pierce G",
+            "level": "15",
+            "weight": "0",
+            "cost": "1500",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "2"
+                },
+                {
+                    "location": "19",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "29108",
+            "name": "þiþe peri þarap",
+            "short_description": "bir þiþe peri þarabý",
+            "description": "Bir þiþe peri þarabý burada býrakýlmýþ.\n",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "G",
+            "wear_flags": "A",
+            "values": "10 'cure blindness' 'invis' '' ''",
+            "level": "10",
+            "weight": "1",
+            "cost": "100",
+            "condition": "P"
+        },
+        {
+            "vnum": "29109",
+            "name": "peri bacaklýk",
+            "short_description": "bir çift peri bacaklýðý",
+            "description": "Bir çift peri bacaklýðý burada býrakýlmýþ, ne yazýk...\n",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "C",
+            "wear_flags": "AF",
+            "values": "5 5 5 0 0",
+            "level": "14",
+            "weight": "0",
+            "cost": "900",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "10"
+                },
+                {
+                    "location": "18",
+                    "modifier": "1"
+                },
+                {
+                    "location": "19",
+                    "modifier": "1"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "29110",
+            "name": "anahtar parlayan",
+            "short_description": "parlayan anahtar",
+            "description": "Parlayan bir anahtar burada, bir kilidi açmayý bekliyor.\n",
+            "material": "silver",
+            "type": "key",
+            "extra_flags": "BG",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "13",
+            "weight": "1",
+            "cost": "130",
+            "condition": "P"
+        },
+        {
+            "vnum": "29111",
+            "name": "kirli fular",
+            "short_description": "kirli fular",
+            "description": "Kirli bir fular burada unutulmuþ.",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "C",
+            "wear_flags": "AC",
+            "values": "5 5 5 0 0",
+            "level": "14",
+            "weight": "2",
+            "cost": "900",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "1"
+                },
+                {
+                    "location": "1",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "29112",
+            "name": "deðnek mavi elmas",
+            "short_description": "mavi elmas deðnek",
+            "description": "Mavi elmas bir deðnek burada býrakýlmýþ... Hadi al onu!\n",
+            "material": "wood",
+            "type": "wand",
+            "extra_flags": "G",
+            "wear_flags": "AO",
+            "values": "14 12 12 'create food' 0",
+            "level": "13",
+            "weight": "2",
+            "cost": "1200",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "elmas mavi",
+                    "description": "Ne kadar da lezzetliler!\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29113",
+            "name": "külçe altýn",
+            "short_description": "külçe altýn",
+            "description": "Ýþte gökkuþaðýnýn dibindeki ALTIN!\n",
+            "material": "gold",
+            "type": "money",
+            "extra_flags": "A",
+            "wear_flags": "AO",
+            "values": "500 0 0 0 0",
+            "level": "0",
+            "weight": "13",
+            "cost": "130",
+            "condition": "P"
+        },
+        {
+            "vnum": "29114",
+            "name": "yiyecek böðürtlen",
+            "short_description": "bir salkým böðürtlen",
+            "description": "Lezeetli bir böðürtlen salkýmý görüyorsun.\n",
+            "material": "flesh",
+            "type": "food",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "24 24 0 0 0",
+            "level": "0",
+            "weight": "1",
+            "cost": "5",
+            "condition": "P"
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "29101",
+            "name": "Ormandaki Açýklýk",
+            "description": "Ormanda bir açýklýktasýn. Ay ýþýðý gölgelerin dans etmesine neden oluyor.\nAçýklýðýn ortasýnda ÇOK büyük mantarlar görüyorsun.\n",
+            "flags": "C",
+            "sector": "3",
+            "extra_descriptions": [
+                {
+                    "keyword": "mantarlar mantar",
+                    "description": "Mantarlarýn oluþturduðu halkaya bakýyorsun. Küçük ayak izlerini takip ederek\ngizli bir kapý buluyorsun.\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3513"
+                },
+                {
+                    "door": "D5",
+                    "description": "gizli kapý",
+                    "keyword": "gizli kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29102"
+                }
+            ]
+        },
+        {
+            "vnum": "29102",
+            "name": "Giriþ Koridoru",
+            "description": "Dar ve boðucu bir tüneldesin. Yukarýdaki aðaçlar köklerini tünelin içine\nuzatmýþlar. Kuzey, güney ve batýda küçük kapýlar var. Köklerden örülmüþ\nbir merdiven yukarý yöneliyor. Doðudan boðuk kutlama sesleri duyuyorsun.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Küçük kapý",
+                    "keyword": "küçük kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29103"
+                },
+                {
+                    "door": "D1",
+                    "description": "Sisli koridor.",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29104"
+                },
+                {
+                    "door": "D2",
+                    "description": "Küçük kapý",
+                    "keyword": "küçük kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29105"
+                },
+                {
+                    "door": "D3",
+                    "description": "Küçük kapý",
+                    "keyword": "küçük kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29106"
+                },
+                {
+                    "door": "D4",
+                    "description": "Küçük kapý",
+                    "keyword": "küçük kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29101"
+                }
+            ]
+        },
+        {
+            "vnum": "29103",
+            "name": "Puk'un Odasý",
+            "description": "Puk'un odasýnýn tavaný ne kadar da alçakmýþ, iyice kamburlaþtýn. Yapraklarla\nyapýlmýþ bir yatak ve raflar görüyorsun. Burada gördüklerine dokunacak kadar\nkaba biri olamazsýn. Puk'a saygýn YOK MU!! Duvarda bir tabela görüyorsun.\n",
+            "flags": "D",
+            "sector": "0",
+            "extra_descriptions": [
+                {
+                    "keyword": "tabela",
+                    "description": "Biraz Saygý Lütfen! imza-PUK\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Küçük kapý",
+                    "keyword": "küçük kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29102"
+                }
+            ]
+        },
+        {
+            "vnum": "29104",
+            "name": "Ufaklýklarýn Barý",
+            "description": "Küçük ve alçak tavanlý bir bardasýn. Sen girince herkes sustu. Etrafýnda ufak\ncanlýlar kristal bardaklardan içkilerini içiyorlar. Oldukça yoðun bir sis var.\nBelki bir süre kalýp peri þarabýný denemek istersin??? Batýya alçak tavanlý\nbir tünel yöneliyor ve doðudan gelen patýrtýlar duyuyorsun.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Patýrtýya doðru.",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29107"
+                },
+                {
+                    "door": "D3",
+                    "description": "Sisli koridor.",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29102"
+                }
+            ]
+        },
+        {
+            "vnum": "29105",
+            "name": "Uyku Ýni",
+            "description": "Uyku inindesin. Duvarda büyük bir tabela var. Kimisi sarhoþ, kimisi ayýk\nbir sürü ufaklýk burada uyuyor. Kuzeyde küçük bir kapý var.\n",
+            "flags": "D",
+            "sector": "0",
+            "extra_descriptions": [
+                {
+                    "keyword": "büyük tabela",
+                    "description": "'Kapýyý kapat, seni APTAL!!!'"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Küçük kapý",
+                    "keyword": "küçük kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29102"
+                }
+            ]
+        },
+        {
+            "vnum": "29106",
+            "name": "Korunan Çukur",
+            "description": "Tekrar dikilince rahatladýn. Ýþte tavanlar böyle yüksek yapýlmalý. Doðuda\nküçük, güneyde ise büyük bir kapý görüyorsun.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Küçük kapý",
+                    "keyword": "kapý küçük",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29102"
+                },
+                {
+                    "door": "D2",
+                    "description": "Büyük kapý",
+                    "keyword": "kapý büyük",
+                    "locks": "1",
+                    "key": "29110",
+                    "u1_vnum": "29108"
+                }
+            ]
+        },
+        {
+            "vnum": "29107",
+            "name": "Oyun Salonu",
+            "description": "Yine kamburlaþtýn. Ufaklýklarýn koþuþturmasýndan buranýn bir oyun salonu\nolabileceðini düþünüyorsun, ama acaba HANGÝ oyunu oynuyorlar? Sen de az\noyun oynamýþ biri deðilsin, hala da oynarsýn ama böyle bir oyunu ilk kez\ngörüyorsun. Onlara katýlmak için birkaç APTALCA hareket yaptýðýný görünce\nufaklýklar gülmeye baþlýyorlar. Oyun oynamayý býraktýlar, seni izliyorlar,\nhadi EÐLENDÝR ONLARI...\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Ufaklýklarýn Barý.",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29104"
+                }
+            ]
+        },
+        {
+            "vnum": "29108",
+            "name": "Kraliçenin Salonu",
+            "description": "Peri Kraliçesi'nin salonundasýn ve üstünün baþýnýn kirli olmasý seni biraz\nutandýrýyor. Ne yapacaðýný bilemeyerek bir an için diz çöküyorsun, sonra\ntekrar ayaða kalkýyorsun; ama tavan o kadar alçak ki kafaný vuruyorsun.\nMacera aramayý býrakýp bir sirke falan katýlmayý düþünür müsün???\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Büyük kapý",
+                    "keyword": "kapý büyük",
+                    "locks": "1",
+                    "key": "29110",
+                    "u1_vnum": "29106"
+                }
+            ]
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "29105",
+            "spec_fun": "spec_thief"
+        },
+        {
+            "vnum": "29106",
+            "spec_fun": "spec_cast_mage"
+        }
+    ],
+    "resets": [
+        {
+            "command": "D",
+            "arg1": "29101",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29102",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29102",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29102",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29102",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29103",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29105",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29106",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29106",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29108",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "29101",
+            "arg2": "4",
+            "arg3": "29102",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29101",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29105",
+            "arg2": "1",
+            "arg3": "29103",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29109",
+            "arg2": "0",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29111",
+            "arg2": "0",
+            "arg3": "4"
+        },
+        {
+            "command": "O",
+            "arg1": "29108",
+            "arg2": "0",
+            "arg3": "29103"
+        },
+        {
+            "command": "M",
+            "arg1": "29102",
+            "arg2": "3",
+            "arg3": "29104",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29105",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29101",
+            "arg2": "4",
+            "arg3": "29104",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29101",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29103",
+            "arg2": "3",
+            "arg3": "29104",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29103",
+            "arg2": "0",
+            "arg3": "13"
+        },
+        {
+            "command": "M",
+            "arg1": "29109",
+            "arg2": "1",
+            "arg3": "29104",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29108",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "29114",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29107",
+            "arg2": "1",
+            "arg3": "29104",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29112",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "29113",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29108",
+            "arg2": "2",
+            "arg3": "29105",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29108",
+            "arg2": "2",
+            "arg3": "29105",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29108",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29104",
+            "arg2": "3",
+            "arg3": "29106",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29104",
+            "arg2": "0",
+            "arg3": "14"
+        },
+        {
+            "command": "M",
+            "arg1": "29104",
+            "arg2": "3",
+            "arg3": "29106",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29104",
+            "arg2": "0",
+            "arg3": "14"
+        },
+        {
+            "command": "G",
+            "arg1": "29110",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29101",
+            "arg2": "4",
+            "arg3": "29107",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29101",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29102",
+            "arg2": "3",
+            "arg3": "29107",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29105",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29103",
+            "arg2": "3",
+            "arg3": "29107",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29103",
+            "arg2": "0",
+            "arg3": "13"
+        },
+        {
+            "command": "M",
+            "arg1": "29106",
+            "arg2": "1",
+            "arg3": "29108",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29102",
+            "arg2": "0",
+            "arg3": "0"
+        },
+        {
+            "command": "E",
+            "arg1": "29106",
+            "arg2": "0",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29107",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29101",
+            "arg2": "4",
+            "arg3": "29108",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29101",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29102",
+            "arg2": "3",
+            "arg3": "29108",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29105",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29103",
+            "arg2": "3",
+            "arg3": "29108",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29103",
+            "arg2": "0",
+            "arg3": "13"
+        },
+        {
+            "command": "M",
+            "arg1": "29104",
+            "arg2": "3",
+            "arg3": "29108",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29104",
+            "arg2": "0",
+            "arg3": "14"
+        }
+    ],
+    "shops": [
+        {
+            "keeper": "29109",
+            "buy_type_0": "1",
+            "buy_type_1": "2",
+            "buy_type_2": "3",
+            "buy_type_3": "4",
+            "buy_type_4": "18",
+            "profit_buy": "120",
+            "profit_sell": "80",
+            "open_hour": "0",
+            "close_hour": "23"
+        }
+    ]
+}

@@ -1,0 +1,1468 @@
+{
+    "area": {
+        "file": "kutsal_koru.are",
+        "name": "Yarý Türkçe",
+        "low_range": "5",
+        "high_range": "20",
+        "min_vnum": "8900",
+        "max_vnum": "8999",
+        "path": "8d 1k",
+        "yonelim_iyi": "33",
+        "yonelim_yansiz": "34",
+        "yonelim_kem": "33"
+    },
+    "mobiles": [
+        {
+            "vnum": "8900",
+            "name": "hiyeropant",
+            "short_description": "Hiyeropant",
+            "long_description": "Kutsal korunun yaþlý Hiyeropant'ý burada, kutsallarý bir araya getiriyor.\n",
+            "description": "Oldukça yaþlý ve kendisi kadar yaþlý bir cüppeye bürünmüþ bir adam. Açýk\nmavi gözleri dünyayý izliyor, yaþayan ve büyüyen herþeyi görüyor.\n",
+            "race": "human",
+            "act": "AGHKQe",
+            "affected_by": "DHN",
+            "level": "20"
+        },
+        {
+            "vnum": "8901",
+            "name": "hiyeropant",
+            "short_description": "Hiyeropant",
+            "long_description": "Kutsal korunun yaþlý Hiyeropant'ý burada, kutsallarý bir araya getiriyor.\n",
+            "description": "Oldukça yaþlý ve kendisi kadar yaþlý bir cüppeye bürünmüþ bir kadýn. Açýk\nmavi gözleri dünyayý izliyor, yaþayan ve büyüyen herþeyi görüyor.\n",
+            "race": "human",
+            "act": "AGHQ",
+            "affected_by": "DHN",
+            "level": "20"
+        },
+        {
+            "vnum": "8902",
+            "name": "yaþlý rahip",
+            "short_description": "yaþlý rahip",
+            "long_description": "Yaþlý bir rahip görüyorsun, vahþi ve kutsal yaþamý izliyor.\n",
+            "description": "Kutsal korunun diðer rahipleri gibi yaþlý. Çenesinden sarkan gri sakalýn\nher telinde onlarca yýlýn tecrübesi ve bilgisi kendini gösteriyor.\n",
+            "race": "human",
+            "act": "AGHQ",
+            "affected_by": "N",
+            "level": "13"
+        },
+        {
+            "vnum": "8903",
+            "name": "yaþlý rahibe",
+            "short_description": "yaþlý rahibe",
+            "long_description": "Yaþlý bir rahibe görüyorsun, vahþi ve kutsal yaþamý izliyor.\n",
+            "description": "Oldukça yaþlý, güzel bir gülümsemeyle seni selamlýyor.\n",
+            "race": "human",
+            "act": "AGHQ",
+            "affected_by": "N",
+            "level": "13"
+        },
+        {
+            "vnum": "8904",
+            "name": "diþi geyik",
+            "short_description": "diþi geyik",
+            "long_description": "Bir geyik görüyorsun, çimenleri eziyor.\n",
+            "description": "Büyük kara gözleriyle seni izleyen barýþçýl bir diþi geyik.\n",
+            "race": "human",
+            "act": "AGH",
+            "affected_by": "0",
+            "level": "5"
+        },
+        {
+            "vnum": "8905",
+            "name": "geyik",
+            "short_description": "geyik",
+            "long_description": "Bir geyik görüyorsun, sessizce dolaþýyor.\n",
+            "description": "Senin varlýðýndan rahatsýz olmuþ gibi görünüyor. Kafasýný yere eðerek\nsað arka ayaðýyla çimleri kopartýp savuruyor.\n",
+            "race": "human",
+            "act": "AGH",
+            "affected_by": "0",
+            "level": "6"
+        },
+        {
+            "vnum": "8906",
+            "name": "erkek geyik",
+            "short_description": "erkek geyik",
+            "long_description": "Büyükçe bir geyik görüyorsun, bölgesini kolluyor.\n",
+            "description": "Onu rahatsýz etmesen daha iyi...\n",
+            "race": "human",
+            "act": "AFGH",
+            "affected_by": "0",
+            "level": "8"
+        },
+        {
+            "vnum": "8907",
+            "name": "küçük tavþan",
+            "short_description": "küçük tavþan",
+            "long_description": "Küçük bir tavþan görüyorsun, zýplayýp duruyor.\n",
+            "description": "Çok güzel bir tavþan, senin olmasýný isterdin...\n",
+            "race": "human",
+            "act": "AGH",
+            "affected_by": "0",
+            "level": "2"
+        },
+        {
+            "vnum": "8908",
+            "name": "yýlan",
+            "short_description": "zararsýz yýlan",
+            "long_description": "Küçük bir yýlan otlarýn arasýnda ilerliyor.\n",
+            "description": "Biraz inceledikten sonra onun zararsýz bir türden olduðunu anladýn.\n",
+            "race": "snake",
+            "act": "AFGH",
+            "affected_by": "P",
+            "level": "4"
+        },
+        {
+            "vnum": "8909",
+            "name": "rahip",
+            "short_description": "rahip",
+            "long_description": "Rahip burada, meditasyon yapýyor.\n",
+            "description": "Onu rahatsýz ettin! Yine de senden buradan çýkmaný rica edecek kadar nazik.\n",
+            "race": "human",
+            "act": "AGHQ",
+            "affected_by": "DN",
+            "level": "10"
+        },
+        {
+            "vnum": "8910",
+            "name": "rahibe",
+            "short_description": "rahibe",
+            "long_description": "Rahibe burada, seni izliyor.\n",
+            "description": "Neden ona baktýðýný ve buraya nasýl geldiðini merak ediyor.\n",
+            "race": "human",
+            "act": "AGHQ",
+            "affected_by": "DN",
+            "level": "10"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "8901",
+            "name": "tahta kutu",
+            "short_description": "tahta kutu",
+            "description": "Tahta bir kutu burada býrakýlmýþ.",
+            "material": "wood",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "100 A 0 100 100",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "tahta kutu",
+                    "description": "Geniþ ve saðlam. Ýdeal bir taþýyýcý.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8902",
+            "name": "baharat þiþesi",
+            "short_description": "baharat þiþesi",
+            "description": "Küçük bir baharat þiþesi burada býrakýlmýþ.",
+            "material": "glass",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "5 AC 0 5 100",
+            "level": "0",
+            "weight": "10",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "8903",
+            "name": "siyah toz",
+            "short_description": "bir miktar siyah toz",
+            "description": "Burada bir miktar toz býrakýlmýþ, oldukça güçlü bir kokusu var.",
+            "material": "food",
+            "type": "food",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "-2 -2 0 0 0",
+            "level": "0",
+            "weight": "10",
+            "cost": "0",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "powder",
+                    "description": "*        *         *\n      *      *       *\n****   AAAHHHH-TSHOU!   ****\n      *      *       *\n    *        *         *\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8904",
+            "name": "sarý çekirdek",
+            "short_description": "bir miktar sarý çekirdek",
+            "description": "Yerde bir miktar çekirdek görüyorsun.",
+            "material": "food",
+            "type": "food",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "1 1 0 0 0",
+            "level": "0",
+            "weight": "10",
+            "cost": "0",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "sarý çekirdek",
+                    "description": "Oldukça doyurucu bir yiyecek gibi görünüyor...\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8905",
+            "name": "kaðýt tomarý",
+            "short_description": "kaðýt tomarý",
+            "description": "Yerde bir kaðýt tomarý görüyorsun.",
+            "material": "paper",
+            "type": "trash",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "10",
+            "cost": "0",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "paper wad",
+                    "description": "It looks old and worn, but You can still make out a faint lettering on it,\nwritten in a strange, alien hand:\n\no    WARNING! WARNING! WARNING! WARNING! WARNING! WARNING! WARNING!   o\no                                                                     o\no    MSGS: MATRIX CONTROL      TO   SUBSYSTEMS/<ALL>                  o\no    ACT : REQUIRED            T:   NOW                               o\no                                                                     o\no    RECENT DATAQUAKE EVALUATED... EVALUATION FOLLOWS...              o\no    MASSIVE SEGMENTATION HAS OCCURRED... ALL SUBSIDIARY SECTORS      o\no    SHUTDOWN... CENTRAL SHUTDOWN: AUTOMATICS ENGAGED...              o\no                                                                     o\no    DATALEAK DETECTED... DIRECTION:FOREIGN VIRTUAL REALITY, CODENAME o\no    ASSIGNED: 'Midgaard'...                                          o\no    SPECIFIC LOCATION: UNCERTAIN, BEING WITHIN 'Midgaard' SUBSECTOR  o\no    CODENAME ASSIGNED: 'Holy Grove'...                               o\no    BEWARE INTRUSIONS POSSIBLE. ADVISE EXTREME CAUTION...            o\no    .                                                                o\no    .                                                                o\no    .                                                                o\no                                                                     o\no    MSGS: MATRIX CONTROL      TO   SUBSYSTEMS/<Sark>                 o\no                                              <101110101101>         o\no                                              <1101111010101101>     o\no    ACT : URGENT              T:   IMMEDIATE                         o\no                                                                     o\no    INTRUDERS DETECTED IN MAIN MATRIX... DIRECTIVE SEARCH AND        o\no    ELIMINATE...                                                     o\no    .                                                                o\no    .                                                                o\no                                                                     o\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8910",
+            "name": "tahta kargý",
+            "short_description": "tahta kargý",
+            "description": "Yerde duran bir tahta kargý görüyorsun.",
+            "material": "wood",
+            "type": "weapon",
+            "extra_flags": "K",
+            "wear_flags": "AN",
+            "values": "exotic 3 6 pound F",
+            "level": "16",
+            "weight": "50",
+            "cost": "1500",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "tahta kargý",
+                    "description": "Meþe aðacýndan yapýlmýþ, oldukça saðlam bir kargý.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8911",
+            "name": "kahverengi cüppe",
+            "short_description": "kahverengi cüppe",
+            "description": "Bir cüppe burada býrakýlmýþ.",
+            "material": "cloth",
+            "type": "armor",
+            "extra_flags": "K",
+            "wear_flags": "AD",
+            "values": "6 6 6 0 0",
+            "level": "16",
+            "weight": "50",
+            "cost": "2300",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "10"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "kahverengi cüppe",
+                    "description": "Oldukça kalýn bir kumaþtan dokunmuþ, fakat yine de çok esnek.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8913",
+            "name": "mavi ot",
+            "short_description": "mavi ot",
+            "description": "Bir miktar ot burada býrakýlmýþ.",
+            "material": "plant_organism sulfur",
+            "type": "pill",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "15 '' '' 'bless' ''",
+            "level": "1",
+            "weight": "10",
+            "cost": "270",
+            "condition": "P"
+        },
+        {
+            "vnum": "8914",
+            "name": "mor ot",
+            "short_description": "mor ot",
+            "description": "Bir miktar ot burada býrakýlmýþ.",
+            "material": "plant_organism flour",
+            "type": "pill",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "15 '' '' 'cure light' ''",
+            "level": "0",
+            "weight": "10",
+            "cost": "250",
+            "condition": "P"
+        },
+        {
+            "vnum": "8915",
+            "name": "siyah ot",
+            "short_description": "siyah ot",
+            "description": "Bir miktar ot burada býrakýlmýþ.",
+            "material": "plant_organism papper",
+            "type": "pill",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "5 '' '' 'blindness' ''",
+            "level": "0",
+            "weight": "10",
+            "cost": "178",
+            "condition": "P"
+        },
+        {
+            "vnum": "8916",
+            "name": "gri ot",
+            "short_description": "gri ot",
+            "description": "Bir miktar ot burada býrakýlmýþ.",
+            "material": "plant_organism",
+            "type": "pill",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "5 '' 'giant strength' 'poison' ''",
+            "level": "5",
+            "weight": "10",
+            "cost": "360",
+            "condition": "P"
+        },
+        {
+            "vnum": "8917",
+            "name": "kýzýl ot",
+            "short_description": "kýzýl ot",
+            "description": "Bir miktar ot burada býrakýlmýþ.",
+            "material": "plant_organism",
+            "type": "pill",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "15 '' '' 'detect magic' ''",
+            "level": "0",
+            "weight": "10",
+            "cost": "250",
+            "condition": "P"
+        },
+        {
+            "vnum": "8918",
+            "name": "turuncu ot",
+            "short_description": "turuncu ot",
+            "description": "Bir miktar ot burada býrakýlmýþ.",
+            "material": "plant_organism",
+            "type": "pill",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "5 '' '' 'cure light' ''",
+            "level": "0",
+            "weight": "10",
+            "cost": "150",
+            "condition": "P"
+        },
+        {
+            "vnum": "8919",
+            "name": "pembe ot",
+            "short_description": "pembe ot",
+            "description": "Bir miktar ot burada býrakýlmýþ.",
+            "material": "unknown",
+            "type": "pill",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "5 '' 'cure poison' 'poison' ''",
+            "level": "6",
+            "weight": "10",
+            "cost": "430",
+            "condition": "P"
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "8901",
+            "name": "Kutsal Koru",
+            "description": "You are standing amidst the ancient oaks and poplars in the holy grove. You\ncan feel a strange sensation of contentedness and relief seeping through You,\nas if great burdens have been lifted from Your shoulders. From here, friendly-\nlooking paths lead east and south.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Yol uzun aðaçlarýn arasýna süzülüyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8902"
+                },
+                {
+                    "door": "D2",
+                    "description": "Yol uzun aðaçlarýn arasýna süzülüyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8904"
+                }
+            ]
+        },
+        {
+            "vnum": "8902",
+            "name": "Kutsal Koru",
+            "description": "You are standing amidst the ancient oaks and poplars in the holy grove. You\nfeel unusually happy here, as if great burdens have been lifted from Your\nshoulders. From here, pleasant-looking paths lead east, west and south.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "The path wind its way through the tall trees, towards a clearing faintly seen.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8903"
+                },
+                {
+                    "door": "D2",
+                    "description": "The path wind its way through the tall trees, towards an open area barely\nvisible in the distance.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8905"
+                },
+                {
+                    "door": "D3",
+                    "description": "Yol uzun aðaçlarýn arasýna süzülüyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8901"
+                }
+            ]
+        },
+        {
+            "vnum": "8903",
+            "name": "Aðaçlarýn Arasýndaki Açýklýk",
+            "description": "You are standing in a clearing in the light woods. Somehow, this place\nseems powerfully DIFFERENT from the rest of the forest, as if something is\nseverely strained in the fabric of reality here.  There is a small tablet\non one of the trees.\n",
+            "flags": "C",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "A small, narrow path winds north, and is quickly lost in the bushes. It\nlooks quite a wilderness there!\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5378"
+                },
+                {
+                    "door": "D2",
+                    "description": "There is a path winding its way south through the tall poplars, disappearing\nout of sight some 100 yds. away.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8906"
+                },
+                {
+                    "door": "D3",
+                    "description": "There is a friendly-looking path leading west through the tall trees.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8902"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "tablet",
+                    "description": "This zone has been populated by Merc.  1993\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8904",
+            "name": "Kutsal Koru",
+            "description": "You are standing amidst the ancient oaks and poplars in the holy grove. You\nfeel calm and relaxed here, as if great burdens have been lifted from Your\nshoulders. From here, pleasant-looking paths lead east, north and south. To\nthe west, through the trees, You can see a faint trail leading towards the\neastern road.\n",
+            "flags": "C",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Yol uzun aðaçlarýn arasýna süzülüyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8901"
+                },
+                {
+                    "door": "D1",
+                    "description": "The path wind its way through the tall trees, towards a clearing faintly seen.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8905"
+                },
+                {
+                    "door": "D2",
+                    "description": "The path wind its way through the tall trees, into the grove.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8907"
+                },
+                {
+                    "door": "D3",
+                    "description": "You can barely see a path leading back towards the eastern road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8951"
+                }
+            ]
+        },
+        {
+            "vnum": "8905",
+            "name": "Kutsal Açýklýk",
+            "description": "You are standing in the middle of the sacred glades, where the citizens of\nMidgaard come to celebrate the spring, where farmers give thanks for bountiful\nharvest in the fall, and where lovers stroll in summer. You feel seasons of\nremembered happiness and joy taking Your sorrows and worries away from You,\nleaving You calm and invigorated, ready for the world. Paths lead into the\nholy grove to the east, north and west, while to the south a wide, sunny field\nslopes down to a sparkling lake.  Above you is a strange shimmering, almost\nlike something from another world....\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "The path wind its way north, disappearing through the tall trees.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8902"
+                },
+                {
+                    "door": "D1",
+                    "description": "Yol uzun aðaçlarýn arasýna süzülüyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8906"
+                },
+                {
+                    "door": "D2",
+                    "description": "To the south, a wide, sunny field stretch out, sloping down towards a brightly\nglittering lake.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8908"
+                },
+                {
+                    "door": "D3",
+                    "description": "The path wind its way west between stately poplars and oaks.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8904"
+                },
+                {
+                    "door": "D4",
+                    "description": "The shimmering grows in intensity as you look at it, beckoning you to reach\nupwards...\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "9000"
+                }
+            ]
+        },
+        {
+            "vnum": "8906",
+            "name": "Kutsal Koru",
+            "description": "You are standing amidst the ancient oaks and poplars in the holy grove. You\ncan feel a strange sensation of joy and calm seeping through You, as if great\nburdens have been lifted from Your shoulders. To the south, You glimpse an open\narea through the trees, while paths lead away north and west.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Yol uzun aðaçlarýn arasýna süzülüyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8903"
+                },
+                {
+                    "door": "D2",
+                    "description": "To the south, just beyond the trees, you can see a wide green lawn, and past\nthe lawn, a softly shimmering, rainbow-colored mansion.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8909"
+                },
+                {
+                    "door": "D3",
+                    "description": "Yol uzun aðaçlarýn arasýna süzülüyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8905"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "konak",
+                    "description": "The mansion is a sprawling, two-story affair with three wings, where the top\nof one wing serves as balcony. The walls look as marble would do, if marble\nchanged color slowly, continuously, through the entire spectrum. There are\nlarge windows all over the house.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8907",
+            "name": "Kutsal Koru",
+            "description": "You are standing amidst the tall, majestic trees in the southern end of the\nholy grove. Paths lead north and east. To the east, You can see a wide, open\nfield, sloping gently down towards a bright, glittering lake. Somehow, here\nyou feel an inexplicable happiness, as if the world's troubles no longer\nreally matter to you.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "The path leading north is soon lost out of sight amongst the ancient oaks and\npoplars.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8904"
+                },
+                {
+                    "door": "D1",
+                    "description": "To the east, the path leads out into a wide, sunny summer's field, sloping\nsouth towards a beautiful lake. Past the field You can see a stately mansion,\nshimmering gently in all the rainbow's colours.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8908"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "konak",
+                    "description": "The mansion is a sprawling, two-story affair with three wings, where the top\nof one wing serves as balcony. The walls look as marble would do, if marble\nchanged color slowly, continuously, through the entire spectrum. There are\nlarge windows all over the house.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8908",
+            "name": "Güneþli Alan",
+            "description": "You are standing in the middle of a wide, summery, sunlit field. There is a\nfragrance of spring in the air, a sound of summer and a feeling of eternal\nSaturday afternoon. To the south is a clear, sparkling lake, and to the north\nand west is the holy grove. In the wood's edge, to the east, is a stately man-\nsion, shimmering softly through the colors of the rainbow. You feel as if You\ncould spend the rest of your life here, lying on your back and looking at the\npatterns of the clouds as they gently drift across the sky.\n",
+            "flags": "D",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "There is a path leading north towards the sacred glade.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8905"
+                },
+                {
+                    "door": "D1",
+                    "description": "To the east, You can see the rainbow-colored mansion, shimmering like some-\nthing out of this world.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8919"
+                },
+                {
+                    "door": "D3",
+                    "description": "There is a small path leading into the woods to the west.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8907"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "konak",
+                    "description": "The mansion is a sprawling, two-story affair with three wings, where the top\nof one wing serves as balcony. The walls look as marble would do, if marble\nchanged color slowly, continuously, through the entire spectrum. There are\nlarge windows all over the house. There is a terrace in front of the house,\nnext to the low wing, which is almost completely windows.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8909",
+            "name": "Çimenlik",
+            "description": "You are standing on a immaculately manicured green lawn, the kind you only\nget after 200 years of meticulous work. There is a winding stone path leading\nfrom the wood's edge to the north, to the softly shimmering, rainbow-colored\nmansion to the south. This place enjoys a perpetual cool, sunny summers after-\nnoon.\n",
+            "flags": "C",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "To the north, the winding stone path leads into the holy grove.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8906"
+                },
+                {
+                    "door": "D2",
+                    "description": "To the south, the path leads straight up to the front door of the mansion.\n",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8910"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "konak",
+                    "description": "The mansion is a sprawling, two-story affair with three wings, where the top\nof one wing serves as balcony. The walls look as marble would do, if marble\nchanged color slowly, continuously, through the entire spectrum. There are\nlarge windows all over the house.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8910",
+            "name": "Giriþ",
+            "description": "You are standing in the foyer of Dragon's mansion. The wide double door to\nthe croquet lawn is to the north, flanked by large windows. The walls are\npanelled in oak and hung with strange paintings.  There is door in the south\nwall.\n",
+            "flags": "CD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Through the windows next to the door you can see the croquet lawn, bathed in\nafternoon sunlight.\n",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8909"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8911"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "tablo tablolar",
+                    "description": "They are strange indeed, works of breathtaking precision depicting obviously\nimpossible motifs, like a sky filled with headless men, all dressed in some\nblack costume (including hats), or a lady standing, blue from the waist up, or\nsome pieces of plankwood that seems to be melting away like snow, or a night\nsky with a dove-shaped hole of bright day sky in the middle.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8911",
+            "name": "Koridor",
+            "description": "You are in the north end of a connecting hallway, tastefully decorated with\noak paneling and the coat-of-arms of various famous nobles hung on the walls.\nThe hallway leads south, and there is a door in the eastern wall.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8910"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8912"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8913"
+                }
+            ]
+        },
+        {
+            "vnum": "8912",
+            "name": "Mavi Oda",
+            "description": "You are in the blue room, one of the guest rooms in Dragon's mansion. The\nwalls are (surprise!) blue, and the rest of the room is decorated in similar\nshades, producing a very nice, cool effect. There is a large bed and a\nmatching set of sofas, easy-chairs and a coffee table. Through the venetian\nblinds in front of the large east window you can see the edge of the grove.\n",
+            "flags": "DJ",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8911"
+                }
+            ]
+        },
+        {
+            "vnum": "8913",
+            "name": "Koridor",
+            "description": "You are standing in the south end of the hallway. There are doors in the\nelegant oak-panelled walls to the south, east and west. Many different\ncoat-of-arms adorn the walls here.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8911"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8914"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8915"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8916"
+                }
+            ]
+        },
+        {
+            "vnum": "8914",
+            "name": "Kýzýl Oda",
+            "description": "You are in the red room, one of the guest rooms in Dragon's mansion. The\nwalls are wallpapered a deep warm red, and dark mahogany panelling nicely com-\nplements them. There is a large, warm waterbed and a sofa group in dark wood\nwith leather upholstery, including a coffee table. Heavy brown curtains are\npulled away from the wide windows, to reveal a nice view towards the grove.\n",
+            "flags": "DJ",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8913"
+                }
+            ]
+        },
+        {
+            "vnum": "8915",
+            "name": "Mutfak",
+            "description": "You are standing in the middle of Dragon's kitchen. Contrary to popular\nbelief, He *doesn't* eat virgins, which is amply demonstrated by the large\nvariety of foodstuffs found here on the shelves. There are numerous cans of\ntomatoes, peas, corn etc., vines of garlic, a *Huge* array of small spice jars\nalong several shelves and a large combo refrigerator/freezer. A big oven and\nstove is lurking in a corner. There is some proof here that Dragon is a less\nthan meticulous housekeeper... There are doors to the north and west.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8913"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8918"
+                }
+            ]
+        },
+        {
+            "vnum": "8916",
+            "name": "Balo Salonu",
+            "description": "You are standing in the middle of a vast palisander floor. This is where\nDragon entertains large number of guests, but the cloth-covered chairs\nstanding forlornly in a corner suggests that this does not happen often.\nThere are doors in the south and east walls, while to the west there is a\nshort corridor to the greenhouse.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8913"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8918"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8917"
+                }
+            ]
+        },
+        {
+            "vnum": "8917",
+            "name": "Yeþil Ev",
+            "description": "This is Dragons' greenhouse. Green light filters in slantwise through the\nplants, giving the room a subtropical ambience. It is not really hot in here,\nthough, rather a pleasantly warm temperature. The walls are all windows, except\nthe eastern one joining the greenhouse to the main building, but it is hard to\nsee out for all the greenery here. There is a set of easy-chairs and a glass\ncoffee table. To the south, there is a wide double door out to a sunlit\nterrace.\n",
+            "flags": "DJ",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8916"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8919"
+                }
+            ]
+        },
+        {
+            "vnum": "8918",
+            "name": "Yemek Salonu",
+            "description": "This is Dragons' dining hall. There is a large long solid oak table,\nseating at least 24, with heavy, wooden chairs to match. The oak panel walls\nare filled with paintings. There are doors to the north and east, and to the\nwest there is a wide double door opening out onto the sunlit terrace.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8916"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8915"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "geniþ kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8919"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "tablo tablolar",
+                    "description": "There are many, many beautiful paintings of famous dragons of history and\nliterature. There is a big one of Smaug, a group picture of Cuspidorian Toxic\nDragons, a rather fearsome picture of Norse Chaos incarnate, a grainy black-\nand-white photograph of Vorgulremik the Steel Dragon, a romantic picture of\nDalvenjah the Mindijaran and Allan the man become dragon. There are three\nempty frames labeled 'The Chimerical', 'The Mythical' and 'The Hypothetical',\nA panoramic picture of Strabo flying between the worlds dominate one wall,\nwhile a dragons-eye view of Pern (with dragons in the foreground, of course)\nfills another. There even are a few rare medieval renditions of the great\nbeast of the Revelation. Over the head of the table hangs a rather modest\nportrait of a silver Dragon, sparkling with blue lightening, looking amused.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8919",
+            "name": "Taraça",
+            "description": "You are standing on a sunlit terrace in front of Dragon's mansion. To the\nwest, there is a splendid view over the field down over the lake. To the north\nis the greenhouse, its large windowpanes shimmering with weird and wonderful\ncolors, while a double door leads into the house proper to the east. It is\nwarm and calm here. There is a white-painted table with a parasol here,\ntogether with a matched set of chairs.\n",
+            "flags": "CD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8917"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "çift kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8918"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8908"
+                }
+            ]
+        },
+        {
+            "vnum": "8950",
+            "name": "Korunun Sonu",
+            "description": "You are standing at the entrace of a beautiful grove of trees, and your\nheart is filled with pure, peaceful thoughts.  This looks like a safe place\nto recover from the wounds of adventuring.  A faint path through the grove\nlies to the north, and you can see the eastern road to the south.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "A faint trail leads deeper into the grove.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8951"
+                },
+                {
+                    "door": "D2",
+                    "description": "A wide road lies to the south.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3526"
+                }
+            ]
+        },
+        {
+            "vnum": "8951",
+            "name": "Korunun Ýçi",
+            "description": "As you walk among the stately oaks of this grove, you feel at peace and\nin harmony with this beautiful forest.  If only the rest of the lands were\nso tranquil.  The trail turns towards the east, leading into the secluded\ntrees of the druids' holy grove, and a path back to the eastern road lies\nsouth.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "You see the stately oaks and poplars of the holy grove.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8904"
+                },
+                {
+                    "door": "D2",
+                    "description": "A faint trail heads towards the eastern road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8950"
+                }
+            ]
+        },
+        {
+            "vnum": "8999",
+            "name": "Sis",
+            "description": "You are in a grey fog, falling, screaming in pain as you realize\nthat you are being torn to nothing, atom by atom, falling and falling\nand falling ...\n...\n.\n",
+            "flags": "C",
+            "sector": "0"
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "8900",
+            "arg2": "1",
+            "arg3": "8905",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8910",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "8911",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "G",
+            "arg1": "8919",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "8918",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "8901",
+            "arg2": "1",
+            "arg3": "8901",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8910",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "8911",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "G",
+            "arg1": "8913",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "8915",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "8902",
+            "arg2": "1",
+            "arg3": "8902",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8910",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "8914",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "8916",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "8903",
+            "arg2": "1",
+            "arg3": "8904",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8910",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "8919",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "8917",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "8904",
+            "arg2": "2",
+            "arg3": "8905",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "8905",
+            "arg2": "2",
+            "arg3": "8906",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "8906",
+            "arg2": "1",
+            "arg3": "8905",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8907",
+            "arg2": "4",
+            "arg3": "8903",
+            "arg4": "4"
+        },
+        {
+            "command": "M",
+            "arg1": "8907",
+            "arg2": "4",
+            "arg3": "8903",
+            "arg4": "4"
+        },
+        {
+            "command": "M",
+            "arg1": "8908",
+            "arg2": "9",
+            "arg3": "8906",
+            "arg4": "9"
+        },
+        {
+            "command": "M",
+            "arg1": "8909",
+            "arg2": "2",
+            "arg3": "8911",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "8913",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "8909",
+            "arg2": "2",
+            "arg3": "8918",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "8916",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "8910",
+            "arg2": "2",
+            "arg3": "8914",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "8914",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "8910",
+            "arg2": "2",
+            "arg3": "8917",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "8918",
+            "arg2": "-1"
+        },
+        {
+            "command": "O",
+            "arg1": "8901",
+            "arg2": "2",
+            "arg3": "8912"
+        },
+        {
+            "command": "O",
+            "arg1": "8901",
+            "arg2": "2",
+            "arg3": "8914"
+        },
+        {
+            "command": "O",
+            "arg1": "8902",
+            "arg2": "2",
+            "arg3": "8915"
+        },
+        {
+            "command": "P",
+            "arg1": "8903",
+            "arg2": "1",
+            "arg3": "8902",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "8902",
+            "arg2": "2",
+            "arg3": "8915"
+        },
+        {
+            "command": "P",
+            "arg1": "8904",
+            "arg2": "1",
+            "arg3": "8902",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "8905",
+            "arg2": "1",
+            "arg3": "8915"
+        },
+        {
+            "command": "D",
+            "arg1": "8914",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8913",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8912",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8911",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8911",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8910",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8910",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8909",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8913",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8915",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8913",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8916",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8918",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8916",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8918",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8915",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8918",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8919",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8917",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8919",
+            "arg2": "0",
+            "arg3": "1"
+        }
+    ],
+    "shops": [],
+    "specials": [
+        {
+            "vnum": "8900",
+            "spec_fun": "spec_cast_cleric"
+        },
+        {
+            "vnum": "8901",
+            "spec_fun": "spec_cast_cleric"
+        },
+        {
+            "vnum": "8902",
+            "spec_fun": "spec_cast_cleric"
+        },
+        {
+            "vnum": "8903",
+            "spec_fun": "spec_cast_cleric"
+        },
+        {
+            "vnum": "8908",
+            "spec_fun": "spec_poison"
+        },
+        {
+            "vnum": "8909",
+            "spec_fun": "spec_cast_cleric"
+        },
+        {
+            "vnum": "8910",
+            "spec_fun": "spec_cast_cleric"
+        }
+    ],
+    "practicers": [
+        {
+            "vnum": "8900",
+            "practicer": "group_meditation"
+        }
+    ]
+}

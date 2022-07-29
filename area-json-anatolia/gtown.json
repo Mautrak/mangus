@@ -1,0 +1,5806 @@
+{
+    "area": {
+        "file": "gtown.are",
+        "name": "Ghost",
+        "low_range": "45",
+        "high_range": "65",
+        "writer": "Yaegar",
+        "credits": "Ghost Town",
+        "min_vnum": "8100",
+        "max_vnum": "8200"
+    },
+    "helps": [
+        {
+            "level": "0",
+            "keyword": "'GHOST TOWN'",
+            "text": "This is purely a simple hack-n-slash area with the interesting added feature\nthat you can't recall... You have to fight your way through the many powerful\nhigh level undead that populate this place. To a good mudder its heaven. To\nsomeone who flees when fighting the children in Mud School, its probably gonna\nbe considered impossible. Either way, have fun.\n\n\n"
+        }
+    ],
+    "mobiles": [
+        {
+            "vnum": "8100",
+            "name": "spectre",
+            "short_description": "a spectre",
+            "long_description": "A Spectre screams at you and attacks!\n",
+            "description": "The spirit of some former minion of this place, this foul Undead creature\nwill do its best you meet the same fate as all previous intruders in this\nfell domain- DEATH.\n",
+            "race": "undead",
+            "act": "AFGO",
+            "affected_by": "DFHT",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "60",
+            "hitroll": "0",
+            "hit_dice": "25d10+9750",
+            "mana_dice": "1d10+5000",
+            "dam_dice": "11d9+36",
+            "dam_type": "slash",
+            "ac_pierce": "-28",
+            "ac_bash": "-28",
+            "ac_slash": "-28",
+            "ac_exotic": "0",
+            "off_flags": "EFNQ",
+            "imm_flags": "R",
+            "res_flags": "0",
+            "vuln_flags": "NX",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "I",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8101",
+            "name": "wraith",
+            "short_description": "a wraith",
+            "long_description": "A Wraith strides  silently toward you, death in its glowing red eyes.\n",
+            "description": "The spirit of some former minion of this place, this foul Undead creature\nwill do its best you meet the same fate as all previous intruders in this\nfell domain- DEATH.\n",
+            "race": "undead",
+            "act": "AFGO",
+            "affected_by": "DFT",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "47",
+            "hitroll": "0",
+            "hit_dice": "25d10+3500",
+            "mana_dice": "1d20+3440",
+            "dam_dice": "6d6+17",
+            "dam_type": "pierce",
+            "ac_pierce": "-17",
+            "ac_bash": "-17",
+            "ac_slash": "-17",
+            "ac_exotic": "2",
+            "off_flags": "EFNQ",
+            "imm_flags": "R",
+            "res_flags": "0",
+            "vuln_flags": "N",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "I",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8102",
+            "name": "wight",
+            "short_description": "a wight",
+            "long_description": "A ghastly wight, still clad in the armor it wore in life, strikes at you.\n",
+            "description": "The spirit of some former minion of this place, this foul Undead creature\nwill do its best you meet the same fate as all previous intruders in this\nfell domain- DEATH.\n",
+            "race": "undead",
+            "act": "AFGO",
+            "affected_by": "DF",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "45",
+            "hitroll": "0",
+            "hit_dice": "25d10+3000",
+            "mana_dice": "10d10+330",
+            "dam_dice": "8d4+16",
+            "dam_type": "slash",
+            "ac_pierce": "-15",
+            "ac_bash": "-15",
+            "ac_slash": "-15",
+            "ac_exotic": "4",
+            "off_flags": "EFNQ",
+            "imm_flags": "R",
+            "res_flags": "0",
+            "vuln_flags": "NX",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "4500",
+            "form": "I",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8103",
+            "name": "ghost",
+            "short_description": "a ghost",
+            "long_description": "The ghost of some long-dead adventurer howls maniacally at you.\n",
+            "description": "The spirit of some former minion of this place, this foul Undead creature\nwill do its best you meet the same fate as all previous intruders in this\nfell domain- DEATH.\n",
+            "race": "undead",
+            "act": "AFGO",
+            "affected_by": "DFTU",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "48",
+            "hitroll": "0",
+            "hit_dice": "25d10+3750",
+            "mana_dice": "10d10+110",
+            "dam_dice": "6d6+18",
+            "dam_type": "pound",
+            "ac_pierce": "-18",
+            "ac_bash": "-18",
+            "ac_slash": "-18",
+            "ac_exotic": "2",
+            "off_flags": "EFNU",
+            "imm_flags": "R",
+            "res_flags": "0",
+            "vuln_flags": "NX",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "I",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8104",
+            "name": "vampire",
+            "short_description": "a vampire",
+            "long_description": "An evil vampire rises from the sarcophagus, bares its fangs and attacks!\n",
+            "description": "The Evil Baron and his two brothers were vampires imprisoned here by Xanan\ncenturies ago, who had not the power to slay them utterly, and now thanks\nto your disturbance they have risen again!\n",
+            "race": "undead",
+            "act": "ABFGO",
+            "affected_by": "DFN",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "54",
+            "hitroll": "0",
+            "hit_dice": "25d10+5250",
+            "mana_dice": "10d10+1110",
+            "dam_dice": "7d6+22",
+            "dam_type": "pierce",
+            "ac_pierce": "-24",
+            "ac_bash": "-24",
+            "ac_slash": "-24",
+            "ac_exotic": "-1",
+            "off_flags": "EFNQ",
+            "imm_flags": "BR",
+            "res_flags": "0",
+            "vuln_flags": "NX",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5300",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8105",
+            "name": "lich",
+            "short_description": "a lich",
+            "long_description": "An insane Lich cackles hideously and unleashes a volley of spells.\n",
+            "description": "This powerful Undead is actually Xantharus' former master, whom he betrayed\nand slew. But he underestimated his master's power, and now he as returned\nas a Lich, seeking revenge!\n",
+            "race": "human",
+            "act": "ABFGO",
+            "affected_by": "DF",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "58",
+            "hitroll": "0",
+            "hit_dice": "50d10+6250",
+            "mana_dice": "10d10+1110",
+            "dam_dice": "5d10+25",
+            "dam_type": "pierce",
+            "ac_pierce": "-28",
+            "ac_bash": "-28",
+            "ac_slash": "-28",
+            "ac_exotic": "2",
+            "off_flags": "EFNQ",
+            "imm_flags": "AB",
+            "res_flags": "T",
+            "vuln_flags": "K",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5800",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8106",
+            "name": "demon",
+            "short_description": "a lesser demon",
+            "long_description": "A Lesser Demon slobbers, drools and cackles insanely!\n",
+            "description": "This grotesque is a minion of the lower planes drawn here by the intense\nconcentration of negative material energy.\n",
+            "race": "undead",
+            "act": "AFGHO",
+            "affected_by": "DF",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "52",
+            "hitroll": "0",
+            "hit_dice": "50d10+4750",
+            "mana_dice": "10d10+4440",
+            "dam_dice": "6d7+20",
+            "dam_type": "pound",
+            "ac_pierce": "-22",
+            "ac_bash": "-22",
+            "ac_slash": "-22",
+            "ac_exotic": "0",
+            "off_flags": "EFNQ",
+            "imm_flags": "R",
+            "res_flags": "0",
+            "vuln_flags": "N",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "I",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8107",
+            "name": "spi  rit revenant",
+            "short_description": "a revenant",
+            "long_description": "The spirit of a mortal horribly wronged has returned as a Revenant.\n",
+            "description": "This poor soul was once a powerful, good priest of Soleil who was betrayed\nby agents of the evil Gomez and tortured and slain by them. His spirit has\nreturned here, seeking out the long-dead fellows who slew him. He will \nignore all else in his quest, but will not hesitate to attack you if you\ninterfere.\n",
+            "race": "undead",
+            "act": "AGO",
+            "affected_by": "DFN",
+            "alignment": "0",
+            "group": "0",
+            "level": "57",
+            "hitroll": "0",
+            "hit_dice": "50d10+6000",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "6d8+24",
+            "dam_type": "pierce",
+            "ac_pierce": "-27",
+            "ac_bash": "-27",
+            "ac_slash": "-27",
+            "ac_exotic": "-2",
+            "off_flags": "EFNQ",
+            "imm_flags": "R",
+            "res_flags": "0",
+            "vuln_flags": "N",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5300",
+            "form": "I",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8108",
+            "name": "spirit haunt",
+            "short_description": "a haunt",
+            "long_description": "The spirit of an adventurer slain here long ago is now bound here as a Haunt.\n",
+            "description": "This spirit was once a powerful warrior who, on a wager, entered Ghost Town.\nHe was quickly slain by the inhabitants, but such was his distress at his\ndeath, his spirit remained behind to haunt the area where he met his end.\n",
+            "race": "undead",
+            "act": "ABGO",
+            "affected_by": "DFTU",
+            "alignment": "0",
+            "group": "0",
+            "level": "48",
+            "hitroll": "0",
+            "hit_dice": "25d10+3750",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "6d6+18",
+            "dam_type": "pierce",
+            "ac_pierce": "-18",
+            "ac_bash": "-18",
+            "ac_slash": "-18",
+            "ac_exotic": "2",
+            "off_flags": "EFNQ",
+            "imm_flags": "R",
+            "res_flags": "0",
+            "vuln_flags": "N",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "I",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8109",
+            "name": "crypt thing",
+            "short_description": "a crypt thing",
+            "long_description": "A Crypt Thing cackles evilly and taunts you.\n",
+            "description": "This fell creature will not attack you, despite its evil- it will merely\ntaunt you, though it will not hesitate to defend itself.\n",
+            "race": "undead",
+            "act": "ABGO",
+            "affected_by": "DF",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "55",
+            "hitroll": "0",
+            "hit_dice": "50d10+5500",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "10d4+23",
+            "dam_type": "pierce",
+            "ac_pierce": "-25",
+            "ac_bash": "-25",
+            "ac_slash": "-25",
+            "ac_exotic": "0",
+            "off_flags": "EFNQ",
+            "imm_flags": "R",
+            "res_flags": "0",
+            "vuln_flags": "N",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5300",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8110",
+            "name": "greater demon",
+            "short_description": "a greater demon",
+            "long_description": "A Greater demon spews forth fire and gas!\n",
+            "description": "This grotesque is a minion of the lower planes drawn here by the intense\nconcentration of negative material energy.\n",
+            "race": "undead",
+            "act": "ABFGO",
+            "affected_by": "DFT",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "58",
+            "hitroll": "0",
+            "hit_dice": "50d10+6250",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "5d10+25",
+            "dam_type": "pound",
+            "ac_pierce": "-28",
+            "ac_bash": "-28",
+            "ac_slash": "-28",
+            "ac_exotic": "-2",
+            "off_flags": "EFNQ",
+            "imm_flags": "R",
+            "res_flags": "0",
+            "vuln_flags": "N",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5600",
+            "form": "I",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8111",
+            "name": "undead dragon",
+            "short_description": "an undead dragon",
+            "long_description": "An Undead Dragon belches forth poisonous fumes!\n",
+            "description": "This foul Dracolich is the undead spirit of a dragon that served Xantharus\nso well in life that he animated it to continue serving him after its\ndeath.\n",
+            "race": "undead",
+            "act": "ABFGO",
+            "affected_by": "DFT",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "62",
+            "hitroll": "0",
+            "hit_dice": "50d10+7250",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "6d9+32",
+            "dam_type": "pound",
+            "ac_pierce": "-32",
+            "ac_bash": "-32",
+            "ac_slash": "-32",
+            "ac_exotic": "-3",
+            "off_flags": "EFNQ",
+            "imm_flags": "R",
+            "res_flags": "0",
+            "vuln_flags": "N",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "7000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8112",
+            "name": "undead monster",
+            "short_description": "an undead monster",
+            "long_description": "An undead monster shambles forth and attacks!\n",
+            "description": "The spirit of some former minion of this place, this foul Undead creature\nwill do its best you meet the same fate as all previous intruders in this\nfell domain- DEATH.\n",
+            "race": "undead",
+            "act": "AFGO",
+            "affected_by": "DF",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "45",
+            "hitroll": "0",
+            "hit_dice": "25d10+3000",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "8d4+16",
+            "dam_type": "slash",
+            "ac_pierce": "-15",
+            "ac_bash": "-15",
+            "ac_slash": "-15",
+            "ac_exotic": "10",
+            "off_flags": "EFNQ",
+            "imm_flags": "R",
+            "res_flags": "0",
+            "vuln_flags": "N",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8113",
+            "name": "giant rat",
+            "short_description": "a giant rat",
+            "long_description": "A GIANT Rat savagely charges you!\n",
+            "description": "When I say GIANT, I am talking ten feet high...\n",
+            "race": "rat",
+            "act": "ACFGHO",
+            "affected_by": "DFQ",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "40",
+            "hitroll": "0",
+            "hit_dice": "10d10+1850",
+            "mana_dice": "10d10+100",
+            "dam_dice": "4d8+13",
+            "dam_type": "charge",
+            "ac_pierce": "-13",
+            "ac_bash": "-13",
+            "ac_slash": "-13",
+            "ac_exotic": "4",
+            "off_flags": "EFNQ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8114",
+            "name": "giant spider",
+            "short_description": "a giant spider",
+            "long_description": "A GIANT Spider drops down on you!\n",
+            "description": "When I say GIANT, I am talking ten feet high...\n",
+            "race": "undead",
+            "act": "ACFGHO",
+            "affected_by": "DFQ",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "45",
+            "hitroll": "0",
+            "hit_dice": "25d10+3000",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "8d4+16",
+            "dam_type": "charge",
+            "ac_pierce": "-15",
+            "ac_bash": "-15",
+            "ac_slash": "-15",
+            "ac_exotic": "4",
+            "off_flags": "EFNQ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "P",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8115",
+            "name": "lurker above",
+            "short_description": "a lurker above",
+            "long_description": "A Lurker Above seeks to enfold and suffocate you!\n",
+            "description": "This foul abberration feeds on any and all that enter its lair- even the\ncorporeal undead avoid it...\n",
+            "race": "undead",
+            "act": "ABFGHO",
+            "affected_by": "T",
+            "alignment": "0",
+            "group": "0",
+            "level": "52",
+            "hitroll": "0",
+            "hit_dice": "50d10+4750",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "6d7+20",
+            "dam_type": "pierce",
+            "ac_pierce": "-20",
+            "ac_bash": "-20",
+            "ac_slash": "-20",
+            "ac_exotic": "2",
+            "off_flags": "EFNQ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8116",
+            "name": "succubus",
+            "short_description": "a succubus",
+            "long_description": "A beautiful female smiles charmingly at you, revealing sharp fangs...\n",
+            "description": "OUCH! Its a Succubus. She will charm you, then waste you. FIGHT!\n",
+            "race": "undead",
+            "act": "ABGO",
+            "affected_by": "DFHT",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "50",
+            "hitroll": "0",
+            "hit_dice": "50d10+4250",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "5d8+19",
+            "dam_type": "slash",
+            "ac_pierce": "-20",
+            "ac_bash": "-20",
+            "ac_slash": "-20",
+            "ac_exotic": "2",
+            "off_flags": "EFNQ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "N",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "I",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8117",
+            "name": "necromancer xantharus",
+            "short_description": "Xantharus",
+            "long_description": "A timid-looking Necromancer begs to be freed.\n",
+            "description": "This pathetic wretch is none other than Xantharus, the evil mage that brought\nthe Undead to this town, destroying it, before losing control of them. He\nhas fled here, in the hopes that they won't find him before he finds a way\nto escape his terrible mistake.\n",
+            "race": "undead",
+            "act": "ABGHO",
+            "affected_by": "0",
+            "alignment": "-400",
+            "group": "0",
+            "level": "50",
+            "hitroll": "0",
+            "hit_dice": "50d10+4250",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "5d8+19",
+            "dam_type": "pound",
+            "ac_pierce": "-20",
+            "ac_bash": "-20",
+            "ac_slash": "-20",
+            "ac_exotic": "2",
+            "off_flags": "EFNQ",
+            "imm_flags": "R",
+            "res_flags": "0",
+            "vuln_flags": "N",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "I",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8118",
+            "name": "rotting corpse",
+            "short_description": "a rotting corpse",
+            "long_description": "A Rotting Corpse staggers clumsily toward you.\n",
+            "description": "This thing and its fellows are what remains of the citizens of this once-\nfine town, reduced to a horrid state of undeath. Slaying them would be the\nbest thing you could do for them...\n",
+            "race": "undead",
+            "act": "AGO",
+            "affected_by": "0",
+            "alignment": "0",
+            "group": "0",
+            "level": "40",
+            "hitroll": "0",
+            "hit_dice": "10d10+1850",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "4d8+13",
+            "dam_type": "slash",
+            "ac_pierce": "-13",
+            "ac_bash": "-13",
+            "ac_slash": "-13",
+            "ac_exotic": "3",
+            "off_flags": "EFNQ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "N",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "3000",
+            "form": "I",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8119",
+            "name": "master",
+            "short_description": "the master",
+            "long_description": "The Master surveys his domain and laughs evilly.\n",
+            "description": "Little is known of this mysterious stranger who came here and took control\nafter the weak Xantharus lost control of his creations. He is a powerful,\ndiabolically evil mage, and will not hesitate to destroy you.\n",
+            "race": "human",
+            "act": "ABFGHO",
+            "affected_by": "CDEFH",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "60",
+            "hitroll": "0",
+            "hit_dice": "50d10+6750",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "8d6+28",
+            "dam_type": "pierce",
+            "ac_pierce": "-30",
+            "ac_bash": "-30",
+            "ac_slash": "-30",
+            "ac_exotic": "0",
+            "off_flags": "EFNQ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5300",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8120",
+            "name": "shambling mound",
+            "short_description": "a shambling mound",
+            "long_description": "A Shambling Mound... well... shambles toward you.\n",
+            "description": "RUN! A twelve-foot high pile of garbage is attacking you!\n",
+            "race": "unique",
+            "act": "AFGO",
+            "affected_by": "N",
+            "alignment": "0",
+            "group": "0",
+            "level": "45",
+            "hitroll": "-1",
+            "hit_dice": "50d10+3000",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "8d4+16",
+            "dam_type": "slash",
+            "ac_pierce": "-15",
+            "ac_bash": "-14",
+            "ac_slash": "-15",
+            "ac_exotic": "4",
+            "off_flags": "EFNQ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5200",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8121",
+            "name": "kampflut",
+            "short_description": "a kampflut",
+            "long_description": "A Kampflut attacks!\n",
+            "description": "This hideous, animated tree resembles an ancient oak with tentacle-like\nbranches and a huge toothed maw. Despite its nasty demeanour, it is not\nevil- it is simply hungry.\n",
+            "race": "undead",
+            "act": "AFGO",
+            "affected_by": "N",
+            "alignment": "0",
+            "group": "0",
+            "level": "50",
+            "hitroll": "0",
+            "hit_dice": "50d10+4250",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "5d8+19",
+            "dam_type": "pierce",
+            "ac_pierce": "-20",
+            "ac_bash": "-20",
+            "ac_slash": "-20",
+            "ac_exotic": "2",
+            "off_flags": "EFNQ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8122",
+            "name": "black pudding",
+            "short_description": "a black pudding",
+            "long_description": "A Black Pudding slowly rolls toward you.\n",
+            "description": "This huge black blob will dissolve weapons and armor it gets the chance,\nthen it will devour you!\n",
+            "race": "undead",
+            "act": "AFGO",
+            "affected_by": "N",
+            "alignment": "0",
+            "group": "0",
+            "level": "52",
+            "hitroll": "0",
+            "hit_dice": "50d10+4750",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "6d7+20",
+            "dam_type": "pierce",
+            "ac_pierce": "-22",
+            "ac_bash": "-22",
+            "ac_slash": "-22",
+            "ac_exotic": "2",
+            "off_flags": "EFNQ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5100",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8123",
+            "name": "green slime",
+            "short_description": "green slime",
+            "long_description": "A patch of Green Slime drips on you, burning your skin!\n",
+            "description": "Green Slime can dissolve even metal, so imagine what it would do to your\nskin...\n",
+            "race": "undead",
+            "act": "ABFGO",
+            "affected_by": "0",
+            "alignment": "0",
+            "group": "0",
+            "level": "40",
+            "hitroll": "0",
+            "hit_dice": "50d10+1850",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "4d8+13",
+            "dam_type": "slash",
+            "ac_pierce": "-13",
+            "ac_bash": "-13",
+            "ac_slash": "-13",
+            "ac_exotic": "4",
+            "off_flags": "EFNQ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8124",
+            "name": "gray ooze",
+            "short_description": "a gray ooze",
+            "long_description": "A pile of gray liquid oozes toward you.\n",
+            "description": "\"Oh,\" I hear you say. \"How threatening\". Well, just you wait!\n",
+            "race": "undead",
+            "act": "AFGO",
+            "affected_by": "N",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "58",
+            "hitroll": "0",
+            "hit_dice": "50d10+6250",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "5d10+25",
+            "dam_type": "pierce",
+            "ac_pierce": "-28",
+            "ac_bash": "-28",
+            "ac_slash": "-28",
+            "ac_exotic": "0",
+            "off_flags": "EFNQ",
+            "imm_flags": "R",
+            "res_flags": "0",
+            "vuln_flags": "N",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "I",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8125",
+            "name": "animated tree",
+            "short_description": "an animated tree",
+            "long_description": "An Animated Tree bashes you with its branches.\n",
+            "description": "This tree is bad and evil- it is an anti-treant :)\n",
+            "race": "undead",
+            "act": "AFGO",
+            "affected_by": "0",
+            "alignment": "0",
+            "group": "0",
+            "level": "45",
+            "hitroll": "0",
+            "hit_dice": "50d10+3000",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "8d4+16",
+            "dam_type": "pound",
+            "ac_pierce": "-15",
+            "ac_bash": "-15",
+            "ac_slash": "-15",
+            "ac_exotic": "3",
+            "off_flags": "EFNQ",
+            "imm_flags": "R",
+            "res_flags": "0",
+            "vuln_flags": "N",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "I",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8126",
+            "name": "tree spirit",
+            "short_description": "a tree spirit",
+            "long_description": "A Tree Spirit offers you shelter in this place of evil.\n",
+            "description": "This spirit is the only good creature in this place. She can guard you\nwhile you rest, and perhaps heal your wounds if you pay her enough...\n",
+            "race": "undead",
+            "act": "ABGO",
+            "affected_by": "BCDFN",
+            "alignment": "400",
+            "group": "0",
+            "level": "65",
+            "hitroll": "0",
+            "hit_dice": "50d10+8250",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "11d5+35",
+            "dam_type": "pierce",
+            "ac_pierce": "-35",
+            "ac_bash": "-35",
+            "ac_slash": "-35",
+            "ac_exotic": "-5",
+            "off_flags": "EFNQ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8127",
+            "name": "death knight",
+            "short_description": "a death knight",
+            "long_description": "A Death Knight salutes you then attacks!\n",
+            "description": "This is the spirit of a Paladin corrupted by the evil of the Master, doomed\nto an eternity as an undead servant. Clad in ornate, ancient armor and \nwielding a shiny silver sword, he would look as he did in life save for his\nrotting face...\n",
+            "race": "undead",
+            "act": "ABFGO",
+            "affected_by": "DF",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "60",
+            "hitroll": "0",
+            "hit_dice": "50d10+6250",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "8d6+28",
+            "dam_type": "pierce",
+            "ac_pierce": "-30",
+            "ac_bash": "-30",
+            "ac_slash": "-30",
+            "ac_exotic": "0",
+            "off_flags": "EFNQ",
+            "imm_flags": "R",
+            "res_flags": "0",
+            "vuln_flags": "N",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "I",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8128",
+            "name": "nightmare",
+            "short_description": "a nightmare",
+            "long_description": "A Nightmare, loyal steed of the denizens of the Lower Planes, rests here.\n",
+            "description": "This black, winged equine hell-steed waits patiently for its master to finish \nits business here before bearing it to its next destination.\n",
+            "race": "undead",
+            "act": "ABGO",
+            "affected_by": "FT",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "45",
+            "hitroll": "0",
+            "hit_dice": "50d10+3000",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "8d4+16",
+            "dam_type": "pound",
+            "ac_pierce": "-15",
+            "ac_bash": "-15",
+            "ac_slash": "-15",
+            "ac_exotic": "4",
+            "off_flags": "EFNQ",
+            "imm_flags": "R",
+            "res_flags": "0",
+            "vuln_flags": "N",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "I",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8129",
+            "name": "retriever",
+            "short_description": "a retriever",
+            "long_description": "A retriever rears on four of its legs and strikes.\n",
+            "description": "This demonic steed resembles a huge spider with razor sharp blades for legs\nand glowing gems for eyes.\n",
+            "race": "undead",
+            "act": "ABFGO",
+            "affected_by": "DF",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "58",
+            "hitroll": "0",
+            "hit_dice": "50d10+6250",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "5d10+25",
+            "dam_type": "slash",
+            "ac_pierce": "-28",
+            "ac_bash": "-28",
+            "ac_slash": "-28",
+            "ac_exotic": "0",
+            "off_flags": "EFNQ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8130",
+            "name": "cambion scout",
+            "short_description": "a cambion scout",
+            "long_description": "A Cambion Scout eyes you cautiously.\n",
+            "description": "This half-man, half-demon creature is a scout for Orcus, Prince of the \nUndead. He is here on a covert mission, and thus will avoid trouble if at\nall possible. He is attempting to ascertain the degree of power of the\nmaster, and inform his master if the strange man poses a significant threat\nto his domination of all things Undead.\n",
+            "race": "undead",
+            "act": "ACGHO",
+            "affected_by": "DEFQV",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "50",
+            "hitroll": "0",
+            "hit_dice": "50d10+4250",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "5d8+19",
+            "dam_type": "pound",
+            "ac_pierce": "-40",
+            "ac_bash": "-40",
+            "ac_slash": "-40",
+            "ac_exotic": "2",
+            "off_flags": "EFNQ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8131",
+            "name": "orcus",
+            "short_description": "Orcus",
+            "long_description": "Orcus, Prince of the Undead, glowers menacingly at you.\n",
+            "description": "Whoa. You are standing before Orcus. He resembles a bloated man twenty\nfeet tall with a bull's nose and eyes, and goat's horns and hooves. He\ngrips a rod with a goat's head in one hoof, and glares suspiciously at you.\nHe is not really meant to be here, and thus will avoid attracting attention\nof the powers of the Prime Material Plane by avoiding combat.\n",
+            "race": "undead",
+            "act": "ABGHO",
+            "affected_by": "BCDEFHN",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "65",
+            "hitroll": "0",
+            "hit_dice": "50d10+8250",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "11d5+35",
+            "dam_type": "pierce",
+            "ac_pierce": "-35",
+            "ac_bash": "-35",
+            "ac_slash": "-35",
+            "ac_exotic": "-4",
+            "off_flags": "EFNQ",
+            "imm_flags": "R",
+            "res_flags": "0",
+            "vuln_flags": "N",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "I",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8132",
+            "name": "water weird",
+            "short_description": "a water weird",
+            "long_description": "A Water Weird lunges at you!\n",
+            "description": "This watery snake resides in the well, which it will fight to defend.\n",
+            "race": "snake",
+            "act": "ABFGO",
+            "affected_by": "N",
+            "alignment": "0",
+            "group": "0",
+            "level": "51",
+            "hitroll": "0",
+            "hit_dice": "50d10+4500",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "5d8+20",
+            "dam_type": "bite",
+            "ac_pierce": "-20",
+            "ac_bash": "-20",
+            "ac_slash": "-20",
+            "ac_exotic": "2",
+            "off_flags": "EFNQ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "0",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8133",
+            "name": "giant spider",
+            "short_description": "a giant spider",
+            "long_description": "A GIANT Spider drops down on you!\n",
+            "description": "When I say GIANT, I am talking ten feet high...\n",
+            "race": "undead",
+            "act": "ABCFGHO",
+            "affected_by": "DFQ",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "48",
+            "hitroll": "0",
+            "hit_dice": "50d10+3750",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "6d6+18",
+            "dam_type": "charge",
+            "ac_pierce": "-18",
+            "ac_bash": "-18",
+            "ac_slash": "-18",
+            "ac_exotic": "3",
+            "off_flags": "EFNQ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "8134",
+            "name": "baron vampire",
+            "short_description": "a baron vampire",
+            "long_description": "The Baron vampire rises from the sarcophagus, bares its fangs and attacks!\n",
+            "description": "The Evil Baron and his two brothers were vampires imprisoned here by Xanan\ncenturies ago, who had not the power to slay them utterly, and now thanks\nto your disturbance they have risen again!\n",
+            "race": "undead",
+            "act": "ABFGO",
+            "affected_by": "DF",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "60",
+            "hitroll": "0",
+            "hit_dice": "50d10+6750",
+            "mana_dice": "10d10+1000",
+            "dam_dice": "8d6+28",
+            "dam_type": "pierce",
+            "ac_pierce": "-30",
+            "ac_bash": "-30",
+            "ac_slash": "-30",
+            "ac_exotic": "0",
+            "off_flags": "EFNQ",
+            "imm_flags": "BR",
+            "res_flags": "0",
+            "vuln_flags": "JNX",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "5000",
+            "form": "I",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "8100",
+            "name": "rod orcus",
+            "short_description": "the Rod of Orcus",
+            "description": "The Rod of Orcus glows evilly here.\n",
+            "material": "wood",
+            "type": "staff",
+            "extra_flags": "BEGH",
+            "wear_flags": "AO",
+            "values": "60 100 100 'pass door' 0 ",
+            "level": "55",
+            "weight": "50",
+            "cost": "30000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "2"
+                },
+                {
+                    "location": "2",
+                    "modifier": "2"
+                },
+                {
+                    "location": "3",
+                    "modifier": "2"
+                },
+                {
+                    "location": "4",
+                    "modifier": "2"
+                },
+                {
+                    "location": "5",
+                    "modifier": "2"
+                },
+                {
+                    "location": "12",
+                    "modifier": "250"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-50"
+                },
+                {
+                    "location": "18",
+                    "modifier": "25"
+                },
+                {
+                    "location": "19",
+                    "modifier": "25"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-10"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-10"
+                }
+            ]
+        },
+        {
+            "vnum": "8101",
+            "name": "hand vecna",
+            "short_description": "the Hand of Vecna",
+            "description": "The Hand of Vecna lies here.\n",
+            "material": "leather steel",
+            "type": "armor",
+            "extra_flags": "EHJMQ",
+            "wear_flags": "AH",
+            "values": "18 19 18 10 0",
+            "level": "56",
+            "weight": "5",
+            "cost": "10000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "3"
+                },
+                {
+                    "location": "3",
+                    "modifier": "3"
+                },
+                {
+                    "location": "12",
+                    "modifier": "100"
+                },
+                {
+                    "location": "18",
+                    "modifier": "3"
+                },
+                {
+                    "location": "19",
+                    "modifier": "3"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-3"
+                }
+            ]
+        },
+        {
+            "vnum": "8102",
+            "name": "eye vecna",
+            "short_description": "the Eye of Vecna",
+            "description": "The Eye of Vecna glows evilly here.\n",
+            "material": "leather steel",
+            "type": "armor",
+            "extra_flags": "AEJM",
+            "wear_flags": "AE",
+            "values": "18 18 18 10 0 ",
+            "level": "56",
+            "weight": "1",
+            "cost": "10000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "3",
+                    "modifier": "3"
+                },
+                {
+                    "location": "4",
+                    "modifier": "3"
+                },
+                {
+                    "location": "12",
+                    "modifier": "50"
+                }
+            ]
+        },
+        {
+            "vnum": "8103",
+            "name": "sword kas",
+            "short_description": "the Sword of Kas",
+            "description": "The Sword of Kas beckons to you!\n",
+            "material": "steel",
+            "type": "weapon",
+            "extra_flags": "BEGJM",
+            "wear_flags": "AN",
+            "values": "sword 5 10 pierce D",
+            "level": "47",
+            "weight": "20",
+            "cost": "17000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "20"
+                },
+                {
+                    "location": "18",
+                    "modifier": "5"
+                },
+                {
+                    "location": "19",
+                    "modifier": "5"
+                }
+            ]
+        },
+        {
+            "vnum": "8104",
+            "name": "circlet",
+            "short_description": "a circlet",
+            "description": "A Circlet lies here, gathering dust.\n",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "GM",
+            "wear_flags": "AE",
+            "values": "17 17 17 10 0 ",
+            "level": "54",
+            "weight": "25",
+            "cost": "18000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "3",
+                    "modifier": "-3"
+                },
+                {
+                    "location": "4",
+                    "modifier": "-3"
+                }
+            ]
+        },
+        {
+            "vnum": "8105",
+            "name": "hoard",
+            "short_description": "a treasure hoard",
+            "description": "A treasure hoard is scattered here.\n",
+            "material": "leather",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "400 0 0 50 50 ",
+            "level": "1",
+            "weight": "150",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "8106",
+            "name": "chest",
+            "short_description": "a chest",
+            "description": "A chest sits here.\n",
+            "material": "steel",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "1",
+            "values": "150 0 0 20 100 ",
+            "level": "48",
+            "weight": "100",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "8107",
+            "name": "robes flesh",
+            "short_description": "robes of Flesh",
+            "description": "Robes made of human flesh are piled here.\n",
+            "material": "human flesh",
+            "type": "armor",
+            "extra_flags": "EJ",
+            "wear_flags": "AK",
+            "values": "15 15 15 6 0 ",
+            "level": "58",
+            "weight": "25",
+            "cost": "13000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "150"
+                },
+                {
+                    "location": "13",
+                    "modifier": "25"
+                }
+            ]
+        },
+        {
+            "vnum": "8108",
+            "name": "rod bone",
+            "short_description": "a Rod of Bone",
+            "description": "A Rod fashioned from a human femur lies here.\n",
+            "material": "human femur",
+            "type": "weapon",
+            "extra_flags": "EJ",
+            "wear_flags": "AN",
+            "values": "exotic 6 9 crush 0",
+            "level": "58",
+            "weight": "25",
+            "cost": "13000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "15"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-10"
+                },
+                {
+                    "location": "18",
+                    "modifier": "4"
+                },
+                {
+                    "location": "19",
+                    "modifier": "4"
+                }
+            ]
+        },
+        {
+            "vnum": "8109",
+            "name": "bones",
+            "short_description": "a pile of bones",
+            "description": "A pile of bones lies here.\n",
+            "material": "silver",
+            "type": "trash",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "1",
+            "weight": "50",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "8110",
+            "name": "gem",
+            "short_description": "a Power Gem",
+            "description": "A Mana Power Gem pulses strongly here.\n",
+            "material": "wood",
+            "type": "staff",
+            "extra_flags": "AG",
+            "wear_flags": "AO",
+            "values": "50 20 20 'sanctuary' 0 ",
+            "level": "58",
+            "weight": "10",
+            "cost": "40000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "50"
+                }
+            ]
+        },
+        {
+            "vnum": "8111",
+            "name": "cloak",
+            "short_description": "a black cloak",
+            "description": "A black cloak is piled here.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AK",
+            "values": "17 17 17 11 0 ",
+            "level": "51",
+            "weight": "10",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "8112",
+            "name": "sword",
+            "short_description": "(Diabolical) a Dark Sword",
+            "description": "A Dark Sword hums evilly here.\n",
+            "material": "steel",
+            "type": "weapon",
+            "extra_flags": "BCEJ",
+            "wear_flags": "AN",
+            "values": "sword 6 10 slash 0",
+            "level": "55",
+            "weight": "35",
+            "cost": "30000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "1"
+                },
+                {
+                    "location": "5",
+                    "modifier": "1"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-20"
+                },
+                {
+                    "location": "18",
+                    "modifier": "2"
+                },
+                {
+                    "location": "19",
+                    "modifier": "4"
+                }
+            ]
+        },
+        {
+            "vnum": "8113",
+            "name": "armor",
+            "short_description": "a Suit of Dark Armor",
+            "description": "A Suit of Dark Armor lies here.\n",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "CEJ",
+            "wear_flags": "AE",
+            "values": "16 16 17 10 0 ",
+            "level": "50",
+            "weight": "25",
+            "cost": "15000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-10"
+                },
+                {
+                    "location": "18",
+                    "modifier": "4"
+                },
+                {
+                    "location": "19",
+                    "modifier": "7"
+                }
+            ]
+        },
+        {
+            "vnum": "8114",
+            "name": "helm",
+            "short_description": "a Dark Helm",
+            "description": "A Dark Helm seeks to possess you!\n",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "CHM",
+            "wear_flags": "AE",
+            "values": "18 18 18 12 0 ",
+            "level": "55",
+            "weight": "75",
+            "cost": "15000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "3",
+                    "modifier": "-3"
+                },
+                {
+                    "location": "4",
+                    "modifier": "-3"
+                }
+            ]
+        },
+        {
+            "vnum": "8115",
+            "name": "jar",
+            "short_description": "a jar",
+            "description": "A glass jar sits here.\n",
+            "material": "glass",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "25 0 0 10 100 ",
+            "level": "48",
+            "weight": "10",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "8116",
+            "name": "poison",
+            "short_description": "some poison",
+            "description": "Some poison lies here.\n",
+            "material": "food",
+            "type": "food",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "1 0 0 A 0",
+            "level": "1",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "8117",
+            "name": "unholy symbol",
+            "short_description": "an Unholy Symbol",
+            "description": "The Unholy Symbol of some priest devoted to evil lies here.\n",
+            "material": "unknown",
+            "type": "light",
+            "extra_flags": "EJ",
+            "wear_flags": "A",
+            "values": "0 0 -1 0 0 ",
+            "level": "48",
+            "weight": "5",
+            "cost": "500",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "3"
+                }
+            ]
+        },
+        {
+            "vnum": "8118",
+            "name": "holy symbol",
+            "short_description": "a holy Symbol",
+            "description": "The Holy Symbol of some priest devoted to good lies here.\n",
+            "material": "unknown",
+            "type": "light",
+            "extra_flags": "AK",
+            "wear_flags": "A",
+            "values": "0 0 -1 0 0 ",
+            "level": "48",
+            "weight": "5",
+            "cost": "500",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "5",
+                    "modifier": "3"
+                }
+            ]
+        },
+        {
+            "vnum": "8119",
+            "name": "corpse",
+            "short_description": "a corpse",
+            "description": "The corpse of some unfortunate adventurer is lying here.\n",
+            "material": "meat",
+            "type": "furniture",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 0 0 0 ",
+            "level": "0",
+            "weight": "75",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "8120",
+            "name": "key",
+            "short_description": "a key",
+            "description": "A black key is here.\n",
+            "material": "iron",
+            "type": "key",
+            "extra_flags": "B",
+            "wear_flags": "AO",
+            "values": "2 0 0 0 0 ",
+            "level": "0",
+            "weight": "5",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "8121",
+            "name": "jar blood",
+            "short_description": "a jar of human blood",
+            "description": "A jar of human blood sits here.\n",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "BEJ",
+            "wear_flags": "AO",
+            "values": "60 'poison' 'weaken' 'curse' ''  ",
+            "level": "45",
+            "weight": "10",
+            "cost": "300",
+            "condition": "P"
+        },
+        {
+            "vnum": "8122",
+            "name": "helm spectre",
+            "short_description": "Helm of the Spectre",
+            "description": "A huge helm is lying on the floor, something is carved on top of it...",
+            "material": "adamantite",
+            "type": "armor",
+            "extra_flags": "ACY",
+            "wear_flags": "AE",
+            "values": "39 39 39 37 30",
+            "level": "57",
+            "weight": "20",
+            "cost": "99000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "3",
+                    "modifier": "2"
+                },
+                {
+                    "location": "13",
+                    "modifier": "50"
+                },
+                {
+                    "location": "18",
+                    "modifier": "5"
+                },
+                {
+                    "location": "19",
+                    "modifier": "5"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-5"
+                }
+            ]
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "8100",
+            "name": "A Dusty Trail",
+            "description": "You are heading along a dusty trail that runs toward the town ahead. There\nis a horrid stench detectable even here. You see a sign up ahead.\n",
+            "flags": "4",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8101"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "9584"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "sign",
+                    "description": "W E L C O M E    T O    G H O S T T O W N\n\n                       Population : 0\n\n\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8101",
+            "name": "The Town",
+            "description": "You have reached the Ghost Town, a place rumored to be inhabited by the\nmost ghastly of undead, as well as their fell minions. Should you proceed,\nyou may find yourself unable to return home by conventional means, and\ninstead have to travel through until you find another means of escape. Your\nchoice.\n",
+            "flags": "4",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8102"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8100"
+                }
+            ]
+        },
+        {
+            "vnum": "8102",
+            "name": "The Main Street",
+            "description": "Stepping onto this street, you immediately feel a wave of fear and dread\nwash over you. Shaking, you collect yourself and prepare to advance into\nthis literally god-forsaken area. Houses line the street to the left and\nright. Up ahead lies a small town square.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8106"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8104"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8103"
+                }
+            ]
+        },
+        {
+            "vnum": "8103",
+            "name": "A Ruined House",
+            "description": "The interior of this house reeks of death. The dried blood smeared on the\nwalls and the piles of bones on the floor bespeak of the fate of the former\ninhabitants of this residence. The current inhabitants may not be so easy\nto kill...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8102"
+                }
+            ]
+        },
+        {
+            "vnum": "8104",
+            "name": "A Ruined House",
+            "description": "The interior of this house reeks of death. The dried blood smeared on the\nwalls and the piles of bones on the floor bespeak of the fate of the former\ninhabitants of this residence. The current inhabitants may not be so easy\nto kill...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8102"
+                }
+            ]
+        },
+        {
+            "vnum": "8105",
+            "name": "The Town Square",
+            "description": "You have come to the Town Square. You can proceed in several directions from\nhere across the square, which is now nothing more than a flat square of\nscorched earth and decimated vegetation, or down one of the side streets.\nThere is a well in the middle of the square.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8108"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8106"
+                }
+            ]
+        },
+        {
+            "vnum": "8106",
+            "name": "The Town Square",
+            "description": "You have come to the Town Square. You can proceed in several directions from\nhere across the square, which is now nothing more than a flat square of\nscorched earth and decimated vegetation, or down one of the side streets.\nThere is a well in the middle of the square.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8109"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8107"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8102"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8105"
+                }
+            ]
+        },
+        {
+            "vnum": "8107",
+            "name": "The Town Square",
+            "description": "You have come to the Town Square. You can proceed in several directions from\nhere across the square, which is now nothing more than a flat square of\nscorched earth and decimated vegetation, or down one of the side streets.\nThere is a well in the middle of the square.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8110"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8106"
+                }
+            ]
+        },
+        {
+            "vnum": "8108",
+            "name": "The Town Square",
+            "description": "You have come to the Town Square. You can proceed in several directions from\nhere across the square, which is now nothing more than a flat square of\nscorched earth and decimated vegetation, or down one of the side streets.\nThere is a well in the middle of the square.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8111"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8109"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8105"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8114"
+                }
+            ]
+        },
+        {
+            "vnum": "8109",
+            "name": "The Well in the Town Square",
+            "description": "You are standing in the middle of the town square, at the well. Paths stretch\npast houses and shops in every direction. There must still be some water in\nthe well, as a small amount of grass has managed to grow around it.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8112"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8110"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8106"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8108"
+                }
+            ]
+        },
+        {
+            "vnum": "8110",
+            "name": "The Town Square",
+            "description": "You have come to the Town Square. You can proceed in several directions from\nhere across the square, which is now nothing more than a flat square of\nscorched earth and decimated vegetation, or down one of the side streets.\nThere is a well in the middle of the square.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8113"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8124"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8107"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8109"
+                }
+            ]
+        },
+        {
+            "vnum": "8111",
+            "name": "The Town Square",
+            "description": "You have come to the Town Square. You can proceed in several directions from\nhere across the square, which is now nothing more than a flat square of\nscorched earth and decimated vegetation, or down one of the side streets.\nThere is a well in the middle of the square.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8112"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8108"
+                }
+            ]
+        },
+        {
+            "vnum": "8112",
+            "name": "The Town Square",
+            "description": "You have come to the Town Square. You can proceed in several directions from\nhere across the square, which is now nothing more than a flat square of\nscorched earth and decimated vegetation, or down one of the side streets.\nThere is a well in the middle of the square.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8134"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8113"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8109"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8111"
+                }
+            ]
+        },
+        {
+            "vnum": "8113",
+            "name": "The Town Square",
+            "description": "You have come to the Town Square. You can proceed in several directions from\nhere across the square, which is now nothing more than a flat square of\nscorched earth and decimated vegetation, or down one of the side streets.\nThere is a well in the middle of the square.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8110"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8112"
+                }
+            ]
+        },
+        {
+            "vnum": "8114",
+            "name": "A Side Street",
+            "description": "You are advancing along a side street that runs west away from the Town\nSquare. Houses lie to the north and south.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8115"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8108"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8116"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8117"
+                }
+            ]
+        },
+        {
+            "vnum": "8115",
+            "name": "A Ruined House",
+            "description": "The interior of this house reeks of death. The dried blood smeared on the\nwalls and the piles of bones on the floor bespeak of the fate of the former\ninhabitants of this residence. The current inhabitants may not be so easy\nto kill...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8114"
+                }
+            ]
+        },
+        {
+            "vnum": "8116",
+            "name": "A Ruined House",
+            "description": "The interior of this house reeks of death. The dried blood smeared on the\nwalls and the piles of bones on the floor bespeak of the fate of the former\ninhabitants of this residence. The current inhabitants may not be so easy\nto kill...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8114"
+                }
+            ]
+        },
+        {
+            "vnum": "8117",
+            "name": "A Side Street",
+            "description": "You are advancing along a side street that runs west away from the Town\nSquare. Houses lie to the north and south.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8118"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8114"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8119"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8120"
+                }
+            ]
+        },
+        {
+            "vnum": "8118",
+            "name": "A Ruined House",
+            "description": "The interior of this house reeks of death. The dried blood smeared on the\nwalls and the piles of bones on the floor bespeak of the fate of the former\ninhabitants of this residence. The current inhabitants may not be so easy\nto kill...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8117"
+                }
+            ]
+        },
+        {
+            "vnum": "8119",
+            "name": "A Ruined House",
+            "description": "The interior of this house reeks of death. The dried blood smeared on the\nwalls and the piles of bones on the floor bespeak of the fate of the former\ninhabitants of this residence. The current inhabitants may not be so easy\nto kill...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8117"
+                }
+            ]
+        },
+        {
+            "vnum": "8120",
+            "name": "A Side Street",
+            "description": "You have reached the end of a side street that runs west away from the Town\nSquare. Houses lie to the north, west and south.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8121"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8117"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8122"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8123"
+                }
+            ]
+        },
+        {
+            "vnum": "8121",
+            "name": "A Ruined House",
+            "description": "The interior of this house reeks of death. The dried blood smeared on the\nwalls and the piles of bones on the floor bespeak of the fate of the former\ninhabitants of this residence. The current inhabitants may not be so easy\nto kill...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8120"
+                }
+            ]
+        },
+        {
+            "vnum": "8122",
+            "name": "A Ruined House",
+            "description": "The interior of this house reeks of death. The dried blood smeared on the\nwalls and the piles of bones on the floor bespeak of the fate of the former\ninhabitants of this residence. The current inhabitants may not be so easy\nto kill...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8120"
+                }
+            ]
+        },
+        {
+            "vnum": "8123",
+            "name": "A Ruined House",
+            "description": "The interior of this house reeks of death. The dried blood smeared on the\nwalls and the piles of bones on the floor bespeak of the fate of the former\ninhabitants of this residence. The current inhabitants may not be so easy\nto kill...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8120"
+                }
+            ]
+        },
+        {
+            "vnum": "8124",
+            "name": "A Side Street",
+            "description": "You are advancing along a side street that runs east away from the Town\nSquare. Houses lie to the north and south.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8125"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8127"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8126"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8110"
+                }
+            ]
+        },
+        {
+            "vnum": "8125",
+            "name": "A Ruined House",
+            "description": "The interior of this house reeks of death. The dried blood smeared on the\nwalls and the piles of bones on the floor bespeak of the fate of the former\ninhabitants of this residence. The current inhabitants may not be so easy\nto kill...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8124"
+                }
+            ]
+        },
+        {
+            "vnum": "8126",
+            "name": "A Ruined House",
+            "description": "The interior of this house reeks of death. The dried blood smeared on the\nwalls and the piles of bones on the floor bespeak of the fate of the former\ninhabitants of this residence. The current inhabitants may not be so easy\nto kill...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8124"
+                }
+            ]
+        },
+        {
+            "vnum": "8127",
+            "name": "A Side Street",
+            "description": "You are advancing along a side street that runs east away from the Town\nSquare. Houses lie to the north and south.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8128"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8130"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8129"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8124"
+                }
+            ]
+        },
+        {
+            "vnum": "8128",
+            "name": "A Ruined House",
+            "description": "The interior of this house reeks of death. The dried blood smeared on the\nwalls and the piles of bones on the floor bespeak of the fate of the former\ninhabitants of this residence. The current inhabitants may not be so easy\nto kill...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8127"
+                }
+            ]
+        },
+        {
+            "vnum": "8129",
+            "name": "A Ruined House",
+            "description": "The interior of this house reeks of death. The dried blood smeared on the\nwalls and the piles of bones on the floor bespeak of the fate of the former\ninhabitants of this residence. The current inhabitants may not be so easy\nto kill...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8127"
+                }
+            ]
+        },
+        {
+            "vnum": "8130",
+            "name": "A Side Street",
+            "description": "You have reached the end of a side street that runs east away from the Town\nSquare. Houses lie to the north, east and south.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8131"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8133"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8132"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8127"
+                }
+            ]
+        },
+        {
+            "vnum": "8131",
+            "name": "A Ruined House",
+            "description": "The interior of this house reeks of death. The dried blood smeared on the\nwalls and the piles of bones on the floor bespeak of the fate of the former\ninhabitants of this residence. The current inhabitants may not be so easy\nto kill...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8130"
+                }
+            ]
+        },
+        {
+            "vnum": "8132",
+            "name": "A Ruined House",
+            "description": "The interior of this house reeks of death. The dried blood smeared on the\nwalls and the piles of bones on the floor bespeak of the fate of the former\ninhabitants of this residence. The current inhabitants may not be so easy\nto kill...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8130"
+                }
+            ]
+        },
+        {
+            "vnum": "8133",
+            "name": "A Ruined House",
+            "description": "The interior of this house reeks of death. The dried blood smeared on the\nwalls and the piles of bones on the floor bespeak of the fate of the former\ninhabitants of this residence. The current inhabitants may not be so easy\nto kill...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8130"
+                }
+            ]
+        },
+        {
+            "vnum": "8134",
+            "name": "Main Street",
+            "description": "You are heading along Main Street, which heads south to the Town Square and\nNorth toward an intersection. Houses line the street.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8137"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8136"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8112"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8135"
+                }
+            ]
+        },
+        {
+            "vnum": "8135",
+            "name": "A Ruined House",
+            "description": "The interior of this house reeks of death. The dried blood smeared on the\nwalls and the piles of bones on the floor bespeak of the fate of the former\ninhabitants of this residence. The current inhabitants may not be so easy\nto kill...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8134"
+                }
+            ]
+        },
+        {
+            "vnum": "8136",
+            "name": "A Ruined House",
+            "description": "The interior of this house reeks of death. The dried blood smeared on the\nwalls and the piles of bones on the floor bespeak of the fate of the former\ninhabitants of this residence. The current inhabitants may not be so easy\nto kill...\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8134"
+                }
+            ]
+        },
+        {
+            "vnum": "8137",
+            "name": "An Intersection",
+            "description": "You are standing at an intersection devoid of houses. A park looms to the\nnorthwest of here, while the former residences of the Mayor lie directly\nwest. You aren't sure where the northern path goes, as that area is\nenshrouded in dark fog...\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8155"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8134"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8138"
+                }
+            ]
+        },
+        {
+            "vnum": "8138",
+            "name": "The Road to the Mayor's House",
+            "description": "This road was at one time spacious and beautiful, but is now cluttered with\ndebris and overgrown with tough, gray weeds that have sprouted through the\ncarefully-laid cobblestones. There are junctions to the east and west of\nhere.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8137"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8139"
+                }
+            ]
+        },
+        {
+            "vnum": "8139",
+            "name": "A Junction",
+            "description": "At this point, a dirt track runs north toward a dismal-looking garden that\nonce flourished with the most beautiful flora on the continent, but is now\nhome to the same sickly-gray weeds that sprout through the footpath, as well\nas some very tall, sinister-looking trees.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8171"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8138"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8140"
+                }
+            ]
+        },
+        {
+            "vnum": "8140",
+            "name": "Outside the Mayor's House",
+            "description": "The path ends at a decrepit manse that once served as home for the Mayor\nof this town. Since the incursion of the undead, it has fallen into\ndisrepair, though not to the state that the other dwellings have, leading\nyou to suspect that perhaps someone (or thing) important now resides here...\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8139"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8141"
+                }
+            ]
+        },
+        {
+            "vnum": "8141",
+            "name": "The Hallway",
+            "description": "You are advancing along a dimly-lit hall lined with garish paintings depicting\nrather macabre-looking members of some decadent family. To the west lies\na crooked stairway that leads up to the next level. Doors lie to the north and\nsouth of here.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8143"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8140"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8142"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8144"
+                }
+            ]
+        },
+        {
+            "vnum": "8142",
+            "name": "A Room in the Mayor's Manse",
+            "description": "This room reeks of decay, perhaps mainly due to the decaying corpses lying\nabout. Blood has been smeared all over the walls, and a sickly-looking vine\nhas crawled in through the broken panes of the windows. You gag and try\nnot to vomit.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8141"
+                }
+            ]
+        },
+        {
+            "vnum": "8143",
+            "name": "A Room in the Mayor's Manse",
+            "description": "This room reeks of decay, perhaps mainly due to the decaying corpses lying\nabout. Blood has been smeared all over the walls, and a sickly-looking vine\nhas crawled in through the broken panes of the windows. You gag and try\nnot to vomit.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8141"
+                }
+            ]
+        },
+        {
+            "vnum": "8144",
+            "name": "The Hallway",
+            "description": "You are advancing along a dimly-lit hall lined with garish paintings depicting\nrather macabre-looking members of some decadent family. To the west lies\na crooked stairway that leads up to the next level. Doors lie to the north and\nsouth of here.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8146"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "8141"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8145"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8147"
+                }
+            ]
+        },
+        {
+            "vnum": "8145",
+            "name": "A Room in the Mayor's Manse",
+            "description": "This room reeks of decay, perhaps mainly due to the decaying corpses lying\nabout. Blood has been smeared all over the walls, and a sickly-looking vine\nhas crawled in through the broken panes of the windows. You gag and try\nnot to vomit.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8144"
+                }
+            ]
+        },
+        {
+            "vnum": "8146",
+            "name": "A Room in the Mayor's Manse",
+            "description": "This room reeks of decay, perhaps mainly due to the decaying corpses lying\nabout. Blood has been smeared all over the walls, and a sickly-looking vine\nhas crawled in through the broken panes of the windows. You gag and try\nnot to vomit.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8144"
+                }
+            ]
+        },
+        {
+            "vnum": "8147",
+            "name": "The Stairway",
+            "description": "This crooked staircase looks very unstable, and this, coupled with the \ndreadful stench emanating from upstairs, makes you reluctant to proceed...\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8144"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8148"
+                }
+            ]
+        },
+        {
+            "vnum": "8148",
+            "name": "The Stairway",
+            "description": "At the top of the stairs you pause to catch your breath, and are immediately\nsorry as horrid-smelling air fills your lungs. Coughing, you fight to \nbreathe, and steel yourself to continue.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8149"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8147"
+                }
+            ]
+        },
+        {
+            "vnum": "8149",
+            "name": "The Hallway",
+            "description": "You are advancing along a dimly-lit hall lined with garish paintings depicting\nrather macabre-looking members of some decadent family. Doors lie to the north \nand south of here. The hall ends at an impressive portal to the east.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8150"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8152"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8151"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8148"
+                }
+            ]
+        },
+        {
+            "vnum": "8150",
+            "name": "A Room in the Mayor's Manse",
+            "description": "This room reeks of decay, perhaps mainly due to the decaying corpses lying\nabout. Blood has been smeared all over the walls, and a sickly-looking vine\nhas crawled in through the broken panes of the windows. You gag and try\nnot to vomit.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8149"
+                }
+            ]
+        },
+        {
+            "vnum": "8151",
+            "name": "A Room in the Mayor's Manse",
+            "description": "This room reeks of decay, perhaps mainly due to the decaying corpses lying\nabout. Blood has been smeared all over the walls, and a sickly-looking vine\nhas crawled in through the broken panes of the windows. You gag and try\nnot to vomit.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8149"
+                }
+            ]
+        },
+        {
+            "vnum": "8152",
+            "name": "The Mayor's Study",
+            "description": "As you enter this room, you are amazed to notice a complete absence of the\nstench you detected earlier. In addition, you are further amazed to notice\nthe surprisingly good condition of this study, a comfortable den lined with\nshelves full of ancient texts. A large oak desk dominates the room, and\nbehind this sits a plush leather chair. Wonder whose domain this is...?\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8153"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8154"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8149"
+                }
+            ]
+        },
+        {
+            "vnum": "8153",
+            "name": "A Bedroom",
+            "description": "In this room lies an ornately-carved four poster bed with satin sheets. \nOpposite it lies a comfortable divan, upon which the maidens of the master\nof this domain usually recline. A painting on one wall catches your eye.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8152"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "painting",
+                    "description": "It is a painting of one Count Philippe Gaspar duGascoigne, a handsome but\nevil-looking gentleman of middle years.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8154",
+            "name": "A Bedroom",
+            "description": "This bedroom is as ruinous as its northern counterpart was lavish, as \ndecayed and despoiled as it was well-presented and comfortable. The furniture,\nwhile obviously once fine, is now ruined beyond repair. Blood stains coat\nthe walls, and a corpse hangs by a rope from the chandelier in the center\nof the room. Whoever lives here must have a disagreeable personality to say\nthe very least...\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8152"
+                }
+            ]
+        },
+        {
+            "vnum": "8155",
+            "name": "A Murky Mist",
+            "description": "You are plowing through a thick mist that has suddenly enshrouded the trail.\nYou can still make it out beneath your feet, but only barely. Howls, screams\nand shouts of anger and terror ring out on all sides, and you feel fear \nclutching at your heart.\n",
+            "flags": "1|8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8156"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8137"
+                }
+            ]
+        },
+        {
+            "vnum": "8156",
+            "name": "A Murky Mist",
+            "description": "You are plowing through a thick mist that has suddenly enshrouded the trail.\nYou can still make it out beneath your feet, but only barely. Howls, screams\nand shouts of anger and terror ring out on all sides, and you feel fear \nclutching at your heart.\n",
+            "flags": "1|8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8159"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8157"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8155"
+                }
+            ]
+        },
+        {
+            "vnum": "8157",
+            "name": "A Small House",
+            "description": "The mist clears suddenly, and you find yourself standing outside a rather\ncreepy little stone dwelling, with no windows, but a stout oak door \ndirectly to the east.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8156"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8158"
+                }
+            ]
+        },
+        {
+            "vnum": "8158",
+            "name": "Temporary Residence of a Demon",
+            "description": "OH NO!\n\nYou have inadvertently stumbled upon the temporary Prime Material Plane lair\nof ORCUS! If he isn't here, leave quickly. If he is...\n\n",
+            "flags": "8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8157"
+                }
+            ]
+        },
+        {
+            "vnum": "8159",
+            "name": "A Murky Mist",
+            "description": "You are plowing through a thick mist that has suddenly enshrouded the trail.\nYou can still make it out beneath your feet, but only barely. Howls, screams\nand shouts of anger and terror ring out on all sides, and you feel fear \nclutching at your heart.\n",
+            "flags": "1|8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8163"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8160"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8156"
+                }
+            ]
+        },
+        {
+            "vnum": "8160",
+            "name": "A Clearing",
+            "description": "You have reached an area devoid of mist, the front yard of a ruined cottage\nwhose door lies to the east. Peering through the windows, you imagine you\ncan see shapes moving about.\n",
+            "flags": "8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8161"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8159"
+                }
+            ]
+        },
+        {
+            "vnum": "8161",
+            "name": "The Interior of the Cottage",
+            "description": "This cottage is, as all the other residences of this place, a ruined mess.\nBroken furniture and decaying corpses litter the floor. To the east, you\ncan see a staircase leading down.\n",
+            "flags": "1|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8162"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8160"
+                }
+            ]
+        },
+        {
+            "vnum": "8162",
+            "name": "A Staircase",
+            "description": "This staircase is an ancient stone structure that looks far older than the\nother structures in the village. You peer down in an attempt to ascertain\nwhat may below, but can see only darkness.\n",
+            "flags": "1|4|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8161"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "8163",
+            "name": "A Murky Mist",
+            "description": "You are plowing through a thick mist that has suddenly enshrouded the trail.\nYou can still make it out beneath your feet, but only barely. Howls, screams\nand shouts of anger and terror ring out on all sides, and you feel fear \nclutching at your heart.\n",
+            "flags": "1|8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8164"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8159"
+                }
+            ]
+        },
+        {
+            "vnum": "8164",
+            "name": "A Murky Mist",
+            "description": "You are plowing through a thick mist that has suddenly enshrouded the trail.\nYou can still make it out beneath your feet, but only barely. Howls, screams\nand shouts of anger and terror ring out on all sides, and you feel fear \nclutching at your heart. You think you can make out a small stone building\nto the east.\n",
+            "flags": "1|8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8195"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8165"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8163"
+                }
+            ]
+        },
+        {
+            "vnum": "8165",
+            "name": "Outside The Crypt",
+            "description": "The small stone building is actually a crypt, which is in good condition,\nnot surprising considering the nature of the current inhabitants of this\nghoulish town. A large iron door looms to the east, and you notice runes\ninscribed into its surface in silver.\n",
+            "flags": "4|8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8166"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8164"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "runes door",
+                    "description": "The runes on the door read-\n\n  \"Here is the final resting place of the Evil Baron Shereck, former\n   tyrant of the Barony of Palem, and his two foul brothers. Imprisoned\n   here by the powerful magic of Xanad, the ArchMage of Anon, their\n   rest may not be disturbed by their undead allies. Pray, whoever reads\n   this, do not breach this portal, for you will once again unleash their\n   undead madness upon the world.\"\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8166",
+            "name": "Inside The Crypt",
+            "description": "The interior of the crypt is dark, damp and cramped. It looks as though\nno-one has been here in centuries. A layer of dust ankle-deep makes progress\ndifficult, as do the hanging cobwebs, with strands as thick as your wrist.\nYou hope you don't run into the spinner of these webs.\n",
+            "flags": "1|128|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8165"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8167"
+                }
+            ]
+        },
+        {
+            "vnum": "8167",
+            "name": "The Crypt Proper",
+            "description": "Three doors and a staircase allow escape from this area, and that is a\nprominent urge you have right now as you glance about the hellish murals\non the walls, and the rotting corpses hanging in metal frames from the \narched ceiling.\n",
+            "flags": "1|128|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8168"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8170"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8169"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8166"
+                }
+            ]
+        },
+        {
+            "vnum": "8168",
+            "name": "A Room In the Crypt",
+            "description": "These three resting places that lead off the Crypt's main chamber are all\nidentical- a raised stone sarcophagus with a bas-relief of the image of its\noccupant in life embossed on the lid. Other than that, the place is bare. Or\nis it...?\n",
+            "flags": "1|128|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8167"
+                }
+            ]
+        },
+        {
+            "vnum": "8169",
+            "name": "A Room In the Crypt",
+            "description": "These three resting places that lead off the Crypt's main chamber are all\nidentical- a raised stone sarcophagus with a bas-relief of the image of its\noccupant in life embossed on the lid. Other than that, the place is bare. Or\nis it...?\n",
+            "flags": "1|128|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8167"
+                }
+            ]
+        },
+        {
+            "vnum": "8170",
+            "name": "A Room In the Crypt",
+            "description": "These three resting places that lead off the Crypt's main chamber are all\nidentical- a raised stone sarcophagus with a bas-relief of the image of its\noccupant in life embossed on the lid. Other than that, the place is bare. Or\nis it...?\n",
+            "flags": "1|128|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8167"
+                }
+            ]
+        },
+        {
+            "vnum": "8171",
+            "name": "The Path To The Garden",
+            "description": "This path runs past some very ugly, dead plants that look like they've had\nthe life drained from them by some disturbingly healthy looking plants with\nthorns that look like teeth...\n",
+            "flags": "8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8172"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8139"
+                }
+            ]
+        },
+        {
+            "vnum": "8172",
+            "name": "The Path To The Garden",
+            "description": "This path runs past some very ugly, dead plants that look like they've had\nthe life drained from them by some disturbingly healthy looking plants with\nthorns that look like teeth. You suddenly curse as you nearly fall into a\nsmall hole in the center of the path which was partially covered by a nest\nof branches.\n",
+            "flags": "4|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8173"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8171"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8174"
+                }
+            ]
+        },
+        {
+            "vnum": "8173",
+            "name": "The Path To The Garden",
+            "description": "This path runs past some very ugly, dead plants that look like they've had\nthe life drained from them by some disturbingly healthy looking plants with\nthorns that look like teeth. The garden gates are directly ahead... Peering\nthrough, you become reluctant to enter. It looks like a virtual maze...\n",
+            "flags": "4|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "8177"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8172"
+                }
+            ]
+        },
+        {
+            "vnum": "8174",
+            "name": "A Bolthole",
+            "description": "Here the cowardly necromancer Xantharus lurks, terrified of the evil he\nbrought to his village. He would do anything to escape, but is currently\ntoo petrified to leave his hole.\n",
+            "flags": "1|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8172"
+                }
+            ]
+        },
+        {
+            "vnum": "8175",
+            "name": "The Garden",
+            "description": "You find yourself lost in a tangled maze of thorny bushes and rotted trees\nthat all seem to move as if with a life of their own. Howls and screams of\npain and delight occasionally rent the still air- otherwise you are engulfed\nby a silent dimness that only exaggerates the already-eerie quality of\nyour surroundings.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8180"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8176"
+                }
+            ]
+        },
+        {
+            "vnum": "8176",
+            "name": "The Garden",
+            "description": "You find yourself lost in a tangled maze of thorny bushes and rotted trees\nthat all seem to move as if with a life of their own. Howls and screams of\npain and delight occasionally rent the still air- otherwise you are engulfed\nby a silent dimness that only exaggerates the already-eerie quality of\nyour surroundings.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8181"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8177"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8175"
+                }
+            ]
+        },
+        {
+            "vnum": "8177",
+            "name": "The Garden",
+            "description": "You find yourself lost in a tangled maze of thorny bushes and rotted trees\nthat all seem to move as if with a life of their own. Howls and screams of\npain and delight occasionally rent the still air- otherwise you are engulfed\nby a silent dimness that only exaggerates the already-eerie quality of\nyour surroundings.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8182"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8178"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8176"
+                }
+            ]
+        },
+        {
+            "vnum": "8178",
+            "name": "The Garden",
+            "description": "You find yourself lost in a tangled maze of thorny bushes and rotted trees\nthat all seem to move as if with a life of their own. Howls and screams of\npain and delight occasionally rent the still air- otherwise you are engulfed\nby a silent dimness that only exaggerates the already-eerie quality of\nyour surroundings.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8183"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8179"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8177"
+                }
+            ]
+        },
+        {
+            "vnum": "8179",
+            "name": "The Garden",
+            "description": "You find yourself lost in a tangled maze of thorny bushes and rotted trees\nthat all seem to move as if with a life of their own. Howls and screams of\npain and delight occasionally rent the still air- otherwise you are engulfed\nby a silent dimness that only exaggerates the already-eerie quality of\nyour surroundings.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8184"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8178"
+                }
+            ]
+        },
+        {
+            "vnum": "8180",
+            "name": "The Garden",
+            "description": "You find yourself lost in a tangled maze of thorny bushes and rotted trees\nthat all seem to move as if with a life of their own. Howls and screams of\npain and delight occasionally rent the still air- otherwise you are engulfed\nby a silent dimness that only exaggerates the already-eerie quality of\nyour surroundings.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8185"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8181"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8175"
+                }
+            ]
+        },
+        {
+            "vnum": "8181",
+            "name": "The Garden",
+            "description": "You find yourself lost in a tangled maze of thorny bushes and rotted trees\nthat all seem to move as if with a life of their own. Howls and screams of\npain and delight occasionally rent the still air- otherwise you are engulfed\nby a silent dimness that only exaggerates the already-eerie quality of\nyour surroundings.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8186"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8182"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8176"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8180"
+                }
+            ]
+        },
+        {
+            "vnum": "8182",
+            "name": "The Garden",
+            "description": "You find yourself lost in a tangled maze of thorny bushes and rotted trees\nthat all seem to move as if with a life of their own. Howls and screams of\npain and delight occasionally rent the still air- otherwise you are engulfed\nby a silent dimness that only exaggerates the already-eerie quality of\nyour surroundings.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8187"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8183"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8177"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8181"
+                }
+            ]
+        },
+        {
+            "vnum": "8183",
+            "name": "The Garden",
+            "description": "You find yourself lost in a tangled maze of thorny bushes and rotted trees\nthat all seem to move as if with a life of their own. Howls and screams of\npain and delight occasionally rent the still air- otherwise you are engulfed\nby a silent dimness that only exaggerates the already-eerie quality of\nyour surroundings.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8188"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8184"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8178"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8182"
+                }
+            ]
+        },
+        {
+            "vnum": "8184",
+            "name": "The Garden",
+            "description": "You find yourself lost in a tangled maze of thorny bushes and rotted trees\nthat all seem to move as if with a life of their own. Howls and screams of\npain and delight occasionally rent the still air- otherwise you are engulfed\nby a silent dimness that only exaggerates the already-eerie quality of\nyour surroundings.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8189"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8179"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8183"
+                }
+            ]
+        },
+        {
+            "vnum": "8185",
+            "name": "The Garden",
+            "description": "You find yourself lost in a tangled maze of thorny bushes and rotted trees\nthat all seem to move as if with a life of their own. Howls and screams of\npain and delight occasionally rent the still air- otherwise you are engulfed\nby a silent dimness that only exaggerates the already-eerie quality of\nyour surroundings.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8190"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8186"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8180"
+                }
+            ]
+        },
+        {
+            "vnum": "8186",
+            "name": "The Garden",
+            "description": "You find yourself lost in a tangled maze of thorny bushes and rotted trees\nthat all seem to move as if with a life of their own. Howls and screams of\npain and delight occasionally rent the still air- otherwise you are engulfed\nby a silent dimness that only exaggerates the already-eerie quality of\nyour surroundings.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8191"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8187"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8181"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8185"
+                }
+            ]
+        },
+        {
+            "vnum": "8187",
+            "name": "The Garden",
+            "description": "You find yourself lost in a tangled maze of thorny bushes and rotted trees\nthat all seem to move as if with a life of their own. Howls and screams of\npain and delight occasionally rent the still air- otherwise you are engulfed\nby a silent dimness that only exaggerates the already-eerie quality of\nyour surroundings.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8192"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8188"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8182"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8186"
+                }
+            ]
+        },
+        {
+            "vnum": "8188",
+            "name": "The Garden",
+            "description": "You find yourself lost in a tangled maze of thorny bushes and rotted trees\nthat all seem to move as if with a life of their own. Howls and screams of\npain and delight occasionally rent the still air- otherwise you are engulfed\nby a silent dimness that only exaggerates the already-eerie quality of\nyour surroundings.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8193"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8189"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8183"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8187"
+                }
+            ]
+        },
+        {
+            "vnum": "8189",
+            "name": "The Garden",
+            "description": "You find yourself lost in a tangled maze of thorny bushes and rotted trees\nthat all seem to move as if with a life of their own. Howls and screams of\npain and delight occasionally rent the still air- otherwise you are engulfed\nby a silent dimness that only exaggerates the already-eerie quality of\nyour surroundings.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8194"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8184"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8188"
+                }
+            ]
+        },
+        {
+            "vnum": "8190",
+            "name": "The Garden",
+            "description": "You find yourself lost in a tangled maze of thorny bushes and rotted trees\nthat all seem to move as if with a life of their own. Howls and screams of\npain and delight occasionally rent the still air- otherwise you are engulfed\nby a silent dimness that only exaggerates the already-eerie quality of\nyour surroundings.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8191"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8185"
+                }
+            ]
+        },
+        {
+            "vnum": "8191",
+            "name": "The Garden",
+            "description": "You find yourself lost in a tangled maze of thorny bushes and rotted trees\nthat all seem to move as if with a life of their own. Howls and screams of\npain and delight occasionally rent the still air- otherwise you are engulfed\nby a silent dimness that only exaggerates the already-eerie quality of\nyour surroundings.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8192"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8186"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8190"
+                }
+            ]
+        },
+        {
+            "vnum": "8192",
+            "name": "The Garden",
+            "description": "You suddenly enter a brightly-lit glade full of towering oaks and fresh,\ngreen grass. Here the powers of good have managed to create a foothold in \nthis realm of darkness, to aid those stranded or trapped here. You may rest\nin peace (if you'll pardon the inappropriate euphemism) for as long as you\nwish here.\n",
+            "flags": "4|1024",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8193"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8187"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8191"
+                }
+            ]
+        },
+        {
+            "vnum": "8193",
+            "name": "The Garden",
+            "description": "You find yourself lost in a tangled maze of thorny bushes and rotted trees\nthat all seem to move as if with a life of their own. Howls and screams of\npain and delight occasionally rent the still air- otherwise you are engulfed\nby a silent dimness that only exaggerates the already-eerie quality of\nyour surroundings.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8194"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8188"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8192"
+                }
+            ]
+        },
+        {
+            "vnum": "8194",
+            "name": "The Garden",
+            "description": "You find yourself lost in a tangled maze of thorny bushes and rotted trees\nthat all seem to move as if with a life of their own. Howls and screams of\npain and delight occasionally rent the still air- otherwise you are engulfed\nby a silent dimness that only exaggerates the already-eerie quality of\nyour surroundings.\n",
+            "flags": "1|8192",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8189"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8193"
+                }
+            ]
+        },
+        {
+            "vnum": "8195",
+            "name": "A Murky Mist",
+            "description": "You are plowing through a thick mist that has suddenly enshrouded the trail.\nYou can still make it out beneath your feet, but only barely. Howls, screams\nand shouts of anger and terror ring out on all sides, and you feel fear \nclutching at your heart. You think you can make out a small stone building\nto the east. A gaping hole looms out of the fog in the ground to the right.\n",
+            "flags": "1|8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8197"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8164"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8196"
+                }
+            ]
+        },
+        {
+            "vnum": "8196",
+            "name": "The Dragon's Lair",
+            "description": "Dragons of all types, alive or undead, keep certain habits, and one of them\nis how they decorate their lair. So when you enter and see treasure splashed\neverywhere, along with a generous helping of blood and fried corpses, you are\nat least 90% sure you have entered the lair of one...\n",
+            "flags": "1|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8195"
+                }
+            ]
+        },
+        {
+            "vnum": "8197",
+            "name": "A Murky Mist",
+            "description": "You are plowing through a thick mist that has suddenly enshrouded the trail.\nYou can still make it out beneath your feet, but only barely. Howls, screams\nand shouts of anger and terror ring out on all sides, and you feel fear \nclutching at your heart. You think you can make out a small stone building\nto the east.\n",
+            "flags": "1|8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8198"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8195"
+                }
+            ]
+        },
+        {
+            "vnum": "8198",
+            "name": "A Murky Mist",
+            "description": "You are plowing through a thick mist that has suddenly enshrouded the trail.\nYou can still make it out beneath your feet, but only barely. Howls, screams\nand shouts of anger and terror ring out on all sides, and you feel fear \nclutching at your heart. You think you can make out a small stone building\nto the east. You aren't sure, but you think you can see a dark tunnel up\nahead.\n",
+            "flags": "1|8192",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8199"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8197"
+                }
+            ]
+        },
+        {
+            "vnum": "8199",
+            "name": "A Dark Tunnel",
+            "description": "Can it be? YES! An escape route! From this tunnel emanates the sweet smell \nof green grass and fresh air. You can clamber through and escape, though\nthe tunnel is so narrow you doubt you'd be able to return through it. But\nyou feel that this room has been blessed by gods, hence you may recall to \nescape.\n",
+            "flags": "1|4",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8198"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "D",
+            "arg1": "8102",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8102",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8103",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8104",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8114",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8114",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8115",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8116",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8117",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8117",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8118",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8119",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8120",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8120",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8120",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8121",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8122",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8123",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8124",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8124",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8125",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8126",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8127",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8127",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8128",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8129",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8130",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8130",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8130",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8131",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8132",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8133",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8134",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8134",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8135",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8136",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8140",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8141",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8141",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8141",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8142",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8143",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8144",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8144",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8145",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8146",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8149",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8149",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8149",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8150",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8151",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8152",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8152",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8152",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8153",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8154",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8157",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8158",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8160",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8161",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8165",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8166",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8167",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8167",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8167",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8168",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8169",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8170",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8103"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8104"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8115"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8116"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8118"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8119"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8121"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8122"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8123"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8125"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8126"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8128"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8129"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8131"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8132"
+        },
+        {
+            "command": "O",
+            "arg1": "8109",
+            "arg2": "0",
+            "arg3": "8133"
+        },
+        {
+            "command": "M",
+            "arg1": "8102",
+            "arg2": "1",
+            "arg3": "8104",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8102",
+            "arg2": "1",
+            "arg3": "8119",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8102",
+            "arg2": "1",
+            "arg3": "8121",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8132",
+            "arg2": "1",
+            "arg3": "8108",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8132",
+            "arg2": "1",
+            "arg3": "8109",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "8132",
+            "arg2": "1",
+            "arg3": "8110",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8108",
+            "arg2": "1",
+            "arg3": "8131",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "8119",
+            "arg2": "0",
+            "arg3": "8131"
+        },
+        {
+            "command": "M",
+            "arg1": "8114",
+            "arg2": "6",
+            "arg3": "8115",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8114",
+            "arg2": "6",
+            "arg3": "8119",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8113",
+            "arg2": "6",
+            "arg3": "8121",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8113",
+            "arg2": "6",
+            "arg3": "8116",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8114",
+            "arg2": "6",
+            "arg3": "8132",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8114",
+            "arg2": "6",
+            "arg3": "8122",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8113",
+            "arg2": "6",
+            "arg3": "8103",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8113",
+            "arg2": "6",
+            "arg3": "8118",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8114",
+            "arg2": "6",
+            "arg3": "8129",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8114",
+            "arg2": "6",
+            "arg3": "8129",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8113",
+            "arg2": "6",
+            "arg3": "8125",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8113",
+            "arg2": "6",
+            "arg3": "8125",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8106",
+            "arg2": "2",
+            "arg3": "8123",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8106",
+            "arg2": "2",
+            "arg3": "8133",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8101",
+            "arg2": "2",
+            "arg3": "8126",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8101",
+            "arg2": "2",
+            "arg3": "8128",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8101",
+            "arg2": "2",
+            "arg3": "8132",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8118",
+            "arg2": "10",
+            "arg3": "8106",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8118",
+            "arg2": "10",
+            "arg3": "8113",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8118",
+            "arg2": "10",
+            "arg3": "8120",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8112",
+            "arg2": "8",
+            "arg3": "8112",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8112",
+            "arg2": "8",
+            "arg3": "8130",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8112",
+            "arg2": "8",
+            "arg3": "8137",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8103",
+            "arg2": "6",
+            "arg3": "8198",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8103",
+            "arg2": "6",
+            "arg3": "8195",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8103",
+            "arg2": "6",
+            "arg3": "8159",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8103",
+            "arg2": "6",
+            "arg3": "8155",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8103",
+            "arg2": "6",
+            "arg3": "8156",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8103",
+            "arg2": "6",
+            "arg3": "8164",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8100",
+            "arg2": "2",
+            "arg3": "8135",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8122",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "8100",
+            "arg2": "2",
+            "arg3": "8136",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8122",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "8130",
+            "arg2": "1",
+            "arg3": "8139",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8103",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "8117",
+            "arg2": "0",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "8128",
+            "arg2": "3",
+            "arg3": "8142",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8128",
+            "arg2": "3",
+            "arg3": "8143",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8128",
+            "arg2": "3",
+            "arg3": "8140",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8129",
+            "arg2": "1",
+            "arg3": "8143",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8127",
+            "arg2": "1",
+            "arg3": "8145",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8112",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "8113",
+            "arg2": "0",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "8114",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "8115",
+            "arg2": "1",
+            "arg3": "8145",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8115",
+            "arg2": "1",
+            "arg3": "8146",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8115",
+            "arg2": "1",
+            "arg3": "8147",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8109",
+            "arg2": "1",
+            "arg3": "8150",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8104",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "8110",
+            "arg2": "1",
+            "arg3": "8151",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8119",
+            "arg2": "1",
+            "arg3": "8152",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8107",
+            "arg2": "0",
+            "arg3": "12"
+        },
+        {
+            "command": "E",
+            "arg1": "8108",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "8110",
+            "arg2": "0",
+            "arg3": "17"
+        },
+        {
+            "command": "G",
+            "arg1": "8120",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "8116",
+            "arg2": "1",
+            "arg3": "8153",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "8115",
+            "arg2": "0",
+            "arg3": "8153"
+        },
+        {
+            "command": "P",
+            "arg1": "8116",
+            "arg2": "0",
+            "arg3": "8115",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "8106",
+            "arg2": "0",
+            "arg3": "8153"
+        },
+        {
+            "command": "P",
+            "arg1": "8105",
+            "arg2": "0",
+            "arg3": "8106",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8105",
+            "arg2": "1",
+            "arg3": "8154",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8101",
+            "arg2": "0",
+            "arg3": "9"
+        },
+        {
+            "command": "E",
+            "arg1": "8102",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "8131",
+            "arg2": "1",
+            "arg3": "8158",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8100",
+            "arg2": "0",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "8123",
+            "arg2": "2",
+            "arg3": "8165",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8133",
+            "arg2": "2",
+            "arg3": "8166",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8123",
+            "arg2": "2",
+            "arg3": "8167",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8104",
+            "arg2": "2",
+            "arg3": "8168",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "8111",
+            "arg2": "0",
+            "arg3": "12"
+        },
+        {
+            "command": "G",
+            "arg1": "8121",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "8104",
+            "arg2": "2",
+            "arg3": "8168",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "8111",
+            "arg2": "0",
+            "arg3": "12"
+        },
+        {
+            "command": "G",
+            "arg1": "8121",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "8134",
+            "arg2": "1",
+            "arg3": "8170",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8111",
+            "arg2": "0",
+            "arg3": "12"
+        },
+        {
+            "command": "G",
+            "arg1": "8121",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "8117",
+            "arg2": "1",
+            "arg3": "8174",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "8118",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "8120",
+            "arg2": "4",
+            "arg3": "8175",
+            "arg4": "4"
+        },
+        {
+            "command": "M",
+            "arg1": "8121",
+            "arg2": "4",
+            "arg3": "8178",
+            "arg4": "4"
+        },
+        {
+            "command": "M",
+            "arg1": "8122",
+            "arg2": "2",
+            "arg3": "8181",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "8124",
+            "arg2": "2",
+            "arg3": "8184",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "8125",
+            "arg2": "8",
+            "arg3": "8187",
+            "arg4": "8"
+        },
+        {
+            "command": "M",
+            "arg1": "8126",
+            "arg2": "1",
+            "arg3": "8192",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8107",
+            "arg2": "1",
+            "arg3": "8190",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8111",
+            "arg2": "1",
+            "arg3": "8196",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "8105",
+            "arg2": "0",
+            "arg3": "8196"
+        },
+        {
+            "command": "R",
+            "arg1": "8175",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8176",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8177",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8178",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8179",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8180",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8181",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8182",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8183",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8184",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8185",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8186",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8187",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8188",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8189",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8190",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "8191",
+            "arg2": "4"
+        }
+    ],
+    "olimits": [
+        {
+            "vnum": "8100",
+            "limit": "1"
+        },
+        {
+            "vnum": "8113",
+            "limit": "1"
+        },
+        {
+            "vnum": "8110",
+            "limit": "10"
+        },
+        {
+            "vnum": "8122",
+            "limit": "2"
+        }
+    ],
+    "omprogs": [
+        {
+            "command": "O",
+            "vnum": "8122",
+            "progtype": "wear_prog",
+            "progname": "wear_prog_headguard"
+        },
+        {
+            "command": "O",
+            "vnum": "8122",
+            "progtype": "remove_prog",
+            "progname": "remove_prog_headguard"
+        }
+    ]
+}

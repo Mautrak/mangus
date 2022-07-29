@@ -1,0 +1,505 @@
+{
+    "area": {
+        "file": "shalafi.are",
+        "name": "Shalafi",
+        "low_range": "90",
+        "high_range": "100",
+        "writer": "Asena",
+        "credits": "Tower of the Arcane Arts",
+        "min_vnum": "530",
+        "max_vnum": "539"
+    },
+    "mobiles": [
+        {
+            "vnum": "530",
+            "name": "Seneschal",
+            "short_description": "The Seneschal",
+            "long_description": "The Seneschal of magic is here.\n",
+            "description": "A ghostly figure floats above you, ready to unleash magical death on all\nthat are against his lords. The creature is formed entirely of flames and\nsome other magical materials. \n",
+            "race": "elf",
+            "act": "ABJKRVe",
+            "affected_by": "FHDe",
+            "alignment": "0",
+            "group": "0",
+            "level": "92",
+            "hitroll": "30",
+            "hit_dice": "2d500+25000",
+            "mana_dice": "1d1+3999",
+            "dam_dice": "10d25+90",
+            "dam_type": "slice",
+            "ac_pierce": "-79",
+            "ac_bash": "-79",
+            "ac_slash": "-79",
+            "ac_exotic": "-40",
+            "off_flags": "FKIN",
+            "imm_flags": "ABH",
+            "res_flags": "C",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "0",
+            "form": "A",
+            "parts": "ABCDE",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "531",
+            "name": "healer adept cabal shalafi",
+            "short_description": "an adept",
+            "long_description": "An adept and healer of the Arcane Arts is here.\n",
+            "description": "He is an old, wise cleric blessing his old friends of the Maters of Five \nMagic to destroy all undisciplined heros at Realms of Anatolia. He has\nbeatiful long white hair and is wearing a white dress that reaches down to\nthe floor. He has a nice smile on his face.\n",
+            "race": "human",
+            "act": "ABQVae",
+            "affected_by": "DFH",
+            "alignment": "1000",
+            "group": "0",
+            "level": "90",
+            "hitroll": "10",
+            "hit_dice": "1d1+28999",
+            "mana_dice": "1d1+999",
+            "dam_dice": "2d4+30",
+            "dam_type": "divine",
+            "ac_pierce": "-75",
+            "ac_bash": "-75",
+            "ac_slash": "-75",
+            "ac_exotic": "-55",
+            "off_flags": "FHIK",
+            "imm_flags": "ABC",
+            "res_flags": "D",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "532",
+            "name": "fiery red demon",
+            "short_description": "a fiery demon",
+            "long_description": "A red, fiery demon is looking around very angry.\n",
+            "description": "An aggressive looking fiery demon stands in the flame. It is quite angry\nto have been summoned. The demon has fiery flaming red skin, two heads,\nred scales, sharp teeth, 2 arms with long razorlike claws and two muscular\nlegs. Narrow red eyes like burning coal in a small cave. Two muscular arms\nsprout from either side of the broad torso, ending in wickedly sharp black\ntalons.\n",
+            "race": "unique",
+            "act": "AB",
+            "affected_by": "JZ",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "40",
+            "hitroll": "0",
+            "hit_dice": "1d1+2000",
+            "mana_dice": "1d1+1",
+            "dam_dice": "2d4+20",
+            "dam_type": "slash",
+            "ac_pierce": "-15",
+            "ac_bash": "-15",
+            "ac_slash": "-15",
+            "ac_exotic": "-15",
+            "off_flags": "FHI",
+            "imm_flags": "H",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "0",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "530",
+            "name": "spider altar",
+            "short_description": "a huge violet altar carved as a spider",
+            "description": "A hude spider shaped altar is standing at the center of room.",
+            "material": "ivory",
+            "type": "container",
+            "extra_flags": "AORY",
+            "wear_flags": "P",
+            "values": "10 15 532 15 100",
+            "level": "60",
+            "weight": "1",
+            "cost": "20",
+            "condition": "P"
+        },
+        {
+            "vnum": "531",
+            "name": "orb",
+            "short_description": "Orb of Magic",
+            "description": "Orb of magic is here.",
+            "material": "ebony",
+            "type": "staff",
+            "extra_flags": "A",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "60",
+            "weight": "1",
+            "cost": "100000",
+            "condition": "P"
+        },
+        {
+            "vnum": "532",
+            "name": "key",
+            "short_description": "a spider shaped key",
+            "description": "A spider shaped  key is on the ground.",
+            "material": "steel",
+            "type": "key",
+            "extra_flags": "ORY",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "40",
+            "weight": "4",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "533",
+            "name": "white object portal",
+            "short_description": "Magical White Portal",
+            "description": "A magically created white object casts strange shadows across the clearing.\n",
+            "material": "energy",
+            "type": "portal",
+            "extra_flags": "AO",
+            "wear_flags": "0",
+            "values": "0 0 D 9209 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "534",
+            "name": "black object portal",
+            "short_description": "Magical Black Portal",
+            "description": "A magically created black object casts strange shadows across the clearing.\n",
+            "material": "energy",
+            "type": "portal",
+            "extra_flags": "AO",
+            "wear_flags": "0",
+            "values": "0 0 E 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "530",
+            "name": "Fifth Level",
+            "description": "The fifth level of the tower hums with whole magical power of the\nuniverse. All around, you see many items which have been carried and\ntransported from different lands. Probably they have been used to reached\nthe secret of the magical worlds; the stones sing and glow magically.\nBefore you is an altar shaped like a huge spider. Carved from diamond,\nit gives off a soft purple radiance.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "537"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "538"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "531"
+                }
+            ]
+        },
+        {
+            "vnum": "531",
+            "name": "Fourth Level",
+            "description": "The fourth level is much bigger than the others. All around you see the\nmagic. There are many wands and staves which have been created by the\nthe Arcane Arts magicians and used to destroy undisciplined heros at\nRealms of Anatolia. You see some red demons summoned and they are quite\nangry about to it.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "530"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "532"
+                }
+            ]
+        },
+        {
+            "vnum": "532",
+            "name": "Third Level",
+            "description": "Now, you are in a mist that has been suddenly appeared. Swirling mist\nobscures your vision and cloud your mind. You start to wander about the\neternity and power of the magic. The mist itself thickens to the up.  \n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "531"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "533"
+                }
+            ]
+        },
+        {
+            "vnum": "533",
+            "name": "Second Level",
+            "description": "The second level of the tower of the Arcane Arts is much like the first.\nThe walls are blackened and burnt by what you could only imagine to be\nmagical fire. A large globe of magical energy floats overhead, providing\nlight. A flight of stairs lead up and down.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "532"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "534"
+                }
+            ]
+        },
+        {
+            "vnum": "534",
+            "name": "Inside the Tower",
+            "description": "You stand in the lowest level of the Tower of Arcane Arts. The magical\nwalls all around you emit a faint magical glow which provides enough light \nto see by. Perhaps in the upper levels lie the secrets of this tower and\nArcane Arts.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "535"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "533"
+                }
+            ]
+        },
+        {
+            "vnum": "535",
+            "name": "Outside the Tower",
+            "description": "You are in a long way leading north and south. The magical walls emit a\nfaint magical glow which provides enough light to see by. Additionally a\nlarge globe of magical energy floats overhead, providing light. The tower\nis created by pure magic and you feel that the whole magical power of the\nuniverse has been used to create this tower.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "534"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "536"
+                }
+            ]
+        },
+        {
+            "vnum": "536",
+            "name": "The Mystical Path",
+            "description": "You start to feel the power of magic. Magical beings from every known\nplane walk amongst you. The path, like everything here, is magically\ncreated and seems perfect. Up ahead you see the Tower of the Arcane\nArts.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "5",
+                    "key": "-1",
+                    "u1_vnum": "535"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "1480"
+                }
+            ]
+        },
+        {
+            "vnum": "537",
+            "name": "The Mystical Room",
+            "description": "This room is looks like the third level of the tower. You are in a mist\nthat has been suddenly appeared. Swirling mist obscures your vision and\ncloud your mind. You start to wander about the eternity and power of the\nmagic. The mist itself thickens to the up. You see a portal that may help\nyou to find some materials to create powerful wands and staves.  \n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "530"
+                }
+            ]
+        },
+        {
+            "vnum": "538",
+            "name": "The Mystical Room",
+            "description": "This room is looks like the third level of the tower. You are in a mist\nthat has been suddenly appeared. Swirling mist obscures your vision and\ncloud your mind. You start to wander about the eternity and power of the\nmagic. The mist itself thickens to the up. You see a portal that may help\nyou to find some materials to create powerful wands and staves.  \n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "530"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "530",
+            "arg2": "1",
+            "arg3": "536",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "532",
+            "arg2": "-1",
+            "arg3": "11"
+        },
+        {
+            "command": "M",
+            "arg1": "531",
+            "arg2": "1",
+            "arg3": "530",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "530",
+            "arg2": "1",
+            "arg3": "530"
+        },
+        {
+            "command": "P",
+            "arg1": "531",
+            "arg2": "1",
+            "arg3": "530",
+            "arg4": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "536",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "533",
+            "arg2": "1",
+            "arg3": "537"
+        },
+        {
+            "command": "O",
+            "arg1": "534",
+            "arg2": "1",
+            "arg3": "538"
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "531",
+            "spec_fun": "spec_cast_cabal"
+        },
+        {
+            "vnum": "530",
+            "spec_fun": "spec_fight_seneschal"
+        },
+        {
+            "vnum": "532",
+            "spec_fun": "spec_cast_mage"
+        }
+    ],
+    "omprogs": [
+        {
+            "command": "O",
+            "vnum": "531",
+            "progtype": "get_prog",
+            "progname": "get_prog_cabal_item"
+        },
+        {
+            "command": "O",
+            "vnum": "531",
+            "progtype": "sac_prog",
+            "progname": "sac_prog_cabal_item"
+        },
+        {
+            "command": "M",
+            "vnum": "530",
+            "progtype": "greet_prog",
+            "progname": "greet_prog_shalafi"
+        }
+    ],
+    "practicers": [
+        {
+            "vnum": "530",
+            "practicer": "group_cabal"
+        }
+    ]
+}

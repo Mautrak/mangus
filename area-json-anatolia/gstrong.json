@@ -1,0 +1,2958 @@
+{
+    "area": {
+        "file": "gstrong.are",
+        "name": "Goblin Stronghold",
+        "low_range": "10",
+        "high_range": "20",
+        "writer": "Badaxe",
+        "credits": "Goblin Stronghold",
+        "min_vnum": "29000",
+        "max_vnum": "29099"
+    },
+    "mobiles": [
+        {
+            "vnum": "29001",
+            "name": "king goblin Grumm",
+            "short_description": "Grumm",
+            "long_description": "Grumm, King of the Goblins isn't happy to see you.\n",
+            "description": "You see a balding, overweight goblin, but he looks quite tough!\n",
+            "race": "goblin",
+            "act": "ABFHT",
+            "affected_by": "Jb",
+            "alignment": "-600",
+            "group": "0",
+            "level": "19",
+            "hitroll": "0",
+            "hit_dice": "10d5+250",
+            "mana_dice": "1d1+99",
+            "dam_dice": "2d4+1",
+            "dam_type": "17",
+            "ac_pierce": "4",
+            "ac_bash": "4",
+            "ac_slash": "4",
+            "ac_exotic": "1",
+            "off_flags": "FKNPR",
+            "imm_flags": "A",
+            "res_flags": "BQ",
+            "vuln_flags": "C",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "800",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "29002",
+            "name": "shaman goblin",
+            "short_description": "The goblin shaman",
+            "long_description": "A goblin up from his writing and glares at your intrusion on his work.\n",
+            "description": "His face is sour and pale. He probably takes his religion very seriously.\n",
+            "race": "goblin",
+            "act": "ABFHQ",
+            "affected_by": "J",
+            "alignment": "-600",
+            "group": "0",
+            "level": "15",
+            "hitroll": "0",
+            "hit_dice": "5d6+150",
+            "mana_dice": "1d1+199",
+            "dam_dice": "2d3+2",
+            "dam_type": "17",
+            "ac_pierce": "5",
+            "ac_bash": "5",
+            "ac_slash": "5",
+            "ac_exotic": "0",
+            "off_flags": "PR",
+            "imm_flags": "A",
+            "res_flags": "Q",
+            "vuln_flags": "C",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "90",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "29003",
+            "name": "mage goblin",
+            "short_description": "Goblin Mage",
+            "long_description": "A goblin mage is angered by your intrusion.\n",
+            "description": "This goblin mage has been working for months towards this moment. And YOU\nhave intruded upon him! He looks REALLY pissed off! Clad in a pile of filth\nyour dog would not sleep in, he is much smaller than the other goblins in the\nstronghold.\n",
+            "race": "goblin",
+            "act": "ABFHR",
+            "affected_by": "BCDEFJVd",
+            "alignment": "-600",
+            "group": "0",
+            "level": "15",
+            "hitroll": "0",
+            "hit_dice": "5d6+150",
+            "mana_dice": "1d1+199",
+            "dam_dice": "1d4+1",
+            "dam_type": "17",
+            "ac_pierce": "2",
+            "ac_bash": "2",
+            "ac_slash": "2",
+            "ac_exotic": "8",
+            "off_flags": "PR",
+            "imm_flags": "A",
+            "res_flags": "Q",
+            "vuln_flags": "C",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "100",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "29004",
+            "name": "champion goblin knarl",
+            "short_description": "Knarl",
+            "long_description": "Before you is the biggest goblin you have ever seen.\n",
+            "description": "Knarl glares right back at you.\n",
+            "race": "goblin",
+            "act": "ABFT",
+            "affected_by": "FJPVb",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "20",
+            "hitroll": "0",
+            "hit_dice": "5d5+350",
+            "mana_dice": "1d1+99",
+            "dam_dice": "2d4+2",
+            "dam_type": "17",
+            "ac_pierce": "5",
+            "ac_bash": "5",
+            "ac_slash": "5",
+            "ac_exotic": "0",
+            "off_flags": "CDEFKPR",
+            "imm_flags": "A",
+            "res_flags": "BQ",
+            "vuln_flags": "C",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "100",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "29005",
+            "name": "guard goblin",
+            "short_description": "goblin guard",
+            "long_description": "A goblin guard eyes you suspiciously.\n",
+            "description": "A bit larger than your average goblin, guards are bullies to the others.\n",
+            "race": "goblin",
+            "act": "ABFT",
+            "affected_by": "J",
+            "alignment": "-600",
+            "group": "29005",
+            "level": "12",
+            "hitroll": "0",
+            "hit_dice": "1d5+250",
+            "mana_dice": "1d1+99",
+            "dam_dice": "1d3+3",
+            "dam_type": "17",
+            "ac_pierce": "3",
+            "ac_bash": "3",
+            "ac_slash": "3",
+            "ac_exotic": "0",
+            "off_flags": "R",
+            "imm_flags": "A",
+            "res_flags": "Q",
+            "vuln_flags": "C",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "100",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "29006",
+            "name": "guard goblin",
+            "short_description": "a goblin guard",
+            "long_description": "A goblin guard eyes you suspiciously.\n",
+            "description": "A bit larger than your average goblin, guards are bullies to the others.\n",
+            "race": "goblin",
+            "act": "AFT",
+            "affected_by": "J",
+            "alignment": "-600",
+            "group": "29006",
+            "level": "13",
+            "hitroll": "0",
+            "hit_dice": "1d5+240",
+            "mana_dice": "1d1+99",
+            "dam_dice": "1d3+1",
+            "dam_type": "17",
+            "ac_pierce": "3",
+            "ac_bash": "3",
+            "ac_slash": "3",
+            "ac_exotic": "0",
+            "off_flags": "EKR",
+            "imm_flags": "QA",
+            "res_flags": "C",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "100",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "29007",
+            "name": "goblin",
+            "short_description": "The goblin",
+            "long_description": "A goblin is here, slacking off.\n",
+            "description": "He's ugly, green, and smelly... What's more to say?\n",
+            "race": "goblin",
+            "act": "AFT",
+            "affected_by": "J",
+            "alignment": "-600",
+            "group": "29007",
+            "level": "12",
+            "hitroll": "0",
+            "hit_dice": "5d12+105",
+            "mana_dice": "1d1+99",
+            "dam_dice": "1d3+2",
+            "dam_type": "17",
+            "ac_pierce": "2",
+            "ac_bash": "2",
+            "ac_slash": "2",
+            "ac_exotic": "0",
+            "off_flags": "R",
+            "imm_flags": "A",
+            "res_flags": "Q",
+            "vuln_flags": "C",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "0",
+            "form": "0",
+            "parts": "0",
+            "size": "small",
+            "material": "0"
+        },
+        {
+            "vnum": "29008",
+            "name": "goblin prisoner",
+            "short_description": "the goblin prisoner",
+            "long_description": "A goblin is here, shackled to the wall.\n",
+            "description": "You notice his skin is more blueish... perhaps he's from another tribe?\n",
+            "race": "goblin",
+            "act": "AT",
+            "affected_by": "J",
+            "alignment": "-600",
+            "group": "0",
+            "level": "3",
+            "hitroll": "0",
+            "hit_dice": "10d2+15",
+            "mana_dice": "1d1+99",
+            "dam_dice": "1d4+1",
+            "dam_type": "17",
+            "ac_pierce": "2",
+            "ac_bash": "2",
+            "ac_slash": "2",
+            "ac_exotic": "0",
+            "off_flags": "0",
+            "imm_flags": "0",
+            "res_flags": "Q",
+            "vuln_flags": "C",
+            "start_pos": "6",
+            "default_pos": "6",
+            "sex": "1",
+            "wealth": "0",
+            "form": "0",
+            "parts": "0",
+            "size": "small",
+            "material": "0"
+        },
+        {
+            "vnum": "29009",
+            "name": "leper goblin",
+            "short_description": "the goblin",
+            "long_description": "This goblin looks very sick.\n",
+            "description": "He screams! Don't look at me!! Aaargh... leper outcast unclean!\n",
+            "race": "goblin",
+            "act": "ACFGS",
+            "affected_by": "FJPQXbd",
+            "alignment": "0",
+            "group": "29009",
+            "level": "15",
+            "hitroll": "0",
+            "hit_dice": "5d5+200",
+            "mana_dice": "1d1+99",
+            "dam_dice": "2d3+3",
+            "dam_type": "17",
+            "ac_pierce": "3",
+            "ac_bash": "3",
+            "ac_slash": "3",
+            "ac_exotic": "0",
+            "off_flags": "BDEFR",
+            "imm_flags": "AB",
+            "res_flags": "Q",
+            "vuln_flags": "CQ",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "2",
+            "form": "0",
+            "parts": "A",
+            "size": "small",
+            "material": "0"
+        },
+        {
+            "vnum": "29010",
+            "name": "goblin",
+            "short_description": "the goblin",
+            "long_description": "A goblin is here, peeling potatoes.\n",
+            "description": "He's ugly, green, and smelly... What's more to say?\n",
+            "race": "goblin",
+            "act": "ABFT",
+            "affected_by": "J",
+            "alignment": "-600",
+            "group": "29010",
+            "level": "14",
+            "hitroll": "0",
+            "hit_dice": "10d2+230",
+            "mana_dice": "1d1+99",
+            "dam_dice": "2d3+1",
+            "dam_type": "17",
+            "ac_pierce": "2",
+            "ac_bash": "2",
+            "ac_slash": "2",
+            "ac_exotic": "0",
+            "off_flags": "R",
+            "imm_flags": "A",
+            "res_flags": "Q",
+            "vuln_flags": "C",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "20",
+            "form": "0",
+            "parts": "0",
+            "size": "small",
+            "material": "0"
+        },
+        {
+            "vnum": "29011",
+            "name": "demon lesser",
+            "short_description": "The Lesser Demon",
+            "long_description": "A dark, horned figure is trapped inside the pentagram.\n",
+            "description": "He really wants to get out of that pentagram. Maybe you should let him out?\n",
+            "race": "human",
+            "act": "ABG",
+            "affected_by": "Hb",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "20",
+            "hitroll": "0",
+            "hit_dice": "1d1+399",
+            "mana_dice": "1d1+149",
+            "dam_dice": "5d4+5",
+            "dam_type": "5",
+            "ac_pierce": "-7",
+            "ac_bash": "-7",
+            "ac_slash": "-7",
+            "ac_exotic": "5",
+            "off_flags": "CDEFIKMN",
+            "imm_flags": "AB",
+            "res_flags": "HQ",
+            "vuln_flags": "EN",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "100",
+            "form": "0",
+            "parts": "0",
+            "size": "large",
+            "material": "0"
+        },
+        {
+            "vnum": "29012",
+            "name": "girl dancing goblin Britta",
+            "short_description": "the dancing girl",
+            "long_description": "A pretty female goblin entertains the court.\n",
+            "description": "She is quite pretty, even for a goblin.\n",
+            "race": "goblin",
+            "act": "ABFT",
+            "affected_by": "J",
+            "alignment": "-600",
+            "group": "0",
+            "level": "9",
+            "hitroll": "0",
+            "hit_dice": "10d2+120",
+            "mana_dice": "1d1+99",
+            "dam_dice": "1d4+1",
+            "dam_type": "17",
+            "ac_pierce": "2",
+            "ac_bash": "2",
+            "ac_slash": "2",
+            "ac_exotic": "0",
+            "off_flags": "R",
+            "imm_flags": "A",
+            "res_flags": "Q",
+            "vuln_flags": "C",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "female",
+            "wealth": "100",
+            "form": "0",
+            "parts": "0",
+            "size": "small",
+            "material": "0"
+        },
+        {
+            "vnum": "29013",
+            "name": "goblin jester",
+            "short_description": "the goblin jester",
+            "long_description": "A obnoxious little runt makes fun of you.\n",
+            "description": "He wears a stupid green suit with bells on it. You hate him.\n",
+            "race": "goblin",
+            "act": "AFT",
+            "affected_by": "J",
+            "alignment": "-600",
+            "group": "0",
+            "level": "11",
+            "hitroll": "0",
+            "hit_dice": "10d2+145",
+            "mana_dice": "1d1+99",
+            "dam_dice": "1d4+1",
+            "dam_type": "17",
+            "ac_pierce": "2",
+            "ac_bash": "2",
+            "ac_slash": "2",
+            "ac_exotic": "0",
+            "off_flags": "0",
+            "imm_flags": "A",
+            "res_flags": "Q",
+            "vuln_flags": "C",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "10",
+            "form": "0",
+            "parts": "0",
+            "size": "small",
+            "material": "0"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "29001",
+            "name": "jacket goblin scale mail",
+            "short_description": "a goblin scale mail jacket",
+            "description": "A goblin scale mail jacket is lying on the ground.",
+            "material": "bone",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AD",
+            "values": "3 4 4 0 0",
+            "level": "10",
+            "weight": "100",
+            "cost": "849",
+            "condition": "G"
+        },
+        {
+            "vnum": "29002",
+            "name": "jerkin goblin scale mail",
+            "short_description": "a goblin scale mail jerkin",
+            "description": "A goblin scale mail jerkin is lying on the ground.",
+            "material": "bone",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AD",
+            "values": "3 4 4 0 0",
+            "level": "9",
+            "weight": "90",
+            "cost": "530",
+            "condition": "G"
+        },
+        {
+            "vnum": "29003",
+            "name": "skirt goblin scale mail",
+            "short_description": "a goblin long scale mail skirt",
+            "description": "A goblin long scale mail skirt is lying on the ground.",
+            "material": "bone",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AF",
+            "values": "3 5 4 0 0",
+            "level": "11",
+            "weight": "120",
+            "cost": "500",
+            "condition": "G"
+        },
+        {
+            "vnum": "29004",
+            "name": "sleeves goblin scale mail",
+            "short_description": "a pair of goblin scale mail sleeves",
+            "description": "A pair of goblin scale mail sleeves is lying on the ground.",
+            "material": "bone",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AI",
+            "values": "3 4 4 0 0",
+            "level": "8",
+            "weight": "60",
+            "cost": "400",
+            "condition": "G"
+        },
+        {
+            "vnum": "29005",
+            "name": "shirt goblin chain mail",
+            "short_description": "a goblin chain mail shirt",
+            "description": "A goblin chain mail shirt is lying on the ground.",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AD",
+            "values": "5 4 5 0 0",
+            "level": "12",
+            "weight": "180",
+            "cost": "800",
+            "condition": "G"
+        },
+        {
+            "vnum": "29006",
+            "name": "skirt goblin chain mail",
+            "short_description": "a goblin long chain mail skirt",
+            "description": "A goblin long chain mail skirt is lying on the ground.",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AF",
+            "values": "5 4 5 0 0",
+            "level": "12",
+            "weight": "100",
+            "cost": "800",
+            "condition": "G"
+        },
+        {
+            "vnum": "29007",
+            "name": "gauntlets goblin chain mail",
+            "short_description": "a pair of goblin chain mail gauntlets",
+            "description": "A pair of goblin chain mail gauntlets is lying on the ground.",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AH",
+            "values": "5 4 5 0 0",
+            "level": "10",
+            "weight": "40",
+            "cost": "700",
+            "condition": "P"
+        },
+        {
+            "vnum": "29008",
+            "name": "sleeves goblin chain mail",
+            "short_description": "a pair of goblin chain mail sleeves",
+            "description": "A pair of goblin chain mail sleeves is lying on the ground.",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AI",
+            "values": "5 4 5 0 0",
+            "level": "10",
+            "weight": "80",
+            "cost": "390",
+            "condition": "P"
+        },
+        {
+            "vnum": "29009",
+            "name": "crown king goblin",
+            "short_description": "the Great Crown of the Goblin King",
+            "description": "A simple crown of silver lies here. It looks quite old.",
+            "material": "silver",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AE",
+            "values": "4 6 5 3 0",
+            "level": "16",
+            "weight": "100",
+            "cost": "2000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "21"
+                }
+            ]
+        },
+        {
+            "vnum": "29010",
+            "name": "grumm axe",
+            "short_description": "the Great War Axe of Grumm",
+            "description": "A quite large, two-handed and double bladed axe lies before you.",
+            "material": "iron",
+            "type": "weapon",
+            "extra_flags": "ABEGLRY",
+            "wear_flags": "AN",
+            "values": "axe 5 5 slash CDF",
+            "level": "18",
+            "weight": "140",
+            "cost": "5000",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "3"
+                },
+                {
+                    "location": "19",
+                    "modifier": "4"
+                }
+            ]
+        },
+        {
+            "vnum": "29011",
+            "name": "helmet goblin horned dark",
+            "short_description": "a dark goblin horned helmet",
+            "description": "A dark goblin horned helmet lies here",
+            "material": "iron",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AE",
+            "values": "3 5 4 0 0",
+            "level": "9",
+            "weight": "30",
+            "cost": "450",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "3",
+                    "modifier": "-1"
+                },
+                {
+                    "location": "19",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "29012",
+            "name": "arm guards granite",
+            "short_description": "a pair of carved granite armguards.",
+            "description": "You see a large hollow tube carved of granite.",
+            "material": "stone",
+            "type": "armor",
+            "extra_flags": "GM",
+            "wear_flags": "AI",
+            "values": "6 6 9 2 0",
+            "level": "15",
+            "weight": "251",
+            "cost": "1900",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "5",
+                    "modifier": "1"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "arm guards armguards granite",
+                    "description": "These heavy armguards have been carved from the rock of these caverns.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29013",
+            "name": "cape green filthy",
+            "short_description": "a filthy green cape",
+            "description": "You see a pile of green rags on the floor",
+            "material": "cloth",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AK",
+            "values": "1 2 1 1 0",
+            "level": "10",
+            "weight": "30",
+            "cost": "1650",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "3",
+                    "modifier": "1"
+                },
+                {
+                    "location": "2",
+                    "modifier": "-1"
+                },
+                {
+                    "location": "12",
+                    "modifier": "28"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "Filthy green cape.",
+                    "description": "You see a cape ridden with filth and vermin. You're not going to WEAR it are\nyou?\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29014",
+            "name": "dagger shard stone",
+            "short_description": "a stone shard",
+            "description": "A sharp pointed rock lies here.",
+            "material": "stone",
+            "type": "weapon",
+            "extra_flags": "AG",
+            "wear_flags": "AN",
+            "values": "dagger 4 4 stab D",
+            "level": "12",
+            "weight": "10",
+            "cost": "1100",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "3"
+                },
+                {
+                    "location": "18",
+                    "modifier": "-1"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "A stone shard",
+                    "description": "Looks like it would make a good weapon.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29015",
+            "name": "sword goblin short",
+            "short_description": "a goblin's shortsword",
+            "description": "It looks heavier than your average shortsword, but it could use sone oiling.",
+            "material": "iron",
+            "type": "weapon",
+            "extra_flags": "G",
+            "wear_flags": "AN",
+            "values": "sword 4 4 slash D",
+            "level": "12",
+            "weight": "50",
+            "cost": "900",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "29016",
+            "name": "potion frothing black",
+            "short_description": "a frothing black potion",
+            "description": "You see a frothing black potion. ",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "BG",
+            "wear_flags": "AO",
+            "values": "15 'heal' 'curse' 'heal' 'remove curse'   ",
+            "level": "10",
+            "weight": "20",
+            "cost": "10000",
+            "condition": "G",
+            "extra_descriptions": [
+                {
+                    "keyword": "frothing black potion",
+                    "description": "It's moving. You can see little bugs and other chunks floating in it.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29017",
+            "name": "sword long two two-hand two-handed",
+            "short_description": "a long two-handed sword",
+            "description": "A long two-handed sword has been left here.",
+            "material": "iron",
+            "type": "weapon",
+            "extra_flags": "AG",
+            "wear_flags": "AN",
+            "values": "sword 4 6 slash DF",
+            "level": "20",
+            "weight": "50",
+            "cost": "7900",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "2"
+                },
+                {
+                    "location": "19",
+                    "modifier": "5"
+                },
+                {
+                    "location": "4",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "5",
+                    "modifier": "-2"
+                }
+            ]
+        },
+        {
+            "vnum": "29018",
+            "name": "key shaman goblin",
+            "short_description": "the goblin shaman's key",
+            "description": "An old rusty key has been forgotten here.",
+            "material": "iron",
+            "type": "key",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "0 0 0 0 0",
+            "level": "5",
+            "weight": "10",
+            "cost": "0",
+            "condition": "G"
+        },
+        {
+            "vnum": "29019",
+            "name": "key king goblin",
+            "short_description": "the goblin king's key",
+            "description": "An old rusty key has been forgotten here.",
+            "material": "iron",
+            "type": "key",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "0 0 0 0 0",
+            "level": "5",
+            "weight": "10",
+            "cost": "0",
+            "condition": "G"
+        },
+        {
+            "vnum": "29020",
+            "name": "key mage goblin",
+            "short_description": "the goblin mage's key",
+            "description": "An old rusty key has been forgotten here.",
+            "material": "iron",
+            "type": "key",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "0 0 0 0 0",
+            "level": "5",
+            "weight": "10",
+            "cost": "0",
+            "condition": "G"
+        },
+        {
+            "vnum": "29021",
+            "name": "key dungeon goblin",
+            "short_description": "the goblin dungeon key",
+            "description": "An old rusty key has been forgotten here.",
+            "material": "iron",
+            "type": "key",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "0 0 0 0 0",
+            "level": "5",
+            "weight": "10",
+            "cost": "0",
+            "condition": "G"
+        },
+        {
+            "vnum": "29022",
+            "name": "rock big",
+            "short_description": "a big rock",
+            "description": "You see a big rock in the middle of the room. It looks real heavy.",
+            "material": "stone",
+            "type": "container",
+            "extra_flags": "ABGLRY",
+            "wear_flags": "AQ",
+            "values": "600 0 0 100 10",
+            "level": "20",
+            "weight": "20",
+            "cost": "12300",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "24",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "22",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "21",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "20",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-2"
+                }
+            ]
+        },
+        {
+            "vnum": "29023",
+            "name": "ring britta",
+            "short_description": "Britta's Ring",
+            "description": "You almost miss a tiny ring of gold.",
+            "material": "gold",
+            "type": "treasure",
+            "extra_flags": "G",
+            "wear_flags": "AB",
+            "values": "0 0 0 0 0",
+            "level": "9",
+            "weight": "10",
+            "cost": "1100",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "21"
+                },
+                {
+                    "location": "3",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "29024",
+            "name": "Bookcase",
+            "short_description": "Bookcase",
+            "description": "A large wooden bookcase",
+            "material": "wood",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "100 0 0 50 72",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "G",
+            "extra_descriptions": [
+                {
+                    "keyword": "Bookcase",
+                    "description": "Its a rather large wooden bookcase. There are many books in it, but they\nare all written in GOBLIN!\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29025",
+            "name": "Desk",
+            "short_description": "A large mahogany desk",
+            "description": "A large mahogany desk is here.",
+            "material": "wood",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "100 0 0 50 72",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "G",
+            "extra_descriptions": [
+                {
+                    "keyword": "Desk",
+                    "description": "This is a beautiful desk.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29026",
+            "name": "Throne",
+            "short_description": "King Grumm's Throne",
+            "description": "King Grumm's Throne is here.",
+            "material": "wood",
+            "type": "furniture",
+            "extra_flags": "A",
+            "wear_flags": "0",
+            "values": "2 200 ABCDEFGHIJKL 200 200",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "Throne",
+                    "description": "This throne must have been left behind by the dwarves. It's inlaid with\nmany fine gems and precious metals. Unfortunately, the largest of these have\nlong since been scavenged.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29027",
+            "name": "table",
+            "short_description": "a large mahogany feast table",
+            "description": "A large mahogany feast table is here.",
+            "material": "wood",
+            "type": "furniture",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "table",
+                    "description": "This is by far the finest table you have ever seen. It stretches clear into\nthe north end of the Great Hall.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29028",
+            "name": "table",
+            "short_description": "A large mahogany feast table",
+            "description": "A large mahogany feast table is here.",
+            "material": "wood",
+            "type": "furniture",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "table",
+                    "description": "This is by far the finest table you have ever seen. It stretches clear into\nthe south end of the Great Hall.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29029",
+            "name": "gold",
+            "short_description": "a small pile of gold",
+            "description": "A small pile of gold is here glitering.",
+            "material": "gold",
+            "type": "money",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "0 75 0 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "29030",
+            "name": "mace heavy iron",
+            "short_description": "a heavy iron mace",
+            "description": "A heavy iron mace lies in the rubble.",
+            "material": "iron",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "mace 4 5 pound 0",
+            "level": "11",
+            "weight": "150",
+            "cost": "790",
+            "condition": "G"
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "29001",
+            "name": "The Entry Hall to the Goblin Stronghold",
+            "description": "You step into a cavern chiseled from solid granite. The first thing\nyou notice is the stench. You see goblins everywhere, clad for battle.\nPerhaps they are training for an assault on Midgaard, as they have been\nspotted outside the South Gate more and more frequently. Whatever their\npurpose here, you must put a stop to it. You see a hallways leading east\nand west, and a set of great doors to the south.\n   There is a small (Glowing) (Huming) tablet.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D5",
+                    "description": "Poor Alley.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3044"
+                },
+                {
+                    "door": "D1",
+                    "description": "A Hallway in the Stronghold.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29019"
+                },
+                {
+                    "door": "D2",
+                    "description": "North end of the Great Hall.\n",
+                    "keyword": "Great Doors",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29002"
+                },
+                {
+                    "door": "D3",
+                    "description": "A Hallway in the Stronghold.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29018"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n+                                                                    +\n+   This area has been groked, modified, debugged (?:) and adapted   +\n+   by jaceks in hot, monday's night, june'96                        +\n+                                                                    +\n+   PS. prepare to die                                               +\n+                                                                    +\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29002",
+            "name": "North End of the Great Hall",
+            "description": "This mighty vaulted cavern seems much too fine to have been crafted by\nthe likes of what you see here. Walls are built from carved granite blocks\nwhich must weigh over a ton apiece. The smooth rock arches up to a perfect\nsemi-circular stone ceiling upon which a great battle scene is painted.\nTapestries and paintings line the walls, but these have fallen into\ndisrepair at the hands of the goblin occupants. A long mahogany dining\ntable stretches for a full twenty yards, well into the south end of the\nGreat Hall. You now notice that the subjects of the artwork here are\ndwarven, not goblin. Perhaps the goblin legions overran this fortress and\ndrove the dwarves out. In any event, your work has just begun. The guards\nhave noticed you. You better be ready. The Great Hall continues south, with\ndoors east and west.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "The Entry Hall to the Goblin Stronghold.\n",
+                    "keyword": "Great Doors",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29001"
+                },
+                {
+                    "door": "D1",
+                    "description": "The Kitchen.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29023"
+                },
+                {
+                    "door": "D2",
+                    "description": "South End of the Great Hall.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29003"
+                },
+                {
+                    "door": "D3",
+                    "description": "The Training Room.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29021"
+                }
+            ]
+        },
+        {
+            "vnum": "29003",
+            "name": "South End of the Great Hall",
+            "description": "This mighty vaulted cavern seems much too fine to have been crafted by\nthe likes of what you see here. Walls are built from carved granite blocks\nwhich must weigh over a ton apiece. The smooth rock arches up to a perfect\nsemi-circular stone ceiling upon which a great battle scene is painted.\nTapestries and paintings line the walls, but these have fallen into\ndisrepair at the hands of the goblin occupants. A long mahogany dining\ntable stretches for a full twenty yards, well into the north end of the\nGreat Hall. A grand archway leads south, and through it you can see a\nthrone.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North End of the Great Hall.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29002"
+                },
+                {
+                    "door": "D2",
+                    "description": "King Grumm's Throne Room.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29004"
+                }
+            ]
+        },
+        {
+            "vnum": "29004",
+            "name": "King Grumm's Throne Room",
+            "description": "Chaos reigns in the court of King Grumm. Jesters, dancing girls,\nofficious-looking goblins, and a myriad of other distractions compete for\nthe time of the king. The Throne Room is a perfectly-round chamber with\na large statue of a heroic-looking dwarf in the centre. Once again,\ntapestries line the walls, portraying battles and glory. If it was possible\nto instil more chaos into this carnival atmosphere, you have succeeded. The\nking leaps to his feat, and goblin guards bar your escape back south. Grumm\ndosen't look like he wants to talk! There is a doorway to your east, and\nanother to the west.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "South End of the Great Hall.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29003"
+                },
+                {
+                    "door": "D1",
+                    "description": "A Bedroom.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29006"
+                },
+                {
+                    "door": "D2",
+                    "description": "Hidden Passage.\n",
+                    "keyword": "Tapestry",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29007"
+                },
+                {
+                    "door": "D3",
+                    "description": "A Bedroom.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29005"
+                }
+            ]
+        },
+        {
+            "vnum": "29005",
+            "name": "Goblin Shaman's Quarters",
+            "description": "This room is a delightful change from the rest of the fortress. The\nair is sweet with the smell of incence, and the room is clean (by goblin\nstandards anyways). There is a large bookcase on the north wall, and before\nit, a desk and chair.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "King Grumm's Throne Room.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29004"
+                }
+            ]
+        },
+        {
+            "vnum": "29006",
+            "name": "Goblin Mage's Quarters",
+            "description": "A very heavy mist hovers above the floor here. It's not enough to\nobscure your vision though, and when you look closer, you can see an inlaid\npentagram has been added to the granite stonework. The room is otherwise\nspartan, though you can see a small cot and a desk. Otherwise the room is\nbarren.\n",
+            "flags": "ADN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "King Grumm's Throne Room.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29004"
+                }
+            ]
+        },
+        {
+            "vnum": "29007",
+            "name": "Hidden Passage",
+            "description": "This passage s obscured behind the curtian. It leads north into the\nThrone Room, and to the south there is a door.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "King Grumm's Throne Room.\n",
+                    "keyword": "Tapestry",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29004"
+                },
+                {
+                    "door": "D2",
+                    "description": "Hidden Passage.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29020",
+                    "u1_vnum": "29008"
+                }
+            ]
+        },
+        {
+            "vnum": "29008",
+            "name": "Hidden Passage",
+            "description": "After opening the first door, you are dismayed to be confronted with a\nsecond. The door leads south, with another leading back north.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Hidden Passage.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29020",
+                    "u1_vnum": "29007"
+                },
+                {
+                    "door": "D2",
+                    "description": "Hidden Passage.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29018",
+                    "u1_vnum": "29009"
+                }
+            ]
+        },
+        {
+            "vnum": "29009",
+            "name": "Hidden Passage",
+            "description": "After opening the second door, you are dismayed to be confronted with\na third. The door leads south, with another leading back north.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Hidden Passage.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29018",
+                    "u1_vnum": "29008"
+                },
+                {
+                    "door": "D2",
+                    "description": "The Treasure Chamber of the Goblin Stronghold.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29019",
+                    "u1_vnum": "29010"
+                }
+            ]
+        },
+        {
+            "vnum": "29010",
+            "name": "The Treasure Chamber of the Goblin Stronghold",
+            "description": "After opening the third door you come opon a cache of gold and\njewelry. There are no exits, save the door you came through.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Hidden Passage.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29019",
+                    "u1_vnum": "29009"
+                }
+            ]
+        },
+        {
+            "vnum": "29011",
+            "name": "A Small Cell in the Dungeon",
+            "description": "As you step through the door to this room, you hear a slam and a\nclick. You spin quickly and are dismayed to see that the door has closed\nand locked. You hear maniacal laughter coming from the far side of the\ndoor. There is no escape. You will spend your days rotting in this goblin\nprision.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D5",
+                    "description": "A Tiny Crawlspace.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29024"
+                }
+            ]
+        },
+        {
+            "vnum": "29012",
+            "name": "A Small Cell in the Dungeon",
+            "description": "This is a little 6x6 cell with a floor of straw. The air is damp here.\nThe far wall has a set of shackles set in the stone. Nice place to visit,\nbut you wouldn't want to live here.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "A Hall in the Dungeon.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29021",
+                    "u1_vnum": "29025"
+                }
+            ]
+        },
+        {
+            "vnum": "29013",
+            "name": "A Small Cell in the Dungeon",
+            "description": "This is a little 6x6 cell with a floor of straw. The air is damp here.\nThe far wall has a set of shackles set in the stone. Nice place to visit,\nbut you wouldn't want to live here.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "A Hall in the Dungeon.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29021",
+                    "u1_vnum": "29025"
+                }
+            ]
+        },
+        {
+            "vnum": "29014",
+            "name": "A Small Cell in the Dungeon",
+            "description": "This is a little 6x6 cell with a floor of straw. The air is damp here.\nThe far wall has a set of shackles set in the stone. Nice place to visit,\nbut you wouldn't want to live here.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "A Hall in the Dungeon.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29021",
+                    "u1_vnum": "29026"
+                }
+            ]
+        },
+        {
+            "vnum": "29015",
+            "name": "A Small Cell in the Dungeon",
+            "description": "This is a little 6x6 cell with a floor of straw. The air is damp here.\nThe far wall has a set of shackles set in the stone. Nice place to visit,\nbut you wouldn't want to live here.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "A Hall in the Dungeon.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29021",
+                    "u1_vnum": "29026"
+                }
+            ]
+        },
+        {
+            "vnum": "29016",
+            "name": "The Dungeon",
+            "description": "Below the iron grate is a small guardroom. There is a table and some\nchairs, but not much else of interest. A hallway leads west, with the iron\ngrate exiting up.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "A Hall in the Dungeon.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29026"
+                },
+                {
+                    "door": "D4",
+                    "description": "A Hallway in the Stronghold.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29017"
+                }
+            ]
+        },
+        {
+            "vnum": "29017",
+            "name": "A Hallway in the Stronghold",
+            "description": "This corridor is lit by torches set in wall brackets. An iron grate is\nset in the floor, and from below you can hear moaning and scraping. The\nhallway leads east with a large room to the south.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "A Hallway in the Stronghold.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29018"
+                },
+                {
+                    "door": "D2",
+                    "description": "Goblin Barraks.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29027"
+                },
+                {
+                    "door": "D5",
+                    "description": "A grate.\n",
+                    "keyword": "grate",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29016"
+                }
+            ]
+        },
+        {
+            "vnum": "29018",
+            "name": "A Hallway in the Stronghold",
+            "description": "This corridor is lit by torches set in wall brackets. The hall\ncontinues to the west, and the Entry Hall is to your east. There is also an\narched doorway to the south. You can hear the sounds of combat to the\nsouth.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "The Entry Hall to the Goblin Stronghold.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29001"
+                },
+                {
+                    "door": "D2",
+                    "description": "The Goblin Training Room.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29021"
+                },
+                {
+                    "door": "D3",
+                    "description": "A Hallway in the Stronghold.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29017"
+                }
+            ]
+        },
+        {
+            "vnum": "29019",
+            "name": "A Hallway in the Stronghold",
+            "description": "This corridor is lit by torches set in wall brackets. The hallway\ncontinues to the east, and the Entry Hall is to your west. There is also an\narched doorway to the south. Something smells foul there.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "A Hallway in the Stronghold.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29020"
+                },
+                {
+                    "door": "D2",
+                    "description": "The Kitchen.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29023"
+                },
+                {
+                    "door": "D3",
+                    "description": "Entry Hall to the Goblin Stronghold.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29001"
+                }
+            ]
+        },
+        {
+            "vnum": "29020",
+            "name": "A Hallway in the Stronghold",
+            "description": "This corridor is lit by torches set in wall brackets. The hallway\ncontinues to the west, and there is an arched doorway to the south.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Goblin Barraks.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29022"
+                },
+                {
+                    "door": "D3",
+                    "description": "A Hallway in the Stronghold.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29019"
+                }
+            ]
+        },
+        {
+            "vnum": "29021",
+            "name": "Goblin Training Room",
+            "description": "This is where the goblins are shaped into something resembling a\nfighting unit. Assorted dummies and training equipment lie around. The room\nhas a sticky film of blood on the floor. Apparently the goblins believe in\nthe Darwinian theory of military training.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "A Hallway in the Stronghold.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29018"
+                },
+                {
+                    "door": "D1",
+                    "description": "South End of the Great Hall.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29002"
+                }
+            ]
+        },
+        {
+            "vnum": "29022",
+            "name": "Goblin Barraks",
+            "description": "This room is where the goblin soldiers sleep. The room is a full 20\nyards square and there are bunks along each wall. There is graphic\ngraphitti scrawled on the walls, but it's in goblin and all you can make\nout are the drawings of goblin females. There is an arched doorway leading\nnorth.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "A Hallway in the Stronghold.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29020"
+                }
+            ]
+        },
+        {
+            "vnum": "29023",
+            "name": "The Kitchen",
+            "description": "A large kitchen area fills this room. Large pots bubble with\nfoul-smelling goblin cuisine. There is nothing in this room to interest\nyou. There is a door to your west, and an arched doorway to the north.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "A Hallway in the Stronghold.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29019"
+                },
+                {
+                    "door": "D3",
+                    "description": "South End of the Great Hall.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29002"
+                }
+            ]
+        },
+        {
+            "vnum": "29024",
+            "name": "A Tiny Crawlspace",
+            "description": "Below the cell there is a tiny crawlspace. There is a portal here.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "A Small Cell in the Dungeon.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29011"
+                }
+            ]
+        },
+        {
+            "vnum": "29025",
+            "name": "A Hall in the Dungeon",
+            "description": "This place is a new addition to the Stronghold. The hallway is little\nmore than a tunnel through the rock. The hall leads east, with doors to\nyour north, south, and west.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "A Small Cell in the Dungeon.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29021",
+                    "u1_vnum": "29012"
+                },
+                {
+                    "door": "D1",
+                    "description": "A Hall in the Dungeon.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29026"
+                },
+                {
+                    "door": "D2",
+                    "description": "A Small Cell in the Dungeon.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29021",
+                    "u1_vnum": "29013"
+                },
+                {
+                    "door": "D3",
+                    "description": "A Small Cell in the Dungeon.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29021",
+                    "u1_vnum": "29011"
+                }
+            ]
+        },
+        {
+            "vnum": "29026",
+            "name": "A Hall in the Dungeon",
+            "description": "This place is a new addition to the Stronghold. The hallway is little\nmore than a tunnel through the rock. The hall leads west, with doors to\nyour north and south, a room to your east.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "A Small Cell in the Dungeon.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29021",
+                    "u1_vnum": "29014"
+                },
+                {
+                    "door": "D1",
+                    "description": "The Dungeon.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29016"
+                },
+                {
+                    "door": "D2",
+                    "description": "A Small Cell in the Dungeon.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29021",
+                    "u1_vnum": "29015"
+                },
+                {
+                    "door": "D3",
+                    "description": "A Hall in the Dungeon.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29025"
+                }
+            ]
+        },
+        {
+            "vnum": "29027",
+            "name": "Goblin Barraks",
+            "description": "This room is where the goblin soldiers sleep. The room is a full 20\nyards square and there are bunks along each wall. There is graphic\ngraphitti scrawled on the walls, but it's in goblin and all you can make\nout are the drawings of goblin females. There is an arched doorway leading\nnorth.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "A Hallway in the Stronghold.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29017"
+                }
+            ]
+        }
+    ],
+    "specials": [],
+    "resets": [
+        {
+            "command": "D",
+            "arg1": "29001",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29002",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29002",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29004",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29004",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29004",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29005",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29006",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29007",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29007",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29008",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29008",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29009",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29009",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29010",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29012",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29013",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29014",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29015",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29016",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29017",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29021",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29023",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29024",
+            "arg2": "4",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29025",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29025",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29025",
+            "arg2": "3",
+            "arg3": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29001",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29001",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29001",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29002",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29002",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "O",
+            "arg1": "29027",
+            "arg2": "0",
+            "arg3": "29002"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29003",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29003",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "O",
+            "arg1": "29028",
+            "arg2": "0",
+            "arg3": "29003"
+        },
+        {
+            "command": "M",
+            "arg1": "29001",
+            "arg2": "1",
+            "arg3": "29004",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29010",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "29009",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29005",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29006",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29007",
+            "arg2": "-1",
+            "arg3": "9"
+        },
+        {
+            "command": "E",
+            "arg1": "29008",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "G",
+            "arg1": "29019",
+            "arg2": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29004",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29004",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29004",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29012",
+            "arg2": "1",
+            "arg3": "29004",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29023",
+            "arg2": "-1",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29013",
+            "arg2": "1",
+            "arg3": "29004",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "29026",
+            "arg2": "0",
+            "arg3": "29004"
+        },
+        {
+            "command": "M",
+            "arg1": "29002",
+            "arg2": "1",
+            "arg3": "29005",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29005",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29006",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29007",
+            "arg2": "-1",
+            "arg3": "9"
+        },
+        {
+            "command": "E",
+            "arg1": "29008",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29016",
+            "arg2": "-1",
+            "arg3": "17"
+        },
+        {
+            "command": "E",
+            "arg1": "29030",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "29018",
+            "arg2": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "29024",
+            "arg2": "0",
+            "arg3": "29005"
+        },
+        {
+            "command": "P",
+            "arg1": "29022",
+            "arg2": "1",
+            "arg3": "29024",
+            "arg4": "10"
+        },
+        {
+            "command": "O",
+            "arg1": "29025",
+            "arg2": "0",
+            "arg3": "29005"
+        },
+        {
+            "command": "M",
+            "arg1": "29003",
+            "arg2": "1",
+            "arg3": "29006",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29020",
+            "arg2": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29013",
+            "arg2": "-1",
+            "arg3": "12"
+        },
+        {
+            "command": "E",
+            "arg1": "29014",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29011",
+            "arg2": "1",
+            "arg3": "29006",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "29029",
+            "arg2": "0",
+            "arg3": "29010"
+        },
+        {
+            "command": "M",
+            "arg1": "29009",
+            "arg2": "1",
+            "arg3": "29011",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29008",
+            "arg2": "4",
+            "arg3": "29012",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29008",
+            "arg2": "4",
+            "arg3": "29013",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29008",
+            "arg2": "4",
+            "arg3": "29014",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29008",
+            "arg2": "4",
+            "arg3": "29015",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29016",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "29021",
+            "arg2": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29016",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29017",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29018",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29019",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29020",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29004",
+            "arg2": "1",
+            "arg3": "29021",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29017",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "29012",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29005",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29006",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29007",
+            "arg2": "-1",
+            "arg3": "9"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29021",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29021",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29021",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29021",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29022",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29022",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29023",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29023",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29010",
+            "arg2": "2",
+            "arg3": "29023",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29010",
+            "arg2": "2",
+            "arg3": "29023",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29027",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29027",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        }
+    ],
+    "shops": []
+}

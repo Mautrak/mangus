@@ -1,0 +1,1993 @@
+{
+    "area": {
+        "file": "korig.are",
+        "name": "Türkçe",
+        "low_range": "5",
+        "high_range": "15",
+        "min_vnum": "3500",
+        "max_vnum": "3599",
+        "path": "6g 1d 3g 1b 2g 1b 2g 1d 2g",
+        "yonelim_iyi": "33",
+        "yonelim_yansiz": "34",
+        "yonelim_kem": "33"
+    },
+    "mobiles": [
+        {
+            "vnum": "3500",
+            "name": "yelbüke",
+            "short_description": "yelbüke",
+            "long_description": "Bir yelbüke baþýnýn üzerinde dönüyor.\n",
+            "description": "Büyük kanatlarýyla bir yelbüke görüyorsun. Neyseki çok aç deðil.\n",
+            "race": "wyvern",
+            "act": "AG",
+            "affected_by": "0",
+            "level": "8"
+        },
+        {
+            "vnum": "3501",
+            "name": "gulyabani dað",
+            "short_description": "gulyabani",
+            "long_description": "Bir dað gulyabanisi burada, kendi kendine mýrýldanýyor.\n",
+            "description": "Boðum boðum kaslarýyla küçük bir yaratýk.\n",
+            "race": "goblin",
+            "act": "AFGT",
+            "affected_by": "0",
+            "level": "6"
+        },
+        {
+            "vnum": "3502",
+            "name": "oðlan küçük",
+            "short_description": "küçük oðlan",
+            "long_description": "Küçük bir oðlan burada, yaralarýný yalýyor.\n",
+            "description": "Zavallý çocuðun bir sürü yarasý var, yine de iyileþecek gibi görünüyor.\nGörünüþe göre saldýrýdan sað kurtulan bir tek o.\n",
+            "race": "human",
+            "act": "ABH",
+            "affected_by": "0",
+            "level": "4"
+        },
+        {
+            "vnum": "3503",
+            "name": "hancý",
+            "short_description": "hancý",
+            "long_description": "Hancý burada, bardaklarý temizliyor.\n",
+            "description": "O artýk zamanýnýn büyük kýsmýný müþteri beklemekle ve gelenlere hizmet\netmekle geçiriyor. Geceleri ise goulyabanileri gözlüyor. Bu han artýk\neskisi gibi sakin ve huzurlu bir yer deðil.\n",
+            "race": "human",
+            "act": "ABT",
+            "affected_by": "0",
+            "level": "10"
+        },
+        {
+            "vnum": "3504",
+            "name": "ozan",
+            "short_description": "ozan",
+            "long_description": "Asýk yüzlü bir ozan burada, dertli dertli içiyor.\n",
+            "description": "Odanýn diðer ucundan ozanýn nefesindeki alkolün kokusunu alabiliyorsun.\nBir süredir burada içiyor.\n",
+            "race": "human",
+            "act": "ABST",
+            "affected_by": "D",
+            "level": "8"
+        },
+        {
+            "vnum": "3505",
+            "name": "atlý kara",
+            "short_description": "kara atlý",
+            "long_description": "Bir kara atlý burada, seni izliyor.\n",
+            "description": "Bir kanunsuz olduðu çok açýk. Seni ufak parçalara ayýrmaktan kuþku\nduymayacaktýr.\n",
+            "race": "human",
+            "act": "AGHS",
+            "affected_by": "P",
+            "level": "8"
+        },
+        {
+            "vnum": "3506",
+            "name": "gulyabani teðmen",
+            "short_description": "gulyabani teðmen",
+            "long_description": "Bir gulyabani teðmen burada, adamlarýný düzene sokmaya çalýþýyor.\n",
+            "description": "Teðmen biraz sinirli görünüyor. Her an adamlarýndan birine saldýrabilir.\n",
+            "race": "goblin",
+            "act": "AFGT",
+            "affected_by": "0",
+            "level": "7"
+        },
+        {
+            "vnum": "3507",
+            "name": "gulyabani lider",
+            "short_description": "gulyabani lider",
+            "long_description": "Gulyabani lider odaya göz gezdiriyor.\n",
+            "description": "Senin onu bulmandan rahatsýz oldu. Kýsa kýlýcýný kaptýðý gibi üzerine\nsaldýrýyor.\n",
+            "race": "goblin",
+            "act": "ACFGT",
+            "affected_by": "0",
+            "level": "9"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "3500",
+            "name": "kýlýç gulyabani kýsa",
+            "short_description": "bir gulyabani kýsa kýlýcý",
+            "description": "Paslý bir gulyabani kýlýcý yerde yatýyor.",
+            "material": "iron",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "sword 2 4 stab 0",
+            "level": "5",
+            "weight": "40",
+            "cost": "460",
+            "condition": "A",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "3501",
+            "name": "asa uzun",
+            "short_description": "uzun bir asa",
+            "description": "Þeytani görünümlü býçaðýyla kara bir asa burada yatýyor.",
+            "material": "iron",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "staff 2 7 thrust F",
+            "level": "6",
+            "weight": "80",
+            "cost": "100",
+            "condition": "A",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "3502",
+            "name": "kara boynuz miðfer",
+            "short_description": "bir kara boynuzlu miðfer",
+            "description": "Sivri boynuzlarýyla bir miðfer burada duruyor.",
+            "material": "iron",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AE",
+            "values": "3 5 4 0 1",
+            "level": "5",
+            "weight": "30",
+            "cost": "490",
+            "condition": "A"
+        },
+        {
+            "vnum": "3503",
+            "name": "lekeli pelerin",
+            "short_description": "bir lekeli pelerin",
+            "description": "Bir giyilmiþ ve lekelenmiþ pelerin burada duruyor.",
+            "material": "cloth",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AC",
+            "values": "2 3 4 0 1",
+            "level": "3",
+            "weight": "40",
+            "cost": "310",
+            "condition": "A"
+        },
+        {
+            "vnum": "3504",
+            "name": "deri büyülü bileklik",
+            "short_description": "büyülü bir deri bileklik",
+            "description": "Bir deri bileklik burada, üzerinde garip semboller taþýyor.",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AM",
+            "values": "2 4 4 2 0",
+            "level": "7",
+            "weight": "10",
+            "cost": "690",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "3505",
+            "name": "rün kama",
+            "short_description": "bir rün iþlemeli kama",
+            "description": "Geniþ aðýzlý bir kama burada býrakýlmýþ.",
+            "material": "mithril",
+            "type": "weapon",
+            "extra_flags": "GK",
+            "wear_flags": "AN",
+            "values": "dagger 2 4 stab 0",
+            "level": "5",
+            "weight": "10",
+            "cost": "420",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "1"
+                }
+            ]
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "3500",
+            "name": "Ovalar",
+            "description": "Geniþ ovalarýn üzerindesin. Terkedilmiþ bu verimli topraklarýn üzerinde\nrüzgar hiç rahatsýz edilmeden bir o yana, bir bu yana esiyor. Yine de\nburaya ilk gelen maceracý deðilsin. Selenge'nin doðu kapýsýndan kimi\nzaman biraz altýn, kimi zamansa kendi ölümlerini aramak için çýkan herkes\nburadan geçer. Önünde onlarýn yýllardýr ayaklarýyla aþýndýrdýklarý bir yol\noluþmuþ. Yol hiç de önemli bir yere çýkýyormuþ gibi görünmüyor. Yine de\nbu yolu izleyip de geri dönemeyen çok olmuþtur.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "4000"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "19001"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3501"
+                }
+            ]
+        },
+        {
+            "vnum": "3501",
+            "name": "Dar Geçit",
+            "description": "Gölgeli, hoþ bir geçitten geçiyorsun. Yüksek aðaçlarýn altýndan ilerleyen\nbu yol kuzeye ve güneye uzanýyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3500"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3502"
+                }
+            ]
+        },
+        {
+            "vnum": "3502",
+            "name": "Yol Kesiþimi",
+            "description": "Ýþte tam burada Moria madenleri ile harabe þehir Thalos arasýndaki eski yol\nbüyük doðu yoluyla kesiþiyor. Selenge oldukça batýnda kaldý. Eski bir kuzey\nyolu Cüce Krallýðý'na ve moria madenlerine, güney yolu ise hayalet þehir\nThalos'a yöneliyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3501"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3525"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "5261"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3503"
+                }
+            ]
+        },
+        {
+            "vnum": "3503",
+            "name": "Þehir Giriþi",
+            "description": "Selenge il sýnýrlarýnýn giriþindesin. Yol batýya, karanýðýn ve aydýnlýðýn\nbirlikte varolduðu ormanlarýn içine ilerliyor. Batýda ise ovalarý geçtikten\nsonra Selenge yerleþimi baþlýyor.\n",
+            "flags": "C",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3502"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3053"
+                }
+            ]
+        },
+        {
+            "vnum": "3505",
+            "name": "Korýg Patikasý",
+            "description": "Küçük bir ormandasýn. Güneye bir yol yöneliyor fakat doðuya giden\npasaj güneye göre oldukça rahat. Batýda aðaçlarýn üstünden yükselen\nduman görülebiliyor. Selenge buranýn kuzeyinde kalýyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3256"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3506"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3507"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3570"
+                }
+            ]
+        },
+        {
+            "vnum": "3506",
+            "name": "Korýg",
+            "description": "Karanlýk ormandasýn. Doðuda daðlar pasajý kesiyor. Buradan sonra\nancak batýdaki küçük ormana veya güneye yönelebilirsin.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3550"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3509"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3505"
+                }
+            ]
+        },
+        {
+            "vnum": "3507",
+            "name": "Korýg",
+            "description": "Orman oldukça derin. Rüzgar aðaçlarla beraber yalýyor saçlarýný.\nKuzeye doðru orman seyrekleþiyor. Batý ve güney yollarý ise sanki\nkaranlýðýn içine akýyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3505"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3510"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3508"
+                }
+            ]
+        },
+        {
+            "vnum": "3508",
+            "name": "Bir Patika",
+            "description": "Yol doðuya ve güneye doðru Korýg'ýn karanlýk ormanlarýna\nilerliyor. Batýda daðlar görünüyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3507"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3511"
+                }
+            ]
+        },
+        {
+            "vnum": "3509",
+            "name": "Korýg",
+            "description": "Korýg'ýn aðaçlarý oldukça gür. Ýçlerinde gezinen kötülükleri\niyi sakladýklarý kesin. Batýya doðru giderek kalýnlaþan aðaçlarý\ngörüyorsun. Fakat istersen kuzey, güney veya doðuya doðru\nilerleyebilirsin.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3506"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3512"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3514"
+                }
+            ]
+        },
+        {
+            "vnum": "3510",
+            "name": "Bir Kavþak",
+            "description": "Tam burada kuzey, güney ve doðu yollarý kesiþiyor. Aðaçlar seni sýkýþtýrmak\nistermiþ gibi kapanýyor. Gökyüzünü zor da olsa hala görebiliyorsun\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3507"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3514"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3516"
+                }
+            ]
+        },
+        {
+            "vnum": "3511",
+            "name": "Keçi Yolu",
+            "description": "Aðaçlarýn arasýndaki bir kuzey-güney yolundasýn. Batýda geçit vermeyen\ndaðlar sana gülümsüyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3508"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3515"
+                }
+            ]
+        },
+        {
+            "vnum": "3512",
+            "name": "Korýg",
+            "description": "Karanlýðý içine hapseden Korýg ormanýnda düþüncelerin\nýþýðýný kaybediyor. Kuzeydeki daðlara ya da  batýdaki ormana\nyönelebilirsin. Veya tam burada kalýp aklýndan geçen\nbütün o þeylerin zehirlenmesini bekleyebilirsin.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3550"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3513"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3509"
+                }
+            ]
+        },
+        {
+            "vnum": "3513",
+            "name": "Korýg",
+            "description": "Orman oldukça karanlýk. Batýda ise karanlýðýn þiddeti artýyor. Bu\nkara ve gür aðaçlarýn altýna saklanma ihtiyacý duyan þeytanlýðý\nseziyorsun. Orman kuzeye doðru sýklýðýný kaybediyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3512"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "29101"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3514"
+                }
+            ]
+        },
+        {
+            "vnum": "3514",
+            "name": "Derin Orman",
+            "description": "Yine karanlýk. Orman seni bir daha hiç býrakmayacakmýþ gibi\nsarýyor. Attýðýn her adýmda karanlýðýn enerjini biraz daha emdiðini\nhissediyorsun. Ýþte tam bu sýrada bir an için ýþýldýyan bir þey\ngörüyorsun. Farkedildiðini anlayan þey hemen uzaklaþýyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3509"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3513"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3517"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3510"
+                }
+            ]
+        },
+        {
+            "vnum": "3515",
+            "name": "Küçük Orman",
+            "description": "Orman oldukça sýðlaþtý. Doðuda tekrar karanlýk baþlýyor. Güneyde ise\nyol devam ediyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3511"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3516"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3518"
+                }
+            ]
+        },
+        {
+            "vnum": "3516",
+            "name": "Bataklýk",
+            "description": "Zemin yumuþuyor. Çamur ayaklarýna güvenmeni engelliyor. Korýg\nbataklýðýndasýn. Dört ana yönün tümü de açýk.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3510"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3517"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3519"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3515"
+                }
+            ]
+        },
+        {
+            "vnum": "3517",
+            "name": "Daðlarýn Yamacýnda",
+            "description": "Doðudaki daðlar oldukça belirgin. Kayalar izin vermediðinden yalnýz\nkuzey ve batýya ilerleyebilirsin.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3514"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3516"
+                }
+            ]
+        },
+        {
+            "vnum": "3518",
+            "name": "Yok Olan Yol",
+            "description": "Yol neredeyse üzerinde yürünmesi imkansýz bir hal almýþ.\nKuzeyde ve batýda orman sýðlaþýyor. Güneyde bir yol görüyorsun.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3515"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "-1"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3522"
+                }
+            ]
+        },
+        {
+            "vnum": "3519",
+            "name": "Karanlýk Patika",
+            "description": "Aðaçlar seni her taraftan sýkýþtýrýyorlar. Yol kuzeye ve güneye devam\nediyor. Batý oldukça sýk aðaçlarla çevrilmiþ. Doðuda ise gökyüzünü\ngörebileceðini düþünüyorsun.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3516"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3520"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3521"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "3520",
+            "name": "Karanlýk Orman",
+            "description": "Kara orman Korýg'ýn aðaçlarý oldukça sýklaþtý. Artýk güneþ ýþýðýný hiç\ngöremiyorsun. Güney ve batýya ilerleyebileceðin gibi, ormanýn daha da\nsýklaþtýðý doðuyu da tercih edebilirsin.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3523"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3519"
+                }
+            ]
+        },
+        {
+            "vnum": "3521",
+            "name": "Katliam",
+            "description": "Her yerde kan izi var. Önünde iki ceset yatýyor. Güneyde orman geçit\nvermiyor, fakat diðer yönler ilerlemeye müsait.\n",
+            "flags": "A",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3519"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3523"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3522"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "ceset",
+                    "description": "Büyük bir asa ile parçalanmýþlar. Bu kiþileri bu hale sokan güç\ngerçekten de büyük olmalý. Dudaklarýndaki mavilik vücutlarýnda\ndolaþan zehri farkettiriyor.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "3522",
+            "name": "Korýg Ormanýnýn Derinlikleri",
+            "description": "Berbat bir koku alýyorsun. Bu ceset ve kan kokusu. Kuzeyde ýþýðý\nyakalýyor gözlerin. Doðu ise oldukça karanlýk.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3518"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3521"
+                }
+            ]
+        },
+        {
+            "vnum": "3523",
+            "name": "Kara Orman",
+            "description": "Dallar güneþ ýþýðýný kesiyor. Orman doðuya, daðlarýn tarafýna, devam ediyor.\nHava oldukça pis. Batýdan oldukça kötü bir koku geliyor, bir his tüylerini\ndiken diken ediyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3520"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3551"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3521"
+                }
+            ]
+        },
+        {
+            "vnum": "3525",
+            "name": "Doðu Yolu",
+            "description": "Selenge ile doðu topraklarý arasýndaki düzgün bir yoldasýn. Batýya giden\nbu yola dik bir kuzey yolu Selenge'a yöneliyor. Kuzeyden zayýf bir ses\nduyuyorsun.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "101"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3526"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3502"
+                }
+            ]
+        },
+        {
+            "vnum": "3526",
+            "name": "Doðu Yolu",
+            "description": "Selenge ile doðu topraklarý arasýndaki doðu yolundasýn. Batý yönü doðruca\nSelenge'a gidiyor. Ýyi korunan bir kontrol noktasý doðuda kalýyor. Kuzeyde\nbir orman, güneyde ise oldukça pis bir yol görüyorsun.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8950"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3527"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "1501"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3525"
+                }
+            ]
+        },
+        {
+            "vnum": "3527",
+            "name": "Kontrol Noktasý",
+            "description": "Saðlam zýrhlý bir grup þövalyeyle karþýlaþtýn. Seni salmadan önce aradýlar.\nBir tanesi seni çöle yönelmemen konusunda uyardý. Yoksa yolunu kaybedermiþsin.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3528"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3526"
+                }
+            ]
+        },
+        {
+            "vnum": "3528",
+            "name": "Doðu Yolu",
+            "description": "Kontrol noktasýnýn doðusunda, rahat bir yoldasýn. Selenge ile Yeni Thalos\narasýndaki yolun neredeyse yarýsýný katettin. Acýlar çölüne yaklaþtýkça\nhava daha kuru ve sýcak bir hal alýyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3529"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3527"
+                }
+            ]
+        },
+        {
+            "vnum": "3529",
+            "name": "Doðu Yolu",
+            "description": "Gizemli güçlerin yitip gittiði ya da sonsuza kadar gizlendiði Acýlar\nÇölü'ne yaklaþýrken sýcaklýk dayanýlmaz boyutlara doðru yükseliyor.\nYol tam anlamýyla yanmýþ...\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3530"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3528"
+                }
+            ]
+        },
+        {
+            "vnum": "3530",
+            "name": "Acýlar Çölü",
+            "description": "Doðu yolu neredeyse yok oluyor. Artýk çöldesin.Yeterli suyunun olup\nolmadýðýndan emin deðilsin. Çöl güneye uzanýyor. Yol ise doðu ve\nbatý yönlerinde uzanýyor. Güneþ gözlerine oyunlar mý oynuyor yoksa\nçok ilerde bir þehir mi görüyorsun???\n",
+            "flags": "0",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3531"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3529"
+                }
+            ]
+        },
+        {
+            "vnum": "3531",
+            "name": "Acýlar Çölü",
+            "description": "Çöl yolu yutuyor. Sýcak yaþamýný vücudundan söküp almaya çalýþýyor.\nGüneyde çölü görüyorsun. Doðuda ise bir þehrin kuleleri yükseliyor.\nBu bir mucize olmalý.\n",
+            "flags": "0",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3532"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3530"
+                }
+            ]
+        },
+        {
+            "vnum": "3532",
+            "name": "Yeni Thalos Þehir Dýþý",
+            "description": "Sýcaklýk zýrhlarý eritecek kadar fazla. Doðuda Yeni Thalos'un güçlü þehir\nkapýlarýný görüyorsun. Güneyde Acýlar Çölü uzanýyor. Batýda ise bakýmlý\nfakat sýcak bir yol Selenge'a ilerliyor.\n",
+            "flags": "0",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "9669"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3531"
+                }
+            ]
+        },
+        {
+            "vnum": "3550",
+            "name": "Dað Yolu",
+            "description": "Daðlarýn dibindesin. O kadar dikler ki kuzey ve doðuya ilerlemek imkansýz.\nGüneyde ve batýda Korýg ormanýný görüyorsun.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3512"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3506"
+                }
+            ]
+        },
+        {
+            "vnum": "3551",
+            "name": "Korýg Ormanýnýn Derinliklerinde",
+            "description": "Dallar güneþi iyice kesmiþ. Orman oldukça karanlýk. Orman batýya devam\nediyor. Daðlar diðer yönlere ilerlemeyi engelliyor. Güneyde daðýn içine\nilerleyen bir tünelin varlýðýný fark ediyorsun.\n",
+            "flags": "A",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3552"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3523"
+                }
+            ]
+        },
+        {
+            "vnum": "3552",
+            "name": "Bir Dað Tüneli",
+            "description": "Bu tünelin duvarlarý uzun yýllar önce ormanýn gulyabanileri tarafýndan\noyulmuþ. Zemin oldukça iyi durumda. Yol güneyde daðýn içlerine,\nkuzeyde ise ormana devam yöneliyor.\n",
+            "flags": "A",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3551"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3553"
+                }
+            ]
+        },
+        {
+            "vnum": "3553",
+            "name": "Bir Dað Tüneli",
+            "description": "Tünel kuzeye doðru daha aydýnlýk, herhalde dýþarý yöneliyor. Güneye\ndoðru ise pasaj gittikçe daralýyor. Doðu duvarýnda küçük bir bölüm\ngözüne iliþiyor.\n",
+            "flags": "A",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3552"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3554"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3555"
+                }
+            ]
+        },
+        {
+            "vnum": "3554",
+            "name": "Bir Küçük Bölüm",
+            "description": "Burada küçük bir bölüm var. Demet demet yaprak ve dallar\ngörüyorsun. Herhalde bir yatak olmalý...\n",
+            "flags": "A",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3553"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "yatak yaprak dal demet",
+                    "description": "Burasý bir insansýnýn yataðýna benziyor.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "3555",
+            "name": "Bir Dað Tüneli",
+            "description": "Tünel güneye doðru küçülüyor. Ýlerleyebilmek için iyice kamburlaþýyorsun.\nGüneye yönelen kemerli bir koridor geniþçe bir odaya açýlýyor.\n",
+            "flags": "A",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3553"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3556"
+                }
+            ]
+        },
+        {
+            "vnum": "3556",
+            "name": "gulyabani Karargahý",
+            "description": "Korýg gulyabanilerinin karargahý. Birçok orman canlýsýnýn kemikleri\netrafa saçýlmýþ. Birinin onlara yemek artýklarýnýn ortalýkta býrakýlmayacaðýný\nöðretmesi gerekiyor. Bu iþi sen yapmak istemezsin deðil mi?\n",
+            "flags": "A",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3555"
+                }
+            ]
+        },
+        {
+            "vnum": "3570",
+            "name": "Hanýn Önü",
+            "description": "Açýklýða çýkan iyi görünümlü bir yoldasýn. Bacasýndan duman tüten\ntahta bir yapý burada. Batýdaki sundurmada bulunan büyükçe bir\niþaret buradan dahi seçilebiliyor. Kuzeye ve güneye giderek yapýnýn\nçevresinde dolaþabilir ya da burayý terk ederek oramana dönebilirsin.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3571"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3505"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3572"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3574"
+                }
+            ]
+        },
+        {
+            "vnum": "3571",
+            "name": "Hanýn Kuzeyi",
+            "description": "Hanýn kuzeyindesin. Bu açýdan da görünümlerin deðiþmediðini\nfarkediyorsun. Havada duman ve yemek kokusu var. Güneyde\nsundurmayý görüyorsun. Ama yine de bir arka kapý olup olmadýðýna\nbakabilirsin.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3570"
+                }
+            ]
+        },
+        {
+            "vnum": "3572",
+            "name": "Hanýn Güneyi",
+            "description": "Hanýn güneyindesin. Kuzeye giderek ön kapýdan içeri girebilirsin, ya da\nbatýya giderek yaýnýn arkasýna geçebilirsin. Güneyden gelen cýlýz bir\naðlama sesi duyuyorsun.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3570"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3575"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3573"
+                }
+            ]
+        },
+        {
+            "vnum": "3573",
+            "name": "Hanýn Arkasý",
+            "description": "Hanýn arkasýndasýn. Hancý buraya çöplerini boþalttýðýndan koku oldukça\nrahatsýz edici. Batýda biraz çöp görüyorsun. Belki içinden iþe yarar birþey\nde çýkabilir. Daha temiz bir yer istiyorsan doðu ve kuzeye gidebilirsin.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3572"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3578"
+                }
+            ]
+        },
+        {
+            "vnum": "3574",
+            "name": "Tahta Haný",
+            "description": "Hanýn umumi odasýndasýn. Havada asýlý duran ince bir sis tabakasý var.\nOrman gulyabanilerin baskýnlarýna uðramaya baþladýðýndan beri han genelde\nboþ oluyor. Bar kuzeyde, ama sana özel bir masa arýyorsan güneye\ngidebilirsin.\n",
+            "flags": "CD",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3576"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3570"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3579"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3577"
+                }
+            ]
+        },
+        {
+            "vnum": "3575",
+            "name": "Pusu Noktasý",
+            "description": "Burasý hanýn güneyinde bir patika. Yol batýya devam ediyor ama gitmek için\ndeli olmalýsýn. Çalýlarýn büyük bir kýsmý kýrýlarak yere yatmýþlar. Burada\noldukça kanlý bir kapýþma olmuþ.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3572"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3581"
+                }
+            ]
+        },
+        {
+            "vnum": "3576",
+            "name": "Meyhane",
+            "description": "Burasý insanlarýn yemeye ve içmeye geldikleri bir yermiþ. Ama artýk sadece\narasýra gelen birkaç maceracýya hizmet ediyor. Güneyde umumi odayý\ngörüyorsun.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3574"
+                }
+            ]
+        },
+        {
+            "vnum": "3577",
+            "name": "Ozanýn Masasý",
+            "description": "Hanýn karanlýk köþesindesin. Büyük yuvarlak bir masanýn etrafýna birkaç\nsandalye dizilmiþ. Masada büyükçe bir leke var, bir içeceðin artýðý olmalý.\n",
+            "flags": "D",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3574"
+                }
+            ]
+        },
+        {
+            "vnum": "3578",
+            "name": "Çöplük",
+            "description": "Dizlerine kadar çöpe batmýþ durumdasýn. ÝÐRENÇ... Çok kötü kokuyor\nve kimbilir burada adýný bilmediðin kaç tane mide bulandýrýcý hayvan\nyaþýyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3573"
+                }
+            ]
+        },
+        {
+            "vnum": "3579",
+            "name": "Handa Sessiz Bir Köþe",
+            "description": "Bu köþe oldukça sakin görünüyor. Dinlenmek ve yaralarýný yalamak\niyi gelebilir...\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3574"
+                }
+            ]
+        },
+        {
+            "vnum": "3581",
+            "name": "Atlýnýn Yolunda",
+            "description": "Yol doðu ve batýya devam ediyor. Taze izler sana atlýnýn batýya\nkaçtýðýný söylüyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3575"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3582"
+                }
+            ]
+        },
+        {
+            "vnum": "3582",
+            "name": "Atlýnýn Yolunda",
+            "description": "Yol doðu ve güneye gidiyor. Yerdeki taze izler sana atlýnýn\nburadan bir dönüþ yaparak güneye kaçtýðýný söylüyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3581"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3583"
+                }
+            ]
+        },
+        {
+            "vnum": "3583",
+            "name": "Atlýnýn Yolunda",
+            "description": "Atlýnýn yolu ormana doðru doðu ve kuzey yönlerinde ilerliyor. Ýzler hala\ntaze olduðuna göre yakýnlarda olmalýlar.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3582"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3584"
+                }
+            ]
+        },
+        {
+            "vnum": "3584",
+            "name": "Ölüm Patikasý",
+            "description": "Patika aðaçlarýn sýklaþmasýyla aniden sonlanýyor. Yerdeki taze izler tam\nburada bitiyor. Atlý yakýnlarda olmalý.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3583"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "3500",
+            "arg2": "2",
+            "arg3": "3521",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "3500",
+            "arg2": "2",
+            "arg3": "3521",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "3501",
+            "arg2": "8",
+            "arg3": "3512",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "3500",
+            "arg2": "18",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "3045",
+            "arg2": "6",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "3501",
+            "arg2": "10",
+            "arg3": "3512",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "3500",
+            "arg2": "18",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "3502",
+            "arg2": "6",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "3075",
+            "arg2": "6",
+            "arg3": "8"
+        },
+        {
+            "command": "M",
+            "arg1": "3501",
+            "arg2": "10",
+            "arg3": "3509",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "3500",
+            "arg2": "18",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "3072",
+            "arg2": "6",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "3501",
+            "arg2": "10",
+            "arg3": "3506",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "3500",
+            "arg2": "18",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "3074",
+            "arg2": "6",
+            "arg3": "7"
+        },
+        {
+            "command": "M",
+            "arg1": "3501",
+            "arg2": "10",
+            "arg3": "3513",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "3500",
+            "arg2": "18",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "3077",
+            "arg2": "6",
+            "arg3": "10"
+        },
+        {
+            "command": "M",
+            "arg1": "3501",
+            "arg2": "10",
+            "arg3": "3556",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "3500",
+            "arg2": "18",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "3076",
+            "arg2": "6",
+            "arg3": "9"
+        },
+        {
+            "command": "M",
+            "arg1": "3506",
+            "arg2": "4",
+            "arg3": "3551",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "3502",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "3500",
+            "arg2": "20",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "3072",
+            "arg2": "8",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "3506",
+            "arg2": "4",
+            "arg3": "3556",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "3500",
+            "arg2": "20",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "3502",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "3072",
+            "arg2": "8",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "3507",
+            "arg2": "1",
+            "arg3": "3556",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "3072",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "3501",
+            "arg2": "6",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "3502",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "3502",
+            "arg2": "1",
+            "arg3": "3575",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "3503",
+            "arg2": "1",
+            "arg3": "3576",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "3504",
+            "arg2": "1",
+            "arg3": "3577",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "3505",
+            "arg2": "3",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "3505",
+            "arg2": "4",
+            "arg3": "3583",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "3503",
+            "arg2": "8",
+            "arg3": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "3022",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "3505",
+            "arg2": "4",
+            "arg3": "3584",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "3504",
+            "arg2": "4",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "3022",
+            "arg2": "-1",
+            "arg3": "16"
+        }
+    ],
+    "shops": [],
+    "specials": [
+        {
+            "vnum": "3500",
+            "spec_fun": "spec_poison"
+        }
+    ]
+}

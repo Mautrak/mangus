@@ -1,0 +1,3297 @@
+{
+    "area": {
+        "file": "cadilar_meclisi.are",
+        "name": "Yarý Türkçe",
+        "low_range": "25",
+        "high_range": "35",
+        "min_vnum": "29120",
+        "max_vnum": "29180",
+        "path": "6d 4g 2d k",
+        "yonelim_iyi": "20",
+        "yonelim_yansiz": "60",
+        "yonelim_kem": "20"
+    },
+    "helps": [
+        {
+            "level": "52",
+            "keyword": "coven",
+            "text": "This area has the following basic plot. Some townsmen fall in with a\nwitch coven, which is lead by a hell creature. The coven raids the\nlumber operation and takes blood sacrifice for their devil. Players\nshould wander into town and piece together this part of the adventure\nby looking at the various mobs. In town they will find a shovel, which\nwill allow them into an old mine which leads to the temple guardian.\nThere is some subtlety here- for instance, if they count corpses in the\nglade, they will count 11 bodies, but both through mobs and on the new\nsign in the mill, the villagers are missing only 10 people, so one of\nthe bodies is not from Dunkeldorf. If they examine bodies, on one they\nwill find branded a pentagram, which shows that one was a witch\nimpostor. So If the players are smart, they can piece together that the\nwitches impersonated lumberjacks and sabotaged them (and there might be\none right now in Dunkeldorf- there is in the inn). The guardian is a\nprophecy threshold, if the heroes pass they can gain a key (the gold\nsickle) which will cut through the magic hedge surrounding the coven.\nOnce in the coven, they discover the horrible truth of the witchcraft\npractice of blood sacrifice. If they are playing good guys, they should\nslay all of the witches. From there they can move on to the fire, which\nis pick proof from inside, and the devil carries the key. IF they kill\nthe devil, they escape with otherworldly treasure.\n"
+        }
+    ],
+    "mobiles": [
+        {
+            "vnum": "29120",
+            "name": "aç canavar",
+            "short_description": "aç canavar",
+            "long_description": "Aç bir canavar av arýyor!\n",
+            "description": "The ravening beast stands about 1' tall at the shoulder, and measures\n10' from nose to tail. It resembles a monitor lizard, only its furry,\nhas a dog like snout, perky ears, and 6 legs, and has many more long\nsharp nasty teeth.\n",
+            "race": "human",
+            "act": "FGX",
+            "affected_by": "F",
+            "level": "30"
+        },
+        {
+            "vnum": "29121",
+            "name": "cadaloz gelda",
+            "short_description": "cadaloz Gelda",
+            "long_description": "Yaþlý bir cadaloz varlýðýný süzüyor.\n",
+            "description": "The hag is dressed in rags, has long tangled matted gray hair, and is\nvery old. The hag tells you 'I see you enter a fire and fight a great\nbattle with a minion of hell, and you die horribly!' . With that the\nhag breaks into an ugly fit of laughter.\n",
+            "race": "insan",
+            "act": "BCGVX",
+            "affected_by": "DK",
+            "level": "28"
+        },
+        {
+            "vnum": "29122",
+            "name": "koru muhafýzý",
+            "short_description": "koru muhafýzý",
+            "long_description": "Koru muhafýzý bölgesini kolaçan ediyor.\n",
+            "description": "The guard has a large war axe, a heavy hide cloak, and a longbow. He\nblends in with the surrounding terrain from years of experience. He\ntells you 'Beware of the Murkmire, because just recently the town of\nDunkeldorf lost 10 men in the forest. Also ware the ravening beasts\nrunning loose in the forest. Avoid the hag. Is there any chance of you\nhiring on to help defend Dunkeldorf?'.\n",
+            "race": "human",
+            "act": "BGX",
+            "affected_by": "MQ",
+            "level": "30"
+        },
+        {
+            "vnum": "29123",
+            "name": "oduncu",
+            "short_description": "oduncu",
+            "long_description": "Oduncu tomruklarý düzenliyor.\n",
+            "description": "The lumberjack is a tall human, equipped with rugged clothing and\ncarrying a lumber axe. He sees you and asks 'Have you come from the\nforest? You have? Is it safe again in the forest?\n",
+            "race": "human",
+            "act": "GX",
+            "affected_by": "0",
+            "level": "25"
+        },
+        {
+            "vnum": "29124",
+            "name": "bakkal al",
+            "short_description": "bakkal Al",
+            "long_description": "Bakkal emirlerini bekliyor.\n",
+            "description": "Al is 5'10\", fat, and balding. His nose twitches at the thought of\nselling you stuff. You get to talking with him, and find out that he is\na very frightened man. Mainly he fears that whatever attacked in the\nwoods will strike town next. He gets to talking of the glory days of\nDunkeldorf, before everyone started disappearing.\n",
+            "race": "human",
+            "act": "BGX",
+            "affected_by": "0",
+            "level": "26"
+        },
+        {
+            "vnum": "29125",
+            "name": "mark deðirmenci",
+            "short_description": "deðirmenci Mark",
+            "long_description": "Deðirmenci Mark una bulanmýþ.\n",
+            "description": "Mark the miller is a thick stocky, hairy man. He carries himself with\ngreat confidence and precision. You talk with him for a while, and he\ntells you that he has had a dream of you visiting a strange white\ntemple and fighting the guardian there. He wishes you luck and\ngodspeed.\n",
+            "race": "human",
+            "act": "BGX",
+            "affected_by": "0",
+            "level": "27"
+        },
+        {
+            "vnum": "29126",
+            "name": "demirci Hans",
+            "short_description": "demirci Hans",
+            "long_description": "Demirci Hans ateþi körüklüyor.\n",
+            "description": "Hans is a very strong human, almost as strong as they run. He is in his\nlate 40's and has jet black hair and a beard. You get to talking with\nHans, and the conversation turns to iron. Hans tells you that he used\nto get iron from the old mine in the Murkmire, but the cave has long\nsince collapsed and become unstable, so now he trades for it.\n",
+            "race": "human",
+            "act": "BGSX",
+            "affected_by": "0",
+            "level": "29"
+        },
+        {
+            "vnum": "29127",
+            "name": "hancý fritz",
+            "short_description": "hancý Fritz",
+            "long_description": "Hancý burada, kalýn perdeden bir þarký söylüyor.\n",
+            "description": "Fritz the innkeeper is a short human, standing a mere 5' tall. He makes\nup for it with a high energy level and animated conversation. Fritz\ntells you a sad tale about his mad sister Gelda running off into the\nforest one night, naked screaming, and never to return.\n",
+            "race": "human",
+            "act": "BGX",
+            "affected_by": "0",
+            "level": "28"
+        },
+        {
+            "vnum": "29128",
+            "name": "tacir libby hobit",
+            "short_description": "tacir Libby",
+            "long_description": "Hobit tacir Shire'dan haberler veriyor.\n",
+            "description": "Libby is a wee little guy, with a plump rounded figure, and a huge\nsatchel full of curiosities. He sings for you a song of life in the\nshire, and of longbottom leaf.\n",
+            "race": "human",
+            "act": "GX",
+            "affected_by": "0",
+            "level": "26"
+        },
+        {
+            "vnum": "29129",
+            "name": "kaya yýlaný",
+            "short_description": "kaya yýlaný",
+            "long_description": "Dev bir kaya yýlaný sana týslýyor!\n",
+            "description": "The rock snake is some 20' long and 1' in diameter, enough muscle to\ncrush an ox. Its rounded head gives it away as a non poisonous\nconstrictor.\n",
+            "race": "snake",
+            "act": "FGX",
+            "affected_by": "0",
+            "level": "32"
+        },
+        {
+            "vnum": "29130",
+            "name": "beyaz tapýnak muhafýzý",
+            "short_description": "Beyaz Tapýnak'ýn muhafýzý",
+            "long_description": "Beyaz cüppesi içinde bir muhafýz burada.\n",
+            "description": "The guardian of the white temple appears human, as your eyes adjust to\nthe light emanating from him. He tells you the following tale:\n\n'When I was an able boy of 18, I worked for my dad in the mine. One day\nI struck out in a new direction, and broke through to this green meadow\nhere. I followed the meadow to this temple and found an aged warrior\nhere garbed as I am now. He gave me this sickle and robe and froze me\nto this spot. He told me that my task was to wait for the day when a\nhero would step forth from the mine, and if that hero should prove\nworthy, you may find release. He said the exit would be hidden from all\nbut the chosen ones. You have come through. Show me you are worthy\nhero, and best me in combat. The forces of evil rise again, and the\nland sings out for a champion. Can you not hear her singing through the\ntemple? Strike now and prove yourself worthy. If you win seek knowledge\nin the runes of the sickle and save the cross for dire need. May god be\nwith you.'\n",
+            "race": "human",
+            "act": "BGX",
+            "affected_by": "H",
+            "level": "33"
+        },
+        {
+            "vnum": "29131",
+            "name": "cadý kadýn",
+            "short_description": "cadý",
+            "long_description": "Siyah cüppesi içinde bir kadýn seni izliyor.\n",
+            "description": "The witch looks harried and driven. Her eyes dance wildly, and she\ncackles at you with an insane glee.\n",
+            "race": "human",
+            "act": "FGX",
+            "affected_by": "D",
+            "level": "32"
+        },
+        {
+            "vnum": "29132",
+            "name": "büyücü",
+            "short_description": "büyücü",
+            "long_description": "Siyah cüppesi içinde bir büyücü seni izliyor.\n",
+            "description": "The warlock looks harried and driven. His eyes dart wildly, and he\ncackles with an insane glee.\n",
+            "race": "human",
+            "act": "FGX",
+            "affected_by": "D",
+            "level": "33"
+        },
+        {
+            "vnum": "29133",
+            "name": "cadýlarýn lideri büyücü",
+            "short_description": "cadýlarýn lideri",
+            "long_description": "Kan kýrmýzýsý cüppesinin içinde kanýný isteyen bir büyücü seni izliyor!\n",
+            "description": "The coven leader looks harried and driven. His eyes dart wildly, and he\ncackles with an insane glee.\n",
+            "race": "human",
+            "act": "FGX",
+            "affected_by": "DF",
+            "level": "34"
+        },
+        {
+            "vnum": "29134",
+            "name": "cehennem ateþi canavarý",
+            "short_description": "cehennem ateþi canavarý",
+            "long_description": "Minyatür cehennem! Canavar üzerine geliyor!\n",
+            "description": "The minion of hell is manlike, and flaming. It has horns and a horribly\ndisfigured face. Its skin is beet red, and his fingers and toes end in\nterrible talons. It looks at you, and with a fiery laughter, it says:\n'So, you are foolish enough to enter the circle. You may win this\nbattle, but you will not stop our plan!'\n",
+            "race": "human",
+            "act": "BFGX",
+            "affected_by": "DFH",
+            "level": "28"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "29120",
+            "name": "altýn orak rün",
+            "short_description": "altýn orak",
+            "description": "Rün iþlemeli altýn bir orak burada bekliyor.\n",
+            "material": "gold",
+            "type": "key",
+            "extra_flags": "I",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "20",
+            "weight": "20",
+            "cost": "2500",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "rün",
+                    "description": "You look at the runes. A warm glow fills you and you hear an inner\nvoice speaking to you. It says ' Go s, 2w, 2s, and 4e from the white\ntemple. Use me on the eastern brush and stop the coven!'\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29121",
+            "name": "kalýn kürek",
+            "short_description": "kalýn kürek",
+            "description": "Kalýn bir kürek burada yatýyor.\n",
+            "material": "wood",
+            "type": "key",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "5",
+            "weight": "30",
+            "cost": "500",
+            "condition": "P"
+        },
+        {
+            "vnum": "29122",
+            "name": "dere",
+            "short_description": "dere",
+            "description": "Küçük bir dereden tertemiz su akýyor.\n",
+            "material": "marble",
+            "type": "fountain",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "1000000 1000000 'water' 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "29123",
+            "name": "soðuk bira",
+            "short_description": "soðuk bira",
+            "description": "Soðuk bir bira yudumlanmayý bekliyor.\n",
+            "material": "glass",
+            "type": "drink",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "1 1 'beer' 0 0",
+            "level": "1",
+            "weight": "5",
+            "cost": "25",
+            "condition": "P"
+        },
+        {
+            "vnum": "29124",
+            "name": "köpüklü bira",
+            "short_description": "köpüklü bira",
+            "description": "Köpüklü bir bira yudumlanmayý bekliyor.\n",
+            "material": "glass",
+            "type": "drink",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "1 1 'beer' 0 0",
+            "level": "1",
+            "weight": "10",
+            "cost": "30",
+            "condition": "P"
+        },
+        {
+            "vnum": "29125",
+            "name": "böðürtlen salkým",
+            "short_description": "böðürtlen",
+            "description": "Bir salkým böðürtlen burada bekliyor.\n",
+            "material": "food",
+            "type": "food",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "12 12 0 0 0",
+            "level": "3",
+            "weight": "20",
+            "cost": "30",
+            "condition": "P"
+        },
+        {
+            "vnum": "29126",
+            "name": "oda anahtarý",
+            "short_description": "oda anahtarý",
+            "description": "Bir oda anahtarý kilidini arýyor.\n",
+            "material": "tin",
+            "type": "key",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "5",
+            "weight": "25",
+            "cost": "500",
+            "condition": "P"
+        },
+        {
+            "vnum": "29127",
+            "name": "alevli muska",
+            "short_description": "alevli muska",
+            "description": "Alevli bir muska topraðý yakýyor.\n",
+            "material": "fire",
+            "type": "key",
+            "extra_flags": "0",
+            "wear_flags": "AC",
+            "values": "0 0 0 0 0",
+            "level": "20",
+            "weight": "20",
+            "cost": "1000",
+            "condition": "P"
+        },
+        {
+            "vnum": "29128",
+            "name": "büyücü kökü",
+            "short_description": "büyücü kökü",
+            "description": "Bir büyücü kökü burada duruyor.\n",
+            "material": "bamboo",
+            "type": "furniture",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "2 300 AEIL 120 120",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "29129",
+            "name": "korucunun baltasý",
+            "short_description": "korucunun baltasý",
+            "description": "Büyük bir balta birþeyleri bölmeye çalýþýyor.\n",
+            "material": "steel",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "axe 5 6 slice 0",
+            "level": "28",
+            "weight": "100",
+            "cost": "2500",
+            "condition": "P"
+        },
+        {
+            "vnum": "29130",
+            "name": "korucunun pelerini",
+            "short_description": "korucunun pelerini",
+            "description": "Orman renginde bir pelerin dinleniyor.\n",
+            "material": "wood",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AD",
+            "values": "7 7 7 3 1",
+            "level": "28",
+            "weight": "80",
+            "cost": "1500",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-10"
+                }
+            ]
+        },
+        {
+            "vnum": "29131",
+            "name": "beyaz mermer haç",
+            "short_description": "beyaz mermer haç",
+            "description": "Mermerden yapýlmýþ beyaz bir haç yerde yatýyor.\n",
+            "material": "marble",
+            "type": "staff",
+            "extra_flags": "AIKL",
+            "wear_flags": "AO",
+            "values": "35 3 3 'sanctuary' 0",
+            "level": "30",
+            "weight": "100",
+            "cost": "15000",
+            "condition": "P"
+        },
+        {
+            "vnum": "29132",
+            "name": "siyah cüppe",
+            "short_description": "siyah cüppe",
+            "description": "Siyah bir cüppe... Ne kadar da güzel!\n",
+            "material": "silk",
+            "type": "armor",
+            "extra_flags": "CEHJM",
+            "wear_flags": "AD",
+            "values": "6 6 6 3 0",
+            "level": "25",
+            "weight": "25",
+            "cost": "300",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "4",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "12",
+                    "modifier": "30"
+                }
+            ]
+        },
+        {
+            "vnum": "29133",
+            "name": "rünlü siyah bileklik",
+            "short_description": "rünlü siyah bileklik",
+            "description": "Üzerine rünler iþlenmiþ siyah bir bileklik burada oturuyor.\n",
+            "material": "metal",
+            "type": "armor",
+            "extra_flags": "CEHJM",
+            "wear_flags": "AM",
+            "values": "0 0 0 0 0",
+            "level": "1",
+            "weight": "300",
+            "cost": "0",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "-20"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-10"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "rün rünler",
+                    "description": "As you look at the runes, you feel an incredible heat surge toward you,\ntrying to consume you! Your sight is filled with a fire and flames of\nsouls in terrible torment. Gradually the flames diminish, leaving only a\ngreen after image of a pentagram.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29134",
+            "name": "rünlü siyah asa",
+            "short_description": "rünlü siyah asa",
+            "description": "Siyah bir asa burada býrakýlmýþ.\n",
+            "material": "sandstone",
+            "type": "staff",
+            "extra_flags": "CEHJM",
+            "wear_flags": "AO",
+            "values": "40 8 8 'fire breath' 0",
+            "level": "30",
+            "weight": "30",
+            "cost": "7000",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "rün rünler",
+                    "description": "As you look at the runes, you feel an incredible heat surge toward you,\ntrying to consume you! Your sight is filled with a fire and flames of\nsouls in terrible torment. Gradually the flames diminish, leaving only a\ngreen after image of a pentagram.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29135",
+            "name": "ateþ yüzük",
+            "short_description": "ateþ yüzüðü",
+            "description": "Ateþten bir yüzük burada býrakýlmýþ.\n",
+            "material": "fire",
+            "type": "armor",
+            "extra_flags": "AQ",
+            "wear_flags": "AB",
+            "values": "1 1 1 1 0",
+            "level": "30",
+            "weight": "50",
+            "cost": "3000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "23",
+                    "modifier": "-3"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-3"
+                },
+                {
+                    "location": "12",
+                    "modifier": "10"
+                }
+            ]
+        },
+        {
+            "vnum": "29136",
+            "name": "kara hançer",
+            "short_description": "kara hançer",
+            "description": "Kara bir hançer burada býrakýlmýþ.\n",
+            "material": "metal",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "dagger 3 6 stab 0",
+            "level": "15",
+            "weight": "80",
+            "cost": "2476",
+            "condition": "P"
+        },
+        {
+            "vnum": "29137",
+            "name": "at nalý",
+            "short_description": "at nalý",
+            "description": "Ah, bir at nalý! Belki de þanslý bir günündesindir. Umarým giymeye kalkmazsýn!\n",
+            "material": "iron",
+            "type": "trash",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "5",
+            "weight": "30",
+            "cost": "2500",
+            "condition": "P"
+        },
+        {
+            "vnum": "29138",
+            "name": "ip",
+            "short_description": "ip",
+            "description": "Uzun bir ip burada býrakýlmýþ.\n",
+            "material": "wool",
+            "type": "trash",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "6",
+            "weight": "100",
+            "cost": "1500",
+            "condition": "P"
+        },
+        {
+            "vnum": "29139",
+            "name": "görünmezlik iksiri sývý þiþe",
+            "short_description": "görünmezlik iksiri",
+            "description": "Sývý dolu bir þiþe görüyorsun.\n",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "30 'invis' 'detect invis' '' ''",
+            "level": "28",
+            "weight": "10",
+            "cost": "3000",
+            "condition": "P"
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "29120",
+            "name": "Karanlýk Korudan Önce",
+            "description": "Ahead of you lies the dark forest Murkmire. You have heard of it\nbefore, back when you were but a small child. Your grandmother used to\ntell you tales of the Murkmire to get you to behave. 'If you don't be\nquiet, a ravening beast will smell you out and carry you off to the\nMurkmire!' she would warn you. Now after many years of battle, you have\nhardened and honed your skills to admirable levels. Are you ready to\nface your own inner demons and enter? As you gaze at the road leading\ninto the dark woods, you notice a small plaque nailed to a tree.\n",
+            "flags": "4",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29121"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5263"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "plaque small",
+                    "description": "Coven, 1996 by MacAsp, levels 25-35\nThere is a mystery here with clues scattered throughout mobs and\nobject. Play with brief off and look at just about everything.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29121",
+            "name": "Karanlýk Koruda Bir Yol",
+            "description": "You are on a broad road in the forest Murkmire. Above you brooding\nwalnuts, oaks, and hickory trees spread their leaves in a high arbor,\nblocking out all light. It is humid here, so much so that the mist\nenvelops you in a suffocating grip. Far above you birds cackle and\nchatter to one and another, marking your presence for all predators.\n",
+            "flags": "1",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29120"
+                },
+                {
+                    "door": "D3",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29122"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "yol",
+                    "description": "Vagonlarýn sürekli kullandýðý bir yol\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29122",
+            "name": "Karanlýk Koruda Bir Yol",
+            "description": "You are on a broad road in the forest Murkmire. Above you brooding\nwalnuts, oaks, and hickory trees spread their leaves in a high arbor,\nblocking out all light. Sweat streams down your face. The road is muddy\nhere, and your boots stick with a sucking pop with each stride.\n",
+            "flags": "1",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29123"
+                },
+                {
+                    "door": "D1",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29121"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "yol",
+                    "description": "Vagonlarýn sürekli kullandýðý bir yol\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29123",
+            "name": "Karanlýk Koruda Kesiþim",
+            "description": "You have arrived at an intersection in the forest Murkmire. Here the\nforest has been ruthlessly beaten back by loggers and you can once\nagain see the sky. There is a small outpost here, made of logs. There\nis a sign staked into the road, pointing to the western road. The road\nre-enters the dark forest to the north and south.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29124"
+                },
+                {
+                    "door": "D2",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29122"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batý yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29138"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "yol",
+                    "description": "Vagonlarýn sürekli kullandýðý bir yol.\n"
+                },
+                {
+                    "keyword": "sign",
+                    "description": "*******************\n*  Dunkeldorf, Pop. 25 *\n*******************\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29124",
+            "name": "Karanlýk Koruda Bir Yol",
+            "description": "You are on a broad road in the forest Murkmire. Here the road ends at\nan eastern and western going logging trail. There is a huge rack of\nde-limbed trees here. There is a large brush pile into created by years\nof dumping. A broad road heads off to the south.\n",
+            "flags": "1",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29125"
+                },
+                {
+                    "door": "D2",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29123"
+                },
+                {
+                    "door": "D3",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29137"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "yol",
+                    "description": "Vagonlarýn sürekli kullandýðý bir yol\n"
+                },
+                {
+                    "keyword": "tomrukçuluk yolu",
+                    "description": "You look down the logging trails. There are deep gouges where logs have\nbeen dragged through the dirt and mud by horse teams. There is some\nevidence of foot traffic, which mostly goes west.\n"
+                },
+                {
+                    "keyword": "brush pile",
+                    "description": "You look closely at the brush pile, and notice a stirring in it.\nSquinting, you make out the face and forepaws of a raccoon.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29125",
+            "name": "Karanlýk Ormanda Aðaç Kesim Bölgesi",
+            "description": "You are mired in mud on an old unused logging trail. You take some\ncomfort in the fact that others before you were also so mired, as\nevidenced by the deep tracks in the mud. Far above you in the trees a\nblack raven squawks at you, almost as if it were laughing at you. You\nwing a rock at the bird, and it flies off.\n",
+            "flags": "1",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29126"
+                },
+                {
+                    "door": "D3",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29124"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "bird raven fly flies",
+                    "description": "The bird has flown off to the northeast, at least you think its\nnortheast.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29126",
+            "name": "Karanlýk Ormanda Aðaç Kesim Bölgesi",
+            "description": "You stand on hard, dry ground in the looming darkness of the Murkmire.\nAround you are old rotted stumps and an impenetrable wall of\nunderbrush. You feel hemmed in and pressed by the towering, looming\nhardwoods. The smell of rotting flesh leads you towards the carcass of\na dead animal wedged in the crook of a tree. Again, tales of the\nravening beast well up in your mind.\n",
+            "flags": "1",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29125"
+                },
+                {
+                    "door": "D1",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29127"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "ceset ölü hayvan",
+                    "description": "As you get closer to the carcass you recoil in horror as you recognize\nit as human. It has many terrible wounds.\n"
+                },
+                {
+                    "keyword": "yaralý insan",
+                    "description": "The human is a male in his late 20's. He is naked, and bears teeth\nmarks on his neck. His chest has been cut open, and his heart removed.\nMost of his right haunch has been consumed by some animal.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29127",
+            "name": "Karanlýk Ormanda Eski Bir Açýklýk",
+            "description": "You have wandered into an ancient clearing in the forest. Here, the\nbirds have ceased their chatter, and here, the heat lies again in a\nheavy humid embrace. The forest canopy has grown over the clearing,\nblocking out the sky above. The underbrush surrounds you, closing off\nall avenues of escape. There is a smell of death in the air, and you\nfeel eyes on the back of your neck.\n",
+            "flags": "1",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29130"
+                },
+                {
+                    "door": "D1",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29128"
+                },
+                {
+                    "door": "D3",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29126"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "gözler göz",
+                    "description": "You quickly turn around, staring hard into the gloom, but there is\nnothing there.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29128",
+            "name": "Karanlýk Ormanda Eski Bir Açýklýk",
+            "description": "You have wandered into an ancient clearing in the forest. Here, the\nbirds have ceased their chatter, and here, the heat lies again in a\nheavy humid embrace. The forest canopy has grown over the clearing,\nblocking out the sky above. The underbrush surrounds you, closing off\nall avenues of escape. There is a smell of death in the air, and you\nfeel eyes on the back of your neck.\n",
+            "flags": "1",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29129"
+                },
+                {
+                    "door": "D3",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29127"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "gözler göz",
+                    "description": "You quickly turn around, staring hard into the gloom, but there is\nnothing there.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29129",
+            "name": "Karanlýk Ormanda Eski Bir Açýklýk",
+            "description": "You have wandered into an ancient clearing in the forest. Here, the\nbirds have ceased their chatter, and here, the heat lies again in a\nheavy humid embrace. The forest canopy has grown over the clearing,\nblocking out the sky above. The underbrush surrounds you, closing off\nall avenues of escape. There is a smell of death in the air, and you\nfeel eyes on the back of your neck.\n",
+            "flags": "1",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29128"
+                },
+                {
+                    "door": "D3",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29130"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "gözler göz",
+                    "description": "You quickly turn around, staring hard into the gloom, and see a dark\nanimal run off into the forest!\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29130",
+            "name": "Karanlýk Ormanda Eski Bir Açýklýk",
+            "description": "You have wandered into an ancient clearing in the forest. Here, the\nbirds have ceased their chatter, and here, the heat lies again in a\nheavy humid embrace. The forest canopy has grown over the clearing,\nblocking out the sky above. The underbrush surrounds you, closing off\nall avenues of escape. There is a smell of death in the air, and you\nfeel eyes on the back of your neck.\n",
+            "flags": "1",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29131"
+                },
+                {
+                    "door": "D1",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29129"
+                },
+                {
+                    "door": "D2",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29127"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "gözler göz",
+                    "description": "You quickly turn around, staring hard into the gloom, but there is\nnothing there.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29131",
+            "name": "Karanlýk Ormanda Aðaç Kesim Bölgesi",
+            "description": "You are mired in mud on an old unused logging trail. You take some\ncomfort in the fact that others before you were also so mired, as\nevidenced by the deep tracks in the mud. The towering trees have\nswallowed the sky, and a thick underbrush presses you in, confining you\nto the trail. Above you, high in a tree, a black raven cackles at you\nin the language of its kind. You wing a rock at it and miss. The raven\ncontinues to laugh at you.\n",
+            "flags": "1",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Karanlýk Koru",
+                    "keyword": "underbrush brush",
+                    "locks": "1",
+                    "key": "29120",
+                    "u1_vnum": "29162"
+                },
+                {
+                    "door": "D2",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29130"
+                },
+                {
+                    "door": "D3",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29132"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "bird raven black",
+                    "description": "You scowl at the raven, but it still sits there laughing at you.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29132",
+            "name": "Karanlýk Ormanda Terkedilmiþ Aðaç Kesim Yeri",
+            "description": "Here, amid the towering trees of the Murkmire, man has carved a small\nspace of his own. Once again you can see the clear open sky, and your\nfoul mood lightens only to immediately plunge downward once again at\nthe sight of many bodies lying about the clearing in twisted broken\nheaps.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29133"
+                },
+                {
+                    "door": "D1",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29131"
+                },
+                {
+                    "door": "D3",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29135"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "vücut vücutlar",
+                    "description": "You examine the dead lumberjacks here. There are 2 of them, and they\nlook as if they have been severely burned. Their chests have been cut\nopen, and their hearts have been removed.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29133",
+            "name": "Karanlýk Ormanda Terkedilmiþ Aðaç Kesim Yeri",
+            "description": "Here, amid the towering trees of the Murkmire, man has carved a small\nspace of his own. Once again you can see the clear open sky, and your\nfoul mood lightens only to immediately plunge downward once again at\nthe sight of many bodies lying about the clearing in twisted broken\nheaps.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29132"
+                },
+                {
+                    "door": "D3",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29134"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "vücut vücutlar",
+                    "description": "You examine the dead lumberjacks here. There are 4 of them, and they\nlook as if they have been severely burned. Their chests have been cut\nopen, and their hearts have been removed. On one you find a strange\nsymbol carved into his sundered chest.\n"
+                },
+                {
+                    "keyword": "garip sembol",
+                    "description": "The symbol is etched into the chest of the body, and is a 5 pointed\nstar inside a circle.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29134",
+            "name": "Karanlýk Ormanda Terkedilmiþ Aðaç Kesim Yeri",
+            "description": "Here, amid the towering trees of the Murkmire, man has carved a small\nspace of his own. Once again you can see the clear open sky, and your\nfoul mood lightens only to immediately plunge downward once again at\nthe sight of many bodies lying about the clearing in twisted broken\nheaps.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29133"
+                },
+                {
+                    "door": "D2",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29135"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "vücut vücutlar",
+                    "description": "You examine the dead lumberjacks here. There are 3 of them, and they\nlook as if they have been severely burned. Their chests have been cut\nopen, and their hearts have been removed.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29135",
+            "name": "Karanlýk Ormanda Terkedilmiþ Aðaç Kesim Yeri",
+            "description": "Here, amid the towering trees of the Murkmire, man has carved a small\nspace of his own. Once again you can see the clear open sky, and your\nfoul mood lightens only to immediately plunge downward once again at\nthe sight of many bodies lying about the clearing in twisted broken\nheaps.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29134"
+                },
+                {
+                    "door": "D1",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29132"
+                },
+                {
+                    "door": "D3",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29136"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "vücut vücutlar",
+                    "description": "You examine the dead lumberjacks here. There are 2 of them, and they\nlook as if they have been severely burned. Their chests have been cut\nopen, and their hearts have been removed.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29136",
+            "name": "Karanlýk Ormanda Aðaç Kesim Bölgesi",
+            "description": "You are on a high, dry, logging trail through the forest Murkmire. To\nthe west of you is an old cave, blocked by a pile of rubble. The\nlooming hardwood trees have blocked off all but the sky just above the\ncave. Underbrush, so thick you cant see through it, presses from all\nsides.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29135"
+                },
+                {
+                    "door": "D2",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29137"
+                },
+                {
+                    "door": "D3",
+                    "description": "Maðara",
+                    "keyword": "rubble stones pile",
+                    "locks": "1",
+                    "key": "29121",
+                    "u1_vnum": "29156"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "rubble pile cave stones",
+                    "description": "You look at the pile of rubble. You think with a good shovel and time,\nyou could clear the opening,\n"
+                },
+                {
+                    "keyword": "trail",
+                    "description": "The trail is well traveled here, with most of the traffic being that of\na cart variety.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29137",
+            "name": "Karanlýk Ormanda Aðaç Kesim Bölgesi",
+            "description": "You are on a high, dry, logging trail through the forest Murkmire. The\ntowering hardwoods blot out the sky. Underbrush, so thick you cant see\nthrough it, presses from all sides. There are piles of logs on either\nside of the trail, shorn of all limbs. From deep within the darkness,\nyou hear a strange inhuman cry.\n",
+            "flags": "1",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29136"
+                },
+                {
+                    "door": "D1",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29124"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "logs piles",
+                    "description": "The logs are still green, oozing sap from the saw cuts.\n"
+                },
+                {
+                    "keyword": "trail",
+                    "description": "The trail is well traveled here, with most of the traffic being that of\na cart variety.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29138",
+            "name": "Ana Cadde",
+            "description": "You stroll down main street in the logging town of Dunkeldorf. All\nabout you people go about their errands with a grim determination. Log\nhouses line the street. There are mule teams hauling logs, down the\nstreet. Sawing can be heard down the street, and you can also hear the\nrhythmic clang, clang, clang of the village smith. People stare long\nand hard at you.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Aðaç Ev",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29139"
+                },
+                {
+                    "door": "D1",
+                    "description": "Karanlýk Koru",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29123"
+                },
+                {
+                    "door": "D2",
+                    "description": "Aðaç Ev",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29140"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ana Cadde",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29141"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "houses house log",
+                    "description": "The log houses are simple one story houses made from a notch and stack\ntechnique and chinked with some kind of mud compound.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29139",
+            "name": "Aðaç Evde",
+            "description": "You stand inside a log house. It is a simple one room house with a dirt\nfloor and mud thatch chinking. There are no windows. The house is\nheated by stone fireplace. There are a few cots and a wash basin in\naddition to the various personal possessions of the occupants.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Ana Cadde",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29138"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "possessions personal possession",
+                    "description": "You snoop through the possessions of the occupants. You see a nice\ndisplay of colored clay pots, a doll, a chest in which clothes are\nkept, and yes, you find a bedpan under one of the cots.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29140",
+            "name": "Aðaç Evde",
+            "description": "You stand inside a log house. It is a simple one room house with a dirt\nfloor and mud thatch chinking. There are no windows. The house is\nheated by stone fireplace. There are a few cots and a wash basin in\naddition to the various personal possessions of the occupants. A little\ngirl is crying here.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ana Cadde",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29138"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "possessions personal possession",
+                    "description": "You snoop through the possessions of the occupants. You see a nice\ndisplay of colored clay pots, a doll, a chest in which clothes are\nkept, and yes, you find a bedpan under one of the cots.\n"
+                },
+                {
+                    "keyword": "girl little crying",
+                    "description": "You look at the little girl, who immediately bursts into a renewed bout\nof tears. You comfort her, and ask her why she is crying. She relates a\nsad tale of how her daddy is gone forever.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29141",
+            "name": "Ana Cadde",
+            "description": "You stroll down main street in the logging town of Dunkeldorf. All\nabout you people go about their errands with a grim determination. Log\nhouses line the street. There are mule teams hauling logs, down the\nstreet. Sawing can be heard down the street, and you can also hear the\nrhythmic clang, clang, clang of the village smith. People stare long\nand hard at you.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Aðaç Ev",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29142"
+                },
+                {
+                    "door": "D1",
+                    "description": "Ana Cadde",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29138"
+                },
+                {
+                    "door": "D2",
+                    "description": "Aðaç Ev",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29143"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ana Cadde",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29144"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "houses house log",
+                    "description": "The log houses are simple one story houses made from a notch and stack\ntechnique and chinked with some kind of mud compound.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29142",
+            "name": "Aðaç Evde",
+            "description": "You stand inside a log house. It is a simple one room house with a dirt\nfloor and mud thatch chinking. There are no windows. The house is\nheated by stone fireplace. There are a few cots and a wash basin in\naddition to the various personal possessions of the occupants. A woman\nscreams in terror at your entrance!\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Ana Cadde",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29141"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "possessions personal possession",
+                    "description": "You snoop through the possessions of the occupants. You see a nice\ndisplay of colored clay pots, a doll, a chest in which clothes are\nkept, and yes, you find a bedpan under one of the cots.\n"
+                },
+                {
+                    "keyword": "woman screaming",
+                    "description": "You manage to calm the woman with a combination of physical restraint\nand soothing tones. She tells you of her fear of the long absence of\nher husband.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29143",
+            "name": "Aðaç Evde",
+            "description": "You stand inside a log house. It is a simple one room house with a dirt\nfloor and mud thatch chinking. There are no windows. The house is\nheated by stone fireplace. There are a few cots and a wash basin in\naddition to the various personal possessions of the occupants. A little\ngirl is crying here.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ana Cadde",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29141"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "possessions personal possession",
+                    "description": "You snoop through the possessions of the occupants. You see a nice\ndisplay of colored clay pots, a doll, a chest in which clothes are\nkept, and yes, you find a bedpan under one of the cots.\n"
+                },
+                {
+                    "keyword": "girl little crying",
+                    "description": "You look at the little girl, who immediately bursts into a renewed bout\nof tears. You comfort her, and ask her why she is crying. She relates a\nsad tale of how her daddy is gone forever.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29144",
+            "name": "Ana Cadde",
+            "description": "You stroll down main street in the logging town of Dunkeldorf. All\nabout you people go about their errands with a grim determination.\nThere are mule teams hauling logs, down the street. Sawing can be heard\ndown the street, and you can also hear the rhythmic clang, clang, clang\nof the village smith. People stare long and hard at you. North of you\nis a two story building with a sign picturing a full mug. To the west\nof you is a huge sawmill.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "The two story building",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29146"
+                },
+                {
+                    "door": "D1",
+                    "description": "Ana Cadde",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29141"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ana Cadde",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29152"
+                },
+                {
+                    "door": "D3",
+                    "description": "Deðirmen",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29145"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "houses house log",
+                    "description": "The log houses are simple one story houses made from a notch and stack\ntechnique and chinked with some kind of mud compound.\n"
+                },
+                {
+                    "keyword": "sign mug",
+                    "description": "*****\n*       ***      THE\n*       *  *    DUNKELDORF\n*       * *         INN\n*       *                       (VACANCY)\n******\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29145",
+            "name": "Deðirmen",
+            "description": "You stand on the hectic floor of a saw mill. Flowing water from a creek\n turns a huge paddle wheel, which drives through a series of belts a\nshaft upon which a 3' diameter saw blade is mounted. The blade spins at\na high rate of speed, slicing through the logs feed through it by mill\nworkers on the table. The noise is deafening, and the mill workers take\nno notice of you. You look over and see a variety of fine work being\ndone, mainly furniture items and one craftsman working on a sign.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Ana Cadde",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29144"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "sign",
+                    "description": "*******************\n*  Dunkeldorf, Pop. 15 *\n*******************\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29146",
+            "name": "Handa Umumi Oda",
+            "description": "You stand in the main common room of the Dunkeldorf Inn. There are 5\ntables and benches here, and a main bay window overlooking Main Street.\nThe floor is being washed by a young lad with a mop, who is patiently\nworking around the paying patrons of the inn. A large sign is nailed to\nthe wall, and a set of stairs goes up.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Ana Cadde",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29144"
+                },
+                {
+                    "door": "D4",
+                    "description": "Up the stairs",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29147"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "sign large",
+                    "description": "Beer, pilsner   5\nBeer, dunkel    10\nGrub            3\nRoom            25\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29147",
+            "name": "At the Top of the Stairs",
+            "description": "You stand at the top of the stairs inside a log building. There are 4\ndoors in the cardinal directions, all made of wood with iron latches. A\nflickering lamp lights the landing.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Oda",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "29126",
+                    "u1_vnum": "29150"
+                },
+                {
+                    "door": "D1",
+                    "description": "Oda",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "29126",
+                    "u1_vnum": "29151"
+                },
+                {
+                    "door": "D2",
+                    "description": "Oda",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "29126",
+                    "u1_vnum": "29148"
+                },
+                {
+                    "door": "D3",
+                    "description": "Oda",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "29126",
+                    "u1_vnum": "29149"
+                },
+                {
+                    "door": "D5",
+                    "description": "Down the stairs",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29146"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "lamp flickering",
+                    "description": "It is just an ordinary oil lamp.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29148",
+            "name": "Küçük Oda",
+            "description": "You are inside a small room in the Dunkeldorf inn. The interior is\nsparse and clean. There is a single bed, a washbasin, a bedpan, and an\narmoire. A simple glass window overlooks the town.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "The landing",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "29126",
+                    "u1_vnum": "29147"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "yatak",
+                    "description": "The bed looks like it has clean sheets, and there is no sign of\nbedbugs.\n"
+                },
+                {
+                    "keyword": "bedpan washbasin",
+                    "description": "You have seen these many times before.\n"
+                },
+                {
+                    "keyword": "armoire",
+                    "description": "You open the armoire. It is empty except for an extra blanket.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29149",
+            "name": "Küçük Oda",
+            "description": "You are inside a small room in the Dunkeldorf inn. The interior is\nsparse and clean. There is a single bed, a washbasin, a bedpan, and an\narmoire. A simple glass window overlooks the town.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "The landing",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "29126",
+                    "u1_vnum": "29147"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "yatak",
+                    "description": "The bed looks like it has clean sheets, and there is no sign of\nbedbugs.\n"
+                },
+                {
+                    "keyword": "bedpan washbasin",
+                    "description": "You have seen these many times before.\n"
+                },
+                {
+                    "keyword": "armoire",
+                    "description": "You open the armoire. It is empty except for an extra blanket.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29150",
+            "name": "Küçük Oda",
+            "description": "You are inside a small room in the Dunkeldorf inn. The interior is\nsparse and clean. There is a single bed, a washbasin, a bedpan, and an\narmoire. A simple glass window overlooks the town.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "The landing",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "29126",
+                    "u1_vnum": "29147"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "yatak",
+                    "description": "The bed looks like it has clean sheets, and there is no sign of\nbedbugs.\n"
+                },
+                {
+                    "keyword": "bedpan washbasin",
+                    "description": "You have seen these many times before.\n"
+                },
+                {
+                    "keyword": "armoire",
+                    "description": "You open the armoire. It is empty except for an extra blanket.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29151",
+            "name": "Küçük Oda",
+            "description": "You are inside a small room in the Dunkeldorf inn. The interior is\nsparse and clean. There is a single bed, a washbasin, a bedpan, and an\narmoire. A simple glass window overlooks the town.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "The landing",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "29126",
+                    "u1_vnum": "29147"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "yatak",
+                    "description": "The bed looks like it has clean sheets, and there is no sign of\nbedbugs.\n"
+                },
+                {
+                    "keyword": "bedpan washbasin",
+                    "description": "You have seen these many times before.\n"
+                },
+                {
+                    "keyword": "armoire",
+                    "description": "You open the armoire. It is empty except for an extra blanket.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29152",
+            "name": "Ana Cadde",
+            "description": "You stroll down main street in the logging town of Dunkeldorf. All\nabout you people go about their errands with a grim determination.\nThere are mule teams hauling logs, down the street. To the west of you\nis a general store, to the east a stables, and to the south, the\nvillage smith.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ana Cadde",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29144"
+                },
+                {
+                    "door": "D1",
+                    "description": "The stables",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29154"
+                },
+                {
+                    "door": "D2",
+                    "description": "The village smith",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29155"
+                },
+                {
+                    "door": "D3",
+                    "description": "The store",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29153"
+                }
+            ]
+        },
+        {
+            "vnum": "29153",
+            "name": "Bakkal",
+            "description": "You are inside the pitiful general store of Dunkeldorf. The single rack\nof shelves is empty of most goods, and what there is way overpriced.\nYou probably own more than this store does.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Ana Cadde",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29152"
+                }
+            ]
+        },
+        {
+            "vnum": "29154",
+            "name": "Ahýr",
+            "description": "The stables of Dunkeldorf are very Spartan, consisting of only six\nstalls and one stable boy. The proprietor is busy brushing a mule while\nhis hand is removing the tack and harness from another team. The floor\nis very muddy as are the mules.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Ana Cadde",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29152"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "mud mules floor muddy",
+                    "description": "The mud looks exactly like the mud on your boots.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29155",
+            "name": "Demirci",
+            "description": "You are in the way at the village smithy. The towns only smith is busy\nworking a single anvil and the bellows. About him are a variety of\nordinary items in various states of repair. There is a sign here.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ana Cadde",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29152"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "sign",
+                    "description": "The sign says type list to see what I have today.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29156",
+            "name": "Karanlýk Maðarada",
+            "description": "You are inside a dark cave which smells of rot. The little airflow here\ncomes from a shaft that goes up and out. White cylindrical rocks lie on\nthe floor in heaps. The walls of the cave appear regular. Rubble is\nstrewn about the cave mouth, which appears to be unstable.\n",
+            "flags": "1",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Karanlýk Maðara",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29157"
+                },
+                {
+                    "door": "D1",
+                    "description": "The cave mouth",
+                    "keyword": "rubble",
+                    "locks": "1",
+                    "key": "29121",
+                    "u1_vnum": "29136"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "shaft",
+                    "description": "The air shaft is too small to climb through for you.\n"
+                },
+                {
+                    "keyword": "rocks cylindrical",
+                    "description": "The rocks upon closer examination are human bones.\n"
+                },
+                {
+                    "keyword": "walls regular wall",
+                    "description": "The walls have red colored veins of iron ore in them, and appear to\nhave been dug by man.\n"
+                },
+                {
+                    "keyword": "rubble",
+                    "description": "It looks like if you had a good shovel, you could move it.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29157",
+            "name": "Karanlýk Maðarada",
+            "description": "You are inside a dark cave which smells of rot. White cylindrical rocks\nlie on the floor in heaps. The walls of the cave appear regular.\n",
+            "flags": "1",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Karanlýk Maðara",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29158"
+                },
+                {
+                    "door": "D2",
+                    "description": "Karanlýk Maðara",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29156"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "rocks cylindrical",
+                    "description": "The rocks upon closer examination are human bones.\n"
+                },
+                {
+                    "keyword": "walls regular wall",
+                    "description": "The walls have red colored veins of iron ore in them, and appear to\nhave been dug by man.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29158",
+            "name": "Karanlýk Maðarada",
+            "description": "You are inside a dark cave which smells of rot. White cylindrical rocks\nlie on the floor in heaps. The walls of the cave appear regular.\n",
+            "flags": "1",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Karanlýk Maðara",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29159"
+                },
+                {
+                    "door": "D2",
+                    "description": "Karanlýk Maðara",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29157"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "rocks cylindrical",
+                    "description": "The rocks upon closer examination are human bones.\n"
+                },
+                {
+                    "keyword": "walls regular wall",
+                    "description": "The walls have red colored veins of iron ore in them, and appear to\nhave been dug by man.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29159",
+            "name": "Karanlýk Maðarada",
+            "description": "You are inside a dark cave which smells of rot. White cylindrical rocks\nlie on the floor in heaps. The walls of the cave appear regular. There\nare markings on the wall here.\n",
+            "flags": "1",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Karanlýk Maðara",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29160"
+                },
+                {
+                    "door": "D3",
+                    "description": "Karanlýk Maðara",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29158"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "rocks cylindrical",
+                    "description": "The rocks upon closer examination are human bones.\n"
+                },
+                {
+                    "keyword": "walls regular wall",
+                    "description": "The walls have red colored veins of iron ore in them, and appear to\nhave been dug by man.\n"
+                },
+                {
+                    "keyword": "markings marking",
+                    "description": "HE WHO IS OF PURE HEART AND STRONG BLADE\nSHALL BEST THE GUARDIAN AND REMOVE THE SCOURGE\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29160",
+            "name": "Karanlýk Maðarada",
+            "description": "You are inside a cave. Light streams in through a tight opening to the\nnorth. Beyond you can see a bright green meadow. Your spirits lift at\nthe thought of getting out of the cave.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "The green meadow",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29161"
+                },
+                {
+                    "door": "D3",
+                    "description": "Karanlýk Maðara",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29159"
+                }
+            ]
+        },
+        {
+            "vnum": "29161",
+            "name": "Çayýrdaki Tapýnak",
+            "description": "You have squeezed from the narrow southern cave into a bright green\nmeadow amid a beautiful open young forest. You walk in the grass\ntowards a white marble chapel, made of seven pillars and open to the\nsky. As you enter the chapel, a feeling of peace comes over you. You\nfeel the worlds wind whistle through the columns, making a strange\nkeening sound.\n",
+            "flags": "8192",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Karanlýk Maðara",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29160"
+                }
+            ]
+        },
+        {
+            "vnum": "29162",
+            "name": "Cadýlar Toplantýsýnýn Dýþ Çemberi",
+            "description": "You stand in a circular clearing, bounded by brush on the outside, and\nwith trees in the center. The twisted trees of the center grow\nexceptionally high here, and blot out the sky in a black canopy. The\nground you stand on has a silvery sheen to the dirt, as if some\nprecious metal has been sprinkled here. To the center of the clearing a\nbright fire roars, and reaches for the treetops in a hellish blaze.\n",
+            "flags": "1",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29163"
+                },
+                {
+                    "door": "D1",
+                    "description": "Ýç Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29169"
+                },
+                {
+                    "door": "D2",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29178"
+                },
+                {
+                    "door": "D3",
+                    "description": "The underbrush",
+                    "keyword": "brush underbrush",
+                    "locks": "1",
+                    "key": "29120",
+                    "u1_vnum": "29131"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "aðaçlar merkez",
+                    "description": "You stare at the trees in the center, and in your mind's eye, you\nconnect them to form a star.\n"
+                },
+                {
+                    "keyword": "tozlu gümüþi parlaklýk",
+                    "description": "The metal tastes like silver\n"
+                },
+                {
+                    "keyword": "ateþ",
+                    "description": "You stare hypnotically into the dancing flames. Images form in the\nfires. Images of enemies. Dead evil enemies you have killed. Their\nfaces twist in horror as their bodies burn, regenerate, and burn again,\nin a never-ending painful cycle. You feel drawn towards them, and start\n\nto walk toward them, when something wet hits you in the eye. You look\nup and see a white dove pin wheeling higher into the sky, through the\ntreetops. Gratefully you wipe the guano from you eye.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29163",
+            "name": "Cadýlar Toplantýsýnýn Dýþ Çemberi",
+            "description": "You stand in a circular clearing, bounded by brush on the outside, and\nwith trees in the center. The twisted trees of the center grow\nexceptionally high here, and blot out the sky in a black canopy. The\nground you stand on has a silvery sheen to the dirt, as if some\nprecious metal has been sprinkled here. To the center of the clearing a\nbright fire roars, and reaches for the treetops in a hellish blaze.\n",
+            "flags": "1",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29175"
+                },
+                {
+                    "door": "D1",
+                    "description": "Ýç Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29166"
+                },
+                {
+                    "door": "D2",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29162"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "aðaçlar merkez",
+                    "description": "You stare at the trees in the center, and in your mind's eye, you\nconnect them to form a star.\n"
+                },
+                {
+                    "keyword": "tozlu gümüþi parlaklýk",
+                    "description": "The metal tastes like silver\n"
+                },
+                {
+                    "keyword": "ateþ",
+                    "description": "You stare hypnotically into the dancing flames. Images form in the\nfires. Images of enemies. Dead evil enemies you have killed. Their\nfaces twist in horror as their bodies burn, regenerate, and burn again,\nin a never-ending painful cycle. You feel drawn towards them, and start\nto walk toward them, when something wet hits you in the eye. You look\nup and see a white dove pin wheeling higher into the sky, through the\ntreetops. Gratefully you wipe the guano from you eye.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29164",
+            "name": "Cadýlar Toplantýsýnýn Dýþ Çemberi",
+            "description": "You stand in a circular clearing, bounded by brush on the outside, and\nwith trees in the center. The twisted trees of the center grow\nexceptionally high here, and blot out the sky in a black canopy. The\nground you stand on has a silvery sheen to the dirt, as if some\nprecious metal has been sprinkled here. To the center of the clearing a\nbright fire roars, and reaches for the treetops in a hellish blaze.\n",
+            "flags": "1",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29165"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ýç Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29166"
+                },
+                {
+                    "door": "D3",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29175"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "aðaçlar merkez",
+                    "description": "You stare at the trees in the center, and in your mind's eye, you\nconnect them to form a star.\n"
+                },
+                {
+                    "keyword": "tozlu gümüþi parlaklýk",
+                    "description": "The metal tastes like silver\n\n"
+                },
+                {
+                    "keyword": "ateþ",
+                    "description": "You stare hypnotically into the dancing flames. Images form in the\nfires. Images of enemies. Dead evil enemies you have killed. Their\nfaces twist in horror as their bodies burn, regenerate, and burn again,\nin a never-ending painful cycle. You feel drawn towards them, and start\nto walk toward them, when something wet hits you in the eye. You look\nup and see a white dove pin wheeling higher into the sky, through the\ntreetops. Gratefully you wipe the guano from you eye.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29165",
+            "name": "Cadýlar Toplantýsýnýn Dýþ Çemberi",
+            "description": "You stand in a circular clearing, bounded by brush on the outside, and\nwith trees in the center. The twisted trees of the center grow\nexceptionally high here, and blot out the sky in a black canopy. The\nground you stand on has a silvery sheen to the dirt, as if some\nprecious metal has been sprinkled here. To the center of the clearing a\nbright fire roars, and reaches for the treetops in a hellish blaze.\n",
+            "flags": "1",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29176"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ýç Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29167"
+                },
+                {
+                    "door": "D3",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29164"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "aðaçlar merkez",
+                    "description": "You stare at the trees in the center, and in your mind's eye, you\nconnect them to form a star.\n"
+                },
+                {
+                    "keyword": "tozlu gümüþi parlaklýk",
+                    "description": "The metal tastes like silver\n"
+                },
+                {
+                    "keyword": "ateþ",
+                    "description": "You stare hypnotically into the dancing flames. Images form in the\nfires. Images of enemies. Dead evil enemies you have killed. Their\nfaces twist in horror as their bodies burn, regenerate, and burn again,\nin a never-ending painful cycle. You feel drawn towards them, and start\nto walk toward them, when something wet hits you in the eye. You look\nup and see a white dove pin wheeling higher into the sky, through the\ntreetops. Gratefully you wipe the guano from you eye.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29166",
+            "name": "Cadýlar Toplantýsýnýn Ýç Çemberi",
+            "description": "You stand in the inner circle of coven, amid the trees. The ground and\ntrees here are scorched, from the raging fire in the pit below you, at\nthe center of the circle. Across the way you see a warlock toss\nfist-sized something into the pit, and the fire leaps higher, greedily\nconsuming the item. There is a heavy aura of evil here which threatens\nand beckons to you.\n",
+            "flags": "1",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29164"
+                },
+                {
+                    "door": "D1",
+                    "description": "Ýç Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29167"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ýç Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29169"
+                },
+                {
+                    "door": "D3",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29163"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "aðaçlar merkez",
+                    "description": "You stare at the trees in the center, and in your mind's eye, you\nconnect them to form a star.\n"
+                },
+                {
+                    "keyword": "yumruk büyüklüðünde birþey",
+                    "description": "You carefully observe a second toss. The object appears to be a piece\nof meat of some kind.\n"
+                },
+                {
+                    "keyword": "ateþ",
+                    "description": "You stare hypnotically into the dancing flames. Images form in the\nfires. Images of enemies. Dead evil enemies you have killed. Their\nfaces twist in horror as their bodies burn, regenerate, and burn again,\nin a never-ending painful cycle. You feel drawn towards them, and start\nto walk toward them, when something wet hits you in the eye. You look\nup and see a white dove pin wheeling higher into the sky, through the\ntreetops. Gratefully you wipe the guano from you eye.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29167",
+            "name": "Cadýlar Toplantýsýnýn Ýç Çemberi",
+            "description": "You stand in the inner circle of coven, amid the trees. The ground and\ntrees here are scorched, from the raging fire in the pit below you, at\nthe center of the circle. Across the way you see a warlock toss\nfist-sized something into the pit, and the fire leaps higher, greedily\nconsuming the item. There is a heavy aura of evil here which threatens\nand beckons to you.\n",
+            "flags": "1",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29165"
+                },
+                {
+                    "door": "D1",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29168"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ýç Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29170"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ýç Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29166"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "aðaçlar merkez",
+                    "description": "You stare at the trees in the center, and in your mind's eye, you\nconnect them to form a star.\n"
+                },
+                {
+                    "keyword": "yumruk büyüklüðünde birþey",
+                    "description": "You carefully observe a second toss. The object appears to be a piece\nof meat of some kind.\n"
+                },
+                {
+                    "keyword": "ateþ",
+                    "description": "You stare hypnotically into the dancing flames. Images form in the\nfires. Images of enemies. Dead evil enemies you have killed. Their\nfaces twist in horror as their bodies burn, regenerate, and burn again,\nin a never-ending painful cycle. You feel drawn towards them, and start\nto walk toward them, when something wet hits you in the eye. You look\nup and see a white dove pin wheeling higher into the sky, through the\ntreetops. Gratefully you wipe the guano from you eye.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29168",
+            "name": "Cadýlar Toplantýsýnýn Dýþ Çemberi",
+            "description": "You stand in a circular clearing, bounded by brush on the outside, and\nwith trees in the center. The twisted trees of the center grow\nexceptionally high here, and blot out the sky in a black canopy. The\nground you stand on has a silvery sheen to the dirt, as if some\nprecious metal has been sprinkled here. To the center of the clearing a\nbright fire roars, and reaches for the treetops in a hellish blaze.\n",
+            "flags": "1",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29176"
+                },
+                {
+                    "door": "D2",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29171"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ýç Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29167"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "aðaçlar merkez",
+                    "description": "You stare at the trees in the center, and in your mind's eye, you\nconnect them to form a star.\n"
+                },
+                {
+                    "keyword": "tozlu gümüþi parlaklýk",
+                    "description": "The metal tastes like silver\n"
+                },
+                {
+                    "keyword": "ateþ",
+                    "description": "You stare hypnotically into the dancing flames. Images form in the\nfires. Images of enemies. Dead evil enemies you have killed. Their\nfaces twist in horror as their bodies burn, regenerate, and burn again,\nin a never-ending painful cycle. You feel drawn towards them, and start\nto walk toward them, when something wet hits you in the eye. You look\nup and see a white dove pin wheeling higher into the sky, through the\ntreetops. Gratefully you wipe the guano from you eye.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29169",
+            "name": "Cadýlar Toplantýsýnýn Ýç Çemberi",
+            "description": "You stand in the inner circle of coven, amid the trees. The ground and\ntrees here are scorched, from the raging fire in the pit below you, at\nthe center of the circle. Across the way you see a warlock toss\nfist-sized something into the pit, and the fire leaps higher, greedily\nconsuming the item. There is a heavy aura of evil here which threatens\nand beckons to you.\n",
+            "flags": "1|4",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ýç Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29166"
+                },
+                {
+                    "door": "D1",
+                    "description": "Ýç Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29170"
+                },
+                {
+                    "door": "D2",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29172"
+                },
+                {
+                    "door": "D3",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29162"
+                },
+                {
+                    "door": "D5",
+                    "description": "Ateþin Ýçi",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29174"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "aðaçlar merkez",
+                    "description": "You stare at the trees in the center, and in your mind's eye, you\nconnect them to form a star.\n"
+                },
+                {
+                    "keyword": "yumruk büyüklüðünde birþey",
+                    "description": "You carefully observe a second toss. The object appears to be a piece\nof meat of some kind.\n"
+                },
+                {
+                    "keyword": "ateþ",
+                    "description": "You stare hypnotically into the dancing flames. Images form in the\nfires. Images of enemies. Dead evil enemies you have killed. Their\nfaces twist in horror as their bodies burn, regenerate, and burn again,\nin a never-ending painful cycle. You feel drawn towards them, and start\nto walk toward them, when something wet hits you in the eye. You look\nup and see a white dove pin wheeling higher into the sky, through the\ntreetops. Gratefully you wipe the guano from you eye.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29170",
+            "name": "Cadýlar Toplantýsýnýn Ýç Çemberi",
+            "description": "You stand in the inner circle of coven, amid the trees. The ground and\ntrees here are scorched, from the raging fire in the pit below you, at\nthe center of the circle. Across the way you see a warlock toss\nfist-sized something into the pit, and the fire leaps higher, greedily\nconsuming the item. There is a heavy aura of evil here which threatens\nand beckons to you.\n",
+            "flags": "1",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ýç Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29167"
+                },
+                {
+                    "door": "D1",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29171"
+                },
+                {
+                    "door": "D2",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29173"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ýç Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29169"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "aðaçlar merkez",
+                    "description": "You stare at the trees in the center, and in your mind's eye, you\nconnect them to form a star.\n"
+                },
+                {
+                    "keyword": "yumruk büyüklüðünde birþey",
+                    "description": "You carefully observe a second toss. The object appears to be a piece\nof meat of some kind.\n"
+                },
+                {
+                    "keyword": "ateþ",
+                    "description": "You stare hypnotically into the dancing flames. Images form in the\nfires. Images of enemies. Dead evil enemies you have killed. Their\nfaces twist in horror as their bodies burn, regenerate, and burn again,\nin a never-ending painful cycle. You feel drawn towards them, and start\nto walk toward them, when something wet hits you in the eye. You look\nup and see a white dove pin wheeling higher into the sky, through the\ntreetops. Gratefully you wipe the guano from you eye.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29171",
+            "name": "Cadýlar Toplantýsýnýn Dýþ Çemberi",
+            "description": "You stand in a circular clearing, bounded by brush on the outside, and\nwith trees in the center. The twisted trees of the center grow\nexceptionally high here, and blot out the sky in a black canopy. The\nground you stand on has a silvery sheen to the dirt, as if some\nprecious metal has been sprinkled here. To the center of the clearing a\nbright fire roars, and reaches for the treetops in a hellish blaze.\n",
+            "flags": "1",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29168"
+                },
+                {
+                    "door": "D2",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29177"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ýç Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29170"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "aðaçlar merkez",
+                    "description": "You stare at the trees in the center, and in your mind's eye, you\nconnect them to form a star.\n"
+                },
+                {
+                    "keyword": "tozlu gümüþi parlaklýk",
+                    "description": "The metal tastes like silver\n"
+                },
+                {
+                    "keyword": "ateþ",
+                    "description": "You stare hypnotically into the dancing flames. Images form in the\nfires. Images of enemies. Dead evil enemies you have killed. Their\nfaces twist in horror as their bodies burn, regenerate, and burn again,\nin a never-ending painful cycle. You feel drawn towards them, and start\nto walk toward them, when something wet hits you in the eye. You look\nup and see a white dove pin wheeling higher into the sky, through the\ntreetops. Gratefully you wipe the guano from you eye.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29172",
+            "name": "Cadýlar Toplantýsýnýn Dýþ Çemberi",
+            "description": "You stand in a circular clearing, bounded by brush on the outside, and\nwith trees in the center. The twisted trees of the center grow\nexceptionally high here, and blot out the sky in a black canopy. The\nground you stand on has a silvery sheen to the dirt, as if some\nprecious metal has been sprinkled here. To the center of the clearing a\nbright fire roars, and reaches for the treetops in a hellish blaze.\n",
+            "flags": "1",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ýç Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29169"
+                },
+                {
+                    "door": "D1",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29173"
+                },
+                {
+                    "door": "D3",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29178"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "aðaçlar merkez",
+                    "description": "You stare at the trees in the center, and in your mind's eye, you\nconnect them to form a star.\n"
+                },
+                {
+                    "keyword": "tozlu gümüþi parlaklýk",
+                    "description": "The metal tastes like silver\n"
+                },
+                {
+                    "keyword": "ateþ",
+                    "description": "You stare hypnotically into the dancing flames. Images form in the\nfires. Images of enemies. Dead evil enemies you have killed. Their\nfaces twist in horror as their bodies burn, regenerate, and burn again,\nin a never-ending painful cycle. You feel drawn towards them, and start\nto walk toward them, when something wet hits you in the eye. You look\nup and see a white dove pin wheeling higher into the sky, through the\ntreetops. Gratefully you wipe the guano from you eye.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29173",
+            "name": "Cadýlar Toplantýsýnýn Dýþ Çemberi",
+            "description": "You stand in a circular clearing, bounded by brush on the outside, and\nwith trees in the center. The twisted trees of the center grow\nexceptionally high here, and blot out the sky in a black canopy. The\nground you stand on has a silvery sheen to the dirt, as if some\nprecious metal has been sprinkled here. To the center of the clearing a\nbright fire roars, and reaches for the treetops in a hellish blaze.\n",
+            "flags": "1",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ýç Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29170"
+                },
+                {
+                    "door": "D1",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29177"
+                },
+                {
+                    "door": "D3",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29172"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "aðaçlar merkez",
+                    "description": "You stare at the trees in the center, and in your mind's eye, you\nconnect them to form a star.\n"
+                },
+                {
+                    "keyword": "tozlu gümüþi parlaklýk",
+                    "description": "The metal tastes like silver\n"
+                },
+                {
+                    "keyword": "ateþ",
+                    "description": "You stare hypnotically into the dancing flames. Images form in the\nfires. Images of enemies. Dead evil enemies you have killed. Their\nfaces twist in horror as their bodies burn, regenerate, and burn again,\nin a never-ending painful cycle. You feel drawn towards them, and start\nto walk toward them, when something wet hits you in the eye. You look\nup and see a white dove pin wheeling higher into the sky, through the\ntreetops. Gratefully you wipe the guano from you eye.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29174",
+            "name": "Ateþin Ýçi",
+            "description": "You have plunged into the raging flames. You feel your equipment and\nskin start to sear, but just as you have given up hope, a warm feeling\nfills your body and mind, and eases your pain. In you head you hear\n'good luck my champion, may you fare well in your bout with the\ncreature from hell. Be sure to recover the amulet, as it will unlock\nthe flame barrier and allow you to return to the real world. Remember\nalways to stay on the path of righteousness.' And with that, the voice\nand warmth vanish.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "Ýç Çember",
+                    "keyword": "alev bariyeri",
+                    "locks": "1",
+                    "key": "29127",
+                    "u1_vnum": "29169"
+                }
+            ]
+        },
+        {
+            "vnum": "29175",
+            "name": "Cadýlar Toplantýsýnýn Dýþ Çemberi",
+            "description": "You stand in a circular clearing, bounded by brush on the outside, and\nwith trees in the center. The twisted trees of the center grow\nexceptionally high here, and blot out the sky in a black canopy. The\nground you stand on has a silvery sheen to the dirt, as if some\nprecious metal has been sprinkled here. To the center of the clearing a\nbright fire roars, and reaches for the treetops in a hellish blaze.\n",
+            "flags": "1",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29164"
+                },
+                {
+                    "door": "D2",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29163"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "aðaçlar merkez",
+                    "description": "You stare at the trees in the center, and in your mind's eye, you\nconnect them to form a star.\n"
+                },
+                {
+                    "keyword": "ateþ",
+                    "description": "You stare hypnotically into the dancing flames. Images form in the\nfires. Images of enemies. Dead evil enemies you have killed. Their\nfaces twist in horror as their bodies burn, regenerate, and burn again,\nin a never-ending painful cycle. You feel drawn towards them, and start\nto walk toward them, when something wet hits you in the eye. You look\nup and see a white dove pin wheeling higher into the sky, through the\ntreetops. Gratefully you wipe the guano from you eye.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29176",
+            "name": "Cadýlar Toplantýsýnýn Dýþ Çemberi",
+            "description": "You stand in a circular clearing, bounded by brush on the outside, and\nwith trees in the center. The twisted trees of the center grow\nexceptionally high here, and blot out the sky in a black canopy. The\nground you stand on has a silvery sheen to the dirt, as if some\nprecious metal has been sprinkled here. To the center of the clearing a\nbright fire roars, and reaches for the treetops in a hellish blaze.\n",
+            "flags": "1",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29168"
+                },
+                {
+                    "door": "D3",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29165"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "aðaçlar merkez",
+                    "description": "You stare at the trees in the center, and in your mind's eye, you\nconnect them to form a star.\n"
+                },
+                {
+                    "keyword": "ateþ",
+                    "description": "You stare hypnotically into the dancing flames. Images form in the\nfires. Images of enemies. Dead evil enemies you have killed. Their\nfaces twist in horror as their bodies burn, regenerate, and burn again,\nin a never-ending painful cycle. You feel drawn towards them, and start\nto walk toward them, when something wet hits you in the eye. You look\nup and see a white dove pin wheeling higher into the sky, through the\ntreetops. Gratefully you wipe the guano from you eye.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29177",
+            "name": "Cadýlar Toplantýsýnýn Dýþ Çemberi",
+            "description": "You stand in a circular clearing, bounded by brush on the outside, and\nwith trees in the center. The twisted trees of the center grow\nexceptionally high here, and blot out the sky in a black canopy. The\nground you stand on has a silvery sheen to the dirt, as if some\nprecious metal has been sprinkled here. To the center of the clearing a\nbright fire roars, and reaches for the treetops in a hellish blaze.\n",
+            "flags": "1",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29171"
+                },
+                {
+                    "door": "D3",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29173"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "aðaçlar merkez",
+                    "description": "You stare at the trees in the center, and in your mind's eye, you\nconnect them to form a star.\n"
+                },
+                {
+                    "keyword": "ateþ",
+                    "description": "You stare hypnotically into the dancing flames. Images form in the\nfires. Images of enemies. Dead evil enemies you have killed. Their\nfaces twist in horror as their bodies burn, regenerate, and burn again,\nin a never-ending painful cycle. You feel drawn towards them, and start\nto walk toward them, when something wet hits you in the eye. You look\nup and see a white dove pin wheeling higher into the sky, through the\ntreetops. Gratefully you wipe the guano from you eye.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29178",
+            "name": "Cadýlar Toplantýsýnýn Dýþ Çemberi",
+            "description": "You stand in a circular clearing, bounded by brush on the outside, and\nwith trees in the center. The twisted trees of the center grow\nexceptionally high here, and blot out the sky in a black canopy. The\nground you stand on has a silvery sheen to the dirt, as if some\nprecious metal has been sprinkled here. To the center of the clearing a\nbright fire roars, and reaches for the treetops in a hellish blaze.\n",
+            "flags": "1",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29162"
+                },
+                {
+                    "door": "D1",
+                    "description": "Dýþ Çember",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29172"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "aðaçlar merkez",
+                    "description": "You stare at the trees in the center, and in your mind's eye, you\nconnect them to form a star.\n"
+                },
+                {
+                    "keyword": "ateþ",
+                    "description": "You stare hypnotically into the dancing flames. Images form in the\nfires. Images of enemies. Dead evil enemies you have killed. Their\nfaces twist in horror as their bodies burn, regenerate, and burn again,\nin a never-ending painful cycle. You feel drawn towards them, and start\nto walk toward them, when something wet hits you in the eye. You look\nup and see a white dove pin wheeling higher into the sky, through the\ntreetops. Gratefully you wipe the guano from you eye.\n"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "29120",
+            "arg2": "2",
+            "arg3": "29128",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29121",
+            "arg2": "1",
+            "arg3": "29133",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29128",
+            "arg2": "99"
+        },
+        {
+            "command": "M",
+            "arg1": "29122",
+            "arg2": "2",
+            "arg3": "29123",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29129",
+            "arg2": "99",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "29130",
+            "arg2": "99",
+            "arg3": "12"
+        },
+        {
+            "command": "M",
+            "arg1": "29123",
+            "arg2": "5",
+            "arg3": "29138",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29129",
+            "arg2": "99",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29123",
+            "arg2": "5",
+            "arg3": "29152",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29129",
+            "arg2": "99",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29123",
+            "arg2": "5",
+            "arg3": "29146",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29129",
+            "arg2": "99",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29123",
+            "arg2": "5",
+            "arg3": "29143",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29124",
+            "arg2": "1",
+            "arg3": "29153",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29138",
+            "arg2": "99"
+        },
+        {
+            "command": "M",
+            "arg1": "29125",
+            "arg2": "1",
+            "arg3": "29145",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29126",
+            "arg2": "1",
+            "arg3": "29155",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29136",
+            "arg2": "99"
+        },
+        {
+            "command": "G",
+            "arg1": "29121",
+            "arg2": "99"
+        },
+        {
+            "command": "G",
+            "arg1": "29137",
+            "arg2": "99"
+        },
+        {
+            "command": "M",
+            "arg1": "29127",
+            "arg2": "1",
+            "arg3": "29146",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29123",
+            "arg2": "99"
+        },
+        {
+            "command": "G",
+            "arg1": "29124",
+            "arg2": "99"
+        },
+        {
+            "command": "G",
+            "arg1": "29125",
+            "arg2": "99"
+        },
+        {
+            "command": "G",
+            "arg1": "29126",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29128",
+            "arg2": "1",
+            "arg3": "29141",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29139",
+            "arg2": "99"
+        },
+        {
+            "command": "O",
+            "arg1": "29122",
+            "arg2": "99",
+            "arg3": "29145"
+        },
+        {
+            "command": "M",
+            "arg1": "29129",
+            "arg2": "1",
+            "arg3": "29158",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29130",
+            "arg2": "1",
+            "arg3": "29161",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29120",
+            "arg2": "99"
+        },
+        {
+            "command": "G",
+            "arg1": "29131",
+            "arg2": "99"
+        },
+        {
+            "command": "M",
+            "arg1": "29131",
+            "arg2": "5",
+            "arg3": "29151",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29132",
+            "arg2": "99",
+            "arg3": "12"
+        },
+        {
+            "command": "M",
+            "arg1": "29131",
+            "arg2": "5",
+            "arg3": "29164",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29132",
+            "arg2": "99",
+            "arg3": "12"
+        },
+        {
+            "command": "M",
+            "arg1": "29131",
+            "arg2": "5",
+            "arg3": "29168",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29132",
+            "arg2": "99",
+            "arg3": "12"
+        },
+        {
+            "command": "M",
+            "arg1": "29131",
+            "arg2": "5",
+            "arg3": "29173",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29132",
+            "arg2": "99",
+            "arg3": "12"
+        },
+        {
+            "command": "M",
+            "arg1": "29131",
+            "arg2": "5",
+            "arg3": "29162",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29132",
+            "arg2": "99",
+            "arg3": "12"
+        },
+        {
+            "command": "M",
+            "arg1": "29132",
+            "arg2": "2",
+            "arg3": "29167",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29132",
+            "arg2": "99",
+            "arg3": "12"
+        },
+        {
+            "command": "M",
+            "arg1": "29133",
+            "arg2": "1",
+            "arg3": "29170",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29132",
+            "arg2": "99",
+            "arg3": "12"
+        },
+        {
+            "command": "E",
+            "arg1": "29133",
+            "arg2": "99",
+            "arg3": "14"
+        },
+        {
+            "command": "M",
+            "arg1": "29134",
+            "arg2": "1",
+            "arg3": "29174",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29135",
+            "arg2": "99",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29134",
+            "arg2": "99",
+            "arg3": "17"
+        },
+        {
+            "command": "E",
+            "arg1": "29127",
+            "arg2": "99",
+            "arg3": "3"
+        },
+        {
+            "command": "D",
+            "arg1": "29131",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29136",
+            "arg2": "3",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29138",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29138",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29139",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29140",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29141",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29141",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29142",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29143",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29147",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29147",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29147",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29147",
+            "arg2": "3",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29148",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29149",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29150",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29151",
+            "arg2": "3",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29156",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29162",
+            "arg2": "3",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29174",
+            "arg2": "4",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29144",
+            "arg2": "0",
+            "arg3": "0"
+        }
+    ],
+    "shops": [
+        {
+            "keeper": "29124",
+            "buy_type_0": "13",
+            "buy_type_1": "12",
+            "buy_type_2": "1",
+            "buy_type_3": "8",
+            "buy_type_4": "19",
+            "profit_buy": "200",
+            "profit_sell": "90",
+            "open_hour": "0",
+            "close_hour": "23"
+        },
+        {
+            "keeper": "29125",
+            "buy_type_0": "12",
+            "buy_type_1": "0",
+            "buy_type_2": "0",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "120",
+            "profit_sell": "70",
+            "open_hour": "0",
+            "close_hour": "23"
+        },
+        {
+            "keeper": "29126",
+            "buy_type_0": "13",
+            "buy_type_1": "5",
+            "buy_type_2": "18",
+            "buy_type_3": "9",
+            "buy_type_4": "0",
+            "profit_buy": "125",
+            "profit_sell": "75",
+            "open_hour": "0",
+            "close_hour": "23"
+        },
+        {
+            "keeper": "29127",
+            "buy_type_0": "19",
+            "buy_type_1": "17",
+            "buy_type_2": "18",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "100",
+            "profit_sell": "75",
+            "open_hour": "0",
+            "close_hour": "23"
+        },
+        {
+            "keeper": "29128",
+            "buy_type_0": "10",
+            "buy_type_1": "0",
+            "buy_type_2": "0",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "150",
+            "profit_sell": "50",
+            "open_hour": "0",
+            "close_hour": "23"
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "29121",
+            "spec_fun": "spec_cast_cleric"
+        },
+        {
+            "vnum": "29122",
+            "spec_fun": "spec_guard"
+        },
+        {
+            "vnum": "29128",
+            "spec_fun": "spec_thief"
+        },
+        {
+            "vnum": "29131",
+            "spec_fun": "spec_cast_cleric"
+        },
+        {
+            "vnum": "29132",
+            "spec_fun": "spec_cast_mage"
+        },
+        {
+            "vnum": "29133",
+            "spec_fun": "spec_cast_mage"
+        },
+        {
+            "vnum": "29134",
+            "spec_fun": "spec_breath_fire"
+        }
+    ],
+    "olimits": [
+        {
+            "vnum": "29131",
+            "limit": "1"
+        }
+    ]
+}

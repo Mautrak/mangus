@@ -1,0 +1,3083 @@
+{
+    "area": {
+        "file": "RiverSpirit.are",
+        "name": "River of spirits.",
+        "low_range": "50",
+        "high_range": "110",
+        "writer": "RM",
+        "credits": "River of spirits",
+        "min_vnum": "20000",
+        "max_vnum": "20099"
+    },
+    "helps": [
+        {
+            "level": "-1",
+            "keyword": "spirit",
+            "text": "River of spirits.\nConverted & edited by REAL MUDDERS\nSpecial thanx to Serdar & Anatolia Consortium"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "20066",
+            "name": "gloves fire ancient",
+            "short_description": "a pair of flaming ancient gloves",
+            "description": "A pair of flaming gloves is burning on the ground.",
+            "material": "fire",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AH",
+            "values": "36 42 42 30 30",
+            "level": "56",
+            "weight": "10",
+            "cost": "136",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "150"
+                },
+                {
+                    "location": "19",
+                    "modifier": "5"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-8"
+                }
+            ]
+        },
+        {
+            "vnum": "20070",
+            "name": "scroll ywln",
+            "short_description": "a scroll ywln",
+            "description": "A rolled ywln is here.",
+            "material": "vellum",
+            "type": "scroll",
+            "extra_flags": "G",
+            "wear_flags": "AO",
+            "values": "48 'bless' 'invis' 'cure light' ''",
+            "level": "46",
+            "weight": "10",
+            "cost": "8520",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "scroll",
+                    "description": "Just try to recite it and see what happen.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "20072",
+            "name": "paper white",
+            "short_description": "a white paper",
+            "description": "A rolled paper is here.",
+            "material": "vellum",
+            "type": "scroll",
+            "extra_flags": "G",
+            "wear_flags": "AO",
+            "values": "55 'acid blast' 'burning hands' '' ''",
+            "level": "41",
+            "weight": "10",
+            "cost": "12100",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "scroll",
+                    "description": "Just try to recite it and see what happen.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "20073",
+            "name": "paper red",
+            "short_description": "a red paper",
+            "description": "A rolled paper is here.",
+            "material": "vellum",
+            "type": "scroll",
+            "extra_flags": "G",
+            "wear_flags": "AO",
+            "values": "55 'fireball' 'lightning ball' '' ''",
+            "level": "45",
+            "weight": "10",
+            "cost": "11100",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "scroll",
+                    "description": "Just try to recite it and see what happen.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "20074",
+            "name": "paper green",
+            "short_description": "a green paper",
+            "description": "A rolled paper is here.",
+            "material": "vellum",
+            "type": "scroll",
+            "extra_flags": "G",
+            "wear_flags": "AO",
+            "values": "45 'sleep' 'curse' 'weaken' 'blind'",
+            "level": "42",
+            "weight": "10",
+            "cost": "15900",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "scroll",
+                    "description": "Just try to recite it and see what happen.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "20075",
+            "name": "paper cyan",
+            "short_description": "a cyan paper",
+            "description": "A rolled paper is here.",
+            "material": "vellum",
+            "type": "scroll",
+            "extra_flags": "G",
+            "wear_flags": "AO",
+            "values": "45 'gas breath' '' '' ''",
+            "level": "40",
+            "weight": "10",
+            "cost": "20100",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "scroll",
+                    "description": "Just try to recite it and see what happen.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "20010",
+            "name": "cloud",
+            "short_description": "an energy cloud",
+            "description": "An energy cloud is resting here.\n",
+            "material": "ice",
+            "type": "wand",
+            "extra_flags": "G",
+            "wear_flags": "AO",
+            "values": "72 10 10 'lightning breath' 0 ",
+            "level": "77",
+            "weight": "2",
+            "cost": "19900",
+            "condition": "P"
+        },
+        {
+            "vnum": "20071",
+            "name": "cloud",
+            "short_description": "an energy cloud",
+            "description": "An energy cloud is resting here.\n",
+            "material": "ice",
+            "type": "wand",
+            "extra_flags": "G",
+            "wear_flags": "AO",
+            "values": "50 15 15 'lightning breath' 0 ",
+            "level": "55",
+            "weight": "2",
+            "cost": "28000",
+            "condition": "P"
+        },
+        {
+            "vnum": "20002",
+            "name": "flame dragon",
+            "short_description": "flame of a dragon",
+            "description": "A very bright , continues flame.",
+            "material": "fire",
+            "type": "light",
+            "extra_flags": "AG",
+            "wear_flags": "A",
+            "values": "0 0 -1 0 0",
+            "level": "81",
+            "weight": "10",
+            "cost": "6400",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "151"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-30"
+                },
+                {
+                    "location": "19",
+                    "modifier": "6"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-5"
+                }
+            ]
+        },
+        {
+            "vnum": "20001",
+            "name": "whip fear dragon",
+            "short_description": "fear of a lost dragon",
+            "description": "A whip shaped form of fear lies here.",
+            "material": "none",
+            "type": "weapon",
+            "extra_flags": "M",
+            "wear_flags": "AN",
+            "values": "whip 20 6 whip DCE",
+            "level": "90",
+            "weight": "190",
+            "cost": "1200000",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "140"
+                },
+                {
+                    "location": "13",
+                    "modifier": "220"
+                },
+                {
+                    "location": "18",
+                    "modifier": "15"
+                },
+                {
+                    "location": "19",
+                    "modifier": "15"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-10"
+                }
+            ]
+        }
+    ],
+    "mobiles": [
+        {
+            "vnum": "20080",
+            "name": "ancient wizard",
+            "short_description": "the ancient wizard",
+            "long_description": "An old man walks around, talking to himself.\n",
+            "description": "He is old, despite being old he looks strong and wise.\n",
+            "race": "human",
+            "act": "ABKVe",
+            "affected_by": "DHN",
+            "alignment": "900",
+            "group": "0",
+            "level": "93",
+            "hitroll": "5",
+            "hit_dice": "25d10+28800",
+            "mana_dice": "1d1+1999",
+            "dam_dice": "10d12+62",
+            "dam_type": "magic",
+            "ac_pierce": "-95",
+            "ac_bash": "-95",
+            "ac_slash": "-95",
+            "ac_exotic": "-75",
+            "off_flags": "AF",
+            "imm_flags": "ABC",
+            "res_flags": "D",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "15000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "20014",
+            "name": "demon ice",
+            "short_description": "an ice demon",
+            "long_description": "An ice demon is here resting.\n",
+            "description": "Brrr.. you fell cold as you look at his face.\n",
+            "race": "human",
+            "act": "ABWeCFGT",
+            "affected_by": "DFJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "50",
+            "hitroll": "20",
+            "hit_dice": "10d40+5000",
+            "mana_dice": "10d30+800",
+            "dam_dice": "10d4+30",
+            "dam_type": "pierce",
+            "ac_pierce": "-30",
+            "ac_bash": "-24",
+            "ac_slash": "-30",
+            "ac_exotic": "-40",
+            "off_flags": "CEFKNU",
+            "imm_flags": "AB",
+            "res_flags": "TPKIL",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "ABCDEFG",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "20015",
+            "name": "lost demon",
+            "short_description": "a lost demon",
+            "long_description": "A lost demon is here looking for his way.\n",
+            "description": "He is lost looking for the way his home.You should help him if he did\nnot grin evilly at you.Better keep your distanse.\n",
+            "race": "human",
+            "act": "ABWeCFGT",
+            "affected_by": "DFJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "52",
+            "hitroll": "20",
+            "hit_dice": "10d40+4000",
+            "mana_dice": "10d30+800",
+            "dam_dice": "10d4+30",
+            "dam_type": "pierce",
+            "ac_pierce": "-30",
+            "ac_bash": "-24",
+            "ac_slash": "-30",
+            "ac_exotic": "-40",
+            "off_flags": "CEFKNU",
+            "imm_flags": "AB",
+            "res_flags": "TPKIL",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "ABCDEFG",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "20016",
+            "name": "demon angry",
+            "short_description": "an angry demon",
+            "long_description": "An angry demon is here looking for a victom.\n",
+            "description": "Angry very angry, wispering something buy you can not understand what he\nsays sumone must have disturbed him, he will probubly will revange first\nhe see someone else.\n",
+            "race": "human",
+            "act": "ABWeCFGT",
+            "affected_by": "DFJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "60",
+            "hitroll": "20",
+            "hit_dice": "10d40+3500",
+            "mana_dice": "10d30+800",
+            "dam_dice": "10d4+30",
+            "dam_type": "pierce",
+            "ac_pierce": "-30",
+            "ac_bash": "-24",
+            "ac_slash": "-30",
+            "ac_exotic": "-40",
+            "off_flags": "CEFKNU",
+            "imm_flags": "AB",
+            "res_flags": "TPKIL",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "ABCDEFG",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "20017",
+            "name": "demon fire",
+            "short_description": "a fire demon",
+            "long_description": "A fire demon is here playing with lava.\n",
+            "description": "He is burning , flames surround him.\n",
+            "race": "human",
+            "act": "ABWeCFGT",
+            "affected_by": "DFJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "69",
+            "hitroll": "20",
+            "hit_dice": "10d40+6000",
+            "mana_dice": "10d30+800",
+            "dam_dice": "10d5+20",
+            "dam_type": "pierce",
+            "ac_pierce": "-30",
+            "ac_bash": "-24",
+            "ac_slash": "-30",
+            "ac_exotic": "-40",
+            "off_flags": "CEFKNU",
+            "imm_flags": "AB",
+            "res_flags": "TPKIL",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "ABCDEFG",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "20018",
+            "name": "anka bird",
+            "short_description": "anka bird",
+            "long_description": "An anka bird is here singing songs.\n",
+            "description": "So beautiful!\n",
+            "race": "unique",
+            "act": "ABWeCFGT",
+            "affected_by": "DFJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "69",
+            "hitroll": "20",
+            "hit_dice": "10d40+7000",
+            "mana_dice": "10d30+800",
+            "dam_dice": "10d5+20",
+            "dam_type": "pierce",
+            "ac_pierce": "-30",
+            "ac_bash": "-24",
+            "ac_slash": "-30",
+            "ac_exotic": "-40",
+            "off_flags": "CEFKNU",
+            "imm_flags": "AB",
+            "res_flags": "TPKIL",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "ABCDEFG",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "20019",
+            "name": "watter arial",
+            "short_description": "a watter arial",
+            "long_description": "A watter arial is here playing with watter.\n",
+            "description": "",
+            "race": "arial",
+            "act": "ABWeCFGT",
+            "affected_by": "DFHJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "71",
+            "hitroll": "20",
+            "hit_dice": "10d40+7000",
+            "mana_dice": "10d30+800",
+            "dam_dice": "10d5+40",
+            "dam_type": "pierce",
+            "ac_pierce": "-30",
+            "ac_bash": "-24",
+            "ac_slash": "-30",
+            "ac_exotic": "-40",
+            "off_flags": "CEFKNU",
+            "imm_flags": "AB",
+            "res_flags": "TPKIL",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "ABCDEFG",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "20060",
+            "name": "spirit fear dragon",
+            "short_description": "Spirit of fear dragon",
+            "long_description": "Spirit of fear dragon is here.\n",
+            "description": "A spriti but has its original body after he died.Here he is behind you \nwithin his full nothingnes and anger, being killed, hunted.\n",
+            "race": "dragon",
+            "act": "ABWeCFGT",
+            "affected_by": "DFHJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "110",
+            "hitroll": "20",
+            "hit_dice": "10d99+29000",
+            "mana_dice": "10d50+2000",
+            "dam_dice": "20d10+150",
+            "dam_type": "pierce",
+            "ac_pierce": "-150",
+            "ac_bash": "-150",
+            "ac_slash": "-150",
+            "ac_exotic": "-151",
+            "off_flags": "CEFKNU",
+            "imm_flags": "ABHQY",
+            "res_flags": "TPKIL",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "ABCDEFG",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "20000",
+            "name": "guardian garden",
+            "short_description": "Guardian of garden",
+            "long_description": "Guardian of the garden is here\n",
+            "description": "",
+            "race": "human",
+            "act": "ABWe",
+            "affected_by": "DFHJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "80",
+            "hitroll": "20",
+            "hit_dice": "10d99+21000",
+            "mana_dice": "10d50+2000",
+            "dam_dice": "10d10+100",
+            "dam_type": "pierce",
+            "ac_pierce": "-150",
+            "ac_bash": "-150",
+            "ac_slash": "-150",
+            "ac_exotic": "-151",
+            "off_flags": "CEFKNU",
+            "imm_flags": "ABHQY",
+            "res_flags": "TPKIL",
+            "vuln_flags": "J",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "A",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "20001",
+            "name": "guardian hell road",
+            "short_description": "Guardian of the road",
+            "long_description": "Guardian of the hell road is here\n",
+            "description": "",
+            "race": "human",
+            "act": "ABWe",
+            "affected_by": "DFHJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "91",
+            "hitroll": "20",
+            "hit_dice": "10d99+21000",
+            "mana_dice": "10d50+2000",
+            "dam_dice": "10d10+100",
+            "dam_type": "pierce",
+            "ac_pierce": "-150",
+            "ac_bash": "-150",
+            "ac_slash": "-150",
+            "ac_exotic": "-151",
+            "off_flags": "CEFKNU",
+            "imm_flags": "ABHQY",
+            "res_flags": "TPKIL",
+            "vuln_flags": "J",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "A",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "20002",
+            "name": "spirit jonny",
+            "short_description": "spirit of jonny",
+            "long_description": "Spirit of Jonny is here.\n",
+            "description": "",
+            "race": "unique",
+            "act": "ABWe",
+            "affected_by": "DFHJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "91",
+            "hitroll": "20",
+            "hit_dice": "10d99+21000",
+            "mana_dice": "10d50+2000",
+            "dam_dice": "10d10+100",
+            "dam_type": "pierce",
+            "ac_pierce": "-50",
+            "ac_bash": "-50",
+            "ac_slash": "-50",
+            "ac_exotic": "-51",
+            "off_flags": "CEFKNU",
+            "imm_flags": "ABCDEFGHIJKLMNOPQRSTXYZ",
+            "res_flags": "TPKIL",
+            "vuln_flags": "J",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "A",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "20003",
+            "name": "spirit kowenno",
+            "short_description": "spirit of kowenno",
+            "long_description": "Spirit of Kowenno is here.\n",
+            "description": "",
+            "race": "unique",
+            "act": "ABWe",
+            "affected_by": "DFHJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "91",
+            "hitroll": "20",
+            "hit_dice": "10d99+21000",
+            "mana_dice": "10d50+2000",
+            "dam_dice": "10d10+100",
+            "dam_type": "pierce",
+            "ac_pierce": "-50",
+            "ac_bash": "-50",
+            "ac_slash": "-50",
+            "ac_exotic": "-51",
+            "off_flags": "CEFKNU",
+            "imm_flags": "ABCDEFGHIJKLMNOPQRSTXYZ",
+            "res_flags": "TPKIL",
+            "vuln_flags": "J",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "A",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "20004",
+            "name": "spirit kalel",
+            "short_description": "spirit of kalel",
+            "long_description": "Spirit of Kalel is here.\n",
+            "description": "",
+            "race": "unique",
+            "act": "ABWe",
+            "affected_by": "DFHJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "91",
+            "hitroll": "20",
+            "hit_dice": "10d99+21000",
+            "mana_dice": "10d50+2000",
+            "dam_dice": "10d10+100",
+            "dam_type": "pierce",
+            "ac_pierce": "-50",
+            "ac_bash": "-50",
+            "ac_slash": "-50",
+            "ac_exotic": "-51",
+            "off_flags": "CEFKNU",
+            "imm_flags": "ABCDEFGHIJKLMNOPQRSTXYZ",
+            "res_flags": "TPKIL",
+            "vuln_flags": "J",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "A",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "20005",
+            "name": "spirit thenor",
+            "short_description": "spirit of thenor",
+            "long_description": "Spirit of Thenor is here.\n",
+            "description": "",
+            "race": "unique",
+            "act": "ABWe",
+            "affected_by": "DFHJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "91",
+            "hitroll": "20",
+            "hit_dice": "10d99+21000",
+            "mana_dice": "10d50+2000",
+            "dam_dice": "10d10+100",
+            "dam_type": "pierce",
+            "ac_pierce": "-50",
+            "ac_bash": "-50",
+            "ac_slash": "-50",
+            "ac_exotic": "-51",
+            "off_flags": "CEFKNU",
+            "imm_flags": "ABCDEFGHIJKLMNOPQRSTXYZ",
+            "res_flags": "TPKIL",
+            "vuln_flags": "J",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "A",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "20006",
+            "name": "spirit neruda",
+            "short_description": "spirit of neruda",
+            "long_description": "Spirit of Neruda is here.\n",
+            "description": "",
+            "race": "unique",
+            "act": "ABWe",
+            "affected_by": "DFHJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "91",
+            "hitroll": "20",
+            "hit_dice": "10d99+21000",
+            "mana_dice": "10d50+2000",
+            "dam_dice": "10d10+100",
+            "dam_type": "pierce",
+            "ac_pierce": "-50",
+            "ac_bash": "-50",
+            "ac_slash": "-50",
+            "ac_exotic": "-51",
+            "off_flags": "CEFKNU",
+            "imm_flags": "ABCDEFGHIJKLMNOPQRSTXYZ",
+            "res_flags": "TPKIL",
+            "vuln_flags": "J",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "A",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "20007",
+            "name": "spirit coni",
+            "short_description": "spirit of coni",
+            "long_description": "Spirit of Coni is here.\n",
+            "description": "",
+            "race": "unique",
+            "act": "ABWe",
+            "affected_by": "DFHJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "91",
+            "hitroll": "20",
+            "hit_dice": "10d99+21000",
+            "mana_dice": "10d50+2000",
+            "dam_dice": "10d10+100",
+            "dam_type": "pierce",
+            "ac_pierce": "-50",
+            "ac_bash": "-50",
+            "ac_slash": "-50",
+            "ac_exotic": "-51",
+            "off_flags": "CEFKNU",
+            "imm_flags": "ABCDEFGHIJKLMNOPQRSTXYZ",
+            "res_flags": "TPKIL",
+            "vuln_flags": "J",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "A",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "20008",
+            "name": "spirit takasi",
+            "short_description": "spirit of takasi",
+            "long_description": "Spirit of Takasi is here.\n",
+            "description": "",
+            "race": "unique",
+            "act": "ABWe",
+            "affected_by": "DFHJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "91",
+            "hitroll": "20",
+            "hit_dice": "10d99+21000",
+            "mana_dice": "10d50+2000",
+            "dam_dice": "10d10+100",
+            "dam_type": "pierce",
+            "ac_pierce": "-50",
+            "ac_bash": "-50",
+            "ac_slash": "-50",
+            "ac_exotic": "-51",
+            "off_flags": "CEFKNU",
+            "imm_flags": "ABCDEFGHIJKLMNOPQRSTXYZ",
+            "res_flags": "TPKIL",
+            "vuln_flags": "J",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "A",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "20009",
+            "name": "spirit rasputin",
+            "short_description": "spirit of rasputin",
+            "long_description": "Spirit of Rasputin is here.\n",
+            "description": "",
+            "race": "unique",
+            "act": "ABWe",
+            "affected_by": "DFHJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "91",
+            "hitroll": "20",
+            "hit_dice": "10d99+21000",
+            "mana_dice": "10d50+2000",
+            "dam_dice": "10d10+100",
+            "dam_type": "pierce",
+            "ac_pierce": "-50",
+            "ac_bash": "-50",
+            "ac_slash": "-50",
+            "ac_exotic": "-51",
+            "off_flags": "CEFKNU",
+            "imm_flags": "ABCDEFGHIJKLMNOPQRSTXYZ",
+            "res_flags": "TPKIL",
+            "vuln_flags": "J",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "A",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "20000",
+            "name": "Entrance to the sewers",
+            "description": "This is the old sweer system of this cursed prison.Exits are north\nand down.\n",
+            "flags": "DN",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D5",
+                    "description": "Seweers\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20001"
+                }
+            ]
+        },
+        {
+            "vnum": "20001",
+            "name": "Sewers",
+            "description": "This is a dark and teribbly smelling tunnel.You can't see the\nstart and the end of the tunnel.Just the sound comming from the \ncontinuing end of the tunnel.You just feel that there is an exit.If\nyou are wrong? what will happen.A dead end? an exitless maze? or death?\nYou don't know what is whaiting you there, now it't time to go.\n     There is a small tablet on the wall.\n",
+            "flags": "DN",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "It is too dark.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20002"
+                },
+                {
+                    "door": "D4",
+                    "description": "You can'r see properly.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20000"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "-------------------------------------------\n                        WARNING\n    Watch your step in this department.Secret \n    level is 2.Unautorized entrances forbidden.\n    -------------------------------------------\n++++++++++++++++++++++++++++++++++++++++++++++++++++\n{     This area has been designed and edited by    }\n{                  REAL MUDDERS                    }\n{ Area redesigned by Revaler, thanx to everybody   }\n{          helped me testing the area.             }\n++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "20002",
+            "name": "Dark tunnel",
+            "description": "You still feel that terible smell.From where does it come?\nThere is watter ant he floor of tunnel but it't so clear that you can \ndrink it.No it comes from a different place, from walls ? no not from\nwalls.Something frightens you, you should better turn back.\n",
+            "flags": "DNA",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Seweers\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20001"
+                },
+                {
+                    "door": "D1",
+                    "description": "Dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20003"
+                }
+            ]
+        },
+        {
+            "vnum": "20003",
+            "name": "Dark tunnel",
+            "description": "The tunnel is dark and frightining.You still fell that smell and\nhear this meanless sound, what is it ? It sounds like a warning message,\nno no it's different, someone is crying; himm sounds like; but not, well\nbetter walk and find out what the problem is. \n",
+            "flags": "DNA",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20002"
+                },
+                {
+                    "door": "D1",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20004"
+                }
+            ]
+        },
+        {
+            "vnum": "20004",
+            "name": "Dark tunnel",
+            "description": "The tunnel is dark and frightining.You still fell that smell and\nhear this meanless sound, what is it ? It sounds like a warning message,\nno no it's different, someone is crying; himm sounds like; but not, well\nbetter walk and find out what the problem is. \n",
+            "flags": "DNA",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20003"
+                },
+                {
+                    "door": "D0",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20005"
+                }
+            ]
+        },
+        {
+            "vnum": "20005",
+            "name": "Dark tunnel",
+            "description": "The tunnel is dark and frightining.You still fell that smell and\nhear this meanless sound, what is it ? It sounds like a warning message,\nno no it's different, someone is crying; himm sounds like; but not, well\nbetter walk and find out what the problem is. \n",
+            "flags": "DNA",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20004"
+                },
+                {
+                    "door": "D1",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20006"
+                }
+            ]
+        },
+        {
+            "vnum": "20006",
+            "name": "Dark tunnel",
+            "description": "The tunnel is dark and frightining.You still fell that smell and\nhear this meanless sound, what is it ? It sounds like a warning message,\nno no it's different, someone is crying; himm sounds like; but not, well\nbetter walk and find out what the problem is. \n",
+            "flags": "DNA",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20005"
+                },
+                {
+                    "door": "D0",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20007"
+                }
+            ]
+        },
+        {
+            "vnum": "20007",
+            "name": "Dark tunnel",
+            "description": "The tunnel is dark and frightining.You still fell that smell and\nhear this meanless sound, what is it ? It sounds like a warning message,\nno no it's different, someone is crying; himm sounds like; but not, well\nbetter walk and find out what the problem is. \n",
+            "flags": "DNA",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20006"
+                },
+                {
+                    "door": "D0",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20008"
+                }
+            ]
+        },
+        {
+            "vnum": "20008",
+            "name": "Dark tunnel",
+            "description": "The tunnel is dark and frightining.You still fell that smell and\nhear this meanless sound, what is it ? It sounds like a warning message,\nno no it's different, someone is crying; himm sounds like; but not, well\nbetter walk and find out what the problem is. \n",
+            "flags": "DNA",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20007"
+                },
+                {
+                    "door": "D0",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20009"
+                }
+            ]
+        },
+        {
+            "vnum": "20009",
+            "name": "Dark tunnel",
+            "description": "The tunnel is dark and frightining.You still fell that smell and\nhear this meanless sound, what is it ? It sounds like a warning message,\nno no it's different, someone is crying; himm sounds like; but not, well\nbetter walk and find out what the problem is. \n",
+            "flags": "DNA",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20008"
+                },
+                {
+                    "door": "D1",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20010"
+                }
+            ]
+        },
+        {
+            "vnum": "20010",
+            "name": "Dark tunnel",
+            "description": "The tunnel is dark and frightining.You still fell that smell and\nhear this meanless sound, what is it ? It sounds like a warning message,\nno no it's different, someone is crying; himm sounds like; but not, well\nbetter walk and find out what the problem is. \n",
+            "flags": "DNA",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20009"
+                },
+                {
+                    "door": "D1",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20011"
+                }
+            ]
+        },
+        {
+            "vnum": "20011",
+            "name": "Dark tunnel",
+            "description": "The tunnel is dark and frightining.You still fell that smell and\nhear this meanless sound, what is it ? It sounds like a warning message,\nno no it's different, someone is crying; himm sounds like; but not, well\nbetter walk and find out what the problem is. \n",
+            "flags": "DNA",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20010"
+                },
+                {
+                    "door": "D1",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20012"
+                }
+            ]
+        },
+        {
+            "vnum": "20012",
+            "name": "Dark tunnel",
+            "description": "At last you see a light at the end of the tunnel, and the sound\ngot clear.You don't feel that smell anymore.And the sound , you realise\nthat the sound was just the sound of a watterfall.The tunnels made it\nsound like that, himm relaxing sound.\n",
+            "flags": "DNA",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20011"
+                },
+                {
+                    "door": "D0",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20013"
+                }
+            ]
+        },
+        {
+            "vnum": "20013",
+            "name": "Exit of the dark tunnel",
+            "description": "It's brighter now.You can see all around without the help of your\nlight source.It's more clear that the sound is coming from a watterfall.\nBut where is this watterfall?\n",
+            "flags": "DN",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20012"
+                },
+                {
+                    "door": "D1",
+                    "description": "Watterfall.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20014"
+                }
+            ]
+        },
+        {
+            "vnum": "20014",
+            "name": "Watterfall",
+            "description": ".\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n        You have fallen.Luckyly you haven't injured yourself.Wow it was\nreally high.You don't have a chance of climbing up there.Better continue\nyour way, from the river.Himm nice place.Looks like the part of heaven.\nYou hear the sings of birds, makes you relax, and feel wonderfull.This\nplace is full of peace...This is the land of lost spirits.\n",
+            "flags": "0",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "The dark tunnel\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20015"
+                }
+            ]
+        },
+        {
+            "vnum": "20015",
+            "name": "River of spirits",
+            "description": "This is a wonderfull place with full of peace.The river you are on is\nwonderfull.Birds flovers everywhere, and the sound of birds , peaceful\nisn't it?\n",
+            "flags": "0",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "River of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20016"
+                }
+            ]
+        },
+        {
+            "vnum": "20016",
+            "name": "River of spirits",
+            "description": "This is a wonderfull place with full of peace.The river you are on is\nwonderfull.Birds flovers everywhere, and the sound of birds , peaceful\nisn't it?\n",
+            "flags": "0",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "River of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20015"
+                },
+                {
+                    "door": "D1",
+                    "description": "River of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20017"
+                }
+            ]
+        },
+        {
+            "vnum": "20017",
+            "name": "River of spirits",
+            "description": "This is a wonderfull place with full of peace.The river you are on is\nwonderfull.Birds flovers everywhere, and the sound of birds , peaceful\nisn't it?\n",
+            "flags": "0",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "River of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20016"
+                },
+                {
+                    "door": "D1",
+                    "description": "River of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20018"
+                },
+                {
+                    "door": "D2",
+                    "description": "hell road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20037"
+                }
+            ]
+        },
+        {
+            "vnum": "20018",
+            "name": "River of spirits",
+            "description": "This is a wonderfull place with full of peace.The river you are on is\nwonderfull.Birds flovers everywhere, and the sound of birds , peaceful\nisn't it?\n",
+            "flags": "0",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "River of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20017"
+                },
+                {
+                    "door": "D1",
+                    "description": "River of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20019"
+                },
+                {
+                    "door": "D0",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20028"
+                }
+            ]
+        },
+        {
+            "vnum": "20019",
+            "name": "River of spirits",
+            "description": "This is a wonderfull place with full of peace.The river you are on is\nwonderfull.Birds flovers everywhere, and the sound of birds , peaceful\nisn't it?\n",
+            "flags": "0",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "River of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20018"
+                },
+                {
+                    "door": "D1",
+                    "description": "River of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20020"
+                }
+            ]
+        },
+        {
+            "vnum": "20020",
+            "name": "River of spirits",
+            "description": "This is a wonderfull place with full of peace.The river you are on is\nwonderfull.Birds flovers everywhere, and the sound of birds , peaceful\nisn't it?\n",
+            "flags": "0",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "River of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20019"
+                },
+                {
+                    "door": "D1",
+                    "description": "River of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20021"
+                },
+                {
+                    "door": "D2",
+                    "description": "hell road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20040"
+                }
+            ]
+        },
+        {
+            "vnum": "20021",
+            "name": "River of spirits",
+            "description": "This is a wonderfull place with full of peace.The river you are on is\nwonderfull.Birds flovers everywhere, and the sound of birds , peaceful\nisn't it?\n",
+            "flags": "0",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20031"
+                },
+                {
+                    "door": "D3",
+                    "description": "River of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20020"
+                },
+                {
+                    "door": "D1",
+                    "description": "River of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20022"
+                }
+            ]
+        },
+        {
+            "vnum": "20022",
+            "name": "River of spirits",
+            "description": "This is a wonderfull place with full of peace.The river you are on is\nwonderfull.Birds flovers everywhere, and the sound of birds , peaceful\nisn't it?\n",
+            "flags": "0",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "River of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20021"
+                },
+                {
+                    "door": "D1",
+                    "description": "River of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20023"
+                }
+            ]
+        },
+        {
+            "vnum": "20023",
+            "name": "River of spirits",
+            "description": "This is a wonderfull place with full of peace.The river you are on is\nwonderfull.Birds flovers everywhere, and the sound of birds , peaceful\nisn't it?\n",
+            "flags": "0",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20033"
+                },
+                {
+                    "door": "D3",
+                    "description": "River of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20022"
+                },
+                {
+                    "door": "D1",
+                    "description": "River of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20024"
+                }
+            ]
+        },
+        {
+            "vnum": "20024",
+            "name": "River of spirits",
+            "description": "This is a wonderfull place with full of peace.The river you are on is\nwonderfull.Birds flovers everywhere, and the sound of birds , peaceful\nisn't it?\n",
+            "flags": "0",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "River of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20023"
+                },
+                {
+                    "door": "D1",
+                    "description": "ocean of neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20045"
+                }
+            ]
+        },
+        {
+            "vnum": "20025",
+            "name": "Garden road",
+            "description": "This road seems to confinue forever, on one side of the road is river\nand the other side is a beautiful flover garden , birds , trees , flowers\npeace and the spirits, they look happy becouse of being here.Yes you see\ngoodnes because of being good in real life , this must be heaven , or part\nof heaven yes this wonderfull place is part of heaven.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20026"
+                }
+            ]
+        },
+        {
+            "vnum": "20026",
+            "name": "Garden road",
+            "description": "This road seems to confinue forever, on one side of the road is river\nand the other side is a beautiful flover garden , birds , trees , flowers\npeace and the spirits, they look happy becouse of being here.Yes you see\ngoodnes because of being good in real life , this must be heaven , or part\nof heaven yes this wonderfull place is part of heaven.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20025"
+                },
+                {
+                    "door": "D1",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20027"
+                }
+            ]
+        },
+        {
+            "vnum": "20027",
+            "name": "Garden road",
+            "description": "This road seems to confinue forever, on one side of the road is river\nand the other side is a beautiful flover garden , birds , trees , flowers\npeace and the spirits, they look happy becouse of being here.Yes you see\ngoodnes because of being good in real life , this must be heaven , or part\nof heaven yes this wonderfull place is part of heaven.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20026"
+                },
+                {
+                    "door": "D1",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20028"
+                }
+            ]
+        },
+        {
+            "vnum": "20028",
+            "name": "Garden road",
+            "description": "This road seems to confinue forever, on one side of the road is river\nand the other side is a beautiful flover garden , birds , trees , flowers\npeace and the spirits, they look happy becouse of being here.Yes you see\ngoodnes because of being good in real life , this must be heaven , or part\nof heaven yes this wonderfull place is part of heaven.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "river of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20018"
+                },
+                {
+                    "door": "D3",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20027"
+                },
+                {
+                    "door": "D1",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20029"
+                }
+            ]
+        },
+        {
+            "vnum": "20029",
+            "name": "Garden road",
+            "description": "This road seems to confinue forever, on one side of the road is river\nand the other side is a beautiful flover garden , birds , trees , flowers\npeace and the spirits, they look happy becouse of being here.Yes you see\ngoodnes because of being good in real life , this must be heaven , or part\nof heaven yes this wonderfull place is part of heaven.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20028"
+                },
+                {
+                    "door": "D1",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20030"
+                }
+            ]
+        },
+        {
+            "vnum": "20030",
+            "name": "Garden road",
+            "description": "This road seems to confinue forever, on one side of the road is river\nand the other side is a beautiful flover garden , birds , trees , flowers\npeace and the spirits, they look happy becouse of being here.Yes you see\ngoodnes because of being good in real life , this must be heaven , or part\nof heaven yes this wonderfull place is part of heaven.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20029"
+                },
+                {
+                    "door": "D1",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20031"
+                }
+            ]
+        },
+        {
+            "vnum": "20031",
+            "name": "Garden road",
+            "description": "This road seems to confinue forever, on one side of the road is river\nand the other side is a beautiful flover garden , birds , trees , flowers\npeace and the spirits, they look happy becouse of being here.Yes you see\ngoodnes because of being good in real life , this must be heaven , or part\nof heaven yes this wonderfull place is part of heaven.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "river of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20021"
+                },
+                {
+                    "door": "D3",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20030"
+                },
+                {
+                    "door": "D1",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20032"
+                }
+            ]
+        },
+        {
+            "vnum": "20032",
+            "name": "Garden road",
+            "description": "This road seems to confinue forever, on one side of the road is river\nand the other side is a beautiful flover garden , birds , trees , flowers\npeace and the spirits, they look happy becouse of being here.Yes you see\ngoodnes because of being good in real life , this must be heaven , or part\nof heaven yes this wonderfull place is part of heaven.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20031"
+                },
+                {
+                    "door": "D1",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20033"
+                }
+            ]
+        },
+        {
+            "vnum": "20033",
+            "name": "Garden road",
+            "description": "This road seems to confinue forever, on one side of the road is river\nand the other side is a beautiful flover garden , birds , trees , flowers\npeace and the spirits, they look happy becouse of being here.Yes you see\ngoodnes because of being good in real life , this must be heaven , or part\nof heaven yes this wonderfull place is part of heaven.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "river of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20023"
+                },
+                {
+                    "door": "D3",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20032"
+                },
+                {
+                    "door": "D1",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20034"
+                }
+            ]
+        },
+        {
+            "vnum": "20034",
+            "name": "Garden road",
+            "description": "This road seems to confinue forever, on one side of the road is river\nand the other side is a beautiful flover garden , birds , trees , flowers\npeace and the spirits, they look happy becouse of being here.Yes you see\ngoodnes because of being good in real life , this must be heaven , or part\nof heaven yes this wonderfull place is part of heaven.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "garden road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20033"
+                },
+                {
+                    "door": "D1",
+                    "description": "ocean of neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20045"
+                }
+            ]
+        },
+        {
+            "vnum": "20035",
+            "name": "Hell road",
+            "description": "My god.What is this? Tere was no such wiev from looking the river, you\ngot shocked.What happened here , why all the trees burned? Is this a resoult\nof fire?There are also spirits here but they look very unhappy?They see\nbadness becouse of the baddnes they have done in real world.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "hell road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20036"
+                }
+            ]
+        },
+        {
+            "vnum": "20036",
+            "name": "Hell road",
+            "description": "My god.What is this? Here was no such viev from looking the river, you\ngot shocked.What happened here , why all the trees burned? Is this a resoult\nof fire?There are also spirits here but they look very unhappy?They see\nbadness becouse of the baddnes they have done in real world.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "hell road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20035"
+                },
+                {
+                    "door": "D1",
+                    "description": "hell road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20037"
+                }
+            ]
+        },
+        {
+            "vnum": "20037",
+            "name": "Hell road",
+            "description": "My god.What is this? Here was no such viev from looking the river, you\ngot shocked.What happened here , why all the trees burned? Is this a resoult\nof fire?There are also spirits here but they look very unhappy?They see\nbadness becouse of the baddnes they have done in real world.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "river of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20017"
+                },
+                {
+                    "door": "D3",
+                    "description": "hell road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20036"
+                },
+                {
+                    "door": "D1",
+                    "description": "hell road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20038"
+                }
+            ]
+        },
+        {
+            "vnum": "20038",
+            "name": "Hell road",
+            "description": "My god.What is this? Here was no such viev from looking the river, you\ngot shocked.What happened here , why all the trees burned? Is this a resoult\nof fire?There are also spirits here but they look very unhappy?They see\nbadness becouse of the baddnes they have done in real world.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "hell road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20037"
+                },
+                {
+                    "door": "D1",
+                    "description": "hell road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20039"
+                }
+            ]
+        },
+        {
+            "vnum": "20039",
+            "name": "Hell road",
+            "description": "My god.What is this? Here was no such viev from looking the river, you\ngot shocked.What happened here , why all the trees burned? Is this a resoult\nof fire?There are also spirits here but they look very unhappy?They see\nbadness becouse of the baddnes they have done in real world.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "hell road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20038"
+                },
+                {
+                    "door": "D1",
+                    "description": "hell road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20040"
+                }
+            ]
+        },
+        {
+            "vnum": "20040",
+            "name": "Hell road",
+            "description": "My god.What is this? Here was no such viev from looking the river, you\ngot shocked.What happened here , why all the trees burned? Is this a resoult\nof fire?There are also spirits here but they look very unhappy?They see\nbadness becouse of the baddnes they have done in real world.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "river of spirits\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20020"
+                },
+                {
+                    "door": "D3",
+                    "description": "hell road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20039"
+                },
+                {
+                    "door": "D1",
+                    "description": "hell road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20041"
+                }
+            ]
+        },
+        {
+            "vnum": "20041",
+            "name": "Hell road",
+            "description": "My god.What is this? Here was no such viev from looking the river, you\ngot shocked.What happened here , why all the trees burned? Is this a resoult\nof fire?There are also spirits here but they look very unhappy?They see\nbadness becouse of the baddnes they have done in real world.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "hell road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20040"
+                },
+                {
+                    "door": "D1",
+                    "description": "hell road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20042"
+                }
+            ]
+        },
+        {
+            "vnum": "20042",
+            "name": "Hell road",
+            "description": "My god.What is this? Here was no such viev from looking the river, you\ngot shocked.What happened here , why all the trees burned? Is this a resoult\nof fire?There are also spirits here but they look very unhappy?They see\nbadness becouse of the baddnes they have done in real world.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "hell road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20041"
+                },
+                {
+                    "door": "D1",
+                    "description": "hell road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20043"
+                }
+            ]
+        },
+        {
+            "vnum": "20043",
+            "name": "Hell road",
+            "description": "My god.What is this? Here was no such viev from looking the river, you\ngot shocked.What happened here , why all the trees burned? Is this a resoult\nof fire?There are also spirits here but they look very unhappy?They see\nbadness becouse of the baddnes they have done in real world.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "hell road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20042"
+                },
+                {
+                    "door": "D1",
+                    "description": "hell road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20044"
+                }
+            ]
+        },
+        {
+            "vnum": "20044",
+            "name": "Hell road",
+            "description": "My god.What is this? Here was no such viev from looking the river, you\ngot shocked.What happened here , why all the trees burned? Is this a resoult\nof fire?There are also spirits here but they look very unhappy?They see\nbadness becouse of the baddnes they have done in real world.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "hell road\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20043"
+                },
+                {
+                    "door": "D1",
+                    "description": "ocean of neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20045"
+                }
+            ]
+        },
+        {
+            "vnum": "20045",
+            "name": "Ocean of neutrality",
+            "description": "All you see the endless watter , surrounding you!With the whole\nloneless and the balance between evil and good, ugly and beauty, chaos\nand rule, war and peace.This endless ocean makes you think of all these.\nWith no reason you  think about all these .BUT BUT one a sudden howe will\nyou exit from here?\n",
+            "flags": "N",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20055"
+                },
+                {
+                    "door": "D1",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20046"
+                },
+                {
+                    "door": "D2",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20050"
+                },
+                {
+                    "door": "D3",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20024"
+                }
+            ]
+        },
+        {
+            "vnum": "20046",
+            "name": "Ocean of neutrality",
+            "description": "All you see the endless watter , surrounding you!With the whole\nloneless and the balance between evil and good, ugly and beauty, chaos\nand rule, war and peace.This endless ocean makes you think of all these.\nWith no reason you  think about all these .BUT BUT one a sudden howe will\nyou exit from here?\n",
+            "flags": "N",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20056"
+                },
+                {
+                    "door": "D1",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20047"
+                },
+                {
+                    "door": "D2",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20051"
+                },
+                {
+                    "door": "D3",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20045"
+                }
+            ]
+        },
+        {
+            "vnum": "20047",
+            "name": "Ocean of neutrality",
+            "description": "All you see the endless watter , surrounding you!With the whole\nloneless and the balance between evil and good, ugly and beauty, chaos\nand rule, war and peace.This endless ocean makes you think of all these.\nWith no reason you  think about all these .BUT BUT one a sudden howe will\nyou exit from here?\n",
+            "flags": "N",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20057"
+                },
+                {
+                    "door": "D1",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20048"
+                },
+                {
+                    "door": "D2",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20052"
+                },
+                {
+                    "door": "D3",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20046"
+                }
+            ]
+        },
+        {
+            "vnum": "20048",
+            "name": "Ocean of neutrality",
+            "description": "All you see the endless watter , surrounding you!With the whole\nloneless and the balance between evil and good, ugly and beauty, chaos\nand rule, war and peace.This endless ocean makes you think of all these.\nWith no reason you  think about all these .BUT BUT one a sudden howe will\nyou exit from here?\n",
+            "flags": "N",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20058"
+                },
+                {
+                    "door": "D1",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20049"
+                },
+                {
+                    "door": "D2",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20053"
+                },
+                {
+                    "door": "D3",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20047"
+                }
+            ]
+        },
+        {
+            "vnum": "20049",
+            "name": "Ocean of neutrality",
+            "description": "All you see the endless watter , surrounding you!With the whole\nloneless and the balance between evil and good, ugly and beauty, chaos\nand rule, war and peace.This endless ocean makes you think of all these.\nWith no reason you  think about all these .BUT BUT one a sudden howe will\nyou exit from here?\n",
+            "flags": "N",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20059"
+                },
+                {
+                    "door": "D1",
+                    "description": "deep hole\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20060"
+                },
+                {
+                    "door": "D2",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20054"
+                },
+                {
+                    "door": "D3",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20048"
+                }
+            ]
+        },
+        {
+            "vnum": "20050",
+            "name": "Ocean of neutrality",
+            "description": "All you see the endless watter , surrounding you!With the whole\nloneless and the balance between evil and good, ugly and beauty, chaos\nand rule, war and peace.This endless ocean makes you think of all these.\nWith no reason you  think about all these .BUT BUT one a sudden how will\nyou exit from here?\n",
+            "flags": "N",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20045"
+                },
+                {
+                    "door": "D1",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20051"
+                },
+                {
+                    "door": "D2",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20055"
+                },
+                {
+                    "door": "D3",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20054"
+                }
+            ]
+        },
+        {
+            "vnum": "20051",
+            "name": "Ocean of neutrality",
+            "description": "All you see the endless watter , surrounding you!With the whole\nloneless and the balance between evil and good, ugly and beauty, chaos\nand rule, war and peace.This endless ocean makes you think of all these.\nWith no reason you  think about all these .BUT BUT one a sudden howe will\nyou exit from here?\n",
+            "flags": "N",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20046"
+                },
+                {
+                    "door": "D1",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20052"
+                },
+                {
+                    "door": "D2",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20056"
+                },
+                {
+                    "door": "D3",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20050"
+                }
+            ]
+        },
+        {
+            "vnum": "20052",
+            "name": "Ocean of neutrality",
+            "description": "All you see the endless watter , surrounding you!With the whole\nloneless and the balance between evil and good, ugly and beauty, chaos\nand rule, war and peace.This endless ocean makes you think of all these.\nWith no reason you  think about all these .BUT BUT one a sudden howe will\nyou exit from here?\n",
+            "flags": "N",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20047"
+                },
+                {
+                    "door": "D1",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20053"
+                },
+                {
+                    "door": "D2",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20057"
+                },
+                {
+                    "door": "D3",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20051"
+                }
+            ]
+        },
+        {
+            "vnum": "20053",
+            "name": "Ocean of neutrality",
+            "description": "All you see the endless watter , surrounding you!With the whole\nloneless and the balance between evil and good, ugly and beauty, chaos\nand rule, war and peace.This endless ocean makes you think of all these.\nWith no reason you  think about all these .BUT BUT one a sudden howe will\nyou exit from here?\n",
+            "flags": "N",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20048"
+                },
+                {
+                    "door": "D1",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20054"
+                },
+                {
+                    "door": "D2",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20058"
+                },
+                {
+                    "door": "D3",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20052"
+                }
+            ]
+        },
+        {
+            "vnum": "20054",
+            "name": "Ocean of neutrality",
+            "description": "All you see the endless watter , surrounding you!With the whole\nloneless and the balance between evil and good, ugly and beauty, chaos\nand rule, war and peace.This endless ocean makes you think of all these.\nWith no reason you  think about all these .BUT BUT one a sudden howe will\nyou exit from here?\n",
+            "flags": "N",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20049"
+                },
+                {
+                    "door": "D1",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20050"
+                },
+                {
+                    "door": "D2",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20059"
+                },
+                {
+                    "door": "D3",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20053"
+                }
+            ]
+        },
+        {
+            "vnum": "20055",
+            "name": "Ocean of neutrality",
+            "description": "All you see the endless watter , surrounding you!With the whole\nloneless and the balance between evil and good, ugly and beauty, chaos\nand rule, war and peace.This endless ocean makes you think of all these.\nWith no reason you  think about all these .BUT BUT one a sudden howe will\nyou exit from here?\n",
+            "flags": "N",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20050"
+                },
+                {
+                    "door": "D1",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20056"
+                },
+                {
+                    "door": "D2",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20045"
+                },
+                {
+                    "door": "D3",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20059"
+                }
+            ]
+        },
+        {
+            "vnum": "20056",
+            "name": "Ocean of neutrality",
+            "description": "All you see the endless watter , surrounding you!With the whole\nloneless and the balance between evil and good, ugly and beauty, chaos\nand rule, war and peace.This endless ocean makes you think of all these.\nWith no reason you  think about all these .BUT BUT one a sudden howe will\nyou exit from here?\n",
+            "flags": "N",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20051"
+                },
+                {
+                    "door": "D1",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20057"
+                },
+                {
+                    "door": "D2",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20046"
+                },
+                {
+                    "door": "D3",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20055"
+                }
+            ]
+        },
+        {
+            "vnum": "20057",
+            "name": "Ocean of neutrality",
+            "description": "All you see the endless watter , surrounding you!With the whole\nloneless and the balance between evil and good, ugly and beauty, chaos\nand rule, war and peace.This endless ocean makes you think of all these.\nWith no reason you  think about all these .BUT BUT one a sudden howe will\nyou exit from here?\n",
+            "flags": "N",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20052"
+                },
+                {
+                    "door": "D1",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20058"
+                },
+                {
+                    "door": "D2",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20047"
+                },
+                {
+                    "door": "D3",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20056"
+                }
+            ]
+        },
+        {
+            "vnum": "20058",
+            "name": "Ocean of neutrality",
+            "description": "All you see the endless watter , surrounding you!With the whole\nloneless and the balance between evil and good, ugly and beauty, chaos\nand rule, war and peace.This endless ocean makes you think of all these.\nWith no reason you  think about all these .BUT BUT one a sudden howe will\nyou exit from here?\n",
+            "flags": "N",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20053"
+                },
+                {
+                    "door": "D1",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20059"
+                },
+                {
+                    "door": "D2",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20048"
+                },
+                {
+                    "door": "D3",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20057"
+                }
+            ]
+        },
+        {
+            "vnum": "20059",
+            "name": "Ocean of neutrality",
+            "description": "All you see the endless watter , surrounding you!With the whole\nloneless and the balance between evil and good, ugly and beauty, chaos\nand rule, war and peace.This endless ocean makes you think of all these.\nWith no reason you  think about all these .BUT BUT one a sudden howe will\nyou exit from here?\n",
+            "flags": "N",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20054"
+                },
+                {
+                    "door": "D1",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20055"
+                },
+                {
+                    "door": "D3",
+                    "description": "infinet neutrality\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "20058"
+                }
+            ]
+        },
+        {
+            "vnum": "20060",
+            "name": "Deep hole",
+            "description": "You are at the bottom of a deep hole you can see around ,\nyou realise that there is no exit; a place able to keep a powerful \ndragon or its spirit!\n",
+            "flags": "0",
+            "sector": "9"
+        }
+    ],
+    "resets": [
+        {
+            "command": "R",
+            "arg1": "20045",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "20046",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "20047",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "20048",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "20049",
+            "arg2": "3"
+        },
+        {
+            "command": "R",
+            "arg1": "20050",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "20051",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "20052",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "20053",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "20054",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "20055",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "20056",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "20057",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "20058",
+            "arg2": "4"
+        },
+        {
+            "command": "R",
+            "arg1": "20059",
+            "arg2": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "20000",
+            "arg2": "4",
+            "arg3": "20028",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "20010",
+            "arg2": "-1",
+            "arg3": "17"
+        },
+        {
+            "command": "E",
+            "arg1": "20066",
+            "arg2": "-1",
+            "arg3": "14"
+        },
+        {
+            "command": "M",
+            "arg1": "20000",
+            "arg2": "4",
+            "arg3": "20035",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "20010",
+            "arg2": "-1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "20001",
+            "arg2": "4",
+            "arg3": "20037",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "20010",
+            "arg2": "-1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "20001",
+            "arg2": "4",
+            "arg3": "20040",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "20010",
+            "arg2": "-1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "20060",
+            "arg2": "1",
+            "arg3": "20060",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "20002",
+            "arg2": "-1",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "20001",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "20002",
+            "arg2": "1",
+            "arg3": "20035",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "20003",
+            "arg2": "1",
+            "arg3": "20039",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "20004",
+            "arg2": "1",
+            "arg3": "20041",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "20005",
+            "arg2": "1",
+            "arg3": "20025",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "20006",
+            "arg2": "1",
+            "arg3": "20037",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "20007",
+            "arg2": "1",
+            "arg3": "20030",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "20008",
+            "arg2": "1",
+            "arg3": "20032",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "20009",
+            "arg2": "1",
+            "arg3": "20038",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "20014",
+            "arg2": "3",
+            "arg3": "20035",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "20014",
+            "arg2": "3",
+            "arg3": "20045",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "20014",
+            "arg2": "3",
+            "arg3": "20025",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "20015",
+            "arg2": "3",
+            "arg3": "20037",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "20015",
+            "arg2": "3",
+            "arg3": "20047",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "20015",
+            "arg2": "3",
+            "arg3": "20027",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "20016",
+            "arg2": "3",
+            "arg3": "20045",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "20016",
+            "arg2": "3",
+            "arg3": "20031",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "20016",
+            "arg2": "3",
+            "arg3": "20056",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "20017",
+            "arg2": "3",
+            "arg3": "20040",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "20017",
+            "arg2": "3",
+            "arg3": "20021",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "20017",
+            "arg2": "3",
+            "arg3": "20027",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "20018",
+            "arg2": "3",
+            "arg3": "20039",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "20018",
+            "arg2": "3",
+            "arg3": "20036",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "20018",
+            "arg2": "3",
+            "arg3": "20032",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "20019",
+            "arg2": "3",
+            "arg3": "20028",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "20019",
+            "arg2": "3",
+            "arg3": "20032",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "20019",
+            "arg2": "3",
+            "arg3": "20025",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "20080",
+            "arg2": "1",
+            "arg3": "20025",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "20070",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "20071",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "20072",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "20073",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "20074",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "20075",
+            "arg2": "-1"
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "20060",
+            "spec_fun": "spec_cast_mage"
+        },
+        {
+            "vnum": "20080",
+            "spec_fun": "spec_cast_mage"
+        }
+    ],
+    "olimits": [
+        {
+            "vnum": "20001",
+            "limit": "3"
+        },
+        {
+            "vnum": "20066",
+            "limit": "3"
+        }
+    ],
+    "omprogs": [
+        {
+            "command": "O",
+            "vnum": "20066",
+            "progtype": "fight_prog",
+            "progname": "fight_prog_ancient_gloves"
+        },
+        {
+            "command": "O",
+            "vnum": "20066",
+            "progtype": "wear_prog",
+            "progname": "wear_prog_ancient_gloves"
+        },
+        {
+            "command": "O",
+            "vnum": "20066",
+            "progtype": "remove_prog",
+            "progname": "remove_prog_ancient_gloves"
+        }
+    ],
+    "shops": [
+        {
+            "keeper": "20080",
+            "buy_type_0": "2",
+            "buy_type_1": "3",
+            "buy_type_2": "4",
+            "buy_type_3": "10",
+            "buy_type_4": "0",
+            "profit_buy": "105",
+            "profit_sell": "15",
+            "open_hour": "0",
+            "close_hour": "23"
+        }
+    ]
+}

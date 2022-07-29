@@ -1,0 +1,380 @@
+{
+    "area": {
+        "file": "hunter.are",
+        "name": "Hunter",
+        "low_range": "90",
+        "high_range": "100",
+        "writer": "Asena",
+        "credits": "The Palace of Hunters",
+        "min_vnum": "570",
+        "max_vnum": "579"
+    },
+    "mobiles": [
+        {
+            "vnum": "570",
+            "name": "keeper guardian hunter",
+            "short_description": "the guardian",
+            "long_description": "The guardian of Hunter Palace is here, serving his cabal.\n",
+            "description": "After joining so many safaris, the guardian know implements what he\nlearned as guarding this palace for very very much amounts of gold. \n",
+            "race": "human",
+            "act": "ABKWe",
+            "affected_by": "DFHJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "92",
+            "hitroll": "40",
+            "hit_dice": "2d500+25000",
+            "mana_dice": "1d200+600",
+            "dam_dice": "10d35+50",
+            "dam_type": "slash",
+            "ac_pierce": "-77",
+            "ac_bash": "-77",
+            "ac_slash": "-77",
+            "ac_exotic": "-37",
+            "off_flags": "CEFKNU",
+            "imm_flags": "AB",
+            "res_flags": "0",
+            "vuln_flags": "S",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "571",
+            "name": "neutral cleric cabal hunter",
+            "short_description": "the cleric",
+            "long_description": "The true neutral cleric is healing his brothers.\n",
+            "description": "After paying much, this wise cleric delivers his spells to hunters in\norder that hunters can serve Anatolia. Remember that if you lost your\neyed sword than say to him that 'trouble'.\n",
+            "race": "human",
+            "act": "ABQVae",
+            "affected_by": "DFH",
+            "alignment": "1000",
+            "group": "0",
+            "level": "80",
+            "hitroll": "0",
+            "hit_dice": "1d1+21999",
+            "mana_dice": "1d1+999",
+            "dam_dice": "2d4+50",
+            "dam_type": "divine",
+            "ac_pierce": "-75",
+            "ac_bash": "-75",
+            "ac_slash": "-75",
+            "ac_exotic": "-15",
+            "off_flags": "FHIK",
+            "imm_flags": "ABC",
+            "res_flags": "D",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "572",
+            "name": "keeper guardian hunter",
+            "short_description": "the guardian",
+            "long_description": "The guardian of Hunter Palace is here, serving his cabal.\n",
+            "description": "After joining so many safaris, the guardian know implements what he\nlearned as guarding this palace for very very much amounts of gold. \n",
+            "race": "human",
+            "act": "ABKWe",
+            "affected_by": "DFHJVZ",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "92",
+            "hitroll": "40",
+            "hit_dice": "2d500+22000",
+            "mana_dice": "1d200+600",
+            "dam_dice": "5d35+50",
+            "dam_type": "slash",
+            "ac_pierce": "-77",
+            "ac_bash": "-77",
+            "ac_slash": "-77",
+            "ac_exotic": "-32",
+            "off_flags": "CEFKNU",
+            "imm_flags": "AB",
+            "res_flags": "0",
+            "vuln_flags": "S",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "570",
+            "name": "platinum golden altar container",
+            "short_description": "the golden sign",
+            "description": "On the altar you see the sign of hunters with platinum carvings.",
+            "material": "golden",
+            "type": "container",
+            "extra_flags": "CEORY",
+            "wear_flags": "P",
+            "values": "10 15 572 15 100",
+            "level": "60",
+            "weight": "1",
+            "cost": "20",
+            "condition": "P"
+        },
+        {
+            "vnum": "571",
+            "name": "golden tattoo",
+            "short_description": "the golden tattoo",
+            "description": "A small, golden tattoo floats in the air.\n",
+            "material": "golden",
+            "type": "treasure",
+            "extra_flags": "CETO",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "60",
+            "weight": "1",
+            "cost": "10000",
+            "condition": "P"
+        },
+        {
+            "vnum": "572",
+            "name": "gray bone",
+            "short_description": "a gray bone",
+            "description": "An ancient animal's bone is left on the floor here.\n",
+            "material": "bone",
+            "type": "key",
+            "extra_flags": "CEORY",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "40",
+            "weight": "4",
+            "cost": "0",
+            "condition": "P"
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "570",
+            "name": "The Well",
+            "description": "You are standing near a shiny gold well blocked by a big boulder on\nthe well mouth. A golden aura fills your body.\n",
+            "flags": "ACDX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "9783"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "enterance",
+                    "locks": "3",
+                    "key": "-1",
+                    "u1_vnum": "571"
+                }
+            ]
+        },
+        {
+            "vnum": "571",
+            "name": "Bottom of the Well",
+            "description": "This place is dimly lit by a flickering torch from a doorway leading north.\nThe guardians are  keeping the hunters from enemies.\n",
+            "flags": "ACDX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "5",
+                    "key": "-1",
+                    "u1_vnum": "572"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "enterance",
+                    "locks": "3",
+                    "key": "-1",
+                    "u1_vnum": "570"
+                }
+            ]
+        },
+        {
+            "vnum": "572",
+            "name": "Golden chambers",
+            "description": "You are inside well lit chamber, with golden plates on the walls. \nAll three corridors connecting this hall, proves how easy hunters can\nfind their way.\n",
+            "flags": "ADX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "573"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "572"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "571"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "572"
+                }
+            ]
+        },
+        {
+            "vnum": "573",
+            "name": "Main chambers of Hunt",
+            "description": "The room is lit by many shiny gold pieces surrounding the room. On the\nnorth wall is a large skin sheet with blood script on it.\n",
+            "flags": "ADX",
+            "sector": "0",
+            "mana_rate": [
+                "110"
+            ],
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "572"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "571",
+            "arg2": "1",
+            "arg3": "573",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "570",
+            "arg2": "1",
+            "arg3": "571",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "572",
+            "arg2": "1",
+            "arg3": "571",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "572",
+            "arg2": "0",
+            "arg3": "11"
+        },
+        {
+            "command": "O",
+            "arg1": "570",
+            "arg2": "1",
+            "arg3": "573"
+        },
+        {
+            "command": "P",
+            "arg1": "571",
+            "arg2": "1",
+            "arg3": "570",
+            "arg4": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "571",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "570",
+            "arg2": "4",
+            "arg3": "1"
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "570",
+            "spec_fun": "spec_fight_hunter"
+        },
+        {
+            "vnum": "571",
+            "spec_fun": "spec_cast_cabal"
+        },
+        {
+            "vnum": "572",
+            "spec_fun": "spec_fight_hunter"
+        }
+    ],
+    "omprogs": [
+        {
+            "command": "O",
+            "vnum": "571",
+            "progtype": "get_prog",
+            "progname": "get_prog_cabal_item"
+        },
+        {
+            "command": "O",
+            "vnum": "571",
+            "progtype": "sac_prog",
+            "progname": "sac_prog_cabal_item"
+        },
+        {
+            "command": "M",
+            "vnum": "570",
+            "progtype": "greet_prog",
+            "progname": "greet_prog_hunter"
+        },
+        {
+            "command": "M",
+            "vnum": "571",
+            "progtype": "speech_prog",
+            "progname": "speech_prog_hunter_cleric"
+        }
+    ],
+    "practicers": [
+        {
+            "vnum": "570",
+            "practicer": "group_cabal"
+        },
+        {
+            "vnum": "572",
+            "practicer": "group_cabal"
+        }
+    ]
+}

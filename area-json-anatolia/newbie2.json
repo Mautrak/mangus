@@ -1,0 +1,2447 @@
+{
+    "area": {
+        "file": "Newbie Zone",
+        "name": "newbie2.are",
+        "low_range": "1",
+        "high_range": "10",
+        "writer": "Maynard",
+        "credits": "Newbie Zone",
+        "min_vnum": "18600",
+        "max_vnum": "18699"
+    },
+    "helps": [
+        {
+            "level": "-1",
+            "keyword": "'zone newbie'",
+            "text": "Converted to standard Envy 1.x by Jason Huang (god@sure.net)\nFurther conversion to Rom 2.4 by Jaceks and Chicken's Den Staff"
+        }
+    ],
+    "mobiles": [
+        {
+            "vnum": "18601",
+            "name": "pitbeast pit-beast",
+            "short_description": "the pit beast",
+            "long_description": "The big, ugly pit-beast is standing here sizing you up.\n",
+            "description": "Ick... what a disgusting creature!  It is black and green and slimy\nand it is drooling everywhere... looks mean too.\n",
+            "race": "bear",
+            "act": "ABC",
+            "affected_by": "0",
+            "alignment": "-750",
+            "group": "0",
+            "level": "5",
+            "hitroll": "0",
+            "hit_dice": "2d6+60",
+            "mana_dice": "49d1+1",
+            "dam_dice": "1d6+1",
+            "dam_type": "pierce",
+            "ac_pierce": "5",
+            "ac_bash": "5",
+            "ac_slash": "5",
+            "ac_exotic": "9",
+            "off_flags": "B",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "150",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "18602",
+            "name": "newbie monster",
+            "short_description": "the newbie monster",
+            "long_description": "The newbie monster stands here looking confused.  Kill him!  Kill him!\n",
+            "description": "What an odd looking little beast.  He looks harmless, but you never can\ntell.  He is only about 4 feet tall, but he pretty muscular looking...\nmaybe you should ask if he needs help?  Nah... kill him.\n",
+            "race": "school monster",
+            "act": "ABC",
+            "affected_by": "G",
+            "alignment": "0",
+            "group": "0",
+            "level": "2",
+            "hitroll": "0",
+            "hit_dice": "2d7+21",
+            "mana_dice": "19d1+1",
+            "dam_dice": "1d5+0",
+            "dam_type": "scratch",
+            "ac_pierce": "8",
+            "ac_bash": "8",
+            "ac_slash": "8",
+            "ac_exotic": "10",
+            "off_flags": "C",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "120",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "18603",
+            "name": "dragon baby",
+            "short_description": "the baby dragon",
+            "long_description": "Someone's little pet dragon has gotten loose, and is sniffing about here.\n",
+            "description": "Awwww... how cute!  A little baby dragon.  He's about 3 feet long and you\njust want to cuddle him to death... no, you really want to kill him to tell\nthe truth.  But, remember, even a little dragon can be a big problem.\n",
+            "race": "dragon",
+            "act": "AB",
+            "affected_by": "0",
+            "alignment": "100",
+            "group": "0",
+            "level": "4",
+            "hitroll": "0",
+            "hit_dice": "2d7+46",
+            "mana_dice": "39d1+1",
+            "dam_dice": "1d5+1",
+            "dam_type": "grep",
+            "ac_pierce": "6",
+            "ac_bash": "6",
+            "ac_slash": "6",
+            "ac_exotic": "9",
+            "off_flags": "C",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "140",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "18604",
+            "name": "keeper guard monster",
+            "short_description": "the newbie guard",
+            "long_description": "The Newbie Guard is here wondering where that dragon went.\n",
+            "description": "The Guard also had the job of taking care of the Alchemist's pet dragon,\nbut he doesn't seem to be doing a good job of it.  He looks at you and\nsays, 'Have you seen that dragon?  Master will have my head if I don't find\nhim.'\n",
+            "race": "human",
+            "act": "AB",
+            "affected_by": "0",
+            "alignment": "0",
+            "group": "0",
+            "level": "3",
+            "hitroll": "0",
+            "hit_dice": "2d6+35",
+            "mana_dice": "29d1+1",
+            "dam_dice": "1d6+0",
+            "dam_type": "punch",
+            "ac_pierce": "7",
+            "ac_bash": "7",
+            "ac_slash": "7",
+            "ac_exotic": "1",
+            "off_flags": "D",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "130",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "18605",
+            "name": "alchemist newbie",
+            "short_description": "the newbie alchemist",
+            "long_description": "The Newbie Alchemist is here trying to make something.\n",
+            "description": "He is a funny looking, furry little dude.  He looks really busy trying to\nmix up a batch of something or other.\n",
+            "race": "human",
+            "act": "AB",
+            "affected_by": "0",
+            "alignment": "0",
+            "group": "0",
+            "level": "5",
+            "hitroll": "0",
+            "hit_dice": "2d6+60",
+            "mana_dice": "49d1+1",
+            "dam_dice": "1d6+1",
+            "dam_type": "punch",
+            "ac_pierce": "5",
+            "ac_bash": "5",
+            "ac_slash": "5",
+            "ac_exotic": "9",
+            "off_flags": "E",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "150",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "18606",
+            "name": "crawler creepy bug thing",
+            "short_description": "the creepy crawler",
+            "long_description": "A creepy little crawling thing is scuttling along the floor at your feet.\n",
+            "description": "Yuck!  If they'd ever clean this place maybe it wouldn't attract vermin\nlike this disgusting, little, six-legged, brown bug.\n",
+            "race": "snake",
+            "act": "ABFG",
+            "affected_by": "0",
+            "alignment": "-250",
+            "group": "0",
+            "level": "1",
+            "hitroll": "0",
+            "hit_dice": "2d6+8",
+            "mana_dice": "9d1+1",
+            "dam_dice": "1d4+0",
+            "dam_type": "punch",
+            "ac_pierce": "9",
+            "ac_bash": "9",
+            "ac_slash": "9",
+            "ac_exotic": "10",
+            "off_flags": "F",
+            "imm_flags": "AB",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "110",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "18607",
+            "name": "newbie zombie",
+            "short_description": "the zombiefied newbie",
+            "long_description": "A VERY gaunt looking newbie... it looks like a zombie!\n",
+            "description": "This guy has been lost in here too long... it is more zombie than man\nnow.  You would feel sorry for it, but it is moving in to attack!\n",
+            "race": "human",
+            "act": "ACFG",
+            "affected_by": "0",
+            "alignment": "-500",
+            "group": "0",
+            "level": "4",
+            "hitroll": "0",
+            "hit_dice": "2d7+46",
+            "mana_dice": "39d1+1",
+            "dam_dice": "1d5+1",
+            "dam_type": "punch",
+            "ac_pierce": "6",
+            "ac_bash": "6",
+            "ac_slash": "6",
+            "ac_exotic": "9",
+            "off_flags": "G",
+            "imm_flags": "AB",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "140",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "18608",
+            "name": "quasit imp thing",
+            "short_description": "the quasit",
+            "long_description": "A funny little imp-like thing (a quasit perhaps?) is sneaking about here.\n",
+            "description": "Little green, vaguely humoniod shaped creature, with a long pointed tail.\nIt is hard to say because before you ever get a good look at it, it darts\nback into the shadows.\n",
+            "race": "snake",
+            "act": "ACGH",
+            "affected_by": "P",
+            "alignment": "-800",
+            "group": "0",
+            "level": "3",
+            "hitroll": "0",
+            "hit_dice": "2d6+35",
+            "mana_dice": "29d1+1",
+            "dam_dice": "1d6+0",
+            "dam_type": "smash",
+            "ac_pierce": "7",
+            "ac_bash": "7",
+            "ac_slash": "7",
+            "ac_exotic": "10",
+            "off_flags": "H",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "130",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "18609",
+            "name": "minotaur",
+            "short_description": "the massive minotaur",
+            "long_description": "The Great Minotaur is wondering just what you'll taste like.\n",
+            "description": "A massive man, with the head of a bull.  He looks as strong as bull too,\nbut not nearly as smart.  Actually, now that you consider it... he looks\na heck of a lot meaner than any bull you have ever seen... and he is\ncoming this way!\n",
+            "race": "dog",
+            "act": "ABFG",
+            "affected_by": "0",
+            "alignment": "-1000",
+            "group": "0",
+            "level": "7",
+            "hitroll": "0",
+            "hit_dice": "2d6+80",
+            "mana_dice": "69d1+1",
+            "dam_dice": "1d8+1",
+            "dam_type": "blast",
+            "ac_pierce": "4",
+            "ac_bash": "4",
+            "ac_slash": "4",
+            "ac_exotic": "9",
+            "off_flags": "I",
+            "imm_flags": "AB",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "170",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "18610",
+            "name": "spectre ghost",
+            "short_description": "the dark spectre",
+            "long_description": "The dark spectre is lurking in the shadows.\n",
+            "description": "The soul of a long since passed on adventurer... it lurks here waiting for\na chance to bring death to any who cross its path.\n",
+            "race": "water fowl",
+            "act": "ABDFG",
+            "affected_by": "BDT",
+            "alignment": "-850",
+            "group": "0",
+            "level": "6",
+            "hitroll": "0",
+            "hit_dice": "2d7+71",
+            "mana_dice": "59d1+1",
+            "dam_dice": "1d7+0",
+            "dam_type": "bite",
+            "ac_pierce": "4",
+            "ac_bash": "4",
+            "ac_slash": "4",
+            "ac_exotic": "9",
+            "off_flags": "J",
+            "imm_flags": "AB",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "either",
+            "wealth": "140",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "18611",
+            "name": "newbie annoying jerk",
+            "short_description": "the annoying newbie",
+            "long_description": "A newbie is here annoying the hell out of you.\n",
+            "description": "What a jerk!  He won't shut up, and he keeps making the most irritating\ncomments about everything.  Better silence him with cold, tempered steel\nMUHAHAHAHAHAHAHAHAHAHA!\n",
+            "race": "human",
+            "act": "ABC",
+            "affected_by": "FG",
+            "alignment": "-500",
+            "group": "0",
+            "level": "2",
+            "hitroll": "0",
+            "hit_dice": "2d7+21",
+            "mana_dice": "19d1+1",
+            "dam_dice": "1d5+0",
+            "dam_type": "punch",
+            "ac_pierce": "8",
+            "ac_bash": "8",
+            "ac_slash": "8",
+            "ac_exotic": "10",
+            "off_flags": "K",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "120",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "18612",
+            "name": "newbie clueless moron",
+            "short_description": "the clueless newbie",
+            "long_description": "A newbie is here looking terribly confused.\n",
+            "description": "What a moron!  Every question that is answered in the help files, he will\nask and he will probably ask 2 or 3 times too.  This guy just doesn't get\nit, best put him out of his misery.\n",
+            "race": "human",
+            "act": "ABC",
+            "affected_by": "G",
+            "alignment": "0",
+            "group": "0",
+            "level": "1",
+            "hitroll": "0",
+            "hit_dice": "2d6+10",
+            "mana_dice": "9d1+1",
+            "dam_dice": "1d4+0",
+            "dam_type": "punch",
+            "ac_pierce": "9",
+            "ac_bash": "9",
+            "ac_slash": "9",
+            "ac_exotic": "10",
+            "off_flags": "L",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "110",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "18613",
+            "name": "newbie talkative",
+            "short_description": "the talkative newbie",
+            "long_description": "A newbie is here talking a lot.\n",
+            "description": "Well, at least this gal seems pretty cool.  Talks a lot, but she's a\nfriendly, interesting sort.  Seems to have a clue what she's doing also,\nunlike some others you might see.\n",
+            "race": "human",
+            "act": "ABG",
+            "affected_by": "0",
+            "alignment": "100",
+            "group": "0",
+            "level": "3",
+            "hitroll": "0",
+            "hit_dice": "2d6+35",
+            "mana_dice": "29d1+1",
+            "dam_dice": "1d6+0",
+            "dam_type": "punch",
+            "ac_pierce": "7",
+            "ac_bash": "7",
+            "ac_slash": "7",
+            "ac_exotic": "10",
+            "off_flags": "M",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "130",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "18614",
+            "name": "newbie lost",
+            "short_description": "the lost newbie",
+            "long_description": "A newbie is here wandering about aimlessly.\n",
+            "description": "Hmmm... looks like he has been around a while, but he wandered a little\ntoo far from home this time.  Don't think he knows quite where he is,\nmaybe you should help him out?\n",
+            "race": "human",
+            "act": "ACG",
+            "affected_by": "0",
+            "alignment": "300",
+            "group": "0",
+            "level": "4",
+            "hitroll": "0",
+            "hit_dice": "2d7+46",
+            "mana_dice": "39d1+1",
+            "dam_dice": "1d5+1",
+            "dam_type": "punch",
+            "ac_pierce": "6",
+            "ac_bash": "6",
+            "ac_slash": "6",
+            "ac_exotic": "9",
+            "off_flags": "N",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "140",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "18615",
+            "name": "newbie smart",
+            "short_description": "the smart newbie",
+            "long_description": "A newbie is here, and he looks quite sure of himself.\n",
+            "description": "Here is a guy who has it all together.  Nice equipment too, must have read\nthe help files, Eh?\n",
+            "race": "human",
+            "act": "ABC",
+            "affected_by": "G",
+            "alignment": "0",
+            "group": "500",
+            "level": "5",
+            "hitroll": "0",
+            "hit_dice": "2d6+60",
+            "mana_dice": "49d1+1",
+            "dam_dice": "1d6+1",
+            "dam_type": "punch",
+            "ac_pierce": "5",
+            "ac_bash": "5",
+            "ac_slash": "5",
+            "ac_exotic": "9",
+            "off_flags": "IK",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "150",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "18601",
+            "name": "sword newbie",
+            "short_description": "a shiny newbie sword",
+            "description": "A shiny newbie sword is lying here waiting to be possessed.",
+            "material": "steel",
+            "type": "5",
+            "extra_flags": "AG",
+            "wear_flags": "AN",
+            "values": "sword 1 7 thrust 0",
+            "level": "4",
+            "weight": "120",
+            "cost": "200",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "18602",
+            "name": "vest newbie",
+            "short_description": "a bright green newbie vest",
+            "description": "A bright green newbie vest is lying here looking for a body to hug.",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AD",
+            "values": "3 3 4 0 3",
+            "level": "4",
+            "weight": "150",
+            "cost": "250",
+            "condition": "G"
+        },
+        {
+            "vnum": "18603",
+            "name": "helm helmet newbie",
+            "short_description": "a bright newbie helm",
+            "description": "A bright newbie helm is hoping a loose head will wander by.",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "AG",
+            "wear_flags": "AE",
+            "values": "4 4 3 1 1",
+            "level": "4",
+            "weight": "50",
+            "cost": "220",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "5",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "18604",
+            "name": "cloak dark newbie",
+            "short_description": "a dark newbie cloak",
+            "description": "A dark newbie cloak is lying here hoping to smother you.",
+            "material": "wool",
+            "type": "armor",
+            "extra_flags": "AG",
+            "wear_flags": "AK",
+            "values": "3 4 3 1 2",
+            "level": "2",
+            "weight": "100",
+            "cost": "180",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-3"
+                },
+                {
+                    "location": "4",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "18605",
+            "name": "ring signet newbie",
+            "short_description": "a newbie signet ring",
+            "description": "A newbie signet ring is lying in the dust here.",
+            "material": "silver",
+            "type": "armor",
+            "extra_flags": "FG",
+            "wear_flags": "AB",
+            "values": "4 3 3 1 1",
+            "level": "1",
+            "weight": "20",
+            "cost": "200",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-2"
+                }
+            ]
+        },
+        {
+            "vnum": "18606",
+            "name": "dagger newbie",
+            "short_description": "a shiny newbie dagger",
+            "description": "A shiny newbie dagger is lying here looking for a back to stab.",
+            "material": "iron",
+            "type": "weapon",
+            "extra_flags": "AG",
+            "wear_flags": "AN",
+            "values": "dagger 1 7 stab 0",
+            "level": "4",
+            "weight": "50",
+            "cost": "140",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "18607",
+            "name": "collar dragon",
+            "short_description": "a pet dragon collar",
+            "description": "Someone's pet dragon has escaped and left his collar here.",
+            "material": "snakeskin",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AC",
+            "values": "3 3 4 1 1",
+            "level": "4",
+            "weight": "20",
+            "cost": "300",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "1"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "18608",
+            "name": "key newbie",
+            "short_description": "a wee little key",
+            "description": "A key with the newbie crest on it is here.",
+            "material": "steel",
+            "type": "key",
+            "extra_flags": "C",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "1",
+            "weight": "10",
+            "cost": "10",
+            "condition": "G"
+        },
+        {
+            "vnum": "18609",
+            "name": "light jar",
+            "short_description": "a brightly glowing jar",
+            "description": "A jar of glowing fluid wants to brighten your day.",
+            "material": "energy",
+            "type": "light",
+            "extra_flags": "AG",
+            "wear_flags": "A",
+            "values": "0 0 -1 0 0",
+            "level": "2",
+            "weight": "20",
+            "cost": "120",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "24",
+                    "modifier": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "18610",
+            "name": "horns horn",
+            "short_description": "the horns of the minotaur",
+            "description": "The horns of the great Minotaur lie here.",
+            "material": "bone",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AE",
+            "values": "3 4 4 1 1",
+            "level": "6",
+            "weight": "100",
+            "cost": "320",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "18611",
+            "name": "hide skin",
+            "short_description": "the smelly hide of the minotaur",
+            "description": "The hide of the great Minotaur is lying here.",
+            "material": "air",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AK",
+            "values": "5 5 5 0 3",
+            "level": "6",
+            "weight": "190",
+            "cost": "366",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-6"
+                },
+                {
+                    "location": "13",
+                    "modifier": "15"
+                }
+            ]
+        },
+        {
+            "vnum": "18612",
+            "name": "leggings newbie",
+            "short_description": "some cool newbie leggings",
+            "description": "A pair of neat looking leggings are here.",
+            "material": "wool",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AF",
+            "values": "3 3 3 0 1",
+            "level": "4",
+            "weight": "120",
+            "cost": "200",
+            "condition": "G"
+        },
+        {
+            "vnum": "18613",
+            "name": "sleeves newbie",
+            "short_description": "some cool newbie sleeves",
+            "description": "A set of nifty sleeves is here.",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AI",
+            "values": "4 4 3 1 1",
+            "level": "3",
+            "weight": "140",
+            "cost": "275",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "18614",
+            "name": "mace newbie",
+            "short_description": "a glowing newbie mace",
+            "description": "A finely crafted newbie mace is waiting for a worthy owner.",
+            "material": "wood",
+            "type": "weapon",
+            "extra_flags": "AG",
+            "wear_flags": "AN",
+            "values": "mace 1 7 pound 0",
+            "level": "3",
+            "weight": "170",
+            "cost": "245",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-2"
+                }
+            ]
+        },
+        {
+            "vnum": "18615",
+            "name": "orb",
+            "short_description": "a baby dragon orb",
+            "description": "A baby dragon orb lies here.",
+            "material": "quartz",
+            "type": "armor",
+            "extra_flags": "AEGJM",
+            "wear_flags": "AQ",
+            "values": "3 3 3 1 1 ",
+            "level": "3",
+            "weight": "20",
+            "cost": "400",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "3",
+                    "modifier": "1"
+                },
+                {
+                    "location": "4",
+                    "modifier": "1"
+                },
+                {
+                    "location": "2",
+                    "modifier": "1"
+                }
+            ]
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "18600",
+            "name": "The Entrance To The Newbie Zone",
+            "description": "Ahhh... the entrance to the newbie zone!  Just the place you have\nbeen looking for.  Well, when you've readied yourself you can enter\nto the north.\n     There is a small (Glowing) (Huming) tablet.\n",
+            "flags": "C",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "You see the start of the newbie zone.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18601"
+                },
+                {
+                    "door": "D5",
+                    "description": "Back to the school that way... chickening out already?\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5379"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n+                                                                    +\n+   This area has been groked, modified, debugged (?:) and adapted   +\n+        in saturday's night under attack horde of mosquitos         +\n+                            by jaceks                               +\n+                                                            july'96 +\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "18601",
+            "name": "The Beginning Of The Passage",
+            "description": "You find yourself entering a long corridor.  You can hear the sound\nof creatures roaming about, but you can't tell where the sound emanates\nfrom exactly.\n   Exits lead to the east along the hallway, and south back to the entrance.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "More of the hallway there... how exciting!\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18602"
+                },
+                {
+                    "door": "D2",
+                    "description": "The entrance to the newbie zone... how dull\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18600"
+                }
+            ]
+        },
+        {
+            "vnum": "18602",
+            "name": "The Dirty Hallway",
+            "description": "You continue wandering down the hallway.  Nothing much different here,\nbut you are positive you here noises behind the door to the south, and\ncoming from the east.  The walls are a bit slimy and moldy here... yeech,\ncouldn't they hire someone to clean this place?  What will the newbies\nthink?  Oh well, you can continue along the hallway to the east or west.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "More of the hallway there... how exciting!\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18603"
+                },
+                {
+                    "door": "D2",
+                    "description": "A small room lies to the south... you hear something moving about inside.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "18606"
+                },
+                {
+                    "door": "D3",
+                    "description": "More of the hallway there... how exciting!\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18601"
+                }
+            ]
+        },
+        {
+            "vnum": "18603",
+            "name": "A Nexus",
+            "description": "Well... you've reached an intersection of two passages, to the north\nand east, the passage brightens, while the darker hallway continues to\nthe south.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "A brighter hallway leads off that way.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "18644"
+                },
+                {
+                    "door": "D1",
+                    "description": "A brighter hallway leads off that way.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "18646"
+                },
+                {
+                    "door": "D2",
+                    "description": "More of the hallway there... how exciting!\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18607"
+                },
+                {
+                    "door": "D3",
+                    "description": "More of the hallway there... how exciting!\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18602"
+                }
+            ]
+        },
+        {
+            "vnum": "18604",
+            "name": "A Narrow Passage",
+            "description": "The thin passage is plain and undecorated, but still clean.  It\nends abruptly to the south at a small oak door, behind which you here\nmovement...\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "A large domed room.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18647"
+                },
+                {
+                    "door": "D2",
+                    "description": "A small cluttered room.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "18612"
+                }
+            ]
+        },
+        {
+            "vnum": "18605",
+            "name": "The Dark Pit",
+            "description": "Ick... a dark damp dirty pit.  Even worse, what is that dark damp\ndirty thing looking at you from the corner?  Ewww... maybe you should\ngo back up where it is a bit safer, unless you think you can tackle\nthat thing in the corner.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "You see a ladder leading up\n",
+                    "keyword": "grate",
+                    "locks": "1",
+                    "key": "18608",
+                    "u1_vnum": "18606"
+                }
+            ]
+        },
+        {
+            "vnum": "18606",
+            "name": "A Small Room",
+            "description": "Hmmm... this is an interesting little room.  Ack, and there is\nan interesting little creature staring at you too.  He looks a bit\nsurprised at your intrusion.  You can leave via the doors north or\neast, or you can stay and annoy him a bit more.  There also appears\nto be some type of well down here also, but it has a rather secure\ngrate covering it.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "More of the hallway there... how exciting!\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "18602"
+                },
+                {
+                    "door": "D1",
+                    "description": "More of the hallway there... how exciting!\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "18607"
+                },
+                {
+                    "door": "D5",
+                    "description": "A ladder leads down into darkness.\n",
+                    "keyword": "grate",
+                    "locks": "1",
+                    "key": "18608",
+                    "u1_vnum": "18605"
+                }
+            ]
+        },
+        {
+            "vnum": "18607",
+            "name": "More Of The Hallway",
+            "description": "Oh joy!  More of this annoying passage.  Perhaps there is something\nmore exciting through that door to the west?  Or you can keep searching\nthe hallways to the north or south.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "More of the hallway there... how exciting!\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18603"
+                },
+                {
+                    "door": "D2",
+                    "description": "More of the hallway there... how exciting!\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18611"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "18606"
+                }
+            ]
+        },
+        {
+            "vnum": "18608",
+            "name": "An Open Field By The Great Field",
+            "description": "Finally, you are in an open field... it is so nice to breathe fresh air\nagain!  You can return to that dank, smelly place to the east, or take the\nexit to the west which appears to lead into a large field.\n",
+            "flags": "C",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "The end of that darn hallway lies back to the east.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18609"
+                }
+            ]
+        },
+        {
+            "vnum": "18609",
+            "name": "The End Of The Passage",
+            "description": "Ahhh... at last, the end of the hallway... you can exit into open\nair to the west,or return to the east and make sure you didn't miss\nanything.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "More of the hallway there... how exciting!\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18610"
+                },
+                {
+                    "door": "D3",
+                    "description": "An open field near The Great Field of Midgaard can be seen.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18608"
+                }
+            ]
+        },
+        {
+            "vnum": "18610",
+            "name": "A Brighter Hallway",
+            "description": "The hallway continues on in a east-west direction... and it seems to\nbe brightening up to the west.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "A corner in the passage lies to the east.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18611"
+                },
+                {
+                    "door": "D3",
+                    "description": "More of the hallway there... how exciting!\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18609"
+                }
+            ]
+        },
+        {
+            "vnum": "18611",
+            "name": "Another Corner",
+            "description": "Another corner of the passage, and just as untidy as the rest of\nthis place (maybe more so?).  There is a door to the east though...\nwonder where that leads?  Oh, and the hallway continues west and\nnorth.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "More of the hallway there... how exciting!\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18607"
+                },
+                {
+                    "door": "D1",
+                    "description": "You peer into a cluttered little room to the east.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "18612"
+                },
+                {
+                    "door": "D3",
+                    "description": "More of the hallway there... how exciting!\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18610"
+                }
+            ]
+        },
+        {
+            "vnum": "18612",
+            "name": "The Alchemist's Room",
+            "description": "Lots of bottles and flasks lie about this room, but it all looks like\nworthless clutter.  It appears whatever alchemist has been working here\nis really very adept at his art.  There are a lot of formulae and spells\nwritten on the walls too... couldn't he buy some paper?  There is a door\nto the north, and also a dark stairway in the corner leading down, with a\nlarge sign next to it that you probably should read...\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "A nice shiny hallway!\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "18604"
+                },
+                {
+                    "door": "D3",
+                    "description": "A corner in the passage lies to the west.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "18611"
+                },
+                {
+                    "door": "D5",
+                    "description": "A shadowed stairway leading down.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18632"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "sign stairs stairway",
+                    "description": "The sign next to the stairs says:\n\nIf you are below level 7 and alone, or below level 4 then bugger off!\nOr else don't blame me if you die...\n\n"
+                }
+            ]
+        },
+        {
+            "vnum": "18620",
+            "name": "A Turn In The Passage",
+            "description": "This corner is much like all the others... except you see a strange\nglow coming from the south.  Could be an exit... you hope.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "The passage continues east quite a ways.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18621"
+                },
+                {
+                    "door": "D2",
+                    "description": "You see an odd red glow from that direction.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18629"
+                }
+            ]
+        },
+        {
+            "vnum": "18621",
+            "name": "A T-Intersection In The Passage",
+            "description": "This is an intersection of a long east-west passage with a corridor\nleading south.  The air seems a bit clearer here though, as if you were\napproaching an exit.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18622"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18633"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18620"
+                }
+            ]
+        },
+        {
+            "vnum": "18622",
+            "name": "Another Corner",
+            "description": "The passage turns from north to west here.  The walls are still\ncovered with the same disgusting green fungus you have seen all\nalong, and you hear sounds of creatures moving all around you...\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18628"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18621"
+                }
+            ]
+        },
+        {
+            "vnum": "18623",
+            "name": "A Corner In The Hallway",
+            "description": "You can hear creatures moving all around you... and it is not\na comforting sound at all.  The furnishing is nothing to speak of\neither, plain grey brick walls with green fungus (or something)\ngrowing on them.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18624"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18627"
+                }
+            ]
+        },
+        {
+            "vnum": "18624",
+            "name": "Another Turn",
+            "description": "Hmmm... the passage turns south here.  You beginning to realize you\ncan easily lose your bearings if you aren't careful, and you don't think\nyou would like spending too much time here...\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18630"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18623"
+                }
+            ]
+        },
+        {
+            "vnum": "18625",
+            "name": "A Large Room",
+            "description": "The passage opens into a large oval room.  There really isn't much of\ninterest here though.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18626"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18631"
+                }
+            ]
+        },
+        {
+            "vnum": "18626",
+            "name": "A Long East-West Passage",
+            "description": "This is a long, narrow passage leading east and west.  The walls are\ndamp and covered with mildew and fungus.  There is a very unhealthy air\nabout this place and you're beginning to want out of here... soon.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18627"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18625"
+                }
+            ]
+        },
+        {
+            "vnum": "18627",
+            "name": "A Crossing Of Corridors",
+            "description": "Here a narrow east-west passage crosses with a wider passage to the\nnorth and south.  The air is dank, and has an odor of decay and debris.\nNot a nice place at all really...\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18623"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18628"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18632"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18626"
+                }
+            ]
+        },
+        {
+            "vnum": "18628",
+            "name": "A Corner Room",
+            "description": "This room is hardly more than a crossing of passages.  You do sense a\nslight breeze wafting down the passage to the north though, but it smells\naltogether bad...\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18622"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18627"
+                }
+            ]
+        },
+        {
+            "vnum": "18629",
+            "name": "The Red Room",
+            "description": "It takes you a moment to realize that the red glow here is coming\nfrom a round portal on the floor.  It looks almost as if someone had\npainted a picture of a dirt running through a field on the floor of\nthis room.  Oddly enough, it is so realistic you can feel the wind in\nthe field coming out of the picture.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18620"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18630"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "portal floor",
+                    "description": "It looks as if you could go down into it... but you can't be sure of where\nyou will end up, or if you can get back.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "18630",
+            "name": "A Branching Passage",
+            "description": "The north-south passage branches to the east here.  There is a queer red\nglow coming from that way as well, along with a faint breeze.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18624"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18634"
+                },
+                {
+                    "door": "D3",
+                    "description": "A very odd red glow emanates from that direction.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18629"
+                }
+            ]
+        },
+        {
+            "vnum": "18631",
+            "name": "A Passage",
+            "description": "Ick... this place is just disgusting.  You try and stay clear of the\nwalls, but the passage is so narrow you keep bumping them anyway.  You\nare almost convinced that the fungus coating the walls is grabbing at\nyou too.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18625"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18632"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18638"
+                }
+            ]
+        },
+        {
+            "vnum": "18632",
+            "name": "The Entrance",
+            "description": "It is dark, dank, disgusting and cold up here.  Plus you here the\nsounds of creatures all around you... and somehow they don't sound\nfriendly.  It is probably wise to exercise some degree of caution\nhere... no telling what you may run into here.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18627"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18635"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18631"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18612"
+                }
+            ]
+        },
+        {
+            "vnum": "18633",
+            "name": "Another Corner",
+            "description": "Well... what is there to say.  More fungus, more weird sounds, and a\nslight breeze from the north.  Bet you want to sign a lease, don't ya...\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18621"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18634"
+                }
+            ]
+        },
+        {
+            "vnum": "18634",
+            "name": "An Intersection Of Passages",
+            "description": "Cold, smelly, and coated with green fungus... just like last week's\nleft-overs.  Furthermore you want nothing to do with either, you just\nwant out right now.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18630"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18637"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18633"
+                }
+            ]
+        },
+        {
+            "vnum": "18635",
+            "name": "A Turn In The Passage",
+            "description": "This place is just plain nauseating... it certainly smells as if\nsomething (or someone) died in here.  You hope you aren't next, but\nfrom the sounds you hear all around you, it seems as if something has\nother ideas about that.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18632"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18636"
+                }
+            ]
+        },
+        {
+            "vnum": "18636",
+            "name": "A Branch To The South",
+            "description": "The east-west passage branches of to the south here.  All around you\nis the odour of death.  Actually, the mold and fungus on the walls is\ndoing great, but otherwise... well... you don't want to think about what\nelse lives here.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18637"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18639"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18635"
+                }
+            ]
+        },
+        {
+            "vnum": "18637",
+            "name": "Yet Another Corner",
+            "description": "The passage turns here and heads north.  You sense something up ahead\nthat way, but you aren't sure what.  You aren't sure if you want to know\nwhat either at this point.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18634"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18636"
+                }
+            ]
+        },
+        {
+            "vnum": "18638",
+            "name": "A Large Room",
+            "description": "You almost stumble as you enter this room... the sudden feeling of no\nwalls on either side of you makes you a bit nervous.  Suddenly you are\nvulnerable on all sides.  You can't even tell how big a room this is,\nbecause it extends to the east farther than you light will reach...\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18631"
+                },
+                {
+                    "door": "D1",
+                    "description": "The room extends into shadows...\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18639"
+                }
+            ]
+        },
+        {
+            "vnum": "18639",
+            "name": "A Large Room",
+            "description": "As you enter, you light glints of the wall to the east.  There appears\nto be words scrawled on the wall, and a crude picture.  To the west the\nroom extends beyond the reach of your light, and the dark shadows make you\nparanoid... anything could be hiding there.  You are painfully aware of\nhow exposed you are without walls around you.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18636"
+                },
+                {
+                    "door": "D3",
+                    "description": "The room extends as far as (and farther than) you can see...\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18638"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "writing words",
+                    "description": "The writing appears to says 'beware the Minotaur...'\n"
+                },
+                {
+                    "keyword": "wall",
+                    "description": "There is a crude picture of a man with the head of a bull with some writing\nnext to it.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "18640",
+            "name": "The Statue's Room",
+            "description": "Here, the passage enters a small room.  Exits lead to the east and south,\nand you notice a wonderful, large (and tastefully done) statue to the north.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "A long hallway, ending in a set of steps.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18641"
+                },
+                {
+                    "door": "D2",
+                    "description": "The hall extends to the south where it seems to darken somewhat.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18644"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "statue",
+                    "description": "Upon closer inspection you see that the statue has a small plaque affixed\nto it.  The face looks remarkably familiar also.\n"
+                },
+                {
+                    "keyword": "plaque nameplate name",
+                    "description": "It says:\n\nMaynard, Death Jester of the Harlequins\n\n"
+                }
+            ]
+        },
+        {
+            "vnum": "18641",
+            "name": "The Hallway",
+            "description": "As you continue wandering down the hallway, you notice banners,\npictures, and other fine decorations adorning the walls all along\nthis passage.  It seems very different from the dismal passage where\nyou entered.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "The hallway ends at a grand marble staircase.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18642"
+                },
+                {
+                    "door": "D3",
+                    "description": "The passage leads into a small room.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18640"
+                }
+            ]
+        },
+        {
+            "vnum": "18642",
+            "name": "The North Stairs",
+            "description": "Here, the hall opens into a wide room, with a high domed roof.  Now that\nthat you have come clear of the enclosed passage, you can see that the stair\nleads upward to an open air balcony overlooking the area.  To the south the\nroom continues, and another stair is visible matching the one in front of\nyou.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "You see another staircase and two passages leading west and south.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18647"
+                },
+                {
+                    "door": "D3",
+                    "description": "An entrance to a bright passage.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18641"
+                },
+                {
+                    "door": "D4",
+                    "description": "An open air balcony.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18643"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "staircase stair stairs",
+                    "description": "They are constructed of smooth, beautiful marble\n"
+                }
+            ]
+        },
+        {
+            "vnum": "18643",
+            "name": "The Balcony",
+            "description": "Here you can look out and observe the world around.  Constructed in a\nsemi-circle around the dome of the room, the balcony allows you to look\nout in almost any direction.  Wandering to the north end, you can see that\nthe Great Fields north of Midgaard continue off towards the Dragonhelm\nMountains to the north.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "The south end of the balcony.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18645"
+                },
+                {
+                    "door": "D5",
+                    "description": "Down the stairs to a large, domed room.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18642"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "staircase stair stairs",
+                    "description": "They are constructed of smooth, beautiful marble\n"
+                }
+            ]
+        },
+        {
+            "vnum": "18644",
+            "name": "A Bright Hallway",
+            "description": "Wow!  What a change from the dismal passage to the south.  Whoever\nkeeps this room up must really like newbies.  The walls and floor are\nclean, and tastefully decorated.  You also notice an interesting design\non the floor.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "A small room with a statue in it.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18640"
+                },
+                {
+                    "door": "D2",
+                    "description": "A intersection of passages.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "18603"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "floor design",
+                    "description": "It appears to be the Crest of the Harlequin Guild.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "18645",
+            "name": "The Balcony",
+            "description": "Here you can look out and observe the world around.  Constructed in a\nsemi-circle around the dome of the room, the balcony allows you to look out\nin almost any direction.  Wandering to the south end, you can see the great\ncity of Midgaard off to the south-west.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "The north end of the balcony.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18643"
+                },
+                {
+                    "door": "D5",
+                    "description": "Back down the south staircase.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18647"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "staircase stair stairs",
+                    "description": "They are constructed of smooth, beautiful marble.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "18646",
+            "name": "A Bright Hallway",
+            "description": "Wow!  What a change from the dismal passage to the west.  Whoever keeps\nthis  room up must really like newbies.  The walls and floor are clean, and\ntastefully decorated.  You also notice an interesting design on the floor.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "The passage opens into a domed room with a grand marble staircase.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18647"
+                },
+                {
+                    "door": "D3",
+                    "description": "A dark intersection of passages.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "18603"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "floor design",
+                    "description": "It appears to be the crest of the Harlequin Guild.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "18647",
+            "name": "The South Stairs",
+            "description": "Here, the hall opens into a wide room, with a high domed roof.  Now that\nthat you have come clear of the enclosed passage, you can see that the stair\nleads upward to an open air balcony overlooking the area.  to the north the\nroom continues, and another stair is visible matching the one in front of\nyou.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Another stairway is to the north, as well as a passage to the west.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18642"
+                },
+                {
+                    "door": "D2",
+                    "description": "A narrow passage to the south, ending in a wood door.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18604"
+                },
+                {
+                    "door": "D3",
+                    "description": "Back down the bright hallway.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18646"
+                },
+                {
+                    "door": "D4",
+                    "description": "An open air balcony.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18645"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "staircase stair stairs",
+                    "description": "They are constructed of smooth, beautiful marble.\n"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "18601",
+            "arg2": "1",
+            "arg3": "18605",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "18604",
+            "arg2": "50",
+            "arg3": "12"
+        },
+        {
+            "command": "M",
+            "arg1": "18602",
+            "arg2": "3",
+            "arg3": "18600",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "18602",
+            "arg2": "99",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "18602",
+            "arg2": "3",
+            "arg3": "18607",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "18606",
+            "arg2": "99",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "18611",
+            "arg2": "1",
+            "arg3": "18646",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "18606",
+            "arg2": "99",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "18612",
+            "arg2": "1",
+            "arg3": "18642",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "18613",
+            "arg2": "1",
+            "arg3": "18640",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "18602",
+            "arg2": "99",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "18614",
+            "arg2": "1",
+            "arg3": "18604",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "18615",
+            "arg2": "1",
+            "arg3": "18645",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "18613",
+            "arg2": "99",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "18612",
+            "arg2": "99",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "18602",
+            "arg2": "99",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "18614",
+            "arg2": "30",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "18603",
+            "arg2": "1",
+            "arg3": "18602",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "18607",
+            "arg2": "99",
+            "arg3": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "18615",
+            "arg2": "100",
+            "arg3": "18"
+        },
+        {
+            "command": "M",
+            "arg1": "18604",
+            "arg2": "1",
+            "arg3": "18606",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "18605",
+            "arg2": "60",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "18603",
+            "arg2": "30",
+            "arg3": "6"
+        },
+        {
+            "command": "G",
+            "arg1": "18608",
+            "arg2": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "18605",
+            "arg2": "1",
+            "arg3": "18612",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "18609",
+            "arg2": "50",
+            "arg3": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "18609",
+            "arg2": "50"
+        },
+        {
+            "command": "M",
+            "arg1": "18606",
+            "arg2": "4",
+            "arg3": "18602",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "18606",
+            "arg2": "4",
+            "arg3": "18606",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "18606",
+            "arg2": "4",
+            "arg3": "18609",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "18607",
+            "arg2": "5",
+            "arg3": "18620",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "18607",
+            "arg2": "5",
+            "arg3": "18624",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "18607",
+            "arg2": "5",
+            "arg3": "18637",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "18607",
+            "arg2": "5",
+            "arg3": "18633",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "18608",
+            "arg2": "5",
+            "arg3": "18627",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "18608",
+            "arg2": "5",
+            "arg3": "18636",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "18608",
+            "arg2": "5",
+            "arg3": "18638",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "18608",
+            "arg2": "5",
+            "arg3": "18621",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "18609",
+            "arg2": "1",
+            "arg3": "18629",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "18610",
+            "arg2": "50",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "18611",
+            "arg2": "50",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "18610",
+            "arg2": "1",
+            "arg3": "18639",
+            "arg4": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "18602",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "18606",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "18603",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "18644",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "18603",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "18646",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "18604",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "18612",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "18606",
+            "arg2": "5",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "18605",
+            "arg2": "4",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "18607",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "18606",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "18611",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "18612",
+            "arg2": "3",
+            "arg3": "1"
+        }
+    ]
+}

@@ -1,0 +1,3700 @@
+{
+    "area": {
+        "file": "antharia.are",
+        "name": "Ýngilizce",
+        "low_range": "9",
+        "high_range": "42",
+        "min_vnum": "12300",
+        "max_vnum": "12400",
+        "path": "Eski Selenge PY'den 6d 4g a",
+        "yonelim_iyi": "45",
+        "yonelim_yansiz": "35",
+        "yonelim_kem": "20"
+    },
+    "helps": [
+        {
+            "level": "100",
+            "keyword": "ANTHARIA_CREDITS",
+            "text": ".\n    I give full permission of this area to be used under the condition that\nnothing be removed or changed in this area, except bit flags.\n    This area was designed to be the intial starting point of a race of\nunderwater beings that had a complex history and culture.  You will find\nthat, if you go through the room descriptions carefully, there are many\nplaces that you could add to this area.  For example, antharia.are tells\nand hints of a great temple; therefore, you could write a temple area to\nbe connected to this area using the history below and the knowledge of\nthe area rooms, etc.   Other possible area ideas based on antharia.are\nwould be: a zoo including some interesting creatures that antharias had\nkept from the time of their submersion to animals that they have\nencountered under the water (which you will find a great connection point\nfor), a temple area (explained above), or Grand Antharia which you will\nsee MANY hints about in the area file itself.  In other words, I believe\nthis area could help many builders with new and creative ways to add to\ntheir muds.\n\n     I do ask that you inform me if you use this area, and if you write\nany more areas that use the idea of Antharia.\n------------------\nCurrent Email:  reece@tinuviel.cs.wcu.edu\nCurrent muds:  Barren Realms:  dogwood.liii.com 8000\n               Evermore MUD :  204.215.32.27 4000\nCurrent BBSs:  ISCA:           bbs.isca.uiowa.edu  (name: Bugle Boy)\n\n\nThanks,\nAmadeus\n"
+        },
+        {
+            "level": "0",
+            "keyword": "ANTHARIA",
+            "text": "This is taken from the latest edition of the Barren Realms High\nSchool History textbook..\n\n        The kingdom of Antharia, one the new discoveries of the modern\nworld, has a very intestesting history.  Being one of the oldest races\nof beings in existence, they have much knowledge that we do not, and\nmuch knowledge that they no longer posess.  We can see this more\nclearly by studing a bit of the history of the capital city, Antharia.\n        About a thousand years ago, Antharia was a very productive and\nthriving kingdom, so old that many problems that face most kingdoms\nhad been solved.  The Realm was ruled by what they called a\nconstitutional monarchy.  They had a king, who worked as a figurehead\nand public leader.  However, the true working laws and policies were\ndictated by a two councils:  The High council of Wizards, and the Holy\nOrder of Priests.  These two groups worked very well together, and\nmade Antharia one of the best places to live. It was these councils\nwho made the discovery that would change the lives of every Antharian.\n        It was discovered that there was going to be a major upheaval\nof the world's outer crust, which would make the whole country of\nAntharia, which was actually a big island, in essense, sink into the ocean.\nFearing for the lives of their citizens, the councils worked quickly\nto come up with a solution to the disaster.\n        After many months of searching, it was decided that there was\nonly solution:  the wizards would have to combine their power to\ncreate a \"Gem of Salvation\".  This gem would, in essense, keep the\nwhole city of Antharia with air, even underwater -- a dome, if you\nwill.  However, this also forced the government to make the decisions\nof who would be able to live and who would die...the city could only\nhold so many people.\n\n        The Antharians are very hesistant to talk about this time in\ntheir history.  Understandbly, it was very hard to make those\ndecisions; therefore, much of the next few decades are lost to us.\nHowever, there was to be an even more dramatic change in the lives of\nthe Antharians.\n\n        As the Antharians were getting used to living in an underwater\ncity, the council of wizards made another discovery which almost cost\nus the culture of Antharia forever.  The gem was working, but getting\nweaker with every day.  Not anticipating this, the wizards again\nstarted looking for solutions to this problem.  With the help of the\npriests of Anthar the wizards came up with the solution that created\nthe Antharian people that we know today.\n        They had decided that the only way of saving their people was\nto transform themselves into Creatures that could breathe water.\nHowever, this process took the powers of all the wizards of Antharia,\nand that meant that none of the wizards could be transformed.  Knowing\nthat this was the only hope for their people, the wizards made this\nsacrifice.  The Day of Transformation is still celebrated as a holiday\nto this day -- and the wizards who gave up their lives are revered in\nloving memory.\n\n        We are lucky that these wizards took time to teach their\nstudents the way to take care of the Gem.  It was altered to simply\nprovide stable gravity and protection from preditors and falling\ndebris.  The gem is still functioning to this day.\n"
+        }
+    ],
+    "mobiles": [
+        {
+            "vnum": "12300",
+            "name": "Antharian Peace Guard",
+            "short_description": "an Antharian Peace Guard",
+            "long_description": "An Antharian Peace guard is watching you here.\n",
+            "description": "A tall Antharian is standing before you.  You have no doubt that this\nbeing can keep the peace...his presence is enough in itself.\n",
+            "race": "human",
+            "act": "AGT",
+            "affected_by": "0",
+            "level": "25"
+        },
+        {
+            "vnum": "12302",
+            "name": "Suretin",
+            "short_description": "Suretin",
+            "long_description": "Suretin, a healer-priest of Anthar, is here.\n",
+            "description": "You see an older Antharian, not too old, just old enough to command\nyour respect.  He is here healing people in the name of Anthar, the\ngod of the Antharians.\n",
+            "race": "human",
+            "act": "AQ",
+            "affected_by": "0",
+            "level": "35"
+        },
+        {
+            "vnum": "12344",
+            "name": "Ertuvia",
+            "short_description": "Ertuvia",
+            "long_description": "Ertuvia is here, a master of the Antharian weapons of war.\n",
+            "description": "You see a tall, strong Antharian, with a presence that even seems\nheavy compared to the other Antharians.  In this society, weaponsmiths\nare artists of war, and he looks like he could paint a very clear\nportrait of death.\n",
+            "race": "human",
+            "act": "ABT",
+            "affected_by": "0",
+            "level": "32"
+        },
+        {
+            "vnum": "12345",
+            "name": "Heaustf",
+            "short_description": "Heaustf",
+            "long_description": "Heaustf, the maker of fine Antharian armor, is here.\n",
+            "description": "Here stands an Antharian who seems to know more than you could ever\ndream.  In Antharian society, the art of making fine armor has been\npassed from generation to generation.  The secret is well kept, and\nrightly so -- for their's is the best.\n",
+            "race": "human",
+            "act": "2|524288",
+            "affected_by": "0",
+            "level": "70"
+        },
+        {
+            "vnum": "12341",
+            "name": "Irghum",
+            "short_description": "Irghum",
+            "long_description": "Irghum is here fixing fine Antharian foods.\n",
+            "description": "You see a smiling Antharian, whose sole purpose in life is to make and\nsell Antharian food.  He is highly respected, as producing good food\nin this underwater world is not easy.\n",
+            "race": "human",
+            "act": "2",
+            "affected_by": "0",
+            "level": "70"
+        },
+        {
+            "vnum": "12348",
+            "name": "Cyrtpea",
+            "short_description": "Cyrtpea",
+            "long_description": "Cyrtpea, sorceress of Antharia, is here staring into your soul.\n",
+            "description": "Cyrtpea is one of the few Antharians that still have any knowledge of\nAntharian magic.  Most of their magic was lost in the Great\nTransformation, and Cyrtpea and her colleages work hard to recover as\nmuch of this lost magic as possible.\n",
+            "race": "human",
+            "act": "2|1048576",
+            "affected_by": "8192",
+            "level": "65"
+        },
+        {
+            "vnum": "12340",
+            "name": "Zaertses",
+            "short_description": "Zaertses",
+            "long_description": "Zaertses is here trying to sell you an old Antharian relic.\n",
+            "description": "Zaertses spends most of his life trying to collect and restore old and\npowerful Antharian relics.  Of these, he will sell some, and keep the\nothers for himself.  He also donates some relics to the Antharian\ncouncils, which are said to be displayed in a museum inside the\nTemple.\n",
+            "race": "human",
+            "act": "2",
+            "affected_by": "0",
+            "level": "70"
+        },
+        {
+            "vnum": "12323",
+            "name": "High Guard",
+            "short_description": "High Guard of Antharia",
+            "long_description": "A High Guard of Antharia is here.\n",
+            "description": "Having been promoted to High Guard, these guards are even more\npowerful and impressive than the Peace Guards.  These guards are here\nto make sure that law and order is maintained, and so it shall.\n",
+            "race": "human",
+            "act": "1|64",
+            "affected_by": "8",
+            "level": "32"
+        },
+        {
+            "vnum": "12303",
+            "name": "Sucker fish",
+            "short_description": "a sucker fish",
+            "long_description": "A sucker fish is here keeping the streets clean.\n",
+            "description": "These sucker fish have been trained and domesticated to roam the\nstreets of Antharia and keep them clean.  They seem to like it and the\nAntharians seem to like it.  All in all, these fish are pretty\ncontent.\n",
+            "race": "human",
+            "act": "1|4|64",
+            "affected_by": "0",
+            "level": "10"
+        },
+        {
+            "vnum": "12309",
+            "name": "Antharian citizen",
+            "short_description": "an Antharian citizen",
+            "long_description": "An Antharian citizen is standing here.\n",
+            "description": "All Antharians share a standard trait: curiosity.  Instead of being\nfrightened of you, a foreigner, the Antharian will study you --\nlooking at every detail.\n   This Antharian seems to be a simple citizen, going about on his\ndaily schedule.\n",
+            "race": "human",
+            "act": "1|64",
+            "affected_by": "0",
+            "level": "15"
+        },
+        {
+            "vnum": "12310",
+            "name": "Antharian citizen",
+            "short_description": "an Antharian citizen",
+            "long_description": "An Antharian citizen is standing here.\n",
+            "description": "All Antharians share a standard trait: curiosity.  Instead of\nbeing frightened of you, a foriegner, the Antharian will study you --\nlooking at every detail.\n    This Antharian seems to be a simple citizen, going about with her\ndaily schedule.\n",
+            "race": "human",
+            "act": "1|64",
+            "affected_by": "0",
+            "level": "16"
+        },
+        {
+            "vnum": "12314",
+            "name": "Antharian child",
+            "short_description": "an Antharian child",
+            "long_description": "An Antharian child is playing here.\n",
+            "description": "Like children of any race, these Antharian children's sole interest\nright now in life is play.  PLAY PLAY PLAY!   They try to drag you\ninto the fray to play with them.\n",
+            "race": "human",
+            "act": "1|64",
+            "affected_by": "0",
+            "level": "9"
+        },
+        {
+            "vnum": "12315",
+            "name": "Antharian child",
+            "short_description": "an Antharian child",
+            "long_description": "An Antharian child is playing here.\n",
+            "description": "Like children of any race, the sole interest in these children's\nmind right now is play.  PLAY PLAY PLAY!  They try to drag you into\ntheir games.\n",
+            "race": "human",
+            "act": "1",
+            "affected_by": "0",
+            "level": "9"
+        },
+        {
+            "vnum": "12318",
+            "name": "Antharian Knight",
+            "short_description": "an Antharian Knight",
+            "long_description": "An Antharian knight is here.\n",
+            "description": "These Antharians are impressive.  The only information that\nnon-Antharians have of the knights are that they are very good, and\nvery mysterious.   It is said that they are knighted in a very intense\nceremony in the Temple of Anthar.\n",
+            "race": "human",
+            "act": "1",
+            "affected_by": "0",
+            "level": "42"
+        },
+        {
+            "vnum": "12360",
+            "name": "Human Representative",
+            "short_description": "a human representative",
+            "long_description": "A human representative is standing here.\n",
+            "description": "A young human is here looking at you.  She is the representative\nfrom the human race here in Antharia.\n",
+            "race": "human",
+            "act": "2|32768",
+            "affected_by": "0",
+            "level": "40"
+        },
+        {
+            "vnum": "12365",
+            "name": "Dwarven Representative",
+            "short_description": "a dwarven representative",
+            "long_description": "A dwarven representative is standing here.\n",
+            "description": "A young Dwarf is here looking at you.  He is the representative\nfrom the Dwarven race here in Antharia.\n",
+            "race": "dwarf",
+            "act": "2|65536",
+            "affected_by": "0",
+            "level": "40"
+        },
+        {
+            "vnum": "12364",
+            "name": "Çora Representative",
+            "short_description": "an Çora representative",
+            "long_description": "An Çora representative is standing here.\n",
+            "description": "A young çora is here looking at you.  She is the representative from\nthe çora race here in Antharia.\n",
+            "race": "çora",
+            "act": "2|1024",
+            "affected_by": "0",
+            "level": "40"
+        },
+        {
+            "vnum": "12361",
+            "name": "Druidic Representative",
+            "short_description": "a druidic representative",
+            "long_description": "A representative from the druids is standing here.\n",
+            "description": "A young druid is here looking at you.   He is the representative\nfrom the druids here in Antharia.\n",
+            "race": "human",
+            "act": "2|8192",
+            "affected_by": "0",
+            "level": "40"
+        },
+        {
+            "vnum": "12362",
+            "name": "Kender Representative",
+            "short_description": "a kender representative",
+            "long_description": "A kender representative is standing here.\n",
+            "description": "A young Kender is standing here looking at you.  She is the\nrepresentative from the Kender race here in Antharia.\n",
+            "race": "human",
+            "act": "2|16384",
+            "affected_by": "0",
+            "level": "40"
+        },
+        {
+            "vnum": "12363",
+            "name": "Antharian Representative",
+            "short_description": "an antharian representative",
+            "long_description": "An atharian beaurocrat is standing here.\n",
+            "description": "A young Antharian is standing here looking for you.  He is the\nrepresentative from the Antharian government here to answer questions\nfrom visitors.\n",
+            "race": "human",
+            "act": "2",
+            "affected_by": "0",
+            "level": "40"
+        },
+        {
+            "vnum": "12370",
+            "name": "illithid Representative",
+            "short_description": "an illithid representative",
+            "long_description": "An illithid representative is standing here.\n",
+            "description": "A young Illithid is standing here looking at you.  She is the\nrepresentative from the Illithid race here in Antharia.\n",
+            "race": "human",
+            "act": "2|16",
+            "affected_by": "0",
+            "level": "40"
+        },
+        {
+            "vnum": "12371",
+            "name": "avian Representative",
+            "short_description": "an avian representative",
+            "long_description": "An avian representative is standing here.\n",
+            "description": "A young avian is standing here looking at you.  She is the\nrepresentative from the avian race here in Antharia.\n",
+            "race": "human",
+            "act": "2|16777216",
+            "affected_by": "0",
+            "level": "40"
+        }
+    ],
+    "old_objects": [
+        {
+            "vnum": "12300",
+            "name": "mother pearl",
+            "short_description": "mother of pearl",
+            "description": "A Mother of Pearl is shining here.",
+            "type": "9",
+            "extra_flags": "64",
+            "wear_flags": "1|16384",
+            "values": "8 0 0 0",
+            "weight": "10",
+            "cost": "4000",
+            "affects_a": [
+                {
+                    "location": "5",
+                    "modifier": "3"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-20"
+                }
+            ]
+        },
+        {
+            "vnum": "12301",
+            "name": "green gem",
+            "short_description": "a green gem",
+            "description": "A green gem is here.",
+            "type": "9",
+            "extra_flags": "256",
+            "wear_flags": "1|16384",
+            "values": "8 0 0 0",
+            "weight": "10",
+            "cost": "4000",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "1"
+                },
+                {
+                    "location": "1",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "12302",
+            "name": "sea shell armor",
+            "short_description": "a sea turtle shell",
+            "description": "A shell from a sea turtle works as a nice piece of armor.",
+            "type": "9",
+            "extra_flags": "2",
+            "wear_flags": "1|8",
+            "values": "8 0 0 0",
+            "weight": "10",
+            "cost": "4000",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-20"
+                },
+                {
+                    "location": "18",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "12303",
+            "name": "giant clamshell",
+            "short_description": "a giant clamshell",
+            "description": "This is a giant clamshell used to store things.",
+            "type": "15",
+            "extra_flags": "1",
+            "wear_flags": "1|16384",
+            "values": "8 1 0 0",
+            "weight": "20",
+            "cost": "4000"
+        },
+        {
+            "vnum": "12304",
+            "name": "Antharian Signet ring",
+            "short_description": "an Antharian signet ring",
+            "description": "This is an Antharian Signet ring, worn by all defenders of Antharia.",
+            "type": "9",
+            "extra_flags": "1",
+            "wear_flags": "1|2",
+            "values": "8 0 0 0",
+            "weight": "5",
+            "cost": "5000",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-5"
+                }
+            ]
+        },
+        {
+            "vnum": "12305",
+            "name": "Antharian Signet ring",
+            "short_description": "an Antharian signet ring",
+            "description": "This is an Antharian Signet ring, worn by all defenders of Antharia.",
+            "type": "28",
+            "extra_flags": "1|32768",
+            "wear_flags": "1|2",
+            "values": "8 0 0 0",
+            "weight": "5",
+            "cost": "5000",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-10"
+                }
+            ]
+        },
+        {
+            "vnum": "12306",
+            "name": "Antharian Signet ring",
+            "short_description": "an Antharian signet ring",
+            "description": "This is an Antharian Signet ring, worn by all defenders of Antharia.",
+            "type": "28",
+            "extra_flags": "1|32768",
+            "wear_flags": "1|2",
+            "values": "8 0 0 0",
+            "weight": "5",
+            "cost": "1000",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-20"
+                },
+                {
+                    "location": "9",
+                    "modifier": "-10"
+                },
+                {
+                    "location": "12",
+                    "modifier": "10"
+                }
+            ]
+        },
+        {
+            "vnum": "12307",
+            "name": "Antharian plate mail",
+            "short_description": "Antharian plate mail",
+            "description": "This is a piece of fine Antharian plate mail.",
+            "type": "9",
+            "extra_flags": "32|4096",
+            "wear_flags": "1|8",
+            "values": "8 0 0 0",
+            "weight": "50",
+            "cost": "1000",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "1"
+                },
+                {
+                    "location": "14",
+                    "modifier": "40"
+                },
+                {
+                    "location": "18",
+                    "modifier": "1"
+                },
+                {
+                    "location": "19",
+                    "modifier": "1"
+                },
+                {
+                    "location": "6",
+                    "modifier": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "12308",
+            "name": "Antharian plate mail",
+            "short_description": "Antharian plate mail",
+            "description": "A fine piece of Antharian plate mail is here.",
+            "type": "9",
+            "extra_flags": "32|4096",
+            "wear_flags": "1|8",
+            "values": "8 0 0 0",
+            "weight": "50",
+            "cost": "1000",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "1"
+                },
+                {
+                    "location": "18",
+                    "modifier": "2"
+                },
+                {
+                    "location": "14",
+                    "modifier": "40"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-10"
+                }
+            ]
+        },
+        {
+            "vnum": "12309",
+            "name": "Antharian plate mail",
+            "short_description": "Antharian plate mail",
+            "description": "A fine piece of Antharian plate mail is here.",
+            "type": "9",
+            "extra_flags": "1024",
+            "wear_flags": "1|8",
+            "values": "8 0 0 0",
+            "weight": "50",
+            "cost": "5000",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "1"
+                },
+                {
+                    "location": "19",
+                    "modifier": "2"
+                },
+                {
+                    "location": "6",
+                    "modifier": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "12310",
+            "name": "synthetic fin",
+            "short_description": "a pair of synthetic fins",
+            "description": "A pair of fins, of Antharian make, are here.",
+            "type": "9",
+            "extra_flags": "256",
+            "wear_flags": "1|32",
+            "values": "8 0 0 0",
+            "weight": "15",
+            "cost": "1000",
+            "affects_a": [
+                {
+                    "location": "14",
+                    "modifier": "150"
+                }
+            ]
+        },
+        {
+            "vnum": "12311",
+            "name": "synthetic fin",
+            "short_description": "a pair of synthetic fins",
+            "description": "A pair of fins, of Antharian make, are here.",
+            "type": "9",
+            "extra_flags": "256",
+            "wear_flags": "1|32",
+            "values": "8 0 0 0",
+            "weight": "15",
+            "cost": "1000",
+            "affects_a": [
+                {
+                    "location": "14",
+                    "modifier": "200"
+                }
+            ]
+        },
+        {
+            "vnum": "12312",
+            "name": "synthetic fin",
+            "short_description": "a apir of synthetic fins",
+            "description": "A pair of fins, of Antharian make, are here.",
+            "type": "9",
+            "extra_flags": "256",
+            "wear_flags": "1|32",
+            "values": "8 0 0 0",
+            "weight": "15",
+            "cost": "1000",
+            "affects_a": [
+                {
+                    "location": "14",
+                    "modifier": "250"
+                }
+            ]
+        },
+        {
+            "vnum": "12313",
+            "name": "Antharian helmet",
+            "short_description": "an Antharian helmet",
+            "description": "A helmet made of Antharian metals is here.",
+            "type": "9",
+            "extra_flags": "1",
+            "wear_flags": "1|16",
+            "values": "8 0 0 0",
+            "weight": "15",
+            "cost": "1000",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "20"
+                }
+            ]
+        },
+        {
+            "vnum": "12314",
+            "name": "Antharian helmet",
+            "short_description": "an Antharian helmet",
+            "description": "A helmet made of Antharian metals is here.",
+            "type": "9",
+            "extra_flags": "1",
+            "wear_flags": "1|16",
+            "values": "8 0 0 0",
+            "weight": "15",
+            "cost": "1000",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "30"
+                }
+            ]
+        },
+        {
+            "vnum": "12315",
+            "name": "Antharian helmet",
+            "short_description": "an Antharian helmet",
+            "description": "A helmet made of Antharian metals is here.",
+            "type": "9",
+            "extra_flags": "1",
+            "wear_flags": "1|16",
+            "values": "8 0 0 0",
+            "weight": "15",
+            "cost": "1000",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "40"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-5"
+                }
+            ]
+        },
+        {
+            "vnum": "12316",
+            "name": "Trident",
+            "short_description": "a sparkling trident",
+            "description": "A sparkling trident, of Antharian make, is here.",
+            "type": "5",
+            "extra_flags": "256",
+            "wear_flags": "AN",
+            "values": "0 0 0 11",
+            "weight": "10",
+            "cost": "1000",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "40"
+                },
+                {
+                    "location": "19",
+                    "modifier": "3"
+                },
+                {
+                    "location": "18",
+                    "modifier": "3"
+                }
+            ]
+        },
+        {
+            "vnum": "12317",
+            "name": "trident",
+            "short_description": "a sparkling trident",
+            "description": "A sparkling trident, of Antharian make, is here.",
+            "type": "5",
+            "extra_flags": "256",
+            "wear_flags": "AN",
+            "values": "0 0 0 11",
+            "weight": "10",
+            "cost": "1000",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "40"
+                },
+                {
+                    "location": "19",
+                    "modifier": "3"
+                },
+                {
+                    "location": "18",
+                    "modifier": "3"
+                }
+            ]
+        },
+        {
+            "vnum": "12318",
+            "name": "trident",
+            "short_description": "a sparkling trident",
+            "description": "A sparkling trident, of Antharian make, is here.",
+            "type": "5",
+            "extra_flags": "256",
+            "wear_flags": "AN",
+            "values": "0 0 0 11",
+            "weight": "15",
+            "cost": "1000",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "60"
+                },
+                {
+                    "location": "19",
+                    "modifier": "4"
+                },
+                {
+                    "location": "18",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "12319",
+            "name": "Seafood platter",
+            "short_description": "a seafood platter",
+            "description": "A big plate of Seafood is here.",
+            "type": "19",
+            "extra_flags": "0",
+            "wear_flags": "1|8",
+            "values": "6 0 0 0",
+            "weight": "4",
+            "cost": "15"
+        },
+        {
+            "vnum": "12320",
+            "name": "Caviar",
+            "short_description": "a dish of caviar",
+            "description": "A small dish of Caviar is here.",
+            "type": "19",
+            "extra_flags": "0",
+            "wear_flags": "1|8",
+            "values": "5 0 0 0",
+            "weight": "4",
+            "cost": "500"
+        },
+        {
+            "vnum": "12321",
+            "name": "Special",
+            "short_description": "today's special",
+            "description": "This is the special of the day....NOT to be missed.",
+            "type": "19",
+            "extra_flags": "0",
+            "wear_flags": "1|8",
+            "values": "10 0 0 0",
+            "weight": "5",
+            "cost": "15"
+        },
+        {
+            "vnum": "12322",
+            "name": "Sushi",
+            "short_description": "some sushi",
+            "description": "This is sushi.",
+            "type": "19",
+            "extra_flags": "0",
+            "wear_flags": "1|8",
+            "values": "3 0 0 0",
+            "weight": "5",
+            "cost": "15"
+        },
+        {
+            "vnum": "12330",
+            "name": "Antharian robe",
+            "short_description": "an Antharian robe",
+            "description": "This is an Antharian robe, woven by hand.",
+            "type": "9",
+            "extra_flags": "0",
+            "wear_flags": "1|1024",
+            "values": "8 0 0 0",
+            "weight": "10",
+            "cost": "1000",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "1"
+                },
+                {
+                    "location": "1",
+                    "modifier": "-1"
+                },
+                {
+                    "location": "19",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "12331",
+            "name": "Antharian belt",
+            "short_description": "an Antharian belt",
+            "description": "An Antharian belt, just your size, is here.",
+            "type": "9",
+            "extra_flags": "0",
+            "wear_flags": "1|2048",
+            "values": "8 0 0 0",
+            "weight": "10",
+            "cost": "1000",
+            "affects_a": [
+                {
+                    "location": "24",
+                    "modifier": "-4"
+                },
+                {
+                    "location": "3",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "12332",
+            "name": "Antharian trousers",
+            "short_description": "Antharian trousers",
+            "description": "A pair of simple Antharian trousers are here.",
+            "type": "9",
+            "extra_flags": "0",
+            "wear_flags": "1|32",
+            "values": "8 0 0 0",
+            "weight": "5",
+            "cost": "1000",
+            "affects_a": [
+                {
+                    "location": "5",
+                    "modifier": "1"
+                },
+                {
+                    "location": "18",
+                    "modifier": "1"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-5"
+                }
+            ]
+        },
+        {
+            "vnum": "12333",
+            "name": "Piece Metal",
+            "short_description": "a round piece of metal",
+            "description": "A round piece of some unknown metal is here.",
+            "type": "3",
+            "extra_flags": "32",
+            "wear_flags": "1|16384",
+            "values": "30 7 7 7",
+            "weight": "10",
+            "cost": "100000"
+        },
+        {
+            "vnum": "12334",
+            "name": "Crystal potion",
+            "short_description": "a crystal potion",
+            "description": "A liquid substance in a crystal container is here.",
+            "type": "10",
+            "extra_flags": "32768",
+            "wear_flags": "1|32",
+            "values": "20 81 0 0",
+            "weight": "3",
+            "cost": "1000"
+        },
+        {
+            "vnum": "12335",
+            "name": "crystal scroll",
+            "short_description": "a crystal scroll",
+            "description": "An amazing scroll of crystal is here.",
+            "type": "2",
+            "extra_flags": "1",
+            "wear_flags": "1|256",
+            "values": "13 24 0 0",
+            "weight": "3",
+            "cost": "1000"
+        },
+        {
+            "vnum": "12336",
+            "name": "glowing seashell",
+            "short_description": "a glowing seashell",
+            "description": "A glowing seashell is here.",
+            "type": "2",
+            "extra_flags": "1",
+            "wear_flags": "1|16",
+            "values": "5 44 0 0",
+            "weight": "3",
+            "cost": "1000"
+        },
+        {
+            "vnum": "12337",
+            "name": "antharian bracer",
+            "short_description": "an Antharian style bracer",
+            "description": "An Antharian style bracer is here.",
+            "type": "9",
+            "extra_flags": "64",
+            "wear_flags": "1|4096",
+            "values": "8 0 0 0",
+            "weight": "5",
+            "cost": "1000",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "1"
+                },
+                {
+                    "location": "4",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "12338",
+            "name": "antharian bracer",
+            "short_description": "an Antharian style bracer",
+            "description": "An Antharian style bracer is here.",
+            "type": "9",
+            "extra_flags": "64",
+            "wear_flags": "1|4096",
+            "values": "8 0 0 0",
+            "weight": "5",
+            "cost": "1000",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "2"
+                },
+                {
+                    "location": "4",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "12339",
+            "name": "antharian bracer",
+            "short_description": "an Antharian style bracer",
+            "description": "An Antharian style bracer is here.",
+            "type": "9",
+            "extra_flags": "64",
+            "wear_flags": "1|4096",
+            "values": "8 0 0 0",
+            "weight": "5",
+            "cost": "1000",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "3"
+                },
+                {
+                    "location": "4",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "12340",
+            "name": "net",
+            "short_description": "a net",
+            "description": "A glowing net is here.",
+            "type": "4",
+            "extra_flags": "1",
+            "wear_flags": "1|16384",
+            "values": "25 10 10 0",
+            "weight": "5",
+            "cost": "1000",
+            "affects_a": [
+                {
+                    "location": "22",
+                    "modifier": "5"
+                }
+            ]
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "12302",
+            "name": "Temple of Anthar",
+            "description": "You are standing just south of the grand temple of Anthar.  This seems\nto be the center of life in the city of Antharia -- Antharians are\npassing by here on a regular basis.  Also, you can almost hear the\nhumming power radiating from the Gem of Salvation mounted upon the\nTemple.\n    From here you can walk around the temple to the east or west...or\nyou can return to the Sea by going south.  There is also a Magical\nsign posted here, put up by the councils of Antharia after the initial\ncontact with Anon.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "One of the main roads of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12303"
+                },
+                {
+                    "door": "D2",
+                    "description": "The entrance road of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12301"
+                },
+                {
+                    "door": "D3",
+                    "description": "One of the main roads of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12309"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "Sign",
+                    "description": "**ATTENTION NON-ANTHARIANS**\n\n    At this point in time, it is illegal for any non-Antharian to\nenter the Temple of Antharia.  As we speak, democratic relations with\nthe other races are making progress to allow this policy to be\nremoved.  Please bear with us and do not attempt to enter the most\nholy temple.\n\n                                     The Joint Councils of Antharia\n"
+                }
+            ]
+        },
+        {
+            "vnum": "12300",
+            "name": "Entrance Street",
+            "description": "As you enter from the sea, you suddenly are aware of a type of\nstability and balance that is not typical of being underwater.\nStanding and walking is now almost like being in the open air, thanks\nto the power of the Gem of Salvation.\n    Looking ahead you can see the Temple of Anthar just a bit further\nto the north.  The city looks huge from here, even though you know\nthat a great portion of the northern section of the city is now in\nruins, with the waning power of the Gem.  Antharians are walking\neverywhere, a serious people.  They do not seem to be totally\nheartless, just aware of what they have to do to survive.  \"Work\nbefore play\" is the motto that Antharians live by.\n    Looking directly up..you can see a clear shot right to the\nsurface..you're amazed at how easy it is to notice the sun at this\ndepth.  More Antharian magic, you think.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "The entrance street continues.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12301"
+                },
+                {
+                    "door": "D4",
+                    "description": "You can look up and barely make out the sun far, far above you.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5358"
+                }
+            ]
+        },
+        {
+            "vnum": "12301",
+            "name": "Entrance Street",
+            "description": "As you get closer to the Temple of Anthar, the power of the gem\nbecomes more and more resonate.  The Temple of Anthar is just a bit\nfurther to the north, and from here you can see the big Gem of\nSalvation mounted on top of it.  The Gem looks, from here, to be a\nhuge red stone mounted in a golden tripod.  There is a faint, but\nvisible ray of light that emits from the gem, blanketing the city in a\nprotective aura.  The sheer power that emits from the gem is awesome\nin iteslf, the wizards of ancient Antharia must have been akin to\ngods.\n    The street continues north from here to the Temple, or south back\nto the Sea.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "The Temple of Anthar\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12302"
+                },
+                {
+                    "door": "D2",
+                    "description": "Entrance street to Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12300"
+                }
+            ]
+        },
+        {
+            "vnum": "12303",
+            "name": "Main Road of Antharia",
+            "description": "You are walking around the grand Temple of Anthar towards the\neast.  The road here is very well kept, and protected day and night by\nthe guards of Antharia.  Antharians flash you a quick smile as they\npass, busy in their work.  Looking around there are many private\nresidents visible, their houses hugging the road just like any other\ncity of this size.  Although old, they are well kept and in good\ncondition.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Temple Circle.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12304"
+                },
+                {
+                    "door": "D1",
+                    "description": "Main road of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12337"
+                },
+                {
+                    "door": "D3",
+                    "description": "Temple of Anthar.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12302"
+                }
+            ]
+        },
+        {
+            "vnum": "12337",
+            "name": "Main Road of Antharia",
+            "description": "The paved road of Antharia continues to the west.  There are\nhouses of every shape form and fashion lining the sides of the street.\nEvery so often you can hear the cry of an infant Antharian coming from\nthese houses.  Although they are different from the other races, they\nstill have a lot in common with them.  Moreover, the Antharian seem\ncontent with their lives underwater, showing no signs of resentment\nthat their once great empire was completely forgotton on the surface.\n    The road continues from here to the west and to the east.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Main road of Antharia\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12336"
+                },
+                {
+                    "door": "D3",
+                    "description": "Main road of Antharia\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12303"
+                }
+            ]
+        },
+        {
+            "vnum": "12336",
+            "name": "Turn in the Main Road",
+            "description": "Here the main road makes a sharp turn to the north, following the\nhigh walls surrounding the city.  The road also continues back to the\nwest towards the Temple of Anthar.\n    After standing here a moment you decide that it IS food that you\nare smelling.  Your mouth waters as you smell an aroma of fine\nAntharian food coming from the north.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "MAin road of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12335"
+                },
+                {
+                    "door": "D3",
+                    "description": "Main road of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12337"
+                }
+            ]
+        },
+        {
+            "vnum": "12335",
+            "name": "Main Road at Eatery",
+            "description": "Standing here, you can smell the fantastic foods that is being\nprepared and sold inside the shop to the east.  Sometimes it's hard to\nfind a smiling Antharian; however, every one that comes out of this\nshop has a very big smile on..and usually something in their hand that\nlooks VERY good.\n   The main road continues to the north and south, if you ever want to\nleave.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Main road of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12334"
+                },
+                {
+                    "door": "D1",
+                    "description": "Irghum's Antharian Eatery.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "12341"
+                },
+                {
+                    "door": "D2",
+                    "description": "Main road of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12336"
+                }
+            ]
+        },
+        {
+            "vnum": "12341",
+            "name": "Irghum's Antharian Eatery",
+            "description": "Heaven.  Every type of Antharian food can be found here, from\nsimple breads to complex meals.  Irghum is standing behind the counter\nfixing something as you stand there.  Working as a master craftsman,\nhe produces a product that would make any chef red with envy.  Looking\naround, it is obvious that Irghum is not hurting for business.  It is\nsaid that every Antharian visits Irghum at least once a month, and on\nspecial occasions.  Antharians love their food and love Irghum.\n",
+            "flags": "8",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "12335"
+                }
+            ]
+        },
+        {
+            "vnum": "12334",
+            "name": "Main Street of Antharia",
+            "description": "Leaving the wonderful smell of the eatery, the road continues\nnorth.  Just ahead you can see a big intersection.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12333"
+                },
+                {
+                    "door": "D2",
+                    "description": "Main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12335"
+                }
+            ]
+        },
+        {
+            "vnum": "12333",
+            "name": "East Intersection -- Main and Center",
+            "description": "This is the east intersection of the city of Antharia.  The road\ncontinues to the north and south, and Center Street goes to the west.\n    There is a road sign posted here.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12332"
+                },
+                {
+                    "door": "D2",
+                    "description": "Main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12334"
+                },
+                {
+                    "door": "D3",
+                    "description": "Center street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12319"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "sign",
+                    "description": "Cyrtpea the Sorceress........North\nHeaustf the Armorer..........East\nErtuvia the Weaponsmith .....East\nIrghum's Eatery .............South\n\n"
+                }
+            ]
+        },
+        {
+            "vnum": "12332",
+            "name": "Main Road of Antharia",
+            "description": "Walking along this road is never boring.  Even though it is very\nsymetrical in form, the houses and people that you pass never leave\nyou with nothing to study.  Just the fact that this city could have\nsurvived at all under these conditions is amazing in itself, but for\ntheir artwork and architecture to survive is a miracle.\n    Antharians are very good at making simple houses look like\nmansions.  After the house is built (all of which are quite old), the\nAntharian family spends the rest of their life adding carvings and\npaintings to their individual houses.  As generations pass, this\nartwork gets more and more impressive.  Antharians are very proud of\ntheir heritage.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12326"
+                },
+                {
+                    "door": "D2",
+                    "description": "East intersection of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12333"
+                }
+            ]
+        },
+        {
+            "vnum": "12326",
+            "name": "Small Intersection",
+            "description": "Here the main bends to the west, with a less traveled road going to\nthe east.  There is a small sign here.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "a new road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12327"
+                },
+                {
+                    "door": "D2",
+                    "description": "Main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12332"
+                },
+                {
+                    "door": "D3",
+                    "description": "Main road of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12324"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "sign",
+                    "description": "**The Great Antharian Zoo  ----------------------------->>>\n\n"
+                }
+            ]
+        },
+        {
+            "vnum": "12324",
+            "name": "Main Road of Antharia",
+            "description": "Walking along the northern edge of the current Antharia, you can\nlook north and see the ruins of what was the rest of the grand\nAntharia.  Antharians now call what Antharia was in the past, \"grand\nAntharia\", and they tell the story of grand Antharia not unlike gospel.\nThe Antharians are very proud of their heritage and grand Antharia is\na major part of that heritage.  Right now, there is a kind of magic\nwall between this section of the city, and the older ruined section.\nRepresentatives from the other races and the city of Anon are\nworking to gain permission to explore this section of Antharia.\n    At this point in time, only Zaertses is allowed to explore these\nruins.  He is known to tell stories sometimes; however, he is usually\nvery quiet about the things that he has seen.  What wanders await us\nin the ruins of grand Antharia?\n    To the south you see the shop of the Sorceress Cyrtpea.  The\nbuilding seems to radiate with power.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Small intersection.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12326"
+                },
+                {
+                    "door": "D2",
+                    "description": "Shop of Cyrtpea.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12348"
+                },
+                {
+                    "door": "D3",
+                    "description": "Main road of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12323"
+                }
+            ]
+        },
+        {
+            "vnum": "12323",
+            "name": "Main Road of Antharia",
+            "description": "Standing here are two Antharians guarding the portal into the ruins of\ngrand Antharia.   Not that anyone could enter without the key -- the\nportal is magically locked by a very powerful wizard.  Right now, only\nZaertses owns a copy of this key, and it's secret is guarded with\nincredible zeal.  One day it is hoped that anyone can apply for\nadmission into the ruins, but not now.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Main road of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12324"
+                },
+                {
+                    "door": "D3",
+                    "description": "Main road of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12322"
+                }
+            ]
+        },
+        {
+            "vnum": "12348",
+            "name": "Workplace of Cyrtpea the Sorceress",
+            "description": "It is said that Cyrtpea actually has knowledge of some of the\nmagics of ancient Antharia, although she denies this to the fullest\ndegree.  However, she does keep her workplace as close to the ruins\nof grand Antharia as possible, and is known to to make special visits\nto Zaertses.  Common Antharians are convinced that Cyrtpea will make\nthe discovery that will bring Antharia back to the splendor that it\nonce knew.\n    The building itself seems to radiate with magical power, even\ntouching you -- a non Antharian.  Cyrtpea sits at her desk, looking at\nbooks that you are sure hold the secrets of the world.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Main road of Antharia\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12324"
+                }
+            ]
+        },
+        {
+            "vnum": "12322",
+            "name": "Main Road of Antharia",
+            "description": "Walking along the northern edge of the current Antharia, you can\nlook north and see the ruins of what was the rest of the grand\nAntharia.  Antharians now call what Antharia was in the past, \"grand\nAntharia\", and they tell the story of grand Antharia not unlike\ngospel.  The Antharians are very proud of their heritage and grand\nAntharia is a major part of that heritage.  Right now, there is a kind\nof magic wall between this section of the city, and the older ruined\nsection.  Representatives from the other races and the city of\nAnon are working to gain permission to explore this section of\nAntharia.\n    At this point in time, on Zaertses is allowed to explore these\nruins.  He is known to tell stories sometimes; however, he is usually\nvery quiet about the things that he has seen.  What wanders await us\nin the ruins of grand Antharia?\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "The main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12323"
+                },
+                {
+                    "door": "D3",
+                    "description": "Bend in the main road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12321"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "2",
+                    "key": "12315",
+                    "u1_vnum": "12366"
+                }
+            ]
+        },
+        {
+            "vnum": "12366",
+            "name": "Forgotten Room",
+            "description": "This room is full of cobwebs and dust..as no one has been here in\nsuch a long time.   You have obviously stumbled upon a part of\nAntharian history, as the room still looks like it did 2000 yrs ago.\n",
+            "flags": "4|1024",
+            "sector": "1"
+        },
+        {
+            "vnum": "12321",
+            "name": "Main Road of Antharia",
+            "description": "Here the road makes a sharp turn to the east and south.  This\nseems to be a less traveled section of the city.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Main road of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12322"
+                },
+                {
+                    "door": "D2",
+                    "description": "Main road of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12320"
+                }
+            ]
+        },
+        {
+            "vnum": "12320",
+            "name": "Main Road of Antharia",
+            "description": "Walking along this road is never boring.  Even though it is very\nsymetrical in form, the houses and people that you pass never leave\nyou with nothing to study.  Just the fact that this city could have\nsurvived at all under these conditions is amazing in itself, but for\ntheir artwork and architecture to survive is a miracle.\n     Antharians are very good at making simple houses look like\nmansions.  After the house is built (all of which are quite old now),\nthe Antharian family spends the rest of their life adding carvings and\npaintings to their individual houses.  As generations pass, this\nartwork gets more and more impressive.  Antharians are very proud of\ntheir heritage.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12321"
+                },
+                {
+                    "door": "D2",
+                    "description": "East intersection.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12315"
+                }
+            ]
+        },
+        {
+            "vnum": "12315",
+            "name": "East Intersection -- Main and Center",
+            "description": "This is the busy east intersection of Antharia.  From here one and\ngo north, south, east or west.  This seems to be a very busy section\nof town.\n     There is a small street sign posted here.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12320"
+                },
+                {
+                    "door": "D1",
+                    "description": "Center street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12316"
+                },
+                {
+                    "door": "D2",
+                    "description": "Main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12314"
+                },
+                {
+                    "door": "D3",
+                    "description": "Street of Guilds.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12350"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "sign",
+                    "description": "Ertuvia the weaponsmith........East\nHeaustf the Armorer............East\nCyrtpea the Sorceress..........North\nZaertses house of relics.......South\n\nGuilds of races................West\n\n"
+                }
+            ]
+        },
+        {
+            "vnum": "12314",
+            "name": "Main Street of Antharia",
+            "description": "In this particular section of street there are children playing\ngames.  Running and playing, they make you remember your childhood.\nJust like all children, these children have that internal need to\nplay IN the street -- instead of in the park or other, more sensible\nplaces.\n     Instead of running in fright, these children seem to be intrigued\nby your presence.  Looking at you in curiosity, they almost look as\nthough they might talk to you.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "East intersection\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12315"
+                },
+                {
+                    "door": "D2",
+                    "description": "Main street of Antharia\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12312"
+                }
+            ]
+        },
+        {
+            "vnum": "12312",
+            "name": "Main Street of Antharia",
+            "description": "The main street of Antharia continues north and south.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12314"
+                },
+                {
+                    "door": "D2",
+                    "description": "Main Street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12311"
+                }
+            ]
+        },
+        {
+            "vnum": "12311",
+            "name": "Main Street of Antharia",
+            "description": "Here the street makes a sharp turn to the north and east.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Main street of Antharia\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12312"
+                },
+                {
+                    "door": "D1",
+                    "description": "Main street of Antharia\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12310"
+                }
+            ]
+        },
+        {
+            "vnum": "12310",
+            "name": "Main Street Before Zaertses'",
+            "description": "Here the main street of Antharia goes past the shop of Zaertses.\nJust south of here is a building, simple and rustic -- with a sign\nhanging on it stating: Zaertses House of Relics.\n      The street continues east and west.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12309"
+                },
+                {
+                    "door": "D2",
+                    "description": "Zaertses' House of Relics.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12340"
+                },
+                {
+                    "door": "D3",
+                    "description": "Main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12311"
+                }
+            ]
+        },
+        {
+            "vnum": "12340",
+            "name": "Zaertses' House of Relics",
+            "description": "This one room shop is absolutely amazing.  There are cases and\nshelves filled with trinkets and other unusual objects.  Zaertses\nhimself is studying a new piece of artwork that he found in the ruins\nof Grand Antharia.  Zaertses is the only person allowed, at this point\nin time, to visit those ruins north of current Antharia.  Some of the\nthings he displays here in his shop, very few (of which there are\nmany) he sells, and the most valuble objects are displayed in a museum\nAntharians are convinced is located in the heart of the Temple of\nAnthar.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12310"
+                }
+            ]
+        },
+        {
+            "vnum": "12309",
+            "name": "Main Street of Antharia",
+            "description": "You are walking around the grand Temple of Anthar towards the\neast.  The road here is very well kept, and protected day and night by\nthe guards of Antharia.  Antharians flash you a quick smile as they\npass, busy in their work.  Looking around, there are many private\nresidents visible, their houses hugging the road just like any other\ncity of this size.  Although old, they are well kept and in good\ncondition.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Temple Circle.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12308"
+                },
+                {
+                    "door": "D1",
+                    "description": "Before the Temple of Anthar.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12302"
+                },
+                {
+                    "door": "D3",
+                    "description": "Main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12310"
+                }
+            ]
+        },
+        {
+            "vnum": "12304",
+            "name": "Temple Circle",
+            "description": "This road circles around the Grand Temple of Anthar.  Just\nstanding here, you feel the magnitude of just how much was put into\nits building.  You can only imagine at the amount of labor force it\ntook to build something of this magnitude.  Now, with the Gem of\nSalvation mounted on the top of the temple, it is even more\nimpressive.  The temple seems to be a focus of tremendous power, you\nfeel that if you could just get inside, you could aquire some of that\npower.\n    The road continues to the north and south.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Temple Circle.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12305"
+                },
+                {
+                    "door": "D2",
+                    "description": "Main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12303"
+                }
+            ]
+        },
+        {
+            "vnum": "12305",
+            "name": "Temple Circle",
+            "description": "Taking a closer look at the temple from this angle, you can tell\nthat it is made of many different levels. It seems to be built almost as\na pyramid:  large at the base, and getting smaller as it goes up.  The\nconnections between the levels seems to be implicable, almost perfect\nin their accuracy.  You wonder, did the wizards help in this\naccomplishment, or were the Antharian masons of that time incredibly\ngood?  Maybe the secret lies within the temple....\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Temple Circle.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12304"
+                },
+                {
+                    "door": "D3",
+                    "description": "Temple Circle.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12306"
+                }
+            ]
+        },
+        {
+            "vnum": "12306",
+            "name": "Temple Circle at Kaer's Bridge",
+            "description": "You are standing just north of the Temple of Anthar, and just\nsouth of Kaer's Bridge.  According to Antharian history, Kaer was a\nking just prior to the catastrophy that forced Antharia underwater.\nWanting to be remembered for all time, he had this bridge built in his\nname.  It is a bridge made of the same material as the Temple --\nsomething that we have no knowledge of today.  However, you can feel\nthe material, and it feels smooth and glossy..almost like ivory.  You\nassume that this bridge once spanned a river or something of that\nnature; however, now this bridge spannes a channel filled with the\nsame water that you are now breathing.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kaer's Bridge.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12318"
+                },
+                {
+                    "door": "D1",
+                    "description": "Temple Circle.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12305"
+                },
+                {
+                    "door": "D3",
+                    "description": "Temple Circle.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12307"
+                }
+            ]
+        },
+        {
+            "vnum": "12318",
+            "name": "Kaer's Bridge",
+            "description": "As with most bridges built in the past, the bridge rises in the\ncenter and comes down on both ends.  From here it is a little easier\nto see parts of the city.  Two things stand out more than the rest\nthough: the Temple of Anthar to the south, and a larger, more\nspectacular building to the far north.  You assume that this northern\nbuilding is part of the ruins of grand Antharia.\n    This bridge is used heavily, as it connects the Temple Circle to\nCenter street.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Center street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12317"
+                },
+                {
+                    "door": "D2",
+                    "description": "Temple Circle.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12306"
+                }
+            ]
+        },
+        {
+            "vnum": "12317",
+            "name": "Center Street",
+            "description": "You are standing here in the exact center of modern Antharia.\nThere is a heavy amount of traffic, as people go to and from the\nTemple of Anthar via the bridge, and also this street is a shortcut\nacross town.\n     Just north of here is a dignified building of Ertuvia the\nWeaponsmith.  Instead of the clanging of metal that is usually\nassociated with weaponsmiths, there is only the sound of talking\ncoming from the building.\n    There is a small street sign here.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ertuvia's shop.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12344"
+                },
+                {
+                    "door": "D1",
+                    "description": "Center street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12319"
+                },
+                {
+                    "door": "D2",
+                    "description": "Kaer's Bridge.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12318"
+                },
+                {
+                    "door": "D3",
+                    "description": "Center street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12316"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "sign",
+                    "description": "Ertuvia the weaponsmith........north\nHearstf the armorer............east\n\nKaer's bridge..................south\n\nTemple of Anthar...............south\n\nStreet of Guilds...............west\n\n"
+                }
+            ]
+        },
+        {
+            "vnum": "12319",
+            "name": "Center Street",
+            "description": "This street seems to split modern Antharia right in the middle,\nmaking the connection from the eastern part of the city, to the\nwestern.  Antharians are passing by continually, on their way to see\nErtuvia or maybe visit the Temple of Anthar.  Walking on Center street\nleaves you know doubt that this is really a bustling city.\n   Just north of here is the shop of Heaustf the Armorer.  As with the\ncase with Ertuvia, there is no sound of metal upon metal coming from\nthe building..just the sound of Antharian voices.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Heaustf's armory.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12345"
+                },
+                {
+                    "door": "D1",
+                    "description": "Main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12333"
+                },
+                {
+                    "door": "D3",
+                    "description": "Center street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12317"
+                }
+            ]
+        },
+        {
+            "vnum": "12316",
+            "name": "Center Street",
+            "description": "This street seems to split modern Antharia right through the\nmiddle, connecting the eastern part of the city to the western.\nAntharians are passing by continually, possibly on their way to see\nHeaustf, or maybe to visit the Temple of Anthar.  Walking on Center\nstreet leaves you no doubt that this is really a major city.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Center street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12317"
+                },
+                {
+                    "door": "D3",
+                    "description": "Main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12315"
+                }
+            ]
+        },
+        {
+            "vnum": "12308",
+            "name": "Temple Circle",
+            "description": "This road circles around the grand Temple of Anthar.  Just\nstanding here, you feel the magnitude of just how much was put into\nits building.  You can only imagine at the amount of labor it took to\nbuild something of this magnitude.  Now, with the Gem of Salvation\nmounted on the top of the temple, it is even more impressive.  The\ntemple seems to be a focus of tremendous power, you fell that if you\ncould just get inside, you could aquire some of that power.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Temple circle.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12307"
+                },
+                {
+                    "door": "D2",
+                    "description": "Main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12309"
+                }
+            ]
+        },
+        {
+            "vnum": "12307",
+            "name": "Temple Circle",
+            "description": "Taking a closer look at the the temple from this angle, you can\ntell that it is made of many different levels.  Seems to be built\nalmost as a pyramid:  large at the base, and getting smaller as it\ngoes up.  The connections between the levels seems to be implicable,\nalmost perfect in its accuracy.  You wonder, did the wizards help in\nthis accomplishment, or were the Antharian masons of that time\nincredibly good?  Maybe the secret lies within the temple...\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Temple circle.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12306"
+                },
+                {
+                    "door": "D2",
+                    "description": "Temple circle.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12308"
+                }
+            ]
+        },
+        {
+            "vnum": "12327",
+            "name": "A New Road",
+            "description": "This road seems to be recently built, leading from the Main street\nto some location to the east.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Zoo gate.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12328"
+                },
+                {
+                    "door": "D3",
+                    "description": "Main street of Antharia.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12326"
+                }
+            ]
+        },
+        {
+            "vnum": "12328",
+            "name": "Zoo Gate",
+            "description": "You are standing at the gate of the zoo of Antharia.  Looking\nthrough the gate, you get a glimpse of known and unknown animals\ncontained therein.  According to the Antharians, the zoo was built\nbefore the catastophy -- as hard as that might be to believe.  It is\nsaid that the Council of Clerics at that time insisted that the zoo be\none of the protected areas.  They wished to preserve the endangered and\nunusual animals that they had aquired through the generations.  Now,\nthis is the most extensive and important zoo in the world, as it\ncontains animals that is found nowhere else.\n    As with many of aspects of the Antharian culture, this zoo is not\ncurrently opened to non-Antharians.  Hopefully, the other races can\nconvince the Antharians to allow other races to explore and\ninvestigate the zoo.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "a new road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12327"
+                }
+            ]
+        },
+        {
+            "vnum": "12345",
+            "name": "Heaustf's Armory",
+            "description": "You are standing in a shop that looks more like a museum than an\narmory.  In Antharian society, the art of making Armor is very highly\nrespected.  Heaustf is one of the most important people in Antharian\nsociety, being the maker of this armor.  His shop does not look like\nan regular armory would -- dirty, smelly, or dark.  Rather, it is\nclean, with Heaustf running the shop like a king running his kingdom.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Center street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12319"
+                }
+            ]
+        },
+        {
+            "vnum": "12344",
+            "name": "Ertuvia's Weapon Shop",
+            "description": "You are standing in the shop of the distingushed Antharian,\nErtuvia.  Ertuvia is considered, by the Antharians, to be a\nartist -- and he commands respect from them.  There are weapons lining\nthe walls, of every shape and form.  There are also certain weapons\nthat are obviously of Antharian origin.  You wonder what exactly those\nweapons are, and what kind of price Ertuvia will charge you for them.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Center street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12317"
+                }
+            ]
+        },
+        {
+            "vnum": "12350",
+            "name": "Guild Street",
+            "description": "You are walking along Guild street, where all the different races in\nthe world are represented.  This street is fairly new, built after the\nmeeting between Antharia and the rest of the overwater world.\n   The street continues to the west, and goes back to the West\nintersection directly to the east.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "West intersection.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12315"
+                },
+                {
+                    "door": "D3",
+                    "description": "Guild street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12351"
+                }
+            ]
+        },
+        {
+            "vnum": "12351",
+            "name": "Guild Street",
+            "description": "You are walking along Guild street, where all the races of the\nworld have representatives to help you along while you're here.  They\ncan answer any questions and help you with diplomatic problems.\n   Just to the north is the Human guild.  The street continues to the\neast and west. The Illithid guild lies to the south.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Human guild.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12360"
+                },
+                {
+                    "door": "D1",
+                    "description": "Guild street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12350"
+                },
+                {
+                    "door": "D2",
+                    "description": "Illithid Guild.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12370"
+                },
+                {
+                    "door": "D3",
+                    "description": "Guild street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12352"
+                }
+            ]
+        },
+        {
+            "vnum": "12352",
+            "name": "Guild Street",
+            "description": "You are walking along Guild street, where all the races of the\nworld have representatives to help you along while you're here.  They\ncan answer any questions and help you with diplomatic problems.\n    The Dwarven guild is just south.  Guild street goes east and west.\nThe Avian guild is due north of here.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Avian Guild.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12371"
+                },
+                {
+                    "door": "D1",
+                    "description": "Guild street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12351"
+                },
+                {
+                    "door": "D2",
+                    "description": "Dwarven guild.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12365"
+                },
+                {
+                    "door": "D3",
+                    "description": "Guild street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12353"
+                }
+            ]
+        },
+        {
+            "vnum": "12353",
+            "name": "Guild Street",
+            "description": "You are walking along Guild street, where all the races have\nrepresentatives to help you while you're here.  They can answer and\nquestions, and help you with any diplomatic problems.\n    The Druid guild is to the north, while the Elven guild is to the\nsouth.  Guild street runs east and west.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Druid guild.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12361"
+                },
+                {
+                    "door": "D1",
+                    "description": "Guild street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12352"
+                },
+                {
+                    "door": "D2",
+                    "description": "Elven guild.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12364"
+                },
+                {
+                    "door": "D3",
+                    "description": "Guild street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12354"
+                }
+            ]
+        },
+        {
+            "vnum": "12354",
+            "name": "Guild Street",
+            "description": "You are at the end of Guild street, where all the races of the\nworld have representatives to help you while you're here.  They can\nanswer any questions, and help you with any diplomatic problems.\n   The Kender guild is to the north, while the Antharian guild is to\nthe south.  Guild street runs towards the east.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kender guild.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12362"
+                },
+                {
+                    "door": "D1",
+                    "description": "Guild street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12353"
+                },
+                {
+                    "door": "D2",
+                    "description": "Antharian guild.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12363"
+                }
+            ]
+        },
+        {
+            "vnum": "12360",
+            "name": "Human Guild",
+            "description": "You are standing in the small, bare building of the human guild.\nThe representative from the human race is standing here willing to\nhelp any of her fellow humans here in Antharia.\n   The exit door to the south leads back to guild street.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Guild street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12351"
+                }
+            ]
+        },
+        {
+            "vnum": "12365",
+            "name": "Dwarven Guild",
+            "description": "You are standing in the small, bare building of the Dwarven guild.\nThe representative from the Dwarves is standing here willing to help\nany of his fellow Dwarves here in Antharia.\n   The exit directly to the north leads to Guild street.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Guild street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12352"
+                }
+            ]
+        },
+        {
+            "vnum": "12361",
+            "name": "Druid's Guild",
+            "description": "You are standing in the small, bare building of the Druidic guild.\nThe representative from the Druids is standing here willing to help\nany of his fellow druids here in Antharia.\n   The exit directly to the south leads to Guild street.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Guild street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12353"
+                }
+            ]
+        },
+        {
+            "vnum": "12364",
+            "name": "Elven Guild",
+            "description": "You are standing in the small, bare building that houses the Elven\nguild.  The representative from the Elves is standing here willing to\nhelp any of her fellow elves here in Antharia.\n    The exit directly to the north leads back to Guild street.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Guild street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12353"
+                }
+            ]
+        },
+        {
+            "vnum": "12362",
+            "name": "Kender Guild",
+            "description": "You are standing in the small, bare building that houses the\nKender guild.  The representative from the Kender is standing here\nwilling to help any of her fellow Kender in Antharia.\n    The exit directly to the south leads to Guild street.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Guild street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12354"
+                }
+            ]
+        },
+        {
+            "vnum": "12363",
+            "name": "Antharian Guild",
+            "description": "You are standing in the building that houses the Antharian guild.\nThis building is a little less bare than the other guilds, being\nfinanced directly by the Antharian government.  The Antharian\nrepresentative is here helping his fellow Antharians in dealing with\nthe other races, and with dealing with YOU.  This Antharian is\nimportant in the diplomatic relationship between Antharia and the\nother races of the world.\n   The exit directly to the north leads back to guild street.\n",
+            "flags": "0",
+            "sector": "11",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Guild street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12354"
+                }
+            ]
+        },
+        {
+            "vnum": "12370",
+            "name": "Illithid Guild",
+            "description": "You are standing in the small, bare building that houses the\nIllithid guild.  The representative from the Illithid is standing here\nwilling to help any of her fellow Illithids in Antharia.\n    The exit directly to the north leads to Guild street.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Guild street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12351"
+                }
+            ]
+        },
+        {
+            "vnum": "12371",
+            "name": "Avian Guild",
+            "description": "You are standing in the small, bare building that houses the\nAvian guild.  The representative from the Avian is standing here\nwilling to help any of her fellow Avian in Antharia.\n    The exit directly to the south leads to Guild street.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Guild street.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "12352"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "12302",
+            "arg2": "1",
+            "arg3": "12302",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12341",
+            "arg2": "1",
+            "arg3": "12341",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "12319",
+            "arg2": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "12320",
+            "arg2": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "12321",
+            "arg2": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "12322",
+            "arg2": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12348",
+            "arg2": "1",
+            "arg3": "12348",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "12334",
+            "arg2": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "12336",
+            "arg2": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "12300",
+            "arg2": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "12340",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "12303",
+            "arg2": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "12335",
+            "arg2": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12345",
+            "arg2": "1",
+            "arg3": "12345",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "12302",
+            "arg2": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12344",
+            "arg2": "1",
+            "arg3": "12344",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12360",
+            "arg2": "1",
+            "arg3": "12360",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12365",
+            "arg2": "1",
+            "arg3": "12365",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12364",
+            "arg2": "1",
+            "arg3": "12364",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12361",
+            "arg2": "1",
+            "arg3": "12361",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12362",
+            "arg2": "1",
+            "arg3": "12362",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12363",
+            "arg2": "1",
+            "arg3": "12363",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12370",
+            "arg2": "1",
+            "arg3": "12370",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12371",
+            "arg2": "1",
+            "arg3": "12371",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12300",
+            "arg2": "4",
+            "arg3": "12336",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12304",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12337",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12310",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12313",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12316",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "12300",
+            "arg2": "4",
+            "arg3": "12321",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12304",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12337",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12310",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12313",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12316",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "12300",
+            "arg2": "20",
+            "arg3": "12302",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12304",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12337",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12310",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12313",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12316",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "12300",
+            "arg2": "4",
+            "arg3": "12312",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12304",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12337",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12310",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12313",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12316",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "12300",
+            "arg2": "4",
+            "arg3": "12352",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12304",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12337",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12310",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12313",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12316",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "12300",
+            "arg2": "4",
+            "arg3": "12304",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12304",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12307",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12310",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12313",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12316",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "12300",
+            "arg2": "4",
+            "arg3": "12307",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12304",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12337",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12310",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12313",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12316",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "12300",
+            "arg2": "4",
+            "arg3": "12319",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12304",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12337",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12310",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12313",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12316",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "12300",
+            "arg2": "4",
+            "arg3": "12326",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12304",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12337",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12310",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12313",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12316",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "12300",
+            "arg2": "4",
+            "arg3": "12334",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12304",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12337",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12310",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12313",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12316",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "12323",
+            "arg2": "4",
+            "arg3": "12323",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12305",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "12338",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12311",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12314",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12317",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "12323",
+            "arg2": "4",
+            "arg3": "12323",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12305",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "12338",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12311",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12314",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12317",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "12323",
+            "arg2": "4",
+            "arg3": "12315",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12305",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "12338",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12311",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12314",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12317",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "12323",
+            "arg2": "4",
+            "arg3": "12315",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12305",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "12338",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12311",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12314",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12317",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "12323",
+            "arg2": "4",
+            "arg3": "12333",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12305",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "12338",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12311",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12314",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12317",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "12323",
+            "arg2": "4",
+            "arg3": "12333",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12305",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "12338",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12311",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12314",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12317",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "12323",
+            "arg2": "4",
+            "arg3": "12328",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12305",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "12338",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12311",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12314",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12317",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "D",
+            "arg1": "12322",
+            "arg2": "4",
+            "arg3": "2"
+        },
+        {
+            "command": "O",
+            "arg1": "12333",
+            "arg2": "1",
+            "arg3": "12366"
+        },
+        {
+            "command": "M",
+            "arg1": "12303",
+            "arg2": "4",
+            "arg3": "12300",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12303",
+            "arg2": "4",
+            "arg3": "12310",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "12301",
+            "arg2": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12303",
+            "arg2": "4",
+            "arg3": "12337",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12303",
+            "arg2": "4",
+            "arg3": "12332",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12303",
+            "arg2": "4",
+            "arg3": "12306",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12303",
+            "arg2": "4",
+            "arg3": "12317",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "12301",
+            "arg2": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12303",
+            "arg2": "4",
+            "arg3": "12322",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12309",
+            "arg2": "4",
+            "arg3": "12352",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12330",
+            "arg2": "1",
+            "arg3": "12"
+        },
+        {
+            "command": "M",
+            "arg1": "12309",
+            "arg2": "4",
+            "arg3": "12319",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12309",
+            "arg2": "4",
+            "arg3": "12337",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12330",
+            "arg2": "1",
+            "arg3": "12"
+        },
+        {
+            "command": "M",
+            "arg1": "12309",
+            "arg2": "4",
+            "arg3": "12311",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12310",
+            "arg2": "4",
+            "arg3": "12320",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12331",
+            "arg2": "1",
+            "arg3": "13"
+        },
+        {
+            "command": "M",
+            "arg1": "12310",
+            "arg2": "4",
+            "arg3": "12332",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12310",
+            "arg2": "4",
+            "arg3": "12312",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12331",
+            "arg2": "1",
+            "arg3": "13"
+        },
+        {
+            "command": "M",
+            "arg1": "12314",
+            "arg2": "5",
+            "arg3": "12314",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12332",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "M",
+            "arg1": "12314",
+            "arg2": "5",
+            "arg3": "12314",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12314",
+            "arg2": "5",
+            "arg3": "12314",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12332",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "M",
+            "arg1": "12315",
+            "arg2": "5",
+            "arg3": "12314",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12332",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "M",
+            "arg1": "12315",
+            "arg2": "5",
+            "arg3": "12314",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "12315",
+            "arg2": "5",
+            "arg3": "12314",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12332",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "M",
+            "arg1": "12318",
+            "arg2": "4",
+            "arg3": "12318",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12306",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12309",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12312",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12315",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12318",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "12318",
+            "arg2": "4",
+            "arg3": "12326",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12306",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12339",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12312",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12315",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12318",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "12318",
+            "arg2": "4",
+            "arg3": "12354",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12306",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12339",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12312",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12315",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12318",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "12318",
+            "arg2": "4",
+            "arg3": "12302",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12306",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12339",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12312",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12315",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12318",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "12318",
+            "arg2": "4",
+            "arg3": "12352",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12306",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "12339",
+            "arg2": "1",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "12312",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "12315",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "12318",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "12340",
+            "arg2": "1",
+            "arg3": "17"
+        }
+    ],
+    "shops": [
+        {
+            "keeper": "12345",
+            "buy_type_0": "0",
+            "buy_type_1": "0",
+            "buy_type_2": "0",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "125",
+            "profit_sell": "75",
+            "open_hour": "4",
+            "close_hour": "20"
+        },
+        {
+            "keeper": "12341",
+            "buy_type_0": "0",
+            "buy_type_1": "0",
+            "buy_type_2": "0",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "125",
+            "profit_sell": "75",
+            "open_hour": "4",
+            "close_hour": "20"
+        },
+        {
+            "keeper": "12348",
+            "buy_type_0": "0",
+            "buy_type_1": "0",
+            "buy_type_2": "0",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "125",
+            "profit_sell": "75",
+            "open_hour": "4",
+            "close_hour": "20"
+        },
+        {
+            "keeper": "12340",
+            "buy_type_0": "0",
+            "buy_type_1": "0",
+            "buy_type_2": "0",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "125",
+            "profit_sell": "75",
+            "open_hour": "4",
+            "close_hour": "20"
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "12302",
+            "spec_fun": "spec_cast_cleric"
+        },
+        {
+            "vnum": "12348",
+            "spec_fun": "spec_cast_mage"
+        },
+        {
+            "vnum": "12314",
+            "spec_fun": "spec_thief"
+        },
+        {
+            "vnum": "12364",
+            "spec_fun": "spec_cast_mage"
+        },
+        {
+            "vnum": "12361",
+            "spec_fun": "spec_cast_cleric"
+        },
+        {
+            "vnum": "12362",
+            "spec_fun": "spec_thief"
+        }
+    ]
+}

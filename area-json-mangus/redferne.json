@@ -1,0 +1,814 @@
+{
+    "area": {
+        "file": "redferne.are",
+        "name": "Türkçe",
+        "low_range": "20",
+        "high_range": "30",
+        "min_vnum": "7900",
+        "max_vnum": "7999",
+        "path": "6g d 3g b g y",
+        "yonelim_iyi": "33",
+        "yonelim_yansiz": "34",
+        "yonelim_kem": "33"
+    },
+    "mobiles": [
+        {
+            "vnum": "7900",
+            "name": "þövalye adbolar",
+            "short_description": "Adbolarlarýn büyük þövalyesi",
+            "long_description": "Büyük Þövalye burada yardýma muhtaçlara yardým etmek için bekliyor.\n",
+            "description": "Þövalye burada duruyor ve sana gülümsüyor. Tamamýyla beyaz, mavi ve\ngümüþ giyinmiþ. Çok güçlü görünüyor. Yardým etmek için her zaman hazýr.\n",
+            "race": "human",
+            "act": "AGKQe",
+            "affected_by": "DH",
+            "level": "29"
+        },
+        {
+            "vnum": "7901",
+            "name": "adbolar solamnia",
+            "short_description": "Solamnia'nýn adbolarý",
+            "long_description": "Solamnia'nýn emekli adbolarý burada dinleniyor.\n",
+            "description": "Kembolarlara karþý yýllar süren mücadelesinden sonra emekli olmuþ ve\nkassandra taþýnýn sorumluluðunu almýþ.\n",
+            "race": "human",
+            "act": "AHSe",
+            "affected_by": "DEPZ",
+            "level": "91"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "7909",
+            "name": "hazine",
+            "short_description": "büyük bir hazine",
+            "description": "Büyük bir hazine burada duruyor, çok deðerli görünüyor.",
+            "material": "silver gold",
+            "type": "money",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "-100 0 0 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "yazý",
+                    "description": "\"Selam Konan.  Buradan para bekleme artýk, sevgiler. :) Ýmza, Redferne\"\n"
+                },
+                {
+                    "keyword": "hazine",
+                    "description": "Çok fazla sikke var. Bir tanesine bir yazý iliþtirilmiþ.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "7910",
+            "name": "sandýk",
+            "short_description": "bir tahta sandýk",
+            "description": "Bir tahta sandýk köþede duruyor.",
+            "material": "wood",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "100 ABCD 7911 20 100",
+            "level": "0",
+            "weight": "4000",
+            "cost": "100",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "sandýk",
+                    "description": "Birbirlerine geçirilmiþ kýsa ve aðýr tahtalardan yapýlmýþ kuvvetli\nbir sandýk. Pirinç kilitle korunuyor.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "7911",
+            "name": "anahtar",
+            "short_description": "pirinç bir anahtar",
+            "description": "Bir pirinç anahtar burada býrakýlmýþ.",
+            "material": "brass",
+            "type": "key",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "7910 0 0 0 0",
+            "level": "0",
+            "weight": "10",
+            "cost": "0",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "anahtar",
+                    "description": "Üstüne bir þey çizilmemiþ veya yazýlmamýþ küçük ve pirinç bir anahtar.\n"
+                }
+            ]
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "7900",
+            "name": "Redferne'nin ikametinin dýþ yüzü",
+            "description": "Þu anda durduðun platoyu dev bir bulut sarýyor. Bulutlarýn aþaðýsýndan\nSelenge'ýn zayýf seslerini duyuyorsun. Hemen önünüzde, kuzeyde Naris'in\nbüyük malikanesi var. Yani Büyük Tanrý Redferne'nin ikameti.\n",
+            "flags": "CJ",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Görkemli binanýn içine giden süslü DEV kapýyý görüyorsun.\n",
+                    "keyword": "büyük kapý dev",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7901"
+                },
+                {
+                    "door": "D2",
+                    "description": "Güzel bulutlar görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9101"
+                },
+                {
+                    "door": "D5",
+                    "description": "Naris Malikanesini yere baðlayan çapanýn büyük zincirlerini görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "7918"
+                }
+            ]
+        },
+        {
+            "vnum": "7901",
+            "name": "Salonun güney sonu",
+            "description": "Loþ ýþýðý gizemli bir þekilde gelen geniþ bir salonda duruyorsun.\nDuvarlarýn salona yaydýðý ýsý gelenlere güzel bir duygu veriyor.\nDuvarýn birine geniþ bir portre asýlmýþ. Geniþ bir tahta merdiven\nkuleye çýkýyor. Doðuda salondan çýkan bir geçit var. Kýsa bir aralýk\nsonrasý uzun tahta kapýyla bitiyor. Geniþ salon kuzeye doðru devam\nediyor. Güneyde büyük ve çok aðýr görünen dövme demirden bir kapý\ngörüyorsun. Bu kapý bu gösteriþli evden çýkmanýn tek yolu. Batýda\nkül renginde büyük bir kapý görüyorsun.\n",
+            "flags": "CDJ",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Koridor bu yolda devam ediyor. Bu yöndeki tahta merdiven altýnda bir\nÇok koridor görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "7904"
+                },
+                {
+                    "door": "D1",
+                    "description": "Uzun meþe yapýmý bir kapý görüyorsun. Seni kapatmak için oldukça sýký.\nüstünde kazýnmýþ küçük rünler görüyorsun.\n",
+                    "keyword": "uzun meþe doðu kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7910"
+                },
+                {
+                    "door": "D2",
+                    "description": "Burada gerçek bir kapý görüyorsun. Buna \"kapý\" yerine \"Geçit\" demeniz\ndaha uygun olur. Çok BÜYÜK! Üstüne dev yazýlarý olan bir tabela asýlmýþ.\nTabelada þunlar yazýyor : \"ACÝL ÇIKIÞ\".\n",
+                    "keyword": "geçit",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7900"
+                },
+                {
+                    "door": "D3",
+                    "description": "Dünyanýn tanýmlamasýna göre bir kapý gibi görünüyor. Kül rengi tahta sarý\nrenkle boyanmýþ. Küçük siyah yazýlar üstüne yazýlmýþ.\n",
+                    "keyword": "kül tahta sarý kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7902"
+                },
+                {
+                    "door": "D4",
+                    "description": "Kulenin çok yüksek yerlerine çýkan bir merdiven görüyorsunz. Yukarýda geniþ\nBir yatak odasýnda bitmiþ gibi görünüyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "7909"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "rünler",
+                    "description": "Bu rünler sana oldukça garip geliyor ama þanslý gününüzdesin: Çünkü\nrünlerin altýnda çevrilmiþ cümlesi var. Þöyle : \" Dýþarýda kal, eðer\nhayatýna önem veriyorsan. Burasý ölümsüzler için\".\n"
+                }
+            ]
+        },
+        {
+            "vnum": "7902",
+            "name": "Redferne'in Kütüphanesi",
+            "description": "Burasý gerçekten gösteriþli bir yer! Her rafta kitaplar ve skroller yan\nyana konmuþ. Büyük bir küre Mud-dünyasý haritasýyla odanýn köþesinde loþ\nbir ýþýkla duruyor. Geniþ ve rahat deri koltuklar kütüphanenin ortasýndaki\nmasanýn etrafýnda yan yana duruyor. Tabandan 10 fit yüksekte olan tavana\nasýlý, loþ ýþýðý yayan dev bir kristal þamdan var. Doðuda büyük bir kapý\nvar. Geniþ bir cam pencere batý duvarýna kurulmuþ.\n",
+            "flags": "CDJ",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Sarý renge boyanmýþ eski bir kül kapý.\n",
+                    "keyword": "doðu kül kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7901"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "Nehir",
+                    "description": "Geniþ ve akarak topraklarý kesen ve ufak bir göle dönüþen bir nehir\ngörüyorsun. Selenge'ýn içinden süzülüyor ve sonunda diyarýn batý\nkýyýsýndaki Büyük Deniz'de bitiyor.\n"
+                },
+                {
+                    "keyword": "Öte dýþarý",
+                    "description": "Bu büyük binanýn kurulduðu yerden form alan bulutlar toplanýyor. En ince\nbulutun içinden Selenge'ý ve tüm üstünde olanlarý görüyorsun.\n"
+                },
+                {
+                    "keyword": "Cam pencere",
+                    "description": "Bu pencereler gerçekten çok büyük' Yerden 50 santim yüksek tavandan 25\nsantim alçak. Dýþarýya bakmayý denediðinde çok öteleri görebilirsin.\n"
+                },
+                {
+                    "keyword": "Deri koltuklar",
+                    "description": "Bu iki koltuk birbirlerinin tamamýyla aynýsý. Çok rahat görünüyorlar.\nÝkisi de eski deriden yapýlma. Ve uzun bir dinlenmede dört dörtlük bir\nRahatlýk verecekleri kesin.\n"
+                },
+                {
+                    "keyword": "Selenge þehri",
+                    "description": "Buranýn batýsýnda aðaçlarla birlikte bir nokta görüyorsun. Güneyde\ngeniþ bir kalenin bir kýsmýný görebilirsin. Sonunda doðudan gelen bir\nnehrin Selenge'ýn ortasýndan geçtiðini görüyorsun.\n"
+                },
+                {
+                    "keyword": "Küre dünya haritasý",
+                    "description": "Büyük kürenin üstüne yapýþtýrýlmýþ geniþ bir dünya haritasý görüyorsun.\nHer çizilmiþ nokta orada bir þehir olduðunu gösteriyor. Haritanýn orta\nyerinde üstüne Selenge yazýlmýþ bir þehir görüyorsun. Ayrýca haritada\ndaðlar, ormanlar, bitki örtüleri ve denizlerde var.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "7903",
+            "name": "Naris'in Özel eþyalar odasý ",
+            "description": "Bu kasvetli ve karanlýk oda duvarlardan yayýlan loþ ýþýkla az miktarda\naydýnlatýlmýþ. Bir dolu güzel görünümlü eþya odanýn ortasýnda duruyor.\nBurada hiç mobilya yok. Buradan tek çýkýþ batýdaki çelik kapý.\n",
+            "flags": "CDJ",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "You see only the back of a safe's steel door.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "7904",
+            "name": "Salonun kuzey sonu",
+            "description": "Geniþ salonun en kuzey yerinde duruyorsun. Bu bölüm tahta bir\nmerdivenin altýnda olduðu için ýþýk daha az parlak. Ama bu seni\nrahatsýz etmiyor. Kuzeyde mutfak var. Güneyde salonun güney sonu\nvar. Doðuda geniþ metal bir kapý var. Batýda ise geniþ kavaktan\nyapýlmýþ bir kapý var.\n",
+            "flags": "CDJ",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "7906"
+                },
+                {
+                    "door": "D1",
+                    "description": "Geniþ metal bir kapý görüyorsun. Oradan pis kokular çýkýyor. Koku\nhayatýndaki en berbat deneyim. Bir düþünce bu kokularla birlikte\naklýna yerleþiyor: \"Canavarlar\" Kendini kapýyý açarken çok berbat\nhissediyorsun.\n",
+                    "keyword": "çelik metal kapý büyük",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7913"
+                },
+                {
+                    "door": "D2",
+                    "description": "Salonun dinlenme yeri bu yönde, ve bir çýkýþ oluyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "7901"
+                },
+                {
+                    "door": "D3",
+                    "description": "Kapýnýn üstünde \"OTURMA ODASI\" yazýyor. Kavaktan yapýlmýþ ve çok iyi\nbir heykeltýraþ iþçiliðiyle oyulmuþ.\n",
+                    "keyword": "kapý kavak",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7905"
+                }
+            ]
+        },
+        {
+            "vnum": "7905",
+            "name": "Naris'in oturma odasý",
+            "description": "Çok rahat bir odanýn ortasýnda duruyorsun. Duvarlar gülümseyen Kral\nve Kraliçelerin resimleriyle dekore edilmiþ. En hoþ resim parlayan bir\nzýrh giymiþ Prensin resmi. Duvarlardan birinin yanýnda eski bir koltuk\nvar. Tek çýkýþ doðuya çýkan kavak aðacýndan kapý.\n",
+            "flags": "CDJ",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Kapý çok AÐIR görünüyor. Tamamýyla bir kavak aðacýndan oyulmuþ.\n",
+                    "keyword": "aðýr kavak kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7904"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "koltuk",
+                    "description": "Çok hoþ ve eski zamandan kalma bir koltuk. Üstünde büyük bir yastýk var.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "7906",
+            "name": "Naris'in mutfaðý",
+            "description": "Burasý yiyeceklerin ve içeceklerin konulduðu yer olmalý. Fark edemediðiniz\nfarelerin etleri ve ekmekleri kemiriþlerinin seslerini duyuyorsun. Sesler\nsenin kendini aç hissetmene neden oluyor. Tek çýkýþ salonun kuzey sonuna\nçýkan güneydeki kapý. Kuzeyde bir kiler ve doðuda bir buz dolabý var.\n",
+            "flags": "CDJ",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Burasý karanlýk ama farelerin çýkardýðý sesler apaçýk ortada.\n",
+                    "keyword": "kiler",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7907"
+                },
+                {
+                    "door": "D1",
+                    "description": "Buradan buz dolabýný görebilirsin. Ýçinde bir dolu içecek var.\n",
+                    "keyword": "buzdolabý dolap",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7908"
+                },
+                {
+                    "door": "D2",
+                    "description": "Salonun kuzey sonunu görebiliyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "7904"
+                }
+            ]
+        },
+        {
+            "vnum": "7907",
+            "name": "Kiler",
+            "description": "Bir dolu yiyecek görüyorsun. Yiyeceklerin üstünde dev fareler görüyorsun.\nEtrafta gezinip bulduklarýný kemiriyorlar.\n",
+            "flags": "CDJ",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "kapý tahta",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7906"
+                }
+            ]
+        },
+        {
+            "vnum": "7908",
+            "name": "Buz dolabý",
+            "description": "Buz dolabý su, içecek ve içkilerle doldurulmuþ.\n",
+            "flags": "CDJ",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "çýkýp kapý dolap buzdolabý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7906"
+                }
+            ]
+        },
+        {
+            "vnum": "7909",
+            "name": "Merdivenlerde",
+            "description": "Merdivenlerin aþaðýsýný ve yukarýsý görebiliyorsun. Aþaðýsý ve yukarýsý\nsonsuza kadar sürüyor gibi görünüyor. Görünüþe göre iki yöne de gitmek\nbaþa çýkýlmaz olur. Yukarýda Redferne'in yatak odasý, aþaðýda salonun\ngüney sonu var.\n",
+            "flags": "CDJ",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "7911"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "7901"
+                }
+            ]
+        },
+        {
+            "vnum": "7910",
+            "name": "Hazine odasý",
+            "description": "Kasvetli bir yer. Tek çýkýþ batýdaki meþe kapýsý.\n",
+            "flags": "CDJ",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "kasa çelik",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "-1"
+                },
+                {
+                    "door": "D3",
+                    "description": "Uzun bir meþe kapýsý görüyorsun.\n",
+                    "keyword": "uzun meþe kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7901"
+                }
+            ]
+        },
+        {
+            "vnum": "7911",
+            "name": "Redferne'in yatak odasý",
+            "description": "Burasý çok iyi hazýrlanmýþ ve romantik bir gece için her þeye sahip\nbir yatak odasý. Yatak çok büyük, öyle ki odanýn yarýsýný kapatýyor.\nOdanýn geniþliði en az 300 metre kare. Çift kapýlar güneydeki geniþ\nbalkona açýlýyor. Geniþ bir merdiven aþaðýdaki salona gidiyor.\n",
+            "flags": "CDJ",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Güneþ dýþarýda rahatlýk verici bir sýcaklýkla parýldýyor.\n",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7912"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "7909"
+                }
+            ]
+        },
+        {
+            "vnum": "7912",
+            "name": "Redferne'in ikametinin balkonu",
+            "description": "Bu dünyanýn en kusursuz yerlerini görüyorsun. Buradan güneye doðru vadi\ngözün daha uzaða gidemeyeceði yerlere kadar gidiyor. Aþaðýda bu görkemli\nbinanýn giriþini görüyorsun. Kuzeyde Redferne'in yatak odasýna giden\nkapýlar var.\n",
+            "flags": "CJ",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Büyük Tanrý Redferne'in malikanesi Naris'in rahat yatak odasýný\ngörüyorsun.\n",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7911"
+                },
+                {
+                    "door": "D5",
+                    "description": "Kalenin oturduðu zemini görüyorsun. Garip bir þekilde, meðer sadece\nbulutlarmýþ.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "7913",
+            "name": "Canavar aðýlý",
+            "description": "Ýçinde büyük bir yaratýk tutulan bir kafeste gibisin. Bunu duvarlarýn\narasýnda hapsedilmiþ ÖFKELÝ canavara bakýnca tahmin ediyorsun. Buranýn\ngüvenli olmadýðýný hissediyorsun.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Bu buradan çýkýþýn tek yolu gibi görünüyor.\n",
+                    "keyword": "metal kapý kafes",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7904"
+                }
+            ]
+        },
+        {
+            "vnum": "7914",
+            "name": "Geniþ Zincirde",
+            "description": "Buradan Selenge'ýn güzel manzarasýný izleyebilirsin. Sadece aþaðýya ve\nyukarýya gidebilirsin. Eðer güvenli ve hareket etmeyen zincirden gitmek\nistemezsen buradan baþka yerlere gidebilirsin.\n",
+            "flags": "C",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "Yukarýda zincirin bulutlarýn arasýnda kaybolduðunu görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "7916"
+                },
+                {
+                    "door": "D5",
+                    "description": "Aþaðýda zincir yere, Yol geçidine baðlanmýþ.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3120"
+                }
+            ]
+        },
+        {
+            "vnum": "7916",
+            "name": "Naris'in büyük zincirinde",
+            "description": "Güvenilmez zincirin hemen hemen tam ortasýndasýn. Tek bir yanlýþ adým\nseni ölümünüze götürebilir. Zincir aþaðý ve yukarýya doðru uzanýyor. Artýk\ninmek için yol yok. Þimdi týrmanmaya baþladýn. Hayatýný kurtarmak için.\nAþaðý bakýn ve nedenini görün.\n",
+            "flags": "C",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "Görünüþe bakýlýrsa tek bir yol var, o da yukarýsý.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "7918"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "7914"
+                }
+            ]
+        },
+        {
+            "vnum": "7918",
+            "name": "Naris'in güçlü zinciri",
+            "description": "Burasý seni tüm yer yüzünü görmeni saðlýyor. Görkemli bir ýþýk seni\naydýnlatýyor ve üstünüzdeki bulutlar çekiliyor. Yukarýda Naris Malikanesi'ni\nyani Büyük Tanrý Redferne'in ikametini görebiliyorsun. Zincir sanki seni\nsaran bulutlarýn arasýnda buharlaþýyor.\n",
+            "flags": "C",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "Bulutlarýn güneþli tepelerini görüyorsun. Bunlarýn da üstünde Malikane\ngözlerinin önünde yükseliyor. Muhteþem!!\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "7900"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "7916"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "D",
+            "arg1": "7900",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7901",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7902",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7901",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7901",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7910",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7904",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7913",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7911",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7912",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7904",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7905",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7906",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7908",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7906",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7907",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "7900",
+            "arg2": "1",
+            "arg3": "7900",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "5221",
+            "arg2": "99",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "7217",
+            "arg2": "99",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "7218",
+            "arg2": "99",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "7219",
+            "arg2": "99",
+            "arg3": "9"
+        },
+        {
+            "command": "E",
+            "arg1": "7220",
+            "arg2": "99",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "7221",
+            "arg2": "99",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "7223",
+            "arg2": "99",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "7222",
+            "arg2": "99",
+            "arg3": "8"
+        },
+        {
+            "command": "E",
+            "arg1": "7224",
+            "arg2": "99",
+            "arg3": "12"
+        },
+        {
+            "command": "G",
+            "arg1": "7911",
+            "arg2": "99"
+        },
+        {
+            "command": "M",
+            "arg1": "7901",
+            "arg2": "1",
+            "arg3": "7907",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "6013",
+            "arg2": "10",
+            "arg3": "7908"
+        },
+        {
+            "command": "O",
+            "arg1": "7910",
+            "arg2": "1",
+            "arg3": "7910"
+        },
+        {
+            "command": "P",
+            "arg1": "7298",
+            "arg2": "1",
+            "arg3": "7910",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "7208",
+            "arg2": "6",
+            "arg3": "7910",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "7909",
+            "arg2": "10",
+            "arg3": "7903"
+        }
+    ],
+    "shops": [],
+    "specials": [
+        {
+            "vnum": "7900",
+            "spec_fun": "spec_cast_cleric"
+        },
+        {
+            "vnum": "7901",
+            "spec_fun": "spec_breath_any"
+        }
+    ],
+    "omprogs": [
+        {
+            "command": "M",
+            "vnum": "7901",
+            "progtype": "greet_prog",
+            "progname": "greet_prog_solamnia"
+        },
+        {
+            "command": "M",
+            "vnum": "7901",
+            "progtype": "give_prog",
+            "progname": "give_prog_solamnia"
+        }
+    ],
+    "practicers": [
+        {
+            "vnum": "7900",
+            "practicer": "group_curative"
+        }
+    ]
+}

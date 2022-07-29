@@ -1,0 +1,1637 @@
+{
+    "area": {
+        "file": "mezarlik.are",
+        "name": "Türkçe",
+        "low_range": "5",
+        "high_range": "10",
+        "min_vnum": "3600",
+        "max_vnum": "3699",
+        "path": "3d 7g b g",
+        "yonelim_iyi": "33",
+        "yonelim_yansiz": "34",
+        "yonelim_kem": "33"
+    },
+    "mobiles": [
+        {
+            "vnum": "3600",
+            "name": "bahçývan henry",
+            "short_description": "bahçývan henry",
+            "long_description": "Bahçývan Henry burada oturuyor. Sarhoþ görünüyor.\n",
+            "description": "Uzun ve iri yapýlý, ellilerinin sonuna gelmiþ bir adam. Yüzünde\nonyýllarýn yorgunluðu oldukça belirgin. Çömelmi hali ise keder ve\nçöküntünün bir anlatýmý. Kaybolmuþ cennetin hatýrasýnda sürükleniyor.\n",
+            "race": "human",
+            "act": "AG",
+            "affected_by": "0",
+            "level": "4"
+        },
+        {
+            "vnum": "3601",
+            "name": "zombi",
+            "short_description": "bir çürümüþ zombi",
+            "long_description": "Çürümüþ bir zombi kollarýný uzatmýþ sana doðru geliyor.\n",
+            "description": "Çürümüþ vücudunda kurtçuklar geziniyor.\n",
+            "race": "human",
+            "act": "ABF",
+            "affected_by": "J",
+            "level": "4"
+        },
+        {
+            "vnum": "3602",
+            "name": "hortlak",
+            "short_description": "korkunç hortlak",
+            "long_description": "Korkunç bir hortlak burada.\n",
+            "description": "O uzun kollarý ve pençeye benzeyen uzun keskin týrnaklarýyla yürüyen bir\nölü. Koyu sarý gözleriyle aç aç sana bakýyor.\n",
+            "race": "human",
+            "act": "ABF",
+            "affected_by": "J",
+            "level": "6"
+        },
+        {
+            "vnum": "3603",
+            "name": "iskelet",
+            "short_description": "bir tozlu iskelet",
+            "long_description": "Bir tozlu iskelet burada.\n",
+            "description": "Tozlu kemiklerin rengi neredeyse kahverengi. Çok uzun zaman önce gömülmüþ\nolmalý.\n",
+            "race": "human",
+            "act": "ABF",
+            "affected_by": "J",
+            "level": "3"
+        },
+        {
+            "vnum": "3604",
+            "name": "iskelet",
+            "short_description": "bir tozlu iskelet",
+            "long_description": "Bir tozlu iskelet burada.\n",
+            "description": "Tozlu kemiklerin rengi neredeyse kahverengi. Çok uzun zaman önce gömülmüþ\nolmalý.\n",
+            "race": "human",
+            "act": "AF",
+            "affected_by": "J",
+            "level": "3"
+        },
+        {
+            "vnum": "3605",
+            "name": "zombi",
+            "short_description": "bir çürümüþ zombi",
+            "long_description": "Çürümüþ bir zombi kollarýný uzatmýþ sana doðru geliyor.\n",
+            "description": "Çürümüþ vücudunda kurtçuklar geziniyor.\n",
+            "race": "human",
+            "act": "AF",
+            "affected_by": "J",
+            "level": "4"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "3600",
+            "name": "þamdan",
+            "short_description": "bir þamdan",
+            "description": "Kalay ve kurþun karýþýmýndan bir þamdan burada duruyor.",
+            "material": "parafin",
+            "type": "light",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "0 0 24 0 0",
+            "level": "0",
+            "weight": "50",
+            "cost": "10",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "þamdan",
+                    "description": "Kalay ve kurþundan yapýlmýþ, üç kollu eski bir þamdan. Sarýmsý renkte\nmumlarý var.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "3601",
+            "name": "brendi þiþesi",
+            "short_description": "bir brendi þiþesi",
+            "description": "Bir birendi þiþesi yerde yatýyor.",
+            "material": "glass",
+            "type": "drink",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "32 32 'whisky' 0 0",
+            "level": "0",
+            "weight": "20",
+            "cost": "100",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "brendi þiþesi",
+                    "description": "Bu özel bir 'Ejder Kaný' brendi þiþesi. Boynu küçük bir ejderhayý\nandýrýyor. Böyle þiþeler boþ olduklarýnda bile para ederler.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "3602",
+            "name": "brendi þiþesi",
+            "short_description": "bir brendi þiþesi",
+            "description": "Bir birendi þiþesi yerde yatýyor.",
+            "material": "glass",
+            "type": "drink",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "32 0 'whisky' 0 0",
+            "level": "0",
+            "weight": "20",
+            "cost": "100",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "brendi þiþesi",
+                    "description": "Bu özel bir 'Ejder Kaný' brendi þiþesi. Boynu küçük bir ejderhayý\nandýrýyor. Böyle þiþeler boþ olduklarýnda bile para ederler.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "3603",
+            "name": "el arabasý",
+            "short_description": "bir el arabasý",
+            "description": "Yeþil boyalý bir el arabasý burada duruyor.",
+            "material": "wood",
+            "type": "boat",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "1000",
+            "cost": "50",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "el arabasý",
+                    "description": "Meþe aðacýndan yapýlmýþ ve koyu yeþile boyanmýþ aðýr bir el arabasý.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "3604",
+            "name": "kürek",
+            "short_description": "bir kürek",
+            "description": "Bir kürek burada yatýyor.",
+            "material": "iron ebony",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "mace 1 5 pound 0",
+            "level": "0",
+            "weight": "80",
+            "cost": "169",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "kürek",
+                    "description": "Sapý tahtadan geniþ metal bir kürek.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "3605",
+            "name": "topuz",
+            "short_description": "bir topuz",
+            "description": "Bir topuz yerde yatýyor.",
+            "material": "unknown",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "mace 1 4 claw 0",
+            "level": "0",
+            "weight": "80",
+            "cost": "140",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "týrmýk",
+                    "description": "Tahtadan sapý olan geniþ metal bir týrmýk.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "3610",
+            "name": "iskelet",
+            "short_description": "tozlu bir iskelet",
+            "description": "Tozlu bir iskelet yerde yatýyor.",
+            "material": "bone",
+            "type": "furniture",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "150",
+            "cost": "0",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "iskelet",
+                    "description": "Kemikler neredeyse kahverengi olmuþ. Öleli çok olmuþ olmalý. Ýskelet\nmükemmel durumda.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "3611",
+            "name": "ametist mücevher",
+            "short_description": "bir ametist mücevher",
+            "description": "Büyük, parlayan, mor bir mücevher burada.",
+            "material": "amethyst",
+            "type": "warp_stone",
+            "extra_flags": "T",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "10",
+            "cost": "2500",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "ametist",
+                    "description": "Oldukça derin mor bir rengi var.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "3612",
+            "name": "pandantif gümüþ",
+            "short_description": "bir pandantif gümüþ",
+            "description": "Bir pandantif gümüþ burada býrakýlmýþ.",
+            "material": "silver",
+            "type": "jewelry",
+            "extra_flags": "0",
+            "wear_flags": "AC",
+            "values": "0 0 0 0 0",
+            "level": "7",
+            "weight": "10",
+            "cost": "800",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "1"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-1"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "pandantif gümüþ",
+                    "description": "Thor'un çekicine benziyor. Saf gümüþten yapýlmýþ.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "3613",
+            "name": "gümüþ kama",
+            "short_description": "bir gümüþ kama",
+            "description": "Uzun bir gümüþ kama burada yatýyor.",
+            "material": "silver",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "dagger 2 4 pierce 0",
+            "level": "6",
+            "weight": "10",
+            "cost": "430",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "1"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "gümüþ hançer",
+                    "description": "Uzun bir hançer. Gümüþten yapýlmýþ. Kabzasýna bir rün iþlenmiþ.\n"
+                }
+            ]
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "3600",
+            "name": "Mezarlýkta bir çakýl yol",
+            "description": "Mezalýk boyunca kuzey ve güneye giden çakýl bir yoldasýn. Yolun iki\nkenarýnda koyu renk yaprak dökmeyen aðaçlar var. Kuzeyde bir demir kapý,\nbatý ve doðuya doðru ise çakýl yol var.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Demir parmaklýklar boyunca Elm Caddesi'ni görüyorsun.\n",
+                    "keyword": "ýzgara",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3124"
+                },
+                {
+                    "door": "D1",
+                    "description": "Çakýl yol koyu yaprak dökmeyen aðaçlarýn arasýndan doðuya ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3650"
+                },
+                {
+                    "door": "D2",
+                    "description": "Çakýl yol güneye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3601"
+                },
+                {
+                    "door": "D3",
+                    "description": "Çakýl yol koyu yaprak dökmeyen aðaçlarýn arasýndan batýya ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3606"
+                }
+            ]
+        },
+        {
+            "vnum": "3601",
+            "name": "Mezarlýkta bir çakýl yol",
+            "description": "Mezalýk boyunca kuzey ve güneye giden çakýl bir yoldasýn. Yolun iki\nkenarýnda koyu renk yaprak dökmeyen aðaçlar var.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Çakýl yol kuzeye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3600"
+                },
+                {
+                    "door": "D2",
+                    "description": "Çakýl yol güneye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3602"
+                }
+            ]
+        },
+        {
+            "vnum": "3602",
+            "name": "Mezarlýkta bir çakýl yol",
+            "description": "Mezalýk boyunca kuzey ve güneye giden çakýl bir yoldasýn. Yolun iki\nkenarýnda koyu renk yaprak dökmeyen aðaçlar var.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Çakýl yol kuzeye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3601"
+                },
+                {
+                    "door": "D2",
+                    "description": "Çakýl yol güneye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3603"
+                }
+            ]
+        },
+        {
+            "vnum": "3603",
+            "name": "Mezarlýkta bir çakýl yol",
+            "description": "Mezalýk boyunca kuzey ve güneye giden çakýl bir yoldasýn. Yolun iki\nkenarýnda koyu renk yaprak dökmeyen aðaçlar var.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Çakýl yol kuzeye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3602"
+                },
+                {
+                    "door": "D2",
+                    "description": "Çakýl yol güneyde küçük yapýnýn önündeki alana ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3604"
+                }
+            ]
+        },
+        {
+            "vnum": "3604",
+            "name": "Küçük Kilisenin Önünde",
+            "description": "Küçük bir kilisenin önünde açýk alandasýn. Çakýl bir yol kuzeye,\nmezarlýða yöneliyor. Kilise giriþi ise güneyde.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Çakýl yol kuzeye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3603"
+                },
+                {
+                    "door": "D1",
+                    "description": "Çakýl yol koyu yaprak dökmeyen aðaçlarýn arasýndan doðuya ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3638"
+                },
+                {
+                    "door": "D2",
+                    "description": "Kilise kapýsý kara aðaçtan yapýlmýþ.\n",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3405"
+                },
+                {
+                    "door": "D3",
+                    "description": "Çakýl yol koyu yaprak dökmeyen aðaçlarýn arasýndan batýya ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3618"
+                }
+            ]
+        },
+        {
+            "vnum": "3606",
+            "name": "Mezarlýkta bir çakýl yol",
+            "description": "Mezalýðýn koyu renk yaprak dökmeyen aðaçlarýnýn arasýnda ilerleyen çakýl\nbir patikadasýn. Burada eski bir mezar var.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Çakýl yol doðuya bir çakýl yola doðru ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3600"
+                },
+                {
+                    "door": "D2",
+                    "description": "Çakýl yol güneye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3608"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3607"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "kabir taþý",
+                    "description": "Bu dikdörtgen, yere yüzü yukarý gelecek þekilde yerleþtirilmiþ gri bir\ntaþ. Zamanla üzerindeki isim silinmiþ.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "3607",
+            "name": "Tozlu Kabirde",
+            "description": "Büyük bir mezar taþýnýn altýnda, karanlýk bir defin odasýndasýn. Tek\nçýkýþ yukarýya.\n",
+            "flags": "AD",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3606"
+                }
+            ]
+        },
+        {
+            "vnum": "3608",
+            "name": "Mezarlýkta bir çakýl yol",
+            "description": "Mezalýðýn koyu renk yaprak dökmeyen aðaçlarýnýn arasýnda ilerleyen çakýl\nbir patikadasýn. Burada eski bir mezar var.\n",
+            "flags": "0",
+            "sector": "2",
+            "extra_descriptions": [
+                {
+                    "keyword": "kabir taþý",
+                    "description": "Bu dikdörtgen, yere yüzü yukarý gelecek þekilde yerleþtirilmiþ gri bir\ntaþ. Zamanla üzerindeki isim silinmiþ.\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Çakýl yol kuzeye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3606"
+                },
+                {
+                    "door": "D3",
+                    "description": "Çakýl yol batýya ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3610"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3609"
+                }
+            ]
+        },
+        {
+            "vnum": "3609",
+            "name": "Tozlu Kabirde",
+            "description": "Büyük bir mezar taþýnýn altýnda, karanlýk bir defin odasýndasýn. Tek\nçýkýþ yukarýya.\n",
+            "flags": "AD",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3608"
+                }
+            ]
+        },
+        {
+            "vnum": "3610",
+            "name": "Mezarlýkta bir çakýl yol",
+            "description": "Mezalýðýn koyu renk yaprak dökmeyen aðaçlarýnýn arasýnda ilerleyen çakýl\nbir patikadasýn. Burada eski bir mezar var.\n",
+            "flags": "0",
+            "sector": "2",
+            "extra_descriptions": [
+                {
+                    "keyword": "kabir taþý",
+                    "description": "Bu dikdörtgen, yere yüzü yukarý gelecek þekilde yerleþtirilmiþ gri bir\ntaþ. Zamanla üzerindeki isim silinmiþ.\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Çakýl yol doðuya ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3608"
+                },
+                {
+                    "door": "D2",
+                    "description": "Çakýl yol güneye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3612"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3611"
+                }
+            ]
+        },
+        {
+            "vnum": "3611",
+            "name": "Tozlu Kabirde",
+            "description": "Büyük bir mezar taþýnýn altýnda, karanlýk bir defin odasýndasýn. Tek\nçýkýþ yukarýya.\n",
+            "flags": "AD",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3610"
+                }
+            ]
+        },
+        {
+            "vnum": "3612",
+            "name": "Mezarlýkta bir çakýl yol",
+            "description": "Mezalýðýn koyu renk yaprak dökmeyen aðaçlarýnýn arasýnda ilerleyen çakýl\nbir patikadasýn. Patika kuzeye ve doðuya ilerliyor. Batýda küçük bir kulübe\nvar.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Çakýl yol kuzeye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3610"
+                },
+                {
+                    "door": "D1",
+                    "description": "Çakýl yol doðuya ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3614"
+                },
+                {
+                    "door": "D3",
+                    "description": "Bu tahta kapýlý, siyah boyalý küçük bir kulübe.\n",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3613"
+                }
+            ]
+        },
+        {
+            "vnum": "3613",
+            "name": "Mezarlýktaki Kulübede",
+            "description": "Burasý bahçede kullanýlan ekipmanlarýn konulduðu bir depo gibi görünüyor.\nTek çýkýþ doðuda.\n",
+            "flags": "D",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3612"
+                }
+            ]
+        },
+        {
+            "vnum": "3614",
+            "name": "Mezarlýkta bir çakýl yol",
+            "description": "Mezalýðýn koyu renk yaprak dökmeyen aðaçlarýnýn arasýnda ilerleyen çakýl\nbir patikadasýn. Burada eski bir mezar var.\n",
+            "flags": "0",
+            "sector": "2",
+            "extra_descriptions": [
+                {
+                    "keyword": "kabir taþý",
+                    "description": "Bu dikdörtgen, yere yüzü yukarý gelecek þekilde yerleþtirilmiþ gri bir\ntaþ. Zamanla üzerindeki isim silinmiþ.\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Çakýl yol güneye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3616"
+                },
+                {
+                    "door": "D3",
+                    "description": "Çakýl yol batýya ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3612"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3615"
+                }
+            ]
+        },
+        {
+            "vnum": "3615",
+            "name": "Tozlu Kabirde",
+            "description": "Büyük bir mezar taþýnýn altýnda, karanlýk bir defin odasýndasýn. Tek\nçýkýþ yukarýya.\n",
+            "flags": "AD",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3614"
+                }
+            ]
+        },
+        {
+            "vnum": "3616",
+            "name": "Mezarlýkta bir çakýl yol",
+            "description": "Mezalýðýn koyu renk yaprak dökmeyen aðaçlarýnýn arasýnda ilerleyen çakýl\nbir patikadasýn. Burada eski bir mezar var.\n",
+            "flags": "0",
+            "sector": "2",
+            "extra_descriptions": [
+                {
+                    "keyword": "kabir taþý",
+                    "description": "Bu dikdörtgen, yere yüzü yukarý gelecek þekilde yerleþtirilmiþ gri bir\ntaþ. Zamanla üzerindeki isim silinmiþ.\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Çakýl yol kuzeye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3614"
+                },
+                {
+                    "door": "D2",
+                    "description": "Çakýl yol güneye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3618"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3617"
+                }
+            ]
+        },
+        {
+            "vnum": "3617",
+            "name": "Tozlu Kabirde",
+            "description": "Büyük bir mezar taþýnýn altýnda, karanlýk bir defin odasýndasýn. Tek\nçýkýþ yukarýya.\n",
+            "flags": "AD",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3616"
+                }
+            ]
+        },
+        {
+            "vnum": "3618",
+            "name": "Mezarlýkta bir çakýl yol",
+            "description": "Mezalýðýn koyu renk yaprak dökmeyen aðaçlarýnýn arasýnda ilerleyen çakýl\nbir patikadasýn. Burada eski bir mezar var.\n",
+            "flags": "0",
+            "sector": "2",
+            "extra_descriptions": [
+                {
+                    "keyword": "kabir taþý",
+                    "description": "Bu dikdörtgen, yere yüzü yukarý gelecek þekilde yerleþtirilmiþ gri bir\ntaþ. Zamanla üzerindeki isim silinmiþ.\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Çakýl yol kuzeye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3616"
+                },
+                {
+                    "door": "D1",
+                    "description": "Çakýl yol doðuya bir çeþit binaya doðru ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3604"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3619"
+                }
+            ]
+        },
+        {
+            "vnum": "3619",
+            "name": "Tozlu Kabirde",
+            "description": "Büyük bir mezar taþýnýn altýnda, karanlýk bir defin odasýndasýn. Tek\nçýkýþ yukarýya.\n",
+            "flags": "AD",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3618"
+                }
+            ]
+        },
+        {
+            "vnum": "3638",
+            "name": "Mezarlýkta bir çakýl yol",
+            "description": "Mezalýðýn koyu renk yaprak dökmeyen aðaçlarýnýn arasýnda ilerleyen çakýl\nbir patikadasýn. Burada eski bir mezar var.\n",
+            "flags": "0",
+            "sector": "2",
+            "extra_descriptions": [
+                {
+                    "keyword": "kabir taþý",
+                    "description": "Bu dikdörtgen, yere yüzü yukarý gelecek þekilde yerleþtirilmiþ gri bir\ntaþ. Zamanla üzerindeki isim silinmiþ.\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Çakýl yol kuzeye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3640"
+                },
+                {
+                    "door": "D3",
+                    "description": "Çakýl yol batýya bir çeþit binaya doðru ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3604"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3639"
+                }
+            ]
+        },
+        {
+            "vnum": "3639",
+            "name": "Tozlu Kabirde",
+            "description": "Büyük bir mezar taþýnýn altýnda, karanlýk bir defin odasýndasýn. Tek\nçýkýþ yukarýya.\n",
+            "flags": "AD",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3638"
+                }
+            ]
+        },
+        {
+            "vnum": "3640",
+            "name": "Mezarlýkta bir çakýl yol",
+            "description": "Mezalýðýn koyu renk yaprak dökmeyen aðaçlarýnýn arasýnda ilerleyen çakýl\nbir patikadasýn. Burada eski bir mezar var.\n",
+            "flags": "0",
+            "sector": "2",
+            "extra_descriptions": [
+                {
+                    "keyword": "kabir taþý",
+                    "description": "Bu dikdörtgen, yere yüzü yukarý gelecek þekilde yerleþtirilmiþ gri bir\ntaþ. Zamanla üzerindeki isim silinmiþ.\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Çakýl yol kuzeye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3642"
+                },
+                {
+                    "door": "D2",
+                    "description": "Çakýl yol güneye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3638"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3641"
+                }
+            ]
+        },
+        {
+            "vnum": "3641",
+            "name": "Tozlu Kabirde",
+            "description": "Büyük bir mezar taþýnýn altýnda, karanlýk bir defin odasýndasýn. Tek\nçýkýþ yukarýya.\n",
+            "flags": "AD",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3640"
+                }
+            ]
+        },
+        {
+            "vnum": "3642",
+            "name": "Mezarlýkta bir çakýl yol",
+            "description": "Mezalýðýn koyu renk yaprak dökmeyen aðaçlarýnýn arasýnda ilerleyen çakýl\nbir patikadasýn. Burada eski bir mezar var.\n",
+            "flags": "0",
+            "sector": "2",
+            "extra_descriptions": [
+                {
+                    "keyword": "kabir taþý",
+                    "description": "Bu dikdörtgen, yere yüzü yukarý gelecek þekilde yerleþtirilmiþ gri bir\ntaþ. Zamanla üzerindeki isim silinmiþ.\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Çakýl yol doðuya ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3644"
+                },
+                {
+                    "door": "D2",
+                    "description": "Çakýl yol güneye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3640"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3643"
+                }
+            ]
+        },
+        {
+            "vnum": "3643",
+            "name": "Tozlu Kabirde",
+            "description": "Büyük bir mezar taþýnýn altýnda, karanlýk bir defin odasýndasýn. Tek\nçýkýþ yukarýya.\n",
+            "flags": "AD",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3642"
+                }
+            ]
+        },
+        {
+            "vnum": "3644",
+            "name": "Mezarlýkta bir çakýl yol",
+            "description": "Mezalýðýn koyu renk yaprak dökmeyen aðaçlarýnýn arasýnda ilerleyen çakýl\nbir patikadasýn. Burada eski bir mezar var.\n",
+            "flags": "0",
+            "sector": "2",
+            "extra_descriptions": [
+                {
+                    "keyword": "kabir taþý",
+                    "description": "Bu dikdörtgen, yere yüzü yukarý gelecek þekilde yerleþtirilmiþ gri bir\ntaþ. Zamanla üzerindeki isim silinmiþ.\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Çakýl yol kuzeye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3646"
+                },
+                {
+                    "door": "D3",
+                    "description": "Çakýl yol batýya ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3642"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3645"
+                }
+            ]
+        },
+        {
+            "vnum": "3645",
+            "name": "Tozlu Kabirde",
+            "description": "Büyük bir mezar taþýnýn altýnda, karanlýk bir defin odasýndasýn. Tek\nçýkýþ yukarýya.\n",
+            "flags": "AD",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3644"
+                }
+            ]
+        },
+        {
+            "vnum": "3646",
+            "name": "Mezarlýkta bir çakýl yol",
+            "description": "Mezalýðýn koyu renk yaprak dökmeyen aðaçlarýnýn arasýnda ilerleyen çakýl\nbir patikadasýn. Burada eski bir mezar var.\n",
+            "flags": "0",
+            "sector": "2",
+            "extra_descriptions": [
+                {
+                    "keyword": "kabir taþý",
+                    "description": "Bu dikdörtgen, yere yüzü yukarý gelecek þekilde yerleþtirilmiþ gri bir\ntaþ. Zamanla üzerindeki isim silinmiþ.\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Çakýl yol güneye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3644"
+                },
+                {
+                    "door": "D3",
+                    "description": "Çakýl yol batýya ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3648"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3647"
+                }
+            ]
+        },
+        {
+            "vnum": "3647",
+            "name": "Tozlu Kabirde",
+            "description": "Büyük bir mezar taþýnýn altýnda, karanlýk bir defin odasýndasýn. Tek\nçýkýþ yukarýya.\n",
+            "flags": "AD",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3646"
+                }
+            ]
+        },
+        {
+            "vnum": "3648",
+            "name": "Mezarlýkta bir çakýl yol",
+            "description": "Mezalýðýn koyu renk yaprak dökmeyen aðaçlarýnýn arasýnda ilerleyen çakýl\nbir patikadasýn. Burada eski bir mezar var.\n",
+            "flags": "0",
+            "sector": "2",
+            "extra_descriptions": [
+                {
+                    "keyword": "kabir taþý",
+                    "description": "Bu dikdörtgen, yere yüzü yukarý gelecek þekilde yerleþtirilmiþ gri bir\ntaþ. Zamanla üzerindeki isim silinmiþ.\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Çakýl yol kuzeye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3650"
+                },
+                {
+                    "door": "D1",
+                    "description": "Çakýl yol doðuya ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3646"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3649"
+                }
+            ]
+        },
+        {
+            "vnum": "3649",
+            "name": "Tozlu Kabirde",
+            "description": "Büyük bir mezar taþýnýn altýnda, karanlýk bir defin odasýndasýn. Tek\nçýkýþ yukarýya.\n",
+            "flags": "AD",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3648"
+                }
+            ]
+        },
+        {
+            "vnum": "3650",
+            "name": "Mezarlýkta bir çakýl yol",
+            "description": "Mezalýðýn koyu renk yaprak dökmeyen aðaçlarýnýn arasýnda ilerleyen çakýl\nbir patikadasýn. Burada eski bir mezar var.\n",
+            "flags": "0",
+            "sector": "2",
+            "extra_descriptions": [
+                {
+                    "keyword": "kabir taþý",
+                    "description": "Bu dikdörtgen, yere yüzü yukarý gelecek þekilde yerleþtirilmiþ gri bir\ntaþ. Zamanla üzerindeki isim silinmiþ.\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Çakýl yol güneye ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3648"
+                },
+                {
+                    "door": "D3",
+                    "description": "Çakýl yol batýya, bir çakýl yola doðru ilerliyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3600"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3651"
+                }
+            ]
+        },
+        {
+            "vnum": "3651",
+            "name": "Tozlu Kabirde",
+            "description": "Büyük bir mezar taþýnýn altýnda, karanlýk bir defin odasýndasýn. Tek\nçýkýþ yukarýya.\n",
+            "flags": "AD",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "kabir taþý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "3650"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "D",
+            "arg1": "3124",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "3600",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "3604",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "3606",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "3607",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "3610",
+            "arg2": "13",
+            "arg3": "3607"
+        },
+        {
+            "command": "D",
+            "arg1": "3608",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "3609",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "3603",
+            "arg2": "4",
+            "arg3": "3609",
+            "arg4": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "3610",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "3611",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "3603",
+            "arg2": "4",
+            "arg3": "3611",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "3613",
+            "arg2": "10",
+            "arg3": "3611"
+        },
+        {
+            "command": "D",
+            "arg1": "3612",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "3613",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "3600",
+            "arg2": "1",
+            "arg3": "3613",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "3601",
+            "arg2": "-1"
+        },
+        {
+            "command": "O",
+            "arg1": "3602",
+            "arg2": "-1",
+            "arg3": "3613"
+        },
+        {
+            "command": "O",
+            "arg1": "3603",
+            "arg2": "1",
+            "arg3": "3613"
+        },
+        {
+            "command": "O",
+            "arg1": "3604",
+            "arg2": "-1",
+            "arg3": "3613"
+        },
+        {
+            "command": "O",
+            "arg1": "3605",
+            "arg2": "-1",
+            "arg3": "3613"
+        },
+        {
+            "command": "D",
+            "arg1": "3614",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "3615",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "3610",
+            "arg2": "13",
+            "arg3": "3615"
+        },
+        {
+            "command": "D",
+            "arg1": "3616",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "3617",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "3602",
+            "arg2": "1",
+            "arg3": "3617",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "3612",
+            "arg2": "-1"
+        },
+        {
+            "command": "D",
+            "arg1": "3618",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "3619",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "3610",
+            "arg2": "13",
+            "arg3": "3619"
+        },
+        {
+            "command": "D",
+            "arg1": "3638",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "3639",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "3603",
+            "arg2": "4",
+            "arg3": "3639",
+            "arg4": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "3640",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "3641",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "3610",
+            "arg2": "13",
+            "arg3": "3641"
+        },
+        {
+            "command": "D",
+            "arg1": "3642",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "3643",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "3603",
+            "arg2": "5",
+            "arg3": "3643"
+        },
+        {
+            "command": "D",
+            "arg1": "3644",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "3645",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "3601",
+            "arg2": "1",
+            "arg3": "3645",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "3611",
+            "arg2": "-1"
+        },
+        {
+            "command": "D",
+            "arg1": "3646",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "3647",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "3610",
+            "arg2": "13",
+            "arg3": "3647"
+        },
+        {
+            "command": "D",
+            "arg1": "3648",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "3649",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "3603",
+            "arg2": "4",
+            "arg3": "3649",
+            "arg4": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "3650",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "3651",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "3604",
+            "arg2": "4",
+            "arg3": "3606",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "3604",
+            "arg2": "4",
+            "arg3": "3604",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "3604",
+            "arg2": "4",
+            "arg3": "3612",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "3604",
+            "arg2": "4",
+            "arg3": "3640",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "3605",
+            "arg2": "3",
+            "arg3": "3651",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "3605",
+            "arg2": "3",
+            "arg3": "3644",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "3605",
+            "arg2": "3",
+            "arg3": "3638",
+            "arg4": "1"
+        }
+    ],
+    "shops": [],
+    "specials": [
+        {
+            "vnum": "3601",
+            "spec_fun": "spec_cast_undead"
+        },
+        {
+            "vnum": "3602",
+            "spec_fun": "spec_cast_undead"
+        },
+        {
+            "vnum": "3603",
+            "spec_fun": "spec_cast_undead"
+        },
+        {
+            "vnum": "3604",
+            "spec_fun": "spec_cast_undead"
+        },
+        {
+            "vnum": "3605",
+            "spec_fun": "spec_cast_undead"
+        }
+    ]
+}

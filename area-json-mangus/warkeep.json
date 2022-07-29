@@ -1,0 +1,3152 @@
+{
+    "area": {
+        "file": "warkeep.are",
+        "name": "Ýngilizce",
+        "low_range": "20",
+        "high_range": "30",
+        "min_vnum": "15700",
+        "max_vnum": "15750",
+        "path": "Eski Selenge PY'den 6d 2k b",
+        "yonelim_iyi": "33",
+        "yonelim_yansiz": "34",
+        "yonelim_kem": "33"
+    },
+    "helps": [
+        {
+            "level": "0",
+            "keyword": "'The Keep of the Warlock'",
+            "text": "Many centuries ago, around the time of the Goblin Wars, which took the lives\nof so many Elves, Dwarves and Humans on the Plains of Blood, there existed\na vile and crafty warlock named Baragar, and he resided in a fell keep\nnear the jagged peak of Mount Doom. By traveling to the past dimension, you\nwill have the chance to meet and slay this evil mercenary who worked against\nhis own race for the money of foul forces such as Krogthar, Jher and Lord\nVax. The warlock is not alone in his keep, however, and you will find\nyourself pitted against many heinous foes in your journey.\n"
+        }
+    ],
+    "mobiles": [
+        {
+            "vnum": "15700",
+            "name": "warlock baragar",
+            "short_description": "the warlock Baragar",
+            "long_description": "The warlock Baragar chuckles at you and dares you to attack him.\n",
+            "description": "Before you stands the master of the keep, Baragar the warlock. And while\nBaragar is weak compared to sorcerers such as Krogthar and his minions,\nor the vile Jher, he is no pushover either.\n\nBaragar is a handsome young man with long white hair, and deep blue eyes.\nHe would appear to be almost angelic were it not for the diabolical gleam\nto his eyes, and the evil grin on his thin, cruel lips.\n",
+            "race": "human",
+            "act": "2|8|64|128",
+            "affected_by": "4|8|16|32|128|512|8192|524288",
+            "level": "30"
+        },
+        {
+            "vnum": "15701",
+            "name": "woman witch alara",
+            "short_description": "the witch Alara",
+            "long_description": "A comely woman in her early twenties grins at you.\n",
+            "description": "This woman is the witch Alara, associate and lover of Baragar. She is nude\nsave for a leather bandolier across her chest and buttocks, which contains\na variety of potions, scrolls and throwing daggers. She would be very\nattractive if she didn't cackle insanely so much.\n",
+            "race": "human",
+            "act": "2|64|128",
+            "affected_by": "8|512|8192",
+            "level": "28"
+        },
+        {
+            "vnum": "15702",
+            "name": "demon",
+            "short_description": "a demon",
+            "long_description": "A minor demon hisses and snarls at you.\n",
+            "description": "Baragar and Alara managed to capture this demon and keep it in this room,\nbut they lacked the power necessary to control it, so they dare not release\nit again. And now you're in here with this eight foot tall, four armed,\ngreen skinned monstrosity from the lower planes. Great.\n",
+            "race": "unique",
+            "act": "2|8|32|64",
+            "affected_by": "8|128|512|524288",
+            "level": "35"
+        },
+        {
+            "vnum": "15703",
+            "name": "cat familiar",
+            "short_description": "a cat familiar",
+            "long_description": "Alara's familiar, a black cat, hisses at you.\n",
+            "description": "This angry feline is Alara's familiar. Do away with it.\n",
+            "race": "cat",
+            "act": "2|32|64|128",
+            "affected_by": "8|512|8192",
+            "level": "10"
+        },
+        {
+            "vnum": "15704",
+            "name": "hawk familiar",
+            "short_description": "a hawk familiar",
+            "long_description": "Alara's familiar, a hawk, screeches at you.\n",
+            "description": "This angry bird is Baragar's familiar. Do away with it.\n",
+            "race": "song bird",
+            "act": "2|32|64|128",
+            "affected_by": "8|512|8192|524288",
+            "level": "12"
+        },
+        {
+            "vnum": "15705",
+            "name": "asura guard",
+            "short_description": "a asura guard",
+            "long_description": "A asura guard squints suspiciously at you.\n",
+            "description": "These asuras are meant to prevent strangers from entering the inner keep,\nbut they see so many strange creatures here they aren't sure which type is\nallowed and which isn't.\n",
+            "race": "asura",
+            "act": "2|8|64",
+            "affected_by": "512|8192",
+            "level": "25"
+        },
+        {
+            "vnum": "15706",
+            "name": "flesh golem",
+            "short_description": "a flesh golem",
+            "long_description": "A flesh golem stands here, arms folded.\n",
+            "description": "This mindless automaton is a creation of Baragar's. It answers only to him,\na fact which irritates (and worries) Alara.\n",
+            "race": "golem",
+            "act": "2|64",
+            "affected_by": "128|8192",
+            "level": "26"
+        },
+        {
+            "vnum": "15707",
+            "name": "fire drake",
+            "short_description": "a fire drake",
+            "long_description": "A fire drake snorts flames and attacks!\n",
+            "description": "This angry dragonkin has been roused from its nap by you, and it isn't happy\nabout it...\n",
+            "race": "unique",
+            "act": "2|32|64",
+            "affected_by": "8|128|512",
+            "level": "28"
+        },
+        {
+            "vnum": "15708",
+            "name": "zombie servant",
+            "short_description": "a zombie servant",
+            "long_description": "A zombie servant gazes at you blankly.\n",
+            "description": "This poor fellow was once a living servant of Baragar who made one mistake\ntoo many. Baragar eventually decided undead staff were far more reliable,\nif a little slower, and slew all his staff, turning them subsequently into\nmindless undead. That's what a charming guy he is.\n",
+            "race": "undead",
+            "act": "64",
+            "affected_by": "0",
+            "level": "15"
+        },
+        {
+            "vnum": "15709",
+            "name": "guard",
+            "short_description": "a keep guard",
+            "long_description": "A keep guard stands rigidly at attention here.\n",
+            "description": "This guard is slightly bemused at your entrance, but doesn't move to stop\nyou- Baragar receives dozens of visitors daily, and if they are powerful\nenough to slay him, then the guards certainly don't stand a chance, so they\nkeep quiet. You may wonder why in that case Baragar bothers having guards.\nWell, so does he.\n",
+            "race": "human",
+            "act": "2|8|64",
+            "affected_by": "512",
+            "level": "18"
+        },
+        {
+            "vnum": "15710",
+            "name": "apprentice",
+            "short_description": "an apprentice mage",
+            "long_description": "An apprentice mage looks up from her work, startled.\n",
+            "description": "This woman was a former lover of Alara's who was brought here by the witch\nas a student after Alara hooked up with Baragar, a warlock of a different\ngender. She is small, cute, and evil.\n",
+            "race": "human",
+            "act": "2|64|128",
+            "affected_by": "8192",
+            "level": "21"
+        },
+        {
+            "vnum": "15711",
+            "name": "grell",
+            "short_description": "a grell",
+            "long_description": "A grell gropes at you with its tentacles.\n",
+            "description": "This looks like a huge brain with green tentacles and a huge squid-like\nbeak. It hovers in the center of the room, glaring at you menacingly.\n",
+            "race": "unique",
+            "act": "2|32|64",
+            "affected_by": "524288",
+            "level": "24"
+        },
+        {
+            "vnum": "15712",
+            "name": "mimic",
+            "short_description": "a mimic",
+            "long_description": "A wooden chest suddenly comes to life!\n",
+            "description": "This mimic has been placed here by Baragar to fool (and hopefully slay)\npotential thieves.\n",
+            "race": "human",
+            "act": "2|32|64",
+            "affected_by": "8192",
+            "level": "22"
+        },
+        {
+            "vnum": "15713",
+            "name": "crocodile",
+            "short_description": "a hungry crocodile",
+            "long_description": "A hungry crocodile snaps its jaws at you.\n",
+            "description": "This hungry reptile hasn't been fed in days. Baragar starves his crocs to\nkeep them savage. He uses them to punish his guards. They seldom make\nthe same mistake twice, because they are usually dead.\n",
+            "race": "lizard",
+            "act": "2|32|64",
+            "affected_by": "0",
+            "level": "19"
+        },
+        {
+            "vnum": "15714",
+            "name": "war dog",
+            "short_description": "a savage war dog",
+            "long_description": "A savage war dog snarls viciously at you.\n",
+            "description": "Baragar bred these brutes from the most vicious alsatians and pit bulls he\ncould find, then infected them with super-rabies to make 'em nice and\nfriendly.\n",
+            "race": "fido",
+            "act": "2|32|64",
+            "affected_by": "8192",
+            "level": "16"
+        },
+        {
+            "vnum": "15715",
+            "name": "assassin",
+            "short_description": "an assassin",
+            "long_description": "An assassin appears suddenly before you.\n",
+            "description": "This mysterious woman is one of Baragar's elite black-robed assassins.\nClosely aligned with the assassins of Krogthar's domain, they are cold-\nblooded, ruthless fanatics devoted to their ruler.\n",
+            "race": "human",
+            "act": "2|32|64|128",
+            "affected_by": "512|8192",
+            "level": "20"
+        },
+        {
+            "vnum": "15716",
+            "name": "dagar assassin",
+            "short_description": "the assassin Dagar",
+            "long_description": "Dagar the assassin urges you to be silent.\n",
+            "description": "Dagar is an agent of Thalos, sent here to eliminate Baragar. He has spent\nweeks infiltrating the keep, and is now in the final stages of his plan.\nHowever, he'd be more than happy for you to complete the task for him.\n",
+            "race": "human",
+            "act": "2|64",
+            "affected_by": "8|32|128|512|32768|65536",
+            "level": "27"
+        },
+        {
+            "vnum": "15717",
+            "name": "gnoll slave",
+            "short_description": "a gnoll slave",
+            "long_description": "A gnoll slave yelps in surprise at your presence.\n",
+            "description": "These evil dog-like humanoids have been captured by Baragar and set to work\nas miners and laborers helping to excavate the ancient lower cavers beneath\nthe keep.\n",
+            "race": "fido",
+            "act": "64|128",
+            "affected_by": "0",
+            "level": "12"
+        },
+        {
+            "vnum": "15718",
+            "name": "ogre slave",
+            "short_description": "an ogre slave",
+            "long_description": "An ogre slave grunts as you enter, then turns back to his work.\n",
+            "description": "These evil giant-kin have been captured by Baragar and set to work as miners\nand laborers helping to excavate the ancient lower cavers beneath the keep.\n",
+            "race": "human",
+            "act": "64",
+            "affected_by": "512",
+            "level": "18"
+        },
+        {
+            "vnum": "15719",
+            "name": "flind slave master",
+            "short_description": "a flind slave master",
+            "long_description": "A flind slave master howls fiercely and orders you to leave.\n",
+            "description": "This gnoll-kin has been placed in charge of the gnolls and ogres that\nlabor here, and will not tolerate any interruptions.\n",
+            "race": "human",
+            "act": "2|32|64",
+            "affected_by": "512|8192",
+            "level": "20"
+        },
+        {
+            "vnum": "15720",
+            "name": "otyugh",
+            "short_description": "an otyugh",
+            "long_description": "An otyugh gibbers and attacks!\n",
+            "description": "This creature is a trangular mass of flesh with a huge maw and two tentacles.\nIt rushes toward you on stubby legs. It is used to devour the garbage of\nthe keep.\n",
+            "race": "unique",
+            "act": "2|32|64",
+            "affected_by": "128|512",
+            "level": "22"
+        }
+    ],
+    "old_objects": [
+        {
+            "vnum": "15700",
+            "name": "robes",
+            "short_description": "some black robes",
+            "description": "Some black robes have been left here.",
+            "type": "9",
+            "extra_flags": "1|64|512",
+            "wear_flags": "1|1024",
+            "values": "0 0 0 0",
+            "weight": "5",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "3",
+                    "modifier": "2"
+                },
+                {
+                    "location": "12",
+                    "modifier": "50"
+                }
+            ]
+        },
+        {
+            "vnum": "15701",
+            "name": "staff",
+            "short_description": "a bone staff",
+            "description": "A bone staff lies here.",
+            "type": "4",
+            "extra_flags": "1|64|512",
+            "wear_flags": "1|16384",
+            "values": "30 12 12 6",
+            "weight": "2",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "4",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "15702",
+            "name": "sword",
+            "short_description": "a bone sword",
+            "description": "A bone sword is stuck in the ground here.",
+            "type": "5",
+            "extra_flags": "1|64|512",
+            "wear_flags": "1|8192",
+            "values": "0 0 0 11",
+            "weight": "10",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "4"
+                },
+                {
+                    "location": "19",
+                    "modifier": "4"
+                }
+            ]
+        },
+        {
+            "vnum": "15703",
+            "name": "helm",
+            "short_description": "a bronze helm",
+            "description": "A bronze helm covered in runes has been left here.",
+            "type": "9",
+            "extra_flags": "1|64|512",
+            "wear_flags": "1|16",
+            "values": "0 0 0 0",
+            "weight": "7",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-10"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-3"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-3"
+                }
+            ]
+        },
+        {
+            "vnum": "15704",
+            "name": "bandolier",
+            "short_description": "a leather bandolier",
+            "description": "A leather bandolier lies here.",
+            "type": "15",
+            "extra_flags": "0",
+            "wear_flags": "1|8",
+            "values": "50 1 0 0",
+            "weight": "4",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "5",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "15705",
+            "name": "potion",
+            "short_description": "a green potion",
+            "description": "A bright green potion has been left here.",
+            "type": "10",
+            "extra_flags": "2|64",
+            "wear_flags": "1|16384",
+            "values": "28 66 34 62",
+            "weight": "1",
+            "cost": "2500"
+        },
+        {
+            "vnum": "15706",
+            "name": "potion",
+            "short_description": "a red potion",
+            "description": "A bright red potion has been left here.",
+            "type": "10",
+            "extra_flags": "2|64",
+            "wear_flags": "1|16384",
+            "values": "28 17 1 61",
+            "weight": "1",
+            "cost": "2500"
+        },
+        {
+            "vnum": "15707",
+            "name": "scroll",
+            "short_description": "a lightning scroll",
+            "description": "A lightning scroll is curled up on the floor here.",
+            "type": "2",
+            "extra_flags": "0",
+            "wear_flags": "1|16384",
+            "values": "28 6 30 204",
+            "weight": "1",
+            "cost": "2500"
+        },
+        {
+            "vnum": "15708",
+            "name": "scroll",
+            "short_description": "a fire scroll",
+            "description": "A fire scroll is curled up on the floor here.",
+            "type": "2",
+            "extra_flags": "0",
+            "wear_flags": "1|16384",
+            "values": "28 201 65 26",
+            "weight": "1",
+            "cost": "2500"
+        },
+        {
+            "vnum": "15709",
+            "name": "wand",
+            "short_description": "a wand",
+            "description": "A wand inscribed with strange runes lies here.",
+            "type": "3",
+            "extra_flags": "1|64|512",
+            "wear_flags": "1|16384",
+            "values": "28 7 7 63",
+            "weight": "1",
+            "cost": "2500"
+        },
+        {
+            "vnum": "15710",
+            "name": "dagger",
+            "short_description": "a dagger",
+            "description": "A rune-covered dagger has been left here.",
+            "type": "5",
+            "extra_flags": "2|16|64|512",
+            "wear_flags": "1|8192",
+            "values": "0 0 0 11",
+            "weight": "5",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "6"
+                }
+            ]
+        },
+        {
+            "vnum": "15711",
+            "name": "staff",
+            "short_description": "a garthalanium staff",
+            "description": "A staff fashioned of garthalanium has been left here.",
+            "type": "4",
+            "extra_flags": "2|16|64|512",
+            "wear_flags": "1|16384",
+            "values": "28 10 10 25",
+            "weight": "5",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "25"
+                }
+            ]
+        },
+        {
+            "vnum": "15712",
+            "name": "pentagram",
+            "short_description": "a pentagram",
+            "description": "A pentagram has been inscribed upon the floor here.",
+            "type": "12",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 0 0",
+            "weight": "1",
+            "cost": "0"
+        },
+        {
+            "vnum": "15713",
+            "name": "spiked club",
+            "short_description": "a spiked club",
+            "description": "A spiked club lies here.",
+            "type": "5",
+            "extra_flags": "512",
+            "wear_flags": "1|32768",
+            "values": "0 0 0 8",
+            "weight": "20",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "-4"
+                },
+                {
+                    "location": "19",
+                    "modifier": "6"
+                }
+            ]
+        },
+        {
+            "vnum": "15714",
+            "name": "leather hauberk",
+            "short_description": "a leather hauberk",
+            "description": "A leather hauberk has been dropped here.",
+            "type": "9",
+            "extra_flags": "0",
+            "wear_flags": "1|8",
+            "values": "10 0 0 0",
+            "weight": "10",
+            "cost": "0"
+        },
+        {
+            "vnum": "15715",
+            "name": "drake hide",
+            "short_description": "a fire drake hide",
+            "description": "The hide of a fire drake has been removed and left here.",
+            "type": "9",
+            "extra_flags": "2|512",
+            "wear_flags": "1|1024",
+            "values": "0 0 0 0",
+            "weight": "25",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-25"
+                }
+            ]
+        },
+        {
+            "vnum": "15716",
+            "name": "bronze plate",
+            "short_description": "a suit of bronze plate",
+            "description": "A suit of bronze plate has been piled up here.",
+            "type": "9",
+            "extra_flags": "0",
+            "wear_flags": "1|8",
+            "values": "0 0 0 0",
+            "weight": "15",
+            "cost": "0"
+        },
+        {
+            "vnum": "15717",
+            "name": "bronze shield",
+            "short_description": "a bronze shield",
+            "description": "A bronze shield lies here.",
+            "type": "9",
+            "extra_flags": "0",
+            "wear_flags": "1|512",
+            "values": "0 0 0 0",
+            "weight": "10",
+            "cost": "0"
+        },
+        {
+            "vnum": "15718",
+            "name": "bronze helm",
+            "short_description": "a bronze helm",
+            "description": "A bronze helm has been left here.",
+            "type": "9",
+            "extra_flags": "0",
+            "wear_flags": "1|16",
+            "values": "0 0 0 0",
+            "weight": "6",
+            "cost": "0"
+        },
+        {
+            "vnum": "15719",
+            "name": "bronze sword",
+            "short_description": "a bronze sword",
+            "description": "A bronze sword is buried in the ground here.",
+            "type": "5",
+            "extra_flags": "0",
+            "wear_flags": "1|8192",
+            "values": "0 0 0 3",
+            "weight": "12",
+            "cost": "0"
+        },
+        {
+            "vnum": "15720",
+            "name": "robes",
+            "short_description": "some green robes",
+            "description": "Some green robes are crumpled up on the floor here.",
+            "type": "9",
+            "extra_flags": "1|64|512",
+            "wear_flags": "1|1024",
+            "values": "0 0 0 0",
+            "weight": "3",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "20"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-3"
+                }
+            ]
+        },
+        {
+            "vnum": "15721",
+            "name": "staff",
+            "short_description": "a wooden staff",
+            "description": "A wooden staff with a bronze head lies here.",
+            "type": "5",
+            "extra_flags": "0",
+            "wear_flags": "1|32768",
+            "values": "0 0 0 7",
+            "weight": "9",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "3"
+                }
+            ]
+        },
+        {
+            "vnum": "15722",
+            "name": "spellbook",
+            "short_description": "a spellbook",
+            "description": "A spellbook with bronze fittings lies here.",
+            "type": "2",
+            "extra_flags": "2|64|512",
+            "wear_flags": "1|16384",
+            "values": "21 4 68 42",
+            "weight": "4",
+            "cost": "0"
+        },
+        {
+            "vnum": "15723",
+            "name": "pit",
+            "short_description": "a deep pit",
+            "description": "A deep pit yawns before you.",
+            "type": "15",
+            "extra_flags": "262144",
+            "wear_flags": "0",
+            "values": "1000 1 0 0",
+            "weight": "1",
+            "cost": "0"
+        },
+        {
+            "vnum": "15724",
+            "name": "collar",
+            "short_description": "a spiked collar",
+            "description": "A spiked dog collar lies here.",
+            "type": "9",
+            "extra_flags": "0",
+            "wear_flags": "1|4",
+            "values": "0 0 0 0",
+            "weight": "5",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "2"
+                },
+                {
+                    "location": "19",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "15725",
+            "name": "assassin robes",
+            "short_description": "the robes of an assassin",
+            "description": "The black robes of an assassin have been torn from her and left here.",
+            "type": "9",
+            "extra_flags": "512",
+            "wear_flags": "1|16384",
+            "values": "0 0 0 0",
+            "weight": "3",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "2"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-5"
+                }
+            ]
+        },
+        {
+            "vnum": "15726",
+            "name": "dagger",
+            "short_description": "a throwing dagger",
+            "description": "A throwing dagger has been left here.",
+            "type": "30",
+            "extra_flags": "0",
+            "wear_flags": "1|8192|16384",
+            "values": "0 0 0 0",
+            "weight": "3",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "15727",
+            "name": "sword",
+            "short_description": "a steel sword",
+            "description": "A rare steel sword covered in runes lies here.",
+            "type": "5",
+            "extra_flags": "1|64",
+            "wear_flags": "1|8192",
+            "values": "0 0 0 3",
+            "weight": "10",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "4"
+                },
+                {
+                    "location": "19",
+                    "modifier": "4"
+                }
+            ]
+        },
+        {
+            "vnum": "15728",
+            "name": "ring",
+            "short_description": "a magic ring",
+            "description": "A magic ring floats by here.",
+            "type": "9",
+            "extra_flags": "1|64|32768",
+            "wear_flags": "1|2",
+            "values": "0 0 0 0",
+            "weight": "1",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "10"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-1"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "15729",
+            "name": "boots",
+            "short_description": "elven boots",
+            "description": "A pair of çora boots lie here.",
+            "type": "9",
+            "extra_flags": "0",
+            "wear_flags": "1|64",
+            "values": "0 0 0 0",
+            "weight": "5",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "2"
+                },
+                {
+                    "location": "14",
+                    "modifier": "25"
+                }
+            ]
+        },
+        {
+            "vnum": "15730",
+            "name": "elven cloak",
+            "short_description": "a green çora cloak",
+            "description": "A green çora cloak has been left here.",
+            "type": "9",
+            "extra_flags": "0",
+            "wear_flags": "1|4",
+            "values": "0 0 0 0",
+            "weight": "3",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "5",
+                    "modifier": "1"
+                },
+                {
+                    "location": "13",
+                    "modifier": "10"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-5"
+                }
+            ]
+        },
+        {
+            "vnum": "15731",
+            "name": "pick",
+            "short_description": "a pick",
+            "description": "A pick rests here.",
+            "type": "5",
+            "extra_flags": "0",
+            "wear_flags": "1|32768",
+            "values": "0 0 0 2",
+            "weight": "10",
+            "cost": "0"
+        },
+        {
+            "vnum": "15732",
+            "name": "shovel",
+            "short_description": "a shovel",
+            "description": "A shovel rests here.",
+            "type": "5",
+            "extra_flags": "0",
+            "wear_flags": "1|32768",
+            "values": "0 0 0 7",
+            "weight": "10",
+            "cost": "0"
+        },
+        {
+            "vnum": "15733",
+            "name": "rubble",
+            "short_description": "a pile of rubble",
+            "description": "A pile of rubble has been made here.",
+            "type": "13",
+            "extra_flags": "0",
+            "wear_flags": "1",
+            "values": "0 0 0 0",
+            "weight": "75",
+            "cost": "0"
+        },
+        {
+            "vnum": "15734",
+            "name": "whip",
+            "short_description": "a whip",
+            "description": "A whip has been curled up here.",
+            "type": "5",
+            "extra_flags": "0",
+            "wear_flags": "1|8192",
+            "values": "0 0 0 4",
+            "weight": "5",
+            "cost": "0"
+        },
+        {
+            "vnum": "15735",
+            "name": "flind bar",
+            "short_description": "a flind bar",
+            "description": "A flind bar has been left here.",
+            "type": "9",
+            "extra_flags": "512",
+            "wear_flags": "1|8192",
+            "values": "0 0 0 7",
+            "weight": "5",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "5"
+                }
+            ]
+        },
+        {
+            "vnum": "15736",
+            "name": "rubbish",
+            "short_description": "a huge pile of rubbish",
+            "description": "A huge pile of rubbish is here.",
+            "type": "13",
+            "extra_flags": "0",
+            "wear_flags": "1",
+            "values": "0 0 0 0",
+            "weight": "150",
+            "cost": "0"
+        },
+        {
+            "vnum": "15737",
+            "name": "rack",
+            "short_description": "a torturer's rack",
+            "description": "A torturer's rack sits near one wall.",
+            "type": "12",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 0 0",
+            "weight": "1",
+            "cost": "0",
+            "extra_descriptions": [
+                {
+                    "keyword": "rack",
+                    "description": "It is not currently in use. The warlock enjoys executions, so people he\ncaptures rarely live long enough to be tortured.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15738",
+            "name": "gallows",
+            "short_description": "a gallows",
+            "description": "A gallows has been erected here.",
+            "type": "12",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 0 0",
+            "weight": "1",
+            "cost": "0",
+            "extra_descriptions": [
+                {
+                    "keyword": "gallows",
+                    "description": "They are used regularly to hang those who piss off the warlock.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15739",
+            "name": "stocks",
+            "short_description": "the stocks",
+            "description": "The stocks sit here, holding a pathetic wretch of a gnoll.",
+            "type": "12",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 0 0",
+            "weight": "1",
+            "cost": "0",
+            "extra_descriptions": [
+                {
+                    "keyword": "stocks gnoll",
+                    "description": "This unfortunate has been left here for a week for insubordination.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15740",
+            "name": "pot boiling oil",
+            "short_description": "a pot of boiling oil",
+            "description": "A pot of boiling oil bubbles away here.",
+            "type": "12",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 0 0",
+            "weight": "1",
+            "cost": "0",
+            "extra_descriptions": [
+                {
+                    "keyword": "pot boiling oil",
+                    "description": "The warlock enjoys immersing insubordinate or irritating lackeys in here.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15741",
+            "name": "flag",
+            "short_description": "a black flag",
+            "description": "A black flag flutters atop a pole here.",
+            "type": "12",
+            "extra_flags": "0",
+            "wear_flags": "1|1024",
+            "values": "0 0 0 0",
+            "weight": "5",
+            "cost": "0",
+            "extra_descriptions": [
+                {
+                    "keyword": "flag",
+                    "description": "It is plain black. The warlock isn't very imaginative.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15742",
+            "name": "leg irons",
+            "short_description": "a set of leg irons",
+            "description": "A set of leg irons rest here.",
+            "type": "9",
+            "extra_flags": "4096",
+            "wear_flags": "1|32",
+            "values": "0 0 0 0",
+            "weight": "10",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "-3"
+                },
+                {
+                    "location": "14",
+                    "modifier": "-100"
+                }
+            ]
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "15700",
+            "name": "The Path to the Keep",
+            "description": "You are heading toward a bleak blackstone keep, sitting in the middle of\na field of scorched earth. Surly guards patrol both on the battlements and\nbelow before the gate, but they pay you little heed. Evidently the guards\nare used to strange visitors...\n",
+            "flags": "1|4",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5365"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15701"
+                }
+            ]
+        },
+        {
+            "vnum": "15701",
+            "name": "Before the Keep",
+            "description": "You are standing outside the massive bronze-bound oak portals that bar the\nway into the keep. They currently stand open, though, as if the warlock\nwere expecting visitors...\n",
+            "flags": "1",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15700"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15704"
+                }
+            ]
+        },
+        {
+            "vnum": "15702",
+            "name": "A Guard Tower",
+            "description": "This tower sits above the gate you just entered. Guards march back and forth.\nThey seem mildly surprised by your entrance, but they don't move to hinder\nyou. The stairs continue up and down.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15703"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15704"
+                }
+            ]
+        },
+        {
+            "vnum": "15703",
+            "name": "The Roof of the Tower",
+            "description": "You emerge onto the roof of the tower. From here you can see far across the\nplains of Past Anon. The ancient city of Thalos, ruined in your own time,\nlies far to the south, while to the east lie the jagged peaks of the first\nmountain range of Anon. It is rumored that the gods temselves reside at their\nlofty peaks. Beyond them, you can see the peak of Mount Doom, whereupon\nthe castle of the dread Lord Krogthar is located.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15702"
+                }
+            ]
+        },
+        {
+            "vnum": "15704",
+            "name": "Inside the Keep",
+            "description": "Guards march to and fro in this small courtyard. Wooden portals lie to the\nnorth, west and south, while the entry gate looms to the east. A set of\nstairs leads up into the tower of the gatehouse.\n",
+            "flags": "1",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15705"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15701"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15706"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15707"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15702"
+                }
+            ]
+        },
+        {
+            "vnum": "15705",
+            "name": "The Stables",
+            "description": "Here the guards of the Keep keep, or kept, rather, their steeds. A\nparticularly harsh winter left the Keep short of food, and necessitated\nthe eating of the horses. They have not been replaced yet.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15704"
+                }
+            ]
+        },
+        {
+            "vnum": "15706",
+            "name": "Barracks",
+            "description": "This room quarters some of the guards of the Keep. There are several bunks\nlittered with dirty underwear and frayed tunics- evidently the warlock is\nnot a stickler for discipline.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15704"
+                }
+            ]
+        },
+        {
+            "vnum": "15707",
+            "name": "The Inner Courtyard",
+            "description": "You have passed into the inner courtyard, which lies before the stark black\nwalls of the inner keep, wherein resides Baragar and his consort Alara.\nGuards occasionally stroll past, as does the occasional servant. The\nservants appear to be rather lifeless and cold...\n",
+            "flags": "1",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15708"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15704"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15709"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15710"
+                }
+            ]
+        },
+        {
+            "vnum": "15708",
+            "name": "The Inner Courtyard",
+            "description": "You have passed into the inner courtyard, which lies before the stark black\nwalls of the inner keep, wherein resides Baragar and his consort Alara.\nGuards occasionally stroll past, as does the occasional servant. The\nservants appear to be rather lifeless and cold...\n",
+            "flags": "1",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15741"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15707"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "15711"
+                }
+            ]
+        },
+        {
+            "vnum": "15709",
+            "name": "The Inner Courtyard",
+            "description": "You have passed into the inner courtyard, which lies before the stark black\nwalls of the inner keep, wherein resides Baragar and his consort Alara.\nGuards occasionally stroll past, as does the occasional servant. The\nservants appear to be rather lifeless and cold...\n",
+            "flags": "1",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15707"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15742"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15712"
+                }
+            ]
+        },
+        {
+            "vnum": "15710",
+            "name": "The Inner Courtyard",
+            "description": "You have passed into the inner courtyard, which lies before the stark black\nwalls of the inner keep, wherein resides Baragar and his consort Alara.\nGuards occasionally stroll past, as does the occasional servant. The\nservants appear to be rather lifeless and cold...\n\nThe doors to the inner keep lie to the west of here.\n",
+            "flags": "1",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15711"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "15707"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15712"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15715"
+                }
+            ]
+        },
+        {
+            "vnum": "15711",
+            "name": "The Inner Courtyard",
+            "description": "You have passed into the inner courtyard, which lies before the stark black\nwalls of the inner keep, wherein resides Baragar and his consort Alara.\nGuards occasionally stroll past, as does the occasional servant. The\nservants appear to be rather lifeless and cold...\n",
+            "flags": "1",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "15708"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15710"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "15713"
+                }
+            ]
+        },
+        {
+            "vnum": "15712",
+            "name": "The Inner Courtyard",
+            "description": "You have passed into the inner courtyard, which lies before the stark black\nwalls of the inner keep, wherein resides Baragar and his consort Alara.\nGuards occasionally stroll past, as does the occasional servant. The\nservants appear to be rather lifeless and cold...\n",
+            "flags": "1",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15710"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15709"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "15714"
+                }
+            ]
+        },
+        {
+            "vnum": "15713",
+            "name": "The Garbage Pit",
+            "description": "Here the keep's occupants dump their garbage, to be devoured by the offal-\neating creature they keep in here. It smells very bad.... very VERY bad...\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15711"
+                }
+            ]
+        },
+        {
+            "vnum": "15714",
+            "name": "The Crocodile Pit",
+            "description": "Here Baragar keeps his pet crocodiles, whom he feeds insubordinate guards\nor slaves to. They are rather hungry, and they would take great pleasure\nin devouring you.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15712"
+                }
+            ]
+        },
+        {
+            "vnum": "15715",
+            "name": "The Inner Keep",
+            "description": "You stand within the inner keep. The entry room is a small dark chamber,\nwith only four wooden doors to break the monotony of the black walls.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15716"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15710"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15717"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15718"
+                }
+            ]
+        },
+        {
+            "vnum": "15716",
+            "name": "Guard Room",
+            "description": "here some of the asura guards of the inner keep reside. They dislike\nintruders, though they are under orders from Baragar not to slay any, for\nhe is intensely curious as to the nature of any visitors, welcome or not.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15715"
+                }
+            ]
+        },
+        {
+            "vnum": "15717",
+            "name": "Guard Room",
+            "description": "here some of the asura guards of the inner keep reside. They dislike\nintruders, though they are under orders from Baragar not to slay any, for\nhe is intensely curious as to the nature of any visitors, welcome or not.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15715"
+                }
+            ]
+        },
+        {
+            "vnum": "15718",
+            "name": "A Stairwell",
+            "description": "These steps lead up into the upper levels of the keep, or down into the\ndungeons. You can hear sounds of construction coming from below.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15715"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15719"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15727"
+                }
+            ]
+        },
+        {
+            "vnum": "15719",
+            "name": "A Stairwell",
+            "description": "These steps lead up into the upper levels of the keep, or down into the\ndungeons. You can hear sounds of construction coming from below.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15720"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15726"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15718"
+                }
+            ]
+        },
+        {
+            "vnum": "15720",
+            "name": "Antechamber",
+            "description": "This small room is totally windowless, and would be utterly dark were it\nnot for your pale light source. You feel uneasy here. Far away, someone\nscreams, and you shiver uncomfortably.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15721"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15722"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15719"
+                }
+            ]
+        },
+        {
+            "vnum": "15721",
+            "name": "Assassins' Quarters",
+            "description": "Here the assassins of Baragar reside, spending their spare time playing\ncards, making poisons, killing peasant rabble captured by the guards, etc.\nThey will not be impressed by your intrusion...\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15720"
+                }
+            ]
+        },
+        {
+            "vnum": "15722",
+            "name": "Apprentice Quarters",
+            "description": "Here resides Alara's apprentice and sometime bed-partner. The apprentice\nhas little to do with Baragar, as Baragar envies and distrusts her, but he\ndares not slay her for Alara would be displeased...\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15720"
+                }
+            ]
+        },
+        {
+            "vnum": "15723",
+            "name": "Antechamber",
+            "description": "This small room is totally windowless, and would be utterly dark were it\nnot for your pale light source. You feel uneasy here. Far away, someone\nscreams, and you shiver uncomfortably.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15724"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15725"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15726"
+                }
+            ]
+        },
+        {
+            "vnum": "15724",
+            "name": "Baragar's Chambers",
+            "description": "Baragar himself resides here, in this small room. It is rather spartan,\nfurnished only with a small military cot, a desk and a shelf full of books.\nYou are surprised that such a wicked man would be so neat and disciplined.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15723"
+                }
+            ]
+        },
+        {
+            "vnum": "15725",
+            "name": "Alara's Chamber",
+            "description": "Yang to Baragar's Yin, Alara's room represents just how different they are.\nHer room is sloppy and messy, filled with useless junk and piles of unwashed\nclothing. There are two large beds, covered with expensive silks and pillows.\nA set of manacles hangs from one wall, used for some perversion you don't\ncare to find out more about.\n",
+            "flags": "1|8|8192",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15723"
+                }
+            ]
+        },
+        {
+            "vnum": "15726",
+            "name": "A Stairwell",
+            "description": "These steps lead up into the upper levels of the keep, or down into the\ndungeons. You can hear sounds of construction coming from below.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15723"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15736"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15719"
+                }
+            ]
+        },
+        {
+            "vnum": "15727",
+            "name": "The Dungeons",
+            "description": "You are in the dank, damp and dirty dungeons of the Keep. The passage you\nare in extends west into darkness. You can hear the sounds of construction\nmore clearly now.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15728"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15718"
+                }
+            ]
+        },
+        {
+            "vnum": "15728",
+            "name": "The Dungeons",
+            "description": "You are in the dank, damp and dirty dungeons of the Keep. The passage you\nare in extends west into darkness. You can hear the sounds of construction\nmore clearly now.\n\nDoors lie to the north and south of here. The southern door has strange\nrunes inscribed upon it.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "15729"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15727"
+                },
+                {
+                    "door": "D2",
+                    "description": "This door is inscribed with strange runes",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15730"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15731"
+                }
+            ]
+        },
+        {
+            "vnum": "15729",
+            "name": "A Treasure Room",
+            "description": "This room has a huge chest cram-packed with loot in the middle of it. But\nas you enter, you feel rather uneasy about the whole situation.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15728"
+                }
+            ]
+        },
+        {
+            "vnum": "15730",
+            "name": "A Summoning Room",
+            "description": "Baragar and Alara use (or used) this room for practicing their gate spells,\nbut when one spell summoned a denizen of the lower planes that they couldn't\ncontrol, they hastily sealed it in this room. And now you have released it.\nWay to go.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15728"
+                }
+            ]
+        },
+        {
+            "vnum": "15731",
+            "name": "A Junction",
+            "description": "You are at a rather busy junction in the dungeons. To the north runs a dark\npassage, while to the south lies a door. To the west lies the source of\nthe noises you heard earlier. it is obvious that a team of workers is\nexcavating down here. Perhaps Baraga wishes to unearth the treasures\nrumored to lie in the ancient caverns beneath his keep...?\n",
+            "flags": "1|4|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15733"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15728"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15735"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15732"
+                }
+            ]
+        },
+        {
+            "vnum": "15732",
+            "name": "The Entryway to the Mines",
+            "description": "Here there is a crude elevator which you can use to lower yourself into\nthe lower caverns, wherein the excavation is occuring. But also down there\nlies the entryway to the ancient caverns, where no one dares travel.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15731"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15737"
+                }
+            ]
+        },
+        {
+            "vnum": "15733",
+            "name": "A Dark Passage",
+            "description": "This passage extends north into a large cave. The cave emits a glow visible\nfrom here, permeating the perpetual darkness here.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15734"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15731"
+                }
+            ]
+        },
+        {
+            "vnum": "15734",
+            "name": "A Fiery Cavern",
+            "description": "This cave is illuminated by a lava pool in the center of the room, in which\na fire drake is currently dozing. He awakes as you enter, and prepares to\ncast you out!\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15733"
+                }
+            ]
+        },
+        {
+            "vnum": "15735",
+            "name": "A Lab",
+            "description": "This room was once used as a lab, but Baragar grew bored with alchemy,\nand abandoned it. Eventually a Grell from the lower caverns made its way\nup here, and created a nest in this lab. Baragar was fascinated by the\nbizarre creature, and sealed it within, intending one day to study it. He\noccasionally feeds it the odd slave or guard.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15731"
+                }
+            ]
+        },
+        {
+            "vnum": "15736",
+            "name": "The Roof of the Inner Keep",
+            "description": "You are standing on the roof, atop the highest point of the whole keep.\nThe lands of Past Anon lay spread out before you, and from this windswept\nposition you can see for miles. You hear the cry of some bird, and look\nabove to see several vultures slowly winging their way toward the desolate\ndeserts to the south. In those deserts there is rumored to be a fantastic\nplace filled with wondrous treasures.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15726"
+                }
+            ]
+        },
+        {
+            "vnum": "15737",
+            "name": "The Mines",
+            "description": "Workers rush back and forth, busily carting bags of excavated stone to and\nfrom the digging sites. They are intent on their work, and ignore you. You\nsee some rather valuable veins of ore in the walls, left untouched, and\nyou assume the treasure below must be magnificent indeed for Baragar to\nignore such wealth.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15738"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15732"
+                }
+            ]
+        },
+        {
+            "vnum": "15738",
+            "name": "The Mines",
+            "description": "Workers rush back and forth, busily carting bags of excavated stone to and\nfrom the digging sites. They are intent on their work, and ignore you. You\nsee some rather valuable veins of ore in the walls, left untouched, and\nyou assume the treasure below must be magnificent indeed for Baragar to\nignore such wealth.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15740"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15737"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15739"
+                }
+            ]
+        },
+        {
+            "vnum": "15739",
+            "name": "The Mines",
+            "description": "Workers rush back and forth, busily carting bags of excavated stone to and\nfrom the digging sites. They are intent on their work, and ignore you. You\nsee some rather valuable veins of ore in the walls, left untouched, and\nyou assume the treasure below must be magnificent indeed for Baragar to\nignore such wealth.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15738"
+                }
+            ]
+        },
+        {
+            "vnum": "15740",
+            "name": "The Mines",
+            "description": "Workers rush back and forth, busily carting bags of excavated stone to and\nfrom the digging sites. They are intent on their work, and ignore you. You\nsee some rather valuable veins of ore in the walls, left untouched, and\nyou assume the treasure below must be magnificent indeed for Baragar to\nignore such wealth.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15738"
+                }
+            ]
+        },
+        {
+            "vnum": "15741",
+            "name": "The Dog Pits",
+            "description": "Here Baragar keeps his vicious war dogs, which he takes with him when on\ncampaigns as guards and hunters of fleeing prey. They are incredibly savage\nand will attack anyone on sight save Baragar. They will even attack Alara if\nshe enters unaccompanied.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15708"
+                }
+            ]
+        },
+        {
+            "vnum": "15742",
+            "name": "The Dog Pits",
+            "description": "Here Baragar keeps his vicious war dogs, which he takes with him when on\ncampaigns as guards and hunters of fleeing prey. They are incredibly savage\nand will attack anyone on sight save Baragar. They will even attack Alara if\nshe enters unaccompanied.\n",
+            "flags": "1|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "15709"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "D",
+            "arg1": "15701",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15704",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15704",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15704",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15704",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15705",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15706",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15707",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15710",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15711",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15712",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15713",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15714",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15715",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15715",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15715",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15715",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15716",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15717",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15718",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15719",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15720",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15720",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15720",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15721",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15722",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15723",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15723",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15723",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15724",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15725",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15726",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15728",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15728",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15729",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15730",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15731",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15735",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15708",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15709",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15741",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "15742",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "15700",
+            "arg2": "1",
+            "arg3": "15724",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15700",
+            "arg2": "1",
+            "arg3": "12"
+        },
+        {
+            "command": "E",
+            "arg1": "15701",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "E",
+            "arg1": "15702",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "15703",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "15701",
+            "arg2": "1",
+            "arg3": "15725",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15704",
+            "arg2": "1",
+            "arg3": "5"
+        },
+        {
+            "command": "P",
+            "arg1": "15705",
+            "arg2": "1",
+            "arg3": "15704",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "15706",
+            "arg2": "1",
+            "arg3": "15704",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "15707",
+            "arg2": "1",
+            "arg3": "15704",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "15708",
+            "arg2": "1",
+            "arg3": "15704",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "15709",
+            "arg2": "1",
+            "arg3": "15704",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15710",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "15711",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "15702",
+            "arg2": "1",
+            "arg3": "15730",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "15712",
+            "arg2": "1",
+            "arg3": "15730"
+        },
+        {
+            "command": "M",
+            "arg1": "15703",
+            "arg2": "1",
+            "arg3": "15725",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "15704",
+            "arg2": "1",
+            "arg3": "15724",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "15705",
+            "arg2": "8",
+            "arg3": "15710",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15713",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "15714",
+            "arg2": "1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "15705",
+            "arg2": "8",
+            "arg3": "15716",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15713",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "15714",
+            "arg2": "1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "15705",
+            "arg2": "8",
+            "arg3": "15717",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15713",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "15714",
+            "arg2": "1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "15706",
+            "arg2": "1",
+            "arg3": "15723",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "15737",
+            "arg2": "1",
+            "arg3": "15723"
+        },
+        {
+            "command": "M",
+            "arg1": "15707",
+            "arg2": "1",
+            "arg3": "15734",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15715",
+            "arg2": "1",
+            "arg3": "12"
+        },
+        {
+            "command": "O",
+            "arg1": "15738",
+            "arg2": "1",
+            "arg3": "15707"
+        },
+        {
+            "command": "O",
+            "arg1": "15739",
+            "arg2": "1",
+            "arg3": "15709"
+        },
+        {
+            "command": "O",
+            "arg1": "15740",
+            "arg2": "1",
+            "arg3": "15711"
+        },
+        {
+            "command": "O",
+            "arg1": "15740",
+            "arg2": "1",
+            "arg3": "15712"
+        },
+        {
+            "command": "O",
+            "arg1": "15741",
+            "arg2": "1",
+            "arg3": "15703"
+        },
+        {
+            "command": "O",
+            "arg1": "15741",
+            "arg2": "1",
+            "arg3": "15736"
+        },
+        {
+            "command": "M",
+            "arg1": "15708",
+            "arg2": "12",
+            "arg3": "15708",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "15708",
+            "arg2": "12",
+            "arg3": "15709",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "15708",
+            "arg2": "12",
+            "arg3": "15718",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "15708",
+            "arg2": "12",
+            "arg3": "15719",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "15708",
+            "arg2": "12",
+            "arg3": "15723",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "15708",
+            "arg2": "12",
+            "arg3": "15726",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "15709",
+            "arg2": "12",
+            "arg3": "15701",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15716",
+            "arg2": "1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "15717",
+            "arg2": "1",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "15718",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "15719",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "15709",
+            "arg2": "12",
+            "arg3": "15702",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15716",
+            "arg2": "1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "15717",
+            "arg2": "1",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "15718",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "15719",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "15709",
+            "arg2": "12",
+            "arg3": "15703",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15716",
+            "arg2": "1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "15717",
+            "arg2": "1",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "15718",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "15719",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "15709",
+            "arg2": "12",
+            "arg3": "15704",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15716",
+            "arg2": "1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "15717",
+            "arg2": "1",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "15718",
+            "arg2": "1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "15719",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "15710",
+            "arg2": "1",
+            "arg3": "15722",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15720",
+            "arg2": "1",
+            "arg3": "12"
+        },
+        {
+            "command": "E",
+            "arg1": "15721",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "15722",
+            "arg2": "1",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "15711",
+            "arg2": "1",
+            "arg3": "15735",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "15712",
+            "arg2": "1",
+            "arg3": "15729",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "15723",
+            "arg2": "1",
+            "arg3": "15729"
+        },
+        {
+            "command": "M",
+            "arg1": "15713",
+            "arg2": "4",
+            "arg3": "15714",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "15723",
+            "arg2": "1",
+            "arg3": "15729"
+        },
+        {
+            "command": "M",
+            "arg1": "15714",
+            "arg2": "6",
+            "arg3": "15741",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15724",
+            "arg2": "1",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "15714",
+            "arg2": "6",
+            "arg3": "15742",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15724",
+            "arg2": "1",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "15715",
+            "arg2": "4",
+            "arg3": "15721",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15725",
+            "arg2": "1",
+            "arg3": "12"
+        },
+        {
+            "command": "E",
+            "arg1": "15726",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "15716",
+            "arg2": "1",
+            "arg3": "15726",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15727",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "15728",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15728",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "15729",
+            "arg2": "1",
+            "arg3": "8"
+        },
+        {
+            "command": "E",
+            "arg1": "15730",
+            "arg2": "1",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "15717",
+            "arg2": "10",
+            "arg3": "15732",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15731",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "15742",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "O",
+            "arg1": "15733",
+            "arg2": "1",
+            "arg3": "15732"
+        },
+        {
+            "command": "M",
+            "arg1": "15717",
+            "arg2": "10",
+            "arg3": "15737",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15732",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "15742",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "O",
+            "arg1": "15733",
+            "arg2": "1",
+            "arg3": "15737"
+        },
+        {
+            "command": "M",
+            "arg1": "15717",
+            "arg2": "10",
+            "arg3": "15738",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15731",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "15742",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "O",
+            "arg1": "15733",
+            "arg2": "1",
+            "arg3": "15738"
+        },
+        {
+            "command": "M",
+            "arg1": "15717",
+            "arg2": "10",
+            "arg3": "15739",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15732",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "15742",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "O",
+            "arg1": "15733",
+            "arg2": "1",
+            "arg3": "15739"
+        },
+        {
+            "command": "M",
+            "arg1": "15717",
+            "arg2": "10",
+            "arg3": "15740",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15731",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "15742",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "O",
+            "arg1": "15733",
+            "arg2": "1",
+            "arg3": "15740"
+        },
+        {
+            "command": "M",
+            "arg1": "15718",
+            "arg2": "4",
+            "arg3": "15738",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15732",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "15742",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "M",
+            "arg1": "15718",
+            "arg2": "4",
+            "arg3": "15740",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15731",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "15742",
+            "arg2": "1",
+            "arg3": "7"
+        },
+        {
+            "command": "M",
+            "arg1": "15719",
+            "arg2": "1",
+            "arg3": "15739",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15735",
+            "arg2": "1",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "15734",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "15720",
+            "arg2": "1",
+            "arg3": "15713",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "15736",
+            "arg2": "1",
+            "arg3": "15713"
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "15700",
+            "spec_fun": "spec_cast_mage"
+        },
+        {
+            "vnum": "15701",
+            "spec_fun": "spec_cast_mage"
+        },
+        {
+            "vnum": "15702",
+            "spec_fun": "spec_cast_undead"
+        },
+        {
+            "vnum": "15703",
+            "spec_fun": "spec_cast_mage"
+        },
+        {
+            "vnum": "15704",
+            "spec_fun": "spec_cast_mage"
+        },
+        {
+            "vnum": "15705",
+            "spec_fun": "spec_fido"
+        },
+        {
+            "vnum": "15706",
+            "spec_fun": "spec_executioner"
+        },
+        {
+            "vnum": "15707",
+            "spec_fun": "spec_breath_fire"
+        },
+        {
+            "vnum": "15708",
+            "spec_fun": "spec_janitor"
+        },
+        {
+            "vnum": "15709",
+            "spec_fun": "spec_guard"
+        },
+        {
+            "vnum": "15710",
+            "spec_fun": "spec_cast_mage"
+        },
+        {
+            "vnum": "15713",
+            "spec_fun": "spec_fido"
+        },
+        {
+            "vnum": "15714",
+            "spec_fun": "spec_poison"
+        },
+        {
+            "vnum": "15715",
+            "spec_fun": "spec_thief"
+        },
+        {
+            "vnum": "15716",
+            "spec_fun": "spec_cast_mage"
+        },
+        {
+            "vnum": "15717",
+            "spec_fun": "spec_janitor"
+        },
+        {
+            "vnum": "15718",
+            "spec_fun": "spec_janitor"
+        },
+        {
+            "vnum": "15719",
+            "spec_fun": "spec_poison"
+        },
+        {
+            "vnum": "15720",
+            "spec_fun": "spec_fido"
+        }
+    ]
+}

@@ -1,0 +1,1210 @@
+{
+    "area": {
+        "file": "faeriering.are",
+        "name": "Faerie Ring",
+        "low_range": "10",
+        "high_range": "15",
+        "writer": "Lok",
+        "credits": "Faerie Ring",
+        "min_vnum": "29101",
+        "max_vnum": "29114"
+    },
+    "mobiles": [
+        {
+            "vnum": "29101",
+            "name": "pixie faerie",
+            "short_description": "a giggling pixie",
+            "long_description": "A pixie pokes you in the butt with its sword and giggles! \n",
+            "description": "The pixie is about 6\" tall, is human like, and has dragonfly wings. \n",
+            "race": "pixie",
+            "act": "ACEH",
+            "affected_by": "T",
+            "alignment": "0",
+            "group": "0",
+            "level": "10",
+            "hitroll": "0",
+            "hit_dice": "2d7+121",
+            "mana_dice": "5d5+100",
+            "dam_dice": "2d4+2",
+            "dam_type": "pierce",
+            "ac_pierce": "1",
+            "ac_bash": "1",
+            "ac_slash": "1",
+            "ac_exotic": "7",
+            "off_flags": "EFR",
+            "imm_flags": "0",
+            "res_flags": "CD",
+            "vuln_flags": "HZ",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5",
+            "form": "ACHMVW",
+            "parts": "ABCDEFGHIJKO",
+            "size": "tiny",
+            "material": "0"
+        },
+        {
+            "vnum": "29102",
+            "name": "nixie faerie",
+            "short_description": "a fluttering nixie",
+            "long_description": "A fluttering nixie rummages through your possessions looking for wine! \n",
+            "description": "The nixie, like the pixie has dragonfly wings, but is taller (9\"). \n",
+            "race": "pixie",
+            "act": "ACEH",
+            "affected_by": "T",
+            "alignment": "0",
+            "group": "0",
+            "level": "12",
+            "hitroll": "0",
+            "hit_dice": "2d10+150",
+            "mana_dice": "5d5+100",
+            "dam_dice": "1d10+3",
+            "dam_type": "slash",
+            "ac_pierce": "0",
+            "ac_bash": "0",
+            "ac_slash": "0",
+            "ac_exotic": "7",
+            "off_flags": "EFU",
+            "imm_flags": "0",
+            "res_flags": "C",
+            "vuln_flags": "HZ",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "10",
+            "form": "AHMVW",
+            "parts": "ABCDEFGHIJKO",
+            "size": "tiny",
+            "material": "0"
+        },
+        {
+            "vnum": "29103",
+            "name": "sprite faerie",
+            "short_description": "a dancing sprite",
+            "long_description": "A sprite casts a spell and you do a merry little dance! \n",
+            "description": "The sprite has dragonfly wings like the nixie and pixie, but she towers over \nthem at an amazing 12\" height!\n",
+            "race": "pixie",
+            "act": "ACEH",
+            "affected_by": "BT",
+            "alignment": "0",
+            "group": "0",
+            "level": "11",
+            "hitroll": "0",
+            "hit_dice": "2d8+134",
+            "mana_dice": "5d5+100",
+            "dam_dice": "1d10+2",
+            "dam_type": "pierce",
+            "ac_pierce": "1",
+            "ac_bash": "1",
+            "ac_slash": "1",
+            "ac_exotic": "7",
+            "off_flags": "EFNU",
+            "imm_flags": "0",
+            "res_flags": "C",
+            "vuln_flags": "HZ",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "female",
+            "wealth": "20",
+            "form": "AHMVW",
+            "parts": "ABCDEFGHIJKO",
+            "size": "tiny",
+            "material": "0"
+        },
+        {
+            "vnum": "29104",
+            "name": "brownie faerie",
+            "short_description": "a stern brownie",
+            "long_description": "A stern brownie stands guard here - you better watch it bub! \n",
+            "description": "The beefy 2' tall brownie wears earth colored clothing, and seems intent on \nits task of guarding.\n",
+            "race": "quickling",
+            "act": "ABCE",
+            "affected_by": "V",
+            "alignment": "0",
+            "group": "0",
+            "level": "13",
+            "hitroll": "0",
+            "hit_dice": "2d10+170",
+            "mana_dice": "5d5+100",
+            "dam_dice": "2d5+3",
+            "dam_type": "pierce",
+            "ac_pierce": "-1",
+            "ac_bash": "-1",
+            "ac_slash": "-1",
+            "ac_exotic": "6",
+            "off_flags": "EFHNU",
+            "imm_flags": "0",
+            "res_flags": "C",
+            "vuln_flags": "Z",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "30",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJK",
+            "size": "small",
+            "material": "0"
+        },
+        {
+            "vnum": "29105",
+            "name": "puck faerie",
+            "short_description": "Puck",
+            "long_description": "Uh oh! You see Puck!\n",
+            "description": "Puck is an amazing 3' tall. He snaps his head back and forth in quick darting \nmotions checking if his pile is still there.\n",
+            "race": "quickling",
+            "act": "ABCES",
+            "affected_by": "QV",
+            "alignment": "0",
+            "group": "0",
+            "level": "14",
+            "hitroll": "0",
+            "hit_dice": "2d10+190",
+            "mana_dice": "5d5+100",
+            "dam_dice": "1d12+3",
+            "dam_type": "stab",
+            "ac_pierce": "-1",
+            "ac_bash": "-1",
+            "ac_slash": "-1",
+            "ac_exotic": "6",
+            "off_flags": "EFHNU",
+            "imm_flags": "0",
+            "res_flags": "CD",
+            "vuln_flags": "Z",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "300",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJK",
+            "size": "small",
+            "material": "0"
+        },
+        {
+            "vnum": "29106",
+            "name": "queen faerie",
+            "short_description": "the Faerie Queen",
+            "long_description": "The Faerie Queen sits in a circle of dancing twinkling faeries! \n",
+            "description": "The faerie queen is here teaching her subjects court in a gossamer gown  of \nmoonbeams. She towers at 4' tall. She is by far the most beautiful creature\n you have ever  seen. Maybe you should stay here a while. Hmmm. Why  bother\ngoing back?\n",
+            "race": "elf",
+            "act": "ABCER",
+            "affected_by": "DHJT",
+            "alignment": "0",
+            "group": "0",
+            "level": "15",
+            "hitroll": "5",
+            "hit_dice": "3d9+208",
+            "mana_dice": "5d5+100",
+            "dam_dice": "2d6+3",
+            "dam_type": "pierce",
+            "ac_pierce": "-2",
+            "ac_bash": "-2",
+            "ac_slash": "-2",
+            "ac_exotic": "6",
+            "off_flags": "EFNU",
+            "imm_flags": "0",
+            "res_flags": "BC",
+            "vuln_flags": "Z",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "female",
+            "wealth": "500",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJKO",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "29107",
+            "name": "lucky leprechaun faerie",
+            "short_description": "Lucky",
+            "long_description": "A little leprechaun garbed in green says 'Wooo-hooo-hoo' and tickles you! \n",
+            "description": "Lucky wears green and is mumbling something about blue diamonds. \n",
+            "race": "quickling",
+            "act": "ACEH",
+            "affected_by": "QUV",
+            "alignment": "0",
+            "group": "0",
+            "level": "13",
+            "hitroll": "0",
+            "hit_dice": "2d10+170",
+            "mana_dice": "5d5+100",
+            "dam_dice": "2d5+3",
+            "dam_type": "slash",
+            "ac_pierce": "-1",
+            "ac_bash": "-1",
+            "ac_slash": "-1",
+            "ac_exotic": "6",
+            "off_flags": "EFHNU",
+            "imm_flags": "0",
+            "res_flags": "C",
+            "vuln_flags": "Z",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "400",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJK",
+            "size": "small",
+            "material": "0"
+        },
+        {
+            "vnum": "29108",
+            "name": "faerie drunken",
+            "short_description": "a drunken faerie",
+            "long_description": "A drunken faerie snores happily on the floor.  \n",
+            "description": "The drunken faerie lies nude on the floor, snoring happily away. Looks like \nsomebody is playing a practical joke on him.\n",
+            "race": "pixie",
+            "act": "ABCE",
+            "affected_by": "RT",
+            "alignment": "0",
+            "group": "0",
+            "level": "10",
+            "hitroll": "-1",
+            "hit_dice": "2d7+121",
+            "mana_dice": "5d5+100",
+            "dam_dice": "2d4+2",
+            "dam_type": "pierce",
+            "ac_pierce": "1",
+            "ac_bash": "1",
+            "ac_slash": "1",
+            "ac_exotic": "7",
+            "off_flags": "EFNU",
+            "imm_flags": "0",
+            "res_flags": "CD",
+            "vuln_flags": "HZ",
+            "start_pos": "sleep",
+            "default_pos": "rest",
+            "sex": "male",
+            "wealth": "5",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJKO",
+            "size": "tiny",
+            "material": "0"
+        },
+        {
+            "vnum": "29109",
+            "name": "twinkletoes bartender faerie",
+            "short_description": "Twinkletoes",
+            "long_description": "A faerie bartender is here, serving up faerie wine and finger food. \n",
+            "description": "Twinkletoes is a fierce, old looking brownie. Maybe you should leave her \nalone.\n",
+            "race": "quickling",
+            "act": "ABCEb",
+            "affected_by": "V",
+            "alignment": "0",
+            "group": "0",
+            "level": "45",
+            "hitroll": "0",
+            "hit_dice": "50d10+5500",
+            "mana_dice": "5d5+5000",
+            "dam_dice": "10d4+23",
+            "dam_type": "pierce",
+            "ac_pierce": "-25",
+            "ac_bash": "-25",
+            "ac_slash": "-25",
+            "ac_exotic": "-1",
+            "off_flags": "EFNU",
+            "imm_flags": "0",
+            "res_flags": "CD",
+            "vuln_flags": "Z",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "female",
+            "wealth": "5000",
+            "form": "AHMV",
+            "parts": "ABCDEFGHIJK",
+            "size": "medium",
+            "material": "0"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "29101",
+            "name": "rhyme catchy little",
+            "short_description": "a catchy little rhyme",
+            "description": "There is a tiny rolled up paper lying on the ground. \n",
+            "material": "paper",
+            "type": "scroll",
+            "extra_flags": "AG",
+            "wear_flags": "AO",
+            "values": "15 'faerie fog' '' '' ''",
+            "level": "10",
+            "weight": "1",
+            "cost": "200",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "rhyme catchy little",
+                    "description": "You look at the rhyme. It reads:\n-\nTurn your clothes inside out\nCircle three times and shout\nIron and cross, make you be\nRevealed to all, and to me\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29102",
+            "name": "light twinkle twinkling ball",
+            "short_description": "a *twinkling* ball of light",
+            "description": "A twinkling ball of light sparkles here! \n",
+            "material": "unknown",
+            "type": "light",
+            "extra_flags": "AGI",
+            "wear_flags": "AO",
+            "values": "0 0 999 0 0",
+            "level": "15",
+            "weight": "0",
+            "cost": "1000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "4",
+                    "modifier": "1"
+                },
+                {
+                    "location": "3",
+                    "modifier": "1"
+                },
+                {
+                    "location": "18",
+                    "modifier": "1"
+                },
+                {
+                    "location": "19",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "29103",
+            "name": "belt sprite",
+            "short_description": "a sprite belt",
+            "description": "A loop of rainbow thread lies here.\n",
+            "material": "mithril",
+            "type": "armor",
+            "extra_flags": "FM",
+            "wear_flags": "AL",
+            "values": "5 5 5 5 0",
+            "level": "11",
+            "weight": "1",
+            "cost": "500",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "24",
+                    "modifier": "-3"
+                }
+            ]
+        },
+        {
+            "vnum": "29104",
+            "name": "bracer brownie",
+            "short_description": "a brownie bracer",
+            "description": "An earthen colored band lies here.\n",
+            "material": "mithril",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AM",
+            "values": "5 5 5 5 0",
+            "level": "13",
+            "weight": "1",
+            "cost": "700",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "1"
+                },
+                {
+                    "location": "13",
+                    "modifier": "8"
+                }
+            ]
+        },
+        {
+            "vnum": "29105",
+            "name": "vial moonlight bottled",
+            "short_description": "a vial of bottled moonlight",
+            "description": "A vial of sparkling liquid emits a soft white glow. \n",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "AG",
+            "wear_flags": "AO",
+            "values": "15 'fly' 'cure poison' 'cure critical' ''",
+            "level": "12",
+            "weight": "1",
+            "cost": "700",
+            "condition": "P"
+        },
+        {
+            "vnum": "29106",
+            "name": "robe gossamer",
+            "short_description": "a gossamer robe",
+            "description": "A gossamer robe sparkles with a pale white glow! \n",
+            "material": "cloth",
+            "type": "armor",
+            "extra_flags": "IM",
+            "wear_flags": "AK",
+            "values": "6 6 6 6 0",
+            "level": "15",
+            "weight": "1",
+            "cost": "1500",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "10"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-2"
+                }
+            ]
+        },
+        {
+            "vnum": "29107",
+            "name": "moonbeam",
+            "short_description": "a moonbeam",
+            "description": "A sparkling pale light ray glows here! \n",
+            "material": "unknown",
+            "type": "weapon",
+            "extra_flags": "AF",
+            "wear_flags": "AN",
+            "values": "exotic 4 4 pierce G ",
+            "level": "15",
+            "weight": "0",
+            "cost": "1500",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "2"
+                },
+                {
+                    "location": "19",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "29108",
+            "name": "wine goblet faerie",
+            "short_description": "a goblet of faerie wine",
+            "description": "A crystal goblet filled with a sparkling wine is here. \n",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "G",
+            "wear_flags": "A",
+            "values": "10 'cure blindness' 'invis' '' ''",
+            "level": "10",
+            "weight": "1",
+            "cost": "100",
+            "condition": "P"
+        },
+        {
+            "vnum": "29109",
+            "name": "britches dirty",
+            "short_description": "a pair of dirty britches",
+            "description": "A pair of dirty britches lies here. Get the laundry soap. \n",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "C",
+            "wear_flags": "AF",
+            "values": "5 5 5 0 0",
+            "level": "14",
+            "weight": "0",
+            "cost": "900",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "10"
+                },
+                {
+                    "location": "18",
+                    "modifier": "1"
+                },
+                {
+                    "location": "19",
+                    "modifier": "1"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "29110",
+            "name": "key sparkling",
+            "short_description": "a sparkling key",
+            "description": "A sparkling key glistens on the ground. \n",
+            "material": "silver",
+            "type": "key",
+            "extra_flags": "BG",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "13",
+            "weight": "1",
+            "cost": "130",
+            "condition": "P"
+        },
+        {
+            "vnum": "29111",
+            "name": "cloak dirty",
+            "short_description": "a dirty cloak",
+            "description": "A dirty cloak lies here. Ugh! Get the laundry soap.",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "C",
+            "wear_flags": "AC",
+            "values": "5 5 5 0 0",
+            "level": "14",
+            "weight": "2",
+            "cost": "900",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "1"
+                },
+                {
+                    "location": "1",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "29112",
+            "name": "wand blue diamond",
+            "short_description": "a blue diamond wand",
+            "description": "A wand with a huge blue diamond on it is just lying here! Pick it up! \n",
+            "material": "wood",
+            "type": "wand",
+            "extra_flags": "G",
+            "wear_flags": "AO",
+            "values": "14 12 12 'create food' 0",
+            "level": "13",
+            "weight": "2",
+            "cost": "1200",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "diamond blue",
+                    "description": "They're magically delicious!\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29113",
+            "name": "gold",
+            "short_description": "whoooooopie! Gold!",
+            "description": "A rainbow ends at this pot of gold!\n",
+            "material": "gold",
+            "type": "money",
+            "extra_flags": "A",
+            "wear_flags": "AO",
+            "values": "500 0 0 0 0",
+            "level": "0",
+            "weight": "13",
+            "cost": "130",
+            "condition": "P"
+        },
+        {
+            "vnum": "29114",
+            "name": "food finger",
+            "short_description": "delicious finger food",
+            "description": "A delicious little plate of scrumptious finger foods lies beckons to you. \n",
+            "material": "flesh",
+            "type": "food",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "24 24 0 0 0",
+            "level": "0",
+            "weight": "1",
+            "cost": "5",
+            "condition": "P"
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "29101",
+            "name": "Forest Clearing",
+            "description": "You stand in a grassy clearing in the forest. Moonlight causes the shadows\nto move in an eerie dance. There is a strange circle of mushrooms about30' in \ndiameter in the center of the clearing.\n",
+            "flags": "C",
+            "sector": "3",
+            "extra_descriptions": [
+                {
+                    "keyword": "mushrooms circle",
+                    "description": "You look at the mushroom circle. You see tiny footprints and the faint outline \nof a trap door in the center of the ring.\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3513"
+                },
+                {
+                    "door": "D5",
+                    "description": "A small trap door",
+                    "keyword": "door trap",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29102"
+                }
+            ]
+        },
+        {
+            "vnum": "29102",
+            "name": "Entrance Hall",
+            "description": "You are in a cramped, low ceiling tunnel. Roots dangle overhead and caress \nyou. There are tiny doors to the north, south and west, which you think you \ncould crawl your way into. A ladder fashioned of woven roots leads up. You \nhear sounds of a raucous celebration to the east.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "A tiny door",
+                    "keyword": "door tiny",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29103"
+                },
+                {
+                    "door": "D1",
+                    "description": "A smoky hallway",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29104"
+                },
+                {
+                    "door": "D2",
+                    "description": "A tiny door",
+                    "keyword": "door tiny",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29105"
+                },
+                {
+                    "door": "D3",
+                    "description": "A tiny door",
+                    "keyword": "door tiny",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29106"
+                },
+                {
+                    "door": "D4",
+                    "description": "A small trap door",
+                    "keyword": "door trap",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29101"
+                }
+            ]
+        },
+        {
+            "vnum": "29103",
+            "name": "Puck's Room",
+            "description": "You are hunched over in Puck's room. You know this by the sign that says \n\"Pucks stuff- keep your grubby hands off\". There is a bed of forest leaves, \nsome rude hollowed out shelves, a tiny table with a half full jack of ale, \nand a great pile of junk beneath the sign.\n",
+            "flags": "D",
+            "sector": "0",
+            "extra_descriptions": [
+                {
+                    "keyword": "sign",
+                    "description": "The sign says: \"Puck's stuff- keep your grubby hands off\" \n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "A tiny door",
+                    "keyword": "door tiny",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29102"
+                }
+            ]
+        },
+        {
+            "vnum": "29104",
+            "name": "Little People's Bar and Grill",
+            "description": "You squeeze into the famous Little People's Bar and Grill! Conversation \nabruptly stops as you enter. Around you little people are drinking from \nbeautifully crafted crystal glasses. The smoke is thick and buoys your \nspirits. Maybe you should stay a while and try the faerie wine? A low tunnel \nheads west, and you hear a thunderous racket coming from the east.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Towards the racket",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29107"
+                },
+                {
+                    "door": "D3",
+                    "description": "A smoky hallway",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29102"
+                }
+            ]
+        },
+        {
+            "vnum": "29105",
+            "name": "Snooze Den",
+            "description": "You hunker in the snooze den. A large sign is on the wall. Many little people \nlie collapsed in drunken heaps about this large room. To the north is a tiny \ndoor.\n",
+            "flags": "D",
+            "sector": "0",
+            "extra_descriptions": [
+                {
+                    "keyword": "sign",
+                    "description": "The sign says 'Close the door, stupid'"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "A tiny door",
+                    "keyword": "door tiny",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29102"
+                }
+            ]
+        },
+        {
+            "vnum": "29106",
+            "name": "Guarded Burrow",
+            "description": "You are once again hunched over in a earthy burrow. There is sign of much \npassage through here, many little feet have packed the dirt hard. To the east \nlies a door, and to the south is a normal sized door.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "A tiny door",
+                    "keyword": "door tiny",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29102"
+                },
+                {
+                    "door": "D2",
+                    "description": "A normal sized door",
+                    "keyword": "door normal",
+                    "locks": "1",
+                    "key": "29110",
+                    "u1_vnum": "29108"
+                }
+            ]
+        },
+        {
+            "vnum": "29107",
+            "name": "Bowling Alley",
+            "description": "You are hunched over in a bowling alley! Little people are rolling round \nobjects down grooved tracks at long white targets. The whole cave echoes in a \ndreadful crash each time they hit the targets! Oh you wish you had that glass \nof faerie wine. To the west is the Little People's Bar and grill.\n",
+            "flags": "D",
+            "sector": "0",
+            "extra_descriptions": [
+                {
+                    "keyword": "round objects",
+                    "description": "You look at the round objects. Each object is a human head! Yikes! \n"
+                },
+                {
+                    "keyword": "targets white",
+                    "description": "You look carefully at the white targets and discover they are human bones! \n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Little People's Bar and Grill",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29104"
+                }
+            ]
+        },
+        {
+            "vnum": "29108",
+            "name": "Hall of the Faerie Queen",
+            "description": "You stand in the hall of the Faerie Queen. Rainbow colors dance across the \nroom in a colorful display. Faerie folk flutter furiously fanning forge fires. \nSay that 3 times fast. Maybe you should have had that faerie wine.\n",
+            "flags": "D",
+            "sector": "0",
+            "extra_descriptions": [
+                {
+                    "keyword": "forge fires",
+                    "description": "They are being fanned furiously by fluttering faerie folk."
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "A normal sized door",
+                    "keyword": "door normal",
+                    "locks": "1",
+                    "key": "29110",
+                    "u1_vnum": "29106"
+                }
+            ]
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "29105",
+            "spec_fun": "spec_thief"
+        },
+        {
+            "vnum": "29106",
+            "spec_fun": "spec_cast_mage"
+        }
+    ],
+    "resets": [
+        {
+            "command": "D",
+            "arg1": "29101",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29102",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29102",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29102",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29102",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29103",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29105",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29106",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29106",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29108",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "29101",
+            "arg2": "4",
+            "arg3": "29102",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29101",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29105",
+            "arg2": "1",
+            "arg3": "29103",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29109",
+            "arg2": "0",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29111",
+            "arg2": "0",
+            "arg3": "4"
+        },
+        {
+            "command": "O",
+            "arg1": "29108",
+            "arg2": "0",
+            "arg3": "29103"
+        },
+        {
+            "command": "M",
+            "arg1": "29102",
+            "arg2": "3",
+            "arg3": "29104",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29105",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29101",
+            "arg2": "4",
+            "arg3": "29104",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29101",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29103",
+            "arg2": "3",
+            "arg3": "29104",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29103",
+            "arg2": "0",
+            "arg3": "13"
+        },
+        {
+            "command": "M",
+            "arg1": "29109",
+            "arg2": "1",
+            "arg3": "29104",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29108",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "29114",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29107",
+            "arg2": "1",
+            "arg3": "29104",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29112",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "29113",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29108",
+            "arg2": "2",
+            "arg3": "29105",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29108",
+            "arg2": "2",
+            "arg3": "29105",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29108",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29104",
+            "arg2": "3",
+            "arg3": "29106",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29104",
+            "arg2": "0",
+            "arg3": "14"
+        },
+        {
+            "command": "M",
+            "arg1": "29104",
+            "arg2": "3",
+            "arg3": "29106",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29104",
+            "arg2": "0",
+            "arg3": "14"
+        },
+        {
+            "command": "G",
+            "arg1": "29110",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29101",
+            "arg2": "4",
+            "arg3": "29107",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29101",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29102",
+            "arg2": "3",
+            "arg3": "29107",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29105",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29103",
+            "arg2": "3",
+            "arg3": "29107",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29103",
+            "arg2": "0",
+            "arg3": "13"
+        },
+        {
+            "command": "M",
+            "arg1": "29106",
+            "arg2": "1",
+            "arg3": "29108",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29102",
+            "arg2": "0",
+            "arg3": "0"
+        },
+        {
+            "command": "E",
+            "arg1": "29106",
+            "arg2": "0",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29107",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29101",
+            "arg2": "4",
+            "arg3": "29108",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29101",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29102",
+            "arg2": "3",
+            "arg3": "29108",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29105",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29103",
+            "arg2": "3",
+            "arg3": "29108",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29103",
+            "arg2": "0",
+            "arg3": "13"
+        },
+        {
+            "command": "M",
+            "arg1": "29104",
+            "arg2": "3",
+            "arg3": "29108",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29104",
+            "arg2": "0",
+            "arg3": "14"
+        }
+    ],
+    "shops": [
+        {
+            "keeper": "29109",
+            "buy_type_0": "1",
+            "buy_type_1": "2",
+            "buy_type_2": "3",
+            "buy_type_3": "4",
+            "buy_type_4": "18",
+            "profit_buy": "120",
+            "profit_sell": "80",
+            "open_hour": "0",
+            "close_hour": "23"
+        }
+    ]
+}

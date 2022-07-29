@@ -1,0 +1,346 @@
+{
+    "area": {
+        "file": "ruler.are",
+        "name": "Ruler",
+        "low_range": "90",
+        "high_range": "100",
+        "writer": "Chronos",
+        "credits": "Palace of The Rulers",
+        "min_vnum": "510",
+        "max_vnum": "519"
+    },
+    "mobiles": [
+        {
+            "vnum": "510",
+            "name": "enforcer guard",
+            "short_description": "the enforcer",
+            "long_description": "The enforcer is waiting here protecting the enterance.\n",
+            "description": "He is trained specially to guard and serve the Ruler Council. Due to the\ndecades of devotion and training, he is almost perfect at many skills.\n",
+            "race": "human",
+            "act": "ABJKWe",
+            "affected_by": "DFHJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "92",
+            "hitroll": "60",
+            "hit_dice": "1d500+25000",
+            "mana_dice": "1d200+1600",
+            "dam_dice": "10d40+50",
+            "dam_type": "none",
+            "ac_pierce": "-70",
+            "ac_bash": "-70",
+            "ac_slash": "-70",
+            "ac_exotic": "-20",
+            "off_flags": "ACEFIKNOU",
+            "imm_flags": "AB",
+            "res_flags": "0",
+            "vuln_flags": "S",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "511",
+            "name": "healer cabal ruler",
+            "short_description": "the lawful healer",
+            "long_description": "The healer with his white robe heals and protects his Rulers.\n",
+            "description": "He is an old, wise cleric serving the Ruler Council, and praying his\ngods for the balance on Anatolia.\n",
+            "race": "human",
+            "act": "ABW",
+            "affected_by": "DFHJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "80",
+            "hitroll": "20",
+            "hit_dice": "1d100+18000",
+            "mana_dice": "1d300+900",
+            "dam_dice": "15d30+40",
+            "dam_type": "divine",
+            "ac_pierce": "-65",
+            "ac_bash": "-65",
+            "ac_slash": "-61",
+            "ac_exotic": "-39",
+            "off_flags": "CEFNU",
+            "imm_flags": "AB",
+            "res_flags": "C",
+            "vuln_flags": "S",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "0",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "510",
+            "name": "book stand bookstand",
+            "short_description": "the bookstand",
+            "description": "The bookstand is standing against the east wall of room.",
+            "material": "ivory",
+            "type": "container",
+            "extra_flags": "ORY",
+            "wear_flags": "P",
+            "values": "10 15 512 15 100",
+            "level": "60",
+            "weight": "1",
+            "cost": "20",
+            "condition": "P"
+        },
+        {
+            "vnum": "511",
+            "name": "law laws book",
+            "short_description": "the book of laws",
+            "description": "The book of laws is left here on the floor.",
+            "material": "paper",
+            "type": "treasure",
+            "extra_flags": "O",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "60",
+            "weight": "1",
+            "cost": "100000",
+            "condition": "P"
+        },
+        {
+            "vnum": "512",
+            "name": "roll paper rolled",
+            "short_description": "a rolled paper",
+            "description": "A rolled paper is left on the ground.",
+            "material": "paper",
+            "type": "key",
+            "extra_flags": "ORY",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "40",
+            "weight": "4",
+            "cost": "0",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "paper",
+                    "description": "There are some secret codes written here, in order to open something.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "513",
+            "name": "sofa silk",
+            "short_description": "a silk sofa",
+            "description": "A silk sofa is here, for rulers sit and rest.\n",
+            "material": "silk",
+            "type": "furniture",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "3 1000 BHKN 150 150",
+            "level": "20",
+            "weight": "400",
+            "cost": "100000",
+            "condition": "P"
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "510",
+            "name": "The Enterance",
+            "description": "You are in a large hallyway. The walls are decorated with beautiful\ncarvings, bright armors and ceramonial shields. On the ceiling you read\n\"In the guiding of the rulers, there is not a problem not to be solved.\"\n  The floor is very clean. The floor is made up of marbles, shine with the\nlight of the sun coming from the windows.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "5",
+                    "key": "-1",
+                    "u1_vnum": "511"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "697"
+                }
+            ]
+        },
+        {
+            "vnum": "511",
+            "name": "Inside the Palace",
+            "description": "Every part of the room is so clean that, you can even see mirror images\non the walls or floor. A golden carved figures are on the ceiling. To the\nnorth you see the room of laws. To the eat you see the resting room for\nthe rulers. And to the west you see the chapel.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "512"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "514"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "510"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "513"
+                }
+            ]
+        },
+        {
+            "vnum": "512",
+            "name": "Room of Laws",
+            "description": "This is the room of the palace, where the old Rulers decides how to rule\nthe Anatolia and young rulers study the laws. There is a bookstand put in\nfront of the east wall of the room. The written form of laws are written\nin a book that stands inside of the bookstand.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "511"
+                }
+            ]
+        },
+        {
+            "vnum": "513",
+            "name": "The Rulers' chapel",
+            "description": "You are in the chapel of Rulers.  This place is for those defenders\nof laws to heal and to pray to their gods. There is no windows inside the\nthe chapel. The chapel is lighted by the hundrets of candles placed on the\neach side of the room. The mystical air freshens your mind.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "511"
+                }
+            ]
+        },
+        {
+            "vnum": "514",
+            "name": "Resting Room",
+            "description": "You are in the resting room of the Rulers. There is a silk sofa in the\nroom for the rulers to sit, rest and relax. Since they study hard to rule\nthe Anatolia, you think that they need such kind of rooms.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "511"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "510",
+            "arg2": "1",
+            "arg3": "510",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "512",
+            "arg2": "0",
+            "arg3": "11"
+        },
+        {
+            "command": "M",
+            "arg1": "511",
+            "arg2": "1",
+            "arg3": "513",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "510",
+            "arg2": "1",
+            "arg3": "512"
+        },
+        {
+            "command": "P",
+            "arg1": "511",
+            "arg2": "1",
+            "arg3": "510",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "513",
+            "arg2": "1",
+            "arg3": "514"
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "510",
+            "spec_fun": "spec_fight_enforcer"
+        },
+        {
+            "vnum": "511",
+            "spec_fun": "spec_cast_cabal"
+        }
+    ],
+    "omprogs": [
+        {
+            "command": "O",
+            "vnum": "511",
+            "progtype": "get_prog",
+            "progname": "get_prog_cabal_item"
+        },
+        {
+            "command": "O",
+            "vnum": "511",
+            "progtype": "sac_prog",
+            "progname": "sac_prog_cabal_item"
+        },
+        {
+            "command": "M",
+            "vnum": "510",
+            "progtype": "greet_prog",
+            "progname": "greet_prog_ruler"
+        }
+    ],
+    "practicers": [
+        {
+            "vnum": "510",
+            "practicer": "group_cabal"
+        }
+    ]
+}

@@ -1,0 +1,1001 @@
+#AREADATA
+Filename ciqualanin_ini.are~
+Name Ciquala'nýn Ýni~
+Builder Binky~
+Translator Bilinmiyor~
+Language Yarý Türkçe~
+Lowlevel 40
+Highlevel 62
+Minvnum 13400
+Maxvnum 13499
+Path 13b 2k 2d k~
+Yonelim_iyi 33
+Yonelim_yansiz 34
+Yonelim_kem 33
+END
+
+#HELPS
+-1 ciquala lair~
+Converted to standard Envy 1.x by Jason Huang (god@sure.net)
+Further conversion to Rom 2.4 by Jaceks and Chicken's Den Staff~
+0 $~
+
+#NEW_MOBILES
+#13400
+lich gardiyan~
+Gardiyan Lich~
+Gardiyan Lich gölgelerin içinden fýrlayýp saldýrýyor!
+~
+The Guardian lich looks like a decaying corpse, with small glowing points of
+light for eyes.
+~
+human~
+ABCF BJQT 43
+#13401
+vampir asistan~
+laboratuvar asistaný vampir~
+Bir laboratuvar asistaný sana doðru dönüp sivri diþlerini gösteriyor!
+~
+This lab assistant was chosen from amongst the undead for both his knowledge
+of magic, and his rather nasty disposition.  He revels in creating loathesome,
+twisted, warped creatures to serve Ciquala.
+~
+human~
+ABCFH DFJ 40
+#13402
+saptýrýlmýþ yaratýk kabus~
+saptýrýlmýþ bir kabus~
+Bir zamanlar bir kabusmuþ gibi görünen saptýrýlmýþ bir yaratýk burada.
+~
+This creature may resemble some kind of serpent, but some parts of it are
+covered with scales, and others with hair.  It's head has 1 large bulbous eye,
+much like that of an insect.  Long talons reach out for you to shred you alive.
+~
+human~
+AFGH DFT 50
+#13403
+itaatkar yaratýk~
+itaatkar bir yaratýk~
+Muhtemelen hatalý bir deneyin sonucunda ortaya çýkmýþ itaatkar bir yaratýk burada.
+~
+The creature would probably not hurt a fly.  Actually, it is unaware of its own
+existence.
+~
+human~
+AB HNO 45
+#13404
+siyah krema küfesi~
+siyah krema~
+Bir küfe burada duruyor.
+~
+As you examine this crate, a black tarlike substance seeps between the boards
+slowly eating the wood away.  It is a black pudding!
+~
+human~
+ABF 0 47
+#13405
+devasa mekanizma~
+devasa bir mekanizma~
+Devasa bir mekanizma yolunu týkýyor.
+~
+This gigantic construct is made of a metallic substance that you do not
+recognize.  He stands about 8' tall, brushing the ceiling.
+~
+human~
+AB H 59
+#13406
+hortlak gardiyan~
+hortlak gardiyan~
+Hortlak bir gardiyan sana doðru çýðlýk atýp saldýrýyor!
+~
+This creature is a hovering dark shape.  It does not seem to have a body so
+to speak.  As it approaches you, a harsh chill makes you shiver.
+~
+human~
+ABF BDT 55
+#13407
+çatý tavandaki tepedeki yukarýdaki pusucu~
+tavandaki pusucu~
+Biri tavanda pusu kurmuþ sinsice zayýf bir anýný kolluyor.
+~
+The ceiling appears rather shiny.  Not like dirt at all.  You suddenly realize
+that it isn't a ceiling, but a LURKER ABOVE!  You had better attack before
+it drops on you!
+~
+human~
+ABFH 0 37
+#13408
+vampir hizmetçi~
+bir vampir hizmetçi~
+Ciquala'nýn vampir hizmetçilerinden biri burada, senin kanýn için bariz bir açlýk çekiyor.
+~
+This vampire looks very pale and thin.  Ciquala has not been allowing him
+enough time at night to feed properly.  He is VERY happy that you walked in
+on him.
+~
+human~
+ABF BDFH 47
+#13409
+insan mekanizmasý~
+insan mekanizmasý~
+Ýnsan niyetine kullanýlan þuursuz bir mekanizma burada duruyor.
+~
+This mindless lump of flesh used to be human.  It's flesh has been converted
+to a dull grey substance.  The automaton is very strong, and will be a fierce
+opponent.
+~
+human~
+ABF NO 42
+#13410
+insan mekanizmasý~
+insan mekanizmasý~
+Ýnsan niyetine kullanýlan þuursuz bir mekanizma burada duruyor.
+~
+This mindless lump of flesh used to be human.  It's flesh has been converted
+to a dull grey substance.  The automaton is very strong, and will be a fierce
+opponent.
+~
+human~
+AB NO 43
+#13411
+insan mekanizmasý~
+insan mekanizmasý~
+Ýnsan niyetine kullanýlan þuursuz bir mekanizma burada duruyor.
+~
+This mindless lump of flesh used to be human.  It's flesh has been converted
+to a dull grey substance.  The automaton is very strong, and will be a fierce
+opponent.
+~
+human~
+ABF NO 46
+#13412
+insan mekanizmasý~
+insan mekanizmasý~
+Ýnsan niyetine kullanýlan þuursuz bir mekanizma burada duruyor.
+~
+This mindless lump of flesh used to be human.  It's flesh has been converted
+to a dull grey substance.  The automaton is very strong, and will be a fierce
+opponent.
+~
+human~
+ABF NO 49
+#13413
+iþkenceci lich~
+iþkenceci lich~
+Kapkara bir yaratýk burada durmuþ, gaddarca sana acý çektirmek için bekliyor.
+~
+You'd better not look to close, he may charm you.
+~
+human~
+ABF HJ 51
+#13414
+hortlak ejderha~
+Ciquala'nýn Hortlak Ejderhasý~
+Ciquala'nýn hortlak ejderhasý burada, taze bir cesedi emmekle meþgul.
+~
+This skeletal dragon is an ancient red dragon preserved through arcane magic.
+~
+dragon~
+ABF DFHJ 60
+#13415
+Ciquala lich~
+Lich Ciquala~
+Güçlü ve þeytani görünen bir lich burada duruyor. Ýsmi Ciquala, var olan tüm
+hortlaklarýn en ihtiyarý.
+~
+Ciquala still looks majestic after all these thousands of years.  But you can
+see the menace in her eye as she looks at you, and prepares her first spell.
+~
+human~
+ABF DFHJT 62
+#13416
+lich~
+Lich~
+Lich senin bu mahzende ne aradýðýný merak ediyor.
+~
+The Lich looks like a decaying corpse, with small glowing points of
+light for eyes.
+~
+human~
+ABCF BD 47
+#13417
+vampir~
+vampir~
+Vampir açlýktan tam anlamýyla kývranýyor.
+~
+The vampire looks incredibly strong.  He is wearing musty clothes, and has
+large fangs that seem to grow longer as he looks back at you.
+~
+human~
+ABCF BDT 57
+#13418
+vampir asistan~
+laboratuvar asistaný vampir~
+Bir laboratuvar asistaný sana doðru dönüp sivri diþlerini gösteriyor!
+~
+This lab assistant was chosen from amongst the undead for both his knowledge
+of magic, and his rather nasty disposition.  She revels in creating loathesome,
+twisted, warped creatures to serve Ciquala.
+~
+human~
+ABCFH DFJ 32
+#0
+
+
+#OBJECTS
+#13400
+ciquala'nýn kýlýcý~
+Ciquala'nýn kýlýcý~
+Büyük, siyah bir kýlýç burada uzanýyor.~
+iron~
+weapon BCHJM AN
+sword 5 13 slice C
+55 80 34799 P
+A
+18 10
+A
+19 10
+A
+13 100
+A
+14 -50
+A
+1 2
+A
+5 2
+#13401
+ciquala'nýn cüppesi~
+Ciquala'nýn cüppesi~
+Aðýr bir siyah kumaþ yýðýný tozlarýn içinde duruyor.~
+leather~
+armor GHJM AK
+17 17 17 2 0
+51 50 29470 G
+A
+17 -30
+A
+2 2
+A
+24 -10
+#13402
+Ciquala'nýn asasý~
+ciquala'nýn asasý~
+Siyah bir asa yerde uzanýyor.~
+wood~
+staff GHJM AO
+40 20 20 'cure critical' 0
+54 20 22100 P
+A
+19 6
+A
+3 3
+A
+4 -2
+#13403
+sandýk~
+sandýk~
+Bir sandýk burada duruyor.~
+iron~
+furniture 0 A
+2 2000 NO 100 100
+0 0 0 P
+#13404
+anahtar~
+bir anahtar~
+Yerde bir anahtar duruyor.~
+iron~
+key 0 A
+0 0 0 0 0
+1 0 0 P
+#13405
+anahtar~
+demir bir anahtar~
+Yerde demirden bir anahtar var.~
+iron~
+key 0 A
+0 0 0 0 0
+1 0 0 P
+#13406
+anahtar büyük~
+büyük bir anahtar~
+Büyük bir anahtar yerde duruyor.~
+iron~
+key 0 A
+0 0 0 0 0
+1 0 0 P
+#13407
+mavi iksir~
+mavi iksir~
+Mavi sývýyla dolu bir þiþe burada uzanýyor.~
+glass~
+potion H A
+31 'acid blast' 'acute vision' 'detect hidden' 'detect invis'
+20 20 49900 P
+#13408
+zümrüt þiþe~
+zümrüt bir þiþe~
+Zümrüt bir þiþe burada uzanýyor~
+glass~
+potion 0 A
+25 'heal' 'heal' 'blindness' ''
+20 20 3350 P
+#13410
+þeffaf test tüpü~
+þeffaf bir test tüpü~
+Þeffaf bir test tüpünün içinde ne olduðu belirsiz bir sývý var.~
+glass~
+potion H A
+38 'burning hands' 'colour spray' 'protection evil' 'giant strength'
+20 20 3300 P
+#13411
+yeþil þiþe~
+yeþil bir þiþe~
+Yeþil bir þiþe raflardan birine kurulmuþ.~
+glass~
+potion 0 A
+28 'create spring' 'energy drain' 'poison' 'armor'
+20 20 2300 P
+#13412
+altýnýmsý sývý þiþe~
+altýnýmsý sývýyla dolu bir þiþe~
+Altýn renkli sývýyla dolu bir þiþe yerde uzanýyor.~
+glas~
+potion 0 A
+24 'weaken' 'poison' 'teleport' 'curse'
+20 20 4300 P
+#13413
+sütümsü sývý þiþe~
+sütümsü sývýyla dolu bir þiþe~
+Sütümsü sývýyla dolu bir þiþe raflardan birine kurulmuþ.~
+glas~
+potion 0 A
+25 'heal' 'pass door' 'teleport' 'curse'
+20 20 5400 P
+#13414
+siyah iksir~
+siyah iksir~
+Siyah bir iksir bir dikiþte içilmeyi bekliyor.~
+glass~
+potion 0 A
+25 'shield' 'infravision' 'cause critical' 'protection good'
+20 20 4900 P
+#13415
+sarý beher~
+sarý sývýyla dolu bir beher~
+Kabarcýklar çýkartan sarý bir sývýyla dolu beher tezgahýn üzerinde duruyor.~
+glass~
+potion 0 A
+22 'harm' 'poison' 'weaken' 'sleep'
+20 20 3400 P
+#13416
+demir bakire~
+demir bakire~
+Hiç el deðmemiþ görünen bir demir bakire burada duruyor.  Denemek hoþ olabilir..~
+iron~
+armor 0 AD
+20 20 20 5 0
+33 1000 0 G
+A
+13 -400
+A
+5 -5
+A
+1 -5
+A
+2 -1
+#13417
+iþkencecinin kýrbacý~
+iþkencecinin kýrbacý~
+Kocaman bir kýrbaç buraya uzanmýþ.~
+iron~
+weapon ABFG AN
+whip 5 10 chop C
+48 90 14700 P
+A
+18 -10
+A
+19 10
+A
+17 -20
+#13418
+ganimet sikkeler altýn~
+çok büyük bir altýn yýðýný~
+Çok büyük bir altýn yýðýný heyecanla sahiplenilmeyi bekliyor.~
+gold~
+money 0 A
+10000 0 0 0 0
+0 0 0 P
+#13419
+cevherler küme~
+bir cevher kümesi~
+Yerde bir cevher kümesi var.~
+iron~
+money A A
+20000 0 0 0 0
+0 0 0 P
+#13420
+sandýk~
+sandýk~
+Bir sandýk burada duruyor.~
+iron~
+furniture 0 A
+2 2000 NO 100 100
+0 0 0 P
+#13421
+sandýk~
+sandýk~
+Bir sandýk burada duruyor.~
+iron~
+furniture 0 A
+2 2000 NO 100 100
+0 0 0 P
+#13422
+sandýk~
+sandýk~
+Bir sandýk burada duruyor.~
+iron~
+furniture 0 A
+2 2000 NO 100 100
+0 0 0 P
+#13423
+sandýk~
+sandýk~
+Bir sandýk burada duruyor.~
+iron~
+furniture 0 A
+2 2000 NO 100 100
+0 0 0 P
+#13424
+köpüren sývý þiþe~
+köpüren bir sývýyla dolu þiþe~
+Köpüren bir sývýyla dolu þiþe burada uzanýyor.~
+glass~
+potion 0 A
+24 'word of recall' 'sleep' 'poison' 'cure poison'
+20 20 1000 P
+#13425
+gri iksir~
+gri iksir~
+Gri bir iksir tezgaha kurulmuþ.~
+glass~
+potion 0 A
+23 'energy drain' 'energy drain' 'create food' 'create spring'
+20 20 1000 0
+#0
+
+
+#ROOMS
+#13400
+Aðaçtaki büyük bir kovuk~
+You stand in a cramped space inside an old, gnarled tree.  A frigid
+breeze rises from the ground.
+     There is a small (Glowing) (Humming) tablet.
+~
+0 0 1
+D2
+~
+hole~
+1 1 6153
+D5
+~
+trapdoor~
+1 -1 13401
+E
+small tablet~
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++                                                                  +
++            This area has been converted and adapted by           +
++                             Kajko                                +
++                                                                  +
++                               &                                  +
++                                                                  +
++                      revised, debugged (?:)                      +
++               slightly enchanced and balanced by                 +
++    jaceks and after him by asena            , september 1996     +
++                                                                  +
++    PS. prepare to die - it is {40 62} area with aggro mobs       +
++                   only armed personel allowed                    +
++                                                                  +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+~
+S
+#13401
+Karanlýðýn içine doðru alçalan bir merdiven!~
+You are climbing on a ladder.  Above you is a trapdoor.  Below you
+is only darkness, from which a frigid breeze blows.
+~
+0 A 0
+D4
+~
+trapdoor~
+1 -1 13400
+D5
+~
+~
+0 -1 13402
+S
+#13402
+Karanlýðýn içine doðru alçalan bir merdiven!~
+You are climbing on a ladder.  Above you the ladder disappears in the
+dark.  Below is only darkness, from which a frigid breeze blows.
+~
+0 A 0
+D4
+~
+~
+0 -1 13401
+D5
+~
+~
+0 -1 13403
+S
+#13403
+Yerin derinliklerindeki tozlu bir tünel~
+You stand in a tunnel that appears to have been dug out of the dirt.
+You do not understand what is keeping the tunnel walls from caving in.  This
+would probably be a very bad place to use a dispel magic spell!  You do see
+some footprints in the dust, and looking up, you see who they belong to!
+~
+0 AD 0
+D1
+~
+~
+0 -1 13404
+D3
+~
+door~
+1 -1 13409
+D4
+~
+~
+0 -1 13402
+S
+#13404
+Ortasýnda büyük bir su birikintisi olan oda~
+This room has a large pool of black water in the center.  You see
+many runes and glyphs surrounding it.  The room is lit by torches held in
+sconces.  Each of these items in the room merits more investigation.
+~
+0 D 0
+D1
+~
+~
+0 -1 13405
+D3
+~
+~
+0 -1 13403
+E
+runes~
+These runes are carved into the rock about the pool.  You think you
+recognize the rune of vision, and another that has something to do with
+projecting power at a distance.
+~
+E
+glyphs~
+The glyphs are drawn upon the stone with what appears to be blood.
+You do not recognize any of them, and it would probably be a good idea not to
+touch any of them.
+~
+E
+sconces~
+The sconces are black and shaped liked two hands, cradling the torches
+between their pointed nails.
+~
+E
+torches~
+The torches are made of a black wood, and as you draw nearer, you find
+that they do not emit any heat.  Indeed, they seem to be radiating cold.  The
+flames are an icy blue, that makes you think twice about getting too close to
+them.
+~
+E
+pool~
+As you lean forward and look in the pool, you see nothing but the dark
+murky water.  Gradually though, an image forms before you.  You recognize the
+person the image shows.  It is the Avatar!  Apparently this is a pool that
+Ciquala uses to scry upon her enemies. The image is so clear, you almost
+believe you could step into the pool, and appear in Lord British's castle.
+~
+S
+#13405
+Ciquala'nýn Laboratuvarý~
+This room is lined with shelves that contain a multitude of jars,
+boxes, vials, chests, tubes, glasses, beakers, and other assorted containers.
+You think that drinking the contents of any might have undesireable effects.
+~
+0 AD 0
+D0
+~
+celldoor~
+1 13404 13408
+D1
+~
+celldoor~
+1 13404 13407
+D2
+~
+door~
+1 -1 13406
+D3
+~
+~
+0 -1 13404
+S
+#13406
+Malzeme odasý~
+This supply room keeps many of the items that are too large to fit in
+the laboratory itself.  You see several corpses that are preserved by the
+ever-present cold that you have encountered in every room in this tunnel
+system.  Also several crates hold contents, whose scent is enought to make
+you wish to shut the door immediately.  You believe that you hear a noise
+from behind one of the crates.
+~
+0 AD 0
+D0
+~
+door~
+1 -1 13405
+S
+#13407
+Çalýþma Hücresi~
+This is nothing more than a small room with a very heavy iron door
+closing it off from the laboratory.  This is where Ciquala's assistants keep
+the experiments they are working on.
+~
+0 AD 0
+D3
+~
+celldoor~
+1 13404 13405
+S
+#13408
+Çalýþma Hücresi~
+This is nothing more than a small room with a very heavy iron door
+closing it off from the laboratory.  This is where Ciquala's minions keep
+the experiments they are working on.
+~
+0 AD 0
+D2
+~
+celldoor~
+1 13404 13405
+S
+#13409
+Gardiyan odasý~
+The occupants of this room were obviously left here by the Lich to
+keep intruders like you from bothering her, or learning her plans.  There
+are doors to both the east and west.
+~
+0 AD 0
+D1
+~
+door~
+1 -1 13403
+D3
+~
+door~
+1 -1 13410
+S
+#13410
+Issýz görünen bir tünel~
+This empty tunnel has doors leading in all directions.  The roof of
+the tunnel seems abnormally low and shiny, almost as if it is not dirt.  This
+room is also as cold as all the others were.
+~
+0 AD 0
+D0
+~
+door~
+1 13405 13411
+D1
+~
+door~
+1 -1 13409
+D2
+~
+door~
+1 -1 13412
+D3
+~
+door~
+1 -1 13413
+S
+#13411
+Harita Odasý~
+This room is filled with maps, apparently containing some of Ciquala's
+plans.  You notice many maps of Lord British's castle.  You might be able to
+gain some information on Ciquala's plans, as well as learn your way through
+British's castle if you examine the map more closely.
+~
+0 AD 0
+D2
+~
+door~
+1 13405 13410
+E
+map~
+As you reach for a map to examine it closer, it bursts into ice cold flames and
+disintegrates before your eyes.  Apparently Ciquala has taken precautions
+against people snooping in her Lair.
+~
+S
+#13412
+Depo~
+You see many boxes before you, apparently this is a storage room of
+some sort.  You can bet that whatever a lich is storing, that it can't be good
+for the world in general.
+~
+0 AD 0
+D0
+~
+door~
+1 -1 13410
+S
+#13413
+Zemininde parmaklýklar olan bir tünel~
+You see a grate on the floor.  When you look down it, you see several
+creatures below, humanoid, but you can't make out exactly what they are.
+There are also doors leading all directions but west.
+~
+0 AD 0
+D0
+~
+door~
+1 -1 13415
+D1
+~
+door~
+1 -1 13410
+D2
+~
+door~
+1 -1 13416
+D5
+~
+grate~
+1 -1 13414
+S
+#13414
+Mekanizma Odasý~
+You gasp as you realize that these pasty faced people do not seem to
+have a will of their own.  No doubt the work of the Lich.  If these
+monstrosities are allowed to escape into the world, they will cause no end
+of problems for Midgaard.
+~
+0 AD 0
+D4
+~
+grate~
+1 -1 13413
+S
+#13415
+Ýþkence Meclisi~
+This room is fitted with many instruments and tools designed to cause
+pain and fear in anyone who enters.  However, you don't pay as much attention
+to the racks and iron maidens as you would if were not for the lich in the
+room.
+~
+0 AD 0
+D2
+~
+door~
+1 -1 13413
+S
+#13416
+Ciquala'nýn Taht Odasýnýn Giriþi~
+This does not look like any of the other rooms you have been in up till
+now.  The ceiling rises a full 40 feet in the air above you.  The walls are
+covered with murals proclaiming the might and majesty of Ciquala.  She does
+not look old and decayed as you would have pictured her.  Instead, she looks
+rather regal and stately, but undoubtedly evil.
+~
+0 AD 0
+D0
+~
+door~
+1 -1 13413
+D2
+~
+~
+0 -1 13417
+S
+#13417
+Ciquala'nýn Taht Odasý~
+This room is clothed in darkness, and a chill eminates from the foul
+monarch of the undead.  A large tapestry hangs behind her throne.  The
+ceiling rises above you, hidden in the darkness beyond the range your
+light can penetrate.  A feeling of hopelessness and insignificance overwhelms
+you as you face the Lich, Ciquala!
+~
+0 AD 0
+D0
+~
+~
+0 -1 13416
+D2
+~
+tapestry~
+1 13406 13418
+S
+#13418
+Ciquala'nýn Ganimet Salonu~
+This room contains enough wealth to fund an army, perhaps a small
+kingdom.  Racks or weapons, and spellbooks, and potions, not to mention large
+piles of coins that cover the floor.  A large paving stone in this room seems
+slightly disturbed.
+~
+0 AD 0
+D0
+~
+tapestry~
+1 13406 13417
+D5
+The stone appears to hide a secret passage going down.~
+stone~
+1 -1 13419
+E
+paving~
+The paving stone seems to be masking a passage down into a pit below this room.
+~
+S
+#13419
+Ciquala'nýn Gizli Mahzeni~
+This room contains several crypts where the lichs and vampires rest.
+Unfortunately, they all seem to be out of their crypts right now.
+~
+0 AD 0
+D4
+~
+stone~
+1 -1 13418
+S
+#0
+
+
+#RESETS
+*
+* part of text removed from #13404
+* D5
+* ~
+* pool~
+* 0 -1 2567
+
+*D 0 13400 2 1                   * A large knothole in a tree Close North
+*D 0 6153  0 1
+
+D 0 13400 5 1                   * A large knothole in a tree Close Down
+D 0 13401 4 1                   * A ladder descending into the darkness! Close Up
+*
+D 0 13403 3 1                   * A dusty tunnel deep under the ground Close West
+D 0 13409 1 1                   * Guard room Close East
+*
+D 0 13405 0 2                   * Ciquala's Laboratory Lock North
+D 0 13408 2 2                   * Holding Cell Lock South
+*
+D 0 13405 1 2                   * Ciquala's Laboratory Lock East
+D 0 13407 3 2                   * Holding Cell Lock West
+*
+D 0 13405 2 1                   * Ciquala's Laboratory Close South
+D 0 13406 0 1                   * Supply room Close North
+*
+D 0 13409 3 1                   * Guard room Close West
+D 0 13410 1 1                   * A seemingly empty tunnel Close East
+*
+D 0 13410 0 2                   * A seemingly empty tunnel Lock North
+D 0 13411 2 2                   * The Map Room Lock South
+*
+D 0 13410 2 1                   * A seemingly empty tunnel Close South
+D 0 13412 0 1                   * Storage Room Close North
+*
+D 0 13410 3 1                   * A seemingly empty tunnel Close West
+D 0 13413 1 1                   * A tunnel with a grate in the floor Close East
+*
+D 0 13413 5 1                   * A tunnel with a grate in the floor Close Down
+D 0 13414 4 1                   * The Room of the Automatons Close Up
+*
+D 0 13413 2 1                   * A tunnel with a grate in the floor Close South
+D 0 13416 0 1                   * Entrance to Ciquala's Throne Room Close North
+*
+D 0 13413 0 1                   * A tunnel with a grate in the floor Close North
+D 0 13415 2 1                   * Torture Chamber Close South
+*
+D 0 13417 2 2                   * Ciquala's Throne Room Lock South
+D 0 13418 0 2                   * Treasure Chamber of Ciquala Lock North
+*
+D 0 13418 5 1                   * Treasure Chamber of Ciquala Close Down
+D 0 13419 4 1                   * The hidden crypt of Ciquala Close Up
+*
+M 0 13400 1 13403 1             *Guardian Lich
+*
+M 0 13401 2 13405 1             *Vampire Assistant, male
+G 1 13404 1                       *key to holding cells
+G 1 13413 -1                      *potion
+G 1 13414 -1                      *potion
+G 1 13415 -1                      *potion
+G 1 13424 -1                      *potion
+G 1 13425 -1                      *potion
+*
+M 0 13418 2 13405 1             *Vampire Assistant, female
+G 1 13407 -1                      *potion
+G 1 13408 -1                      *potion
+*G 1 13409 -1                      *potion
+G 1 13410 -1                      *potion
+G 1 13411 -1                      *potion
+G 1 13412 -1                      *potion
+*
+M 0 13402 4 13408 2             *Nightmare creature
+M 0 13402 4 13407 2             *Nightmare creature
+*
+M 0 13403 4 13408 2             *Docile creature
+M 0 13403 4 13407 2             *Docile creature
+*
+M 0 13404 4 13412 2             *Black pudding
+M 0 13404 4 13406 2             *Black pudding
+*
+M 0 13405 1 13409 1             *Giant Automaton
+G 1 13405 1                       *key to war room
+*
+M 0 13406 1 13409 1             *Undead Guardian
+*
+M 0 13407 1 13410 1             *Lurker Above
+*
+M 0 13408 1 13411 1             *Vampire servant
+*
+M 0 13409 1 13414 1             *Human Automaton
+*
+M 0 13410 1 13414 1             *Human Automaton
+*
+M 0 13411 1 13414 1             *Human Automaton
+*
+M 0 13412 1 13414 1             *Human Automaton
+*
+M 0 13413 1 13415 1             *Torturer
+E 1 13417 -1 16                   *whip
+*
+M 0 13414 2 13416 2             *Undead Dragon
+*
+M 0 13415 1 13417 1             *Ciquala
+E 1 13400 -1 16                   *sword
+E 1 13401 -1 12                   *robe
+E 1 13402 -1 17                   *staff
+G 1 13406 1                       *key to treasury
+*
+M 0 13416 4 13419 2             *Lich (37)
+M 0 13416 4 13419 2             *Lich
+*
+M 0 13417 4 13419 2             *Vampire (47)
+M 0 13417 4 13419 2             *Vampire
+*
+O 1 13403 1 13406 1              *Crate
+O 1 13420 1 13406 1              *Crate
+O 1 13421 1 13406 1              *Crate
+*
+O 1 13416 -1 13415 1             *Iron Maiden
+*
+O 1 13418 -1 13418 1             *Coins
+O 1 13419 -1 13418 1             *Gems
+*
+O 1 13422 1 13412 1              *Crate
+O 1 13423 1 13412 1              *Crate
+S
+
+
+#SPECIALS
+* M  13400 spec_assassin                 *Guardian Lich
+M  13401 spec_cast_undead              *the vampire lab assistant
+M  13403 spec_breath_acid              *a docile creature
+M  13406 spec_cast_undead              *the undead guardian
+M  13408 spec_cast_undead              *a vampire servant
+* M  13413 spec_assassin                 *the torturer lich
+M  13414 spec_breath_gas               *Ciquala's undead pet dragon
+M  13415 spec_cast_undead              *the lich Ciquala
+M  13416 spec_cast_undead              *Lich
+S
+
+#OLIMITS
+O 13407 10
+S
+
+
+#$

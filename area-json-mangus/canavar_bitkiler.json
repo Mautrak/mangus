@@ -1,0 +1,1183 @@
+{
+    "area": {
+        "file": "canavar_bitkiler.are",
+        "name": "Yarý Türkçe",
+        "low_range": "40",
+        "high_range": "60",
+        "min_vnum": "30230",
+        "max_vnum": "30270",
+        "path": "13b 2k d 2k 4b k 2b 2k 2b 5g 2b k",
+        "yonelim_iyi": "10",
+        "yonelim_yansiz": "80",
+        "yonelim_kem": "10"
+    },
+    "mobiles": [
+        {
+            "vnum": "30232",
+            "name": "yeþil canavar çiçek",
+            "short_description": "canavar çiçek",
+            "long_description": "Yeþil renkte bir canavar çiçek iþtahla seni izliyor.\n",
+            "description": "This giant plant is covered with bud. It looks like it could\nsmoke you.\n",
+            "race": "human",
+            "act": "64|128",
+            "affected_by": "8|128|524288",
+            "level": "55"
+        },
+        {
+            "vnum": "30233",
+            "name": "mor canavar çiçek",
+            "short_description": "canavar çiçek",
+            "long_description": "Mor renkte bir canavar çiçek iþtahla seni izliyor.\n",
+            "description": "The bud of this giant bush weighs its leaves to the ground.\nIt is a blend of beautiful orange, red, and blue hairs. Just a\nfraction of this plant would be enough to keep you happy for a year.\n",
+            "race": "human",
+            "act": "2|64",
+            "affected_by": "8|128|524288",
+            "level": "60"
+        },
+        {
+            "vnum": "30234",
+            "name": "küçük canavar çiçek",
+            "short_description": "canavar çiçek",
+            "long_description": "Küçük bir canavar çiçek bacaðýný ýsýrmaya çalýþýyor.\n",
+            "description": "This wrapping of reefer is just what you might need after a hard\nday of work.\n",
+            "race": "human",
+            "act": "64|128",
+            "affected_by": "32768|524288",
+            "level": "40"
+        },
+        {
+            "vnum": "30235",
+            "name": "eþek arýsý",
+            "short_description": "eþek arýsý",
+            "long_description": "Sarý-siyah renkte halkalarýyla kocaman bir eþek arýsý VIZILDIYOR.\n",
+            "description": "What used to be a cigar is now filled with enough bud to get the\nowner 5 years.\n",
+            "race": "human",
+            "act": "64",
+            "affected_by": "524288",
+            "level": "46"
+        },
+        {
+            "vnum": "30236",
+            "name": "keskin diþli keçi",
+            "short_description": "keskin diþli keçi",
+            "long_description": "Keskin diþli bir keçi. Et yiyen bir keçi görmüþ müydün???\n",
+            "description": "While not a large quanitity of weed, it's probably enough to get\nyou by for an hour or two.\n",
+            "race": "human",
+            "act": "64|128",
+            "affected_by": "8|524288",
+            "level": "43"
+        },
+        {
+            "vnum": "30237",
+            "name": "keskin diþli ördek",
+            "short_description": "keskin diþli ördek",
+            "long_description": "Ýþte diþleri olan bir ördek! Ne kadar da keskinler...\n",
+            "description": "This burly, buzzcutted fellow just joined the DEA after being fired\nfrom the ATF for shooting an innocent child. He's not the type to be\nmessed with. Of course if you've been smoking any of this weed, you\nwouldn't really care.\n",
+            "race": "human",
+            "act": "64|128",
+            "affected_by": "8|32768",
+            "level": "51"
+        },
+        {
+            "vnum": "30238",
+            "name": "dev solucan",
+            "short_description": "dev solucan",
+            "long_description": "Dev bir solucan! Aðzýndan sümüksü salyalar akýyor...\n",
+            "description": "A big Central American looks at you and says,\n\"Hola amigo, muchos dinenos.\"\n",
+            "race": "human",
+            "act": "64|512",
+            "affected_by": "32768|65536",
+            "level": "43"
+        },
+        {
+            "vnum": "30239",
+            "name": "siyah kelebek kocaman",
+            "short_description": "kelebek",
+            "long_description": "Siyah kanatlara sahip kocaman bir kelebek!\n",
+            "description": "Just the sweet fragrance of the air is enough to give you\nthe munchies.\n",
+            "race": "unique",
+            "act": "32|64",
+            "affected_by": "2|8",
+            "level": "38"
+        },
+        {
+            "vnum": "30240",
+            "name": "bitki avcýsý",
+            "short_description": "bitki avcýsý",
+            "long_description": "Ýþte canavar bitki ve hayvanlardan korkmayan bir avcý! Aptal olmalý...\n",
+            "description": "He breaks into timeless verse singing,\n",
+            "race": "human",
+            "act": "64",
+            "affected_by": "8|128|32768|524288",
+            "level": "57"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "30232",
+            "name": "su kamýþý on ayak",
+            "short_description": "su kamýþý",
+            "description": "On ayak uzunluðunda bir kamýþ görüyorsun.",
+            "material": "glass",
+            "type": "weapon",
+            "extra_flags": "1|512",
+            "wear_flags": "1|8192",
+            "values": "exotic 6 9 suction 0",
+            "level": "60",
+            "weight": "7",
+            "cost": "7200",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "10"
+                },
+                {
+                    "location": "19",
+                    "modifier": "10"
+                },
+                {
+                    "location": "3",
+                    "modifier": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "30233",
+            "name": "sümüksü salgý",
+            "short_description": "sümüksü salgý",
+            "description": "Sümüksü bir salgý birikintisi görüyorsun. ÝÐRENÇ!",
+            "material": "",
+            "type": "potion",
+            "extra_flags": "1",
+            "wear_flags": "1",
+            "values": "25 'heal' 'invis' 'sanctuary' ''",
+            "level": "25",
+            "weight": "1",
+            "cost": "5800",
+            "condition": "P"
+        },
+        {
+            "vnum": "30234",
+            "name": "tuzlanmýþ yaprak",
+            "short_description": "tuzlanmýþ yaprak",
+            "description": "Tuzlanmýþ bir yaprak görüyorsun.",
+            "material": "",
+            "type": "pill",
+            "extra_flags": "1",
+            "wear_flags": "1",
+            "values": "30 'armor' 'fly' 'infravision' ''",
+            "level": "25",
+            "weight": "1",
+            "cost": "2000",
+            "condition": "P"
+        },
+        {
+            "vnum": "30235",
+            "name": "iþlenmiþ yapraklar",
+            "short_description": "iþlenmiþ yapraklar",
+            "description": "Birbirine baðlanarak iþlenmiþ yapraklar görüyorsun.",
+            "material": "",
+            "type": "armor",
+            "extra_flags": "64",
+            "wear_flags": "1|16384",
+            "values": "0 0 0 0 0",
+            "level": "50",
+            "weight": "2",
+            "cost": "1300",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "30236",
+            "name": "çatallý asa",
+            "short_description": "çatallý asa",
+            "description": "Çatallý bir asa görüyorsun.",
+            "material": "",
+            "type": "weapon",
+            "extra_flags": "1|1024",
+            "wear_flags": "1|8192",
+            "values": "exotic 6 9 suction 0",
+            "level": "54",
+            "weight": "6",
+            "cost": "12000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "10"
+                },
+                {
+                    "location": "19",
+                    "modifier": "10"
+                },
+                {
+                    "location": "12",
+                    "modifier": "35"
+                }
+            ]
+        },
+        {
+            "vnum": "30237",
+            "name": "parlayan yaprak",
+            "short_description": "parlayan yaprak",
+            "description": "Büyüyle parlayan bir yaprak görüyorsun",
+            "material": "",
+            "type": "light",
+            "extra_flags": "1",
+            "wear_flags": "1",
+            "values": "0 1 -1 0 0",
+            "level": "55",
+            "weight": "5",
+            "cost": "1200",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "25"
+                },
+                {
+                    "location": "2",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "30238",
+            "name": "domuz artýk",
+            "short_description": "domuz artýðý",
+            "description": "Domuzun yemekten vazgeçtiði bir artýk görüyorsun.",
+            "material": "",
+            "type": "food",
+            "extra_flags": "0",
+            "wear_flags": "1",
+            "values": "24 24 0 0 0",
+            "level": "0",
+            "weight": "5",
+            "cost": "10",
+            "condition": "P"
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "30232",
+            "name": "Bitkinin Çevresi",
+            "description": "This area is intended to be humorous.\nDo not enter if you have a poor sense of humor or are under level 40.\nYou have been warned. You try being creative after a few screwdrivers.\n",
+            "flags": "4|1024",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30233"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "18024"
+                }
+            ]
+        },
+        {
+            "vnum": "30233",
+            "name": "Bitkinin Dibi",
+            "description": "You are at the base of a giant plant with leaves of seven points.\nYou notice a sweet smell in the air, and begin to feel lightheaded\nas you inhale this tasty air. As you look up you see buds of orange,\nred, blue, green, and purple. The beautiful colors and the way you\nare feeling invite you to explore further.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "-1"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30232"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30234"
+                }
+            ]
+        },
+        {
+            "vnum": "30234",
+            "name": "Bitkinin Sapý",
+            "description": "You are travelling up the stem of the plant. You see leaves of the\nplant to the left and the right of you. As before, the air is filled\nwith a sweet fragrance which relaxes you and enhances your senses.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30250"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30236"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30253"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30235"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30241"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30233"
+                }
+            ]
+        },
+        {
+            "vnum": "30235",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30234"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30239"
+                }
+            ]
+        },
+        {
+            "vnum": "30236",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30237"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30234"
+                }
+            ]
+        },
+        {
+            "vnum": "30237",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30238"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30236"
+                }
+            ]
+        },
+        {
+            "vnum": "30238",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30237"
+                }
+            ]
+        },
+        {
+            "vnum": "30239",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30235"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30240"
+                }
+            ]
+        },
+        {
+            "vnum": "30240",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30239"
+                }
+            ]
+        },
+        {
+            "vnum": "30241",
+            "name": "Bitkinin Sapý",
+            "description": "You are travelling up the stem of the plant. You see leaves of the\nplant to the left and the right of you. As before, the air is filled\nwith a sweet fragrance which relaxes you and enhances your senses.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30256"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30244"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30258"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30242"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30246"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30234"
+                }
+            ]
+        },
+        {
+            "vnum": "30242",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30241"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30243"
+                }
+            ]
+        },
+        {
+            "vnum": "30243",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30242"
+                }
+            ]
+        },
+        {
+            "vnum": "30244",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30245"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30241"
+                }
+            ]
+        },
+        {
+            "vnum": "30245",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30244"
+                }
+            ]
+        },
+        {
+            "vnum": "30246",
+            "name": "Bitkinin Sapý",
+            "description": "You are travelling up the stem of the plant. You see leaves of the\nplant to the left and the right of you. As before, the air is filled\nwith a sweet fragrance which relaxes you and enhances your senses.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30260"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30247"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30261"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30248"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30249"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30241"
+                }
+            ]
+        },
+        {
+            "vnum": "30247",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30246"
+                }
+            ]
+        },
+        {
+            "vnum": "30248",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30246"
+                }
+            ]
+        },
+        {
+            "vnum": "30249",
+            "name": "Bitkinin Üzeri",
+            "description": "You have reached the top this wonderful bundle of bud. You remember\nwhen you were young and you were told to say no to drugs. But were\nyou ever told how they could expand your mind and give you fun new\nexperiences?\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30246"
+                }
+            ]
+        },
+        {
+            "vnum": "30250",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30251"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30234"
+                }
+            ]
+        },
+        {
+            "vnum": "30251",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30252"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30250"
+                }
+            ]
+        },
+        {
+            "vnum": "30252",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30251"
+                }
+            ]
+        },
+        {
+            "vnum": "30253",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30234"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30254"
+                }
+            ]
+        },
+        {
+            "vnum": "30254",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30253"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30255"
+                }
+            ]
+        },
+        {
+            "vnum": "30255",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30254"
+                }
+            ]
+        },
+        {
+            "vnum": "30256",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30257"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30241"
+                }
+            ]
+        },
+        {
+            "vnum": "30257",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30256"
+                }
+            ]
+        },
+        {
+            "vnum": "30258",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30241"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30259"
+                }
+            ]
+        },
+        {
+            "vnum": "30259",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30258"
+                }
+            ]
+        },
+        {
+            "vnum": "30260",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30246"
+                }
+            ]
+        },
+        {
+            "vnum": "30261",
+            "name": "Bitkinin Yapraðý",
+            "description": "You are travelling on the leaves of the plant. You feel yourself\nbecoming stuck in the hairs of the plant. You look around and all\nyou see is sheer beauty. If only real life could be this perfect.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "30246"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "30233",
+            "arg2": "1",
+            "arg3": "30249",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "30232",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "30232",
+            "arg2": "1",
+            "arg3": "30246",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "30236",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "30240",
+            "arg2": "1",
+            "arg3": "30241",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "30237",
+            "arg2": "100",
+            "arg3": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "30236",
+            "arg2": "1",
+            "arg3": "30256",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "30236",
+            "arg2": "1",
+            "arg3": "30258",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "30235",
+            "arg2": "1",
+            "arg3": "30236",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "30235",
+            "arg2": "1",
+            "arg3": "30235",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "30234",
+            "arg2": "1",
+            "arg3": "30233",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "30233",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "30239",
+            "arg2": "1",
+            "arg3": "30233",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "30238",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "30234",
+            "arg2": "1",
+            "arg3": "30234",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "30233",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "30237",
+            "arg2": "1",
+            "arg3": "30252",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "30235",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "30238",
+            "arg2": "1",
+            "arg3": "30255",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "30234",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "30237",
+            "arg2": "1",
+            "arg3": "30245",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "30235",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "30236",
+            "arg2": "1",
+            "arg3": "30245",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "30234",
+            "arg2": "100"
+        }
+    ],
+    "olimits": [
+        {
+            "vnum": "30233",
+            "limit": "10"
+        },
+        {
+            "vnum": "30234",
+            "limit": "3"
+        }
+    ]
+}

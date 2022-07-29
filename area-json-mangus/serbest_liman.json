@@ -1,0 +1,4018 @@
+{
+    "area": {
+        "file": "serbest_liman.are",
+        "name": "Yarý Türkçe",
+        "low_range": "8",
+        "high_range": "53",
+        "min_vnum": "29201",
+        "max_vnum": "29276",
+        "path": "34d k 3d",
+        "yonelim_iyi": "33",
+        "yonelim_yansiz": "34",
+        "yonelim_kem": "33"
+    },
+    "mobiles": [
+        {
+            "vnum": "29201",
+            "name": "mavi dilli kertenkele",
+            "short_description": "mavi dilli kertenkele",
+            "long_description": "Mavi dilli bir kertenkele sana týslýyor.\n",
+            "description": "The blue-tongued lizard measures some 18\" from head to tail,\nis very quick, and has sharp pointy teeth.\n",
+            "race": "lizard",
+            "act": "ACEHX",
+            "affected_by": "0",
+            "level": "8"
+        },
+        {
+            "vnum": "29202",
+            "name": "kýrmýzý dilli kertenkele",
+            "short_description": "kýrmýzý dilli kertenkele",
+            "long_description": "Kýrmýzý dilli bir kertenkele sana týslýyor.\n",
+            "description": "The red-tongued lizard measures some 18\" from head to tail,\nis very quick, and has sharp pointy teeth.\n",
+            "race": "lizard",
+            "act": "ACEHX",
+            "affected_by": "0",
+            "level": "9"
+        },
+        {
+            "vnum": "29203",
+            "name": "yeþil dilli kertenkele",
+            "short_description": "yeþil dilli kertenkele",
+            "long_description": "Yeþil dilli bir kertenkele sana týslýyor.\n",
+            "description": "The green-tongued lizard measures some 18\" from head to tail,\nis very quick, and has sharp pointy teeth.\n",
+            "race": "lizard",
+            "act": "ACEHX",
+            "affected_by": "0",
+            "level": "8"
+        },
+        {
+            "vnum": "29204",
+            "name": "denizci yaþlý dul kadýn burnu gözcü",
+            "short_description": "Dul Kadýn Burnu gözcüsü",
+            "long_description": "Yaþlý bir denizci burada bekliyor.\n",
+            "description": "You strike up a conversation with the watchman. He tells you that\nhe has noticed several craft entering and leaving Freeport harbor\nat night, but when he reported it, nobody seemed to care.\n",
+            "race": "human",
+            "act": "ABCEX",
+            "affected_by": "0",
+            "level": "12"
+        },
+        {
+            "vnum": "29205",
+            "name": "balýkçý",
+            "short_description": "balýkçý",
+            "long_description": "Bir balýkçý burada, oltasýný sallýyor.\n",
+            "description": "You strike up a conversation with the fisherman. He tells you that\nyou really should try the blue-tongued lizards which hide in the\njetty rocks.\n",
+            "race": "human",
+            "act": "ABCEX",
+            "affected_by": "0",
+            "level": "10"
+        },
+        {
+            "vnum": "29206",
+            "name": "rýhtým iþçisi",
+            "short_description": "rýhtým iþçisi",
+            "long_description": "Bir rýhtým iþçisi aðýr yükleri kaldýrýyor.\n",
+            "description": "The dockworker is dressed in loose-fitting cotton clothing and uses\na rope to lift the heavy crate.\n",
+            "race": "human",
+            "act": "ACEX",
+            "affected_by": "0",
+            "level": "9"
+        },
+        {
+            "vnum": "29207",
+            "name": "rýhtým þefi",
+            "short_description": "rýhtým þefi",
+            "long_description": "Rýhtým þefi seni dikkatli gözlerle izliyor.\n",
+            "description": "The harbormaster is an old hand at this, and doesn't put up with\nany crap from you. Give him his list or go to the brig.\n",
+            "race": "human",
+            "act": "ABCE",
+            "affected_by": "0",
+            "level": "29"
+        },
+        {
+            "vnum": "29208",
+            "name": "liman vatandaþ",
+            "short_description": "liman vatandaþý",
+            "long_description": "Bir liman vatandaþý ýslýk çalarak yürüyor.\n",
+            "description": "The citizen is dressed in light cotton clothing and sandals.\n",
+            "race": "human",
+            "act": "ACEX",
+            "affected_by": "0",
+            "level": "10"
+        },
+        {
+            "vnum": "29209",
+            "name": "gülen çocuk",
+            "short_description": "gülen çocuk",
+            "long_description": "Bir çocuk burada, oyun oynuyor.\n",
+            "description": "The child is dressed in a white cotton shirt.\n",
+            "race": "human",
+            "act": "ACEX",
+            "affected_by": "0",
+            "level": "7"
+        },
+        {
+            "vnum": "29210",
+            "name": "denizcinin karýsý",
+            "short_description": "denizcinin karýsý",
+            "long_description": "Denizcinin karýsý burada, eþinin dönüþünü bekliyor.\n",
+            "description": "The sailor's wife is dressed in a simple cotton dress,\nand has hair bleached blond by the sun and the sea.\n",
+            "race": "human",
+            "act": "ACEX",
+            "affected_by": "0",
+            "level": "9"
+        },
+        {
+            "vnum": "29211",
+            "name": "gemi yapým þefi",
+            "short_description": "gemi yapým þefi",
+            "long_description": "Gemi yapým þefi yeni bir gemi üzerinde çalýþýyor.\n",
+            "description": "After introducing yourself and the usual small talk, you\nfind out from the master shipbuilder that he has been recently\ncommissioned to build 3 triremes, boats which offer little\ncargo storage, but excellent raiding speed.\n",
+            "race": "human",
+            "act": "ABCE",
+            "affected_by": "0",
+            "level": "95"
+        },
+        {
+            "vnum": "29212",
+            "name": "gemi yapým çýraðý",
+            "short_description": "gemi yapým çýraðý",
+            "long_description": "Bir gemi yapým çýraðý baðlantý yerlerini ziftliyor.\n",
+            "description": "The apprentice shipbuilder is a young boy dressed in a dirty\ngrey smock.\n",
+            "race": "human",
+            "act": "ABCE",
+            "affected_by": "0",
+            "level": "7"
+        },
+        {
+            "vnum": "29213",
+            "name": "depo yetkilisi",
+            "short_description": "depo yetkilisi",
+            "long_description": "Depo yetkilisi liman iþçisine sesleniyor.\n",
+            "description": "The warehouse overseer complains about the shoddy record keeping\nof his employees. Why just this last month the records show 60 missing\ncrates bound for destinations around the world.\n",
+            "race": "human",
+            "act": "ABCE",
+            "affected_by": "0",
+            "level": "34"
+        },
+        {
+            "vnum": "29214",
+            "name": "liman devriyesi",
+            "short_description": "liman devriyesi",
+            "long_description": "Bir liman devriyesi seni izliyor.\n",
+            "description": "The harbor patrolman is dressed in light armor. He is well armed\nthough, and looks like he is in no mood for your crap.\n",
+            "race": "human",
+            "act": "ACEX",
+            "affected_by": "0",
+            "level": "20"
+        },
+        {
+            "vnum": "29215",
+            "name": "yükleyici",
+            "short_description": "yükleyici",
+            "long_description": "Bir yükleyici kargoyu limana götürüyor.\n",
+            "description": "The teamster drives his single mule with a long whip and foul language.\n",
+            "race": "human",
+            "act": "ACEX",
+            "affected_by": "0",
+            "level": "13"
+        },
+        {
+            "vnum": "29216",
+            "name": "lefti",
+            "short_description": "Batýk Korsan'ýn sahibi Lefti",
+            "long_description": "Batýk Korsan'ýn sahibi Lefti içki ve yiyecek daðýtýyor.\n",
+            "description": "When you ask about the recent gossip, Lefty tells you that he heard\na shady looking bunch talking about how Oglethorpe the master merchant\nhad sold out Freeport to the pirates.\n",
+            "race": "human",
+            "act": "ABCDE",
+            "affected_by": "0",
+            "level": "95"
+        },
+        {
+            "vnum": "29217",
+            "name": "anvar",
+            "short_description": "Emporyum'un sahibi Anvar",
+            "long_description": "Anvar egzotik mallarýný satýyor.\n",
+            "description": "You flip Anwar a gold coin. He holds out his hand for more. You give\nhim 50 gold. He tells you that he has access to some goods which are\nvery cheap in which you might be interested. When you scoff at his\nfenced goods, Anwar clams up.\n",
+            "race": "çora",
+            "act": "ABCEV",
+            "affected_by": "J",
+            "level": "95"
+        },
+        {
+            "vnum": "29218",
+            "name": "radner cüce zýrhçý",
+            "short_description": "cüce zýrhçý Radner",
+            "long_description": "Cüce zýrhçý Radner metal bir plakaya þekil veriyor.\n",
+            "description": "Raedner gladly accepts a pull from your ale skin. As he wipes his brow,\nhe begins a story about how he thinks the last election was rigged, since\nnobody he had talked to voted for Mayor Friendly. He offers to repair your\narmor.\n",
+            "race": "dwarf",
+            "act": "ABCESV",
+            "affected_by": "J",
+            "level": "94"
+        },
+        {
+            "vnum": "29219",
+            "name": "samanta mistik göz cadýsý",
+            "short_description": "Mistik Göz'ün cadýsý Samanta",
+            "long_description": "Mistik Göz'ün cadýsý Samanta mallarýný gösteriyor.\n",
+            "description": "Samantha bats her eyes at you with no shame at all. She propositions you\nfor some indecent activity. You accept to pump her for more information.\nShe lets slip that Lord Mourning was seen recently in her shop. She offers\nto identify anything you may have.\n",
+            "race": "human",
+            "act": "ABCERV",
+            "affected_by": "0",
+            "level": "94"
+        },
+        {
+            "vnum": "29220",
+            "name": "çýrak tüccar",
+            "short_description": "çýrak tüccar",
+            "long_description": "Çýrak tüccar seninle ticari bir anlaþma yapmanýn peþinde.\n",
+            "description": "The apprentice is trying to fill his docket for the evening's tide. He\nwears a simple yellow smock.\n",
+            "race": "human",
+            "act": "ABCE",
+            "affected_by": "0",
+            "level": "7"
+        },
+        {
+            "vnum": "29221",
+            "name": "keres tüccar",
+            "short_description": "tüccar Keres",
+            "long_description": "Tüccar Keres seni içten bir gülümsemeyle karþýlýyor.\n",
+            "description": "You strike up a conversation with Ceres. He tells you that he was recently\nthreatened by Oglethorpe (1st chair) when he brought up the subject of\nmissing records of the guild.\n",
+            "race": "human",
+            "act": "ABCEN",
+            "affected_by": "0",
+            "level": "46"
+        },
+        {
+            "vnum": "29222",
+            "name": "elken banker",
+            "short_description": "Banker Elken",
+            "long_description": "Banker Elken yatýracaðýn paralarý bekliyor.\n",
+            "description": "Elken seems to squirm and shift when you begin gentle inquiries into\nthe strange happenings of Freeport. He excuses himself and goes to\ntalk to a teller, who in turn leaves the bank in a hurry.\n",
+            "race": "human",
+            "act": "ABCE",
+            "affected_by": "0",
+            "level": "49"
+        },
+        {
+            "vnum": "29224",
+            "name": "genç bahriye öðrencisi",
+            "short_description": "genç bahriye öðrencisi",
+            "long_description": "Genç bahriye öðrencisi burada dinleniyor.\n",
+            "description": "You strike up a conversation, and he tells you of the rigors of the\nNaval academy. He relays a funny story of how during last summers\nsailors games he took his girl off to a secret tunnel from Freeport\nbay, and wound up sinking his boat and having to swim back, missing\nthe final race.\n",
+            "race": "human",
+            "act": "ABCE",
+            "affected_by": "0",
+            "level": "14"
+        },
+        {
+            "vnum": "29225",
+            "name": "amiral beyaz miðfer yaþlý adam",
+            "short_description": "Amiral Beyaz Miðfer",
+            "long_description": "Yaþlý bir adam piposunu içiyor.\n",
+            "description": "You offer Whitecap some honey gold pipe tobacco. He smiles, kicks back,\nand lights up his pipe. An hour later, you are much wiser in the ways of the\nsea. He also tells you of how recently he has grown concerned for the\nfirst admiral of Freeport, Blacksail, who has acquired an addiction to\ndevil weed.\n",
+            "race": "human",
+            "act": "ABCEPQ",
+            "affected_by": "0",
+            "level": "49"
+        },
+        {
+            "vnum": "29226",
+            "name": "yardýmsever baþkan",
+            "short_description": "yardýmsever Baþkan",
+            "long_description": "Yardýmsever baþkan seni içten bir gülümsemeyle karþýlýyor.\n",
+            "description": "When you begin to subtly inquire about the strange happenings in Freeport\nMayor Friendly gets nervous and clams up. You notice that he keeps looking\nat a white marble statue.\n",
+            "race": "human",
+            "act": "ABCE",
+            "affected_by": "0",
+            "level": "44"
+        },
+        {
+            "vnum": "29227",
+            "name": "hancý mige",
+            "short_description": "Tayfa Bölgesi'nin hancýsý Midge",
+            "long_description": "Tayfa Bölgesi'nin hancýsý Midge sana sýcak yemek öneriyor.\n",
+            "description": "Midge sits down with you as you have the meal, as her business right now\nhas been slow. She tells you that her business has steadily declined for\nthe last 6 years. Recently her business picked up again. In fact, she\njust last month had a week stay by a very rich visitor named Lord Vulture.\n",
+            "race": "human",
+            "act": "ABCE",
+            "affected_by": "0",
+            "level": "94"
+        },
+        {
+            "vnum": "29228",
+            "name": "kirli korsan denizci",
+            "short_description": "kirli korsan",
+            "long_description": "Kirli bir korsan denizci yüklerini indiriyor.\n",
+            "description": "The sailor reeks of rum and the sea.\n",
+            "race": "human",
+            "act": "ACEX",
+            "affected_by": "0",
+            "level": "45"
+        },
+        {
+            "vnum": "29229",
+            "name": "korsan muhafýz",
+            "short_description": "korsan muhafýz",
+            "long_description": "Korsan muhafýz burada, yolu kapatýyor.\n",
+            "description": "The guard is heavily armed and moves with military\nprecision.\n",
+            "race": "human",
+            "act": "ABCEF",
+            "affected_by": "0",
+            "level": "46"
+        },
+        {
+            "vnum": "29230",
+            "name": "amiral kara yelken",
+            "short_description": "Amiral Kara Yelken",
+            "long_description": "Amiral Kara Yelken otlara olan düþkünlüðüyle ürperiyor.\n",
+            "description": "You confront Blacksail with his villainy. He begs for your mercy. He\nclaims Mourning forced him into his present addiction, and threatens\nto cut him off from all devil weed unless he complies with his every\nwhim.\n",
+            "race": "human",
+            "act": "ABCE",
+            "affected_by": "0",
+            "level": "47"
+        },
+        {
+            "vnum": "29231",
+            "name": "ogletorp tüccar efendi",
+            "short_description": "tüccar efendi Ogletorp",
+            "long_description": "Tüccar efendi Ogletorp varlýðýndan ürküyor!\n",
+            "description": "Oglethorpe, when faced with your accusations proudly admits to skimming\noff profits from his information scandal and ties to the pirate lords.\nHe laughs at your puny attempts to frighten him, and vows your slow, cold\ntorture. With that, he laughs and eats a blue lizard tongue.\n",
+            "race": "human",
+            "act": "ABCE",
+            "affected_by": "0",
+            "level": "47"
+        },
+        {
+            "vnum": "29232",
+            "name": "lord yas",
+            "short_description": "Lord Yas",
+            "long_description": "Lord Yas sana gülüyor!\n",
+            "description": "Bah! Who are you to threaten me? I was sinking navies when you were a mere\nstrapling on your mother's teat! I will destroy you! And if not me, then\nsomeone else, for every one of us you kill, 2 more sprout up to take my\nplace! With that Lord Mourning draws his saber and eats a blue lizard\ntongue.\n",
+            "race": "human",
+            "act": "ABCE",
+            "affected_by": "H",
+            "level": "52"
+        },
+        {
+            "vnum": "29233",
+            "name": "sarhoþ denizci",
+            "short_description": "sarhoþ denizci",
+            "long_description": "Sarhoþ bir denizci sendeleyerek yürüyor.\n",
+            "description": "The drunken sailor has been a long time away at sea, and this is his\nfirst day back in port. His wandering drunk shows on his clothing. Here\na stain from the red wine he had this morning. There is the gravy from\nthe meat he had for lunch.\n",
+            "race": "human",
+            "act": "ACEX",
+            "affected_by": "0",
+            "level": "8"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "29201",
+            "name": "eski anahtar",
+            "short_description": "eski anahtar",
+            "description": "Eski bir anahtar yerde yatýyor.\n",
+            "material": "iron",
+            "type": "key",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "44",
+            "weight": "1",
+            "cost": "440",
+            "condition": "P"
+        },
+        {
+            "vnum": "29202",
+            "name": "mavi kertenkele dili",
+            "short_description": "mavi kertenkele dili",
+            "description": "Mavi bir kertenkele dili burada duruyor.\n",
+            "material": "flesh",
+            "type": "pill",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "10 'sanctuary' '' '' ''",
+            "level": "8",
+            "weight": "1",
+            "cost": "2450",
+            "condition": "P"
+        },
+        {
+            "vnum": "29203",
+            "name": "kýrmýzý kertenkele dili",
+            "short_description": "kýrmýzý kertenkele dili",
+            "description": "Kýrmýzý bir kertenkele dili burada duruyor.\n",
+            "material": "flesh",
+            "type": "pill",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "10 'poison' '' '' ''",
+            "level": "9",
+            "weight": "1",
+            "cost": "90",
+            "condition": "P"
+        },
+        {
+            "vnum": "29204",
+            "name": "yeþil kertenkele dili",
+            "short_description": "yeþil kertenkele dili",
+            "description": "Yeþil bir kertenkele dili burada duruyor.\n",
+            "material": "flesh",
+            "type": "pill",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "10 'curse' '' '' ''",
+            "level": "8",
+            "weight": "1",
+            "cost": "80",
+            "condition": "P"
+        },
+        {
+            "vnum": "29205",
+            "name": "gözcü ateþi",
+            "short_description": "gözcü ateþi",
+            "description": "Bir gözcü ateþi burada yanýyor.\n",
+            "material": "unknown",
+            "type": "light",
+            "extra_flags": "A",
+            "wear_flags": "AO",
+            "values": "0 0 999 0 0",
+            "level": "10",
+            "weight": "20",
+            "cost": "100",
+            "condition": "P"
+        },
+        {
+            "vnum": "29206",
+            "name": "olta",
+            "short_description": "olta",
+            "description": "Bir olta burada unutulmuþ.\n",
+            "material": "wood",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "0 3 5 4 0",
+            "level": "10",
+            "weight": "3",
+            "cost": "100",
+            "condition": "P"
+        },
+        {
+            "vnum": "29207",
+            "name": "defter",
+            "short_description": "defter",
+            "description": "Bir defter burada býrakýlmýþ.\n",
+            "material": "vellum",
+            "type": "treasure",
+            "extra_flags": "G",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "29",
+            "weight": "4",
+            "cost": "290",
+            "condition": "P"
+        },
+        {
+            "vnum": "29208",
+            "name": "devriye ýþýk",
+            "short_description": "devriye ýþýðý",
+            "description": "Parlak bir devriye ýþýðý burada býrakýlmýþ.\n",
+            "material": "glass",
+            "type": "light",
+            "extra_flags": "A",
+            "wear_flags": "AO",
+            "values": "0 0 999 0 0",
+            "level": "20",
+            "weight": "5",
+            "cost": "200",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "24",
+                    "modifier": "-5"
+                }
+            ]
+        },
+        {
+            "vnum": "29209",
+            "name": "zýrh",
+            "short_description": "zýrh",
+            "description": "Bir zýrh burada býrakýlmýþ.\n",
+            "material": "iron",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AD",
+            "values": "7 7 7 0 0",
+            "level": "20",
+            "weight": "20",
+            "cost": "200",
+            "condition": "P"
+        },
+        {
+            "vnum": "29210",
+            "name": "üç diþli çatal",
+            "short_description": "üç diþli çatal",
+            "description": "Üç diþli bir çatal burada býrakýlmýþ.\n",
+            "material": "wood",
+            "type": "weapon",
+            "extra_flags": "G",
+            "wear_flags": "AN",
+            "values": "3 5 5 2 0",
+            "level": "20",
+            "weight": "9",
+            "cost": "200",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "3"
+                }
+            ]
+        },
+        {
+            "vnum": "29211",
+            "name": "parça et",
+            "short_description": "parça et",
+            "description": "Bir parça et burada býrakýlmýþ.\n",
+            "material": "flesh",
+            "type": "food",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "8 8 0 0 0",
+            "level": "0",
+            "weight": "2",
+            "cost": "5",
+            "condition": "P"
+        },
+        {
+            "vnum": "29212",
+            "name": "damýtýlmýþ deniz suyu þiþe",
+            "short_description": "damýtýlmýþ deniz suyu",
+            "description": "Bir þiþe damýtýlmýþ deniz suyu burada duruyor.\n",
+            "material": "glass",
+            "type": "drink",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "2 2 'water' 0 0",
+            "level": "0",
+            "weight": "2",
+            "cost": "10",
+            "condition": "P"
+        },
+        {
+            "vnum": "29213",
+            "name": "kutsal ekmek",
+            "short_description": "kutsal ekmek",
+            "description": "Bir kutsal ekmek burada býrakýlmýþ.\n",
+            "material": "flesh",
+            "type": "pill",
+            "extra_flags": "G",
+            "wear_flags": "A",
+            "values": "15 'bless' '' '' ''",
+            "level": "5",
+            "weight": "1",
+            "cost": "2550",
+            "condition": "P"
+        },
+        {
+            "vnum": "29214",
+            "name": "gümüþ zýrh",
+            "short_description": "gümüþ zýrh",
+            "description": "Gümüþ bir zýrh burada býrakýlmýþ.\n",
+            "material": "silver",
+            "type": "treasure",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "15",
+            "weight": "8",
+            "cost": "300",
+            "condition": "P"
+        },
+        {
+            "vnum": "29215",
+            "name": "duvar halýsý",
+            "short_description": "duvar halýsý",
+            "description": "Bir duvar halýsý burada býrakýlmýþ.\n",
+            "material": "cloth",
+            "type": "treasure",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "15",
+            "weight": "30",
+            "cost": "150",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "tapestry",
+                    "description": "The tapestry is of knights locked in battle in the Battleplain\nof Arden.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29216",
+            "name": "zümrüt zýrh",
+            "short_description": "zümrüt zýrh",
+            "description": "Zümrüt bir zýrh burada býrakýlmýþ.\n",
+            "material": "stone",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AD",
+            "values": "13 13 13 10 0",
+            "level": "46",
+            "weight": "40",
+            "cost": "2000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-30"
+                }
+            ]
+        },
+        {
+            "vnum": "29217",
+            "name": "cüce çekiç",
+            "short_description": "cüce çekici",
+            "description": "Bir cüce çekici burada býrakýlmýþ.\n",
+            "material": "unknown",
+            "type": "weapon",
+            "extra_flags": "GP",
+            "wear_flags": "AN",
+            "values": "4 9 5 0 0",
+            "level": "40",
+            "weight": "20",
+            "cost": "1500",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "4"
+                },
+                {
+                    "location": "19",
+                    "modifier": "4"
+                }
+            ]
+        },
+        {
+            "vnum": "29218",
+            "name": "örgülü çora kolluk",
+            "short_description": "bir çift örgülü çora kolluðu",
+            "description": "Bir çift örgülü çora kolluðu burada býrakýlmýþ.\n",
+            "material": "mithril",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AI",
+            "values": "5 5 5 5 0",
+            "level": "10",
+            "weight": "4",
+            "cost": "100",
+            "condition": "P"
+        },
+        {
+            "vnum": "29219",
+            "name": "örgülü çora bacaklýk",
+            "short_description": "bir çift örgülü çora bacaklýðý",
+            "description": "Bir çift örgülü çora bacaklýðý burada býrakýlmýþ.\n",
+            "material": "mithril",
+            "type": "armor",
+            "extra_flags": "GQ",
+            "wear_flags": "AF",
+            "values": "5 5 5 5 0",
+            "level": "10",
+            "weight": "5",
+            "cost": "100",
+            "condition": "P"
+        },
+        {
+            "vnum": "29220",
+            "name": "kýrmýzý þarap bardak",
+            "short_description": "bir bardak kýrmýzý þarap",
+            "description": "Bir bardak kýrmýzý þarap burada býrakýlmýþ.\n",
+            "material": "leather",
+            "type": "drink",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "1 1 'red wine' 0 0",
+            "level": "0",
+            "weight": "1",
+            "cost": "10",
+            "condition": "P"
+        },
+        {
+            "vnum": "29221",
+            "name": "beyaz þarap",
+            "short_description": "bir bardak beyaz þarap",
+            "description": "Bir bardak beyaz þarap burada býrakýlmýþ.\n",
+            "material": "glass",
+            "type": "drink",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "1 1 'white wine' 0 0",
+            "level": "46",
+            "weight": "1",
+            "cost": "20",
+            "condition": "P"
+        },
+        {
+            "vnum": "29222",
+            "name": "etli hamur",
+            "short_description": "etli hamur",
+            "description": "Bir etli hamur burada býrakýlmýþ.\n",
+            "material": "flesh",
+            "type": "food",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "5 5 0 0 0",
+            "level": "0",
+            "weight": "2",
+            "cost": "14",
+            "condition": "P"
+        },
+        {
+            "vnum": "29223",
+            "name": "sandýk",
+            "short_description": "sandýk",
+            "description": "Büyük bir sandýk burada býrakýlmýþ.\n",
+            "material": "wood",
+            "type": "trash",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "7",
+            "weight": "100",
+            "cost": "70",
+            "condition": "P"
+        },
+        {
+            "vnum": "29224",
+            "name": "sal",
+            "short_description": "sal",
+            "description": "Bir sal burada bekliyor.\n",
+            "material": "wood",
+            "type": "boat",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 0 0 0",
+            "level": "7",
+            "weight": "100",
+            "cost": "70",
+            "condition": "P"
+        },
+        {
+            "vnum": "29225",
+            "name": "zümrüt bileklik",
+            "short_description": "zümrüt bileklik",
+            "description": "Zümrüt bir bileklik burada býrakýlmýþ.\n",
+            "material": "stone",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AM",
+            "values": "12 12 12 6 0",
+            "level": "46",
+            "weight": "10",
+            "cost": "3500",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-20"
+                }
+            ]
+        },
+        {
+            "vnum": "29226",
+            "name": "zümrüt uzunkýlýç",
+            "short_description": "zümrüt uzunkýlýç",
+            "description": "Zümrütle iþlenmiþ bir uzunkýlýç burada býrakýlmýþ.\n",
+            "material": "stone",
+            "type": "weapon",
+            "extra_flags": "G",
+            "wear_flags": "AN",
+            "values": "1 5 10 3 0",
+            "level": "46",
+            "weight": "10",
+            "cost": "3200",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-10"
+                }
+            ]
+        },
+        {
+            "vnum": "29227",
+            "name": "zümrüt miðfer",
+            "short_description": "zümrüt miðfer",
+            "description": "Zümrüt bir miðfer burada býrakýlmýþ.\n",
+            "material": "stone",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AE",
+            "values": "12 12 12 6 0",
+            "level": "46",
+            "weight": "15",
+            "cost": "1800",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-10"
+                }
+            ]
+        },
+        {
+            "vnum": "29228",
+            "name": "þeytan otu",
+            "short_description": "þeytan otu",
+            "description": "Bir þeytan otu burada býrakýlmýþ.\n",
+            "material": "cloth",
+            "type": "pill",
+            "extra_flags": "G",
+            "wear_flags": "A",
+            "values": "40 'poison' '' '' ''",
+            "level": "45",
+            "weight": "1",
+            "cost": "450",
+            "condition": "P"
+        },
+        {
+            "vnum": "29229",
+            "name": "amiral pelerini",
+            "short_description": "amiral pelerini",
+            "description": "Bir amiral pelerini burada býrakýlmýþ.\n",
+            "material": "cloth",
+            "type": "armor",
+            "extra_flags": "GI",
+            "wear_flags": "ACD",
+            "values": "12 12 12 6 0",
+            "level": "45",
+            "weight": "10",
+            "cost": "3200",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "2"
+                },
+                {
+                    "location": "19",
+                    "modifier": "2"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-20"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-5"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-5"
+                }
+            ]
+        },
+        {
+            "vnum": "29230",
+            "name": "amiral mühürlü yüzük",
+            "short_description": "amiral mühürlü yüzüðü",
+            "description": "Bir yüzük burada unutulmuþ.\n",
+            "material": "gold",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AB",
+            "values": "12 12 12 6 0",
+            "level": "45",
+            "weight": "1",
+            "cost": "1800",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "14",
+                    "modifier": "100"
+                },
+                {
+                    "location": "18",
+                    "modifier": "6"
+                },
+                {
+                    "location": "19",
+                    "modifier": "3"
+                }
+            ]
+        },
+        {
+            "vnum": "29231",
+            "name": "para çantasý",
+            "short_description": "para çantasý",
+            "description": "Bir para çantasý burada býrakýlmýþ.\n",
+            "material": "leather",
+            "type": "money",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "800 0 0 0 0",
+            "level": "47",
+            "weight": "100",
+            "cost": "470",
+            "condition": "P"
+        },
+        {
+            "vnum": "29232",
+            "name": "jiletli çizme",
+            "short_description": "bir çift jiletli çizme",
+            "description": "Bir çift jiletli çizme burada býrakýlmýþ.\n",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AG",
+            "values": "17 17 17 9 0",
+            "level": "52",
+            "weight": "5",
+            "cost": "3900",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "5"
+                },
+                {
+                    "location": "18",
+                    "modifier": "5"
+                }
+            ]
+        },
+        {
+            "vnum": "29233",
+            "name": "boyutsal fular delik",
+            "short_description": "boyutsal fular",
+            "description": "Gerçekliðin içinde bir delik burada yatýyor.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AC",
+            "values": "13 13 13 13 0",
+            "level": "52",
+            "weight": "3",
+            "cost": "5000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "1"
+                },
+                {
+                    "location": "2",
+                    "modifier": "1"
+                },
+                {
+                    "location": "3",
+                    "modifier": "1"
+                },
+                {
+                    "location": "4",
+                    "modifier": "1"
+                },
+                {
+                    "location": "5",
+                    "modifier": "1"
+                },
+                {
+                    "location": "12",
+                    "modifier": "20"
+                },
+                {
+                    "location": "13",
+                    "modifier": "20"
+                },
+                {
+                    "location": "19",
+                    "modifier": "5"
+                }
+            ]
+        },
+        {
+            "vnum": "29234",
+            "name": "asura taþý yeþil",
+            "short_description": "asura taþý",
+            "description": "Yeþile boyanmýþ bir taþ burada bekliyor.",
+            "material": "glass",
+            "type": "staff",
+            "extra_flags": "FG",
+            "wear_flags": "AO",
+            "values": "55 10 8 'sanctuary' 0",
+            "level": "52",
+            "weight": "1",
+            "cost": "3000",
+            "condition": "P"
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "29201",
+            "name": "Akþam Karalýðýnýn Kenarý",
+            "description": "You have reached the point of Freeport isle, a place locals\ncall Dusk's edge. There is an ivory statue of a dolphin entering the\nwater from a great leap is here.\n",
+            "flags": "0",
+            "sector": "5",
+            "extra_descriptions": [
+                {
+                    "keyword": "heykel",
+                    "description": "The statue shows the Dolphin as it is entering the water. The inscription\nreads `When Dolphin was created at the dawn of time, she leaped forth from\nthe water with great joy, and the water which fell from her back became the\nisle of Freeport.\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29202"
+                },
+                {
+                    "door": "D3",
+                    "description": "Land Ho!!",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14501"
+                }
+            ]
+        },
+        {
+            "vnum": "29202",
+            "name": "Dalgakýran",
+            "description": "You walk along the rock jetty of the isle of Freeport. The waves crash and\nspray a salt mist into the air. Gulls wheel in the sky above you, having\nflown from their perches upon seeing you.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29203"
+                },
+                {
+                    "door": "D3",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29201"
+                }
+            ]
+        },
+        {
+            "vnum": "29203",
+            "name": "Dalgakýran",
+            "description": "You walk along the rock jetty of the isle of Freeport. The waves crash and\nspray a salt mist into the air. Gulls wheel in the sky above you, having\nflown from their perches upon seeing you.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29202"
+                },
+                {
+                    "door": "D2",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29204"
+                }
+            ]
+        },
+        {
+            "vnum": "29204",
+            "name": "Dalgakýran",
+            "description": "You walk along the rock jetty of the isle of Freeport. The waves crash and\nspray a salt mist into the air. Gulls wheel in the sky above you, having\nflown from their perches upon seeing you.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29203"
+                },
+                {
+                    "door": "D1",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29206"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29205"
+                }
+            ]
+        },
+        {
+            "vnum": "29205",
+            "name": "Ýskele Yolu",
+            "description": "You are on the stone paved wharf road. To your south is a rock jetty upon\nwhich the waves crash. Traffic from the warehouse to the west travels to\nthe wharf via wharf road.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29204"
+                },
+                {
+                    "door": "D1",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29207"
+                }
+            ]
+        },
+        {
+            "vnum": "29206",
+            "name": "Ýskele",
+            "description": "You are on the wharf of Freeport, where ships dock and load. The docks\nare busy today as any day, for the commerce of the seas knows no holiday.\nTo the north of you the harbor of Freeport stretches.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29208"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29207"
+                },
+                {
+                    "door": "D3",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29204"
+                }
+            ]
+        },
+        {
+            "vnum": "29207",
+            "name": "Ýskele Yolu",
+            "description": "You are on the stone paved wharf road. To your south is a rock jetty upon\nwhich the waves crash. Traffic from the warehouse to the west travels to\nthe wharf via wharf road.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29206"
+                },
+                {
+                    "door": "D1",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29209"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29205"
+                }
+            ]
+        },
+        {
+            "vnum": "29208",
+            "name": "Ýskele",
+            "description": "You are on the wharf of Freeport, where ships dock and load. The docks\nare busy today as any day, for the commerce of the seas knows no holiday.\nTo the north of you the harbor of Freeport stretches.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29212"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29209"
+                },
+                {
+                    "door": "D3",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29206"
+                }
+            ]
+        },
+        {
+            "vnum": "29209",
+            "name": "Ýskele Yolu",
+            "description": "You are on the stone paved wharf road. To your south is a rock jetty upon\nwhich the waves crash. Traffic from the warehouse to the west travels to\nthe wharf via wharf road.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29208"
+                },
+                {
+                    "door": "D1",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29213"
+                },
+                {
+                    "door": "D2",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29210"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29207"
+                }
+            ]
+        },
+        {
+            "vnum": "29210",
+            "name": "Dalgakýran",
+            "description": "You walk along the rock jetty of the isle of Freeport. The waves crash\nand spray a salt mist into the air. Gulls wheel in the sky above you,\nhaving flown from their perches upon seeing you.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29209"
+                },
+                {
+                    "door": "D1",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29214"
+                }
+            ]
+        },
+        {
+            "vnum": "29211",
+            "name": "Ýskele",
+            "description": "You are on the wharf of Freeport, where ships dock and load. The docks\nare busy today as any day, for the commerce of the seas knows no holiday.\nTo the north of you the harbor of Freeport stretches.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29217"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29212"
+                }
+            ]
+        },
+        {
+            "vnum": "29212",
+            "name": "Ýskele",
+            "description": "You are on the wharf of Freeport, where ships dock and load. The docks\nare busy today as any day, for the commerce of the seas knows no holiday.\nTo the north of you the harbor of Freeport stretches.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29211"
+                },
+                {
+                    "door": "D1",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29218"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29213"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29208"
+                }
+            ]
+        },
+        {
+            "vnum": "29213",
+            "name": "Ýskele Yolu",
+            "description": "You are on the stone paved wharf road. To your south is a rock jetty upon\nwhich the waves crash. Traffic from the warehouse to the west travels to\nthe wharf via wharf road.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29212"
+                },
+                {
+                    "door": "D1",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29219"
+                },
+                {
+                    "door": "D2",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29214"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29209"
+                }
+            ]
+        },
+        {
+            "vnum": "29214",
+            "name": "Dalgakýran",
+            "description": "You walk along the rock jetty of the isle of Freeport. The waves crash\nand spray a salt mist into the air. Gulls wheel in the sky above you,\nhaving flown from their perches upon seeing you.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29213"
+                },
+                {
+                    "door": "D2",
+                    "description": "Dul Kadýn Burnu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29215"
+                },
+                {
+                    "door": "D3",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29210"
+                }
+            ]
+        },
+        {
+            "vnum": "29215",
+            "name": "Dul Kadýn Burnu",
+            "description": "You have climbed the rocks of widows cape, and can see the violent southern\nshoals which have claimed many a ship. A watchfire is kept burning here at\nnight to warn sailors.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29214"
+                }
+            ]
+        },
+        {
+            "vnum": "29216",
+            "name": "Ýskele",
+            "description": "You are on the wharf of Freeport, where ships dock and load. The docks\nare busy today as any day, for the commerce of the seas knows no holiday.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29221"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29217"
+                }
+            ]
+        },
+        {
+            "vnum": "29217",
+            "name": "Ýskele",
+            "description": "You are on the wharf of Freeport, where ships dock and load. The docks\nare busy today as any day, for the commerce of the seas knows no holiday.\nTo the north of you the harbor of Freeport stretches.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29216"
+                },
+                {
+                    "door": "D1",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29222"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29218"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29211"
+                }
+            ]
+        },
+        {
+            "vnum": "29218",
+            "name": "Ýskele Yolu",
+            "description": "You are on the stone paved wharf road. Here you see a ship being hauled up\nto dry dock for repairs. Traffic from the warehouse to the west travels to\nthe wharf via wharf road.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29217"
+                },
+                {
+                    "door": "D1",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29223"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29219"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29212"
+                }
+            ]
+        },
+        {
+            "vnum": "29219",
+            "name": "Ýskele Yolu",
+            "description": "You are on the stone paved wharf road. To your south is a rock jetty upon\nwhich the waves crash. Traffic from the warehouse to the west travels to\nthe wharf via wharf road.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29218"
+                },
+                {
+                    "door": "D1",
+                    "description": "Liman Kasabasý",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29224"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29213"
+                }
+            ]
+        },
+        {
+            "vnum": "29220",
+            "name": "Ýskele",
+            "description": "You are on the wharf of Freeport, where ships dock and load. The docks\nare busy today as any day, for the commerce of the seas knows no holiday.\nTo the north of you the harbor of Freeport stretches.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29226"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29221"
+                }
+            ]
+        },
+        {
+            "vnum": "29221",
+            "name": "Ýskele Yolu",
+            "description": "You are on the stone paved wharf road. Traffic from the warehouse to the\nwest travels to the wharf via wharf road. To your immediate east is the\nshipyards, where you can hear the sounds of construction.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29220"
+                },
+                {
+                    "door": "D1",
+                    "description": "Tersane",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29227"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29222"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29216"
+                }
+            ]
+        },
+        {
+            "vnum": "29222",
+            "name": "Ýskele Yolu",
+            "description": "You are on the stone paved wharf road. Traffic from the warehouse to the\nwest travels to the wharf via wharf road. To your immediate east you see\nthe road to the city of Freeport.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29221"
+                },
+                {
+                    "door": "D1",
+                    "description": "Liman Þehri Yolunda",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29228"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29223"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29217"
+                }
+            ]
+        },
+        {
+            "vnum": "29223",
+            "name": "Ýskele Yolu",
+            "description": "You are on the stone paved wharf road. Traffic from the warehouse to the west travels to\nthe wharf via wharf road. Immediately to the east you see the mercantile\nwarehouse, where crates of goods are in temporary storage for shipping.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29222"
+                },
+                {
+                    "door": "D1",
+                    "description": "Warehouse",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29229"
+                },
+                {
+                    "door": "D2",
+                    "description": "Liman Kasabasý",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29224"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29218"
+                }
+            ]
+        },
+        {
+            "vnum": "29224",
+            "name": "Liman Kasabasý",
+            "description": "You stand in the burrows of Freeport, where all the sailors and merchants\nfamilies live. The houses are made of the local stone and have slate roofs.\nThe closer the houses are to the city, the more beautiful and grandiose they\nbecome. Down next to the jetty where flooding is likely, live the poorest\nfamilies, in temporary shacks which are prone to flooding. A small road leads\neast into the village.\n",
+            "flags": "C",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29223"
+                },
+                {
+                    "door": "D1",
+                    "description": "Liman Kasabasý",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29243"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29219"
+                }
+            ]
+        },
+        {
+            "vnum": "29225",
+            "name": "Dalgakýran",
+            "description": "You walk along the rock jetty of the isle of Freeport. The waves crash and\nspray a salt mist into the air. Gulls wheel in the sky above you, having\nflown from their perches upon seeing you.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29237"
+                },
+                {
+                    "door": "D2",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29226"
+                }
+            ]
+        },
+        {
+            "vnum": "29226",
+            "name": "Dalgakýran",
+            "description": "You walk along the rock jetty of the isle of Freeport. The waves crash and\nspray a salt mist into the air. Gulls wheel in the sky above you, having\nflown from their perches upon seeing you.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29225"
+                },
+                {
+                    "door": "D1",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29230"
+                },
+                {
+                    "door": "D2",
+                    "description": "Tersane",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29227"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ýskele",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29220"
+                }
+            ]
+        },
+        {
+            "vnum": "29227",
+            "name": "Tersane",
+            "description": "You are in the shipyards of Freeport. About you in dry storage are many\nvessels either in repair or in the process of being developed. Of particular\ninterest is the deep-keeled prototype vessel currently under construction.\nYou get the sense that sailing as you know it is about to change. Many of\nthe islanders are employed here, and ages range from the youthful 12 year\nold apprentice, to the grizzled old shipwrights.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29226"
+                },
+                {
+                    "door": "D1",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29231"
+                },
+                {
+                    "door": "D2",
+                    "description": "Liman Þehri Yolunda",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29228"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29221"
+                }
+            ]
+        },
+        {
+            "vnum": "29228",
+            "name": "Liman Þehri Yolunda",
+            "description": "You are on a stone paved road which rises up the hill to Freeport City.\nThe city itself has been built on the highest part of the island. The city\nhas walls, made of the local slate and a mortar joint. Roads stretch off\nnorth to the shipyards, east to Freeport village, south to the mercantile\nwarehouse, and westward wharf road continues along the harbor.\n",
+            "flags": "C",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Tersane",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29227"
+                },
+                {
+                    "door": "D1",
+                    "description": "Liman Kasabasý",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29232"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ticari Depo",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29229"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29222"
+                },
+                {
+                    "door": "D4",
+                    "description": "The city gates",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29246"
+                }
+            ]
+        },
+        {
+            "vnum": "29229",
+            "name": "Ticari Depo",
+            "description": "You dodge porters and errand boys in the whirling mayhem of the mercantile\nwarehouse. Longshoremen load crates of cargo into horse drawn carts and\nlead the teams down to the wharf for embarking vessels. The cargomaster\nsignals to his apprentices in a strange sign language of the merchants\nguild. You get caught up in the excitement of the warehouse, and lend a\nhand to two struggling boys.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Liman Þehri Yolunda",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29228"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ýskele Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29223"
+                }
+            ]
+        },
+        {
+            "vnum": "29230",
+            "name": "Dalgakýran",
+            "description": "You walk along the rock jetty of the isle of Freeport. The waves crash and\nspray a salt mist into the air. Gulls wheel in the sky above you, having\nflown from their perches upon seeing you.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29231"
+                },
+                {
+                    "door": "D3",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29226"
+                }
+            ]
+        },
+        {
+            "vnum": "29231",
+            "name": "Dalgakýran",
+            "description": "You walk along the rock jetty of the isle of Freeport. The waves crash and\nspray a salt mist into the air. Gulls wheel in the sky above you, having\nflown from their perches upon seeing you.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29230"
+                },
+                {
+                    "door": "D1",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29233"
+                },
+                {
+                    "door": "D2",
+                    "description": "Liman Kasabasý",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29232"
+                },
+                {
+                    "door": "D3",
+                    "description": "Tersane",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29227"
+                }
+            ]
+        },
+        {
+            "vnum": "29232",
+            "name": "Liman Kasabasý",
+            "description": "You stand in the burrows of Freeport, where all the sailors and merchants\nfamilies live. The houses are made of the local stone and have slate roofs.\nThe closer the houses are to the city, the more beautiful and grandiose they\nbecome. Down next to the jetty where flooding is likely, live the poorest\nfamilies, in temporary shacks which are prone to flooding. The road to the\ncity of Freeport is to your west.\n",
+            "flags": "C",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29231"
+                },
+                {
+                    "door": "D2",
+                    "description": "Liman Kasabasý",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29245"
+                },
+                {
+                    "door": "D3",
+                    "description": "Liman Þehri Yolunda",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29228"
+                }
+            ]
+        },
+        {
+            "vnum": "29233",
+            "name": "Dalgakýran",
+            "description": "You walk along the rock jetty of the isle of Freeport. The waves crash and\nspray a salt mist into the air. Gulls wheel in the sky above you, having\nflown from their perches upon seeing you.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29234"
+                },
+                {
+                    "door": "D3",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29231"
+                }
+            ]
+        },
+        {
+            "vnum": "29234",
+            "name": "Dalgakýran",
+            "description": "You walk along the rock jetty of the isle of Freeport. The waves crash and\nspray a salt mist into the air. Gulls wheel in the sky above you, having\nflown from their perches upon seeing you.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29235"
+                },
+                {
+                    "door": "D3",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29233"
+                }
+            ]
+        },
+        {
+            "vnum": "29235",
+            "name": "Dalgakýran",
+            "description": "You walk along the rock jetty of the isle of Freeport. The waves crash and\nspray a salt mist into the air. Gulls wheel in the sky above you, having\nflown from their perches upon seeing you.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29234"
+                },
+                {
+                    "door": "D1",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29236"
+                }
+            ]
+        },
+        {
+            "vnum": "29236",
+            "name": "Þafaðýn Kenarý",
+            "description": "You have reached the easternmost point of Freeport isle, a place locals call\nDawn's edge. There is an ivory statue of a dolphin leaping out of the water\nhere. To the east you see the corner of the world.\n",
+            "flags": "0",
+            "sector": "5",
+            "extra_descriptions": [
+                {
+                    "keyword": "heykel",
+                    "description": "The statue shows the Dolphin as it is rising out of the water. The\ninscription reads `When Dolphin was created at the dawn of time, she\nleaped forth from the water with great joy, and the water which fell\nfrom her back became the isle of Freeport'\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Dünyanýn Kenarý",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "14001"
+                },
+                {
+                    "door": "D3",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29235"
+                }
+            ]
+        },
+        {
+            "vnum": "29237",
+            "name": "Dalgakýran",
+            "description": "You walk along the rock jetty of the isle of Freeport. The waves crash and\nspray a salt mist into the air. Gulls wheel in the sky above you, having\nflown from their perches upon seeing you.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29225"
+                },
+                {
+                    "door": "D3",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29238"
+                }
+            ]
+        },
+        {
+            "vnum": "29238",
+            "name": "Dalgakýran",
+            "description": "You walk along the rock jetty of the isle of Freeport. The waves crash and\nspray a salt mist into the air. Gulls wheel in the sky above you, having\nflown from their perches upon seeing you.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29239"
+                },
+                {
+                    "door": "D1",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29237"
+                }
+            ]
+        },
+        {
+            "vnum": "29239",
+            "name": "Dalgakýran",
+            "description": "You walk along the rock jetty of the isle of Freeport. The waves crash and\nspray a salt mist into the air. Gulls wheel in the sky above you, having\nflown from their perches upon seeing you.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29238"
+                },
+                {
+                    "door": "D3",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29240"
+                }
+            ]
+        },
+        {
+            "vnum": "29240",
+            "name": "Dalgakýran",
+            "description": "You walk along the rock jetty of the isle of Freeport. The waves crash and\nspray a salt mist into the air. Gulls wheel in the sky above you, having\nflown from their perches upon seeing you.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29239"
+                },
+                {
+                    "door": "D3",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29241"
+                }
+            ]
+        },
+        {
+            "vnum": "29241",
+            "name": "Dalgakýran",
+            "description": "You walk along the rock jetty of the isle of Freeport. The waves crash and\nspray a salt mist into the air. Gulls wheel in the sky above you, having\nflown from their perches upon seeing you.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29242"
+                },
+                {
+                    "door": "D1",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29240"
+                }
+            ]
+        },
+        {
+            "vnum": "29242",
+            "name": "Kuzey Noktasý",
+            "description": "You have reached the end of the jetty at a place called Northpoint. Here\nlong swells from the northeast crash with great force upon the island. You\nsee why the island has been reinforced with a rock jetty- without it, it\nwould rapidly erode.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Dalgakýran",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29241"
+                }
+            ]
+        },
+        {
+            "vnum": "29243",
+            "name": "Liman Kasabasý",
+            "description": "You stand in the burrows of Freeport, where all the sailors and merchants\nfamilies live. The houses are made of the local stone and have slate roofs.\nThe closer the houses are to the city, the more beautiful and grandiose they\nbecome. Down next to the jetty where flooding is likely, live the poorest\nfamilies, in temporary shacks which are prone to flooding. To the north is\nthe mercantile warehouse.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Liman Kasabasý",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29244"
+                },
+                {
+                    "door": "D3",
+                    "description": "Liman Kasabasý",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29224"
+                }
+            ]
+        },
+        {
+            "vnum": "29244",
+            "name": "Liman Kasabasý",
+            "description": "You have reached the heart of Freeport village. Sailors wives wave at\nyou and ask you to join them for tea. Children run along the main street\nplaying sailors and pirates. There is a small church here at the point\non the shore.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Liman Kasabasý",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29245"
+                },
+                {
+                    "door": "D3",
+                    "description": "Liman Kasabasý",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29243"
+                }
+            ]
+        },
+        {
+            "vnum": "29245",
+            "name": "Liman Kasabasý",
+            "description": "You stand in the burrows of Freeport, where all the sailors and merchants\nfamilies live. The houses are made of the local stone and have slate roofs.\nThe closer the houses are to the city, the more beautiful and grandiose they\nbecome. Down next to the jetty where flooding is likely, live the poorest\nfamilies, in temporary shacks which are prone to flooding. To the west is\nthe mercantile warehouse.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Liman Kasabasý",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29232"
+                },
+                {
+                    "door": "D2",
+                    "description": "Liman Kasabasý",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29244"
+                }
+            ]
+        },
+        {
+            "vnum": "29246",
+            "name": "Liman Þehri Kapýlarý",
+            "description": "You stand at the famed bronze gates of Freeport, built on the thriving\ncommerce of the city. From here you have a commanding view of the island\nand the harbor. You stop and rest, watching the Liola Lew hoist anchor\nand sail off with her cargo into the seas. Yes, you think you could get\nused to life here on Freeport. Commerce lane goes south through the city\ngates.\n",
+            "flags": "C",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Commerce lane",
+                    "keyword": "tunç kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29247"
+                },
+                {
+                    "door": "D5",
+                    "description": "The road to the island",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29228"
+                }
+            ]
+        },
+        {
+            "vnum": "29247",
+            "name": "Ticaret Caddesi",
+            "description": "You stroll down bustling Commerce street, taking in the sights, sounds,\nand smells of the Jewel of the Pirate Seas, as Freeport is often called.\nTo your east is the Sunken Pirate, the local watering hole, and to the\nwest is the Emporium, a store of exotic goods. Commerce street continues\nsouth.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Liman Þehri Kapýlarý",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29246"
+                },
+                {
+                    "door": "D1",
+                    "description": "Batýk Korsan",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29248"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ticaret Caddesi",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29250"
+                },
+                {
+                    "door": "D3",
+                    "description": "Emporyum",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29249"
+                }
+            ]
+        },
+        {
+            "vnum": "29248",
+            "name": "Batýk Korsan",
+            "description": "Here, amid the reek of spilled beer, bad cigars, and other unmentionable\nsmells lies an endearing little bar done up in a nautical theme. The jolly\nroger flies over the main bar, where the local beer and wine is served\nas the locals like it- warm. Waitresses clad in little wiggle between\nthe packed tables to the delight of their naval and mercantile clientele.\nAn unleavened spiced bread called Pilas is served hot and in generous portions\nin wicker baskets.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Ticaret Caddesi",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29247"
+                }
+            ]
+        },
+        {
+            "vnum": "29249",
+            "name": "Emporyum",
+            "description": "This warehouse-sized store is packed to the ceiling with goods from\nseveral lands. Bolts of cloth, silver plates and utensils, lanterns\ncandles, rugs, etc. dazzle you. Several store boys work the floor, helping\ntheir customers.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Ticaret Caddesi",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29247"
+                }
+            ]
+        },
+        {
+            "vnum": "29250",
+            "name": "Ticaret Caddesi",
+            "description": "You stroll down bustling Commerce street, taking in the sights, sounds,\nand smells of the Jewel of the Pirate Seas, as Freeport is often called.\nTo the east is the Bronze Scabbard, the shop of the armourer of Freeport.\nTo the west is the Mystic Eye, a famed magic shop. Commerce street continues\nnorth and south.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ticaret Caddesi",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29247"
+                },
+                {
+                    "door": "D1",
+                    "description": "Tunç Kýn",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29251"
+                },
+                {
+                    "door": "D2",
+                    "description": "The Þehir Meydaný",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29253"
+                },
+                {
+                    "door": "D3",
+                    "description": "Mistik Göz",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29252"
+                }
+            ]
+        },
+        {
+            "vnum": "29251",
+            "name": "Tunç Kýn",
+            "description": "The Bronze Scabbard is actually a front store for the blacksmith the\nmetalworkers of Freeport. The bulk of the commissions come from the\nCaptains guild and the shipyards, where most of the arms of Freeport\nare made. In their spare time the metalworkers make various trinkets\nfor the local citizenry and tourists.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Ticaret Caddesi",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29250"
+                }
+            ]
+        },
+        {
+            "vnum": "29252",
+            "name": "Mistik Göz",
+            "description": "Your head swims in the exotic fumes emitted by the candles of this shop.\nSeveral lamps on display change from color to color, in addition to the\neverlasting variety. Scrolls and books are stored in a glass cabinet behind\nthe counter.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Ticaret Caddesi",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29250"
+                }
+            ]
+        },
+        {
+            "vnum": "29253",
+            "name": "Liman Þehri Meydaný",
+            "description": "You are in the broad town square of Freeport, which measures 100 yds by 100\nyds. Small outdoor cafes have set up shop in the square, catering to\ntheir people watching customers. To the south is the town hall, where\nthe famed waterclock of Freeport chimes the martial song of the Captains\nguild every hour. To the east, Naval street runs to the Captains guild at\nthe end, and to the west Shippers Lane goes to the Merchants guild. Commerce\nstreet leads northwards out of the city.\n",
+            "flags": "K",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ticaret Caddesi",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29250"
+                },
+                {
+                    "door": "D1",
+                    "description": "Bahriye Caddesi",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29254"
+                },
+                {
+                    "door": "D2",
+                    "description": "Yönetim Binasý",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29256"
+                },
+                {
+                    "door": "D3",
+                    "description": "Nakliye Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29255"
+                }
+            ]
+        },
+        {
+            "vnum": "29254",
+            "name": "Bahriye Caddesi",
+            "description": "You stand on Naval street, which has been paved with engraved stones,\neach stone commemorating a naval engagement in the city's history. Cadets\ndrill at the end of the street, marching up and down, over and over in\ntight formation. To the south is an inn called The Crew's Quarters.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Bahriye Caddesi",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29276"
+                },
+                {
+                    "door": "D2",
+                    "description": "Tayfa Bölgesi",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29257"
+                },
+                {
+                    "door": "D3",
+                    "description": "Þehir Meydaný",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29253"
+                }
+            ]
+        },
+        {
+            "vnum": "29255",
+            "name": "Nakliye Yolu",
+            "description": "You walk Shippers lane. Two story houses press closely to the to the\nstreet and people bustle back and forth. To the south is the bank of\nFreeport.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Þehir Meydaný",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29253"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "29258"
+                },
+                {
+                    "door": "D3",
+                    "description": "Nakliye Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29259"
+                }
+            ]
+        },
+        {
+            "vnum": "29256",
+            "name": "Yönetim Binasý",
+            "description": "You stand inside the town hall of the city of Freeport. Town hall\nis arranged for meetings. To your left are the 9 captains chairs, where\nthe representatives of the Captains guild sit. To your right are the\n5 chairs of the merchants guild. Ahead, in the center, is where the mayor\nsits. Around you are many wooden benches upon which townsmen may sit and\nparticipate in the meetings. The role of the mayor is as arbitrator, and\nhe is freely elected by popular vote. White marble statues are displayed\nin alcoves about the hall.\n",
+            "flags": "D",
+            "sector": "0",
+            "extra_descriptions": [
+                {
+                    "keyword": "heykeller",
+                    "description": "The statues are of past mayors of the city. As you examine them more\nclosely, you notice one of them shows signs of having been moved across the\nfloor many many times. You try to move it, but the statue is held in place\nby a locking mechanism.\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Þehir Meydaný",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29253"
+                },
+                {
+                    "door": "D5",
+                    "description": "Gizli pasaj",
+                    "keyword": "heykel",
+                    "locks": "1",
+                    "key": "29201",
+                    "u1_vnum": "29264"
+                }
+            ]
+        },
+        {
+            "vnum": "29257",
+            "name": "Tayfa Bölgesi",
+            "description": "You are inside a homely inn. Here in the giant common room, a fire roars\nin the stone fireplace, and patrons sip wine next to it. Rooms are available\nfor let, starting at 50 G a night. The tables are made of a thickly varnished\nand dark stained oak, the walls are paneled, and the windows facing the\nstreet resemble portholes. This is a popular meeting place for the captains\nwhen they have foreign visitors.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Bahriye Caddesi",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29254"
+                }
+            ]
+        },
+        {
+            "vnum": "29258",
+            "name": "Liman Bankasý",
+            "description": "You stand inside the stout walls of the bank of Freeport. There is a\ncontinual stream of customers entering and depositing vast sums of money in\nthe well guarded vault. The bank is faring well, as you can judge by\nthe amount of gilding inside the building.\n",
+            "flags": "CD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "29255"
+                }
+            ]
+        },
+        {
+            "vnum": "29259",
+            "name": "Nakliye Yolu",
+            "description": "You walk Shippers lane. Two story houses press closely to the to the\nstreet and people bustle back and forth. To the north is the mercantile\nschool, and to the south is the merchant's guild.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ticaret Okulu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29260"
+                },
+                {
+                    "door": "D1",
+                    "description": "Nakliye Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29255"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ticaret Loncasý",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29261"
+                }
+            ]
+        },
+        {
+            "vnum": "29260",
+            "name": "Ticaret Okulu",
+            "description": "You stand in the courtyard of the mercantile school of Freeport. It is\nhere that young boys master the subtleties of profit and trade. Scribes\nrecord the latest buy and sell rates of commodities around the world upon\nthe rolls of the school. This school is one of the main reasons for the\neconomic dominance of Freeport of world trade.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Nakliye Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29259"
+                }
+            ]
+        },
+        {
+            "vnum": "29261",
+            "name": "Ticaret Loncasý",
+            "description": "You have entered the grand arch of the merchants guild of Freeport. It is\nhere that the master traders conduct their business of contracting with\ncaptains for the transport of cargo to remote destinations. Each member of\nthe merchant's guild tithes to the guild, money which is used to not\nonly maintain the guild proper, but also to open new markets in foreign\nlands. The guild masters command much respect, wealth, and power throughout\nthe world. Guild matters are decided by a vote, scaled by the wealth of\neach master. The 5 richest masters make up the council of 5, and argue on\nthe guilds behalf in contractual negotiations in town meetings. It has been\nsaid that the council of 5 collectively owns one quarter of the world's\nwealth.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Nakliye Yolu",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29259"
+                }
+            ]
+        },
+        {
+            "vnum": "29262",
+            "name": "Bahriye Akademisi",
+            "description": "You stand on the grounds of the renowned naval academy of Freeport, the\ntraining grounds for the worlds captains. Young boys are taught for a\nperiod of 8 years the art of sailing, and finish their apprenticeship onboard\nactual military vessels. The academy has a long tradition of turning out\nfine sailors. Most cadets eventually become captains of their own vessels\nand under contract to the Merchants guild.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Bahriye Caddesi",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29276"
+                }
+            ]
+        },
+        {
+            "vnum": "29263",
+            "name": "Yüzbaþý Loncasý",
+            "description": "Here in the halls of the Captains guild, the worlds shipping begins and\nends. The guild was founded over 300 years ago to represent the collective\ninterests of the ship owners. To be a member, one must demonstrate the\nclear title to at least one vessel. Ahead of you is the great hall where\nthe guild holds its meetings. Votes in the guild are based weighted by\nthe number of vessels the captain has. The richest men with the most ships\nfill the 9 seats of honor in the guild, and are called the Admirals. It has\nbeen said that they control one third of the world's shipping.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Bahriye Caddesi",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29276"
+                }
+            ]
+        },
+        {
+            "vnum": "29264",
+            "name": "Gizli Merdiven",
+            "description": "You follow a secret staircase south and downward underground. The stairs\nare wet and mossy. Far below you hear the sounds of men loading a ship.\nThe old torch sconces on the wall have not been used in years. There is\na sign on the wall.\n",
+            "flags": "AD",
+            "sector": "4",
+            "extra_descriptions": [
+                {
+                    "keyword": "iþaret duvar",
+                    "description": "{45 53} Lok  Hall of the 6th Pirate Lord\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Gizli Merdiven",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29265"
+                },
+                {
+                    "door": "D4",
+                    "description": "Through the secret kapý",
+                    "keyword": "heykel",
+                    "locks": "1",
+                    "key": "29201",
+                    "u1_vnum": "29256"
+                }
+            ]
+        },
+        {
+            "vnum": "29265",
+            "name": "Gizli Merdiven",
+            "description": "You follow a secret staircase south and downward underground. The stairs\nare wet and mossy. Far below you hear the sounds of men loading a ship.\nThe old torch sconces on the wall have not been used in years.\n",
+            "flags": "AD",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Gizli Merdiven",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29264"
+                },
+                {
+                    "door": "D2",
+                    "description": "Gizli Merdiven",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29267"
+                }
+            ]
+        },
+        {
+            "vnum": "29267",
+            "name": "Gizli Maðara",
+            "description": "You have discovered a hidden underground cavern. In the center of the\nroom is a deep pool in which several triremes have been moored.\nLaughing sailors are unloading cargo from one of the ships. You quickly\ndisguise yourself as one of the sailors.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Gizli Merdiven",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29265"
+                },
+                {
+                    "door": "D1",
+                    "description": "Gizli Maðara",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29269"
+                },
+                {
+                    "door": "D2",
+                    "description": "Gizli Maðara",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29268"
+                }
+            ]
+        },
+        {
+            "vnum": "29268",
+            "name": "Gizli Maðara",
+            "description": "You walk along the shore of an underground water cave in which several\ntriremes have been moored, one of which is being unloaded. You sneak\nunnoticed behind several CRATES which have been recently off-loaded.\n",
+            "flags": "D",
+            "sector": "0",
+            "extra_descriptions": [
+                {
+                    "keyword": "sandýklar",
+                    "description": "These crates are marked with a destination of Solace. That's funny. What\nare they doing here?\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Gizli Maðara",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29267"
+                },
+                {
+                    "door": "D1",
+                    "description": "Saklý Liman",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29275"
+                },
+                {
+                    "door": "D2",
+                    "description": "Gizli Maðara",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29273"
+                }
+            ]
+        },
+        {
+            "vnum": "29269",
+            "name": "Gizli Maðara",
+            "description": "You walk along the shore of an underground water cave in which several\ntriremes have been moored, one of which is being unloaded. You sneak\nunnoticed behind several CRATES which have been recently off-loaded. To\nthe north of you is a guarded door.\n",
+            "flags": "D",
+            "sector": "0",
+            "extra_descriptions": [
+                {
+                    "keyword": "sandýklar",
+                    "description": "These crates are marked with a destination of Antharia. That's funny. What\nare they doing here?\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Through the guarded kapý",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29270"
+                },
+                {
+                    "door": "D1",
+                    "description": "Gizli Maðara",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29271"
+                },
+                {
+                    "door": "D2",
+                    "description": "Saklý Liman",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29275"
+                },
+                {
+                    "door": "D3",
+                    "description": "Gizli Maðara",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29267"
+                }
+            ]
+        },
+        {
+            "vnum": "29270",
+            "name": "Korsan Lordunun Maðarasý",
+            "description": "You have boldly entered the secret cave of the 6th pirate lord. About\nyou the evidence of his terrible crimes abounds. Here is a pilfered\nshipping schedule, duplicated on scrolls addressed to the other pirate\nlords. There is a cargo list of several missing merchant vessels. On the\ndesk is a scroll of the departure time, vessel name, and destination of\na rich noble. Yes you have discovered the kingpin of the pirate lords,\nthe man who has terrorized commerce for a decade. What will you do about\nit?\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Through the kapý",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29269"
+                }
+            ]
+        },
+        {
+            "vnum": "29271",
+            "name": "Gizli Maðara",
+            "description": "You walk along the shore of an underground water cave in which several\ntriremes have been moored, one of which is being unloaded. You sneak\nunnoticed behind several CRATES which have been recently off-loaded.\n",
+            "flags": "D",
+            "sector": "0",
+            "extra_descriptions": [
+                {
+                    "keyword": "sandýklar",
+                    "description": "These crates are marked with a destination of the Shire. That's funny. What\nare they doing here?\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Gizli Maðara",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29272"
+                },
+                {
+                    "door": "D3",
+                    "description": "Gizli Maðara",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29269"
+                }
+            ]
+        },
+        {
+            "vnum": "29272",
+            "name": "Gizli Maðara",
+            "description": "You walk along the shore of an underground water cave in which several\ntriremes have been moored, one of which is being unloaded. You sneak\nunnoticed behind several CRATES which have been recently off-loaded.\n",
+            "flags": "D",
+            "sector": "0",
+            "extra_descriptions": [
+                {
+                    "keyword": "sandýklar",
+                    "description": "These crates are marked with a destination of Camelot. That's funny. What\nare they doing here?\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Gizli Maðara",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29271"
+                },
+                {
+                    "door": "D2",
+                    "description": "Gizli Maðara",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29274"
+                },
+                {
+                    "door": "D3",
+                    "description": "Saklý Liman",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29275"
+                }
+            ]
+        },
+        {
+            "vnum": "29273",
+            "name": "Gizli Maðara",
+            "description": "You walk along the shore of an underground water cave in which several\ntriremes have been moored, one of which is being unloaded. You sneak\nunnoticed behind several CRATES which have been recently off-loaded. To\nthe south of you the waterway leaves the cavern through a tunnel which\nU's in a long curve.\n",
+            "flags": "D",
+            "sector": "0",
+            "extra_descriptions": [
+                {
+                    "keyword": "sandýklar",
+                    "description": "These crates are marked with a destination of Dunkeldorf. That's funny. What\nare they doing here?\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Gizli Maðara",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29268"
+                }
+            ]
+        },
+        {
+            "vnum": "29274",
+            "name": "Gizli Maðara",
+            "description": "You walk along the shore of an underground water cave in which several\ntriremes have been moored, one of which is being unloaded. You sneak\nunnoticed behind several CRATES which have been recently off-loaded.\n",
+            "flags": "D",
+            "sector": "0",
+            "extra_descriptions": [
+                {
+                    "keyword": "sandýklar",
+                    "description": "These crates are marked with a destination of Malancandra. That's funny. What\nare they doing here?\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Gizli Maðara",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29272"
+                }
+            ]
+        },
+        {
+            "vnum": "29275",
+            "name": "Saklý Liman",
+            "description": "You bob in the waters of the hidden harbor among several docked triremes.\nYou can dock in any cardinal direction except south, where the harbor\nturns into a dark tunnel which bends around to the west. There is a small\nbuoy floating here.\n",
+            "flags": "0",
+            "sector": "7",
+            "extra_descriptions": [
+                {
+                    "keyword": "þamandýra",
+                    "description": "{45 53} Lok   The hall of the 6th Pirate Lord\n"
+                }
+            ],
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Doklarda",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29269"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doklarda",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29272"
+                },
+                {
+                    "door": "D3",
+                    "description": "Doklarda",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29268"
+                }
+            ]
+        },
+        {
+            "vnum": "29276",
+            "name": "Bahriye Caddesi",
+            "description": "You stand on Naval street, which has been paved with engraved stones,\neach stone commemorating a naval engagement in the city's history. Cadets\ndrill at the end of the street, marching up and down, over and over in\ntight formation. To the north is the Naval Academy, and to the south\nis the Captains guild.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Bahriye Akademisi",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29262"
+                },
+                {
+                    "door": "D2",
+                    "description": "Yüzbaþý Loncasý",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29263"
+                },
+                {
+                    "door": "D3",
+                    "description": "Bahriye Caddesi",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29254"
+                }
+            ]
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "29230",
+            "spec_fun": "spec_poison"
+        },
+        {
+            "vnum": "29231",
+            "spec_fun": "spec_poison"
+        },
+        {
+            "vnum": "29232",
+            "spec_fun": "spec_poison"
+        }
+    ],
+    "resets": [
+        {
+            "command": "D",
+            "arg1": "29256",
+            "arg2": "5",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29264",
+            "arg2": "4",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29269",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29202",
+            "arg2": "2",
+            "arg3": "29203",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29203",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29206",
+            "arg2": "5",
+            "arg3": "29206",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "29223",
+            "arg2": "0",
+            "arg3": "29206"
+        },
+        {
+            "command": "O",
+            "arg1": "29224",
+            "arg2": "0",
+            "arg3": "29206"
+        },
+        {
+            "command": "M",
+            "arg1": "29208",
+            "arg2": "5",
+            "arg3": "29207",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29208",
+            "arg2": "5",
+            "arg3": "29208",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "29223",
+            "arg2": "0",
+            "arg3": "29208"
+        },
+        {
+            "command": "O",
+            "arg1": "29223",
+            "arg2": "0",
+            "arg3": "29208"
+        },
+        {
+            "command": "O",
+            "arg1": "29224",
+            "arg2": "0",
+            "arg3": "29208"
+        },
+        {
+            "command": "M",
+            "arg1": "29203",
+            "arg2": "2",
+            "arg3": "29210",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29204",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29206",
+            "arg2": "5",
+            "arg3": "29211",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29214",
+            "arg2": "3",
+            "arg3": "29213",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29208",
+            "arg2": "0",
+            "arg3": "0"
+        },
+        {
+            "command": "E",
+            "arg1": "29209",
+            "arg2": "0",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29210",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29204",
+            "arg2": "1",
+            "arg3": "29215",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "29205",
+            "arg2": "0",
+            "arg3": "29215"
+        },
+        {
+            "command": "M",
+            "arg1": "29207",
+            "arg2": "1",
+            "arg3": "29216",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29207",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29214",
+            "arg2": "3",
+            "arg3": "29217",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29208",
+            "arg2": "0",
+            "arg3": "0"
+        },
+        {
+            "command": "E",
+            "arg1": "29209",
+            "arg2": "0",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29210",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29206",
+            "arg2": "5",
+            "arg3": "29220",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "29223",
+            "arg2": "0",
+            "arg3": "29220"
+        },
+        {
+            "command": "O",
+            "arg1": "29224",
+            "arg2": "0",
+            "arg3": "29220"
+        },
+        {
+            "command": "M",
+            "arg1": "29215",
+            "arg2": "2",
+            "arg3": "29223",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29211",
+            "arg2": "1",
+            "arg3": "29227",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29212",
+            "arg2": "1",
+            "arg3": "29227",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29206",
+            "arg2": "5",
+            "arg3": "29229",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29213",
+            "arg2": "1",
+            "arg3": "29229",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29207",
+            "arg2": "0"
+        },
+        {
+            "command": "O",
+            "arg1": "29223",
+            "arg2": "0",
+            "arg3": "29229"
+        },
+        {
+            "command": "O",
+            "arg1": "29223",
+            "arg2": "0",
+            "arg3": "29229"
+        },
+        {
+            "command": "M",
+            "arg1": "29202",
+            "arg2": "2",
+            "arg3": "29230",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29203",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29203",
+            "arg2": "2",
+            "arg3": "29235",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29204",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29201",
+            "arg2": "2",
+            "arg3": "29240",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29202",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29205",
+            "arg2": "1",
+            "arg3": "29242",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29206",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29208",
+            "arg2": "5",
+            "arg3": "29243",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29210",
+            "arg2": "2",
+            "arg3": "29244",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29209",
+            "arg2": "2",
+            "arg3": "29245",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29233",
+            "arg2": "2",
+            "arg3": "29248",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29216",
+            "arg2": "1",
+            "arg3": "29248",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29211",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "29212",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29217",
+            "arg2": "1",
+            "arg3": "29249",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29213",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "29214",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "29215",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29214",
+            "arg2": "3",
+            "arg3": "29250",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29208",
+            "arg2": "0",
+            "arg3": "0"
+        },
+        {
+            "command": "E",
+            "arg1": "29209",
+            "arg2": "0",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29210",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29218",
+            "arg2": "1",
+            "arg3": "29251",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29216",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "29217",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29208",
+            "arg2": "5",
+            "arg3": "29252",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29219",
+            "arg2": "1",
+            "arg3": "29252",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29218",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "29219",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29208",
+            "arg2": "5",
+            "arg3": "29253",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29209",
+            "arg2": "2",
+            "arg3": "29253",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29210",
+            "arg2": "2",
+            "arg3": "29255",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29226",
+            "arg2": "1",
+            "arg3": "29256",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29201",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29227",
+            "arg2": "1",
+            "arg3": "29257",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29220",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "29221",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "29222",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29233",
+            "arg2": "2",
+            "arg3": "29257",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29222",
+            "arg2": "1",
+            "arg3": "29258",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29220",
+            "arg2": "1",
+            "arg3": "29260",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29221",
+            "arg2": "1",
+            "arg3": "29261",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29221",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29224",
+            "arg2": "1",
+            "arg3": "29262",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29225",
+            "arg2": "1",
+            "arg3": "29263",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29229",
+            "arg2": "0",
+            "arg3": "12"
+        },
+        {
+            "command": "E",
+            "arg1": "29230",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "29229",
+            "arg2": "2",
+            "arg3": "29265",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29225",
+            "arg2": "0",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "29226",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "29227",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "O",
+            "arg1": "29223",
+            "arg2": "0",
+            "arg3": "29268"
+        },
+        {
+            "command": "M",
+            "arg1": "29229",
+            "arg2": "2",
+            "arg3": "29269",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29225",
+            "arg2": "0",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "29226",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "29227",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "O",
+            "arg1": "29223",
+            "arg2": "0",
+            "arg3": "29269"
+        },
+        {
+            "command": "M",
+            "arg1": "29231",
+            "arg2": "1",
+            "arg3": "29270",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29231",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "29232",
+            "arg2": "1",
+            "arg3": "29270",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29232",
+            "arg2": "0",
+            "arg3": "8"
+        },
+        {
+            "command": "E",
+            "arg1": "29233",
+            "arg2": "0",
+            "arg3": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "29234",
+            "arg2": "0",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "29228",
+            "arg2": "1",
+            "arg3": "29272",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29229",
+            "arg2": "0",
+            "arg3": "12"
+        },
+        {
+            "command": "E",
+            "arg1": "29230",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "G",
+            "arg1": "29228",
+            "arg2": "0"
+        },
+        {
+            "command": "O",
+            "arg1": "29223",
+            "arg2": "0",
+            "arg3": "29272"
+        },
+        {
+            "command": "M",
+            "arg1": "29228",
+            "arg2": "2",
+            "arg3": "29273",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29228",
+            "arg2": "2",
+            "arg3": "29274",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "29224",
+            "arg2": "0",
+            "arg3": "29275"
+        }
+    ],
+    "shops": [
+        {
+            "keeper": "29211",
+            "buy_type_0": "22",
+            "buy_type_1": "0",
+            "buy_type_2": "0",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "130",
+            "profit_sell": "70",
+            "open_hour": "6",
+            "close_hour": "17"
+        },
+        {
+            "keeper": "29216",
+            "buy_type_0": "17",
+            "buy_type_1": "19",
+            "buy_type_2": "0",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "150",
+            "profit_sell": "75",
+            "open_hour": "0",
+            "close_hour": "23"
+        },
+        {
+            "keeper": "29217",
+            "buy_type_0": "8",
+            "buy_type_1": "12",
+            "buy_type_2": "13",
+            "buy_type_3": "26",
+            "buy_type_4": "0",
+            "profit_buy": "130",
+            "profit_sell": "80",
+            "open_hour": "9",
+            "close_hour": "17"
+        },
+        {
+            "keeper": "29218",
+            "buy_type_0": "5",
+            "buy_type_1": "9",
+            "buy_type_2": "29",
+            "buy_type_3": "30",
+            "buy_type_4": "0",
+            "profit_buy": "125",
+            "profit_sell": "85",
+            "open_hour": "6",
+            "close_hour": "18"
+        },
+        {
+            "keeper": "29219",
+            "buy_type_0": "9",
+            "buy_type_1": "2",
+            "buy_type_2": "3",
+            "buy_type_3": "4",
+            "buy_type_4": "28",
+            "profit_buy": "140",
+            "profit_sell": "60",
+            "open_hour": "17",
+            "close_hour": "23"
+        },
+        {
+            "keeper": "29227",
+            "buy_type_0": "17",
+            "buy_type_1": "19",
+            "buy_type_2": "0",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "110",
+            "profit_sell": "90",
+            "open_hour": "0",
+            "close_hour": "23"
+        }
+    ],
+    "olimits": [
+        {
+            "vnum": "29202",
+            "limit": "10"
+        },
+        {
+            "vnum": "29234",
+            "limit": "10"
+        }
+    ]
+}

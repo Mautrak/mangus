@@ -1,0 +1,293 @@
+{
+    "area": {
+        "file": "ofcol.are",
+        "name": "Türkçe",
+        "low_range": "1",
+        "high_range": "100",
+        "min_vnum": "5500",
+        "max_vnum": "5599",
+        "path": "4d 3k 2b 5k 6d 4k",
+        "yonelim_iyi": "33",
+        "yonelim_yansiz": "34",
+        "yonelim_kem": "33"
+    },
+    "mobiles": [],
+    "objects": [],
+    "rooms": [
+        {
+            "vnum": "5550",
+            "name": "Köy sokaðý",
+            "description": "Ofcol'da, küçük bir köy caddesinde duruyorsunuz. Buradan\nküçük evler ve birkaç insan görebiliyorsunuz. Buradan\nkuzeye doðru insanlarýn her zamanki gibi toplandýðý alana\ncadde uzanýyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Sokaklara baktýðýnýzda pek ilginç veya özel þeyler görmüyorsunuz.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5551"
+                },
+                {
+                    "door": "D2",
+                    "description": "Bu geniþ yol güneye, T kavþaðýna doðru gidiyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "314"
+                }
+            ]
+        },
+        {
+            "vnum": "5551",
+            "name": "Köy sokaðý",
+            "description": "Ofcol'da, küçük bir köy caddesinde duruyorsunuz. Buradan doðuda\nKüçük bir sokak var. Kuzeye giderek köy meydanýna çýkabilirsiniz.\nGüneye doðru giderek de Ofcol þehrinden ayrýlabilirsiniz.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Köy meydaný her zamanki gibi çok kalabalýk deðil.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5552"
+                },
+                {
+                    "door": "D1",
+                    "description": "Küçük yol sakin ve huzurlu görünüyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5553"
+                },
+                {
+                    "door": "D2",
+                    "description": "Yavaþça geniþleyen köy sokaðýný görüyorsunuz.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5550"
+                }
+            ]
+        },
+        {
+            "vnum": "5552",
+            "name": "Köy meydaný",
+            "description": "Köy alaný köyün sakinlerinin toplanýp konuþabileceði,\nticaret ve eþya satýmý yapabileceði ve sadece güzel\nbir vakit geçirebileceði bir yer. Batýda küçük bir\ndükkan ve kuzeyde köyün yerli hanýný görüyorsunuz.\nAyrýlacaksanýz güneye, köy sokaðýna gidebilirsiniz.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "'Ofcol yerel haný' adlý bir han görüyorsunuz. Hoþ görünüyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5556"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ofcol þehrinin köy sokaðýný görüyorsunuz.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5551"
+                },
+                {
+                    "door": "D3",
+                    "description": "'Luxan'ýn Karýþýk eþyalarý' yazýlý tabelasýyla küçük bir dükkan.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5555"
+                }
+            ]
+        },
+        {
+            "vnum": "5553",
+            "name": "Küçük sokak",
+            "description": "Küçük ve sessiz bir sokaktasýnýz. Buradan batýda köy sokaðýný\ngörüyorsunuz ve güneyde küçük bir oda var.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Büyük bir kesiþme yeri görüyorsunuz.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "601"
+                },
+                {
+                    "door": "D2",
+                    "description": "Bir pratik odasýnýn gelecekteki yüzü gibi görünüyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5554"
+                },
+                {
+                    "door": "D3",
+                    "description": "Köy sokaðý hariç hiçbir þey fark etmiyorsunuz.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5551"
+                }
+            ]
+        },
+        {
+            "vnum": "5554",
+            "name": "Gelecekteki pratik odasý",
+            "description": "Bu bir pratik odasýnýn gelecekteki yüzü gibi görünüyor. Tek çýkýþ\nKüçük sokaða, kuzeye doðru gidiyor.\n",
+            "flags": "D",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Gerçekten ilginç olmayan küçük yolu görebiliyorsunuz.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5553"
+                }
+            ]
+        },
+        {
+            "vnum": "5555",
+            "name": "Luxan'ýn karýþýk eþyalar dükkaný",
+            "description": "Her çeþit eþyanýn konduðu küçük bir dükkanda duruyorsunuz.\nburada sadece aradýðýnýz þeyi bulabilirsiniz. Tek çýkýþ\ndoðudan köy meydanýna çýkýyor.\n",
+            "flags": "D",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Köy meydaný her zamanki gibi çok kalabalýk deðil.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5552"
+                }
+            ]
+        },
+        {
+            "vnum": "5556",
+            "name": "Yerel Han",
+            "description": "Ofcol insanlarýnýn huzurlu bir biçimde toplanýp konuþtuðu ve\nboðazlarýný serinlettiði bir yerel handasýnýz. Ofcol'un seyrek\nnüfuslu bir þehir olmadýðýný anlýyorsunuz çünkü burada bir çok\ninsan var. Tek çýkýþ güneyden köy meydanýna çýkýyor.\n",
+            "flags": "D",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Köy meydaný her zamanki gibi çok kalabalýk deðil.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5552"
+                }
+            ]
+        },
+        {
+            "vnum": "5577",
+            "name": "Ravan'ýn saklandýðý yer",
+            "description": "Burasý kimsenin sizi rahatsýz etmeyeceði küçük ve keyifli bir yer.\nDuvarlara asýlmýþ bir kaç tablo ile ufak bir dekorasyon yapýlmýþ.\nBu odadan çýkýþ olmadýðýný görüyorsunuz.\n",
+            "flags": "C",
+            "sector": "0",
+            "extra_descriptions": [
+                {
+                    "keyword": "arkadaþ arkadaþlar",
+                    "description": "Liste belli baþlý isimleri de içeriyor: Tanrý, Lottie, Kurgan,\nEzzard, Mike, Sprocket ve Stormbringer.\n"
+                },
+                {
+                    "keyword": "düþman düþmanlar",
+                    "description": "Burada sadece bir resim var... Dim.\nBu resimde onun þehrin kuzeyinde asýlýþý konu alýnmýþ. Resmin\nAþaðýsýna R.I.P yazýlmýþ.\n"
+                },
+                {
+                    "keyword": "resimler resim dekorasyon",
+                    "description": "Bu resim Ravan'ýn dostlarý ve düþmanlarýný gösteriyor. Ayýrmasý\nkolay çünkü bir çok düþmanýnýn altýna R.I.P. yazýlmýþ.\n"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "303",
+            "arg2": "5",
+            "arg3": "5556",
+            "arg4": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "303",
+            "arg2": "5",
+            "arg3": "5550",
+            "arg4": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "304",
+            "arg2": "5",
+            "arg3": "5553",
+            "arg4": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "304",
+            "arg2": "5",
+            "arg3": "5552",
+            "arg4": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "3020",
+            "arg2": "99",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "306",
+            "arg2": "1",
+            "arg3": "5555",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "304",
+            "arg2": "100"
+        },
+        {
+            "command": "G",
+            "arg1": "3030",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "308",
+            "arg2": "1",
+            "arg3": "5556",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "3000",
+            "arg2": "100"
+        },
+        {
+            "command": "G",
+            "arg1": "3001",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "350",
+            "arg2": "1",
+            "arg3": "5577",
+            "arg4": "1"
+        }
+    ],
+    "shops": [],
+    "specials": []
+}

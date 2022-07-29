@@ -1,0 +1,2385 @@
+{
+    "area": {
+        "file": "thera_hapishanesi.are",
+        "name": "Türkçe",
+        "low_range": "80",
+        "high_range": "130",
+        "min_vnum": "15000",
+        "max_vnum": "15099",
+        "path": "",
+        "yonelim_iyi": "5",
+        "yonelim_yansiz": "15",
+        "yonelim_kem": "80"
+    },
+    "mobiles": [
+        {
+            "vnum": "15000",
+            "name": "baþ gardiyan",
+            "short_description": "Hücre gardiyanlarýnýn baþý",
+            "long_description": "Hapisanedeki gardiyanlarýn baþý burada.\n",
+            "description": "Bu adam yýllardýr burada. Hapishanesini zarardan koruyor. Kötü\nbüyücüden tek etkilenmeyen kiþi o. O güçlü ve bilge.\n",
+            "race": "human",
+            "act": "ABWe",
+            "affected_by": "DFHJVZ",
+            "level": "130"
+        },
+        {
+            "vnum": "15003",
+            "name": "hücre gardiyan",
+            "short_description": "Hücrenin gardiyaný",
+            "long_description": "Hapisanenin gardiyaný burada.\n",
+            "description": "Omzunda gardiyanlarýn iþaretini taþýyan, iþini yapan, güçlü\nbir gardiyan.\n",
+            "race": "human",
+            "act": "ABWe",
+            "affected_by": "DFHJVZ",
+            "level": "95"
+        },
+        {
+            "vnum": "15001",
+            "name": "hücre temizlikçi",
+            "short_description": "Hapishane temizlikçisi",
+            "long_description": "Hapishane temizlikçilerinden biri burada.\n",
+            "description": "Öyle acýklý aðlýyor ve þarký söylüyor ama sen hiçbir þey anlayamýyorsun.\nNeden ayný zamanda hep þarký söyleyip hem de aðlýyor? Birden anlýyorsun,\nþarký söylemek : þimdi öleceksin!\n",
+            "race": "human",
+            "act": "ACGT",
+            "affected_by": "DFJZ",
+            "level": "80"
+        },
+        {
+            "vnum": "15002",
+            "name": "suçlu",
+            "short_description": "Suçlu",
+            "long_description": "Bir suçlu burada dinleniyor.\n",
+            "description": "Suçlunun sýkýlmýþ gözleri var, zombi gibi! Diðer yaratýklara hiç\nbenzemiyor. Aniden birinin fýsýldadýðýný farediyorsun:\n\"nasýl isterseniz efendim\".\n",
+            "race": "human",
+            "act": "ACGT",
+            "affected_by": "DFJZ",
+            "level": "88"
+        },
+        {
+            "vnum": "15009",
+            "name": "eski büyücü Kwal",
+            "short_description": "Eski büyücü Kwal",
+            "long_description": "Eski büyücü Kwal planlarý üzerinde çalýþýyor.\n",
+            "description": "Kadýnýn gözlerine bakýnca korkuyu görüyorsun. Fakat bu onun korkusu\ndeðil. Bu senin korkun, sonun geliyor, gözlerini yakaladý, ruhunu\nçaðýrýyor! Gözlerinde þimdi de nefret ve kýzgýnlýðýn gölgeleri\noynaþýyor. Anlaþýlan onu rahatsýz ettin. Birden baðýrýyor:\n\"Hepiniz bunu ödeyeceksiniz!!\"\n",
+            "race": "çora",
+            "act": "ABWeCFGT",
+            "affected_by": "DFHJVZ",
+            "level": "109"
+        },
+        {
+            "vnum": "15010",
+            "name": "uyandýrýlmýþ þeytan",
+            "short_description": "Bir uyandýrýlmýþ þeytan",
+            "long_description": "Bir uyandýrýlmýþ þeytan birþeyleri arar gibi.\n",
+            "description": "Çok sinirli!\n",
+            "race": "çora",
+            "act": "ABWeCFGT",
+            "affected_by": "DFHJVZ",
+            "level": "109"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "15002",
+            "name": "paslý çeþme",
+            "short_description": "bir çeþme",
+            "description": "Küçük bir paslý çeþme burada.",
+            "material": "",
+            "type": "fountain",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 'water' 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "G",
+            "extra_descriptions": [
+                {
+                    "keyword": "çeþme paslý",
+                    "description": "Güzel görünmese de suyu içilebilir.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15001",
+            "name": "kirli somun",
+            "short_description": "bir büyük, kirli somun",
+            "description": "Bir büyük, kirli somun yerde duruyor.",
+            "material": "food",
+            "type": "food",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "20 40 0 0 0",
+            "level": "0",
+            "weight": "20",
+            "cost": "22",
+            "condition": "P"
+        },
+        {
+            "vnum": "15005",
+            "name": "gardiyan yüzük",
+            "short_description": "parlak bir gardiyan yüzüðü",
+            "description": "Yerde parlak bir yüzük görüyorsun.\n",
+            "material": "gold",
+            "type": "armor",
+            "extra_flags": "BEGH",
+            "wear_flags": "AB",
+            "values": "29 30 30 30 29",
+            "level": "88",
+            "weight": "10",
+            "cost": "8000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "3"
+                },
+                {
+                    "location": "2",
+                    "modifier": "3"
+                },
+                {
+                    "location": "12",
+                    "modifier": "100"
+                },
+                {
+                    "location": "13",
+                    "modifier": "100"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-20"
+                },
+                {
+                    "location": "18",
+                    "modifier": "5"
+                },
+                {
+                    "location": "19",
+                    "modifier": "5"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "15006",
+            "name": "suçlu tasma",
+            "short_description": "bir suçlu tasmasý",
+            "description": "Yerde güzel bir tasma duruyor.\n",
+            "material": "gold",
+            "type": "armor",
+            "extra_flags": "BEGH",
+            "wear_flags": "AC",
+            "values": "25 35 35 35 21",
+            "level": "85",
+            "weight": "10",
+            "cost": "8400",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "4",
+                    "modifier": "3"
+                },
+                {
+                    "location": "5",
+                    "modifier": "3"
+                },
+                {
+                    "location": "12",
+                    "modifier": "100"
+                },
+                {
+                    "location": "13",
+                    "modifier": "100"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-5"
+                },
+                {
+                    "location": "18",
+                    "modifier": "5"
+                },
+                {
+                    "location": "19",
+                    "modifier": "5"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-2"
+                }
+            ]
+        },
+        {
+            "vnum": "15007",
+            "name": "ýþýk hale",
+            "short_description": "bir ýþýk halesi",
+            "description": "Mistik bir ýþýk halesi burada.\n",
+            "material": "light",
+            "type": "armor",
+            "extra_flags": "BEGH",
+            "wear_flags": "AQ",
+            "values": "25 25 25 25 21",
+            "level": "85",
+            "weight": "10",
+            "cost": "8400",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "1"
+                },
+                {
+                    "location": "5",
+                    "modifier": "1"
+                },
+                {
+                    "location": "12",
+                    "modifier": "200"
+                },
+                {
+                    "location": "13",
+                    "modifier": "200"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-20"
+                },
+                {
+                    "location": "18",
+                    "modifier": "7"
+                },
+                {
+                    "location": "19",
+                    "modifier": "7"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-5"
+                }
+            ]
+        },
+        {
+            "vnum": "15008",
+            "name": "hotsuma ruh kalkan",
+            "short_description": "Hotsuma'nýn ruh kalkaný",
+            "description": "Kaybolmuþ bir ruhun parlayan kalkaný burada.\n",
+            "material": "gold",
+            "type": "armor",
+            "extra_flags": "BEGH",
+            "wear_flags": "AJ",
+            "values": "21 21 21 21 80",
+            "level": "70",
+            "weight": "10",
+            "cost": "8400",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "150"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-30"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-5"
+                }
+            ]
+        },
+        {
+            "vnum": "15003",
+            "name": "rathaen yýlan asa",
+            "short_description": "Rathaen'in yýlanlý asasý",
+            "description": "Kayýp bir ruha ait yaþayan bir asa burada, hareket ediyor.\n",
+            "material": "wood",
+            "type": "staff",
+            "extra_flags": "BEGH",
+            "wear_flags": "AO",
+            "values": "100 50 50 'frenzy' 0",
+            "level": "90",
+            "weight": "50",
+            "cost": "30000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "5",
+                    "modifier": "3"
+                },
+                {
+                    "location": "12",
+                    "modifier": "400"
+                },
+                {
+                    "location": "13",
+                    "modifier": "400"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-30"
+                },
+                {
+                    "location": "18",
+                    "modifier": "25"
+                },
+                {
+                    "location": "19",
+                    "modifier": "25"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-4"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-4"
+                }
+            ]
+        },
+        {
+            "vnum": "15010",
+            "name": "eski asa",
+            "short_description": "eskilerin asasý",
+            "description": "Eskilerin asasý burada.\n",
+            "material": "wood",
+            "type": "staff",
+            "extra_flags": "BEGH",
+            "wear_flags": "AO",
+            "values": "100 20 20 'sanctuary' 0",
+            "level": "75",
+            "weight": "50",
+            "cost": "30000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "5",
+                    "modifier": "3"
+                },
+                {
+                    "location": "13",
+                    "modifier": "100"
+                },
+                {
+                    "location": "18",
+                    "modifier": "5"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-10"
+                }
+            ]
+        },
+        {
+            "vnum": "15011",
+            "name": "koruma pelerin",
+            "short_description": "Kutsal Koruma pelerini",
+            "description": "Bir pelerin inanýlmaz güzelliðiyle yerde duruyor.",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "ACY",
+            "wear_flags": "AC",
+            "values": "39 39 39 37 30",
+            "level": "84",
+            "weight": "10",
+            "cost": "99000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "3",
+                    "modifier": "2"
+                },
+                {
+                    "location": "18",
+                    "modifier": "8"
+                },
+                {
+                    "location": "19",
+                    "modifier": "8"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-4"
+                }
+            ]
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "15001",
+            "name": "Hücre No:001",
+            "description": "Burasý kirli ve daðýnýk bir hücre. Oldukça küçük. Havada aðýr bir\nkoku var. Köþede tuvaleti ve çeþmeyi görüyorsun. Buradan çýkýþ yok,\nduvarlar kapalý. Duvarlara bakýnca için kararýyor.Duvarda küçük\nbir tablet var.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Uzun koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15021"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Hücre No:001               +\n+            Gürültü  Yapma              +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15002",
+            "name": "Hücre No:002",
+            "description": "Burasý kirli ve daðýnýk bir hücre. Oldukça küçük. Havada aðýr bir\nkoku var. Köþede tuvaleti ve çeþmeyi görüyorsun. Buradan çýkýþ yok,\nduvarlar kapalý. Duvarlara bakýnca için kararýyor.Duvarda küçük\nbir tablet var.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Uzun koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15022"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Hücre No:002               +\n+            Gürültü  Yapma              +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15003",
+            "name": "Hücre No:003",
+            "description": "Burasý kirli ve daðýnýk bir hücre. Oldukça küçük. Havada aðýr bir\nkoku var. Köþede tuvaleti ve çeþmeyi görüyorsun. Buradan çýkýþ yok,\nduvarlar kapalý. Duvarlara bakýnca için kararýyor.Duvarda küçük\nbir tablet var.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Uzun koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15023"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Hücre No:003               +\n+            Gürültü  Yapma              +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15004",
+            "name": "Hücre No:004",
+            "description": "Burasý kirli ve daðýnýk bir hücre. Oldukça küçük. Havada aðýr bir\nkoku var. Köþede tuvaleti ve çeþmeyi görüyorsun. Buradan çýkýþ yok,\nduvarlar kapalý. Duvarlara bakýnca için kararýyor.Duvarda küçük\nbir tablet var.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Uzun koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15024"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Hücre No:004               +\n+            Gürültü  Yapma              +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15005",
+            "name": "Hücre No:005",
+            "description": "Burasý kirli ve daðýnýk bir hücre. Oldukça küçük. Havada aðýr bir\nkoku var. Köþede tuvaleti ve çeþmeyi görüyorsun. Buradan çýkýþ yok,\nduvarlar kapalý. Duvarlara bakýnca için kararýyor.Duvarda küçük\nbir tablet var.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Uzun koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15025"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Hücre No:005               +\n+            Gürültü  Yapma              +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15006",
+            "name": "Hücre No:006",
+            "description": "Burasý kirli ve daðýnýk bir hücre. Oldukça küçük. Havada aðýr bir\nkoku var. Köþede tuvaleti ve çeþmeyi görüyorsun. Buradan çýkýþ yok,\nduvarlar kapalý. Duvarlara bakýnca için kararýyor.Duvarda küçük\nbir tablet var.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Uzun koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15026"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Hücre No:006               +\n+            Gürültü  Yapma              +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15007",
+            "name": "Hücre No:007",
+            "description": "Burasý kirli ve daðýnýk bir hücre. Oldukça küçük. Havada aðýr bir\nkoku var. Köþede tuvaleti ve çeþmeyi görüyorsun. Buradan çýkýþ yok,\nduvarlar kapalý. Duvarlara bakýnca için kararýyor.Duvarda küçük\nbir tablet var.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Uzun koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15027"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Hücre No:007               +\n+            Gürültü  Yapma              +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15008",
+            "name": "Hücre No:008",
+            "description": "Burasý kirli ve daðýnýk bir hücre. Oldukça küçük. Havada aðýr bir\nkoku var. Köþede tuvaleti ve çeþmeyi görüyorsun. Buradan çýkýþ yok,\nduvarlar kapalý. Duvarlara bakýnca için kararýyor.Duvarda küçük\nbir tablet var.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Uzun koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15028"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Hücre No:008               +\n+            Gürültü  Yapma              +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15009",
+            "name": "Hücre No:009",
+            "description": "Burasý kirli ve daðýnýk bir hücre. Oldukça küçük. Havada aðýr bir\nkoku var. Köþede tuvaleti ve çeþmeyi görüyorsun. Buradan çýkýþ yok,\nduvarlar kapalý. Duvarlara bakýnca için kararýyor.Duvarda küçük\nbir tablet var.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Uzun koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15029"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Hücre No:009               +\n+            Gürültü  Yapma              +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15010",
+            "name": "Hücre No:010",
+            "description": "Burasý kirli ve daðýnýk bir hücre. Oldukça küçük. Havada aðýr bir\nkoku var. Köþede tuvaleti ve çeþmeyi görüyorsun. Buradan çýkýþ yok,\nduvarlar kapalý. Duvarlara bakýnca için kararýyor.Duvarda küçük\nbir tablet var.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Uzun koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15030"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Hücre No:010               +\n+            Gürültü  Yapma              +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15011",
+            "name": "Hücre No:011",
+            "description": "Burasý kirli ve daðýnýk bir hücre. Oldukça küçük. Havada aðýr bir\nkoku var. Köþede tuvaleti ve çeþmeyi görüyorsun. Buradan çýkýþ yok,\nduvarlar kapalý. Duvarlara bakýnca için kararýyor.Duvarda küçük\nbir tablet var.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Uzun koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15031"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Hücre No:011               +\n+            Gürültü  Yapma              +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15012",
+            "name": "Hücre No:012",
+            "description": "Burasý kirli ve daðýnýk bir hücre. Oldukça küçük. Havada aðýr bir\nkoku var. Köþede tuvaleti ve çeþmeyi görüyorsun. Buradan çýkýþ yok,\nduvarlar kapalý. Duvarlara bakýnca için kararýyor.Duvarda küçük\nbir tablet var.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Uzun koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15032"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Hücre No:012               +\n+            Gürültü  Yapma              +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15013",
+            "name": "Hücre No:013",
+            "description": "Burasý kirli ve daðýnýk bir hücre. Oldukça küçük. Havada aðýr bir\nkoku var. Köþede tuvaleti ve çeþmeyi görüyorsun. Buradan çýkýþ yok,\nduvarlar kapalý. Duvarlara bakýnca için kararýyor.Duvarda küçük\nbir tablet var.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Uzun koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15033"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Hücre No:013               +\n+            Gürültü  Yapma              +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15014",
+            "name": "Hücre No:014",
+            "description": "Burasý kirli ve daðýnýk bir hücre. Oldukça küçük. Havada aðýr bir\nkoku var. Köþede tuvaleti ve çeþmeyi görüyorsun. Buradan çýkýþ yok,\nduvarlar kapalý. Duvarlara bakýnca için kararýyor.Duvarda küçük\nbir tablet var.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Uzun koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15034"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Hücre No:014               +\n+            Gürültü  Yapma              +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15015",
+            "name": "Hücre No:015",
+            "description": "Burasý kirli ve daðýnýk bir hücre. Oldukça küçük. Havada aðýr bir\nkoku var. Köþede tuvaleti ve çeþmeyi görüyorsun. Buradan çýkýþ yok,\nduvarlar kapalý. Duvarlara bakýnca için kararýyor.Duvarda küçük\nbir tablet var.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Uzun koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15035"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Hücre No:015               +\n+            Gürültü  Yapma              +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15016",
+            "name": "Hücre No:016",
+            "description": "Burasý kirli ve daðýnýk bir hücre. Oldukça küçük. Havada aðýr bir\nkoku var. Köþede tuvaleti ve çeþmeyi görüyorsun. Buradan çýkýþ yok,\nduvarlar kapalý. Duvarlara bakýnca için kararýyor.Duvarda küçük\nbir tablet var.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Uzun koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15036"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Hücre No:016               +\n+            Gürültü  Yapma              +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15017",
+            "name": "Hücre No:017",
+            "description": "Burasý kirli ve daðýnýk bir hücre. Oldukça küçük. Havada aðýr bir\nkoku var. Köþede tuvaleti ve çeþmeyi görüyorsun. Buradan çýkýþ yok,\nduvarlar kapalý. Duvarlara bakýnca için kararýyor.Duvarda küçük\nbir tablet var.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Uzun koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15037"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Hücre No:017               +\n+            Gürültü  Yapma              +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15018",
+            "name": "Hücre No:018",
+            "description": "Burasý kirli ve daðýnýk bir hücre. Oldukça küçük. Havada aðýr bir\nkoku var. Köþede tuvaleti ve çeþmeyi görüyorsun. Buradan çýkýþ yok,\nduvarlar kapalý. Duvarlara bakýnca için kararýyor.Duvarda küçük\nbir tablet var.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Uzun koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15038"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Hücre No:018               +\n+            Gürültü  Yapma              +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15019",
+            "name": "Hücre No:019",
+            "description": "Burasý kirli ve daðýnýk bir hücre. Oldukça küçük. Havada aðýr bir\nkoku var. Köþede tuvaleti ve çeþmeyi görüyorsun. Buradan çýkýþ yok,\nduvarlar kapalý. Duvarlara bakýnca için kararýyor.Duvarda küçük\nbir tablet var.\n",
+            "flags": "0",
+            "sector": "9",
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Hücre No:019               +\n+            Gürültü  Yapma              +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15020",
+            "name": "Hücre No:020",
+            "description": "Burasý kirli ve daðýnýk bir hücre. Oldukça küçük. Havada aðýr bir\nkoku var. Köþede tuvaleti ve çeþmeyi görüyorsun. Buradan çýkýþ yok,\nduvarlar kapalý. Duvarlara bakýnca için kararýyor.Duvarda küçük\nbir tablet var.\n",
+            "flags": "J",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Uzun koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15040"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Hücre No:020               +\n+            Gürültü  Yapma              +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15021",
+            "name": "Uzun Koridor",
+            "description": "Bu uzun ve karanlýk bir koridor. Kuzeyde 001 nolu hücre giriþi var.\nKoridor doðuya devam ediyor.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzey 001 nolu hücre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15001"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðuda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15022"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda hapishanenin giriþi var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15000"
+                }
+            ]
+        },
+        {
+            "vnum": "15022",
+            "name": "Uzun Koridor",
+            "description": "Bu uzun ve karanlýk bir koridor. Kuzeyde 002 nolu hücre giriþi var.\nKoridor doðuya devam ediyor.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzey 002 nolu hücre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15002"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðuda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15023"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15021"
+                }
+            ]
+        },
+        {
+            "vnum": "15023",
+            "name": "Uzun Koridor",
+            "description": "Bu uzun ve karanlýk bir koridor. Kuzeyde 003 nolu hücre giriþi var.\nKoridor doðuya devam ediyor.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzey 003 nolu hücre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15003"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðuda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15024"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15022"
+                }
+            ]
+        },
+        {
+            "vnum": "15024",
+            "name": "Uzun Koridor",
+            "description": "Bu uzun ve karanlýk bir koridor. Kuzeyde 004 nolu hücre giriþi var.\nKoridor doðuya devam ediyor.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzey 004 nolu hücre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15004"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðuda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15025"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15023"
+                }
+            ]
+        },
+        {
+            "vnum": "15025",
+            "name": "Uzun Koridor",
+            "description": "Bu uzun ve karanlýk bir koridor. Kuzeyde 005 nolu hücre giriþi var.\nKoridor doðuya devam ediyor.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzey 005 nolu hücre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15005"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðuda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15026"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15024"
+                }
+            ]
+        },
+        {
+            "vnum": "15026",
+            "name": "Uzun Koridor",
+            "description": "Bu uzun ve karanlýk bir koridor. Kuzeyde 006 nolu hücre giriþi var.\nKoridor doðuya devam ediyor.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzey 006 nolu hücre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15006"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðuda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15027"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15025"
+                }
+            ]
+        },
+        {
+            "vnum": "15027",
+            "name": "Uzun Koridor",
+            "description": "Bu uzun ve karanlýk bir koridor. Kuzeyde 007 nolu hücre giriþi var.\nKoridor doðuya devam ediyor.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzey 007 nolu hücre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15007"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðuda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15028"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15026"
+                }
+            ]
+        },
+        {
+            "vnum": "15028",
+            "name": "Uzun Koridor",
+            "description": "Bu uzun ve karanlýk bir koridor. Kuzeyde 008 nolu hücre giriþi var.\nKoridor doðuya devam ediyor.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzey 008 nolu hücre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15008"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðuda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15029"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15027"
+                }
+            ]
+        },
+        {
+            "vnum": "15029",
+            "name": "Uzun Koridor",
+            "description": "Bu uzun ve karanlýk bir koridor. Kuzeyde 009 nolu hücre giriþi var.\nKoridor doðuya devam ediyor.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzey 009 nolu hücre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15009"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðuda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15030"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15028"
+                }
+            ]
+        },
+        {
+            "vnum": "15030",
+            "name": "Uzun Koridor",
+            "description": "Bu uzun ve karanlýk bir koridor. Kuzeyde 010 nolu hücre giriþi var.\nKoridor doðuya devam ediyor.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzey 010 nolu hücre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15010"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðuda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15031"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15029"
+                }
+            ]
+        },
+        {
+            "vnum": "15031",
+            "name": "Uzun Koridor",
+            "description": "Bu uzun ve karanlýk bir koridor. Kuzeyde 011 nolu hücre giriþi var.\nKoridor doðuya devam ediyor.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzey 011 nolu hücre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15011"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðuda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15032"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15030"
+                }
+            ]
+        },
+        {
+            "vnum": "15032",
+            "name": "Uzun Koridor",
+            "description": "Bu uzun ve karanlýk bir koridor. Kuzeyde 012 nolu hücre giriþi var.\nKoridor doðuya devam ediyor.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzey 012 nolu hücre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15012"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðuda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15033"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15031"
+                }
+            ]
+        },
+        {
+            "vnum": "15033",
+            "name": "Uzun Koridor",
+            "description": "Bu uzun ve karanlýk bir koridor. Kuzeyde 013 nolu hücre giriþi var.\nKoridor doðuya devam ediyor.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzey 013 nolu hücre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15013"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðuda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15034"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15032"
+                }
+            ]
+        },
+        {
+            "vnum": "15034",
+            "name": "Uzun Koridor",
+            "description": "Bu uzun ve karanlýk bir koridor. Kuzeyde 014 nolu hücre giriþi var.\nKoridor doðuya devam ediyor.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzey 014 nolu hücre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15014"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðuda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15035"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15033"
+                }
+            ]
+        },
+        {
+            "vnum": "15035",
+            "name": "Uzun Koridor",
+            "description": "Bu uzun ve karanlýk bir koridor. Kuzeyde 015 nolu hücre giriþi var.\nKoridor doðuya devam ediyor.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzey 015 nolu hücre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15015"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðuda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15036"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15034"
+                }
+            ]
+        },
+        {
+            "vnum": "15036",
+            "name": "Uzun Koridor",
+            "description": "Bu uzun ve karanlýk bir koridor. Kuzeyde 016 nolu hücre giriþi var.\nKoridor doðuya devam ediyor.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzey 016 nolu hücre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15016"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðuda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15037"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15035"
+                },
+                {
+                    "door": "D2",
+                    "description": "Güneyde eski kanalizasyon sistemi var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20000"
+                }
+            ]
+        },
+        {
+            "vnum": "15037",
+            "name": "Uzun Koridor",
+            "description": "Bu uzun ve karanlýk bir koridor. Kuzeyde 017 nolu hücre giriþi var.\nKoridor doðuya devam ediyor.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzey 017 nolu hücre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15017"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðuda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15038"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15036"
+                }
+            ]
+        },
+        {
+            "vnum": "15038",
+            "name": "Uzun Koridor",
+            "description": "Bu uzun ve karanlýk bir koridor. Kuzeyde 018 nolu hücre giriþi var.\nKoridor doðuya devam ediyor.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzey 018 nolu hücre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15018"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðuda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15039"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15037"
+                }
+            ]
+        },
+        {
+            "vnum": "15039",
+            "name": "Uzun Koridor",
+            "description": "Bu uzun ve karanlýk bir koridor. Kuzeyde 019 nolu hücre giriþi var.\nKoridor doðuya devam ediyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzey 019 nolu hücre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15019"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðuda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15040"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15038"
+                }
+            ]
+        },
+        {
+            "vnum": "15040",
+            "name": "Uzun Koridor",
+            "description": "Bu uzun ve karanlýk bir koridor. Kuzeyde 020 nolu hücre giriþi var.\nKoridor birden bitiyor.\n",
+            "flags": "DN",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzey 020 nolu hücre.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15020"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15039"
+                }
+            ]
+        },
+        {
+            "vnum": "15000",
+            "name": "Hapishane Giriþi",
+            "description": "Duvarlarýnda kan olan karanlýk bir odadasýn, ve buradan kaçýþ yok.\nBurada azýlý katiller ve canavarlar yatar. Yöneticiler hepsine\nGEREKTÝÐÝ gibi davranýr.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Doðuda uzun koridor var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15021"
+                },
+                {
+                    "door": "D2",
+                    "description": "Hapishane yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15090"
+                }
+            ]
+        },
+        {
+            "vnum": "15099",
+            "name": "Hapishane yolu",
+            "description": "Hapishane yolunda yürüyorsun. Adýmlarýna dikkat et, bir yanlýþýn\nsenin sonun hazýrlayabilir. Aklýna bir hikaye geliyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Tam olarak göremiyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8019"
+                },
+                {
+                    "door": "D1",
+                    "description": "Hapishane yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15098"
+                },
+                {
+                    "door": "D3",
+                    "description": "Tam olarak göremiyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8019"
+                }
+            ]
+        },
+        {
+            "vnum": "15098",
+            "name": "Hapishane yolu",
+            "description": "Hapishane yolunda yürüyorsun. Adýmlarýna dikkat et, bir yanlýþýn\nsenin sonun hazýrlayabilir. Thera'nýn eski zamanlarýnda Kwal isimli\ngüçlü bir büyücü yaþarmýþ.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Tam olarak göremiyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5028"
+                },
+                {
+                    "door": "D0",
+                    "description": "Hapishane yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15097"
+                },
+                {
+                    "door": "D3",
+                    "description": "Hapishane yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15099"
+                }
+            ]
+        },
+        {
+            "vnum": "15097",
+            "name": "Hapishane yolu",
+            "description": "Hapishane yolunda yürüyorsun. Adýmlarýna dikkat et, bir yanlýþýn\nsenin sonun hazýrlayabilir. Yakalanýp bu hapishaneye kapatýldýðýnda\nherkes artýk sorunlarýn bittiðini düþünmüþ.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Tam olarak göremiyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5067"
+                },
+                {
+                    "door": "D2",
+                    "description": "Hapishane yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15098"
+                },
+                {
+                    "door": "D5",
+                    "description": "Hapishane yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15096"
+                }
+            ]
+        },
+        {
+            "vnum": "15096",
+            "name": "Hapishane yolu",
+            "description": "Hapishane yolunda yürüyorsun. Adýmlarýna dikkat et, bir yanlýþýn\nsenin sonun hazýrlayabilir. Fakat o yeri ve göðü yokedebilecek\ngücü çoktan ele geçirmiþ.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "Hapishane yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15097"
+                },
+                {
+                    "door": "D1",
+                    "description": "Hapishane yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15095"
+                },
+                {
+                    "door": "D5",
+                    "description": "Tam olarak göremiyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5001"
+                }
+            ]
+        },
+        {
+            "vnum": "15095",
+            "name": "Hapishane yolu",
+            "description": "Hapishane yolunda yürüyorsun. Adýmlarýna dikkat et, bir yanlýþýn\nsenin sonun hazýrlayabilir. O bu hapishaneyi ve içindekileri\nlanetledikten sonra tanrýlar onu terketmiþ.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Tam olarak göremiyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15099"
+                },
+                {
+                    "door": "D3",
+                    "description": "Hapishane yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15096"
+                },
+                {
+                    "door": "D1",
+                    "description": "Hapishane yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15094"
+                }
+            ]
+        },
+        {
+            "vnum": "15094",
+            "name": "Hapishane yolu",
+            "description": "Hapishane yolunda yürüyorsun. Adýmlarýna dikkat et, bir yanlýþýn\nsenin sonun hazýrlayabilir. Hikayeye göre o ruhlarýn gerçekliðine\nbir yol bulmuþ ve þeytani ölümsüzlerin yardýmýný almýþ.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Hapishane yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15095"
+                },
+                {
+                    "door": "D0",
+                    "description": "Tam olarak göremiyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15098"
+                },
+                {
+                    "door": "D1",
+                    "description": "Hapishane yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15093"
+                }
+            ]
+        },
+        {
+            "vnum": "15093",
+            "name": "Hapishane yolu",
+            "description": "Hapishane yolunda yürüyorsun. Adýmlarýna dikkat et, bir yanlýþýn\nsenin sonun hazýrlayabilir.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Hapishane yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15094"
+                },
+                {
+                    "door": "D1",
+                    "description": "Tam olarak göremiyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15091"
+                },
+                {
+                    "door": "D2",
+                    "description": "Hapishane yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15092"
+                }
+            ]
+        },
+        {
+            "vnum": "15092",
+            "name": "Hapishane yolu",
+            "description": "Hapishane yolunda yürüyorsun. Adýmlarýna dikkat et, bir yanlýþýn\nsenin sonun hazýrlayabilir.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Hapishane yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15093"
+                },
+                {
+                    "door": "D2",
+                    "description": "Tam olarak göremiyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3049"
+                },
+                {
+                    "door": "D1",
+                    "description": "Hapishane yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15091"
+                }
+            ]
+        },
+        {
+            "vnum": "15091",
+            "name": "Hapishane yolu",
+            "description": "Hapishane yolunda yürüyorsun. Adýmlarýna dikkat et, bir yanlýþýn\nsenin sonun hazýrlayabilir.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Hapishane yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15092"
+                },
+                {
+                    "door": "D1",
+                    "description": "Tam olarak göremiyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5205"
+                },
+                {
+                    "door": "D0",
+                    "description": "Hapishane yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15090"
+                }
+            ]
+        },
+        {
+            "vnum": "15090",
+            "name": "Hapishane yolu",
+            "description": "Hapishane yolunda yürüyorsun. Adýmlarýna dikkat et, bir yanlýþýn\nsenin sonun hazýrlayabilir.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Uzun koridorun giriþi.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15000"
+                },
+                {
+                    "door": "D2",
+                    "description": "Hapishane yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15091"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "15000",
+            "arg2": "1",
+            "arg3": "15040",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15003",
+            "arg2": "-1",
+            "arg3": "17"
+        },
+        {
+            "command": "E",
+            "arg1": "15007",
+            "arg2": "-1",
+            "arg3": "18"
+        },
+        {
+            "command": "M",
+            "arg1": "15003",
+            "arg2": "4",
+            "arg3": "15021",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "15003",
+            "arg2": "4",
+            "arg3": "15026",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15005",
+            "arg2": "-1",
+            "arg3": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "15003",
+            "arg2": "4",
+            "arg3": "15031",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15005",
+            "arg2": "-1",
+            "arg3": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "15003",
+            "arg2": "4",
+            "arg3": "15036",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "15002",
+            "arg2": "6",
+            "arg3": "15001",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "15006",
+            "arg2": "-1",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "15002",
+            "arg2": "6",
+            "arg3": "15004",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "15002",
+            "arg2": "6",
+            "arg3": "15009",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "15006",
+            "arg2": "-1",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "15002",
+            "arg2": "6",
+            "arg3": "15016",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "15001",
+            "arg2": "6",
+            "arg3": "15022",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "15001",
+            "arg2": "6",
+            "arg3": "15024",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "15001",
+            "arg2": "6",
+            "arg3": "15035",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "15001",
+            "arg2": "6",
+            "arg3": "15031",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "15010",
+            "arg2": "1",
+            "arg3": "15019",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15011",
+            "arg2": "-1",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "15009",
+            "arg2": "1",
+            "arg3": "15020",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15008",
+            "arg2": "-1",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "15010",
+            "arg2": "-1",
+            "arg3": "18"
+        },
+        {
+            "command": "R",
+            "arg1": "15099",
+            "arg2": "3"
+        },
+        {
+            "command": "R",
+            "arg1": "15098",
+            "arg2": "3"
+        },
+        {
+            "command": "R",
+            "arg1": "15097",
+            "arg2": "3"
+        },
+        {
+            "command": "R",
+            "arg1": "15096",
+            "arg2": "3"
+        },
+        {
+            "command": "R",
+            "arg1": "15095",
+            "arg2": "3"
+        },
+        {
+            "command": "R",
+            "arg1": "15094",
+            "arg2": "3"
+        },
+        {
+            "command": "R",
+            "arg1": "15093",
+            "arg2": "3"
+        },
+        {
+            "command": "R",
+            "arg1": "15092",
+            "arg2": "3"
+        },
+        {
+            "command": "R",
+            "arg1": "15091",
+            "arg2": "3"
+        },
+        {
+            "command": "R",
+            "arg1": "15090",
+            "arg2": "2"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15001"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15002"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15003"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15004"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15005"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15006"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15007"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15008"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15009"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15010"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15011"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15012"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15013"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15014"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15015"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15016"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15017"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15018"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15019"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15020"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15001"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15002"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15003"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15004"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15005"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15006"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15007"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15008"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15009"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15010"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15011"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15012"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15013"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15014"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15015"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15016"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15017"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15018"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15019"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15020"
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "15000",
+            "spec_fun": "spec_breath_any"
+        },
+        {
+            "vnum": "15009",
+            "spec_fun": "spec_breath_any"
+        }
+    ],
+    "olimits": [
+        {
+            "vnum": "15003",
+            "limit": "2"
+        },
+        {
+            "vnum": "15008",
+            "limit": "2"
+        },
+        {
+            "vnum": "15010",
+            "limit": "10"
+        },
+        {
+            "vnum": "15011",
+            "limit": "1"
+        }
+    ],
+    "omprogs": [
+        {
+            "command": "O",
+            "vnum": "15008",
+            "progtype": "fight_prog",
+            "progname": "fight_prog_ancient_shield"
+        },
+        {
+            "command": "O",
+            "vnum": "15008",
+            "progtype": "wear_prog",
+            "progname": "wear_prog_ancient_shield"
+        },
+        {
+            "command": "O",
+            "vnum": "15008",
+            "progtype": "remove_prog",
+            "progname": "remove_prog_ancient_shield"
+        },
+        {
+            "command": "O",
+            "vnum": "15011",
+            "progtype": "wear_prog",
+            "progname": "wear_prog_neckguard"
+        },
+        {
+            "command": "O",
+            "vnum": "15011",
+            "progtype": "remove_prog",
+            "progname": "remove_prog_neckguard"
+        }
+    ]
+}

@@ -1,0 +1,3319 @@
+#AREADATA
+Filename yeni_ofcol.are~
+Name Yeni Ofcol~
+Builder Hatchet~
+Translator Bilinmiyor~
+Language Yarý Türkçe~
+Lowlevel 5
+Highlevel 35
+Minvnum 600
+Maxvnum 699
+Path 4d 3k 2b 3k d 2k 2d k d 3k 2d~
+Yonelim_iyi 65
+Yonelim_yansiz 25
+Yonelim_kem 10
+END
+
+#FLAG
+AB
+
+#NEW_MOBILES
+#600
+þehir muhafýzý muhafýz~
+Ofcol þehir muhafýzý~
+Bir Ofcol þehir muhafýzý burada durmuþ, herhangi bir sorun olup olmadýðýna bakýyor.
+~
+This guard is surely a trained and skilled fighter.  He is fully armed and
+armored, and he uses his equipment with a practiced precision.  Luckily for
+you, this guard will only use his deadly skills for the good of the citizens of
+Ofcol.
+~
+human~
+ACT N 19
+#601
+mareþal diana~
+Mareþal Diana~
+Diana, Ofcol'un Mareþali, gururla burada duruyor.
+~
+Diana is a beautiful, powerfully built woman.  She wears platinum armor for
+three reasons.  The first is to show she is strong enough to withstand the
+weight.  The second is to show her rank of office.  The third is that platinum
+is the hardest metal she can find.  She is willing to defend Ofcol to her
+death.
+~
+human~
+ABQKe DHN 73
+#602
+derrick kaptan muhafýz þehir muhafýzý~
+Kaptan Derrick~
+Derrick, Muhafýzlarýn Kaptaný, burada muhafýzlarý disipline sokuyor.
+~
+Derrick is a very big man.  He has acquired this station, not by brains or
+charm, but by brute strength.  He had fought in three orc wars and is a
+descendent of a surviving cityguard of old Thalos.  He believes that everything
+has to be hard won to be kept, and that laxity is for the weak.
+~
+human~
+AGQ DHN 27
+#603
+jacklyn kaptan muhafýz þehir muhafýzý~
+Kaptan Jacklyn~
+Jacklyn, Hisar Muhafýzlarýnýn Kaptaný, burada muhafýzlara moral veriyor.
+~
+Jacklyn is pale and wiry, but then, so are most other witches.  The fact that
+Jacklyn is a mage and a warrior makes her the perfect captain of the citadel
+guards.  Jacklyn is very beautiful, but whether it is due to her pale softness
+or her magic, no one has ever found out.  She isn't very strong physically, but
+she need not be.
+~
+human~
+ABR DN 27
+#604
+jim demirci~
+Demirci Jim~
+Demirci Jim burada, en son yaptýðý metal iþlerini satýyor.
+~
+Jim is big and brawny, just like what you'd expect of a blacksmith.  He is
+smiling a very big smile, as he looks at your coins.  You wonder if he likes
+the metals or the value of the coins.
+~
+human~
+AB N 30
+#605
+sam~
+Sam~
+Sam burada, yaptýðý deri iþlerini satýyor.
+~
+Sam is a middle-aged workman.  He looks tired, but never too tired to get that
+last sale from you.  He grins at you slightly.
+~
+human~
+AB N 30
+#606
+bayan tracy~
+Bayan Tracy~
+Bayan Tracy burada, küçük ganimetler alýp satýyor.
+~
+Madam Tracy is a bit old, but not to the point of senility.  Besides, she knows
+the hard ways of this world and is ready for it.  She spends her time at the
+shop, trading little things (for a wee bit of profit).
+~
+human~
+AB N 20
+#607
+marty~
+Marty~
+Kasap dükkanýnýn sahibi Marty burada, sana kaliteli etlerinden satmaya çalýþýyor.
+~
+Marty is a big man.  He used to hunt the animals he sells, but now he lets his
+son, Jim, raise and slaughter the animals for him.  Marty still knows how to
+kill, though.
+~
+human~
+AB N 30
+#608
+elizabeth çiftçi~
+Çiftçi Elizabeth~
+Çiftçi Elizabeth burada, en son mahsullerini satýyor.
+~
+Elizabeth is a very happy woman.  She can't believe the nice weather here in
+Ofcol, and the great vegetables this land produces is unbelievable to her too.
+Farmer Elizabeth smiles at you nicely, but you bet she is doing that just to
+get a good price off of you!
+~
+human~
+AB N 20
+#609
+nine jenkins~
+Jenkins Nine~
+Jenkins Nine burada, imbiði çalýþtýrýyor.
+~
+Granny Jenkins is a feeble woman, but she knows her brew.  She might be very
+old, but she is still in charge of the still.  She cackles lightly at herself
+every time she tastes her whiskey, which is quite often!
+Granny Jenkins cackles again.
+~
+human~
+AB N 6
+#610
+jack~
+Jack~
+Jack burada hayvanlarý kesiyor.
+~
+Jack is the son of Marty, and you can see the family resemblance (especially in
+their shared affinity for slaughtering animals.)  Jack leers at you as you
+enter.  "Came by to watch, eh?", he asks.
+~
+human~
+ABFH 0 12
+#611
+Sarah çiftçi~
+Çiftçi Sara~
+Çiftçi Sara burada, inekleri saðýyor.
+~
+Farmer Sara is all covered with bits of straw and grime, but underneath all
+that, she doesn't look that bad.  She smiles at you demurely, and goes back to
+her work.
+~
+human~
+ABH 0 5
+#612
+tavuk piliç~
+bir piliç~
+Bir piliç burada, senin geliþin yüzünden cýyaklýyor.
+~
+The hen has yellow feathers and small wings.  It looks like a chicken, if
+you've ever seen one.
+~
+human~
+AHI 0 1
+#613
+inek~
+inek~
+Bir inek burada, otluyor.
+~
+The cow is here happily grazing.  It moos at you and goes back to grazing.
+~
+human~
+AI 0 5
+#614
+inek~
+inek~
+Bir inek burada, saðýlmayý bekliyor.
+~
+The cow is just standing here.  She moos at you and otherwise ignores you.
+~
+human~
+ABI 0 5
+#615
+genç at~
+genç at~
+Genç bir at burada, otluyor.
+~
+The horse whinnies at you, then runs around you a few times, then just goes
+back to grazing.
+~
+human~
+AFHI 0 6
+#616
+domuz~
+domuz~
+Bir domuz burada oynarken, hem kendisini hem seni pislik içinde býrakýyor.
+~
+The pig looks dirty.  It snorts and sniffs at you, then goes back to its slop.
+~
+pig~
+ABI 0 4
+#617
+þehirli adam erkek~
+Þehirli~
+Bir þehirli burada, sana gülümsüyor.
+~
+The citizen smiles at you.  He is having a great day, and he wishes the same
+for you.  He looks at you strangely, though, wondering why you are so armed and
+armored.
+~
+human~
+AH 0 5
+#618
+þehirli kadýn~
+þehirli~
+Bir þehirli burada, sana gülümsüyor.
+~
+The citizen smiles at you.  She is having a great day, and she wishes the same
+for you.  She looks at you strangely, though, wondering why you are so armed
+and armored.
+~
+human~
+AH 0 5
+#619
+çocuk oðlan erkek~
+çocuk~
+Bir oðlan çocuðu burada, ebelemece ve baþka çocuk oyunlarý oynuyor.
+~
+The little boy looks up at you and says, 'Hi.  Can I have a piece of candy?'
+He then smiles and runs away, remembering his game.
+~
+human~
+AH 0 3
+#620
+çocuk kýz~
+çocuk~
+Bir kýz çocuðu burada, körebe ve baþka çocuk oyunlarý oynuyor.
+~
+The little girl looks up at you and says, 'Hi.  Can I have a pretty little
+coin?'  She then smiles and runs away, remembering her game.
+~
+human~
+AH 0 3
+#621
+hizmetçi kadýn~
+hizmetçi~
+Bir hizmetçi burada, evi temizleyip bir sonraki öðünün yemeðini hazýrlýyor.
+~
+The maid startles at your presence.  'You are ruining my floors!  Wait till
+Master and Mistress come back.  You will get me in trouble!  Shoo!', she says.
+She hits you with her broom.
+~
+human~
+AH 0 5
+#622
+Nyles~
+Barmen Nyles~
+Barmen Nyles burada, sana iyi bir bira sunmak için bekliyor.
+~
+Nyles is a hefty guy, who looks like he's waiting for the next bar fight to
+join in.  He keeps an eye on you and his glasses, making sure you don't steal
+any.
+~
+human~
+AB 0 30
+#623
+þehir muhafýzý muhafýz~
+Ofcol þehir muhafýzý~
+Bir Ofcol þehir muhafýzý giriþi korusun diye buraya yerleþtirilmiþ.
+~
+This guard is surely a trained and skilled fighter.  He is fully armed and
+armored, and he uses his equipment with a practiced precision.  Luckily for
+you, this guard will only use his deadly skills for the good of the citizens of
+Ofcol.
+~
+human~
+ABT N 19
+#624
+ozan~
+bir ozan~
+Bir ozan burada, Ofcol'un þanlý zaferleriyle ilgili bir þarký söylüyor.
+~
+After years of traveling around the world, this bard has decided to stay in the
+peaceful city of Ofcol, and to sing of its unmatched glories.  He smiles at
+you, hinting toward a tip from you in ever a subtle way.
+~
+human~
+AB N 13
+#625
+uþak~
+bir uþak~
+Bir uþak burada, Altýn Hisar'ýn Bekçisine kimi ihtiyaçlarýný taþýyor.
+~
+The servant smiles good-naturedly at you, then goes on his duties.
+~
+human~
+AG N 6
+#626
+bey~
+bir bey~
+Bir bey burada, aceleyle bir iþten diðerine koþuþturuyor.
+~
+This young man smiles at you, but is too busy to chat.
+~
+human~
+AG N 7
+#627
+ulak~
+bir ulak~
+Bir ulak burada, þövalyesine bir mesaj yolluyor.
+~
+The page smiles for you, asking if he can do you a favor too.
+~
+human~
+AG N 5
+#628
+rahibe~
+Ofcol'un Rahibesi~
+Ofcol'un Rahibesi burada, neþeli gülümsemesiyle seni kutsuyor.
+~
+The Priestess of Ofcol is an old woman, perfectly at peace with herself and
+with the world.  She devotes all her time to help teach you the ways of her
+god, Bahamut.  The dragon symbol around her neck looks almost alive.
+~
+human~
+ABKe HN 30
+#629
+zimamdar Jerrold~
+Zimamdar Jerrold~
+Hisar zimamdarý Jerrold, burada etraftaki insanlarýn hareketlerini yönlendiriyor.
+~
+He smiles at you, with the enthusiasm of a little kid.  "What're you doing just
+STANDING here, young man?  Go help that other squire there!", he yells.  He
+turns to you and with a consipatory tone, whispers, "Kids!"
+~
+human~
+AGT BHN 20
+#630
+ejderhalordu ejderha lordu~
+bir Ejderhalordu~
+Ejderha pullarý kuþanmýþ bir þövalye burada duruyor.
+~
+This person looks almost like a dragon itself.  His golden scales gleam with
+power.  He smiles at you with a vicious grin.  You're happy that he doesn't
+look upset at your presence.
+~
+human~
+AB BHN 29
+#631
+ejderha altýn~
+Kadim Altýn Ejderha~
+Parýldayan yaþlý bir ejderha sana uykulu gözlerle bakýyor.
+~
+This dragon's head is taller than you.  He is annoyed at your disturbance, but
+realizing that you're no danger to him, he ignores you.  He waves to one of
+his attendants to escort you away.
+~
+dragon~
+ABC BHN 48
+#632
+refakatçi~
+bir ejderha refakatçisi~
+Altýndan kýyafetlere bürünmüþ biri, Hisar'ýn Bekçisine refakat ediyor.
+~
+This elder servant to the Gold Dragon is very loyal to him, willing to risk
+his life for his liege.
+~
+human~
+ABR BN 21
+#633
+ejderhaþövalyesi ejderha þövalyesi~
+bir Ejderhaþövalyesi~
+Bir altýn ejderhanýn pullarýný kuþanmýþ biri, burada durmuþ Altýn Hisar'ý koruyor.
+~
+This person looks like a dragon itself.  His golden scales gleam with power.
+He smiles at you, showing very sharp teeth.
+~
+human~
+AG BN 21
+#634
+þehir muhafýzý muhafýz~
+Ofcol þehir muhafýzý~
+Bir Ofcol þehir muhafýzý giriþi korusun diye buraya yerleþtirilmiþ.
+~
+This guard is surely a trained and skilled fighter.  He is fully armed and
+armored, and he uses his equipment with a practiced precision.  Luckily for
+you, this guard will only use his deadly skills for the good of the citizens of
+Ofcol.
+~
+human~
+ABT N 19
+#635
+old man~
+the Old Man~
+An Old man is standing here, informing you.
+~
+He is very old. But he still waits for the enterance.
+~
+human~
+ABCGTe N 81
+#0
+
+#OBJECTS
+#600
+balta~
+bir balta~
+Bir balta burada yerde duruyor.~
+iron~
+weapon 0 AN
+axe 1 8 chop 0
+4 100 420 P
+E
+handaxe hand axe~
+You see a finely made axe.  Iron, with a nice wooden shaft, this axe can
+withstand years of use.
+~
+#601
+kasap býçaðý býçak~
+bir kasap býçaðý~
+Keskin bir kasap býçaðý hemen þuracýkta yerde duruyor!~
+iron~
+weapon 0 AN
+dagger 2 5 chop 0
+8 50 530 P
+A
+19 1
+E
+meat cleaver~
+This meat cleaver is made of good steel.
+~
+#602
+parça et biftek~
+bir parça biftek~
+Bir parça biftek burada yerde duruyor.~
+meat~
+food 0 A
+24 24 0 0 0
+0 100 50 P
+#603
+parça et domuz eti~
+bir parça domuz eti~
+Bir parça domuz eti burada yerde duruyor.~
+meat~
+food 0 A
+23 23 0 0 0
+0 100 42 P
+#604
+parça et at eti~
+bir parça at eti~
+Bir parça at eti burada yerde duruyor.~
+meat~
+food 0 A
+30 30 0 0 0
+0 120 21 P
+#605
+et tavuk~
+ütülmüþ bir tavuk~
+Ütülmüþ bir tavuk burada yerde duruyor.~
+meat~
+food 0 A
+16 16 0 0 0
+0 50 10 P
+#606
+zümrüt yüzük~
+bir zümrüt yüzük~
+Zümrüt bir yüzük yerde tozlanmakla meþgul.~
+amethyst~
+jewelry G AB
+0 0 0 0 0
+0 10 1000 P
+#607
+cam biblo~
+camdan bir biblo~
+Camdan bir biblo yerde tozlanmakla meþgul.~
+glass~
+gem 0 AO
+0 0 0 0 0
+0 10 150 P
+A
+20 -1
+#608
+altýn kolye~
+altýn bir kolye~
+Altýn bir kolye yerde tozlanmakla meþgul.~
+gold~
+jewelry 0 AC
+0 0 0 0 0
+0 20 500 P
+A
+4 -1
+#609
+kabak~
+bir baþ kabak~
+Bir miktar taze kabak burada duruyor. Hazýr tazeyken al istersen!~
+food~
+food 0 A
+12 12 0 0 0
+0 20 2 P
+#610
+marul~
+biraz marul~
+Bir miktar taze marul burada duruyor. Hazýr tazeyken al istersen!~
+plant_organism~
+food 0 A
+12 12 0 0 0
+0 20 2 P
+#611
+süt þiþe~
+bir þiþe süt~
+Rafta duran cam þiþedeki süt belli ki henüz saðýlmýþ.~
+glass~
+drink 0 A
+20 20 'milk' 0 0
+0 50 3 P
+#612
+apple~
+an apple~
+An apple is on the ground.~
+food~
+food 0 A
+8 8 0 0 0
+0 10 1 P
+#613
+mýsýr~
+bir koçan mýsýr~
+Bir koçan dolusu mýsýr yerde duruyor.~
+food~
+food 0 A
+8 8 0 0 0
+0 10 3 P
+#614
+kuru ot yýðýný~
+bir kuru ot yýðýný~
+Büyük bir kuru ot yýðýný burada duruyor.~
+wood~
+trash 0 A
+0 0 0 0 0
+0 200 0 P
+#615
+yaba~
+bir yaba~
+Bir yaba yerde duruyor.~
+iron~
+weapon 0 AN
+staff 3 3 stab 0
+7 100 122 P
+#616
+yelek~
+bir deri yelek~
+Deri bir yelek yerde duruyor.~
+leather~
+armor 0 AD
+1 2 2 0 0
+0 100 270 P
+#617
+kolluklar~
+bir takým deri kolluk~
+Bir takým deri kolluk yerde duruyor.~
+leather~
+armor 0 AI
+1 2 2 0 0
+0 50 136 P
+#618
+bacaklýklar~
+bir takým deri bacaklýk~
+Bir takým deri bacaklýk yerde duruyor.~
+leather~
+armor 0 AF
+1 2 2 0 0
+0 50 136 P
+#619
+botlar~
+bir takým deri bot~
+Bir takým deri bot yerde duruyor.~
+leather~
+armor 0 AG
+1 2 2 0 0
+0 50 136 P
+#620
+mühür yüzüðü yüzük~
+bir Ofcol mühür yüzüðü~
+Parlak altýn bir yüzük tozun içinde þans eseri gözüne çarpýyor.~
+gold~
+jewelry G AB
+0 0 0 0 0
+10 10 730 P
+A
+17 -2
+A
+13 5
+A
+20 -1
+#621
+zýrh pirinç~
+pirinç zýrh~
+Pirinç bir zýrh burada duvarýn önünde duruyor.~
+brass~
+armor G AD
+6 5 6 1 0
+16 100 2400 P
+A
+13 10
+A
+20 -1
+#622
+miðfer pirinç~
+pirinç bir miðfer~
+Pirinçten bir miðfer burada duvarýn önünde duruyor.~
+brass~
+armor G AE
+6 5 6 1 0
+16 100 1280 P
+A
+13 5
+A
+20 -1
+#623
+bacaklýklar pirinç~
+pirinç bacaklýklar~
+Pirinç bacaklýklar burada duvarýn önünde duruyor.~
+brass~
+armor G AF
+6 5 6 1 0
+16 100 1280 P
+A
+13 5
+A
+20 -1
+#624
+botlar pirinç~
+pirinç botlar~
+Pirinç botlar burada duvarýn önünde duruyor.~
+brass~
+armor G AG
+6 5 6 1 0
+16 100 1280 P
+A
+13 5
+A
+20 -1
+#625
+eldivenler pirinç~
+pirinç eldivenler~
+Bir çift pirinç eldiven burada duvarýn önünde duruyor.~
+brass~
+armor G AH
+6 5 6 1 0
+16 100 1280 P
+A
+13 5
+A
+20 -1
+#626
+kolluklar pirinç~
+pirinç kolluklar~
+Bir çift pirinç kolluk burada duvarýn önünde duruyor.~
+brass~
+armor G AI
+6 5 6 1 0
+16 100 1280 P
+A
+13 5
+A
+20 -1
+#627
+kalkan pirinç~
+pirinç bir kalkan~
+Büyük pirinçten bir kalkan burada duvarýn önünde duruyor.~
+brass~
+armor G AJ
+6 5 6 2 0
+16 200 1850 P
+A
+13 5
+A
+20 -1
+#628
+kolan pirinç~
+pirinç bir kolan~
+Pirinç bir kolan burada duvarýn önünde duruyor.~
+brass~
+armor G AL
+6 5 6 1 0
+16 100 1280 P
+A
+13 5
+A
+20 -1
+#629
+bileklik pirinç~
+pirinç bir bileklik~
+Pirinç bir bileklik burada duvarýn önünde duruyor.~
+brass~
+armor G AM
+4 5 6 1 0
+12 100 1040 P
+A
+13 5
+A
+20 -1
+#630
+çiftaðýzlý kýlýç~
+bir çiftaðýzlý kýlýç~
+ÇOK BÜYÜK bir kýlýç burada duvarýn önünde duruyor.~
+iron~
+weapon G AN
+sword 4 6 cleave F
+19 160 3100 P
+A
+19 4
+A
+18 -2
+#631
+zýrh gümüþ~
+gümüþ zýrh~
+Gümüþten örülmüþ bir çeþit zincirli tabaka yerde duruyor.~
+silver~
+armor GK AD
+8 8 8 2 0
+25 200 5000 P
+A
+1 1
+A
+12 10
+#632
+miðfer gümüþ~
+gümüþ bir miðfer~
+Parlak bir miðfer yerde duruyor.~
+silver~
+armor GK AE
+8 8 8 2 0
+25 200 2900 P
+A
+2 1
+A
+12 5
+#633
+bacaklýklar gümüþ~
+gümüþ bacaklýklar~
+Bir takým parýldayan bacaklýk yerde duruyor.~
+silver~
+armor GK AF
+8 8 8 2 0
+25 200 2900 P
+A
+3 1
+A
+12 5
+#634
+botlar gümüþ~
+gümüþ botlar~
+Bir takým parýldayan bot yerde duruyor.~
+silver~
+armor GK AG
+8 8 8 2 0
+25 200 2900 P
+A
+4 1
+A
+12 5
+#635
+eldivenler gümüþ~
+gümüþ eldivenler~
+Bir çift parýldayan eldiven yerde duruyor.~
+silver~
+armor GK AH
+8 8 8 2 0
+25 200 2900 P
+A
+5 1
+A
+12 5
+#636
+kolluklar gümüþ~
+gümüþ kolluklar~
+Bir takým parýldayan kolluk yerde duruyor.~
+silver~
+armor GK AI
+8 8 8 2 0
+25 200 2400 P
+A
+18 1
+A
+12 5
+#637
+kalkan gümüþ~
+gümüþ kalkan~
+Parlak bir kalkan yerde duruyor.~
+silver~
+armor GK AJ
+8 8 8 3 0
+25 240 4200 P
+A
+17 -3
+A
+12 5
+#638
+kolan gümüþ~
+gümüþ kolan~
+Parlak bir kolan yerde duruyor.~
+silver~
+armor GK AL
+8 8 8 2 0
+25 200 2400 P
+A
+19 1
+A
+12 5
+#639
+zýrh platin~
+platin zýrh~
+Gümüþi bir metal yýðýný yerde duruyor.~
+platinum~
+armor GK AD
+19 19 19 13 0
+70 500 9200 P
+A
+5 2
+A
+13 15
+A
+19 5
+#640
+miðfer platin~
+platin miðfer~
+Gümüþi bir miðfer yerde duruyor.~
+platinum~
+armor GK AE
+19 19 19 13 0
+70 300 6300 P
+A
+4 2
+A
+12 100
+A
+19 5
+#641
+bacaklýklar platin~
+platin bacaklýklar~
+Bir takým gümüþi bacaklýk yerde duruyor.~
+platinum~
+armor GK AF
+9 9 9 3 0
+70 400 6300 P
+A
+2 2
+A
+13 100
+A
+19 5
+#642
+botlar platin~
+platin botlar~
+Bir takým gümüþi bot yerde duruyor.~
+platinum~
+armor GK AG
+19 19 19 13 0
+72 400 4100 P
+A
+14 250
+A
+13 100
+A
+19 5
+#643
+eldivenler platin~
+platin eldivenler~
+Bir çift gümüþi eldiven yerde duruyor.~
+platinum~
+armor GK AH
+19 19 19 13 0
+71 400 4300 P
+A
+18 5
+A
+13 100
+A
+19 5
+#644
+kolluklar platin~
+platin kolluklar~
+Bir çift gümüþi kolluk yerde duruyor.~
+platinum~
+armor GK AI
+19 19 19 13 0
+70 400 6300 P
+A
+1 2
+A
+13 100
+A
+19 5
+#645
+kalkan çivili platin~
+çivili platin kalkan~
+Sivri çivileri olan, gümüþi bir kalkan yerde duruyor.~
+platinum~
+armor GK AJ
+19 19 19 15 0
+71 400 6000 P
+A
+19 5
+A
+13 100
+#646
+kolan platin~
+platin kolan~
+Gümüþi bir kolan yerde duruyor.~
+platinum~
+armor GK AL
+19 19 19 13 0
+71 400 4000 P
+A
+20 -10
+A
+13 100
+A
+19 5
+#647
+öcalýcý kutlu kýlýç~
+kutlu Öcalýcý~
+Parýldayan gümüþi kýlýç kendisine bir efendi bulmak için buralarda süzülüyor.~
+platinum~
+weapon GK AN
+sword 17 5 slice 0
+72 250 5700 P
+A
+19 15
+A
+18 3
+#648
+sek viski~
+sek bir viski~
+Sek bir viski masada duruyor.~
+glass~
+drink 0 A
+2 2 'whisky' 0 0
+0 10 12 P
+#649
+ale çeyrek fýçý~
+çeyrek fýçý bira~
+Çeyrek fýçý bira masada duruyor.~
+clay~
+drink 0 A
+32 32 'ale' 0 0
+0 20 10 P
+#650
+çeyrek fýçý tatlý bira~
+çeyrek fýçý tatlý bira~
+Çeyrek fýçý tatlý bira masada duruyor.~
+clay~
+drink 0 A
+32 32 'dark ale' 0 0
+0 20 18 P
+#651
+anahtar hisar~
+hisar anahtarý~
+Bir anahtar yerde duruyor.~
+iron~
+key 0 A
+0 0 0 0 0
+0 10 0 P
+#652
+sembol kutlu~
+Bahamut'un kutlu sembolü~
+Çok parlak bir sembol yerde duruyor.~
+ivory~
+jewelry GIKL AC
+0 0 0 0 0
+17 50 3700 P
+A
+4 2
+A
+12 10
+A
+17 -3
+#653
+inleten kargý~
+Ýnleten~
+Aðýr bir kargý hasar vermeye hazýr bir halde duvarýn önünde duruyor.~
+iron~
+weapon GK AN
+polearm 4 7 thrust F
+24 200 1460 P
+A
+19 -1
+A
+18 3
+#654
+giysi ejderha pulundan altýn~
+altýn ejderha pulundan bir giysi~
+Altýn ejderha pulundan bir giysi yerde duruyor!~
+gold~
+armor GK AD
+7 7 7 3 0
+24 250 6200 P
+A
+18 2
+A
+17 -5
+#655
+ejderha miðferi altýn~
+altýn bir ejderha miðferi~
+Altýn bir ejderha miðferi yerde duruyor!~
+gold~
+armor GK AE
+7 7 7 3 0
+21 100 2800 P
+A
+18 1
+A
+17 -3
+#656
+bacaklýklar altýn~
+altýn ejderha pulundan bacaklýklar~
+Bir takým altýn ejderha pulundan bacaklýk yerde duruyor!~
+gold~
+armor GK AF
+7 7 7 3 0
+21 100 2800 P
+A
+18 1
+A
+17 -3
+#657
+botlar altýn~
+altýn ejderha pulundan botlar~
+Bir takým altýn ejderha pulundan bot yerde duruyor!~
+gold~
+armor GK AG
+7 7 7 3 0
+21 100 2800 P
+A
+18 1
+A
+17 -3
+#658
+eldivenler altýn~
+altýn ejderha pulundan eldivenler~
+Bir takým altýn ejderha pulundan eldiven yerde duruyor!~
+gold~
+armor GK AH
+7 7 7 3 0
+21 100 2800 P
+A
+18 1
+A
+17 -3
+#659
+kolluklar altýn~
+altýn ejderha pulundan kolluklar~
+Bir takým altýn ejderha pulundan kolluk yerde duruyor!~
+gold~
+armor GK AI
+7 7 7 3 0
+21 100 2800 P
+A
+18 1
+A
+17 -3
+#660
+kalkan altýn~
+altýn ejderha pulundan kalkan~
+Altýn ejderha pulundan bir kalkan yerde duruyor!~
+gold~
+armor GK AJ
+7 7 7 4 0
+21 200 3700 P
+A
+18 1
+A
+17 -3
+#661
+kolan altýn~
+altýn ejderha pulundan bir kolan~
+Altýn ejderha pulundan bir kolan yerde duruyor!~
+gold~
+armor GK AL
+7 7 7 3 0
+21 100 2800 P
+A
+18 1
+A
+17 -3
+#662
+pençe altýn~
+altýn pençe~
+Küçük altýn bir pençe yerde duruyor.~
+gold~
+weapon GK AN
+exotic 3 9 claw 0
+21 100 2600 P
+A
+19 2
+#663
+orb ejderha orbu ~
+Altýn Ejderha Orbu~
+Çok büyük bir inciye benzeyen küre odanýn tam ortasýnda duruyor.~
+gold~
+staff GKL AO
+14 4 4 'heal' 0
+17 300 9000 P
+A
+4 2
+A
+3 1
+#664
+cüppe altýn~
+altýn bir cüppe~
+Altýn bir cüppe yerde duruyor.~
+cloth~
+armor GK AK
+6 6 5 2 0
+17 100 3800 P
+A
+3 2
+#665
+ev anahtarý~
+bir ev anahtarý~
+Bir ev anahtarý yerde duruyor.~
+silver~
+key 0 A
+0 0 0 0 0
+0 10 0 P
+#666
+süpürge~
+bir süpürge~
+Bir süpürge burada duvarýn önünde duruyor.~
+wood~
+weapon 0 AN
+exotic 2 3 beating 0
+1 80 760 P
+A
+19 -3
+A
+18 3
+#667
+sandýk~
+bir sandýk~
+Bir sandýk burada yerde duruyor.~
+wood~
+container 0 A
+100 0 0 10 100
+0 100 100 P
+#668
+pençe altýn~
+Altýn Pençe~
+Büyük altýn bir pençe yerde duruyor.~
+gold~
+weapon GK AN
+exotic 4 10 claw 0
+39 200 7200 P
+A
+19 5
+#669
+pençe altýn~
+altýn pençe~
+Büyük altýn bir pençe yerde duruyor.~
+gold~
+weapon GK AN
+exotic 3 11 claw 0
+28 150 4100 P
+A
+19 3
+#670
+pit~
+the donation pit~
+A pit for sacrifices is in front of the altar.~
+none~
+container O 0
+10000 0 0 1000 100
+0 0 0 P
+E
+pit~
+This is where you put money and items to help Doz expand this shrine,
+~
+#0
+
+#ROOMS
+#600
+Ninenin Ýmbik Odasý~
+You are in Granny Jenkins' still room.  The smell of whiskey is heady, and
+the bottles of it on the floor make your mouth water and your mind swirl.  You
+also see a very large still.  So THIS is why there are so many grain fields!
+The exit is to the east.
+~
+0 D 0
+D1
+You see the storage shed.
+~
+door~
+1 -1 616
+S
+#601
+Büyük Kesiþme~
+You are in the big intersection between Raff Way and Impy Way.  Crowds
+of people walk past you as they go on their daily tasks.  Raff Way continues
+east and west, and Impy Way runs north and south.
+~
+0 0 1
+D0
+Impy Way continues north.
+~
+~
+0 0 625
+D1
+Raff Way continues east.
+~
+~
+0 0 666
+D2
+Impy Way continues south.
+~
+~
+0 0 602
+D3
+Raff Way continues west.
+~
+~
+0 0 5553
+S
+#602
+Elit Yolu~
+You are on Impy Way.  You can see a leather shop east and a blacksmith
+west.  To the north you see a big intersection, and Impy Way continues south.
+~
+0 0 1
+D0
+You see the big intersection.
+~
+~
+0 0 601
+D1
+You see the leather shop.
+~
+~
+0 0 604
+D2
+Impy Way continues south.
+~
+~
+0 0 605
+D3
+You see the blacksmith.
+~
+~
+0 0 603
+S
+#603
+Demirci~
+You are in a black and smelly room.  Pieces of metal are strewn all over
+the floor, and a wave of heat from a big furnace hits you.  An anvil sits on
+one side of the room, and on the other side is a workbench.  The exit is east.
+~
+0 D 0
+D1
+You see Impy Way.
+~
+~
+0 0 602
+S
+#604
+Deri Dükkaný~
+You are in a brown and smelly room.  Pieces of leather are strewn all over
+the floor.  The smell of burnt hide assaults your nose.  You can tell by the
+looks that the tanning is done VERY CLOSE to here!   A table is near the
+entrance.  The exit is west.
+~
+0 D 0
+D3
+You see Impy Way.
+~
+~
+0 0 602
+S
+#605
+Elit Yolu~
+You are on Impy Way.  To the east is a meat store, and to the west is a
+pawn shop.  Impy Way continues north and south.  People are rushing around you
+to go to these stores.
+~
+0 0 1
+D0
+Impy Way continues North.
+~
+~
+0 0 602
+D1
+You see the Meat Store.
+~
+~
+0 0 607
+D2
+Impy Way continues south.
+~
+~
+0 0 608
+D3
+You see the Pawn Shop.
+~
+~
+0 0 606
+S
+#606
+Rehin Dükkaný~
+You are in a little shop filled with a lot of knick knacks and semi-
+valuable goods.  There is a display case full of little treasures that you are
+sure that you or any other little kid would like to touch!  The exit is east.
+~
+0 D 0
+D1
+You see Impy Way.
+~
+~
+0 0 605
+S
+#607
+Kasap~
+You are in a meat store.  Hanging on hooks are meats of many kinds of
+animals.  In the background, you can hear the sound of blade against flesh.
+It smells like meat here (which is not a good smell).  The exit is west.
+~
+0 D 0
+D3
+You see Impy Way.
+~
+~
+0 0 605
+S
+#608
+Elit Yolu~
+You are on Impy Way.  To the east is Farmer's Market, and to the west is
+Nyles' House of Ale.  Impy Way runs north and ends south of here.  You can hear
+the sound of housewives gossiping at the market.
+~
+0 0 1
+D0
+Impy Way continues north.
+~
+~
+0 0 605
+D1
+You see the Farmer's Market.
+~
+~
+0 0 610
+D2
+You see the end of Impy Way.
+~
+~
+0 0 611
+D3
+You see Nyles' House of Ale.
+~
+~
+0 0 609
+S
+#609
+Nyles'ýn Bira Evi~
+This is a very busy bar, with everyone holding homemade bottles of
+ale.  You see even the more gentile persons here, laughing along with
+Nyles, who offers you a quart of ale too.
+~
+0 D 0
+D1
+You see Impy Way.
+~
+~
+0 0 608
+S
+#610
+Çiftçi Pazarý~
+You see many carts filled with fruits and vegetables.  Many farmers are
+all trying to sell you their produce, each saying their's is better.  The exit
+is west.
+~
+0 D 0
+D3
+You see Impy Way.
+~
+~
+0 0 608
+S
+#611
+Elit Yolunun Sonu~
+You are at the end of Impy and of the city part of Ofcol.  To the east is
+a dirt road leading toward the farm animals.  West from here are fields.  Impy
+Way continues north.
+~
+0 0 1
+D0
+Impy Way continues north.
+~
+~
+0 0 608
+D1
+You see the dirt road.
+~
+~
+0 0 668
+D3
+You see the fields.
+~
+~
+0 0 612
+S
+#612
+Tarlalar~
+You are in a corn field.  You can't see far, since the corn stalks are
+taller than you are.  You remember that the end of Impy Way is east of here,
+and you think you see a building to the north.  The field continues south and
+west.
+~
+0 0 2
+D0
+You think you see a building north of here.
+~
+~
+0 0 616
+D1
+You remember that the end of Impy Way is east.
+~
+~
+0 0 611
+D2
+You can make a path to the fields south.
+~
+~
+0 0 613
+D3
+You can make a path to the fields west.
+~
+~
+0 0 615
+S
+#613
+Tarlalar~
+You are among fruit trees in a field.  You see many apple and orange
+trees.  You can make out the corn fields north and some vegetable patches west.
+The sight of the fruit makes your mouth water.
+~
+0 0 2
+D0
+You see the corn fields.
+~
+~
+0 0 612
+D3
+You see the vegetable fields.
+~
+~
+0 0 614
+S
+#614
+Tarlalar~
+You are among the vegetable fields.  You see many cabbage and lettuce
+patches, along with tomato bushes and potato plants.  To the east are some
+fruit trees, and north are some wheat fields.
+~
+0 0 2
+D0
+You see the wheat fields.
+~
+~
+0 0 615
+D1
+You see the fruit trees.
+~
+~
+0 0 613
+S
+#615
+Tarlalar~
+You are among the wheat fields.  The gentle caress of the wheat and the
+cool shadow from the tall stalks and scarecrow lulls you to sleep and dream
+of a little girl and little dog from a faraway place.  To the east are the corn
+stalks, and south of you are the vegetable patches.
+~
+0 0 2
+D1
+You see the corn fields.
+~
+~
+0 0 612
+D2
+You see the vegetable patches.
+~
+~
+0 0 614
+S
+#616
+Baraka~
+You are in the storage shed.  Bales of wheat, corn and hay are piled
+against the wall, and some vegetables are in carts.  You see a small door
+to the west.  The main exit is south.
+~
+0 D 0
+D2
+You see the corn fields.
+~
+~
+0 0 612
+D3
+You see the door.
+~
+door~
+1 -1 600
+S
+#617
+Mezbaha~
+You are in the slaughterhouse, where all the animals are slaughtered so
+that they can be sold or their skins be tanned.  The scream of dying animals
+makes your stomach churn.  The exit is to the west.
+~
+0 D 0
+D3
+You see the dirt road.
+~
+~
+0 0 668
+S
+#618
+Toprak Yol~
+You are on a dirt road.  To the east is a barn, and you see a big chicken
+coop south of you.  The dirt road continues north and west.
+~
+0 0 2
+D0
+You see the dirt road.
+~
+~
+0 0 668
+D1
+You see the barn.
+~
+~
+0 0 620
+D2
+You see the chicken coop.
+~
+coop~
+1 -1 619
+D3
+You see the dirt road.
+~
+~
+0 0 621
+S
+#619
+Tavuk Kümesi~
+You are in the chicken coop.  The smell of chickens and chicken droppings
+makes you gasp.  The exit is north.
+~
+0 D 0
+D0
+You can sense the fresh air.
+~
+~
+1 -1 618
+S
+#620
+Ahýr~
+You are in a barn.  There are some cows here, munching on mounds of hay.
+Milk is milked and bottled here.  You see the exit west.
+~
+0 D 0
+D3
+You see the dirt road.
+~
+~
+0 0 618
+S
+#621
+Toprak Yol~
+You are on a dirt road.  To the north and south, you see some grass
+fields.  There is a pigsty west, and the dirt road continues east.
+~
+0 0 2
+D0
+You see some grass fields.
+~
+~
+0 0 622
+D1
+You see the dirt road.
+~
+~
+0 0 618
+D2
+You see some grass fields.
+~
+~
+0 0 623
+D3
+You see the pigsty.
+~
+~
+0 0 624
+S
+#622
+Çimlik Arazi~
+You are in a grass field.  Fences block the way north, east, and west.
+The dirt road is to the south.
+~
+0 0 2
+D2
+You see the dirt road.
+~
+~
+0 0 621
+S
+#623
+Çimlik Arazi~
+You are in a grass field.  Fences block the way south, east, and west.
+The dirt road is to the north.
+~
+0 0 2
+D0
+You see the dirt road.
+~
+~
+0 0 621
+S
+#624
+Domuz Aðýlý~
+For some reason, you are in a pig sty.  You wonder why you are standing in
+muck.  To realize your senses and notice the dirt road is to the east.
+~
+0 0 2
+D1
+You see the dry dirt road.
+~
+~
+0 0 621
+S
+#625
+Elit Yolu~
+You are on Impy Way.  East and west of you are big houses.  Impy Way
+continues north and reaches a big intersection south.  Children are running to
+from home to home.
+~
+0 0 1
+D0
+Impy Way continues north.
+~
+~
+0 0 632
+D1
+You see a big house.
+~
+door~
+1 665 626
+D2
+You see a big intersection.
+~
+~
+0 0 601
+D3
+You see a big house.
+~
+door~
+1 665 629
+S
+#626
+Büyük Ev~
+You are in a big house.  Evidently, the owners of this house are richer
+than the average citizen, since there is more than one room to this house.  A
+door leads to the kitchen east, and a bedroom is upstairs.  The exit is to the
+west.
+~
+0 D 0
+D1
+You see the kitchen.
+~
+~
+0 0 628
+D3
+You see Impy Way.
+~
+door~
+1 665 625
+D4
+You see the bedroom.
+~
+~
+0 0 627
+S
+#627
+Yatakodasý~
+You are in the bedroom.  There isn't much of interest except for a bed and
+a closet.  The stairs lead back down.
+~
+0 D 0
+D5
+You see the main room of the house.
+~
+~
+0 0 626
+S
+#628
+Mutfak~
+You are in a kitchen.  There isn't much of interest here.  The main room
+is west of here.
+~
+0 D 0
+D3
+You see the main room of the house.
+~
+~
+0 0 626
+S
+#629
+Büyük Ev~
+You are in a big house.  Evidently, the owners of this house are richer
+than the average citizen, since there is more than one room to this house.  A
+door leads to the kitchen west, and a bedroom is upstairs.  The exit is to the
+east.
+~
+0 D 0
+D1
+You see Impy Way.
+~
+door~
+1 665 625
+D3
+You see the kitchen.
+~
+~
+0 0 631
+D4
+You see the bedroom.
+~
+~
+0 0 630
+S
+#630
+Yatakodasý~
+You are in the bedroom.  There isn't much of interest except for a bed and
+a closet.  The stairs lead back down.
+~
+0 D 0
+D5
+You see the main room of the house.
+~
+~
+0 0 629
+S
+#631
+Mutfak~
+You are in a kitchen.  There isn't much of interest here.  The main room
+is east of here.
+~
+0 D 0
+D1
+You see the main room of the house.
+~
+~
+0 0 629
+S
+#632
+Elit Yolu~
+You are on Impy Way.  Houses are to the east and west of here.  Impy Way
+continues north and south.  There are many people walking along the streets.
+~
+0 0 1
+D0
+Impy Way continues north.
+~
+~
+0 0 637
+D1
+You see a house.
+~
+door~
+1 -1 633
+D2
+Impy Way continues south.
+~
+~
+0 0 625
+D3
+You see a house.
+~
+door~
+1 -1 635
+S
+#633
+Ev~
+You are in a house.  The living room and kitchen are all bundled into
+this room.  There is a bedroom south of here.  The exit is west.
+~
+0 D 0
+D2
+You see the bedroom.
+~
+~
+0 0 634
+D3
+You see Impy Way.
+~
+door~
+1 -1 632
+S
+#634
+Yatakodasý~
+You are in a bedroom.  There isn't much of interest here except for a bed
+and a dresser.  The main room of the house is north of here.
+~
+0 D 0
+D0
+You see the main room of the house.
+~
+~
+0 0 633
+S
+#635
+Ev~
+You are in a house.  The living room and kitchen are all bundled into
+this room.  There is a bedroom south of here.  The exit is east.
+~
+0 D 0
+D1
+You see Impy Way.
+~
+door~
+1 -1 632
+D2
+You see the bedroom.
+~
+~
+0 0 636
+S
+#636
+Yatakodasý~
+You are in a bedroom.  There isn't much of interest here except for a bed
+and a dresser.  The main room of the house is north of here.
+~
+0 D 0
+D0
+You see the main room of the house.
+~
+~
+0 0 635
+S
+#637
+Elit Yolu~
+You are on Impy Way.  Houses are to the east and west of here.  Impy Way
+continues south.  To the north is a big intersection.  There are many people
+walking along the streets.
+~
+0 0 1
+D0
+You see a big intersection.
+~
+~
+0 0 642
+D1
+You see a house.
+~
+door~
+1 -1 638
+D2
+Impy Way continues south.
+~
+~
+0 0 632
+D3
+You see a house.
+~
+door~
+1 -1 640
+S
+#638
+Ev~
+You are in a house.  The living room and kitchen are all bundled into
+this room.  There is a bedroom south of here.  The exit is west.
+~
+0 D 0
+D2
+You see the bedroom.
+~
+~
+0 0 639
+D3
+You see Impy Way.
+~
+door~
+1 -1 637
+S
+#639
+Yatakodasý~
+You are in a bedroom.  There isn't much of interest here except for a bed
+and a dresser.  The main room of the house is north of here.
+~
+0 D 0
+D0
+You see the main room of the house.
+~
+~
+0 0 638
+S
+#640
+Ev~
+You are in a house.  The living room and kitchen are all bundled into
+this room.  There is a bedroom south of here.  The exit is east.
+~
+0 D 0
+D1
+You see Impy Way.
+~
+door~
+1 -1 637
+D2
+You see the bedroom.
+~
+~
+0 0 641
+S
+#641
+Yatakodasý~
+You are in a bedroom.  There isn't much of interest here except for a bed
+and a dresser.  The main room of the house is north of here.
+~
+0 D 0
+D0
+You see the main room of the house.
+~
+~
+0 0 640
+S
+#642
+Büyük Kesiþme~
+You are on the intersection of Impy Way and Swiftest Way.  To the north of
+you is a big house.  Swiftest Way runs east and west, and Impy way continues
+south.  There are quite a few people on this intersection.
+~
+0 0 1
+D0
+You see the big house.
+~
+door~
+1 665 643
+D1
+Swiftest Way continues east.
+~
+~
+0 0 646
+D2
+Impy Way continues south.
+~
+~
+0 0 637
+D3
+Swiftest Way continues west.
+~
+~
+0 0 649
+S
+#643
+Büyük Ev~
+You are in a big house.  Evidently, the owners of this house are richer
+than the average citizen, since there is more than one room to this house.  A
+door leads to the kitchen north, and a bedroom is upstairs.  The exit is to
+the south.
+~
+0 D 0
+D0
+You see the kitchen.
+~
+~
+0 0 645
+D2
+You see Impy Way.
+~
+door~
+1 665 642
+D4
+You see the bedroom.
+~
+~
+0 0 644
+S
+#644
+Yatakodasý~
+You are in the bedroom.  There isn't much of interest except for a bed
+and a closet.  The stairs lead back down.
+~
+0 D 0
+D5
+You see the main room of the house.
+~
+~
+0 0 643
+S
+#645
+Mutfak~
+You are in a kitchen.  There isn't much of interest here.  The main room
+is east of here.
+~
+0 D 0
+D2
+You see the main room of the house.
+~
+~
+0 0 643
+S
+#646
+Sürat Yolu~
+You are on Swiftest Way, the commoner's residential area.  Small houses
+are north and south of you.  Swiftest Way continues east, and west is a big
+intersection.
+~
+0 0 1
+D0
+You see a small house.
+~
+~
+0 0 652
+D1
+Swiftest Way continues east.
+~
+~
+0 0 647
+D2
+You see a small house.
+~
+~
+0 0 653
+D3
+You see a big intersection.
+~
+~
+0 0 642
+S
+#647
+Sürat Yolu~
+You are on Swiftest Way, the commoner's residential area.  Small houses
+are north and south of you.  Swiftest Way continues east and west.
+~
+0 0 1
+D0
+You see a small house.
+~
+~
+0 0 654
+D1
+You see the end of Swiftest Way.
+~
+~
+0 0 648
+D2
+You see a small house.
+~
+~
+0 0 655
+D3
+Swiftest Way continues west.
+~
+~
+0 0 646
+S
+#648
+Sürat Yolunun Sonu~
+You are on Swiftest Way, the commoner's residential area.  Small houses
+are north, south, and east of you.  Swiftest Way continues west.
+~
+0 0 1
+D0
+You see a small house.
+~
+~
+0 0 656
+D1
+You see a small house.
+~
+~
+0 0 657
+D2
+You see a small house.
+~
+~
+0 0 658
+D3
+Swiftest Way continues west.
+~
+~
+0 0 647
+S
+#649
+Sürat Yolu~
+You are on Swiftest Way, the commoner's residential area.  Small houses
+are north and south of you.  Swiftest Way continues west, and to the east you
+see a big intersection.
+~
+0 0 1
+D0
+You see a small house.
+~
+~
+0 0 659
+D1
+You see the big intersection.
+~
+~
+0 0 642
+D2
+You see a small house.
+~
+~
+0 0 660
+D3
+Swiftest Way continues west.
+~
+~
+0 0 650
+S
+#650
+Sürat Yolu~
+You are on Swiftest Way, the commoner's residential area.  Small houses
+are north and south of you.  Swiftest Way continues east and west.
+~
+0 0 1
+D0
+You see a small house.
+~
+~
+0 0 661
+D1
+Swiftest Way continues east.
+~
+~
+0 0 649
+D2
+You see a small house.
+~
+~
+0 0 662
+D3
+You see the end of Swiftest Way.
+~
+~
+0 0 651
+S
+#651
+Sürat Yolunun Sonu~
+You are on Swiftest Way, the commoner's residential area.  Small houses
+are north, south, and west of you.  Swiftest Way continues east.
+~
+0 0 1
+D0
+You see a small house.
+~
+~
+0 0 663
+D1
+Swiftest Way continues east.
+~
+~
+0 0 650
+D2
+You see a small house.
+~
+~
+0 0 664
+D3
+You see a small house.
+~
+~
+0 0 665
+S
+#652
+Küçük Ev~
+You are in a small house, owned by a commoner of Ofcol.  There isn't much
+of value here to you, but you'd bet that the owner really cherishes the pile
+of stuff here.  The exit is to the south.
+~
+0 D 0
+D2
+You see Swiftest Way.
+~
+~
+0 0 646
+S
+#653
+Küçük Ev~
+You are in a small house, owned by a commoner of Ofcol.  There isn't much
+of value here to you, but you'd bet that the owner really cherishes the pile
+of stuff here.  The exit is to the north.
+~
+0 D 0
+D0
+You see Swiftest Way.
+~
+~
+0 0 646
+S
+#654
+Küçük Ev~
+You are in a small house, owned by a commoner of Ofcol.  There isn't much
+of value here to you, but you'd bet that the owner really cherishes the pile
+of stuff here.  The exit is to the south.
+~
+0 D 0
+D2
+You see Swiftest Way.
+~
+~
+0 0 647
+S
+#655
+Küçük Ev~
+You are in a small house, owned by a commoner of Ofcol.  There isn't much
+of value here to you, but you'd bet that the owner really cherishes the pile
+of stuff here.  The exit is to the north.
+~
+0 D 0
+D0
+You see Swiftest Way.
+~
+~
+0 0 647
+S
+#656
+Küçük Ev~
+You are in a small house, owned by a commoner of Ofcol.  There isn't much
+of value here to you, but you'd bet that the owner really cherishes the pile
+of stuff here.  The exit is to the south.
+~
+0 D 0
+D2
+You see the end of Swiftest Way.
+~
+~
+0 0 648
+S
+#657
+Küçük Ev~
+You are in a small house, owned by a commoner of Ofcol.  There isn't much
+of value here to you, but you'd bet that the owner really cherishes the pile
+of stuff here.  The exit is to the west.
+~
+0 D 0
+D3
+You see the end of Swiftest Way.
+~
+~
+0 0 648
+S
+#658
+Küçük Ev~
+You are in a small house, owned by a commoner of Ofcol.  There isn't much
+of value here to you, but you'd bet that the owner really cherishes the pile
+of stuff here.  The exit is to the north.
+~
+0 D 0
+D0
+You see the end of Swiftest Way.
+~
+~
+0 0 648
+S
+#659
+Küçük Ev~
+You are in a small house, owned by a commoner of Ofcol.  There isn't much
+of value here to you, but you'd bet that the owner really cherishes the pile
+of stuff here.  The exit is to the south.
+~
+0 D 0
+D2
+You see Swiftest Way.
+~
+~
+0 0 649
+S
+#660
+Küçük Ev~
+You are in a small house, owned by a commoner of Ofcol.  There isn't much
+of value here to you, but you'd bet that the owner really cherishes the pile
+of stuff here.  The exit is to the north.
+~
+0 D 0
+D0
+You see Swiftest Way.
+~
+~
+0 0 649
+S
+#661
+Küçük Ev~
+You are in a small house, owned by a commoner of Ofcol.  There isn't much
+of value here to you, but you'd bet that the owner really cherishes the pile
+of stuff here.  The exit is to the south.
+~
+0 D 0
+D2
+You see Swiftest Way.
+~
+~
+0 0 650
+S
+#662
+Küçük Ev~
+You are in a small house, owned by a commoner of Ofcol.  There isn't much
+of value here to you, but you'd bet that the owner really cherishes the pile
+of stuff here.  The exit is to the north.
+~
+0 D 0
+D0
+You see Swiftest Way.
+~
+~
+0 0 650
+S
+#663
+Küçük Ev~
+You are in a small house, owned by a commoner of Ofcol.  There isn't much
+of value here to you, but you'd bet that the owner really cherishes the pile
+of stuff here.  The exit is to the south.
+~
+0 D 0
+D2
+You see the end of Swiftest Way.
+~
+~
+0 0 651
+S
+#664
+Küçük Ev~
+You are in a small house, owned by a commoner of Ofcol.  There isn't much
+of value here to you, but you'd bet that the owner really cherishes the pile
+of stuff here.  The exit is to the north.
+~
+0 D 0
+D0
+You see the end of Swiftest Way.
+~
+~
+0 0 651
+S
+#665
+Küçük Ev~
+You are in a small house, owned by a commoner of Ofcol.  There isn't much
+of value here to you, but you'd bet that the owner really cherishes the pile
+of stuff here.  The exit is to the east.
+~
+0 D 0
+D1
+You see the end of Swiftest Way.
+~
+~
+0 0 651
+S
+#666
+Avam Yolu~
+You are on Raff Way.  To the west, you can see a big intersection.  To
+the east, you see Raff Way continue toward the Golden Citadel.  There are
+beautiful flowers growing along the road here, making this more of a garden
+than a road.
+~
+0 0 1
+D1
+Raff Way continues east.
+~
+~
+0 0 667
+D3
+You see the big intersection.
+~
+~
+0 0 601
+S
+#667
+Avam Yolu~
+You are on Raff Way.  Raff Way continues west to the city of Ofcol.  To
+the east, you see Raff Way continue toward the Golden Citadel.  There are
+beautiful flowers growing along the road here, making this more of a garden
+than a road.
+~
+0 0 1
+D1
+You see the entrance of the Golden Citadel.
+~
+~
+0 0 699
+D3
+Raff Way continues west.
+~
+~
+0 0 666
+S
+#668
+Toprak Yol~
+You are on a dirt road.  To the east is a large building with a bad smell
+emanating from it.  To the west is the end of Impy Way, and this road continues
+south.
+~
+0 0 2
+D1
+You see the large building with the bad smell.
+~
+~
+0 0 617
+D2
+The dirt road continues south.
+~
+~
+0 0 618
+D3
+You see the end of Impy Way.
+~
+~
+0 0 611
+S
+#669
+Ofcol Tapýnaðý~
+You are in the Temple of Ofcol.  Golden tiles cover the floor, and solid
+gold columns reach the twelve foot ceiling of this vast chamber.  Servants in
+golden livery wander this place, making even the raggiest messenger boy look
+richer than you are.  Exits lead to the anterooms in the cardinal directions.
+~
+0 D 0
+D0
+~
+~
+0 0 670
+D1
+~
+~
+0 0 672
+D2
+~
+~
+0 0 673
+D3
+~
+~
+0 0 671
+S
+#670
+Ofcol Tapýnaðý'nýn Bekleme Odasý~
+You are in an anteroom to the Temple of Ofcol.  Gold tiles cover the
+floor, and servants in golden livery pass you by peaceably.  The temple is to
+the south, and to the north is a hallway.  A stairways leads up.
+~
+0 D 0
+D0
+~
+~
+0 0 675
+D2
+~
+~
+0 0 669
+D4
+~
+~
+0 0 686
+S
+#671
+Ofcol Tapýnaðý'nýn Bekleme Odasý~
+You are in an anteroom to the Temple of Ofcol.  Gold tiles cover the
+floor, and servants in golden livery pass you by peaceably.  The temple is to
+the east, and to the west is a hallway.  A stairways leads up.
+~
+0 D 0
+D1
+~
+~
+0 0 669
+D3
+~
+~
+0 0 679
+D4
+~
+~
+0 0 687
+S
+#672
+Ofcol Tapýnaðý'nýn Bekleme Odasý~
+You are in an anteroom to the Temple of Ofcol.  Gold tiles cover the
+floor, and servants in golden livery pass you by peaceably.  The temple is to
+the west, and to the east is a hallway.  A stairways leads up.
+~
+0 D 0
+D1
+~
+~
+0 0 680
+D3
+~
+~
+0 0 669
+D4
+~
+~
+0 0 689
+S
+#673
+Ofcol Tapýnaðý'nýn Bekleme Odasý~
+You are in an anteroom to the Temple of Ofcol.  Gold tiles cover the
+floor, and servants in golden livery pass you by peaceably.  The temple is to
+the north, and to the south is a hallway.  A stairways leads up.
+~
+0 D 0
+D0
+~
+~
+0 0 669
+D2
+~
+~
+0 0 684
+D4
+~
+~
+0 0 690
+S
+#674
+Altýn Hisar'ýn Salonlarýndan Biri~
+You are in a hallway of the Golden Citadel.  Gold tiles cover the floors,
+and rich golden tapestries drape the walls.  Servants in golden livery pass you
+by peaceably.  Exits lead east and south.
+~
+0 D 0
+D1
+~
+~
+0 0 675
+D2
+~
+~
+0 0 677
+S
+#675
+Altýn Hisar'ýn Salonlarýndan Biri~
+You are in a hallway of the Golden Citadel.  Gold tiles cover the floors,
+and rich golden tapestries drape the walls.  Servants in golden livery pass you
+by peaceably.  Exits lead east, west, and south.
+~
+0 D 0
+D1
+~
+~
+0 0 676
+D2
+~
+~
+0 0 670
+D3
+~
+~
+0 0 674
+S
+#676
+Altýn Hisar'ýn Salonlarýndan Biri~
+You are in a hallway of the Golden Citadel.  Gold tiles cover the floors,
+and rich golden tapestries drape the walls.  Servants in golden livery pass you
+by peaceably.  Exits lead west and south.
+~
+0 D 0
+D2
+~
+~
+0 0 678
+D3
+~
+~
+0 0 675
+S
+#677
+Altýn Hisar'ýn Salonlarýndan Biri~
+You are in a hallway of the Golden Citadel.  Gold tiles cover the floors,
+and rich golden tapestries drape the walls.  Servants in golden livery pass you
+by peaceably.  Exits lead north and south.
+~
+0 D 0
+D0
+~
+~
+0 0 674
+D2
+~
+~
+0 0 679
+S
+#678
+Altýn Hisar'ýn Salonlarýndan Biri~
+You are in a hallway of the Golden Citadel.  Gold tiles cover the floors,
+and rich golden tapestries drape the walls.  Servants in golden livery pass you
+by peaceably.  Exits lead north and south.
+~
+0 D 0
+D0
+~
+~
+0 0 676
+D2
+~
+~
+0 0 680
+S
+#679
+Altýn Hisar'ýn Salonlarýndan Biri~
+You are in a hallway of the Golden Citadel.  Gold tiles cover the floors,
+and rich golden tapestries drape the walls.  Servants in golden livery pass you
+by peaceably.  Exits lead to the cardinal directions, with the east leading
+toward the Temple of Ofcol, and west leading toward the City of Ofcol.
+~
+0 D 0
+D0
+~
+~
+0 0 677
+D1
+~
+~
+0 0 671
+D2
+~
+~
+0 0 681
+D3
+~
+~
+0 0 698
+S
+#680
+Altýn Hisar'ýn Salonlarýndan Biri~
+You are in a hallway of the Golden Citadel.  Gold tiles cover the floors,
+and rich golden tapestries drape the walls.  Servants in golden livery pass you
+by peaceably.  Exits lead west, north and south.
+~
+0 D 0
+D0
+~
+~
+0 0 678
+D2
+~
+~
+0 0 682
+D3
+~
+~
+0 0 672
+S
+#681
+Altýn Hisar'ýn Salonlarýndan Biri~
+You are in a hallway of the Golden Citadel.  Gold tiles cover the floors,
+and rich golden tapestries drape the walls.  Servants in golden livery pass you
+by peaceably.  Exits lead north and south.
+~
+0 D 0
+D0
+~
+~
+0 0 679
+D2
+~
+~
+0 0 683
+S
+#682
+Altýn Hisar'ýn Salonlarýndan Biri~
+You are in a hallway of the Golden Citadel.  Gold tiles cover the floors,
+and rich golden tapestries drape the walls.  Servants in golden livery pass you
+by peaceably.  Exits lead north and south.
+~
+0 D 0
+D0
+~
+~
+0 0 680
+D2
+~
+~
+0 0 685
+S
+#683
+Altýn Hisar'ýn Salonlarýndan Biri~
+You are in a hallway of the Golden Citadel.  Gold tiles cover the floors,
+and rich golden tapestries drape the walls.  Servants in golden livery pass you
+by peaceably.  Exits lead north and east.
+~
+0 D 0
+D0
+~
+~
+0 0 681
+D1
+~
+~
+0 0 684
+S
+#684
+Altýn Hisar'ýn Salonlarýndan Biri~
+You are in a hallway of the Golden Citadel.  Gold tiles cover the floors,
+and rich golden tapestries drape the walls.  Servants in golden livery pass you
+by peaceably.  Exits lead east, west, and north.
+~
+0 D 0
+D0
+~
+~
+0 0 673
+D1
+~
+~
+0 0 685
+D3
+~
+~
+0 0 683
+S
+#685
+Altýn Hisar'ýn Salonlarýndan Biri~
+You are in a hallway of the Golden Citadel.  Gold tiles cover the floors,
+and rich golden tapestries drape the walls.  Servants in golden livery pass you
+by peaceably.  Exits lead west and north.
+~
+0 D 0
+D0
+~
+~
+0 0 682
+D3
+~
+~
+0 0 684
+S
+#686
+Altýn Hisar'ýn Yukarý Salonlarýndan Biri~
+You are in one of the upper chambers of the Golden Citadel.  The decora-
+tions of this place surpass even those of the first floor.  Gold tiles etched
+with platinum cover the floor, walls and the ceiling.  The lights from numerous
+torches reflect from these shimmering planes, giving the illusion that you are
+standing in a gem.  Stairways lead up and down, and the hall leads south.
+~
+0 D 0
+D2
+~
+~
+0 0 688
+D4
+~
+~
+0 0 691
+D5
+~
+~
+0 0 670
+S
+#687
+Altýn Hisar'ýn Yukarý Salonlarýndan Biri~
+You are in one of the upper chambers of the Golden Citadel.  The decora-
+tions of this place surpass even those of the first floor.  Gold tiles etched
+with platinum cover the floor, walls and the ceiling.  The lights from numerous
+torches reflect from these shimmering planes, giving the illusion that you are
+standing in a gem.  Stairways lead up and down, and the hall leads east.
+~
+0 D 0
+D1
+~
+~
+0 0 688
+D4
+~
+~
+0 0 692
+D5
+~
+~
+0 0 671
+S
+#688
+EjderhaLordlarý'nýn Meclisi~
+You are in a vast hall, filled with the commanders of the Golden Citadel.
+Golden tiles etched with platinum cover the floors, and weapons of all types
+are mounted on the walls of this meeting hall.  Surrounding a solid gold table
+are four sons of the Keeper of the Golden Citadel.  They smile at you and ask
+you to join them in lunch.  Exits lead to the cardinal directions.
+~
+0 D 0
+D0
+~
+~
+0 0 686
+D1
+~
+~
+0 0 689
+D2
+~
+~
+0 0 690
+D3
+~
+~
+0 0 687
+S
+#689
+Altýn Hisar'ýn Yukarý Salonlarýndan Biri~
+You are in one of the upper chambers of the Golden Citadel.  The decora-
+tions of this place surpass even those of the first floor.  Gold tiles etched
+with platinum cover the floor, walls and the ceiling.  The lights from numerous
+torches reflect from these shimmering planes, giving the illusion that you are
+standing in a gem.  Stairways lead up and down, and the hall leads west.
+~
+0 D 0
+D3
+~
+~
+0 0 688
+D4
+~
+~
+0 0 694
+D5
+~
+~
+0 0 672
+S
+#690
+Altýn Hisar'ýn Yukarý Salonlarýndan Biri~
+You are in one of the upper chambers of the Golden Citadel.  The decora-
+tions of this place surpass even those of the first floor.  Gold tiles etched
+with platinum cover the floor, walls and the ceiling.  The lights from numerous
+torches reflect from these shimmering planes, giving the illusion that you are
+standing in a gem.  Stairways lead up and down, and the hall leads north.
+~
+0 D 0
+D0
+~
+~
+0 0 688
+D4
+~
+~
+0 0 695
+D5
+~
+~
+0 0 673
+S
+#691
+Altýn Hisar'ýn Baþ Meclislerinden Biri~
+You are in one of the top chambers of the Golden Citadel.  The decorations
+of this room looks like a dragon's hoard.  The whole room is carved out of pure
+gold, and gems of all types glitter from the walls, ceiling, even the floor.
+It is obvious that this room was not meant for you to intrude upon.  A stair-
+case leads back down, and a doorway leads south.
+~
+0 D 0
+D2
+~
+~
+0 0 693
+D5
+~
+~
+0 0 686
+S
+#692
+Altýn Hisar'ýn Baþ Meclislerinden Biri~
+You are in one of the top chambers of the Golden Citadel.  The decorations
+of this room looks like a dragon's hoard.  The whole room is carved out of pure
+gold, and gems of all types glitter from the walls, ceiling, even the floor.
+It is obvious that this room was not meant for you to intrude upon.  A stair-
+case leads back down, and a doorway leads east.
+~
+0 D 0
+D1
+~
+~
+0 0 693
+D5
+~
+~
+0 0 687
+S
+#693
+Ejderha Salonu~
+You are in a vast chamber carved from gold and platinum.  Gems the size of
+a man's fist protrude from the walls, ceiling, and the floor, making your step
+painful.  A vast open sky-light lets fresh air come in from the top.  In the
+center of this chamber, you see a great wealth of coins, and on top of that
+pile of coins, you see a golden dragon squinting at you.  Exits lead to the
+cardinal directions to the anterooms.
+~
+0 D 0
+D0
+~
+~
+0 0 691
+D1
+~
+~
+0 0 694
+D2
+~
+~
+0 0 695
+D3
+~
+~
+0 0 692
+D4
+~
+~
+0 0 696
+S
+#694
+Altýn Hisar'ýn Baþ Meclislerinden Biri~
+You are in one of the top chambers of the Golden Citadel.  The decorations
+of this room looks like a dragon's hoard.  The whole room is carved out of pure
+gold, and gems of all types glitter from the walls, ceiling, even the floor.
+It is obvious that this room was not meant for you to intrude upon.  A stair-
+case leads back down, and a doorway leads west.
+~
+0 D 0
+D3
+~
+~
+0 0 693
+D5
+~
+~
+0 0 689
+S
+#695
+Altýn Hisar'ýn Baþ Meclislerinden Biri~
+You are in one of the top chambers of the Golden Citadel.  The decorations
+of this room looks like a dragon's hoard.  The whole room is carved out of pure
+gold, and gems of all types glitter from the walls, ceiling, even the floor.
+It is obvious that this room was not meant for you to intrude upon.  A stair-
+case leads back down, and a doorway leads north.
+~
+0 D 0
+D0
+~
+~
+0 0 693
+D5
+~
+~
+0 0 690
+S
+#696
+Ejderha Salonu'nun Yukarýsý~
+You are above the Dragon Chamber.  You curiously note that this shaft that
+connects the chamber to the sky is wide enough that even a dragon can fit
+through.  This shaft leads up and down.
+~
+0 D 0
+D4
+~
+~
+0 0 697
+D5
+~
+~
+0 0 693
+S
+#697
+Ejderha Salonu'nun Havalandýrmasý~
+You are in the shaft leading from the Dragon Chamber.  Below you lies the
+Dragon Chamber of the Golden Citadel.  Above you, you see the sky, but
+currently, the way out is sealed by a layer of diamond that looks impenetrable.
+~
+0 D 0
+D0
+~
+~
+1 -1 510
+D5
+~
+~
+0 0 696
+S
+#698
+Altýn Hisar Kapýlarýnýn Ýçi~
+You are inside the entrance to the Golden Citadel.  Rich golden tapestries
+line the walls, and golden tiles cover the floors.  The exit to this citadel is
+to the west, while the citadel itself is to the east.
+~
+0 D 0
+D1
+~
+~
+0 0 679
+D3
+~
+gate~
+1 651 699
+S
+#699
+Altýn Hisar Kapýlarýnýn Dýþý~
+You are outside the entrance to the Golden Citadel.  A great gate is to
+to the east, marking the entranceway into the citadel.  The road also leads
+back west to Raff Way.
+~
+0 0 2
+D1
+~
+~
+1 651 698
+D3
+~
+~
+0 0 667
+S
+#0
+
+#RESETS
+D 0  618   2    1	* Dirt Road south
+D 0  619   0    1	* Chicken Coop north
+D 0  600   1    1	* Granny's Still Room east
+D 0  616   3    1	* The Shed west
+D 0  625   1    2	* Impy Way east
+D 0  626   3    2	* Big House west
+D 0  625   3    2	* Impy Way west
+D 0  629   1    2	* Big House east
+D 0  642   0    2	* The Big Intersection north
+D 0  643   2    2	* Big House south
+D 0  632   1    1	* Impy Way east
+D 0  632   3    1	* Impy Way west
+D 0  633   3    1	* House west
+D 0  635   1    1	* House east
+D 0  637   1    1	* Impy Way east
+D 0  637   3    1	* Impy Way west
+D 0  638   3    1	* House west
+D 0  640   1    1	* House east
+M 0  600   8  608  1	* the Ofcol cityguard
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  621  99    5	*   brass plate
+E 1  630  99   16	*   a claymore
+E 1  622  99    6	*   a brass helm
+M 0  600   8  604  1	* the Ofcol cityguard
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  621  99    5	*   brass plate
+E 1  630  99   16	*   a claymore
+E 1  623  99    7	*   brass leggings
+M 0  600   8  601  1	* the Ofcol cityguard
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  621  99    5	*   brass plate
+E 1  630  99   16	*   a claymore
+E 1  624  99    8	*   brass boots
+M 0  600   8  650  1	* the Ofcol cityguard
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  621  99    5	*   brass plate
+E 1  630  99   16	*   a claymore
+E 1  625  99    9	*   brass gauntlets
+M 0  600   8  642  1	* the Ofcol cityguard
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  621  99    5	*   brass plate
+E 1  630  99   16	*   a claymore
+E 1  626  99   10	*   brass sleeves
+M 0  600   8  647  1	* the Ofcol cityguard
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  621  99    5	*   brass plate
+E 1  630  99   16	*   a claymore
+E 1  627  99   11	*   a brass shield
+M 0  600   8  667  1	* the Ofcol cityguard
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  621  99    5	*   brass plate
+E 1  630  99   16	*   a claymore
+E 1  628  99   13	*   a brass girth
+M 0  600   8  637  1	* the Ofcol cityguard
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  621  99    5	*   brass plate
+E 1  630  99   16	*   a claymore
+E 1  629  99   14	*   a brass bracer
+M 0  601   1  601  1	* Marshall Diana
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  639  99    5	*   platinum plate
+E 1  640  99    6	*   the platinum helmet
+E 1  641  99    7	*   platinum leggings
+E 1  642  99    8	*   platinum boots
+E 1  643  99    9	*   platinum gauntlets
+E 1  644  99   10	*   platinum sleeves
+E 1  645  99   11	*   the platinum spiked shield
+E 1  646  99   13	*   the platinum girth
+E 1  647  99   16	*   holy Avenger
+M 0  602   1  669  1	* Captain Derrick
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  631  99    5	*   silver plate
+E 1  653  99   16	*   a ranseur
+E 1  632  99    6	*   a silver helm
+E 1  633  99    7	*   silver leggings
+E 1  634  99    8	*   silver boots
+E 1  635  99    9	*   silver gauntlets
+E 1  626  99   10	*   brass sleeves
+E 1  627  99   11	*   a brass shield
+E 1  628  99   13	*   a brass girth
+M 0  603   1  699  1	* Captain Jacklyn
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  631  99    5	*   silver plate
+E 1  653  99   16	*   a ranseur
+E 1  632  99    6	*   a silver helm
+E 1  623  99    7	*   brass leggings
+E 1  624  99    8	*   brass boots
+E 1  625  99    9	*   brass gauntlets
+E 1  636  99   10	*   silver sleeves
+E 1  637  99   11	*   the silver shield
+E 1  638  99   13	*   the silver girth
+M 0  623   3  699  3	* the Ofcol cityguard
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  621  99    5	*   brass plate
+E 1  630  99   16	*   a claymore
+E 1  627  99   11	*   a brass shield
+G 1  651  99     	*   the citadel key
+M 0  623   3  699  3	* the Ofcol cityguard
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  621  99    5	*   brass plate
+E 1  630  99   16	*   a claymore
+E 1  627  99   11	*   a brass shield
+G 1  651  99     	*   the citadel key
+M 0  623   3  699  3	* the Ofcol cityguard
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  621  99    5	*   brass plate
+E 1  630  99   16	*   a claymore
+E 1  627  99   11	*   a brass shield
+G 1  651  99     	*   the citadel key
+M 0  634   3  698  3	* the Ofcol cityguard
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  621  99    5	*   brass plate
+E 1  630  99   16	*   a claymore
+E 1  627  99   11	*   a brass shield
+G 1  651  99     	*   the citadel key
+M 0  634   3  698  3	* the Ofcol cityguard
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  621  99    5	*   brass plate
+E 1  630  99   16	*   a claymore
+E 1  627  99   11	*   a brass shield
+G 1  651  99     	*   the citadel key
+M 0  634   3  698  3	* the Ofcol cityguard
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  621  99    5	*   brass plate
+E 1  630  99   16	*   a claymore
+E 1  627  99   11	*   a brass shield
+G 1  651  99     	*   the citadel key
+M 0  604   1  603  1	* Jim the Blacksmith
+G 1  600  99     	*   a hand axe
+G 1  601  99     	*   a meat cleaver
+G 1  615  99     	*   a pitchfork
+G 1  667  99     	*   a chest
+M 0  605   1  604  1	* Sam
+G 1  616  99     	*   a leather vest
+G 1  617  99     	*   some leather sleeves
+G 1  618  99     	*   some leather leggings
+G 1  619  99     	*   some leather boots
+M 0  606   1  606  1	* Madam Tracy
+G 1  606  99     	*   an emerald ring
+G 1  607  99     	*   a glass trinket
+G 1  608  99     	*   a golden necklace
+M 0  607   1  607  1	* Marty
+G 1  602  99     	*   a side of beef
+G 1  603  99     	*   a side of pork
+G 1  604  99     	*   a side of horse
+G 1  605  99     	*   a defeathered chicken
+M 0  622   1  609  1	* Nyles the Bartender
+G 1  648  99     	*   a shot of whiskey
+G 1  649  99     	*   a quart of ale
+G 1  650  99     	*   a quart of port brew
+M 0  608   1  610  1	* Farmer Elizabeth
+G 1  609  99     	*   a head of cabbage
+G 1  610  99     	*   a head of lettuce
+G 1  611  99     	*   a bottle of milk
+G 1  612  99     	*   an apple
+G 1  613  99     	*   an ear of corn
+M 0  609   1  600  1	* Granny Jenkins
+O 0  649  99  600	* a quart of ale
+M 0  610   1  617  1	* Jack
+E 1  601  99   16	*   a meat cleaver
+M 0  611   1  620  1	* Farmer Sara
+E 1  615  99   16	*   a pitchfork
+O 0  614  99  620	* a pile of hay
+O 0  611  99  620	* a bottle of milk
+M 0  612   4  619  4	* a hen
+M 0  612   4  619  4	* a hen
+M 0  612   4  619  4	* a hen
+M 0  612   4  619  4	* a hen
+M 0  613   3  623  3	* the cow
+M 0  613   3  623  3	* the cow
+M 0  613   3  623  3	* the cow
+M 0  614   2  620  2	* the cow
+M 0  614   2  620  2	* the cow
+M 0  615   4  622  4	* the young horse
+M 0  615   4  622  4	* the young horse
+M 0  615   4  622  4	* the young horse
+M 0  615   4  622  4	* the young horse
+M 0  616   4  624  4	* the pig
+M 0  616   4  624  4	* the pig
+M 0  616   4  624  4	* the pig
+M 0  616   4  624  4	* the pig
+M 0  617   3  601  1	* the citizen
+M 0  617   3  650  1	* the citizen
+M 0  617   3  648  1	* the citizen
+M 0  618   3  611  1	* the citizen
+M 0  618   3  666  1	* the citizen
+M 0  618   3  637  1	* the citizen
+M 0  619   2  661  1	* the boy
+M 0  619   2  655  1	* the boy
+M 0  620   2  635  1	* the girl
+M 0  620   2  652  1	* the girl
+M 0  624   1  609  1	* a bard
+M 0  621   3  627  1	* the maid
+G 1  665  99     	*   a house key
+E 1  666  99   16	*   a broom
+M 0  621   3  629  1	* the maid
+G 1  665  99     	*   a house key
+E 1  666  99   16	*   a broom
+M 0  621   3  643  1	* the maid
+G 1  665  99     	*   a house key
+E 1  666  99   16	*   a broom
+M 0  625   2  674  1	* a servant
+M 0  625   2  673  1	* a servant
+M 0  626   2  682  1	* a squire
+M 0  626   2  683  1	* a squire
+M 0  627   1  678  1	* a page
+M 0  628   1  669  1	* the Priestess of Ofcol
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  664  99   12	*   a golden robe
+E 1  652  99    3	*   the Holy Symbol of Bahamut
+M 0  629   1  688  1	* Chaplain Jerrold
+E 1  664  99   12	*   a golden robe
+M 0  630   3  688  3	* a Dragonlord
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  654  99    5	*   a golden dragonscale torso
+E 1  660  99   11	*   a golden dragonscale shield
+E 1  669  99   16	*   the golden claw
+E 1  656  99    6	*   golden dragonscale leggings
+E 1  657  99    7	*   golden dragonscale boots
+M 0  630   3  688  3	* a Dragonlord
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  654  99    5	*   a golden dragonscale torso
+E 1  660  99   11	*   a golden dragonscale shield
+E 1  669  99   16	*   the golden claw
+E 1  657  99    8	*   golden dragonscale boots
+E 1  658  99    9	*   golden dragonscale gauntlets
+M 0  630   3  688  3	* a Dragonlord
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  654  99    5	*   a golden dragonscale torso
+E 1  660  99   11	*   a golden dragonscale shield
+E 1  669  99   16	*   the golden claw
+E 1  659  99   10	*   golden dragonscale sleeves
+E 1  661  99   13	*   a golden dragonscale girth
+M 0  631   1  693  1	* The Ancient Gold Dragon
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  668  99   16	*   the Golden Claw
+E 1  663  99   17	*   the Gold Dragon Orb
+M 0  632   2  693  2	* an attendant of the dragon
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  664  99   12	*   a golden robe
+M 0  632   2  693  2	* an attendant of the dragon
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  664  99   12	*   a golden robe
+M 0  633   3  690  1	* a Dragonknight
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  654  99    5	*   a golden dragonscale torso
+E 1  660  99   11	*   a golden dragonscale shield
+E 1  662  99   16	*   the golden claw
+M 0  633   3  676  1	* a Dragonknight
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  654  99    5	*   a golden dragonscale torso
+E 1  660  99   11	*   a golden dragonscale shield
+E 1  662  99   16	*   the golden claw
+M 0  633   3  681  1	* a Dragonknight
+E 1  620  99    1	*   an Ofcol signet ring
+E 1  654  99    5	*   a golden dragonscale torso
+E 1  660  99   11	*   a golden dragonscale shield
+E 1  662  99   16	*   the golden claw
+O 0  670   1  669	* The Donation Pit
+M 0  635   1  697  1	* a Dragonknight
+S
+#SHOPS
+ 604  5  9 15  0  0 	 120  80 	 0 23 	* Jim the Blacksmith
+ 605  9  0  0  0  0 	 120  80 	 0 23 	* Sam
+ 606  8 12 13  0  0 	 120  80 	 0 23 	* Madam Tracy
+ 607  0 19  0  0  0 	 120  10 	 0 23 	* Marty
+ 608  0 17 19  0  0 	 120  10 	 0 23 	* Farmer Elizabeth
+ 622  0 17  0  0  0 	 120  10 	 0 23 	* Nyles the Bartender
+0
+#SPECIALS
+M 600 spec_guard          	* the Ofcol cityguard
+M 601 spec_cast_cleric    	* Marshall Diana
+M 602 spec_cast_cleric    	* Captain Derrick
+M 603 spec_cast_mage      	* Captain Jacklyn
+M 621 spec_janitor        	* the maid
+M 623 spec_guard          	* the Ofcol cityguard
+M 628 spec_cast_adept     	* the Priestess of Ofcol
+M 629 spec_guard          	* Chaplain Jerrold
+M 630 spec_breath_any     	* a Dragonlord
+M 631 spec_breath_any     	* The Ancient Gold Dragon
+M 632 spec_cast_mage      	* an attendant of the dragon
+M 633 spec_breath_any     	* a Dragonknight
+M 634 spec_guard          	* the Ofcol cityguard
+*M 600 spec_ofcol_guard		* the Ofcol cityguard
+*M 623 spec_ofcol_guard		* the Ofcol cityguard
+*M 634 spec_ofcol_guard		* the Ofcol cityguard
+S
+
+#OMPROGS
+M 635 greet_prog greet_prog_ruler_pre
+M 601 fight_prog fight_prog_diana
+S
+
+#PRACTICERS
+M 628 group_healing		*priestess
+M 601 group_maladictions	*diana
+S
+
+#$

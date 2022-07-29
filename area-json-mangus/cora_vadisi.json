@@ -1,0 +1,4121 @@
+{
+    "area": {
+        "file": "cora_vadisi.are",
+        "name": "Yarý Türkçe",
+        "low_range": "5",
+        "high_range": "20",
+        "min_vnum": "7800",
+        "max_vnum": "7899",
+        "path": "4d 3k 2b 5k b k",
+        "yonelim_iyi": "5",
+        "yonelim_yansiz": "10",
+        "yonelim_kem": "85"
+    },
+    "mobiles": [
+        {
+            "vnum": "7800",
+            "name": "köpek doberman",
+            "short_description": "bir doberman",
+            "long_description": "Büyükçe bir köpek burada, vadide geziniyor.\n",
+            "description": "Bu doberman neredeyse gördüðün en büyük köpek olabilir. Kahverengi lekeli,\nyeþilimsi bir ceketi var. Þekli, renkleri ile birlikte, bu dobermaný hareket\nettikçe neredeyse farkedilemez hale getiriyor.\n",
+            "race": "dog",
+            "act": "AGH",
+            "affected_by": "P",
+            "level": "5"
+        },
+        {
+            "vnum": "7801",
+            "name": "vadi çorasý",
+            "short_description": "bir vadi çorasý",
+            "long_description": "Bir vadi çorasý senin varlýðýn yüzünden ihtiyatla etrafta geziniyor.\n",
+            "description": "Bu çora neredeyse senin kadar uzun, ama çok daha ince ve çevik.\nGözlerindeki nefreti görüp ve bakýþlarýndan kaçýnmaya çalýþýyorsun.\nGergin vücudu avýný takip eden bir dað aslaný gibi sana saldýrmaya hazýr\ngörünüyor. Onu fark ettiðini görüyor ve sessizce kayboluyor.\n",
+            "race": "çora",
+            "act": "ACFGH",
+            "affected_by": "P",
+            "level": "8"
+        },
+        {
+            "vnum": "7802",
+            "name": "vadi çorasý",
+            "short_description": "bir vadi çorasý",
+            "long_description": "Diþi bir vadi çorasý, uzun çimenler arasýnda dans edercesine etrafta dolaþýyor.\n",
+            "description": "Bu çora neredeyse senin kadar uzun, ama çok daha ince ve çevik.\nSana dik dik bakýyor ve onu daha fazla göremeden çabucak kayboluyor.\n",
+            "race": "çora",
+            "act": "ACFGH",
+            "affected_by": "P",
+            "level": "8"
+        },
+        {
+            "vnum": "7803",
+            "name": "nöbet tutan vadi çorasý nöbetçi",
+            "short_description": "nöbet tutan bir vadi çorasý",
+            "long_description": "Burada nöbet tutan bir vadi çorasý seni fark eder etmez hýzlýca saldýrýyor!\n",
+            "description": "Bu çora neredeyse senin kadar uzun, ama çok daha ince ve çevik.\nSana tehditkar bir þekilde saldýrýyor!\n",
+            "race": "çora",
+            "act": "ABF",
+            "affected_by": "P",
+            "level": "7"
+        },
+        {
+            "vnum": "7804",
+            "name": "nöbet tutan vadi çorasý nöbetçi",
+            "short_description": "nöbet tutan bir vadi çorasý",
+            "long_description": "Burada nöbet tutan bir vadi çorasý seni fark eder etmez hýzlýca saldýrýyor!\n",
+            "description": "Bu çora neredeyse senin kadar uzun, ama çok daha ince ve çevik.\nSana tehditkar bir þekilde saldýrýyor!\n",
+            "race": "çora",
+            "act": "ABF",
+            "affected_by": "P",
+            "level": "7"
+        },
+        {
+            "vnum": "7805",
+            "name": "gözcülük yapan vadi çorasý",
+            "short_description": "gözcülük yapan bir vadi çorasý",
+            "long_description": "Gözcülük yapan bir vadi çorasý, senin gibi davetsiz konuklarýn izini sürüyor!\n",
+            "description": "Davetsiz giriþin üzerine sana kendinden emin bir þekilde saldýrýyor!\n",
+            "race": "çora",
+            "act": "ACFG",
+            "affected_by": "P",
+            "level": "6"
+        },
+        {
+            "vnum": "7806",
+            "name": "vadi çorasý",
+            "short_description": "bir vadi çorasý",
+            "long_description": "Bir vadi çorasý burada kendi iþleriyle uðraþýyor.\n",
+            "description": "Þu anda bazý angarya iþler yapýyor ve onun yolunda olduðunuz zamanlar haricinde\nburada davetsiz olmanýzý görmezden geliyor.\n",
+            "race": "çora",
+            "act": "AGH",
+            "affected_by": "P",
+            "level": "6"
+        },
+        {
+            "vnum": "7807",
+            "name": "ihtiyar vadi çorasý",
+            "short_description": "ihtiyar bir vadi çorasý",
+            "long_description": "Ýhtiyar bir vadi çorasý burada çalýþýrken seni fark ediyor.\nÝhtiyar bir vadi çorasý baðýrýyor 'Buraya izinsiz girdin.  Ölmeye hazýrlan!'\n",
+            "description": "Bu çora oldukça yaþlý görünüyor, senin yaþýnýn belki de yirmi katý.\nYaþýna raðmen oldukça güçlü duruyor.\n",
+            "race": "çora",
+            "act": "ABCFQ",
+            "affected_by": "HN",
+            "level": "15"
+        },
+        {
+            "vnum": "7808",
+            "name": "ihtiyar vadi çorasý",
+            "short_description": "ihtiyar bir vadi çorasý",
+            "long_description": "Ýhtiyar bir vadi çorasý burada çalýþýrken seni fark ediyor.\nÝhtiyar bir vadi çorasý þöyle söylüyor 'Seni yolun sonuna getiren, küstahlýðýndýr.'\n",
+            "description": "Bu çora oldukça yaþlý görünüyor, senin yaþýnýn belki de yirmi katý.\nYaþýna raðmen oldukça güçlü duruyor.\n",
+            "race": "çora",
+            "act": "ABCFR",
+            "affected_by": "N",
+            "level": "15"
+        },
+        {
+            "vnum": "7809",
+            "name": "ateþ hidrasý",
+            "short_description": "ateþ hidrasý",
+            "long_description": "Her biri ateþ püskürten bir çok baþý olan büyük yaratýk, garezle sana bakýyor.\n",
+            "description": "Bu büyük canavar küçük bir kýrmýzý ejderhaya benziyor, ancak normal bir ejderhadan\nçok daha fazla baþý var. Pek mutlu durmuyor.\n",
+            "race": "human",
+            "act": "ABF",
+            "affected_by": "0",
+            "level": "20"
+        },
+        {
+            "vnum": "7810",
+            "name": "keþiþ adam yaþlý",
+            "short_description": "yaþlý bir keþiþ",
+            "long_description": "Yaþlý bir keþiþ burada oturmuþ çubuk tüttürüyor.\n",
+            "description": "Yaþlý ve zayýf görünüyor.\n",
+            "race": "human",
+            "act": "ABCH",
+            "affected_by": "0",
+            "level": "3"
+        },
+        {
+            "vnum": "7811",
+            "name": "büyücü talemon",
+            "short_description": "Talemon",
+            "long_description": "Yaþlý bir büyücü bir takým kimyasallarla meþgul.\n",
+            "description": "Talemon zararsýz görünüyor, ama sana fýrlattýðý ateþ toplarý için aynýsý denemez.\n",
+            "race": "human",
+            "act": "ABCFR",
+            "affected_by": "0",
+            "level": "25"
+        },
+        {
+            "vnum": "7812",
+            "name": "muhafýz cin",
+            "short_description": "muhafýz cin",
+            "long_description": "Devasa bir cin burada hazineyi gözetip koruyor.\n",
+            "description": "Bu cin çaðrýldýðý iþinden memnun deðil ve öfkesini senden çýkarmaya hazýr!\n",
+            "race": "human",
+            "act": "ABF",
+            "affected_by": "0",
+            "level": "25"
+        },
+        {
+            "vnum": "7813",
+            "name": "kurt",
+            "short_description": "bir kurt",
+            "long_description": "Bir kurt görüyorsun, sessizce izliyor.\n",
+            "description": "Kurt kahverengi saçlý. Korku ile sana bakýyor.\n",
+            "race": "wolf",
+            "act": "AFH",
+            "affected_by": "0",
+            "level": "4"
+        },
+        {
+            "vnum": "7814",
+            "name": "antilop",
+            "short_description": "bir antilop",
+            "long_description": "Bir antilop burada, özgürce çimlerde otluyor.\n",
+            "description": "Kaba, kahverengi saçlar üzerinde boynuzlarý ve lekeleri olan bu canavar,\nkesinlikle bir antilop.\n",
+            "race": "human",
+            "act": "AH",
+            "affected_by": "0",
+            "level": "6"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "7800",
+            "name": "çora zincir zýrhý zincirzýrh",
+            "short_description": "çora iþi zincirzýrh",
+            "description": "Parlak metalik bir gömlek yerde duruyor.",
+            "material": "iron",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AD",
+            "values": "4 4 4 2 0",
+            "level": "5",
+            "weight": "30",
+            "cost": "1080",
+            "condition": "P"
+        },
+        {
+            "vnum": "7801",
+            "name": "çora iþi botlar",
+            "short_description": "çora iþi botlar",
+            "description": "Oldukça yumuþak cinsten botlar yerde duruyor.",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AG",
+            "values": "3 3 3 0 0",
+            "level": "7",
+            "weight": "30",
+            "cost": "390",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "14",
+                    "modifier": "5"
+                }
+            ]
+        },
+        {
+            "vnum": "7802",
+            "name": "uzunkýlýç çora iþi uzun kýlýç",
+            "short_description": "çora iþi bir uzunkýlýç",
+            "description": "Parlak bir býçak yerde duruyor.",
+            "material": "steel",
+            "type": "weapon",
+            "extra_flags": "G",
+            "wear_flags": "AN",
+            "values": "sword 3 3 slash 0",
+            "level": "7",
+            "weight": "30",
+            "cost": "670",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "7803",
+            "name": "kahverengi pelerin",
+            "short_description": "kahverengi bir pelerin",
+            "description": "Kahverengi bir kumaþ yýðýný yerde duruyor.",
+            "material": "cloth",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AC",
+            "values": "3 3 3 0 0",
+            "level": "7",
+            "weight": "30",
+            "cost": "900",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "7804",
+            "name": "anahtar",
+            "short_description": "bir anahtar",
+            "description": "Parlak bir anahtar yerde duruyor.",
+            "material": "bronze",
+            "type": "key",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "7846 0 0 0 0",
+            "level": "0",
+            "weight": "10",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "7805",
+            "name": "anahtar",
+            "short_description": "bir anahtar",
+            "description": "Parlak bir anahtar yerde duruyor.",
+            "material": "wood",
+            "type": "key",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "7880 0 0 0 0",
+            "level": "0",
+            "weight": "10",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "7806",
+            "name": "yüzük altýn",
+            "short_description": "altýn bir yüzük",
+            "description": "Parlak bir yüzük yerde duruyor.",
+            "material": "gold",
+            "type": "jewelry",
+            "extra_flags": "G",
+            "wear_flags": "AB",
+            "values": "0 0 0 0 0",
+            "level": "5",
+            "weight": "10",
+            "cost": "110",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "10"
+                }
+            ]
+        },
+        {
+            "vnum": "7807",
+            "name": "cirit çift-elli",
+            "short_description": "bir cirit",
+            "description": "Bir cirit yerde duruyor.",
+            "material": "wood",
+            "type": "weapon",
+            "extra_flags": "G",
+            "wear_flags": "AN",
+            "values": "staff 5 5 pound F",
+            "level": "21",
+            "weight": "50",
+            "cost": "670",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "7808",
+            "name": "iksir",
+            "short_description": "bir iksir",
+            "description": "Bir iksir yerde duruyor.",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "G",
+            "wear_flags": "A",
+            "values": "10 'armor' 'invisibility' '' ''",
+            "level": "0",
+            "weight": "10",
+            "cost": "200",
+            "condition": "P"
+        },
+        {
+            "vnum": "7809",
+            "name": "potion",
+            "short_description": "a potion",
+            "description": "A potion is on the floor.",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "G",
+            "wear_flags": "A",
+            "values": "10 'energy drain' '' '' ''",
+            "level": "8",
+            "weight": "10",
+            "cost": "580",
+            "condition": "P"
+        },
+        {
+            "vnum": "7810",
+            "name": "iksir",
+            "short_description": "bir iksir",
+            "description": "Bir iksir yerde duruyor.",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "G",
+            "wear_flags": "A",
+            "values": "10 'improved detect' 'detect magic' 'detect invis' 'weaken'",
+            "level": "4",
+            "weight": "10",
+            "cost": "290",
+            "condition": "P"
+        },
+        {
+            "vnum": "7811",
+            "name": "iksir",
+            "short_description": "bir iksir",
+            "description": "Bir iksir yerde duruyor.",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "G",
+            "wear_flags": "A",
+            "values": "50 'dispel magic' 'dispel magic' 'dispel magic' ''",
+            "level": "6",
+            "weight": "10",
+            "cost": "1380",
+            "condition": "P"
+        },
+        {
+            "vnum": "7812",
+            "name": "iksir",
+            "short_description": "bir iksir",
+            "description": "Bir iksir yerde duruyor.",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "G",
+            "wear_flags": "A",
+            "values": "10 'refresh' 'protection evil' '' ''",
+            "level": "2",
+            "weight": "10",
+            "cost": "240",
+            "condition": "P"
+        },
+        {
+            "vnum": "7813",
+            "name": "iksir",
+            "short_description": "bir iksir",
+            "description": "Bir iksir yerde duruyor.",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "G",
+            "wear_flags": "A",
+            "values": "10 'sleep' '' '' ''",
+            "level": "1",
+            "weight": "10",
+            "cost": "250",
+            "condition": "P"
+        },
+        {
+            "vnum": "7814",
+            "name": "iksir",
+            "short_description": "bir iksir",
+            "description": "Bir iksir yerde duruyor.",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "G",
+            "wear_flags": "A",
+            "values": "10 'bless' '' '' ''",
+            "level": "1",
+            "weight": "10",
+            "cost": "220",
+            "condition": "P"
+        },
+        {
+            "vnum": "7815",
+            "name": "iksir",
+            "short_description": "bir iksir",
+            "description": "Bir iksir yerde duruyor.",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "G",
+            "wear_flags": "A",
+            "values": "10 'cure critical' '' '' ''",
+            "level": "5",
+            "weight": "10",
+            "cost": "330",
+            "condition": "P"
+        },
+        {
+            "vnum": "7816",
+            "name": "iksir",
+            "short_description": "bir iksir",
+            "description": "Bir iksir yerde duruyor.",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "G",
+            "wear_flags": "A",
+            "values": "14 'farsight' '' '' ''",
+            "level": "6",
+            "weight": "10",
+            "cost": "420",
+            "condition": "P"
+        },
+        {
+            "vnum": "7817",
+            "name": "parþömen",
+            "short_description": "bir parþömen",
+            "description": "Bir parþömen yerde duruyor.",
+            "material": "vellum",
+            "type": "scroll",
+            "extra_flags": "G",
+            "wear_flags": "A",
+            "values": "10 'cure critical' '' '' ''",
+            "level": "5",
+            "weight": "10",
+            "cost": "660",
+            "condition": "P"
+        },
+        {
+            "vnum": "7818",
+            "name": "parþömen",
+            "short_description": "bir parþömen",
+            "description": "Bir parþömen yerde duruyor.",
+            "material": "vellum",
+            "type": "scroll",
+            "extra_flags": "G",
+            "wear_flags": "A",
+            "values": "16 'enchant armor' '' '' ''",
+            "level": "8",
+            "weight": "10",
+            "cost": "1090",
+            "condition": "P"
+        },
+        {
+            "vnum": "7819",
+            "name": "parþömen",
+            "short_description": "bir parþömen",
+            "description": "Bir parþömen yerde duruyor.",
+            "material": "vellum",
+            "type": "scroll",
+            "extra_flags": "G",
+            "wear_flags": "A",
+            "values": "10 'detect evil' '' '' ''",
+            "level": "0",
+            "weight": "10",
+            "cost": "400",
+            "condition": "P"
+        },
+        {
+            "vnum": "7820",
+            "name": "parþömen",
+            "short_description": "bir parþömen",
+            "description": "Bir parþömen yerde duruyor.",
+            "material": "vellum",
+            "type": "scroll",
+            "extra_flags": "G",
+            "wear_flags": "A",
+            "values": "10 'create water' '' '' ''",
+            "level": "0",
+            "weight": "10",
+            "cost": "400",
+            "condition": "P"
+        },
+        {
+            "vnum": "7821",
+            "name": "parþömen",
+            "short_description": "bir parþömen",
+            "description": "Bir parþömen yerde duruyor.",
+            "material": "vellum",
+            "type": "scroll",
+            "extra_flags": "G",
+            "wear_flags": "A",
+            "values": "10 'magic missile' '' '' ''",
+            "level": "0",
+            "weight": "10",
+            "cost": "400",
+            "condition": "P"
+        },
+        {
+            "vnum": "7822",
+            "name": "parþömen",
+            "short_description": "bir parþömen",
+            "description": "Bir parþömen yerde duruyor.",
+            "material": "vellum",
+            "type": "scroll",
+            "extra_flags": "G",
+            "wear_flags": "A",
+            "values": "10 'chill touch' '' '' ''",
+            "level": "0",
+            "weight": "10",
+            "cost": "400",
+            "condition": "P"
+        },
+        {
+            "vnum": "7823",
+            "name": "parþömen",
+            "short_description": "bir parþömen",
+            "description": "Bir parþömen yerde duruyor.",
+            "material": "vellum",
+            "type": "scroll",
+            "extra_flags": "G",
+            "wear_flags": "A",
+            "values": "10 'heal' '' '' ''",
+            "level": "11",
+            "weight": "10",
+            "cost": "1360",
+            "condition": "P"
+        },
+        {
+            "vnum": "7825",
+            "name": "cirit çift-elli",
+            "short_description": "bir cirit",
+            "description": "Bir cirit yerde duruyor.",
+            "material": "wood",
+            "type": "weapon",
+            "extra_flags": "G",
+            "wear_flags": "AN",
+            "values": "staff 3 7 pound F",
+            "level": "14",
+            "weight": "50",
+            "cost": "310",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "1"
+                }
+            ]
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "7800",
+            "name": "Düzlüklerden uzanan bir Patika",
+            "description": "Ofcol'dan uzak bir yoldasýn. Yol iyi görünmüyor, ancak nispeten iyi korunuyor.\nGüneyinde Ofcol bulunan bu yol kuzeye doðru uzanmakta.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Yol kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7801"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ofcol'u görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "323"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "8829"
+                }
+            ]
+        },
+        {
+            "vnum": "7801",
+            "name": "Patika",
+            "description": "Ofcoldan uzak bir yoldasýn. Ana yol kuzeyde bir tepeye, güney ise Ofcol'a\ndoðru gitmekte. Batý ve doðuda yan yollar görünüyor, geniþliðine bakýlýrsa\nbir geyik patikasý.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Tepeyi görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7804"
+                },
+                {
+                    "door": "D1",
+                    "description": "Küçük Patikayý görüyorsun.\n\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7803"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ofcol'a giden yolu görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7800"
+                },
+                {
+                    "door": "D3",
+                    "description": "Küçük Patikayý görüyorsun.\n\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7802"
+                }
+            ]
+        },
+        {
+            "vnum": "7802",
+            "name": "Dar bir Patika",
+            "description": "Bu küçük geyik patikasý kuzeye ve doðuya doðru uzanýyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Patika kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7867"
+                },
+                {
+                    "door": "D1",
+                    "description": "Ana yol doðuya doðru.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7801"
+                }
+            ]
+        },
+        {
+            "vnum": "7803",
+            "name": "Dar bir Patika",
+            "description": "Bu küçük geyik patikasý kuzeye ve batýya doðru uzanýyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Patika kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7849"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ana yol batýya doðru.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7801"
+                }
+            ]
+        },
+        {
+            "vnum": "7804",
+            "name": "Tepeden bakýþ",
+            "description": "Büyük bir vadinin üzerindesin. Aþaðýda, vadinin etrafýnda dolaþan insansý\nformlar görüyorsun. Zengin yeþil çim, vadiyi kaplayan ve manzarayý süsleyen\nküçük aðaçlar var. Güneyde Ofcol'a doðru giden bir yol görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Ofcol'a giden yolu görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7801"
+                },
+                {
+                    "door": "D5",
+                    "description": "Vadiye giriþi görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7805"
+                }
+            ]
+        },
+        {
+            "vnum": "7805",
+            "name": "Çora Vadisi'nin Giriþi",
+            "description": "Çora Vadisi'nin giriþindesin. Çoralar davetsiz giriþini farkediyor,\nama çoðu seninle uðraþmak için çok meþgul. Vadi doðuya ve batýya doðru\ngeniþlerken kuzeye yayýlýyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Vadi kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7810"
+                },
+                {
+                    "door": "D1",
+                    "description": "Vadi doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7807"
+                },
+                {
+                    "door": "D3",
+                    "description": "Vadi batýya doðru devam ediyor..\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7806"
+                },
+                {
+                    "door": "D4",
+                    "description": "Yukarýda tepeyi görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7804"
+                }
+            ]
+        },
+        {
+            "vnum": "7806",
+            "name": "Vadinin Kenarý",
+            "description": "Çora vadisinin kenarýndasýn. Yukarýda, tüm vadiyi çevreleyen küçük\nbir patika görüyorsun. Vadi kuzey ve doðuya doðru devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Vadi kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7809"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðuda vadinin giriþi var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7805"
+                }
+            ]
+        },
+        {
+            "vnum": "7807",
+            "name": "Vadinin Kenarý",
+            "description": "Çora vadisinin kenarýndasýn. Yukarýda, tüm vadiyi çevreleyen küçük\nbir patika görüyorsun. Vadi kuzey ve batýya doðru devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Vadi kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7811"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda vadinin giriþi var.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7805"
+                }
+            ]
+        },
+        {
+            "vnum": "7808",
+            "name": "Vadinin Kenarý",
+            "description": "Çora vadisinin kenarýndasýn. Yukarýda, tüm vadiyi çevreleyen küçük\nbir patika görüyorsun. Vadi kuzey ve doðuya doðru devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Vadi kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7813"
+                },
+                {
+                    "door": "D1",
+                    "description": "Vadi doðya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7809"
+                }
+            ]
+        },
+        {
+            "vnum": "7809",
+            "name": "Çora Vadisi",
+            "description": "Çora Vadisindesin. Vadi her yöne doðru devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Vadi kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7814"
+                },
+                {
+                    "door": "D1",
+                    "description": "Vadi doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7810"
+                },
+                {
+                    "door": "D2",
+                    "description": "Vadi güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7806"
+                },
+                {
+                    "door": "D3",
+                    "description": "Vadi batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7808"
+                }
+            ]
+        },
+        {
+            "vnum": "7810",
+            "name": "Çora Vadisi",
+            "description": "Çora Vadisindesin. Vadi her yöne doðru devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Vadi kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7815"
+                },
+                {
+                    "door": "D1",
+                    "description": "Vadi doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7811"
+                },
+                {
+                    "door": "D2",
+                    "description": "Vadinin giriþini görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7805"
+                },
+                {
+                    "door": "D3",
+                    "description": "Vadi batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7809"
+                }
+            ]
+        },
+        {
+            "vnum": "7811",
+            "name": "Çora Vadisi",
+            "description": "Çora vadisindesin. Vadi her yöne doðru devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Vadi kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7816"
+                },
+                {
+                    "door": "D1",
+                    "description": "Vadi doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7812"
+                },
+                {
+                    "door": "D2",
+                    "description": "Vadi güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7807"
+                },
+                {
+                    "door": "D3",
+                    "description": "Vadi batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7810"
+                }
+            ]
+        },
+        {
+            "vnum": "7812",
+            "name": "Vadinin Kenarý",
+            "description": "Çora Vadisinin kenarýndasýn. Yukarýda, tüm vadiyi çevreleyen küçük\nbir patika görüyorsun. Vadi kuzey ve batý yönünde devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Vadi kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7817"
+                },
+                {
+                    "door": "D3",
+                    "description": "Vadi batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7811"
+                }
+            ]
+        },
+        {
+            "vnum": "7813",
+            "name": "Vadinin Kenarý",
+            "description": "Çora Vadisinin kenarýndasýn. Dik bir patika vadiyi çevreleyen geyik patikasýna\ndoðru uzanýyor. Vadi kuzey, güney ve doðu yönünde devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Vadi kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7818"
+                },
+                {
+                    "door": "D1",
+                    "description": "Vadi doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7814"
+                },
+                {
+                    "door": "D2",
+                    "description": "Vadi güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7808"
+                },
+                {
+                    "door": "D4",
+                    "description": "Dik patika yukarý doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7863"
+                }
+            ]
+        },
+        {
+            "vnum": "7814",
+            "name": "Çora Vadisi",
+            "description": "Çora vadisindesin. Vadi her yöne doðru devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Vadi kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7819"
+                },
+                {
+                    "door": "D1",
+                    "description": "Vadi doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7815"
+                },
+                {
+                    "door": "D2",
+                    "description": "Vadi güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7809"
+                },
+                {
+                    "door": "D3",
+                    "description": "Vadi batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7813"
+                }
+            ]
+        },
+        {
+            "vnum": "7815",
+            "name": "Çora Vadisi",
+            "description": "Çora vadisindesin. Vadi her yöne doðru devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Vadi kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7820"
+                },
+                {
+                    "door": "D1",
+                    "description": "Vadi doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7816"
+                },
+                {
+                    "door": "D2",
+                    "description": "Vadi güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7810"
+                },
+                {
+                    "door": "D3",
+                    "description": "Vadi batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7814"
+                }
+            ]
+        },
+        {
+            "vnum": "7816",
+            "name": "Çora Vadisi",
+            "description": "Çora vadisindesin. Vadi her yöne doðru devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Vadi kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7821"
+                },
+                {
+                    "door": "D1",
+                    "description": "Vadi doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7817"
+                },
+                {
+                    "door": "D2",
+                    "description": "Vadi güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7811"
+                },
+                {
+                    "door": "D3",
+                    "description": "Vadi batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7815"
+                }
+            ]
+        },
+        {
+            "vnum": "7817",
+            "name": "Vadinin Kenarý",
+            "description": "Çora Vadisinin kenarýndasýn. Dik bir patika vadiyi çevreleyen geyik patikasýna\ndoðru uzanýyor. Vadi kuzey, güney ve batý yönünde devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Vadi kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7822"
+                },
+                {
+                    "door": "D2",
+                    "description": "Vadi güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7812"
+                },
+                {
+                    "door": "D3",
+                    "description": "Vadi batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7816"
+                },
+                {
+                    "door": "D4",
+                    "description": "Dik patika yukarý doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7853"
+                }
+            ]
+        },
+        {
+            "vnum": "7818",
+            "name": "Vadinin Kenarý",
+            "description": "Çora Vadisinin kenarýndasýn. Dik bir patika vadiyi çevreleyen geyik patikasýna\ndoðru uzanýyor. Vadi, güney ve doðu yönünde devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Vadi doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7819"
+                },
+                {
+                    "door": "D2",
+                    "description": "Vadi güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7813"
+                }
+            ]
+        },
+        {
+            "vnum": "7819",
+            "name": "Çora Vadisi",
+            "description": "Çora vadisindesin. Vadi her yöne doðru devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Vadi kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7823"
+                },
+                {
+                    "door": "D1",
+                    "description": "Vadi doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7820"
+                },
+                {
+                    "door": "D2",
+                    "description": "Vadi güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7814"
+                },
+                {
+                    "door": "D3",
+                    "description": "Vadi batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7818"
+                }
+            ]
+        },
+        {
+            "vnum": "7820",
+            "name": "Çora Vadisi",
+            "description": "Çora vadisindesin. Vadi her yöne doðru devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Vadi kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7824"
+                },
+                {
+                    "door": "D1",
+                    "description": "Vadi doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7821"
+                },
+                {
+                    "door": "D2",
+                    "description": "Vadi güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7815"
+                },
+                {
+                    "door": "D3",
+                    "description": "Vadi batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7819"
+                }
+            ]
+        },
+        {
+            "vnum": "7821",
+            "name": "Çora Vadisi",
+            "description": "Çora vadisindesin. Vadi her yöne doðru devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Vadi kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7825"
+                },
+                {
+                    "door": "D1",
+                    "description": "Vadi doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7822"
+                },
+                {
+                    "door": "D2",
+                    "description": "Vadi güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7816"
+                },
+                {
+                    "door": "D3",
+                    "description": "Vadi batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7820"
+                }
+            ]
+        },
+        {
+            "vnum": "7822",
+            "name": "Vadinin Kenarý",
+            "description": "Çora Vadisinin kenarýndasýn. Dik bir patika vadiyi çevreleyen geyik patikasýna\ndoðru uzanýyor. Vadi, güney ve batý yönünde devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Vadi güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7817"
+                },
+                {
+                    "door": "D3",
+                    "description": "Vadi batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7821"
+                }
+            ]
+        },
+        {
+            "vnum": "7823",
+            "name": "Vadinin Kenarý",
+            "description": "Çora Vadisinin kenarýndasýn. Dik bir patika vadiyi çevreleyen geyik patikasýna\ndoðru uzanýyor. Vadi, güney ve doðu yönünde devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Vadi doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7824"
+                },
+                {
+                    "door": "D2",
+                    "description": "Vadi güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7819"
+                }
+            ]
+        },
+        {
+            "vnum": "7824",
+            "name": "Vadinin Kenarý",
+            "description": "Çora vadisindesin. Vadi her yöne doðru devam ediyor.\nKuzeyde küçük, vadiden uzaklaþan dar bir patika var.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Küçük bir patika vadiden uzaklaþýyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7826"
+                },
+                {
+                    "door": "D1",
+                    "description": "Vadi doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7825"
+                },
+                {
+                    "door": "D2",
+                    "description": "Vadi güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7820"
+                },
+                {
+                    "door": "D3",
+                    "description": "Vadi batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7823"
+                }
+            ]
+        },
+        {
+            "vnum": "7825",
+            "name": "Vadinin Kenarý",
+            "description": "Çora Vadisinin kenarýndasýn. tüm vadiyi çevreleyen küçük bir patika görüyorsun.\nVadi güneye ve batýya doðru devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Vadi güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7821"
+                },
+                {
+                    "door": "D3",
+                    "description": "Vadi batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7824"
+                }
+            ]
+        },
+        {
+            "vnum": "7826",
+            "name": "Vadinin dýþýna uzanan bir Patika",
+            "description": "Çora Vadisinden uzaklaþan dar bir patika üzerindesin.\nBu patika kuzeye ve güneye gidiyor. Örme bir merdiven bir örme köprüye uzanýyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Patika kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7827"
+                },
+                {
+                    "door": "D2",
+                    "description": "Patika vadiye doðru uzanýyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7824"
+                },
+                {
+                    "door": "D4",
+                    "description": "Yukarýda örme köprüyü görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7858"
+                }
+            ]
+        },
+        {
+            "vnum": "7827",
+            "name": "Patika",
+            "description": "Çora Vadisinden uzaklaþan bir patikadasýn. Çevrendeki tepeler patikayý\ndaraltýyor. Patika doðu, güney, batý ve kuzeye doðru devam ediyor.\nKuzeye doðru bir tarla görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Arcadia Yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "12018"
+                },
+                {
+                    "door": "D1",
+                    "description": "Patika doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7828"
+                },
+                {
+                    "door": "D2",
+                    "description": "Patika güneye doðru vadiye uzanýyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7826"
+                },
+                {
+                    "door": "D3",
+                    "description": "Patika batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7868"
+                }
+            ]
+        },
+        {
+            "vnum": "7828",
+            "name": "Patikada bir dönemeç",
+            "description": "Çora Vadisinden uzaklaþan bir patikadasýn. Çevrendeki tepeler patikayý\ndaraltýyor. Patika batý ve kuzeye doðru devam ediyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzeyde küçük bir vadi görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7829"
+                },
+                {
+                    "door": "D3",
+                    "description": "Patika batýya doðru uzanýyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7827"
+                }
+            ]
+        },
+        {
+            "vnum": "7829",
+            "name": "Daha küçük bir Vadi",
+            "description": "Bu tepelerin içindeki baþka bir vadide bulunuyorsun. Kuzeyde bir bina var ve\ngüneyde bu vadiden uzaklaþan bir yol görüyorsun. Batý ve doðu yollarý bu binayý\nçevrelemekte.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Binayý görüyorsun.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7834"
+                },
+                {
+                    "door": "D1",
+                    "description": "Binanýn etrafýndaki Patikayý görüyorsun.\n\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7831"
+                },
+                {
+                    "door": "D2",
+                    "description": "Vadiden uzaklaþan Patikayý görüyorsun.\n\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7828"
+                },
+                {
+                    "door": "D3",
+                    "description": "Binanýn etrafýndaki Patikayý görüyorsun.\n\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7830"
+                }
+            ]
+        },
+        {
+            "vnum": "7830",
+            "name": "Vadideki bir Patika",
+            "description": "Çora Vadisinde bir patikadasýn. Bu patika kuzeye ve doðuya doðru gidiyor.\nKuzeydoðuda bir bina görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7832"
+                },
+                {
+                    "door": "D1",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7829"
+                }
+            ]
+        },
+        {
+            "vnum": "7831",
+            "name": "Vadideki bir Patika",
+            "description": "Çora Vadisinde bir patikadasýn. Bu patika batýya ve doðuya doðru gidiyor.\nKuzeybatýda bir bina görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7833"
+                },
+                {
+                    "door": "D3",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7829"
+                }
+            ]
+        },
+        {
+            "vnum": "7832",
+            "name": "Vadideki bir Patika",
+            "description": "Çora Vadisinde bir patikadasýn. Bu patika kuzeye ve güneye doðru gidiyor.\nDoðuda bir bina görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7837"
+                },
+                {
+                    "door": "D2",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7830"
+                }
+            ]
+        },
+        {
+            "vnum": "7833",
+            "name": "Vadideki bir Patika",
+            "description": "Çora Vadisinde bir patikadasýn. Bu patika kuzeye ve batýya gidiyor.\nKuzeybatýda bir bina görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7836"
+                },
+                {
+                    "door": "D3",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7831"
+                }
+            ]
+        },
+        {
+            "vnum": "7834",
+            "name": "Çora Yuvasý",
+            "description": "Vadi çoralarýnýn evindesin. Bina kuzeye ve doðuya devam ediyor.\nGüneye doðru bir çýkýþ var.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Bina kuzeye devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7838"
+                },
+                {
+                    "door": "D1",
+                    "description": "Bina doðuya devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7835"
+                },
+                {
+                    "door": "D2",
+                    "description": "Güneyde bir çýkýþ görüyorsun.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7829"
+                }
+            ]
+        },
+        {
+            "vnum": "7835",
+            "name": "Mutfak",
+            "description": "Vadi çoralarýnýn halk mutfaðýndasýn. Duvarlara sýralanmýþ tencere ve tavalar,\nyiyecek dolu raflar görüyorsun. Bir kenarda ise büyükce bir fýrýn bulunuyor,\npiþmiþ çorabiyelerin kokusunu alýyorsun. Kuzeyde ve batýda kapýlar bulunuyor.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Bina kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7839"
+                },
+                {
+                    "door": "D3",
+                    "description": "Bina batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7834"
+                }
+            ]
+        },
+        {
+            "vnum": "7836",
+            "name": "Vadideki bir Patika",
+            "description": "Çora Vadisinde bir patikadasýn. Bu patika kuzeye ve güneye doðru devam ediyor.\nBatýda bir bina görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7840"
+                },
+                {
+                    "door": "D2",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7833"
+                }
+            ]
+        },
+        {
+            "vnum": "7837",
+            "name": "Vadideki bir Patika",
+            "description": "Çora Vadisinde bir patikadasýn. Bu patika kuzeye ve güneye doðru devam ediyor.\nDoðuda bir bina görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7841"
+                },
+                {
+                    "door": "D2",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7832"
+                }
+            ]
+        },
+        {
+            "vnum": "7838",
+            "name": "Salon",
+            "description": "Çora evinin oturma odasýndasýn. Zemin halýlar ile kaplý ve bir masa üzerinde\nmeyve dolu bir kase görüyorsun. Pencereden kýr çiçeklerini ve uzun, yeþil\notlarýyla vadiyi izliyorsun.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Bina doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7839"
+                },
+                {
+                    "door": "D2",
+                    "description": "Bina güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7834"
+                }
+            ]
+        },
+        {
+            "vnum": "7839",
+            "name": "Depo",
+            "description": "Çora evinin deposundasýn. Odanýn bir tarafý un çuvallarý ve diðer tarafý ve\ntemizlik malzemeleri ile kaplý. Burada ilgini çeken hiçbir þey bulamýyorsun.\nBir merdiven yukarý uzanýyor.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Bina güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7835"
+                },
+                {
+                    "door": "D3",
+                    "description": "Bina batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7838"
+                },
+                {
+                    "door": "D4",
+                    "description": "Ýkinci katý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7848"
+                }
+            ]
+        },
+        {
+            "vnum": "7840",
+            "name": "Vadideki bir Patika",
+            "description": "Çora Vadisinde bir patikadasýn. Bu patika kuzeye ve güneye doðru gidiyor.\nBatýda bir bina görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7844"
+                },
+                {
+                    "door": "D2",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7836"
+                }
+            ]
+        },
+        {
+            "vnum": "7841",
+            "name": "Vadideki bir Patika",
+            "description": "Çora Vadisinde bir patikadasýn. Bu patika doðuya ve güneye doðru gidiyor.\nGüneydoðuda bir bina görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7842"
+                },
+                {
+                    "door": "D2",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7837"
+                }
+            ]
+        },
+        {
+            "vnum": "7842",
+            "name": "Vadideki bir Patika",
+            "description": "Çora Vadisinde bir patikadasýn. Bu patika batýya ve doðuya doðru gidiyor.\nGüneyde bir bina görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7843"
+                },
+                {
+                    "door": "D3",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7841"
+                }
+            ]
+        },
+        {
+            "vnum": "7843",
+            "name": "Vadideki bir Patika",
+            "description": "Çora Vadisinde bir patikadasýn.  Bu patika doðuya ve batýya doðru gidiyor.\nGüneyde bir bina görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7844"
+                },
+                {
+                    "door": "D3",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7842"
+                }
+            ]
+        },
+        {
+            "vnum": "7844",
+            "name": "Vadideki bir Patika",
+            "description": "Çora Vadisinde bir patikadasýn.  Bu patika güneye ve batýya doðru gidiyor.\nGüneydoðuda bir bina görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7840"
+                },
+                {
+                    "door": "D3",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7843"
+                }
+            ]
+        },
+        {
+            "vnum": "7845",
+            "name": "Ýhtiyarlar Odasý",
+            "description": "Vadi çorasý ihtiyarlarýnýn odasýndasýn. Garip dillerde yazýlmýþ kitaplarla\ndolu bir raf ve parþömenlerle kaplý bir masa görüyorsun. Odanýn merkezinde\npürüzsüz bir küresel nesne var.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Baþka bir oda görüyorsun.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7847"
+                },
+                {
+                    "door": "D1",
+                    "description": "Baþka bir oda görüyorsun.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "7804",
+                    "u1_vnum": "7846"
+                }
+            ]
+        },
+        {
+            "vnum": "7846",
+            "name": "Depo",
+            "description": "Bir depolama odasýndasýn.\nBirçok önemsiz (senin için) eþya bu odayý dolduruyor.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Baþka bir oda görüyorsun.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "7804",
+                    "u1_vnum": "7848"
+                },
+                {
+                    "door": "D3",
+                    "description": "Baþka bir oda görüyorsun.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "7804",
+                    "u1_vnum": "7845"
+                }
+            ]
+        },
+        {
+            "vnum": "7847",
+            "name": "Dinlenme Bölmeleri",
+            "description": "Vadi çoralarýnýn dinlenme bölmelerindesin. Yerlerde bebek karyolalarý sýralý,\nvadiyi manzara alan iki pencere görüyorsun. Raflarda tuhaf dillerde kitaplar\nsýralý ancak ilgi çekici bir þey var gibi durmuyor.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Baþka bir oda görüyorsun.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7848"
+                },
+                {
+                    "door": "D2",
+                    "description": "Baþka bir oda görüyorsun.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7845"
+                }
+            ]
+        },
+        {
+            "vnum": "7848",
+            "name": "Çalýþma Odasý",
+            "description": "Vadi elflerinin çalýþma odasýndasýn. Yerde konforlu halýlar ve raflara düzgün\nbir þekilde yerleþtirilmiþ müzik aletleri dikkatini çekiyor. Garip dillerde\nyazýlmýþ kitaplar bazý çoralarý sýraya sokuyor.\nBirinci kata inen bir merdiven görüyorsun.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Baþka bir oda görüyorsun.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "7804",
+                    "u1_vnum": "7846"
+                },
+                {
+                    "door": "D3",
+                    "description": "Baþka bir oda görüyorsun.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7847"
+                },
+                {
+                    "door": "D5",
+                    "description": "Birinci katý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7839"
+                }
+            ]
+        },
+        {
+            "vnum": "7849",
+            "name": "Vadinin Kenarýndaki Rüzgarlý bir Patika",
+            "description": "Çora vadisinin kenarýnda dar bir yoldasýn. Aþaðýda, kýr çiçekleri ve\nuzun, yeþil otlarla dolu vadiyi görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7850"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7803"
+                },
+                {
+                    "door": "D5",
+                    "description": "Bu patika yolculuða devam etmek için hiç güvenli durmuyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7883"
+                }
+            ]
+        },
+        {
+            "vnum": "7850",
+            "name": "Vadinin Kenarýndaki Rüzgarlý bir Patika",
+            "description": "Çora vadisinin kenarýnda dar bir yoldasýn. Aþaðýda, kýr çiçekleri ve\nuzun, yeþil otlarla dolu vadiyi görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7851"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7849"
+                },
+                {
+                    "door": "D5",
+                    "description": "Bu patika yolculuða devam etmek için hiç güvenli durmuyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7883"
+                }
+            ]
+        },
+        {
+            "vnum": "7851",
+            "name": "Vadinin Kenarýndaki Rüzgarlý bir Patika",
+            "description": "Çora vadisinin kenarýnda dar bir yoldasýn. Aþaðýda, kýr çiçekleri ve\nuzun, yeþil otlarla dolu vadiyi görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7852"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7850"
+                },
+                {
+                    "door": "D5",
+                    "description": "Bu patika yolculuða devam etmek için hiç güvenli durmuyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7883"
+                }
+            ]
+        },
+        {
+            "vnum": "7852",
+            "name": "Vadinin Kenarýndaki Rüzgarlý bir Patika",
+            "description": "Çora vadisinin kenarýnda dar bir yoldasýn. Aþaðýda, kýr çiçekleri ve\nuzun, yeþil otlarla dolu vadiyi görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7853"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7851"
+                },
+                {
+                    "door": "D5",
+                    "description": "Bu patika yolculuða devam etmek için hiç güvenli durmuyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7883"
+                }
+            ]
+        },
+        {
+            "vnum": "7853",
+            "name": "Vadinin Kenarýndaki Rüzgarlý bir Patika",
+            "description": "Çora vadisinin kenarýnda dar bir yoldasýn. Aþaðýda, kýr çiçekleri ve\nuzun, yeþil otlarla dolu vadiyi görüyorsun.\nVadiye inen güvenli bir patika dikkatini çekiyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7854"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7852"
+                },
+                {
+                    "door": "D5",
+                    "description": "Aþaðýdaki patika güvenli duruyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7817"
+                }
+            ]
+        },
+        {
+            "vnum": "7854",
+            "name": "Vadinin Kenarýndaki Rüzgarlý bir Patika",
+            "description": "Çora vadisinin kenarýnda dar bir yoldasýn. Aþaðýda, kýr çiçekleri ve\nuzun, yeþil otlarla dolu vadiyi görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7853"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7855"
+                },
+                {
+                    "door": "D5",
+                    "description": "Bu patika yolculuða devam etmek için hiç güvenli durmuyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7883"
+                }
+            ]
+        },
+        {
+            "vnum": "7855",
+            "name": "Vadinin Kenarýndaki Rüzgarlý bir Patika",
+            "description": "Çora vadisinin kenarýnda dar bir yoldasýn. Aþaðýda, kýr çiçekleri ve\nuzun, yeþil otlarla dolu vadiyi görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7856"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7854"
+                },
+                {
+                    "door": "D5",
+                    "description": "Bu patika yolculuða devam etmek için hiç güvenli durmuyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7883"
+                }
+            ]
+        },
+        {
+            "vnum": "7856",
+            "name": "Vadinin Kenarýndaki Rüzgarlý bir Patika",
+            "description": "Çora vadisinin kenarýnda dar bir yoldasýn. Aþaðýda, kýr çiçekleri ve\nuzun, yeþil otlarla dolu vadiyi görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7855"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7857"
+                },
+                {
+                    "door": "D5",
+                    "description": "Bu patika yolculuða devam etmek için hiç güvenli durmuyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7883"
+                }
+            ]
+        },
+        {
+            "vnum": "7857",
+            "name": "Vadinin Kenarýndaki Rüzgarlý bir Patika",
+            "description": "Çora vadisinin kenarýnda dar bir yoldasýn. Aþaðýda, kýr çiçekleri ve\nuzun, yeþil otlarla dolu vadiyi görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7856"
+                },
+                {
+                    "door": "D3",
+                    "description": "Bir örme köprü görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7858"
+                },
+                {
+                    "door": "D5",
+                    "description": "Bu patika yolculuða devam etmek için hiç güvenli durmuyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7883"
+                }
+            ]
+        },
+        {
+            "vnum": "7858",
+            "name": "Örme Köprü",
+            "description": "Örme köprünün üzerindesin. Buradan çoralarýn bütün vadisini görebiliyorsun.\nGüneyde ana vadiyi görüyorsun. Kuzeydoðuda, ortasýnda bir bina bulunan daha\nküçük bir vadi görüyorsunuz. Kuzeybatýda, merkezinde bir kulübe bulunan çok\nküçük bir vadi görebilirsiniz. Bir patikaya doðru inen örgüden\nbir merdiven görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7857"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7859"
+                },
+                {
+                    "door": "D5",
+                    "description": "Patikayý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7826"
+                }
+            ]
+        },
+        {
+            "vnum": "7859",
+            "name": "Vadinin Kenarýndaki Rüzgarlý bir Patika",
+            "description": "Çora vadisinin kenarýnda dar bir yoldasýn. Aþaðýda, kýr çiçekleri ve\nuzun, yeþil otlarla dolu vadiyi görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Örme bir köprü görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7858"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7860"
+                },
+                {
+                    "door": "D5",
+                    "description": "Bu patika yolculuða devam etmek için hiç güvenli durmuyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7883"
+                }
+            ]
+        },
+        {
+            "vnum": "7860",
+            "name": "Vadinin Kenarýndaki Rüzgarlý bir Patika",
+            "description": "Çora vadisinin kenarýnda dar bir yoldasýn. Aþaðýda, kýr çiçekleri ve\nuzun, yeþil otlarla dolu vadiyi görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7859"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7861"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "8800"
+                },
+                {
+                    "door": "D5",
+                    "description": "Bu patika yolculuða devam etmek için hiç güvenli durmuyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7883"
+                }
+            ]
+        },
+        {
+            "vnum": "7861",
+            "name": "Vadinin Kenarýndaki Rüzgarlý bir Patika",
+            "description": "Çora vadisinin kenarýnda dar bir yoldasýn. Aþaðýda, kýr çiçekleri ve\nuzun, yeþil otlarla dolu vadiyi görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7860"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7862"
+                },
+                {
+                    "door": "D5",
+                    "description": "Bu patika yolculuða devam etmek için hiç güvenli durmuyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7883"
+                }
+            ]
+        },
+        {
+            "vnum": "7862",
+            "name": "Vadinin Kenarýndaki Rüzgarlý bir Patika",
+            "description": "Çora vadisinin kenarýnda dar bir yoldasýn. Aþaðýda, kýr çiçekleri ve\nuzun, yeþil otlarla dolu vadiyi görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7861"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7863"
+                },
+                {
+                    "door": "D5",
+                    "description": "Bu patika yolculuða devam etmek için hiç güvenli durmuyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7883"
+                }
+            ]
+        },
+        {
+            "vnum": "7863",
+            "name": "Vadinin Kenarýndaki Rüzgarlý bir Patika",
+            "description": "Çora vadisinin kenarýnda dar bir yoldasýn. Aþaðýda, kýr çiçekleri ve\nuzun, yeþil otlarla dolu vadiyi görüyorsun.\nVadiye inen güvenli bir patika dikkatini çekiyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7862"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7864"
+                },
+                {
+                    "door": "D5",
+                    "description": "The trail down looks safe.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7813"
+                }
+            ]
+        },
+        {
+            "vnum": "7864",
+            "name": "Vadinin Kenarýndaki Rüzgarlý bir Patika",
+            "description": "Çora vadisinin kenarýnda dar bir yoldasýn. Aþaðýda, kýr çiçekleri ve\nuzun, yeþil otlarla dolu vadiyi görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7863"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7865"
+                },
+                {
+                    "door": "D5",
+                    "description": "Bu patika yolculuða devam etmek için hiç güvenli durmuyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7883"
+                }
+            ]
+        },
+        {
+            "vnum": "7865",
+            "name": "Vadinin Kenarýndaki Rüzgarlý bir Patika",
+            "description": "Çora vadisinin kenarýnda dar bir yoldasýn. Aþaðýda, kýr çiçekleri ve\nuzun, yeþil otlarla dolu vadiyi görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7866"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7864"
+                },
+                {
+                    "door": "D5",
+                    "description": "Bu patika yolculuða devam etmek için hiç güvenli durmuyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7883"
+                }
+            ]
+        },
+        {
+            "vnum": "7866",
+            "name": "Vadinin Kenarýndaki Rüzgarlý bir Patika",
+            "description": "Çora vadisinin kenarýnda dar bir yoldasýn. Aþaðýda, kýr çiçekleri ve\nuzun, yeþil otlarla dolu vadiyi görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7865"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7867"
+                },
+                {
+                    "door": "D5",
+                    "description": "Bu patika yolculuða devam etmek için hiç güvenli durmuyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7883"
+                }
+            ]
+        },
+        {
+            "vnum": "7867",
+            "name": "Vadinin Kenarýndaki Rüzgarlý bir Patika",
+            "description": "Çora vadisinin kenarýnda dar bir yoldasýn. Aþaðýda, kýr çiçekleri ve\nuzun, yeþil otlarla dolu vadiyi görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7802"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7866"
+                },
+                {
+                    "door": "D5",
+                    "description": "Bu patika yolculuða devam etmek için hiç güvenli durmuyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7883"
+                }
+            ]
+        },
+        {
+            "vnum": "7868",
+            "name": "Patikadaki bir dönemeç",
+            "description": "Ana vadiden uzanan patikada bir dönemeçtesin. Çevrenizdeki tepeler bu\npatikayý oldukça daraltýyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Patika kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7869"
+                },
+                {
+                    "door": "D1",
+                    "description": "Patika doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7827"
+                }
+            ]
+        },
+        {
+            "vnum": "7869",
+            "name": "Patikadaki bir dönemeç",
+            "description": "Ana vadiden uzanan patikada bir dönemeçtesin. Çevrendeki tepeler bu\npatikayý oldukça daraltýyor. Batýda, daha da küçük bir vadi görüyorsun,\nortasýnda küçük bir kulübe var gibi duruyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Patika güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7868"
+                },
+                {
+                    "door": "D3",
+                    "description": "Küçük vadinin giriþi batýda.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7870"
+                }
+            ]
+        },
+        {
+            "vnum": "7870",
+            "name": "Küçük Vadi",
+            "description": "Küçük vadidesin. Burada garip bir þekilde uzun aðaçlar büyüyor, neredeyse\nbüyümelerine yardýmcý olmak için biraz sihir kullanýlmýþ gibi. Bu vadiden\nçýkýþ doðudan, kulübeye giriþ ise batýdandýr.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Vadi kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7871"
+                },
+                {
+                    "door": "D1",
+                    "description": "Bu küçük vadiden çýkýþ doðuya doðrudur.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7869"
+                },
+                {
+                    "door": "D2",
+                    "description": "Vadi güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7872"
+                },
+                {
+                    "door": "D3",
+                    "description": "Küçük kulübeyi görüyorsun.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7878"
+                }
+            ]
+        },
+        {
+            "vnum": "7871",
+            "name": "Küçük Vadi",
+            "description": "Küçük vadidesin. Burada garip bir þekilde uzun aðaçlar büyüyor, neredeyse\nbüyümelerine yardýmcý olmak için biraz sihir kullanýlmýþ gibi.\nGüneybatýda küçük bir kulübe görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Vadi güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7870"
+                },
+                {
+                    "door": "D3",
+                    "description": "Vadi batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7873"
+                }
+            ]
+        },
+        {
+            "vnum": "7872",
+            "name": "Küçük Vadi",
+            "description": "Küçük vadidesin. Burada garip bir þekilde uzun aðaçlar büyüyor, neredeyse\nbüyümelerine yardýmcý olmak için biraz sihir kullanýlmýþ gibi.\nKuzeybatýda küçük bir kulübe görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Vadi kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7870"
+                },
+                {
+                    "door": "D3",
+                    "description": "Vadi batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7877"
+                }
+            ]
+        },
+        {
+            "vnum": "7873",
+            "name": "Küçük Vadi",
+            "description": "Küçük vadidesin. Burada garip bir þekilde uzun aðaçlar büyüyor, neredeyse\nbüyümelerine yardýmcý olmak için biraz sihir kullanýlmýþ gibi.\nGüneyde küçük bir kulübe görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Vadi doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7871"
+                },
+                {
+                    "door": "D3",
+                    "description": "Vadi batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7874"
+                }
+            ]
+        },
+        {
+            "vnum": "7874",
+            "name": "Küçük Vadi",
+            "description": "Küçük vadidesin. Burada garip bir þekilde uzun aðaçlar büyüyor, neredeyse\nbüyümelerine yardýmcý olmak için biraz sihir kullanýlmýþ gibi. Güneydoðuda\nküçük bir kulübe kuzeyde ise yüksek bir kulenin meþe kapýlarýný görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Vadi doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7873"
+                },
+                {
+                    "door": "D2",
+                    "description": "Vadi güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7875"
+                }
+            ]
+        },
+        {
+            "vnum": "7875",
+            "name": "Küçük Vadi",
+            "description": "Küçük vadidesin. Burada garip bir þekilde uzun aðaçlar büyüyor, neredeyse\nbüyümelerine yardýmcý olmak için biraz sihir kullanýlmýþ gibi.\nDoðuda küçük bir kulübe görüyorsun\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Vadi kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7874"
+                },
+                {
+                    "door": "D2",
+                    "description": "Vadi güneye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7876"
+                }
+            ]
+        },
+        {
+            "vnum": "7876",
+            "name": "Küçük Vadi",
+            "description": "Küçük vadidesin. Burada garip bir þekilde uzun aðaçlar büyüyor, neredeyse\nbüyümelerine yardýmcý olmak için biraz sihir kullanýlmýþ gibi.\nKuzeydoðuda küçük bir kulübe görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Vadi kuzeye doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7875"
+                },
+                {
+                    "door": "D1",
+                    "description": "Vadi doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7877"
+                }
+            ]
+        },
+        {
+            "vnum": "7877",
+            "name": "Küçük Vadi",
+            "description": "Küçük vadidesin. Burada garip bir þekilde uzun aðaçlar büyüyor, neredeyse\nbüyümelerine yardýmcý olmak için biraz sihir kullanýlmýþ gibi.\nKuzeyde küçük bir kulübe görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Vadi doðuya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7872"
+                },
+                {
+                    "door": "D3",
+                    "description": "Vadi batýya doðru devam ediyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7876"
+                }
+            ]
+        },
+        {
+            "vnum": "7878",
+            "name": "Küçük Kulübenin Ýçi",
+            "description": "Küçük kulübenin içindesin. Kenarda küçük bir soba görüyorsun,\nüzerinde çorba piþiyor. Deðerli bir þey görmüyorsun.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Dýþarýda vadiyi görüyorsun.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7870"
+                },
+                {
+                    "door": "D5",
+                    "description": "Bir tuzak kapýsý görüyorsun!\n",
+                    "keyword": "trap door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7879"
+                }
+            ]
+        },
+        {
+            "vnum": "7879",
+            "name": "Küçük Kulübenin Aþaðýsý",
+            "description": "Küçük kulübenin altýnda güneye giden bir tüneldesin. Burasý oldukça\nsýcak hissettiriyor.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Kýrmýzýmsý duran bir oda görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7880"
+                },
+                {
+                    "door": "D4",
+                    "description": "Bildiðin bir yere geri döndün!\n",
+                    "keyword": "trap door",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "7878"
+                }
+            ]
+        },
+        {
+            "vnum": "7880",
+            "name": "Ateþ Hidrasý'nýn Ýni",
+            "description": "Sen Ateþ Hidrasý'nýn inindesin. Bütün duvarlar kömürleþmiþ ve bu\noda tamamen yanan katrana yakýn bir koku ile dolu.\n",
+            "flags": "AD",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuzeydeki nispi güvenliði görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "7879"
+                },
+                {
+                    "door": "D1",
+                    "description": "Doðudaki kömürleþmiþ kayada kýrýlmalar görüyorsun.\n",
+                    "keyword": "secret",
+                    "locks": "1",
+                    "key": "7805",
+                    "u1_vnum": "7882"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýda bir kapý görüyorsun.\n",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "7805",
+                    "u1_vnum": "7881"
+                }
+            ]
+        },
+        {
+            "vnum": "7881",
+            "name": "Çalýþma odasý",
+            "description": "Bu oda büyülü çalýþmalar için kullanýlýyormuþ gibi görünüyor.\nÝksirler brülörlerin üzerinde kabarcýklar oluþturuyor ve tüm\noda ot ve ölü hayvan eti kokuyor. Kenardaki bir fýrýn odayý\naydýnlatýyor. Bütün oda büyülü bir aura kaplý.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "door",
+                    "locks": "1",
+                    "key": "7805",
+                    "u1_vnum": "7880"
+                }
+            ]
+        },
+        {
+            "vnum": "7882",
+            "name": "Depo",
+            "description": "Bu oda parþömenleri, iksirleri ve diðer büyülü eþyalarý\nsaklamak için kullanýlýyor. Bütün oda büyülü bir aura ile kaplý.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "secret door",
+                    "locks": "1",
+                    "key": "7805",
+                    "u1_vnum": "7880"
+                }
+            ]
+        },
+        {
+            "vnum": "7883",
+            "name": "Vadinin derinliklerine doðru giden YOL!",
+            "description": "Dik bir yokuþtan aþaðý inmeye çalýþýrken düþtün.\nBelki de bu iyi bir fikir deðildi ha?\n\nYuvarlandýn, ve kalkamayacak kadar sersemledin.. Seni zavallý küçük þey!\n",
+            "flags": "C",
+            "sector": "0"
+        }
+    ],
+    "resets": [
+        {
+            "command": "D",
+            "arg1": "7829",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7834",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7845",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "7846",
+            "arg2": "3",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "7845",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7846",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "7847",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7847",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7848",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "7848",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7870",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7878",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7878",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7879",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "7880",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "7882",
+            "arg2": "3",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "7880",
+            "arg2": "3",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "7881",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "7800",
+            "arg2": "6",
+            "arg3": "7806",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "7800",
+            "arg2": "6",
+            "arg3": "7807",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "7800",
+            "arg2": "6",
+            "arg3": "7837",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "7800",
+            "arg2": "6",
+            "arg3": "7873",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "7800",
+            "arg2": "6",
+            "arg3": "7823",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "7800",
+            "arg2": "6",
+            "arg3": "7833",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "7801",
+            "arg2": "6",
+            "arg3": "7805",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "7801",
+            "arg2": "6",
+            "arg3": "7820",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "7801",
+            "arg2": "6",
+            "arg3": "7818",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "7801",
+            "arg2": "6",
+            "arg3": "7844",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "7801",
+            "arg2": "6",
+            "arg3": "7877",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "7801",
+            "arg2": "6",
+            "arg3": "7816",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "7802",
+            "arg2": "6",
+            "arg3": "7868",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "7802",
+            "arg2": "6",
+            "arg3": "7811",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "7802",
+            "arg2": "6",
+            "arg3": "7865",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "7802",
+            "arg2": "6",
+            "arg3": "7854",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "7802",
+            "arg2": "6",
+            "arg3": "7842",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "7802",
+            "arg2": "6",
+            "arg3": "7820",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "7803",
+            "arg2": "1",
+            "arg3": "7853",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7800",
+            "arg2": "9",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "7801",
+            "arg2": "9",
+            "arg3": "8"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "7803",
+            "arg2": "9",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "7803",
+            "arg2": "4",
+            "arg3": "7866",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7800",
+            "arg2": "9",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "7801",
+            "arg2": "9",
+            "arg3": "8"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "7803",
+            "arg2": "9",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "7803",
+            "arg2": "4",
+            "arg3": "7860",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7800",
+            "arg2": "9",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "7801",
+            "arg2": "9",
+            "arg3": "8"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "7803",
+            "arg2": "9",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "7803",
+            "arg2": "4",
+            "arg3": "7848",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7800",
+            "arg2": "9",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "7801",
+            "arg2": "9",
+            "arg3": "8"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "7803",
+            "arg2": "9",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "7804",
+            "arg2": "4",
+            "arg3": "7850",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7800",
+            "arg2": "9",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "7801",
+            "arg2": "9",
+            "arg3": "8"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "7803",
+            "arg2": "9",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "7804",
+            "arg2": "4",
+            "arg3": "7856",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7800",
+            "arg2": "9",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "7801",
+            "arg2": "9",
+            "arg3": "8"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "7803",
+            "arg2": "9",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "7804",
+            "arg2": "4",
+            "arg3": "7863",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7800",
+            "arg2": "9",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "7801",
+            "arg2": "9",
+            "arg3": "8"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "7803",
+            "arg2": "9",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "7804",
+            "arg2": "4",
+            "arg3": "7848",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7800",
+            "arg2": "9",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "7801",
+            "arg2": "9",
+            "arg3": "8"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "7803",
+            "arg2": "9",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "7805",
+            "arg2": "5",
+            "arg3": "7852",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7801",
+            "arg2": "9",
+            "arg3": "8"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "7803",
+            "arg2": "9",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "7805",
+            "arg2": "5",
+            "arg3": "7862",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7801",
+            "arg2": "9",
+            "arg3": "8"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "7803",
+            "arg2": "9",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "7805",
+            "arg2": "5",
+            "arg3": "7827",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7801",
+            "arg2": "9",
+            "arg3": "8"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "7803",
+            "arg2": "9",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "7805",
+            "arg2": "5",
+            "arg3": "7842",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7801",
+            "arg2": "9",
+            "arg3": "8"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "7803",
+            "arg2": "9",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "7805",
+            "arg2": "5",
+            "arg3": "7876",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7801",
+            "arg2": "9",
+            "arg3": "8"
+        },
+        {
+            "command": "E",
+            "arg1": "7802",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "7803",
+            "arg2": "9",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "7806",
+            "arg2": "5",
+            "arg3": "7847",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "7806",
+            "arg2": "5",
+            "arg3": "7847",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "7806",
+            "arg2": "5",
+            "arg3": "7835",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "7806",
+            "arg2": "5",
+            "arg3": "7838",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "7806",
+            "arg2": "5",
+            "arg3": "7839",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "7809",
+            "arg2": "9",
+            "arg3": "7846"
+        },
+        {
+            "command": "O",
+            "arg1": "7823",
+            "arg2": "9",
+            "arg3": "7846"
+        },
+        {
+            "command": "O",
+            "arg1": "7820",
+            "arg2": "9",
+            "arg3": "7846"
+        },
+        {
+            "command": "O",
+            "arg1": "7817",
+            "arg2": "9",
+            "arg3": "7846"
+        },
+        {
+            "command": "O",
+            "arg1": "7815",
+            "arg2": "9",
+            "arg3": "7846"
+        },
+        {
+            "command": "O",
+            "arg1": "7816",
+            "arg2": "9",
+            "arg3": "7846"
+        },
+        {
+            "command": "O",
+            "arg1": "7819",
+            "arg2": "9",
+            "arg3": "7846"
+        },
+        {
+            "command": "O",
+            "arg1": "7808",
+            "arg2": "9",
+            "arg3": "7882"
+        },
+        {
+            "command": "O",
+            "arg1": "7822",
+            "arg2": "9",
+            "arg3": "7882"
+        },
+        {
+            "command": "O",
+            "arg1": "7821",
+            "arg2": "9",
+            "arg3": "7882"
+        },
+        {
+            "command": "O",
+            "arg1": "7810",
+            "arg2": "9",
+            "arg3": "7882"
+        },
+        {
+            "command": "O",
+            "arg1": "7812",
+            "arg2": "9",
+            "arg3": "7882"
+        },
+        {
+            "command": "O",
+            "arg1": "7811",
+            "arg2": "9",
+            "arg3": "7882"
+        },
+        {
+            "command": "O",
+            "arg1": "7820",
+            "arg2": "9",
+            "arg3": "7882"
+        },
+        {
+            "command": "O",
+            "arg1": "7815",
+            "arg2": "9",
+            "arg3": "7882"
+        },
+        {
+            "command": "O",
+            "arg1": "7818",
+            "arg2": "9",
+            "arg3": "7882"
+        },
+        {
+            "command": "O",
+            "arg1": "7814",
+            "arg2": "9",
+            "arg3": "7882"
+        },
+        {
+            "command": "O",
+            "arg1": "7813",
+            "arg2": "9",
+            "arg3": "7882"
+        },
+        {
+            "command": "O",
+            "arg1": "7823",
+            "arg2": "9",
+            "arg3": "7882"
+        },
+        {
+            "command": "M",
+            "arg1": "7807",
+            "arg2": "1",
+            "arg3": "7845",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "7804",
+            "arg2": "-1"
+        },
+        {
+            "command": "E",
+            "arg1": "7806",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7825",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "7808",
+            "arg2": "1",
+            "arg3": "7845",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7806",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7825",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "7809",
+            "arg2": "1",
+            "arg3": "7880",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "7805",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "7810",
+            "arg2": "1",
+            "arg3": "7878",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "7811",
+            "arg2": "1",
+            "arg3": "7881",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7806",
+            "arg2": "-1",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "7807",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "7812",
+            "arg2": "1",
+            "arg3": "7882",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "7813",
+            "arg2": "3",
+            "arg3": "7818",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "7813",
+            "arg2": "3",
+            "arg3": "7830",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "7813",
+            "arg2": "3",
+            "arg3": "7860",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "7814",
+            "arg2": "3",
+            "arg3": "7815",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "7814",
+            "arg2": "3",
+            "arg3": "7825",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "7814",
+            "arg2": "3",
+            "arg3": "7852",
+            "arg4": "1"
+        }
+    ],
+    "shops": [],
+    "specials": [
+        {
+            "vnum": "7807",
+            "spec_fun": "spec_cast_cleric"
+        },
+        {
+            "vnum": "7808",
+            "spec_fun": "spec_cast_mage"
+        },
+        {
+            "vnum": "7809",
+            "spec_fun": "spec_breath_fire"
+        },
+        {
+            "vnum": "7811",
+            "spec_fun": "spec_cast_mage"
+        }
+    ]
+}

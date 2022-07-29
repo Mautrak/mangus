@@ -1,0 +1,584 @@
+{
+    "area": {
+        "file": "battlerager.are",
+        "name": "Battlerager",
+        "low_range": "90",
+        "high_range": "100",
+        "writer": "Chronos",
+        "credits": "The Caven of Martial Arts",
+        "min_vnum": "540",
+        "max_vnum": "549"
+    },
+    "mobiles": [
+        {
+            "vnum": "540",
+            "name": "Powerman",
+            "short_description": "the Powerman",
+            "long_description": "The Powerman of martial arts is here.\n",
+            "description": "This old giant warrior has spent all his time on martial arts. He \nnever believed the power of magic. He never used potions, wands or \nstaffs. Even he had never used a magical item. Those shows how he\nhates magic.\n",
+            "race": "giant",
+            "act": "ABJKTVe",
+            "affected_by": "DFe",
+            "alignment": "0",
+            "group": "0",
+            "level": "92",
+            "hitroll": "70",
+            "hit_dice": "2d500+25000",
+            "mana_dice": "1d1+3999",
+            "dam_dice": "10d40+90",
+            "dam_type": "slash",
+            "ac_pierce": "-90",
+            "ac_bash": "-90",
+            "ac_slash": "-90",
+            "ac_exotic": "-70",
+            "off_flags": "AIKFEC",
+            "imm_flags": "AB",
+            "res_flags": "D",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "0",
+            "form": "A",
+            "parts": "ABCDE",
+            "size": "giant",
+            "material": "0"
+        },
+        {
+            "vnum": "541",
+            "name": "Gordall",
+            "short_description": "Gordall",
+            "long_description": "Gordall the weaponsmith is here to sell his fine works.\n",
+            "description": "After spending all his years as a weaponsmaster, Gordall sells his\nproficiencies on his weapons.\n",
+            "race": "human",
+            "act": "ABTVe",
+            "affected_by": "DHFVe",
+            "alignment": "800",
+            "group": "0",
+            "level": "80",
+            "hitroll": "30",
+            "hit_dice": "3d300+17000",
+            "mana_dice": "1d1+2000",
+            "dam_dice": "15d30+80",
+            "dam_type": "pound",
+            "ac_pierce": "-80",
+            "ac_bash": "-80",
+            "ac_slash": "-80",
+            "ac_exotic": "-60",
+            "off_flags": "IJKFEDCN",
+            "imm_flags": "AB",
+            "res_flags": "D",
+            "vuln_flags": "P",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "0",
+            "form": "A",
+            "parts": "ABCDE",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "542",
+            "name": "wiseman",
+            "short_description": "A Wiseman",
+            "long_description": "A wiseman is here taking care of the young battleragers.\n",
+            "description": "Although he never attempted to learn magic, the wiseman can heal\nhaters of magic by his beneficial herbs. If you need help just \n        say 'aid me wiseman'\n",
+            "race": "human",
+            "act": "ABQVae",
+            "affected_by": "DFH",
+            "alignment": "1000",
+            "group": "0",
+            "level": "80",
+            "hitroll": "0",
+            "hit_dice": "1d1+16999",
+            "mana_dice": "1d1+999",
+            "dam_dice": "20d30+40",
+            "dam_type": "divine",
+            "ac_pierce": "-95",
+            "ac_bash": "-95",
+            "ac_slash": "-95",
+            "ac_exotic": "-65",
+            "off_flags": "FHIK",
+            "imm_flags": "ABC",
+            "res_flags": "D",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "540",
+            "name": "key",
+            "short_description": "a bone key",
+            "description": "A key, made of bone, is lying on the ground.",
+            "material": "bone",
+            "type": "key",
+            "extra_flags": "ORY",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "40",
+            "weight": "4",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "541",
+            "name": "skull",
+            "short_description": "Skull of mage",
+            "description": "An old glowing small skull is sitting on the ground.",
+            "material": "bone",
+            "type": "treasure",
+            "extra_flags": "O",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "60",
+            "weight": "1",
+            "cost": "100000",
+            "condition": "P"
+        },
+        {
+            "vnum": "542",
+            "name": "white throne",
+            "short_description": "A white throne",
+            "description": "A large white throne made from bones is standing in front of the wall here.",
+            "material": "bone",
+            "type": "container",
+            "extra_flags": "ORY",
+            "wear_flags": "P",
+            "values": "10 15 540 15 100",
+            "level": "60",
+            "weight": "1",
+            "cost": "20",
+            "condition": "P"
+        },
+        {
+            "vnum": "543",
+            "name": "pit",
+            "short_description": "the pit for donations",
+            "description": "A pit for sacrifices is in front of the altar.",
+            "material": "",
+            "type": "container",
+            "extra_flags": "O",
+            "wear_flags": "0",
+            "values": "10000 0 0 1000 100",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "pit",
+                    "description": "This pit is for battleragers, in order to donate themselves.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "544",
+            "name": "water fall waterfall",
+            "short_description": "Waterfall",
+            "description": "You see a beautiful waterfall here.\n",
+            "material": "water",
+            "type": "portal",
+            "extra_flags": "AO",
+            "wear_flags": "0",
+            "values": "0 0 B 5281 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "545",
+            "name": "dagger fine gordall",
+            "short_description": "a fine dagger",
+            "description": "A fine dagger lies upon the ground.",
+            "material": "adamantite",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "dagger 4 7 pierce ED",
+            "level": "32",
+            "weight": "450",
+            "cost": "5600",
+            "condition": "P"
+        },
+        {
+            "vnum": "546",
+            "name": "sword fine gordall",
+            "short_description": "a fine sword",
+            "description": "A fine sword lies upon the ground.",
+            "material": "adamantite",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "sword 5 6 slash ED",
+            "level": "33",
+            "weight": "450",
+            "cost": "5600",
+            "condition": "P"
+        },
+        {
+            "vnum": "547",
+            "name": "axe fine gordall",
+            "short_description": "a fine two-handed axe",
+            "description": "A fine two-handed axe lies upon the ground.",
+            "material": "adamantite",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "axe 6 6 cleave DF",
+            "level": "36",
+            "weight": "450",
+            "cost": "5600",
+            "condition": "P"
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "540",
+            "name": "Front of the caven",
+            "description": "Beyond the water fall, you are in front of a caven. Things getting darker. \nYou seek for the light but you couldn't find. But the light coming from the\nwater fall still can light the enterance of the caven.\n",
+            "flags": "XY",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5281"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "541"
+                }
+            ]
+        },
+        {
+            "vnum": "541",
+            "name": "The entrance to the Caven of Battlerager",
+            "description": "You see some sort of light coming thru the west, making the inside of\nthe caven more noticable. You see lots of weapon and blood tracks on the\nwall. There are several bones on the ground. You notice that the huge man\nlooking over you before you moving on.\n",
+            "flags": "WXY",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "540"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "5",
+                    "key": "-1",
+                    "u1_vnum": "542"
+                }
+            ]
+        },
+        {
+            "vnum": "542",
+            "name": "Inside the Caven",
+            "description": "In spite of the low level light, you notice that the caven continues to\nthe west. You see lots of bones again on the ground. You observe that\nthere seems no way from the west of the caven.\n",
+            "flags": "WXY",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "541"
+                },
+                {
+                    "door": "D3",
+                    "description": "w\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "543"
+                }
+            ]
+        },
+        {
+            "vnum": "543",
+            "name": "Deep in the caven",
+            "description": "You see that there are two openings more in the caven, one to the north\nand one to the south. To the north you see a large white throne. To the\nsouth you see some clothes and weapons left on the ground. It seems that\nthe south is something like a donation room.\n",
+            "flags": "WXY",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "545"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "542"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "544"
+                }
+            ]
+        },
+        {
+            "vnum": "544",
+            "name": "The donation room",
+            "description": "You find lots of weapons and clothings on the floor. You noticed the\nwriting on the floor.\n      \"Every battlerager is your brother.\"\nThen you change your mind, and want to put some good clothing and weapon\nhere for all other cabal members to strengten themselves, and to destroy\nmagicians.\n",
+            "flags": "WXY",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "543"
+                }
+            ]
+        },
+        {
+            "vnum": "545",
+            "name": "Battle Square",
+            "description": "You see lots of bones on the floor. You think that you are very near to\nthe place where martial arts are practiced. There are four openings in\nall directions. To the east you see the continuing of bones on the floor,\nto the north you see the shrine of battleragers, to the west you see the a\nGordall's weapon house, to the very south you see the donation room.\n",
+            "flags": "WXY",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "548"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "546"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "543"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "547"
+                }
+            ]
+        },
+        {
+            "vnum": "546",
+            "name": "Battle House",
+            "description": "You are in the battle house. You see lots of bones and broken weapons on\nthe floor. You read the following on the wall:\n    \"After you kill your first magician, you become a BattleRager.\"\n\n",
+            "flags": "WXY",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "545"
+                }
+            ]
+        },
+        {
+            "vnum": "547",
+            "name": "Gordall's Weapon House",
+            "description": "You see the metals hung up on the wall, shining brilliantly. Most\nprobably they are the materials that Gordall use to produce his weapons.\nAnd to the higher portion of the wall you see the newly finished weapons,\ndaggers, swords and axes.\n",
+            "flags": "WXY",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "545"
+                }
+            ]
+        },
+        {
+            "vnum": "548",
+            "name": "The Shrine of Battleragers",
+            "description": "You are in front of a large white throne made from bones. There are\nshelves line the walls, upon them there are many jars inside of which are\nblood and heads of magicians. \n  A stone tabled placed on the wall, here.\n",
+            "flags": "WXY",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "545"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "tablet",
+                    "description": "*******************************************************************\n * 1) No magic, in any form can be used by a battlerager. Likewise * \n *    if  any mortal  casts in your presence, you should punish it *\n *    immediately.                                                 *\n * 2) Members of Shalafi should be  *massacred*, whenever they are *\n *    seen.                                                        *\n * 3) Only clerics and paladins, which are not members of Shalafi, *\n *    can be tolerated, unless their magic is not casted on you.   *\n * 4) If one caster is beyond commandment 3, you should terminate  *\n *    that caster.                                                 *\n * 5) You should be afraid of any form of enemies. You ought to be *\n *    encouraged to be a Great Warrior.                            *\n *******************************************************************\n"
+                }
+            ]
+        }
+    ],
+    "shops": [
+        {
+            "keeper": "541",
+            "buy_type_0": "1",
+            "buy_type_1": "5",
+            "buy_type_2": "9",
+            "buy_type_3": "11",
+            "buy_type_4": "0",
+            "profit_buy": "150",
+            "profit_sell": "70",
+            "open_hour": "0",
+            "close_hour": "23"
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "540",
+            "arg2": "1",
+            "arg3": "540",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "540",
+            "arg2": "0",
+            "arg3": "11"
+        },
+        {
+            "command": "M",
+            "arg1": "541",
+            "arg2": "1",
+            "arg3": "547",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "545",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "546",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "547",
+            "arg2": "-1"
+        },
+        {
+            "command": "M",
+            "arg1": "542",
+            "arg2": "1",
+            "arg3": "548",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "542",
+            "arg2": "1",
+            "arg3": "548"
+        },
+        {
+            "command": "P",
+            "arg1": "541",
+            "arg2": "1",
+            "arg3": "542",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "543",
+            "arg2": "1",
+            "arg3": "544"
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "540",
+            "spec_fun": "spec_fight_powerman"
+        }
+    ],
+    "omprogs": [
+        {
+            "command": "O",
+            "vnum": "541",
+            "progtype": "get_prog",
+            "progname": "get_prog_cabal_item"
+        },
+        {
+            "command": "O",
+            "vnum": "541",
+            "progtype": "sac_prog",
+            "progname": "sac_prog_cabal_item"
+        },
+        {
+            "command": "M",
+            "vnum": "540",
+            "progtype": "greet_prog",
+            "progname": "greet_prog_battle"
+        },
+        {
+            "command": "M",
+            "vnum": "542",
+            "progtype": "speech_prog",
+            "progname": "speech_prog_wiseman"
+        }
+    ],
+    "practicers": [
+        {
+            "vnum": "540",
+            "practicer": "group_cabal"
+        }
+    ]
+}

@@ -1,0 +1,3657 @@
+{
+    "area": {
+        "file": "selenge_ormani.are",
+        "name": "Türkçe",
+        "low_range": "5",
+        "high_range": "15",
+        "min_vnum": "9400",
+        "max_vnum": "9499",
+        "path": "3g 3b g d",
+        "yonelim_iyi": "33",
+        "yonelim_yansiz": "34",
+        "yonelim_kem": "33"
+    },
+    "mobiles": [
+        {
+            "vnum": "9401",
+            "name": "ziyaretçi",
+            "short_description": "ziyaretçi",
+            "long_description": "Ormaný gezmeye gelmiþ bir ziyaretçi burada.\n",
+            "description": "Ormanda dolaþmaktan zevk aldýðý bakýþlarýndan\nbelli. Seni farketmedi bile.\n",
+            "race": "human",
+            "act": "ABG",
+            "affected_by": "0",
+            "level": "8"
+        },
+        {
+            "vnum": "9402",
+            "name": "ziyaretçi",
+            "short_description": "ziyaretçi",
+            "long_description": "Ormaný gezmeye gelmiþ bir ziyaretçi burada.\n",
+            "description": "Ormanda dolaþmaktan zevk aldýðý bakýþlarýndan\nbelli. Seni farketti.\n",
+            "race": "human",
+            "act": "ABGT",
+            "affected_by": "DVc",
+            "level": "8"
+        },
+        {
+            "vnum": "9403",
+            "name": "ziyaretçi",
+            "short_description": "ziyaretçi",
+            "long_description": "Ormaný gezmeye gelmiþ bir ziyaretçi burada.\n",
+            "description": "Ormanda dolaþmaktan zevk aldýðý bakýþlarýndan\nbelli. Seni farketti.\n",
+            "race": "human",
+            "act": "ABGS",
+            "affected_by": "DVc",
+            "level": "8"
+        },
+        {
+            "vnum": "9404",
+            "name": "ziyaretçi",
+            "short_description": "kaybolmuþ ziyaretçi",
+            "long_description": "Ormanda yolunu kaybetmiþ bir ziyaretçi burada.\n",
+            "description": "Kaybolmak onu korkutmuþ.\n",
+            "race": "human",
+            "act": "ABGH",
+            "affected_by": "0",
+            "level": "8"
+        },
+        {
+            "vnum": "9405",
+            "name": "bekçi",
+            "short_description": "orman bekçisi",
+            "long_description": "Ormana bekçilik yapan adam burada.\n",
+            "description": "Bu yaþlý adam ormanýn eskilerinden. Kim bilir neler biliyor\normanýn karanlýk yüzü hakkýnda.\n",
+            "race": "human",
+            "act": "AGR",
+            "affected_by": "CDEFGHc",
+            "level": "14"
+        },
+        {
+            "vnum": "9406",
+            "name": "sansar",
+            "short_description": "sansar",
+            "long_description": "Bir sansar hastalýklý gözleriyle sana bakýyor.\n",
+            "description": "Bir sansar görüyorsun. Hastalýðý gözlerine kadar ilerlemiþ.\nYoksa saldýracak birini mi arýyor?!!\n",
+            "race": "fido",
+            "act": "AFGH",
+            "affected_by": "ZV",
+            "level": "6"
+        },
+        {
+            "vnum": "9407",
+            "name": "tilki",
+            "short_description": "tilki",
+            "long_description": "Bir tilki hastalýklý gözleriyle sana bakýyor.\n",
+            "description": "Bir tilki görüyorsun. Hastalýðý gözlerine kadar ilerlemiþ.\nYoksa saldýracak birini mi arýyor?!!\n",
+            "race": "fox",
+            "act": "AFGH",
+            "affected_by": "ZV",
+            "level": "4"
+        },
+        {
+            "vnum": "9408",
+            "name": "gölge",
+            "short_description": "lanetli gölge",
+            "long_description": "Bir gölge SENÝ izliyor.\n",
+            "description": "Simsiyah bir gölge.\n",
+            "race": "human",
+            "act": "AGT",
+            "affected_by": "ZV",
+            "level": "14"
+        },
+        {
+            "vnum": "9409",
+            "name": "sarhoþ",
+            "short_description": "Sarhoþ",
+            "long_description": "Sarhoþun biri burada, dans etmeye çalýþýyor.\n",
+            "description": "Ormaný meyhane olarak kullananlardan...\n",
+            "race": "human",
+            "act": "ACGH",
+            "affected_by": "0",
+            "level": "4"
+        },
+        {
+            "vnum": "9410",
+            "name": "serseri",
+            "short_description": "serseri",
+            "long_description": "Serserinin biri burada, aðaca birþeyler kazýyor.\n",
+            "description": "Seni faketmemiþ gibi davranan bu serseriye dikkat\netmelisin.\n",
+            "race": "drow",
+            "act": "AGS",
+            "affected_by": "PV",
+            "level": "9"
+        },
+        {
+            "vnum": "9411",
+            "name": "sürüngen",
+            "short_description": "sürüngen",
+            "long_description": "Bir sürüngen görüyorsun, gözlerindeki lanet seni þaþýrtýyor.\n",
+            "description": "O da karanlýktan etkilenenlerden.\n",
+            "race": "snake",
+            "act": "ABC",
+            "affected_by": "0",
+            "level": "4"
+        },
+        {
+            "vnum": "9412",
+            "name": "iþçi orman",
+            "short_description": "orman iþçisi",
+            "long_description": "Bir orman iþçisi burada, elindeki kazmayla çalýþýyor.\n",
+            "description": "Oldukça yorgun görünüyor.\n",
+            "race": "human",
+            "act": "AGHT",
+            "affected_by": "0",
+            "level": "6"
+        },
+        {
+            "vnum": "9413",
+            "name": "iþçi orman",
+            "short_description": "orman iþçisi",
+            "long_description": "Bir orman iþçisi burada, aðacýn dibinde uyuyakalmýþ.\n",
+            "description": "Horluyor.\n",
+            "race": "human",
+            "act": "ABHT",
+            "affected_by": "0",
+            "level": "7"
+        },
+        {
+            "vnum": "9414",
+            "name": "baykuþ",
+            "short_description": "baykuþ",
+            "long_description": "Bir baykuþ görüyorsun, dalýn üzerinden seni seyrediyor.\n",
+            "description": "Orman kadar yaþlý olsa gerek. Gözleri buranýn hikayesini\nbilirmiþ gibi bakýyor.\n",
+            "race": "song bird",
+            "act": "AGR",
+            "affected_by": "DFHTc",
+            "level": "38"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "9401",
+            "name": "mermer heykelli çeþme",
+            "short_description": "mermer heykelli çeþme",
+            "description": "Heykelli bir mermer çeþme görüyorsun.",
+            "material": "marble",
+            "type": "fountain",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "100000 100000 'water' 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "G",
+            "extra_descriptions": [
+                {
+                    "keyword": "çeþme mermer",
+                    "description": "Karanlýðýn içinde suyu tertemiz bir çeþme.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "9402",
+            "name": "bakýr çeþme",
+            "short_description": "bir bakýr çeþme",
+            "description": "Büyük bir bakýr çeþme görüyorsun.",
+            "material": "copper",
+            "type": "fountain",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "100000 100000 'water' 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "G",
+            "extra_descriptions": [
+                {
+                    "keyword": "çeþme bakýr",
+                    "description": "Selenge Beyi'nin ziyaretçiler için yaptýrdýðý bir çeþme.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "9403",
+            "name": "çaký",
+            "short_description": "bir çaký",
+            "description": "Bir çaký yerde yeni sahibini bekliyor.",
+            "material": "iron",
+            "type": "weapon",
+            "extra_flags": "U",
+            "wear_flags": "AN",
+            "values": "dagger 1 4 pierce 0",
+            "level": "0",
+            "weight": "10",
+            "cost": "210",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "1"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "çaký",
+                    "description": "Kalitesiz birþeye benziyor.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "9404",
+            "name": "gümüþ kýlýç",
+            "short_description": "bir gümüþ kýlýç",
+            "description": "Yerde gümüþ bir kýlýç görüyorsun.",
+            "material": "silver",
+            "type": "weapon",
+            "extra_flags": "U",
+            "wear_flags": "AN",
+            "values": "sword 1 6 slash 0",
+            "level": "1",
+            "weight": "30",
+            "cost": "360",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "1"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "kýlýç",
+                    "description": "Kalitesiz birþeye benziyor.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "9405",
+            "name": "gümüþ kama",
+            "short_description": "bir gümüþ kama",
+            "description": "Yerde gümüþ bir kama görüyorsun.",
+            "material": "silver",
+            "type": "weapon",
+            "extra_flags": "U",
+            "wear_flags": "AN",
+            "values": "dagger 1 4 pierce 0",
+            "level": "0",
+            "weight": "10",
+            "cost": "210",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "1"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "kama",
+                    "description": "Kalitesiz birþeye benziyor.\n"
+                }
+            ]
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "9400",
+            "name": "Selenge Ormaný",
+            "description": "Selenge þehrinin batýsýnda kalan ormanýn giriþindesin.\nYüksek aðaçlar güneþ ýþýðýnýn bir kýsmýný emiyorlar. Toprak yaðan\nyaðmurlarla her zaman yumuþak ve verimli. Ormanýn batý bölümünde\naðaçlarýn arasýnda geniþ aralýklar bulunuyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9401"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "3047"
+                }
+            ]
+        },
+        {
+            "vnum": "9401",
+            "name": "Selenge Ormaný",
+            "description": "Söylendiðine göre ormanýn ilk fidanlarý yaklaþýk üç yüzyýl önce\ndikilmiþ. Daha sonra gelen efendiler de buranýn bakýmýný hiç ihmal\netmemiþler. Kitaplarda da isminden bahsedilen bir büyücü üç yüzyýl\nönce, orman henüz batýya doðru yayýlmamýþken, aðaçlarýn daha hýzlý\ngeliþmeleri için efendisinin isteði üzerine büyüler yapmýþ ormana.\nBüyülerin ardýndan aðaçlar hýzla büyümüþler. Bunun üzerine de efendi\normana büyücünün bir heykelini diktirmiþ. Yaþlý büyücü Haman birkaç\nyýl sonra Thalos'a yaptýðý gezide hayatýný kaybetmiþ.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9402"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9400"
+                }
+            ]
+        },
+        {
+            "vnum": "9402",
+            "name": "Selenge Ormaný",
+            "description": "Yýllar geçtikçe, orman batýya doðru geniþlerken, ilk zamanlarda\ndikilen aðaçlarýn bulunduðu doðu bölümü karanlýk bir düþünceyle\nkavrulur olmuþ. Aðaçlarýn da, altýnda yaþayan hayvanlarýn da renkleri\nkararmaya baþlamýþ. Öyle yavaþmýþ ki bu deðiþim hiç kimse fark etmemiþ...\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9403"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9401"
+                }
+            ]
+        },
+        {
+            "vnum": "9403",
+            "name": "Selenge Ormaný",
+            "description": "Sonra Haman'ýn torunlarý Heran ve Gmeran birden bire kaybolmuþlar.\nÞehrin kapýlarý kapatýlmýþ ve her yer muhafýzlar tarafýndan didik\ndidik aranmýþ. Hiçbir iz bulunamayýnca Miden'nir bölgesinden iki kolcu\ngelmiþ. Kolcular çocuklarýn izlerini ormanda bulmuþlar. Ýzler ormanýn\ndoðusuna kadar ilerliyor ve sonra yokoluyormuþ. Efendi hiddetlenmiþ ve\normanýn doðu bölümünün yokedilmesini emretmiþ...\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9404"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9402"
+                }
+            ]
+        },
+        {
+            "vnum": "9404",
+            "name": "Selenge Ormaný",
+            "description": "O geniþ gövdeli aðaçlarý yere indirmek hiç de kolay olmamýþ. Yabani\notlar temizlenmiþ, hayvanlar tek tek öldürülmüþ. Yine de bu çabalar\nhiçbir iþe yaramamýþ. Aðaçlar yeniden ve yeniden büyümüþler. Doðu\nbölümü yine vahþi hayvanlarla dolmuþ. Selenge'liler tedirginmiþ.\nEfendi sandýk dolusu altýn vererek Thalos'dan iki büyücü getirtmiþ.\nBüyücüler üç gün üç gece büyülerle saldýrmýþlar doðu ormanýna. Orman\nacýlar içinde baðýrmýþ. Haykýrýþlarý tapýnaðýn duvarlarýný titretmiþ.\nDördüncü gece efendi ve Thalos'lu iki büyücü yataklarýnda ölü\nbulunmuþlar. Son dördüne girerken ay, efendinin oðlu Rehazar babasýnýn\ntahtýna oturmuþ...\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9405"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9403"
+                }
+            ]
+        },
+        {
+            "vnum": "9405",
+            "name": "Selenge Ormaný",
+            "description": "Rehazar akýllýca davranýp ormanýn kendi haline býrakýlmasýný emretmiþ.\nO günden sonra doðu ormaný -her ne kadar korusa da karanlýðýný- kimseye\nsaldýrmamýþ. Ýþte böyledir geceleri aðaçlarý aðlayan Selenge Ormaný'nýn\nhikayesi...\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9406"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9404"
+                }
+            ]
+        },
+        {
+            "vnum": "9406",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nKoca bir meþe aðacý doðu yönünü kapatmýþ.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9407"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9412"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9405"
+                }
+            ]
+        },
+        {
+            "vnum": "9407",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nBatýda orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9408"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9421"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9406"
+                }
+            ]
+        },
+        {
+            "vnum": "9408",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nBatýda orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9409"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9420"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9407"
+                }
+            ]
+        },
+        {
+            "vnum": "9409",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nBatýda orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9410"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9419"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9408"
+                }
+            ]
+        },
+        {
+            "vnum": "9410",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nBatýda orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9411"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9418"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9409"
+                }
+            ]
+        },
+        {
+            "vnum": "9411",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nBatýda ve kuzeyde orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9417"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9410"
+                }
+            ]
+        },
+        {
+            "vnum": "9412",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nBatýda orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9406"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9423"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9413"
+                }
+            ]
+        },
+        {
+            "vnum": "9413",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nBatýda orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9412"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9424"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9414"
+                }
+            ]
+        },
+        {
+            "vnum": "9414",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nBatýda orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9413"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9425"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9415"
+                }
+            ]
+        },
+        {
+            "vnum": "9415",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nBatýda orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9414"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9426"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9416"
+                }
+            ]
+        },
+        {
+            "vnum": "9416",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nBatýda ve güneyde orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9415"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9427"
+                }
+            ]
+        },
+        {
+            "vnum": "9417",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nKuzeyde orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9438"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9418"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9411"
+                }
+            ]
+        },
+        {
+            "vnum": "9418",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9417"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9437"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9419"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9410"
+                }
+            ]
+        },
+        {
+            "vnum": "9419",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9418"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9436"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9420"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9409"
+                }
+            ]
+        },
+        {
+            "vnum": "9420",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9419"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9435"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9421"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9408"
+                }
+            ]
+        },
+        {
+            "vnum": "9421",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nBir ceviz aðacý doðu yönünü kapatmýþ.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9420"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9422"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9407"
+                }
+            ]
+        },
+        {
+            "vnum": "9422",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nKoca bir meþe aðacý batý yönünü kapatmýþ.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9421"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9433"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9423"
+                }
+            ]
+        },
+        {
+            "vnum": "9423",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9422"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9432"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9424"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9412"
+                }
+            ]
+        },
+        {
+            "vnum": "9424",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9423"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9431"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9425"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9413"
+                }
+            ]
+        },
+        {
+            "vnum": "9425",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9424"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9430"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9426"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9414"
+                }
+            ]
+        },
+        {
+            "vnum": "9426",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9425"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9429"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9427"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9415"
+                }
+            ]
+        },
+        {
+            "vnum": "9427",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nBir ceviz aðacý doðu yönünü kapatmýþ ve güneyde orman sýnýr duvarý\nyükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9426"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9416"
+                }
+            ]
+        },
+        {
+            "vnum": "9428",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nBir ceviz aðacý batý yönünü kapatmýþ; doðuda, batýda ve güneyde orman\nsýnýr duvarý yükseliyor..\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9429"
+                }
+            ]
+        },
+        {
+            "vnum": "9429",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9430"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9452"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9428"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9426"
+                }
+            ]
+        },
+        {
+            "vnum": "9430",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9431"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9451"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9429"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9425"
+                }
+            ]
+        },
+        {
+            "vnum": "9431",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nBüyük bir ceviz aðacý doðu yönünü kapatmýþ.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9432"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9430"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9424"
+                }
+            ]
+        },
+        {
+            "vnum": "9432",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nBüyük bir ceviz aðacý doðu yönünü kapatmýþ.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9433"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9421"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9423"
+                }
+            ]
+        },
+        {
+            "vnum": "9433",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9434"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9448"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9432"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9422"
+                }
+            ]
+        },
+        {
+            "vnum": "9434",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nBir ceviz aðacý batý yönünü kapatmýþ.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9435"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9447"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9433"
+                }
+            ]
+        },
+        {
+            "vnum": "9435",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9436"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9446"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9434"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9420"
+                }
+            ]
+        },
+        {
+            "vnum": "9436",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor. Bir ceviz aðacýna kazýnmýþ yazýyý fark ediyorsun.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9437"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9445"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9435"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9419"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "yazý",
+                    "description": "Biri aþýk olduðu kadýnýn adýný aðaca kazýmýþ.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "9437",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9438"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9444"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9436"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9418"
+                }
+            ]
+        },
+        {
+            "vnum": "9438",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9439"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9443"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9437"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9417"
+                }
+            ]
+        },
+        {
+            "vnum": "9439",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nBüyük bir ceviz aðacý doðu yönünü kapatmýþ ve batýda orman sýnýr\nduvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9440"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9438"
+                }
+            ]
+        },
+        {
+            "vnum": "9440",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nKuzeyde ve batýda orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9441"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9439"
+                }
+            ]
+        },
+        {
+            "vnum": "9441",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nKuzeyde ve doðuda orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9442"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9440"
+                }
+            ]
+        },
+        {
+            "vnum": "9442",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nBüyük bir ceviz aðacý batý yönünü kapatmýþ ve doðuda orman sýnýr\nduvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9441"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9443"
+                }
+            ]
+        },
+        {
+            "vnum": "9443",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nDoðuda orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9442"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9444"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9438"
+                }
+            ]
+        },
+        {
+            "vnum": "9444",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nDoðuda orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9443"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9445"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9437"
+                }
+            ]
+        },
+        {
+            "vnum": "9445",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9444"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9453"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9446"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9436"
+                }
+            ]
+        },
+        {
+            "vnum": "9446",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9445"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9454"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9447"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9435"
+                }
+            ]
+        },
+        {
+            "vnum": "9447",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9446"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9455"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9448"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9434"
+                }
+            ]
+        },
+        {
+            "vnum": "9448",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9447"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9456"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9449"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9433"
+                }
+            ]
+        },
+        {
+            "vnum": "9449",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nBüyük bir ceviz aðacý batý yönünü kapatmýþ.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9448"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9457"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9450"
+                }
+            ]
+        },
+        {
+            "vnum": "9450",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nBüyük bir ceviz aðacý batý yönünü kapatmýþ.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9449"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9458"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9451"
+                }
+            ]
+        },
+        {
+            "vnum": "9451",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9450"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9459"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9452"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9430"
+                }
+            ]
+        },
+        {
+            "vnum": "9452",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nGüneyde orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9451"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9460"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9429"
+                }
+            ]
+        },
+        {
+            "vnum": "9453",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nKuzeyde orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9464"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9454"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9445"
+                }
+            ]
+        },
+        {
+            "vnum": "9454",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9453"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9465"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9455"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9446"
+                }
+            ]
+        },
+        {
+            "vnum": "9455",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9454"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9466"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9456"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9447"
+                }
+            ]
+        },
+        {
+            "vnum": "9456",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9455"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9467"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9457"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9448"
+                }
+            ]
+        },
+        {
+            "vnum": "9457",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9456"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9468"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9458"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9449"
+                }
+            ]
+        },
+        {
+            "vnum": "9458",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9457"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9469"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9459"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9450"
+                }
+            ]
+        },
+        {
+            "vnum": "9459",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nDoðuda orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9458"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9460"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9451"
+                }
+            ]
+        },
+        {
+            "vnum": "9460",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nDoðuda orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9459"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9461"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9452"
+                }
+            ]
+        },
+        {
+            "vnum": "9461",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nDoðuda ve batýda orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9460"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9462"
+                }
+            ]
+        },
+        {
+            "vnum": "9462",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nDoðuda ve batýda orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9461"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9463"
+                }
+            ]
+        },
+        {
+            "vnum": "9463",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Huzur dolu bu görüntüye\nkuþ sesleri doluyor.\nDoðuda, batýda ve güneyde orman sýnýr duvarý yükseliyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9462"
+                }
+            ]
+        },
+        {
+            "vnum": "9464",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Doðudan gelen garip\nsesler tüylerini diken diken ediyor.\nKuzeyde orman sýnýr duvarý yükseliyor, doðuda ise ormanýn doðu bölümünü\nbatýdan ayýran uzun demir parmaklýðý görüyorsun. Birileri demirlerden\niki tanesini keserek senin de geçebileceðin bir aralýk açmýþlar.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9476"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9465"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9453"
+                }
+            ]
+        },
+        {
+            "vnum": "9465",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Doðudan gelen garip\nsesler tüylerini diken diken ediyor.\nDoðuda ormanýn doðu bölümünü batýdan ayýran uzun demir parmaklýðý\ngörüyorsun.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9464"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9466"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9454"
+                }
+            ]
+        },
+        {
+            "vnum": "9466",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Doðudan gelen garip\nsesler tüylerini diken diken ediyor.\nDoðuda ormanýn doðu bölümünü batýdan ayýran uzun demir parmaklýðý\ngörüyorsun.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9465"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9455"
+                }
+            ]
+        },
+        {
+            "vnum": "9467",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Doðudan gelen garip\nsesler tüylerini diken diken ediyor.\nDoðuda ormanýn doðu bölümünü batýdan ayýran uzun demir parmaklýðý\ngörüyorsun.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9468"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9456"
+                }
+            ]
+        },
+        {
+            "vnum": "9468",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Doðudan gelen garip\nsesler tüylerini diken diken ediyor.\nDoðuda ormanýn doðu bölümünü batýdan ayýran uzun demir parmaklýðý\ngörüyorsun.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9467"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9469"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9457"
+                }
+            ]
+        },
+        {
+            "vnum": "9469",
+            "name": "Ormanýn Batý Bölümü",
+            "description": "Düzenli bir þekilde büyümüþ aðaçlarýn arasýndasýn. Toprak sýk yaðan\nyaðmurlar nedeniyle oldukça yumuþak. Aðaçlarýn tutmayý býraktýðý\nyapraklar yerde eþsiz bir örtü oluþturmuþlar. Doðudan gelen garip\nsesler tüylerini diken diken ediyor.\nGüneyde orman sýnýr duvarý yükseliyor, doðuda ormanýn doðu bölümünü\nbatýdan ayýran uzun demir parmaklýðý görüyorsun.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9468"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9458"
+                }
+            ]
+        },
+        {
+            "vnum": "9470",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\nGüneyde ve batýda çürümüþ orman sýnýr duvarýný görüyorsun.\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9471"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9485"
+                }
+            ]
+        },
+        {
+            "vnum": "9471",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\nBatýda ormanýn doðu bölümünü batýdan ayýran uzun demir parmaklýðý\ngörüyorsun.\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9472"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9484"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9470"
+                }
+            ]
+        },
+        {
+            "vnum": "9472",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\nBatýda ormanýn doðu bölümünü batýdan ayýran uzun demir parmaklýðý\ngörüyorsun.\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9473"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9483"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9471"
+                }
+            ]
+        },
+        {
+            "vnum": "9473",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\nBatýda ormanýn doðu bölümünü batýdan ayýran uzun demir parmaklýðý\ngörüyorsun.\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9474"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9482"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9472"
+                }
+            ]
+        },
+        {
+            "vnum": "9474",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\nBatýda ormanýn doðu bölümünü batýdan ayýran uzun demir parmaklýðý\ngörüyorsun.\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9475"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9481"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9473"
+                }
+            ]
+        },
+        {
+            "vnum": "9475",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\nBatýda ormanýn doðu bölümünü batýdan ayýran uzun demir parmaklýðý\ngörüyorsun.\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9476"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9480"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9474"
+                }
+            ]
+        },
+        {
+            "vnum": "9476",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\nBatýda ormanýn doðu bölümünü batýdan ayýran uzun demir parmaklýðý\ngörüyorsun.\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9477"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9479"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9475"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9464"
+                }
+            ]
+        },
+        {
+            "vnum": "9477",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\nKuzeyde ve batýda çürümüþ orman sýnýr duvarýný görüyorsun.\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9478"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9476"
+                }
+            ]
+        },
+        {
+            "vnum": "9478",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\nKuzeyde çürümüþ orman sýnýr duvarýný görüyorsun.\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9479"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9477"
+                }
+            ]
+        },
+        {
+            "vnum": "9479",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9478"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9480"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9476"
+                }
+            ]
+        },
+        {
+            "vnum": "9480",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9479"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9481"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9475"
+                }
+            ]
+        },
+        {
+            "vnum": "9481",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9480"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9482"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9474"
+                }
+            ]
+        },
+        {
+            "vnum": "9482",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9481"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9483"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9473"
+                }
+            ]
+        },
+        {
+            "vnum": "9483",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9482"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9486"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9484"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9472"
+                }
+            ]
+        },
+        {
+            "vnum": "9484",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9483"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9487"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9485"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9471"
+                }
+            ]
+        },
+        {
+            "vnum": "9485",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\nGüneyde çürümüþ orman sýnýr duvarýný görüyorsun.\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9484"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9488"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9470"
+                }
+            ]
+        },
+        {
+            "vnum": "9486",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9491"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9487"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9483"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "heykel dev",
+                    "description": "Büyücü Haman'ýn heykeli karþýnda duruyor. Ne kadar da haþmetli.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "9487",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9486"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9490"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9488"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9484"
+                }
+            ]
+        },
+        {
+            "vnum": "9488",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\nDoðuda çürümüþ orman sýnýr duvarýný görüyorsun.\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9487"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9489"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9485"
+                }
+            ]
+        },
+        {
+            "vnum": "9489",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\nGüneyde, doðuda ve batýda çürümüþ orman sýnýr duvarýný görüyorsun.\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9488"
+                }
+            ]
+        },
+        {
+            "vnum": "9490",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\nDoðuda ve güneyde çürümüþ orman sýnýr duvarýný görüyorsun.\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9491"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9487"
+                }
+            ]
+        },
+        {
+            "vnum": "9491",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\nDoðuda çürümüþ orman sýnýr duvarýný görüyorsun.\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9492"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9490"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9486"
+                }
+            ]
+        },
+        {
+            "vnum": "9492",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\nDoðuda çürümüþ orman sýnýr duvarýný görüyorsun.\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9493"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9491"
+                }
+            ]
+        },
+        {
+            "vnum": "9493",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\nDoðuda çürümüþ orman sýnýr duvarýný görüyorsun.\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9494"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9492"
+                }
+            ]
+        },
+        {
+            "vnum": "9494",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\nDoðuda çürümüþ orman sýnýr duvarýný görüyorsun.\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9495"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9493"
+                }
+            ]
+        },
+        {
+            "vnum": "9495",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\nDoðuda çürümüþ orman sýnýr duvarýný görüyorsun.\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9496"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9494"
+                }
+            ]
+        },
+        {
+            "vnum": "9496",
+            "name": "Ormanýn Doðu Bölümü",
+            "description": "En küçüðünün boyunun batý bölümündekilerden daha uzun olduðu iri\naðaçlar arasýndasýn. Güneþ çok uzun zamandýr ýþýðýný veremiyor bu\ntopraklara. Garip sesler duyuyorsun. Aðaçlarýn burada neler görüp\nneler gizlediðini kimse bilmiyor...\nDoðuda ve kuzeyde çürümüþ orman sýnýr duvarýný görüyorsun.\n",
+            "flags": "NA",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "9495"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "9401",
+            "arg2": "5",
+            "arg3": "9420",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "9401",
+            "arg2": "5",
+            "arg3": "9430",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "9401",
+            "arg2": "5",
+            "arg3": "9450",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "9401",
+            "arg2": "5",
+            "arg3": "9443",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "9401",
+            "arg2": "5",
+            "arg3": "9460",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "9402",
+            "arg2": "1",
+            "arg3": "9464",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "9404",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "9403",
+            "arg2": "2",
+            "arg3": "9490",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "9405",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "9404",
+            "arg2": "1",
+            "arg3": "9494",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "9405",
+            "arg2": "1",
+            "arg3": "9453",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "9406",
+            "arg2": "2",
+            "arg3": "9477",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "9406",
+            "arg2": "2",
+            "arg3": "9485",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "9407",
+            "arg2": "1",
+            "arg3": "9481",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "9408",
+            "arg2": "1",
+            "arg3": "9486",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "9409",
+            "arg2": "2",
+            "arg3": "9452",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "9409",
+            "arg2": "2",
+            "arg3": "9471",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "9410",
+            "arg2": "1",
+            "arg3": "9422",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "9403",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "9411",
+            "arg2": "3",
+            "arg3": "9492",
+            "arg4": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "9412",
+            "arg2": "1",
+            "arg3": "9464",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "9413",
+            "arg2": "1",
+            "arg3": "9464",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "9414",
+            "arg2": "1",
+            "arg3": "9486",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "9401",
+            "arg2": "0",
+            "arg3": "9486"
+        },
+        {
+            "command": "O",
+            "arg1": "9402",
+            "arg2": "0",
+            "arg3": "9423"
+        }
+    ],
+    "shops": [],
+    "specials": [
+        {
+            "vnum": "9411",
+            "spec_fun": "spec_fido"
+        },
+        {
+            "vnum": "9407",
+            "spec_fun": "spec_fido"
+        },
+        {
+            "vnum": "9406",
+            "spec_fun": "spec_fido"
+        },
+        {
+            "vnum": "9411",
+            "spec_fun": "spec_poison"
+        },
+        {
+            "vnum": "9403",
+            "spec_fun": "spec_thief"
+        }
+    ]
+}

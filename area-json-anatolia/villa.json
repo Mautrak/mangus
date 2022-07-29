@@ -1,0 +1,5241 @@
+{
+    "area": {
+        "file": "villa.are",
+        "name": "The Village of Anon",
+        "low_range": "1",
+        "high_range": "65",
+        "writer": "Yaegar",
+        "credits": "The Village of Anon",
+        "min_vnum": "24100",
+        "max_vnum": "24200"
+    },
+    "mobiles": [
+        {
+            "vnum": "24100",
+            "name": "shaman",
+            "short_description": "the village shaman",
+            "long_description": "The village shaman tends to the weak and infirm here.\n",
+            "description": "The shaman is a well respected and devoted healer and mystic. He spends his\ntime curing the ailments of the inhabitants of this village, or those of any\nstrangers that may pass by.\n",
+            "race": "human",
+            "act": "2|8|64",
+            "affected_by": "128|8192",
+            "alignment": "1000",
+            "group": "0",
+            "level": "93",
+            "hitroll": "0",
+            "hit_dice": "50d10+20500",
+            "mana_dice": "5d5+5000",
+            "dam_dice": "17d10+64",
+            "dam_type": "divine",
+            "ac_pierce": "-66",
+            "ac_bash": "-66",
+            "ac_slash": "-66",
+            "ac_exotic": "-33",
+            "off_flags": "FHKN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24101",
+            "name": "flint knapper flint-knapper",
+            "short_description": "the village flint-knapper",
+            "long_description": "The village flint-knapper is here repairing crude tools.\n",
+            "description": "While the knapper's primary job is to craft tools for the village, such is\nhis skill that he may also be able to repair your equipment. Contact with\nmerchants from more advanced civilisations to the south have made him\nremarkably conversant with the properties of metals such as copper and silver \nand alloys such as bronze.\n",
+            "race": "human",
+            "act": "2|64",
+            "affected_by": "128|8192",
+            "alignment": "1000",
+            "group": "0",
+            "level": "73",
+            "hitroll": "0",
+            "hit_dice": "50d10+20500",
+            "mana_dice": "5d5+5000",
+            "dam_dice": "17d10+64",
+            "dam_type": "pound",
+            "ac_pierce": "-66",
+            "ac_bash": "-66",
+            "ac_slash": "-66",
+            "ac_exotic": "-33",
+            "off_flags": "FHKIN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24102",
+            "name": "trader",
+            "short_description": "a swarthy southern trader",
+            "long_description": "A swarthy southern trader is here hawking his wares.\n",
+            "description": "This fellow is possessed of much darker skin and eyes than his current\nneighbors, hailing as he does from the island kingdoms far to the south. He\nhas brought with him a variety of bronze arms and armor, as well as the \noccasional crude iron oddity.\n",
+            "race": "human",
+            "act": "2|64",
+            "affected_by": "128|8192",
+            "alignment": "1000",
+            "group": "0",
+            "level": "80",
+            "hitroll": "0",
+            "hit_dice": "50d10+20500",
+            "mana_dice": "5d5+5000",
+            "dam_dice": "17d10+64",
+            "dam_type": "pound",
+            "ac_pierce": "-66",
+            "ac_bash": "-66",
+            "ac_slash": "-66",
+            "ac_exotic": "-33",
+            "off_flags": "FHIKN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24103",
+            "name": "merc",
+            "short_description": "a mercenary",
+            "long_description": "A tough mercenary offers to hire out his men to you.\n",
+            "description": "Type list to see what he has to offer.\n",
+            "race": "human",
+            "act": "2|64",
+            "affected_by": "128|8192",
+            "alignment": "1000",
+            "group": "0",
+            "level": "93",
+            "hitroll": "0",
+            "hit_dice": "50d10+20500",
+            "mana_dice": "5d5+5000",
+            "dam_dice": "17d10+64",
+            "dam_type": "slash",
+            "ac_pierce": "-66",
+            "ac_bash": "-66",
+            "ac_slash": "-66",
+            "ac_exotic": "-33",
+            "off_flags": "FHKIN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24104",
+            "name": "witchdoctor",
+            "short_description": "the village witchdoctor",
+            "long_description": "The village witchdoctor is here selling a variety of potions and brews.\n",
+            "description": "This young woman, one of the chief's many daughters, has travelled far and \nwide, and gathered a variety of exotic herbs and roots that she blends into \nmarvellous potions. They taste even worse than they smell...\n",
+            "race": "human",
+            "act": "2|64",
+            "affected_by": "128|8192",
+            "alignment": "1000",
+            "group": "0",
+            "level": "83",
+            "hitroll": "0",
+            "hit_dice": "50d10+20500",
+            "mana_dice": "5d5+5000",
+            "dam_dice": "17d10+64",
+            "dam_type": "pound",
+            "ac_pierce": "-66",
+            "ac_bash": "-66",
+            "ac_slash": "-66",
+            "ac_exotic": "-33",
+            "off_flags": "FHKIN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "female",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24105",
+            "name": "wise woman",
+            "short_description": "the village wise woman",
+            "long_description": "The village wise woman cracks a toothless grin as you enter.\n",
+            "description": "Age may have taken what beauty this crone once possessed, but it hasn't \nrobbed her of her wits. She is more knowledgable in the properties of items\nthan anyone else in the known world (which, admittedly, doesn't cover very\nmuch. In fact, to these villagers it is about as far as you can see on a \nclear day).\n",
+            "race": "human",
+            "act": "2|64",
+            "affected_by": "128|8192",
+            "alignment": "1000",
+            "group": "0",
+            "level": "83",
+            "hitroll": "0",
+            "hit_dice": "50d10+20500",
+            "mana_dice": "5d5+5000",
+            "dam_dice": "17d10+64",
+            "dam_type": "pound",
+            "ac_pierce": "-66",
+            "ac_bash": "-66",
+            "ac_slash": "-66",
+            "ac_exotic": "-33",
+            "off_flags": "FHKIN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "female",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24106",
+            "name": "beastmaster",
+            "short_description": "the village beastmaster",
+            "long_description": "The village beastmaster is here wrestling with a large bear.\n",
+            "description": "When he has the time, this impossibly huge man will gladly sell you a pet\nthat he has domesticated, though from the look of it you may have doubts\nin his ability to exact obedience. That bear sure doesn't look tame...\n",
+            "race": "human",
+            "act": "2|64",
+            "affected_by": "128|8192",
+            "alignment": "1000",
+            "group": "0",
+            "level": "80",
+            "hitroll": "0",
+            "hit_dice": "50d10+20500",
+            "mana_dice": "5d5+5000",
+            "dam_dice": "17d10+64",
+            "dam_type": "pound",
+            "ac_pierce": "-66",
+            "ac_bash": "-66",
+            "ac_slash": "-66",
+            "ac_exotic": "-33",
+            "off_flags": "FHKIN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24107",
+            "name": "trader northerner",
+            "short_description": "a northern trader",
+            "long_description": "A grizzled northerner offers to sell you some supplies.\n",
+            "description": "This stout hunter spends six months of the year trapping for fur, and the rest \nof the year fashioning and selling basic equipment.\n",
+            "race": "human",
+            "act": "2|64",
+            "affected_by": "128|8192",
+            "alignment": "1000",
+            "group": "0",
+            "level": "83",
+            "hitroll": "0",
+            "hit_dice": "50d10+20500",
+            "mana_dice": "5d5+5000",
+            "dam_dice": "17d10+64",
+            "dam_type": "pound",
+            "ac_pierce": "-66",
+            "ac_bash": "-66",
+            "ac_slash": "-66",
+            "ac_exotic": "-33",
+            "off_flags": "FKIN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24108",
+            "name": "daughter woman girl",
+            "short_description": "a daughter of the tribe",
+            "long_description": "A daughter of the tribe is here selling food.\n",
+            "description": "The crop was good this year, and the villagers have sufficient to sell to\ntravellers and other villagers.\n",
+            "race": "human",
+            "act": "2|64",
+            "affected_by": "128|8192",
+            "alignment": "1000",
+            "group": "0",
+            "level": "80",
+            "hitroll": "0",
+            "hit_dice": "50d10+20500",
+            "mana_dice": "5d5+5000",
+            "dam_dice": "17d10+64",
+            "dam_type": "pound",
+            "ac_pierce": "-66",
+            "ac_bash": "-66",
+            "ac_slash": "-66",
+            "ac_exotic": "-33",
+            "off_flags": "FIKN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "female",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24109",
+            "name": "brewer",
+            "short_description": "the village brewer",
+            "long_description": "The village brewer is handing out samples of his sacred drink.\n",
+            "description": "The art of brewing is held sacred by the northern tribes, and the brewers\nare considered holy men. In accordance with their beliefs, the brewers hand\nout samples of their sacred draught to all who pass by, and while there is\nno real cost, a small \"donation\" to the sacred coffer is expected. And when \nthe brewer is the size of a grizzly bear, few refuse.\n",
+            "race": "human",
+            "act": "2|64",
+            "affected_by": "128|8192",
+            "alignment": "1000",
+            "group": "0",
+            "level": "85",
+            "hitroll": "0",
+            "hit_dice": "50d10+20500",
+            "mana_dice": "5d5+5000",
+            "dam_dice": "17d10+64",
+            "dam_type": "pound",
+            "ac_pierce": "-66",
+            "ac_bash": "-66",
+            "ac_slash": "-66",
+            "ac_exotic": "-33",
+            "off_flags": "FIKN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24110",
+            "name": "hedgehog",
+            "short_description": "the hedgehog",
+            "long_description": "A hedgehog, well, does nothing at you.\n",
+            "description": "The hedgehog looks like a cute, little, fierce fighter.\n",
+            "race": "unique",
+            "act": "256",
+            "affected_by": "0",
+            "alignment": "400",
+            "group": "0",
+            "level": "4",
+            "hitroll": "0",
+            "hit_dice": "2d7+46",
+            "mana_dice": "5d5+100",
+            "dam_dice": "1d5+1",
+            "dam_type": "charge",
+            "ac_pierce": "6",
+            "ac_bash": "6",
+            "ac_slash": "6",
+            "ac_exotic": "9",
+            "off_flags": "F",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24111",
+            "name": "otter",
+            "short_description": "the otter",
+            "long_description": "A loyal, sleek growls at you.\n",
+            "description": "The otter looks like a fierce fighter.\n",
+            "race": "unique",
+            "act": "256",
+            "affected_by": "0",
+            "alignment": "400",
+            "group": "0",
+            "level": "10",
+            "hitroll": "0",
+            "hit_dice": "2d7+121",
+            "mana_dice": "5d5+100",
+            "dam_dice": "2d4+2",
+            "dam_type": "claw",
+            "ac_pierce": "1",
+            "ac_bash": "1",
+            "ac_slash": "1",
+            "ac_exotic": "7",
+            "off_flags": "F",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "either",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24112",
+            "name": "hawk",
+            "short_description": "the hawk",
+            "long_description": "A fierce but loyal hawk is here.\n",
+            "description": "The hawk looks like a fierce fighter.\n",
+            "race": "song bird",
+            "act": "256",
+            "affected_by": "524288",
+            "alignment": "400",
+            "group": "0",
+            "level": "15",
+            "hitroll": "0",
+            "hit_dice": "3d9+208",
+            "mana_dice": "5d5+100",
+            "dam_dice": "2d6+3",
+            "dam_type": "claw",
+            "ac_pierce": "-2",
+            "ac_bash": "-2",
+            "ac_slash": "-2",
+            "ac_exotic": "6",
+            "off_flags": "F",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "either",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24113",
+            "name": "grizzly bear",
+            "short_description": "the grizzly bear",
+            "long_description": "A large, loyal grizzly bear is here.\n",
+            "description": "The grizzly bear looks like a strong, fierce fighter.\n",
+            "race": "bear",
+            "act": "256",
+            "affected_by": "0",
+            "alignment": "0",
+            "group": "0",
+            "level": "20",
+            "hitroll": "0",
+            "hit_dice": "3d9+333",
+            "mana_dice": "5d5+1000",
+            "dam_dice": "2d8+5",
+            "dam_type": "claw",
+            "ac_pierce": "-4",
+            "ac_bash": "-4",
+            "ac_slash": "-4",
+            "ac_exotic": "5",
+            "off_flags": "CF",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "either",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24114",
+            "name": "aurochs",
+            "short_description": "the aurochs",
+            "long_description": "A HUGE Aurochs stomps its feet and lowers its head to charge.\n",
+            "description": "The aurochs is a BAD ASS.\n",
+            "race": "unique",
+            "act": "256",
+            "affected_by": "0",
+            "alignment": "0",
+            "group": "0",
+            "level": "30",
+            "hitroll": "0",
+            "hit_dice": "6d12+853",
+            "mana_dice": "5d5+1000",
+            "dam_dice": "4d6+8",
+            "dam_type": "charge",
+            "ac_pierce": "-9",
+            "ac_bash": "-9",
+            "ac_slash": "-9",
+            "ac_exotic": "3",
+            "off_flags": "F",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24115",
+            "name": "champion",
+            "short_description": "the village champion",
+            "long_description": "The village champion flexes his mighty thews and grins at you.\n",
+            "description": "The village champion once tore the head off a rabid Mastodon with his thumbs.\nImagine what he could do to you...\n",
+            "race": "human",
+            "act": "2|8|64",
+            "affected_by": "128|512|8192",
+            "alignment": "0",
+            "group": "0",
+            "level": "93",
+            "hitroll": "0",
+            "hit_dice": "50d10+20500",
+            "mana_dice": "5d5+5000",
+            "dam_dice": "18d10+64",
+            "dam_type": "crush",
+            "ac_pierce": "-76",
+            "ac_bash": "-76",
+            "ac_slash": "-76",
+            "ac_exotic": "-33",
+            "off_flags": "0",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "FHIKN",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24116",
+            "name": "merchant",
+            "short_description": "a hook-nosed merchant",
+            "long_description": "A hook-nosed merchant from the desert kingdoms rubs his hands together.\n",
+            "description": "This fellow may not speak your language well, but the language he does know\nvery well makes conversation suddenly become much simpler- MONEY.\n",
+            "race": "human",
+            "act": "4|64|128",
+            "affected_by": "8|32|8192",
+            "alignment": "0",
+            "group": "0",
+            "level": "60",
+            "hitroll": "0",
+            "hit_dice": "50d10+6750",
+            "mana_dice": "5d5+5000",
+            "dam_dice": "8d6+28",
+            "dam_type": "pound",
+            "ac_pierce": "-30",
+            "ac_bash": "-30",
+            "ac_slash": "-30",
+            "ac_exotic": "-3",
+            "off_flags": "FHIKN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24117",
+            "name": "chieftain",
+            "short_description": "the village chieftain",
+            "long_description": "The village chieftain welcomes you to her village.\n",
+            "description": "This strapping giant of a woman has flaming red hair and biceps bigger than\nyour thighs. She has ruled this village wisely for many years, through lean \ntimes and times of plenty, and her people have the utmost faith in her\nability. Time and the birth of many children have not softened her \nwell-muscled frame - she is still a very attractive woman, and the men of the \nvillage (and some women too) vie for her favours.\n",
+            "race": "human",
+            "act": "64",
+            "affected_by": "4|8|128|512|8192",
+            "alignment": "1000",
+            "group": "0",
+            "level": "60",
+            "hitroll": "0",
+            "hit_dice": "50d10+6750",
+            "mana_dice": "5d5+5000",
+            "dam_dice": "8d6+28",
+            "dam_type": "pound",
+            "ac_pierce": "-30",
+            "ac_bash": "-30",
+            "ac_slash": "-30",
+            "ac_exotic": "-3",
+            "off_flags": "FIKN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24118",
+            "name": "villager",
+            "short_description": "a villager",
+            "long_description": "A fur-clad villager hurries by.\n",
+            "description": "The villagers are a hardy lot, toughened by their environment and their\nrugged lifestyle, and you marvel at their good condition as they pass.\n",
+            "race": "human",
+            "act": "1|64",
+            "affected_by": "0",
+            "alignment": "0",
+            "group": "0",
+            "level": "4",
+            "hitroll": "0",
+            "hit_dice": "2d7+46",
+            "mana_dice": "5d5+100",
+            "dam_dice": "1d5+1",
+            "dam_type": "punch",
+            "ac_pierce": "6",
+            "ac_bash": "6",
+            "ac_slash": "6",
+            "ac_exotic": "9",
+            "off_flags": "F",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24119",
+            "name": "villager",
+            "short_description": "a villager",
+            "long_description": "A fur-clad villager hurries by.\n",
+            "description": "The villagers are a hardy lot, toughened by their environment and their\nrugged lifestyle, and you marvel at their good condition as they pass.\n",
+            "race": "human",
+            "act": "1|64",
+            "affected_by": "0",
+            "alignment": "0",
+            "group": "0",
+            "level": "4",
+            "hitroll": "0",
+            "hit_dice": "2d7+46",
+            "mana_dice": "5d5+100",
+            "dam_dice": "1d5+1",
+            "dam_type": "punch",
+            "ac_pierce": "6",
+            "ac_bash": "6",
+            "ac_slash": "6",
+            "ac_exotic": "9",
+            "off_flags": "F",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "female",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24120",
+            "name": "child",
+            "short_description": "a child",
+            "long_description": "A child engages in rough horse play with other village children.\n",
+            "description": "The children of the village are a rough and tumble lot, used to working hard\nand playing harder.\n",
+            "race": "human",
+            "act": "1|64",
+            "affected_by": "0",
+            "alignment": "0",
+            "group": "0",
+            "level": "3",
+            "hitroll": "0",
+            "hit_dice": "2d7+46",
+            "mana_dice": "5d5+100",
+            "dam_dice": "1d5+1",
+            "dam_type": "punch",
+            "ac_pierce": "6",
+            "ac_bash": "6",
+            "ac_slash": "6",
+            "ac_exotic": "9",
+            "off_flags": "F",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24121",
+            "name": "idiot",
+            "short_description": "the village idiot",
+            "long_description": "The village idiot gawks at you.\n",
+            "description": "When he was young, this poor fellow had his skull staved in by a horse kick.\n",
+            "race": "human",
+            "act": "4|64|128",
+            "affected_by": "0",
+            "alignment": "0",
+            "group": "0",
+            "level": "4",
+            "hitroll": "0",
+            "hit_dice": "2d7+46",
+            "mana_dice": "5d5+100",
+            "dam_dice": "1d5+1",
+            "dam_type": "punch",
+            "ac_pierce": "6",
+            "ac_bash": "6",
+            "ac_slash": "6",
+            "ac_exotic": "9",
+            "off_flags": "0",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24122",
+            "name": "drunk",
+            "short_description": "a village drunk",
+            "long_description": "A village drunk.\n",
+            "description": "This fellow has evidently made many generous donations to the village brewer.\n",
+            "race": "human",
+            "act": "64",
+            "affected_by": "0",
+            "alignment": "400",
+            "group": "0",
+            "level": "4",
+            "hitroll": "0",
+            "hit_dice": "2d7+46",
+            "mana_dice": "5d5+100",
+            "dam_dice": "1d5+1",
+            "dam_type": "punch",
+            "ac_pierce": "6",
+            "ac_bash": "6",
+            "ac_slash": "6",
+            "ac_exotic": "9",
+            "off_flags": "0",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24123",
+            "name": "beggar",
+            "short_description": "a beggar",
+            "long_description": "A beggar sits in the dirt asking for donations.\n",
+            "description": "The inhabitants of this village are a tough lot, but not ungenerous, and it\nis likely that this fellow will have a roof over his head soon, provided by\none of the more prosperous villagers.\n",
+            "race": "human",
+            "act": "2|64",
+            "affected_by": "0",
+            "alignment": "400",
+            "group": "0",
+            "level": "3",
+            "hitroll": "0",
+            "hit_dice": "2d7+46",
+            "mana_dice": "5d5+100",
+            "dam_dice": "1d5+1",
+            "dam_type": "punch",
+            "ac_pierce": "6",
+            "ac_bash": "6",
+            "ac_slash": "6",
+            "ac_exotic": "9",
+            "off_flags": "F",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24124",
+            "name": "thief",
+            "short_description": "a thief",
+            "long_description": "A thief adroitly cuts the strings of another fat merchant's purse.\n",
+            "description": "This unsavory fellow preys on the rich foreign merchants from the south.\n",
+            "race": "human",
+            "act": "64|128",
+            "affected_by": "2|32768|65536|1048576",
+            "alignment": "0",
+            "group": "0",
+            "level": "10",
+            "hitroll": "0",
+            "hit_dice": "2d7+121",
+            "mana_dice": "5d5+100",
+            "dam_dice": "2d4+2",
+            "dam_type": "punch",
+            "ac_pierce": "1",
+            "ac_bash": "1",
+            "ac_slash": "1",
+            "ac_exotic": "7",
+            "off_flags": "FIN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24125",
+            "name": "wolf",
+            "short_description": "a scrawny wolf",
+            "long_description": "A scrawny wolf is here looking for food.\n",
+            "description": "This wolf has strayed in from the wild, driven by hunger. The villagers are\nquick to repel such unwelcome wildlife, and it is only a matter of time\nbefore the militia run it off.\n",
+            "race": "wolf",
+            "act": "64|128",
+            "affected_by": "0",
+            "alignment": "0",
+            "group": "0",
+            "level": "5",
+            "hitroll": "0",
+            "hit_dice": "2d7+46",
+            "mana_dice": "5d5+100",
+            "dam_dice": "1d5+1",
+            "dam_type": "bite",
+            "ac_pierce": "6",
+            "ac_bash": "6",
+            "ac_slash": "6",
+            "ac_exotic": "9",
+            "off_flags": "F",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "either",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24126",
+            "name": "rat",
+            "short_description": "a rat",
+            "long_description": "A black rat.\n",
+            "description": "These mangy black rodents came with the merchants from the south, hidden\namongst their goods, and have quickly become a nuisance, being scavengers\nand carriers of disease.\n",
+            "race": "rat",
+            "act": "64|128",
+            "affected_by": "0",
+            "alignment": "0",
+            "group": "0",
+            "level": "2",
+            "hitroll": "0",
+            "hit_dice": "2d7+26",
+            "mana_dice": "5d5+100",
+            "dam_dice": "1d5+1",
+            "dam_type": "charge",
+            "ac_pierce": "6",
+            "ac_bash": "6",
+            "ac_slash": "6",
+            "ac_exotic": "9",
+            "off_flags": "F",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "none",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24127",
+            "name": "dog",
+            "short_description": "a dog",
+            "long_description": "A stray dog whines piteously at you.\n",
+            "description": "This mongrel is the unwanted offspring of some hunter's sled dogs, left to \nfend for itself here in the village.\n",
+            "race": "fido",
+            "act": "64|128",
+            "affected_by": "0",
+            "alignment": "0",
+            "group": "0",
+            "level": "3",
+            "hitroll": "0",
+            "hit_dice": "2d7+46",
+            "mana_dice": "5d5+100",
+            "dam_dice": "1d5+1",
+            "dam_type": "bite",
+            "ac_pierce": "6",
+            "ac_bash": "6",
+            "ac_slash": "6",
+            "ac_exotic": "9",
+            "off_flags": "F",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "female",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24128",
+            "name": "militia member",
+            "short_description": "a member of the village militia",
+            "long_description": "A member of the village militia eyes you suspiciously.\n",
+            "description": "Like most civilizations of the time, the northern villagers have no organised\nstanding military or police force. However, the recent influx of foreigners\nand bandits has necessitated the introduction of a militia to keep the peace.\n",
+            "race": "human",
+            "act": "8|64",
+            "affected_by": "4|128|8192",
+            "alignment": "1000",
+            "group": "0",
+            "level": "50",
+            "hitroll": "0",
+            "hit_dice": "50d10+4250",
+            "mana_dice": "5d5+5000",
+            "dam_dice": "5d8+19",
+            "dam_type": "pound",
+            "ac_pierce": "-20",
+            "ac_bash": "-20",
+            "ac_slash": "-20",
+            "ac_exotic": "0",
+            "off_flags": "EFIKN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24129",
+            "name": "militia member",
+            "short_description": "a member of the village militia",
+            "long_description": "A member of the village militia eyes you suspiciously.\n",
+            "description": "Like most civilizations of the time, the northern villagers have no organised\nstanding military or police force. However, the recent influx of foreigners\nand bandits has necessitated the introduction of a militia to keep the peace.\n",
+            "race": "human",
+            "act": "8|64",
+            "affected_by": "4|128|8192",
+            "alignment": "1000",
+            "group": "0",
+            "level": "50",
+            "hitroll": "0",
+            "hit_dice": "50d10+4250",
+            "mana_dice": "5d5+5000",
+            "dam_dice": "5d8+19",
+            "dam_type": "pound",
+            "ac_pierce": "-20",
+            "ac_bash": "-20",
+            "ac_slash": "-20",
+            "ac_exotic": "0",
+            "off_flags": "CEFIKN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24130",
+            "name": "militia member",
+            "short_description": "a member of the village militia",
+            "long_description": "A member of the village militia hefts a large club and eyes you suspiciously.\n",
+            "description": "Like most civilizations of the time, the northern villagers have no organised\nstanding military or police force. However, the recent influx of foreigners\nand bandits has necessitated the introduction of a militia to keep the peace.\n",
+            "race": "human",
+            "act": "2|8|64",
+            "affected_by": "4|128|8192",
+            "alignment": "1000",
+            "group": "0",
+            "level": "50",
+            "hitroll": "0",
+            "hit_dice": "50d10+4250",
+            "mana_dice": "5d5+5000",
+            "dam_dice": "5d8+19",
+            "dam_type": "pound",
+            "ac_pierce": "-20",
+            "ac_bash": "-20",
+            "ac_slash": "-20",
+            "ac_exotic": "0",
+            "off_flags": "CEFIKN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24131",
+            "name": "minoan merc merc1",
+            "short_description": "minoan mercenary",
+            "long_description": "A Minoan mercenary scowls menacingly at you.\n",
+            "description": "This Merc looks big and tough. Better be careful.\n",
+            "race": "human",
+            "act": "256",
+            "affected_by": "32|512",
+            "alignment": "0",
+            "group": "0",
+            "level": "15",
+            "hitroll": "0",
+            "hit_dice": "3d9+208",
+            "mana_dice": "5d5+100",
+            "dam_dice": "2d6+3",
+            "dam_type": "pound",
+            "ac_pierce": "-2",
+            "ac_bash": "-2",
+            "ac_slash": "-2",
+            "ac_exotic": "6",
+            "off_flags": "CDFKIJ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "female",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24132",
+            "name": "assyrian merc merc2",
+            "short_description": "Assyrian mercenary",
+            "long_description": "An Assyrian Mercenary scowls menacingly at you.\n",
+            "description": "This Merc looks big and tough. Better be careful.\n",
+            "race": "human",
+            "act": "256",
+            "affected_by": "8|512",
+            "alignment": "0",
+            "group": "0",
+            "level": "20",
+            "hitroll": "0",
+            "hit_dice": "3d9+333",
+            "mana_dice": "5d5+1000",
+            "dam_dice": "2d8+5",
+            "dam_type": "pound",
+            "ac_pierce": "-4",
+            "ac_bash": "-4",
+            "ac_slash": "-4",
+            "ac_exotic": "5",
+            "off_flags": "FKNIJ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24133",
+            "name": "egyptian merc merc3",
+            "short_description": "Egyptian mercenary",
+            "long_description": "An Egyptian mercenary scowls menacingly at you.\n",
+            "description": "This Merc looks big and tough. Better be careful.\n",
+            "race": "human",
+            "act": "256",
+            "affected_by": "512|8192",
+            "alignment": "0",
+            "group": "0",
+            "level": "25",
+            "hitroll": "0",
+            "hit_dice": "5d10+550",
+            "mana_dice": "5d5+1000",
+            "dam_dice": "2d10+7",
+            "dam_type": "pound",
+            "ac_pierce": "-7",
+            "ac_bash": "-7",
+            "ac_slash": "-7",
+            "ac_exotic": "4",
+            "off_flags": "FIKN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24134",
+            "name": "trojan merc merc4",
+            "short_description": "Trojan mercenary",
+            "long_description": "A Trojan mercenary scowls menacingly at you.\n",
+            "description": "This Merc looks big and tough. Better be careful.\n",
+            "race": "human",
+            "act": "256",
+            "affected_by": "512|8192",
+            "alignment": "0",
+            "group": "0",
+            "level": "30",
+            "hitroll": "0",
+            "hit_dice": "6d12+853",
+            "mana_dice": "5d5+1000",
+            "dam_dice": "4d6+8",
+            "dam_type": "slash",
+            "ac_pierce": "-9",
+            "ac_bash": "-9",
+            "ac_slash": "-9",
+            "ac_exotic": "3",
+            "off_flags": "FKIJ",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24135",
+            "name": "nubian merc merc5",
+            "short_description": "nubian Mercenary",
+            "long_description": "A Nubian mercenary scowls menacingly at you.\n",
+            "description": "This Merc looks big and tough. Better be careful.\n",
+            "race": "human",
+            "act": "256",
+            "affected_by": "8192",
+            "alignment": "0",
+            "group": "0",
+            "level": "35",
+            "hitroll": "0",
+            "hit_dice": "10d10+1300",
+            "mana_dice": "5d5+1000",
+            "dam_dice": "4d7+11",
+            "dam_type": "slash",
+            "ac_pierce": "-11",
+            "ac_bash": "-11",
+            "ac_slash": "-11",
+            "ac_exotic": "3",
+            "off_flags": "FIKN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "24136",
+            "name": "mycenaean merc merc6",
+            "short_description": "Mycenaean mercenary",
+            "long_description": "A Mycenaean mercenary scowls menacingly at you.\n",
+            "description": "This Merc looks big and tough. Better be careful.\n",
+            "race": "human",
+            "act": "256",
+            "affected_by": "8|32|512|524288",
+            "alignment": "0",
+            "group": "0",
+            "level": "40",
+            "hitroll": "0",
+            "hit_dice": "15d10+1850",
+            "mana_dice": "5d5+1000",
+            "dam_dice": "4d8+13",
+            "dam_type": "slash",
+            "ac_pierce": "-13",
+            "ac_bash": "-13",
+            "ac_slash": "-13",
+            "ac_exotic": "3",
+            "off_flags": "FIKN",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "1000",
+            "form": "0",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        }
+    ],
+    "old_objects": [
+        {
+            "vnum": "24100",
+            "name": "key",
+            "short_description": "a bone key",
+            "description": "The key to the village gates.\n",
+            "type": "18",
+            "extra_flags": "0",
+            "wear_flags": "1|16384",
+            "values": "0 0 0 0 ",
+            "weight": "1",
+            "cost": "0"
+        },
+        {
+            "vnum": "24101",
+            "name": "barrel beer",
+            "short_description": "a barrel of beer",
+            "description": "A beer barrel has been left here.\n",
+            "type": "17",
+            "extra_flags": "0",
+            "wear_flags": "1",
+            "values": "30 30 1 0 ",
+            "weight": "60",
+            "cost": "300"
+        },
+        {
+            "vnum": "24102",
+            "name": "bottle beer",
+            "short_description": "a bottle of rough beer",
+            "description": "A beer bottle has been left here.",
+            "type": "17",
+            "extra_flags": "0",
+            "wear_flags": "1",
+            "values": "4 4 1 0 ",
+            "weight": "10",
+            "cost": "20"
+        },
+        {
+            "vnum": "24103",
+            "name": "bottle ale",
+            "short_description": "a bottle of home brew ale",
+            "description": "A dark bottle of ale has been left here.",
+            "type": "17",
+            "extra_flags": "0",
+            "wear_flags": "1",
+            "values": "5 5 3 0 ",
+            "weight": "10",
+            "cost": "10"
+        },
+        {
+            "vnum": "24104",
+            "name": "bottle firebreather",
+            "short_description": "a bottle of rough spirits",
+            "description": "A firebreather has been left here.",
+            "type": "17",
+            "extra_flags": "0",
+            "wear_flags": "1",
+            "values": "8 8 7 0 ",
+            "weight": "10",
+            "cost": "50"
+        },
+        {
+            "vnum": "24105",
+            "name": "bottle local",
+            "short_description": "a bottle of brewer's specialty (\"Holy Water\")",
+            "description": "A dark bottle has been left here.",
+            "type": "17",
+            "extra_flags": "0",
+            "wear_flags": "1",
+            "values": "8 8 8 0 ",
+            "weight": "10",
+            "cost": "20"
+        },
+        {
+            "vnum": "24106",
+            "name": "torch",
+            "short_description": "a torch",
+            "description": "A large torch.",
+            "type": "1",
+            "extra_flags": "0",
+            "wear_flags": "1|65536",
+            "values": "0 0 24 0 ",
+            "weight": "1",
+            "cost": "10"
+        },
+        {
+            "vnum": "24107",
+            "name": "lamp",
+            "short_description": "a stone lamp",
+            "description": "A stone lamp that uses animal fat as fuel has been left here.",
+            "type": "1",
+            "extra_flags": "0",
+            "wear_flags": "1|16384",
+            "values": "0 0 100 0 ",
+            "weight": "4",
+            "cost": "60"
+        },
+        {
+            "vnum": "24108",
+            "name": "brew yellow",
+            "short_description": "a yellow brew",
+            "description": "A yellow brew.",
+            "type": "10",
+            "extra_flags": "64",
+            "wear_flags": "1",
+            "values": "12 3 -1 -1 ",
+            "weight": "1",
+            "cost": "400"
+        },
+        {
+            "vnum": "24109",
+            "name": "skin water buffalo",
+            "short_description": "a buffalo water skin",
+            "description": "A buffalo water skin is on the floor.",
+            "type": "17",
+            "extra_flags": "0",
+            "wear_flags": "1",
+            "values": "25 25 0 0 ",
+            "weight": "5",
+            "cost": "30"
+        },
+        {
+            "vnum": "24110",
+            "name": "jug water",
+            "short_description": "a jug of water",
+            "description": "A large jug of water sloshes on the floor.",
+            "type": "17",
+            "extra_flags": "1",
+            "wear_flags": "1",
+            "values": "60 60 0 0 ",
+            "weight": "85",
+            "cost": "0"
+        },
+        {
+            "vnum": "24111",
+            "name": "club",
+            "short_description": "a heavy lead-sheathed club",
+            "description": "A heavy club sheathed in lead lies here.",
+            "type": "5",
+            "extra_flags": "0",
+            "wear_flags": "1|8192",
+            "values": "0 0 0 8 ",
+            "weight": "30",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "19",
+                    "modifier": "4"
+                }
+            ]
+        },
+        {
+            "vnum": "24112",
+            "name": "mace",
+            "short_description": "a bone mace",
+            "description": "A bone mace lies here.",
+            "type": "5",
+            "extra_flags": "0",
+            "wear_flags": "1|8192",
+            "values": "0 0 0 7 ",
+            "weight": "20",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "-1"
+                },
+                {
+                    "location": "19",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "24113",
+            "name": "dagger",
+            "short_description": "a bronze dagger",
+            "description": "A bronze dagger lies here.",
+            "type": "5",
+            "extra_flags": "0",
+            "wear_flags": "1|8192",
+            "values": "0 0 0 11 ",
+            "weight": "15",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "-1"
+                },
+                {
+                    "location": "19",
+                    "modifier": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "24114",
+            "name": "blade sword",
+            "short_description": "a bronze sword",
+            "description": "A broad, heavy bronze blade lies here.",
+            "type": "5",
+            "extra_flags": "0",
+            "wear_flags": "1|8192",
+            "values": "0 0 0 3 ",
+            "weight": "25",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "19",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "24115",
+            "name": "sandals",
+            "short_description": "a pair of sandals",
+            "description": "A pair of sandals lies here.",
+            "type": "9",
+            "extra_flags": "0",
+            "wear_flags": "1|64",
+            "values": "0 0 0 0 ",
+            "weight": "15",
+            "cost": "0"
+        },
+        {
+            "vnum": "24116",
+            "name": "belt",
+            "short_description": "a hide belt",
+            "description": "A belt crafted of hide is curled up here.",
+            "type": "9",
+            "extra_flags": "0",
+            "wear_flags": "1|2048",
+            "values": "0 0 0 0 ",
+            "weight": "20",
+            "cost": "0"
+        },
+        {
+            "vnum": "24117",
+            "name": "bronze helm",
+            "short_description": "a bronze helm",
+            "description": "A bronze helm.",
+            "type": "9",
+            "extra_flags": "0",
+            "wear_flags": "1|16",
+            "values": "0 0 0 0 ",
+            "weight": "5",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-2"
+                }
+            ]
+        },
+        {
+            "vnum": "24118",
+            "name": "cloak",
+            "short_description": "a rough fur cloak",
+            "description": "A rough fur cloak is here.",
+            "type": "9",
+            "extra_flags": "0",
+            "wear_flags": "1|4",
+            "values": "0 0 0 0 ",
+            "weight": "5",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-5"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "24119",
+            "name": "ring",
+            "short_description": "a bronze ring",
+            "description": "A bronze ring.",
+            "type": "18",
+            "extra_flags": "1",
+            "wear_flags": "1|2",
+            "values": "0 0 0 0 ",
+            "weight": "1",
+            "cost": "0"
+        },
+        {
+            "vnum": "24120",
+            "name": "black bread",
+            "short_description": "black bread",
+            "description": "Black bread.",
+            "type": "19",
+            "extra_flags": "0",
+            "wear_flags": "1",
+            "values": "5 0 0 0 ",
+            "weight": "3",
+            "cost": "0"
+        },
+        {
+            "vnum": "24121",
+            "name": "cheese",
+            "short_description": "cheese",
+            "description": "A sour cheese.",
+            "type": "19",
+            "extra_flags": "0",
+            "wear_flags": "1",
+            "values": "8 0 0 0 ",
+            "weight": "5",
+            "cost": "0"
+        },
+        {
+            "vnum": "24122",
+            "name": "dried meat",
+            "short_description": "a strip of dried meat",
+            "description": "A strip of unidentifiable dried meat.",
+            "type": "19",
+            "extra_flags": "0",
+            "wear_flags": "1",
+            "values": "10 0 0 0 ",
+            "weight": "5",
+            "cost": "0"
+        },
+        {
+            "vnum": "24123",
+            "name": "egg",
+            "short_description": "an egg",
+            "description": "An egg (raw), warm from the nest.",
+            "type": "19",
+            "extra_flags": "0",
+            "wear_flags": "1",
+            "values": "4 0 0 0 ",
+            "weight": "5",
+            "cost": "0"
+        },
+        {
+            "vnum": "24124",
+            "name": "potion",
+            "short_description": "a foul potion",
+            "description": "A foul potion rolls around here.",
+            "type": "10",
+            "extra_flags": "1|2|64",
+            "wear_flags": "1",
+            "values": "10 29 28 56 ",
+            "weight": "2",
+            "cost": "400"
+        },
+        {
+            "vnum": "24125",
+            "name": "totem",
+            "short_description": "the village totem",
+            "description": "The village totem stands here.",
+            "type": "12",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 0 0 ",
+            "weight": "1000",
+            "cost": "0"
+        },
+        {
+            "vnum": "24126",
+            "name": "wolf head",
+            "short_description": "a wolf's head",
+            "description": "The champion's wolf's head is here.\n",
+            "type": "9",
+            "extra_flags": "0",
+            "wear_flags": "1|16",
+            "values": "0 0 0 0 ",
+            "weight": "75",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "250"
+                }
+            ]
+        },
+        {
+            "vnum": "24127",
+            "name": "club",
+            "short_description": "the chief's club",
+            "description": "The chief's oak club is lying here in the dirt.\n",
+            "type": "5",
+            "extra_flags": "64",
+            "wear_flags": "1|8192",
+            "values": "0 10 100 8 ",
+            "weight": "25",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-15"
+                },
+                {
+                    "location": "19",
+                    "modifier": "6"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-3"
+                }
+            ]
+        },
+        {
+            "vnum": "24128",
+            "name": "stick",
+            "short_description": "a stick",
+            "description": "A wooden stick.",
+            "type": "5",
+            "extra_flags": "0",
+            "wear_flags": "1|8192",
+            "values": "0 0 0 7 ",
+            "weight": "15",
+            "cost": "0"
+        },
+        {
+            "vnum": "24129",
+            "name": "wooden club",
+            "short_description": "a wooden club",
+            "description": "A wooden club is lying here.",
+            "type": "5",
+            "extra_flags": "64",
+            "wear_flags": "1|8192",
+            "values": "0 0 0 8 ",
+            "weight": "15",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "6"
+                }
+            ]
+        },
+        {
+            "vnum": "24130",
+            "name": "boiled leather jerkin",
+            "short_description": "a boiled leather jerkin",
+            "description": "A boiled leather jerkin is lying here.",
+            "type": "9",
+            "extra_flags": "0",
+            "wear_flags": "1|8",
+            "values": "0 0 0 0 ",
+            "weight": "10",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "5",
+                    "modifier": "2"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-15"
+                }
+            ]
+        },
+        {
+            "vnum": "24131",
+            "name": "bone bracelet",
+            "short_description": "a rune-covered bone bracelet",
+            "description": "A rune-covered bone bracelet is lying here.",
+            "type": "9",
+            "extra_flags": "0",
+            "wear_flags": "1|4096",
+            "values": "0 0 0 0 ",
+            "weight": "5",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "1"
+                },
+                {
+                    "location": "18",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "24132",
+            "name": "fur cloak",
+            "short_description": "a fur cloak",
+            "description": "A fur cloak is lying here.",
+            "type": "9",
+            "extra_flags": "0",
+            "wear_flags": "1|4",
+            "values": "0 0 0 0 ",
+            "weight": "10",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "25"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-5"
+                }
+            ]
+        },
+        {
+            "vnum": "24133",
+            "name": "helm",
+            "short_description": "a boar tusk helm",
+            "description": "A boar tusk helm lies here.",
+            "type": "9",
+            "extra_flags": "0",
+            "wear_flags": "1|16",
+            "values": "0 0 0 0 ",
+            "weight": "10",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-10"
+                }
+            ]
+        },
+        {
+            "vnum": "24134",
+            "name": "shield",
+            "short_description": "an ox-hide shield",
+            "description": "An ox-hide shield lies here.\n",
+            "type": "9",
+            "extra_flags": "0",
+            "wear_flags": "1|512",
+            "values": "0 0 0 0 ",
+            "weight": "20",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-20"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-2"
+                }
+            ]
+        },
+        {
+            "vnum": "24135",
+            "name": "spear",
+            "short_description": "a throwing spear",
+            "description": "A sturdy throwing spear has been thrust into the ground here.\n",
+            "type": "30",
+            "extra_flags": "64",
+            "wear_flags": "1|8192|16384",
+            "values": "0 0 0 0 ",
+            "weight": "20",
+            "cost": "0",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "2"
+                },
+                {
+                    "location": "19",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "24136",
+            "name": "papyrus",
+            "short_description": "a blank papyrus",
+            "description": "A blank papyrus is here.\n",
+            "type": "2",
+            "extra_flags": "0",
+            "wear_flags": "1|16384",
+            "values": "0 0 0 0 ",
+            "weight": "1",
+            "cost": "0"
+        },
+        {
+            "vnum": "24137",
+            "name": "potion",
+            "short_description": "a shimmering potion",
+            "description": "A shimmering potion is here.\n",
+            "type": "10",
+            "extra_flags": "64",
+            "wear_flags": "1|16384",
+            "values": "5 82 43 17 ",
+            "weight": "1",
+            "cost": "400"
+        },
+        {
+            "vnum": "24138",
+            "name": "gate",
+            "short_description": "a stone gate",
+            "description": "A magical stone gate allows one to pass through to other worlds.",
+            "type": "33",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "31144 0 0 0",
+            "weight": "1",
+            "cost": "0"
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "24100",
+            "name": "Outside the Shaman's Hut",
+            "description": "You are standing outside the wooden hut where the Shaman of the village\nresides. Paths stretch out to the east, south and west from here.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "24101"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24104"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24103"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24102"
+                }
+            ]
+        },
+        {
+            "vnum": "24101",
+            "name": "The Interior of the Shaman's Hut",
+            "description": "You cough as you enter the smoky interior of this cramped hut, your eyes\nwatering as the odor of some bubbling concoction in an iron cauldron wafts\ntoward you. In the center of this hut the shaman awaits, quietly meditating.\nA variety of furs, bones, charms and trinkets line the walls, doubtless\nserving as focii for the shaman's mystic powers.\n",
+            "flags": "8|1024",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "24100"
+                }
+            ]
+        },
+        {
+            "vnum": "24102",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24100"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24105"
+                }
+            ]
+        },
+        {
+            "vnum": "24103",
+            "name": "A Path in the Village",
+            "description": "You are walking along a path of packed earth that heads north toward the\nShaman's hut.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24100"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24106"
+                }
+            ]
+        },
+        {
+            "vnum": "24104",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24107"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24100"
+                }
+            ]
+        },
+        {
+            "vnum": "24105",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24137"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24102"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24139"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24108"
+                }
+            ]
+        },
+        {
+            "vnum": "24106",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24103"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24163"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24109"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24161"
+                }
+            ]
+        },
+        {
+            "vnum": "24107",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24141"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24110"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24143"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24104"
+                }
+            ]
+        },
+        {
+            "vnum": "24108",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24105"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24111"
+                }
+            ]
+        },
+        {
+            "vnum": "24109",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening. The village square outside\nthe Shaman's hut lies a short way to the north of here.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24106"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24133"
+                }
+            ]
+        },
+        {
+            "vnum": "24110",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24112"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24107"
+                }
+            ]
+        },
+        {
+            "vnum": "24111",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24108"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24113"
+                }
+            ]
+        },
+        {
+            "vnum": "24112",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening. Several children suddenly\nrush by, immersed in some strange activity, the rules of which are quite\nunfathomable to you.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24114"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24110"
+                }
+            ]
+        },
+        {
+            "vnum": "24113",
+            "name": "Approaching the Western Gate",
+            "description": "You are approaching the western gates of the village, which are constantly\npatrolled by the militia. There is no-one else about here, as the \nconcentration of residences and shops is nearer to the center of the village.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24111"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24115"
+                }
+            ]
+        },
+        {
+            "vnum": "24114",
+            "name": "Approaching the Eastern Gate",
+            "description": "You are approaching the eastern gates of the village, which are constantly\npatrolled by the militia. There is no-one else about here, as the \nconcentration of residences and shops is nearer to the center of the village.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24116"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24112"
+                }
+            ]
+        },
+        {
+            "vnum": "24115",
+            "name": "Inside the Western Gates",
+            "description": "You have reached the westernmost extent of the village. To the west lie the\nstout wooden gates, set in the wooden barrier that surrounds the village.\nMembers of the militia, on the lookout for bandits and wolves, grant you\na cursory nod as they go about their duties.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24113"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "24100",
+                    "u1_vnum": "24117"
+                }
+            ]
+        },
+        {
+            "vnum": "24116",
+            "name": "Inside the Eastern Gates",
+            "description": "You have reached the easternmost extent of the village. To the east lie the\nstout wooden gates, set in the wooden barrier that surrounds the village.\nMembers of the militia, on the lookout for bandits and wolves, grant you\na cursory nod as they go about their duties.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "24100",
+                    "u1_vnum": "24118"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24114"
+                }
+            ]
+        },
+        {
+            "vnum": "24117",
+            "name": "Outside the Western Gates",
+            "description": "You are standing outside the Gates at the western end of town. They currently\nstand open, but the militia are ready at a moment's notice to slam them shut\nand bar them with heavy wooden crossbeams bound with rare iron imported from\nthe south.\n",
+            "flags": "4",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24119"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "24100",
+                    "u1_vnum": "24115"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24132"
+                }
+            ]
+        },
+        {
+            "vnum": "24118",
+            "name": "Outside the Eastern Gates",
+            "description": "You are standing outside the Gates at the eastern end of town. They currently\nstand open, but the militia are ready at a moment's notice to slam them shut\nand bar them with heavy wooden crossbeams bound with rare iron imported from\nthe south.\n",
+            "flags": "4",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24125"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "31018"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24126"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "24100",
+                    "u1_vnum": "24116"
+                }
+            ]
+        },
+        {
+            "vnum": "24119",
+            "name": "A Dirt Path",
+            "description": "You are travelling along a broad path comprised of hard earth packed down\nby the steps of thousands of travellers over the many years. This path  \ncircles the wooden walls of the village, and from here you can see some of\nthe larger structures within.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24120"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24117"
+                }
+            ]
+        },
+        {
+            "vnum": "24120",
+            "name": "A Dirt Path",
+            "description": "You are travelling along a broad path comprised of hard earth packed down\nby the steps of thousands of travellers over the many years. This path  \ncircles the wooden walls of the village, and from here you can see some of\nthe larger structures within.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24121"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24119"
+                }
+            ]
+        },
+        {
+            "vnum": "24121",
+            "name": "A Dirt Path",
+            "description": "You are travelling along a broad path comprised of hard earth packed down\nby the steps of thousands of travellers over the many years. This path  \ncircles the wooden walls of the village, and from here you can see some of\nthe larger structures within.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24122"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24120"
+                }
+            ]
+        },
+        {
+            "vnum": "24122",
+            "name": "A Dirt Path",
+            "description": "You are travelling along a broad path comprised of hard earth packed down\nby the steps of thousands of travellers over the many years. This path  \ncircles the wooden walls of the village, and from here you can see some of\nthe larger structures within.\n\nThere is a path running up a hill here which you may ascend.\n",
+            "flags": "4",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24123"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24121"
+                }
+            ]
+        },
+        {
+            "vnum": "24123",
+            "name": "A Dirt Path",
+            "description": "You are travelling along a broad path comprised of hard earth packed down\nby the steps of thousands of travellers over the many years. This path  \ncircles the wooden walls of the village, and from here you can see some of\nthe larger structures within.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24124"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24122"
+                }
+            ]
+        },
+        {
+            "vnum": "24124",
+            "name": "A Dirt Path",
+            "description": "You are travelling along a broad path comprised of hard earth packed down\nby the steps of thousands of travellers over the many years. This path  \ncircles the wooden walls of the village, and from here you can see some of\nthe larger structures within.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24125"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24123"
+                }
+            ]
+        },
+        {
+            "vnum": "24125",
+            "name": "A Dirt Path",
+            "description": "You are travelling along a broad path comprised of hard earth packed down\nby the steps of thousands of travellers over the many years. This path  \ncircles the wooden walls of the village, and from here you can see some of\nthe larger structures within.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24124"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24118"
+                }
+            ]
+        },
+        {
+            "vnum": "24126",
+            "name": "A Dirt Path",
+            "description": "You are travelling along a broad path comprised of hard earth packed down\nby the steps of thousands of travellers over the many years. This path  \ncircles the wooden walls of the village, and from here you can see some of\nthe larger structures within.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24118"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24127"
+                }
+            ]
+        },
+        {
+            "vnum": "24127",
+            "name": "A Dirt Path",
+            "description": "You are travelling along a broad path comprised of hard earth packed down\nby the steps of thousands of travellers over the many years. This path  \ncircles the wooden walls of the village, and from here you can see some of\nthe larger structures within.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24126"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24128"
+                }
+            ]
+        },
+        {
+            "vnum": "24128",
+            "name": "A Dirt Path",
+            "description": "You are travelling along a broad path comprised of hard earth packed down\nby the steps of thousands of travellers over the many years. This path  \ncircles the wooden walls of the village, and from here you can see some of\nthe larger structures within.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24127"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24129"
+                }
+            ]
+        },
+        {
+            "vnum": "24129",
+            "name": "A Dirt Path",
+            "description": "You are travelling along a broad path comprised of hard earth packed down\nby the steps of thousands of travellers over the many years. This path  \ncircles the wooden walls of the village, and from here you can see some of\nthe larger structures within.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24128"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24130"
+                }
+            ]
+        },
+        {
+            "vnum": "24130",
+            "name": "A Dirt Path",
+            "description": "You are travelling along a broad path comprised of hard earth packed down\nby the steps of thousands of travellers over the many years. This path  \ncircles the wooden walls of the village, and from here you can see some of\nthe larger structures within.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24129"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24131"
+                }
+            ]
+        },
+        {
+            "vnum": "24131",
+            "name": "A Dirt Path",
+            "description": "You are travelling along a broad path comprised of hard earth packed down\nby the steps of thousands of travellers over the many years. This path  \ncircles the wooden walls of the village, and from here you can see some of\nthe larger structures within.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24132"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24130"
+                }
+            ]
+        },
+        {
+            "vnum": "24132",
+            "name": "A Dirt Path",
+            "description": "You are travelling along a broad path comprised of hard earth packed down\nby the steps of thousands of travellers over the many years. This path  \ncircles the wooden walls of the village, and from here you can see some of\nthe larger structures within.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24117"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24131"
+                }
+            ]
+        },
+        {
+            "vnum": "24133",
+            "name": "Outside a Village Clan Hut",
+            "description": "You are standing outside a hut in the village. It is a wooden walled structure\nwith a thatched roof, and a sturdy oak door. Occasionally a villager enters\nor exits the hut, sparing you a curious glance as they do. A crude etching\nupon the doors of this hut marks it as the Horse Clan hut.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24109"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "24134"
+                }
+            ]
+        },
+        {
+            "vnum": "24134",
+            "name": "Inside the Hut",
+            "description": "You are standing inside the hut. The sounds and smells of cooking emanate\nfrom the east, while quiet conversation can be heard to the west. You feel\nslightly nervous about intruding upon this clan, but then again that's\nwhat your profession is all about, really. Intruding.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "24133"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24136"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24135"
+                }
+            ]
+        },
+        {
+            "vnum": "24135",
+            "name": "The Meeting Room",
+            "description": "You have entered the common room of this hut. Several villagers sit about,\nsipping at their ales and chatting quietly with each other. As you enter\nthey smile and bid you welcome, and ask you to stay and enjoy some good\nconversation for a while.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24134"
+                }
+            ]
+        },
+        {
+            "vnum": "24136",
+            "name": "The Kitchen",
+            "description": "In here several teenagers of both sexes rush about preparing the evening\nmeal under the watchful eye of a hefty cook, who helps them along with the\noccasional shout or cuff on the ear.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24134"
+                }
+            ]
+        },
+        {
+            "vnum": "24137",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n\nThe chieftain's lodge lies to the west of here.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24145"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24105"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "24138"
+                }
+            ]
+        },
+        {
+            "vnum": "24138",
+            "name": "The Chieftain's Lodge",
+            "description": "This is where the chieftain resides. It may seem to be a small dwelling\nfor a figure of such importance, but it should be remembered that she has\nit to herself, while most other villagers live with their clans in groups of\nup to thirty, residing in three room lodges.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "24137"
+                }
+            ]
+        },
+        {
+            "vnum": "24139",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n\nThe flint-knepper practices his trade to the west of here.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24105"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24160"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24140"
+                }
+            ]
+        },
+        {
+            "vnum": "24140",
+            "name": "The Flint-Knepper",
+            "description": "You are greeted with a sudden blast of heat from the furnace as you enter\nthe smithy. Wiping sweat from your brow, you gaze about, taking the place\nin. Various items of armor in various stages of repair line the walls. A\nhuge, muscular man is using a massive hammer to beat the dents out of a\nsuit of rather battered-looking bronze plate. The flint-knepper has learnt\nskills far more advanced than his contemporaries, thanks to the many\nvisitors this village attracts, and his forge shows evidence of this.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24139"
+                }
+            ]
+        },
+        {
+            "vnum": "24141",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24153"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24142"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24107"
+                }
+            ]
+        },
+        {
+            "vnum": "24142",
+            "name": "A Storage Hut",
+            "description": "This hut is used to store the goods of the many merchants that come to this\nvillage. It currently holds little of interest, being filled largely with\nbales of hay and coils of hemp rope.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24141"
+                }
+            ]
+        },
+        {
+            "vnum": "24143",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24107"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24144"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24165"
+                }
+            ]
+        },
+        {
+            "vnum": "24144",
+            "name": "A Trader's Den",
+            "description": "This hut has been loaned by the chieftain to a travelling arms specialist,\nwho is currently doing a roaring trade with the locals, who are eager to\nacquire the rare metal weapons he has bought with him from the south.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24143"
+                }
+            ]
+        },
+        {
+            "vnum": "24145",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24146"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24148"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24137"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24181"
+                }
+            ]
+        },
+        {
+            "vnum": "24146",
+            "name": "Militia Hut",
+            "description": "Here the foreign mercenaries who have come to the north looking for \nemployment gather. You may take advantage of their services for a sizeable\nsum of gold should you wish to.\n",
+            "flags": "8|4096",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24145"
+                }
+            ]
+        },
+        {
+            "vnum": "24147",
+            "name": "Merc Store",
+            "description": "You shouldn't be here. Go Away. Or I'll Tell.\n\nOh look- a garbled transmission from Outer Space-\nand a large fries.\n",
+            "flags": "8",
+            "sector": "0"
+        },
+        {
+            "vnum": "24148",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n\nThe witchdoctor's hut is to the north of here.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24149"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24150"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24145"
+                }
+            ]
+        },
+        {
+            "vnum": "24149",
+            "name": "The Witch Doctor's Hut",
+            "description": "This hut is cram-packed with magical artefacts, items and spell components\nof every type imaginable (and several unimaginable). Forcing your way through\nthe clutter, you eventually find an assistant, a raven-haired witch doctor who \nsmiles sweetly and welcomes you to her hut.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24148"
+                }
+            ]
+        },
+        {
+            "vnum": "24150",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24156"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24151"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24148"
+                }
+            ]
+        },
+        {
+            "vnum": "24151",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n\nThe wise woman's hut is to the north.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24152"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24153"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24150"
+                }
+            ]
+        },
+        {
+            "vnum": "24152",
+            "name": "The Wise Woman's Residence",
+            "description": "The Wise Woman of the village lives in this run-down old hut. People come\nto her to avail themselves of her remarkable ability to determine the nature\nof items of all types (there's no other reason to come here, really).\n",
+            "flags": "4|8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24151"
+                }
+            ]
+        },
+        {
+            "vnum": "24153",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n\nThe beastmaster's hut is to the north.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24154"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24188"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24141"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24151"
+                }
+            ]
+        },
+        {
+            "vnum": "24154",
+            "name": "The Beastmaster's Hut",
+            "description": "The Beastmaster captures and trains the wild animals of the north, and then\nsells them to the merchants from the south. It is a very profitable but\nextremely dangerous profession, as the many scars on his brawny body\nsuggest.\n",
+            "flags": "8|4096",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24153"
+                }
+            ]
+        },
+        {
+            "vnum": "24155",
+            "name": "Pet Store Storage",
+            "description": "You shouldn't be here. Go Away. Or I'll Tell.\n\n\n\n\n\n\n\nNOW!\n",
+            "flags": "8",
+            "sector": "0"
+        },
+        {
+            "vnum": "24156",
+            "name": "Outside a Village Clan Hut",
+            "description": "You are standing outside a hut in the village. It is a wooden walled structure\nwith a thatched roof, and a sturdy oak door. Occasionally a villager enters\nor exits the hut, sparing you a curious glance as they do. A crude etching\nupon the doors of this hut marks it as the Bear Clan hut.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24157"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24150"
+                }
+            ]
+        },
+        {
+            "vnum": "24157",
+            "name": "Inside the Hut",
+            "description": "You are standing inside the hut. The sounds and smells of cooking emanate\nfrom the east, while quiet conversation can be heard to the west. You feel\nslightly nervous about intruding upon this clan, but then again that's\nwhat your profession is all about, really. Intruding.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24158"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24156"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24159"
+                }
+            ]
+        },
+        {
+            "vnum": "24158",
+            "name": "The Meeting Room",
+            "description": "You have entered the common room of this hut. Several villagers sit about,\nsipping at their ales and chatting quietly with each other. As you enter\nthey smile and bid you welcome, and ask you to stay and enjoy some good\nconversation for a while.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24157"
+                }
+            ]
+        },
+        {
+            "vnum": "24159",
+            "name": "The Kitchen",
+            "description": "In here several teenagers of both sexes rush about preparing the evening\nmeal under the watchful eye of a hefty cook, who helps them along with the\noccasional shout or cuff on the ear.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24157"
+                }
+            ]
+        },
+        {
+            "vnum": "24160",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24139"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24161"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24167"
+                }
+            ]
+        },
+        {
+            "vnum": "24161",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n\nA trapper is selling his goods to the south.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24106"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24162"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24160"
+                }
+            ]
+        },
+        {
+            "vnum": "24162",
+            "name": "A Hut",
+            "description": "A trapper has set up a business here, where he sells goods that he has\nfashioned or acquired during his expeditions into the wilds. His stock is\nusually rather low, as the villagers quickly buy up for the winter.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24161"
+                }
+            ]
+        },
+        {
+            "vnum": "24163",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n\nFood is in fact available to the south of here, though it isn't hot.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24165"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24164"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24106"
+                }
+            ]
+        },
+        {
+            "vnum": "24164",
+            "name": "A Supply Hut",
+            "description": "Some enterprising young women have set up a small shop here, where they\nsell off the surplus food that is not required to provision their Clans.\nYou may purchase supplies for your travels here.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24163"
+                }
+            ]
+        },
+        {
+            "vnum": "24165",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n\nThe brewer's hut is south of here.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24143"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24174"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24166"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24163"
+                }
+            ]
+        },
+        {
+            "vnum": "24166",
+            "name": "The Brewer's Hut",
+            "description": "It is here that the village Brewer practices his holy trade. Should you\nwish to indulge, you may obtain alcohol from the Brewer, though a small\ndonation is in order.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24165"
+                }
+            ]
+        },
+        {
+            "vnum": "24167",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24160"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24168"
+                }
+            ]
+        },
+        {
+            "vnum": "24168",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24167"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24169"
+                }
+            ]
+        },
+        {
+            "vnum": "24169",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24168"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24170"
+                }
+            ]
+        },
+        {
+            "vnum": "24170",
+            "name": "Outside a Village Clan Hut",
+            "description": "You are standing outside a hut in the village. It is a wooden walled structure\nwith a thatched roof, and a sturdy oak door. Occasionally a villager enters\nor exits the hut, sparing you a curious glance as they do. A crude etching\nupon the doors of this hut marks it as the Eagle Clan hut.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24169"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "24171"
+                }
+            ]
+        },
+        {
+            "vnum": "24171",
+            "name": "Inside the Hut",
+            "description": "You are standing inside the hut. The sounds and smells of cooking emanate\nfrom the east, while quiet conversation can be heard to the west. You feel\nslightly nervous about intruding upon this clan, but then again that's\nwhat your profession is all about, really. Intruding.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "24170"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24173"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24172"
+                }
+            ]
+        },
+        {
+            "vnum": "24172",
+            "name": "The Meeting Room",
+            "description": "You have entered the common room of this hut. Several villagers sit about,\nsipping at their ales and chatting quietly with each other. As you enter\nthey smile and bid you welcome, and ask you to stay and enjoy some good\nconversation for a while.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24171"
+                }
+            ]
+        },
+        {
+            "vnum": "24173",
+            "name": "The Kitchen",
+            "description": "In here several teenagers of both sexes rush about preparing the evening\nmeal under the watchful eye of a hefty cook, who helps them along with the\noccasional shout or cuff on the ear.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24171"
+                }
+            ]
+        },
+        {
+            "vnum": "24174",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24175"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24165"
+                }
+            ]
+        },
+        {
+            "vnum": "24175",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24176"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24174"
+                }
+            ]
+        },
+        {
+            "vnum": "24176",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24177"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24175"
+                }
+            ]
+        },
+        {
+            "vnum": "24177",
+            "name": "Outside a Village Clan Hut",
+            "description": "You are standing outside a hut in the village. It is a wooden walled structure\nwith a thatched roof, and a sturdy oak door. Occasionally a villager enters\nor exits the hut, sparing you a curious glance as they do. A crude etching\nupon the doors of this hut marks it as the Wolf Clan hut.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24176"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "24178"
+                }
+            ]
+        },
+        {
+            "vnum": "24178",
+            "name": "Inside the Hut",
+            "description": "You are standing inside the hut. The sounds and smells of cooking emanate\nfrom the east, while quiet conversation can be heard to the west. You feel\nslightly nervous about intruding upon this clan, but then again that's\nwhat your profession is all about, really. Intruding.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "0",
+                    "u1_vnum": "24177"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24179"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24180"
+                }
+            ]
+        },
+        {
+            "vnum": "24179",
+            "name": "The Kitchen",
+            "description": "In here several teenagers of both sexes rush about preparing the evening\nmeal under the watchful eye of a hefty cook, who helps them along with the\noccasional shout or cuff on the ear.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24178"
+                }
+            ]
+        },
+        {
+            "vnum": "24180",
+            "name": "The Meeting Room",
+            "description": "You have entered the common room of this hut. Several villagers sit about,\nsipping at their ales and chatting quietly with each other. As you enter\nthey smile and bid you welcome, and ask you to stay and enjoy some good\nconversation for a while.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24178"
+                }
+            ]
+        },
+        {
+            "vnum": "24181",
+            "name": "Outside a Village Clan Hut",
+            "description": "You are standing outside a hut in the village. It is a wooden walled structure\nwith a thatched roof, and a sturdy oak door. Occasionally a villager enters\nor exits the hut, sparing you a curious glance as they do. A crude etching\nupon the doors of this hut marks it as the Boar Clan hut.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "24185"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24145"
+                }
+            ]
+        },
+        {
+            "vnum": "24182",
+            "name": "The Common Hall",
+            "description": "These rooms are used by locals and foreigners alike to relax, sing songs and\nenjoy each other's company. Feel free to stay as long as you wish.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24183"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24184"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24190"
+                }
+            ]
+        },
+        {
+            "vnum": "24183",
+            "name": "The Common Hall",
+            "description": "These rooms are used by locals and foreigners alike to relax, sing songs and\nenjoy each other's company. Feel free to stay as long as you wish.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24182"
+                }
+            ]
+        },
+        {
+            "vnum": "24184",
+            "name": "The Common Hall",
+            "description": "These rooms are used by locals and foreigners alike to relax, sing songs and\nenjoy each other's company. Feel free to stay as long as you wish.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24182"
+                }
+            ]
+        },
+        {
+            "vnum": "24185",
+            "name": "Inside the Hut",
+            "description": "You are standing inside the hut. The sounds and smells of cooking emanate\nfrom the east, while quiet conversation can be heard to the west. You feel\nslightly nervous about intruding upon this clan, but then again that's\nwhat your profession is all about, really. Intruding.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24187"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "24181"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24186"
+                }
+            ]
+        },
+        {
+            "vnum": "24186",
+            "name": "The Meeting Room",
+            "description": "You have entered the common room of this hut. Several villagers sit about,\nsipping at their ales and chatting quietly with each other. As you enter\nthey smile and bid you welcome, and ask you to stay and enjoy some good\nconversation for a while.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24185"
+                }
+            ]
+        },
+        {
+            "vnum": "24187",
+            "name": "The Kitchen",
+            "description": "In here several teenagers of both sexes rush about preparing the evening\nmeal under the watchful eye of a hefty cook, who helps them along with the\noccasional shout or cuff on the ear.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24185"
+                }
+            ]
+        },
+        {
+            "vnum": "24188",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24189"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24153"
+                }
+            ]
+        },
+        {
+            "vnum": "24189",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24190"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24188"
+                }
+            ]
+        },
+        {
+            "vnum": "24190",
+            "name": "A Path in the Village",
+            "description": "You are strolling along a path in the village. Flecks of white snow are blown\nabout on the hard ground by a chill northern breeze that blows in from the\nicy mountains far to the north. You hope that you will be able to find\na hot meal and a comfortable bed this evening.\n\nThe Common Halls lie to the east.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24191"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24182"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24189"
+                }
+            ]
+        },
+        {
+            "vnum": "24191",
+            "name": "Outside a Village Clan Hut",
+            "description": "You are standing outside a hut in the village. It is a wooden walled structure\nwith a thatched roof, and a sturdy oak door. Occasionally a villager enters\nor exits the hut, sparing you a curious glance as they do. A crude etching\nupon the doors of this hut marks it as the Deer Clan hut.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24192"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24190"
+                }
+            ]
+        },
+        {
+            "vnum": "24192",
+            "name": "Inside the Hut",
+            "description": "You are standing inside the hut. The sounds and smells of cooking emanate\nfrom the east, while quiet conversation can be heard to the west. You feel\nslightly nervous about intruding upon this clan, but then again that's\nwhat your profession is all about, really. Intruding.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24194"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24191"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24193"
+                }
+            ]
+        },
+        {
+            "vnum": "24193",
+            "name": "The Meeting Room",
+            "description": "You have entered the common room of this hut. Several villagers sit about,\nsipping at their ales and chatting quietly with each other. As you enter\nthey smile and bid you welcome, and ask you to stay and enjoy some good\nconversation for a while.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24192"
+                }
+            ]
+        },
+        {
+            "vnum": "24194",
+            "name": "The Kitchen",
+            "description": "In here several teenagers of both sexes rush about preparing the evening\nmeal under the watchful eye of a hefty cook, who helps them along with the\noccasional shout or cuff on the ear.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "24192"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "O",
+            "arg1": "24138",
+            "arg2": "1",
+            "arg3": "24101"
+        },
+        {
+            "command": "M",
+            "arg1": "24100",
+            "arg2": "1",
+            "arg3": "24101",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24117",
+            "arg2": "1",
+            "arg3": "24138",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "24127",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "24101",
+            "arg2": "1",
+            "arg3": "24140",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24102",
+            "arg2": "1",
+            "arg3": "24144",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "24115",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24116",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24117",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24118",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24119",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24111",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24112",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24113",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24114",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "24103",
+            "arg2": "1",
+            "arg3": "24146",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24131",
+            "arg2": "1",
+            "arg3": "24147",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24132",
+            "arg2": "1",
+            "arg3": "24147",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24133",
+            "arg2": "1",
+            "arg3": "24147",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24134",
+            "arg2": "1",
+            "arg3": "24147",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24135",
+            "arg2": "1",
+            "arg3": "24147",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24136",
+            "arg2": "1",
+            "arg3": "24147",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24104",
+            "arg2": "1",
+            "arg3": "24149",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "24108",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24124",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24136",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24137",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "24105",
+            "arg2": "1",
+            "arg3": "24152",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24106",
+            "arg2": "1",
+            "arg3": "24154",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24110",
+            "arg2": "1",
+            "arg3": "24155",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24111",
+            "arg2": "1",
+            "arg3": "24155",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24112",
+            "arg2": "1",
+            "arg3": "24155",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24113",
+            "arg2": "1",
+            "arg3": "24155",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24114",
+            "arg2": "1",
+            "arg3": "24155",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24107",
+            "arg2": "1",
+            "arg3": "24162",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "24106",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24107",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24109",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24110",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "24108",
+            "arg2": "1",
+            "arg3": "24164",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "24120",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24121",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24122",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24123",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "24109",
+            "arg2": "1",
+            "arg3": "24166",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "24101",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24102",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24103",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24104",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "24105",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "24115",
+            "arg2": "1",
+            "arg3": "24100",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "24126",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "O",
+            "arg1": "24125",
+            "arg2": "0",
+            "arg3": "24100"
+        },
+        {
+            "command": "M",
+            "arg1": "24116",
+            "arg2": "1",
+            "arg3": "24174",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "24124",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "24118",
+            "arg2": "3",
+            "arg3": "24169",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24118",
+            "arg2": "3",
+            "arg3": "24189",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24119",
+            "arg2": "3",
+            "arg3": "24161",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24119",
+            "arg2": "3",
+            "arg3": "24113",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24120",
+            "arg2": "3",
+            "arg3": "24112",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24121",
+            "arg2": "2",
+            "arg3": "24175",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "24128",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "24122",
+            "arg2": "6",
+            "arg3": "24171",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24123",
+            "arg2": "3",
+            "arg3": "24111",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24124",
+            "arg2": "1",
+            "arg3": "24177",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24125",
+            "arg2": "5",
+            "arg3": "24150",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24126",
+            "arg2": "6",
+            "arg3": "24176",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24127",
+            "arg2": "6",
+            "arg3": "24106",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "24128",
+            "arg2": "8",
+            "arg3": "24100",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "24129",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "24130",
+            "arg2": "0",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "24131",
+            "arg2": "0",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "24131",
+            "arg2": "0",
+            "arg3": "15"
+        },
+        {
+            "command": "E",
+            "arg1": "24132",
+            "arg2": "0",
+            "arg3": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "24133",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "24134",
+            "arg2": "0",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "24135",
+            "arg2": "0",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "24130",
+            "arg2": "8",
+            "arg3": "24115",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "24129",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "24130",
+            "arg2": "0",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "24131",
+            "arg2": "0",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "24131",
+            "arg2": "0",
+            "arg3": "15"
+        },
+        {
+            "command": "E",
+            "arg1": "24132",
+            "arg2": "0",
+            "arg3": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "24133",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "24134",
+            "arg2": "0",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "24135",
+            "arg2": "0",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "24130",
+            "arg2": "8",
+            "arg3": "24116",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "24129",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "24130",
+            "arg2": "0",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "24131",
+            "arg2": "0",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "24131",
+            "arg2": "0",
+            "arg3": "15"
+        },
+        {
+            "command": "E",
+            "arg1": "24132",
+            "arg2": "0",
+            "arg3": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "24133",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "24134",
+            "arg2": "0",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "24135",
+            "arg2": "0",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "24129",
+            "arg2": "8",
+            "arg3": "24169",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "24129",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "24130",
+            "arg2": "0",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "24131",
+            "arg2": "0",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "24131",
+            "arg2": "0",
+            "arg3": "15"
+        },
+        {
+            "command": "E",
+            "arg1": "24132",
+            "arg2": "0",
+            "arg3": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "24133",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "24134",
+            "arg2": "0",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "24135",
+            "arg2": "0",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "24128",
+            "arg2": "8",
+            "arg3": "24145",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "24129",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "24130",
+            "arg2": "0",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "24131",
+            "arg2": "0",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "24131",
+            "arg2": "0",
+            "arg3": "15"
+        },
+        {
+            "command": "E",
+            "arg1": "24132",
+            "arg2": "0",
+            "arg3": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "24133",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "24134",
+            "arg2": "0",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "24135",
+            "arg2": "0",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "24129",
+            "arg2": "8",
+            "arg3": "24153",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "24129",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "24130",
+            "arg2": "0",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "24131",
+            "arg2": "0",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "24131",
+            "arg2": "0",
+            "arg3": "15"
+        },
+        {
+            "command": "E",
+            "arg1": "24132",
+            "arg2": "0",
+            "arg3": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "24133",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "24134",
+            "arg2": "0",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "24135",
+            "arg2": "0",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "24128",
+            "arg2": "8",
+            "arg3": "24165",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "24129",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "24130",
+            "arg2": "0",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "24131",
+            "arg2": "0",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "24131",
+            "arg2": "0",
+            "arg3": "15"
+        },
+        {
+            "command": "E",
+            "arg1": "24132",
+            "arg2": "0",
+            "arg3": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "24133",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "24134",
+            "arg2": "0",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "24135",
+            "arg2": "0",
+            "arg3": "17"
+        }
+    ],
+    "shops": [
+        {
+            "keeper": "24102",
+            "buy_type_0": "5",
+            "buy_type_1": "9",
+            "buy_type_2": "30",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "150",
+            "profit_sell": "50",
+            "open_hour": "0",
+            "close_hour": "23"
+        },
+        {
+            "keeper": "24103",
+            "buy_type_0": "0",
+            "buy_type_1": "0",
+            "buy_type_2": "0",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "150",
+            "profit_sell": "50",
+            "open_hour": "0",
+            "close_hour": "23"
+        },
+        {
+            "keeper": "24104",
+            "buy_type_0": "2",
+            "buy_type_1": "3",
+            "buy_type_2": "4",
+            "buy_type_3": "10",
+            "buy_type_4": "26",
+            "profit_buy": "150",
+            "profit_sell": "50",
+            "open_hour": "0",
+            "close_hour": "23"
+        },
+        {
+            "keeper": "24106",
+            "buy_type_0": "0",
+            "buy_type_1": "0",
+            "buy_type_2": "0",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "150",
+            "profit_sell": "50",
+            "open_hour": "0",
+            "close_hour": "23"
+        },
+        {
+            "keeper": "24107",
+            "buy_type_0": "15",
+            "buy_type_1": "13",
+            "buy_type_2": "8",
+            "buy_type_3": "1",
+            "buy_type_4": "18",
+            "profit_buy": "150",
+            "profit_sell": "50",
+            "open_hour": "0",
+            "close_hour": "23"
+        },
+        {
+            "keeper": "24108",
+            "buy_type_0": "19",
+            "buy_type_1": "0",
+            "buy_type_2": "0",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "180",
+            "profit_sell": "20",
+            "open_hour": "0",
+            "close_hour": "23"
+        },
+        {
+            "keeper": "24109",
+            "buy_type_0": "17",
+            "buy_type_1": "0",
+            "buy_type_2": "0",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "180",
+            "profit_sell": "20",
+            "open_hour": "0",
+            "close_hour": "23"
+        },
+        {
+            "keeper": "24116",
+            "buy_type_0": "5",
+            "buy_type_1": "9",
+            "buy_type_2": "10",
+            "buy_type_3": "15",
+            "buy_type_4": "18",
+            "profit_buy": "180",
+            "profit_sell": "20",
+            "open_hour": "0",
+            "close_hour": "23"
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "24100",
+            "spec_fun": "spec_cast_adept"
+        },
+        {
+            "vnum": "24115",
+            "spec_fun": "spec_executioner"
+        },
+        {
+            "vnum": "24124",
+            "spec_fun": "spec_thief"
+        },
+        {
+            "vnum": "24125",
+            "spec_fun": "spec_fido"
+        },
+        {
+            "vnum": "24126",
+            "spec_fun": "spec_fido"
+        },
+        {
+            "vnum": "24127",
+            "spec_fun": "spec_fido"
+        },
+        {
+            "vnum": "24128",
+            "spec_fun": "spec_guard"
+        },
+        {
+            "vnum": "24129",
+            "spec_fun": "spec_guard"
+        },
+        {
+            "vnum": "24130",
+            "spec_fun": "spec_guard"
+        }
+    ]
+}

@@ -1,0 +1,441 @@
+{
+    "area": {
+        "file": "tilsim.are",
+        "name": "Türkçe",
+        "low_range": "90",
+        "high_range": "100",
+        "min_vnum": "530",
+        "max_vnum": "539",
+        "path": "Yüksek Kule'nin Giriþinden k 3d 2k y 3b 4g 4d 4k y 4b 4g 4d 4k y 4b 4g 4d 4k y 2b 5g 2y 6k",
+        "yonelim_iyi": "10",
+        "yonelim_yansiz": "80",
+        "yonelim_kem": "10"
+    },
+    "area_flag": {
+        "flag": "C"
+    },
+    "mobiles": [
+        {
+            "vnum": "530",
+            "name": "kethüda týlsým cabal kabal",
+            "short_description": "kethüda",
+            "long_description": "Büyünün Kethüdasý burada duruyor.\n",
+            "description": "Hayaletimsi bir figür efendilerine karþý olan herkesi öldürecek büyülü\nefsunu yaymak için burada etrafýnda süzülüyor. Yaratýk tamamen alevlerden ve\nbaþka büyülü materyallerden yaratýlmýþ.\n",
+            "race": "çora",
+            "act": "ABJKRVe",
+            "affected_by": "FHDec",
+            "level": "92"
+        },
+        {
+            "vnum": "531",
+            "name": "týlsým þifacý cabal kabal",
+            "short_description": "þifacý",
+            "long_description": "Kadim sanatlarýn þifacýsý burada.\n",
+            "description": "Yaþlý, bilge rahip eski dostlarý olan kadim sanatlar ustalarýný kutsuyor.\nÇok güzel uzun ak saçlara sahip, yerlere kadar ulaþan beyaz bir elbise\ngiymekte. Yüzünde gülümsüyen bir tebessüm var.\n",
+            "race": "human",
+            "act": "ABQVae",
+            "affected_by": "DFH",
+            "level": "90"
+        },
+        {
+            "vnum": "532",
+            "name": "ateþten kýrmýzý iblis",
+            "short_description": "ateþten yaratýlmýþ iblis",
+            "long_description": "Alevden yaratýlmýþ kýrmýzý iblis etrafýna kýzgýnlýkla bakýyor.\n",
+            "description": "Alevler içinde duran agresif bir iblis görüyorsun. Çaðrýldýðý için bayaðý\nbir kýzgýn. Ateþten kýrmýzý bir cilde sahip, iki kafalý, kýrmýzý skalalar,\nkeskin diþler, 2 kol ve uzun pençelere sahip kaslý bir iblis.\n",
+            "race": "unique",
+            "act": "AB",
+            "affected_by": "JZ",
+            "level": "40"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "530",
+            "name": "örümcek mimber",
+            "short_description": "örümcek þekline bürünmüþ mimber",
+            "description": "Örümcek þekline bürünmüþ bir mimber odanýn ortasýnda duruyor.",
+            "material": "ivory",
+            "type": "container",
+            "extra_flags": "AORY",
+            "wear_flags": "P",
+            "values": "10 15 532 15 100",
+            "level": "60",
+            "weight": "1",
+            "cost": "20",
+            "condition": "P"
+        },
+        {
+            "vnum": "531",
+            "name": "küre",
+            "short_description": "Büyülü küre",
+            "description": "Büyülü küre burada.",
+            "material": "ebony",
+            "type": "staff",
+            "extra_flags": "A",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "60",
+            "weight": "1",
+            "cost": "100000",
+            "condition": "P"
+        },
+        {
+            "vnum": "532",
+            "name": "anahtar",
+            "short_description": "örümcek þeklinde anahtar",
+            "description": "Örümcek þeklindeki anahtar yerde duruyor.",
+            "material": "steel",
+            "type": "key",
+            "extra_flags": "ORY",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "40",
+            "weight": "4",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "533",
+            "name": "beyaz portal",
+            "short_description": "Büyülü Beyaz Portal",
+            "description": "Etrafýna garip gölgeler yayan efsunla örülmüþ beyaz bir nesne görüyorsun.",
+            "material": "energy",
+            "type": "portal",
+            "extra_flags": "AO",
+            "wear_flags": "0",
+            "values": "0 0 D 9209 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "534",
+            "name": "siyah portal",
+            "short_description": "Büyülü Siyah Portal",
+            "description": "Etrafýna garip gölgeler yayan efsunla örülmüþ siyah bir nesne görüyorsun.",
+            "material": "energy",
+            "type": "portal",
+            "extra_flags": "AO",
+            "wear_flags": "0",
+            "values": "0 0 E 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "530",
+            "name": "Beþinci Kat",
+            "description": "Kulenin beþinci katý evrenin büyülü gücüyle etrafýnda výzýldýyor.\nEtrafýnda diyarýn her bir tarafýndan alýnmýþ, kullanýlmýþ ve taþýnmýþ\neþyalarýna rastlýyorsun. Muhtemelen büyü dünyasýnýn sýrlarýna ulaþýlmak için\nkullanýlmýþ bu eþyalar; taþlar büyü ile uðulduyup, ýþýk veriyorlar. Önünde\nörümcek þekline bürünmüþ bir mimber görüyorsun, ve etrafýna yumuþak mor ýþýk\nsaçýyor.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "537"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "538"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "531"
+                }
+            ]
+        },
+        {
+            "vnum": "531",
+            "name": "Dördüncü Kat",
+            "description": "Dördüncü kat diðerlerinden daha büyük. Etrafýnda büyüler görmektesin.\nBurada Kadim Sanatlar büyücülerinin yarattýðý ve Uzak Diyarlar diyarýnda\nonlara taraf olmayan kahramanlarý öldürmekte kullandýðý deðnekler bulunuyor.\nÇaðrýlmýþ kýrmýzý kýzgýn iblisler çaðrýlmalarýna sinirli bir þekilde burada\ndurmaktadýr.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "530"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "532"
+                }
+            ]
+        },
+        {
+            "vnum": "532",
+            "name": "Üçüncü Kat",
+            "description": "Birden ortaya çýkan bir sisin içinde buluyorsun kendini. Girdap içinde\ndönen bu sis senin görüþ alanýný ve zihnini karaltýyor. Birden sonsuzluk ve\nbüyünün gücünü merak etmeye baþlýyorsun. Yukarýlara doðru sisin gittikçe\ninceldiðini görüyorsun.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "531"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "533"
+                }
+            ]
+        },
+        {
+            "vnum": "533",
+            "name": "Ýkinci Kat",
+            "description": "Kadim sanatlar kulesinin ikinci katýda ilk katý ile genellikle ayný.\nKararmýþ ve yanmýþ duvarlarýn büyülü bir ateþ ile yakýldýðýný hayal\nediyorsun. Büyülü küreler üzerinde süzülerek sana ýþýk saðlýyor. Aþaðýya ve\nyukarýya doðru uzanan merdivenleri görüyorsun.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "532"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "534"
+                }
+            ]
+        },
+        {
+            "vnum": "534",
+            "name": "Kulenin Ýçi",
+            "description": "Kadim Sanatlarýn Kulesinin en alt katýnda duruyorsun. Efsunlu duvarlar\nbüyülü ýþýldamalarýyla etrafýný görebileceðin kadar aydýnlatmakta. Belkide\nüst katlarda kulenin ve kadim sanatýn sýrlarý yatmaktadýr.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "535"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "533"
+                }
+            ]
+        },
+        {
+            "vnum": "535",
+            "name": "Kulenin dýþý",
+            "description": "Uçlarý kuzeye ve güneye uzayan uzun bir yoldasýn. Efsunlu duvarlar büyülü\nýþýldamalarýyla etrafýný görebileceðin kadar aydýnlatmakta. Buna ek olarak\nbüyülü küreler üzerinde süzülerek sana ýþýk saðlýyor. Saf büyü ile\nyaratýlmýþ bu kulenin yapýmýnda bütün diyarýn gücünün kullanýldýðýný\nhissediyorsun.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "534"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "536"
+                }
+            ]
+        },
+        {
+            "vnum": "536",
+            "name": "Gizemli Yol",
+            "description": "Efsunun gücünü hissetmeye baþlýyorsun. Bilinen bütün düzlemlerden büyülü\nvarlýklar sana doðru yürüyor. Bu yol etrafýndaki herþey gibi efsunla\nyaratýlmýþ ve mükemmel durumda. Önünde Kadim Sanatlarýn Kulesini görüyorsun.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "5",
+                    "key": "-1",
+                    "u1_vnum": "535"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "1480"
+                }
+            ]
+        },
+        {
+            "vnum": "537",
+            "name": "Gizemli Oda",
+            "description": "Bu oda kulenin üçüncü katýna benziyor. Birden ortaya çýkýp etrafýný saran\nbir sisin içindesin. Girdap içinde dönen bu sis senin görüþ alanýný ve\nzihnini karaltýyor. Birden sonsuzluk ve büyünün gücünü merak etmeye\nbaþlýyorsun. Yukarýlara doðru sisin gittikçe inceldiðini görüyorsun. Güçlü\ndeðnekler yaratmak için bulabileceðin materyalleri barýndýran bir portal\ngörüyorsun.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "530"
+                }
+            ]
+        },
+        {
+            "vnum": "538",
+            "name": "Gizemli Oda",
+            "description": "Bu oda kulenin üçüncü katýna benziyor. Birden ortaya çýkýp etrafýný saran\nbir sisin içindesin. Girdap içinde dönen bu sis senin görüþ alanýný ve\nzihnini karaltýyor. Birden sonsuzluk ve büyünün gücünü merak etmeye\nbaþlýyorsun. Yukarýlara doðru sisin gittikçe inceldiðini görüyorsun. Güçlü\ndeðnekler yaratmak için bulabileceðin materyalleri barýndýran bir portal\ngörüyorsun.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "530"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "530",
+            "arg2": "1",
+            "arg3": "536",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "532",
+            "arg2": "-1",
+            "arg3": "11"
+        },
+        {
+            "command": "M",
+            "arg1": "531",
+            "arg2": "1",
+            "arg3": "530",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "530",
+            "arg2": "1",
+            "arg3": "530"
+        },
+        {
+            "command": "P",
+            "arg1": "531",
+            "arg2": "1",
+            "arg3": "530",
+            "arg4": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "536",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "533",
+            "arg2": "1",
+            "arg3": "537"
+        },
+        {
+            "command": "O",
+            "arg1": "534",
+            "arg2": "1",
+            "arg3": "538"
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "531",
+            "spec_fun": "spec_cast_cabal"
+        },
+        {
+            "vnum": "530",
+            "spec_fun": "spec_fight_seneschal"
+        },
+        {
+            "vnum": "532",
+            "spec_fun": "spec_cast_mage"
+        }
+    ],
+    "omprogs": [
+        {
+            "command": "O",
+            "vnum": "531",
+            "progtype": "get_prog",
+            "progname": "get_prog_cabal_item"
+        },
+        {
+            "command": "O",
+            "vnum": "531",
+            "progtype": "sac_prog",
+            "progname": "sac_prog_cabal_item"
+        },
+        {
+            "command": "M",
+            "vnum": "530",
+            "progtype": "greet_prog",
+            "progname": "greet_prog_shalafi"
+        }
+    ],
+    "practicers": [
+        {
+            "vnum": "530",
+            "practicer": "group_cabal"
+        }
+    ]
+}

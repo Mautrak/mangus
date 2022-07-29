@@ -1,0 +1,6382 @@
+{
+    "area": {
+        "file": "selenge_cezaevi.are",
+        "name": "Türkçe",
+        "low_range": "5",
+        "high_range": "90",
+        "min_vnum": "32000",
+        "max_vnum": "32100",
+        "path": "6g 3b",
+        "yonelim_iyi": "5",
+        "yonelim_yansiz": "15",
+        "yonelim_kem": "80"
+    },
+    "mobiles": [
+        {
+            "vnum": "32000",
+            "name": "kapýbekçisi kapý bekçi",
+            "short_description": "kapýbekçisi",
+            "long_description": "Kapýbekçisi burada, þekerleme yapýyor.\n",
+            "description": "Oldukça iri bir bekçi görüyorsun. Horultusu güçlü ve ürkütücü.\nSanýrým onu hemen öldürmeyi düþünüyorsun...\n",
+            "race": "human",
+            "act": "ABG",
+            "affected_by": "0",
+            "level": "6"
+        },
+        {
+            "vnum": "32001",
+            "name": "sýçan",
+            "short_description": "sýçan",
+            "long_description": "Bir sýçan kýçýnýn üstüne oturmuþ bir sonraki yemeðini düþünüyor.\n",
+            "description": "Günlerdir birþey yememiþ... Þimdi SENÝ yemeyi düþünüyor.\n",
+            "race": "lizard",
+            "act": "AG",
+            "affected_by": "Q",
+            "level": "5"
+        },
+        {
+            "vnum": "32002",
+            "name": "gardiyan",
+            "short_description": "Gardiyan",
+            "long_description": "Gardiyan burada, dalgýn görünmesine raðmen dikkatli.\n",
+            "description": "Çýplak el dövüþü ve konuþturma yöntemleri (tabii ki iþkenceler) konularýnda\nözel eðitime sahip.\n",
+            "race": "human",
+            "act": "ACG",
+            "affected_by": "0",
+            "level": "65"
+        },
+        {
+            "vnum": "32003",
+            "name": "cezaevi iþçi",
+            "short_description": "cezaevi iþçisi",
+            "long_description": "Cezaevi iþçisi burada, mümkün olduðunca az çalýþmaya çalýþýyor.\n",
+            "description": "Selenge'deki çöpçülere benziyor.\n",
+            "race": "human",
+            "act": "ACG",
+            "affected_by": "DF",
+            "level": "9"
+        },
+        {
+            "vnum": "32004",
+            "name": "hücre gardiyaný",
+            "short_description": "hücre gardiyaný",
+            "long_description": "Hücre gardiyaný burada, yüzünde buz gibi bir gülümseme var.\n",
+            "description": "Herþeyi cezaevi içinde tutmayý becerebilecek kadar güçlü.\n",
+            "race": "human",
+            "act": "ABG",
+            "affected_by": "H",
+            "level": "65"
+        },
+        {
+            "vnum": "32005",
+            "name": "mahkum",
+            "short_description": "mahkum",
+            "long_description": "Mahkum burada, oldukça umutsuz görünüyor.\n",
+            "description": "Hergün deliler gibi çalýþtýrýlmaktan elleri yara olmuþ.\n",
+            "race": "human",
+            "act": "AG",
+            "affected_by": "0",
+            "level": "33"
+        },
+        {
+            "vnum": "32006",
+            "name": "hamamböceði",
+            "short_description": "hamamböceði",
+            "long_description": "Büyük bir hamamböceði burada, etrafý kolaçan ediyor.\n",
+            "description": "Bu bünyeyi besleyebilmek için en azýndan her iki günde bir senin büyüklüðünde bir\nsomun yemesi gerekiyor.\n",
+            "race": "centipede",
+            "act": "AG",
+            "affected_by": "0",
+            "level": "8"
+        },
+        {
+            "vnum": "32007",
+            "name": "hizmetkar",
+            "short_description": "hizmetkar",
+            "long_description": "Hizmetkar burada, birinin kendisine emir vermesini bekliyor.\n",
+            "description": "Cezaevinin en düþük rütbeli çalýþaný. Rahatlýkla gebertebileceðin biri...\n",
+            "race": "human",
+            "act": "AGH",
+            "affected_by": "0",
+            "level": "13"
+        },
+        {
+            "vnum": "32008",
+            "name": "taþ muhafýz",
+            "short_description": "taþ muhafýz",
+            "long_description": "Muhafýz burada, taþ gibi duruyor.\n",
+            "description": "Oldukça sert ve yoðun bir þekilde sigara kokuyor.\n",
+            "race": "human",
+            "act": "ABGH",
+            "affected_by": "0",
+            "level": "44"
+        },
+        {
+            "vnum": "32009",
+            "name": "gangster",
+            "short_description": "gangster",
+            "long_description": "Gangster burada, hizmetkarlara emirler yaðdýrýyor.\n",
+            "description": "Baþkana önerdiði rüþvetin azlýðý nedeniyle burada.\n",
+            "race": "human",
+            "act": "ACGH",
+            "affected_by": "0",
+            "level": "23"
+        },
+        {
+            "vnum": "32010",
+            "name": "topuz müdür",
+            "short_description": "Müdür Topuz",
+            "long_description": "Müdür Topuz burada, öldürülecek mahkumlarýn listesini arýyor.\n",
+            "description": "Giyim zevki ve hareketleriyle Selenge baþkanýna çok benziyor. Sapkýn\ndüþleri ve hareketleriyle hem mahkumlarýn, hem gardiyanlarýn hem de\nDemay'ýn baþ belasý.\n",
+            "race": "human",
+            "act": "AG",
+            "affected_by": "HU",
+            "level": "84"
+        },
+        {
+            "vnum": "32011",
+            "name": "demay",
+            "short_description": "sekreter Demay",
+            "long_description": "Sekreter Demay burada, dosyalarla uðraþýyor.\n",
+            "description": "Hergün gördüðün sekreterlerden. Güzel göðüsler ve sütun gibi bacaklar...\n",
+            "race": "human",
+            "act": "AB",
+            "affected_by": "0",
+            "level": "40"
+        },
+        {
+            "vnum": "32012",
+            "name": "tamirci enre",
+            "short_description": "Enre",
+            "long_description": "Tamirci Enre burada, birþeylerle uðraþýyor.\n",
+            "description": "Cezaevinin bütün onarým iþlerinin sorumlusu. Çalýþmayý pek sevmese de\npara kazanmak için yapabileceði baþka birþey yok.\n",
+            "race": "human",
+            "act": "ABG",
+            "affected_by": "0",
+            "level": "50"
+        },
+        {
+            "vnum": "32013",
+            "name": "yardýmcý dot",
+            "short_description": "Dot",
+            "long_description": "Dot burada, Enre'nin yapmasý gerekenlerle uðraþýyor.\n",
+            "description": "Enre'nin tembelliði yüzünden yapmadýðý iþlerle uðraþýyor. Bir yandan\nçalýþýyor, bir yandan da Enre'nin küfürlerini ve aþaðýlamalarýný dinliyor.\n",
+            "race": "human",
+            "act": "AG",
+            "affected_by": "0",
+            "level": "53"
+        },
+        {
+            "vnum": "32014",
+            "name": "aþçý wendy",
+            "short_description": "Wendy",
+            "long_description": "Wendy burada, bir sonraki öðünde ne piþireceðini düþünüyor.\n",
+            "description": "Uzun siyah saçlarýný topuz yapmýþ genç ve alýmlý bir bayan görüyorsun.\nBurada aþçý olarak çalýþmak onu memnun ediyor. Oðlu Yakup'u da hergün\nyanýnda getiriyor.\n",
+            "race": "human",
+            "act": "ABG",
+            "affected_by": "HN",
+            "level": "90"
+        },
+        {
+            "vnum": "32015",
+            "name": "buhar canavarý",
+            "short_description": "buhar canavarý",
+            "long_description": "Garip bir canavar görüyorsun.\n",
+            "description": "Iþýksýz bir ortamda bile rahatça görülebilecek kadar parlak. Ne iþ\nyapýyor, neden burada duruyor... Bütün bu sorularýn cevabýný ben\nbiliyorum, ya sen bilmek ister misin?\n",
+            "race": "asura",
+            "act": "ABFG",
+            "affected_by": "D",
+            "level": "30"
+        },
+        {
+            "vnum": "32016",
+            "name": "zýrhçý Larry",
+            "short_description": "Larry",
+            "long_description": "Zýrhçý Larry burada, zýrhlarýný gösteriyor.\n",
+            "description": "Üzerinde düþünülmesi gereken biri deðil.\n",
+            "race": "human",
+            "act": "ABG",
+            "affected_by": "0",
+            "level": "105"
+        },
+        {
+            "vnum": "32017",
+            "name": "demirci gomas",
+            "short_description": "Gomas",
+            "long_description": "Demirci Gomas burada, yeni silahlar dövüyor.\n",
+            "description": "Eski bir hücre muhafýzý. Þimdi ise silah üretimiyle uðraþýyor. Bu iþi\nyapmayý hakedecek bilgi ve beceriye sahip biri.\n",
+            "race": "human",
+            "act": "ABG",
+            "affected_by": "0",
+            "level": "105"
+        },
+        {
+            "vnum": "32018",
+            "name": "biftek dilim",
+            "short_description": "biftek dilimi",
+            "long_description": "Bir biftek dilimi burada, hareket ediyor.\n",
+            "description": "Biftek dilimini inceliyorsun. Sen ona bakarken o da yavaþ yavaþ\nuzaklaþmayý deniyor.\n",
+            "race": "ghost",
+            "act": "ABG",
+            "affected_by": "0",
+            "level": "1"
+        },
+        {
+            "vnum": "32019",
+            "name": "dindar ermiþ",
+            "short_description": "Dindar Ermiþ",
+            "long_description": "Dindar bir Ermiþ görüyorsun, barýþ içinde elini tutuyor.\n",
+            "description": "Uzaklardan, çook uzaklardan gelmiþ. Geldiði yerde insanlarýn güneþ\naltýnda kavrulduðundan bahsediyor.\n",
+            "race": "human",
+            "act": "ABGK",
+            "affected_by": "HN",
+            "level": "115"
+        },
+        {
+            "vnum": "32020",
+            "name": "havlucu çocuk",
+            "short_description": "havlucu",
+            "long_description": "Havlucu çocuk burada, sýrtýný duvara dayamýþ duruyor.\n",
+            "description": "Ne kadar berbat bir iþ!! Onun görevi uþu kullananlara havlu yetiþtirmek.\n",
+            "race": "human",
+            "act": "ABG",
+            "affected_by": "JN",
+            "level": "5"
+        },
+        {
+            "vnum": "32021",
+            "name": "cellat",
+            "short_description": "Cellat",
+            "long_description": "Cellat burada, birilerini öldürmek için son hazýrlýklarýný yapýyor.\n",
+            "description": "Onun ne bir yüzü, ne de bir ruhu var. O yaþý bilinmeyen bir iblis.\n",
+            "race": "human",
+            "act": "ABG",
+            "affected_by": "HJN",
+            "level": "100"
+        },
+        {
+            "vnum": "32022",
+            "name": "þey siyah",
+            "short_description": "Siyah Þey",
+            "long_description": "Siyah bir Þey burada duruyor.\n",
+            "description": "Ýçinde ve dýþýnda gökkuþaðýndaki renklerin soluk izlerinin oynaþtýðý\nsiyah bir kütle görüyorsun. Onun ne olduðunu inan ben de bilmiyorum....\n",
+            "race": "ghoul",
+            "act": "ABFG",
+            "affected_by": "J",
+            "level": "40"
+        },
+        {
+            "vnum": "32023",
+            "name": "tunç ejderha",
+            "short_description": "Tunç Ejderha",
+            "long_description": "Büyük, tunç bir ejderha görüyorsun, her nefes alýþýnda sanki gök gürlüyor.\n",
+            "description": "O bir seferde algýlanamayacak kadar büyük... Burada iþi ne?!\n",
+            "race": "dragon",
+            "act": "AG",
+            "affected_by": "BDFHJPU",
+            "level": "75"
+        },
+        {
+            "vnum": "32024",
+            "name": "terry",
+            "short_description": "Terry",
+            "long_description": "Kimyager Terry burada.\n",
+            "description": "Çevre Kimya Endüstrisi için çalýþan genç bir kimyager görüyorsun. Stif'e\nkimyasal maddeleri satan adam bu olmalý.\n",
+            "race": "human",
+            "act": "ACH",
+            "affected_by": "DH",
+            "level": "50"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "32000",
+            "name": "kapý anahtar",
+            "short_description": "kapý anahtarý",
+            "description": "Metal bir anahtar burada duruyor.",
+            "material": "iron",
+            "type": "key",
+            "extra_flags": "B",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "5",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32001",
+            "name": "kýsa kýlýç",
+            "short_description": "kýsa kýlýç",
+            "description": "Tehlikeli bir kýsa kýlýç burada dinleniyor.",
+            "material": "steel",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "sword 1 6 slash 0",
+            "level": "5",
+            "weight": "5",
+            "cost": "100",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "1"
+                },
+                {
+                    "location": "19",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "32002",
+            "name": "sigara paketi",
+            "short_description": "bir paket sigara",
+            "description": "Bir paket sigara burada düþürülmüþ.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "BE",
+            "wear_flags": "AO",
+            "values": "3 3 3 0 0",
+            "level": "10",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "18",
+                    "modifier": "2"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "sigara paket",
+                    "description": "Yasal Uyarý: Sigara Saðlýða Zararlýdýr."
+                }
+            ]
+        },
+        {
+            "vnum": "32003",
+            "name": "bez parça",
+            "short_description": "bez parçasý",
+            "description": "Tozlu bir bez burada duruyor.\n",
+            "material": "unknown",
+            "type": "trash",
+            "extra_flags": "H",
+            "wear_flags": "A",
+            "values": "0 1 6 11 P",
+            "level": "20",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32004",
+            "name": "yaðlý ip",
+            "short_description": "yaðlý ip",
+            "description": "Bir yaðlý ip görüyorsun.\n",
+            "material": "unknown",
+            "type": "weapon",
+            "extra_flags": "AGJL",
+            "wear_flags": "AN",
+            "values": "exotic 4 4 pound 0",
+            "level": "11",
+            "weight": "10",
+            "cost": "10",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "1"
+                },
+                {
+                    "location": "4",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "32005",
+            "name": "çanta",
+            "short_description": "çanta",
+            "description": "Güzel bir çanta burada duruyor.\n",
+            "material": "leather",
+            "type": "container",
+            "extra_flags": "FG",
+            "wear_flags": "AO",
+            "values": "300 0 0 11 100",
+            "level": "0",
+            "weight": "10",
+            "cost": "10",
+            "condition": "P"
+        },
+        {
+            "vnum": "32006",
+            "name": "kor yüzük",
+            "short_description": "kor yüzük",
+            "description": "Güzel bir yüzük burada dinleniyor.\n",
+            "material": "unknown",
+            "type": "treasure",
+            "extra_flags": "0",
+            "wear_flags": "AB",
+            "values": "0 0 0 0 0",
+            "level": "1",
+            "weight": "5",
+            "cost": "0",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "1"
+                },
+                {
+                    "location": "13",
+                    "modifier": "12"
+                }
+            ]
+        },
+        {
+            "vnum": "32007",
+            "name": "zarif yüzük",
+            "short_description": "zarif yüzük",
+            "description": "Zarif bir yüzük burada, yerde dinlenmenin tadýný çýkarýyor.\n",
+            "material": "unknown",
+            "type": "treasure",
+            "extra_flags": "0",
+            "wear_flags": "AB",
+            "values": "0 0 0 0 0",
+            "level": "1",
+            "weight": "5",
+            "cost": "0",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "1"
+                },
+                {
+                    "location": "13",
+                    "modifier": "6"
+                }
+            ]
+        },
+        {
+            "vnum": "32008",
+            "name": "zarif kaftan",
+            "short_description": "zarif kaftan",
+            "description": "Zarif bir kaftan burada, yeni sahibini bekliyor.\n",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AK",
+            "values": "2 0 0 0 0",
+            "level": "1",
+            "weight": "5",
+            "cost": "0",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "4",
+                    "modifier": "1"
+                },
+                {
+                    "location": "12",
+                    "modifier": "5"
+                }
+            ]
+        },
+        {
+            "vnum": "32009",
+            "name": "sýçan eti",
+            "short_description": "sýçan eti",
+            "description": "Lezzetli bir sýçan eti parçasý burada duruyor.\n",
+            "material": "food",
+            "type": "food",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "8 6 0 A 0",
+            "level": "0",
+            "weight": "1",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32010",
+            "name": "zarif fular",
+            "short_description": "zarif fular",
+            "description": "Zarif bir fular burada, yeni sahibini bekliyor.\n",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AC",
+            "values": "2 0 0 0 0",
+            "level": "1",
+            "weight": "5",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32011",
+            "name": "zarif gömlek",
+            "short_description": "zarif gömlek",
+            "description": "Zarif bir gömlek burada, yeni sahibini bekliyor.\n",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AD",
+            "values": "2 0 0 0 0",
+            "level": "1",
+            "weight": "5",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32012",
+            "name": "zarif miðfer",
+            "short_description": "zarif miðfer",
+            "description": "Zarif bir miðfer burada, yeni sahibini bekliyor.\n",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AE",
+            "values": "2 0 0 0 0",
+            "level": "1",
+            "weight": "5",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32013",
+            "name": "zarif bacaklýk",
+            "short_description": "bir çift zarif bacaklýk",
+            "description": "Bir çift zarif bacaklýk burada, yeni sahibini bekliyor.\n",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AF",
+            "values": "2 0 0 0 0",
+            "level": "1",
+            "weight": "5",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32014",
+            "name": "zarif çizme",
+            "short_description": "bir çift zarif çizme",
+            "description": "Bir çift zarif çizme burada, yeni sahibini bekliyor.\n",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AG",
+            "values": "2 0 0 0 0",
+            "level": "1",
+            "weight": "5",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32015",
+            "name": "zarif eldiven",
+            "short_description": "bir çift zarif eldiven",
+            "description": "Bir çift zarif eldiven burada, yeni sahibini bekliyor.\n",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AH",
+            "values": "2 0 0 0 0",
+            "level": "1",
+            "weight": "5",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32016",
+            "name": "zarif kolluk",
+            "short_description": "bir çift zarif kolluk",
+            "description": "Bir çift zarif kolluk burada, yeni sahibini bekliyor.\n",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AI",
+            "values": "2 0 0 0 0",
+            "level": "1",
+            "weight": "10",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32017",
+            "name": "zarif kalkan",
+            "short_description": "zarif kalkan",
+            "description": "Bir zarif kalkan burada, yeni sahibini bekliyor.\n",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AJ",
+            "values": "2 0 0 0 0",
+            "level": "1",
+            "weight": "10",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32018",
+            "name": "zarif kemer",
+            "short_description": "zarif kemer",
+            "description": "Bir zarif kemer burada, yeni sahibini bekliyor.\n",
+            "material": "leather",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "AK",
+            "values": "100 0 0 5 100",
+            "level": "3",
+            "weight": "5",
+            "cost": "0",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "1"
+                },
+                {
+                    "location": "18",
+                    "modifier": "1"
+                },
+                {
+                    "location": "13",
+                    "modifier": "10"
+                }
+            ]
+        },
+        {
+            "vnum": "32019",
+            "name": "zarif bileklik",
+            "short_description": "zarif bileklik",
+            "description": "Bir zarif bileklik burada düþürülmüþ.\n",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AM",
+            "values": "2 0 0 0 0",
+            "level": "1",
+            "weight": "5",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32020",
+            "name": "hanor parlak",
+            "short_description": "parlak hanor",
+            "description": "Üzerinde 'parlak hanor' yazan birþey burada býrakýlmýþ.\n",
+            "material": "unknown",
+            "type": "treasure",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "2 0 0 0 0",
+            "level": "5",
+            "weight": "10",
+            "cost": "110",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "4",
+                    "modifier": "1"
+                },
+                {
+                    "location": "5",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "32021",
+            "name": "bavul mahkum",
+            "short_description": "mahkum bavulu",
+            "description": "Bir mahkum bavulu burada unutulmuþ.\n",
+            "material": "unknown",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "75 0 0 5 100",
+            "level": "5",
+            "weight": "10",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32022",
+            "name": "heykelli çeþme",
+            "short_description": "heykelli çeþme",
+            "description": "Mervie'ye itafen yapýlan bir heykelli çeþme görüyorsun.\n",
+            "material": "marble",
+            "type": "fountain",
+            "extra_flags": "A",
+            "wear_flags": "0",
+            "values": "1100 1100 'water' 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "çeþme heykel",
+                    "description": "Tunçtan yapýlmýþ büyük bir heykel. Elinde uzun bir sopa, sýrtýnda oklarýný\nkoyduðu deri bir çanta ve çapraz astýðý yayýyla Mervie'yi görüyorsun...\nSaygýyla anýyorsun. Þimdi su içebilirsin."
+                }
+            ]
+        },
+        {
+            "vnum": "32023",
+            "name": "buruþmuþ kaðýt",
+            "short_description": "buruþmuþ kaðýt",
+            "description": "Buruþmuþ bir kaðýt burada býrakýlmýþ.\n",
+            "material": "paper",
+            "type": "treasure",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "10",
+            "cost": "0",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "kaðýt",
+                    "description": "Seni terkediyorum.\nDiana"
+                }
+            ]
+        },
+        {
+            "vnum": "32024",
+            "name": "masa",
+            "short_description": "masa",
+            "description": "Üzeri kaðýtla kaplý bir masa görüyorsun.\n",
+            "material": "wood",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "1000 0 0 50 100",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "0"
+        },
+        {
+            "vnum": "32025",
+            "name": "hücre anahtar",
+            "short_description": "hücre anahtarý",
+            "description": "Metal bir hücre anahtarý burada duruyor.\n",
+            "material": "iron",
+            "type": "key",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "15",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32026",
+            "name": "çivili deðnek",
+            "short_description": "çivili deðnek",
+            "description": "Çivili bir deðnek burada, yeni sahibini bekliyor.\n",
+            "material": "unknown",
+            "type": "wand",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "13 6 6 'faerie fire' 0",
+            "level": "5",
+            "weight": "5",
+            "cost": "110",
+            "condition": "P"
+        },
+        {
+            "vnum": "32027",
+            "name": "taklit elmas",
+            "short_description": "taklit elmas",
+            "description": "Iþýl ýþýl bir elmas burada duruyor.\n",
+            "material": "unknown",
+            "type": "treasure",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "0 1 6 0 0",
+            "level": "0",
+            "weight": "10",
+            "cost": "10",
+            "condition": "P"
+        },
+        {
+            "vnum": "32028",
+            "name": "süpürge",
+            "short_description": "süpürge",
+            "description": "Duvara dayanmýþ bir süpürge görüyorsun.\n",
+            "material": "unknown",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "exotic 2 4 pierce 0",
+            "level": "5",
+            "weight": "5",
+            "cost": "10",
+            "condition": "P"
+        },
+        {
+            "vnum": "32029",
+            "name": "savaþ balta",
+            "short_description": "savaþ baltasý",
+            "description": "Bir savaþ baltasý burada, yeni bir sahip bekliyor.\n",
+            "material": "steel",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "axe 5 7 chop 0",
+            "level": "30",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-10"
+                },
+                {
+                    "location": "19",
+                    "modifier": "3"
+                }
+            ]
+        },
+        {
+            "vnum": "32030",
+            "name": "çivili bileklik",
+            "short_description": "çivili bileklik",
+            "description": "Çivili bir bileklik burada, yeni bir sahip istiyor.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AM",
+            "values": "20 21 20 20 0",
+            "level": "60",
+            "weight": "10",
+            "cost": "100",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "50"
+                },
+                {
+                    "location": "12",
+                    "modifier": "50"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-20"
+                },
+                {
+                    "location": "18",
+                    "modifier": "5"
+                },
+                {
+                    "location": "19",
+                    "modifier": "5"
+                }
+            ]
+        },
+        {
+            "vnum": "32031",
+            "name": "titanyum bacaklýk",
+            "short_description": "bir çift titanyum bacaklýk",
+            "description": "Yerde bekleyen güçlü bacaklýklar görüyorsun.\n",
+            "material": "titanium",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AF",
+            "values": "28 26 26 16 0",
+            "level": "60",
+            "weight": "15",
+            "cost": "100",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-15"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-15"
+                }
+            ]
+        },
+        {
+            "vnum": "32032",
+            "name": "titanyum kolluk",
+            "short_description": "bir çift titanyum kolluk",
+            "description": "Yerde bekleyen güçlü kolluklar görüyorsun.\n",
+            "material": "titanium",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AI",
+            "values": "25 25 26 20 0",
+            "level": "60",
+            "weight": "5",
+            "cost": "100",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "3"
+                }
+            ]
+        },
+        {
+            "vnum": "32033",
+            "name": "mahkum elbise",
+            "short_description": "mahkum elbisesi",
+            "description": "Bir mahkum elbisesi burada, yeni bir mahkum bekliyor.\n",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AK",
+            "values": "6 6 7 5 0",
+            "level": "20",
+            "weight": "5",
+            "cost": "10",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "3"
+                }
+            ]
+        },
+        {
+            "vnum": "32034",
+            "name": "titanyum kalkan",
+            "short_description": "titanyum kalkan",
+            "description": "Yerde saðlam bir kalkan görüyorsun.\n",
+            "material": "titanium",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AJ",
+            "values": "29 29 28 20 0",
+            "level": "60",
+            "weight": "35",
+            "cost": "1000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "10"
+                }
+            ]
+        },
+        {
+            "vnum": "32035",
+            "name": "kama eðri",
+            "short_description": "eðri kama",
+            "description": "Eðri bir kama burada, yeni bir suikast bekliyor.\n",
+            "material": "steel",
+            "type": "weapon",
+            "extra_flags": "EFJ",
+            "wear_flags": "AN",
+            "values": "dagger 8 8 pierce 0",
+            "level": "64",
+            "weight": "5",
+            "cost": "1000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "10"
+                },
+                {
+                    "location": "19",
+                    "modifier": "4"
+                }
+            ]
+        },
+        {
+            "vnum": "32036",
+            "name": "karasý zift yüzük muhafýz",
+            "short_description": "zift karasý bir yüzük",
+            "description": "Kara bir yüzük burada unutulmuþ.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "ABFG",
+            "wear_flags": "AB",
+            "values": "18 18 19 10 0",
+            "level": "30",
+            "weight": "5",
+            "cost": "1000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-30"
+                },
+                {
+                    "location": "13",
+                    "modifier": "200"
+                }
+            ]
+        },
+        {
+            "vnum": "32037",
+            "name": "demir kelepçe",
+            "short_description": "demir kelepçe",
+            "description": "Yerde saðlam, demir bir kelepçe görüyorsun.\n",
+            "material": "iron",
+            "type": "armor",
+            "extra_flags": "M",
+            "wear_flags": "AM",
+            "values": "1 1 1 0 0",
+            "level": "1",
+            "weight": "5",
+            "cost": "0",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "14",
+                    "modifier": "-200"
+                },
+                {
+                    "location": "9",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "32038",
+            "name": "enerji deðnek",
+            "short_description": "bir enerji deðneði",
+            "description": "Ev yapýmý bir deðnek burada unutulmuþ.\n",
+            "material": "unknown",
+            "type": "wand",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "15 8 8 'high explosive' 0",
+            "level": "5",
+            "weight": "5",
+            "cost": "10",
+            "condition": "P"
+        },
+        {
+            "vnum": "32039",
+            "name": "altýn sikke",
+            "short_description": "bir yýðýn altýn sikke",
+            "description": "Bir yýðýn altýn sikke burada unutulmuþ. ÞANSA BAK!!!\n",
+            "material": "gold",
+            "type": "money",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "1500 0 0 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32040",
+            "name": "pullu pembe çizme",
+            "short_description": "bir çift pullu pembe çizme",
+            "description": "Bir çift pullu pembe çizme burada unutulmuþ.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AG",
+            "values": "26 26 26 16 0",
+            "level": "80",
+            "weight": "5",
+            "cost": "1000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "5"
+                }
+            ]
+        },
+        {
+            "vnum": "32041",
+            "name": "pembe kaþkol",
+            "short_description": "pembe kaþkol",
+            "description": "Pembe bir kaþkol burada unutulmuþ.\n",
+            "material": "cashmire",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AC",
+            "values": "20 20 20 10 0",
+            "level": "60",
+            "weight": "5",
+            "cost": "1000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-10"
+                }
+            ]
+        },
+        {
+            "vnum": "32042",
+            "name": "mutfak önlük",
+            "short_description": "mutfak önlüðü",
+            "description": "Bir mutfak önlüðü burada býrakýlmýþ.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "M",
+            "wear_flags": "AD",
+            "values": "12 12 12 10 0",
+            "level": "36",
+            "weight": "10",
+            "cost": "10",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "9",
+                    "modifier": "-10"
+                },
+                {
+                    "location": "19",
+                    "modifier": "3"
+                }
+            ]
+        },
+        {
+            "vnum": "32043",
+            "name": "iþçi tulum",
+            "short_description": "iþçi tulumu",
+            "description": "Bir iþçi tulumu burada býrakýlmýþ.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "BF",
+            "wear_flags": "AK",
+            "values": "15 15 15 5 0",
+            "level": "48",
+            "weight": "10",
+            "cost": "1100",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "3"
+                },
+                {
+                    "location": "13",
+                    "modifier": "100"
+                }
+            ]
+        },
+        {
+            "vnum": "32044",
+            "name": "þapka",
+            "short_description": "þapka",
+            "description": "Garip bir þapka burada býrakýlmýþ.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AE",
+            "values": "15 16 16 10 0",
+            "level": "48",
+            "weight": "2",
+            "cost": "10",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "14",
+                    "modifier": "200"
+                },
+                {
+                    "location": "24",
+                    "modifier": "10"
+                }
+            ]
+        },
+        {
+            "vnum": "32045",
+            "name": "iþçi kemer",
+            "short_description": "iþçi kemeri",
+            "description": "Bir iþçi kemeri burada býrakýlmýþ.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AL",
+            "values": "16 17 15 10 0",
+            "level": "50",
+            "weight": "5",
+            "cost": "50",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "5",
+                    "modifier": "3"
+                }
+            ]
+        },
+        {
+            "vnum": "32046",
+            "name": "altýn saç file",
+            "short_description": "altýn saç filesi",
+            "description": "Altýndan bir saç filesi burada býrakýlmýþ.\n",
+            "material": "gold",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AE",
+            "values": "26 27  26 18 0",
+            "level": "80",
+            "weight": "45",
+            "cost": "3000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "4",
+                    "modifier": "2"
+                },
+                {
+                    "location": "3",
+                    "modifier": "2"
+                },
+                {
+                    "location": "2",
+                    "modifier": "2"
+                },
+                {
+                    "location": "1",
+                    "modifier": "2"
+                },
+                {
+                    "location": "5",
+                    "modifier": "2"
+                },
+                {
+                    "location": "13",
+                    "modifier": "200"
+                }
+            ]
+        },
+        {
+            "vnum": "32047",
+            "name": "bebek yakup",
+            "short_description": "bebek yakup",
+            "description": "Bebek Yakup burada yatýyor.\n",
+            "material": "stone",
+            "type": "light",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 0 0 0",
+            "level": "40",
+            "weight": "5",
+            "cost": "50",
+            "condition": "P"
+        },
+        {
+            "vnum": "32048",
+            "name": "parþömen inanç",
+            "short_description": "Ýnanç parþömeni",
+            "description": "Bir parþömen burada unutulmuþ.\n",
+            "material": "vellum",
+            "type": "scroll",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "60 'word of recall' '' '' ''",
+            "level": "40",
+            "weight": "5",
+            "cost": "50",
+            "condition": "P"
+        },
+        {
+            "vnum": "32049",
+            "name": "önlük",
+            "short_description": "önlük",
+            "description": "Biri burada bir önlük býrakmýþ.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AK",
+            "values": "27 26 25 20 0",
+            "level": "80",
+            "weight": "5",
+            "cost": "0",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "4",
+                    "modifier": "1"
+                },
+                {
+                    "location": "14",
+                    "modifier": "-500"
+                }
+            ]
+        },
+        {
+            "vnum": "32050",
+            "name": "muzlu pasta",
+            "short_description": "muzlu pasta",
+            "description": "Bir paket muzlu pasta burada býrakýlmýþ.\n",
+            "material": "food",
+            "type": "food",
+            "extra_flags": "H",
+            "wear_flags": "A",
+            "values": "6 6 0 0 0",
+            "level": "0",
+            "weight": "5",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32051",
+            "name": "kara miðfer",
+            "short_description": "kara miðfer",
+            "description": "Kara bir miðfer burada býrakýlmýþ.\n",
+            "material": "iron",
+            "type": "armor",
+            "extra_flags": "ABFKL",
+            "wear_flags": "AE",
+            "values": "30 30 30 20 0",
+            "level": "90",
+            "weight": "25",
+            "cost": "110",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "10"
+                }
+            ]
+        },
+        {
+            "vnum": "32052",
+            "name": "balta yýkým",
+            "short_description": "YýKýM BalTaSý",
+            "description": "Üzerinde kan izleri olan bir balta görüyorsun.\n",
+            "material": "steel",
+            "type": "weapon",
+            "extra_flags": "BFG",
+            "wear_flags": "AN",
+            "values": "axe 11 11 chop DE",
+            "level": "90",
+            "weight": "30",
+            "cost": "0",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "120"
+                },
+                {
+                    "location": "19",
+                    "modifier": "10"
+                }
+            ]
+        },
+        {
+            "vnum": "32053",
+            "name": "çöp kutu",
+            "short_description": "çöp kutusu",
+            "description": "Bir çöp kutusu görüyorsun. Üzerinde kocaman harflerle 'ÇÖP' yazýyor.\n",
+            "material": "bronze",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "200 0 0 6 100",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32054",
+            "name": "idam sehpasý",
+            "short_description": "idam sehpasý",
+            "description": "Bir idam sehpasý görüyorsun. Üzerine oturup dinlenmeye ne dersin?\n",
+            "material": "iron",
+            "type": "furniture",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32055",
+            "name": "kopmuþ kafa",
+            "short_description": "kopmuþ kafa",
+            "description": "Odanýn köþesinde kopmuþ bir kafa duruyor.\n",
+            "material": "unknown",
+            "type": "pill",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "1 '' '' '' ''",
+            "level": "5",
+            "weight": "5",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32056",
+            "name": "paslý duþ",
+            "short_description": "paslý duþ",
+            "description": "Paslanmýþ bir duþ görüyorsun.\n",
+            "material": "stone",
+            "type": "fountain",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 'water' 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32057",
+            "name": "siyah hap",
+            "short_description": "siyah hap",
+            "description": "Siyah bir hap görüyorsun, yerde tozlanýyor.\n",
+            "material": "unknown",
+            "type": "pill",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "10 'cure light' 'cure serious' 'sanctuary' ''",
+            "level": "5",
+            "weight": "20",
+            "cost": "500",
+            "condition": "P"
+        },
+        {
+            "vnum": "32058",
+            "name": "berbat duman þiþe",
+            "short_description": "bir þiþe berbat duman",
+            "description": "Yerde dumanlý bir iksir görüyorsun.\n",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "8 'fly' 'refresh' '' ''",
+            "level": "2",
+            "weight": "25",
+            "cost": "10",
+            "condition": "P"
+        },
+        {
+            "vnum": "32059",
+            "name": "rünlü asa",
+            "short_description": "rünlü asa",
+            "description": "Meþe aðacýndan rünlü bir asa burada býrakýlmýþ.\n",
+            "material": "wood",
+            "type": "staff",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "12 8 8 'armor' 0",
+            "level": "5",
+            "weight": "5",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32060",
+            "name": "varil",
+            "short_description": "varil",
+            "description": "55 galonluk bir varil burada býrakýlmýþ.\n",
+            "material": "unknown",
+            "type": "furniture",
+            "extra_flags": "A",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "10",
+            "cost": "100",
+            "condition": "P"
+        },
+        {
+            "vnum": "32061",
+            "name": "deri çanta",
+            "short_description": "deri çanta",
+            "description": "Deri bir çanta burada býrakýlmýþ.\n",
+            "material": "leather",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "AJ",
+            "values": "50 0 0 5 100",
+            "level": "5",
+            "weight": "10",
+            "cost": "10",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-12"
+                }
+            ]
+        },
+        {
+            "vnum": "32062",
+            "name": "kalem",
+            "short_description": "kalem",
+            "description": "Burada býrakýlmýþ bir kalem görüyorsun.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "F",
+            "wear_flags": "AO",
+            "values": "16 17 16 9 0",
+            "level": "50",
+            "weight": "10",
+            "cost": "10",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "3"
+                },
+                {
+                    "location": "18",
+                    "modifier": "3"
+                },
+                {
+                    "location": "13",
+                    "modifier": "30"
+                },
+                {
+                    "location": "12",
+                    "modifier": "50"
+                }
+            ]
+        },
+        {
+            "vnum": "32063",
+            "name": "levha",
+            "short_description": "levha",
+            "description": "Garip bir levha burada býrakýlmýþ.\n",
+            "material": "unknown",
+            "type": "trash",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32064",
+            "name": "levha",
+            "short_description": "levha",
+            "description": "Garip bir levha burada býrakýlmýþ.\n",
+            "material": "unknown",
+            "type": "trash",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32065",
+            "name": "ec50 deðnek",
+            "short_description": "EC50 deðneði",
+            "description": "Üzerinde tetikleme mekanizmasý bulunan garip bir deðnek burada unutulmuþ.\n",
+            "material": "unknown",
+            "type": "wand",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "15 5 5 'fireball' 0",
+            "level": "10",
+            "weight": "10",
+            "cost": "1500",
+            "condition": "P"
+        },
+        {
+            "vnum": "32067",
+            "name": "zarif yüzük",
+            "short_description": "zarif yüzük",
+            "description": "Zarif bir yüzük burada, yerde dinlenmenin tadýný çýkarýyor.\n",
+            "material": "unknown",
+            "type": "treasure",
+            "extra_flags": "0",
+            "wear_flags": "AB",
+            "values": "0 0 0 0 0",
+            "level": "1",
+            "weight": "8",
+            "cost": "0",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "1"
+                },
+                {
+                    "location": "13",
+                    "modifier": "6"
+                }
+            ]
+        },
+        {
+            "vnum": "32068",
+            "name": "zarif fular",
+            "short_description": "zarif fular",
+            "description": "Zarif bir fular burada, yeni sahibini bekliyor.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AC",
+            "values": "2 0 0 0 0",
+            "level": "1",
+            "weight": "5",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32069",
+            "name": "zarif bileklik",
+            "short_description": "zarif bileklik",
+            "description": "Bir zarif bileklik burada düþürülmüþ.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AM",
+            "values": "2 1 0 0 0",
+            "level": "1",
+            "weight": "5",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32070",
+            "name": "geniþ masa",
+            "short_description": "geniþ bir masa",
+            "description": "Geniþ bir masa odanýn köþesinde duruyor.\n",
+            "material": "unknown",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "200 0 0 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "32071",
+            "name": "fildiþi çeþme",
+            "short_description": "fildiþi çeþme",
+            "description": "Fildiþinden yapýlmýþ büyük bir çeþme görüyorsun.\n",
+            "material": "ivory",
+            "type": "fountain",
+            "extra_flags": "A",
+            "wear_flags": "0",
+            "values": "100 100 'water' 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "0"
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "32000",
+            "name": "Selenge Cezaevi Giriþi",
+            "description": "Ürkütücü bir binanýn gölgesinde duruyorsun. Hiç penceresi yok. Iþýðýn\niçeri girebilmesi için yarýklar kullanýlmýþ. Uzaktan gelen bir çýðlýk\ntüylerini diken diken etmeye yetiyor.\n",
+            "flags": "C",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32001"
+                },
+                {
+                    "door": "D1",
+                    "description": "Selenge Cezaevi\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3100"
+                }
+            ]
+        },
+        {
+            "vnum": "32001",
+            "name": "Selenge Cezaevi",
+            "description": "Büyük cezaevinin önündesin. Bu büyük yapý içeri girenlerin dýþarý\nçýkmasýna izin vermiyormuþ gibi görünüyor. Kuzeyde paslý, büyük bir\nkapý, duvarda ise bir tabela var.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "paslý kapý",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "32000",
+                    "u1_vnum": "32002"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32000"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "tabela",
+                    "description": "*****************************************\n*  Selenge Cezaevine Hoþgeldiniz.  *\n*****************************************\n"
+                }
+            ]
+        },
+        {
+            "vnum": "32002",
+            "name": "Aydýnlýk Kesiþim",
+            "description": "Cezaevinin merkez kavþaðýndasýn. Doðu ve batý oldukça aydýnlýk,\nkuzeyde ise karanlýk bir koridor uzuyor.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32003"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32026"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32001"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32011"
+                }
+            ]
+        },
+        {
+            "vnum": "32003",
+            "name": "Karanlýk Kesiþim",
+            "description": "karanlýk bir kavþaktasýn. Doðu ve batýda hücre bloklarý var. Koridor\nkuzey ve güneye devam ediyor.\n",
+            "flags": "A",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32004"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32052"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32002"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32041"
+                }
+            ]
+        },
+        {
+            "vnum": "32004",
+            "name": "Uzun Koridor",
+            "description": "Uzun bir koridordasýn. Doðudan garip bir koku geliyor. Koridor kuzeye\ndevam ediyor.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32005"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32084"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32003"
+                }
+            ]
+        },
+        {
+            "vnum": "32005",
+            "name": "Uzun Koridor",
+            "description": "Uzun bir koridordasýn. Koridor kuzeye ve güneye devam ediyor.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32006"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32004"
+                }
+            ]
+        },
+        {
+            "vnum": "32006",
+            "name": "Uzun Koridor",
+            "description": "Uzun bir koridordasýn. Batýdan keskin ve hoþ bir koku geliyor.\nKoridor kuzeye ve güneye devam ediyor.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32007"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32005"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32086"
+                }
+            ]
+        },
+        {
+            "vnum": "32007",
+            "name": "Uzun Koridor",
+            "description": "Uzun bir koridordasýn. Koridor kuzeye ve güneye devam ediyor.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32008"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32006"
+                }
+            ]
+        },
+        {
+            "vnum": "32008",
+            "name": "Uzun Koridor",
+            "description": "Uzun bir koridordasýn. Koridor kuzeye ve güneye devam ediyor.\nDoðu ve batýda bölüm avlularýný görüyorsun.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32009"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32063"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32007"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32073"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32010"
+                }
+            ]
+        },
+        {
+            "vnum": "32009",
+            "name": "Celladýn Odasý",
+            "description": "Burasý birçok mahkumun gördüðü son odadýr. Odanýn ortasýnda idamda\nkullanýlan bir giyotin var. Leþ kokusu ciðerlerini yakýyor.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32008"
+                }
+            ]
+        },
+        {
+            "vnum": "32010",
+            "name": "Þafinin Gizli Odasý",
+            "description": "Bir din adamýnýn gizli odasýndasýn. Etraf dini eþyalarla dolu.\nBurasý oldukça huzurlu bir yer.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32008"
+                }
+            ]
+        },
+        {
+            "vnum": "32011",
+            "name": "Sessiz Koridor",
+            "description": "Sessiz bir koridordasýn. Duvarda belediye baþkanýnýn büyük bir\ntablosu var.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32002"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32012"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "baþkan belediye tablo",
+                    "description": "Tablo büyük bir özenle þehirli bir ressam tarafýndan yapýlmýþ.\nTablonun altýnda ressamýn imzasýný görüyorsun."
+                }
+            ]
+        },
+        {
+            "vnum": "32012",
+            "name": "Sessiz Koridor",
+            "description": "Sessiz bir koridordasýn. Güneyde bir kapý var.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32011"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32013"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32014"
+                }
+            ]
+        },
+        {
+            "vnum": "32013",
+            "name": "Silah odasý",
+            "description": "Silah Odasýndasýn. Muhafýzlar görevleri bittiðinde ekipmanlarýný\nburada býrakýyorlar. Tezgahýn arkasýndaki rafta asýlý kýlýçlar ve\nbaltalar görüyorsun.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32012"
+                }
+            ]
+        },
+        {
+            "vnum": "32014",
+            "name": "Sessiz Koridor",
+            "description": "Sessiz bir koridordasýn. Koridor doðuya ve batýya ilerliyor.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32012"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32015"
+                }
+            ]
+        },
+        {
+            "vnum": "32015",
+            "name": "Kabul Salonu",
+            "description": "Merkez kabul salonundasýn. Rahat bir divanla bir su çeþmesi görüyorsun.\nGüneyde idare koridorunu görüyorsun.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32016"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32014"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32020"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32017"
+                }
+            ]
+        },
+        {
+            "vnum": "32016",
+            "name": "Malzeme Odasý",
+            "description": "küçük bir malzeme odasýndasýn. Raflarda süpürgeler, bezler ve baþka\ntemizlik ekipmanlarý görüyorsun.\n",
+            "flags": "A",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32015"
+                }
+            ]
+        },
+        {
+            "vnum": "32017",
+            "name": "Sarmal Merdiven",
+            "description": "Taþtan yapýlmýþ sarmal bir merdivendesin. Keskin bir koku ciðerlerini\nyakýyor. Bu yanan Cannibus olabilir mi?\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32015"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32018"
+                }
+            ]
+        },
+        {
+            "vnum": "32018",
+            "name": "Sarmal Merdiven",
+            "description": "Taþtan yapýlmýþ sarmal bir merdivendesin. Yukarýda birilerinin kahkaha\nattýðýný duyuyorsun. Cannibus'un kokusu gittikçe aðýrlaþýyor.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32019"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32017"
+                }
+            ]
+        },
+        {
+            "vnum": "32019",
+            "name": "Dumanlý Kule",
+            "description": "Dumanýn içinde aldýðýn derin nefesler yüzünden baþýn dönüyor. Aman\ntanrým, bir pencere yok mu burada?!\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32018"
+                }
+            ]
+        },
+        {
+            "vnum": "32020",
+            "name": "Ýdare Koridoru",
+            "description": "Ýdare koridorundasýn. Koridor kuzey ve güneye devam ediyor.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32015"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32021"
+                }
+            ]
+        },
+        {
+            "vnum": "32021",
+            "name": "Ýdare Koridoru",
+            "description": "Ýdare koridorundasýn. Koridor kuzey ve güneye devam ediyor.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32020"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32022"
+                }
+            ]
+        },
+        {
+            "vnum": "32022",
+            "name": "Ýdare Koridoru",
+            "description": "Ýdare koridorundasýn. Koridor kuzey ve güneye devam ediyor.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32021"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32023"
+                }
+            ]
+        },
+        {
+            "vnum": "32023",
+            "name": "Ýdare Koridoru",
+            "description": "Ýdare koridorundasýn. Güneyden yazý yazan birinin sesi geliyor.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32022"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32024"
+                }
+            ]
+        },
+        {
+            "vnum": "32024",
+            "name": "Cezaevi Müdürünün Ofisi",
+            "description": "Cezaevi müdürünün ofisindesin. Odada hoþ bir koku hakim.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32023"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32025"
+                }
+            ]
+        },
+        {
+            "vnum": "32025",
+            "name": "Cezaevi Müdürünün Odasý",
+            "description": "Cezaevi müdürünün odasýndasýn. Duvarda idam ettiði mahkumlarýn\ntablolarý asýlý. Bu manyak bir mahkumu öldürmeden önce resmini mi\nyaptýrýyormuþ!!!\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32024"
+                }
+            ]
+        },
+        {
+            "vnum": "32026",
+            "name": "Sessiz Koridor",
+            "description": "Sessiz bir koridordasýn. Duvarda müdür Brad'in büyük bir tablosu var.\nKoridor doðuya ve batýya ilerliyor.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32027"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32002"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "topuz tablo müdür",
+                    "description": "Tabloda tek gördüðün öldürmekten zevk alan, hatta sýrf eðlence için\nkafa koparan bir zorbanýn figürü."
+                }
+            ]
+        },
+        {
+            "vnum": "32027",
+            "name": "Sessiz Koridor",
+            "description": "Sessiz bir koridordasýn. Güneyde bir kapý var.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32029"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32028"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32026"
+                }
+            ]
+        },
+        {
+            "vnum": "32028",
+            "name": "Zýrh Odasý",
+            "description": "Zýrh Odasýndasýn. Muhafýzlar zýrh ekipmanlarýný buradan alýyor ve\niþleri bittiðinde tekrar buraya býrakýyorlar. Tezgahýn arkasýnda\nasýlý kalkanlar görüyorsun.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32027"
+                }
+            ]
+        },
+        {
+            "vnum": "32029",
+            "name": "Üçlü Kavþak",
+            "description": "Üçlü bir kavþaktasýn. Onarým koridoru güneye, loþ koridor ise doðuya\nuzanýyor.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32030"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32035"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32027"
+                }
+            ]
+        },
+        {
+            "vnum": "32030",
+            "name": "Loþ Koridor",
+            "description": "Loþ koridordasýn. Birinin duvardaki meþaleleri yakmasý gerektiðini\ndüþünüyorsun.\n",
+            "flags": "A",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32031"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32032"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32029"
+                }
+            ]
+        },
+        {
+            "vnum": "32031",
+            "name": "Malzeme Odasý",
+            "description": "Küçük bir malzeme odasýndasýn. Burada ne bez, ne de süpürge var.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32030"
+                }
+            ]
+        },
+        {
+            "vnum": "32032",
+            "name": "Sarmal merdiven",
+            "description": "Taþtan yapýlmýþ sarmal bir merdivenin altýndasýn. Yukarýdan gelen\ntütün kokusunu alabiliyorsun.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32030"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32033"
+                }
+            ]
+        },
+        {
+            "vnum": "32033",
+            "name": "Sarmal merdiven",
+            "description": "Taþtan yapýlmýþ sarmal bir merdivendesin. Yukarýdan küfür ve kahkaha\nsesleri geliyor.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32034"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32032"
+                }
+            ]
+        },
+        {
+            "vnum": "32034",
+            "name": "Sinsi Kule",
+            "description": "Sarmal merdivenin tepesindesin. Her taraf ansiklopedi dolu. Son\nzamanlarda sadece üzerine oturup kumar oynamak için kullanýlmýþlar.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32033"
+                }
+            ]
+        },
+        {
+            "vnum": "32035",
+            "name": "Onarým Bölümü Koridoru",
+            "description": "Onarým bölümü koridorundasýn. Burnuna boya ve gaz kokusu geliyor.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32029"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32036"
+                }
+            ]
+        },
+        {
+            "vnum": "32036",
+            "name": "Onarým Bölümü Koridoru",
+            "description": "Onarým bölümü koridorundasýn. Burnuna boya ve gaz kokusu geliyor.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32035"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32037"
+                }
+            ]
+        },
+        {
+            "vnum": "32037",
+            "name": "Onarým Bölümü Koridoru",
+            "description": "Onarým bölümü koridorundasýn. Burnuna boya ve gaz kokusu geliyor.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32036"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32038"
+                }
+            ]
+        },
+        {
+            "vnum": "32038",
+            "name": "Onarým Bölümü Koridoru",
+            "description": "Onarým bölümü koridorundasýn. Güneyde bir kapý, duvarda ise bir\ntabela var.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32037"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32039"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "tabela",
+                    "description": "**** DÝKKAT ****\nSatýcýlar randevu alýnmadan görülemez.\n    Aksi takdirde cezasý ÖLÜMdür.\n                             -yönetim."
+                }
+            ]
+        },
+        {
+            "vnum": "32039",
+            "name": "Onarým Bölümü Odasý",
+            "description": "Onarým ekipman ve malzemeleriyle dolu bir odadasýn. Onlarca kilo\nharç malzemesi ve boya görüyorsun.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32038"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32040"
+                }
+            ]
+        },
+        {
+            "vnum": "32040",
+            "name": "Buhar Odasý",
+            "description": "Buhar Odasýndasýn. Öyle sýcak ki buharlaþmaktan korkuyorsun.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32039"
+                }
+            ]
+        },
+        {
+            "vnum": "32041",
+            "name": "Muhafýz Odasý",
+            "description": "Muhafýz odasýndasýn. Batýda kilitli kocaman bir kapý var.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32003"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "32025",
+                    "u1_vnum": "32042"
+                }
+            ]
+        },
+        {
+            "vnum": "32042",
+            "name": "Hücre Bloðu",
+            "description": "Ýþte canlýlarý içine alan ve çýkmalarýný engelleyen mekanizma.\nAcaba sen çýkabilecek misin? Kuzey ve güneyde hücreler var.\n",
+            "flags": "AN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32050"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32041"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32051"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32043"
+                }
+            ]
+        },
+        {
+            "vnum": "32043",
+            "name": "Hücre Bloðu",
+            "description": "Ýþte canlýlarý içine alan ve çýkmalarýný engelleyen mekanizma.\nAcaba sen çýkabilecek misin? Kuzey ve güneyde hücreler var.\n",
+            "flags": "AN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32048"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32042"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32049"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32044"
+                }
+            ]
+        },
+        {
+            "vnum": "32044",
+            "name": "Hücre Bloðu",
+            "description": "Ýþte canlýlarý içine alan ve çýkmalarýný engelleyen mekanizma.\nAcaba sen çýkabilecek misin? Kuzey ve güneyde hücreler, batýda\nise küçük bir bölüm var.\n",
+            "flags": "AN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32046"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32043"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32047"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32045"
+                }
+            ]
+        },
+        {
+            "vnum": "32045",
+            "name": "Küçük Bölüm",
+            "description": "Tamamen iþe yaramaz bir oda.........\n",
+            "flags": "AN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32044"
+                }
+            ]
+        },
+        {
+            "vnum": "32046",
+            "name": "Hücre",
+            "description": "Bir hücredesin. Yerde biraz saman, duvarda týrnak izleri var.\n",
+            "flags": "AN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32044"
+                }
+            ]
+        },
+        {
+            "vnum": "32047",
+            "name": "Hücre",
+            "description": "Bir hücredesin. Yerde biraz saman, duvarda týrnak izleri var.\n",
+            "flags": "AN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32044"
+                }
+            ]
+        },
+        {
+            "vnum": "32048",
+            "name": "Hücre",
+            "description": "Bir hücredesin. Yerde biraz saman, duvarda týrnak izleri var.\n",
+            "flags": "AN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32043"
+                }
+            ]
+        },
+        {
+            "vnum": "32049",
+            "name": "Hücre",
+            "description": "Bir hücredesin. Yerde biraz saman, duvarda týrnak izleri var.\n",
+            "flags": "AN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32043"
+                }
+            ]
+        },
+        {
+            "vnum": "32050",
+            "name": "Hücre",
+            "description": "Bir hücredesin. Yerde biraz saman, duvarda týrnak izleri var.\n",
+            "flags": "AN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32042"
+                }
+            ]
+        },
+        {
+            "vnum": "32051",
+            "name": "Hücre",
+            "description": "Bir hücredesin. Yerde biraz saman, duvarda týrnak izleri var.\n",
+            "flags": "AN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32042"
+                }
+            ]
+        },
+        {
+            "vnum": "32052",
+            "name": "Muhafýz Odasý",
+            "description": "Muhafýz odasýndasýn. Doðuda büyük ve kilitli bir kapý var.\n",
+            "flags": "A",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "32025",
+                    "u1_vnum": "32053"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32003"
+                }
+            ]
+        },
+        {
+            "vnum": "32053",
+            "name": "Hücre Bloðu",
+            "description": "Ýþte canlýlarý içine alan ve çýkmalarýný engelleyen mekanizma.\nAcaba sen çýkabilecek misin? Kuzey ve güneyde hücreler var.\n",
+            "flags": "AN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32057"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32054"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32058"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32052"
+                }
+            ]
+        },
+        {
+            "vnum": "32054",
+            "name": "Hücre Bloðu",
+            "description": "Ýþte canlýlarý içine alan ve çýkmalarýný engelleyen mekanizma.\nAcaba sen çýkabilecek misin? Kuzey ve güneyde hücreler var.\n",
+            "flags": "AN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32059"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32055"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32060"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32053"
+                }
+            ]
+        },
+        {
+            "vnum": "32055",
+            "name": "Hücre Bloðu",
+            "description": "Ýþte canlýlarý içine alan ve çýkmalarýný engelleyen mekanizma.\nAcaba sen çýkabilecek misin? Kuzey ve güneyde hücreler, doðuda\nise küçük bir bölüm var.\n",
+            "flags": "AN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32061"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32056"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32062"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32054"
+                }
+            ]
+        },
+        {
+            "vnum": "32056",
+            "name": "Küçük Bölüm",
+            "description": "Küçük bir bölümdesin. Görünüþe göre burada biri yaþýyor. Bölümün\nbir köþesi tuvalet olarak kullanýlmýþ. Ýþaret parmaðýný dýþkýya\nbatýrýyorsun: \"Hmm, oldukça soðuk...\"\n",
+            "flags": "AN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32055"
+                }
+            ]
+        },
+        {
+            "vnum": "32057",
+            "name": "Hücre",
+            "description": "Bir hücredesin. Yerde biraz saman, duvarda týrnak izleri var.\n",
+            "flags": "AN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32053"
+                }
+            ]
+        },
+        {
+            "vnum": "32058",
+            "name": "Hücre",
+            "description": "Bir hücredesin. Yerde biraz saman, duvarda týrnak izleri var.\n",
+            "flags": "AN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32053"
+                }
+            ]
+        },
+        {
+            "vnum": "32059",
+            "name": "Hücre",
+            "description": "Bir hücredesin. Yerde biraz saman, duvarda týrnak izleri var.\n",
+            "flags": "AN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32054"
+                }
+            ]
+        },
+        {
+            "vnum": "32060",
+            "name": "Hücre",
+            "description": "Bir hücredesin. Yerde biraz saman, duvarda týrnak izleri var.\n",
+            "flags": "AN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32054"
+                }
+            ]
+        },
+        {
+            "vnum": "32061",
+            "name": "Hücre",
+            "description": "Bir hücredesin. Yerde biraz saman, duvarda týrnak izleri var.\n",
+            "flags": "AN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32055"
+                }
+            ]
+        },
+        {
+            "vnum": "32062",
+            "name": "Hücre",
+            "description": "Bir hücredesin. Yerde biraz saman, duvarda týrnak izleri var.\n",
+            "flags": "AN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "32055"
+                }
+            ]
+        },
+        {
+            "vnum": "32063",
+            "name": "Avlu",
+            "description": "Talim avlusundasýn. Duvarýn ardýndan Selenge'nin gürültüsü\ngeliyor. Gardiyanlar da kendi aralarýnda fýsýldaþarak\nkonuþuyorlar.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32064"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32072"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32008"
+                }
+            ]
+        },
+        {
+            "vnum": "32064",
+            "name": "Avlunun Kuzey-Doðu Köþesi",
+            "description": "Avlunun kuzey-doðu köþesindesin. Duvarda kan izleri var.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32065"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32063"
+                }
+            ]
+        },
+        {
+            "vnum": "32065",
+            "name": "Avlunun Doðu Sonu",
+            "description": "Avlunun doðu sonundasýn. Küçük gruplara ayrýlmýþ muhafýzlar\navluyu neredeyse doldurmuþ. Doðuda yüksek bir duvar var.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32064"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32066"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32072"
+                }
+            ]
+        },
+        {
+            "vnum": "32066",
+            "name": "Avlunun Doðu Sonu",
+            "description": "Avlunun doðu sonundasýn. Küçük gruplara ayrýlmýþ muhafýzlar\navluyu neredeyse doldurmuþ. Doðuda yüksek bir duvar var.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32065"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32067"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32071"
+                }
+            ]
+        },
+        {
+            "vnum": "32067",
+            "name": "Avlunun Doðu Sonu",
+            "description": "Avlunun doðu sonundasýn. Küçük gruplara ayrýlmýþ muhafýzlar\navluyu neredeyse doldurmuþ. Doðuda yüksek bir duvar var.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32066"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32068"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32070"
+                }
+            ]
+        },
+        {
+            "vnum": "32068",
+            "name": "Avlunun Güney-Doðu Köþesi",
+            "description": "Avlunun güney-doðu köþesinde duruyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32067"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32069"
+                }
+            ]
+        },
+        {
+            "vnum": "32069",
+            "name": "Avlunun Güney Sonu",
+            "description": "Avlunun güney sonundasýn. Küçük gruplara ayrýlmýþ muhafýzlar\navluyu neredeyse doldurmuþ. Doðuda yüksek bir duvar var.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32070"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32068"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32079"
+                }
+            ]
+        },
+        {
+            "vnum": "32070",
+            "name": "Avlunun Ortasý",
+            "description": "Talim avlusunun ortasýnda duruyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32071"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32067"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32069"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32080"
+                }
+            ]
+        },
+        {
+            "vnum": "32071",
+            "name": "Avlunun Ortasý",
+            "description": "Talim avlusunun ortasýnda duruyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32072"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32066"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32070"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32081"
+                }
+            ]
+        },
+        {
+            "vnum": "32072",
+            "name": "Avlunun Ortasý",
+            "description": "Talim avlusunun ortasýnda duruyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32063"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32065"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32071"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32082"
+                }
+            ]
+        },
+        {
+            "vnum": "32073",
+            "name": "Avlu",
+            "description": "Talim avlusundasýn. Duvarýn ardýndan Selenge'nin gürültüsü\ngeliyor. Gardiyanlar da kendi aralarýnda fýsýldaþarak\nkonuþuyorlar.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32008"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32082"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32074"
+                }
+            ]
+        },
+        {
+            "vnum": "32074",
+            "name": "Avlunun Kuzey-Batý Köþesi",
+            "description": "Avlunun kuzey-batý köþesindesin. Avluyu dolduran gardiyan gruplarýný\ngörüyorsun. Bir yabancý olduðun çok belli.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32073"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32075"
+                }
+            ]
+        },
+        {
+            "vnum": "32075",
+            "name": "Avlunun Batý Sonu",
+            "description": "Batý duvarýnýn önündesin. Avluyu dolduran gardiyan gruplarýný görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32074"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32082"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32076"
+                }
+            ]
+        },
+        {
+            "vnum": "32076",
+            "name": "Avlunun Batý Sonu",
+            "description": "Batý duvarýnýn önündesin. Avluyu dolduran gardiyan gruplarýný görüyorsun.\nGüneyden bir kargaþanýn sesleri geliyor.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32075"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32081"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32077"
+                }
+            ]
+        },
+        {
+            "vnum": "32077",
+            "name": "Batý Duvarýnda Yarýk",
+            "description": "Avlunun batý sonundasýn. Batý duvarýnda bir yarýk görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32076"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32080"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32078"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32083"
+                }
+            ]
+        },
+        {
+            "vnum": "32078",
+            "name": "Duvarýn Güney-Batý Köþesi",
+            "description": "Avlunun güney-batý köþesindesin. Burasý idamlarýn gerçekleþtirildiði\nyerlerden biri olsa gerek, duvarda asýlý cesetler görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32077"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32079"
+                }
+            ]
+        },
+        {
+            "vnum": "32079",
+            "name": "Avlunun Güney Köþesi",
+            "description": "Avlunun güney köþesindesin. Avluda gruplar oluþturmuþ gardiyanlarý\ngörüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32080"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32069"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32078"
+                }
+            ]
+        },
+        {
+            "vnum": "32080",
+            "name": "Avlunun Ortasý",
+            "description": "Avlunun ortasýndasýn. Küçük gruplar halindeki gardiyanlarý görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32081"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32070"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32079"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32077"
+                }
+            ]
+        },
+        {
+            "vnum": "32081",
+            "name": "Avlunun Ortasý",
+            "description": "Avlunun ortasýndasýn. Küçük gruplar halindeki gardiyanlarý görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32082"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32071"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32080"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32076"
+                }
+            ]
+        },
+        {
+            "vnum": "32082",
+            "name": "Avlunun Ortasý",
+            "description": "Avlunun ortasýndasýn. Küçük gruplar halindeki gardiyanlarý görüyorsun.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32073"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32072"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32081"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32075"
+                }
+            ]
+        },
+        {
+            "vnum": "32083",
+            "name": "Yarýðýn Ýçinde",
+            "description": "Duvardaki yarýðýn içindesin. Burasý bir kaçýþ deliðine benziyor. Sanþlýysan\nburayý kazan yakýnlarda deðildir.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32077"
+                }
+            ]
+        },
+        {
+            "vnum": "32084",
+            "name": "Dein Nemli Koridor",
+            "description": "Duþlara açýlan bir pasajdasýn. Duvarlar ve hava oldukça rutubetli.\nKorkunun ve çürümenin kokusunu alabiliyorsun. Uzaklaþsan iyi olur.\n",
+            "flags": "A",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32085"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32004"
+                }
+            ]
+        },
+        {
+            "vnum": "32085",
+            "name": "Duþlar",
+            "description": "Hapishanenin en korkulan ve nefret edilen yerindesin. Bunun nedeni bütün\ngardiyanlarýn çok kirli görünmesi olabilir mi? Duvarlar týrnak izleri ve\nkanla örtülmüþ.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32084"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "duþ musluk",
+                    "description": "Ýþte su buradan geliyor..................BERBAT.\nEðer çok susadýysan belki içmeyi deneyebilirsin."
+                }
+            ]
+        },
+        {
+            "vnum": "32086",
+            "name": "Kafeterya",
+            "description": "Herkes birþeyler yemek için buraya gelir. Bugünün menüsünde kýzarmýþ\nsýçan ve balçýk çorbasý var. ÝGRENÇ bir koku!\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32087"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32006"
+                }
+            ]
+        },
+        {
+            "vnum": "32087",
+            "name": "Mutfak",
+            "description": "Selenge'nin en meþhur aþçýlarý burada gardiyanlara yemek hazýrlýyor.\nGörünüþe göre hepsi bir süre önce buradan ayrýlmýþ.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "32086"
+                }
+            ]
+        },
+        {
+            "vnum": "32088",
+            "name": "Flar'ýn Bilinmeyene Kapýsý",
+            "description": "",
+            "flags": "C",
+            "sector": "1"
+        },
+        {
+            "vnum": "32089",
+            "name": "Flar'ýn Cennet Kapýsý",
+            "description": "Büyük bir depodasýn. Burasý Flar'ýn bütün gününü geçirdiði yer olmalý.\nKöþede bir masa, duvarda ise büyük bir iþaret görüyorsun.\n",
+            "flags": "C",
+            "sector": "1"
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "32000",
+            "arg2": "1",
+            "arg3": "32001",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32001",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32002",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "G",
+            "arg1": "32000",
+            "arg2": "100"
+        },
+        {
+            "command": "D",
+            "arg1": "32001",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "32008",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "32016",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "32046",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "32044",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "32047",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "32048",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "32050",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "32042",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "32051",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "32053",
+            "arg2": "3",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "32054",
+            "arg2": "3",
+            "arg3": "0"
+        },
+        {
+            "command": "D",
+            "arg1": "32055",
+            "arg2": "3",
+            "arg3": "0"
+        },
+        {
+            "command": "D",
+            "arg1": "32055",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "32057",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "32053",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "32058",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "32059",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "32023",
+            "arg2": "1",
+            "arg3": "32088",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32007",
+            "arg2": "100",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32007",
+            "arg2": "100",
+            "arg3": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "32010",
+            "arg2": "100",
+            "arg3": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "32010",
+            "arg2": "100",
+            "arg3": "4"
+        },
+        {
+            "command": "E",
+            "arg1": "32011",
+            "arg2": "100",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "32012",
+            "arg2": "100",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "32013",
+            "arg2": "100",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "32014",
+            "arg2": "100",
+            "arg3": "8"
+        },
+        {
+            "command": "E",
+            "arg1": "32015",
+            "arg2": "100",
+            "arg3": "9"
+        },
+        {
+            "command": "E",
+            "arg1": "32016",
+            "arg2": "100",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "32017",
+            "arg2": "100",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "32008",
+            "arg2": "100",
+            "arg3": "12"
+        },
+        {
+            "command": "E",
+            "arg1": "32018",
+            "arg2": "100",
+            "arg3": "13"
+        },
+        {
+            "command": "E",
+            "arg1": "32019",
+            "arg2": "100",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "32019",
+            "arg2": "100",
+            "arg3": "15"
+        },
+        {
+            "command": "E",
+            "arg1": "32006",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32020",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "G",
+            "arg1": "32021",
+            "arg2": "100"
+        },
+        {
+            "command": "O",
+            "arg1": "32020",
+            "arg2": "100",
+            "arg3": "32088"
+        },
+        {
+            "command": "O",
+            "arg1": "32019",
+            "arg2": "100",
+            "arg3": "32088"
+        },
+        {
+            "command": "O",
+            "arg1": "32019",
+            "arg2": "100",
+            "arg3": "32088"
+        },
+        {
+            "command": "O",
+            "arg1": "32018",
+            "arg2": "100",
+            "arg3": "32088"
+        },
+        {
+            "command": "O",
+            "arg1": "32017",
+            "arg2": "100",
+            "arg3": "32088"
+        },
+        {
+            "command": "O",
+            "arg1": "32016",
+            "arg2": "100",
+            "arg3": "32088"
+        },
+        {
+            "command": "O",
+            "arg1": "32015",
+            "arg2": "100",
+            "arg3": "32088"
+        },
+        {
+            "command": "O",
+            "arg1": "32014",
+            "arg2": "100",
+            "arg3": "32088"
+        },
+        {
+            "command": "O",
+            "arg1": "32013",
+            "arg2": "100",
+            "arg3": "32088"
+        },
+        {
+            "command": "O",
+            "arg1": "32012",
+            "arg2": "100",
+            "arg3": "32088"
+        },
+        {
+            "command": "O",
+            "arg1": "32011",
+            "arg2": "100",
+            "arg3": "32088"
+        },
+        {
+            "command": "O",
+            "arg1": "32010",
+            "arg2": "100",
+            "arg3": "32088"
+        },
+        {
+            "command": "O",
+            "arg1": "32009",
+            "arg2": "100",
+            "arg3": "32088"
+        },
+        {
+            "command": "O",
+            "arg1": "32008",
+            "arg2": "100",
+            "arg3": "32088"
+        },
+        {
+            "command": "O",
+            "arg1": "32007",
+            "arg2": "100",
+            "arg3": "32088"
+        },
+        {
+            "command": "O",
+            "arg1": "32007",
+            "arg2": "100",
+            "arg3": "32088"
+        },
+        {
+            "command": "O",
+            "arg1": "32006",
+            "arg2": "100",
+            "arg3": "32088"
+        },
+        {
+            "command": "O",
+            "arg1": "32005",
+            "arg2": "100",
+            "arg3": "32088"
+        },
+        {
+            "command": "O",
+            "arg1": "32021",
+            "arg2": "100",
+            "arg3": "32088"
+        },
+        {
+            "command": "O",
+            "arg1": "32022",
+            "arg2": "100",
+            "arg3": "32088"
+        },
+        {
+            "command": "M",
+            "arg1": "32018",
+            "arg2": "2",
+            "arg3": "32087",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "32022",
+            "arg2": "100",
+            "arg3": "32089"
+        },
+        {
+            "command": "O",
+            "arg1": "32009",
+            "arg2": "100",
+            "arg3": "32089"
+        },
+        {
+            "command": "O",
+            "arg1": "32024",
+            "arg2": "100",
+            "arg3": "32089"
+        },
+        {
+            "command": "M",
+            "arg1": "32003",
+            "arg2": "6",
+            "arg3": "32003",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32028",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32017",
+            "arg2": "1",
+            "arg3": "32013",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "32026",
+            "arg2": "100"
+        },
+        {
+            "command": "G",
+            "arg1": "32038",
+            "arg2": "100"
+        },
+        {
+            "command": "G",
+            "arg1": "32004",
+            "arg2": "100"
+        },
+        {
+            "command": "G",
+            "arg1": "32001",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32008",
+            "arg2": "3",
+            "arg3": "32017",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32026",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "G",
+            "arg1": "32027",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32008",
+            "arg2": "3",
+            "arg3": "32019",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32026",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "G",
+            "arg1": "32027",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32011",
+            "arg2": "1",
+            "arg3": "32024",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32042",
+            "arg2": "100",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "32010",
+            "arg2": "1",
+            "arg3": "32025",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32041",
+            "arg2": "100",
+            "arg3": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "32040",
+            "arg2": "100",
+            "arg3": "8"
+        },
+        {
+            "command": "G",
+            "arg1": "32039",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32016",
+            "arg2": "1",
+            "arg3": "32028",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "32018",
+            "arg2": "100"
+        },
+        {
+            "command": "G",
+            "arg1": "32019",
+            "arg2": "100"
+        },
+        {
+            "command": "G",
+            "arg1": "32037",
+            "arg2": "100"
+        },
+        {
+            "command": "G",
+            "arg1": "32057",
+            "arg2": "100"
+        },
+        {
+            "command": "G",
+            "arg1": "32058",
+            "arg2": "100"
+        },
+        {
+            "command": "G",
+            "arg1": "32059",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32012",
+            "arg2": "1",
+            "arg3": "32039",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32044",
+            "arg2": "100",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "32043",
+            "arg2": "100",
+            "arg3": "12"
+        },
+        {
+            "command": "M",
+            "arg1": "32013",
+            "arg2": "1",
+            "arg3": "32039",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32045",
+            "arg2": "100",
+            "arg3": "13"
+        },
+        {
+            "command": "M",
+            "arg1": "32015",
+            "arg2": "3",
+            "arg3": "32040",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "32050",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32002",
+            "arg2": "10",
+            "arg3": "32034",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32007",
+            "arg2": "100",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32030",
+            "arg2": "100",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "32029",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32004",
+            "arg2": "2",
+            "arg3": "32041",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32036",
+            "arg2": "100",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32036",
+            "arg2": "100",
+            "arg3": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "32034",
+            "arg2": "100",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "32035",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "32025",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32004",
+            "arg2": "2",
+            "arg3": "32052",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32031",
+            "arg2": "100",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "32034",
+            "arg2": "100",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "32007",
+            "arg2": "100",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32007",
+            "arg2": "100",
+            "arg3": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "32032",
+            "arg2": "100",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "32030",
+            "arg2": "100",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "32030",
+            "arg2": "100",
+            "arg3": "15"
+        },
+        {
+            "command": "E",
+            "arg1": "32035",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "32025",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32005",
+            "arg2": "14",
+            "arg3": "32046",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32037",
+            "arg2": "100",
+            "arg3": "15"
+        },
+        {
+            "command": "E",
+            "arg1": "32038",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32005",
+            "arg2": "14",
+            "arg3": "32047",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32037",
+            "arg2": "100",
+            "arg3": "15"
+        },
+        {
+            "command": "E",
+            "arg1": "32004",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32005",
+            "arg2": "14",
+            "arg3": "32048",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32037",
+            "arg2": "100",
+            "arg3": "15"
+        },
+        {
+            "command": "E",
+            "arg1": "32038",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32005",
+            "arg2": "14",
+            "arg3": "32049",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32038",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32037",
+            "arg2": "100",
+            "arg3": "15"
+        },
+        {
+            "command": "G",
+            "arg1": "32009",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32005",
+            "arg2": "14",
+            "arg3": "32050",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32011",
+            "arg2": "100",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "32038",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32037",
+            "arg2": "100",
+            "arg3": "15"
+        },
+        {
+            "command": "M",
+            "arg1": "32005",
+            "arg2": "14",
+            "arg3": "32051",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32037",
+            "arg2": "100",
+            "arg3": "15"
+        },
+        {
+            "command": "E",
+            "arg1": "32004",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32005",
+            "arg2": "14",
+            "arg3": "32057",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32037",
+            "arg2": "100",
+            "arg3": "15"
+        },
+        {
+            "command": "E",
+            "arg1": "32004",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32005",
+            "arg2": "1",
+            "arg3": "32058",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32037",
+            "arg2": "100",
+            "arg3": "15"
+        },
+        {
+            "command": "E",
+            "arg1": "32038",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32005",
+            "arg2": "14",
+            "arg3": "32059",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32037",
+            "arg2": "100",
+            "arg3": "15"
+        },
+        {
+            "command": "E",
+            "arg1": "32038",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32005",
+            "arg2": "14",
+            "arg3": "32060",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32037",
+            "arg2": "100",
+            "arg3": "15"
+        },
+        {
+            "command": "E",
+            "arg1": "32028",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32005",
+            "arg2": "14",
+            "arg3": "32061",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32037",
+            "arg2": "100",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "32037",
+            "arg2": "100",
+            "arg3": "15"
+        },
+        {
+            "command": "E",
+            "arg1": "32038",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32005",
+            "arg2": "14",
+            "arg3": "32062",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32037",
+            "arg2": "100",
+            "arg3": "15"
+        },
+        {
+            "command": "E",
+            "arg1": "32038",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32018",
+            "arg2": "2",
+            "arg3": "32086",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "32014",
+            "arg2": "1",
+            "arg3": "32087",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32046",
+            "arg2": "100",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "32049",
+            "arg2": "100",
+            "arg3": "12"
+        },
+        {
+            "command": "G",
+            "arg1": "32048",
+            "arg2": "100"
+        },
+        {
+            "command": "G",
+            "arg1": "32058",
+            "arg2": "100"
+        },
+        {
+            "command": "G",
+            "arg1": "32039",
+            "arg2": "100"
+        },
+        {
+            "command": "G",
+            "arg1": "32039",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32021",
+            "arg2": "1",
+            "arg3": "32009",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32052",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32022",
+            "arg2": "2",
+            "arg3": "32083",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "32036",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32009",
+            "arg2": "5",
+            "arg3": "32077",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32038",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32020",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "G",
+            "arg1": "32039",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32007",
+            "arg2": "15",
+            "arg3": "32077",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32004",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32002",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "32005",
+            "arg2": "14",
+            "arg3": "32075",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32037",
+            "arg2": "100",
+            "arg3": "15"
+        },
+        {
+            "command": "E",
+            "arg1": "32028",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32007",
+            "arg2": "15",
+            "arg3": "32074",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32004",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32002",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "32001",
+            "arg2": "12",
+            "arg3": "32082",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "32009",
+            "arg2": "5",
+            "arg3": "32081",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32038",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32020",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "G",
+            "arg1": "32039",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32001",
+            "arg2": "12",
+            "arg3": "32080",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "32007",
+            "arg2": "15",
+            "arg3": "32080",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32004",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32002",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "32003",
+            "arg2": "6",
+            "arg3": "32079",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32028",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32007",
+            "arg2": "15",
+            "arg3": "32079",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32004",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32002",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "32002",
+            "arg2": "10",
+            "arg3": "32078",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32033",
+            "arg2": "100",
+            "arg3": "12"
+        },
+        {
+            "command": "E",
+            "arg1": "32029",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32009",
+            "arg2": "5",
+            "arg3": "32068",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32038",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32020",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "G",
+            "arg1": "32039",
+            "arg2": "100"
+        },
+        {
+            "command": "G",
+            "arg1": "32057",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32007",
+            "arg2": "15",
+            "arg3": "32068",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32004",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32002",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "32007",
+            "arg2": "15",
+            "arg3": "32067",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32004",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32002",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "32001",
+            "arg2": "12",
+            "arg3": "32066",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "32001",
+            "arg2": "12",
+            "arg3": "32065",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "32007",
+            "arg2": "15",
+            "arg3": "32064",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32004",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32002",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "32007",
+            "arg2": "15",
+            "arg3": "32063",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32004",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32002",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "32009",
+            "arg2": "5",
+            "arg3": "32070",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32038",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "32057",
+            "arg2": "100"
+        },
+        {
+            "command": "G",
+            "arg1": "32039",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32007",
+            "arg2": "15",
+            "arg3": "32071",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32004",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32002",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "32005",
+            "arg2": "14",
+            "arg3": "32072",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32037",
+            "arg2": "100",
+            "arg3": "14"
+        },
+        {
+            "command": "E",
+            "arg1": "32037",
+            "arg2": "100",
+            "arg3": "15"
+        },
+        {
+            "command": "M",
+            "arg1": "32001",
+            "arg2": "12",
+            "arg3": "32040",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "32001",
+            "arg2": "12",
+            "arg3": "32037",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "32003",
+            "arg2": "6",
+            "arg3": "32037",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32028",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32006",
+            "arg2": "4",
+            "arg3": "32036",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "32001",
+            "arg2": "12",
+            "arg3": "32031",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "32001",
+            "arg2": "12",
+            "arg3": "32033",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "32003",
+            "arg2": "6",
+            "arg3": "32027",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32028",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32003",
+            "arg2": "6",
+            "arg3": "32005",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32028",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32006",
+            "arg2": "4",
+            "arg3": "32007",
+            "arg4": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "32041",
+            "arg2": "3",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "32052",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "32055",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "32055",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "32002",
+            "arg2": "10",
+            "arg3": "32008",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32031",
+            "arg2": "100",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "32032",
+            "arg2": "100",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "32034",
+            "arg2": "100",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "32029",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "O",
+            "arg1": "32060",
+            "arg2": "100",
+            "arg3": "32016"
+        },
+        {
+            "command": "M",
+            "arg1": "32006",
+            "arg2": "4",
+            "arg3": "32016",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "32025",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32003",
+            "arg2": "6",
+            "arg3": "32021",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32028",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32001",
+            "arg2": "12",
+            "arg3": "32029",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "32053",
+            "arg2": "100",
+            "arg3": "32031"
+        },
+        {
+            "command": "O",
+            "arg1": "32060",
+            "arg2": "100",
+            "arg3": "32031"
+        },
+        {
+            "command": "O",
+            "arg1": "32039",
+            "arg2": "100",
+            "arg3": "32034"
+        },
+        {
+            "command": "M",
+            "arg1": "32001",
+            "arg2": "12",
+            "arg3": "32036",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "32024",
+            "arg2": "1",
+            "arg3": "32038",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32061",
+            "arg2": "100",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "32062",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "G",
+            "arg1": "32065",
+            "arg2": "100"
+        },
+        {
+            "command": "G",
+            "arg1": "32064",
+            "arg2": "100"
+        },
+        {
+            "command": "G",
+            "arg1": "32063",
+            "arg2": "100"
+        },
+        {
+            "command": "G",
+            "arg1": "32048",
+            "arg2": "100"
+        },
+        {
+            "command": "O",
+            "arg1": "32036",
+            "arg2": "100",
+            "arg3": "32045"
+        },
+        {
+            "command": "M",
+            "arg1": "32001",
+            "arg2": "12",
+            "arg3": "32051",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "32001",
+            "arg2": "12",
+            "arg3": "32000",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "32015",
+            "arg2": "3",
+            "arg3": "32040",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "32050",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32009",
+            "arg2": "5",
+            "arg3": "32081",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32038",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32020",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "G",
+            "arg1": "32039",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32022",
+            "arg2": "2",
+            "arg3": "32083",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "32036",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32001",
+            "arg2": "12",
+            "arg3": "32083",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "32015",
+            "arg2": "3",
+            "arg3": "32085",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "32036",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32020",
+            "arg2": "1",
+            "arg3": "32084",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "32002",
+            "arg2": "10",
+            "arg3": "32005",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32029",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32002",
+            "arg2": "10",
+            "arg3": "32008",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32029",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32002",
+            "arg2": "10",
+            "arg3": "32011",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32029",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32002",
+            "arg2": "10",
+            "arg3": "32021",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32029",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32002",
+            "arg2": "10",
+            "arg3": "32026",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32029",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32002",
+            "arg2": "10",
+            "arg3": "32030",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32029",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "32039",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32002",
+            "arg2": "10",
+            "arg3": "32034",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32029",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "32002",
+            "arg2": "10",
+            "arg3": "32085",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32029",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32033",
+            "arg2": "100",
+            "arg3": "12"
+        },
+        {
+            "command": "O",
+            "arg1": "32055",
+            "arg2": "100",
+            "arg3": "32009"
+        },
+        {
+            "command": "O",
+            "arg1": "32055",
+            "arg2": "100",
+            "arg3": "32009"
+        },
+        {
+            "command": "O",
+            "arg1": "32054",
+            "arg2": "100",
+            "arg3": "32009"
+        },
+        {
+            "command": "M",
+            "arg1": "32008",
+            "arg2": "3",
+            "arg3": "32019",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32026",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "G",
+            "arg1": "32027",
+            "arg2": "100"
+        },
+        {
+            "command": "M",
+            "arg1": "32007",
+            "arg2": "15",
+            "arg3": "32063",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32004",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32002",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "32007",
+            "arg2": "15",
+            "arg3": "32065",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32004",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32002",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "32007",
+            "arg2": "15",
+            "arg3": "32067",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32004",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32002",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "32007",
+            "arg2": "15",
+            "arg3": "32067",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32004",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32002",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "32007",
+            "arg2": "15",
+            "arg3": "32074",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32004",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32002",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "32007",
+            "arg2": "15",
+            "arg3": "32074",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "32004",
+            "arg2": "100",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "32002",
+            "arg2": "100",
+            "arg3": "17"
+        },
+        {
+            "command": "P",
+            "arg1": "32007",
+            "arg2": "100",
+            "arg3": "32005",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "32008",
+            "arg2": "100",
+            "arg3": "32005",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "32009",
+            "arg2": "100",
+            "arg3": "32005",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "32010",
+            "arg2": "100",
+            "arg3": "32005",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "32011",
+            "arg2": "100",
+            "arg3": "32005",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "32012",
+            "arg2": "100",
+            "arg3": "32005",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "32013",
+            "arg2": "100",
+            "arg3": "32005",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "32014",
+            "arg2": "100",
+            "arg3": "32005",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "32015",
+            "arg2": "100",
+            "arg3": "32005",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "32016",
+            "arg2": "100",
+            "arg3": "32005",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "32017",
+            "arg2": "100",
+            "arg3": "32005",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "32018",
+            "arg2": "100",
+            "arg3": "32005",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "32019",
+            "arg2": "100",
+            "arg3": "32005",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "32020",
+            "arg2": "100",
+            "arg3": "32005",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "32021",
+            "arg2": "100",
+            "arg3": "32005",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "32067",
+            "arg2": "100",
+            "arg3": "32005",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "32068",
+            "arg2": "100",
+            "arg3": "32005",
+            "arg4": "1"
+        },
+        {
+            "command": "P",
+            "arg1": "32069",
+            "arg2": "100",
+            "arg3": "32005",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "32056",
+            "arg2": "100",
+            "arg3": "32085"
+        },
+        {
+            "command": "O",
+            "arg1": "32003",
+            "arg2": "100",
+            "arg3": "32084"
+        },
+        {
+            "command": "O",
+            "arg1": "32023",
+            "arg2": "100",
+            "arg3": "32002"
+        },
+        {
+            "command": "O",
+            "arg1": "32060",
+            "arg2": "100",
+            "arg3": "32039"
+        },
+        {
+            "command": "O",
+            "arg1": "32053",
+            "arg2": "100",
+            "arg3": "32024"
+        },
+        {
+            "command": "O",
+            "arg1": "32070",
+            "arg2": "100",
+            "arg3": "32089"
+        },
+        {
+            "command": "O",
+            "arg1": "32071",
+            "arg2": "100",
+            "arg3": "32089"
+        }
+    ],
+    "shops": [
+        {
+            "keeper": "32016",
+            "buy_type_0": "9",
+            "buy_type_1": "0",
+            "buy_type_2": "0",
+            "buy_type_3": "8",
+            "buy_type_4": "0",
+            "profit_buy": "100",
+            "profit_sell": "100",
+            "open_hour": "0",
+            "close_hour": "23"
+        },
+        {
+            "keeper": "32017",
+            "buy_type_0": "0",
+            "buy_type_1": "5",
+            "buy_type_2": "4",
+            "buy_type_3": "3",
+            "buy_type_4": "0",
+            "profit_buy": "100",
+            "profit_sell": "100",
+            "open_hour": "0",
+            "close_hour": "23"
+        },
+        {
+            "keeper": "32024",
+            "buy_type_0": "0",
+            "buy_type_1": "0",
+            "buy_type_2": "0",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "100",
+            "profit_sell": "100",
+            "open_hour": "0",
+            "close_hour": "23"
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "32000",
+            "spec_fun": "spec_thief"
+        },
+        {
+            "vnum": "32001",
+            "spec_fun": "spec_fido"
+        },
+        {
+            "vnum": "32002",
+            "spec_fun": "spec_guard"
+        },
+        {
+            "vnum": "32003",
+            "spec_fun": "spec_janitor"
+        },
+        {
+            "vnum": "32004",
+            "spec_fun": "spec_guard"
+        },
+        {
+            "vnum": "32005",
+            "spec_fun": "spec_thief"
+        },
+        {
+            "vnum": "32006",
+            "spec_fun": "spec_poison"
+        },
+        {
+            "vnum": "32010",
+            "spec_fun": "spec_breath_lightning"
+        },
+        {
+            "vnum": "32014",
+            "spec_fun": "spec_breath_any"
+        },
+        {
+            "vnum": "32015",
+            "spec_fun": "spec_poison"
+        },
+        {
+            "vnum": "32023",
+            "spec_fun": "spec_breath_fire"
+        },
+        {
+            "vnum": "32024",
+            "spec_fun": "spec_poison"
+        }
+    ],
+    "olimits": [
+        {
+            "vnum": "32034",
+            "limit": "2"
+        },
+        {
+            "vnum": "32036",
+            "limit": "5"
+        },
+        {
+            "vnum": "32030",
+            "limit": "1"
+        },
+        {
+            "vnum": "32052",
+            "limit": "1"
+        },
+        {
+            "vnum": "32057",
+            "limit": "10"
+        }
+    ]
+}

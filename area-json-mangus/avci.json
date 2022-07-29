@@ -1,0 +1,316 @@
+{
+    "area": {
+        "file": "avci.are",
+        "name": "Türkçe",
+        "low_range": "90",
+        "high_range": "100",
+        "min_vnum": "570",
+        "max_vnum": "579",
+        "path": "21d 11k",
+        "yonelim_iyi": "5",
+        "yonelim_yansiz": "90",
+        "yonelim_kem": "5"
+    },
+    "area_flag": {
+        "flag": "C"
+    },
+    "mobiles": [
+        {
+            "vnum": "570",
+            "name": "avcý malikane koruma AVCI HUNTER",
+            "short_description": "koruma",
+            "long_description": "Avcý Kabalýnýn Malikanesinin giriþinde duran yabancýlarýn girmesini\nönleyen bir Koruma.\n",
+            "description": "Yüzbinlerce altýn ile özel olarak tutulmuþ kaslý bir koruma.\n",
+            "race": "human",
+            "act": "ABKWe",
+            "affected_by": "DFHJVZc",
+            "level": "92"
+        },
+        {
+            "vnum": "571",
+            "name": "avcý kabal þifacý AVCI hunter",
+            "short_description": "þifacý",
+            "long_description": "Para karþýlýðý tutulmuþ bir ermiþ burada avcý kabal mensuplarýna þifa\ndaðýtmak için bekliyor.\n",
+            "description": "Yüzbinlerce altýn ile tutulmuþ diyarda eþi benzeri az bulunan güçlü ve\nbilge bir þifacý burada avcý kabal mensuplarýna þifa daðýtmayý bekliyor.\n",
+            "race": "human",
+            "act": "ABQVae",
+            "affected_by": "DFH",
+            "level": "80"
+        },
+        {
+            "vnum": "572",
+            "name": "avcý malikane koruma AVCI HUNTER",
+            "short_description": "koruma",
+            "long_description": "Avcý Kabalýnýn Malikanesinin giriþinde duran yabancýlarýn girmesini\nönleyen bir Koruma.\n",
+            "description": "Yüzbinlerce altýn ile özel olarak tutulmuþ kaslý bir koruma.\n",
+            "race": "human",
+            "act": "ABKWe",
+            "affected_by": "DFHJVZ",
+            "level": "92"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "570",
+            "name": "altýn iþlemeli sandýk",
+            "short_description": "sandýk",
+            "description": "Avcý kabalýnýn hazinesini içinde tutan, etrafa sarý ýþýk\nhüzmeleri yayan bir sandýk.",
+            "material": "golden",
+            "type": "container",
+            "extra_flags": "CEORY",
+            "wear_flags": "P",
+            "values": "10 15 572 15 100",
+            "level": "60",
+            "weight": "1",
+            "cost": "20",
+            "condition": "P"
+        },
+        {
+            "vnum": "571",
+            "name": "hazine",
+            "short_description": "avcý kabalýnýn hazinesi",
+            "description": "avcý kabalýnýn hazinesi",
+            "material": "golden",
+            "type": "treasure",
+            "extra_flags": "CETO",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "60",
+            "weight": "1",
+            "cost": "10000",
+            "condition": "P"
+        },
+        {
+            "vnum": "572",
+            "name": "altýn anahtar",
+            "short_description": "altýn iþlemeli anahtar",
+            "description": "Altýn iþlemeli anahtar burada duruyor.",
+            "material": "bone",
+            "type": "key",
+            "extra_flags": "CEORY",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "40",
+            "weight": "4",
+            "cost": "0",
+            "condition": "P"
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "570",
+            "name": "Malikane'nin Kapýlarý",
+            "description": "Daha önce görmediðin derecede lüks bir malikanenin altýndan yapýlmýþ\nkapýsýnýn önünde duruyorsun. Altýnýn etrafa yaydýðý sarý ýþýk görünüþe göre\nbulunduðun yeri aydýnlatan tek þey. Zenginlik abidesi malikane'nin kapýlarý\nsana içeride çok zengin kiþi veyahut kiþilerin bulunabileceðini\ndüþündürüyor.\n",
+            "flags": "ACDX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "9783"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "giriþ",
+                    "locks": "3",
+                    "key": "-1",
+                    "u1_vnum": "571"
+                }
+            ]
+        },
+        {
+            "vnum": "571",
+            "name": "Malikane'nin Giriþi",
+            "description": "Lüks lambalarýn aydýnlattýðý altýndan oluþan dekorlu bir odadasýn.\nMalikanenin içinde kapýda iki tane koruma görüyorsun. Amaçlarý Avcý\nKabalýnýn Malikanesini davetsiz misafirlerden korumak olsa gerek. Eðer tek\nparça halinde kalmak istiyorsan yapman gereken tek þey kaçmak.\n",
+            "flags": "ACDX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "5",
+                    "key": "-1",
+                    "u1_vnum": "572"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "giriþ",
+                    "locks": "3",
+                    "key": "-1",
+                    "u1_vnum": "570"
+                }
+            ]
+        },
+        {
+            "vnum": "572",
+            "name": "Gizemli Koridor",
+            "description": "Etrafýnda binlerce kapý barýndýran bir koridordasýn. Girdiðin odalarýn\nhepsinde birbirinin ayný; Gösteriþli eþyalar, rahat görünüþlü kanepeler, ve\nde bir kaç yatak... Altýn kaplý döþemeler, lüks lambalar aklýný karýþtýrýyor\nkayýpmý oluyorsun? Ýçinden bir ses bu odalarýn ayný olduðunu söylüyor fakat\nbu nasýl olur? Odanýn kuzey duvarýnda bir kapý etrafa sarý ýþýk hüzmeleri\nyayýyor.\n",
+            "flags": "ADX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "573"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "572"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "571"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "572"
+                }
+            ]
+        },
+        {
+            "vnum": "573",
+            "name": "Avcý Kabalýnda Gizli bir oda",
+            "description": "Kapýdan içeri girdiðinde gördüklerinin birer halisünasyon olduðunu\naslýnda tek tük meþalelerle aydýnlanmýþ, loþ ve nemli bir havanýn hakim\nolduðu mahzende buluyorsun kendini. Odanýn ortasýnda duran sandýðýn içinde\ndeðerli birþeyler olsa gerek...\n",
+            "flags": "ADX",
+            "sector": "0",
+            "mana_rate": [
+                "110"
+            ],
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "572"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "571",
+            "arg2": "1",
+            "arg3": "573",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "570",
+            "arg2": "1",
+            "arg3": "571",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "572",
+            "arg2": "1",
+            "arg3": "571",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "572",
+            "arg2": "0",
+            "arg3": "11"
+        },
+        {
+            "command": "O",
+            "arg1": "570",
+            "arg2": "1",
+            "arg3": "573"
+        },
+        {
+            "command": "P",
+            "arg1": "571",
+            "arg2": "1",
+            "arg3": "570",
+            "arg4": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "571",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "570",
+            "arg2": "4",
+            "arg3": "1"
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "570",
+            "spec_fun": "spec_fight_hunter"
+        },
+        {
+            "vnum": "571",
+            "spec_fun": "spec_cast_cabal"
+        },
+        {
+            "vnum": "572",
+            "spec_fun": "spec_fight_hunter"
+        }
+    ],
+    "omprogs": [
+        {
+            "command": "O",
+            "vnum": "571",
+            "progtype": "get_prog",
+            "progname": "get_prog_cabal_item"
+        },
+        {
+            "command": "O",
+            "vnum": "571",
+            "progtype": "sac_prog",
+            "progname": "sac_prog_cabal_item"
+        },
+        {
+            "command": "M",
+            "vnum": "570",
+            "progtype": "greet_prog",
+            "progname": "greet_prog_hunter"
+        },
+        {
+            "command": "M",
+            "vnum": "571",
+            "progtype": "speech_prog",
+            "progname": "speech_prog_hunter_cleric"
+        }
+    ],
+    "practicers": [
+        {
+            "vnum": "570",
+            "practicer": "group_cabal"
+        },
+        {
+            "vnum": "572",
+            "practicer": "group_cabal"
+        }
+    ]
+}

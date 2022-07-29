@@ -1,0 +1,3298 @@
+{
+    "area": {
+        "file": "cuce_mezarligi.are",
+        "name": "Yarý Türkçe",
+        "low_range": "1",
+        "high_range": "20",
+        "min_vnum": "2000",
+        "max_vnum": "2099",
+        "path": "6d 3k 2d 3k 3b 2a",
+        "yonelim_iyi": "10",
+        "yonelim_yansiz": "60",
+        "yonelim_kem": "30"
+    },
+    "mobiles": [
+        {
+            "vnum": "2001",
+            "name": "yarasa",
+            "short_description": "bir yarasa",
+            "long_description": "Bir yarasa sana doðru vahþice kanat çýrpýyor!\n",
+            "description": "Your typical smelly, blind flying mammal.\n",
+            "race": "bat",
+            "act": "ABF",
+            "affected_by": "F",
+            "level": "5"
+        },
+        {
+            "vnum": "2002",
+            "name": "ulak þövalye ulaðý",
+            "short_description": "bir þövalye ulaðý",
+            "long_description": "Henüz eðitilmekte olan bir þövalye ulaðý kafasý karýþmýþ halde burada duruyor.\n",
+            "description": "He has lost his family and everything of his former life.\n",
+            "race": "human",
+            "act": "AH",
+            "affected_by": "0",
+            "level": "7"
+        },
+        {
+            "vnum": "2003",
+            "name": "maðara kaþifi",
+            "short_description": "bir maðara kaþifi",
+            "long_description": "Bir maðara kaþifi bu tünellerde yolunu kolaylýkla buluyor gibi.\n",
+            "description": "He recently discovered these catacombs and wants to see where they lead.\nHe just hopes he doesn't get killed in the process.  He carries only\nessential exploration gear; if there IS anything down here, he\nprobably won't last long.\n",
+            "race": "human",
+            "act": "ACH",
+            "affected_by": "F",
+            "level": "8"
+        },
+        {
+            "vnum": "2004",
+            "name": "mezar kazýcý soyguncu mezar soyguncusu",
+            "short_description": "bir mezar soyguncusu",
+            "long_description": "Bir mezar soyguncusu ölü bedenleri kýyasýya inceliyor.\n",
+            "description": "Working for an evil necromancer isn't the greatest thing in the world.\nThey seem like little more than zombie servants themselves.\n",
+            "race": "human",
+            "act": "ACF",
+            "affected_by": "0",
+            "level": "9"
+        },
+        {
+            "vnum": "2005",
+            "name": "süzülen sis",
+            "short_description": "bir miktar sis",
+            "long_description": "Bir miktar sis senin etrafýnda süzülüyor ... sakýn CANLI olmasýn?!\n",
+            "description": "In fact it IS alive in a magical sort of sense.\n",
+            "race": "human",
+            "act": "A",
+            "affected_by": "HPU",
+            "level": "10"
+        },
+        {
+            "vnum": "2006",
+            "name": "þey o",
+            "short_description": "Ve iþte O..",
+            "long_description": "",
+            "description": "",
+            "race": "human",
+            "act": "AF",
+            "affected_by": "0",
+            "level": "10"
+        },
+        {
+            "vnum": "2007",
+            "name": "iskelet asker",
+            "short_description": "bir iskelet",
+            "long_description": "Bir iskelet asker yeraltýnýn muharebe meydanlarýnda hala savaþýyor.\n",
+            "description": "Even though he has died in the physical sense of the word, the battle\ncontinues for him in his charmed state.\n",
+            "race": "human",
+            "act": "ACF",
+            "affected_by": "0",
+            "level": "11"
+        },
+        {
+            "vnum": "2008",
+            "name": "þövalye",
+            "short_description": "bir þövalye",
+            "long_description": "Bir þövalye baðýrýyor \"EVVET! ÖLDÜRÜN KAFÝRÝ!\"\n",
+            "description": "Sen onu dikkatle inceleyince, o da dikkatle seni incelemeye baþlýyor.\nBir þövalye yakýndan dikkatle seni inceliyor.\nBir þövalye sana þöyle diyor, \"Sen kötülük yaymaya çalýþan bozuk bir tohumsun!\".\nBir þövalye ekliyor, \"Günahýn yüzünden þimdi ÖLMELÝSÝN!\".\n",
+            "race": "human",
+            "act": "ACF",
+            "affected_by": "0",
+            "level": "12"
+        },
+        {
+            "vnum": "2009",
+            "name": "hayalet",
+            "short_description": "gizemli bir hayalet",
+            "long_description": "Gizemli bir hayalet gözlerinin önünde birden cisimleþiyor.\n",
+            "description": "Hard to tell much about the mysterious form even upon further inspection.\n",
+            "race": "human",
+            "act": "ACF",
+            "affected_by": "FU",
+            "level": "12"
+        },
+        {
+            "vnum": "2010",
+            "name": "þövalye subayý",
+            "short_description": "þövalye subayý",
+            "long_description": "Bir þövalye subayý etrafta olan biteni gözlüyor.\n",
+            "description": "A templar officer tells you \"Better move along evil one!\"\n",
+            "race": "human",
+            "act": "AF",
+            "affected_by": "D",
+            "level": "13"
+        },
+        {
+            "vnum": "2011",
+            "name": "zombi büyücü",
+            "short_description": "zombi",
+            "long_description": "Boþ boþ bakan bir büyücü zombi savaþa katýlýyor.\n",
+            "description": "He seems to lack real interest in what he is doing.\n",
+            "race": "human",
+            "act": "ACFR",
+            "affected_by": "0",
+            "level": "13"
+        },
+        {
+            "vnum": "2012",
+            "name": "gölgeler",
+            "short_description": "gölge",
+            "long_description": "Ürkütücü gölgeler odayý kaplýyor.\n",
+            "description": "Looks vaguely you-shaped.\n",
+            "race": "human",
+            "act": "A",
+            "affected_by": "FPU",
+            "level": "14"
+        },
+        {
+            "vnum": "2013",
+            "name": "yarasa vampir",
+            "short_description": "Vampir",
+            "long_description": "Bir yarasa sana doðru vahþice kanat çýrpýyor!\n",
+            "description": "Biraz daha ÝRÝCE bir \"yarasa\" ...\n",
+            "race": "bat",
+            "act": "ABF",
+            "affected_by": "F",
+            "level": "15"
+        },
+        {
+            "vnum": "2014",
+            "name": "ölümbüyücüsü ölüm büyücüsü",
+            "short_description": "kara ölümbüyücüsü",
+            "long_description": "Kara ölümbüyücüsü cesetleri hortlatýp yeni askerler yaratýyor.\n",
+            "description": "Though he seems absorbed in his work, you'd bet he'd take the time out\nto kill you to get a fresh corpse!\n",
+            "race": "human",
+            "act": "ABF",
+            "affected_by": "0",
+            "level": "15"
+        },
+        {
+            "vnum": "2015",
+            "name": "ulu þövalye lider",
+            "short_description": "Ulu Þövalye",
+            "long_description": "Ulu Þövalye sessizce burada senin hareketlerini seyrediyor.\n",
+            "description": "A slight, tolerant smile comes briefly across his face.  In the blink\nof an eye he seems stern again.\n",
+            "race": "human",
+            "act": "AB",
+            "affected_by": "DFH",
+            "level": "16"
+        },
+        {
+            "vnum": "2016",
+            "name": "prizma ejderha",
+            "short_description": "prizma ejderha",
+            "long_description": "Iþýk, burada pusuya yatmýþ güzel ancak tehlikeli ejderhanýn üzerinden yansýyor.\n",
+            "description": "The spray of colored light bouncing off his scales is almost blinding.\n",
+            "race": "human",
+            "act": "ABF",
+            "affected_by": "DF",
+            "level": "20"
+        },
+        {
+            "vnum": "2017",
+            "name": "karanlýk canavar karanlýkcanavar",
+            "short_description": "Karanlýk Canavar",
+            "long_description": "Göremesen de, Karanlýk Canavarýn varlýðýný diðer tüm duyularýnla hissediyorsun.\n",
+            "description": "You see nothing more than the sense of darkness and evil.\n",
+            "race": "human",
+            "act": "ABF",
+            "affected_by": "0",
+            "level": "24"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "2001",
+            "name": "parýldayan anahtar",
+            "short_description": "parýldayan bir anahtar",
+            "description": "Halka þeklinde, parýldayan anahtar etrafýna parlak bir aura yayýyor.",
+            "material": "steel",
+            "type": "key",
+            "extra_flags": "ABG",
+            "wear_flags": "A",
+            "values": "39 0 0 0 0",
+            "level": "0",
+            "weight": "10",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "2002",
+            "name": "granit zýrh",
+            "short_description": "granite bir zýrh",
+            "description": "Granitten oyulmuþ bir göðüs zýrhý bir köþede kendi kendine duruyor.",
+            "material": "granite",
+            "type": "armor",
+            "extra_flags": "BJ",
+            "wear_flags": "AD",
+            "values": "8 8 8 2 0",
+            "level": "23",
+            "weight": "550",
+            "cost": "3600",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "2",
+                    "modifier": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "2003",
+            "name": "akik yüzük",
+            "short_description": "akik bir yüzük",
+            "description": "Kapkara akik taþlý olan bir yüz tozun içine býrakýlmýþ.",
+            "material": "onyx",
+            "type": "jewelry",
+            "extra_flags": "J",
+            "wear_flags": "AB",
+            "values": "0 0 0 0 0",
+            "level": "7",
+            "weight": "10",
+            "cost": "800",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "4",
+                    "modifier": "1"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "2004",
+            "name": "kýsýrlaþtýrýcý kýlýç",
+            "short_description": "Kýsýrlaþtýrýcý",
+            "description": "Geniþ býçaklý uzun ince bir kýlýç merakýný uyandýrýyor.",
+            "material": "iron",
+            "type": "weapon",
+            "extra_flags": "BJK",
+            "wear_flags": "AN",
+            "values": "sword 4 5 slash 0",
+            "level": "16",
+            "weight": "90",
+            "cost": "1280",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "2"
+                },
+                {
+                    "location": "18",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "2005",
+            "name": "kýlýç excalibur",
+            "short_description": "kýlýç Excalibur",
+            "description": "Bir kýlýç, gümüþi býçaðýndaki büyüyle ýþýldýyor.",
+            "material": "steel",
+            "type": "weapon",
+            "extra_flags": "AGKL",
+            "wear_flags": "AN",
+            "values": "sword 10 4 slash 0",
+            "level": "24",
+            "weight": "150",
+            "cost": "3400",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "1"
+                },
+                {
+                    "location": "18",
+                    "modifier": "3"
+                }
+            ]
+        },
+        {
+            "vnum": "2006",
+            "name": "taç kral tacý",
+            "short_description": "bir kral tacý",
+            "description": "Uzun süre önce kaybolmuþ bir kralýn tacý burada unutulmuþ.",
+            "material": "gold",
+            "type": "key",
+            "extra_flags": "I",
+            "wear_flags": "AE",
+            "values": "0 0 0 0 0",
+            "level": "24",
+            "weight": "100",
+            "cost": "1850",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-6"
+                }
+            ]
+        },
+        {
+            "vnum": "2007",
+            "name": "taþ",
+            "short_description": "taþ",
+            "description": "Taþ parlak bir ýþýkla çevrelenmiþ. En iyisi yakýndan bakmak...",
+            "material": "stone",
+            "type": "container",
+            "extra_flags": "A",
+            "wear_flags": "0",
+            "values": "15 ABCD 2006 15 100",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "2008",
+            "name": "kutsal su matarasý",
+            "short_description": "bir kutsal su matarasý",
+            "description": "Bir kutsal su matarasý burada.",
+            "material": "copper",
+            "type": "potion",
+            "extra_flags": "A",
+            "wear_flags": "AO",
+            "values": "25 'bless' 'sanctuary' '' ''",
+            "level": "11",
+            "weight": "20",
+            "cost": "880",
+            "condition": "P"
+        },
+        {
+            "vnum": "2009",
+            "name": "zincirzýrh zincir zýrh giysi",
+            "short_description": "bir zincirzýrh",
+            "description": "Hoþ bir zincirzýrh burada terk edilmiþ.",
+            "material": "iron",
+            "type": "armor",
+            "extra_flags": "I",
+            "wear_flags": "AD",
+            "values": "5 5 5 0 0",
+            "level": "10",
+            "weight": "200",
+            "cost": "1450",
+            "condition": "P"
+        },
+        {
+            "vnum": "2010",
+            "name": "beyaz pelerin",
+            "short_description": "beyaz bir pelerin",
+            "description": "Iþýldayan beyaz renkten bir pelerin dikkatle buraya uzanmýþ.",
+            "material": "cloth",
+            "type": "armor",
+            "extra_flags": "A",
+            "wear_flags": "AC",
+            "values": "5 5 5 0 0",
+            "level": "12",
+            "weight": "30",
+            "cost": "1000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "2011",
+            "name": "kalkan savunma",
+            "short_description": "savunma kalkaný",
+            "description": "Büyük bir kalkan bir þeyleri savunmaya hazýr bir halde bekliyor.",
+            "material": "iron",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AJ",
+            "values": "6 6 6 4 0",
+            "level": "13",
+            "weight": "350",
+            "cost": "1920",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "-1"
+                },
+                {
+                    "location": "18",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "13",
+                    "modifier": "10"
+                },
+                {
+                    "location": "12",
+                    "modifier": "10"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-2"
+                }
+            ]
+        },
+        {
+            "vnum": "2012",
+            "name": "pul kalkan ejderha pulu",
+            "short_description": "ejderha pulundan bir kalkan",
+            "description": "Büyük bir ejderhanýn pullarýndan yapýlmýþ kalkan burada uzanýyor.",
+            "material": "dragonskin",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AJ",
+            "values": "7 7 7 4 0",
+            "level": "22",
+            "weight": "200",
+            "cost": "3500",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "20",
+                    "modifier": "-2"
+                }
+            ]
+        },
+        {
+            "vnum": "2013",
+            "name": "prizma deðnek",
+            "short_description": "bir prizma deðnek",
+            "description": "Üçgen prizmadan yapýlmýþ bir deðnek tozun içinde titrek bir þekilde parlýyor.",
+            "material": "glass",
+            "type": "wand",
+            "extra_flags": "AG",
+            "wear_flags": "AO",
+            "values": "11 4 4 'colour spray' 0",
+            "level": "12",
+            "weight": "40",
+            "cost": "2200",
+            "condition": "P"
+        },
+        {
+            "vnum": "2014",
+            "name": "gölge pelerini",
+            "short_description": "bir gölge pelerini",
+            "description": "Odanýn köþesindeki gölgeler biraz acayip görünüyor ...",
+            "material": "cloth",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AK",
+            "values": "7 7 7 2 0",
+            "level": "14",
+            "weight": "10",
+            "cost": "210",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "14",
+                    "modifier": "-30"
+                }
+            ]
+        },
+        {
+            "vnum": "2015",
+            "name": "buðulu iksir",
+            "short_description": "buðulu bir iksir",
+            "description": "Buharlaþan sis benzeri bir maddeden oluþan iksir burada.",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "10 'pass door' 'faerie fire' '' ''",
+            "level": "12",
+            "weight": "10",
+            "cost": "920",
+            "condition": "P"
+        },
+        {
+            "vnum": "2016",
+            "name": "þövalye kýlýcý þövalyenin kýlýcý ahþap",
+            "short_description": "bir þövalyenin kýlýcý",
+            "description": "Tahtadan yapýlmýþ bir kýlýç burada býrakýlmýþ.",
+            "material": "wood",
+            "type": "weapon",
+            "extra_flags": "I",
+            "wear_flags": "AN",
+            "values": "sword 2 6 slash 0",
+            "level": "10",
+            "weight": "60",
+            "cost": "830",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "2"
+                }
+            ]
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "2001",
+            "name": "Mezarlýðýn kuzey giriþi",
+            "description": "You are almost surprised to see a tunnel leading off to the south\ninto utter darkness.  The floorboards above you haven't been moved\nin a long time, yet there is life down here.  A beam of light from\nthe opening above you falls upon a message scrawled on the wall here.\n\nThe message reads:\n     Adventure for the strong yet calculating\n     Death for the weak and shallow\n     Treasure for the smart and lucky\n     Death for the stupid and accursed\n\nAn ancient Glyph above the entrance keeps monsters from wandering up\nfrom the catacombs.\n",
+            "flags": "C",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2002"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "floorboard board",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "6524"
+                }
+            ]
+        },
+        {
+            "vnum": "2002",
+            "name": "Kuzey/güney tüneli",
+            "description": "This part of the catacombs looked roughly hewn and man-made. There is\na large cross painted on the floor of the tunnel.To the south it seems\nmaybe a bit lighter for some odd reason.  To the north a ray of light\ncomes in from a hole in the ceiling.\n",
+            "flags": "DI",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2001"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2007"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "cross paint floor",
+                    "description": "The cross is a Templar's cross. It seems to have had a fresh coat of\npaint recently."
+                }
+            ]
+        },
+        {
+            "vnum": "2003",
+            "name": "Silah pratik alaný",
+            "description": "This is a place to keep up on there weapon skills.  Much of the\nequipment looks old and worn but upon further inspection seems quite\nsturdy in fact.\n",
+            "flags": "DI",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2004"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2008"
+                }
+            ]
+        },
+        {
+            "vnum": "2004",
+            "name": "Yakarýþ ve eðitim alaný",
+            "description": "The templar's curious mix of religion and fighting is evident here.\nA central painting depicts a cross composed of swords.  The elders\nteach the ancient art of prayer to the young pages.\n",
+            "flags": "DI",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2005"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2003"
+                }
+            ]
+        },
+        {
+            "vnum": "2005",
+            "name": "Koridorlarýn kesiþimi",
+            "description": "Training facilities are evident to the west. To the south lies a hallway\nwhich has doors every couple of feet, looks like living quarters of some\nsort.  To the east the tunnel leads back into the natural catacombs.\n",
+            "flags": "DI",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2006"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2010"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2004"
+                }
+            ]
+        },
+        {
+            "vnum": "2006",
+            "name": "Koridor",
+            "description": "The hallway takes on a more indoor look to the west.  To the east it\nlooks awfully dark.\n",
+            "flags": "CDI",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2007"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2005"
+                }
+            ]
+        },
+        {
+            "vnum": "2007",
+            "name": "Kesiþme",
+            "description": "The tunnel continues to the north and the south, becoming less hewn and\nmore natural to the south.  A passageway lined with paneling leads west.\n",
+            "flags": "DI",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2002"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2012"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2006"
+                }
+            ]
+        },
+        {
+            "vnum": "2008",
+            "name": "Ulaklarýn yatakhanesi",
+            "description": "Several bunk beds are lined up across the room.  It looks rather spartan\nand there is little evidence of toys or games.  Most of the desks are\nfilled with books and papers of little interest.\n",
+            "flags": "DI",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2003"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2009"
+                }
+            ]
+        },
+        {
+            "vnum": "2009",
+            "name": "Templar Knights sleeping quarters",
+            "description": "This is a huge room which is filled wall to wall with beds. Apparently\nall the low level knights all sleep in this one room.  A door on the\nsouth wall is labelled \"Elders only!\".\n",
+            "flags": "DI",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2013"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2008"
+                }
+            ]
+        },
+        {
+            "vnum": "2010",
+            "name": "K/G koridor",
+            "description": "The hallway leads north an south.  A door leads to a templar's room to\nthe east.  The decoration looks rather sparse here.\n",
+            "flags": "DI",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2005"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2011"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "2014"
+                }
+            ]
+        },
+        {
+            "vnum": "2011",
+            "name": "Orta yaþlý bir þövalyenin odasý",
+            "description": "This is a room furnished in a room becoming a low level templar scribe.\nNo real amenities but better than a communal sleeping quarters. As far\nas you can tell he would be a rank equivalent to a Sargeant.\n",
+            "flags": "DI",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2010"
+                }
+            ]
+        },
+        {
+            "vnum": "2012",
+            "name": "Yaþ, rutubetli tünel",
+            "description": "As the tunnel leads south it gets more humid and damp.  Moss covers the\nwalls and ferns even grow in the cracks here and there.  To the north it\nseems much more sterile.\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2007"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2019"
+                }
+            ]
+        },
+        {
+            "vnum": "2013",
+            "name": "Ýdari oda",
+            "description": "The elders gather here to discuss training strategies and count their\nloot.  You notice papers which look like important secret documents\nlying around. An escape passage leads west.\n",
+            "flags": "DI",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2009"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2016"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2069"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "papers documents secrets",
+                    "description": "It seems that the loot comes from raids on the towns in the surrounding\nareas above ground.  From the documents it seems that the pages and\ntrainees are kidnapped from the villages too!\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2014",
+            "name": "K/G koridor",
+            "description": "The hallway continues to become more important-looking as you wander\nsouth.  A room to the east looks rather more pleasant that some of the\nothers.\n",
+            "flags": "DI",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2010"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2015"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2017"
+                }
+            ]
+        },
+        {
+            "vnum": "2015",
+            "name": "Orta düzey liderin odasý",
+            "description": "A rather nice looking room considering the drab conditions down here.\nThrough all the signs of decoration you can still see evidence of water\nleaks.\n",
+            "flags": "DI",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2014"
+                }
+            ]
+        },
+        {
+            "vnum": "2016",
+            "name": "Yemekhane",
+            "description": "The a huge table with an immaculate white table cloth stretches way off\nto the south.  The room is kept immaculately clean by the nights\nthemselves.  They truly belive that cleanliness is next to godliness.\n",
+            "flags": "DI",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2013"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2023"
+                }
+            ]
+        },
+        {
+            "vnum": "2017",
+            "name": "K/G koridor",
+            "description": "The hallway continues north and south.  A peculiar kind of glow seems\nto come from somewhere further along the hallway to the south. The room\nto the east looks like the lap of luxury.\n",
+            "flags": "DI",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2014"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2018"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2024"
+                }
+            ]
+        },
+        {
+            "vnum": "2018",
+            "name": "Yüksek subayýn odasý",
+            "description": "First thing you notice in this room is the pleasant aroma of cedar.  All\nthe paneling in the room is made of fine cedar.  A painting of an\nelegant knight hangs on the wall.\n",
+            "flags": "DI",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2017"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "painting elegant knight",
+                    "description": "Something oddly familiar about the knight.  He carries a glowing sword\nwith a silvery blade.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2019",
+            "name": "Yosunlu kesiþme",
+            "description": "There is a turn off to the passage here.  The main passage leads north\nand south. To the south it seems to get impossibly darker.  To the east\nyou hear... birds?  A small rivulet of water seeps in from the passage\neast.  The air is very humid and damp here.\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2012"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2020"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2026"
+                }
+            ]
+        },
+        {
+            "vnum": "2020",
+            "name": "Kutsal Koru",
+            "description": "A small grove of birches grow seem to grow from solid rock.  You hear\nbirds singing but try as you might you cant see any.  A strange glow\nemanates from a place somewhere to the southeast in the grove.\n",
+            "flags": "DJ",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2021"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2019"
+                }
+            ]
+        },
+        {
+            "vnum": "2021",
+            "name": "Kutsal Koru",
+            "description": "The trees seem real enough even though they take root in solid rock.\nYou hear other small animals scampering through the light undergrowth\nyet you see nothing. The grove continues south, east and west. An out of\nplace passage way for some reason heads north.\n",
+            "flags": "DJ",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2068"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2022"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2027"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2020"
+                }
+            ]
+        },
+        {
+            "vnum": "2022",
+            "name": "Kutsal Koru",
+            "description": "The grove continues west and south.  The glow is roughly to the south\nsomewhere.\n",
+            "flags": "DJ",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2028"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2021"
+                }
+            ]
+        },
+        {
+            "vnum": "2023",
+            "name": "Yemekhane",
+            "description": "\"mess\" isn't exactly the best word to describe this room.  On the\ncontrary, it is immaculately clean.  A very long table stretches way off\nto the north. A hallway is to the east.\n",
+            "flags": "DI",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2016"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2024"
+                }
+            ]
+        },
+        {
+            "vnum": "2024",
+            "name": "Koridorun sonu",
+            "description": "You hear voices coming from a room to the west.  the hallway goes north.\nTo the east lies a room which seems to glow with power and piety.\n",
+            "flags": "DI",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2017"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2025"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2023"
+                }
+            ]
+        },
+        {
+            "vnum": "2025",
+            "name": "Ulu Þövalyenin odasý",
+            "description": "All the items in this room look ancient yet strangely very powerful and\nrich.  There is an aura of great holiness about the room.\n",
+            "flags": "DI",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2024"
+                }
+            ]
+        },
+        {
+            "vnum": "2026",
+            "name": "Kör karanlýk geçit",
+            "description": "This room is so dark that even powerful magic lights seems to barely\nilluminate the ground in front of you.  If its possible it seems even\ndarker to the south.  The passage also leads back north.\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2019"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2030"
+                }
+            ]
+        },
+        {
+            "vnum": "2027",
+            "name": "Kutsal Koru",
+            "description": "The grove continues north and east.  To the east a strange humming can\nbarely be heard.\n",
+            "flags": "DJ",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2021"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2028"
+                }
+            ]
+        },
+        {
+            "vnum": "2028",
+            "name": "Kutsal Koru",
+            "description": "All of a sudden all the mysterious sounds of the grove stop. Or perhaps\nits just the strange humming and glowing from a clearing to the south\ndrowning out everything else. There is a sort of magical forcefield door\nto the south.\n",
+            "flags": "DJ",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2022"
+                },
+                {
+                    "door": "D2",
+                    "description": "a glowing forcefield with a small circular hole in it.\n",
+                    "keyword": "glow glowing field forcefield door",
+                    "locks": "1",
+                    "key": "2001",
+                    "u1_vnum": "2032"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2027"
+                }
+            ]
+        },
+        {
+            "vnum": "2029",
+            "name": "Kapkaranlýk maðara giriþi",
+            "description": "This room is so very dark that no one is quite sure whats in it, so\nthere's nothing really to describe except maybe the powerful sense of\nevil coming from the east and the almost overcoming urge to run to the\nwest.\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2030"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2033"
+                }
+            ]
+        },
+        {
+            "vnum": "2030",
+            "name": "Mezarlýðýn derinlikleri",
+            "description": "It stinks like a lair in here.  A rotten smell of humanoid flesh\nlingers.  You stumble over what you think are corpses in the utter\ndarkness. You sense a evil growl from somewhere in the room. maybe\neverywhere in the room. . ..\n",
+            "flags": "AD",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2026"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2031"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2029"
+                }
+            ]
+        },
+        {
+            "vnum": "2031",
+            "name": "Kör karanlýk maðara",
+            "description": "The cavern is hard to describe due to the extreme magical darkness.\nProbing with a light source seems to reveal nothing but more darkness.\n",
+            "flags": "AD",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2034"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2030"
+                }
+            ]
+        },
+        {
+            "vnum": "2032",
+            "name": "Kutsal bölge",
+            "description": "A glowing stone lies in the center of the clearing.  You recognize it as\nthe stone of the Excalibur.  The strange humming glowing makes it\ndifficult to see if the Excalibur is there or not. Might want to take a\ncloser look if possible.\n",
+            "flags": "DJ",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "a glowing forcefield with a small circular hole in it.\n",
+                    "keyword": "glow glowing field forcefield door",
+                    "locks": "1",
+                    "key": "2001",
+                    "u1_vnum": "2028"
+                }
+            ]
+        },
+        {
+            "vnum": "2033",
+            "name": "Sisli geçit",
+            "description": "Warm mist swirl about you making you feel threatened as well as\nprotected at the same time.  The swirling mist makes it tough to tell\ndirections quite clearly, but you seem to be able to go north or south.\nThe mist gets denser to the south.\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2029"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2042"
+                }
+            ]
+        },
+        {
+            "vnum": "2034",
+            "name": "Maðara kesiþimi",
+            "description": "Caverns head north, south and east from this peculiar spot. Medium\nsized caverns from the east and the north join to form a huge cavern\nheading south.  The walls of the cavern are made of a bizarre mixture\nof many shiny crystals.\n",
+            "flags": "AD",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2031"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2035"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2044"
+                }
+            ]
+        },
+        {
+            "vnum": "2035",
+            "name": "Kabristanlara giriþ",
+            "description": "You have entered what appears to be a burial ground of sorts. The\ntemplars buried their dead here.  Chills go down your spine as you feel\nsomething watching you.  You hear the random groan of a ghost, the howl\nof a wraith, and the dry clanking of bones.\n",
+            "flags": "AD",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2036"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2034"
+                }
+            ]
+        },
+        {
+            "vnum": "2036",
+            "name": "Kabristanlar",
+            "description": "Random tombs to unknown warriors were lain in rows as far as the eye\ncan see.  To your horror many of the graves are empty and desecrated.\nA gap in the rows of tombs leads south and there are more graves to the\neast and west.\n",
+            "flags": "AD",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2037"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2045"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2035"
+                }
+            ]
+        },
+        {
+            "vnum": "2037",
+            "name": "Kabristanlar",
+            "description": "It seems as if many of the warriors could not stop fighting even in\ndeath.  They fight amongst each other and flail at any living being\nthat would wander near.\n",
+            "flags": "AD",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2038"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2036"
+                }
+            ]
+        },
+        {
+            "vnum": "2038",
+            "name": "Kabristanlar",
+            "description": "Legions of skeletal warriors wander by and battle the enemy even in\ndeath.  Old battlelines have been forgotten and new ones made. Its a\ngruesome scene.\n",
+            "flags": "AD",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2039"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2037"
+                }
+            ]
+        },
+        {
+            "vnum": "2039",
+            "name": "Yeni mezarlar",
+            "description": "The tombs in this section seem somewhat more recent.  Rotting zombie\nwarriors groan and wail with blank stares.  You hear sounds of digging\noff a bit to the south.\n",
+            "flags": "AD",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2047"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2038"
+                }
+            ]
+        },
+        {
+            "vnum": "2040",
+            "name": "Sisli maðara",
+            "description": "A chilling icy mist swirl about you.  The dampness and warmth has become\nbitter cold.  The walls of the cavern are several feet thick with ice\nhere.  An icy wind blows from the south.\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2041"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2048"
+                }
+            ]
+        },
+        {
+            "vnum": "2041",
+            "name": "Sisli maðara",
+            "description": "The temperature is a pleasant and mild here.  This is due to a warm wind\nblowing in from the east and a chilly breeze blowing in from the west.\nThe updrafts create bizarre icy-steamy mists which dance along the\nwalls.\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2042"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2040"
+                }
+            ]
+        },
+        {
+            "vnum": "2042",
+            "name": "Sis maðarasý",
+            "description": "A warm wind blows in from the east.  The air is still stifling hot in\nhere despite the breeze.  The mist seems thick enough to be alive. . .\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2033"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2043"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2041"
+                }
+            ]
+        },
+        {
+            "vnum": "2043",
+            "name": "Sis þelalesi",
+            "description": "River of hot mist pour down in a cascade from a hole in the cavern.  It\nfalls like water down from the heights like a waterfall and creates\nbeautiful swirls.  It causes a hot wind to flow west.\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2042"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "hole height waterfall cascade",
+                    "description": "The hole is much too high up for you to reach.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2044",
+            "name": "Rengarenk devasa tünel",
+            "description": "The tunnel leads north and south.  To the south there is an odd\ntwinkling phenomenon.\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2034"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2050"
+                }
+            ]
+        },
+        {
+            "vnum": "2045",
+            "name": "Issýz yýkýntýlar",
+            "description": "Several mausoleums used to grace the way here but these have been\ndefiled. And most have been torn down and burned by looters. Some still\nseem to be intact to the south.  To the northwest is a seeming field of\ntombs of soldiers, now a battleground for the undead.\n",
+            "flags": "AD",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2051"
+                }
+            ]
+        },
+        {
+            "vnum": "2046",
+            "name": "Müdürün bölmesi",
+            "description": "The undertaker, the historian and the curator used to be here. Now they\ntoo have joined the legions of the undead.  From the looks of the place\nthey seem to have starved to death.  Rickety stairs head down into a\nsort of basement.\n",
+            "flags": "AD",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2047"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2052"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "stairs basement",
+                    "description": "Surprisingly the stairs look sturdy enough.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "2047",
+            "name": "Taze mezarlar",
+            "description": "Graves of recent casualties lie here.  Even the most recent don't seem to\nhave been left undisturbed.  You hear sounds of digging in progress\nfurther to the south.\n",
+            "flags": "AD",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2039"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2053"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2046"
+                }
+            ]
+        },
+        {
+            "vnum": "2048",
+            "name": "Kývrýlan maðara",
+            "description": "The way twist this way and that and its all you can do to keep your head\nfrom spinning.  The air is very cold here and layers of ice on the wall.\nThe sounds of metal on ice echo through the cavern. A side passage leads\neast and the main passage goes north and south.\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2040"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2049"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2056"
+                }
+            ]
+        },
+        {
+            "vnum": "2049",
+            "name": "Þerit tüneli",
+            "description": "The walls of the tunnels have many brilliant colors in them from the\nvarious veins of crystals running in them.  An odd twinkling comes from\nthe east.\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2050"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2048"
+                }
+            ]
+        },
+        {
+            "vnum": "2050",
+            "name": "Prizmatik maðara",
+            "description": "The roof of this cave peaks over a hundred feet high making it one of\nthe biggest in the catacombs.  Crystals of every color cast prismatic\nsprays of light everywhere.  The light from your lamp causes almost a\nblinding flare of brilliance as more light is added to the multi-colored\ntwinkling phenomenon that exists here.  This is also the lair of the\nfabled and feared Prism Dragon.\n",
+            "flags": "D",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2044"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2058"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2057"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2049"
+                }
+            ]
+        },
+        {
+            "vnum": "2051",
+            "name": "Yýkýlmýþ anýt",
+            "description": "A monument to a famous king once stood here. Not much is left to even\nsignify that is was here at all.  A building of some sort can be entered\nthrough a basement to the east.  The southern gate of the grounds is to\nthe south.\n",
+            "flags": "AD",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2045"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2052"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2054"
+                }
+            ]
+        },
+        {
+            "vnum": "2052",
+            "name": "Bodrum",
+            "description": "Its dark and it smells like. ...BATS down here!  All you see is a swirl\nof the darkness and lots of scratching bats madly flailing around. A set\nof stairs go up into the building and a broken window leads west.\n",
+            "flags": "AD",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2051"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2046"
+                }
+            ]
+        },
+        {
+            "vnum": "2053",
+            "name": "Taze mezarlar",
+            "description": "The graves here seem very recent.  You notice many signs of digging and\ndefilement.  There are piles of fresh bodies here awaiting burial.  A\nstrange sense of evil magic from the south makes the hairs on the back\nof your neck to stand on end!\n",
+            "flags": "AD",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2047"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2055"
+                }
+            ]
+        },
+        {
+            "vnum": "2054",
+            "name": "Güney geçidi",
+            "description": "A rusty gate here no longer keeps anyone out or in.  You see a lonely\nE/W passage to the south.  A little used trail winds east through a\ncrack in the wall.\n",
+            "flags": "AD",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2051"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2066"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2059"
+                }
+            ]
+        },
+        {
+            "vnum": "2055",
+            "name": "Ölülerin dehþet manzarasý",
+            "description": "An army of undead creatures of all types are lined up patiently. Their\nleader is an evil demonoid necromancer.  His plans to use his army of\nundead to take over the world seem about ready to get underway.\n",
+            "flags": "AD",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2053"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2062"
+                }
+            ]
+        },
+        {
+            "vnum": "2056",
+            "name": "Kývrýlan geçit",
+            "description": "The passage bends north and east here.  To the east your not certain\nwhat lies ahead due to all the twists and turns you've made.  To the\nnorth is seems cold.\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2048"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2057"
+                }
+            ]
+        },
+        {
+            "vnum": "2057",
+            "name": "Maðara kesiþmesi",
+            "description": "A little-used cavern enters from the south. A passage twists away to\nthe west.  An odd twinkling comes from the cave to the north.\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2050"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2066"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2056"
+                }
+            ]
+        },
+        {
+            "vnum": "2058",
+            "name": "Kimsesiz tünel",
+            "description": "Something indescribable makes you feel lonesome and sad here. Its just\na feeling you get from this tunnel.  The tunnel east and west.\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2059"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2050"
+                }
+            ]
+        },
+        {
+            "vnum": "2059",
+            "name": "Kimsesiz tünel",
+            "description": "Something indescribable makes you feel lonesome and sad here. You see a\ngate to a burial ground to the north.  This lonesome tunnel sighs along\nwest and east.\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2054"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2060"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2058"
+                }
+            ]
+        },
+        {
+            "vnum": "2060",
+            "name": "Kimsesiz tünelde yol ayrýmý",
+            "description": "Something indescribable makes you feel lonesome and sad here. The\ntunnel bends west and south.\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2061"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2059"
+                }
+            ]
+        },
+        {
+            "vnum": "2061",
+            "name": "Kimsesiz tünel",
+            "description": "Something indescribable makes you feel lonesome and sad here. The very\nwalls of the tunnel seems to groan.  to the north the tunnel bends and\neast is an intersection.\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2060"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2062"
+                }
+            ]
+        },
+        {
+            "vnum": "2062",
+            "name": "Kesiþme",
+            "description": "To the north you enter the burial grounds.  a trail of blood leads that\ndirection.  Also you feel an ominous sense of evil magic from there.\nThe tunnel to the west creaks and sighs as if alive.  To the south you\nsmell a hint of fresh air.\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2055"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2063"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2061"
+                }
+            ]
+        },
+        {
+            "vnum": "2063",
+            "name": "Tünel",
+            "description": "The tunnel heads north and south.  North you see an intersection and\nfar to the south you sense light and smell a fresh breeze.\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2062"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2064"
+                }
+            ]
+        },
+        {
+            "vnum": "2064",
+            "name": "Tünel",
+            "description": "The tunnel slopes noticeably down to the north and you sense the surface\ncould be reached to the south.\n",
+            "flags": "ADI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2063"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2065"
+                }
+            ]
+        },
+        {
+            "vnum": "2065",
+            "name": "Mezarlýðýn güney giriþi",
+            "description": "Through a trapdoor above you streams light.  Through a doorway to\nthe south streams darkness.  A message has been scrawled upon the wall\nhere.  The message reads:\n     Adventure for the strong yet calculating\n     Death for the weak and shallow\n     Treasure for the smart and lucky\n     Death for the stupid and accursed\nAn ancient Glyph above the entrance keeps monsters from wandering up\nfrom the catacombs.\n",
+            "flags": "C",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2064"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "floorboard board",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "6527"
+                }
+            ]
+        },
+        {
+            "vnum": "2066",
+            "name": "Meçhul dehliz",
+            "description": "Oh dear you seem to have lost your way.  You look back from whence you\ncame but there's no exit there anymore.  There are exits in other\ndirections but you have a feeling that you are hopelessly lost.\n",
+            "flags": "ACDI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2067"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2068"
+                }
+            ]
+        },
+        {
+            "vnum": "2067",
+            "name": "Meçhul dehliz",
+            "description": "Oh dear you seem to have lost your way.  You look back from whence you\ncame but there's no exit there anymore.  There are exits in other\ndirections but you have a feeling that you are hopelessly lost.\n",
+            "flags": "ACDI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2069"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2066"
+                }
+            ]
+        },
+        {
+            "vnum": "2068",
+            "name": "Meçhul dehliz",
+            "description": "Oh dear you seem to have lost your way.  You look back from whence you\ncame but there's no exit there anymore.  There are exits in other\ndirections but you have a feeling that you are hopelessly lost.\n",
+            "flags": "ACDI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2066"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2069"
+                }
+            ]
+        },
+        {
+            "vnum": "2069",
+            "name": "Meçhul dehliz",
+            "description": "Oh dear you seem to have lost your way.  You look back from whence you\ncame but there's no exit there anymore.  There are exits in other\ndirections but you have a feeling that you are hopelessly lost.\n",
+            "flags": "ACDI",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2067"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "2068"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "2001",
+            "arg2": "6",
+            "arg3": "2052",
+            "arg4": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "2001",
+            "arg2": "6",
+            "arg3": "2052",
+            "arg4": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "2001",
+            "arg2": "6",
+            "arg3": "2052",
+            "arg4": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "2013",
+            "arg2": "1",
+            "arg3": "2052",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2004",
+            "arg2": "9",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2001",
+            "arg2": "6",
+            "arg3": "2052",
+            "arg4": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "2001",
+            "arg2": "6",
+            "arg3": "2052",
+            "arg4": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "2001",
+            "arg2": "6",
+            "arg3": "2052",
+            "arg4": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "2002",
+            "arg2": "8",
+            "arg3": "2008",
+            "arg4": "8"
+        },
+        {
+            "command": "M",
+            "arg1": "2002",
+            "arg2": "8",
+            "arg3": "2008",
+            "arg4": "8"
+        },
+        {
+            "command": "M",
+            "arg1": "2002",
+            "arg2": "8",
+            "arg3": "2008",
+            "arg4": "8"
+        },
+        {
+            "command": "M",
+            "arg1": "2002",
+            "arg2": "8",
+            "arg3": "2008",
+            "arg4": "8"
+        },
+        {
+            "command": "M",
+            "arg1": "2002",
+            "arg2": "8",
+            "arg3": "2008",
+            "arg4": "8"
+        },
+        {
+            "command": "M",
+            "arg1": "2002",
+            "arg2": "8",
+            "arg3": "2009",
+            "arg4": "8"
+        },
+        {
+            "command": "M",
+            "arg1": "2002",
+            "arg2": "8",
+            "arg3": "2009",
+            "arg4": "8"
+        },
+        {
+            "command": "M",
+            "arg1": "2002",
+            "arg2": "8",
+            "arg3": "2010",
+            "arg4": "8"
+        },
+        {
+            "command": "M",
+            "arg1": "2003",
+            "arg2": "2",
+            "arg3": "2002",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2003",
+            "arg2": "2",
+            "arg3": "2064",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2004",
+            "arg2": "4",
+            "arg3": "2053",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "2004",
+            "arg2": "4",
+            "arg3": "2053",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "2004",
+            "arg2": "4",
+            "arg3": "2055",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "2004",
+            "arg2": "4",
+            "arg3": "2055",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "2006",
+            "arg2": "7",
+            "arg3": "2039",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2006",
+            "arg2": "7",
+            "arg3": "2040",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2006",
+            "arg2": "7",
+            "arg3": "2028",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2006",
+            "arg2": "7",
+            "arg3": "2019",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2006",
+            "arg2": "7",
+            "arg3": "2049",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2006",
+            "arg2": "7",
+            "arg3": "2033",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2006",
+            "arg2": "7",
+            "arg3": "2036",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2007",
+            "arg2": "4",
+            "arg3": "2035",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2009",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2007",
+            "arg2": "4",
+            "arg3": "2036",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2007",
+            "arg2": "4",
+            "arg3": "2037",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2009",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2007",
+            "arg2": "4",
+            "arg3": "2038",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2008",
+            "arg2": "12",
+            "arg3": "2003",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2009",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2016",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2008",
+            "arg2": "12",
+            "arg3": "2004",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2016",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2008",
+            "arg2": "12",
+            "arg3": "2005",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2008",
+            "arg2": "12",
+            "arg3": "2006",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2009",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2008",
+            "arg2": "12",
+            "arg3": "2009",
+            "arg4": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "2009",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2008",
+            "arg2": "12",
+            "arg3": "2009",
+            "arg4": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "2016",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2008",
+            "arg2": "12",
+            "arg3": "2009",
+            "arg4": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "2009",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2008",
+            "arg2": "12",
+            "arg3": "2016",
+            "arg4": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "2016",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2008",
+            "arg2": "12",
+            "arg3": "2016",
+            "arg4": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "2009",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2008",
+            "arg2": "12",
+            "arg3": "2016",
+            "arg4": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "2009",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2008",
+            "arg2": "12",
+            "arg3": "2023",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "2016",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2008",
+            "arg2": "12",
+            "arg3": "2023",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "2009",
+            "arg2": "2",
+            "arg3": "2039",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "2009",
+            "arg2": "2",
+            "arg3": "2047",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "2010",
+            "arg2": "6",
+            "arg3": "2016",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "2016",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2009",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2010",
+            "arg2": "6",
+            "arg3": "2016",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "2016",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2009",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2010",
+            "arg2": "6",
+            "arg3": "2016",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "2016",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2009",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2010",
+            "arg2": "6",
+            "arg3": "2023",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2009",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2016",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "2010",
+            "arg2": "6",
+            "arg3": "2018",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2016",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2009",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2010",
+            "arg2": "6",
+            "arg3": "2015",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2016",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "2009",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "M",
+            "arg1": "2011",
+            "arg2": "4",
+            "arg3": "2047",
+            "arg4": "4"
+        },
+        {
+            "command": "M",
+            "arg1": "2011",
+            "arg2": "4",
+            "arg3": "2053",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2011",
+            "arg2": "4",
+            "arg3": "2037",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2011",
+            "arg2": "4",
+            "arg3": "2036",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2012",
+            "arg2": "2",
+            "arg3": "2026",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "2014",
+            "arg2": "25",
+            "arg3": "12"
+        },
+        {
+            "command": "M",
+            "arg1": "2014",
+            "arg2": "1",
+            "arg3": "2055",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2011",
+            "arg2": "9",
+            "arg3": "11"
+        },
+        {
+            "command": "M",
+            "arg1": "2015",
+            "arg2": "1",
+            "arg3": "2025",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2010",
+            "arg2": "9",
+            "arg3": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "2001",
+            "arg2": "9",
+            "arg3": "0"
+        },
+        {
+            "command": "E",
+            "arg1": "2008",
+            "arg2": "9",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "2016",
+            "arg2": "1",
+            "arg3": "2050",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2012",
+            "arg2": "9",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2013",
+            "arg2": "9",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "2017",
+            "arg2": "1",
+            "arg3": "2030",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2003",
+            "arg2": "9",
+            "arg3": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "2002",
+            "arg2": "9",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "2006",
+            "arg2": "9",
+            "arg3": "17"
+        },
+        {
+            "command": "O",
+            "arg1": "2007",
+            "arg2": "1",
+            "arg3": "2032"
+        },
+        {
+            "command": "P",
+            "arg1": "2005",
+            "arg2": "1",
+            "arg3": "2007",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "2005",
+            "arg2": "9",
+            "arg3": "2033",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2015",
+            "arg2": "35",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "2005",
+            "arg2": "9",
+            "arg3": "2040",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "2015",
+            "arg2": "35",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "2005",
+            "arg2": "9",
+            "arg3": "2040",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "2015",
+            "arg2": "35",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "2005",
+            "arg2": "9",
+            "arg3": "2041",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "2015",
+            "arg2": "35",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "2005",
+            "arg2": "9",
+            "arg3": "2041",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "2015",
+            "arg2": "35",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "2005",
+            "arg2": "9",
+            "arg3": "2042",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "2015",
+            "arg2": "35",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "2005",
+            "arg2": "9",
+            "arg3": "2043",
+            "arg4": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "2015",
+            "arg2": "35",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "2005",
+            "arg2": "9",
+            "arg3": "2043",
+            "arg4": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "2015",
+            "arg2": "35",
+            "arg3": "17"
+        },
+        {
+            "command": "M",
+            "arg1": "2005",
+            "arg2": "9",
+            "arg3": "2043",
+            "arg4": "3"
+        },
+        {
+            "command": "E",
+            "arg1": "2015",
+            "arg2": "35",
+            "arg3": "17"
+        },
+        {
+            "command": "D",
+            "arg1": "2028",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "2032",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "2001",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "2065",
+            "arg2": "4",
+            "arg3": "1"
+        }
+    ],
+    "shops": [],
+    "specials": [
+        {
+            "vnum": "2007",
+            "spec_fun": "spec_cast_undead"
+        },
+        {
+            "vnum": "2009",
+            "spec_fun": "spec_cast_undead"
+        },
+        {
+            "vnum": "2011",
+            "spec_fun": "spec_cast_mage"
+        },
+        {
+            "vnum": "2013",
+            "spec_fun": "spec_cast_undead"
+        },
+        {
+            "vnum": "2014",
+            "spec_fun": "spec_cast_undead"
+        },
+        {
+            "vnum": "2016",
+            "spec_fun": "spec_breath_any"
+        },
+        {
+            "vnum": "2017",
+            "spec_fun": "spec_poison"
+        }
+    ],
+    "olimits": [
+        {
+            "vnum": "2005",
+            "limit": "1"
+        },
+        {
+            "vnum": "2008",
+            "limit": "10"
+        }
+    ],
+    "omprogs": [
+        {
+            "command": "O",
+            "vnum": "2005",
+            "progtype": "speech_prog",
+            "progname": "speech_prog_excalibur"
+        },
+        {
+            "command": "O",
+            "vnum": "2005",
+            "progtype": "wear_prog",
+            "progname": "wear_prog_excalibur"
+        },
+        {
+            "command": "O",
+            "vnum": "2005",
+            "progtype": "remove_prog",
+            "progname": "remove_prog_excalibur"
+        },
+        {
+            "command": "O",
+            "vnum": "2005",
+            "progtype": "death_prog",
+            "progname": "death_prog_excalibur"
+        },
+        {
+            "command": "O",
+            "vnum": "2005",
+            "progtype": "sac_prog",
+            "progname": "sac_prog_excalibur"
+        }
+    ]
+}

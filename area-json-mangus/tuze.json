@@ -1,0 +1,504 @@
+{
+    "area": {
+        "file": "tuze.are",
+        "name": "Türkçe",
+        "low_range": "90",
+        "high_range": "100",
+        "min_vnum": "510",
+        "max_vnum": "519",
+        "path": "4d 3k 2b 3k d 2k 2d k d 3k 8d 2y d 2y k",
+        "yonelim_iyi": "40",
+        "yonelim_yansiz": "40",
+        "yonelim_kem": "20"
+    },
+    "area_flag": {
+        "flag": "C"
+    },
+    "mobiles": [
+        {
+            "vnum": "510",
+            "name": "adalet tüze muhafýz",
+            "short_description": "adaletin kadim muhafýzý",
+            "long_description": "Tüze konaðýnýn ve adaletin kadim muhafýzý burada, kutsal olan mekanýn\ngiriþini koruyor.\n",
+            "description": "Yargýçlara ve ideallerine hizmet etmek için yýllarca eðitilmiþ bu adam,\nyenilmesi çok zor bir rakip gibi görünüyor. Yüzünde , geride býraktýðý þeref\ndolu yýllarýn kalýcý izleri var.\n",
+            "race": "human",
+            "act": "ABJKWe",
+            "affected_by": "DFHJVZc",
+            "level": "92"
+        },
+        {
+            "vnum": "511",
+            "name": "þifacý kabal tüze rahip ermiþ",
+            "short_description": "tüze rahibi",
+            "long_description": "Tüze kabalýnýn þifacýsý ve din adamý burada, neferlerin yüreklerini\ncesaretle dolduruyor.\n",
+            "description": "Bu yaþlý ermiþ, kutsal mabedinde Cabülka Cabülsa'nýn dengesi ve düzeni\niçin tanrýsýna dualar ediyor.\n",
+            "race": "human",
+            "act": "ABQVae",
+            "affected_by": "DFH",
+            "level": "90"
+        },
+        {
+            "vnum": "512",
+            "name": "katip yazman tüze",
+            "short_description": "yasa katibi",
+            "long_description": "Tüze kabalýnýn katibi burada Yargýçlarýn aðzýndan çýkacak kanunlarý\nyazýya dökmek için bekliyor.\n",
+            "description": "Orta yaþlý basit görünüþlü bu adam yargýçlarýn cümlelerini dikte etmek\niçin elinde kalemiyle bekliyor.\n",
+            "race": "human",
+            "act": "AGY",
+            "affected_by": "0",
+            "level": "15"
+        },
+        {
+            "vnum": "513",
+            "name": "arpçý ozan sanatçý",
+            "short_description": "bir arp sanatçýsý",
+            "long_description": "Bir arp sanatçýsý burada ruhuna huzur veren bir ezgi çalýyor.\n",
+            "description": "Ofcol doðumlu bu genç adam Yargýçlara hizmet etmesi için tutulmuþ\nyetenekli bir ozan.\n",
+            "race": "human",
+            "act": "AG",
+            "affected_by": "0",
+            "level": "11"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "510",
+            "name": "sandýk ýþýldayan",
+            "short_description": "ýþýldayan sandýk",
+            "description": "Odanýn kuzey duvarýndaki bir platformun üzerindeki sandýk gün ýþýðýyla parýldýyor.",
+            "material": "ivory",
+            "type": "container",
+            "extra_flags": "ORY",
+            "wear_flags": "P",
+            "values": "10 15 512 15 100",
+            "level": "60",
+            "weight": "1",
+            "cost": "20",
+            "condition": "P"
+        },
+        {
+            "vnum": "511",
+            "name": "tüze kitap yasa",
+            "short_description": "Tüze kitabý",
+            "description": "Tüze neferlerinin yasalarýnýn yazýldýðý kitap sarýldýðý ipek kumaþýn içinde burada duruyor.",
+            "material": "paper",
+            "type": "treasure",
+            "extra_flags": "O",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "60",
+            "weight": "1",
+            "cost": "100000",
+            "condition": "P"
+        },
+        {
+            "vnum": "512",
+            "name": "parþömen gizli rulo",
+            "short_description": "bir parþömen rulosu",
+            "description": "Rulo halinde bir parþömen burada duruyor.",
+            "material": "paper",
+            "type": "key",
+            "extra_flags": "ORY",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "40",
+            "weight": "4",
+            "cost": "0",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "kaðýt",
+                    "description": "Burada birþeyleri açmak için kullanýlan gizli kodlar yazýyor.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "513",
+            "name": "hamak",
+            "short_description": "gümüþi iplikten bir hamak",
+            "description": "Gümüþ ipliklerden örülmüþ konforlu bir hamak burada derin bir uyku vadediyor.",
+            "material": "silk",
+            "type": "furniture",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "3 1000 BHKN 150 150",
+            "level": "20",
+            "weight": "400",
+            "cost": "100000",
+            "condition": "P"
+        },
+        {
+            "vnum": "514",
+            "name": "heykel büst yargýç",
+            "short_description": "Büyücü bir tüze neferinin heykeli",
+            "description": "Efsuncu bir Yargýcýn heykeli elinde asasýyla giriþin yanýnda bekliyor.",
+            "material": "ivory",
+            "type": "furniture",
+            "extra_flags": "R",
+            "wear_flags": "P",
+            "values": "1 0 0 0 0",
+            "level": "40",
+            "weight": "60",
+            "cost": "20000",
+            "condition": "P"
+        },
+        {
+            "vnum": "515",
+            "name": "heykel büst savaþçý",
+            "short_description": "Savaþçý bir tüze neferinin heykeli",
+            "description": "Savaþçý bir Yargýcýn heykeli elinde heybetli kýlýcýyla giriþin yanýnda bekliyor.",
+            "material": "ivory",
+            "type": "furniture",
+            "extra_flags": "R",
+            "wear_flags": "P",
+            "values": "0 0 0 0 0",
+            "level": "40",
+            "weight": "40",
+            "cost": "20000",
+            "condition": "P"
+        },
+        {
+            "vnum": "516",
+            "name": "kürsü",
+            "short_description": "Baþyargýcýn kürsüsü",
+            "description": "Holdeki kalabalýða hitap edilmesi için buraya bir kürsü yerleþtirilmiþ.",
+            "material": "ivory",
+            "type": "furniture",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "1 0 0 0 0",
+            "level": "5",
+            "weight": "5",
+            "cost": "5",
+            "condition": "P"
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "510",
+            "name": "Tüze Konaðý'nýn Kapýlarý",
+            "description": "Ayaklarýnýn altýnda kalan dev sarayýn çatýsýnda, beklenmedik derecede\ngeniþ bir terastasýn. Rüzgar burada ayaklarýnýn konumunu tehdit edercesine\nhýzlý esiyor. Gri gökyüzünü dolduran yoðun bulutlarýn arasýndan yükselen dev\nkanat sesleri ve çýðlýklar huzursuzluk daðýtýyor. Kuzey yönünde gümüþ\nrenginde heybetli ahþap bir konak rüzgara karþý duruyor. Konaðýn dev adamant\nkapýlarý, önünde bekleyen muhafýzla hemen hemen ayný boyda. Konaðýn üstüne\nyerleþmiþ altýn terazi yontusu bulutlarýn arasýndan sýzan güneþ ýþýðýyla\nbulunduðun obsidyen terasý göz kamaþtýrýcý hale getiriyor.\n",
+            "flags": "DX",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "511"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "697"
+                }
+            ]
+        },
+        {
+            "vnum": "511",
+            "name": "Konaðýn Ön bahçesi",
+            "description": "Dev kapýlardan geçtiðinde, kendini beklenmedik derecede huzurlu bir\nbahçede buluyorsun. Buradaki gökyüzü açýk ve tatlý, serin bir meltem güneþin\nsýcak etkisini azaltýyor. Dýþarýdaki manzaranýn bir göz yanýlsamasý olmasý\nkuvvetle mümkün görünüyor. Bahçenin zemini bütünüyle çimlerle örülü ve yer\nyer ejderha þekilleri verilmiþ þimþir aðaçlarý dikkatini daðýtýyor. Gümüþ\nkonaðýn ahþap kapýlarý ardýna kadar açýk ve içeriden davetkar bir harp sesi\ngeliyor. Batýda küçük, gri mermerden yapýlmýþ bir tapýnak, doðuda ise\nbahçenin içine kurulmuþ hasýrdan bir çardak var.\n",
+            "flags": "DX",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "512"
+                },
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "514"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "510"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "513"
+                }
+            ]
+        },
+        {
+            "vnum": "512",
+            "name": "Tüze Konaðý'nýn Ana Holü",
+            "description": "Burasý Tüze Neferlerinin kadim ikametgahýnýn giriþ holü. Dev salonun\ntavanýnýn yüksekliði baþýný döndürüyor ve tam karþýndan yukarý doðru çýkan,\ngümüþ ipliklerle iþlenmiþ halýlarla kaplý geniþ merdivenler ileride ikiye\nayrýlarak üzerlerindekileri geniþ bir asma kata çýkartýyor. Mermer zemin,\nayný sanatla örülmüþ gri ejderha figürleri taþýyan kilimlerle kaplanmýþ.\nMekanýn havasýnda tek bir toz tanesi bile olmamasý, Yargýçlarýn temizlik ve\nbakým konusundaki hassasiyetlerini ortaya koyuyor. Yeþil ve kýrmýzý iþlemeli\nperdelerin arasýndaki geniþ pencereler holü gün ýþýðýyla dolduruyor. Saðýnda\nve solundaki odalarýn kapalý kapýlarýnýn ardýndan kaðýt hýþýrtýlarý\ndikkatini çekiyor.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "516"
+                },
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "511"
+                },
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "515"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "517"
+                }
+            ]
+        },
+        {
+            "vnum": "513",
+            "name": "Tüze Tapýnaðý",
+            "description": "Yargýçlarýn ibadethanesindesin. Nereden geldiði belli olmayan huzur\nverici bir su þýrýltýsý tapýnaðý dolduruyor. Mermer duvarlarda sembolize\nedilmiþ kusursuz ejderha figürleri gözlerini tavanýn tam ortasýndaki terazi\nminyatürüne dikmiþ görünüyorlar. Dualarýyla suyun melodisine uyum saðlayan\ndin adamý, üzerindeki terazi nakýþlarý ýþýkla parlayan cübbesinin içinde\nritmik hareketlerle seni selamlýyor.\n",
+            "flags": "DX",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "511"
+                }
+            ]
+        },
+        {
+            "vnum": "514",
+            "name": "Yargýçlarýn dinlence bölgesi",
+            "description": "Zorlu koþullarda çalýþarak Cabülka Cabülsa'ya hüküm veren Yargýçlarýn boþ\nzamanlarýný deðerlendirmek için geldikleri, bahçenin huzurlu bir köþesine\nkurulmuþ bir gölgeliðin altýnda buluyorsun kendini. Gölgeliðin tepesine\nasýlmýþ tuhaf, hoþ kokulu mor bir bitki çardaðýn içindeki havayý derin derin\nsolumaya deðer kýlýyor. Bu açýk hava cennetindeki herþey konak ahalisinin\nkonforu için hazýrlanmýþa benziyor.\n",
+            "flags": "DX",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "511"
+                }
+            ]
+        },
+        {
+            "vnum": "515",
+            "name": "Katip Odasý",
+            "description": "Burasý Yargýçlarýn hükümlerini ve buyruklarýný dikte ettirdikleri yer.\nDuvarlardaki asma raflarda dosyalanmýþ yüzlerce kaðýt rulosu ve mürekkep\nhokkalarý var. Odayý gün ýþýðýyla dolduran geniþ, açýk bir pencereden sýzan\nmeltem, odanýn ortasýndaki masanýn üzerindeki parþömenleri sana doðru\nuçuruyor.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "512"
+                }
+            ]
+        },
+        {
+            "vnum": "516",
+            "name": "Adalet Kütüphanesi",
+            "description": "4-5 metre yüksekliðinde bir tavana kadar uzanan geniþ kitaplýklarla dolu\nkare þeklinde bir kütüphanedesin. Odanýn ortasýnda 2 masa ve 6 sandalye\nduruyor ve masanýn üzerinde açýk kalmýþ kalýn ciltli kitaplar var. Cabülka\nCabülsanýn tüze daðýtanlarýnýn irfanýnýn kaynaðýnýn bu odada olduðu\nfazlasýyla belli. Masanýn üstünde açýk halde duran geniþ bir parþömen\ndikkatini çekiyor.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "512"
+                }
+            ]
+        },
+        {
+            "vnum": "517",
+            "name": "Asma Kat",
+            "description": "Geniþliði 5 metreden fazla olan merdivenlerden yukarý, mermer\ntrabzanlarla çevrelenmiþ gri tonda dekore edilmiþ bir asma kattasýn. Buradan\naþaðýdaki geniþ hol net bir þekilde görülüyor ve fildiþinden yapýlmýþ bir\nkürsü holde bekleyen kalabalýða hitap edecek olanýn heybetine heybet katmak\niçin trabzanlarýn sonuna yerleþtirilmiþ. Durduðun yerden yukarý baktýðýnda\ntepedeki camlý kubbe ve arkasýndaki dev altýn terazi yontusunun parlaklýðý\ngözlerini alýyor. Mekanýn akustiðindeki kusursuzluðu nefes sesinin tüm\nkonaðý doldurmasýyla farkediyorsun. Kuzeyindeki kapýnýn iki yanýna\nkonuþlanmýþ heykeller geniþ iþlemeli kemerli giriþi koruyormuþ izlenimi\nveriyorlar.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "518"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "512"
+                }
+            ]
+        },
+        {
+            "vnum": "518",
+            "name": "Adalet Mabedi",
+            "description": "Yargýçlarýn toplantý odasýndasýn. Odanýn tam ortasýnda altýgen þekilli\nahþap iþlemeli bir masa ve çevresinde 5 adet gri valen aðacýndan koltuklar\nvar. Tam karþýnda kalan yerde ise bir tahtý andýran geniþ ve heybetli bir\nkoltuk duruyor. Ahþap duvarlar gümüþ ejderha motifleriyle kusursuzca\ndokunmuþ kilimlerle kaplý. Þaþalý koltuðun arkasýnda, üzerine güneþ ýþýðý\nvuran bir sandýðýn varlýðý kalbine heyecan veriyor. Sandýðýn tepesindeki,\nodayý duvardan duvara kateden taç, metal iþlemeli bir yazýyý gözler önüne\nseriyor. \"Þan ver adaletin zikrine!\"\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "517"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "510",
+            "arg2": "1",
+            "arg3": "510",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "512",
+            "arg2": "1",
+            "arg3": "20"
+        },
+        {
+            "command": "M",
+            "arg1": "511",
+            "arg2": "1",
+            "arg3": "513",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "513",
+            "arg2": "0",
+            "arg3": "514"
+        },
+        {
+            "command": "M",
+            "arg1": "513",
+            "arg2": "1",
+            "arg3": "514",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "512",
+            "arg2": "1",
+            "arg3": "515",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "515",
+            "arg2": "0",
+            "arg3": "517"
+        },
+        {
+            "command": "O",
+            "arg1": "514",
+            "arg2": "0",
+            "arg3": "517"
+        },
+        {
+            "command": "O",
+            "arg1": "516",
+            "arg2": "0",
+            "arg3": "517"
+        },
+        {
+            "command": "O",
+            "arg1": "510",
+            "arg2": "0",
+            "arg3": "518"
+        },
+        {
+            "command": "P",
+            "arg1": "511",
+            "arg2": "1",
+            "arg3": "510",
+            "arg4": "1"
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "510",
+            "spec_fun": "spec_fight_enforcer"
+        },
+        {
+            "vnum": "511",
+            "spec_fun": "spec_cast_cabal"
+        }
+    ],
+    "omprogs": [
+        {
+            "command": "O",
+            "vnum": "511",
+            "progtype": "get_prog",
+            "progname": "get_prog_cabal_item"
+        },
+        {
+            "command": "O",
+            "vnum": "511",
+            "progtype": "sac_prog",
+            "progname": "sac_prog_cabal_item"
+        },
+        {
+            "command": "M",
+            "vnum": "510",
+            "progtype": "greet_prog",
+            "progname": "greet_prog_ruler"
+        }
+    ],
+    "practicers": [
+        {
+            "vnum": "510",
+            "practicer": "group_cabal"
+        }
+    ]
+}

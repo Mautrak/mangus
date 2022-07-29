@@ -1,0 +1,2661 @@
+{
+    "area": {
+        "file": "goblin_kalesi.are",
+        "name": "Türkçe",
+        "low_range": "10",
+        "high_range": "20",
+        "min_vnum": "29000",
+        "max_vnum": "29000",
+        "path": "3g 2b y",
+        "yonelim_iyi": "10",
+        "yonelim_yansiz": "20",
+        "yonelim_kem": "70"
+    },
+    "mobiles": [
+        {
+            "vnum": "29001",
+            "name": "goblin kralý grumm",
+            "short_description": "grumm",
+            "long_description": "Goblin Kralý Grumm seni gördüðü için pek mutlu deðil!\n",
+            "description": "Kel, kilolu bir goblin görüyorsun fakat çokda güçlü olsa gerek.\n",
+            "race": "goblin",
+            "act": "ABFHT",
+            "affected_by": "Jb",
+            "level": "19"
+        },
+        {
+            "vnum": "29002",
+            "name": "goblin þamaný",
+            "short_description": "þaman",
+            "long_description": "Yazýsýndan kalkýp odaya girip onu bölmeye cürret eden kiþiye(Sana)\nsinirle bakýyor.\n",
+            "description": "Yüzü ekþi ve soluk bir goblin. Ýþine kendini çok verdiðini düþündürüyor.\n",
+            "race": "goblin",
+            "act": "ABFHQ",
+            "affected_by": "J",
+            "level": "15"
+        },
+        {
+            "vnum": "29003",
+            "name": "goblin büyücü",
+            "short_description": "goblin",
+            "long_description": "Goblin büyücüsü onu rahatsýz etmenden dolayý bir hayli sinirli.\n",
+            "description": "Goblin büyücüsü uzun süredir bu an için çalýþmaktaydý, ve SEN bu aný\nMAHFETTÝN! GERÇEKTENDE çok sinirli bir þekilde sana bakýyor! Goblin\nkalesindeki diðer goblinlerden oldukça kýsa olduðunu görüyorsun.\n",
+            "race": "goblin",
+            "act": "ABFHR",
+            "affected_by": "BCDEFJVd",
+            "level": "15"
+        },
+        {
+            "vnum": "29004",
+            "name": "þampiyon goblin knarl",
+            "short_description": "knarl",
+            "long_description": "Önünde gördüðün en güçlü goblin duruyor.\n",
+            "description": "Knarl sana sinsice sýrýtýyor.\n",
+            "race": "goblin",
+            "act": "ABFT",
+            "affected_by": "FJPVb",
+            "level": "20"
+        },
+        {
+            "vnum": "29005",
+            "name": "goblin muhafýz",
+            "short_description": "muhafýz goblin",
+            "long_description": "Goblin muhafýzý þüpheli bir þekilde seni süzüyor.\n",
+            "description": "Averaj goblinlerden daha geniþ bir gobline bakýyorsun. Etrafýndaki diðer\ngoblinlere kabadayýlýk ediyor.\n",
+            "race": "goblin",
+            "act": "ABFT",
+            "affected_by": "J",
+            "level": "12"
+        },
+        {
+            "vnum": "29006",
+            "name": "muhafýz goblin",
+            "short_description": "goblin muhafýzý",
+            "long_description": "Goblin muhafýzý burada sana þüpheli bir þekilde bakýyor.\n",
+            "description": "Averaj goblinlerden daha geniþ bir gobline bakýyorsun. Etrafýndaki diðer\ngoblinlere kabadayýlýk ediyor.\n",
+            "race": "goblin",
+            "act": "AFT",
+            "affected_by": "J",
+            "level": "13"
+        },
+        {
+            "vnum": "29007",
+            "name": "goblin",
+            "short_description": "goblin",
+            "long_description": "Goblin burada boþ boþ dolanýyor.\n",
+            "description": "Çirkin, yeþil ve iðrenç bir þekilde kokan birisi. Daha ne söylenebilirki?\n",
+            "race": "goblin",
+            "act": "AFT",
+            "affected_by": "J",
+            "level": "12"
+        },
+        {
+            "vnum": "29008",
+            "name": "goblin mahkum",
+            "short_description": "goblin mahkum",
+            "long_description": "Goblin burada duvara zincirlenmiþ duruyor.\n",
+            "description": "Derisinin daha mavimsi olduðunu görüyorsun, belkide baþka bir kabileye\nbaðlý.\n",
+            "race": "goblin",
+            "act": "AT",
+            "affected_by": "J",
+            "level": "3"
+        },
+        {
+            "vnum": "29009",
+            "name": "cüzzamlý goblin",
+            "short_description": "goblin",
+            "long_description": "Bu goblin çok hasta gözüküyor.\n",
+            "description": "Sana baðýrýyor! Bana bakma! ! Aaargh... Dýþlanmýþ cüzzamlý ve pis...\n",
+            "race": "goblin",
+            "act": "ACFGS",
+            "affected_by": "FJPQXbd",
+            "level": "15"
+        },
+        {
+            "vnum": "29010",
+            "name": "goblin",
+            "short_description": "goblin",
+            "long_description": "Goblin burada, patates doðruyor.\n",
+            "description": "Çirkin, yeþil ve iðrenç bir þekilde kokan birisi. Daha ne söylenebilirki?\n",
+            "race": "goblin",
+            "act": "ABFT",
+            "affected_by": "J",
+            "level": "14"
+        },
+        {
+            "vnum": "29011",
+            "name": "zayýf iblis",
+            "short_description": "zayýf iblis",
+            "long_description": "Karanlýk, boynuzlu bir figür pentagramýn içinde hapsolmuþ.\n",
+            "description": "Gerçektende pentagramdan çýkmak istiyor; belkide yardým etmelisin ona?\n",
+            "race": "human",
+            "act": "ABG",
+            "affected_by": "Hb",
+            "level": "20"
+        },
+        {
+            "vnum": "29012",
+            "name": "dansöz goblin britta",
+            "short_description": "danseden bir kýz",
+            "long_description": "Güzel diþi goblin etrafýndakileri etkilemeye çalýþýyor.\n",
+            "description": "Bu kýz gerçektende güzel, goblin olsa bile.\n",
+            "race": "goblin",
+            "act": "ABFT",
+            "affected_by": "J",
+            "level": "9"
+        },
+        {
+            "vnum": "29013",
+            "name": "soytarý goblin",
+            "short_description": "soytarý goblin",
+            "long_description": "Tiksindirici bu küçük goblin seninle dalga geçmeye çalýþýyor.\n",
+            "description": "Üzerinde ziller olan,aptal, yeþil bir kostüm giyiyor. Ondan nefret\nediyorsun.\n",
+            "race": "goblin",
+            "act": "AFT",
+            "affected_by": "J",
+            "level": "11"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "29001",
+            "name": "zýrhlý goblin ceketi",
+            "short_description": "zýrhlý goblin ceketi",
+            "description": "bir zýrhlý goblin ceketi yerde duruyor.",
+            "material": "bone",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AD",
+            "values": "3 4 4 0 0",
+            "level": "10",
+            "weight": "100",
+            "cost": "849",
+            "condition": "G"
+        },
+        {
+            "vnum": "29002",
+            "name": "zýrhlý goblin yeleði",
+            "short_description": "zýrhlý goblin yeleði",
+            "description": "bir zýrhlý goblin yeleði yerde duruyor",
+            "material": "bone",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AD",
+            "values": "3 4 4 0 0",
+            "level": "9",
+            "weight": "90",
+            "cost": "530",
+            "condition": "G"
+        },
+        {
+            "vnum": "29003",
+            "name": "zýrhlý goblin eteði",
+            "short_description": "zýrhlý ve uzun goblin eteði",
+            "description": "zýrhlý ve uzun bir goblin eteði yerde duruyor",
+            "material": "bone",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AF",
+            "values": "3 5 4 0 0",
+            "level": "11",
+            "weight": "120",
+            "cost": "500",
+            "condition": "G"
+        },
+        {
+            "vnum": "29004",
+            "name": "zýrhlý giysi kolu",
+            "short_description": "bir çift zýrhlý giysi kolu",
+            "description": "bir çift zýrhlý giysi kolu yerde duruyor",
+            "material": "bone",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AI",
+            "values": "3 4 4 0 0",
+            "level": "8",
+            "weight": "60",
+            "cost": "400",
+            "condition": "G"
+        },
+        {
+            "vnum": "29005",
+            "name": "zýrhlý goblin gömleði",
+            "short_description": "zýrhlý goblin gömleði",
+            "description": "zýrhlý goblin gömleði yerde duruyor.",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AD",
+            "values": "5 4 5 0 0",
+            "level": "12",
+            "weight": "180",
+            "cost": "800",
+            "condition": "G"
+        },
+        {
+            "vnum": "29006",
+            "name": "saðlam zýrhlý goblin eteði",
+            "short_description": "saðlam zýrhlý goblin eteði",
+            "description": "saðlam zýrhlý goblin eteði yerde duruyor",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AF",
+            "values": "5 4 5 0 0",
+            "level": "12",
+            "weight": "100",
+            "cost": "800",
+            "condition": "G"
+        },
+        {
+            "vnum": "29007",
+            "name": "saðlam zýrhlý goblin eldiveni",
+            "short_description": "bir çift saðlam zýrhlý goblin eldiveni",
+            "description": "bir çift saðlam zýrhlý goblin eldiveni yerde duruyor.",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AH",
+            "values": "5 4 5 0 0",
+            "level": "10",
+            "weight": "40",
+            "cost": "700",
+            "condition": "P"
+        },
+        {
+            "vnum": "29008",
+            "name": "saðlam zýrhlý goblin giysi kolu",
+            "short_description": "bir çift saðlam zýrhlý goblin giysi kolu",
+            "description": "bir çift saðlam zýrhlý goblin giysi kolu yerde duruyor.",
+            "material": "steel",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AI",
+            "values": "5 4 5 0 0",
+            "level": "10",
+            "weight": "80",
+            "cost": "390",
+            "condition": "P"
+        },
+        {
+            "vnum": "29009",
+            "name": "goblin kral tacý",
+            "short_description": "Goblin kralýnýn muhteþem tacý",
+            "description": "Sýradan gümüþ bir tac burada duruyor. Oldukça eski görünüyor.",
+            "material": "silver",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AE",
+            "values": "4 6 5 3 0",
+            "level": "16",
+            "weight": "100",
+            "cost": "2000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "21"
+                }
+            ]
+        },
+        {
+            "vnum": "29010",
+            "name": "grumm balta",
+            "short_description": "Grumm ýn muhteþem savaþ baltasý",
+            "description": "oldukça geniþ, iki elli ve çift býçaklý balta önünde duruyor",
+            "material": "iron",
+            "type": "weapon",
+            "extra_flags": "ABEGLRY",
+            "wear_flags": "AN",
+            "values": "axe 5 5 slash CDF",
+            "level": "18",
+            "weight": "140",
+            "cost": "5000",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "3"
+                },
+                {
+                    "location": "19",
+                    "modifier": "4"
+                }
+            ]
+        },
+        {
+            "vnum": "29011",
+            "name": "boynuzlu siyah goblin miðferi",
+            "short_description": "boynuzlu siyah goblin miðferi",
+            "description": "boynuzlu siyah goblin miðferi burada duruyor",
+            "material": "iron",
+            "type": "armor",
+            "extra_flags": "0",
+            "wear_flags": "AE",
+            "values": "3 5 4 0 0",
+            "level": "9",
+            "weight": "30",
+            "cost": "450",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "3",
+                    "modifier": "-1"
+                },
+                {
+                    "location": "19",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "29012",
+            "name": "granit kolluk",
+            "short_description": "bir çift keskin granit kolluk",
+            "description": "bir çift keskin granit kolluk görüyorsun",
+            "material": "stone",
+            "type": "armor",
+            "extra_flags": "GM",
+            "wear_flags": "AI",
+            "values": "6 6 9 2 0",
+            "level": "15",
+            "weight": "251",
+            "cost": "1900",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "5",
+                    "modifier": "1"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "arm guards armguards granite",
+                    "description": "These heavy armguards have been carved from the rock of these caverns.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29013",
+            "name": "kirli yeþil pelerin",
+            "short_description": "kirli yeþil pelerin",
+            "description": "kirli yeþil pelerin yerde duruyor.",
+            "material": "cloth",
+            "type": "armor",
+            "extra_flags": "G",
+            "wear_flags": "AK",
+            "values": "1 2 1 1 0",
+            "level": "10",
+            "weight": "30",
+            "cost": "1650",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "3",
+                    "modifier": "1"
+                },
+                {
+                    "location": "2",
+                    "modifier": "-1"
+                },
+                {
+                    "location": "12",
+                    "modifier": "28"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "Filthy green cape.",
+                    "description": "You see a cape ridden with filth and vermin. You're not going to WEAR it are\nyou?\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29014",
+            "name": "kýrýk taþlý hançer",
+            "short_description": "kýrýk taþ",
+            "description": "sivri uçlu kýrýk bir taþ yerde duruyor",
+            "material": "stone",
+            "type": "weapon",
+            "extra_flags": "AG",
+            "wear_flags": "AN",
+            "values": "dagger 4 4 stab D",
+            "level": "12",
+            "weight": "10",
+            "cost": "1100",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "3"
+                },
+                {
+                    "location": "18",
+                    "modifier": "-1"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "A stone shard",
+                    "description": "Looks like it would make a good weapon.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29015",
+            "name": "kýsa goblin kýlýç",
+            "short_description": "kýsa goblin kýlýcý",
+            "description": "normal bir kýsa kýlýçtan daha aðýr görünüyor, ama yinede biraz yaðlanma yapýlabilinir.",
+            "material": "iron",
+            "type": "weapon",
+            "extra_flags": "G",
+            "wear_flags": "AN",
+            "values": "sword 4 4 slash D",
+            "level": "12",
+            "weight": "50",
+            "cost": "900",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "1"
+                }
+            ]
+        },
+        {
+            "vnum": "29016",
+            "name": "köpüren siyah iksir",
+            "short_description": "köpüren siyah iksir",
+            "description": "köpüren siyah iksir görüyorsun",
+            "material": "glass",
+            "type": "potion",
+            "extra_flags": "BG",
+            "wear_flags": "AO",
+            "values": "15 'heal' 'curse' 'heal' 'remove curse'",
+            "level": "10",
+            "weight": "20",
+            "cost": "10000",
+            "condition": "G",
+            "extra_descriptions": [
+                {
+                    "keyword": "frothing black potion",
+                    "description": "It's moving. You can see little bugs and other chunks floating in it.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29017",
+            "name": "çift-elli uzun kýlýç",
+            "short_description": "çift-elli uzun kýlýç",
+            "description": "çift-elli uzun bir kýlýç burada býrakýlmýþ",
+            "material": "iron",
+            "type": "weapon",
+            "extra_flags": "AG",
+            "wear_flags": "AN",
+            "values": "sword 4 6 slash DF",
+            "level": "20",
+            "weight": "50",
+            "cost": "7900",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "2"
+                },
+                {
+                    "location": "19",
+                    "modifier": "5"
+                },
+                {
+                    "location": "4",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "5",
+                    "modifier": "-2"
+                }
+            ]
+        },
+        {
+            "vnum": "29018",
+            "name": "þaman goblinin anahtarý",
+            "short_description": "þaman goblinin anahtarý",
+            "description": "eski püskü bir anahtar burada unutulmuþ.",
+            "material": "iron",
+            "type": "key",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "0 0 0 0 0",
+            "level": "5",
+            "weight": "10",
+            "cost": "0",
+            "condition": "G"
+        },
+        {
+            "vnum": "29019",
+            "name": "goblin kral anahtar",
+            "short_description": "goblin kral'ýnýn anahtarý",
+            "description": "eski püskü bir anahtar burada býrakýlmýþ",
+            "material": "iron",
+            "type": "key",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "0 0 0 0 0",
+            "level": "5",
+            "weight": "10",
+            "cost": "0",
+            "condition": "G"
+        },
+        {
+            "vnum": "29020",
+            "name": "anahtar büyücü goblin",
+            "short_description": "goblin büyücüsü'nün anahtarý",
+            "description": "eski püskü bir anahtar burada duruyor.",
+            "material": "iron",
+            "type": "key",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "0 0 0 0 0",
+            "level": "5",
+            "weight": "10",
+            "cost": "0",
+            "condition": "G"
+        },
+        {
+            "vnum": "29021",
+            "name": "anahtar zindan goblin",
+            "short_description": "goblin zindanýnýn anahtarý",
+            "description": "Eski bir anahtar burada býrakýlmýþ.",
+            "material": "iron",
+            "type": "key",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "0 0 0 0 0",
+            "level": "5",
+            "weight": "10",
+            "cost": "0",
+            "condition": "G"
+        },
+        {
+            "vnum": "29022",
+            "name": "wardamir kayýp kaya",
+            "short_description": "Wardamir'in kayýp kayasý",
+            "description": "Müthiþ! Türlü destanlarda bahsi geçen kayýp kaya odanýn ortasýnda duruyor.",
+            "material": "stone",
+            "type": "container",
+            "extra_flags": "ABGLRY",
+            "wear_flags": "AQ",
+            "values": "600 0 0 100 10",
+            "level": "20",
+            "weight": "20",
+            "cost": "12300",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "24",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "22",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "21",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "20",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-2"
+                }
+            ]
+        },
+        {
+            "vnum": "29023",
+            "name": "yüzük britta",
+            "short_description": "Britta'nýn yüzüðü",
+            "description": "Neredeyse farketmediðin altýn küçük bir yüzük.",
+            "material": "gold",
+            "type": "treasure",
+            "extra_flags": "G",
+            "wear_flags": "AB",
+            "values": "0 0 0 0 0",
+            "level": "9",
+            "weight": "10",
+            "cost": "1100",
+            "condition": "G",
+            "affects_a": [
+                {
+                    "location": "12",
+                    "modifier": "21"
+                },
+                {
+                    "location": "3",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "29024",
+            "name": "kitaplýk",
+            "short_description": "kitaplýk",
+            "description": "geniþ ahþap kitaplýk",
+            "material": "wood",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "100 0 0 50 72",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "G",
+            "extra_descriptions": [
+                {
+                    "keyword": "Bookcase",
+                    "description": "Its a rather large wooden bookcase. There are many books in it, but they\nare all written in GOBLIN!\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29025",
+            "name": "masa",
+            "short_description": "mahun aðacýndan yapýlmýþ bir masa",
+            "description": "mahun aðacýndan yapýlmýþ bir masa burada duruyor.",
+            "material": "wood",
+            "type": "container",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "100 0 0 50 72",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "G",
+            "extra_descriptions": [
+                {
+                    "keyword": "Desk",
+                    "description": "This is a beautiful desk.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29026",
+            "name": "taht",
+            "short_description": "Kral Grumm'ýn Tahtý",
+            "description": "Kral Grumm'ýn Tahtý burada",
+            "material": "wood",
+            "type": "furniture",
+            "extra_flags": "A",
+            "wear_flags": "0",
+            "values": "2 200 ABCDEFGHIJKL 200 200",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "Throne",
+                    "description": "This throne must have been left behind by the dwarves. It's inlaid with\nmany fine gems and precious metals. Unfortunately, the largest of these have\nlong since been scavenged.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29027",
+            "name": "masa",
+            "short_description": "yemek masasý",
+            "description": "Yemek masasý burada",
+            "material": "wood",
+            "type": "furniture",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "table",
+                    "description": "This is by far the finest table you have ever seen. It stretches clear into\nthe north end of the Great Hall.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29028",
+            "name": "masa",
+            "short_description": "yemek masasý",
+            "description": "Yemek masasý burada",
+            "material": "wood",
+            "type": "furniture",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 0 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "table",
+                    "description": "This is by far the finest table you have ever seen. It stretches clear into\nthe south end of the Great Hall.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29029",
+            "name": "altýn",
+            "short_description": "altýn yýðýný",
+            "description": "altýn yýðýný burada parýldýyor.",
+            "material": "gold",
+            "type": "money",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "0 75 0 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "29030",
+            "name": "aðýr demir topuz",
+            "short_description": "aðýr demirle dövülmüþ topuz",
+            "description": "aðýr demirle dövülmüþ topuz burada duruyor.",
+            "material": "iron",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "mace 4 5 pound 0",
+            "level": "11",
+            "weight": "150",
+            "cost": "790",
+            "condition": "G"
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "29001",
+            "name": "Goblin Kalesinin Giriþi",
+            "description": "Katý granitlerin keskinleþtirdiði büyük bir maðaraya adýmýný atýyorsun.\nÝlk farkettiðin þey bulunduðun yerde etkisini süren pis koku oluyor. Savaþ\nzýrhlarýný kuþanmýþ goblinler her taraftalar. Ýçinden bir düþünce belkide\ngoblinlerin yakýnda Selenge'ye saldýrabileceðini söylüyor, belkide güney\nkapýsýnýn dýþýnda gördüðün goblinlerinde bir etkisi olabilir bu düþünceye\nvarmanda. Her ne amaç güderlerse gütsünler, senin buna bir son vermen\ngerekiyor. Doðuya, batýya uzanan koridorlar vede güneye doðru geniþ kapýlar\ngörmektesin. Burada parlayan küçük bir tablet bulunmakta.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D5",
+                    "description": "Arka sokak\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3044"
+                },
+                {
+                    "door": "D1",
+                    "description": "Kalede bir koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29019"
+                },
+                {
+                    "door": "D2",
+                    "description": "Geniþ hol'ün Kuzey ucu\n",
+                    "keyword": "Geniþ Kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29002"
+                },
+                {
+                    "door": "D3",
+                    "description": "Kalede bir koridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29018"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "küçük tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\nBu bölge 96 yýlýnýn haziran ayýnýn sýcak bir gecesi düzeltildi, onarýldý ve\nuyarlandý + ++++++++ + + DN. Ölmeye hazýrlan ++ Bu harita Siradril\ntarafýndan türkçeye çevrilmiþtir. + + +\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "29002",
+            "name": "Geniþ Hol'ün Kuzey Ucu",
+            "description": "Bu kubbeli maðara etrafýnda gördüðün goblin türünün muazzam bir eseridir.\nKeskin granit bloklarýndan yapýlmýþ duvarlar her blok baþý 1 ton dan daha\naðýr olsa gerek. Kaygan kaya yukarýdaki mükemmel yarý daire þeklindeki savaþ\nresmini aydýnlatýyor. Duvarlarda çeþitli resimler ve çizimler duruyor, fakat\ngoblinlerin ellerine geçtiðinden beri onarýlmadýðýda apaçýk ortada olsa\ngerek. Mahun aðacýndan yapýlmýþ uzun bir yemek masasý yaklaþýk 20 metrelik\nuzunluðuyla karþýnda duruyor. Güneh tarafta Geniþ Hol'ün sonu bulunmakta.\nBuradaki sanat eserlerinin goblinler tarafýndan deðilde cüceler tarafýndan\nyapýldýðýný anlýyorsun. Belkide goblin ordularý buraya bir baskýn verip\ncüceleri buradan dýþarý sürmüþlerdir. Burada ne olmuþ olursa görevin daha\nyeni baþladý. Muhafýzlar seni farketti. Hazýr olan iyi olur. Geniþ Hol\ngüneye doðru devam ediyor, ayný zamanda batý ve doðu duvarlarýndaki kapýlarý\nfarkediyorsun.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Goblin Kale'sinin Giriþi\n",
+                    "keyword": "Geniþ kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29001"
+                },
+                {
+                    "door": "D1",
+                    "description": "Mutfak\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29023"
+                },
+                {
+                    "door": "D2",
+                    "description": "Geniþ Hol'ün güney ucu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29003"
+                },
+                {
+                    "door": "D3",
+                    "description": "Eðitim odasý.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29021"
+                }
+            ]
+        },
+        {
+            "vnum": "29003",
+            "name": "Geniþ Hol'ün Güney Ucu",
+            "description": "Bu kubbeli maðara etrafýnda gördüðün goblin türünün muazzam bir eseridir.\nKeskin granit bloklarýndan yapýlmýþ duvarlar her blok baþý 1 ton dan daha\naðýr olsa gerek. Kaygan kaya yukarýdaki mükemmel yarý daire þeklindeki savaþ\nresmini aydýnlatýyor. Duvarlarda çeþitli resimler ve çizimler duruyor, fakat\ngoblinlerin ellerine geçtiðinden beri onarýlmadýðýda apaçýk ortada olsa\ngerek. Mahun aðacýndan yapýlmýþ uzun bir yemek masasý yaklaþýk 20 metrelik\nuzunluðuyla karþýnda duruyor. Kuzey taraftaki Geniþ Hol'e uzanmakta. Güneye\ndoðru büyük kemerli bir geçit bulunmakta, dikkatlice bakýnca güneyde taht'ý\ngörmektesin.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Geniþ Hol'ün kuzey ucu\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29002"
+                },
+                {
+                    "door": "D2",
+                    "description": "Kral Grumm'un Taht Odasý\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29004"
+                }
+            ]
+        },
+        {
+            "vnum": "29004",
+            "name": "Kral Grumm'un Taht Odasý",
+            "description": "Kral Grumm'un odasýnda kaos hükmetmekte. Soytarýlar, danseden kadýnlar,\niþgüzar görünümlü goblinler, ve çok büyük sayýda dikkat daðýtan kiþiler\nkralýn vakti için yarýþmakta. Taht odasý mükkemmel daire þeklinde bir saray\nodasýný andýrýyor, odanýn ortasýnda kahramanvari görünümlü bir cüce heykeli\nbulunmakta. Bir kez daha duvarlarda çizimler görüyorsun; savaþlarý ve\nzaferleri portreleyen. Eðer kaosun daha fazla hükmetmesi mümkündü ise\nburadaki karnaval atmosferinde bunu baþardýn. Kral ayaða kalkýyor, ve goblin\nmuhafýzlarý güney tarafýndaki kapýya yönelerek kapýyý kaplýyor. Grumm'un\nkonuþmaya tenezzül edecek gibi bir havasý yok! Doðuya ve batýya doðru\nkapýlar bulunmakta.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Geniþ Hol'ün Güney Ucu\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29003"
+                },
+                {
+                    "door": "D1",
+                    "description": "Goblin Büyücüsünün Odasý\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29006"
+                },
+                {
+                    "door": "D2",
+                    "description": "Gizli Pasaj\n",
+                    "keyword": "Perde",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29007"
+                },
+                {
+                    "door": "D3",
+                    "description": "Goblin Þaman'ýnýn Odasý\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29005"
+                }
+            ]
+        },
+        {
+            "vnum": "29005",
+            "name": "Goblin Þaman'ýnýn Odasý",
+            "description": "Bu odada kalenin diðer kýsýmlarýndaki kaos hükmetmemekte. Havada güzel\nbir koku var, odada oldukça temiz görünmekte(goblin standarlarýna göre).\nKuzeydeki duvarda geniþ bir kitaplýk var, ve onun hemen önündede bir masa\nile sandalye.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Kral Grumm'un Taht odasý.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29004"
+                }
+            ]
+        },
+        {
+            "vnum": "29006",
+            "name": "Goblin Büyücüsünün Odasý",
+            "description": "Çok aðýr bir sis hemen zeminin üstünde odaya yayýlmakta. Görüþünü\nkapamakta yeterli olmadýðý ortada bu sisin, daha yakýndan baktýðýnda ,\ngranit iþlemenin üstüne bir pentagram kakýlmýþ. Bunlarýn dýþýnda yalýn bir\noda, küçük bir karyola, masa görmektesin. Bunlarýn dýþýnda oda çok anlamsýz.\n",
+            "flags": "ADN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Kral Grumm'un Taht Odasý.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29004"
+                }
+            ]
+        },
+        {
+            "vnum": "29007",
+            "name": "Gizli Pasaj",
+            "description": "Bu pasaj bir perdenin arkasýnda saklanmakta. Kuzeydeki Taht odasýna ve\ngüneydeki bir kapýya koridor görevi yapýyor.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kral Grumm'un Taht Odasý\n",
+                    "keyword": "Perde",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29004"
+                },
+                {
+                    "door": "D2",
+                    "description": "Gizli Pasaj\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29020",
+                    "u1_vnum": "29008"
+                }
+            ]
+        },
+        {
+            "vnum": "29008",
+            "name": "Gizli Pasaj",
+            "description": "Ýlk kapýyý açtýktan sonra, korkmamak için bir kaç saniyeliðine kendini\ntoparlýyorsun. Güneyde ve kuzeyde kapý bulunmakta.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Gizli Pasaj\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29020",
+                    "u1_vnum": "29007"
+                },
+                {
+                    "door": "D2",
+                    "description": "Gizli Pasaj\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29018",
+                    "u1_vnum": "29009"
+                }
+            ]
+        },
+        {
+            "vnum": "29009",
+            "name": "Gizli Pasaj",
+            "description": "Ýkinci kapýyý açtýktan sonra, korkmamak için bir kaç saniyeliðine kendini\ntoparlýyorsun. Güneyde ve kuzeyde kapý bulunmakta.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Gizli Pasaj\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29018",
+                    "u1_vnum": "29008"
+                },
+                {
+                    "door": "D2",
+                    "description": "Goblin Kalesinin Hazine Odasý\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29019",
+                    "u1_vnum": "29010"
+                }
+            ]
+        },
+        {
+            "vnum": "29010",
+            "name": "Goblin Kalesinin Hazine Odasý",
+            "description": "Üçüncü Kapýyý açtýktan sonra, altýn ve mücevher yýðýnýnýn arasýnda\nbuluyorsun kendini. Geldiðin kapý dýþýnda odadan baþka bir çýkýþ yok.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Gizli Pasaj\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29019",
+                    "u1_vnum": "29009"
+                }
+            ]
+        },
+        {
+            "vnum": "29011",
+            "name": "Zindanda küçük bir hücre",
+            "description": "Bu odanýn kapýsýndan içeri girdiðinde, bir çarpma ve klik sesi\nduyuyorsun. Hemen arkana dönüp baktýðýnda kapýnýn kapatýlmýþ ve kilitlenmiþ\nolduðunu farkediyorsun. Kapýnýn dýþýndan iðrenç bir kahkaha duymaktasýn.\nKaçmanýn yolu yok. Zamanýný bu goblin hücresinde çürüyerek geçireceksin\nartýk.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D5",
+                    "description": "Minik iþçilik alaný\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29024"
+                }
+            ]
+        },
+        {
+            "vnum": "29012",
+            "name": "Zindanda küçük bir hücre",
+            "description": "Burasý 6 metrekarelik bir hücre, ayaklarýnýn altýnda saman var. Odanýn\nhavasý nemli ve rutubetli. Uzaktaki duvarda duran pranga seti gözüne\nçarpýyor. Ziyaret etmek için güzel fakat yaþamak için çok kötü bir yer\nolduðunu düþünüyorsun buranýn.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Zindanda bir hol\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29021",
+                    "u1_vnum": "29025"
+                }
+            ]
+        },
+        {
+            "vnum": "29013",
+            "name": "Zindanda küçük bir hücre",
+            "description": "Burasý 6 metrekarelik bir hücre, ayaklarýnýn altýnda saman var. Odanýn\nhavasý nemli ve rutubetli. Uzaktaki duvarda duran pranga seti gözüne\nçarpýyor. Ziyaret etmek için güzel fakat yaþamak için çok kötü bir yer\nolduðunu düþünüyorsun buranýn.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Zindanda bir hol\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29021",
+                    "u1_vnum": "29025"
+                }
+            ]
+        },
+        {
+            "vnum": "29014",
+            "name": "Zindanda küçük bir hücre",
+            "description": "Burasý 6 metrekarelik bir hücre, ayaklarýnýn altýnda saman var. Odanýn\nhavasý nemli ve rutubetli. Uzaktaki duvarda duran pranga seti gözüne\nçarpýyor. Ziyaret etmek için güzel fakat yaþamak için çok kötü bir yer\nolduðunu düþünüyorsun buranýn.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Zindanda bir hol\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29021",
+                    "u1_vnum": "29026"
+                }
+            ]
+        },
+        {
+            "vnum": "29015",
+            "name": "Zindanda küçük bir hücre",
+            "description": "Burasý 6 metrekarelik bir hücre, ayaklarýnýn altýnda saman var. Odanýn\nhavasý nemli ve rutubetli. Uzaktaki duvarda duran pranga seti gözüne\nçarpýyor. Ziyaret etmek için güzel fakat yaþamak için çok kötü bir yer\nolduðunu düþünüyorsun buranýn.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Zindanda bir hol\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29021",
+                    "u1_vnum": "29026"
+                }
+            ]
+        },
+        {
+            "vnum": "29016",
+            "name": "Zindan",
+            "description": "Demir kapýnýn ardýnda küçük bir muhafýz odasý bulunmakta. Odada bir masa\nve bir kaç sandalye bulunmakta, baþka dikkatini çeken birþey yok. Batýya\ndoðru uzanan bir koridor ile yukarýya çýkan demir kapý etraftaki tek çýkýþ\nyollarý.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Zindanda bir hol\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29026"
+                },
+                {
+                    "door": "D4",
+                    "description": "Kalede bir koridor.\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29017"
+                }
+            ]
+        },
+        {
+            "vnum": "29017",
+            "name": "Kalede bir koridor",
+            "description": "Duvara tutturulmuþ meþalelerle aydýnlanýyor bu oda. Yerde demir bir kapý\ngörüyorsun, buradan inlemeler ve çýðlýklar duyuyorsun. Koridor doðuya ve\ngüneydeki geniþ bir odaya doðru uzanýyor.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Kalede bir koridor\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29018"
+                },
+                {
+                    "door": "D2",
+                    "description": "Goblin Barakalarý\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29027"
+                },
+                {
+                    "door": "D5",
+                    "description": "Demir kapý\n",
+                    "keyword": "demir kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29016"
+                }
+            ]
+        },
+        {
+            "vnum": "29018",
+            "name": "Kalede bir koridor",
+            "description": "Duvara tutturulmuþ meþalelerle aydýnlanýyor bu oda. Koridor batýya doðru\ndevam ediyor, Giriþ Holü doðuda kalýyor. Ayný zamanda güney tarafýnda bir\noda görüyorsun. Güney tarafýndan kýlýç,balta sesleri geliyor.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Goblin Kalesinin Giriþi\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29001"
+                },
+                {
+                    "door": "D2",
+                    "description": "Goblin Eðitim Odasý\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29021"
+                },
+                {
+                    "door": "D3",
+                    "description": "Kalede bir koridor\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29017"
+                }
+            ]
+        },
+        {
+            "vnum": "29019",
+            "name": "Kalede bir koridor",
+            "description": "Duvara tutturulmuþ meþalelerle aydýnlanýyor bu oda. Koridor doðuya doðru\ndevam ediyor, Giriþ Holü batýda kalýyor. Ayný zamanda güney tarafýnda bir\noda görüyorsun. Burnuna garip kokular geliyor...\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Kalede bir koridor\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29020"
+                },
+                {
+                    "door": "D2",
+                    "description": "Mutfak\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29023"
+                },
+                {
+                    "door": "D3",
+                    "description": "Goblin Kalesinin Giriþi\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29001"
+                }
+            ]
+        },
+        {
+            "vnum": "29020",
+            "name": "Kalede bir koridor",
+            "description": "Duvara tutturulmuþ meþalelerle aydýnlanýyor bu oda. Koridor batýya doðru\ndevam ediyor. Ayný zamanda güney tarafýnda bir oda görüyorsun.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Goblin Barakalarý.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29022"
+                },
+                {
+                    "door": "D3",
+                    "description": "Kalede bir koridor\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29019"
+                }
+            ]
+        },
+        {
+            "vnum": "29021",
+            "name": "Goblin Eðitim Odasý",
+            "description": "Goblinler burada savaþçý eðitimi görüp savaþçý olma yetisi kazanýyorlar.\nÇeþitli manken hedefler, ve bir sürü eðitim eþyasý etrafta duruyor. Yerde\nyapýþkan hale gelmiþ kan duruyor. Görünüþe göre goblinler cücelerin savaþ\neðitimi teorisine katýlmaktalar.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kalede bir koridor\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29018"
+                },
+                {
+                    "door": "D1",
+                    "description": "Geniþ Hol'ün güney ucu\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29002"
+                }
+            ]
+        },
+        {
+            "vnum": "29022",
+            "name": "Goblin Barakalarý",
+            "description": "Bu oda goblin askerlerinin uyumasý için. 20 metrekarelik geniþliðe sahip,\nbir sürü ranzanýn içinde bulunduðu bir odadasýn. Burada duvarlara kazýnmýþ\nçeþitli çizimler görüyorsun, fakat bu goblin eliþine daha çok benziyor, ve\ngördüðün çizimler goblin diþilerine ait. Kuzeye doðru bir kapý görüyorsun.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kalede bir koridor\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29020"
+                }
+            ]
+        },
+        {
+            "vnum": "29023",
+            "name": "Mutfak",
+            "description": "Geniþ bir mutfaktasýn, fokurdayan tencereler, ve çok kötü koku odada\ndikkat ettiðin tek þey. Batýda ve kuzeyde kapýlar duruyor.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kalede bir Koridor\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29019"
+                },
+                {
+                    "door": "D3",
+                    "description": "Geniþ Hol'ün güney ucu\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29002"
+                }
+            ]
+        },
+        {
+            "vnum": "29024",
+            "name": "Minik iþçilik alaný",
+            "description": "Hücrenin altýnda minik bir iþçilik alaný bulunmakta. Alanýn içinde bir\ntane geçit görüyorsun.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "Zindanda küçük bir hücre\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "29011"
+                }
+            ]
+        },
+        {
+            "vnum": "29025",
+            "name": "Zindanda bir Koridor",
+            "description": "Burasý kaleye daha sonradan monte edilmiþ bir alana benziyor. Koridor\ndaha çok küçük bir tünele benziyor. Koridor doðuya devam ediyor, kuzeyde\ngüneyde ve batýda kapýlar var.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Zindanda küçük bir hücre\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29021",
+                    "u1_vnum": "29012"
+                },
+                {
+                    "door": "D1",
+                    "description": "Zindanda bir koridor\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29026"
+                },
+                {
+                    "door": "D2",
+                    "description": "Zindanda küçük bir hücre\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29021",
+                    "u1_vnum": "29013"
+                },
+                {
+                    "door": "D3",
+                    "description": "Zindanda küçük bir hücre\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29021",
+                    "u1_vnum": "29011"
+                }
+            ]
+        },
+        {
+            "vnum": "29026",
+            "name": "Zindanda bir koridor",
+            "description": "Burasý kaleye daha sonradan monte edilmiþ bir alana benziyor. Koridor\ndaha çok küçük bir tünele benziyor. Koridor batýya doðru devam ediyor,\nkuzeyde güneyde ve doðuda kapýlar var.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Zindanda küçük bir hücre\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29021",
+                    "u1_vnum": "29014"
+                },
+                {
+                    "door": "D1",
+                    "description": "Zindan\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29016"
+                },
+                {
+                    "door": "D2",
+                    "description": "Zindanda küçük bir hücre\n",
+                    "keyword": "",
+                    "locks": "1",
+                    "key": "29021",
+                    "u1_vnum": "29015"
+                },
+                {
+                    "door": "D3",
+                    "description": "Zindanda küçük bir hücre\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29025"
+                }
+            ]
+        },
+        {
+            "vnum": "29027",
+            "name": "Goblin Barakalarý",
+            "description": "Bu oda goblin askerlerinin uyumasý için. 20 metrekarelik geniþliðe sahip,\nbir sürü ranzanýn içinde bulunduðu bir odadasýn. Burada duvarlara kazýnmýþ\nçeþitli çizimler görüyorsun, fakat bu goblin eliþine daha çok benziyor, ve\ngördüðün çizimler goblin diþilerine ait. Kuzeye doðru bir kapý görüyorsun.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kalede bir koridor\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "29017"
+                }
+            ]
+        }
+    ],
+    "specials": [],
+    "resets": [
+        {
+            "command": "D",
+            "arg1": "29001",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29002",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29002",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29004",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29004",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29004",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29005",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29006",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29007",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29007",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29008",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29008",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29009",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29009",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29010",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29012",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29013",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29014",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29015",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29016",
+            "arg2": "4",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29017",
+            "arg2": "5",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29021",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29023",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "29024",
+            "arg2": "4",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29025",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29025",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "29025",
+            "arg2": "3",
+            "arg3": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29001",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29001",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29001",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29002",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29002",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "O",
+            "arg1": "29027",
+            "arg2": "0",
+            "arg3": "29002"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29003",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29003",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "O",
+            "arg1": "29028",
+            "arg2": "0",
+            "arg3": "29003"
+        },
+        {
+            "command": "M",
+            "arg1": "29001",
+            "arg2": "1",
+            "arg3": "29004",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29010",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "29009",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29005",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29006",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29007",
+            "arg2": "-1",
+            "arg3": "9"
+        },
+        {
+            "command": "E",
+            "arg1": "29008",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "G",
+            "arg1": "29019",
+            "arg2": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29004",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29004",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29004",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29012",
+            "arg2": "1",
+            "arg3": "29004",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29023",
+            "arg2": "-1",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29013",
+            "arg2": "1",
+            "arg3": "29004",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "29026",
+            "arg2": "0",
+            "arg3": "29004"
+        },
+        {
+            "command": "M",
+            "arg1": "29002",
+            "arg2": "1",
+            "arg3": "29005",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29005",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29006",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29007",
+            "arg2": "-1",
+            "arg3": "9"
+        },
+        {
+            "command": "E",
+            "arg1": "29008",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29016",
+            "arg2": "-1",
+            "arg3": "17"
+        },
+        {
+            "command": "E",
+            "arg1": "29030",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "29018",
+            "arg2": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "29024",
+            "arg2": "0",
+            "arg3": "29005"
+        },
+        {
+            "command": "P",
+            "arg1": "29022",
+            "arg2": "1",
+            "arg3": "29024",
+            "arg4": "10"
+        },
+        {
+            "command": "O",
+            "arg1": "29025",
+            "arg2": "0",
+            "arg3": "29005"
+        },
+        {
+            "command": "M",
+            "arg1": "29003",
+            "arg2": "1",
+            "arg3": "29006",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "29020",
+            "arg2": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29013",
+            "arg2": "-1",
+            "arg3": "12"
+        },
+        {
+            "command": "E",
+            "arg1": "29014",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29011",
+            "arg2": "1",
+            "arg3": "29006",
+            "arg4": "1"
+        },
+        {
+            "command": "O",
+            "arg1": "29029",
+            "arg2": "0",
+            "arg3": "29010"
+        },
+        {
+            "command": "M",
+            "arg1": "29009",
+            "arg2": "1",
+            "arg3": "29011",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29008",
+            "arg2": "4",
+            "arg3": "29012",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29008",
+            "arg2": "4",
+            "arg3": "29013",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29008",
+            "arg2": "4",
+            "arg3": "29014",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29008",
+            "arg2": "4",
+            "arg3": "29015",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29016",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "G",
+            "arg1": "29021",
+            "arg2": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29016",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29017",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29018",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29019",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29020",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29004",
+            "arg2": "1",
+            "arg3": "29021",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29017",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "29012",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29005",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29006",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29007",
+            "arg2": "-1",
+            "arg3": "9"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29021",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29021",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29021",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29021",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29022",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29005",
+            "arg2": "10",
+            "arg3": "29022",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29001",
+            "arg2": "-1",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "29003",
+            "arg2": "-1",
+            "arg3": "7"
+        },
+        {
+            "command": "E",
+            "arg1": "29004",
+            "arg2": "-1",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29023",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29023",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29010",
+            "arg2": "2",
+            "arg3": "29023",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29010",
+            "arg2": "2",
+            "arg3": "29023",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29027",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "M",
+            "arg1": "29007",
+            "arg2": "20",
+            "arg3": "29027",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "29011",
+            "arg2": "-1",
+            "arg3": "6"
+        },
+        {
+            "command": "E",
+            "arg1": "29015",
+            "arg2": "-1",
+            "arg3": "16"
+        }
+    ],
+    "shops": []
+}

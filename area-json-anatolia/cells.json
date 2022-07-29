@@ -1,0 +1,2528 @@
+{
+    "area": {
+        "file": "PrisonThera.are",
+        "name": "Prison of Thera.",
+        "low_range": "80",
+        "high_range": "130",
+        "writer": "RM",
+        "credits": "Prison of thera",
+        "min_vnum": "15000",
+        "max_vnum": "15099"
+    },
+    "helps": [
+        {
+            "level": "-1",
+            "keyword": "prison2 ",
+            "text": "Converted & edited by REAL MUDDERS\nSpecial thanx to Serdar & Anatolia Consortium"
+        }
+    ],
+    "mobiles": [
+        {
+            "vnum": "15000",
+            "name": "head guardian cell",
+            "short_description": "Head of the cell guardians",
+            "long_description": "Head of the guardians of this prison is here.\n",
+            "description": "This man has been here for years , protecting his prison from being\ndestroyed.The only one who is not affacted from that evil mage; stong ,\npowerful and wise.\n",
+            "race": "human",
+            "act": "ABWe",
+            "affected_by": "DFHJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "130",
+            "hitroll": "20",
+            "hit_dice": "10d400+28000",
+            "mana_dice": "10d50+9000",
+            "dam_dice": "20d20+100",
+            "dam_type": "pierce",
+            "ac_pierce": "-150",
+            "ac_bash": "-150",
+            "ac_slash": "-150",
+            "ac_exotic": "-151",
+            "off_flags": "CEFKNU",
+            "imm_flags": "ABHQY",
+            "res_flags": "TPKIL",
+            "vuln_flags": "J",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "A",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "15003",
+            "name": "guardian cell",
+            "short_description": "Guardian of the cell",
+            "long_description": "The guardian of this prison is here.\n",
+            "description": "A powerful looking guardian on duty.He has the sign of guardians on\nhis shoulder.\n",
+            "race": "human",
+            "act": "ABWe",
+            "affected_by": "DFHJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "95",
+            "hitroll": "20",
+            "hit_dice": "10d400+14000",
+            "mana_dice": "10d50+2000",
+            "dam_dice": "10d15+12",
+            "dam_type": "pierce",
+            "ac_pierce": "-80",
+            "ac_bash": "-70",
+            "ac_slash": "-72",
+            "ac_exotic": "-81",
+            "off_flags": "CEFKNU",
+            "imm_flags": "ABH",
+            "res_flags": "0",
+            "vuln_flags": "J",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "A",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "15001",
+            "name": "cleaner cell",
+            "short_description": "Cleaner of the prison",
+            "long_description": "One of the cleaners of this prison is here.\n",
+            "description": "He is so sad actually crying,and singing you don't understand\nanything.Why is he crying and singing at the same time.Suddenly you\nunderstand; singing : now you die!\n",
+            "race": "human",
+            "act": "ACGT",
+            "affected_by": "DFJZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "80",
+            "hitroll": "20",
+            "hit_dice": "10d400+12000",
+            "mana_dice": "10d50+1000",
+            "dam_dice": "12d10+12",
+            "dam_type": "pierce",
+            "ac_pierce": "-50",
+            "ac_bash": "-50",
+            "ac_slash": "-50",
+            "ac_exotic": "-51",
+            "off_flags": "CEFKNU",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "S",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "A",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "15002",
+            "name": "criminal",
+            "short_description": "The criminal",
+            "long_description": "A criminal is here resting.\n",
+            "description": "A simply criminal, looking with aboring eyes like a zombie!Not like \nother creatures you've ever seen.You hear a week voice like wispering \nbut continues : \"as you wished my master\".\n",
+            "race": "human",
+            "act": "ACGT",
+            "affected_by": "DFJZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "88",
+            "hitroll": "20",
+            "hit_dice": "10d400+12000",
+            "mana_dice": "10d50+1000",
+            "dam_dice": "12d12+30",
+            "dam_type": "pierce",
+            "ac_pierce": "-50",
+            "ac_bash": "-50",
+            "ac_slash": "-50",
+            "ac_exotic": "-51",
+            "off_flags": "CEFKNU",
+            "imm_flags": "0",
+            "res_flags": "0",
+            "vuln_flags": "S",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "male",
+            "wealth": "5000",
+            "form": "A",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "15009",
+            "name": "kwal mage ancient",
+            "short_description": "Kwal tha ancient mage",
+            "long_description": "Kwal the ancient mage is here working on his plans.\n",
+            "description": "As you look at this old woman, you see fear in her eyes.But this is\nnot her fear.This is your fear, your end whaiting you,catching your eyes,\ncalling your spirit!One a sudden you see hate and anger in these eyes, \nyou must have disturbed her; she screams \"All of you will pay for this!!\"\n",
+            "race": "dark-elf",
+            "act": "ABWeCFGT",
+            "affected_by": "DFHJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "109",
+            "hitroll": "20",
+            "hit_dice": "30d100+27000",
+            "mana_dice": "10d50+2300",
+            "dam_dice": "23d27+190",
+            "dam_type": "pierce",
+            "ac_pierce": "-88",
+            "ac_bash": "-85",
+            "ac_slash": "-90",
+            "ac_exotic": "-81",
+            "off_flags": "CEFKNU",
+            "imm_flags": "ABHQY",
+            "res_flags": "TPKIL",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "female",
+            "wealth": "5000",
+            "form": "ABCDEFG",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        },
+        {
+            "vnum": "15010",
+            "name": "disturbed demon",
+            "short_description": "A disturbed demon",
+            "long_description": "A disturbed demon is here looking for something.\n",
+            "description": "She is very angry !\n",
+            "race": "dark-elf",
+            "act": "ABWeCFGT",
+            "affected_by": "DFHJVZ",
+            "alignment": "0",
+            "group": "0",
+            "level": "109",
+            "hitroll": "20",
+            "hit_dice": "10d400+22000",
+            "mana_dice": "10d50+2300",
+            "dam_dice": "23d10+30",
+            "dam_type": "pierce",
+            "ac_pierce": "-88",
+            "ac_bash": "-85",
+            "ac_slash": "-90",
+            "ac_exotic": "-81",
+            "off_flags": "CEFKNU",
+            "imm_flags": "ABHQY",
+            "res_flags": "TPKIL",
+            "vuln_flags": "0",
+            "start_pos": "stand",
+            "default_pos": "stand",
+            "sex": "female",
+            "wealth": "5000",
+            "form": "ABCDEFG",
+            "parts": "0",
+            "size": "medium",
+            "material": "0"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "15002",
+            "name": "dusty fountain",
+            "short_description": "a fountain",
+            "description": "A small dusty fountain is here.",
+            "material": "",
+            "type": "fountain",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 'water' 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "G",
+            "extra_descriptions": [
+                {
+                    "keyword": "dusty",
+                    "description": "It doesn't look nice; covered with dust, but probubly you can drink the\nwater\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15001",
+            "name": "potpie dirty",
+            "short_description": "a big dirty pot pie",
+            "description": "A big dirty pot pie is on the floor.",
+            "material": "food",
+            "type": "food",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "20 40 0 0 0",
+            "level": "0",
+            "weight": "20",
+            "cost": "22",
+            "condition": "P"
+        },
+        {
+            "vnum": "15005",
+            "name": "cell guardian ring",
+            "short_description": "a shiny cell guardian ring",
+            "description": "You see a shining ring on the floor.\n",
+            "material": "gold",
+            "type": "armor",
+            "extra_flags": "BEGH",
+            "wear_flags": "AB",
+            "values": "29 30 30 30 29",
+            "level": "88",
+            "weight": "10",
+            "cost": "8000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "3"
+                },
+                {
+                    "location": "2",
+                    "modifier": "3"
+                },
+                {
+                    "location": "12",
+                    "modifier": "100"
+                },
+                {
+                    "location": "13",
+                    "modifier": "100"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-20"
+                },
+                {
+                    "location": "18",
+                    "modifier": "5"
+                },
+                {
+                    "location": "19",
+                    "modifier": "5"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-1"
+                }
+            ]
+        },
+        {
+            "vnum": "15006",
+            "name": "criminal necklace",
+            "short_description": "a criminal necklace",
+            "description": "A beautiful necklace is here.\n",
+            "material": "gold",
+            "type": "armor",
+            "extra_flags": "BEGH",
+            "wear_flags": "AC",
+            "values": "25 35 35 35 21",
+            "level": "85",
+            "weight": "10",
+            "cost": "8400",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "4",
+                    "modifier": "3"
+                },
+                {
+                    "location": "5",
+                    "modifier": "3"
+                },
+                {
+                    "location": "12",
+                    "modifier": "100"
+                },
+                {
+                    "location": "13",
+                    "modifier": "100"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-5"
+                },
+                {
+                    "location": "18",
+                    "modifier": "5"
+                },
+                {
+                    "location": "19",
+                    "modifier": "5"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-2"
+                }
+            ]
+        },
+        {
+            "vnum": "15007",
+            "name": "light aura",
+            "short_description": "an aura of light",
+            "description": "A mystic aura of light.\n",
+            "material": "light",
+            "type": "armor",
+            "extra_flags": "BEGH",
+            "wear_flags": "AQ",
+            "values": "25 25 25 25 21",
+            "level": "85",
+            "weight": "10",
+            "cost": "8400",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "1"
+                },
+                {
+                    "location": "5",
+                    "modifier": "1"
+                },
+                {
+                    "location": "12",
+                    "modifier": "200"
+                },
+                {
+                    "location": "13",
+                    "modifier": "200"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-20"
+                },
+                {
+                    "location": "18",
+                    "modifier": "7"
+                },
+                {
+                    "location": "19",
+                    "modifier": "7"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-5"
+                }
+            ]
+        },
+        {
+            "vnum": "15008",
+            "name": "shield lost spirit",
+            "short_description": "shield of lost spirits",
+            "description": "Shining shield of the lost spirits.\n",
+            "material": "gold",
+            "type": "armor",
+            "extra_flags": "BEGH",
+            "wear_flags": "AJ",
+            "values": "21 21 21 21 80",
+            "level": "70",
+            "weight": "10",
+            "cost": "8400",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "150"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-30"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-5"
+                }
+            ]
+        },
+        {
+            "vnum": "15003",
+            "name": "rod ambrossia",
+            "short_description": "the rod of ambrossia",
+            "description": "The rod of ambrossia is here.\n",
+            "material": "wood",
+            "type": "staff",
+            "extra_flags": "BEGH",
+            "wear_flags": "AO",
+            "values": "100 50 50 'frenzy' 0",
+            "level": "90",
+            "weight": "50",
+            "cost": "30000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "5",
+                    "modifier": "3"
+                },
+                {
+                    "location": "12",
+                    "modifier": "400"
+                },
+                {
+                    "location": "13",
+                    "modifier": "400"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-30"
+                },
+                {
+                    "location": "18",
+                    "modifier": "25"
+                },
+                {
+                    "location": "19",
+                    "modifier": "25"
+                },
+                {
+                    "location": "23",
+                    "modifier": "-4"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-4"
+                }
+            ]
+        },
+        {
+            "vnum": "15010",
+            "name": "staff ancients ancient",
+            "short_description": "staff of ancients",
+            "description": "The staff of ancients lies here.\n",
+            "material": "wood",
+            "type": "staff",
+            "extra_flags": "BEGH",
+            "wear_flags": "AO",
+            "values": "100 20 20 'sanctuary' 0",
+            "level": "75",
+            "weight": "50",
+            "cost": "30000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "5",
+                    "modifier": "3"
+                },
+                {
+                    "location": "13",
+                    "modifier": "100"
+                },
+                {
+                    "location": "18",
+                    "modifier": "5"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-10"
+                }
+            ]
+        },
+        {
+            "vnum": "15011",
+            "name": "cloak divine protection",
+            "short_description": "Cloak of Divine Protection",
+            "description": "An incredibly glowing cloak is lying on the floor.",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "ACY",
+            "wear_flags": "AC",
+            "values": "39 39 39 37 30",
+            "level": "84",
+            "weight": "10",
+            "cost": "99000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "3",
+                    "modifier": "2"
+                },
+                {
+                    "location": "18",
+                    "modifier": "8"
+                },
+                {
+                    "location": "19",
+                    "modifier": "8"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-4"
+                }
+            ]
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "15001",
+            "name": "The cell numbered 001",
+            "description": "This is a dirty and untidy cell.It is too small, you can see very \nlittle here.There is a heavy smell in the air.At the corner of the \nroom is a toilet and a fountain.There is no exit here , close walls, \nyour mind clouds when you look at the walls.\n     There is a small tablet on the wall.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15021"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Cell  no 001               +\n+           Don't make noise             +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15002",
+            "name": "The cell numbered 002",
+            "description": "This is a dirty and untidy cell.It is too small, you can see very \nlittle here.There is a heavy smell in the air.At the corner of the \nroom is a toilet and a fountain.There is no exit here , close walls, \nyour mind clouds when you look at the walls.\n     There is a small tablet on the wall.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15022"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Cell  no 002               +\n+           Don't make noise             +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15003",
+            "name": "The cell numbered 003",
+            "description": "This is a dirty and untidy cell.It is too small, you can see very \nlittle here.There is a heavy smell in the air.At the corner of the \nroom is a toilet and a fountain.There is no exit here , close walls, \nyour mind clouds when you look at the walls.\n     There is a small tablet on the wall.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15023"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Cell  no 003               +\n+           Don't make noise             +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15004",
+            "name": "The cell numbered 004",
+            "description": "This is a dirty and untidy cell.It is too small, you can see very \nlittle here.There is a heavy smell in the air.At the corner of the \nroom is a toilet and a fountain.There is no exit here , close walls, \nyour mind clouds when you look at the walls.\n     There is a small tablet on the wall.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15024"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Cell  no 004               +\n+           Don't make noise             +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15005",
+            "name": "The cell numbered 005",
+            "description": "This is a dirty and untidy cell.It is too small, you can see very \nlittle here.There is a heavy smell in the air.At the corner of the \nroom is a toilet and a fountain.There is no exit here , close walls, \nyour mind clouds when you look at the walls.\n     There is a small tablet on the wall.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15025"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Cell  no 005               +\n+           Don't make noise             +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15006",
+            "name": "The cell numbered 006",
+            "description": "This is a dirty and untidy cell.It is too small, you can see very \nlittle here.There is a heavy smell in the air.At the corner of the \nroom is a toilet and a fountain.There is no exit here , close walls, \nyour mind clouds when you look at the walls.\n     There is a small tablet on the wall.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15026"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Cell  no 006               +\n+           Don't make noise             +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15007",
+            "name": "The cell numbered 007",
+            "description": "This is a dirty and untidy cell.It is too small, you can see very \nlittle here.There is a heavy smell in the air.At the corner of the \nroom is a toilet and a fountain.There is no exit here , close walls, \nyour mind clouds when you look at the walls.\n     There is a small tablet on the wall.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15027"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Cell  no 007               +\n+           Don't make noise             +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15008",
+            "name": "The cell numbered 008",
+            "description": "This is a dirty and untidy cell.It is too small, you can see very \nlittle here.There is a heavy smell in the air.At the corner of the \nroom is a toilet and a fountain.There is no exit here , close walls, \nyour mind clouds when you look at the walls.\n     There is a small tablet on the wall.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15028"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Cell  no 008               +\n+           Don't make noise             +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15009",
+            "name": "The cell numbered 009",
+            "description": "This is a dirty and untidy cell.It is too small, you can see very \nlittle here.There is a heavy smell in the air.At the corner of the \nroom is a toilet and a fountain.There is no exit here , close walls, \nyour mind clouds when you look at the walls.\n     There is a small tablet on the wall.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15029"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Cell  no 009               +\n+           Don't make noise             +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15010",
+            "name": "The cell numbered 010",
+            "description": "This is a dirty and untidy cell.It is too small, you can see very \nlittle here.There is a heavy smell in the air.At the corner of the \nroom is a toilet and a fountain.There is no exit here , close walls, \nyour mind clouds when you look at the walls.\n     There is a small tablet on the wall.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15030"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Cell  no 010               +\n+           Don't make noise             +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15011",
+            "name": "The cell numbered 011",
+            "description": "This is a dirty and untidy cell.It is too small, you can see very \nlittle here.There is a heavy smell in the air.At the corner of the \nroom is a toilet and a fountain.There is no exit here , close walls, \nyour mind clouds when you look at the walls.\n     There is a small tablet on the wall.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15031"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Cell  no 011               +\n+           Don't make noise             +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15012",
+            "name": "The cell numbered 012",
+            "description": "This is a dirty and untidy cell.It is too small, you can see very \nlittle here.There is a heavy smell in the air.At the corner of the \nroom is a toilet and a fountain.There is no exit here , close walls, \nyour mind clouds when you look at the walls.\n     There is a small tablet on the wall.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15032"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Cell  no 012               +\n+           Don't make noise             +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15013",
+            "name": "The cell numbered 013",
+            "description": "This is a dirty and untidy cell.It is too small, you can see very \nlittle here.There is a heavy smell in the air.At the corner of the \nroom is a toilet and a fountain.There is no exit here , close walls, \nyour mind clouds when you look at the walls.\n     There is a small tablet on the wall.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15033"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Cell  no 013               +\n+           Don't make noise             +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15014",
+            "name": "The cell numbered 014",
+            "description": "This is a dirty and untidy cell.It is too small, you can see very \nlittle here.There is a heavy smell in the air.At the corner of the \nroom is a toilet and a fountain.There is no exit here , close walls, \nyour mind clouds when you look at the walls.\n     There is a small tablet on the wall.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15034"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Cell  no 014               +\n+           Don't make noise             +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15015",
+            "name": "The cell numbered 015",
+            "description": "This is a dirty and untidy cell.It is too small, you can see very \nlittle here.There is a heavy smell in the air.At the corner of the \nroom is a toilet and a fountain.There is no exit here , close walls, \nyour mind clouds when you look at the walls.\n     There is a small tablet on the wall.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15035"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Cell  no 015               +\n+           Don't make noise             +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15016",
+            "name": "The cell numbered 016",
+            "description": "This is a dirty and untidy cell.It is too small, you can see very \nlittle here.There is a heavy smell in the air.At the corner of the \nroom is a toilet and a fountain.There is no exit here , close walls, \nyour mind clouds when you look at the walls.\n     There is a small tablet on the wall.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15036"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Cell  no 016               +\n+           Don't make noise             +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15017",
+            "name": "The cell numbered 017",
+            "description": "This is a dirty and untidy cell.It is too small, you can see very \nlittle here.There is a heavy smell in the air.At the corner of the \nroom is a toilet and a fountain.There is no exit here , close walls, \nyour mind clouds when you look at the walls.\n     There is a small tablet on the wall.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15037"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Cell  no 017               +\n+           Don't make noise             +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15018",
+            "name": "The cell numbered 018",
+            "description": "This is a dirty and untidy cell.It is too small, you can see very \nlittle here.There is a heavy smell in the air.At the corner of the \nroom is a toilet and a fountain.There is no exit here , close walls, \nyour mind clouds when you look at the walls.\n     There is a small tablet on the wall.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15038"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Cell  no 018               +\n+           Don't make noise             +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15019",
+            "name": "The cell numbered 019",
+            "description": "This is a dirty and untidy cell.It is too small, you can see very \nlittle here.There is a heavy smell in the air.At the corner of the \nroom is a toilet and a fountain.There is no exit here , close walls, \nyour mind clouds when you look at the walls.\n     There is a small tablet on the wall.\n",
+            "flags": "0",
+            "sector": "9",
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Cell  no 019               +\n+           Don't make noise             +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15020",
+            "name": "The cell numbered 020",
+            "description": "This is a dirty and untidy cell.It is too small, you can see very \nlittle here.There is a heavy smell in the air.At the corner of the \nroom is a toilet and a fountain.There is no exit here , close walls, \nyour mind clouds when you look at the walls.\n     There is a small tablet on the wall.\n",
+            "flags": "J",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15040"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "small tablet",
+                    "description": "++++++++++++++++++++++++++++++++++++++++++\n+             Cell  no 020               +\n+           Don't make noise             +\n++++++++++++++++++++++++++++++++++++++++++\n"
+                }
+            ]
+        },
+        {
+            "vnum": "15021",
+            "name": "The long coridor",
+            "description": "This is a dark and long coridor.North you see the entrance of the cell\nnumbered 001, coridor leads east.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North is the cell numbered 001.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15001"
+                },
+                {
+                    "door": "D1",
+                    "description": "East leads the long conridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15022"
+                },
+                {
+                    "door": "D3",
+                    "description": "West is the entrance of the prison.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15000"
+                }
+            ]
+        },
+        {
+            "vnum": "15022",
+            "name": "The long coridor",
+            "description": "This is a dark and long coridor.North you see the entrance of the cell\nnumbered 002, coridor leads east.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North is the cell numbered 002.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15002"
+                },
+                {
+                    "door": "D1",
+                    "description": "East leads the long conridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15023"
+                },
+                {
+                    "door": "D3",
+                    "description": "West is the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15021"
+                }
+            ]
+        },
+        {
+            "vnum": "15023",
+            "name": "The long coridor",
+            "description": "This is a dark and long coridor.North you see the entrance of the cell\nnumbered 003, coridor leads east.\n",
+            "flags": "DN",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North is the cell numbered 003.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15003"
+                },
+                {
+                    "door": "D1",
+                    "description": "East leads the long conridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15024"
+                },
+                {
+                    "door": "D3",
+                    "description": "West is the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15022"
+                }
+            ]
+        },
+        {
+            "vnum": "15024",
+            "name": "The long coridor",
+            "description": "This is a dark and long coridor.North you see the entrance of the cell\nnumbered 004, coridor leads east.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North is the cell numbered 004.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15004"
+                },
+                {
+                    "door": "D1",
+                    "description": "East leads the long conridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15025"
+                },
+                {
+                    "door": "D3",
+                    "description": "West is the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15023"
+                }
+            ]
+        },
+        {
+            "vnum": "15025",
+            "name": "The long coridor",
+            "description": "This is a dark and long coridor.North you see the entrance of the cell\nnumbered 005, coridor leads east.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North is the cell numbered 005.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15005"
+                },
+                {
+                    "door": "D1",
+                    "description": "East leads the long conridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15026"
+                },
+                {
+                    "door": "D3",
+                    "description": "West is the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15024"
+                }
+            ]
+        },
+        {
+            "vnum": "15026",
+            "name": "The long coridor",
+            "description": "This is a dark and long coridor.North you see the entrance of the cell\nnumbered 006, coridor leads east.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North is the cell numbered 006.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15006"
+                },
+                {
+                    "door": "D1",
+                    "description": "East leads the long conridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15027"
+                },
+                {
+                    "door": "D3",
+                    "description": "West is the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15025"
+                }
+            ]
+        },
+        {
+            "vnum": "15027",
+            "name": "The long coridor",
+            "description": "This is a dark and long coridor.North you see the entrance of the cell\nnumbered 007, coridor leads east.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North is the cell numbered 007.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15007"
+                },
+                {
+                    "door": "D1",
+                    "description": "East leads the long conridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15028"
+                },
+                {
+                    "door": "D3",
+                    "description": "West is the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15026"
+                }
+            ]
+        },
+        {
+            "vnum": "15028",
+            "name": "The long coridor",
+            "description": "This is a dark and long coridor.North you see the entrance of the cell\nnumbered 008, coridor leads east.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North is the cell numbered 008.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15008"
+                },
+                {
+                    "door": "D1",
+                    "description": "East leads the long conridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15029"
+                },
+                {
+                    "door": "D3",
+                    "description": "West is the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15027"
+                }
+            ]
+        },
+        {
+            "vnum": "15029",
+            "name": "The long coridor",
+            "description": "This is a dark and long coridor.North you see the entrance of the cell\nnumbered 009, coridor leads east.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North is the cell numbered 009.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15009"
+                },
+                {
+                    "door": "D1",
+                    "description": "East leads the long conridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15030"
+                },
+                {
+                    "door": "D3",
+                    "description": "West is the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15028"
+                }
+            ]
+        },
+        {
+            "vnum": "15030",
+            "name": "The long coridor",
+            "description": "This is a dark and long coridor.North you see the entrance of the cell\nnumbered 010, coridor leads east.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North is the cell numbered 010.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15010"
+                },
+                {
+                    "door": "D1",
+                    "description": "East leads the long conridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15031"
+                },
+                {
+                    "door": "D3",
+                    "description": "West is the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15029"
+                }
+            ]
+        },
+        {
+            "vnum": "15031",
+            "name": "The long coridor",
+            "description": "This is a dark and long coridor.North you see the entrance of the cell\nnumbered 011, coridor leads east.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North is the cell numbered 011.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15011"
+                },
+                {
+                    "door": "D1",
+                    "description": "East leads the long conridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15032"
+                },
+                {
+                    "door": "D3",
+                    "description": "West is the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15030"
+                }
+            ]
+        },
+        {
+            "vnum": "15032",
+            "name": "The long coridor",
+            "description": "This is a dark and long coridor.North you see the entrance of the cell\nnumbered 012, coridor leads east.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North is the cell numbered 012.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15012"
+                },
+                {
+                    "door": "D1",
+                    "description": "East leads the long conridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15033"
+                },
+                {
+                    "door": "D3",
+                    "description": "West is the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15031"
+                }
+            ]
+        },
+        {
+            "vnum": "15033",
+            "name": "The long coridor",
+            "description": "This is a dark and long coridor.North you see the entrance of the cell\nnumbered 013, coridor leads east.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North is the cell numbered 003.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15013"
+                },
+                {
+                    "door": "D1",
+                    "description": "East leads the long conridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15034"
+                },
+                {
+                    "door": "D3",
+                    "description": "West is the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15032"
+                }
+            ]
+        },
+        {
+            "vnum": "15034",
+            "name": "The long coridor",
+            "description": "This is a dark and long coridor.North you see the entrance of the cell\nnumbered 014, coridor leads east.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North is the cell numbered 014.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15014"
+                },
+                {
+                    "door": "D1",
+                    "description": "East leads the long conridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15035"
+                },
+                {
+                    "door": "D3",
+                    "description": "West is the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15033"
+                }
+            ]
+        },
+        {
+            "vnum": "15035",
+            "name": "The long coridor",
+            "description": "This is a dark and long coridor.North you see the entrance of the cell\nnumbered 015, coridor leads east.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North is the cell numbered 015.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15015"
+                },
+                {
+                    "door": "D1",
+                    "description": "East leads the long conridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15036"
+                },
+                {
+                    "door": "D3",
+                    "description": "West is the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15034"
+                }
+            ]
+        },
+        {
+            "vnum": "15036",
+            "name": "The long coridor",
+            "description": "This is a dark and long coridor.North you see the entrance of the cell\nnumbered 016, coridor leads east.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North is the cell numbered 016.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15016"
+                },
+                {
+                    "door": "D1",
+                    "description": "East leads the long conridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15037"
+                },
+                {
+                    "door": "D3",
+                    "description": "West is the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15035"
+                },
+                {
+                    "door": "D2",
+                    "description": "South is the old swear system\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "20000"
+                }
+            ]
+        },
+        {
+            "vnum": "15037",
+            "name": "The long coridor",
+            "description": "This is a dark and long coridor.North you see the entrance of the cell\nnumbered 017, coridor leads east.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North is the cell numbered 017.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15017"
+                },
+                {
+                    "door": "D1",
+                    "description": "East leads the long conridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15038"
+                },
+                {
+                    "door": "D3",
+                    "description": "West is the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15036"
+                }
+            ]
+        },
+        {
+            "vnum": "15038",
+            "name": "The long coridor",
+            "description": "This is a dark and long coridor.North you see the entrance of the cell\nnumbered 018, coridor leads east.\n",
+            "flags": "DNV",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North is the cell numbered 018.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15018"
+                },
+                {
+                    "door": "D1",
+                    "description": "East leads the long conridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15039"
+                },
+                {
+                    "door": "D3",
+                    "description": "West is the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15037"
+                }
+            ]
+        },
+        {
+            "vnum": "15039",
+            "name": "The long coridor",
+            "description": "This is a dark and long coridor.North you see the entrance of the cell\nnumbered 019,no exit from this cell.Coridor leads east.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North is the cell numbered 019.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15019"
+                },
+                {
+                    "door": "D1",
+                    "description": "East leads the long conridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15040"
+                },
+                {
+                    "door": "D3",
+                    "description": "West is the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15038"
+                }
+            ]
+        },
+        {
+            "vnum": "15040",
+            "name": "End of the long coridor",
+            "description": "This is a dark and long coridor.North you see the entrance of the cell\nnumbered 020, coridor suddeny ends here.\n",
+            "flags": "DN",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "North is the cell numbered 020.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15020"
+                },
+                {
+                    "door": "D3",
+                    "description": "West is the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15039"
+                }
+            ]
+        },
+        {
+            "vnum": "15000",
+            "name": "Entrance of the prison",
+            "description": "You are in a dark and silent room, there are blood on the walls,\nand no escape from here.Only exits are east and west , along the long\ncoridor cells are located to north.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "East is the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15021"
+                },
+                {
+                    "door": "D2",
+                    "description": "Prison road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15090"
+                }
+            ]
+        },
+        {
+            "vnum": "15099",
+            "name": "Prison road",
+            "description": "You are walking on the road to the prison.Take care your step, a\nmistake of yours may prepare your end.As you remember the tales you \nafraid.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "You can't see properly.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8019"
+                },
+                {
+                    "door": "D1",
+                    "description": "Prison road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15098"
+                },
+                {
+                    "door": "D3",
+                    "description": "You can't see properly.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8019"
+                }
+            ]
+        },
+        {
+            "vnum": "15098",
+            "name": "Prison road",
+            "description": "You are walking on the road to the prison.Take care your step, a\nmistake of yours may prepare your end.In the anciant times of thera\nthera thera was a powerful mage named Kwal.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "You can't see properly.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5028"
+                },
+                {
+                    "door": "D0",
+                    "description": "Prison road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15097"
+                },
+                {
+                    "door": "D3",
+                    "description": "Prison road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15099"
+                }
+            ]
+        },
+        {
+            "vnum": "15097",
+            "name": "Prison road",
+            "description": "You are walking on the road to the prison.Take care your step, a\nmistake of yours may prepare your end.As he chougt and put in this \nprison everybody thought that everything has finished.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "You can't see properly.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5067"
+                },
+                {
+                    "door": "D2",
+                    "description": "Prison road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15098"
+                },
+                {
+                    "door": "D5",
+                    "description": "Prison road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15096"
+                }
+            ]
+        },
+        {
+            "vnum": "15096",
+            "name": "Prison road",
+            "description": "You are walking on the road to the prison.Take care your step, a\nmistake of yours may prepare your end.But he got the power to destroy \nthe land.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "Prison road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15097"
+                },
+                {
+                    "door": "D1",
+                    "description": "Prison road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15095"
+                },
+                {
+                    "door": "D5",
+                    "description": "You can't see properly.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5001"
+                }
+            ]
+        },
+        {
+            "vnum": "15095",
+            "name": "Prison road",
+            "description": "You are walking on the road to the prison.Take care your step, a\nmistake of yours may prepare your end.Gods have forshaken him after\nhe had cursed this prison and people inside it.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "You can't see properly.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15099"
+                },
+                {
+                    "door": "D3",
+                    "description": "Prison road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15096"
+                },
+                {
+                    "door": "D1",
+                    "description": "Prison road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15094"
+                }
+            ]
+        },
+        {
+            "vnum": "15094",
+            "name": "Prison road",
+            "description": "You are walking on the road to the prison.Take care your step, a\nmistake of yours may prepare your end.Tales continued that he found the\nway to the realm of spirits and got help from evil ones of them.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Prison road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15095"
+                },
+                {
+                    "door": "D0",
+                    "description": "You can't see properly.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15098"
+                },
+                {
+                    "door": "D1",
+                    "description": "Prison road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15093"
+                }
+            ]
+        },
+        {
+            "vnum": "15093",
+            "name": "Prison road",
+            "description": "You are walking on the road to the prison.Take care your step, a\nmistake of yours may prepare your end.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Prison road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15094"
+                },
+                {
+                    "door": "D1",
+                    "description": "You can't see properly.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15091"
+                },
+                {
+                    "door": "D2",
+                    "description": "Prison road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15092"
+                }
+            ]
+        },
+        {
+            "vnum": "15092",
+            "name": "Prison road",
+            "description": "You are walking on the road to the prison.Take care your step, a\nmistake of yours may prepare your end.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Prison road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15093"
+                },
+                {
+                    "door": "D2",
+                    "description": "You can't see properly.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3049"
+                },
+                {
+                    "door": "D1",
+                    "description": "Prison road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15091"
+                }
+            ]
+        },
+        {
+            "vnum": "15091",
+            "name": "Prison road",
+            "description": "You are walking on the road to the prison.Take care your step, a\nmistake of yours may prepare your end.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Prison road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15092"
+                },
+                {
+                    "door": "D1",
+                    "description": "You can't see properly.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "5205"
+                },
+                {
+                    "door": "D0",
+                    "description": "Prison road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15090"
+                }
+            ]
+        },
+        {
+            "vnum": "15090",
+            "name": "Prison road",
+            "description": "You are walking on the road to the prison.Take care your step, a\nmistake of yours may prepare your end.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Entrance to the long coridor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15000"
+                },
+                {
+                    "door": "D2",
+                    "description": "Prison road.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "15091"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "15000",
+            "arg2": "1",
+            "arg3": "15040",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15003",
+            "arg2": "-1",
+            "arg3": "17"
+        },
+        {
+            "command": "E",
+            "arg1": "15007",
+            "arg2": "-1",
+            "arg3": "18"
+        },
+        {
+            "command": "M",
+            "arg1": "15003",
+            "arg2": "4",
+            "arg3": "15021",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "15003",
+            "arg2": "4",
+            "arg3": "15026",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15005",
+            "arg2": "-1",
+            "arg3": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "15003",
+            "arg2": "4",
+            "arg3": "15031",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15005",
+            "arg2": "-1",
+            "arg3": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "15003",
+            "arg2": "4",
+            "arg3": "15036",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "15002",
+            "arg2": "6",
+            "arg3": "15001",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "15006",
+            "arg2": "-1",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "15002",
+            "arg2": "6",
+            "arg3": "15004",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "15002",
+            "arg2": "6",
+            "arg3": "15009",
+            "arg4": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "15006",
+            "arg2": "-1",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "15002",
+            "arg2": "6",
+            "arg3": "15016",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "15001",
+            "arg2": "6",
+            "arg3": "15022",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "15001",
+            "arg2": "6",
+            "arg3": "15024",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "15001",
+            "arg2": "6",
+            "arg3": "15035",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "15001",
+            "arg2": "6",
+            "arg3": "15031",
+            "arg4": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "15010",
+            "arg2": "1",
+            "arg3": "15019",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15011",
+            "arg2": "-1",
+            "arg3": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "15009",
+            "arg2": "1",
+            "arg3": "15020",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "15008",
+            "arg2": "-1",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "15010",
+            "arg2": "-1",
+            "arg3": "18"
+        },
+        {
+            "command": "R",
+            "arg1": "15099",
+            "arg2": "3"
+        },
+        {
+            "command": "R",
+            "arg1": "15098",
+            "arg2": "3"
+        },
+        {
+            "command": "R",
+            "arg1": "15097",
+            "arg2": "3"
+        },
+        {
+            "command": "R",
+            "arg1": "15096",
+            "arg2": "3"
+        },
+        {
+            "command": "R",
+            "arg1": "15095",
+            "arg2": "3"
+        },
+        {
+            "command": "R",
+            "arg1": "15094",
+            "arg2": "3"
+        },
+        {
+            "command": "R",
+            "arg1": "15093",
+            "arg2": "3"
+        },
+        {
+            "command": "R",
+            "arg1": "15092",
+            "arg2": "3"
+        },
+        {
+            "command": "R",
+            "arg1": "15091",
+            "arg2": "3"
+        },
+        {
+            "command": "R",
+            "arg1": "15090",
+            "arg2": "2"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15001"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15002"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15003"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15004"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15005"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15006"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15007"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15008"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15009"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15010"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15011"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15012"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15013"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15014"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15015"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15016"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15017"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15018"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15019"
+        },
+        {
+            "command": "O",
+            "arg1": "15002",
+            "arg2": "10",
+            "arg3": "15020"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15001"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15002"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15003"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15004"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15005"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15006"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15007"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15008"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15009"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15010"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15011"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15012"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15013"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15014"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15015"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15016"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15017"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15018"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15019"
+        },
+        {
+            "command": "O",
+            "arg1": "15001",
+            "arg2": "1",
+            "arg3": "15020"
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "15000",
+            "spec_fun": "spec_breath_any"
+        },
+        {
+            "vnum": "15009",
+            "spec_fun": "spec_breath_any"
+        }
+    ],
+    "olimits": [
+        {
+            "vnum": "15003",
+            "limit": "2"
+        },
+        {
+            "vnum": "15008",
+            "limit": "2"
+        },
+        {
+            "vnum": "15010",
+            "limit": "10"
+        },
+        {
+            "vnum": "15011",
+            "limit": "1"
+        }
+    ],
+    "omprogs": [
+        {
+            "command": "O",
+            "vnum": "15008",
+            "progtype": "fight_prog",
+            "progname": "fight_prog_ancient_shield"
+        },
+        {
+            "command": "O",
+            "vnum": "15008",
+            "progtype": "wear_prog",
+            "progname": "wear_prog_ancient_shield"
+        },
+        {
+            "command": "O",
+            "vnum": "15008",
+            "progtype": "remove_prog",
+            "progname": "remove_prog_ancient_shield"
+        },
+        {
+            "command": "O",
+            "vnum": "15011",
+            "progtype": "wear_prog",
+            "progname": "wear_prog_neckguard"
+        },
+        {
+            "command": "O",
+            "vnum": "15011",
+            "progtype": "remove_prog",
+            "progname": "remove_prog_neckguard"
+        }
+    ]
+}

@@ -1,0 +1,1492 @@
+{
+    "area": {
+        "file": "hayvanat.are",
+        "name": "Türkçe",
+        "low_range": "1",
+        "high_range": "15",
+        "min_vnum": "8200",
+        "max_vnum": "8299",
+        "path": "8g d g y",
+        "yonelim_iyi": "20",
+        "yonelim_yansiz": "70",
+        "yonelim_kem": "10"
+    },
+    "mobiles": [
+        {
+            "vnum": "8200",
+            "name": "tüccar giles",
+            "short_description": "giles",
+            "long_description": "Giles dükkan sahibi burada oturmuþ tezgahta müþterileri bekliyor.\n",
+            "description": "Giles zamanýnýn çoðunu burada oturarak Hayvanat Bahçesine gelen\nziyaretçilere hizmet ederek geçiriyor. Tembel birisi olduðu için baþka bir\niþ yapmaya tenezzül etmiyor, hem ayrýca iyide para kazanýyor burada.\n",
+            "race": "human",
+            "act": "ABG",
+            "affected_by": "D",
+            "level": "20"
+        },
+        {
+            "vnum": "8201",
+            "name": "hayvanat bahçesi bekçisi",
+            "short_description": "hayvanat bahçesi bekçisi",
+            "long_description": "Bekçi masanýn arkasýnda oturuyor.\n",
+            "description": "Diyarýn en ünlü hayvanat bahçesinin bekçisi karþýnda. Bütün hayvanlarýn\nidare edilmesinden sadece o sorumlu. Deðiþik bir saç þekline sahip birisi,\npahalý kýyafetleri var. Kýyafetlerine bakýlarak hayvanlara pek bakmadýðý\nizlenimine kapýlýyorsun.\n",
+            "race": "human",
+            "act": "AB",
+            "affected_by": "F",
+            "level": "10"
+        },
+        {
+            "vnum": "8202",
+            "name": "dev sülük",
+            "short_description": "dev bir sülük",
+            "long_description": "Dev bir sülük koluna yapýþýyor.\n",
+            "description": "Dev hafif kahverengi siyahýmsý bir sülük.\n",
+            "race": "bear",
+            "act": "ABEF",
+            "affected_by": "0",
+            "level": "3"
+        },
+        {
+            "vnum": "8203",
+            "name": "kaplan",
+            "short_description": "kaplan",
+            "long_description": "Kaplan burada avlanmak için bekliyor.\n",
+            "description": "Sýradan fakat aç bir kaplan.\n",
+            "race": "cat",
+            "act": "ABEF",
+            "affected_by": "J",
+            "level": "17"
+        },
+        {
+            "vnum": "8204",
+            "name": "yunus",
+            "short_description": "yunus",
+            "long_description": "Mutluca yüzen bir yunus burada.\n",
+            "description": "Çok tatlý.\n",
+            "race": "water fowl",
+            "act": "ABCE",
+            "affected_by": "0",
+            "level": "10"
+        },
+        {
+            "vnum": "8205",
+            "name": "tek-boynuzlu at",
+            "short_description": "tek-boynuzlu at",
+            "long_description": "Tek-boynuzlu bir at burada duruyor.\n",
+            "description": "Muhteþem.\n",
+            "race": "fox",
+            "act": "AB",
+            "affected_by": "0",
+            "level": "15"
+        },
+        {
+            "vnum": "8206",
+            "name": "timsah",
+            "short_description": "timsah",
+            "long_description": "Timsah havuzun hemen üst kýsmýnda süzülerek yüzüyor.\n",
+            "description": "Büyük yeþil deriye sahip bir yaratýk, çok büyük ve geniþ diþleri var.\nDaha önce doyurulmuþ olmasýný umut ediyorsun.\n",
+            "race": "lizard",
+            "act": "ABF",
+            "affected_by": "0",
+            "level": "13"
+        },
+        {
+            "vnum": "8207",
+            "name": "ayý",
+            "short_description": "ayý",
+            "long_description": "Yaklaþtýkça hýrýldayan bir ayý.\n",
+            "description": "Þu ana kadar gördüðün en büyük ayý. Pençeleriyle sana verebileceði\nzararlarý düþününce kalbin duracak gibi oluyor.\n",
+            "race": "bear",
+            "act": "ABF",
+            "affected_by": "0",
+            "level": "13"
+        },
+        {
+            "vnum": "8208",
+            "name": "bebek ejderha",
+            "short_description": "bebek ejderha",
+            "long_description": "8metrelik boyuyla burada bebek ejderha duruyor.\n",
+            "description": "Bebek olmasýna raðmen pek bir büyük ejderha karþýnda duruyor.\n",
+            "race": "dragon",
+            "act": "AB",
+            "affected_by": "0",
+            "level": "19"
+        },
+        {
+            "vnum": "8209",
+            "name": "fil",
+            "short_description": "fil",
+            "long_description": "Sýradan bir fil burada duruyor.\n",
+            "description": "Büyük kulaklara sahip gri bir fil.\n",
+            "race": "dragon",
+            "act": "AB",
+            "affected_by": "0",
+            "level": "14"
+        },
+        {
+            "vnum": "8210",
+            "name": "goril",
+            "short_description": "goril",
+            "long_description": "Goril burada duruyor.\n",
+            "description": "Kýllý geniþ bir goril.\n",
+            "race": "human",
+            "act": "ABF",
+            "affected_by": "0",
+            "level": "15"
+        },
+        {
+            "vnum": "8211",
+            "name": "hayvanat bahçesi asistaný bir kadýn",
+            "short_description": "hayvanat bahçesi asistaný",
+            "long_description": "Hayvanat bahçesi asistaný bir kadýn burada yemek hazýrlýyor.\n",
+            "description": "Hayvanat bahçesindeki hayvanlarý beslemekten sorumlu olan\nbir kadýn.\n",
+            "race": "human",
+            "act": "AB",
+            "affected_by": "0",
+            "level": "10"
+        },
+        {
+            "vnum": "8230",
+            "name": "domuz",
+            "short_description": "domuz",
+            "long_description": "Bir domuz burada yuvarlanýyor.\n",
+            "description": "Bu sýradan küçük pembe bir domuz. Ne fazlasý var nede eksiði var.\n",
+            "race": "pig",
+            "act": "AB",
+            "affected_by": "0",
+            "level": "3"
+        },
+        {
+            "vnum": "8231",
+            "name": "küçük kuþ",
+            "short_description": "küçük kuþ",
+            "long_description": "Küçük bir kuþ etrafta uçuyor.\n",
+            "description": "Gökyüzünde uçarmýþçasýna kafeste uçan küçük bir kuþ.\n",
+            "race": "song bird",
+            "act": "A",
+            "affected_by": "0",
+            "level": "1"
+        },
+        {
+            "vnum": "8232",
+            "name": "bebek keçi",
+            "short_description": "bebek keçi",
+            "long_description": "Bebek keçi burada ot yiyor.\n",
+            "description": "Tasmalý bir bebek keçi görüyorsun.\n",
+            "race": "fox",
+            "act": "ABG",
+            "affected_by": "0",
+            "level": "2"
+        },
+        {
+            "vnum": "8233",
+            "name": "anne keçi",
+            "short_description": "anne keçi",
+            "long_description": "Normal bir vücuda sahip ortalama bir keçi.\n",
+            "description": "Keçinin geniþ daire þeklinde zilleri var. Ona bakarken senin giysilerini\nçiðnemeye baþlýyor.\n",
+            "race": "fox",
+            "act": "ABG",
+            "affected_by": "0",
+            "level": "3"
+        },
+        {
+            "vnum": "8234",
+            "name": "baba keçi",
+            "short_description": "baba keçi",
+            "long_description": "Baba keçi burada duruyor.\n",
+            "description": "Baba keçi burada ailesini koruyor. Görünüþe göre boynuzlarýyla sana\nepeyce bir zarar verebilir.\n",
+            "race": "fox",
+            "act": "ABG",
+            "affected_by": "0",
+            "level": "4"
+        },
+        {
+            "vnum": "8235",
+            "name": "üzgün görünümlü eþek",
+            "short_description": "eþek",
+            "long_description": "Üzgün görünümlü bir eþek burada duruyor.\n",
+            "description": "Oldukça üzgün ve çaresiz bir eþek duruyor burada.\n",
+            "race": "dog",
+            "act": "AB",
+            "affected_by": "0",
+            "level": "5"
+        },
+        {
+            "vnum": "8236",
+            "name": "yaþlý at",
+            "short_description": "yaþlý at",
+            "long_description": "Yaþlý bir at burada duruyor.\n",
+            "description": "Bir zamanlat savaþ atýna benzer bir görüntüsü var atýn. Büyük ve kaslý,\nve muhtemelen emekli olmasýna raðmen zarar verebilir durumda.\n",
+            "race": "fox",
+            "act": "AB",
+            "affected_by": "0",
+            "level": "6"
+        },
+        {
+            "vnum": "8237",
+            "name": "papaðan harvey",
+            "short_description": "papaðan harvey",
+            "long_description": "Harvey, yeþil papaðan burada tüneðin üstünde duruyor.\n",
+            "description": "Bu yeþil papaðan tüneðin üstünde oturuyor. Senin bütün hareketlerini\nizliyor. Papaðanýn üstünde, isminin yazýlý olduðu küçük bir tabela var.\nTabelanýn üstünde \"Harvey konuþan papaðan, lütfen parmaklarýnýza dikkat\nediniz.\" Yazýyor.\n",
+            "race": "song bird",
+            "act": "AB",
+            "affected_by": "0",
+            "level": "8"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "8200",
+            "name": "pirinç küçük anahtar",
+            "short_description": "pirinçten yapýlmýþ küçük anahtar",
+            "description": "pirinçten yapýlmýþ küçük anahtar burada duruyor.",
+            "material": "brass",
+            "type": "key",
+            "extra_flags": "0",
+            "wear_flags": "A",
+            "values": "0 0 0 0 0",
+            "level": "1",
+            "weight": "10",
+            "cost": "4",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "key",
+                    "description": "It is a small, simple brass key with no inscriptions\nor marks of any kind.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8201",
+            "name": "tiþört",
+            "short_description": "Tiþört",
+            "description": "Üzerinde çeþitli renklerle yazý yazan düz beyaz bir tiþört burada duruyor.",
+            "material": "satin",
+            "type": "clothing",
+            "extra_flags": "0",
+            "wear_flags": "AK",
+            "values": "0 0 0 0 0",
+            "level": "1",
+            "weight": "20",
+            "cost": "50",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-1"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "writting",
+                    "description": "The writting on the tee-shirt reads\n\"I've been to the Midgaard Zoo\"\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8202",
+            "name": "çinili fincan",
+            "short_description": "çinili bir fincan",
+            "description": "Yerde üzerinde çeþit çeþit renklerle yazý yazýlmýþ çinili bir fincan duruyor.",
+            "material": "porcelain",
+            "type": "drink",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "3 3 'lemonade' 0 0",
+            "level": "1",
+            "weight": "10",
+            "cost": "10",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "writting",
+                    "description": "The writting on the mug reads\n\"I've been to the Midgaard Zoo\"\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8203",
+            "name": "su çeþmesi",
+            "short_description": "Çeþme",
+            "description": "Çeþmeden su fýþkýrýyor.",
+            "material": "",
+            "type": "fountain",
+            "extra_flags": "0",
+            "wear_flags": "0",
+            "values": "0 0 'water' 0 0",
+            "level": "0",
+            "weight": "0",
+            "cost": "0",
+            "condition": "G",
+            "extra_descriptions": [
+                {
+                    "keyword": "fountain",
+                    "description": "It is very nice.  Made from fine white marble.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8204",
+            "name": "katlanabilir hayvanat bahçesi haritasý",
+            "short_description": "Katlanabilir bir hayvanat bahçesi haritasý",
+            "description": "Katlanabilir bir hayvanat bahçesi haritasý burada duruyor.",
+            "material": "paper",
+            "type": "map",
+            "extra_flags": "0",
+            "wear_flags": "AO",
+            "values": "0 0 0 0 0",
+            "level": "1",
+            "weight": "12",
+            "cost": "200",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "harita hayvanat bahçe",
+                    "description": "Selenge Hayvanat Bahçesi\n\n             [ ]\n            / |\n           /  |                  G = Gift Shop\n         [G]-[W]--[K]            W = Wishing well\n              |                  K = Kiddies Zoo\n        [X]--[ ]                 X = Out of bounds (Keeper)\n              |                  C = Crocodile\n     [C]      |   [G]            Y = Out Of Bounds (Feed Hut)\n      |       |    |             D = Dolphin\n     [ ]-----[ ]--[ ]--[ ]-[Y]   T = Tiger\n      |       |    |    |        U = Unicorn\n     [D] [E]-[ ]  [b]   |        B = Baby Dragon\n              |        [ ]-[B]   G = Gorilla\n             [T]        |        E = Elephant\n                       [U]       b = Bear\n\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8205",
+            "name": "hayvanat bahçesi hançeri",
+            "short_description": "Hayvanat Bahçesine ait hançer",
+            "description": "Küçük, üzerinde çok renkli bir yazý bulunan demir hançer burada duruyor.",
+            "material": "iron",
+            "type": "weapon",
+            "extra_flags": "0",
+            "wear_flags": "AN",
+            "values": "dagger 3 5 pierce 0",
+            "level": "10",
+            "weight": "80",
+            "cost": "750",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "writting",
+                    "description": "The writting on the tee-shirt reads\n\"I've been to the Midgaard Zoo\"\n"
+                }
+            ]
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "8200",
+            "name": "Hayvanat Bahçesinin Dýþý",
+            "description": "Parkýn içindeki bir patikanýn sonuna geldin. Selenge Hayvanat Bahçesinin\nkapýlarýnýn dýþýnda duruyorsun. Batýda ufak bir göl görüyorsun, doðuda ise\nküçük bir patika bulunmakta. Güneyde ise 2 tane turnike var. Biri hayvanat\nbahçesine diðeride dýþýna çýkýyor.\n",
+            "flags": "C",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3114"
+                },
+                {
+                    "door": "D5",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "3115"
+                },
+                {
+                    "door": "D2",
+                    "description": "Turnike yol ayrýmlarýnda oklarla hangi yönün nereye gittiðini anlatmak\nadýna kullanýlýr.\n",
+                    "keyword": "turnike",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8205"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "turnike",
+                    "description": "The turnstiles are study and can only be made to turn in one direction.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8201",
+            "name": "Hayvanat Bahçesi Dilek Kuyusu",
+            "description": "Selenge Hayvanat Bahçesinin hemen giriþinde duruyorsun. Dýþarýya yönelen\nturnike hemen batýda olmalý fakat turnike yerine küçük bir bina var orada.\nSen yinede çýkmak için ayný yoldan geri dönmen gerektiðini düþünüyorsun.\nDoðuda ise çocuklar için hazýrlanmýþ oldukça parlak ve renkli Hayvanat\nBahçesi Çocuk bölümü var, güneyde ise asýl Hayvanat Bahçesi bulunmakta.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "The turnstile looks study and impossible to get through from this side.\n",
+                    "keyword": "turnstile",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "-1"
+                },
+                {
+                    "door": "D1",
+                    "description": "Birkaç kulübe ve kümes görüyorsun doðuda.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8230"
+                },
+                {
+                    "door": "D2",
+                    "description": "Küçük bir patika görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8204"
+                },
+                {
+                    "door": "D3",
+                    "description": "Bina þehir dýþýndan gelenler için yapýlmýþ bir hediye dükkaný imiþ.\n",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8205"
+                },
+                {
+                    "door": "D5",
+                    "description": "Bulanýk sudaki parýldayan bozukluklar görüyorsun.\n",
+                    "keyword": "ýzgara",
+                    "locks": "1",
+                    "key": "8200",
+                    "u1_vnum": "8203"
+                }
+            ]
+        },
+        {
+            "vnum": "8203",
+            "name": "Dilek Kuyusunun Dibi",
+            "description": "Dilek kuyusunun dibindesin, pek yüksek olmayan kuyudan rahatlýkla\ntýrmanarak geri çýkabilirsin.\n",
+            "flags": "1",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D4",
+                    "description": "Gökyüzünü görebiliyorsun.\n",
+                    "keyword": "ýzgara",
+                    "locks": "1",
+                    "key": "8200",
+                    "u1_vnum": "8201"
+                }
+            ]
+        },
+        {
+            "vnum": "8204",
+            "name": "Hayvanat Bahçesinde Bir Patika",
+            "description": "Hayvanat Bahçesindeki küçük bir patikadasýn. Batýda önemli olduðu\nizlenimine kapýldýðýn bir bina bulunuyor, güney ve kuzeye doðru devam ediyor\npatika.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kuyuyu görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8201"
+                },
+                {
+                    "door": "D2",
+                    "description": "Yanyol ve arayollarý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8207"
+                },
+                {
+                    "door": "D3",
+                    "description": "Kapýnýn hemen üstünde \"Hayvanat Bahçesi Bakýcýsý\" yazýsýný görüyorsun.\n",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8206"
+                }
+            ]
+        },
+        {
+            "vnum": "8205",
+            "name": "Hediye Dükkaný",
+            "description": "Pek bir özenle hazýrlanmýþ hediyelerin bulunduðu bir dükkandasýn.\nDükkanda hayvanat bahçesiyle ilgili bazý eþyalar satýlmakta. Kuzeye\nbaktýðýnda bir turnike dýþarý dünyaya açýlýyor, doðuda ise tekrar Hayvanat\nBahçesine dönüyor. Tezgahýn üstündeki tabela dikkatini çekiyor.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Turnike Hayvanat Bahçesinin dýþýna çýkýyor.\n",
+                    "keyword": "turnike",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8200"
+                },
+                {
+                    "door": "D1",
+                    "description": "Kapý aralýðýndan Hayvanat Bahçesi kuyusunu görüyorsun.\n",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8201"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "iþaret tabela",
+                    "description": "+----------------------+\n|  The Zoo Gift Shop   |\n|                      |\n| Type 'list' or 'buy' |\n|  here to deal with   |\n|     shop keeper.     |\n+----------------------+\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8206",
+            "name": "Hayvanat Bahçesi Bakýcýsý'nýn Ofisi",
+            "description": "Hayvanat Bahçesi bakýcýsýnýn ofisinde duruyorsun. Geniþ bir masa ve\nüzerindeki birsürü kaðýtlar odayý meþgul etmekte.\n",
+            "flags": "8",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8204"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "paper",
+                    "description": "You pick a piece of paper randomly and read it. It details the profits of the\nzoo for the last week. Wow! You realise this guy is making a packet.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "8207",
+            "name": "Hayvanat Bahçesinde bir Anayol",
+            "description": "Anayol'un ortasýnda duruyorsun; güneye, kuzeye, batýya ve doðuya giden\npatikalar görüyorsun.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Küçük bir patika görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8204"
+                },
+                {
+                    "door": "D1",
+                    "description": "Küçük bir patika görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8208"
+                },
+                {
+                    "door": "D2",
+                    "description": "Küçük bir patika görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8209"
+                },
+                {
+                    "door": "D3",
+                    "description": "Küçük bir patika görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8210"
+                }
+            ]
+        },
+        {
+            "vnum": "8208",
+            "name": "Kafesler arasýndaki bir patika",
+            "description": "Meþhur Selenge Hayvanat Bahçesinde bir patikada duruyorsun. Kuzeyde ve\ngüneyde kafesler var. Patika doðuya ve batýya doðru devam ediyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Goril kafese yaklaþtýðýnda senin göðsüne vuruyor, sana meydan\nokurmuþçasýna. O kadar akýllý olamazlar ama deðil mi?\n",
+                    "keyword": "kapý kafes",
+                    "locks": "1",
+                    "key": "8200",
+                    "u1_vnum": "8211"
+                },
+                {
+                    "door": "D1",
+                    "description": "Küçük bir kulübe gözüne çarpýyor.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8213"
+                },
+                {
+                    "door": "D2",
+                    "description": "Büyük kahverengi bir ayý ayaða kalkýp hýrlamaya baþlýyor tamda sen\nyaklaþýp ona düzgün bir bakýþ attýðýnda.\n",
+                    "keyword": "kapý kafes",
+                    "locks": "1",
+                    "key": "8200",
+                    "u1_vnum": "8212"
+                },
+                {
+                    "door": "D3",
+                    "description": "Anayolu görebiliyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8207"
+                }
+            ]
+        },
+        {
+            "vnum": "8209",
+            "name": "Kafesler arasýndaki bir patika",
+            "description": "Meþhur Selenge Hayvanat Bahçesinde bir patikada duruyorsun. Batýda ve\ngüneyde kafesler var. Patika kuzeye doðru devam ediyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Anayolu görebiliyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8207"
+                },
+                {
+                    "door": "D2",
+                    "description": "Kafesin içindeki kaplaný görüyorsun, kaplan kafesin bir ucundan diðer\nucuna yürüyüyor; sýkýlmýþ olsa gerek.\n",
+                    "keyword": "kapý kafes",
+                    "locks": "1",
+                    "key": "8200",
+                    "u1_vnum": "8214"
+                },
+                {
+                    "door": "D3",
+                    "description": "Batýdaki kafeste bir fil sakince duruyor.\n",
+                    "keyword": "kapý kafes",
+                    "locks": "1",
+                    "key": "8200",
+                    "u1_vnum": "8215"
+                }
+            ]
+        },
+        {
+            "vnum": "8210",
+            "name": "Kafesler arasýndaki bir patika",
+            "description": "Meþhur Selenge Hayvanat Bahçesinde bir patikadasýn. Kuzeyde ve güneyde\nbazý kafesler var. Kafeslerin içinde havuzlar görüyorsun. Patika doðuya\ndoðru geri dönüyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Sayýsýz timsah görüyorsun kafesin ardýnda, hepside havuzda çýrpýnmaya\nçalýþýyor.\n",
+                    "keyword": "kapý kafes",
+                    "locks": "1",
+                    "key": "8200",
+                    "u1_vnum": "8216"
+                },
+                {
+                    "door": "D1",
+                    "description": "Anayolu görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8207"
+                },
+                {
+                    "door": "D2",
+                    "description": "Sayýsýz yunus görebiliyorsun kafesin ardýnda, birbirleriyle suda oyun\noynuyorlar.\n",
+                    "keyword": "kafes kapý",
+                    "locks": "1",
+                    "key": "8200",
+                    "u1_vnum": "8217"
+                }
+            ]
+        },
+        {
+            "vnum": "8211",
+            "name": "Goril Kafesi",
+            "description": "Hayvanat Bahçesin'deki Goril kafesinin içindesin. Kocaman fakat tek\nbaþýna durmuþ bir aðaç görüyorsun. Kafesin dýþ kapýsý güneyde.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Kafesin hemen dýþýnda küçük bir patika görüyorsun.\n",
+                    "keyword": "kafes kapý",
+                    "locks": "1",
+                    "key": "8200",
+                    "u1_vnum": "8208"
+                }
+            ]
+        },
+        {
+            "vnum": "8212",
+            "name": "Ayý Kafesi",
+            "description": "Hayvanat Bahçesin'deki Ayý kafesinin içindesin. Kafesin bir köþesinde\nbirsürü yarýsý yenmiþ et duruyor. Hadi bunlarý dün yediyse ve þimdi açsa\ndiye düþünüyorsun. Kafesin çýkýþ kapýsý kuzeyde duruyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kafesin dýþýnda küçük bir patika görüyorsun.\n",
+                    "keyword": "kafes kapý",
+                    "locks": "1",
+                    "key": "8200",
+                    "u1_vnum": "8208"
+                }
+            ]
+        },
+        {
+            "vnum": "8213",
+            "name": "Patikada bir kývrým",
+            "description": "Patika batýdan güneye doðru kývrýlýyor. Küçük bir kulübeye giden kapý\ndoðuda duruyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Kapý oldukça zayýf.\n",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8219"
+                },
+                {
+                    "door": "D2",
+                    "description": "Küçük bir patika görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8218"
+                },
+                {
+                    "door": "D3",
+                    "description": "Küçük bir patika görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8208"
+                }
+            ]
+        },
+        {
+            "vnum": "8214",
+            "name": "Kaplan Kafesi",
+            "description": "Hayvanat Bahçesindeki Kaplan kafesindesin. Yerlerde uzun çimenler\nbüyüyor. Tahmin etmeye pek gerek yok sanýrým neden çimenlerin biçilmediðine.\nBirden kafesin içinde olduðunun farkýna varýyorsun. Sen ne yaptýn? Belkide\nhemen kuzeydeki kapýya koþup kafesten çýkmalýsýn.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kafesin diðer tarafýnda küçük bir patika görüyorsun.\n",
+                    "keyword": "kapý kafes",
+                    "locks": "1",
+                    "key": "8200",
+                    "u1_vnum": "8209"
+                }
+            ]
+        },
+        {
+            "vnum": "8215",
+            "name": "Fil Kafesi",
+            "description": "Hayvanat Bahçesinin Fil kafesinin içindesin. Zeminin sert ve tozlu\nolduðunu farkediyorsun. Kafesin dýþýna çýkan kapý doðu tarafýnda.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Kafesin dýþýnda küçük bir patika görüyorsun.\n",
+                    "keyword": "kapý kafes",
+                    "locks": "1",
+                    "key": "8200",
+                    "u1_vnum": "8209"
+                }
+            ]
+        },
+        {
+            "vnum": "8216",
+            "name": "Timsah Kafesi",
+            "description": "Hayvanat Bahçesinin Timsah kafesinin içindesin. Kafesin çoðu kýsmýný bir\nhavuz kaplýyor. Kafesin dýþýna çýkan kapý güney tarafýnda duruyor.\n",
+            "flags": "0",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Kafesin dýþýnda küçük bir patika görüyorsun.\n",
+                    "keyword": "kapý kafes",
+                    "locks": "1",
+                    "key": "8200",
+                    "u1_vnum": "8210"
+                }
+            ]
+        },
+        {
+            "vnum": "8217",
+            "name": "Yunus Kafesi",
+            "description": "Hayvanat Bahçesindeki yunus kafesinin içindesin. Havuzun içinde\nyüzüyorsun. Kafesin dýþýna çýkan kapý kuzey tarafýnda.\n",
+            "flags": "0",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kafesin dýþýnda küçük bir patika görüyorsun.\n",
+                    "keyword": "kapý kafes",
+                    "locks": "1",
+                    "key": "8200",
+                    "u1_vnum": "8210"
+                }
+            ]
+        },
+        {
+            "vnum": "8218",
+            "name": "Kafeslerin arasýnda bir patika",
+            "description": "Meþhur Selenge Hayvanat Bahçesinde bir patikada duruyorsun. Doðuda ve\ngüneyde kafesler bulunuyor, patika kuzeye doðru devam ediyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Kafesin içindeki devasa kertenkeleyi görüyorsun.\n",
+                    "keyword": "kapý kafes",
+                    "locks": "1",
+                    "key": "8200",
+                    "u1_vnum": "8220"
+                },
+                {
+                    "door": "D2",
+                    "description": "Kafesin diðer tarafýnda beyaz boynuzlu bir at görüyorsun.\n",
+                    "keyword": "kapý kafes",
+                    "locks": "1",
+                    "key": "8200",
+                    "u1_vnum": "8221"
+                },
+                {
+                    "door": "D0",
+                    "description": "Kapý aralýðýndan küçük bir patikayý görebiliyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8213"
+                }
+            ]
+        },
+        {
+            "vnum": "8219",
+            "name": "Hayvan yemek deposu",
+            "description": "Küçük bir kulübede duruyorsun. Hayvanat Bahçesindeki bütün hayvanlarýn\nyemeklerinin burada olduðunu rahatlýkla etrafýndaki yemeklerden\nanlayabiliyorsun. Kulübenin dýþýna çýkan kapý batý yönünde.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Kapý oldukça zayýf.\n",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8213"
+                }
+            ]
+        },
+        {
+            "vnum": "8220",
+            "name": "Bebek Ejderha Kafesi",
+            "description": "Hayvanat Bahçesindeki bebek ejderhanýn kafesinin içinde duruyorsun. Kafes\nneredeyse bomboþ bebek dýþýnda. Kafesin çýkýþ kapýsý batýdaki kapýda.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Kafesin dýþýnda küçük bir patika görüyorsun.\n",
+                    "keyword": "kapý kafes",
+                    "locks": "1",
+                    "key": "8200",
+                    "u1_vnum": "8218"
+                }
+            ]
+        },
+        {
+            "vnum": "8221",
+            "name": "Tek boynuzlu At'ýn kafesi",
+            "description": "Hayvanat Bahçesindeki tek-boynuzlu at'ýn kafesinin içindesin. Kafesin\niçerisi oldukça soðuk, kafesin kuzey duvarýnda çýkýþ kapýsý var.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kafesin dýþýnda küçük bir patika görüyorsun.\n",
+                    "keyword": "kapý kafes",
+                    "locks": "1",
+                    "key": "8200",
+                    "u1_vnum": "8218"
+                }
+            ]
+        },
+        {
+            "vnum": "8230",
+            "name": "Küçüklerin Hayvanat Bahçesi",
+            "description": "Hayvanat Bahçesinin küçükler için yapýlmýþ kýsmýnýn giriþindesin. Batýda\nHayvanat Bahçesi kuyusunu görüyorsun, doðuda ise küçük bir patika var.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D3",
+                    "description": "Kuyuyu görebiliyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8201"
+                },
+                {
+                    "door": "D1",
+                    "description": "Küçük bir patika görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8231"
+                }
+            ]
+        },
+        {
+            "vnum": "8231",
+            "name": "Hayvanat Bahçesi Küçükler Bölümünde küçük bir patika",
+            "description": "Küçükler için yapýlmýþ kýsýmda bir patikadasýn. Kuzey tarafda keçilerin\nbulunduðu bir çit, güney taraftada domuzlarýn bulunduðu bir çit bulunmakta.\nPatika doðuya ve batýdaki giriþe doðru devam ediyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Keçi ailesini görebiliyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8232"
+                },
+                {
+                    "door": "D1",
+                    "description": "Küçük bir patika görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8234"
+                },
+                {
+                    "door": "D2",
+                    "description": "Çamurun içine atlayan domuzlarý görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8233"
+                },
+                {
+                    "door": "D3",
+                    "description": "Giriþi görebiliyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8230"
+                }
+            ]
+        },
+        {
+            "vnum": "8232",
+            "name": "Keçi çiti",
+            "description": "Düþmüþ geniþ bir aðaç burada duruyor, çocuklarýn gelip keçilerle\noynamasýna olanak saðlýyor. Güneyde küçük bir patika yatýyor.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Küçük bir patika görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8231"
+                }
+            ]
+        },
+        {
+            "vnum": "8233",
+            "name": "Domuz Çiti",
+            "description": "Dizlerine kadar çamurun içinde duruyorsun. Kötü bir koku senin bütün duyu\norganlarýný faal duruma düþürmekte. Kuzeye küçük patikaya gidebilirsin.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Küçük bir patika görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8231"
+                }
+            ]
+        },
+        {
+            "vnum": "8234",
+            "name": "Hayvanat Bahçesinin Küçükler için olan bölümünde bir patika",
+            "description": "Hayvanat Bahçesinin küçükler için yapýlmýþ kýsmýnda küçük bir\npatikadasýn. Kuzeyde büyük kuþ kafesleri günde ise ahýr görüyorsun. Batýya\ndoðru geri dönen bir patika bulunmakta.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Tahtanýn üstünden bir baþka tahtanýn üstüne uçan kuþlar görüyorsun.\n",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8236"
+                },
+                {
+                    "door": "D3",
+                    "description": "Küçük bir patika görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8231"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ahýrdan bir sürü atýn sesi geliyor.\n",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8235"
+                }
+            ]
+        },
+        {
+            "vnum": "8235",
+            "name": "Ahýr",
+            "description": "Küçük bir ahýrdasýn. Bütün zemin samanla örtülmüþ durumda, çeþitli at\nayaklarý ve bir sürü þey daha duvarlara çivilenmiþ duruyor. Ahýrýn çýkýþ\nkapýsý kuzeyde duruyor.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kapýnýn çýkýþýnda küçük bir patika birda ötesinde kuþ kafesi görüyorsun.\n",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8234"
+                }
+            ]
+        },
+        {
+            "vnum": "8236",
+            "name": "Büyük Kuþ Kafesi",
+            "description": "Büyük bir kuþ kafesindesin. Kafes kuzeye doðru devam ediyor, güneyde ise\nçýkýþ kapýsý var.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kafesin dahada devam ettiðini görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8237"
+                },
+                {
+                    "door": "D2",
+                    "description": "Kapýnýn penceresinden küçük bir patika görüyorsun.\n",
+                    "keyword": "kapý",
+                    "locks": "1",
+                    "key": "-1",
+                    "u1_vnum": "8234"
+                }
+            ]
+        },
+        {
+            "vnum": "8237",
+            "name": "Büyük Kuþ Kafesi",
+            "description": "Büyük bir kuþ kafesinde duruyorsun. Kafes batýya ve güneye doðru devam\nediyor.\n",
+            "flags": "D",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Kafesin devamýný görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8236"
+                },
+                {
+                    "door": "D3",
+                    "description": "Kafesin devamýný görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8238"
+                }
+            ]
+        },
+        {
+            "vnum": "8238",
+            "name": "Büyük Kuþ Kafesi",
+            "description": "Büyük kuþ kafesinin donunda duruyorsun. Kafesin geri kalan kýsmý doðuda\nduruyor.\n",
+            "flags": "D",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Kafesin devamýný görüyorsun.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "-1",
+                    "u1_vnum": "8237"
+                }
+            ]
+        }
+    ],
+    "resets": [
+        {
+            "command": "M",
+            "arg1": "8200",
+            "arg2": "1",
+            "arg3": "8205",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "8201",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "8202",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "8204",
+            "arg2": "-1"
+        },
+        {
+            "command": "G",
+            "arg1": "8205",
+            "arg2": "-1"
+        },
+        {
+            "command": "D",
+            "arg1": "8201",
+            "arg2": "5",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "8204",
+            "arg2": "3",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8206",
+            "arg2": "1",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8210",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "8210",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "8216",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "8217",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "8209",
+            "arg2": "3",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "8209",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "8214",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "8215",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "8208",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "8208",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "8211",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "8212",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "8218",
+            "arg2": "1",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "8218",
+            "arg2": "2",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "8220",
+            "arg2": "3",
+            "arg3": "2"
+        },
+        {
+            "command": "D",
+            "arg1": "8221",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "M",
+            "arg1": "8201",
+            "arg2": "1",
+            "arg3": "8206",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "8200",
+            "arg2": "8"
+        },
+        {
+            "command": "M",
+            "arg1": "8211",
+            "arg2": "1",
+            "arg3": "8219",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "8205",
+            "arg2": "-1",
+            "arg3": "16"
+        },
+        {
+            "command": "O",
+            "arg1": "8203",
+            "arg2": "1",
+            "arg3": "8201"
+        },
+        {
+            "command": "M",
+            "arg1": "8203",
+            "arg2": "1",
+            "arg3": "8214",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8206",
+            "arg2": "3",
+            "arg3": "8216",
+            "arg4": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "8204",
+            "arg2": "3",
+            "arg3": "8217",
+            "arg4": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "8205",
+            "arg2": "1",
+            "arg3": "8221",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8202",
+            "arg2": "6",
+            "arg3": "8203",
+            "arg4": "4"
+        },
+        {
+            "command": "M",
+            "arg1": "8209",
+            "arg2": "1",
+            "arg3": "8215",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8210",
+            "arg2": "1",
+            "arg3": "8211",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8207",
+            "arg2": "1",
+            "arg3": "8212",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8208",
+            "arg2": "1",
+            "arg3": "8220",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8230",
+            "arg2": "6",
+            "arg3": "8233",
+            "arg4": "3"
+        },
+        {
+            "command": "M",
+            "arg1": "8234",
+            "arg2": "1",
+            "arg3": "8232",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8233",
+            "arg2": "1",
+            "arg3": "8232",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8232",
+            "arg2": "1",
+            "arg3": "8232",
+            "arg4": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8235",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8234",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8236",
+            "arg2": "1",
+            "arg3": "8235",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8235",
+            "arg2": "1",
+            "arg3": "8235",
+            "arg4": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8236",
+            "arg2": "2",
+            "arg3": "1"
+        },
+        {
+            "command": "D",
+            "arg1": "8234",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8231",
+            "arg2": "12",
+            "arg3": "8236",
+            "arg4": "7"
+        },
+        {
+            "command": "M",
+            "arg1": "8231",
+            "arg2": "12",
+            "arg3": "8238",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "8237",
+            "arg2": "1",
+            "arg3": "8238",
+            "arg4": "1"
+        }
+    ],
+    "shops": [
+        {
+            "keeper": "8200",
+            "buy_type_0": "0",
+            "buy_type_1": "0",
+            "buy_type_2": "0",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "100",
+            "profit_sell": "100",
+            "open_hour": "0",
+            "close_hour": "23"
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "8208",
+            "spec_fun": "spec_breath_lightning"
+        }
+    ]
+}

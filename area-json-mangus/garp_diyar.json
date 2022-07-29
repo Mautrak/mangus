@@ -1,0 +1,2797 @@
+{
+    "area": {
+        "file": "garp_diyar.are",
+        "name": "Türkçe",
+        "low_range": "40",
+        "high_range": "90",
+        "min_vnum": "10000",
+        "max_vnum": "10050",
+        "path": "13b 2k d 3k",
+        "yonelim_iyi": "33",
+        "yonelim_yansiz": "34",
+        "yonelim_kem": "33"
+    },
+    "mobiles": [
+        {
+            "vnum": "10001",
+            "name": "zargana uzun kuyruklu",
+            "short_description": "Uzun kuyruklu bir zargana",
+            "long_description": "Uzun kuyruklu bir zargana seni ormanýn derinliklerine kadar takip ediyor.\n",
+            "description": "Koku duyusuyla avlanan dev bir etobur yaratýk görüyorsun. Senin kanýn ise\noldukça tatlý olmalý çünkü seni farketti ve sana doðru koþuyor. HIZLI OL!\n",
+            "race": "dragon",
+            "act": "ABFT",
+            "affected_by": "TVb",
+            "level": "60"
+        },
+        {
+            "vnum": "10002",
+            "name": "zargana uzun kuyruklu",
+            "short_description": "Uzun kuyruklu bir zargana",
+            "long_description": "Uzun kuyruklu bir zargana seni ormanýn derinliklerine kadar takip ediyor.\n",
+            "description": "Koku duyusuyla avlanan dev bir etobur yaratýk görüyorsun. Senin kanýn ise\noldukça tatlý olmalý çünkü seni farketti ve sana doðru koþuyor. HIZLI OL!\n",
+            "race": "dragon",
+            "act": "ABFT",
+            "affected_by": "TVb",
+            "level": "46"
+        },
+        {
+            "vnum": "10003",
+            "name": "zargana uzun kuyruklu",
+            "short_description": "uzun kuyruklu bir zargana",
+            "long_description": "Uzun kuyruklu bir zargana seni ormanýn içlerine doðru takip ediyor.\n",
+            "description": "Koku duyusuyla avlanan dev bir etobur yaratýk görüyorsun. Senin kanýn ise\noldukça tatlý olmalý çünkü seni farketti ve sana doðru koþuyor. HIZLI OL!\n",
+            "race": "dragon",
+            "act": "ABFT",
+            "affected_by": "TVb",
+            "level": "46"
+        },
+        {
+            "vnum": "10004",
+            "name": "sivrisinek",
+            "short_description": "Sivrisinek",
+            "long_description": "Küçük, rahatsýz edici bir böcek kanýný emmek için sabýrsýzlanýyor.\n",
+            "description": "Deforme olmuþ, dev gibi diþleri olan, minik bir böcek görüyorsun. Tenini\ndelmek için sabýrsýzlanýyor.\n",
+            "race": "unique",
+            "act": "ABT",
+            "affected_by": "BGJTVb",
+            "level": "40"
+        },
+        {
+            "vnum": "10005",
+            "name": "katrat suikastçisi",
+            "short_description": "Bir katrat suikastçisi",
+            "long_description": "Katrat suikastçilerinin bir üyesi burada.\n",
+            "description": "Aðýr zýrhlar içinde tehlikeli ve silahlý bir adam görüyorsun. Suikastçi tipinde\nbirine benziyor. Aklýnda tek bir düþünce varmýþ gibi gözüküyor: ÖLDÜRMEK!\n",
+            "race": "human",
+            "act": "ABT",
+            "affected_by": "Vb",
+            "level": "55"
+        },
+        {
+            "vnum": "10006",
+            "name": "katrat suikastçisi",
+            "short_description": "Bir katrat suikastçisi",
+            "long_description": "Katrat suikastçilerinin bir üyesi burada.\n",
+            "description": "Aðýr zýrhlar içinde tehlikeli ve silahlý bir adam görüyorsun. Suikastçi tipinde\nbirine benziyor. Aklýnda tek bir düþünce varmýþ gibi gözüküyor: ÖLDÜRMEK!\n",
+            "race": "human",
+            "act": "ABT",
+            "affected_by": "Vb",
+            "level": "56"
+        },
+        {
+            "vnum": "10007",
+            "name": "genç bayan",
+            "short_description": "Genç bir bayan",
+            "long_description": "Bahçesinden çiçek toplayan hoþ, genç bir bayan burada.\n",
+            "description": "Bahçesinden çiçek toplayan genç bir bayan görüyorsun.\n",
+            "race": "human",
+            "act": "ABT",
+            "affected_by": "Nb",
+            "level": "46"
+        },
+        {
+            "vnum": "10008",
+            "name": "balýkçý",
+            "short_description": "Bir balýkçý",
+            "long_description": "Günün balýðýný bekleyen bir balýkçý görüyorsun.\n",
+            "description": "Balýk tutmayý seven uzun boylu bir adam. Görünüþe göre eve götürmek için\nbirkaç balýk yakalamak istiyor.\n",
+            "race": "human",
+            "act": "ABT",
+            "affected_by": "Nb",
+            "level": "50"
+        },
+        {
+            "vnum": "10009",
+            "name": "küçük çocuk",
+            "short_description": "Küçük bir çocuk",
+            "long_description": "Kumda oynayan küçük bir çocuk burada.\n",
+            "description": "Kumdan kale yapan küçük bir çocuk görüyorsun. Kum onun kaleleri için\nmükemmel ve ona katýlmak istediðini hissediyorsun.\n",
+            "race": "human",
+            "act": "ABT",
+            "affected_by": "Nb",
+            "level": "50"
+        },
+        {
+            "vnum": "10010",
+            "name": "yürektazýsý",
+            "short_description": "bir yürektazýsý",
+            "long_description": "Burada aðzýnýn suyu akan bir yürektazýsý var.\n",
+            "description": "Bu sýnýrdan kaçan en ölümcül yaratýklardan biri. Dikkatli olsan iyi olur,\nçünkü ne gibi güçleri olduðu bilinmiyor. Son derece ölümcül bir yaratýk.\nDirek kalbe hamle yaptýklarý için bu ismi almýþlardýr. Diðerleri ise\nkalp atýþlarýný duyduklarýný iddia eder.\n",
+            "race": "unique",
+            "act": "AFGT",
+            "affected_by": "UVZb",
+            "level": "55"
+        },
+        {
+            "vnum": "10011",
+            "name": "sözcü",
+            "short_description": "bir sözcü",
+            "long_description": "Burada kalabalýða konuþma yapan bir sözcü var.\n",
+            "description": "Köylüler üzerinde büyük otoritesi varmýþ gibi gözüken uzun boylu bir adam.\nAteþ ve onun ölümcül kayýplarý konusunda harika bir konuþma yapýyor. Üzerinde\nbeyaz pantolon ve tünik var. Kötü biri gibi deðil. Konuþmasý seni sýkmaya\nbaþlýyor ve yoluna koyulmak istiyorsun.\n",
+            "race": "human",
+            "act": "AFGT",
+            "affected_by": "UVZb",
+            "level": "60"
+        },
+        {
+            "vnum": "10012",
+            "name": "mutlu köylü",
+            "short_description": "Mutlu bir köylü",
+            "long_description": "Burada gerçekten mutlu bir köylü var.\n",
+            "description": "Bu köylünün yanýndan geçerken \"Merhaba\" diyor ve seni tükürüklü bir biçimde\nuzun uzun öpüyor. Sadece sarhoþ mu yoksa tamamen aklýný mý kaçýrdýðýný\nmerak etmeye baþlýyorsun.\n",
+            "race": "human",
+            "act": "AFGT",
+            "affected_by": "UVZb",
+            "level": "60"
+        },
+        {
+            "vnum": "10013",
+            "name": "þifacý",
+            "short_description": "Bir þifacý",
+            "long_description": "Kasabanýn þifacýsý burada.\n",
+            "description": "Ýnsanlarý iyileþtirmekten memnun gibi gözüken bir kadýn burada. Güzel, uzun\nsaçlarý var ve neredeyse yere deðecek kadar uzun, beyaz bir giysi giyiyor.\nKafasýný dik tutuyor ve yüzünde hoþ bir gülümseme var.\n",
+            "race": "human",
+            "act": "ABQ",
+            "affected_by": "HF",
+            "level": "106"
+        },
+        {
+            "vnum": "10014",
+            "name": "sýnýr bekçisi",
+            "short_description": "Bir sýnýr bekçisi",
+            "long_description": "Güçlü, kudretli bir sýnýr bekçisi burada.\n",
+            "description": "Þimdiye kadar gördüðün en dayanýklý, güçlü ve uzun kiþi. Yaklaþýl 7'6 inç ve\nbir insan aðýrýðýnýn sekiz katý. Zýrh ve silahlarla iyice donanmýþ ve savaþ\niçin hazýr görünüyor. Arkadaþ canlý biri olmasý iyi birþey.\n",
+            "race": "human",
+            "act": "AGT",
+            "affected_by": "DFHJUVb",
+            "level": "70"
+        },
+        {
+            "vnum": "10015",
+            "name": "hýrsýz",
+            "short_description": "Bir hýrsýz",
+            "long_description": "Küçük bir hýrsýz burada paraný çalmaya çalýþýyor.\n",
+            "description": "Burada tamamen siyahlara bürünmüþ, sen ayakta uyurken paraný çalmaya hazýr,\nbir hýrsýz duruyor. Binalarýn gölgelerinde zorlukla farkedilen kara botlar\nve pantalon giymiþ.\n",
+            "race": "human",
+            "act": "ACT",
+            "affected_by": "CDGPQVd",
+            "level": "40"
+        },
+        {
+            "vnum": "10016",
+            "name": "dilenci",
+            "short_description": "Bir dilenci",
+            "long_description": "Burada para isteyen çirkin bir dilenci var.\n",
+            "description": "*offf* Eðer burada paraný çalmaya çalýþan hýrsýzlar yoksa onu isteyen\ndilenciler var. Zavallý küçüðe acýyorsun. Kýsa bir sonra kýþ olacak olmasý\nve gidecek bir yerinin olmamasý ne kadar kötü. N'APALIM, hayat devam ediyor.\n",
+            "race": "human",
+            "act": "ABCH",
+            "affected_by": "DVb",
+            "level": "46"
+        },
+        {
+            "vnum": "10017",
+            "name": "Kemik Kadýn",
+            "short_description": "Kemik Kadýn",
+            "long_description": "Burada kemiklerle oynayan ilginç bir kadýn görüyorsun.\n",
+            "description": "Kadýnýn gözleri beyaz. Seni görüp görmediðini merak ediyorsun.\nOdaya girdiðin zaman seni hoþ karþlýlýyor ve misafirliðe davet ediyor.\nBoyununda kemikten bir kolye var. Onu gördüðün zaman aklýnýn içinde bazý\nsözler duyuyorsun \"Kolye'yi almak zorundayým!!\" Kadýn onu sana vermeyecek...\neðer almak istiyorsan bir savaþ yakýndýr.\n",
+            "race": "human",
+            "act": "ABR",
+            "affected_by": "CDEFJTV",
+            "level": "109"
+        },
+        {
+            "vnum": "10018",
+            "name": "kavrayýcý",
+            "short_description": "Yaramaz bir kavrayýcý",
+            "long_description": "Küçük, yaramaz bir kavrayýcý sana saldýrmak için bekliyor.\n",
+            "description": "Zýrh kaplý ve uzun keskin diþli bir kavrayýcý görüyorsun. Çok aç gözüküyor.\nO yüzden ben olsam yanýna yaklaþmazdým. O, sana yapýþan ve ölene kadar kanýný\niçen bir aþaðýdünya yaratýðý. En iyi, kaplumbaðadan yavaþ olmasýna raðmen,\nbuna dikkat etmek.\n",
+            "race": "human",
+            "act": "ACGT",
+            "affected_by": "JV",
+            "level": "92"
+        },
+        {
+            "vnum": "10019",
+            "name": "gölge þeyi",
+            "short_description": "KOrkUnÇ GöLgE ÞEyi",
+            "long_description": "Burada seni öldürmeye hazýr bir KOrkUnÇ GöLgE ÞEyi var.\n",
+            "description": "Bu seni tek dokunuþla öldürebilecek gibi görünen çok korkunç bir yaratýk.\nPanis Rahl, son savaþtaki Darken'ýn babasý tarafýndan gönderilmiþti. Bu, safi\ntehlike anlamýna gelir. Ben olsam uzaklýðýmý korurdum.\n",
+            "race": "human",
+            "act": "ABCGT",
+            "affected_by": "JV",
+            "level": "99"
+        },
+        {
+            "vnum": "10020",
+            "name": "hayalet kral",
+            "short_description": "Hayalet Kral",
+            "long_description": "Burada durur yüce Hayalet Kral, geçiþini engelleyerek.\n",
+            "description": "Bu hayaletimsi kral'ýn inanýlmaz güçleri var ve geçiþine izin vermeyecek.\nOnu Darken Rahl'ýn kendisi göndermiþ olmalý. Geri dönmelisin, çünkü bu Kral\nsenin bu taraftan çýkmana izin vermeyecek. Aþaðý dünyanýn efendisi senin\ngeçmene neden olabilecek hiçbirþeye göz yummaz.\n",
+            "race": "human",
+            "act": "ABCGT",
+            "affected_by": "HJV",
+            "level": "119"
+        },
+        {
+            "vnum": "10021",
+            "name": "dev kýzýl ejderha",
+            "short_description": "Dev kýzýl ejderha",
+            "long_description": "Darken Rahl'ýn etrafta dolaþmak için kullandýðý dev kýzýl ejderi görüyorsun.\n",
+            "description": "Bu iri ejderhanýn devasa pençeleri ve büyük kanatlarý var. Diðer ejderhalardan\nÇOK ÇOK daha büyük olduðu için onu sinirlendirmenin kötü bir fikir olacaðýndan\neminsin. Bu ejderha her milimetresini kaplayan devasa pullarla kaplanmýþ.\nSenin gördüðün YADA görebileceðin her yaratýktan daha büyük gibi gözüküyor.\n",
+            "race": "dragon",
+            "act": "ABCGT",
+            "affected_by": "GHJT",
+            "level": "119"
+        },
+        {
+            "vnum": "10022",
+            "name": "gölge kiþilik",
+            "short_description": "Kötü gölge kiþilik",
+            "long_description": "Kötü gölge kiþilik burada.\n",
+            "description": "Kesin hatlarý olmayan karanlýk bir þekil görüyorsun. Darken Rahl tarafýndan\nseni durdurmak için gönderildi. Dikkatli ol, dokunuþu zehir demektir.\n",
+            "race": "human",
+            "act": "ACGT",
+            "affected_by": "GJ",
+            "level": "110"
+        },
+        {
+            "vnum": "10023",
+            "name": "barmen",
+            "short_description": "Barmen",
+            "long_description": "Týknaz bir barmen burada içecek servisi yapýyor.\n",
+            "description": "Uzun sakallý kýsa biri. Lakin oldukça salak gözüküyor, ayakkabýlarýný ters\nayaklara giymiþ. Parçalanmýþ bir pantalon giymesine ve fakir birine benzemesine\nraðmen bu barý iþletiyor.\n",
+            "race": "human",
+            "act": "ABCGT",
+            "affected_by": "GJ",
+            "level": "50"
+        },
+        {
+            "vnum": "10024",
+            "name": "sarhoþ köylü",
+            "short_description": "Sarhoþ köylü",
+            "long_description": "Sarhoþ bir köylü burada, bira içiyor.\n",
+            "description": "Üzerinde bira lekeleri olan kýsa bir adam. Onu gördükçe kusmak istiyorsun.\n",
+            "race": "human",
+            "act": "ABCGT",
+            "affected_by": "GJ",
+            "level": "50"
+        },
+        {
+            "vnum": "10025",
+            "name": "kara hýrsýz",
+            "short_description": "Küçük bir hýrsýz",
+            "long_description": "Burada çalacak birþeyler arayan bir hýrsýz var.\n",
+            "description": "Karanlýk bir þekilde giyinmiþ, lanetli bir amacý olan, hýrsýz. Gecenin içinde\nsadece bir amaçla bekliyor: Pusuyu kurduðu yerden geçen bir zavallýnýn boðazýný\nkesip paralarýna konmak... mesela senin gibi bir zavallý....\n",
+            "race": "human",
+            "act": "ACGT",
+            "affected_by": "GJ",
+            "level": "60"
+        },
+        {
+            "vnum": "10026",
+            "name": "sarý yýlan",
+            "short_description": "Sarý bir yýlan",
+            "long_description": "Havuzda yüzen küçük, sarý bir yýlan burada.\n",
+            "description": "Çýplak gözle zorlukla seçilebilecek minik bir yýlan. Suyun içinden sana doðru\nyüzüyor. Sana saldýrmadan önce hýzlýca uzaklaþsan iyi olur çünkü bedenin\nbir daha hiç bulunmayabilir!\n",
+            "race": "unique",
+            "act": "ABCGT",
+            "affected_by": "GJ",
+            "level": "30"
+        },
+        {
+            "vnum": "10027",
+            "name": "yeraltý yaratýðý",
+            "short_description": "Bir yeraltý yaratýðý",
+            "long_description": "Bir yeraltý yaratýðý, kaybolmuþ görünüyor.\n",
+            "description": "Hiç ama hiç þekli yok. Sadece insanlar geçerken onlara saldýran düz bir duman.\n",
+            "race": "unique",
+            "act": "ACGT",
+            "affected_by": "GJ",
+            "level": "69"
+        },
+        {
+            "vnum": "10028",
+            "name": "kedi uyuþuk",
+            "short_description": "Uyuþuk küçük bir kedi",
+            "long_description": "Küçük uyuþuk bir kedi uyuyacak yer arýyor.\n",
+            "description": "Bu kedi yiyecek bir yemek, uyuyacak ve korunacak güvenli bir yer için sonuçsuz\narayýþýna devam ediyor. Bu küçük için üzülüyorsun fakat yapabileceðin hiçbir\nþey yok.\n",
+            "race": "unique",
+            "act": "ACGT",
+            "affected_by": "GJ",
+            "level": "11"
+        },
+        {
+            "vnum": "10029",
+            "name": "mord sith",
+            "short_description": "Þeytani Mord-Sith",
+            "long_description": "Burada durur heybetli Mord-Sith, seni evcil hayvaný olarak almayý düþünerek.\n",
+            "description": "Mord-Sith senden korkmuþa benzemiyor. Boynunda beyaz bir haleyle parýldayan\nbeyaz bir nesne var. Bu yaratýk oldukça korkutucu. Kalýp sohbet etmek\nistemezsin.\n",
+            "race": "human",
+            "act": "ABCGT",
+            "affected_by": "GJ",
+            "level": "120"
+        },
+        {
+            "vnum": "10030",
+            "name": "mürit",
+            "short_description": "Darken Rahl'ýn bir müridi",
+            "long_description": "Bir mürid burada, pek az þey ifade eden bir ilahi þakýyor.\n",
+            "description": "Bu mürid Darken Rahl hakkýnda bir ilahi söylüyor. Darken Rahl'ýn kötü biri\nolmadýðýna, aksine iyi biri olduðuna inanýyormuþ gibi görünüyor.\nAyrýca bu kiþiden uzak dur.\n",
+            "race": "human",
+            "act": "ABCGT",
+            "affected_by": "GJ",
+            "level": "110"
+        },
+        {
+            "vnum": "10031",
+            "name": "darken rahl",
+            "short_description": "Þeytani Dark-Rahl",
+            "long_description": "Karþýnda duruyor en kötü kabusun, Darken Rahl.\n",
+            "description": "Bütün bu yolu onun için geldin ve en sonunda karþýlaþtýn. Bütün yaþamýn boyunca\nbeklediðin an buydu. En kýsa süresinde üstesinden gelmelisin çünkü dünyayý\niþgal etmeye hazýrmýþ gibi gözüküyor.\n",
+            "race": "human",
+            "act": "ABCGT",
+            "affected_by": "GHJ",
+            "level": "125"
+        }
+    ],
+    "objects": [
+        {
+            "vnum": "10001",
+            "name": "bekçi topuz sýnýr",
+            "short_description": "Bir Sýnýrbekçisinin topuzu",
+            "description": "Büyük bir topuz burada duvara yaslanmýþ bir þekilde duruyor.\n",
+            "material": "unknown",
+            "type": "weapon",
+            "extra_flags": "ABG",
+            "wear_flags": "AN",
+            "values": "mace 12 7 blast 0",
+            "level": "70",
+            "weight": "15",
+            "cost": "1938",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "6"
+                },
+                {
+                    "location": "18",
+                    "modifier": "6"
+                },
+                {
+                    "location": "13",
+                    "modifier": "20"
+                },
+                {
+                    "location": "2",
+                    "modifier": "-1"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "bekçi topuz",
+                    "description": "Bu keskin ölümcül bir diþle kaplanmýþ dev bir topuz. Öldürmek için yapýlmýþ.\nGerçekten güçlü bir silah.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "10002",
+            "name": "kemik kolye",
+            "short_description": "Kemik Kadýnýn Kolyesi",
+            "description": "Güzel bir kolye yerde duruyor.\n",
+            "material": "stone",
+            "type": "armor",
+            "extra_flags": "AB",
+            "wear_flags": "AC",
+            "values": "30 30 30 20 0",
+            "level": "90",
+            "weight": "10",
+            "cost": "98504",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "55"
+                },
+                {
+                    "location": "3",
+                    "modifier": "3"
+                },
+                {
+                    "location": "2",
+                    "modifier": "3"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "kemik kolye",
+                    "description": "Bu Kemik Kadýnýn boynunundaki kolyeyDÝ. Kadýný öldürmek çok zor olduðuna göre\ngüçlü bir nesne olmalý.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "10003",
+            "name": "kavrayýcý diþ",
+            "short_description": "Biraz kavrayýcý diþi",
+            "description": "Burada kavrayýcýnýn diþlerinden birazý var.\n",
+            "material": "stone",
+            "type": "armor",
+            "extra_flags": "ABM",
+            "wear_flags": "AC",
+            "values": "26 26 27 16 0",
+            "level": "80",
+            "weight": "10",
+            "cost": "100",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "6"
+                },
+                {
+                    "location": "1",
+                    "modifier": "3"
+                }
+            ]
+        },
+        {
+            "vnum": "10004",
+            "name": "maþrapa bira",
+            "short_description": "Bir Maþrapa Bira",
+            "description": "Bir maþrapa bira yerde duruyor.\n",
+            "material": "glass",
+            "type": "drink",
+            "extra_flags": "BC",
+            "wear_flags": "A",
+            "values": "20 20 3 0 0",
+            "level": "1",
+            "weight": "1",
+            "cost": "1",
+            "condition": "P"
+        },
+        {
+            "vnum": "10005",
+            "name": "hýrsýz çizme çizmeler kara",
+            "short_description": "Bir çift kara çizme",
+            "description": "Bir çift kara çizme güneþ iþiðýný emiyor.\n",
+            "material": "leather",
+            "type": "armor",
+            "extra_flags": "BC",
+            "wear_flags": "AG",
+            "values": "20 20 20 10 0",
+            "level": "60",
+            "weight": "10",
+            "cost": "3000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "-10"
+                },
+                {
+                    "location": "12",
+                    "modifier": "30"
+                },
+                {
+                    "location": "1",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "10006",
+            "name": "sýnýr eldiven bekçi eldivenler",
+            "short_description": "Sýnýrbekçisi eldivenleri",
+            "description": "Bir çift eldiven burada býrakýlmýþ, alýnmayý bekliyorlar.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "BC",
+            "wear_flags": "AH",
+            "values": "20 20 20 9 0",
+            "level": "60",
+            "weight": "10",
+            "cost": "9684",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "24",
+                    "modifier": "-2"
+                },
+                {
+                    "location": "18",
+                    "modifier": "8"
+                },
+                {
+                    "location": "1",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "10007",
+            "name": "sýnýr bot bekçi botlar",
+            "short_description": "Sýnýrbekçisi botlarý",
+            "description": "Bir çift bot burada býrakýlmýþ.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "BC",
+            "wear_flags": "AG",
+            "values": "21 19 19 10 0",
+            "level": "60",
+            "weight": "10",
+            "cost": "9898",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "22",
+                    "modifier": "-3"
+                },
+                {
+                    "location": "19",
+                    "modifier": "6"
+                },
+                {
+                    "location": "18",
+                    "modifier": "5"
+                }
+            ]
+        },
+        {
+            "vnum": "10008",
+            "name": "sýnýr kolluk bekçi",
+            "short_description": "Sýnýrbekçisinin kolluklarý",
+            "description": "Bir çift kolluk burada aðaca dayalý bir þekilde býrakýlmýþ.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "BC",
+            "wear_flags": "AI",
+            "values": "21 20 19 10 0",
+            "level": "60",
+            "weight": "10",
+            "cost": "9898",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "20"
+                },
+                {
+                    "location": "2",
+                    "modifier": "2"
+                },
+                {
+                    "location": "1",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "10009",
+            "name": "sýnýr kalkan bekçi",
+            "short_description": "Sýnýrbekçisinin kalkaný",
+            "description": "En iyi metalden yapýlmýþ bir kalkan burada duruyor.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "BC",
+            "wear_flags": "AJ",
+            "values": "20 21 20 15 0",
+            "level": "60",
+            "weight": "10",
+            "cost": "9898",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "40"
+                },
+                {
+                    "location": "17",
+                    "modifier": "-9"
+                }
+            ]
+        },
+        {
+            "vnum": "10010",
+            "name": "sýnýr tünik bekçi",
+            "short_description": "Sýnýrbekçisinin tüniði",
+            "description": "Ýyi deriden yapýlmýþ bir tünik burada býrakýlmýþ.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "BC",
+            "wear_flags": "AK",
+            "values": "20 20 20 10 0",
+            "level": "60",
+            "weight": "10",
+            "cost": "9898",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-21"
+                }
+            ]
+        },
+        {
+            "vnum": "10011",
+            "name": "sýnýr baþlýk bekçi",
+            "short_description": "Sýnýrbekçisi baþlýðý",
+            "description": "Geniþ bir baþlýk sahibi tarafýndan býrakýlmýþ...ne yazýk!\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "BC",
+            "wear_flags": "AE",
+            "values": "20 20 20 10 0",
+            "level": "60",
+            "weight": "10",
+            "cost": "9898",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "23",
+                    "modifier": "-5"
+                },
+                {
+                    "location": "1",
+                    "modifier": "2"
+                }
+            ]
+        },
+        {
+            "vnum": "10012",
+            "name": "sýnýr yüzük bekçi",
+            "short_description": "Sýnýrbekçisi yüzüðü",
+            "description": "Parlak bir gümüþ yüzük tozun üstünde duruyor.\n",
+            "material": "unknown",
+            "type": "treasure",
+            "extra_flags": "BC",
+            "wear_flags": "AB",
+            "values": "0 0 0 0 0",
+            "level": "60",
+            "weight": "10",
+            "cost": "9898",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "75"
+                }
+            ]
+        },
+        {
+            "vnum": "10013",
+            "name": "sýnýr bacaklýk bekçi bacaklýklar",
+            "short_description": "Sýnýrbekçisi Bacaklýklarý",
+            "description": "Bir çift bacaklýk burada býrakýlmýþ.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "BC",
+            "wear_flags": "AF",
+            "values": "20 20 20 10 0",
+            "level": "60",
+            "weight": "10",
+            "cost": "9898",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "21",
+                    "modifier": "-1"
+                },
+                {
+                    "location": "14",
+                    "modifier": "30"
+                }
+            ]
+        },
+        {
+            "vnum": "10014",
+            "name": "elbise kara",
+            "short_description": "Kara bir elbise",
+            "description": "Bir elbise aðacýn tekinin gölgesi altýna býrakýlmýþ.\n",
+            "material": "cloth",
+            "type": "armor",
+            "extra_flags": "BC",
+            "wear_flags": "AD",
+            "values": "23 23 22 11 0",
+            "level": "70",
+            "weight": "10",
+            "cost": "5060",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "13",
+                    "modifier": "25"
+                },
+                {
+                    "location": "12",
+                    "modifier": "50"
+                }
+            ]
+        },
+        {
+            "vnum": "10015",
+            "name": "tasma yürek tazý",
+            "short_description": "Bir yürek tazýsý tasmasý",
+            "description": "Bir tasma alanýn ortasýnda duruyor.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "BC",
+            "wear_flags": "AC",
+            "values": "23 22 22 16 0",
+            "level": "70",
+            "weight": "10",
+            "cost": "8080",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "17",
+                    "modifier": "-8"
+                },
+                {
+                    "location": "13",
+                    "modifier": "50"
+                },
+                {
+                    "location": "12",
+                    "modifier": "50"
+                }
+            ]
+        },
+        {
+            "vnum": "10016",
+            "name": "kese büyülü deri",
+            "short_description": "Büyü bir deri kese",
+            "description": "Bir kese çamurun içinde býrakýlmýþ.\n",
+            "material": "leather",
+            "type": "container",
+            "extra_flags": "BC",
+            "wear_flags": "A",
+            "values": "700 1 0 350 72",
+            "level": "70",
+            "weight": "50",
+            "cost": "1000",
+            "condition": "P"
+        },
+        {
+            "vnum": "10017",
+            "name": "kurabiye",
+            "short_description": "BÜYÜK bir kurabiye",
+            "description": "Yerde bir kurabiye var, ne yazýk.\n",
+            "material": "unknown",
+            "type": "food",
+            "extra_flags": "B",
+            "wear_flags": "A",
+            "values": "40 0 0 0 0",
+            "level": "8",
+            "weight": "10",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "10018",
+            "name": "kek",
+            "short_description": "BÜYÜK bir parça kek",
+            "description": "Büyük lezzetli bir parça kek burada.\n",
+            "material": "unknown",
+            "type": "food",
+            "extra_flags": "B",
+            "wear_flags": "A",
+            "values": "10 0 0 0 0",
+            "level": "1",
+            "weight": "10",
+            "cost": "0",
+            "condition": "P"
+        },
+        {
+            "vnum": "10019",
+            "name": "sýnýr kýlýç bekçi",
+            "short_description": "Sýnýrbekçisinin kýlýcý",
+            "description": "Kaliteli bir kýlýç burada býrakýlmýþ.\n",
+            "material": "unknown",
+            "type": "weapon",
+            "extra_flags": "ABCEJL",
+            "wear_flags": "AN",
+            "values": "sword 9 5 slash 0",
+            "level": "50",
+            "weight": "30",
+            "cost": "3500",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "4"
+                },
+                {
+                    "location": "18",
+                    "modifier": "4"
+                }
+            ],
+            "extra_descriptions": [
+                {
+                    "keyword": "sýnýr kýlýç bekçi",
+                    "description": "Burada bir Sýnýrbekçisi kýlýcý var, sadece onlarýn kullanýmý için.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "10020",
+            "name": "sýnýr döven bekçi",
+            "short_description": "Sýnýrbekçisi döveni",
+            "description": "Bir döven burada.\n",
+            "material": "unknown",
+            "type": "weapon",
+            "extra_flags": "ABCEJL",
+            "wear_flags": "AN",
+            "values": "flail 7 7 pound 0",
+            "level": "50",
+            "weight": "30",
+            "cost": "3400",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "3"
+                },
+                {
+                    "location": "18",
+                    "modifier": "4"
+                }
+            ]
+        },
+        {
+            "vnum": "10021",
+            "name": "sýnýr topuz bekçi",
+            "short_description": "Sýnýrbekçisi topuzu",
+            "description": "Bir topuz burada býrakýlmýþ.\n",
+            "material": "unknown",
+            "type": "weapon",
+            "extra_flags": "ABCEIJ",
+            "wear_flags": "AN",
+            "values": "mace 7 7 pound 0",
+            "level": "50",
+            "weight": "30",
+            "cost": "2999",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "18",
+                    "modifier": "2"
+                },
+                {
+                    "location": "18",
+                    "modifier": "3"
+                }
+            ]
+        },
+        {
+            "vnum": "10022",
+            "name": "sýnýr kama bekçi",
+            "short_description": "Sýnýrbekçisi kamasý",
+            "description": "Bir kama burada býrakýlmýþ.\n",
+            "material": "steel",
+            "type": "weapon",
+            "extra_flags": "ABCEIJ",
+            "wear_flags": "AN",
+            "values": "dagger 5 10 pierce 0",
+            "level": "50",
+            "weight": "30",
+            "cost": "2999",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "3"
+                },
+                {
+                    "location": "18",
+                    "modifier": "3"
+                }
+            ]
+        },
+        {
+            "vnum": "10023",
+            "name": "mord kýlýç silah",
+            "short_description": "Mord-Sith'in kýlýcý",
+            "description": "Büyülü bir kýlýç burada býrakýlmýþ.\n",
+            "material": "unknown",
+            "type": "weapon",
+            "extra_flags": "ABCEGM",
+            "wear_flags": "AN",
+            "values": "sword 18 7 slash 0",
+            "level": "90",
+            "weight": "20",
+            "cost": "9902",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "4"
+                },
+                {
+                    "location": "18",
+                    "modifier": "4"
+                },
+                {
+                    "location": "13",
+                    "modifier": "20"
+                },
+                {
+                    "location": "12",
+                    "modifier": "20"
+                }
+            ]
+        },
+        {
+            "vnum": "10024",
+            "name": "bilezik kudret",
+            "short_description": "Kudret Bileziði",
+            "description": "Çamurun içinde bir bilezik var.\n",
+            "material": "unknown",
+            "type": "armor",
+            "extra_flags": "ABC",
+            "wear_flags": "AM",
+            "values": "32 32 33 25 0",
+            "level": "90",
+            "weight": "20",
+            "cost": "9000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "19",
+                    "modifier": "7"
+                },
+                {
+                    "location": "18",
+                    "modifier": "7"
+                },
+                {
+                    "location": "13",
+                    "modifier": "50"
+                },
+                {
+                    "location": "12",
+                    "modifier": "50"
+                }
+            ]
+        },
+        {
+            "vnum": "10025",
+            "name": "batý diyar",
+            "short_description": "Bir Ýþaret",
+            "description": "Batý Diyar'ýn haritasýný da içeren bir iþaret burada.\n",
+            "material": "wood",
+            "type": "furniture",
+            "extra_flags": "A",
+            "wear_flags": "0",
+            "values": "0 0 0 0 0",
+            "level": "91",
+            "weight": "90",
+            "cost": "90",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "batý diyar batýdiyar",
+                    "description": "****************************************************************\n*^\\^\\        /^/^\\^\\^\\^\\      /^\\^/^/^/^/^/^\\^\\^\\^\\^\\^\\^\\^\\^\\  *\n*^\\      /^\\^/^/^/^\\^/^\\   K      /^\\^\\^/^\\^\\^\\^\\^/^\\^\\^\\^\\    *\n*     /^\\^/^\\^/^/^/^/^\\    |         /^/^/^/^/^/^\\^/^\\^\\^\\^\\^\\ *\n*      /^\\^\\^\\^\\       B---|---D /^/^/^/^\\^\\^/^\\^\\^\\^/^\\       *\n* /^/^/^/^\\^\\^\\^\\^\\^\\      |        /^\\^\\^\\^\\^\\^/^\\^/^/^/^/^/^/*\n*^\\^/^/^/^/^/^/^/^/^\\      G           /^/^/^/^\\ / /^/^/^/^/^\\ *\n*^/^/^\\^\\^/^\\^/^/^\\        /^/^\\^\\   /^/^/^\\^\\^/^\\^/^/^/^/^\\   *\n*^\\^/^/^/^\\^/^/^\\                        /^/^/^/^\\/^\\/^\\^/^/^/^*\n*^\\^\\^/^\\^/^\\          /^/^\\^\\        /^/^/^/^S /^/^\\^/^\\^\\^\\^/*\n*^/^/^/^/^/^/^/^\\                       /^/^/^\\I/^/^/^\\^\\^/^/^\\*\n*^/^/^\\^/^/^/^\\   *******************       /^/^N/^/^/^/^/^\\^\\ *\n*^/^/^/^/^\\       *    GARPDÝYAR    *      /^/^/^I /^\\^/^/^\\^\\^*\n*^/^/^/^\\^/^\\     *******************         /^\\^R/^\\^/^/^/^/^*\n*^/^\\^/^\\         /^/^/^\\^\\         Y /^\\   /^\\^/^\\^/^\\^/^\\^\\^\\*\n*^/^/^\\        /^/^/^/^/^\\^\\^\\      U          /^/^\\/ /^\\^\\^\\^/*\n*^/^\\      /^/^/^\\^\\^/^/^\\ = /^\\^/^\\K/^\\^\\   /^\\^/^/^\\ /^\\^/^\\^*\n*^\\      /^/^/^/^\\^/^/^/^\\===/^/^/^\\A/^\\^/^\\   /^\\^\\^\\^/^\\^\\^\\ *\n*^\\^\\           /^/^\\^\\^\\ ==== /^\\^\\R            /^/^/^/^/^\\^\\^*\n*^\\^\\              /^/^\\^\\^\\ =====  I /^\\^\\   /^\\^\\^\\^/^/^\\^\\^\\*\n*/^\\    ÝÇDÝYAR           ======/^\\    *         /^/^/^/^/^/^/^*\n*^/^/^\\    *                /^\\^/^\\ V       /^/^/^/^/^/^\\^\\^/^\\*\n*^\\^\\     TRUNT GÖLÜ    /^\\^\\^\\^\\^/^E/^\\      /^/^\\^\\^/^\\^\\    *\n*^/^\\^/^\\      *            /^\\^/^/^N/^\\^\\ /^\\^/^\\^\\^\\^\\^\\^\\^\\^*\n*^/^\\^/^\\^/^\\                  /^\\^/^/^\\     /^/^/^/^/^/^/^\\   *\n*^\\^/^\\       /^\\^\\^\\^/^\\        /^\\^\\^\\^\\      /^/^\\^/^\\^/^\\  *\n*^\\^/^\\         /^/^\\^\\        /^/^/^\\      /^/^\\^\\^\\^\\^/^\\^\\  *\n*^/^/^/^\\            GÜNEYSIÐINAK  /^/^\\^\\    /^/^/^/^/^/^\\^\\^\\*\n*^/^\\^/^\\^/^\\     /^\\    *           /^/^/^\\    /^\\KARAN ^/^/^/*\n*^/^/^/^\\                                        /^\\LIK^\\      *\n*^/^/^\\^/^\\^\\             /^\\                       ###########*\n*^/^\\^/^\\^\\^\\^\\^\\                 /^/^\\^\\     /^\\^/^/^\\^/^\\^/^\\*\n*^/^/^/^/^/^\\^\\^\\^/^\\   /^^\\  /^/^/^/^\\^/^\\    /^\\^\\^\\^\\^\\^\\^\\^*\n****************************************************************\n\nBatý Diyar'a hoþgeldin. Bu bu dünyadaki iki ülkeden biri. Darken Rahl isminde\niki ülkeyede hükmetmek isteyen büyük bir büyücü var. D'hara iki ülkeden daha\ngüçlü olanýdýr. Bu nedenlerden biri ise birkaç milyon yýl önce büyücülerin\nen büyükleri iki ülkeyi de yarattýlar. Batý diyar tek hiç büyüsü olmayan ülkeydi.\nAyrýca iki ülkeyi birbirinden büyülü bir sýnýrla ayýrdý. Bu sýnýr bir ülkeden\ndiðerine geçen bütün büyüleri durdurmasý için yaratýldý. Ve buradan þimdiye\nkadar geçen en taþ hatun Caernil'di.\n"
+                }
+            ]
+        },
+        {
+            "vnum": "10026",
+            "name": "tabela",
+            "short_description": "Küçük bir tabela",
+            "description": "Burada D'hara'nýn haritasýný gösteren bir tabela var.\n",
+            "material": "wood",
+            "type": "furniture",
+            "extra_flags": "A",
+            "wear_flags": "0",
+            "values": "0 0 0 0 0",
+            "level": "91",
+            "weight": "90",
+            "cost": "90",
+            "condition": "P",
+            "extra_descriptions": [
+                {
+                    "keyword": "d'hara hara'nýn tabelasý",
+                    "description": "****************************************************************\n*/^/^/^\\^\\^\\^\\^/^\\^\\^\\^\\^\\^\\^\\^\\^/^\\ ***********=-=-=- =-=-=-= *\n*/^\\^\\^/^\\^\\^/^\\^\\^\\^\\^\\^\\^\\^/^\\ -=- *D'H A R A*=-=- =-=-=- =  *\n*^\\^/^/^\\^\\^/^\\^/^\\^\\^\\^\\^\\ -=- =-=-=***********=-=-=-=- =-=-= *\n*/^/^/^\\^\\/^/^\\^\\^\\^\\ -=- =-=-=-=-=-=-=-=- =-=-=-=-=- =-=-=-   *\n*/^/^/^/^\\/\\^\\^\\^\\   -=-=-=-=-=-=- =-=-=-=-=-=-=-=-=-=-=-=-=-  *\n*/^/^\\^\\^\\^\\/^/^\\  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=  *\n*^\\^\\^\\^S/^/^\\^\\  =-=-=-=  -=-=-=- =-=-=-=-=- =-=-=-=-=-=-- =- *\n*/^/^\\^\\^I/^/^\\^\\^\\ -=  *============================*  -=-=-  *\n*/^/^/^/^/N/^/^\\   =-=  |     /^/^/^/^/^/^/^/^\\^\\    |  -=-=-= *\n*/^/^/^/^\\^I/^/^\\^\\ -=  | /^\\^\\^\\^/ KÝÞÝLERÝN ^/^\\^\\ |   =-= - *\n*^/^/^/^\\^\\^R/^\\   -=-  | /^\\   /^/^\\  ***  /^/^\\^\\^\\|  =- =-  *\n*/^/^/^/^/^\\^\\/^/^/^\\^\\ |    /^/^\\^\\   ***  /^/^\\^\\^\\|   -=-=- *\n*/^/^\\^\\^\\^\\^/\\/^/^\\ -  | /^/^/^/^/--/SARAYI /^/^\\^\\ |  -=- =  *\n*/^/^/^/^\\^\\^\\^\\/^/^/^\\ |    /^/^|--|^/^/^/^\\^\\^\\    |   =-=-  *\n*/^/^\\^\\^\\^\\^\\^\\^\\^\\ -  | /^/^/^\\^\\--\\^\\^\\^\\^\\^\\     |  -=-=-  *\n*/^/^\\^\\^\\^\\^\\^\\  =-=-  |   /^/^\\^\\|--|/^/^\\^\\^\\^\\   |  =-=-=- *\n*/^/^\\^\\^\\^\\^\\  =-=-=-  *==========*---*=============*   =-    *\n*/^/^\\^\\^\\    -=-=--=-=-=-=-=-=-=-= |_ | -=- =-=-=-=-=- =-=-=- *\n*/^/^/^/^\\^\\^\\   =-=-=-=-=-=-=-=-= /_ / -=-=-=-=-=-=-=-=-=- =  *\n*/^/^/^/^/^\\   -=-=-=-=-=-=-=-=-= |__| ==-=-=-=-=-=-=-=-=- =-= *\n*/^/^/^/^/^/^/^\\  =-=-=-=-= =-=-=      =-=-=-=- =-=-=-=-=-=-=- *\n*/^/^\\^\\^\\^\\   =-=-=-=-=-= =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-  *\n*/^/^\\-=-/^\\^\\^\\  =-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=- =-=-=- =-  *\n*^\\^\\^\\^\\^/^\\   -==-=-=-=- =-=-=-=-=-=-=- =-=-=-=-=-=- =-=-  /^*\n*^\\^\\^/^\\^/^\\^\\  =-=-=-=-=-=-=- =-=-=-=-=-=-=- =-=-=-=-  /^/^/^*\n*\\^\\^\\^/^  -=-=-=-=- AZRITH =-=-=-=-=-=-=-=-=-=-=-=-=-=   /^/^/*\n*/^/^/^\\ -=-=-=--=- DÜZLÜKLERÝ -=-=-=-=-=-=-=-=-=-   /^/^/^/^\\^*\n* KARAN    -=-=-=-=-=-=-=-=-=-=-=-=-=- =-=-=-=-=-=   /^/^/^\\^\\^*\n*########     =-=-=-=-=-=-=-=-=-=-=-=-=-=-=   /^/^/^\\^\\^/^/^\\^\\*\n*  LIK   /^/^\\  =-=-=-=-=-=-=-=-=-=-=--  /^/^/^/^\\^\\^\\^\\^\\^\\^\\^*\n*          /^/^\\ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=  /^\\^\\^\\^\\^\\^/*\n* /^\\^\\^\\^\\^/^/^/^/^\\^\\=-=/^/^\\=--=-/^/^\\^\\^\\^/^\\^/^\\^/^\\^\\^\\^\\*\n* /^/^/^\\=-/^/^/^/^\\^/^/^/^\\^\\=-/^/^\\^\\^\\^/^/^/^\\^/^\\^/^\\^\\^\\^/*\n*/^/^/^\\=-=-=-=-=-/^\\ =-=-= /^\\^/^\\^\\^\\^\\^/^\\^\\^/^\\^\\^\\^\\^/^/^\\*\n*/^/^\\^\\^/^\\^\\^\\-=-=-=-/^\\^\\^\\^/^/^/^/^/^\\^\\^\\^/^/^\\^/^\\^\\^/^\\^*\n****************************************************************\n\nD'hara. Burasý Darken Rahl'ýn evi ve buradaki en güçlü kiþi o. Çok güçlü\nolmasýna karþýn yenilemez deðil. Azrith Düzlüklerine çok büyük olduklarý\niçin dikkat et ve kuzeyden batýya doðuya ve güneye git. Düzlüklerde\nkaybolmak çok kolaydýr oyüzden Ýnsanlarýn kalesinden ona giden yolu bul\nçok geç olmadan veya kaybolmadan önce! Gerçekten acele etmelisin çünkü\nDarken Rahl savaþý kazanýp ülkeleri kontrol etmeye çok yakýn!\n"
+                }
+            ]
+        },
+        {
+            "vnum": "10027",
+            "name": "taç ateþ mishakal",
+            "short_description": "Mishakal'ýn Ateþ Tacý",
+            "description": "Bir taç yerde yanarken unutmadýðý efendisi için bir aðýt fýsýldýyor.",
+            "material": "adamantite",
+            "type": "armor",
+            "extra_flags": "ACY",
+            "wear_flags": "AE",
+            "values": "39 39 39 37 30",
+            "level": "86",
+            "weight": "10",
+            "cost": "99000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "3",
+                    "modifier": "2"
+                },
+                {
+                    "location": "6",
+                    "modifier": "5"
+                },
+                {
+                    "location": "13",
+                    "modifier": "200"
+                },
+                {
+                    "location": "18",
+                    "modifier": "12"
+                },
+                {
+                    "location": "19",
+                    "modifier": "12"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-8"
+                }
+            ]
+        },
+        {
+            "vnum": "10028",
+            "name": "zýrh karanlýk sith",
+            "short_description": "Karanlýðýn zýrhý",
+            "description": "Geniþ gölgeli bir figür yerde.",
+            "material": "adamantite",
+            "type": "armor",
+            "extra_flags": "CJY",
+            "wear_flags": "AD",
+            "values": "31 31 31 29 10",
+            "level": "57",
+            "weight": "50",
+            "cost": "75000",
+            "condition": "P",
+            "affects_a": [
+                {
+                    "location": "1",
+                    "modifier": "2"
+                },
+                {
+                    "location": "13",
+                    "modifier": "200"
+                },
+                {
+                    "location": "24",
+                    "modifier": "-5"
+                }
+            ]
+        }
+    ],
+    "rooms": [
+        {
+            "vnum": "10001",
+            "name": "Gölün yanýndaki bir patika",
+            "description": "Kristal kadar berrak güzel bir gölün yanýnda yürüyorsun. Havada taze bir\nmeltem var ve aðaçlar özgürce sallanýyor. Yeni bir dünyaya giriyormuþ gibi\nhissediyorsun fakat hala Uzakdiyarlardasýn. Saðýndaki göl berrak ve sakin.\nGölün üstünde yüzden bir ördek ailesi seni farketmiyormuþ gibi gözüküyor.\nEtrafýndaki ormanlarda geyikler, kuþlar ve diðer hayvanlar var. Aðaçlar uzun\nve bereketli, güneþin bu kutlu diyarlara girmesine izin vermiyorlar. Yol,\nkuzeye ve tabiki geldiðin yol olan güneye doðru devam ediyor. Aðaçlarýn\nötesinde kan içen çirkin bir yaratýk görüyorsun alnýnda Caernil yazýyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Yoðun ormana doðru.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10002"
+                },
+                {
+                    "door": "D2",
+                    "description": "Uzun tozlu yol.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "18002"
+                },
+                {
+                    "door": "D4",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10701"
+                }
+            ]
+        },
+        {
+            "vnum": "10002",
+            "name": "Ormanda bir açýklýk",
+            "description": "Ormanda yürürken birden bire bir açýklýða çýkýyorsun. Açýklýk fazla büyük\nolmamasýna raðmen yeniden güneþi görmek güzel. Orman tekrar devam etmeden\nönce yol kenarýna asýlmýþ iki büyük tabela var. Üzerinde ne yazdýðýný merak\nediyorsun ve daha yakýndan bakmak için yanýna gidiyorsun. Gölün yanýndan iki\nçýkýþ var. Birisi güneye gidiyor diðeri ise geldiðin yön olan güneye gidiyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ormana giriþ.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10003"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ormana geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10001"
+                }
+            ]
+        },
+        {
+            "vnum": "10003",
+            "name": "Garpdiyar'a Hoþgeldiniz!",
+            "description": "Hoþgeldiniz! Trout gölünün yanýndaki ormanýn tam ortasýnda duruyorsun.\nYürümekte olduuðn yol kuzeye doðru gider, eðer geri dönmek istersen\ngüneye yönel. Gölün içinde zýplayan balýklar var, insanlar kumlarda\noynuyor veya çiçek topluyorlar. Burasý kesinlikle harika bir yer.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Yoldan aþaðý.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10004"
+                },
+                {
+                    "door": "D2",
+                    "description": "Açýklýða geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10002"
+                }
+            ]
+        },
+        {
+            "vnum": "10004",
+            "name": "Yoldan aþaðý bir patika",
+            "description": "Trout gölünün yanýndaki tozlu eski yoldan ilerliyorsun. Güneþ yukarýda\nparlýyor ve terlemeye baþlýyorsun. Yol kuzey ve güneye doðru devam ediyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Yolda dönüþ.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10005"
+                },
+                {
+                    "door": "D2",
+                    "description": "Güneye yol.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10003"
+                }
+            ]
+        },
+        {
+            "vnum": "10005",
+            "name": "Yoldaki bir dönüþ",
+            "description": "Yolda yürürken daðlara doðru giden bir patika görüyorsun. Kuzeye gitmek seni\ndirek gölün içine yönlendireceði için batýya, daðlara doðru gitmen lazým.\nÖnünde küçük bir tavþan bir havuzdan su içiyor. Böylesine güzel bir yaratýðýn\nnereden geldiðini merak ediyorsun. Hala güneye gidebilirsin.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Güneye yol.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10004"
+                },
+                {
+                    "door": "D3",
+                    "description": "Daðlara giden patika.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10006"
+                }
+            ]
+        },
+        {
+            "vnum": "10006",
+            "name": "Daðlara giden bir patika",
+            "description": "Daðlara yaklaþtýkça, orman arazisi arkada kalýyor ve açýk havaya çýkýyorsun.\nRüzgar burada daha hýzlý esiyor ve hava daha da sýcak. Uzakta hayal meyal bazý\ninatçý palmiyeler görüyorsun. Böylesine harika bitkilerinde nereden geldiðini\nuyuþuk bir þekilde merak ediyorsun. Daðdan yukarý olan yol hoþ ve kolaya\nbenziyor. Doðu ya gidip geri dönebilirsin veya daðdan yukarý doðru\nilerleyebilirsin.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Orman   giden patika\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10005"
+                },
+                {
+                    "door": "D4",
+                    "description": "Daðlara giden patika\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10007"
+                }
+            ]
+        },
+        {
+            "vnum": "10007",
+            "name": "Daðlara giden yol",
+            "description": "Yürümesi hoþ bir yol ve yürüyüþten oldukça hoþlanýyorsun. Yolun en yukarýsýna\ngeldiðinde buranýn Yukarý Ven olduðunu farkediyorsun. Yukarý Ven þehriden önceki\ndaðdýr. Patika oldukça temiz ve geçmesi kolay gibi gözüküyür. Kayalar güneþ\nyüzünden ýlýklar ve ýsýnmýþ yalgýnla parýldýyorlar. Kuzeye veya aþaðýya\nyönelebilirsin.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Uçurum boyunca uzanan patika.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10008"
+                },
+                {
+                    "door": "D5",
+                    "description": "Daða geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10006"
+                }
+            ]
+        },
+        {
+            "vnum": "10008",
+            "name": "Yukarý Ven'in sonu",
+            "description": "Daðýn sonuna ulaþtýn ve tekrar aþaðý inmek zorundasýn. Yol bir ormana doðru\ngidiyor ve anlaþýlan sonunda güneþten uzaklaþabileceksin. Orman aðaçlarla ve\nyeni gelen mevsimden dolayý renk deðiþtirmiþ fundalarla dolu. Yapraklarýn\naltýn ve bronz renkleri sanki hayatýn kendisinden daha güzelmiþ gibi duruyor.\nDað havasý temiz ve ferahlatýcý öyleki oturup biraz dinlenmek istiyorsun.\nAþaðý veya güneye gidebilirsin.\n",
+            "flags": "0",
+            "sector": "5",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Güney yolu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10007"
+                },
+                {
+                    "door": "D5",
+                    "description": "Ormana giden yol.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10009"
+                }
+            ]
+        },
+        {
+            "vnum": "10009",
+            "name": "Ormanýn içinden geçen yol",
+            "description": "Ýçdiyar kasabasýnýn yakýnýndaki ormana girdin. Yol, parlak sarý çiçeklerle ve\nküçük mor çiçeklerle kaplý. Doðudaki bir derme çatma kulübe hiçte o kadar\ndavetkar durmuyor. Orman çok sýk deðil ve etrafýndaki herþeyi görebiliyorsun.\nEtrafta yaban eðrelti otlarý ve daha önce görmediðin diðer bitkiler var.\nBitkilerden birini hatýrlýyorsun..hmm, sanýrýrm onu daha önce bir kitapta\ngörmüþtün. Bu orman bir sýðýnýða oldukça benziyor. Yol kuzeye, Ýçdiyar'ýn\neteklerine, doðru veya daðdan yukarý doðru gidiyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ýçdiyarýn etekleri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10010"
+                },
+                {
+                    "door": "D4",
+                    "description": "Daðdan yukarý yol.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10008"
+                }
+            ]
+        },
+        {
+            "vnum": "10010",
+            "name": "Ýçdiyarýn etekleri",
+            "description": "Ýçdiyar isimli küçük bir kasabanýn eteklerindesin. Yürüdüðün yol kuru ve\ntozlu. Görünüþe göre bir süredir yaðmur yaðmýyor. Ýleride kasaba yavaþ\nyavaþ görünüyor. Kasabanýn sokaklarýnda sanki bir pazar alaný varmýþ gibi\nkalabalýk fakat etrafta satýlýk hiç birþey yok. Bütün köylüler ateþ\nhakkýnda bir demeç veren sözcünün etrafýnda toplanýyorlar. Þehir tamamen\nmutlu insanlarla dolu gibi gözüküyor, hepsinin mükemmel iþleri ve aileleri\nvar. Çýkýþlar kuzeye ve güneye.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Ýçdiyar kasabasý.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10011"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ormana geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10009"
+                }
+            ]
+        },
+        {
+            "vnum": "10011",
+            "name": "Ýçdiyar kasabasý",
+            "description": "Ýçdiyar kasabasýna girdin. Burada herkes mutlu ve neþeli gibi gözüküyor.\nHepsi ateþ hakkýnda seni ilgilendirmeyen bir konuþmayý dinliyor gibiler.\nSözcünün nasýl konuþtuðunu ve dinleyicinin dikkatini çektiðini görüyorsun,\nburada bir otorite gibi gözüküyor. Neden bu kadar küçük birinin insanlar\nüzerinde bu kadar güce sahip olduðunu merak ediyorsun. Etrafta küçük evler\nvar fakat hiç biri davetkar durmuyorlar. Kuzeye çayýrlardaki patikaya doðru\nveya geriye ormana doðru gidebilirsin.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kasabanýn dýþýndaki çayýrlar.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10012"
+                },
+                {
+                    "door": "D2",
+                    "description": "Ýçdiyar eteklerine geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10010"
+                }
+            ]
+        },
+        {
+            "vnum": "10012",
+            "name": "Ýçdiyar çayýrlarý",
+            "description": "Kasabanýn dýþýndaki çayýrlara girdin ve Güney Sýðýnaða doðru yola koyuldun.\nKaranlýk, Güney Sýðýnaðýn yakýnýnda. Güney Sýðýnaða giderken bataklýklardan\ngeçmek zorundasýn. Burada hava þaþýrtýcý derecede durgun ve sakin. Etrafta\ntek-tük aðaçlar var ve onlardan da az hayvan var. Yol kuzeye doðru nefesini\nkesen iðrenç bir koku salan bir bataklýða doðru gidiyor, güneyde ise geldiðin\nkasaba var.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Bataklýða giden patika.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10013"
+                },
+                {
+                    "door": "D2",
+                    "description": "Kasabaya giden yol.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10011"
+                }
+            ]
+        },
+        {
+            "vnum": "10013",
+            "name": "Bataklýða giden yol",
+            "description": "Yolda yürürken orman sýklaþtýkça sýklaþýyor. Yol giderek daha da saklý bir\nhale geliyor ve bir sis beliriyor. Aðaçlarýn dallarý biraraya gelerek güneþi\nkapýyorlar. Hava hala küf kokulu ve giderek soðuyor. Uzakta sýnýra doðru ava\ngelen yürek tazýlarýnýn çýðlýklarýný duyuyorsun. Ýþlerin daha kötü\ngidemeyeceðini düþünürken, önündeki yolda bir suikastçi takýmý farkediyorsun.\nDikkatli olmalýsýn. Yol kuzeye gidiyor ve kasabaya geri...güney.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Bataklýða daha yakýn.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10014"
+                },
+                {
+                    "door": "D2",
+                    "description": "Çayýrlara geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10012"
+                }
+            ]
+        },
+        {
+            "vnum": "10014",
+            "name": "Bataklýða daha yakýn",
+            "description": "Bataklýða dahada yaklaþýyorsun ve siste daha kalýnlaþýyor. Suikastçi takýmý\nsana saldýrmadý yani sanýrým güvendesin. Aðaçlar kuru ve eski görünmeye\nbaþlýyorlar, zemin de çamurlu. Yürektazýlarýnýn çýðlýklarý çok daha\nyakýndan geliyor ve paniklemeye baþlýyorsun. Yol doðuya ve güneye\ndoðru gidiyor.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Bataklýktaki patika.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10015"
+                },
+                {
+                    "door": "D2",
+                    "description": "Yola geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10013"
+                }
+            ]
+        },
+        {
+            "vnum": "10015",
+            "name": "Bataklýktaki patika",
+            "description": "Bataklýða yürektazýlarýyla ayný anda geldin. Yürektazýsý bataklýða girmeyecek\nyani bu senin son þansýn...yada savaþacaksýn. Bataklýk davetkar gözükmüyor\nayrýca bulanýl sularda ne gibi yaratýklarýn yaþadýðýný bilmiyorsun. Bataklýðýn\nortasýnda terkedilmiþ gibi gözüken küçük bir ada var. Bataklýk sularý\nyürünebilecek kadar sýð. Hýzlý karar vermen lazým....savaþ yada adaya doðru\ngit. Çýkýþlar doðu ve batýya.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Sularýn üstünde.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10016"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ormanlardan geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10014"
+                }
+            ]
+        },
+        {
+            "vnum": "10016",
+            "name": "Bataklýk sularýnýn üstünde",
+            "description": "Sularýn üstünden geçerken tazýlarýn seni izlemediklerini farkediyorsun.\nSu dinlendirici ve ferah. Ada biraz ilerde ve oraya varmak için\nsabýrsýzlanýyorsun. Suyun hareket ettiðini görüyorsun ve hemen sonra\nonlarý görüyorsun. Yýlanlar! Ölümcül küçük sarý yýlanlar. Heryerde.\nAdaya doðru tüm hýzýnla koþmaya baþlýyorsun. Doðuya adaya gidebilirsin\nveya geriye yani batýya.\n",
+            "flags": "0",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Adada.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10017"
+                },
+                {
+                    "door": "D3",
+                    "description": "Patikaya geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10015"
+                }
+            ]
+        },
+        {
+            "vnum": "10017",
+            "name": "Adada",
+            "description": "Adanýn üzerine týrmandýðýn zaman yýlanlarýn seni kuru toprakta takip\netmediklerini farkediyorsun. Tazýlar hala diðer kýyýdalar ve suya girmeye\nhiç niyetleri yok ve senin kýyýya çýktýðýný gördüklerinde hayal kýrýklýðýyla\nkesik kesik havlýyorlar. Adada herhangi bir aðaç veya bitki yok. Doðuya\nbaktýðýnda Güney Sýðýnaða giden yeni bir patika görüyorsun.\nÇýkýþlar doðuya ve batýya.\n",
+            "flags": "0",
+            "sector": "4",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Sularýn üzerinden güneye.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10018"
+                },
+                {
+                    "door": "D3",
+                    "description": "Sularýn üzerine geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10016"
+                }
+            ]
+        },
+        {
+            "vnum": "10018",
+            "name": "Sularýn üstünde",
+            "description": "Bataklýkta yeniden yola koyulduðunda güneþin doðduðunu ve sisin daðýldýðýný\nfarkediyorsun. Yýlanlar henüz seni rahatsýz etmediler ve tazýlar sýnýrdaki\nevlerine geri döndüler. Karaya yeniden yaklaþýrken bataklýk sýðlaþýyor ve\nhava açýlýyor. Çýkýþlar doðuda kýyý ve batýda adaya geri.\n",
+            "flags": "0",
+            "sector": "6",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Kýyýda.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10019"
+                },
+                {
+                    "door": "D3",
+                    "description": "Adaya geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10017"
+                }
+            ]
+        },
+        {
+            "vnum": "10019",
+            "name": "Yeniden kýyýda",
+            "description": "Kýyýya ulaþýp tazýlarýn gitmiþ olduklarý gördüðünde rahatlýyarak bir iç\ngeçiriyorsun. Doðuya  GüneySýðýnaða bakarken þehir yaþamýnýn sönük seslerini\nduyuyorsun. Sonrasýnda ise GüneySýðýnaða doðru olan yürüyüþüne devam ediyorsun.\nBataklýða geri dönebilirsin(batý) veya doðuya doðru devam edebilirsin.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Ormandan geçen yol.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10020"
+                },
+                {
+                    "door": "D3",
+                    "description": "Tekrar sularda.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10018"
+                }
+            ]
+        },
+        {
+            "vnum": "10020",
+            "name": "Ormandan geçen yol",
+            "description": "Orman onu en son gördüðünden beri canlanmýþ gibi gözüküyor. Buradaki aðaçlarda\nbüyük ve renkli yapraklar var, yok yeniden kuru ve heryerde büyüyen bitkiler\nvar. GüneySýðýnaða olan yolculuðun düþündüðün kadar kötü geçmiyor. Biraz\nileride köyü görebiliyorsun. Çýkýþlar batýya doðru kýyý ve güneye doðru köy.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Köye giriþ.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10021"
+                },
+                {
+                    "door": "D3",
+                    "description": "Sulara geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10019"
+                }
+            ]
+        },
+        {
+            "vnum": "10021",
+            "name": "Köy Kapýlarý",
+            "description": "Köye yaklaþýrken bu devasa kapýlar seni karþýlamak için açýlýyor. Þehrin\nsokaklarý oldukça canlý ve hareketli. Heryerde çocuklar var ve dükkanlarda\ninsanlar. Köy yolu doðuya sana bir bardak içki vaad ederek uzanýyor. Batýya\normana gidebilir veya doðuya köye devam edebilirsin.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Köyün içindeki Yol.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10022"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ormana geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10020"
+                }
+            ]
+        },
+        {
+            "vnum": "10022",
+            "name": "Köyün Ordaki Yol",
+            "description": "Sokakta ilerlerken kuzeye doðru hoþ bir barýn varlýðý dikkatini çekiyor.\nOldukça davetkar görünüyor ve sende kayda deðer bir þekilde susuzsun.\nÝçeriden sönük þarký sesleri yükseliyor...sarhoþlar olduðunu sanýyorsun.\nBirkaç kiþinin haftasonunda ne yapacaklarýndan bahsettiklerinin duyuyorsun.\nÞehirde esen taze, hoþ bir meltem var. Çýkýþlar batýya doðru kapýlar,\nkuzeyde bar, doðu da ise Karanlýk.\n",
+            "flags": "0",
+            "sector": "1",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Bara giriþ.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10023"
+                },
+                {
+                    "door": "D1",
+                    "description": "Karanlýða giden patika.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10024"
+                },
+                {
+                    "door": "D3",
+                    "description": "Kapýlara geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10021"
+                }
+            ]
+        },
+        {
+            "vnum": "10023",
+            "name": "Taverna",
+            "description": "Ýçen ve eðlenen insanlarla dolu olan küçük, dumanlý bir odaya girdin. Ýçecek\nsatan bir barmen, sahnede sevdiði küçük þarkýyý söyleyen bir bayan var.\nSarhoþlar uzun ve güçlü fakat üzerlerinde bira lekeleri var.\nÇýkýþ güneye tekrar yola.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Yeniden yolda.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10022"
+                }
+            ]
+        },
+        {
+            "vnum": "10024",
+            "name": "Karanlýða giden yol",
+            "description": "Bu D'Hara ya gitmen için içinden geçmen gereken Karanlýða giden yol. Patika\ngeniþ ve oldukça rahat görülebiliyor. Etraftaki ormanlarda koþuþturan bir\nsürü küçük hayvan var. Aðaçlarýn çok daha sýk ve daha yeþil olduðunu\nfarkediyorsun. Nem artmaya ve daha sýcak olmaya baþlýyor. Ýleride Kemik\nKadýnýn kulübesini gördüðünde yorulmaya baþlamýþtýn. Onu bir ziyaret etmek\nfena olmaz. Kulübesi hmm...yirmi yarda ileride ve ona ulaþmak pek zaman\nalmaz. Ýleride Karanlýðý seçebiliyorsun. Çýkýþlar batýda köy ve kuzeyde\nKemik Avrat.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Kemik Kadýna giden patika.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10025"
+                },
+                {
+                    "door": "D3",
+                    "description": "Köye giden patika.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10022"
+                }
+            ]
+        },
+        {
+            "vnum": "10025",
+            "name": "Kemik Kadýnýn kulübesine giden patika",
+            "description": "Ormanda bir açýklýða çýkýyorsun ve gökyüzünün yeniden açýk olduðunu\nfarkediyorsun. Orman bir yaðmur için hazýr gibi gözüküyor ve aðaçlar\nyapraklarýný ters çevirmiþler. Kuzeyinde Kemik Kadýna sahip olduðunu\ntahmin ettiðin bir kulübe var. Kulübe hoþ ve rahat gözüküyor. Kalýp\nKemik Kadýný bir ziyaret etmek hoþ olurdu. Çýkýþlar batýya orman, kuzeye\nKemik Kadýn, doðuya Karanlýk.\n",
+            "flags": "0",
+            "sector": "3",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kemik Kadýnýn evi.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10026"
+                },
+                {
+                    "door": "D1",
+                    "description": "Karanlýða giden patika.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10027"
+                },
+                {
+                    "door": "D3",
+                    "description": "Ormana geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10024"
+                }
+            ]
+        },
+        {
+            "vnum": "10026",
+            "name": "Kemik Kadýnýn Kulübesi",
+            "description": "Tüm duvarlarý kemikle kaplý bir oda ya giriyorsun. Köþede duran hoþ bir\nþömine ýþýk ve ýsý yayýyor. Bir yað lambasý tavandan sarkýyor ve odaya\ngarip bir parýltý yayýyor. Yerdeki minik birikintileri üzerinde kemikler\nvar ve hepsinin ortasýnda ise Kemik Kadýn oturuyor. Yüzüde geniþ bir\ngülümseme var ve sana evinde istediði kadar kalabileceðini söylüyor.\nVe cevabýný dinlemeden sana Caernil isimli bir vampir hakkýnda bir\ndestan anlatmaya baþlýyor. Çýkýþ güneye doðru, yola geri.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Yola geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10025"
+                }
+            ]
+        },
+        {
+            "vnum": "10027",
+            "name": "Karanlýk",
+            "description": "Karanlýða vardýn. Burasý içinde durmanýn tehlikeli olduðu bir yer.\nKaranlýkta yaþayan bir sürü aþaðýdünya yaratýðý var. Gardýný yüksek\ntutmak ve uykuya dalmamak zorundasýn. Çýkýþlar doðuda ve batýya Kemik\nKadýnla bir fincan çay içebilmek için.\n",
+            "flags": "0",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Karanlýktan geçen patika.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10028"
+                },
+                {
+                    "door": "D3",
+                    "description": "Bir fincan çay için Kemik Kadýna geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10025"
+                }
+            ]
+        },
+        {
+            "vnum": "10028",
+            "name": "Karanlýktan geçen patika",
+            "description": "Ýzlediðin yol takipetmesi oldukça kolay olan bir tanesi. Hiç ses olmamasý\nseni baþta biraz ürkütüyor fakat bir süre sonra bu korkuda geçiyor. Doðu\nda Karanlýðýn merkezinin yaklaþtýðýný görüyorsun. Görünüþe göre Karanlýðýn\nen tehlikeli kýsmý. Çýkýþlar doðuda Karanlýðýn Merkezi ve batýda\nKaranlýðýn Giriþi.\n",
+            "flags": "0",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Karanlýðýn Merkezi.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10029"
+                },
+                {
+                    "door": "D3",
+                    "description": "Karanlýðýn giriþine geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10027"
+                }
+            ]
+        },
+        {
+            "vnum": "10029",
+            "name": "Karanlýðýn Merkezi",
+            "description": "Onu farkettiðin zaman Karanlýðýn Merkezine doðru yaklaiýyorsun. Bir Gölge Kiþi.\nZehirli dokunuþlarý vardýr ve ölü gömücülerdir. Ona farkettirmeden süzülmeye\nçalýþýyorsun. Hava kararýyor ve hala gidebileceðin çok az yer var. Çýkýþlar\ndoðu-batý yönlü, doðu gitmek istediðin yön.\n",
+            "flags": "0",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Karanlýðýn sonuna giden patika.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10030"
+                },
+                {
+                    "door": "D3",
+                    "description": "Geldiðin yol.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10028"
+                }
+            ]
+        },
+        {
+            "vnum": "10030",
+            "name": "Karanlýðýn sonuna Yakýn",
+            "description": "Karanlýðýn sonuna yaklaþýyorsun. Bu korkunç yerden ayrýlmak üzere olduðun için\nrahatlayarak iç geçiriyorsun. Güneþ yolunu görmeni zorlaþtýrarak uzakta batýyor.\nKaranlýktan gece çökmeden önce çýkmaya çalýþýyorsun.\nÇýkýþlar tabi ki doðu ve batý.\n",
+            "flags": "0",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Karanlýðýn sonu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10031"
+                },
+                {
+                    "door": "D3",
+                    "description": "Tabiki de geldiðin yol.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10029"
+                }
+            ]
+        },
+        {
+            "vnum": "10031",
+            "name": "Karanlýðýn Sonu",
+            "description": "Karanlýðýn sonuna vardýn!!! Eeee!... Of..Ah!! Güneþ battý ve gözünün tam\nönünde maddeleþiyor Hayalet Kral. Geçmene izin vermeyecek. Bu pislik yaratýðý\nbir þekilde uzaklaþtýrýp Darken Rahla ulaþman gerek. Çýkýþlar doðu ve batý.\n",
+            "flags": "0",
+            "sector": "10",
+            "exits": [
+                {
+                    "door": "D1",
+                    "description": "Azrith Düzlükleri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10032"
+                },
+                {
+                    "door": "D3",
+                    "description": "Karanlýk.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10030"
+                }
+            ]
+        },
+        {
+            "vnum": "10032",
+            "name": "Azrith Düzlükleri",
+            "description": "D'Hara'ya Hoþgeldin! Karanlýktan baþarýyla geçtin ve Azrith Düzlüklerinin\nönünde duruyorsun. Düzlükler oldukça devasa ve gözün alabildiðince uzanýyor.\nUzakta Kiþilerin Sarayýný görüyorsun, Darken Rahl'ýn evini. Darken Rahl'la\ndevasa sarayýnda karþýlaþmak için Azrith Düzlüklerini geçmen lazým.\nÇýkýþlar batý ve kuzeye.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Azrith Düzlükleri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10033"
+                },
+                {
+                    "door": "D3",
+                    "description": "Karanlýðýn sonu.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10031"
+                }
+            ]
+        },
+        {
+            "vnum": "10033",
+            "name": "Düzlüklerden geçen patika",
+            "description": "Oldukça uzun fakat Darken Rahl'ýn sarayýna giden bir yol buldun. Yol\ntaþlarla kaplý ver orada burada seyrek aðaçlar var. Gökyüzü açýk,\ngüneþli ve oldukça sýcak. Susamaya baþlýyorsun ve biraz yorgun\nhissetmeye baþlýyorsun. Tek þansýn Kiþilerin Sarayýna doðru devam\netmek ve Darken Rahl ý durdurmak ardýndan içecek ve yiyecek birþeyler\nçalabilirsin. Karanlýða giden yol pek iç açýcý gözükmüyor. Çýkýþlar\ngüney ve kuzeye.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Azrith Düzlükleri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10034"
+                },
+                {
+                    "door": "D2",
+                    "description": "Geldiðin yola dönen patika.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10032"
+                }
+            ]
+        },
+        {
+            "vnum": "10034",
+            "name": "Azrith Düzlükleri",
+            "description": "Oldukça fazla yol geldiðini ve neredeyse Saraya vardýðýný farkediyorsun.\nDurup geri dönmek için ani bir istek duyuyorsun fakat sonra geçiyor.\nÝleride yolu týkayan dev bir ejderha var. Belki seni dinler ve yoldan\nçekilir. Belkide seni kahvaltý niyetine yer...Hmmm...kahvaltý fikri\nfena deðil. Çýkýþlar güneyve kuzeye.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "BÜyüK korkutucu EJderHa ya.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10035"
+                },
+                {
+                    "door": "D2",
+                    "description": "Sýkýcý eski düzlüklere geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10033"
+                }
+            ]
+        },
+        {
+            "vnum": "10035",
+            "name": "BÜyüK korkutucu EJderHa'nýn yanýnda",
+            "description": "Ejderhaya yaklaþýrken onun þimdiye kadar gördüðün en büyük ve korkutucu\nþey olduðunu farkediyorsun. Sen geçmeye çalýþýrken ejderha seni zorla\nfarkediyor. Belkide onu öldürmeui DENEmelisin böylece dönerken onunla\nsavaþmak zorunda kalmazsýn... Belkide geri dönüp biraz kurabiye için\nanneciðe koþsan... mmmmm kurabiyeler. PASO MÝDENÝ DÜÞÜNMEYÝ BIRAK ARTIK!\nÝlerleyip Darken Rahl'ý öldürmen lazým. Çýkýþlar her zamanki gibi kuzey\nve güneye.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Kiþilerin Sarayýna giriþ.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10036"
+                },
+                {
+                    "door": "D2",
+                    "description": "Geldiðin yoldan geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10034"
+                }
+            ]
+        },
+        {
+            "vnum": "10036",
+            "name": "Kiþilerin Sarayý",
+            "description": "En sonunda Kiþilerin sarayýndasýn. Burasý harbi büyük. Þimdiye kadar gördüðün\nher þeyden büyük. Kapýlar senden 10 kat daha büyük, açýk durmalarýna raðmen...\nsanki farkedilmiþin gibi. Merdivenler mermerden yapýlmýþlar ve pürüssüzler.\nÇýkýþlar kuzeye sarayýn içine ve güneye ejderhanýn yanýna.\n",
+            "flags": "0",
+            "sector": "2",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Saray.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10038"
+                },
+                {
+                    "door": "D2",
+                    "description": "Büyük korkutucu EJderHa.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10035"
+                }
+            ]
+        },
+        {
+            "vnum": "10038",
+            "name": "Uzun Hol",
+            "description": "Saraya giriyorsun ve uzun bir holden geçiyorsun. Burada gezinen bir sürü\nbaþka kiþi var, diðerleri ise Darken Rahl a dua ediyor veya ona ilahilar\nsöylüyorlar. Böyle insanlarla dolu bir tahsis odasýnýn yanýndan geçiyorsun.\nDurmayýp ilerlemeye karar veriyorsun. Çýkýþlar kuzeye, güneye ve doðuda\nmüritlerle dolu bir oda var.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Daha uzun hol.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10041"
+                },
+                {
+                    "door": "D1",
+                    "description": "Tahsis odasý.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10039"
+                },
+                {
+                    "door": "D2",
+                    "description": "Geçitlere geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10036"
+                }
+            ]
+        },
+        {
+            "vnum": "10039",
+            "name": "Tahsis odasý",
+            "description": "Bu oda kafalarýný yere dayamýþ armonik bir tonda ilahi söyleyen insanlarla\ndolu. Odanýn ortasýnda su dolu dev bir havuz var. Burasý bir iç bahçe gibi\ngözüküyor. Darken Rahl a adanmýþ bütün bu insanlar karþýsýnda baþtan aþaðý\nürperiyorsun. Çýkýþlar kuzeye ve batýya geri.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Mord-Sith Odasýna.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10040"
+                },
+                {
+                    "door": "D3",
+                    "description": "Hole geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10038"
+                }
+            ]
+        },
+        {
+            "vnum": "10040",
+            "name": "Mord-Sithlerin odasý",
+            "description": "Bu odanýn kan ve ter birleþimi korkunç kokusu mideni bulandýrýyor. Ýnsanlar\nborulara zincirlenmiþ ve kýrmýzý giymiþ kadýn onlara iþkence yapýyor.\nZemin tamamen kanla kaplý. Odaya girdiðin an bundan piþman oluyorsun.\nMord-Sithler seni farkettiler ve sana doðru geliyorlar. En iyi hýzlý KOÞ!\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "Tahsis odasýna geri.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10039"
+                }
+            ]
+        },
+        {
+            "vnum": "10041",
+            "name": "Holün Sonu",
+            "description": "Holün sonuna geldin...bu kattaki. Önündeki dev kapýlarýn altýndan saplarý var.\nÝçerinden kuþ ötüþleri geliyor. Bu odayý sarmalayan büyüyü hissediyorsun....\n\nDarken Rahl'ý buldun! Kapý önünde otomatik olarak açýlýyor. Girebilir veya\nMord-Sithlere geri dönebilirsin.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D0",
+                    "description": "Yaþam Bahçesi.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10042"
+                },
+                {
+                    "door": "D2",
+                    "description": "Uzun Hol.\n",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10038"
+                }
+            ]
+        },
+        {
+            "vnum": "10042",
+            "name": "Yaþam Bahçesi",
+            "description": "Burasý harika büyülü bitki türleriyle doldurulmuþ maðramsý bir oda.\nSüslü pencereler oldukça yukarýda bereketli bitkiler için ýþýk saðlýyor.\nOdanýn eteklerinde çiçek yataklarý eðrilip bükülen yürüyüþ yollarýnýn\netrafýna ekilmiþ. Çiçeklerin ötesinde ise küçük aðaçlar, ve sarmaþýklarýn\nkapladýðý taþ bir duvar ve güzelyerleþtirilmiþ bitkiler görüntüyü tamamlýyor.\nYukarýdaki pencereler dýþýnda oda bir bahçeyi aynen taklit ediyor. Bu pahalý\nodanýn ortasýnda bir çim alaný neredeyse kusursuz bir daire çiziyor, çimen\ndaire beyaz bir taþýn kýskýsý tarafýndan bozuluyor, üstünde bir parça granit\nbulunan, hoþ,fakat üstüne oyulmuþ oluklar seni bir köþedeki kuyuya götürüyor.\nYivlerle süslenmiþ iki pedestal tarafýndan tutuluyor. Granit parçasýnýn\nötesinde cilalanmýþ kara bir taþ blok bir ateþ çukurunun yanýnda duruyor.\nÇimenlerin ortasýnda meþalelerin ateþiyle beslenen ve garip bir þekilde\nyanan beyaz sihirbazýn kumu var.\n\nTek çýkýþ güneyde.\n",
+            "flags": "0",
+            "sector": "0",
+            "exits": [
+                {
+                    "door": "D2",
+                    "description": "",
+                    "keyword": "",
+                    "locks": "0",
+                    "key": "0",
+                    "u1_vnum": "10041"
+                }
+            ]
+        }
+    ],
+    "specials": [
+        {
+            "vnum": "10017",
+            "spec_fun": "spec_cast_cleric"
+        },
+        {
+            "vnum": "10020",
+            "spec_fun": "spec_cast_mage"
+        },
+        {
+            "vnum": "10021",
+            "spec_fun": "spec_breath_fire"
+        },
+        {
+            "vnum": "10024",
+            "spec_fun": "spec_breath_any"
+        },
+        {
+            "vnum": "10025",
+            "spec_fun": "spec_thief"
+        },
+        {
+            "vnum": "10031",
+            "spec_fun": "spec_cast_undead"
+        }
+    ],
+    "resets": [
+        {
+            "command": "O",
+            "arg1": "10025",
+            "arg2": "0",
+            "arg3": "10001"
+        },
+        {
+            "command": "O",
+            "arg1": "10026",
+            "arg2": "0",
+            "arg3": "10001"
+        },
+        {
+            "command": "M",
+            "arg1": "10007",
+            "arg2": "1",
+            "arg3": "10003",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10008",
+            "arg2": "1",
+            "arg3": "10003",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10009",
+            "arg2": "1",
+            "arg3": "10003",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10005",
+            "arg2": "4",
+            "arg3": "10005",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10005",
+            "arg2": "4",
+            "arg3": "10005",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10005",
+            "arg2": "4",
+            "arg3": "10005",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10005",
+            "arg2": "4",
+            "arg3": "10005",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10014",
+            "arg2": "2",
+            "arg3": "10006",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "10012",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "10012",
+            "arg2": "0",
+            "arg3": "2"
+        },
+        {
+            "command": "E",
+            "arg1": "10013",
+            "arg2": "0",
+            "arg3": "7"
+        },
+        {
+            "command": "M",
+            "arg1": "10010",
+            "arg2": "4",
+            "arg3": "10008",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10010",
+            "arg2": "4",
+            "arg3": "10008",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10001",
+            "arg2": "2",
+            "arg3": "10009",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10002",
+            "arg2": "2",
+            "arg3": "10009",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10004",
+            "arg2": "4",
+            "arg3": "10009",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10004",
+            "arg2": "4",
+            "arg3": "10009",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10015",
+            "arg2": "1",
+            "arg3": "10010",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10011",
+            "arg2": "1",
+            "arg3": "10011",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10012",
+            "arg2": "2",
+            "arg3": "10011",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10012",
+            "arg2": "2",
+            "arg3": "10011",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10013",
+            "arg2": "1",
+            "arg3": "10011",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10003",
+            "arg2": "1",
+            "arg3": "10012",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10004",
+            "arg2": "4",
+            "arg3": "10012",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10016",
+            "arg2": "2",
+            "arg3": "10012",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10016",
+            "arg2": "2",
+            "arg3": "10012",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10001",
+            "arg2": "2",
+            "arg3": "10015",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10002",
+            "arg2": "2",
+            "arg3": "10015",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10004",
+            "arg2": "4",
+            "arg3": "10015",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10010",
+            "arg2": "4",
+            "arg3": "10015",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10010",
+            "arg2": "4",
+            "arg3": "10015",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "10015",
+            "arg2": "0",
+            "arg3": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10026",
+            "arg2": "4",
+            "arg3": "10016",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10026",
+            "arg2": "4",
+            "arg3": "10016",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10026",
+            "arg2": "4",
+            "arg3": "10016",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10026",
+            "arg2": "4",
+            "arg3": "10016",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10014",
+            "arg2": "2",
+            "arg3": "10020",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "10001",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "10006",
+            "arg2": "0",
+            "arg3": "9"
+        },
+        {
+            "command": "E",
+            "arg1": "10007",
+            "arg2": "0",
+            "arg3": "8"
+        },
+        {
+            "command": "E",
+            "arg1": "10008",
+            "arg2": "0",
+            "arg3": "10"
+        },
+        {
+            "command": "E",
+            "arg1": "10009",
+            "arg2": "0",
+            "arg3": "11"
+        },
+        {
+            "command": "E",
+            "arg1": "10010",
+            "arg2": "0",
+            "arg3": "5"
+        },
+        {
+            "command": "E",
+            "arg1": "10011",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "G",
+            "arg1": "10020",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "10021",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "10022",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "10019",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "10025",
+            "arg2": "1",
+            "arg3": "10022",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "10014",
+            "arg2": "0"
+        },
+        {
+            "command": "E",
+            "arg1": "10005",
+            "arg2": "0",
+            "arg3": "8"
+        },
+        {
+            "command": "M",
+            "arg1": "10028",
+            "arg2": "1",
+            "arg3": "10022",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "10017",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "10023",
+            "arg2": "1",
+            "arg3": "10023",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "10004",
+            "arg2": "0"
+        },
+        {
+            "command": "G",
+            "arg1": "10016",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "10024",
+            "arg2": "4",
+            "arg3": "10023",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "10004",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "10024",
+            "arg2": "4",
+            "arg3": "10023",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10024",
+            "arg2": "4",
+            "arg3": "10023",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10024",
+            "arg2": "4",
+            "arg3": "10023",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10006",
+            "arg2": "4",
+            "arg3": "10025",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10006",
+            "arg2": "4",
+            "arg3": "10025",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10006",
+            "arg2": "4",
+            "arg3": "10025",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10006",
+            "arg2": "4",
+            "arg3": "10025",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10017",
+            "arg2": "1",
+            "arg3": "10026",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "10002",
+            "arg2": "0",
+            "arg3": "4"
+        },
+        {
+            "command": "M",
+            "arg1": "10018",
+            "arg2": "3",
+            "arg3": "10028",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "10003",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "10018",
+            "arg2": "3",
+            "arg3": "10028",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10018",
+            "arg2": "3",
+            "arg3": "10029",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10019",
+            "arg2": "2",
+            "arg3": "10029",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10030",
+            "arg2": "2",
+            "arg3": "10029",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10019",
+            "arg2": "2",
+            "arg3": "10030",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10020",
+            "arg2": "1",
+            "arg3": "10031",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10022",
+            "arg2": "4",
+            "arg3": "10032",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10027",
+            "arg2": "2",
+            "arg3": "10032",
+            "arg4": "1"
+        },
+        {
+            "command": "G",
+            "arg1": "10018",
+            "arg2": "0"
+        },
+        {
+            "command": "M",
+            "arg1": "10027",
+            "arg2": "2",
+            "arg3": "10032",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10022",
+            "arg2": "4",
+            "arg3": "10034",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10022",
+            "arg2": "4",
+            "arg3": "10034",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10021",
+            "arg2": "1",
+            "arg3": "10035",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "10027",
+            "arg2": "0",
+            "arg3": "6"
+        },
+        {
+            "command": "M",
+            "arg1": "10029",
+            "arg2": "2",
+            "arg3": "10038",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "10023",
+            "arg2": "0",
+            "arg3": "16"
+        },
+        {
+            "command": "E",
+            "arg1": "10028",
+            "arg2": "0",
+            "arg3": "4"
+        },
+        {
+            "command": "M",
+            "arg1": "10029",
+            "arg2": "2",
+            "arg3": "10040",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10030",
+            "arg2": "2",
+            "arg3": "10041",
+            "arg4": "1"
+        },
+        {
+            "command": "M",
+            "arg1": "10031",
+            "arg2": "1",
+            "arg3": "10042",
+            "arg4": "1"
+        },
+        {
+            "command": "E",
+            "arg1": "10024",
+            "arg2": "0",
+            "arg3": "14"
+        }
+    ],
+    "shops": [
+        {
+            "keeper": "10023",
+            "buy_type_0": "0",
+            "buy_type_1": "0",
+            "buy_type_2": "0",
+            "buy_type_3": "0",
+            "buy_type_4": "0",
+            "profit_buy": "100",
+            "profit_sell": "0",
+            "open_hour": "0",
+            "close_hour": "23"
+        }
+    ],
+    "omprogs": [
+        {
+            "command": "O",
+            "vnum": "10027",
+            "progtype": "wear_prog",
+            "progname": "wear_prog_headguard"
+        },
+        {
+            "command": "O",
+            "vnum": "10027",
+            "progtype": "remove_prog",
+            "progname": "remove_prog_headguard"
+        },
+        {
+            "command": "O",
+            "vnum": "10028",
+            "progtype": "wear_prog",
+            "progname": "wear_prog_blackguard"
+        },
+        {
+            "command": "O",
+            "vnum": "10028",
+            "progtype": "remove_prog",
+            "progname": "remove_prog_blackguard"
+        }
+    ],
+    "olimits": [
+        {
+            "vnum": "10027",
+            "limit": "1"
+        },
+        {
+            "vnum": "10028",
+            "limit": "2"
+        }
+    ]
+}
