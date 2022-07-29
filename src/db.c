@@ -3275,7 +3275,7 @@ int number_range( int from, int to )
   int x;
   int fark;
 
-  fark = to - from;
+  fark = abs(to - from);
 
   if( fark == 0 )
   {
