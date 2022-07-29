@@ -103,7 +103,7 @@ int race_lookup (const char *name)
 {
    int race;
    char buf[MAX_STRING_LENGTH];
-
+/*
    if( !strcmp( name, "duergar" ) || !strcmp( name, "yeg" ) || !strcmp( name, "githyanki" ) || !strcmp( name, "arial" ) )
 	   strcpy( (char*)name, "gamayun");
    if( !strcmp( name, "half-elf" ) || !strcmp( name, "dark-elf" ) || !strcmp( name, "rockseer" ) )
@@ -112,7 +112,7 @@ int race_lookup (const char *name)
 	   strcpy( (char*)name, "pardus");
    if( !strcmp( name, "troll" ) || !strcmp( name, "trol" ) )
 	   strcpy( (char*)name, "asura");
-
+*/
    for ( race = 0; race_table[race].name[1] != NULL; race++)
    {
      if (((LOWER(name[0]) == LOWER(race_table[race].name[0][0])) &&  !str_prefix( name,race_table[race].name[0])) ||

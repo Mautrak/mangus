@@ -23,8 +23,8 @@ while ( 1 )
 	@ index++
     end
 
-    # Run uzakdiyarlar.
-    ../area/uzakdiyarlar $port >&! $logfile
+    # Run mangus.
+    ../area/mangus $port >&! $logfile
 
     # Restart, giving old connections a chance to die.
     if ( -e shutdown.txt ) then

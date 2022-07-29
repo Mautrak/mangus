@@ -283,10 +283,10 @@ typedef void OPROG_FUN_AREA args((OBJ_DATA *obj));
 #define MAX_SKILL		  427
 #define MAX_ALIAS		   20
 #define MAX_CLASS		   13
-#define MAX_PC_RACE		   7
+#define MAX_PC_RACE		   9
 /* unique ve null dahil */
-#define MAX_RACE		    77
-#define MAX_CABAL		    9
+#define MAX_RACE		    83
+#define MAX_CABAL		    10
 #define MAX_RELIGION		   5
 #define MAX_TIME_LOG		   14
 #define MIN_TIME_LIMIT		   600   /* 10 Hours */
@@ -662,7 +662,9 @@ struct	class_type
 #define LANG_DRAGON 14
 #define LANG_WATER 15
 #define LANG_DOG 16
-#define MAX_LANGUAGE	     17
+#define LANG_ELVISH 17
+#define LANG_TROLLISH 18
+#define MAX_LANGUAGE	     19
 
 struct item_type
 {
@@ -2926,10 +2928,6 @@ char *	crypt		args( ( const char *key, const char *salt ) );
 #endif
 
 #if	defined(hpux)
-char *	crypt		args( ( const char *key, const char *salt ) );
-#endif
-
-#if	defined(linux)
 char *	crypt		args( ( const char *key, const char *salt ) );
 #endif
 

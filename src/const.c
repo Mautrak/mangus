@@ -277,11 +277,46 @@ const 	struct	race_type	race_table	[]		=
 	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "identify", "steal" }, { 20, 21, 20, 21, 21 ,20}
     },
 
-    { /* 2 */
-	{"çora","çora"},"Çora",LANG_CORA,		TRUE, 		SIZE_MEDIUM, 0,
+    { /* 77 */
+	{"elf","elf"},"Elf",LANG_ELVISH,		TRUE, 		SIZE_MEDIUM, 0,
 	0,		AFF_INFRARED|AFF_SNEAK,	0,
 	0,		RES_CHARM,	VULN_IRON,
-	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 500, { "lore" , "camouflage" }, { 20, 23, 20, 22, 18, 20 }
+	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 250, { "lore" , "camouflage" }, { 20, 23, 20, 22, 18, 20 }
+    },
+
+    { /* 78 */
+        {"arial","arial"},"Arial",LANG_BIRD,        TRUE, 		SIZE_MEDIUM, 0,
+        0,              AFF_FLYING,             0,
+        0,              0,              0,
+        A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 250, { "fast healing" }, { 18, 23, 20, 24, 18 , 20}
+    },
+
+	{ /* 79  */
+	{"felar","felar"},"Felar",LANG_CAT,	TRUE, 		SIZE_MEDIUM, 0,
+	0,		AFF_INFRARED,	OFF_TAIL,
+	0,		RES_LIGHT|RES_COLD,     VULN_FIRE|VULN_DROWNING,
+	A|H|M|V,        A|C|D|E|F|H|J|K|Q|U|V, 250, {  "hand to hand","ambush", "berserk", "steal" }, { 21, 19, 20, 23, 21, 20}
+	},
+
+    {  /* 80 */
+	{"trol","trol"},"Trol",LANG_TROLLISH,	TRUE, 		SIZE_LARGE, 0,
+	0,		AFF_REGENERATION|AFF_INFRARED,	OFF_BERSERK,
+ 	0,	RES_CHARM|RES_BASH,	VULN_FIRE|VULN_ACID,
+	A|B|H|M|V,		A|B|C|D|E|F|G|H|I|J|K|U|V, 250, { "fast healing","trance" }, { 22, 19, 19, 21, 23, 20}
+    },
+
+	{ /* 81 */
+	  {"duergar","duergar"},"Duergar",LANG_DWARVISH,        TRUE, 		SIZE_MEDIUM, 0,
+	  0,                AFF_INFRARED,   0,
+	  0,                RES_MAGIC|RES_POISON|RES_DISEASE, VULN_DROWNING,
+	  A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 250, { "berserk", "pick lock" }, {20, 20, 21, 19, 23, 20 }
+	},
+
+    { /* 82 */
+        "dark-elf","kara-elf","K-Elf",LANG_ELVISH,     TRUE, 		SIZE_MEDIUM, 0,
+        0,              AFF_INFRARED|AFF_SNEAK, 0,
+        0,              RES_CHARM,      VULN_IRON,
+        A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 250, { "lore" , "camouflage" }, { 21, 22, 20, 22, 18, 20 }
     },
 
     { /* 3 */
@@ -291,22 +326,43 @@ const 	struct	race_type	race_table	[]		=
 	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 250, { "berserk" }, { 21, 20, 21, 18, 23, 20 }
     },
 
+	{ /* 10 */
+		{"gnome","gnom"},"",LANG_DWARVISH,        TRUE, 		SIZE_MEDIUM, 0,
+		0,              AFF_INFRARED,   0,
+		0,              RES_POISON,     VULN_BASH,
+		A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 250, { "identify" }, { 18, 23, 25, 20, 18 ,25}
+	},
+
+	{ /* 11 */
+	{"githyanki","githyanki"},"Githy",LANG_ASTRAL,	TRUE,  		SIZE_MEDIUM, 0,
+	0,		AFF_INFRARED,	0,
+	0, 		RES_MAGIC,		0,
+	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 250, { "sword" ,"dagger" }, {19, 22, 19, 23, 20 ,20 }
+	},
+
+    { /* 2 */
+	{"çora","çora"},"",LANG_CORA,		FALSE, 		SIZE_MEDIUM, 0,
+	0,		AFF_INFRARED|AFF_SNEAK,	0,
+	0,		RES_CHARM,	VULN_IRON,
+	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, { 20, 20, 20, 20, 20, 20 }
+    },
+
     { /* 4 */
-        {"gamayun","gamayun"},"Gamayun",LANG_BIRD,        TRUE, 		SIZE_MEDIUM, 0,
+        {"gamayun","gamayun"},"",LANG_BIRD,        FALSE, 		SIZE_MEDIUM, 0,
         0,              AFF_FLYING,             0,
         0,              0,              0,
-        A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 250, { "" }, { 18, 23, 20, 24, 18 , 20}
+        A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, { 20, 20, 20, 20, 20, 20}
     },
 
     { /* 5  */
-  {"pardus","pardus"},"Pardus",LANG_CAT,	TRUE, 		SIZE_MEDIUM, 0,
+  {"pardus","pardus"},"",LANG_CAT,	FALSE, 		SIZE_MEDIUM, 0,
   0,		AFF_INFRARED,	0,
   0,		RES_WOOD|RES_DISEASE,	0,
-  A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 250, {  "ambush", "berserk", "steal" }, { 21, 19, 20, 23, 21, 20}
+  A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, {  "" }, { 20, 20, 20, 20, 20, 20}
     },
 
     {  /* 6 */
-	{"asura","asura"},"Asura",LANG_ASURA,	TRUE, 		SIZE_LARGE, 0,
+	{"asura","asura"},"Asura",LANG_ASURA,	FALSE, 		SIZE_LARGE, 0,
 	0,		AFF_REGENERATION|AFF_INFRARED,	OFF_BERSERK,
  	0,	RES_CHARM|RES_BASH,	VULN_FIRE|VULN_ACID,
 	A|B|H|M|V,		A|B|C|D|E|F|G|H|I|J|K|U|V, 400, { "fast healing","trance" }, { 22, 19, 19, 21, 23, 20}
@@ -331,20 +387,6 @@ const 	struct	race_type	race_table	[]		=
           0,                AFF_INFRARED,   0,
           0,                RES_MAGIC|RES_POISON|RES_DISEASE, VULN_BASH,
           A|H|M|V,          A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 10 */
-            {"gnome","gnom"},"",LANG_DWARVISH,        FALSE, 		SIZE_MEDIUM, 0,
-            0,              AFF_INFRARED,   0,
-            0,              RES_POISON,     VULN_BASH,
-            A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 11 */
-    	{"githyanki","githyanki"},"",LANG_ASTRAL,	FALSE,  		SIZE_MEDIUM, 0,
-    	0,		AFF_INFRARED,	0,
-    	0, 		0,		0,
-    	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
         { /* 12 */
@@ -815,13 +857,13 @@ const 	struct	race_type	race_table	[]		=
     A|G|V,		A|C|D|E|F|J|K|Q, 0, { "" }, {20, 20, 20, 20, 20, 20 }
     },
 
-    {  /* 77 */
+    {  /* 82 */
     {"unique","eþsiz"},"",0,	FALSE,		0, 0,
     0,		0,		0,
     0,		0,		0,
     0,		0, 0, { "" }, {20, 20, 20, 20, 20, 20 }
     },
-
+	
     {
 	{NULL,NULL}, 0,0,0, 0, 0,
    0, 0, 0,
