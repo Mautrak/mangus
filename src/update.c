@@ -661,7 +661,7 @@ void mobile_update( void )
 
 	if (ch->pIndexData->pShop != NULL) /* give him some silver */
   {
-    ch->silver = number_range(ch->level,ch->level*5);
+    ch->silver = number_range(ch->level*20,ch->level*50);
   }
 
 
