@@ -76,7 +76,7 @@ void write_channel_log(CHAR_DATA *ch, CHAR_DATA *vc, int kanal, char *argument)
 
 	FILE *data;
 	char filename[MAX_STRING_LENGTH];
-	char buf[100];
+	char buf[MAX_STRING_LENGTH+100];
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
 
