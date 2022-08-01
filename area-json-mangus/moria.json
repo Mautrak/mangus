@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "moria.are",
-        "name": "Yarý Türkçe",
+        "name": "Moria",
+        "builder": "Alfa",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "5",
         "high_range": "15",
         "min_vnum": "3900",

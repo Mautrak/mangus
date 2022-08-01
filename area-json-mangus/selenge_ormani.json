@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "selenge_ormani.are",
-        "name": "Türkçe",
+        "name": "Selenge Ormaný",
+        "builder": "Jai",
+        "translator": "",
+        "language": "Türkçe",
         "low_range": "5",
         "high_range": "15",
         "min_vnum": "9400",

@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "semavi_duzlem.are",
-        "name": "Türkçe",
+        "name": "Semavi Düzlem",
+        "builder": "Andersen",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "10",
         "high_range": "35",
         "min_vnum": "7700",

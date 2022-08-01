@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "karanlik_kita.are",
-        "name": "Yarı Türkçe",
+        "name": "Karanlık Kıta",
+        "builder": "Mort",
+        "translator": "Bilinmiyor",
+        "language": "Yarı Türkçe",
         "low_range": "5",
         "high_range": "35",
         "min_vnum": "14500",

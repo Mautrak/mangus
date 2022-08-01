@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "selenge.are",
-        "name": "Türkçe",
+        "name": "Selenge",
+        "builder": "Diku",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "1",
         "high_range": "100",
         "min_vnum": "3000",

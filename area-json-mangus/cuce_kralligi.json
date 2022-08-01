@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "cuce_kralligi.are",
-        "name": "Türkçe",
+        "name": "Cüce Krallýðý",
+        "builder": "Anon",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "10",
         "high_range": "25",
         "min_vnum": "6500",

@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "arkadya.are",
-        "name": "Yarı Türkçe",
+        "name": "Arkadya",
+        "builder": "Cernunn",
+        "translator": "Bilinmiyor",
+        "language": "Yarı Türkçe",
         "low_range": "30",
         "high_range": "90",
         "min_vnum": "12000",

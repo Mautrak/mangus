@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "aslan.are",
-        "name": "Türkçe",
+        "name": "Aslan Kalesi",
+        "builder": "Cabal",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "90",
         "high_range": "100",
         "min_vnum": "500",

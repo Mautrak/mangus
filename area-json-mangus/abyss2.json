@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "abyss2.are",
-        "name": "Ýngilizce",
+        "name": "The Abyss",
+        "builder": "Anon",
+        "translator": "",
+        "language": "Ýngilizce",
         "low_range": "30",
         "high_range": "50",
         "min_vnum": "25000",

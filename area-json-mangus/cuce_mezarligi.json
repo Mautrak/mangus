@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "cuce_mezarligi.are",
-        "name": "Yarý Türkçe",
+        "name": "Cüce Mezarlýðý",
+        "builder": "Raff",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "1",
         "high_range": "20",
         "min_vnum": "2000",

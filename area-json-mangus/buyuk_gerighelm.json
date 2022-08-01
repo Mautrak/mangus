@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "buyuk_gerighelm.are",
-        "name": "Yarý Türkçe",
+        "name": "Büyük Gerighelm",
+        "builder": "Zarchon",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "1",
         "high_range": "30",
         "min_vnum": "7500",

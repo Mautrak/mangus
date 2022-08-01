@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "cora_vadisi.are",
-        "name": "Yarý Türkçe",
+        "name": "Çora Vadisi",
+        "builder": "Hatchet",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "5",
         "high_range": "20",
         "min_vnum": "7800",

@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "zooloji.are",
-        "name": "Yarý Türkçe",
+        "name": "Zooloji",
+        "builder": "Og",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "1",
         "high_range": "10",
         "min_vnum": "400",

@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "mudokulu.are",
-        "name": "Türkçe",
+        "name": "Mud Okulu",
+        "builder": "Hatchet",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "1",
         "high_range": "10",
         "min_vnum": "3700",

@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "warkeep.are",
-        "name": "Ýngilizce",
+        "name": "The Keep of The Warlock",
+        "builder": "Yaegar",
+        "translator": "",
+        "language": "Ýngilizce",
         "low_range": "20",
         "high_range": "30",
         "min_vnum": "15700",

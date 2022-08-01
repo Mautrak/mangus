@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "ofcol.are",
-        "name": "Türkçe",
+        "name": "Ofcol",
+        "builder": "Alfa",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "1",
         "high_range": "100",
         "min_vnum": "5500",

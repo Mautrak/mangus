@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "ofke.are",
-        "name": "Yarý Türkçe",
+        "name": "Öfke",
+        "builder": "Chronos",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "90",
         "high_range": "100",
         "min_vnum": "540",

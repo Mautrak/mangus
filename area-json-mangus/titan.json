@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "titan.are",
-        "name": "Türkçe",
+        "name": "Titan Vadisi",
+        "builder": "Xavier",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "25",
         "high_range": "50",
         "min_vnum": "18000",

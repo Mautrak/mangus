@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "korsan_adalari.are",
-        "name": "Yarý Türkçe",
+        "name": "Korsan Adalarý",
+        "builder": "Lok",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "40",
         "high_range": "90",
         "min_vnum": "17000",

@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "ryzen2.are",
-        "name": "Ýngilizce",
+        "name": "Caverns",
+        "builder": "Ryzen",
+        "translator": "",
+        "language": "Ýngilizce",
         "low_range": "25",
         "high_range": "45",
         "min_vnum": "22000",

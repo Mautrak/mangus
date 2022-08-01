@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "lic_kulesi.are",
-        "name": "Türkçe",
+        "name": "Liç Kulesi",
+        "builder": "Ryzen",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "45",
         "high_range": "75",
         "min_vnum": "29350",

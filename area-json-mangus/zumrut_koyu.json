@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "zumrut_koyu.are",
-        "name": "Türkçe",
+        "name": "Zümrüt Köyü",
+        "builder": "Serendal",
+        "translator": "",
+        "language": "Türkçe",
         "low_range": "1",
         "high_range": "10",
         "min_vnum": "100",

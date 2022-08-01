@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "peri_cemberi.are",
-        "name": "Türkçe",
+        "name": "Peri Çemberi",
+        "builder": "Lok",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "10",
         "high_range": "15",
         "min_vnum": "29101",

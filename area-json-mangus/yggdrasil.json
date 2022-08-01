@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "yggdrasil.are",
-        "name": "Yarý Türkçe",
+        "name": "Yggdrasil",
+        "builder": "Glop",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "30",
         "high_range": "45",
         "min_vnum": "2900",

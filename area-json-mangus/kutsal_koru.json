@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "kutsal_koru.are",
-        "name": "Yarý Türkçe",
+        "name": "Kutsal Koru",
+        "builder": "Alfa",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "5",
         "high_range": "20",
         "min_vnum": "8900",

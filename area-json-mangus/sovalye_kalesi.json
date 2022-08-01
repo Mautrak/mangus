@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "sovalye_kalesi.are",
-        "name": "Yarý Türkçe",
+        "name": "Þövalye Kalesi",
+        "builder": "Chronos",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "90",
         "high_range": "100",
         "min_vnum": "520",

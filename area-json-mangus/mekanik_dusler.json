@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "mekanik_dusler.are",
-        "name": "Türkçe",
+        "name": "Mekanik Düþler",
+        "builder": "Furey",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "1",
         "high_range": "5",
         "min_vnum": "8600",

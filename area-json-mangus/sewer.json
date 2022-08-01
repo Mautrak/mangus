@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "sewer.are",
-        "name": "Ýngilizce",
+        "name": "Sewers",
+        "builder": "Diku",
+        "translator": "",
+        "language": "Ýngilizce",
         "low_range": "5",
         "high_range": "30",
         "min_vnum": "7000",

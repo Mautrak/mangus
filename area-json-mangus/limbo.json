@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "limbo.are",
-        "name": "Türkçe",
+        "name": "Limbo",
+        "builder": "Diku",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "99",
         "high_range": "100",
         "min_vnum": "0",

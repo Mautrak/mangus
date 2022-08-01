@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "wyvern_kulesi.are",
-        "name": "Yarý Türkçe",
+        "name": "Wyvern Kulesi",
+        "builder": "Tyrst",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "5",
         "high_range": "30",
         "min_vnum": "1600",

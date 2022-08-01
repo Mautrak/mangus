@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "lanetli_manastir.are",
-        "name": "Yarı Türkçe",
+        "name": "Lanetli Manastır",
+        "builder": "Yaegar",
+        "translator": "Bilinmiyor",
+        "language": "Yarı Türkçe",
         "low_range": "60",
         "high_range": "65",
         "min_vnum": "30800",

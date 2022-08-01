@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "serbest_liman.are",
-        "name": "Yarý Türkçe",
+        "name": "Serbest Liman",
+        "builder": "Lok",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "8",
         "high_range": "53",
         "min_vnum": "29201",

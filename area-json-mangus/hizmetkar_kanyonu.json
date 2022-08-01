@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "hizmetkar_kanyonu.are",
-        "name": "Türkçe",
+        "name": "Hizmetkar Kanyonu",
+        "builder": "Raff",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "5",
         "high_range": "30",
         "min_vnum": "9200",

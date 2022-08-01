@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "thalos.are",
-        "name": "Türkçe",
+        "name": "Thalos",
+        "builder": "Drkside",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "10",
         "high_range": "25",
         "min_vnum": "5200",

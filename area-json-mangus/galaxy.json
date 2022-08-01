@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "galaxy.are",
-        "name": "Ýngilizce",
+        "name": "Galaxy",
+        "builder": "Doctor",
+        "translator": "",
+        "language": "Ýngilizce",
         "low_range": "20",
         "high_range": "30",
         "min_vnum": "9300",

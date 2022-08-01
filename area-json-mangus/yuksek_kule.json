@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "yuksek_kule.are",
-        "name": "Türkçe",
+        "name": "Yüksek Büyücülük Kulesi",
+        "builder": "Skylar",
+        "translator": "",
+        "language": "Türkçe",
         "low_range": "10",
         "high_range": "30",
         "min_vnum": "1300",

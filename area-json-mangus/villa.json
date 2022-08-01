@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "villa.are",
-        "name": "Ýngilizce",
+        "name": "The Village of Anon",
+        "builder": "Yaegar",
+        "translator": "",
+        "language": "Ýngilizce",
         "low_range": "1",
         "high_range": "65",
         "min_vnum": "24100",

@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "korig.are",
-        "name": "Türkçe",
+        "name": "Korýg",
+        "builder": "Copper",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "5",
         "high_range": "15",
         "min_vnum": "3500",

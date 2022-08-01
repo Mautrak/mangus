@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "ruhlar_nehri.are",
-        "name": "Yarý Türkçe",
+        "name": "Ruhlar Nehri",
+        "builder": "RM",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "50",
         "high_range": "110",
         "min_vnum": "20000",

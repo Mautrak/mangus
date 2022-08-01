@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "ejderha_kulesi.are",
-        "name": "Türkçe",
+        "name": "Ejderha Kulesi",
+        "builder": "Wench",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "5",
         "high_range": "30",
         "min_vnum": "2200",

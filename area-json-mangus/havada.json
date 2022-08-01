@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "havada.are",
-        "name": "Türkçe",
+        "name": "Havada",
+        "builder": "Copper",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "5",
         "high_range": "10",
         "min_vnum": "1000",

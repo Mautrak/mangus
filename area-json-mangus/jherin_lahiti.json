@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "jherin_lahiti.are",
-        "name": "Yarý Türkçe",
+        "name": "Jher'in Lahiti",
+        "builder": "Garth",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "35",
         "high_range": "55",
         "min_vnum": "32700",

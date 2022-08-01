@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "antharia.are",
-        "name": "Ýngilizce",
+        "name": "Antharia",
+        "builder": "Amadeus",
+        "translator": "",
+        "language": "Ýngilizce",
         "low_range": "9",
         "high_range": "42",
         "min_vnum": "12300",

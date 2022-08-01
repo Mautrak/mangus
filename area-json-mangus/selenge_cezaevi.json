@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "selenge_cezaevi.are",
-        "name": "Türkçe",
+        "name": "Selenge Cezaevi",
+        "builder": "Flar",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "5",
         "high_range": "90",
         "min_vnum": "32000",

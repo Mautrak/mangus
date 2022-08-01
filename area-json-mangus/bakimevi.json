@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "bakimevi.are",
-        "name": "Türkçe",
+        "name": "Bakýmevi",
+        "builder": "Sandman",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "1",
         "high_range": "5",
         "min_vnum": "6600",

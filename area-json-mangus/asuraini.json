@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "asuraini.are",
-        "name": "Türkçe",
+        "name": "Asura Ýni",
+        "builder": "Merc",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "10",
         "high_range": "15",
         "min_vnum": "2800",

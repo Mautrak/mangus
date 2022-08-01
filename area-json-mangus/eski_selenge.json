@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "eski_selenge.are",
-        "name": "Yarý Türkçe",
+        "name": "Eski Selenge",
+        "builder": "Kahn",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "1",
         "high_range": "30",
         "min_vnum": "5300",

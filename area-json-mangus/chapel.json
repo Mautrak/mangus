@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "chapel.are",
-        "name": "Ýngilizce",
+        "name": "Chapel Catacombs",
+        "builder": "Yaegar",
+        "translator": "",
+        "language": "Ýngilizce",
         "low_range": "15",
         "high_range": "25",
         "min_vnum": "3400",

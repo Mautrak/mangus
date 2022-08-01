@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "gnom_koyu.are",
-        "name": "Türkçe",
+        "name": "Gnom Köyü",
+        "builder": "Vougon",
+        "translator": "Qualyn",
+        "language": "Türkçe",
         "low_range": "5",
         "high_range": "15",
         "min_vnum": "1500",

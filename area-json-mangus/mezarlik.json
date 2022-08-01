@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "mezarlik.are",
-        "name": "Türkçe",
+        "name": "Mezarlýk",
+        "builder": "Alfa",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "5",
         "high_range": "10",
         "min_vnum": "3600",

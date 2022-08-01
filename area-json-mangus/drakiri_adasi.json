@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "drakiri_adasi.are",
-        "name": "Yarý Türkçe",
+        "name": "Drakiri Adasý",
+        "builder": "Ydri",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "65",
         "high_range": "90",
         "min_vnum": "11800",

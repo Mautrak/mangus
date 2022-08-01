@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "acemi_bolgesi.are",
-        "name": "Yarý Türkçe",
+        "name": "Acemi Bölgesi",
+        "builder": "Maynard",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "1",
         "high_range": "10",
         "min_vnum": "18600",

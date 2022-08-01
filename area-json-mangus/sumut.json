@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "sumut.are",
-        "name": "Türkçe",
+        "name": "Sumut Ýstihkamý",
+        "builder": "Generic",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "5",
         "high_range": "60",
         "min_vnum": "900",

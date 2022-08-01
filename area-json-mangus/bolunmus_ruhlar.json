@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "bolunmus_ruhlar.are",
-        "name": "Türkçe",
+        "name": "Bölünmüþ Ruhlar",
+        "builder": "Ydri",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "45",
         "high_range": "90",
         "min_vnum": "11600",

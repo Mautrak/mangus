@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "goblin_kavmi.are",
-        "name": "Yarý Türkçe",
+        "name": "Goblin Kavmi",
+        "builder": "Mort",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "10",
         "high_range": "25",
         "min_vnum": "9901",

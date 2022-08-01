@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "troy.are",
-        "name": "Ýngilizce",
+        "name": "Old Troya",
+        "builder": "Yaegar",
+        "translator": "",
+        "language": "Ýngilizce",
         "low_range": "30",
         "high_range": "45",
         "min_vnum": "29500",

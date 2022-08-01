@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "kufal_kosku.are",
-        "name": "Türkçe",
+        "name": "Kufal Köþkü",
+        "builder": "Quifael",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "31",
         "high_range": "35",
         "min_vnum": "6900",

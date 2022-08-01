@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "canavar_bitkiler.are",
-        "name": "Yarı Türkçe",
+        "name": "Canavar Bitkiler",
+        "builder": "Garth",
+        "translator": "Bilinmiyor",
+        "language": "Yarı Türkçe",
         "low_range": "40",
         "high_range": "60",
         "min_vnum": "30230",

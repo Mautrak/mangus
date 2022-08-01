@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "bataklik.are",
-        "name": "Türkçe",
+        "name": "Bataklýk",
+        "builder": "Generic",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "15",
         "high_range": "25",
         "min_vnum": "8300",

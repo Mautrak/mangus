@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "ciqualanin_ini.are",
-        "name": "Yarý Türkçe",
+        "name": "Ciquala'nýn Ýni",
+        "builder": "Binky",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "40",
         "high_range": "62",
         "min_vnum": "13400",

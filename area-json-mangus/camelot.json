@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "camelot.are",
-        "name": "Türkçe",
+        "name": "Camelot",
+        "builder": "Lok",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "20",
         "high_range": "52",
         "min_vnum": "17300",

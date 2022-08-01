@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "hayalet_sehir.are",
-        "name": "Türkçe",
+        "name": "Hayalet Þehir",
+        "builder": "Yaegar",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "45",
         "high_range": "65",
         "min_vnum": "8100",

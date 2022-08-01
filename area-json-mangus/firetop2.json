@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "firetop2.are",
-        "name": "Ýngilizce",
+        "name": "Firetop Mountain",
+        "builder": "Yaegar",
+        "translator": "",
+        "language": "Ýngilizce",
         "low_range": "10",
         "high_range": "20",
         "min_vnum": "5735",

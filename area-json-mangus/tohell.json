@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "tohell.are",
-        "name": "Ýngilizce",
+        "name": "Descent to Hell",
+        "builder": "Strahd",
+        "translator": "",
+        "language": "Ýngilizce",
         "low_range": "32",
         "high_range": "56",
         "min_vnum": "10400",

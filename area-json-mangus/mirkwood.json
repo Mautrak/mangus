@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "mirkwood.are",
-        "name": "Yarý Türkçe",
+        "name": "Mirkwood",
+        "builder": "Yaegar",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "5",
         "high_range": "15",
         "min_vnum": "8800",

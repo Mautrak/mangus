@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "thera_hapishanesi.are",
-        "name": "Türkçe",
+        "name": "Thera Hapishanesi",
+        "builder": "RM",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "80",
         "high_range": "130",
         "min_vnum": "15000",

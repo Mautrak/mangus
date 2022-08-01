@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "ejderha_helezonu.are",
-        "name": "Yarý Türkçe",
+        "name": "Ejderha Helezonu",
+        "builder": "Anon",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "30",
         "high_range": "65",
         "min_vnum": "2400",

@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "bucukluk.are",
-        "name": "Türkçe",
+        "name": "Buçukluk Ülkesi",
+        "builder": "Poohb",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "5",
         "high_range": "35",
         "min_vnum": "1100",

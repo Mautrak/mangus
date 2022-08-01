@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "nirvana.are",
-        "name": "Ýngilizce",
+        "name": "Nirvana",
+        "builder": "Fstall",
+        "translator": "",
+        "language": "Ýngilizce",
         "low_range": "30",
         "high_range": "35",
         "min_vnum": "9000",

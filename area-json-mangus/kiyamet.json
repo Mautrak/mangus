@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "kiyamet.are",
-        "name": "Yarý Türkçe",
+        "name": "Kýyamet",
+        "builder": "Lok",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "70",
         "high_range": "95",
         "min_vnum": "14001",

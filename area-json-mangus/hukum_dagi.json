@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "hukum_dagi.are",
-        "name": "Yarý Türkçe",
+        "name": "Hüküm Daðý",
+        "builder": "Yaegar",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "45",
         "high_range": "65",
         "min_vnum": "14700",

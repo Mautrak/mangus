@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "tuze.are",
-        "name": "Türkçe",
+        "name": "Tüze Konaðý",
+        "builder": "Chronos",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "90",
         "high_range": "100",
         "min_vnum": "510",

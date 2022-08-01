@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "yeni_ofcol.are",
-        "name": "Yarý Türkçe",
+        "name": "Yeni Ofcol",
+        "builder": "Hatchet",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "5",
         "high_range": "35",
         "min_vnum": "600",

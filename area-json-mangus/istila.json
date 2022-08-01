@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "istila.are",
-        "name": "Türkçe",
+        "name": "Ýstila",
+        "builder": "Asena",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "90",
         "high_range": "100",
         "min_vnum": "560",

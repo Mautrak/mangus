@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "haon_dor.are",
-        "name": "Yarý Türkçe",
+        "name": "Haon Dor",
+        "builder": "Diku",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "5",
         "high_range": "10",
         "min_vnum": "6000",

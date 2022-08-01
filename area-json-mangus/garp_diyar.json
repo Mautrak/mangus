@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "garp_diyar.are",
-        "name": "Türkçe",
+        "name": "Garp Diyar",
+        "builder": "Xavier",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "40",
         "high_range": "90",
         "min_vnum": "10000",

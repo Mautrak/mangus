@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "valhalla.are",
-        "name": "Yarý Türkçe",
+        "name": "Valhalla",
+        "builder": "ROM",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "91",
         "high_range": "100",
         "min_vnum": "1200",

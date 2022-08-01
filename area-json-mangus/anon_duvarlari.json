@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "anon_duvarlari.are",
-        "name": "Yarý Türkçe",
+        "name": "Anon Duvarlarý",
+        "builder": "Yaegar",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "50",
         "high_range": "65",
         "min_vnum": "31200",

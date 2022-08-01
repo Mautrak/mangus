@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "arako_sehri.are",
-        "name": "Yarý Türkçe",
+        "name": "Arako Þehri",
+        "builder": "Slash",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "15",
         "high_range": "30",
         "min_vnum": "5600",

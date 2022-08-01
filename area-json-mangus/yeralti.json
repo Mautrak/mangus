@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "yeralti.are",
-        "name": "Yarý Türkçe",
+        "name": "Yeraltý",
+        "builder": "Silence",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "13",
         "high_range": "50",
         "min_vnum": "16000",

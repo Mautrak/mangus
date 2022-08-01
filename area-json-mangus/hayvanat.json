@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "hayvanat.are",
-        "name": "Türkçe",
+        "name": "Hayvanat Bahçesi",
+        "builder": "Anon",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "1",
         "high_range": "15",
         "min_vnum": "8200",

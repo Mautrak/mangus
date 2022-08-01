@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "blight.are",
-        "name": "Yarý Türkçe",
+        "name": "Blight",
+        "builder": "Stile",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "35",
         "high_range": "50",
         "min_vnum": "23001",

@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "newthalos.are",
-        "name": "Ýngilizce",
+        "name": "New Thalos",
+        "builder": "Conner",
+        "translator": "",
+        "language": "Ýngilizce",
         "low_range": "10",
         "high_range": "35",
         "min_vnum": "9500",

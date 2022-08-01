@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "cadilar_meclisi.are",
-        "name": "Yarý Türkçe",
+        "name": "Cadýlar Meclisi",
+        "builder": "MacAsp",
+        "translator": "Bilinmiyor",
+        "language": "Yarý Türkçe",
         "low_range": "25",
         "high_range": "35",
         "min_vnum": "29120",

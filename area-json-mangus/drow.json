@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "drow.are",
-        "name": "Ýngilizce",
+        "name": "Drow City",
+        "builder": "Drkside",
+        "translator": "",
+        "language": "Ýngilizce",
         "low_range": "15",
         "high_range": "25",
         "min_vnum": "5100",

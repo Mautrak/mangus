@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "satranc.are",
-        "name": "Türkçe",
+        "name": "Satranç Tahtasý",
+        "builder": "Exxon",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "10",
         "high_range": "35",
         "min_vnum": "4200",

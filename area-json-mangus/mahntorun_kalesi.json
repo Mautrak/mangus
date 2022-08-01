@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "mahntorun_kalesi.are",
-        "name": "Türkçe",
+        "name": "Mahn-Tor'un Kalesi",
+        "builder": "Chris",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "5",
         "high_range": "35",
         "min_vnum": "2300",

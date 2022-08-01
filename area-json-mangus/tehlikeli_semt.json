@@ -1,7 +1,10 @@
 {
     "area": {
         "file": "tehlikeli_semt.are",
-        "name": "Türkçe",
+        "name": "Tehlikeli Semt",
+        "builder": "Raff",
+        "translator": "Bilinmiyor",
+        "language": "Türkçe",
         "low_range": "5",
         "high_range": "15",
         "min_vnum": "2100",
