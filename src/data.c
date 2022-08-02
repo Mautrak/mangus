@@ -146,7 +146,7 @@ void write_event_log(char *argument)
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
 
-	data=fopen("../log/events","a");
+	data=fopen("../log/events/events","a");
 
 	sprintf(buf,"%02d/%02d/%02d %02d:%02d:%02d|%d|%s|%d|%d|%s\n",\
 				tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, \
