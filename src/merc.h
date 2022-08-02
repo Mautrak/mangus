@@ -663,7 +663,7 @@ struct	class_type
 #define LANG_DOG 16
 #define LANG_ELVISH 17
 #define LANG_TROLLISH 18
-#define MAX_LANGUAGE	     19
+#define MAX_LANGUAGE	     13
 
 struct item_type
 {
