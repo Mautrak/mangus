@@ -143,10 +143,13 @@ void write_event_log(char *argument)
 
 	FILE *data;
 	char buf[MAX_STRING_LENGTH+100];
+	time_t t = time(NULL);
+	struct tm tm = *localtime(&t);
 
 	data=fopen("../log/events","a");
 
-	sprintf(buf,"%d|%s|%d|%d|%s\n",\
+	sprintf(buf,"%02d/%02d/%02d %02d:%02d:%02d|%d|%s|%d|%d|%s\n",\
+				tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, \
 				time_info.year,month_name[time_info.month-1],time_info.day, time_info.hour, argument);
 	fprintf(data,buf);
 	fclose(data);
