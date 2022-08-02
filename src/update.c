@@ -2073,10 +2073,6 @@ void update_handler( void )
     {
 	wiznet("KARAKTER YENILEME!",NULL,NULL,WIZ_TICKS,0,0);
 	pulse_point     = PULSE_TICK;
-	if(hourly == true)
-	{
-		weather_update	( );
-	}
 	char_update	( );
 	quest_update    ( );
   ikikat_update    ( );
@@ -2095,13 +2091,18 @@ void update_handler( void )
 
     }
 
+	if(hourly == true)
+	{
+		weather_update	( );
+	}
+
     aggr_update( );
     auction_update( );
 
     tail_chain( );
 
 	hourly = false;
-	
+
     return;
 }
 
