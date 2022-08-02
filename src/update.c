@@ -999,33 +999,37 @@ int age_to_num( int age )
 		case  0:
 		strcat( buf, "Yeni bir gün baþladý.\n\r" );
 		write_event_log("Yeni bir gün baþladý.");
+		is_new_hour = false;
 		break;
 
 		case  5:
 		weather_info.sunlight = SUN_LIGHT;
 		strcat( buf, "Güneþin ilk ýþýklarý gelmeye baþladý.\n\r" );
 		write_event_log("Güneþin ilk ýþýklarý gelmeye baþladý.");
+		is_new_hour = false;
 		break;
 
 		case  6:
 		weather_info.sunlight = SUN_RISE;
 		strcat( buf, "Güneþ doðudan yükseliyor.\n\r" );
 		write_event_log("Güneþ doðudan yükseliyor.");
+		is_new_hour = false;
 		break;
 
 		case 19:
 		weather_info.sunlight = SUN_SET;
 		strcat( buf, "Güneþ batýda yavaþça kayboluyor.\n\r" );
 		write_event_log("Güneþ batýda yavaþça kayboluyor.");
+		is_new_hour = false;
 		break;
 
 		case 20:
 		weather_info.sunlight = SUN_DARK;
 		strcat( buf, "Gece baþladý.\n\r" );
 		write_event_log("Gece baþladý.");
+		is_new_hour = false;
 		break;
 		}
-		is_new_hour = false;
 	}
 	else
 	{
