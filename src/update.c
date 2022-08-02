@@ -112,7 +112,7 @@ void	track_update	args( ( void ) );
 int	save_number = 0;
 extern int max_on;
 extern int max_on_so_far;
-int is_new_hour = false;
+bool is_new_hour = false;
 
 
 /*
@@ -894,7 +894,6 @@ milat: sunucu alindiktan sonra oyunun ilk acildigi gun
 	long bir_oyun_yili	= 12 * bir_oyun_ayi; /* 240 gerçek saat, 10 gerçek gün */
 	// saatte bir degisiklik oldu mu, bunu yakalamak icin.
 	int previous_hour_calculation;
-	bool is_new_hour;
 
 	long x , eski_gun;
 	char buf[ MAX_STRING_LENGTH ];
