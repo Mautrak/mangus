@@ -915,6 +915,7 @@ milat: sunucu alindiktan sonra oyunun ilk acildigi gun
 
 	if (previous_hour_calculation != time_info.hour)
 	{
+		bug("saat degisti.\n\r",0);
 		is_new_hour = true;
 	}
 
@@ -2024,6 +2025,15 @@ void update_handler( void )
 	bool is_new_hour = false;
 
     is_new_hour = game_time_update();
+
+	if (is_new_hour == false)
+	{
+		bug("saat degismedi\n\r",0);
+	}
+	else
+	{
+		bug("saat degisti.\n\r",0);
+	}
 
     if ( --pulse_area     <= 0 )
     {
