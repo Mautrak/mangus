@@ -984,24 +984,33 @@ int age_to_num( int age )
 
      switch ( time_info.hour )
      {
+	case  0:
+ 	strcat( buf, "Yeni bir gün baþladý.\n\r" );
+	write_event_log("Yeni bir gün baþladý.");
+ 	break;
+
      case  5:
  	weather_info.sunlight = SUN_LIGHT;
- 	strcat( buf, "Gün baþladý.\n\r" );
+ 	strcat( buf, "Güneþin ilk ýþýklarý gelmeye baþladý.\n\r" );
+	write_event_log("Güneþin ilk ýþýklarý gelmeye baþladý.");
  	break;
 
      case  6:
  	weather_info.sunlight = SUN_RISE;
  	strcat( buf, "Güneþ doðudan yükseliyor.\n\r" );
+	write_event_log("Güneþ doðudan yükseliyor.");
  	break;
 
      case 19:
  	weather_info.sunlight = SUN_SET;
  	strcat( buf, "Güneþ batýda yavaþça kayboluyor.\n\r" );
+	write_event_log("Güneþ batýda yavaþça kayboluyor.");
  	break;
 
      case 20:
  	weather_info.sunlight = SUN_DARK;
  	strcat( buf, "Gece baþladý.\n\r" );
+	write_event_log("Gece baþladý.");
  	break;
      }
 

@@ -116,3 +116,24 @@ void write_channel_log(CHAR_DATA *ch, CHAR_DATA *vc, int kanal, char *argument)
 	fclose(data);
 	return;
 }
+
+void write_event_log(char *argument)
+{
+
+	if ( argument[0] == '\0' )
+	{
+		return;
+	}
+
+	FILE *data;
+	char buf[MAX_STRING_LENGTH+100];
+
+	data=fopen("../log/events","a");
+
+	sprintf(buf,"%d|%s|%d|%d|%s\n",\
+				time_info.year,month_name[time_info.month-1],time_info.day, time_info.hour, argument);
+	fprintf(data,buf);
+	fclose(data);
+	return;
+
+}

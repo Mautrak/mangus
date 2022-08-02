@@ -3124,6 +3124,7 @@ void	bugf		args( ( char *, ... ) );
 void ud_data_write args( (void) );
 void ud_data_read args( (void) );
 void write_channel_log args( (CD *ch, CD *vc, int kanal, char *argument) );
+void write_event_log args( (char *argument) );
 
 /* db.c */
 char *	print_flags	args( ( int flag ));
