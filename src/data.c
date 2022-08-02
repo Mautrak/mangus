@@ -20,6 +20,8 @@
 
 extern int max_on;
 extern int max_on_so_far;
+extern int ikikat_tp;
+extern int ikikat_gp;
 
 void ud_data_write(void)
 {
