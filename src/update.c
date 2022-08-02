@@ -88,7 +88,7 @@ int	hit_gain	args( ( CHAR_DATA *ch ) );
 int	mana_gain	args( ( CHAR_DATA *ch ) );
 int	move_gain	args( ( CHAR_DATA *ch ) );
 void	mobile_update	args( ( void ) );
-void	weather_update	args( ( bool is_new_hour ) );
+void	weather_update	args( ( void ) );
 void	char_update	args( ( void ) );
 void	obj_update	args( ( void ) );
 void	aggr_update	args( ( void ) );
@@ -112,6 +112,7 @@ void	track_update	args( ( void ) );
 int	save_number = 0;
 extern int max_on;
 extern int max_on_so_far;
+int is_new_hour = false;
 
 
 /*
@@ -880,7 +881,7 @@ int i;
   return(FALSE);
 }
 
-bool game_time_update( void )
+void game_time_update( void )
 {
 /*
 milat: sunucu alindiktan sonra oyunun ilk acildigi gun
@@ -915,13 +916,8 @@ milat: sunucu alindiktan sonra oyunun ilk acildigi gun
 
 	if (previous_hour_calculation != time_info.hour)
 	{
-		//bug("saat degisti.\n\r",0);
+		bug("1-saat degisti.\n\r",0);
 		is_new_hour = true;
-	}
-	else
-	{
-		//bug("saat degismedi.\n\r",0);
-		is_new_hour = false;
 	}
 
 	if( eski_gun != time_info.day )
@@ -929,8 +925,6 @@ milat: sunucu alindiktan sonra oyunun ilk acildigi gun
 		sprintf( buf,"Oyun tarihi: %ld/%ld/%ld Saat: %ld",time_info.day,time_info.month,time_info.year,time_info.hour);
 		log_string( buf );
 	}
-
-	return is_new_hour;
 }
 
 void game_time_to_string( time_t gameTime , char *buf )
@@ -988,7 +982,7 @@ int age_to_num( int age )
 /*
  * Update the weather.
  */
- void weather_update( bool is_new_hour )
+ void weather_update()
  {
      char buf[MAX_STRING_LENGTH];
      DESCRIPTOR_DATA *d;
@@ -1031,6 +1025,7 @@ int age_to_num( int age )
 		write_event_log("Gece baþladý.");
 		break;
 		}
+		is_new_hour = false;
 	}
      /*
       * Weather change.
@@ -2027,9 +2022,8 @@ void update_handler( void )
     static  int	    pulse_water_float;
     static  int	    pulse_raffect;
     static  int	    pulse_track;
-	bool is_new_hour = false;
 
-    is_new_hour = game_time_update();
+    game_time_update();
 
 	if (is_new_hour == false)
 	{
@@ -2089,7 +2083,7 @@ void update_handler( void )
     {
 	wiznet("KARAKTER YENILEME!",NULL,NULL,WIZ_TICKS,0,0);
 	pulse_point     = PULSE_TICK;
-	weather_update	( is_new_hour );
+	weather_update	( );
 	char_update	( );
 	quest_update    ( );
   ikikat_update    ( );
