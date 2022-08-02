@@ -117,6 +117,22 @@ void write_channel_log(CHAR_DATA *ch, CHAR_DATA *vc, int kanal, char *argument)
 	return;
 }
 
+char *	const	month_name	[] =
+{
+	(char*)"Albars",
+	(char*)"Kadimler",
+    (char*)"Büyük Acý",
+	(char*)"Zeytin",
+	(char*)"Yýlan",
+	(char*)"Yelbüke",
+	(char*)"Pusu",
+	(char*)"Savaþ",
+	(char*)"Albastý",
+	(char*)"Gölge",
+	(char*)"Kara Ölüm",
+	(char*)"Alacakaranlýk",
+};
+
 void write_event_log(char *argument)
 {
 
