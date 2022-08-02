@@ -4450,6 +4450,11 @@ void do_ikikat( CHAR_DATA *ch, char *argument )
     send_to_char("Kullaným:\n\r",ch);
     send_to_char("  ikikat <tp | gp> <dakika>\n\r",ch);
     send_to_char("Dakika olarak 0 veya pozitif bir deðer verilmelidir.\n\r",ch);
+
+    if(ikikat_gp >= 0)
+        printf_to_char(ch,"Ýki kat GP etkinliðinin bitmesine kalan: %d.\n\r", ikikat_gp);
+    if(ikikat_tp >= 0)
+        printf_to_char(ch,"Ýki kat TP etkinliðinin bitmesine kalan: %d.\n\r", ikikat_tp);
     return;
   }
 
