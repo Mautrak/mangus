@@ -893,7 +893,7 @@ milat: sunucu alindiktan sonra oyunun ilk acildigi gun
 	long bir_oyun_yili	= 12 * bir_oyun_ayi; /* 240 gerçek saat, 10 gerçek gün */
 	// saatte bir degisiklik oldu mu, bunu yakalamak icin.
 	int previous_hour_calculation;
-	bool is_new_hour = false;
+	bool is_new_hour;
 
 	long x , eski_gun;
 	char buf[ MAX_STRING_LENGTH ];
@@ -915,8 +915,13 @@ milat: sunucu alindiktan sonra oyunun ilk acildigi gun
 
 	if (previous_hour_calculation != time_info.hour)
 	{
-		bug("saat degisti.\n\r",0);
+		//bug("saat degisti.\n\r",0);
 		is_new_hour = true;
+	}
+	else
+	{
+		//bug("saat degismedi.\n\r",0);
+		is_new_hour = false;
 	}
 
 	if( eski_gun != time_info.day )
@@ -2028,11 +2033,11 @@ void update_handler( void )
 
 	if (is_new_hour == false)
 	{
-		bug("saat degismedi\n\r",0);
+		//bug("saat degismedi\n\r",0);
 	}
 	else
 	{
-		bug("saat degisti.\n\r",0);
+		bug("1-saat degisti.\n\r",0);
 	}
 
     if ( --pulse_area     <= 0 )
