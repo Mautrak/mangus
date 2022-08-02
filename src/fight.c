@@ -613,6 +613,7 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
     bool result;
     OBJ_DATA *corpse;
     int sercount;
+	char eventbuf[MAX_STRING_LENGTH];
 
     sn = -1;
     counter = FALSE;
@@ -679,7 +680,9 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
     /* get the weapon skill */
     sn = get_weapon_sn(ch,secondary);
     skill = 20 + get_weapon_skill(ch,sn);
-	write_event_log(("%s, %s tarafýndan ikiye bölünerek öldürüldü.",victim->name,ch->name));
+	strcpy(buf,ch->description);
+	sprintf(buf,"%s, %s tarafýndan ikiye bölünerek öldürüldü.",victim->name,ch->name);
+	write_event_log(buf);
     /*
      * Calculate to-hit-armor-class-0 versus armor.
      */
