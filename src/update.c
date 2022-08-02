@@ -994,6 +994,7 @@ int age_to_num( int age )
 
 	if (is_new_hour == true)
 	{
+		bug("3-saat degisti",0);
 		switch ( time_info.hour )
 		{
 		case  0:
@@ -1026,6 +1027,10 @@ int age_to_num( int age )
 		break;
 		}
 		is_new_hour = false;
+	}
+	else
+	{
+		bug("3-saat degisMEMIS.\n\r",0);
 	}
      /*
       * Weather change.
@@ -2031,7 +2036,7 @@ void update_handler( void )
 	}
 	else
 	{
-		bug("1-saat degisti.\n\r",0);
+		bug("2-saat degisti.\n\r",0);
 	}
 
     if ( --pulse_area     <= 0 )
