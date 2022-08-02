@@ -112,7 +112,7 @@ void	track_update	args( ( void ) );
 int	save_number = 0;
 extern int max_on;
 extern int max_on_so_far;
-bool is_new_hour = false;
+bool hourly = false;
 
 
 /*
@@ -916,7 +916,7 @@ milat: sunucu alindiktan sonra oyunun ilk acildigi gun
 	if (previous_hour_calculation != time_info.hour)
 	{
 		bug("1-saat degisti.\n\r",0);
-		is_new_hour = true;
+		hourly = true;
 	}
 
 	if( eski_gun != time_info.day )
@@ -987,54 +987,40 @@ int age_to_num( int age )
      DESCRIPTOR_DATA *d;
      int diff;
 
-
-
      buf[0] = '\0';
 
-	if (is_new_hour == true)
+	switch ( time_info.hour )
 	{
-		bug("3-saat degisti",0);
-		switch ( time_info.hour )
-		{
-		case  0:
-		strcat( buf, "Yeni bir gün baþladý.\n\r" );
-		write_event_log("Yeni bir gün baþladý.");
-		is_new_hour = false;
-		break;
+	case  0:
+	strcat( buf, "Yeni bir gün baþladý.\n\r" );
+	write_event_log("Yeni bir gün baþladý.");
+	break;
 
-		case  5:
-		weather_info.sunlight = SUN_LIGHT;
-		strcat( buf, "Güneþin ilk ýþýklarý gelmeye baþladý.\n\r" );
-		write_event_log("Güneþin ilk ýþýklarý gelmeye baþladý.");
-		is_new_hour = false;
-		break;
+	case  5:
+	weather_info.sunlight = SUN_LIGHT;
+	strcat( buf, "Güneþin ilk ýþýklarý gelmeye baþladý.\n\r" );
+	write_event_log("Güneþin ilk ýþýklarý gelmeye baþladý.");
+	break;
 
-		case  6:
-		weather_info.sunlight = SUN_RISE;
-		strcat( buf, "Güneþ doðudan yükseliyor.\n\r" );
-		write_event_log("Güneþ doðudan yükseliyor.");
-		is_new_hour = false;
-		break;
+	case  6:
+	weather_info.sunlight = SUN_RISE;
+	strcat( buf, "Güneþ doðudan yükseliyor.\n\r" );
+	write_event_log("Güneþ doðudan yükseliyor.");
+	break;
 
-		case 19:
-		weather_info.sunlight = SUN_SET;
-		strcat( buf, "Güneþ batýda yavaþça kayboluyor.\n\r" );
-		write_event_log("Güneþ batýda yavaþça kayboluyor.");
-		is_new_hour = false;
-		break;
+	case 19:
+	weather_info.sunlight = SUN_SET;
+	strcat( buf, "Güneþ batýda yavaþça kayboluyor.\n\r" );
+	write_event_log("Güneþ batýda yavaþça kayboluyor.");
+	break;
 
-		case 20:
-		weather_info.sunlight = SUN_DARK;
-		strcat( buf, "Gece baþladý.\n\r" );
-		write_event_log("Gece baþladý.");
-		is_new_hour = false;
-		break;
-		}
+	case 20:
+	weather_info.sunlight = SUN_DARK;
+	strcat( buf, "Gece baþladý.\n\r" );
+	write_event_log("Gece baþladý.");
+	break;
 	}
-	else
-	{
-		bug("3-saat degisMEMIS.\n\r",0);
-	}
+
      /*
       * Weather change.
       */
@@ -2033,13 +2019,9 @@ void update_handler( void )
 
     game_time_update();
 
-	if (is_new_hour == false)
+	if (hourly == true)
 	{
-		//bug("saat degismedi\n\r",0);
-	}
-	else
-	{
-		bug("2-saat degisti.\n\r",0);
+		bug("saat degisti\n\r",0);
 	}
 
     if ( --pulse_area     <= 0 )
@@ -2091,7 +2073,10 @@ void update_handler( void )
     {
 	wiznet("KARAKTER YENILEME!",NULL,NULL,WIZ_TICKS,0,0);
 	pulse_point     = PULSE_TICK;
-	weather_update	( );
+	if(hourly == true)
+	{
+		weather_update	( );
+	}
 	char_update	( );
 	quest_update    ( );
   ikikat_update    ( );
@@ -2115,6 +2100,8 @@ void update_handler( void )
 
     tail_chain( );
 
+	hourly = false;
+	
     return;
 }
 
