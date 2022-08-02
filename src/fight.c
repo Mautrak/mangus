@@ -679,7 +679,7 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
     /* get the weapon skill */
     sn = get_weapon_sn(ch,secondary);
     skill = 20 + get_weapon_skill(ch,sn);
-
+	write_event_log(("%s, %s tarafýndan ikiye bölünerek öldürüldü.",victim->name,ch->name));
     /*
      * Calculate to-hit-armor-class-0 versus armor.
      */
