@@ -493,6 +493,8 @@ void boot_db( void )
     ikikat_tp = 0;
     ikikat_gp = 0;
 
+    ud_data_read();
+
     /*
      * Set time and weather.
      */
