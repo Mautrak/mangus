@@ -2338,7 +2338,6 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	{
 			printf_to_char( ch , "\n\r{CÝki kat GP kazanma etkinliði etkin. Kalan süre %d dakika.{x\n\r\n\r" , ikikat_gp );
 	}
-	ud_data_write();
 
 	/*
 	 *

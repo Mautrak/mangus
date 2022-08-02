@@ -31,6 +31,8 @@ void ud_data_write(void)
 	data=fopen("../data/ud_data","a");
 	fprintf(data,"* Cevrimici oyuncu rekoru\n");
 	fprintf(data,"Encokcevrimici %d\n",max_on_so_far);
+	fprintf(data,"IkikatTP %d\n",ikikat_tp);
+	fprintf(data,"IkikatGP %d\n",ikikat_gp);
 	fprintf(data,"End\n");
 	fclose(data);
 }
@@ -50,6 +52,14 @@ void ud_data_read(void)
 		if (!str_cmp( word, (char*)"Encokcevrimici"))
 		{
 			max_on_so_far = fread_number( fp );
+		}
+		else if (!str_cmp( word, (char*)"IkikatTP"))
+		{
+			ikikat_tp = fread_number( fp );
+		}
+		else if (!str_cmp( word, (char*)"IkikatGP"))
+		{
+			ikikat_gp = fread_number( fp );
 		}
 		else if(!str_cmp( word, (char*)"*"))
 		{

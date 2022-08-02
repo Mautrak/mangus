@@ -3,8 +3,6 @@ import asyncio
 import csv
 from datetime import datetime
 
-time = datetime.now
-
 bot = commands.Bot(command_prefix='!')
 
 async def timer():
@@ -13,6 +11,7 @@ async def timer():
     msg_sent = False
 
     with open('../log/events/events',encoding='iso8859-9') as csv_file:
+        print("dosya açýldý...")
         csv_reader = csv.reader(csv_file, delimiter='|')
         for row in csv_reader:
             tarih = datetime.strptime(row[0], '%Y/%m/%d %H:%M:%S')
@@ -21,8 +20,9 @@ async def timer():
             oyun_gunu = row[3]
             oyun_saati = row[4]
             mesaj = row[5]
+            now = datetime.now()
             #print((now-tarih).total_seconds())
-            if ((datetime.now()-tarih).total_seconds()<=60):
+            if ((now-tarih).total_seconds()<=60):
                 await channel.send(mesaj)
 
     await asyncio.sleep(60)

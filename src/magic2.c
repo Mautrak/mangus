@@ -3651,8 +3651,11 @@ void spell_power_kill ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
   send_to_char( "Ö L D Ü R Ü L D Ü N!\n\r", victim );
 
   /* event */
+  if (!IS_NPC(victim))
+	{
 	sprintf(eventbuf,"%s, %s tarafýndan öldürüldü.",victim->name, ch->name);
 	write_event_log(eventbuf);
+  }
 
   act("$N öldürüldü!\n\r", ch, NULL, victim, TO_CHAR);
   act("$N öldürüldü!\n\r", ch, NULL, victim, TO_ROOM);

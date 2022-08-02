@@ -1158,8 +1158,11 @@ char eventbuf[MAX_STRING_LENGTH];
 	send_to_char( "Ö L D Ü R Ü L D Ü N!!\n\r", victim );
 
   /* event */
+  if (!IS_NPC(victim))
+	{
 	sprintf(eventbuf,"%s, %s tarafından öldürüldü.",victim->name, ch->name);
 	write_event_log(eventbuf);
+  }
 
 	return;
     }

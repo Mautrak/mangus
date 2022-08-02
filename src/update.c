@@ -2069,7 +2069,7 @@ void update_handler( void )
 	pulse_point     = PULSE_TICK;
 	char_update	( );
 	quest_update    ( );
-  ikikat_update    ( );
+  	ikikat_update    ( );
 	obj_update	( );
 	check_reboot	( );
 
@@ -2088,6 +2088,7 @@ void update_handler( void )
 	if(hourly == true)
 	{
 		weather_update	( );
+		ud_data_write();
 	}
 
     aggr_update( );

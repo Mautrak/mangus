@@ -1007,8 +1007,11 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
 	    act("$n ÖLDÜ!",victim,NULL,NULL,TO_ROOM);
 
 		/* event */
+		if (!IS_NPC(victim))
+		{
 		sprintf(eventbuf,"%s, %s tarafýndan ikiye bölünerek öldürüldü.",victim->name,ch->name);
 		write_event_log(eventbuf);
+		}
 
 	    WAIT_STATE( ch, 2 );
 	    raw_kill(victim);
@@ -1055,8 +1058,11 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
 	    send_to_char("Ö L D Ü R Ü L D Ü N!\n\r",victim);
 
 		/* event */
+		if (!IS_NPC(victim))
+		{
 		sprintf(eventbuf,"%s, %s tarafýndan suikastle öldürüldü.",victim->name,ch->name);
 		write_event_log(eventbuf);
+		}
 
 	    check_improve(ch,gsn_assassinate,TRUE,1);
 	    raw_kill(victim);
@@ -1593,8 +1599,11 @@ bool damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt, int dam_type, bo
 			act( "$n ÖLDÜ!!", victim, 0, 0, TO_ROOM );
 			send_to_char("Ö L D Ü R Ü L D Ü N!!\n\r\n\r", victim );
 			/* event */
+			if (!IS_NPC(victim))
+			{
 			sprintf(eventbuf,"%s öldü.",victim->name);
 			write_event_log(eventbuf);
+			}
 			break;
 
 		default:
@@ -3344,8 +3353,11 @@ void do_slay( CHAR_DATA *ch, char *argument )
     act("$n $M yoketti!",  ch, NULL, victim, TO_NOTVICT );
 
 	/* event */
+	if (!IS_NPC(victim))
+	{
 	sprintf(eventbuf,"%s, tanrýlar tarafýndan ölümle cezalandýrýldý!",victim->name);
 	write_event_log(eventbuf);
+	}
 
     raw_kill( victim );
     return;
