@@ -12,7 +12,7 @@ async def timer():
     channel = bot.get_channel(1003974452989673492) # replace with channel ID that you want to send to
     msg_sent = False
 
-    with open('events',encoding='iso8859-9') as csv_file:
+    with open('../log/events/events',encoding='iso8859-9') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter='|')
         for row in csv_reader:
             tarih = datetime.strptime(row[0], '%Y/%m/%d %H:%M:%S')
