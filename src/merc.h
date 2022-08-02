@@ -3396,7 +3396,7 @@ char *	spec_name	args( ( SPEC_FUN *function ) );
 RID *	room_by_name	args( ( char *target, int level, bool error) );
 
 /* update.c */
-void	game_time_update args(( void ));
+bool	game_time_update args(( void ));
 void	game_time_to_string args(( time_t gameTime , char *buf ));
 int		game_time_to_year args(( time_t gameTime ));
 int     get_age         args( ( CHAR_DATA *ch ) );
