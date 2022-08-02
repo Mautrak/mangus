@@ -4438,6 +4438,7 @@ void do_ikikat( CHAR_DATA *ch, char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
+  char eventbuf[MAX_STRING_LENGTH];
   int value;
 
   smash_tilde( argument );
@@ -4466,9 +4467,18 @@ void do_ikikat( CHAR_DATA *ch, char *argument )
   {
     ikikat_tp = value;
     if (value != 0)
+    {
       printf_to_char(ch,"Ýki kat TP %d dakikalýðýna açýldý.", value);
+      /* event */
+      sprintf(eventbuf,"Ýki kat TP %d dakikalýðýna açýldý.", value);
+	  write_event_log(eventbuf);
+    }
     else
+    {
       printf_to_char(ch,"Ýki kat TP kapatýldý.");
+      /* event */
+	  write_event_log("Ýki kat TP etkinliði kapatýldý.");
+    }
     return;
   }
 
@@ -4476,9 +4486,18 @@ void do_ikikat( CHAR_DATA *ch, char *argument )
   {
     ikikat_gp = value;
     if (value != 0)
+    {
       printf_to_char(ch,"Ýki kat GP %d dakikalýðýna açýldý.", value);
+      /* event */
+      sprintf(eventbuf,"Ýki kat GP %d dakikalýðýna açýldý.", value);
+	  write_event_log(eventbuf);
+    }
     else
+    {
       printf_to_char(ch,"Ýki kat GP kapatýldý.");
+      /* event */
+	  write_event_log("Ýki kat TP etkinliði kapatýldý.");
+    }
     return;
   }
 

@@ -3631,6 +3631,7 @@ void spell_power_kill ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   int dam;
+  char eventbuf[MAX_STRING_LENGTH];
 
 
   act_color( "Parmaðýndan çýkan karanlýk $M sarýyor.",
@@ -3648,6 +3649,10 @@ void spell_power_kill ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 	}
 
   send_to_char( "Ö L D Ü R Ü L D Ü N!\n\r", victim );
+
+  /* event */
+	sprintf(eventbuf,"%s, %s tarafýndan öldürüldü.",victim->name, ch->name);
+	write_event_log(eventbuf);
 
   act("$N öldürüldü!\n\r", ch, NULL, victim, TO_CHAR);
   act("$N öldürüldü!\n\r", ch, NULL, victim, TO_ROOM);

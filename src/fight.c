@@ -680,8 +680,6 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
     /* get the weapon skill */
     sn = get_weapon_sn(ch,secondary);
     skill = 20 + get_weapon_skill(ch,sn);
-	sprintf(eventbuf,"%s, %s tarafýndan ikiye bölünerek öldürüldü.",victim->name,ch->name);
-	write_event_log(eventbuf);
     /*
      * Calculate to-hit-armor-class-0 versus armor.
      */
@@ -1007,6 +1005,11 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
 		      ch,NULL,victim,TO_NOTVICT,POS_RESTING,CLR_RED);
 	    send_to_char("Ö L D Ü R Ü L D Ü N!\n\r",victim);
 	    act("$n ÖLDÜ!",victim,NULL,NULL,TO_ROOM);
+
+		/* event */
+		sprintf(eventbuf,"%s, %s tarafýndan ikiye bölünerek öldürüldü.",victim->name,ch->name);
+		write_event_log(eventbuf);
+
 	    WAIT_STATE( ch, 2 );
 	    raw_kill(victim);
 	    if ( !IS_NPC(ch) && IS_NPC(victim) )
@@ -1050,6 +1053,11 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
 	    act_color("$n sana $C+++SUÝKAST+++$c düzenledi!",ch,NULL,victim,
 		      TO_VICT,POS_DEAD,CLR_RED);
 	    send_to_char("Ö L D Ü R Ü L D Ü N!\n\r",victim);
+
+		/* event */
+		sprintf(eventbuf,"%s, %s tarafýndan suikastle öldürüldü.",victim->name,ch->name);
+		write_event_log(eventbuf);
+
 	    check_improve(ch,gsn_assassinate,TRUE,1);
 	    raw_kill(victim);
 	    if ( !IS_NPC(ch) && IS_NPC(victim) )
@@ -1289,6 +1297,7 @@ bool damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt, int dam_type, bo
 	OBJ_DATA *corpse;
 	bool immune;
 	int lost_exp;
+	char eventbuf[MAX_STRING_LENGTH];
 
 	if  ( victim->position == POS_DEAD)
 	{
@@ -1583,6 +1592,9 @@ bool damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt, int dam_type, bo
 		case POS_DEAD:
 			act( "$n ÖLDÜ!!", victim, 0, 0, TO_ROOM );
 			send_to_char("Ö L D Ü R Ü L D Ü N!!\n\r\n\r", victim );
+			/* event */
+			sprintf(eventbuf,"%s öldü.",victim->name);
+			write_event_log(eventbuf);
 			break;
 
 		default:
@@ -3299,6 +3311,7 @@ void do_slay( CHAR_DATA *ch, char *argument )
 {
     CHAR_DATA *victim;
     char arg[MAX_INPUT_LENGTH];
+	char eventbuf[MAX_STRING_LENGTH];
 
     one_argument( argument, arg );
     if ( arg[0] == '\0' )
@@ -3329,6 +3342,11 @@ void do_slay( CHAR_DATA *ch, char *argument )
 		act("$M yokettin!",  ch, NULL, victim, TO_CHAR    );
     act("$n seni yoketti!", ch, NULL, victim, TO_VICT    );
     act("$n $M yoketti!",  ch, NULL, victim, TO_NOTVICT );
+
+	/* event */
+	sprintf(eventbuf,"%s, tanrýlar tarafýndan ölümle cezalandýrýldý!",victim->name);
+	write_event_log(eventbuf);
+
     raw_kill( victim );
     return;
 }

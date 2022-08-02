@@ -1130,6 +1130,7 @@ void remove_prog_demonfireshield(OBJ_DATA *obj, CHAR_DATA *ch)
 void fight_prog_vorbalblade( OBJ_DATA *obj, CHAR_DATA *ch )
 {
 CHAR_DATA *victim;
+char eventbuf[MAX_STRING_LENGTH];
 
   if ( IS_NPC(ch) )
 	return;
@@ -1155,6 +1156,11 @@ CHAR_DATA *victim;
 	act( "$n ÖLDÜ!!", victim, NULL, NULL, TO_CHAR );
 	raw_kill_org( victim, 3 );
 	send_to_char( "Ö L D Ü R Ü L D Ü N!!\n\r", victim );
+
+  /* event */
+	sprintf(eventbuf,"%s, %s tarafından öldürüldü.",victim->name, ch->name);
+	write_event_log(eventbuf);
+
 	return;
     }
   }
