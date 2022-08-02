@@ -88,7 +88,7 @@ int	hit_gain	args( ( CHAR_DATA *ch ) );
 int	mana_gain	args( ( CHAR_DATA *ch ) );
 int	move_gain	args( ( CHAR_DATA *ch ) );
 void	mobile_update	args( ( void ) );
-void	weather_update	args( ( void ) );
+void	weather_update	args( ( bool is_new_hour ) );
 void	char_update	args( ( void ) );
 void	obj_update	args( ( void ) );
 void	aggr_update	args( ( void ) );
@@ -112,7 +112,6 @@ void	track_update	args( ( void ) );
 int	save_number = 0;
 extern int max_on;
 extern int max_on_so_far;
-
 
 
 /*
@@ -881,7 +880,7 @@ int i;
   return(FALSE);
 }
 
-void game_time_update( void )
+bool game_time_update( void )
 {
 /*
 milat: sunucu alindiktan sonra oyunun ilk acildigi gun
@@ -892,6 +891,9 @@ milat: sunucu alindiktan sonra oyunun ilk acildigi gun
 	long bir_oyun_gunu	= 24 * bir_oyun_saati; /* 120 gerçek dakika , 2 gerçek saat*/
 	long bir_oyun_ayi	= 10 * bir_oyun_gunu; /* 20 gerçek saat */
 	long bir_oyun_yili	= 12 * bir_oyun_ayi; /* 240 gerçek saat, 10 gerçek gün */
+	// saatte bir degisiklik oldu mu, bunu yakalamak icin.
+	int previous_hour_calculation;
+	bool is_new_hour = false;
 
 	long x , eski_gun;
 	char buf[ MAX_STRING_LENGTH ];
@@ -907,14 +909,22 @@ milat: sunucu alindiktan sonra oyunun ilk acildigi gun
 	x = x % bir_oyun_ayi;
 	time_info.day = ceil( (float)x / (float)bir_oyun_gunu );
 
+	previous_hour_calculation = time_info.hour;
 	x = x % bir_oyun_gunu;
 	time_info.hour = x / bir_oyun_saati;
+
+	if (previous_hour_calculation != time_info.hour)
+	{
+		is_new_hour = true;
+	}
 
 	if( eski_gun != time_info.day )
 	{
 		sprintf( buf,"Oyun tarihi: %ld/%ld/%ld Saat: %ld",time_info.day,time_info.month,time_info.year,time_info.hour);
 		log_string( buf );
 	}
+
+	return is_new_hour;
 }
 
 void game_time_to_string( time_t gameTime , char *buf )
@@ -972,7 +982,7 @@ int age_to_num( int age )
 /*
  * Update the weather.
  */
- void weather_update( void )
+ void weather_update( bool is_new_hour )
  {
      char buf[MAX_STRING_LENGTH];
      DESCRIPTOR_DATA *d;
@@ -982,38 +992,40 @@ int age_to_num( int age )
 
      buf[0] = '\0';
 
-     switch ( time_info.hour )
-     {
-	case  0:
- 	strcat( buf, "Yeni bir gün baþladý.\n\r" );
-	write_event_log("Yeni bir gün baþladý.");
- 	break;
+	if (is_new_hour == true)
+	{
+		switch ( time_info.hour )
+		{
+		case  0:
+		strcat( buf, "Yeni bir gün baþladý.\n\r" );
+		write_event_log("Yeni bir gün baþladý.");
+		break;
 
-     case  5:
- 	weather_info.sunlight = SUN_LIGHT;
- 	strcat( buf, "Güneþin ilk ýþýklarý gelmeye baþladý.\n\r" );
-	write_event_log("Güneþin ilk ýþýklarý gelmeye baþladý.");
- 	break;
+		case  5:
+		weather_info.sunlight = SUN_LIGHT;
+		strcat( buf, "Güneþin ilk ýþýklarý gelmeye baþladý.\n\r" );
+		write_event_log("Güneþin ilk ýþýklarý gelmeye baþladý.");
+		break;
 
-     case  6:
- 	weather_info.sunlight = SUN_RISE;
- 	strcat( buf, "Güneþ doðudan yükseliyor.\n\r" );
-	write_event_log("Güneþ doðudan yükseliyor.");
- 	break;
+		case  6:
+		weather_info.sunlight = SUN_RISE;
+		strcat( buf, "Güneþ doðudan yükseliyor.\n\r" );
+		write_event_log("Güneþ doðudan yükseliyor.");
+		break;
 
-     case 19:
- 	weather_info.sunlight = SUN_SET;
- 	strcat( buf, "Güneþ batýda yavaþça kayboluyor.\n\r" );
-	write_event_log("Güneþ batýda yavaþça kayboluyor.");
- 	break;
+		case 19:
+		weather_info.sunlight = SUN_SET;
+		strcat( buf, "Güneþ batýda yavaþça kayboluyor.\n\r" );
+		write_event_log("Güneþ batýda yavaþça kayboluyor.");
+		break;
 
-     case 20:
- 	weather_info.sunlight = SUN_DARK;
- 	strcat( buf, "Gece baþladý.\n\r" );
-	write_event_log("Gece baþladý.");
- 	break;
-     }
-
+		case 20:
+		weather_info.sunlight = SUN_DARK;
+		strcat( buf, "Gece baþladý.\n\r" );
+		write_event_log("Gece baþladý.");
+		break;
+		}
+	}
      /*
       * Weather change.
       */
@@ -2009,8 +2021,9 @@ void update_handler( void )
     static  int	    pulse_water_float;
     static  int	    pulse_raffect;
     static  int	    pulse_track;
+	bool is_new_hour = false;
 
-    game_time_update();
+    is_new_hour = game_time_update();
 
     if ( --pulse_area     <= 0 )
     {
@@ -2061,7 +2074,7 @@ void update_handler( void )
     {
 	wiznet("KARAKTER YENILEME!",NULL,NULL,WIZ_TICKS,0,0);
 	pulse_point     = PULSE_TICK;
-	weather_update	( );
+	weather_update	( is_new_hour );
 	char_update	( );
 	quest_update    ( );
   ikikat_update    ( );
