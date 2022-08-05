@@ -2,7 +2,7 @@
  *                                                                         *
  * Uzak Diyarlar açık kaynak Türkçe Mud projesidir.                        *
  * Oyun geliştirmesi Jai ve Maru tarafından yönetilmektedir.               *
- * Unutulmaması gerekenler: Nir, Kame, Nyah, Sint                          *
+ * Unutulmaması gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -446,7 +446,7 @@ int main( int argc, char **argv )
 
 #if defined(macintosh) || defined(MSDOS)
     boot_db( );
-    log_string( "UD kullanıma hazır." );
+    log_string( "Mangus kullanıma hazır." );
     game_loop_mac_msdos( );
 #endif
 
@@ -455,7 +455,7 @@ int main( int argc, char **argv )
 #if defined(unix)
     control = init_socket( port );
     boot_db( );
-		sprintf( log_buf, "UD %d portunda kullanıma hazır.", port );
+		sprintf( log_buf, "Mangus %d portunda kullanıma hazır.", port );
     log_string( log_buf );
     game_loop_unix( control );
     close (control);
@@ -2325,7 +2325,7 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 
     case CON_READ_MOTD:
 	write_to_buffer( d,
-    "\n\rUzak Diyarlar'a hoşgeldin. Ölümün tadını çıkar!!...\n\r",
+    "\n\rMangus'a hoşgeldin. Ölümün tadını çıkar!!...\n\r",
 	    0 );
 	ch->next	= char_list;
 	char_list	= ch;

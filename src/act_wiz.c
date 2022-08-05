@@ -2,7 +2,7 @@
  *                                                                         *
  * Uzak Diyarlar açık kaynak Türkçe Mud projesidir.                        *
  * Oyun geliştirmesi Jai ve Maru tarafından yönetilmektedir.               *
- * Unutulmaması gerekenler: Nir, Kame, Nyah, Sint                          *
+ * Unutulmaması gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -1851,7 +1851,7 @@ void do_mstat( CHAR_DATA *ch, char *argument )
     sprintf( buf,
 	"Vnum: %d  Format: %s  Race: %s(%s)  Sex: %s  Room: %d\n\r",
 	IS_NPC(victim) ? victim->pIndexData->vnum : 0,
-	IS_NPC(victim) ? "UD" : "PC",
+	IS_NPC(victim) ? "NPC" : "PC",
 	race_table[RACE(victim)].name[1],race_table[ORG_RACE(victim)].name[1],
 	sex_table[victim->sex].name,
 	victim->in_room == NULL    ?        0 : victim->in_room->vnum
@@ -5567,7 +5567,7 @@ void do_reboot( CHAR_DATA *ch, char *argument )
 	return;
       }
      reboot_counter = atoi(arg);
-     printf_to_char(ch,"{cUzak Diyarlar %i dakika sonra yeniden başlatılacak.{x\n\r",reboot_counter);
+     printf_to_char(ch,"{cMangus %i dakika sonra yeniden başlatılacak.{x\n\r",reboot_counter);
      return;
     }
 
@@ -5587,7 +5587,7 @@ void reboot_uzakdiyarlar( bool fmessage )
     {
 	d_next = d->next;
 	if (fmessage)
-	   write_to_buffer(d,"***** UD ŞİMDİ YENİDEN BAŞLATILIYOR! *****\n\r",0);
+	   write_to_buffer(d,"***** MANGUS ŞİMDİ YENİDEN BAŞLATILIYOR! *****\n\r",0);
         if (d->character != NULL)
 	{
 	   update_total_played(d->character);

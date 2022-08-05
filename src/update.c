@@ -2,7 +2,7 @@
  *                                                                         *
  * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
  * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
- * Unutulmamasý gerekenler: Nir, Kame, Nyah, Sint                          *
+ * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -2507,7 +2507,7 @@ void check_reboot( void )
   case 5:
   case 10:
   case 15:
-  sprintf(buf,"\007***** %i DAKÝKA SONRA UD YENÝDEN BAÞLATILACAK *****\007\n\r",reboot_counter);
+  sprintf(buf,"\007***** %i DAKÝKA SONRA MANGUS YENÝDEN BAÞLATILACAK *****\007\n\r",reboot_counter);
     for (d = descriptor_list; d != NULL; d = d->next)
 	  write_to_buffer(d,buf,0);
   default:

@@ -2,7 +2,7 @@
  *                                                                         *
  * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
  * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
- * Unutulmamasý gerekenler: Nir, Kame, Nyah, Sint                          *
+ * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -804,7 +804,7 @@ act ("$E görevi bitirdiðini haber veriyorsun.",ch, NULL, questman, TO_CHAR);
 		int reward=0, pointreward=0, pracreward=0,level;
 
 		level = ch->level;
-		reward = 10 + dice( level, 20);
+		reward = 300 + number_range(100,700);
 		pointreward = number_range(20,40);
 
 		if(IS_SET(ch->pcdata->dilek,DILEK_FLAG_GOREV))

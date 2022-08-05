@@ -2,7 +2,7 @@
  *                                                                         *
  * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
  * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
- * Unutulmamasý gerekenler: Nir, Kame, Nyah, Sint                          *
+ * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -2059,7 +2059,7 @@ void do_time( CHAR_DATA *ch, char *argument )
       return;
   }
     sprintf(buf2, "%s", (char *) ctime( &boot_time ));
-    sprintf(buf,"UD Mud %s tarihinde baþlatýldý.\n\rSistem zamaný, %s.\n\r",
+    sprintf(buf,"Mangus %s tarihinde baþlatýldý.\n\rSistem zamaný, %s.\n\r",
 	buf2, (char *) ctime( &current_time ) );
     send_to_char( buf, ch );
 

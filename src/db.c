@@ -2,7 +2,7 @@
  *                                                                         *
  * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
  * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
- * Unutulmamasý gerekenler: Nir, Kame, Nyah, Sint                          *
+ * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -1848,7 +1848,7 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex , AREA_DATA *	pArea)
     mob->cabal		= CABAL_NONE;
     mob->iclass		= CLASS_CLERIC;
 
-    mob->silver = number_range(mob->level/5,mob->level*2);
+    mob->silver = number_range(mob->level*3,mob->level*20);
 
   mob->act 		= pMobIndex->act | ACT_IS_NPC;
   mob->comm		= COMM_NOCHANNELS|COMM_NOSHOUT|COMM_NOTELL;
@@ -3268,7 +3268,7 @@ int number_fuzzy( int number )
 
 
 /*
- * UD'deki rastgele sayi uretiminin temel yeri.
+ * Mangus'taki rastgele sayi uretiminin temel yeri.
  * Modula ile yapilan hesaplamanin problemini
  * asmaya calisiyoruz.
  */

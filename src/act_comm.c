@@ -2,7 +2,7 @@
  *                                                                         *
  * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
  * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
- * Unutulmamasý gerekenler: Nir, Kame, Nyah, Sint                          *
+ * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -965,7 +965,7 @@ void do_rent( CHAR_DATA *ch, char *argument )
 
 void do_qui( CHAR_DATA *ch, char *argument )
 {
-  printf_to_char( ch,"Uzak Diyarlar'dan ayrýlmak istiyorsan komutu eksiksiz yazmalýsýn.\n\r" );
+  printf_to_char( ch,"Mangus'tan ayrýlmak istiyorsan komutu eksiksiz yazmalýsýn.\n\r" );
     return;
 }
 
