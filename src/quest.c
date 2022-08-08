@@ -827,7 +827,7 @@ act ("$E görevi bitirdiðini haber veriyorsun.",ch, NULL, questman, TO_CHAR);
 		int reward=0, pointreward=0, pracreward=0,level;
 
 		level = ch->level;
-		reward = 300 + number_range(100,700);
+		reward = 700 + number_range(100,700);
 		pointreward = number_range(20,40);
 
 		if(IS_SET(ch->pcdata->dilek,DILEK_FLAG_GOREV))
