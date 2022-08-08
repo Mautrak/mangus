@@ -2070,13 +2070,7 @@ void do_remort( CHAR_DATA *ch, char *argument )
 
     if ( ch->level != LEVEL_HERO)
     {
-      printf_to_char( ch,"Yeniyaþam için KAHRAMAN olmalýsýn.\n\r" );
-        return;
-    }
-
-    if ( !IS_SET(ch->act, PLR_CANREMORT) && !IS_SET(ch->act, PLR_REMORTED))
-    {
-      printf_to_char( ch,"Yeniyaþam için ölümsüzlerden izin almalýsýn.\n\r" );
+      printf_to_char( ch,"Yeniyaþam için seviye 91 olmalýsýn.\n\r" );
         return;
     }
 
@@ -2090,28 +2084,29 @@ ch->pcdata->confirm_remort = FALSE;
 
     if ( ch->pcdata->confirm_remort )
     {
-	SET_BIT(ch->act, PLR_REMORTED);
-  printf_to_char(ch,"\n\r...YENÝYAÞAM...\n\r");
-	printf_to_char(ch,"Yeni ýrk, sýnýf ve zarlarla yeni bir karakter yaratacaksýn.\n\r");
-	printf_to_char(ch,"Bu sýrada muddan koparsan veya mud çökerse:\n\r");
-	printf_to_char(ch,"    AYNI ÝSÝMLE YENÝ BÝR KARAKTER YARAT VE ÖLÜMSÜZLERE DURUMU BÝLDÝR.\n\r");
-	printf_to_char(ch,"Unutma ki, eski karaktere ait aþaðýdaki özellikler aynen korunur:\n\r");
-	printf_to_char(ch,"        bankadakiler dahil tüm akçe\n\r");
-	printf_to_char(ch,"        pratik, eðitim seanslarý ve görev puaný\n\r");
-	printf_to_char(ch,"Yeni yaþamýnda 6 yüzük takabileceksin.\n\r");
-	printf_to_char(ch,"             Ve fazladan 10 eðitim seansýn olacak.\n\r");
+		ch->pcdata->questpoints -= 100;
+		SET_BIT(ch->act, PLR_REMORTED);
+		printf_to_char(ch,"\n\r...YENÝYAÞAM...\n\r");
+		printf_to_char(ch,"Yeni ýrk, sýnýf ve zarlarla yeni bir karakter yaratacaksýn.\n\r");
+		printf_to_char(ch,"Bu sýrada muddan koparsan veya mud çökerse:\n\r");
+		printf_to_char(ch,"    AYNI ÝSÝMLE YENÝ BÝR KARAKTER YARAT VE ÖLÜMSÜZLERE DURUMU BÝLDÝR.\n\r");
+		printf_to_char(ch,"Unutma ki, eski karaktere ait aþaðýdaki özellikler aynen korunur:\n\r");
+		printf_to_char(ch,"        bankadakiler dahil tüm akçe\n\r");
+		printf_to_char(ch,"        pratik, eðitim seanslarý ve görev puaný\n\r");
+		printf_to_char(ch,"Yeni yaþamýnda 6 yüzük takabileceksin.\n\r");
+		printf_to_char(ch,"             Ve fazladan 10 eðitim seansýn olacak.\n\r");
 
-	sprintf( pbuf, "%s", ch->pcdata->pwd );
-	sprintf( remstr, "%s%s", PLAYER_DIR, capitalize( ch->name ) );
-	sprintf( mkstr, "%s%s", REMORT_DIR, capitalize( ch->name ) );
-	sprintf( name, "%s", ch->name );
-	d = ch->desc;
-	banks	= ch->pcdata->bank_s;
-	qp	= ch->pcdata->questpoints;
-	silver	= ch->silver;
-  old_tra = ch->train;
-  old_pra = ch->practice;
-  rkp = ch->pcdata->rk_puani;
+		sprintf( pbuf, "%s", ch->pcdata->pwd );
+		sprintf( remstr, "%s%s", PLAYER_DIR, capitalize( ch->name ) );
+		sprintf( mkstr, "%s%s", REMORT_DIR, capitalize( ch->name ) );
+		sprintf( name, "%s", ch->name );
+		d = ch->desc;
+		banks	= ch->pcdata->bank_s;
+		qp	= ch->pcdata->questpoints;
+		silver	= ch->silver;
+		old_tra = ch->train;
+		old_pra = ch->practice;
+		rkp = ch->pcdata->rk_puani;
 
 	if (!quit_org(ch, argument, TRUE, TRUE ))	return;
 

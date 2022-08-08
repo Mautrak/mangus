@@ -5599,46 +5599,6 @@ void reboot_uzakdiyarlar( bool fmessage )
 }
 
 
-void do_premort( CHAR_DATA *ch, char *argument )
-{
-  char arg[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
-
-    if ( !IS_IMMORTAL(ch) )
-        return;
-    argument = one_argument(argument,arg);
-
-    if ( arg[0] == '\0' )
-    {
-	send_to_char("Usage:\n\r  premort <player>\n\r", ch);
-	return;
-    }
-
-    if ( (victim = get_char_world(ch ,arg)) == NULL )
-    {
-        send_to_char( "He is not currently playing.\n\r", ch );
-        return;
-    }
-
-    if ( IS_NPC(victim) || victim->level < LEVEL_HERO )
-    {
-        send_to_char("You cannot give remorting permissions to that!.\n\r", ch);
-        return;
-    }
-   if (IS_SET(victim->act, PLR_CANREMORT) )
-        {
-   REMOVE_BIT(victim->act,PLR_CANREMORT);
-   send_to_char("You have lost your remorting permission.\n\r",victim);
-   send_to_char("Ok.\n\r", ch );
-        }
-   else
-        {
-   SET_BIT(victim->act,PLR_CANREMORT);
-   send_to_char("You are given the permission to remort.\n\r",victim);
-   send_to_char( "Ok.\n\r", ch );
-        }
-   return;
-}
 
 void do_maximum( CHAR_DATA *ch, char *argument )
 {

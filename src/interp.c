@@ -311,7 +311,6 @@ const	struct	cmd_type	cmd_table	[] =
   { "pratik",       do_practice,	POS_SLEEPING,    0,  LOG_NORMAL, 1, CMD_KEEP_HIDE },
   { "prefi",		do_prefi,	POS_DEAD,	IM,  LOG_NORMAL, 0, CMD_KEEP_HIDE|CMD_GHOST },
   { "prefix",		do_prefix,	POS_DEAD,	IM,  LOG_NORMAL, 1, CMD_KEEP_HIDE|CMD_GHOST },
-  { "premort",	do_premort,	POS_DEAD,	L8,  LOG_ALWAYS, 1, CMD_KEEP_HIDE|CMD_GHOST },
   { "protect",	do_protect,	POS_DEAD,	L1,  LOG_ALWAYS, 1, CMD_KEEP_HIDE|CMD_GHOST },
   { "purge",		do_purge,	POS_DEAD,	L4,  LOG_ALWAYS, 1, CMD_KEEP_HIDE|CMD_GHOST },
   { "pusu",         do_ambush,      POS_STANDING,    0,  LOG_NORMAL, 1,0 },

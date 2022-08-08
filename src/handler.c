@@ -2714,7 +2714,6 @@ char *act_bit_name( int act_flags )
 	if (act_flags & PLR_LOG		) strcat(buf, " log");
 	if (act_flags & PLR_FREEZE	) strcat(buf, " frozen");
 	if (act_flags & PLR_LEFTHAND	) strcat(buf, " lefthand");
-	if (act_flags & PLR_CANREMORT	) strcat(buf, " canremort");
 	if (act_flags & PLR_QUESTOR	) strcat(buf, " questor");
 	if (act_flags & PLR_VAMPIRE	) strcat(buf, " VAMPIRE");
 	if (act_flags & PLR_HARA_KIRI	) strcat(buf, " harakiri");

@@ -2056,7 +2056,6 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	break;
 
     case CON_REMORTING:
-	SET_BIT( ch->act, PLR_CANREMORT );
 	SET_BIT( ch->act, PLR_REMORTED );
 	sprintf(buf,
 "Bildiðin gibi Mangus Mud'da %d farklý ýrk bulunmaktadýr:",
