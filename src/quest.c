@@ -109,13 +109,13 @@ void do_quest(CHAR_DATA *ch, char *argument)
     argument = one_argument(argument, arg2);
 
     if (IS_NPC(ch) )  return;
-
+  /*
   if ( IS_SET(ch->act,PLR_NO_DESCRIPTION) )
   {
     printf_to_char(ch, "En az 350 karakterlik tanýmýn olmadan görev komutlarýný kullanamazsýn.");
     return;
   }
-
+  */
   if (!strcmp(arg1, "bilgi"))
   {
     if (IS_SET(ch->act, PLR_QUESTOR))
