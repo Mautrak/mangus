@@ -221,6 +221,7 @@ printf_to_char(ch, "{Coymalı yüzük{x........({yoymalı{x  ).......{R750 gp{x\n\r"
 printf_to_char(ch, "{Ckakmalı yüzük{x.......({ykakmalı{x ).......{R750 gp{x\n\r");
 printf_to_char(ch, "{Ctesti{x...............({ytesti{x   ).......{R500 gp{x\n\r");
 printf_to_char(ch, "{C1 bünye puanı{x.......({ybünye{x   ).......{R250 gp{x\n\r");
+printf_to_char(ch, "{C15.000 akçe{x.........({yakçe{x    ).......{R10  gp{x\n\r");
 if ( ch->iclass == CLASS_SAMURAI )
 {
 printf_to_char(ch, "{Ckatana{x..............({ykatana{x  ).......{R100 gp{x\n\r");
@@ -568,6 +569,28 @@ act_color( "$CGökyüzünde şimşekler çakıyor.$c",   ch, NULL,
 	    {
 		ch->pcdata->questpoints -= 250;
 		ch->perm_stat[STAT_CON] += 1;
+	    }
+	    else
+	    {
+        sprintf(buf, "Üzgünüm %s, bunun için yeterli görev puanın yok.",ch->name);
+		do_tell_quest(ch,questman,buf);
+		return;
+	    }
+	}
+	else if (is_name(arg2, (char*)"akçe"))
+	{
+		if(ch->pcdata->bank_s > 39985000)
+		{
+			send_to_char("Banka 40 milyon akçeden fazlasını kabul etmez.\n\r",ch);
+			return;
+		}
+	    if (ch->pcdata->questpoints >= 10)
+	    {
+			ch->pcdata->questpoints -= 10;
+			ch->perm_stat[STAT_CON] += 1;
+			ch->pcdata->bank_s += 15000;
+			send_to_char("Banka hesabına 15000 akçe yatırıldı. Güle güle harca.\n\r",ch);
+			return;
 	    }
 	    else
 	    {

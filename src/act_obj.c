@@ -4512,9 +4512,9 @@ void do_deposit(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if ( (amount_s + ch->pcdata->bank_s) > 400000 )
+  if ( (amount_s + ch->pcdata->bank_s) > 40000000 )
     {
-      send_to_char("Bankamýz 400,000 akçeden fazlasýný kabul etmez.\n\r",ch);
+      send_to_char("Bankamýz 40 milyon akçeden fazlasýný kabul etmez.\n\r",ch);
       return;
     }
 
