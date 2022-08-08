@@ -2485,6 +2485,7 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 
 	do_look( ch, (char*)"auto" );
 
+	/*
 	if (ch->silver > 10000 && !IS_IMMORTAL(ch))
 	{
 	    sprintf(buf,"Baþkanýn açacaðý yeni bar için %ld akçe vergi ödemeniz gerekiyor.\n\r",
@@ -2501,7 +2502,7 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	    send_to_char(buf,ch);
 	    ch->pcdata->bank_s -= (ch->pcdata->bank_s - 100000) / 10;
 	}
-
+	*/
 
 	if (ch->pet != NULL)
 	{
