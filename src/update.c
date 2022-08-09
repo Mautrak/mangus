@@ -2103,49 +2103,80 @@ void update_handler( void )
 
 void light_update( void )
 {
-    CHAR_DATA *ch;
-    int dam_light;
-    DESCRIPTOR_DATA *d, *d_next;
+	CHAR_DATA *ch;
+	int dam_light;
+	DESCRIPTOR_DATA *d, *d_next;
 
 
-    for ( d = descriptor_list; d != NULL; d = d_next )
+	for ( d = descriptor_list; d != NULL; d = d_next )
 	{
-	 d_next = d->next;
-	 if ( d->connected != CON_PLAYING )
-		continue;
+		d_next = d->next;
+		if ( d->connected != CON_PLAYING )
+		{
+			continue;
+		}
 
-	ch = (d->original != NULL) ? d->original : d->character;
+		ch = (d->original != NULL) ? d->original : d->character;
 
-	if (IS_IMMORTAL(ch) ) continue;
+		if (IS_IMMORTAL(ch) )
+		{
+			continue;
+		}
+		
+		// Yapay ýþýk zarar vermemeli.
+		if (ch->in_room->sector_type == SECT_INSIDE)
+		{
+			continue;
+		}
 
-        if ( ch->iclass != CLASS_VAMPIRE)   continue;
+		if ( ch->iclass != CLASS_VAMPIRE)
+		{
+			continue;
+		}
 
-	/* also checks vampireness */
-	if ( (dam_light = isn_dark_safe(ch)) == 0 )
-		continue;
+		/* also checks vampireness */
+		if ( (dam_light = isn_dark_safe(ch)) == 0 )
+		{
+			continue;
+		}
 
-	if (dam_light != 2 && number_percent() < get_skill(ch,gsn_light_res))
-	{
-	    check_improve(ch,gsn_light_res,TRUE,32);
-	    continue;
+		if (dam_light != 2 && number_percent() < get_skill(ch,gsn_light_res))
+		{
+			check_improve(ch,gsn_light_res,TRUE,32);
+			continue;
+		}
+
+		if (dam_light == 1)
+		{
+			send_to_char("Odadaki ýþýktan rahatsýz oluyorsun.\n\r",ch);
+		}
+		else
+		{
+			send_to_char("Güneþ ýþýðýndan rahatsýz oluyorsun.\n\r",ch);
+		}
+
+		dam_light = ( ch->max_hit * 4 )/ 100;
+		
+		if (!dam_light)
+		{
+			dam_light = 1;
+		}
+		
+		damage(ch, ch, dam_light, TYPE_HUNGER, DAM_LIGHT_V , TRUE);
+
+		if ( ch->position == POS_STUNNED )
+		{
+			update_pos( ch );
+		}
+
+		if (number_percent() < 10)
+		{
+			gain_condition( ch, COND_DRUNK,  -1 );
+		}
 	}
 
-	if (dam_light == 1)
-  send_to_char("Odadaki ýþýktan rahatsýz oluyorsun.\n\r",ch);
-else send_to_char("Güneþ ýþýðýndan rahatsýz oluyorsun.\n\r",ch);
 
-	dam_light = ( ch->max_hit * 4 )/ 100;
-	if (!dam_light) dam_light = 1;
-	damage(ch, ch, dam_light, TYPE_HUNGER, DAM_LIGHT_V , TRUE);
-
-	if ( ch->position == POS_STUNNED )
-	    update_pos( ch );
-
-	if (number_percent() < 10)  gain_condition( ch, COND_DRUNK,  -1 );
-	}
-
-
-    return;
+	return;
 }
 
 
