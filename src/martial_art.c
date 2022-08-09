@@ -1569,9 +1569,9 @@ void do_assassinate( CHAR_DATA *ch, char *argument )
 
   WAIT_STATE( ch, skill_table[gsn_assassinate].beats );
 
-  chance += int( get_curr_stat( ch , STAT_INT ) / 4 );
-  chance += int( get_curr_stat( ch , STAT_WIS ) / 4 );
-  chance += int( get_curr_stat( ch , STAT_DEX ) / 4 );
+  chance += int( get_curr_stat( ch , STAT_STR ) / 4 );
+  chance += int( get_curr_stat( ch , STAT_DEX ) / 2 );
+  chance += int( ch->pcdata->familya[victim->race] / 25 ) ;
   chance += int( ( get_skill( ch , gsn_assassinate ) - 75 ) / 2 ) ;
 
   obj = get_eq_char( ch, WEAR_HANDS );
