@@ -62,8 +62,8 @@ void do_dilek(CHAR_DATA *ch, char *argument)
 		act ("$Z dilek taþlarýnýn listesini istiyorsun.",ch, NULL, wishmaster, TO_CHAR);
 
 		printf_to_char(ch, "Mevcut dilek taþlarý:\n\r\n\r");
-		printf_to_char(ch, "  {Ctecrübe taþý{x....({ytecrübe{x)....{R3000 gp, 50000 akçe{x\n\r");
-		printf_to_char(ch, "  {Cgörev taþý{x......({ygörev  {x)....{R3000 gp, 50000 akçe{x\n\r");
+		printf_to_char(ch, "  {Ctecrübe taþý{x....({ytecrübe{x)....{R3000 gp, 100000 akçe{x\n\r");
+		printf_to_char(ch, "  {Cgörev taþý{x......({ygörev  {x)....{R3000 gp, 100000 akçe{x\n\r");
 		return;
 	}
 	else if (!strcmp(arg1, "özellik"))
@@ -103,10 +103,10 @@ void do_dilek(CHAR_DATA *ch, char *argument)
 				do_say(wishmaster,(char*)"Bu dileði zaten dilemiþsin.");
 				return;
 			}
-			if (ch->pcdata->questpoints >= 3000 && ch->silver >= 50000)
+			if (ch->pcdata->questpoints >= 3000 && ch->pcdata->bank_s >= 100000)
 			{
 				ch->pcdata->questpoints -= 3000;
-				ch->silver -= 50000;
+				ch->pcdata->bank_s -= 100000;
 				SET_BIT(ch->pcdata->dilek,DILEK_FLAG_TECRUBE);
 				do_say(wishmaster,(char*)"Ýþte bu taþ senin dileðin için...");
 				printf_to_char( ch , "\n\r{CHüssam mavi bir dilek taþýna son þeklini verdikten sonra kuyuya atýyor.{x\n\r");
@@ -115,7 +115,7 @@ void do_dilek(CHAR_DATA *ch, char *argument)
 			}
 			else
 			{
-				sprintf(buf, "Üzgünüm %s, o kadar puanýn veya paran yok.",ch->name);
+				sprintf(buf, "Üzgünüm %s, o kadar puanýn veya bankada akçen yok.",ch->name);
 				do_say(wishmaster,buf);
 				return;
 			}
@@ -127,10 +127,10 @@ void do_dilek(CHAR_DATA *ch, char *argument)
 				do_say(wishmaster,(char*)"Bu dileði zaten dilemiþsin.");
 				return;
 			}
-			if (ch->pcdata->questpoints >= 3000 && ch->silver >= 50000)
+			if (ch->pcdata->questpoints >= 3000 && ch->silver >= 100000)
 			{
 				ch->pcdata->questpoints -= 3000;
-				ch->silver -= 50000;
+				ch->pcdata->bank_s -= 100000;
 				SET_BIT(ch->pcdata->dilek,DILEK_FLAG_GOREV);
 				do_say(wishmaster,(char*)"Ýþte bu taþ senin dileðin için...");
 				printf_to_char( ch , "\n\r{CHüssam kýzýl bir dilek taþýna son þeklini verdikten sonra kuyuya atýyor.{x\n\r");
@@ -139,7 +139,7 @@ void do_dilek(CHAR_DATA *ch, char *argument)
 			}
 			else
 			{
-				sprintf(buf, "Üzgünüm %s, o kadar puanýn veya akçen yok.",ch->name);
+				sprintf(buf, "Üzgünüm %s, o kadar puanýn veya bankada akçen yok.",ch->name);
 				do_say(wishmaster,buf);
 				return;
 			}
