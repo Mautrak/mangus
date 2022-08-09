@@ -587,7 +587,6 @@ act_color( "$CGökyüzünde şimşekler çakıyor.$c",   ch, NULL,
 	    if (ch->pcdata->questpoints >= 10)
 	    {
 			ch->pcdata->questpoints -= 10;
-			ch->perm_stat[STAT_CON] += 1;
 			ch->pcdata->bank_s += 15000;
 			send_to_char("Banka hesabına 15000 akçe yatırıldı. Güle güle harca.\n\r",ch);
 			return;
