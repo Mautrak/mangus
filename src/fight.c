@@ -1741,7 +1741,33 @@ bool damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt, int dam_type, bo
 			{
 				act_color( "$C$n $S cesedinden kan emiyor!!$c",ch, NULL,victim,TO_ROOM,POS_SLEEPING,CLR_RED_BOLD);
 				send_ch_color("$CCesetten kan emiyorsun!!$c\n\r\n\r",ch,POS_SLEEPING,CLR_RED_BOLD );
-				gain_condition(ch,COND_BLOODLUST,3);
+				gain_condition(ch,COND_BLOODLUST,4);
+				
+				/*
+				 * Vampirlerin emdikleri kandan YP iyileþtirmeleri için
+				 */
+				if(victim->level >= ch->level)
+				{
+					ch->hit += ch->level * 2;
+					ch->hit = UMIN(ch->hit,ch->max_hit);
+					send_to_char("Emdiðin kanla þifa buluyorsun!!!\n\r",ch);
+				}
+				else if(ch->level - victim->level < 5)
+				{
+					ch->hit += ch->level;
+					ch->hit = UMIN(ch->hit,ch->max_hit);
+					send_to_char("Emdiðin kanla þifa buluyorsun!!\n\r",ch);
+				}
+				else if(ch->level - victim->level < 10)
+				{
+					ch->hit += int(ch->level / 3);
+					ch->hit = UMIN(ch->hit,ch->max_hit);
+					send_to_char("Emdiðin kanla þifa buluyorsun!\n\r",ch);
+				}
+				else
+				{
+					send_to_char("Emdiðin deðersiz kandan þifa alman imkansýz!\n\r",ch);
+				}
 			}
 
 			if ( IS_SET(ch->act, PLR_AUTOSAC) )
