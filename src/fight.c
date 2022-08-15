@@ -1045,11 +1045,7 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
 
     if (dt == gsn_assassinate)
       {
-		  int aaa = number_percent();
-		  int bbb = URANGE(10, 20+(ch->level-victim->level)*2, 50);
-		  printf_to_char(ch,"aaa=%d,bbb=%d",aaa,bbb);
-		  
-	if (aaa <= bbb, 50) && !counter)
+	if (number_percent() <= URANGE(10, 20+(ch->level-victim->level)*2, 50) && !counter)
 	  {
 			act_color("Sen $E $C+++SUÝKAST+++$c düzenledin!",ch,NULL,victim,TO_CHAR,
 		      POS_RESTING,CLR_RED);
