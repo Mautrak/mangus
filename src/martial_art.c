@@ -1573,31 +1573,31 @@ void do_assassinate( CHAR_DATA *ch, char *argument )
   chance += int( get_curr_stat( ch , STAT_DEX ) / 2 );
   chance += int( ch->pcdata->familya[victim->race] / 25 ) ;
   chance += int( ( get_skill( ch , gsn_assassinate ) - 75 ) / 2 ) ;
+  
+	// en azindan bir eli dolu
+	if ( get_eq_char(ch, WEAR_LEFT) != NULL
+		|| get_eq_char(ch, WEAR_RIGHT) != NULL
+		|| get_eq_char(ch, WEAR_BOTH) != NULL )
+	{
+		chance -= 15;
+	}
+	// elleri boþ
+	else
+	{
+		chance += 10;
+	}
 
-  obj = get_eq_char( ch, WEAR_HANDS );
-
-  if( obj == NULL )
-  {
-    chance += 10;
-  }
-  else if( is_metal( obj ) )
-  {
-    chance -= 20;
-  }
-  else
-  {
-    chance -= 5;
-  }
-
-  if ( IS_NPC(ch) ||
-	!IS_AWAKE(victim)
-	||   number_percent( ) < chance)
-      multi_hit(ch,victim,gsn_assassinate);
-    else
-      {
-	check_improve(ch,gsn_assassinate,FALSE,1);
-	damage( ch, victim, 0, gsn_assassinate,DAM_NONE, TRUE );
-      }
+	// Suikast'in tutma þansý var
+	if ( IS_NPC(ch) || !IS_AWAKE(victim) || number_percent( ) < chance)
+	{
+		multi_hit(ch,victim,gsn_assassinate);
+	}
+	// Suikast'in tutma þansý yok
+	else
+	{
+		check_improve(ch,gsn_assassinate,FALSE,1);
+		damage( ch, victim, 0, gsn_assassinate,DAM_NONE, TRUE );
+	}
     /* Player shouts if he doesn't die */
     if (!(IS_NPC(victim)) && !(IS_NPC(ch))
 	&& victim->position == POS_FIGHTING)
