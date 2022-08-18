@@ -3388,7 +3388,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"detect hide","saklýyý saptama"},	{ 93, 93, 10, 93, 93, 93, 10, 93 ,93,93,93,93,93},
+	{"detect hide","saklýyý saptama"},	{ 93, 93, 93, 93, 93, 93, 93, 93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_CHAR_SELF,		POS_STANDING,
 	&gsn_detect_hidden,	SLOT(0),	 5,	12,
