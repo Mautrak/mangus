@@ -245,18 +245,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
     fprintf( fp, "Exp  %d\n",	ch->exp			);
     if (ch->act != 0)
 	fprintf( fp, "Act  %s\n",   print_flags(ch->act));
-/*
-    if (ch->affected_by != 0)
-	{
-	 if (IS_NPC(ch))
-	 fprintf( fp, "AfBy %s\n", print_flags(ch->affected_by) );
-	 else
-	 fprintf( fp, "AfBy %s\n",
-		print_flags((ch->affected_by & (~AFF_CHARM))) );
-	}
-    if (ch->detection != 0)
-	fprintf( fp, "Detect %s\n",   print_flags(ch->detection));
-*/
+
     fprintf( fp, "Comm %s\n",       print_flags(ch->comm));
     if (ch->wiznet)
     	fprintf( fp, "Wizn %s\n",   print_flags(ch->wiznet));
@@ -271,16 +260,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
     if (ch->train != 0)
 	fprintf( fp, "Trai %d\n",	ch->train	);
     fprintf( fp, "Alig  %d\n",	ch->alignment		);
-/*
-    if (ch->saving_throw != 0)
-	fprintf( fp, "Save  %d\n",	ch->saving_throw);
-    if (ch->hitroll != 0)
-	fprintf( fp, "Hit   %d\n",	ch->hitroll	);
-    if (ch->damroll != 0)
-	fprintf( fp, "Dam   %d\n",	ch->damroll	);
-    fprintf( fp, "ACs %d %d %d %d\n",
-	ch->armor[0],ch->armor[1],ch->armor[2],ch->armor[3]);
-*/
+
     if (ch->wimpy !=0 )
 	fprintf( fp, "Wimp  %d\n",	ch->wimpy	);
 
