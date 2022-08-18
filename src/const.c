@@ -3450,7 +3450,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
-    {
+    { /* Ani ölüm */
 	{"disintegrate","ufala"},       {  75,93,93,93,93,93,93,93,93,93 ,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_disintegrate,      TAR_CHAR_OFFENSIVE,   POS_STANDING,
@@ -3459,7 +3459,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
-    {
+    { /* Ani ölüm */
 	{"arz yutaðý","arz yutaðý"},       {  93,93,93,93,93,93,93,93,93,93 ,93,93,75},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_arz_yutagi,      TAR_CHAR_OFFENSIVE,   POS_STANDING,
@@ -4404,7 +4404,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	RACE_NONE, ALIGN_NONE, GROUP_PROTECTIVE
     },
 
-    {
+    { /* Ani ölüm */
 	{"power word kill","ölüm sözcüðü"},		{   93, 93, 93, 93,93,93,93,93,93 ,93,93,78,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_power_kill,	TAR_CHAR_OFFENSIVE,	POS_STANDING,
@@ -5176,7 +5176,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	RACE_NONE, ALIGN_NONE, GROUP_FIGHTMASTER
     },
 
-    {
+    { /* Ani ölüm */
 	{"assassinate","suikast"},       {  93, 93, 93, 93, 93, 93, 65, 93 ,93,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,      TAR_IGNORE,          POS_STANDING,
