@@ -231,8 +231,10 @@ void spell_disintegrate( int sn, int level, CHAR_DATA *ch, void *vo, int target)
   int i,dam=0;
   OBJ_DATA *tattoo;
 
-
-    if (saves_spell(level,victim,DAM_MENTAL) || number_range(0,1) == 0)
+	/*
+	 * Ani ölüm büyüsü. Tutma yüzdesi %15 düþürüldü.
+	 */
+    if (saves_spell(level,victim,DAM_MENTAL) || number_range(0,1) == 0 || number_percent() < 15)
 	{
 	 dam = dice( level , 24 ) ;
 	 damage(ch, victim , dam , sn, DAM_MENTAL, TRUE);
@@ -327,8 +329,10 @@ void spell_arz_yutagi( int sn, int level, CHAR_DATA *ch, void *vo, int target)
   int i,dam=0;
   OBJ_DATA *tattoo;
 
-
-    if (saves_spell(level,victim,DAM_MENTAL) || number_range(0,1) == 0)
+	/*
+	 * Ani ölüm büyüsü. Tutma yüzdesi %15 düþürüldü.
+	 */
+    if (saves_spell(level,victim,DAM_MENTAL) || number_range(0,1) == 0 || number_percent() < 15)
 	{
 	 dam = dice( level , 24 ) ;
 	 damage(ch, victim , dam , sn, DAM_MENTAL, TRUE);
@@ -3641,7 +3645,10 @@ void spell_power_kill ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
   act_color( "$S parmaðýndan çýkan karanlýk seni sarýyor.",
 		victim, NULL, ch, TO_CHAR, POS_RESTING, CLR_RED );
 
-    if (saves_spell(level,victim,DAM_MENTAL) || number_range(0,1) == 0)
+    /*
+	 * Ani ölüm büyüsü. Tutma yüzdesi %15 düþürüldü.
+	 */
+    if (saves_spell(level,victim,DAM_MENTAL) || number_range(0,1) == 0 || number_percent() < 15)
 	{
 	 dam = dice( level , 24 ) ;
 	 damage(ch, victim , dam , sn, DAM_MENTAL, TRUE);
