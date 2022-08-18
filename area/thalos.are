@@ -2170,7 +2170,7 @@ S
 #OLIMITS
 O 5208 1
 O 5210 10	* sanctuary potion
-O 5211 10	* detect hidden potion
+O 5211 2	* detect hidden potion
 S
 
 #PRACTICERS

@@ -5124,7 +5124,7 @@ M 7555 spec_breath_any
 S
 
 #OLIMITS
-O 7509 10
+O 7509 2
 O 7699 2
 O 7507 10 * haste potion
 S
