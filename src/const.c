@@ -886,45 +886,45 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
     },
 
     {
-	{"cleric","ermiþ"}, "Erm",  STAT_WIS,  OBJ_VNUM_SCHOOL_SWORD,
-	{ 3003, 9619, 9619, 9619, 9619, 9619},  75,  18, 2,  70, 80, TRUE,
-	100,{1,2,2,0,0,5},CR_ALL
+		{"cleric","ermiþ"}, "Erm",  STAT_WIS,  OBJ_VNUM_SCHOOL_SWORD,
+		{ 3003, 9619, 9619, 9619, 9619, 9619},  75,  18, 2,  70, 80, TRUE,
+		100,{1,2,2,0,0,5},CR_ALL
     },
 
     {
-	{"thief","hýrsýz"}, "Hýr",  STAT_DEX,  OBJ_VNUM_SCHOOL_DAGGER,
-	{ 3028, 9639, 9639, 9639, 9639, 9639 },  75,  18,  -4, 100, 50, FALSE,
-        0,{0,0,0,3,0,5},CR_ALL
+		{"thief","hýrsýz"}, "Hýr",  STAT_DEX,  OBJ_VNUM_SCHOOL_DAGGER,
+		{ 3028, 9639, 9639, 9639, 9639, 9639 },  75,  18,  -4, 100, 50, FALSE,
+			0,{0,0,0,3,0,5},CR_ALL
     },
 
     {
-	{"warrior","savaþçý"}, "Sav",  STAT_STR,  OBJ_VNUM_SCHOOL_SWORD,
-	{ 3022, 9633, 9633, 9633, 9633, 9633 },  75,  18,  -10, 100,50,FALSE,
-	0,{3,0,0,0,1,5},CR_ALL
+		{"warrior","savaþçý"}, "Sav",  STAT_STR,  OBJ_VNUM_SCHOOL_SWORD,
+		{ 3022, 9633, 9633, 9633, 9633, 9633 },  75,  18,  -10, 100,50,FALSE,
+		0,{3,0,0,0,1,5},CR_ALL
     },
 
     {
-	{"paladin","adbolar"}, "Adb",   STAT_STR,  OBJ_VNUM_SCHOOL_SWORD,
-	{ 3063, 0, 0, 0, 0, 0 },  75,  18,  -6,  80, 70, TRUE,
-	400,{2,0,1,0,2,5},CR_GOOD
+		{"paladin","adbolar"}, "Adb",   STAT_STR,  OBJ_VNUM_SCHOOL_SWORD,
+		{ 3063, 0, 0, 0, 0, 0 },  75,  18,  -6,  80, 70, TRUE,
+		400,{2,0,1,0,2,5},CR_GOOD
     },
 
     {
-	{"anti-paladin","kembolar"}, "Kmb",  STAT_STR,  OBJ_VNUM_SCHOOL_SWORD,
-	{ 3061, 0, 0, 0, 0, 0 },  75,  18,  -6,  80, 70, TRUE,
-	300,{2,1,0,1,1,5},CR_EVIL
+		{"anti-paladin","kembolar"}, "Kmb",  STAT_STR,  OBJ_VNUM_SCHOOL_SWORD,
+		{ 3061, 0, 0, 0, 0, 0 },  75,  18,  -6,  80, 70, TRUE,
+		300,{2,1,0,1,1,5},CR_EVIL
     },
 
     {
-	{"ninja","ninja"}, "Nin",  STAT_DEX,  OBJ_VNUM_SCHOOL_DAGGER,
-	{ 3062, 0, 0, 0, 0, 0 },  75,  18,  -10,  90, 60, FALSE,
-	300,{1,0,0,2,1,5},CR_ALL
+		{"ninja","ninja"}, "Nin",  STAT_DEX,  OBJ_VNUM_SCHOOL_DAGGER,
+		{ 3062, 0, 0, 0, 0, 0 },  75,  18,  -10,  90, 60, FALSE,
+		300,{1,0,0,2,1,5},CR_ALL
     },
 
     {
-	{"ranger","korucu"}, "Krc",  STAT_STR,  OBJ_VNUM_SCHOOL_SWORD,
-	{ 6156, 0, 0, 0, 0, 0 },  75,  18,  -8,  90, 60, FALSE,
-	200,{1,0,0,1,1,5},CR_ALL
+		{"ranger","korucu"}, "Krc",  STAT_STR,  OBJ_VNUM_SCHOOL_SWORD,
+		{ 6156, 0, 0, 0, 0, 0 },  75,  18,  -8,  90, 60, FALSE,
+		200,{1,0,0,1,1,5},CR_ALL
     },
 
     {
@@ -939,11 +939,11 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
         500,{1,1,1,0,1,5},CR_ALL
     },
 
-   {
-      {  "vampire","vampir"}, "Vam", STAT_INT,  OBJ_VNUM_SCHOOL_DAGGER,
-        { 5395, 5396, 0, 0, 0, 0 },  75,  18, -6,  80,  70, TRUE,
-        300,{1,2,0,0,0,5},CR_EVIL
-        },
+	{
+		{  "vampire","vampir"}, "Vam", STAT_INT,  OBJ_VNUM_SCHOOL_DAGGER,
+		{ 5395, 5396, 0, 0, 0, 0 },  75,  18, -6,  80,  70, TRUE,
+		300,{1,2,0,0,0,5},CR_EVIL
+	},
 
    {
         {"necromancer","karakam"}, "Kam",  STAT_INT,  OBJ_VNUM_SCHOOL_DAGGER,
@@ -3388,7 +3388,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"detect hide","saklýyý saptama"},	{ 93, 93, 60, 93, 93, 93, 60, 93 ,93,93,93,93,93},
+	{"detect hide","saklýyý saptama"},	{ 93, 93, 10, 93, 93, 93, 10, 93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_CHAR_SELF,		POS_STANDING,
 	&gsn_detect_hidden,	SLOT(0),	 5,	12,

@@ -275,8 +275,7 @@ bool saves_spell( int level, CHAR_DATA *victim, int dam_type )
 {
     int save;
 
-    save = 40 + ( victim->level - level) * 4 -
-	(victim->saving_throw * 90) / UMAX(45,victim->level);
+    save = 40 + ( victim->level - level) * 4 - (victim->saving_throw * 90) / UMAX(45,victim->level);
 
     if (IS_AFFECTED(victim,AFF_BERSERK))
 	save += victim->level / 5;
