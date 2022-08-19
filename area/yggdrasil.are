@@ -269,7 +269,7 @@ parlayan pembe bir iksir~
 Pembe bir iksir parýldayarak titreþiyor.~
 energy~
 potion AG A
-10 'detect invis' 'detect magic' 'detect poison' 'detect good'
+10 'detect magic' 'detect poison' 'detect good' ''
 13 10 4580 G
 #0
 
@@ -745,6 +745,7 @@ S
 
 #OLIMITS
 O 2908 10	* haste potion
+O 2906 2    * detect invis
 S
 
 #$

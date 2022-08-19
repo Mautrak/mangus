@@ -243,7 +243,7 @@ bir baðlý parþömen~
 Bir baðlý, ortaya çýkarma parþömeni burada yatýyor.~
 vellum~
 scroll G A
-15 'detect evil' 'detect invis' 'detect magic' ''
+15 'detect evil' 'detect magic' '' ''
 0 150 500 P
 #5217
 gümüþ flüt~
@@ -2170,7 +2170,7 @@ S
 #OLIMITS
 O 5208 1
 O 5210 10	* sanctuary potion
-O 5211 2	* detect hidden potion
+O 5211 1	* detect hidden potion
 S
 
 #PRACTICERS

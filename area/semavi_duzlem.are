@@ -613,7 +613,7 @@ gümüþi renkli bir iksir~
 Ýçinde ýþýk yansýtan gümüþi renkli bir sývý olan sekiz kenarlý bir þiþe burada duruyor.~
 glass~
 potion 0 A
-20 'detect invis' 'detect magic' 'detect poison' ''
+20 'detect magic' 'detect poison' '' ''
 1 20 320 P
 E
 iksir gümüþi~

@@ -238,7 +238,7 @@ berrak iksir~
 Deriye sarýlmýþ berrak bir iksir dikkat çekmeyecek þekilde buraya konmuþ.~
 glass~
 potion G A
-20 'detect evil' 'detect invis' 'detect magic' ''
+20 'detect evil' 'detect magic' '' ''
 0 20 300 P
 E
 leather~

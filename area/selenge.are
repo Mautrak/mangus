@@ -1438,7 +1438,7 @@ bir eksiksiz görüþ iksiri~
 Bir eksiksiz görüþ iksiri burada.~
 glass~
 potion G AO
-10 'detect invis' 'detect magic' 'detect evil' 'detect good'
+10 'detect magic' 'detect evil' 'detect good' ''
 4 10 2290 P
 #3093
 tahta ok~
@@ -2401,7 +2401,7 @@ gerçek görüþ iksiri~
 Bir gerçek görüþ iksiri burada duruyor.~
 glass~
 potion G AO
-10 'detect invis' 'detect magic' 'detect good' 'detect evil'
+10 'detect magic' 'detect good' 'detect evil' ''
 4 10 2290 P
 #3349
 uzun kýlýç~
@@ -7770,6 +7770,7 @@ O 3081 10 * potion of sanctuary
 O 3082 10 * potion of sanctuary
 O 3281 10 * potion of sanctuary
 O 3282 10 * potion of sanctuary
+O 3241 2  * detect invis
 S
 
 #$

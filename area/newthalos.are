@@ -1622,7 +1622,7 @@ wand~
 You see a small engraved storm cloud at the base of this wand.
 ~
 #9580
-wand detect invis grey silver~
+wand grey silver~
 a wand of glinting yellow~
 A wand of glinting yellow lies here.~
 gold brass~
@@ -6917,6 +6917,8 @@ S
 
 #OLIMITS
 O 9573 10	* haste potion
+O 9572 1    * detect invis potion
+O 9580 1    * detect invis wand
 S
 
 #$

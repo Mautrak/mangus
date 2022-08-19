@@ -2150,7 +2150,7 @@ Saptama iksiri~
 Bir saptama iksiri yudumlanmak için bekliyor.~
 glass~
 potion 0 A
-15 'detect invis' 'detect magic' 'detect poison' 'detect evil'
+15 'detect magic' 'detect poison' 'detect evil' ''
 10 2 100 P
 #16062
 pardus bacaklýklarý~
@@ -15708,6 +15708,7 @@ O 16036 2 * boots of flying
 O 16081 1 * DRAGON TATTOO
 O 16089 1 * DEMONFIRE SHIELD
 O 16095 2 * helm of an eye
+O 16003 1 * detect invis
 S
 
 #OMPROGS

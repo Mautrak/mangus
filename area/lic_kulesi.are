@@ -275,7 +275,7 @@ gümüþi iksir ~
 Gümüþi bir iksir masanýn üstünde býrakýlmýþ~
 glass~
 potion AG AO
-40 'invisibility' 'detect invis' 'detect magic' 'detect poison'
+40 'detect magic' 'detect poison' '' ''
 40 2 5400 P
 #29363
 altýn anahtar~
