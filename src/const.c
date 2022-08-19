@@ -287,14 +287,14 @@ const 	struct	race_type	race_table	[]		=
     { /* 78 */
         {"arial","arial"},"Arial",LANG_BIRD,        TRUE, 		SIZE_MEDIUM, 0,
         0,              AFF_FLYING,             0,
-        0,              0,              0,
+        0,              RES_MENTAL,              0,
         A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 250, { "fast healing" }, { 18, 23, 20, 24, 18 , 20}
     },
 
 	{ /* 79  */
 	{"felar","felar"},"Felar",LANG_CAT,	TRUE, 		SIZE_MEDIUM, 0,
 	0,		AFF_INFRARED,	OFF_TAIL,
-	0,		RES_LIGHT|RES_COLD,     VULN_FIRE|VULN_DROWNING,
+	0,		RES_LIGHT|RES_COLD|RES_MENTAL,     VULN_FIRE|VULN_DROWNING,
 	A|H|M|V,        A|C|D|E|F|H|J|K|Q|U|V, 250, {  "hand to hand","ambush", "berserk", "steal" }, { 21, 19, 20, 23, 21, 20}
 	},
 
