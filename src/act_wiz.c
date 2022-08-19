@@ -171,17 +171,17 @@ int apply_location;
 	if ( !str_cmp( arg2, "str" ) || !str_cmp( arg2, "int" ) || !str_cmp( arg2, "wis" ) || !str_cmp( arg2, "dex" ) || !str_cmp( arg2, "con" ) || !str_cmp( arg2, "cha" ) )
 	{
 		if(!str_cmp( arg2, "str" ))
-			apply_location = 1
+			apply_location = 1;
 		else if(!str_cmp( arg2, "dex" ))
-			apply_location = 2
+			apply_location = 2;
 		else if(!str_cmp( arg2, "int" ))
-			apply_location = 3
+			apply_location = 3;
 		else if(!str_cmp( arg2, "wis" ))
-			apply_location = 4
+			apply_location = 4;
 		else if(!str_cmp( arg2, "con" ))
-			apply_location = 5
+			apply_location = 5;
 		else if(!str_cmp( arg2, "cha" ))
-			apply_location = 6
+			apply_location = 6;
 		for( obj=object_list; obj!=NULL; obj = obj->next )
 		{
 			if (!obj->enchanted)
@@ -190,7 +190,7 @@ int apply_location;
 				{
 					if(paf->location == apply_location)
 					{
-						printf_to_char(ch,"%d - %s - %d etkiler.\n\r",obj->vnum,obj->name,paf->modifier);
+						printf_to_char(ch,"%d - %s - %d etkiler.\n\r",obj->pIndexData->vnum,obj->name,paf->modifier);
 					}
 				}
 			}
@@ -198,7 +198,7 @@ int apply_location;
 			{
 				if(paf->location == apply_location)
 				{
-					printf_to_char(ch,"%d - %s - %d etkiler.\n\r",obj->vnum,obj->name,paf->modifier);
+					printf_to_char(ch,"%d - %s - %d etkiler.\n\r",obj->pIndexData->vnum,obj->name,paf->modifier);
 				}
 			}
 		}

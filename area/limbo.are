@@ -554,14 +554,6 @@ weapon AGIOY ANP
 exotic 10 4 slash D
 21 100 100000 G
 A
-1 2
-A
-2 2
-A
-4 2
-A
-6 1
-A
 19 25
 A
 18 25
@@ -579,14 +571,6 @@ platinum~
 weapon AGIOY ANP
 exotic 10 4 slash D
 21 100 100000 G
-A
-1 2
-A
-2 2
-A
-4 2
-A
-6 1
 A
 19 25
 A
@@ -840,16 +824,6 @@ platinum~
 armor AGIOY ALP
 12 12 12 9 2
 21 300 100000 G
-A
-1 2
-A
-4 2
-A
-5 3
-A
-3 3
-A
-6 1
 A
 12 200
 A

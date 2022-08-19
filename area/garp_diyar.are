@@ -430,8 +430,6 @@ A
 13 -10
 A
 12 30
-A
-1 2
 #10006
 sýnýr eldiven bekçi eldivenler~
 Sýnýrbekçisi eldivenleri~
@@ -445,8 +443,6 @@ A
 24 -2
 A
 18 8
-A
-1 2
 #10007
 sýnýr bot bekçi botlar~
 Sýnýrbekçisi botlarý~
@@ -473,10 +469,6 @@ armor BC AI
 60 10 9898 P
 A
 13 20
-A
-2 2
-A
-1 2
 #10009
 sýnýr kalkan bekçi~
 Sýnýrbekçisinin kalkaný~
@@ -512,8 +504,6 @@ armor BC AE
 60 10 9898 P
 A
 23 -5
-A
-1 2
 #10012
 sýnýr yüzük bekçi~
 Sýnýrbekçisi yüzüðü~
@@ -802,10 +792,6 @@ armor ACY AE
 39 39 39 37 30
 86 10 99000 P
 A
-3 2
-A
-6 5
-A
 13 200
 A
 18 12
@@ -821,8 +807,6 @@ adamantite~
 armor CJY AD
 31 31 31 29 10
 57 50 75000 P
-A
-1 2
 A
 13 200
 A
