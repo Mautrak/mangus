@@ -168,19 +168,19 @@ int apply_location;
 	return;
     }
 	
-	if ( !str_cmp( arg2, "str" ) || !str_cmp( arg2, "int" ) || !str_cmp( arg2, "wis" ) || !str_cmp( arg2, "dex" ) || !str_cmp( arg2, "con" ) || !str_cmp( arg2, "cha" ) )
+	if ( !str_cmp( arg1, "str" ) || !str_cmp( arg1, "int" ) || !str_cmp( arg1, "wis" ) || !str_cmp( arg1, "dex" ) || !str_cmp( arg1, "con" ) || !str_cmp( arg1, "cha" ) )
 	{
-		if(!str_cmp( arg2, "str" ))
+		if(!str_cmp( arg1, "str" ))
 			apply_location = 1;
-		else if(!str_cmp( arg2, "dex" ))
+		else if(!str_cmp( arg1, "dex" ))
 			apply_location = 2;
-		else if(!str_cmp( arg2, "int" ))
+		else if(!str_cmp( arg1, "int" ))
 			apply_location = 3;
-		else if(!str_cmp( arg2, "wis" ))
+		else if(!str_cmp( arg1, "wis" ))
 			apply_location = 4;
-		else if(!str_cmp( arg2, "con" ))
+		else if(!str_cmp( arg1, "con" ))
 			apply_location = 5;
-		else if(!str_cmp( arg2, "cha" ))
+		else if(!str_cmp( arg1, "cha" ))
 			apply_location = 6;
 		for( obj=object_list; obj!=NULL; obj = obj->next )
 		{
@@ -204,7 +204,7 @@ int apply_location;
 		}
 		return;
 	}
-	else if ( !str_cmp( arg2, "file" ) )
+	else if ( !str_cmp( arg1, "file" ) )
 	{
 	   if ( (fp=fopen( "objlist.txt", "w+" ) ) == NULL )
 	   {
