@@ -992,31 +992,31 @@ int age_to_num( int age )
 	{
 	case  0:
 	strcat( buf, "Yeni bir gün baþladý.\n\r" );
-	write_event_log("Yeni bir gün baþladý.");
+	write_event_log((char *)"Yeni bir gün baþladý.");
 	break;
 
 	case  5:
 	weather_info.sunlight = SUN_LIGHT;
 	strcat( buf, "Güneþin ilk ýþýklarý gelmeye baþladý.\n\r" );
-	write_event_log("Güneþin ilk ýþýklarý gelmeye baþladý.");
+	write_event_log((char *)"Güneþin ilk ýþýklarý gelmeye baþladý.");
 	break;
 
 	case  6:
 	weather_info.sunlight = SUN_RISE;
 	strcat( buf, "Güneþ doðudan yükseliyor.\n\r" );
-	write_event_log("Güneþ doðudan yükseliyor.");
+	write_event_log((char *)"Güneþ doðudan yükseliyor.");
 	break;
 
 	case 19:
 	weather_info.sunlight = SUN_SET;
 	strcat( buf, "Güneþ batýda yavaþça kayboluyor.\n\r" );
-	write_event_log("Güneþ batýda yavaþça kayboluyor.");
+	write_event_log((char *)"Güneþ batýda yavaþça kayboluyor.");
 	break;
 
 	case 20:
 	weather_info.sunlight = SUN_DARK;
 	strcat( buf, "Gece baþladý.\n\r" );
-	write_event_log("Gece baþladý.");
+	write_event_log((char *)"Gece baþladý.");
 	break;
 	}
 
@@ -1953,7 +1953,9 @@ void aggr_update( void )
           }
 
           if (ch->last_fought != NULL)
+		  {
             continue;
+		  }
 
 	    /*
 	     * Ok we have a 'wch' player character and a 'ch' npc aggressor.
