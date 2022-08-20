@@ -2579,10 +2579,10 @@ const struct color_type color_table[] = /*  Last entry should be NULL   */
 const struct religion_type religion_table [] =
 {
   { "", "None", 0 },
-  { "Kamenilik", "Kameniler", OBJ_VNUM_TATTOO_KAME },
-  { "Niryanilik", "Niryaniler", OBJ_VNUM_TATTOO_NIR },
-  { "Nyahilik", "Nyahiler", OBJ_VNUM_TATTOO_NYAH },
-  { "Sintiyanlýk", "Sintiyanlar", OBJ_VNUM_TATTOO_SINT },
+  { "Kamenilik", "Kameniler", "Kame", OBJ_VNUM_TATTOO_KAME },
+  { "Niryanilik", "Niryaniler", "Nir", OBJ_VNUM_TATTOO_NIR },
+  { "Nyahilik", "Nyahiler", "Nyah", OBJ_VNUM_TATTOO_NYAH },
+  { "Sintiyanlýk", "Sintiyanlar", "Sint", OBJ_VNUM_TATTOO_SINT },
 };
 
 const struct ethos_type ethos_table [] =

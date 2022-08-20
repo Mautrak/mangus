@@ -379,6 +379,7 @@ struct religion_type
 {
   const char *name;
   const char *followers;
+  const char *leader;
   int vnum;
 };
 

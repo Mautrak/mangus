@@ -720,39 +720,47 @@ void greet_prog_keeper(CHAR_DATA *mob, CHAR_DATA *ch)
 
 void speech_prog_templeman(CHAR_DATA *mob, CHAR_DATA *ch, char *speech)
 {
-char buf[160];
-int chosen = 0;
+	char buf[160];
+	int chosen = 0;
 
-if ( !str_cmp( speech, "din" )|| !str_cmp(speech,"dinler") )
-	mob->status = GIVE_HELP_RELIGION;
-    else if (( chosen = lookup_religion_name( speech)) != 0 )
-	mob->status = RELIG_CHOSEN;
-    else  return;
-
-   if ( mob->status == RELIG_CHOSEN )
-   {
-    if (( ch->religion > 0) && (ch->religion < MAX_RELIGION) )
+	if ( !str_cmp( speech, "din" )|| !str_cmp(speech,"dinler") )
 	{
-    sprintf(buf,"Zaten %s yolundasýn.",
-		religion_table[ch->religion].name);
-	 do_say(mob,buf);
-	 return;
+		mob->status = GIVE_HELP_RELIGION;
+	}
+	else if (( chosen = lookup_religion_name( speech)) != 0 )
+	{
+		mob->status = RELIG_CHOSEN;
+	}
+	else
+	{
+		return;
 	}
 
-    ch->religion = chosen;
-    sprintf(buf,"Bundan böyle sonsuza kadar %s yolundasýn.",
-		religion_table[ch->religion].name);
-    do_say(mob,buf);
-    return;
-   }
-   do_say(mob,(char*)"Hmmm... Eveeett.. Din.. Bununla gerçekten ilgileniyor musun?");
-   do_say(mob,(char*)"Önce yardým almayý dene. 'yardým din' yaz.");
-   do_say(mob,(char*)"Bildiðin gibi bu diyarda üç din vardýr.");
-   do_say(mob,(char*)"Aktular için Nama, Yansýzlar için Bolloh ve Þer için Kamos.");
-   do_say(mob,(char*)"Bana seçmek istediðin dinin efendisini söylemelisin.");
-   do_say(mob,(char*)"Unutma ki dinini bir kez seçersin.");
-   do_say(mob,(char*)"Dinini deðiþtirmek istersen bunun için kimi görevleri bitirmen gerekir.");
-   return;
+	if ( mob->status == RELIG_CHOSEN )
+	{
+		if (( ch->religion > 0) && (ch->religion < MAX_RELIGION) )
+		{
+			sprintf(buf,"Zaten %s yolundasýn.", religion_table[ch->religion].name);
+			do_say(mob,buf);
+			return;
+		}
+
+		ch->religion = chosen;
+		sprintf(buf,"Bundan böyle sonsuza kadar %s yolundasýn.",religion_table[ch->religion].name);
+		do_say(mob,buf);
+		return;
+	}
+	do_say(mob,(char*)"Hmmm... Eveeett.. Din.. Bununla gerçekten ilgileniyor musun?");
+	do_say(mob,(char*)"Bildiðin gibi bu diyarda dört din vardýr.");
+	do_say(mob,(char*)"Kame efendinin dini Kamenilik.");
+	do_say(mob,(char*)"Nir efendinin dini Niryanilik. Nyahilik ve Sintiyanlýk.");
+	do_say(mob,(char*)"Nyah efendinin dini Nyahilik.");
+	do_say(mob,(char*)"Sint efendinin dini Sintiyanlýk.");
+	do_say(mob,(char*)"Bana seçmek istediðin dinin efendisini söylemelisin.");
+	do_say(mob,(char*)"Unutma ki dinini bir kez seçersin.");
+	do_say(mob,(char*)"Din seçimi yeniyaþamdan sonra dahi deðiþmez.");
+	do_say(mob,(char*)"Dinini deðiþtirmek istersen bunun için kimi görevleri bitirmen gerekir.");
+	return;
 }
 
 void greet_prog_templeman(CHAR_DATA *mob, CHAR_DATA *ch)
@@ -774,8 +782,8 @@ int lookup_religion_name (const char *name)
 
    for ( value = 0; value < MAX_RELIGION ; value++)
    {
-	if (LOWER(name[0]) == LOWER(religion_table[value].name[0])
-	&&  !str_prefix( name,religion_table[value].name))
+	if (LOWER(name[0]) == LOWER(religion_table[value].leader[0])
+	&&  !str_prefix( name,religion_table[value].leader))
 	    return value;
    }
 
