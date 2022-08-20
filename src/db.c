@@ -1894,6 +1894,35 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex , AREA_DATA *	pArea)
   mob->damage[DICE_BONUS]	= damage_dice_2(pMobIndex->level);
   mob->dam_type		= dam_type_dice();
   mob->status		= 0;
+  
+  /* mob icin din ayarlama */
+  
+  if(number_percent()<40)
+  {
+	  mob->religion = 0;
+  }
+  else
+  {
+	  switch(number_range(1,4))
+	  {
+		case 1:
+			mob->religion = 1;
+			break;
+		case 2:
+			mob->religion = 2;
+			break;
+		case 3:
+			mob->religion = 3;
+			break;
+		case 4:
+			mob->religion = 4;
+			break;
+	  }
+	
+  }
+  
+  /* mob icin din ayarlama bitti */
+  
   if (mob->dam_type == 0)
     switch(number_range(1,3))
     {

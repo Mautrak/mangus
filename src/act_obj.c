@@ -2382,9 +2382,9 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
         obj_next = obj->next_content;
         if ( can_see_obj( ch, obj ) && !IS_OBJ_STAT(obj,ITEM_NOPURGE) && obj->item_type != ITEM_CORPSE_PC  && CAN_WEAR(obj, ITEM_TAKE) && !CAN_WEAR(obj, ITEM_NO_SAC) )
         {
-          silver = UMAX(1,number_fuzzy(obj->level));
+          silver = number_range(1,obj->cost);
           if (obj->item_type != ITEM_CORPSE_NPC && obj->item_type != ITEM_CORPSE_PC)
-              silver = UMIN(silver,obj->cost);
+              silver = number_range(1,100);
           count++;//kurban edilen eþya sayýsý
           toplam_silver+=silver;//kurban etme iþleminden toplanan akçe sayýsý
           extract_obj( obj );
@@ -2392,9 +2392,20 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
       }
     if (count>0)//eger birþeyler kurban edilebilmiþse
     {
-      sprintf(buf,"Tanrýlar %d kurbanýn için %ld akçe veriyor.\n\r",count,toplam_silver);
-      send_to_char(buf,ch);
-      ch->silver += toplam_silver;
+		if(ch->religion == 0)
+		{
+			printf_to_char(ch,"Tanrýlara %d kurbanýn için tanrýlardan bir iþaret gelmiyor.\n\r",count);
+		}
+		else
+		{
+			printf_to_char(ch,"Tanrýlar %d kurbanýn için %ld akçe veriyor.\n\r",count,toplam_silver);
+			ch->silver += toplam_silver;
+			if(number_percent()<5)
+			{
+				printf_to_char(ch,"Din puanýn artýnca kendini tanrýna yaklaþmýþ hissediyorsun.\n\r");
+				ch->pcdata->din_puani += 1;
+			}
+		}
     }
     return;
       }

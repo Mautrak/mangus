@@ -778,16 +778,17 @@ void greet_prog_templeman(CHAR_DATA *mob, CHAR_DATA *ch)
 
 int lookup_religion_name (const char *name)
 {
-   int value;
+	int value;
 
-   for ( value = 0; value < MAX_RELIGION ; value++)
-   {
-	if (LOWER(name[0]) == LOWER(religion_table[value].leader[0])
-	&&  !str_prefix( name,religion_table[value].leader))
-	    return value;
-   }
+	for ( value = 1; value < MAX_RELIGION ; value++)
+	{
+		if (!strcmp(name,religion_table[value].leader))
+		{
+			return value;
+		}
+	}
 
-   return 0;
+	return 0;
 }
 
 void greet_prog_lions(CHAR_DATA *mob, CHAR_DATA *ch)
