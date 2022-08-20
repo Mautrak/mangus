@@ -138,26 +138,36 @@ void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container )
     CHAR_DATA *gch;
     int members;
     char buffer[100];
-    if ( !CAN_WEAR(obj, ITEM_TAKE) )
-    {
-      send_to_char( "Onu alamazsın.\n\r", ch );
-	return;
-    }
-    if (obj->pIndexData->limit != -1)
-    {
-      if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IS_EVIL(ch)    )
-      ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IS_GOOD(ch)    )
-      ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IS_NEUTRAL(ch) ) )
-      {
-        act( "$p tarafından çarpıldın ve onu yere düşürdün.", ch, obj, NULL, TO_CHAR );
-  			act( "$n $p tarafından çarpıldı ve onu yere düşürdü.",  ch, obj, NULL, TO_ROOM );
-	return;
-      }
-      if( !limit_kontrol(ch,obj) )
-      {
-  			return;
-      }
-    }
+	if ( !CAN_WEAR(obj, ITEM_TAKE) )
+	{
+		send_to_char( "Onu alamazsın.\n\r", ch );
+		return;
+	}
+	if (obj->pIndexData->limit != -1)
+	{
+		if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IS_EVIL(ch)    )
+		||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IS_GOOD(ch)    )
+		||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IS_NEUTRAL(ch) ) )
+		{
+			act( "$p tarafından çarpıldın ve onu yere düşürdün.", ch, obj, NULL, TO_CHAR );
+			act( "$n $p tarafından çarpıldı ve onu yere düşürdü.",  ch, obj, NULL, TO_ROOM );
+			return;
+		}
+		if(IS_PC(ch))
+		{
+			// oyuncu katlini kabul etmeyen karakter limit esya alamasin
+			if(ch->pcdata->oyuncu_katli == 0)
+			{
+				act( "$p tarafından çarpıldın ve onu yere düşürdün.", ch, obj, NULL, TO_CHAR );
+				act( "$n $p tarafından çarpıldı ve onu yere düşürdü.",  ch, obj, NULL, TO_ROOM );
+				return;
+			}
+		}
+		if( !limit_kontrol(ch,obj) )
+		{
+			return;
+		}
+	}
     if ( ch->carry_number + get_obj_number( obj ) > can_carry_n( ch ) )
     {
       act( "$d: bu kadar çok şey taşıyamazsın.",
@@ -1021,6 +1031,16 @@ void do_drag( CHAR_DATA *ch, char *argument )
         act( "$n $p tarafından çarpıldı ve onu düşürdü.",  ch, obj, NULL, TO_ROOM );
         return;
       }
+		if(IS_PC(ch))
+		{
+			// oyuncu katlini kabul etmeyen karakter limit esya alamasin
+			if(ch->pcdata->oyuncu_katli == 0)
+			{
+				act( "$p tarafından çarpıldın ve onu yere düşürdün.", ch, obj, NULL, TO_CHAR );
+				act( "$n $p tarafından çarpıldı ve onu yere düşürdü.",  ch, obj, NULL, TO_ROOM );
+				return;
+			}
+		}
       if( !limit_kontrol(ch,obj) )
       {
   			return;
@@ -1240,6 +1260,15 @@ void do_give( CHAR_DATA *ch, char *argument )
 	  {
 		  send_to_char( "Limit eşyaları başkasına veremezsin.\n\r", ch );
 		  return;
+	  }
+	  
+	  //NPC'ler pk kabul etmeyen PC'ye limit esya veremesin.
+	  if(IS_NPC(ch) && IS_PC(victim))
+	  {
+		  if(victim->pcdata->oyuncu_katli == 0)
+		  {
+			return;
+		  }
 	  }
 	  
       if( !limit_kontrol(victim,obj) )
@@ -3003,6 +3032,17 @@ void do_steal( CHAR_DATA *ch, char *argument )
       	act( "Tanrılar $s davranışını onaylamıyor.",  ch, obj, NULL, TO_ROOM );
 	percent = 0;
       }
+	  
+		if(IS_PC(ch))
+		{
+			// oyuncu katlini kabul etmeyen karakter limit esya alamasin
+			if(ch->pcdata->oyuncu_katli == 0)
+			{
+				act( "$p tarafından çarpıldın ve onu yere düşürdün.", ch, obj, NULL, TO_CHAR );
+				act( "$n $p tarafından çarpıldı ve onu yere düşürdü.",  ch, obj, NULL, TO_ROOM );
+				return;
+			}
+		}
 
       if( !limit_kontrol(ch,obj) )
       {
@@ -3517,6 +3557,16 @@ void do_buy( CHAR_DATA *ch, char *argument )
 	    	ch->reply = keeper;
 	    	return;
 	    }
+		if(IS_PC(ch))
+		{
+			// oyuncu katlini kabul etmeyen karakter limit esya alamasin
+			if(ch->pcdata->oyuncu_katli == 0)
+			{
+				act("$n 'Sana limit eşya satamam' dedi.",keeper,NULL,ch,TO_VICT);
+				ch->reply = keeper;
+				return;
+			}
+		}
       if( !limit_kontrol(ch,obj) )
       {
   			return;
