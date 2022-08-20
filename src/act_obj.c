@@ -879,6 +879,16 @@ act( "$p býrakýyorsun.", ch, obj, NULL, TO_CHAR );
   act("$p dumana dönüþüyor.",ch,obj,NULL,TO_CHAR);
 	  extract_obj(obj);
 	}
+	else if (obj->pIndexData->limit != -1)
+	{
+		//PC'ler limit esya birakirsa esya kaybolsun.
+		if(IS_PC(ch))
+		{
+			act( "$p küçük parçalara bölünüyor.", ch, obj, NULL,TO_ROOM );
+			act( "$p küçük parçalara bölünüyor.", ch, obj, NULL,TO_CHAR );
+			extract_obj( obj );
+		}
+	}
     }
     else
     {
@@ -931,6 +941,16 @@ act( "$p býrakýyorsun.", ch, obj, NULL, TO_CHAR );
     act("$p dumana dönüþüyor.",ch,obj,NULL,TO_CHAR);
             	  extract_obj(obj);
         	}
+			else if (obj->pIndexData->limit != -1)
+			{
+				//PC'ler limit esya birakirsa esya kaybolsun.
+				if(IS_PC(ch))
+				{
+					act( "$p küçük parçalara bölünüyor.", ch, obj, NULL,TO_ROOM );
+					act( "$p küçük parçalara bölünüyor.", ch, obj, NULL,TO_CHAR );
+					extract_obj( obj );
+				}
+			}
 	    }
 	}
 
@@ -1211,9 +1231,17 @@ void do_give( CHAR_DATA *ch, char *argument )
       ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IS_GOOD(victim)    )
       ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IS_NEUTRAL(victim) ) )
       {
-        send_to_char( "Kurbanýnýn yönelimi eþyanýnkiyle uyuþmuyor.", ch );
+        send_to_char( "Kurbanýnýn yönelimi eþyanýnkiyle uyuþmuyor.\n\r", ch );
 	return;
       }
+	  
+	  //PC'ler limit esya veremesin.
+	  if(IS_PC(ch))
+	  {
+		  send_to_char( "Limit eþyalarý baþkasýna veremezsin.\n\r", ch );
+		  return;
+	  }
+	  
       if( !limit_kontrol(victim,obj) )
       {
   			return;

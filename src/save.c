@@ -1178,7 +1178,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp )
 	    break;
 	
 	case 'O':
-	    KEY( "OyuncuKatli",	ch->pcdata->oyuncu_katli,		fread_string( fp ) );
+	    KEY( "OyuncuKatli",	ch->pcdata->oyuncu_katli,		fread_number( fp ) );
 	    break;
 
 	case 'P':
