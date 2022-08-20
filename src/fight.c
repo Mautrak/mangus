@@ -2803,58 +2803,75 @@ void group_gain( CHAR_DATA *ch, CHAR_DATA *victim )
  */
 int xp_compute(CHAR_DATA *gch, CHAR_DATA *victim, int total_levels,int members)
 {
-  int xp;
-  int base_exp;
-  int level_range;
-  int neg_cha=0, pos_cha=0;
+	int xp;
+	int base_exp;
+	int level_range;
+	int neg_cha=0, pos_cha=0;
 
-  level_range = victim->level - gch->level;
+	level_range = victim->level - gch->level;
 
-  switch (level_range)
-    {
-    default : 	base_exp =   0;		break;
-  case -9 :	base_exp =   1;		break;
-  case -8 :	base_exp =   2;		break;
-  case -7 :	base_exp =   5;		break;
-  case -6 : 	base_exp =   9;		break;
-  case -5 :	base_exp =  11;		break;
-  case -4 :	base_exp =  22;		break;
-  case -3 :	base_exp =  33;		break;
-  case -2 :	base_exp =  43;		break;
-  case -1 :	base_exp =  60;		break;
-  case  0 :	base_exp =  74;		break;
-  case  1 :	base_exp =  84;		break;
-  case  2 :	base_exp =  99;		break;
-  case  3 :	base_exp = 121;		break;
-  case  4 :	base_exp = 143;		break;
-  }
+	switch (level_range)
+	{
+		default : 	base_exp =   0;		break;
+		case -9 :	base_exp =   1;		break;
+		case -8 :	base_exp =   2;		break;
+		case -7 :	base_exp =   5;		break;
+		case -6 : 	base_exp =   9;		break;
+		case -5 :	base_exp =  11;		break;
+		case -4 :	base_exp =  22;		break;
+		case -3 :	base_exp =  33;		break;
+		case -2 :	base_exp =  43;		break;
+		case -1 :	base_exp =  60;		break;
+		case  0 :	base_exp =  74;		break;
+		case  1 :	base_exp =  84;		break;
+		case  2 :	base_exp =  99;		break;
+		case  3 :	base_exp = 121;		break;
+		case  4 :	base_exp = 143;		break;
+	}
 
-  if (level_range > 4)
-    base_exp = 140 + 20 * (level_range - 4);
+	if (level_range > 4)
+	{
+		base_exp = 140 + 20 * (level_range - 4);
+	}
 
 
-  /* calculate exp multiplier */
-  if (IS_SET(victim->act,ACT_NOALIGN))
-    xp = base_exp;
+	/* calculate exp multiplier */
+	if (IS_SET(victim->act,ACT_NOALIGN))
+	{
+		xp = base_exp;
+	}
 
-  /* alignment */
-  else if ((IS_EVIL(gch) && IS_GOOD(victim)) || (IS_EVIL(victim) && IS_GOOD(gch)))
-    xp = base_exp * 8/5;
+	/* alignment */
+	else if ((IS_EVIL(gch) && IS_GOOD(victim)) || (IS_EVIL(victim) && IS_GOOD(gch)))
+	{
+		xp = base_exp * 8/5;
+	}
 
-  else if ( IS_GOOD(gch) && IS_GOOD(victim) )
-    xp = 0;
+	else if ( IS_GOOD(gch) && IS_GOOD(victim) )
+	{
+		xp = 0;
+	}
 
-  else if ( !IS_NEUTRAL(gch) && IS_NEUTRAL(victim) )
-    xp = (int)((float)base_exp * 1.1);
+	else if ( !IS_NEUTRAL(gch) && IS_NEUTRAL(victim) )
+	{
+		xp = (int)((float)base_exp * 1.1);
+	}
 
-  else if ( IS_NEUTRAL(gch) && !IS_NEUTRAL(victim) )
-    xp = (int)((float)base_exp * 1.3);
+	else if ( IS_NEUTRAL(gch) && !IS_NEUTRAL(victim) )
+	{
+		xp = (int)((float)base_exp * 1.3);
+	}
 
-  else xp = base_exp;
+	else
+	{
+		xp = base_exp;
+	}
 
     /* more exp at the low levels */
     if (gch->level < 6)
-    	xp = 15 * xp / (gch->level + 4);
+	{
+		xp = 15 * xp / (gch->level + 4);
+	}
 
     /* randomize the rewards */
     xp = number_range (xp * 8/9, xp * 11/10);
@@ -2863,17 +2880,30 @@ int xp_compute(CHAR_DATA *gch, CHAR_DATA *victim, int total_levels,int members)
     xp = xp * gch->level/total_levels;
 
     if (members == 2)
-      xp *= ( 20/10 );
+	{
+		xp *= ( 20/10 );
+	}
     if (members == 3)
-      xp *= ( 30/10 );
+	{
+		xp *= ( 30/10 );
+	}
 
     if (gch->level < KIDEMLI_OYUNCU_SEVIYESI)
-	 xp = UMIN((250 + dice(1,40)),xp);
+	{
+		xp = UMIN((250 + dice(1,40)),xp);
+	}
     else if (gch->level < 40)
-	xp = UMIN((225 + dice(1,40)),xp);
+	{
+		xp = UMIN((225 + dice(1,40)),xp);
+	}
     else if (gch->level < 60)
-	xp = UMIN((200 + dice(1,40)),xp);
-    else xp = UMIN((180 + dice(1,20)),xp);
+	{
+		xp = UMIN((200 + dice(1,40)),xp);
+	}
+    else
+	{
+		xp = UMIN((180 + dice(1,20)),xp);
+	}
 
     xp += (xp * ( gch->max_hit - gch->hit )) / (gch->max_hit * 5 );
 
@@ -2899,7 +2929,7 @@ int xp_compute(CHAR_DATA *gch, CHAR_DATA *victim, int total_levels,int members)
 	}
 
 	if ( neg_cha )
-  {
+	{
 		if ( (gch->pcdata->anti_killed % 100) == 99 )
 		{
 			printf_to_char(gch,"Þimdiye kadar %d adet seninle ayný yönelime sahip canlý öldürdün.",gch->pcdata->anti_killed);
@@ -2921,6 +2951,12 @@ int xp_compute(CHAR_DATA *gch, CHAR_DATA *victim, int total_levels,int members)
 				gch->perm_stat[STAT_CHA] += 1;
 			}
 		}
+	}
+	
+	// Oyuncu katline dahil olan oyuncular %20 fazla TP kazansin.
+	if (gch->pcdata->oyuncu_katli == 1)
+	{
+		xp += ((int)(xp / 5))
 	}
 
 	if(IS_SET(gch->pcdata->dilek,DILEK_FLAG_TECRUBE))
