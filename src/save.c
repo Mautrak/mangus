@@ -226,6 +226,8 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
     fprintf( fp, "Sex  %d\n",	ch->sex			);
     fprintf( fp, "Cla  %d\n",	ch->iclass		);
     fprintf( fp, "Levl %d\n",	ch->level		);
+	fprintf( fp, "OyuncuKatli %d\n",	ch->pcdata->oyuncu_katli		);
+	fprintf( fp, "YeniyasamSayisi %d\n",	ch->pcdata->yeniyasam_sayisi		);
     if (ch->trust != 0)
 	fprintf( fp, "Tru  %d\n",	ch->trust	);
     fprintf( fp, "Plyd %d\n",
@@ -840,6 +842,8 @@ void fread_char( CHAR_DATA *ch, FILE *fp )
     sprintf(buf,"Karakter yukleme: %s.",ch->name);
     log_string(buf);
     ch->pcdata->bank_s = 0;
+	ch->pcdata->yeniyasam_sayisi = 0;
+	ch->pcdata->oyuncu_katli = 0;
 	ch->pcdata->questpractice = 0;
     tmp_silver = 0;
     ch->pcdata->ghost_mode_counter = 0;
@@ -1172,6 +1176,10 @@ void fread_char( CHAR_DATA *ch, FILE *fp )
 	case 'N':
 	    KEY( "Name",	ch->name,		fread_string( fp ) );
 	    break;
+	
+	case 'O':
+	    KEY( "OyuncuKatli",	ch->pcdata->oyuncu_katli,		fread_string( fp ) );
+	    break;
 
 	case 'P':
 	    KEY( "Password",	ch->pcdata->pwd,	fread_string( fp ) );
@@ -1332,6 +1340,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp )
 	    break;
   case 'Y':
 	    KEY( "YardimPuani",   ch->pcdata->yardim_puani,fread_number( fp) );
+		KEY( "YeniyasamSayisi",   ch->pcdata->yeniyasam_sayisi,fread_number( fp) );
 	    break;
 
 	case 'W':

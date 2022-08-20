@@ -221,8 +221,9 @@ printf_to_char(ch, "{Coymalý yüzük{x........({yoymalý{x  ).......{R750 gp{x\n\r"
 printf_to_char(ch, "{Ckakmalý yüzük{x.......({ykakmalý{x ).......{R750 gp{x\n\r");
 printf_to_char(ch, "{Ctesti{x...............({ytesti{x   ).......{R500 gp{x\n\r");
 printf_to_char(ch, "{C1 bünye puaný{x.......({ybünye{x   ).......{R250 gp{x\n\r");
-printf_to_char(ch, "{C15.000 akçe{x.........({yakçe{x    ).......{R10  gp{x\n\r");
+printf_to_char(ch, "{C15.000 akçe{x.........({yakçe{x    )........{R10 gp{x\n\r");
 printf_to_char(ch, "{Cdinden çýkma{x........({yateist{x  )......{R1000 gp{x\n\r");
+printf_to_char(ch, "{Coyuncu katline giriþ{x({ykatlet{x  ).......{R100 gp{x\n\r");
 if ( ch->iclass == CLASS_SAMURAI )
 {
 printf_to_char(ch, "{Ckatana{x..............({ykatana{x  ).......{R100 gp{x\n\r");
@@ -337,6 +338,30 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 			ch->religion = 0;
 			act("$n artýk herhangi bir tanrýya inanmýyor.", ch, NULL, questman, TO_ROOM );
 			act("$N dinden çýkmana yardým ediyor.",   ch, NULL, questman, TO_CHAR );
+			return;
+		}
+		else
+		{
+			sprintf(buf, "Üzgünüm %s, bunun için yeterli görev puanýn yok.",ch->name);
+			do_tell_quest(ch,questman,buf);
+			return;
+		}
+	}
+	
+	else if (is_name(arg2, (char*)"katlet"))
+	{
+		if (ch->pcdata->oyuncu_katli == 1)
+		{
+		do_tell_quest(ch,questman,(char*)"Zaten oyuncu katli sözleþmesini kabul etmiþsin.");
+		return;
+		}
+
+		if (ch->pcdata->questpoints >= 100)
+		{
+			ch->pcdata->questpoints -= 100;
+			ch->pcdata->oyuncu_katli = 1;
+			act("$n oyuncu katli sözleþmesini kabul ediyor.", ch, NULL, questman, TO_ROOM );
+			act("$N oyuncu katli sözleþmesini imzalarken sana yardýmcý oluyor.",   ch, NULL, questman, TO_CHAR );
 			return;
 		}
 		else

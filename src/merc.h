@@ -2206,6 +2206,8 @@ struct	pc_data
     int			log_date[MAX_TIME_LOG];	/* last MTL days */
     int			log_time[MAX_TIME_LOG];	/* min.s of playing each day */
 	int			dilek;
+	int			yeniyasam_sayisi;
+	sh_int		oyuncu_katli;
 	long		rk_puani;
 	long		din_puani;
 	long		yardim_puani;

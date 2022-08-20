@@ -1884,6 +1884,12 @@ bool is_safe_nomessage(CHAR_DATA *ch, CHAR_DATA *victim )
   	( victim->level >= (ch->level + UMAX(4,victim->level/10 +2) )
 		|| victim->level <= (ch->level - UMAX(4,victim->level/10 +2))) )
     return TRUE;
+	
+	// oyuncu katline katilmak istemeyen oyunculari haric tutalim
+	if (IS_PC(ch) && IS_PC(victim) && (ch->pcdata->oyuncu_katli == 0 || victim->pcdata->oyuncu_katli == 0))
+	{
+		return TRUE;
+	}
 
   return FALSE;
 }

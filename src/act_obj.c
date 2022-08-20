@@ -2394,7 +2394,7 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
     {
 		if(ch->religion == 0)
 		{
-			printf_to_char(ch,"Tanrýlara %d kurbanýn için tanrýlardan bir iþaret gelmiyor.\n\r",count);
+			printf_to_char(ch,"%d kurbanýn için tanrýlardan bir iþaret gelmiyor.\n\r",count);
 		}
 		else
 		{
