@@ -924,25 +924,25 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
     {
 		{"ranger","korucu"}, "Krc",  STAT_STR,  OBJ_VNUM_SCHOOL_SWORD,
 		{ 6156, 0, 0, 0, 0, 0 },  75,  18,  -8,  90, 60, FALSE,
-		200,{1,0,0,1,1,5},CR_ALL
+		200,{1,0,0,1,2,5},CR_ALL
     },
 
     {
         {"transmuter","biçimci"}, "Biç",  STAT_INT,  OBJ_VNUM_SCHOOL_DAGGER,
         { 3073, 0, 0, 0, 0, 0 },  75,  18, 2,  60,  100, TRUE,
-        0,{0,3,0,0,0,5},CR_ALL
+        0,{0,3,0,0,1,5},CR_ALL
     },
 
     {
         {"samurai","samuray"}, "Sam",  STAT_STR,  OBJ_VNUM_SCHOOL_SWORD,
         { 3075, 9633, 0, 0, 0, 0 },  75,  18,  -10,  100,60,FALSE,
-        500,{1,1,1,0,1,5},CR_ALL
+        500,{2,1,1,0,1,5},CR_ALL
     },
 
 	{
 		{  "vampire","vampir"}, "Vam", STAT_INT,  OBJ_VNUM_SCHOOL_DAGGER,
 		{ 5395, 5396, 0, 0, 0, 0 },  75,  18, -6,  80,  70, TRUE,
-		300,{1,2,0,0,0,5},CR_EVIL
+		300,{2,2,0,0,1,5},CR_EVIL
 	},
 
    {
