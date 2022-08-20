@@ -1990,10 +1990,10 @@ void mob_score(CHAR_DATA *ch,CHAR_DATA *mob)
   printf_to_char(ch,"{c| Yönelim : {w%-8d{c | Bün: {w%-2d{c        | ZZ     : {w%-4d {c|               |\n\r",mob->alignment,mob->perm_stat[STAT_CON],GET_DAMROLL(mob));
   printf_to_char(ch,"{c|                    | Kar: {w%-2d{c        | VZ     : {w%-4d {c|               |\n\r",mob->perm_stat[STAT_CHA],GET_HITROLL(mob));
 	printf_to_char(ch,"{c|--------------------|----------------|---------------'---------------'{x\n\r");
-	printf_to_char(ch,"{c| Yp    : {w%-5d/%-5d{c| Akçe : {w%-7ld {c| Din: {w%-12s{c              |\n\r",mob->hit,  mob->max_hit,mob->silver,religion_table[mob->religion].name);
-	printf_to_char(ch,"{c| Mana  : {w%-5d/%-5d{c| Beden: {w%-8d{c|                                      |\n\r",mob->mana, mob->max_mana,mob->size);
-	printf_to_char(ch,"{c| Hp    : {w%-5d/%-5d{c|                |                                      |\n\r",mob->move, mob->max_move);
-	printf_to_char(ch,"{c| Seviye: {w%-7ld{c    |                |                                      |\n\r",mob->level);
+	printf_to_char(ch,"{c| Yp    : {w%-5d/%-5d{c| Akçe : {w%-7ld {c| Din: {w%-12s{c             |\n\r",mob->hit,  mob->max_hit,mob->silver,religion_table[mob->religion].name);
+	printf_to_char(ch,"{c| Mana  : {w%-5d/%-5d{c| Beden: {w%-8d{c|                               |\n\r",mob->mana, mob->max_mana,mob->size);
+	printf_to_char(ch,"{c| Hp    : {w%-5d/%-5d{c|                |                               |\n\r",mob->move, mob->max_move);
+	printf_to_char(ch,"{c| Seviye: {w%-7ld{c    |                |                               |\n\r",mob->level);
 	printf_to_char(ch,"{c|--------------------'------------------'-----------------------------,{x\n\r");
   printf_to_char(ch,"{c| {wBaðýþýklýklar, Dayanýklýlýklar, Zayýflýklar{c                         |{x\n\r");
   printf_to_char(ch,"{c| {cteshir:%s%s%s {cçaðrý  :%s%s%s {cbüyü  :%s%s%s {csilah :%s%s%s {cezici :%s%s%s {cdelici  :%s%s%s{c|{x\n\r",(mob->imm_flags  & IMM_CHARM)?"{w+{x":"{D-{x",(mob->res_flags  & RES_CHARM)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_CHARM)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_SUMMON)?"{w+{x":"{D-{x",(mob->res_flags  & RES_SUMMON)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_SUMMON)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_MAGIC)?"{w+{x":"{D-{x",(mob->res_flags  & RES_MAGIC)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_MAGIC)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_WEAPON)?"{w+{x":"{D-{x",(mob->res_flags  & RES_WEAPON)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_WEAPON)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_BASH)?"{w+{x":"{D-{x",(mob->res_flags  & RES_BASH)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_BASH)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_PIERCE)?"{w+{x":"{D-{x",(mob->res_flags  & RES_PIERCE)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_PIERCE)?"{w+{x":"{D-{x");
