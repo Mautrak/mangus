@@ -1858,6 +1858,7 @@ void do_worth( CHAR_DATA *ch, char *argument )
 void do_score( CHAR_DATA *ch, char *argument )
 {
 	char sex[8];
+	char oyuncukatli[6];
   char dogumGunu[20];
   char yonelim_etik[20];
 	sex[0]='\0';
@@ -1909,6 +1910,19 @@ void do_score( CHAR_DATA *ch, char *argument )
     }
 
     game_time_to_string(victim->pcdata->birth_time,dogumGunu);
+	
+	if(victim->pcdata->oyuncu_katli == 0)
+	{
+		strcpy(oyuncukatli,"Hayýr");
+	}
+	else if(victim->pcdata->oyuncu_katli == 1)
+	{
+		strcpy(oyuncukatli,"Evet");
+	}
+	else
+	{
+		strcpy(oyuncukatli,"Bug");
+	}
   }
   else
   {
@@ -1927,6 +1941,19 @@ void do_score( CHAR_DATA *ch, char *argument )
     }
 
     game_time_to_string(ch->pcdata->birth_time,dogumGunu);
+	
+	if(ch->pcdata->oyuncu_katli == 0)
+	{
+		strcpy(oyuncukatli,"Hayýr");
+	}
+	else if(ch->pcdata->oyuncu_katli == 1)
+	{
+		strcpy(oyuncukatli,"Evet");
+	}
+	else
+	{
+		strcpy(oyuncukatli,"Bug");
+	}
   }
 
   sprintf( yonelim_etik, "%s/%s", IS_GOOD((victim==NULL?ch:victim)) ? "iyi" :	IS_EVIL((victim==NULL?ch:victim)) ? "kem" : "yansýz",((victim==NULL?ch:victim)->ethos==1?"tüze":(victim==NULL?ch:victim)->ethos==2?"yansýz":"kaos") );
@@ -1949,7 +1976,7 @@ void do_score( CHAR_DATA *ch, char *argument )
   printf_to_char(ch,"{c| TP    : {w%-12ld{c    | Kar: {w%-2d(%-2d){c  | GörevZ : {w%-2d{c                |\n\r",(victim==NULL?ch:victim)->exp,(victim==NULL?ch:victim)->perm_stat[STAT_CHA],get_curr_stat((victim==NULL?ch:victim),STAT_CHA),((IS_SET((victim==NULL?ch:victim)->act, PLR_QUESTOR))?((victim==NULL?ch:victim)->pcdata->countdown):((victim==NULL?ch:victim)->pcdata->nextquest)));
   printf_to_char(ch,"{c| Korkak: {w%-10d{c      | ZZ : {w%-3d{c     | GörevPr: {w%-2d{c                |\n\r",(victim==NULL?ch:victim)->wimpy,GET_DAMROLL((victim==NULL?ch:victim)),(victim==NULL?ch:victim)->pcdata->questpractice);
   printf_to_char(ch,"{c| Ölüm  : {w%-3d{c             | VZ : {w%-3d{c     | RolP   : {w%-6ld{c            |\n\r",(victim==NULL?ch:victim)->pcdata->death,GET_HITROLL((victim==NULL?ch:victim)), (victim==NULL?ch:victim)->pcdata->rk_puani);
-  printf_to_char(ch,"{c| Din   : {w%-12s{c    |              | DinP   : {w%-6ld{c            |\n\r",religion_table[(victim==NULL?ch:victim)->religion].name, (victim==NULL?ch:victim)->pcdata->din_puani);
+  printf_to_char(ch,"{c| Din   : {w%-12s{c    | OK : {w%-6s{c   | DinP   : {w%-6ld{c            |\n\r",religion_table[(victim==NULL?ch:victim)->religion].name, oyuncukatli, (victim==NULL?ch:victim)->pcdata->din_puani);
   printf_to_char(ch,"{c|-------------------------'--------------'----------------------------|{w\n\r");
   printf_to_char(ch,"{c| {wBaðýþýklýklar, Dayanýklýlýklar, Zayýflýklar{c                         |{x\n\r");
   printf_to_char(ch,"{c| {cteshir:%s%s%s {cçaðrý  :%s%s%s {cbüyü  :%s%s%s {csilah :%s%s%s {cezici :%s%s%s {cdelici  :%s%s%s{c|{x\n\r",((victim==NULL?ch:victim)->imm_flags  & IMM_CHARM)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_CHARM)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_CHARM)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_SUMMON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_SUMMON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_SUMMON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_MAGIC)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_MAGIC)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_MAGIC)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_WEAPON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_WEAPON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_WEAPON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_BASH)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_BASH)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_BASH)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_PIERCE)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_PIERCE)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_PIERCE)?"{w+{x":"{D-{x");
