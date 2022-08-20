@@ -840,6 +840,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp )
     sprintf(buf,"Karakter yukleme: %s.",ch->name);
     log_string(buf);
     ch->pcdata->bank_s = 0;
+	ch->pcdata->questpractice = 0;
     tmp_silver = 0;
     ch->pcdata->ghost_mode_counter = 0;
 

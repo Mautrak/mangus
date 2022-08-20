@@ -2092,7 +2092,7 @@ ch->pcdata->confirm_remort = FALSE;
 		printf_to_char(ch,"    AYNI ÝSÝMLE YENÝ BÝR KARAKTER YARAT VE ÖLÜMSÜZLERE DURUMU BÝLDÝR.\n\r");
 		printf_to_char(ch,"Unutma ki, eski karaktere ait aþaðýdaki özellikler aynen korunur:\n\r");
 		printf_to_char(ch,"        bankadakiler dahil tüm akçe\n\r");
-		printf_to_char(ch,"        pratik, eðitim seanslarý ve görev puaný\n\r");
+		printf_to_char(ch,"        pratik, eðitim seanslarý, görev pratik deðeri ve görev puaný\n\r");
 		printf_to_char(ch,"Yeni yaþamýnda 6 yüzük takabileceksin.\n\r");
 		printf_to_char(ch,"             Ve fazladan 10 eðitim seansýn olacak.\n\r");
 
@@ -2138,7 +2138,7 @@ ch->pcdata->confirm_remort = FALSE;
     printf_to_char(ch,"Yeniyaþam komutunu argümanla yazmak yeniyaþam durumunu iptal edecektir.\n\r");
     printf_to_char(ch,"Unutma ki, eski karaktere ait aþaðýdaki özellikler aynen korunur:\n\r");
   	printf_to_char(ch,"        bankadakiler dahil tüm akçe\n\r");
-  	printf_to_char(ch,"        pratik, eðitim seanslarý ve görev puaný\n\r");
+  	printf_to_char(ch,"        pratik, eðitim seanslarý, görev pratik deðeri ve görev puaný\n\r");
   	printf_to_char(ch,"Yeni yaþamýnda 6 yüzük takabileceksin.\n\r");
   	printf_to_char(ch,"             Ve fazladan 10 eðitim seansýn olacak.\n\r");
     ch->pcdata->confirm_remort = TRUE;
