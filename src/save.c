@@ -350,6 +350,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
 
     if (ch->pcdata->questpoints !=0)
         fprintf( fp, "QuestPnts %d\n", ch->pcdata->questpoints	);
+	fprintf( fp, "QuestPractice %d\n", ch->pcdata->questpractice	);
     if (ch->pcdata->nextquest !=0)
         fprintf( fp ,"QuestNext %d\n", ch->pcdata->nextquest	);
     if (IS_QUESTOR(ch))
@@ -1220,6 +1221,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp )
 	    KEY( "QuestMob",	ch->pcdata->questmob,	fread_number( fp) );
 	    KEY( "QuestGiv",	ch->pcdata->questgiver,	fread_number( fp) );
       KEY( "QuestRoom",	ch->pcdata->questroom,	fread_number( fp) );
+	  KEY( "QuestPractice",	ch->pcdata->questpractice,	fread_number( fp) );
 	    KEY( "QuestPnts",   ch->pcdata->questpoints,fread_number( fp) );
             KEY( "QuestNext",   ch->pcdata->nextquest,	fread_number( fp) );
        	    KEY( "Ques",	ch->quest, 		fread_flag( fp)	  );

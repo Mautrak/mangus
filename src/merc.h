@@ -1863,8 +1863,6 @@ struct	kill_data
 #define QUEST_BACKPACK		(L)
 #define QUEST_DECANTER		(O)
 
-#define QUEST_PRACTICE		(S)
-
 /* time log problems */
 #define TLP_NOLOG		(A)
 #define TLP_BOOT		(B)
@@ -2196,6 +2194,7 @@ struct	pc_data
     int			has_killed;
     sh_int		questgiver;	/* quest */
     int                 questpoints;	/* quest */
+	int			questpractice;
     sh_int              nextquest;	/* quest */
     sh_int              countdown;	/* quest */
     sh_int              questmob;       /* quest */
@@ -2209,6 +2208,7 @@ struct	pc_data
 	long		rk_puani;
 	long		din_puani;
 	long		yardim_puani;
+	
 };
 
 

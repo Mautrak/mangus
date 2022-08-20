@@ -2484,25 +2484,6 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 
 	do_look( ch, (char*)"auto" );
 
-	/*
-	if (ch->silver > 10000 && !IS_IMMORTAL(ch))
-	{
-	    sprintf(buf,"Baþkanýn açacaðý yeni bar için %ld akçe vergi ödemeniz gerekiyor.\n\r",
-		(ch->silver - 10000) / 2);
-	    send_to_char(buf,ch);
-	    ch->silver -= (ch->silver - 10000) / 2;
-	}
-
-
-	if (ch->pcdata->bank_s > 100000 && !IS_IMMORTAL(ch))
-	{
-		sprintf(buf,"Ne yazýk ki sultanýn savaþ giderleri için %ld akçe vergi ödemeniz gerekiyor.\n\r",
-		(ch->pcdata->bank_s - 100000) / 10 );
-	    send_to_char(buf,ch);
-	    ch->pcdata->bank_s -= (ch->pcdata->bank_s - 100000) / 10;
-	}
-	*/
-
 	if (ch->pet != NULL)
 	{
 	    char_to_room(ch->pet,ch->in_room);

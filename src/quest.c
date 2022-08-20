@@ -507,9 +507,9 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
   }
 	else if (is_name(arg2, (char*)"pratik"))
 	{
-	    if (IS_SET(ch->quest, QUEST_PRACTICE))
+	    if (ch->pcdata->questpractice == 10)
 	    {
-        sprintf(buf, "Üzgünüm %s, bu ödülü daha önce almýþtýn!",ch->name);
+        sprintf(buf, "Üzgünüm %s, bu ödülü daha önce 10 kez almýþtýn!",ch->name);
 		do_tell_quest(ch,questman,buf);
 		return;
 	    }
@@ -520,7 +520,7 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 	        ch->practice += 100;
           act("$N $e 100 pratik seansý veriyor.", ch, NULL, questman, TO_ROOM );
           act("$N sana 100 pratik seansý veriyor.",   ch, NULL, questman, TO_CHAR );
-		SET_BIT(ch->quest, QUEST_PRACTICE);
+		ch->pcdata->questpractice += 1;
 	        return;
 	    }
 	    else
