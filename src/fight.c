@@ -2956,7 +2956,7 @@ int xp_compute(CHAR_DATA *gch, CHAR_DATA *victim, int total_levels,int members)
 	// Oyuncu katline dahil olan oyuncular %20 fazla TP kazansin.
 	if (gch->pcdata->oyuncu_katli == 1)
 	{
-		xp += ((int)(xp / 5))
+		xp += ((int)(xp / 5));
 	}
 
 	if(IS_SET(gch->pcdata->dilek,DILEK_FLAG_TECRUBE))
