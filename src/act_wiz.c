@@ -5076,6 +5076,12 @@ void do_induct( CHAR_DATA *ch, char *argument)
       return;
 	}
 
+  if (victim->pcdata->oyuncu_katli == 0 )
+  {
+    act("Fakat $N oyuncu katlini kabul etmiyor!",ch,NULL,victim,TO_CHAR);
+    return;
+  }
+  
   if (victim->iclass == CLASS_WARRIOR  && i == CABAL_SHALAFI )
   {
     act("Fakat $N pis bir büyücü!",ch,NULL,victim,TO_CHAR);
