@@ -156,63 +156,15 @@ void do_objlist( CHAR_DATA *ch, char *argument )
 FILE *fp;
 OBJ_DATA *obj;
 AFFECT_DATA *paf;
-char arg1 [MAX_INPUT_LENGTH];
 int apply_location;
 
-	argument = one_argument( argument, arg1 );
-
-    if ( arg1[0] == '\0' )
-    {
-	send_to_char("Syntax:\n\r",ch);
-	send_to_char("  objlist <file|str|int|wis|dex|con|cha>\n\r",ch);
-	return;
-    }
-	
-	if ( !str_cmp( arg1, "str" ) || !str_cmp( arg1, "int" ) || !str_cmp( arg1, "wis" ) || !str_cmp( arg1, "dex" ) || !str_cmp( arg1, "con" ) || !str_cmp( arg1, "cha" ) )
-	{
-		if(!str_cmp( arg1, "str" ))
-			apply_location = 1;
-		else if(!str_cmp( arg1, "dex" ))
-			apply_location = 2;
-		else if(!str_cmp( arg1, "int" ))
-			apply_location = 3;
-		else if(!str_cmp( arg1, "wis" ))
-			apply_location = 4;
-		else if(!str_cmp( arg1, "con" ))
-			apply_location = 5;
-		else if(!str_cmp( arg1, "cha" ))
-			apply_location = 6;
-		for( obj=object_list; obj!=NULL; obj = obj->next )
-		{
-			if (!obj->enchanted)
-			{
-				for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
-				{
-					if(paf->location == apply_location)
-					{
-						printf_to_char(ch,"%d - %s - %d etkiler.\n\r",obj->pIndexData->vnum,obj->name,paf->modifier);
-					}
-				}
-			}
-			for ( paf = obj->affected; paf != NULL; paf = paf->next )
-			{
-				if(paf->location == apply_location)
-				{
-					printf_to_char(ch,"%d - %s - %d etkiler.\n\r",obj->pIndexData->vnum,obj->name,paf->modifier);
-				}
-			}
-		}
-		return;
-	}
-	else if ( !str_cmp( arg1, "file" ) )
-	{
 	   if ( (fp=fopen( "objlist.csv", "w+" ) ) == NULL )
 	   {
 			send_to_char( "File error.\n\r", ch );
 			return;
 	   }
 
-		fprintf(fp, "Vnum,Name,Type,Extra Flags,Weight,Cost,Level,Value0,Value1,Value2,Value3,Value4,Paf1,Paf2,Paf3,Paf4,Paf5,Paf6,Paf7,Paf8,Paf9,Paf10\n");
+		fprintf(fp, "Vnum,Name,Type,Extra Flags,Weight,Cost,Level,Value0,Value1,Value2,Value3,Value4,Paf1,Paf2,Paf3,Paf4,Paf5,Paf6,Paf7,Paf8,Paf9,Paf10,Paf11,Paf12,Paf13,Paf14,Paf15\n");
 	   for( obj=object_list; obj!=NULL; obj = obj->next )
 	   {
 		   
@@ -330,19 +282,14 @@ int apply_location;
 					}
 				}
 			}
-			for(pafcounter;pafcounter<11;pafcounter=pafcounter+1)
+			for(pafcounter;pafcounter<16;pafcounter=pafcounter+1)
 			{
 				fprintf(fp,",");
 			}
 			fprintf(fp,"\n");
 		 }
 	   fclose( fp );
-	   return;
-	}
-	else
-	{
-		printf_to_char(ch,"Hý?\n\r");
-	}
+
 	return;
 }
 
