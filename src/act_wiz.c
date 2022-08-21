@@ -329,7 +329,6 @@ int apply_location;
 				}
 			}
 		 }
-	   }
 	   fclose( fp );
 	   return;
 	}
