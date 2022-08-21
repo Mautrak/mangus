@@ -298,7 +298,6 @@ int apply_location;
 								fprintf(fp,",unknown bit %d:%d",paf->where,paf->bitvector);
 								break;
 						}
-						send_to_char( buf, ch );
 					}
 				}
 			}
