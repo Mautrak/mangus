@@ -212,7 +212,7 @@ int apply_location;
 			return;
 	   }
 
-		fprintf(fp, "Vnum,Name,Type,Extra Flags,Weight,Cost,Level,Value0,Value1,Value2,Value3,Value4");
+		fprintf(fp, "Vnum,Name,Type,Extra Flags,Weight,Cost,Level,Value0,Value1,Value2,Value3,Value4,Paf1,Paf2,Paf3,Paf4,Paf5,Paf6,Paf7,Paf8,Paf9,Paf10\n");
 	   for( obj=object_list; obj!=NULL; obj = obj->next )
 	   {
 		   
@@ -328,6 +328,7 @@ int apply_location;
 					}
 				}
 			}
+			fprintf(fp,"\n");
 		 }
 	   fclose( fp );
 	   return;
