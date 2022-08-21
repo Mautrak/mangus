@@ -261,7 +261,7 @@ int apply_location;
 			break;
 
 			case ITEM_DRINK_CON:
-				fprintf(fp,",,,%s,",liq_table[obj->value[2]].liq_name);
+				fprintf(fp,",,,%s",liq_table[obj->value[2]].liq_name);
 				break;
 
 			case ITEM_CONTAINER:
@@ -293,8 +293,10 @@ int apply_location;
 				fprintf( fp,",%d,%d,%d,%d,",obj->value[0], obj->value[1], obj->value[2], obj->value[3] );
 				break;
 			}
+			int pafcounter = 0;
 			for( paf=obj->pIndexData->affected; paf != NULL; paf = paf->next )
 			{
+				pafcounter += 1;
 				if ( paf == NULL )
 				{
 					continue;
@@ -327,6 +329,10 @@ int apply_location;
 							break;
 					}
 				}
+			}
+			for(pafcounter;pafcounter<11;pafcounter=pafcounter+1)
+			{
+				fprintf(fp,",");
 			}
 			fprintf(fp,"\n");
 		 }
