@@ -168,7 +168,7 @@ int apply_location;
 	   for( obj=object_list; obj!=NULL; obj = obj->next )
 	   {
 		   
-			fprintf( fp, "%d,%s,%s,%d,%s,%d,%d,%d,%d", obj->pIndexData->vnum, obj->name, item_type_name( obj ), obj->pIndexData->limit, extra_bit_name( obj->extra_flags ), obj->weight / 10, obj->cost, obj->level, obj->pObjIndex->condition);
+			fprintf( fp, "%d,%s,%s,%d,%s,%d,%d,%d,%d", obj->pIndexData->vnum, obj->name, item_type_name( obj ), obj->pIndexData->limit, extra_bit_name( obj->extra_flags ), obj->weight / 10, obj->cost, obj->level, obj->pIndexData->condition);
 		   
 
 			switch ( obj->item_type )
