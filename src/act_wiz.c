@@ -164,11 +164,11 @@ int apply_location;
 			return;
 	   }
 
-		fprintf(fp, "Vnum,Name,Type,Limit,Extra Flags,Weight,Cost,Level,Value0,Value1,Value2,Value3,Value4,Paf1,Paf2,Paf3,Paf4,Paf5,Paf6,Paf7,Paf8,Paf9,Paf10,Paf11,Paf12,Paf13,Paf14,Paf15\n");
+		fprintf(fp, "Vnum,Name,Type,Limit,Extra Flags,Weight,Cost,Level,Condition,Value0,Value1,Value2,Value3,Value4,Paf1,Paf2,Paf3,Paf4,Paf5,Paf6,Paf7,Paf8,Paf9,Paf10,Paf11,Paf12,Paf13,Paf14,Paf15\n");
 	   for( obj=object_list; obj!=NULL; obj = obj->next )
 	   {
 		   
-			fprintf( fp, "%d,%s,%s,%d,%s,%d,%d,%d", obj->pIndexData->vnum, obj->name, item_type_name( obj ), obj->pIndexData->limit, extra_bit_name( obj->extra_flags ), obj->weight / 10, obj->cost, obj->level);
+			fprintf( fp, "%d,%s,%s,%d,%s,%d,%d,%d,%d", obj->pIndexData->vnum, obj->name, item_type_name( obj ), obj->pIndexData->limit, extra_bit_name( obj->extra_flags ), obj->weight / 10, obj->cost, obj->level, obj->pObjIndex->condition);
 		   
 
 			switch ( obj->item_type )
@@ -272,22 +272,37 @@ int apply_location;
 				switch(paf->where)
 				{
 					case TO_AFFECTS:
-						fprintf(fp,",%d - %s - %s affect",paf->modifier,affect_loc_name( paf->location ),affect_bit_name(paf->bitvector));
+						if(paf->bitvector)
+							fprintf(fp,",%d %s - %s affect",paf->modifier,affect_loc_name( paf->location ),affect_bit_name(paf->bitvector));
+						else
+							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
 						break;
 					case TO_OBJECT:
-						fprintf(fp,",%d - %s - %s object flag",paf->modifier,affect_loc_name( paf->location ),extra_bit_name(paf->bitvector));
+						fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
 						break;
 					case TO_IMMUNE:
-						fprintf(fp,",%d - %s - %s immunity",paf->modifier,affect_loc_name( paf->location ),imm_bit_name(paf->bitvector));
+						if(paf->bitvector)
+							fprintf(fp,",%d %s - %s immunity",paf->modifier,affect_loc_name( paf->location ),imm_bit_name(paf->bitvector));
+						else
+							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
 						break;
 					case TO_RESIST:
-						fprintf(fp,",%d - %s - %s resistance",paf->modifier,affect_loc_name( paf->location ),imm_bit_name(paf->bitvector));
+						if(paf->bitvector)
+							fprintf(fp,",%d %s - %s resistance",paf->modifier,affect_loc_name( paf->location ),imm_bit_name(paf->bitvector));
+						else
+							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
 						break;
 					case TO_VULN:
-						fprintf(fp,",%d - %s - %s vulnerability",paf->modifier,affect_loc_name( paf->location ),imm_bit_name(paf->bitvector));
+						if(paf->bitvector)
+							fprintf(fp,",%d %s - %s vulnerability",paf->modifier,affect_loc_name( paf->location ),imm_bit_name(paf->bitvector));
+						else
+							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
 						break;
 					case TO_DETECTS:
-						fprintf(fp,",%d - %s - %s detection",paf->modifier,affect_loc_name( paf->location ),detect_bit_name(paf->bitvector));
+						if(paf->bitvector)
+							fprintf(fp,",%d %s - %s detection",paf->modifier,affect_loc_name( paf->location ),detect_bit_name(paf->bitvector));
+						else
+							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
 						break;
 					default:
 						fprintf(fp,",%d - %s - unknown bit %d:%d",paf->modifier,affect_loc_name( paf->location ),paf->where,paf->bitvector);
