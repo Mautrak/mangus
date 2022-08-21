@@ -268,40 +268,33 @@ int apply_location;
 			int pafcounter = 0;
 			for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
 			{
-				if ( paf->location != APPLY_NONE && paf->modifier != 0 )
+				pafcounter += 1;
+				switch(paf->where)
 				{
-					pafcounter += 1;
-					fprintf( fp, ",%d %s",paf->modifier,affect_loc_name( paf->location ));
-					if (paf->bitvector)
-					{
-						switch(paf->where)
-						{
-							case TO_AFFECTS:
-								fprintf(fp,",%s affect",affect_bit_name(paf->bitvector));
-								break;
-							case TO_OBJECT:
-								fprintf(fp,",%s object flag",extra_bit_name(paf->bitvector));
-								break;
-							case TO_IMMUNE:
-								fprintf(fp,",%s immunity",imm_bit_name(paf->bitvector));
-								break;
-							case TO_RESIST:
-								fprintf(fp,",%s resistance",imm_bit_name(paf->bitvector));
-								break;
-							case TO_VULN:
-								fprintf(fp,",%s vulnerability",imm_bit_name(paf->bitvector));
-								break;
-							case TO_DETECTS:
-								fprintf(fp,",%s detection",detect_bit_name(paf->bitvector));
-								break;
-							default:
-								fprintf(fp,",unknown bit %d:%d",paf->where,paf->bitvector);
-								break;
-						}
-					}
+					case TO_AFFECTS:
+						fprintf(fp,",%d - %s - %s affect",paf->modifier,affect_loc_name( paf->location ),affect_bit_name(paf->bitvector));
+						break;
+					case TO_OBJECT:
+						fprintf(fp,",%d - %s - %s object flag",paf->modifier,affect_loc_name( paf->location ),extra_bit_name(paf->bitvector));
+						break;
+					case TO_IMMUNE:
+						fprintf(fp,",%d - %s - %s immunity",paf->modifier,affect_loc_name( paf->location ),imm_bit_name(paf->bitvector));
+						break;
+					case TO_RESIST:
+						fprintf(fp,",%d - %s - %s resistance",paf->modifier,affect_loc_name( paf->location ),imm_bit_name(paf->bitvector));
+						break;
+					case TO_VULN:
+						fprintf(fp,",%d - %s - %s vulnerability",paf->modifier,affect_loc_name( paf->location ),imm_bit_name(paf->bitvector));
+						break;
+					case TO_DETECTS:
+						fprintf(fp,",%d - %s - %s detection",paf->modifier,affect_loc_name( paf->location ),detect_bit_name(paf->bitvector));
+						break;
+					default:
+						fprintf(fp,",%d - %s - unknown bit %d:%d",paf->modifier,affect_loc_name( paf->location ),paf->where,paf->bitvector);
+						break;
 				}
 			}
-			for(pafcounter;pafcounter<16;pafcounter=pafcounter+1)
+			for(pafcounter;pafcounter<15;pafcounter=pafcounter+1)
 			{
 				fprintf(fp,",");
 			}
