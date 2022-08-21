@@ -206,165 +206,128 @@ int apply_location;
 	}
 	else if ( !str_cmp( arg1, "file" ) )
 	{
-	   if ( (fp=fopen( "objlist.txt", "w+" ) ) == NULL )
+	   if ( (fp=fopen( "objlist.csv", "w+" ) ) == NULL )
 	   {
 			send_to_char( "File error.\n\r", ch );
 			return;
 	   }
 
+		fprintf(fp, "Vnum,Name,Type,Extra Flags,Weight,Cost,Level,Value0,Value1,Value2,Value3,Value4");
 	   for( obj=object_list; obj!=NULL; obj = obj->next )
 	   {
-		 if ( CAN_WEAR( obj, ITEM_WIELD )
-		&& (obj->level < 25 && obj->level > 15) )
-		 {
-		   fprintf( fp, "\n#Obj: %s (Vnum : %d) \n", obj->short_descr ,obj->pIndexData->vnum);
-		fprintf( fp,
-		"Object '%s' is type %s, extra flags %s.\nWeight is %d, value is %d, level is %d.\n",
+		   
+			fprintf( fp, "%d,%s,%s,%s,%d,%d,%d", obj->pIndexData->vnum, obj->name, item_type_name( obj ), extra_bit_name( obj->extra_flags ), obj->weight / 10, obj->cost, obj->level);
+		   
 
-		obj->name,
-		item_type_name( obj ),
-		extra_bit_name( obj->extra_flags ),
-		obj->weight / 10,
-		obj->cost,
-		obj->level
-		);
+			switch ( obj->item_type )
+			{
+			case ITEM_SCROLL:
+			case ITEM_POTION:
+			case ITEM_PILL:
+				fprintf( fp, ",%d", obj->value[0] );
 
-		switch ( obj->item_type )
-		{
-		case ITEM_SCROLL:
-		case ITEM_POTION:
-		case ITEM_PILL:
-		fprintf( fp, "Level %d spells of:", obj->value[0] );
+				if ( obj->value[1] >= 0 && obj->value[1] < MAX_SKILL )
+				{
+					fprintf(fp, ",%s", skill_table[obj->value[1]].name[1]);
+				}
 
-		if ( obj->value[1] >= 0 && obj->value[1] < MAX_SKILL )
-		{
-			fprintf(fp, " '%s'", skill_table[obj->value[1]].name[1]);
-		}
+				if ( obj->value[2] >= 0 && obj->value[2] < MAX_SKILL )
+				{
+					fprintf(fp, ",%s", skill_table[obj->value[2]].name[1]);
+				}
 
-		if ( obj->value[2] >= 0 && obj->value[2] < MAX_SKILL )
-		{
-			fprintf(fp, " '%s'", skill_table[obj->value[2]].name[1]);
-		}
+				if ( obj->value[3] >= 0 && obj->value[3] < MAX_SKILL )
+				{
+					fprintf(fp, ",%s", skill_table[obj->value[3]].name[1]);
+				}
 
-		if ( obj->value[3] >= 0 && obj->value[3] < MAX_SKILL )
-		{
-			fprintf(fp, " '%s'", skill_table[obj->value[3]].name[1]);
-		}
+				if (obj->value[4] >= 0 && obj->value[4] < MAX_SKILL)
+				{
+					fprintf(fp, ",%s", skill_table[obj->value[4]].name[1]);
+				}
+				break;
 
-		if (obj->value[4] >= 0 && obj->value[4] < MAX_SKILL)
-		{
-			fprintf(fp, " '%s'", skill_table[obj->value[4]].name[1]);
-		}
+			case ITEM_WAND:
+			case ITEM_STAFF:
+				fprintf(fp, ",%d,%d,%d", obj->value[0], obj->value[1], obj->value[2]);
 
-		fprintf( fp,".\n");
-		break;
+				if ( obj->value[3] >= 0 && obj->value[3] < MAX_SKILL )
+				{
+					fprintf(fp, ",%s", skill_table[obj->value[3]].name[1]);
+				}
+				
+				fprintf(fp, ",%d", obj->value[4]);
 
-		case ITEM_WAND:
-		case ITEM_STAFF:
-		fprintf(fp, "Has %d charges of level %d", obj->value[2], obj->value[0]);
-
-		if ( obj->value[3] >= 0 && obj->value[3] < MAX_SKILL )
-		{
-			fprintf(fp, " '%s'", skill_table[obj->value[3]].name[1]);
-		}
-
-		fprintf( fp,".\n");
-		break;
-
-		case ITEM_DRINK_CON:
-			fprintf(fp,"It holds %s-colored %s.\n",
-			liq_table[obj->value[2]].liq_color,
-				liq_table[obj->value[2]].liq_name);
 			break;
 
-		case ITEM_CONTAINER:
-		fprintf(fp,"Capacity: %d#  Maximum weight: %d#  flags: %s\n",
-			obj->value[0], obj->value[3], cont_bit_name(obj->value[1]));
-		if (obj->value[4] != 100)
-		{
-			fprintf(fp,"Weight multiplier: %d%%\n",
-			obj->value[4]);
-		}
-		break;
+			case ITEM_DRINK_CON:
+				fprintf(fp,",,,%s,",liq_table[obj->value[2]].liq_name);
+				break;
 
-		case ITEM_WEAPON:
-		fprintf(fp,"Weapon type is ");
-		switch (obj->value[0])
-		{
-			case(WEAPON_EXOTIC) : fprintf(fp,"exotic.\n");	break;
-			case(WEAPON_SWORD)  : fprintf(fp,"sword.\n");	break;
-			case(WEAPON_DAGGER) : fprintf(fp,"dagger.\n");	break;
-			case(WEAPON_SPEAR)	: fprintf(fp,"spear/staff.\n");	break;
-			case(WEAPON_MACE) 	: fprintf(fp,"mace/club.\n");	break;
-			case(WEAPON_AXE)	: fprintf(fp,"axe.\n");		break;
-			case(WEAPON_FLAIL)	: fprintf(fp,"flail.\n");	break;
-			case(WEAPON_WHIP)	: fprintf(fp,"whip.\n");	break;
-			case(WEAPON_POLEARM): fprintf(fp,"polearm.\n");	break;
-			case(WEAPON_BOW)	: fprintf(fp,"bow.\n");		break;
-			case(WEAPON_ARROW)	: fprintf(fp,"arrow.\n");	break;
-			case(WEAPON_LANCE)	: fprintf(fp,"lance.\n");	break;
-			default		: fprintf(fp,"unknown.\n");	break;
-		}
-		if (obj->pIndexData->new_format)
-			fprintf(fp,"Damage is %dd%d (average %d).\n",
-			obj->value[1],obj->value[2],
-			(1 + obj->value[2]) * obj->value[1] / 2);
-		else
-			fprintf( fp, "Damage is %d to %d (average %d).\n",
-				obj->value[1], obj->value[2],
-				( obj->value[1] + obj->value[2] ) / 2 );
-			if (obj->value[4])  /* weapon flags */
+			case ITEM_CONTAINER:
+				fprintf(fp,",%d,%s,,%d,%d",obj->value[0], cont_bit_name(obj->value[1]),obj->value[3],obj->value[4]);
+				break;
+
+			case ITEM_WEAPON:
+				switch (obj->value[0])
+				{
+					case(WEAPON_EXOTIC) : fprintf(fp,",exotic");	break;
+					case(WEAPON_SWORD)  : fprintf(fp,",sword");	break;
+					case(WEAPON_DAGGER) : fprintf(fp,",dagger");	break;
+					case(WEAPON_SPEAR)	: fprintf(fp,",spear/staff");	break;
+					case(WEAPON_MACE) 	: fprintf(fp,",mace/club");	break;
+					case(WEAPON_AXE)	: fprintf(fp,",axe");		break;
+					case(WEAPON_FLAIL)	: fprintf(fp,",flail");	break;
+					case(WEAPON_WHIP)	: fprintf(fp,",whip");	break;
+					case(WEAPON_POLEARM): fprintf(fp,",polearm");	break;
+					case(WEAPON_BOW)	: fprintf(fp,",bow");		break;
+					case(WEAPON_ARROW)	: fprintf(fp,",arrow");	break;
+					case(WEAPON_LANCE)	: fprintf(fp,",lance");	break;
+					default		: fprintf(fp,",unknown");	break;
+				}
+				fprintf(fp,",%d,%d,,%s",obj->value[1],obj->value[2],weapon_bit_name(obj->value[4]));
+
+				break;
+
+			case ITEM_ARMOR:
+				fprintf( fp,",%d,%d,%d,%d,",obj->value[0], obj->value[1], obj->value[2], obj->value[3] );
+				break;
+			}
+			for( paf=obj->pIndexData->affected; paf != NULL; paf = paf->next )
 			{
-				fprintf(fp,"Weapons flags: %s\n",weapon_bit_name(obj->value[4]));
-		}
-		break;
-
-		case ITEM_ARMOR:
-		fprintf( fp,
-		"Armor class is %d pierce, %d bash, %d slash, and %d vs. magic.\n",
-			obj->value[0], obj->value[1], obj->value[2], obj->value[3] );
-		break;
-		}
-		   for( paf=obj->pIndexData->affected; paf != NULL; paf = paf->next )
-		   {
-				if ( paf == NULL ) continue;
-				fprintf( fp, "  Affects %s by %d.\n",
-					affect_loc_name( paf->location ), paf->modifier );
+				if ( paf == NULL )
+				{
+					continue;
+				}
+				fprintf( fp, ",%d %s",paf->modifier,affect_loc_name( paf->location ));
 				if (paf->bitvector)
 				{
 					switch(paf->where)
 					{
 						case TO_AFFECTS:
-							fprintf(fp,"   Adds %s affect.\n",
-								affect_bit_name(paf->bitvector));
+							fprintf(fp,",%s affect",affect_bit_name(paf->bitvector));
 							break;
 						case TO_OBJECT:
-							fprintf(fp,"   Adds %s object flag.\n",
-								extra_bit_name(paf->bitvector));
+							fprintf(fp,",%s object flag",extra_bit_name(paf->bitvector));
 							break;
 						case TO_IMMUNE:
-							fprintf(fp,"   Adds immunity to %s.\n",
-								imm_bit_name(paf->bitvector));
+							fprintf(fp,",%s immunity",imm_bit_name(paf->bitvector));
 							break;
 						case TO_RESIST:
-							fprintf(fp,"   Adds resistance to %s.\n\r",
-								imm_bit_name(paf->bitvector));
+							fprintf(fp,",%s resistance",imm_bit_name(paf->bitvector));
 							break;
 						case TO_VULN:
-							fprintf(fp,"   Adds vulnerability to %s.\n\r",
-								imm_bit_name(paf->bitvector));
+							fprintf(fp,",%s vulnerability",imm_bit_name(paf->bitvector));
 							break;
 						case TO_DETECTS:
-							fprintf(fp,"   Adds %s detection.\n\r",
-								detect_bit_name(paf->bitvector));
+							fprintf(fp,",%s detection",detect_bit_name(paf->bitvector));
 							break;
 						default:
-							fprintf(fp,"   Unknown bit %d: %d\n\r",
-								paf->where,paf->bitvector);
+							fprintf(fp,",unknown bit %d:%d",paf->where,paf->bitvector);
 							break;
 					}
 				}
-		   }
+			}
 		 }
 	   }
 	   fclose( fp );
