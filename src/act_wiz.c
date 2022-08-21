@@ -164,11 +164,11 @@ int apply_location;
 			return;
 	   }
 
-		fprintf(fp, "Vnum,Name,Type,Extra Flags,Weight,Cost,Level,Value0,Value1,Value2,Value3,Value4,Paf1,Paf2,Paf3,Paf4,Paf5,Paf6,Paf7,Paf8,Paf9,Paf10,Paf11,Paf12,Paf13,Paf14,Paf15\n");
+		fprintf(fp, "Vnum,Name,Type,Limit,Extra Flags,Weight,Cost,Level,Value0,Value1,Value2,Value3,Value4,Paf1,Paf2,Paf3,Paf4,Paf5,Paf6,Paf7,Paf8,Paf9,Paf10,Paf11,Paf12,Paf13,Paf14,Paf15\n");
 	   for( obj=object_list; obj!=NULL; obj = obj->next )
 	   {
 		   
-			fprintf( fp, "%d,%s,%s,%s,%d,%d,%d", obj->pIndexData->vnum, obj->name, item_type_name( obj ), extra_bit_name( obj->extra_flags ), obj->weight / 10, obj->cost, obj->level);
+			fprintf( fp, "%d,%s,%s,%d,%s,%d,%d,%d", obj->pIndexData->vnum, obj->name, item_type_name( obj ), obj->pIndexData->limit, extra_bit_name( obj->extra_flags ), obj->weight / 10, obj->cost, obj->level);
 		   
 
 			switch ( obj->item_type )
@@ -182,20 +182,36 @@ int apply_location;
 				{
 					fprintf(fp, ",%s", skill_table[obj->value[1]].name[1]);
 				}
+				else
+				{
+					fprintf(fp, ",%d", obj->value[1]);
+				}
 
 				if ( obj->value[2] >= 0 && obj->value[2] < MAX_SKILL )
 				{
 					fprintf(fp, ",%s", skill_table[obj->value[2]].name[1]);
+				}
+				else
+				{
+					fprintf(fp, ",%d", obj->value[2]);
 				}
 
 				if ( obj->value[3] >= 0 && obj->value[3] < MAX_SKILL )
 				{
 					fprintf(fp, ",%s", skill_table[obj->value[3]].name[1]);
 				}
+				else
+				{
+					fprintf(fp, ",%d", obj->value[3]);
+				}
 
 				if (obj->value[4] >= 0 && obj->value[4] < MAX_SKILL)
 				{
 					fprintf(fp, ",%s", skill_table[obj->value[4]].name[1]);
+				}
+				else
+				{
+					fprintf(fp, ",%d", obj->value[4]);
 				}
 				break;
 
@@ -207,17 +223,21 @@ int apply_location;
 				{
 					fprintf(fp, ",%s", skill_table[obj->value[3]].name[1]);
 				}
+				else
+				{
+					fprintf(fp, ",%d", obj->value[3]);
+				}
 				
 				fprintf(fp, ",%d", obj->value[4]);
 
 			break;
 
 			case ITEM_DRINK_CON:
-				fprintf(fp,",,,%s",liq_table[obj->value[2]].liq_name);
+				fprintf(fp,",%d,%d,%s,%d,%d",obj->value[0],obj->value[1],liq_table[obj->value[2]].liq_name,obj->value[3],obj->value[4]);
 				break;
 
 			case ITEM_CONTAINER:
-				fprintf(fp,",%d,%s,,%d,%d",obj->value[0], cont_bit_name(obj->value[1]),obj->value[3],obj->value[4]);
+				fprintf(fp,",%d,%s,%d,%d,%d",obj->value[0], cont_bit_name(obj->value[1]),obj->value[2],obj->value[3],obj->value[4]);
 				break;
 
 			case ITEM_WEAPON:
@@ -237,48 +257,48 @@ int apply_location;
 					case(WEAPON_LANCE)	: fprintf(fp,",lance");	break;
 					default		: fprintf(fp,",unknown");	break;
 				}
-				fprintf(fp,",%d,%d,,%s",obj->value[1],obj->value[2],weapon_bit_name(obj->value[4]));
+				fprintf(fp,",%d,%d,%d,%s",obj->value[1],obj->value[2],obj->value[3],weapon_bit_name(obj->value[4]));
 
 				break;
 
 			case ITEM_ARMOR:
-				fprintf( fp,",%d,%d,%d,%d,",obj->value[0], obj->value[1], obj->value[2], obj->value[3] );
+				fprintf( fp,",%d,%d,%d,%d,%d",obj->value[0], obj->value[1], obj->value[2], obj->value[3], obj->value[4] );
 				break;
 			}
 			int pafcounter = 0;
-			for( paf=obj->pIndexData->affected; paf != NULL; paf = paf->next )
+			for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
 			{
-				pafcounter += 1;
-				if ( paf == NULL )
+				if ( paf->location != APPLY_NONE && paf->modifier != 0 )
 				{
-					continue;
-				}
-				fprintf( fp, ",%d %s",paf->modifier,affect_loc_name( paf->location ));
-				if (paf->bitvector)
-				{
-					switch(paf->where)
+					pafcounter += 1;
+					fprintf( fp, ",%d %s",paf->modifier,affect_loc_name( paf->location ));
+					if (paf->bitvector)
 					{
-						case TO_AFFECTS:
-							fprintf(fp,",%s affect",affect_bit_name(paf->bitvector));
-							break;
-						case TO_OBJECT:
-							fprintf(fp,",%s object flag",extra_bit_name(paf->bitvector));
-							break;
-						case TO_IMMUNE:
-							fprintf(fp,",%s immunity",imm_bit_name(paf->bitvector));
-							break;
-						case TO_RESIST:
-							fprintf(fp,",%s resistance",imm_bit_name(paf->bitvector));
-							break;
-						case TO_VULN:
-							fprintf(fp,",%s vulnerability",imm_bit_name(paf->bitvector));
-							break;
-						case TO_DETECTS:
-							fprintf(fp,",%s detection",detect_bit_name(paf->bitvector));
-							break;
-						default:
-							fprintf(fp,",unknown bit %d:%d",paf->where,paf->bitvector);
-							break;
+						switch(paf->where)
+						{
+							case TO_AFFECTS:
+								fprintf(fp,",%s affect",affect_bit_name(paf->bitvector));
+								break;
+							case TO_OBJECT:
+								fprintf(fp,",%s object flag",extra_bit_name(paf->bitvector));
+								break;
+							case TO_IMMUNE:
+								fprintf(fp,",%s immunity",imm_bit_name(paf->bitvector));
+								break;
+							case TO_RESIST:
+								fprintf(fp,",%s resistance",imm_bit_name(paf->bitvector));
+								break;
+							case TO_VULN:
+								fprintf(fp,",%s vulnerability",imm_bit_name(paf->bitvector));
+								break;
+							case TO_DETECTS:
+								fprintf(fp,",%s detection",detect_bit_name(paf->bitvector));
+								break;
+							default:
+								fprintf(fp,",unknown bit %d:%d",paf->where,paf->bitvector);
+								break;
+						}
+						send_to_char( buf, ch );
 					}
 				}
 			}
