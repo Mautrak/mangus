@@ -555,12 +555,12 @@ weapon 0 AN
 sword 5 8 pierce 0
 40 140 17276 G
 #15223
-gümüþ ve altýn akçeler~
-gümüþ ve altýn akçeler~
-Yerde gümüþ ve altýn akçeler var.~
+gümüþ akçeler~
+gümüþ akçeler~
+Yerde gümüþ akçe var.~
 gold~
 money 0 A
-50000 0 0 0 0
+600 0 0 0 0
 0 0 0 P
 E
 gümüþ~

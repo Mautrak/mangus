@@ -398,12 +398,12 @@ A
 A
 17 -20
 #13418
-ganimet sikkeler altýn~
-çok büyük bir altýn yýðýný~
-Çok büyük bir altýn yýðýný heyecanla sahiplenilmeyi bekliyor.~
+ganimet sikkeler akçe~
+çok büyük bir akçe yýðýný~
+Çok büyük bir akçe yýðýný heyecanla sahiplenilmeyi bekliyor.~
 gold~
 money 0 A
-10000 0 0 0 0
+450 0 0 0 0
 0 0 0 P
 #13419
 cevherler küme~
@@ -411,7 +411,7 @@ bir cevher kümesi~
 Yerde bir cevher kümesi var.~
 iron~
 money A A
-20000 0 0 0 0
+400 0 0 0 0
 0 0 0 P
 #13420
 sandýk~

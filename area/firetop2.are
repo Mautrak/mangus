@@ -1291,12 +1291,12 @@ loot~
 This is part of the Warlock's wealth.
 ~
 #5798
-gold~
+gold warlock~
 gold!~
 The Warlock's Gold!~
 gold~
 money 0 A
-50345 0 0 0 0
+800 0 0 0 0
 0 0 0 P
 #5799
 key~
