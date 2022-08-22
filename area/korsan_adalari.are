@@ -1289,7 +1289,7 @@ Aðýr, þiþkin bir altýn çantasý burada duruyor.
 ~
 leather~
 money 0 A
-50000 0 0 0 0
+800 0 0 0 0
 0 30 0 P
 #17065
 çanta gümüþ~
@@ -1298,7 +1298,7 @@ Aðýr, þiþkin bir gümüþ çantasý burada duruyor.
 ~
 leather~
 money 0 A
-25000 0 0 0 0
+500 0 0 0 0
 0 30 0 P
 #17066
 çanta cevher~
@@ -1307,7 +1307,7 @@ Aðýr, þiþkin bir cevher çantasý burada duruyor.
 ~
 leather~
 money 0 A
-75000 0 0 0 0
+800 0 0 0 0
 0 30 0 P
 #17067
 çanta mücevher~
@@ -1316,7 +1316,7 @@ Aðýr, þiþkin bir mücevher çantasý burada duruyor.
 ~
 leather~
 money 0 A
-100000 0 0 0 0
+1000 0 0 0 0
 0 30 0 P
 #17068
 göz kem~
