@@ -168,7 +168,7 @@ int apply_location;
 	   for( obj=object_list; obj!=NULL; obj = obj->next )
 	   {
 		   
-			fprintf( fp, "%d,%s,%s,%d,%s,%d,%d,%d,%s,%s,%d", \
+			fprintf( fp, "%d,%s,%s,%d,%s,%d,%d,%d,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%d", \
 				obj->pIndexData->vnum, \
 				obj->name, \
 				item_type_name( obj ), \
