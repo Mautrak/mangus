@@ -164,21 +164,19 @@ int apply_location;
 			return;
 	   }
 			
-		fprintf(fp, "Vnum,Name,Type,Limit,Extra Flags,Weight,Cost,Level,Item Take,Item Wear Finger,Item Wear Neck,Item Wear Body,Item Wear Head,Item Wear Legs,Item Wear Feet, Item Wear Hands,Item Wear Arms,Item Wear Shield,Item Wear About,Item Wear Waist,Item Wear Wrist,Item Wield,Item Hold,Item No Sac,Item Wear Float,Item Wear Tattoo,WearCondition,Value0,Value1,Value2,Value3,Value4,Add Str,Add Int,Add Wis,Add Dex,Add Con,Add Cha,Add Age,Add Mana,Add Hit,Add Move,Add AC,Add Hitroll,Add Damroll,Add Size,Add Saves,Add Saves Rod,Add Saves Petri,Add Saves Breath,Add Saves Spell,Paf1,Paf2,Paf3,Paf4,Paf5,Paf6,Paf7,Paf8,Paf9,Paf10,Paf11,Paf12,Paf13,Paf14,Paf15,Paf16,Paf17,Paf18,Paf19,Paf20\n");
+		fprintf(fp, "Vnum,Name,Type,Limit,Weight,Cost,Level,Item Take,Item Wear Finger,Item Wear Neck,Item Wear Body,Item Wear Head,Item Wear Legs,Item Wear Feet, Item Wear Hands,Item Wear Arms,Item Wear Shield,Item Wear About,Item Wear Waist,Item Wear Wrist,Item Wield,Item Hold,Item No Sac,Item Wear Float,Item Wear Tattoo,Condition,Value0,Value1,Value2,Value3,Value4,Glow Flag,Hum Flag,Dark Flag,Lock Flag,Evil Flag,Invis Flag,Magic Flag,NoDrop Flag,Bless Flag,AntiGood Flag,AntiEvil Flag,AntiNeutral Flag,NoRemove Flag,Inventory Flag,NoPurge Flag,RotDeath Flag,VisDeath Flag,NoSac Flag,NonMetal Flag,NoLocate Flag,MeltDrop Flag,HadTimer Flag,SellExtract Flag,BurnProof Flag,NounCurse Flag,NoSell Flag,Buried Flag,Add Str,Add Int,Add Wis,Add Dex,Add Con,Add Cha,Add Age,Add Mana,Add Hit,Add Move,Add AC,Add Hitroll,Add Damroll,Add Size,Add Saves,Add Saves Rod,Add Saves Petri,Add Saves Breath,Add Saves Spell,Paf1,Paf2,Paf3,Paf4,Paf5,Paf6,Paf7,Paf8,Paf9,Paf10,Paf11,Paf12,Paf13,Paf14,Paf15,Paf16,Paf17,Paf18,Paf19,Paf20\n");
 	   for( obj=object_list; obj!=NULL; obj = obj->next )
 	   {
 
 			//Asagidaki obje turleri henuz incelenmiyor.
 			if(obj->item_type == ITEM_TREASURE || obj->item_type == ITEM_LIGHT || obj->item_type == ITEM_CLOTHING || obj->item_type == ITEM_FURNITURE || obj->item_type == ITEM_TRASH || obj->item_type == ITEM_KEY || obj->item_type == ITEM_FOOD || obj->item_type == ITEM_MONEY || obj->item_type == ITEM_BOAT || obj->item_type == ITEM_CORPSE_NPC || obj->item_type == ITEM_CORPSE_PC || obj->item_type == ITEM_FOUNTAIN || obj->item_type == ITEM_PROTECT || obj->item_type == ITEM_MAP || obj->item_type == ITEM_PORTAL || obj->item_type == ITEM_WARP_STONE || obj->item_type == ITEM_ROOM_KEY || obj->item_type == ITEM_GEM || obj->item_type == ITEM_JEWELRY || obj->item_type == ITEM_JUKEBOX || obj->item_type == ITEM_TATTOO || obj->item_type == ITEM_MAYMUNCUK)
 				continue;
-			   
-		   
-			fprintf( fp, "%d,%s,%s,%d,%s,%d,%d,%d,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%d", \
+
+			fprintf( fp, "%d,%s,%s,%d,%d,%d,%d,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%d", \
 				obj->pIndexData->vnum, \
 				obj->name, \
 				item_type_name( obj ), \
 				obj->pIndexData->limit, \
-				extra_bit_name( obj->extra_flags ), \
 				obj->weight / 10, \
 				obj->cost, \
 				obj->level, \
@@ -298,6 +296,37 @@ int apply_location;
 				fprintf( fp,",%d,%d,%d,%d,%d",obj->value[0], obj->value[1], obj->value[2], obj->value[3], obj->value[4] );
 				break;
 			}
+
+			fprintf( fp, "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s", \
+				IS_OBJ_STAT(obj, ITEM_GLOW)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_HUM)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_DARK)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_LOCK)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_EVIL)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_INVIS)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_MAGIC)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_NODROP)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_BLESS)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_NOREMOVE)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_INVENTORY)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_NOPURGE)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_ROT_DEATH)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_VIS_DEATH)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_NOSAC)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_NONMETAL)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_NOLOCATE)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_MELT_DROP)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_HAD_TIMER)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_SELL_EXTRACT)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_BURN_PROOF)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_NOUNCURSE)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_NOSELL)?"Yes":"No", \
+				IS_OBJ_STAT(obj, ITEM_BURIED)?"Yes":"No"
+			);
+			
 			int pafmod_str = 0;
 			int pafmod_int = 0;
 			int pafmod_wis = 0;
