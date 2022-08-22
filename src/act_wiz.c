@@ -319,7 +319,7 @@ int apply_location;
 				{
 					default:
 					bug( "Affect_modify: unknown location %d.", paf->location );
-					return;
+					break;
 
 					case APPLY_STR:				pafmod_str = paf->modifier;	break;
 					case APPLY_DEX:				pafmod_dex = paf->modifier;	break;
