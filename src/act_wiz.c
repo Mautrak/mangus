@@ -163,7 +163,7 @@ int apply_location;
 			send_to_char( "File error.\n\r", ch );
 			return;
 	   }
-			
+
 		fprintf(fp, "Vnum,Name,Type,Limit,Weight,Cost,Level,Item Take,Item Wear Finger,Item Wear Neck,Item Wear Body,Item Wear Head,Item Wear Legs,Item Wear Feet, Item Wear Hands,Item Wear Arms,Item Wear Shield,Item Wear About,Item Wear Waist,Item Wear Wrist,Item Wield,Item Hold,Item No Sac,Item Wear Float,Item Wear Tattoo,Condition,Value0,Value1,Value2,Value3,Value4,Glow Flag,Hum Flag,Dark Flag,Lock Flag,Evil Flag,Invis Flag,Magic Flag,NoDrop Flag,Bless Flag,AntiGood Flag,AntiEvil Flag,AntiNeutral Flag,NoRemove Flag,Inventory Flag,NoPurge Flag,RotDeath Flag,VisDeath Flag,NoSac Flag,NonMetal Flag,NoLocate Flag,MeltDrop Flag,HadTimer Flag,SellExtract Flag,BurnProof Flag,NounCurse Flag,NoSell Flag,Buried Flag,Add Str,Add Int,Add Wis,Add Dex,Add Con,Add Cha,Add Age,Add Mana,Add Hit,Add Move,Add AC,Add Hitroll,Add Damroll,Add Size,Add Saves,Add Saves Rod,Add Saves Petri,Add Saves Breath,Add Saves Spell,Paf1,Paf2,Paf3,Paf4,Paf5,Paf6,Paf7,Paf8,Paf9,Paf10,Paf11,Paf12,Paf13,Paf14,Paf15,Paf16,Paf17,Paf18,Paf19,Paf20\n");
 	   for( obj=object_list; obj!=NULL; obj = obj->next )
 	   {
@@ -297,7 +297,7 @@ int apply_location;
 				break;
 			}
 
-			fprintf( fp, "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s", \
+			fprintf( fp, ",%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s", \
 				IS_OBJ_STAT(obj, ITEM_GLOW)?"Yes":"No", \
 				IS_OBJ_STAT(obj, ITEM_HUM)?"Yes":"No", \
 				IS_OBJ_STAT(obj, ITEM_DARK)?"Yes":"No", \
