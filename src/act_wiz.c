@@ -380,33 +380,56 @@ int apply_location;
 			int pafcounter = 0;
 			for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
 			{
-				pafcounter += 1;
-				switch(paf->where)
+				if ( paf->location != APPLY_NONE && paf->modifier != 0 )
 				{
-					case TO_AFFECTS:
-						if(paf->bitvector)
-							fprintf(fp,",%s affect",affect_bit_name(paf->bitvector));
-						break;
-					case TO_OBJECT:
-						if(paf->bitvector)
-							fprintf(fp,",%s object",affect_bit_name(paf->bitvector));
-						break;
-					case TO_IMMUNE:
-						if(paf->bitvector)
-							fprintf(fp,",%s immunity",affect_bit_name(paf->bitvector));
-						break;
-					case TO_RESIST:
-						if(paf->bitvector)
-							fprintf(fp,",%s resistance",affect_bit_name(paf->bitvector));
-						break;
-					case TO_VULN:
-						if(paf->bitvector)
-							fprintf(fp,",%s vulnerability",affect_bit_name(paf->bitvector));
-						break;
-					case TO_DETECTS:
-						if(paf->bitvector)
-							fprintf(fp,",%s detection",affect_bit_name(paf->bitvector));
-						break;
+					if (paf->bitvector)
+					{
+						switch(paf->where)
+						{
+							case TO_AFFECTS:
+								if(paf->bitvector)
+								{
+									pafcounter += 1;
+									fprintf(fp,",%s etkisi ekler",affect_bit_name(paf->bitvector));
+								}
+								break;
+							case TO_OBJECT:
+								if(paf->bitvector)
+								{
+									pafcounter += 1;
+									fprintf(fp,",%s obje özelliði ekler",affect_bit_name(paf->bitvector));
+								}
+								break;
+							case TO_IMMUNE:
+								if(paf->bitvector)
+								{
+									pafcounter += 1;
+									fprintf(fp,",%s baðýþýklýðý ekler",affect_bit_name(paf->bitvector));
+								}
+								break;
+							case TO_RESIST:
+								if(paf->bitvector)
+								{
+									pafcounter += 1;
+									fprintf(fp,",%s direnci ekler",affect_bit_name(paf->bitvector));
+								}
+								break;
+							case TO_VULN:
+								if(paf->bitvector)
+								{
+									pafcounter += 1;
+									fprintf(fp,",%s dayanýksýzlýðý ekler",affect_bit_name(paf->bitvector));
+								}
+								break;
+							case TO_DETECTS:
+								if(paf->bitvector)
+								{
+									pafcounter += 1;
+									fprintf(fp,",%s saptamasý ekler",affect_bit_name(paf->bitvector));
+								}
+								break;
+						}
+					}
 				}
 			}
 			for(pafcounter;pafcounter<20;pafcounter=pafcounter+1)
