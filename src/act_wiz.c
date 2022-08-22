@@ -164,11 +164,39 @@ int apply_location;
 			return;
 	   }
 
-		fprintf(fp, "Vnum,Name,Type,Limit,Extra Flags,Weight,Cost,Level,Condition,Value0,Value1,Value2,Value3,Value4,Paf1,Paf2,Paf3,Paf4,Paf5,Paf6,Paf7,Paf8,Paf9,Paf10,Paf11,Paf12,Paf13,Paf14,Paf15\n");
+		fprintf(fp, "Vnum,Name,Type,Limit,Extra Flags,Weight,Cost,Level,Item Take,Item Wear Finger,Item Wear Neck,Item Wear Body,Item Wear Head,Item Wear Legs,Item Wear Feet, Item Wear Hands,Item Wear Arms,Item Wear Shield,Item Wear About,Item Wear Waist,Item Wear Wrist,Item Wield,Item Hold,Item No Sac,Item Wear Float,Item Wear Tattoo,WearCondition,Value0,Value1,Value2,Value3,Value4,Paf1,Paf2,Paf3,Paf4,Paf5,Paf6,Paf7,Paf8,Paf9,Paf10,Paf11,Paf12,Paf13,Paf14,Paf15,Paf16,Paf17,Paf18,Paf19,Paf20\n");
 	   for( obj=object_list; obj!=NULL; obj = obj->next )
 	   {
 		   
-			fprintf( fp, "%d,%s,%s,%d,%s,%d,%d,%d,%d", obj->pIndexData->vnum, obj->name, item_type_name( obj ), obj->pIndexData->limit, extra_bit_name( obj->extra_flags ), obj->weight / 10, obj->cost, obj->level, obj->pIndexData->condition);
+			fprintf( fp, "%d,%s,%s,%d,%s,%d,%d,%d,%s,%s,%d", \
+				obj->pIndexData->vnum, \
+				obj->name, \
+				item_type_name( obj ), \
+				obj->pIndexData->limit, \
+				extra_bit_name( obj->extra_flags ), \
+				obj->weight / 10, \
+				obj->cost, \
+				obj->level, \
+				IS_SET(container->wear_flags, ITEM_TAKE):"Evet"?"Hayýr", \
+				IS_SET(container->wear_flags, ITEM_WEAR_FINGER):"Evet"?"Hayýr", \
+				IS_SET(container->wear_flags, ITEM_WEAR_NECK):"Evet"?"Hayýr", \
+				IS_SET(container->wear_flags, ITEM_WEAR_BODY):"Evet"?"Hayýr", \
+				IS_SET(container->wear_flags, ITEM_WEAR_HEAD):"Evet"?"Hayýr", \
+				IS_SET(container->wear_flags, ITEM_WEAR_LEGS):"Evet"?"Hayýr", \
+				IS_SET(container->wear_flags, ITEM_WEAR_FEET):"Evet"?"Hayýr", \
+				IS_SET(container->wear_flags, ITEM_WEAR_HANDS):"Evet"?"Hayýr", \
+				IS_SET(container->wear_flags, ITEM_WEAR_ARMS):"Evet"?"Hayýr", \
+				IS_SET(container->wear_flags, ITEM_WEAR_SHIELD):"Evet"?"Hayýr", \
+				IS_SET(container->wear_flags, ITEM_WEAR_ABOUT):"Evet"?"Hayýr", \
+				IS_SET(container->wear_flags, ITEM_WEAR_WAIST):"Evet"?"Hayýr", \
+				IS_SET(container->wear_flags, ITEM_WEAR_WRIST):"Evet"?"Hayýr", \
+				IS_SET(container->wear_flags, ITEM_WIELD):"Evet"?"Hayýr", \
+				IS_SET(container->wear_flags, ITEM_HOLD):"Evet"?"Hayýr", \
+				IS_SET(container->wear_flags, ITEM_NO_SAC):"Evet"?"Hayýr", \
+				IS_SET(container->wear_flags, ITEM_WEAR_FLOAT):"Evet"?"Hayýr", \
+				IS_SET(container->wear_flags, ITEM_WEAR_TATTOO):"Evet"?"Hayýr", \
+				obj->pIndexData->condition
+			);
 		   
 
 			switch ( obj->item_type )
@@ -272,35 +300,74 @@ int apply_location;
 				switch(paf->where)
 				{
 					case TO_AFFECTS:
-						if(paf->bitvector)
-							fprintf(fp,",%d %s - %s affect",paf->modifier,affect_loc_name( paf->location ),affect_bit_name(paf->bitvector));
+						if(paf->modifier && paf->bitvector)
+						{
+							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
+							fprintf(fp,",%s affect",affect_bit_name(paf->bitvector));
+							pafcounter += 1;
+						}
+						else if(paf->bitvector)
+							fprintf(fp,",%s affect",paf->modifier,affect_loc_name( paf->location ),affect_bit_name(paf->bitvector));
 						else
 							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
 						break;
 					case TO_OBJECT:
-						fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
+						if(paf->modifier && paf->bitvector)
+						{
+							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
+							fprintf(fp,",%s object",affect_bit_name(paf->bitvector));
+							pafcounter += 1;
+						}
+						else if(paf->bitvector)
+							fprintf(fp,",%s object",paf->modifier,affect_loc_name( paf->location ),affect_bit_name(paf->bitvector));
+						else
+							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
 						break;
 					case TO_IMMUNE:
-						if(paf->bitvector)
-							fprintf(fp,",%d %s - %s immunity",paf->modifier,affect_loc_name( paf->location ),imm_bit_name(paf->bitvector));
+						if(paf->modifier && paf->bitvector)
+						{
+							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
+							fprintf(fp,",%s immunity",affect_bit_name(paf->bitvector));
+							pafcounter += 1;
+						}
+						else if(paf->bitvector)
+							fprintf(fp,",%s immunity",paf->modifier,affect_loc_name( paf->location ),affect_bit_name(paf->bitvector));
 						else
 							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
 						break;
 					case TO_RESIST:
-						if(paf->bitvector)
-							fprintf(fp,",%d %s - %s resistance",paf->modifier,affect_loc_name( paf->location ),imm_bit_name(paf->bitvector));
+						if(paf->modifier && paf->bitvector)
+						{
+							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
+							fprintf(fp,",%s resistance",affect_bit_name(paf->bitvector));
+							pafcounter += 1;
+						}
+						else if(paf->bitvector)
+							fprintf(fp,",%s resistance",paf->modifier,affect_loc_name( paf->location ),affect_bit_name(paf->bitvector));
 						else
 							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
 						break;
 					case TO_VULN:
-						if(paf->bitvector)
-							fprintf(fp,",%d %s - %s vulnerability",paf->modifier,affect_loc_name( paf->location ),imm_bit_name(paf->bitvector));
+						if(paf->modifier && paf->bitvector)
+						{
+							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
+							fprintf(fp,",%s vulnerability",affect_bit_name(paf->bitvector));
+							pafcounter += 1;
+						}
+						else if(paf->bitvector)
+							fprintf(fp,",%s vulnerability",paf->modifier,affect_loc_name( paf->location ),affect_bit_name(paf->bitvector));
 						else
 							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
 						break;
 					case TO_DETECTS:
-						if(paf->bitvector)
-							fprintf(fp,",%d %s - %s detection",paf->modifier,affect_loc_name( paf->location ),detect_bit_name(paf->bitvector));
+						if(paf->modifier && paf->bitvector)
+						{
+							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
+							fprintf(fp,",%s detection",affect_bit_name(paf->bitvector));
+							pafcounter += 1;
+						}
+						else if(paf->bitvector)
+							fprintf(fp,",%s detection",paf->modifier,affect_loc_name( paf->location ),affect_bit_name(paf->bitvector));
 						else
 							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
 						break;
@@ -309,7 +376,7 @@ int apply_location;
 						break;
 				}
 			}
-			for(pafcounter;pafcounter<15;pafcounter=pafcounter+1)
+			for(pafcounter;pafcounter<20;pafcounter=pafcounter+1)
 			{
 				fprintf(fp,",");
 			}
