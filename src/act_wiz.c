@@ -177,24 +177,24 @@ int apply_location;
 				obj->weight / 10, \
 				obj->cost, \
 				obj->level, \
-				IS_SET(container->wear_flags, ITEM_TAKE)?"Yes":"No", \
-				IS_SET(container->wear_flags, ITEM_WEAR_FINGER)?"Yes":"No", \
-				IS_SET(container->wear_flags, ITEM_WEAR_NECK)?"Yes":"No", \
-				IS_SET(container->wear_flags, ITEM_WEAR_BODY)?"Yes":"No", \
-				IS_SET(container->wear_flags, ITEM_WEAR_HEAD)?"Yes":"No", \
-				IS_SET(container->wear_flags, ITEM_WEAR_LEGS)?"Yes":"No", \
-				IS_SET(container->wear_flags, ITEM_WEAR_FEET)?"Yes":"No", \
-				IS_SET(container->wear_flags, ITEM_WEAR_HANDS)?"Yes":"No", \
-				IS_SET(container->wear_flags, ITEM_WEAR_ARMS)?"Yes":"No", \
-				IS_SET(container->wear_flags, ITEM_WEAR_SHIELD)?"Yes":"No", \
-				IS_SET(container->wear_flags, ITEM_WEAR_ABOUT)?"Yes":"No", \
-				IS_SET(container->wear_flags, ITEM_WEAR_WAIST)?"Yes":"No", \
-				IS_SET(container->wear_flags, ITEM_WEAR_WRIST)?"Yes":"No", \
-				IS_SET(container->wear_flags, ITEM_WIELD)?"Yes":"No", \
-				IS_SET(container->wear_flags, ITEM_HOLD)?"Yes":"No", \
-				IS_SET(container->wear_flags, ITEM_NO_SAC)?"Yes":"No", \
-				IS_SET(container->wear_flags, ITEM_WEAR_FLOAT)?"Yes":"No", \
-				IS_SET(container->wear_flags, ITEM_WEAR_TATTOO)?"Yes":"No", \
+				IS_SET(obj->wear_flags, ITEM_TAKE)?"Yes":"No", \
+				IS_SET(obj->wear_flags, ITEM_WEAR_FINGER)?"Yes":"No", \
+				IS_SET(obj->wear_flags, ITEM_WEAR_NECK)?"Yes":"No", \
+				IS_SET(obj->wear_flags, ITEM_WEAR_BODY)?"Yes":"No", \
+				IS_SET(obj->wear_flags, ITEM_WEAR_HEAD)?"Yes":"No", \
+				IS_SET(obj->wear_flags, ITEM_WEAR_LEGS)?"Yes":"No", \
+				IS_SET(obj->wear_flags, ITEM_WEAR_FEET)?"Yes":"No", \
+				IS_SET(obj->wear_flags, ITEM_WEAR_HANDS)?"Yes":"No", \
+				IS_SET(obj->wear_flags, ITEM_WEAR_ARMS)?"Yes":"No", \
+				IS_SET(obj->wear_flags, ITEM_WEAR_SHIELD)?"Yes":"No", \
+				IS_SET(obj->wear_flags, ITEM_WEAR_ABOUT)?"Yes":"No", \
+				IS_SET(obj->wear_flags, ITEM_WEAR_WAIST)?"Yes":"No", \
+				IS_SET(obj->wear_flags, ITEM_WEAR_WRIST)?"Yes":"No", \
+				IS_SET(obj->wear_flags, ITEM_WIELD)?"Yes":"No", \
+				IS_SET(obj->wear_flags, ITEM_HOLD)?"Yes":"No", \
+				IS_SET(obj->wear_flags, ITEM_NO_SAC)?"Yes":"No", \
+				IS_SET(obj->wear_flags, ITEM_WEAR_FLOAT)?"Yes":"No", \
+				IS_SET(obj->wear_flags, ITEM_WEAR_TATTOO)?"Yes":"No", \
 				obj->pIndexData->condition
 			);
 		   
