@@ -163,8 +163,8 @@ int apply_location;
 			send_to_char( "File error.\n\r", ch );
 			return;
 	   }
-
-		fprintf(fp, "Vnum,Name,Type,Limit,Extra Flags,Weight,Cost,Level,Item Take,Item Wear Finger,Item Wear Neck,Item Wear Body,Item Wear Head,Item Wear Legs,Item Wear Feet, Item Wear Hands,Item Wear Arms,Item Wear Shield,Item Wear About,Item Wear Waist,Item Wear Wrist,Item Wield,Item Hold,Item No Sac,Item Wear Float,Item Wear Tattoo,WearCondition,Value0,Value1,Value2,Value3,Value4,Paf1,Paf2,Paf3,Paf4,Paf5,Paf6,Paf7,Paf8,Paf9,Paf10,Paf11,Paf12,Paf13,Paf14,Paf15,Paf16,Paf17,Paf18,Paf19,Paf20\n");
+			
+		fprintf(fp, "Vnum,Name,Type,Limit,Extra Flags,Weight,Cost,Level,Item Take,Item Wear Finger,Item Wear Neck,Item Wear Body,Item Wear Head,Item Wear Legs,Item Wear Feet, Item Wear Hands,Item Wear Arms,Item Wear Shield,Item Wear About,Item Wear Waist,Item Wear Wrist,Item Wield,Item Hold,Item No Sac,Item Wear Float,Item Wear Tattoo,WearCondition,Value0,Value1,Value2,Value3,Value4,Add Str,Add Int,Add Wis,Add Dex,Add Con,Add Cha,Add Age,Add Mana,Add Hit,Add Move,Add AC,Add Hitroll,Add Damroll,Add Size,Add Saves,Add Saves Rod,Add Saves Petri,Add Saves Breath,Add Saves Spell,Paf1,Paf2,Paf3,Paf4,Paf5,Paf6,Paf7,Paf8,Paf9,Paf10,Paf11,Paf12,Paf13,Paf14,Paf15,Paf16,Paf17,Paf18,Paf19,Paf20\n");
 	   for( obj=object_list; obj!=NULL; obj = obj->next )
 	   {
 		   
@@ -293,6 +293,56 @@ int apply_location;
 				fprintf( fp,",%d,%d,%d,%d,%d",obj->value[0], obj->value[1], obj->value[2], obj->value[3], obj->value[4] );
 				break;
 			}
+			int pafmod_str = 0;
+			int pafmod_int = 0;
+			int pafmod_wis = 0;
+			int pafmod_dex = 0;
+			int pafmod_con = 0;
+			int pafmod_cha = 0;
+			int pafmod_age = 0;
+			int pafmod_mana = 0;
+			int pafmod_hit = 0;
+			int pafmod_move = 0;
+			int pafmod_ac = 0;
+			int pafmod_hitroll = 0;
+			int pafmod_damroll = 0;
+			int pafmod_size = 0;
+			int pafmod_saves = 0;
+			int pafmod_saves_rod = 0;
+			int pafmod_saves_petri = 0;
+			int pafmod_saves_breath = 0;
+			int pafmod_saves_spell = 0;
+			
+			for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
+			{
+				switch ( paf->location )
+				{
+					default:
+					bug( "Affect_modify: unknown location %d.", paf->location );
+					return;
+
+					case APPLY_STR:				pafmod_str = paf->modifier;	break;
+					case APPLY_DEX:				pafmod_dex = paf->modifier;	break;
+					case APPLY_INT:				pafmod_int = paf->modifier;	break;
+					case APPLY_WIS:				pafmod_wis = paf->modifier;	break;
+					case APPLY_CON:				pafmod_con = paf->modifier;	break;
+					case APPLY_CHA:				pafmod_cha = paf->modifier;	break;
+					case APPLY_AGE:				pafmod_age = paf->modifier;	break;
+					case APPLY_MANA:			pafmod_mana = paf->modifier;	break;
+					case APPLY_HIT:				pafmod_hit = paf->modifier;	break;
+					case APPLY_MOVE:			pafmod_move = paf->modifier;	break;
+					case APPLY_AC:				pafmod_ac = paf->modifier;	break;
+					case APPLY_HITROLL:			pafmod_hitroll = paf->modifier;	break;
+					case APPLY_DAMROLL:			pafmod_damroll = paf->modifier;	break;
+					case APPLY_SIZE:			pafmod_size = paf->modifier;	break;
+					case APPLY_SAVES:			pafmod_saves = paf->modifier;	break;
+					case APPLY_SAVING_ROD:		pafmod_saves_rod = paf->modifier;	break;
+					case APPLY_SAVING_PETRI:	pafmod_saves_petri = paf->modifier;	break;
+					case APPLY_SAVING_BREATH:	pafmod_saves_breath = paf->modifier;	break;
+					case APPLY_SAVING_SPELL:	pafmod_saves_spell = paf->modifier;	break;
+				}
+			}
+			fprintf( fp,",%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d",pafmod_str, pafmod_int, pafmod_wis, pafmod_dex, pafmod_con, pafmod_cha, pafmod_age, pafmod_mana, pafmod_hit, pafmod_move, pafmod_ac, pafmod_hitroll, pafmod_damroll, pafmod_size, pafmod_saves, pafmod_saves_rod, pafmod_saves_petri, pafmod_saves_breath, pafmod_saves_spell );
 			int pafcounter = 0;
 			for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
 			{
@@ -300,79 +350,28 @@ int apply_location;
 				switch(paf->where)
 				{
 					case TO_AFFECTS:
-						if(paf->modifier && paf->bitvector)
-						{
-							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
+						if(paf->bitvector)
 							fprintf(fp,",%s affect",affect_bit_name(paf->bitvector));
-							pafcounter += 1;
-						}
-						else if(paf->bitvector)
-							fprintf(fp,",%s affect",paf->modifier,affect_loc_name( paf->location ),affect_bit_name(paf->bitvector));
-						else
-							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
 						break;
 					case TO_OBJECT:
-						if(paf->modifier && paf->bitvector)
-						{
-							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
+						if(paf->bitvector)
 							fprintf(fp,",%s object",affect_bit_name(paf->bitvector));
-							pafcounter += 1;
-						}
-						else if(paf->bitvector)
-							fprintf(fp,",%s object",paf->modifier,affect_loc_name( paf->location ),affect_bit_name(paf->bitvector));
-						else
-							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
 						break;
 					case TO_IMMUNE:
-						if(paf->modifier && paf->bitvector)
-						{
-							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
+						if(paf->bitvector)
 							fprintf(fp,",%s immunity",affect_bit_name(paf->bitvector));
-							pafcounter += 1;
-						}
-						else if(paf->bitvector)
-							fprintf(fp,",%s immunity",paf->modifier,affect_loc_name( paf->location ),affect_bit_name(paf->bitvector));
-						else
-							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
 						break;
 					case TO_RESIST:
-						if(paf->modifier && paf->bitvector)
-						{
-							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
+						if(paf->bitvector)
 							fprintf(fp,",%s resistance",affect_bit_name(paf->bitvector));
-							pafcounter += 1;
-						}
-						else if(paf->bitvector)
-							fprintf(fp,",%s resistance",paf->modifier,affect_loc_name( paf->location ),affect_bit_name(paf->bitvector));
-						else
-							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
 						break;
 					case TO_VULN:
-						if(paf->modifier && paf->bitvector)
-						{
-							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
+						if(paf->bitvector)
 							fprintf(fp,",%s vulnerability",affect_bit_name(paf->bitvector));
-							pafcounter += 1;
-						}
-						else if(paf->bitvector)
-							fprintf(fp,",%s vulnerability",paf->modifier,affect_loc_name( paf->location ),affect_bit_name(paf->bitvector));
-						else
-							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
 						break;
 					case TO_DETECTS:
-						if(paf->modifier && paf->bitvector)
-						{
-							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
+						if(paf->bitvector)
 							fprintf(fp,",%s detection",affect_bit_name(paf->bitvector));
-							pafcounter += 1;
-						}
-						else if(paf->bitvector)
-							fprintf(fp,",%s detection",paf->modifier,affect_loc_name( paf->location ),affect_bit_name(paf->bitvector));
-						else
-							fprintf(fp,",%d %s",paf->modifier,affect_loc_name( paf->location ));
-						break;
-					default:
-						fprintf(fp,",%d - %s - unknown bit %d:%d",paf->modifier,affect_loc_name( paf->location ),paf->where,paf->bitvector);
 						break;
 				}
 			}
