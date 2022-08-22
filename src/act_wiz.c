@@ -169,7 +169,7 @@ int apply_location;
 	   {
 
 			//Asagidaki obje turleri henuz incelenmiyor.
-			if(obj->item_type == ITEM_TREASURE || obj->item_type == ITEM_LIGHT || obj->item_type == ITEM_CLOTHING || obj->item_type == ITEM_FURNITURE || obj->item_type == ITEM_TRASH || obj->item_type == ITEM_KEY || obj->item_type == ITEM_FOOD || obj->item_type == ITEM_MONEY || obj->item_type == ITEM_BOAT || obj->item_type == ITEM_CORPSE_NPC || obj->item_type == ITEM_CORPSE_PC || obj->item_type == ITEM_FOUNTAIN || obj->item_type == ITEM_PROTECT || obj->item_type == ITEM_MAP || obj->item_type == ITEM_PORTAL || obj->item_type == ITEM_WARP_STONE || obj->item_type == ITEM_ROOM_KEY || obj->item_type == ITEM_GEM || obj->item_type == ITEM_JEWELRY || obj->item_type == ITEM_JUKEBOX || obj->item_type == ITEM_TATTOO || ITEM_MAYMUNCUK)
+			if(obj->item_type == ITEM_TREASURE || obj->item_type == ITEM_LIGHT || obj->item_type == ITEM_CLOTHING || obj->item_type == ITEM_FURNITURE || obj->item_type == ITEM_TRASH || obj->item_type == ITEM_KEY || obj->item_type == ITEM_FOOD || obj->item_type == ITEM_MONEY || obj->item_type == ITEM_BOAT || obj->item_type == ITEM_CORPSE_NPC || obj->item_type == ITEM_CORPSE_PC || obj->item_type == ITEM_FOUNTAIN || obj->item_type == ITEM_PROTECT || obj->item_type == ITEM_MAP || obj->item_type == ITEM_PORTAL || obj->item_type == ITEM_WARP_STONE || obj->item_type == ITEM_ROOM_KEY || obj->item_type == ITEM_GEM || obj->item_type == ITEM_JEWELRY || obj->item_type == ITEM_JUKEBOX || obj->item_type == ITEM_TATTOO || obj->item_type == ITEM_MAYMUNCUK)
 				continue;
 			   
 		   
