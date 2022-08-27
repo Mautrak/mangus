@@ -1100,6 +1100,7 @@ else sprintf(buf, "Önce bir görev ÝSTEmelisin, %s.",ch->name);
 				obj->short_descr = str_dup( buf );
 				
 				obj->value[0] = 1; // sword
+				obj->value[3] = 3; // pierce
 
 				act("$N $e $p veriyor.", ch, obj, questman, TO_ROOM );
 				act("$N sana $p veriyor.",   ch, obj, questman, TO_CHAR );
@@ -1115,6 +1116,7 @@ else sprintf(buf, "Önce bir görev ÝSTEmelisin, %s.",ch->name);
 				obj->short_descr = str_dup( buf );
 				
 				obj->value[0] = 2; // hancer
+				obj->value[3] = 11; // pierce
 
 				act("$N $e $p veriyor.", ch, obj, questman, TO_ROOM );
 				act("$N sana $p veriyor.",   ch, obj, questman, TO_CHAR );
