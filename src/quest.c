@@ -541,6 +541,7 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 			{
 				printf_to_char(ch,"Hangi tür silah istiyorsun?\n\r");
 				printf_to_char(ch,"Seçenekler: kýlýç, hançer, kýrbaç, balta ve egzotik\n\r");
+				printf_to_char(ch,"Örn: görev satýnal parlak kýlýç\n\r");
 				return;
 			}
 			if (is_name (arg3, (char*)"kýlýç"))
@@ -575,6 +576,7 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 			{
 				printf_to_char(ch,"Hangi tür silah istiyorsun?\n\r");
 				printf_to_char(ch,"Seçenekler: kýlýç, hançer, kýrbaç, balta ve egzotik\n\r");
+				printf_to_char(ch,"Örn: görev satýnal mat kýlýç\n\r");
 				return;
 			}
 			if (is_name (arg3, (char*)"kýlýç"))
@@ -994,6 +996,7 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 			{
 				printf_to_char(ch,"Hangi tür silah istiyorsun?\n\r");
 				printf_to_char(ch,"Seçenekler: kýlýç, hançer, kýrbaç, balta ve egzotik\n\r");
+				printf_to_char(ch,"Örn: görev sigorta parlak kýlýç\n\r");
 				return;
 			}
 
@@ -1030,6 +1033,7 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 			{
 				printf_to_char(ch,"Hangi tür silah istiyorsun?\n\r");
 				printf_to_char(ch,"Seçenekler: kýlýç, hançer, kýrbaç, balta ve egzotik\n\r");
+				printf_to_char(ch,"Örn: görev sigorta parlak kýlýç\n\r");
 				return;
 			}
 
