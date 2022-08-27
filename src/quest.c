@@ -617,6 +617,7 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 			obj->short_descr = str_dup( buf );
 			
 			obj->value[0] = 1; // sword
+			obj->value[3] = 1; // slash
 
 			act("$N $e $p veriyor.", ch, obj, questman, TO_ROOM );
 			act("$N sana $p veriyor.",   ch, obj, questman, TO_CHAR );
@@ -633,7 +634,8 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 			free_string( obj->short_descr );
 			obj->short_descr = str_dup( buf );
 			
-			obj->value[0] = 2; // sword
+			obj->value[0] = 2; // hancer
+			obj->value[3] = 11; // pierce
 
 			act("$N $e $p veriyor.", ch, obj, questman, TO_ROOM );
 			act("$N sana $p veriyor.",   ch, obj, questman, TO_CHAR );
