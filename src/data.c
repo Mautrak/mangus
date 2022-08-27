@@ -124,7 +124,7 @@ void write_channel_log(CHAR_DATA *ch, CHAR_DATA *vc, int kanal, char *argument)
 
 	data=fopen(filename,"a");
 	sprintf(buf,"%02d/%02d/%02d %02d:%02d:%02d, Oda:%6d, Char: %10s, Victim: %10s, Log: %s\n",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec,ch->in_room->vnum,ch->name,(vc != NULL)?vc->name:"None",argument);
-	fprintf(data,buf);
+	fprintf(data,(char*)buf);
 	fclose(data);
 	return;
 }
@@ -163,7 +163,7 @@ void write_event_log(char *argument)
 	sprintf(buf,"%02d/%02d/%02d %02d:%02d:%02d|%ld|%s|%ld|%ld|%s\n",\
 				tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, \
 				time_info.year,month_name[time_info.month-1],time_info.day, time_info.hour, argument);
-	fprintf(data,buf);
+	fprintf(data,(char*)buf);
 	fclose(data);
 	return;
 

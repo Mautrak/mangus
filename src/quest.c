@@ -196,7 +196,6 @@ bool quest_item_sigorta_object(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num
 
 bool quest_item_iade(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num, int quest_obj_vnum, int points)
 {
-	OBJ_DATA *obj=NULL;
 	char buf [MAX_STRING_LENGTH];
 
 	if (!IS_SET(ch->quest,quest_num))
@@ -220,14 +219,14 @@ bool quest_item_iade(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num, int ques
 void do_quest(CHAR_DATA *ch, char *argument)
 {
     CHAR_DATA *questman;
-    OBJ_DATA *obj=NULL, *obj_next;
+    OBJ_DATA *obj=NULL;
     MOB_INDEX_DATA *questinfo;
     ROOM_INDEX_DATA *pRoomIndex;
     char buf [MAX_STRING_LENGTH];
     char arg1 [MAX_INPUT_LENGTH];
     char arg2 [MAX_INPUT_LENGTH];
 	char arg3 [MAX_INPUT_LENGTH];
-    int sn,trouble_vnum=0;
+    int sn;
 
     argument = one_argument(argument, arg1);
     argument = one_argument(argument, arg2);
@@ -902,9 +901,8 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 		{
 			if (ch->pcdata->questmob == -1 && ch->pcdata->countdown > 0)
 			{
-				int reward=0, pointreward=0, pracreward=0,level;
+				int reward=0, pointreward=0, pracreward=0;
 
-				level = ch->level;
 				reward = 700 + number_range(100,700);
 				pointreward = number_range(20,40);
 
