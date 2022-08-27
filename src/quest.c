@@ -544,22 +544,22 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 				printf_to_char(ch,"Seçenekler: kýlýç, hançer, kýrbaç, balta ve egzotik\n\r");
 				return;
 			}
-			if (is_name (arg3, "kýlýç"))
+			if (is_name (arg3, (char*)"kýlýç"))
 			{
 				quest_item_buy_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1000, 1, 3);
 				return;
 			}
-			else if (is_name (arg3, "hançer"))
+			else if (is_name (arg3, (char*)"hançer"))
 			{
 				quest_item_buy_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1000, 2, 11);
 				return;
 			}
-			else if (is_name (arg3, "kýrbaç"))
+			else if (is_name (arg3, (char*)"kýrbaç"))
 			{
 				quest_item_buy_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1000, 7, 4);
 				return;
 			}
-			else if (is_name (arg3, "balta"))
+			else if (is_name (arg3, (char*)"balta"))
 			{
 				quest_item_buy_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1000, 5, 8);
 				return;
@@ -578,22 +578,22 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 				printf_to_char(ch,"Seçenekler: kýlýç, hançer, kýrbaç, balta ve egzotik\n\r");
 				return;
 			}
-			if (is_name (arg3, "kýlýç"))
+			if (is_name (arg3, (char*)"kýlýç"))
 			{
 				quest_item_buy_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1000, 1, 3);
 				return;
 			}
-			else if (is_name (arg3, "hançer"))
+			else if (is_name (arg3, (char*)"hançer"))
 			{
 				quest_item_buy_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1000, 2, 11);
 				return;
 			}
-			else if (is_name (arg3, "kýrbaç"))
+			else if (is_name (arg3, (char*)"kýrbaç"))
 			{
 				quest_item_buy_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1000, 7, 4);
 				return;
 			}
-			else if (is_name (arg3, "balta"))
+			else if (is_name (arg3, (char*)"balta"))
 			{
 				quest_item_buy_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1000, 5, 8);
 				return;
@@ -999,22 +999,22 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 				return;
 			}
 
-			if (is_name (arg3, "kýlýç"))
+			if (is_name (arg3, (char*)"kýlýç"))
 			{
 				quest_item_sigorta_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1, 3);
 				return;
 			}
-			else if (is_name (arg3, "hançer"))
+			else if (is_name (arg3, (char*)"hançer"))
 			{
 				quest_item_sigorta_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 2, 11);
 				return;
 			}
-			else if (is_name (arg3, "kýrbaç"))
+			else if (is_name (arg3, (char*)"kýrbaç"))
 			{
 				quest_item_sigorta_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 7, 4);
 				return;
 			}
-			else if (is_name (arg3, "balta"))
+			else if (is_name (arg3,(char*) "balta"))
 			{
 				quest_item_sigorta_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 5, 8);
 				return;
@@ -1035,22 +1035,22 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 				return;
 			}
 
-			if (is_name (arg3, "kýlýç"))
+			if (is_name (arg3, (char*)"kýlýç"))
 			{
 				quest_item_sigorta_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1, 3);
 				return;
 			}
-			else if (is_name (arg3, "hançer"))
+			else if (is_name (arg3, (char*)"hançer"))
 			{
 				quest_item_sigorta_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 2, 11);
 				return;
 			}
-			else if (is_name (arg3, "kýrbaç"))
+			else if (is_name (arg3, (char*)"kýrbaç"))
 			{
 				quest_item_sigorta_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 7, 4);
 				return;
 			}
-			else if (is_name (arg3, "balta"))
+			else if (is_name (arg3, (char*)"balta"))
 			{
 				quest_item_sigorta_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 5, 8);
 				return;
