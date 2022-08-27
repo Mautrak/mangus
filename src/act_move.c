@@ -245,6 +245,12 @@ void move_char( CHAR_DATA *ch, int door, bool follow )
       send_to_char( "Orasý bir kabal bölgesi. 20. seviyeden önce oraya girmesen iyi olur. Tabii senin için...\n\r", ch );
 	return;
     }
+	
+	if (IS_SET(to_room->area->area_flag, AREA_CABAL) && !IS_NPC(ch) && (ch->pcdata->oyuncu_katli == 0))
+    {
+      send_to_char( "Orasý bir kabal bölgesi ve oyuncu katli sözleþmesini kabul etmeyenlerin oraya girmesine izin verilmiyor.\n\r", ch );
+	return;
+    }
 
     if (MOUNTED(ch))
     {
@@ -722,93 +728,96 @@ void scan_char(CHAR_DATA *victim, CHAR_DATA *ch, sh_int depth, sh_int door)
 
 void do_open( CHAR_DATA *ch, char *argument )
 {
-    char arg[MAX_INPUT_LENGTH];
-    OBJ_DATA *obj;
-    int door;
+	char arg[MAX_INPUT_LENGTH];
+	OBJ_DATA *obj;
+	int door;
 
-    one_argument( argument, arg );
+	one_argument( argument, arg );
 
-    if ( arg[0] == '\0' )
-    {
-      send_to_char( "Neyi açacaksýn?\n\r", ch );
-	return;
-    }
-
-
-
-    if ( ( obj = get_obj_here( ch, arg ) ) != NULL )
-    {
- 	/* open portal */
-	if (obj->item_type == ITEM_PORTAL)
+	if ( arg[0] == '\0' )
 	{
-	    if (!IS_SET(obj->value[1], EX_ISDOOR))
-	    {
-		send_to_char("Bunu yapamazsýn.\n\r",ch);
+		send_to_char( "Neyi açacaksýn?\n\r", ch );
 		return;
-	    }
-
-	    if (!IS_SET(obj->value[1], EX_CLOSED))
-	    {
-		send_to_char("Zaten açýk.\n\r",ch);
-		return;
-	    }
-
-	    if (IS_SET(obj->value[1], EX_LOCKED))
-	    {
-		send_to_char("Kilitli.\n\r",ch);
-		return;
-	    }
-
-	    REMOVE_BIT(obj->value[1], EX_CLOSED);
-	    act("$p açýyorsun.",ch,obj,NULL,TO_CHAR);
-	    act("$n $p açýyor.",ch,obj,NULL,TO_ROOM);
-	    return;
- 	}
-
-	/* 'open object' */
-  if ( obj->item_type != ITEM_CONTAINER)
-	    { send_to_char( "Bu bir taþýyýcý deðil.\n\r", ch ); return; }
-	if ( !IS_SET(obj->value[1], CONT_CLOSED) )
-	    { send_to_char( "Zaten açýk.\n\r",ch ); return; }
-	if ( !IS_SET(obj->value[1], CONT_CLOSEABLE) )
-	    { send_to_char( "Bunu yapamazsýn.\n\r",ch ); return; }
-	if ( IS_SET(obj->value[1], CONT_LOCKED) )
-	    { send_to_char( "Kilitli.\n\r",ch ); return; }
-
-	REMOVE_BIT(obj->value[1], CONT_CLOSED);
-  act("$p açýyorsun.",ch,obj,NULL,TO_CHAR);
-	act("$n $p açýyor.", ch, obj, NULL, TO_ROOM );
-	return;
-    }
-    if ( ( door = find_door( ch, arg ) ) >= 0 )
-    {
-	/* 'open door' */
-	ROOM_INDEX_DATA *to_room;
-	EXIT_DATA *pexit;
-	EXIT_DATA *pexit_rev;
-
-	pexit = ch->in_room->exit[door];
-  if ( !IS_SET(pexit->exit_info, EX_CLOSED) )
-	    { send_to_char( "Zaten açýk.\n\r",ch ); return; }
-	if (  IS_SET(pexit->exit_info, EX_LOCKED) )
-	    { send_to_char( "Kilitli.\n\r", ch ); return; }
-
-	REMOVE_BIT(pexit->exit_info, EX_CLOSED);
-  act( "$n $d açýyor.", ch, NULL, pexit->keyword, TO_ROOM );
-	send_to_char("Tamam.\n\r", ch );
-
-	/* open the other side */
-	if ( ( to_room   = pexit->u1.to_room            ) != NULL
-	&&   ( pexit_rev = to_room->exit[rev_dir[door]] ) != NULL
-	&&   pexit_rev->u1.to_room == ch->in_room )
-	{
-	    CHAR_DATA *rch;
-
-	    REMOVE_BIT( pexit_rev->exit_info, EX_CLOSED );
-	    for ( rch = to_room->people; rch != NULL; rch = rch->next_in_room )
-      act( "$d açýlýyor.", rch, NULL, pexit_rev->keyword, TO_CHAR );
 	}
-	return;
+
+	if ( ( door = find_door( ch, arg ) ) >= 0 )
+	{
+		/* 'open door' */
+		ROOM_INDEX_DATA *to_room;
+		EXIT_DATA *pexit;
+		EXIT_DATA *pexit_rev;
+
+		pexit = ch->in_room->exit[door];
+		if ( !IS_SET(pexit->exit_info, EX_CLOSED) )
+		{ send_to_char( "Zaten açýk.\n\r",ch ); return; }
+		if (  IS_SET(pexit->exit_info, EX_LOCKED) )
+		{ send_to_char( "Kilitli.\n\r", ch ); return; }
+
+		REMOVE_BIT(pexit->exit_info, EX_CLOSED);
+		act( "$n $d açýyor.", ch, NULL, pexit->keyword, TO_ROOM );
+		send_to_char("Tamam.\n\r", ch );
+
+		/* open the other side */
+		if ( ( to_room   = pexit->u1.to_room            ) != NULL
+		&&   ( pexit_rev = to_room->exit[rev_dir[door]] ) != NULL
+		&&   pexit_rev->u1.to_room == ch->in_room )
+		{
+			CHAR_DATA *rch;
+
+			REMOVE_BIT( pexit_rev->exit_info, EX_CLOSED );
+			for ( rch = to_room->people; rch != NULL; rch = rch->next_in_room )
+			{
+				act( "$d açýlýyor.", rch, NULL, pexit_rev->keyword, TO_CHAR );
+			}
+		}
+		return;
+	}
+
+
+
+	if ( ( obj = get_obj_here( ch, arg ) ) != NULL )
+	{
+		/* open portal */
+		if (obj->item_type == ITEM_PORTAL)
+		{
+			if (!IS_SET(obj->value[1], EX_ISDOOR))
+			{
+				send_to_char("Bunu yapamazsýn.\n\r",ch);
+				return;
+			}
+
+			if (!IS_SET(obj->value[1], EX_CLOSED))
+			{
+				send_to_char("Zaten açýk.\n\r",ch);
+				return;
+			}
+
+			if (IS_SET(obj->value[1], EX_LOCKED))
+			{
+				send_to_char("Kilitli.\n\r",ch);
+				return;
+			}
+
+			REMOVE_BIT(obj->value[1], EX_CLOSED);
+			act("$p açýyorsun.",ch,obj,NULL,TO_CHAR);
+			act("$n $p açýyor.",ch,obj,NULL,TO_ROOM);
+			return;
+		}
+
+		/* 'open object' */
+		if ( obj->item_type != ITEM_CONTAINER)
+			{ send_to_char( "Bu bir taþýyýcý deðil.\n\r", ch ); return; }
+		if ( !IS_SET(obj->value[1], CONT_CLOSED) )
+			{ send_to_char( "Zaten açýk.\n\r",ch ); return; }
+		if ( !IS_SET(obj->value[1], CONT_CLOSEABLE) )
+			{ send_to_char( "Bunu yapamazsýn.\n\r",ch ); return; }
+		if ( IS_SET(obj->value[1], CONT_LOCKED) )
+			{ send_to_char( "Kilitli.\n\r",ch ); return; }
+
+		REMOVE_BIT(obj->value[1], CONT_CLOSED);
+		act("$p açýyorsun.",ch,obj,NULL,TO_CHAR);
+		act("$n $p açýyor.", ch, obj, NULL, TO_ROOM );
+		return;
     }
     return;
 }
