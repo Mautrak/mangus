@@ -109,7 +109,7 @@ bool quest_extract_object(CHAR_DATA *ch,int obj_vnum)
 	return TRUE;
 }
 
-bool quest_item_buy_object(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num, int quest_obj_vnum, int questp)
+bool quest_item_buy_object(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num, int quest_obj_vnum, int questp, int weapon_type, int dam_type)
 {
 	OBJ_DATA *obj=NULL;
 	char buf [MAX_STRING_LENGTH];
@@ -125,79 +125,21 @@ bool quest_item_buy_object(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num, in
 		ch->pcdata->questpoints -= questp;
 		obj = create_object(get_obj_index(quest_obj_vnum),ch->level);
 		SET_BIT(ch->quest,quest_num);
-		sprintf( buf, obj->short_descr, IS_GOOD(ch) ? "parlak-mavi" : IS_NEUTRAL(ch) ? "parlak-yeþil" : "parlak-kýzýl", ch->name);
-		free_string( obj->short_descr );
-		obj->short_descr = str_dup( buf );
-		act("$N $e $p veriyor.", ch, obj, questman, TO_ROOM );
-		act("$N sana $p veriyor.",   ch, obj, questman, TO_CHAR );
-		obj_to_char(obj, ch);
-		return TRUE;
-	}
-	else
-	{
-		sprintf(buf, "Üzgünüm %s, bunun için yeterli görev puanýn yok.",ch->name);
-		do_tell_quest(ch,questman,buf);
-		return FALSE;
-	}
-	
-	return FALSE;
-}
-
-bool quest_item_sigorta_object(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num, int quest_obj_vnum)
-{
-	OBJ_DATA *obj=NULL;
-	char buf [MAX_STRING_LENGTH];
-
-	if (!IS_SET(ch->quest,quest_num))
-	{
-		sprintf(buf,"Üzgünüm %s, fakat bahsettiðin ödülü henüz almamýþsýn.\n\r",ch->name);
-		do_tell_quest(ch,questman,buf);
-		return FALSE;
-	}
-	
-	quest_extract_object(ch, quest_obj_vnum);
-	
-	obj = create_object(get_obj_index(quest_obj_vnum),ch->level);
-	
-	sprintf( buf, obj->short_descr, IS_GOOD(ch) ? "parlak-mavi" : IS_NEUTRAL(ch) ? "parlak-yeþil" : "parlak-kýzýl", ch->name);
-	
-	free_string( obj->short_descr );
-	obj->short_descr = str_dup( buf );
-	
-	act( "$N $p objesini $e veriyor.", ch, obj, questman, TO_ROOM );
-	act( "$N $p objesini sana veriyor.",   ch, obj, questman, TO_CHAR );
-	obj_to_char(obj, ch);
-	return TRUE;
-}
-
-bool quest_item_buy_weapon(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num, int quest_obj_vnum, int questp, int weapon_type, int dam_type)
-{
-	OBJ_DATA *obj=NULL;
-	char buf [MAX_STRING_LENGTH];
-	
-	if (IS_SET(ch->quest,quest_num))
-    {
-      do_tell_quest(ch,questman,(char*)"Bu eþyayý zaten almýþsýn. Kaybettiysen sigortadan faydalan.");
-      return FALSE;
-    }
-	
-	if (ch->pcdata->questpoints >= questp)
-	{
-		ch->pcdata->questpoints -= questp;
-		obj = create_object(get_obj_index(quest_obj_vnum),ch->level);
-		SET_BIT(ch->quest,quest_num);
-		if(quest_obj_vnum == QUEST_ITEM_SILAH1)
-		{
-			sprintf( buf, obj->short_descr, IS_GOOD(ch) ? "parlak-mavi" : IS_NEUTRAL(ch) ? "parlak-yeþil" : "parlak-kýzýl", ch->name);
-		}
-		else
+		if(quest_obj_vnum == QUEST_ITEM_SILAH2)
 		{
 			sprintf( buf, obj->short_descr, IS_GOOD(ch) ? "mat-mavi" : IS_NEUTRAL(ch) ? "mat-yeþil" : "mat-kýzýl", ch->name);
 		}
+		else
+		{
+			sprintf( buf, obj->short_descr, IS_GOOD(ch) ? "parlak-mavi" : IS_NEUTRAL(ch) ? "parlak-yeþil" : "parlak-kýzýl", ch->name);
+		}
 		free_string( obj->short_descr );
 		obj->short_descr = str_dup( buf );
-		obj->value[0] = weapon_type;
-		obj->value[3] = dam_type;
+		if(quest_obj_vnum == QUEST_ITEM_SILAH1 || quest_obj_vnum == QUEST_ITEM_SILAH2)
+		{
+			obj->value[0] = weapon_type;
+			obj->value[3] = dam_type;
+		}
 		act("$N $e $p veriyor.", ch, obj, questman, TO_ROOM );
 		act("$N sana $p veriyor.",   ch, obj, questman, TO_CHAR );
 		obj_to_char(obj, ch);
@@ -213,7 +155,7 @@ bool quest_item_buy_weapon(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num, in
 	return FALSE;
 }
 
-bool quest_item_sigorta_weapon(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num, int quest_obj_vnum, int weapon_type, int dam_type)
+bool quest_item_sigorta_object(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num, int quest_obj_vnum, int weapon_type, int dam_type)
 {
 	OBJ_DATA *obj=NULL;
 	char buf [MAX_STRING_LENGTH];
@@ -229,24 +171,48 @@ bool quest_item_sigorta_weapon(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num
 	
 	obj = create_object(get_obj_index(quest_obj_vnum),ch->level);
 	
-	if(quest_obj_vnum == QUEST_ITEM_SILAH1)
+	if(quest_obj_vnum == QUEST_ITEM_SILAH2)
 	{
-		sprintf( buf, obj->short_descr, IS_GOOD(ch) ? "parlak-mavi" : IS_NEUTRAL(ch) ? "parlak-yeþil" : "parlak-kýzýl", ch->name);
+		sprintf( buf, obj->short_descr, IS_GOOD(ch) ? "mat-mavi" : IS_NEUTRAL(ch) ? "mat-yeþil" : "mat-kýzýl", ch->name);
 	}
 	else
 	{
-		sprintf( buf, obj->short_descr, IS_GOOD(ch) ? "mat-mavi" : IS_NEUTRAL(ch) ? "mat-yeþil" : "mat-kýzýl", ch->name);
+		sprintf( buf, obj->short_descr, IS_GOOD(ch) ? "parlak-mavi" : IS_NEUTRAL(ch) ? "parlak-yeþil" : "parlak-kýzýl", ch->name);
 	}
 	
 	free_string( obj->short_descr );
 	obj->short_descr = str_dup( buf );
-	obj->value[0] = weapon_type;
-	obj->value[3] = dam_type;
+	if(quest_obj_vnum == QUEST_ITEM_SILAH1 || quest_obj_vnum == QUEST_ITEM_SILAH2)
+	{
+		obj->value[0] = weapon_type;
+		obj->value[3] = dam_type;
+	}
 	
 	act( "$N $p objesini $e veriyor.", ch, obj, questman, TO_ROOM );
 	act( "$N $p objesini sana veriyor.",   ch, obj, questman, TO_CHAR );
 	obj_to_char(obj, ch);
 	return TRUE;
+}
+
+bool quest_item_iade(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num, int quest_obj_vnum, int points)
+{
+	OBJ_DATA *obj=NULL;
+	char buf [MAX_STRING_LENGTH];
+
+	if (!IS_SET(ch->quest,quest_num))
+	{
+		sprintf(buf,"Üzgünüm %s, fakat bahsettiðin ödülü henüz almamýþsýn.\n\r",ch->name);
+		do_tell_quest(ch,questman,buf);
+		return FALSE;
+	}
+	
+	quest_extract_object(ch, quest_obj_vnum);
+	
+	REMOVE_BIT( ch->quest , quest_num );
+	
+	ch->pcdata->questpoints += points;
+	printf_to_char(ch,"Ýade iþlemi tamamlandý. Puanlarýn hesabýna geçti. Yine bekleriz.\n\r");
+  	return TRUE;
 }
 
 /* The main quest function */
@@ -534,39 +500,39 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 
 		else if (is_name(arg2, (char*)"çanta"))
 		{
-			quest_item_buy_object(ch, questman, QUEST_BACKPACK, QUEST_ITEM4, 5000);
+			quest_item_buy_object(ch, questman, QUEST_BACKPACK, QUEST_ITEM4, 5000,0,0);
 			return;
 		}
 
 		else if (is_name(arg2, (char*)"testi"))
 		{
-			quest_item_buy_object(ch, questman, QUEST_DECANTER, QUEST_ITEM5, 500);
+			quest_item_buy_object(ch, questman, QUEST_DECANTER, QUEST_ITEM5, 500,0,0);
 			return;
 		}
 
 		else if (is_name(arg2, (char*)"kemer"))
 		{
-			quest_item_buy_object(ch, questman, QUEST_GIRTH, QUEST_ITEM1, 1000);
+			quest_item_buy_object(ch, questman, QUEST_GIRTH, QUEST_ITEM1, 1000,0,0);
 			return;
 		}
 		else if (is_name(arg2, (char*)"iþlemeli"))
 		{
-			quest_item_buy_object(ch, questman, QUEST_YUZUK1, QUEST_ITEM_YUZUK1, 750);
+			quest_item_buy_object(ch, questman, QUEST_YUZUK1, QUEST_ITEM_YUZUK1, 750,0,0);
 			return;
 		}
 		else if (is_name(arg2, (char*)"desenli"))
 		{
-			quest_item_buy_object(ch, questman, QUEST_YUZUK2, QUEST_ITEM_YUZUK2, 750);
+			quest_item_buy_object(ch, questman, QUEST_YUZUK2, QUEST_ITEM_YUZUK2, 750,0,0);
 			return;
 		}
 		else if (is_name(arg2, (char*)"oymalý"))
 		{
-			quest_item_buy_object(ch, questman, QUEST_YUZUK3, QUEST_ITEM_YUZUK3, 750);
+			quest_item_buy_object(ch, questman, QUEST_YUZUK3, QUEST_ITEM_YUZUK3, 750,0,0);
 			return;
 		}
 		else if (is_name(arg2, (char*)"kakmalý"))
 		{
-			quest_item_buy_object(ch, questman, QUEST_YUZUK4, QUEST_ITEM_YUZUK4, 750);
+			quest_item_buy_object(ch, questman, QUEST_YUZUK4, QUEST_ITEM_YUZUK4, 750,0,0);
 			return;
 		}
 
@@ -580,27 +546,27 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 			}
 			if (is_name (arg3, "kýlýç"))
 			{
-				quest_item_buy_weapon(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1000, 1, 3);
+				quest_item_buy_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1000, 1, 3);
 				return;
 			}
 			else if (is_name (arg3, "hançer"))
 			{
-				quest_item_buy_weapon(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1000, 2, 11);
+				quest_item_buy_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1000, 2, 11);
 				return;
 			}
 			else if (is_name (arg3, "kýrbaç"))
 			{
-				quest_item_buy_weapon(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1000, 7, 4);
+				quest_item_buy_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1000, 7, 4);
 				return;
 			}
 			else if (is_name (arg3, "balta"))
 			{
-				quest_item_buy_weapon(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1000, 5, 8);
+				quest_item_buy_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1000, 5, 8);
 				return;
 			}
 			else // exotic
 			{
-				quest_item_buy_weapon(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1000, 0, 18);
+				quest_item_buy_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1000, 0, 18);
 				return;
 			}
 		}
@@ -614,27 +580,27 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 			}
 			if (is_name (arg3, "kýlýç"))
 			{
-				quest_item_buy_weapon(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1000, 1, 3);
+				quest_item_buy_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1000, 1, 3);
 				return;
 			}
 			else if (is_name (arg3, "hançer"))
 			{
-				quest_item_buy_weapon(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1000, 2, 11);
+				quest_item_buy_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1000, 2, 11);
 				return;
 			}
 			else if (is_name (arg3, "kýrbaç"))
 			{
-				quest_item_buy_weapon(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1000, 7, 4);
+				quest_item_buy_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1000, 7, 4);
 				return;
 			}
 			else if (is_name (arg3, "balta"))
 			{
-				quest_item_buy_weapon(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1000, 5, 8);
+				quest_item_buy_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1000, 5, 8);
 				return;
 			}
 			else // exotic
 			{
-				quest_item_buy_weapon(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1000, 0, 18);
+				quest_item_buy_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1000, 0, 18);
 				return;
 			}
 		}
@@ -1011,17 +977,17 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 
 		if (is_name(arg2, (char*)"kemer"))
 		{
-			quest_item_sigorta_object(ch, questman, QUEST_GIRTH, QUEST_ITEM1);
+			quest_item_sigorta_object(ch, questman, QUEST_GIRTH, QUEST_ITEM1,0,0);
 			return;
 		}
 		else if (is_name(arg2, (char*)"çanta"))
 		{
-			quest_item_sigorta_object(ch, questman, QUEST_BACKPACK, QUEST_ITEM4);
+			quest_item_sigorta_object(ch, questman, QUEST_BACKPACK, QUEST_ITEM4,0,0);
 			return;
 		}
 		else if (is_name(arg2, (char*)"testi"))
 		{
-			quest_item_sigorta_object(ch, questman, QUEST_DECANTER, QUEST_ITEM5);
+			quest_item_sigorta_object(ch, questman, QUEST_DECANTER, QUEST_ITEM5,0,0);
 			return;
 		}
 		else if (is_name(arg2, (char*)"parlak"))
@@ -1035,27 +1001,27 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 
 			if (is_name (arg3, "kýlýç"))
 			{
-				quest_item_sigorta_weapon(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1, 3);
+				quest_item_sigorta_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1, 3);
 				return;
 			}
 			else if (is_name (arg3, "hançer"))
 			{
-				quest_item_sigorta_weapon(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 2, 11);
+				quest_item_sigorta_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 2, 11);
 				return;
 			}
 			else if (is_name (arg3, "kýrbaç"))
 			{
-				quest_item_sigorta_weapon(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 7, 4);
+				quest_item_sigorta_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 7, 4);
 				return;
 			}
 			else if (is_name (arg3, "balta"))
 			{
-				quest_item_sigorta_weapon(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 5, 8);
+				quest_item_sigorta_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 5, 8);
 				return;
 			}
 			else // exotic
 			{
-				quest_item_sigorta_weapon(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 0, 18);
+				quest_item_sigorta_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 0, 18);
 				return;
 			}
 			
@@ -1071,49 +1037,49 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 
 			if (is_name (arg3, "kýlýç"))
 			{
-				quest_item_sigorta_weapon(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1, 3);
+				quest_item_sigorta_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1, 3);
 				return;
 			}
 			else if (is_name (arg3, "hançer"))
 			{
-				quest_item_sigorta_weapon(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 2, 11);
+				quest_item_sigorta_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 2, 11);
 				return;
 			}
 			else if (is_name (arg3, "kýrbaç"))
 			{
-				quest_item_sigorta_weapon(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 7, 4);
+				quest_item_sigorta_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 7, 4);
 				return;
 			}
 			else if (is_name (arg3, "balta"))
 			{
-				quest_item_sigorta_weapon(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 5, 8);
+				quest_item_sigorta_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 5, 8);
 				return;
 			}
 			else // exotic
 			{
-				quest_item_sigorta_weapon(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 0, 18);
+				quest_item_sigorta_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 0, 18);
 				return;
 			}
 			
 		}
 		else if (is_name(arg2, (char*)"iþlemeli"))
 		{
-			quest_item_sigorta_object(ch, questman, QUEST_YUZUK1, QUEST_ITEM_YUZUK1);
+			quest_item_sigorta_object(ch, questman, QUEST_YUZUK1, QUEST_ITEM_YUZUK1,0,0);
 			return;
 		}
 		else if (is_name(arg2, (char*)"desenli"))
 		{
-			quest_item_sigorta_object(ch, questman, QUEST_YUZUK2, QUEST_ITEM_YUZUK2);
+			quest_item_sigorta_object(ch, questman, QUEST_YUZUK2, QUEST_ITEM_YUZUK2,0,0);
 			return;
 		}
 		else if (is_name(arg2, (char*)"oymalý"))
 		{
-			quest_item_sigorta_object(ch, questman, QUEST_YUZUK3, QUEST_ITEM_YUZUK3);
+			quest_item_sigorta_object(ch, questman, QUEST_YUZUK3, QUEST_ITEM_YUZUK3,0,0);
 			return;
 		}
 		else if (is_name(arg2, (char*)"kakmalý"))
 		{
-			quest_item_sigorta_object(ch, questman, QUEST_YUZUK4, QUEST_ITEM_YUZUK4);
+			quest_item_sigorta_object(ch, questman, QUEST_YUZUK4, QUEST_ITEM_YUZUK4,0,0);
 			return;
 		}
 		return;
@@ -1128,141 +1094,49 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
   		}
   		else if (is_name(arg2, (char*)"kemer"))
   		{
-  			if( !IS_SET(ch->quest,QUEST_GIRTH) )
-  			{
-  				printf_to_char(ch,"Bu eþyayý zaten almamýþsýn.\n\r");
-  				return;
-  			}
-			
-			quest_extract_object(ch, QUEST_ITEM1);
-
-  			REMOVE_BIT( ch->quest , QUEST_GIRTH );
-  			ch->pcdata->questpoints += 900;
-  			printf_to_char(ch,"Ýade iþlemi tamamlandý. 900 GP hesabýna geçti.\n\r");
+			quest_item_iade(ch, questman, QUEST_GIRTH, QUEST_ITEM1, 900);
   			return;
   		}
   		else if (is_name(arg2, (char*)"çanta"))
   		{
-  			if( !IS_SET(ch->quest,QUEST_BACKPACK) )
-  			{
-  				printf_to_char(ch,"Bu eþyayý zaten almamýþsýn.\n\r");
-  				return;
-  			}
-			
-			quest_extract_object(ch, QUEST_ITEM4);
-
-  			REMOVE_BIT( ch->quest , QUEST_BACKPACK );
-  			ch->pcdata->questpoints += 4500;
-  			printf_to_char(ch,"Ýade iþlemi tamamlandý. 4500 GP hesabýna geçti.\n\r");
+			quest_item_iade(ch, questman, QUEST_BACKPACK, QUEST_ITEM4, 4500);
   			return;
   		}
   		else if (is_name(arg2, (char*)"testi"))
   		{
-  			if( !IS_SET(ch->quest,QUEST_DECANTER) )
-  			{
-  				printf_to_char(ch,"Bu eþyayý zaten almamýþsýn.\n\r");
-  				return;
-  			}
-			
-			quest_extract_object(ch, QUEST_ITEM5);
-
-  			REMOVE_BIT( ch->quest , QUEST_DECANTER );
-  			ch->pcdata->questpoints += 450;
-  			printf_to_char(ch,"Ýade iþlemi tamamlandý. 450 GP hesabýna geçti.\n\r");
-  			return;
+			quest_item_iade(ch, questman, QUEST_DECANTER, QUEST_ITEM5, 450);
+			return;
   		}
   		else if (is_name(arg2, (char*)"parlak"))
   		{
-  			if( !IS_SET(ch->quest,QUEST_SILAH1) )
-  			{
-  				printf_to_char(ch,"Bu eþyayý zaten almamýþsýn.\n\r");
-  				return;
-  			}
-			
-			quest_extract_object(ch, QUEST_ITEM_SILAH1);
-
-  			REMOVE_BIT( ch->quest , QUEST_SILAH1 );
-  			ch->pcdata->questpoints += 900;
-  			printf_to_char(ch,"Ýade iþlemi tamamlandý. 900 GP hesabýna geçti.\n\r");
-  			return;
+			quest_item_iade(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 900);
+			return;
   		}
-      else if (is_name(arg2, (char*)"mat"))
+		else if (is_name(arg2, (char*)"mat"))
   		{
-  			if( !IS_SET(ch->quest,QUEST_SILAH2) )
-  			{
-  				printf_to_char(ch,"Bu eþyayý zaten almamýþsýn.\n\r");
-  				return;
-  			}
-			
-			quest_extract_object(ch, QUEST_ITEM_SILAH2);
-
-  			REMOVE_BIT( ch->quest , QUEST_SILAH2 );
-  			ch->pcdata->questpoints += 900;
-  			printf_to_char(ch,"Ýade iþlemi tamamlandý. 900 GP hesabýna geçti.\n\r");
-  			return;
+			quest_item_iade(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 900);
+			return;
   		}
-  		else if (is_name(arg2, (char*)"iþlemeli"))
+		else if (is_name(arg2, (char*)"iþlemeli"))
   		{
-  			if( !IS_SET(ch->quest,QUEST_YUZUK1) )
-  			{
-  				printf_to_char(ch,"Bu eþyayý zaten almamýþsýn.\n\r");
-  				return;
-  			}
-			
-			quest_extract_object(ch, QUEST_ITEM_YUZUK1);
-
-  			REMOVE_BIT( ch->quest , QUEST_YUZUK1 );
-  			ch->pcdata->questpoints += 675;
-  			printf_to_char(ch,"Ýade iþlemi tamamlandý. 675 GP hesabýna geçti.\n\r");
-  			return;
+			quest_item_iade(ch, questman, QUEST_YUZUK1, QUEST_ITEM_YUZUK1, 675);
+			return;
   		}
-      else if (is_name(arg2, (char*)"desenli"))
+		else if (is_name(arg2, (char*)"desenli"))
   		{
-  			if( !IS_SET(ch->quest,QUEST_YUZUK2) )
-  			{
-  				printf_to_char(ch,"Bu eþyayý zaten almamýþsýn.\n\r");
-  				return;
-  			}
-			
-			quest_extract_object(ch, QUEST_ITEM_YUZUK2);
-
-  			REMOVE_BIT( ch->quest , QUEST_YUZUK2 );
-  			ch->pcdata->questpoints += 675;
-  			printf_to_char(ch,"Ýade iþlemi tamamlandý. 675 GP hesabýna geçti.\n\r");
-  			return;
+			quest_item_iade(ch, questman, QUEST_YUZUK2, QUEST_ITEM_YUZUK2, 675);
+			return;
   		}
-      else if (is_name(arg2, (char*)"oymalý"))
+		else if (is_name(arg2, (char*)"oymalý"))
   		{
-  			if( !IS_SET(ch->quest,QUEST_YUZUK3) )
-  			{
-  				printf_to_char(ch,"Bu eþyayý zaten almamýþsýn.\n\r");
-  				return;
-  			}
-
-			quest_extract_object(ch, QUEST_ITEM_YUZUK3);
-
-  			REMOVE_BIT( ch->quest , QUEST_YUZUK3 );
-  			ch->pcdata->questpoints += 675;
-  			printf_to_char(ch,"Ýade iþlemi tamamlandý. 675 GP hesabýna geçti.\n\r");
-  			return;
+			quest_item_iade(ch, questman, QUEST_YUZUK3, QUEST_ITEM_YUZUK3, 675);
+			return;
   		}
-      else if (is_name(arg2, (char*)"kakmalý"))
+		else if (is_name(arg2, (char*)"kakmalý"))
   		{
-  			if( !IS_SET(ch->quest,QUEST_YUZUK4) )
-  			{
-  				printf_to_char(ch,"Bu eþyayý zaten almamýþsýn.\n\r");
-  				return;
-  			}
-
-			quest_extract_object(ch, QUEST_ITEM_YUZUK4);
-
-  			REMOVE_BIT( ch->quest , QUEST_YUZUK4 );
-  			ch->pcdata->questpoints += 675;
-  			printf_to_char(ch,"Ýade iþlemi tamamlandý. 675 GP hesabýna geçti.\n\r");
-  			return;
+			quest_item_iade(ch, questman, QUEST_YUZUK4, QUEST_ITEM_YUZUK4, 675);
+			return;
   		}
-
-
   		else
   		{
   			printf_to_char(ch,"Hangi görev ekipmanýný iade etmek istiyorsun?\n\rKullaným: {Rgörev iade <ekipman>{x\n\r");
