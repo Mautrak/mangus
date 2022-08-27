@@ -155,7 +155,7 @@ bool quest_item_sigorta_object(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num
 		return FALSE;
 	}
 	
-	quest_extract_object(CHAR_DATA *ch, quest_obj_vnum);
+	quest_extract_object(ch, quest_obj_vnum);
 	
 	obj = create_object(get_obj_index(quest_obj_vnum),ch->level);
 	
@@ -225,7 +225,7 @@ bool quest_item_sigorta_weapon(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num
 		return FALSE;
 	}
 	
-	quest_extract_object(CHAR_DATA *ch, quest_obj_vnum);
+	quest_extract_object(ch, quest_obj_vnum);
 	
 	obj = create_object(get_obj_index(quest_obj_vnum),ch->level);
 	
@@ -1134,7 +1134,7 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
   				return;
   			}
 			
-			quest_extract_object(CHAR_DATA *ch,int QUEST_ITEM1);
+			quest_extract_object(ch, QUEST_ITEM1);
 
   			REMOVE_BIT( ch->quest , QUEST_GIRTH );
   			ch->pcdata->questpoints += 900;
@@ -1149,7 +1149,7 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
   				return;
   			}
 			
-			quest_extract_object(CHAR_DATA *ch,int QUEST_ITEM4);
+			quest_extract_object(ch, QUEST_ITEM4);
 
   			REMOVE_BIT( ch->quest , QUEST_BACKPACK );
   			ch->pcdata->questpoints += 4500;
@@ -1164,7 +1164,7 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
   				return;
   			}
 			
-			quest_extract_object(CHAR_DATA *ch,int QUEST_ITEM5);
+			quest_extract_object(ch, QUEST_ITEM5);
 
   			REMOVE_BIT( ch->quest , QUEST_DECANTER );
   			ch->pcdata->questpoints += 450;
@@ -1179,7 +1179,7 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
   				return;
   			}
 			
-			quest_extract_object(CHAR_DATA *ch,int QUEST_ITEM_SILAH1);
+			quest_extract_object(ch, QUEST_ITEM_SILAH1);
 
   			REMOVE_BIT( ch->quest , QUEST_SILAH1 );
   			ch->pcdata->questpoints += 900;
@@ -1194,7 +1194,7 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
   				return;
   			}
 			
-			quest_extract_object(CHAR_DATA *ch,int QUEST_ITEM_SILAH2);
+			quest_extract_object(ch, QUEST_ITEM_SILAH2);
 
   			REMOVE_BIT( ch->quest , QUEST_SILAH2 );
   			ch->pcdata->questpoints += 900;
@@ -1209,7 +1209,7 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
   				return;
   			}
 			
-			quest_extract_object(CHAR_DATA *ch,int QUEST_ITEM_YUZUK1);
+			quest_extract_object(ch, QUEST_ITEM_YUZUK1);
 
   			REMOVE_BIT( ch->quest , QUEST_YUZUK1 );
   			ch->pcdata->questpoints += 675;
@@ -1224,7 +1224,7 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
   				return;
   			}
 			
-			quest_extract_object(CHAR_DATA *ch,int QUEST_ITEM_YUZUK2);
+			quest_extract_object(ch, QUEST_ITEM_YUZUK2);
 
   			REMOVE_BIT( ch->quest , QUEST_YUZUK2 );
   			ch->pcdata->questpoints += 675;
@@ -1239,7 +1239,7 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
   				return;
   			}
 
-			quest_extract_object(CHAR_DATA *ch,int QUEST_ITEM_YUZUK3);
+			quest_extract_object(ch, QUEST_ITEM_YUZUK3);
 
   			REMOVE_BIT( ch->quest , QUEST_YUZUK3 );
   			ch->pcdata->questpoints += 675;
@@ -1254,7 +1254,7 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
   				return;
   			}
 
-			quest_extract_object(CHAR_DATA *ch,int QUEST_ITEM_YUZUK4);
+			quest_extract_object(ch, QUEST_ITEM_YUZUK4);
 
   			REMOVE_BIT( ch->quest , QUEST_YUZUK4 );
   			ch->pcdata->questpoints += 675;
