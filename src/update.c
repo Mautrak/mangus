@@ -998,7 +998,6 @@ int age_to_num( int age )
 	case  5:
 	weather_info.sunlight = SUN_LIGHT;
 	strcat( buf, "Güneþin ilk ýþýklarý gelmeye baþladý.\n\r" );
-	write_event_log((char *)"Güneþin ilk ýþýklarý gelmeye baþladý.");
 	break;
 
 	case  6:
@@ -1010,13 +1009,11 @@ int age_to_num( int age )
 	case 19:
 	weather_info.sunlight = SUN_SET;
 	strcat( buf, "Güneþ batýda yavaþça kayboluyor.\n\r" );
-	write_event_log((char *)"Güneþ batýda yavaþça kayboluyor.");
 	break;
 
 	case 20:
 	weather_info.sunlight = SUN_DARK;
 	strcat( buf, "Gece baþladý.\n\r" );
-	write_event_log((char *)"Gece baþladý.");
 	break;
 	}
 
@@ -1048,6 +1045,7 @@ int age_to_num( int age )
  	|| ( weather_info.mmhg < 1010 && number_range(0,3) == 0 ) )
  	{
  	    strcat( buf, "Gökyüzü bulutlanýyor.\n\r" );
+		write_event_log((char *)"Gökyüzü bulutlanýyor.");
  	    weather_info.sky = SKY_CLOUDY;
  	}
  	break;
@@ -2541,6 +2539,7 @@ void check_reboot( void )
   case 10:
   case 15:
   sprintf(buf,"\007***** %i DAKÝKA SONRA MANGUS YENÝDEN BAÞLATILACAK *****\007\n\r",reboot_counter);
+  write_event_log(buf);
     for (d = descriptor_list; d != NULL; d = d->next)
 	  write_to_buffer(d,buf,0);
   default:
