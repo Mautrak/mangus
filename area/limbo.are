@@ -547,7 +547,7 @@ F
 A 14 500 TU
 #36
 parlak kahraman silah~
-%s parlak kahraman silahý [%s]~
+%s kahraman silahý [%s]~
 Parlak bir silah yerde duruyor.~
 platinum~
 weapon AGIOY ANP
@@ -565,7 +565,7 @@ A
 14 500
 #37
 mat kahraman silah~
-%s mat kahraman silahý [%s]~
+%s kahraman silahý [%s]~
 Mat bir silah yerde duruyor.~
 platinum~
 weapon AGIOY ANP
