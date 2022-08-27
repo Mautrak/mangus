@@ -117,7 +117,7 @@ bool quest_item_buy_object(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num, in
 	if (IS_SET(ch->quest,quest_num))
     {
       do_tell_quest(ch,questman,(char*)"Bu eþyayý zaten almýþsýn. Kaybettiysen sigortadan faydalan.");
-      return;
+      return FALSE;
     }
 	
 	if (ch->pcdata->questpoints >= questp)
