@@ -2219,7 +2219,14 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
     obj->from           = str_dup(""); /* used with body parts */
     obj->pit            = OBJ_VNUM_PIT; /* default for corpse decaying */
     obj->altar          = ROOM_VNUM_ALTAR; /* default for corpses */
-    obj->condition	= pObjIndex->condition;
+	if(Count == TRUE)
+	{
+		obj->condition	= pObjIndex->condition;
+	}
+	else
+	{
+		obj->condition	= obj_random_condition();
+	}
 
     if (level == -1 || pObjIndex->new_format)
 	obj->cost	= pObjIndex->cost;

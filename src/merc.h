@@ -3375,6 +3375,7 @@ int position_dice args( (void) );
 int sex_dice args( (void) );
 /* obj_creator.c */
 void obj_random_paf		args( (OBJ_DATA *obj) );
+int  obj_random_condition  args( (void) );
 /* quest.c */
 bool gorev_ekipmani_mi args( (OBJ_DATA *obj) );
 

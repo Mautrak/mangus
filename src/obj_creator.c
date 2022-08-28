@@ -165,9 +165,9 @@ void obj_random_paf(OBJ_DATA *obj)
 {
 	int location=0;
 	int bitvector=0;
-	while(number_percent()<50)
+	while(number_range(1,5000)==1)
 	{
-		if(number_percent()<80)
+		if(number_percent()<90)
 		{
 			location = obj_random_paf_find_available_location(obj);
 			if(location == 0)
@@ -201,4 +201,25 @@ void obj_random_paf(OBJ_DATA *obj)
 			top_affect++;
 		}
 	}
+}
+
+int obj_random_condition()
+{
+	int percent = 0;
+	
+	percent = number_percent();
+	
+	if(percent<=50)
+		return 100;
+	else if(percent>50 && percent<=70)
+		return 90;
+	else if(percent>70 && percent<=85)
+		return 75;
+	else if(percent>85 && percent<=90)
+		return 50;
+	else if(percent>90 && percent<=95)
+		return 35;
+	else
+		return 20;
+	return 20;
 }
