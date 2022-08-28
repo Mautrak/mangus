@@ -2269,6 +2269,7 @@ struct	obj_index_data
     int                 progtypes;
     int                 limit;
     OPROG_DATA	       *oprogs;
+	bool		random_object;
 };
 
 
