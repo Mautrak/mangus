@@ -26,22 +26,62 @@
 #include "tables.h"
 #include "db.h"
 
-int obj_random_paf_modifier()
+int obj_random_paf_modifier(int location, int level)
 {
-	int random_number = number_range(1,100);
+	int random_number;
 	
-	if(random_number<=50)
-		return 1;
-	else if(random_number<=80)
-		return 2;
-	else if(random_number<=90)
-		return 3;
-	else if(random_number<=95)
-		return 4;
-	else if(random_number<=98)
-		return 5;
-	else
-		return 6;
+	if (location == APPLY_STR || location == APPLY_DEX || location == APPLY_INT || 
+		location == APPLY_WIS || location == APPLY_CON || location == APPLY_CHA )
+	{
+		random_number = number_range(1,100);
+		
+		if(random_number<=50)
+			return number_range(1,2);
+		else if(random_number<=80)
+			return number_range(1,3);
+		else if(random_number<=90)
+			return number_range(1,4);
+		else if(random_number<=95)
+			return number_range(1,5);
+		else if(random_number<=98)
+			return number_range(1,6);
+		else
+			return 6;
+	}
+	if (location == APPLY_MANA || location == APPLY_HIT || location == APPLY_MOVE)
+	{
+		random_number = number_range(1,100);
+		
+		if(random_number<=50)
+			return number_range(10,UMAX(11,int(level/3)));
+		else if(random_number<=80)
+			return number_range(10,UMAX(10,int(level/2)));
+		else if(random_number<=90)
+			return number_range(10,UMAX(10,int(level)));
+		else if(random_number<=95)
+			return number_range(10,UMAX(10,int(level*(3/2))));
+		else if(random_number<=98)
+			return number_range(10,UMAX(10,int(level*2)));
+		else
+			return number_range(10,UMAX(10,int(level*3)));
+	}
+	if (location == APPLY_HITROLL || location == APPLY_DAMROLL)
+	{
+		random_number = number_range(1,100);
+		
+		if(random_number<=50)
+			return number_range(1,UMAX(2,int(level/20)));
+		else if(random_number<=80)
+			return number_range(1,UMAX(2,int(level/15)));
+		else if(random_number<=90)
+			return number_range(1,UMAX(2,int(level/12)));
+		else if(random_number<=95)
+			return number_range(1,UMAX(2,int(level/10)));
+		else if(random_number<=98)
+			return number_range(1,UMAX(2,int(level/8)));
+		else
+			return number_range(1,UMAX(2,int(level/6)));
+	}
 	return 1;
 }
 
@@ -92,7 +132,7 @@ void obj_random_paf(OBJ_DATA *obj)
 		paf->level              = obj->level;
 		paf->duration           = -1;
 		paf->location           = location;
-		paf->modifier           = obj_random_paf_modifier();
+		paf->modifier           = obj_random_paf_modifier(location,obj->level);
 		paf->bitvector          = 0;
 		paf->next               = obj->affected;
 		obj->affected			= paf;
