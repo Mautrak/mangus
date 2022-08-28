@@ -2318,7 +2318,7 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
 	break;
     }
 	
-	if(obj->pIndexData->count == TRUE)
+	if(Count == TRUE)
 	{
 		if(number_percent()<50)
 		{
