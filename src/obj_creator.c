@@ -155,10 +155,10 @@ int obj_random_paf_find_available_resistance(OBJ_DATA *obj)
 	for (paf = obj->affected; paf != NULL; paf = paf->next)
 	{
 		if(paf->where == TO_RESIST && IS_SET(paf->bitvector,random_res) )
-			return paf->bitvector;
+			return 0;
 	}
 	
-	return SET_BIT(paf->bitvector,random_res);
+	return random_res;
 }
 
 void obj_random_paf(OBJ_DATA *obj)
