@@ -446,6 +446,7 @@ void    load_omprogs    args( ( FILE *fp ) );
 void 	load_new_mobiles	args( ( FILE *fp ) );
 void	load_old_obj	args( ( FILE *fp ) );
 void 	load_objects	args( ( FILE *fp ) );
+void 	load_new_objects	args( ( FILE *fp ) );
 void	load_resets	args( ( FILE *fp ) );
 void	load_rooms	args( ( FILE *fp ) );
 void	load_shops	args( ( FILE *fp ) );
@@ -609,6 +610,7 @@ void boot_db( void )
 		else if ( !str_cmp( word, "NEW_MOBILES"  ) ) load_new_mobiles (fpArea);
 		else if ( !str_cmp( word, "OBJOLD"   ) ) load_old_obj (fpArea);
 	  	else if ( !str_cmp( word, "OBJECTS"  ) ) load_objects (fpArea);
+		else if ( !str_cmp( word, "NEW_OBJECTS"  ) ) load_new_objects (fpArea);
 		else if ( !str_cmp( word, "RESETS"   ) ) load_resets  (fpArea);
 		else if ( !str_cmp( word, "ROOMS"    ) ) load_rooms   (fpArea);
 		else if ( !str_cmp( word, "SHOPS"    ) ) load_shops   (fpArea);
@@ -799,7 +801,7 @@ void load_old_obj( FILE *fp )
 	letter				= fread_letter( fp );
 	if ( letter != '#' )
 	{
-	    bug( "Load_objects: # not found.", 0 );
+	    bug( "Load_old_objects: # not found.", 0 );
 	    exit( 1 );
 	}
 
@@ -810,13 +812,14 @@ void load_old_obj( FILE *fp )
 	fBootDb = FALSE;
 	if ( get_obj_index( vnum ) != NULL )
 	{
-	    bug( "Load_objects: vnum %d duplicated.", vnum );
+	    bug( "Load_old_objects: vnum %d duplicated.", vnum );
 	    exit( 1 );
 	}
 	fBootDb = TRUE;
 
 	pObjIndex			= (OBJ_INDEX_DATA *)alloc_perm( sizeof(*pObjIndex) );
 	pObjIndex->vnum			= vnum;
+	pObjIndex->random_object		= FALSE;
 	pObjIndex->new_format		= FALSE;
 	pObjIndex->reset_num	 	= 0;
 	pObjIndex->name			= fread_string( fp );
@@ -2216,7 +2219,14 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
     obj->from           = str_dup(""); /* used with body parts */
     obj->pit            = OBJ_VNUM_PIT; /* default for corpse decaying */
     obj->altar          = ROOM_VNUM_ALTAR; /* default for corpses */
-    obj->condition	= pObjIndex->condition;
+	if(Count == TRUE)
+	{
+		obj->condition	= pObjIndex->condition;
+	}
+	else
+	{
+		obj->condition	= obj_random_condition();
+	}
 
     if (level == -1 || pObjIndex->new_format)
 	obj->cost	= pObjIndex->cost;
@@ -2314,6 +2324,11 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
 	    obj->value[0]	= obj->cost;
 	break;
     }
+	
+	if(Count == TRUE)
+	{
+		obj_random_paf(obj);
+	}
 
     for (paf = pObjIndex->affected; paf != NULL; paf = paf->next)
 	if ( paf->location == APPLY_SPELL_AFFECT )

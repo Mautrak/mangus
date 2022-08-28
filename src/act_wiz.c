@@ -1582,8 +1582,8 @@ void do_ostat( CHAR_DATA *ch, char *argument )
 	obj->name );
     send_to_char( buf, ch );
 
-    sprintf( buf, "Vnum: %d  Format: %s  Type: %s  Resets: %d\n\r",
-	obj->pIndexData->vnum, obj->pIndexData->new_format ? "new" : "old",
+    sprintf( buf, "Vnum: %d  Format: %s  Random: %s  Type: %s  Resets: %d\n\r",
+	obj->pIndexData->vnum, obj->pIndexData->new_format ? "new" : "old", obj->pIndexData->random_object ? "yes" : "no",
 	item_type_name(obj), obj->pIndexData->reset_num );
     send_to_char( buf, ch );
 
