@@ -158,7 +158,7 @@ int obj_random_paf_find_available_resistance(OBJ_DATA *obj)
 			return paf->bitvector;
 	}
 	
-	return SET_BIT(paf->bitvector,random_location);
+	return SET_BIT(paf->bitvector,random_res);
 }
 
 void obj_random_paf(OBJ_DATA *obj)
@@ -187,7 +187,6 @@ void obj_random_paf(OBJ_DATA *obj)
 		}
 		else
 		{
-			bitvector = obj_random_paf_find_available_location(bitvector);
 			AFFECT_DATA *paf;
 			paf						= (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
 			paf->where				= TO_RESIST;
@@ -196,7 +195,7 @@ void obj_random_paf(OBJ_DATA *obj)
 			paf->duration           = -1;
 			paf->location           = 0;
 			paf->modifier           = 0;
-			paf->bitvector          = obj_random_paf_find_available_resistance(obj);
+			paf->bitvector          = obj_random_paf_find_available_location(obj);
 			paf->next               = obj->affected;
 			obj->affected			= paf;
 			top_affect++;
