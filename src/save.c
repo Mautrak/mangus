@@ -601,7 +601,23 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
             paf->bitvector
             );
     }
-
+	
+	for ( paf = obj->affected; paf != NULL; paf = paf->next )
+    {
+		if (paf->type < 0)
+		{
+			fprintf( fp, "Affs %3d %3d %3d %3d %3d %3d %10d\n",
+			paf->type,
+			paf->where,
+			paf->level,
+			paf->duration,
+			paf->modifier,
+			paf->location,
+			paf->bitvector
+			);
+		}
+    }
+		
     for ( ed = obj->extra_descr; ed != NULL; ed = ed->next )
     {
 	fprintf( fp, "ExDe %s~ %s~\n",
@@ -1638,59 +1654,79 @@ void fread_obj( CHAR_DATA *ch, FILE *fp )
 
 	switch ( UPPER(word[0]) )
 	{
-	case '*':
-	    fMatch = TRUE;
-	    fread_to_eol( fp );
-	    break;
+		case '*':
+			fMatch = TRUE;
+			fread_to_eol( fp );
+			break;
 
-	case 'A':
-	    if (!str_cmp(word,"AffD"))
-	    {
-		AFFECT_DATA *paf;
-		int sn;
+		case 'A':
+			if (!str_cmp(word,"AffD"))
+			{
+				AFFECT_DATA *paf;
+				int sn;
 
-		paf = new_affect();
+				paf = new_affect();
 
-		sn = skill_lookup(fread_word(fp));
-		if (sn < 0)
-		    bug("Fread_obj: unknown skill.",0);
-		else
-		    paf->type = sn;
+				sn = skill_lookup(fread_word(fp));
+				if (sn < 0)
+					bug("Fread_obj: unknown skill.",0);
+				else
+					paf->type = sn;
 
-		paf->level	= fread_number( fp );
-		paf->duration	= fread_number( fp );
-		paf->modifier	= fread_number( fp );
-		paf->location	= fread_number( fp );
-		paf->bitvector	= fread_number( fp );
-		paf->next	= obj->affected;
-		obj->affected	= paf;
-		fMatch		= TRUE;
-		break;
-	    }
+				paf->level	= fread_number( fp );
+				paf->duration	= fread_number( fp );
+				paf->modifier	= fread_number( fp );
+				paf->location	= fread_number( fp );
+				paf->bitvector	= fread_number( fp );
+				paf->next	= obj->affected;
+				obj->affected	= paf;
+				fMatch		= TRUE;
+				break;
+			}
             if (!str_cmp(word,"Affc"))
             {
-                AFFECT_DATA *paf;
-                int sn;
+				AFFECT_DATA *paf;
+				int sn;
 
-                paf = new_affect();
+				paf = new_affect();
 
-                sn = skill_lookup(fread_word(fp));
-                if (sn < 0)
-                    bug("Fread_obj: unknown skill.",0);
-                else
-                    paf->type = sn;
+				sn = skill_lookup(fread_word(fp));
+				if (sn < 0)
+					bug("Fread_obj: unknown skill.",0);
+				else
+					paf->type = sn;
 
-		paf->where	= fread_number( fp );
-                paf->level      = fread_number( fp );
-                paf->duration   = fread_number( fp );
-                paf->modifier   = fread_number( fp );
-                paf->location   = fread_number( fp );
-                paf->bitvector  = fread_number( fp );
-                paf->next       = obj->affected;
-                obj->affected   = paf;
-                fMatch          = TRUE;
-                break;
+				paf->where	= fread_number( fp );
+				paf->level      = fread_number( fp );
+				paf->duration   = fread_number( fp );
+				paf->modifier   = fread_number( fp );
+				paf->location   = fread_number( fp );
+				paf->bitvector  = fread_number( fp );
+				paf->next       = obj->affected;
+				obj->affected   = paf;
+				fMatch          = TRUE;
+				break;
             }
+			if (!str_cmp(word,"Affs"))
+            {
+				AFFECT_DATA *paf;
+				int sn;
+
+				paf = new_affect();
+
+				paf->type 		= fread_number( fp );
+				paf->where		= fread_number( fp );
+				paf->level      = fread_number( fp );
+				paf->duration   = fread_number( fp );
+				paf->modifier   = fread_number( fp );
+				paf->location   = fread_number( fp );
+				paf->bitvector  = fread_number( fp );
+				paf->next       = obj->affected;
+				obj->affected   = paf;
+				fMatch          = TRUE;
+				break;
+            }
+
 	    break;
 
 	case 'C':
