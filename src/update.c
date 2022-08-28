@@ -2512,6 +2512,7 @@ void room_affect_update( void )
 void check_reboot( void )
 {
  char buf[MAX_STRING_LENGTH];
+ char buf2[MAX_STRING_LENGTH];
  DESCRIPTOR_DATA *d;
  int t;
 
@@ -2539,7 +2540,8 @@ void check_reboot( void )
   case 10:
   case 15:
   sprintf(buf,"\007***** %i DAKÝKA SONRA MANGUS YENÝDEN BAÞLATILACAK *****\007\n\r",reboot_counter);
-  write_event_log(buf);
+  sprintf(buf2,"%i dakika sonra Mangus yeniden baþlatýlacak.\n\r",reboot_counter);
+  write_event_log(buf2);
     for (d = descriptor_list; d != NULL; d = d->next)
 	  write_to_buffer(d,buf,0);
   default:

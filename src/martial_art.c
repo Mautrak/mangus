@@ -3144,8 +3144,8 @@ void do_shield( CHAR_DATA *ch, char *argument )
     /* modifiers */
 
     /* skill */
-   chance = chance * ch_weapon / 200;
-   chance = chance * 100 / vict_shield;
+   chance = int(chance * ch_weapon / 200);
+   chance = int(chance * 100 / vict_shield);
 
     /* dex vs. strength */
     chance += get_curr_stat(ch,STAT_DEX);
