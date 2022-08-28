@@ -48,13 +48,32 @@ int obj_random_paf_modifier()
 int obj_random_paf_find_available_location(OBJ_DATA *obj)
 {
 	AFFECT_DATA *paf;
-	int random_location = number_range(1,6); //str,int,wis,dex,con,cha
+	int random_number = number_range(1,11); //str,int,wis,dex,con,cha
+	int random_location = 0;
+	
+	switch(random_number)
+	{
+		case 1:		random_location = APPLY_STR; break;
+		case 2:		random_location = APPLY_DEX; break;
+		case 3:		random_location = APPLY_INT; break;
+		case 4:		random_location = APPLY_WIS; break;
+		case 5:		random_location = APPLY_CON; break;
+		case 6:		random_location = APPLY_CHA; break;
+		case 7:		random_location = APPLY_MANA; break;
+		case 8:		random_location = APPLY_HIT; break;
+		case 9:		random_location = APPLY_MOVE; break;
+		case 10:	random_location = APPLY_HITROLL; break;
+		case 11:	random_location = APPLY_DAMROLL; break;
+		default:	return 0;
+	}
+	
 	
 	for (paf = obj->affected; paf != NULL; paf = paf->next)
 	{
 		if(paf->location == random_location)
 			return 0;
 	}
+	
 	return random_location;
 }
 
