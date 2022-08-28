@@ -55,15 +55,15 @@ int obj_random_paf_modifier(int location, int level)
 		if(random_number<=50)
 			return number_range(10,UMAX(11,int(level/3)));
 		else if(random_number<=80)
-			return number_range(10,UMAX(10,int(level/2)));
+			return number_range(10,UMAX(11,int(level/2)));
 		else if(random_number<=90)
-			return number_range(10,UMAX(10,int(level)));
+			return number_range(10,UMAX(11,int(level)));
 		else if(random_number<=95)
-			return number_range(10,UMAX(10,int(level*(3/2))));
+			return number_range(10,UMAX(11,int(level*(3/2))));
 		else if(random_number<=98)
-			return number_range(10,UMAX(10,int(level*2)));
+			return number_range(10,UMAX(11,int(level*2)));
 		else
-			return number_range(10,UMAX(10,int(level*3)));
+			return number_range(10,UMAX(11,int(level*3)));
 	}
 	if (location == APPLY_HITROLL || location == APPLY_DAMROLL)
 	{
@@ -117,25 +117,89 @@ int obj_random_paf_find_available_location(OBJ_DATA *obj)
 	return random_location;
 }
 
+int obj_random_paf_find_available_resistance(OBJ_DATA *obj)
+{
+	AFFECT_DATA *paf;
+	int random_number = number_range(1,23); //str,int,wis,dex,con,cha
+	int random_res = 0;
+	
+	switch(random_number)
+	{
+		case 1:		random_res = RES_SUMMON; break;
+		case 2:		random_res = RES_CHARM; break;
+		case 3:		random_res = RES_MAGIC; break;
+		case 4:		random_res = RES_WEAPON; break;
+		case 5:		random_res = RES_BASH; break;
+		case 6:		random_res = RES_PIERCE; break;
+		case 7:		random_res = RES_SLASH; break;
+		case 8:		random_res = RES_FIRE; break;
+		case 9:		random_res = RES_COLD; break;
+		case 10:	random_res = RES_LIGHTNING; break;
+		case 11:	random_res = RES_ACID; break;
+		case 12:	random_res = RES_POISON; break;
+		case 13:	random_res = RES_NEGATIVE; break;
+		case 14:	random_res = RES_HOLY; break;
+		case 15:	random_res = RES_ENERGY; break;
+		case 16:	random_res = RES_MENTAL; break;
+		case 17:	random_res = RES_DISEASE; break;
+		case 18:	random_res = RES_DROWNING; break;
+		case 19:	random_res = RES_LIGHT; break;
+		case 20:	random_res = RES_SOUND; break;
+		case 21:	random_res = RES_WOOD; break;
+		case 22:	random_res = RES_SILVER; break;
+		case 23:	random_res = RES_IRON; break;
+		default:	random_res = RES_IRON; break;
+	}
+	
+	
+	for (paf = obj->affected; paf != NULL; paf = paf->next)
+	{
+		if(paf->where == TO_RESIST && IS_SET(paf->bitvector,random_res) )
+			return paf->bitvector;
+	}
+	
+	return SET_BIT(paf->bitvector,random_location);
+}
+
 void obj_random_paf(OBJ_DATA *obj)
 {
 	int location=0;
+	int bitvector=0;
 	while(number_percent()<50)
 	{
-		location = obj_random_paf_find_available_location(obj);
-		if(location == 0)
-			continue;
-		AFFECT_DATA *paf;
-		paf						= (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
-		paf->where				= TO_OBJECT;
-		paf->type               = -1;
-		paf->level              = obj->level;
-		paf->duration           = -1;
-		paf->location           = location;
-		paf->modifier           = obj_random_paf_modifier(location,obj->level);
-		paf->bitvector          = 0;
-		paf->next               = obj->affected;
-		obj->affected			= paf;
-		top_affect++;
+		if(number_percent()<80)
+		{
+			location = obj_random_paf_find_available_location(obj);
+			if(location == 0)
+				continue;
+			AFFECT_DATA *paf;
+			paf						= (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
+			paf->where				= TO_OBJECT;
+			paf->type               = -1;
+			paf->level              = obj->level;
+			paf->duration           = -1;
+			paf->location           = location;
+			paf->modifier           = obj_random_paf_modifier(location,obj->level);
+			paf->bitvector          = 0;
+			paf->next               = obj->affected;
+			obj->affected			= paf;
+			top_affect++;
+		}
+		else
+		{
+			bitvector = obj_random_paf_find_available_location(bitvector);
+			AFFECT_DATA *paf;
+			paf						= (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
+			paf->where				= TO_RESIST;
+			paf->type               = -1;
+            paf->level              = obj->level;
+			paf->duration           = -1;
+			paf->location           = 0;
+			paf->modifier           = 0;
+			paf->bitvector          = obj_random_paf_find_available_resistance(obj);
+			paf->next               = obj->affected;
+			obj->affected			= paf;
+			top_affect++;
+		}
 	}
 }
