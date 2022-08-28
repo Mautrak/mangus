@@ -566,8 +566,8 @@ void load_new_objects( FILE *fp )
         pObjIndex->vnum                 = vnum;
 		pObjIndex->random_object		= TRUE;
         pObjIndex->new_format           = TRUE;
-	pObjIndex->reset_num		= 0;
-	newobjs++;
+		pObjIndex->reset_num		= 0;
+		newobjs++;
         pObjIndex->name                 = fread_string( fp );
         pObjIndex->short_descr          = fread_string( fp );
         pObjIndex->description          = fread_string( fp );
@@ -576,56 +576,56 @@ void load_new_objects( FILE *fp )
         pObjIndex->item_type            = item_lookup(fread_word( fp ));
         pObjIndex->extra_flags          = fread_flag( fp );
         pObjIndex->wear_flags           = fread_flag( fp );
-	switch(pObjIndex->item_type)
-	{
-	case ITEM_WEAPON:
-	    pObjIndex->value[0]		= weapon_type(fread_word(fp));
-	    pObjIndex->value[1]		= fread_number(fp);
-	    pObjIndex->value[2]		= fread_number(fp);
-	    pObjIndex->value[3]		= attack_lookup(fread_word(fp));
-	    pObjIndex->value[4]		= fread_flag(fp);
-	    break;
-	case ITEM_CONTAINER:
-	    pObjIndex->value[0]		= fread_number(fp);
-	    pObjIndex->value[1]		= fread_flag(fp);
-	    pObjIndex->value[2]		= fread_number(fp);
-	    pObjIndex->value[3]		= fread_number(fp);
-	    pObjIndex->value[4]		= fread_number(fp);
-	    break;
-        case ITEM_DRINK_CON:
-	case ITEM_FOUNTAIN:
-            pObjIndex->value[0]         = fread_number(fp);
-            pObjIndex->value[1]         = fread_number(fp);
-            pObjIndex->value[2]         = liq_lookup(fread_word(fp));
-            pObjIndex->value[3]         = fread_number(fp);
-            pObjIndex->value[4]         = fread_number(fp);
-            break;
-	case ITEM_WAND:
-	case ITEM_STAFF:
-	    pObjIndex->value[0]		= fread_number(fp);
-	    pObjIndex->value[1]		= fread_number(fp);
-	    pObjIndex->value[2]		= fread_number(fp);
-	    pObjIndex->value[3]		= skill_lookup(fread_word(fp));
-	    pObjIndex->value[4]		= fread_number(fp);
-	    break;
-	case ITEM_POTION:
-	case ITEM_PILL:
-	case ITEM_SCROLL:
- 	    pObjIndex->value[0]		= fread_number(fp);
-	    pObjIndex->value[1]		= skill_lookup(fread_word(fp));
-	    pObjIndex->value[2]		= skill_lookup(fread_word(fp));
-	    pObjIndex->value[3]		= skill_lookup(fread_word(fp));
-	    pObjIndex->value[4]		= skill_lookup(fread_word(fp));
-	    break;
-	default:
-            pObjIndex->value[0]             = fread_flag( fp );
-            pObjIndex->value[1]             = fread_flag( fp );
-            pObjIndex->value[2]             = fread_flag( fp );
-            pObjIndex->value[3]             = fread_flag( fp );
-	    pObjIndex->value[4]		    = fread_flag( fp );
-	    break;
-	}
-	pObjIndex->level		= fread_number( fp );
+		switch(pObjIndex->item_type)
+		{
+		case ITEM_WEAPON:
+			pObjIndex->value[0]		= weapon_type(fread_word(fp));
+			pObjIndex->value[1]		= fread_number(fp);
+			pObjIndex->value[2]		= fread_number(fp);
+			pObjIndex->value[3]		= attack_lookup(fread_word(fp));
+			pObjIndex->value[4]		= fread_flag(fp);
+			break;
+		case ITEM_CONTAINER:
+			pObjIndex->value[0]		= fread_number(fp);
+			pObjIndex->value[1]		= fread_flag(fp);
+			pObjIndex->value[2]		= fread_number(fp);
+			pObjIndex->value[3]		= fread_number(fp);
+			pObjIndex->value[4]		= fread_number(fp);
+			break;
+			case ITEM_DRINK_CON:
+		case ITEM_FOUNTAIN:
+				pObjIndex->value[0]         = fread_number(fp);
+				pObjIndex->value[1]         = fread_number(fp);
+				pObjIndex->value[2]         = liq_lookup(fread_word(fp));
+				pObjIndex->value[3]         = fread_number(fp);
+				pObjIndex->value[4]         = fread_number(fp);
+				break;
+		case ITEM_WAND:
+		case ITEM_STAFF:
+			pObjIndex->value[0]		= fread_number(fp);
+			pObjIndex->value[1]		= fread_number(fp);
+			pObjIndex->value[2]		= fread_number(fp);
+			pObjIndex->value[3]		= skill_lookup(fread_word(fp));
+			pObjIndex->value[4]		= fread_number(fp);
+			break;
+		case ITEM_POTION:
+		case ITEM_PILL:
+		case ITEM_SCROLL:
+			pObjIndex->value[0]		= fread_number(fp);
+			pObjIndex->value[1]		= skill_lookup(fread_word(fp));
+			pObjIndex->value[2]		= skill_lookup(fread_word(fp));
+			pObjIndex->value[3]		= skill_lookup(fread_word(fp));
+			pObjIndex->value[4]		= skill_lookup(fread_word(fp));
+			break;
+		default:
+				pObjIndex->value[0]             = fread_flag( fp );
+				pObjIndex->value[1]             = fread_flag( fp );
+				pObjIndex->value[2]             = fread_flag( fp );
+				pObjIndex->value[3]             = fread_flag( fp );
+			pObjIndex->value[4]		    = fread_flag( fp );
+			break;
+		}
+		pObjIndex->level		= fread_number( fp );
         pObjIndex->weight               = fread_number( fp );
         pObjIndex->cost                 = fread_number( fp );
         pObjIndex->progtypes            = 0;
@@ -634,17 +634,17 @@ void load_new_objects( FILE *fp )
 
         /* condition */
         letter 				= fread_letter( fp );
-	switch (letter)
- 	{
-	    case ('P') :		pObjIndex->condition = 100; break;
-	    case ('G') :		pObjIndex->condition =  90; break;
-	    case ('A') :		pObjIndex->condition =  75; break;
-	    case ('W') :		pObjIndex->condition =  50; break;
-	    case ('D') :		pObjIndex->condition =  25; break;
-	    case ('B') :		pObjIndex->condition =  10; break;
-	    case ('R') :		pObjIndex->condition =   0; break;
-	    default:			pObjIndex->condition = 100; break;
-	}
+		switch (letter)
+		{
+			case ('P') :		pObjIndex->condition = 100; break;
+			case ('G') :		pObjIndex->condition =  90; break;
+			case ('A') :		pObjIndex->condition =  75; break;
+			case ('W') :		pObjIndex->condition =  50; break;
+			case ('D') :		pObjIndex->condition =  25; break;
+			case ('B') :		pObjIndex->condition =  10; break;
+			case ('R') :		pObjIndex->condition =   0; break;
+			default:			pObjIndex->condition = 100; break;
+		}
 
         for ( ; ; )
         {
@@ -654,57 +654,16 @@ void load_new_objects( FILE *fp )
 
             if ( letter == 'A' )
             {
-                AFFECT_DATA *paf;
-
-                paf                     = (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
-		paf->where		= TO_OBJECT;
-                paf->type               = -1;
-                paf->level              = pObjIndex->level;
-                paf->duration           = -1;
-                paf->location           = fread_number( fp );
-                paf->modifier           = fread_number( fp );
-                paf->bitvector          = 0;
-                paf->next               = pObjIndex->affected;
-                pObjIndex->affected     = paf;
-                top_affect++;
+				fread_number( fp );
+				fread_number( fp );
             }
 
-	    else if (letter == 'F')
+			else if (letter == 'F')
             {
-                AFFECT_DATA *paf;
-
-                paf                     = (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
-		letter 			= fread_letter(fp);
-		switch (letter)
-	 	{
-		case 'A':
-                    paf->where          = TO_AFFECTS;
-		    break;
-		case 'I':
-		    paf->where		= TO_IMMUNE;
-		    break;
-		case 'R':
-		    paf->where		= TO_RESIST;
-		    break;
-		case 'V':
-		    paf->where		= TO_VULN;
-		    break;
-		case 'D':
-		    paf->where		= TO_DETECTS;
-		    break;
-		default:
-            	    bug( "Load_objects: Bad where on flag set.", 0 );
-            	   exit( 1 );
-		}
-                paf->type               = -1;
-                paf->level              = pObjIndex->level;
-                paf->duration           = -1;
-                paf->location           = fread_number(fp);
-                paf->modifier           = fread_number(fp);
-                paf->bitvector          = fread_flag(fp);
-                paf->next               = pObjIndex->affected;
-                pObjIndex->affected     = paf;
-                top_affect++;
+                fread_letter(fp);
+				fread_number(fp);
+                fread_number(fp);
+                fread_flag(fp);
             }
 
             else if ( letter == 'E' )
