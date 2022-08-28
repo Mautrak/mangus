@@ -195,7 +195,7 @@ void obj_random_paf(OBJ_DATA *obj)
 			paf->duration           = -1;
 			paf->location           = 0;
 			paf->modifier           = 0;
-			paf->bitvector          = obj_random_paf_find_available_location(obj);
+			paf->bitvector          = obj_random_paf_find_available_resistance(obj);
 			paf->next               = obj->affected;
 			obj->affected			= paf;
 			top_affect++;
