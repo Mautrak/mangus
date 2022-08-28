@@ -45,17 +45,32 @@ int obj_random_paf_modifier()
 	return 1;
 }
 
+int obj_random_paf_find_available_location(OBJ_DATA *obj)
+{
+	int random_location = number_range(1,6); //str,int,wis,dex,con,cha
+	for (paf = parent->affected; paf != NULL; paf = paf->next)
+	{
+		if(paf->location == random_location)
+			return 0;
+	}
+	return random_location;
+}
+
 void obj_random_paf(OBJ_DATA *obj)
 {
+	int location=0;
 	while(number_percent()<50)
 	{
+		location = obj_random_paf_find_available_location(obj);
+		if(location == 0)
+			continue;
 		AFFECT_DATA *paf;
 		paf						= (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
 		paf->where				= TO_OBJECT;
 		paf->type               = -1;
 		paf->level              = obj->level;
 		paf->duration           = -1;
-		paf->location           = number_range(1,6); //str,int,wis,dex,con,cha
+		paf->location           = location;
 		paf->modifier           = obj_random_paf_modifier();
 		paf->bitvector          = 0;
 		paf->next               = obj->affected;
