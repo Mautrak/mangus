@@ -2320,21 +2320,7 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
 	
 	if(Count == TRUE)
 	{
-		if(number_percent()<50)
-		{
-			AFFECT_DATA *paf;
-			paf						= (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
-			paf->where				= TO_OBJECT;
-			paf->type               = -1;
-			paf->level              = obj->level;
-			paf->duration           = -1;
-			paf->location           = 1; //str
-			paf->modifier           = 5;
-			paf->bitvector          = 0;
-			paf->next               = obj->affected;
-			obj->affected     = paf;
-			top_affect++;
-		}
+		obj_random_paf(obj);
 	}
 
     for (paf = pObjIndex->affected; paf != NULL; paf = paf->next)

@@ -3373,7 +3373,8 @@ int dam_type_dice args( (void) );
 int ac_dice args( (int i,int level) );
 int position_dice args( (void) );
 int sex_dice args( (void) );
-
+/* obj_creator.c */
+void obj_random_paf		args( (OBJ_DATA *obj) );
 /* quest.c */
 bool gorev_ekipmani_mi args( (OBJ_DATA *obj) );
 
