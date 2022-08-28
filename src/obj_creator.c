@@ -48,7 +48,7 @@ int obj_random_paf_modifier()
 int obj_random_paf_find_available_location(OBJ_DATA *obj)
 {
 	int random_location = number_range(1,6); //str,int,wis,dex,con,cha
-	for (paf = parent->affected; paf != NULL; paf = paf->next)
+	for (paf = obj->affected; paf != NULL; paf = paf->next)
 	{
 		if(paf->location == random_location)
 			return 0;
