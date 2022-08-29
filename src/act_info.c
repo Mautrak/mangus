@@ -4861,6 +4861,9 @@ void do_diril( CHAR_DATA *ch, char *argument )
 void do_discord( CHAR_DATA *ch, char *argument )
 {
 	char arg[MAX_INPUT_LENGTH];
+	FILE *fp;
+	char line[30];
+	ssize_t read;
 
 	argument = one_argument(argument,arg);
 	if (arg[0] == '\0')
@@ -4876,6 +4879,23 @@ void do_discord( CHAR_DATA *ch, char *argument )
 		printf_to_char(ch,"Örneðin: discord 123456789123456789\n\r");
 		return;
 	}
+	
+	if ( ( fp = fopen( "../data/discord_users", "r" ) ) == NULL )
+	{
+		printf_to_char(ch,"Ýþlem yapýlamadý, daha sonra tekrar deneyiniz.\n\r");
+		return;
+	}
+	
+	for ( ; ; )
+	{
+		if ( feof(fp) )
+        {
+            fclose( fp );
+            break;
+        }
+		line = str_dup(fread_word(fp));
+        printf_to_char(ch,"Retrieved line: -%s-\n\r", line);
+    }
 	
 	ch->pcdata->discord_id = str_dup( arg );
 	
