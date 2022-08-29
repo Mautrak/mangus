@@ -204,6 +204,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
 
     fprintf( fp, "Name %s~\n",	ch->name		);
     fprintf( fp, "Id   %ld\n", ch->id			);
+	fprintf( fp, "Discord %s~\n", ch->pcdata->discord_id );
     fprintf( fp, "Birth  %ld\n", ch->pcdata->birth_time	);
     fprintf( fp, "LogO %ld\n",	current_time		);
     fprintf( fp, "Vers %d\n",   7			);
@@ -1083,6 +1084,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp )
       }
 		KEY( "Dilek",	ch->pcdata->dilek, 		fread_flag( fp)	  );
     KEY( "DinPuani",   ch->pcdata->din_puani,fread_number( fp) );
+	KEY( "Discord",	ch->pcdata->discord_id,	fread_string( fp ) );
 	    break;
 
 	case 'E':

@@ -155,6 +155,7 @@ const	struct	cmd_type	cmd_table	[] =
   { "direnç",     do_resistance,  POS_FIGHTING,    0,  LOG_NORMAL, 0,0 },
   { "diril",     do_diril,  POS_RESTING,    0,  LOG_NORMAL, 1,CMD_GHOST},
   { "disconnect",	do_disconnect,	POS_DEAD,	L3,  LOG_ALWAYS, 1, CMD_KEEP_HIDE|CMD_GHOST },
+  { "discord",	do_discord,	POS_DEAD,	0,  LOG_ALWAYS, 1, CMD_KEEP_HIDE|CMD_GHOST },
   { "doðra",        do_butcher,     POS_STANDING,    0,  LOG_NORMAL, 1,0 },
   { "dök",		do_pour,	POS_RESTING,	 0,  LOG_NORMAL, 1,CMD_KEEP_HIDE },
   { "dokun",		do_vtouch,	POS_STANDING,	 0,  LOG_NORMAL, 0,0 },

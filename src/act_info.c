@@ -1959,7 +1959,7 @@ void do_score( CHAR_DATA *ch, char *argument )
   sprintf( yonelim_etik, "%s/%s", IS_GOOD((victim==NULL?ch:victim)) ? "iyi" :	IS_EVIL((victim==NULL?ch:victim)) ? "kem" : "yansýz",((victim==NULL?ch:victim)->ethos==1?"tüze":(victim==NULL?ch:victim)->ethos==2?"yansýz":"kaos") );
 
   printf_to_char(ch,"{c,---------------------------------------------------------------------,{w\n\r");
-  printf_to_char(ch,"{c|{w%+12s%-30s{c                           |\n\r",(victim==NULL?ch:victim)->name,(victim==NULL?ch:victim)->pcdata->title);
+  printf_to_char(ch,"{c|{w%+12s%-30s{c Discord:%-18s|\n\r",(victim==NULL?ch:victim)->name,(victim==NULL?ch:victim)->pcdata->title,(victim==NULL?ch:victim)->pcdata->discord_id);
   printf_to_char(ch,"{c|-------------------------,-------------------------------------------,{w\n\r");
   printf_to_char(ch,"{c| Irk     : {w%-13s{c | ZIRH         | PARA                       |\n\r",race_table[(victim==NULL?ch:victim)->race].name[1]);
   printf_to_char(ch,"{c| Yaþ     : {w%-13d{c | Delici : {w%-4d{c| Akçe        : {w%-7ld{c      |\n\r",get_age(victim==NULL?ch:victim),GET_AC((victim==NULL?ch:victim),AC_PIERCE),(victim==NULL?ch:victim)->silver);
@@ -4856,4 +4856,30 @@ void do_diril( CHAR_DATA *ch, char *argument )
   }
 
   return;
+}
+
+void do_discord( CHAR_DATA *ch, char *argument )
+{
+	char arg[MAX_INPUT_LENGTH];
+
+	argument = one_argument(argument,arg);
+	if (arg[0] == '\0')
+	{
+		printf_to_char(ch,"Bu karakterin baðlý olduðu discord kullanýcýsýnýn 18 karakterlik ID'sini vermelisin.\n\r");
+		printf_to_char(ch,"Örneðin: discord 123456789123456789\n\r");
+		return;
+	}
+
+	if (strlen(arg) != 18)
+	{
+		printf_to_char(ch,"Discord kullanýcýsýnýn ID'si 18 karakterden oluþmalýdýr.\n\r");
+		printf_to_char(ch,"Örneðin: discord 123456789123456789\n\r");
+		return;
+	}
+	
+	strcpy(ch->pcdata->discord_id,argument);
+	
+	printf_to_char(ch,"Discord kullanýcý ID'si kaydedildi.\n\r");
+
+	return;
 }
