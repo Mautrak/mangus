@@ -4893,7 +4893,7 @@ void do_discord( CHAR_DATA *ch, char *argument )
             fclose( fp );
             break;
         }
-		line = str_dup(fread_word(fp));
+		strcpy(line,fread_word(fp));
         printf_to_char(ch,"Retrieved line: -%s-\n\r", line);
     }
 	
