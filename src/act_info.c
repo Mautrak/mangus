@@ -4877,7 +4877,7 @@ void do_discord( CHAR_DATA *ch, char *argument )
 		return;
 	}
 	
-	strcpy(ch->pcdata->discord_id,argument);
+	strcpy(ch->pcdata->discord_id,arg);
 	
 	printf_to_char(ch,"Discord kullanýcý ID'si kaydedildi.\n\r");
 
