@@ -3479,42 +3479,60 @@ void do_bear_call( CHAR_DATA *ch, char *argument )
 
 void do_identify( CHAR_DATA *ch, char *argument )
 {
-    OBJ_DATA *obj;
-    CHAR_DATA *rch;
+	OBJ_DATA *obj;
+	CHAR_DATA *rch;
+	int cost = 100;
 
-    if ( ( obj = get_obj_carry( ch, argument ) ) == NULL )
-    {
-      send_to_char( "Bunu taþýmýyorsun.\n\r", ch );
-       return;
-    }
+	if ( ( obj = get_obj_carry( ch, argument ) ) == NULL )
+	{
+		send_to_char( "Bunu taþýmýyorsun.\n\r", ch );
+		return;
+	}
 
-    for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
-       if (IS_NPC(rch) && rch->pIndexData->vnum == MOB_VNUM_SAGE)
-          break;
+	for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
+	{
+		if (IS_NPC(rch) && rch->pIndexData->vnum == MOB_VNUM_SAGE)
+		{
+			break;
+		}
+	}
 
-    if (!rch)
-    {
-      send_to_char(  "Buralarda o þeyden anlayan yok.\n\r", ch);
-       return;
-    }
+	if (!rch)
+	{
+		send_to_char(  "Buralarda o þeyden anlayan yok.\n\r", ch);
+		return;
+	}
+	
+	if(number_percent()<= get_skill(ch, gsn_haggle))
+	{
+		if(number_percent()>90)
+		{
+			cost = 10;
+		}
+		else
+		{
+			cost = 40;
+		}
+	}
 
-    if (IS_IMMORTAL(ch))
-    act( "$n sana bakýyor!\n\r", rch, obj, ch, TO_VICT );
-    else if (ch->silver < 100)
-       {
-         act( "$n $p'yi tanýmlamaya devam ediyor.",
-               rch, obj, 0, TO_ROOM );
-  	send_to_char(" En azýndan 100 akçen olmalý.\n\r", ch);
-       return;
-       }
-    else
-       {
-       ch->silver -= 100;
-       send_to_char("Para kesen hafifliyor.\n\r", ch);
-       }
+	if (IS_IMMORTAL(ch))
+	{
+		act( "$n sana bakýyor!\n\r", rch, obj, ch, TO_VICT );
+	}
+	else if (ch->silver < cost)
+	{
+		act( "$n $p'yi tanýmlamaya devam ediyor.",rch, obj, 0, TO_ROOM );
+		printf_to_char(ch,"Yeterli akçen yok.\n\r");
+		return;
+	}
+	else
+	{
+		ch->silver -= cost;
+		printf_to_char(ch,"Aldýðýn hizmet için %d akçe ödüyorsun.\n\r", cost);
+	}
 
-       act( "$n $p üzerine bilge bir bakýþ fýrlatýyor.", rch, obj, 0, TO_ROOM );
-    spell_identify( 0, 0, ch, obj ,0);
+	act( "$n $p üzerine bilge bir bakýþ fýrlatýyor.", rch, obj, 0, TO_ROOM );
+	spell_identify( 0, 0, ch, obj ,0);
 }
 
 

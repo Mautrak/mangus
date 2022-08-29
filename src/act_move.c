@@ -623,42 +623,48 @@ int find_exit( CHAR_DATA *ch, char *arg )
 
 int find_door( CHAR_DATA *ch, char *arg )
 {
-    EXIT_DATA *pexit;
-    int door;
+	EXIT_DATA *pexit;
+	int door;
 
-    if ( !str_cmp( arg, "k" ) || !str_cmp( arg, "kuzey" ) ) door = 0;
-     else if ( !str_cmp( arg, "d" ) || !str_cmp( arg, "doðu"  ) ) door = 1;
-     else if ( !str_cmp( arg, "g" ) || !str_cmp( arg, "güney" ) ) door = 2;
-     else if ( !str_cmp( arg, "b" ) || !str_cmp( arg, "batý"  ) ) door = 3;
-     else if ( !str_cmp( arg, "y" ) || !str_cmp( arg, "yukarý"    ) ) door = 4;
-     else if ( !str_cmp( arg, "a" ) || !str_cmp( arg, "aþaðý"  ) ) door = 5;
-    else
-    {
-	for ( door = 0; door <= 5; door++ )
+	if ( !str_cmp( arg, "k" ) || !str_cmp( arg, "kuzey" ) )
+		door = 0;
+	else if ( !str_cmp( arg, "d" ) || !str_cmp( arg, "doðu"  ) )
+		door = 1;
+	else if ( !str_cmp( arg, "g" ) || !str_cmp( arg, "güney" ) )
+		door = 2;
+	else if ( !str_cmp( arg, "b" ) || !str_cmp( arg, "batý"  ) )
+		door = 3;
+	else if ( !str_cmp( arg, "y" ) || !str_cmp( arg, "yukarý"    ) )
+		door = 4;
+	else if ( !str_cmp( arg, "a" ) || !str_cmp( arg, "aþaðý"  ) )
+		door = 5;
+	else
 	{
-	    if ( ( pexit = ch->in_room->exit[door] ) != NULL
-	    &&   IS_SET(pexit->exit_info, EX_ISDOOR)
-	    &&   pexit->keyword != NULL
-	    &&   is_name( arg, pexit->keyword ) )
-		return door;
+		for ( door = 0; door <= 5; door++ )
+		{
+			if ( ( pexit = ch->in_room->exit[door] ) != NULL
+			&&   IS_SET(pexit->exit_info, EX_ISDOOR)
+			&&   pexit->keyword != NULL
+			&&   is_name( arg, pexit->keyword ) )
+				return door;
+		}
+		act("Hiç $T isminde kapý yok.", ch, NULL, arg, TO_CHAR );
+		return -1;
 	}
-  act("Hiç $T yok.", ch, NULL, arg, TO_CHAR );
-	return -1;
-    }
 
-    if ( ( pexit = ch->in_room->exit[door] ) == NULL )
-    {
-      act("$T yönünde kapý görünmüyor.", ch, NULL, arg, TO_CHAR );
-	return -1;
-    }
+	if ( ( pexit = ch->in_room->exit[door] ) == NULL )
+	{
+		act("$T yönünde kapý görünmüyor.", ch, NULL, arg, TO_CHAR );
+		return -1;
+	}
 
-    if ( !IS_SET(pexit->exit_info, EX_ISDOOR) )
-    {
-      send_to_char("Bunu yapamazsýn.\n\r", ch );
-	return -1;
-    }
+	if ( !IS_SET(pexit->exit_info, EX_ISDOOR) )
+	{
+		send_to_char("Bunu yapamazsýn.\n\r", ch );
+		return -1;
+	}
 
-    return door;
+	return door;
 }
 
 /* scan.c */
@@ -749,9 +755,15 @@ void do_open( CHAR_DATA *ch, char *argument )
 
 		pexit = ch->in_room->exit[door];
 		if ( !IS_SET(pexit->exit_info, EX_CLOSED) )
-		{ send_to_char( "Zaten açýk.\n\r",ch ); return; }
+		{
+			send_to_char( "Zaten açýk.\n\r",ch );
+			return;
+		}
 		if (  IS_SET(pexit->exit_info, EX_LOCKED) )
-		{ send_to_char( "Kilitli.\n\r", ch ); return; }
+		{
+			send_to_char( "Kilitli.\n\r", ch );
+			return;
+		}
 
 		REMOVE_BIT(pexit->exit_info, EX_CLOSED);
 		act( "$n $d açýyor.", ch, NULL, pexit->keyword, TO_ROOM );

@@ -3758,92 +3758,92 @@ void do_list( CHAR_DATA *ch, char *argument )
 
 void do_sell( CHAR_DATA *ch, char *argument )
 {
-    char buf[MAX_STRING_LENGTH];
-    char arg[MAX_INPUT_LENGTH];
-    CHAR_DATA *keeper;
-    OBJ_DATA *obj;
-    int cost,roll;
-    int silver;
-    one_argument( argument, arg );
+	char buf[MAX_STRING_LENGTH];
+	char arg[MAX_INPUT_LENGTH];
+	CHAR_DATA *keeper;
+	OBJ_DATA *obj;
+	int cost,roll;
+	one_argument( argument, arg );
 
-    if ( arg[0] == '\0' )
-    {
-      send_to_char( "Ne satacaksýn?\n\r", ch );
-	return;
-    }
+	if ( arg[0] == '\0' )
+	{
+		send_to_char( "Ne satacaksýn?\n\r", ch );
+		return;
+	}
 
-    if ( ( keeper = find_keeper( ch ) ) == NULL )
-	return;
+	if ( ( keeper = find_keeper( ch ) ) == NULL )
+		return;
 
-    if ( ( obj = get_obj_carry( ch, arg ) ) == NULL )
-    {
-      act( "$n anlatýyor 'Sende ondan yok.'",
-	    keeper, NULL, ch, TO_VICT );
-	ch->reply = keeper;
-	return;
-    }
+	if ( ( obj = get_obj_carry( ch, arg ) ) == NULL )
+	{
+		act( "$n anlatýyor 'Sende ondan yok.'", keeper, NULL, ch, TO_VICT );
+		ch->reply = keeper;
+		return;
+	}
 
-    if ( !can_drop_obj( ch, obj ) )
-    {
-      send_to_char("Ondan kurtulamýyorsun.\n\r", ch );
-	return;
-    }
+	if ( !can_drop_obj( ch, obj ) )
+	{
+		send_to_char("Ondan kurtulamýyorsun.\n\r", ch );
+		return;
+	}
 
-    if (!can_see_obj(keeper,obj))
-    {
-      act("$n teklif ettiðin þeyi göremiyor.",keeper,NULL,ch,TO_VICT);
-	return;
-    }
+	if (!can_see_obj(keeper,obj))
+	{
+		act("$n teklif ettiðin þeyi göremiyor.",keeper,NULL,ch,TO_VICT);
+		return;
+	}
 
-    if ( ( cost = get_cost( keeper, obj, FALSE ) ) <= 0 )
-    {
-      act(  "$n $p ile ilgilenmiyor.", keeper, obj, ch, TO_VICT );
-	return;
-    }
-    if ( cost > keeper->silver )
-    {
-      act("$n anlatýyor Üzgünüm '$p'nin ederini ödeyemem.",keeper,obj,ch,TO_VICT);
-	return;
-    }
+	if ( ( cost = get_cost( keeper, obj, FALSE ) ) <= 0 )
+	{
+		act(  "$n $p ile ilgilenmiyor.", keeper, obj, ch, TO_VICT );
+		return;
+	}
+	if ( cost > keeper->silver )
+	{
+		// Eger pazarligi varsa dukkancida da akce olsun.
+		if(number_percent() > get_skill(ch, gsn_haggle))
+		{
+		act("$n anlatýyor Üzgünüm '$p'nin ederini ödeyemem.",keeper,obj,ch,TO_VICT);
+		return;
+		}
+	}
 
-    act("$n $p satýyor.", ch, obj, NULL, TO_ROOM );
-    /* haggle */
-    roll = number_percent();
-    if (!IS_OBJ_STAT(obj,ITEM_SELL_EXTRACT) && roll < get_skill(ch,gsn_haggle))
-    {
-        roll = get_skill(ch, gsn_haggle) + number_range(1, 20) - 10;
-        send_to_char("Esnafla pazarlýk ediyorsun.\n\r",ch);
-        cost += obj->cost / 2 * roll / 100;
-        cost = UMIN(cost,95 * get_cost(keeper,obj,TRUE) / 100);
-	cost = UMIN(cost,keeper->silver );
-        check_improve(ch,gsn_haggle,TRUE,4);
-    }
+	act("$n $p satýyor.", ch, obj, NULL, TO_ROOM );
+	/* haggle */
+	roll = number_percent();
+	
+	if (!IS_OBJ_STAT(obj,ITEM_SELL_EXTRACT) && roll < get_skill(ch,gsn_haggle))
+	{
+		roll = get_skill(ch, gsn_haggle) + number_range(1, 20) - 10;
+		send_to_char("Esnafla pazarlýk ediyorsun.\n\r",ch);
+		cost += obj->cost / 2 * roll / 100;
+		cost = UMIN(cost,95 * get_cost(keeper,obj,TRUE) / 100);
+		cost = UMIN(cost,keeper->silver );
+		check_improve(ch,gsn_haggle,TRUE,4);
+	}
 
-    silver = cost ;
+	sprintf( buf, "$p eþyasýný %d akçeye satýyorsun.",cost);
 
-    sprintf( buf, "$p eþyasýný %d akçeye satýyorsun.",silver);
+	act( buf, ch, obj, NULL, TO_CHAR );
+	ch->silver 	 += cost;
 
-    act( buf, ch, obj, NULL, TO_CHAR );
-    ch->silver 	 += silver;
-    deduct_cost(keeper,cost);
-    if ( keeper->silver< 0)
-	keeper->silver = 0;
+	deduct_cost(keeper,cost);
 
-    if ( obj->item_type == ITEM_TRASH || IS_OBJ_STAT(obj,ITEM_SELL_EXTRACT))
-    {
+	if ( obj->item_type == ITEM_TRASH || IS_OBJ_STAT(obj,ITEM_SELL_EXTRACT))
+	{
 	extract_obj( obj );
-    }
-    else
-    {
-	obj_from_char( obj );
-	if (obj->timer)
-	    SET_BIT(obj->extra_flags,ITEM_HAD_TIMER);
+	}
 	else
-	    obj->timer = number_range(50,100);
-	obj_to_keeper( obj, keeper );
-    }
+	{
+		obj_from_char( obj );
+		if (obj->timer)
+			SET_BIT(obj->extra_flags,ITEM_HAD_TIMER);
+		else
+			obj->timer = number_range(50,100);
+		obj_to_keeper( obj, keeper );
+	}
 
-    return;
+	return;
 }
 
 
