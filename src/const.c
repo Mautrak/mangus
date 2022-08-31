@@ -4234,7 +4234,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"meld into stone","taþa dönüþme"},	{ 20, 20,20, 20,20,20,20,20 ,20,20,20,20,20},
+	{"meld into stone","taþa dönüþme"},	{ 93, 93,93, 93,93,93,93,93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_meld_into_stone,	TAR_CHAR_SELF,		POS_STANDING,
 	NULL,			SLOT(584),	12,	18,
