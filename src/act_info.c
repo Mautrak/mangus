@@ -4914,7 +4914,7 @@ void do_discord( CHAR_DATA *ch, char *argument )
 	}
 	else
 	{
-		printf_to_char(ch,"Discord Mangus loncasýnda %s ID'li bir üyemiz bulunmuyor. Discord ID'si kontrol ederek tekrar deneyin.\n\r");
+		printf_to_char(ch,"Discord Mangus loncasýnda %s ID'li bir üyemiz bulunmuyor. Discord ID'si kontrol ederek tekrar deneyin.\n\r",arg);
 	}
 
 	return;
