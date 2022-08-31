@@ -4885,7 +4885,7 @@ void do_discord( CHAR_DATA *ch, char *argument )
 		printf_to_char(ch,"Ýþlem yapýlamadý, daha sonra tekrar deneyiniz.\n\r");
 		return;
 	}
-	
+	/*
 	for ( ; ; )
 	{
 		if ( feof(fp) )
@@ -4896,7 +4896,11 @@ void do_discord( CHAR_DATA *ch, char *argument )
 		strcpy(line,fread_string(fp));
         printf_to_char(ch,"Retrieved line: -%s-\n\r", line);
     }
-	
+	*/
+	while(fgets (line, 30, fp) != NULL)
+	{
+		printf_to_char(ch,"Retrieved line: -%s-\n\r", line);
+	}
 	ch->pcdata->discord_id = str_dup( arg );
 	
 	printf_to_char(ch,"Discord kullanýcý ID'si kaydedildi.\n\r");
