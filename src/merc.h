@@ -2211,6 +2211,7 @@ struct	pc_data
 	long		rk_puani;
 	long		din_puani;
 	long		yardim_puani;
+	char * 		discord_id;
 	
 };
 

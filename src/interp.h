@@ -161,6 +161,7 @@ DECLARE_DO_FUN( do_diril	);
 DECLARE_DO_FUN( do_dirt		);
 DECLARE_DO_FUN(	do_disarm	);
 DECLARE_DO_FUN(	do_disconnect	);
+DECLARE_DO_FUN(	do_discord	);
 DECLARE_DO_FUN(	do_dishonor	);
 DECLARE_DO_FUN(	do_down		);
 DECLARE_DO_FUN(	do_drag		);
