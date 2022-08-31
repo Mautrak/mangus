@@ -4886,24 +4886,11 @@ void do_discord( CHAR_DATA *ch, char *argument )
 		printf_to_char(ch,"Ýþlem yapýlamadý, daha sonra tekrar deneyiniz.\n\r");
 		return;
 	}
-	/*
-	for ( ; ; )
-	{
-		if ( feof(fp) )
-        {
-            fclose( fp );
-            break;
-        }
-		strcpy(line,fread_string(fp));
-        printf_to_char(ch,"Retrieved line: -%s-\n\r", line);
-    }
-	*/
-	
+
 	is_found = 0;
 	
 	while(fgets (line, 30, fp) != NULL)
 	{
-		printf_to_char(ch,"Retrieved line: -%s-\n\r", line);
 		line[strcspn(line, "\r\n")] = 0;
 		if (!strcmp(arg,line))
 		{

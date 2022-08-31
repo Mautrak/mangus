@@ -2337,6 +2337,11 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	{
 			printf_to_char( ch , "\n\r{CÝki kat GP kazanma etkinliði etkin. Kalan süre %d dakika.{x\n\r\n\r" , ikikat_gp );
 	}
+	
+	if (!IS_NPC(ch) && (strlen(ch->pcdata->discord_id)<18))
+	{
+		printf_to_char( ch , "\n\r{CDiscord ID'niz kayýtlý deðil. 'discord' komutuyla discord kullanýcý ID'nizi kaydediniz.{x\n\r\n\r" );
+	}
 
 	/*
 	 *
