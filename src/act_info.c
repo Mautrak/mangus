@@ -4863,6 +4863,7 @@ void do_discord( CHAR_DATA *ch, char *argument )
 	char arg[MAX_INPUT_LENGTH];
 	FILE *fp;
 	char line[30];
+	bool is_found = FALSE;
 	ssize_t read;
 
 	argument = one_argument(argument,arg);
@@ -4900,10 +4901,21 @@ void do_discord( CHAR_DATA *ch, char *argument )
 	while(fgets (line, 30, fp) != NULL)
 	{
 		printf_to_char(ch,"Retrieved line: -%s-\n\r", line);
+		if (!strcmp(arg,line))
+		{
+			is_found = TRUE;
+		}
 	}
-	ch->pcdata->discord_id = str_dup( arg );
 	
-	printf_to_char(ch,"Discord kullanýcý ID'si kaydedildi.\n\r");
+	if(is_found)
+	{
+		ch->pcdata->discord_id = str_dup( arg );
+		printf_to_char(ch,"Discord kullanýcý ID'si kaydedildi.\n\r");
+	}
+	else
+	{
+		printf_to_char(ch,"Discord Mangus loncasýnda %s ID'li bir üyemiz bulunmuyor. Discord ID'si kontrol ederek tekrar deneyin.\n\r");
+	}
 
 	return;
 }
