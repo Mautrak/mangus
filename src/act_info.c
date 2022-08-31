@@ -4904,6 +4904,7 @@ void do_discord( CHAR_DATA *ch, char *argument )
 	while(fgets (line, 30, fp) != NULL)
 	{
 		printf_to_char(ch,"Retrieved line: -%s-\n\r", line);
+		line[strcspn(line, "\r\n")] = 0;
 		if (!strcmp(arg,line))
 		{
 			is_found = 1;
