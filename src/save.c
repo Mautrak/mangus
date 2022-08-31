@@ -687,6 +687,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
     ch->pcdata->bamfin			= str_dup( "" );
     ch->pcdata->bamfout			= str_dup( "" );
     ch->pcdata->title			= str_dup( "" );
+	ch->pcdata->discord_id		= str_dup( "" );
 
     ch->pcdata->time_flag		= 0;
 
