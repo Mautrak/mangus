@@ -1603,14 +1603,14 @@ void equip_char( CHAR_DATA *ch, OBJ_DATA *obj, int iWear )
     ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IS_GOOD(ch)    )
     ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IS_NEUTRAL(ch) ) )
     {
-	/*
-	 * Thanks to Morgenes for the bug fix here!
-	 */
-   act("$p seni çarparak elinden düşüyor.", ch, obj, NULL, TO_CHAR );
- 	act("$p $m çarparak elinden düşüyor.",  ch, obj, NULL, TO_ROOM );
-	obj_from_char( obj );
-	obj_to_room( obj, ch->in_room );
-	return;
+		/*
+		* Thanks to Morgenes for the bug fix here!
+		*/
+		act("$p seni çarparak elinden düşüyor.", ch, obj, NULL, TO_CHAR );
+		act("$p $m çarparak elinden düşüyor.",  ch, obj, NULL, TO_ROOM );
+		obj_from_char( obj );
+		obj_to_room( obj, ch->in_room );
+		return;
     }
 
 

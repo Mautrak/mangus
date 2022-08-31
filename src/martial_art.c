@@ -3636,7 +3636,7 @@ void do_katana(CHAR_DATA *ch, char *argument)
       af.level	= ch->level;
       af.duration	= -1;
       af.location	= APPLY_DAMROLL;
-      af.modifier	= ch->level / 10;
+      af.modifier	= ch->level / 9;
       af.bitvector	= 0;
       affect_to_obj( katana, &af );
 

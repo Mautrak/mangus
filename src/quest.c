@@ -905,8 +905,8 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 			{
 				int reward=0, pointreward=0, pracreward=0;
 
-				reward = 700 + number_range(100,700);
-				pointreward = number_range(20,40);
+				reward = 700 + number_range(100,600);
+				pointreward = number_range(15,35);
 
 				if(IS_SET(ch->pcdata->dilek,DILEK_FLAG_GOREV))
 				{
@@ -942,7 +942,7 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 				ch->pcdata->questgiver = 0;
 				ch->pcdata->countdown = 0;
 				ch->pcdata->questmob = 0;
-				ch->pcdata->nextquest = number_range(1,4);
+				ch->pcdata->nextquest = 1;
 				ch->silver += reward;
 				ch->pcdata->questpoints += pointreward;
 				return;

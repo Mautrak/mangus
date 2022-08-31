@@ -2063,7 +2063,7 @@ void do_remort( CHAR_DATA *ch, char *argument )
     char mkstr[MAX_INPUT_LENGTH];
     char pbuf[MAX_STRING_LENGTH];
     char name[MAX_STRING_LENGTH];
-    int banks, qp, silver, old_tra, old_pra, rkp, questpractice,yeniyasamsayisi,oyuncukatli;
+    int banks, qp, silver, rkp,yeniyasamsayisi;
 
     if ( IS_NPC(ch) || ( d = ch->desc ) == NULL )
         return;
@@ -2104,12 +2104,8 @@ ch->pcdata->confirm_remort = FALSE;
 		banks	= ch->pcdata->bank_s;
 		qp	= ch->pcdata->questpoints;
 		silver	= ch->silver;
-		old_tra = ch->train;
-		old_pra = ch->practice;
 		rkp = ch->pcdata->rk_puani;
-		questpractice = ch->pcdata->questpractice;
 		yeniyasamsayisi = ch->pcdata->yeniyasam_sayisi;
-		oyuncukatli = ch->pcdata->oyuncu_katli;
 
 	if (!quit_org(ch, argument, TRUE, TRUE ))	return;
 
@@ -2126,12 +2122,11 @@ ch->pcdata->confirm_remort = FALSE;
 	ch->pcdata->bank_s += banks;
 	ch->silver	+= silver;
 	ch->pcdata->questpoints	+= qp;
-  ch->practice += old_pra;
-	ch->train	+= (5 + old_tra);
-  ch->pcdata->rk_puani += rkp;
-  ch->pcdata->questpractice = questpractice;
-  ch->pcdata->yeniyasam_sayisi = yeniyasamsayisi + 1;
-  ch->pcdata->oyuncu_katli = oyuncukatli;
+	ch->train	+= 10;
+	ch->pcdata->rk_puani += rkp;
+	ch->pcdata->questpractice = 0;
+	ch->pcdata->yeniyasam_sayisi = yeniyasamsayisi + 1;
+	ch->pcdata->oyuncu_katli = 0;
 
   write_to_buffer( d, "\n\r[Devam etmek için ENTER]\n\r",0);
 	return;
@@ -2142,7 +2137,7 @@ ch->pcdata->confirm_remort = FALSE;
     printf_to_char(ch,"Yeniyaþam komutunu argümanla yazmak yeniyaþam durumunu iptal edecektir.\n\r");
     printf_to_char(ch,"Unutma ki, eski karaktere ait aþaðýdaki özellikler aynen korunur:\n\r");
   	printf_to_char(ch,"        bankadakiler dahil tüm akçe\n\r");
-  	printf_to_char(ch,"        pratik, eðitim seanslarý, görev pratik deðeri ve görev puaný\n\r");
+  	printf_to_char(ch,"        görev pratik deðeri ve görev puaný\n\r");
   	printf_to_char(ch,"Yeni yaþamýnda 6 yüzük takabileceksin.\n\r");
   	printf_to_char(ch,"             Ve fazladan 10 eðitim seansýn olacak.\n\r");
     ch->pcdata->confirm_remort = TRUE;

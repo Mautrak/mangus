@@ -899,7 +899,7 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
 		  && strstr(katana->extra_descr->description,ch->name) != NULL )
 	      {
 		katana->cost++;
-		if (katana->cost > 249)
+		if (katana->cost > 180)
 		{
 		   paf =  affect_find(katana->affected,gsn_katana);
 		   if (paf != NULL)
@@ -927,7 +927,7 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
 		  && strstr(katana->extra_descr->description,ch->name) != NULL )
 	      {
 		katana->cost++;
-		if (katana->cost > 249)
+		if (katana->cost > 180)
 		{
 		   paf =  affect_find(katana->affected,gsn_katana);
 		   if (paf != NULL)
