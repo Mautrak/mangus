@@ -111,20 +111,6 @@ human~
 
 
 #OBJECTS
-#30232
-su kamýþý on ayak~
-su kamýþý~
-On ayak uzunluðunda bir kamýþ görüyorsun.~
-glass~
-weapon 1|512 1|8192
-exotic 6 9 suction 0
-60 7 7200 P
-A
-18 10
-A
-19 10
-A
-3 -1
 #30233
 sümüksü salgý~
 sümüksü salgý~
@@ -141,6 +127,24 @@ Tuzlanmýþ bir yaprak görüyorsun.~
 pill 1 1
 30 'armor' 'fly' 'infravision' ''
 25 1 2000 P
+#0
+
+
+#NEW_OBJECTS
+#30232
+su kamýþý on ayak~
+su kamýþý~
+On ayak uzunluðunda bir kamýþ görüyorsun.~
+glass~
+weapon 1|512 1|8192
+exotic 6 9 suction 0
+60 7 7200 P
+A
+18 10
+A
+19 10
+A
+3 -1
 #30235
 iþlenmiþ yapraklar~
 iþlenmiþ yapraklar~

@@ -168,7 +168,26 @@ ACG CDFH 35
 #0
 
 #OBJECTS
+#2906
+parlayan yeþil iksir~
+parlayan yeþil iksir~
+Yeþil bir iksir parýldayarak titreþiyor.~
+energy~
+potion AG AO
+10 'detect invis' 'detect magic' 'detect poison' 'detect evil'
+23 10 4580 G
+#2908
+holipant diþi~
+bir holipant diþi~
+Bir holipant diþi burada duruyor.~
+bone~
+wand AGK AO
+19 3 3 'haste' 0
+14 10 2160 G
+#0
 
+
+#NEW_OBJECTS
 #2900
 kargý cüsse ezen~
 bir cüsse ezen~
@@ -229,14 +248,6 @@ A
 19 3
 A
 20 2
-#2906
-parlayan yeþil iksir~
-parlayan yeþil iksir~
-Yeþil bir iksir parýldayarak titreþiyor.~
-energy~
-potion AG AO
-10 'detect invis' 'detect magic' 'detect poison' 'detect evil'
-23 10 4580 G
 #2907
 kaðýt üçgen~
 kaðýt bir üçgen~
@@ -245,14 +256,6 @@ paper~
 scroll F A
 50 'armor' 'bless' 'fly' 'stone skin'
 22 12 6700 G
-#2908
-holipant diþi~
-bir holipant diþi~
-Bir holipant diþi burada duruyor.~
-bone~
-wand AGK AO
-19 3 3 'haste' 0
-14 10 2160 G
 #2909
 kolan dökme demir~
 dökme bir demir kolan~

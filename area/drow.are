@@ -124,7 +124,26 @@ The drow scout blends so well with her environment, you barely see her form.
 human~
 AFH PQ 11
 #0
+
+
 #OBJECTS
+#5115
+whip snake skin~
+two Snake Headed whip~
+A two Snake Headed whip is lying on the ground.~
+snakeskin~
+weapon CGJRT AN
+whip 10 4 whip 0
+24 140 1530 P
+A
+19 7
+A
+18 5
+#0
+
+
+
+#NEW_OBJECTS
 #5100
 longsword commoner~
 a commoner's longsword~
@@ -289,18 +308,6 @@ armor H AE
 12 10 1180 P
 A
 17 -2
-#5115
-whip snake skin~
-two Snake Headed whip~
-A two Snake Headed whip is lying on the ground.~
-snakeskin~
-weapon CGJRT AN
-whip 10 4 whip 0
-24 140 1530 P
-A
-19 7
-A
-18 5
 #0
 
 #ROOMS
