@@ -4465,8 +4465,12 @@ void do_demand( CHAR_DATA *ch, char *argument)
 
   if ( !can_drop_obj( ch, obj ) )
     {
-      do_say(victim,
-	(char*)"O lanetli, kendimden ayýramýyorum. Affedin, efendim.");
+      do_say(victim,(char*)"O lanetli, kendimden ayýramýyorum. Affedin, efendim.");
+	  if(number_percent()<30)
+	  {
+		printf_to_char(ch,"Rol yapma puanýnýn arttýðýný hissediyorsun.\n\r");
+		ch->pcdata->rk_puani += 1;
+	  }
       return;
     }
 
@@ -4507,6 +4511,11 @@ void do_demand( CHAR_DATA *ch, char *argument)
 }
 
     send_to_char( "Gücün arzýn ürpermesine neden oluyor.\n\r",ch);
+	if(number_percent()<30)
+	  {
+		printf_to_char(ch,"Rol yapma puanýnýn arttýðýný hissediyorsun.\n\r");
+		ch->pcdata->rk_puani += 1;
+	  }
 
   return;
 }

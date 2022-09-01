@@ -157,7 +157,83 @@ FILE *fp;
 OBJ_DATA *obj;
 AFFECT_DATA *paf;
 int apply_location;
+char arg[MAX_INPUT_LENGTH];
+char buf[MAX_STRING_LENGTH];
 
+	argument = one_argument( argument, arg );
+	
+	if ( arg[0] == '\0' )
+	{
+		printf_to_char("Argumanlar: dosya, randompaf\n\r", ch );
+		return;
+	}
+	
+	if (!strcmp(arg, "randompaf"))
+	{
+		for( obj=object_list; obj!=NULL; obj = obj->next )
+		{
+			if(obj->pIndexData->random_object && obj->affected != NULL)
+			{
+				sprintf( buf, "Name(s): %s\n\r",obj->name );
+				send_to_char( buf, ch );
+				sprintf( buf, "Vnum: %d  Format: %s  Random: %s  Type: %s  Resets: %d\n\r",obj->pIndexData->vnum, obj->pIndexData->new_format ? "new" : "old", obj->pIndexData->random_object ? "yes" : "no",item_type_name(obj), obj->pIndexData->reset_num );
+				send_to_char( buf, ch );
+				for ( paf = obj->affected; paf != NULL; paf = paf->next )
+				{
+				sprintf( buf, "Affects %s by %d, level %d",
+					affect_loc_name( paf->location ), paf->modifier,paf->level );
+				send_to_char(buf,ch);
+				if ( paf->duration > -1)
+					sprintf(buf,", %d hours.\n\r",paf->duration);
+				else
+					sprintf(buf,".\n\r");
+				send_to_char( buf, ch );
+				if (paf->bitvector)
+				{
+					switch(paf->where)
+					{
+					case TO_AFFECTS:
+						sprintf(buf,"Adds %s affect.\n",
+						affect_bit_name(paf->bitvector));
+						break;
+							case TO_WEAPON:
+								sprintf(buf,"Adds %s weapon flags.\n",
+									weapon_bit_name(paf->bitvector));
+						break;
+					case TO_OBJECT:
+						sprintf(buf,"Adds %s object flag.\n",
+						extra_bit_name(paf->bitvector));
+						break;
+					case TO_IMMUNE:
+						sprintf(buf,"Adds immunity to %s.\n",
+						imm_bit_name(paf->bitvector));
+						break;
+					case TO_RESIST:
+						sprintf(buf,"Adds resistance to %s.\n\r",
+						imm_bit_name(paf->bitvector));
+						break;
+					case TO_VULN:
+						sprintf(buf,"Adds vulnerability to %s.\n\r",
+						imm_bit_name(paf->bitvector));
+						break;
+					case TO_DETECTS:
+						sprintf(buf,"Adds %s detection.\n\r",
+						detect_bit_name(paf->bitvector));
+						break;
+					default:
+						sprintf(buf,"Unknown bit %d: %d\n\r",
+						paf->where,paf->bitvector);
+						break;
+					}
+					send_to_char(buf,ch);
+				}
+				}
+			}
+		}
+	}
+	
+	else if (!strcmp(arg, "dosya"))
+	{
 	   if ( (fp=fopen( "objlist.csv", "w+" ) ) == NULL )
 	   {
 			send_to_char( "File error.\n\r", ch );
@@ -439,6 +515,8 @@ int apply_location;
 			fprintf(fp,"\n");
 		 }
 	   fclose( fp );
+
+	}
 
 	return;
 }
