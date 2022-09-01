@@ -336,7 +336,7 @@ orc~
 ACFGT 0 9
 #0
 
-#NEW_OBJECTS
+#OBJECTS
 #4000
 sarý yeþil yüzük~
 sarý ve yeþil bir yüzük~
@@ -2929,4 +2929,5 @@ M 4157 spec_cast_mage      	* the Mage
 M 4158 spec_poison         	* the snake
 S
 
+S
 #$
