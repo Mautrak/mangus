@@ -164,7 +164,7 @@ char buf[MAX_STRING_LENGTH];
 	
 	if ( arg[0] == '\0' )
 	{
-		printf_to_char("Argumanlar: dosya, randompaf\n\r", ch );
+		printf_to_char((char *)"Argumanlar: dosya, randompaf\n\r", ch );
 		return;
 	}
 	
