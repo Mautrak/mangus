@@ -351,8 +351,40 @@ ABCGT GHJ 125
 #0
 
 
-
 #OBJECTS
+#10027
+taç ateþ mishakal~
+Mishakal'ýn Ateþ Tacý~
+Bir taç yerde yanarken unutmadýðý efendisi için bir aðýt fýsýldýyor.~
+adamantite~
+armor ACY AE
+39 39 39 37 30
+86 10 99000 P
+A
+13 200
+A
+18 12
+A
+19 12
+A
+24 -8
+#10028
+zýrh karanlýk sith~
+Karanlýðýn zýrhý~
+Geniþ gölgeli bir figür yerde.~
+adamantite~
+armor CJY AD
+31 31 31 29 10
+57 50 75000 P
+A
+13 200
+A
+24 -5
+#0
+
+
+
+#NEW_OBJECTS
 #10001
 bekçi topuz sýnýr~
 Bir Sýnýrbekçisinin topuzu~
@@ -783,34 +815,6 @@ kaybolmak çok kolaydýr oyüzden Ýnsanlarýn kalesinden ona giden yolu bul
 çok geç olmadan veya kaybolmadan önce! Gerçekten acele etmelisin çünkü
 Darken Rahl savaþý kazanýp ülkeleri kontrol etmeye çok yakýn!
 ~
-#10027
-taç ateþ mishakal~
-Mishakal'ýn Ateþ Tacý~
-Bir taç yerde yanarken unutmadýðý efendisi için bir aðýt fýsýldýyor.~
-adamantite~
-armor ACY AE
-39 39 39 37 30
-86 10 99000 P
-A
-13 200
-A
-18 12
-A
-19 12
-A
-24 -8
-#10028
-zýrh karanlýk sith~
-Karanlýðýn zýrhý~
-Geniþ gölgeli bir figür yerde.~
-adamantite~
-armor CJY AD
-31 31 31 29 10
-57 50 75000 P
-A
-13 200
-A
-24 -5
 #0
 
 

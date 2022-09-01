@@ -20,7 +20,27 @@ River of spirits.
 Converted & edited by REAL MUDDERS
 Special thanx to Serdar & Anatolia Consortium~
 0 $~
+
 #OBJECTS
+#20001
+kýrbaç dehþet teosaki~
+Teosaki'nin dehþeti~
+Kayýp bir ruha ait kýrbaç þekline bürünmüþ bir dehþet parçacýðý uzanýyor.~
+none~
+weapon M AN
+whip 20 6 whip DCE
+90 190 1200000 G
+
+A
+12 140
+A
+13 220
+A
+18 15
+A
+19 15
+A
+24 -10
 #20066
 eldiven qualyn alev kadim~
 Qualyn'in bir çift alevden eldiveni~
@@ -35,7 +55,9 @@ A
 19 5
 A
 24 -8
+#0
 
+#NEW_OBJECTS
 #20070
 parþömen ywln~
 ywln adlý bir parþömen~
@@ -131,25 +153,6 @@ A
 19 6
 A
 24 -5
-#20001
-kýrbaç dehþet teosaki~
-Teosaki'nin dehþeti~
-Kayýp bir ruha ait kýrbaç þekline bürünmüþ bir dehþet parçacýðý uzanýyor.~
-none~
-weapon M AN
-whip 20 6 whip DCE
-90 190 1200000 G
-
-A
-12 140
-A
-13 220
-A
-18 15
-A
-19 15
-A
-24 -10
 #0
 
 #NEW_MOBILES

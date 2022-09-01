@@ -361,7 +361,24 @@ görüp görmediðini soruyor.
 human~
 ABT 0 8
 #0
+
 #OBJECTS
+#1105
+tek yüzük~
+tek yüzük~
+Burada sihirli bir yüzük duruyor.~
+copper~
+jewelry G AB
+0 0 0 0 0
+20 30 1660 P
+F
+A 0 0 B
+A
+1 -1
+#0
+
+
+#NEW_OBJECTS
 #1100
 gökkuþaðý asa~
 gökkuþaðý asasý~
@@ -420,18 +437,6 @@ armor GK AK
 15 30 1320 P
 A
 20 -1
-#1105
-tek yüzük~
-tek yüzük~
-Burada sihirli bir yüzük duruyor.~
-copper~
-jewelry G AB
-0 0 0 0 0
-20 30 1660 P
-F
-A 0 0 B
-A
-1 -1
 #1106
 çora mýzrak~
 bir çora mýzraðý~

@@ -166,7 +166,19 @@ kesinlikle bir antilop.
 human~
 AH 0 6
 #0
+
 #OBJECTS
+#7810
+iksir~
+bir iksir~
+Bir iksir yerde duruyor.~
+glass~
+potion G A
+10 'improved detect' 'detect magic' 'detect invis' 'weaken'
+4 10 290 P
+#0
+
+#NEW_OBJECTS
 #7800
 çora zincir zýrhý zincirzýrh~
 çora iþi zincirzýrh~
@@ -257,14 +269,6 @@ glass~
 potion G A
 10 'energy drain' '' '' ''
 8 10 580 P
-#7810
-iksir~
-bir iksir~
-Bir iksir yerde duruyor.~
-glass~
-potion G A
-10 'improved detect' 'detect magic' 'detect invis' 'weaken'
-4 10 290 P
 #7811
 iksir~
 bir iksir~

@@ -369,6 +369,27 @@ ABGKRe D 46
 #0
 
 #OBJECTS
+#9205
+rüzgar çizme~
+bir çift rüzgar çizmesi~
+Bir çift rüzgar çizmesi çevresinde hava akýmý oluþturuyor.~
+fiber~
+armor G AG
+8 8 8 2 0
+26 10 5200 P
+A
+2 2
+#9225
+büyülü toz~
+büyülü toz~
+Bir miktar büyülü toz etrafa daðýlmýþ.~
+unknown~
+pill 0 A
+20 'detect invis' '' '' ''
+0 10 300 P
+#0
+
+#NEW_OBJECTS
 #9201
 toprak yüzük~
 toprak yüzüðü~
@@ -413,16 +434,6 @@ armor A AC
 30 30 3100 P
 A
 19 1
-#9205
-rüzgar çizme~
-bir çift rüzgar çizmesi~
-Bir çift rüzgar çizmesi çevresinde hava akýmý oluþturuyor.~
-fiber~
-armor G AG
-8 8 8 2 0
-26 10 5200 P
-A
-2 2
 #9206
 kasýrga miðferi~
 kasýrga miðferi~
@@ -609,14 +620,6 @@ glass~
 drink 0 A
 150 150 'water' 0 0
 0 20 200 P
-#9225
-büyülü toz~
-büyülü toz~
-Bir miktar büyülü toz etrafa daðýlmýþ.~
-unknown~
-pill 0 A
-20 'detect invis' '' '' ''
-0 10 300 P
 #9226
 alev mýzrak~
 alev mýzraðý~

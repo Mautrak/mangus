@@ -167,8 +167,37 @@ AGR H 31
 #0
 
 
-
 #OBJECTS
+#22005
+sheath wrist~
+a concealable wrist sheath~
+A large leather wrist sheath for a dagger lies here.~
+leather~
+container GY AM
+10 0 0 5 50
+26 2 500 P
+A
+17 -10
+A
+2 2
+A
+19 4
+A
+18 4
+#22007
+rulership rod~
+the Rod of Rulership~
+A rod inscribed with words of command floats here.~
+admantite~
+armor ABG AO
+13 12 12 5 0
+38 5 5000 P
+A
+18 4
+A
+13 100
+A
+19 7
 #22000
 girdle giant strength~
 girdle of giant strength~
@@ -181,6 +210,10 @@ A
 19 5
 A
 1 5
+#0
+
+
+#NEW_OBJECTS
 #22001
 bone key carved~
 a carved bone key~
@@ -225,22 +258,6 @@ A
 12 50
 A
 3 2
-#22005
-sheath wrist~
-a concealable wrist sheath~
-A large leather wrist sheath for a dagger lies here.~
-leather~
-container GY AM
-10 0 0 5 50
-26 2 500 P
-A
-17 -10
-A
-2 2
-A
-19 4
-A
-18 4
 #22006
 spinagon spear~
 a Spinagon's spear~
@@ -253,20 +270,6 @@ A
 19 6
 A
 18 2
-#22007
-rulership rod~
-the Rod of Rulership~
-A rod inscribed with words of command floats here.~
-admantite~
-armor ABG AO
-13 12 12 5 0
-38 5 5000 P
-A
-18 4
-A
-13 100
-A
-19 7
 #22008
 collar bloody~
 a bloody collar~

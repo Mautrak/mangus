@@ -342,14 +342,6 @@ ABG BDH 30
 #0
 
 #OBJECTS
-#9301
-comet's tail~
-a comet's tail~
-A long, slender whip lies here.~
-leather~
-weapon AB AN
-whip 2 7 whip 0
-10 90 390 P
 #9302
 arm hercules~
 the Titanic Arm plates of Hercules~
@@ -364,6 +356,17 @@ E
 arm~
 These mighty armors have been worn by this immortal, since the ancient time.
 ~
+#0
+
+#NEW_OBJECTS
+#9301
+comet's tail~
+a comet's tail~
+A long, slender whip lies here.~
+leather~
+weapon AB AN
+whip 2 7 whip 0
+10 90 390 P
 #9304
 belt orion~
 the Titanic Belt of Orion~

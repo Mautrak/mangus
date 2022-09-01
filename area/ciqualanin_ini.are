@@ -223,6 +223,18 @@ ABCFH DFJ 32
 
 
 #OBJECTS
+#13407
+mavi iksir~
+mavi iksir~
+Mavi sývýyla dolu bir þiþe burada uzanýyor.~
+glass~
+potion H A
+31 'acid blast' 'acute vision' 'detect hidden' 'detect invis'
+20 20 49900 P
+#0
+
+
+#NEW_OBJECTS
 #13400
 ciquala'nýn kýlýcý~
 Ciquala'nýn kýlýcý~
@@ -303,14 +315,6 @@ iron~
 key 0 A
 0 0 0 0 0
 1 0 0 P
-#13407
-mavi iksir~
-mavi iksir~
-Mavi sývýyla dolu bir þiþe burada uzanýyor.~
-glass~
-potion H A
-31 'acid blast' 'acute vision' 'detect hidden' 'detect invis'
-20 20 49900 P
 #13408
 zümrüt þiþe~
 zümrüt bir þiþe~

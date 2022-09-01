@@ -177,7 +177,31 @@ You see nothing more than the sense of darkness and evil.
 human~
 ABF 0 24
 #0
+
 #OBJECTS
+#2005
+kýlýç excalibur~
+kýlýç Excalibur~
+Bir kýlýç, gümüþi býçaðýndaki büyüyle ýþýldýyor.~
+steel~
+weapon AGKL AN
+sword 10 4 slash 0
+24 150 3400 P
+A
+1 1
+A
+18 3
+#2008
+kutsal su matarasý~
+bir kutsal su matarasý~
+Bir kutsal su matarasý burada.~
+copper~
+potion A AO
+25 'bless' 'sanctuary' '' ''
+11 20 880 P
+#0
+
+#NEW_OBJECTS
 #2001
 parýldayan anahtar~
 parýldayan bir anahtar~
@@ -220,18 +244,6 @@ A
 19 2
 A
 18 1
-#2005
-kýlýç excalibur~
-kýlýç Excalibur~
-Bir kýlýç, gümüþi býçaðýndaki büyüyle ýþýldýyor.~
-steel~
-weapon AGKL AN
-sword 10 4 slash 0
-24 150 3400 P
-A
-1 1
-A
-18 3
 #2006
 taç kral tacý~
 bir kral tacý~
@@ -250,14 +262,6 @@ stone~
 container A 0
 15 ABCD 2006 15 100
 0 0 0 P
-#2008
-kutsal su matarasý~
-bir kutsal su matarasý~
-Bir kutsal su matarasý burada.~
-copper~
-potion A AO
-25 'bless' 'sanctuary' '' ''
-11 20 880 P
 #2009
 zincirzýrh zincir zýrh giysi~
 bir zincirzýrh~
