@@ -794,7 +794,56 @@ dwarf~
 ABTVe CDFJVZ 85
 #0
 
+
 #OBJECTS
+#3081
+iksir takdis~
+bir takdis iksiri~
+Bir iksir burada býrakýlmýþ.~
+glass~
+potion G AO
+20 'sanctuary' '' '' ''
+11 10 800 P
+#3082
+iksir ilahi~
+bir ilahi iksir~
+Bir iksir burada býrakýlmýþ.~
+crystal~
+potion ABGI AO
+35 'sanctuary' 'stone skin' 'enhanced armor' ''
+16 10 1800 P
+#3281
+iksir takdis~
+takdis iksiri~
+Bir takdis iksiri burada duruyor.~
+glass~
+potion G AO
+20 'sanctuary' '' '' ''
+11 10 800 P
+#3282
+ilahi koruma iksir~
+ilahi koruma iksiri~
+Bir ilahi koruma iksiri burada duruyor.~
+crystal~
+potion ABGI AO
+35 'sanctuary' 'stone skin' 'enhanced armor' 'shield'
+16 10 1800 P
+#3241
+sarý iksir~
+sarý iksir~
+Sarý renkli küçük bir iksir burada býrakýlmýþ.~
+glass~
+potion G AO
+12 'detect invis' '' '' ''
+0 10 220 P
+E
+sarý iksir~
+Ýksirin üzerinde 'Görünmeyeni Görme Ýksiri' diye bir etiket var.
+~
+#0
+
+
+#NEW_OBJECTS
 #3000
 fýçý bira~
 bir bira fýçýsý~
@@ -1344,22 +1393,6 @@ glass~
 potion G AO
 20 'heal' '' '' ''
 11 10 800 P
-#3081
-iksir takdis~
-bir takdis iksiri~
-Bir iksir burada býrakýlmýþ.~
-glass~
-potion G AO
-20 'sanctuary' '' '' ''
-11 10 800 P
-#3082
-iksir ilahi~
-bir ilahi iksir~
-Bir iksir burada býrakýlmýþ.~
-crystal~
-potion ABGI AO
-35 'sanctuary' 'stone skin' 'enhanced armor' ''
-16 10 1800 P
 #3083
 iksir hafif tedavi~
 bir hafif tedavi iksiri~
@@ -2275,18 +2308,6 @@ Parþömen üzerinde þöyle bir büyü formülü yazýlý:
       ?
       *
 ~
-#3241
-sarý iksir~
-sarý iksir~
-Sarý renkli küçük bir iksir burada býrakýlmýþ.~
-glass~
-potion G AO
-12 'detect invis' '' '' ''
-0 10 220 P
-E
-sarý iksir~
-Ýksirin üzerinde 'Görünmeyeni Görme Ýksiri' diye bir etiket var.
-~
 #3242
 anýmsama parþömen~
 anýmsama parþömeni~
@@ -2307,22 +2328,6 @@ glass~
 potion G AO
 20 'heal' '' '' ''
 11 10 800 P
-#3281
-iksir takdis~
-takdis iksiri~
-Bir takdis iksiri burada duruyor.~
-glass~
-potion G AO
-20 'sanctuary' '' '' ''
-11 10 800 P
-#3282
-ilahi koruma iksir~
-ilahi koruma iksiri~
-Bir ilahi koruma iksiri burada duruyor.~
-crystal~
-potion ABGI AO
-35 'sanctuary' 'stone skin' 'enhanced armor' 'shield'
-16 10 1800 P
 #3283
 iksir hafif tedavi~
 hafif tedavi iksiri~

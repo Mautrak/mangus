@@ -572,6 +572,72 @@ ABT 0 80
 
 
 #OBJECTS
+#17019
+kudret kolaný~
+kudret kolaný~
+Ustalýkla iþlenmiþ bir silah kemeri burada duruyor.
+~
+mithril~
+armor G AL
+17 16 16 8 0
+50 5 1000 P
+A
+5 4
+A
+19 10
+E
+kemer kudret kolaný~
+Kolanýn üzerinde bir yazýt var:
+------------------------------------
+Gündüzde ya da gecede
+Karanlýkta, yahut ýþýkta
+Ne yanlýþ vardýr ne de doðru..
+Baki olan tek þey, ZAFER KAZANMAYI BÝLEN KUDRETTÝR..
+------------------------------------
+~
+#17024
+göz kracken krackenin gözü~
+kracken'in gözü~
+Bir çeþit deniz yaratýðýnýn büyük göz bebeði yerde çürüyor.
+~
+flesh~
+staff CEJ AO
+25 10 10 'detect invis' 0
+25 1 1000 P
+E
+eye eyeball~
+You stare into the eye, and you feel an ancient evil try to
+wrest control of your mind away from you. You win and break
+your gaze.
+~
+#17025
+volkanik kol bantlarý~
+Volkanik kol bantlarý~
+Ateþten yapýlmýþ kol bantlarý yerde için için yanýyor.
+~
+fire~
+armor AGQ AI
+25 25 25 25 0
+64 5 1000 P
+A
+13 100
+E
+fire~
+The armbands are burning brightly.
+~
+#17029
+ettin'in ettinin kaný~
+Ettin'in kaný~
+Kanla dolu bir kavanoz burada.
+~
+glass~
+potion FG A
+25 'sanctuary' 'stone skin' 'shield' 'armor'
+20 3 9000 P
+#0
+
+
+#NEW_OBJECTS
 #17011
 aðaç muz aðacý~
 muz aðacý~
@@ -675,29 +741,6 @@ Upon closer examination, you see that the sextant has an inscription
 on the side. It reads 'Recite these words on what you need, and at
 last I will be freed'
 ~
-#17019
-kudret kolaný~
-kudret kolaný~
-Ustalýkla iþlenmiþ bir silah kemeri burada duruyor.
-~
-mithril~
-armor G AL
-17 16 16 8 0
-50 5 1000 P
-A
-5 4
-A
-19 10
-E
-kemer kudret kolaný~
-Kolanýn üzerinde bir yazýt var:
-------------------------------------
-Gündüzde ya da gecede
-Karanlýkta, yahut ýþýkta
-Ne yanlýþ vardýr ne de doðru..
-Baki olan tek þey, ZAFER KAZANMAYI BÝLEN KUDRETTÝR..
-------------------------------------
-~
 #17020
 eldivenler isabet~
 isabet eldivenleri~
@@ -749,36 +792,6 @@ A
 18 5
 A
 19 5
-#17024
-göz kracken krackenin gözü~
-kracken'in gözü~
-Bir çeþit deniz yaratýðýnýn büyük göz bebeði yerde çürüyor.
-~
-flesh~
-staff CEJ AO
-25 10 10 'detect invis' 0
-25 1 1000 P
-E
-eye eyeball~
-You stare into the eye, and you feel an ancient evil try to
-wrest control of your mind away from you. You win and break
-your gaze.
-~
-#17025
-volkanik kol bantlarý~
-Volkanik kol bantlarý~
-Ateþten yapýlmýþ kol bantlarý yerde için için yanýyor.
-~
-fire~
-armor AGQ AI
-25 25 25 25 0
-64 5 1000 P
-A
-13 100
-E
-fire~
-The armbands are burning brightly.
-~
 #17026
 sandýk tunç~
 büyük tunç bir sandýk~
@@ -818,15 +831,6 @@ E
 cloak~
 Yes, you have seen a thief wearing this once before.
 ~
-#17029
-ettin'in ettinin kaný~
-Ettin'in kaný~
-Kanla dolu bir kavanoz burada.
-~
-glass~
-potion FG A
-25 'sanctuary' 'stone skin' 'shield' 'armor'
-20 3 9000 P
 #17030
 korsan definesi~
 korsan definesi~
