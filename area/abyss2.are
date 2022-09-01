@@ -366,8 +366,39 @@ human~
 ABFG DFHJ 35
 #0
 
-
 #OBJECTS
+#25022
+ivory bracelet~
+an Ivory Bracelet~
+A bracelet made of the finest ivory rests here.~
+ivory~
+armor GL AM
+9 9 9 2 0
+31 16 13420 G
+F
+R 0 0 CD
+F
+A 0 0 KT
+F
+D 0 0 Z
+#25083
+diamond collar~
+diamond collar~
+A large diamond is lying on the floor.~
+diamond~
+armor ACY AC
+10 10 10 10 0
+20 90 99900 P
+A
+18 3
+A
+19 3
+A
+24 -2
+#0
+
+
+#NEW_OBJECTS
 #25000
 sword~
 the Sword of the Ancients~
@@ -641,20 +672,6 @@ armor AGLP AC
 41 20 18999 G
 A
 12 50
-#25022
-ivory bracelet~
-an Ivory Bracelet~
-A bracelet made of the finest ivory rests here.~
-ivory~
-armor GL AM
-9 9 9 2 0
-31 16 13420 G
-F
-R 0 0 CD
-F
-A 0 0 KT
-F
-D 0 0 Z
 #25023
 green cape~
 a Bright Green Cape~
@@ -867,21 +884,6 @@ steel~
 weapon AGIOY AN
 exotic 10 11 slash D
 51 300 100000 G
-#25083
-diamond collar~
-diamond collar~
-A large diamond is lying on the floor.~
-diamond~
-armor ACY AC
-10 10 10 10 0
-20 90 99900 P
-A
-18 3
-A
-19 3
-A
-24 -2
-
 #0
 
 

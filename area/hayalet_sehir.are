@@ -398,7 +398,6 @@ undead~
 ABFGO DF 60
 #0
 
-
 #OBJECTS
 #8100
 asa ciblll~
@@ -431,6 +430,54 @@ A
 23 -10
 A
 24 -10
+#8113
+zýrh~
+Kara Zýrh~
+Bir Kara Zýrh burada duruyor.
+~
+steel~
+armor CEJ AE
+16 16 17 10 0
+50 25 15000 P
+A
+17 -10
+A
+18 4
+A
+19 7
+#8110
+elmas asa~
+bir elmas asa~
+Bir elmas asa burada kudretle parlýyor.
+~
+wood~
+staff AG AO
+50 20 20 'sanctuary' 0
+58 10 40000 P
+A
+12 50
+#8122
+miðfer hayalet~
+Hayalet Miðferi~
+Tepesinde birþey oyulmuþ olan dev bir miðfer yerde duruyor...~
+adamantite~
+armor ACY AE
+39 39 39 37 30
+57 20 99000 P
+A
+3 2
+A
+13 50
+A
+18 5
+A
+19 5
+A
+24 -5
+#0
+
+
+#NEW_OBJECTS
 #8101
 el vecna~
 Vecna'nýn Eli~
@@ -552,17 +599,6 @@ silver~
 trash 0 A
 0 0 0 0 0
 1 50 0 P
-#8110
-elmas asa~
-bir elmas asa~
-Bir elmas asa burada kudretle parlýyor.
-~
-wood~
-staff AG AO
-50 20 20 'sanctuary' 0
-58 10 40000 P
-A
-12 50
 #8111
 pelerin~
 Kara Pelerin~
@@ -591,21 +627,6 @@ A
 18 2
 A
 19 4
-#8113
-zýrh~
-Kara Zýrh~
-Bir Kara Zýrh burada duruyor.
-~
-steel~
-armor CEJ AE
-16 16 17 10 0
-50 25 15000 P
-A
-17 -10
-A
-18 4
-A
-19 7
 #8114
 miðfer~
 Kara Miðfer~
@@ -686,25 +707,6 @@ glass~
 potion BEJ AO
 60 'poison' 'weaken' 'curse' ''
 45 10 300 P
-#8122
-miðfer hayalet~
-Hayalet Miðferi~
-Tepesinde birþey oyulmuþ olan dev bir miðfer yerde duruyor...~
-adamantite~
-armor ACY AE
-39 39 39 37 30
-57 20 99000 P
-A
-3 2
-A
-13 50
-A
-18 5
-A
-19 5
-A
-24 -5
-
 #0
 
 #ROOMS

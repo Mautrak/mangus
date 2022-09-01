@@ -217,6 +217,61 @@ ABQ DEHJN 38
 #0
 
 #OBJECTS
+#8716
+aslan pençesi~
+bir aslanýn pençesi~
+Aslan benzeri bir yaratýðýn kuvvetli pençesi buraya atýlmýþ.~
+bone~
+weapon G AN
+exotic 4 15 claw 0
+26 200 4400 P
+A
+19 6
+A
+18 8
+A
+5 1
+E
+lion paw~
+The massive paw has straps on it formed of bronze, so that it will
+fit snugly over your hand.  As you put it on, it melds with your hand,
+becoming an extension of your arm.
+~
+#8728
+lost ring ra~
+the lost ring of ra~
+A huge shining ring has been carelessly dropped here.~
+ruby~
+jewelry BG AB
+0 0 0 0 0
+40 50 44300 P
+A
+19 5
+A
+17 20
+E
+ra ring~
+The ring is bigger than other rings, smooth, metal-colored and shining,
+save that it gives off a continuous low humming noise that tickles your
+fingertips. There is something written on it. I can't read it what is that
+is that punish or punishment? ~
+#8721
+ufak bir iksir þiþesi~
+ufak bir iksir þiþesi~
+Ufak bir iksir þiþesi ayaðýnýn dibinde duruyor.~
+glass~
+potion G A
+30 'giant strength' 'stone skin' 'sanctuary' ''
+16 20 1820 P
+E
+small elixir~
+The elixir is deceptively small.  Something tells you that its
+contents are truly quite potent.  Perhaps too potent for ordinary
+mortals to attempt to consume.
+~
+#0
+
+#NEW_OBJECTS
 #8700
 mýsýr gürzü~
 bir Mýsýr gürzü~
@@ -449,26 +504,6 @@ The book has well-worn pages, containing many befuddling riddles
 to surprise, confuse, and amuse you.  You find yourself bewildered
 by its contents and put it down to sort your head out.
 ~
-#8716
-aslan pençesi~
-bir aslanýn pençesi~
-Aslan benzeri bir yaratýðýn kuvvetli pençesi buraya atýlmýþ.~
-bone~
-weapon G AN
-exotic 4 15 claw 0
-26 200 4400 P
-A
-19 6
-A
-18 8
-A
-5 1
-E
-lion paw~
-The massive paw has straps on it formed of bronze, so that it will
-fit snugly over your hand.  As you put it on, it melds with your hand,
-becoming an extension of your arm.
-~
 #8717
 cevap~
 cevap~
@@ -530,20 +565,6 @@ curse mummy~
 Rumor has it that whomever disturbs the grave of the mummy shall be
 cursed for all eternity, and that the descendents of that person shall
 likewise be cursed for ten generations to follow.
-~
-#8721
-ufak bir iksir þiþesi~
-ufak bir iksir þiþesi~
-Ufak bir iksir þiþesi ayaðýnýn dibinde duruyor.~
-glass~
-potion G A
-30 'giant strength' 'stone skin' 'sanctuary' ''
-16 20 1820 P
-E
-small elixir~
-The elixir is deceptively small.  Something tells you that its
-contents are truly quite potent.  Perhaps too potent for ordinary
-mortals to attempt to consume.
 ~
 #8722
 altýn maske~
@@ -652,24 +673,6 @@ These magically fashioned leggings impart the strength and stamina
 of the mightiest of the ancient sphinxes.  You feel ancient power
 emanating from them; they seem to be almost alive.
 ~
-#8728
-lost ring ra~
-the lost ring of ra~
-A huge shining ring has been carelessly dropped here.~
-ruby~
-jewelry BG AB
-0 0 0 0 0
-40 50 44300 P
-A
-19 5
-A
-17 20
-E
-ra ring~
-The ring is bigger than other rings, smooth, metal-colored and shining,
-save that it gives off a continuous low humming noise that tickles your
-fingertips. There is something written on it. I can't read it what is that
-is that punish or punishment? ~
 #0
 
 #ROOMS

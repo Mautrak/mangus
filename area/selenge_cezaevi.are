@@ -262,6 +262,75 @@ ACH DH 50
 
 
 #OBJECTS
+#32034
+titanyum kalkan~
+titanyum kalkan~
+Yerde saðlam bir kalkan görüyorsun.
+~
+titanium~
+armor 0 AJ
+29 29 28 20 0
+60 35 1000 P
+A
+19 10
+#32036
+karasý zift yüzük muhafýz~
+zift karasý bir yüzük~
+Kara bir yüzük burada unutulmuþ.
+~
+unknown~
+armor ABFG AB
+18 18 19 10 0
+30 5 1000 P
+A
+17 -30
+A
+13 200
+#32030
+çivili bileklik~
+çivili bileklik~
+Çivili bir bileklik burada, yeni bir sahip istiyor.
+~
+unknown~
+armor 0 AM
+20 21 20 20 0
+60 10 100 P
+A
+13 50
+A
+12 50
+A
+17 -20
+A
+18 5
+A
+19 5
+#32052
+balta yýkým~
+YýKýM BalTaSý~
+Üzerinde kan izleri olan bir balta görüyorsun.
+~
+steel~
+weapon BFG AN
+axe 11 11 chop DE
+90 30 0 P
+A
+17 120
+A
+19 10
+#32057
+siyah hap~
+siyah hap~
+Siyah bir hap görüyorsun, yerde tozlanýyor.
+~
+unknown~
+pill 0 A
+10 'cure light' 'cure serious' 'sanctuary' ''
+5 20 500 P
+#0
+
+
+#NEW_OBJECTS
 #32000
 kapý anahtar~
 kapý anahtarý~
@@ -580,25 +649,6 @@ A
 17 -10
 A
 19 3
-#32030
-çivili bileklik~
-çivili bileklik~
-Çivili bir bileklik burada, yeni bir sahip istiyor.
-~
-unknown~
-armor 0 AM
-20 21 20 20 0
-60 10 100 P
-A
-13 50
-A
-12 50
-A
-17 -20
-A
-18 5
-A
-19 5
 #32031
 titanyum bacaklýk~
 bir çift titanyum bacaklýk~
@@ -634,17 +684,6 @@ armor 0 AK
 20 5 10 P
 A
 2 3
-#32034
-titanyum kalkan~
-titanyum kalkan~
-Yerde saðlam bir kalkan görüyorsun.
-~
-titanium~
-armor 0 AJ
-29 29 28 20 0
-60 35 1000 P
-A
-19 10
 #32035
 kama eðri~
 eðri kama~
@@ -658,19 +697,6 @@ A
 18 10
 A
 19 4
-#32036
-karasý zift yüzük muhafýz~
-zift karasý bir yüzük~
-Kara bir yüzük burada unutulmuþ.
-~
-unknown~
-armor ABFG AB
-18 18 19 10 0
-30 5 1000 P
-A
-17 -30
-A
-13 200
 #32037
 demir kelepçe~
 demir kelepçe~
@@ -846,19 +872,6 @@ armor ABFKL AE
 90 25 110 P
 A
 19 10
-#32052
-balta yýkým~
-YýKýM BalTaSý~
-Üzerinde kan izleri olan bir balta görüyorsun.
-~
-steel~
-weapon BFG AN
-axe 11 11 chop DE
-90 30 0 P
-A
-17 120
-A
-19 10
 #32053
 çöp kutu~
 çöp kutusu~
@@ -895,15 +908,6 @@ stone~
 fountain 0 0
 0 0 'water' 0 0
 0 0 0 P
-#32057
-siyah hap~
-siyah hap~
-Siyah bir hap görüyorsun, yerde tozlanýyor.
-~
-unknown~
-pill 0 A
-10 'cure light' 'cure serious' 'sanctuary' ''
-5 20 500 P
 #32058
 berbat duman þiþe~
 bir þiþe berbat duman~
