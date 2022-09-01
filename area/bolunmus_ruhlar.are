@@ -1386,7 +1386,156 @@ ACFGS PQ 70
 
 #0
 
+
 #OBJECTS
+#11708
+çift kol bandý kan kýrmýzý kolbantlarý~
+kan kýrmýzýsý kolbantlarý~
+Kan kýrmýzýsý bir çift kol bandý ýþýkta ýslak kan halkalarý gibi parlýyor.~
+adamantite~
+armor AI AI
+41 40 40 23 0
+90 50 10000 P
+A
+1 4
+A
+2 4
+A
+12 120
+A
+13 120
+A
+18 12
+A
+19 12
+A
+20 -5
+E
+çift kol bandý kan kýrmýzý kolbantlarý kandan halkalar~
+Kan kýrmýzýsý metalin altýna iki çapraz hançerin üzerine alçalan bir
+atmaca figürü oyulmuþ. Üzerinde de þöyle bir yazýt var:
+
+			"Ir'vekire zai'Zdreni",
+.
+~
+#11709
+adamant quanchi intikam yemini bant band~
+Quanchi'nin Ýntikam Yemini~
+Kayýp bir ruha ait kan kýrmýzýsý adamant bir bant, yemini mýrýldanýyor.~
+adamantite~
+armor B AC
+40 40 40 24 0
+90 30 15000 P
+A
+1 5
+A
+2 5
+A
+3 5
+A
+4 5
+A
+5 5
+A
+12 500
+A
+13 250
+A
+14 500
+A
+18 15
+A
+19 15
+A
+20 -10
+F
+A 0 0 c
+F
+R 0 0 CD
+E
+adamant yakut intikam yemini bandý~
+Bantýn dýþ kýsmýný bir yazýt çevreliyor:  "Ir'vekire zai'Zdreni"
+
+Metalinin iç kýsmýna boydan boya oyulmuþ þu kelimeleri fark ediyorsun:
+
+               "sh'keva Zdreni zeraika shai !"
+
+        ("akan zdreni kaný için alýnacak öç bizimdir!")
+
+Yakutun üzerine, iki çapraz hançer üzerine alçalan atmaca formu oyulmuþ.
+~
+#11710
+deshanti kamasý~
+deshanti kamasý~
+Koyu kan rengi kabzasý olan bir kama, burada parýldýyor.~
+adamantite~
+weapon AC AN
+dagger 10 15 pierce CD
+90 180 12500 P
+A
+18 25
+A
+19 25
+#11693
+müzikal bileklikler siyah tüy~
+müzikal bileklikler~
+Bir çift siyah tüy bileklik, melodik bir þekilde výzýldayarak burada uzanýyor.~
+feathers~
+armor AB AI
+13 13 13 13 0
+43 20 2200 P
+A
+2 3
+A
+12 45
+A
+19 3
+#11680
+bileklikler enerji~
+enerji bileklikleri~
+Çok renkli enerjiden oluþan bileklikler burada uzanýyor.~
+energy~
+armor AB AI
+20 20 20 20 0
+76 40 4300 P
+A
+2 3
+A
+12 90
+A
+19 5
+F
+A 0 0 V
+#11645
+tavþan yemek artýk~
+bir tavþan yemeði artýðý~
+Bir tavþanýn yemek artýklarý burada uzanýyor.~
+food~
+pill 0 A
+55 'haste' '' '' ''
+45 10 500 P
+#11730
+duman rengi dumanrengi rütbeli pelerin~
+duman rengi rütbeli koyu bir pelerin~
+Koyu bir pelerinin üzerine duman rengi iki çapraz hançer figürü iþlenmiþ.~
+leather~
+armor C AC
+19 19 19 17 0
+60 50 3800 P
+A
+2 2
+A
+5 2
+A
+13 100
+A
+18 5
+A
+19 5
+#0
+
+
+#NEW_OBJECTS
 #11600
 sanatsal beyaz nesne kemikten yaratýk~
 Tuhaf sanat çalýþmasý~
@@ -2049,14 +2198,6 @@ A
 12 40
 A
 19 3
-#11645
-tavþan yemek artýk~
-bir tavþan yemeði artýðý~
-Bir tavþanýn yemek artýklarý burada uzanýyor.~
-food~
-pill 0 A
-55 'haste' '' '' ''
-45 10 500 P
 #11646
 inleyen beyaz melek~
 inleyen bir melek~
@@ -2580,22 +2721,6 @@ A
 18 3
 A
 19 6
-#11680
-bileklikler enerji~
-enerji bileklikleri~
-Çok renkli enerjiden oluþan bileklikler burada uzanýyor.~
-energy~
-armor AB AI
-20 20 20 20 0
-76 40 4300 P
-A
-2 3
-A
-12 90
-A
-19 5
-F
-A 0 0 V
 #11681
 hýzla dönen enerji diski~
 hýzla dönen disk~
@@ -2766,20 +2891,6 @@ A
 18 5
 A
 19 5
-#11693
-müzikal bileklikler siyah tüy~
-müzikal bileklikler~
-Bir çift siyah tüy bileklik, melodik bir þekilde výzýldayarak burada uzanýyor.~
-feathers~
-armor AB AI
-13 13 13 13 0
-43 20 2200 P
-A
-2 3
-A
-12 45
-A
-19 3
 #11694
 sessiz kara alev~
 bir sessiz alev~
@@ -2928,94 +3039,6 @@ burgacýk bir yazýyla yazýlmýþ þu kelimeler var:
 
 Sýrtýndan ensene kadar çýkan bir ürpermeyle titriyorsun.
 ~
-#11708
-çift kol bandý kan kýrmýzý kolbantlarý~
-kan kýrmýzýsý kolbantlarý~
-Kan kýrmýzýsý bir çift kol bandý ýþýkta ýslak kan halkalarý gibi parlýyor.~
-adamantite~
-armor AI AI
-41 40 40 23 0
-90 50 10000 P
-A
-1 4
-A
-2 4
-A
-12 120
-A
-13 120
-A
-18 12
-A
-19 12
-A
-20 -5
-E
-çift kol bandý kan kýrmýzý kolbantlarý kandan halkalar~
-Kan kýrmýzýsý metalin altýna iki çapraz hançerin üzerine alçalan bir
-atmaca figürü oyulmuþ. Üzerinde de þöyle bir yazýt var:
-
-			"Ir'vekire zai'Zdreni",
-.
-~
-#11709
-adamant quanchi intikam yemini bant band~
-Quanchi'nin Ýntikam Yemini~
-Kayýp bir ruha ait kan kýrmýzýsý adamant bir bant, yemini mýrýldanýyor.~
-adamantite~
-armor B AC
-40 40 40 24 0
-90 30 15000 P
-A
-1 5
-A
-2 5
-A
-3 5
-A
-4 5
-A
-5 5
-A
-12 500
-A
-13 250
-A
-14 500
-A
-18 15
-A
-19 15
-A
-20 -10
-F
-A 0 0 c
-F
-R 0 0 CD
-E
-adamant yakut intikam yemini bandý~
-Bantýn dýþ kýsmýný bir yazýt çevreliyor:  "Ir'vekire zai'Zdreni"
-
-Metalinin iç kýsmýna boydan boya oyulmuþ þu kelimeleri fark ediyorsun:
-
-               "sh'keva Zdreni zeraika shai !"
-
-        ("akan zdreni kaný için alýnacak öç bizimdir!")
-
-Yakutun üzerine, iki çapraz hançer üzerine alçalan atmaca formu oyulmuþ.
-~
-#11710
-deshanti kamasý~
-deshanti kamasý~
-Koyu kan rengi kabzasý olan bir kama, burada parýldýyor.~
-adamantite~
-weapon AC AN
-dagger 10 15 pierce CD
-90 180 12500 P
-A
-18 25
-A
-19 25
 #11711
 gece karasý akik rütbe yüzüðü yüzük~
 gece karasý bir rütbe~
@@ -3281,24 +3304,6 @@ A
 18 4
 A
 19 4
-#11730
-duman rengi dumanrengi rütbeli pelerin~
-duman rengi rütbeli koyu bir pelerin~
-Koyu bir pelerinin üzerine duman rengi iki çapraz hançer figürü iþlenmiþ.~
-leather~
-armor C AC
-19 19 19 17 0
-60 50 3800 P
-A
-2 2
-A
-5 2
-A
-13 100
-A
-18 5
-A
-19 5
 #11731
 beyaz uzun kargý~
 uzun beyaz bir kargý~

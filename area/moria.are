@@ -337,6 +337,21 @@ ACFGT 0 9
 #0
 
 #OBJECTS
+#4050
+iksir mor~
+mor bir iksir~
+Mor bir iksir burada duruyor.~
+glass~
+potion 0 AO
+13 'cure blindness' 'sanctuary' '' ''
+11 10 720 G
+E
+potion purple~
+It looks rather strange!
+~
+#0
+
+#NEW_OBJECTS
 #4000
 sarý yeþil yüzük~
 sarý ve yeþil bir yüzük~
@@ -425,18 +440,6 @@ E
 furs~
 They're heavy and smelly and would probably slow you down...but they do look
 like good armor.
-~
-#4050
-iksir mor~
-mor bir iksir~
-Mor bir iksir burada duruyor.~
-glass~
-potion 0 AO
-13 'cure blindness' 'bless' '' ''
-11 10 720 G
-E
-potion purple~
-It looks rather strange!
 ~
 #4051
 metal miðfer~
@@ -2929,5 +2932,7 @@ M 4157 spec_cast_mage      	* the Mage
 M 4158 spec_poison         	* the snake
 S
 
+#OLIMITS
+O 4050 10 * sanctuary potion
 S
 #$
