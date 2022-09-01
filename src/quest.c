@@ -1389,6 +1389,7 @@ void do_eniyi(CHAR_DATA *ch,char *argument)
 	char arg1 [MAX_INPUT_LENGTH];
 	OBJ_DATA *obj,*zz1,*zz2,*zz3,*ac1,*ac2,*ac3;
 	AFFECT_DATA *paf;
+	int cost = 200;
 
 	for ( questman = ch->in_room->people; questman != NULL; questman = questman->next_in_room )
     {
@@ -1440,10 +1441,28 @@ if ( argument[0] == '\0' )
 		send_to_char("Vücudunda böyle bir bölge göremiyorum!\n\r",ch);
 		return;
 	}
-	if(ch->silver<((ch->level/2)+1))
+	
+	if(number_percent()<= get_skill(ch, gsn_haggle))
+	{
+		if(number_percent()>90)
+		{
+			cost = 20;
+		}
+		else
+		{
+			cost = 80;
+		}
+	}
+	
+	if(ch->silver<cost)
 	{
 		send_to_char("Yeterli akçen yok, bilgi veremem.\n\r",ch);
 		return;
+	}
+	else
+	{
+		ch->silver -= cost;
+		printf_to_char(ch,"Aldýðýn hizmet için %d akçe ödüyorsun.\n\r", cost);
 	}
 
 	zz1=NULL;
@@ -1523,42 +1542,43 @@ if ( argument[0] == '\0' )
 	{
 		do_tell_quest(ch,questman,(char*)"Þu an birþey hatýrlayamýyorum. Sanýrým yaþlanýyorum.");
 		do_tell_quest(ch,questman,(char*)"Daha sonra tekrar uðra lütfen.");
+		ch->silver += cost;
+		printf_to_char(ch,"%d akçeni geri alýyorsun.\n\r", cost);
 		return;
 	}
-	ch->silver -= (ch->level/2)+1;
 	do_tell_quest(ch,questman,(char*)"Bir düþüneyim... Evet sanýrým birþeyler hatýrladým.");
 	do_tell_quest(ch,questman,(char*)"Bazý ekipmanlar hatýrlýyorum, senin giyebileceðin seviyede ekipmanlar.");
 
 	if(zz1 != NULL)
 	{
 		do_tell_quest(ch,questman,(char*)"Vuruþlarýnýn gücünü ve isabetini artýracak ekipmanlar. Mesela...");
-		sprintf(buf,"%s",zz1->short_descr);
+		sprintf(buf,"[%s] %s",( zz1->carried_by != NULL )?(zz1->carried_by->in_room->area->name):"Bir yerlerde",zz1->short_descr);
 		do_tell_quest(ch,questman,(char*)buf);
 	}
 	if(zz2 != NULL)
 	{
-		sprintf(buf,"%s",zz2->short_descr);
+		sprintf(buf,"[%s] %s",( zz2->carried_by != NULL )?(zz2->carried_by->in_room->area->name):"Bir yerlerde",zz2->short_descr);
 		do_tell_quest(ch,questman,(char*)buf);
 	}
 	if(zz3 != NULL)
 	{
-		sprintf(buf,"%s",zz3->short_descr);
+		sprintf(buf,"[%s] %s",( zz3->carried_by != NULL )?(zz3->carried_by->in_room->area->name):"Bir yerlerde",zz3->short_descr);
 		do_tell_quest(ch,questman,(char*)buf);
 	}
 	if(ac1 != NULL)
 	{
 		do_tell_quest(ch,questman,(char*)"Bir de seni koruyacak ekipmanlar var aklýma gelen. Mesela...");
-		sprintf(buf,"%s",ac1->short_descr);
+		sprintf(buf,"[%s] %s",( ac1->carried_by != NULL )?(ac1->carried_by->in_room->area->name):"Bir yerlerde",ac1->short_descr);
 		do_tell_quest(ch,questman,(char*)buf);
 	}
 	if(ac2 != NULL)
 	{
-		sprintf(buf,"%s",ac2->short_descr);
+		sprintf(buf,"[%s] %s",( ac2->carried_by != NULL )?(ac2->carried_by->in_room->area->name):"Bir yerlerde",ac2->short_descr);
 		do_tell_quest(ch,questman,(char*)buf);
 	}
 	if(ac3 != NULL)
 	{
-		sprintf(buf,"%s",ac3->short_descr);
+		sprintf(buf,"[%s] %s",( ac3->carried_by != NULL )?(ac3->carried_by->in_room->area->name):"Bir yerlerde",ac3->short_descr);
 		do_tell_quest(ch,questman,(char*)buf);
 	}
 }
