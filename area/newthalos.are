@@ -997,6 +997,37 @@ ABKRVe DEFZ  96
 #0
 
 #OBJECTS
+#9572
+potion crystal clear~
+a crystal clear potion~
+A crystal clear potion lies here.~
+glass~
+potion G AO
+10 'detect invis' '' '' ''
+0 10 200 P
+#9573
+white potion~
+an off white potion~
+An off white potion lies here.~
+glass~
+potion G AO
+21 'haste' '' '' ''
+11 10 820 P
+#9580
+wand grey silver~
+a wand of glinting yellow~
+A wand of glinting yellow lies here.~
+gold brass~
+wand G AO
+1 15 15 'detect invis' 0
+5 10 580 P
+E
+wand~
+You see a shape slowly fading into exsistance at the base of this wand.
+~
+#0
+
+#NEW_OBJECTS
 #9500
 palace key~
 the palace key of New Thalos~
@@ -1553,22 +1584,6 @@ glass~
 potion G AO
 10 'stone skin' 'blindness' '' ''
 12 10 950 P
-#9572
-potion crystal clear~
-a crystal clear potion~
-A crystal clear potion lies here.~
-glass~
-potion G AO
-10 'detect invis' '' '' ''
-0 10 200 P
-#9573
-white potion~
-an off white potion~
-An off white potion lies here.~
-glass~
-potion G AO
-21 'haste' '' '' ''
-11 10 820 P
 #9574
 potion dark blue~
 a dark blue potion~
@@ -1620,18 +1635,6 @@ wand AG AO
 E
 wand~
 You see a small engraved storm cloud at the base of this wand.
-~
-#9580
-wand grey silver~
-a wand of glinting yellow~
-A wand of glinting yellow lies here.~
-gold brass~
-wand G AO
-1 15 15 'detect invis' 0
-5 10 580 P
-E
-wand~
-You see a shape slowly fading into exsistance at the base of this wand.
 ~
 #9581
 wand armor oak~

@@ -800,6 +800,98 @@ ABG DFNU 40
 
 
 #OBJECTS
+#19033
+horn golden~
+a unicorn's golden horn~
+A unicorn's horn is here.
+~
+gold~
+weapon AGK AN
+exotic 5 12 stab 0
+39 30 30000 P
+A
+18 8
+A
+19 8
+E
+golden horn gold~
+The unicorn's horn appears to be made of twisted gold tipped with a
+glittering diamond; down at the base, where it was severed from the
+unicorn's head, you can see some dried blood and fibers.  As you hold
+the horn in your hand, you feel a strange current running through your
+body, as though it still retained life in some way.~
+#19110
+sword obsidian eclipse~
+an eclipse sword~
+A sword of pure obsidian lies here, seeming to swallow up the rays of light.
+~
+obsidian~
+weapon FGHJM AN
+sword 5 10 slash DG
+35 20 20000 P
+A
+13 -50
+A
+12 -50
+A
+19 10
+E
+eclipse sword obsidian~
+This dark sword seems to draw in all the light near it and swallow it up....
+its edges and hilt are fuzzy and hard to make out, since all the light that
+falls near them is consumed by the power of the sword.~
+#19127
+blood red dagger~
+a blood-red dagger~
+A blood-red dagger lies here.
+~
+steel~
+weapon EGJ AN
+dagger 6 10 pierce AD
+45 10 10000 P
+A
+19 15
+E
+blood red dagger~
+.    The dagger before you is known as a blood dagger, and for good reason: as
+it pierces its victim's flesh, it draws the victim's blood into its blade,
+absorbing its dark red color.  This particular dagger radiates an almost
+black color, showing just how much use it has seen....
+.    The arms of an evil-looking creature cover the handle, forming an
+excellent grip, while the creature's gaping mouth and head form the hilt
+at the dagger's top.  The blade itself has been notched like a saw, for
+extra destructive power....
+ ~
+#19062
+sea blue robe sea-blue~
+a sea-blue robe~
+A sea-blue robe lies here.~
+cloth~
+armor 0 AK
+12 11 11 8 0
+35 5 10 P
+A
+19 5
+#19011
+harp silver caerlin~
+a silver harp~
+A bright silver harp lies here.~
+silver~
+wand K AO
+30 25 25 'sanctuary' 0
+15 10 1000 P
+#19067
+poultice detection~
+a poultice of detection~
+A small herbal poultice lies hee.~
+food~
+pill 0 AO
+20 'detect invis' 'detect magic' '' ''
+10 1 0 P
+#0
+
+
+#NEW_OBJECTS
 #19001
 mirror shield mirrored~
 a mirrored shield~
@@ -932,14 +1024,6 @@ beautiful blendings of silver and gold.  As you hold it in your hand, you
 somehow feel more confident, calmer, even happier, even though the king
 gave up the sceptre just after he was plunged into despair and depression.
 ~
-#19011
-harp silver caerlin~
-a silver harp~
-A bright silver harp lies here.~
-silver~
-wand K AO
-30 25 25 'sanctuary' 0
-15 10 1000 P
 #19012
 pool cue~
 a pool cue~
@@ -1148,26 +1232,6 @@ menu~
 *                                                                  *
 *  Your waiter will take your order.                               *
 ********************************************************************~
-#19033
-horn golden~
-a unicorn's golden horn~
-A unicorn's horn is here.
-~
-gold~
-weapon AGK AN
-exotic 5 12 stab 0
-39 30 30000 P
-A
-18 8
-A
-19 8
-E
-golden horn gold~
-The unicorn's horn appears to be made of twisted gold tipped with a
-glittering diamond; down at the base, where it was severed from the
-unicorn's head, you can see some dried blood and fibers.  As you hold
-the horn in your hand, you feel a strange current running through your
-body, as though it still retained life in some way.~
 #19034
 ermine blanket~
 an ermine blanket~
@@ -1469,16 +1533,6 @@ armor 0 AK
 35 5 10 P
 A
 12 35
-#19062
-sea blue robe sea-blue~
-a sea-blue robe~
-A sea-blue robe lies here.~
-cloth~
-armor 0 AK
-12 11 11 8 0
-35 5 10 P
-A
-19 5
 #19063
 violet robe~
 a violet robe~
@@ -1519,14 +1573,6 @@ cloth~
 armor K AK
 11 12 11 10 0
 39 5 100 P
-#19067
-poultice detection~
-a poultice of detection~
-A small herbal poultice lies hee.~
-food~
-pill 0 AO
-20 'detect invis' 'detect magic' '' ''
-10 1 0 P
 #19068
 beer glass~
 beer~
@@ -1939,26 +1985,6 @@ food~
 pill 0 A
 10 'poison' '' '' ''
 2 2 0 P
-#19110
-sword obsidian eclipse~
-an eclipse sword~
-A sword of pure obsidian lies here, seeming to swallow up the rays of light.
-~
-obsidian~
-weapon FGHJM AN
-sword 5 10 slash DG
-35 20 20000 P
-A
-13 -50
-A
-12 -50
-A
-19 10
-E
-eclipse sword obsidian~
-This dark sword seems to draw in all the light near it and swallow it up....
-its edges and hilt are fuzzy and hard to make out, since all the light that
-falls near them is consumed by the power of the sword.~
 #19111
 menu~
 a menu~
@@ -2166,28 +2192,6 @@ cloth~
 armor F AK
 16 16 16 7 0
 50 5 0 P
-#19127
-blood red dagger~
-a blood-red dagger~
-A blood-red dagger lies here.
-~
-steel~
-weapon EGJ AN
-dagger 6 10 pierce AD
-45 10 10000 P
-A
-19 15
-E
-blood red dagger~
-.    The dagger before you is known as a blood dagger, and for good reason: as
-it pierces its victim's flesh, it draws the victim's blood into its blade,
-absorbing its dark red color.  This particular dagger radiates an almost
-black color, showing just how much use it has seen....
-.    The arms of an evil-looking creature cover the handle, forming an
-excellent grip, while the creature's gaping mouth and head form the hilt
-at the dagger's top.  The blade itself has been notched like a saw, for
-extra destructive power....
- ~
 #19128
 sigil dark~
 the Sigil of the Dark~

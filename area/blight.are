@@ -276,7 +276,47 @@ unique~
 AT DFJ 45
 #0
 
+
 #OBJECTS
+#23020
+falagar albatros amblemli kýlýç~
+Falagar'ýn albatros amblemli kýlýcý~
+Kayýp bir ruhun adýný fýsýldayan kýlýç ayaðýnýn önünde duruyor.~
+iron~
+weapon GIM AN
+sword 10 11 slash DE
+60 12 600 P
+A
+19 15
+A
+18 10
+A
+13 50
+#23023
+maar yürektaþý hançer~
+Maar'ýn yürektaþý hançeri~
+Kayýp bir ruha ait hançer, efendisinin adýný fýsýldýyor.~
+unknown~
+weapon GM AN
+dagger 10 11 pierce D
+60 10 600 P
+A
+19 10
+A
+18 10
+A
+4 3
+#23028
+asa çita~
+oymalý bir asa~
+Kedi figürü oymalý bir asa burada dinleniyor.~
+unknown~
+staff 0 AO
+40 8 8 'sanctuary' 0
+43 5 430 P
+#0
+
+#NEW_OBJECTS
 #23001
 kýlýç büyük kavisli~
 büyük bir kavisli kýlýç~
@@ -465,20 +505,6 @@ A
 17 -15
 A
 12 50
-#23020
-falagar albatros amblemli kýlýç~
-Falagar'ýn albatros amblemli kýlýcý~
-Kayýp bir ruhun adýný fýsýldayan kýlýç ayaðýnýn önünde duruyor.~
-iron~
-weapon GIM AN
-sword 10 11 slash DE
-60 12 600 P
-A
-19 15
-A
-18 10
-A
-13 50
 #23021
 malkierian battle helm crane~
 turna þekilli altýn miðfer~
@@ -507,20 +533,6 @@ A
 19 4
 A
 18 2
-#23023
-maar yürektaþý hançer~
-Maar'ýn yürektaþý hançeri~
-Kayýp bir ruha ait hançer, efendisinin adýný fýsýldýyor.~
-unknown~
-weapon GM AN
-dagger 10 11 pierce D
-60 10 600 P
-A
-19 10
-A
-18 10
-A
-4 3
 #23024
 lord hüküm asa~
 bir Lord hüküm asasý~
@@ -563,14 +575,6 @@ E
 bayrak bayraklar~
 Bayraklardan biri küçük bir oyuðu örtüyor.
 ~
-#23028
-asa çita~
-oymalý bir asa~
-Kedi figürü oymalý bir asa burada dinleniyor.~
-unknown~
-staff 0 AO
-40 8 8 'sanctuary' 0
-43 5 430 P
 #23029
 pislik~
 kurumuþ göl pisliði~
