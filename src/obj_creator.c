@@ -160,7 +160,7 @@ void obj_random_paf(OBJ_DATA *obj)
 	int location=0;
 	int bitvector=0;
 	
-	if(number_range(1,500)!=1)
+	if(number_range(1,200)!=1)
 	{
 		return;
 	}
