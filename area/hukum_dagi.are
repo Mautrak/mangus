@@ -532,8 +532,27 @@ pardus~
 ABDG DHJ 51
 #0
 
-
 #OBJECTS
+#14759
+kara hortlak zýrhý~
+Kara Hortlak Zýrhý~
+Büyükçe bir zýrh burada býrakýlmýþ.~
+adamantite~
+armor CY AD
+31 31 31 29 10
+57 50 75000 P
+A
+18 6
+A
+19 6
+A
+13 75
+A
+24 -4
+#0
+
+
+#NEW_OBJECTS
 #14700
 lord krotgar zýrhý~
 Lord Krotgar'ýn Zýrhý~
@@ -1190,23 +1209,6 @@ iron~
 key 0 1|16384
 0 0 0 0 0
 0 0 0 P
-#14759
-kara hortlak zýrhý~
-Kara Hortlak Zýrhý~
-Büyükçe bir zýrh burada býrakýlmýþ.~
-adamantite~
-armor CY AD
-31 31 31 29 10
-57 50 75000 P
-A
-18 6
-A
-19 6
-A
-13 75
-A
-24 -4
-
 #0
 
 

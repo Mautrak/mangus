@@ -236,6 +236,28 @@ BFGX DFH 28
 
 
 #OBJECTS
+#29131
+beyaz mermer haç~
+beyaz mermer haç~
+Mermerden yapýlmýþ beyaz bir haç yerde yatýyor.
+~
+marble~
+staff AIKL AO
+35 3 3 'sanctuary' 0
+30 100 15000 P
+#29139
+görünmezlik iksiri sývý þiþe~
+görünmezlik iksiri~
+Sývý dolu bir þiþe görüyorsun.
+~
+glass~
+potion 0 AN
+30 'invis' 'detect invis' '' ''
+28 10 3000 P
+#0
+
+
+#NEW_OBJECTS
 #29120
 altýn orak rün~
 altýn orak~
@@ -342,15 +364,6 @@ armor 0 AD
 7 7 7 3 1
 28 80 1500 P
 A 17 -10
-#29131
-beyaz mermer haç~
-beyaz mermer haç~
-Mermerden yapýlmýþ beyaz bir haç yerde yatýyor.
-~
-marble~
-staff AIKL AO
-35 3 3 'sanctuary' 0
-30 100 15000 P
 #29132
 siyah cüppe~
 siyah cüppe~
@@ -435,15 +448,6 @@ wool~
 trash 0 AO
 0 0 0 0 0
 6 100 1500 P
-#29139
-görünmezlik iksiri sývý þiþe~
-görünmezlik iksiri~
-Sývý dolu bir þiþe görüyorsun.
-~
-glass~
-potion 0 AN
-30 'invis' 'detect invis' '' ''
-28 10 3000 P
 #0
 
 
