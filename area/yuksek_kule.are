@@ -629,7 +629,36 @@ human~
 ACGR DP 17
 #0
 
+
 #OBJECTS
+#1384
+bileklik gümüþ~
+ýþýldayan gümüþ bir bileklik~
+Iþýldayan, gümüþ bir çember burada~
+silver~
+jewelry G AM
+0 0 0 0 0
+20 50 1440 P
+A
+17 -5
+A
+6 1
+#1369
+iksir köpüren~
+köpüren bir iksir~
+Köpüren bir iksir burada.~
+glass~
+potion G A
+16 'detect evil' 'detect invis' 'detect magic' ''
+0 20 260 P
+E
+potion effervescent~
+Ahh!  Schwepes Sparkling Soda a refreshing drink.
+~
+#0
+
+
+#NEW_OBJECTS
 #1301
 taþfýrýn siyah~
 bir taþfýrýn~
@@ -1159,18 +1188,6 @@ glass~
 potion G A
 20 'blindness' 'teleport' 'cure blindness' ''
 5 20 470 P
-#1369
-iksir köpüren~
-köpüren bir iksir~
-Köpüren bir iksir burada.~
-glass~
-potion G A
-16 'detect evil' 'detect invis' 'detect magic' ''
-0 20 260 P
-E
-potion effervescent~
-Ahh!  Schwepes Sparkling Soda a refreshing drink.
-~
 #1370
 sütlü beyaz iksir~
 sütlü beyaz bir iksir~
@@ -1307,18 +1324,6 @@ A
 20 -2
 A
 17 -7
-#1384
-bileklik gümüþ~
-ýþýldayan gümüþ bir bileklik~
-Iþýldayan, gümüþ bir çember burada~
-silver~
-jewelry G AM
-0 0 0 0 0
-20 50 1440 P
-A
-17 -5
-A
-6 1
 #1385
 asa~
 demir ayaklý bir asa~

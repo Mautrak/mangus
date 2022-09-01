@@ -486,17 +486,7 @@ ABT CDEFJNTZ 91
 #0
 
 
-
 #OBJECTS
-#14001
-david anahtarý~
-David'in anahtarý~
-Kutsal aurayla çevrelenmiþ bir anahtar burada bekliyor.
-~
-adamantite~
-key BGS AO
-0 0 0 0 0
-0 10 0 P
 #14002
 demir göðüslük~
 demir göðüslük~
@@ -510,6 +500,56 @@ A
 19 15
 A
 17 -25
+#14013
+savaþ kýlýç~
+savaþ kýlýcý~
+Büyük bir iki elli kýlýç görüyorsun.~
+admantite~
+weapon EJM AN
+sword 11 12 slash DEFH
+85 20 14000 P
+A
+19 10
+A
+18 10
+#14018
+biçici týrpan~
+Biçici'nin Týrpaný~
+Soðuk ve karanlýk bir týrpan görüyorsun.~
+unknown~
+weapon CEFJMQ AN
+polearm 11 10 cleave CDFH
+85 20 14000 P
+A
+19 10
+A
+18 10
+#14019
+baþbüyücü kutsal mýzrak~
+Baþbüyücü'nün KutsaL Mýzraðý~
+Kutsal aurasýyla parlayan bir mýzrak görüyorsun.~
+admantite~
+weapon ABGIKMS AN
+lance 12 10 pierce A
+91 15 20000 P
+A
+19 10
+A
+18 10
+#0
+
+
+
+#NEW_OBJECTS
+#14001
+david anahtarý~
+David'in anahtarý~
+Kutsal aurayla çevrelenmiþ bir anahtar burada bekliyor.
+~
+adamantite~
+key BGS AO
+0 0 0 0 0
+0 10 0 P
 #14003
 çekirge iðnesi~
 çekirge iðnesi~
@@ -634,18 +674,6 @@ A
 19 7
 A
 17 -10
-#14013
-savaþ kýlýç~
-savaþ kýlýcý~
-Büyük bir iki elli kýlýç görüyorsun.~
-admantite~
-weapon EJM AN
-sword 11 12 slash DEFH
-85 20 14000 P
-A
-19 10
-A
-18 10
 #14014
 göðüslük jacinth~
 Jacinth'in göðüslüðü~
@@ -693,30 +721,6 @@ mithril~
 armor CEFGQ AK
 30 30 30 10 0
 85 10 14000 P
-#14018
-biçici týrpan~
-Biçici'nin Týrpaný~
-Soðuk ve karanlýk bir týrpan görüyorsun.~
-unknown~
-weapon CEFJMQ AN
-polearm 11 10 cleave CDFH
-85 20 14000 P
-A
-19 10
-A
-18 10
-#14019
-baþbüyücü kutsal mýzrak~
-Baþbüyücü'nün KutsaL Mýzraðý~
-Kutsal aurasýyla parlayan bir mýzrak görüyorsun.~
-admantite~
-weapon ABGIKMS AN
-lance 12 10 pierce A
-91 15 20000 P
-A
-19 10
-A
-18 10
 #14020
 hayvan damgasý deri daðlanmýþ parça~
 hayvan damgasý~

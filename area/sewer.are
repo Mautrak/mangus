@@ -263,7 +263,39 @@ human~
 ABF J 12
 #0
 
+
 #OBJECTS
+#7221
+shield~
+the shield of the rose~
+The shield of the rose rests on the floor.~
+steel~
+armor GIKL AJ
+8 8 8 3 0
+30 300 5800 P
+A
+17 -7
+E
+shield~
+On the shield you see a clear and perfect painting of a dark red rose on a white
+background. You also notice the inscription :'Pax Est Sanctuum'.
+~
+#7303
+orb dragonorb~
+the Red DragonOrb~
+A large reddish sphere is in the center of the room.~
+emerald~
+staff GJ AO
+13 10 10 'sanctuary' 0
+21 50 18600 P
+A
+4 2
+A
+3 2
+#0
+
+
+#NEW_OBJECTS
 #7190
 ring silver~
 a glinting ring of silver~
@@ -496,21 +528,6 @@ helmet silvery~
 The helmet is made from platinum or silver and has a white fur brush attached
 on the top.
 ~
-#7221
-shield~
-the shield of the rose~
-The shield of the rose rests on the floor.~
-steel~
-armor GIKL AJ
-8 8 8 3 0
-30 300 5800 P
-A
-17 -7
-E
-shield~
-On the shield you see a clear and perfect painting of a dark red rose on a white
-background. You also notice the inscription :'Pax Est Sanctuum'.
-~
 #7222
 boots silvery~
 a pair of silvery boots~
@@ -594,18 +611,6 @@ cloth~
 container 0 AL
 5 AC 0 1 100
 0 10 20 P
-#7303
-orb dragonorb~
-the Red DragonOrb~
-A large reddish sphere is in the center of the room.~
-emerald~
-staff GJ AO
-13 10 10 'sanctuary' 0
-21 50 18600 P
-A
-4 2
-A
-3 2
 #7304
 red torso~
 a red dragon torso~

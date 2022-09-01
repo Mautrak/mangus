@@ -902,8 +902,28 @@ ABKQVae DFH 80
 #0
 
 
-
 #OBJECTS
+#18030
+kutsal dokunuþ iksir~
+kutsal dokunuþ iksiri~
+Bir þiþe iksir yerde duruyor.~
+glass~
+potion AB A
+25 'bless' 'sanctuary' 'enhanced armor' 'shield'
+20 100 25000 P
+#18031
+ölümcül dövüþ iksir~
+ölümcül dövüþ iksiri~
+Bir þiþe iksir burda duruyor.~
+glass~
+potion AB A
+24 'sanctuary' 'stone skin' 'giant strength' 'armor'
+20 100 19000 P
+#0
+
+
+
+#NEW_OBJECTS
 #18000
 þiþe bordo þarap~
 þiþe bordo þarabý~
@@ -1173,22 +1193,6 @@ glass~
 potion AB AO
 23 'teleport' 'teleport' 'teleport' 'teleport'
 20 50 13000 P
-#18030
-kutsal dokunuþ iksir~
-kutsal dokunuþ iksiri~
-Bir þiþe iksir yerde duruyor.~
-glass~
-potion AB A
-25 'bless' 'sanctuary' 'enhanced armor' 'shield'
-20 100 25000 P
-#18031
-ölümcül dövüþ iksir~
-ölümcül dövüþ iksiri~
-Bir þiþe iksir burda duruyor.~
-glass~
-potion AB A
-24 'sanctuary' 'stone skin' 'giant strength' 'armor'
-20 100 19000 P
 #18032
 yara tedavi iksir~
 yara tedavi iksiri~
