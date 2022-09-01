@@ -165,7 +165,7 @@ void obj_random_paf(OBJ_DATA *obj)
 {
 	int location=0;
 	int bitvector=0;
-	while(number_range(1,5000)==1)
+	while(number_range(1,1000)==1)
 	{
 		if(number_percent()<90)
 		{
