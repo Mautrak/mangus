@@ -35,18 +35,12 @@ int obj_random_paf_modifier(int location, int level)
 	{
 		random_number = number_range(1,100);
 		
-		if(random_number<=50)
+		if(random_number<=90)
+			return 1;
+		else if(random_number<=97)
 			return number_range(1,2);
-		else if(random_number<=80)
-			return number_range(1,3);
-		else if(random_number<=90)
-			return number_range(1,4);
-		else if(random_number<=95)
-			return number_range(1,5);
-		else if(random_number<=98)
-			return number_range(1,6);
 		else
-			return 6;
+			return number_range(1,3);
 	}
 	if (location == APPLY_MANA || location == APPLY_HIT || location == APPLY_MOVE)
 	{
@@ -165,7 +159,13 @@ void obj_random_paf(OBJ_DATA *obj)
 {
 	int location=0;
 	int bitvector=0;
-	while(number_range(1,1000)==1)
+	
+	if(number_range(1,500)!=1)
+	{
+		return;
+	}
+	
+	while(number_range(1,10)<3)
 	{
 		if(number_percent()<90)
 		{
