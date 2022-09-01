@@ -157,7 +157,7 @@ AHT BDFHPQTUV 60
 #0
 
 
-#OBJECTS
+#NEW_OBJECTS
 #4200
 zýrh siyah piyon~
 bir siyah piyon zýrhý~
@@ -252,7 +252,7 @@ bir beyaz vezir tacý~
 Bir beyaz vezir tacý burada.~
 wood~
 staff GKL AO
-20 5 5 'sanctuary' 0
+20 5 5 'bless' 0
 23 20 3879 P
 #4210
 siyah vezir taç~
@@ -2739,9 +2739,5 @@ D 0 4266 4 2
 *
 S
 
-#OLIMITS
-O 4209 10 * sanctuary potion
-
-S
 
 #$

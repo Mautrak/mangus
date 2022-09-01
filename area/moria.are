@@ -336,7 +336,7 @@ orc~
 ACFGT 0 9
 #0
 
-#OBJECTS
+#NEW_OBJECTS
 #4000
 sarý yeþil yüzük~
 sarý ve yeþil bir yüzük~
@@ -432,7 +432,7 @@ mor bir iksir~
 Mor bir iksir burada duruyor.~
 glass~
 potion 0 AO
-13 'cure blindness' 'sanctuary' '' ''
+13 'cure blindness' 'bless' '' ''
 11 10 720 G
 E
 potion purple~
@@ -2928,9 +2928,6 @@ M 4155 spec_thief          	* the thief
 M 4157 spec_cast_mage      	* the Mage
 M 4158 spec_poison         	* the snake
 S
-
-#OLIMITS
-O 4050 10 * sanctuary potion
 
 S
 #$
