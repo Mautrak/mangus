@@ -1446,8 +1446,87 @@ snake~
 ABG 0 24
 #0
 
-
 #OBJECTS
+#16003
+göz salgý~
+Ýnfaz memurunun salgýsý.~
+Kahverengi sývý salgý~
+glass~
+potion G A
+23 'detect invis' 'heal' 'detect magic' ''
+10 1 1000 P
+#16011
+göðüs zýrhý~
+Güç zýrhý~
+Göðüs zýrhý etrafa bir güç aurasý yayýyor.~
+unknown~
+armor AG AD
+25 25 25 20 0
+43 4 100 P
+A
+1 5
+A
+13 50
+A
+18 5
+A
+19 7
+#16036
+uçuþ botlarý~
+Uçuþ botlarý~
+Bir çift bot zeminin yukarýsýnda süzülüyor.~
+unknown~
+armor FGM AG
+18 18 18 9 0
+31 2 1000 P
+A
+14 200
+A
+2 4
+#16081
+ejderha dövmesi~
+Ejderha dövmesi~
+Yerde ejderhayý andýran tuhaf bir parýltý var.~
+unknown~
+armor G AM
+19 19 19 7 0
+46 1 100 P
+A
+18 5
+A
+19 5
+#16089
+iblis ateþi~
+Ýblis ateþi~
+Tuhaf bir alev burada yanýyor.~
+fire~
+armor BEG AJ
+22 20 20 12 0
+37 5 1000 P
+A
+17 -15
+A
+19 6
+#16095
+miðfer göz nazar~
+Gözün Miðferi~
+Acayip görünüþlü bir miðfer burada uzanýyor.~
+adamantite~
+armor ACY AE
+12 12 12 10 6
+29 10 99000 P
+A
+3 1
+A
+6 2
+A
+13 50
+A
+24 -2
+#0
+
+
+#NEW_OBJECTS
 #16001
 terazi göz~
 Ýnfaz memurunun terazisi~
@@ -1468,14 +1547,6 @@ wood~
 wand A AO
 22 2 2 'flamestrike' 0
 15 3 2000 P
-#16003
-göz salgý~
-Ýnfaz memurunun salgýsý.~
-Kahverengi sývý salgý~
-glass~
-potion G A
-23 'detect invis' 'heal' 'detect magic' ''
-10 1 1000 P
 #16004
 göz yargý~
 Devasa bir yargý gözü~
@@ -1552,22 +1623,6 @@ stone~
 treasure C A
 0 0 0 0 0
 1 0 0 P
-#16011
-göðüs zýrhý~
-Güç zýrhý~
-Göðüs zýrhý etrafa bir güç aurasý yayýyor.~
-unknown~
-armor AG AD
-25 25 25 20 0
-43 4 100 P
-A
-1 5
-A
-13 50
-A
-18 5
-A
-19 7
 #16012
 kutlu sembol xevior~
 Xevior'un parýldayan kutlu sembolü~
@@ -1874,18 +1929,6 @@ A
 2 2
 A
 18 3
-#16036
-uçuþ botlarý~
-Uçuþ botlarý~
-Bir çift bot zeminin yukarýsýnda süzülüyor.~
-unknown~
-armor FGM AG
-18 18 18 9 0
-31 2 1000 P
-A
-14 200
-A
-2 4
 #16037
 bileklik güç~
 Güç bilekliði~
@@ -2416,18 +2459,6 @@ A
 18 1
 A
 19 2
-#16081
-ejderha dövmesi~
-Ejderha dövmesi~
-Yerde ejderhayý andýran tuhaf bir parýltý var.~
-unknown~
-armor G AM
-19 19 19 7 0
-46 1 100 P
-A
-18 5
-A
-19 5
 #16082
 elmas miðfer~
 Elmas bir miðfer~
@@ -2516,18 +2547,6 @@ A
 17 -5
 A
 19 2
-#16089
-iblis ateþi~
-Ýblis ateþi~
-Tuhaf bir alev burada yanýyor.~
-fire~
-armor BEG AJ
-22 20 20 12 0
-37 5 1000 P
-A
-17 -15
-A
-19 6
 #16090
 ateþ cevher~
 Bir ateþ cevheri~
@@ -2568,22 +2587,6 @@ gold~
 money 0 A
 500 0 0 0 0
 1 1 1000 P
-#16095
-miðfer göz nazar~
-Gözün Miðferi~
-Acayip görünüþlü bir miðfer burada uzanýyor.~
-adamantite~
-armor ACY AE
-12 12 12 10 6
-29 10 99000 P
-A
-3 1
-A
-6 2
-A
-13 50
-A
-24 -2
 
 #0
 
