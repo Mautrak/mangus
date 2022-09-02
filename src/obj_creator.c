@@ -47,24 +47,24 @@ int obj_random_paf_modifier(int location, int level)
 		random_number = number_range(1,100);
 		
 		if(random_number<=50)
-			return number_range(10,UMAX(11,int(level/2)));
-		else if(random_number<=80)
 			return number_range(10,UMAX(11,int(level)));
-		else if(random_number<=90)
-			return number_range(10,UMAX(11,int(level*(3/2))));
-		else if(random_number<=95)
+		else if(random_number<=85)
 			return number_range(10,UMAX(11,int(level*2)));
-		else if(random_number<=98)
+		else if(random_number<=95)
 			return number_range(10,UMAX(11,int(level*3)));
-		else
+		else if(random_number<=98)
 			return number_range(10,UMAX(11,int(level*4)));
+		else if(random_number<=99)
+			return number_range(10,UMAX(11,int(level*5)));
+		else
+			return number_range(10,UMAX(11,int(level*6)));
 	}
 	if (location == APPLY_HITROLL || location == APPLY_DAMROLL)
 	{
 		random_number = number_range(1,100);
 		
 		if(random_number<=50)
-			return number_range(1,UMAX(2,int(level/15)));
+			return number_range(1,UMAX(2,int(level/13)));
 		else if(random_number<=70)
 			return number_range(1,UMAX(2,int(level/10)));
 		else if(random_number<=80)
@@ -98,13 +98,20 @@ int obj_random_paf_find_available_location(OBJ_DATA *obj)
 			default:	random_location = APPLY_STR; break;
 		}
 	}
-	else
+	else if(random_number<10)
 	{
-		switch(number_range(7,11))
+		switch(number_range(7,9))
 		{
 			case 7:		random_location = APPLY_MANA; break;
 			case 8:		random_location = APPLY_HIT; break;
 			case 9:		random_location = APPLY_MOVE; break;
+			default:	random_location = APPLY_HIT; break;
+		}
+	}
+	else
+	{
+		switch(number_range(10,11))
+		{
 			case 10:	random_location = APPLY_HITROLL; break;
 			case 11:	random_location = APPLY_DAMROLL; break;
 			default:	random_location = APPLY_HITROLL; break;
@@ -174,12 +181,7 @@ void obj_random_paf(OBJ_DATA *obj)
 	{
 		return;
 	}
-	/*
-	if ( obj->wear_loc == WEAR_NONE )
-	{
-		return;
-	}
-	*/
+
 	if(	obj->item_type == ITEM_TREASURE || obj->item_type == ITEM_FURNITURE		|| obj->item_type == ITEM_TRASH		|| obj->item_type == ITEM_KEY 		||
 		obj->item_type == ITEM_MONEY	|| obj->item_type == ITEM_CORPSE_NPC	|| obj->item_type == ITEM_CORPSE_PC	|| obj->item_type == ITEM_FOUNTAIN	||
 		obj->item_type == ITEM_PROTECT	|| obj->item_type == ITEM_MAP			|| obj->item_type == ITEM_ROOM_KEY	|| obj->item_type == ITEM_GEM		||
