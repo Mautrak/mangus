@@ -65,13 +65,13 @@ int obj_random_paf_modifier(int location, int level)
 		
 		if(random_number<=50)
 			return number_range(1,UMAX(2,int(level/20)));
-		else if(random_number<=80)
+		else if(random_number<=70)
 			return number_range(1,UMAX(2,int(level/15)));
-		else if(random_number<=90)
+		else if(random_number<=80)
 			return number_range(1,UMAX(2,int(level/12)));
-		else if(random_number<=95)
+		else if(random_number<=90)
 			return number_range(1,UMAX(2,int(level/10)));
-		else if(random_number<=98)
+		else if(random_number<=95)
 			return number_range(1,UMAX(2,int(level/8)));
 		else
 			return number_range(1,UMAX(2,int(level/6)));
@@ -178,12 +178,12 @@ void obj_random_paf(OBJ_DATA *obj)
 		return;
 	}
 	
-	if(number_range(1,75)!=1)
+	if(number_range(1,50)!=1)
 	{
 		return;
 	}
 	
-	while(number_range(1,10)<3)
+	while(number_range(1,10)<5)
 	{
 		if(number_percent()<90)
 		{
