@@ -170,10 +170,10 @@ void obj_random_paf(OBJ_DATA *obj)
 	int location=0;
 	int bitvector=0;
 	
-	if(	obj->type == ITEM_TREASURE 	|| obj->type == ITEM_FURNITURE	|| obj->type == ITEM_TRASH		|| obj->type == ITEM_KEY 		||
-		obj->type == ITEM_MONEY		|| obj->type == ITEM_CORPSE_NPC	|| obj->type == ITEM_CORPSE_PC	|| obj->type == ITEM_FOUNTAIN	||
-		obj->type == ITEM_PROTECT	|| obj->type == ITEM_MAP		|| obj->type == ITEM_ROOM_KEY	|| obj->type == ITEM_GEM		||
-		obj->type == ITEM_JEWELRY	|| obj->type == ITEM_JUKEBOX	|| obj->type == ITEM_TATTOO		|| obj->type == ITEM_MAYMUNCUK )
+	if(	obj->item_type == ITEM_TREASURE || obj->item_type == ITEM_FURNITURE		|| obj->item_type == ITEM_TRASH		|| obj->item_type == ITEM_KEY 		||
+		obj->item_type == ITEM_MONEY	|| obj->item_type == ITEM_CORPSE_NPC	|| obj->item_type == ITEM_CORPSE_PC	|| obj->item_type == ITEM_FOUNTAIN	||
+		obj->item_type == ITEM_PROTECT	|| obj->item_type == ITEM_MAP			|| obj->item_type == ITEM_ROOM_KEY	|| obj->item_type == ITEM_GEM		||
+		obj->item_type == ITEM_JEWELRY	|| obj->item_type == ITEM_JUKEBOX		|| obj->item_type == ITEM_TATTOO	|| obj->item_type == ITEM_MAYMUNCUK )
 	{
 		return;
 	}
