@@ -2438,9 +2438,10 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
 			printf_to_char(ch,"%s\n\r",obj->name);
 		}
 		printf_to_char(ch,"---\n\r");
-		for ( obj = ch->in_room->contents; obj != NULL; obj = obj_next )
+		obj = ch->in_room->contents;
+		while(obj != NULL)
+		//for ( obj = ch->in_room->contents; obj != NULL; obj = obj_next )
 		{
-			obj_next = obj->next_content;
 			printf_to_char(ch,"tumu for: %s\n\r",obj->name);
 			if ( can_see_obj( ch, obj ) && !IS_OBJ_STAT(obj,ITEM_NOPURGE) && obj->item_type != ITEM_CORPSE_PC  && CAN_WEAR(obj, ITEM_TAKE) && !CAN_WEAR(obj, ITEM_NO_SAC) )
 			{
@@ -2472,7 +2473,9 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
 				}
 				count++;//kurban edilen eşya sayısı
 				toplam_silver+=silver;//kurban etme işleminden toplanan akçe sayısı
+				obj_next = obj->next_content;
 				extract_obj( obj );
+				obj = obj_next;
 			}
 		}
 		if (count>0)//eger birşeyler kurban edilebilmişse
