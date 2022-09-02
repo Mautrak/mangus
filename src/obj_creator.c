@@ -82,23 +82,33 @@ int obj_random_paf_modifier(int location, int level)
 int obj_random_paf_find_available_location(OBJ_DATA *obj)
 {
 	AFFECT_DATA *paf;
-	int random_number = number_range(1,11); //str,int,wis,dex,con,cha
+	int random_number = number_range(1,100);
 	int random_location = 0;
 	
-	switch(random_number)
+	if(random_number<5)
 	{
-		case 1:		random_location = APPLY_STR; break;
-		case 2:		random_location = APPLY_DEX; break;
-		case 3:		random_location = APPLY_INT; break;
-		case 4:		random_location = APPLY_WIS; break;
-		case 5:		random_location = APPLY_CON; break;
-		case 6:		random_location = APPLY_CHA; break;
-		case 7:		random_location = APPLY_MANA; break;
-		case 8:		random_location = APPLY_HIT; break;
-		case 9:		random_location = APPLY_MOVE; break;
-		case 10:	random_location = APPLY_HITROLL; break;
-		case 11:	random_location = APPLY_DAMROLL; break;
-		default:	return 0;
+		switch(number_range(1,6))
+		{
+			case 1:		random_location = APPLY_STR; break;
+			case 2:		random_location = APPLY_DEX; break;
+			case 3:		random_location = APPLY_INT; break;
+			case 4:		random_location = APPLY_WIS; break;
+			case 5:		random_location = APPLY_CON; break;
+			case 6:		random_location = APPLY_CHA; break;
+			default:	random_location = APPLY_STR; break;
+		}
+	}
+	else
+	{
+		switch(number_range(7,11))
+		{
+			case 7:		random_location = APPLY_MANA; break;
+			case 8:		random_location = APPLY_HIT; break;
+			case 9:		random_location = APPLY_MOVE; break;
+			case 10:	random_location = APPLY_HITROLL; break;
+			case 11:	random_location = APPLY_DAMROLL; break;
+			default:	random_location = APPLY_HITROLL; break;
+		}
 	}
 	
 	
@@ -160,7 +170,15 @@ void obj_random_paf(OBJ_DATA *obj)
 	int location=0;
 	int bitvector=0;
 	
-	if(number_range(1,100)!=1)
+	if(	obj->type == ITEM_TREASURE 	|| obj->type == ITEM_FURNITURE	|| obj->type == ITEM_TRASH		|| obj->type == ITEM_KEY 		||
+		obj->type == ITEM_MONEY		|| obj->type == ITEM_CORPSE_NPC	|| obj->type == ITEM_CORPSE_PC	|| obj->type == ITEM_FOUNTAIN	||
+		obj->type == ITEM_PROTECT	|| obj->type == ITEM_MAP		|| obj->type == ITEM_ROOM_KEY	|| obj->type == ITEM_GEM		||
+		obj->type == ITEM_JEWELRY	|| obj->type == ITEM_JUKEBOX	|| obj->type == ITEM_TATTOO		|| obj->type == ITEM_MAYMUNCUK )
+	{
+		return;
+	}
+	
+	if(number_range(1,75)!=1)
 	{
 		return;
 	}
