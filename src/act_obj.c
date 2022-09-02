@@ -2442,7 +2442,7 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
 				{
 					silver = number_range(1,100);
 				}
-				if (obj->item_type == ITEM_CORPSE_NPC && obj->item_type == ITEM_CORPSE_PC)
+				if (obj->item_type == ITEM_CORPSE_NPC || obj->item_type == ITEM_CORPSE_PC)
 				{
 					for ( obj_content = obj->contains; obj_content; obj_content = obj_next )
 					{
