@@ -906,7 +906,7 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 				int reward=0, pointreward=0, pracreward=0;
 
 				reward = 700 + number_range(100,600);
-				pointreward = number_range(15,35);
+				pointreward = number_range(21,35);
 
 				if(IS_SET(ch->pcdata->dilek,DILEK_FLAG_GOREV))
 				{
