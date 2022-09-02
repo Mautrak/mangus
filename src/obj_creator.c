@@ -85,7 +85,7 @@ int obj_random_paf_find_available_location(OBJ_DATA *obj)
 	int random_number = number_range(1,100);
 	int random_location = 0;
 	
-	if(random_number<5)
+	if(random_number<2)
 	{
 		switch(number_range(1,6))
 		{
@@ -170,11 +170,21 @@ void obj_random_paf(OBJ_DATA *obj)
 	int location=0;
 	int bitvector=0;
 	
+	if( !IS_SET( obj->wear_flags, ITEM_TAKE) )
+	{
+		return;
+	}
+	
+	if ( obj->wear_loc == WEAR_NONE )
+	{
+		return;
+	}
+	
 	if(	obj->item_type == ITEM_TREASURE || obj->item_type == ITEM_FURNITURE		|| obj->item_type == ITEM_TRASH		|| obj->item_type == ITEM_KEY 		||
 		obj->item_type == ITEM_MONEY	|| obj->item_type == ITEM_CORPSE_NPC	|| obj->item_type == ITEM_CORPSE_PC	|| obj->item_type == ITEM_FOUNTAIN	||
 		obj->item_type == ITEM_PROTECT	|| obj->item_type == ITEM_MAP			|| obj->item_type == ITEM_ROOM_KEY	|| obj->item_type == ITEM_GEM		||
 		obj->item_type == ITEM_JEWELRY	|| obj->item_type == ITEM_JUKEBOX		|| obj->item_type == ITEM_TATTOO	|| obj->item_type == ITEM_MAYMUNCUK ||
-		obj->item_type == ITEM_FOOD		|| obj->item_type == ITEM_POTION )
+		obj->item_type == ITEM_FOOD		|| obj->item_type == ITEM_POTION 		|| obj->item_type == ITEM_DRINK_CON )
 	{
 		return;
 	}
