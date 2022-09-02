@@ -2434,6 +2434,7 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
 	{
 		for ( obj = ch->in_room->contents; obj != NULL; obj = obj_next )
 		{
+			obj_next = obj->next_content;
 			printf_to_char(ch,"%s\n\r",obj->name);
 		}
 		for ( obj = ch->in_room->contents; obj != NULL; obj = obj_next )
