@@ -2453,7 +2453,7 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
 							silver = number_range(1,100);
 							count++;
 							toplam_silver+=silver;
-							extract_obj( obj );
+							extract_obj( obj_content );
 						}
 						else
 						{
