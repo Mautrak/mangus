@@ -174,12 +174,12 @@ void obj_random_paf(OBJ_DATA *obj)
 	{
 		return;
 	}
-	
+	/*
 	if ( obj->wear_loc == WEAR_NONE )
 	{
 		return;
 	}
-	
+	*/
 	if(	obj->item_type == ITEM_TREASURE || obj->item_type == ITEM_FURNITURE		|| obj->item_type == ITEM_TRASH		|| obj->item_type == ITEM_KEY 		||
 		obj->item_type == ITEM_MONEY	|| obj->item_type == ITEM_CORPSE_NPC	|| obj->item_type == ITEM_CORPSE_PC	|| obj->item_type == ITEM_FOUNTAIN	||
 		obj->item_type == ITEM_PROTECT	|| obj->item_type == ITEM_MAP			|| obj->item_type == ITEM_ROOM_KEY	|| obj->item_type == ITEM_GEM		||
