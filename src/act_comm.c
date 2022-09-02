@@ -414,17 +414,6 @@ void do_kdcevapla( CHAR_DATA *ch, char *argument )
 		printf_to_char(ch, "Cevap verebileceðin biri yok.\n\r" );
 		return;
     }
-
-	/*
-	* Can tell to PC's anywhere, but NPC's only in same room.
-	* -- Furey
-	*/
-	if ( ( victim = get_char_world( ch, arg ) ) == NULL
-	|| ( IS_NPC(victim) && victim->in_room != ch->in_room ) )
-	{
-		printf_to_char(ch, "Cevap verebileceðin biri yok.\n\r" );
-		return;
-	}
 	
     if ( argument[0] == '\0' )
     {
