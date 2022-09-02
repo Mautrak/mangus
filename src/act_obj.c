@@ -2437,9 +2437,11 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
 			obj_next = obj->next_content;
 			printf_to_char(ch,"%s\n\r",obj->name);
 		}
+		printf_to_char(ch,"---\n\r");
 		for ( obj = ch->in_room->contents; obj != NULL; obj = obj_next )
 		{
 			obj_next = obj->next_content;
+			printf_to_char(ch,"tumu for: %s\n\r",obj->name);
 			if ( can_see_obj( ch, obj ) && !IS_OBJ_STAT(obj,ITEM_NOPURGE) && obj->item_type != ITEM_CORPSE_PC  && CAN_WEAR(obj, ITEM_TAKE) && !CAN_WEAR(obj, ITEM_NO_SAC) )
 			{
 				silver = number_range(1,obj->cost);
@@ -2462,6 +2464,7 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
 						}
 						else
 						{
+							printf_to_char(ch,"ceset else: %s\n\r",obj_content->name);
 							obj_from_obj( obj_content );
 							obj_to_room( obj_content, ch->in_room );
 						}
