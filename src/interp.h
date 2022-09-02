@@ -222,6 +222,7 @@ DECLARE_DO_FUN(	do_invis	);
 DECLARE_DO_FUN(	do_judge	);
 DECLARE_DO_FUN(	do_katana	);
 DECLARE_DO_FUN(	do_kd	);
+DECLARE_DO_FUN(	do_kdcevapla	);
 DECLARE_DO_FUN(	do_kick		);
 DECLARE_DO_FUN(	do_kill		);
 DECLARE_DO_FUN(	do_lash		);

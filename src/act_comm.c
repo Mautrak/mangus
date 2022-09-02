@@ -392,6 +392,91 @@ void do_kd( CHAR_DATA *ch, char *argument )
 }
 
 
+void do_kdcevapla( CHAR_DATA *ch, char *argument )
+{
+    char arg[MAX_INPUT_LENGTH],buf[MAX_STRING_LENGTH];
+    CHAR_DATA *victim;
+
+    if (IS_SET(ch->comm,COMM_NOKD))
+    {
+	printf_to_char(ch,"Önce KD kanalýný açmalýsýn.\n\r");
+	return;
+    }
+
+	if ( IS_AFFECTED(ch, AFF_CHARM) &&   ch->master != NULL )
+    {
+		printf_to_char( ch , "Teshirliyken kd kanalýný kullanamazsýn.\n\r" );
+		return;
+    }
+	
+	if ( ( victim = ch->reply ) == NULL )
+    {
+		printf_to_char(ch, "Cevap verebileceðin biri yok.\n\r" );
+		return;
+    }
+
+	/*
+	* Can tell to PC's anywhere, but NPC's only in same room.
+	* -- Furey
+	*/
+	if ( ( victim = get_char_world( ch, arg ) ) == NULL
+	|| ( IS_NPC(victim) && victim->in_room != ch->in_room ) )
+	{
+		printf_to_char(ch, "Cevap verebileceðin biri yok.\n\r" );
+		return;
+	}
+	
+    if ( argument[0] == '\0' )
+    {
+		printf_to_char(ch,"Ne mesaj göndereceksin?\n\r");
+		return;
+    }
+
+	if( victim == ch )
+	{
+		printf_to_char( ch,"Kendine KD mesajý atamazsýn.\n\r" );
+		return;
+	}
+
+    if ( victim->desc == NULL && !IS_NPC(victim))
+    {
+	act("$N baðlantýsýný kaybetmiþ görünüyor...daha sonra tekrar dene.",
+	    ch,NULL,victim,TO_CHAR);
+        sprintf(buf,"%s: %s%s%s\n\r",PERS(ch,victim),CLR_RED_BOLD,argument,CLR_NORMAL);
+        buf[0] = UPPER(buf[0]);
+        add_buf(victim->pcdata->buffer,buf);
+	return;
+    }
+
+    if ((IS_SET(victim->comm,COMM_NOKD)) && !IS_IMMORTAL(ch))
+    {
+	act( "$N KD kanalýný almýyor.", ch, 0, victim, TO_CHAR );
+  	return;
+    }
+
+    write_channel_log(ch,victim,KANAL_KD,argument);
+
+    if (is_affected(ch,gsn_garble))
+      garble(buf,argument);
+    else
+      strcpy(buf,argument);
+
+    if (ch->level >= KIDEMLI_OYUNCU_SEVIYESI && victim->level >= KIDEMLI_OYUNCU_SEVIYESI )
+    {
+      ch->pcdata->rk_puani -= 1;
+    }
+
+   if (!is_affected(ch, gsn_deafen))
+     act_color("$N kd: $C$t$c",ch,buf,victim,TO_CHAR,POS_DEAD, CLR_MAGENTA_BOLD );
+
+   act_color( "$n kd: $C$t$c",ch,buf,victim,TO_VICT,POS_DEAD, CLR_RED_BOLD );
+
+    victim->reply	= ch;
+
+    return;
+}
+
+
 void do_kdg( CHAR_DATA *ch, char *argument )
 {
     DESCRIPTOR_DATA *d;

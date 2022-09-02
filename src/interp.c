@@ -133,6 +133,7 @@ const	struct	cmd_type	cmd_table	[] =
   { "büyüler",		do_spells,	POS_DEAD,	 0,  LOG_NORMAL, 1, CMD_KEEP_HIDE|CMD_GHOST },
   { "büyüyýkýmý",      do_spellbane,   POS_FIGHTING,    0,  LOG_NORMAL, 0,0 },
   { "cabal_scan",	do_cabal_scan,	POS_STANDING,    0,  LOG_NEVER, 0, CMD_KEEP_HIDE|CMD_GHOST },
+  { "cevapla",		do_kdcevapla,	POS_DEAD,	 0,  LOG_NORMAL, 1, CMD_GHOST },
   { "çaðrýyok",	do_nosummon,	POS_DEAD,        0,  LOG_NORMAL, 1, CMD_KEEP_HIDE|CMD_GHOST },
   { "çarp",		do_zap,		POS_RESTING,	 0,  LOG_NORMAL, 1,0 },
   { "çelme",		do_trip,	POS_FIGHTING,    0,  LOG_NORMAL, 1,0 },

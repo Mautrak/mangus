@@ -2440,7 +2440,6 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
 		printf_to_char(ch,"---\n\r");
 		obj = ch->in_room->contents;
 		while(obj != NULL)
-		//for ( obj = ch->in_room->contents; obj != NULL; obj = obj_next )
 		{
 			printf_to_char(ch,"tumu for: %s\n\r",obj->name);
 			if ( can_see_obj( ch, obj ) && !IS_OBJ_STAT(obj,ITEM_NOPURGE) && obj->item_type != ITEM_CORPSE_PC  && CAN_WEAR(obj, ITEM_TAKE) && !CAN_WEAR(obj, ITEM_NO_SAC) )
