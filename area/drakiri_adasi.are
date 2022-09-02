@@ -1042,8 +1042,6 @@ A
 18 10
 A
 19 13
-A
-6 2
 #11845
 kara ->*<- fular~
 kara ->*<- fular~
@@ -1053,11 +1051,7 @@ treasure EL AC
 0 0 0 0 0
 80 20 25000 P
 A
-2 3
-A
 9 2
-A
-6 2
 A
 12 175
 A
@@ -1071,12 +1065,6 @@ armor B AM
 26 26 26 20 0
 78 20 9900 P
 A
-1 4
-A
-2 2
-A
-6 1
-A
 12 150
 A
 13 150
@@ -1088,10 +1076,6 @@ nothingness~
 armor BI AH
 40 40 39 26 0
 89 0 50000 P
-A
-1 4
-A
-6 1
 A
 13 100
 A
@@ -1106,12 +1090,6 @@ nothingness~
 armor BI AM
 40 40 40 26 0
 89 0 55000 P
-A
-1 4
-A
-2 4
-A
-6 1
 A
 12 300
 A
@@ -1145,18 +1123,6 @@ light AFIJK A
 0 0 -1 0 0
 89 0 55000 P
 A
-1 2
-A
-2 2
-A
-3 2
-A
-4 2
-A
-5 2
-A
-6 2
-A
 12 275
 A
 13 275
@@ -1176,8 +1142,6 @@ parchment~
 staff BFG AO
 85 3 3 'detect hidden' 0
 79 50 28000 P
-A
-3 4
 #11822
 mitril koruma asa~
 koruma asasý~

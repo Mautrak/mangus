@@ -409,16 +409,6 @@ staff BEGH AO
 60 100 100 'pass door' 0
 55 50 30000 P
 A
-1 2
-A
-2 2
-A
-3 2
-A
-4 2
-A
-5 2
-A
 12 250
 A
 17 -50
@@ -464,8 +454,6 @@ adamantite~
 armor ACY AE
 39 39 39 37 30
 57 20 99000 P
-A
-3 2
 A
 13 50
 A

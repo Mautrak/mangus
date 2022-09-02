@@ -1464,8 +1464,6 @@ armor AG AD
 25 25 25 20 0
 43 4 100 P
 A
-1 5
-A
 13 50
 A
 18 5
@@ -1481,8 +1479,6 @@ armor FGM AG
 31 2 1000 P
 A
 14 200
-A
-2 4
 #16081
 ejderha dövmesi~
 Ejderha dövmesi~
@@ -1515,10 +1511,6 @@ adamantite~
 armor ACY AE
 12 12 12 10 6
 29 10 99000 P
-A
-3 1
-A
-6 2
 A
 13 50
 A
