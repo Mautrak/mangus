@@ -187,31 +187,55 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 	strcat( buf, "["     );
 	
 	if(OBJ_NITELIK == 0)
+	{
 		strcat( buf, CLR_WHITE );strcat( buf, "*"     );
+	}
 	else if(OBJ_NITELIK <=2)
+	{
 		strcat( buf, CLR_WHITE_BOLD );strcat( buf, "*"     );
+	}
 	else if(OBJ_NITELIK <=4)
+	{
 		strcat( buf, CLR_RED );strcat( buf, "*"     );
+	}
 	else
+	{
 		strcat( buf, CLR_RED_BOLD );strcat( buf, "*"     );
+	}
 
 	if(OBJ_YP_MANA_HP = 0)
+	{
 		strcat( buf, CLR_WHITE );strcat( buf, "*"     );
+	}
 	else if(OBJ_YP_MANA_HP <= 100)
+	{
 		strcat( buf, CLR_WHITE_BOLD );strcat( buf, "*"     );
+	}
 	else if(OBJ_YP_MANA_HP <= 300)
+	{
 		strcat( buf, CLR_WHITE_RED );strcat( buf, "*"     );
+	}
 	else
+	{
 		strcat( buf, CLR_WHITE_RED_BOLD );strcat( buf, "*"     );
+	}
 	
 	if(OBJ_ZZ_VZ = 0)
+	{
 		strcat( buf, CLR_WHITE );strcat( buf, "*"     );
+	}
 	else if(OBJ_ZZ_VZ <= 5)
+	{
 		strcat( buf, CLR_WHITE_BOLD );strcat( buf, "*"     );
+	}
 	else if(OBJ_ZZ_VZ <= 25)
+	{
 		strcat( buf, CLR_WHITE_RED );strcat( buf, "*"     );
+	}
 	else
+	{
 		strcat( buf, CLR_WHITE_RED_BOLD );strcat( buf, "*"     );
+	}
 	
 	strcat( buf, CLR_WHITE );
 	strcat( buf, "]"     );
