@@ -1476,6 +1476,12 @@ if ( argument[0] == '\0' )
 
 	for( obj=object_list; obj!=NULL; obj = obj->next )
 	{
+		// limit esyalari soylemesin
+		if(obj->pIndexData->limit != -1)
+		{
+			continue;
+		}
+		
 		zararzari=0;
 		actoplam=0;
 		if ( CAN_WEAR(obj,ITEM_TAKE) &&
