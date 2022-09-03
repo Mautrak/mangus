@@ -191,11 +191,6 @@ void obj_random_paf(OBJ_DATA *obj)
 		return;
 	}
 	
-	if(number_range(1,30)!=1)
-	{
-		return;
-	}
-	
 	if(obj->level < 10)
 	{
 		if(number_range(1,30)!=1)
