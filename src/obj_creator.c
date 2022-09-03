@@ -82,7 +82,7 @@ int obj_random_paf_modifier(int location, int level)
 int obj_random_paf_find_available_location(OBJ_DATA *obj)
 {
 	AFFECT_DATA *paf;
-	int random_number = number_range(1,300);
+	int random_number = number_range(1,500);
 	int random_location = 0;
 	
 	if(random_number==1)
@@ -98,7 +98,7 @@ int obj_random_paf_find_available_location(OBJ_DATA *obj)
 			default:	random_location = APPLY_STR; break;
 		}
 	}
-	else if(random_number<20)
+	else if(random_number<100)
 	{
 		switch(number_range(7,9))
 		{
