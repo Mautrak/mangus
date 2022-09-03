@@ -2325,7 +2325,7 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
 	break;
     }
 	
-	if(Count == TRUE)
+	if(Count == TRUE && obj->pIndexData->random_object)
 	{
 		obj_random_paf(obj);
 	}
