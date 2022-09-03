@@ -196,6 +196,70 @@ void obj_random_paf(OBJ_DATA *obj)
 		return;
 	}
 	
+	if(obj->level < 10)
+	{
+		if(number_range(1,30)!=1)
+		{
+			return;
+		}
+	}
+	else if(obj->level < 20)
+	{
+		if(number_range(1,25)!=1)
+		{
+			return;
+		}
+	}
+	else if(obj->level < 30)
+	{
+		if(number_range(1,20)!=1)
+		{
+			return;
+		}
+	}
+	else if(obj->level < 40)
+	{
+		if(number_range(1,17)!=1)
+		{
+			return;
+		}
+	}
+	else if(obj->level < 50)
+	{
+		if(number_range(1,15)!=1)
+		{
+			return;
+		}
+	}
+	else if(obj->level < 60)
+	{
+		if(number_range(1,12)!=1)
+		{
+			return;
+		}
+	}
+	else if(obj->level < 70)
+	{
+		if(number_range(1,9)!=1)
+		{
+			return;
+		}
+	}
+	else if(obj->level < 80)
+	{
+		if(number_range(1,6)!=1)
+		{
+			return;
+		}
+	}
+	else
+	{
+		if(number_range(1,3)!=1)
+		{
+			return;
+		}
+	}
+	
 	while(number_range(1,10)<6)
 	{
 		if(number_percent()<90)
