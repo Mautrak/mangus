@@ -144,6 +144,7 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 {
     static char buf[MAX_STRING_LENGTH];
     static char buf_con[100];
+	AFFECT_DATA *paf;
 	
 	int OBJ_NITELIK = 0;
 	int OBJ_ZZ_VZ = 0;
@@ -213,11 +214,11 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 	}
 	else if(OBJ_YP_MANA_HP <= 300)
 	{
-		strcat( buf, CLR_WHITE_RED );strcat( buf, "*"     );
+		strcat( buf, CLR_RED );strcat( buf, "*"     );
 	}
 	else
 	{
-		strcat( buf, CLR_WHITE_RED_BOLD );strcat( buf, "*"     );
+		strcat( buf, CLR_RED_BOLD );strcat( buf, "*"     );
 	}
 	
 	if(OBJ_ZZ_VZ = 0)
@@ -230,11 +231,11 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 	}
 	else if(OBJ_ZZ_VZ <= 25)
 	{
-		strcat( buf, CLR_WHITE_RED );strcat( buf, "*"     );
+		strcat( buf, CLR_RED );strcat( buf, "*"     );
 	}
 	else
 	{
-		strcat( buf, CLR_WHITE_RED_BOLD );strcat( buf, "*"     );
+		strcat( buf, CLR_RED_BOLD );strcat( buf, "*"     );
 	}
 	
 	strcat( buf, CLR_WHITE );
