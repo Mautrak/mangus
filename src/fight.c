@@ -2964,6 +2964,12 @@ int xp_compute(CHAR_DATA *gch, CHAR_DATA *victim, int total_levels,int members)
 		printf_to_char( gch , "{CTecrübe dileðin sayesinde kazandýðýn TP artýyor.{x\n\r" );
 		xp *= 2;
 	}
+	
+	if(ch->pcdata->discord_id[0] == '\0')
+	{
+		printf_to_char( gch , "{CDiscord ID girmediðin için kazandýðýn TP azalýyor.{x\n\r" );
+		xp /= 2;
+	}
 
 	return xp;
 }
