@@ -174,6 +174,7 @@ char buf[MAX_STRING_LENGTH];
 		{
 			if(obj->pIndexData->random_object && obj->affected != NULL)
 			{
+				send_to_char( "\n\r", ch );
 				sprintf( buf, "Name(s): %s\n\r",obj->name );
 				send_to_char( buf, ch );
 				sprintf( buf, "Vnum: %d  Format: %s  Random: %s  Type: %s  Resets: %d\n\r",obj->pIndexData->vnum, obj->pIndexData->new_format ? "new" : "old", obj->pIndexData->random_object ? "yes" : "no",item_type_name(obj), obj->pIndexData->reset_num );
