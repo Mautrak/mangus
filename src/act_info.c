@@ -148,7 +148,7 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 	
 	int OBJ_NITELIK = 0;
 	int OBJ_ZZ_VZ = 0;
-	int OBJ_YP_MANA_HP = 0
+	int OBJ_YP_MANA_HP = 0;
 
     buf[0] = '\0';
     buf_con[0] = '\0';
