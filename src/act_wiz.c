@@ -160,6 +160,25 @@ int apply_location;
 char arg[MAX_INPUT_LENGTH];
 char buf[MAX_STRING_LENGTH];
 
+int level10 = 0;
+int level10count = 0;
+int level20 = 0;
+int level20count = 0;
+int level30 = 0;
+int level30count = 0;
+int level40 = 0;
+int level40count = 0;
+int level50 = 0;
+int level50count = 0;
+int level60 = 0;
+int level60count = 0;
+int level70 = 0;
+int level70count = 0;
+int level80 = 0;
+int level80count = 0;
+int level90 = 0;
+int level90count = 0;
+
 	argument = one_argument( argument, arg );
 	
 	if ( arg[0] == '\0' )
@@ -172,8 +191,80 @@ char buf[MAX_STRING_LENGTH];
 	{
 		for( obj=object_list; obj!=NULL; obj = obj->next )
 		{
+			if(obj->level < 10)
+			{
+				level10count++;
+			}
+			else if(obj->level < 20)
+			{
+				level20count++;
+			}
+			else if(obj->level < 30)
+			{
+				level30count++;
+			}
+			else if(obj->level < 40)
+			{
+				level40count++;
+			}
+			else if(obj->level < 50)
+			{
+				level50count++;
+			}
+			else if(obj->level < 60)
+			{
+				level60count++;
+			}
+			else if(obj->level < 70)
+			{
+				level70count++;
+			}
+			else if(obj->level < 80)
+			{
+				level80count++;
+			}
+			else
+			{
+				level90count++;
+			}
 			if(obj->pIndexData->random_object && obj->affected != NULL)
 			{
+					if(obj->level < 10)
+					{
+						level10++;
+					}
+					else if(obj->level < 20)
+					{
+						level20++;
+					}
+					else if(obj->level < 30)
+					{
+						level30++;
+					}
+					else if(obj->level < 40)
+					{
+						level40++;
+					}
+					else if(obj->level < 50)
+					{
+						level50++;
+					}
+					else if(obj->level < 60)
+					{
+						level60++;
+					}
+					else if(obj->level < 70)
+					{
+						level70++;
+					}
+					else if(obj->level < 80)
+					{
+						level80++;
+					}
+					else
+					{
+						level90++;
+					}
 				send_to_char( "\n\r", ch );
 				sprintf( buf, "Name(s): %s\n\r",obj->name );
 				send_to_char( buf, ch );
@@ -231,6 +322,16 @@ char buf[MAX_STRING_LENGTH];
 				}
 			}
 		}
+		
+		printf_to_char(ch,"level10: %3d/%3d\n\r",level10,level10count);
+		printf_to_char(ch,"level20: %3d/%3d\n\r",level20,level20count);
+		printf_to_char(ch,"level30: %3d/%3d\n\r",level30,level30count);
+		printf_to_char(ch,"level40: %3d/%3d\n\r",level40,level40count);
+		printf_to_char(ch,"level50: %3d/%3d\n\r",level50,level50count);
+		printf_to_char(ch,"level60: %3d/%3d\n\r",level60,level60count);
+		printf_to_char(ch,"level70: %3d/%3d\n\r",level70,level70count);
+		printf_to_char(ch,"level80: %3d/%3d\n\r",level80,level80count);
+		printf_to_char(ch,"level90: %3d/%3d\n\r",level90,level90count);
 	}
 	
 	else if (!strcmp(arg, "dosya"))
