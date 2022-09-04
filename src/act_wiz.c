@@ -191,39 +191,39 @@ int level90count = 0;
 	{
 		for( obj=object_list; obj!=NULL; obj = obj->next )
 		{
-			if(obj->level < 10)
+			if(obj->pIndexData->random_object && obj->level < 10)
 			{
 				level10count++;
 			}
-			else if(obj->level < 20)
+			else if(obj->pIndexData->random_object && obj->level < 20)
 			{
 				level20count++;
 			}
-			else if(obj->level < 30)
+			else if(obj->pIndexData->random_object && obj->level < 30)
 			{
 				level30count++;
 			}
-			else if(obj->level < 40)
+			else if(obj->pIndexData->random_object && obj->level < 40)
 			{
 				level40count++;
 			}
-			else if(obj->level < 50)
+			else if(obj->pIndexData->random_object && obj->level < 50)
 			{
 				level50count++;
 			}
-			else if(obj->level < 60)
+			else if(obj->pIndexData->random_object && obj->level < 60)
 			{
 				level60count++;
 			}
-			else if(obj->level < 70)
+			else if(obj->pIndexData->random_object && obj->level < 70)
 			{
 				level70count++;
 			}
-			else if(obj->level < 80)
+			else if(obj->pIndexData->random_object && obj->level < 80)
 			{
 				level80count++;
 			}
-			else
+			else if(obj->pIndexData->random_object)
 			{
 				level90count++;
 			}
