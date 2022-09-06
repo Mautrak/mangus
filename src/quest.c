@@ -919,9 +919,9 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 					printf_to_char( ch , "{CÝki kat GP kazanma etkinliði nedeniyle kazandýðýn GP artýyor.{x\n\r" );
 					pointreward *= 2;
 				}
-				if(gch->pcdata->discord_id[0] == '\0')
+				if(ch->pcdata->discord_id[0] == '\0')
 				{
-					printf_to_char( gch , "{CDiscord ID girmediðin için kazandýðýn GP ve akçe azalýyor.{x\n\r" );
+					printf_to_char( ch , "{CDiscord ID girmediðin için kazandýðýn GP ve akçe azalýyor.{x\n\r" );
 					pointreward = int(pointreward / 3);
 					reward = int(reward / 3);
 				}
