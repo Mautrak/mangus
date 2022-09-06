@@ -164,25 +164,51 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
     ||  (obj->description == NULL || obj->description[0] == '\0'))
 	return buf;
 	
-	for (paf = obj->affected; paf != NULL; paf = paf->next)
+	if (obj->enchanted)
 	{
-		if(paf->where == TO_OBJECT)
+		for (paf = obj->affected; paf != NULL; paf = paf->next)
 		{
-			if(paf->location == APPLY_HITROLL || paf->location == APPLY_DAMROLL)
+			if(paf->where == TO_OBJECT)
 			{
-				OBJ_ZZ_VZ += paf->modifier;
-			}
-			else if(paf->location == APPLY_STR || paf->location == APPLY_INT || paf->location == APPLY_WIS ||
-					paf->location == APPLY_DEX || paf->location == APPLY_CON || paf->location == APPLY_CHA )
-			{
-				OBJ_NITELIK += paf->modifier;
-			}
-			else if(paf->location == APPLY_MANA || paf->location == APPLY_HIT || paf->location == APPLY_MOVE)
-			{
-				OBJ_YP_MANA_HP += paf->modifier;
+				if(paf->location == APPLY_HITROLL || paf->location == APPLY_DAMROLL)
+				{
+					OBJ_ZZ_VZ += paf->modifier;
+				}
+				else if(paf->location == APPLY_STR || paf->location == APPLY_INT || paf->location == APPLY_WIS ||
+						paf->location == APPLY_DEX || paf->location == APPLY_CON || paf->location == APPLY_CHA )
+				{
+					OBJ_NITELIK += paf->modifier;
+				}
+				else if(paf->location == APPLY_MANA || paf->location == APPLY_HIT || paf->location == APPLY_MOVE)
+				{
+					OBJ_YP_MANA_HP += paf->modifier;
+				}
 			}
 		}
 	}
+	else
+	{
+		for (paf = obj->pIndexData->affected; paf != NULL; paf = paf->next)
+		{
+			if(paf->where == TO_OBJECT)
+			{
+				if(paf->location == APPLY_HITROLL || paf->location == APPLY_DAMROLL)
+				{
+					OBJ_ZZ_VZ += paf->modifier;
+				}
+				else if(paf->location == APPLY_STR || paf->location == APPLY_INT || paf->location == APPLY_WIS ||
+						paf->location == APPLY_DEX || paf->location == APPLY_CON || paf->location == APPLY_CHA )
+				{
+					OBJ_NITELIK += paf->modifier;
+				}
+				else if(paf->location == APPLY_MANA || paf->location == APPLY_HIT || paf->location == APPLY_MOVE)
+				{
+					OBJ_YP_MANA_HP += paf->modifier;
+				}
+			}
+		}
+	}
+	
 	
 	strcat( buf, CLR_WHITE );
 	strcat( buf, "["     );
@@ -193,7 +219,7 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 	}
 	else if(OBJ_NITELIK <=2)
 	{
-		strcat( buf, CLR_WHITE_BOLD );strcat( buf, "*"     );
+		strcat( buf, CLR_BROWN );strcat( buf, "*"     );
 	}
 	else if(OBJ_NITELIK <=4)
 	{
@@ -201,7 +227,7 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 	}
 	else
 	{
-		strcat( buf, CLR_RED_BOLD );strcat( buf, "*"     );
+		strcat( buf, CLR_CYAN );strcat( buf, "*"     );
 	}
 
 	if(OBJ_YP_MANA_HP = 0)
@@ -210,7 +236,7 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 	}
 	else if(OBJ_YP_MANA_HP <= 100)
 	{
-		strcat( buf, CLR_WHITE_BOLD );strcat( buf, "*"     );
+		strcat( buf, CLR_BROWN );strcat( buf, "*"     );
 	}
 	else if(OBJ_YP_MANA_HP <= 300)
 	{
@@ -218,7 +244,7 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 	}
 	else
 	{
-		strcat( buf, CLR_RED_BOLD );strcat( buf, "*"     );
+		strcat( buf, CLR_CYAN );strcat( buf, "*"     );
 	}
 	
 	if(OBJ_ZZ_VZ = 0)
@@ -227,7 +253,7 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 	}
 	else if(OBJ_ZZ_VZ <= 5)
 	{
-		strcat( buf, CLR_WHITE_BOLD );strcat( buf, "*"     );
+		strcat( buf, CLR_BROWN );strcat( buf, "*"     );
 	}
 	else if(OBJ_ZZ_VZ <= 25)
 	{
@@ -235,7 +261,7 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 	}
 	else
 	{
-		strcat( buf, CLR_RED_BOLD );strcat( buf, "*"     );
+		strcat( buf, CLR_CYAN );strcat( buf, "*"     );
 	}
 	
 	strcat( buf, CLR_WHITE );
