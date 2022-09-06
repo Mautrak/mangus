@@ -270,7 +270,6 @@ int level90count = 0;
 				send_to_char( buf, ch );
 				sprintf( buf, "Vnum: %d  Format: %s  Random: %s  Type: %s  Resets: %d\n\r",obj->pIndexData->vnum, obj->pIndexData->new_format ? "new" : "old", obj->pIndexData->random_object ? "yes" : "no",item_type_name(obj), obj->pIndexData->reset_num );
 				send_to_char( buf, ch );
-				send_to_char( "\n\r\n\r", ch );
 				if(obj->enchanted)
 				{
 				for ( paf = obj->affected; paf != NULL; paf = paf->next )
@@ -326,7 +325,7 @@ int level90count = 0;
 				}
 			}
 		}
-		
+		send_to_char( "\n\r\n\r", ch );
 		printf_to_char(ch,"level10: %3d/%3d\n\r",level10,level10count);
 		printf_to_char(ch,"level20: %3d/%3d\n\r",level20,level20count);
 		printf_to_char(ch,"level30: %3d/%3d\n\r",level30,level30count);
