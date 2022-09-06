@@ -168,7 +168,7 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 	{
 		for (paf = obj->affected; paf != NULL; paf = paf->next)
 		{
-			if(paf->where == TO_OBJECT)
+			if(paf->location)
 			{
 				if(paf->location == APPLY_HITROLL || paf->location == APPLY_DAMROLL)
 				{
@@ -190,7 +190,7 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 	{
 		for (paf = obj->pIndexData->affected; paf != NULL; paf = paf->next)
 		{
-			if(paf->where == TO_OBJECT)
+			if(paf->location)
 			{
 				if(paf->location == APPLY_HITROLL || paf->location == APPLY_DAMROLL)
 				{
