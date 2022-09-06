@@ -230,7 +230,7 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 		strcat( buf, CLR_CYAN );strcat( buf, "*"     );
 	}
 
-	if(OBJ_YP_MANA_HP = 0)
+	if(OBJ_YP_MANA_HP == 0)
 	{
 		strcat( buf, CLR_WHITE );strcat( buf, "*"     );
 	}
@@ -247,7 +247,7 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 		strcat( buf, CLR_CYAN );strcat( buf, "*"     );
 	}
 	
-	if(OBJ_ZZ_VZ = 0)
+	if(OBJ_ZZ_VZ == 0)
 	{
 		strcat( buf, CLR_WHITE );strcat( buf, "*"     );
 	}
