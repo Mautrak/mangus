@@ -2330,10 +2330,12 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
 		obj_random_paf(obj);
 	}
 
+	/*
     for (paf = pObjIndex->affected; paf != NULL; paf = paf->next)
 	if ( paf->location == APPLY_SPELL_AFFECT )
 	    affect_to_obj(obj,paf);
-
+	*/
+	
     obj->next		= object_list;
     object_list		= obj;
     if ( Count )

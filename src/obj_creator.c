@@ -257,6 +257,7 @@ void obj_random_paf(OBJ_DATA *obj)
 	
 	while(number_range(1,10)<6)
 	{
+		obj->enchanted	= TRUE;
 		if(number_percent()<90)
 		{
 			location = obj_random_paf_find_available_location(obj);
