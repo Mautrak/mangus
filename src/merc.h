@@ -1401,14 +1401,17 @@ struct	kill_data
 
 /* quest rewards */
 #define QUEST_ITEM1 94
+#define QUEST_ITEM5 29
+#define QUEST_ITEM4 30
 #define QUEST_ITEM_YUZUK1 32
 #define QUEST_ITEM_YUZUK2 33
 #define QUEST_ITEM_YUZUK3 34
 #define QUEST_ITEM_YUZUK4 35
 #define QUEST_ITEM_SILAH1 36
 #define QUEST_ITEM_SILAH2 37
-#define QUEST_ITEM4 30
-#define QUEST_ITEM5 29
+#define QUEST_ITEM_MIGFER 38
+#define QUEST_ITEM_KOLLUK 39
+#define QUEST_ITEM_BACAKLIK 40
 
 /*
  * Item types.
@@ -1640,7 +1643,6 @@ struct	kill_data
 #define ROOM_LAW		(S)
 #define ROOM_NOWHERE		(T)
 #define ROOM_BANK               (U)
-#define ROOM_KUMAR          (V)
 #define ROOM_NO_MAGIC           (W)
 #define ROOM_NOSUMMON           (X)
 #define ROOM_REGISTRY           (bb)
@@ -1861,6 +1863,9 @@ struct	kill_data
 #define QUEST_YUZUK3		(G)
 #define QUEST_YUZUK4		(H)
 #define QUEST_SILAH2		(I)
+#define QUEST_MIGFER		(J)
+#define QUEST_KOLLUK		(K)
+#define QUEST_BACAKLIK		(M)
 #define QUEST_BACKPACK		(L)
 #define QUEST_DECANTER		(O)
 

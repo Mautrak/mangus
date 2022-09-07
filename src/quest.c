@@ -335,6 +335,9 @@ void do_quest(CHAR_DATA *ch, char *argument)
 act ("$Z görev ekipmanlarýnýn listesini istiyorsun.",ch, NULL, questman, TO_CHAR);
 
 printf_to_char(ch, "{Csýrtçantasý{x.........({yçanta{x   )......{R5000 gp{x\n\r");
+printf_to_char(ch, "{Cmiðfer{x..............({ymiðfer{x  )......{R1000 gp{x\n\r");
+printf_to_char(ch, "{Ckolluk{x..............({ykolluk{x  )......{R1000 gp{x\n\r");
+printf_to_char(ch, "{Cbacaklýk{x............({ybacaklýk{x)......{R1000 gp{x\n\r");
 printf_to_char(ch, "{Ckemer{x...............({ykemer{x   )......{R1000 gp{x\n\r");
 printf_to_char(ch, "{Cparlak silah{x........({yparlak{x  )......{R1000 gp{x\n\r");
 printf_to_char(ch, "{Cmat silah{x...........({ymat{x     )......{R1000 gp{x\n\r");
@@ -379,6 +382,27 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
   		else if (is_name(arg2, (char*)"kemer"))
   		{
   			obj = create_object(get_obj_index(QUEST_ITEM1),ch->level);
+  			spell_identify( 0, 0, ch, obj ,0);
+  			extract_obj(obj);
+  			return;
+  		}
+		else if (is_name(arg2, (char*)"miðfer"))
+  		{
+  			obj = create_object(get_obj_index(QUEST_ITEM_MIGFER),ch->level);
+  			spell_identify( 0, 0, ch, obj ,0);
+  			extract_obj(obj);
+  			return;
+  		}
+		else if (is_name(arg2, (char*)"kolluk"))
+  		{
+  			obj = create_object(get_obj_index(QUEST_ITEM_KOLLUK),ch->level);
+  			spell_identify( 0, 0, ch, obj ,0);
+  			extract_obj(obj);
+  			return;
+  		}
+		else if (is_name(arg2, (char*)"bacaklýk"))
+  		{
+  			obj = create_object(get_obj_index(QUEST_ITEM_BACAKLIK),ch->level);
   			spell_identify( 0, 0, ch, obj ,0);
   			extract_obj(obj);
   			return;
@@ -512,6 +536,21 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 		else if (is_name(arg2, (char*)"kemer"))
 		{
 			quest_item_buy_object(ch, questman, QUEST_GIRTH, QUEST_ITEM1, 1000,0,0);
+			return;
+		}
+		else if (is_name(arg2, (char*)"miðfer"))
+		{
+			quest_item_buy_object(ch, questman, QUEST_MIGFER, QUEST_ITEM_MIGFER, 1000,0,0);
+			return;
+		}
+		else if (is_name(arg2, (char*)"kolluk"))
+		{
+			quest_item_buy_object(ch, questman, QUEST_KOLLUK, QUEST_ITEM_KOLLUK, 1000,0,0);
+			return;
+		}
+		else if (is_name(arg2, (char*)"bacaklýk"))
+		{
+			quest_item_buy_object(ch, questman, QUEST_BACAKLIK, QUEST_ITEM_BACAKLIK, 1000,0,0);
 			return;
 		}
 		else if (is_name(arg2, (char*)"iþlemeli"))
@@ -986,6 +1025,21 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 			quest_item_sigorta_object(ch, questman, QUEST_GIRTH, QUEST_ITEM1,0,0);
 			return;
 		}
+		else if (is_name(arg2, (char*)"miðfer"))
+		{
+			quest_item_sigorta_object(ch, questman, QUEST_MIGFER, QUEST_ITEM_MIGFER,0,0);
+			return;
+		}
+		else if (is_name(arg2, (char*)"kolluk"))
+		{
+			quest_item_sigorta_object(ch, questman, QUEST_KOLLUK, QUEST_ITEM_KOLLUK,0,0);
+			return;
+		}
+		else if (is_name(arg2, (char*)"bacaklýk"))
+		{
+			quest_item_sigorta_object(ch, questman, QUEST_BACAKLIK, QUEST_ITEM_BACAKLIK,0,0);
+			return;
+		}
 		else if (is_name(arg2, (char*)"çanta"))
 		{
 			quest_item_sigorta_object(ch, questman, QUEST_BACKPACK, QUEST_ITEM4,0,0);
@@ -1103,6 +1157,21 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
   		else if (is_name(arg2, (char*)"kemer"))
   		{
 			quest_item_iade(ch, questman, QUEST_GIRTH, QUEST_ITEM1, 900);
+  			return;
+  		}
+		else if (is_name(arg2, (char*)"miðfer"))
+  		{
+			quest_item_iade(ch, questman, QUEST_MIGFER, QUEST_ITEM_MIGFER, 900);
+  			return;
+  		}
+		else if (is_name(arg2, (char*)"kolluk"))
+  		{
+			quest_item_iade(ch, questman, QUEST_KOLLUK, QUEST_ITEM_KOLLUK, 900);
+  			return;
+  		}
+		else if (is_name(arg2, (char*)"bacaklýk"))
+  		{
+			quest_item_iade(ch, questman, QUEST_BACAKLIK, QUEST_ITEM_BACAKLIK, 900);
   			return;
   		}
   		else if (is_name(arg2, (char*)"çanta"))

@@ -123,6 +123,7 @@ DECLARE_SPEC_FUN(       spec_cast_cabal         );
 DECLARE_SPEC_FUN(       spec_special_guard      );
 DECLARE_SPEC_FUN(       spec_stalker            );
 DECLARE_SPEC_FUN(       spec_questmaster        );
+DECLARE_SPEC_FUN(       spec_duzenbaz        );
 DECLARE_SPEC_FUN(       spec_assassinater       );
 DECLARE_SPEC_FUN(       spec_repairman		);
 DECLARE_SPEC_FUN(       spec_wishmaster		);
@@ -171,6 +172,7 @@ const   struct  spec_type    spec_table[] =
     {	"spec_stalker",			spec_stalker		},
     {	"spec_special_guard",		spec_special_guard	},
     {   "spec_questmaster",             spec_questmaster        },
+	{   "spec_duzenbaz",             spec_duzenbaz        },
     {   "spec_assassinater",            spec_assassinater	},
     {   "spec_repairman",		spec_repairman		},
     {   "spec_wishmaster",		spec_wishmaster		},
@@ -1165,6 +1167,17 @@ bool spec_questmaster( CHAR_DATA *ch )
         return FALSE;
     if (number_range(0,100) == 0) {
       do_say(ch, (char*)"Bir görev istemez misin?");
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool spec_duzenbaz( CHAR_DATA *ch )
+{
+    if ( !IS_AWAKE(ch) )
+        return FALSE;
+    if (number_range(0,100) == 0) {
+      do_say(ch, (char*)"Hoþgeldin, var mýdýr bir sýkýntý? Yardýmcý olalým.");
         return TRUE;
     }
     return FALSE;

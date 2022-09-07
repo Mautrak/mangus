@@ -98,7 +98,7 @@ int obj_random_paf_find_available_location(OBJ_DATA *obj)
 			default:	random_location = APPLY_STR; break;
 		}
 	}
-	else if(random_number<200)
+	else if(random_number<400)
 	{
 		switch(number_range(7,9))
 		{

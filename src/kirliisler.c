@@ -27,19 +27,29 @@
 
 void do_zar (CHAR_DATA * ch, char *argument)
 {
+	CHAR_DATA *duzenbaz;
 	char arg1[MAX_INPUT_LENGTH];
 	char arg2[MAX_INPUT_LENGTH];
 	int zar_tipi, ch_zar, mekanci_zar;
 	long yatirilan,kazanc;
-
-	if (!IS_SET(ch->in_room->room_flags, ROOM_KUMAR))
+	
+	for ( duzenbaz = ch->in_room->people; duzenbaz != NULL; duzenbaz = duzenbaz->next_in_room )
     {
-      printf_to_char (ch,"Kumarhanede deðilsin.\n\r");
-      return;
+		if (!IS_NPC(duzenbaz))
+			continue;
+        if (duzenbaz->spec_fun == spec_lookup( (char*)"spec_duzenbaz" ))
+			break;
     }
-	if (ch->silver < 5)
+	
+	if (duzenbaz == NULL || duzenbaz->spec_fun != spec_lookup( (char*)"spec_duzenbaz" ))
     {
-        printf_to_char (ch,"Zar oynamak için en az 5 akçen ihtiyacýn var.\n\r");
+		send_to_char("Odada bu iþlerden anlayan bir düzenbaz göremiyorum.\n\r", ch);
+		return;
+    }
+	
+	if (ch->silver < 1000)
+    {
+        printf_to_char (ch,"Zar oynamak için en az 1000 akçen ihtiyacýn var.\n\r");
         return;
     }
 
@@ -88,9 +98,9 @@ void do_zar (CHAR_DATA * ch, char *argument)
 		send_to_char ("Bu oyun lafla deðil akçeyle oynanýr!\n\r", ch);
         	return;
 	}
-	if( (yatirilan>50000)||(yatirilan<5) )
+	if( (yatirilan>500000)||(yatirilan<1000) )
 	{
-		send_to_char ("Zar en az 5, en çok 50,000 akçeyle oynanýr.\n\r", ch);
+		send_to_char ("Zar en az 1000, en çok 500,000 akçeyle oynanýr.\n\r", ch);
         return;
 	}
 	ch->silver -= yatirilan;
