@@ -1594,8 +1594,10 @@ int search_sockets(DESCRIPTOR_DATA *inp)
    {
       if ( d->character && inp->character )
       {
-	if (!strcmp(inp->character->name,d->character->name))
-	   continue;
+		if (!strcmp(inp->character->name,d->character->name))
+			continue;
+		if (get_trust(inp->character) >= LEVEL_IMMORTAL || get_trust(d->character) >= LEVEL_IMMORTAL)
+			continue;
       }
       return 1;
    }
