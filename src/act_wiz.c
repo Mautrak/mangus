@@ -4231,19 +4231,18 @@ void do_sockets( CHAR_DATA *ch, char *argument )
     one_argument(argument,arg);
     for ( d = descriptor_list; d != NULL; d = d->next )
     {
-	if ( d->character != NULL && can_see( ch, d->character )
-	&& (arg[0] == '\0' || is_name(arg,d->character->name)
-			   || (d->original && is_name(arg,d->original->name))))
-	{
-	    count++;
-	    sprintf( buf + strlen(buf), "[%3d %2d] %s@%s\n\r",
-		d->descriptor,
-		d->connected,
-		d->original  ? d->original->name  :
-		d->character ? d->character->name : "(none)",
-		d->host
-		);
-	}
+		if ( d->character != NULL && can_see( ch, d->character )
+		&& (arg[0] == '\0' || is_name(arg,d->character->name)
+				   || (d->original && is_name(arg,d->original->name))))
+		{
+			count++;
+			sprintf( buf + strlen(buf), "[%3d %2d] %s@%s\n\r",
+			d->descriptor,
+			d->connected,
+			d->original  ? d->original->name  : d->character ? d->character->name : "(none)",
+			d->host
+			);
+		}
     }
     if (count == 0)
     {
