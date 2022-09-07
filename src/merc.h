@@ -1412,6 +1412,7 @@ struct	kill_data
 #define QUEST_ITEM_MIGFER 95
 #define QUEST_ITEM_KOLLUK 97
 #define QUEST_ITEM_BACAKLIK 96
+#define QUEST_ITEM_KALKAN 86
 
 /*
  * Item types.
@@ -1866,6 +1867,7 @@ struct	kill_data
 #define QUEST_MIGFER		(J)
 #define QUEST_KOLLUK		(K)
 #define QUEST_BACAKLIK		(M)
+#define QUEST_KALKAN		(N)
 #define QUEST_BACKPACK		(L)
 #define QUEST_DECANTER		(O)
 

@@ -721,6 +721,26 @@ gold~
 weapon TWAIP AN
 sword 10 1 pierce D
 20 80 0 P
+#86
+kahraman kalkan~
+%s kahraman kalkaný [%s]~
+Kocaman bir kalkan odayý gücüyle dolduruyor.~
+platinum~
+armor AGIOY AJP
+10 10 10 7 2
+21 250 100000 G
+A
+12 150
+A
+13 150
+A
+14 400
+A
+18 12
+A
+19 12
+F
+R 17 -25 E
 #87
 yataðan~
 yataðan~
