@@ -376,8 +376,8 @@ pill 0 A
 10 'sanctuary' '' '' ''
 8 1 2450 P
 #29234
-asura taþý yeþil~
-asura taþý~
+trol taþý yeþil~
+trol taþý~
 Yeþile boyanmýþ bir taþ burada bekliyor.~
 glass~
 staff FG AO
@@ -2330,7 +2330,7 @@ G 0 29231 0 A very heavy purse is given to Oglethorpe, 1st Master Merchant of Fr
 M 0 29232 1 29270 1*Load Lord Mourning
 E 0 29232 0 8 Bladed boots is loaded on the feet of Lord Mourning
 E 0 29233 0 3 A dimensional cape is loaded around the neck (1) of Lord Mourning
-E 0 29234 0 17 The asura stone is loaded held in the hands of Lord Mourning
+E 0 29234 0 17 The trol stone is loaded held in the hands of Lord Mourning
 M 0 29228 1 29272 1*Load the scruffy pirate
 E 0 29229 0 12 An admiral's cape is loaded about the shoulders of the scruffy pirate
 E 0 29230 0 2 An admiral's signet is loaded on the right finger of the scruffy pirate

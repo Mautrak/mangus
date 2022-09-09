@@ -1,6 +1,6 @@
 #AREADATA
-Filename asuraini.are~
-Name Asura Ýni~
+Filename trolini.are~
+Name Trol Ýni~
 Builder Merc~
 Translator Bilinmiyor~
 Language Türkçe~
@@ -26,53 +26,53 @@ anlaþýlan az önce birþeyler yemiþ.
 human~
 ABCFG DPQ 7
 #2801
-genç asura~
-genç asura~
-Genç bir asura oturmuþ kemik çiðniyor.
+genç trol~
+genç trol~
+Genç bir trol oturmuþ kemik çiðniyor.
 ~
-Uzun ve tüylü bir asura. Gözlerin onunkilerle buluþuyor. Birden gülümsüyor,
+Uzun ve tüylü bir trol. Gözlerin onunkilerle buluþuyor. Birden gülümsüyor,
 elindeki kemiði atýyor ve sana doðru geliyor!!
 ~
-asura~
+trol~
 ACFG P 6
 #2802
-asura~
-asura~
-Sinirli bir asura görüyorsun.
+trol~
+trol~
+Sinirli bir trol görüyorsun.
 ~
-Uzun, zayýf ve tüylü bir asura. Gözlerini sana dikmiþ, kendisine benzeyip
+Uzun, zayýf ve tüylü bir trol. Gözlerini sana dikmiþ, kendisine benzeyip
 benzemediðinizi konarba ediyor.
 ~
-asura~
+trol~
 ABCFG P 8
 #2803
-bebek asura~
-bebek asura~
-Bir bebek asura burada, bir kadavrayla doktorculuk oynuyor.
+bebek trol~
+bebek trol~
+Bir bebek trol burada, bir kadavrayla doktorculuk oynuyor.
 ~
-Tombul, iri ve tüylü bir asura. Seni fark edince "Katýlsana?" diyor.
+Tombul, iri ve tüylü bir trol. Seni fark edince "Katýlsana?" diyor.
 ~
-asura~
+trol~
 ABCF P 5
 #2804
-dev asura~
-dev asura~
-Dev bir asura burada, ceset yýðýnlarýnýn üstüne uzanmýþ düþünüyor.
+dev trol~
+dev trol~
+Dev bir trol burada, ceset yýðýnlarýnýn üstüne uzanmýþ düþünüyor.
 ~
-Kaslý ve tüylü bir asura. Ýçeri girdiðini fark edince hýzlý hýzlý solumaya
+Kaslý ve tüylü bir trol. Ýçeri girdiðini fark edince hýzlý hýzlý solumaya
 baþlýyor.
 ~
-asura~
+trol~
 ABCFG P 13
 #2805
-diþi asura~
-diþi asura~
-Diþi bir asura burada, ceset yýðýný üstüne uzanmýþ düþünüyor.
+diþi trol~
+diþi trol~
+Diþi bir trol burada, ceset yýðýný üstüne uzanmýþ düþünüyor.
 ~
-Ýri ve tüylü bir asura. Ýçeri girdiðini fark edince hýzlý hýzlý solumaya
+Ýri ve tüylü bir trol. Ýçeri girdiðini fark edince hýzlý hýzlý solumaya
 baþlýyor.
 ~
-asura~
+trol~
 ABCFG P 11
 #2806
 þiþman kurtçuk~
@@ -95,14 +95,14 @@ anlaþýlan az önce birþeyler yemiþ.
 human~
 ABCFG DP 7
 #2808
-aptal asura~
-aptal asura~
-Aptal bir asura burada, etrafta geziniyor.
+aptal trol~
+aptal trol~
+Aptal bir trol burada, etrafta geziniyor.
 ~
-Uzun, zayýf ve tüylü bir asura. Seni fark ediyor ve neye baktýðýný bulmaya
+Uzun, zayýf ve tüylü bir trol. Seni fark ediyor ve neye baktýðýný bulmaya
 çalýþýyor.
 ~
-asura~
+trol~
 ACFG P 8
 #0
 
@@ -124,9 +124,9 @@ container 0 0
 30 0 0 30 100
 0 0 0 P
 #2802
-asura derisi~
-asura derisi~
-Bir asuranýn kirli derisi burada býrakýlmýþ.~
+trol derisi~
+trol derisi~
+Bir trolnýn kirli derisi burada býrakýlmýþ.~
 skin~
 armor 0 AK
 5 5 5 0 0
@@ -134,8 +134,8 @@ armor 0 AK
 A
 1 1
 E
-asura derisi~
-Bu ölü asuranýn derisi. Kötü görünüyor, kötü kokuyor ve kötü hissettiriyor.
+trol derisi~
+Bu ölü trolnýn derisi. Kötü görünüyor, kötü kokuyor ve kötü hissettiriyor.
 ~
 #2803
 opal yüzük~
@@ -191,7 +191,7 @@ Daha güçlü bir koku var.
 0 0 2803
 S
 #2802
-Asura Kileri~
+Trol Kileri~
 Bu odanýn tüm duvarlarýnda bol miktarda kan ve sakatat var. Onlara týrmanan
 kurtçuklar ve böcekler görüyorsun. Bu yerde uygarlýk yok. Yarý yenmiþ veya
 çürüyen cesetler zemini kapatmýþ. Ve hepsini sinekler, kurtçuklar ve böcekler
@@ -267,19 +267,19 @@ S
 #RESETS
 M 0 2800   2 2801  1	* the guardian beast
 O 0 2805  10 2801	* a cracked bone
-M 0 2801   2 2802  2	* the young asura
-M 0 2801   2 2802  2	* the young asura
-M 0 2802   1 2803  1	* the medium asura
+M 0 2801   2 2802  2	* the young trol
+M 0 2801   2 2802  2	* the young trol
+M 0 2802   1 2803  1	* the medium trol
 O 0 2800  10 2804	* the cadaver-toy
 P 1 2804  -1 2800  1	*   a leather belt
 M 0 2800   2 2803  1	* the guardian beast
-M 0 2803   4 2804  4	* a baby asura
-M 0 2803   4 2804  4	* a baby asura
-M 0 2803   4 2804  4	* a baby asura
-M 0 2803   4 2804  4	* a baby asura
-M 0 2804   1 2805  1	* the giant asura
-E 1 2802   5   12	*   the asura skin
-M 0 2805   1 2805  1	* the large female asura
+M 0 2803   4 2804  4	* a baby trol
+M 0 2803   4 2804  4	* a baby trol
+M 0 2803   4 2804  4	* a baby trol
+M 0 2803   4 2804  4	* a baby trol
+M 0 2804   1 2805  1	* the giant trol
+E 1 2802   5   12	*   the trol skin
+M 0 2805   1 2805  1	* the large female trol
 O 0 2801  10 2805	* the heap of carnage
 P 1 2803   5 2801  1	*   an opal ring
 M 0 2806  10 2803  4	* a fat worm
@@ -288,7 +288,7 @@ M 0 2806  10 2802  4	* a fat worm
 M 0 2806  10 2802  4	* a fat worm
 M 0 2806  10 2804  2	* a fat worm
 M 0 2807   1 2802  1	* the roving beast
-M 0 2808   1 2803  1	* the medium asura
+M 0 2808   1 2803  1	* the medium trol
 S
 #SHOPS
 0

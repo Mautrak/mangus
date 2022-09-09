@@ -4808,9 +4808,9 @@ void do_withdraw(CHAR_DATA *ch, char *argument)
   }
 
   ch->pcdata->bank_s -= amount_s;
-  ch->silver += (long)(0.90 * amount_s);
+  ch->silver += (long)(0.95 * amount_s);
 
-  printf_to_char(ch,"Ýþte %ld akçe, hesap iþlemi olarak %ld sikkeni alýyorum.\n\r",amount_s,UMAX(1, (0.10 * amount_s)) );
+  printf_to_char(ch,"Ýþte %ld akçe, hesap iþlemi olarak %ld sikkeni alýyorum.\n\r",(long)(0.95 * amount_s),UMAX(1, long(amount_s * 0.05)) );
   act("$n vezneye yaklaþýyor.",ch,NULL,NULL,TO_ROOM);
 }
 

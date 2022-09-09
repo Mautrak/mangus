@@ -409,14 +409,14 @@ degree of caution, but not aggression.
 human~
 ABG DEHJ 49
 #14736
-asura~
-asura~
-Bir asura görüyorsun, gürültüyle esniyor.
+trol~
+trol~
+Bir trol görüyorsun, gürültüyle esniyor.
 ~
 These grotesques were bred for combat, not sentry duty, and the boredom is
 almost killing them. They don't even notice your presence.
 ~
-asura~
+trol~
 ABG J 48
 #14737
 ethin~
@@ -520,15 +520,15 @@ Bir bekçi görüyorsun, tüm nefretiyle seni izliyor.
 unique~
 ABFG JN 46
 #14747
-prenses pardus~
-prenses pardus~
-Prenses Pardus'u görüyorsun, seni izliyor!
+prenses felar~
+prenses felar~
+Prenses Felar'u görüyorsun, seni izliyor!
 ~
 This snake with a woman's head seems unimpressed by your intrusion, but
 she refrains from attacking, hoping that the guards of the castle will see
 to you so she doesn't have to expend energy fighting.
 ~
-pardus~
+felar~
 ABDG DHJ 51
 #0
 
@@ -3503,7 +3503,7 @@ E 1 14716 1 16              *         wields morning star
 E 1 14717 1 6                *        wears helm
 G 1 14758 0			0                           gives key
 *
-M 1 14736 2 14771      1     *          loads asuras
+M 1 14736 2 14771      1     *          loads trols
 E 1 14747 1 16                *       wields pole arm
 E 1 14748 1 5                  *      wears chainmail
 *
@@ -3682,7 +3682,7 @@ M  14729 spec_breath_fire                        hell hound
 M  14733 spec_cast_cleric                        cloud giant
 M  14734 spec_janitor                            ogre servant
 M  14735 spec_cast_mage                          ogre mage
-M  14736 spec_fido                               asura
+M  14736 spec_fido                               trol
 M  14737 spec_guard                              ettin
 M  14738 spec_cast_mage                          chief assassin
 M  14739 spec_thief                              assassins

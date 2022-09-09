@@ -172,10 +172,10 @@ rugar~
 rugar~
 Bu iri görünümlü rugar sana daha yakýndan bakmayý düþünüyor.
 ~
-Whilst you look at this asura, you realize he is trying to
+Whilst you look at this trol, you realize he is trying to
 figure just how tender you are.
 ~
-asura~
+trol~
 ABCFT 0 12
 #4102
 gardiyan yýlan~
@@ -294,7 +294,7 @@ rugar~
 ~
 He looks quite mean.  Don't mess with him.
 ~
-asura~
+trol~
 ABCFT 0 14
 #4157
 büyücü~
@@ -323,7 +323,7 @@ küçük rugar~
 ~
 He is so happy, you are disgusted.  Kill him now!
 ~
-asura~
+trol~
 ACFGT 0 8
 #4160
 ork~
@@ -2857,7 +2857,7 @@ M 0 4100   1 4114  1	* the Mage
 G 1 4102   4     	*   a scroll which reads "ysafg"
 G 1 4155   9     	*   a map of the third level of Moria
 E 1 3351  -1   16	*   a standard issue dagger
-M 0 4101   1 4122  1	* the asura
+M 0 4101   1 4122  1	* the trol
 E 1 4100   2   16	*   the black demon blade
 M 0 4102   2 4111  2	* the guardian snake
 G 1 4103  10     	*   a green slime mold
@@ -2892,7 +2892,7 @@ M 0 4154   2 4164  1	* the black bat
 M 0 4154   2 4157  1	* the black bat
 M 0 4155   1 4158  1	* the thief
 E 1 4152   3   16	*   a light silver dagger
-M 0 4156   1 4151  1	* the asura
+M 0 4156   1 4151  1	* the trol
 E 1 4105   5   16	*   an iron-shod staff
 M 0 4157   2 4167  2	* the Mage
 E 1 3351  -1   16	*   a standard issue dagger
@@ -2901,8 +2901,8 @@ E 1 4151   3   17	*   a heavy oak staff
 E 1 3351  -1   16	*   a standard issue dagger
 M 0 4158   2 4162  1	* the snake
 M 0 4158   2 4169  1	* the snake
-M 0 4159   2 4168  1	* the small asura
-M 0 4159   2 4153  1	* the small asura
+M 0 4159   2 4168  1	* the small trol
+M 0 4159   2 4153  1	* the small trol
 M 0 4160   2 4160  1	* the orc
 E 1 3045  20    5	*   a scale mail jacket
 E 1 4055   9   16	*   a broad sword

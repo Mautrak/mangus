@@ -48,10 +48,10 @@
 Hangi isimle anýlmak istersin? ~
 
 -1 motd~
-* Uzak Diyarlar oyuncu katline izin veren bir rol kesme oyunudur.
+* Mangus oyuncu katline izin veren bir rol kesme oyunudur.
 * Kurallarý bilmekle yükümlüsünüz.
 * Oyunla ilgili bilgi edinmek için 'yardým' komutunu kullanýn
-  veya www.uzakdiyarlar.net adresini ziyaret edin.
+  veya www.mangusmud.com adresini ziyaret edin.
 
 [Devam etmek için ENTER]
 ~
@@ -116,7 +116,7 @@ Irkýnýz ne olsun? Bilgi için "yardým" komutunu kullanabilirsiniz.
 
 -1 insan~
 
-Uzak Diyarlarýn en kalabalýk ýrkýdýr. Ýnsan ýrkýný diðer ýrklardan ayýran
+Mangus'un en kalabalýk ýrkýdýr. Ýnsan ýrkýný diðer ýrklardan ayýran
 en önemli özellik her türlü ortama kolaylýkla uyum saðlayabilmeleridir.
 Bu nedenle bütün sýnýflar için uygun olan tek ýrktýr. Ayrýca etik olarak da
 tahmin edilebilir bir ýrk deðildir. Ýçlerinde ezileni koruyan, merhameti bol
@@ -129,7 +129,7 @@ sahip bir ýrktýr.
 
 -1 cüce~
 
-Cüceler Uzak Diyarlarýn kýsa boylu ama güçlü, uzun sakallarýyla meþhur
+Cüceler Mangus'un kýsa boylu ama güçlü, uzun sakallarýyla meþhur
 ýrklarýndandýr. Pek zeki bir ýrk olmasa da uzun yaþam süreleri, onlarýn
 diyardaki bir çok ýrka göre daha bilge bir ýrk olmasýný saðlamýþtýr. Çeviklik
 bakýmýndan zayýf ve sessiz hareket etme konusunda baþarýz olduklarý için bazý
@@ -146,9 +146,9 @@ yakýn hakaret ve küfür mevcuttur.
 
 ~
 
--1 çora~
+-1 elf~
 
-Uzak Diyarlarýn gözle görülmeyen, ateþten yaratýlmýþ varlýklarýdýr.
+Mangus'un gözle görülmeyen, ateþten yaratýlmýþ varlýklarýdýr.
 Niyetleri önceden kestirilemez. Ýçlerinde merhamet dolu olanlarý da vardýr,
 diyara korku salanlarý da... Doðuþtan geliþmiþ görünmezliðe sahiptirler.
 Varlýklarý ateþten olduðu için ateþe karþý hiçbir ýrkýn olmadýðý kadar
@@ -162,7 +162,7 @@ yaþamayý tercih edenleri de vardýr.
 
 -1 yeg~
 
-Uzak Diyarlarýn habis ruhlu ýrklarýndandýr. Yer altýnýn karanlýk
+Mangus'un habis ruhlu ýrklarýndandýr. Yer altýnýn karanlýk
 dehlizlerini mesken edinen, yer üstündekilere korku salan, zulüm
 etmekten fazlasýyla haz alan, kýsa boylu, güçlü varlýklardýr. Gün
 ýþýðýndan mümkün olduðunca uzak dururlar.Geceleri av olarak seçtikleri
@@ -177,30 +177,30 @@ cücelerin bebeklerini kaçýrdýklarýna dair söylentiler vardýr.
 
 ~
 
--1  asura~
+-1  trol~
 
-Asura Hint ve Budist mitlerindeki genellikle negatif eðilimler taþýyan,
+Trol Hint ve Budist mitlerindeki genellikle negatif eðilimler taþýyan,
 devasa yapýda ve dünyevi zevklere, özellikle de pahalý þeylere düþkün
 güçlü varlýklara verilen isimdir. Iran bölgesinde Ahura adýný
 almýþlardýr.
 
-Asuralar kimi zaman tanrýlarla savaþýr kimi zaman da karýþýklýða neden
+Trollar kimi zaman tanrýlarla savaþýr kimi zaman da karýþýklýða neden
 olurlar, boynuzlu ve uzun kuyruklu, iri diþleri aðýzlarýndan taþan
 yaratýklar olarak tasvir edilirler, efendi veya tanrý/yarýtanrý olarak
 kabul edildikleri olmuþsa da en çok tanýnan görüþ yeraltýnda hüküm
 sürdükleri ve yýkýcý olduklarý yönündedir. Yine de savaþ disiplinleri ve
 zekalarý nedeniyle takdir edilirler, Ýblis vb. sözcükler bu ýrk için
-yetersiz kalýr. Bir Asura'nýn saygýsý ancak onunla savaþarak kazanýlabilir
+yetersiz kalýr. Bir Trol'nýn saygýsý ancak onunla savaþarak kazanýlabilir
 çünkü savaþmayan kiþi köleleri olmayý kabul etmiþ demektir.
 
-Bir Asura'nýn arkadaþlýðý riskli, düþmanlýðý ise mutlaka ölümcüldür.
+Bir Trol'nýn arkadaþlýðý riskli, düþmanlýðý ise mutlaka ölümcüldür.
 Tabi ki bazý tanrýsal güçlere sahip deðilseniz.
 
 ~
 
 -1 sýnýflar~
 
-Aþaðýda sýnýf listesi verilmiþtir. Daha fazla bilgi için uzakdiyarlar.net
+Aþaðýda sýnýf listesi verilmiþtir. Daha fazla bilgi için www.mangusmud.com
 adresini ziyaret ediniz.
 
 SINIF       KISALTMA  GEREKEN   TP
@@ -252,13 +252,13 @@ iyisi fazla bir beklenti içine girme. Ölüme ve acýya hazýr ol.
 
 0 genel~
 .
-Uzak Diyarlar karakter katli ve rol yapma gerektiren bir muddýr. Seviyeniz
+Mangus karakter katli ve rol yapma gerektiren bir muddýr. Seviyeniz
 10'u geçtikten sonra baþka karakterlerin "Katledilebilir" listesine girmeye
-baþlarsýnýz. Karakter katli ile ilgili daha fazla bilgiyi uzakdiyarlar.net
+baþlarsýnýz. Karakter katli ile ilgili daha fazla bilgiyi www.mangusmud.com
 adresinde bulabilirsiniz.
-Uzak Diyarlar'da rol yapmak bir tiyatro oyununda rol almaktan farklýdýr.
+Mangus'da rol yapmak bir tiyatro oyununda rol almaktan farklýdýr.
 Burada rol yapmak aslýnda yalnýzca burada yaþadýðýnýzý hissetmektir. Rol
-yapmakla ilgili ayrýntýlý bilgiyi uzakdiyarlar.net adresinde bulabilirsiniz.
+yapmakla ilgili ayrýntýlý bilgiyi mangusmud.com adresinde bulabilirsiniz.
 
 ~
 
@@ -339,16 +339,16 @@ KABAL KURALLARI
 
 RK KURALLARI
 
-1- Uzak Diyarlar'da yapýlan RK'ler, baþka oyun sistemleri, edebi metinleri
+1- Mangus'da yapýlan RK'ler, baþka oyun sistemleri, edebi metinleri
    ve kurgu dünyalarý baz alamazlar.
 
-2- Uzak Diyarlar'da oyuncu karakterleri kiþiliklerine (etik ve yönelim)
+2- Mangus'da oyuncu karakterleri kiþiliklerine (etik ve yönelim)
    aykýrý tavýrlar sergileyemezler.
 
 3- Aksi belirtilmediði müddetçe ölümsüzlerle girilen diyaloglarýn tümünde
    RK yapýlmak zorunluluðu vardýr.
 
-4- Uzak Diyarlar'da yapýlan RK'ler argo, küfür vb. unsurlar barýndýramazlar.
+4- Mangus'da yapýlan RK'ler argo, küfür vb. unsurlar barýndýramazlar.
 
 OK KURALLARI
 
@@ -416,15 +416,15 @@ GENEL KURALLAR
 7- Kural ihlallerine iliþkin hiçbir karar gelecekte alýnacak kararlara
    emsal teþkil etmez.
 
-8- Uzak Diyarlar Mud'da karakter sahibi her oyuncu yukarda belirtilen
+8- Mangus Mud'da karakter sahibi her oyuncu yukarda belirtilen
    kurallarýn hepsini kabul etmiþ sayýlýr.
 ~
 
 -1 nitelik~
-Uzak Diyarlar'da þu an için 6 karakter niteliði vardýr. Bunlar,
+Mangus'da þu an için 6 karakter niteliði vardýr. Bunlar,
 Güç, Zeka, Bilgelik, Çeviklik, Bünye ve Karizma. Her niteliðin
 karaktere saðladýðý avantajlar vardýr. Niteliklerle ilgili ayrýntýlý
-bilgiyi uzakdiyarlar.net adresinde bulabilirsiniz.
+bilgiyi www.mangusmud.com adresinde bulabilirsiniz.
 ~
 
 0 kuzey güney doðu batý aþaðý yukarý~
@@ -885,7 +885,7 @@ kim 10            10. seviye ve yukarýsýný listeler.
 kim 15 20         10. ve 20. seviye arasýný listeler.
 kim savaþçý       savaþçýlarý listeler.
 kim savaþçý 1 5   1 ve 5. seviye arasýndaki savaþçýlarý listeler.
-kim çora savaþçý  çora savaþçýlarý listeler
+kim elf savaþçý  elf savaþçýlarý listeler
 
 ~
 

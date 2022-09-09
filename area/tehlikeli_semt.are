@@ -16,13 +16,13 @@ END
 
 #NEW_MOBILES
 #2101
-asura çete üyesi~
-bir asura çete üyesi~
-asura çetesinin bir üyesi burada.
+trol çete üyesi~
+bir trol çete üyesi~
+trol çetesinin bir üyesi burada.
 ~
 Küçüklükten beri hep şiddet dolu bir yaşamı olmuş.
 ~
-asura~
+trol~
 ACEG 0 5
 #2102
 umacı çete üyesi~
@@ -34,24 +34,24 @@ Dünyayı bütün arbalardan temizlemek istiyor.
 human~
 ACEG 0 5
 #2103
-asura çete lideri~
-asura çete lideri~
-asura çete lideri burada. Yerini bulmandan memnun olmadı!
+trol çete lideri~
+trol çete lideri~
+trol çete lideri burada. Yerini bulmandan memnun olmadı!
 ~
 Liderliğini ayı gibi güçlü olmasına ve kurnazlığına borçlu.
 Kaslarından oldukça kuvvetli olduğunu anlıyorsun.
 ~
-asura~
+trol~
 ABFGT 0 13
 #2104
-çürütücü asura~
+çürütücü trol~
 bir çürütücü~
 Oldukça iri bir çürütücü burada kıracak kemik bekliyor.
 ~
 Oldukça uzun ve ağır. Kafanı parçalamak için yeterli güce
-sahip gibi. Bu ne biçim bir asura ! !
+sahip gibi. Bu ne biçim bir trol ! !
 ~
-asura~
+trol~
 ACFGHT D 11
 #2105
 bebek kız~
@@ -92,20 +92,20 @@ içinde. Senden önce kanlı bir biftek yemiş olabilir! ! !
 dog~
 ABFG DQ 5
 #2109
-pank asura~
-bir pank asura~
+pank trol~
+bir pank trol~
 Bir pank burada duvara birşeyler oymakla meşgul.
 ~
 İş yaparken rehabilite olmanın tipik bir örneği. Güzel değil.
 ~
-asura~
+trol~
 AFHS P 10
 #2110
 umacı çete lideri~
 umacı çete lideri~
 Umacı çete lideri bıçağını şaklatıyor.
 ~
-asura liderden daha küçük fakat kuşkusuz daha akıllı.
+trol liderden daha küçük fakat kuşkusuz daha akıllı.
 ~
 human~
 ABFGS 0 13
@@ -114,7 +114,7 @@ katil~
 bir katil~
 Çirkin ve ürkütücü bir katil burada. Tekmeleyecek köpek arıyor.
 ~
-Bu kişi asura çürütücüler kadar büyük değil fakat umacı ler için yine de
+Bu kişi trol çürütücüler kadar büyük değil fakat umacı ler için yine de
 bir şef.
 ~
 human~
@@ -123,9 +123,9 @@ ACFGHT D 11
 
 #NEW_OBJECTS
 #2101
-asura ceketi~
-bir asura çete ceketi~
-Bir asura çete ceketi düşüncesizce buraya bırakılmış.~
+trol ceketi~
+bir trol çete ceketi~
+Bir trol çete ceketi düşüncesizce buraya bırakılmış.~
 leather~
 armor 0 AD
 3 5 4 0 0
@@ -222,8 +222,8 @@ A
 14 5
 #2111
 mühürlü yüzük~
-bir asura mühürlü yüzüğü~
-Üzerinde asura işareti taşıyan bir yüzük tozun içinde kaybolmuş.~
+bir trol mühürlü yüzüğü~
+Üzerinde trol işareti taşıyan bir yüzük tozun içinde kaybolmuş.~
 bronze~
 jewelry 0 AB
 0 0 0 0 0
@@ -255,9 +255,9 @@ A
 A
 19 1
 #2114
-çivili çete asura ceket~
-bir çivili asura çete ceketi~
-Bir asura çivili ceket burada yeni sahibini bekliyor.~
+çivili çete trol ceket~
+bir çivili trol çete ceketi~
+Bir trol çivili ceket burada yeni sahibini bekliyor.~
 leather~
 armor 0 AD
 4 6 5 0 0
@@ -327,7 +327,7 @@ risk alıyorsunuz demektir. Duvarda bir plaket var.
 0 AC 1
 E
 plaket~
-Bu bölgenin Türkçe çevirisi Uzak Diyarlar için Jai tarafından yapılmıştır.
+Bu bölgenin Türkçe çevirisi Mangus için Jai tarafından yapılmıştır.
 ~
 D1
 ~
@@ -341,7 +341,7 @@ You can see Emerald Avenue, a much nicer place to be.
 S
 #2102
 Beyaz Ejder Bulvarının Başlangıcı~
-Şehrin bu bölümü bir asura Çetesi tarafından istila edilmiş. Poliste bile
+Şehrin bu bölümü bir trol Çetesi tarafından istila edilmiş. Poliste bile
 burada bulunmaktan dolayı bir korku var. Burası eskiden orta sınıfın güzel
 bir mekanıymış; şimdi ise caddelerini çeteciler yönetiyor. Bütün ev ve
 işyerleri terkedilmiş. Batıda dar bir sokak var. Cadde ise doğuya doğru
@@ -757,7 +757,7 @@ batı tahta kapı~
 S
 #2126
 Sarı Ejder Yolu~
-Sarı Ejder Yolu asura terörünün güney sınırıdır. Yol doğuya genişliyor.
+Sarı Ejder Yolu trol terörünün güney sınırıdır. Yol doğuya genişliyor.
 Güneyde ise "sahipsiz" diyar.
 ~
 0 0 1
@@ -1584,94 +1584,94 @@ D 0 2124   1    1	* Old Abandoned Warehouse east
 D 0 2125   3    1	* Bronze Dragon Street at Warehouse west
 D 0 2148   1    1	* A small ruined chapel east
 D 0 2149   3    1	* Ajax Avenue at chapel west
-M 0 2103   1 2124  1	* the asura gang leader
+M 0 2103   1 2124  1	* the trol gang leader
 E 1 2119  -1   16	*   a broken bottle
-E 1 2111   5    1	*   a asura signet ring
-E 1 2114  -1    5	*   a studded asura gang jacket
+E 1 2111   5    1	*   a trol signet ring
+E 1 2114  -1    5	*   a studded trol gang jacket
 M 0 2108  12 2124  6	* a pitbull
 M 0 2108  12 2124  6	* a pitbull
 M 0 2108  12 2124  6	* a pitbull
 M 0 2108  12 2124  6	* a pitbull
 M 0 2104   5 2116  1	* a bruiser
-E 1 2114  -1    5	*   a studded asura gang jacket
+E 1 2114  -1    5	*   a studded trol gang jacket
 E 1 2104  10   11	*   a metal shield
 E 1 2103  10   16	*   a hefty length of chain
 M 0 2104   5 2114  1	* a bruiser
-E 1 2114  -1    5	*   a studded asura gang jacket
-E 1 2111   5    1	*   a asura signet ring
+E 1 2114  -1    5	*   a studded trol gang jacket
+E 1 2111   5    1	*   a trol signet ring
 E 1 2103  10   16	*   a hefty length of chain
 M 0 2104   5 2108  1	* a bruiser
-E 1 2114  -1    5	*   a studded asura gang jacket
+E 1 2114  -1    5	*   a studded trol gang jacket
 E 1 2109   5    9	*   comfortable leather gloves
 E 1 2113  10   16	*   a lead pipe
 M 0 2104   5 2135  1	* a bruiser
-E 1 2114  -1    5	*   a studded asura gang jacket
+E 1 2114  -1    5	*   a studded trol gang jacket
 E 1 2104  10   11	*   a metal shield
-E 1 2111   5    1	*   a asura signet ring
+E 1 2111   5    1	*   a trol signet ring
 M 0 2104   5 2123  1	* a bruiser
-E 1 2114  -1    5	*   a studded asura gang jacket
+E 1 2114  -1    5	*   a studded trol gang jacket
 E 1 2113  10   16	*   a lead pipe
 E 1 2117  10    7	*   a pair of black leather pants
 M 0 2109   3 2102  1	* a punk
 E 1 2105   8   17	*   a spray paint can
-E 1 2114  -1    5	*   a studded asura gang jacket
+E 1 2114  -1    5	*   a studded trol gang jacket
 M 0 2109   3 2114  1	* a punk
-E 1 2114  -1    5	*   a studded asura gang jacket
+E 1 2114  -1    5	*   a studded trol gang jacket
 E 1 2118  10   16	*   a switchblade
 M 0 2109   3 2128  1	* a punk
-E 1 2114  -1    5	*   a studded asura gang jacket
+E 1 2114  -1    5	*   a studded trol gang jacket
 E 1 2105   8   17	*   a spray paint can
 E 1 2118  10   16	*   a switchblade
-M 0 2101  25 2102  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2103  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2104  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2105  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2106  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2107  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2108  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2109  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2110  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2111  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2112  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2113  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2114  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2115  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2116  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2117  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2118  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2119  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2120  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2121  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2122  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2128  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2130  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2131  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
-M 0 2101  25 2134  1	* a asura gang member
-E 1 2101  -1    5	*   a asura gang jacket
+M 0 2101  25 2102  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2103  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2104  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2105  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2106  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2107  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2108  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2109  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2110  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2111  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2112  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2113  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2114  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2115  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2116  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2117  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2118  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2119  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2120  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2121  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2122  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2128  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2130  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2131  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
+M 0 2101  25 2134  1	* a trol gang member
+E 1 2101  -1    5	*   a trol gang jacket
 M 0 2110   1 2148  1	* the Ogre gang leader
 E 1 2115  -1    5	*   a studded Ogre gang jacket
 E 1 2106   5   16	*   a stiletto

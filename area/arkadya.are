@@ -221,8 +221,8 @@ rugar muhafýz~
 bir rugar muhafýz~
 Soðukkanlý bir rugar muhafýzý burada durmuþ seni izliyor.
 ~
-This asura stands about 9 feet tall and looks as if he was made of
-stone.  Once the rulers of Arcadia asuras such as this one now serve the
+This trol stands about 9 feet tall and looks as if he was made of
+stone.  Once the rulers of Arcadia trols such as this one now serve the
 sidhe as faithfull warriors.
 ~
 giant~
@@ -232,11 +232,11 @@ rugar muhafýz~
 bir rugar muhafýz~
 Soðukkanlý bir rugar muhafýzý burada durmuþ seni izliyor.
 ~
-This asura stands about 9 feet tall and looks as if he was made of
-stone.  Once the rulers of Arcadia asuras such as this one now serve the
+This trol stands about 9 feet tall and looks as if he was made of
+stone.  Once the rulers of Arcadia trols such as this one now serve the
 sidhe as faithfull warriors.
 ~
-asura~
+trol~
 ABT Nbcd 71
 #12021
 pooka soytarý~
@@ -263,48 +263,48 @@ fun....
 human~
 AGHS PQ 60
 #12023
-sarhoþ pardus~
-bir pardus sarhoþ~
-Bir pardus burada, bir yanýnda þiþesi bir yanýnda kadýnýyla oturuyor.
+sarhoþ felar~
+bir felar sarhoþ~
+Bir felar burada, bir yanýnda þiþesi bir yanýnda kadýnýyla oturuyor.
 ~
-Half-man, half-tiger pardus are the party animals of the Fae.  Renowned
+Half-man, half-tiger felar are the party animals of the Fae.  Renowned
 for their great stamina they can drink more than almost any other being.
 ~
-pardus~
+felar~
 ABS d 64
 #12024
-kavalcý pardus~
-bir pardus kavalcý~
-Bir pardus kavalcýsý burada, hareketli bir dans parçasý çalýyor.
+kavalcý felar~
+bir felar kavalcý~
+Bir felar kavalcýsý burada, hareketli bir dans parçasý çalýyor.
 ~
 The piper seems to be almost lost in the music issuing from his pipes.
 As you listen you too are drawn into the music.....
 ~
-pardus~
+felar~
 AGR d 66
 #12025
-pardus þarkýcý~
-bir pardus þarkýcý~
-Güzel bir diþi pardus kayýp aþkýnýn þarkýsýný söylüyor.
+felar þarkýcý~
+bir felar þarkýcý~
+Güzel bir diþi felar kayýp aþkýnýn þarkýsýný söylüyor.
 ~
-The singer is a pardus, half horse, half human.  The lower portion of her
+The singer is a felar, half horse, half human.  The lower portion of her
 body consists of goat legs covered by short, thick, brown hair, while the
 upper portion is that of a well proportioned human female, covered only
 by her long, sandy blonde hair.  Her singing is exquisite and the slight
 swaying of her body as she sings entrances you.
 ~
-pardus~
+felar~
 AGR d 62
 #12026
-pardus azgýn~
-azgýn bir pardus~
-Bir pardus burada genç bir periyi kovalýyor.
+felar azgýn~
+azgýn bir felar~
+Bir felar burada genç bir periyi kovalýyor.
 ~
-This pardus seems totaly obsessed with catching the beautiful woodland
+This felar seems totaly obsessed with catching the beautiful woodland
 nymph.  You can tell by the look in his eyes that it would be a BAD idea
 to get in his way.
 ~
-pardus~
+felar~
 ABT JVbd 60
 #12027
 boggan ustasý ayakkbý üreticisi~
@@ -5167,10 +5167,10 @@ P 0 12061 0 12028 1*A bit of slime put inside A bit of slime
 M 0 12035 2 12115 1*Load a sluagh guardian
 G 0 12067 0 A small black key is given to a sluagh guardian
 E 0 12008 0 16 A dull kris blade is loaded wielded of a sluagh guardian
-M 0 12020 5 12116 1*Load a asura guard
-E 0 12039 0 1 An oath ring is loaded on the left finger of a asura guard
-E 0 12038 0 11 An ice shield is loaded as a shield of a asura guard
-E 0 12037 0 16 A twisted spiked club is loaded wielded of a asura guard
+M 0 12020 5 12116 1*Load a trol guard
+E 0 12039 0 1 An oath ring is loaded on the left finger of a trol guard
+E 0 12038 0 11 An ice shield is loaded as a shield of a trol guard
+E 0 12037 0 16 A twisted spiked club is loaded wielded of a trol guard
 M 0 12037 10 12116 1*Load a sprite
 E 0 12005 0 16 A small slender sword is loaded wielded of a sprite
 E 0 12006 0 8 A pair of grey boots is loaded on the feet of a sprite
@@ -5179,27 +5179,27 @@ E 0 12045 0 14 An engraved sidhe bracer is loaded on the left wrist of a sidhe g
 E 0 12045 0 15 An engraved sidhe bracer is loaded on the right wrist of a sidhe guard
 E 0 12044 0 7 A pair of sidhe greaves is loaded on the legs of a sidhe guard
 E 0 12043 0 10 A pair of sidhe armguards is loaded on the arms of a sidhe guard
-M 0 12020 5 12118 1*Load a asura guard
-E 0 12039 0 1 An oath ring is loaded on the left finger of a asura guard
-E 0 12038 0 11 An ice shield is loaded as a shield of a asura guard
-E 0 12037 0 16 A twisted spiked club is loaded wielded of a asura guard
-M 0 12019 6 12120 2 *Load a asura guard
-G 0 12065 0 A small oak key is given to a asura guard
-E 0 12039 0 1 An oath ring is loaded on the left finger of a asura guard
-E 0 12038 0 11 An ice shield is loaded as a shield of a asura guard
-E 0 12036 0 16 A white  mace is loaded wielded of a asura guard
+M 0 12020 5 12118 1*Load a trol guard
+E 0 12039 0 1 An oath ring is loaded on the left finger of a trol guard
+E 0 12038 0 11 An ice shield is loaded as a shield of a trol guard
+E 0 12037 0 16 A twisted spiked club is loaded wielded of a trol guard
+M 0 12019 6 12120 2 *Load a trol guard
+G 0 12065 0 A small oak key is given to a trol guard
+E 0 12039 0 1 An oath ring is loaded on the left finger of a trol guard
+E 0 12038 0 11 An ice shield is loaded as a shield of a trol guard
+E 0 12036 0 16 A white  mace is loaded wielded of a trol guard
 M 0 12034 6 12119 1*Load a sluagh watcher
 M 0 12036 13 12119 1*Load a pixie
 G 0 12007 0 A pixie bow is given to a pixie
 E 0 12006 0 8 A pair of grey boots is loaded on the feet of a pixie
-M 0 12019 6 12120 2*Load a asura guard
-E 0 12039 0 1 An oath ring is loaded on the left finger of a asura guard
-E 0 12038 0 11 An ice shield is loaded as a shield of a asura guard
-E 0 12036 0 16 A white  mace is loaded wielded of a asura guard
-M 0 12019 6 12134 1*Load a asura guard
-E 0 12039 0 1 An oath ring is loaded on the left finger of a asura guard
-E 0 12038 0 11 An ice shield is loaded as a shield of a asura guard
-E 0 12036 0 16 A white  mace is loaded wielded of a asura guard
+M 0 12019 6 12120 2*Load a trol guard
+E 0 12039 0 1 An oath ring is loaded on the left finger of a trol guard
+E 0 12038 0 11 An ice shield is loaded as a shield of a trol guard
+E 0 12036 0 16 A white  mace is loaded wielded of a trol guard
+M 0 12019 6 12134 1*Load a trol guard
+E 0 12039 0 1 An oath ring is loaded on the left finger of a trol guard
+E 0 12038 0 11 An ice shield is loaded as a shield of a trol guard
+E 0 12036 0 16 A white  mace is loaded wielded of a trol guard
 M 0 12010 3 12121 1*Load a sidhe guard
 E 0 12045 0 14 An engraved sidhe bracer is loaded on the left wrist of a sidhe guard
 E 0 12045 0 15 An engraved sidhe bracer is loaded on the right wrist of a sidhe guard
@@ -5207,14 +5207,14 @@ E 0 12044 0 7 A pair of sidhe greaves is loaded on the legs of a sidhe guard
 E 0 12043 0 10 A pair of sidhe armguards is loaded on the arms of a sidhe guard
 M 0 12029 4 12125 1*Load an adventurous eshu
 E 0 12013 0 16 A gleaming khopesh is loaded wielded of an adventurous eshu
-M 0 12020 8 12131 1*Load a asura guard
-E 0 12039 0 1 An oath ring is loaded on the left finger of a asura guard
-E 0 12038 0 11 An ice shield is loaded as a shield of a asura guard
-E 0 12037 0 16 A twisted spiked club is loaded wielded of a asura guard
-M 0 12020 8 12123 1*Load a asura guard
-E 0 12039 0 1 An oath ring is loaded on the left finger of a asura guard
-E 0 12038 0 11 An ice shield is loaded as a shield of a asura guard
-E 0 12037 0 16 A twisted spiked club is loaded wielded of a asura guard
+M 0 12020 8 12131 1*Load a trol guard
+E 0 12039 0 1 An oath ring is loaded on the left finger of a trol guard
+E 0 12038 0 11 An ice shield is loaded as a shield of a trol guard
+E 0 12037 0 16 A twisted spiked club is loaded wielded of a trol guard
+M 0 12020 8 12123 1*Load a trol guard
+E 0 12039 0 1 An oath ring is loaded on the left finger of a trol guard
+E 0 12038 0 11 An ice shield is loaded as a shield of a trol guard
+E 0 12037 0 16 A twisted spiked club is loaded wielded of a trol guard
 M 0 12031 2 12131 1*Load a drunken eshu
 G 0 12019 0 A flagon of dark ale is given to a drunken eshu
 M 0 12037 10 12132 1*Load a sprite
@@ -5232,17 +5232,17 @@ E 0 12018 0 17 Pan pipes is loaded held in the hands of a ciren piper
 M 0 12030 3 12134 1*Load an eshu
 G 0 12007 0 A pixie bow is given to an eshu
 M 0 12040 5 12134 1*Load a playful dryad
-M 0 12019 6 12135 1*Load a asura guard
-E 0 12039 0 1 An oath ring is loaded on the left finger of a asura guard
-E 0 12038 0 11 An ice shield is loaded as a shield of a asura guard
-E 0 12036 0 16 A white  mace is loaded wielded of a asura guard
+M 0 12019 6 12135 1*Load a trol guard
+E 0 12039 0 1 An oath ring is loaded on the left finger of a trol guard
+E 0 12038 0 11 An ice shield is loaded as a shield of a trol guard
+E 0 12036 0 16 A white  mace is loaded wielded of a trol guard
 M 0 12036 13 12136 1*Load a pixie
 G 0 12007 0 A pixie bow is given to a pixie
 E 0 12006 0 8 A pair of grey boots is loaded on the feet of a pixie
-M 0 12019 6 12138 1*Load a asura guard
-E 0 12039 0 1 An oath ring is loaded on the left finger of a asura guard
-E 0 12038 0 11 An ice shield is loaded as a shield of a asura guard
-E 0 12036 0 16 A white  mace is loaded wielded of a asura guard
+M 0 12019 6 12138 1*Load a trol guard
+E 0 12039 0 1 An oath ring is loaded on the left finger of a trol guard
+E 0 12038 0 11 An ice shield is loaded as a shield of a trol guard
+E 0 12036 0 16 A white  mace is loaded wielded of a trol guard
 O 0 12030 0 12141 A large oak bookshelf loaded to The Chamber of Lughnasadh
 P 0 12031 0 12030 1*An ancient manuscript put inside An ancient manuscript
 P 0 12032 0 12030 1*An ancient manuscript put inside An ancient manuscript
@@ -5285,10 +5285,10 @@ M 0 12018 2 12144 1*Load a noble sidhe knight
 E 0 12042 0 5 A sidhe breastplate is loaded on the body of a noble sidhe knight
 E 0 12041 0 16 A sidhe broadsword is loaded wielded of a noble sidhe knight
 E 0 12040 0 3 A noble's cape is loaded around the neck (1) of a noble sidhe knight
-M 0 12019 6 12144 1*Load a asura guard
-E 0 12039 0 1 An oath ring is loaded on the left finger of a asura guard
-E 0 12038 0 11 An ice shield is loaded as a shield of a asura guard
-E 0 12036 0 16 A white  mace is loaded wielded of a asura guard
+M 0 12019 6 12144 1*Load a trol guard
+E 0 12039 0 1 An oath ring is loaded on the left finger of a trol guard
+E 0 12038 0 11 An ice shield is loaded as a shield of a trol guard
+E 0 12036 0 16 A white  mace is loaded wielded of a trol guard
 M 0 12021 1 12144 1*Load a pooka jester
 G 0 12035 0 A jester's stick is given to a pooka jester
 E 0 12020 0 6 A jester's cap is loaded over the head of a pooka jester
@@ -5330,10 +5330,10 @@ E 0 12008 0 16 A dull kris blade is loaded wielded of a sluagh guardian
 M 0 12004 1 12149 1*Load Gwyn ap Nudd
 E 0 12051 0 3 A silver torc is loaded around the neck (1) of Gwyn ap Nudd
 E 0 12050 0 6 A stag horned helmet is loaded over the head of Gwyn ap Nudd
-M 0 12020 5 12149 1*Load a asura guard
-E 0 12039 0 1 An oath ring is loaded on the left finger of a asura guard
-E 0 12038 0 11 An ice shield is loaded as a shield of a asura guard
-E 0 12037 0 16 A twisted spiked club is loaded wielded of a asura guard
+M 0 12020 5 12149 1*Load a trol guard
+E 0 12039 0 1 An oath ring is loaded on the left finger of a trol guard
+E 0 12038 0 11 An ice shield is loaded as a shield of a trol guard
+E 0 12037 0 16 A twisted spiked club is loaded wielded of a trol guard
 M 0 12005 1 12150 1*Load The Morrigan
 G 0 12049 0 Night's blood is given to The Morrigan
 G 0 12048 0 The heart of night is given to The Morrigan

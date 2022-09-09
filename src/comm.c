@@ -1901,7 +1901,7 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	    else
 		do_help(ch,argument);
             write_to_buffer(d,
-							"Sýnýfýnýz nedir (bilgi için: www.uzakdiyarlar.net)? ",0);
+							"Sýnýfýnýz nedir (bilgi için: www.mangusmud.com)? ",0);
 	    return;
 	}
 
@@ -2080,7 +2080,7 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	      {
 		do_help(ch,argument);
                 write_to_buffer(d,
-									"Irkýnýz nedir? (bilgi: www.uzakdiyarlar.net) ",0);
+									"Irkýnýz nedir? (bilgi: www.mangusmud.com) ",0);
 	      }
 	    break;
   	}
@@ -2103,7 +2103,7 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
             }
             write_to_buffer(d,"\n\r",0);
             write_to_buffer(d,
-							"Irkýnýz nedir? (bilgi: www.uzakdiyarlar.net) ",0);
+							"Irkýnýz nedir? (bilgi: www.mangusmud.com) ",0);
 	    break;
 	}
 
@@ -2169,7 +2169,7 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	strcat( buf, "]\n\r " );
 	write_to_buffer( d, buf, 0 );
             write_to_buffer(d,
-		"Sýnýfýn ne olsun (bilgi: www.uzakdiyarlar.net)? ",0);
+		"Sýnýfýn ne olsun (bilgi: www.mangusmud.com)? ",0);
         d->connected = CON_GET_NEW_CLASS;
         break;
 
@@ -2184,7 +2184,7 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	    else
 		do_help(ch,argument);
             write_to_buffer(d,
-		"Sýnýfýn ne olsun (bilgi: www.uzakdiyarlar.net)? ",0);
+		"Sýnýfýn ne olsun (bilgi: www.mangusmud.com)? ",0);
 	    return;
 	  }
 
@@ -2270,7 +2270,7 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 		break;
 	   default:
 	    write_to_buffer(d, "\n\rGeçerli bir etik seçmedin.\n\r", 0);
-	    write_to_buffer(d, "Etiðin ne olsun, (T/Y/K) (bilgi: www.uzakdiyarlar.net)?",0);
+	    write_to_buffer(d, "Etiðin ne olsun, (T/Y/K) (bilgi: www.mangusmud.com)?",0);
 	    return;
 	   }
          }

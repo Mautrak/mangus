@@ -16,24 +16,24 @@ END
 
 #NEW_MOBILES
 #8301
-asura~
-bataklýk asurasý~
-Bir bataklýk asurasý sana saldýrýyor.
+trol~
+bataklýk trolsý~
+Bir bataklýk trolsý sana saldýrýyor.
 ~
 Bu büyük yaratýk altý ayak boyunda. Sana doðru iki kara pençesini
 kaldýrmýþ gelirken alaylý bir þekilde gülümsüyor.
 ~
-asura~
+trol~
 ABCFG FJc 16
 #8302
-asura~
-yeþil asura~
-Yeþil bir asura seni yakalamaya çalýþýyor.
+trol~
+yeþil trol~
+Yeþil bir trol seni yakalamaya çalýþýyor.
 ~
-Bu büyük asura üzerinde bir kule gibi yükseliyor. Ustalýkla kullandýðý bir
+Bu büyük trol üzerinde bir kule gibi yükseliyor. Ustalýkla kullandýðý bir
 mýzraða sahip.
 ~
-asura~
+trol~
 ACFG FJc 14
 #8303
 ogre~
@@ -661,13 +661,13 @@ D2
 S
 #0
 #RESETS
-M 0 8301   2 8303  1	* a swamp asura
-M 0 8301   2 8308  1	* a swamp asura
-M 0 8302   6 8303  2	* a green asura
+M 0 8301   2 8303  1	* a swamp trol
+M 0 8301   2 8308  1	* a swamp trol
+M 0 8302   6 8303  2	* a green trol
 G 1 8307  -1     	*   a murky green potion
-M 0 8302   6 8304  2	* a green asura
+M 0 8302   6 8304  2	* a green trol
 G 1 8307  -1     	*   a murky green potion
-M 0 8302   6 8306  2	* a green asura
+M 0 8302   6 8306  2	* a green trol
 M 0 8303   3 8303  1	* an ogre
 M 0 8303   3 8313  1	* an ogre
 M 0 8303   3 8307  1	* an ogre

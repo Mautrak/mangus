@@ -46,15 +46,15 @@ int obj_random_paf_modifier(int location, int level)
 	{
 		random_number = number_range(1,100);
 		
-		if(random_number<=50)
+		if(random_number<=40)
 			return number_range(10,UMAX(11,int(level)));
-		else if(random_number<=85)
+		else if(random_number<=75)
 			return number_range(10,UMAX(11,int(level*2)));
-		else if(random_number<=95)
+		else if(random_number<=85)
 			return number_range(10,UMAX(11,int(level*3)));
-		else if(random_number<=98)
+		else if(random_number<=90)
 			return number_range(10,UMAX(11,int(level*4)));
-		else if(random_number<=99)
+		else if(random_number<=95)
 			return number_range(10,UMAX(11,int(level*5)));
 		else
 			return number_range(10,UMAX(11,int(level*6)));

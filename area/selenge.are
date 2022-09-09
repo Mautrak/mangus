@@ -156,7 +156,7 @@ Yorgun ve yaþlý görünümlü bu kadýnda geçmiþten kalma bilgi ve deneyimi
 açýkça görebiliyorsun. Mavi bir aura ile çevrelenmiþ ve oldukça güzel
 giysiler giymiþ bu kadýn ayrýca loncanýn üstadý.
 ~
-çora~
+elf~
 ABKRVe DEFZ 96
 #3021
 lonca efendisi~
@@ -197,7 +197,7 @@ Bir sihirbaz giriþi koruyor.
 O kendisini savaþ büyülerinde ustalaþtýrmýþ bir büyücü. Artýk tek görevi
 bu kapýyý ölümcül savunma ve saldýrýlarýyla korumak.
 ~
-çora~
+elf~
 ABRTVe BD 30
 #3025
 arna~
@@ -696,7 +696,7 @@ renkte parladýðýný görüyorsun. Cüppesinin baþ kýsmý kafasýnýn
 neredeyse tamamýný örtüyor. Güçlü ve uzun görünüyor. Kem düþüncelerden
 vazgeçmediðin sürece seni eðitebileceðini biliyorsun.
 ~
-çora~
+elf~
 ABKRVe DEFZ 96
 #3170
 lonca efendisi~
@@ -707,7 +707,7 @@ Yaþlý ve yorgun bir lonca efendisi. Gözlerinde derin bilginin izlerini
 görebiliyorsun. Büyülü olmasý muhtemel kaliteli bir kýyafet giyiyor.
 Mavi bir aurayla çevrelendiðini fark ediyorsun.
 ~
-çora~
+elf~
 ABKRVe DEFZ 96
 #3171
 lonca efendisi samuray~
@@ -767,9 +767,9 @@ Bir dindar Nyahilik inancýyla ilgili bilgiler veriyor.
 ~
 Bölünmüþ Ruhlar'da geçirdiði yýllarda öðrendiði bilgileri
 baþkalarýyla paylaþmaya, onlarý da Nyahilik yoluna çekmeye
-çalýþan dindar bir çora.
+çalýþan dindar bir elf.
 ~
-çora~
+elf~
 ABRQVe CDFJVZH 93
 #3177
 sintaryan dindar~
@@ -1971,8 +1971,8 @@ Toraklar  Kapýsý    |      |    Yeri      |           |        Kapýsý   Patikasý
          Selenge               Selenge                        Selenge
 ~
 #3163
-kuzey harita uzak diyarlar~
-kuzey Uzak Diyarlar haritasý~
+kuzey harita mangus~
+kuzey Mangus haritasý~
 Kývrýlmýþ bir harita burada duruyor.~
 paper~
 map 0 A
@@ -1981,7 +1981,7 @@ map 0 A
 E
 kuzey harita uzak diyarlar~
 .
-                       * * * Kuzey Uzak Diyarlar  * * *
+                       * * *    Kuzey Mangus     * * *
                           = = ================== = =
 
                                                    Moria
@@ -1998,7 +1998,7 @@ Grove---Galaxy              Midgaard   G'harne       |            \Holy
       Forest Of-----+-------Midgaard---------------Cross---Eastern Road---Point
       Haon Dor              / | | | \              Roads             |
      /     |     Mob Factory  | | |  Machine            \        Gnome Village
-  Old    Asura               /  | |  Dreams               \
+  Old    Trol               /  | |  Dreams               \
  Marsh    Den           Sewer   |  \            Ruins of---Dwarf---Frigid Waste
                                 |    \Midgaard   Thalos    Forest         |
        Redferne's---Chain---Southern    River                |  \      Keep of
@@ -2009,7 +2009,7 @@ Grove---Galaxy              Midgaard   G'harne       |            \Holy
                             Miden'nir   Church   Mega-City  Canyon
                             (Goblins)  Catacombs    One
 
-Bu harita, Uzak Diyarlar'daki belli baþlý alanlarý içermekte olup, ölçeðe göre
+Bu harita, Mangus'daki belli baþlý alanlarý içermekte olup, ölçeðe göre
 çizilmemiþtir. Harita, alanlarýn diðer alanlara göre yaklaþýk konumlarýný
 belirtecek þekilde tasarlanmýþtýr.
 ~
@@ -2786,7 +2786,7 @@ Shop---Western-Road---Square---------Boulevard
 ~
 #3383
 harita uzak diyarlar batý~
-Batý Uzak Diyarlar'ýn haritasý~
+Batý Mangus'un haritasý~
 Kývrýlmýþ bir harita görüyorsun.~
 paper~
 map 0 A
@@ -2795,7 +2795,7 @@ map 0 A
 E
 harita uzak diyarlar batý~
 .
-                         * * * Western Anatolia  * * *
+                         * * *  Batý Mangus   * * *
                          = = ================== = =
         Mage
 Dragon  Tower						Plains
@@ -2809,7 +2809,7 @@ Tower    |   	 		Ciquala's Lair		  /|
       Forest Of Haon Dor-------/----+--------------------Midgaard--------Cross
 	  	/    |		|	     Chessboard -/|\| |		 Roads
 	      /	     |		|	    Mob-Factory  -| |\|
-     	    Old    Asura Den	|    	 		 /| | | \
+     	    Old    Trol Den	|    	 		 /| | | \
 	    Marsh    		|		    Sewer | | |  Goblin Str.hold
 			  Drakyri Isle		 Prison --| | \
 							    |   \	Cage & A
@@ -2830,8 +2830,8 @@ respect to the other areas. Type "areas" for a complete list with suggested
 levels and the authors.
 ~
 #3384
-harita uzak diyarlar doðu~
-Doðu Uzak Diyarlar'ýn haritasý~
+harita mangus doðu~
+Doðu Mangus'un haritasý~
 Kývrýlmýþ bir harita görüyorsun.~
 paper~
 map 0 A
@@ -2840,7 +2840,7 @@ map 0 A
 E
 harita uzak diyarlar doðu~
 .
-                         * * * East Anatolia  * * *
+                         * * * Doðu Mangus  * * *
                          = = =============== = =
 
 Olympus	King's Castle	Moria
@@ -2877,7 +2877,7 @@ suggested levels and the authors.
 ~
 #3385
 acemi harita~
-Acemiler için Doðu Uzak Diyarlar haritasý~
+Acemiler için Doðu Mangus haritasý~
 Kývrýlmýþ bir harita görüyorsun.~
 paper~
 map 0 A
@@ -2913,7 +2913,7 @@ acemi harita~
 ~
 #3386
 acemi harita~
-Acemiler için Batý Uzak Diyarlar haritasý~
+Acemiler için Batý Mangus haritasý~
 Kývrýlmýþ bir harita görüyorsun.~
 paper~
 map 0 A
@@ -3197,7 +3197,7 @@ map 0 A
 E
 siyah harita~
 .
-Asura Den			{10 - 15}
+Trol Den			{10 - 15}
 from MSM :>>>> 3s 2e 2s 6w n e s...
 
 Valley of The Elves		{5 - 20}

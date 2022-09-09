@@ -89,15 +89,15 @@ masterminds many evil operations.
 ghoul~
 ABC CDEFH 49
 #16007
-lefur pardus~
+lefur felar~
 Lefur~
-Kahverengimsi gri bir pardus dikkatle seni izliyor.
+Kahverengimsi gri bir felar dikkatle seni izliyor.
 ~
-Before you stands a pardus.  Much like a regular gnome
+Before you stands a felar.  Much like a regular gnome
 the only real difference is the fact that this gnome's skin is a brownish grey
 and he is going slightly bald.
 ~
-pardus~
+felar~
 AC E 19
 #16008
 ýsdarl tüccar~
@@ -860,35 +860,35 @@ Jiestis~
 Jiestis hiçbir þey çalmadýðýndan ve aldýklarýnýn parasýný ödediðinden emin
 olmak için seni izliyor.
 ~
-Jiestis is a pardus.  He sells many varieties of roots and
+Jiestis is a felar.  He sells many varieties of roots and
 mushrooms to those of the Underdark.  It is rumoured that some of his
 food has healing properties.  Jiestis is a small figure who is easy to
 overlook, yet he seems to be very very powerful, not a person to mess
 with.
 ~
-pardus~
+felar~
 AB D 49
 #16078
-pardus lefur~
+felar lefur~
 Lefur~
-Bir pardus sana kin ve güvensizlik dolu bakýþlar atýyor.
+Bir felar sana kin ve güvensizlik dolu bakýþlar atýyor.
 ~
-This pardus has taken sanctuary in the embassy.  By
+This felar has taken sanctuary in the embassy.  By
 the way he is acting you figure he is running from something.  He is
 dressed is dark grey clothing and stands a good five feet tall.
 ~
-pardus~
+felar~
 AG 0 17
 #16079
-pardus yüksek rütbeli~
-Yüksek rütbeli pardus~
-Yüksek rütbeli bir pardus geliþinle þaþýrmýþ görünüyor.
+felar yüksek rütbeli~
+Yüksek rütbeli felar~
+Yüksek rütbeli bir felar geliþinle þaþýrmýþ görünüyor.
 ~
-This is a pardus dignitary who is using the embassy as a place of rest.
+This is a felar dignitary who is using the embassy as a place of rest.
 He has just been rather shaken up by his visit to the drow city and has
 come here to find comfort in the safe walls of this building.  He is dressed
 in different shades of grey and sports a nice looking necklace ~
-pardus~
+felar~
 AG 0 16
 #16080
 lefur bekçi~
@@ -1265,15 +1265,15 @@ can become the most feared drow in the land
 human~
 ABR 0 26
 #16113
-pardus dövüþçü~
+felar dövüþçü~
 Hangharid~
-Bir pardus dövüþçü yatakta dinleniyor.
+Bir felar dövüþçü yatakta dinleniyor.
 ~
-This is Hangharid, a pardus fighter.  He has vanquished many foes and
+This is Hangharid, a felar fighter.  He has vanquished many foes and
 all his enemies fear him.  Even though he is a gnome, he has strength that
 rivals that of an ogre.
 ~
-pardus~
+felar~
 ABT 0 24
 #16114
 ýsdarl cleric~
@@ -2188,9 +2188,9 @@ potion 0 A
 15 'detect magic' 'detect poison' 'detect evil' ''
 10 2 100 P
 #16062
-pardus bacaklýklarý~
-pardus bacaklýklarý~
-Bir çift pardus bacaklýðý yerde uzanmýþ keþfedilmeyi bekliyor.~
+felar bacaklýklarý~
+felar bacaklýklarý~
+Bir çift felar bacaklýðý yerde uzanmýþ keþfedilmeyi bekliyor.~
 steel~
 armor G AF
 6 6 6 0 0
@@ -11495,9 +11495,9 @@ The street of the gods
 0 -1 16111
 S
 #16361
-Pardus Elçiliði Fuayesi~
+Felar Elçiliði Fuayesi~
 You are standing the foyer of the deep gnome presence in the Underdark.
-The pardus maintain this building for their own merchants and people
+The felar maintain this building for their own merchants and people
 should they come into trouble here.  The building has a low ceiling, about
 seven feet off the ground.  The walls and ground are earthy in colour and
 texture.
