@@ -265,40 +265,36 @@ int level90count = 0;
 					{
 						level90++;
 					}
-                printf_to_char(ch,"\n\rName(s): %s  Vnum: %d  Random: %s  Type: %s\n\r", obj->name, obj->pIndexData->vnum, obj->pIndexData->random_object ? "yes" : "no", item_type_name(obj));
+                printf_to_char(ch,"\n\r%s, %d, %d, %s\n\r", obj->name, obj->pIndexData->vnum, obj->level, item_type_name(obj));
 				if(obj->enchanted)
 				{
 				for ( paf = obj->affected; paf != NULL; paf = paf->next )
 				{
-                printf_to_char(ch,"Affects %s by %d, level %d", affect_loc_name( paf->location ), paf->modifier, paf->level);
-				if ( paf->duration > -1)
-                    printf_to_char(ch,", %d hours.\n\r", paf->duration);
-				else
-                    printf_to_char(ch,".\n\r");
+                printf_to_char(ch,"%s by %d\n\r", affect_loc_name( paf->location ), paf->modifier);
 				if (paf->bitvector)
 				{
 					switch(paf->where)
 					{
 					case TO_AFFECTS:
-                        printf_to_char(ch,"Adds %s affect.\n\r", affect_bit_name(paf->bitvector));
+                        printf_to_char(ch,"%s aff\n\r", affect_bit_name(paf->bitvector));
 						break;
                     case TO_WEAPON:
-                        printf_to_char(ch,"Adds %s weapon flags.\n\r",weapon_bit_name(paf->bitvector));
+                        printf_to_char(ch,"%s weapon flag\n\r",weapon_bit_name(paf->bitvector));
 						break;
 					case TO_OBJECT:
-                        printf_to_char(ch,"Adds %s object flag.\n\r", extra_bit_name(paf->bitvector));
+                        printf_to_char(ch,"%s obj flag\n\r", extra_bit_name(paf->bitvector));
 						break;
 					case TO_IMMUNE:
-                        printf_to_char(ch,"Adds immunity to %s.\n\r",imm_bit_name(paf->bitvector));
+                        printf_to_char(ch,"%s imm\n\r",imm_bit_name(paf->bitvector));
 						break;
 					case TO_RESIST:
-                        printf_to_char(ch,"Adds resistance to %s.\n\r",imm_bit_name(paf->bitvector));
+                        printf_to_char(ch,"%s res\n\r",imm_bit_name(paf->bitvector));
 						break;
 					case TO_VULN:
-                        printf_to_char(ch,"Adds vulnerability to %s.\n\r",imm_bit_name(paf->bitvector));
+                        printf_to_char(ch,"%s vuln\n\r",imm_bit_name(paf->bitvector));
 						break;
 					case TO_DETECTS:
-                        printf_to_char(ch,"Adds %s detection.\n\r",detect_bit_name(paf->bitvector));
+                        printf_to_char(ch,"%s det\n\r",detect_bit_name(paf->bitvector));
 						break;
 					default:
                         printf_to_char(ch,"Unknown bit %d: %d\n\r",paf->where,paf->bitvector);
