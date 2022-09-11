@@ -1470,7 +1470,9 @@ bool gorev_ekipmani_mi( OBJ_DATA *obj )
        || obj->pIndexData->vnum == QUEST_ITEM_YUZUK2 || obj->pIndexData->vnum == QUEST_ITEM_YUZUK3
        || obj->pIndexData->vnum == QUEST_ITEM_YUZUK4 || obj->pIndexData->vnum == QUEST_ITEM_SILAH1
        || obj->pIndexData->vnum == QUEST_ITEM_SILAH2 || obj->pIndexData->vnum == QUEST_ITEM4
-       || obj->pIndexData->vnum == QUEST_ITEM5
+       || obj->pIndexData->vnum == QUEST_ITEM5 || obj->pIndexData->vnum ==  QUEST_ITEM_MIGFER
+	   || obj->pIndexData->vnum == QUEST_ITEM_KOLLUK || obj->pIndexData->vnum ==  QUEST_ITEM_BACAKLIK
+	   || obj->pIndexData->vnum ==  QUEST_ITEM_KALKAN
      )
   {
     return TRUE;
