@@ -283,13 +283,13 @@ int level90count = 0;
                         printf_to_char(ch,"Adds %s affect.\n\r", affect_bit_name(paf->bitvector));
 						break;
                     case TO_WEAPON:
-                        printf_to_char(ch,"Adds %s weapon flags.\n",weapon_bit_name(paf->bitvector));
+                        printf_to_char(ch,"Adds %s weapon flags.\n\r",weapon_bit_name(paf->bitvector));
 						break;
 					case TO_OBJECT:
-                        printf_to_char(ch,"Adds %s object flag.\n", extra_bit_name(paf->bitvector));
+                        printf_to_char(ch,"Adds %s object flag.\n\r", extra_bit_name(paf->bitvector));
 						break;
 					case TO_IMMUNE:
-                        printf_to_char(ch,"Adds immunity to %s.\n",imm_bit_name(paf->bitvector));
+                        printf_to_char(ch,"Adds immunity to %s.\n\r",imm_bit_name(paf->bitvector));
 						break;
 					case TO_RESIST:
                         printf_to_char(ch,"Adds resistance to %s.\n\r",imm_bit_name(paf->bitvector));
@@ -319,6 +319,7 @@ int level90count = 0;
 		printf_to_char(ch,"level70: %3d/%3d\n\r",level70,level70count);
 		printf_to_char(ch,"level80: %3d/%3d\n\r",level80,level80count);
 		printf_to_char(ch,"level90: %3d/%3d\n\r",level90,level90count);
+        return;
 	}
 	
 	else if (!strcmp(arg, "dosya"))
