@@ -46,15 +46,15 @@ int obj_random_paf_modifier(int location, int level)
 	{
 		random_number = number_range(1,100);
 		
-		if(random_number<=40)
+		if(random_number<=30)
 			return number_range(10,UMAX(11,int(level)));
-		else if(random_number<=75)
+		else if(random_number<=65)
 			return number_range(10,UMAX(11,int(level*2)));
-		else if(random_number<=85)
+		else if(random_number<=75)
 			return number_range(10,UMAX(11,int(level*3)));
-		else if(random_number<=90)
+		else if(random_number<=83)
 			return number_range(10,UMAX(11,int(level*4)));
-		else if(random_number<=95)
+		else if(random_number<=90)
 			return number_range(10,UMAX(11,int(level*5)));
 		else
 			return number_range(10,UMAX(11,int(level*6)));
@@ -63,15 +63,15 @@ int obj_random_paf_modifier(int location, int level)
 	{
 		random_number = number_range(1,100);
 		
-		if(random_number<=50)
+		if(random_number<=30)
 			return number_range(1,UMAX(2,int(level/11)));
-		else if(random_number<=70)
+		else if(random_number<=45)
 			return number_range(1,UMAX(2,int(level/9)));
-		else if(random_number<=80)
+		else if(random_number<=60)
 			return number_range(1,UMAX(2,int(level/7)));
-		else if(random_number<=90)
+		else if(random_number<=75)
 			return number_range(1,UMAX(2,int(level/5)));
-		else if(random_number<=95)
+		else if(random_number<=90)
 			return number_range(1,UMAX(2,int(level/3)));
 		else
 			return number_range(1,UMAX(2,int(level/2)));
@@ -193,56 +193,56 @@ void obj_random_paf(OBJ_DATA *obj)
 	
 	if(obj->level < 10)
 	{
-		if(number_range(1,25)!=1)
+		if(number_range(1,15)!=1)
 		{
 			return;
 		}
 	}
 	else if(obj->level < 20)
 	{
-		if(number_range(1,20)!=1)
+		if(number_range(1,13)!=1)
 		{
 			return;
 		}
 	}
 	else if(obj->level < 30)
 	{
-		if(number_range(1,15)!=1)
+		if(number_range(1,11)!=1)
 		{
 			return;
 		}
 	}
 	else if(obj->level < 40)
 	{
-		if(number_range(1,12)!=1)
+		if(number_range(1,9)!=1)
 		{
 			return;
 		}
 	}
 	else if(obj->level < 50)
 	{
-		if(number_range(1,10)!=1)
+		if(number_range(1,7)!=1)
 		{
 			return;
 		}
 	}
 	else if(obj->level < 60)
 	{
-		if(number_range(1,8)!=1)
+		if(number_range(1,5)!=1)
 		{
 			return;
 		}
 	}
 	else if(obj->level < 70)
 	{
-		if(number_range(1,7)!=1)
+		if(number_range(1,3)!=1)
 		{
 			return;
 		}
 	}
 	else if(obj->level < 80)
 	{
-		if(number_range(1,4)!=1)
+		if(number_range(1,2)!=1)
 		{
 			return;
 		}
@@ -255,7 +255,7 @@ void obj_random_paf(OBJ_DATA *obj)
 		}
 	}
 	
-	while(number_range(1,10)<6)
+	while(number_range(1,10)<7)
 	{
 		obj->enchanted	= TRUE;
 		if(number_percent()<90)
