@@ -265,67 +265,51 @@ int level90count = 0;
 					{
 						level90++;
 					}
-				send_to_char( "\n\r", ch );
-				sprintf( buf, "Name(s): %s\n\r",obj->name );
-				send_to_char( buf, ch );
-				sprintf( buf, "Vnum: %d  Format: %s  Random: %s  Type: %s  Resets: %d\n\r",obj->pIndexData->vnum, obj->pIndexData->new_format ? "new" : "old", obj->pIndexData->random_object ? "yes" : "no",item_type_name(obj), obj->pIndexData->reset_num );
-				send_to_char( buf, ch );
+                printf_to_char(ch,"\n\rName(s): %s  Vnum: %d  Random: %s  Type: %s\n\r", obj->name, obj->pIndexData->vnum, obj->pIndexData->random_object ? "yes" : "no", item_type_name(obj));
 				if(obj->enchanted)
 				{
 				for ( paf = obj->affected; paf != NULL; paf = paf->next )
 				{
-				sprintf( buf, "Affects %s by %d, level %d",
-					affect_loc_name( paf->location ), paf->modifier,paf->level );
-				send_to_char(buf,ch);
+                printf_to_char(ch,"Affects %s by %d, level %d", affect_loc_name( paf->location ), paf->modifier, paf->level);
 				if ( paf->duration > -1)
-					sprintf(buf,", %d hours.\n\r",paf->duration);
+                    printf_to_char(ch,", %d hours.\n\r", paf->duration);
 				else
-					sprintf(buf,".\n\r");
-				send_to_char( buf, ch );
+                    printf_to_char(ch,".\n\r");
 				if (paf->bitvector)
 				{
 					switch(paf->where)
 					{
 					case TO_AFFECTS:
-						sprintf(buf,"Adds %s affect.\n",
-						affect_bit_name(paf->bitvector));
+                        printf_to_char(ch,"Adds %s affect.\n\r", affect_bit_name(paf->bitvector));
 						break;
-							case TO_WEAPON:
-								sprintf(buf,"Adds %s weapon flags.\n",
-									weapon_bit_name(paf->bitvector));
+                    case TO_WEAPON:
+                        printf_to_char(ch,"Adds %s weapon flags.\n",weapon_bit_name(paf->bitvector));
 						break;
 					case TO_OBJECT:
-						sprintf(buf,"Adds %s object flag.\n",
-						extra_bit_name(paf->bitvector));
+                        printf_to_char(ch,"Adds %s object flag.\n", extra_bit_name(paf->bitvector));
 						break;
 					case TO_IMMUNE:
-						sprintf(buf,"Adds immunity to %s.\n",
-						imm_bit_name(paf->bitvector));
+                        printf_to_char(ch,"Adds immunity to %s.\n",imm_bit_name(paf->bitvector));
 						break;
 					case TO_RESIST:
-						sprintf(buf,"Adds resistance to %s.\n\r",
-						imm_bit_name(paf->bitvector));
+                        printf_to_char(ch,"Adds resistance to %s.\n\r",imm_bit_name(paf->bitvector));
 						break;
 					case TO_VULN:
-						sprintf(buf,"Adds vulnerability to %s.\n\r",
-						imm_bit_name(paf->bitvector));
+                        printf_to_char(ch,"Adds vulnerability to %s.\n\r",imm_bit_name(paf->bitvector));
 						break;
 					case TO_DETECTS:
-						sprintf(buf,"Adds %s detection.\n\r",
-						detect_bit_name(paf->bitvector));
+                        printf_to_char(ch,"Adds %s detection.\n\r",detect_bit_name(paf->bitvector));
 						break;
 					default:
-						sprintf(buf,"Unknown bit %d: %d\n\r",
-						paf->where,paf->bitvector);
+                        printf_to_char(ch,"Unknown bit %d: %d\n\r",paf->where,paf->bitvector);
 						break;
 					}
-					send_to_char(buf,ch);
 				}
 				}
 				}
 			}
 		}
-		send_to_char( "\n\r\n\r", ch );
+        printf_to_char(ch,"\n\r\n\r");
 		printf_to_char(ch,"level10: %3d/%3d\n\r",level10,level10count);
 		printf_to_char(ch,"level20: %3d/%3d\n\r",level20,level20count);
 		printf_to_char(ch,"level30: %3d/%3d\n\r",level30,level30count);
