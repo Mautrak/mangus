@@ -1879,10 +1879,10 @@ bool is_safe_nomessage(CHAR_DATA *ch, CHAR_DATA *victim )
 
   /* level adjustement */
   if ( ch != victim && !IS_IMMORTAL(ch) && !IS_NPC(ch) && !IS_NPC(victim) &&
-  	( ch->level >= (victim->level + UMAX(4,ch->level/10 +2) )
-	  ||	 ch->level <= (victim->level - UMAX(4,ch->level/10 +2)) )&&
-  	( victim->level >= (ch->level + UMAX(4,victim->level/10 +2) )
-		|| victim->level <= (ch->level - UMAX(4,victim->level/10 +2))) )
+  	( ch->level >= (victim->level + UMAX(3,(int)(ch->level/18)) )
+	  ||	 ch->level <= (victim->level - UMAX(3,(int)(ch->level/18))) )&&
+  	( victim->level >= (ch->level + UMAX(3,(int)(victim->level/18)) )
+		|| victim->level <= (ch->level - UMAX(3,(int)(victim->level/18))) ))
     return TRUE;
 	
 	// oyuncu katline katilmak istemeyen oyunculari haric tutalim
