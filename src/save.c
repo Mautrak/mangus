@@ -475,7 +475,7 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
     AFFECT_DATA *paf;
     int i;
 
-	if ( gorev_ekipmani_mi( obj ))
+	if ( obj->pIndexData->vnum ==  86 || obj->pIndexData->vnum ==  95)
 		bug( "1-gorev ekipman save %d.", obj->pIndexData->vnum );
     /*
      * Slick recursion to write lists backwards,
@@ -488,7 +488,7 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
       if (obj->pIndexData->vnum == cabal_table[i].obj_vnum)
         return;
 
-	if ( gorev_ekipmani_mi( obj ))
+	if ( obj->pIndexData->vnum ==  86 || obj->pIndexData->vnum ==  95)
 		bug( "2-gorev ekipman save %d.", obj->pIndexData->vnum );
 
 
@@ -505,7 +505,7 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
 	return;
     }
 
-	if ( gorev_ekipmani_mi( obj ))
+	if ( obj->pIndexData->vnum ==  86 || obj->pIndexData->vnum ==  95)
 		bug( "3-gorev ekipman save %d.", obj->pIndexData->vnum );
 
     if ( gorev_ekipmani_mi( obj ) && strstr(obj->short_descr,ch->name) == NULL )
@@ -515,7 +515,7 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
   	 return;
   	}
 
-	if ( gorev_ekipmani_mi( obj ))
+	if ( obj->pIndexData->vnum ==  86 || obj->pIndexData->vnum ==  95)
 		bug( "4-gorev ekipman save %d.", obj->pIndexData->vnum );
 
     fprintf( fp, "#O\n" );
@@ -598,7 +598,7 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
 	break;
     }
 
-	if ( gorev_ekipmani_mi( obj ))
+	if ( obj->pIndexData->vnum ==  86 || obj->pIndexData->vnum ==  95)
 		bug( "5-gorev ekipman save %d.", obj->pIndexData->vnum );
 
     for ( paf = obj->affected; paf != NULL; paf = paf->next )
@@ -642,7 +642,7 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
 
     if ( obj->contains != NULL )
 	fwrite_obj( ch, obj->contains, fp, iNest + 1 );
-	if ( gorev_ekipmani_mi( obj ))
+	if ( obj->pIndexData->vnum ==  86 || obj->pIndexData->vnum ==  95)
 		bug( "6-gorev ekipman save %d.", obj->pIndexData->vnum );
     return;
 }
