@@ -1895,9 +1895,12 @@ bool spec_fight_hunter( CHAR_DATA *ch )
 bool spec_wishmaster( CHAR_DATA *ch )
 {
 	int i;
+
     if ( !IS_AWAKE(ch) )
         return FALSE;
+
 	i=number_range(0,150);
+
 	switch(i)
 	{
 		case 0:
