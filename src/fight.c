@@ -2844,7 +2844,7 @@ int xp_compute(CHAR_DATA *gch, CHAR_DATA *victim, int total_levels,int members)
 	/* alignment */
 	else if ((IS_EVIL(gch) && IS_GOOD(victim)) || (IS_EVIL(victim) && IS_GOOD(gch)))
 	{
-		xp = base_exp * 8/5;
+		xp = (int)((float)base_exp * 1.6);
 	}
 
 	else if ( IS_GOOD(gch) && IS_GOOD(victim) )
@@ -2874,18 +2874,18 @@ int xp_compute(CHAR_DATA *gch, CHAR_DATA *victim, int total_levels,int members)
 	}
 
     /* randomize the rewards */
-    xp = number_range (xp * 8/9, xp * 11/10);
+    xp = number_range ((int)((float)xp * 0.8), (int)((float)xp * 1.2));
 
     /* adjust for grouping */
-    xp = xp * gch->level/total_levels;
+    xp = (int)((float)xp * (float)gch->level/(float)total_levels);
 
     if (members == 2)
 	{
-		xp *= ( 20/10 );
+		xp *= 2;
 	}
     if (members == 3)
 	{
-		xp *= ( 30/10 );
+		xp *= 3;
 	}
 
     if (gch->level < KIDEMLI_OYUNCU_SEVIYESI)
@@ -2905,7 +2905,7 @@ int xp_compute(CHAR_DATA *gch, CHAR_DATA *victim, int total_levels,int members)
 		xp = UMIN((180 + dice(1,20)),xp);
 	}
 
-    xp += (xp * ( gch->max_hit - gch->hit )) / (gch->max_hit * 5 );
+    xp += (int)((float)(xp * ( gch->max_hit - gch->hit )) / (float)(gch->max_hit * 5 ));
 
 	if (IS_GOOD(gch))
 	{
@@ -2956,7 +2956,7 @@ int xp_compute(CHAR_DATA *gch, CHAR_DATA *victim, int total_levels,int members)
 	// Oyuncu katline dahil olan oyuncular %20 fazla TP kazansin.
 	if (gch->pcdata->oyuncu_katli == 1)
 	{
-		xp += ((int)(xp / 5));
+		xp += (int)((float)xp / (float)5);
 	}
 
 	if(IS_SET(gch->pcdata->dilek,DILEK_FLAG_TECRUBE))
@@ -2968,7 +2968,7 @@ int xp_compute(CHAR_DATA *gch, CHAR_DATA *victim, int total_levels,int members)
 	if(gch->pcdata->discord_id[0] == '\0')
 	{
 		printf_to_char( gch , "{CDiscord ID girmediðin için kazandýðýn TP azalýyor.{x\n\r" );
-		xp = int(xp / 3);
+		xp = int((float)xp / (float)3);
 	}
 
 	return xp;
