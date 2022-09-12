@@ -475,8 +475,6 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
     AFFECT_DATA *paf;
     int i;
 
-	if ( obj->pIndexData->vnum ==  86 || obj->pIndexData->vnum ==  95)
-		bug( "1-gorev ekipman save %d.", obj->pIndexData->vnum );
     /*
      * Slick recursion to write lists backwards,
      *   so loading them will load in forwards order.
@@ -487,10 +485,6 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
     for (i=1;i < MAX_CABAL;i++)
       if (obj->pIndexData->vnum == cabal_table[i].obj_vnum)
         return;
-
-	if ( obj->pIndexData->vnum ==  86 || obj->pIndexData->vnum ==  95)
-		bug( "2-gorev ekipman save %d.", obj->pIndexData->vnum );
-
 
     /*
      * Castrate storage characters.
@@ -505,18 +499,12 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
 	return;
     }
 
-	if ( obj->pIndexData->vnum ==  86 || obj->pIndexData->vnum ==  95)
-		bug( "3-gorev ekipman save %d.", obj->pIndexData->vnum );
-
     if ( gorev_ekipmani_mi( obj ) && strstr(obj->short_descr,ch->name) == NULL )
   	{
       act("$p yokoluyor!",ch,obj,NULL,TO_CHAR);
   	 extract_obj(obj);
   	 return;
   	}
-
-	if ( obj->pIndexData->vnum ==  86 || obj->pIndexData->vnum ==  95)
-		bug( "4-gorev ekipman save %d.", obj->pIndexData->vnum );
 
     fprintf( fp, "#O\n" );
     fprintf( fp, "Vnum %d\n",   	obj->pIndexData->vnum		);
@@ -598,9 +586,6 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
 	break;
     }
 
-	if ( obj->pIndexData->vnum ==  86 || obj->pIndexData->vnum ==  95)
-		bug( "5-gorev ekipman save %d.", obj->pIndexData->vnum );
-
     for ( paf = obj->affected; paf != NULL; paf = paf->next )
     {
 	if (paf->type < 0 || paf->type >= MAX_SKILL)
@@ -642,8 +627,6 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
 
     if ( obj->contains != NULL )
 	fwrite_obj( ch, obj->contains, fp, iNest + 1 );
-	if ( obj->pIndexData->vnum ==  86 || obj->pIndexData->vnum ==  95)
-		bug( "6-gorev ekipman save %d.", obj->pIndexData->vnum );
     return;
 }
 

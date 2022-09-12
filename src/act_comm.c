@@ -1145,20 +1145,6 @@ bool quit_org( CHAR_DATA *ch, char *argument, bool Count , bool Remort)
 
     update_total_played( ch );
 
-    for ( obj = object_list; obj != NULL; obj = obj_next )
-     {
-	obj_next = obj->next;
-	if (   obj->pIndexData->vnum == 84
-	    || obj->pIndexData->vnum == 85
-	    || obj->pIndexData->vnum == 86
-	    || obj->pIndexData->vnum == 97 )
-	{
-	 if (obj->extra_descr == NULL) extract_obj(obj);
-	 else if ( strstr( obj->extra_descr->description, ch->name) != NULL )
-		 extract_obj( obj);
-	}
-     }
-
     for( obj = ch->carrying; obj ; obj = obj_next)
 	{
 	 obj_next = obj->next_content;
@@ -1166,19 +1152,6 @@ bool quit_org( CHAR_DATA *ch, char *argument, bool Count , bool Remort)
 	   {
 		 extract_obj( obj);
 	   }
-	if (   obj->pIndexData->vnum == 84
-	    || obj->pIndexData->vnum == 85
-	    || obj->pIndexData->vnum == 86
-	    || obj->pIndexData->vnum == 97 )
-	 {
-	  if (obj->extra_descr == NULL) extract_obj(obj);
-	  else if ( strstr( obj->extra_descr->description, ch->name) !=NULL )
-		 extract_obj( obj);
-	  else {
-		obj_from_char(obj);
-		obj_to_room(obj,ch->in_room);
-	       }
-	 }
 	}
 
     for (vch=char_list; vch != NULL; vch = vch_next)
