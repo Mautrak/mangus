@@ -631,8 +631,8 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
      * Can't beat a dead char!
      * Guard against weird room-leavings.
      */
-    if ( victim->position == POS_DEAD || ch->in_room != victim->in_room )
-	return;
+	if ( victim->position == POS_DEAD || ch->in_room != victim->in_room )
+		return;
 
 	familya_check_improve(ch, victim);
 
@@ -1942,8 +1942,8 @@ bool check_parry( CHAR_DATA *ch, CHAR_DATA *victim )
     }
 
 
-    if ( number_percent( ) >= chance + victim->level - ch->level )
-	return FALSE;
+	if ( number_percent( ) >= chance + victim->level - ch->level )
+		return FALSE;
 
 	act("Sen $s saldýrýsýný karþýlýyorsun.",  ch, NULL, victim, TO_VICT    );
 	act( "$N saldýrýný karþýlýyor.", ch, NULL, victim, TO_CHAR    );
@@ -2050,8 +2050,8 @@ bool check_block( CHAR_DATA *ch, CHAR_DATA *victim )
      chance -= (victim->iclass == CLASS_WARRIOR) ? 0 : 10;
     }
 
-    if ( number_percent( ) >= chance + victim->level - ch->level )
-	return FALSE;
+	if ( number_percent( ) >= chance + victim->level - ch->level )
+		return FALSE;
 
 	act( " Sen $s saldýrýsýný kalkanýnla karþýlýyorsun.",  ch, NULL, victim, TO_VICT    );
 	act( "$N saldýrýný kalkanýyla karþýlýyor.", ch,NULL,victim,TO_CHAR);
@@ -2159,8 +2159,8 @@ bool check_cross( CHAR_DATA *ch, CHAR_DATA *victim )
     }
 
 
-    if ( number_percent( ) >= chance + victim->level - ch->level )
-	return FALSE;
+	if ( number_percent( ) >= chance + victim->level - ch->level )
+		return FALSE;
 
 	act( "$s saldýrýsýný çapraz blokla karþýlýyorsun.",  ch, NULL, victim, TO_VICT    );
 	act("$N saldýrýný çapraz blokla karþýlýyor.", ch, NULL, victim, TO_CHAR    );
@@ -2237,8 +2237,8 @@ bool check_hand( CHAR_DATA *ch, CHAR_DATA *victim )
     }
 
 
-    if ( number_percent( ) >= chance + victim->level - ch->level )
-	return FALSE;
+	if ( number_percent( ) >= chance + victim->level - ch->level )
+		return FALSE;
 
 	act( "$s saldýrýsýný ellerinle karþýlýyorsun.",  ch, NULL, victim, TO_VICT    );
 	act( "$S elleri saldýrýný durduruyor.", ch, NULL, victim, TO_CHAR    );
@@ -2425,82 +2425,83 @@ void make_corpse( CHAR_DATA *ch )
 
 void death_cry( CHAR_DATA *ch )
 {
-  death_cry_org( ch, -1 );
+	death_cry_org( ch, -1 );
 }
 
 /*
- * Improved Death_cry contributed by Diavolo.
- */
+* Improved Death_cry contributed by Diavolo.
+*/
 void death_cry_org( CHAR_DATA *ch, int part )
 {
-    ROOM_INDEX_DATA *was_in_room;
-    const char *msg;
-    int door;
-    int vnum;
+	ROOM_INDEX_DATA *was_in_room;
+	const char *msg;
+	int door;
+	int vnum;
 
-    vnum = 0;
-		msg = "$s acý çýðlýðýný duyuyorsun.";
+	vnum = 0;
+	msg = "$s acý çýðlýðýný duyuyorsun.";
 
-    if ( part == -1 )
-      part = number_range(0,15);
+	if ( part == -1 )
+		part = number_range(0,15);
 
-    switch ( part )
-    {
-
+	switch ( part )
+	{
+		case  0:
 			msg  = "$n yere düþüyor... $n ÖLDÜ.";
-    case  1:
-	if (ch->material == 0)
-	{
-		msg  = "$s kaný zýrhýna sýçrýyor.";
-	    break;
+			break;
+		case  1:
+			if (ch->material == 0)
+			{
+				msg  = "$s kaný zýrhýna sýçrýyor.";
+				break;
+			}
+		case  2:
+			if (IS_SET(ch->parts,PART_GUTS))
+			{
+				msg = "$s baðýrsaklarý yere saçýlýyor.";
+				vnum = OBJ_VNUM_GUTS;
+			}
+		break;
+		case  3:
+			if (IS_SET(ch->parts,PART_HEAD))
+			{
+				msg  = "$s kopan kafasý yerde yuvarlanýyor.";
+				vnum = OBJ_VNUM_SEVERED_HEAD;
+			}
+		break;
+		case  4:
+			if (IS_SET(ch->parts,PART_HEART))
+			{
+				msg  = "$s kalbi göðsünden dýþarý fýrlýyor.";
+				vnum = OBJ_VNUM_TORN_HEART;
+			}
+		break;
+		case  5:
+			if (IS_SET(ch->parts,PART_ARMS))
+			{
+				msg  = "$s kolu ölü gövdeden ayrýlýyor.";
+				vnum = OBJ_VNUM_SLICED_ARM;
+			}
+			break;
+		case  6:
+			if (IS_SET(ch->parts,PART_LEGS))
+			{
+				msg  = "$s bacaðý ölü gövdeden ayrýlýyor.";
+				vnum = OBJ_VNUM_SLICED_LEG;
+			}
+			break;
+		case 7:
+			if (IS_SET(ch->parts,PART_BRAINS))
+			{
+				msg = "$s kafasý kýrýlýyor ve beyin parçalarý üstüne sýçrýyor.";
+				vnum = OBJ_VNUM_BRAINS;
+			}
 	}
-    case  2:
-	if (IS_SET(ch->parts,PART_GUTS))
-	{
-		msg = "$s baðýrsaklarý yere saçýlýyor.";
-	    vnum = OBJ_VNUM_GUTS;
-	}
-	break;
-    case  3:
-	if (IS_SET(ch->parts,PART_HEAD))
-	{
-		msg  = "$s kopan kafasý yerde yuvarlanýyor.";
-	    vnum = OBJ_VNUM_SEVERED_HEAD;
-	}
-	break;
-    case  4:
-	if (IS_SET(ch->parts,PART_HEART))
-	{
-		msg  = "$s kalbi göðsünden dýþarý fýrlýyor.";
-	    vnum = OBJ_VNUM_TORN_HEART;
-	}
-	break;
-    case  5:
-	if (IS_SET(ch->parts,PART_ARMS))
-	{
-		msg  = "$s kolu ölü gövdeden ayrýlýyor.";
-	    vnum = OBJ_VNUM_SLICED_ARM;
-	}
-	break;
-    case  6:
-	if (IS_SET(ch->parts,PART_LEGS))
-	{
-		msg  = "$s bacaðý ölü gövdeden ayrýlýyor.";
-	    vnum = OBJ_VNUM_SLICED_LEG;
-	}
-	break;
-    case 7:
-	if (IS_SET(ch->parts,PART_BRAINS))
-	{
-		msg = "$s kafasý kýrýlýyor ve beyin parçalarý üstüne sýçrýyor.";
-	    vnum = OBJ_VNUM_BRAINS;
-	}
-    }
 
-    act( msg, ch, NULL, NULL, TO_ROOM );
+	act( msg, ch, NULL, NULL, TO_ROOM );
 
-    if ( vnum != 0 )
-    {
+	if ( vnum != 0 )
+	{
 	char buf[MAX_STRING_LENGTH];
 	OBJ_DATA *obj;
 	char *name;
@@ -2521,40 +2522,40 @@ void death_cry_org( CHAR_DATA *ch, int part )
 
 	if (obj->item_type == ITEM_FOOD)
 	{
-	    if (IS_SET(ch->form,FORM_POISON))
-		obj->value[3] = 1;
-	    else if (!IS_SET(ch->form,FORM_EDIBLE))
-		obj->item_type = ITEM_TRASH;
+	if (IS_SET(ch->form,FORM_POISON))
+	obj->value[3] = 1;
+	else if (!IS_SET(ch->form,FORM_EDIBLE))
+	obj->item_type = ITEM_TRASH;
 	}
 
 	obj_to_room( obj, ch->in_room );
-    }
-
-		if ( IS_NPC(ch) )
-	{
-		msg = "Birþeyin acý çýðlýðýný duyuyorsun.";
-	}
-    else
-	{
-		msg = "Birinin acý çýðlýðýný duyuyorsun.";
 	}
 
-    was_in_room = ch->in_room;
-    for ( door = 0; door <= 5; door++ )
-    {
+	if ( IS_NPC(ch) )
+	{
+	msg = "Birþeyin acý çýðlýðýný duyuyorsun.";
+	}
+	else
+	{
+	msg = "Birinin acý çýðlýðýný duyuyorsun.";
+	}
+
+	was_in_room = ch->in_room;
+	for ( door = 0; door <= 5; door++ )
+	{
 	EXIT_DATA *pexit;
 
 	if ( ( pexit = was_in_room->exit[door] ) != NULL
 	&&   pexit->u1.to_room != NULL
 	&&   pexit->u1.to_room != was_in_room )
 	{
-	    ch->in_room = pexit->u1.to_room;
-	    act( msg, ch, NULL, NULL, TO_ROOM );
+	ch->in_room = pexit->u1.to_room;
+	act( msg, ch, NULL, NULL, TO_ROOM );
 	}
-    }
-    ch->in_room = was_in_room;
+	}
+	ch->in_room = was_in_room;
 
-    return;
+	return;
 }
 
 

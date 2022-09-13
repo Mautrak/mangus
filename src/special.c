@@ -1894,22 +1894,22 @@ bool spec_fight_hunter( CHAR_DATA *ch )
 
 bool spec_wishmaster( CHAR_DATA *ch )
 {
-	int i;
+    int i;
 
     if ( !IS_AWAKE(ch) )
         return FALSE;
 
-	i=number_range(0,150);
+    i=number_range(0,150);
 
-	switch(i)
-	{
-		case 0:
-			do_say(ch, (char*)"Bir dilek tutmak istemez misin? Öyleyse dilek listeme bakmalýsýn.");
-			return TRUE;
-		case 1:
-			do_say(ch, (char*)"Uygun bir ücrete harika bir dilek dilemek istemez misin? Listeme bakmalýsýn.");
-			return TRUE;
-	}
+    switch(i)
+    {
+        case 0:
+            do_say(ch, (char*)"Bir dilek tutmak istemez misin? Öyleyse dilek listeme bakmalýsýn.");
+            return TRUE;
+        case 1:
+            do_say(ch, (char*)"Uygun bir ücrete harika bir dilek dilemek istemez misin? Listeme bakmalýsýn.");
+            return TRUE;
+    }
     return FALSE;
 }
 
