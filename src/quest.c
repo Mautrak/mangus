@@ -1581,6 +1581,12 @@ if ( argument[0] == '\0' )
 		{
 			continue;
 		}
+
+		// gorev esyalarini soylemesin
+		if(gorev_ekipmani_mi(obj))
+		{
+			continue;
+		}
 		
 		zararzari=0;
 		actoplam=0;
@@ -1620,6 +1626,7 @@ if ( argument[0] == '\0' )
 				}
 
 			}//if (!obj->enchanted)
+			
 			if(obj->item_type==ITEM_ARMOR)
 			{
 				actoplam = obj->value[0] + obj->value[1] + obj->value[2] + obj->value[3];

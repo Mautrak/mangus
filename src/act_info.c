@@ -1455,7 +1455,7 @@ void do_look( CHAR_DATA *ch, char *argument )
   if ( arg1[0] == '\0' || !str_cmp( arg1, "auto" ) )
   {
     /* 'look' or 'look auto' */
-    printf_to_char( ch, "{c%s{x", ch->in_room->name );
+    printf_to_char( ch, "{y%s{x", ch->in_room->name );
     switch(ch->in_room->sector_type)
     {
       case SECT_INSIDE:
