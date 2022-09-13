@@ -1670,50 +1670,56 @@ void unequip_char( CHAR_DATA *ch, OBJ_DATA *obj )
     obj->wear_loc	 = -1;
 
     if (!obj->enchanted)
-	for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
-	    if ( paf->location == APPLY_SPELL_AFFECT )
-	    {
-	        for ( lpaf = ch->affected; lpaf != NULL; lpaf = lpaf_next )
-	        {
-		    lpaf_next = lpaf->next;
-		    if ((lpaf->type == paf->type) &&
-		        (lpaf->level == paf->level) &&
-		        (lpaf->location == APPLY_SPELL_AFFECT))
-		    {
-		        affect_remove( ch, lpaf );
-			lpaf_next = NULL;
-		    }
-	        }
-	    }
-	    else
-	    {
-	        affect_modify( ch, paf, FALSE );
-		affect_check(ch,paf->where,paf->bitvector);
-	    }
+    {
+        for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
+        {
+            if ( paf->location == APPLY_SPELL_AFFECT )
+            {
+                for ( lpaf = ch->affected; lpaf != NULL; lpaf = lpaf_next )
+                {
+                    lpaf_next = lpaf->next;
+                    if ((lpaf->type == paf->type) &&
+                        (lpaf->level == paf->level) &&
+                        (lpaf->location == APPLY_SPELL_AFFECT))
+                    {
+                        affect_remove( ch, lpaf );
+                    lpaf_next = NULL;
+                    }
+                }
+            }
+            else
+            {
+                affect_modify( ch, paf, FALSE );
+                affect_check(ch,paf->where,paf->bitvector);
+            }
+        }
+    }
 
     for ( paf = obj->affected; paf != NULL; paf = paf->next )
-	if ( paf->location == APPLY_SPELL_AFFECT )
-	{
-	    bug ( "Norm-Apply: %d", 0 );
-	    for ( lpaf = ch->affected; lpaf != NULL; lpaf = lpaf_next )
-	    {
-		lpaf_next = lpaf->next;
-		if ((lpaf->type == paf->type) &&
-		    (lpaf->level == paf->level) &&
-		    (lpaf->location == APPLY_SPELL_AFFECT))
-		{
-		    bug ( "location = %d", lpaf->location );
-		    bug ( "type = %d", lpaf->type );
-		    affect_remove( ch, lpaf );
-		    lpaf_next = NULL;
-		}
-	    }
-	}
-	else
-	{
-	    affect_modify( ch, paf, FALSE );
-	    affect_check(ch,paf->where,paf->bitvector);
-	}
+    {
+        if ( paf->location == APPLY_SPELL_AFFECT )
+        {
+            bug ( "Norm-Apply: %d", 0 );
+            for ( lpaf = ch->affected; lpaf != NULL; lpaf = lpaf_next )
+            {
+                lpaf_next = lpaf->next;
+                if ((lpaf->type == paf->type) &&
+                    (lpaf->level == paf->level) &&
+                    (lpaf->location == APPLY_SPELL_AFFECT))
+                {
+                    bug ( "location = %d", lpaf->location );
+                    bug ( "type = %d", lpaf->type );
+                    affect_remove( ch, lpaf );
+                    lpaf_next = NULL;
+                }
+            }
+        }
+        else
+        {
+            affect_modify( ch, paf, FALSE );
+            affect_check(ch,paf->where,paf->bitvector);
+        }
+    }
 
     if ( get_light_char(ch) == NULL && ch->in_room != NULL
 	&& ( (obj->item_type == ITEM_LIGHT && obj->value[2] != 0)

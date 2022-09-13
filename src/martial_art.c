@@ -1495,7 +1495,7 @@ void do_assassinate( CHAR_DATA *ch, char *argument )
   CHAR_DATA *victim;
   char buf[MAX_STRING_LENGTH];
   int chance = 0;
-  OBJ_DATA *obj;
+
 
   if ( MOUNTED(ch) )
   {

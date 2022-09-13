@@ -2159,7 +2159,7 @@ OBJ_DATA *create_object_nocount(OBJ_INDEX_DATA *pObjIndex, int level )
  */
 OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
 {
-    AFFECT_DATA *paf;
+
     OBJ_DATA *obj;
     int i;
 

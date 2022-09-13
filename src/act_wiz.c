@@ -158,7 +158,7 @@ OBJ_DATA *obj;
 AFFECT_DATA *paf;
 int apply_location;
 char arg[MAX_INPUT_LENGTH];
-char buf[MAX_STRING_LENGTH];
+
 
 int level10 = 0;
 int level10count = 0;
@@ -4766,7 +4766,7 @@ void do_ikikat( CHAR_DATA *ch, char *argument )
     {
       printf_to_char(ch,"Ýki kat TP kapatýldý.");
       /* event */
-	  write_event_log("Ýki kat TP etkinliði kapatýldý.");
+	  write_event_log((char*)"Ýki kat TP etkinliði kapatýldý.");
     }
     return;
   }
@@ -4785,7 +4785,7 @@ void do_ikikat( CHAR_DATA *ch, char *argument )
     {
       printf_to_char(ch,"Ýki kat GP kapatýldý.");
       /* event */
-	  write_event_log("Ýki kat TP etkinliði kapatýldý.");
+	  write_event_log((char*)"Ýki kat TP etkinliði kapatýldý.");
     }
     return;
   }
