@@ -394,7 +394,7 @@ void do_kd( CHAR_DATA *ch, char *argument )
 
 void do_kdcevapla( CHAR_DATA *ch, char *argument )
 {
-    char arg[MAX_INPUT_LENGTH],buf[MAX_STRING_LENGTH];
+    char buf[MAX_STRING_LENGTH];
     CHAR_DATA *victim;
 
     if (IS_SET(ch->comm,COMM_NOKD))

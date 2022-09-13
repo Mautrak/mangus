@@ -175,7 +175,7 @@ int obj_random_paf_find_available_resistance(OBJ_DATA *obj)
 void obj_random_paf(OBJ_DATA *obj)
 {
 	int location=0;
-	int bitvector=0;
+
 	
 	if( !IS_SET( obj->wear_flags, ITEM_TAKE) )
 	{
