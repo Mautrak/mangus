@@ -5905,7 +5905,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"grip","kavrama"},            { 93, 93, 93,43,93,93,93,93,93,93,93,93,93},
+	{"grip","kavrama"},            { 93, 93, 93,43,93,93,93,93,93,50,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_grip,            SLOT( 0),        0,     18,

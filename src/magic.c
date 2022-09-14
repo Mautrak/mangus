@@ -4019,104 +4019,88 @@ void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     }
 
     if (!obj->enchanted)
-    for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
     {
-	if ( paf->location != APPLY_NONE && paf->modifier != 0 )
-	{
-    sprintf( buf, "%s etkisi %d birim.\n\r",
-		affect_loc_name( paf->location ), paf->modifier );
-	    send_to_char(buf,ch);
-            if (paf->bitvector)
-	    {
-                switch(paf->where)
-                {
-                    case TO_AFFECTS:
-                        sprintf(buf,"%s etkisi ekler.\n",
-                            affect_bit_name(paf->bitvector));
-                        break;
-                    case TO_OBJECT:
-                        sprintf(buf,"%s obje özelliği ekler.\n",
-                            extra_bit_name(paf->bitvector));
-                        break;
-                    case TO_IMMUNE:
-                        sprintf(buf,"%s bağışıklığı ekler.\n",
-                            imm_bit_name(paf->bitvector));
-                        break;
-					case TO_RESIST:
-                        sprintf(buf,"%s direnci ekler.\n\r",
-                            imm_bit_name(paf->bitvector));
-                        break;
-                    case TO_VULN:
-						sprintf(buf,"%s dayanıksızlığı ekler.\n\r",
-                            imm_bit_name(paf->bitvector));
-                        break;
-                    case TO_DETECTS:
-						sprintf(buf,"%s saptaması ekler.\n\r",
-                            detect_bit_name(paf->bitvector));
-                        break;
-                    default:
-                        sprintf(buf,"Bilinmeyen bit %d: %d\n\r",
-                            paf->where,paf->bitvector);
-                        break;
-                }
-	        send_to_char( buf, ch );
-	    }
-	}
-    }
-
-    for ( paf = obj->affected; paf != NULL; paf = paf->next )
-    {
-	if ( paf->location != APPLY_NONE && paf->modifier != 0 )
-	{
-    sprintf( buf, "%s etkisi %d birim",
-	    	affect_loc_name( paf->location ), paf->modifier );
-	    send_to_char( buf, ch );
-	    if ( paf->duration > -1)
-      sprintf(buf,", %d saat.\n\r",paf->duration);
-            else
-                sprintf(buf,".\n\r");
-	    send_to_char(buf,ch);
+        for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
+        {
+            if ( paf->location != APPLY_NONE && paf->modifier != 0 )
+            {
+                printf_to_char(ch,"%s etkisi %d birim.\n\r", affect_loc_name( paf->location ), paf->modifier );
+            }
 
             if (paf->bitvector)
             {
                 switch(paf->where)
                 {
                     case TO_AFFECTS:
-                    sprintf(buf,"%s etkisi ekler.\n",
-                            affect_bit_name(paf->bitvector));
+                        printf_to_char(ch,"%s etkisi ekler.\n\r",affect_bit_name(paf->bitvector));
                         break;
                     case TO_OBJECT:
-                    sprintf(buf,"%s obje etkisi ekler.\n",
-			    extra_bit_name(paf->bitvector));
+                        printf_to_char(ch,"%s eşya özelliği ekler.\n\r",extra_bit_name(paf->bitvector));
                         break;
-		    case TO_WEAPON:
-			sprintf(buf,"Adds %s weapon flags.\n",
-			    weapon_bit_name(paf->bitvector));
-			break;
-      case TO_IMMUNE:
-          sprintf(buf,"%s bağışıklığı ekler.\n",
-              imm_bit_name(paf->bitvector));
-          break;
-      case TO_RESIST:
-          sprintf(buf,"%s direnci ekler.\n\r",
-              imm_bit_name(paf->bitvector));
-          break;
-      case TO_VULN:
-          sprintf(buf,"%s dayanıksızlığı ekler.\n\r",
-              imm_bit_name(paf->bitvector));
-          break;
-      case TO_DETECTS:
-          sprintf(buf,"%s saptaması ekler.\n\r",
-              detect_bit_name(paf->bitvector));
-          break;
-      default:
-          sprintf(buf,"Bilinmeyen bit %d: %d\n\r",
-			    paf->where,paf->bitvector);
+                    case TO_WEAPON:
+                        printf_to_char(ch,"%s silah özelliği ekler.\n\r",weapon_bit_name(paf->bitvector));
+                        break;
+                    case TO_IMMUNE:
+                        printf_to_char(ch,"%s bağışıklığı ekler.\n\r",imm_bit_name(paf->bitvector));
+                        break;
+                    case TO_RESIST:
+                        printf_to_char(ch,"%s direnci ekler.\n\r",imm_bit_name(paf->bitvector));
+                        break;
+                    case TO_VULN:
+                        printf_to_char(ch,"%s dayanıksızlığı ekler.\n\r",imm_bit_name(paf->bitvector));
+                        break;
+                    case TO_DETECTS:
+                        printf_to_char(ch,"%s saptaması ekler.\n\r",detect_bit_name(paf->bitvector));
+                        break;
+                    default:
+                        printf_to_char(ch,"Bilinmeyen bit %d: %d\n\r",paf->where,paf->bitvector);
                         break;
                 }
-                send_to_char(buf,ch);
             }
-	}
+        }
+    }
+
+    for ( paf = obj->affected; paf != NULL; paf = paf->next )
+    {
+        if ( paf->location != APPLY_NONE && paf->modifier != 0 )
+        {
+            printf_to_char(ch,"%s etkisi %d birim", affect_loc_name( paf->location ), paf->modifier );
+            if ( paf->duration > -1)
+                printf_to_char(ch,", %d saat.\n\r",paf->duration);
+            else
+                printf_to_char(ch,".\n\r");
+        }
+
+        if (paf->bitvector)
+        {
+            switch(paf->where)
+            {
+                case TO_AFFECTS:
+                    printf_to_char(ch,"%s etkisi ekler.\n\r",affect_bit_name(paf->bitvector));
+                    break;
+                case TO_OBJECT:
+                    printf_to_char(ch,"%s eşya özelliği ekler.\n\r",extra_bit_name(paf->bitvector));
+                    break;
+                case TO_WEAPON:
+                    printf_to_char(ch,"%s silah özelliği ekler.\n\r",weapon_bit_name(paf->bitvector));
+                    break;
+                case TO_IMMUNE:
+                    printf_to_char(ch,"%s bağışıklığı ekler.\n\r",imm_bit_name(paf->bitvector));
+                    break;
+                case TO_RESIST:
+                    printf_to_char(ch,"%s direnci ekler.\n\r",imm_bit_name(paf->bitvector));
+                    break;
+                case TO_VULN:
+                    printf_to_char(ch,"%s dayanıksızlığı ekler.\n\r",imm_bit_name(paf->bitvector));
+                    break;
+                case TO_DETECTS:
+                    printf_to_char(ch,"%s saptaması ekler.\n\r",detect_bit_name(paf->bitvector));
+                    break;
+                default:
+                    printf_to_char(ch,"Bilinmeyen bit %d: %d\n\r",paf->where,paf->bitvector);
+                    break;
+            }
+        }
     }
 
     return;
