@@ -28,7 +28,7 @@ long pazarlik_sonu_ucreti_hesapla(CHAR_DATA *ch, long cost, bool buy_or_sell)
         }
         else if(roll<=90)
         {
-            return buy_or_sell?UMAX(1,long(cost * 0.6)):UMAX(1,long(cost * 1.6)););
+            return buy_or_sell?UMAX(1,long(cost * 0.6)):UMAX(1,long(cost * 1.6));
         }
         else if(roll<=94)
         {
@@ -98,7 +98,7 @@ long hizmet_bedeli_odeme(CHAR_DATA *ch, CHAR_DATA *victim, long cost, bool buy_o
         }
         else if (long(cost_haggle*1.05) <= ch->pcdata->bank_s)
         {
-            ch->pcdata->silver -= long(cost_haggle*1.05);
+            ch->pcdata->bank_s -= long(cost_haggle*1.05);
             //printf_to_char(ch,"Banka hesabýndan komisyon dahil %ld akçe ödeme yapýyorsun.\n\r",long(cost_haggle*1.05));
         }
         else
