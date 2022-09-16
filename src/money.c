@@ -81,7 +81,7 @@ long hizmet_bedeli_odeme(CHAR_DATA *ch, CHAR_DATA *victim, long cost, bool buy_o
 
     if(cost != cost_haggle)
     {
-        printf_to_char(ch,"Pazarlýkla ediyorsun.\n\r",cost_haggle);
+        printf_to_char(ch,"Pazarlýk ediyorsun.\n\r",cost_haggle);
     }
 
     //buy
@@ -127,7 +127,7 @@ long hizmet_bedeli_odeme(CHAR_DATA *ch, CHAR_DATA *victim, long cost, bool buy_o
             }
             else
             {
-                //printf_to_char(ch,"%s sana %ld akçe ödüyor.\n\r",victim->name,cost_haggle);
+                printf_to_char(ch,"%s sana %ld akçe ödüyor.\n\r",victim->name,cost_haggle);
                 victim->silver -= cost_haggle;
                 ch->silver += cost_haggle; 
                 if (victim->silver < 0)
