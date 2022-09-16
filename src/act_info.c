@@ -3612,7 +3612,7 @@ void do_identify( CHAR_DATA *ch, char *argument )
 		return;
 	}
 
-  cost = hizmet_bedeli_odeme(ch, keeper, cost , FALSE);
+  cost = hizmet_bedeli_odeme(ch, NULL, cost , FALSE);
 
 	if(cost == -1)
 	{
