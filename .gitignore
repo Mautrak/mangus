@@ -2,3 +2,6 @@
 .vscode/dryrun.log
 .vscode/settings.json
 .vscode/targets.log
+*.o
+area/mangus
+src/mangus
