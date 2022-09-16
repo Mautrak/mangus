@@ -3837,7 +3837,7 @@ void do_buy( CHAR_DATA *ch, char *argument )
 	    return;
 	}
 
-	cost = hizmet_bedeli_odeme(ch, keeper, cost*number , TRUE);
+	cost = hizmet_bedeli_odeme(ch, keeper, cost*number , FALSE);
 
 	if(cost == -1)
 	{
