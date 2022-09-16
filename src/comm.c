@@ -1595,9 +1595,17 @@ int search_sockets(DESCRIPTOR_DATA *inp)
       if ( d->character && inp->character )
       {
 		if (!strcmp(inp->character->name,d->character->name))
+		{
 			continue;
+		}
 		if (get_trust(inp->character) >= LEVEL_IMMORTAL || get_trust(d->character) >= LEVEL_IMMORTAL)
+		{
 			continue;
+		}
+		if(inp->character->pcdata->discord_id[0] != '\0' && d->character->pcdata->discord_id[0] != '\0' && strcmp(inp->character->pcdata->discord_id,d->character->pcdata->discord_id))
+		{	
+			continue;
+		}
       }
       return 1;
    }

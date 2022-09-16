@@ -1,35 +1,38 @@
 #PLAYER
 Name Jai~
 Id   1566157726
-LogO 1566160101
+Discord ~
+Birth  1648678532
+LogO 1663367863
 Vers 7
 Etho 3
 Home 0
 Cab  0
 Dead 0
+GhostCounter 0
 Ques 0
-Prom <%n: %hhp %mm %vmv Opp:<%o>> ~
+Prom Yp:%h/%H Mp:%m/%M Hp:%v/%V <%o>{x ~
 Race yeg~
 Sex  1
 Cla  5
 Levl 100
-Plyd 0
-Not  0 0 0 0 0
+OyuncuKatli 0
+YeniyasamSayisi 0
+Plyd 837
 Scro 22
-Room 3001
+Room 3700
 HMV  97 131 123
-Gold 0
 Silv 114
 Banks 0
-Bankg 0
-Exp  6274
+Dilek 0
+Exp  130000
 Act  DEFIOQ
 Comm NO
 Pos  8
 Prac 10
 Alig  -1000
 Attr 23 19 19 22 22 20
-Pass JaDleNmPQniqQ~
+Pass XesCiLmmHFJ7Y~
 Titl , Cani~
 Pnts 550
 TSex 1
@@ -43,6 +46,7 @@ Sk 1 'blindness'
 Sk 1 'charm person'
 Sk 1 'chill touch'
 Sk 1 'cure light'
+Sk 1 'poison'
 Sk 1 'curse'
 Sk 1 'deadly venom'
 Sk 1 'deafen'
@@ -63,7 +67,6 @@ Sk 1 'mind wrack'
 Sk 1 'mind wrench'
 Sk 1 'mysterious dream'
 Sk 1 'plague'
-Sk 1 'poison'
 Sk 1 'protection good'
 Sk 1 'power word stun'
 Sk 1 'sleep'
@@ -107,12 +110,14 @@ Sk 100 'pick lock'
 Sk 75 'recall'
 Sk 1 'scrolls'
 Sk 1 'wands'
-Affc 'bless'   0  27   7  -3  24          0
-Affc 'bless'   0  28   7   3  18          0
+Fm 75 'yeg'
+QuestPractice 0
 Relig 0
 Haskilled 31
 Antkilled 0
 PlayLog 1
+258 4
+258 9
 -1
 End
 

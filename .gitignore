@@ -5,3 +5,7 @@
 *.o
 area/mangus
 src/mangus
+gods/*
+log/ip/*
+player/*
+data/discord_users
