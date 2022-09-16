@@ -3611,13 +3611,33 @@ void do_identify( CHAR_DATA *ch, char *argument )
 		send_to_char(  "Buralarda o þeyden anlayan yok.\n\r", ch);
 		return;
 	}
-
-  cost = hizmet_bedeli_odeme(ch, keeper, cost , FALSE);
-
-	if(cost == -1)
+	
+	if(number_percent()<= get_skill(ch, gsn_haggle))
 	{
-		printf_to_char(ch,"Ödemede sorun çýktýðý için alýþveriþ yapamadýn.\n\r");
+		if(number_percent()>90)
+		{
+			cost = 10;
+		}
+		else
+		{
+			cost = 40;
+		}
+	}
+
+	if (IS_IMMORTAL(ch))
+	{
+		act( "$n sana bakýyor!\n\r", rch, obj, ch, TO_VICT );
+	}
+	else if (ch->silver < cost)
+	{
+		act( "$n $p'yi tanýmlamaya devam ediyor.",rch, obj, 0, TO_ROOM );
+		printf_to_char(ch,"Yeterli akçen yok.\n\r");
 		return;
+	}
+	else
+	{
+		ch->silver -= cost;
+		printf_to_char(ch,"Aldýðýn hizmet için %d akçe ödüyorsun.\n\r", cost);
 	}
 
 	act( "$n $p üzerine bilge bir bakýþ fýrlatýyor.", rch, obj, 0, TO_ROOM );

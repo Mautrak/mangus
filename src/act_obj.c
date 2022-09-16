@@ -3652,20 +3652,20 @@ void do_buy( CHAR_DATA *ch, char *argument )
 	{
  	 cost = 10 * pet->level * pet->level;
 
-	if ( ch->level < pet->level + 5)
-	{
-		send_to_char("O hayvana hükmedecek güçte deðilsin.\n\r", ch );
-		return;
-	}
+	 if ( ch->silver < cost )
+	 {
+     send_to_char( "Onu satýn almaya gücün yetmez.\n\r", ch );
+	    return;
+	 }
 
-	cost = hizmet_bedeli_odeme(ch, NULL, cost , TRUE);
+	 if ( ch->level < pet->level + 5)
+	 {
+	    send_to_char(
+        "O hayvana hükmedecek güçte deðilsin.\n\r", ch );
+	    return;
+	 }
 
-	if(cost == -1)
-	{
-		printf_to_char(ch,"Ödemede sorun çýktýðý için alýþveriþ yapamadýn.\n\r");
-		return;
-	}
-
+	 deduct_cost(ch,cost);
 	 pet = create_mobile( pet->pIndexData, NULL );
 	 pet->comm = COMM_NOTELL|COMM_NOSHOUT|COMM_NOCHANNELS;
 
@@ -3684,6 +3684,12 @@ void do_buy( CHAR_DATA *ch, char *argument )
 
  	cost = 10 * pet->level * pet->level;
 
+	if ( ch->silver < cost )
+	{
+    send_to_char( "Onu satýn almaya gücün yetmez.\n\r", ch );
+	    return;
+	}
+
 	if ( ch->level < pet->level )
 	{
 	    send_to_char(
@@ -3691,14 +3697,18 @@ void do_buy( CHAR_DATA *ch, char *argument )
 	    return;
 	}
 
-	cost = hizmet_bedeli_odeme(ch, NULL, cost , TRUE);
-
-	if(cost == -1)
+	/* haggle */
+	roll = number_percent();
+	if (roll < get_skill(ch,gsn_haggle))
 	{
-		printf_to_char(ch,"Ödemede sorun çýktýðý için alýþveriþ yapamadýn.\n\r");
-		return;
+	    cost -= cost / 2 * roll / 100;
+      sprintf(buf,"pazarlýk ederek fiyatý %d sikkeye çekiyorsun.\n\r",cost);
+	    send_to_char(buf,ch);
+	    check_improve(ch,gsn_haggle,TRUE,4);
+
 	}
 
+	deduct_cost(ch,cost);
 	pet			= create_mobile( pet->pIndexData , NULL);
 	SET_BIT(pet->act, ACT_PET);
 	SET_BIT(pet->affected_by, AFF_CHARM);
@@ -3837,19 +3847,21 @@ void do_buy( CHAR_DATA *ch, char *argument )
 	    return;
 	}
 
-	cost = hizmet_bedeli_odeme(ch, keeper, cost*number , FALSE);
-
-	if(cost == -1)
+	/* haggle */
+	roll = number_percent();
+	if (!IS_OBJ_STAT(obj,ITEM_SELL_EXTRACT)
+	&& roll < get_skill(ch,gsn_haggle))
 	{
-		printf_to_char(ch,"Ödemede sorun çýktýðý için alýþveriþ yapamadýn.\n\r");
-		return;
+	    cost -= obj->cost / 2 * roll / 100;
+      act("$N ile pazarlýk ediyorsun.",ch,NULL,keeper,TO_CHAR);
+	    check_improve(ch,gsn_haggle,TRUE,4);
 	}
 
 	if (number > 1)
 	{
     sprintf(buf,"$n $p[%d] satýn alýyor.",number);
     act(buf,ch,obj,NULL,TO_ROOM);
-    sprintf(buf,"%d akçeye $p[%d] satýn alýyorsun.",cost,number);
+    sprintf(buf,"%d akçeye $p[%d] satýn alýyorsun.",cost * number,number);
     act(buf,ch,obj,NULL,TO_CHAR);
 	}
 	else
@@ -3858,6 +3870,8 @@ void do_buy( CHAR_DATA *ch, char *argument )
     sprintf(buf,"%d akçeye $p satýn alýyorsun.",cost);
 	    act( buf, ch, obj, NULL, TO_CHAR );
 	}
+	deduct_cost(ch,cost * number);
+	keeper->silver += cost * number;
 
 	for (count = 0; count < number; count++)
 	{
@@ -4028,20 +4042,36 @@ void do_sell( CHAR_DATA *ch, char *argument )
 		act(  "$n $p ile ilgilenmiyor.", keeper, obj, ch, TO_VICT );
 		return;
 	}
-
-	cost = hizmet_bedeli_odeme(ch, keeper, cost , FALSE);
-
-	if(cost == -1)
+	if ( cost > keeper->silver )
 	{
-		printf_to_char(ch,"Ödemede sorun çýktýðý için alýþveriþ yapamadýn.\n\r");
+		// Eger pazarligi varsa dukkancida da akce olsun.
+		if(number_percent() > get_skill(ch, gsn_haggle))
+		{
+		act("$n anlatýyor Üzgünüm '$p'nin ederini ödeyemem.",keeper,obj,ch,TO_VICT);
 		return;
+		}
 	}
 
 	act("$n $p satýyor.", ch, obj, NULL, TO_ROOM );
+	/* haggle */
+	roll = number_percent();
+	
+	if (!IS_OBJ_STAT(obj,ITEM_SELL_EXTRACT) && roll < get_skill(ch,gsn_haggle))
+	{
+		roll = get_skill(ch, gsn_haggle) + number_range(1, 20) - 10;
+		send_to_char("Esnafla pazarlýk ediyorsun.\n\r",ch);
+		cost += obj->cost / 2 * roll / 100;
+		cost = UMIN(cost,95 * get_cost(keeper,obj,TRUE) / 100);
+		cost = UMIN(cost,keeper->silver );
+		check_improve(ch,gsn_haggle,TRUE,4);
+	}
 
 	sprintf( buf, "$p eþyasýný %d akçeye satýyorsun.",cost);
 
 	act( buf, ch, obj, NULL, TO_CHAR );
+	ch->silver 	 += cost;
+
+	deduct_cost(keeper,cost);
 
 	if ( obj->item_type == ITEM_TRASH || IS_OBJ_STAT(obj,ITEM_SELL_EXTRACT))
 	{

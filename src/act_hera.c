@@ -1452,16 +1452,16 @@ void do_repair(CHAR_DATA *ch, char *argument)
     cost = ( (obj->level * 10) +
 		((obj->cost * (100 - obj->condition)) /100)    );
 
-    cost = hizmet_bedeli_odeme(ch, mob, cost , TRUE);
-
-    if(cost == -1)
+    if (cost > ch->silver)
     {
-      printf_to_char(ch,"Ödemede sorun çýktýðý için alýþveriþ yapamadýn.\n\r");
-      return;
+	do_say(mob,(char*)"Hizmetlerimden yararlanmak için yeterince paran yok.");
+	return;
     }
 
     WAIT_STATE(ch,PULSE_VIOLENCE);
 
+    ch->silver -= cost;
+    mob->silver += cost;
     sprintf(buf, "$N $n'dan %s'ý alýyor, tamir ediyor ve $n'a geri veriyor.", obj->short_descr);
     act(buf,ch,NULL,mob,TO_ROOM);
     sprintf(buf, "%s %s'ý alýp, tamir edip sana geri veriyor.\n\r", mob->short_descr, obj->short_descr);
@@ -1568,13 +1568,12 @@ void do_restring( CHAR_DATA *ch, char *argument )
 
 	cost += (obj->level * 1500);
 
-    cost = hizmet_bedeli_odeme(ch, mob, cost , FALSE);
-
-	if(cost == -1)
-	{
-		printf_to_char(ch,"Ödemede sorun çýktýðý için alýþveriþ yapamadýn.\n\r");
+    if (cost > ch->silver)
+    {
+      act("$N 'Hizmetlerim için yeterli akçen yok,' dedi.",
+		  ch,NULL,mob,TO_CHAR);
 		return;
-	}
+    }
 
 	if ( !str_prefix( arg1, "name" ) )
 	{
@@ -1601,6 +1600,8 @@ void do_restring( CHAR_DATA *ch, char *argument )
 
     WAIT_STATE(ch,PULSE_VIOLENCE);
 
+    ch->silver -= cost;
+    mob->silver += cost;
     sprintf(buf, "$N takes $n's item, tinkers with it, and returns it to $n.");
 	act(buf,ch,NULL,mob,TO_ROOM);
   sprintf(buf,"%s takes your item, tinkers with it, and returns %s to you.\n\r", mob->short_descr, obj->short_descr);
