@@ -3383,7 +3383,7 @@ int position_dice args( (void) );
 int sex_dice args( (void) );
 
 /* money.c */
-long hizmet_bedeli_odeme args((CHAR_DATA *ch, CHAR_DATA *victim, long cost, bool buy_or_sell));
+bool hizmet_bedeli_odeme args((CHAR_DATA *ch, CHAR_DATA *victim, long cost, bool buy_or_sell));
 
 /* obj_creator.c */
 void obj_random_paf		args( (OBJ_DATA *obj) );
