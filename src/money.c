@@ -75,13 +75,13 @@ long hizmet_bedeli_odeme(CHAR_DATA *ch, CHAR_DATA *victim, long cost, bool buy_o
     
     // bu noktadan sonra cost aslinda cost_haggle'dir.
     cost_haggle = cost;
-    
+
     if(IS_PC(ch))
         cost_haggle = pazarlik_sonu_ucreti_hesapla(ch,cost,buy_or_sell);
 
     if(cost != cost_haggle)
     {
-        printf_to_char(ch,"Pazarlýkla %ld akçede anlaþýyorsunuz.\n\r",cost_haggle);
+        printf_to_char(ch,"Pazarlýkla ediyorsun.\n\r",cost_haggle);
     }
 
     //buy
