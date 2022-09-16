@@ -137,6 +137,10 @@ long hizmet_bedeli_odeme(CHAR_DATA *ch, CHAR_DATA *victim, long cost, bool buy_o
                 }
             }
         }
+        else
+        {
+            printf_to_char(ch,"%s sana %ld akçe ödüyor.\n\r",victim->name,cost_haggle);
+        }
     }
 
     return cost_haggle;
