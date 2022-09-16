@@ -4,8 +4,6 @@
 #include <string.h>
 #include "merc.h"
 
-DECLARE_DO_FUN( do_say  	);
-
 // TRUE - buy
 // FALSE - sell
 long pazarlik_sonu_ucreti_hesapla(CHAR_DATA *ch, long cost, bool buy_or_sell)
