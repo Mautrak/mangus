@@ -1594,14 +1594,21 @@ int search_sockets(DESCRIPTOR_DATA *inp)
    {
       if ( d->character && inp->character )
       {
+		// baglantisi dusmus oyuncu tekrar girmek istediginde oyuna girebilsin.
 		if (!strcmp(inp->character->name,d->character->name))
 			continue;
+		// iki katakterden biri IMM level trusta sahipse ayni anda oyuna girebilsinler.
 		if (get_trust(inp->character) >= LEVEL_IMMORTAL || get_trust(d->character) >= LEVEL_IMMORTAL)
 			continue;
+		// iki karakterin de discord id'si tanimliysa ve her ikisininki de farkliysa her ikisi ayni anda oyunda olabilsin.
+		if(inp->character->pcdata->discord_id[0] != '\0' && d->character->pcdata->discord_id[0] != '\0' && strcmp(inp->character->pcdata->discord_id,d->character->pcdata->discord_id))
+			continue;
       }
+	  // multi uyarisi yap, ikinci karakter oyuna giremesin.
       return 1;
    }
  }
+ // ayni hosta sahip baska karakter yok, oyuna girebilsin.
  return 0;
 }
 

@@ -58,18 +58,29 @@ long pazarlik_sonu_ucreti_hesapla(CHAR_DATA *ch, long cost, bool buy_or_sell)
 
 // TRUE - buy
 // FALSE - sell
-bool hizmet_bedeli_odeme(CHAR_DATA *ch, CHAR_DATA *victim, long , bool buy_or_sell)
+long hizmet_bedeli_odeme(CHAR_DATA *ch, CHAR_DATA *victim, long cost, bool buy_or_sell)
 {
     int cost_haggle = 0;
     int roll = number_percent();
 
+    // ana karakter ch. Eger NULL ise fonksiyonu isletmeyelim.
+    if(ch == NULL)
+        return -1;
+
+    // eger ch bir NPC ise veya victim PC ise fonksiyonu isletmeyelim.
+    if(IS_NPC(ch) || (victim != NULL && IS_PC(victim)))
+        return -1;
+    
     if(IS_PC(ch))
         cost_haggle = pazarlik_sonu_ucreti_hesapla(ch,cost,buy_or_sell);
 
     if(cost != cost_haggle)
     {
-        printf_to_char(ch,"Pazarlýk ediyorsun. ");
+        printf_to_char(ch,"Fiyat konusunda pazarlýk ediyorsun.\n\r");
     }
+
+    // bu noktadan sonra cost aslinda cost_haggle'dir.
+    cost_haggle = cost;
 
     //buy
     if(buy_or_sell)
@@ -77,69 +88,50 @@ bool hizmet_bedeli_odeme(CHAR_DATA *ch, CHAR_DATA *victim, long , bool buy_or_se
         if (cost_haggle > ch->silver && long(cost_haggle*1.05) > ch->pcdata->bank_s)
         {
             printf_to_char(ch,"Ne üzerinde ne de banka hesabýnda bu ücreti karþýlayacak akçen yok.\n\r");
-            return FALSE;
+            return -1;
         }
 
         if (cost_haggle <= ch->silver)
         {
             ch->silver -= cost_haggle;
-            printf_to_char(ch,"%ld akçe ödeme yapýyorsun.\n\r",cost_haggle);
+            //printf_to_char(ch,"%ld akçe ödeme yapýyorsun.\n\r",cost_haggle);
         }
         else if (long(cost_haggle*1.05) <= ch->pcdata->bank_s)
         {
             ch->pcdata->silver -= long(cost_haggle*1.05);
-            printf_to_char(ch,"Banka hesabýndan komisyon dahil %ld akçe ödeme yapýyorsun.\n\r",long(cost_haggle*1.05));
+            //printf_to_char(ch,"Banka hesabýndan komisyon dahil %ld akçe ödeme yapýyorsun.\n\r",long(cost_haggle*1.05));
         }
         else
         {
-            printf_to_char(ch,"Ödemede sorun çýktýðý için alýþveriþten vazgeçiyorsun.\n\r");
-            return FALSE;
+            return -1;
         }
     }
     //sell
     else
     {
-        if ( IS_NPC(victim) )
+        if(victim != NULL)
         {
-            if( cost > victim->silver )
+            if( cost_haggle > victim->silver )
             {
-                if(number_percent() > get_skill(ch, gsn_haggle))
+                if(get_skill(ch, gsn_haggle) < 75)
                 {
                     do_say(victim,(char*)"Üzgünüm, bunun bedelini ödeyemem.");
-                    return FALSE;
+                    return -1;
                 }
             }
             else
             {
+                //printf_to_char(ch,"%s sana %ld akçe ödüyor.\n\r",victim->name,cost_haggle);
                 victim->silver -= cost_haggle;
-                ch->victim += cost_haggle; 
+                ch->silver += cost_haggle; 
+                if (victim->silver < 0)
+                {
+                    bug("deduct costs: silver %d < 0",victim->silver);
+                    victim->silver = 0;
+                }
             }
         }
     }
 
-    ch->silver 	 += cost;
-
-    if (cost >= ch->silver)
-    {
-        ch->silver -= cost;
-        printf_to_char(ch,"%ld akçe ödeme yapýyorsun.\n\r",cost);
-    }
-    else if (long(cost*1.05) >= ch->pcdata->bank_s)
-    {
-        ch->pcdata->silver -= long(cost*1.05);
-        printf_to_char(ch,"Banka hesabýndan komisyon dahil %ld akçe ödeme yapýyorsun.\n\r",long(cost*1.05));
-    }
-    else
-    {
-        printf_to_char(ch,"Ödemede sorun çýktýðý için alýþveriþten vazgeçiyorsun.\n\r");
-        return FALSE;
-    }
-
-    if(victim != NULL)
-    {
-        victim->silver += cost;
-        printf_to_char(victim,"%s sana %ld akçe ödüyor.\n\r",ch->name,cost);
-    }
-
-    return TRUE;
+    return cost_haggle;
 }

@@ -224,16 +224,15 @@ void do_heal(CHAR_DATA *ch, char *argument)
 	return;
     }
 
-    if ( cost > ch->silver )
+    cost = hizmet_bedeli_odeme(ch, mob, cost , TRUE);
+
+    if(cost == -1)
     {
-      act("Yeterli akçen yok.",ch,NULL,mob,TO_CHAR);
-	return;
+      printf_to_char(ch,"Ödemede sorun çýktýðý için alýþveriþ yapamadýn.\n\r");
+      return;
     }
 
     WAIT_STATE(ch,PULSE_VIOLENCE);
-
-    deduct_cost(ch,cost);
-    mob->silver += cost;
 
     act("$n mýrýldanýyor, '$T'.",mob,NULL,words,TO_ROOM);
     if (sn == -2)

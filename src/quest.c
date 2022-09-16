@@ -1553,17 +1553,17 @@ if ( argument[0] == '\0' )
 			cost = 80;
 		}
 	}
-	
-	if(ch->silver<cost)
+
+	cost = hizmet_bedeli_odeme(ch, NULL, 200 , TRUE);
+
+	if(cost == -1)
 	{
-		send_to_char("Yeterli akçen yok, bilgi veremem.\n\r",ch);
+		printf_to_char(ch,"Ödemede sorun çýktýðý için alýþveriþ yapamadýn.\n\r");
 		return;
 	}
-	else
-	{
-		ch->silver -= cost;
-		printf_to_char(ch,"Aldýðýn hizmet için %d akçe ödüyorsun.\n\r", cost);
-	}
+
+	printf_to_char(ch,"Aldýðýn hizmet için %d akçe ödüyorsun.\n\r", cost);
+
 
 	zz1=NULL;
 	zz2=NULL;
