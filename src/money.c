@@ -107,6 +107,10 @@ long hizmet_bedeli_odeme(CHAR_DATA *ch, CHAR_DATA *victim, long cost, bool buy_o
         {
             return -1;
         }
+        if(victim != NULL)
+        {
+            victim->silver += cost_haggle;
+        }
     }
     //sell
     else

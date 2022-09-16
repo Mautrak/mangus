@@ -3612,13 +3612,15 @@ void do_identify( CHAR_DATA *ch, char *argument )
 		return;
 	}
 
-  cost = hizmet_bedeli_odeme(ch, NULL, cost , FALSE);
+  cost = hizmet_bedeli_odeme(ch, NULL, cost , TRUE);
 
 	if(cost == -1)
 	{
 		printf_to_char(ch,"Ödemede sorun çýktýðý için alýþveriþ yapamadýn.\n\r");
 		return;
 	}
+
+  printf_to_char(ch,"Tanýmlama için %ld akçe ödüyorsun.\n\r",cost);
 
 	act( "$n $p üzerine bilge bir bakýþ fýrlatýyor.", rch, obj, 0, TO_ROOM );
 	spell_identify( 0, 0, ch, obj ,0);
