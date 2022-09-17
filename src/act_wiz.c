@@ -119,7 +119,7 @@ void do_cabal_scan( CHAR_DATA *ch, char *argument )
     if (IS_IMMORTAL(ch) || ch->cabal == i)
 	show = 1;
     else show = 0;
-    sprintf(buf1, " Cabal: %-11s, room %4d, item %4d, ptr: %-20s ",
+    sprintf(buf1, " Cabal: %-11s, room %4d, item %4d, ptr: %-40s ",
 	cabal_table[i].short_name,
         cabal_table[i].room_vnum,
         cabal_table[i].obj_vnum,
