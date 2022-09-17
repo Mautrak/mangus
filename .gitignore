@@ -2,11 +2,10 @@
 .vscode/dryrun.log
 .vscode/settings.json
 .vscode/targets.log
-*.o
+src/*.o
 area/mangus
 src/mangus
 gods/*
-log/ip/*
+log/*
 player/*
-data/discord_users
-log/kanal/*
+data

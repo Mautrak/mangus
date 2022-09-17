@@ -2934,7 +2934,7 @@ void do_hara( CHAR_DATA *ch, char *argument)
 }
 
 /*
- * ground strike
+* ground strike
 */
 int ground_strike( CHAR_DATA *ch, CHAR_DATA *victim,   int dam )
 {
@@ -2942,73 +2942,69 @@ int ground_strike( CHAR_DATA *ch, CHAR_DATA *victim,   int dam )
   AFFECT_DATA baf;
 
   if ( IS_NPC(ch) || get_skill( ch, gsn_ground_strike) < 2 )
-	return dam;
+    return dam;
 
   if ( ch->in_room->sector_type != SECT_HILLS
-		&& ch->in_room->sector_type != SECT_MOUNTAIN
-		&& ch->in_room->sector_type != SECT_FOREST
-		&& ch->in_room->sector_type != SECT_FIELD )
-      return dam;
+  && ch->in_room->sector_type != SECT_MOUNTAIN
+  && ch->in_room->sector_type != SECT_FOREST
+  && ch->in_room->sector_type != SECT_FIELD )
+    return dam;
 
   diceroll = number_range( 0, 100 );
-  if( victim -> level > ch -> level )
-      diceroll += ( victim->level - ch->level ) * 2;
-  if( victim -> level < ch -> level )
-      diceroll -= ( ch->level - victim->level );
 
-  if ( diceroll <= (get_skill( ch, gsn_ground_strike )/3) )
+  if( victim -> level > ch -> level )
+    diceroll += ( victim->level - ch->level ) * 2;
+  if( victim -> level < ch -> level )
+    diceroll -= ( ch->level - victim->level );
+
+  if ( diceroll <= (get_skill( ch, gsn_ground_strike )/2) )
   {
-      check_improve( ch, gsn_ground_strike, TRUE, 2 );
-      dam += dam * diceroll/200;
+    check_improve( ch, gsn_ground_strike, TRUE, 2 );
+    dam += (int)(dam * ((float)diceroll/(float)200));
+    printf_to_char(ch,"{gBirden {Gzemin kontrol {gbilgini kullanabileceðin fevkalade bir an yakalýyorsun.{x\n\r");
   }
 
-  if ( diceroll <= (get_skill(ch, gsn_ground_strike)/15) )
+  if ( diceroll <= (get_skill(ch, gsn_ground_strike)/12) )
   {
-      diceroll = number_percent( );
-      if( diceroll < 75 )
-      {
-        act_color( "$CZeminin hareket etmeye baþladýðýný hissediyorsun!$c",
-	     ch, NULL, victim, TO_VICT,POS_RESTING,CLR_RED);
-	act_color("$C$S ayaklarýnýn altýndaki zemini kontrolün altýna alýyorsun!$c",
-	     ch, NULL, victim, TO_CHAR,POS_RESTING,CLR_RED );
+    diceroll = number_percent( );
+    if( diceroll < 75 )
+    {
+      act_color( "$CZeminin hareket etmeye baþladýðýný hissediyorsun!$c", ch, NULL, victim, TO_VICT,POS_RESTING,CLR_RED);
+      act_color("$C$S ayaklarýnýn altýndaki zemini kontrolün altýna alýyorsun!$c", ch, NULL, victim, TO_CHAR,POS_RESTING,CLR_RED );
 
-        check_improve( ch, gsn_ground_strike, TRUE, 3 );
-	WAIT_STATE( victim, 2 * PULSE_VIOLENCE );
-	dam += (dam * number_range( 2, 5 )) / 5;
-	return dam;
-      }
-      else if( diceroll > 75 && diceroll < 95 )
-      {
-        act_color( "$C$s saldýrýsýyla kör oldun!$c", ch, NULL, victim,
-			TO_VICT ,POS_RESTING,CLR_BROWN);
-        act_color( "$CSaldýrýnla $M kör ettin!$c", ch, NULL, victim,
-			TO_CHAR,POS_RESTING,CLR_BROWN );
+      check_improve( ch, gsn_ground_strike, TRUE, 3 );
+      WAIT_STATE( victim, 2 * PULSE_VIOLENCE );
+      dam += (int)((float)(dam * number_range( 2, 5 )) / (float)4);
+      return dam;
+    }
+    else if( diceroll > 75 && diceroll < 95 )
+    {
+      act_color( "$C$s saldýrýsýyla kör oldun!$c", ch, NULL, victim, TO_VICT ,POS_RESTING,CLR_BROWN);
+      act_color( "$CSaldýrýnla $M kör ettin!$c", ch, NULL, victim, TO_CHAR,POS_RESTING,CLR_BROWN );
 
-	check_improve( ch, gsn_ground_strike, TRUE, 4 );
-	if (!IS_AFFECTED(victim,AFF_BLIND))
-	{
-          baf.type = gsn_dirt;
-	  baf.level = ch->level;
-	  baf.location = APPLY_HITROLL;
-	  baf.modifier = -4;
-	  baf.duration = number_range(1,5);
-	  baf.bitvector = AFF_BLIND;
-	  affect_to_char( victim, &baf );
-        }
-	dam += dam * number_range( 1, 2 );
-	return dam;
-      }
-      else if( diceroll > 95 )
+      check_improve( ch, gsn_ground_strike, TRUE, 4 );
+      if (!IS_AFFECTED(victim,AFF_BLIND))
       {
-        act_color( "$C$n kalbini söktü! AahH!!$c",
-             ch, NULL, victim, TO_VICT ,POS_RESTING,CLR_RED);
-        act_color( "$C$S kalbini söktün!  Eminim acýmýþtýr!$c",
-             ch, NULL, victim, TO_CHAR ,POS_RESTING,CLR_RED);
-
-	check_improve( ch, gsn_ground_strike, TRUE, 5 );
-	dam += dam * number_range( 2, 5 );
-	return dam;
+        baf.type = gsn_dirt;
+        baf.level = ch->level;
+        baf.location = APPLY_HITROLL;
+        baf.modifier = -(victim->level);
+        baf.duration = number_range(2,6);
+        baf.bitvector = AFF_BLIND;
+        affect_to_char( victim, &baf );
       }
+      dam += dam * number_range( 2, 3 );
+      return dam;
+    }
+    else if( diceroll > 95 )
+    {
+      act_color( "$C$n kalbini söktü! AahH!!$c", ch, NULL, victim, TO_VICT ,POS_RESTING,CLR_RED);
+      act_color( "$C$S kalbini söktün!  Eminim acýmýþtýr!$c", ch, NULL, victim, TO_CHAR ,POS_RESTING,CLR_RED);
+
+      check_improve( ch, gsn_ground_strike, TRUE, 5 );
+      dam += dam * number_range( 4, 6 );
+      return dam;
+    }
   }
 
   return dam;
