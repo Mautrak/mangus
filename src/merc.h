@@ -286,7 +286,7 @@ typedef void OPROG_FUN_AREA args((OBJ_DATA *obj));
 #define MAX_PC_RACE		   9
 /* unique ve null dahil */
 #define MAX_RACE		    83
-#define MAX_CABAL		    10
+#define MAX_CABAL		    9
 #define MAX_RELIGION		   5
 #define MAX_TIME_LOG		   14
 #define MIN_TIME_LIMIT		   600   /* 10 Hours */
