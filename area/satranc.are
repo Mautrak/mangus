@@ -173,7 +173,7 @@ zýrh siyah piyon~
 bir siyah piyon zýrhý~
 Bir siyah piyon zýrhý burada.~
 steel~
-armor J AD
+armor 0 AD
 5 5 5 0 2
 10 75 600 G
 #4201
@@ -181,7 +181,7 @@ zýrh beyaz piyon~
 bir beyaz piyon zýrhý~
 Bir beyaz piyon zýrhý burada.~
 steel~
-armor K AD
+armor 0 AD
 5 5 5 0 2
 10 75 600 G
 #4202
@@ -189,7 +189,7 @@ balta siyah piyon~
 bir siyah piyon baltasý~
 Bir siyah piyon baltasý burada.~
 steel~
-weapon J AN
+weapon 0 AN
 axe 2 7 chomp 0
 10 100 750 G
 #4203
@@ -197,7 +197,7 @@ balta beyaz piyon~
 bir beyaz piyon baltasý~
 Bir beyaz piyon baltasý burada.~
 steel~
-weapon K AN
+weapon 0 AN
 axe 2 7 chomp 0
 10 100 750 G
 #4204
@@ -205,7 +205,7 @@ zýrh siyah kale~
 bir siyah kale zýrhý~
 Bir siyah kale zýrhý burada.~
 stone~
-armor J AD
+armor 0 AD
 8 8 8 0 5
 25 70 1250 G
 A
@@ -217,7 +217,7 @@ zýrh beyaz kale~
 bir beyaz kale zýrhý~
 Bir beyaz kale zýrhý burada.~
 stone~
-armor K AD
+armor 0 AD
 8 8 8 0 5
 25 70 1250 G
 A
@@ -229,7 +229,7 @@ kargý siyah at~
 bir siyah at kargýsý~
 Bir siyah at kargýsý burada.~
 bronze~
-weapon BJ AN
+weapon B AN
 lance 5 5 pierce D
 17 50 2250 P
 A
@@ -241,7 +241,7 @@ kargý beyaz þövalye~
 bir beyaz at kargýsý~
 Bir beyaz at kargýsý burada.~
 bronze~
-weapon BK AN
+weapon B AN
 lance 5 5 pierce D
 17 50 2300 P
 A
@@ -253,7 +253,7 @@ asa siyah fil~
 bir siyah fil asasý~
 Bir siyah fil asasý burada.~
 wood~
-staff GJL AO
+staff GL AO
 20 5 5 'energy drain' 0
 23 20 3523 P
 #4210
@@ -261,7 +261,7 @@ siyah vezir taç~
 bir siyah vezir tacý~
 Bir siyah vezir tacý burada.~
 gold~
-armor AGJL AE
+armor AGL AE
 9 9 9 1 1
 32 50 5000 G
 A
@@ -273,7 +273,7 @@ beyaz vezir taç~
 bir beyaz vezir tacý~
 Bir beyaz vezir tacý burada.~
 gold~
-armor AGKL AE
+armor AGL AE
 9 9 9 1 1
 32 50 5000 G
 A
@@ -285,7 +285,7 @@ hükümdar siyah asa kral~
 bir siyah kral hükümdar asasý~
 Siyah kralýn hükümdar asasý burada.~
 gold~
-treasure JL AO
+treasure L AO
 0 0 0 0 0
 32 10 7900 P
 A
@@ -297,7 +297,7 @@ hükümdar beyaz asa kral~
 bir beyaz kral hükümdar asasý~
 Beyaz kralýn hükümdar asasý burada.~
 gold~
-treasure KL AO
+treasure L AO
 0 0 0 0 0
 32 10 7900 P
 A
@@ -342,7 +342,7 @@ döven siyah piyon~
 bir siyah piyon döveni~
 Bir siyah piyon döveni burada duruyor.~
 steel~
-weapon J AN
+weapon 0 AN
 flail 2 7 blast 0
 10 100 750 G
 #4219
@@ -350,7 +350,7 @@ döven beyaz piyon~
 bir beyaz piyon döveni~
 Bir beyaz piyon döveni burada duruyor.~
 steel~
-weapon K AN
+weapon 0 AN
 flail 2 6 blast 0
 10 100 750 G
 
@@ -359,7 +359,7 @@ kýrbaç siyah piyon~
 bir siyah piyon kýrbacý~
 Bir siyah piyon kýrbacý burada duruyor.~
 steel~
-weapon J AN
+weapon 0 AN
 whip 2 7 whip 0
 10 100 750 G
 #4221
@@ -367,7 +367,7 @@ kýrbaç beyaz piyon~
 bir beyaz piyon kýrbacý~
 Bir beyaz piyon kýrbacý burada duruyor.~
 steel~
-weapon K AN
+weapon 0 AN
 whip 2 6 whip 0
 10 100 750 G
 
@@ -376,7 +376,7 @@ asa siyah piyon~
 bir siyah piyon asasý~
 Bir siyah piyon asasý burada duruyor.~
 steel~
-weapon J AN
+weapon 0 AN
 staff 2 7 thrust 0
 10 100 750 G
 #4223
@@ -384,7 +384,7 @@ asa beyaz piyon~
 bir beyaz piyon asasý~
 Bir beyaz piyon asasý burada duruyor.~
 steel~
-weapon K AN
+weapon 0 AN
 staff 2 7 thrust 0
 10 100 750 G
 
@@ -393,7 +393,7 @@ teber siyah piyon~
 bir siyah piyon teberi~
 Bir siyah piyon teberi burada duruyor.~
 steel~
-weapon J AN
+weapon 0 AN
 polear 2 7 pierce 0
 10 100 750 G
 #4225
@@ -401,7 +401,7 @@ teber beyaz piyon~
 bir beyaz piyon teberi~
 Bir beyaz piyon teberi burada duruyor.~
 steel~
-weapon K AN
+weapon 0 AN
 polearm 2 7 pierce 0
 10 100 750 G
 
@@ -410,7 +410,7 @@ kýlýç siyah piyon~
 bir siyah piyon kýlýcý~
 Bir siyah piyon kýlýcý burada duruyor.~
 steel~
-weapon J AN
+weapon 0 AN
 sword 2 7 pierce 0
 10 100 750 G
 #4227
@@ -418,7 +418,7 @@ kýlýç beyaz piyon~
 bir beyaz piyon kýlýcý~
 Bir beyaz piyon kýlýcý burada duruyor.~
 steel~
-weapon K AN
+weapon 0 AN
 sword 2 7 pierce 0
 10 100 750 G#
 
@@ -427,7 +427,7 @@ kama siyah piyon~
 bir siyah piyon kamasý~
 Bir siyah piyon kamasý burada duruyor.~
 steel~
-weapon J AN
+weapon 0 AN
 dagger 2 7 pierce 0
 10 100 750 G
 #4229
@@ -435,7 +435,7 @@ kama beyaz piyon~
 bir beyaz piyon kamasý~
 Bir beyaz piyon kamasý burada duruyor.~
 steel~
-weapon K AN
+weapon 0 AN
 dagger 2 7 pierce 0
 10 100 750 G
 
@@ -444,7 +444,7 @@ tataryayý siyah piyon~
 bir siyah piyon tataryayý~
 Bir siyah piyon tataryayý burada duruyor.~
 steel~
-weapon J AN
+weapon 0 AN
 exotic 2 7 blast 0
 10 100 750 G
 #4231
@@ -452,7 +452,7 @@ tataryay beyaz piyon~
 bir beyaz piyon tataryayý~
 Bir beyaz piyon tataryayý burada duruyor.~
 steel~
-weapon K AN
+weapon 0 AN
 exotic 2 7 blast 0
 10 100 750 G
 
@@ -461,7 +461,7 @@ kalkan siyah piyon~
 bir siyah piyon kalkaný~
 Bir siyah piyon kalkaný burada duruyor.~
 steel~
-armor J AJ
+armor 0 AJ
 8 7 7 2 2
 10 30 1210 P
 #4233
@@ -469,7 +469,7 @@ kalkan beyaz piyon~
 bir beyaz piyon kalkaný~
 Bir beyaz piyon kalkaný burada duruyor.~
 steel~
-armor K AJ
+armor 0 AJ
 8 7 7 2 2
 10 30 1210 P
 
@@ -478,7 +478,7 @@ fular siyah piyon~
 bir siyah piyon fularý~
 Bir siyah piyon fularý burada duruyor.~
 cloth~
-armor J AC
+armor 0 AC
 5 7 7 1 1
 10 40 1510 P
 #4235
@@ -486,7 +486,7 @@ fular beyaz piyon~
 bir beyaz piyon fularý~
 Bir beyaz piyon fularý burada duruyor.~
 cloth~
-armor K AC
+armor 0 AC
 5 7 7 1 1
 10 40 1510 P
 
@@ -495,7 +495,7 @@ miðfer siyah piyon~
 bir siyah piyon miðferi~
 Bir siyah piyon miðferi burada duruyor.~
 leather~
-armor J AE
+armor 0 AE
 6 6 7 1 1
 10 50 1150 P
 #4237
@@ -503,7 +503,7 @@ miðfer beyaz piyon~
 bir beyaz piyon miðferi~
 Bir beyaz piyon miðferi burada duruyor.~
 leather~
-armor K AE
+armor 0 AE
 6 6 7 1 1
 10 50 1150 P
 
@@ -512,7 +512,7 @@ bacaklýk siyah piyon~
 bir çift siyah piyon bacaklýðý~
 Bir çift siyah piyon bacaklýðý burada duruyor.~
 leather~
-armor J AF
+armor 0 AF
 6 6 6 1 1
 10 30 1350 P
 #4239
@@ -520,7 +520,7 @@ bacaklýk beyaz piyon~
 bir çift beyaz piyon bacaklýðý~
 Bir çift beyaz piyon bacaklýðý burada duruyor.~
 leather~
-armor K AF
+armor 0 AF
 6 6 6 1 1
 10 30 1350 P
 
@@ -529,7 +529,7 @@ ayakkabý siyah piyon~
 bir çift siyah piyon ayakkabýsý~
 Bir çift siyah piyon ayakkabýsý burada duruyor.~
 leather~
-armor J AG
+armor 0 AG
 7 6 7 1 1
 10 130 1450 P
 #4241
@@ -537,7 +537,7 @@ ayakkabý beyaz piyon~
 bir çift beyaz piyon ayakkabýsý~
 Bir çift beyaz piyon ayakkabýsý burada duruyor.~
 leather~
-armor K AG
+armor 0 AG
 7 6 7 1 1
 10 130 1450 P
 
@@ -546,7 +546,7 @@ eldiven siyah piyon~
 bir çift siyah piyon eldiveni~
 Bir çift siyah piyon eldiveni burada duruyor.~
 leather~
-armor J AH
+armor 0 AH
 6 6 5 1 1
 10 80 950 P
 #4243
@@ -554,7 +554,7 @@ eldiven beyaz piyon~
 bir çift beyaz piyon eldiveni~
 Bir çift beyaz piyon eldiveni burada duruyor.~
 leather~
-armor K AH
+armor 0 AH
 6 6 5 1 1
 10 80 950 P
 
@@ -563,7 +563,7 @@ kolluk siyah piyon~
 bir çift siyah piyon kolluðu~
 Bir çift siyah piyon kolluðu burada duruyor.~
 leather~
-armor J AI
+armor 0 AI
 6 5 6 1 1
 10 90 1150 P
 #4245
@@ -571,7 +571,7 @@ kolluk beyaz piyon~
 bir çift beyaz piyon kolluðu~
 Bir çift beyaz piyon kolluðu burada duruyor.~
 leather~
-armor K AI
+armor 0 AI
 6 5 6 1 1
 10 90 1150 P
 
@@ -580,7 +580,7 @@ pelerin siyah piyon~
 bir siyah piyon pelerini~
 Bir siyah piyon pelerini burada duruyo~
 cloth~
-armor J AK
+armor 0 AK
 7 5 7 1 1
 10 80 1380 P
 #4247
@@ -588,7 +588,7 @@ pelerin beyaz piyon~
 bir beyaz piyon pelerini~
 Bir beyaz piyon pelerini burada duruyor.~
 cloth~
-armor K AK
+armor 0 AK
 7 5 7 1 1
 10 80 1380 P
 
@@ -597,7 +597,7 @@ kemer siyah piyon~
 bir siyah piyon kemeri~
 Bir siyah piyon kemeri burada duruyor.~
 bronze~
-armor J AL
+armor 0 AL
 4 6 6 1 1
 10 70 990 P
 #4249
@@ -605,7 +605,7 @@ kemer beyaz piyon~
 bir beyaz piyon kemeri~
 Bir beyaz piyon kemeri burada duruyor.~
 bronze~
-armor K AL
+armor 0 AL
 4 6 6 1 1
 10 20 990 P
 
@@ -614,7 +614,7 @@ bileklik siyah piyon~
 bir siyah piyon bilekliði~
 Bir siyah piyon bilekliði burada duruyor.~
 bronze~
-armor J AM
+armor 0 AM
 7 5 5 1 0
 10 60 1390 P
 #4251
@@ -622,7 +622,7 @@ bileklik beyaz piyon~
 bir beyaz piyon bilekliði~
 Bir beyaz piyon bilekliði burada duruyor.~
 bronze~
-armor K AM
+armor 0 AM
 7 5 5 1 0
 10 60 1390 P
 
@@ -631,7 +631,7 @@ satranç tahtasý~
 satranç tahtasý~
 Küçük bir satranç tahtasý görüyorsun.~
 wood~
-armor ABFJK AQ
+armor ABF AQ
 17 17 17 33 0
 51 60 55390 P
 F
@@ -643,7 +643,7 @@ kalkan siyah at~
 siyah at kalkaný~
 Bir siyah at kalkaný burada duruyor.~
 steel~
-armor J AJ
+armor 0 AJ
 8 9 9 2 2
 18 90 2210 P
 #4262
@@ -651,7 +651,7 @@ kalkan beyaz at~
 beyaz at kalkaný~
 Bir beyaz at kalkaný burada duruyor.~
 steel~
-armor K AJ
+armor 0 AJ
 8 9 9 2 2
 18 90 2210 P
 
@@ -660,7 +660,7 @@ pelerin siyah at~
 bir siyah at pelerini~
 Bir siyah at pelerini burada duruyor.~
 cloth~
-armor J AC
+armor 0 AC
 6 8 7 1 1
 18 70 2610 P
 #4264
@@ -668,7 +668,7 @@ pelerin beyaz at~
 bir beyaz at pelerini~
 Bir beyaz at pelerini burada duruyor.~
 cloth~
-armor K AC
+armor 0 AC
 6 8 7 1 1
 18 70 2610 P
 
@@ -677,7 +677,7 @@ miðfer siyah at~
 bir siyah at miðferi~
 Bir siyah at miðferi burada duruyor.~
 leather~
-armor J AE
+armor 0 AE
 7 7 8 1 1
 18 70 1950 P
 #4266
@@ -685,7 +685,7 @@ miðfer beyaz at~
 bir beyaz at miðferi~
 Bir beyaz at miðferi burada duruyor.~
 leather~
-armor K AE
+armor 0 AE
 7 7 8 1 1
 18 70 1950 P
 
@@ -694,7 +694,7 @@ bacaklýk siyah at~
 bir çift siyah at bacaklýðý~
 Bir çift siyah at bacaklýðý burada duruyor.~
 leather~
-armor J AF
+armor 0 AF
 7 7 7 1 1
 18 80 1350 P
 #4268
@@ -702,7 +702,7 @@ bacaklýk beyaz at~
 bir çift beyaz at bacaklýðý~
 Bir çift beyaz at bacaklýðý burada duruyor.~
 leather~
-armor K AF
+armor 0 AF
 7 7 7 1 1
 18 80 1350 P
 
@@ -711,7 +711,7 @@ ayakkabý siyah at~
 bir çift siyah at ayakkabýsý~
 Bir çift siyah at ayakkabýsý burada duruyor.~
 leather~
-armor J AG
+armor 0 AG
 8 7 7 1 1
 18 110 2850 P
 #4270
@@ -719,7 +719,7 @@ ayakkabý beyaz at~
 bir çift beyaz at ayakkabýsý~
 Bir çift beyaz at ayakkabýsý burada duruyor.~
 leather~
-armor K AG
+armor 0 AG
 8 7 7 1 1
 18 110 2850 P
 
@@ -728,7 +728,7 @@ eldiven siyah at~
 bir çift siyah at eldiveni~
 Bir çift siyah at eldiveni burada duruyor.~
 leather~
-armor J AH
+armor 0 AH
 6 7 6 1 1
 18 80 2250 P
 #4272
@@ -736,7 +736,7 @@ eldiven beyaz at~
 bir çift beyaz at eldiveni~
 Bir çift beyaz at eldiveni burada duruyor.~
 leather~
-armor K AH
+armor 0 AH
 6 7 6 1 1
 18 80 2250 P
 
@@ -745,7 +745,7 @@ kolluk siyah at~
 bir çift siyah at kolluðu~
 Bir çift siyah at kolluðu burada duruyor.~
 leather~
-armor J AI
+armor 0 AI
 7 6 7 1 1
 18 100 2150 P
 #4274
@@ -753,7 +753,7 @@ kolluk beyaz at~
 bir çift beyaz at kolluðu~
 Bir çift beyaz at kolluðu burada duruyor.~
 leather~
-armor K AI
+armor 0 AI
 7 6 7 1 1
 18 100 2150 P
 
@@ -762,7 +762,7 @@ pelerin siyah at~
 bir siyah at pelerini~
 Bir siyah at pelerini burada duruyor.~
 cloth~
-armor J AK
+armor 0 AK
 7 7 7 1 1
 18 70 1380 P
 #4276
@@ -770,7 +770,7 @@ pelerin beyaz at~
 bir beyaz at pelerini~
 Bir beyaz at pelerini burada duruyor.~
 cloth~
-armor K AK
+armor 0 AK
 7 7 7 1 1
 18 70 1380 P
 
@@ -779,7 +779,7 @@ kemer siyah at~
 bir siyah at kemeri~
 Bir siyah at kemeri burada duruyor.~
 bronze~
-armor J AL
+armor 0 AL
 6 6 6 1 1
 18 60 1990 P
 #4278
@@ -787,7 +787,7 @@ kemer beyaz at~
 bir beyaz at kemeri~
 Bir beyaz at kemeri burada duruyor.~
 bronze~
-armor K AL
+armor 0 AL
 6 6 6 1 1
 18 60 1990 P
 
@@ -796,7 +796,7 @@ bileklik siyah at~
 bir siyah at bilekliði~
 Bir siyah at bilekliði burada duruyor.~
 bronze~
-armor J AM
+armor 0 AM
 7 7 6 1 0
 18 40 2390 P
 #4280
@@ -804,7 +804,7 @@ bileklik beyaz at~
 bir beyaz at bilekliði~
 Bir beyaz at bilekliði burada duruyor.~
 bronze~
-armor K AM
+armor 0 AM
 7 7 6 1 0
 18 40 2390 P
 
