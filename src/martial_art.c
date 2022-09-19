@@ -501,7 +501,7 @@ void do_dirt( CHAR_DATA *ch, char *argument )
     /* speed  */
     if (IS_SET(ch->off_flags,OFF_FAST) || IS_AFFECTED(ch,AFF_HASTE))
 	chance += 10;
-    if (IS_SET(victim->off_flags,OFF_FAST) || IS_AFFECTED(victim,OFF_FAST))
+    if (IS_SET(victim->off_flags,OFF_FAST) || IS_AFFECTED(victim,AFF_HASTE))
 	chance -= 25;
 
     /* level */
@@ -2961,7 +2961,7 @@ int ground_strike( CHAR_DATA *ch, CHAR_DATA *victim,   int dam )
   {
     check_improve( ch, gsn_ground_strike, TRUE, 2 );
     dam += (int)(dam * ((float)diceroll/(float)200));
-    printf_to_char(ch,"{gBirden {Gzemin kontrol {gbilgini kullanabileceðin fevkalade bir an yakalýyorsun.{x\n\r");
+    printf_to_char(ch,"{gBirden zemin kontrol bilgini kullanabileceðin fevkalade bir an yakalýyorsun.{x\n\r");
   }
 
   if ( diceroll <= (get_skill(ch, gsn_ground_strike)/12) )

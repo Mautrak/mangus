@@ -1146,7 +1146,7 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
 					{
 						dam = int(dam * 3 / 2);
 					}
-					printf_to_char(ch,"{gBirden {G%s ýrký{gna iliþkin bilgini kullanabileceðin bir an yakalýyorsun.{x\n\r",race_table[victim->race].name[1]);
+					printf_to_char(ch,"{gBirden %s ýrkýna iliþkin bilgini kullanabileceðin bir an yakalýyorsun.{x\n\r",race_table[victim->race].name[1]);
 				}
 			}
 			/*
