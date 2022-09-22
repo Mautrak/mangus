@@ -4868,6 +4868,35 @@ void do_deposit(CHAR_DATA *ch, char *argument)
 }
 
 
+void do_kasa(CHAR_DATA *ch, char *argument)
+{
+	long amount_s;
+	char buf[100];
+	char arg[200];
+
+	if (IS_NPC(ch))
+	{
+		send_to_char("Kiþisel kasan yok.\n\r",ch);
+		return;
+	}
+
+	if (!IS_SET(ch->in_room->room_flags, ROOM_BANK))
+	{
+		send_to_char( "Bankada deðilsin.\n\r",ch);
+		return;
+	}
+
+	if (ch->pcdata->kisisel_kasa != 1)
+	{
+		send_to_char( "Kiþisel kasan yok.\n\r",ch);
+		return;
+	}
+
+	send_to_char( "Kasa hizmetine hoþgeldin.\n\r",ch);
+
+}
+
+
 
 void do_enchant(CHAR_DATA *ch, char *argument)
 {

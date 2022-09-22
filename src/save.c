@@ -228,6 +228,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
     fprintf( fp, "Cla  %d\n",	ch->iclass		);
     fprintf( fp, "Levl %d\n",	ch->level		);
 	fprintf( fp, "OyuncuKatli %d\n",	ch->pcdata->oyuncu_katli		);
+	fprintf( fp, "KisiselKasa %d\n",	ch->pcdata->kisisel_kasa		);
 	fprintf( fp, "YeniyasamSayisi %d\n",	ch->pcdata->yeniyasam_sayisi		);
     if (ch->trust != 0)
 	fprintf( fp, "Tru  %d\n",	ch->trust	);
@@ -859,6 +860,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp )
     ch->pcdata->bank_s = 0;
 	ch->pcdata->yeniyasam_sayisi = 0;
 	ch->pcdata->oyuncu_katli = 0;
+	ch->pcdata->kisisel_kasa = 0;
 	ch->pcdata->questpractice = 0;
     tmp_silver = 0;
     ch->pcdata->ghost_mode_counter = 0;
@@ -1171,6 +1173,10 @@ void fread_char( CHAR_DATA *ch, FILE *fp )
 	    KEY( "InvisLevel",	ch->invis_level,	fread_number( fp ) );
 	    KEY( "Inco",	ch->incog_level,	fread_number( fp ) );
 	    KEY( "Invi",	ch->invis_level,	fread_number( fp ) );
+	    break;
+	
+	case 'O':
+	    KEY( "KisiselKasa",	ch->pcdata->kisisel_kasa,		fread_number( fp ) );
 	    break;
 
 	case 'L':

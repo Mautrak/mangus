@@ -225,6 +225,7 @@ const	struct	cmd_type	cmd_table	[] =
   { "kapat",		do_close,	POS_RESTING,	 0,  LOG_NORMAL, 1,0 },
   { "kapýkýr",	do_bash_door,	POS_FIGHTING,    0,  LOG_NORMAL, 1,0 },
   { "kaplan",		do_tiger,	POS_FIGHTING,	 0,  LOG_NORMAL, 1,0 },
+  { "kasa",	        do_kasa,	POS_STANDING,	 0,  LOG_NORMAL, 1,CMD_GHOST},
   { "katana",		do_katana, 	POS_STANDING,    0,  LOG_NORMAL, 1,0 },
   { "katle",		do_murde,	POS_FIGHTING,	 0,  LOG_NORMAL, 0,0 },
   { "katlet",		do_murder,	POS_FIGHTING,	 0,  LOG_ALWAYS, 1,0 },

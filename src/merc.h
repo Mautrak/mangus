@@ -2215,6 +2215,7 @@ struct	pc_data
 	int			dilek;
 	int			yeniyasam_sayisi;
 	sh_int		oyuncu_katli;
+    sh_int		kisisel_kasa;
 	long		rk_puani;
 	long		din_puani;
 	long		yardim_puani;
