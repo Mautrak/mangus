@@ -836,48 +836,42 @@ void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch )
   ellere_giyilen_gizler = FALSE;
 
   obj = get_eq_char( vict, WEAR_ABOUT );
+
   if( obj != NULL )
   {
     vucuda_giyilen_gizler = TRUE;
   }
 
-  obj = get_eq_char( ch, WEAR_HANDS );
+  obj = get_eq_char( vict, WEAR_HANDS );
+
   if( obj != NULL )
   {
-    if( is_metal( obj ) )
-    {
-      ellere_giyilen_gizler = TRUE;
-    }
+    ellere_giyilen_gizler = TRUE;
   }
 
   for ( iWear = 0; iWear < MAX_WEAR; iWear++ )
   {
-    if ( vucuda_giyilen_gizler )
-    {
-      if ( iWear== WEAR_NECK || iWear == WEAR_BODY || iWear == WEAR_LEGS ||
-            iWear == WEAR_ARMS || iWear == WEAR_WAIST )
-      {
-        continue;
-      }
-    }
-
-    if ( ellere_giyilen_gizler )
-    {
-      if ( iWear== WEAR_FINGER )
-      {
-        continue;
-      }
-    }
-
     if ( iWear==WEAR_FINGER || iWear==WEAR_NECK || iWear==WEAR_WRIST || iWear==WEAR_TATTOO )
     {
       for ( obj=vict->carrying; obj != NULL; obj = obj->next_content )
       {
         if ( obj->wear_loc == iWear )
         {
-          if (can_see_obj( ch, obj ) )
+          if( ( obj->wear_loc == WEAR_FINGER && ellere_giyilen_gizler ) ||
+              ( (obj->wear_loc == WEAR_NECK || obj->wear_loc == WEAR_WRIST || obj->wear_loc == WEAR_TATTOO ) && vucuda_giyilen_gizler ) )
           {
-            printf_to_char(ch,"%s %s\n\r",where_name[obj->wear_loc],format_obj_to_char( obj, ch, TRUE ));
+            printf_to_char(ch,"%s {DÖrtülü{x\n\r",where_name[obj->wear_loc]);
+          }
+          else
+          {
+            if (can_see_obj( ch, obj ) )
+            {
+              printf_to_char(ch,"%s %s\n\r",where_name[obj->wear_loc],format_obj_to_char( obj, ch, TRUE ));
+            }
+            else
+            {
+              printf_to_char(ch,"%s\n\r",where_name[iWear]);
+            }
           }
         }
       }
@@ -888,7 +882,15 @@ void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch )
       {
         for( i=1 ; i <= bolgeye_giyilen_esya_sayisi ; i++ )
         {
-          printf_to_char(ch,"%s\n\r",where_name[iWear]);
+          if( ( iWear == WEAR_FINGER && ellere_giyilen_gizler ) ||
+              ( (iWear == WEAR_NECK || iWear == WEAR_WRIST || iWear == WEAR_TATTOO ) && vucuda_giyilen_gizler ) )
+          {
+            printf_to_char(ch,"%s {DÖrtülü{x\n\r",where_name[iWear]);
+          }
+          else
+          {
+            printf_to_char(ch,"%s\n\r",where_name[iWear]);
+          }
         }
       }
     }
@@ -907,18 +909,50 @@ void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch )
     }
     else
     {
-      if ( ( obj = get_eq_char(vict,iWear)) != NULL )
+      if ( iWear==WEAR_BODY || iWear==WEAR_LEGS || iWear==WEAR_ARMS || iWear==WEAR_WAIST )
       {
-        if (can_see_obj( ch, obj ) )
+        for ( obj=vict->carrying; obj != NULL; obj = obj->next_content )
         {
-          sprintf(buf,where_name[obj->wear_loc], ' ');
-          printf_to_char(ch,"%s %s\n\r",buf,format_obj_to_char( obj, ch, TRUE ));
+          if ( obj->wear_loc == iWear )
+          {
+            if( vucuda_giyilen_gizler )
+            {
+              printf_to_char(ch,"%s {DÖrtülü{x\n\r",where_name[obj->wear_loc]);
+            }
+            else
+            {
+              if (can_see_obj( ch, obj ) )
+              {
+                printf_to_char(ch,"%s %s\n\r",where_name[obj->wear_loc],format_obj_to_char( obj, ch, TRUE ));
+              }
+              else
+              {
+                printf_to_char(ch,"%s\n\r",where_name[iWear]);
+              }
+            }
+          }
         }
       }
       else
       {
-        sprintf(buf,where_name[iWear], ' ');
-        printf_to_char(ch,"%s\n\r",buf);
+        if ( ( obj = get_eq_char(vict,iWear)) != NULL )
+        {
+          if (can_see_obj( ch, obj ) )
+          {
+            sprintf(buf,where_name[obj->wear_loc], ' ');
+            printf_to_char(ch,"%s %s\n\r",buf,format_obj_to_char( obj, ch, TRUE ));
+          }
+          else
+          {
+            sprintf(buf,where_name[iWear], ' ');
+            printf_to_char(ch,"%s\n\r",buf);
+          }
+        }
+        else
+        {
+          sprintf(buf,where_name[iWear], ' ');
+          printf_to_char(ch,"%s\n\r",buf);
+        }
       }
     }
   }
