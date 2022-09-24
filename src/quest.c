@@ -352,7 +352,7 @@ printf_to_char(ch, "{C1 bünye puaný{x.......({ybünye{x   ).......{R250 gp{x\n\r"
 printf_to_char(ch, "{C15.000 akçe{x.........({yakçe{x    )........{R10 gp{x\n\r");
 printf_to_char(ch, "{Cdinden çýkma{x........({yateist{x  )......{R1000 gp{x\n\r");
 printf_to_char(ch, "{Coyuncu katline giriþ{x({ykatlet{x  ).......{R100 gp{x\n\r");
-printf_to_char(ch, "{Ckiþisel kasa{x........({ykasa{x    )......{R5000 gp{x\n\r");
+printf_to_char(ch, "{Ckiþisel kasa{x........({ykasa{x    ).......{R500 gp{x\n\r");
 if ( ch->iclass == CLASS_SAMURAI )
 {
 printf_to_char(ch, "{Ckatana{x..............({ykatana{x  ).......{R100 gp{x\n\r");
@@ -514,9 +514,9 @@ printf_to_char(ch, "Bir eþya satýn almak için {Rgörev satýnal <eþya_adý>{x yaz.\
 			return;
 			}
 
-			if (ch->pcdata->questpoints >= 5000)
+			if (ch->pcdata->questpoints >= 500)
 			{
-				ch->pcdata->questpoints -= 5000;
+				ch->pcdata->questpoints -= 500;
 				ch->pcdata->kisisel_kasa = 1;
 				act("$n kiþisel bir kasa için gereken sözleþmeyi imzalýyor.", ch, NULL, questman, TO_ROOM );
 				act("$N kiþisel kasa sözleþmesini imzalarken sana yardýmcý oluyor.",   ch, NULL, questman, TO_CHAR );
