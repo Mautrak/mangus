@@ -2110,7 +2110,7 @@ void do_remort( CHAR_DATA *ch, char *argument )
     char mkstr[MAX_INPUT_LENGTH];
     char pbuf[MAX_STRING_LENGTH];
     char name[MAX_STRING_LENGTH];
-    int banks, qp, silver, rkp,yeniyasamsayisi;
+    int banks, qp, silver, rkp,yeniyasamsayisi,kasa;
 
     if ( IS_NPC(ch) || ( d = ch->desc ) == NULL )
         return;
@@ -2153,6 +2153,7 @@ ch->pcdata->confirm_remort = FALSE;
 		silver	= ch->silver;
 		rkp = ch->pcdata->rk_puani;
 		yeniyasamsayisi = ch->pcdata->yeniyasam_sayisi;
+    kasa = ch->pcdata->kisisel_kasa;
 
 	if (!quit_org(ch, argument, TRUE, TRUE ))	return;
 
@@ -2174,6 +2175,7 @@ ch->pcdata->confirm_remort = FALSE;
 	ch->pcdata->questpractice = 0;
 	ch->pcdata->yeniyasam_sayisi = yeniyasamsayisi + 1;
 	ch->pcdata->oyuncu_katli = 0;
+  ch->pcdata->kisisel_kasa = kasa;
 
   write_to_buffer( d, "\n\r[Devam etmek için ENTER]\n\r",0);
 	return;

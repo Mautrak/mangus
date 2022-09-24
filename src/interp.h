@@ -220,6 +220,7 @@ DECLARE_DO_FUN( do_induct	);
 DECLARE_DO_FUN(	do_inventory	);
 DECLARE_DO_FUN(	do_invis	);
 DECLARE_DO_FUN(	do_judge	);
+DECLARE_DO_FUN(	do_kasa	);
 DECLARE_DO_FUN(	do_katana	);
 DECLARE_DO_FUN(	do_kd	);
 DECLARE_DO_FUN(	do_kdcevapla	);

@@ -1465,6 +1465,7 @@ void affect_join( CHAR_DATA *ch, AFFECT_DATA *paf )
     return;
 }
 
+
 /*
  * Give an obj to a char.
  */

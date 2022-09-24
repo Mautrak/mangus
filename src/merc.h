@@ -2215,6 +2215,8 @@ struct	pc_data
 	int			dilek;
 	int			yeniyasam_sayisi;
 	sh_int		oyuncu_katli;
+    sh_int		kisisel_kasa;
+    OBJ_DATA *		kasa_esyalari;
 	long		rk_puani;
 	long		din_puani;
 	long		yardim_puani;
@@ -3078,6 +3080,7 @@ void hunt_victim(CHAR_DATA *ch);
 void	set_title	args( ( CHAR_DATA *ch, char *title ) );
 char	*get_cond_alias	args( ( OBJ_DATA *obj ) );
 void	mob_score	args((CHAR_DATA *ch,CHAR_DATA *mob));
+char *format_obj_to_char args(( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort ));
 
 /* act_move.c */
 void	move_char	args( ( CHAR_DATA *ch, int door, bool follow ) );
