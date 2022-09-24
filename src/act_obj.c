@@ -4870,9 +4870,10 @@ void do_deposit(CHAR_DATA *ch, char *argument)
 
 void do_kasa(CHAR_DATA *ch, char *argument)
 {
-	long amount_s;
-	char buf[100];
-	char arg[200];
+	char arg1[MAX_INPUT_LENGTH];
+	char arg2[MAX_INPUT_LENGTH];
+	OBJ_DATA *obj,*obj_tmp;
+	int pcount = 0;
 
 	if (IS_NPC(ch))
 	{
@@ -4882,7 +4883,7 @@ void do_kasa(CHAR_DATA *ch, char *argument)
 
 	if (!IS_SET(ch->in_room->room_flags, ROOM_BANK))
 	{
-		send_to_char( "Bankada deðilsin.\n\r",ch);
+		send_to_char( "Kasa hizmeti veren bir bankada deðilsin.\n\r",ch);
 		return;
 	}
 
@@ -4892,7 +4893,106 @@ void do_kasa(CHAR_DATA *ch, char *argument)
 		return;
 	}
 
-	send_to_char( "Kasa hizmetine hoþgeldin.\n\r",ch);
+	argument = one_argument( argument, arg1 );
+	argument = one_argument( argument, arg2 );
+
+	if ( arg1[0] == '\0' )
+	{
+		printf_to_char( ch, "Kasanla ilgili hangi iþlemi yapacaksýn?\n\r" );
+		printf_to_char( ch, "Kasana bir eþya koyabilir, kasandan bir eþya alabilir\n\r" );
+		printf_to_char( ch, "veya kasandaki eþyalarý listeleyebilirsin.\n\r" );
+		return;
+	}
+
+	if (!strcmp(arg1, "koy"))
+	{
+		for ( obj = ch->pcdata->kasa_esyalari; obj != NULL; obj = obj->next_content )
+		{
+			pcount++;
+		}
+		if( pcount > 15 )
+		{
+			send_to_char( "Kasaya bu kadar çok eþya koyamazsýn.\n\r", ch );
+			return;
+		}
+		if ( ( obj = get_obj_carry( ch, arg2 ) ) == NULL )
+		{
+			send_to_char( "Sende öyle bir eþya yok.\n\r", ch );
+			return;
+		}
+		if ( obj->pIndexData->limit != -1)
+		{
+			send_to_char( "Kasaya limit eþya koyamazsýn.\n\r", ch );
+			return;
+		}
+		if( obj->item_type == ITEM_CONTAINER || obj->item_type == ITEM_MONEY || obj->item_type == ITEM_POTION ||
+			obj->item_type == ITEM_FURNITURE || obj->item_type == ITEM_FOOD || obj->item_type ==  ITEM_BOAT ||
+			obj->item_type == ITEM_CORPSE_NPC || obj->item_type == ITEM_CORPSE_PC || obj->item_type == ITEM_FOUNTAIN ||
+			obj->item_type == ITEM_PORTAL || obj->item_type == ITEM_JUKEBOX || obj->item_type == ITEM_TATTOO )
+		{
+			send_to_char( "Kasaya bu tür eþyalar koyamazsýn.\n\r", ch );
+			return;
+		}
+
+		obj_from_char( obj );
+
+		obj->next_content	 = ch->pcdata->kasa_esyalari;
+		ch->pcdata->kasa_esyalari	 = obj;
+		obj->carried_by	 = ch;
+		obj->in_room	 = NULL;
+		obj->in_obj		 = NULL;
+
+		printf_to_char(ch, "Kasaya %s koyuyorsun.\n\r", obj->short_descr );
+		return;
+	}
+	else if (!strcmp(arg1, "al"))
+	{
+		for ( obj = ch->pcdata->kasa_esyalari; obj != NULL; obj = obj->next_content )
+		{
+			if( is_name( arg2, obj->name ) && can_see_obj( ch, obj ) )
+			{
+				if ( obj == ch->pcdata->kasa_esyalari )
+				{
+					ch->pcdata->kasa_esyalari = obj->next_content;
+					get_obj( ch, obj, NULL );
+					return;
+				}
+				else
+				{
+					OBJ_DATA *prev;
+					for ( prev = ch->pcdata->kasa_esyalari; prev != NULL; prev = prev->next_content )
+					{
+						if ( prev->next_content == obj )
+						{
+							prev->next_content = obj->next_content;
+							get_obj( ch, obj, NULL );
+							return;
+						}
+					}
+				}
+			}
+		}
+		send_to_char( "Kasada o isimde bir eþya bulamýyorsun.\n\r", ch );
+		return;
+	}
+	else if (!strcmp(arg1, "liste"))
+	{
+		send_to_char( "Kasadaki eþyalarýn:\n\r", ch );
+		send_to_char( "-------------------\n\r", ch );
+		for ( obj = ch->pcdata->kasa_esyalari; obj != NULL; obj = obj->next_content )
+		{
+			printf_to_char( ch, "%s\n\r", format_obj_to_char( obj, ch, TRUE ) );
+		}
+		return;
+	}
+	else
+	{
+		send_to_char( "Böyle bir kasa iþlemi bilmiyorum.\n\r", ch );
+		return;
+	}
+
+
+	return;
 
 }
 

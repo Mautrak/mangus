@@ -109,8 +109,6 @@ int max_on_so_far;
 /*
  * Local functions.
  */
-char *	format_obj_to_char	args( ( OBJ_DATA *obj, CHAR_DATA *ch,
-				    bool fShort ) );
 void	show_list_to_char	args( ( OBJ_DATA *list, CHAR_DATA *ch,
 				    bool fShort, bool fShowNothing ) );
 void	show_char_to_char_0	args( ( CHAR_DATA *victim, CHAR_DATA *ch ) );
