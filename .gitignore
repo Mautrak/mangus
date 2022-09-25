@@ -10,3 +10,4 @@ log/ip/*
 log/kanal/*
 player/*
 data
+log/events/events

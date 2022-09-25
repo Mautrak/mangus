@@ -23,12 +23,12 @@ Ahhh zavallý yalnýz bebeðim :(
 sek 0 0
 BOÝÝNNNNNNKK!
 $n neþeli bir gülümsemeyle etrafta sekiyor.
-$M kucaðýna zýplayýp kýpýr kýpýr sekiyorsun.
-$n $M kucaðýna zýplayýp kýpýr kýpýr sekiyor.
+$S kucaðýna zýplayýp kýpýr kýpýr sekiyorsun.
+$n $S kucaðýna zýplayýp kýpýr kýpýr sekiyor.
 $n senin kucaðýna zýplayýp kýpýr kýpýr sekiyor.
 Oyuncaðýný göremiyorsun.
 Kafaný bir basket topu gibi sektiriyorsun.
-$n $M kafasýyla basketbol oynuyor.
+$n $S kafasýyla basketbol oynuyor.
 
 gülümse 1 0
 Gülümsüyorsun.
@@ -97,7 +97,7 @@ iççek 0 0
 Derin derin iç çekiyorsun.
 $n derin derin iç çekiyor.
 $M düþünüp derin derin iç çekiyorsun.
-$n $M önünde iç çekiyor.
+$n $S önünde iç çekiyor.
 $n seni düþünüp iç çekiyor.  Dokunaklý, deðil mi?
 Arkadaþýný göremediðin için, derin derin iç çekiyorsun.
 Kendine iç çekiyorsun.  ÇOK YALNIZ olmalýsýn.
@@ -125,7 +125,7 @@ sokul 1 5
 Kime sokulacaksýn?
 $
 $E sokuluyorsun.
-$n $M yanýna sokuluyor.
+$n $S yanýna sokuluyor.
 $n senin yanýna sokuluyor.
 Burada yoklar.
 Uyumaya hazýr bir halde kývrýlýveriyorsun.
@@ -135,7 +135,7 @@ $n uyumaya hazýr bir halde kývrýlýveriyor.
 kucaklaþ 1 5
 Bugün kiminle kucaklaþmak istiyorsun?
 $
-$M ile kucaklaþýyorsun.
+$N ile kucaklaþýyorsun.
 $n $N ile kucaklaþýyor.
 $n seninle kucaklaþýyor.
 Burada yoklar.
@@ -146,8 +146,8 @@ $n kendi gölgesiyle kucaklaþýyor.  Ne üzücü bir görüntü.
 aðla 0 5
 Uwwwaaaaah..
 $n gözyaþlarýna boðuluyor.
-$M omuzunda aðlýyorsun.
-$n $M omuzunda aðlýyor.
+$S omuzunda aðlýyorsun.
+$n $S omuzunda aðlýyor.
 $n senin omuzunda aðlýyor.
 Bu da kim?
 Kendi kendine aðlýyorsun.
@@ -190,8 +190,8 @@ $n kendi kendisine sýrýtýyor.  Aklýndan ne geçiyor acaba?
 eðil 0 5
 Yerlere kadar eðiliyorsun.
 $n yerlere kadar eðiliyor.
-$M önünde eðiliyorsun.
-$n $M önünde eðiliyor.
+$S önünde eðiliyorsun.
+$n $S önünde eðiliyor.
 $n senin önünde eðiliyor.
 Bu kim?
 Ayak parmaklarýný öpüyorsun.
@@ -201,8 +201,8 @@ $n yay gibi bükülüp kendi ayak parmaklarýný öpüyor.
 alkýþla 0 0
 Þak, þak, þak.
 $n bir alkýþ patlatýyor.
-$M yaptýklarýný alkýþlýyorsun.
-$n $M yaptýklarýný alkýþlýyor.
+$S yaptýklarýný alkýþlýyorsun.
+$n $S yaptýklarýný alkýþlýyor.
 $n seni alkýþlýyor.  Galiba iyi bir þey yaptýn!
 Hayali arkadaþýna hayali bir alkýþ seremonisi sunuyorsun.
 Kendini alkýþlýyorsun.  Vay, kibirliyiz galiba!
@@ -224,8 +224,8 @@ geðir 0 0
 Yüksek sesle geðiriyorsun. Gðaark!
 $n, yüksek sesle geðiriyor. Gðaark!
 $E yanýt olarak daha yüksek bir geðirti koyveriyorsun.
-$n, $M düþüncesine yanýt olarak yüksek sesle geðiriyor.
-$n, senin düþüncene yanýt olarak yüksek sesle geðiriyor.
+$n, $E yanýt olarak yüksek sesle geðiriyor.
+$n, sana yanýt olarak yüksek sesle geðiriyor.
 Kurbanýný bulamýyorsun.
 Kendine doðru geðiriyorsun.
 $n kendisine doðru geðiriyor.  Amma mide bulandýrýcý bir görüntü.
@@ -252,7 +252,7 @@ osur 0 0
 Hiç mi görgün yok senin ?
 $n, gerçek bir sökülme-gümbürtüsü koyveriyor... Etrafý yeþil bir bulut kaplýyor!
 $E karþý osuruyorsun.  Vay be, harbiden iðrençsin.
-$n $M suratýna doðru osuruyor.  En iyisi sýra sana gelmeden burdan kaçmak!
+$n $S suratýna doðru osuruyor.  En iyisi sýra sana gelmeden burdan kaçmak!
 $n senin suratýna doðru osuruyor.  Güçlükle soluk alýyorsun.
 Boþver... Yeterince tuttun zaten!
 Kendine doðru osuruyorsun.  Bunu haketmiþtin.
@@ -285,7 +285,7 @@ $n kendisine kaþ çatýyor.  Uwww, ne kadar da üzgün bir köpek yavrusu....
 Þaþkýnlýktan güçlükle soluyorsun.
 $n, þaþkýnlýktan güçlükle soluyor.
 $E'nin yaptýklarýný anladýðýnda güçlükle soluyorsun.
-$n, $M yaptýklarýný anladýðýnda güçlükle soluyor.
+$n, $S yaptýklarýný anladýðýnda güçlükle soluyor.
 $n, senin ne yaptýðýný anladýðýnda güçlükle soluyor.
 Önce biraz paniklemen lazým.
 Kendine bakýyorsun ve güçlükle soluk almaya baþlýyorsun!
@@ -306,8 +306,8 @@ $n kendi ayaklarýna dik dik bakýyor, canýný sýkan ne acaba?
 inle 0 0
 Yüksek sesle inliyorsun.
 $n, yüksek sesle inliyor.
-$M önünde inliyorsun.
-$n, $M önünde inliyor.
+$S önünde inliyorsun.
+$n, $S önünde inliyor.
 $n, senin önünde inliyor.
 Ýnlemek için herhangi bir sebep görmüyorsun.
 Ne yaptýðýný anlayýnca inliyorsun.
@@ -323,8 +323,8 @@ $n, hýçkýrýyor.
 yala 0 0
 Dudaklarýný yalayýp gülümsüyorsun.
 $n, dudaklarýný yalayýp gülümsüyor.
-$M aðzýný nazikçe yalýyorsun.
-$n, $M aðzýný nazikçe yalýyor.
+$S aðzýný nazikçe yalýyorsun.
+$n, $S aðzýný nazikçe yalýyor.
 $n, senin aðzýný nazikçe yalýyor.
 Yalamasýna yala ama, burada deðil ki..
 Kendi kaþlarýný yalýyorsun.
@@ -356,8 +356,8 @@ $n, kendi kendisini zýrlatýyor.
 diþle 0 0
 Kimi diþleyeceksin ?
 $
-$M kulaðýný diþliyorsun.
-$n, $M kulaðýný diþliyor.
+$S kulaðýný diþliyorsun.
+$n, $S kulaðýný diþliyor.
 $n, senin kulaðýný diþliyor.
 Maalesef, yok.
 KENDÝ kulaðýný diþliyorsun. Eh, bu da bir yetenek tabi..
@@ -378,8 +378,8 @@ $n kendisinden ürperiyor.
 omuzsilk 0 0
 Omuz silkiyorsun.
 $n, çaresizce omuz silkiyor.
-$M sorusuna karþýlýk omuzlarýný silkiyorsun.
-$n, $M sorusuna karþýlýk omuzlarýný silkiyor.
+$S sorusuna karþýlýk omuzlarýný silkiyorsun.
+$n, $S sorusuna karþýlýk omuzlarýný silkiyor.
 $n, senin soruna karþýlýk omuzlarýný silkiyor.
 Tamam iyi omuz silkiyorsun ama arkadaþýn burada yok.
 Kendine doðru omuz silkiyorsun.
@@ -417,7 +417,7 @@ $n, hapþuruyor.
 kýskýs 0 0
 Kýs kýs gülüyorsun.
 $n, kýs kýs gülüyor.
-$M ile paylaþtýðýnýz sýrrý düþünüp kýs kýs gülüyorsun.
+$N ile paylaþtýðýnýz sýrrý düþünüp kýs kýs gülüyorsun.
 $n, $N ile paylaþtýklarý sýrrý düþünüp kýs kýs gülüyor.
 $n, seninle paylaþtýðý sýrrý düþünüp kýs kýs gülüyor.
 Nassý yani?
@@ -478,8 +478,8 @@ $n kendisine hoþçakal diyip el sallýyor.
 ýslýk 0 0
 Hoþnutlukla ýslýk çalýyorsun.
 $n, hoþnutlukla ýslýk çalýyor.
-$M önünde ýslýk çalýyorsun.
-$n $M önünde ýslýk çalýyor.
+$S önünde ýslýk çalýyorsun.
+$n $S önünde ýslýk çalýyor.
 $n senin önünde ýslýk çalýyor.
 Islýk çalacak özel bir þey görmüyorsun.
 Kendine ýslýkla küçük bir þarký çalýyorsun.
@@ -517,8 +517,8 @@ $n, esniyor.
 taran 0 0
 Saçlarýný tarýyorsun - kusursuz.
 $n saçlarýný tarýyor, ne kadar da þýk bir model !
-Sabýrla $M saçýndaki düðümleri çözüyorsun - bu nasýl bir karmaþa !
-$n, sabýrla $M saçýndaki düðümleri çözmeye çalýþýyor.
+Sabýrla $S saçýndaki düðümleri çözüyorsun - bu nasýl bir karmaþa !
+$n, sabýrla $S saçýndaki düðümleri çözmeye çalýþýyor.
 $n, senin saçlarýný taramaya çalýþýrken çoðunu yoluyor.
 Bu kiþi burada deðil.
 Saçlarýný çekiþtiriyorsun, ama yatýþacak gibi deðiller.
@@ -528,8 +528,8 @@ $n düðüm olmuþ saçlarýný taramaya çalýþýyor.
 masajyap 0 0
 Kime masaj yapacaksýn?  Havaya mý?
 $
-$M omuzlarýna tatlý bir masaj yapýyorsun.
-$n, $M omuzlarýna tatlý bir masaj yapýyor.
+$S omuzlarýna tatlý bir masaj yapýyorsun.
+$n, $S omuzlarýna tatlý bir masaj yapýyor.
 $n, senin omuzlarýna tatlý bir masaj yapýyor - Ahhhhhhhhhh...
 Sadece seninle ayný odada olan birine masaj yapabilirsin.
 Kendi kendine masaj yapmaya çalýþtýkça farkýnda olmadan yoga pratik ediyorsun.
@@ -550,8 +550,8 @@ $n, kendisini gýdýklýyor. Koca ahmak.
 baþokþa 0 0
 Kimin baþýný okþayacaksýn?
 $
-$M baþýný okþuyorsun.
-$n $M baþýný okþuyor.
+$S baþýný okþuyorsun.
+$n $S baþýný okþuyor.
 $n senin baþýný okþuyor.
 Kim, nerede, ne?
 Kendi baþýný okþuyorsun. Güven tazelemek için ilginç bir yol..
@@ -572,8 +572,8 @@ $n, kendisine küfretmeye baþlýyor.  Niye yardým etmeyesin?
 yakar 0 0
 Kendini erdemli hissediyorsun, eh belki biraz da budala.
 $n varolduðunu düþündüðü güçlere yaltaklanýp merhamet dileniyor.
-$M önünde yerlerde sürünüyorsun.
-$n, kendini yere atýp $M önünde yerlerde sürünüyor.
+$S önünde yerlerde sürünüyorsun.
+$n, kendini yere atýp $S önünde yerlerde sürünüyor.
 $n, senin ayaklarýndaki pisliði öpüyor.
 Etrafta böyle biri yok; yakarýlarýn sonsuz boþluklarýn içinde yitip gidiyor.
 Bize biraz narsisizmden bahset...
@@ -622,8 +622,8 @@ $n, yumruklarýný sýkýp, paldýr küldür yürüyerek, öfkeden köpürüyor.
 sürün 1 0
 Tozun içinde sürünüyorsun.
 $n, tozun içinde sürünüyor.
-$M önünde yerlerde sürünüp yaltaklanýyorsun.
-$n, $M önünde yerlerde sürünüp yaltaklanýyor.
+$S önünde yerlerde sürünüp yaltaklanýyorsun.
+$n, $S önünde yerlerde sürünüp yaltaklanýyor.
 $n, senin önünde yerlerde sürünüp yaltaklanýyor.
 Kim?
 Bu bana biraz aptalca göründü.
@@ -650,8 +650,8 @@ $n, kendisini yumrukluyor.  Neden sen de katýlmayasýn?
 elöp 0 0
 Kimin elini öpeceksin?
 $
-$M elini öpüyorsun.
-$n, $M elini öpüyor.  Ne kadar da Avrupai!
+$S elini öpüyorsun.
+$n, $S elini öpüyor.  Ne kadar da Avrupai!
 $n, senin elini öpüyor.  Ne kadar da Avrupai!
 Etrafta tek bir bayan eli bulamadýn.
 Kendi elini öpüyorsun.
@@ -661,7 +661,7 @@ $n, kendi elini öpüyor.
 türkü 1 0
 Efkarlanýp bir türkü çýðýrmaya baþlýyorsun.
 $n bir türkü çýðýrmaya baþladý:  HEY!! RAHÝPLER!! BÝR ÝYÝLEÞTÝRME BÜYÜSÜ ATMAZMIYDINIZ!!!
-Çýðýrdýðýn türküyü duyan $M ilk refleksi kulaklarýný týkamak oldu.
+Çýðýrdýðýn türküyü duyan $S ilk refleksi kulaklarýný týkamak oldu.
 $n $E bir türkü çýðýrýyor.
 $n sana bir türkü çýðýrýyor...sen ise korkuyla sinip arkaný dönüyorsun.
 Bu kiþi biraz önce kaçtý!
@@ -672,8 +672,8 @@ $n kendisine bir türkü çýðýrýyor.  Nasýl bir sado-mazoþist bu!!.
 bayýl 1 0
 Bayýlýyorsun.
 $n, bayýlýyor.
-$M kollarýna doðru bayýlýyorsun.
-$n, $M açýk kollarýna doðru bayýlýyor.
+$S kollarýna doðru bayýlýyorsun.
+$n, $S açýk kollarýna doðru bayýlýyor.
 $n, az önce SENÝN kollarýna doðru bayýldý.
 Tam bir aptal gibi görünerek yere yuvarlandýn--gerçekten naziklermiþ.
 #
@@ -690,8 +690,8 @@ Bu kim?
 sendele 1 8
 Kör bir halde odanýn içinde sendeliyorsun.
 $n, kör bir halde odanýn içinde sendeliyor.
-Oda fýrýl fýrýl dönmeye baþlayýnca $M üzerine doðru sendeliyorsun.
-$n, $M üzerine doðru sendeliyor.
+Oda fýrýl fýrýl dönmeye baþlayýnca $S üzerine doðru sendeliyorsun.
+$n, $S üzerine doðru sendeliyor.
 $n, kör bir halde senin üzerine doðru sendeliyor.
 Kimin üzerine sendeleyeceksin!?!?
 #
@@ -710,8 +710,8 @@ $n, kendisine doðru alaycý bir kahkaha atýyor.
 salya 1 0
 Kendi üstüne salya akýtýyorsun.
 $n, kendi üstüne salya akýtýyor.
-$M üzerine salya akýtýyorsun.
-$n, $M üzerine salya akýtýyor. Kaç, üzerine sýçrayacak..
+$S üzerine salya akýtýyorsun.
+$n, $S üzerine salya akýtýyor. Kaç, üzerine sýçrayacak..
 $n, iðrenç bir þekilde senin üzerine salya akýtýyor. **Ýðk**
 Pekala, bir salya havuzu meydana getir -- ama onlar kaçalý çok oldu.
 #
@@ -905,8 +905,8 @@ $n kendisini ovuyor...ne gýcýk!
 kana 1 0
 Bol bol kanýyorsun -- berbat bir pislik oluþturarak!
 $n, tüm zemine sulu sulu kanýyor.
-$M üzerine doðru kanýyorsun -- uwww!
-$n, $M üzerine doðru kanýyor.  Dikkat et, sýradaki SEN olabilirsin!
+$S üzerine doðru kanýyorsun -- uwww!
+$n, $S üzerine doðru kanýyor.  Dikkat et, sýradaki SEN olabilirsin!
 $n, senin üzerine doðru kanýyor -- uwww!  Uzaklaþ hemen!!
 Kimin üzerine kanayacaksýn?
 Tamamýyla kendi üzerine kanýyorsun.
@@ -969,8 +969,8 @@ Deneme bile -- az önce ayrýldýlar.
 yýðýl 1 0
 Bitkinlikten yere yýðýlýyorsun.
 $n, bitkinlikten dramatik bir biçimde yere yýðýlýyor.
-$M kollarýna yýðýlýyorsun.
-$n, $M kollarýna yýðýlýyor.
+$S kollarýna yýðýlýyorsun.
+$n, $S kollarýna yýðýlýyor.
 Aniden, $n bitkinlikten senin kollarýna yýðýlýyor.
 Onlar az önce ayrýldýlar, sadece yere yýðýlabilirsin.
 #
@@ -1003,7 +1003,7 @@ $n, sana bakýp zevkten kývranýyor.
 mööle
 Geviþ getirip dokunaklý bir þekilde mölüyorsun.  Muh-ÖÖÖÖ!
 $n inek gibi gözlerini sana çeviriyor, geviþ getirip dokunaklý bir þekilde mölüyor.
-Tüm inek 'Zen'ini $M üzerine odaklayýp, düþündüklerini sakýnmadan söylüyorsun;  Möööööö..
+Tüm inek 'Zen'ini $S üzerine odaklayýp, düþündüklerini sakýnmadan söylüyorsun;  Möööööö..
 Kendine möleyecek birini bulsan iyi edersin.
 Ýnek 'Zen'i sayesinde yaþamýn anlamýný kavramýþ durumdasýn; oysa ahmak dünya senin sadece mölediðini düþünüyor.
 $n tekrar tekrar kendisine mölüyor...  Bu odanýn en yakýn çýkýþý hangisiydi!?
@@ -1013,7 +1013,7 @@ irkil 1 0
 Acýyla irkiliyorsun.
 $n acýyla irkiliyor.
 $E bakýyorsun ve düþüncesinden irkiliyorsun.
-$n, $M düþüncesinden irkiliyor.
+$n, $S düþüncesinden irkiliyor.
 $n, senin düþüncenden irkiliyor.
 #
 
@@ -1037,8 +1037,8 @@ $n, kendisine doðru sessizce bir þey mýrýldanýyor.
 histeri 1 0
 Yerlerde yuvarlanýp isterik bir biçimde gülüyorsun.
 $n yere düþüyor ve etrafta isterik kahkahalar atarak yuvarlanýyor.
-$M ortaya attýðý fikre gülmekten yerlere yatýyorsun.
-$n, $M maskaralýðýna yerlerde yuvarlanarak gülüyor!
+$S ortaya attýðý fikre gülmekten yerlere yatýyorsun.
+$n, $S maskaralýðýna yerlerde yuvarlanarak gülüyor!
 $n, senin maskaralýðýna yerlerde yuvarlanarak gülüyor!
 #
 
@@ -1072,8 +1072,8 @@ $n beyhude bir etkileme çabasýyla sana doðru kaslarýný þiþiriyor.
 kafayavur 1 0
 ***BONK!!!***
 $
-Böyle bir moron olduðu için $M kafasýna vuruyorsun.
-$n, su katýlmadýk bir moron olduðu için $M kafasýna vuruyor.
+Böyle bir moron olduðu için $S kafasýna vuruyorsun.
+$n, su katýlmadýk bir moron olduðu için $S kafasýna vuruyor.
 $n aptallýðýndan ötürü senin kafana vuruyor.
 ***BONK*** onlar ayrýldýlar...
 Kendi kafana vuruyorsun, seni aptal.
@@ -1091,16 +1091,16 @@ $n sana bakýyor ve zevkle haykýrýyor!
 tut 1 0
 Odadaki herkesi mi tutacaksýn?!
 $
-Þakacý bir þekilde $M yakalýyorsun.
-$n þakacý bir þekilde $M yakalýyor.
+Þakacý bir þekilde $E yakalýyorsun.
+$n þakacý bir þekilde $E yakalýyor.
 $n þakacý bir þekilde seni yakalayýp yere yapýþtýrýyor!
 #
 
 tükür 1 0
 Tam bir iðrenmeyle tükürüyorsun.
 $n tam bir iðrenmeyle tükürüyor!
-$M üzerine tükürüyorsun...uww iðrençsin!
-$n, $M üzerine tükürüyor.
+$S üzerine tükürüyorsun...uww iðrençsin!
+$n, $S üzerine tükürüyor.
 $n senin üzerine tükürüyor -- ne kadar iðrenç!
 Kurbanýn burada deðil.
 Kendi üzerine tükürdün, eh evet oldukça iðrenç..
@@ -1115,7 +1115,7 @@ $n bounces off of $N in a vain attempt to mosh... what a LOSER.
 $n slams into you, moshing painfully against you.  That REALLY hurts!
 Hmmm...  your victim found a new dance partner.
 Masochist!
-$n throws $M on the floor, grinding $M into a bloody pulp
+$n throws $N on the floor, grinding $N into a bloody pulp
 
 
 uzaklaþ 0 0
@@ -1144,7 +1144,7 @@ makasal 0 0
 Kimden makas alacaksýn?
 $
 Onun yanaðýndan makas alýyorsun.  Çok TATLI deðil mi?
-$n $M yanaðýndan makas aldý... birlikte çok hoþ görünmüyorlar mý?
+$n $S yanaðýndan makas aldý... birlikte çok hoþ görünmüyorlar mý?
 $n sevecenlikle senin yanaðýndan makas alýyor.  Bu sana büyükanneni hatýrlattý... *ühehüe*
 *Ühühüe*  Bu yanak kaybolmuþ.
 BUNU yapamazsýn.
@@ -1222,7 +1222,7 @@ eleþtir 0 0
 Evet, ama kimi?
 $
 Bir yýlanýn tüm içtenliðiyle onu eleþtiriyorsun.
-Suratýnda pis bir sýrýtýþla, $n $M tüm çabalarýnýn yerden yere vuruyor.
+$n Suratýnda pis bir sýrýtýþla $S tüm çabalarýnýn yerden yere vuruyor.
 $n sana çabalarýnýn bazý ÖNEMLÝ düzeltmelere ihtiyacý olduðunu anlatýyor.
 Kurbaným nerelere gitti, oh nerelere nerelere...
 Kendini bol bol eleþtiriyorsun.
@@ -1244,7 +1244,7 @@ yargýla 0 0
 Evet, ama kimi?
 $
 Onu 1 ile 10 arasýnda yargýlýyorsun.
-1 ile 10 arasýnda $n, $M tamamen koca bir SIFIR olduðunu düþünüyor!!!
+1 ile 10 arasýnda $n, $S tamamen koca bir SIFIR olduðunu düþünüyor!!!
 $n hareketlerini 1 ile 10 arasýnda yargýlayýp sana SIFIR veriyor!!!
 Þu anda burada deðiller.
 Bunu yapmayý GERÇEKTEN istemezsin.
@@ -1323,7 +1323,7 @@ týrnakla 0 0
 Ellerini sýkýp yumruk yapýyorsun.
 $n kanatana kadar yumruklarýný sýkýyor...
 Onun gözlerini týrnakladýn... ÝÐRENÇ!
-$n týrnaklarýný $M gözlerine gömdü ... AMAN TANRIM, KAN!
+$n týrnaklarýný $S gözlerine gömdü ... AMAN TANRIM, KAN!
 $n týrnaklarýný senin gözlerine gömdü ve sen kendi kanýnla kör oldun!
 Týrnaklayacaðýn kiþileri bu odadan seç.
 Kendini pençeleyip ince ince doðruyorsun!
@@ -1364,8 +1364,8 @@ $n, senin gözlerinin önünde açlýktan ölüyor!  Biraz yiyecek ayýrabilir miydin, l
 feryat
 AAAAAARRRRRRGGGGGGHHHHHH!!!!!!
 $n kafasýný geriye doðru atýp derin bir hüsranla feryat ediyor!
-Hüsranýný haykýrýyorsun ve iki elinle $M boðazýný yakalýyorsun!
-$n feryat figan $M üzerine sýçrayýp, onu boðazlamaya çalýþýyor!
+Hüsranýný haykýrýyorsun ve iki elinle $S boðazýný yakalýyorsun!
+$n feryat figan $S üzerine sýçrayýp, onu boðazlamaya çalýþýyor!
 $n, hüsranla feryat edip iki eliyle senin boðazýný sýkýyor!
 Gýrtlaklayacak kimseyi bulamayýnca DAHA da fazla feryat ediyorsun!
 Kendi aptallýðýn yüzünden düþ kýrýklýðýyla feryat ediyorsun!
@@ -1403,13 +1403,13 @@ $n oggs $N's head with photon torpedos!  $N reels.
 $n oggs your head with photon torpedos!  You are reeling.
 You can't find your target.
 If you do that, the universe will explode.
-$n almost oggs $M, but wisely reconsiders.
+$n almost oggs $N, but wisely reconsiders.
 
 
 tebessüm
 Keyifle tatlý tatlý gülümsüyorsun.
 $n tatlý tatlý gülümsüyor.
-Gülüþünle $M gözlerini kamaþtýrýyorsun.
+Gülüþünle $S gözlerini kamaþtýrýyorsun.
 $n $E bu kadar tatlý gülümsediðine göre onu çok seviyor olmalý!
 $n sana bu kadar tatlý gülümsediðine göre seni çok seviyor olmalý!
 Hayali arkadaþlarýna gülümserken gerçekten oldukça aptal görünüyorsun...
@@ -1440,8 +1440,8 @@ Tamam, disko dansýný solo da yapabilirsin.
 sürt
 Koyun gibi ayaðýný yere sürüyorsun.
 $n, ayaðýný yere sürterken çok utangaç görünüyor.
-$M bakýþýndan sakýnýrken ayaðýný yere sürüyorsun.
-$n ayaðýný sürüyor ve utangaç bir þekilde $M bakýþýndan sakýnýyor.
+$S bakýþýndan sakýnýrken ayaðýný yere sürüyorsun.
+$n ayaðýný sürüyor ve utangaç bir þekilde $S bakýþýndan sakýnýyor.
 $n ayaðýný sürüyor ve utangaç bir þekilde senin bakýþýndan sakýnýyor.
 Onlar burada deðiller.
 #
@@ -1449,8 +1449,8 @@ Onlar burada deðiller.
 patakla
 Kimi pataklayacaksýn?
 $
-$M kafasýna kafasýna vurup bir güzel pataklýyorsun!
-$n $M bir yandan azarlayýp bir yandan da pataklýyor.
+$S kafasýna kafasýna vurup bir güzel pataklýyorsun!
+$n $S bir yandan azarlayýp bir yandan da pataklýyor.
 HEY!  $n kafana kafana vurup seni bir güzel pataklýyor!
 Uffff...
 Uww! Kafana kafana vurup kendini bir güzel pataklýyorsun.
@@ -1498,7 +1498,7 @@ nazik 0 0
 Nazik bir þekilde gülümsüyorsun.
 $n nazik bir þekilde gülümsüyor.
 Onun esprisini beðenmediðini belli ediyorsun.
-$n $M esprisine nazik bir þekilde gülümsüyor.
+$n $S esprisine nazik bir þekilde gülümsüyor.
 $n yaptýðýn espriyi beðenmediðini kýsa ve nazik gülümseyiþiyle belli ediyor.
 Gülümseyecek bir arkadaþ bulamýyorsun.
 Baþka kimse yapmayacaðý için, kendi esprine kendin gülüyorsun.
@@ -1573,7 +1573,7 @@ kadehkaldýr 0 0
 Kutlama için þampanya kadehini havaya kaldýrýyorsun.
 $n, kutlama için þampanya kadehini havaya kaldýrýyor.
 Þampanya kadehini ona doðru kaldýrýyorsun.
-$n sessizce $M saðlýðýna içiyor.
+$n sessizce $S saðlýðýna içiyor.
 $n sessizce senin saðlýðýna içiyor.
 Övgünün nesnesi burada yok.
 Þeytani bir sýrýtýþla kendi saðlýðýna içiyorsun.
@@ -1623,7 +1623,7 @@ kýrbaç 0 0
 Boða derisinden bir kýrbacý tehditkar bir biçimde yerde þaklatýyorsun.
 $n boða derisinden bir kýrbacý tehditkar bir biçimde yerde þaklatýyor.
 Kýrbacýný onun çýplak sýrtýnda þaklatýyorsun.
-$n kýrbacýný $M çýplak sýrtýnda þaklatýyor.
+$n kýrbacýný $S çýplak sýrtýnda þaklatýyor.
 $n senin sýrtýnda bir kamçý þaklatýyor... acý.. haz..
 Üzgünüm dostum, bu kiþiyi burada göremiyorum.
 Kendini kýrbaçladýkça zevkten çýldýrýyorsun.
@@ -1648,8 +1648,8 @@ $n, pelerinini kullanarak týrnaklarýný parlatýyor.
 baðýrsak 0 0
 Öfke içinde baðýrsaklarýný sökeceðin birini arýyorsun.
 $n öfke içinde baðýrsaklarýný sökeceði birini arýyor.
-$M karaciðerini söküp yiyorsun.
-$n, $M karaciðerini söküp yiyor.
+$S karaciðerini söküp yiyorsun.
+$n, $S karaciðerini söküp yiyor.
 $n, senin karaciðerini söküp yiyor.
 Gazabýnýn nesnesi burada yok.
 #
