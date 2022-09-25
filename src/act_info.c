@@ -209,6 +209,10 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 	
 	
 	strcat( buf, CLR_WHITE );
+  if (IS_IMMORTAL(ch))
+  {
+    sprintf(buf,"[%-6d]",obj->pIndexData->vnum);
+  }
 	strcat( buf, "["     );
 	
 	if(OBJ_NITELIK == 0)
