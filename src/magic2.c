@@ -4751,7 +4751,7 @@ void spell_super_heal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 void spell_master_heal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
     CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int bonus = 300 + level + dice(1,40);
+    int bonus = 500 + level + dice(1,40);
 
     victim->hit = UMIN( victim->hit + bonus, victim->max_hit );
     update_pos( victim );
