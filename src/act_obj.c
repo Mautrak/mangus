@@ -4253,7 +4253,7 @@ void do_herbs(CHAR_DATA *ch, char *argument)
       af.where  = TO_AFFECTS;
       af.type 	= gsn_herbs;
       af.level 	= ch->level;
-      af.duration = 5;
+      af.duration = 3;
       af.location = APPLY_NONE;
       af.modifier = 0;
       af.bitvector = 0;

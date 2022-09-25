@@ -6,6 +6,7 @@ src/*.o
 area/mangus
 src/mangus
 gods/*
-log/*
+log/ip/*
+log/kanal/*
 player/*
 data
