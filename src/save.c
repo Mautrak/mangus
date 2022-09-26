@@ -686,19 +686,19 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
 
     /* these data are only used if they do not match the defaults */
 
-    if ( obj->name != obj->pIndexData->name)
+    //if ( obj->name != obj->pIndexData->name)
     	fprintf( fp, "Name %s~\n",	obj->name		     );
-    if ( obj->short_descr != obj->pIndexData->short_descr)
+    //if ( obj->short_descr != obj->pIndexData->short_descr)
         fprintf( fp, "ShD  %s~\n",	obj->short_descr	     );
-    if ( obj->description != obj->pIndexData->description)
+    //if ( obj->description != obj->pIndexData->description)
         fprintf( fp, "Desc %s~\n",	obj->description	     );
-    if ( obj->extra_flags != obj->pIndexData->extra_flags)
+    //if ( obj->extra_flags != obj->pIndexData->extra_flags)
         fprintf( fp, "ExtF %d\n",	obj->extra_flags	     );
-    if ( obj->wear_flags != obj->pIndexData->wear_flags)
+    //if ( obj->wear_flags != obj->pIndexData->wear_flags)
         fprintf( fp, "WeaF %d\n",	obj->wear_flags		     );
-    if ( obj->item_type != obj->pIndexData->item_type)
+    //if ( obj->item_type != obj->pIndexData->item_type)
         fprintf( fp, "Ityp %d\n",	obj->item_type		     );
-    if ( obj->weight != obj->pIndexData->weight)
+    //if ( obj->weight != obj->pIndexData->weight)
         fprintf( fp, "Wt   %d\n",	obj->weight		     );
 
     /* variable data */
@@ -709,11 +709,13 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
     if (obj->timer != 0)
         fprintf( fp, "Time %d\n",	obj->timer	     );
     fprintf( fp, "Cost %d\n",	obj->cost		     );
-    if (obj->value[0] != obj->pIndexData->value[0]
+    /*
+	if (obj->value[0] != obj->pIndexData->value[0]
     ||  obj->value[1] != obj->pIndexData->value[1]
     ||  obj->value[2] != obj->pIndexData->value[2]
     ||  obj->value[3] != obj->pIndexData->value[3]
     ||  obj->value[4] != obj->pIndexData->value[4])
+	*/
     	fprintf( fp, "Val  %d %d %d %d %d\n",
 	    obj->value[0], obj->value[1], obj->value[2], obj->value[3],
 	    obj->value[4]	     );
