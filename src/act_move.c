@@ -3653,8 +3653,8 @@ int send_arrow( CHAR_DATA *ch, CHAR_DATA *victim,OBJ_DATA *arrow , int door, int
 	   if (is_safe(ch,victim) ||
 		(IS_NPC(victim) && IS_SET(victim->act,ACT_NOTRACK)) )
     	    {
-            act("$p $E hasar vermeden yere düþüyor...",victim,arrow,NULL,TO_ALL);
-        	 	act("$p $E hasar vermeden yere düþüyor...",ch,arrow,NULL,TO_CHAR);
+            act("$p $e hasar vermeden yere düþüyor...",victim,arrow,NULL,TO_ALL);
+        	 	act("$p $e hasar vermeden yere düþüyor...",ch,arrow,NULL,TO_CHAR);
     	 	obj_to_room(arrow,victim->in_room);
     	    }
 	   else
