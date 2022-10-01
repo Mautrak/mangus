@@ -3730,6 +3730,7 @@ void load_limited_objects()
       fReadLevel = FALSE;
       tplayed = 0;
       sprintf(log_buf,"[%s] okunacak.\n\r",buf);
+      dump_to_scr(log_buf);
       if ( (pfile = fopen(buf, "r")) == NULL)
       {
         bug("Load_limited_objects: Can't open player file.",0);
