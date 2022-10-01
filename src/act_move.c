@@ -2439,7 +2439,7 @@ void do_vampire( CHAR_DATA *ch, char *argument )
 
     level = ch->level;
     duration = level / 10 ;
-    duration += 5;
+    duration += 7;
 
 /* haste */
     af.where     = TO_AFFECTS;
@@ -2477,7 +2477,7 @@ void do_vampire( CHAR_DATA *ch, char *argument )
     af.level     = level;
     af.duration  = duration;
     af.location  = APPLY_DAMROLL;
-    af.modifier  = ch->damroll;
+    af.modifier  = (int)((float)ch->damroll*0.7);
     af.bitvector = AFF_BERSERK;
     affect_to_char( ch, &af );
 

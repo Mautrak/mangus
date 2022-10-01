@@ -2811,7 +2811,7 @@ void spell_dragons_breath(int sn,int level,CHAR_DATA *ch, void *vo,int target )
 
     hpch = UMAX( 10, ch->hit );
     hp_dam  = number_range( hpch/9+1, hpch/5 );
-    dice_dam = dice(level,20);
+    dice_dam = dice(level,30);
 
     dam = UMAX(hp_dam + dice_dam / 5, dice_dam + hp_dam / 5);
 

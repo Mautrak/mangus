@@ -3684,12 +3684,6 @@ void do_buy( CHAR_DATA *ch, char *argument )
 
  	cost = 10 * pet->level * pet->level;
 
-	if ( ch->silver < cost )
-	{
-    send_to_char( "Onu satın almaya gücün yetmez.\n\r", ch );
-	    return;
-	}
-
 	if ( ch->level < pet->level )
 	{
 	    send_to_char(
@@ -3708,7 +3702,28 @@ void do_buy( CHAR_DATA *ch, char *argument )
 
 	}
 
-	deduct_cost(ch,cost);
+	if ( ch->silver < cost && ch->pcdata->bank_s < (int)((float)cost*1.05))
+	{
+    	send_to_char( "Onu satın almaya gücün yetmez.\n\r", ch );
+	    return;
+	}
+
+	if ( ch->silver >= cost )
+	{
+		deduct_cost(ch,cost);
+	}
+	else if(ch->pcdata->bank_s >= (int)((float)cost*1.05))
+	{
+		ch->pcdata->bank_s -= (int)((float)cost*1.05);
+		printf_to_char(ch,"Ödemeyi yüzde 5 komisyonla banka senedi imzalayarak yapıyorsun.\n\r");
+	}
+	else
+	{
+		send_to_char( "Bir ödeme sorunu çıktı ve onu satın almaya gücün yetmiyor.\n\r", ch );
+	    return;
+	}
+
+
 	pet			= create_mobile( pet->pIndexData , NULL);
 	SET_BIT(pet->act, ACT_PET);
 	SET_BIT(pet->affected_by, AFF_CHARM);
@@ -3817,16 +3832,6 @@ void do_buy( CHAR_DATA *ch, char *argument )
       }
 	}
 
-  if ( (ch->silver) < cost * number )
-	{
-	    if (number > 1)
-		act("$n anlatıyor 'Bu kadar çok alacak paran yok.",keeper,obj,ch,TO_VICT);
-	    else
-	    	act( "$n anlatıyor '$p satın alacak paran yok'.",keeper, obj, ch, TO_VICT );
-	    ch->reply = keeper;
-	    return;
-	}
-
 	if ( obj->level > ch->level )
 	{
     act( "$n anlatıyor 'Henüz $p kullanamazsın'.",
@@ -3857,6 +3862,16 @@ void do_buy( CHAR_DATA *ch, char *argument )
 	    check_improve(ch,gsn_haggle,TRUE,4);
 	}
 
+	if ( ch->silver < ( cost * number ) && ch->pcdata->bank_s < (int)((float)cost*(float)number*1.05))
+	{
+    	if (number > 1)
+		act("$n anlatıyor 'Bu kadar çok alacak paran yok.",keeper,obj,ch,TO_VICT);
+	    else
+	    	act( "$n anlatıyor '$p satın alacak paran yok'.",keeper, obj, ch, TO_VICT );
+	    ch->reply = keeper;
+	    return;
+	}
+
 	if (number > 1)
 	{
     sprintf(buf,"$n $p[%d] satın alıyor.",number);
@@ -3870,8 +3885,24 @@ void do_buy( CHAR_DATA *ch, char *argument )
     sprintf(buf,"%d akçeye $p satın alıyorsun.",cost);
 	    act( buf, ch, obj, NULL, TO_CHAR );
 	}
-	deduct_cost(ch,cost * number);
+	
+	if ( ch->silver >= ( cost * number ) )
+	{
+		deduct_cost(ch,cost * number);
+	}
+	else if(ch->pcdata->bank_s >= (int)((float)cost*(float)number*1.05))
+	{
+		ch->pcdata->bank_s -= (int)((float)cost*(float)number*1.05);
+		printf_to_char(ch,"Ödemeyi yüzde 5 komisyonla banka senedi imzalayarak yapıyorsun.\n\r");
+	}
+	else
+	{
+		send_to_char( "Bir ödeme sorunu çıktı ve satın almaya gücün yetmiyor.\n\r", ch );
+	    return;
+	}
+
 	keeper->silver += cost * number;
+
 
 	for (count = 0; count < number; count++)
 	{

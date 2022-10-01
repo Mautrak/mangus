@@ -1056,9 +1056,9 @@ void spell_acid_blast( int sn, int level, CHAR_DATA *ch, void *vo, int target )
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     int dam;
 
-    dam = dice( level, 18 );
+    dam = dice( level, 30 );
     if ( saves_spell( level, victim, DAM_ACID ) )
-	dam /= 2;
+	    dam /= 2;
     damage( ch, victim, dam, sn,DAM_ACID,TRUE);
     return;
 }

@@ -1333,7 +1333,7 @@ void do_nerve(CHAR_DATA *ch, char *argument)
 
   if (is_safe(ch,victim)) return;
 
-  if (is_affected(ch,gsn_nerve))
+  if (is_affected(victim,gsn_nerve))
     {
       send_to_char("Onu daha fazla zayýflatamazsýn.\n\r",ch);
       return;
