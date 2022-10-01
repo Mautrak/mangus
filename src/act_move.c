@@ -3662,7 +3662,15 @@ int send_arrow( CHAR_DATA *ch, CHAR_DATA *victim,OBJ_DATA *arrow , int door, int
 	        int dam;
 
 		dam = dice(arrow->value[1],arrow->value[2]);
-		dam = number_range((int)((float)dam* 1.5), (5*dam));
+		dam = number_range((int)((float)dam* 2), (7*dam));
+
+    if ( ch->in_room->sector_type == SECT_FIELD )
+      dam = (int)((float)dam*1.3)
+    else if( ch->in_room->sector_type == SECT_FOREST )
+      dam = (int)((float)dam*2)
+    else if( ch->in_room->sector_type == SECT_MOUNTAIN || ch->in_room->sector_type == SECT_HILLS )
+      dam = (int)((float)dam*1.7)
+
 		dam += damroll + bonus + (10 * str_app[get_curr_stat(ch,STAT_STR)].todam);
 
         	if (IS_WEAPON_STAT(arrow,WEAPON_POISON))

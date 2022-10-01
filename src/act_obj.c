@@ -4928,10 +4928,20 @@ void do_kasa(CHAR_DATA *ch, char *argument)
 		if( obj->item_type == ITEM_CONTAINER || obj->item_type == ITEM_MONEY || obj->item_type == ITEM_POTION ||
 			obj->item_type == ITEM_FURNITURE || obj->item_type == ITEM_FOOD || obj->item_type ==  ITEM_BOAT ||
 			obj->item_type == ITEM_CORPSE_NPC || obj->item_type == ITEM_CORPSE_PC || obj->item_type == ITEM_FOUNTAIN ||
-			obj->item_type == ITEM_PORTAL || obj->item_type == ITEM_JUKEBOX || obj->item_type == ITEM_TATTOO )
+			obj->item_type == ITEM_PORTAL || obj->item_type == ITEM_JUKEBOX || obj->item_type == ITEM_TATTOO || obj->item_type == ITEM_KEY )
 		{
 			send_to_char( "Kasaya bu tür eþyalar koyamazsýn.\n\r", ch );
 			return;
+		}
+
+		if((ch->level < obj->level -3) && (obj->item_type != ITEM_CONTAINER))
+		{
+			send_to_char( "Eðer bir taþýyýcý deðilse, seviyenin en fazla 3 üstü bir eþyayý kasaya koyabilirsin.\n\r", ch );
+		}
+
+		if(obj->item_type == ITEM_MAP && !obj->value[0])
+		{
+			send_to_char( "Deðersiz haritalarý kasaya koyamazsýn.\n\r", ch );
 		}
 
 		obj_from_char( obj );
