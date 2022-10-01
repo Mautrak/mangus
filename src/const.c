@@ -884,7 +884,7 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
         { 3018, 0, 0, 0, 0, 0 },  75,  18, 6,  60,  100, TRUE,
         0,{0,3,0,0,0,5},CR_ALL
     },
-
+ 
     {
 		{"cleric","ermiþ"}, "Erm",  STAT_WIS,  OBJ_VNUM_SCHOOL_SWORD,
 		{ 3003, 9619, 9619, 9619, 9619, 9619},  75,  18, 2,  70, 80, TRUE,
@@ -5141,7 +5141,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"whip","kýrbaç"},		{  1, 1,  93,  1,93,1,93,1 ,1,93,1,1,1},
+	{"whip","kýrbaç"},		{  1, 1,  93,  1,1,1,93,1 ,1,93,1,1,1},
 	{ 2, 2, 1, 1,1,1,1,1,1,1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_whip,            	SLOT( 0),       0,      0,
