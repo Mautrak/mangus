@@ -5063,7 +5063,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{"bow","yay"},{ 93, 93,93, 44,93,93,93,35 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,	TAR_IGNORE,	POS_STANDING,
-	&gsn_bow,		SLOT(0),	0,	12,
+	&gsn_bow,		SLOT(0),	0,	4,
   "yay",		"!bow!",	"",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_WEAPONSMASTER
     },
