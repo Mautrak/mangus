@@ -140,23 +140,41 @@ bool show_cwear_to_char( CHAR_DATA *ch, OBJ_DATA *obj )
 
 char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 {
-    static char buf[MAX_STRING_LENGTH];
-    static char buf_con[100];
-	AFFECT_DATA *paf;
-	
-	int OBJ_NITELIK = 0;
-	int OBJ_ZZ_VZ = 0;
-	int OBJ_YP_MANA_HP = 0;
+  static char buf[MAX_STRING_LENGTH];
+  static char buf_con[100],buf_eskime[100];
+  AFFECT_DATA *paf;
 
-    buf[0] = '\0';
+  int OBJ_NITELIK = 0;
+  int OBJ_ZZ_VZ = 0;
+  int OBJ_YP_MANA_HP = 0;
+
+  buf[0] = '\0';
+  buf_con[0] = '\0';
+  buf_eskime[0] = '\0';
+
+  if (obj->pIndexData->vnum > 5)	/* money  etc */
+  {
+    sprintf(buf_con," [%s%s%s]",
+      CLR_GREEN,
+      get_cond_alias(obj),
+      CLR_WHITE_BOLD);
+  }
+  else
+  {
     buf_con[0] = '\0';
+  }
 
-    if (obj->pIndexData->vnum > 5)	/* money  etc */
-    	sprintf(buf_con," [%s%s%s]",
-		CLR_GREEN,
-		get_cond_alias(obj),
-		CLR_WHITE_BOLD);
-    else buf_con[0] = '\0';
+  if (obj->pIndexData->vnum > 5)	/* money  etc */
+  {
+    sprintf(buf_eskime," [%s%d%s]",
+      CLR_GREEN,
+      esya_kac_gunluk(obj->creation_time),
+      CLR_WHITE_BOLD);
+  }
+  else
+  {
+    buf_eskime[0] = '\0';
+  }
 
     if ((fShort && (obj->short_descr == NULL || obj->short_descr[0] == '\0'))
     ||  (obj->description == NULL || obj->description[0] == '\0'))
@@ -315,8 +333,9 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
     {
 	if ( obj->short_descr != NULL )
 	{
-	    strcat( buf, obj->short_descr );
-            strcat( buf, buf_con );
+    strcat( buf, obj->short_descr );
+    strcat( buf, buf_con );
+    strcat( buf, buf_eskime );
 	}
     }
     else
@@ -2085,7 +2104,7 @@ void do_score( CHAR_DATA *ch, char *argument )
 
     }
 
-    game_time_to_string(ch->pcdata->birth_time,dogumGunu);
+  game_time_to_string(ch->pcdata->birth_time,dogumGunu);
 	
 	if(ch->pcdata->oyuncu_katli == 0)
 	{

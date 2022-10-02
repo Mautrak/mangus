@@ -930,9 +930,9 @@ void game_time_to_string( time_t gameTime , char *buf )
 	/* varsayýlan deðerler */
 	long milat 			= 1566421201;
 	long bir_oyun_saati	= 5 * 60; /* 300 gerçek saniye , 5 gerçek dakika */
-	long bir_oyun_gunu	= 24 * bir_oyun_saati; /* 120 gerçek dakika , 2 gerçek saat*/
-	long bir_oyun_ayi	= 10 * bir_oyun_gunu; /* 20 gerçek saat */
-	long bir_oyun_yili	= 12 * bir_oyun_ayi; /* 240 gerçek saat, 10 gerçek gün */
+	long bir_oyun_gunu	= 24 * bir_oyun_saati; /* 120 gerçek dakika , 2 gerçek saat, 7200*/
+	long bir_oyun_ayi	= 10 * bir_oyun_gunu; /* 20 gerçek saat, 72000 */
+	long bir_oyun_yili	= 12 * bir_oyun_ayi; /* 240 gerçek saat, 10 gerçek gün, 864000 */
 
 	long yil , ay , gun , x;
 
@@ -962,6 +962,11 @@ int game_time_to_year( time_t gameTime )
 	x = (long)( gameTime - milat );
 	yil = ceil( (float)x / (float)bir_oyun_yili );
 	return yil;
+}
+
+int esya_kac_gunluk( long esya_yaratilma_zamani )
+{
+	return (int)((float)(current_time - esya_yaratilma_zamani)) / (float)( 5 * 60 * 24 );
 }
 
 int get_age( CHAR_DATA *ch )

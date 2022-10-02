@@ -2176,7 +2176,7 @@ struct	pc_data
 {
     PC_DATA *		next;
     BUFFER * 		buffer;
-		time_t		birth_time;
+	time_t		birth_time;
     bool		valid;
     char *		pwd;
     char *		bamfin;
@@ -2322,6 +2322,7 @@ struct	obj_data
     int			pit;
     bool		extracted;
     int			water_float;
+    time_t		creation_time; // esyanin yasini hesaplamak icin
 };
 
 
@@ -3417,6 +3418,7 @@ void	game_time_update args(( void ));
 void	game_time_to_string args(( time_t gameTime , char *buf ));
 int		game_time_to_year args(( time_t gameTime ));
 int     get_age         args( ( CHAR_DATA *ch ) );
+int     esya_kac_gunluk args( ( long esya_yaratilma_zamani ) );
 int		age_to_num	args( ( int age) );
 void	advance_level	args( ( CHAR_DATA *ch ) );
 void	gain_exp	args( ( CHAR_DATA *ch, int gain ) );

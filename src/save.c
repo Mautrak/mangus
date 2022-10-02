@@ -677,6 +677,7 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
     fprintf( fp, "#O\n" );
     fprintf( fp, "Vnum %d\n",   	obj->pIndexData->vnum		);
     fprintf( fp, "Cond %d\n",		obj->condition			);
+	fprintf( fp, "Creation  %ld\n", obj->creation_time	);
 
     if (!obj->pIndexData->new_format)
 	fprintf( fp, "Oldstyle\n");
@@ -1915,6 +1916,7 @@ void fread_obj( CHAR_DATA *ch, FILE *fp )
 		break;
 	    }
 	    KEY( "Cost",	obj->cost,		fread_number( fp ) );
+		KEY( "Creation",	obj->creation_time,	fread_number( fp ) );
 	    break;
 
 	case 'D':
