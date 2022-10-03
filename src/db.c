@@ -1940,7 +1940,15 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex , AREA_DATA *	pArea)
   mob->armor[AC_SLASH]		= ac_dice(AC_SLASH,pMobIndex->level);
   mob->armor[AC_EXOTIC]	= ac_dice(AC_EXOTIC,pMobIndex->level);
 
-  mob->race		= race_dice(mob->level);
+  if( pMobIndex->vnum == MOB_VNUM_ELM_EARTH || pMobIndex->vnum == MOB_VNUM_ELM_AIR || pMobIndex->vnum == MOB_VNUM_ELM_FIRE ||
+      pMobIndex->vnum == MOB_VNUM_ELM_WATER || pMobIndex->vnum == MOB_VNUM_ELM_LIGHT || pMobIndex->vnum == MOB_VNUM_WEAPON ||
+      pMobIndex->vnum == MOB_VNUM_ARMOR || pMobIndex->vnum == MOB_VNUM_DEMON || pMobIndex->vnum == MOB_VNUM_UNDEAD || 
+      pMobIndex->vnum == MOB_VNUM_LION || pMobIndex->vnum == MOB_VNUM_WOLF || pMobIndex->vnum == MOB_VNUM_LESSER_GOLEM || 
+      pMobIndex->vnum == MOB_VNUM_STONE_GOLEM || pMobIndex->vnum == MOB_VNUM_IRON_GOLEM || pMobIndex->vnum == MOB_VNUM_ADAMANTITE_GOLEM || 
+      pMobIndex->vnum == MOB_VNUM_HUNTER || pMobIndex->vnum == MOB_VNUM_SUM_SHADOW || pMobIndex->vnum == MOB_VNUM_DOG )
+        mob->race		= pMobIndex->race;
+  else
+        mob->race		= race_dice(mob->level);
 
   mob->off_flags		= race_table[mob->race].off;
   mob->imm_flags		= race_table[mob->race].imm;
