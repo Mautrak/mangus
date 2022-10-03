@@ -1063,8 +1063,8 @@ struct	kill_data
 #define IMM_MENTAL              (P)
 #define IMM_DISEASE             (Q)
 #define IMM_DROWNING            (R)
-#define IMM_LIGHT		(S)
-#define IMM_SOUND		(T)
+#define IMM_LIGHT		        (S)
+#define IMM_SOUND		        (T)
 #define IMM_WOOD                (X)
 #define IMM_SILVER              (Y)
 #define IMM_IRON                (Z)
@@ -3074,6 +3074,7 @@ int advatoi args((const char *s));
 
 /* enter.c */
 RID  *get_random_room   args ( (CHAR_DATA *ch) );
+
 /* hunt.c */
 void hunt_victim(CHAR_DATA *ch);
 
