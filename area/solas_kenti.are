@@ -174,7 +174,7 @@ Bir tarla faresi burada, yiyecek arýyor.
 ~
 A dirty nasty field rat . Obviously  looking for food in the town.
 ~
-lizard~
+snake~
 1|64 65536 10
 #10217
 katip~
@@ -395,7 +395,7 @@ sýçan~
 Büyük bir sýçan burada.
 ~
 ~
-lizard~
+snake~
 1|4|64 65536 5
 #10240
 yarasa~
@@ -493,7 +493,7 @@ Bir papaðan görüyorsun, kuyruðunu oynatýp saða sola sallanýyor.
 ~
 The macaw looks like a strong, fearless fighter. It is a beautiful bird.
 ~
-song bird~
+bird~
 6 0 12
 #10251
 kuzgun~
@@ -512,7 +512,7 @@ Büyük bir avcý doðan görüyorsun.
 The hawk looks like a strong, fearless fighter. It has been trained for
 hunting game.
 ~
-song bird~
+bird~
 6 0 18
 #10253
 savaþ þahin~
@@ -522,7 +522,7 @@ Büyük bir savaþ þahini burada.
 The battle falcon looks like a strong, fearless fighter. This giant breed has
 been trained especially for combat.
 ~
-song bird~
+bird~
 6 0 21
 #0
 

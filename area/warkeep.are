@@ -85,7 +85,7 @@ Alara's familiar, a hawk, screeches at you.
 ~
 This angry bird is Baragar's familiar. Do away with it.
 ~
-song bird~
+bird~
 2|32|64|128 8|512|8192|524288 12
 #15705
 trol guard~
@@ -183,7 +183,7 @@ This hungry reptile hasn't been fed in days. Baragar starves his crocs to
 keep them savage. He uses them to punish his guards. They seldom make
 the same mistake twice, because they are usually dead.
 ~
-lizard~
+snake~
 2|32|64 0 19
 #15714
 war dog~

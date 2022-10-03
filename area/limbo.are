@@ -191,7 +191,7 @@ Kocaman bir toprak uþaðý hareket etmeye hazýrlanýyor.
 ~
 Hakkýnda özel bir þey görmüyorsun.
 ~
-earth elemental~
+elemental~
 A 0 1
 #29
 hava uþak~
@@ -200,7 +200,7 @@ Kocaman bir hava uþaðý esmeye hazýrlanýyor.
 ~
 Hakkýnda özel bir þey görmüyorsun.
 ~
-air elemental~
+elemental~
 A 0 1
 #30
 ateþ uþak~
@@ -209,7 +209,7 @@ Kocaman bir ateþ uþaðý yakmaya hazýrlanýyor.
 ~
 Hakkýnda özel bir þey görmüyorsun.
 ~
-fire elemental~
+elemental~
 A 0 1
 #31
 su uþak~
@@ -218,7 +218,7 @@ Kocaman bir su uþaðý boðmaya hazýrlanýyor.
 ~
 Hakkýnda özel bir þey görmüyorsun.
 ~
-water elemental~
+elemental~
 A 0 1
 #32
 enerji uþak~
@@ -227,7 +227,7 @@ Kocaman bir enerji uþaðý çarpmaya hazýrlanýyor.
 ~
 Hakkýnda özel bir þey görmüyorsun.
 ~
-air elemental~
+elemental~
 A 0 1
 #33
 canlandýrýlmýþ silah~
