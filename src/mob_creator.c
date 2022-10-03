@@ -124,3 +124,13 @@ int sex_dice(void)
 {
 	return number_range(1,2);
 }
+
+sh_int race_dice(int level)
+{
+	if(level<40)
+		return number_range(1,26);
+	else
+		return number_range(1,31);
+	
+	return number_range(1,26);
+}

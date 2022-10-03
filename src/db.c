@@ -1940,19 +1940,20 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex , AREA_DATA *	pArea)
   mob->armor[AC_SLASH]		= ac_dice(AC_SLASH,pMobIndex->level);
   mob->armor[AC_EXOTIC]	= ac_dice(AC_EXOTIC,pMobIndex->level);
 
-  mob->off_flags		= race_table[pMobIndex->race].off;
-  mob->imm_flags		= race_table[pMobIndex->race].imm;
-  mob->res_flags		= race_table[pMobIndex->race].res;
-  mob->vuln_flags		= race_table[pMobIndex->race].vuln;
+  mob->race		= race_dice(mob->level);
+
+  mob->off_flags		= race_table[mob->race].off;
+  mob->imm_flags		= race_table[mob->race].imm;
+  mob->res_flags		= race_table[mob->race].res;
+  mob->vuln_flags		= race_table[mob->race].vuln;
 
   mob->start_pos		= position_dice();
   mob->default_pos		= position_dice();
   mob->sex				= sex_dice();
 
-  mob->race		= pMobIndex->race;
-  mob->form		= race_table[pMobIndex->race].form;
-  mob->parts		= race_table[pMobIndex->race].parts;
-  mob->size		= race_table[pMobIndex->race].size;
+  mob->form		= race_table[mob->race].form;
+  mob->parts		= race_table[mob->race].parts;
+  mob->size		= race_table[mob->race].size;
   mob->material		= str_dup("none");
   mob->extracted		= FALSE;
   mob = mob_assign_perm_stats(mob);

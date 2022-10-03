@@ -3386,6 +3386,7 @@ int dam_type_dice args( (void) );
 int ac_dice args( (int i,int level) );
 int position_dice args( (void) );
 int sex_dice args( (void) );
+sh_int race_dice args( (int level) );
 /* obj_creator.c */
 void obj_random_paf		args( (OBJ_DATA *obj) );
 int  obj_random_condition  args( (void) );
