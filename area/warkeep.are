@@ -194,7 +194,7 @@ Baragar bred these brutes from the most vicious alsatians and pit bulls he
 could find, then infected them with super-rabies to make 'em nice and
 friendly.
 ~
-fido~
+dog~
 2|32|64 8192 16
 #15715
 assassin~
@@ -227,7 +227,7 @@ These evil dog-like humanoids have been captured by Baragar and set to work
 as miners and laborers helping to excavate the ancient lower cavers beneath
 the keep.
 ~
-fido~
+dog~
 64|128 0 12
 #15718
 ogre slave~
@@ -553,7 +553,7 @@ A
 #15729
 boots~
 elven boots~
-A pair of çora boots lie here.~
+A pair of elf boots lie here.~
 ~
 9 0 1|64
 0 0 0 0
@@ -564,8 +564,8 @@ A
 14 25
 #15730
 elven cloak~
-a green çora cloak~
-A green çora cloak has been left here.~
+a green elf cloak~
+A green elf cloak has been left here.~
 ~
 9 0 1|4
 0 0 0 0

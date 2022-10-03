@@ -1116,8 +1116,8 @@ wand AG AO
 44 50 50 'teleport' 0
 39 30 18900 P
 #10435
-figurine black dragon~
-a figurine of a black dragon~
+figurine dragon~
+a figurine of a dragon~
 You see a small figurine of a black dragon on the ground.~
 oldstyle~
 wand AG AO
@@ -1140,16 +1140,16 @@ wand AG AO
 38 10 10 'acid blast' 0
 33 30 57600 P
 #10438
-figurine green dragon~
-a figurine of a green dragon~
+figurine dragon~
+a figurine of a dragon~
 You see a small figurine of a green dragon on the ground.~
 oldstyle~
 wand AG AO
 41 5 5 'gas breath' 0
 41 30 87800 P
 #10439
-figurine blue dragon~
-a figurine of a blue dragon~
+figurine dragon~
+a figurine of a dragon~
 You see a small figurine of a blue dragon on the ground.~
 oldstyle~
 wand AG AO

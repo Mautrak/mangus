@@ -40,7 +40,7 @@ Küçük bir kýrkayak burada bitki arýyor.
 ~
 It looks completely harmless but who knows for sure?
 ~
-centipede~
+snake~
 ABU 0 3
 #4003
 kobold~
@@ -89,15 +89,15 @@ to show you what he can do!
 human~
 ACFT 0 7
 #4052
-hobgoblin~
-hobgoblin~
+goblin~
+goblin~
 Küçük bitkin bir hobgoblin köþeye sinmiþ duruyor.
 ~
 Looking into the eyes of this poor soul makes you feel
 sad as you see the terror and fear in its eyes.  Why
 don't you put it out of its misery?
 ~
-hobgoblin~
+goblin~
 ACGHT 0 6
 #4053
 yýlan~
@@ -115,17 +115,17 @@ Beyaz bir kýrkayak maðara yüzeyi boyunca geliþigüzel sürünüyor.
 ~
 The centipede doesn't really seem to notice you.
 ~
-centipede~
+snake~
 ABU 0 5
 #4055
-hobgoblin~
+goblin~
 iri hobgoblin~
 Ýri bir hobgoblin seni koparýp koparamayacaðýný merak ediyor.
 ~
 Red, bloodshot eyes and drool dripping from its mouth makes you
 wonder just how far away you should be.
 ~
-hobgoblin~
+goblin~
 ACGT 0 10
 #4056
 ork~
@@ -213,7 +213,7 @@ Küçük, zararsýz bir kýrkayak, burada yiyecek yeþillik arýyor.
 It doesn't seem to pay any attention towards you.  You are probably
 not important.
 ~
-centipede~
+snake~
 ABU 0 6
 #4106
 savaþçý~
@@ -240,7 +240,7 @@ Mavi bir yarasa daireler çizerek uçarken elektrik akýmlarý oluþturuyor.
 ~
 Bzzzt.  Zap.  Crackle.  Speak about static electricity!
 ~
-bat~
+bird~
 ABF 0 7
 #4151
 kýrmýzý yarasa~
@@ -249,7 +249,7 @@ Kýrmýzý bir yarasa tavanda baþaþaðý asýlý duruyor ve parlýyor.
 ~
 You can definitely feel some heat from this thing.  A fever perhaps?
 ~
-bat~
+bird~
 ABF 0 7
 #4152
 yarasa yeþil~
@@ -258,7 +258,7 @@ Yeþil bir yarasa duvardan duvara uçarken berbat bir koku býrakýyor.
 ~
 Whew!  What a stinker!
 ~
-bat~
+bird~
 ABF 0 7
 #4153
 beyaz yarasa~
@@ -267,7 +267,7 @@ Beyaz bir yarasa tavanda dinleniyor. Bu soðuðun nereden geldiðini merak ediyorsu
 ~
 Brrr!  You almost can't distinguish this bat from an ice cube.
 ~
-bat~
+bird~
 ABF 0 7
 #4154
 siyah yarasa~
@@ -276,7 +276,7 @@ Siyah bir yarasa duvarlarda uçarken geride týslayan bir sývý býrakýyor.
 ~
 Amazing!  This bat is grooming itself with acid!
 ~
-bat~
+bird~
 ABF 0 7
 #4155
 hýrsýz~

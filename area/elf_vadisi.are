@@ -2104,29 +2104,29 @@ M 0 7800   6 7837  1	* a cooshee
 M 0 7800   6 7873  1	* a cooshee
 M 0 7800   6 7823  1	* a cooshee
 M 0 7800   6 7833  1	* a cooshee
-M 0 7801   6 7805  1	* a valley çora
+M 0 7801   6 7805  1	* a valley elf 
 E 1 7802  -1   16	*   an elf longsword
-M 0 7801   6 7820  1	* a valley çora
+M 0 7801   6 7820  1	* a valley elf 
 E 1 7802  -1   16	*   an elf longsword
-M 0 7801   6 7818  1	* a valley çora
+M 0 7801   6 7818  1	* a valley elf 
 E 1 7802  -1   16	*   an elf longsword
-M 0 7801   6 7844  1	* a valley çora
+M 0 7801   6 7844  1	* a valley elf 
 E 1 7802  -1   16	*   an elf longsword
-M 0 7801   6 7877  1	* a valley çora
+M 0 7801   6 7877  1	* a valley elf 
 E 1 7802  -1   16	*   an elf longsword
-M 0 7801   6 7816  1	* a valley çora
+M 0 7801   6 7816  1	* a valley elf 
 E 1 7802  -1   16	*   an elf longsword
-M 0 7802   6 7868  1	* a valley çora
+M 0 7802   6 7868  1	* a valley elf 
 E 1 7802  -1   16	*   an elf longsword
-M 0 7802   6 7811  1	* a valley çora
+M 0 7802   6 7811  1	* a valley elf 
 E 1 7802  -1   16	*   an elf longsword
-M 0 7802   6 7865  1	* a valley çora
+M 0 7802   6 7865  1	* a valley elf 
 E 1 7802  -1   16	*   an elf longsword
-M 0 7802   6 7854  1	* a valley çora
+M 0 7802   6 7854  1	* a valley elf 
 E 1 7802  -1   16	*   an elf longsword
-M 0 7802   6 7842  1	* a valley çora
+M 0 7802   6 7842  1	* a valley elf 
 E 1 7802  -1   16	*   an elf longsword
-M 0 7802   6 7820  1	* a valley çora
+M 0 7802   6 7820  1	* a valley elf 
 E 1 7802  -1   16	*   an elf longsword
 M 0 7803   1 7853  1	* a valley elf sentry
 E 1 7800   9    5	*   elf chainmail
@@ -2188,11 +2188,11 @@ M 0 7805   5 7876  1	* a valley elf scout
 E 1 7801   9    8	*   elf boots
 E 1 7802  -1   16	*   an elf longsword
 E 1 7803   9    3	*   a brown cloak
-M 0 7806   5 7847  2	* a valley çora
-M 0 7806   5 7847  2	* a valley çora
-M 0 7806   5 7835  1	* a valley çora
-M 0 7806   5 7838  1	* a valley çora
-M 0 7806   5 7839  1	* a valley çora
+M 0 7806   5 7847  2	* a valley elf 
+M 0 7806   5 7847  2	* a valley elf 
+M 0 7806   5 7835  1	* a valley elf 
+M 0 7806   5 7838  1	* a valley elf 
+M 0 7806   5 7839  1	* a valley elf 
 O 0 7809   9 7846	* a potion
 O 0 7823   9 7846	* a scroll
 O 0 7820   9 7846	* a scroll

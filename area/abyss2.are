@@ -95,7 +95,7 @@ The lost soul is a ghostly apparition, seeking revenge on the living.
 human~
 ACF DP 20
 #25006
-storm giant~
+giant~
 a Storm Giant~
 A storm giant stands here, angered by your presence.
 ~
@@ -133,7 +133,7 @@ A huge eight headed hydra is sleeping here
 The huge, scaled creature  has eight heads... each capable of breathing
 a dangerous stream of fire.
 ~
-fox~
+dog~
 ABCF 0 36
 #25010
 kraken~
@@ -144,7 +144,7 @@ This large creature is a close relative of the squid but a much larger
 size. its huge tentacles grasp something... though you can not make out
 what the object is.
 ~
-water fowl~
+bird~
 ABF 8 40
 #25011
 treant tree~
@@ -157,8 +157,8 @@ is a large opening that looks very much like a mouth.
 lizard~
 ABCF H 44
 #25012
-gamayun~
-a gamayun~
+arial~
+a arial~
 A disgusting creature of etheral nature stands here, its body completely
 wraped in bandages..
 ~
@@ -166,7 +166,7 @@ This man sized creature has bandages wrapped all about its body. Its eyes
 glow with a brilliant red fire, in its right hand he grasps a an extremely
 sharp blade of magical nature.
 ~
-gamayun~
+arial~
 ABCGH DP 26
 #25013
 kalas~
@@ -226,7 +226,7 @@ The prince of water elementals flows here
 ~
 He looks like a giant wave about to swoop down upon you.
 ~
-water fowl~
+bird~
 AB FH 32
 #25019
 earth elemental king~
@@ -235,7 +235,7 @@ The King of earth elementals stands here.. cower fool!
 ~
 It looks vaguely man-shaped.
 ~
-water fowl~
+bird~
 AB FH 32
 #25020
 air elemental lord~

@@ -296,14 +296,14 @@ from the Dwarven race here in Antharia.
 dwarf~
 2|65536 0 40
 #12364
-Çora Representative~
-an Çora representative~
-An Çora representative is standing here.
+Elf Representative~
+an Elf representative~
+An Elf representative is standing here.
 ~
-A young çora is here looking at you.  She is the representative from
-the çora race here in Antharia.
+A young elf is here looking at you.  She is the representative from
+the elf race here in Antharia.
 ~
-çora~
+elf~
 2|1024 0 40
 #12361
 Druidic Representative~
@@ -1971,7 +1971,7 @@ M 1 12360 1 12360  1 *                       load Hum. rep.
 *
 M 1 12365 1 12365  1 *                       load Dwf. rep.
 *
-M 1 12364 1 12364  1 *                       load Çora rep.
+M 1 12364 1 12364  1 *                       load Elf rep.
 *
 M 1 12361 1 12361  1 *                       load Dru. rep.
 *

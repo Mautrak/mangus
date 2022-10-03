@@ -104,7 +104,7 @@ AC E 19
 Tüccar Isdarl~
 Tüccar bir Isdarl kendi iþleriyle meþgul oluyor.
 ~
-A black-skinned and pale-haired çora stands before you heading somewhere
+A black-skinned and pale-haired elf stands before you heading somewhere
 with a purpose to sell his goods.  Although he looks skinny he looks very
 deadly and quick.
 ~
@@ -704,12 +704,12 @@ A small kobold looks like a strong fierce fighter.
 kobold~
 ABCT 0 20
 #16063
-çora köle~
-Çora köle~
-Çora bir köle emirlere hazýr bekliyor.
+elf köle~
+Elf köle~
+Elf bir köle emirlere hazýr bekliyor.
 ~
-The çora slave looks as if he would defend his master, if he had to. ~
-çora~
+The elf slave looks as if he would defend his master, if he had to. ~
+elf~
 ABC 0 24
 #16064
 cüce köle~
@@ -1126,7 +1126,7 @@ wide.  The wings are membrane and you can see the sickly green blood
 pulsating through them.  The beast's eyes are a dirty reddish colour and the
 focus right at you.
 ~
-bat~
+bird~
 AG F 44
 #16102
 skyzorr'n~
@@ -1570,9 +1570,9 @@ A
 A
 19 5
 #16007
-bakýr-çora kýlýç karanlýk~
+bakýr-elf kýlýç karanlýk~
 Karanlýðýn kýlýcý~
-Bir bakýr-çora býçaðý sanki etrafýna karanlýk yayýyor gibi.~
+Bir bakýr-elf býçaðý sanki etrafýna karanlýk yayýyor gibi.~
 steel~
 weapon C AN
 sword 4 4 slice 0
@@ -2034,8 +2034,8 @@ A
 A
 19 4
 #16046
-bakýr-çora zincirzýrh~
-Siyah bakýr-çora zincirzýrhý~
+bakýr-elf zincirzýrh~
+Siyah bakýr-elf zincirzýrhý~
 Siyah bir zincirzýrh bulunmaya hazýr bir halde yere uzanmýþ.~
 iron~
 armor B AD
@@ -2046,8 +2046,8 @@ A
 A
 13 4
 #16047
-bakýr-çora kýlýcý kýlýç~
-Bir bakýr-çora kýlýcý~
+bakýr-elf kýlýcý kýlýç~
+Bir bakýr-elf kýlýcý~
 Koyu renk bir kýlýç yerde uzanýyor.~
 steel~
 weapon G AN
@@ -2058,8 +2058,8 @@ A
 A
 19 1
 #16048
-bakýr-çora hançeri~
-Bir bakýr-çora hançeri~
+bakýr-elf hançeri~
+Bir bakýr-elf hançeri~
 Koyu renk bir hançer yerde uzanýyor.~
 steel~
 weapon G AN
@@ -2070,8 +2070,8 @@ A
 A
 19 1
 #16049
-bakýr-çora gürzü~
-Bir bakýr-çora gürzü~
+bakýr-elf gürzü~
+Bir bakýr-elf gürzü~
 Koyu renk bir gürz yerde uzanýyor.~
 wood~
 weapon G AN
@@ -15022,7 +15022,7 @@ M 0 16059 1  16320 1 *; goblin slave at slave dealer
 M 0 16060 1  16320 1 *; male human slave at slave dealer
 M 0 16061 1  16320 1 *; female human slave at slave dealer
 M 0 16062 1  16320 1 *; kobold slave at slave dealer
-M 0 16063 1  16320 1 *; çora slave at slave dealer
+M 0 16063 1  16320 1 *; elf slave at slave dealer
 M 0 16064 1  16320 1 *; dwarf slave at slave dealer
 *
 M 0 16022 4  16352 1 *; yeg patron

@@ -548,7 +548,7 @@ For example:
 
 who immortal    lists all immortals playing
 who pk		lists all characters in your PK range
-who çora         lists all çora clerics
+who elf         lists all elf clerics
 who entropy pk  lists all characters in entropy cabal, (if you are a mamber)
 		which are in your PK range
 
@@ -2052,13 +2052,11 @@ character creation process:
 Human:     Humans are the typical, average race, possessing no advantages nor
            disadvantages.
 Elves:     Elves are slender and fragile, yet agile and dextrous creatures.
-	   There are currently THREE çora races.(Elf,Dark-Elf,Half-Elf).
+	   There are currently THREE elf races.(Elf,Dark-Elf,Half-Elf).
 Dwarf:     Dwarves are typically high in constitution and strength, and have
 	   infravision.There are currently THREE: Dwarf,Yeg,Svirfnebli.
 Gnome:     Gnomes are typically highly intelligent but low in strength. And
 	   gnomes costs 300 extra exps per level.
-Gamayun:     Gamayuns are a highly dextrous and smart race.They always fly. And
-	   gamayuns costs 250  exps per level.
 Giant:     Giants are great and strong race. They are higher in constitution.
 	   There are currently FOUR: Fire-Gia, Storm-Gia, Frost-Gia, Cloud-Gia.
 Börü:	   They are not strong , but has the ability to see in the dark, called

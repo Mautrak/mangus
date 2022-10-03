@@ -35,14 +35,14 @@ fur and has the ugliest teeth you have ever seen.
 human~
 AF c 10
 #14502
-tüccar çora~
-Çora tüccar~
-Bir Çora tüccar mallarýný kontrol ediyor.
+tüccar elf~
+Elf tüccar~
+Bir Elf tüccar mallarýný kontrol ediyor.
 ~
-This Çora does not appear to be very prosperous. His violet eyes look you
+This Elf does not appear to be very prosperous. His violet eyes look you
 over as he tries to decide if you are a client or a salesman.
 ~
-çora~
+elf~
 BG J 12
 #14503
 tüccar cüce~
@@ -171,22 +171,22 @@ to be in good health, her eyes are puffy and red.
 human~
 ACS 0 8
 #14516
-çora erkek~
-Çora Erkeði~
-Bir Çora Erkeði birþeyler arýyor.
+elf erkek~
+Elf Erkeði~
+Bir Elf Erkeði birþeyler arýyor.
 ~
-The Çora Man looks at you intently before continuing on his way.
+The Elf Man looks at you intently before continuing on his way.
 ~
-çora~
+elf~
 ABR DEFZ 13
 #14517
-çora kadýn~
-Çora Kadýný~
-Güzel bir Çora Kadýný kendi kendine mýrýldanýyor.
+elf kadýn~
+Elf Kadýný~
+Güzel bir Elf Kadýný kendi kendine mýrýldanýyor.
 ~
 Looking into her eyes causes you great fear.
 ~
-çora~
+elf~
 ABR DEFZ 16
 #14518
 cüce kadýn~
@@ -231,21 +231,21 @@ treasure A A
 0 0 0 0 0
 5 2 400 P
 #14502
-çora kolyesi~
-Çora Kolyesi~
+elf kolyesi~
+Elf Kolyesi~
 Bir kolye burada düþürülmüþ.~
 steal~
 armor 0 AC
 7 7 7 0 2
 19 50 4700 P
 E
-necklace çora~
+necklace elf~
 Engraved on the back are the words: "Protect that which is important"~
 A
 17 -10
 #14503
-çora iksiri~
-Çora Ýksiri~
+elf iksiri~
+Elf Ýksiri~
 Bir iksir burada düþürülmüþ.~
 glass~
 potion G AO
@@ -257,8 +257,8 @@ Written on the seal of the bottle is a glyph. You believe that the glyph
 stands for "POISON"
 ~
 #14504
-çora su çizmeleri~
-bir çift Çora Su Çizmesi~
+elf su çizmeleri~
+bir çift Elf Su Çizmesi~
 Bir çift çizme burada yatýyor.~
 ash~
 boat A AG
@@ -2314,7 +2314,7 @@ G 1 14501 -1                             * a monkey paw
 M 0 14502 1 14578 1                    * the Elven Merchant to Large Warehouse
 G 1 14502 -1                             * an Elven Necklace
 G 1 14503 -1                             * an Elven potion
-G 1 14504 -1                             * çora Water Walking Boots
+G 1 14504 -1                             * elf Water Walking Boots
 
 M 0 14503 1 14577 1                    * the Dwarven Merchant to Oceanview Home
 G 1 14505 -1                             * a keg of Dwarven Go Juice

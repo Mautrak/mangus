@@ -121,7 +121,7 @@ const   struct  language_type       language_table      [ MAX_LANGUAGE ] =
 {
   { "ortak",	LANG_COMMON	},
   { "insan",	LANG_HUMAN	},
-  { "çora",	LANG_CORA	},
+  { "elf",	LANG_ELVISH	},
   { "cüce",	LANG_DWARVISH	},
   { "kuþ",	LANG_BIRD	},
   { "kedi",	LANG_CAT	},
@@ -277,255 +277,91 @@ const 	struct	race_type	race_table	[]		=
 	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "identify", "steal" }, { 20, 21, 20, 21, 21 ,20}
     },
 
-    { /* 77 */
+    { /* 2 */
 	{"elf","elf"},"Elf",LANG_ELVISH,		TRUE, 		SIZE_MEDIUM, 0,
 	0,		AFF_INFRARED|AFF_SNEAK,	0,
 	0,		RES_CHARM,	VULN_IRON,
 	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 250, { "lore" , "camouflage" }, { 20, 23, 20, 22, 18, 20 }
     },
 
-    { /* 78 */
+    { /* 3 */
         {"arial","arial"},"Arial",LANG_BIRD,        TRUE, 		SIZE_MEDIUM, 0,
         0,              AFF_FLYING,             0,
         0,              RES_MENTAL,              0,
         A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 250, { "fast healing" }, { 18, 23, 20, 24, 18 , 20}
     },
 
-	{ /* 79  */
+	{ /* 4  */
 	{"felar","felar"},"Felar",LANG_CAT,	TRUE, 		SIZE_MEDIUM, 0,
 	0,		AFF_INFRARED,	OFF_TAIL,
 	0,		RES_LIGHT|RES_COLD|RES_MENTAL,     VULN_FIRE|VULN_DROWNING,
 	A|H|M|V,        A|C|D|E|F|H|J|K|Q|U|V, 250, {  "hand to hand","ambush", "berserk", "steal" }, { 21, 19, 20, 23, 21, 20}
 	},
 
-    {  /* 80 */
+    {  /* 5 */
 	{"trol","trol"},"Trol",LANG_TROLLISH,	TRUE, 		SIZE_LARGE, 0,
 	0,		AFF_REGENERATION|AFF_INFRARED,	OFF_BERSERK,
  	0,	RES_CHARM|RES_BASH,	VULN_FIRE|VULN_ACID,
 	A|B|H|M|V,		A|B|C|D|E|F|G|H|I|J|K|U|V, 250, { "fast healing","trance" }, { 22, 19, 19, 21, 23, 20}
     },
 
-	{ /* 81 */
+	{ /* 6 */
 	  {"duergar","duergar"},"Duergar",LANG_DWARVISH,        TRUE, 		SIZE_MEDIUM, 0,
 	  0,                AFF_INFRARED,   0,
 	  0,                RES_MAGIC|RES_POISON|RES_DISEASE, VULN_DROWNING,
 	  A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 250, { "berserk", "pick lock" }, {20, 20, 21, 19, 23, 20 }
 	},
 
-    { /* 82 */
+    { /* 7 */
         "dark-elf","kara-elf","K-Elf",LANG_ELVISH,     TRUE, 		SIZE_MEDIUM, 0,
         0,              AFF_INFRARED|AFF_SNEAK, 0,
         0,              RES_CHARM,      VULN_IRON,
         A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 250, { "lore" , "camouflage" }, { 21, 22, 20, 22, 18, 20 }
     },
 
-    { /* 3 */
+    { /* 8 */
 	{"dwarf","cüce"},"Cüce",LANG_DWARVISH,	TRUE, 		SIZE_MEDIUM, 0,
 	0,		AFF_INFRARED,	0,
 	0,		RES_POISON|RES_DISEASE, VULN_DROWNING,
 	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 250, { "berserk" }, { 21, 20, 21, 18, 23, 20 }
     },
 
-	{ /* 10 */
+	{ /* 9 */
 		{"gnome","gnom"},"",LANG_DWARVISH,        TRUE, 		SIZE_MEDIUM, 0,
 		0,              AFF_INFRARED,   0,
 		0,              RES_POISON,     VULN_BASH,
 		A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 250, { "identify" }, { 18, 23, 25, 20, 18 ,25}
 	},
 
-	{ /* 11 */
+	{ /* 10 */
 	{"githyanki","githyanki"},"Githy",LANG_ASTRAL,	TRUE,  		SIZE_MEDIUM, 0,
 	0,		AFF_INFRARED,	0,
 	0, 		RES_MAGIC,		0,
 	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 250, { "sword" ,"dagger" }, {19, 22, 19, 23, 20 ,20 }
 	},
 
-    { /* 2 */
-	{"çora","çora"},"",LANG_CORA,		FALSE, 		SIZE_MEDIUM, 0,
-	0,		AFF_INFRARED|AFF_SNEAK,	0,
-	0,		RES_CHARM,	VULN_IRON,
-	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, { 20, 20, 20, 20, 20, 20 }
-    },
-
-    { /* 4 */
-        {"gamayun","gamayun"},"",LANG_BIRD,        FALSE, 		SIZE_MEDIUM, 0,
-        0,              AFF_FLYING,             0,
-        0,              0,              0,
-        A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, { 20, 20, 20, 20, 20, 20}
-    },
-
-    { /* 5  */
-  {"pardus","pardus"},"",LANG_CAT,	FALSE, 		SIZE_MEDIUM, 0,
-  0,		AFF_INFRARED,	0,
-  0,		RES_WOOD|RES_DISEASE,	0,
-  A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, {  "" }, { 20, 20, 20, 20, 20, 20}
-    },
-
-    {  /* 6 */
-	{"asura","asura"},"Asura",LANG_ASURA,	FALSE, 		SIZE_LARGE, 0,
-	0,		AFF_REGENERATION|AFF_INFRARED,	OFF_BERSERK,
- 	0,	RES_CHARM|RES_BASH,	VULN_FIRE|VULN_ACID,
-	A|B|H|M|V,		A|B|C|D|E|F|G|H|I|J|K|U|V, 400, { "fast healing","trance" }, { 22, 19, 19, 21, 23, 20}
-    },
-
-        { /* 7 */
-          {"yeg","yeg"},"",LANG_DWARVISH,        FALSE, 		SIZE_MEDIUM, 0,
-          0,                AFF_INFRARED,   0,
-          0,                RES_MAGIC|RES_POISON|RES_DISEASE, VULN_DROWNING,
-          A|H|M|V,          A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 8 */
-            {"börü","börü"},"", LANG_DOG,       FALSE, 		SIZE_MEDIUM, 0,
-            0,              AFF_INFRARED,   OFF_TAIL,
-            0,              RES_LIGHT|RES_COLD,     VULN_FIRE|VULN_DROWNING,
-            A|H|M|V,        A|C|D|E|F|H|J|K|Q|U|V, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        {  /* 9 */
-          {"naga","naga"},"",LANG_SURUNGEN,     FALSE, 		SIZE_MEDIUM, 0,
-          0,                AFF_INFRARED,   0,
-          0,                RES_MAGIC|RES_POISON|RES_DISEASE, VULN_BASH,
-          A|H|M|V,          A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 12 */
-      {"storm giant","fýrtýna devi"},"",LANG_GIANT,	FALSE, 		SIZE_GIANT, 0,
-      0,		AFF_FLYING,		0,
-      0,		RES_LIGHTNING,	VULN_MENTAL|VULN_COLD|VULN_FIRE,
-      A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 13 */
-      {"cloud giant","bulut devi"},	"",LANG_GIANT,FALSE, 		SIZE_GIANT, 0,
-      0,		AFF_FLYING,		0,
-      0,		RES_WEAPON,	VULN_MENTAL|VULN_LIGHTNING,
-      A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 14 */
-      {"fire giant","ateþ devi"},"",LANG_GIANT,	FALSE, 		SIZE_GIANT, 0,
-      0,		0,		0,
-      0,		RES_FIRE,	VULN_MENTAL|VULN_LIGHTNING|VULN_COLD,
-      A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 15 */
-      {"frost giant","buz devi"},"",LANG_GIANT,	FALSE, 		SIZE_GIANT, 0,
-      0,		0,		0,
-      0,		RES_COLD,	VULN_MENTAL|VULN_LIGHTNING|VULN_FIRE,
-      A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 16 */
-            {"black dragon","kara ejderha"},"",LANG_DRAGON, FALSE,  	SIZE_GARGANTUAN, 0,
-    	0, 		AFF_INFRARED|AFF_FLYING,	0,
-    	0,		RES_BASH|RES_CHARM|RES_ACID,	VULN_PIERCE,
-            A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 17 */
-            {"blue dragon","mavi ejderha"}, "",LANG_DRAGON,	FALSE, 		SIZE_GARGANTUAN, 0,
-    	0, 		AFF_INFRARED|AFF_FLYING,	0,
-    	0,		RES_BASH|RES_CHARM|RES_LIGHTNING,
-    	VULN_PIERCE,
-            A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 18 */
-            {"green dragon","yeþil ejderha"},"",LANG_DRAGON, FALSE, 		SIZE_GARGANTUAN, 0,
-    	0, 		AFF_INFRARED|AFF_FLYING,	0,
-    	0,		RES_BASH|RES_CHARM|RES_POISON,	VULN_PIERCE,
-            A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 19 */
-            {"red dragon","kýzýl ejderha"},"", LANG_DRAGON,	FALSE, 		SIZE_GARGANTUAN, 0,
-    	0, 		AFF_INFRARED|AFF_FLYING,	0,
-    	0,		RES_BASH|RES_CHARM|RES_FIRE,	VULN_PIERCE,
-            A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 20 */
-            {"white dragon","ak ejderha"},"",LANG_DRAGON, FALSE, 		SIZE_GARGANTUAN, 0,
-    	0, 		AFF_INFRARED|AFF_FLYING,	0,
-    	0,		RES_BASH|RES_CHARM|RES_COLD,	VULN_PIERCE,
-            A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 21 */
-            {"brass dragon","pirinç ejderha"},"",LANG_DRAGON, FALSE, 		SIZE_GARGANTUAN, 0,
-    	0, 		AFF_INFRARED|AFF_FLYING,	0,
-    	0,		RES_BASH|RES_CHARM|RES_FIRE,	VULN_PIERCE,
-            A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 22 */
-            {"gold dragon","altýn ejderha"},"",LANG_DRAGON, 	FALSE, 		SIZE_GARGANTUAN, 0,
-    	0, 		AFF_INFRARED|AFF_FLYING,	0,
-    	0,		RES_BASH|RES_CHARM|RES_FIRE|RES_POISON,
-    	VULN_PIERCE,
-            A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 23 */
-            {"silver dragon","gümüþ ejderha"},"",LANG_DRAGON,FALSE, 		SIZE_GARGANTUAN, 0,
-    	0, 		AFF_INFRARED|AFF_FLYING,	0,
-    	0,		RES_BASH|RES_CHARM|RES_COLD,	VULN_PIERCE,
-            A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 24 */
-            {"bronze dragon","tunç ejderha"},"",LANG_DRAGON,FALSE, 		SIZE_GARGANTUAN, 0,
-    	0, 		AFF_INFRARED|AFF_FLYING,	0,
-    	0,		RES_BASH|RES_CHARM|RES_LIGHTNING,
-    	VULN_PIERCE,
-            A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 25 */
-            {"copper dragon","bakýr ejderha"},"",LANG_DRAGON,FALSE, 		SIZE_GARGANTUAN, 0,
-    	0, 		AFF_INFRARED|AFF_FLYING,	0,
-    	0,		RES_BASH|RES_CHARM|RES_ACID,	VULN_PIERCE,
-            A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 26 */
-    	{"bat","yarasa"},"",LANG_BIRD,		FALSE, 		SIZE_TINY, 0,
-    	0,		AFF_FLYING/*|AFF_DARK_VISION*/,	OFF_DODGE|OFF_FAST,
-    	0,		0,		VULN_LIGHT,
-    	A|G|V,		A|C|D|E|F|H|J|K|P, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 27 */
+        { /* 11 */
     	{"bear","ayý"},	"",	LANG_DOG, FALSE, 		SIZE_LARGE, 0,
     	0,		0,		OFF_CRUSH|OFF_DISARM|OFF_BERSERK,
     	0,		RES_BASH|RES_COLD,	0,
     	A|G|V,		A|B|C|D|E|F|H|J|K|U|V, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
-        {  /* 28 */
+        {  /* 12 */
     	{"cat","kedi"},"",LANG_CAT,		FALSE, 		SIZE_SMALL, 0,
     	0,		/*AFF_DARK_VISION*/0,	OFF_FAST|OFF_DODGE,
     	0,		0,		0,
     	A|G|V,		A|C|D|E|F|H|J|K|Q|U|V, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
-        {  /* 29 */
-    	{"centipede","kýrkayak"},"",LANG_SURUNGEN,	FALSE, 		SIZE_TINY, 0,
-    	0,		/*AFF_DARK_VISION*/0,	0,
-    	0,		RES_PIERCE|RES_COLD,	VULN_BASH,
-     	A|B|G|O,		A|C|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        {  /* 30 */
+        {  /* 13 */
     	{"dog","köpek"},"",LANG_DOG,		FALSE, 		SIZE_SMALL, 0,
     	0,		0,		OFF_FAST,
     	0,		0,		0,
     	A|G|V,		A|C|D|E|F|H|J|K|U|V, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
-        { /* 31 */
+        { /* 14 */
     	{"doll","kukla"},"",LANG_COMMON,		FALSE, 		SIZE_SMALL, 0,
     	0,		0,		0,
     	IMM_COLD|IMM_POISON|IMM_HOLY|IMM_NEGATIVE|IMM_MENTAL|IMM_DISEASE
@@ -534,49 +370,28 @@ const 	struct	race_type	race_table	[]		=
     	E|J|M|cc,	A|B|C|G|H|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
-        { /* 32 */
-    	{"fido","enik"},"",LANG_DOG,		FALSE, 		SIZE_SMALL, 0,
-    	0,		0,		OFF_DODGE|ASSIST_RACE,
-    	0,		0,			VULN_MAGIC,
-    	A|B|G|V,	A|C|D|E|F|H|J|K|Q|V, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 33 */
-    	{"fox","tilki"},"",LANG_DOG,		FALSE, 		SIZE_SMALL, 0,
-    	0,		/*AFF_DARK_VISION*/0,	OFF_FAST|OFF_DODGE,
-    	0,		0,		0,
-    	A|G|V,		A|C|D|E|F|H|J|K|Q|V, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 34 */
+        { /* 15 */
     	{"goblin","gulyabani"},"",LANG_CORA,	FALSE, 		SIZE_MEDIUM, 0,
     	0,		AFF_INFRARED,	0,
     	0,		RES_DISEASE,	VULN_MAGIC,
     	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
-        { /* 35 */
-    	{"hobgoblin","ifrit"},"",LANG_CORA,	FALSE, 		SIZE_MEDIUM, 0,
-    	0,		AFF_INFRARED,	0,
-    	0,		RES_DISEASE|RES_POISON,	0,
-    	A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K|Y, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        {  /* 36 */
+        {  /* 16 */
     	{"kobold","argun"},"",LANG_CORA,	FALSE, 		SIZE_MEDIUM, 0,
     	0,		AFF_INFRARED,	0,
     	0,		RES_POISON,	VULN_MAGIC,
     	A|B|H|M|V,	A|B|C|D|E|F|G|H|I|J|K|Q, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
-        {  /* 37 */
+        {  /* 17 */
     	{"lizard","kertenkele"},"",LANG_SURUNGEN,	FALSE, 		SIZE_SMALL, 0,
     	0,		0,		0,
     	0,		RES_POISON,	VULN_COLD,
     	A|G|X|cc,	A|C|D|E|F|H|K|Q|V, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
-        {  /* 38 */
+        {  /* 18 */
     	{"modron","geme"},"",LANG_COMMON,	FALSE, 		SIZE_MEDIUM, 0,
     	0,		AFF_INFRARED,	ASSIST_RACE|ASSIST_ALIGN,
     	IMM_CHARM|IMM_DISEASE|IMM_MENTAL|IMM_HOLY|IMM_NEGATIVE,
@@ -584,91 +399,70 @@ const 	struct	race_type	race_table	[]		=
     	H,		A|B|C|G|H|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
-        {  /* 39 */
+        {  /* 19 */
     	{"orc","ork"},"",LANG_CORA,		FALSE, 		SIZE_MEDIUM, 0,
     	0,		AFF_INFRARED,	0,
     	0,		RES_DISEASE,	VULN_LIGHT,
     	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
-        {  /* 40 */
+        {  /* 20 */
     	{"pig","domuz"},"",	LANG_DOG,	FALSE, 		SIZE_MEDIUM, 0,
     	0,		0,		0,
     	0,		0,		0,
     	A|G|V,	 	A|C|D|E|F|H|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
-        { /* 41 */
+        { /* 21 */
     	{"rabbit","tavþan"},"",LANG_DOG,	FALSE, 		SIZE_SMALL, 0,
     	0,		0,		OFF_DODGE|OFF_FAST,
     	0,		0,		0,
     	A|G|V,		A|C|D|E|F|H|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
-        { /* 42 */
-    	{"school monster","okul canavarý"},"",LANG_HUMAN,	FALSE, 		SIZE_MEDIUM, 0,
-    	ACT_NOALIGN,		0,		0,
-    	IMM_CHARM|IMM_SUMMON,	0,		VULN_MAGIC,
-    	A|M|V,		A|B|C|D|E|F|H|J|K|Q|U, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        {  /* 43 */
-    	{"snake","yýlan"},"",LANG_SURUNGEN,	FALSE, 		SIZE_SMALL, 0,
+        {  /* 22 */
+    	{"snake","sürüngen"},"",LANG_SURUNGEN,	FALSE, 		SIZE_SMALL, 0,
     	0,		0,		0,
     	0,		RES_POISON,	VULN_COLD,
     	A|G|X|Y|cc,	A|D|E|F|K|L|Q|V|X, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
-        {  /* 44 */
-    	{"song bird","serçe"},"",LANG_BIRD,	FALSE, 		SIZE_TINY, 0,
+        {  /* 23 */
+    	{"bird","kuþ"},"",LANG_BIRD,	FALSE, 		SIZE_TINY, 0,
     	0,		AFF_FLYING,		OFF_FAST|OFF_DODGE,
     	0,		0,		0,
     	A|G|W,		A|C|D|E|F|H|K|P, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
-        {  /* 45 */
-    	{"water fowl","ördek"},"",LANG_WATER,	FALSE, 		SIZE_SMALL, 0,
-    	0,		AFF_SWIM|AFF_FLYING,	0,
-    	0,		RES_DROWNING,		0,
-    	A|G|W,		A|C|D|E|F|H|K|P, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        {  /* 46 */
+        {  /* 24 */
     	{"wolf","kurt"},"",LANG_DOG,		FALSE, 		SIZE_MEDIUM, 0,
     	0,		/*AFF_DARK_VISION*/0,	OFF_FAST|OFF_DODGE,
     	0,		0,		0,
     	A|G|V,		A|C|D|E|F|J|K|Q|V, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
-        {  /* 47 */
-    	{"wyvern","yelbüke"},"",LANG_DRAGON,	FALSE, 		SIZE_HUGE, DETECT_INVIS|DETECT_HIDDEN,
-    	0,		AFF_FLYING,	OFF_BASH|OFF_FAST|OFF_DODGE,
-    	IMM_POISON,	0,	VULN_LIGHT,
-    	A|B|G|Z,		A|C|D|E|F|H|J|K|Q|V|X, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 48 */
+        { /* 25 */
             {"dragon","ejderha"},"", LANG_DRAGON,	FALSE,		SIZE_GARGANTUAN, 0,
     	0, 		AFF_INFRARED|AFF_FLYING,	0,
     	0,		RES_FIRE|RES_BASH|RES_CHARM,	VULN_PIERCE|VULN_COLD,
     	A|H|Z,		A|C|D|E|F|G|H|I|J|K|P|Q|U|V|X, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
-        { /* 49 */
+        { /* 26 */
     	{"giant","dev"},"",LANG_GIANT,	FALSE, 		SIZE_GIANT, 0,
     	0,		0,		0,
     	0,		RES_FIRE|RES_COLD,	VULN_MENTAL|VULN_LIGHTNING,
     	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
-        { /* 50 */
+        { /* 27 */
     	{"golem","golem"},"",LANG_HUMAN,	FALSE, 		SIZE_LARGE, 0,
     	0,		0,		0,
     	IMM_POISON|IMM_DISEASE,		RES_WEAPON,	VULN_MENTAL|VULN_MAGIC,
     	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
-        { /* 51 */
+        { /* 28 */
     	{"undead","hortlak"},"",LANG_ASTRAL,	FALSE, SIZE_MEDIUM,
     	DETECT_INVIS|DETECT_HIDDEN|DETECT_GOOD|DETECT_EVIL,
     	0,		AFF_PASS_DOOR|AFF_INFRARED,	0,
@@ -677,115 +471,49 @@ const 	struct	race_type	race_table	[]		=
     	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
-        { /* 52 */
-    	{"drow","rayel"},	"",LANG_CORA,	FALSE,		SIZE_MEDIUM, 0,
-    	0,		AFF_INFRARED,	0,
-    	0,		RES_CHARM,		VULN_IRON,
-    	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 53 */
-    	{"draconian","luu"},"",LANG_DRAGON,	FALSE,		SIZE_LARGE, 0,
-    	0,		0,		0,
-    	0,		RES_SLASH|RES_POISON,	VULN_COLD,
-    	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 54 */
-    	{"sprite","peri"},"",LANG_CORA,	FALSE,		SIZE_SMALL, DETECT_EVIL,
-    	0,		AFF_FLYING,		G,
-    	0,		0,			VULN_COLD|VULN_WEAPON,
-    	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /* 55 */
-    	{"aarakocra","kerkes"},"",LANG_BIRD,	FALSE,		SIZE_MEDIUM, 0,
-    	ACT_SCAVENGER,	AFF_FLYING,	OFF_FAST,
-    	0,		0,		0,
-    	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K|P, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        { /*  56 */
-    	{"beholder","çokgöz"},"",LANG_COMMON,	FALSE,		SIZE_MEDIUM, 0,
-    	0,		AFF_REGENERATION,		0,
-    	0,		RES_MAGIC,		0,
-    	A|H|M|V,	A|E|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        {  /* 57 */
-    	{"tiger","kaplan"},"",LANG_CAT,	FALSE,		SIZE_MEDIUM, 0,
-    	0,	/*AFF_DARK_VISION*/0, OFF_FAST|OFF_DODGE,
-    	0,		RES_WEAPON,		0,
-    	A|G|V,		A|C|D|E|F|H|J|K|Q|U|V, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-        {  /* 58 */
+        {  /* 29 */
     	{"lion","aslan"},"",LANG_CAT,		FALSE,		SIZE_MEDIUM, 0,
     	ACT_SENTINEL,	/*AFF_DARK_VISION*/0,	OFF_FAST|OFF_DODGE,
     	0,		RES_WEAPON,		0,
     	A|G|V,		A|C|D|E|F|H|J|K|Q|U|V, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
-        {  /* 59 */
-    	{"death knight","aldacý"},"",LANG_HUMAN,	FALSE,		SIZE_MEDIUM, 0,
-    	ACT_UNDEAD,	0, 	OFF_PARRY|OFF_DISARM,
-    	IMM_DISEASE|IMM_POISON|IMM_DROWNING,	RES_FIRE|RES_NEGATIVE,
-    	VULN_HOLY,
-    	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-        },
-
-
-    { /* 60 */
-    {"dracolich","alavan"}, "",LANG_DRAGON,	FALSE, 		SIZE_LARGE, 0,
-    0, 		AFF_INFRARED|AFF_FLYING,	0,
-    IMM_CHARM|IMM_LIGHTNING|IMM_COLD,	RES_FIRE|RES_BASH,
-    VULN_PIERCE|VULN_COLD,
-    A|H|Z,		A|C|D|E|F|G|H|I|J|K|P|Q|U|V|X, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-    },
-
-    {  /* 61 */
+    {  /* 30 */
     {"air elemental","hava uþaðý"},"",LANG_ASTRAL,FALSE,		SIZE_HUGE, 0,
     0,		0,		OFF_FADE,
     0,		RES_WEAPON|RES_SUMMON,		0,
     A|H|Z,		A|D, 0, { "" }, {20, 20, 20, 20, 20, 20 }
     },
 
-    {  /* 62 */
+    {  /* 31 */
     {"earth elemental","toprak uþaðý"},"",LANG_ASTRAL,	FALSE,		SIZE_HUGE, 0,
     0,		0,	OFF_FADE,
     0,		RES_WEAPON|RES_SUMMON,		0,
     A|H|Z,		A|D, 0, { "" }, {20, 20, 20, 20, 20, 20 }
     },
 
-    {  /* 63 */
+    {  /* 32 */
     {"fire elemental","ateþ uþaðý"},"",LANG_ASTRAL,FALSE,		SIZE_HUGE, 0,
     0,		0,	OFF_FADE,
     IMM_FIRE,		RES_WEAPON,		VULN_COLD,
     A|H|Z,		A|D, 0, { "" }, {20, 20, 20, 20, 20, 20 }
     },
 
-    {  /* 64 */
+    {  /* 33 */
     {"water elemental","su uþaðý"},"",LANG_ASTRAL,	FALSE,		SIZE_HUGE, 0,
     0,		0,	OFF_FADE,
     0,		RES_WEAPON|RES_FIRE|RES_COLD,	0,
     A|H|Z,		A|D, 0, { "" }, {20, 20, 20, 20, 20, 20 }
     },
 
-    {  /* 65 */
+    {  /* 34 */
     {"fish","balýk"},	"",LANG_WATER,		FALSE,		SIZE_TINY, 0,
     0,		AFF_SWIM,	0,
     0,		0,		VULN_COLD|VULN_FIRE,
     A|H|Z,		A|D|E|F|J|K|O|X, 0, { "" }, {20, 20, 20, 20, 20, 20 }
     },
 
-    {  /* 66 */
-    {"gargoyle","togrýl"},"",LANG_HUMAN,	FALSE,		SIZE_MEDIUM, 0,
-    ACT_AGGRESSIVE,	AFF_FLYING,	OFF_FAST,
-    0,		RES_WEAPON,	VULN_COLD|VULN_FIRE,
-    A|G|W,		A|C|D|E|F|H|K|P, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-    },
-
-    {  /* 67 */
+    {  /* 35 */
     {"ghost","hayalet"},"",LANG_ASTRAL,	FALSE,		SIZE_MEDIUM, 0,
     ACT_UNDEAD,	AFF_FLYING,	OFF_FADE,
     IMM_DROWNING|IMM_NEGATIVE|IMM_DISEASE|IMM_POISON,
@@ -793,71 +521,21 @@ const 	struct	race_type	race_table	[]		=
     A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
     },
 
-    {  /* 68 */
+    {  /* 36 */
     {"ghoul","gul"},"",LANG_HUMAN,	FALSE,		SIZE_MEDIUM, 0,
     0,		0,		0,
     IMM_DISEASE,	RES_CHARM,	VULN_MAGIC,
     A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
     },
 
-    {  /* 69 */
-    {"gnoll","arböri"},	"",LANG_DWARVISH,FALSE,		SIZE_MEDIUM, DETECT_INVIS|DETECT_HIDDEN,
-    0,		0,		OFF_DISARM,
-    0,		0,		0,
-    A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-    },
-
-    {  /* 70 */
-    {"harpy","harpi"},"",	LANG_BIRD,FALSE,		SIZE_MEDIUM, DETECT_INVIS|DETECT_HIDDEN,
-    0,		AFF_FLYING,		OFF_DISARM,
-    0,		RES_CHARM,		0,
-    A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K|P, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-    },
-
-    {  /* 71 */
-    {"lamia","lamia"},"",LANG_HUMAN,	FALSE,		SIZE_MEDIUM, 0,
-    ACT_AGGRESSIVE,	0,		OFF_FAST|OFF_DODGE,
-    0,		RES_CHARM,		0,
-    A|G|V,		A|B|C|D|E|F|G|H|I|J|K|Q|U, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-    },
-
-    {  /* 72 */
-    {"lich","yelviçin"},"",LANG_ASTRAL,	FALSE,		SIZE_MEDIUM, 0,
-    0,		0,		OFF_FAST|OFF_DODGE,
-    IMM_POISON|IMM_DISEASE|IMM_CHARM|IMM_LIGHTNING|IMM_COLD,
-    RES_WEAPON|RES_FIRE,	VULN_HOLY,
-    A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-    },
-
-    {  /* 73 */
-    {"minotaur","bogra"},"",LANG_HUMAN,	FALSE,		SIZE_LARGE, 0,
-    0,		0,		OFF_CRUSH|OFF_FAST|OFF_BASH,
-    0,		0,		0,
-    A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K|W, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-    },
-
-    {  /* 74 */
-    {"ogre","ogre"},"",LANG_DWARVISH,		FALSE,		SIZE_LARGE, 0,
-    0,		AFF_INFRARED,	0,
-    0,		RES_DISEASE,	0,
-    A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-    },
-
-    {  /* 75 */
-    {"zombie","hortlak"},	"",LANG_ASTRAL,	FALSE,		SIZE_MEDIUM, 0,
-    0,		AFF_SLOW,	0,
-    IMM_MAGIC|IMM_POISON|IMM_CHARM,	RES_COLD, VULN_WEAPON,
-    A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
-    },
-
-    {  /* 76 */
+    {  /* 37 */
     {"horse","at"},	"",LANG_DOG,FALSE, 		SIZE_LARGE, 0,
     0,		0,		OFF_FAST|OFF_DODGE,
     0,		0,		0,
     A|G|V,		A|C|D|E|F|J|K|Q, 0, { "" }, {20, 20, 20, 20, 20, 20 }
     },
 
-    {  /* 82 */
+    {  /* 38 */
     {"unique","eþsiz"},"",0,	FALSE,		0, 0,
     0,		0,		0,
     0,		0,		0,

@@ -92,15 +92,15 @@ the many scores other devils demand.
 human~
 2|64 8|32|512|8192 66
 #30807
-çora bakire~
-çora bakire~
-Çýrýlçýplak vücuduyla bir çora bakire mimbere zincirlenmiþ.
+elf bakire~
+elf bakire~
+Çýrýlçýplak vücuduyla bir elf bakire mimbere zincirlenmiþ.
 ~
-The monks capture and sacrifice female çora virgins to summon devils from
+The monks capture and sacrifice female elf virgins to summon devils from
 the Hells. This one has gone quite insane from the pain and shock of capture
 and subsequent subjection to the cruel rituals of the monks.
 ~
-çora~
+elf~
 2|64 0 1
 #30808
 cüce köle~
@@ -141,19 +141,19 @@ kara ejderha~
 ~
 They aren't called the dragon clan for nothing, pal.
 ~
-black dragon~
+dragon~
 2|64 4|8|16|32|128|512|8192|524288 70
 #30812
-yaþlý çora~
-yaþlý çora~
-Yaþlý bir çora kayanýn üzerinde oturuyor.
+yaþlý elf~
+yaþlý elf~
+Yaþlý bir elf kayanýn üzerinde oturuyor.
 ~
-This old çora, one Felthesres by name, is one of the bards of Malathar who has
+This old elf , one Felthesres by name, is one of the bards of Malathar who has
 vowed to remain here and await the return of the Paladin Grimafax from his
 missions. He has been waiting several centuries, and will be waiting for
 much longer before Grimafax returns.
 ~
-çora~
+elf~
 2|64 128 62
 #30813
 kemik golem~
@@ -167,7 +167,7 @@ itself.
 golem~
 2|64 8192 62
 #30814
-wyvern~
+dragon~
 a wyvern~
 Ýrice bir wyvern tepende asýlý duruyor.
 ~
@@ -175,7 +175,7 @@ This wyvern is a scout for the monks of the abbey, you surmise. Then again
 it could be a perfectly normal wyvern that just happens to be wearing a
 massive green amulet with "dragon clan" written on it...
 ~
-wyvern~
+dragon~
 2|64 524288 61
 #30815
 hayvan~
@@ -282,8 +282,8 @@ A
 A
 19 6
 #30808
-çora uzunkýlýç iþlemeli~
-çora uzunkýlýcý~
+elf uzunkýlýç iþlemeli~
+elf uzunkýlýcý~
 Ýþlemeli bir kýlýç burada düþürülmüþ.~
 ~
 weapon 1|64 1|8192
@@ -294,8 +294,8 @@ A
 A
 18 12
 #30809
-çora iþi örgü zýrhý~
-çora iþi örgü zýrh~
+elf iþi örgü zýrhý~
+elf iþi örgü zýrh~
 Bir örgü zýrhý burada býrakýlmýþ.~
 ~
 armor 1|64 1|8
@@ -1422,7 +1422,7 @@ S
 #30837
 Mezar~
 The tomb is icy cold, almost dangerously so, and is dominated by a huge
-sarcophagus, inside which rests the corpse of an çora paladin. Maybe it
+sarcophagus, inside which rests the corpse of an elf paladin. Maybe it
 wasn't such a good idea releasing him...
 ~
 0 1|8 0
@@ -2094,7 +2094,7 @@ S
 #30879
 Hücreler~
 Here the Necromancers store the results of their twisted experiments on some
-captured çora knights. They howl and scream so much that even their
+captured elf knights. They howl and scream so much that even their
 creators are scared of them.
 ~
 0 1|8 0
@@ -2481,7 +2481,7 @@ E 1 30844 1 15           surcoat
 *
 M 1 30811 1 30819 1*        dwagony-poo
 *
-M 1 30812 1 30800  1*       old çora
+M 1 30812 1 30800  1*       old elf 
 *
 M 1 30813 1 30824  1*       bone golem
 O 1 30824 1 30824         bellows

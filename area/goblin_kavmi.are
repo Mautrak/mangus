@@ -38,14 +38,14 @@ This Dwarf has been horribly mutilated.
 dwarf~
 32|64 0 5
 #9903
-deli çora~
-Deli çora~
-Delirmiþ bir çora görüyorsun, aniden saldýrýyor!
+deli elf~
+Deli elf~
+Delirmiþ bir elf görüyorsun, aniden saldýrýyor!
 ~
-This çora is a young adult.  Obviously driven mad by
+This elf is a young adult.  Obviously driven mad by
 his capture and torture.
 ~
-çora~
+elf~
 32|64 0 5
 #9904
 þaþkýn genç~
@@ -201,9 +201,9 @@ E
 necklace~
 This is an identification necklace.  It is number 3.~
 #9907
-çora yüzük~
-Çora Yüzüðü~
-Bir çora yüzüðü burada unutulmuþ.~
+elf yüzük~
+Elf Yüzüðü~
+Bir elf yüzüðü burada unutulmuþ.~
 ~
 armor 0 1|2
 0 0 0 0 0
@@ -212,26 +212,26 @@ E
 ring~
 This ring is for identification.  It is ring 1.~
 #9908
-çora yüzük~
-Çora Yüzüðü~
-Bir çora yüzüðü burada unutulmuþ.~
+elf yüzük~
+Elf Yüzüðü~
+Bir elf yüzüðü burada unutulmuþ.~
 ~
 armor 0 1|2
 0 0 0 0 0
 5 1 0 P
 E
 ring~
-This çora ring is for identification.  It is ring 2.~
+This elf ring is for identification.  It is ring 2.~
 #9909
-çora yüzük~
-Çora Yüzüðü~
-Bir çora yüzüðü burada unutulmuþ.~
+elf yüzük~
+Elf Yüzüðü~
+Bir elf yüzüðü burada unutulmuþ.~
 ~
 armor 0 1|2
 0 0 0 0 0
 5 5 0 P
 E
-ring çora~
+ring elf~
 This ring is for identification.  It is ring 3.~
 #9910
 oyuncak~
@@ -2065,13 +2065,13 @@ E 1 9905 100 3
 M 1 9902 3 9959	1*		the Eyeless Dwarf to Village path
 E 1 9906 100 3
 *
-M 1 9903 3 9991	1*		the Deranged Çora to Wooden hut
+M 1 9903 3 9991	1*		the Deranged Elf to Wooden hut
 E 1 9907 100 1
 *
-M 1 9903 3 9929	1*		the Deranged Çora to A blue hut
+M 1 9903 3 9929	1*		the Deranged Elf to A blue hut
 E 1 9908 100 1
 *
-M 1 9903 3 9976	1*		the Deranged Çora to Stick hut
+M 1 9903 3 9976	1*		the Deranged Elf to Stick hut
 E 1 9909 100 1
 *
 M 1 9904 3 9965	1*		the Confused Human to Large wood hut

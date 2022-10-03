@@ -22,7 +22,7 @@ Bir piksi burada, seni kýlýcýyla dürtüklüyor.
 ~
 Kanatlarýyla bir ejderhayý andýran insansý bir varlýk.
 ~
-sprite~
+bird~
 ACEH T 10
 #29102
 niksi~
@@ -31,7 +31,7 @@ Kanat çýrpan bir niksi görüyorsun.
 ~
 Piksi gibi ejderha kanatlarýna sahip, fakat ondan biraz daha uzun.
 ~
-sprite~
+bird~
 ACEH T 12
 #29103
 peri~
@@ -40,7 +40,7 @@ Güzel, danseden bir peri görüyorsun.
 ~
 Niksi ve piksi gibi kanatlara sahip fakat iksinden de daha uzun.
 ~
-sprite~
+bird~
 ACEH BT 11
 #29104
 cin~
@@ -49,7 +49,7 @@ Haþin bir cin burada, muhafýzlýk yapýyor.
 ~
 Toprak rengi giysiler içinde bir cin görüyorsun. Görevinde oldukça iyi.
 ~
-sprite~
+bird~
 ABCE V 13
 #29105
 puk~
@@ -59,7 +59,7 @@ Aman tamrým! Bu bir Puk!
 Oldukça uzun boylu. Bir o yana, bir bu yana bakarak ganimetlerine göz kulak
 oluyor.
 ~
-sprite~
+bird~
 ABCES QV 14
 #29106
 peri kraliçe~
@@ -69,7 +69,7 @@ Peri Kraliçe burada, muhteþem bir ezgiyle dans ediyor.
 Uzun boylu bir adaril. Oldukça da güzel bir yüze sahip. Onu izlemek sana
 büyük bir zevk veriyor.
 ~
-çora~
+elf~
 ABCER DHJT 15
 #29107
 þans peri~
@@ -78,7 +78,7 @@ Bir þans perisi görüyorsun, elindeki zarlarý sallýyor.
 ~
 Elmas iþlemeli yeiþl bir giysi giyiyor.
 ~
-sprite~
+bird~
 ACEH QUV 13
 #29108
 sarhoþ peri~
@@ -87,7 +87,7 @@ Sarhoþ bir peri görüyorsun, dans ediyor.
 ~
 Düþe kalka dans etmeye çalýþan bir peri. Ne kadar da eðlenceli...
 ~
-sprite~
+bird~
 ABCE RT 10
 #29109
 garson peri~
@@ -96,7 +96,7 @@ garson peri~
 ~
 Oldukça yaþlý. Belki de büyü gücünü kaybettiði için bu iþi yapýyordur...
 ~
-sprite~
+bird~
 ABCEb V 45
 #0
 

@@ -148,7 +148,7 @@ Büyük ve kadim bir vivern varlýðýna gülüyor...
 ~
 It thunders loudly 'I must protect my Master's wealth!'
 ~
-wyvern~
+dragon~
 ACFG DF 18
 #1617
 hayalet~
@@ -288,9 +288,9 @@ mace 2 6 pound 0
 A
 18 1
 #1603
-uzun çora hançeri~
-uzun çora hançeri~
-Uzun bir çora hançeri görüyorsun.~
+uzun elf hançeri~
+uzun elf hançeri~
+Uzun bir elf hançeri görüyorsun.~
 steel~
 weapon AG AN
 dagger 2 5 pierce 0
@@ -1517,7 +1517,7 @@ R 0 1644   0     	* It's too dark to see anything!
 O 0 1652   2 1608	* a barrel of ale
 O 0 1601   2 1627	* a rusty cleaver
 O 0 1651   1 1645	* a bronze chest
-P 1 1603   1 1651  1	*   a long çora dagger
+P 1 1603   1 1651  1	*   a long elf dagger
 M 0 1601   4 1620  2	* a killer frog
 M 0 1601   4 1620  2	* a killer frog
 M 0 1601   4 1621  2	* a killer frog

@@ -46,7 +46,7 @@ Bir canavar buraya zincirlenmiþ.
 Haþin birine benzese de onu öldürebileceðinden eminsin. Nedeni ise onun
 zincirlenmiþ, senin ise serbest olman.
 ~
-school monster~
+goblin~
 AB 0 1
 #3703
 korkak canavar~
@@ -56,7 +56,7 @@ Korkak bir canavar buraya zincirlenmiþ.
 Korkmuþ görünüyor. Onu öldürebileceðinden eminsin. Nedeni ise onun
 zincirlenmiþ, senin ise serbest olman.
 ~
-school monster~
+goblin~
 ABH 0 1
 #3704
 saldýrgan canavar~
@@ -66,7 +66,7 @@ Saldýrgan bir canavar buraya zincirlenmiþ.
 Haþin birine benzese de onu öldürebileceðinden eminsin. Nedeni ise onun
 zincirlenmiþ, senin ise serbest olman.
 ~
-school monster~
+goblin~
 ABF 0 1
 #3705
 korkak saldýrgan canavar~
@@ -76,7 +76,7 @@ Korkak saldýrgan bir canavar buraya zincirlenmiþ.
 Haþin birine benzese de onu öldürebileceðinden eminsin. Nedeni ise onun
 zincirlenmiþ, senin ise serbest olman.
 ~
-school monster~
+goblin~
 ABFH 0 1
 #3706
 iri yaratýk~
@@ -86,7 +86,7 @@ Yaratýk seni aðýr aðýr süzüyor.
 Haþin görünüyor, onu öldürürken biraz sorun yaþayabilirsin. Ama ödülü
 büyük olacak! ! !
 ~
-school monster~
+goblin~
 AB JZ 2
 #3707
 üstad~
@@ -140,7 +140,7 @@ Bir tilki sana dik dik bakýyor.
 ~
 Kürkü para edebilir.
 ~
-fox~
+dog~
 AGHU 0 1
 #3713
 salyangoz~
@@ -158,7 +158,7 @@ Bir hayvan seninle beslenmeyi düþünüyor.
 ~
 Haþin görünüyor. Uzaklaþsan iyi olur.
 ~
-school monster~
+goblin~
 AFT Z 5
 #3715
 ayý~
@@ -213,7 +213,7 @@ diplomalý canavar~
 Bu korkunç canavar senin MUD okulundaki son sýnavýn olacak. Öldür onu ve
 diploma senin olsun.
 ~
-school monster~
+goblin~
 ABe J 3
 #0
 

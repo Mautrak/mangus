@@ -31,9 +31,9 @@ Checked and beta tested by Quartz.
 
 #NEW_MOBILES
 #8800
-çora gözcüsü~
-çora gözcüsü~
-Bir çora gözcüsü varlýðýný farketti!
+elf gözcüsü~
+elf gözcüsü~
+Bir elf gözcüsü varlýðýný farketti!
 ~
 The Sylvan Çoras are a good people, but centuries of subjection to the
 violences and prejudices of other races have made them wary and very
@@ -41,19 +41,19 @@ hostile toward outsiders. However, if you're tough enough, perhaps he'll
 back down. As natives of Mirkwood, they are virtually imposssible to see
 if they don't want to be seen.
 ~
-çora~
+elf~
 ABCFG FJQ 5
 #8801
-çora savaþçý~
-çora savaþçý~
-Bir çora savaþçý silahýný çekiyor!
+elf savaþçý~
+elf savaþçý~
+Bir elf savaþçý silahýný çekiyor!
 ~
 The Sylvan Elves are a good people, but centuries of subjection to the
 violences and prejudices of other races have made them wary and very
 hostile toward outsiders. However, if you're tough enough, perhaps he'll
 back down.
 ~
-çora~
+elf~
 ABCFG J 7
 #8802
 ork gözcü~
@@ -80,14 +80,14 @@ of the immense Orcish hordes.
 orc~
 ACFG J 5
 #8804
-orman çorasý muhafýzý~
-orman çorasý muhafýzý~
-Bir orman çorasý muhafýzý dikkatle seni izliyor.
+orman elf sý muhafýzý~
+orman elf sý muhafýzý~
+Bir orman elf sý muhafýzý dikkatle seni izliyor.
 ~
 This angry guard is incensed at your trespass in the hall of his king, and
 will attempt to forcibly eject you.
 ~
-çora~
+elf~
 AFGTQ J 8
 #8805
 muhafýz þefi~
@@ -99,56 +99,56 @@ violences and prejudices of other races have made them wary and very
 hostile toward outsiders. However, if you're tough enough, perhaps he'll
 back down.
 ~
-çora~
+elf~
 ABCFGQ J 12
 #8806
 kahya galon~
 Kahya Galon~
-Çora kahyasý varlýðýndan tedirgin oldu.
+Elf kahyasý varlýðýndan tedirgin oldu.
 ~
 Galion has a tremenous fondness for Dorwinion Wine, and he is now well and
 truly inebriated. However that does not mean he won't react to your intrusion.
 ~
-çora~
+elf~
 ABCFG J 10
 #8807
 tanduil kral~
 Kral Tanduil~
-Orman çoralarýnýn kralý Tanduil seni dikkatle izliyor.
+Orman elf larýnýn kralý Tanduil seni dikkatle izliyor.
 ~
 While not immune to the prejudices of his brethren, Thranduil is a trifle
 wiser (and more civilized) and he will not attack without provocation.
 ~
-çora~
+elf~
 BGR HJ 15
 #8808
-erkek çora~
-erkek çora~
-Bir çora erkeði sana sinirle bakýyor.
+erkek elf~
+erkek elf~
+Bir elf erkeði sana sinirle bakýyor.
 ~
 This person won't attack you like the guards will, but that doesn't mean
 he likes you any more than they do...
 ~
-çora~
+elf~
 CGQ J 6
 #8809
-çora kadýn~
-kadýn çora~
-Bir çora kadýný sana sinirle bakýyor.
+elf kadýn~
+kadýn elf~
+Bir elf kadýný sana sinirle bakýyor.
 ~
 This person won't attack you like the guards will, but that doesn't mean
 ahe likes you any more than they do...
 ~
-çora~
+elf~
 CGQ J 6
 #8810
-çora gardiyan~
+elf gardiyan~
 gardiyan~
 Gardiyan uyuyakalmýþ.
 ~
 This surly fellow is almost always passed out from copious alcohol consumption.
 ~
-çora~
+elf~
 BCG J 9
 #8811
 torin meþekalkaný~
@@ -159,7 +159,7 @@ This Dwarf is descended from noble blood. He and his fellows were waylaid
 by the Wood Elves while journeying to avenge their brethren against the
 dragon Smaug.
 ~
-çora~
+elf~
 CGQ O 14
 #0
 
@@ -178,8 +178,8 @@ havuz~
 It looks tasty. Have a drink!
 ~
 #8801
-çora kýlýç~
-çora kýlýcý~
+elf kýlýç~
+elf kýlýcý~
 Güzel bir kýlýç burada býrakýlmýþ.~
 adamantite~
 weapon G AN
@@ -188,9 +188,9 @@ sword 1 5 slash 0
 A
 18 2
 #8802
-çora fularý~
-çora fularý~
-Güzel bir çora fularý burada býrakýlmýþ.~
+elf fularý~
+elf fularý~
+Güzel bir elf fularý burada býrakýlmýþ.~
 cloth~
 armor G AC
 3 3 3 0 1
@@ -200,9 +200,9 @@ A
 A
 17 -2
 #8803
-çora çizme~
-bir çift çora çizmesi~
-Bir çift çora çizmesi burada býrakýlmýþ.~
+elf çizme~
+bir çift elf çizmesi~
+Bir çift elf çizmesi burada býrakýlmýþ.~
 leather~
 armor G AG
 3 4 4 0 2
@@ -214,7 +214,7 @@ A
 #8804
 su þiþesi~
 su þiþesi~
-Çora iþi bir su þiþesi görüyorsun.~
+Elf iþi bir su þiþesi görüyorsun.~
 porcelain~
 drink 0 A
 10 10 'water' 0 0
@@ -274,9 +274,9 @@ drink 0 A
 100 0 'water' 0 0
 1 140 200 G
 #8811
-güzel çora kýlýç~
-güzel bir çora kýlýcý~
-Güzel bir çora kýlýcý burada býrakýlmýþ.~
+güzel elf kýlýç~
+güzel bir elf kýlýcý~
+Güzel bir elf kýlýcý burada býrakýlmýþ.~
 metal~
 weapon AL AN
 sword 2 12 cleave DF
@@ -516,7 +516,7 @@ D4
 S
 #8810
 Muhafýz Noktasý~
-You have stumbled into a Sylvan Çora guard post, from which they carefully
+You have stumbled into a Sylvan Elf guard post, from which they carefully
 watch out for intruding Orcs or Goblins. They dislike strangers in general,
 and detest interlopers into their personal areas even more. Expect a violent
 reception if there is a guard present...
@@ -693,7 +693,7 @@ D4
 S
 #8821
 Muhafýz Noktasý~
-You have stumbled into a Sylvan Çora guard post, from which they carefully
+You have stumbled into a Sylvan Elf guard post, from which they carefully
 watch out for intruding Orcs or Goblins. They dislike strangers in general,
 and detest interlopers into their personal areas even more. Expect a violent
 reception if there is a guard present...
@@ -1112,7 +1112,7 @@ D2
 S
 #8846
 Muhafýz Noktasý~
-You have stumbled into a Sylvan Çora guard post, from which they carefully
+You have stumbled into a Sylvan Elf guard post, from which they carefully
 watch out for intruding Orcs or Goblins. They dislike strangers in general,
 and detest interlopers into their personal areas even more. Expect a violent
 reception if there is a guard present...

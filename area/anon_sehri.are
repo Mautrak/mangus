@@ -20,7 +20,7 @@ END
 
  The City of Anon-
 
-    Illithid                      Çora                      Avian
+    Illithid                      Elf                      Avian
      Guild      Merc    Magic    Guild     ID       Pet     Guild
        |        Hire    Shop       |       Guy      Shop      |
        |_________|________|________|________|________|________|________Human
@@ -155,16 +155,16 @@ you want it to have to the same line, i.e, BUY mouse harold".
 human~
 ABG HN 80
 #31009
-çora loncasý efendisi~
-Çora Loncasý Efendisi~
-Çora Loncasý Efendisi sana "Hoþgeldin" diyor.
+elf loncasý efendisi~
+Elf Loncasý Efendisi~
+Elf Loncasý Efendisi sana "Hoþgeldin" diyor.
 ~
 "Welcome, friend, to the Guild of the Elves. Should you wish to practice
 a skill or spell that is within my area of expertise, simply type PRAC
 <skillname>. Typing PRAC without an argument will display what skills or
 spells you may learn here".
 ~
-çora~
+elf~
 ABGK HN 10
 #31010
 bakkal~
@@ -236,14 +236,14 @@ Honest, Reliable and Courteous (yeah right).
 human~
 ABG HN 55
 #31016
-çora garson~
-Çora Garson~
-Çora Garson içki servisi yapýyor.
+elf garson~
+Elf Garson~
+Elf Garson içki servisi yapýyor.
 ~
 A prominent employee of the Guild.
 Honest, Reliable and Courteous (yeah right).
 ~
-çora~
+elf~
 ABG HN 60
 #31017
 cüce garson~
@@ -493,7 +493,7 @@ Sokak eniði yiyecek arýyor.
 ~
 The beastly fido is foaming at the mouth. You smell the aroma of his latest kill.
 ~
-fido~
+dog~
 AGH 0 5
 #31042
 laðým sýçan~
@@ -557,13 +557,13 @@ Oldukça sert görünüyor, dikkatli olmalýsýn...
 human~
 AI FJ 15
 #31048
-çora paralý askeri~
-Çora Paralý Askeri~
-Bir çora paralý askeri kaþlarýný çatmýþ bekliyor.
+elf paralý askeri~
+Elf Paralý Askeri~
+Bir elf paralý askeri kaþlarýný çatmýþ bekliyor.
 ~
 Oldukça sert görünüyor, dikkatli olmalýsýn...
 ~
-çora~
+elf~
 AI DJ 20
 #31049
 cüce paralý askeri~
@@ -1642,8 +1642,8 @@ of time before this city falls, which is a pity as it lies on the only road
 that leads to the mysterious lands to the south east.
 ~
 E
-çora~
-The çora race is smaller in number than the Humans, though it is almost as
+elf~
+The elf race is smaller in number than the Humans, though it is almost as
 powerful. Its holdings consist of-
 
 THE DUCHY OF MALATHAR
@@ -1666,7 +1666,7 @@ whom they trade via the River of Anon.
 E
 Mirkwood~
 This dark, mysterious wood is inhabited by a great number of Elves, most of
-whom answer to the Wood Çora kings, in their great wooden estate in the
+whom answer to the Wood Elf kings, in their great wooden estate in the
 center of the forest. Government is indirect and erratic, however, the elves
 really only coming together in times of great crisis.
 ~
@@ -1751,7 +1751,7 @@ the many races of Anon. For more information on the relevant races, type
 read Elf, Dwarf, Human, Kender, Avian, Illithid, Dryad or Darkling.
 ~
 E
-çora~
+elf~
 
 The Elves of Anon vary in their social structure according to the various
 sub-types of Elves. This chapter will focus on those Elves known as the
@@ -1759,7 +1759,7 @@ High or True Elves, the Elves that deign to associate with humanity, and
 have a desire for adventure.
 
 High Elves come from a very rigid social structure, a complex feudal system
-where vertical ascension is very difficult. Basically, the path an Çora will
+where vertical ascension is very difficult. Basically, the path an Elf will
 take in life is determined to a very large extent by what their parents did-
 i.e, mages are the children of magicians, warriors the children of warriors,
 nobles the children of nobility, etc. Occasionally, young Elves who
@@ -1951,7 +1951,7 @@ This slim tome contains a brief synopsis of the history of each of the major
 races of the Known World. These synopses have been gathered from extant
 primary sources by Xanafax and compiled here for the dilettante to peruse
 and learn a little about their fellow Anonians. For further information,
-try read çora, read human, etc.
+try read elf , read human, etc.
 ~
 E
 Dryad~
@@ -1989,7 +1989,7 @@ exceedingly fond. Dryads are respected practitioners of the healing arts, as
 well as respected wielders of powerful battle magics.
 ~
 E
-çora~
+elf~
 
 Aeons ago, when the land of Anon first came into being, Elves were among the
 first races to emerge through the mystical portals that sprang up across the
@@ -2251,7 +2251,7 @@ area.
 
 The great forests to the east are known by several names, though perhaps best
 as Mirkwood, named so by the elves who first settled there. In the depths
-of this forest can be found the çora duchy of Malathar, as well as the
+of this forest can be found the elf duchy of Malathar, as well as the
 sacred Valley of the Elves, and the Dryad Holy Grove. There is also a small
 goblin kingdom further in the forest, where few dare travel. North of this
 lies the magical world of Animaland, a small kingdom ruled and populated by
@@ -2369,7 +2369,7 @@ meaner and more bitter to the people that were living in The Realms.
 
 	Feenix Flarestar was born into this world shortly after it was
 created, and chose the path of the Elf, the Master of offensive magic.
-Feenix was an acomplished youg çora, killed many a monster, and died even
+Feenix was an acomplished youg elf , killed many a monster, and died even
 more time than he killed (but that is story for another time). He learned
 the ropes of adventuring in The Realms rather quickly, and made many
 friends, both mortal and  godly.
@@ -2398,7 +2398,7 @@ feeling of wanderlust was starting up again.
 
 	Feenix left The Realms and headed out into space, looking for
 more adventure. After many failed attempts at finding it, he located a
-place called Anon. He entered the world as an Çora once again, and started
+place called Anon. He entered the world as an Elf once again, and started
 his adventuring career.
 
 	As he slowly progressed, he started to notice that the gods and
@@ -2490,7 +2490,7 @@ races.  His favorite stories were of humankind.
 His sleep and daydreams were both populated by the Mort d'Arthur, Gawaine and
 the Green Knight, and tales by Frank Baum, C. S. Lewis, and Robert Heinlein.
 As an adolescent, Nemo was apprenticed as a magician to his uncle, Kamack.
-Kamack was a kindly old çora, but Nemo quickly surpassed him in magic ability.
+Kamack was a kindly old elf , but Nemo quickly surpassed him in magic ability.
 To avoid the dreadfully dull future that awaited him in his native village
 and to avoid having to marry his pretty but half-witted cousin Edwina, Nemo
 slipped away one summer night to seek out Humankind and his own destiny.
@@ -3725,7 +3725,7 @@ Elven Guild, and beyond that loom the cyclopean city walls.
 ~
 0 0 1
 D0
-Çora Loncasý~
+Elf Loncasý~
 ~
 0 -1 31058
 D2
@@ -3734,7 +3734,7 @@ Corner of Honor Avenue and Barýþ Caddesi~
 0 -1 31051
 S
 #31058
-Çora Loncasý~
+Elf Loncasý~
 You are standing in the forecourt of the tower which holds the chambers of
 the Elven Guild. Here, practitioners of the magic of the Elves come to
 advance their knowledge of their art. Upstairs lie the offices of the Guild,
@@ -3750,7 +3750,7 @@ Lonca Ofisleri~
 ~
 0 -1 31059
 D5
-Çora Barý~
+Elf Barý~
 ~
 0 -1 31061
 S
@@ -3768,12 +3768,12 @@ Lonca Efendisinin Ofisi~
 ~
 0 -1 31060
 D5
-Çora Loncasý~
+Elf Loncasý~
 ~
 0 -1 31058
 S
 #31060
-Çora Loncasý Efendisinin Ofisi~
+Elf Loncasý Efendisinin Ofisi~
 This spacious office is lined on every wall by tall bookcases crammed with
 books on magic and mystical lore, as well as treatises on history, science
 mathematics, philosophy and alchemy. The Guildmaster himself sits behind
@@ -3788,15 +3788,15 @@ Lonca Ofisleri~
 0 -1 31059
 S
 #31061
-Çora Barý~
+Elf Barý~
 Elves are notorious drinkers, mainly due to the fact that their power relies
 solely on mana, and the best way to rapidly regain mana is to be rip-roaring
-drunk. Thus it is extremely rare to see an active adventuring Çora remotely
+drunk. Thus it is extremely rare to see an active adventuring Elf remotely
 sober.
 ~
 0 8 0
 D4
-Çora Loncasý~
+Elf Loncasý~
 ~
 0 -1 31058
 S
@@ -4220,7 +4220,7 @@ S
 Bar~
 You have entered a seedy bar full of low-lifes of the lowest common
 denominator. A greasy bartender serves drinks to the sullen patrons, while
-in the corner a couple of sailors are roughing up an Çora who refused to pay
+in the corner a couple of sailors are roughing up an Elf who refused to pay
 up upon losing the last hand in poker.
 ~
 0 1|8 0
