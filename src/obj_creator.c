@@ -82,7 +82,7 @@ int obj_random_paf_modifier(int location, int level)
 int obj_random_paf_find_available_location(OBJ_DATA *obj)
 {
 	AFFECT_DATA *paf;
-	int random_number = number_range(1,5000);
+	int random_number = number_range(1,500);
 	int random_location = 0;
 	
 	if(random_number==1)
@@ -98,7 +98,7 @@ int obj_random_paf_find_available_location(OBJ_DATA *obj)
 			default:	random_location = APPLY_STR; break;
 		}
 	}
-	else if(random_number<400)
+	else if(random_number<200)
 	{
 		switch(number_range(7,9))
 		{
@@ -172,6 +172,94 @@ int obj_random_paf_find_available_resistance(OBJ_DATA *obj)
 	return random_res;
 }
 
+int obj_random_paf_find_available_vulnerability(OBJ_DATA *obj)
+{
+	AFFECT_DATA *paf;
+	int random_number = number_range(1,23); //str,int,wis,dex,con,cha
+	int random_vuln = 0;
+	
+	switch(random_number)
+	{
+		case 1:		random_vuln = VULN_SUMMON; break;
+		case 2:		random_vuln = VULN_CHARM; break;
+		case 3:		random_vuln = VULN_MAGIC; break;
+		case 4:		random_vuln = VULN_WEAPON; break;
+		case 5:		random_vuln = VULN_BASH; break;
+		case 6:		random_vuln = VULN_PIERCE; break;
+		case 7:		random_vuln = VULN_SLASH; break;
+		case 8:		random_vuln = VULN_FIRE; break;
+		case 9:		random_vuln = VULN_COLD; break;
+		case 10:	random_vuln = VULN_LIGHTNING; break;
+		case 11:	random_vuln = VULN_ACID; break;
+		case 12:	random_vuln = VULN_POISON; break;
+		case 13:	random_vuln = VULN_NEGATIVE; break;
+		case 14:	random_vuln = VULN_HOLY; break;
+		case 15:	random_vuln = VULN_ENERGY; break;
+		case 16:	random_vuln = VULN_MENTAL; break;
+		case 17:	random_vuln = VULN_DISEASE; break;
+		case 18:	random_vuln = VULN_DROWNING; break;
+		case 19:	random_vuln = VULN_LIGHT; break;
+		case 20:	random_vuln = VULN_SOUND; break;
+		case 21:	random_vuln = VULN_WOOD; break;
+		case 22:	random_vuln = VULN_SILVER; break;
+		case 23:	random_vuln = VULN_IRON; break;
+		default:	random_vuln = VULN_IRON; break;
+	}
+	
+	
+	for (paf = obj->affected; paf != NULL; paf = paf->next)
+	{
+		if(paf->where == TO_VULN && IS_SET(paf->bitvector,random_vuln) )
+			return 0;
+	}
+	
+	return random_vuln;
+}
+
+int obj_random_paf_find_available_immunity(OBJ_DATA *obj)
+{
+	AFFECT_DATA *paf;
+	int random_number = number_range(1,23); //str,int,wis,dex,con,cha
+	int random_imm = 0;
+	
+	switch(random_number)
+	{
+		case 1:		random_imm = IMM_SUMMON; break;
+		case 2:		random_imm = IMM_CHARM; break;
+		case 3:		random_imm = IMM_MAGIC; break;
+		case 4:		random_imm = IMM_WEAPON; break;
+		case 5:		random_imm = IMM_BASH; break;
+		case 6:		random_imm = IMM_PIERCE; break;
+		case 7:		random_imm = IMM_SLASH; break;
+		case 8:		random_imm = IMM_FIRE; break;
+		case 9:		random_imm = IMM_COLD; break;
+		case 10:	random_imm = IMM_LIGHTNING; break;
+		case 11:	random_imm = IMM_ACID; break;
+		case 12:	random_imm = IMM_POISON; break;
+		case 13:	random_imm = IMM_NEGATIVE; break;
+		case 14:	random_imm = IMM_HOLY; break;
+		case 15:	random_imm = IMM_ENERGY; break;
+		case 16:	random_imm = IMM_MENTAL; break;
+		case 17:	random_imm = IMM_DISEASE; break;
+		case 18:	random_imm = IMM_DROWNING; break;
+		case 19:	random_imm = IMM_LIGHT; break;
+		case 20:	random_imm = IMM_SOUND; break;
+		case 21:	random_imm = IMM_WOOD; break;
+		case 22:	random_imm = IMM_SILVER; break;
+		case 23:	random_imm = IMM_IRON; break;
+		default:	random_imm = IMM_IRON; break;
+	}
+	
+	
+	for (paf = obj->affected; paf != NULL; paf = paf->next)
+	{
+		if(paf->where == TO_IMMUNE && IS_SET(paf->bitvector,random_imm) )
+			return 0;
+	}
+	
+	return random_imm;
+}
+
 void obj_random_paf(OBJ_DATA *obj)
 {
 	int location=0;
@@ -193,42 +281,42 @@ void obj_random_paf(OBJ_DATA *obj)
 	
 	if(obj->level < 10)
 	{
-		if(number_range(1,15)!=1)
+		if(number_range(1,11)!=1)
 		{
 			return;
 		}
 	}
 	else if(obj->level < 20)
 	{
-		if(number_range(1,13)!=1)
+		if(number_range(1,9)!=1)
 		{
 			return;
 		}
 	}
 	else if(obj->level < 30)
 	{
-		if(number_range(1,11)!=1)
+		if(number_range(1,8)!=1)
 		{
 			return;
 		}
 	}
 	else if(obj->level < 40)
 	{
-		if(number_range(1,9)!=1)
+		if(number_range(1,7)!=1)
 		{
 			return;
 		}
 	}
 	else if(obj->level < 50)
 	{
-		if(number_range(1,7)!=1)
+		if(number_range(1,5)!=1)
 		{
 			return;
 		}
 	}
 	else if(obj->level < 60)
 	{
-		if(number_range(1,5)!=1)
+		if(number_range(1,4)!=1)
 		{
 			return;
 		}
@@ -255,10 +343,10 @@ void obj_random_paf(OBJ_DATA *obj)
 		}
 	}
 	
-	while(number_range(1,10)<7)
+	while(number_range(1,10)<8)
 	{
 		obj->enchanted	= TRUE;
-		if(number_percent()<90)
+		if(number_percent()<95)
 		{
 			location = obj_random_paf_find_available_location(obj);
 			if(location == 0)
@@ -276,7 +364,22 @@ void obj_random_paf(OBJ_DATA *obj)
 			obj->affected			= paf;
 			top_affect++;
 		}
-		else
+		else if(number_percent()<97)
+		{
+			AFFECT_DATA *paf;
+			paf						= (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
+			paf->where				= TO_VULN;
+			paf->type               = -1;
+            paf->level              = obj->level;
+			paf->duration           = -1;
+			paf->location           = 0;
+			paf->modifier           = 0;
+			paf->bitvector          = obj_random_paf_find_available_vulnerability(obj);
+			paf->next               = obj->affected;
+			obj->affected			= paf;
+			top_affect++;
+		}
+		else if(number_percent()<99)
 		{
 			AFFECT_DATA *paf;
 			paf						= (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
@@ -287,6 +390,21 @@ void obj_random_paf(OBJ_DATA *obj)
 			paf->location           = 0;
 			paf->modifier           = 0;
 			paf->bitvector          = obj_random_paf_find_available_resistance(obj);
+			paf->next               = obj->affected;
+			obj->affected			= paf;
+			top_affect++;
+		}
+		else
+		{
+			AFFECT_DATA *paf;
+			paf						= (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
+			paf->where				= TO_IMMUNE;
+			paf->type               = -1;
+            paf->level              = obj->level;
+			paf->duration           = -1;
+			paf->location           = 0;
+			paf->modifier           = 0;
+			paf->bitvector          = obj_random_paf_find_available_immunity(obj);
 			paf->next               = obj->affected;
 			obj->affected			= paf;
 			top_affect++;
