@@ -432,3 +432,88 @@ int obj_random_condition()
 		return 20;
 	return 20;
 }
+
+int obj_random_cost(int level)
+{
+	return (level * level * (number_range(1,5)));
+}
+
+int obj_random_weight(int level)
+{
+	return (level * number_range(1,10));
+}
+
+int obj_random_extra_flag()
+{
+	int newflag = 0;
+	
+	if(number_percent()<2)
+		SET_BIT(newflag,ITEM_GLOW);
+	if(number_percent()<2)
+		SET_BIT(newflag,ITEM_HUM);
+	if(number_percent()<2)
+		SET_BIT(newflag,ITEM_DARK);
+	if(number_percent()<2)
+		SET_BIT(newflag,ITEM_LOCK);
+	if(number_percent()<2)
+		SET_BIT(newflag,ITEM_EVIL);
+	if(number_percent()<2)
+		SET_BIT(newflag,ITEM_INVIS);
+	if(number_percent()<2)
+		SET_BIT(newflag,ITEM_MAGIC);
+	if(number_percent()<2)
+		SET_BIT(newflag,ITEM_NODROP);
+	if(number_percent()<2)
+		SET_BIT(newflag,ITEM_BLESS);
+	if(number_percent()<2)
+		SET_BIT(newflag,ITEM_ANTI_GOOD);
+	if(number_percent()<2)
+		SET_BIT(newflag,ITEM_ANTI_EVIL);
+	if(number_percent()<2)
+		SET_BIT(newflag,ITEM_ANTI_NEUTRAL);
+	if(number_percent()<2)
+		SET_BIT(newflag,ITEM_NOREMOVE);
+	if(number_percent()<2)
+		SET_BIT(newflag,ITEM_NOPURGE);
+	if(number_percent()<2)
+		SET_BIT(newflag,ITEM_NOSAC);
+	if(number_percent()<2)
+		SET_BIT(newflag,ITEM_NOLOCATE);
+	if(number_percent()<2)
+		SET_BIT(newflag,ITEM_MELT_DROP);
+	if(number_percent()<2)
+		SET_BIT(newflag,ITEM_BURN_PROOF);
+
+    return newflag;
+}
+
+int obj_random_weapon_flag()
+{
+	int newflag = 0;
+	
+	if(number_percent()<2)
+		SET_BIT(newflag,WEAPON_FLAMING);
+	if(number_percent()<2)
+		SET_BIT(newflag,WEAPON_FROST);
+	if(number_percent()<2)
+		SET_BIT(newflag,WEAPON_VAMPIRIC);
+	if(number_percent()<2)
+		SET_BIT(newflag,WEAPON_SHARP);
+	if(number_percent()<2)
+		SET_BIT(newflag,WEAPON_VORPAL);
+	if(number_percent()<2)
+		SET_BIT(newflag,WEAPON_TWO_HANDS);
+	if(number_percent()<2)
+		SET_BIT(newflag,WEAPON_SHOCKING);
+	if(number_percent()<2)
+		SET_BIT(newflag,WEAPON_POISON);
+	if(number_percent()<2)
+		SET_BIT(newflag,WEAPON_HOLY);
+
+    return newflag;
+}
+
+char *obj_random_wand_potion_spell()
+{
+	return (char*)wand_spell_table[number_range(1,76)-1].name;
+}

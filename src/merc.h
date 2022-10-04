@@ -3391,6 +3391,12 @@ sh_int race_dice args( (int level, bool humanoid) );
 /* obj_creator.c */
 void obj_random_paf		args( (OBJ_DATA *obj) );
 int  obj_random_condition  args( (void) );
+int obj_random_cost  args( (int level) );
+int obj_random_weight  args( (int level) );
+int obj_random_extra_flag  args( (void) );
+int obj_random_weapon_flag  args( (void) );
+char *obj_random_wand_potion_spell  args( (void) );
+
 /* quest.c */
 bool gorev_ekipmani_mi args( (OBJ_DATA *obj) );
 

@@ -2242,6 +2242,7 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
     obj->from           = str_dup(""); /* used with body parts */
     obj->pit            = OBJ_VNUM_PIT; /* default for corpse decaying */
     obj->altar          = ROOM_VNUM_ALTAR; /* default for corpses */
+    obj->condition	= pObjIndex->condition;
     obj->creation_time  = current_time;
 
     if (level == -1 || pObjIndex->new_format)
@@ -2345,10 +2346,54 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
 	{
 		obj_random_paf(obj);
         obj->condition	= obj_random_condition();
-	}
-    else if(Count == TRUE)
-	{
-		obj->condition	= pObjIndex->condition;
+        obj->cost           = obj_random_cost(obj->level);
+        obj->weight         = obj_random_weight(obj->level);
+        obj->extra_flags    = obj_random_extra_flag();
+
+        switch ( obj->item_type )
+        {
+            case ITEM_WEAPON:
+                obj->value[4] = obj_random_weapon_flag();
+            break;
+            case ITEM_ARMOR:
+                obj->value[0]	= number_range(1,int(obj->level/2));	// armor vs. pierce
+                obj->value[1]	= number_range(1,int(obj->level/2));	// armor vs. bash
+                obj->value[2]	= number_range(1,int(obj->level/2));	// armor vs. slash
+                obj->value[3]	= number_range(1,int(obj->level/2));	// armor vs. exotic weapons
+                obj->value[4]	= 0;										// unused
+            break;
+            case ITEM_WAND:
+            case ITEM_STAFF:
+                obj->value[0]	= (number_percent()<95)?(obj->level):(number_range(5,90)); // spell level
+                obj->value[1]	= number_range(1,40);	// maximum number of charges
+                obj->value[2]	= obj->value[1];	// current number of charges
+                obj->value[3]	= skill_lookup(obj_random_wand_potion_spell());
+                obj->value[4]	= 0;					// unused
+            break;
+            case ITEM_POTION:
+            case ITEM_PILL:
+            case ITEM_SCROLL:
+                obj->value[0]		= (number_percent()<95)?(obj->level):(number_range(5,90)); // spell level
+                obj->value[1]		= skill_lookup(obj_random_wand_potion_spell());
+                obj->value[2]		= (number_percent()<70)?(skill_lookup(obj_random_wand_potion_spell())):-1;
+                obj->value[3]		= (number_percent()<40)?(skill_lookup(obj_random_wand_potion_spell())):-1;
+                obj->value[4]		= (number_percent()<10)?(skill_lookup(obj_random_wand_potion_spell())):-1;
+            break;
+            case ITEM_LIGHT:
+                obj->value[0]	= 0;								// unused
+                obj->value[1]	= 0;								// unused
+                obj->value[2]	= (number_percent()<20)?-1:number_range(5,500); // light duration in game hours (-1 unlimited)
+                obj->value[3]	= 0;								// unused
+                obj->value[4]	= 0;								// unused
+            break;
+            case ITEM_FOOD:
+                obj->value[0]	= number_range(5,40);				// number of game hours the food will keep the person who eats it full
+                obj->value[1]	= number_range(5,70);				// number of hours it will keep the person from getting hungry
+                obj->value[2]	= 0;								// unused
+                obj->value[3]	= (number_percent()<95)?0:1;		// nonpoisoned:0,poisoned:1
+                obj->value[4]	= 0;								// unused
+            break;
+        }
 	}
 
 	/*

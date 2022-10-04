@@ -61,6 +61,8 @@ extern	const	struct	yp_tip	yp_tablo[];
 extern	const	struct	position_type	position_table[];
 extern	const	struct	sex_type	sex_table[];
 extern	const	struct	size_type	size_table[];
+//extern	const	struct	material_type	material_table[];
+extern	const	struct	wand_spell_type	wand_spell_table[];
 
 /* flag tables */
 extern	const	struct	flag_type	act_flags[];
@@ -98,6 +100,11 @@ struct sex_type
 };
 
 struct size_type
+{
+    const char *name;
+};
+
+struct wand_spell_type
 {
     const char *name;
 };
