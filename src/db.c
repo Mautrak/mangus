@@ -1946,9 +1946,23 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex , AREA_DATA *	pArea)
       pMobIndex->vnum == MOB_VNUM_LION || pMobIndex->vnum == MOB_VNUM_WOLF || pMobIndex->vnum == MOB_VNUM_LESSER_GOLEM || 
       pMobIndex->vnum == MOB_VNUM_STONE_GOLEM || pMobIndex->vnum == MOB_VNUM_IRON_GOLEM || pMobIndex->vnum == MOB_VNUM_ADAMANTITE_GOLEM || 
       pMobIndex->vnum == MOB_VNUM_HUNTER || pMobIndex->vnum == MOB_VNUM_SUM_SHADOW || pMobIndex->vnum == MOB_VNUM_DOG )
+      {
         mob->race		= pMobIndex->race;
+      }
   else
-        mob->race		= race_dice(mob->level);
+    {
+        if( (mob->spec_fun != spec_lookup( (char*)"spec_questmaster" )) || IS_SET(mob->act, ACT_MAFYA) || IS_SET(mob->act, ACT_TRAIN) ||
+            IS_SET(mob->act, ACT_PRACTICE) || IS_SET(mob->act, ACT_CLERIC) || IS_SET(mob->act, ACT_MAGE) ||
+            IS_SET(mob->act, ACT_THIEF) || IS_SET(mob->act, ACT_WARRIOR) || IS_SET(mob->act, ACT_IS_HEALER) ||
+            IS_SET(mob->act, ACT_GAIN) )
+            {
+                mob->race		= race_dice(mob->level, TRUE);
+            }
+        else
+        {
+            mob->race		= race_dice(mob->level, FALSE);
+        }
+    }
 
   mob->off_flags		= race_table[mob->race].off;
   mob->imm_flags		= race_table[mob->race].imm;

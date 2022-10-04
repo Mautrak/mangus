@@ -700,6 +700,7 @@ struct race_type
     const char 	who_name[8];
 		sh_int	language;		/* language		*/
     bool	pc_race;		/* can be chosen by pcs  */
+    bool	humanoid;		/* intelligent humanoid races  */
     sh_int	size;
     long	det;			/* det bits for the race */
     long	act;			/* act bits for the race */
@@ -3386,7 +3387,7 @@ int dam_type_dice args( (void) );
 int ac_dice args( (int i,int level) );
 int position_dice args( (void) );
 int sex_dice args( (void) );
-sh_int race_dice args( (int level) );
+sh_int race_dice args( (int level, bool humanoid) );
 /* obj_creator.c */
 void obj_random_paf		args( (OBJ_DATA *obj) );
 int  obj_random_condition  args( (void) );

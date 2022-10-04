@@ -125,12 +125,43 @@ int sex_dice(void)
 	return number_range(1,2);
 }
 
-sh_int race_dice(int level)
+sh_int race_dice(int level, bool humanoid)
 {
+	int irace = 0;
 	if(level<40)
-		return number_range(1,26);
+	{
+		if(humanoid == TRUE)
+		{
+			while(TRUE)
+			{
+				irace = number_range(1,26);
+				if(race_table[irace].humanoid == TRUE)
+					break;
+			}
+			return irace;
+		}
+		else
+		{
+			return number_range(1,26);
+		}
+	}
 	else
-		return number_range(1,31);
+	{
+		if(humanoid == TRUE)
+		{
+			while(TRUE)
+			{
+				irace = number_range(1,31);
+				if(race_table[irace].humanoid == TRUE)
+					break;
+			}
+			return irace;
+		}
+		else
+		{
+			return number_range(1,31);
+		}
+	}
 	
 	return number_range(1,26);
 }
