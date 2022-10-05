@@ -233,8 +233,9 @@ void spell_disintegrate( int sn, int level, CHAR_DATA *ch, void *vo, int target)
 
 	/*
 	 * Ani ölüm büyüsü. Tutma yüzdesi %5 düþürüldü.
+   * Ani ölüm büyüsü. Tutma yüzdesi bir daha %5 düþürüldü.
 	 */
-    if (saves_spell(level,victim,DAM_MENTAL) || number_percent() < 55)
+    if (saves_spell(level,victim,DAM_MENTAL) || number_percent() < 60)
 	{
 	 dam = dice( level , 24 ) ;
 	 damage(ch, victim , dam , sn, DAM_MENTAL, TRUE);
