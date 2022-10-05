@@ -2373,11 +2373,28 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
             case ITEM_POTION:
             case ITEM_PILL:
             case ITEM_SCROLL:
-                obj->value[0]		= (number_percent()<95)?(obj->level):(number_range(5,90)); // spell level
-                obj->value[1]		= skill_lookup(obj_random_wand_potion_spell());
-                obj->value[2]		= (number_percent()<70)?(skill_lookup(obj_random_wand_potion_spell())):-1;
-                obj->value[3]		= (number_percent()<40)?(skill_lookup(obj_random_wand_potion_spell())):-1;
-                obj->value[4]		= (number_percent()<10)?(skill_lookup(obj_random_wand_potion_spell())):-1;
+                if(obj->value[2] == 0)
+                {
+                    if(number_range(1,100) == 1)
+                    {
+                        obj->value[2] = skill_lookup(obj_random_wand_potion_spell());
+                    }
+                }
+                if(obj->value[3] == 0)
+                {
+                    if(number_range(1,100) == 1)
+                    {
+                        obj->value[3] = skill_lookup(obj_random_wand_potion_spell());
+                    }
+                }
+                if(obj->value[4] == 0)
+                {
+                    if(number_range(1,100) == 1)
+                    {
+                        obj->value[4] = skill_lookup(obj_random_wand_potion_spell());
+                    }
+                }
+                obj->cost = UMAX(number_range(950,1000),obj->cost * number_range(1,5));
             break;
             case ITEM_LIGHT:
                 obj->value[0]	= 0;								// unused

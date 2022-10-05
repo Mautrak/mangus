@@ -435,7 +435,9 @@ int obj_random_condition()
 
 int obj_random_cost(int level)
 {
-	return (level * level * (number_range(1,5)));
+	int min_cost = number_range(1,50);
+	int max_cost = level * level * number_range(1,5);
+	return UMAX( min_cost, max_cost );
 }
 
 int obj_random_weight(int level)

@@ -4024,7 +4024,7 @@ void do_list( CHAR_DATA *ch, char *argument )
 	}
 
 	if ( !found )
-  send_to_char( "Buradan birþey satýn alamazsýn.\n\r", ch );
+  send_to_char( "Buradan bir þey satýn alamazsýn.\n\r", ch );
 	return;
     }
 }
