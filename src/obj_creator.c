@@ -442,7 +442,7 @@ int obj_random_cost(int level)
 
 int obj_random_weight(int level)
 {
-	return (level * number_range(1,10));
+	return (UMAX(1,level/10) * number_range(1,10));
 }
 
 int obj_random_extra_flag()

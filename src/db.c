@@ -2341,6 +2341,8 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
 	    obj->value[0]	= obj->cost;
 	break;
     }
+
+    obj->weight         = obj_random_weight(obj->level);
 	
 	if(Count == TRUE && obj->pIndexData->random_object)
 	{
