@@ -262,7 +262,7 @@ int obj_random_paf_find_available_immunity(OBJ_DATA *obj)
 
 void obj_random_paf(OBJ_DATA *obj)
 {
-	int location=0;
+	int location=0,bitvector=0;
 
 	
 	if( !IS_SET( obj->wear_flags, ITEM_TAKE) )
@@ -366,6 +366,9 @@ void obj_random_paf(OBJ_DATA *obj)
 		}
 		else if(number_percent()<88)
 		{
+			bitvector = obj_random_paf_find_available_vulnerability(obj);
+			if(bitvector == 0)
+				continue;
 			AFFECT_DATA *paf;
 			paf						= (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
 			paf->where				= TO_VULN;
@@ -374,13 +377,16 @@ void obj_random_paf(OBJ_DATA *obj)
 			paf->duration           = -1;
 			paf->location           = 0;
 			paf->modifier           = 0;
-			paf->bitvector          = obj_random_paf_find_available_vulnerability(obj);
+			paf->bitvector          = bitvector;
 			paf->next               = obj->affected;
 			obj->affected			= paf;
 			top_affect++;
 		}
 		else if(number_percent()<94)
 		{
+			bitvector = obj_random_paf_find_available_resistance(obj);
+			if(bitvector == 0)
+				continue;
 			AFFECT_DATA *paf;
 			paf						= (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
 			paf->where				= TO_RESIST;
@@ -389,13 +395,16 @@ void obj_random_paf(OBJ_DATA *obj)
 			paf->duration           = -1;
 			paf->location           = 0;
 			paf->modifier           = 0;
-			paf->bitvector          = obj_random_paf_find_available_resistance(obj);
+			paf->bitvector          = bitvector;
 			paf->next               = obj->affected;
 			obj->affected			= paf;
 			top_affect++;
 		}
 		else
 		{
+			bitvector = obj_random_paf_find_available_immunity(obj);
+			if(bitvector == 0)
+				continue;
 			AFFECT_DATA *paf;
 			paf						= (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
 			paf->where				= TO_IMMUNE;
@@ -404,7 +413,7 @@ void obj_random_paf(OBJ_DATA *obj)
 			paf->duration           = -1;
 			paf->location           = 0;
 			paf->modifier           = 0;
-			paf->bitvector          = obj_random_paf_find_available_immunity(obj);
+			paf->bitvector          = bitvector;
 			paf->next               = obj->affected;
 			obj->affected			= paf;
 			top_affect++;

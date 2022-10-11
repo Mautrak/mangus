@@ -637,8 +637,8 @@ void do_put( CHAR_DATA *ch, char *argument )
 	}
 */
 	if (get_obj_weight( obj ) + get_true_weight( container )
-	     > (container->value[0] * 10)
-	||  get_obj_weight(obj) > (container->value[3] * 10))
+	     > (container->value[0] * 25)
+	||  get_obj_weight(obj) > (container->value[3] * 25))
 	{
     send_to_char( "Sýðmaz.\n\r", ch );
 	    return;
