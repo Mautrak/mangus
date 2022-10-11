@@ -175,7 +175,7 @@ void advance_level( CHAR_DATA *ch )
     ch->pcdata->perm_move	+= add_move;
 
 
-    printf_to_char( ch, "{GKazancýn: %d/%d yp, %d/%d mana, %d/%d hp %d/%d pratik.{x\n\r" ,add_hp,		ch->max_hit,
+    printf_to_char( ch, "{GKazancýn: %d/%d Yp, %d/%d Mp, %d/%d Zp %d/%d pratik.{x\n\r" ,add_hp,		ch->max_hit,
   	add_mana,	ch->max_mana,add_move,	ch->max_move,add_prac,	ch->practice);
     return;
 }

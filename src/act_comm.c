@@ -1575,7 +1575,7 @@ void do_group( CHAR_DATA *ch, char *argument )
 	    if ( is_same_group( gch, ch ) )
 	    {
 		  printf_to_char( ch,
-		  "[%2d %s] %-16s %d/%d hp %d/%d mana %d/%d mv   %5d xp\n\r",
+		  "[%2d %s] %-16s %d/%d yp %d/%d mp %d/%d zp   %5d xp\n\r",
 		    gch->level,
 		    IS_NPC(gch) ? "Mob" : class_table[gch->iclass].who_name,
 		    capitalize( PERS(gch, ch) ),

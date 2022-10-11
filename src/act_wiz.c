@@ -1695,7 +1695,7 @@ void do_mobstat( CHAR_DATA *ch, char *argument )
       if (!IS_NPC(gch))
           continue;
       if (gch->level == atoi(arg1))
-        printf_to_char(ch,"Level: %-3d  Damroll: %-4d  Hitroll: %-4d  Hp: %-6d Mn: %-6d Mv: %-6d\n\r",atoi( arg1 ),gch->damroll,gch->hitroll,gch->hit,gch->mana,gch->move);
+        printf_to_char(ch,"Level: %-3d  Damroll: %-4d  Hitroll: %-4d  Yp: %-6d Mp: %-6d Zp: %-6d\n\r",atoi( arg1 ),gch->damroll,gch->hitroll,gch->hit,gch->mana,gch->move);
 
   }
 }
@@ -1765,7 +1765,7 @@ void do_mstat( CHAR_DATA *ch, char *argument )
     send_to_char( buf, ch );
 
 
-    sprintf( buf, "Hp: %d/%d  Mana: %d/%d  Move: %d/%d  Practices: %d\n\r",
+    sprintf( buf, "Yp: %d/%d  Mp: %d/%d  Zp: %d/%d  Practices: %d\n\r",
 	victim->hit,         victim->max_hit,
 	victim->mana,        victim->max_mana,
 	victim->move,        victim->max_move,

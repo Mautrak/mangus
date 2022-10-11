@@ -1419,7 +1419,7 @@ bool process_output( DESCRIPTOR_DATA *d, bool fPrompt )
 
      point = buf;
 
-			strcpy( buf, "Yp:%h/%H Mp:%m/%M Hp:%v/%V <%o>{x ");
+			strcpy( buf, "Yp:%h/%H Mp:%m/%M Zp:%v/%V <%o>{x ");
 			free_string( ch->prompt );
 			ch->prompt = str_dup( buf );
 			str = ch->prompt;
