@@ -527,7 +527,6 @@ struct	str_app_type
     sh_int	tohit;
     sh_int	todam;
     sh_int	carry;
-    sh_int	wield;
 };
 
 struct	int_app_type

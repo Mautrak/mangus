@@ -814,7 +814,7 @@ int can_carry_w( CHAR_DATA *ch )
     if ( IS_NPC(ch) && IS_SET(ch->act, ACT_PET) )
 	return 0;
 
-    return (str_app[get_curr_stat(ch,STAT_STR)].carry * 10 + ch->level * 25 ) * 6;
+    return (str_app[get_curr_stat(ch,STAT_STR)].carry + ch->level * 25 ) * 5;
 }
 
 

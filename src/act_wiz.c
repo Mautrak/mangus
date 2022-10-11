@@ -153,458 +153,52 @@ void do_cabal_scan( CHAR_DATA *ch, char *argument )
 
 void do_objlist( CHAR_DATA *ch, char *argument )
 {
-FILE *fp;
-OBJ_DATA *obj;
-AFFECT_DATA *paf;
-int apply_location;
-char arg[MAX_INPUT_LENGTH];
+    char arg[MAX_INPUT_LENGTH];
+    OBJ_DATA *obj;
+    AFFECT_DATA *paf;
 
-
-int level10 = 0;
-int level10count = 0;
-int level20 = 0;
-int level20count = 0;
-int level30 = 0;
-int level30count = 0;
-int level40 = 0;
-int level40count = 0;
-int level50 = 0;
-int level50count = 0;
-int level60 = 0;
-int level60count = 0;
-int level70 = 0;
-int level70count = 0;
-int level80 = 0;
-int level80count = 0;
-int level90 = 0;
-int level90count = 0;
-
-	argument = one_argument( argument, arg );
+    argument = one_argument( argument, arg );
 	
 	if ( arg[0] == '\0' )
 	{
-		printf_to_char(ch,"Argumanlar: dosya, randompaf\n\r" );
+		printf_to_char(ch,"Argumanlar: imm, res\n\r" );
 		return;
 	}
-	
-	if (!strcmp(arg, "randompaf"))
-	{
-		for( obj=object_list; obj!=NULL; obj = obj->next )
-		{
-			if(obj->pIndexData->random_object && obj->level < 10)
-			{
-				level10count++;
-			}
-			else if(obj->pIndexData->random_object && obj->level < 20)
-			{
-				level20count++;
-			}
-			else if(obj->pIndexData->random_object && obj->level < 30)
-			{
-				level30count++;
-			}
-			else if(obj->pIndexData->random_object && obj->level < 40)
-			{
-				level40count++;
-			}
-			else if(obj->pIndexData->random_object && obj->level < 50)
-			{
-				level50count++;
-			}
-			else if(obj->pIndexData->random_object && obj->level < 60)
-			{
-				level60count++;
-			}
-			else if(obj->pIndexData->random_object && obj->level < 70)
-			{
-				level70count++;
-			}
-			else if(obj->pIndexData->random_object && obj->level < 80)
-			{
-				level80count++;
-			}
-			else if(obj->pIndexData->random_object)
-			{
-				level90count++;
-			}
-			if(obj->pIndexData->random_object && obj->enchanted && obj->affected != NULL)
-			{
-					if(obj->level < 10)
-					{
-						level10++;
-					}
-					else if(obj->level < 20)
-					{
-						level20++;
-					}
-					else if(obj->level < 30)
-					{
-						level30++;
-					}
-					else if(obj->level < 40)
-					{
-						level40++;
-					}
-					else if(obj->level < 50)
-					{
-						level50++;
-					}
-					else if(obj->level < 60)
-					{
-						level60++;
-					}
-					else if(obj->level < 70)
-					{
-						level70++;
-					}
-					else if(obj->level < 80)
-					{
-						level80++;
-					}
-					else
-					{
-						level90++;
-					}
-                printf_to_char(ch,"\n\r%s, %d, %d, %s\n\r", obj->name, obj->pIndexData->vnum, obj->level, item_type_name(obj));
-				if(obj->enchanted)
-				{
-				for ( paf = obj->affected; paf != NULL; paf = paf->next )
-				{
-                printf_to_char(ch,"%s by %d\n\r", affect_loc_name( paf->location ), paf->modifier);
-				if (paf->bitvector)
-				{
-					switch(paf->where)
-					{
-					case TO_AFFECTS:
-                        printf_to_char(ch,"%s aff\n\r", affect_bit_name(paf->bitvector));
-						break;
-                    case TO_WEAPON:
-                        printf_to_char(ch,"%s weapon flag\n\r",weapon_bit_name(paf->bitvector));
-						break;
-					case TO_OBJECT:
-                        printf_to_char(ch,"%s obj flag\n\r", extra_bit_name(paf->bitvector));
-						break;
-					case TO_IMMUNE:
-                        printf_to_char(ch,"%s imm\n\r",imm_bit_name(paf->bitvector));
-						break;
-					case TO_RESIST:
-                        printf_to_char(ch,"%s res\n\r",imm_bit_name(paf->bitvector));
-						break;
-					case TO_VULN:
-                        printf_to_char(ch,"%s vuln\n\r",imm_bit_name(paf->bitvector));
-						break;
-					case TO_DETECTS:
-                        printf_to_char(ch,"%s det\n\r",detect_bit_name(paf->bitvector));
-						break;
-					default:
-                        printf_to_char(ch,"Unknown bit %d: %d\n\r",paf->where,paf->bitvector);
-						break;
-					}
-				}
-				}
-				}
-			}
-		}
-        printf_to_char(ch,"\n\r\n\r");
-		printf_to_char(ch,"level10: %3d/%3d\n\r",level10,level10count);
-		printf_to_char(ch,"level20: %3d/%3d\n\r",level20,level20count);
-		printf_to_char(ch,"level30: %3d/%3d\n\r",level30,level30count);
-		printf_to_char(ch,"level40: %3d/%3d\n\r",level40,level40count);
-		printf_to_char(ch,"level50: %3d/%3d\n\r",level50,level50count);
-		printf_to_char(ch,"level60: %3d/%3d\n\r",level60,level60count);
-		printf_to_char(ch,"level70: %3d/%3d\n\r",level70,level70count);
-		printf_to_char(ch,"level80: %3d/%3d\n\r",level80,level80count);
-		printf_to_char(ch,"level90: %3d/%3d\n\r",level90,level90count);
-        return;
-	}
-	
-	else if (!strcmp(arg, "dosya"))
-	{
-	   if ( (fp=fopen( "objlist.csv", "w+" ) ) == NULL )
-	   {
-			send_to_char( "File error.\n\r", ch );
-			return;
-	   }
 
-		fprintf(fp, "Vnum,Name,Type,Material,Limit,Weight(gr.),Cost,Level,Item Take,Item Wear Finger,Item Wear Neck,Item Wear Body,Item Wear Head,Item Wear Legs,Item Wear Feet, Item Wear Hands,Item Wear Arms,Item Wear Shield,Item Wear About,Item Wear Waist,Item Wear Wrist,Item Wield,Item Hold,Item No Sac,Item Wear Float,Item Wear Tattoo,Condition,Value0,Value1,Value2,Value3,Value4,Glow Flag,Hum Flag,Dark Flag,Lock Flag,Evil Flag,Invis Flag,Magic Flag,NoDrop Flag,Bless Flag,AntiGood Flag,AntiEvil Flag,AntiNeutral Flag,NoRemove Flag,Inventory Flag,NoPurge Flag,RotDeath Flag,VisDeath Flag,NoSac Flag,NonMetal Flag,NoLocate Flag,MeltDrop Flag,HadTimer Flag,SellExtract Flag,BurnProof Flag,NounCurse Flag,NoSell Flag,Buried Flag,Add Str,Add Int,Add Wis,Add Dex,Add Con,Add Cha,Add Age,Add Mana,Add Hit,Add Move,Add AC,Add Hitroll,Add Damroll,Add Size,Add Saves,Add Saves Rod,Add Saves Petri,Add Saves Breath,Add Saves Spell,Paf1,Paf2,Paf3,Paf4,Paf5,Paf6,Paf7,Paf8,Paf9,Paf10,Paf11,Paf12,Paf13,Paf14,Paf15,Paf16,Paf17,Paf18,Paf19,Paf20\n");
-	   for( obj=object_list; obj!=NULL; obj = obj->next )
-	   {
-
-			fprintf( fp, "%d,%s,%s,%s,%d,%d,%d,%d,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%d", \
-				obj->pIndexData->vnum, \
-				obj->name, \
-				item_type_name( obj ), \
-				obj->material, \
-				obj->pIndexData->limit, \
-				obj->weight, \
-				obj->cost, \
-				obj->level, \
-				IS_SET(obj->wear_flags, ITEM_TAKE)?"Yes":"No", \
-				IS_SET(obj->wear_flags, ITEM_WEAR_FINGER)?"Yes":"No", \
-				IS_SET(obj->wear_flags, ITEM_WEAR_NECK)?"Yes":"No", \
-				IS_SET(obj->wear_flags, ITEM_WEAR_BODY)?"Yes":"No", \
-				IS_SET(obj->wear_flags, ITEM_WEAR_HEAD)?"Yes":"No", \
-				IS_SET(obj->wear_flags, ITEM_WEAR_LEGS)?"Yes":"No", \
-				IS_SET(obj->wear_flags, ITEM_WEAR_FEET)?"Yes":"No", \
-				IS_SET(obj->wear_flags, ITEM_WEAR_HANDS)?"Yes":"No", \
-				IS_SET(obj->wear_flags, ITEM_WEAR_ARMS)?"Yes":"No", \
-				IS_SET(obj->wear_flags, ITEM_WEAR_SHIELD)?"Yes":"No", \
-				IS_SET(obj->wear_flags, ITEM_WEAR_ABOUT)?"Yes":"No", \
-				IS_SET(obj->wear_flags, ITEM_WEAR_WAIST)?"Yes":"No", \
-				IS_SET(obj->wear_flags, ITEM_WEAR_WRIST)?"Yes":"No", \
-				IS_SET(obj->wear_flags, ITEM_WIELD)?"Yes":"No", \
-				IS_SET(obj->wear_flags, ITEM_HOLD)?"Yes":"No", \
-				IS_SET(obj->wear_flags, ITEM_NO_SAC)?"Yes":"No", \
-				IS_SET(obj->wear_flags, ITEM_WEAR_FLOAT)?"Yes":"No", \
-				IS_SET(obj->wear_flags, ITEM_WEAR_TATTOO)?"Yes":"No", \
-				obj->pIndexData->condition
-			);
-		   
-
-			switch ( obj->item_type )
-			{
-			case ITEM_SCROLL:
-			case ITEM_POTION:
-			case ITEM_PILL:
-				fprintf( fp, ",%d", obj->value[0] );
-
-				if ( obj->value[1] >= 0 && obj->value[1] < MAX_SKILL )
-				{
-					fprintf(fp, ",%s", skill_table[obj->value[1]].name[1]);
-				}
-				else
-				{
-					fprintf(fp, ",%d", obj->value[1]);
-				}
-
-				if ( obj->value[2] >= 0 && obj->value[2] < MAX_SKILL )
-				{
-					fprintf(fp, ",%s", skill_table[obj->value[2]].name[1]);
-				}
-				else
-				{
-					fprintf(fp, ",%d", obj->value[2]);
-				}
-
-				if ( obj->value[3] >= 0 && obj->value[3] < MAX_SKILL )
-				{
-					fprintf(fp, ",%s", skill_table[obj->value[3]].name[1]);
-				}
-				else
-				{
-					fprintf(fp, ",%d", obj->value[3]);
-				}
-
-				if (obj->value[4] >= 0 && obj->value[4] < MAX_SKILL)
-				{
-					fprintf(fp, ",%s", skill_table[obj->value[4]].name[1]);
-				}
-				else
-				{
-					fprintf(fp, ",%d", obj->value[4]);
-				}
-				break;
-
-			case ITEM_WAND:
-			case ITEM_STAFF:
-				fprintf(fp, ",%d,%d,%d", obj->value[0], obj->value[1], obj->value[2]);
-
-				if ( obj->value[3] >= 0 && obj->value[3] < MAX_SKILL )
-				{
-					fprintf(fp, ",%s", skill_table[obj->value[3]].name[1]);
-				}
-				else
-				{
-					fprintf(fp, ",%d", obj->value[3]);
-				}
-				
-				fprintf(fp, ",%d", obj->value[4]);
-
-			break;
-
-			case ITEM_DRINK_CON:
-				fprintf(fp,",%d,%d,%s,%d,%d",obj->value[0],obj->value[1],liq_table[obj->value[2]].liq_name,obj->value[3],obj->value[4]);
-				break;
-
-			case ITEM_CONTAINER:
-				fprintf(fp,",%d,%s,%d,%d,%d",obj->value[0], cont_bit_name(obj->value[1]),obj->value[2],obj->value[3],obj->value[4]);
-				break;
-
-			case ITEM_WEAPON:
-				switch (obj->value[0])
-				{
-					case(WEAPON_EXOTIC) : fprintf(fp,",exotic");	break;
-					case(WEAPON_SWORD)  : fprintf(fp,",sword");	break;
-					case(WEAPON_DAGGER) : fprintf(fp,",dagger");	break;
-					case(WEAPON_SPEAR)	: fprintf(fp,",spear/staff");	break;
-					case(WEAPON_MACE) 	: fprintf(fp,",mace/club");	break;
-					case(WEAPON_AXE)	: fprintf(fp,",axe");		break;
-					case(WEAPON_FLAIL)	: fprintf(fp,",flail");	break;
-					case(WEAPON_WHIP)	: fprintf(fp,",whip");	break;
-					case(WEAPON_POLEARM): fprintf(fp,",polearm");	break;
-					case(WEAPON_BOW)	: fprintf(fp,",bow");		break;
-					case(WEAPON_ARROW)	: fprintf(fp,",arrow");	break;
-					case(WEAPON_LANCE)	: fprintf(fp,",lance");	break;
-					default		: fprintf(fp,",unknown");	break;
-				}
-				fprintf(fp,",%d,%d,%d,%s",obj->value[1],obj->value[2],obj->value[3],weapon_bit_name(obj->value[4]));
-
-				break;
-
-			case ITEM_ARMOR:
-				fprintf( fp,",%d,%d,%d,%d,%d",obj->value[0], obj->value[1], obj->value[2], obj->value[3], obj->value[4] );
-				break;
-			default:
-				fprintf( fp,",%d,%d,%d,%d,%d",obj->value[0], obj->value[1], obj->value[2], obj->value[3], obj->value[4] );
-				break;
-			}
-
-			fprintf( fp, ",%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s", \
-				IS_OBJ_STAT(obj, ITEM_GLOW)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_HUM)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_DARK)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_LOCK)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_EVIL)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_INVIS)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_MAGIC)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_NODROP)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_BLESS)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_NOREMOVE)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_INVENTORY)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_NOPURGE)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_ROT_DEATH)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_VIS_DEATH)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_NOSAC)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_NONMETAL)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_NOLOCATE)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_MELT_DROP)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_HAD_TIMER)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_SELL_EXTRACT)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_BURN_PROOF)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_NOUNCURSE)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_NOSELL)?"Yes":"No", \
-				IS_OBJ_STAT(obj, ITEM_BURIED)?"Yes":"No"
-			);
-			
-			int pafmod_str = 0;
-			int pafmod_int = 0;
-			int pafmod_wis = 0;
-			int pafmod_dex = 0;
-			int pafmod_con = 0;
-			int pafmod_cha = 0;
-			int pafmod_age = 0;
-			int pafmod_mana = 0;
-			int pafmod_hit = 0;
-			int pafmod_move = 0;
-			int pafmod_ac = 0;
-			int pafmod_hitroll = 0;
-			int pafmod_damroll = 0;
-			int pafmod_size = 0;
-			int pafmod_saves = 0;
-			int pafmod_saves_rod = 0;
-			int pafmod_saves_petri = 0;
-			int pafmod_saves_breath = 0;
-			int pafmod_saves_spell = 0;
-			
-			for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
-			{
-				switch ( paf->location )
-				{
-					default:
-					bug( "Affect_modify: unknown location %d.", paf->location );
-					break;
-
-					case APPLY_STR:				pafmod_str = paf->modifier;	break;
-					case APPLY_DEX:				pafmod_dex = paf->modifier;	break;
-					case APPLY_INT:				pafmod_int = paf->modifier;	break;
-					case APPLY_WIS:				pafmod_wis = paf->modifier;	break;
-					case APPLY_CON:				pafmod_con = paf->modifier;	break;
-					case APPLY_CHA:				pafmod_cha = paf->modifier;	break;
-					case APPLY_AGE:				pafmod_age = paf->modifier;	break;
-					case APPLY_MANA:			pafmod_mana = paf->modifier;	break;
-					case APPLY_HIT:				pafmod_hit = paf->modifier;	break;
-					case APPLY_MOVE:			pafmod_move = paf->modifier;	break;
-					case APPLY_AC:				pafmod_ac = paf->modifier;	break;
-					case APPLY_HITROLL:			pafmod_hitroll = paf->modifier;	break;
-					case APPLY_DAMROLL:			pafmod_damroll = paf->modifier;	break;
-					case APPLY_SIZE:			pafmod_size = paf->modifier;	break;
-					case APPLY_SAVES:			pafmod_saves = paf->modifier;	break;
-					case APPLY_SAVING_ROD:		pafmod_saves_rod = paf->modifier;	break;
-					case APPLY_SAVING_PETRI:	pafmod_saves_petri = paf->modifier;	break;
-					case APPLY_SAVING_BREATH:	pafmod_saves_breath = paf->modifier;	break;
-					case APPLY_SAVING_SPELL:	pafmod_saves_spell = paf->modifier;	break;
-				}
-			}
-			fprintf( fp,",%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d",pafmod_str, pafmod_int, pafmod_wis, pafmod_dex, pafmod_con, pafmod_cha, pafmod_age, pafmod_mana, pafmod_hit, pafmod_move, pafmod_ac, pafmod_hitroll, pafmod_damroll, pafmod_size, pafmod_saves, pafmod_saves_rod, pafmod_saves_petri, pafmod_saves_breath, pafmod_saves_spell );
-			int pafcounter = 0;
-			for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
-			{
-				if ( paf->location != APPLY_NONE && paf->modifier != 0 )
-				{
-					if (paf->bitvector)
-					{
-						switch(paf->where)
-						{
-							case TO_AFFECTS:
-								if(paf->bitvector)
-								{
-									pafcounter += 1;
-									fprintf(fp,",%s etkisi ekler",affect_bit_name(paf->bitvector));
-								}
-								break;
-							case TO_OBJECT:
-								if(paf->bitvector)
-								{
-									pafcounter += 1;
-									fprintf(fp,",%s obje özelliði ekler",affect_bit_name(paf->bitvector));
-								}
-								break;
-							case TO_IMMUNE:
-								if(paf->bitvector)
-								{
-									pafcounter += 1;
-									fprintf(fp,",%s baðýþýklýðý ekler",affect_bit_name(paf->bitvector));
-								}
-								break;
-							case TO_RESIST:
-								if(paf->bitvector)
-								{
-									pafcounter += 1;
-									fprintf(fp,",%s direnci ekler",affect_bit_name(paf->bitvector));
-								}
-								break;
-							case TO_VULN:
-								if(paf->bitvector)
-								{
-									pafcounter += 1;
-									fprintf(fp,",%s dayanýksýzlýðý ekler",affect_bit_name(paf->bitvector));
-								}
-								break;
-							case TO_DETECTS:
-								if(paf->bitvector)
-								{
-									pafcounter += 1;
-									fprintf(fp,",%s saptamasý ekler",affect_bit_name(paf->bitvector));
-								}
-								break;
-						}
-					}
-				}
-			}
-			for(pafcounter;pafcounter<20;pafcounter=pafcounter+1)
-			{
-				fprintf(fp,",");
-			}
-			fprintf(fp,"\n");
-		 }
-	   fclose( fp );
-
-	}
-
-	return;
+    if (!strcmp(arg, "imm"))
+    {
+        for( obj=object_list; obj!=NULL; obj = obj->next )
+        {
+            if(obj->pIndexData->random_object && obj->affected != NULL)
+            {
+                for ( paf = obj->affected; paf != NULL; paf = paf->next )
+                {
+                    if (paf->bitvector && paf->where == TO_IMMUNE)
+                    {
+                        printf_to_char(ch,"%s, %d, %d, %s\n\r", obj->name, obj->pIndexData->vnum, obj->level, item_type_name(obj));
+                        printf_to_char(ch,"%s imm\n\r\n\r",imm_bit_name(paf->bitvector));
+                    }
+                }
+            }
+        }
+    }
+    else if (!strcmp(arg, "res"))
+    {
+        for( obj=object_list; obj!=NULL; obj = obj->next )
+        {
+            if(obj->pIndexData->random_object && obj->affected != NULL)
+            {
+                for ( paf = obj->affected; paf != NULL; paf = paf->next )
+                {
+                    if (paf->bitvector && paf->where == TO_RESIST)
+                    {
+                        printf_to_char(ch,"%s, %d, %d, %s\n\r", obj->name, obj->pIndexData->vnum, obj->level, item_type_name(obj));
+                        printf_to_char(ch,"%s res\n\r\n\r",imm_bit_name(paf->bitvector));
+                    }
+                }
+            }
+        }
+    }
 }
 
 void do_limited( CHAR_DATA *ch, char *argument )

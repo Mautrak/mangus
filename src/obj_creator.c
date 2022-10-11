@@ -346,7 +346,7 @@ void obj_random_paf(OBJ_DATA *obj)
 	while(number_range(1,10)<8)
 	{
 		obj->enchanted	= TRUE;
-		if(number_percent()<95)
+		if(number_percent()<86)
 		{
 			location = obj_random_paf_find_available_location(obj);
 			if(location == 0)
@@ -364,7 +364,7 @@ void obj_random_paf(OBJ_DATA *obj)
 			obj->affected			= paf;
 			top_affect++;
 		}
-		else if(number_percent()<97)
+		else if(number_percent()<88)
 		{
 			AFFECT_DATA *paf;
 			paf						= (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
@@ -379,7 +379,7 @@ void obj_random_paf(OBJ_DATA *obj)
 			obj->affected			= paf;
 			top_affect++;
 		}
-		else if(number_percent()<99)
+		else if(number_percent()<94)
 		{
 			AFFECT_DATA *paf;
 			paf						= (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
