@@ -446,22 +446,6 @@ staff AG AO
 58 10 40000 P
 A
 12 50
-#8122
-miðfer hayalet~
-Hayalet Miðferi~
-Tepesinde birþey oyulmuþ olan dev bir miðfer yerde duruyor...~
-adamantite~
-armor ACY AE
-39 39 39 37 30
-57 20 99000 P
-A
-13 50
-A
-18 5
-A
-19 5
-A
-24 -5
 #0
 
 
@@ -695,6 +679,22 @@ glass~
 potion BEJ AO
 60 'poison' 'weaken' 'curse' ''
 45 10 300 P
+#8122
+miðfer hayalet~
+Hayalet Miðferi~
+Tepesinde birþey oyulmuþ olan dev bir miðfer yerde duruyor...~
+adamantite~
+armor ACY AE
+39 39 39 37 30
+57 20 99000 P
+A
+13 50
+A
+18 5
+A
+19 5
+A
+24 -5
 #0
 
 #ROOMS
@@ -2729,7 +2729,6 @@ S
 O 8100 1 * Rod of Orcus
 O 8113 1 * A suit of dark armor
 O 8110 10 * sanctuary potion
-O 8122 2 * helm
 S
 
 #OMPROGS

@@ -369,16 +369,6 @@ ABGKRe D 46
 #0
 
 #OBJECTS
-#9205
-rüzgar çizme~
-bir çift rüzgar çizmesi~
-Bir çift rüzgar çizmesi çevresinde hava akýmý oluþturuyor.~
-fiber~
-armor G AG
-8 8 8 2 0
-26 10 5200 P
-A
-2 2
 #9225
 büyülü toz~
 büyülü toz~
@@ -434,6 +424,16 @@ armor A AC
 30 30 3100 P
 A
 19 1
+#9205
+rüzgar çizme~
+bir çift rüzgar çizmesi~
+Bir çift rüzgar çizmesi çevresinde hava akýmý oluþturuyor.~
+fiber~
+armor G AG
+8 8 8 2 0
+26 10 5200 P
+A
+2 2
 #9206
 kasýrga miðferi~
 kasýrga miðferi~
@@ -1934,7 +1934,6 @@ O 9205 remove_prog remove_prog_wind_boots
 S
 
 #OLIMITS
-O 9205 2
 O 9225 2
 S
 

@@ -125,24 +125,6 @@ human~
 AFH PQ 11
 #0
 
-
-#OBJECTS
-#5115
-whip snake skin~
-two Snake Headed whip~
-A two Snake Headed whip is lying on the ground.~
-snakeskin~
-weapon CGJRT AN
-whip 10 4 whip 0
-24 140 1530 P
-A
-19 7
-A
-18 5
-#0
-
-
-
 #NEW_OBJECTS
 #5100
 longsword commoner~
@@ -308,6 +290,18 @@ armor H AE
 12 10 1180 P
 A
 17 -2
+#5115
+whip snake skin~
+two Snake Headed whip~
+A two Snake Headed whip is lying on the ground.~
+snakeskin~
+weapon CGJRT AN
+whip 10 4 whip 0
+24 140 1530 P
+A
+19 7
+A
+18 5
 #0
 
 #ROOMS
@@ -1203,10 +1197,6 @@ O 5115 fight_prog fight_prog_snake
 O 5115 get_prog get_prog_snake
 O 5115 wear_prog wear_prog_snake
 O 5115 remove_prog remove_prog_snake
-S
-
-#OLIMITS
-O 5115 1
 S
 
 #$

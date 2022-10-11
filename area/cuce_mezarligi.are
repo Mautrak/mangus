@@ -179,16 +179,6 @@ ABF 0 24
 #0
 
 #OBJECTS
-#2005
-kýlýç excalibur~
-kýlýç Excalibur~
-Bir kýlýç, gümüþi býçaðýndaki büyüyle ýþýldýyor.~
-steel~
-weapon AGKL AN
-sword 10 4 slash 0
-24 150 3400 P
-A
-18 3
 #2008
 kutsal su matarasý~
 bir kutsal su matarasý~
@@ -242,6 +232,16 @@ A
 19 2
 A
 18 1
+#2005
+kýlýç excalibur~
+kýlýç Excalibur~
+Bir kýlýç, gümüþi býçaðýndaki büyüyle ýþýldýyor.~
+steel~
+weapon AGKL AN
+sword 10 4 slash 0
+24 150 3400 P
+A
+18 3
 #2006
 taç kral tacý~
 bir kral tacý~
@@ -1701,17 +1701,13 @@ M 2017 spec_poison         	* The DarkenBeast
 S
 
 #OLIMITS
-O 2005 1	* excalibur
 O 2008 10	* sanctuary potion
-
 S
 
 #OMPROGS
 O 2005 speech_prog speech_prog_excalibur
 O 2005 wear_prog wear_prog_excalibur
 O 2005 remove_prog remove_prog_excalibur
-O 2005 death_prog death_prog_excalibur
-O 2005 sac_prog sac_prog_excalibur
 S
 
 #$

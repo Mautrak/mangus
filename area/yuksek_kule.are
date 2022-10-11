@@ -641,18 +641,6 @@ jewelry G AM
 20 50 1440 P
 A
 17 -5
-#1369
-iksir köpüren~
-köpüren bir iksir~
-Köpüren bir iksir burada.~
-glass~
-potion G A
-16 'detect evil' 'detect invis' 'detect magic' ''
-0 20 260 P
-E
-potion effervescent~
-Ahh!  Schwepes Sparkling Soda a refreshing drink.
-~
 #0
 
 
@@ -1186,6 +1174,18 @@ glass~
 potion G A
 20 'blindness' 'teleport' 'cure blindness' ''
 5 20 470 P
+#1369
+iksir köpüren~
+köpüren bir iksir~
+Köpüren bir iksir burada.~
+glass~
+potion G A
+16 'detect evil' 'detect magic' '' ''
+0 20 260 P
+E
+potion effervescent~
+Ahh!  Schwepes Sparkling Soda a refreshing drink.
+~
 #1370
 sütlü beyaz iksir~
 sütlü beyaz bir iksir~
@@ -5147,7 +5147,6 @@ S
 
 #OLIMITS
 O 1384 3
-O 1369 1 * detect invis
 S
 
 #PRACTICERS
