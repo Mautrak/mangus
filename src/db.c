@@ -2227,7 +2227,6 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
     obj->name		= pObjIndex->name;
     obj->short_descr	= pObjIndex->short_descr;
     obj->description	= pObjIndex->description;
-    obj->material	= str_dup(pObjIndex->material);
     obj->item_type	= pObjIndex->item_type;
     obj->extra_flags	= pObjIndex->extra_flags;
     obj->wear_flags	= pObjIndex->wear_flags;
@@ -2342,14 +2341,15 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
 	break;
     }
 
-    obj->weight         = obj_random_weight(obj->level);
+    //obj_random_weight(obj);
 	
 	if(Count == TRUE && obj->pIndexData->random_object)
 	{
 		obj_random_paf(obj);
-        obj->condition	= obj_random_condition();
+        obj->condition	    = obj_random_condition();
+        obj_random_material(obj);
         obj->cost           = obj_random_cost(obj->level);
-        obj->weight         = obj_random_weight(obj->level);
+        obj_random_weight(obj);
         obj->extra_flags    = obj_random_extra_flag();
 
         switch ( obj->item_type )
@@ -2414,6 +2414,10 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
             break;
         }
 	}
+    else
+    {
+        obj->material	= str_dup(pObjIndex->material);
+    }
 
 	/*
     for (paf = pObjIndex->affected; paf != NULL; paf = paf->next)

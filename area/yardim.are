@@ -657,11 +657,17 @@ görev liste
 Bu kombinasyon görev puaný karþýlýðýnda alýnabilecek eþyalarýn listesini
 verir ve ancak bir görevciyle ayný odada olduðunuzda iþlevlidir.
 
-görev alýþ <göreveþyasý>
+görev satýnal <göreveþyasý>
 Bu kombinasyon görev puaný karþýlýðýnda görev eþyasý almak için kullanýlýr
 ve ancak bir görevciyle ayný odada olduðunuzda iþlevlidir.
 Örnek:
-görev alýþ tunçkemer
+görev satýnal tunçkemer
+
+görev iade <göreveþyasý>
+Bir görev eþyasýný iade etmek için kullanýlýr. Eþyanýn GP ederinin bir kýsmý
+iade bedeli olarak kesilir.
+Örnek:
+görev iade tunçkemer
 
 görev sigorta <göreveþyasý>
 Bu kombinasyon sigortadan yararlanarak kaybolan görev eþyasýný geri almak için

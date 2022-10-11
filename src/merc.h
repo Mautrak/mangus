@@ -284,6 +284,7 @@ typedef void OPROG_FUN_AREA args((OBJ_DATA *obj));
 #define MAX_ALIAS		   20
 #define MAX_CLASS		   13
 #define MAX_PC_RACE		   9
+#define MAX_MATERIALS		66
 /* unique ve null dahil */
 #define MAX_RACE		    33
 #define MAX_CABAL		    9
@@ -2133,7 +2134,7 @@ struct	char_data
     sh_int		position;
     sh_int		practice;
     sh_int		train;
-    sh_int		carry_weight;
+    long		carry_weight;
     sh_int		carry_number;
     sh_int		saving_throw;
     sh_int		alignment;
@@ -2274,7 +2275,7 @@ struct	obj_index_data
     sh_int		level;
     sh_int 		condition;
     sh_int		count;
-    sh_int		weight;
+    int		    weight;
     int			cost;
     int			value[5];
     int                 progtypes;
@@ -2310,7 +2311,7 @@ struct	obj_data
     int			extra_flags;
     int			wear_flags;
     sh_int		wear_loc;
-    sh_int		weight;
+    int		    weight;
     int			cost;
     sh_int		level;
     sh_int 		condition;
@@ -2797,7 +2798,7 @@ extern sh_int  gsn_mental_knife;
 
 #define WAIT_STATE(ch, npulse)	((ch)->wait = IS_IMMORTAL((ch))?1:UMAX((ch)->wait, (npulse)))
 #define DAZE_STATE(ch, npulse)  ((ch)->daze = UMAX((ch)->daze, (npulse)))
-#define get_carry_weight(ch)	((ch)->carry_weight + (ch)->silver/10 )
+#define get_carry_weight(ch)	((ch)->carry_weight + (ch)->silver/50 )
 /*
  * room macros
  */
@@ -3392,10 +3393,11 @@ sh_int race_dice args( (int level, bool humanoid) );
 void obj_random_paf		args( (OBJ_DATA *obj) );
 int  obj_random_condition  args( (void) );
 int obj_random_cost  args( (int level) );
-int obj_random_weight  args( (int level) );
+void obj_random_weight  args( (OBJ_DATA *obj) );
 int obj_random_extra_flag  args( (void) );
 int obj_random_weapon_flag  args( (void) );
 char *obj_random_wand_potion_spell  args( (void) );
+void obj_random_material args((OBJ_DATA *obj));
 
 /* quest.c */
 bool gorev_ekipmani_mi args( (OBJ_DATA *obj) );

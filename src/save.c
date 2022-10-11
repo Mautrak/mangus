@@ -522,20 +522,21 @@ void fwrite_kasa( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
 
     /* these data are only used if they do not match the defaults */
 
-    if ( obj->name != obj->pIndexData->name)
+    //if ( obj->name != obj->pIndexData->name)
     	fprintf( fp, "Name %s~\n",	obj->name		     );
-    if ( obj->short_descr != obj->pIndexData->short_descr)
+    //if ( obj->short_descr != obj->pIndexData->short_descr)
         fprintf( fp, "ShD  %s~\n",	obj->short_descr	     );
-    if ( obj->description != obj->pIndexData->description)
+    //if ( obj->description != obj->pIndexData->description)
         fprintf( fp, "Desc %s~\n",	obj->description	     );
-    if ( obj->extra_flags != obj->pIndexData->extra_flags)
+    //if ( obj->extra_flags != obj->pIndexData->extra_flags)
         fprintf( fp, "ExtF %d\n",	obj->extra_flags	     );
-    if ( obj->wear_flags != obj->pIndexData->wear_flags)
+    //if ( obj->wear_flags != obj->pIndexData->wear_flags)
         fprintf( fp, "WeaF %d\n",	obj->wear_flags		     );
-    if ( obj->item_type != obj->pIndexData->item_type)
+    //if ( obj->item_type != obj->pIndexData->item_type)
         fprintf( fp, "Ityp %d\n",	obj->item_type		     );
-    if ( obj->weight != obj->pIndexData->weight)
+    //if ( obj->weight != obj->pIndexData->weight)
         fprintf( fp, "Wt   %d\n",	obj->weight		     );
+		fprintf( fp, "Material   %s~\n",	obj->material		     );
 
     /* variable data */
 
@@ -701,6 +702,7 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
         fprintf( fp, "Ityp %d\n",	obj->item_type		     );
     //if ( obj->weight != obj->pIndexData->weight)
         fprintf( fp, "Wt   %d\n",	obj->weight		     );
+		fprintf( fp, "Material   %s~\n",	obj->material		     );
 
     /* variable data */
 
@@ -2009,6 +2011,10 @@ void fread_obj( CHAR_DATA *ch, FILE *fp )
 	case 'L':
 	    KEY( "Level",	obj->level,		fread_number( fp ) );
 	    KEY( "Lev",		obj->level,		fread_number( fp ) );
+	    break;
+	
+	case 'M':
+	    KEY( "Material",	obj->material,	fread_string( fp ) );
 	    break;
 
 	case 'N':

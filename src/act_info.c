@@ -141,7 +141,7 @@ bool show_cwear_to_char( CHAR_DATA *ch, OBJ_DATA *obj )
 char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 {
   static char buf[MAX_STRING_LENGTH];
-  static char buf_con[100],buf_eskime[100];
+  static char buf_con[50],buf_eskime[50], buf_material[50];
   AFFECT_DATA *paf;
 
   int OBJ_NITELIK = 0;
@@ -175,6 +175,8 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
   {
     buf_eskime[0] = '\0';
   }
+
+  sprintf(buf_material," [%s%s%s]",CLR_GREEN,obj->material,CLR_WHITE_BOLD);
 
     if ((fShort && (obj->short_descr == NULL || obj->short_descr[0] == '\0'))
     ||  (obj->description == NULL || obj->description[0] == '\0'))
@@ -229,7 +231,7 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 	strcat( buf, CLR_WHITE );
   if (IS_IMMORTAL(ch))
   {
-    sprintf(buf,"[%-6d]",obj->pIndexData->vnum);
+    sprintf(buf,"[%-5d]",obj->pIndexData->vnum);
   }
 	strcat( buf, "["     );
 	
@@ -334,6 +336,7 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 	if ( obj->short_descr != NULL )
 	{
     strcat( buf, obj->short_descr );
+    strcat( buf, buf_material );
     strcat( buf, buf_con );
     strcat( buf, buf_eskime );
 	}

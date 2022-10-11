@@ -809,12 +809,12 @@ int can_carry_n( CHAR_DATA *ch )
 int can_carry_w( CHAR_DATA *ch )
 {
     if ( !IS_NPC(ch) && ch->level >= LEVEL_IMMORTAL )
-	return 10000000;
+	    return 10000000;
 
     if ( IS_NPC(ch) && IS_SET(ch->act, ACT_PET) )
 	return 0;
 
-    return str_app[get_curr_stat(ch,STAT_STR)].carry * 10 + ch->level * 25;
+    return (str_app[get_curr_stat(ch,STAT_STR)].carry * 10 + ch->level * 25 ) * 6;
 }
 
 

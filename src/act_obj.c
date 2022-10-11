@@ -4370,7 +4370,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
   else if (get_skill(ch,gsn_lore) < 40)
     {
       sprintf( buf,
-	  "Eþya '%s'.  Aðýrlýðý %d, deðeri %d.\n\r",
+	  "Eþya '%s'.  Aðýrlýðý %d gr., deðeri %d.\n\r",
 	      obj->name,
 	      chance < 60 ? obj->weight : number_range(1, 2 * obj->weight),
 	      chance < 60 ? number_range(1, 2 * obj->cost) : obj->cost
@@ -4388,7 +4388,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
   else if (get_skill(ch,gsn_lore) < 60)
     {
       sprintf( buf,
-	      "Obje '%s', aðýrlýðý %d.\n\rDeðeri %d, seviyesi %d.\n\rMateryali %s.\n\r",
+	      "Obje '%s', aðýrlýðý %d gr.\n\rDeðeri %d, seviyesi %d.\n\rMateryali %s.\n\r",
 	      obj->name,
 	      obj->weight,
 	      chance < 60 ? number_range(1, 2 * obj->cost) : obj->cost,
@@ -4404,7 +4404,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
   else if (get_skill(ch,gsn_lore) < 80)
     {
       sprintf( buf,
-	      "Obje '%s', tipi %s, ekstra özellikleri %s.\n\rAðýrlýðý %d, deðeri %d, seviyesi %d.\n\rMateryali %s.\n\r",
+	      "Obje '%s', tipi %s, ekstra özellikleri %s.\n\rAðýrlýðý %d gr., deðeri %d, seviyesi %d.\n\rMateryali %s.\n\r",
 	      obj->name,
 	      item_type_name( obj ),
 	      extra_bit_name( obj->extra_flags ),
@@ -4422,7 +4422,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
   else if (get_skill(ch,gsn_lore) < 85)
     {
       sprintf( buf,
-	      "Obje '%s', tipi %s, ekstra özellikleri %s.\n\rAðýrlýðý %d, deðeri %d, seviyesi %d.\n\rMateryali %s.\n\r",
+	      "Obje '%s', tipi %s, ekstra özellikleri %s.\n\rAðýrlýðý %d gr., deðeri %d, seviyesi %d.\n\rMateryali %s.\n\r",
 	      obj->name,
 	      item_type_name( obj ),
 	      extra_bit_name( obj->extra_flags ),
@@ -4436,7 +4436,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
   else
     {
       sprintf( buf,
-	      "Obje '%s', tipi %s, ekstra özellikleri %s.\n\rAðýrlýðý %d, deðeri %d, seviyesi %d.\n\rMateryali %s.\n\r",
+	      "Obje '%s', tipi %s, ekstra özellikleri %s.\n\rAðýrlýðý %d gr., deðeri %d, seviyesi %d.\n\rMateryali %s.\n\r",
 	      obj->name,
 	      item_type_name( obj ),
 	      extra_bit_name( obj->extra_flags ),

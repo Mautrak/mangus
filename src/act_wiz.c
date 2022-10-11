@@ -326,7 +326,7 @@ int level90count = 0;
 			return;
 	   }
 
-		fprintf(fp, "Vnum,Name,Type,Material,Limit,Weight,Cost,Level,Item Take,Item Wear Finger,Item Wear Neck,Item Wear Body,Item Wear Head,Item Wear Legs,Item Wear Feet, Item Wear Hands,Item Wear Arms,Item Wear Shield,Item Wear About,Item Wear Waist,Item Wear Wrist,Item Wield,Item Hold,Item No Sac,Item Wear Float,Item Wear Tattoo,Condition,Value0,Value1,Value2,Value3,Value4,Glow Flag,Hum Flag,Dark Flag,Lock Flag,Evil Flag,Invis Flag,Magic Flag,NoDrop Flag,Bless Flag,AntiGood Flag,AntiEvil Flag,AntiNeutral Flag,NoRemove Flag,Inventory Flag,NoPurge Flag,RotDeath Flag,VisDeath Flag,NoSac Flag,NonMetal Flag,NoLocate Flag,MeltDrop Flag,HadTimer Flag,SellExtract Flag,BurnProof Flag,NounCurse Flag,NoSell Flag,Buried Flag,Add Str,Add Int,Add Wis,Add Dex,Add Con,Add Cha,Add Age,Add Mana,Add Hit,Add Move,Add AC,Add Hitroll,Add Damroll,Add Size,Add Saves,Add Saves Rod,Add Saves Petri,Add Saves Breath,Add Saves Spell,Paf1,Paf2,Paf3,Paf4,Paf5,Paf6,Paf7,Paf8,Paf9,Paf10,Paf11,Paf12,Paf13,Paf14,Paf15,Paf16,Paf17,Paf18,Paf19,Paf20\n");
+		fprintf(fp, "Vnum,Name,Type,Material,Limit,Weight(gr.),Cost,Level,Item Take,Item Wear Finger,Item Wear Neck,Item Wear Body,Item Wear Head,Item Wear Legs,Item Wear Feet, Item Wear Hands,Item Wear Arms,Item Wear Shield,Item Wear About,Item Wear Waist,Item Wear Wrist,Item Wield,Item Hold,Item No Sac,Item Wear Float,Item Wear Tattoo,Condition,Value0,Value1,Value2,Value3,Value4,Glow Flag,Hum Flag,Dark Flag,Lock Flag,Evil Flag,Invis Flag,Magic Flag,NoDrop Flag,Bless Flag,AntiGood Flag,AntiEvil Flag,AntiNeutral Flag,NoRemove Flag,Inventory Flag,NoPurge Flag,RotDeath Flag,VisDeath Flag,NoSac Flag,NonMetal Flag,NoLocate Flag,MeltDrop Flag,HadTimer Flag,SellExtract Flag,BurnProof Flag,NounCurse Flag,NoSell Flag,Buried Flag,Add Str,Add Int,Add Wis,Add Dex,Add Con,Add Cha,Add Age,Add Mana,Add Hit,Add Move,Add AC,Add Hitroll,Add Damroll,Add Size,Add Saves,Add Saves Rod,Add Saves Petri,Add Saves Breath,Add Saves Spell,Paf1,Paf2,Paf3,Paf4,Paf5,Paf6,Paf7,Paf8,Paf9,Paf10,Paf11,Paf12,Paf13,Paf14,Paf15,Paf16,Paf17,Paf18,Paf19,Paf20\n");
 	   for( obj=object_list; obj!=NULL; obj = obj->next )
 	   {
 
@@ -336,7 +336,7 @@ int level90count = 0;
 				item_type_name( obj ), \
 				obj->material, \
 				obj->pIndexData->limit, \
-				obj->weight / 10, \
+				obj->weight, \
 				obj->cost, \
 				obj->level, \
 				IS_SET(obj->wear_flags, ITEM_TAKE)?"Yes":"No", \
@@ -1746,9 +1746,12 @@ void do_ostat( CHAR_DATA *ch, char *argument )
 	obj->name );
     send_to_char( buf, ch );
 
-    sprintf( buf, "Vnum: %d  Format: %s  Random: %s  Type: %s  Resets: %d\n\r",
-	obj->pIndexData->vnum, obj->pIndexData->new_format ? "new" : "old", obj->pIndexData->random_object ? "yes" : "no",
-	item_type_name(obj), obj->pIndexData->reset_num );
+    sprintf( buf, "Vnum: %d  Type: %s  Material: %s\n\r",
+	obj->pIndexData->vnum, item_type_name(obj), obj->material );
+    send_to_char( buf, ch );
+
+    sprintf( buf, "Format: %s  Random: %s  Resets: %d\n\r",
+	obj->pIndexData->new_format ? "new" : "old", obj->pIndexData->random_object ? "yes" : "no", obj->pIndexData->reset_num );
     send_to_char( buf, ch );
 
     sprintf( buf, "Short description: %s\n\rLong description: %s\n\r",
@@ -1759,7 +1762,7 @@ void do_ostat( CHAR_DATA *ch, char *argument )
 	wear_bit_name(obj->wear_flags), extra_bit_name( obj->extra_flags ) );
     send_to_char( buf, ch );
 
-    sprintf( buf, "Number: %d/%d  Weight: %d/%d/%d (10th pounds)\n\r",
+    sprintf( buf, "Number: %d/%d  Weight: %d/%d/%d gr.\n\r",
 	1,           get_obj_number( obj ),
 	obj->weight, get_obj_weight( obj ),get_true_weight(obj) );
     send_to_char( buf, ch );

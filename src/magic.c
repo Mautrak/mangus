@@ -3883,12 +3883,13 @@ void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     AFFECT_DATA *paf;
 
     sprintf( buf,
-      "Obje '%s', tip %s, ekstra özellik %s.\n\rAðýrlýk %d, deðer %d, seviye %d.\n\r",
+      "Obje '%s', tip %s, materyal %s, ekstra özellik %s.\n\rAðýrlýk %d gr, deðer %d, seviye %d.\n\r",
 
 	obj->name,
 	item_type_name( obj ),
+    obj->material,
 	extra_bit_name( obj->extra_flags ),
-	obj->weight / 10,
+	obj->weight,
 	obj->cost,
 	obj->level
 	);

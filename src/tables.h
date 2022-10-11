@@ -61,7 +61,7 @@ extern	const	struct	yp_tip	yp_tablo[];
 extern	const	struct	position_type	position_table[];
 extern	const	struct	sex_type	sex_table[];
 extern	const	struct	size_type	size_table[];
-//extern	const	struct	material_type	material_table[];
+extern	const	struct	material_type	material_table[];
 extern	const	struct	wand_spell_type	wand_spell_table[];
 
 /* flag tables */
@@ -107,4 +107,20 @@ struct size_type
 struct wand_spell_type
 {
     const char *name;
+};
+
+struct material_type
+{
+    const char *name;
+    const char *nametr;
+    bool food_ok;
+    bool container_ok;
+    bool textile_ok;
+    bool armor_ok;
+    bool weapon_ok;
+    bool potion_ok;
+    bool scroll_ok;
+    bool silent_ok;
+    bool swim_ok;
+    sh_int weight_pt;
 };
