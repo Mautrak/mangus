@@ -236,15 +236,6 @@ BFGX DFH 28
 
 
 #OBJECTS
-#29131
-beyaz mermer haç~
-beyaz mermer haç~
-Mermerden yapýlmýþ beyaz bir haç yerde yatýyor.
-~
-marble~
-staff AIKL AO
-35 3 3 'sanctuary' 0
-30 100 15000 P
 #29139
 görünmezlik iksiri sývý þiþe~
 görünmezlik iksiri~
@@ -364,6 +355,15 @@ armor 0 AD
 7 7 7 3 1
 28 80 1500 P
 A 17 -10
+#29131
+beyaz mermer haç~
+beyaz mermer haç~
+Mermerden yapýlmýþ beyaz bir haç yerde yatýyor.
+~
+marble~
+staff AIKL AO
+35 3 3 'bless' 0
+30 100 15000 P
 #29132
 siyah cüppe~
 siyah cüppe~
@@ -2332,7 +2332,6 @@ M  29134 spec_breath_fire         *  The beast from hell
 S
 
 #OLIMITS
-O 29131 1 * sanctuary potion
 O 29139 2 * detect invis ve invis
 S
 
