@@ -2301,6 +2301,7 @@ struct	obj_data
     OBJ_INDEX_DATA *	pIndexData;
     ROOM_INDEX_DATA *	in_room;
     bool		valid;
+    bool		kasada_duruyor;
     bool		enchanted;
     char *	        owner;
     char *		name;

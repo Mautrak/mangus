@@ -2198,6 +2198,8 @@ void fread_kasa( CHAR_DATA *ch, FILE *fp )
     	obj->description	= str_dup( "" );
     }
 
+	obj->kasada_duruyor = TRUE;
+
     fNest		= FALSE;
     fVnum		= TRUE;
     iNest		= 0;

@@ -292,18 +292,6 @@ A
 18 10
 A
 13 50
-#23023
-maar yürektaþý hançer~
-Maar'ýn yürektaþý hançeri~
-Kayýp bir ruha ait hançer, efendisinin adýný fýsýldýyor.~
-unknown~
-weapon GM AN
-dagger 10 11 pierce D
-60 10 600 P
-A
-19 10
-A
-18 10
 #23028
 asa çita~
 oymalý bir asa~
@@ -531,6 +519,18 @@ A
 19 4
 A
 18 2
+#23023
+maar yürektaþý hançer~
+Maar'ýn yürektaþý hançeri~
+Kayýp bir ruha ait hançer, efendisinin adýný fýsýldýyor.~
+unknown~
+weapon GM AN
+dagger 10 11 pierce D
+60 10 600 P
+A
+19 10
+A
+18 10
 #23024
 lord hüküm asa~
 bir Lord hüküm asasý~
@@ -5951,7 +5951,6 @@ S
 
 #OLIMITS
 O 23020 1 * heron market blade
-O 23023 1 * heartstone dagger
 O 23028 10 * sanctuary potion
 S
 

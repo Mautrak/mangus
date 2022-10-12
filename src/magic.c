@@ -3966,8 +3966,8 @@ void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
         break;
 
     case ITEM_CONTAINER:
-    sprintf(buf,"Kapasite: %d#  Maks. Aðýrlýk: %d#  Özellikler: %s\n\r",
-	    obj->value[0], obj->value[3], cont_bit_name(obj->value[1]));
+    sprintf(buf,"Kapasite: %d#  Maks. tek eþya aðýrlýðý: %d#  Özellikler: %s\n\r",
+	    (obj->value[0])*25, (obj->value[3])*25, cont_bit_name(obj->value[1]));
 	send_to_char(buf,ch);
 	if (obj->value[4] != 100)
 	{

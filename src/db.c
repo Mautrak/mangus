@@ -2198,6 +2198,7 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
     obj->pIndexData	= pObjIndex;
     obj->in_room	= NULL;
     obj->enchanted	= FALSE;
+    obj->kasada_duruyor	= FALSE;
 
     for (i=1;i < MAX_CABAL;i++)
     {

@@ -1627,219 +1627,224 @@ bool fChar;
  */
 void obj_update( void )
 {
-    OBJ_DATA *obj;
-    OBJ_DATA *obj_next;
-    OBJ_DATA *t_obj, *pit, *next_obj;
+	OBJ_DATA *obj;
+	OBJ_DATA *obj_next;
+	OBJ_DATA *t_obj, *pit, *next_obj;
 
-    AFFECT_DATA *paf, *paf_next;
-    static int pit_count = 1;
+	AFFECT_DATA *paf, *paf_next;
+	static int pit_count = 1;
 
-    for ( obj = object_list; obj != NULL; obj = obj_next )
-    {
-	CHAR_DATA *rch;
-	const char *message;
+	for ( obj = object_list; obj != NULL; obj = obj_next )
+	{
+		CHAR_DATA *rch;
+		const char *message;
 
-	obj_next = obj->next;
+		obj_next = obj->next;
 
-	/* go through affects and decrement */
-        for ( paf = obj->affected; paf != NULL; paf = paf_next )
-        {
-            paf_next    = paf->next;
-            if ( paf->duration > 0 )
-            {
-                paf->duration--;
-                if (number_range(0,4) == 0 && paf->level > 0)
-                  paf->level--;  /* spell strength fades with time */
-            }
-            else if ( paf->duration < 0 )
-                ;
-            else
-            {
-                if ( paf_next == NULL
-                ||   paf_next->type != paf->type
-                ||   paf_next->duration > 0 )
-                {
-                    if ( paf->type > 0 && skill_table[paf->type].msg_obj )
-                    {
-			if (obj->carried_by != NULL)
+		/* go through affects and decrement */
+		for ( paf = obj->affected; paf != NULL; paf = paf_next )
+		{
+			paf_next    = paf->next;
+			if ( paf->duration > 0 )
 			{
-			    rch = obj->carried_by;
-			    act(skill_table[paf->type].msg_obj,
-				rch,obj,NULL,TO_CHAR);
+				paf->duration--;
+				if (number_range(0,4) == 0 && paf->level > 0)
+					paf->level--;  /* spell strength fades with time */
 			}
-			if (obj->in_room != NULL
-			&& obj->in_room->people != NULL)
-			{
-			    rch = obj->in_room->people;
-			    act(skill_table[paf->type].msg_obj,
-				rch,obj,NULL,TO_ALL);
-			}
-                    }
-                }
-
-                affect_remove_obj( obj, paf );
-            }
-        }
-
-
-        for(t_obj = obj; t_obj->in_obj; t_obj = t_obj->in_obj);
-
-        if (IS_SET(obj->progtypes,OPROG_AREA))
-           if ( ( t_obj->in_room != NULL &&
-                (t_obj->in_room->area->nplayer > 0))
-               ||
-                (t_obj->carried_by &&
-                 t_obj->carried_by->in_room &&
-                 t_obj->carried_by->in_room->area->nplayer > 0) )
-              (obj->pIndexData->oprogs->area_prog) (obj);
-
-        if ( check_material( obj, (char*)"ice" ) )
-          {
-	   if ( obj->carried_by != NULL )
-             {
-	      if ( obj->carried_by->in_room->sector_type == SECT_DESERT )
-	      if ( number_percent() < 40 )
-              {
-                act( "$p aþýrý sýcaktan eriyor.", obj->carried_by, obj, NULL, TO_CHAR );
-		extract_obj( obj );
-		continue;
-	      }
-	  }
-	  else if ( obj->in_room != NULL )
-	    if ( obj->in_room->sector_type == SECT_DESERT )
-	      if ( number_percent() < 50 )  {
-		if ( obj->in_room->people != NULL )
-                {
-                  act(  "$p aþýrý sýcaktan eriyor.", obj->in_room->people, obj, NULL, TO_ROOM );
-            		  act("$p aþýrý sýcaktan eriyor.", obj->in_room->people, obj, NULL, TO_CHAR );
-	        }
-		extract_obj( obj );
-		continue;
-	      }
-	}
-
-        if ( !check_material( obj, (char*)"glass" ) && obj->item_type==ITEM_POTION)  {
-	  if ( obj->carried_by != NULL )  {
-	    if ( obj->carried_by->in_room->sector_type == SECT_DESERT &&
-		 !IS_NPC(obj->carried_by) )
-	      if ( number_percent() < 20 )  {
-          act( "$p buharlaþýyor.", obj->carried_by, obj, NULL, TO_CHAR );
-		extract_obj( obj );
-		continue;
-	      }
-	  }
-	  else if ( obj->in_room != NULL )
-	    if ( obj->in_room->sector_type == SECT_DESERT )
-	      if ( number_percent() < 30 )
-               {
-		if ( obj->in_room->people != NULL )
-                {
-                  act( "$p aþýrý sýcaktan buharlaþýyor.", obj->in_room->people, obj, NULL, TO_ROOM );
-            		  act( "$p aþýrý sýcaktan buharlaþýyor.", obj->in_room->people, obj, NULL, TO_CHAR );
-	        }
-	        extract_obj( obj );
-	        continue;
-	       }
-	}
-
-	if ( obj->condition > -1 && (obj->timer <= 0 || --obj->timer > 0) )
-	    continue;
-
-	switch ( obj->item_type )
-	{
-    default:              message = "$p ufalanýyor.";break;
-  	case ITEM_FOUNTAIN:   message = "$p kuruyor.";break;
-  	case ITEM_CORPSE_NPC: message = "$p çürüyor.";break;
-  	case ITEM_CORPSE_PC:  message = "$p çürüyor.";break;
-  	case ITEM_FOOD:       message = "$p bozuluyor.";break;
-  	case ITEM_POTION:     message = "$p beklemekten buharlaþýyor.";break;
-  	case ITEM_PORTAL:     message = "$p kayboluyor.";break;
-	case ITEM_CONTAINER:
-	    if (CAN_WEAR(obj,ITEM_WEAR_FLOAT))
-		if (obj->contains)
-    message ="$p içindekileri etrafa saçarak yokoluyor.";
-		else
-    message = "$p titriyor ve yokoluyor.";
-	    else
-      message = "$p ufalanýyor.";
-	    break;
-	}
-
-	if ( obj->carried_by != NULL )
-	{
-	    if (IS_NPC(obj->carried_by)
-	    &&  obj->carried_by->pIndexData->pShop != NULL)
-		obj->carried_by->silver += obj->cost/5;
-	    else
-	    {
-	    	act( message, obj->carried_by, obj, NULL, TO_CHAR );
-		if ( obj->wear_loc == WEAR_FLOAT)
-		    act(message,obj->carried_by,obj,NULL,TO_ROOM);
-	    }
-	}
-	else if ( obj->in_room != NULL
-	&&      ( rch = obj->in_room->people ) != NULL )
-	{
-	    if (! (obj->in_obj && obj->in_obj->pIndexData->vnum == OBJ_VNUM_PIT
-	           && !CAN_WEAR(obj->in_obj,ITEM_TAKE)))
-	    {
-	    	act( message, rch, obj, NULL, TO_ROOM );
-	    	act( message, rch, obj, NULL, TO_CHAR );
-	    }
-	}
-
-        pit_count = (pit_count+1) % 120; /* more or less an hour */
-        if (obj->pIndexData->vnum == OBJ_VNUM_PIT &&
-            pit_count == 121) {
-          for (t_obj = obj->contains; t_obj != NULL; t_obj = next_obj) {
-            next_obj = t_obj->next_content;
-            obj_from_obj(t_obj);
-            extract_obj(t_obj);
-          }
-        }
-
-
-        if ((obj->item_type == ITEM_CORPSE_PC || obj->wear_loc == WEAR_FLOAT)
-	&&  obj->contains)
-	{   /* save the contents */
-     	    OBJ_DATA *t_obj, *next_obj;
-
-	    for (t_obj = obj->contains; t_obj != NULL; t_obj = next_obj)
-	    {
-		next_obj = t_obj->next_content;
-		obj_from_obj(t_obj);
-
-		if (obj->in_obj) /* in another object */
-		    obj_to_obj(t_obj,obj->in_obj);
-
-		else if (obj->carried_by)  /* carried */
-		    if (obj->wear_loc == WEAR_FLOAT)
-			if (obj->carried_by->in_room == NULL)
-			    extract_obj(t_obj);
+			else if ( paf->duration < 0 )
+			;
 			else
-			    obj_to_room(t_obj,obj->carried_by->in_room);
-		    else
-		    	obj_to_char(t_obj,obj->carried_by);
+			{
+				if ( paf_next == NULL
+				||   paf_next->type != paf->type
+				||   paf_next->duration > 0 )
+				{
+					if ( paf->type > 0 && skill_table[paf->type].msg_obj )
+					{
+						if (obj->carried_by != NULL)
+						{
+							rch = obj->carried_by;
+							act(skill_table[paf->type].msg_obj,
+							rch,obj,NULL,TO_CHAR);
+						}
+						if (obj->in_room != NULL && obj->in_room->people != NULL)
+						{
+							rch = obj->in_room->people;
+							act(skill_table[paf->type].msg_obj,
+							rch,obj,NULL,TO_ALL);
+						}
+					}
+				}
 
-		else if (obj->in_room == NULL)  /* destroy it */
-		    extract_obj(t_obj);
+				affect_remove_obj( obj, paf );
+			}
+		}
 
-                else { /* to the pit */
-                  for (pit = get_room_index(obj->altar)->contents;
-                       pit != NULL && pit->pIndexData->vnum != obj->pit;
-                       pit = pit->next);
 
-                  if (pit == NULL)
-                    obj_to_room(t_obj,obj->in_room);
-                  else obj_to_obj(t_obj,pit);
-                }
-	    }
+		for(t_obj = obj; t_obj->in_obj; t_obj = t_obj->in_obj);
+
+		if (IS_SET(obj->progtypes,OPROG_AREA))
+			if ( ( t_obj->in_room != NULL &&
+				(t_obj->in_room->area->nplayer > 0))
+				||
+				(t_obj->carried_by &&
+				t_obj->carried_by->in_room &&
+				t_obj->carried_by->in_room->area->nplayer > 0) )
+			{
+				(obj->pIndexData->oprogs->area_prog) (obj);
+			}
+
+		if ( check_material( obj, (char*)"ice" ) && obj->kasada_duruyor == FALSE)
+		{
+			if ( obj->carried_by != NULL )
+			{
+				if ( obj->carried_by->in_room->sector_type == SECT_DESERT )
+					if ( number_percent() < 40 )
+					{
+					act( "$p aþýrý sýcaktan eriyor.", obj->carried_by, obj, NULL, TO_CHAR );
+					extract_obj( obj );
+					continue;
+					}
+			}
+			else if ( obj->in_room != NULL )
+				if ( obj->in_room->sector_type == SECT_DESERT )
+					if ( number_percent() < 50 ) 
+					{
+						if ( obj->in_room->people != NULL )
+						{
+							act(  "$p aþýrý sýcaktan eriyor.", obj->in_room->people, obj, NULL, TO_ROOM );
+							act("$p aþýrý sýcaktan eriyor.", obj->in_room->people, obj, NULL, TO_CHAR );
+						}
+						extract_obj( obj );
+						continue;
+					}
+		}
+
+		if ( !check_material( obj, (char*)"glass" ) && obj->item_type==ITEM_POTION && obj->kasada_duruyor == FALSE) 
+		{
+			if ( obj->carried_by != NULL ) 
+			{
+				if ( obj->carried_by->in_room->sector_type == SECT_DESERT && !IS_NPC(obj->carried_by) )
+					if ( number_percent() < 20 ) 
+					{
+						act( "$p buharlaþýyor.", obj->carried_by, obj, NULL, TO_CHAR );
+						extract_obj( obj );
+						continue;
+					}
+			}
+			else if ( obj->in_room != NULL )
+				if ( obj->in_room->sector_type == SECT_DESERT )
+					if ( number_percent() < 30 )
+					{
+					if ( obj->in_room->people != NULL )
+					{
+					act( "$p aþýrý sýcaktan buharlaþýyor.", obj->in_room->people, obj, NULL, TO_ROOM );
+					act( "$p aþýrý sýcaktan buharlaþýyor.", obj->in_room->people, obj, NULL, TO_CHAR );
+					}
+					extract_obj( obj );
+					continue;
+					}
+		}
+
+		if ( obj->condition > -1 && (obj->timer <= 0 || --obj->timer > 0) )
+			continue;
+
+		switch ( obj->item_type )
+		{
+			default:              message = "$p ufalanýyor.";break;
+			case ITEM_FOUNTAIN:   message = "$p kuruyor.";break;
+			case ITEM_CORPSE_NPC: message = "$p çürüyor.";break;
+			case ITEM_CORPSE_PC:  message = "$p çürüyor.";break;
+			case ITEM_FOOD:       message = "$p bozuluyor.";break;
+			case ITEM_POTION:     message = "$p beklemekten buharlaþýyor.";break;
+			case ITEM_PORTAL:     message = "$p kayboluyor.";break;
+			case ITEM_CONTAINER:
+			if (CAN_WEAR(obj,ITEM_WEAR_FLOAT))
+			if (obj->contains)
+			message ="$p içindekileri etrafa saçarak yokoluyor.";
+			else
+			message = "$p titriyor ve yokoluyor.";
+			else
+			message = "$p ufalanýyor.";
+			break;
+		}
+
+		if ( obj->carried_by != NULL )
+		{
+			if (IS_NPC(obj->carried_by)
+			&&  obj->carried_by->pIndexData->pShop != NULL)
+				obj->carried_by->silver += obj->cost/5;
+			else
+			{
+				act( message, obj->carried_by, obj, NULL, TO_CHAR );
+				if ( obj->wear_loc == WEAR_FLOAT)
+					act(message,obj->carried_by,obj,NULL,TO_ROOM);
+			}
+		}
+		else if ( obj->in_room != NULL &&      ( rch = obj->in_room->people ) != NULL )
+		{
+			if (! (obj->in_obj && obj->in_obj->pIndexData->vnum == OBJ_VNUM_PIT
+			&& !CAN_WEAR(obj->in_obj,ITEM_TAKE)))
+			{
+				act( message, rch, obj, NULL, TO_ROOM );
+				act( message, rch, obj, NULL, TO_CHAR );
+			}
+		}
+
+		pit_count = (pit_count+1) % 120; /* more or less an hour */
+		if (obj->pIndexData->vnum == OBJ_VNUM_PIT && pit_count == 121)
+		{
+			for (t_obj = obj->contains; t_obj != NULL; t_obj = next_obj)
+			{
+				next_obj = t_obj->next_content;
+				obj_from_obj(t_obj);
+				extract_obj(t_obj);
+			}
+		}
+
+
+		if ((obj->item_type == ITEM_CORPSE_PC || obj->wear_loc == WEAR_FLOAT) &&  obj->contains)
+		{   /* save the contents */
+			OBJ_DATA *t_obj, *next_obj;
+
+			for (t_obj = obj->contains; t_obj != NULL; t_obj = next_obj)
+			{
+				next_obj = t_obj->next_content;
+				obj_from_obj(t_obj);
+
+				if (obj->in_obj) /* in another object */
+					obj_to_obj(t_obj,obj->in_obj);
+
+				else if (obj->carried_by)  /* carried */
+					if (obj->wear_loc == WEAR_FLOAT)
+						if (obj->carried_by->in_room == NULL)
+							extract_obj(t_obj);
+						else
+							obj_to_room(t_obj,obj->carried_by->in_room);
+					else
+						obj_to_char(t_obj,obj->carried_by);
+
+				else if (obj->in_room == NULL)  /* destroy it */
+					extract_obj(t_obj);
+
+				else
+				{ /* to the pit */
+					for (pit = get_room_index(obj->altar)->contents;
+					pit != NULL && pit->pIndexData->vnum != obj->pit;
+					pit = pit->next);
+
+						if (pit == NULL)
+							obj_to_room(t_obj,obj->in_room);
+						else
+							obj_to_obj(t_obj,pit);
+				}
+			}
+		}
+
+		extract_obj( obj );
 	}
 
-	extract_obj( obj );
-    }
-
-    return;
+	return;
 }
 
 

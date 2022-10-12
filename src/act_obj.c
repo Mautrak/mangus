@@ -4982,6 +4982,7 @@ void do_kasa(CHAR_DATA *ch, char *argument)
 		obj->carried_by	 = ch;
 		obj->in_room	 = NULL;
 		obj->in_obj		 = NULL;
+		obj->kasada_duruyor		 = TRUE;
 
 		printf_to_char(ch, "Kasaya %s koyuyorsun.\n\r", obj->short_descr );
 		return;
@@ -4996,6 +4997,7 @@ void do_kasa(CHAR_DATA *ch, char *argument)
 				{
 					ch->pcdata->kasa_esyalari = obj->next_content;
 					get_obj( ch, obj, NULL );
+					obj->kasada_duruyor		 = FALSE;
 					return;
 				}
 				else
@@ -5007,6 +5009,7 @@ void do_kasa(CHAR_DATA *ch, char *argument)
 						{
 							prev->next_content = obj->next_content;
 							get_obj( ch, obj, NULL );
+							obj->kasada_duruyor		 = FALSE;
 							return;
 						}
 					}
