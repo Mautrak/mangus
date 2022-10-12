@@ -5322,7 +5322,7 @@ bool limit_kontrol (CHAR_DATA *ch, OBJ_DATA *obj)
           if( c_obj->item_type == ITEM_SCROLL || c_obj->item_type == ITEM_PILL || c_obj->item_type == ITEM_POTION )
           {
             limit_iksir_sayisi++;
-            if( limit_iksir_sayisi > MAKSIMUM_LIMIT_IKSIR_HAP_PARSOMEN)
+            if( limit_iksir_sayisi > MAKSIMUM_LIMIT_IKSIR_HAP_PARSOMEN && !IS_IMMORTAL(ch))
   					{
   						extract_obj( c_obj );
   						limit_iksir_sayisi--;
@@ -5331,12 +5331,12 @@ bool limit_kontrol (CHAR_DATA *ch, OBJ_DATA *obj)
           else
           {
   					limit_ekipman_sayisi++;
-  					if( !(ch->cabal) && limit_ekipman_sayisi > MAKSIMUM_LIMIT_EKIPMAN)
+  					if( !(ch->cabal) && limit_ekipman_sayisi > MAKSIMUM_LIMIT_EKIPMAN && !IS_IMMORTAL(ch))
   					{
   						extract_obj( c_obj );
   						limit_ekipman_sayisi--;
   					}
-            else if( (ch->cabal) && limit_ekipman_sayisi > MAKSIMUM_LIMIT_EKIPMAN_KABAL)
+            else if( (ch->cabal) && limit_ekipman_sayisi > MAKSIMUM_LIMIT_EKIPMAN_KABAL && !IS_IMMORTAL(ch))
   					{
   						extract_obj( c_obj );
   						limit_ekipman_sayisi--;
@@ -5350,7 +5350,7 @@ bool limit_kontrol (CHAR_DATA *ch, OBJ_DATA *obj)
       if( b_obj->item_type == ITEM_SCROLL || b_obj->item_type == ITEM_PILL || b_obj->item_type == ITEM_POTION )
       {
         limit_iksir_sayisi++;
-        if( limit_iksir_sayisi > MAKSIMUM_LIMIT_IKSIR_HAP_PARSOMEN)
+        if( limit_iksir_sayisi > MAKSIMUM_LIMIT_IKSIR_HAP_PARSOMEN && !IS_IMMORTAL(ch))
         {
           extract_obj( b_obj );
           limit_iksir_sayisi--;
@@ -5359,12 +5359,12 @@ bool limit_kontrol (CHAR_DATA *ch, OBJ_DATA *obj)
       else
       {
   			limit_ekipman_sayisi++;
-  			if( !(ch->cabal) && limit_ekipman_sayisi > MAKSIMUM_LIMIT_EKIPMAN)
+  			if( !(ch->cabal) && limit_ekipman_sayisi > MAKSIMUM_LIMIT_EKIPMAN && !IS_IMMORTAL(ch))
   			{
   				extract_obj( b_obj );
   				limit_ekipman_sayisi--;
   			}
-        else if( (ch->cabal) && limit_ekipman_sayisi > MAKSIMUM_LIMIT_EKIPMAN_KABAL)
+        else if( (ch->cabal) && limit_ekipman_sayisi > MAKSIMUM_LIMIT_EKIPMAN_KABAL && !IS_IMMORTAL(ch))
         {
           extract_obj( b_obj );
           limit_ekipman_sayisi--;
@@ -5377,7 +5377,7 @@ bool limit_kontrol (CHAR_DATA *ch, OBJ_DATA *obj)
   {
     if ((obj->item_type == ITEM_SCROLL) || (obj->item_type == ITEM_PILL) || (obj->item_type == ITEM_POTION))
     {
-      if (limit_iksir_sayisi==MAKSIMUM_LIMIT_IKSIR_HAP_PARSOMEN)
+      if (limit_iksir_sayisi==MAKSIMUM_LIMIT_IKSIR_HAP_PARSOMEN && !IS_IMMORTAL(ch))
       {
         printf_to_char(ch,"Limit hap/parþömen/iksir kontenjanýn dolu!\n\r");
         return FALSE;
@@ -5385,9 +5385,9 @@ bool limit_kontrol (CHAR_DATA *ch, OBJ_DATA *obj)
     }
     else
     {
-      if (ch->cabal)
+      if (ch->cabal && !IS_IMMORTAL(ch))
       {
-        if (limit_ekipman_sayisi==MAKSIMUM_LIMIT_EKIPMAN_KABAL)
+        if (limit_ekipman_sayisi==MAKSIMUM_LIMIT_EKIPMAN_KABAL && !IS_IMMORTAL(ch))
         {
           printf_to_char(ch,"Limit ekipman kontenjanýn dolu!\n\r");
           return FALSE;
@@ -5395,7 +5395,7 @@ bool limit_kontrol (CHAR_DATA *ch, OBJ_DATA *obj)
       }
       else
       {
-        if (limit_ekipman_sayisi==MAKSIMUM_LIMIT_EKIPMAN)
+        if (limit_ekipman_sayisi==MAKSIMUM_LIMIT_EKIPMAN && !IS_IMMORTAL(ch))
         {
           printf_to_char(ch,"Limit ekipman kontenjanýn dolu!\n\r");
           return FALSE;

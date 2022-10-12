@@ -352,22 +352,6 @@ ABCGT GHJ 125
 
 
 #OBJECTS
-#10027
-taç ateþ mishakal~
-Mishakal'ýn Ateþ Tacý~
-Bir taç yerde yanarken unutmadýðý efendisi için bir aðýt fýsýldýyor.~
-adamantite~
-armor ACY AE
-39 39 39 37 30
-86 10 99000 P
-A
-13 200
-A
-18 12
-A
-19 12
-A
-24 -8
 #10028
 zýrh karanlýk sith~
 Karanlýðýn zýrhý~
@@ -815,6 +799,22 @@ kaybolmak çok kolaydýr oyüzden Ýnsanlarýn kalesinden ona giden yolu bul
 çok geç olmadan veya kaybolmadan önce! Gerçekten acele etmelisin çünkü
 Darken Rahl savaþý kazanýp ülkeleri kontrol etmeye çok yakýn!
 ~
+#10027
+taç ateþ mishakal~
+Mishakal'ýn Ateþ Tacý~
+Bir taç yerde yanarken unutmadýðý efendisi için bir aðýt fýsýldýyor.~
+adamantite~
+armor ACY AE
+39 39 39 37 30
+86 10 99000 P
+A
+13 200
+A
+18 12
+A
+19 12
+A
+24 -8
 #0
 
 
@@ -1781,7 +1781,6 @@ O 10028 remove_prog remove_prog_blackguard
 S
 
 #OLIMITS
-O 10027 1
 O 10028 2
 S
 
