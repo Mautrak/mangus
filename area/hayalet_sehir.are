@@ -399,27 +399,6 @@ ABFGO DF 60
 #0
 
 #OBJECTS
-#8100
-asa ciblll~
-Ciblll'in fýsýldayan asasý~
-Kadim bir asa burada, unutmadýðý efendisinin adýný fýsýldýyor.
-~
-wood~
-staff BEGH AO
-60 100 100 'pass door' 0
-55 50 30000 P
-A
-12 250
-A
-17 -50
-A
-18 25
-A
-19 25
-A
-23 -10
-A
-24 -10
 #8113
 zýrh~
 Kara Zýrh~
@@ -450,6 +429,27 @@ A
 
 
 #NEW_OBJECTS
+#8100
+asa ciblll~
+Ciblll'in fýsýldayan asasý~
+Kadim bir asa burada, unutmadýðý efendisinin adýný fýsýldýyor.
+~
+wood~
+staff BEGH AO
+60 100 100 'pass door' 0
+55 50 30000 P
+A
+12 250
+A
+17 -50
+A
+18 25
+A
+19 25
+A
+23 -10
+A
+24 -10
 #8101
 el vecna~
 Vecna'nýn Eli~
@@ -2726,7 +2726,6 @@ R 1 8191 4
 S
 
 #OLIMITS
-O 8100 1 * Rod of Orcus
 O 8113 1 * A suit of dark armor
 O 8110 10 * sanctuary potion
 S

@@ -145,9 +145,10 @@ void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container )
 	}
 	if (obj->pIndexData->limit != -1)
 	{
-		if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IS_EVIL(ch)    )
+		if ((( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IS_EVIL(ch)    )
 		||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IS_GOOD(ch)    )
 		||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IS_NEUTRAL(ch) ) )
+		&& !IS_IMMORTAL(ch))
 		{
 			act( "$p tarafýndan çarpýldýn ve onu yere düþürdün.", ch, obj, NULL, TO_CHAR );
 			act( "$n $p tarafýndan çarpýldý ve onu yere düþürdü.",  ch, obj, NULL, TO_ROOM );
@@ -156,7 +157,7 @@ void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container )
 		if(IS_PC(ch))
 		{
 			// oyuncu katlini kabul etmeyen karakter limit esya alamasin
-			if(ch->pcdata->oyuncu_katli == 0)
+			if(ch->pcdata->oyuncu_katli == 0 && !IS_IMMORTAL(ch))
 			{
 				act( "$p tarafýndan çarpýldýn ve onu yere düþürdün.", ch, obj, NULL, TO_CHAR );
 				act( "$n $p tarafýndan çarpýldý ve onu yere düþürdü.",  ch, obj, NULL, TO_ROOM );
@@ -1023,9 +1024,10 @@ void do_drag( CHAR_DATA *ch, char *argument )
 
    if (obj->pIndexData->limit != -1)
    {
-      if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IS_EVIL(ch)    )
+      if ((( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IS_EVIL(ch)    )
       ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IS_GOOD(ch)    )
       ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IS_NEUTRAL(ch) ) )
+	  && !IS_IMMORTAL(ch))
       {
         act( "$p tarafýndan çarpýldýn ve onu düþürdün.", ch, obj, NULL, TO_CHAR );
         act( "$n $p tarafýndan çarpýldý ve onu düþürdü.",  ch, obj, NULL, TO_ROOM );
@@ -1034,7 +1036,7 @@ void do_drag( CHAR_DATA *ch, char *argument )
 		if(IS_PC(ch))
 		{
 			// oyuncu katlini kabul etmeyen karakter limit esya alamasin
-			if(ch->pcdata->oyuncu_katli == 0)
+			if(ch->pcdata->oyuncu_katli == 0 && !IS_IMMORTAL(ch))
 			{
 				act( "$p tarafýndan çarpýldýn ve onu yere düþürdün.", ch, obj, NULL, TO_CHAR );
 				act( "$n $p tarafýndan çarpýldý ve onu yere düþürdü.",  ch, obj, NULL, TO_ROOM );
@@ -3261,9 +3263,10 @@ void do_steal( CHAR_DATA *ch, char *argument )
 
     if (obj != NULL && obj->pIndexData->limit != -1)
     {
-      if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IS_EVIL(ch)    )
+      if ((( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IS_EVIL(ch)    )
       ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IS_GOOD(ch)    )
       ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IS_NEUTRAL(ch) ) )
+	  && !IS_IMMORTAL(ch))
       {
         act( "$p tarafýndan çarpýldýn.", ch, obj, NULL, TO_CHAR );
       	act( "$n $p tarafýndan çarpýldý.",  ch, obj, NULL, TO_ROOM );
@@ -3280,7 +3283,7 @@ void do_steal( CHAR_DATA *ch, char *argument )
 		if(IS_PC(ch))
 		{
 			// oyuncu katlini kabul etmeyen karakter limit esya alamasin
-			if(ch->pcdata->oyuncu_katli == 0)
+			if(ch->pcdata->oyuncu_katli == 0 && !IS_IMMORTAL(ch))
 			{
 				act( "$p tarafýndan çarpýldýn ve onu yere düþürdün.", ch, obj, NULL, TO_CHAR );
 				act( "$n $p tarafýndan çarpýldý ve onu yere düþürdü.",  ch, obj, NULL, TO_ROOM );

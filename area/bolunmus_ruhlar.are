@@ -1388,32 +1388,6 @@ ACFGS PQ 70
 
 
 #OBJECTS
-#11708
-çift kol bandý kan kýrmýzý kolbantlarý~
-kan kýrmýzýsý kolbantlarý~
-Kan kýrmýzýsý bir çift kol bandý ýþýkta ýslak kan halkalarý gibi parlýyor.~
-adamantite~
-armor AI AI
-41 40 40 23 0
-90 50 10000 P
-A
-12 120
-A
-13 120
-A
-18 12
-A
-19 12
-A
-20 -5
-E
-çift kol bandý kan kýrmýzý kolbantlarý kandan halkalar~
-Kan kýrmýzýsý metalin altýna iki çapraz hançerin üzerine alçalan bir
-atmaca figürü oyulmuþ. Üzerinde de þöyle bir yazýt var:
-
-			"Ir'vekire zai'Zdreni",
-.
-~
 #11709
 adamant quanchi intikam yemini bant band~
 Quanchi'nin Ýntikam Yemini~
@@ -3016,6 +2990,32 @@ burgacýk bir yazýyla yazýlmýþ þu kelimeler var:
             "sh'keva Zdreni ke'zeraika shai !"
 
 Sýrtýndan ensene kadar çýkan bir ürpermeyle titriyorsun.
+~
+#11708
+çift kol bandý kan kýrmýzý kolbantlarý~
+kan kýrmýzýsý kolbantlarý~
+Kan kýrmýzýsý bir çift kol bandý ýþýkta ýslak kan halkalarý gibi parlýyor.~
+adamantite~
+armor AI AI
+41 40 40 23 0
+90 50 10000 P
+A
+12 120
+A
+13 120
+A
+18 12
+A
+19 12
+A
+20 -5
+E
+çift kol bandý kan kýrmýzý kolbantlarý kandan halkalar~
+Kan kýrmýzýsý metalin altýna iki çapraz hançerin üzerine alçalan bir
+atmaca figürü oyulmuþ. Üzerinde de þöyle bir yazýt var:
+
+			"Ir'vekire zai'Zdreni",
+.
 ~
 #11711
 gece karasý akik rütbe yüzüðü yüzük~
@@ -6888,7 +6888,6 @@ O 11730 remove_prog remove_prog_neckguard
 S
 
 #OLIMITS
-O 11708 2
 O 11709 2
 O 11710 2
 O 11693 2

@@ -883,8 +883,9 @@ void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch )
       {
         if ( obj->wear_loc == iWear )
         {
-          if( ( obj->wear_loc == WEAR_FINGER && ellere_giyilen_gizler ) ||
+          if((( obj->wear_loc == WEAR_FINGER && ellere_giyilen_gizler ) ||
               ( (obj->wear_loc == WEAR_NECK || obj->wear_loc == WEAR_WRIST || obj->wear_loc == WEAR_TATTOO ) && vucuda_giyilen_gizler ) )
+              && !IS_IMMORTAL(ch))
           {
             printf_to_char(ch,"%s {DÖrtülü{x\n\r",where_name[obj->wear_loc]);
           }
@@ -908,8 +909,9 @@ void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch )
       {
         for( i=1 ; i <= bolgeye_giyilen_esya_sayisi ; i++ )
         {
-          if( ( iWear == WEAR_FINGER && ellere_giyilen_gizler ) ||
+          if((( iWear == WEAR_FINGER && ellere_giyilen_gizler ) ||
               ( (iWear == WEAR_NECK || iWear == WEAR_WRIST || iWear == WEAR_TATTOO ) && vucuda_giyilen_gizler ) )
+              && !IS_IMMORTAL(ch))
           {
             printf_to_char(ch,"%s {DÖrtülü{x\n\r",where_name[iWear]);
           }
@@ -941,7 +943,7 @@ void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch )
         {
           if ( obj->wear_loc == iWear )
           {
-            if( vucuda_giyilen_gizler )
+            if( vucuda_giyilen_gizler && !IS_IMMORTAL(ch) )
             {
               printf_to_char(ch,"%s {DÖrtülü{x\n\r",where_name[obj->wear_loc]);
             }

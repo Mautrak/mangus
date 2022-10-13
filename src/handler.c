@@ -2772,9 +2772,10 @@ char *imm_bit_name(int imm_flags)
     if (imm_flags & IMM_DISEASE	) strcat(buf, " disease");
     if (imm_flags & IMM_DROWNING	) strcat(buf, " drowning");
     if (imm_flags & IMM_LIGHT		) strcat(buf, " light");
-    if (imm_flags & VULN_IRON		) strcat(buf, " iron");
-    if (imm_flags & VULN_WOOD		) strcat(buf, " wood");
-    if (imm_flags & VULN_SILVER	) strcat(buf, " silver");
+    if (imm_flags & IMM_SOUND		) strcat(buf, " sound");
+    if (imm_flags & IMM_IRON		) strcat(buf, " iron");
+    if (imm_flags & IMM_WOOD		) strcat(buf, " wood");
+    if (imm_flags & IMM_SILVER	) strcat(buf, " silver");
 
     return (char *)(( buf[0] != '\0' ) ? buf+1 : "none");
 }

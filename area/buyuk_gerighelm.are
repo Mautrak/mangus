@@ -573,22 +573,6 @@ food~
 pill 0 A
 11 'detect hidden' 'acute vision' 'detect invis' 'poison'
 5 10 494 P
-#7699
-týrpan~
-Ölüm'ün Týrpaný~
-Çok tehlikeli görünen kötücül bir týrpan burada.~
-mithril~
-weapon G AN
-exotic 10 8 smash DE
-60 200 50000 P
-#7507
-kuvvetlendirici bitkiler kýrmýzý demet~
-bir demet kýrmýzý bitki~
-Bir demet kuvvetlendirici bitki burada yetiþmiþ.~
-food~
-pill 0 A
-2 'giant strength' 'refresh' 'haste' ''
-1 15 855 P
 #0
 
 
@@ -641,6 +625,14 @@ glass~
 drink 0 A
 25 25 'water' 0 0
 0 5 100 P
+#7507
+kuvvetlendirici bitkiler kýrmýzý demet~
+bir demet kýrmýzý bitki~
+Bir demet kuvvetlendirici bitki burada yetiþmiþ.~
+food~
+pill 0 A
+2 'giant strength' 'refresh' 'bless' ''
+1 15 855 P
 #7508
 þifalý bitkiler yeþil demet~
 bir demet yeþil bitki~
@@ -1368,6 +1360,14 @@ steel~
 armor A AG
 3 3 3 0 2
 18 50 10 P
+#7699
+týrpan~
+Ölüm'ün Týrpaný~
+Çok tehlikeli görünen kötücül bir týrpan burada.~
+mithril~
+weapon G AN
+exotic 10 8 smash DE
+60 200 50000 P
 #0
 
 #ROOMS
@@ -5128,8 +5128,6 @@ S
 
 #OLIMITS
 O 7509 2
-O 7699 2
-O 7507 10 * haste potion
 S
 
 #$

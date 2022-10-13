@@ -3901,6 +3901,11 @@ void load_limited_objects()
               if (get_obj_index(vnum) != NULL)
               {
                 get_obj_index(vnum)->count++;
+                if( get_obj_index(vnum)->limit != -1 )
+                {
+                    sprintf(log_buf,"**** Limit eq in player file: %d.\n",vnum);
+                    dump_to_scr( log_buf );
+                }
               }
               fBootDb = TRUE;
             }

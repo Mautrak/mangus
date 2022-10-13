@@ -612,7 +612,7 @@ bool death_prog_ranger_staff(OBJ_DATA *obj, CHAR_DATA *ch)
 void get_prog_spec_weapon(OBJ_DATA *obj, CHAR_DATA *ch)
 {
 
-  if ( strstr( obj->extra_descr->description, ch->name ) != NULL )
+  if ( strstr( obj->extra_descr->description, ch->name ) != NULL || IS_IMMORTAL(ch))
   {
     if ( IS_AFFECTED( ch, AFF_POISON ) && (dice(1,5)==1) )  {
       send_to_char( "Silahýn mavi renkte parlýyor.", ch );

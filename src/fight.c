@@ -2778,9 +2778,10 @@ void group_gain( CHAR_DATA *ch, CHAR_DATA *victim )
 			if ( obj->wear_loc == WEAR_NONE )
 				continue;
 
-			if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IS_EVIL(ch)    )
+			if ((( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IS_EVIL(ch)    )
 			||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IS_GOOD(ch)    )
 			||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IS_NEUTRAL(ch) ) )
+			&& !IS_IMMORTAL(ch))
 			{
 				act( "Sen $p tarafýndan çarpýldýn.", ch, obj, NULL, TO_CHAR );
 				act( "$n $p tarafýndan çarpýldý.",   ch, obj, NULL, TO_ROOM );
