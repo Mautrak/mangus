@@ -284,7 +284,7 @@ typedef void OPROG_FUN_AREA args((OBJ_DATA *obj));
 #define MAX_ALIAS		   20
 #define MAX_CLASS		   13
 #define MAX_PC_RACE		   9
-#define MAX_MATERIALS		66
+#define MAX_MATERIALS		81
 /* unique ve null dahil */
 #define MAX_RACE		    33
 #define MAX_CABAL		    9
@@ -3398,6 +3398,7 @@ int obj_random_extra_flag  args( (void) );
 int obj_random_weapon_flag  args( (void) );
 char *obj_random_wand_potion_spell  args( (void) );
 void obj_random_material args((OBJ_DATA *obj));
+int find_material_decay_days args((OBJ_DATA *obj));
 
 /* quest.c */
 bool gorev_ekipmani_mi args( (OBJ_DATA *obj) );

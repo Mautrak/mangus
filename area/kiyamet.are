@@ -504,7 +504,7 @@ A
 savaþ kýlýç~
 savaþ kýlýcý~
 Büyük bir iki elli kýlýç görüyorsun.~
-admantite~
+adamantite~
 weapon EJM AN
 sword 11 12 slash DEFH
 85 20 14000 P
@@ -516,7 +516,7 @@ A
 biçici týrpan~
 Biçici'nin Týrpaný~
 Soðuk ve karanlýk bir týrpan görüyorsun.~
-unknown~
+platinum~
 weapon CEFJMQ AN
 polearm 11 10 cleave CDFH
 85 20 14000 P
@@ -528,7 +528,7 @@ A
 baþbüyücü kutsal mýzrak~
 Baþbüyücü'nün KutsaL Mýzraðý~
 Kutsal aurasýyla parlayan bir mýzrak görüyorsun.~
-admantite~
+adamantite~
 weapon ABGIKMS AN
 lance 12 10 pierce A
 91 15 20000 P
@@ -638,7 +638,7 @@ wand AG AO
 beyaz fatih taç~
 fatihin beyaz tacý~
 Beyaz bir taç görüyorsun.~
-admantite~
+adamantite~
 armor EJ AE
 28 28 28 14 0
 85 35 10000 P
@@ -654,7 +654,7 @@ A
 beyaz fatih yayý~
 fatihin beyaz yayý~
 Büyük beyaz bir yay görüyorsun.~
-admantite~
+adamantite~
 weapon EJM AN
 bow 10 10 blast AFH
 85 10 12000 P
@@ -848,7 +848,7 @@ KING OF KINGS, AND LORD OF LORDS
 iki aðýzlý keskin kýlýç büyük~
 iki aðýzlý keskin kýlýç~
 Büyük bir kýlýç görüyorsun.~
-admantite~
+adamantite~
 weapon IKLM AN
 sword 3 43 slash DF
 91 30 25000 P

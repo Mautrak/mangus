@@ -543,7 +543,7 @@ AIQU DEFTZe 70
 gecenin kaný~
 gecenin kaný~
 Gecenin Kraliçesinin bir damla kaný.~
-unknown~
+glass~
 potion G AO
 80 'pass door' 'sanctuary' '' ''
 82 3 9900 P
@@ -643,7 +643,7 @@ A
 diþli býçak~
 bir diþli býçak~
 Diþli, kýrýlmýþ ve ufalanmýþ bir býçak.~
-unknown~
+iron~
 weapon G AN
 sword 4 11 cleave 0
 43 13 200 W
@@ -695,7 +695,7 @@ A
 khopeþ~
 Parýldayan bir khopeþ~
 Parlak, geniþ býçaklý, altýn ve fildiþinden kabzasý olan bir khopeþ.~
-unknown~
+iron~
 weapon G AN
 sword 8 7 slash 0
 56 30 1200 P
@@ -704,7 +704,7 @@ bitmemiþ miðfer~
 Bitmemiþ bir miðfer~
 Benzersiz bir iþçilikle yapýlmýþ bir miðfer, hiç bir zaman
 tamamlanamayacak olmasý çok kötü.~
-unknown~
+iron~
 armor G AEO
 14 14 12 12 0
 51 15 800 G
@@ -777,7 +777,7 @@ A
 bitmamiþ balta~
 Bitmemiþ bir balta~
 Biraz dengesiz görünen, iri, etkieyici bir balta.~
-unknown~
+steel~
 weapon 0 AN
 axe 5 10 chop 0
 51 10 10 G
@@ -867,7 +867,7 @@ quench your thirst.
 balçýk birikinti~
 balçýk birikintisi~
 Bir balçýk birikintisi burada.~
-unknown~
+leather~
 container 0 0
 100 0 0 50 100
 1 0 0 A
@@ -875,7 +875,7 @@ container 0 0
 balçýk parça~
 Bir parça balçýk~
 Parlak çizgili küçük bir parça mor balçýk.~
-unknown~
+leather~
 pill A A
 30 'know alignment' 'armor' '' ''
 28 2 0 G
@@ -883,7 +883,7 @@ pill A A
 kitaplýk~
 Geniþ bir meþe kitaplýk~
 Çeþitli konularda kitaplarla dolu bir kitaplýk.~
-unknown~
+hardwood~
 container 0 0
 100 0 12065 50 100
 0 0 0 P
@@ -891,7 +891,7 @@ container 0 0
 el yazmasý~
 Kadim bir el yazmasý~
 Seelie ve Useelie hakkýnda kadim bir el yazmasý.~
-unknown~
+vellum~
 treasure 0 A
 0 0 0 0 0
 20 3 2000 P
@@ -918,7 +918,7 @@ by changing courts.
 el yazmasý~
 Kadim bir el yazmasý~
 Fae nin budalasý Puck hakkýnda kadim bir el yazmasý.~
-unknown~
+vellum~
 treasure 0 A
 0 0 0 0 0
 20 3 2000 P
@@ -942,7 +942,7 @@ as is his nature he isn't telling.
 soytarý asasý~
 Bir soytarý asasý~
 Tepesinde bir soytarý kuklasý olan oymalý bir sopa.~
-unknown~
+hardwood~
 staff BI AO
 60 20 20 'faerie fog' 0
 58 7 6200 G
@@ -950,7 +950,7 @@ staff BI AO
 soytarý asasý~
 Bir soytarý asasý~
 Tepesinde bir soytarý kuklasý olan oymalý bir sopa.~
-unknown~
+hardwood~
 staff BI AO
 60 20 20 'blindness' 0
 58 7 9200 G
@@ -958,7 +958,7 @@ staff BI AO
 soytarý asasý~
 Bir soytarý asasý~
 Tepesinde bir soytarý kuklasý olan oymalý bir sopa.~
-unknown~
+hardwood~
 staff BI AO
 60 20 20 'teleport' 0
 58 7 8200 G
@@ -1022,7 +1022,7 @@ A
 soylu pelerin~
 Bir soylunun pelerini~
 Kaliteli yapým, mor, uzun bir zengin giysisi.~
-unknown~
+leather~
 armor G AC
 22 22 22 16 0
 72 5 1200 P
@@ -1030,7 +1030,7 @@ armor G AC
 soylu kýlýç~
 Bir sidhe geniþ kýlýçý~
 Üzerinde garip yaýtlar olan kaliteli yapým bir sidhe geniþ kýlýcý.~
-unknown~
+steel~
 weapon G AN
 sword 10 8 slash 0
 72 5 1200 P
@@ -1038,7 +1038,7 @@ sword 10 8 slash 0
 soylu göðüs zýrhý zýrh~
 Bir sidhe göðüs zýrhý~
 Kaliteli yapým, iþlemeli bir sidhe soylusu zýrhý.~
-unknown~
+iron~
 armor G AD
 22 22 21 17 0
 72 9 1200 P
@@ -1048,7 +1048,7 @@ A
 sidhe kolluðu kolluk~
 Bir çift sidhe kolluðu~
 Bir çift parlak gümüþ, kaliteli kolluk.~
-unknown~
+steel~
 armor G AI
 22 23 21 16 0
 68 6 1100 P
@@ -1058,7 +1058,7 @@ A
 sidhe bacaklýðý bacaklýk~
 Bir çift sidhe bacaklýðý~
 Bir çift parlak gümüþ, bacak zýrhý takýmý.~
-unknown~
+steel~
 armor G AF
 23 23 21 16 0
 68 6 800 P
@@ -1068,7 +1068,7 @@ A
 sidhe bilekliði bileklik~
 Ýþlemeli bir sidhe bilekliði~
 Karmakarýþýk iþlemeli bir metal bileklik.~
-unknown~
+steel~
 armor G AM
 22 21 23 16 0
 68 3 960 P
@@ -1080,7 +1080,7 @@ A
 soylu tacý taç~
 Bir soylunun tacý~
 Sidhe desenleriyle iþlenmiþ ve üzerinde yeþil cevherler olan bir taç.~
-unknown~
+steel~
 armor G AE
 23 23 23 17 0
 73 3 980 P
@@ -1106,7 +1106,7 @@ A
 gecenin kalbi kalp~
 Gecenin Kalbi~
 Gecenin kara kalbi güçle atýyor.~
-unknown~
+gem~
 treasure G AO
 0 0 0 0 0
 84 20 0 P
@@ -1124,7 +1124,7 @@ A
 geyik boynuzlu miðfer~
 Bir geyik boynuzlu miðfer~
 Üzerinde yedi çatallý iki gümüþ boynuz olan bir miðfer.~
-unknown~
+steel~
 armor G AE
 28 28 28 11 0
 86 11 2800 P
@@ -1144,7 +1144,7 @@ A
 þiir~
 þiir~
 Üzerine þiir yazýlmýþ büyük bir kaðýt.~
-unknown~
+vellum~
 scroll G A
 80 'enchant weapon' 'enchant weapon' 'enchant weapon' ''
 78 2 5000 P
@@ -1152,7 +1152,7 @@ scroll G A
 cüppe~
 Bir þairin cüppesi~
 Þairin koyu mavi cüppesi.~
-unknown~
+leather~
 armor G AK
 25 25 25 18 0
 78 7 2000 P
@@ -1162,7 +1162,7 @@ A
 önlük~
 Ýnce nakýþ önlük~
 Ýnce nakþedilmiþ saray önlüðü.~
-unknown~
+silk~
 armor G AK
 28 29 29 22 0
 84 8 2000 P
@@ -1172,7 +1172,7 @@ A
 madalyon~
 Bir yaz madalyonu~
 Yazýn kokusunu taþýyan bir madalyon.~
-unknown~
+iron~
 armor G AC
 28 28 29 22 0
 84 4 1750 P
@@ -1200,7 +1200,7 @@ A
 gölgelerin pelerini~
 Gölgelerin pelerini~
 Deðiþen þekilsiz gölgelerden bir pelerin.~
-unknown~
+silk~
 armor CG AC
 27 28 28 21 0
 84 2 3000 P
@@ -1210,7 +1210,7 @@ A
 hile çantasý~
 Bir hile çantasý~
 Boþ görünen geyik derisi bir çanta.~
-unknown~
+leather~
 container G AO
 1000 0 0 500 100
 82 2 0 P
@@ -1218,7 +1218,7 @@ container G AO
 portakal~
 Bir portakal~
 Küçük turuncu bir portakal.~
-unknown~
+wheat~
 pill 0 A
 82 'curse' 'sleep' 'blindness' 'poison'
 83 1 0 P
@@ -1226,7 +1226,7 @@ pill 0 A
 deri~
 Küçük yýpranmýþ bir deri~
 Aþýnarak içe doðru delinmiþ pütürlü bir deri.~
-unknown~
+leather~
 boat MN AO
 0 0 0 0 0
 89 0 0 W

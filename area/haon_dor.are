@@ -244,7 +244,7 @@ The coins seem to be gold.  They are obviously valuable.
 böðürtlen avuç~
 bir avuç böðürtlen~
 Bir çalýlýkta büyümüþ böðürtlenleri görüyorsun.~
-food~
+wheat~
 food 0 A
 3 3 0 0 0
 0 10 0 P
@@ -256,7 +256,7 @@ They look very tasty indeed.
 mantar~
 mantar~
 Toprakta bir mantar büyümüþ.~
-food~
+meat~
 food 0 A
 6 6 0 0 0
 0 10 0 P

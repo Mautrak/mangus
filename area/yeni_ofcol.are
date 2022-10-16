@@ -497,7 +497,7 @@ A
 kabak~
 bir baþ kabak~
 Bir miktar taze kabak burada duruyor. Hazýr tazeyken al istersen!~
-food~
+wheat~
 food 0 A
 12 12 0 0 0
 0 20 2 P
@@ -521,7 +521,7 @@ drink 0 A
 apple~
 an apple~
 An apple is on the ground.~
-food~
+wheat~
 food 0 A
 8 8 0 0 0
 0 10 1 P
@@ -529,7 +529,7 @@ food 0 A
 mýsýr~
 bir koçan mýsýr~
 Bir koçan dolusu mýsýr yerde duruyor.~
-food~
+wheat~
 food 0 A
 8 8 0 0 0
 0 10 3 P

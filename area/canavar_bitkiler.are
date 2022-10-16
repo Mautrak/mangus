@@ -115,7 +115,7 @@ human~
 sümüksü salgý~
 sümüksü salgý~
 Sümüksü bir salgý birikintisi görüyorsun. ÝÐRENÇ!~
-~
+glass~
 potion 1 1
 25 'heal' 'invis' 'sanctuary' ''
 25 1 5800 P
@@ -123,7 +123,7 @@ potion 1 1
 tuzlanmýþ yaprak~
 tuzlanmýþ yaprak~
 Tuzlanmýþ bir yaprak görüyorsun.~
-~
+wheat~
 pill 1 1
 30 'armor' 'fly' 'infravision' ''
 25 1 2000 P

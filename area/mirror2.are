@@ -824,7 +824,7 @@ body, as though it still retained life in some way.~
 sea blue robe sea-blue~
 a sea-blue robe~
 A sea-blue robe lies here.~
-cloth~
+silk~
 armor 0 AK
 12 11 11 8 0
 35 5 10 P
@@ -842,7 +842,7 @@ wand K AO
 poultice detection~
 a poultice of detection~
 A small herbal poultice lies hee.~
-food~
+wheat~
 pill 0 AO
 20 'detect invis' 'detect magic' '' ''
 10 1 0 P
@@ -1084,7 +1084,7 @@ potion H A
 hamburger burger~
 a hamburger~
 A juicy hamburger is here.~
-food~
+meat~
 food 0 A
 15 15 0 0 0
 1 2 20 P
@@ -1092,7 +1092,7 @@ food 0 A
 steak yorkshire pudding food~
 steak and Yorkshire Pudding~
 A plate of food lies here.~
-food~
+meat~
 food 0 A
 15 15 0 0 0
 1 2 20 P
@@ -1100,7 +1100,7 @@ food 0 A
 roast chicken food~
 roast Chicken~
 A plate of food lies here.~
-food~
+meat~
 food 0 A
 15 15 0 0 0
 1 1 0 P
@@ -1108,7 +1108,7 @@ food 0 A
 mashed potatoes food~
 mashed potatoes~
 A small bowl of mashed potatoes is here.~
-food~
+meat~
 food 0 A
 4 4 0 0 0
 1 1 0 P
@@ -1116,7 +1116,7 @@ food 0 A
 peas food~
 peas~
 A small bowl of peas is here.~
-food~
+meat~
 food 0 A
 2 2 0 0 0
 1 1 0 P
@@ -1124,7 +1124,7 @@ food 0 A
 baked ham food~
 baked Ham~
 A plate of food lies here.~
-food~
+meat~
 food 0 A
 15 10 0 0 0
 1 1 0 P
@@ -1132,7 +1132,7 @@ food 0 A
 green beans food~
 green beans~
 A small dish of green beans lies here.~
-food~
+wheat~
 food 0 A
 2 2 0 0 0
 1 1 0 P
@@ -1140,7 +1140,7 @@ food 0 A
 shrimp cocktail food~
 shrimp cocktail~
 A small dish of shrimp is here.~
-food~
+wheat~
 food 0 A
 2 2 0 0 0
 1 1 0 P
@@ -1148,7 +1148,7 @@ food 0 A
 green salad food~
 green salad~
 A salad is here.~
-food~
+wheat~
 food 0 A
 4 4 0 0 0
 1 2 0 P
@@ -1156,7 +1156,7 @@ food 0 A
 vegetable soup food~
 vegetable soup~
 A bowl of vegetable soup is here.~
-food~
+wheat~
 food 0 A
 4 4 0 0 0
 1 1 0 P
@@ -1211,7 +1211,7 @@ container 0 0
 apple fruit~
 an apple~
 A ripe red apple is here.~
-food~
+wheat~
 pill 0 A
 10 'refresh' '' '' ''
 1 1 0 P
@@ -1227,7 +1227,7 @@ container 0 0
 plum fruit~
 a plum~
 A plum is here.~
-food~
+wheat~
 food 0 A
 3 3 0 0 0
 1 1 0 P
@@ -1447,7 +1447,7 @@ A
 goldfish white~
 the white goldfish~
 The white goldfish nuzzles gently at you as you pass by.~
-food~
+meat~
 food 0 A
 4 4 0 0 0
 2 2 0 P
@@ -1618,7 +1618,7 @@ drink 0 A
 pack rations~
 rations~
 A small pack of rations lies here.~
-food~
+wheat~
 food 0 A
 6 6 0 0 0
 1 1 0 P
@@ -1796,7 +1796,7 @@ container 0 0
 nectarine fruit~
 a nectarine~
 A nectarine stands here.~
-food~
+wheat~
 food 0 A
 3 3 0 0 0
 1 1 0 P
@@ -1939,7 +1939,7 @@ container 0 0
 holly berries berry~
 a few holly berries~
 A few holly berries lie here.~
-food~
+wheat~
 pill 0 A
 10 'poison' '' '' ''
 2 2 0 P
@@ -2009,7 +2009,7 @@ sign health~
 beef stew~
 beef stew~
 A bowl of beef stew lies here.~
-food~
+meat~
 food 0 A
 3 3 0 0 0
 0 2 0 P
@@ -2039,7 +2039,7 @@ container 0 0
 acorn~
 an acorn~
 An acorn lies here.~
-food~
+wheat~
 food H A
 10 10 0 0 0
 1 1 0 P
@@ -2069,7 +2069,7 @@ A
 squid~
 a dead squid~
 Bubbles of swamp gas gently shake the arms of this dead squid.~
-food~
+meat~
 food 0 A
 2 2 0 0 0
 2 2 0 P
@@ -2530,7 +2530,7 @@ A
 honey jar~
 a jar of honey~
 A jar of honey lies here.~
-food~
+wheat~
 food 0 A
 2 2 0 0 0
 2 2 0 P
@@ -2635,7 +2635,7 @@ key 0 A
 fish trout~
 a trout~
 A trout lies here.~
-food~
+meat~
 food 0 A
 6 6 0 0 0
 2 2 0 P
@@ -2643,7 +2643,7 @@ food 0 A
 heart key~
 the heart key~
 A small key lies on the ground here; use it to lock yourselves in...~
-food~
+meat~
 food 0 A
 0 0 0 0 0
 1 0 0 P
@@ -2659,7 +2659,7 @@ drink 0 A
 spam can~
 a can of Spam~
 A can of Spam lies here.~
-food~
+meat~
 food 0 A
 20 10 0 0 0
 1 3 0 P

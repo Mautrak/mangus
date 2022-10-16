@@ -2146,7 +2146,7 @@ void do_recall( CHAR_DATA *ch, char *argument )
 	stop_fighting( ch, TRUE );
     }
 
-    ch->move /= 2;
+    ch->move -= (ch->move / 10);
     act( "$n yokoluyor.", ch, NULL, NULL, TO_ROOM );
     char_from_room( ch );
     char_to_room( ch, location );

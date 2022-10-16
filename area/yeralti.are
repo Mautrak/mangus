@@ -1459,7 +1459,7 @@ potion G A
 göðüs zýrhý~
 Güç zýrhý~
 Göðüs zýrhý etrafa bir güç aurasý yayýyor.~
-unknown~
+platinum~
 armor AG AD
 25 25 25 20 0
 43 4 100 P
@@ -1473,7 +1473,7 @@ A
 uçuþ botlarý~
 Uçuþ botlarý~
 Bir çift bot zeminin yukarýsýnda süzülüyor.~
-unknown~
+platinum~
 armor FGM AG
 18 18 18 9 0
 31 2 1000 P
@@ -1483,7 +1483,7 @@ A
 ejderha dövmesi~
 Ejderha dövmesi~
 Yerde ejderhayý andýran tuhaf bir parýltý var.~
-unknown~
+energy~
 armor G AM
 19 19 19 7 0
 46 1 100 P
@@ -1495,7 +1495,7 @@ A
 iblis ateþi~
 Ýblis ateþi~
 Tuhaf bir alev burada yanýyor.~
-fire~
+platinum~
 armor BEG AJ
 22 20 20 12 0
 37 5 1000 P
@@ -2135,7 +2135,7 @@ A
 kahverengi mantar~
 Kahverengi bir mantar~
 Leziz görünen kahverengi bir mantar burada uzanýyor.~
-food~
+meat~
 food I A
 12 12 0 0 0
 1 2 0 P
@@ -2143,7 +2143,7 @@ food I A
 iri mantar~
 Ýri bir mantar~
 Ýri bir mantar yerde uzanýyor.~
-food~
+meat~
 food I A
 25 25 0 0 0
 1 5 0 P
@@ -2151,7 +2151,7 @@ food I A
 kýrmýzý yosun~
 Kýrmýzý yosun~
 Bir miktar kýrmýzý yosun yerde uzanýyor.~
-food~
+wheat~
 pill I A
 12 'cure serious' 'cure critical' 'giant strength' ''
 6 4 1200 P
@@ -2159,7 +2159,7 @@ pill I A
 kirli kök~
 Kirli bir kök~
 Kirli bir kök yerde uzanýyor.~
-food~
+wheat~
 pill I A
 12 'armor' 'shield' 'stone skin' ''
 6 2 2400 P

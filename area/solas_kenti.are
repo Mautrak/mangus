@@ -528,7 +528,7 @@ bird~
 
 
 
-#OBJOLD
+#NEW_OBJOLD
 #10201
 miðfer aytaþý~
 aytaþý miðferi~
@@ -1029,8 +1029,8 @@ iþlemeli hançer~
 iþlemeli hançer~
 Üzeri iþlemelerle süslenmiþ bir hançer burada unutulmuþ.~
 ~
-9 64 1|8192
-11 0 0 0
+5 64 1|8192
+2 0 0 0
 6 1000 100
 E
 iþleme hançer~
@@ -1117,7 +1117,7 @@ büyülü cesim büyük kýlýç~
 büyülü cesim kýlýç~
 Rün iþlemeli büyük bir kýlýç yerde duruyor.~
 ~
-9 64 1|8192
+5 64 1|8192
 0 5 15 0
 30 1000 100
 A
@@ -1485,7 +1485,7 @@ týrpan~
 týrpan~
 Büyük ve saðlam bir týrpan burada unutulmuþ.~
 ~
-9 1|64|512 1|8192
+5 1|64|512 1|8192
 0 100 100 0
 50 400 50
 A
@@ -1509,7 +1509,7 @@ kristal uzun kýlýç~
 kristal uzun kýlýç~
 Bir kristal uzun kýlýç burada, alýnmayý bekliyor.~
 ~
-9 32|64 1|8192
+5 32|64 1|8192
 0 5 12 1
 15 400 50
 A

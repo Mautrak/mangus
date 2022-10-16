@@ -144,7 +144,7 @@ container 0 A
 siyah toz~
 bir miktar siyah toz~
 Burada bir miktar toz býrakýlmýþ, oldukça güçlü bir kokusu var.~
-food~
+wheat~
 food 0 A
 -2 -2 0 0 0
 0 10 0 P
@@ -160,7 +160,7 @@ powder~
 sarý çekirdek~
 bir miktar sarý çekirdek~
 Yerde bir miktar çekirdek görüyorsun.~
-food~
+wheat~
 food 0 AO
 1 1 0 0 0
 0 10 0 P

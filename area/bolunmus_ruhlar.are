@@ -1440,7 +1440,7 @@ A
 müzikal bileklikler siyah tüy~
 müzikal bileklikler~
 Bir çift siyah tüy bileklik, melodik bir þekilde výzýldayarak burada uzanýyor.~
-feathers~
+feather~
 armor AB AI
 13 13 13 13 0
 43 20 2200 P
@@ -1466,7 +1466,7 @@ A 0 0 V
 tavþan yemek artýk~
 bir tavþan yemeði artýðý~
 Bir tavþanýn yemek artýklarý burada uzanýyor.~
-food~
+meat~
 pill 0 A
 55 'haste' '' '' ''
 45 10 500 P
@@ -1900,7 +1900,7 @@ Niþanýn etrafýnda altýn iple dokunmuþ bir yazýt parlýyor:
 beyaz gri tüylü zýrh~
 beyaz-gri bir zýrh~
 Kocaman beyaz-gri tüylü bir zýrh burada uzanýyor~
-feathers~
+feather~
 armor 0 AD
 21 22 21 19 0
 65 150 5500 P
@@ -2215,7 +2215,7 @@ Maskenin içine bir þiir oyulmuþ:
 cehennem atmacasý kara tüy~
 bir cehennem atmacasý tüyü~
 Parýldayan siyah bir tüy ateþten bir kýzýllýkla yanýyor.~
-feathers~
+feather~
 armor A AO
 21 20 20 18 0
 65 10 5500 P
@@ -2703,7 +2703,7 @@ A
 pembe domuz kanatlarý~
 bir çift domuz kanadý~
 Bir kýsým pembe domuz kanadý etrafta kanat çýrpýyor.~
-feathers~
+feather~
 armor B AI
 15 15 15 15 0
 59 60 2250 P
@@ -2821,7 +2821,7 @@ A
 kýrmýzý tüyden bacaklýklar~
 kýrmýzý tüyden bir çift bacaklýk~
 Parlak kýrmýzý papaðan tüyünden yapýlmýþ bir çift bacaklýk burada uzanýyor.~
-feathers~
+feather~
 armor AB AF
 20 21 20 20 0
 77 80 6500 P
@@ -2835,7 +2835,7 @@ A
 göz alýcý kýrmýzý tüy kuyruk tüyü~
 parlak kýrmýzý kuyruk tüyü~
 Uzun kýrmýzý bir tüy görkemli bir biçimde parlýyor.~
-feathers~
+feather~
 weapon A AN
 staff 10 10 pierce DG
 80 380 3450 P
@@ -2875,7 +2875,7 @@ A
 kara baykuþ tüyünden battaniye~
 kara baykuþ tüyünden bir battaniye~
 Kara bir kuþun yumuþak tüyleri, bir battaniye oluþturacak þekilde örülmüþ.~
-feathers~
+feather~
 furniture CG AO
 2 1200 BEHKN 115 115
 65 70 5500 P

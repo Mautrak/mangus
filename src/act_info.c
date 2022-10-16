@@ -335,7 +335,10 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
     {
 	if ( obj->short_descr != NULL )
 	{
+    if(esya_kac_gunluk(obj->creation_time) > find_material_decay_days(obj))
+      strcat( buf, CLR_RED_BOLD );
     strcat( buf, obj->short_descr );
+    strcat( buf, CLR_WHITE_BOLD );
     strcat( buf, buf_material );
     strcat( buf, buf_con );
     strcat( buf, buf_eskime );

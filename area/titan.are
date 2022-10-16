@@ -1585,7 +1585,7 @@ wand A AO
 çikolatalý dondurma~
 çikolatalý dondurma~
 Burada biraz dondurma duruyor.~
-food~
+wheat~
 food A A
 50 50 0 0 0
 3 110 340 P
@@ -1593,7 +1593,7 @@ food A A
 kirazlý dondurma~
 kirazlý dondurma~
 Burada biraz kirazlý dondurma duruyor.~
-food~
+wheat~
 food A A
 55 55 0 0 0
 3 110 500 P
@@ -1601,7 +1601,7 @@ food A A
 þekerlemeli dondurma~
 þekerlemeli dondurma~
 Biraz dondurma burada duruyor.~
-food~
+wheat~
 food A A
 60 60 0 0 0
 3 110 200 P
@@ -1609,7 +1609,7 @@ food A A
 çikolata kaplý badem~
 çikolata kaplý badem~
 Biraz çikolata burada duruyor.~
-food~
+wheat~
 food A A
 65 65 0 0 0
 4 120 500 P
@@ -1617,7 +1617,7 @@ food A A
 karamelli çikolata~
 karamelli çikolata~
 Burada biraz çikolata duruyor.~
-food~
+wheat~
 food A A
 70 70 0 0 0
 4 120 600 P
@@ -1625,7 +1625,7 @@ food A A
 çabuk bozulan çikolata~
 çabuk bozulan çikolata~
 Burada biraz çikolata duruyor.~
-food~
+wheat~
 food A A
 10 10 0 0 0
 4 120 100 P
@@ -1633,7 +1633,7 @@ food A A
 naneli çikolata~
 naneli çikolata~
 Biraz çikolata yerde duruyor.~
-food~
+wheat~
 food A A
 50 50 0 0 0
 2 120 100 P
@@ -1727,7 +1727,7 @@ potion AB A
 turta~
 elmalý turta~
 Bir parça elmalý turta burada duruyor.~
-food~
+wheat~
 food A A
 20 20 0 0 0
 20 20 50 P

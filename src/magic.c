@@ -5200,7 +5200,7 @@ hometown_table[victim->hometown].recall[IS_GOOD(victim)?0:IS_NEUTRAL(victim)?1:I
 	stop_fighting(victim,TRUE);
     }
 
-    ch->move /= 2;
+    ch->move -= (ch->move / 10);
     act("$n yokoluyor.",victim,NULL,NULL,TO_ROOM);
     char_from_room(victim);
     char_to_room(victim,location);

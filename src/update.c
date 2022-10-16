@@ -1630,6 +1630,7 @@ void obj_update( void )
 	OBJ_DATA *obj;
 	OBJ_DATA *obj_next;
 	OBJ_DATA *t_obj, *pit, *next_obj;
+	int esya_kac_gun, esya_curume_gun_sayisi, random_sayi;
 
 	AFFECT_DATA *paf, *paf_next;
 	static int pit_count = 1;
@@ -1746,7 +1747,14 @@ void obj_update( void )
 					}
 		}
 
-		if ( obj->condition > -1 && (obj->timer <= 0 || --obj->timer > 0) )
+		// objenin eskiyerek yok olmasi da burada hesaplaniyor.
+		esya_kac_gun = esya_kac_gunluk(obj->creation_time);
+		esya_curume_gun_sayisi = find_material_decay_days(obj);
+
+		if (esya_kac_gun < esya_curume_gun_sayisi && obj->condition > -1 && (obj->timer <= 0 || --obj->timer > 0) )
+			continue;
+
+		if(esya_kac_gun >= esya_curume_gun_sayisi && number_range(1,200)>5)
 			continue;
 
 		switch ( obj->item_type )

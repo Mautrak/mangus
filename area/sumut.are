@@ -285,7 +285,7 @@ ABCR BDFHNT 22
 güneþ kýlýç~
 Güneþ Kýlýcý~
 Parýldayan, güzel bir kýlýç yerde duruyor.~
-unknown~
+platinum~
 weapon FGKL AN
 sword 12 10 slash 0
 85 200 6800 P
@@ -470,7 +470,7 @@ axe 9 12 slice 0
 üzüm salkým~
 salkým üzüm~
 Bir salkým üzüm burada yenmeyi bekliyor.~
-food~
+wheat~
 food 0 A
 24 24 0 0 0
 0 10 100 P
@@ -502,7 +502,7 @@ treasure 0 A
 elma~
 elma~
 Bir elma burada duruyor.~
-food~
+wheat~
 pill 0 A
 50 'cure light' 'cure light' 'cure light' 'cure light'
 0 10 340 P
@@ -510,7 +510,7 @@ pill 0 A
 armut~
 armut~
 Bir armut burada duruyor.~
-food~
+wheat~
 pill 0 A
 80 'remove curse' 'cure light' 'cure poison' 'cure disease'
 6 10 530 P
@@ -518,7 +518,7 @@ pill 0 A
 portakal~
 portakal~
 Bir portakal burada duruyor.~
-food~
+wheat~
 pill 0 A
 50 '' 'shield' 'armor' ''
 0 10 340 P
@@ -526,7 +526,7 @@ pill 0 A
 kivi~
 bir kivi~
 Bir kivi burada duruyor.~
-food~
+wheat~
 pill 0 A
 50 '' '' 'cure poison' 'cure disease'
 6 10 530 P

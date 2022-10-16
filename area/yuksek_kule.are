@@ -669,7 +669,7 @@ Bir anda bunun içinde kadavralarýn olabileceðini düþündün
 yemek dilim~
 bir dilim hamurlu ve etli yemek~
 Üzerinde etler olan ve çok lezzetli görünen bir hamur dilimi burada~
-food~
+wheat~
 food 0 A
 15 15 0 0 0
 0 10 10 P
@@ -685,7 +685,7 @@ food 0 A
 sandviç~
 bir parmak sandviç~
 Bir parmak sandviç burada~
-food~
+wheat~
 food 0 A
 20 20 0 0 0
 0 20 18 P
@@ -1056,7 +1056,7 @@ drink 0 A
 yolculuk ekmeði~
 bir yolculuk ekmeði~
 Bir somun yolculuk ekmeði burada~
-food~
+wheat~
 food 0 A
 25 32 0 0 0
 0 10 50 P

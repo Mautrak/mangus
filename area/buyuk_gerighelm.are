@@ -569,7 +569,7 @@ ABGT CDF 60
 tuhaf bitkiler yeþil demet~
 bir bitki kümesi~
 Bir tuhaf bitki kümesi burada yetiþmiþ.~
-food~
+wheat~
 pill 0 A
 11 'detect hidden' 'acute vision' 'detect invis' 'poison'
 5 10 494 P
@@ -581,7 +581,7 @@ pill 0 A
 elma~
 bir elma~
 Bir elma burada duruyor.~
-food~
+wheat~
 food 0 A
 20 20 0 0 0
 1 1 2 P
@@ -589,7 +589,7 @@ food 0 A
 elmalý turta~
 bir elmalý turta~
 Bir elmalý turta burada.~
-food~
+wheat~
 food 0 A
 40 40 0 0 0
 1 4 10 P
@@ -597,7 +597,7 @@ food 0 A
 pancar~
 bir pancar~
 Burada bir pancar yetiþmiþ.~
-food~
+wheat~
 food 0 A
 50 50 0 A 0
 1 4 40 P
@@ -605,7 +605,7 @@ food 0 A
 havuç~
 bir havuç~
 Bir havuç burada duruyor.~
-food~
+wheat~
 food 0 A
 20 20 0 0 0
 1 4 10 P
@@ -629,7 +629,7 @@ drink 0 A
 kuvvetlendirici bitkiler kýrmýzý demet~
 bir demet kýrmýzý bitki~
 Bir demet kuvvetlendirici bitki burada yetiþmiþ.~
-food~
+wheat~
 pill 0 A
 2 'giant strength' 'refresh' 'bless' ''
 1 15 855 P
@@ -637,7 +637,7 @@ pill 0 A
 þifalý bitkiler yeþil demet~
 bir demet yeþil bitki~
 Bir demet þifalý bitki burada yetiþmiþ.~
-food~
+wheat~
 pill 0 A
 1 'cure critical' 'remove curse' 'cure poison' 'cure disease'
 1 20 437 P
@@ -645,7 +645,7 @@ pill 0 A
 ceset süs balýðý cesedi~
 bir süs balýðý cesedi~
 Bir süs balýðý cesedi burada. Tek yaptýðý ölü gibi uzanmak.~
-food~
+meat~
 food 0 A
 4 4 0 0 0
 1 10 0 P
@@ -653,7 +653,7 @@ food 0 A
 ceset altýn balýðý cesedi~
 bir altýn balýðý cesedi~
 bir altýn balýðý cesedi burada.  Öleli epey bir süre olmuþ..~
-food~
+meat~
 food 0 A
 5 5 0 0 0
 1 10 0 P
@@ -1220,7 +1220,7 @@ A
 garip bitkiler yeþil küme~
 bir bitki kümesi~
 Yeþil renkli garip bir bitki kümesi burada yetiþmiþ.~
-food~
+wheat~
 pill G A
 1 'detect magic' 'fly' 'word of recall' 'pass door'
 1 1 469 P

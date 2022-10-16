@@ -445,6 +445,7 @@ void	load_helps	args( ( FILE *fp ) );
 void    load_omprogs    args( ( FILE *fp ) );
 void 	load_new_mobiles	args( ( FILE *fp ) );
 void	load_old_obj	args( ( FILE *fp ) );
+void	load_new_old_obj	args( ( FILE *fp ) );
 void 	load_objects	args( ( FILE *fp ) );
 void 	load_new_objects	args( ( FILE *fp ) );
 void	load_resets	args( ( FILE *fp ) );
@@ -609,6 +610,7 @@ void boot_db( void )
 		else if ( !str_cmp( word, "HELPS"    ) ) load_helps   (fpArea);
 		else if ( !str_cmp( word, "NEW_MOBILES"  ) ) load_new_mobiles (fpArea);
 		else if ( !str_cmp( word, "OBJOLD"   ) ) load_old_obj (fpArea);
+        else if ( !str_cmp( word, "NEW_OBJOLD"   ) ) load_new_old_obj (fpArea);
 	  	else if ( !str_cmp( word, "OBJECTS"  ) ) load_objects (fpArea);
 		else if ( !str_cmp( word, "NEW_OBJECTS"  ) ) load_new_objects (fpArea);
 		else if ( !str_cmp( word, "RESETS"   ) ) load_resets  (fpArea);
@@ -820,6 +822,155 @@ void load_old_obj( FILE *fp )
 	pObjIndex			= (OBJ_INDEX_DATA *)alloc_perm( sizeof(*pObjIndex) );
 	pObjIndex->vnum			= vnum;
 	pObjIndex->random_object		= FALSE;
+	pObjIndex->new_format		= FALSE;
+	pObjIndex->reset_num	 	= 0;
+	pObjIndex->name			= fread_string( fp );
+	pObjIndex->short_descr		= fread_string( fp );
+	pObjIndex->description		= fread_string( fp );
+	/* Action description */	  fread_string( fp );
+
+	pObjIndex->material		= (char*)"copper";
+	pObjIndex->short_descr[0]	= LOWER(pObjIndex->short_descr[0]);
+	pObjIndex->description[0]	= UPPER(pObjIndex->description[0]);
+	pObjIndex->material		= str_dup("");
+
+	pObjIndex->item_type		= fread_number( fp );
+	pObjIndex->extra_flags		= fread_flag( fp );
+	pObjIndex->wear_flags		= fread_flag( fp );
+	pObjIndex->value[0]		= fread_number( fp );
+	pObjIndex->value[1]		= fread_number( fp );
+	pObjIndex->value[2]		= fread_number( fp );
+	pObjIndex->value[3]		= fread_number( fp );
+	pObjIndex->value[4]		= 0;
+	pObjIndex->level		= 0;
+	pObjIndex->condition 		= 100;
+	pObjIndex->weight		= fread_number( fp );
+	pObjIndex->cost			= fread_number( fp );	/* Unused */
+	/* Cost per day */		  fread_number( fp );
+	pObjIndex->limit		= -1;
+	pObjIndex->oprogs		= NULL;
+
+	if (pObjIndex->item_type == ITEM_WEAPON)
+	{
+	    if (is_name((char*)"two",pObjIndex->name)
+	    ||  is_name((char*)"two-handed",pObjIndex->name)
+	    ||  is_name((char*)"claymore",pObjIndex->name)
+      ||  is_name((char*)"iki-el",pObjIndex->name)
+      ||  is_name((char*)"ikiel",pObjIndex->name)
+      ||  is_name((char*)"çift-el",pObjIndex->name))
+		SET_BIT(pObjIndex->value[4],WEAPON_TWO_HANDS);
+	}
+
+	for ( ; ; )
+	{
+	    char letter;
+
+	    letter = fread_letter( fp );
+
+	    if ( letter == 'A' )
+	    {
+		AFFECT_DATA *paf;
+
+		paf			= (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
+		paf->where		= TO_OBJECT;
+		paf->type		= -1;
+		paf->level		= 20; /* RT temp fix */
+		paf->duration		= -1;
+		paf->location		= fread_number( fp );
+		paf->modifier		= fread_number( fp );
+		paf->bitvector		= 0;
+		paf->next		= pObjIndex->affected;
+		pObjIndex->affected	= paf;
+		top_affect++;
+	    }
+
+	    else if ( letter == 'E' )
+	    {
+		EXTRA_DESCR_DATA *ed;
+
+		ed			= (EXTRA_DESCR_DATA *)alloc_perm( sizeof(*ed) );
+		ed->keyword		= fread_string( fp );
+		ed->description		= fread_string( fp );
+		ed->next		= pObjIndex->extra_descr;
+		pObjIndex->extra_descr	= ed;
+		top_ed++;
+	    }
+
+	    else
+	    {
+		ungetc( letter, fp );
+		break;
+	    }
+	}
+
+        /* fix armors */
+        if (pObjIndex->item_type == ITEM_ARMOR)
+        {
+            pObjIndex->value[1] = pObjIndex->value[0];
+            pObjIndex->value[2] = pObjIndex->value[1];
+        }
+
+	/*
+	 * Translate spell "slot numbers" to internal "skill numbers."
+	 */
+	switch ( pObjIndex->item_type )
+	{
+	case ITEM_PILL:
+	case ITEM_POTION:
+	case ITEM_SCROLL:
+	    pObjIndex->value[1] = slot_lookup( pObjIndex->value[1] );
+	    pObjIndex->value[2] = slot_lookup( pObjIndex->value[2] );
+	    pObjIndex->value[3] = slot_lookup( pObjIndex->value[3] );
+	    pObjIndex->value[4] = slot_lookup( pObjIndex->value[4] );
+	    break;
+
+	case ITEM_STAFF:
+	case ITEM_WAND:
+	    pObjIndex->value[3] = slot_lookup( pObjIndex->value[3] );
+	    break;
+	}
+
+	iHash			= vnum % MAX_KEY_HASH;
+	pObjIndex->next		= obj_index_hash[iHash];
+	obj_index_hash[iHash]	= pObjIndex;
+	top_obj_index++;
+    }
+
+    return;
+}
+
+void load_new_old_obj( FILE *fp )
+{
+    OBJ_INDEX_DATA *pObjIndex;
+
+    for ( ; ; )
+    {
+	sh_int vnum;
+	char letter;
+	int iHash;
+
+	letter				= fread_letter( fp );
+	if ( letter != '#' )
+	{
+	    bug( "Load_old_objects: # not found.", 0 );
+	    exit( 1 );
+	}
+
+	vnum				= fread_number( fp );
+	if ( vnum == 0 )
+	    break;
+
+	fBootDb = FALSE;
+	if ( get_obj_index( vnum ) != NULL )
+	{
+	    bug( "Load_old_objects: vnum %d duplicated.", vnum );
+	    exit( 1 );
+	}
+	fBootDb = TRUE;
+
+	pObjIndex			= (OBJ_INDEX_DATA *)alloc_perm( sizeof(*pObjIndex) );
+	pObjIndex->vnum			= vnum;
+	pObjIndex->random_object		= TRUE;
 	pObjIndex->new_format		= FALSE;
 	pObjIndex->reset_num	 	= 0;
 	pObjIndex->name			= fread_string( fp );

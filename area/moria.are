@@ -455,7 +455,7 @@ A
 mantar~
 bir mantar~
 Küçük bir mantar burada.~
-food~
+meat~
 food 0 A
 2 2 0 1 0
 0 10 0 G
@@ -606,7 +606,7 @@ It looks informative.
 balçýk küf~
 yeþil bir küf balçýðý~
 Yeþil bir küf balçýðý burada. Bu gerçekten KÖTÜ kokuyor.~
-food~
+wheat~
 food P A
 24 24 0 0 0
 0 10 0 G
@@ -618,7 +618,7 @@ It wasn't meant to be food, - Certainly not for humans.
 balçýk küf~
 yeþil bir küf balçýðý~
 Yeþil bir küf balçýðý burada. Bu gerçekten KÖTÜ kokuyor.~
-food~
+wheat~
 food P A
 24 24 0 1 0
 0 10 0 G

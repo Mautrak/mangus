@@ -697,7 +697,7 @@ This vicious little Goblin weapon would make a GREAT backstabbing weapon...
 cheese~
 a piece of sweet-smelling cheese~
 A piece of sweet-smelling cheese is here.~
-food~
+wheat~
 food 0 AO
 5 5 0 0 0
 0 10 5 P
@@ -1074,7 +1074,7 @@ boots.
 eggs~
 some pickled eggs~
 Some pickled eggs have fallen out of their jar.~
-food~
+meat~
 food 0 A
 5 5 0 0 0
 0 5 10 P

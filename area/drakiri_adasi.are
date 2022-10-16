@@ -1118,7 +1118,7 @@ skull:
 alevi denge gümüþ~
 denge alevi~
 Parlak gümüþ bir alev yanýyor.~
-fire~
+platinum~
 light AFIJK A
 0 0 -1 0 0
 89 0 55000 P
@@ -1156,7 +1156,7 @@ A
 derin indigo hapý~
 derin indigo hapý~
 Derin bir indigo hapý burada bekliyor.~
-food~
+wheat~
 pill 0 A
 65 'sanctuary' 'bless' '' ''
 55 10 850 P
@@ -1164,7 +1164,7 @@ pill 0 A
 yeþil enerji hapý~
 enerji hapý~
 Yeþil bir hap enerjiyle parlýyor.~
-food~
+wheat~
 pill B A
 65 'haste' 'enhanced armor' '' ''
 55 10 500 P
@@ -1505,7 +1505,7 @@ A
 baykuþun gözleri~
 Baykuþun gözleri~
 Tüylerle bezenmiþ bir çift göz burada dinleniyor.~
-feathers~
+feather~
 armor GI AE
 28 28 27 24 0
 85 10 9000 P
@@ -2574,7 +2574,7 @@ A
 yumuþak hap~
 yumuþak hap~
 Garip görünüþlü bir hap burada bekliyor.~
-food~
+wheat~
 pill B A
 61 'teleport' 'curse' 'heal' 'invisibility'
 55 10 9300 P

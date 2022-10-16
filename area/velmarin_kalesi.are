@@ -494,7 +494,7 @@ sword 5 10 pierce 0
 ýstakoz~
 lezzetli görünen bir ýstakoz~
 lezzetli görünen bir ýstakoz burada yenilmeyi bekliyor.~
-food~
+meat~
 food 0 A
 7 7 0 0 0
 30 50 5088 G
@@ -502,7 +502,7 @@ food 0 A
 Havyar~
 biraz havyar~
 Biraz havyar burada aðzýnýn sulanmasýna sebep oluyor.~
-food~
+meat~
 food 0 A
 2 2 0 0 0
 31 250 5189 G

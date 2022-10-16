@@ -956,7 +956,7 @@ dilim kek~
 dilim kek~
 Bir dilim kek görüyorsun.
 ~
-food~
+wheat~
 food 0 1
 4 4 0 0 0
 0 1 3 P
@@ -965,7 +965,7 @@ dürüm~
 dürüm~
 Bir dürüm görüyorsun.
 ~
-food~
+wheat~
 food 0 1
 5 5 0 0 0
 0 1 1 P
@@ -974,7 +974,7 @@ peynirli sandviç~
 peynirli sandviç~
 Peynirli bir sandviç görüyorsun.
 ~
-food~
+wheat~
 food 0 1
 5 5 0 0 0
 0 1 3 P
@@ -983,7 +983,7 @@ food 0 1
 çiftli ekmek~
 Büyükçe bir ekmek görüyorsun!
 ~
-food~
+wheat~
 food 0 1
 24 24 0 0 0
 0 3 3 P
@@ -1008,7 +1008,7 @@ kirli giyotin~
 kirli giyotin~
 Keskin býçaðýyla kirli bir giyotin görüyorsun.
 ~
-unknown~
+iron~
 container 0 0
 100 1 0 0 100
 0 0 0 P

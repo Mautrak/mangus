@@ -123,4 +123,5 @@ struct material_type
     bool silent_ok;
     bool swim_ok;
     sh_int weight_pt;
+    int decay_pt;
 };

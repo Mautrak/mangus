@@ -263,12 +263,12 @@ unique~
 #0
 
 
-#OBJOLD
+#NEW_OBJOLD
 #15700
 robes~
 some black robes~
 Some black robes have been left here.~
-~
+leather~
 9 1|64|512 1|1024
 0 0 0 0
 5 0 0
@@ -613,8 +613,8 @@ flind bar~
 a flind bar~
 A flind bar has been left here.~
 ~
-9 512 1|8192
-0 0 0 7
+5 512 1|8192
+0 0 0 0
 5 0 0
 A
 19 5

@@ -363,7 +363,7 @@ container 0 A
 yerfýstýðý~
 yerfýstýðý~
 Yerde bir avuç kadar yer fýstýðý görüyorsun.~
-food~
+wheat~
 food 0 A
 16 16 0 0 0
 0 90 0 P
@@ -441,7 +441,7 @@ A
 muz~
 muz~
 Bir muz yenilmeyi bekliyor.~
-food~
+wheat~
 food 0 A
 6 6 0 0 0
 0 50 0 P

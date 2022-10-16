@@ -131,7 +131,7 @@ int obj_random_paf_find_available_location(OBJ_DATA *obj)
 int obj_random_paf_find_available_resistance(OBJ_DATA *obj)
 {
 	AFFECT_DATA *paf;
-	int random_number = number_range(1,23); //str,int,wis,dex,con,cha
+	int random_number = number_range(1,23);
 	int random_res = 0;
 	
 	switch(random_number)
@@ -219,34 +219,33 @@ int obj_random_paf_find_available_vulnerability(OBJ_DATA *obj)
 int obj_random_paf_find_available_immunity(OBJ_DATA *obj)
 {
 	AFFECT_DATA *paf;
-	int random_number = number_range(1,23); //str,int,wis,dex,con,cha
+	int random_number = number_range(1,21);
 	int random_imm = 0;
 	
 	switch(random_number)
 	{
+		// weapon ve magic imm olmasin.
 		case 1:		random_imm = IMM_SUMMON; break;
 		case 2:		random_imm = IMM_CHARM; break;
-		case 3:		random_imm = IMM_MAGIC; break;
-		case 4:		random_imm = IMM_WEAPON; break;
-		case 5:		random_imm = IMM_BASH; break;
-		case 6:		random_imm = IMM_PIERCE; break;
-		case 7:		random_imm = IMM_SLASH; break;
-		case 8:		random_imm = IMM_FIRE; break;
-		case 9:		random_imm = IMM_COLD; break;
-		case 10:	random_imm = IMM_LIGHTNING; break;
-		case 11:	random_imm = IMM_ACID; break;
-		case 12:	random_imm = IMM_POISON; break;
-		case 13:	random_imm = IMM_NEGATIVE; break;
-		case 14:	random_imm = IMM_HOLY; break;
-		case 15:	random_imm = IMM_ENERGY; break;
-		case 16:	random_imm = IMM_MENTAL; break;
-		case 17:	random_imm = IMM_DISEASE; break;
-		case 18:	random_imm = IMM_DROWNING; break;
-		case 19:	random_imm = IMM_LIGHT; break;
-		case 20:	random_imm = IMM_SOUND; break;
-		case 21:	random_imm = IMM_WOOD; break;
-		case 22:	random_imm = IMM_SILVER; break;
-		case 23:	random_imm = IMM_IRON; break;
+		case 3:		random_imm = IMM_BASH; break;
+		case 4:		random_imm = IMM_PIERCE; break;
+		case 5:		random_imm = IMM_SLASH; break;
+		case 6:		random_imm = IMM_FIRE; break;
+		case 7:		random_imm = IMM_COLD; break;
+		case 8:		random_imm = IMM_LIGHTNING; break;
+		case 9:		random_imm = IMM_ACID; break;
+		case 10:	random_imm = IMM_POISON; break;
+		case 11:	random_imm = IMM_NEGATIVE; break;
+		case 12:	random_imm = IMM_HOLY; break;
+		case 13:	random_imm = IMM_ENERGY; break;
+		case 14:	random_imm = IMM_MENTAL; break;
+		case 15:	random_imm = IMM_DISEASE; break;
+		case 16:	random_imm = IMM_DROWNING; break;
+		case 17:	random_imm = IMM_LIGHT; break;
+		case 18:	random_imm = IMM_SOUND; break;
+		case 19:	random_imm = IMM_WOOD; break;
+		case 20:	random_imm = IMM_SILVER; break;
+		case 21:	random_imm = IMM_IRON; break;
 		default:	random_imm = IMM_IRON; break;
 	}
 	
@@ -451,14 +450,31 @@ int obj_random_cost(int level)
 
 int find_material_index(char *material_name)
 {
-	for(int i=0;i<=MAX_MATERIALS;i++)
+	for(int i=0;i<MAX_MATERIALS-1;i++)
 	{
 		if(!strcmp(material_table[i].name,material_name))
 			return i;
 	}
 	// material bulunamadi. NULL'u gonder.
-	bugf( (char*)"Find material: Unknown material name '%s'", material_name );
+	bugf( (char*)"Find material index: Unknown material name '%s'", material_name );
 	return 66;
+}
+
+int find_material_decay_days(OBJ_DATA *obj)
+{
+	for(int i=0;i<MAX_MATERIALS-1;i++)
+	{
+		if(!strcmp(material_table[i].name,obj->material))
+		{
+			if(IS_WEAPON_STAT(obj,WEAPON_KATANA))
+				return material_table[i].decay_pt * 5;
+			else
+				return material_table[i].decay_pt;
+		}
+	}
+	// material bulunamadi. NULL'u gonder.
+	bugf( (char*)"Find material decay days: Unknown material name for %d '%s'", obj->pIndexData->vnum, obj->material );
+	return 240;
 }
 
 void obj_random_weight(OBJ_DATA *obj)
@@ -639,7 +655,7 @@ void obj_random_material(OBJ_DATA *obj)
 			if(IS_SET(obj->wear_flags, ITEM_WEAR_ABOUT))
 			{
 				while(1){
-					material = number_range(0,MAX_MATERIALS);
+					material = number_range(0,MAX_MATERIALS-1);
 					if( material_table[material].textile_ok == TRUE )
 					{
 						obj->material = str_dup(material_table[material].name);
@@ -650,7 +666,7 @@ void obj_random_material(OBJ_DATA *obj)
 			else
 			{
 				while(1){
-					material = number_range(0,MAX_MATERIALS);
+					material = number_range(0,MAX_MATERIALS-1);
 					if( material_table[material].armor_ok == TRUE )
 					{
 						obj->material = str_dup(material_table[material].name);
@@ -661,7 +677,7 @@ void obj_random_material(OBJ_DATA *obj)
 			break;
 		case ITEM_WEAPON:
 			while(1){
-				material = number_range(0,MAX_MATERIALS);
+				material = number_range(0,MAX_MATERIALS-1);
 				if( material_table[material].weapon_ok == TRUE )
 				{
 					obj->material = str_dup(material_table[material].name);
@@ -672,7 +688,7 @@ void obj_random_material(OBJ_DATA *obj)
 		case ITEM_FOOD:
 		case ITEM_PILL:
 			while(1){
-				material = number_range(0,MAX_MATERIALS);
+				material = number_range(0,MAX_MATERIALS-1);
 				if( material_table[material].food_ok == TRUE )
 				{
 					obj->material = str_dup(material_table[material].name);
@@ -686,7 +702,7 @@ void obj_random_material(OBJ_DATA *obj)
 		case ITEM_SCROLL:
 		case ITEM_MAP:
 			while(1){
-				material = number_range(0,MAX_MATERIALS);
+				material = number_range(0,MAX_MATERIALS-1);
 				if( material_table[material].scroll_ok == TRUE )
 				{
 					obj->material = str_dup(material_table[material].name);
@@ -696,7 +712,7 @@ void obj_random_material(OBJ_DATA *obj)
 			break;
 		case ITEM_CLOTHING:
 			while(1){
-				material = number_range(0,MAX_MATERIALS);
+				material = number_range(0,MAX_MATERIALS-1);
 				if( material_table[material].textile_ok == TRUE )
 				{
 					obj->material = str_dup(material_table[material].name);
@@ -707,7 +723,7 @@ void obj_random_material(OBJ_DATA *obj)
 		case ITEM_CONTAINER:
 		case ITEM_DRINK_CON:
 			while(1){
-				material = number_range(0,MAX_MATERIALS);
+				material = number_range(0,MAX_MATERIALS-1);
 				if( material_table[material].container_ok == TRUE )
 				{
 					obj->material = str_dup(material_table[material].name);

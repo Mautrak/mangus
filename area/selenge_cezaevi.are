@@ -267,7 +267,7 @@ karasý zift yüzük muhafýz~
 zift karasý bir yüzük~
 Kara bir yüzük burada unutulmuþ.
 ~
-unknown~
+platinum~
 armor ABFG AB
 18 18 19 10 0
 30 5 1000 P
@@ -280,7 +280,7 @@ siyah hap~
 siyah hap~
 Siyah bir hap görüyorsun, yerde tozlanýyor.
 ~
-unknown~
+wheat~
 pill 0 A
 10 'cure light' 'cure serious' 'sanctuary' ''
 5 20 500 P
@@ -399,7 +399,7 @@ sýçan eti~
 sýçan eti~
 Lezzetli bir sýçan eti parçasý burada duruyor.
 ~
-food~
+meat~
 food 0 A
 8 6 0 A 0
 0 1 0 P
@@ -844,7 +844,7 @@ muzlu pasta~
 muzlu pasta~
 Bir paket muzlu pasta burada býrakýlmýþ.
 ~
-food~
+meat~
 food H A
 6 6 0 0 0
 0 5 0 P

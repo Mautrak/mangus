@@ -909,7 +909,7 @@ food 0 A
 turta~
 turta~
 Bir turta burada býrakýlmýþ.~
-food~
+wheat~
 food 0 A
 20 40 0 0 0
 0 20 22 P
@@ -930,7 +930,7 @@ buraya konmuþ.
 ekmek~
 ekmek~
 Bir dilim ekmek burada býrakýlmýþ, hem de bayat deðil.~
-food~
+wheat~
 food 0 A
 18 12 0 0 0
 0 10 9 P
@@ -938,7 +938,7 @@ food 0 A
 sandviç~
 sandviç~
 Sýcak bir sandviç burada, çok da lezzetli görünüyor.~
-food~
+wheat~
 food 0 A
 4 8 0 0 0
 0 10 16 P
@@ -946,7 +946,7 @@ food 0 A
 kurabiye~
 kurabiye~
 Büyük bir parça kurabiye burada býrakýlmýþ.~
-food~
+wheat~
 food 0 A
 8 10 0 0 0
 0 10 11 P
@@ -954,7 +954,7 @@ food 0 A
 çilek pasta~
 çilekli pasta~
 Lezzetli bir çilekli pasta burada býrakýlmýþ.~
-food~
+wheat~
 food 0 A
 8 6 0 0 0
 0 10 5 P
@@ -1878,7 +1878,7 @@ Soðuk algýnlýðýna ve gribe bire bir!
 kase güveç yahni~
 bir kase güveç yahnisi~
 Daha fýrýndan yeni çýkmýþ güveç yahnisinden tüten dumanlarý görebiliyorsun.~
-food~
+meat~
 food 0 A
 25 25 0 0 0
 0 30 14 P
@@ -1890,7 +1890,7 @@ kase güveç yahni~
 bisküvi~
 bisküvi~
 Tereyað kaplý lezzetli bir bisküvi burada duruyor.~
-food~
+wheat~
 food 0 A
 4 3 0 0 0
 0 10 5 P
@@ -2719,7 +2719,7 @@ key OY 0
 biftek dilimi~
 bir dilim biftek~
 Bir dilim biftek burada unutulmuþ.~
-food~
+meat~
 food 0 A
 20 40 0 0 0
 0 15 100 P
@@ -2727,7 +2727,7 @@ food 0 A
 bütün tavuk~
 bir bütün tavuk~
 Temizlenmiþ bütün bir tavuk burada býrakýlmýþ.~
-food~
+meat~
 food 0 A
 18 12 0 0 0
 0 11 87 P

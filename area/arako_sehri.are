@@ -377,7 +377,7 @@ pill 0 A
 taze kurt paketi~
 taze kurt paketi~
 Ýçinde baharatlý ve taze kurtlarýn olduðu bir paket burada duruyor.~
-food~
+meat~
 food 0 A
 20 20 0 0 0
 1 10 5 P
@@ -385,7 +385,7 @@ food 0 A
 kase baharatlý larva yemek~
 bir kase baharatlý larva~
 Güzel kokular yayan bir larva yemeði burada duruyor.~
-food~
+meat~
 food 0 A
 50 50 0 0 0
 2 1 30 P
@@ -393,7 +393,7 @@ food 0 A
 baharatlý kemirgen yahnisi~
 baharatlý kemirgen yahnisi~
 Yerde duran yahninin kokusu iþtahýný kabartýyor.~
-food~
+meat~
 food 0 A
 40 40 0 0 0
 3 1 25 P
@@ -401,7 +401,7 @@ food 0 A
 sýçan yemek sebzeli~
 sýçan yemeði~
 Yerde sebzeli sýçan yemeði duruyor.~
-food~
+meat~
 food 0 A
 30 30 0 0 0
 1 1 20 P
@@ -409,7 +409,7 @@ food 0 A
 raw worms rice~
 raw worms with rice~
 Your mouth waters at the sight of raw worms.~
-food~
+meat~
 food 0 A
 30 30 0 0 0
 1 1 20 P

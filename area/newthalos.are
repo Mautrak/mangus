@@ -1348,7 +1348,7 @@ light 0 AO
 cheese~
 a hunk of cheese~
 A hunk of cheese lies here.~
-food~
+wheat~
 food 0 A
 5 5 0 0 0
 0 10 4 P
@@ -1356,7 +1356,7 @@ food 0 A
 bread~
 a bread~
 A bread lies here.~
-food~
+wheat~
 food 0 A
 5 3 0 0 0
 0 10 6 P
@@ -1364,7 +1364,7 @@ food 0 A
 dry rations~
 some dry rations~
 Some dry rations lie here.~
-food~
+wheat~
 food 0 A
 15 20 0 0 0
 0 20 24 P
@@ -1372,7 +1372,7 @@ food 0 A
 iron rations~
 some iron rations~
 A tin of iron rations lies here.~
-food~
+wheat~
 food 0 A
 18 30 0 0 0
 0 10 50 P
@@ -1380,7 +1380,7 @@ food 0 A
 nuts~
 some nuts~
 Some nuts lies scattered on the ground.~
-food~
+wheat~
 food 0 A
 1 1 0 0 0
 0 10 3 P
@@ -1468,7 +1468,7 @@ clothing 0 AK
 egg~
 an egg~
 An egg lies here.~
-food~
+meat~
 food 0 A
 2 2 0 0 0
 0 10 4 P
@@ -1492,7 +1492,7 @@ food 0 A
 fig~
 a fig~
 A fig lies here.~
-food~
+wheat~
 food 0 A
 2 1 0 0 0
 0 10 3 P
@@ -1500,7 +1500,7 @@ food 0 A
 dates~
 some dates~
 A bunch of dates lies here.~
-food~
+wheat~
 food 0 A
 2 2 0 0 0
 0 10 6 P
@@ -1726,7 +1726,7 @@ exotic 1 5 thwack 0
 sesame seed~
 a sesame seed~
 A sesame seed lies here.~
-food~
+wheat~
 key 0 AO
 0 0 0 0 0
 0 30 1 P

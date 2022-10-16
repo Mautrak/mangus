@@ -577,7 +577,7 @@ volkanik kol bantlarý~
 Volkanik kol bantlarý~
 Ateþten yapýlmýþ kol bantlarý yerde için için yanýyor.
 ~
-fire~
+coal~
 armor AGQ AI
 25 25 25 25 0
 64 5 1000 P
@@ -609,7 +609,7 @@ muz salkýmý~
 bir muz salkýmý~
 Olgun muzlarla dolu bir salkým burada- peki maymun nerede?
 ~
-food~
+wheat~
 food 0 A
 5 5 0 0 0
 0 2 10 P
@@ -1041,7 +1041,7 @@ mide~
 bir mide~
 Yerde duran kanlý bir mide, karýncalar tarafýndan afiyetle tüketiliyor.
 ~
-food~
+meat~
 pill 0 A
 35 'heal' '' '' ''
 25 2 4000 P
@@ -1111,7 +1111,7 @@ göz kartalýn gözü~
 kartal gözü~
 Üzerinde tek bir siyah nokta olan yumuþak bir kehribar taþý görüyorsun.
 ~
-food~
+meat~
 staff G AO
 40 40 40 'infravision' 0
 40 1 10 P

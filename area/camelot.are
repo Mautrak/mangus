@@ -732,7 +732,7 @@ bileklik ak~
 Ak Bileklik~
 Kör edici parýltýda ak bir bileklik burada duruyor!
 ~
-admantite~
+adamantite~
 armor ABGK AM
 11 11 11 11 0
 40 2 3000 P
@@ -786,7 +786,7 @@ kýlýç excalibur~
 excalibur~
 Güzel ejderha iþlemeli bir kýlýç burada duruyor!
 ~
-admantite~
+adamantite~
 weapon BKL AN
 sword 5 8 slice D
 38 4 4500 P
@@ -1067,7 +1067,7 @@ asa ýþýk uðursuz~
 Uðursuz ýþýk yayan bir asa~
 Bir asa burada uðursuz ve karanlýk bir ýþýk yayýyor.
 ~
-admantite~
+adamantite~
 weapon ACEG AN
 staff 5 8 pierce C
 34 10 2500 P
@@ -1293,7 +1293,7 @@ yaþambiçici~
 Yaþambiçici~
 Mavi-siyah bir kýlýç yere çakýlmýþ.
 ~
-admantite~
+adamantite~
 weapon C AN
 sword 5 7 slash C
 32 20 3200 P
