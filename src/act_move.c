@@ -2400,6 +2400,143 @@ void do_track(CHAR_DATA *ch, char *argument)
 }
 
 
+void do_evolve_bear( CHAR_DATA *ch, char *argument )
+{
+    AFFECT_DATA af;
+    int level,duration;
+
+    if ( is_affected( ch, gsn_evolve_bear ) )
+    {
+      send_to_char("Daha fazla ayýlaþamazsýn!\n\r",ch);
+     return;
+    }
+
+    if ( !IS_NPC(ch)
+    &&   ch->level < skill_table[gsn_evolve_bear].skill_level[ch->iclass] )
+    {
+	send_to_char("Göðsünü çýkarýp olmayan pençelerini sallayarak bir ayý gibi görünmeye çalýþýyorsun.\n\r", ch );
+	return;
+    }
+
+    if ( get_skill(ch,gsn_evolve_bear) < 50 )
+	{
+    send_to_char("Git ve görevciden yardým al.\n\r",ch);
+	 return;
+	}
+    if ( is_affected(ch,gsn_evolve_bear) )
+	{
+    send_to_char("Daha fazla ayý olmak istiyorsan git bir ayý gibi davran.\n\r",ch);
+	 return;
+	}
+
+
+    if ( ch->in_room->sector_type != SECT_FIELD && ch->in_room->sector_type != SECT_FOREST &&
+         ch->in_room->sector_type != SECT_HILLS && ch->in_room->sector_type != SECT_MOUNTAIN )
+    {
+      send_to_char("Ayýya dönüþmek için orman, ova, tepe veya daðda olmalýsýn.\n\r",ch);
+      return;
+    }
+
+    level = ch->level;
+    duration = level / 10 ;
+    duration += 5;
+
+/* haste */
+    af.where     = TO_AFFECTS;
+    af.type      = gsn_evolve_bear;
+    af.level     = level;
+    af.duration  = duration;
+    af.location  = APPLY_DEX;
+    af.modifier  = 1 + (level /40);
+    af.bitvector = AFF_HASTE;
+    affect_to_char( ch, &af );
+
+/* giant strength + camouflage */
+    af.where     = TO_AFFECTS;
+    af.type      = gsn_evolve_bear;
+    af.level     = level;
+    af.duration  = duration;
+    af.location  = APPLY_STR;
+    af.modifier  = 1 + (level / 15);
+    af.bitvector = AFF_REGENERATION;
+    affect_to_char( ch, &af );
+
+/* size */
+    af.where     = TO_AFFECTS;
+    af.type      = gsn_evolve_bear;
+    af.level     = level;
+    af.duration  = duration;
+    af.location  = APPLY_SIZE;
+    af.modifier  = 1 + (level / 50 );
+    af.bitvector = AFF_CAMOUFLAGE;
+    affect_to_char( ch, &af );
+
+/* damroll */
+    af.where     = TO_AFFECTS;
+    af.type      = gsn_evolve_bear;
+    af.level     = level;
+    af.duration  = duration;
+    af.location  = APPLY_DAMROLL;
+    af.modifier  = ch->damroll;
+    af.bitvector = AFF_BERSERK;
+    affect_to_char( ch, &af );
+
+/* magic resistance */
+    af.where = TO_RESIST;
+    af.type = gsn_evolve_bear;
+    af.duration = duration;
+    af.level = level;
+    af.location = APPLY_NONE;
+    af.modifier = 0;
+    af.bitvector = RES_MAGIC;
+    affect_to_char(ch, &af);
+
+/* weapon resistance */
+    af.where = TO_RESIST;
+    af.type = gsn_evolve_bear;
+    af.duration = duration;
+    af.level = level;
+    af.location = APPLY_NONE;
+    af.modifier = 0;
+    af.bitvector = RES_WEAPON;
+    affect_to_char(ch, &af);
+
+/* cold immunity */
+    af.where = TO_IMMUNE;
+    af.type = gsn_evolve_bear;
+    af.duration = duration;
+    af.level = level;
+    af.location = APPLY_NONE;
+    af.modifier = 0;
+    af.bitvector = IMM_COLD;
+    affect_to_char(ch, &af);
+
+/* fire vuln */
+    af.where = TO_VULN;
+    af.type = gsn_evolve_bear;
+    af.duration = duration;
+    af.level = level;
+    af.location = APPLY_NONE;
+    af.modifier = 0;
+    af.bitvector = VULN_FIRE;
+    affect_to_char(ch, &af);
+
+/* bear flag */
+    af.where     = TO_ACT_FLAG;
+    af.type      = gsn_evolve_bear;
+    af.level     = level;
+    af.duration  = duration;
+    af.location  = APPLY_NONE;
+    af.modifier  = 0;
+    af.bitvector = PLR_BEAR;
+    affect_to_char( ch, &af );
+
+    send_to_char( "Ayýlaþtýðýný hissediyorsun.\n\r", ch );
+    act("$m tanýyamýyorsun.",ch,NULL,NULL,TO_ROOM);
+   return;
+}
+
+
 void do_vampire( CHAR_DATA *ch, char *argument )
 {
     AFFECT_DATA af;
@@ -3911,20 +4048,29 @@ char *find_way(CHAR_DATA *ch,ROOM_INDEX_DATA *rstart, ROOM_INDEX_DATA *rend)
 
 void do_human( CHAR_DATA *ch, char *argument )
 {
-    if (ch->iclass != CLASS_VAMPIRE)
+    if (ch->iclass != CLASS_VAMPIRE && ch->iclass != CLASS_RANGER )
     {
       send_to_char("Hý?\n\r",ch);
      return;
     }
 
-    if ( !IS_VAMPIRE(ch) )
+    if ( !IS_VAMPIRE(ch) && !IS_BEAR(ch) )
     {
-      send_to_char("Zaten insansýn.\n\r",ch);
+      send_to_char("Zaten kendi formundasýn.\n\r",ch);
      return;
     }
 
-   affect_strip(ch, gsn_vampire);
-   REMOVE_BIT(ch->act,PLR_VAMPIRE);
+    if (ch->iclass == CLASS_VAMPIRE )
+    {
+      affect_strip(ch, gsn_vampire);
+      REMOVE_BIT(ch->act,PLR_VAMPIRE);
+    }
+    else if (ch->iclass == CLASS_RANGER )
+    {
+      affect_strip(ch, gsn_evolve_bear);
+      REMOVE_BIT(ch->act,PLR_BEAR);
+    }
+
    send_to_char( "Gerçek ölçülerine dönüyorsun.\n\r", ch );
    return;
 }

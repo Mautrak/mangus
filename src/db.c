@@ -253,6 +253,7 @@ sh_int  gsn_hara_kiri;
 sh_int  gsn_mouse;
 sh_int  gsn_enhanced_armor;
 sh_int  gsn_vampire;
+sh_int  gsn_evolve_bear;
 sh_int  gsn_vampiric_bite;
 sh_int  gsn_light_res;
 sh_int  gsn_blink;

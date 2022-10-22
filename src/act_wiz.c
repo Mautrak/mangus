@@ -60,6 +60,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "merc.h"
+#include "magic.h"
 #include "recycle.h"
 #include "tables.h"
 #include "lookup.h"
@@ -153,47 +154,89 @@ void do_cabal_scan( CHAR_DATA *ch, char *argument )
 
 void do_objlist( CHAR_DATA *ch, char *argument )
 {
-    char arg[MAX_INPUT_LENGTH];
+    char arg1[MAX_INPUT_LENGTH];
+    char arg2[MAX_INPUT_LENGTH];
+    char arg3[MAX_INPUT_LENGTH];
     OBJ_DATA *obj;
     AFFECT_DATA *paf;
+    int altseviye = -1;
+    int ustseviye = -1;
 
-    argument = one_argument( argument, arg );
+    argument = one_argument( argument, arg1 );
+    argument = one_argument( argument, arg2 );
+    argument = one_argument( argument, arg3 );
 	
-	if ( arg[0] == '\0' )
+	if ( arg1[0] == '\0' )
 	{
-		printf_to_char(ch,"Argumanlar: imm, res\n\r" );
+		printf_to_char(ch,"Argumanlar: <imm|res> <altseviye> <ustseviye>\n\r" );
 		return;
 	}
 
-    if (!strcmp(arg, "imm"))
+    if ( arg2[0] != '\0' )
+    {
+        if( is_number(arg2) )
+        {
+            altseviye = atoi(arg2);
+        }
+        else
+        {
+            send_to_char("altseviye argümaný bir sayý olmalýdýr.\n\r",ch);
+            return;
+        }
+    }
+
+    if ( arg3[0] != '\0' )
+    {
+        if( is_number(arg3) )
+        {
+            ustseviye = atoi(arg3);
+        }
+        else
+        {
+            send_to_char("ustseviye argümaný bir sayý olmalýdýr.\n\r",ch);
+            return;
+        }
+    }
+
+    if (!strcmp(arg1, "imm"))
     {
         for( obj=object_list; obj!=NULL; obj = obj->next )
         {
+            if( altseviye >= 0 && obj->level < altseviye )
+                continue;
+            if( ustseviye >= 0 && obj->level > ustseviye )
+                continue;
+
             if(obj->pIndexData->random_object && obj->affected != NULL)
             {
                 for ( paf = obj->affected; paf != NULL; paf = paf->next )
                 {
                     if (paf->bitvector && paf->where == TO_IMMUNE)
                     {
-                        printf_to_char(ch,"%s, %d, %d, %s\n\r", obj->name, obj->pIndexData->vnum, obj->level, item_type_name(obj));
-                        printf_to_char(ch,"%s imm\n\r\n\r",imm_bit_name(paf->bitvector));
+                        spell_identify( 0, 0, ch, obj ,0);
+                        send_to_char("\n\r",ch);
                     }
                 }
             }
         }
     }
-    else if (!strcmp(arg, "res"))
+    else if (!strcmp(arg1, "res"))
     {
         for( obj=object_list; obj!=NULL; obj = obj->next )
         {
+            if( altseviye >= 0 && obj->level < altseviye )
+                continue;
+            if( ustseviye >= 0 && obj->level > ustseviye )
+                continue;
+
             if(obj->pIndexData->random_object && obj->affected != NULL)
             {
                 for ( paf = obj->affected; paf != NULL; paf = paf->next )
                 {
                     if (paf->bitvector && paf->where == TO_RESIST)
                     {
-                        printf_to_char(ch,"%s, %d, %d, %s\n\r", obj->name, obj->pIndexData->vnum, obj->level, item_type_name(obj));
-                        printf_to_char(ch,"%s res\n\r\n\r",imm_bit_name(paf->bitvector));
+                        spell_identify( 0, 0, ch, obj ,0);
+                        send_to_char("\n\r",ch);
                     }
                 }
             }

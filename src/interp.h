@@ -184,6 +184,7 @@ DECLARE_DO_FUN(	do_examine	);
 DECLARE_DO_FUN(	do_exits	);
 DECLARE_DO_FUN(	do_exlist		);
 DECLARE_DO_FUN( do_explode	);
+DECLARE_DO_FUN( do_evolve_bear	);
 DECLARE_DO_FUN( do_fade         );
 DECLARE_DO_FUN(	do_familya	);
 DECLARE_DO_FUN(	do_fill		);

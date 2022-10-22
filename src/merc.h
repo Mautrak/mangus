@@ -280,7 +280,7 @@ typedef void OPROG_FUN_AREA args((OBJ_DATA *obj));
 #define MAKSIMUM_LIMIT_IKSIR_HAP_PARSOMEN	2
 #define MAKSIMUM_LIMIT_EKIPMAN_KABAL 4
 #define MAX_SOCIALS		  256
-#define MAX_SKILL		  427
+#define MAX_SKILL		  428
 #define MAX_ALIAS		   20
 #define MAX_CLASS		   13
 #define MAX_PC_RACE		   9
@@ -865,6 +865,7 @@ struct	kill_data
 #define cc			268435456
 #define dd			536870912
 #define ee			1073741824
+#define ab          2147483648
 
 
 /* race table */
@@ -1845,10 +1846,12 @@ struct	kill_data
 #define PLR_VAMPIRE		(cc)
 #define PLR_HARA_KIRI		(dd)
 #define PLR_BLINK_ON		(ee)
+#define PLR_BEAR		(ab)
 
 
 #define IS_QUESTOR(ch)		(IS_SET((ch)->act , PLR_QUESTOR))
 #define IS_VAMPIRE(ch)		(!IS_NPC(ch) && IS_SET((ch)->act , PLR_VAMPIRE))
+#define IS_BEAR(ch)		(!IS_NPC(ch) && IS_SET((ch)->act , PLR_BEAR))
 #define IS_HARA_KIRI(ch)	(IS_SET((ch)->act , PLR_HARA_KIRI))
 #define CANT_CHANGE_TITLE(ch)	(IS_SET(ch->act , PLR_NO_TITLE))
 #define IS_BLINK_ON(ch)		(IS_SET((ch)->act , PLR_BLINK_ON))
@@ -2652,6 +2655,7 @@ extern sh_int  gsn_lion_call;
 extern sh_int  gsn_hara_kiri;
 extern sh_int  gsn_mouse;
 extern sh_int  gsn_enhanced_armor;
+extern sh_int  gsn_evolve_bear;
 extern sh_int  gsn_vampire;
 extern sh_int  gsn_vampiric_bite;
 extern sh_int  gsn_light_res;

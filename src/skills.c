@@ -585,6 +585,12 @@ void do_learn( CHAR_DATA *ch, char *argument )
 	 return;
 	}
 
+	if ( sn == gsn_evolve_bear )
+	{
+    send_to_char( "Bu konuda ancak görevci yardým edebilir.\n\r",ch);
+	 return;
+	}
+
 	argument = one_argument(argument,arg);
 
 	if ( (mob = get_char_room(ch,arg) ) == NULL)

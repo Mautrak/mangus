@@ -329,7 +329,7 @@ struct cabal_type cabal_table [] =
   { "Dövüþ sanatlarýnýn efendileri",	"öfke",	541,548,NULL 	},
   { "Þövalyeler", 		"þövalye",	522,524,NULL 	},
   { "Ormanlarýn efendileri", 		"aslan",		502,504,NULL 	},
-  { "Tüccarlar",	"avcý",	571,573,NULL 	}
+  { "Tüccarlar",	"tüccar",	571,573,NULL 	}
 };
 
 const   struct  prac_type    prac_table[] =

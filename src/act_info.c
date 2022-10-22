@@ -2376,7 +2376,7 @@ void do_whois (CHAR_DATA *ch, char *argument)
 	    continue;
 
 	if ( d->connected != CON_PLAYING ||
-(IS_VAMPIRE( d->character ) && !IS_IMMORTAL(ch) && (ch != d->character) ) )
+((IS_VAMPIRE( d->character ) || IS_BEAR( d->character ) ) && !IS_IMMORTAL(ch) && (ch != d->character) ) )
 	    continue;
 
 	wch = ( d->original != NULL ) ? d->original : d->character;
@@ -3661,108 +3661,229 @@ void do_identify( CHAR_DATA *ch, char *argument )
 		return;
 	}
 
-	for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
-	{
-		if (IS_NPC(rch) && rch->pIndexData->vnum == MOB_VNUM_SAGE)
-		{
-			break;
-		}
-	}
+  // AVCI (TURCCAR) kabali uyeleri de tanimlama yapabilsin.
+  // Ancak bunun icin para vs odemeyecek, kendi irfanlariyla tanimlama yapacaklar.
+  // Ilerde bu isin icine (avcilar icin) karizma veya bilgelik etkisi de ekleyelim.
+  // ya da siger oyuncular avci kabalindan biri odadayken tanimlama yapabilsinler
+  // ve odemeyi avci kabali uyesine yapsinlar.
+  if(ch->cabal != CABAL_HUNTER)
+  {
+    for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
+    {
+      if (IS_NPC(rch) && rch->pIndexData->vnum == MOB_VNUM_SAGE)
+      {
+        break;
+      }
+    }
 
-	if (!rch)
-	{
-		send_to_char(  "Buralarda o þeyden anlayan yok.\n\r", ch);
-		return;
-	}
-	
-	if(number_percent()<= get_skill(ch, gsn_haggle))
-	{
-		if(number_percent()>90)
-		{
-			cost = 10;
-		}
-		else
-		{
-			cost = 40;
-		}
-	}
+    if (!rch)
+    {
+      send_to_char(  "Buralarda o þeyden anlayan yok.\n\r", ch);
+      return;
+    }
+    
+    if(number_percent()<= get_skill(ch, gsn_haggle))
+    {
+      if(number_percent()>90)
+      {
+        cost = 10;
+      }
+      else
+      {
+        cost = 40;
+      }
+    }
 
-	if (IS_IMMORTAL(ch))
-	{
-		act( "$n sana bakýyor!\n\r", rch, obj, ch, TO_VICT );
-	}
-	else if (ch->silver < cost)
-	{
-		act( "$n $p'yi tanýmlamaya devam ediyor.",rch, obj, 0, TO_ROOM );
-		printf_to_char(ch,"Yeterli akçen yok.\n\r");
-		return;
-	}
-	else
-	{
-		ch->silver -= cost;
-		printf_to_char(ch,"Aldýðýn hizmet için %d akçe ödüyorsun.\n\r", cost);
-	}
+    if (IS_IMMORTAL(ch))
+    {
+      act( "$n sana bakýyor!\n\r", rch, obj, ch, TO_VICT );
+    }
+    else if (ch->silver < cost)
+    {
+      act( "$n $p'yi tanýmlamaya devam ediyor.",rch, obj, 0, TO_ROOM );
+      printf_to_char(ch,"Yeterli akçen yok.\n\r");
+      return;
+    }
+    else
+    {
+      ch->silver -= cost;
+      printf_to_char(ch,"Aldýðýn hizmet için %d akçe ödüyorsun.\n\r", cost);
+    }
 
-	act( "$n $p üzerine bilge bir bakýþ fýrlatýyor.", rch, obj, 0, TO_ROOM );
+    act( "$n $p üzerine bilge bir bakýþ fýrlatýyor.", rch, obj, 0, TO_ROOM );
+  }
 	spell_identify( 0, 0, ch, obj ,0);
 }
 
 
 void do_affects_col(CHAR_DATA *ch, char *argument )
 {
-    AFFECT_DATA *paf, *paf_last = NULL;
-    char buf[MAX_STRING_LENGTH];
-    bool found;
+  AFFECT_DATA *paf, *paf_last = NULL;
+  char buf[MAX_STRING_LENGTH];
+  bool found, firstAffect;
 
-    found = FALSE;
+  found = FALSE;
+  firstAffect = TRUE;
 
-    if ( ch->affected != NULL )
+  if ( ch->affected != NULL )
+  {
+    found = TRUE;
+    send_to_char( "Þunlardan etkileniyorsun:\n\r", ch );
+    for ( paf = ch->affected; paf != NULL; paf = paf->next )
     {
-      found = TRUE;
-      send_to_char( "Þunlardan etkileniyorsun:\n\r", ch );
-	for ( paf = ch->affected; paf != NULL; paf = paf->next )
-	{
-	    if (paf_last != NULL && paf->type == paf_last->type)
-		if (ch->level >= 20 )
-		    sprintf( buf, "                      ");
-		else
-		    continue;
-	    else
-      sprintf( buf, "%sBüyü%s: %s%-15s%s",
-		CLR_RED,CLR_WHITE_BOLD,CLR_YELLOW,
-		skill_table[paf->type].name[1] ,CLR_WHITE_BOLD);
+      if (paf_last != NULL && paf->type == paf_last->type)
+      {
+        if( firstAffect == TRUE )
+        {
+          sprintf( buf, "");
+          firstAffect = FALSE;
+        }
+        else
+        {
+          sprintf( buf, "                      ");
+        }
+      }
+      else
+      {
+        sprintf( buf, "%sEtki%s: %s%-16s%s",
+          CLR_RED,CLR_WHITE_BOLD,CLR_YELLOW,
+          skill_table[paf->type].name[1] ,CLR_WHITE_BOLD);
+      }
 
-	    send_to_char( buf, ch );
+      send_to_char( buf, ch );
 
-	    if ( ch->level >= 20 )
-	    {
-		sprintf( buf,
-      ": %s%s%s yönünü %s%d%s deðiþtirir",
-		    CLR_MAGENTA,affect_loc_name( paf->location ),CLR_WHITE_BOLD,
-		    CLR_MAGENTA,paf->modifier,CLR_WHITE_BOLD);
-		send_to_char( buf, ch );
-		if ( paf->duration == -1 || paf->duration == -2)
-    sprintf( buf, "%ssürekli%s" ,CLR_CYAN,CLR_WHITE);
-		else
-    sprintf( buf, "%s%d%s saat",
-			CLR_MAGENTA,paf->duration ,CLR_WHITE_BOLD);
-		send_to_char( buf, ch );
-	    }
-	    send_to_char( "\n\r", ch );
-	    paf_last = paf;
-	}
+      if ( paf->location != APPLY_NONE && paf->modifier != 0 )
+      {
+        printf_to_char( ch,
+          ": %s%s%s yönünü %s%d%s deðiþtirir",
+          CLR_MAGENTA,affect_loc_name( paf->location ),CLR_WHITE_BOLD,
+          CLR_MAGENTA,paf->modifier,CLR_WHITE_BOLD);
+        if ( paf->duration == -1 || paf->duration == -2)
+        {
+          printf_to_char( ch,"%ssürekli%s\n\r" ,CLR_CYAN,CLR_WHITE);
+        }
+        else
+        {
+          printf_to_char( ch,"%s%d%s saat\n\r",CLR_MAGENTA,paf->duration ,CLR_WHITE_BOLD);
+        }
+      }
+      else if (paf->bitvector)
+      {
+        switch(paf->where)
+        {
+            case TO_AFFECTS:
+                printf_to_char( ch,": %s%s%s etkisi ekler, ",CLR_MAGENTA,affect_bit_name(paf->bitvector),CLR_WHITE_BOLD);
+                if ( paf->duration == -1 || paf->duration == -2)
+                {
+                  printf_to_char( ch,"%ssürekli%s\n\r" ,CLR_CYAN,CLR_WHITE);
+                }
+                else
+                {
+                  printf_to_char( ch,"%s%d%s saat\n\r",CLR_MAGENTA,paf->duration ,CLR_WHITE_BOLD);
+                }
+                break;
+            case TO_OBJECT:
+                printf_to_char( ch,": %s%s%s eþya özelliði ekler, ",CLR_MAGENTA,extra_bit_name(paf->bitvector),CLR_WHITE_BOLD);
+                if ( paf->duration == -1 || paf->duration == -2)
+                {
+                  printf_to_char( ch,"%ssürekli%s\n\r" ,CLR_CYAN,CLR_WHITE);
+                }
+                else
+                {
+                  printf_to_char( ch,"%s%d%s saat\n\r",CLR_MAGENTA,paf->duration ,CLR_WHITE_BOLD);
+                }
+                break;
+            case TO_WEAPON:
+                printf_to_char( ch,": %s%s%s silah özelliði ekler, ",CLR_MAGENTA,weapon_bit_name(paf->bitvector),CLR_WHITE_BOLD);
+                if ( paf->duration == -1 || paf->duration == -2)
+                {
+                  printf_to_char( ch,"%ssürekli%s\n\r" ,CLR_CYAN,CLR_WHITE);
+                }
+                else
+                {
+                  printf_to_char( ch,"%s%d%s saat\n\r",CLR_MAGENTA,paf->duration ,CLR_WHITE_BOLD);
+                }
+                break;
+            case TO_IMMUNE:
+                printf_to_char( ch,": %s%s%s baðýþýklýðý ekler, ",CLR_MAGENTA,imm_bit_name(paf->bitvector),CLR_WHITE_BOLD);
+                if ( paf->duration == -1 || paf->duration == -2)
+                {
+                  printf_to_char( ch,"%ssürekli%s\n\r" ,CLR_CYAN,CLR_WHITE);
+                }
+                else
+                {
+                  printf_to_char( ch,"%s%d%s saat\n\r",CLR_MAGENTA,paf->duration ,CLR_WHITE_BOLD);
+                }
+                break;
+            case TO_RESIST:
+                printf_to_char( ch,": %s%s%s direnci ekler, ",CLR_MAGENTA,imm_bit_name(paf->bitvector),CLR_WHITE_BOLD);
+                if ( paf->duration == -1 || paf->duration == -2)
+                {
+                  printf_to_char( ch,"%ssürekli%s\n\r" ,CLR_CYAN,CLR_WHITE);
+                }
+                else
+                {
+                  printf_to_char( ch,"%s%d%s saat\n\r",CLR_MAGENTA,paf->duration ,CLR_WHITE_BOLD);
+                }
+                break;
+            case TO_VULN:
+                printf_to_char( ch,": %s%s%s dayanýksýzlýðý ekler, ",CLR_MAGENTA,imm_bit_name(paf->bitvector),CLR_WHITE_BOLD);
+                if ( paf->duration == -1 || paf->duration == -2)
+                {
+                  printf_to_char( ch,"%ssürekli%s\n\r" ,CLR_CYAN,CLR_WHITE);
+                }
+                else
+                {
+                  printf_to_char( ch,"%s%d%s saat\n\r",CLR_MAGENTA,paf->duration ,CLR_WHITE_BOLD);
+                }
+                break;
+            case TO_DETECTS:
+                printf_to_char( ch,": %s%s%s saptamasý ekler, ",CLR_MAGENTA,detect_bit_name(paf->bitvector),CLR_WHITE_BOLD);
+                if ( paf->duration == -1 || paf->duration == -2)
+                {
+                  printf_to_char( ch,"%ssürekli%s\n\r" ,CLR_CYAN,CLR_WHITE);
+                }
+                else
+                {
+                  printf_to_char( ch,"%s%d%s saat\n\r",CLR_MAGENTA,paf->duration ,CLR_WHITE_BOLD);
+                }
+                break;
+            case TO_ACT_FLAG:
+            case TO_RACE:
+                break;
+            default:
+                printf_to_char( ch,": %s%d-%d%s bilinmeyen etkisi ekler, ",CLR_MAGENTA,paf->where,paf->bitvector,CLR_WHITE_BOLD);
+                if ( paf->duration == -1 || paf->duration == -2)
+                {
+                  printf_to_char( ch,"%ssürekli%s\n\r" ,CLR_CYAN,CLR_WHITE);
+                }
+                else
+                {
+                  printf_to_char( ch,"%s%d%s saat\n\r",CLR_MAGENTA,paf->duration ,CLR_WHITE_BOLD);
+                }
+                break;
+        }
+      }
+      else
+      {
+        printf_to_char( ch,": %sBilinmeyen etki%s\n\r",CLR_MAGENTA,CLR_WHITE_BOLD);
+      }
+      paf_last = paf;
     }
+  }
 
-    if (!IS_NPC(ch) && (IS_SET(ch->act,PLR_GHOST)))
-    {
-      found = TRUE;
-      printf_to_char(ch,"{rHayalet{w: %d saat",ch->pcdata->ghost_mode_counter);
-    }
+  if (!IS_NPC(ch) && (IS_SET(ch->act,PLR_GHOST)))
+  {
+    found = TRUE;
+    printf_to_char(ch,"{rHayalet{w: %d saat",ch->pcdata->ghost_mode_counter);
+  }
 
-    if (found == FALSE)
-      send_to_char("Hiçbir þeyin etkisinde deðilsin.\n\r",ch);
+  if (found == FALSE)
+  {
+    send_to_char("Hiçbir þeyin etkisinde deðilsin.\n\r",ch);
+  }
 
-    return;
+  return;
 }
 
 
@@ -4358,7 +4479,7 @@ void do_who_col( CHAR_DATA *ch, char *argument )
 	    continue;
 
 	if ( d->connected != CON_PLAYING ||
-(IS_VAMPIRE( d->character ) && !IS_IMMORTAL(ch) && (ch != d->character) ) )
+((IS_VAMPIRE( d->character ) || IS_BEAR( d->character )) && !IS_IMMORTAL(ch) && (ch != d->character) ) )
 	    continue;
 
 	wch   = ( d->original != NULL ) ? d->original : d->character;

@@ -3301,6 +3301,15 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
+	{"evolve bear","ayýya dönüþme"},	{   93, 93, 93, 93,93,93,93,65,93 ,93,93,93,93},
+	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
+	        spell_null,      TAR_IGNORE,       POS_STANDING,
+	&gsn_evolve_bear,       SLOT(0),        100,       12,
+    "",	"Doðallaþýyorsun.",	"", CABAL_NONE ,
+	RACE_NONE, ALIGN_NONE, GROUP_NONE
+    },
+
+    {
 	{"faerie fire","cin ateþi"},		{ 11,  6, 93, 93,93,93,8,93 ,15 ,93,93,93,11},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_faerie_fire,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
