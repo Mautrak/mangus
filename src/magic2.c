@@ -230,6 +230,7 @@ void spell_disintegrate( int sn, int level, CHAR_DATA *ch, void *vo, int target)
   OBJ_DATA *obj_next;
   int i,dam=0;
   OBJ_DATA *tattoo;
+  char eventbuf[MAX_STRING_LENGTH];
 
 	/*
 	 * Ani ölüm büyüsü. Tutma yüzdesi %5 düþürüldü.
@@ -272,6 +273,7 @@ void spell_arz_yutagi( int sn, int level, CHAR_DATA *ch, void *vo, int target)
   OBJ_DATA *obj_next;
   int i,dam=0;
   OBJ_DATA *tattoo;
+  char eventbuf[MAX_STRING_LENGTH];
 
 	/*
 	 * Ani ölüm büyüsü. Tutma yüzdesi %5 düþürüldü.
