@@ -1258,6 +1258,11 @@ The narrow, dusty trail leads south through the forest.
 ~
 ~
 0 -1 6108
+D3
+Yolu engelleyen aðacýn batýsýnda bir keçi yolu görüyorsun.
+~
+~
+0 -1 6157
 E
 trees trunks~
 These ancient trees must have been here for many, many years.  It is impossible
@@ -2483,7 +2488,429 @@ You see an open clearing to north.
 ~
 0 -1 6008
 S
+#6157
+Keçi yolu~
+Yolu engelleyen aðacýn batýsýnda, keçi yoluna benzer bir patikadasýn.
+Patika aðaçlarýn arasýndan küçük kývrýmlarla batýya uzanýyor.
+~
+0 SX 3
+D1
+Yolu engelleyen bir aðaç görüyorsun.
+~
+~
+0 -1 6103
+D3
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6158
+S
+#6158
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla batýya uzanýyor.
+~
+0 SX 3
+D1
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6157
+D3
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6159
+S
+#6159
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla batýya uzanýyor.
+~
+0 SX 3
+D1
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6158
+D3
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6160
+S
+#6160
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla batýya uzanýyor.
+~
+0 SX 3
+D1
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6159
+D3
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6161
+S
+#6161
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla batýya uzanýyor.
+~
+0 SX 3
+D1
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6160
+D3
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6162
+S
+#6162
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla kýsa süre kuzeye uzanýyor.
+~
+0 SX 3
+D0
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6163
+D1
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6161
+S
+#6163
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla batýya uzanýyor.
+~
+0 SX 3
+D2
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6162
+D3
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6164
+S
+#6164
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla batýya uzanýyor.
+~
+0 SX 3
+D1
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6163
+D3
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6165
+S
+#6165
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla batýya uzanýyor.
+~
+0 SX 3
+D1
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6164
+D3
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6166
+S
+#6166
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla batýya uzanýyor.
+~
+0 SX 3
+D1
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6165
+D3
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6167
+S
+#6167
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla güneye uzanýyor.
+~
+0 SX 3
+D1
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6166
+D2
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6168
+S
+#6168
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla batýya uzanýyor.
+~
+0 SX 3
+D0
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6167
+D3
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6169
+S
+#6169
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla batýya uzanýyor.
+~
+0 SX 3
+D1
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6168
+D3
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6170
+S
+#6170
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla batýya uzanýyor.
+~
+0 SX 3
+D1
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6169
+D3
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6171
+S
+#6171
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla kuzeye uzanýyor.
+~
+0 SX 3
+D1
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6170
+D0
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6172
+S
+#6172
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla kuzeye uzanýyor.
+~
+0 SX 3
+D0
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6173
+D2
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6171
+S
+#6173
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla batýya uzanýyor.
+~
+0 SX 3
+D2
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6172
+D3
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6174
+S
+#6174
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla batýya uzanýyor.
+~
+0 SX 3
+D1
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6173
+D3
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6175
+S
+#6175
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla batýya uzanýyor.
+~
+0 SX 3
+D1
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6174
+D3
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6176
+S
+#6176
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla batýya uzanýyor.
+~
+0 SX 3
+D1
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6175
+D3
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6177
+S
+#6177
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla batýya uzanýyor.
+~
+0 SX 3
+D1
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6176
+D3
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6178
+S
+#6178
+Keçi yolu~
+Keçi yoluna benzer bir patikadasýn. Patika aðaçlarýn arasýndan küçük
+kývrýmlarla batýya uzanýyor.
+~
+0 SX 3
+D1
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6177
+D3
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6179
+S
+#6179
+Kumsalda~
+Batýsý deniz, doðusu Haon Dor ormaný olan ince kumlarla oluþmuþ
+bir sahildesin. Batýdan dalgalarýn sesi geliyor.
+~
+0 SX 3
+D1
+Keçi yolunu görüyorsun.
+~
+~
+0 -1 6178
+D3
+Kumsalý görüyorsun.
+~
+~
+0 -1 6180
+S
+#6180
+Kumsalda~
+Batýsý deniz, doðusu Haon Dor ormaný olan ince kumlarla oluþmuþ
+bir sahildesin. Batýdan dalgalarýn sesi geliyor.
+~
+0 SX 3
+D1
+Önünde kumsalý, uzakta ormaný görüyorsun.
+~
+~
+0 -1 6179
+D3
+Denizi görüyorsun.
+~
+~
+0 -1 6181
+S
+#6181
+Kumsalýn kýyýsýnda~
+Uçsuz bucaksýz, engin ve korkutucu denizin sahildeki ince kumlarý
+dalgalarla dövdüðü yerdesin. Onun gücünden tedirgin oluyor ve bir
+adým geri çekiliyorsun.
+~
+0 SX 3
+D1
+Önünde kumsalý, uzakta ormaný görüyorsun.
+~
+~
+0 -1 6180
+S
 #0
+
 #RESETS
 M 0 6000   1 6009  1	* John the Lumberjack
 E 1 6000  10   16	*   a lumber axe
