@@ -136,7 +136,10 @@ int obj_random_paf_find_available_location(OBJ_DATA *obj)
 		for (paf = obj->affected; paf != NULL; paf = paf->next)
 		{
 			if(paf->location == random_location)
+			{
+				random_location = 0;
 				found = FALSE;
+			}
 		}
 	}
 
@@ -186,7 +189,10 @@ int obj_random_paf_find_available_resistance(OBJ_DATA *obj)
 		for (paf = obj->affected; paf != NULL; paf = paf->next)
 		{
 			if(paf->where == TO_RESIST && IS_SET(paf->bitvector,random_res) )
+			{
+				random_res = 0;
 				found = FALSE;
+			}
 		}
 	}
 
@@ -236,7 +242,10 @@ int obj_random_paf_find_available_vulnerability(OBJ_DATA *obj)
 		for (paf = obj->affected; paf != NULL; paf = paf->next)
 		{
 			if(paf->where == TO_VULN && IS_SET(paf->bitvector,random_vuln) )
+			{
+				random_vuln = 0;
 				found = FALSE;
+			}
 		}
 	}
 	
@@ -285,7 +294,10 @@ int obj_random_paf_find_available_immunity(OBJ_DATA *obj)
 		for (paf = obj->affected; paf != NULL; paf = paf->next)
 		{
 			if(paf->where == TO_IMMUNE && IS_SET(paf->bitvector,random_imm) )
+			{
+				random_imm = 0;
 				found = FALSE;
+			}
 		}
 	}
 
