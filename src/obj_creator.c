@@ -91,8 +91,9 @@ int obj_random_paf_find_available_location(OBJ_DATA *obj)
 	int random_number;
 	int random_location = 0;
 	bool found = FALSE;
+	int i = 0;
 	
-	while(found == FALSE)
+	while(found == FALSE && ++i <= 10)
 	{
 		random_number = number_range(1,500);
 		if(random_number==1)
@@ -148,8 +149,9 @@ int obj_random_paf_find_available_resistance(OBJ_DATA *obj)
 	int random_number = number_range(1,23);
 	int random_res = 0;
 	bool found = FALSE;
+	int i = 0;
 	
-	while(found == FALSE)
+	while(found == FALSE && ++i <= 10)
 	{
 		switch(random_number)
 		{
@@ -197,8 +199,9 @@ int obj_random_paf_find_available_vulnerability(OBJ_DATA *obj)
 	int random_number = number_range(1,23); //str,int,wis,dex,con,cha
 	int random_vuln = 0;
 	bool found = FALSE;
+	int i = 0;
 	
-	while(found == FALSE)
+	while(found == FALSE && ++i <= 10)
 	{
 		switch(random_number)
 		{
@@ -246,8 +249,9 @@ int obj_random_paf_find_available_immunity(OBJ_DATA *obj)
 	int random_number = number_range(1,21);
 	int random_imm = 0;
 	bool found = FALSE;
+	int i = 0;
 	
-	while(found == FALSE)
+	while(found == FALSE && ++i <= 10)
 	{
 		switch(random_number)
 		{
