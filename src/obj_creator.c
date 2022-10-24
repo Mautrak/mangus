@@ -44,7 +44,7 @@ int obj_random_paf_modifier(int location, int level)
 	}
 	if (location == APPLY_MANA || location == APPLY_HIT || location == APPLY_MOVE)
 	{
-		return number_range( UMAX(1,int((level+5)*2)) , UMAX(1,int((level+5)*5)) );
+		return number_range( UMAX(1,int((level+5)*3/2)) , UMAX(1,int((level+5)*5)) );
 		/*
 		random_number = number_range(1,100);
 		
@@ -64,7 +64,7 @@ int obj_random_paf_modifier(int location, int level)
 	}
 	if (location == APPLY_HITROLL || location == APPLY_DAMROLL)
 	{
-		return number_range( UMAX(1,int((level+4)/4)) , UMAX(1,int((level+3)/2)) );
+		return number_range( UMAX(1,int((level+4)/5)) , UMAX(1,int((level+3)/2)) );
 		/*
 		random_number = number_range(1,100);
 		
@@ -307,6 +307,7 @@ int obj_random_paf_find_available_immunity(OBJ_DATA *obj)
 void obj_random_paf(OBJ_DATA *obj)
 {
 	int location=0,bitvector=0;
+	int random_number=0;
 
 	
 	if( !IS_SET( obj->wear_flags, ITEM_TAKE) )
@@ -325,65 +326,66 @@ void obj_random_paf(OBJ_DATA *obj)
 	
 	if(obj->level < 10)
 	{
-		if(number_range(1,11)!=1)
+		if(number_range(1,16)!=1)
 		{
 			return;
 		}
 	}
 	else if(obj->level < 20)
 	{
-		if(number_range(1,9)!=1)
+		if(number_range(1,14)!=1)
 		{
 			return;
 		}
 	}
 	else if(obj->level < 30)
 	{
-		if(number_range(1,8)!=1)
+		if(number_range(1,11)!=1)
 		{
 			return;
 		}
 	}
 	else if(obj->level < 40)
 	{
-		if(number_range(1,7)!=1)
+		if(number_range(1,9)!=1)
 		{
 			return;
 		}
 	}
 	else if(obj->level < 50)
 	{
-		if(number_range(1,5)!=1)
+		if(number_range(1,7)!=1)
 		{
 			return;
 		}
 	}
 	else if(obj->level < 60)
 	{
-		if(number_range(1,4)!=1)
+		if(number_range(1,6)!=1)
 		{
 			return;
 		}
 	}
 	else if(obj->level < 70)
 	{
-		if(number_range(1,3)!=1)
+		if(number_range(1,5)!=1)
 		{
 			return;
 		}
 	}
 	else
 	{
-		if(number_range(1,2)!=1)
+		if(number_range(1,4)!=1)
 		{
 			return;
 		}
 	}
 	
-	while(number_range(1,10)<8)
+	while(number_range(1,10)<7)
 	{
 		obj->enchanted	= TRUE;
-		if(number_percent()<86)
+		random_number = number_range(1,100);
+		if(random_number<=90)
 		{
 			location = obj_random_paf_find_available_location(obj);
 			if(location == 0)
@@ -401,7 +403,7 @@ void obj_random_paf(OBJ_DATA *obj)
 			obj->affected			= paf;
 			top_affect++;
 		}
-		else if(number_percent()<88)
+		else if(random_number<=92)
 		{
 			bitvector = obj_random_paf_find_available_vulnerability(obj);
 			if(bitvector == 0)
@@ -419,7 +421,7 @@ void obj_random_paf(OBJ_DATA *obj)
 			obj->affected			= paf;
 			top_affect++;
 		}
-		else if(number_percent()<94)
+		else if(random_number<=99)
 		{
 			bitvector = obj_random_paf_find_available_resistance(obj);
 			if(bitvector == 0)
