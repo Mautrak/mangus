@@ -44,6 +44,8 @@ int obj_random_paf_modifier(int location, int level)
 	}
 	if (location == APPLY_MANA || location == APPLY_HIT || location == APPLY_MOVE)
 	{
+		return number_range( UMAX(1,int((level+5)*2)) , UMAX(1,int((level+5)*5)) );
+		/*
 		random_number = number_range(1,100);
 		
 		if(random_number<=30)
@@ -58,9 +60,12 @@ int obj_random_paf_modifier(int location, int level)
 			return number_range(10,UMAX(11,int(level*5)));
 		else
 			return number_range(10,UMAX(11,int(level*6)));
+		*/
 	}
 	if (location == APPLY_HITROLL || location == APPLY_DAMROLL)
 	{
+		return number_range( UMAX(1,int((level+4)/4)) , UMAX(1,int((level+3)/2)) );
+		/*
 		random_number = number_range(1,100);
 		
 		if(random_number<=30)
@@ -75,6 +80,7 @@ int obj_random_paf_modifier(int location, int level)
 			return number_range(1,UMAX(2,int(level/3)));
 		else
 			return number_range(1,UMAX(2,int(level/2)));
+		*/
 	}
 	return 1;
 }
@@ -82,49 +88,57 @@ int obj_random_paf_modifier(int location, int level)
 int obj_random_paf_find_available_location(OBJ_DATA *obj)
 {
 	AFFECT_DATA *paf;
-	int random_number = number_range(1,500);
+	int random_number;
 	int random_location = 0;
+	bool found = FALSE;
 	
-	if(random_number==1)
+	while(found == FALSE)
 	{
-		switch(number_range(1,6))
+		random_number = number_range(1,500);
+		if(random_number==1)
 		{
-			case 1:		random_location = APPLY_STR; break;
-			case 2:		random_location = APPLY_DEX; break;
-			case 3:		random_location = APPLY_INT; break;
-			case 4:		random_location = APPLY_WIS; break;
-			case 5:		random_location = APPLY_CON; break;
-			case 6:		random_location = APPLY_CHA; break;
-			default:	random_location = APPLY_STR; break;
+			switch(number_range(1,6))
+			{
+				case 1:		random_location = APPLY_STR; break;
+				case 2:		random_location = APPLY_DEX; break;
+				case 3:		random_location = APPLY_INT; break;
+				case 4:		random_location = APPLY_WIS; break;
+				case 5:		random_location = APPLY_CON; break;
+				case 6:		random_location = APPLY_CHA; break;
+				default:	random_location = APPLY_STR; break;
+			}
+		}
+		else if(random_number<200)
+		{
+			switch(number_range(1,5))
+			{
+				case 1:		random_location = APPLY_MOVE; break;
+				case 2:
+				case 3:		random_location = APPLY_HIT; break;
+				case 4:
+				case 5:		random_location = APPLY_MANA; break;
+				default:	random_location = APPLY_HIT; break;
+			}
+		}
+		else
+		{
+			switch(number_range(1,2))
+			{
+				case 1:		random_location = APPLY_HITROLL; break;
+				case 2:		random_location = APPLY_DAMROLL; break;
+				default:	random_location = APPLY_HITROLL; break;
+			}
+		}
+		
+		found = TRUE;
+		
+		for (paf = obj->affected; paf != NULL; paf = paf->next)
+		{
+			if(paf->location == random_location)
+				found = FALSE;
 		}
 	}
-	else if(random_number<200)
-	{
-		switch(number_range(7,9))
-		{
-			case 7:		random_location = APPLY_MANA; break;
-			case 8:		random_location = APPLY_HIT; break;
-			case 9:		random_location = APPLY_MOVE; break;
-			default:	random_location = APPLY_HIT; break;
-		}
-	}
-	else
-	{
-		switch(number_range(10,11))
-		{
-			case 10:	random_location = APPLY_HITROLL; break;
-			case 11:	random_location = APPLY_DAMROLL; break;
-			default:	random_location = APPLY_HITROLL; break;
-		}
-	}
-	
-	
-	for (paf = obj->affected; paf != NULL; paf = paf->next)
-	{
-		if(paf->location == random_location)
-			return 0;
-	}
-	
+
 	return random_location;
 }
 
@@ -133,42 +147,47 @@ int obj_random_paf_find_available_resistance(OBJ_DATA *obj)
 	AFFECT_DATA *paf;
 	int random_number = number_range(1,23);
 	int random_res = 0;
+	bool found = FALSE;
 	
-	switch(random_number)
+	while(found == FALSE)
 	{
-		case 1:		random_res = RES_SUMMON; break;
-		case 2:		random_res = RES_CHARM; break;
-		case 3:		random_res = RES_MAGIC; break;
-		case 4:		random_res = RES_WEAPON; break;
-		case 5:		random_res = RES_BASH; break;
-		case 6:		random_res = RES_PIERCE; break;
-		case 7:		random_res = RES_SLASH; break;
-		case 8:		random_res = RES_FIRE; break;
-		case 9:		random_res = RES_COLD; break;
-		case 10:	random_res = RES_LIGHTNING; break;
-		case 11:	random_res = RES_ACID; break;
-		case 12:	random_res = RES_POISON; break;
-		case 13:	random_res = RES_NEGATIVE; break;
-		case 14:	random_res = RES_HOLY; break;
-		case 15:	random_res = RES_ENERGY; break;
-		case 16:	random_res = RES_MENTAL; break;
-		case 17:	random_res = RES_DISEASE; break;
-		case 18:	random_res = RES_DROWNING; break;
-		case 19:	random_res = RES_LIGHT; break;
-		case 20:	random_res = RES_SOUND; break;
-		case 21:	random_res = RES_WOOD; break;
-		case 22:	random_res = RES_SILVER; break;
-		case 23:	random_res = RES_IRON; break;
-		default:	random_res = RES_IRON; break;
+		switch(random_number)
+		{
+			case 1:		random_res = RES_SUMMON; break;
+			case 2:		random_res = RES_CHARM; break;
+			case 3:		random_res = RES_MAGIC; break;
+			case 4:		random_res = RES_WEAPON; break;
+			case 5:		random_res = RES_BASH; break;
+			case 6:		random_res = RES_PIERCE; break;
+			case 7:		random_res = RES_SLASH; break;
+			case 8:		random_res = RES_FIRE; break;
+			case 9:		random_res = RES_COLD; break;
+			case 10:	random_res = RES_LIGHTNING; break;
+			case 11:	random_res = RES_ACID; break;
+			case 12:	random_res = RES_POISON; break;
+			case 13:	random_res = RES_NEGATIVE; break;
+			case 14:	random_res = RES_HOLY; break;
+			case 15:	random_res = RES_ENERGY; break;
+			case 16:	random_res = RES_MENTAL; break;
+			case 17:	random_res = RES_DISEASE; break;
+			case 18:	random_res = RES_DROWNING; break;
+			case 19:	random_res = RES_LIGHT; break;
+			case 20:	random_res = RES_SOUND; break;
+			case 21:	random_res = RES_WOOD; break;
+			case 22:	random_res = RES_SILVER; break;
+			case 23:	random_res = RES_IRON; break;
+			default:	random_res = RES_IRON; break;
+		}
+		
+		found = TRUE;
+		
+		for (paf = obj->affected; paf != NULL; paf = paf->next)
+		{
+			if(paf->where == TO_RESIST && IS_SET(paf->bitvector,random_res) )
+				found = FALSE;
+		}
 	}
-	
-	
-	for (paf = obj->affected; paf != NULL; paf = paf->next)
-	{
-		if(paf->where == TO_RESIST && IS_SET(paf->bitvector,random_res) )
-			return 0;
-	}
-	
+
 	return random_res;
 }
 
@@ -177,40 +196,45 @@ int obj_random_paf_find_available_vulnerability(OBJ_DATA *obj)
 	AFFECT_DATA *paf;
 	int random_number = number_range(1,23); //str,int,wis,dex,con,cha
 	int random_vuln = 0;
+	bool found = FALSE;
 	
-	switch(random_number)
+	while(found == FALSE)
 	{
-		case 1:		random_vuln = VULN_SUMMON; break;
-		case 2:		random_vuln = VULN_CHARM; break;
-		case 3:		random_vuln = VULN_MAGIC; break;
-		case 4:		random_vuln = VULN_WEAPON; break;
-		case 5:		random_vuln = VULN_BASH; break;
-		case 6:		random_vuln = VULN_PIERCE; break;
-		case 7:		random_vuln = VULN_SLASH; break;
-		case 8:		random_vuln = VULN_FIRE; break;
-		case 9:		random_vuln = VULN_COLD; break;
-		case 10:	random_vuln = VULN_LIGHTNING; break;
-		case 11:	random_vuln = VULN_ACID; break;
-		case 12:	random_vuln = VULN_POISON; break;
-		case 13:	random_vuln = VULN_NEGATIVE; break;
-		case 14:	random_vuln = VULN_HOLY; break;
-		case 15:	random_vuln = VULN_ENERGY; break;
-		case 16:	random_vuln = VULN_MENTAL; break;
-		case 17:	random_vuln = VULN_DISEASE; break;
-		case 18:	random_vuln = VULN_DROWNING; break;
-		case 19:	random_vuln = VULN_LIGHT; break;
-		case 20:	random_vuln = VULN_SOUND; break;
-		case 21:	random_vuln = VULN_WOOD; break;
-		case 22:	random_vuln = VULN_SILVER; break;
-		case 23:	random_vuln = VULN_IRON; break;
-		default:	random_vuln = VULN_IRON; break;
-	}
-	
-	
-	for (paf = obj->affected; paf != NULL; paf = paf->next)
-	{
-		if(paf->where == TO_VULN && IS_SET(paf->bitvector,random_vuln) )
-			return 0;
+		switch(random_number)
+		{
+			case 1:		random_vuln = VULN_SUMMON; break;
+			case 2:		random_vuln = VULN_CHARM; break;
+			case 3:		random_vuln = VULN_MAGIC; break;
+			case 4:		random_vuln = VULN_WEAPON; break;
+			case 5:		random_vuln = VULN_BASH; break;
+			case 6:		random_vuln = VULN_PIERCE; break;
+			case 7:		random_vuln = VULN_SLASH; break;
+			case 8:		random_vuln = VULN_FIRE; break;
+			case 9:		random_vuln = VULN_COLD; break;
+			case 10:	random_vuln = VULN_LIGHTNING; break;
+			case 11:	random_vuln = VULN_ACID; break;
+			case 12:	random_vuln = VULN_POISON; break;
+			case 13:	random_vuln = VULN_NEGATIVE; break;
+			case 14:	random_vuln = VULN_HOLY; break;
+			case 15:	random_vuln = VULN_ENERGY; break;
+			case 16:	random_vuln = VULN_MENTAL; break;
+			case 17:	random_vuln = VULN_DISEASE; break;
+			case 18:	random_vuln = VULN_DROWNING; break;
+			case 19:	random_vuln = VULN_LIGHT; break;
+			case 20:	random_vuln = VULN_SOUND; break;
+			case 21:	random_vuln = VULN_WOOD; break;
+			case 22:	random_vuln = VULN_SILVER; break;
+			case 23:	random_vuln = VULN_IRON; break;
+			default:	random_vuln = VULN_IRON; break;
+		}
+		
+		found = TRUE;
+
+		for (paf = obj->affected; paf != NULL; paf = paf->next)
+		{
+			if(paf->where == TO_VULN && IS_SET(paf->bitvector,random_vuln) )
+				found = FALSE;
+		}
 	}
 	
 	return random_vuln;
@@ -221,41 +245,46 @@ int obj_random_paf_find_available_immunity(OBJ_DATA *obj)
 	AFFECT_DATA *paf;
 	int random_number = number_range(1,21);
 	int random_imm = 0;
+	bool found = FALSE;
 	
-	switch(random_number)
+	while(found == FALSE)
 	{
-		// weapon ve magic imm olmasin.
-		case 1:		random_imm = IMM_SUMMON; break;
-		case 2:		random_imm = IMM_CHARM; break;
-		case 3:		random_imm = IMM_BASH; break;
-		case 4:		random_imm = IMM_PIERCE; break;
-		case 5:		random_imm = IMM_SLASH; break;
-		case 6:		random_imm = IMM_FIRE; break;
-		case 7:		random_imm = IMM_COLD; break;
-		case 8:		random_imm = IMM_LIGHTNING; break;
-		case 9:		random_imm = IMM_ACID; break;
-		case 10:	random_imm = IMM_POISON; break;
-		case 11:	random_imm = IMM_NEGATIVE; break;
-		case 12:	random_imm = IMM_HOLY; break;
-		case 13:	random_imm = IMM_ENERGY; break;
-		case 14:	random_imm = IMM_MENTAL; break;
-		case 15:	random_imm = IMM_DISEASE; break;
-		case 16:	random_imm = IMM_DROWNING; break;
-		case 17:	random_imm = IMM_LIGHT; break;
-		case 18:	random_imm = IMM_SOUND; break;
-		case 19:	random_imm = IMM_WOOD; break;
-		case 20:	random_imm = IMM_SILVER; break;
-		case 21:	random_imm = IMM_IRON; break;
-		default:	random_imm = IMM_IRON; break;
+		switch(random_number)
+		{
+			// weapon ve magic imm olmasin.
+			case 1:		random_imm = IMM_SUMMON; break;
+			case 2:		random_imm = IMM_CHARM; break;
+			case 3:		random_imm = IMM_BASH; break;
+			case 4:		random_imm = IMM_PIERCE; break;
+			case 5:		random_imm = IMM_SLASH; break;
+			case 6:		random_imm = IMM_FIRE; break;
+			case 7:		random_imm = IMM_COLD; break;
+			case 8:		random_imm = IMM_LIGHTNING; break;
+			case 9:		random_imm = IMM_ACID; break;
+			case 10:	random_imm = IMM_POISON; break;
+			case 11:	random_imm = IMM_NEGATIVE; break;
+			case 12:	random_imm = IMM_HOLY; break;
+			case 13:	random_imm = IMM_ENERGY; break;
+			case 14:	random_imm = IMM_MENTAL; break;
+			case 15:	random_imm = IMM_DISEASE; break;
+			case 16:	random_imm = IMM_DROWNING; break;
+			case 17:	random_imm = IMM_LIGHT; break;
+			case 18:	random_imm = IMM_SOUND; break;
+			case 19:	random_imm = IMM_WOOD; break;
+			case 20:	random_imm = IMM_SILVER; break;
+			case 21:	random_imm = IMM_IRON; break;
+			default:	random_imm = IMM_IRON; break;
+		}
+		
+		found = TRUE;
+		
+		for (paf = obj->affected; paf != NULL; paf = paf->next)
+		{
+			if(paf->where == TO_IMMUNE && IS_SET(paf->bitvector,random_imm) )
+				found = FALSE;
+		}
 	}
-	
-	
-	for (paf = obj->affected; paf != NULL; paf = paf->next)
-	{
-		if(paf->where == TO_IMMUNE && IS_SET(paf->bitvector,random_imm) )
-			return 0;
-	}
-	
+
 	return random_imm;
 }
 
@@ -323,13 +352,6 @@ void obj_random_paf(OBJ_DATA *obj)
 	else if(obj->level < 70)
 	{
 		if(number_range(1,3)!=1)
-		{
-			return;
-		}
-	}
-	else if(obj->level < 80)
-	{
-		if(number_range(1,2)!=1)
 		{
 			return;
 		}

@@ -2408,93 +2408,91 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
      */
     switch ( obj->item_type )
     {
-    default:
-	bug( "Read_object: vnum %d bad type.", pObjIndex->vnum );
-	break;
+        default:
+        bug( "Read_object: vnum %d bad type.", pObjIndex->vnum );
+        break;
 
-    case ITEM_LIGHT:
-	if (obj->value[2] == 999)
-		obj->value[2] = -1;
-	break;
+        case ITEM_LIGHT:
+        if (obj->value[2] == 999)
+            obj->value[2] = -1;
+        break;
 
-    case ITEM_FURNITURE:
-    case ITEM_TRASH:
-    case ITEM_CONTAINER:
-    case ITEM_DRINK_CON:
-    case ITEM_KEY:
-    case ITEM_MAYMUNCUK:
-    case ITEM_FOOD:
-    case ITEM_BOAT:
-    case ITEM_CORPSE_NPC:
-    case ITEM_CORPSE_PC:
-    case ITEM_FOUNTAIN:
-    case ITEM_MAP:
-    case ITEM_CLOTHING:
-    case ITEM_PORTAL:
-	if (!pObjIndex->new_format)
-	    obj->cost /= 5;
-	break;
+        case ITEM_FURNITURE:
+        case ITEM_TRASH:
+        case ITEM_CONTAINER:
+        case ITEM_DRINK_CON:
+        case ITEM_KEY:
+        case ITEM_MAYMUNCUK:
+        case ITEM_FOOD:
+        case ITEM_BOAT:
+        case ITEM_CORPSE_NPC:
+        case ITEM_CORPSE_PC:
+        case ITEM_FOUNTAIN:
+        case ITEM_MAP:
+        case ITEM_CLOTHING:
+        case ITEM_PORTAL:
+        if (!pObjIndex->new_format)
+            obj->cost /= 5;
+        break;
 
-    case ITEM_TREASURE:
-    case ITEM_WARP_STONE:
-    case ITEM_ROOM_KEY:
-    case ITEM_GEM:
-    case ITEM_JEWELRY:
-    case ITEM_TATTOO:
-	break;
+        case ITEM_TREASURE:
+        case ITEM_WARP_STONE:
+        case ITEM_ROOM_KEY:
+        case ITEM_GEM:
+        case ITEM_JEWELRY:
+        case ITEM_TATTOO:
+        break;
 
-    case ITEM_JUKEBOX:
-	for (i = 0; i < 5; i++)
-	   obj->value[i] = -1;
-	break;
+        case ITEM_JUKEBOX:
+        for (i = 0; i < 5; i++)
+        obj->value[i] = -1;
+        break;
 
-    case ITEM_SCROLL:
-	if (level != -1 && !pObjIndex->new_format)
-	    obj->value[0]	= number_fuzzy( obj->value[0] );
-	break;
+        case ITEM_SCROLL:
+        if (level != -1 && !pObjIndex->new_format)
+            obj->value[0]	= number_fuzzy( obj->value[0] );
+        break;
 
-    case ITEM_WAND:
-    case ITEM_STAFF:
-	if (level != -1 && !pObjIndex->new_format)
-	{
-	    obj->value[0]	= number_fuzzy( obj->value[0] );
-	    obj->value[1]	= number_fuzzy( obj->value[1] );
-	    obj->value[2]	= obj->value[1];
-	}
-	if (!pObjIndex->new_format)
-	    obj->cost *= 2;
-	break;
+        case ITEM_WAND:
+        case ITEM_STAFF:
+        if (level != -1 && !pObjIndex->new_format)
+        {
+            obj->value[0]	= number_fuzzy( obj->value[0] );
+            obj->value[1]	= number_fuzzy( obj->value[1] );
+            obj->value[2]	= obj->value[1];
+        }
+        if (!pObjIndex->new_format)
+            obj->cost *= 2;
+        break;
 
-    case ITEM_WEAPON:
-	if (level != -1 && !pObjIndex->new_format)
-	{
-	    obj->value[1] = number_fuzzy( number_fuzzy( 1 * level / 4 + 2 ) );
-	    obj->value[2] = number_fuzzy( number_fuzzy( 3 * level / 4 + 6 ) );
-	}
-	break;
+        case ITEM_WEAPON:
+        if (level != -1 && !pObjIndex->new_format)
+        {
+            obj->value[1] = number_fuzzy( number_fuzzy( 1 * level / 4 + 2 ) );
+            obj->value[2] = number_fuzzy( number_fuzzy( 3 * level / 4 + 6 ) );
+        }
+        break;
 
-    case ITEM_ARMOR:
-	if (level != -1 && !pObjIndex->new_format)
-	{
-	    obj->value[0]	= number_fuzzy( level / 5 + 3 );
-	    obj->value[1]	= number_fuzzy( level / 5 + 3 );
-	    obj->value[2]	= number_fuzzy( level / 5 + 3 );
-	}
-	break;
+        case ITEM_ARMOR:
+        if (level != -1 && !pObjIndex->new_format)
+        {
+            obj->value[0]	= number_fuzzy( level / 5 + 3 );
+            obj->value[1]	= number_fuzzy( level / 5 + 3 );
+            obj->value[2]	= number_fuzzy( level / 5 + 3 );
+        }
+        break;
 
-    case ITEM_POTION:
-    case ITEM_PILL:
-	if (level != -1 && !pObjIndex->new_format)
-	    obj->value[0] = number_fuzzy( number_fuzzy( obj->value[0] ) );
-	break;
+        case ITEM_POTION:
+        case ITEM_PILL:
+        if (level != -1 && !pObjIndex->new_format)
+            obj->value[0] = number_fuzzy( number_fuzzy( obj->value[0] ) );
+        break;
 
-    case ITEM_MONEY:
-	if (!pObjIndex->new_format)
-	    obj->value[0]	= obj->cost;
-	break;
+        case ITEM_MONEY:
+        if (!pObjIndex->new_format)
+            obj->value[0]	= obj->cost;
+        break;
     }
-
-    //obj_random_weight(obj);
 	
 	if(Count == TRUE && obj->pIndexData->random_object)
 	{

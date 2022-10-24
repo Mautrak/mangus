@@ -157,18 +157,21 @@ void do_objlist( CHAR_DATA *ch, char *argument )
     char arg1[MAX_INPUT_LENGTH];
     char arg2[MAX_INPUT_LENGTH];
     char arg3[MAX_INPUT_LENGTH];
+    char arg4[MAX_INPUT_LENGTH];
     OBJ_DATA *obj;
     AFFECT_DATA *paf;
     int altseviye = -1;
     int ustseviye = -1;
+    int enaz = 0;
 
     argument = one_argument( argument, arg1 );
     argument = one_argument( argument, arg2 );
     argument = one_argument( argument, arg3 );
+    argument = one_argument( argument, arg4 );
 	
 	if ( arg1[0] == '\0' )
 	{
-		printf_to_char(ch,"Argumanlar: <imm|res> <altseviye> <ustseviye>\n\r" );
+		printf_to_char(ch,"Argumanlar: <imm|res|yp|mp|zp|vz|zz|nitelik> <altseviye> <ustseviye> <enaz>\n\r" );
 		return;
 	}
 
@@ -194,6 +197,19 @@ void do_objlist( CHAR_DATA *ch, char *argument )
         else
         {
             send_to_char("ustseviye argümaný bir sayý olmalýdýr.\n\r",ch);
+            return;
+        }
+    }
+
+    if ( arg4[0] != '\0' )
+    {
+        if( is_number(arg4) )
+        {
+            enaz = atoi(arg4);
+        }
+        else
+        {
+            send_to_char("enaz argümaný bir sayý olmalýdýr.\n\r",ch);
             return;
         }
     }
@@ -234,6 +250,139 @@ void do_objlist( CHAR_DATA *ch, char *argument )
                 for ( paf = obj->affected; paf != NULL; paf = paf->next )
                 {
                     if (paf->bitvector && paf->where == TO_RESIST)
+                    {
+                        spell_identify( 0, 0, ch, obj ,0);
+                        send_to_char("\n\r",ch);
+                    }
+                }
+            }
+        }
+    }
+    else if (!strcmp(arg1, "yp"))
+    {
+        for( obj=object_list; obj!=NULL; obj = obj->next )
+        {
+            if( altseviye >= 0 && obj->level < altseviye )
+                continue;
+            if( ustseviye >= 0 && obj->level > ustseviye )
+                continue;
+
+            if(obj->pIndexData->random_object && obj->affected != NULL)
+            {
+                for ( paf = obj->affected; paf != NULL; paf = paf->next )
+                {
+                    if(paf->location == APPLY_HIT && paf->modifier >= enaz)
+                    {
+                        spell_identify( 0, 0, ch, obj ,0);
+                        send_to_char("\n\r",ch);
+                    }
+                }
+            }
+        }
+    }
+    else if (!strcmp(arg1, "mp"))
+    {
+        for( obj=object_list; obj!=NULL; obj = obj->next )
+        {
+            if( altseviye >= 0 && obj->level < altseviye )
+                continue;
+            if( ustseviye >= 0 && obj->level > ustseviye )
+                continue;
+
+            if(obj->pIndexData->random_object && obj->affected != NULL)
+            {
+                for ( paf = obj->affected; paf != NULL; paf = paf->next )
+                {
+                    if(paf->location == APPLY_MANA && paf->modifier >= enaz)
+                    {
+                        spell_identify( 0, 0, ch, obj ,0);
+                        send_to_char("\n\r",ch);
+                    }
+                }
+            }
+        }
+    }
+    else if (!strcmp(arg1, "zp"))
+    {
+        for( obj=object_list; obj!=NULL; obj = obj->next )
+        {
+            if( altseviye >= 0 && obj->level < altseviye )
+                continue;
+            if( ustseviye >= 0 && obj->level > ustseviye )
+                continue;
+
+            if(obj->pIndexData->random_object && obj->affected != NULL)
+            {
+                for ( paf = obj->affected; paf != NULL; paf = paf->next )
+                {
+                    if(paf->location == APPLY_MOVE && paf->modifier >= enaz)
+                    {
+                        spell_identify( 0, 0, ch, obj ,0);
+                        send_to_char("\n\r",ch);
+                    }
+                }
+            }
+        }
+    }
+    else if (!strcmp(arg1, "zz"))
+    {
+        for( obj=object_list; obj!=NULL; obj = obj->next )
+        {
+            if( altseviye >= 0 && obj->level < altseviye )
+                continue;
+            if( ustseviye >= 0 && obj->level > ustseviye )
+                continue;
+
+            if(obj->pIndexData->random_object && obj->affected != NULL)
+            {
+                for ( paf = obj->affected; paf != NULL; paf = paf->next )
+                {
+                    if(paf->location == APPLY_DAMROLL && paf->modifier >= enaz)
+                    {
+                        spell_identify( 0, 0, ch, obj ,0);
+                        send_to_char("\n\r",ch);
+                    }
+                }
+            }
+        }
+    }
+    else if (!strcmp(arg1, "vz"))
+    {
+        for( obj=object_list; obj!=NULL; obj = obj->next )
+        {
+            if( altseviye >= 0 && obj->level < altseviye )
+                continue;
+            if( ustseviye >= 0 && obj->level > ustseviye )
+                continue;
+
+            if(obj->pIndexData->random_object && obj->affected != NULL)
+            {
+                for ( paf = obj->affected; paf != NULL; paf = paf->next )
+                {
+                    if(paf->location == APPLY_HITROLL && paf->modifier >= enaz)
+                    {
+                        spell_identify( 0, 0, ch, obj ,0);
+                        send_to_char("\n\r",ch);
+                    }
+                }
+            }
+        }
+    }
+    else if (!strcmp(arg1, "nitelik"))
+    {
+        for( obj=object_list; obj!=NULL; obj = obj->next )
+        {
+            if( altseviye >= 0 && obj->level < altseviye )
+                continue;
+            if( ustseviye >= 0 && obj->level > ustseviye )
+                continue;
+
+            if(obj->pIndexData->random_object && obj->affected != NULL)
+            {
+                for ( paf = obj->affected; paf != NULL; paf = paf->next )
+                {
+                    if((paf->location == APPLY_STR || paf->location == APPLY_INT || paf->location == APPLY_DEX ||
+                        paf->location == APPLY_WIS || paf->location == APPLY_CON || paf->location == APPLY_CHA ) && paf->modifier >= enaz)
                     {
                         spell_identify( 0, 0, ch, obj ,0);
                         send_to_char("\n\r",ch);
