@@ -2493,7 +2493,7 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
             obj->value[0]	= obj->cost;
         break;
     }
-
+    obj_random_material(obj);
     obj->weight         = obj_random_weight(obj->pIndexData->vnum, obj->item_type, obj->value[0], find_material_index(obj->material), obj->wear_flags);
 	
 	if(Count == TRUE && obj->pIndexData->random_object)
