@@ -517,52 +517,55 @@ int find_material_decay_days(OBJ_DATA *obj)
 	return 240;
 }
 
-void obj_random_weight(OBJ_DATA *obj)
+int obj_random_weight(int vnum, int item_type, int weapon_type, int material, int wear_flags)
 {
 	//return (UMAX(1,level/10) * number_range(1,10));
 	//return material_table[find_material_index(obj->material)].weight_pt * (number_range(1,2));
 	long hacim = 0;
-	switch ( obj->item_type )
+
+	switch ( item_type )
 	{
 		case ITEM_ARMOR:
-			if(IS_SET(obj->wear_flags, ITEM_WEAR_FINGER))
+			if(wear_flags & ITEM_WEAR_FINGER)
 				hacim = number_range(1,3);
-			else if(IS_SET(obj->wear_flags, ITEM_WEAR_NECK))
+			else if(wear_flags & ITEM_WEAR_NECK)
 				hacim = number_range(10,60);
-			else if(IS_SET(obj->wear_flags, ITEM_WEAR_BODY))
+			else if(wear_flags & ITEM_WEAR_BODY)
 				hacim = number_range(700,1125);
-			else if(IS_SET(obj->wear_flags, ITEM_WEAR_HEAD))
+			else if(wear_flags & ITEM_WEAR_HEAD)
 				hacim = number_range(175,450);
-			else if(IS_SET(obj->wear_flags, ITEM_WEAR_LEGS))
+			else if(wear_flags & ITEM_WEAR_LEGS)
 				hacim = number_range(300,625);
-			else if(IS_SET(obj->wear_flags, ITEM_WEAR_FEET))
+			else if(wear_flags & ITEM_WEAR_FEET)
 				hacim = number_range(175,375);
-			else if(IS_SET(obj->wear_flags, ITEM_WEAR_HANDS))
+			else if(wear_flags & ITEM_WEAR_HANDS)
 				hacim = number_range(80,250);
-			else if(IS_SET(obj->wear_flags, ITEM_WEAR_ARMS))
+			else if(wear_flags & ITEM_WEAR_ARMS)
 				hacim = number_range(200,375);
-			else if(IS_SET(obj->wear_flags, ITEM_WEAR_SHIELD))
+			else if(wear_flags & ITEM_WEAR_SHIELD)
 				hacim = number_range(300,625);
-			else if(IS_SET(obj->wear_flags, ITEM_WEAR_ABOUT))
+			else if(wear_flags & ITEM_WEAR_ABOUT)
 				hacim = number_range(125,500);
-			else if(IS_SET(obj->wear_flags, ITEM_WEAR_WAIST))
+			else if(wear_flags & ITEM_WEAR_WAIST)
 				hacim = number_range(150,300);
-			else if(IS_SET(obj->wear_flags, ITEM_WEAR_WRIST))
+			else if(wear_flags & ITEM_WEAR_WRIST)
 				hacim = number_range(10,60);
-			else if(IS_SET(obj->wear_flags, ITEM_HOLD))
+			else if(wear_flags & ITEM_HOLD)
 				hacim = number_range(10,60);
-			else if(IS_SET(obj->wear_flags, ITEM_NO_SAC))
+			else if(wear_flags & ITEM_NO_SAC)
 				hacim = number_range(300,625);
-			else if(IS_SET(obj->wear_flags, ITEM_WEAR_FLOAT))
+			else if(wear_flags & ITEM_WEAR_FLOAT)
 				hacim = number_range(20,200);
-			else if(IS_SET(obj->wear_flags, ITEM_WEAR_TATTOO))
+			else if(wear_flags & ITEM_WEAR_TATTOO)
 				hacim = number_range(1,2);
 			else
-				bugf( "Random volume: Unknown armor type '%d'", obj->pIndexData->vnum );
+			{
+				bugf( "Random volume: Unknown armor type '%d'", vnum );
 				hacim = number_range(300,625);
+			}
 			break;
 		case ITEM_WEAPON:
-			switch (obj->value[0])
+			switch (weapon_type)
 			{
 				case(WEAPON_EXOTIC):
 					hacim = number_range(125,250);
@@ -601,7 +604,7 @@ void obj_random_weight(OBJ_DATA *obj)
 					hacim = number_range(125,250);
 					break;
 				default:
-					bugf( "Random volume: Unknown weapon type '%d'", obj->pIndexData->vnum );
+					bugf( "Random volume: Unknown weapon type '%d'", vnum );
 					hacim = number_range(125,250);
 					break;
  	    	}
@@ -678,12 +681,11 @@ void obj_random_weight(OBJ_DATA *obj)
 			hacim = number_range(1,10);
 			break;
 		default:
-			bugf( "Random volume: Unknown obj type '%d'", obj->pIndexData->vnum );
+			bugf( "Random volume: Unknown obj type '%d'", vnum );
 			hacim = number_range(8,1000);
 	}
 
-	obj->weight = material_table[find_material_index(obj->material)].weight_pt * hacim;
-	return;
+	return material_table[material].weight_pt * hacim;
 }
 
 void obj_random_material(OBJ_DATA *obj)

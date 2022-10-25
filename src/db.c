@@ -2493,6 +2493,8 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
             obj->value[0]	= obj->cost;
         break;
     }
+
+    obj->weight         = obj_random_weight(obj->pIndexData->vnum, obj->item_type, obj->value[0], find_material_index(obj->material), obj->wear_flags);
 	
 	if(Count == TRUE && obj->pIndexData->random_object)
 	{
@@ -2500,7 +2502,7 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
         obj->condition	    = obj_random_condition();
         obj_random_material(obj);
         obj->cost           = obj_random_cost(obj->level);
-        obj_random_weight(obj);
+        obj->weight         = obj_random_weight(obj->pIndexData->vnum, obj->item_type, obj->value[0], find_material_index(obj->material), obj->wear_flags);
         obj->extra_flags    = obj_random_extra_flag();
 
         switch ( obj->item_type )
@@ -2509,16 +2511,16 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
                 obj->value[4] = obj_random_weapon_flag();
             break;
             case ITEM_ARMOR:
-                obj->value[0]	= number_range(1,int(obj->level/2));	// armor vs. pierce
-                obj->value[1]	= number_range(1,int(obj->level/2));	// armor vs. bash
-                obj->value[2]	= number_range(1,int(obj->level/2));	// armor vs. slash
-                obj->value[3]	= number_range(1,int(obj->level/2));	// armor vs. exotic weapons
+                obj->value[0]	= number_range( UMAX(1,int((obj->level+4)/5)) , UMAX(1,int((obj->level+3)/2)) );	// armor vs. pierce
+                obj->value[1]	= number_range( UMAX(1,int((obj->level+4)/5)) , UMAX(1,int((obj->level+3)/2)) );	// armor vs. bash
+                obj->value[2]	= number_range( UMAX(1,int((obj->level+4)/5)) , UMAX(1,int((obj->level+3)/2)) );	// armor vs. slash
+                obj->value[3]	= number_range( UMAX(1,int((obj->level+4)/5)) , UMAX(1,int((obj->level+3)/2)) );	// armor vs. exotic weapons
                 obj->value[4]	= 0;										// unused
             break;
             case ITEM_WAND:
             case ITEM_STAFF:
                 obj->value[0]	= (number_percent()<95)?(obj->level):(number_range(5,90)); // spell level
-                obj->value[1]	= number_range(1,40);	// maximum number of charges
+                obj->value[1]	= number_range( UMAX(1,int((obj->level+4)/5)) , UMAX(1,int((obj->level+3)/2)) );	// maximum number of charges
                 obj->value[2]	= obj->value[1];	// current number of charges
                 obj->value[3]	= skill_lookup(obj_random_wand_potion_spell());
                 obj->value[4]	= 0;					// unused
@@ -2547,7 +2549,7 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
                         obj->value[4] = skill_lookup(obj_random_wand_potion_spell());
                     }
                 }
-                obj->cost = UMAX(number_range(950,1000),obj->cost * number_range(1,5));
+                obj->cost = number_range( UMAX(1,obj->level) , UMAX(2,obj->level*3) );
             break;
             case ITEM_LIGHT:
                 obj->value[0]	= 0;								// unused
