@@ -799,18 +799,18 @@ char *show_char_to_char_1_alignment(CHAR_DATA *ch , CHAR_DATA *victim)
 
   if (alignment >= 350)
   {
-    return (char*)"iyi";
+    return (char*)"galiba 'iyi'";
   }
   else if (alignment <= -350)
   {
-    return (char*)"kem";
+    return (char*)"galiba 'kem'";
   }
   else
   {
-    return (char*)"yansız";
+    return (char*)"galiba 'yansız'";
   }
 
-  return (char*)"yansız";
+  return (char*)"galiba 'yansız'";
 }
 
 
