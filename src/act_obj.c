@@ -4944,7 +4944,7 @@ void do_kasa(CHAR_DATA *ch, char *argument)
 		{
 			pcount++;
 		}
-		if( pcount > 15 )
+		if( pcount > 25 )
 		{
 			send_to_char( "Kasaya bu kadar çok eþya koyamazsýn.\n\r", ch );
 			return;
