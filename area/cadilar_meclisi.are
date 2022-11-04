@@ -235,19 +235,6 @@ BFGX DFH 28
 #0
 
 
-#OBJECTS
-#29139
-görünmezlik iksiri sývý þiþe~
-görünmezlik iksiri~
-Sývý dolu bir þiþe görüyorsun.
-~
-glass~
-potion 0 AN
-30 'invis' 'detect invis' '' ''
-28 10 3000 P
-#0
-
-
 #NEW_OBJECTS
 #29120
 altýn orak rün~
@@ -448,6 +435,15 @@ wool~
 trash 0 AO
 0 0 0 0 0
 6 100 1500 P
+#29139
+görünmezlik iksiri sývý þiþe~
+görünmezlik iksiri~
+Sývý dolu bir þiþe görüyorsun.
+~
+glass~
+potion 0 AN
+30 'invis' 'detect invis' '' ''
+28 10 3000 P
 #0
 
 
@@ -2329,10 +2325,6 @@ M  29131 spec_cast_cleric         *  The witch
 M  29132 spec_cast_mage           *  The warlock
 M  29133 spec_cast_mage           *  The coven leader
 M  29134 spec_breath_fire         *  The beast from hell
-S
-
-#OLIMITS
-O 29139 2 * detect invis ve invis
 S
 
 #$

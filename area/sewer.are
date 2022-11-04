@@ -264,33 +264,6 @@ ABF J 12
 #0
 
 
-#OBJECTS
-#7221
-shield~
-the shield of the rose~
-The shield of the rose rests on the floor.~
-steel~
-armor GIKL AJ
-8 8 8 3 0
-30 300 5800 P
-A
-17 -7
-E
-shield~
-On the shield you see a clear and perfect painting of a dark red rose on a white
-background. You also notice the inscription :'Pax Est Sanctuum'.
-~
-#7303
-orb dragonorb~
-the Red DragonOrb~
-A large reddish sphere is in the center of the room.~
-emerald~
-staff GJ AO
-13 10 10 'sanctuary' 0
-21 50 18600 P
-#0
-
-
 #NEW_OBJECTS
 #7190
 ring silver~
@@ -524,6 +497,21 @@ helmet silvery~
 The helmet is made from platinum or silver and has a white fur brush attached
 on the top.
 ~
+#7221
+shield~
+the shield of the rose~
+The shield of the rose rests on the floor.~
+steel~
+armor GIKL AJ
+8 8 8 3 0
+30 300 5800 P
+A
+17 -7
+E
+shield~
+On the shield you see a clear and perfect painting of a dark red rose on a white
+background. You also notice the inscription :'Pax Est Sanctuum'.
+~
 #7222
 boots silvery~
 a pair of silvery boots~
@@ -607,6 +595,14 @@ cloth~
 container 0 AL
 5 AC 0 1 100
 0 10 20 P
+#7303
+orb dragonorb~
+the Red DragonOrb~
+A large reddish sphere is in the center of the room.~
+emerald~
+staff GJ AO
+13 10 10 'sanctuary' 0
+21 50 18600 P
 #7304
 red torso~
 a red dragon torso~
@@ -4700,15 +4696,6 @@ M 7201 spec_cast_mage      	* the senior mindflayer
 M 7202 spec_cast_mage      	* the junior mindflayer
 M 7203 spec_poison         	* the ugly wererat
 M 7204 spec_poison         	* the gigantic rat
-S
-
-#OMPROGS
-O 7221 fight_prog fight_prog_rose_shield
-S
-
-#OLIMITS
-O 7221 1
-O 7303 10	* sanctuary potion
 S
 
 #$

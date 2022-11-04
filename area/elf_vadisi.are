@@ -167,16 +167,6 @@ human~
 AH 0 6
 #0
 
-#OBJECTS
-#7810
-iksir~
-bir iksir~
-Bir iksir yerde duruyor.~
-glass~
-potion G A
-10 'improved detect' 'detect magic' 'detect invis' 'weaken'
-4 10 290 P
-#0
 
 #NEW_OBJECTS
 #7800
@@ -269,6 +259,14 @@ glass~
 potion G A
 10 'energy drain' '' '' ''
 8 10 580 P
+#7810
+iksir~
+bir iksir~
+Bir iksir yerde duruyor.~
+glass~
+potion G A
+10 'improved detect' 'detect magic' 'detect invis' 'weaken'
+4 10 290 P
 #7811
 iksir~
 bir iksir~
@@ -2234,15 +2232,15 @@ M 0 7814   3 7815  1	* an antelope
 M 0 7814   3 7825  1	* an antelope
 M 0 7814   3 7852  1	* an antelope
 S
+
 #SHOPS
 0
+
 #SPECIALS
 M 7807 spec_cast_cleric    	* a valley elf elder
 M 7808 spec_cast_mage      	* a valley elf elder
 M 7809 spec_breath_fire    	* the pyrohydra
 M 7811 spec_cast_mage      	* Talemon
 S
-#OLIMITS
-O 7810 2
-S
+
 #$

@@ -1169,15 +1169,19 @@ Ayný.
 0 0 1020
 S
 #0
+
 #RESETS
 M 0 1000  10 1005  4	* A fairy dragon
 M 0 1000  10 1022  4	* A fairy dragon
 M 0 1000  10 1019  4	* A fairy dragon
 M 0 1001   3 1034  3	* A griffin
 S
+
 #SHOPS
 0
+
 #SPECIALS
 M 1000 spec_cast_mage      	* A fairy dragon
 S
+
 #$

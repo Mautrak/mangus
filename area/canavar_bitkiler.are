@@ -110,25 +110,6 @@ human~
 #0
 
 
-#OBJECTS
-#30233
-sümüksü salgý~
-sümüksü salgý~
-Sümüksü bir salgý birikintisi görüyorsun. ÝÐRENÇ!~
-glass~
-potion 1 1
-25 'heal' 'invis' 'sanctuary' ''
-25 1 5800 P
-#30234
-tuzlanmýþ yaprak~
-tuzlanmýþ yaprak~
-Tuzlanmýþ bir yaprak görüyorsun.~
-wheat~
-pill 1 1
-30 'armor' 'fly' 'infravision' ''
-25 1 2000 P
-#0
-
 
 #NEW_OBJECTS
 #30232
@@ -145,6 +126,22 @@ A
 19 10
 A
 3 -1
+#30233
+sümüksü salgý~
+sümüksü salgý~
+Sümüksü bir salgý birikintisi görüyorsun. ÝÐRENÇ!~
+glass~
+potion 1 1
+25 'heal' 'invis' 'sanctuary' ''
+25 1 5800 P
+#30234
+tuzlanmýþ yaprak~
+tuzlanmýþ yaprak~
+Tuzlanmýþ bir yaprak görüyorsun.~
+wheat~
+pill 1 1
+30 'armor' 'fly' 'infravision' ''
+25 1 2000 P
 #30235
 iþlenmiþ yapraklar~
 iþlenmiþ yapraklar~
@@ -718,11 +715,6 @@ E 1 30235 100 17
 *
 M 1 30236 1 30245 1 * A Bowlful of Resinated Bud to A Leaf of the Plant
 G 1 30234 100
-S
-
-#OLIMITS
-O 30233 10	* sanctuary potion
-O 30234 3	* tuzlanmýþ yaprak
 S
 
 #$

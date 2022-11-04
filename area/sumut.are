@@ -280,36 +280,6 @@ human~
 ABCR BDFHNT 22
 #0
 
-#OBJECTS
-#923
-güneþ kýlýç~
-Güneþ Kýlýcý~
-Parýldayan, güzel bir kýlýç yerde duruyor.~
-platinum~
-weapon FGKL AN
-sword 12 10 slash 0
-85 200 6800 P
-A
-19 20
-A
-18 20
-#926
-nektar~
-nektar~
-Ufak bir þiþe nektar yerde duruyor.~
-glass~
-potion 0 A
-90 'sanctuary' 'giant strength' 'fly' 'enhanced armor'
-42 10 810 P
-#905
-asa fildiþi~
-fildiþi asa~
-Bir fildiþi asa burada býrakýlmýþ.~
-ivory~
-staff FGK AO
-90 9 9 'sanctuary' 0
-55 80 35800 P
-#0
 
 
 
@@ -374,6 +344,14 @@ armor FGK AG
 65 50 32200 P
 F
 A 0 0 T
+#905
+asa fildiþi~
+fildiþi asa~
+Bir fildiþi asa burada býrakýlmýþ.~
+ivory~
+staff FGK AO
+90 9 9 'sanctuary' 0
+55 80 35800 P
 #906
 üç diþ asa~
 Üç Diþli Asa~
@@ -544,6 +522,18 @@ A
 17 -40
 A
 24 -5
+#923
+güneþ kýlýç~
+Güneþ Kýlýcý~
+Parýldayan, güzel bir kýlýç yerde duruyor.~
+platinum~
+weapon FGKL AN
+sword 12 10 slash 0
+85 200 6800 P
+A
+19 20
+A
+18 20
 #924
 kaftan mavi~
 mavi kaftan~
@@ -562,6 +552,14 @@ cloth~
 armor FGK AE
 4 4 4 3 0
 5 50 580 P
+#926
+nektar~
+nektar~
+Ufak bir þiþe nektar yerde duruyor.~
+glass~
+potion 0 A
+90 'sanctuary' 'giant strength' 'fly' 'enhanced armor'
+42 10 810 P
 #927
 anahtar hücre~
 hücre anahtarý~
@@ -1538,20 +1536,6 @@ M 921 spec_cast_cleric    	* Hera
 M 922 spec_poison         	* a roc
 M 923 spec_thief          	* A citizen
 M 926 spec_cast_mage      	* The Jailer
-S
-
-#OMPROGS
-O 908 fight_prog fight_prog_firegauntlets
-O 908 wear_prog wear_prog_firegauntlets
-O 908 remove_prog remove_prog_firegauntlets
-O 923 fight_prog fight_prog_vorbalblade
-O 901 fight_prog fight_prog_shockwave
-S
-
-#OLIMITS
-O 923 1         * Sword of SUN
-O 926 10	* sanctuary potion
-O 905 10	* sanctuary potion
 S
 
 #$

@@ -571,24 +571,6 @@ ABT 0 80
 #0
 
 
-#OBJECTS
-#17025
-volkanik kol bantlarý~
-Volkanik kol bantlarý~
-Ateþten yapýlmýþ kol bantlarý yerde için için yanýyor.
-~
-coal~
-armor AGQ AI
-25 25 25 25 0
-64 5 1000 P
-A
-13 100
-E
-fire~
-The armbands are burning brightly.
-~
-#0
-
 
 #NEW_OBJECTS
 #17011
@@ -780,6 +762,21 @@ eye eyeball~
 You stare into the eye, and you feel an ancient evil try to
 wrest control of your mind away from you. You win and break
 your gaze.
+~
+#17025
+volkanik kol bantlarý~
+Volkanik kol bantlarý~
+Ateþten yapýlmýþ kol bantlarý yerde için için yanýyor.
+~
+coal~
+armor AGQ AI
+25 25 25 25 0
+64 5 1000 P
+A
+13 100
+E
+fire~
+The armbands are burning brightly.
 ~
 #17026
 sandýk tunç~
@@ -4240,16 +4237,6 @@ M  17037 spec_fido             *All sharks eat corpses
 M  17038 spec_fido             *All sharks eat corpses
 M  17039 spec_fido             *All sharks eat corpses
 M  17050 spec_cast_mage        *Lord Vulture dabbles in magic
-S
-
-#OLIMITS
-O 17025 1 * armbands volcanoes
-S
-
-#OMPROGS
-O 17025 fight_prog fight_prog_armbands
-O 17025 wear_prog wear_prog_armbands
-O 17025 remove_prog remove_prog_armbands
 S
 
 #$

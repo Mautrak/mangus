@@ -75,6 +75,7 @@ bir çürümüþ zombi~
 human~
 AF J 4
 #0
+
 #NEW_OBJECTS
 #3600
 þamdan~
@@ -919,8 +920,10 @@ M 0 3605   3 3651  1	* the rotting zombie
 M 0 3605   3 3644  1	* the rotting zombie
 M 0 3605   3 3638  1	* the rotting zombie
 S
+
 #SHOPS
 0
+
 #SPECIALS
 M 3601 spec_cast_undead    	* the rotting zombie
 M 3602 spec_cast_undead    	* the ghastly ghoul
@@ -928,4 +931,5 @@ M 3603 spec_cast_undead    	* a dusty skeleton
 M 3604 spec_cast_undead    	* a dusty skeleton
 M 3605 spec_cast_undead    	* the rotting zombie
 S
+
 #$

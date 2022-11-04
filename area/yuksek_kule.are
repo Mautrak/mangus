@@ -630,19 +630,6 @@ ACGR DP 17
 #0
 
 
-#OBJECTS
-#1384
-bileklik gümüþ~
-ýþýldayan gümüþ bir bileklik~
-Iþýldayan, gümüþ bir çember burada~
-silver~
-jewelry G AM
-0 0 0 0 0
-20 50 1440 P
-A
-17 -5
-#0
-
 
 #NEW_OBJECTS
 #1301
@@ -1322,6 +1309,16 @@ A
 20 -2
 A
 17 -7
+#1384
+bileklik gümüþ~
+ýþýldayan gümüþ bir bileklik~
+Iþýldayan, gümüþ bir çember burada~
+silver~
+jewelry G AM
+0 0 0 0 0
+20 50 1440 P
+A
+17 -5
 #1385
 asa~
 demir ayaklý bir asa~
@@ -5138,15 +5135,6 @@ M 1362 spec_cast_mage      	* The master of goodness
 M 1363 spec_cast_mage      	* A calico cat
 M 1364 spec_cast_mage      	* The Grand Mistress
 M 1365 spec_cast_mage      	* a wizard
-S
-
-#OMPROGS
-O 1384 wear_prog wear_prog_bracer		* Glinting silver bracelet.
-O 1384 remove_prog remove_prog_bracer		* Glinting silver bracelet.
-S
-
-#OLIMITS
-O 1384 3
 S
 
 #PRACTICERS

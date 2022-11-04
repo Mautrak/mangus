@@ -216,22 +216,6 @@ human~
 ABQ DEHJN 38
 #0
 
-#OBJECTS
-#8721
-ufak bir iksir þiþesi~
-ufak bir iksir þiþesi~
-Ufak bir iksir þiþesi ayaðýnýn dibinde duruyor.~
-glass~
-potion G A
-30 'giant strength' 'stone skin' 'sanctuary' ''
-16 20 1820 P
-E
-small elixir~
-The elixir is deceptively small.  Something tells you that its
-contents are truly quite potent.  Perhaps too potent for ordinary
-mortals to attempt to consume.
-~
-#0
 
 #NEW_OBJECTS
 #8700
@@ -545,6 +529,20 @@ curse mummy~
 Rumor has it that whomever disturbs the grave of the mummy shall be
 cursed for all eternity, and that the descendents of that person shall
 likewise be cursed for ten generations to follow.
+~
+#8721
+ufak bir iksir þiþesi~
+ufak bir iksir þiþesi~
+Ufak bir iksir þiþesi ayaðýnýn dibinde duruyor.~
+glass~
+potion G A
+30 'giant strength' 'stone skin' 'sanctuary' ''
+16 20 1820 P
+E
+small elixir~
+The elixir is deceptively small.  Something tells you that its
+contents are truly quite potent.  Perhaps too potent for ordinary
+mortals to attempt to consume.
 ~
 #8722
 altýn maske~
@@ -2234,8 +2232,10 @@ E 1 8722  -1    6	*   a golden mask
 O 0 8723   0 8719	* the diamond
 O 0 8728   0 8729	* lost ring ra
 S
+
 #SHOPS
 0
+
 #SPECIALS
 M 8700 spec_poison         	* A horrible asp
 M 8701 spec_poison         	* A hooded cobra snake
@@ -2248,15 +2248,6 @@ M 8714 spec_cast_cleric    	* A criosphinx
 M 8715 spec_cast_cleric    	* An androsphinx
 M 8716 spec_breath_any     	* The great sphinx
 M 8717 spec_cast_cleric    	* Ramses the Damned
-S
-
-#OMPROGS
-O 8716 fight_prog fight_prog_lion_claw
-O 8728 speech_prog speech_prog_ring_ra
-S
-
-#OLIMITS
-O 8721 10	* potion sanctuary
 S
 
 #$

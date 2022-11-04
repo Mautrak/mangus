@@ -538,18 +538,6 @@ AIQU DEFTZe 70
 #0
 
 
-#OBJECTS
-#12049
-gecenin kaný~
-gecenin kaný~
-Gecenin Kraliçesinin bir damla kaný.~
-glass~
-potion G AO
-80 'pass door' 'sanctuary' '' ''
-82 3 9900 P
-#0
-
-
 #NEW_OBJECTS
 #12000
 palamut kep~
@@ -1120,6 +1108,14 @@ A
 13 50
 A
 12 50
+#12049
+gecenin kaný~
+gecenin kaný~
+Gecenin Kraliçesinin bir damla kaný.~
+glass~
+potion G AO
+80 'pass door' 'sanctuary' '' ''
+82 3 9900 P
 #12050
 geyik boynuzlu miðfer~
 Bir geyik boynuzlu miðfer~
@@ -5351,9 +5347,5 @@ S
 
 #SHOPS
 0
-
-#OLIMITS
-O 12049 10  * night 'sanctuary' potion
-S
 
 #$

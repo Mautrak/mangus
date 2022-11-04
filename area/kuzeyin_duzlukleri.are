@@ -110,6 +110,7 @@ but so far they haven't succeeded.
 dragon~
 ABHR DH 10
 #0
+
 #NEW_OBJECTS
 #300
 bitkiler~
@@ -1305,11 +1306,14 @@ M 0  301   1  331  1	* Sorbus the Hermit
 G 1  303   2     	*   a dark red jar
 O 0  309  30  331	* a rabbit roast
 S
+
 #SHOPS
  306  1 10 11 19  0 	 120  60 	 0 23 	* Luxan
  308  0  0  0  0  0 	 110 100 	 0 23 	* the Innkeeper
 0
+
 #SPECIALS
 M 350 spec_cast_mage      	* the pet dragon
 S
+
 #$

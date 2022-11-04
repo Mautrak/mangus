@@ -711,21 +711,6 @@ human~
 ABG H 6
 #0
 
-#OBJECTS
-#31010
-iksir sarý~
-sarý iksir~
-Küçük sarý bir iksir görüyorsun.~
-glass~
-potion 64 1
-12 'detect invis' '' '' ''
-0 10 220 P
-E
-iksir sarý~
-The iksir has a small label 'Detect The Invisible'.
-~
-#0
-
 #NEW_OBJECTS
 #31000
 püsküllü anahtar~
@@ -818,6 +803,18 @@ vellum~
 scroll 64 1
 12 'identify' '' '' ''
 0 1 2000 P
+#31010
+iksir sarý~
+sarý iksir~
+Küçük sarý bir iksir görüyorsun.~
+glass~
+potion 64 1
+12 'detect invis' '' '' ''
+0 10 220 P
+E
+iksir sarý~
+The iksir has a small label 'Detect The Invisible'.
+~
 #31011
 bufalo derisinden matara~
 bufalo derisinden matara~
@@ -5043,7 +5040,4 @@ S
 M 31000  group_protective * gath
 S
 
-#OLIMITS
-O 31010 2
-S
 #$

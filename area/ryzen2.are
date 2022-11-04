@@ -167,35 +167,7 @@ AGR H 31
 #0
 
 
-#OBJECTS
-#22005
-sheath wrist~
-a concealable wrist sheath~
-A large leather wrist sheath for a dagger lies here.~
-leather~
-container GY AM
-10 0 0 5 50
-26 2 500 P
-A
-17 -10
-A
-19 4
-A
-18 4
-#22007
-rulership rod~
-the Rod of Rulership~
-A rod inscribed with words of command floats here.~
-adamantite~
-armor ABG AO
-13 12 12 5 0
-38 5 5000 P
-A
-18 4
-A
-13 100
-A
-19 7
+#NEW_OBJECTS
 #22000
 girdle giant strength~
 girdle of giant strength~
@@ -206,10 +178,6 @@ armor BG AL
 42 3 2000 P
 A
 19 5
-#0
-
-
-#NEW_OBJECTS
 #22001
 bone key carved~
 a carved bone key~
@@ -254,6 +222,20 @@ A
 12 50
 A
 3 2
+#22005
+sheath wrist~
+a concealable wrist sheath~
+A large leather wrist sheath for a dagger lies here.~
+leather~
+container GY AM
+10 0 0 5 50
+26 2 500 P
+A
+17 -10
+A
+19 4
+A
+18 4
 #22006
 spinagon spear~
 a Spinagon's spear~
@@ -266,6 +248,20 @@ A
 19 6
 A
 18 2
+#22007
+rulership rod~
+the Rod of Rulership~
+A rod inscribed with words of command floats here.~
+adamantite~
+armor ABG AO
+13 12 12 5 0
+38 5 5000 P
+A
+18 4
+A
+13 100
+A
+19 7
 #22008
 collar bloody~
 a bloody collar~
@@ -1177,19 +1173,7 @@ M 0 22008 5 22049 1*Load a Spinagon
 E 0 22006 0 16 A spinagon's spear is loaded wielded of a Spinagon
 S
 
-
-
 #SHOPS
 0
 
-#OMPROGS
-O 22000 wear_prog wear_prog_girdle_giant
-O 22000 remove_prog remove_prog_girdle_giant
-S
-
-#OLIMITS
-O 22005 3
-O 22007 2
-O 22000 2
-S
 #$

@@ -1852,9 +1852,5 @@ M 9331 spec_cast_mage      	* Cepheus the King
 M 9332 spec_breath_acid    	* Polaris, the polar star
 S
 
-#OMPROGS
-O 9302 wear_prog wear_prog_arm_hercules
-O 9302 remove_prog remove_prog_arm_hercules
-S
 
 #$

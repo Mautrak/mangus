@@ -1254,8 +1254,11 @@ M 0 9010   4 9052  1	* secundus
 M 0 9011   1 9020  1	* Primus
 E 1 9000   2   16	*   THE long sword
 S
+
 #SHOPS
 0
+
 #SPECIALS
 S
+
 #$

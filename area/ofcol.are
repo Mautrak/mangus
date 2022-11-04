@@ -16,6 +16,7 @@ END
 
 #NEW_MOBILES
 #0
+
 #NEW_OBJECTS
 #0
 
@@ -173,6 +174,7 @@ kolay çünkü bir çok düþmanýnýn altýna R.I.P. yazýlmýþ.
 ~
 S
 #0
+
 #RESETS
 M 0  303   5 5556  3	* the citizen
 M 0  303   5 5550  3	* the citizen
@@ -187,8 +189,11 @@ G 1 3000 100     	*   a barrel of beer
 G 1 3001 100     	*   a bottle of beer
 M 0  350   1 5577  1	* the pet dragon
 S
+
 #SHOPS
 0
+
 #SPECIALS
 S
+
 #$

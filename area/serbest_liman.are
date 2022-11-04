@@ -365,26 +365,6 @@ human~
 ACEX 0 8
 #0
 
-#OBJECTS
-#29202
-mavi kertenkele dili~
-mavi kertenkele dili~
-Mavi bir kertenkele dili burada duruyor.
-~
-flesh~
-pill 0 A
-10 'sanctuary' '' '' ''
-8 1 2450 P
-#29234
-trol taþý yeþil~
-trol taþý~
-Yeþile boyanmýþ bir taþ burada bekliyor.~
-glass~
-staff FG AO
-55 10 8 'sanctuary' 0
-52 1 3000 P
-#0
-
 
 
 #NEW_OBJECTS
@@ -397,6 +377,15 @@ iron~
 key 0 A
 0 0 0 0 0
 44 1 440 P
+#29202
+mavi kertenkele dili~
+mavi kertenkele dili~
+Mavi bir kertenkele dili burada duruyor.
+~
+flesh~
+pill 0 A
+10 'sanctuary' '' '' ''
+8 1 2450 P
 #29203
 kýrmýzý kertenkele dili~
 kýrmýzý kertenkele dili~
@@ -733,6 +722,14 @@ A
 13 20
 A
 19 5
+#29234
+trol taþý yeþil~
+trol taþý~
+Yeþile boyanmýþ bir taþ burada bekliyor.~
+glass~
+staff FG AO
+55 10 8 'sanctuary' 0
+52 1 3000 P
 #0
 
 
@@ -2351,12 +2348,5 @@ S
 29219 9 2 3 4 28 140 60 17 23
 29227 17 19 0 0 0 110 90 0 23
 0
-
-
-#OLIMITS
-O 29202 10	* sanctuary potion
-O 29234 10 	* sanctuary potion
-
-S
 
 #$

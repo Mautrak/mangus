@@ -977,8 +977,10 @@ D 0 8027   2    2       * Stockroom of Throt & Gleep's Megger Store south
 D 0 8027   0    2       * Stockroom of Throt & Gleep's Megger Store north
 D 0 8028   2    2       * Throt & Gleep's Vault south
 S
+
 #SHOPS
 0
+
 #SPECIALS
 M 8003 spec_cast_judge          * a Citi-Def Militiaman
 M 8004 spec_thief               * a dunk
@@ -986,5 +988,6 @@ M 8006 spec_cast_judge          * a rookie judge
 M 8010 spec_cast_judge          * Judge Eckersely
 M 8011 spec_cast_judge          * Judge Beddows
 S
+
 #$
 

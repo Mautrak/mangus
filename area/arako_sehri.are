@@ -340,38 +340,6 @@ AB P 1
 #0
 
 
-#OBJECTS
-#5644
-uzun pençe~
-bir çift uzun pençe~
-Bir çift uzun pençe görüyorsun.~
-tin~
-armor AO AH
-5 1 1 1 1
-5 100 1000 G
-A
-19 4
-#5655
-uzun pençe~
-bir çift uzun pençe~
-Bir çift uzun pençe görüyorsun.~
-bronze~
-armor BO AH
-5 1 1 1 0
-5 100 1000 G
-A
-19 4
-#5608
-bukalemun kuyruk~
-bukalemun kuyruðu~
-Bir bukalemun kuyruðu görüyorsun.~
-snakeskin~
-pill 0 A
-11 'detect invis' '' '' ''
-9 100 400 P
-#0
-
-
 #NEW_OBJECTS
 #5600
 taze kurt paketi~
@@ -439,6 +407,14 @@ glass~
 pill 0 A
 20 'detect magic' '' '' ''
 2 100 100 P
+#5608
+bukalemun kuyruk~
+bukalemun kuyruðu~
+Bir bukalemun kuyruðu görüyorsun.~
+snakeskin~
+pill 0 A
+11 'detect invis' '' '' ''
+9 100 400 P
 #5609
 mürekkepbalýðý gözü~
 mürekkepbalýðý gözü~
@@ -772,6 +748,16 @@ E
 çizme~
 These boots have large toe holes, to accommodate large Aarakocran feet.
 ~
+#5644
+uzun pençe~
+bir çift uzun pençe~
+Bir çift uzun pençe görüyorsun.~
+tin~
+armor AO AH
+5 1 1 1 1
+5 100 1000 G
+A
+19 4
 #5645
 kanat koruyucu~
 bir çift kanat koruyucu~
@@ -874,6 +860,16 @@ E
 çizme~
 These boots have large toe holes, to accommodate large Aarakocran feet.
 ~
+#5655
+uzun pençe~
+bir çift uzun pençe~
+Bir çift uzun pençe görüyorsun.~
+bronze~
+armor BO AH
+5 1 1 1 0
+5 100 1000 G
+A
+19 4
 #5656
 kolluk~
 bir çift kolluk~
@@ -3622,9 +3618,4 @@ M  5628 spec_guard                       * the small bat
 * M  5606 spec_taxidermist   the taxidermist
 S
 
-#OLIMITS
-O 5644 3
-O 5655 3
-O 5608 2
-S
 #$

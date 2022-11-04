@@ -151,6 +151,7 @@ still hang over his clothes from last camouflage.
 human~
 ABKRV DEFZ 66
 #0
+
 #NEW_OBJECTS
 #6000
 çift elli odun baltasý~
@@ -2908,6 +2909,11 @@ D1
 ~
 ~
 0 -1 6180
+D3
+Denizin sýð yerleri.
+~
+~
+0 -1 2600
 S
 #0
 

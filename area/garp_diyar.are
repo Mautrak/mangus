@@ -351,23 +351,6 @@ ABCGT GHJ 125
 #0
 
 
-#OBJECTS
-#10028
-zýrh karanlýk sith~
-Karanlýðýn zýrhý~
-Geniþ gölgeli bir figür yerde.~
-adamantite~
-armor CJY AD
-31 31 31 29 10
-57 50 75000 P
-A
-13 200
-A
-24 -5
-#0
-
-
-
 #NEW_OBJECTS
 #10001
 bekçi topuz sýnýr~
@@ -815,6 +798,18 @@ A
 19 12
 A
 24 -8
+#10028
+zýrh karanlýk sith~
+Karanlýðýn zýrhý~
+Geniþ gölgeli bir figür yerde.~
+adamantite~
+armor CJY AD
+31 31 31 29 10
+57 50 75000 P
+A
+13 200
+A
+24 -5
 #0
 
 
@@ -1767,22 +1762,8 @@ M 0 10031 1 10042 1*Load The Evil Darken Rahl
 E 0 10024 0 14 The bracer of power is loaded on the left wrist of The Evil Darken Rahl
 S
 
-
-
 #SHOPS
 10023 0 0 0 0 0 100 0 0 23
 0
-
-#OMPROGS
-O 10027 wear_prog wear_prog_headguard
-O 10027 remove_prog remove_prog_headguard
-O 10028 wear_prog wear_prog_blackguard
-O 10028 remove_prog remove_prog_blackguard
-S
-
-#OLIMITS
-O 10028 2
-S
-
 
 #$

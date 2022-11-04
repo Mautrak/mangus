@@ -178,16 +178,6 @@ human~
 ABF 0 24
 #0
 
-#OBJECTS
-#2008
-kutsal su matarasý~
-bir kutsal su matarasý~
-Bir kutsal su matarasý burada.~
-copper~
-potion A AO
-25 'bless' 'sanctuary' '' ''
-11 20 880 P
-#0
 
 #NEW_OBJECTS
 #2001
@@ -260,6 +250,14 @@ stone~
 container A 0
 15 ABCD 2006 15 100
 0 0 0 P
+#2008
+kutsal su matarasý~
+bir kutsal su matarasý~
+Bir kutsal su matarasý burada.~
+copper~
+potion A AO
+25 'bless' 'sanctuary' '' ''
+11 20 880 P
 #2009
 zincirzýrh zincir zýrh giysi~
 bir zincirzýrh~
@@ -1698,16 +1696,6 @@ M 2013 spec_cast_undead    	* The vampire
 M 2014 spec_cast_undead    	* the evil necromancer
 M 2016 spec_breath_any     	* the prism dragon
 M 2017 spec_poison         	* The DarkenBeast
-S
-
-#OLIMITS
-O 2008 10	* sanctuary potion
-S
-
-#OMPROGS
-O 2005 speech_prog speech_prog_excalibur
-O 2005 wear_prog wear_prog_excalibur
-O 2005 remove_prog remove_prog_excalibur
 S
 
 #$

@@ -180,7 +180,6 @@ AHS DEPZ 91
 #0
 
 #NEW_OBJECTS
-
 #2400
 kýlýc~
 bir minik kýlýc~
@@ -2923,10 +2922,4 @@ M 2413 spec_breath_any	 * fireflash
 M 2412 spec_cast_mage	 * keeper of fireflash
 S
 
-#OMPROGS
-M 2412 give_prog give_prog_keeper
-M 2412 greet_prog greet_prog_keeper
-M 2413 greet_prog greet_prog_fireflash
-M 2413 give_prog give_prog_fireflash
-S
 #$

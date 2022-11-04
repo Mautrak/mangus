@@ -398,35 +398,6 @@ undead~
 ABFGO DF 60
 #0
 
-#OBJECTS
-#8113
-zýrh~
-Kara Zýrh~
-Bir Kara Zýrh burada duruyor.
-~
-steel~
-armor CEJ AE
-16 16 17 10 0
-50 25 15000 P
-A
-17 -10
-A
-18 4
-A
-19 7
-#8110
-elmas asa~
-bir elmas asa~
-Bir elmas asa burada kudretle parlýyor.
-~
-wood~
-staff AG AO
-50 20 20 'sanctuary' 0
-58 10 40000 P
-A
-12 50
-#0
-
 
 #NEW_OBJECTS
 #8100
@@ -571,6 +542,17 @@ silver~
 trash 0 A
 0 0 0 0 0
 1 50 0 P
+#8110
+elmas asa~
+bir elmas asa~
+Bir elmas asa burada kudretle parlýyor.
+~
+wood~
+staff AG AO
+50 20 20 'sanctuary' 0
+58 10 40000 P
+A
+12 50
 #8111
 pelerin~
 Kara Pelerin~
@@ -599,6 +581,21 @@ A
 18 2
 A
 19 4
+#8113
+zýrh~
+Kara Zýrh~
+Bir Kara Zýrh burada duruyor.
+~
+steel~
+armor CEJ AE
+16 16 17 10 0
+50 25 15000 P
+A
+17 -10
+A
+18 4
+A
+19 7
 #8114
 miðfer~
 Kara Miðfer~
@@ -2723,16 +2720,6 @@ R 1 8188 4
 R 1 8189 4
 R 1 8190 4
 R 1 8191 4
-S
-
-#OLIMITS
-O 8113 1 * A suit of dark armor
-O 8110 10 * sanctuary potion
-S
-
-#OMPROGS
-O 8122 wear_prog wear_prog_headguard
-O 8122 remove_prog remove_prog_headguard
 S
 
 #$

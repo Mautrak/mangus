@@ -1192,11 +1192,5 @@ M 5108 spec_cast_cleric    	* the matron mother
 M 5109 spec_breath_any     	* the yochlol
 S
 
-#OMPROGS
-O 5115 fight_prog fight_prog_snake
-O 5115 get_prog get_prog_snake
-O 5115 wear_prog wear_prog_snake
-O 5115 remove_prog remove_prog_snake
-S
 
 #$

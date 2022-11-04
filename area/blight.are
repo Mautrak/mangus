@@ -277,31 +277,6 @@ AT DFJ 45
 #0
 
 
-#OBJECTS
-#23020
-falagar albatros amblemli kýlýç~
-Falagar'ýn albatros amblemli kýlýcý~
-Kayýp bir ruhun adýný fýsýldayan kýlýç ayaðýnýn önünde duruyor.~
-iron~
-weapon GIM AN
-sword 10 11 slash DE
-60 12 600 P
-A
-19 15
-A
-18 10
-A
-13 50
-#23028
-asa çita~
-oymalý bir asa~
-Kedi figürü oymalý bir asa burada dinleniyor.~
-hardwood~
-staff 0 AO
-40 8 8 'sanctuary' 0
-43 5 430 P
-#0
-
 #NEW_OBJECTS
 #23001
 kýlýç büyük kavisli~
@@ -491,6 +466,20 @@ A
 17 -15
 A
 12 50
+#23020
+falagar albatros amblemli kýlýç~
+Falagar'ýn albatros amblemli kýlýcý~
+Kayýp bir ruhun adýný fýsýldayan kýlýç ayaðýnýn önünde duruyor.~
+iron~
+weapon GIM AN
+sword 10 11 slash DE
+60 12 600 P
+A
+19 15
+A
+18 10
+A
+13 50
 #23021
 malkierian battle helm crane~
 turna þekilli altýn miðfer~
@@ -573,6 +562,14 @@ E
 bayrak bayraklar~
 Bayraklardan biri küçük bir oyuðu örtüyor.
 ~
+#23028
+asa çita~
+oymalý bir asa~
+Kedi figürü oymalý bir asa burada dinleniyor.~
+hardwood~
+staff 0 AO
+40 8 8 'sanctuary' 0
+43 5 430 P
 #23029
 pislik~
 kurumuþ göl pisliði~
@@ -5949,9 +5946,5 @@ S
 #SHOPS
 0
 
-#OLIMITS
-O 23020 1 * heron market blade
-O 23028 10 * sanctuary potion
-S
 
 #$

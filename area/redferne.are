@@ -499,11 +499,6 @@ M 7900 spec_cast_cleric    	* the Grand Knight of paladins
 M 7901 spec_breath_any		* the solamnia
 S
 
-#OMPROGS
-M 7901 greet_prog greet_prog_solamnia
-M 7901 give_prog give_prog_solamnia
-S
-
 #PRACTICERS
 M 7900 group_curative		* grand knight of paladin
 S

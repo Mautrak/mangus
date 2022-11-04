@@ -1387,106 +1387,6 @@ ACFGS PQ 70
 #0
 
 
-#OBJECTS
-#11709
-adamant quanchi intikam yemini bant band~
-Quanchi'nin Ýntikam Yemini~
-Kayýp bir ruha ait kan kýrmýzýsý adamant bir bant, yemini mýrýldanýyor.~
-adamantite~
-armor B AC
-40 40 40 24 0
-90 30 15000 P
-A
-12 500
-A
-13 250
-A
-14 500
-A
-18 15
-A
-19 15
-A
-20 -10
-F
-A 0 0 c
-F
-R 0 0 CD
-E
-adamant yakut intikam yemini bandý~
-Bantýn dýþ kýsmýný bir yazýt çevreliyor:  "Ir'vekire zai'Zdreni"
-
-Metalinin iç kýsmýna boydan boya oyulmuþ þu kelimeleri fark ediyorsun:
-
-               "sh'keva Zdreni zeraika shai !"
-
-        ("akan zdreni kaný için alýnacak öç bizimdir!")
-
-Yakutun üzerine, iki çapraz hançer üzerine alçalan atmaca formu oyulmuþ.
-~
-#11710
-deshanti kamasý~
-deshanti kamasý~
-Koyu kan rengi kabzasý olan bir kama, burada parýldýyor.~
-adamantite~
-weapon AC AN
-dagger 10 15 pierce CD
-90 180 12500 P
-A
-18 25
-A
-19 25
-#11693
-müzikal bileklikler siyah tüy~
-müzikal bileklikler~
-Bir çift siyah tüy bileklik, melodik bir þekilde výzýldayarak burada uzanýyor.~
-feather~
-armor AB AI
-13 13 13 13 0
-43 20 2200 P
-A
-12 45
-A
-19 3
-#11680
-bileklikler enerji~
-enerji bileklikleri~
-Çok renkli enerjiden oluþan bileklikler burada uzanýyor.~
-energy~
-armor AB AI
-20 20 20 20 0
-76 40 4300 P
-A
-12 90
-A
-19 5
-F
-A 0 0 V
-#11645
-tavþan yemek artýk~
-bir tavþan yemeði artýðý~
-Bir tavþanýn yemek artýklarý burada uzanýyor.~
-meat~
-pill 0 A
-55 'haste' '' '' ''
-45 10 500 P
-#11730
-duman rengi dumanrengi rütbeli pelerin~
-duman rengi rütbeli koyu bir pelerin~
-Koyu bir pelerinin üzerine duman rengi iki çapraz hançer figürü iþlenmiþ.~
-leather~
-armor C AC
-19 19 19 17 0
-60 50 3800 P
-A
-13 100
-A
-18 5
-A
-19 5
-#0
-
-
 #NEW_OBJECTS
 #11600
 sanatsal beyaz nesne kemikten yaratýk~
@@ -2150,6 +2050,14 @@ A
 12 40
 A
 19 3
+#11645
+tavþan yemek artýk~
+bir tavþan yemeði artýðý~
+Bir tavþanýn yemek artýklarý burada uzanýyor.~
+meat~
+pill 0 A
+55 'haste' '' '' ''
+45 10 500 P
 #11646
 inleyen beyaz melek~
 inleyen bir melek~
@@ -2673,6 +2581,20 @@ A
 18 3
 A
 19 6
+#11680
+bileklikler enerji~
+enerji bileklikleri~
+Çok renkli enerjiden oluþan bileklikler burada uzanýyor.~
+energy~
+armor AB AI
+20 20 20 20 0
+76 40 4300 P
+A
+12 90
+A
+19 5
+F
+A 0 0 V
 #11681
 hýzla dönen enerji diski~
 hýzla dönen disk~
@@ -2843,6 +2765,18 @@ A
 18 5
 A
 19 5
+#11693
+müzikal bileklikler siyah tüy~
+müzikal bileklikler~
+Bir çift siyah tüy bileklik, melodik bir þekilde výzýldayarak burada uzanýyor.~
+feather~
+armor AB AI
+13 13 13 13 0
+43 20 2200 P
+A
+12 45
+A
+19 3
 #11694
 sessiz kara alev~
 bir sessiz alev~
@@ -3017,6 +2951,54 @@ atmaca figürü oyulmuþ. Üzerinde de þöyle bir yazýt var:
 			"Ir'vekire zai'Zdreni",
 .
 ~
+#11709
+adamant quanchi intikam yemini bant band~
+Quanchi'nin Ýntikam Yemini~
+Kayýp bir ruha ait kan kýrmýzýsý adamant bir bant, yemini mýrýldanýyor.~
+adamantite~
+armor B AC
+40 40 40 24 0
+90 30 15000 P
+A
+12 500
+A
+13 250
+A
+14 500
+A
+18 15
+A
+19 15
+A
+20 -10
+F
+A 0 0 c
+F
+R 0 0 CD
+E
+adamant yakut intikam yemini bandý~
+Bantýn dýþ kýsmýný bir yazýt çevreliyor:  "Ir'vekire zai'Zdreni"
+
+Metalinin iç kýsmýna boydan boya oyulmuþ þu kelimeleri fark ediyorsun:
+
+               "sh'keva Zdreni zeraika shai !"
+
+        ("akan zdreni kaný için alýnacak öç bizimdir!")
+
+Yakutun üzerine, iki çapraz hançer üzerine alçalan atmaca formu oyulmuþ.
+~
+#11710
+deshanti kamasý~
+deshanti kamasý~
+Koyu kan rengi kabzasý olan bir kama, burada parýldýyor.~
+adamantite~
+weapon AC AN
+dagger 10 15 pierce CD
+90 180 12500 P
+A
+18 25
+A
+19 25
 #11711
 gece karasý akik rütbe yüzüðü yüzük~
 gece karasý bir rütbe~
@@ -3282,6 +3264,20 @@ A
 18 4
 A
 19 4
+#11730
+duman rengi dumanrengi rütbeli pelerin~
+duman rengi rütbeli koyu bir pelerin~
+Koyu bir pelerinin üzerine duman rengi iki çapraz hançer figürü iþlenmiþ.~
+leather~
+armor C AC
+19 19 19 17 0
+60 50 3800 P
+A
+13 100
+A
+18 5
+A
+19 5
 #11731
 beyaz uzun kargý~
 uzun beyaz bir kargý~
@@ -6877,23 +6873,5 @@ S
 11695  0 0 0 0 0  100 100  0 23  * sherayna (zeinia rep)
 11696  0 0 0 0 0  100 100  0 23  * nyvri (zeinia rep)
 0
-
-#OMPROGS
-O 11693 wear_prog wear_prog_bracer
-O 11693 remove_prog remove_prog_bracer
-O 11680 wear_prog wear_prog_bracer
-O 11680 remove_prog remove_prog_bracer
-O 11730 wear_prog wear_prog_neckguard
-O 11730 remove_prog remove_prog_neckguard
-S
-
-#OLIMITS
-O 11709 2
-O 11710 2
-O 11693 2
-O 11680 2
-O 11645 10 * haste
-O 11730 2  * brown
-S
 
 #$

@@ -21,7 +21,7 @@ Converted & edited by REAL MUDDERS
 Special thanx to Serdar & Anatolia Consortium~
 0 $~
 
-#OBJECTS
+#NEW_OBJECTS
 #20001
 kýrbaç dehþet teosaki~
 Teosaki'nin dehþeti~
@@ -55,9 +55,6 @@ A
 19 5
 A
 24 -8
-#0
-
-#NEW_OBJECTS
 #20070
 parþömen ywln~
 ywln adlý bir parþömen~
@@ -1777,20 +1774,14 @@ G 1 20073  -1		*   paper hate
 G 1 20074  -1		*   paper hate
 G 1 20075  -1		*   paper hate
 S
+
 #SPECIALS
 M 20060 spec_cast_mage *dragon
 M 20080 spec_cast_mage *wizard
 S
-#OLIMITS
-O 20001 3 * fear of a lost dragon
-O 20066 3 *anceint gloves
-S
-#OMPROGS
-O 20066 fight_prog fight_prog_ancient_gloves
-O 20066 wear_prog wear_prog_ancient_gloves
-O 20066 remove_prog remove_prog_ancient_gloves
-S
+
 #SHOPS
 20080  2  3  4 10  0 	 105  15 	 0 23 	* the ancient wizard
 0
+
 #$

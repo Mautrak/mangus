@@ -368,17 +368,6 @@ human~
 ABGKRe D 46
 #0
 
-#OBJECTS
-#9225
-büyülü toz~
-büyülü toz~
-Bir miktar büyülü toz etrafa daðýlmýþ.~
-wheat~
-pill 0 A
-20 'detect invis' '' '' ''
-0 10 300 P
-#0
-
 #NEW_OBJECTS
 #9201
 toprak yüzük~
@@ -620,6 +609,14 @@ glass~
 drink 0 A
 150 150 'water' 0 0
 0 20 200 P
+#9225
+büyülü toz~
+büyülü toz~
+Bir miktar büyülü toz etrafa daðýlmýþ.~
+wheat~
+pill 0 A
+20 'detect invis' '' '' ''
+0 10 300 P
 #9226
 alev mýzrak~
 alev mýzraðý~
@@ -1926,15 +1923,6 @@ M 9234 spec_thief          	* an alchemist
 M 9235 spec_breath_any     	* a baby rainbow dragon
 M 9237 spec_breath_any     	* a HUGE elemental
 M 9238 spec_cast_mage      	* the elixir vendor
-S
-
-#OMPROGS
-O 9205 wear_prog wear_prog_wind_boots
-O 9205 remove_prog remove_prog_wind_boots
-S
-
-#OLIMITS
-O 9225 2
 S
 
 #PRACTICERS

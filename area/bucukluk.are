@@ -362,20 +362,6 @@ human~
 ABT 0 8
 #0
 
-#OBJECTS
-#1105
-tek yüzük~
-tek yüzük~
-Burada sihirli bir yüzük duruyor.~
-copper~
-jewelry G AB
-0 0 0 0 0
-20 30 1660 P
-F
-A 0 0 B
-A
-1 -1
-#0
 
 
 #NEW_OBJECTS
@@ -437,6 +423,18 @@ armor GK AK
 15 30 1320 P
 A
 20 -1
+#1105
+tek yüzük~
+tek yüzük~
+Burada sihirli bir yüzük duruyor.~
+copper~
+jewelry G AB
+0 0 0 0 0
+20 30 1660 P
+F
+A 0 0 B
+A
+1 -1
 #1106
 elf mýzrak~
 bir elf mýzraðý~
@@ -1792,8 +1790,5 @@ M 1122 spec_thief          	* a halfling youth
 M 1132 spec_guard          	* a shiriff
 S
 
-#OLIMITS
-O 1105 3
-S
 
 #$

@@ -426,22 +426,6 @@ ABFG DFHJNOT 15
 #0
 
 
-#OBJECTS
-#5811
-book~
-a book~
-A book is here.~
-paper~
-scroll AG AO
-20 'armor' 'bless' 'stone skin' 'haste'
-15 10 10 P
-E
-book~
-This heavy book deals with the magical science of Abjuration.
-~
-#0
-
-
 #NEW_OBJECTS
 #5735
 armor leather~
@@ -1461,6 +1445,18 @@ E
 curio~
 You are lookign at one of the curios of the Warlock of Firetop Mountain,
 which may be of value to someone.
+~
+#5811
+book~
+a book~
+A book is here.~
+paper~
+scroll AG AO
+20 'armor' 'bless' 'stone skin' 'haste'
+15 10 10 P
+E
+book~
+This heavy book deals with the magical science of Abjuration.
 ~
 #5812
 desk~
@@ -3776,9 +3772,5 @@ M  5768 spec_thief                      *a hand
 M  5770 spec_breath_gas                 *a gas beast
 S
 
-#OLIMITS
-O 5811 10	* haste potion
-
-S
 
 #$

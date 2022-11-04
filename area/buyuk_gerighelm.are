@@ -563,19 +563,6 @@ human~
 ABGT CDF 60
 #0
 
-
-#OBJECTS
-#7509
-tuhaf bitkiler yeþil demet~
-bir bitki kümesi~
-Bir tuhaf bitki kümesi burada yetiþmiþ.~
-wheat~
-pill 0 A
-11 'detect hidden' 'acute vision' 'detect invis' 'poison'
-5 10 494 P
-#0
-
-
 #NEW_OBJECTS
 #7500
 elma~
@@ -641,6 +628,14 @@ wheat~
 pill 0 A
 1 'cure critical' 'remove curse' 'cure poison' 'cure disease'
 1 20 437 P
+#7509
+tuhaf bitkiler yeþil demet~
+bir bitki kümesi~
+Bir tuhaf bitki kümesi burada yetiþmiþ.~
+wheat~
+pill 0 A
+11 'detect hidden' 'acute vision' 'detect invis' 'poison'
+5 10 494 P
 #7511
 ceset süs balýðý cesedi~
 bir süs balýðý cesedi~
@@ -5124,10 +5119,6 @@ M 7537 spec_guard
 M 7540 spec_cast_cleric
 M 7554 spec_cast_judge
 M 7555 spec_breath_any
-S
-
-#OLIMITS
-O 7509 2
 S
 
 #$

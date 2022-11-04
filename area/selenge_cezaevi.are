@@ -257,35 +257,7 @@ kimyasal maddeleri satan adam bu olmalý.
 ~
 human~
 ACH DH 50
-
 #0
-
-
-#OBJECTS
-#32036
-karasý zift yüzük muhafýz~
-zift karasý bir yüzük~
-Kara bir yüzük burada unutulmuþ.
-~
-platinum~
-armor ABFG AB
-18 18 19 10 0
-30 5 1000 P
-A
-17 -30
-A
-13 200
-#32057
-siyah hap~
-siyah hap~
-Siyah bir hap görüyorsun, yerde tozlanýyor.
-~
-wheat~
-pill 0 A
-10 'cure light' 'cure serious' 'sanctuary' ''
-5 20 500 P
-#0
-
 
 #NEW_OBJECTS
 #32000
@@ -684,6 +656,19 @@ A
 18 10
 A
 19 4
+#32036
+karasý zift yüzük muhafýz~
+zift karasý bir yüzük~
+Kara bir yüzük burada unutulmuþ.
+~
+platinum~
+armor ABFG AB
+18 18 19 10 0
+30 5 1000 P
+A
+17 -30
+A
+13 200
 #32037
 demir kelepçe~
 demir kelepçe~
@@ -908,6 +893,15 @@ stone~
 fountain 0 0
 0 0 'water' 0 0
 0 0 0 P
+#32057
+siyah hap~
+siyah hap~
+Siyah bir hap görüyorsun, yerde tozlanýyor.
+~
+wheat~
+pill 0 A
+10 'cure light' 'cure serious' 'sanctuary' ''
+5 20 500 P
 #32058
 berbat duman þiþe~
 bir þiþe berbat duman~
@@ -2946,9 +2940,5 @@ M  32023 spec_breath_fire            *           A huge Bronze Dragon
 M  32024 spec_poison                 *   Terry the salesman
 S
 
-#OLIMITS
-O 32036 5	* pitch black ring
-O 32057 10	* sanctuary potion
-S
 
 #$
