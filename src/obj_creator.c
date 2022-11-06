@@ -901,23 +901,23 @@ int obj_random_weapon_flag()
 {
 	int newflag = 0;
 	
-	if(number_percent()<2)
+	if(number_percent()<=2)
 		SET_BIT(newflag,WEAPON_FLAMING);
-	if(number_percent()<2)
+	if(number_percent()<=2)
 		SET_BIT(newflag,WEAPON_FROST);
-	if(number_percent()<2)
+	if(number_percent()<=2)
 		SET_BIT(newflag,WEAPON_VAMPIRIC);
-	if(number_percent()<2)
+	if(number_percent()<=2)
 		SET_BIT(newflag,WEAPON_SHARP);
-	if(number_percent()<2)
+	if(number_percent()<=2)
 		SET_BIT(newflag,WEAPON_VORPAL);
-	if(number_percent()<2)
+	if(number_percent()<=2)
 		SET_BIT(newflag,WEAPON_TWO_HANDS);
-	if(number_percent()<2)
+	if(number_percent()<=2)
 		SET_BIT(newflag,WEAPON_SHOCKING);
-	if(number_percent()<2)
+	if(number_percent()<=2)
 		SET_BIT(newflag,WEAPON_POISON);
-	if(number_percent()<2)
+	if(number_percent()<=2)
 		SET_BIT(newflag,WEAPON_HOLY);
 
     return newflag;
@@ -926,4 +926,121 @@ int obj_random_weapon_flag()
 char *obj_random_wand_potion_spell()
 {
 	return (char*)wand_spell_table[number_range(1,76)-1].name;
+}
+
+void obj_random_name(OBJ_DATA *obj)
+{
+	if(obj == NULL)
+	{
+		return;
+	}
+	switch ( obj->item_type )
+	{
+		case ITEM_WEAPON:
+			if(obj->value[0]==WEAPON_EXOTIC){
+				free_string( obj->name );
+				obj->name = str_dup( "egzotik silah" );
+				free_string( obj->short_descr );
+       			obj->short_descr = str_dup("egzotik bir silah");
+				free_string( obj->description );
+				obj->description = str_dup( "Egzotik bir silah burada duruyor." );
+			}
+			else if(obj->value[0]==WEAPON_SWORD){
+				free_string( obj->name );
+				obj->name = str_dup( "kýlýç silah" );
+				free_string( obj->short_descr );
+       			obj->short_descr = str_dup("bir kýlýç");
+				free_string( obj->description );
+				obj->description = str_dup( "Bir kýlýç burada duruyor." );
+			}
+			else if(obj->value[0]==WEAPON_DAGGER){
+				free_string( obj->name );
+				obj->name = str_dup( "hançer silah" );
+				free_string( obj->short_descr );
+       			obj->short_descr = str_dup("bir hançer");
+				free_string( obj->description );
+				obj->description = str_dup( "Bir hançer burada duruyor." );
+			}
+			else if(obj->value[0]==WEAPON_SPEAR){
+				free_string( obj->name );
+				obj->name = str_dup( "mýzrak silah" );
+				free_string( obj->short_descr );
+       			obj->short_descr = str_dup("bir mýzrak");
+				free_string( obj->description );
+				obj->description = str_dup( "Bir mýzrak burada duruyor." );
+			}
+			else if(obj->value[0]==WEAPON_MACE){
+				free_string( obj->name );
+				obj->name = str_dup( "topuz silah" );
+				free_string( obj->short_descr );
+       			obj->short_descr = str_dup("bir topuz");
+				free_string( obj->description );
+				obj->description = str_dup( "Bir topuz burada duruyor." );
+			}
+			else if(obj->value[0]==WEAPON_AXE){
+				free_string( obj->name );
+				obj->name = str_dup( "balta silah" );
+				free_string( obj->short_descr );
+       			obj->short_descr = str_dup("bir balta");
+				free_string( obj->description );
+				obj->description = str_dup( "Bir balta burada duruyor." );
+			}
+			else if(obj->value[0]==WEAPON_FLAIL){
+				free_string( obj->name );
+				obj->name = str_dup( "döven silah" );
+				free_string( obj->short_descr );
+       			obj->short_descr = str_dup("bir döven");
+				free_string( obj->description );
+				obj->description = str_dup( "Bir döven burada duruyor." );
+			}
+			else if(obj->value[0]==WEAPON_WHIP){
+				free_string( obj->name );
+				obj->name = str_dup( "kýrbaç silah" );
+				free_string( obj->short_descr );
+       			obj->short_descr = str_dup("bir kýrbaç");
+				free_string( obj->description );
+				obj->description = str_dup( "Bir kýrbaç burada duruyor." );
+			}
+			else if(obj->value[0]==WEAPON_POLEARM){
+				free_string( obj->name );
+				obj->name = str_dup( "teber silah" );
+				free_string( obj->short_descr );
+       			obj->short_descr = str_dup("bir teber");
+				free_string( obj->description );
+				obj->description = str_dup( "Bir teber burada duruyor." );
+			}
+			else if(obj->value[0]==WEAPON_BOW){
+				free_string( obj->name );
+				obj->name = str_dup( "yay silah" );
+				free_string( obj->short_descr );
+       			obj->short_descr = str_dup("bir yay");
+				free_string( obj->description );
+				obj->description = str_dup( "Bir yay burada duruyor." );
+			}
+			else if(obj->value[0]==WEAPON_ARROW){
+				free_string( obj->name );
+				obj->name = str_dup( "ok silah" );
+				free_string( obj->short_descr );
+       			obj->short_descr = str_dup("bir ok");
+				free_string( obj->description );
+				obj->description = str_dup( "Bir ok burada duruyor." );
+			}
+			else if(obj->value[0]==WEAPON_LANCE){
+				free_string( obj->name );
+				obj->name = str_dup( "kargý silah" );
+				free_string( obj->short_descr );
+       			obj->short_descr = str_dup("bir kargý");
+				free_string( obj->description );
+				obj->description = str_dup( "Bir kargý burada duruyor." );
+			}
+			else{
+				free_string( obj->name );
+				obj->name = str_dup( "bilinmeyen silah" );
+				free_string( obj->short_descr );
+       			obj->short_descr = str_dup("bilinmeyen bir silah");
+				free_string( obj->description );
+				obj->description = str_dup( "Bilinmeyen bir tür silah burada duruyor." );
+			}
+
+	}
 }

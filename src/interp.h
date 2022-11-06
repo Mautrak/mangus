@@ -310,6 +310,7 @@ DECLARE_DO_FUN(	do_request	);
 DECLARE_DO_FUN(	do_rescue	);
 DECLARE_DO_FUN( do_resistance   );
 DECLARE_DO_FUN(	do_rest		);
+DECLARE_DO_FUN(	do_restring	);
 DECLARE_DO_FUN(	do_restore	);
 DECLARE_DO_FUN( do_reture	);
 DECLARE_DO_FUN(	do_return	);

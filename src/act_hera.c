@@ -1543,7 +1543,7 @@ void do_restring( CHAR_DATA *ch, char *argument )
 
     if ( mob == NULL )
     {
-      send_to_char( "Burada yapamazsýn.\n\r", ch );
+      send_to_char( "Burada yapamazsýn, bir þifacý bul.\n\r", ch );
         return;
     }
 
@@ -1554,9 +1554,10 @@ void do_restring( CHAR_DATA *ch, char *argument )
 
 	if ( arg[0] == '\0' || arg1[0] == '\0' || arg2[0] == '\0' )
 	{
+    send_to_char( "Adýný deðiþtirmek istediðin eþyayý ve deðiþtirmek istediðin alaný belirt.\n\r", ch );
     send_to_char("Yazým:\n\r",ch);
-		send_to_char("  restring <obj> <field> <string>\n\r",ch);
-		send_to_char("    fields: name short long\n\r",ch);
+		send_to_char("  isimlendir <eþya> <alan> <yeni isim>\n\r",ch);
+		send_to_char("  alanlar: name short long\n\r",ch);
 		return;
 	}
 
@@ -1566,7 +1567,7 @@ void do_restring( CHAR_DATA *ch, char *argument )
 		return;
     }
 
-	cost += (obj->level * 1500);
+	cost += (obj->level * 1000);
 
     if (cost > ch->silver)
     {
@@ -1594,7 +1595,7 @@ void do_restring( CHAR_DATA *ch, char *argument )
 	}
 	else
 	{
-    send_to_char("Geçerli bir Field deðil.\n\r",ch);
+    send_to_char("Geçerli bir deðil.\n\r",ch);
 		return;
 	}
 
@@ -1602,12 +1603,11 @@ void do_restring( CHAR_DATA *ch, char *argument )
 
     ch->silver -= cost;
     mob->silver += cost;
-    sprintf(buf, "$N takes $n's item, tinkers with it, and returns it to $n.");
+    sprintf(buf, "$N $s eþyasýný alýyor, üzerine bir þeyler kazýyýp geri veriyor.");
 	act(buf,ch,NULL,mob,TO_ROOM);
-  sprintf(buf,"%s takes your item, tinkers with it, and returns %s to you.\n\r", mob->short_descr, obj->short_descr);
+  sprintf(buf,"%s eþyaný alýyor, üzerine bir þeyler kazýyýp geri veriyor.\n\r", mob->short_descr);
   send_to_char(buf,ch);
-  send_to_char("Remember, if we find your new string offensive, we will not be happy.\n\r", ch);
-  send_to_char(" This is your ONE AND ONLY Warning.\n\r", ch);
+  send_to_char("Eþya isimlendirmede saldýrgan ve hakaret içeren isimler vermek kurallara aykýrýdýr.\n\r", ch);
 }
 
 void check_shield_destroyed(CHAR_DATA *ch, CHAR_DATA *victim,bool second)

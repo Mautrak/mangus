@@ -3400,6 +3400,7 @@ int obj_random_cost  args( (int level) );
 int obj_random_weight  args( (int vnum, int item_type, int weapon_type, int material, int wear_flags) );
 int obj_random_extra_flag  args( (void) );
 int obj_random_weapon_flag  args( (void) );
+void obj_random_name args((OBJ_DATA *obj));
 int find_material_index args((char *material_name));
 char *obj_random_wand_potion_spell  args( (void) );
 void obj_random_material args((OBJ_DATA *obj));
