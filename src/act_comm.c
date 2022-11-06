@@ -376,10 +376,12 @@ void do_kd( CHAR_DATA *ch, char *argument )
     else
       strcpy(buf,argument);
 
+    /*
     if (ch->level >= KIDEMLI_OYUNCU_SEVIYESI && victim->level >= KIDEMLI_OYUNCU_SEVIYESI )
     {
       ch->pcdata->rk_puani -= 1;
     }
+    */
 
    if (!is_affected(ch, gsn_deafen))
      act_color("$N kd: $C$t$c",ch,buf,victim,TO_CHAR,POS_DEAD, CLR_MAGENTA_BOLD );
@@ -450,10 +452,12 @@ void do_kdcevapla( CHAR_DATA *ch, char *argument )
     else
       strcpy(buf,argument);
 
+    /*
     if (ch->level >= KIDEMLI_OYUNCU_SEVIYESI && victim->level >= KIDEMLI_OYUNCU_SEVIYESI )
     {
       ch->pcdata->rk_puani -= 1;
     }
+    */
 
    if (!is_affected(ch, gsn_deafen))
      act_color("$N kd: $C$t$c",ch,buf,victim,TO_CHAR,POS_DEAD, CLR_MAGENTA_BOLD );
