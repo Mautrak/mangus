@@ -67,6 +67,8 @@ void do_heal(CHAR_DATA *ch, char *argument)
 {
     CHAR_DATA *mob;
     char arg[MAX_INPUT_LENGTH];
+    char arg2[MAX_INPUT_LENGTH];
+    OBJ_DATA *obj = NULL;
     int cost,sn;
     SPELL_FUN *spell;
     const char *words;
@@ -98,7 +100,7 @@ void do_heal(CHAR_DATA *ch, char *argument)
         return;
     }
 
-    one_argument(argument,arg);
+    argument = one_argument(argument,arg);
 
     if (arg[0] == '\0')
     {
@@ -178,6 +180,15 @@ void do_heal(CHAR_DATA *ch, char *argument)
 
     else if (!str_prefix(arg,"lanet") )
     {
+      one_argument(argument,arg2);
+      if(arg2[0] != '\0')
+      {
+        if ( ( obj = get_obj_carry( ch, arg2 ) ) == NULL )
+        {
+          send_to_char( "Sende öyle birþey yok.\n\r", ch );
+            return;
+        }
+      }
 	spell = spell_remove_curse;
 	sn    = skill_lookup("remove curse");
 	words = "candussido judifgz";
@@ -252,7 +263,14 @@ void do_heal(CHAR_DATA *ch, char *argument)
      if (sn < 0)
 	return;
 
+    if(spell == spell_remove_curse && obj != NULL)
+    {
+      spell(sn,mob->level,mob,obj,TARGET_OBJ);
+    }
+    else
+    {
      spell(sn,mob->level,mob,ch,TARGET_CHAR);
+    }
 }
 
 
