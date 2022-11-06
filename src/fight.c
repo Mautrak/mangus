@@ -1981,7 +1981,7 @@ bool check_parry( CHAR_DATA *ch, CHAR_DATA *victim )
 		 	act("Yere düþtün!",ch,NULL,victim,TO_VICT);
 		 	act("$N saldýrýna direnemiyor ve düþüyor!",
 		 		ch,NULL,victim,TO_CHAR);
-		 	act("$n sersemletici gücü $N düþürüyor.",
+		 	act("$s sersemletici gücü $N düþürüyor.",
 		 		ch,NULL,victim,TO_NOTVICT);
 
 	WAIT_STATE(victim,skill_table[gsn_bash].beats);
