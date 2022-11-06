@@ -2507,8 +2507,8 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
         {
             case ITEM_WEAPON:
                 obj->value[0]	= number_range(1,12)-1;			// weapon type
-                obj->value[1]	= number_fuzzy( number_fuzzy( 1 * level / 4 + 2 ) );				// number of dice
-                obj->value[2]	= number_fuzzy( number_fuzzy( 3 * level / 4 + 6 ) );				// number of dice, each dice has
+                obj->value[1]	= UMAX(1,number_range(level/11,level/9)+3);				// number of dice
+                obj->value[2]	= UMAX(1,number_range(level/8,level/6));					// number of dice, each dice has
                 obj->value[3]	= number_range(1,40)-1;			// damage message (attack_table)
                 obj->value[4]   = obj_random_weapon_flag();
                 obj_random_name(obj);
