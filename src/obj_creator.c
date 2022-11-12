@@ -45,42 +45,10 @@ int obj_random_paf_modifier(int location, int level)
 	if (location == APPLY_MANA || location == APPLY_HIT || location == APPLY_MOVE)
 	{
 		return number_range( UMAX(1,int((level+5)*3/2)) , UMAX(1,int((level+5)*5)) );
-		/*
-		random_number = number_range(1,100);
-		
-		if(random_number<=30)
-			return number_range(10,UMAX(11,int(level)));
-		else if(random_number<=65)
-			return number_range(10,UMAX(11,int(level*2)));
-		else if(random_number<=75)
-			return number_range(10,UMAX(11,int(level*3)));
-		else if(random_number<=83)
-			return number_range(10,UMAX(11,int(level*4)));
-		else if(random_number<=90)
-			return number_range(10,UMAX(11,int(level*5)));
-		else
-			return number_range(10,UMAX(11,int(level*6)));
-		*/
 	}
 	if (location == APPLY_HITROLL || location == APPLY_DAMROLL)
 	{
 		return number_range( UMAX(1,int((level+4)/5)) , UMAX(1,int((level+3)/2)) );
-		/*
-		random_number = number_range(1,100);
-		
-		if(random_number<=30)
-			return number_range(1,UMAX(2,int(level/11)));
-		else if(random_number<=45)
-			return number_range(1,UMAX(2,int(level/9)));
-		else if(random_number<=60)
-			return number_range(1,UMAX(2,int(level/7)));
-		else if(random_number<=75)
-			return number_range(1,UMAX(2,int(level/5)));
-		else if(random_number<=90)
-			return number_range(1,UMAX(2,int(level/3)));
-		else
-			return number_range(1,UMAX(2,int(level/2)));
-		*/
 	}
 	return 1;
 }
@@ -677,8 +645,10 @@ int obj_random_weight(int vnum, int item_type, int weapon_type, int material, in
 			hacim = number_range(1,10);
 			break;
 		case ITEM_WAND:
+			hacim = number_range(10,30);
+			break;
 		case ITEM_STAFF:
-			hacim = number_range(1,10);
+			hacim = number_range(125,250);
 			break;
 		default:
 			bugf( "Random volume: Unknown obj type '%d'", vnum );

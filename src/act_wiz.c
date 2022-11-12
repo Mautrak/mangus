@@ -1015,23 +1015,28 @@ void do_disconnect( CHAR_DATA *ch, char *argument )
 
 void do_duyuru( CHAR_DATA *ch, char *argument )
 {
-  DESCRIPTOR_DATA *d;
+    DESCRIPTOR_DATA *d;
+    char eventbuf[MAX_STRING_LENGTH];
 
-  if ( argument[0] == '\0' )
-  {
-    send_to_char( "Neyi duyuracaksýn?\n\r", ch );
-    return;
-  }
-
-  for ( d = descriptor_list; d; d = d->next )
-  {
-    if ( d->connected == CON_PLAYING )
+    if ( argument[0] == '\0' )
     {
-      printf_to_char(d->character,"{RDUYURU: {G%s{x\n\r",argument);
+        send_to_char( "Neyi duyuracaksýn?\n\r", ch );
+        return;
     }
-  }
 
-  return;
+    for ( d = descriptor_list; d; d = d->next )
+    {
+        if ( d->connected == CON_PLAYING )
+        {
+            printf_to_char(d->character,"{RDUYURU: {G%s{x\n\r",argument);
+        }
+    }
+
+    /* event */
+    sprintf(eventbuf,"DUYURU: %s", argument);
+    write_event_log(eventbuf);
+
+    return;
 }
 
 
