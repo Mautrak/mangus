@@ -2515,7 +2515,7 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
                     while(i<100)
                     {
                         obj->value[3] = number_range(1,40)-1;
-                        if(attack_table[obj->value[3]]->damage == DAM_PIERCE)
+                        if(attack_table[obj->value[3]].damage == DAM_PIERCE)
                             break;
                     }
                 }
@@ -2525,7 +2525,7 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
                     while(i<100)
                     {
                         obj->value[3] = number_range(1,40)-1;
-                        if(attack_table[obj->value[3]]->damage == DAM_SLASH)
+                        if(attack_table[obj->value[3]].damage == DAM_SLASH)
                             break;
                     }
                 }
