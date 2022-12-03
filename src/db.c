@@ -2511,7 +2511,7 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
                 obj->value[2]	= UMAX(1,number_range(level/8,level/6));					// number of dice, each dice has
                 if(obj->value[0] == 2)//dagger
                 {
-                    int i==0;
+                    i=0;
                     while(i<100)
                     {
                         obj->value[3] == number_range(1,40)-1;
@@ -2521,7 +2521,7 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
                 }
                 else if(obj->value[0] == 0)//sword
                 {
-                    int i==0;
+                    i=0;
                     while(i<100)
                     {
                         obj->value[3] == number_range(1,40)-1;
