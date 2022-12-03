@@ -2514,7 +2514,7 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
                     i=0;
                     while(i<100)
                     {
-                        obj->value[3] == number_range(1,40)-1;
+                        obj->value[3] = number_range(1,40)-1;
                         if(attack_table()->damage == DAM_PIERCE)
                             break;
                     }
@@ -2524,14 +2524,14 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
                     i=0;
                     while(i<100)
                     {
-                        obj->value[3] == number_range(1,40)-1;
+                        obj->value[3] = number_range(1,40)-1;
                         if(attack_table()->damage == DAM_SLASH)
                             break;
                     }
                 }
                 else
                 {
-                    obj->value[3] == number_range(1,40)-1;
+                    obj->value[3] = number_range(1,40)-1;
                 }
                 obj->value[4]   = obj_random_weapon_flag();
                 obj_random_name(obj);
