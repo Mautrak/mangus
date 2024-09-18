@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
- * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
- * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aï¿½ï¿½k kaynak Tï¿½rkï¿½e Mud projesidir.                        *
+ * Oyun geliï¿½tirmesi Jai ve Maru tarafï¿½ndan yï¿½netilmektedir.               *
+ * Unutulmamasï¿½ gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -84,7 +84,7 @@ void do_gain(CHAR_DATA *ch, char *argument)
 
     if (trainer == NULL || !can_see(ch,trainer))
     {
-      send_to_char("Burada yapamazsýn.\n\r", ch);
+      send_to_char("Burada yapamazsï¿½n.\n\r", ch);
 	return;
     }
 
@@ -92,9 +92,9 @@ void do_gain(CHAR_DATA *ch, char *argument)
 
     if (arg[0] == '\0')
     {
-      do_say(trainer,(char*)"10 pratiði 1 eðitime dönüþtürebilirsin.");
-    	do_say(trainer,(char*)"1 eðitimi 10 pratiðe dönüþtürebilirsin.");
-    	do_say(trainer,(char*)"Þunlarý kullan: 'kazan eðitim','kazan pratik'");
+      do_say(trainer,(char*)"10 pratiï¿½i 1 eï¿½itime dï¿½nï¿½ï¿½tï¿½rebilirsin.");
+    	do_say(trainer,(char*)"1 eï¿½itimi 10 pratiï¿½e dï¿½nï¿½ï¿½tï¿½rebilirsin.");
+    	do_say(trainer,(char*)"ï¿½unlarï¿½ kullan: 'kazan eï¿½itim','kazan pratik'");
 	return;
     }
 
@@ -102,35 +102,35 @@ void do_gain(CHAR_DATA *ch, char *argument)
     {
 	if (ch->train < 1)
 	{
-    act("$N anlatýyor 'Hazýr deðilsin.'",
+    act("$N anlatï¿½yor 'Hazï¿½r deï¿½ilsin.'",
 		ch,NULL,trainer,TO_CHAR);
 	    return;
 	}
 
-  act("$N eðitimini pratiklere dönüþtürmene yardým ediyor.",
+  act("$N eï¿½itimini pratiklere dï¿½nï¿½ï¿½tï¿½rmene yardï¿½m ediyor.",
 		ch,NULL,trainer,TO_CHAR);
 	ch->practice += 10;
 	ch->train -=1 ;
 	return;
     }
 
-    if (!str_prefix(arg,"eðitim"))
+    if (!str_prefix(arg,"eï¿½itim"))
     {
 	if (ch->practice < 10)
 	{
-    act("$N anlatýyor 'Hazýr deðilsin.'",
+    act("$N anlatï¿½yor 'Hazï¿½r deï¿½ilsin.'",
 		ch,NULL,trainer,TO_CHAR);
 	    return;
 	}
 
-  act("$N pratiklerini eðitime dönüþtürmene yardým ediyor.",
+  act("$N pratiklerini eï¿½itime dï¿½nï¿½ï¿½tï¿½rmene yardï¿½m ediyor.",
 		ch,NULL,trainer,TO_CHAR);
 	ch->practice -= 10;
 	ch->train +=1 ;
 	return;
     }
 
-    act("$N anlatýyor 'Anlamadým...'",ch,NULL,trainer,TO_CHAR);
+    act("$N anlatï¿½yor 'Anlamadï¿½m...'",ch,NULL,trainer,TO_CHAR);
 
 }
 
@@ -159,7 +159,7 @@ void do_spells(CHAR_DATA *ch, char *argument)
 
     for (sn = 0; sn < MAX_SKILL; sn++)
     {
-      if (skill_table[sn].name == NULL)
+      if (skill_table[sn].name[0] == NULL)
         break;
 
       if (skill_table[sn].skill_level[ch->iclass] < LEVEL_HERO &&
@@ -193,7 +193,7 @@ void do_spells(CHAR_DATA *ch, char *argument)
 
     if (!found)
     {
-      send_to_char("Büyü bilmiyorsun.\n\r",ch);
+      send_to_char("Bï¿½yï¿½ bilmiyorsun.\n\r",ch);
       return;
     }
 
@@ -256,7 +256,7 @@ void do_skills(CHAR_DATA *ch, char *argument)
 
     if (!found)
     {
-      send_to_char("Büyü bilmiyorsun.\n\r",ch);
+      send_to_char("Bï¿½yï¿½ bilmiyorsun.\n\r",ch);
       return;
     }
 
@@ -339,7 +339,7 @@ void check_improve( CHAR_DATA *ch, int sn, bool success, int multiplier )
 	chance = URANGE(5,100 - ch->pcdata->learned[sn], 95);
 	if (number_percent() < chance)
 	{
-    sprintf(buf,"$C%s geliþiyor!$c",
+    sprintf(buf,"$C%s geliï¿½iyor!$c",
 		    skill_table[sn].name[1]);
 	    act_color(buf,ch,NULL,NULL,TO_CHAR,POS_DEAD, CLR_GREEN);
 	    ch->pcdata->learned[sn]++;
@@ -353,7 +353,7 @@ void check_improve( CHAR_DATA *ch, int sn, bool success, int multiplier )
 	if (number_percent() < chance)
 	{
 	    sprintf(buf,
-        "$CHatalarýndan ders alýyorsun ve %s geliþiyor.$c",
+        "$CHatalarï¿½ndan ders alï¿½yorsun ve %s geliï¿½iyor.$c",
 		skill_table[sn].name[1]);
 	    act_color(buf,ch,NULL,NULL,TO_CHAR,POS_DEAD,CLR_GREEN);
 	    ch->pcdata->learned[sn] += number_range(1,3);
@@ -399,13 +399,13 @@ void do_slist(CHAR_DATA *ch, char *argument)
     argument = one_argument(argument, arg);
     if (arg[0] == '\0')
 	{
-    send_to_char("Yazým: syetenek <sýnýf>.\n\r",ch);
+    send_to_char("Yazï¿½m: syetenek <sï¿½nï¿½f>.\n\r",ch);
 	 return;
 	}
     iclass = class_lookup(arg);
     if (iclass == -1)
 	{
-    send_to_char("Geçerli bir sýnýf deðil.\n\r",ch);
+    send_to_char("Geï¿½erli bir sï¿½nï¿½f deï¿½il.\n\r",ch);
 	 return;
 	}
     /* initilize data */
@@ -443,7 +443,7 @@ void do_slist(CHAR_DATA *ch, char *argument)
 
     if (!found)
     {
-      send_to_char("O sýnýfta yetenek yok.\n\r",ch);
+      send_to_char("O sï¿½nï¿½fta yetenek yok.\n\r",ch);
       return;
     }
 
@@ -480,13 +480,13 @@ void do_glist( CHAR_DATA *ch , char *argument)
 
  if (arg[0] == '\0')
   {
-    send_to_char("Yazým : grupliste <grup>\n\r",ch);
+    send_to_char("Yazï¿½m : grupliste <grup>\n\r",ch);
    return;
   }
 
  if ((group = group_lookup(arg) ) == -1)
   {
-    send_to_char("Geçerli bir grup deðil.\n\r",ch);
+    send_to_char("Geï¿½erli bir grup deï¿½il.\n\r",ch);
    return;
   }
 
@@ -519,13 +519,13 @@ void do_slook( CHAR_DATA *ch, char *argument)
      one_argument(argument,arg);
      if (arg[0] == '\0')
 	{
-	 send_to_char("Yazým : slook <skill or spell name>.\n\r",ch);
+	 send_to_char("Yazï¿½m : slook <skill or spell name>.\n\r",ch);
 	 return;
 	}
 
      if ( (sn = skill_lookup(arg)) == -1 )
 	{
-	 send_to_char("Böyle bir büyü veya yetenek yok.\n\r",ch);
+	 send_to_char("Bï¿½yle bir bï¿½yï¿½ veya yetenek yok.\n\r",ch);
 	 return;
 	}
 
@@ -551,19 +551,19 @@ void do_learn( CHAR_DATA *ch, char *argument )
 
 	if ( !IS_AWAKE(ch) )
 	{
-    send_to_char("Rüyalarýnda mý?\n\r", ch);
+    send_to_char("Rï¿½yalarï¿½nda mï¿½?\n\r", ch);
 	    return;
 	}
 
 	if ( argument[0] == '\0')
 	{
-    send_to_char( "Yazým: öðren <yetenek|büyü> <öðretici>.\n\r", ch );
+    send_to_char( "Yazï¿½m: ï¿½ï¿½ren <yetenek|bï¿½yï¿½> <ï¿½ï¿½retici>.\n\r", ch );
 	    return;
 	}
 
 	if ( ch->practice <= 0 )
 	{
-    send_to_char("Pratik seansýn yok.\n\r", ch );
+    send_to_char("Pratik seansï¿½n yok.\n\r", ch );
 	    return;
 	}
 
@@ -581,13 +581,13 @@ void do_learn( CHAR_DATA *ch, char *argument )
 
 	if ( sn == gsn_vampire )
 	{
-    send_to_char( "Bu konuda ancak görevci yardým edebilir.\n\r",ch);
+    send_to_char( "Bu konuda ancak gï¿½revci yardï¿½m edebilir.\n\r",ch);
 	 return;
 	}
 
 	if ( sn == gsn_evolve_bear )
 	{
-    send_to_char( "Bu konuda ancak görevci yardým edebilir.\n\r",ch);
+    send_to_char( "Bu konuda ancak gï¿½revci yardï¿½m edebilir.\n\r",ch);
 	 return;
 	}
 
@@ -595,25 +595,25 @@ void do_learn( CHAR_DATA *ch, char *argument )
 
 	if ( (mob = get_char_room(ch,arg) ) == NULL)
 	{
-    send_to_char( "Kahramanýn burada deðil.\n\r", ch );
+    send_to_char( "Kahramanï¿½n burada deï¿½il.\n\r", ch );
 	    return;
 	}
 
 	if ( IS_NPC(mob) || mob->level != HERO )
 	{
-    send_to_char( "Bir kahraman bulmalýsýn, sýradan birini deðil.\n\r",ch);
+    send_to_char( "Bir kahraman bulmalï¿½sï¿½n, sï¿½radan birini deï¿½il.\n\r",ch);
 	  return;
 	}
 
 	if ( mob->status != PC_PRACTICER )
 	{
-    send_to_char( "Kahramanýn öðretmeye istekli görünmüyor.\n\r",ch);
+    send_to_char( "Kahramanï¿½n ï¿½ï¿½retmeye istekli gï¿½rï¿½nmï¿½yor.\n\r",ch);
 	  return;
 	}
 
 	if (get_skill(mob,sn) < 100)
 	{
-    send_to_char("Kahramanýn bu konuyu öðretebilecek kadar bilmiyor.\n\r",ch);
+    send_to_char("Kahramanï¿½n bu konuyu ï¿½ï¿½retebilecek kadar bilmiyor.\n\r",ch);
 	  return;
 	}
 
@@ -621,7 +621,7 @@ void do_learn( CHAR_DATA *ch, char *argument )
 
 	if ( ch->pcdata->learned[sn] >= adept )
 	{
-    sprintf( buf, "%s konusunu zaten öðrendin.\n\r",
+    sprintf( buf, "%s konusunu zaten ï¿½ï¿½rendin.\n\r",
 		skill_table[sn].name[1] );
 	    send_to_char( buf, ch );
 	}
@@ -633,23 +633,23 @@ void do_learn( CHAR_DATA *ch, char *argument )
 		int_app[get_curr_stat(ch,STAT_INT)].learn /
 	        UMAX(skill_table[sn].rating[ch->iclass],1);
 	    mob->status = 0;
-      act( "$T öðretiyorsun.",
+      act( "$T ï¿½ï¿½retiyorsun.",
 		    mob, NULL, skill_table[sn].name[1], TO_CHAR );
-	    act( "$n $T öðretiyor.",
+	    act( "$n $T ï¿½ï¿½retiyor.",
 		    mob, NULL, skill_table[sn].name[1], TO_ROOM );
 	    if ( ch->pcdata->learned[sn] < adept )
 	    {
-        act( "$T öðreniyorsun.",
+        act( "$T ï¿½ï¿½reniyorsun.",
     		    ch, NULL, skill_table[sn].name[1], TO_CHAR );
-    		act( "$n $T öðreniyor.",
+    		act( "$n $T ï¿½ï¿½reniyor.",
     		    ch, NULL, skill_table[sn].name[1], TO_ROOM );
 	    }
 	    else
 	    {
 		ch->pcdata->learned[sn] = adept;
-    act( "$T konusunu öðrendin.",
+    act( "$T konusunu ï¿½ï¿½rendin.",
 		    ch, NULL, skill_table[sn].name[1], TO_CHAR );
-		act( "$n $T konusunu öðrendi.",
+		act( "$n $T konusunu ï¿½ï¿½rendi.",
 		    ch, NULL, skill_table[sn].name[1], TO_ROOM );
 	    }
 	}
@@ -661,10 +661,10 @@ void do_teach( CHAR_DATA *ch, char *argument)
 {
  if (IS_NPC(ch) || ch->level != LEVEL_HERO)
   {
-    send_to_char("Bir kahraman olmalýsýn.\n\r",ch);
+    send_to_char("Bir kahraman olmalï¿½sï¿½n.\n\r",ch);
 	return;
   }
  ch->status = PC_PRACTICER;
- send_to_char("Artýk %100 olan yeteneklerini gençlere öðretebilirsin.\n\r",ch);
+ send_to_char("Artï¿½k %100 olan yeteneklerini genï¿½lere ï¿½ï¿½retebilirsin.\n\r",ch);
  return;
 }

@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açık kaynak Türkçe Mud projesidir.                        *
- * Oyun geliştirmesi Jai ve Maru tarafından yönetilmektedir.               *
- * Unutulmaması gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aï¿½ï¿½k kaynak Tï¿½rkï¿½e Mud projesidir.                        *
+ * Oyun geliï¿½tirmesi Jai ve Maru tarafï¿½ndan yï¿½netilmektedir.               *
+ * Unutulmamasï¿½ gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -280,6 +280,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
 	ch->perm_stat[STAT_CHA] );
 
 	fprintf( fp, "Pass %s~\n",	ch->pcdata->pwd		);
+	fprintf(fp, "Salt %s~\n", ch->pcdata->salt);
 	if (ch->pcdata->bamfin[0] != '\0')
 	    fprintf( fp, "Bin  %s~\n",	ch->pcdata->bamfin);
 	if (ch->pcdata->bamfout[0] != '\0')
@@ -878,7 +879,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
     ch->pcdata->questgiver = 0;
     ch->pcdata->countdown = 0;
     ch->pcdata->questmob = 0;
-    ch->pcdata->birth_time = current_time - 14688000;// 17 oyun yılını çıkarıyoruz ki doğum yılı doğru olsun
+    ch->pcdata->birth_time = current_time - 14688000;// 17 oyun yï¿½lï¿½nï¿½ ï¿½ï¿½karï¿½yoruz ki doï¿½um yï¿½lï¿½ doï¿½ru olsun
     ch->religion = RELIGION_NONE;
     ch->pcdata->has_killed = 0;
     ch->pcdata->anti_killed = 0;
@@ -1380,6 +1381,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp )
 	case 'P':
 	    KEY( "Password",	ch->pcdata->pwd,	fread_string( fp ) );
 	    KEY( "Pass",	ch->pcdata->pwd,	fread_string( fp ) );
+		KEY("Salt", ch->pcdata->salt, fread_string(fp));
 	    KEY( "Played",	ch->pcdata->played,	fread_number( fp ) );
 	    KEY( "Plyd",	ch->pcdata->played,	fread_number( fp ) );
 	    KEY( "Points",	ch->pcdata->points,	fread_number( fp ) );

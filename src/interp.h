@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
- * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
- * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aï¿½ï¿½k kaynak Tï¿½rkï¿½e Mud projesidir.                        *
+ * Oyun geliï¿½tirmesi Jai ve Maru tarafï¿½ndan yï¿½netilmektedir.               *
+ * Unutulmamasï¿½ gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -65,20 +65,6 @@
 
 #define COM_INGORE	1
 
-
-/*
- * Structure for a command in the command lookup table.
- */
-struct	cmd_type
-{
-    const char *	name;
-    DO_FUN *		do_fun;
-    sh_int		position;
-    sh_int		level;
-    sh_int		log;
-    sh_int              show;
-    sh_int		extra;
-};
 
 /* the command table itself */
 extern	const	struct	cmd_type	cmd_table	[];

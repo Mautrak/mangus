@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
- * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
- * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aï¿½ï¿½k kaynak Tï¿½rkï¿½e Mud projesidir.                        *
+ * Oyun geliï¿½tirmesi Jai ve Maru tarafï¿½ndan yï¿½netilmektedir.               *
+ * Unutulmamasï¿½ gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -68,6 +68,28 @@
 #include <inttypes.h>
 #include "merc.h"
 
+/* Struct Definitions */
+#define SENTINEL_VALUE ((void *)-1)
+struct hash_link
+{
+  int			key;
+  struct hash_link	*next;
+  void			*data;
+};
+
+typedef struct hash_link hash_link; // Added typedef
+
+struct hash_header
+{
+  int			rec_size;
+  int			table_size;
+  int			*keylist, klistsize, klistlen; /* this is really lame,
+							  AMAZINGLY lame */
+  struct hash_link	**buckets;
+};
+
+typedef struct hash_header hash_header; // Added typedef
+
 /* command procedures needed */
 DECLARE_DO_FUN(do_look		);
 DECLARE_DO_FUN(do_stand		);
@@ -120,14 +142,14 @@ void do_enter( CHAR_DATA *ch, char *argument)
 
 	if (portal == NULL)
 	{
-    printf_to_char(ch,"Öyle birþey görmüyorsun.\n\r");
+    printf_to_char(ch,"ï¿½yle birï¿½ey gï¿½rmï¿½yorsun.\n\r");
 	    return;
 	}
 
 	if (portal->item_type != ITEM_PORTAL
         ||  (IS_SET(portal->value[1],EX_CLOSED) && !IS_TRUSTED(ch,ANGEL)))
 	{
-    printf_to_char(ch,"Bir yol bulamýyorsun.\n\r");
+    printf_to_char(ch,"Bir yol bulamï¿½yorsun.\n\r");
 	    return;
 	}
 
@@ -136,7 +158,7 @@ void do_enter( CHAR_DATA *ch, char *argument)
 	||   IS_SET(old_room->room_flags,ROOM_NO_RECALL)
 	||   IS_RAFFECTED(old_room,AFF_ROOM_CURSE) ))
 	{
-    printf_to_char(ch,"Birþey ayrýlmaný engelliyor...\n\r");
+    printf_to_char(ch,"Birï¿½ey ayrï¿½lmanï¿½ engelliyor...\n\r");
 	    return;
 	}
 
@@ -155,26 +177,26 @@ void do_enter( CHAR_DATA *ch, char *argument)
 	||  !can_see_room(ch,location)
 	||  (room_is_private(location) && !IS_TRUSTED(ch,IMPLEMENTOR)))
 	{
-    act("$p hiçbir yere ulaþmýyor.",ch,portal,NULL,TO_CHAR);
+    act("$p hiï¿½bir yere ulaï¿½mï¿½yor.",ch,portal,NULL,TO_CHAR);
 	   return;
 	}
 
         if (IS_NPC(ch) && IS_SET(ch->act,ACT_AGGRESSIVE)
         &&  IS_SET(location->room_flags,ROOM_LAW))
         {
-          printf_to_char(ch,"Birþey ayrýlmaný engelliyor...\n\r");
+          printf_to_char(ch,"Birï¿½ey ayrï¿½lmanï¿½ engelliyor...\n\r");
             return;
         }
 
         if (MOUNTED(ch))
-        sprintf(buf,"$n sürdüðü %s ile $p içine giriyor.",MOUNTED(ch)->short_descr );
-        sprintf(buf,"$n $p içine giriyor." );
+        sprintf(buf,"$n sï¿½rdï¿½ï¿½ï¿½ %s ile $p iï¿½ine giriyor.",MOUNTED(ch)->short_descr );
+        sprintf(buf,"$n $p iï¿½ine giriyor." );
 	act(buf,ch,portal,NULL,TO_ROOM);
 
 	if (IS_SET(portal->value[2],GATE_NORMAL_EXIT))
-  act("$p içine giriyorsun.",ch,portal,NULL,TO_CHAR);
+  act("$p iï¿½ine giriyorsun.",ch,portal,NULL,TO_CHAR);
 	else
-  act("$p içine yürüyünce kendini baþka yerde buluyorsun...",ch,portal,NULL,TO_CHAR);
+  act("$p iï¿½ine yï¿½rï¿½yï¿½nce kendini baï¿½ka yerde buluyorsun...",ch,portal,NULL,TO_CHAR);
 
 	mount = MOUNTED(ch);
 	char_from_room(ch);
@@ -189,14 +211,14 @@ void do_enter( CHAR_DATA *ch, char *argument)
 	if (IS_SET(portal->value[2],GATE_NORMAL_EXIT))
 	 {
 	  if (mount)
-    act("$n $M sürerek geldi.",ch,portal,mount,TO_ROOM);
+    act("$n $M sï¿½rerek geldi.",ch,portal,mount,TO_ROOM);
     else  act("$n geldi.",ch,portal,NULL,TO_ROOM);
 	 }
 	else
 	 {
 	  if (mount)
-    act("$n $p içinden $M sürerek geldi.",ch,portal,mount,TO_ROOM);
-  else  act("$n $p içinden geldi.",ch,portal,NULL,TO_ROOM);
+    act("$n $p iï¿½inden $M sï¿½rerek geldi.",ch,portal,mount,TO_ROOM);
+  else  act("$n $p iï¿½inden geldi.",ch,portal,NULL,TO_ROOM);
 	 }
 
 	do_look(ch,(char*)"auto");
@@ -239,9 +261,9 @@ void do_enter( CHAR_DATA *ch, char *argument)
                 if (IS_SET(ch->in_room->room_flags,ROOM_LAW)
                 &&  (IS_NPC(fch) && IS_SET(fch->act,ACT_AGGRESSIVE)))
                 {
-                  act("$M þehre sokamazsýn.",
+                  act("$M ï¿½ehre sokamazsï¿½n.",
                     ch,NULL,fch,TO_CHAR);
-                  act("Þehirde istenmiyorsun.",
+                  act("ï¿½ehirde istenmiyorsun.",
                     fch,NULL,NULL,TO_CHAR);
                     continue;
             	}
@@ -268,7 +290,7 @@ void do_enter( CHAR_DATA *ch, char *argument)
 	return;
     }
 
-    printf_to_char(ch,"Hayýr, bunu yapamazsýn.\n\r");
+    printf_to_char(ch,"Hayï¿½r, bunu yapamazsï¿½n.\n\r");
     return;
 }
 
@@ -277,7 +299,7 @@ void do_settraps( CHAR_DATA *ch, char *argument )
     if ( !IS_NPC(ch)
     &&   ch->level < skill_table[gsn_settraps].skill_level[ch->iclass] )
       {
-        printf_to_char(ch,"Tuzak kurmayý bilmiyorsun.\n\r");
+        printf_to_char(ch,"Tuzak kurmayï¿½ bilmiyorsun.\n\r");
 	return;
       }
 
@@ -285,7 +307,7 @@ void do_settraps( CHAR_DATA *ch, char *argument )
 
     if ( IS_SET(ch->in_room->room_flags, ROOM_LAW) )
 	{
-    send_to_char("Mistik bir güç odayý koruyor.\n\r",ch);
+    send_to_char("Mistik bir gï¿½ï¿½ odayï¿½ koruyor.\n\r",ch);
 	 return;
 	}
 
@@ -300,13 +322,13 @@ void do_settraps( CHAR_DATA *ch, char *argument )
 
       if ( is_affected_room( ch->in_room, gsn_settraps ))
       {
-        send_to_char("Bu odaya zaten tuzak kurulmuþ.\n\r",ch);
+        send_to_char("Bu odaya zaten tuzak kurulmuï¿½.\n\r",ch);
 	return;
        }
 
       if ( is_affected(ch,gsn_settraps))
       {
-        send_to_char("Bu yetenek yakýn zamanda kullanýldý.\n\r",ch);
+        send_to_char("Bu yetenek yakï¿½n zamanda kullanï¿½ldï¿½.\n\r",ch);
 	return;
       }
 
@@ -332,7 +354,7 @@ void do_settraps( CHAR_DATA *ch, char *argument )
       af2.location  = APPLY_NONE;
       af2.bitvector = 0;
       affect_to_char( ch, &af2 );
-      send_to_char( "Tuzaðý kurdun.\n\r", ch );
+      send_to_char( "Tuzaï¿½ï¿½ kurdun.\n\r", ch );
       act("$n odaya tuzak kurdu.",ch,NULL,NULL,TO_ROOM);
       return;
     }
@@ -353,31 +375,10 @@ void do_settraps( CHAR_DATA *ch, char *argument )
  *  Adopted to ANATOLIA by Chronos.                                        *
  ***************************************************************************/
 
-#if	defined(linux)
-void bcopy(const void *src,void *dest,int n);
-void bzero(void *s,int n);
-#else
-void bcopy(char *s1,char* s2,int len);
-void bzero(char *sp,int len);
-#endif
 
 extern const char* dir_name[];
 
-struct hash_link
-{
-  int			key;
-  struct hash_link	*next;
-  void			*data;
-};
 
-struct hash_header
-{
-  int			rec_size;
-  int			table_size;
-  int			*keylist, klistsize, klistlen; /* this is really lame,
-							  AMAZINGLY lame */
-  struct hash_link	**buckets;
-};
 
 #define WORLD_SIZE	32700
 #define	HASH_KEY(ht,key)((((unsigned int)(key))*17)%(ht)->table_size)
@@ -420,7 +421,7 @@ void init_hash_table(struct hash_header	*ht,int rec_size,int table_size)
 void init_world(ROOM_INDEX_DATA *room_db[])
 {
   /* zero out the world */
-  bzero((char *)room_db,sizeof(ROOM_INDEX_DATA *)*WORLD_SIZE);
+  memset((char *)room_db, 0, sizeof(ROOM_INDEX_DATA *) * WORLD_SIZE);
 }
 
 CHAR_DATA *get_char_area( CHAR_DATA *ch, char *argument )
@@ -578,45 +579,45 @@ int room_remove(ROOM_INDEX_DATA *rb[],int key)
   return(0);
 }
 
-void *hash_remove(struct hash_header *ht,int key)
+void *hash_remove(struct hash_header *ht, int key)
 {
-  struct hash_link **scan;
+    struct hash_link **scan;
 
-  scan = ht->buckets+HASH_KEY(ht,key);
+    scan = ht->buckets + HASH_KEY(ht, key);
 
-  while(*scan && (*scan)->key!=key)
-    scan = &(*scan)->next;
+    while (*scan && (*scan)->key != key)
+        scan = &(*scan)->next;
 
-  if(*scan)
+    if (*scan)
     {
-      int		i;
-      struct hash_link	*temp, *aux;
+        int i;
+        struct hash_link *temp, *aux;
 
-      temp	= (hash_link*)(*scan)->data;
-      aux	= *scan;
-      *scan	= aux->next;
-      free(aux);
+        temp = (struct hash_link *)(*scan)->data; // Fixed by adding 'struct'
+        aux = *scan;
+        *scan = aux->next;
+        free(aux);
 
-      for(i=0;i<ht->klistlen;i++)
-	if(ht->keylist[i]==key)
-	  break;
+        for (i = 0; i < ht->klistlen; i++)
+            if (ht->keylist[i] == key)
+                break;
 
-      if(i<ht->klistlen)
-	{
-	  bcopy((char *)ht->keylist+i+1,(char *)ht->keylist+i,(ht->klistlen-i)
-		*sizeof(*ht->keylist));
-	  ht->klistlen--;
-	}
+        if (i < ht->klistlen)
+        {
+            memcpy((char *)ht->keylist + i, (char *)ht->keylist + i + 1, (ht->klistlen - i) * sizeof(*ht->keylist));
+            ht->klistlen--;
+        }
 
-      return temp;
+        return temp;
     }
 
-  return NULL;
+    return NULL;
 }
+
 
 void room_iterate(ROOM_INDEX_DATA *rb[],void (*func)(int, ROOM_INDEX_DATA *, void * ),void *cdata)
 {
-  register int i;
+  int i;
 
   for(i=0;i<WORLD_SIZE;i++)
     {
@@ -635,7 +636,7 @@ void hash_iterate(struct hash_header *ht,void (*func)(int, void*,void*),void *cd
   for(i=0;i<ht->klistlen;i++)
     {
       void		*temp;
-      register int	key;
+      int	key;
 
       key = ht->keylist[i];
       temp = hash_find(ht,key);
@@ -663,126 +664,136 @@ void donothing(void *pDummy)
   return;
 }
 
-int find_path( int in_room_vnum, int out_room_vnum, CHAR_DATA *ch,
-	       int depth, int in_zone )
+typedef struct {
+    int direction;
+} ancestor_info;
+
+int find_path(int in_room_vnum, int out_room_vnum, CHAR_DATA *ch,
+             int depth, int in_zone)
 {
-  struct room_q		*tmp_q, *q_head, *q_tail;
-  struct hash_header	x_room;
-  int			i, tmp_room, count=0, thru_doors;
-  ROOM_INDEX_DATA	*herep;
-  ROOM_INDEX_DATA	*startp;
-  EXIT_DATA		*exitp;
+    struct room_q *tmp_q, *q_head, *q_tail;
+    struct hash_header x_room;
+    int i, tmp_room, count = 0, thru_doors;
+    ROOM_INDEX_DATA *herep;
+    ROOM_INDEX_DATA *startp;
+    EXIT_DATA *exitp;
 
-  if ( depth <0 )
+    if (depth < 0)
     {
-      thru_doors = TRUE;
-      depth = -depth;
+        thru_doors = TRUE;
+        depth = -depth;
     }
-  else
+    else
     {
-      thru_doors = FALSE;
-    }
-
-  startp = get_room_index( in_room_vnum );
-
-  init_hash_table( &x_room, sizeof(int), 2048 );
-  hash_enter( &x_room, in_room_vnum, (void *) - 1 );
-
-  /* initialize queue */
-  q_head = (struct room_q *) malloc(sizeof(struct room_q));
-  q_tail = q_head;
-  q_tail->room_nr = in_room_vnum;
-  q_tail->next_q = 0;
-
-  while(q_head)
-    {
-      herep = get_room_index( q_head->room_nr );
-      /* for each room test all directions */
-      if (herep==NULL) fprintf(stderr,"BUG:  Null herep in hunt.c, room #%d",q_head->room_nr);
-      if( herep && (herep->area == startp->area || !in_zone) )
-		{
-	  /* only look in this zone...
-	     saves cpu time and  makes world safer for players  */
-	  for( i = 0; i <= 5; i++ )
-	    {
-	      exitp = herep->exit[i];
-	      if( exit_ok(exitp) && ( thru_doors ? GO_OK_SMARTER : GO_OK ) )
-		{
-		  /* next room */
-		  tmp_room = herep->exit[i]->u1.to_room->vnum;
-		  if( tmp_room != out_room_vnum )
-		    {
-		      /* shall we add room to queue ?
-			 count determines total breadth and depth */
-		      if( !hash_find( &x_room, tmp_room )
-			 && ( count < depth ) )
-			/* && !IS_SET( RM_FLAGS(tmp_room), DEATH ) ) */
-			{
-			  count++;
-			  /* mark room as visted and put on queue */
-
-			  tmp_q = (struct room_q *)
-			    malloc(sizeof(struct room_q));
-			  tmp_q->room_nr = tmp_room;
-			  tmp_q->next_q = 0;
-			  q_tail->next_q = tmp_q;
-			  q_tail = tmp_q;
-
-			  /* ancestor for first layer is the direction */
-			  hash_enter( &x_room, tmp_room,
-				     ((intptr_t)hash_find(&x_room,q_head->room_nr)== -1) ? reinterpret_cast<void*>(i+1) : hash_find(&x_room,q_head->room_nr));
-			}
-		    }
-		  else
-		    {
-		      /* have reached our goal so free queue */
-		      tmp_room = q_head->room_nr;
-		      for(;q_head;q_head = tmp_q)
-			{
-			  tmp_q = q_head->next_q;
-			  free(q_head);
-			}
-		      /* return direction if first layer */
-		      if ((intptr_t)hash_find(&x_room,tmp_room)==-1)
-			{
-			  if (x_room.buckets)
-			    {
-			      /* junk left over from a previous track */
-			      destroy_hash_table(&x_room, donothing);
-			    }
-			  return(i);
-			}
-		      else
-			{
-			  /* else return the ancestor */
-			  int i;
-
-			  i = (intptr_t)hash_find(&x_room,tmp_room);
-			  if (x_room.buckets)
-			    {
-			      /* junk left over from a previous track */
-			      destroy_hash_table(&x_room, donothing);
-			    }
-			  return( -1+i);
-			}
-		    }
-		}
-	    }
-	}
-
-      /* free queue head and point to next entry */
-      tmp_q = q_head->next_q;
-      free(q_head);
-      q_head = tmp_q;
+        thru_doors = FALSE;
     }
 
-  /* couldn't find path */
-  if( x_room.buckets )
+    startp = get_room_index(in_room_vnum);
+
+    init_hash_table(&x_room, sizeof(int), 2048);
+    hash_enter(&x_room, in_room_vnum, SENTINEL_VALUE); // Use sentinel
+
+    /* initialize queue */
+    q_head = (struct room_q *)malloc(sizeof(struct room_q));
+    q_tail = q_head;
+    q_tail->room_nr = in_room_vnum;
+    q_tail->next_q = 0;
+
+    while (q_head)
     {
-      /* junk left over from a previous track */
-      destroy_hash_table( &x_room, donothing );
+        herep = get_room_index(q_head->room_nr);
+        /* for each room test all directions */
+        if (herep == NULL)
+            fprintf(stderr, "BUG:  Null herep in hunt.c, room #%d", q_head->room_nr);
+        if (herep && (herep->area == startp->area || !in_zone))
+        {
+            /* only look in this zone... saves cpu time and makes world safer for players */
+            for (i = 0; i <= 5; i++)
+            {
+                exitp = herep->exit[i];
+                if (exit_ok(exitp) && (thru_doors ? GO_OK_SMARTER : GO_OK))
+                {
+                    /* next room */
+                    tmp_room = herep->exit[i]->u1.to_room->vnum;
+                    if (tmp_room != out_room_vnum)
+                    {
+                        /* shall we add room to queue? count determines total breadth and depth */
+                        if (!hash_find(&x_room, tmp_room) && (count < depth))
+                        /* && !IS_SET( RM_FLAGS(tmp_room), DEATH ) ) */
+                        {
+                            count++;
+                            /* mark room as visited and put on queue */
+
+                            tmp_q = (struct room_q *)malloc(sizeof(struct room_q));
+                            tmp_q->room_nr = tmp_room;
+                            tmp_q->next_q = 0;
+                            q_tail->next_q = tmp_q;
+                            q_tail = tmp_q;
+
+                            /* ancestor for first layer is the direction */
+                            ancestor_info *ancestor;
+                            if (hash_find(&x_room, q_head->room_nr) == SENTINEL_VALUE) {
+                                ancestor = static_cast<ancestor_info*>(malloc(sizeof(ancestor_info)));
+                                if (!ancestor) {
+                                    fprintf(stderr, "Memory allocation failed for ancestor_info.\n");
+                                    exit(EXIT_FAILURE); // Handle appropriately
+                                }
+                                ancestor->direction = i + 1;
+                            } else {
+                                ancestor = (ancestor_info *)hash_find(&x_room, q_head->room_nr);
+                            }
+                            hash_enter(&x_room, tmp_room, ancestor);
+                        }
+                    }
+                    else
+                    {
+                        /* have reached our goal so free queue */
+                        tmp_room = q_head->room_nr;
+                        for (; q_head; q_head = tmp_q)
+                        {
+                            tmp_q = q_head->next_q;
+                            free(q_head);
+                        }
+                        /* return direction if first layer */
+                        if (hash_find(&x_room, tmp_room) == SENTINEL_VALUE)
+                        {
+                            if (x_room.buckets)
+                            {
+                                /* junk left over from a previous track */
+                                destroy_hash_table(&x_room, donothing);
+                            }
+                            return i;
+                        }
+                        else
+                        {
+                            /* else return the ancestor */
+                            ancestor_info *ainfo = (ancestor_info *)hash_find(&x_room, tmp_room);
+                            int direction = ainfo->direction;
+                            if (x_room.buckets)
+                            {
+                                /* junk left over from a previous track */
+                                destroy_hash_table(&x_room, donothing);
+                            }
+                            return (-1 + direction);
+                        }
+                    }
+                }
+            }
+        }
+
+        /* free queue head and point to next entry */
+        tmp_q = q_head->next_q;
+        free(q_head);
+        q_head = tmp_q;
     }
-  return -1;
+
+    /* couldn't find path */
+    if (x_room.buckets)
+    {
+        /* junk left over from a previous track */
+        destroy_hash_table(&x_room, donothing);
+    }
+    return -1;
 }
 
 
@@ -804,7 +815,7 @@ void do_hunt( CHAR_DATA *ch, char *argument )
     if ( !IS_NPC(ch)
     &&   ch->level < skill_table[gsn_hunt].skill_level[ch->iclass] )
     {
-	send_to_char("Hý?\n\r", ch );
+	send_to_char("Hï¿½?\n\r", ch );
 	return;
     }
 
@@ -812,7 +823,7 @@ void do_hunt( CHAR_DATA *ch, char *argument )
 
   if( arg[0] == '\0' )
     {
-      send_to_char( "Kimi avlamaya çalýþýyorsun?\n\r", ch );
+      send_to_char( "Kimi avlamaya ï¿½alï¿½ï¿½ï¿½yorsun?\n\r", ch );
       return;
     }
 
@@ -868,7 +879,7 @@ void do_hunt( CHAR_DATA *ch, char *argument )
     }
 }
 
-act("$n dikkatle topraðý inceliyor.", ch, NULL, NULL, TO_ROOM );
+act("$n dikkatle topraï¿½ï¿½ inceliyor.", ch, NULL, NULL, TO_ROOM );
 
   WAIT_STATE( ch, skill_table[gsn_hunt].beats );
   direction = find_path( ch->in_room->vnum, victim->in_room->vnum,
@@ -876,14 +887,14 @@ act("$n dikkatle topraðý inceliyor.", ch, NULL, NULL, TO_ROOM );
 
   if( direction == -1 )
     {
-      act( "Burada $E giden bir yol bulamýyorsun.",
+      act( "Burada $E giden bir yol bulamï¿½yorsun.",
 	  ch, NULL, victim, TO_CHAR );
       return;
     }
 
   if( direction < 0 || direction > 5 )
     {
-      send_to_char("Hmm... Birþeyler hatalý gibi.\n\r", ch );
+      send_to_char("Hmm... Birï¿½eyler hatalï¿½ gibi.\n\r", ch );
       return;
     }
 
@@ -912,14 +923,14 @@ act("$n dikkatle topraðý inceliyor.", ch, NULL, NULL, TO_ROOM );
 else {
 	  log_string("Do hunt, player hunt, no exits from room!");
   	  ch->hunting=NULL;
-      send_to_char("Odanýn çýkýþý yok!!!!\n\r",ch);
+      send_to_char("Odanï¿½n ï¿½ï¿½kï¿½ï¿½ï¿½ yok!!!!\n\r",ch);
   	  return;
   	}
   /*
    * Display the results of the search.
    */
   }
-  sprintf( buf, "$N %s yönünde.", dir_name[direction] );
+  sprintf( buf, "$N %s yï¿½nï¿½nde.", dir_name[direction] );
   act( buf, ch, NULL, victim, TO_CHAR );
   return;
 }
@@ -954,11 +965,11 @@ void hunt_victim( CHAR_DATA *ch )
 	   if (ch->in_room==NULL || ch->hunting==NULL) return;
 	   if( ch->in_room == ch->hunting->in_room )
 	    {
-        act( "$n $E dik dik bakarak diyor ki, 'Öleceksin!'",
+        act( "$n $E dik dik bakarak diyor ki, 'ï¿½leceksin!'",
   	  ch, NULL, ch->hunting, TO_NOTVICT );
-        act("$n sana dik dik bakarak diyor ki, 'Öleceksin!'",
+        act("$n sana dik dik bakarak diyor ki, 'ï¿½leceksin!'",
   	  ch, NULL, ch->hunting, TO_VICT );
-        act( "$E dik dik bakarak diyorsun ki, 'Öleceksin!'",
+        act( "$E dik dik bakarak diyorsun ki, 'ï¿½leceksin!'",
   	  ch, NULL, ch->hunting, TO_CHAR);
 	      multi_hit( ch, ch->hunting, TYPE_UNDEFINED );
       	      ch->hunting = NULL; /* No more hunting, now tracking */
@@ -969,7 +980,7 @@ void hunt_victim( CHAR_DATA *ch )
         }
        else
 	{
-         do_say( ch, (char*)"Ahhhh!  Avým gitti!!" );
+         do_say( ch, (char*)"Ahhhh!  Avï¿½m gitti!!" );
          ch->hunting = NULL;
          return;
         }
@@ -994,11 +1005,11 @@ void hunt_victim( CHAR_DATA *ch )
       if (ch->in_room==NULL || ch->hunting==NULL) return;
       if( ch->in_room == ch->hunting->in_room )
        {
-         act( "$n $E dik dik bakarak diyor ki, 'Öleceksin!'",
+         act( "$n $E dik dik bakarak diyor ki, 'ï¿½leceksin!'",
    	  ch, NULL, ch->hunting, TO_NOTVICT );
-         act("$n sana dik dik bakarak diyor ki, 'Öleceksin!'",
+         act("$n sana dik dik bakarak diyor ki, 'ï¿½leceksin!'",
    	  ch, NULL, ch->hunting, TO_VICT );
-         act( "$E dik dik bakarak diyorsun ki, 'Öleceksin!'",
+         act( "$E dik dik bakarak diyorsun ki, 'ï¿½leceksin!'",
    	  ch, NULL, ch->hunting, TO_CHAR);
         multi_hit( ch, ch->hunting, TYPE_UNDEFINED );
         ch->hunting = NULL;
@@ -1030,11 +1041,11 @@ void hunt_victim( CHAR_DATA *ch )
   if (ch->in_room==NULL || ch->hunting==NULL) return;
   if( ch->in_room == ch->hunting->in_room )
     {
-      act( "$n $E dik dik bakarak diyor ki, 'Öleceksin!'",
+      act( "$n $E dik dik bakarak diyor ki, 'ï¿½leceksin!'",
 	  ch, NULL, ch->hunting, TO_NOTVICT );
-      act("$n sana dik dik bakarak diyor ki, 'Öleceksin!'",
+      act("$n sana dik dik bakarak diyor ki, 'ï¿½leceksin!'",
 	  ch, NULL, ch->hunting, TO_VICT );
-      act( "$E dik dik bakarak diyorsun ki, 'Öleceksin!'",
+      act( "$E dik dik bakarak diyorsun ki, 'ï¿½leceksin!'",
 	  ch, NULL, ch->hunting, TO_CHAR);
       multi_hit( ch, ch->hunting, TYPE_UNDEFINED );
       ch->hunting = NULL;
@@ -1086,11 +1097,11 @@ void hunt_victim_old( CHAR_DATA *ch )
   if (ch->in_room==NULL || ch->hunting==NULL) return;
   if( ch->in_room == ch->hunting->in_room )
     {
-      act( "$n $E dik dik bakarak diyor ki, 'Öleceksin!'",
+      act( "$n $E dik dik bakarak diyor ki, 'ï¿½leceksin!'",
 	  ch, NULL, ch->hunting, TO_NOTVICT );
-      act("$n sana dik dik bakarak diyor ki, 'Öleceksin!'",
+      act("$n sana dik dik bakarak diyor ki, 'ï¿½leceksin!'",
 	  ch, NULL, ch->hunting, TO_VICT );
-      act( "$E dik dik bakarak diyorsun ki, 'Öleceksin!'",
+      act( "$E dik dik bakarak diyorsun ki, 'ï¿½leceksin!'",
 	  ch, NULL, ch->hunting, TO_CHAR);
       multi_hit( ch, ch->hunting, TYPE_UNDEFINED );
       ch->hunting = NULL;
@@ -1112,7 +1123,7 @@ void hunt_victim_old( CHAR_DATA *ch )
     	  }
          }
 
-         do_say( ch, (char*)"Ahhhh!  Avým gitti!!" );
+         do_say( ch, (char*)"Ahhhh!  Avï¿½m gitti!!" );
          ch->hunting = NULL;
          return;
         }
@@ -1139,11 +1150,11 @@ void hunt_victim_old( CHAR_DATA *ch )
   if (ch->in_room==NULL || ch->hunting==NULL) return;
   if( ch->in_room == ch->hunting->in_room )
     {
-      act( "$n $E dik dik bakarak diyor ki, 'Öleceksin!'",
+      act( "$n $E dik dik bakarak diyor ki, 'ï¿½leceksin!'",
 	  ch, NULL, ch->hunting, TO_NOTVICT );
-      act("$n sana dik dik bakarak diyor ki, 'Öleceksin!'",
+      act("$n sana dik dik bakarak diyor ki, 'ï¿½leceksin!'",
 	  ch, NULL, ch->hunting, TO_VICT );
-      act( "$E dik dik bakarak diyorsun ki, 'Öleceksin!'",
+      act( "$E dik dik bakarak diyorsun ki, 'ï¿½leceksin!'",
 	  ch, NULL, ch->hunting, TO_CHAR);
       multi_hit( ch, ch->hunting, TYPE_UNDEFINED );
       ch->hunting = NULL;
@@ -1217,11 +1228,11 @@ void hunt_victim_old( CHAR_DATA *ch )
   if (ch->in_room==NULL || ch->hunting==NULL) return;
   if( ch->in_room == ch->hunting->in_room )
     {
-      act( "$n $E dik dik bakarak diyor ki, 'Öleceksin!'",
+      act( "$n $E dik dik bakarak diyor ki, 'ï¿½leceksin!'",
 	  ch, NULL, ch->hunting, TO_NOTVICT );
-      act("$n sana dik dik bakarak diyor ki, 'Öleceksin!'",
+      act("$n sana dik dik bakarak diyor ki, 'ï¿½leceksin!'",
 	  ch, NULL, ch->hunting, TO_VICT );
-      act( "$E dik dik bakarak diyorsun ki, 'Öleceksin!'",
+      act( "$E dik dik bakarak diyorsun ki, 'ï¿½leceksin!'",
 	  ch, NULL, ch->hunting, TO_CHAR);
       multi_hit( ch, ch->hunting, TYPE_UNDEFINED );
       ch->hunting = NULL;
@@ -1246,17 +1257,17 @@ void damage_to_obj(CHAR_DATA *ch,OBJ_DATA *wield, OBJ_DATA *worn, int damage)
 
  if( gorev_ekipmani_mi( worn ) )
  {
-   act_color("$C$p tarafýndan verilecek hasarý $P engelliyor.$c",ch,wield,worn,TO_ROOM,POS_RESTING,CLR_RED);
+   act_color("$C$p tarafï¿½ndan verilecek hasarï¿½ $P engelliyor.$c",ch,wield,worn,TO_ROOM,POS_RESTING,CLR_RED);
    return;
  }
  worn->condition -= damage;
 
- act_color("$C$p $P üzerine hasar býrakýyor.$c",
+ act_color("$C$p $P ï¿½zerine hasar bï¿½rakï¿½yor.$c",
 	ch,wield,worn,TO_ROOM,POS_RESTING,CLR_RED);
 
  if (worn->condition < 1)
 	{
-    act_color("$C$P parçalara ayrýlýyor.$c",
+    act_color("$C$P parï¿½alara ayrï¿½lï¿½yor.$c",
 	ch,wield,worn,TO_ROOM,POS_RESTING,CLR_WHITE);
 	extract_obj( worn );
 	return;
@@ -1267,11 +1278,11 @@ void damage_to_obj(CHAR_DATA *ch,OBJ_DATA *wield, OBJ_DATA *worn, int damage)
      && (IS_SET(worn->extra_flags,ITEM_ANTI_EVIL)
 	&& IS_SET(worn->extra_flags,ITEM_ANTI_NEUTRAL) ) )
  {
-   sprintf(buf,"$C$p $P'ye karþý dövüþmek istemiyor.$c");
+   sprintf(buf,"$C$p $P'ye karï¿½ï¿½ dï¿½vï¿½ï¿½mek istemiyor.$c");
    act_color(buf,ch,wield,worn,TO_ROOM,POS_RESTING,CLR_GREEN);
-   sprintf(buf,"$C$p kendisini senden kurtarýyor!$c.");
+   sprintf(buf,"$C$p kendisini senden kurtarï¿½yor!$c.");
    act_color(buf,ch,wield,worn,TO_CHAR,POS_RESTING,CLR_GREEN);
-   sprintf(buf,"$C$p kendisini $z kurtarýyor$c.");
+   sprintf(buf,"$C$p kendisini $z kurtarï¿½yor$c.");
   act_color(buf,ch,wield,worn,TO_ROOM,POS_RESTING,CLR_GREEN);
   unequip_char( ch, wield );
   return;
@@ -1280,7 +1291,7 @@ void damage_to_obj(CHAR_DATA *ch,OBJ_DATA *wield, OBJ_DATA *worn, int damage)
  if (IS_SET(wield->extra_flags,ITEM_ANTI_EVIL)
 	&& IS_SET(worn->extra_flags,ITEM_ANTI_EVIL))
  {
-   sprintf(buf,"$C$p $P üzerine zarar uygulamaktan korkuyor.$c");
+   sprintf(buf,"$C$p $P ï¿½zerine zarar uygulamaktan korkuyor.$c");
   act_color(buf,ch,wield,worn,TO_ROOM,POS_RESTING,CLR_GREEN);
   return;
  }
@@ -1412,7 +1423,7 @@ void do_repair(CHAR_DATA *ch, char *argument)
 
     if ( mob == NULL )
     {
-      send_to_char( "Burada yapamazsýn.\n\r", ch );
+      send_to_char( "Burada yapamazsï¿½n.\n\r", ch );
         return;
     }
 
@@ -1420,25 +1431,25 @@ void do_repair(CHAR_DATA *ch, char *argument)
 
     if (arg[0] == '\0')
     {
-	do_say(mob,(char*)"Senin için bir silahý onarabilirim. Tabii ücret karþýlýðýnda.");
+	do_say(mob,(char*)"Senin iï¿½in bir silahï¿½ onarabilirim. Tabii ï¿½cret karï¿½ï¿½lï¿½ï¿½ï¿½nda.");
 	send_to_char("Type estimate <weapon> to be assessed for damage.\n\r",ch);
 	return;
     }
     if (( obj = get_obj_carry(ch, arg)) == NULL)
     {
-	do_say(mob,(char*)"Sende bu eþya yok.");
+	do_say(mob,(char*)"Sende bu eï¿½ya yok.");
 	return;
     }
 
     if (obj->pIndexData->vnum == OBJ_VNUM_HAMMER)
     {
-     do_say(mob,(char*)"Bu çekiç benim ustalýðýmýn üstünde.");
+     do_say(mob,(char*)"Bu ï¿½ekiï¿½ benim ustalï¿½ï¿½ï¿½mï¿½n ï¿½stï¿½nde.");
      return;
     }
 
     if (obj->condition >= 100)
     {
-	do_say(mob,(char*)"Bu eþya zaten iyi durumda.");
+	do_say(mob,(char*)"Bu eï¿½ya zaten iyi durumda.");
         return;
     }
 
@@ -1454,7 +1465,7 @@ void do_repair(CHAR_DATA *ch, char *argument)
 
     if (cost > ch->silver)
     {
-	do_say(mob,(char*)"Hizmetlerimden yararlanmak için yeterince paran yok.");
+	do_say(mob,(char*)"Hizmetlerimden yararlanmak iï¿½in yeterince paran yok.");
 	return;
     }
 
@@ -1462,9 +1473,9 @@ void do_repair(CHAR_DATA *ch, char *argument)
 
     ch->silver -= cost;
     mob->silver += cost;
-    sprintf(buf, "$N $n'dan %s'ý alýyor, tamir ediyor ve $n'a geri veriyor.", obj->short_descr);
+    sprintf(buf, "$N $n'dan %s'ï¿½ alï¿½yor, tamir ediyor ve $n'a geri veriyor.", obj->short_descr);
     act(buf,ch,NULL,mob,TO_ROOM);
-    sprintf(buf, "%s %s'ý alýp, tamir edip sana geri veriyor.\n\r", mob->short_descr, obj->short_descr);
+    sprintf(buf, "%s %s'ï¿½ alï¿½p, tamir edip sana geri veriyor.\n\r", mob->short_descr, obj->short_descr);
     send_to_char(buf, ch);
     obj->condition = 100;
 }
@@ -1486,7 +1497,7 @@ void do_estimate(CHAR_DATA *ch, char *argument)
 
     if ( mob == NULL )
     {
-        send_to_char( "Burada yapamazsýn..\n\r", ch );
+        send_to_char( "Burada yapamazsï¿½n..\n\r", ch );
         return;
     }
 
@@ -1494,34 +1505,34 @@ void do_estimate(CHAR_DATA *ch, char *argument)
 
     if (arg[0] == '\0')
     {
-	do_say(mob,(char*)"Ücret <eþya> yazmayý dene.");
+	do_say(mob,(char*)"ï¿½cret <eï¿½ya> yazmayï¿½ dene.");
    	return;
     }
     if ((obj = (get_obj_carry(ch, arg))) == NULL)
     {
-	do_say(mob,(char*)"Sende bu eþya yok.");
+	do_say(mob,(char*)"Sende bu eï¿½ya yok.");
 	return;
     }
     if (obj->pIndexData->vnum == OBJ_VNUM_HAMMER)
 	{
-	    do_say(mob,(char*)"Bu çekiç benim ustalýðýmýn üstünde.");
+	    do_say(mob,(char*)"Bu ï¿½ekiï¿½ benim ustalï¿½ï¿½ï¿½mï¿½n ï¿½stï¿½nde.");
 	    return;
 	}
     if (obj->condition >= 100)
     {
-	do_say(mob,(char*)"Bu eþya zaten iyi durumda.");
+	do_say(mob,(char*)"Bu eï¿½ya zaten iyi durumda.");
 	return;
     }
     if (obj->cost == 0)
     {
-	do_say(mob,(char*)"Bu eþya tamir edilemeyecek durumda.");
+	do_say(mob,(char*)"Bu eï¿½ya tamir edilemeyecek durumda.");
     	return;
     }
 
     cost = ( (obj->level * 10) +
 		((obj->cost * (100 - obj->condition)) /100)    );
 
-    sprintf(buf, "Bu eþyayý tamir etmek sana %d akçeye patlar.", cost);
+    sprintf(buf, "Bu eï¿½yayï¿½ tamir etmek sana %d akï¿½eye patlar.", cost);
     do_say(mob,buf);
 }
 
@@ -1543,7 +1554,7 @@ void do_restring( CHAR_DATA *ch, char *argument )
 
     if ( mob == NULL )
     {
-      send_to_char( "Burada yapamazsýn, bir þifacý bul.\n\r", ch );
+      send_to_char( "Burada yapamazsï¿½n, bir ï¿½ifacï¿½ bul.\n\r", ch );
         return;
     }
 
@@ -1554,9 +1565,9 @@ void do_restring( CHAR_DATA *ch, char *argument )
 
 	if ( arg[0] == '\0' || arg1[0] == '\0' || arg2[0] == '\0' )
 	{
-    send_to_char( "Adýný deðiþtirmek istediðin eþyayý ve deðiþtirmek istediðin alaný belirt.\n\r", ch );
-    send_to_char("Yazým:\n\r",ch);
-		send_to_char("  isimlendir <eþya> <alan> <yeni isim>\n\r",ch);
+    send_to_char( "Adï¿½nï¿½ deï¿½iï¿½tirmek istediï¿½in eï¿½yayï¿½ ve deï¿½iï¿½tirmek istediï¿½in alanï¿½ belirt.\n\r", ch );
+    send_to_char("Yazï¿½m:\n\r",ch);
+		send_to_char("  isimlendir <eï¿½ya> <alan> <yeni isim>\n\r",ch);
 		send_to_char("  alanlar: name short long\n\r",ch);
 		return;
 	}
@@ -1571,7 +1582,7 @@ void do_restring( CHAR_DATA *ch, char *argument )
 
     if (cost > ch->silver)
     {
-      act("$N 'Hizmetlerim için yeterli akçen yok,' dedi.",
+      act("$N 'Hizmetlerim iï¿½in yeterli akï¿½en yok,' dedi.",
 		  ch,NULL,mob,TO_CHAR);
 		return;
     }
@@ -1595,7 +1606,7 @@ void do_restring( CHAR_DATA *ch, char *argument )
 	}
 	else
 	{
-    send_to_char("Geçerli bir deðil.\n\r",ch);
+    send_to_char("Geï¿½erli bir deï¿½il.\n\r",ch);
 		return;
 	}
 
@@ -1603,11 +1614,11 @@ void do_restring( CHAR_DATA *ch, char *argument )
 
     ch->silver -= cost;
     mob->silver += cost;
-    sprintf(buf, "$N $s eþyasýný alýyor, üzerine bir þeyler kazýyýp geri veriyor.");
+    sprintf(buf, "$N $s eï¿½yasï¿½nï¿½ alï¿½yor, ï¿½zerine bir ï¿½eyler kazï¿½yï¿½p geri veriyor.");
 	act(buf,ch,NULL,mob,TO_ROOM);
-  sprintf(buf,"%s eþyaný alýyor, üzerine bir þeyler kazýyýp geri veriyor.\n\r", mob->short_descr);
+  sprintf(buf,"%s eï¿½yanï¿½ alï¿½yor, ï¿½zerine bir ï¿½eyler kazï¿½yï¿½p geri veriyor.\n\r", mob->short_descr);
   send_to_char(buf,ch);
-  send_to_char("Eþya isimlendirmede saldýrgan ve hakaret içeren isimler vermek kurallara aykýrýdýr.\n\r", ch);
+  send_to_char("Eï¿½ya isimlendirmede saldï¿½rgan ve hakaret iï¿½eren isimler vermek kurallara aykï¿½rï¿½dï¿½r.\n\r", ch);
 }
 
 void check_shield_destroyed(CHAR_DATA *ch, CHAR_DATA *victim,bool second)
@@ -1810,14 +1821,14 @@ void do_smithing(CHAR_DATA *ch, char *argument)
     if ( IS_NPC(ch)
     ||   ch->level < skill_table[gsn_smithing].skill_level[ch->iclass] )
     {
-	send_to_char("Hý?\n\r", ch );
+	send_to_char("Hï¿½?\n\r", ch );
 	return;
     }
 
 
     if ( ch->fighting )
     {
-      send_to_char( "Dövüþ bitene kadar bekle.\n\r", ch );
+      send_to_char( "Dï¿½vï¿½ï¿½ bitene kadar bekle.\n\r", ch );
         return;
     }
 
@@ -1831,25 +1842,25 @@ void do_smithing(CHAR_DATA *ch, char *argument)
 
     if (( obj = get_obj_carry(ch, arg)) == NULL)
     {
-      send_to_char("Onu taþýmýyorsun.\n\r",ch);
+      send_to_char("Onu taï¿½ï¿½mï¿½yorsun.\n\r",ch);
 	return;
     }
 
    if (obj->condition >= 100)
     {
-      send_to_char("Eþyan zarar görmemiþ.\n\r",ch);
+      send_to_char("Eï¿½yan zarar gï¿½rmemiï¿½.\n\r",ch);
 	return;
     }
 
     if (( hammer = get_hold_char(ch)) == NULL)
     {
-      send_to_char("Bir çekiç taþýmýyorsun.\n\r",ch);
+      send_to_char("Bir ï¿½ekiï¿½ taï¿½ï¿½mï¿½yorsun.\n\r",ch);
 	return;
     }
 
     if ( hammer->pIndexData->vnum != OBJ_VNUM_HAMMER )
     {
-      send_to_char("Elindeki çekiç uygun deðil.\n\r",ch);
+      send_to_char("Elindeki ï¿½ekiï¿½ uygun deï¿½il.\n\r",ch);
 	return;
     }
 
@@ -1857,18 +1868,18 @@ void do_smithing(CHAR_DATA *ch, char *argument)
     if ( number_percent() > get_skill(ch,gsn_smithing) )
      {
       check_improve(ch,gsn_smithing,FALSE,8);
-      sprintf(buf, "$n %s eþyasýný çekiçle tamir etmeyi denedi fakat beceremedi.", obj->short_descr);
+      sprintf(buf, "$n %s eï¿½yasï¿½nï¿½ ï¿½ekiï¿½le tamir etmeyi denedi fakat beceremedi.", obj->short_descr);
     act(buf,ch,NULL,obj,TO_ROOM);
-    sprintf(buf, "%s eþyasýný tamir etmeyi beceremedin.\n\r", obj->short_descr);
+    sprintf(buf, "%s eï¿½yasï¿½nï¿½ tamir etmeyi beceremedin.\n\r", obj->short_descr);
     send_to_char(buf, ch);
     hammer->condition -= 25;
      }
     else
      {
     check_improve(ch,gsn_smithing,TRUE,4);
-    sprintf(buf, "$n %s eþyasýný çekiçle tamir etti.", obj->short_descr);
+    sprintf(buf, "$n %s eï¿½yasï¿½nï¿½ ï¿½ekiï¿½le tamir etti.", obj->short_descr);
     act(buf,ch,NULL,NULL,TO_ROOM);
-    sprintf(buf, "%s eþyasýný tamir ettin.\n\r", obj->short_descr);
+    sprintf(buf, "%s eï¿½yasï¿½nï¿½ tamir ettin.\n\r", obj->short_descr);
     send_to_char(buf, ch);
     obj->condition = UMAX( 100 ,
 	 obj->condition + ( get_skill(ch,gsn_smithing) / 2) );
@@ -1980,12 +1991,13 @@ int advatoi (const char *s)
 
   strcpy (string,s);        /* working copy */
 
-  while ( isdigit (*stringptr)) /* as long as the current character is a digit */
-  {
-      strncpy (tempstring,stringptr,1);           /* copy first digit */
-      number = (number * 10) + atoi (tempstring); /* add to current number */
-      stringptr++;                                /* advance */
-  }
+    while (isdigit(*stringptr))
+    {
+        strncpy(tempstring, stringptr, 1); /* copy first digit */
+        tempstring[1] = '\0'; // Ensure null-termination
+        number = (number * 10) + atoi(tempstring);
+        stringptr++;
+    }
 
   switch (UPPER(*stringptr)) {
       case 'K'  : multiplier = 1000;    number *= multiplier; stringptr++; break;
@@ -1994,13 +2006,13 @@ int advatoi (const char *s)
       default   : return 0; /* not k nor m nor NUL - return 0! */
   }
 
-  while ( isdigit (*stringptr) && (multiplier > 1)) /* if any digits follow k/m, add those too */
-  {
-      strncpy (tempstring,stringptr,1);           /* copy first digit */
-      multiplier = multiplier / 10;  /* the further we get to right, the less are the digit 'worth' */
-      number = number + (atoi (tempstring) * multiplier);
-      stringptr++;
-  }
+    while (isdigit(*stringptr))
+    {
+        strncpy(tempstring, stringptr, 1); /* copy first digit */
+        tempstring[1] = '\0'; // Ensure null-termination
+        number = (number * 10) + atoi(tempstring);
+        stringptr++;
+    }
 
   if (*stringptr != '\0' && !isdigit(*stringptr)) /* a non-digit character was found, other than NUL */
     return 0; /* If a digit is found, it means the multiplier is 1 - i.e. extra
@@ -2068,9 +2080,9 @@ void auction_update (void)
             case 1 : /* going once */
             case 2 : /* going twice */
             if (auction->bet > 0)
-            sprintf (buf, "%s: %d akçeye gidiyor.", auction->item->short_descr,auction->bet);
+            sprintf (buf, "%s: %d akï¿½eye gidiyor.", auction->item->short_descr,auction->bet);
             else
-            sprintf (buf, "%s: henüz teklif yok.", auction->item->short_descr);
+            sprintf (buf, "%s: henï¿½z teklif yok.", auction->item->short_descr);
 	          sprintf(bufc,"%s%s%s",CLR_CYAN,buf,CLR_WHITE_BOLD);
             talk_auction (bufc);
             break;
@@ -2079,16 +2091,16 @@ void auction_update (void)
 
             if (auction->bet > 0)
             {
-              sprintf (buf, "%s: %s %d akçeye satýn aldý.",
+              sprintf (buf, "%s: %s %d akï¿½eye satï¿½n aldï¿½.",
                     auction->item->short_descr,
                     IS_NPC(auction->buyer) ? auction->buyer->short_descr : auction->buyer->name,
                     auction->bet);
 	        sprintf(bufc,"%s%s%s",CLR_CYAN,buf,CLR_WHITE_BOLD);
                 talk_auction(bufc);
                 obj_to_char (auction->item,auction->buyer);
-                act ("Mezatçý yanýnda belirerek $p eþyasýný sana veriyor.",
+                act ("Mezatï¿½ï¿½ yanï¿½nda belirerek $p eï¿½yasï¿½nï¿½ sana veriyor.",
                      auction->buyer,auction->item,NULL,TO_CHAR);
-                act ("Mezatçý beliriyor ve $p eþyasýný $e veriyor.",
+                act ("Mezatï¿½ï¿½ beliriyor ve $p eï¿½yasï¿½nï¿½ $e veriyor.",
                      auction->buyer,auction->item,NULL,TO_ROOM);
 
                 auction->seller->silver += auction->bet; /* give him the money */
@@ -2098,10 +2110,10 @@ void auction_update (void)
             }
             else /* not sold */
             {
-              sprintf (buf, "%s teklif gelmediði için mezattan çekildi.",auction->item->short_descr);
+              sprintf (buf, "%s teklif gelmediï¿½i iï¿½in mezattan ï¿½ekildi.",auction->item->short_descr);
 			  sprintf(bufc,"%s%s%s",CLR_CYAN,buf,CLR_WHITE_BOLD);
               talk_auction(bufc);
-              sprintf (buf, "Mezatçý satýlmayan eþyayý depoya kaldýrýyor.");
+              sprintf (buf, "Mezatï¿½ï¿½ satï¿½lmayan eï¿½yayï¿½ depoya kaldï¿½rï¿½yor.");
 			  sprintf(bufc,"%s%s%s",CLR_RED,buf,CLR_WHITE_BOLD);
               talk_auction(bufc);
                 extract_obj(auction->item);
@@ -2130,16 +2142,16 @@ void do_auction (CHAR_DATA *ch, char *argument)
 
     if (IS_SET(ch->comm,COMM_NOAUCTION))
 	{
-    if (!str_cmp(arg1,"açýk") )
+    if (!str_cmp(arg1,"aï¿½ï¿½k") )
 	 {
-     send_to_char("Mezat kanalý açýldý.\n\r",ch);
+     send_to_char("Mezat kanalï¿½ aï¿½ï¿½ldï¿½.\n\r",ch);
 	  REMOVE_BIT(ch->comm,COMM_NOAUCTION);
 	  return;
 	 }
 	 else
 	 {
-     send_to_char("Mezat kanalý kapandý.\n\r",ch);
- 	  send_to_char( "Mezat kanalýn açýk deðil.\n\r",ch);
+     send_to_char("Mezat kanalï¿½ kapandï¿½.\n\r",ch);
+ 	  send_to_char( "Mezat kanalï¿½n aï¿½ï¿½k deï¿½il.\n\r",ch);
 	  return;
 	 }
 	}
@@ -2150,9 +2162,9 @@ void do_auction (CHAR_DATA *ch, char *argument)
         {
             /* show item data here */
             if (auction->bet > 0)
-            sprintf (buf, "Bu objeye son verilen teklif %d akçe.\n\r",auction->bet);
+            sprintf (buf, "Bu objeye son verilen teklif %d akï¿½e.\n\r",auction->bet);
             else
-            sprintf (buf, "Henüz teklif verilmedi.\n\r");
+            sprintf (buf, "Henï¿½z teklif verilmedi.\n\r");
 	    sprintf(bufc,"%s%s%s",CLR_GREEN,buf,CLR_WHITE_BOLD);
             send_to_char (bufc,ch);
 	    spell_identify(0, 0, ch, auction->item,0);
@@ -2160,14 +2172,14 @@ void do_auction (CHAR_DATA *ch, char *argument)
         }
         else
         {
-          printf_to_char(ch,"{rNeyi mezata çýkaracaksýn?{x\n\r");
+          printf_to_char(ch,"{rNeyi mezata ï¿½ï¿½karacaksï¿½n?{x\n\r");
             return;
         }
     }
 
-    if (!str_cmp(arg1,"kapalý") )
+    if (!str_cmp(arg1,"kapalï¿½") )
 	{
-    send_to_char("Mezat kanalý kapandý.\n\r",ch);
+    send_to_char("Mezat kanalï¿½ kapandï¿½.\n\r",ch);
 	 SET_BIT(ch->comm,COMM_NOAUCTION);
 	 return;
 	}
@@ -2176,12 +2188,12 @@ void do_auction (CHAR_DATA *ch, char *argument)
     {
     if (auction->item == NULL)
     {
-      send_to_char ("Durdurabileceðin bir mezat yürümüyor.\n\r",ch);
+      send_to_char ("Durdurabileceï¿½in bir mezat yï¿½rï¿½mï¿½yor.\n\r",ch);
         return;
     }
     else /* stop the auction */
     {
-      sprintf(buf,"%s objesinin satýþý bir ölümsüz tarafýndan durduruldu.",auction->item->short_descr);
+      sprintf(buf,"%s objesinin satï¿½ï¿½ï¿½ bir ï¿½lï¿½msï¿½z tarafï¿½ndan durduruldu.",auction->item->short_descr);
 	sprintf(bufc,"%s%s%s",CLR_WHITE,buf,CLR_WHITE_BOLD);
         talk_auction(bufc);
         obj_to_char(auction->item, auction->seller);
@@ -2189,7 +2201,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
         if (auction->buyer != NULL) /* return money to the buyer */
         {
             auction->buyer->silver += auction->bet;
-            printf_to_char (auction->buyer,"%d akçen iade edildi.\n\r",auction->bet);
+            printf_to_char (auction->buyer,"%d akï¿½en iade edildi.\n\r",auction->bet);
         }
         return;
     }
@@ -2203,7 +2215,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
 
 	if ( ch == auction->seller )
 		{
-      send_to_char("Kendi malýn için artýrým yapamazsýn...:)\n\r",ch);
+      send_to_char("Kendi malï¿½n iï¿½in artï¿½rï¿½m yapamazsï¿½n...:)\n\r",ch);
 	return;
 		}
             /* make - perhaps - a bet now */
@@ -2218,7 +2230,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
 
             if (newbet < (auction->bet + 1))
             {
-              send_to_char ("Teklifin son tekliften 1 akçe fazla ya da açýlýþ fiyatý kadar olmalý.\n\r",ch);
+              send_to_char ("Teklifin son tekliften 1 akï¿½e fazla ya da aï¿½ï¿½lï¿½ï¿½ fiyatï¿½ kadar olmalï¿½.\n\r",ch);
                 return;
             }
 
@@ -2242,7 +2254,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
             auction->going = 0;
             auction->pulse = PULSE_AUCTION; /* start the auction over again */
 
-            sprintf (buf,"%s için %d akçe teklif edildi.\n\r",auction->item->short_descr,newbet);
+            sprintf (buf,"%s iï¿½in %d akï¿½e teklif edildi.\n\r",auction->item->short_descr,newbet);
 	    sprintf(bufc,"%s%s%s",CLR_MAGENTA,buf,CLR_WHITE_BOLD);
             talk_auction (bufc);
             return;
@@ -2251,7 +2263,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
         }
         else
         {
-          send_to_char ("Mezatta birþey yok.\n\r",ch);
+          send_to_char ("Mezatta birï¿½ey yok.\n\r",ch);
             return;
         }
         }
@@ -2262,13 +2274,13 @@ void do_auction (CHAR_DATA *ch, char *argument)
 
     if (obj == NULL)
     {
-      send_to_char ("Onu taþýmýyorsun.\n\r",ch);
+      send_to_char ("Onu taï¿½ï¿½mï¿½yorsun.\n\r",ch);
         return;
     }
 
     if (obj->pIndexData->vnum < 100)
     {
-      send_to_char ("Onu mezata süremezsin.\n\r",ch);
+      send_to_char ("Onu mezata sï¿½remezsin.\n\r",ch);
         return;
     }
 
@@ -2276,7 +2288,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
     {
       if (obj->pIndexData->vnum == cabal_table[i].obj_vnum)
       {
-        send_to_char("Ýsteðin tanrýlarý sinirlendiriyor.\n\r", ch);
+        send_to_char("ï¿½steï¿½in tanrï¿½larï¿½ sinirlendiriyor.\n\r", ch);
 	return;
       }
     }
@@ -2286,7 +2298,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
     {
 
     default:
-    act_color ("$C$T eþyalarý mezata sürülemez.$c",ch, NULL, item_type_name(obj),
+    act_color ("$C$T eï¿½yalarï¿½ mezata sï¿½rï¿½lemez.$c",ch, NULL, item_type_name(obj),
 		TO_CHAR,POS_SLEEPING,CLR_RED);
         return;
 
@@ -2312,7 +2324,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
     } /* switch */
     else
     {
-      act ("Þu an mezatta $p eþyasý var, daha sonra tekrar dene!",ch,auction->item,NULL,TO_CHAR);
+      act ("ï¿½u an mezatta $p eï¿½yasï¿½ var, daha sonra tekrar dene!",ch,auction->item,NULL,TO_CHAR);
         return;
     }
 }

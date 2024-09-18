@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
- * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
- * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aï¿½ï¿½k kaynak Tï¿½rkï¿½e Mud projesidir.                        *
+ * Oyun geliï¿½tirmesi Jai ve Maru tarafï¿½ndan yï¿½netilmektedir.               *
+ * Unutulmamasï¿½ gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -47,7 +47,10 @@
 *	By using this code, you have agreed to follow the terms of the	   *
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
+/* merc.h */
 
+#ifndef MERC_H
+#define MERC_H
 /*
  * Accommodate old non-Ansi compilers.
  */
@@ -106,6 +109,19 @@
 #define DECLARE_OPROG_FUN_DEATH(fun)	OPROG_FUN_DEATH fun
 #define DECLARE_OPROG_FUN_SPEECH(fun)	OPROG_FUN_SPEECH fun
 #define DECLARE_OPROG_FUN_AREA(fun)	OPROG_FUN_AREA fun
+
+/* Include stdbool.h to define bool, true, false */
+#include <stdbool.h>
+
+/* Define macros for directory paths if not already defined */
+#ifndef PLAYER_DIR
+#define PLAYER_DIR "../player/"     /* Adjust the path as needed */
+#endif
+
+#ifndef REMORT_DIR
+#define REMORT_DIR "../remort/"     /* Adjust the path as needed */
+#endif
+
 #endif
 
 
@@ -133,6 +149,12 @@ typedef short   int			sh_int;
 #endif
 
 /* ea */
+/* <stdbool.h> is already included in the non-TRADITIONAL case */
+/* No need to include it again here */
+
+/* Remove any manual typedef for bool in non-TRADITIONAL case to avoid conflicts */
+/* Ensure that in TRADITIONAL case, bool is already defined appropriately */
+
 #define MSL MAX_STRING_LENGTH
 #define MIL MAX_INPUT_LENGTH
 
@@ -151,12 +173,12 @@ typedef struct	help_data		HELP_DATA;
 typedef struct	kill_data		KILL_DATA;
 typedef struct	mem_data		MEM_DATA;
 typedef struct	mob_index_data		MOB_INDEX_DATA;
-typedef struct	quest_index_data		QUEST_INDEX_DATA;
+typedef struct	quest_index_data	QUEST_INDEX_DATA;
 typedef struct  obj_data		OBJ_DATA;
-typedef struct	obj_index_data		OBJ_INDEX_DATA;
+typedef struct	obj_index_data	OBJ_INDEX_DATA;
 typedef struct	pc_data			PC_DATA;
 typedef struct	reset_data		RESET_DATA;
-typedef struct	room_index_data		ROOM_INDEX_DATA;
+typedef struct	room_index_data	ROOM_INDEX_DATA;
 typedef struct	shop_data		SHOP_DATA;
 typedef struct	time_info_data		TIME_INFO_DATA;
 typedef struct	weather_data		WEATHER_DATA;
@@ -169,31 +191,31 @@ typedef struct  auction_data            AUCTION_DATA;
 /*
  * Function types.
  */
-typedef	void DO_FUN	args( ( CHAR_DATA *ch, char *argument ) );
-typedef bool SPEC_FUN	args( ( CHAR_DATA *ch ) );
-typedef void SPELL_FUN	args( ( int sn, int level, CHAR_DATA *ch, void *vo,
-				int target ) );
-typedef void MPROG_FUN_BRIBE args( ( CHAR_DATA *mob, CHAR_DATA *ch, int amount ) );
-typedef void MPROG_FUN_ENTRY args( ( CHAR_DATA *mob ) );
-typedef void MPROG_FUN_GREET args( ( CHAR_DATA *mob, CHAR_DATA *ch ) );
-typedef void MPROG_FUN_GIVE args(( CHAR_DATA *mob, CHAR_DATA *ch, OBJ_DATA *obj ));
-typedef void MPROG_FUN_FIGHT args( ( CHAR_DATA *mob, CHAR_DATA *victim ));
-typedef bool MPROG_FUN_DEATH args( ( CHAR_DATA *mob ) );
-typedef void MPROG_FUN_AREA args( ( CHAR_DATA *mob ) );
-typedef void MPROG_FUN_SPEECH args((CHAR_DATA *mob, CHAR_DATA *ch, char *speech));
+void sha256_string_with_salt(const char *password, const char *salt, char *output_hash_hex);
+typedef	void DO_FUN( CHAR_DATA *ch, char *argument );
+typedef bool SPEC_FUN( CHAR_DATA *ch );
+typedef void SPELL_FUN( int sn, int level, CHAR_DATA *ch, void *vo, int target );
+typedef void MPROG_FUN_BRIBE( CHAR_DATA *mob, CHAR_DATA *ch, int amount );
+typedef void MPROG_FUN_ENTRY( CHAR_DATA *mob );
+typedef void MPROG_FUN_GREET( CHAR_DATA *mob, CHAR_DATA *ch );
+typedef void MPROG_FUN_GIVE( CHAR_DATA *mob, CHAR_DATA *ch, OBJ_DATA *obj );
+typedef void MPROG_FUN_FIGHT( CHAR_DATA *mob, CHAR_DATA *victim );
+typedef bool MPROG_FUN_DEATH( CHAR_DATA *mob );
+typedef void MPROG_FUN_AREA( CHAR_DATA *mob );
+typedef void MPROG_FUN_SPEECH( CHAR_DATA *mob, CHAR_DATA *ch, char *speech );
 
-typedef void OPROG_FUN_WEAR args((OBJ_DATA *obj, CHAR_DATA *ch));
-typedef void OPROG_FUN_REMOVE args((OBJ_DATA *obj, CHAR_DATA *ch));
-typedef void OPROG_FUN_GET args((OBJ_DATA *obj, CHAR_DATA *ch));
-typedef void OPROG_FUN_DROP args((OBJ_DATA *obj, CHAR_DATA *ch));
-typedef bool OPROG_FUN_SAC args((OBJ_DATA *obj, CHAR_DATA *ch));
-typedef void OPROG_FUN_ENTRY args((OBJ_DATA *obj));
-typedef void OPROG_FUN_GIVE args((OBJ_DATA *obj, CHAR_DATA *from, CHAR_DATA *to));
-typedef void OPROG_FUN_GREET args((OBJ_DATA *obj, CHAR_DATA *ch));
-typedef void OPROG_FUN_FIGHT args((OBJ_DATA *obj, CHAR_DATA *ch));
-typedef bool OPROG_FUN_DEATH args((OBJ_DATA *obj, CHAR_DATA *ch));
-typedef void OPROG_FUN_SPEECH args((OBJ_DATA *obj, CHAR_DATA *ch, char *speech));
-typedef void OPROG_FUN_AREA args((OBJ_DATA *obj));
+typedef void OPROG_FUN_WEAR( OBJ_DATA *obj, CHAR_DATA *ch );
+typedef void OPROG_FUN_REMOVE( OBJ_DATA *obj, CHAR_DATA *ch );
+typedef void OPROG_FUN_GET( OBJ_DATA *obj, CHAR_DATA *ch );
+typedef void OPROG_FUN_DROP( OBJ_DATA *obj, CHAR_DATA *ch );
+typedef bool OPROG_FUN_SAC( OBJ_DATA *obj, CHAR_DATA *ch );
+typedef void OPROG_FUN_ENTRY( OBJ_DATA *obj );
+typedef void OPROG_FUN_GIVE( OBJ_DATA *obj, CHAR_DATA *from, CHAR_DATA *to );
+typedef void OPROG_FUN_GREET( OBJ_DATA *obj, CHAR_DATA *ch );
+typedef void OPROG_FUN_FIGHT( OBJ_DATA *obj, CHAR_DATA *ch );
+typedef bool OPROG_FUN_DEATH( OBJ_DATA *obj, CHAR_DATA *ch );
+typedef void OPROG_FUN_SPEECH( OBJ_DATA *obj, CHAR_DATA *ch, char *speech );
+typedef void OPROG_FUN_AREA( OBJ_DATA *obj );
 
 /*
  *  COMMAND extra bits..
@@ -462,7 +484,64 @@ struct	weather_data
     int		sunlight;
 };
 
+/*
+ * Structure for a command in the command lookup table.
+ */
+struct	cmd_type
+{
+    const char *	name;
+    DO_FUN *		do_fun;
+    sh_int		position;
+    sh_int		level;
+    sh_int		log;
+    sh_int              show;
+    sh_int		extra;
+};
 
+struct flag_type
+{
+    const char *name;
+    int bit;
+    bool settable;
+};
+
+struct position_type
+{
+    const char *name;
+    const char *short_name;
+};
+
+struct sex_type
+{
+    const char *name;
+};
+
+struct size_type
+{
+    const char *name;
+};
+
+struct wand_spell_type
+{
+    const char *name;
+};
+
+struct material_type
+{
+    const char *name;
+    const char *nametr;
+    bool food_ok;
+    bool container_ok;
+    bool textile_ok;
+    bool armor_ok;
+    bool weapon_ok;
+    bool potion_ok;
+    bool scroll_ok;
+    bool silent_ok;
+    bool swim_ok;
+    sh_int weight_pt;
+    int decay_pt;
+};
 
 /*
  * Connected state for a channel.
@@ -2183,6 +2262,7 @@ struct	pc_data
 	time_t		birth_time;
     bool		valid;
     char *		pwd;
+    char		salt[33];
     char *		bamfin;
     char *		bamfout;
     char *		title;
@@ -2841,8 +2921,8 @@ extern sh_int  gsn_mental_knife;
  * Description macros.
  */
 #define PERS(ch, looker)	( can_see( looker, (ch) ) ?         \
-				( IS_NPC(ch) ? (ch)->short_descr :((IS_VAMPIRE(ch) && !IS_IMMORTAL(looker))? "Çirkin bir varlýk" : (ch)->name ) ) \
-				: ( (!IS_NPC(ch) && (ch)->level > (LEVEL_HERO)) ? "bir ölümsüz" : "birisi" ) )
+				( IS_NPC(ch) ? (ch)->short_descr :((IS_VAMPIRE(ch) && !IS_IMMORTAL(looker))? "ï¿½irkin bir varlï¿½k" : (ch)->name ) ) \
+				: ( (!IS_NPC(ch) && (ch)->level > (LEVEL_HERO)) ? "bir ï¿½lï¿½msï¿½z" : "birisi" ) )
 /* new defines */
 #define MAX_CHARM(ch)	((get_curr_stat(ch,STAT_INT) / 6) + (ch->level / 45))
 
@@ -3455,11 +3535,4 @@ void oprog_set(OBJ_INDEX_DATA *, const char *, const char *);
 /* mob_prog.c */
 void mprog_set(MOB_INDEX_DATA *, const char *, const char *);
 
-
-#undef	CD
-#undef	MID
-#undef	OD
-#undef	OID
-#undef	RID
-#undef	SF
-#undef  AD
+#endif 

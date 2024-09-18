@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
- * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
- * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aï¿½ï¿½k kaynak Tï¿½rkï¿½e Mud projesidir.                        *
+ * Oyun geliï¿½tirmesi Jai ve Maru tarafï¿½ndan yï¿½netilmektedir.               *
+ * Unutulmamasï¿½ gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -47,7 +47,12 @@
 *	By using this code, you have agreed to follow the terms of the	   *
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
+#ifndef TABLES_H
+#define TABLES_H
 
+/* Include merc.h to get struct definitions */
+#include "merc.h"
+#endif
 struct yp_tip
 {
     int min_yp;
@@ -80,48 +85,3 @@ extern	const	struct	flag_type	container_flags[];
 extern	const	struct	flag_type	portal_flags[];
 extern	const	struct	flag_type	room_flags[];
 extern	const	struct	flag_type	exit_flags[];
-
-struct flag_type
-{
-    const char *name;
-    int bit;
-    bool settable;
-};
-
-struct position_type
-{
-    const char *name;
-    const char *short_name;
-};
-
-struct sex_type
-{
-    const char *name;
-};
-
-struct size_type
-{
-    const char *name;
-};
-
-struct wand_spell_type
-{
-    const char *name;
-};
-
-struct material_type
-{
-    const char *name;
-    const char *nametr;
-    bool food_ok;
-    bool container_ok;
-    bool textile_ok;
-    bool armor_ok;
-    bool weapon_ok;
-    bool potion_ok;
-    bool scroll_ok;
-    bool silent_ok;
-    bool swim_ok;
-    sh_int weight_pt;
-    int decay_pt;
-};
