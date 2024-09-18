@@ -3534,5 +3534,11 @@ void oprog_set(OBJ_INDEX_DATA *, const char *, const char *);
 
 /* mob_prog.c */
 void mprog_set(MOB_INDEX_DATA *, const char *, const char *);
-
+#undef	CD
+#undef	MID
+#undef	OD
+#undef	OID
+#undef	RID
+#undef	SF
+#undef  AD
 #endif 
