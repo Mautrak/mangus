@@ -65,6 +65,7 @@
 #include "tables.h"
 #include "lookup.h"
 #include <openssl/sha.h>
+#include <openssl/rand.h>
 
 #define SALT_LENGTH 16
 #define HASH_LENGTH 32
@@ -3194,64 +3195,38 @@ void do_wimpy( CHAR_DATA *ch, char *argument )
     return;
 }
 
-void generate_salt(char *salt, size_t length) {
-    const char *chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789./";
+void  generate_salt(char *salt, size_t length) {
+    const char *charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789./";
+    size_t charset_size = strlen(charset);
+    
+    // Seed the random number generator
+    srand((unsigned int)time(NULL));
+    
     for (size_t i = 0; i < length - 1; i++) {
-        salt[i] = chars[rand() % (strlen(chars))];
+        salt[i] = charset[rand() % charset_size];
     }
-    salt[length - 1] = '\0';
+    salt[length - 1] = '\0'; // Null-terminate the salt string
 }
 
-void sha256_string_with_salt(const char *password, const char *salt, char *output_hash_hex);
-{
-    EVP_MD_CTX *mdctx;
-    const EVP_MD *md;
-    unsigned char hash[EVP_MAX_MD_SIZE];
-    unsigned int lengthOfHash;
-    int i;
-
-    /* Initialize the EVP context */
-    md = EVP_sha256();
-    mdctx = EVP_MD_CTX_new();
-    if (mdctx == NULL) {
-        fprintf(stderr, "EVP_MD_CTX_new failed\n");
-        exit(EXIT_FAILURE); // Handle appropriately
+void sha256_string_with_salt(const char *password, const char *salt, char *output_hash_hex) {
+    unsigned char hash[SHA256_DIGEST_LENGTH];
+    SHA256_CTX sha256;
+    
+    // Initialize SHA-256 context
+    SHA256_Init(&sha256);
+    
+    // Update context with salt and password
+    SHA256_Update(&sha256, salt, strlen(salt));
+    SHA256_Update(&sha256, password, strlen(password));
+    
+    // Finalize the hash
+    SHA256_Final(hash, &sha256);
+    
+    // Convert the binary hash to a hexadecimal string
+    for(int i = 0; i < SHA256_DIGEST_LENGTH; i++) {
+        sprintf(output_hash_hex + (i * 2), "%02x", hash[i]);
     }
-
-    if (1 != EVP_DigestInit_ex(mdctx, md, NULL)) {
-        fprintf(stderr, "EVP_DigestInit_ex failed\n");
-        EVP_MD_CTX_free(mdctx);
-        exit(EXIT_FAILURE);
-    }
-
-    // Update with salt first
-    if (1 != EVP_DigestUpdate(mdctx, salt, strlen(salt))) {
-        fprintf(stderr, "EVP_DigestUpdate failed\n");
-        EVP_MD_CTX_free(mdctx);
-        exit(EXIT_FAILURE);
-    }
-
-    // Then update with the password
-    if (1 != EVP_DigestUpdate(mdctx, input, strlen(input))) {
-        fprintf(stderr, "EVP_DigestUpdate failed\n");
-        EVP_MD_CTX_free(mdctx);
-        exit(EXIT_FAILURE);
-    }
-
-    if (1 != EVP_DigestFinal_ex(mdctx, hash, &lengthOfHash)) {
-        fprintf(stderr, "EVP_DigestFinal_ex failed\n");
-        EVP_MD_CTX_free(mdctx);
-        exit(EXIT_FAILURE);
-    }
-
-    EVP_MD_CTX_free(mdctx);
-
-    /* Convert the hash to a hex string */
-    for(i = 0; i < lengthOfHash; i++)
-    {
-        sprintf(output + (i * 2), "%02x", hash[i]);
-    }
-    output[lengthOfHash * 2] = '\0'; // Null-terminate the string
+    output_hash_hex[64] = 0; // Null-terminate the string
 }
 
 
