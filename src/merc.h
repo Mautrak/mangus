@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar aï¿½ï¿½k kaynak Tï¿½rkï¿½e Mud projesidir.                        *
- * Oyun geliï¿½tirmesi Jai ve Maru tarafï¿½ndan yï¿½netilmektedir.               *
- * Unutulmamasï¿½ gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
+ * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
+ * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -2918,8 +2918,8 @@ extern sh_int  gsn_mental_knife;
  * Description macros.
  */
 #define PERS(ch, looker)	( can_see( looker, (ch) ) ?         \
-				( IS_NPC(ch) ? (ch)->short_descr :((IS_VAMPIRE(ch) && !IS_IMMORTAL(looker))? "ï¿½irkin bir varlï¿½k" : (ch)->name ) ) \
-				: ( (!IS_NPC(ch) && (ch)->level > (LEVEL_HERO)) ? "bir ï¿½lï¿½msï¿½z" : "birisi" ) )
+				( IS_NPC(ch) ? (ch)->short_descr :((IS_VAMPIRE(ch) && !IS_IMMORTAL(looker))? "Çirkin bir varlýk" : (ch)->name ) ) \
+				: ( (!IS_NPC(ch) && (ch)->level > (LEVEL_HERO)) ? "bir ölümsüz" : "birisi" ) )
 /* new defines */
 #define MAX_CHARM(ch)	((get_curr_stat(ch,STAT_INT) / 6) + (ch->level / 45))
 

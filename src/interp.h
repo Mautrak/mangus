@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar aï¿½ï¿½k kaynak Tï¿½rkï¿½e Mud projesidir.                        *
- * Oyun geliï¿½tirmesi Jai ve Maru tarafï¿½ndan yï¿½netilmektedir.               *
- * Unutulmamasï¿½ gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
+ * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
+ * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *

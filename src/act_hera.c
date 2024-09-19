@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar aï¿½ï¿½k kaynak Tï¿½rkï¿½e Mud projesidir.                        *
- * Oyun geliï¿½tirmesi Jai ve Maru tarafï¿½ndan yï¿½netilmektedir.               *
- * Unutulmamasï¿½ gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
+ * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
+ * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -142,14 +142,14 @@ void do_enter( CHAR_DATA *ch, char *argument)
 
 	if (portal == NULL)
 	{
-    printf_to_char(ch,"ï¿½yle birï¿½ey gï¿½rmï¿½yorsun.\n\r");
+    printf_to_char(ch,"Öyle birþey görmüyorsun.\n\r");
 	    return;
 	}
 
 	if (portal->item_type != ITEM_PORTAL
         ||  (IS_SET(portal->value[1],EX_CLOSED) && !IS_TRUSTED(ch,ANGEL)))
 	{
-    printf_to_char(ch,"Bir yol bulamï¿½yorsun.\n\r");
+    printf_to_char(ch,"Bir yol bulamýyorsun.\n\r");
 	    return;
 	}
 
@@ -158,7 +158,7 @@ void do_enter( CHAR_DATA *ch, char *argument)
 	||   IS_SET(old_room->room_flags,ROOM_NO_RECALL)
 	||   IS_RAFFECTED(old_room,AFF_ROOM_CURSE) ))
 	{
-    printf_to_char(ch,"Birï¿½ey ayrï¿½lmanï¿½ engelliyor...\n\r");
+    printf_to_char(ch,"Birþey ayrýlmaný engelliyor...\n\r");
 	    return;
 	}
 
@@ -177,26 +177,26 @@ void do_enter( CHAR_DATA *ch, char *argument)
 	||  !can_see_room(ch,location)
 	||  (room_is_private(location) && !IS_TRUSTED(ch,IMPLEMENTOR)))
 	{
-    act("$p hiï¿½bir yere ulaï¿½mï¿½yor.",ch,portal,NULL,TO_CHAR);
+    act("$p hiçbir yere ulaþmýyor.",ch,portal,NULL,TO_CHAR);
 	   return;
 	}
 
         if (IS_NPC(ch) && IS_SET(ch->act,ACT_AGGRESSIVE)
         &&  IS_SET(location->room_flags,ROOM_LAW))
         {
-          printf_to_char(ch,"Birï¿½ey ayrï¿½lmanï¿½ engelliyor...\n\r");
+          printf_to_char(ch,"Birþey ayrýlmaný engelliyor...\n\r");
             return;
         }
 
         if (MOUNTED(ch))
-        sprintf(buf,"$n sï¿½rdï¿½ï¿½ï¿½ %s ile $p iï¿½ine giriyor.",MOUNTED(ch)->short_descr );
-        sprintf(buf,"$n $p iï¿½ine giriyor." );
+        sprintf(buf,"$n sürdüðü %s ile $p içine giriyor.",MOUNTED(ch)->short_descr );
+        sprintf(buf,"$n $p içine giriyor." );
 	act(buf,ch,portal,NULL,TO_ROOM);
 
 	if (IS_SET(portal->value[2],GATE_NORMAL_EXIT))
-  act("$p iï¿½ine giriyorsun.",ch,portal,NULL,TO_CHAR);
+  act("$p içine giriyorsun.",ch,portal,NULL,TO_CHAR);
 	else
-  act("$p iï¿½ine yï¿½rï¿½yï¿½nce kendini baï¿½ka yerde buluyorsun...",ch,portal,NULL,TO_CHAR);
+  act("$p içine yürüyünce kendini baþka yerde buluyorsun...",ch,portal,NULL,TO_CHAR);
 
 	mount = MOUNTED(ch);
 	char_from_room(ch);
@@ -211,14 +211,14 @@ void do_enter( CHAR_DATA *ch, char *argument)
 	if (IS_SET(portal->value[2],GATE_NORMAL_EXIT))
 	 {
 	  if (mount)
-    act("$n $M sï¿½rerek geldi.",ch,portal,mount,TO_ROOM);
+    act("$n $M sürerek geldi.",ch,portal,mount,TO_ROOM);
     else  act("$n geldi.",ch,portal,NULL,TO_ROOM);
 	 }
 	else
 	 {
 	  if (mount)
-    act("$n $p iï¿½inden $M sï¿½rerek geldi.",ch,portal,mount,TO_ROOM);
-  else  act("$n $p iï¿½inden geldi.",ch,portal,NULL,TO_ROOM);
+    act("$n $p içinden $M sürerek geldi.",ch,portal,mount,TO_ROOM);
+  else  act("$n $p içinden geldi.",ch,portal,NULL,TO_ROOM);
 	 }
 
 	do_look(ch,(char*)"auto");
@@ -261,9 +261,9 @@ void do_enter( CHAR_DATA *ch, char *argument)
                 if (IS_SET(ch->in_room->room_flags,ROOM_LAW)
                 &&  (IS_NPC(fch) && IS_SET(fch->act,ACT_AGGRESSIVE)))
                 {
-                  act("$M ï¿½ehre sokamazsï¿½n.",
+                  act("$M þehre sokamazsýn.",
                     ch,NULL,fch,TO_CHAR);
-                  act("ï¿½ehirde istenmiyorsun.",
+                  act("Þehirde istenmiyorsun.",
                     fch,NULL,NULL,TO_CHAR);
                     continue;
             	}
@@ -290,7 +290,7 @@ void do_enter( CHAR_DATA *ch, char *argument)
 	return;
     }
 
-    printf_to_char(ch,"Hayï¿½r, bunu yapamazsï¿½n.\n\r");
+    printf_to_char(ch,"Hayýr, bunu yapamazsýn.\n\r");
     return;
 }
 
@@ -299,7 +299,7 @@ void do_settraps( CHAR_DATA *ch, char *argument )
     if ( !IS_NPC(ch)
     &&   ch->level < skill_table[gsn_settraps].skill_level[ch->iclass] )
       {
-        printf_to_char(ch,"Tuzak kurmayï¿½ bilmiyorsun.\n\r");
+        printf_to_char(ch,"Tuzak kurmayý bilmiyorsun.\n\r");
 	return;
       }
 
@@ -307,7 +307,7 @@ void do_settraps( CHAR_DATA *ch, char *argument )
 
     if ( IS_SET(ch->in_room->room_flags, ROOM_LAW) )
 	{
-    send_to_char("Mistik bir gï¿½ï¿½ odayï¿½ koruyor.\n\r",ch);
+    send_to_char("Mistik bir güç odayý koruyor.\n\r",ch);
 	 return;
 	}
 
@@ -322,13 +322,13 @@ void do_settraps( CHAR_DATA *ch, char *argument )
 
       if ( is_affected_room( ch->in_room, gsn_settraps ))
       {
-        send_to_char("Bu odaya zaten tuzak kurulmuï¿½.\n\r",ch);
+        send_to_char("Bu odaya zaten tuzak kurulmuþ.\n\r",ch);
 	return;
        }
 
       if ( is_affected(ch,gsn_settraps))
       {
-        send_to_char("Bu yetenek yakï¿½n zamanda kullanï¿½ldï¿½.\n\r",ch);
+        send_to_char("Bu yetenek yakýn zamanda kullanýldý.\n\r",ch);
 	return;
       }
 
@@ -354,7 +354,7 @@ void do_settraps( CHAR_DATA *ch, char *argument )
       af2.location  = APPLY_NONE;
       af2.bitvector = 0;
       affect_to_char( ch, &af2 );
-      send_to_char( "Tuzaï¿½ï¿½ kurdun.\n\r", ch );
+      send_to_char( "Tuzaðý kurdun.\n\r", ch );
       act("$n odaya tuzak kurdu.",ch,NULL,NULL,TO_ROOM);
       return;
     }
@@ -817,7 +817,7 @@ void do_hunt( CHAR_DATA *ch, char *argument )
     if ( !IS_NPC(ch)
     &&   ch->level < skill_table[gsn_hunt].skill_level[ch->iclass] )
     {
-	send_to_char("Hï¿½?\n\r", ch );
+	send_to_char("Hý?\n\r", ch );
 	return;
     }
 
@@ -825,7 +825,7 @@ void do_hunt( CHAR_DATA *ch, char *argument )
 
   if( arg[0] == '\0' )
     {
-      send_to_char( "Kimi avlamaya ï¿½alï¿½ï¿½ï¿½yorsun?\n\r", ch );
+      send_to_char( "Kimi avlamaya çalýþýyorsun?\n\r", ch );
       return;
     }
 
@@ -881,7 +881,7 @@ void do_hunt( CHAR_DATA *ch, char *argument )
     }
 }
 
-act("$n dikkatle topraï¿½ï¿½ inceliyor.", ch, NULL, NULL, TO_ROOM );
+act("$n dikkatle topraðý inceliyor.", ch, NULL, NULL, TO_ROOM );
 
   WAIT_STATE( ch, skill_table[gsn_hunt].beats );
   direction = find_path( ch->in_room->vnum, victim->in_room->vnum,
@@ -889,14 +889,14 @@ act("$n dikkatle topraï¿½ï¿½ inceliyor.", ch, NULL, NULL, TO_ROOM );
 
   if( direction == -1 )
     {
-      act( "Burada $E giden bir yol bulamï¿½yorsun.",
+      act( "Burada $E giden bir yol bulamýyorsun.",
 	  ch, NULL, victim, TO_CHAR );
       return;
     }
 
   if( direction < 0 || direction > 5 )
     {
-      send_to_char("Hmm... Birï¿½eyler hatalï¿½ gibi.\n\r", ch );
+      send_to_char("Hmm... Birþeyler hatalý gibi.\n\r", ch );
       return;
     }
 
@@ -925,14 +925,14 @@ act("$n dikkatle topraï¿½ï¿½ inceliyor.", ch, NULL, NULL, TO_ROOM );
 else {
 	  log_string("Do hunt, player hunt, no exits from room!");
   	  ch->hunting=NULL;
-      send_to_char("Odanï¿½n ï¿½ï¿½kï¿½ï¿½ï¿½ yok!!!!\n\r",ch);
+      send_to_char("Odanýn çýkýþý yok!!!!\n\r",ch);
   	  return;
   	}
   /*
    * Display the results of the search.
    */
   }
-  sprintf( buf, "$N %s yï¿½nï¿½nde.", dir_name[direction] );
+  sprintf( buf, "$N %s yönünde.", dir_name[direction] );
   act( buf, ch, NULL, victim, TO_CHAR );
   return;
 }
@@ -967,11 +967,11 @@ void hunt_victim( CHAR_DATA *ch )
 	   if (ch->in_room==NULL || ch->hunting==NULL) return;
 	   if( ch->in_room == ch->hunting->in_room )
 	    {
-        act( "$n $E dik dik bakarak diyor ki, 'ï¿½leceksin!'",
+        act( "$n $E dik dik bakarak diyor ki, 'Öleceksin!'",
   	  ch, NULL, ch->hunting, TO_NOTVICT );
-        act("$n sana dik dik bakarak diyor ki, 'ï¿½leceksin!'",
+        act("$n sana dik dik bakarak diyor ki, 'Öleceksin!'",
   	  ch, NULL, ch->hunting, TO_VICT );
-        act( "$E dik dik bakarak diyorsun ki, 'ï¿½leceksin!'",
+        act( "$E dik dik bakarak diyorsun ki, 'Öleceksin!'",
   	  ch, NULL, ch->hunting, TO_CHAR);
 	      multi_hit( ch, ch->hunting, TYPE_UNDEFINED );
       	      ch->hunting = NULL; /* No more hunting, now tracking */
@@ -982,7 +982,7 @@ void hunt_victim( CHAR_DATA *ch )
         }
        else
 	{
-         do_say( ch, (char*)"Ahhhh!  Avï¿½m gitti!!" );
+         do_say( ch, (char*)"Ahhhh!  Avým gitti!!" );
          ch->hunting = NULL;
          return;
         }
@@ -1007,11 +1007,11 @@ void hunt_victim( CHAR_DATA *ch )
       if (ch->in_room==NULL || ch->hunting==NULL) return;
       if( ch->in_room == ch->hunting->in_room )
        {
-         act( "$n $E dik dik bakarak diyor ki, 'ï¿½leceksin!'",
+         act( "$n $E dik dik bakarak diyor ki, 'Öleceksin!'",
    	  ch, NULL, ch->hunting, TO_NOTVICT );
-         act("$n sana dik dik bakarak diyor ki, 'ï¿½leceksin!'",
+         act("$n sana dik dik bakarak diyor ki, 'Öleceksin!'",
    	  ch, NULL, ch->hunting, TO_VICT );
-         act( "$E dik dik bakarak diyorsun ki, 'ï¿½leceksin!'",
+         act( "$E dik dik bakarak diyorsun ki, 'Öleceksin!'",
    	  ch, NULL, ch->hunting, TO_CHAR);
         multi_hit( ch, ch->hunting, TYPE_UNDEFINED );
         ch->hunting = NULL;
@@ -1043,11 +1043,11 @@ void hunt_victim( CHAR_DATA *ch )
   if (ch->in_room==NULL || ch->hunting==NULL) return;
   if( ch->in_room == ch->hunting->in_room )
     {
-      act( "$n $E dik dik bakarak diyor ki, 'ï¿½leceksin!'",
+      act( "$n $E dik dik bakarak diyor ki, 'Öleceksin!'",
 	  ch, NULL, ch->hunting, TO_NOTVICT );
-      act("$n sana dik dik bakarak diyor ki, 'ï¿½leceksin!'",
+      act("$n sana dik dik bakarak diyor ki, 'Öleceksin!'",
 	  ch, NULL, ch->hunting, TO_VICT );
-      act( "$E dik dik bakarak diyorsun ki, 'ï¿½leceksin!'",
+      act( "$E dik dik bakarak diyorsun ki, 'Öleceksin!'",
 	  ch, NULL, ch->hunting, TO_CHAR);
       multi_hit( ch, ch->hunting, TYPE_UNDEFINED );
       ch->hunting = NULL;
@@ -1099,11 +1099,11 @@ void hunt_victim_old( CHAR_DATA *ch )
   if (ch->in_room==NULL || ch->hunting==NULL) return;
   if( ch->in_room == ch->hunting->in_room )
     {
-      act( "$n $E dik dik bakarak diyor ki, 'ï¿½leceksin!'",
+      act( "$n $E dik dik bakarak diyor ki, 'Öleceksin!'",
 	  ch, NULL, ch->hunting, TO_NOTVICT );
-      act("$n sana dik dik bakarak diyor ki, 'ï¿½leceksin!'",
+      act("$n sana dik dik bakarak diyor ki, 'Öleceksin!'",
 	  ch, NULL, ch->hunting, TO_VICT );
-      act( "$E dik dik bakarak diyorsun ki, 'ï¿½leceksin!'",
+      act( "$E dik dik bakarak diyorsun ki, 'Öleceksin!'",
 	  ch, NULL, ch->hunting, TO_CHAR);
       multi_hit( ch, ch->hunting, TYPE_UNDEFINED );
       ch->hunting = NULL;
@@ -1125,7 +1125,7 @@ void hunt_victim_old( CHAR_DATA *ch )
     	  }
          }
 
-         do_say( ch, (char*)"Ahhhh!  Avï¿½m gitti!!" );
+         do_say( ch, (char*)"Ahhhh!  Avým gitti!!" );
          ch->hunting = NULL;
          return;
         }
@@ -1152,11 +1152,11 @@ void hunt_victim_old( CHAR_DATA *ch )
   if (ch->in_room==NULL || ch->hunting==NULL) return;
   if( ch->in_room == ch->hunting->in_room )
     {
-      act( "$n $E dik dik bakarak diyor ki, 'ï¿½leceksin!'",
+      act( "$n $E dik dik bakarak diyor ki, 'Öleceksin!'",
 	  ch, NULL, ch->hunting, TO_NOTVICT );
-      act("$n sana dik dik bakarak diyor ki, 'ï¿½leceksin!'",
+      act("$n sana dik dik bakarak diyor ki, 'Öleceksin!'",
 	  ch, NULL, ch->hunting, TO_VICT );
-      act( "$E dik dik bakarak diyorsun ki, 'ï¿½leceksin!'",
+      act( "$E dik dik bakarak diyorsun ki, 'Öleceksin!'",
 	  ch, NULL, ch->hunting, TO_CHAR);
       multi_hit( ch, ch->hunting, TYPE_UNDEFINED );
       ch->hunting = NULL;
@@ -1230,11 +1230,11 @@ void hunt_victim_old( CHAR_DATA *ch )
   if (ch->in_room==NULL || ch->hunting==NULL) return;
   if( ch->in_room == ch->hunting->in_room )
     {
-      act( "$n $E dik dik bakarak diyor ki, 'ï¿½leceksin!'",
+      act( "$n $E dik dik bakarak diyor ki, 'Öleceksin!'",
 	  ch, NULL, ch->hunting, TO_NOTVICT );
-      act("$n sana dik dik bakarak diyor ki, 'ï¿½leceksin!'",
+      act("$n sana dik dik bakarak diyor ki, 'Öleceksin!'",
 	  ch, NULL, ch->hunting, TO_VICT );
-      act( "$E dik dik bakarak diyorsun ki, 'ï¿½leceksin!'",
+      act( "$E dik dik bakarak diyorsun ki, 'Öleceksin!'",
 	  ch, NULL, ch->hunting, TO_CHAR);
       multi_hit( ch, ch->hunting, TYPE_UNDEFINED );
       ch->hunting = NULL;
@@ -1259,17 +1259,17 @@ void damage_to_obj(CHAR_DATA *ch,OBJ_DATA *wield, OBJ_DATA *worn, int damage)
 
  if( gorev_ekipmani_mi( worn ) )
  {
-   act_color("$C$p tarafï¿½ndan verilecek hasarï¿½ $P engelliyor.$c",ch,wield,worn,TO_ROOM,POS_RESTING,CLR_RED);
+   act_color("$C$p tarafýndan verilecek hasarý $P engelliyor.$c",ch,wield,worn,TO_ROOM,POS_RESTING,CLR_RED);
    return;
  }
  worn->condition -= damage;
 
- act_color("$C$p $P ï¿½zerine hasar bï¿½rakï¿½yor.$c",
+ act_color("$C$p $P üzerine hasar býrakýyor.$c",
 	ch,wield,worn,TO_ROOM,POS_RESTING,CLR_RED);
 
  if (worn->condition < 1)
 	{
-    act_color("$C$P parï¿½alara ayrï¿½lï¿½yor.$c",
+    act_color("$C$P parçalara ayrýlýyor.$c",
 	ch,wield,worn,TO_ROOM,POS_RESTING,CLR_WHITE);
 	extract_obj( worn );
 	return;
@@ -1280,11 +1280,11 @@ void damage_to_obj(CHAR_DATA *ch,OBJ_DATA *wield, OBJ_DATA *worn, int damage)
      && (IS_SET(worn->extra_flags,ITEM_ANTI_EVIL)
 	&& IS_SET(worn->extra_flags,ITEM_ANTI_NEUTRAL) ) )
  {
-   sprintf(buf,"$C$p $P'ye karï¿½ï¿½ dï¿½vï¿½ï¿½mek istemiyor.$c");
+   sprintf(buf,"$C$p $P'ye karþý dövüþmek istemiyor.$c");
    act_color(buf,ch,wield,worn,TO_ROOM,POS_RESTING,CLR_GREEN);
-   sprintf(buf,"$C$p kendisini senden kurtarï¿½yor!$c.");
+   sprintf(buf,"$C$p kendisini senden kurtarýyor!$c.");
    act_color(buf,ch,wield,worn,TO_CHAR,POS_RESTING,CLR_GREEN);
-   sprintf(buf,"$C$p kendisini $z kurtarï¿½yor$c.");
+   sprintf(buf,"$C$p kendisini $z kurtarýyor$c.");
   act_color(buf,ch,wield,worn,TO_ROOM,POS_RESTING,CLR_GREEN);
   unequip_char( ch, wield );
   return;
@@ -1293,7 +1293,7 @@ void damage_to_obj(CHAR_DATA *ch,OBJ_DATA *wield, OBJ_DATA *worn, int damage)
  if (IS_SET(wield->extra_flags,ITEM_ANTI_EVIL)
 	&& IS_SET(worn->extra_flags,ITEM_ANTI_EVIL))
  {
-   sprintf(buf,"$C$p $P ï¿½zerine zarar uygulamaktan korkuyor.$c");
+   sprintf(buf,"$C$p $P üzerine zarar uygulamaktan korkuyor.$c");
   act_color(buf,ch,wield,worn,TO_ROOM,POS_RESTING,CLR_GREEN);
   return;
  }
@@ -1425,7 +1425,7 @@ void do_repair(CHAR_DATA *ch, char *argument)
 
     if ( mob == NULL )
     {
-      send_to_char( "Burada yapamazsï¿½n.\n\r", ch );
+      send_to_char( "Burada yapamazsýn.\n\r", ch );
         return;
     }
 
@@ -1433,25 +1433,25 @@ void do_repair(CHAR_DATA *ch, char *argument)
 
     if (arg[0] == '\0')
     {
-	do_say(mob,(char*)"Senin iï¿½in bir silahï¿½ onarabilirim. Tabii ï¿½cret karï¿½ï¿½lï¿½ï¿½ï¿½nda.");
+	do_say(mob,(char*)"Senin için bir silahý onarabilirim. Tabii ücret karþýlýðýnda.");
 	send_to_char("Type estimate <weapon> to be assessed for damage.\n\r",ch);
 	return;
     }
     if (( obj = get_obj_carry(ch, arg)) == NULL)
     {
-	do_say(mob,(char*)"Sende bu eï¿½ya yok.");
+	do_say(mob,(char*)"Sende bu eþya yok.");
 	return;
     }
 
     if (obj->pIndexData->vnum == OBJ_VNUM_HAMMER)
     {
-     do_say(mob,(char*)"Bu ï¿½ekiï¿½ benim ustalï¿½ï¿½ï¿½mï¿½n ï¿½stï¿½nde.");
+     do_say(mob,(char*)"Bu çekiç benim ustalýðýmýn üstünde.");
      return;
     }
 
     if (obj->condition >= 100)
     {
-	do_say(mob,(char*)"Bu eï¿½ya zaten iyi durumda.");
+	do_say(mob,(char*)"Bu eþya zaten iyi durumda.");
         return;
     }
 
@@ -1467,7 +1467,7 @@ void do_repair(CHAR_DATA *ch, char *argument)
 
     if (cost > ch->silver)
     {
-	do_say(mob,(char*)"Hizmetlerimden yararlanmak iï¿½in yeterince paran yok.");
+	do_say(mob,(char*)"Hizmetlerimden yararlanmak için yeterince paran yok.");
 	return;
     }
 
@@ -1475,9 +1475,9 @@ void do_repair(CHAR_DATA *ch, char *argument)
 
     ch->silver -= cost;
     mob->silver += cost;
-    sprintf(buf, "$N $n'dan %s'ï¿½ alï¿½yor, tamir ediyor ve $n'a geri veriyor.", obj->short_descr);
+    sprintf(buf, "$N $n'dan %s'ý alýyor, tamir ediyor ve $n'a geri veriyor.", obj->short_descr);
     act(buf,ch,NULL,mob,TO_ROOM);
-    sprintf(buf, "%s %s'ï¿½ alï¿½p, tamir edip sana geri veriyor.\n\r", mob->short_descr, obj->short_descr);
+    sprintf(buf, "%s %s'ý alýp, tamir edip sana geri veriyor.\n\r", mob->short_descr, obj->short_descr);
     send_to_char(buf, ch);
     obj->condition = 100;
 }
@@ -1499,7 +1499,7 @@ void do_estimate(CHAR_DATA *ch, char *argument)
 
     if ( mob == NULL )
     {
-        send_to_char( "Burada yapamazsï¿½n..\n\r", ch );
+        send_to_char( "Burada yapamazsýn..\n\r", ch );
         return;
     }
 
@@ -1507,34 +1507,34 @@ void do_estimate(CHAR_DATA *ch, char *argument)
 
     if (arg[0] == '\0')
     {
-	do_say(mob,(char*)"ï¿½cret <eï¿½ya> yazmayï¿½ dene.");
+	do_say(mob,(char*)"Ücret <eþya> yazmayý dene.");
    	return;
     }
     if ((obj = (get_obj_carry(ch, arg))) == NULL)
     {
-	do_say(mob,(char*)"Sende bu eï¿½ya yok.");
+	do_say(mob,(char*)"Sende bu eþya yok.");
 	return;
     }
     if (obj->pIndexData->vnum == OBJ_VNUM_HAMMER)
 	{
-	    do_say(mob,(char*)"Bu ï¿½ekiï¿½ benim ustalï¿½ï¿½ï¿½mï¿½n ï¿½stï¿½nde.");
+	    do_say(mob,(char*)"Bu çekiç benim ustalýðýmýn üstünde.");
 	    return;
 	}
     if (obj->condition >= 100)
     {
-	do_say(mob,(char*)"Bu eï¿½ya zaten iyi durumda.");
+	do_say(mob,(char*)"Bu eþya zaten iyi durumda.");
 	return;
     }
     if (obj->cost == 0)
     {
-	do_say(mob,(char*)"Bu eï¿½ya tamir edilemeyecek durumda.");
+	do_say(mob,(char*)"Bu eþya tamir edilemeyecek durumda.");
     	return;
     }
 
     cost = ( (obj->level * 10) +
 		((obj->cost * (100 - obj->condition)) /100)    );
 
-    sprintf(buf, "Bu eï¿½yayï¿½ tamir etmek sana %d akï¿½eye patlar.", cost);
+    sprintf(buf, "Bu eþyayý tamir etmek sana %d akçeye patlar.", cost);
     do_say(mob,buf);
 }
 
@@ -1556,7 +1556,7 @@ void do_restring( CHAR_DATA *ch, char *argument )
 
     if ( mob == NULL )
     {
-      send_to_char( "Burada yapamazsï¿½n, bir ï¿½ifacï¿½ bul.\n\r", ch );
+      send_to_char( "Burada yapamazsýn, bir þifacý bul.\n\r", ch );
         return;
     }
 
@@ -1567,9 +1567,9 @@ void do_restring( CHAR_DATA *ch, char *argument )
 
 	if ( arg[0] == '\0' || arg1[0] == '\0' || arg2[0] == '\0' )
 	{
-    send_to_char( "Adï¿½nï¿½ deï¿½iï¿½tirmek istediï¿½in eï¿½yayï¿½ ve deï¿½iï¿½tirmek istediï¿½in alanï¿½ belirt.\n\r", ch );
-    send_to_char("Yazï¿½m:\n\r",ch);
-		send_to_char("  isimlendir <eï¿½ya> <alan> <yeni isim>\n\r",ch);
+    send_to_char( "Adýný deðiþtirmek istediðin eþyayý ve deðiþtirmek istediðin alaný belirt.\n\r", ch );
+    send_to_char("Yazým:\n\r",ch);
+		send_to_char("  isimlendir <eþya> <alan> <yeni isim>\n\r",ch);
 		send_to_char("  alanlar: name short long\n\r",ch);
 		return;
 	}
@@ -1584,7 +1584,7 @@ void do_restring( CHAR_DATA *ch, char *argument )
 
     if (cost > ch->silver)
     {
-      act("$N 'Hizmetlerim iï¿½in yeterli akï¿½en yok,' dedi.",
+      act("$N 'Hizmetlerim için yeterli akçen yok,' dedi.",
 		  ch,NULL,mob,TO_CHAR);
 		return;
     }
@@ -1608,7 +1608,7 @@ void do_restring( CHAR_DATA *ch, char *argument )
 	}
 	else
 	{
-    send_to_char("Geï¿½erli bir deï¿½il.\n\r",ch);
+    send_to_char("Geçerli bir deðil.\n\r",ch);
 		return;
 	}
 
@@ -1616,11 +1616,11 @@ void do_restring( CHAR_DATA *ch, char *argument )
 
     ch->silver -= cost;
     mob->silver += cost;
-    sprintf(buf, "$N $s eï¿½yasï¿½nï¿½ alï¿½yor, ï¿½zerine bir ï¿½eyler kazï¿½yï¿½p geri veriyor.");
+    sprintf(buf, "$N $s eþyasýný alýyor, üzerine bir þeyler kazýyýp geri veriyor.");
 	act(buf,ch,NULL,mob,TO_ROOM);
-  sprintf(buf,"%s eï¿½yanï¿½ alï¿½yor, ï¿½zerine bir ï¿½eyler kazï¿½yï¿½p geri veriyor.\n\r", mob->short_descr);
+  sprintf(buf,"%s eþyaný alýyor, üzerine bir þeyler kazýyýp geri veriyor.\n\r", mob->short_descr);
   send_to_char(buf,ch);
-  send_to_char("Eï¿½ya isimlendirmede saldï¿½rgan ve hakaret iï¿½eren isimler vermek kurallara aykï¿½rï¿½dï¿½r.\n\r", ch);
+  send_to_char("Eþya isimlendirmede saldýrgan ve hakaret içeren isimler vermek kurallara aykýrýdýr.\n\r", ch);
 }
 
 void check_shield_destroyed(CHAR_DATA *ch, CHAR_DATA *victim,bool second)
@@ -1823,14 +1823,14 @@ void do_smithing(CHAR_DATA *ch, char *argument)
     if ( IS_NPC(ch)
     ||   ch->level < skill_table[gsn_smithing].skill_level[ch->iclass] )
     {
-	send_to_char("Hï¿½?\n\r", ch );
+	send_to_char("Hý?\n\r", ch );
 	return;
     }
 
 
     if ( ch->fighting )
     {
-      send_to_char( "Dï¿½vï¿½ï¿½ bitene kadar bekle.\n\r", ch );
+      send_to_char( "Dövüþ bitene kadar bekle.\n\r", ch );
         return;
     }
 
@@ -1844,25 +1844,25 @@ void do_smithing(CHAR_DATA *ch, char *argument)
 
     if (( obj = get_obj_carry(ch, arg)) == NULL)
     {
-      send_to_char("Onu taï¿½ï¿½mï¿½yorsun.\n\r",ch);
+      send_to_char("Onu taþýmýyorsun.\n\r",ch);
 	return;
     }
 
    if (obj->condition >= 100)
     {
-      send_to_char("Eï¿½yan zarar gï¿½rmemiï¿½.\n\r",ch);
+      send_to_char("Eþyan zarar görmemiþ.\n\r",ch);
 	return;
     }
 
     if (( hammer = get_hold_char(ch)) == NULL)
     {
-      send_to_char("Bir ï¿½ekiï¿½ taï¿½ï¿½mï¿½yorsun.\n\r",ch);
+      send_to_char("Bir çekiç taþýmýyorsun.\n\r",ch);
 	return;
     }
 
     if ( hammer->pIndexData->vnum != OBJ_VNUM_HAMMER )
     {
-      send_to_char("Elindeki ï¿½ekiï¿½ uygun deï¿½il.\n\r",ch);
+      send_to_char("Elindeki çekiç uygun deðil.\n\r",ch);
 	return;
     }
 
@@ -1870,18 +1870,18 @@ void do_smithing(CHAR_DATA *ch, char *argument)
     if ( number_percent() > get_skill(ch,gsn_smithing) )
      {
       check_improve(ch,gsn_smithing,FALSE,8);
-      sprintf(buf, "$n %s eï¿½yasï¿½nï¿½ ï¿½ekiï¿½le tamir etmeyi denedi fakat beceremedi.", obj->short_descr);
+      sprintf(buf, "$n %s eþyasýný çekiçle tamir etmeyi denedi fakat beceremedi.", obj->short_descr);
     act(buf,ch,NULL,obj,TO_ROOM);
-    sprintf(buf, "%s eï¿½yasï¿½nï¿½ tamir etmeyi beceremedin.\n\r", obj->short_descr);
+    sprintf(buf, "%s eþyasýný tamir etmeyi beceremedin.\n\r", obj->short_descr);
     send_to_char(buf, ch);
     hammer->condition -= 25;
      }
     else
      {
     check_improve(ch,gsn_smithing,TRUE,4);
-    sprintf(buf, "$n %s eï¿½yasï¿½nï¿½ ï¿½ekiï¿½le tamir etti.", obj->short_descr);
+    sprintf(buf, "$n %s eþyasýný çekiçle tamir etti.", obj->short_descr);
     act(buf,ch,NULL,NULL,TO_ROOM);
-    sprintf(buf, "%s eï¿½yasï¿½nï¿½ tamir ettin.\n\r", obj->short_descr);
+    sprintf(buf, "%s eþyasýný tamir ettin.\n\r", obj->short_descr);
     send_to_char(buf, ch);
     obj->condition = UMAX( 100 ,
 	 obj->condition + ( get_skill(ch,gsn_smithing) / 2) );
@@ -2082,9 +2082,9 @@ void auction_update (void)
             case 1 : /* going once */
             case 2 : /* going twice */
             if (auction->bet > 0)
-            sprintf (buf, "%s: %d akï¿½eye gidiyor.", auction->item->short_descr,auction->bet);
+            sprintf (buf, "%s: %d akçeye gidiyor.", auction->item->short_descr,auction->bet);
             else
-            sprintf (buf, "%s: henï¿½z teklif yok.", auction->item->short_descr);
+            sprintf (buf, "%s: henüz teklif yok.", auction->item->short_descr);
 	          sprintf(bufc,"%s%s%s",CLR_CYAN,buf,CLR_WHITE_BOLD);
             talk_auction (bufc);
             break;
@@ -2093,16 +2093,16 @@ void auction_update (void)
 
             if (auction->bet > 0)
             {
-              sprintf (buf, "%s: %s %d akï¿½eye satï¿½n aldï¿½.",
+              sprintf (buf, "%s: %s %d akçeye satýn aldý.",
                     auction->item->short_descr,
                     IS_NPC(auction->buyer) ? auction->buyer->short_descr : auction->buyer->name,
                     auction->bet);
 	        sprintf(bufc,"%s%s%s",CLR_CYAN,buf,CLR_WHITE_BOLD);
                 talk_auction(bufc);
                 obj_to_char (auction->item,auction->buyer);
-                act ("Mezatï¿½ï¿½ yanï¿½nda belirerek $p eï¿½yasï¿½nï¿½ sana veriyor.",
+                act ("Mezatçý yanýnda belirerek $p eþyasýný sana veriyor.",
                      auction->buyer,auction->item,NULL,TO_CHAR);
-                act ("Mezatï¿½ï¿½ beliriyor ve $p eï¿½yasï¿½nï¿½ $e veriyor.",
+                act ("Mezatçý beliriyor ve $p eþyasýný $e veriyor.",
                      auction->buyer,auction->item,NULL,TO_ROOM);
 
                 auction->seller->silver += auction->bet; /* give him the money */
@@ -2112,10 +2112,10 @@ void auction_update (void)
             }
             else /* not sold */
             {
-              sprintf (buf, "%s teklif gelmediï¿½i iï¿½in mezattan ï¿½ekildi.",auction->item->short_descr);
+              sprintf (buf, "%s teklif gelmediði için mezattan çekildi.",auction->item->short_descr);
 			  sprintf(bufc,"%s%s%s",CLR_CYAN,buf,CLR_WHITE_BOLD);
               talk_auction(bufc);
-              sprintf (buf, "Mezatï¿½ï¿½ satï¿½lmayan eï¿½yayï¿½ depoya kaldï¿½rï¿½yor.");
+              sprintf (buf, "Mezatçý satýlmayan eþyayý depoya kaldýrýyor.");
 			  sprintf(bufc,"%s%s%s",CLR_RED,buf,CLR_WHITE_BOLD);
               talk_auction(bufc);
                 extract_obj(auction->item);
@@ -2144,16 +2144,16 @@ void do_auction (CHAR_DATA *ch, char *argument)
 
     if (IS_SET(ch->comm,COMM_NOAUCTION))
 	{
-    if (!str_cmp(arg1,"aï¿½ï¿½k") )
+    if (!str_cmp(arg1,"açýk") )
 	 {
-     send_to_char("Mezat kanalï¿½ aï¿½ï¿½ldï¿½.\n\r",ch);
+     send_to_char("Mezat kanalý açýldý.\n\r",ch);
 	  REMOVE_BIT(ch->comm,COMM_NOAUCTION);
 	  return;
 	 }
 	 else
 	 {
-     send_to_char("Mezat kanalï¿½ kapandï¿½.\n\r",ch);
- 	  send_to_char( "Mezat kanalï¿½n aï¿½ï¿½k deï¿½il.\n\r",ch);
+     send_to_char("Mezat kanalý kapandý.\n\r",ch);
+ 	  send_to_char( "Mezat kanalýn açýk deðil.\n\r",ch);
 	  return;
 	 }
 	}
@@ -2164,9 +2164,9 @@ void do_auction (CHAR_DATA *ch, char *argument)
         {
             /* show item data here */
             if (auction->bet > 0)
-            sprintf (buf, "Bu objeye son verilen teklif %d akï¿½e.\n\r",auction->bet);
+            sprintf (buf, "Bu objeye son verilen teklif %d akçe.\n\r",auction->bet);
             else
-            sprintf (buf, "Henï¿½z teklif verilmedi.\n\r");
+            sprintf (buf, "Henüz teklif verilmedi.\n\r");
 	    sprintf(bufc,"%s%s%s",CLR_GREEN,buf,CLR_WHITE_BOLD);
             send_to_char (bufc,ch);
 	    spell_identify(0, 0, ch, auction->item,0);
@@ -2174,14 +2174,14 @@ void do_auction (CHAR_DATA *ch, char *argument)
         }
         else
         {
-          printf_to_char(ch,"{rNeyi mezata ï¿½ï¿½karacaksï¿½n?{x\n\r");
+          printf_to_char(ch,"{rNeyi mezata çýkaracaksýn?{x\n\r");
             return;
         }
     }
 
-    if (!str_cmp(arg1,"kapalï¿½") )
+    if (!str_cmp(arg1,"kapalý") )
 	{
-    send_to_char("Mezat kanalï¿½ kapandï¿½.\n\r",ch);
+    send_to_char("Mezat kanalý kapandý.\n\r",ch);
 	 SET_BIT(ch->comm,COMM_NOAUCTION);
 	 return;
 	}
@@ -2190,12 +2190,12 @@ void do_auction (CHAR_DATA *ch, char *argument)
     {
     if (auction->item == NULL)
     {
-      send_to_char ("Durdurabileceï¿½in bir mezat yï¿½rï¿½mï¿½yor.\n\r",ch);
+      send_to_char ("Durdurabileceðin bir mezat yürümüyor.\n\r",ch);
         return;
     }
     else /* stop the auction */
     {
-      sprintf(buf,"%s objesinin satï¿½ï¿½ï¿½ bir ï¿½lï¿½msï¿½z tarafï¿½ndan durduruldu.",auction->item->short_descr);
+      sprintf(buf,"%s objesinin satýþý bir ölümsüz tarafýndan durduruldu.",auction->item->short_descr);
 	sprintf(bufc,"%s%s%s",CLR_WHITE,buf,CLR_WHITE_BOLD);
         talk_auction(bufc);
         obj_to_char(auction->item, auction->seller);
@@ -2203,7 +2203,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
         if (auction->buyer != NULL) /* return money to the buyer */
         {
             auction->buyer->silver += auction->bet;
-            printf_to_char (auction->buyer,"%d akï¿½en iade edildi.\n\r",auction->bet);
+            printf_to_char (auction->buyer,"%d akçen iade edildi.\n\r",auction->bet);
         }
         return;
     }
@@ -2217,7 +2217,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
 
 	if ( ch == auction->seller )
 		{
-      send_to_char("Kendi malï¿½n iï¿½in artï¿½rï¿½m yapamazsï¿½n...:)\n\r",ch);
+      send_to_char("Kendi malýn için artýrým yapamazsýn...:)\n\r",ch);
 	return;
 		}
             /* make - perhaps - a bet now */
@@ -2232,7 +2232,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
 
             if (newbet < (auction->bet + 1))
             {
-              send_to_char ("Teklifin son tekliften 1 akï¿½e fazla ya da aï¿½ï¿½lï¿½ï¿½ fiyatï¿½ kadar olmalï¿½.\n\r",ch);
+              send_to_char ("Teklifin son tekliften 1 akçe fazla ya da açýlýþ fiyatý kadar olmalý.\n\r",ch);
                 return;
             }
 
@@ -2256,7 +2256,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
             auction->going = 0;
             auction->pulse = PULSE_AUCTION; /* start the auction over again */
 
-            sprintf (buf,"%s iï¿½in %d akï¿½e teklif edildi.\n\r",auction->item->short_descr,newbet);
+            sprintf (buf,"%s için %d akçe teklif edildi.\n\r",auction->item->short_descr,newbet);
 	    sprintf(bufc,"%s%s%s",CLR_MAGENTA,buf,CLR_WHITE_BOLD);
             talk_auction (bufc);
             return;
@@ -2265,7 +2265,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
         }
         else
         {
-          send_to_char ("Mezatta birï¿½ey yok.\n\r",ch);
+          send_to_char ("Mezatta birþey yok.\n\r",ch);
             return;
         }
         }
@@ -2276,13 +2276,13 @@ void do_auction (CHAR_DATA *ch, char *argument)
 
     if (obj == NULL)
     {
-      send_to_char ("Onu taï¿½ï¿½mï¿½yorsun.\n\r",ch);
+      send_to_char ("Onu taþýmýyorsun.\n\r",ch);
         return;
     }
 
     if (obj->pIndexData->vnum < 100)
     {
-      send_to_char ("Onu mezata sï¿½remezsin.\n\r",ch);
+      send_to_char ("Onu mezata süremezsin.\n\r",ch);
         return;
     }
 
@@ -2290,7 +2290,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
     {
       if (obj->pIndexData->vnum == cabal_table[i].obj_vnum)
       {
-        send_to_char("ï¿½steï¿½in tanrï¿½larï¿½ sinirlendiriyor.\n\r", ch);
+        send_to_char("Ýsteðin tanrýlarý sinirlendiriyor.\n\r", ch);
 	return;
       }
     }
@@ -2300,7 +2300,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
     {
 
     default:
-    act_color ("$C$T eï¿½yalarï¿½ mezata sï¿½rï¿½lemez.$c",ch, NULL, item_type_name(obj),
+    act_color ("$C$T eþyalarý mezata sürülemez.$c",ch, NULL, item_type_name(obj),
 		TO_CHAR,POS_SLEEPING,CLR_RED);
         return;
 
@@ -2326,7 +2326,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
     } /* switch */
     else
     {
-      act ("ï¿½u an mezatta $p eï¿½yasï¿½ var, daha sonra tekrar dene!",ch,auction->item,NULL,TO_CHAR);
+      act ("Þu an mezatta $p eþyasý var, daha sonra tekrar dene!",ch,auction->item,NULL,TO_CHAR);
         return;
     }
 }
