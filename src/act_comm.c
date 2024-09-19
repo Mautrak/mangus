@@ -66,7 +66,7 @@
 #else
 #include <unistd.h>
 #endif
-
+#include <errno.h>
 #include "merc.h"
 #include "recycle.h"
 #include "tables.h"
@@ -2103,13 +2103,19 @@ void do_remort( CHAR_DATA *ch, char *argument )
         if (!quit_org(ch, argument, TRUE, TRUE ))    return;
 
         // Move the character file from PLAYER_DIR to REMORT_DIR
-        if (!MoveFile(remstr, mkstr))
-        {
-            // Handle error
-            printf_to_char(ch, "Karakter dosyasý taþýnamadý. Hata kodu: %lu\n\r", GetLastError());
-            return;
-        }
-
+        #if defined(_WIN32) || defined(_WIN64)
+            if (!MoveFile(remstr, mkstr))
+            {
+             // Handle error
+                printf_to_char(ch, "Karakter dosyasý taþýnamadý. Hata kodu: %lu\n\r", GetLastError());
+                return;
+            }
+        #else
+            if (rename(remstr, mkstr) != 0) {
+                printf_to_char(ch, "Karakter dosyasý taþýnamadý. Hata kodu: %d\n\r", errno);
+                return;
+                }
+        #endif
         // Reload character data
         if (!load_char_obj( d, name ))
         {
