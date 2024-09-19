@@ -186,6 +186,7 @@ typedef struct  auction_data            AUCTION_DATA;
  * Function types.
  */
 void sha256_string_with_salt(const char *password, const char *salt, char *output_hash_hex);
+void generate_salt(char *salt, size_t length);
 typedef	void DO_FUN	args( ( CHAR_DATA *ch, char *argument ) );
 typedef bool SPEC_FUN	args( ( CHAR_DATA *ch ) );
 typedef void SPELL_FUN	args( ( int sn, int level, CHAR_DATA *ch, void *vo,

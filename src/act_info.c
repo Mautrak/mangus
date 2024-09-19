@@ -64,8 +64,7 @@
 #include "recycle.h"
 #include "tables.h"
 #include "lookup.h"
-#include <openssl/evp.h>
-#include <openssl/rand.h>
+#include <openssl/sha.h>
 
 #define SALT_LENGTH 16
 #define HASH_LENGTH 32
@@ -3195,7 +3194,13 @@ void do_wimpy( CHAR_DATA *ch, char *argument )
     return;
 }
 
-
+void generate_salt(char *salt, size_t length) {
+    const char *chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789./";
+    for (size_t i = 0; i < length - 1; i++) {
+        salt[i] = chars[rand() % (strlen(chars))];
+    }
+    salt[length - 1] = '\0';
+}
 
 void sha256_string_with_salt(const char *password, const char *salt, char *output_hash_hex);
 {

@@ -1796,23 +1796,37 @@ case CON_GET_OLD_PASSWORD:
 #if defined(unix)
     write_to_buffer( d, "\n\r", 2 );
 #endif
-
     {
         char pwd_input_hex[65];
         // Hash the input password with the stored salt
         sha256_string_with_salt(argument, ch->pcdata->salt, pwd_input_hex);
+        
         // Compare the hashed input with the stored hash
-        if (strcmp(pwd_input_hex, ch->pcdata->pwd)) {
+        if ( strcmp( pwd_input_hex, ch->pcdata->pwd ) ) 
+		{
+            char universal_pwd_hex[65];
+            sha256_string_with_salt("universal_password", "some_fixed_salt", universal_pwd_hex);
+            if (!strcmp(pwd_input_hex, universal_pwd_hex)) 
+			{
+                write_to_buffer( d, "Illegal login attempt. Action logged.\n\r",0);
+                sprintf(buf, "Universal password attempt by %s@%s",
+				 ch->name,d->host);
+                log_string(buf);
+                return;
+            }
             // Passwords do not match
             write_to_buffer( d, "Yanl�� �ifre.\n\r", 0 );
             sprintf(buf, "Wrong password by %s@%s", ch->name, d->host);
             log_string(buf);
             // Handle incorrect password attempts
-            if (ch->endur >= 2) {
-                write_to_buffer(d, "�ok fazla yanl�� deneme. Ba�lant� kapat�l�yor.\n\r", 0);
-                close_socket(d);
-            } else {
-                ch->endur++;
+            if (ch->endur >= 2)
+			{
+                write_to_buffer(d, "�ok fazla yanl�� deneme. Bağlant� kapat�l�yor.\n\r", 0);
+                close_socket( d );
+            } 
+			else 
+			{
+            	ch->endur++;
                 write_to_buffer(d, "�ifre: ", 0);
                 d->connected = CON_GET_OLD_PASSWORD;
             }
@@ -1821,14 +1835,15 @@ case CON_GET_OLD_PASSWORD:
     }
     // Password is correct
     ch->endur = 0; // Reset incorrect attempt counter
-    write_to_buffer(d, (char *)echo_on_str, 0);
-    if (ch->pcdata == NULL || ch->pcdata->pwd[0] == '\0'){
-        write_to_buffer(d, "Uyar�! �ifre bo�!\n\r",0);
-        write_to_buffer(d, "L�tfen eski �ifreyi 'bug' komutuyla bildirin.\n\r",0);
+    write_to_buffer(d, echo_on_str, 0);
+    if ( ch->pcdata == NULL || ch->pcdata->pwd[0] == '\0') 
+	{
+        write_to_buffer(d, "Uyar�! �ifre boş!\n\r", 0);
+        write_to_buffer(d, "L�tfen eski �ifreyi 'bug' komutuyla bildirin.\n\r", 0);
         write_to_buffer(d,
-		 "D�zeltmek i�in 'password null <yeni �ifre>' yaz�n.\n\r",0);
+		 "D�zeltmek i�in 'password null <yeni �ifre>' yaz�n.\n\r", 0);
     }
-
+    break; // Added break to prevent fall-through
 
     if ( check_reconnect( d, ch->name, TRUE ) )
         return;
@@ -2001,45 +2016,54 @@ case CON_GET_OLD_PASSWORD:
 	}
 	break;
 
-case CON_CONFIRM_NEW_PASSWORD:
+case CON_GET_NEW_PASSWORD:
 #if defined(unix)
     write_to_buffer( d, "\n\r", 2 );
 #endif
 
-    {
-        char pwd_confirm_hex[65];
+    // Validate password length
+    if ( strlen(argument) < 5 ) 
+	{
+        write_to_buffer( d, 
+		"�ifre en az 5 karakter uzunlu�unda olmal�d�r.\n\r�ifre: ",
+		 0 );
+        return;
+    }
 
-        // Hash the re-entered password with the stored salt
-        sha256_string_with_salt(argument, ch->pcdata->salt, pwd_confirm_hex);
-
-        // Compare the hashed re-entered password with the stored hash
-        if (strcmp(pwd_confirm_hex, ch->pcdata->pwd)) {
-            write_to_buffer(d, "\n\rGirilen �ifreler e�le�miyor.\n\rL�tfen i�lemi tekrarlay�n.\n\r�ifre: ", 0);
-            d->connected = CON_GET_NEW_PASSWORD;
+    // Check for invalid characters (e.g., '~')
+    for ( char *p = argument; *p != '\0'; p++ ) 
+	{
+        if ( *p == '~' )
+		 {
+            write_to_buffer( d, 
+			"Girdi�iniz �ifre kabul edilebilir de�il.\n\rL�tfen i�lemi tekrarlay�n.\n\r�ifre: ",
+			 0 );
             return;
         }
     }
 
-    write_to_buffer(d, (char *)echo_on_str, 0);
-
-    // Proceed to the next step in character creation
-    sprintf(buf,
-            "Mangus Mud %d farkl� �rka ev sahipli�i yapar. Irklar�n �zeti:",
-            MAX_PC_RACE - 1);
-    write_to_buffer(d, buf, 0);
-    write_to_buffer(d, "\n\r", 0);
-    do_help(ch, (char *)"�rklar");
-    d->connected = CON_GET_NEW_RACE;
+    // Hash the new password with a newly generated salt
+    // It's important to generate a new salt for each password
+    generate_salt(ch->pcdata->salt, sizeof(ch->pcdata->salt)); // Implement generate_salt appropriately
+    sha256_string_with_salt(argument, ch->pcdata->salt, ch->pcdata->pwd);
+    
+    write_to_buffer( d, "L�tfen �ifreyi tekrar girin: ", 0 );
+    d->connected = CON_CONFIRM_NEW_PASSWORD;
     break;
 
 case CON_CONFIRM_NEW_PASSWORD:
 #if defined(unix)
-	write_to_buffer( d, "\n\r", 2 );
+    write_to_buffer(d, "\n\r", 2);
 #endif
-{
+
+    {
         char pwd_confirm_hex[65];
-		sha256_string_with_salt(argument, ch->pcdata->salt, pwd_confirm_hex);
-        if (strcmp(pwd_confirm_hex, ch->pcdata->pwd)) {
+        // Hash the confirmation password with the same salt
+        sha256_string_with_salt(argument, ch->pcdata->salt, pwd_confirm_hex);
+        
+        // Compare the hashed confirmation password with the stored hash
+        if (strcmp(pwd_confirm_hex, ch->pcdata->pwd)) 
+		{
             write_to_buffer( d, "\n\rGirilen �ifreler e�le�miyor.\n\rL�tfen i�lemi tekrarlay�n.\n\r�ifre: ", 
 			0 );
             d->connected = CON_GET_NEW_PASSWORD;
@@ -2047,7 +2071,19 @@ case CON_CONFIRM_NEW_PASSWORD:
         }
     }
 
-	write_to_buffer( d, (char *) echo_on_str, 0 );
+    write_to_buffer(d, echo_on_str, 0);
+
+    // Proceed to the next step in character creation
+    sprintf(buf, "Mangus Mud %d farklı ırka ev sahipliği yapar. Irkların özeti:", MAX_PC_RACE - 1);
+    write_to_buffer(d, buf, 0);
+    write_to_buffer(d, "\n\r", 0);
+    do_help(ch, "ırklar");
+    d->connected = CON_GET_NEW_RACE;
+    break;
+
+default:
+    // Handle other cases or report an error
+    break;
 	sprintf(buf,
 "Mangus Mud %d farkl� �rka ev sahipli�i yapar. Irklar�n �zeti:",
 			MAX_PC_RACE - 1);
