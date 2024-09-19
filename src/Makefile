@@ -2,18 +2,18 @@
 CXX = g++
 
 # Determine the operating system to set executable extension and remove command
-ifeq ($(OS),Windows_NT)
-    EXE_EXT = .exe
-    RM = del /Q
-    # OpenSSL directories for MinGW64 (adjust if necessary)
-    OPENSSL_INC = -IC:/mingw64/include
-    OPENSSL_LIB = -LC:/mingw64/lib
-else
+ifeq ($(shell uname -s), Linux)
     EXE_EXT =
     RM = rm -f
-    # Assume OpenSSL is in standard system paths on Linux
     OPENSSL_INC =
     OPENSSL_LIB =
+    LIBS = -lssl -lcrypto -lcrypt
+else ifeq ($(OS), Windows_NT)
+    EXE_EXT = .exe
+    RM = del /Q
+    OPENSSL_INC = -IC:/mingw64/include
+    OPENSSL_LIB = -LC:/mingw64/lib
+    LIBS = -lssl -lcrypto
 endif
 
 # Flags for optimization and debugging
@@ -23,9 +23,6 @@ NOCRYPT =
 # Compiler and linker flags
 CXXFLAGS = -Wall $(PROF) $(NOCRYPT) -Wno-misleading-indentation -Wno-format-overflow $(OPENSSL_INC)
 LDFLAGS = $(PROF) $(OPENSSL_LIB)
-
-# Libraries
-LIBS = -lssl -lcrypto -lcrypt
 
 # Source files
 SRC_FILES = \

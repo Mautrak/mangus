@@ -3256,7 +3256,7 @@ void do_password(CHAR_DATA *ch, char *argument) {
     argument = one_argument(argument, arg2);
 
     if (arg1[0] == '\0' || arg2[0] == '\0') {
-        send_to_char("Kullanım: password <eski> <yeni>.\n\r", ch);
+        send_to_char("Kullaným: password <eski> <yeni>.\n\r", ch);
         return;
     }
 
@@ -3264,18 +3264,18 @@ void do_password(CHAR_DATA *ch, char *argument) {
     sha256_string_with_salt(arg1, ch->pcdata->salt, pwd1_hex);
 
     if (strcmp(pwd1_hex, ch->pcdata->pwd)) {
-        send_to_char("Şifre eşleşmiyor.\n\r", ch);
+        send_to_char("Þifre eþleþmiyor.\n\r", ch);
         return;
     }
 
     if (strlen(arg2) < 5) {
-        send_to_char("Yeni şifreniz en az 5 karakter uzunluğunda olmalı.\n\r", ch);
+        send_to_char("Yeni þifreniz en az 5 karakter uzunluðunda olmalý.\n\r", ch);
         return;
     }
 
     // Generate a new salt
     if (!generate_salt(salt_new, 16)) {
-        send_to_char("Salt oluşturulurken hata oluştu.\n\r", ch);
+        send_to_char("Salt oluþturulurken hata oluþtu.\n\r", ch);
         return;
     }
 
@@ -3287,7 +3287,7 @@ void do_password(CHAR_DATA *ch, char *argument) {
     free_string(ch->pcdata->pwd);
     ch->pcdata->pwd = str_dup(pwdnew_hex);
 
-    send_to_char("Şifreniz başarıyla değiştirildi.\n\r", ch);
+    send_to_char("Þifreniz baþarýyla deðiþtirildi.\n\r", ch);
 
     // Save the updated character data
     save_char_obj(ch);
