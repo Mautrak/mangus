@@ -111,6 +111,9 @@ int max_on_so_far;
 
 
 
+/*
+ * Local functions.
+ */
 void	show_list_to_char	args( ( OBJ_DATA *list, CHAR_DATA *ch,
 				    bool fShort, bool fShowNothing ) );
 void	show_char_to_char_0	args( ( CHAR_DATA *victim, CHAR_DATA *ch ) );
@@ -3035,7 +3038,7 @@ void do_practice( CHAR_DATA *ch, char *argument )
         strcpy( buf2, "" );
 	for ( sn = 0; sn < MAX_SKILL; sn++ )
 	{
-	    if (skill_table[sn].name[0] == NULL)
+	    if ( skill_table[sn].name[0] == NULL )
 		break;
 	    if ( ch->level < skill_table[sn].skill_level[ch->iclass] ||
 		!RACE_OK(ch,sn) ||
@@ -3192,6 +3195,8 @@ void do_wimpy( CHAR_DATA *ch, char *argument )
     return;
 }
 
+
+
 void sha256_string_with_salt(const char *password, const char *salt, char *output_hash_hex);
 {
     EVP_MD_CTX *mdctx;
@@ -3255,8 +3260,9 @@ void do_password(CHAR_DATA *ch, char *argument) {
     argument = one_argument(argument, arg1);
     argument = one_argument(argument, arg2);
 
-    if (arg1[0] == '\0' || arg2[0] == '\0') {
-        send_to_char("Kullaným: password <eski> <yeni>.\n\r", ch);
+    if ( arg1[0] == '\0' || arg2[0] == '\0') 
+    {
+        send_to_char("Yaz�m: �ifre <eski> <yeni>.\n\r" , ch);
         return;
     }
 
@@ -3264,37 +3270,33 @@ void do_password(CHAR_DATA *ch, char *argument) {
     sha256_string_with_salt(arg1, ch->pcdata->salt, pwd1_hex);
 
     if (strcmp(pwd1_hex, ch->pcdata->pwd)) {
-        send_to_char("Þifre eþleþmiyor.\n\r", ch);
+        send_to_char("�ifre e�le�miyor.\n\r", ch);
         return;
     }
 
-    if (strlen(arg2) < 5) {
-        send_to_char("Yeni þifreniz en az 5 karakter uzunluðunda olmalý.\n\r", ch);
+    if ( strlen(arg2) < 5 ) 
+    {
+        send_to_char( "Yeni parola en az 5 karakter uzunlu�unda olmal�.\n\r", ch);
         return;
     }
 
     // Generate a new salt
     if (!generate_salt(salt_new, 16)) {
-        send_to_char("Salt oluþturulurken hata oluþtu.\n\r", ch);
+        send_to_char("Salt olu�turulurken hata olu�tu.\n\r", ch);
         return;
     }
-
     // Hash the new password with the new salt
     sha256_string_with_salt(arg2, salt_new, pwdnew_hex);
-
     // Update the character's salt and password hash
     strcpy(ch->pcdata->salt, salt_new);
     free_string(ch->pcdata->pwd);
     ch->pcdata->pwd = str_dup(pwdnew_hex);
 
-    send_to_char("Þifreniz baþarýyla deðiþtirildi.\n\r", ch);
-
+    send_to_char("�ifreniz ba�ar�yla de�i�tirildi.\n\r", ch);
     // Save the updated character data
     save_char_obj(ch);
-
     return;
 }
-
 
 /* RT configure command */
 
@@ -4112,7 +4114,7 @@ void do_pracnew( CHAR_DATA *ch, char *argument )
         strcpy( buf2, "" );
 	for ( sn = 0; sn < MAX_SKILL; sn++ )
 	{
-	    if (skill_table[sn].name[0] == NULL)
+	    if ( skill_table[sn].name[0] == NULL )
 		break;
 	    if ( ch->level < skill_table[sn].skill_level[ch->iclass] ||
 	!RACE_OK(ch,sn) ||

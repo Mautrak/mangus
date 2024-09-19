@@ -149,12 +149,6 @@ typedef short   int			sh_int;
 #endif
 
 /* ea */
-/* <stdbool.h> is already included in the non-TRADITIONAL case */
-/* No need to include it again here */
-
-/* Remove any manual typedef for bool in non-TRADITIONAL case to avoid conflicts */
-/* Ensure that in TRADITIONAL case, bool is already defined appropriately */
-
 #define MSL MAX_STRING_LENGTH
 #define MIL MAX_INPUT_LENGTH
 
@@ -173,12 +167,12 @@ typedef struct	help_data		HELP_DATA;
 typedef struct	kill_data		KILL_DATA;
 typedef struct	mem_data		MEM_DATA;
 typedef struct	mob_index_data		MOB_INDEX_DATA;
-typedef struct	quest_index_data	QUEST_INDEX_DATA;
+typedef struct	quest_index_data		QUEST_INDEX_DATA;
 typedef struct  obj_data		OBJ_DATA;
-typedef struct	obj_index_data	OBJ_INDEX_DATA;
+typedef struct	obj_index_data		OBJ_INDEX_DATA;
 typedef struct	pc_data			PC_DATA;
 typedef struct	reset_data		RESET_DATA;
-typedef struct	room_index_data	ROOM_INDEX_DATA;
+typedef struct	room_index_data		ROOM_INDEX_DATA;
 typedef struct	shop_data		SHOP_DATA;
 typedef struct	time_info_data		TIME_INFO_DATA;
 typedef struct	weather_data		WEATHER_DATA;
@@ -192,30 +186,31 @@ typedef struct  auction_data            AUCTION_DATA;
  * Function types.
  */
 void sha256_string_with_salt(const char *password, const char *salt, char *output_hash_hex);
-typedef	void DO_FUN( CHAR_DATA *ch, char *argument );
-typedef bool SPEC_FUN( CHAR_DATA *ch );
-typedef void SPELL_FUN( int sn, int level, CHAR_DATA *ch, void *vo, int target );
-typedef void MPROG_FUN_BRIBE( CHAR_DATA *mob, CHAR_DATA *ch, int amount );
-typedef void MPROG_FUN_ENTRY( CHAR_DATA *mob );
-typedef void MPROG_FUN_GREET( CHAR_DATA *mob, CHAR_DATA *ch );
-typedef void MPROG_FUN_GIVE( CHAR_DATA *mob, CHAR_DATA *ch, OBJ_DATA *obj );
-typedef void MPROG_FUN_FIGHT( CHAR_DATA *mob, CHAR_DATA *victim );
-typedef bool MPROG_FUN_DEATH( CHAR_DATA *mob );
-typedef void MPROG_FUN_AREA( CHAR_DATA *mob );
-typedef void MPROG_FUN_SPEECH( CHAR_DATA *mob, CHAR_DATA *ch, char *speech );
+typedef	void DO_FUN	args( ( CHAR_DATA *ch, char *argument ) );
+typedef bool SPEC_FUN	args( ( CHAR_DATA *ch ) );
+typedef void SPELL_FUN	args( ( int sn, int level, CHAR_DATA *ch, void *vo,
+                 int target ) );
+typedef void MPROG_FUN_BRIBE args( ( CHAR_DATA *mob, CHAR_DATA *ch, int amount ) );
+typedef void MPROG_FUN_ENTRY args( ( CHAR_DATA *mob ) );
+typedef void MPROG_FUN_GREET args( ( CHAR_DATA *mob, CHAR_DATA *ch ) );
+typedef void MPROG_FUN_GIVE args(( CHAR_DATA *mob, CHAR_DATA *ch, OBJ_DATA *obj ));
+typedef void MPROG_FUN_FIGHT args( ( CHAR_DATA *mob, CHAR_DATA *victim ));
+typedef bool MPROG_FUN_DEATH args( ( CHAR_DATA *mob ) );
+typedef void MPROG_FUN_AREA args( ( CHAR_DATA *mob ) );
+typedef void MPROG_FUN_SPEECH args((CHAR_DATA *mob, CHAR_DATA *ch, char *speech));
 
-typedef void OPROG_FUN_WEAR( OBJ_DATA *obj, CHAR_DATA *ch );
-typedef void OPROG_FUN_REMOVE( OBJ_DATA *obj, CHAR_DATA *ch );
-typedef void OPROG_FUN_GET( OBJ_DATA *obj, CHAR_DATA *ch );
-typedef void OPROG_FUN_DROP( OBJ_DATA *obj, CHAR_DATA *ch );
-typedef bool OPROG_FUN_SAC( OBJ_DATA *obj, CHAR_DATA *ch );
-typedef void OPROG_FUN_ENTRY( OBJ_DATA *obj );
-typedef void OPROG_FUN_GIVE( OBJ_DATA *obj, CHAR_DATA *from, CHAR_DATA *to );
-typedef void OPROG_FUN_GREET( OBJ_DATA *obj, CHAR_DATA *ch );
-typedef void OPROG_FUN_FIGHT( OBJ_DATA *obj, CHAR_DATA *ch );
-typedef bool OPROG_FUN_DEATH( OBJ_DATA *obj, CHAR_DATA *ch );
-typedef void OPROG_FUN_SPEECH( OBJ_DATA *obj, CHAR_DATA *ch, char *speech );
-typedef void OPROG_FUN_AREA( OBJ_DATA *obj );
+typedef void OPROG_FUN_WEAR args((OBJ_DATA *obj, CHAR_DATA *ch));
+typedef void OPROG_FUN_REMOVE args((OBJ_DATA *obj, CHAR_DATA *ch));
+typedef void OPROG_FUN_GET args((OBJ_DATA *obj, CHAR_DATA *ch));
+typedef void OPROG_FUN_DROP args((OBJ_DATA *obj, CHAR_DATA *ch));
+typedef bool OPROG_FUN_SAC args((OBJ_DATA *obj, CHAR_DATA *ch));
+typedef void OPROG_FUN_ENTRY args((OBJ_DATA *obj));
+typedef void OPROG_FUN_GIVE args((OBJ_DATA *obj, CHAR_DATA *from, CHAR_DATA *to));
+typedef void OPROG_FUN_GREET args((OBJ_DATA *obj, CHAR_DATA *ch));
+typedef void OPROG_FUN_FIGHT args((OBJ_DATA *obj, CHAR_DATA *ch));
+typedef bool OPROG_FUN_DEATH args((OBJ_DATA *obj, CHAR_DATA *ch));
+typedef void OPROG_FUN_SPEECH args((OBJ_DATA *obj, CHAR_DATA *ch, char *speech));
+typedef void OPROG_FUN_AREA args((OBJ_DATA *obj));
 
 /*
  *  COMMAND extra bits..
@@ -483,6 +478,7 @@ struct	weather_data
     int		sky;
     int		sunlight;
 };
+
 
 /*
  * Structure for a command in the command lookup table.
@@ -3534,6 +3530,8 @@ void oprog_set(OBJ_INDEX_DATA *, const char *, const char *);
 
 /* mob_prog.c */
 void mprog_set(MOB_INDEX_DATA *, const char *, const char *);
+
+
 #undef	CD
 #undef	MID
 #undef	OD

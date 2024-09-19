@@ -1645,11 +1645,12 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
     CHAR_DATA *ch;
     char *pwdnew;
     char *p;
-    int iClass, race, i;
+    int iClass,race,i;
     bool fOld;
     int obj_count;
     int obj_count2;
     OBJ_DATA *obj;
+	/* OBJ_DATA *inobj; */
 
     while ( isspace(*argument) )
         argument++;
@@ -1791,52 +1792,48 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	}
 	break;
 
-
 case CON_GET_OLD_PASSWORD:
 #if defined(unix)
-    write_to_buffer(d, "\n\r", 2);
+    write_to_buffer( d, "\n\r", 2 );
 #endif
 
     {
         char pwd_input_hex[65];
-
         // Hash the input password with the stored salt
         sha256_string_with_salt(argument, ch->pcdata->salt, pwd_input_hex);
-
         // Compare the hashed input with the stored hash
         if (strcmp(pwd_input_hex, ch->pcdata->pwd)) {
             // Passwords do not match
-            write_to_buffer(d, "Yanlýþ þifre.\n\r", 0);
+            write_to_buffer( d, "Yanl�� �ifre.\n\r", 0 );
             sprintf(buf, "Wrong password by %s@%s", ch->name, d->host);
             log_string(buf);
-
             // Handle incorrect password attempts
             if (ch->endur >= 2) {
-                write_to_buffer(d, "Çok fazla yanlýþ deneme. Baðlantý kapatýlýyor.\n\r", 0);
+                write_to_buffer(d, "�ok fazla yanl�� deneme. Ba�lant� kapat�l�yor.\n\r", 0);
                 close_socket(d);
             } else {
                 ch->endur++;
-                write_to_buffer(d, "Þifre: ", 0);
+                write_to_buffer(d, "�ifre: ", 0);
                 d->connected = CON_GET_OLD_PASSWORD;
             }
             return;
         }
     }
-
     // Password is correct
     ch->endur = 0; // Reset incorrect attempt counter
     write_to_buffer(d, (char *)echo_on_str, 0);
-
-    if (ch->pcdata == NULL || ch->pcdata->pwd[0] == '\0') {
-        write_to_buffer(d, "Uyarý! Þifre boþ!\n\r", 0);
-        write_to_buffer(d, "Lütfen eski þifreyi 'bug' komutuyla bildirin.\n\r", 0);
-        write_to_buffer(d, "Düzeltmek için 'password null <yeni þifre>' yazýn.\n\r", 0);
+    if (ch->pcdata == NULL || ch->pcdata->pwd[0] == '\0'){
+        write_to_buffer(d, "Uyar�! �ifre bo�!\n\r",0);
+        write_to_buffer(d, "L�tfen eski �ifreyi 'bug' komutuyla bildirin.\n\r",0);
+        write_to_buffer(d,
+		 "D�zeltmek i�in 'password null <yeni �ifre>' yaz�n.\n\r",0);
     }
 
-    if (check_reconnect(d, ch->name, TRUE))
+
+    if ( check_reconnect( d, ch->name, TRUE ) )
         return;
 
-    if (check_playing(d, ch->name))
+    if ( check_playing( d, ch->name ) )
         return;
 
 	/* Count objects in loaded player file */
@@ -2006,7 +2003,7 @@ case CON_GET_OLD_PASSWORD:
 
 case CON_CONFIRM_NEW_PASSWORD:
 #if defined(unix)
-    write_to_buffer(d, "\n\r", 2);
+    write_to_buffer( d, "\n\r", 2 );
 #endif
 
     {
@@ -2017,7 +2014,7 @@ case CON_CONFIRM_NEW_PASSWORD:
 
         // Compare the hashed re-entered password with the stored hash
         if (strcmp(pwd_confirm_hex, ch->pcdata->pwd)) {
-            write_to_buffer(d, "\n\rGirilen þifreler eþleþmiyor.\n\rLütfen iþlemi tekrarlayýn.\n\rþifre: ", 0);
+            write_to_buffer(d, "\n\rGirilen �ifreler e�le�miyor.\n\rL�tfen i�lemi tekrarlay�n.\n\r�ifre: ", 0);
             d->connected = CON_GET_NEW_PASSWORD;
             return;
         }
@@ -2027,11 +2024,11 @@ case CON_CONFIRM_NEW_PASSWORD:
 
     // Proceed to the next step in character creation
     sprintf(buf,
-            "Mangus Mud %d farklý ýrka ev sahipliði yapar. Irklarýn özeti:",
+            "Mangus Mud %d farkl� �rka ev sahipli�i yapar. Irklar�n �zeti:",
             MAX_PC_RACE - 1);
     write_to_buffer(d, buf, 0);
     write_to_buffer(d, "\n\r", 0);
-    do_help(ch, (char *)"ýrklar");
+    do_help(ch, (char *)"�rklar");
     d->connected = CON_GET_NEW_RACE;
     break;
 
@@ -2043,13 +2040,14 @@ case CON_CONFIRM_NEW_PASSWORD:
         char pwd_confirm_hex[65];
 		sha256_string_with_salt(argument, ch->pcdata->salt, pwd_confirm_hex);
         if (strcmp(pwd_confirm_hex, ch->pcdata->pwd)) {
-            write_to_buffer(d, "\n\rGirilen þifreler eþleþmiyor.\n\rLütfen iþlemi tekrarlayýn.\n\rÞifre: ", 0);
+            write_to_buffer( d, "\n\rGirilen �ifreler e�le�miyor.\n\rL�tfen i�lemi tekrarlay�n.\n\r�ifre: ", 
+			0 );
             d->connected = CON_GET_NEW_PASSWORD;
             return;
         }
     }
 
-	write_to_buffer(d, (char *)echo_on_str, 0);
+	write_to_buffer( d, (char *) echo_on_str, 0 );
 	sprintf(buf,
 "Mangus Mud %d farkl� �rka ev sahipli�i yapar. Irklar�n �zeti:",
 			MAX_PC_RACE - 1);

@@ -379,7 +379,6 @@ void do_settraps( CHAR_DATA *ch, char *argument )
 extern const char* dir_name[];
 
 
-
 #define WORLD_SIZE	32700
 #define	HASH_KEY(ht,key)((((unsigned int)(key))*17)%(ht)->table_size)
 
@@ -421,7 +420,7 @@ void init_hash_table(struct hash_header	*ht,int rec_size,int table_size)
 void init_world(ROOM_INDEX_DATA *room_db[])
 {
   /* zero out the world */
-  memset((char *)room_db, 0, sizeof(ROOM_INDEX_DATA *) * WORLD_SIZE);
+  memset((char *)room_db, 0, sizeof(ROOM_INDEX_DATA *)*WORLD_SIZE);
 }
 
 CHAR_DATA *get_char_area( CHAR_DATA *ch, char *argument )
@@ -579,32 +578,33 @@ int room_remove(ROOM_INDEX_DATA *rb[],int key)
   return(0);
 }
 
-void *hash_remove(struct hash_header *ht, int key)
+void *hash_remove(struct hash_header *ht,int key)
 {
     struct hash_link **scan;
 
-    scan = ht->buckets + HASH_KEY(ht, key);
+    scan = ht->buckets+HASH_KEY(ht,key);
 
-    while (*scan && (*scan)->key != key)
+    while(*scan && (*scan)->key!=key)
         scan = &(*scan)->next;
 
-    if (*scan)
+    if(*scan)
     {
-        int i;
-        struct hash_link *temp, *aux;
+        int		i;
+        struct hash_link	*temp, *aux;
 
-        temp = (struct hash_link *)(*scan)->data; // Fixed by adding 'struct'
-        aux = *scan;
-        *scan = aux->next;
+        temp	= (struct hash_link*)(*scan)->data; // Fixed by adding 'struct'
+        aux	= *scan;
+        *scan	= aux->next;
         free(aux);
 
-        for (i = 0; i < ht->klistlen; i++)
-            if (ht->keylist[i] == key)
+        for(i=0;i<ht->klistlen;i++)
+            if(ht->keylist[i]==key)
                 break;
 
-        if (i < ht->klistlen)
+        if(i<ht->klistlen)
         {
-            memcpy((char *)ht->keylist + i, (char *)ht->keylist + i + 1, (ht->klistlen - i) * sizeof(*ht->keylist));
+            memcpy((char *)ht->keylist+i,(char *)ht->keylist+i+1,(ht->klistlen-i)
+            *sizeof(*ht->keylist));
             ht->klistlen--;
         }
 
@@ -613,7 +613,6 @@ void *hash_remove(struct hash_header *ht, int key)
 
     return NULL;
 }
-
 
 void room_iterate(ROOM_INDEX_DATA *rb[],void (*func)(int, ROOM_INDEX_DATA *, void * ),void *cdata)
 {
@@ -668,17 +667,17 @@ typedef struct {
     int direction;
 } ancestor_info;
 
-int find_path(int in_room_vnum, int out_room_vnum, CHAR_DATA *ch,
-             int depth, int in_zone)
+int find_path( int in_room_vnum, int out_room_vnum, CHAR_DATA *ch,
+             int depth, int in_zone )
 {
-    struct room_q *tmp_q, *q_head, *q_tail;
-    struct hash_header x_room;
-    int i, tmp_room, count = 0, thru_doors;
-    ROOM_INDEX_DATA *herep;
-    ROOM_INDEX_DATA *startp;
-    EXIT_DATA *exitp;
+    struct room_q		*tmp_q, *q_head, *q_tail;
+    struct hash_header	x_room;
+    int			i, tmp_room, count=0, thru_doors;
+    ROOM_INDEX_DATA	*herep;
+    ROOM_INDEX_DATA	*startp;
+    EXIT_DATA		*exitp;
 
-    if (depth < 0)
+    if ( depth <0 )
     {
         thru_doors = TRUE;
         depth = -depth;
@@ -688,43 +687,46 @@ int find_path(int in_room_vnum, int out_room_vnum, CHAR_DATA *ch,
         thru_doors = FALSE;
     }
 
-    startp = get_room_index(in_room_vnum);
+    startp = get_room_index( in_room_vnum );
 
-    init_hash_table(&x_room, sizeof(int), 2048);
-    hash_enter(&x_room, in_room_vnum, SENTINEL_VALUE); // Use sentinel
+    init_hash_table( &x_room, sizeof(int), 2048 );
+    hash_enter( &x_room, in_room_vnum, SENTINEL_VALUE ); // Use sentinel
 
     /* initialize queue */
-    q_head = (struct room_q *)malloc(sizeof(struct room_q));
+    q_head = (struct room_q *) malloc(sizeof(struct room_q));
     q_tail = q_head;
     q_tail->room_nr = in_room_vnum;
     q_tail->next_q = 0;
 
-    while (q_head)
+    while(q_head)
     {
-        herep = get_room_index(q_head->room_nr);
+        herep = get_room_index( q_head->room_nr );
         /* for each room test all directions */
-        if (herep == NULL)
-            fprintf(stderr, "BUG:  Null herep in hunt.c, room #%d", q_head->room_nr);
-        if (herep && (herep->area == startp->area || !in_zone))
+        if (herep==NULL) fprintf(stderr,"BUG:  Null herep in hunt.c, room #%d",q_head->room_nr);
+        if( herep && (herep->area == startp->area || !in_zone) )
         {
-            /* only look in this zone... saves cpu time and makes world safer for players */
-            for (i = 0; i <= 5; i++)
+            /* only look in this zone... 
+            saves cpu time and  makes world safer for players  */
+            for( i = 0; i <= 5; i++ )
             {
                 exitp = herep->exit[i];
-                if (exit_ok(exitp) && (thru_doors ? GO_OK_SMARTER : GO_OK))
+                if( exit_ok(exitp) && ( thru_doors ? GO_OK_SMARTER : GO_OK ) )
                 {
                     /* next room */
                     tmp_room = herep->exit[i]->u1.to_room->vnum;
-                    if (tmp_room != out_room_vnum)
+                    if( tmp_room != out_room_vnum )
                     {
-                        /* shall we add room to queue? count determines total breadth and depth */
-                        if (!hash_find(&x_room, tmp_room) && (count < depth))
+                        /* shall we add room to queue ? 
+                        count determines total breadth and depth */
+                        if( !hash_find( &x_room, tmp_room )
+                         && ( count < depth ) )
                         /* && !IS_SET( RM_FLAGS(tmp_room), DEATH ) ) */
                         {
                             count++;
                             /* mark room as visited and put on queue */
 
-                            tmp_q = (struct room_q *)malloc(sizeof(struct room_q));
+                            tmp_q = (struct room_q *)
+                            malloc(sizeof(struct room_q));
                             tmp_q->room_nr = tmp_room;
                             tmp_q->next_q = 0;
                             q_tail->next_q = tmp_q;
@@ -749,7 +751,7 @@ int find_path(int in_room_vnum, int out_room_vnum, CHAR_DATA *ch,
                     {
                         /* have reached our goal so free queue */
                         tmp_room = q_head->room_nr;
-                        for (; q_head; q_head = tmp_q)
+                        for(;q_head;q_head = tmp_q)
                         {
                             tmp_q = q_head->next_q;
                             free(q_head);
@@ -788,10 +790,10 @@ int find_path(int in_room_vnum, int out_room_vnum, CHAR_DATA *ch,
     }
 
     /* couldn't find path */
-    if (x_room.buckets)
+    if( x_room.buckets )
     {
         /* junk left over from a previous track */
-        destroy_hash_table(&x_room, donothing);
+        destroy_hash_table( &x_room, donothing );
     }
     return -1;
 }
@@ -1991,12 +1993,12 @@ int advatoi (const char *s)
 
   strcpy (string,s);        /* working copy */
 
-    while (isdigit(*stringptr))
+    while ( isdigit (*stringptr)) /* as long as the current character is a digit */
     {
-        strncpy(tempstring, stringptr, 1); /* copy first digit */
+        strncpy (tempstring,stringptr,1);           /* copy first digit */
         tempstring[1] = '\0'; // Ensure null-termination
-        number = (number * 10) + atoi(tempstring);
-        stringptr++;
+        number = (number * 10) + atoi (tempstring); /* add to current number */
+        stringptr++;                                /* advance */
     }
 
   switch (UPPER(*stringptr)) {
@@ -2006,7 +2008,7 @@ int advatoi (const char *s)
       default   : return 0; /* not k nor m nor NUL - return 0! */
   }
 
-    while (isdigit(*stringptr))
+    while ( isdigit (*stringptr) )
     {
         strncpy(tempstring, stringptr, 1); /* copy first digit */
         tempstring[1] = '\0'; // Ensure null-termination
