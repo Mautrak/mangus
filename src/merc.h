@@ -3241,6 +3241,8 @@ const char 	*weapon_name	args( ( int weapon_Type) );
 int	item_lookup	args( ( const char *name) );
 const char	*item_name	args( ( int item_type) );
 int	attack_lookup	args( ( const char *name) );
+/* Function prototype for Turkish-aware UTF-8 lowercasing */
+void turkish_tolower_utf8(char *dest, const char *src, size_t n);
 int	race_lookup	args( ( const char *name) );
 long	wiznet_lookup	args( ( const char *name) );
 int	class_lookup	args( ( const char *name) );

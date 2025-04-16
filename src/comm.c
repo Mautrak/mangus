@@ -148,6 +148,7 @@ const	char 	go_ahead_str	[] = { '\0' };
 const	char	echo_off_str	[] = { IAC, WILL, TELOPT_ECHO, '\0' };
 const	char	echo_on_str	[] = { IAC, WONT, TELOPT_ECHO, '\0' };
 const	char 	go_ahead_str	[] = { IAC, GA, '\0' };
+void	init_descriptor		args( ( int control ) );
 #endif
 
 char *get_stat_alias		args( (CHAR_DATA* ch, int which) );
@@ -1008,6 +1009,27 @@ void init_descriptor( int control )
     dnew->next			= descriptor_list;
     descriptor_list		= dnew;
 
+    {
+        // Using unsigned char for Telnet codes is safer
+        unsigned char iac_will_binary[3] = { IAC, WILL, TELOPT_BINARY };
+        unsigned char iac_will_sga[3]    = { IAC, WILL, TELOPT_SGA };
+        unsigned char iac_do_sga[3]      = { IAC, DO,   TELOPT_SGA };
+
+        /* Tell client: Server WILL use BINARY. Crucial for UTF-8. */
+        if (write(dnew->descriptor, iac_will_binary, 3) < 0) {
+            perror("init_descriptor: write IAC WILL BINARY");
+        }
+
+        /* Tell client: Server WILL Suppress Go-Ahead. Helps prompt display. */
+        if (write(dnew->descriptor, iac_will_sga, 3) < 0) {
+             perror("init_descriptor: write IAC WILL SGA");
+        }
+
+        /* Tell client: Client SHOULD Suppress Go-Ahead. */
+        if (write(dnew->descriptor, iac_do_sga, 3) < 0) {
+             perror("init_descriptor: write IAC DO SGA");
+        }
+    }
     /*
      * Send the greeting.
      */
@@ -1184,20 +1206,20 @@ void read_from_buffer( DESCRIPTOR_DATA *d )
 {
     int i, j, k;
     char buf[MAX_STRING_LENGTH];
-
+	
     /*
      * Hold horses if pending command already.
      */
     if ( d->incomm[0] != '\0' )
-	return;
+        return;
 
     /*
      * Look for at least one new line.
      */
     for ( i = 0; d->inbuf[i] != '\n' && d->inbuf[i] != '\r'; i++ )
     {
-	if ( d->inbuf[i] == '\0' )
-	    return;
+        if ( d->inbuf[i] == '\0' )
+            return;
     }
 
     /*
@@ -1205,38 +1227,39 @@ void read_from_buffer( DESCRIPTOR_DATA *d )
      */
     for ( i = 0, k = 0; d->inbuf[i] != '\n' && d->inbuf[i] != '\r'; i++ )
     {
-	if ( k >= MAX_INPUT_LENGTH - 2 )
-	{
-	    write_to_descriptor( d->descriptor, (char*)"Satır çok uzun.\n\r", 0 );
+        if ( k >= MAX_INPUT_LENGTH - 2 )
+        {
+            write_to_descriptor( d->descriptor, (char*)"Satır çok uzun.\n\r", 0 );
 
-	    /* skip the rest of the line */
-	    for ( ; d->inbuf[i] != '\0'; i++ )
-	    {
-		if ( d->inbuf[i] == '\n' || d->inbuf[i] == '\r' )
-		    break;
-	    }
-	    d->inbuf[i]   = '\n';
-	    d->inbuf[i+1] = '\0';
-	    break;
-	}
+            /* skip the rest of the line */
+            for ( ; d->inbuf[i] != '\0'; i++ )
+            {
+                if ( d->inbuf[i] == '\n' || d->inbuf[i] == '\r' )
+                    break;
+            }
+             if (d->inbuf[i] == '\0') {
+             } else {
+                 d->inbuf[i]   = '\n';
+             }
+            break;
+        }
 
-	if ( d->inbuf[i] == '\b' && k > 0 )
-	    --k;
-			else if (( isascii(d->inbuf[i]) && isprint(d->inbuf[i]) )
-     ||d->inbuf[i]=='ı' ||d->inbuf[i]=='ğ'
-     || d->inbuf[i]=='ü' || d->inbuf[i]=='ş'|| d->inbuf[i]=='ö'
-     ||d->inbuf[i]=='ç' ||d->inbuf[i]=='İ' ||d->inbuf[i]=='Ğ'
-     ||d->inbuf[i]=='Ü'||d->inbuf[i]=='Ş'||d->inbuf[i]=='Ö'
-      ||d->inbuf[i]=='Ç')
-	    d->incomm[k++] = d->inbuf[i];
+        if ( (d->inbuf[i] == '\b' || d->inbuf[i] == '\x7F') && k > 0 )
+        {
+            --k;
+        }
+        else if ( d->inbuf[i] != '\b' && d->inbuf[i] != '\x7F' )
+        {
+            d->incomm[k++] = d->inbuf[i];
+        }
     }
 
-    /*
-     * Finish off the line.
-     */
-    if ( k == 0 )
-	d->incomm[k++] = ' ';
-    d->incomm[k] = '\0';
+    /* 
+	 * Finish off the line.
+	*/
+     if ( k == 0 ) 
+	 d->incomm[k++] = ' '; 
+     d->incomm[k] = '\0';
 
     /*
      * Deal with bozos with #repeat 1000 ...
@@ -1244,53 +1267,52 @@ void read_from_buffer( DESCRIPTOR_DATA *d )
 
     if ( k > 1 || d->incomm[0] == '!' )
     {
-    	if ( d->incomm[0] != '!' && strcmp( d->incomm, d->inlast ) )
-	{
-	    d->repeat = 0;
-	}
-	else
-	{
-	    if ( ++d->repeat >= 25 )	/* corrected by chronos */
-	    {
-		sprintf( log_buf, "%s input spamming!", d->host );
-		log_string( log_buf );
-             if (d->character != NULL)
-	      {
-		sprintf(buf,"SPAM SPAM SPAM %s spamming, and OUT!",d->character->name);
-		wiznet(buf,d->character,NULL,WIZ_SPAM,0,get_trust(d->character));
+        if ( d->incomm[0] != '!' && strcmp( d->incomm, d->inlast ) )
+        {
+            d->repeat = 0;
+        }
+        else
+        {
+            if ( ++d->repeat >= 25 )	/* corrected by chronos */
+            {
+                sprintf( log_buf, "%s input spamming!", d->host );
+                log_string( log_buf );
+                 if (d->character != NULL)
+                  {
+                    sprintf(buf,"SPAM SPAM SPAM %s spamming, and OUT!",d->character->name);
+                    wiznet(buf,d->character,NULL,WIZ_SPAM,0,get_trust(d->character));
 
-		sprintf(buf,"[%s]'s  Inlast:[%s] Incomm:[%s]!",
-			d->character->name,d->inlast,d->incomm);
-        	wiznet(buf,d->character,NULL,WIZ_SPAM,0,get_trust(d->character));
+                    sprintf(buf,"[%s]'s  Inlast:[%s] Incomm:[%s]!",
+                        d->character->name,d->inlast,d->incomm);
+                    wiznet(buf,d->character,NULL,WIZ_SPAM,0,get_trust(d->character));
 
-		d->repeat = 0;
+                    d->repeat = 0;
 
-		write_to_descriptor( d->descriptor,
-		    (char*)"\n\r*** BUNA BİR SON VER!!! ***\n\r", 0 );
-/*		strcpy( d->incomm, "quit" );	*/
-		close_socket( d );
-		return;
-	       }
-	    }
-	}
-    }
+                    write_to_descriptor( d->descriptor,
+                        (char*)"\n\r*** BUNA BİR SON VER!!! ***\n\r", 0 );
+                    close_socket( d );
+                    return;
+                   } 
+            } 
+        }
+    } 
 
 
     /*
-     * Do '!' substitution.
-     */
+	 * Do '!' substitution.
+	 */
     if ( d->incomm[0] == '!' )
-	strcpy( d->incomm, d->inlast );
+        strcpy( d->incomm, d->inlast );
     else
-	strcpy( d->inlast, d->incomm );
+        strcpy( d->inlast, d->incomm );
 
-    /*
-     * Shift the input buffer.
-     */
+    /* 
+	 * Shift the input buffer.
+	*/
     while ( d->inbuf[i] == '\n' || d->inbuf[i] == '\r' )
-	i++;
+        i++;
     for ( j = 0; ( d->inbuf[j] = d->inbuf[i+j] ) != '\0'; j++ )
-	;
+        ;
     return;
 }
 

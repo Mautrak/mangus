@@ -1,7 +1,9 @@
 FROM ubuntu:22.04
-
+ENV LANG=en_US.UTF-8
 # Bu kurulum sırasında bişey sormaya kalkmasın diye
 ENV DEBIAN_FRONTEND=noninteractive
+EXPOSE 4000
+
 
 # Bunlari kurmamız lazım yoksa çalışmaz
 RUN apt-get update && apt-get install -y \
@@ -28,4 +30,4 @@ WORKDIR /app/area
 
 # Mangus'u çalıştırıyoruz, işte bu kadar
 
-# CMD ["./mangus"]
+ CMD ["./mangus"]

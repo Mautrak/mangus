@@ -411,7 +411,7 @@ int			newobjs = 0;
  * Increase MAX_STRING if you have too.
  * Tune the others only if you understand what you're doing.
  */
-#define			MAX_STRING	3500000
+#define			MAX_STRING	5000000
 #define			MAX_PERM_BLOCK	150000
 #define			MAX_MEM_LIST	11
 
@@ -2942,17 +2942,21 @@ long flag_convert(char letter )
  *   each string prepended with hash pointer to prev string,
  *   hash code is simply the string length.
  *   this function takes 40% to 50% of boot-up time.
+ *
+ * Vulnerability Fixed: Added checks inside the loop to prevent
+ * writing past the end of string_space.
  */
 char *fread_string( FILE *fp )
 {
     char *plast;
     char c;
+    char * const buffer_end = string_space + MAX_STRING;
 
     plast = top_string + sizeof(char *);
-    if ( plast > &string_space[MAX_STRING - MAX_STRING_LENGTH] )
+    if (plast >= buffer_end)
     {
-	bug( "Fread_string: MAX_STRING %d exceeded.", MAX_STRING );
-	exit( 1 );
+        bug( "Fread_string: No space left in buffer even for an empty string.", 0 );
+        exit( 1 );
     }
 
     /*
@@ -2961,36 +2965,55 @@ char *fread_string( FILE *fp )
      */
     do
     {
-	c = getc( fp );
+        c = getc( fp );
+        if (c == EOF) {
+             bug("Fread_string: EOF encountered while skipping leading whitespace.", 0);
+             exit(1);
+        }
     }
     while ( isspace(c) );
 
-    if ( ( *plast++ = c ) == '~' )
-	return &str_empty[0];
+    if (plast >= buffer_end) {
+        *(buffer_end - 1) = '\0';
+        bug( "Fread_string: MAX_STRING %d buffer overflow before reading first char.", MAX_STRING );
+        exit(1);
+    }
+    *plast++ = c;
+
+    if ( c == '~' ) {
+        *(plast-1) = '\0';
+        return &str_empty[0];
+    }
 
     for ( ;; )
     {
-        /*
-         * Back off the char type lookup,
-         *   it was too dirty for portability.
-         *   -- Furey
-         */
+        if (plast >= buffer_end) {
+            *(buffer_end - 1) = '\0';
+            bug("Fread_string: MAX_STRING %d buffer overflow detected before reading next char.", MAX_STRING);
+            exit(1);
+        }
 
-	switch ( *plast = getc(fp) )
-	{
+        c = getc(fp);
+
+        switch ( c )
+        {
         default:
-            plast++;
+            *plast++ = c;
             break;
 
         case EOF:
-	/* temp fix */
-            bug( "Fread_string: EOF", 0 );
-	    return NULL;
-            /* exit( 1 ); */
+            bug( "Fread_string: EOF encountered mid-string", 0 );
+            *plast = '\0';
+            exit( 1 );
             break;
 
         case '\n':
-            plast++;
+            *plast++ = c;
+            if (plast >= buffer_end) {
+                *(buffer_end - 1) = '\0';
+                bug("Fread_string: MAX_STRING %d buffer overflow attempting to add carriage return.", MAX_STRING);
+                exit(1);
+            }
             *plast++ = '\r';
             break;
 
@@ -2998,53 +3021,60 @@ char *fread_string( FILE *fp )
             break;
 
         case '~':
-            plast++;
-	    {
-		union
-		{
-		    char *	pc;
-		    char	rgc[sizeof(char *)];
-		} u1;
-		size_t ic;
-		int iHash;
-		char *pHash;
-		char *pHashPrev;
-		char *pString;
+            *plast = '\0';
+            { 
+                union
+                {
+                    char *	pc;
+                    char	rgc[sizeof(char *)];
+                } u1;
+                size_t ic;
+                int iHash;
+                char *pHash;
+                char *pHashPrev;
+                char *pString;
 
-		plast[-1] = '\0';
-		iHash     = UMIN( MAX_KEY_HASH - 1, plast - 1 - top_string );
-		for ( pHash = string_hash[iHash]; pHash; pHash = pHashPrev )
-		{
-		    for ( ic = 0; ic < sizeof(char *); ic++ )
-			u1.rgc[ic] = pHash[ic];
-		    pHashPrev = u1.pc;
-		    pHash    += sizeof(char *);
+                iHash = UMIN( MAX_KEY_HASH - 1, (plast - (top_string + sizeof(char *))) );
+                for ( pHash = string_hash[iHash]; pHash; pHash = pHashPrev )
+                {
+                    for ( ic = 0; ic < sizeof(char *); ic++ )
+                        u1.rgc[ic] = pHash[ic];
+                    pHashPrev = u1.pc;
+                    pHash    += sizeof(char *); 
 
-		    if ( top_string[sizeof(char *)] == pHash[0]
-		    &&   !strcmp( top_string+sizeof(char *)+1, pHash+1 ) )
-			return pHash;
-		}
+                    if ( (top_string + sizeof(char *))[0] == pHash[0] 
+                    &&   !strcmp( top_string + sizeof(char *) + 1, pHash + 1 ) ) 
+                    {
+                        return pHash;
+                    }
+                }
 
-		if ( fBootDb )
-		{
-		    pString		= top_string;
-		    top_string		= plast;
-		    u1.pc		= string_hash[iHash];
-		    for ( ic = 0; ic < sizeof(char *); ic++ )
-			pString[ic] = u1.rgc[ic];
-		    string_hash[iHash]	= pString;
+                if ( fBootDb )
+                {
+                    if (plast >= buffer_end) {
+                        *(buffer_end - 1) = '\0';
+                        bug("Fread_string: Buffer overflow detected just before finalizing unique string.", MAX_STRING);
+                        exit(1);
+                    }
 
-		    nAllocString += 1;
-		    sAllocString += top_string - pString;
-		    return pString + sizeof(char *);
-		}
-		else
-		{
-		    return str_dup( top_string + sizeof(char *) );
-		}
-	    }
-	}
-    }
+                    pString		= top_string; 
+                    top_string		= plast;      
+                    u1.pc		= string_hash[iHash];
+                    for ( ic = 0; ic < sizeof(char *); ic++ )
+                        pString[ic] = u1.rgc[ic];
+                    string_hash[iHash]	= pString; 
+
+                    nAllocString++;
+                    sAllocString += top_string - pString;
+                    return pString + sizeof(char *);
+                }
+                else
+                {
+                    return str_dup( top_string + sizeof(char *) );
+                }
+            } 
+        } 
+    } 
 }
 
 char *fread_string_eol( FILE *fp )

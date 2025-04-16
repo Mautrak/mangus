@@ -98,17 +98,144 @@ int material_lookup (const char *name)
     return 0;
 }
 
-/* returns race number */
+void turkish_tolower_utf8(char *dest, const char *src, size_t n)
+{
+    size_t dest_i = 0; 
+    const unsigned char *usrc = (const unsigned char *)src;
+    if (n == 0) return;
+    if (n == 1) {
+        dest[0] = '\0';
+        return;
+    }
+
+    while (*usrc != '\0' && dest_i < n - 1) 
+    {
+        if (*usrc <= 127)
+        {
+            if (*usrc >= 'A' && *usrc <= 'Z')
+            {
+                if (*usrc == 'I')
+                {
+                    if (dest_i + 2 < n) { 
+                        dest[dest_i++] = (char)0xC4;
+                        dest[dest_i++] = (char)0xB1;
+                    } else {
+                        break; 
+                    }
+                }
+                else
+                {
+                    dest[dest_i++] = (*usrc) + ('a' - 'A');
+                }
+            }
+            else
+            {
+                dest[dest_i++] = *usrc;
+            }
+            usrc++; 
+        }
+        else if (usrc[1] != '\0')
+        {
+            if (usrc[0] == 0xC4 && usrc[1] == 0xB0) {
+                dest[dest_i++] = 'i';
+                usrc += 2; // Advance source by 2 bytes
+            }
+            else if (usrc[0] == 0xC5 && usrc[1] == 0x9E) {
+                 if (dest_i + 2 < n) {
+                    dest[dest_i++] = (char)0xC5;
+                    dest[dest_i++] = (char)0x9F;
+                 } else { break; }
+                 usrc += 2;
+            }
+            else if (usrc[0] == 0xC4 && usrc[1] == 0x9E) {
+                 if (dest_i + 2 < n) {
+                    dest[dest_i++] = (char)0xC4;
+                    dest[dest_i++] = (char)0x9F;
+                 } else { break; }
+                 usrc += 2;
+            }
+            else if (usrc[0] == 0xC3 && usrc[1] == 0x96) {
+                 if (dest_i + 2 < n) {
+                    dest[dest_i++] = (char)0xC3;
+                    dest[dest_i++] = (char)0xB6;
+                 } else { break; }
+                 usrc += 2;
+            }
+            else if (usrc[0] == 0xC3 && usrc[1] == 0x9C) {
+                 if (dest_i + 2 < n) {
+                    dest[dest_i++] = (char)0xC3;
+                    dest[dest_i++] = (char)0xBC;
+                 } else { break; }
+                 usrc += 2;
+            }
+            else if (usrc[0] == 0xC3 && usrc[1] == 0x87) {
+                 if (dest_i + 2 < n) {
+                    dest[dest_i++] = (char)0xC3;
+                    dest[dest_i++] = (char)0xA7;
+                 } else { break; }
+                 usrc += 2;
+            }
+            else if ((usrc[0] & 0xE0) == 0xC0) {
+                 if (dest_i + 2 < n) {
+                    dest[dest_i++] = usrc[0];
+                    dest[dest_i++] = usrc[1];
+                 } else { break; }
+                 usrc += 2;
+            }
+            else if (((usrc[0] & 0xF0) == 0xE0) && usrc[1] != '\0' && usrc[2] != '\0') {
+                 if (dest_i + 3 < n) {
+                    dest[dest_i++] = usrc[0];
+                    dest[dest_i++] = usrc[1];
+                    dest[dest_i++] = usrc[2];
+                 } else { break; }
+                 usrc += 3;
+            }
+            else if (((usrc[0] & 0xF8) == 0xF0) && usrc[1] != '\0' && usrc[2] != '\0' && usrc[3] != '\0') {
+                 if (dest_i + 4 < n) {
+                    dest[dest_i++] = usrc[0];
+                    dest[dest_i++] = usrc[1];
+                    dest[dest_i++] = usrc[2];
+                    dest[dest_i++] = usrc[3];
+                 } else { break; }
+                 usrc += 4;
+            }
+            else {
+                usrc++;
+            }
+        }
+        else {
+             break;
+        }
+    }
+
+    dest[dest_i] = '\0';
+}
 int race_lookup (const char *name)
 {
    int race;
    char buf[MAX_STRING_LENGTH];
+   char input_lower[MAX_INPUT_LENGTH];
+   char table_name_lower[MAX_INPUT_LENGTH];
 
-   for ( race = 0; race_table[race].name[1] != NULL; race++)
+   turkish_tolower_utf8(input_lower, name, sizeof(input_lower));
+
+   for ( race = 1; race_table[race].name != NULL && race_table[race].name[0] != NULL; race++)
    {
-     if (((LOWER(name[0]) == LOWER(race_table[race].name[0][0])) &&  !str_prefix( name,race_table[race].name[0])) ||
-        ((LOWER(name[0]) == LOWER(race_table[race].name[1][0])) &&  !str_prefix( name,race_table[race].name[1])) )
-	    return race;
+       if (race_table[race].name[0][0] != '\0') // Check if the string is not empty
+       {
+           turkish_tolower_utf8(table_name_lower, race_table[race].name[0], sizeof(table_name_lower));
+
+           if (!strcmp(input_lower, table_name_lower))
+               return race;
+       }
+
+       if (race_table[race].name[1] != NULL && race_table[race].name[1][0] != '\0')
+       {
+           turkish_tolower_utf8(table_name_lower, race_table[race].name[1], sizeof(table_name_lower));
+
+           if (!strcmp(input_lower, table_name_lower))
+               return race;
+       }
    }
 
    sprintf(buf, "Race_lookup: race not found %s.", name);
@@ -400,18 +527,44 @@ long wiznet_lookup (const char *name)
 /* returns class number */
 int class_lookup (const char *name)
 {
-   int iclass;
+    int iclass;
+    char input_lower[MAX_INPUT_LENGTH];
+    char table_name_lower[MAX_INPUT_LENGTH];
 
-   for ( iclass = 0; iclass < MAX_CLASS; iclass++)
-   {
-        if ( (LOWER(name[0]) == LOWER(class_table[iclass].name[0][0]) &&  !str_prefix( name,class_table[iclass].name[0])) ||
-              (LOWER(name[0]) == LOWER(class_table[iclass].name[1][0]) &&  !str_prefix( name,class_table[iclass].name[1])) )
-	{
-            return iclass;
-	}
-   }
+    if (name == NULL || name[0] == '\0') {
+        return -1;
+    }
 
-   return -1;
+    turkish_tolower_utf8(input_lower, name, sizeof(input_lower));
+
+    for ( iclass = 0; iclass < MAX_CLASS; iclass++)
+    {
+        if (class_table[iclass].name != NULL
+            && class_table[iclass].name[0] != NULL
+            && class_table[iclass].name[0][0] != '\0')
+        {
+            turkish_tolower_utf8(table_name_lower, class_table[iclass].name[0], sizeof(table_name_lower));
+
+            if (!strcmp(input_lower, table_name_lower))
+            {
+                return iclass;
+            }
+        }
+
+        if (class_table[iclass].name != NULL
+            && class_table[iclass].name[1] != NULL
+            && class_table[iclass].name[1][0] != '\0')
+        {
+            turkish_tolower_utf8(table_name_lower, class_table[iclass].name[1], sizeof(table_name_lower));
+
+            if (!strcmp(input_lower, table_name_lower))
+            {
+                 return iclass;
+            }
+        }
+    }
+
+    return -1;
 }
 
 /* for immunity, vulnerabiltiy, and resistant

@@ -1,5 +1,5 @@
 CC      = g++
-PROF    = -O -g
+PROF    = -g
 NOCRYPT =
 C_FLAGS = -Wall $(PROF) $(NOCRYPT) -Wno-misleading-indentation -Wno-format-overflow
 L_FLAGS =  $(PROF)
