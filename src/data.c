@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açık kaynak Türkçe Mud projesidir.                        *
- * Oyun geliştirmesi Jai ve Maru tarafından yönetilmektedir.               *
- * Unutulmaması gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aÃ§Ä±k kaynak TÃ¼rkÃ§e Mud projesidir.                        *
+ * Oyun geliÅŸtirmesi Jai ve Maru tarafÄ±ndan yÃ¶netilmektedir.               *
+ * UnutulmamasÄ± gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -133,16 +133,16 @@ char *	const	month_name	[] =
 {
 	(char*)"Albars",
 	(char*)"Kadimler",
-    (char*)"Büyük Acı",
+    (char*)"BÃ¼yÃ¼k AcÄ±",
 	(char*)"Zeytin",
-	(char*)"Yılan",
-	(char*)"Yelbüke",
+	(char*)"YÄ±lan",
+	(char*)"YelbÃ¼ke",
 	(char*)"Pusu",
-	(char*)"Savaş",
-	(char*)"Albastı",
-	(char*)"Gölge",
-	(char*)"Kara Ölüm",
-	(char*)"Alacakaranlık",
+	(char*)"SavaÅŸ",
+	(char*)"AlbastÄ±",
+	(char*)"GÃ¶lge",
+	(char*)"Kara Ã–lÃ¼m",
+	(char*)"AlacakaranlÄ±k",
 };
 
 void write_event_log(char *argument)

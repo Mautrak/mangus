@@ -6,6 +6,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Bunlari kurmamız lazım yoksa çalışmaz
 RUN apt-get update && apt-get install -y \
     build-essential \
+    gdb \
+    telnet \
     make \
     && rm -rf /var/lib/apt/lists/*
 
@@ -25,4 +27,5 @@ RUN mv src/mangus area/
 WORKDIR /app/area
 
 # Mangus'u çalıştırıyoruz, işte bu kadar
-CMD ["./mangus"]
+
+# CMD ["./mangus"]

@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
- * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
- * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aÃ§Ä±k kaynak TÃ¼rkÃ§e Mud projesidir.                        *
+ * Oyun geliÅŸtirmesi Jai ve Maru tarafÄ±ndan yÃ¶netilmektedir.               *
+ * UnutulmamasÄ± gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -14,11 +14,11 @@
 
 const struct pers_suffix_type pers_suffix_table[] =
 {
-	{(char*)"sS"	,(char*)"birisinin"	,(char*)"bir ölümsüzün"	,(char*)"n"	,(char*)"ýn",(char*)"in",(char*)"un",(char*)"ün"	},
-	{(char*)"mM"	,(char*)"birisini"	,(char*)"bir ölümsüzü"	,(char*)"y"	,(char*)"ý"	,(char*)"i"	,(char*)"u"	,(char*)"ü"	},
-	{(char*)"eE"	,(char*)"birisine"	,(char*)"bir ölümsüze"	,(char*)"y"	,(char*)"a"	,(char*)"e"	,(char*)"a"	,(char*)"e"	},
-	{(char*)"yY"	,(char*)"birisinde"	,(char*)"bir ölümsüzde"	,(char*)"d"	,(char*)"a"	,(char*)"e"	,(char*)"a"	,(char*)"e"	},
-	{(char*)"zZ"	,(char*)"birisinden",(char*)"bir ölümsüzden",(char*)"d"	,(char*)"an",(char*)"en",(char*)"an",(char*)"en"	},
+	{(char*)"sS"	,(char*)"birisinin"	,(char*)"bir Ã¶lÃ¼msÃ¼zÃ¼n"	,(char*)"n"	,(char*)"Ä±n",(char*)"in",(char*)"un",(char*)"Ã¼n"	},
+	{(char*)"mM"	,(char*)"birisini"	,(char*)"bir Ã¶lÃ¼msÃ¼zÃ¼"	,(char*)"y"	,(char*)"Ä±"	,(char*)"i"	,(char*)"u"	,(char*)"Ã¼"	},
+	{(char*)"eE"	,(char*)"birisine"	,(char*)"bir Ã¶lÃ¼msÃ¼ze"	,(char*)"y"	,(char*)"a"	,(char*)"e"	,(char*)"a"	,(char*)"e"	},
+	{(char*)"yY"	,(char*)"birisinde"	,(char*)"bir Ã¶lÃ¼msÃ¼zde"	,(char*)"d"	,(char*)"a"	,(char*)"e"	,(char*)"a"	,(char*)"e"	},
+	{(char*)"zZ"	,(char*)"birisinden",(char*)"bir Ã¶lÃ¼msÃ¼zden",(char*)"d"	,(char*)"an",(char*)"en",(char*)"an",(char*)"en"	},
     {NULL	,NULL			,NULL				,NULL	,NULL	,NULL	,NULL	,NULL	}
 };
 
@@ -27,14 +27,14 @@ char *ekler (CHAR_DATA *to, CHAR_DATA *ch, char *format)
 	int say;//pers_suffix_table'da kacinci elemanin okunacagini tutuyor.
 	char *i, *ek;// i BUF'u point edecek.
 	char buf[MAX_STRING_LENGTH];//return olacak bilgi burada
-	/* SAY deðiþkenine deðeri atanýyor */
+	/* SAY deÄŸiÅŸkenine deÄŸeri atanÄ±yor */
 	for(say=0;pers_suffix_table[say].belirtec[0] != '\0';say++)
 	{
 		if(	pers_suffix_table[say].belirtec[0]==*format ||
 			pers_suffix_table[say].belirtec[1]==*format	)
 				break;
 	}
-	if(say>=5)//tablodaki doðru elemaný bulamadýðý için çökme olmasýn diye.
+	if(say>=5)//tablodaki doÄŸru elemanÄ± bulamadÄ±ÄŸÄ± iÃ§in Ã§Ã¶kme olmasÄ±n diye.
 		say=1;
 	buf[0]='\0';
 	i=NULL;
@@ -42,8 +42,8 @@ char *ekler (CHAR_DATA *to, CHAR_DATA *ch, char *format)
 	{
 		sprintf(buf,"%s%s",	!IS_NPC(ch)?ch->name:ch->short_descr,
 							!IS_NPC(ch)?"'":"");
-		/*  sondaki sessizin yumuþamasý. aslýnda tek heceli kelimelerde
-		 *  yumusama olmaz. ama tek hece kontrolü yok.
+		/*  sondaki sessizin yumuÅŸamasÄ±. aslÄ±nda tek heceli kelimelerde
+		 *  yumusama olmaz. ama tek hece kontrolÃ¼ yok.
 		 */
 		if(IS_NPC(ch))
 		{
@@ -52,7 +52,7 @@ char *ekler (CHAR_DATA *to, CHAR_DATA *ch, char *format)
 				case 'p':
 					buf[strlen(buf)-1]='b';
 					break;
-				case 'ç':
+				case 'Ã§':
 					buf[strlen(buf)-1]='c';
 					break;
 				case 't':
@@ -89,7 +89,7 @@ char * son_harf_unlu(CHAR_DATA *ch, int say)
 	{
 		switch(isim[strlen(isim)-number])
 		{
-			case 'a': case 'ý':
+			case 'a': case 'Ä±':
 				if(say>2)
 				{
 					sprintf(buf,"d%s",pers_suffix_table[say].bir);
@@ -113,7 +113,7 @@ char * son_harf_unlu(CHAR_DATA *ch, int say)
 				}
 				sprintf(buf,"%s%s",(number==1)?(pers_suffix_table[say].sesli_eki):(""),pers_suffix_table[say].uc);
 				return ptr;
-			case 'ö': case 'ü':
+			case 'Ã¶': case 'Ã¼':
 				if(say>2)
 				{
 					sprintf(buf,"d%s",pers_suffix_table[say].dort);

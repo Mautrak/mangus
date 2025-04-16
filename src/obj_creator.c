@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açık kaynak Türkçe Mud projesidir.                        *
- * Oyun geliştirmesi Jai ve Maru tarafından yönetilmektedir.               *
- * Unutulmaması gerekenler: Nir, Kame, Randalin, Nyah, Sint                *
+ * Uzak Diyarlar aÃ§Ä±k kaynak TÃ¼rkÃ§e Mud projesidir.                        *
+ * Oyun geliÅŸtirmesi Jai ve Maru tarafÄ±ndan yÃ¶netilmektedir.               *
+ * UnutulmamasÄ± gerekenler: Nir, Kame, Randalin, Nyah, Sint                *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -917,27 +917,27 @@ void obj_random_name(OBJ_DATA *obj)
 			}
 			else if(obj->value[0]==WEAPON_SWORD){
 				free_string( obj->name );
-				obj->name = str_dup( "kılıç silah" );
+				obj->name = str_dup( "kÄ±lÄ±Ã§ silah" );
 				free_string( obj->short_descr );
-       			obj->short_descr = str_dup("bir kılıç");
+       			obj->short_descr = str_dup("bir kÄ±lÄ±Ã§");
 				free_string( obj->description );
-				obj->description = str_dup( "Bir kılıç burada duruyor." );
+				obj->description = str_dup( "Bir kÄ±lÄ±Ã§ burada duruyor." );
 			}
 			else if(obj->value[0]==WEAPON_DAGGER){
 				free_string( obj->name );
-				obj->name = str_dup( "hançer silah" );
+				obj->name = str_dup( "hanÃ§er silah" );
 				free_string( obj->short_descr );
-       			obj->short_descr = str_dup("bir hançer");
+       			obj->short_descr = str_dup("bir hanÃ§er");
 				free_string( obj->description );
-				obj->description = str_dup( "Bir hançer burada duruyor." );
+				obj->description = str_dup( "Bir hanÃ§er burada duruyor." );
 			}
 			else if(obj->value[0]==WEAPON_SPEAR){
 				free_string( obj->name );
-				obj->name = str_dup( "mızrak silah" );
+				obj->name = str_dup( "mÄ±zrak silah" );
 				free_string( obj->short_descr );
-       			obj->short_descr = str_dup("bir mızrak");
+       			obj->short_descr = str_dup("bir mÄ±zrak");
 				free_string( obj->description );
-				obj->description = str_dup( "Bir mızrak burada duruyor." );
+				obj->description = str_dup( "Bir mÄ±zrak burada duruyor." );
 			}
 			else if(obj->value[0]==WEAPON_MACE){
 				free_string( obj->name );
@@ -957,19 +957,19 @@ void obj_random_name(OBJ_DATA *obj)
 			}
 			else if(obj->value[0]==WEAPON_FLAIL){
 				free_string( obj->name );
-				obj->name = str_dup( "döven silah" );
+				obj->name = str_dup( "dÃ¶ven silah" );
 				free_string( obj->short_descr );
-       			obj->short_descr = str_dup("bir döven");
+       			obj->short_descr = str_dup("bir dÃ¶ven");
 				free_string( obj->description );
-				obj->description = str_dup( "Bir döven burada duruyor." );
+				obj->description = str_dup( "Bir dÃ¶ven burada duruyor." );
 			}
 			else if(obj->value[0]==WEAPON_WHIP){
 				free_string( obj->name );
-				obj->name = str_dup( "kırbaç silah" );
+				obj->name = str_dup( "kÄ±rbaÃ§ silah" );
 				free_string( obj->short_descr );
-       			obj->short_descr = str_dup("bir kırbaç");
+       			obj->short_descr = str_dup("bir kÄ±rbaÃ§");
 				free_string( obj->description );
-				obj->description = str_dup( "Bir kırbaç burada duruyor." );
+				obj->description = str_dup( "Bir kÄ±rbaÃ§ burada duruyor." );
 			}
 			else if(obj->value[0]==WEAPON_POLEARM){
 				free_string( obj->name );
@@ -997,11 +997,11 @@ void obj_random_name(OBJ_DATA *obj)
 			}
 			else if(obj->value[0]==WEAPON_LANCE){
 				free_string( obj->name );
-				obj->name = str_dup( "kargı silah" );
+				obj->name = str_dup( "kargÄ± silah" );
 				free_string( obj->short_descr );
-       			obj->short_descr = str_dup("bir kargı");
+       			obj->short_descr = str_dup("bir kargÄ±");
 				free_string( obj->description );
-				obj->description = str_dup( "Bir kargı burada duruyor." );
+				obj->description = str_dup( "Bir kargÄ± burada duruyor." );
 			}
 			else{
 				free_string( obj->name );
@@ -1009,7 +1009,7 @@ void obj_random_name(OBJ_DATA *obj)
 				free_string( obj->short_descr );
        			obj->short_descr = str_dup("bilinmeyen bir silah");
 				free_string( obj->description );
-				obj->description = str_dup( "Bilinmeyen bir tür silah burada duruyor." );
+				obj->description = str_dup( "Bilinmeyen bir tÃ¼r silah burada duruyor." );
 			}
 
 	}

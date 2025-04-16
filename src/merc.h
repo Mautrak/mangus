@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
- * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
- * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aÃ§Ä±k kaynak TÃ¼rkÃ§e Mud projesidir.                        *
+ * Oyun geliÅŸtirmesi Jai ve Maru tarafÄ±ndan yÃ¶netilmektedir.               *
+ * UnutulmamasÄ± gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -615,7 +615,7 @@ struct	shop_data
 struct	class_type
 {
     const char *	name[2];			/* the full name of the class */
-    const char 	who_name	[4];	/* Three-letter name for 'who'	*/
+    const char 	who_name	[8];	/* Three-letter name for 'who'	*/
     sh_int	attr_prime;		/* Prime attribute		*/
     sh_int	weapon;			/* First weapon			*/
     sh_int	guild[MAX_GUILD];	/* Vnum of guild rooms		*/
@@ -2841,8 +2841,8 @@ extern sh_int  gsn_mental_knife;
  * Description macros.
  */
 #define PERS(ch, looker)	( can_see( looker, (ch) ) ?         \
-				( IS_NPC(ch) ? (ch)->short_descr :((IS_VAMPIRE(ch) && !IS_IMMORTAL(looker))? "Çirkin bir varlýk" : (ch)->name ) ) \
-				: ( (!IS_NPC(ch) && (ch)->level > (LEVEL_HERO)) ? "bir ölümsüz" : "birisi" ) )
+				( IS_NPC(ch) ? (ch)->short_descr :((IS_VAMPIRE(ch) && !IS_IMMORTAL(looker))? "Ã‡irkin bir varlÄ±k" : (ch)->name ) ) \
+				: ( (!IS_NPC(ch) && (ch)->level > (LEVEL_HERO)) ? "bir Ã¶lÃ¼msÃ¼z" : "birisi" ) )
 /* new defines */
 #define MAX_CHARM(ch)	((get_curr_stat(ch,STAT_INT) / 6) + (ch->level / 45))
 

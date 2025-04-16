@@ -3,7 +3,7 @@ Filename okyanus.are~
 Name Okyanus~
 Builder Jai~
 Translator Jai~
-Language Türkçe~
+Language TÃ¼rkÃ§e~
 Lowlevel 40
 Highlevel 50
 Minvnum 2600
@@ -22,913 +22,913 @@ END
 
 #ROOMS
 #2600
-Haon Dor kıyısında~
-Okyanusun kıyısındasın. Doğuda, Haon Dor ormanını görüyorsun. Batıda ise okyanus var.
+Haon Dor kÄ±yÄ±sÄ±nda~
+Okyanusun kÄ±yÄ±sÄ±ndasÄ±n. DoÄŸuda, Haon Dor ormanÄ±nÄ± gÃ¶rÃ¼yorsun. BatÄ±da ise okyanus var.
 ~
 0 AD 0
 D1
-Islak kumsalı görüyorsun.
+Islak kumsalÄ± gÃ¶rÃ¼yorsun.
 ~
 ~
 0 0 6181
 D3
-Okyanusu görüyorsun.
+Okyanusu gÃ¶rÃ¼yorsun.
 ~
 ~
 0 0 2601
 S
 #2601
-Kıyıya yakın bir yerde~
-Okyanusun kıyıya yakın bir yerindesin. Uzak doğuda Haon Dor ormanını görüyorsun.
-Batıda ise okyanus var.
+KÄ±yÄ±ya yakÄ±n bir yerde~
+Okyanusun kÄ±yÄ±ya yakÄ±n bir yerindesin. Uzak doÄŸuda Haon Dor ormanÄ±nÄ± gÃ¶rÃ¼yorsun.
+BatÄ±da ise okyanus var.
 ~
 0 AD 0
 D1
-Su sığlaşıyor.
+Su sÄ±ÄŸlaÅŸÄ±yor.
 ~
 ~
 0 0 2600
 D3
-Okyanusu görüyorsun.
+Okyanusu gÃ¶rÃ¼yorsun.
 ~
 ~
 0 0 2602
 S
 #2602
 Okyanusta~
-Açık denizdesin. Doğuda, uzakta, karayı görüyorsun.
+AÃ§Ä±k denizdesin. DoÄŸuda, uzakta, karayÄ± gÃ¶rÃ¼yorsun.
 ~
 0 AD 0
 D1
-Kıyıya yakın.
+KÄ±yÄ±ya yakÄ±n.
 ~
 ~
 0 0 2601
 D3
-Okyanusu görüyorsun.
+Okyanusu gÃ¶rÃ¼yorsun.
 ~
 ~
 0 0 2603
 S
 #2603
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2602
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2604
 S
 #2604
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2603
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2605
 S
 #2605
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2604
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2604
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2604
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2606
 S
 #2606
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2604
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2605
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2607
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2604
 S
 #2607
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2608
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2607
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2606
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2609
 S
 #2608
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2608
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2608
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2609
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2608
 S
 #2609
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2609
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2607
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2610
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2609
 S
 #2610
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2610
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2609
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2610
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2611
 S
 #2611
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2612
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2611
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2610
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2611
 S
 #2612
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2612
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2612
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2611
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2613
 S
 #2613
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2613
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2612
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2613
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2614
 S
 #2614
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2614
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2613
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2614
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2615
 S
 #2615
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2616
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2614
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2615
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2615
 S
 #2616
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2616
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2616
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2615
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2617
 S
 #2617
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2616
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2617
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2618
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2617
 S
 #2618
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2617
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2618
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2619
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2618
 S
 #2619
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2618
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2619
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2620
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2619
 S
 #2620
 Okyanusta~
-Açık denizdesin. Tehlikesiz, küçük bir girdap dönüp duruyor.
+AÃ§Ä±k denizdesin. Tehlikesiz, kÃ¼Ã§Ã¼k bir girdap dÃ¶nÃ¼p duruyor.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2619
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2620
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2620
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2621
 S
 #2621
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2621
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2620
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2621
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2622
 S
 #2622
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2622
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2621
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2622
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2623
 S
 #2623
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2623
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2622
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2623
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2624
 S
 #2624
 Okyanusta~
-Açık denizdesin. Kuzey ve güneyden gelen güçlü akıntılar nedeniyle yalnızca
-doğu ve batıya ilerleyebilirsin.
+AÃ§Ä±k denizdesin. Kuzey ve gÃ¼neyden gelen gÃ¼Ã§lÃ¼ akÄ±ntÄ±lar nedeniyle yalnÄ±zca
+doÄŸu ve batÄ±ya ilerleyebilirsin.
 ~
 0 AD 0
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2623
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2625
 S
 #2625
 Okyanusta~
-Açık denizdesin. Kuzey ve güneyden gelen güçlü akıntılar nedeniyle yalnızca
-doğu ve batıya ilerleyebilirsin.
+AÃ§Ä±k denizdesin. Kuzey ve gÃ¼neyden gelen gÃ¼Ã§lÃ¼ akÄ±ntÄ±lar nedeniyle yalnÄ±zca
+doÄŸu ve batÄ±ya ilerleyebilirsin.
 ~
 0 AD 0
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2624
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2626
 S
 #2626
 Okyanusta~
-Açık denizdesin. Kuzey ve güneyden gelen güçlü akıntılar nedeniyle yalnızca
-doğu ve batıya ilerleyebilirsin.
+AÃ§Ä±k denizdesin. Kuzey ve gÃ¼neyden gelen gÃ¼Ã§lÃ¼ akÄ±ntÄ±lar nedeniyle yalnÄ±zca
+doÄŸu ve batÄ±ya ilerleyebilirsin.
 ~
 0 AD 0
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2625
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2627
 S
 #2627
 Okyanusta~
-Açık denizdesin. Batı ve güneyden gelen güçlü akıntılar nedeniyle yalnızca
-doğu ve kuzeye ilerleyebilirsin.
+AÃ§Ä±k denizdesin. BatÄ± ve gÃ¼neyden gelen gÃ¼Ã§lÃ¼ akÄ±ntÄ±lar nedeniyle yalnÄ±zca
+doÄŸu ve kuzeye ilerleyebilirsin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2628
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2626
 S
 #2628
 Okyanusta~
-Açık denizdesin. Batı ve güneyden gelen güçlü akıntılar nedeniyle yalnızca
-doğu ve kuzeye ilerleyebilirsin.
+AÃ§Ä±k denizdesin. BatÄ± ve gÃ¼neyden gelen gÃ¼Ã§lÃ¼ akÄ±ntÄ±lar nedeniyle yalnÄ±zca
+doÄŸu ve kuzeye ilerleyebilirsin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2629
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2627
 S
 #2629
 Okyanusta~
-Açık denizdesin. Kuzey ve güneyden gelen güçlü akıntılar nedeniyle yalnızca
-doğu ve batıya ilerleyebilirsin.
+AÃ§Ä±k denizdesin. Kuzey ve gÃ¼neyden gelen gÃ¼Ã§lÃ¼ akÄ±ntÄ±lar nedeniyle yalnÄ±zca
+doÄŸu ve batÄ±ya ilerleyebilirsin.
 ~
 0 AD 0
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2628
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2630
 S
 #2630
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2631
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2629
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2630
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2630
 S
 #2631
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2632
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2630
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2630
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2630
 S
 #2632
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2633
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2630
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2630
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2630
 S
 #2633
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2634
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2630
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2630
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2630
 S
 #2634
 Okyanusta~
-Açık denizdesin.
+AÃ§Ä±k denizdesin.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2634
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2633
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2634
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2635
 S
 #2635
 Okyanusta~
-Açık denizdesin. Uzak batıda, ufukta bir karartı görüyorsun.
+AÃ§Ä±k denizdesin. Uzak batÄ±da, ufukta bir karartÄ± gÃ¶rÃ¼yorsun.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2634
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2634
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2634
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2636
 S
 #2636
-Kara göründü!~
-Açık denizdesin. Batıda bir kara parçası görüyorsun.
+Kara gÃ¶rÃ¼ndÃ¼!~
+AÃ§Ä±k denizdesin. BatÄ±da bir kara parÃ§asÄ± gÃ¶rÃ¼yorsun.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2635
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2635
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2635
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2637
 S
 #2637
-Kara göründü!~
-Açık denizdesin. Batıda bir kara parçası görüyorsun.
+Kara gÃ¶rÃ¼ndÃ¼!~
+AÃ§Ä±k denizdesin. BatÄ±da bir kara parÃ§asÄ± gÃ¶rÃ¼yorsun.
 ~
 0 AD 0
 D0
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2636
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2636
 D2
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2636
 D3
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2638
 S
 #2638
-Sığ deniz~
-Batıda karayı, doğuda ise açık denizi görüyorsun.
+SÄ±ÄŸ deniz~
+BatÄ±da karayÄ±, doÄŸuda ise aÃ§Ä±k denizi gÃ¶rÃ¼yorsun.
 ~
 0 AD 0
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2637
 D3
-Sığ deniz.
+SÄ±ÄŸ deniz.
 ~
 ~
 0 0 2639
 S
 #2639
-Sığ deniz~
-Batıda karayı, doğuda ise açık denizi görüyorsun.
+SÄ±ÄŸ deniz~
+BatÄ±da karayÄ±, doÄŸuda ise aÃ§Ä±k denizi gÃ¶rÃ¼yorsun.
 ~
 0 AD 0
 D1
-Açık deniz.
+AÃ§Ä±k deniz.
 ~
 ~
 0 0 2638

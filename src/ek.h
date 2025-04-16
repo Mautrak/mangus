@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açık kaynak Türkçe Mud projesidir.                        *
- * Oyun geliştirmesi Jai ve Maru tarafından yönetilmektedir.               *
- * Unutulmaması gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aÃ§Ä±k kaynak TÃ¼rkÃ§e Mud projesidir.                        *
+ * Oyun geliÅŸtirmesi Jai ve Maru tarafÄ±ndan yÃ¶netilmektedir.               *
+ * UnutulmamasÄ± gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -28,10 +28,10 @@ struct pers_suffix_type
     char *birisi;
 	char *olumsuz;
 	char *sesli_eki;
-	char *bir;//a,ı
+	char *bir;//a,Ä±
 	char *iki;//e,i
 	char *uc;//o,u
-	char *dort;//ö,ü
+	char *dort;//Ã¶,Ã¼
 };
 
 extern	const	struct	pers_suffix_type	pers_suffix_table[];

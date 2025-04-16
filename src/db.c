@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar a��k kaynak T�rk�e Mud projesidir.                        *
- * Oyun geli�tirmesi Jai ve Maru taraf�ndan y�netilmektedir.               *
- * Unutulmamas� gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aï¿½ï¿½k kaynak Tï¿½rkï¿½e Mud projesidir.                        *
+ * Oyun geliï¿½tirmesi Jai ve Maru tarafï¿½ndan yï¿½netilmektedir.               *
+ * Unutulmamasï¿½ gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -858,7 +858,7 @@ void load_old_obj( FILE *fp )
 	    ||  is_name((char*)"claymore",pObjIndex->name)
       ||  is_name((char*)"iki-el",pObjIndex->name)
       ||  is_name((char*)"ikiel",pObjIndex->name)
-      ||  is_name((char*)"�ift-el",pObjIndex->name))
+      ||  is_name((char*)"ï¿½ift-el",pObjIndex->name))
 		SET_BIT(pObjIndex->value[4],WEAPON_TWO_HANDS);
 	}
 
@@ -1007,7 +1007,7 @@ void load_new_old_obj( FILE *fp )
 	    ||  is_name((char*)"claymore",pObjIndex->name)
       ||  is_name((char*)"iki-el",pObjIndex->name)
       ||  is_name((char*)"ikiel",pObjIndex->name)
-      ||  is_name((char*)"�ift-el",pObjIndex->name))
+      ||  is_name((char*)"ï¿½ift-el",pObjIndex->name))
 		SET_BIT(pObjIndex->value[4],WEAPON_TWO_HANDS);
 	}
 
@@ -1543,13 +1543,13 @@ void area_update( void )
 	    ROOM_INDEX_DATA *pRoomIndex;
 
 	    reset_area( pArea );
-      sprintf(buf,"%s b�lgesi reset'lendi.",pArea->name);
+      sprintf(buf,"%s bï¿½lgesi reset'lendi.",pArea->name);
 	    wiznet(buf,NULL,NULL,WIZ_RESETS,0,0);
 
 	    if (pArea->resetmsg)
 	    	 sprintf(buf,"%s\n\r",pArea->resetmsg);
 	    else
-      sprintf(buf,"Ya�am�n yeni seslerini duyuyorsun...\n\r");
+      sprintf(buf,"Yaï¿½amï¿½n yeni seslerini duyuyorsun...\n\r");
 
             for ( d = descriptor_list; d != NULL; d = d->next )
 	       {
@@ -1613,7 +1613,7 @@ void reset_area( AREA_DATA *pArea )
         ( get_skill(ch, gsn_track)>50) &&
         ( !IS_SET(ch->in_room->room_flags, ROOM_INDOORS) ) )
       {
-        send_to_char("Ya�mur izleri temizliyor.\n\r", ch );
+        send_to_char("Yaï¿½mur izleri temizliyor.\n\r", ch );
       }
     }
     for (i=pArea->min_vnum; i<pArea->max_vnum; i++)
@@ -3379,7 +3379,7 @@ void do_areas( CHAR_DATA *ch, char *argument )
 {
     AREA_DATA *pArea;
 
-    printf_to_char(ch,"B�lgeler:\n\r\n\r");
+    printf_to_char(ch,"Bï¿½lgeler:\n\r\n\r");
     for ( pArea = area_first; pArea != NULL; pArea = pArea->next )
     {
         printf_to_char(ch,"[{W%2d %3d{x] {c%25s{x - {c%s{x\n\r",pArea->low_range,pArea->high_range,pArea->name,pArea->path);
@@ -3820,7 +3820,7 @@ void append_file( CHAR_DATA *ch, char *file, char *str )
     if ( ( fp = fopen( file, "a" ) ) == NULL )
     {
 	perror( file );
-	send_to_char( "Dosya a��lamad�!\n\r", ch );
+	send_to_char( "Dosya aï¿½ï¿½lamadï¿½!\n\r", ch );
     }
     else
     {

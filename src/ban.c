@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açık kaynak Türkçe Mud projesidir.                        *
- * Oyun geliştirmesi Jai ve Maru tarafından yönetilmektedir.               *
- * Unutulmaması gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aÃ§Ä±k kaynak TÃ¼rkÃ§e Mud projesidir.                        *
+ * Oyun geliÅŸtirmesi Jai ve Maru tarafÄ±ndan yÃ¶netilmektedir.               *
+ * UnutulmamasÄ± gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -181,7 +181,7 @@ void ban_site(CHAR_DATA *ch, char *argument, bool fPerm)
     {
 	if (ban_list == NULL)
 	{
-	    send_to_char("Şu an yasaklı site yok.\n\r",ch);
+	    send_to_char("Åu an yasaklÄ± site yok.\n\r",ch);
 	    return;
   	}
 	buffer = new_buf();
@@ -240,7 +240,7 @@ void ban_site(CHAR_DATA *ch, char *argument, bool fPerm)
 
     if (strlen(name) == 0)
     {
-	send_to_char("Bir şeyi yasaklaman gerekiyor.\n\r",ch);
+	send_to_char("Bir ÅŸeyi yasaklaman gerekiyor.\n\r",ch);
 	return;
     }
 
@@ -251,7 +251,7 @@ void ban_site(CHAR_DATA *ch, char *argument, bool fPerm)
         {
 	    if (pban->level > get_trust(ch))
 	    {
-            	send_to_char( "Bu yasak daha yüksek seviyeli biri tarafından koyulmuş.\n\r", ch );
+            	send_to_char( "Bu yasak daha yÃ¼ksek seviyeli biri tarafÄ±ndan koyulmuÅŸ.\n\r", ch );
             	return;
 	    }
 	    else
@@ -336,6 +336,6 @@ void do_allow( CHAR_DATA *ch, char *argument )
         }
     }
 
-    send_to_char( "Bu site yasaklı değil.\n\r", ch );
+    send_to_char( "Bu site yasaklÄ± deÄŸil.\n\r", ch );
     return;
 }
