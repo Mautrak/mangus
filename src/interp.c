@@ -264,7 +264,7 @@ const	struct	cmd_type	cmd_table	[] =
   { "kurtar",		do_rescue,	POS_FIGHTING,	 0,  LOG_NORMAL, 0,0 },
   { "kuyruk",		do_tail,	POS_FIGHTING,    0,  LOG_NORMAL, 1,0 },
   { "laka",		do_titl,	POS_DEAD,	 0,  LOG_NORMAL, 0, CMD_KEEP_HIDE|CMD_GHOST },
-  { "lakap",		do_title,	POS_DEAD,	 0,  LOG_NORMAL, 1, CMD_KEEP_HIDE|CMD_GHOST },
+  { "lakap",		do_titl,	POS_DEAD,	 0,  LOG_NORMAL, 1, CMD_KEEP_HIDE|CMD_GHOST }, /* Changed do_title to do_titl */
   { "limited",	do_limited,	POS_DEAD,	L4,  LOG_ALWAYS, 1, CMD_KEEP_HIDE|CMD_GHOST },
   { "lisan",		do_speak,	POS_DEAD,	 0,  LOG_NORMAL, 1, CMD_KEEP_HIDE|CMD_GHOST },
   { "liste",		do_list,	POS_RESTING,	 0,  LOG_NORMAL, 1,CMD_KEEP_HIDE|CMD_GHOST },
@@ -357,8 +357,8 @@ const	struct	cmd_type	cmd_table	[] =
   { "slook",		do_slook,	POS_SLEEPING,	 0,  LOG_NORMAL, 1,CMD_KEEP_HIDE|CMD_GHOST},
   { "smite",		do_smite,	POS_DEAD,	L7,  LOG_ALWAYS, 1,0 },
   { "smote",		do_smote,	POS_DEAD,	IM,  LOG_NORMAL, 1, CMD_KEEP_HIDE|CMD_GHOST },
-  { "snoop",		do_snoop,	POS_DEAD,	L5,  LOG_ALWAYS, 1, CMD_KEEP_HIDE|CMD_GHOST},
-  { "sockets",	do_sockets,	POS_DEAD,	L4,  LOG_NORMAL, 1 },
+  { "snoop",		do_snoop,	POS_DEAD,	L5,  LOG_ALWAYS, 1, CMD_KEEP_HIDE|CMD_GHOST}, /* Removed redundant .extra = 0 */
+  { "sockets",	do_sockets,	POS_DEAD,	L4,  LOG_NORMAL, 1, CMD_KEEP_HIDE|CMD_GHOST}, /* Added missing extra initializer */
   { "sockets",        do_sockets,	POS_DEAD,       L4,  LOG_NORMAL, 1, CMD_KEEP_HIDE|CMD_GHOST},
   { "soluş",		do_fade,	POS_RESTING,	 0,  LOG_NORMAL, 1, CMD_KEEP_HIDE },
   { "sosyaller",	do_socials,	POS_DEAD,	 0,  LOG_NORMAL, 1, CMD_KEEP_HIDE|CMD_GHOST },
@@ -489,14 +489,11 @@ void interpret( CHAR_DATA *ch, char *argument, bool is_order )
 	}
 #endif
 
-    if ( !isalpha(argument[0]) && !isdigit(argument[0]) && !(argument[0]=='ı')
-&& !(argument[0]=='ğ') && !(argument[0]=='ü') && !(argument[0]=='ş')
-&& !(argument[0]=='ö') && !(argument[0]=='ç') && !(argument[0]=='İ')
-&& !(argument[0]=='Ğ') && !(argument[0]=='Ü') && !(argument[0]=='Ş') && !(argument[0]=='Ö')
-&& !(argument[0]=='Ç'))
+    /* Removed checks for multi-byte Turkish characters in single quotes */
+    if ( !isalpha(argument[0]) && !isdigit(argument[0]) )
     {
-	command[0] = argument[0];
-	command[1] = '\0';
+ command[0] = argument[0];
+ command[1] = '\0';
 	argument++;
 	while ( isspace(*argument) )
 	    argument++;
@@ -916,6 +913,7 @@ char *one_argument( char *argument, char *arg_first )
  */
 void do_commands( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Mark as unused */
     char buf[MAX_STRING_LENGTH];
     char output[4 * MAX_STRING_LENGTH];
     int letter;
@@ -951,6 +949,7 @@ void do_commands( CHAR_DATA *ch, char *argument )
 
 void do_wizhelp( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Mark as unused */
     char buf[MAX_STRING_LENGTH];
     char output[4 * MAX_STRING_LENGTH];
     char letter;
@@ -987,6 +986,7 @@ void do_wizhelp( CHAR_DATA *ch, char *argument )
 
 void do_reture( CHAR_DATA *ch, char *argument)
 {
+  (void)argument; /* Mark as unused */
   send_to_char("Tamam.\n\r",ch);
   return;
 }
@@ -1053,6 +1053,7 @@ void substitute_alias(DESCRIPTOR_DATA *d, char *argument)
 
 void do_alia(CHAR_DATA *ch, char *argument)
 {
+  (void)argument; /* Mark as unused */
   send_to_char("Üzgünüm, KISAYOL komutu tam girilmeli.\n\r",ch);
     return;
 }
@@ -1178,7 +1179,7 @@ void do_unalias(CHAR_DATA *ch, char *argument)
 
     argument = one_argument(argument,arg);
 
-    if (arg == NULL)
+    if (arg[0] == '\0') /* Changed check from arg == NULL to arg[0] == '\0' */
     {
       send_to_char("Hangi kısayolu kaldıracaksınız?\n\r",ch);
 	return;

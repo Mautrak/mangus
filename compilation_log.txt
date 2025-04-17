@@ -1,0 +1,59 @@
+src/act_info.c:3044:39: warning: comparing a pointer to a null character constant; did you mean to compare to NULL? [-Wpointer-compare]
+ 3044 |       if ( skill_table[sn].name[0] == '\0' )
+      |                                       ^~~~
+      |                                       (void *)0
+src/act_info.c:4120:27: warning: comparison of array 'skill_table[sn].name' equal to a null pointer is always false [-Wtautological-pointer-compare]
+ 4120 |             if ( skill_table[sn].name == NULL || skill_table[sn].name[0] == '\0' )
+      |                  ~~~~~~~~~~~~~~~~^~~~    ~~~~
+src/act_info.c:4120:70: warning: comparing a pointer to a null character constant; did you mean to compare to NULL? [-Wpointer-compare]
+ 4120 |             if ( skill_table[sn].name == NULL || skill_table[sn].name[0] == '\0' )
+      |                                                                             ^~~~
+      |                                                                             (void *)0
+3 warnings generated.
+src/act_wiz.c:3511:27: warning: comparison of array 'skill_table[sn].name' equal to a null pointer is always false [-Wtautological-pointer-compare]
+ 3511 |             if ( skill_table[sn].name == NULL || skill_table[sn].name[0] == '\0' )
+      |                  ~~~~~~~~~~~~~~~~^~~~    ~~~~
+src/act_wiz.c:3511:70: warning: comparing a pointer to a null character constant; did you mean to compare to NULL? [-Wpointer-compare]
+ 3511 |             if ( skill_table[sn].name == NULL || skill_table[sn].name[0] == '\0' )
+      |                                                                             ^~~~
+      |                                                                             (void *)0
+src/act_wiz.c:3644:29: warning: comparison of array 'skill_table[sn].name' not equal to a null pointer is always true [-Wtautological-pointer-compare]
+ 3644 |             if ( ( skill_table[sn].name != NULL && skill_table[sn].name[0] != '\0' )
+      |                    ~~~~~~~~~~~~~~~~^~~~    ~~~~
+src/act_wiz.c:3644:72: warning: comparing a pointer to a null character constant; did you mean to compare to NULL? [-Wpointer-compare]
+ 3644 |             if ( ( skill_table[sn].name != NULL && skill_table[sn].name[0] != '\0' )
+      |                                                                               ^~~~
+      |                                                                               (void *)0
+src/act_wiz.c:5047:28: warning: comparison of array 'skill_table[sn].name' not equal to a null pointer is always true [-Wtautological-pointer-compare]
+ 5047 |             if ( (skill_table[sn].name != NULL && skill_table[sn].name[0] != '\0') && !RACE_OK(victim,sn) )
+      |                   ~~~~~~~~~~~~~~~~^~~~    ~~~~
+src/act_wiz.c:5047:71: warning: comparing a pointer to a null character constant; did you mean to compare to NULL? [-Wpointer-compare]
+ 5047 |             if ( (skill_table[sn].name != NULL && skill_table[sn].name[0] != '\0') && !RACE_OK(victim,sn) )
+      |                                                                              ^~~~
+      |                                                                              (void *)0
+src/act_wiz.c:5053:28: warning: comparison of array 'skill_table[sn].name' not equal to a null pointer is always true [-Wtautological-pointer-compare]
+ 5053 |             if ( (skill_table[sn].name != NULL && skill_table[sn].name[0] != '\0') && IS_SET(skill_table[sn].race, (1 << (victim->pcdata->race - 1))) )
+      |                   ~~~~~~~~~~~~~~~~^~~~    ~~~~
+src/act_wiz.c:5053:71: warning: comparing a pointer to a null character constant; did you mean to compare to NULL? [-Wpointer-compare]
+ 5053 |             if ( (skill_table[sn].name != NULL && skill_table[sn].name[0] != '\0') && IS_SET(skill_table[sn].race, (1 << (victim->pcdata->race - 1))) )
+      |                                                                              ^~~~
+      |                                                                              (void *)0
+8 warnings generated.
+src/db.c:3663:34: warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+ 3663 | void init_random_number_generator( )
+      |                                  ^
+      |                                    void
+1 warning generated.
+src/exlist.c:113:4: warning: add explicit braces to avoid dangling else [-Wdangling-else]
+  113 |                         else {
+      |                         ^
+1 warning generated.
+src/magic.c:96:34: warning: comparing a pointer to a null character constant; did you mean to compare to NULL? [-Wpointer-compare]
+   96 |         if ( skill_table[sn].name[0] == '\0' )
+      |                                         ^~~~
+      |                                         (void *)0
+src/magic.c:119:33: warning: comparing a pointer to a null character constant; did you mean to compare to NULL? [-Wpointer-compare]
+  119 |         if (skill_table[sn].name[0] == '\0')
+      |                                        ^~~~
+      |                                        (void *)0
+2 warnings generated.

@@ -139,6 +139,7 @@ void do_gain(CHAR_DATA *ch, char *argument)
 
 void do_spells(CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     char spell_list[LEVEL_HERO][MAX_STRING_LENGTH];
     char spell_columns[LEVEL_HERO];
     int sn,lev,mana;
@@ -159,7 +160,8 @@ void do_spells(CHAR_DATA *ch, char *argument)
 
     for (sn = 0; sn < MAX_SKILL; sn++)
     {
-      if (skill_table[sn].name == NULL)
+      /* Check if the first name pointer is NULL */
+      if (skill_table[sn].name[0] == NULL)
         break;
 
       if (skill_table[sn].skill_level[ch->iclass] < LEVEL_HERO &&
@@ -206,6 +208,7 @@ void do_spells(CHAR_DATA *ch, char *argument)
 
 void do_skills(CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     char skill_list[LEVEL_HERO][MAX_STRING_LENGTH];
     char skill_columns[LEVEL_HERO];
     int sn,lev;
@@ -224,7 +227,8 @@ void do_skills(CHAR_DATA *ch, char *argument)
 
     for (sn = 0; sn < MAX_SKILL; sn++)
     {
-      if (skill_table[sn].name == NULL )
+      /* Check if the first name pointer is NULL */
+      if (skill_table[sn].name[0] == NULL )
         break;
 
 
@@ -269,6 +273,7 @@ void do_skills(CHAR_DATA *ch, char *argument)
 
 int base_exp(CHAR_DATA *ch, int points)
 {
+  (void) points; /* Unused parameter */
   int expl;
 
   if (IS_NPC(ch))    return 1500;
@@ -287,6 +292,8 @@ int exp_to_level(CHAR_DATA *ch, int points)
 
 int exp_this_level(CHAR_DATA *ch, int level, int points)
 {
+  (void) level; /* Unused parameter */
+  (void) points; /* Unused parameter */
   int base;
 
   base = base_exp(ch,points);
@@ -296,6 +303,7 @@ int exp_this_level(CHAR_DATA *ch, int level, int points)
 
 int exp_per_level(CHAR_DATA *ch, int points)
 {
+    (void) points; /* Unused parameter */
     int expl;
 
     if (IS_NPC(ch))
@@ -417,7 +425,8 @@ void do_slist(CHAR_DATA *ch, char *argument)
 
     for (sn = 0; sn < MAX_SKILL; sn++)
     {
-      if (skill_table[sn].name == NULL )
+      /* Check if the first name pointer is NULL */
+      if (skill_table[sn].name[0] == NULL )
         break;
 
 
@@ -659,6 +668,7 @@ void do_learn( CHAR_DATA *ch, char *argument )
 
 void do_teach( CHAR_DATA *ch, char *argument)
 {
+ (void) argument; /* Unused parameter */
  if (IS_NPC(ch) || ch->level != LEVEL_HERO)
   {
     send_to_char("Bir kahraman olmalısın.\n\r",ch);

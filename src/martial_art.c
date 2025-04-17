@@ -156,6 +156,7 @@ act_color( "$C$N wields his second weapon as first!$c",  ch, NULL, victim,
 
 void do_berserk( CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     int chance, hp_percent;
 
     if ((chance = get_skill(ch,gsn_berserk)) == 0
@@ -1093,6 +1094,7 @@ void do_rescue( CHAR_DATA *ch, char *argument )
 
 void do_kick( CHAR_DATA *ch, char *argument )
 {
+    (void) argument; /* Unused parameter */
     CHAR_DATA *victim;
     int kick_dam;
     int chance;
@@ -1142,6 +1144,7 @@ void do_kick( CHAR_DATA *ch, char *argument )
 
 void do_circle( CHAR_DATA *ch, char *argument )
 {
+    (void) argument; /* Unused parameter */
     CHAR_DATA *victim;
     CHAR_DATA *person;
     bool second;
@@ -1389,6 +1392,7 @@ void do_nerve(CHAR_DATA *ch, char *argument)
 
 void do_endure(CHAR_DATA *ch, char *arg)
 {
+  (void) arg; /* Unused parameter */
   AFFECT_DATA af;
 
   if (IS_NPC(ch))
@@ -1569,10 +1573,11 @@ void do_assassinate( CHAR_DATA *ch, char *argument )
 
   WAIT_STATE( ch, skill_table[gsn_assassinate].beats );
 
-  chance += int( get_curr_stat( ch , STAT_STR ) / 4 );
-  chance += int( get_curr_stat( ch , STAT_DEX ) / 2 );
-  chance += int( ch->pcdata->familya[victim->race] / 25 ) ;
-  chance += int( ( get_skill( ch , gsn_assassinate ) - 75 ) / 2 ) ;
+  /* Correct C-style cast */
+  chance += (int)( get_curr_stat( ch , STAT_STR ) / 4 );
+  chance += (int)( get_curr_stat( ch , STAT_DEX ) / 2 );
+  chance += (int)( ch->pcdata->familya[victim->race] / 25 ) ;
+  chance += (int)( ( get_skill( ch , gsn_assassinate ) - 75 ) / 2 ) ;
   
 	// en azindan bir eli dolu
 	if ( get_eq_char(ch, WEAR_LEFT) != NULL
@@ -1618,6 +1623,7 @@ void do_assassinate( CHAR_DATA *ch, char *argument )
 
 void do_caltraps(CHAR_DATA *ch, char *argument)
 {
+  (void) argument; /* Unused parameter */
   CHAR_DATA *victim = ch->fighting;
 
   if (IS_NPC(ch) || ch->pcdata->learned[gsn_caltraps] < 1)
@@ -2027,6 +2033,7 @@ void do_blackjack(CHAR_DATA *ch, char *argument)
 
 void do_bloodthirst( CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     int chance, hp_percent;
 
     if (ch_skill_nok_nomessage(ch,gsn_bloodthirst))
@@ -2104,6 +2111,7 @@ void do_bloodthirst( CHAR_DATA *ch, char *argument)
 
 void do_spellbane(CHAR_DATA *ch, char *argument)
 {
+  (void) argument; /* Unused parameter */
   AFFECT_DATA af;
 
   if (ch_skill_nok(ch,gsn_spellbane))
@@ -2138,6 +2146,7 @@ void do_spellbane(CHAR_DATA *ch, char *argument)
 
 void do_resistance(CHAR_DATA *ch, char *argument)
 {
+  (void) argument; /* Unused parameter */
   if (ch_skill_nok(ch,gsn_resistance) )
       return;
 
@@ -2345,6 +2354,7 @@ void do_trophy(CHAR_DATA *ch, char *argument)
 
 void do_truesight(CHAR_DATA *ch, char *argument)
 {
+  (void) argument; /* Unused parameter */
   if (ch_skill_nok(ch,gsn_truesight))
     return;
 
@@ -2410,6 +2420,7 @@ void do_truesight(CHAR_DATA *ch, char *argument)
 
 void do_warcry(CHAR_DATA *ch, char *argument)
 {
+  (void) argument; /* Unused parameter */
   AFFECT_DATA af;
 
   if (IS_NPC(ch) ||
@@ -2753,6 +2764,7 @@ void do_target (CHAR_DATA *ch, char *argument)
 
 void do_tiger( CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     int chance, hp_percent;
 
     if ((chance = get_skill(ch,gsn_tiger_power)) == 0
@@ -2849,6 +2861,7 @@ void do_tiger( CHAR_DATA *ch, char *argument)
 
 void do_hara( CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     int chance;
     AFFECT_DATA  af;
 
@@ -3092,6 +3105,7 @@ int critical_strike( CHAR_DATA *ch, CHAR_DATA *victim,   int dam )
 
 void do_shield( CHAR_DATA *ch, char *argument )
 {
+    (void) argument; /* Unused parameter */
     CHAR_DATA *victim;
     int chance,ch_weapon,vict_shield;
     OBJ_DATA *shield,*axe;
@@ -3140,8 +3154,9 @@ void do_shield( CHAR_DATA *ch, char *argument )
     /* modifiers */
 
     /* skill */
-   chance = int(chance * ch_weapon / 200);
-   chance = int(chance * 100 / vict_shield);
+   /* Correct C-style cast */
+   chance = (int)(chance * ch_weapon / 200);
+   chance = (int)(chance * 100 / vict_shield);
 
     /* dex vs. strength */
     chance += get_curr_stat(ch,STAT_DEX);
@@ -3176,6 +3191,7 @@ void do_shield( CHAR_DATA *ch, char *argument )
 
 void do_weapon( CHAR_DATA *ch, char *argument )
 {
+    (void) argument; /* Unused parameter */
     CHAR_DATA *victim;
     OBJ_DATA *wield,*axe;
     int chance,ch_weapon,vict_weapon;
@@ -3426,6 +3442,7 @@ void do_tail( CHAR_DATA *ch, char *argument )
 
 void do_concentrate( CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     int chance;
 
     if ( MOUNTED(ch) )
@@ -3504,6 +3521,7 @@ void do_concentrate( CHAR_DATA *ch, char *argument)
 
 void do_bandage( CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     int heal;
 
     if (ch_skill_nok(ch,gsn_bandage) )
@@ -3669,6 +3687,7 @@ void do_katana(CHAR_DATA *ch, char *argument)
 
 void do_crush( CHAR_DATA *ch, char *argument )
 {
+    (void) argument; /* Unused parameter */
     CHAR_DATA *victim;
     int chance=100, wait=0;
     int damage_crush;
@@ -3777,6 +3796,7 @@ void do_crush( CHAR_DATA *ch, char *argument )
 
 void do_sense(CHAR_DATA *ch, char *argument)
 {
+  (void) argument; /* Unused parameter */
   if (IS_NPC(ch) ||
         ch->level < skill_table[gsn_sense_life].skill_level[ch->iclass] )
     {
@@ -3830,6 +3850,7 @@ void do_sense(CHAR_DATA *ch, char *argument)
 
 void do_poison_smoke( CHAR_DATA *ch, char *argument)
 {
+  (void) argument; /* Unused parameter */
   CHAR_DATA *tmp_vict;
   char buf[MAX_STRING_LENGTH];
 
@@ -3885,6 +3906,7 @@ void do_poison_smoke( CHAR_DATA *ch, char *argument)
 
 void do_blindness_dust( CHAR_DATA *ch, char *argument)
 {
+  (void) argument; /* Unused parameter */
   CHAR_DATA *tmp_vict;
   char buf[MAX_STRING_LENGTH];
 

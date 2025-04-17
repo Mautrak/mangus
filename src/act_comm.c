@@ -83,6 +83,7 @@ void update_total_played	args( ( CHAR_DATA *ch) );
 
 void do_delet( CHAR_DATA *ch, char *argument)
 {
+  (void) argument; /* Unused parameter */
   printf_to_char(ch,"İntihar etmek için komutu eksiksiz yazmalısın.\n\r");
 }
 
@@ -130,6 +131,7 @@ void do_delete( CHAR_DATA *ch, char *argument)
 
 void do_channels( CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     /* lists all channels and their status */
     printf_to_char(ch,"kanal       durumu\n\r");
     printf_to_char(ch,"------------------\n\r");
@@ -202,7 +204,7 @@ void garble(char *garbled,char *speech)
 {
   int i;
 
-  for (i = 0; speech[i] != (char) NULL; i++) {
+  for (i = 0; speech[i] != '\0'; i++) {
     if (speech[i] >= 'a' && speech[i] <= 'z')
       garbled[i] = 'a' + number_range(0,25);
     else if (speech[i] >= 'A' && speech[i] <= 'Z')
@@ -217,6 +219,7 @@ void garble(char *garbled,char *speech)
 
 void do_deaf( CHAR_DATA *ch, char *argument)
 {
+   (void) argument; /* Unused parameter */
 
    if (IS_SET(ch->comm,COMM_DEAF))
    {
@@ -234,6 +237,7 @@ void do_deaf( CHAR_DATA *ch, char *argument)
 
 void do_quiet ( CHAR_DATA *ch, char * argument)
 {
+    (void) argument; /* Unused parameter */
     if (IS_SET(ch->comm,COMM_QUIET))
     {
       printf_to_char(ch,"Sessiz moddan çıkıldı.\n\r");
@@ -248,6 +252,7 @@ void do_quiet ( CHAR_DATA *ch, char * argument)
 
 void do_replay (CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     if (IS_NPC(ch))
     {
       printf_to_char(ch,"Tekrarlayamazsın.\n\r");
@@ -260,7 +265,7 @@ void do_replay (CHAR_DATA *ch, char *argument)
 
 void do_immtalk( CHAR_DATA *ch, char *argument )
 {
-    DESCRIPTOR_DATA *d;
+    DESCRIPTOR_DATA *d; /* Declare d */
 
     if ( argument[0] == '\0' )
     {
@@ -1003,6 +1008,7 @@ const	struct	pose_table_type	pose_table	[]	=
 
 void do_pose( CHAR_DATA *ch, char *argument )
 {
+    (void) argument; /* Unused parameter */
     int level;
     int pose;
 
@@ -1036,6 +1042,7 @@ void do_typo( CHAR_DATA *ch, char *argument )
 
 void do_rent( CHAR_DATA *ch, char *argument )
 {
+    (void) argument; /* Unused parameter */
     printf_to_char(ch,"There is no rent here.  Just save and quit.\n\r");
     return;
 }
@@ -1043,6 +1050,7 @@ void do_rent( CHAR_DATA *ch, char *argument )
 
 void do_qui( CHAR_DATA *ch, char *argument )
 {
+  (void) argument; /* Unused parameter */
   printf_to_char( ch,"Mangus'tan ayrılmak istiyorsan komutu eksiksiz yazmalısın.\n\r" );
     return;
 }
@@ -1068,6 +1076,7 @@ void do_quit_remort( CHAR_DATA *ch, char *argument )
 
 bool quit_org( CHAR_DATA *ch, char *argument, bool Count , bool Remort)
 {
+    (void) argument; /* Unused parameter */
     DESCRIPTOR_DATA *d, *dr, *d_next;
     CHAR_DATA *vch, *vch_next;
     OBJ_DATA *obj,*obj_next;
@@ -1233,6 +1242,7 @@ bool quit_org( CHAR_DATA *ch, char *argument, bool Count , bool Remort)
 
 void do_save( CHAR_DATA *ch, char *argument )
 {
+    (void) argument; /* Unused parameter */
     if ( IS_NPC(ch) )
 	return;
 
@@ -2103,6 +2113,7 @@ void do_judge( CHAR_DATA *ch, char *argument )
 
 void do_remor( CHAR_DATA *ch, char *argument )
 {
+  (void) argument; /* Unused parameter */
   printf_to_char(ch,"Yeniyaşam istiyorsan eksiksiz yaz.\n\r" );
     return;
 }

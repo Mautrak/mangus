@@ -103,9 +103,6 @@ ROOM_INDEX_DATA * check_place( CHAR_DATA *ch, char *argument )
 
 void spell_portal( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-  (void)sn;
-    (void)vo;
-    (void)target;
     CHAR_DATA *victim;
     OBJ_DATA *portal, *stone;
 
@@ -156,9 +153,6 @@ void spell_portal( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
 void spell_nexus( int sn, int level, CHAR_DATA *ch, void *vo, int target)
 {
-    (void)sn;
-    (void)vo;
-    (void)target;
     CHAR_DATA *victim;
     OBJ_DATA *portal, *stone;
     ROOM_INDEX_DATA *to_room, *from_room;
@@ -230,9 +224,12 @@ void spell_nexus( int sn, int level, CHAR_DATA *ch, void *vo, int target)
 
 void spell_disintegrate( int sn, int level, CHAR_DATA *ch, void *vo, int target)
 {
-    (void)target;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
-  int dam=0;
+  CHAR_DATA *tmp_ch;
+  OBJ_DATA *obj;
+  OBJ_DATA *obj_next;
+  int i,dam=0;
+  OBJ_DATA *tattoo;
   char eventbuf[MAX_STRING_LENGTH];
 
 	/*
@@ -270,9 +267,12 @@ void spell_disintegrate( int sn, int level, CHAR_DATA *ch, void *vo, int target)
 
 void spell_arz_yutagi( int sn, int level, CHAR_DATA *ch, void *vo, int target)
 {
-    (void)target;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
-  int dam=0;
+  CHAR_DATA *tmp_ch;
+  OBJ_DATA *obj;
+  OBJ_DATA *obj_next;
+  int i,dam=0;
+  OBJ_DATA *tattoo;
   char eventbuf[MAX_STRING_LENGTH];
 
 	/*
@@ -309,10 +309,6 @@ void spell_arz_yutagi( int sn, int level, CHAR_DATA *ch, void *vo, int target)
 
 void spell_poison_smoke( int sn, int level, CHAR_DATA *ch, void *vo, int target) {
 
-    (void)sn;
-    (void)level;
-    (void)vo;
-    (void)target;
   CHAR_DATA *tmp_vict;
   char buf[MAX_STRING_LENGTH];
 
@@ -349,10 +345,6 @@ void spell_poison_smoke( int sn, int level, CHAR_DATA *ch, void *vo, int target)
 
 void spell_blindness_dust( int sn, int level, CHAR_DATA *ch, void *vo, int target)
 {
-    (void)sn;
-    (void)level;
-    (void)vo;
-    (void)target;
   CHAR_DATA *tmp_vict;
   char buf[MAX_STRING_LENGTH];
 
@@ -390,7 +382,6 @@ void spell_blindness_dust( int sn, int level, CHAR_DATA *ch, void *vo, int targe
 
 void spell_bark_skin( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -417,8 +408,6 @@ else
 
 void spell_bear_call( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   CHAR_DATA *gch;
   CHAR_DATA *bear;
   CHAR_DATA *bear2;
@@ -490,8 +479,6 @@ void spell_bear_call( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_ranger_staff( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   OBJ_DATA *staff;
   AFFECT_DATA tohit;
   AFFECT_DATA todam;
@@ -531,9 +518,6 @@ void spell_ranger_staff( int sn, int level, CHAR_DATA *ch, void *vo, int target 
 
 void spell_vanish( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)sn;
-    (void)level;
-    (void)target;
   ROOM_INDEX_DATA *pRoomIndex;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   int i;
@@ -581,8 +565,6 @@ void spell_vanish( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_transform( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   AFFECT_DATA af;
 
   if (is_affected(ch,sn) || ch->hit > ch->max_hit)
@@ -608,8 +590,6 @@ void spell_transform( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_mana_transfer( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)level;
-    (void)target;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
 
   if (victim == ch)
@@ -634,7 +614,6 @@ void spell_mana_transfer( int sn, int level, CHAR_DATA *ch, void *vo, int target
 
 void spell_mental_knife( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
   AFFECT_DATA af;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   int dam;
@@ -670,8 +649,6 @@ void spell_mental_knife( int sn, int level, CHAR_DATA *ch, void *vo, int target 
 
 void spell_demon_summon( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   CHAR_DATA *gch;
   CHAR_DATA *demon;
   AFFECT_DATA af;
@@ -751,8 +728,6 @@ void spell_demon_summon( int sn, int level, CHAR_DATA *ch, void *vo, int target 
 
 void spell_scourge( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   CHAR_DATA *tmp_vict;
   CHAR_DATA *tmp_next;
   char buf[MAX_STRING_LENGTH];
@@ -809,7 +784,6 @@ void spell_scourge( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_doppelganger( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   AFFECT_DATA af;
 
@@ -857,7 +831,6 @@ void spell_doppelganger( int sn, int level, CHAR_DATA *ch, void *vo, int target 
 
 void spell_manacles( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
 
   if (!IS_SET(victim->act, PLR_WANTED))
@@ -895,8 +868,6 @@ void spell_manacles( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_shield_ruler( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    (void)vo;
-    (void)target;
   int shield_vnum;
   OBJ_DATA *shield;
   AFFECT_DATA af;
@@ -962,8 +933,6 @@ void spell_shield_ruler( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
 void spell_guard_call( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   CHAR_DATA *gch;
   CHAR_DATA *guard;
   CHAR_DATA *guard2;
@@ -1046,8 +1015,6 @@ void spell_guard_call( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_nightwalker( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   CHAR_DATA *gch;
   CHAR_DATA *walker;
   AFFECT_DATA af;
@@ -1122,10 +1089,6 @@ void spell_nightwalker( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_eyes( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)sn;
-    (void)level;
-    (void)vo;
-    (void)target;
     CHAR_DATA *victim;
     ROOM_INDEX_DATA *ori_room;
 
@@ -1156,7 +1119,6 @@ void spell_eyes( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_shadow_cloak( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -1191,8 +1153,6 @@ else
 
 void spell_nightfall( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   CHAR_DATA *vch;
   OBJ_DATA  *light;
   AFFECT_DATA af;
@@ -1241,8 +1201,6 @@ void spell_nightfall( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_mirror( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)sn;
-    (void)target;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   AFFECT_DATA af;
   int mirrors,new_mirrors;
@@ -1277,11 +1235,10 @@ else
   af.bitvector = 0;
 
   for (tmp_vict = victim; is_affected(tmp_vict,gsn_doppelganger);
-       tmp_vict = tmp_vict->doppel)
-    ;
+       tmp_vict = tmp_vict->doppel);
 
        sprintf(long_buf, "%s%s burada.\n\r", tmp_vict->name, tmp_vict->pcdata->title);
-  sprintf(short_buf, "%s", tmp_vict->name);
+  sprintf(short_buf, tmp_vict->name);
 
   order = number_range(0,level/5 - mirrors);
 
@@ -1343,7 +1300,6 @@ else
 
 void spell_garble( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   AFFECT_DATA af;
 
@@ -1383,7 +1339,6 @@ void spell_garble( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_confuse( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   AFFECT_DATA af;
   CHAR_DATA *rch;
@@ -1430,8 +1385,6 @@ void spell_confuse( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_terangreal( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)ch;
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -1459,8 +1412,6 @@ void spell_terangreal( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_kassandra( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
 
     AFFECT_DATA af;
 
@@ -1488,8 +1439,6 @@ void spell_kassandra( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_sebat( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   AFFECT_DATA af;
 
   if ( is_affected( ch, sn ) )
@@ -1514,7 +1463,6 @@ void spell_sebat( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_matandra( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   int dam;
   AFFECT_DATA af;
@@ -1541,10 +1489,6 @@ void spell_matandra( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_amnesia( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)sn;
-    (void)level;
-    (void)ch;
-    (void)target;
   int i;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
 
@@ -1561,8 +1505,6 @@ void spell_amnesia( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_chaos_blade( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   OBJ_DATA *blade;
   AFFECT_DATA af;
 
@@ -1601,9 +1543,6 @@ void spell_chaos_blade( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_tattoo( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)sn;
-    (void)level;
-    (void)target;
   OBJ_DATA *tattoo;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   int i;
@@ -1648,9 +1587,6 @@ void spell_tattoo( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_remove_tattoo( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)sn;
-    (void)level;
-    (void)target;
   OBJ_DATA *tattoo;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
 
@@ -1670,7 +1606,6 @@ void spell_remove_tattoo( int sn, int level, CHAR_DATA *ch, void *vo, int target
 
 void spell_wrath( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   int dam;
   AFFECT_DATA af;
@@ -1720,8 +1655,6 @@ void spell_wrath( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_old_randomizer(int sn, int level, CHAR_DATA *ch, void *vo, int target)
 {
-    (void)vo;
-    (void)target;
   ROOM_INDEX_DATA *pRoomIndex;
   EXIT_DATA *pexit;
   int d0;
@@ -1785,8 +1718,6 @@ void spell_old_randomizer(int sn, int level, CHAR_DATA *ch, void *vo, int target
 
 void spell_stalker( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   CHAR_DATA *victim;
   CHAR_DATA *stalker;
   AFFECT_DATA af;
@@ -1869,9 +1800,6 @@ void spell_stalker( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_tesseract( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)sn;
-    (void)vo;
-    (void)target;
   CHAR_DATA *victim;
   CHAR_DATA *wch;
   CHAR_DATA *wch_next;
@@ -1954,8 +1882,6 @@ void spell_tesseract( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_brew( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)sn;
-    (void)target;
     OBJ_DATA *obj = (OBJ_DATA *) vo;
     OBJ_DATA *potion;
     OBJ_DATA *vial;
@@ -2069,7 +1995,6 @@ void spell_brew( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_shadowlife( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   CHAR_DATA *shadow;
   AFFECT_DATA af;
@@ -2142,7 +2067,6 @@ void spell_shadowlife( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_ruler_badge( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
   OBJ_DATA *badge;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   OBJ_DATA *obj_next;
@@ -2211,9 +2135,6 @@ void spell_ruler_badge( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_remove_badge( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)sn;
-    (void)level;
-    (void)target;
   OBJ_DATA *badge;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   OBJ_DATA *obj_next;
@@ -2240,8 +2161,6 @@ void spell_remove_badge( int sn, int level, CHAR_DATA *ch, void *vo, int target 
 
 void spell_dragon_strength(int sn, int level, CHAR_DATA *ch, void *vo, int target)
 {
-    (void)vo;
-    (void)target;
   AFFECT_DATA af;
 
   if (is_affected(ch, sn))
@@ -2282,7 +2201,6 @@ void spell_dragon_strength(int sn, int level, CHAR_DATA *ch, void *vo, int targe
 
 void spell_dragon_breath(int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   int dam;
 
@@ -2297,7 +2215,6 @@ void spell_dragon_breath(int sn, int level, CHAR_DATA *ch, void *vo, int target 
 
 void spell_golden_aura( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
   AFFECT_DATA af;
   CHAR_DATA *vch = (CHAR_DATA *)vo;
 
@@ -2342,8 +2259,6 @@ void spell_golden_aura( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_dragonplate( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   int plate_vnum;
   OBJ_DATA *plate;
   AFFECT_DATA af;
@@ -2376,8 +2291,6 @@ void spell_dragonplate( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_squire( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   CHAR_DATA *gch;
   CHAR_DATA *squire;
   AFFECT_DATA af;
@@ -2459,8 +2372,6 @@ void spell_squire( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_dragonsword( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   int sword_vnum;
   OBJ_DATA *sword;
   char arg[MAX_INPUT_LENGTH];
@@ -2518,8 +2429,6 @@ void spell_dragonsword( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_entangle( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-(void)sn;
-  (void)target;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   int dam;
 
@@ -2534,9 +2443,9 @@ void spell_entangle( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
   dam = number_range(level, 4 * level);
   if ( saves_spell( level, victim, DAM_PIERCE ) )
-      dam /= 2;
+    dam /= 2;
 
-  damage(ch,victim,dam,gsn_entangle,DAM_PIERCE, TRUE);
+  damage(ch,victim,ch->level,gsn_entangle,DAM_PIERCE, TRUE);
 
   act("Yerden fırlayan sarmaşıklar $s bacaklarına dolanıyor!", victim,
       NULL, NULL, TO_ROOM);
@@ -2564,8 +2473,6 @@ void spell_entangle( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_holy_armor( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   AFFECT_DATA af;
 
   if ( is_affected( ch, sn ) )
@@ -2589,8 +2496,6 @@ void spell_holy_armor( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_love_potion( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   AFFECT_DATA af;
 
   af.where		= TO_AFFECTS;
@@ -2607,7 +2512,6 @@ void spell_love_potion( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_protective_shield( int sn, int level, CHAR_DATA *ch, void *vo, int target ) {
   CHAR_DATA *victim = (CHAR_DATA *) vo;
-    (void)target;
   AFFECT_DATA af;
 
   if ( is_affected( victim, sn ) )
@@ -2634,7 +2538,6 @@ void spell_protective_shield( int sn, int level, CHAR_DATA *ch, void *vo, int ta
 
 void spell_deafen( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   AFFECT_DATA af;
 
@@ -2671,8 +2574,6 @@ void spell_deafen( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_disperse( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   CHAR_DATA *vch;
   CHAR_DATA *vch_next;
   ROOM_INDEX_DATA *pRoomIndex;
@@ -2729,7 +2630,6 @@ void spell_disperse( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_honor_shield( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   AFFECT_DATA af;
 
@@ -2760,7 +2660,6 @@ send_to_char(  "Onlar zaten onurlarıyla korunuyorlar.\n\r", ch);
 
 void spell_acute_vision( int sn, int level, CHAR_DATA *ch, void *vo, int target )
  {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -2788,7 +2687,6 @@ void spell_acute_vision( int sn, int level, CHAR_DATA *ch, void *vo, int target 
 
 void spell_dragons_breath(int sn,int level,CHAR_DATA *ch, void *vo,int target )
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     CHAR_DATA *vch, *vch_next;
     int dam,hp_dam,dice_dam;
@@ -2962,8 +2860,6 @@ switch( dice(1,5) )
 
 void spell_sand_storm( int sn, int level, CHAR_DATA *ch, void *vo,int target )
  {
-    (void)vo;
-    (void)target;
     CHAR_DATA *vch, *vch_next;
     int dam,hp_dam,dice_dam;
     int hpch;
@@ -3013,8 +2909,6 @@ void spell_sand_storm( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 
 void spell_scream( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    (void)vo;
-    (void)target;
     CHAR_DATA *vch, *vch_next;
     int dam=0,hp_dam,dice_dam;
     int hpch;
@@ -3072,8 +2966,6 @@ void spell_attract_other( int sn, int level, CHAR_DATA *ch, void *vo,int target 
 
 void spell_vampire( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    (void)vo;
-    (void)target;
     AFFECT_DATA af;
 
     if ( is_affected( ch, sn ) )
@@ -3286,7 +3178,6 @@ void spell_animate_dead(int sn,int level, CHAR_DATA *ch, void *vo,int target )
 
 void spell_enhanced_armor( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -3316,7 +3207,6 @@ else
 
 void spell_meld_into_stone( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   AFFECT_DATA af;
 
@@ -3344,7 +3234,6 @@ void spell_meld_into_stone( int sn, int level, CHAR_DATA *ch, void *vo, int targ
 
 void spell_web( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -3384,9 +3273,6 @@ else
 
 void spell_group_defense( int sn, int level, CHAR_DATA *ch, void *vo ,int target)
 {
-    (void)sn;
-    (void)vo;
-    (void)target;
 	CHAR_DATA *gch;
 	AFFECT_DATA af;
 	int shield_sn, armor_sn;
@@ -3451,9 +3337,6 @@ void spell_group_defense( int sn, int level, CHAR_DATA *ch, void *vo ,int target
 
 void spell_inspire( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    (void)sn;
-    (void)vo;
-    (void)target;
 	CHAR_DATA *gch;
 	AFFECT_DATA af;
 	int bless_sn;
@@ -3496,9 +3379,6 @@ void spell_inspire( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
 void spell_mass_sanctuary( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    (void)sn;
-    (void)vo;
-    (void)target;
 	CHAR_DATA *gch;
 	AFFECT_DATA af;
 	int sanc_sn;
@@ -3537,9 +3417,6 @@ void spell_mass_sanctuary( int sn, int level, CHAR_DATA *ch, void *vo,int target
 
 void spell_mend( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)sn;
-    (void)level;
-    (void)target;
     OBJ_DATA *obj = (OBJ_DATA *) vo;
     int result,skill;
 
@@ -3589,7 +3466,6 @@ void spell_mend( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 
 void spell_shielding( int sn, int level, CHAR_DATA *ch, void *vo ,int target)
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -3632,9 +3508,6 @@ void spell_shielding( int sn, int level, CHAR_DATA *ch, void *vo ,int target)
 
 void spell_link ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)sn;
-    (void)level;
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     int random, tmpmana;
 
@@ -3649,7 +3522,6 @@ void spell_link ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 
 void spell_power_kill ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)target;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   int dam;
   char eventbuf[MAX_STRING_LENGTH];
@@ -3690,10 +3562,6 @@ void spell_power_kill ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 
 void spell_eyed_sword ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)sn;
-    (void)level;
-    (void)vo;
-    (void)target;
     char buf[MAX_STRING_LENGTH];
     OBJ_DATA *eyed;
     int i;
@@ -3744,8 +3612,6 @@ void spell_eyed_sword ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 
 void spell_lion_help ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)vo;
-    (void)target;
   CHAR_DATA *lion;
   CHAR_DATA *victim;
   AFFECT_DATA af;
@@ -3851,8 +3717,6 @@ void spell_lion_help ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 
 void spell_magic_jar ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)sn;
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     OBJ_DATA *vial;
     OBJ_DATA *fire;
@@ -3931,7 +3795,6 @@ void spell_magic_jar ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 
 void turn_spell ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     int dam, align;
 
@@ -4006,7 +3869,6 @@ void turn_spell ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 
 void spell_turn ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)vo;
     CHAR_DATA *vch;
     CHAR_DATA *vch_next;
 
@@ -4048,8 +3910,6 @@ void spell_turn ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 
 void spell_fear ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)sn;
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -4077,8 +3937,6 @@ void spell_fear ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 
 void spell_protection_heat ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)sn;
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -4125,8 +3983,6 @@ else
 
 void spell_protection_cold ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)sn;
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -4172,10 +4028,6 @@ else
 
 void spell_fire_shield ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)sn;
-    (void)level;
-    (void)vo;
-    (void)target;
     char buf[MAX_STRING_LENGTH];
     char arg[MAX_INPUT_LENGTH];
     OBJ_DATA *fire;
@@ -4231,8 +4083,6 @@ void spell_fire_shield ( int sn, int level, CHAR_DATA *ch, void *vo , int target
 
 void spell_witch_curse ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)sn;
-    (void)target;
   AFFECT_DATA af;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
 
@@ -4267,9 +4117,6 @@ void spell_witch_curse ( int sn, int level, CHAR_DATA *ch, void *vo , int target
 
 void spell_knock ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)level;
-    (void)vo;
-    (void)target;
     char arg[MAX_INPUT_LENGTH];
     int chance=0;
     int door;
@@ -4355,8 +4202,6 @@ if ( IS_SET(pexit->exit_info, EX_NOPASS) )
 
 void spell_magic_resistance ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)vo;
-    (void)target;
   AFFECT_DATA af;
 
     if (!is_affected(ch, sn))
@@ -4379,18 +4224,12 @@ void spell_magic_resistance ( int sn, int level, CHAR_DATA *ch, void *vo , int t
 
 void spell_hallucination ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)sn;
-    (void)level;
-    (void)vo;
-    (void)target;
   send_to_char( "That spell is under construction.\n\r",ch);
  return;
 }
 
 void spell_wolf( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   CHAR_DATA *gch;
   CHAR_DATA *demon;
   AFFECT_DATA af;
@@ -4458,7 +4297,6 @@ void spell_wolf( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_vam_blast( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     int dam;
 
@@ -4471,7 +4309,6 @@ void spell_vam_blast( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_dragon_skin( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   AFFECT_DATA af;
 
@@ -4501,8 +4338,6 @@ void spell_dragon_skin( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_mind_light(int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    (void)vo;
-    (void)target;
     AFFECT_DATA af,af2;
 
     if ( is_affected_room( ch->in_room, sn ))
@@ -4535,7 +4370,6 @@ void spell_mind_light(int sn, int level, CHAR_DATA *ch, void *vo,int target )
 
 void spell_insanity ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -4564,8 +4398,6 @@ void spell_insanity ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 
 void spell_power_stun ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)ch;
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -4590,8 +4422,6 @@ void spell_power_stun ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 
 void spell_improved_invis( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    (void)ch;
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -4616,7 +4446,6 @@ void spell_improved_invis( int sn, int level, CHAR_DATA *ch, void *vo,int target
 
 void spell_improved_detection( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -4645,7 +4474,6 @@ else
 
 void spell_severity_force( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     char buf[MAX_STRING_LENGTH];
     int dam;
@@ -4662,8 +4490,6 @@ void spell_severity_force( int sn, int level, CHAR_DATA *ch, void *vo,int target
 
 void spell_randomizer(int sn, int level, CHAR_DATA *ch, void *vo, int target)
 {
-    (void)vo;
-    (void)target;
     AFFECT_DATA af,af2;
 
     if ( is_affected( ch, sn ) )
@@ -4725,7 +4551,6 @@ void spell_randomizer(int sn, int level, CHAR_DATA *ch, void *vo, int target)
 
 void spell_bless_weapon(int sn,int level,CHAR_DATA *ch, void *vo,int target)
 {
-    (void)target;
     OBJ_DATA *obj = (OBJ_DATA *) vo;
     AFFECT_DATA af;
 
@@ -4779,8 +4604,6 @@ void spell_bless_weapon(int sn,int level,CHAR_DATA *ch, void *vo,int target)
 
 void spell_resilience( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)vo;
-    (void)target;
   AFFECT_DATA af;
 
     if (!is_affected(ch, sn))
@@ -4803,8 +4626,6 @@ void spell_resilience( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 
 void spell_super_heal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    (void)sn;
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     int bonus = 170 + level + dice(1,20);
 
@@ -4818,8 +4639,6 @@ void spell_super_heal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 
 void spell_master_heal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    (void)sn;
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     int bonus = 500 + level + dice(1,40);
 
@@ -4833,9 +4652,6 @@ void spell_master_heal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 
 void spell_group_healing(int sn, int level, CHAR_DATA *ch, void *vo, int target)
 {
-    (void)sn;
-    (void)vo;
-    (void)target;
     CHAR_DATA *gch;
     int heal_num, refresh_num;
 
@@ -4856,8 +4672,6 @@ void spell_group_healing(int sn, int level, CHAR_DATA *ch, void *vo, int target)
 
 void spell_restoring_light( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    (void)sn;
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     int nsn, mana_add;
 
@@ -4897,8 +4711,6 @@ void spell_restoring_light( int sn, int level, CHAR_DATA *ch, void *vo,int targe
 
 void spell_lesser_golem( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   CHAR_DATA *gch;
   CHAR_DATA *golem;
   AFFECT_DATA af;
@@ -4976,8 +4788,6 @@ void spell_lesser_golem( int sn, int level, CHAR_DATA *ch, void *vo, int target 
 
 void spell_stone_golem( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   CHAR_DATA *gch;
   CHAR_DATA *golem;
   AFFECT_DATA af;
@@ -5054,8 +4864,6 @@ void spell_stone_golem( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_iron_golem( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   CHAR_DATA *gch;
   CHAR_DATA *golem;
   AFFECT_DATA af;
@@ -5128,8 +4936,6 @@ void spell_iron_golem( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_adamantite_golem( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   CHAR_DATA *gch;
   CHAR_DATA *golem;
   AFFECT_DATA af;
@@ -5203,10 +5009,6 @@ void spell_adamantite_golem( int sn, int level, CHAR_DATA *ch, void *vo, int tar
 
 void spell_sanctify_lands(int sn, int level, CHAR_DATA *ch, void *vo, int target)
 {
-    (void)sn;
-    (void)level;
-    (void)vo;
-    (void)target;
   if (number_range(0,1) == 0)
     {
       send_to_char("Başaramadın.\n\r",ch);
@@ -5249,8 +5051,6 @@ void spell_sanctify_lands(int sn, int level, CHAR_DATA *ch, void *vo, int target
 
 void spell_deadly_venom(int sn, int level, CHAR_DATA *ch, void *vo, int target)
 {
-    (void)vo;
-    (void)target;
     AFFECT_DATA af;
 
   if (IS_SET(ch->in_room->room_flags, ROOM_LAW))
@@ -5280,8 +5080,6 @@ void spell_deadly_venom(int sn, int level, CHAR_DATA *ch, void *vo, int target)
 
 void spell_cursed_lands(int sn, int level, CHAR_DATA *ch, void *vo, int target)
 {
-    (void)vo;
-    (void)target;
     AFFECT_DATA af;
 
   if (IS_SET(ch->in_room->room_flags, ROOM_LAW))
@@ -5311,8 +5109,6 @@ void spell_cursed_lands(int sn, int level, CHAR_DATA *ch, void *vo, int target)
 
 void spell_lethargic_mist(int sn, int level, CHAR_DATA *ch, void *vo, int target)
 {
-    (void)vo;
-    (void)target;
    AFFECT_DATA af;
 
   if (IS_SET(ch->in_room->room_flags, ROOM_LAW))
@@ -5342,8 +5138,6 @@ void spell_lethargic_mist(int sn, int level, CHAR_DATA *ch, void *vo, int target
 
 void spell_black_death(int sn, int level, CHAR_DATA *ch, void *vo, int target)
 {
-    (void)vo;
-    (void)target;
   AFFECT_DATA af;
 
   if (IS_SET(ch->in_room->room_flags, ROOM_LAW))
@@ -5373,8 +5167,6 @@ void spell_black_death(int sn, int level, CHAR_DATA *ch, void *vo, int target)
 
 void spell_mysterious_dream(int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    (void)vo;
-    (void)target;
   AFFECT_DATA af;
 
   if (IS_SET(ch->in_room->room_flags, ROOM_LAW))
@@ -5404,8 +5196,6 @@ void spell_mysterious_dream(int sn, int level, CHAR_DATA *ch, void *vo,int targe
 
 void spell_polymorph( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
     AFFECT_DATA af;
     int race;
 
@@ -5448,9 +5238,6 @@ void spell_polymorph( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_plant_form( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)sn;
-    (void)vo;
-    (void)target;
     AFFECT_DATA af;
 
     if ( !ch->in_room
@@ -5490,7 +5277,6 @@ void spell_plant_form( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_blade_barrier(int sn,int level,CHAR_DATA *ch, void *vo,int target)
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     char buf[MAX_STRING_LENGTH];
     int dam;
@@ -5552,8 +5338,6 @@ void spell_blade_barrier(int sn,int level,CHAR_DATA *ch, void *vo,int target)
 
 void spell_protection_negative ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)vo;
-    (void)target;
   AFFECT_DATA af;
 
     if (!is_affected(ch, sn))
@@ -5577,8 +5361,6 @@ void spell_protection_negative ( int sn, int level, CHAR_DATA *ch, void *vo , in
 
 void spell_ruler_aura( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)vo;
-    (void)target;
   AFFECT_DATA af;
 
     if (!is_affected(ch, sn))
@@ -5602,8 +5384,6 @@ void spell_ruler_aura( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 
 void spell_evil_spirit( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 {
-    (void)vo;
-    (void)target;
  AREA_DATA *pArea = ch->in_room->area;
  ROOM_INDEX_DATA *room;
  AFFECT_DATA af,af2;
@@ -5659,7 +5439,6 @@ void spell_evil_spirit( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 
 void spell_disgrace( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
   AFFECT_DATA af;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
 
@@ -5697,7 +5476,6 @@ void spell_control_undead( int sn, int level, CHAR_DATA *ch, void *vo,int target
 
 void spell_assist( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -5728,7 +5506,6 @@ void spell_assist( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_aid( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -5759,8 +5536,6 @@ void spell_aid( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_summon_shadow( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   CHAR_DATA *gch;
   CHAR_DATA *shadow;
   AFFECT_DATA af;
@@ -5829,10 +5604,6 @@ void spell_summon_shadow( int sn, int level, CHAR_DATA *ch, void *vo, int target
 
 void spell_farsight( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)sn;
-    (void)level;
-    (void)vo;
-    (void)target;
     ROOM_INDEX_DATA *room,*oldr;
     int mount;
 
@@ -5864,8 +5635,6 @@ void spell_farsight( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_remove_fear( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    (void)sn;
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
 
     if (check_dispel(level,victim,gsn_fear))
@@ -5878,7 +5647,6 @@ void spell_remove_fear( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
 void spell_desert_fist( int sn, int level, CHAR_DATA *ch, void *vo,int target )
  {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     int dam;
 
@@ -5902,7 +5670,6 @@ void spell_desert_fist( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 
 void spell_holy_aura( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -5944,7 +5711,6 @@ void spell_holy_aura( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_holy_fury(int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -5996,7 +5762,6 @@ void spell_holy_fury(int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
 void spell_light_arrow( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     int dam;
 
@@ -6010,7 +5775,6 @@ void spell_light_arrow( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_hydroblast( int sn, int level, CHAR_DATA *ch, void *vo,int target )
  {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     int dam;
 
@@ -6033,8 +5797,6 @@ void spell_hydroblast( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 
 void spell_wolf_spirit( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    (void)vo;
-    (void)target;
     AFFECT_DATA af;
 
     if ( is_affected( ch, sn ) )
@@ -6082,7 +5844,6 @@ void spell_wolf_spirit( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 
 void spell_sword_of_justice( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   int dam;
 
@@ -6112,8 +5873,6 @@ void spell_sword_of_justice( int sn, int level, CHAR_DATA *ch, void *vo, int tar
 
 void spell_guard_dogs( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   CHAR_DATA *gch;
   CHAR_DATA *dog;
   CHAR_DATA *dog2;
@@ -6189,10 +5948,6 @@ void spell_guard_dogs( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_eyes_of_tiger( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)sn;
-    (void)level;
-    (void)vo;
-    (void)target;
     CHAR_DATA *victim;
     ROOM_INDEX_DATA *ori_room;
 
@@ -6229,8 +5984,6 @@ void spell_eyes_of_tiger( int sn, int level, CHAR_DATA *ch, void *vo, int target
 
 void spell_lion_shield( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    (void)vo;
-    (void)target;
   OBJ_DATA *shield;
   AFFECT_DATA af;
 
@@ -6287,8 +6040,6 @@ void spell_lion_shield( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
 void spell_evolve_lion( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)vo;
-    (void)target;
   AFFECT_DATA af;
 
   if (is_affected(ch,sn) || ch->hit > ch->max_hit)
@@ -6341,8 +6092,6 @@ void spell_evolve_lion( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_prevent(int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    (void)vo;
-    (void)target;
     AFFECT_DATA af,af2;
 
     if ( is_affected_room( ch->in_room, sn ))
@@ -6376,7 +6125,6 @@ void spell_prevent(int sn, int level, CHAR_DATA *ch, void *vo,int target )
 
 void spell_enlarge( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -6406,7 +6154,6 @@ else
 
 void spell_chromatic_orb( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     int dam;
 
@@ -6430,7 +6177,6 @@ void spell_chromatic_orb( int sn, int level, CHAR_DATA *ch, void *vo, int target
 
 void spell_suffocate( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -6614,9 +6360,6 @@ void spell_mummify( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_soul_bind( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)sn;
-    (void)level;
-    (void)target;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
 
   if (ch->pet != NULL)
@@ -6643,7 +6386,6 @@ void spell_soul_bind( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 void spell_forcecage( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -6671,7 +6413,6 @@ void spell_forcecage( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
 void spell_iron_body( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -6699,7 +6440,6 @@ void spell_iron_body( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
 void spell_elemental_sphere( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
@@ -6728,7 +6468,6 @@ void spell_elemental_sphere( int sn, int level, CHAR_DATA *ch, void *vo,int targ
 
 void spell_aura_of_chaos( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 

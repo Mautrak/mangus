@@ -48,38 +48,14 @@
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
 
+#include "merc.h" /* Include merc.h for bool and sh_int types */
+
+/* Structure definitions first */
 struct yp_tip
 {
     int min_yp;
 	int max_yp;
 };
-
-/* game tables */
-
-extern	const	struct	yp_tip	yp_tablo[];
-
-extern	const	struct	position_type	position_table[];
-extern	const	struct	sex_type	sex_table[];
-extern	const	struct	size_type	size_table[];
-extern	const	struct	material_type	material_table[];
-extern	const	struct	wand_spell_type	wand_spell_table[];
-
-/* flag tables */
-extern	const	struct	flag_type	act_flags[];
-extern	const	struct	flag_type	plr_flags[];
-extern	const	struct	flag_type	affect_flags[];
-extern	const	struct	flag_type	off_flags[];
-extern	const	struct	flag_type	imm_flags[];
-extern	const	struct	flag_type	form_flags[];
-extern	const	struct	flag_type	part_flags[];
-extern	const	struct	flag_type	comm_flags[];
-extern	const	struct	flag_type	extra_flags[];
-extern	const	struct	flag_type	wear_flags[];
-extern	const	struct	flag_type	weapon_flags[];
-extern	const	struct	flag_type	container_flags[];
-extern	const	struct	flag_type	portal_flags[];
-extern	const	struct	flag_type	room_flags[];
-extern	const	struct	flag_type	exit_flags[];
 
 struct flag_type
 {
@@ -125,3 +101,30 @@ struct material_type
     sh_int weight_pt;
     int decay_pt;
 };
+
+/* Now the extern declarations */
+
+/* game tables */
+extern	const	struct	yp_tip	yp_tablo[];
+extern	const	struct	position_type	position_table[];
+extern	const	struct	sex_type	sex_table[];
+extern	const	struct	size_type	size_table[];
+extern	const	struct	material_type	material_table[];
+extern	const	struct	wand_spell_type	wand_spell_table[];
+
+/* flag tables */
+extern	const	struct	flag_type	act_flags[];
+extern	const	struct	flag_type	plr_flags[];
+extern	const	struct	flag_type	affect_flags[];
+extern	const	struct	flag_type	off_flags[];
+extern	const	struct	flag_type	imm_flags[];
+extern	const	struct	flag_type	form_flags[];
+extern	const	struct	flag_type	part_flags[];
+extern	const	struct	flag_type	comm_flags[];
+extern	const	struct	flag_type	extra_flags[];
+extern	const	struct	flag_type	wear_flags[];
+extern	const	struct	flag_type	weapon_flags[];
+extern	const	struct	flag_type	container_flags[];
+extern	const	struct	flag_type	portal_flags[];
+extern	const	struct	flag_type	room_flags[];
+extern	const	struct	flag_type	exit_flags[];

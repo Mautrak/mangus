@@ -507,6 +507,7 @@ void wear_prog_excalibur(OBJ_DATA *obj, CHAR_DATA *ch)
 
 void wear_prog_bracer(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   AFFECT_DATA af;
 
   if (!is_affected(ch, gsn_haste))
@@ -527,6 +528,7 @@ void wear_prog_bracer(OBJ_DATA *obj, CHAR_DATA *ch)
 
 void remove_prog_bracer(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   if (is_affected(ch, gsn_haste))
     {
       affect_strip(ch, gsn_haste);
@@ -566,6 +568,7 @@ void speech_prog_excalibur(OBJ_DATA *obj, CHAR_DATA *ch, char *speech)
 
 bool sac_prog_excalibur(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   act("Ölümsüzler çileden çıktı!",ch,NULL,NULL,TO_CHAR);
   act("Ölümsüzler çileden çıktı!",ch,NULL,NULL,TO_ROOM);
   damage(ch,ch,
@@ -922,6 +925,7 @@ void fight_prog_golden_weapon(OBJ_DATA *obj, CHAR_DATA *ch)
 }
 void get_prog_heart(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) ch; /* Unused parameter */
   if (obj->timer == 0)
     obj->timer = 24;
 }
@@ -987,6 +991,7 @@ void wear_prog_ranger_staff(OBJ_DATA *obj, CHAR_DATA *ch)
 
 void wear_prog_coconut(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   act("Hindistancevizi kabuklarını birbirine vurmaya başlıyorsun.",ch,NULL,NULL,TO_CHAR);
   act("Dörtnala gelen atların sesini duyunca bineğine atlıyorsun.",
 	ch, NULL, NULL, TO_CHAR);
@@ -1017,6 +1022,7 @@ void greet_prog_coconut(OBJ_DATA *obj, CHAR_DATA *ch)
 
 void get_prog_coconut(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   send_to_char(
 "Hindistancevizini kulağına tutunca dörtnala giden atların\n\rzayıf kükreyişini duyuyorsun.\n\r", ch);
   act("$n bir hindistancevizini kulağına tutuyor.", ch, NULL, NULL, TO_ROOM);
@@ -1024,6 +1030,7 @@ void get_prog_coconut(OBJ_DATA *obj, CHAR_DATA *ch)
 
 void remove_prog_coconut(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   send_to_char("Atların sesi yokoluyor.\n\r", ch);
   act("$n bir attan iniyormuş numarası yapıyor.", ch, NULL, NULL, TO_ROOM);
 }
@@ -1053,12 +1060,14 @@ int dam;
 
 void wear_prog_firegauntlets(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   send_to_char("Eldivenler ellerini ısıtıyor.\n\r", ch );
 	return;
 }
 
 void remove_prog_firegauntlets(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   send_to_char("Ellerin soğuyor.\n\r", ch );
 	return;
 }
@@ -1087,12 +1096,14 @@ int dam;
 
 void wear_prog_armbands(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   send_to_char( "Kolbantların kollarını ısıtıyor.\n\r", ch );
 	return;
 }
 
 void remove_prog_armbands(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   send_to_char("Kolların soğuyor.\n\r", ch );
 	return;
 }
@@ -1118,12 +1129,14 @@ int dam;
 
 void wear_prog_demonfireshield(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   send_to_char("Kalkanın ellerini ısıtıyor.\n\r", ch );
 	return;
 }
 
 void remove_prog_demonfireshield(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   send_to_char("Ellerin soğuyor.\n\r", ch );
 	return;
 }
@@ -1172,6 +1185,7 @@ char eventbuf[MAX_STRING_LENGTH];
 
 void wear_prog_wind_boots(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   AFFECT_DATA af;
 
   if (!is_affected(ch, gsn_fly))
@@ -1192,6 +1206,7 @@ void wear_prog_wind_boots(OBJ_DATA *obj, CHAR_DATA *ch)
 
 void remove_prog_wind_boots(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   if (is_affected(ch, gsn_fly))
     {
       affect_strip(ch, gsn_fly);
@@ -1201,6 +1216,7 @@ void remove_prog_wind_boots(OBJ_DATA *obj, CHAR_DATA *ch)
 }
 void wear_prog_boots_flying(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   AFFECT_DATA af;
 
   if (!is_affected(ch, gsn_fly))
@@ -1220,6 +1236,7 @@ void wear_prog_boots_flying(OBJ_DATA *obj, CHAR_DATA *ch)
 }
 void remove_prog_boots_flying(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   if (is_affected(ch, gsn_fly))
     {
       affect_strip(ch, gsn_fly);
@@ -1231,6 +1248,7 @@ void remove_prog_boots_flying(OBJ_DATA *obj, CHAR_DATA *ch)
 
 void wear_prog_arm_hercules(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   AFFECT_DATA af;
 
   if (!is_affected(ch, gsn_giant_strength))
@@ -1251,6 +1269,7 @@ void wear_prog_arm_hercules(OBJ_DATA *obj, CHAR_DATA *ch)
 
 void remove_prog_arm_hercules(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   if (is_affected(ch, gsn_giant_strength))
     {
       affect_strip(ch, gsn_giant_strength);
@@ -1260,6 +1279,7 @@ void remove_prog_arm_hercules(OBJ_DATA *obj, CHAR_DATA *ch)
 
 void wear_prog_girdle_giant(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   AFFECT_DATA af;
 
   if (!is_affected(ch, gsn_giant_strength))
@@ -1280,6 +1300,7 @@ void wear_prog_girdle_giant(OBJ_DATA *obj, CHAR_DATA *ch)
 
 void remove_prog_girdle_giant(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   if (is_affected(ch, gsn_giant_strength))
     {
       affect_strip(ch, gsn_giant_strength);
@@ -1288,6 +1309,7 @@ void remove_prog_girdle_giant(OBJ_DATA *obj, CHAR_DATA *ch)
 }
 void wear_prog_breastplate_strength(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   AFFECT_DATA af;
 
   if (!is_affected(ch, gsn_giant_strength))
@@ -1308,6 +1330,7 @@ void wear_prog_breastplate_strength(OBJ_DATA *obj, CHAR_DATA *ch)
 
 void remove_prog_breastplate_strength(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   if (is_affected(ch, gsn_giant_strength))
     {
       affect_strip(ch, gsn_giant_strength);
@@ -1538,12 +1561,14 @@ void fight_prog_ancient_gloves( OBJ_DATA *obj, CHAR_DATA *ch )
 
 void remove_prog_ancient_gloves(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   send_to_char("Ellerindeki alev yokoluyor.\n\r", ch );
         return;
 }
 
 void wear_prog_ancient_gloves(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   send_to_char("Ellerinde bir alev dans etmeye başlıyor!\n\r", ch );
         return;
 }
@@ -1603,6 +1628,7 @@ void wear_prog_ancient_shield(OBJ_DATA *obj, CHAR_DATA *ch)
 
 void wear_prog_neckguard(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   AFFECT_DATA af;
 
   if (!is_affected(ch, gsn_neckguard))
@@ -1620,12 +1646,14 @@ void wear_prog_neckguard(OBJ_DATA *obj, CHAR_DATA *ch)
 
 void remove_prog_neckguard(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   if (is_affected(ch, gsn_neckguard))
       affect_strip(ch, gsn_neckguard);
 }
 
 void wear_prog_headguard(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   AFFECT_DATA af;
 
   if (!is_affected(ch, gsn_headguard))
@@ -1643,12 +1671,14 @@ void wear_prog_headguard(OBJ_DATA *obj, CHAR_DATA *ch)
 
 void remove_prog_headguard(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   if (is_affected(ch, gsn_headguard))
       affect_strip(ch, gsn_headguard);
 }
 
 void wear_prog_blackguard(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   AFFECT_DATA af;
 
   if (!is_affected(ch, gsn_blackguard))
@@ -1666,6 +1696,7 @@ void wear_prog_blackguard(OBJ_DATA *obj, CHAR_DATA *ch)
 
 void remove_prog_blackguard(OBJ_DATA *obj, CHAR_DATA *ch)
 {
+  (void) obj; /* Unused parameter */
   if (is_affected(ch, gsn_blackguard))
       affect_strip(ch, gsn_blackguard);
 }

@@ -1055,6 +1055,7 @@ bool check_blind( CHAR_DATA *ch )
 
 void do_clear( CHAR_DATA *ch, char *argument )
 {
+    (void) argument; /* Unused parameter */
   if ( !IS_NPC(ch) )
     send_to_char("\033[0;0H\033[2J", ch );
   return;
@@ -1111,6 +1112,7 @@ void do_scroll(CHAR_DATA *ch, char *argument)
 /* RT does socials */
 void do_socials(CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     char buf[MAX_STRING_LENGTH];
     int iSocial;
     int col;
@@ -1135,6 +1137,7 @@ void do_socials(CHAR_DATA *ch, char *argument)
 
 void do_autolist(CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     /* lists most player flags */
     if (IS_NPC(ch))
       return;
@@ -1215,6 +1218,7 @@ void do_autolist(CHAR_DATA *ch, char *argument)
 
 void do_autoassist(CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     if (IS_NPC(ch))
       return;
 
@@ -1232,6 +1236,7 @@ void do_autoassist(CHAR_DATA *ch, char *argument)
 
 void do_autoexit(CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     if (IS_NPC(ch))
       return;
 
@@ -1249,6 +1254,7 @@ void do_autoexit(CHAR_DATA *ch, char *argument)
 
 void do_autoakce(CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     if (IS_NPC(ch))
       return;
 
@@ -1266,6 +1272,7 @@ void do_autoakce(CHAR_DATA *ch, char *argument)
 
 void do_autoloot(CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     if (IS_NPC(ch))
       return;
 
@@ -1283,6 +1290,7 @@ void do_autoloot(CHAR_DATA *ch, char *argument)
 
 void do_autosac(CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     if (IS_NPC(ch))
       return;
 
@@ -1300,6 +1308,7 @@ void do_autosac(CHAR_DATA *ch, char *argument)
 
 void do_autosplit(CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     if (IS_NPC(ch))
       return;
 
@@ -1317,6 +1326,7 @@ void do_autosplit(CHAR_DATA *ch, char *argument)
 
 void do_brief(CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     if (IS_SET(ch->comm,COMM_BRIEF))
     {
       send_to_char("Özet tanım kapandı.\n\r",ch);
@@ -1331,6 +1341,7 @@ void do_brief(CHAR_DATA *ch, char *argument)
 
 void do_compact(CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     if (IS_SET(ch->comm,COMM_COMPACT))
     {
       printf_to_char(ch,"Kompakt modu kapatıldı.\n\r");
@@ -1345,6 +1356,7 @@ void do_compact(CHAR_DATA *ch, char *argument)
 
 void do_show(CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     if (IS_SET(ch->comm,COMM_SHOW_AFFECTS))
     {
       printf_to_char(ch,"Etkiler skor tablosunda gösterilmeyecek.\n\r");
@@ -1386,6 +1398,7 @@ void do_prompt(CHAR_DATA *ch, char *argument)
 
 void do_combine(CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     if (IS_SET(ch->comm,COMM_COMBINE))
     {
       send_to_char("Bileşik nesne kaldırıldı.\n\r",ch);
@@ -1400,6 +1413,7 @@ void do_combine(CHAR_DATA *ch, char *argument)
 
 void do_noloot(CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     if (IS_NPC(ch))
       return;
 
@@ -1417,6 +1431,7 @@ void do_noloot(CHAR_DATA *ch, char *argument)
 
 void do_nofollow(CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     if (IS_NPC(ch))
       return;
     if ( IS_AFFECTED( ch, AFF_CHARM ) )  {
@@ -1439,6 +1454,7 @@ void do_nofollow(CHAR_DATA *ch, char *argument)
 
 void do_nosummon(CHAR_DATA *ch, char *argument)
 {
+    (void) argument; /* Unused parameter */
     if (IS_NPC(ch))
     {
       if (IS_SET(ch->imm_flags,IMM_SUMMON))
@@ -1987,6 +2003,7 @@ void do_exits( CHAR_DATA *ch, char *argument )
 
 void do_worth( CHAR_DATA *ch, char *argument )
 {
+    (void)argument;
     char buf[MAX_STRING_LENGTH];
     int total_played;
 
@@ -2085,7 +2102,8 @@ void do_score( CHAR_DATA *ch, char *argument )
 	
 	if(victim->pcdata->oyuncu_katli == 0)
 	{
-		strcpy(oyuncukatli,"Hayır");
+		strncpy(oyuncukatli, "Hayır", sizeof(oyuncukatli) - 1);
+		oyuncukatli[sizeof(oyuncukatli) - 1] = '\0'; /* Ensure null termination */
 	}
 	else if(victim->pcdata->oyuncu_katli == 1)
 	{
@@ -2116,7 +2134,8 @@ void do_score( CHAR_DATA *ch, char *argument )
 	
 	if(ch->pcdata->oyuncu_katli == 0)
 	{
-		strcpy(oyuncukatli,"Hayır");
+		strncpy(oyuncukatli, "Hayır", sizeof(oyuncukatli) - 1);
+		oyuncukatli[sizeof(oyuncukatli) - 1] = '\0'; /* Ensure null termination */
 	}
 	else if(ch->pcdata->oyuncu_katli == 1)
 	{
@@ -2202,21 +2221,7 @@ void mob_score(CHAR_DATA *ch,CHAR_DATA *mob)
   printf_to_char(ch,"{c'---------------------------------------------------------------------'{x\n\r");
 }
 
-char *	const	month_name	[] =
-{
-	(char*)"Albars",
-	(char*)"Kadimler",
-    (char*)"Büyük Acı",
-	(char*)"Zeytin",
-	(char*)"Yılan",
-	(char*)"Yelbüke",
-	(char*)"Pusu",
-	(char*)"Savaş",
-	(char*)"Albastı",
-	(char*)"Gölge",
-	(char*)"Kara Ölüm",
-	(char*)"Alacakaranlık",
-};
+extern char * const month_name[];
 
 
 #define COLOR_DAWN "\033[1;34;44m"
@@ -2227,6 +2232,7 @@ char *	const	month_name	[] =
 
 void do_time( CHAR_DATA *ch, char *argument )
 {
+    (void)argument;
     char buf[MAX_STRING_LENGTH];
     char buf2[MAX_STRING_LENGTH - 20];
 
@@ -2269,6 +2275,7 @@ void do_time( CHAR_DATA *ch, char *argument )
 
 void do_weather( CHAR_DATA *ch, char *argument )
 {
+    (void)argument;
 
     static const char * sky_look[4] =
     {
@@ -2501,6 +2508,7 @@ void do_whois (CHAR_DATA *ch, char *argument)
 
 void do_count ( CHAR_DATA *ch, char *argument )
 {
+    (void)argument;
     int count;
     DESCRIPTOR_DATA *d;
     char buf[MAX_STRING_LENGTH];
@@ -2525,6 +2533,7 @@ void do_count ( CHAR_DATA *ch, char *argument )
 
 void do_inventory( CHAR_DATA *ch, char *argument )
 {
+    (void)argument;
     send_to_char( "Taşıdıkların:\n\r", ch );
     show_list_to_char( ch->carrying, ch, TRUE, TRUE );
     return;
@@ -2534,7 +2543,8 @@ void do_inventory( CHAR_DATA *ch, char *argument )
 
 void do_equipment( CHAR_DATA *ch, char *argument )
 {
-  OBJ_DATA *obj;
+    (void)argument;
+    OBJ_DATA *obj;
   int iWear, bolgeye_giyilen_esya_sayisi, i;
   bool found;
   char buf[MAX_STRING_LENGTH];
@@ -2876,11 +2886,7 @@ void set_title( CHAR_DATA *ch, char *title )
 
 void do_titl( CHAR_DATA *ch, char *argument)
 {
-   printf_to_char( ch,"Lakabını değiştirmek istiyorsan 'lakap' komutunu eksiksiz yazmalısın.\n\r" );
-}
-
-void do_title( CHAR_DATA *ch, char *argument )
-{
+    (void)argument; /* Unused parameter */
     if ( IS_NPC(ch) )
         return;
 
@@ -3002,6 +3008,7 @@ void do_description( CHAR_DATA *ch, char *argument )
 
 void do_report( CHAR_DATA *ch, char *argument )
 {
+    (void)argument;
     char buf[MAX_INPUT_LENGTH];
 
     sprintf( buf, "%d/%d Yp %d/%d Mp %d/%d Zp %d Tp",
@@ -3029,17 +3036,18 @@ void do_practice( CHAR_DATA *ch, char *argument )
     {
 	int col;
 
-	col    = 0;
+  col    = 0;
         strcpy( buf2, "" );
-	for ( sn = 0; sn < MAX_SKILL; sn++ )
-	{
-	    if ( skill_table[sn].name == NULL )
-		break;
-	    if ( ch->level < skill_table[sn].skill_level[ch->iclass] ||
-		!RACE_OK(ch,sn) ||
+  for ( sn = 0; sn < MAX_SKILL; sn++ )
+  {
+      /* Check if the string is empty */
+      if ( skill_table[sn].name[0] == '\0' )
+   break;
+      if ( ch->level < skill_table[sn].skill_level[ch->iclass] ||
+   !RACE_OK(ch,sn) ||
 (skill_table[sn].cabal != ch->cabal && skill_table[sn].cabal != CABAL_NONE)
-	      )
-		continue;
+        )
+    continue;
 
     if(ch->pcdata->learned[sn]<75)
     sprintf( buf, "{r%-18s %3d%%  {x",skill_table[sn].name[1], ch->pcdata->learned[sn] );
@@ -3499,7 +3507,8 @@ void do_request( CHAR_DATA *ch, char *argument)
 
 void do_detect_hidden( CHAR_DATA *ch, char *argument)
 {
-    AFFECT_DATA af;
+ (void)argument;
+ AFFECT_DATA af;
 
 
   if (IS_NPC(ch) ||
@@ -3534,7 +3543,8 @@ void do_detect_hidden( CHAR_DATA *ch, char *argument)
 
 void do_bear_call( CHAR_DATA *ch, char *argument )
 {
-  CHAR_DATA *gch;
+ (void)argument;
+ CHAR_DATA       *gch;
   CHAR_DATA *bear;
   CHAR_DATA *bear2;
   AFFECT_DATA af;
@@ -3718,7 +3728,8 @@ void do_identify( CHAR_DATA *ch, char *argument )
 
 void do_affects_col(CHAR_DATA *ch, char *argument )
 {
-  AFFECT_DATA *paf, *paf_last = NULL;
+    (void)argument;
+    AFFECT_DATA *paf, *paf_last = NULL;
   char buf[MAX_STRING_LENGTH];
   bool found, firstAffect;
 
@@ -3889,6 +3900,7 @@ void do_affects_col(CHAR_DATA *ch, char *argument )
 
 void do_familya(CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
 	int sn,col;
 	col    = 0;
 	printf_to_char(ch,"Irklara ilişkin irfanın:\n\r\n\r");
@@ -3911,7 +3923,8 @@ void do_familya(CHAR_DATA *ch, char *argument )
 
 void do_lion_call( CHAR_DATA *ch, char *argument )
 {
-  CHAR_DATA *gch;
+ (void)argument;
+ CHAR_DATA       *gch;
   CHAR_DATA *bear;
   CHAR_DATA *bear2;
   AFFECT_DATA af;
@@ -4043,6 +4056,7 @@ char *get_cond_alias( OBJ_DATA *obj)
 /* room affects */
 void do_raffects(CHAR_DATA *ch, char *argument )
 {
+    (void)argument;
     AFFECT_DATA *paf, *paf_last = NULL;
     char buf[MAX_STRING_LENGTH];
 
@@ -4102,8 +4116,9 @@ void do_pracnew( CHAR_DATA *ch, char *argument )
         strcpy( buf2, "" );
 	for ( sn = 0; sn < MAX_SKILL; sn++ )
 	{
-	    if ( skill_table[sn].name == NULL )
-		break;
+	    /* Check if the string is empty instead of comparing pointer to NULL */
+	    if ( skill_table[sn].name == NULL || skill_table[sn].name[0] == '\0' )
+	 break;
 	    if ( ch->level < skill_table[sn].skill_level[ch->iclass] ||
 	!RACE_OK(ch,sn) ||
 (skill_table[sn].cabal != ch->cabal && skill_table[sn].cabal != CABAL_NONE)
@@ -4616,6 +4631,7 @@ void do_who_col( CHAR_DATA *ch, char *argument )
 
 void do_camp( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
   AFFECT_DATA af,af2;
 
   if (IS_NPC(ch) ||
@@ -5033,7 +5049,8 @@ void do_make_arrow( CHAR_DATA *ch, char *argument )
 
 void do_make_bow( CHAR_DATA *ch, char *argument )
 {
-  OBJ_DATA *bow;
+    (void)argument;
+    OBJ_DATA *bow;
   AFFECT_DATA tohit,todam;
   int mana,wait;
 
@@ -5119,6 +5136,7 @@ void do_make( CHAR_DATA *ch, char *argument )
 
 void do_nocancel(CHAR_DATA *ch, char *argument)
 {
+    (void)argument;
     if (IS_NPC(ch))
       return;
 
@@ -5137,6 +5155,7 @@ void do_nocancel(CHAR_DATA *ch, char *argument)
 
 void do_diril( CHAR_DATA *ch, char *argument )
 {
+  (void)argument;
   if(IS_NPC(ch))
   {
     return;
@@ -5166,7 +5185,7 @@ void do_discord( CHAR_DATA *ch, char *argument )
 	FILE *fp;
 	char line[30];
 	int is_found;
-	ssize_t read;
+/*      ssize_t read; Unused variable */
 
 	argument = one_argument(argument,arg);
 	if (arg[0] == '\0')

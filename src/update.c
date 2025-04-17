@@ -76,7 +76,7 @@ DECLARE_SPEC_FUN(       spec_special_guard      );
 
 void	raw_kill		args( ( CHAR_DATA *victim ) );
 void	back_home		args( ( CHAR_DATA *ch ) );
-int 	check_time_sync		( );
+int 	check_time_sync		( void ); /* Fixed prototype */
 
 //#include <unistd.h>
 #include <signal.h>
@@ -985,10 +985,10 @@ int age_to_num( int age )
 /*
 * Update the weather.
 */
-void weather_update()
+void weather_update( void ) /* Fixed prototype */
 {
-	char buf[MAX_STRING_LENGTH];
-	DESCRIPTOR_DATA *d;
+char buf[MAX_STRING_LENGTH];
+DESCRIPTOR_DATA *d;
 	int diff;
 
 	buf[0] = '\0';
@@ -1630,7 +1630,7 @@ void obj_update( void )
 	OBJ_DATA *obj;
 	OBJ_DATA *obj_next;
 	OBJ_DATA *t_obj, *pit, *next_obj;
-	int esya_kac_gun, esya_curume_gun_sayisi, random_sayi;
+	int esya_kac_gun, esya_curume_gun_sayisi; //, random_sayi; /* Commented out unused variable */
 
 	AFFECT_DATA *paf, *paf_next;
 	static int pit_count = 1;
@@ -1839,7 +1839,8 @@ void obj_update( void )
 				{ /* to the pit */
 					for (pit = get_room_index(obj->altar)->contents;
 					pit != NULL && pit->pIndexData->vnum != obj->pit;
-					pit = pit->next);
+					pit = pit->next)
+						; /* Fixed empty loop body warning */
 
 						if (pit == NULL)
 							obj_to_room(t_obj,obj->in_room);

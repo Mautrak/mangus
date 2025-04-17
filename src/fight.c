@@ -1144,7 +1144,7 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
 					}
 					else
 					{
-						dam = int(dam * 3 / 2);
+						dam = (int)(dam * 3 / 2);
 					}
 					printf_to_char(ch,"{gBirden %s ırkına ilişkin bilgini kullanabileceğin bir an yakalıyorsun.{x\n\r",race_table[victim->race].name[1]);
 				}
@@ -1757,7 +1757,7 @@ bool damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt, int dam_type, bo
 				}
 				else if(ch->level - victim->level < 10)
 				{
-					ch->hit += int(ch->level / 3);
+					ch->hit += (int)(ch->level / 3);
 					ch->hit = UMIN(ch->hit,ch->max_hit);
 					send_to_char("Emdiğin kanla şifa buluyorsun!\n\r",ch);
 				}
@@ -2967,7 +2967,7 @@ int xp_compute(CHAR_DATA *gch, CHAR_DATA *victim, int total_levels,int members)
 	if(gch->pcdata->discord_id[0] == '\0')
 	{
 		printf_to_char( gch , "{CDiscord ID girmediğin için kazandığın TP azalıyor.{x\n\r" );
-		xp = int((float)xp / (float)3);
+		xp = (int)((float)xp / (float)3);
 	}
 
 	return xp;
@@ -3214,7 +3214,7 @@ void do_kill( CHAR_DATA *ch, char *argument )
 
 void do_murde( CHAR_DATA *ch, char *argument )
 {
-	send_to_char( "KATLETmek istiyorsan tam olarak yaz.\n\r", ch );
+    (void)argument;	send_to_char( "KATLETmek istiyorsan tam olarak yaz.\n\r", ch );
     return;
 }
 
@@ -3308,6 +3308,7 @@ void do_murder( CHAR_DATA *ch, char *argument )
 
 void do_flee( CHAR_DATA *ch, char *argument )
 {
+    (void)argument;
     ROOM_INDEX_DATA *was_in;
     ROOM_INDEX_DATA *now_in;
     CHAR_DATA *victim;
@@ -3383,6 +3384,7 @@ void do_flee( CHAR_DATA *ch, char *argument )
 
 void do_sla( CHAR_DATA *ch, char *argument )
 {
+    (void)argument;
 	send_to_char("SLAY etmek istiyorsan komutu tam yazmalısın.\n\r", ch );
     return;
 }
@@ -3487,6 +3489,7 @@ bool check_obj_dodge( CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *obj, int bonus
 
 void do_dishonor( CHAR_DATA *ch, char *argument )
 {
+    (void)argument;
     ROOM_INDEX_DATA *was_in;
     ROOM_INDEX_DATA *now_in;
     CHAR_DATA *gch;

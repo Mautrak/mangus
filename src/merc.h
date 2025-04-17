@@ -1,3 +1,6 @@
+#ifndef MERC_H
+#define MERC_H
+
 /***************************************************************************
  *                                                                         *
  * Uzak Diyarlar açık kaynak Türkçe Mud projesidir.                        *
@@ -9,6 +12,11 @@
  * Discord : https://discord.gg/kXyZzv                                     *
  *                                                                         *
  ***************************************************************************/
+
+/* Define unix for macOS builds if not already defined */
+#if defined(__APPLE__) && !defined(unix)
+#define unix 1
+#endif
 
 /***************************************************************************
  *     ANATOLIA 2.1 is copyright 1996-1997 Serdar BULUT, Ibrahim CANPUNAR  *
@@ -108,6 +116,7 @@
 #define DECLARE_OPROG_FUN_AREA(fun)	OPROG_FUN_AREA fun
 #endif
 
+#include <stdbool.h> /* Include for bool type (C99) */
 
 /*
  * Short scalar types.
@@ -2876,7 +2885,6 @@ extern	const	struct	cha_app_type	cha_app		[26];
 
 extern  const   struct  language_type   language_table     [MAX_LANGUAGE];
 extern	const	struct	translation_type translation_table	[];
-extern	const	struct	cmd_type	cmd_table	[];
 extern	const	struct	class_type	class_table	[MAX_CLASS];
 extern	const	struct	weapon_type	weapon_table	[];
 extern  const   struct  item_type	item_table	[];
@@ -3137,7 +3145,7 @@ void	send_to_char_bw	args( ( const char *txt, CHAR_DATA *ch ) );
 void	page_to_char_bw	args( ( const char *txt, CHAR_DATA *ch ) );
 	//act_color: format1 for english, format2 for turkish
 void    dump_to_scr	args( ( char *text ) );
-void	init_signals	args( () );
+void	init_signals	args( ( void ) ); /* Fixed prototype */
 void	sig_handler		args( (int sig) );
 
 void	printf_to_char	args( ( CHAR_DATA *, const char *, ... ) );
@@ -3465,3 +3473,5 @@ void mprog_set(MOB_INDEX_DATA *, const char *, const char *);
 #undef	RID
 #undef	SF
 #undef  AD
+
+#endif /* MERC_H */

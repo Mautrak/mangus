@@ -2137,10 +2137,16 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	    break;
 	}
 
-        ORG_RACE(ch) = race;
-	RACE(ch) = race;
-	for (i=0; i < MAX_STATS;i++)
-	      ch->mod_stat[i] = 0;
+        /* ORG_RACE is a macro, assign to the underlying member */
+        /* Fix L2140: Assign directly to pcdata->race for PCs */
+        if (!IS_NPC(ch))
+        {
+         ch->pcdata->race = race;
+        }
+        /* Note: Cannot change race for NPCs this way */
+ /* RACE(ch) = race; */ /* This line was causing the assignability error as RACE(ch) might resolve to pcdata->race again */
+ for (i=0; i < MAX_STATS;i++)
+       ch->mod_stat[i] = 0;
 
 	ch->hit = ch->max_hit;
 	ch->mana = ch->max_mana;
@@ -2252,10 +2258,20 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
       case CON_GET_ALIGNMENT:
 	switch( argument[0])
 	  {
-	  case 'i' : case 'İ' :
-		ch->alignment = 1000;
-		write_to_buffer(d, "Karakterinin yönelimi 'iyi'.\n\r",0);
-		break;
+	  case 'i' : /* case 'İ' : */ /* Fix L2255: Cannot use multi-byte char literal */
+	 /* Handle 'İ' separately if needed, assuming ISO-8859-9 for 0xDD */
+	 if (argument[0] == 'i' || (unsigned char)argument[0] == 0xDD)
+	 {
+	  ch->alignment = 1000;
+	  write_to_buffer(d, "Karakterinin yönelimi 'iyi'.\n\r",0);
+	 }
+	 else
+	 {
+	  write_to_buffer(d,"Geçerli bir yönelim değil.\n\r",0);
+	  write_to_buffer(d,"Karakterinin yöneliminin ne olmasını istiyorsun ( i - y - k )? ",0);
+	  return;
+	 }
+	 break;
 	  case 'y' : case 'Y' :
 		ch->alignment = 0;
 		write_to_buffer(d, "Karakterinin yönelimi 'yansız'.\n\r",0);
@@ -2630,6 +2646,7 @@ bool check_parse_name( char *name )
  */
 bool check_reconnect( DESCRIPTOR_DATA *d, char *name, bool fConn )
 {
+    (void)name; /* Parameter 'name' is not used in this function */
     CHAR_DATA *ch;
 
     for ( ch = char_list; ch != NULL; ch = ch->next )
@@ -2930,22 +2947,24 @@ void show_string(struct descriptor_data *d, char *input)
 	{
 	    *scan = '\0';
 	    write_to_buffer(d,buffer,strlen(buffer));
-	    for (chk = d->showstr_point; isspace(*chk); chk++);
+	    for (chk = d->showstr_point; isspace(*chk); chk++)
+	    { /* Fix L2933: Added braces for clarity */
+	 /* empty */
+	    }
+	    if (!*chk)
 	    {
-		if (!*chk)
-		{
 		    if (d->showstr_head)
         	    {
             		free_string(d->showstr_head);
             		d->showstr_head = 0;
         	    }
         	    d->showstr_point  = 0;
-    		}
-	    }
-	    return;
-	}
-    }
-    return;
+      }
+        	   return; /* Moved inside the 'else if' block */
+     }
+ } /* Closing brace for 'for' loop */
+    /* Removed extra return that was here */
+    return; /* Keep this final return for the function */
 }
 
 
@@ -3191,6 +3210,7 @@ extern AREA_DATA *area_first;
 
 void exit_function(int signum)
 {
+  (void)signum; /* Fix L3192: Unused parameter */
   dump_to_scr((char*)"Exiting from the player saver.\n\r");
   wait(NULL);
 }

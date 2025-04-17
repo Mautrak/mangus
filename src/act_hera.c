@@ -65,7 +65,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <ctype.h>
-#include <inttypes.h>
+#include <inttypes.h> /* For intptr_t */
 #include "merc.h"
 
 /* command procedures needed */
@@ -274,6 +274,7 @@ void do_enter( CHAR_DATA *ch, char *argument)
 
 void do_settraps( CHAR_DATA *ch, char *argument )
 {
+    (void) argument; /* Unused parameter */
     if ( !IS_NPC(ch)
     &&   ch->level < skill_table[gsn_settraps].skill_level[ch->iclass] )
       {
@@ -352,13 +353,12 @@ void do_settraps( CHAR_DATA *ch, char *argument )
  *  Modified by Turtle for Merc22 (07-Nov-94).                             *
  *  Adopted to ANATOLIA by Chronos.                                        *
  ***************************************************************************/
-
 #if	defined(linux)
-void bcopy(const void *src,void *dest,int n);
-void bzero(void *s,int n);
+/* void bcopy(const void *src,void *dest,int n); Removed, using memmove */
+/* void bzero(void *s,int n); Removed, conflicts with system macro */
 #else
-void bcopy(char *s1,char* s2,int len);
-void bzero(char *sp,int len);
+/* void bcopy(char *s1,char* s2,int len); Removed, using memmove */
+/* void bzero(char *sp,int len); Removed, conflicts with system macro */
 #endif
 
 extern const char* dir_name[];
@@ -592,7 +592,8 @@ void *hash_remove(struct hash_header *ht,int key)
       int		i;
       struct hash_link	*temp, *aux;
 
-      temp	= (hash_link*)(*scan)->data;
+      /* Correct cast syntax */
+      temp	= (struct hash_link *)(*scan)->data;
       aux	= *scan;
       *scan	= aux->next;
       free(aux);
@@ -602,11 +603,11 @@ void *hash_remove(struct hash_header *ht,int key)
 	  break;
 
       if(i<ht->klistlen)
-	{
-	  bcopy((char *)ht->keylist+i+1,(char *)ht->keylist+i,(ht->klistlen-i)
-		*sizeof(*ht->keylist));
-	  ht->klistlen--;
-	}
+ {
+   /* Use memmove instead of deprecated bcopy */
+          memmove((char *)ht->keylist+i, (char *)ht->keylist+i+1, (ht->klistlen-i)*sizeof(*ht->keylist));
+   ht->klistlen--;
+ }
 
       return temp;
     }
@@ -660,12 +661,14 @@ int exit_ok( EXIT_DATA *pexit )
 
 void donothing(void *pDummy)
 {
+  (void) pDummy; /* Unused parameter */
   return;
 }
 
 int find_path( int in_room_vnum, int out_room_vnum, CHAR_DATA *ch,
 	       int depth, int in_zone )
 {
+  (void) ch; /* Unused parameter */
   struct room_q		*tmp_q, *q_head, *q_tail;
   struct hash_header	x_room;
   int			i, tmp_room, count=0, thru_doors;
@@ -729,10 +732,11 @@ int find_path( int in_room_vnum, int out_room_vnum, CHAR_DATA *ch,
 			  q_tail = tmp_q;
 
 			  /* ancestor for first layer is the direction */
+			  /* Correct C-style cast */
 			  hash_enter( &x_room, tmp_room,
-				     ((intptr_t)hash_find(&x_room,q_head->room_nr)== -1) ? reinterpret_cast<void*>(i+1) : hash_find(&x_room,q_head->room_nr));
+			      ((intptr_t)hash_find(&x_room,q_head->room_nr)== -1) ? (void *)(intptr_t)(i+1) : hash_find(&x_room,q_head->room_nr));
 			}
-		    }
+			   }
 		  else
 		    {
 		      /* have reached our goal so free queue */

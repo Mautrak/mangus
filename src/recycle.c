@@ -492,7 +492,7 @@ int get_size (int val)
     return -1;
 }
 
-BUFFER *new_buf()
+BUFFER *new_buf( void ) /* Fixed prototype */
 {
     BUFFER *buffer;
 

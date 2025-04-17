@@ -11,3 +11,5 @@ log/kanal/*
 player/*
 data
 log/events/events
+.gitignore
+src/*.bak

@@ -108,24 +108,27 @@ void checkexits (ROOM_INDEX_DATA *room, AREA_DATA *pArea, char* buffer)
 				else
 					room_pair (room,to_room,exit_to,buf); /* > */
 				
-				strcat (buffer, buf);				
-			}			
-			else			
-			if ( (room->area != pArea) && (exit->u1.to_room->area == pArea) )
-			{ /* an exit from another area to our area */
+				strcat (buffer, buf);
+			}
+			else
+			{ /* Add opening brace for the else block */
+			             if ( (room->area != pArea) && (exit->u1.to_room->area == pArea) )
+			             { /* an exit from another area to our area */
 
-				if  (!
-			    	 (to_room->exit[opposite_dir[i]] &&
-				      to_room->exit[opposite_dir[i]]->u1.to_room == room )
-					)
-				/* two-way exits are handled in the other if */
-				{						
-					room_pair (to_room,room,exit_from,buf);
-					strcat (buffer, buf);
-				}
-				
-			} /* if room->area */
-			
+			                 if  (!
+			                      (to_room->exit[opposite_dir[i]] &&
+			                       to_room->exit[opposite_dir[i]]->u1.to_room == room )
+			                     )
+			                 /* two-way exits are handled in the other if */
+			                 {
+			                     room_pair (to_room,room,exit_from,buf);
+			                     strcat (buffer, buf);
+			                 }
+
+			             } /* if room->area */
+			         }
+			} /* Add closing brace for the else block */
+
 	} /* for */
 	
 }
@@ -133,6 +136,7 @@ void checkexits (ROOM_INDEX_DATA *room, AREA_DATA *pArea, char* buffer)
 /* for now, no arguments, just list the current area */
 void do_exlist (CHAR_DATA *ch, char * argument)
 {
+    (void)argument;
 	AREA_DATA* pArea;
 	ROOM_INDEX_DATA* room;
 	int i;
@@ -157,6 +161,7 @@ void do_exlist (CHAR_DATA *ch, char * argument)
 
 void do_vlist (CHAR_DATA *ch, char *argument)
 {
+    (void)argument;
 	int i,j,vnum;
 	ROOM_INDEX_DATA *room;
 	char buffer[MAX_ROW*100]; /* should be plenty */
@@ -183,5 +188,3 @@ void do_vlist (CHAR_DATA *ch, char *argument)
 		send_to_char ("\n\r",ch);
 	} /* for rows */
 }
-
-

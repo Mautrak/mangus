@@ -531,6 +531,7 @@ else act( "$n geldi.", ch, NULL, NULL, TO_ROOM );
 
 void do_north( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
     move_char( ch, DIR_NORTH, FALSE );
     return;
 }
@@ -539,6 +540,7 @@ void do_north( CHAR_DATA *ch, char *argument )
 
 void do_east( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
     move_char( ch, DIR_EAST, FALSE );
     return;
 }
@@ -547,6 +549,7 @@ void do_east( CHAR_DATA *ch, char *argument )
 
 void do_south( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
     move_char( ch, DIR_SOUTH, FALSE );
     return;
 }
@@ -555,6 +558,7 @@ void do_south( CHAR_DATA *ch, char *argument )
 
 void do_west( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
     move_char( ch, DIR_WEST, FALSE );
     return;
 }
@@ -563,6 +567,7 @@ void do_west( CHAR_DATA *ch, char *argument )
 
 void do_up( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
     move_char( ch, DIR_UP, FALSE );
     return;
 }
@@ -571,6 +576,7 @@ void do_up( CHAR_DATA *ch, char *argument )
 
 void do_down( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
     move_char( ch, DIR_DOWN, FALSE );
     return;
 }
@@ -680,6 +686,7 @@ void scan_char           args((CHAR_DATA *victim, CHAR_DATA *ch,
                                sh_int depth, sh_int door));
 void do_scan2(CHAR_DATA *ch, char *argument)
 {
+    (void)argument; /* Unused parameter */
    //extern   char *  const   dir_name        [];
    EXIT_DATA *pExit;
    sh_int door;
@@ -1238,10 +1245,10 @@ void do_pick( CHAR_DATA *ch, char *argument )
 
   WAIT_STATE( ch, skill_table[gsn_pick_lock].beats );
 
-  chance += int( get_curr_stat( ch , STAT_INT ) / 3 );
-  chance += int( get_curr_stat( ch , STAT_WIS ) / 3 );
-  chance += int( get_curr_stat( ch , STAT_DEX ) / 3 );
-  chance += int( ( get_skill( ch , gsn_pick_lock ) - 75 ) / 2 ) ;
+  chance += (int)( get_curr_stat( ch , STAT_INT ) / 3 );
+  chance += (int)( get_curr_stat( ch , STAT_WIS ) / 3 );
+  chance += (int)( get_curr_stat( ch , STAT_DEX ) / 3 );
+  chance += (int)( ( get_skill( ch , gsn_pick_lock ) - 75 ) / 2 ) ;
 
   obj_eldiven = get_eq_char( ch, WEAR_HANDS );
 
@@ -1874,6 +1881,7 @@ void do_wake( CHAR_DATA *ch, char *argument )
 
 void do_sneak( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
     AFFECT_DATA af;
 
     if (MOUNTED(ch))
@@ -1910,6 +1918,7 @@ void do_sneak( CHAR_DATA *ch, char *argument )
 
 void do_hide( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
 int forest;
 
     if (MOUNTED(ch))
@@ -1950,6 +1959,7 @@ int forest;
 
 void do_camouflage( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
 
     if (MOUNTED(ch))
     {
@@ -2006,6 +2016,7 @@ void do_camouflage( CHAR_DATA *ch, char *argument )
  */
  void do_visible( CHAR_DATA *ch, char *argument )
  {
+     (void)argument; /* Unused parameter */
      if (IS_SET(ch->affected_by, AFF_HIDE))
        {
  	send_to_char( "Gölgelerden çıkıyorsun.\n\r", ch );
@@ -2062,6 +2073,7 @@ void do_camouflage( CHAR_DATA *ch, char *argument )
 
 void do_recall( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
   char buf[MAX_STRING_LENGTH];
   CHAR_DATA *victim;
   ROOM_INDEX_DATA *location;
@@ -2402,6 +2414,7 @@ void do_track(CHAR_DATA *ch, char *argument)
 
 void do_evolve_bear( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
     AFFECT_DATA af;
     int level,duration;
 
@@ -2528,7 +2541,7 @@ void do_evolve_bear( CHAR_DATA *ch, char *argument )
     af.duration  = duration;
     af.location  = APPLY_NONE;
     af.modifier  = 0;
-    af.bitvector = PLR_BEAR;
+    af.bitvector = (unsigned int)PLR_BEAR;
     affect_to_char( ch, &af );
 
     send_to_char( "Ayılaştığını hissediyorsun.\n\r", ch );
@@ -2539,6 +2552,7 @@ void do_evolve_bear( CHAR_DATA *ch, char *argument )
 
 void do_vampire( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
     AFFECT_DATA af;
     int level,duration;
 
@@ -2932,6 +2946,7 @@ void do_blink( CHAR_DATA *ch, char *argument )
 
 void do_vanish( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
   ROOM_INDEX_DATA *pRoomIndex;
   int i;
 
@@ -3006,6 +3021,7 @@ void do_vanish( CHAR_DATA *ch, char *argument )
 
 void do_detect_sneak( CHAR_DATA *ch, char *argument)
 {
+    (void)argument; /* Unused parameter */
     AFFECT_DATA af;
 
     if ( is_affected(ch, gsn_detect_sneak) )
@@ -3027,6 +3043,7 @@ void do_detect_sneak( CHAR_DATA *ch, char *argument)
 
 void do_fade( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
     if (ch_skill_nok(ch,gsn_fade)) return;
 
     if (MOUNTED(ch))
@@ -3360,6 +3377,7 @@ if ( ( door = find_exit( ch, arg2 ) ) >= 0 )
 
 void do_crecall( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
     CHAR_DATA *victim;
     ROOM_INDEX_DATA *location;
     int point = ROOM_VNUM_BATTLE;
@@ -3725,6 +3743,7 @@ void do_mount( CHAR_DATA *ch, char *argument )
 
 void do_dismount( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
   struct char_data *mount;
 
   if(MOUNTED(ch)) {
@@ -4019,8 +4038,8 @@ char *find_way(CHAR_DATA *ch,ROOM_INDEX_DATA *rstart, ROOM_INDEX_DATA *rend)
  sprintf(buf,"Find: ");
  for(i=0; i<65535; i++)
  {
- if ( (rend == rstart))
-	 return buf;
+ if (rend == rstart)
+  return buf;
   if ( (direction = find_path(rstart->vnum,rend->vnum,ch,-40000,0)) == -1)
 	{
 	 strcat(buf," BUGGY");
@@ -4048,6 +4067,7 @@ char *find_way(CHAR_DATA *ch,ROOM_INDEX_DATA *rstart, ROOM_INDEX_DATA *rend)
 
 void do_human( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
     if (ch->iclass != CLASS_VAMPIRE && ch->iclass != CLASS_RANGER )
     {
       send_to_char("Hı?\n\r",ch);

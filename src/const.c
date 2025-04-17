@@ -332,7 +332,7 @@ const 	struct	race_type	race_table	[]		=
 	},
 
     { /* 7 */
-        "dark-elf","kara-elf","K-Elf",LANG_ELVISH,     TRUE,TRUE, 		SIZE_MEDIUM, 0,
+        {"dark-elf","kara-elf"},"K-Elf",LANG_ELVISH,     TRUE,TRUE, 		SIZE_MEDIUM, 0, /* Fix L335: Added braces */
         0,              AFF_INFRARED|AFF_SNEAK, 0,
         0,              RES_CHARM,      VULN_IRON,
         A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 250, { "lore" , "camouflage" }, { 21, 22, 20, 22, 18, 20 }
@@ -516,12 +516,6 @@ const 	struct	race_type	race_table	[]		=
     0,		0, 0, { "" }, {20, 20, 20, 20, 20, 20 }
     },
 	
-    {
-	{NULL,NULL}, 0,0,0, 0,0, 0,
-   0, 0, 0,
-   0,0,0,
-    0,0,0, 0, 0
-  }
 };
 
 
@@ -2230,7 +2224,7 @@ const struct color_type color_table[] = /*  Last entry should be NULL   */
 /* God's Name, name of religion, tattoo vnum  */
 const struct religion_type religion_table [] =
 {
-  { "", "None", 0 },
+  { "", "None", "", 0 },
   { "Kamenilik", "Kameniler", "Kame", OBJ_VNUM_TATTOO_KAME },
   { "Niryanilik", "Niryaniler", "Nir", OBJ_VNUM_TATTOO_NIR },
   { "Nyahilik", "Nyahiler", "Nyah", OBJ_VNUM_TATTOO_NYAH },

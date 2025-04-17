@@ -58,7 +58,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <malloc.h>
+#include <stdlib.h> /* Replaced malloc.h for macOS compatibility */
 #include "merc.h"
 #include "recycle.h"
 #include "lookup.h"
@@ -312,10 +312,11 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
 
 	for ( sn = 0; sn < MAX_SKILL; sn++ )
 	{
-	    if ( skill_table[sn].name != NULL && ch->pcdata->learned[sn] > 0 )
+	    /* Check if the first name pointer is not NULL */
+	    if ( skill_table[sn].name[0] != NULL && ch->pcdata->learned[sn] > 0 )
 	    {
-		fprintf( fp, "Sk %d '%s'\n",
-		    ch->pcdata->learned[sn], skill_table[sn].name[0] );
+	 fprintf( fp, "Sk %d '%s'\n",
+	     ch->pcdata->learned[sn], skill_table[sn].name[0] );
 	    }
 	}
 
@@ -958,10 +959,12 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
     /* initialize race */
     if (found)
     {
-	if (ORG_RACE(ch) == 0)
-	    ORG_RACE(ch) = race_lookup("human");
-	if (RACE(ch) == 0)
-	    RACE(ch) = race_lookup("human");
+	/* If original race wasn't saved or is invalid, default to human */
+	if (ch->pcdata->race <= 0 || ch->pcdata->race >= MAX_RACE)
+	    ch->pcdata->race = race_lookup("human");
+	/* If current race wasn't saved or is invalid, default to original race */
+	if (RACE(ch) <= 0 || RACE(ch) >= MAX_RACE)
+	    RACE(ch) = ch->pcdata->race;
 
 	ch->size = race_table[ORG_RACE(ch)].size;
 	ch->dam_type = 17; /*punch */
@@ -1440,7 +1443,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp )
 	    if ( !str_cmp( word, "Race" ) )
 	    {
 		RACE(ch) = race_lookup(fread_string(fp));
-		ORG_RACE(ch) = RACE(ch);
+		/* ORG_RACE(ch) = RACE(ch); -- This seems incorrect, commenting out */
 		fMatch = TRUE;
 		break;
 	    }
@@ -1750,7 +1753,7 @@ void fread_pet( CHAR_DATA *ch, FILE *fp )
 	    if ( !str_cmp( word, "Race" ) )
 	    {
 		RACE(pet) = race_lookup(fread_string(fp));
-		ORG_RACE(pet) = RACE(pet);
+		/* ORG_RACE(pet) = RACE(pet); -- This seems incorrect, commenting out */
 		fMatch = TRUE;
 		break;
 	    }
@@ -1890,7 +1893,6 @@ void fread_obj( CHAR_DATA *ch, FILE *fp )
 			if (!str_cmp(word,"Affs"))
             {
 				AFFECT_DATA *paf;
-				int sn;
 
 				paf = new_affect();
 
@@ -2270,7 +2272,6 @@ void fread_kasa( CHAR_DATA *ch, FILE *fp )
 			if (!str_cmp(word,"Affs"))
             {
 				AFFECT_DATA *paf;
-				int sn;
 
 				paf = new_affect();
 

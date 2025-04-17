@@ -1,0 +1,10 @@
+1331i\
+    (void)ch;
+1154i\
+    (void)ch;
+1131i\
+    (void)ch;
+1122i\
+    (void)ch;
+1122i\
+    (void)amount;

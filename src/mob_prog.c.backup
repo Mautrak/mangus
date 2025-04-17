@@ -1119,8 +1119,6 @@ void bribe_prog_beggar(CHAR_DATA *mob, CHAR_DATA *ch, int amount)
 
 void bribe_prog_drunk(CHAR_DATA *mob, CHAR_DATA *ch, int amount)
 {
-  (void)ch;
-  (void)amount;  
   do_say(mob,(char*) "Ahh! Daha fazla ruh! Güzel Ruhlar!");
   interpret(mob,(char*)"şarkı", FALSE);
    return;
@@ -1130,7 +1128,6 @@ void bribe_prog_drunk(CHAR_DATA *mob, CHAR_DATA *ch, int amount)
 
 void fight_prog_beggar(CHAR_DATA *mob, CHAR_DATA *ch)
 {
-  (void)ch;
   if (mob->hit < (mob->max_hit * 0.45) && mob->hit > (mob->max_hit * 0.55))
   do_say(mob,(char*)"İşte ölüyorum...");
   return;
@@ -1154,7 +1151,6 @@ bool death_prog_vagabond(CHAR_DATA *mob)
 
 void speech_prog_crier(CHAR_DATA *mob, CHAR_DATA *ch, char *speech)
 {
-  (void)ch;
  char arg[512];
 
  speech = one_argument(speech,arg);
@@ -1332,7 +1328,6 @@ void speech_prog_hunter_cleric(CHAR_DATA *mob, CHAR_DATA *ch, char *speech)
 
 void fight_prog_golem( CHAR_DATA *mob, CHAR_DATA *ch)
 {
-    (void)ch;
     CHAR_DATA *master;
     CHAR_DATA *m_next;
     char buf[MAX_INPUT_LENGTH];

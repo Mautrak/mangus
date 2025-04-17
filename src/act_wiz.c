@@ -102,6 +102,7 @@ void update_total_played        args( ( CHAR_DATA *ch) );
 
 void do_cabal_scan( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
  int i;
  char buf1[MAX_INPUT_LENGTH];
  char buf2[MAX_INPUT_LENGTH];
@@ -639,6 +640,7 @@ void do_tick( CHAR_DATA *ch, char *argument )
 /* equips a character */
 void do_outfit ( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
     OBJ_DATA *obj;
     int vnum;
 
@@ -1205,7 +1207,6 @@ void do_goto( CHAR_DATA *ch, char *argument )
 {
     ROOM_INDEX_DATA *location;
     CHAR_DATA *rch;
-    int count = 0;
 
     if ( argument[0] == '\0' )
     {
@@ -1219,9 +1220,9 @@ void do_goto( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    count = 0;
-    for ( rch = location->people; rch != NULL; rch = rch->next_in_room )
-        count++;
+    /* count = 0; */ /* Unused variable removed */
+    /* for ( rch = location->people; rch != NULL; rch = rch->next_in_room ) */
+    /*     count++; */ /* Unused variable removed */
 /*
     if (!is_room_owner(ch,location) && room_is_private(location)
     &&  (count > 1 || get_trust(ch) < MAX_LEVEL))
@@ -2447,6 +2448,8 @@ void do_mwhere( CHAR_DATA *ch, char *argument )
 
 void do_reboo( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
+    (void)argument; /* Unused parameter */
     send_to_char( "If you want to REBOOT, spell it out.\n\r", ch );
     return;
 }
@@ -2455,6 +2458,7 @@ void do_reboo( CHAR_DATA *ch, char *argument )
 
 void do_shutdow( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
     send_to_char( "If you want to SHUTDOWN, spell it out.\n\r", ch );
     return;
 }
@@ -2463,6 +2467,7 @@ void do_shutdow( CHAR_DATA *ch, char *argument )
 
 void do_shutdown( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
     char buf[MAX_STRING_LENGTH];
 
     if (ch->invis_level < LEVEL_HERO)
@@ -2662,6 +2667,7 @@ void do_switch( CHAR_DATA *ch, char *argument )
 
 void do_return( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
     char buf[MAX_STRING_LENGTH];
 
     if ( ch->desc == NULL )
@@ -3424,6 +3430,8 @@ void do_notell( CHAR_DATA *ch, char *argument )
 
 void do_peace( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
+    (void)argument; /* Unused parameter */
     CHAR_DATA *rch;
 
     for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
@@ -3440,6 +3448,8 @@ void do_peace( CHAR_DATA *ch, char *argument )
 
 void do_wizlock( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
+    (void)argument; /* Unused parameter */
     extern bool wizlock;
     wizlock = !wizlock;
 
@@ -3461,6 +3471,8 @@ void do_wizlock( CHAR_DATA *ch, char *argument )
 
 void do_newlock( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
+    (void)argument; /* Unused parameter */
     extern bool newlock;
     newlock = !newlock;
 
@@ -3496,7 +3508,7 @@ void do_slookup( CHAR_DATA *ch, char *argument )
     {
 	for ( sn = 0; sn < MAX_SKILL; sn++ )
 	{
-	    if ( skill_table[sn].name == NULL )
+	    if ( skill_table[sn].name == NULL || skill_table[sn].name[0] == '\0' )
 		break;
 	    sprintf( buf, "Sn: %3d  Slot: %3d  Skill/spell: '%s'\n\r",
 		sn, skill_table[sn].slot, skill_table[sn].name[1] );
@@ -3629,7 +3641,7 @@ void do_sset( CHAR_DATA *ch, char *argument )
     {
 	for ( sn = 0; sn < MAX_SKILL; sn++ )
 	{
-	    if ( ( skill_table[sn].name != NULL )
+	    if ( ( skill_table[sn].name != NULL && skill_table[sn].name[0] != '\0' )
 		&& ( (victim->cabal == skill_table[sn].cabal )
 		|| (skill_table[sn].cabal == CABAL_NONE) )
 		&& ( RACE_OK(victim,sn) )
@@ -4270,6 +4282,7 @@ void do_incognito( CHAR_DATA *ch, char *argument )
 
 void do_holylight( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
     if ( IS_NPC(ch) )
 	return;
 
@@ -4291,6 +4304,7 @@ void do_holylight( CHAR_DATA *ch, char *argument )
 
 void do_prefi (CHAR_DATA *ch, char *argument)
 {
+    (void)argument; /* Unused parameter */
     send_to_char("You cannot abbreviate the prefix command.\r\n",ch);
     return;
 }
@@ -5029,18 +5043,26 @@ void do_mset( CHAR_DATA *ch, char *argument )
 	if (!IS_NPC(victim))
 	for ( sn = 0; sn < MAX_SKILL; sn++ )
 	{
-	    if ( ( skill_table[sn].name != NULL )
-		&& !RACE_OK(victim,sn)	)
-		victim->pcdata->learned[sn]	= 0;
+	    /* If the skill exists and the victim's race can't use it, set learned to 0 */
+	    if ( (skill_table[sn].name != NULL && skill_table[sn].name[0] != '\0') && !RACE_OK(victim,sn) )
+	 {
+	  victim->pcdata->learned[sn]	= 0;
+	 }
 
-	    if ( ( skill_table[sn].name != NULL )
-		&&  (ORG_RACE(victim) == skill_table[sn].race )
-		)
-		victim->pcdata->learned[sn]	= 70;
+	    /* If the skill exists and it's a starting skill for the victim's original race, set learned to 70 */
+	    if ( (skill_table[sn].name != NULL && skill_table[sn].name[0] != '\0') && IS_SET(skill_table[sn].race, (1 << (victim->pcdata->race - 1))) )
+	 {
+	  victim->pcdata->learned[sn]	= 70;
+	 }
 	}
 
-	if (ORG_RACE(victim) == RACE(victim)) RACE(victim) = race;
-	ORG_RACE(victim) = race;
+	/* If the current race is the same as the original race, update the current race */
+	if (victim->pcdata->race == RACE(victim))
+	{
+	 RACE(victim) = race;
+	}
+	/* Update the original race */
+	victim->pcdata->race = race;
 
 	victim->exp = victim->level * exp_per_level(victim, 0);
 	return;
@@ -5281,6 +5303,7 @@ void do_smite(CHAR_DATA *ch, char *argument)
 
 void do_popularity( CHAR_DATA *ch, char *argument )
 {
+    (void)argument; /* Unused parameter */
 char buf[4 * MAX_STRING_LENGTH];
 char buf2[MAX_STRING_LENGTH];
 AREA_DATA *area;
@@ -5552,6 +5575,7 @@ void do_noaffect( CHAR_DATA *ch, char * argument)
 
 void do_affrooms(CHAR_DATA *ch, char *argument)
  {
+    (void)argument; /* Unused parameter */
     ROOM_INDEX_DATA *room;
     ROOM_INDEX_DATA *room_next;
     char buf[MAX_STRING_LENGTH];

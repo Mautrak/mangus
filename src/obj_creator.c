@@ -44,11 +44,13 @@ int obj_random_paf_modifier(int location, int level)
 	}
 	if (location == APPLY_MANA || location == APPLY_HIT || location == APPLY_MOVE)
 	{
-		return number_range( UMAX(1,int((level+5)*3/2)) , UMAX(1,int((level+5)*5)) );
+		/* Correct C-style cast */
+		return number_range( UMAX(1,(int)((level+5)*3/2)) , UMAX(1,(int)((level+5)*5)) );
 	}
 	if (location == APPLY_HITROLL || location == APPLY_DAMROLL)
 	{
-		return number_range( UMAX(1,int((level+4)/5)) , UMAX(1,int((level+3)/2)) );
+		/* Correct C-style cast */
+		return number_range( UMAX(1,(int)((level+4)/5)) , UMAX(1,(int)((level+3)/2)) );
 	}
 	return 1;
 }
@@ -428,7 +430,7 @@ void obj_random_paf(OBJ_DATA *obj)
 	}
 }
 
-int obj_random_condition()
+int obj_random_condition(void)
 {
 	int percent = 0;
 	
@@ -823,7 +825,7 @@ void obj_random_material(OBJ_DATA *obj)
 
 }
 
-int obj_random_extra_flag()
+int obj_random_extra_flag(void)
 {
 	int newflag = 0;
 	
@@ -867,7 +869,7 @@ int obj_random_extra_flag()
     return newflag;
 }
 
-int obj_random_weapon_flag()
+int obj_random_weapon_flag(void)
 {
 	int newflag = 0;
 	
@@ -893,7 +895,7 @@ int obj_random_weapon_flag()
     return newflag;
 }
 
-char *obj_random_wand_potion_spell()
+char *obj_random_wand_potion_spell(void)
 {
 	return (char*)wand_spell_table[number_range(1,76)-1].name;
 }

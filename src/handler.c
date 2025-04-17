@@ -95,6 +95,7 @@ int count_users(OBJ_DATA *obj)
 /* returns material number */
 int material_lookup (const char *name)
 {
+    (void)name; /* Parameter unused, but kept for potential future use */
     return 0;
 }
 
@@ -219,7 +220,8 @@ int race_lookup (const char *name)
 
    turkish_tolower_utf8(input_lower, name, sizeof(input_lower));
 
-   for ( race = 1; race_table[race].name != NULL && race_table[race].name[0] != NULL; race++)
+   /* Loop condition changed: removed tautological 'race_table[race].name != NULL' check */
+   for ( race = 1; race_table[race].name[0] != NULL; race++)
    {
        if (race_table[race].name[0][0] != '\0') // Check if the string is not empty
        {
@@ -539,8 +541,8 @@ int class_lookup (const char *name)
 
     for ( iclass = 0; iclass < MAX_CLASS; iclass++)
     {
-        if (class_table[iclass].name != NULL
-            && class_table[iclass].name[0] != NULL
+        /* Condition changed: removed tautological 'class_table[iclass].name != NULL' check */
+        if (class_table[iclass].name[0] != NULL
             && class_table[iclass].name[0][0] != '\0')
         {
             turkish_tolower_utf8(table_name_lower, class_table[iclass].name[0], sizeof(table_name_lower));
@@ -551,8 +553,8 @@ int class_lookup (const char *name)
             }
         }
 
-        if (class_table[iclass].name != NULL
-            && class_table[iclass].name[1] != NULL
+        /* Condition changed: removed tautological 'class_table[iclass].name != NULL' check */
+        if (class_table[iclass].name[1] != NULL
             && class_table[iclass].name[1][0] != '\0')
         {
             turkish_tolower_utf8(table_name_lower, class_table[iclass].name[1], sizeof(table_name_lower));
@@ -3618,7 +3620,8 @@ int get_total_played( CHAR_DATA *ch )
     return (sum + parse_time_spec(current_time - ch->logon));
 }
 
-int check_time_sync( )
+/* Changed to standard C prototype */
+int check_time_sync(void)
 {
     char *strtime;
     char mytime[MAX_INPUT_LENGTH];

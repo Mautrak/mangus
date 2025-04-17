@@ -69,7 +69,7 @@
 #include "lookup.h"
 #include "tables.h"
 
-void load_limited_objects();
+void load_limited_objects(void);
 
 
 #if !defined(macintosh)
@@ -77,10 +77,10 @@ extern	int	_filbuf		args( (FILE *) );
 #endif
 
 #if !defined(linux)
-long random();
+long random(void);
 #endif
 void srandom(unsigned int);
-int getpid();
+int getpid(void);
 time_t time(time_t *tloc);
 
 
@@ -2537,16 +2537,16 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
                 obj_random_name(obj);
             break;
             case ITEM_ARMOR:
-                obj->value[0]	= number_range( UMAX(1,int((obj->level+4)/5)) , UMAX(1,int((obj->level+3)/2)) );	// armor vs. pierce
-                obj->value[1]	= number_range( UMAX(1,int((obj->level+4)/5)) , UMAX(1,int((obj->level+3)/2)) );	// armor vs. bash
-                obj->value[2]	= number_range( UMAX(1,int((obj->level+4)/5)) , UMAX(1,int((obj->level+3)/2)) );	// armor vs. slash
-                obj->value[3]	= number_range( UMAX(1,int((obj->level+4)/5)) , UMAX(1,int((obj->level+3)/2)) );	// armor vs. exotic weapons
+                obj->value[0]	= number_range( UMAX(1,(int)((obj->level+4)/5)) , UMAX(1,(int)((obj->level+3)/2)) );	// armor vs. pierce
+                obj->value[1]	= number_range( UMAX(1,(int)((obj->level+4)/5)) , UMAX(1,(int)((obj->level+3)/2)) );	// armor vs. bash
+                obj->value[2]	= number_range( UMAX(1,(int)((obj->level+4)/5)) , UMAX(1,(int)((obj->level+3)/2)) );	// armor vs. slash
+                obj->value[3]	= number_range( UMAX(1,(int)((obj->level+4)/5)) , UMAX(1,(int)((obj->level+3)/2)) );	// armor vs. exotic weapons
                 obj->value[4]	= 0;										// unused
             break;
             case ITEM_WAND:
             case ITEM_STAFF:
                 obj->value[0]	= (number_percent()<95)?(obj->level):(number_range(5,90)); // spell level
-                obj->value[1]	= number_range( UMAX(1,int((obj->level+4)/5)) , UMAX(1,int((obj->level+3)/2)) );	// maximum number of charges
+                obj->value[1]	= number_range( UMAX(1,(int)((obj->level+4)/5)) , UMAX(1,(int)((obj->level+3)/2)) );	// maximum number of charges
                 obj->value[2]	= obj->value[1];	// current number of charges
                 obj->value[3]	= skill_lookup(obj_random_wand_potion_spell());
                 obj->value[4]	= 0;					// unused
@@ -3407,7 +3407,7 @@ void free_string( char *pstr )
 
 void do_areas( CHAR_DATA *ch, char *argument )
 {
-    AREA_DATA *pArea;
+    (void)argument;    AREA_DATA *pArea;
 
     printf_to_char(ch,"Bï¿½lgeler:\n\r\n\r");
     for ( pArea = area_first; pArea != NULL; pArea = pArea->next )
@@ -3422,6 +3422,7 @@ void do_areas( CHAR_DATA *ch, char *argument )
 
 void do_memory( CHAR_DATA *ch, char *argument )
 {
+    (void)argument;
     char buf[MAX_STRING_LENGTH];
 
     sprintf( buf, "Affects %5d\n\r", top_affect    ); send_to_char( buf, ch );
@@ -3452,6 +3453,8 @@ void do_memory( CHAR_DATA *ch, char *argument )
 
 void do_dump( CHAR_DATA *ch, char *argument )
 {
+    (void)ch;
+    (void)argument;
     int count,count2,num_pcs,aff_count;
     CHAR_DATA *fch;
     MOB_INDEX_DATA *pMobIndex;
@@ -3657,7 +3660,7 @@ int number_door( void )
     return number_range(0,5);
 }
 
-void init_random_number_generator( )
+void init_random_number_generator( void )
 {
   srandom(time(NULL)^getpid());
   return;
@@ -3993,7 +3996,7 @@ void load_olimits(FILE *fp)
 /*
  * Add the objects in players not logged on to object count
  */
-void load_limited_objects()
+void load_limited_objects ( void )
 {
   #if defined(linux)
   struct dirent *dp;
