@@ -3508,7 +3508,7 @@ void do_slookup( CHAR_DATA *ch, char *argument )
     {
 	for ( sn = 0; sn < MAX_SKILL; sn++ )
 	{
-	    if ( skill_table[sn].name == NULL || skill_table[sn].name[0] == '\0' )
+	    if ( skill_table[sn].name[0][0] == '\0' )
 		break;
 	    sprintf( buf, "Sn: %3d  Slot: %3d  Skill/spell: '%s'\n\r",
 		sn, skill_table[sn].slot, skill_table[sn].name[1] );
@@ -3641,7 +3641,7 @@ void do_sset( CHAR_DATA *ch, char *argument )
     {
 	for ( sn = 0; sn < MAX_SKILL; sn++ )
 	{
-	    if ( ( skill_table[sn].name != NULL && skill_table[sn].name[0] != '\0' )
+	    if ( ( skill_table[sn].name[0][0] != '\0' )
 		&& ( (victim->cabal == skill_table[sn].cabal )
 		|| (skill_table[sn].cabal == CABAL_NONE) )
 		&& ( RACE_OK(victim,sn) )
@@ -5044,13 +5044,13 @@ void do_mset( CHAR_DATA *ch, char *argument )
 	for ( sn = 0; sn < MAX_SKILL; sn++ )
 	{
 	    /* If the skill exists and the victim's race can't use it, set learned to 0 */
-	    if ( (skill_table[sn].name != NULL && skill_table[sn].name[0] != '\0') && !RACE_OK(victim,sn) )
+	    if ( (skill_table[sn].name[0][0] != '\0') && !RACE_OK(victim,sn) )
 	 {
 	  victim->pcdata->learned[sn]	= 0;
 	 }
 
 	    /* If the skill exists and it's a starting skill for the victim's original race, set learned to 70 */
-	    if ( (skill_table[sn].name != NULL && skill_table[sn].name[0] != '\0') && IS_SET(skill_table[sn].race, (1 << (victim->pcdata->race - 1))) )
+	    if ( (skill_table[sn].name[0][0] != '\0') && IS_SET(skill_table[sn].race, (1 << (victim->pcdata->race - 1))) )
 	 {
 	  victim->pcdata->learned[sn]	= 70;
 	 }

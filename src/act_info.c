@@ -3041,7 +3041,7 @@ void do_practice( CHAR_DATA *ch, char *argument )
   for ( sn = 0; sn < MAX_SKILL; sn++ )
   {
       /* Check if the string is empty */
-      if ( skill_table[sn].name[0] == '\0' )
+      if ( skill_table[sn].name[0][0] == '\0' )
    break;
       if ( ch->level < skill_table[sn].skill_level[ch->iclass] ||
    !RACE_OK(ch,sn) ||
@@ -4117,7 +4117,7 @@ void do_pracnew( CHAR_DATA *ch, char *argument )
 	for ( sn = 0; sn < MAX_SKILL; sn++ )
 	{
 	    /* Check if the string is empty instead of comparing pointer to NULL */
-	    if ( skill_table[sn].name == NULL || skill_table[sn].name[0] == '\0' )
+	    if ( skill_table[sn].name[0][0] == '\0' )
 	 break;
 	    if ( ch->level < skill_table[sn].skill_level[ch->iclass] ||
 	!RACE_OK(ch,sn) ||
