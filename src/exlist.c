@@ -127,7 +127,7 @@ void checkexits (ROOM_INDEX_DATA *room, AREA_DATA *pArea, char* buffer)
 
 			             } /* if room->area */
 			         }
-			} /* Add closing brace for the else block */
+			/* Removed extra closing brace */
 
 	} /* for */
 	

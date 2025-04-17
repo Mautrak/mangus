@@ -13,3 +13,6 @@ data
 log/events/events
 .gitignore
 src/*.bak
+src/mangus.dSYM/Contents/Info.plist
+src/mangus.dSYM/Contents/Resources/DWARF/mangus
+src/mangus.dSYM/Contents/Resources/Relocations/aarch64/mangus.yml
