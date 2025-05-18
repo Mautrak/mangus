@@ -9,7 +9,7 @@
 		   					    Mud okulunda bir oda----Mud okulunda bir oda
 								   /		           /     |
 							 	  /		          /	 |
-			 					 /   	       Kütle Kafesi	 |
+			 					 /   	       KÃ¼tle Kafesi	 |
 			 					/ 				 |
 							       /	     	            Mud okulunda bir oda
 			                		      /		                         |               
@@ -25,18 +25,18 @@
 					   Bir kafes/	                                                           |
 						|  /								   |
 						| /	                                                           |
-						|/	                                   Eðitim odasý---Mud okulunda bir oda---Pratik odasý
-			Bir kafes---Kafes odalarý merkezi---Bir kafes	                                           |   
+						|/	                                   EÄŸitim odasÄ±---Mud okulunda bir oda---Pratik odasÄ±
+			Bir kafes---Kafes odalarÄ± merkezi---Bir kafes	                                           |   
 					   /	|	                                                           |
 					  /	|	                                                           |
-					 /	|	                                                    MUD OKULU GÝRÝÞÝ(OYUNA BAÞLADIÐINIZ YER)                                                                   
+					 /	|	                                                    MUD OKULU GÄ°RÄ°ÅžÄ°(OYUNA BAÅžLADIÄžINIZ YER)                                                                   
                                         /   Bir kafes								   |           
 				       /									   =              
 				      /										   |             
-			             /    							     AKBK---AKD---AKD---AKD---AKDK       Selenge Tapýnaðý(Hassan)
+			             /    							     AKBK---AKD---AKD---AKD---AKDK       Selenge TapÄ±naÄŸÄ±(Hassan)
 			            /								       |     |     |     |     |           /
 			           /								      ABD----A-----A-----A----ADD         /
-			          /								       |     |     |     |     |   Güvenli bir oda(Arenanýn bütün odalarýndan yukarý çýkýnca)
+			          /								       |     |     |     |     |   GÃ¼venli bir oda(ArenanÄ±n bÃ¼tÃ¼n odalarÄ±ndan yukarÄ± Ã§Ä±kÄ±nca)
 			         /           							      ABD----A----ArM----A----ADD     /
 			     	/								       |     |ZiM/ |     |     |     /
 			       /								      ABD----A-----A-----A----ADD   /
@@ -45,7 +45,7 @@
 			    /											   |
 			   / 											   |			       ZKBK---ZKD---ZKDK
 			  /											   |				 |     |     |
-			 /	                    		      Karanlýk oda(anahtar)                        =				ZBD--(ZiM)--ZDD
+			 /	                    		      KaranlÄ±k oda(anahtar)                        =				ZBD--(ZiM)--ZDD
 			/	                     	                   |                                       |				 |     |     |
 		       /                            	  	           |                                       |			       ZGBK---ZGD---ZGDK
 		      /                                     	           |			                   |
@@ -53,25 +53,25 @@
 	               |
                        |
                        |
-             Mud okulunda bir dükkan
+             Mud okulunda bir dÃ¼kkan
 
 
-													AKBK: Arenanýn kuzey batý köþesi
-													AKD : Arenanýn kuzey duvarý
-													AKDK: Arenanýn kuzey doðu köþesi
-													ABD : Arenanýn batý duvarý
+													AKBK: ArenanÄ±n kuzey batÄ± kÃ¶ÅŸesi
+													AKD : ArenanÄ±n kuzey duvarÄ±
+													AKDK: ArenanÄ±n kuzey doÄŸu kÃ¶ÅŸesi
+													ABD : ArenanÄ±n batÄ± duvarÄ±
 													A   : Arena
-													ADD : Arenanýn doðu duvarý
-													ArM : Arena Merkezi (aþaðý yönünde kapalý kapý)
-													AGBK: Arenanýn güney batý köþesi
-													AGD : Arenanýn güney duvarý
-													AGDK: Arenanýn güney doðu köþesi
+													ADD : ArenanÄ±n doÄŸu duvarÄ±
+													ArM : Arena Merkezi (aÅŸaÄŸÄ± yÃ¶nÃ¼nde kapalÄ± kapÄ±)
+													AGBK: ArenanÄ±n gÃ¼ney batÄ± kÃ¶ÅŸesi
+													AGD : ArenanÄ±n gÃ¼ney duvarÄ±
+													AGDK: ArenanÄ±n gÃ¼ney doÄŸu kÃ¶ÅŸesi
 													ZiM : Zindan Merkezi
-													ZKD : Zindan Kuzey Duvarý
-													ZKDK: Zindan Kuzey Doðu Köþesi
-													ZKBK: Zindan Kuzey Batý Köþesi
-													ZDD : Zindan Doðu Duvarý
-													ZBD : Zindan Batý Duvarý
-													ZGD : Zindan Güney Duvarý
-													ZGDK: Zindan Güney Doðu Köþesi
-													ZGBK: Zindan Güney Batý Köþesi
+													ZKD : Zindan Kuzey DuvarÄ±
+													ZKDK: Zindan Kuzey DoÄŸu KÃ¶ÅŸesi
+													ZKBK: Zindan Kuzey BatÄ± KÃ¶ÅŸesi
+													ZDD : Zindan DoÄŸu DuvarÄ±
+													ZBD : Zindan BatÄ± DuvarÄ±
+													ZGD : Zindan GÃ¼ney DuvarÄ±
+													ZGDK: Zindan GÃ¼ney DoÄŸu KÃ¶ÅŸesi
+													ZGBK: Zindan GÃ¼ney BatÄ± KÃ¶ÅŸesi

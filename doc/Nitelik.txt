@@ -1,4 +1,4 @@
-NÝTELÝKLER
+NÄ°TELÄ°KLER
 
 char_data'da nitelikleri tutan iki dizi var.
 
