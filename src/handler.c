@@ -217,13 +217,17 @@ int race_lookup (const char *name)
    char buf[MAX_STRING_LENGTH];
    char input_lower[MAX_INPUT_LENGTH];
    char table_name_lower[MAX_INPUT_LENGTH];
+   if (name == NULL || name[0] == '\0') {
+       bug("Race_lookup: called with NULL or empty name.", 0);
+       return 0;
+   }
 
    turkish_tolower_utf8(input_lower, name, sizeof(input_lower));
 
-   /* Loop condition changed: removed tautological 'race_table[race].name != NULL' check */
-   for ( race = 1; race_table[race].name[0] != NULL; race++)
+
+   for ( race = 1; race < MAX_RACE && race_table[race].name[0] != NULL; race++)
    {
-       if (race_table[race].name[0][0] != '\0') // Check if the string is not empty
+       if (race_table[race].name[0][0] != '\0')
        {
            turkish_tolower_utf8(table_name_lower, race_table[race].name[0], sizeof(table_name_lower));
 
@@ -240,7 +244,7 @@ int race_lookup (const char *name)
        }
    }
 
-   sprintf(buf, "Race_lookup: race not found %s.", name);
+   sprintf(buf, "Race_lookup: race not found '%s'.", name);
    bug(buf, 0);
    return 0;
 }
