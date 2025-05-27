@@ -68,6 +68,7 @@
 #include "recycle.h"
 #include "lookup.h"
 #include "tables.h"
+#include "ek.h"
 
 void load_limited_objects(void);
 
@@ -651,6 +652,25 @@ void boot_db( void )
     }
 
     return;
+}
+
+bool str_cmp_turkish(const char *astr, const char *bstr) {
+    if (astr == NULL) {
+        // bug("Str_cmp_turkish: null astr.", 0); // Optional: keep original bug logging style
+        return TRUE; // Indicates difference, as per original str_cmp
+    }
+    if (bstr == NULL) {
+        // bug("Str_cmp_turkish: null bstr.", 0);
+        return TRUE;
+    }
+
+    char astr_lower[MAX_INPUT_LENGTH];
+    char bstr_lower[MAX_INPUT_LENGTH];
+
+    convert_to_turkish_lowercase_utf8(astr, astr_lower, MAX_INPUT_LENGTH);
+    convert_to_turkish_lowercase_utf8(bstr, bstr_lower, MAX_INPUT_LENGTH);
+
+    return strcmp(astr_lower, bstr_lower) != 0; // strcmp returns 0 for identical strings
 }
 
 // Bolge bilgilerini biraz daha detaylandiralim.

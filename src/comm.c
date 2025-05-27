@@ -81,6 +81,7 @@
 #include <time.h>
 #include <stdarg.h>
 #include <unistd.h>
+#include <locale.h>
 
 #include "merc.h"
 #include "interp.h"
@@ -388,6 +389,9 @@ int main( int argc, char **argv )
 #if defined(unix)
     int control;
 #endif
+
+    /* Set locale for UTF-8 support */
+    setlocale(LC_CTYPE, "en_US.UTF-8");
 
     /* Don't leave save processes stranded */
     signal( SIGQUIT, exit_function );

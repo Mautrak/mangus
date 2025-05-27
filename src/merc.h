@@ -3202,6 +3202,10 @@ void	bug		args( ( const char *str, int param ) );
 void	log_string	args( ( const char *str ) );
 void	tail_chain	args( ( void ) );
 
+// Turkish-aware string comparison
+bool str_cmp_turkish(const char *astr, const char *bstr);
+bool str_prefix_turkish(const char *astr, const char *bstr);
+
 /* effect.c */
 void	acid_effect	args( (void *vo, int level, int dam, int target) );
 void	cold_effect	args( (void *vo, int level, int dam, int target) );

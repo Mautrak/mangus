@@ -35,3 +35,6 @@ struct pers_suffix_type
 };
 
 extern	const	struct	pers_suffix_type	pers_suffix_table[];
+
+void convert_to_turkish_lowercase_utf8(const char *input, char *output, size_t output_size);
+bool str_prefix_turkish(const char *astr, const char *bstr);

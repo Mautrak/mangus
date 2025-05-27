@@ -60,6 +60,7 @@
 #include <time.h>
 #include "merc.h"
 #include "interp.h"
+#include "ek.h"
 
 #undef IMMORTALS_LOGS
 
@@ -490,7 +491,7 @@ void interpret( CHAR_DATA *ch, char *argument, bool is_order )
 #endif
 
     /* Removed checks for multi-byte Turkish characters in single quotes */
-    if ( !isalpha(argument[0]) && !isdigit(argument[0]) )
+    if ( argument[0] == '\'' || argument[0] == ';' || argument[0] == ':' || argument[0] == ',' )
     {
  command[0] = argument[0];
  command[1] = '\0';
@@ -503,6 +504,9 @@ void interpret( CHAR_DATA *ch, char *argument, bool is_order )
 	argument = one_argument( argument, command );
     }
 
+    char lower_command[MAX_INPUT_LENGTH];
+    convert_to_turkish_lowercase_utf8(command, lower_command, MAX_INPUT_LENGTH);
+
     /*
      * Look for command in command table.
      */
@@ -510,9 +514,9 @@ void interpret( CHAR_DATA *ch, char *argument, bool is_order )
     trust = get_trust( ch );
     for ( cmd = 0; cmd_table[cmd].name[0] != '\0'; cmd++ )
     {
-	if ( command[0] == cmd_table[cmd].name[0]
-	&&   !str_prefix( command, cmd_table[cmd].name )
-	&&   cmd_table[cmd].level <= trust )
+	if ( lower_command[0] == cmd_table[cmd].name[0]
+	&&   cmd_table[cmd].level <= trust
+	&&   !str_prefix_turkish( lower_command, cmd_table[cmd].name ) )
 	{
          /*
           * Implement charmed mobs commands.
@@ -672,7 +676,7 @@ bool check_social( CHAR_DATA *ch, char *command, char *argument )
     for ( cmd = 0; social_table[cmd].name[0] != '\0'; cmd++ )
     {
 	if ( command[0] == social_table[cmd].name[0]
-	&&   !str_prefix( command, social_table[cmd].name ) )
+	&&   !str_prefix_turkish( command, social_table[cmd].name ) )
 	{
 	    found = TRUE;
 	    break;
@@ -896,7 +900,7 @@ char *one_argument( char *argument, char *arg_first )
 	    argument++;
 	    break;
 	}
-	*arg_first = LOWER(*argument);
+	*arg_first = *argument;
 	arg_first++;
 	argument++;
     }
@@ -1004,7 +1008,7 @@ void substitute_alias(DESCRIPTOR_DATA *d, char *argument)
     ch = d->original ? d->original : d->character;
 
     /* check for prefix */
-    if (ch->prefix[0] != '\0' && str_prefix("prefix",argument))
+    if (ch->prefix[0] != '\0' && str_prefix_turkish("prefix",argument))
     {
 	if (strlen(ch->prefix) + strlen(argument) > MAX_INPUT_LENGTH)
 	    send_to_char("Line to long, prefix not processed.\r\n",ch);
@@ -1016,8 +1020,8 @@ void substitute_alias(DESCRIPTOR_DATA *d, char *argument)
     }
 
     if (IS_NPC(ch) || ch->pcdata->alias[0] == NULL
-    ||	!str_prefix("kısayol",argument) || !str_prefix("kısayolkaldır",argument)
-    ||  !str_prefix("prefix",argument))
+    ||	!str_prefix_turkish("kısayol",argument) || !str_prefix_turkish("kısayolkaldır",argument)
+    ||  !str_prefix_turkish("prefix",argument))
     {
 	interpret(d->character,argument, FALSE);
 	return;
@@ -1030,7 +1034,7 @@ void substitute_alias(DESCRIPTOR_DATA *d, char *argument)
 	if (ch->pcdata->alias[alias] == NULL)
 	    break;
 
-	if (!str_prefix(ch->pcdata->alias[alias],argument))
+	if (!str_prefix_turkish(ch->pcdata->alias[alias],argument))
 	{
 	    point = one_argument(argument,name);
 	    if (!strcmp(ch->pcdata->alias[alias],name))
@@ -1100,7 +1104,7 @@ void do_alias(CHAR_DATA *ch, char *argument)
 	return;
     }
 
-    if (!str_prefix("kısayolkaldır",arg) || !str_cmp("kısayol",arg))
+    if (!str_prefix_turkish("kısayolkaldır",arg) || !str_cmp("kısayol",arg))
     {
       send_to_char("Üzgünüm, ayrılmış(reserverd) sözcükler olmaz.\n\r",ch);
 	return;
@@ -1127,7 +1131,7 @@ void do_alias(CHAR_DATA *ch, char *argument)
 	return;
     }
 
-    if (!str_prefix(argument,"intihar") || !str_prefix(argument,"prefix"))
+    if (!str_prefix_turkish(argument,"intihar") || !str_prefix_turkish(argument,"prefix"))
     {
       send_to_char("Olmaz!\n\r",ch);
 	return;

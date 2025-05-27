@@ -1005,10 +1005,10 @@ bool is_name( char *str, char *namelist )
 	    if (name[0] == '\0')  /* this name was not found */
 		return FALSE;
 
-	    if (!str_prefix(string,name))
+	    if (!str_prefix_turkish(string,name))
 		return TRUE; /* full pattern match */
 
-	    if (!str_prefix(part,name))
+	    if (!str_prefix_turkish(part,name))
 		break;
 	}
     }

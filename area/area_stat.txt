@@ -1,111 +1,108 @@
 
-Booted Mon May 26 23:43:16 2025
+Booted Tue May 27 22:24:22 2025
 Area popularity statistics (in char * ticks)
-Limbo”(                                                   0
-Mekanik DÃ¼ÅŸler-.(                                        0
-Zooloji×-(                                                 0
-HavadaÖd(                                                  0
-Hayvanat BahÃ§esi‹g(                                       0
-Kuzeyin DÃ¼zlÃ¼klerim(                                    0
-Goblin KalesišÍ(                                           0
-Firetop MountainôU(                                        0
-BÃ¼yÃ¼k Gerighelm;*(                                       0
-Yeni Ofcol9*(                                              0
-Valhallaƒ{(                                                0
-SelengeÇ(                                                 0
-Haon Dorˆ                                                    0
-Arachnos­É(                                                0
-Hizmetkar Kanyonu	c(                                       0
-Dylan's AreaÏ½(                                            0
-CÃ¼ce MezarlÄ±ÄŸÄ±h?	(                                      0
-Chapel CatacombsM«	(                                        0
-BuÃ§ukluk Ãœlkesiçñ	(                                       0
-KaranlÄ±k KÄ±tažK
-(                                         0
-Ejderha Kulesi©é
-(                                          0
-SatranÃ§ TahtasÄ±¶\(                                       0
-Semavi DÃ¼zlemät(                                          0
-CÃ¼ce KrallÄ±ÄŸÄ±Å((                                       0
-Drow Cityûè(                                               0
-Thalosï(                                                  0
-IstÄ±rap Ã‡Ã¶lÃ¼}9(                                        0
-Arako ÅžehriðÃ(                                            0
-Galaxy“·(                                                  0
-The Keep of The WarlockÙì(                                 0
-Yggdrasil?F(                                               0
-Old Troya‡(                                               0
-Mirror of RealmÇÑ(                                         0
-Caverns(                                                 0
-Titan VadisiË:(                                            0
-Velmar'Ä±n Kalesi—º(                                       0
-Blight6(                                                  0
-Ejderha Helezonu¤â(                                        0
-Canavar Bitkiler8                                            0
-Ciquala'nÄ±n Ä°nic»(                                       0
-The Village of Anon¿(                                     0
-Anon ÅžehriK(                                             0
-HÃ¼kÃ¼m DaÄŸÄ±Þz(                                          0
-Hayalet Åžehir²D(                                          0
-Anon DuvarlarÄ±aù(                                         0
-Lanetli ManastÄ±rÛK(                                       0
-LiÃ§ KulesiÎ@(                                             0
-Arkadya`u(                                                 0
-BÃ¶lÃ¼nmÃ¼ÅŸ Ruhlaræ¡(                                     0
-Drakiri AdasÄ±Þ°(                                          0
-KÄ±yametæc (                                                0
-Mud Okulu¦¡!(                                               0
-BakÄ±mevi$Æ"(                                               0
-Acemi BÃ¶lgesiÅÜ"(                                          0
-ZÃ¼mrÃ¼t KÃ¶yÃ¼ìB#(                                         0
-MezarlÄ±kÖR#(                                               0
-Gnom KÃ¶yÃ¼ùƒ#(                                             0
-Selenge OrmanÄ±Oæ#(                                         0
-MoriaI $(                                                   0
-KorÄ±g‡!%(                                                  0
-Mirkwoodm6%(                                                0
-Tehlikeli SemtØ¥%(                                          0
-Kutsal KoruaM&(                                             0
-Elf Vadisi¹—&(                                              0
-Mega Åžehirw¿((                                             0
-Eski Selenge5ù((                                            0
-Sewers#Û)(                                                  0
-Goblin Kavmi
-+(                                            0
-Peri Ã‡emberi»+(                                           0
-Trol Ä°niÁŠ+(                                               0
-BataklÄ±kÍ§+(                                               0
-New Thalos$Ö+(                                              0
-Ofcol×5-(                                                   0
-Kufal KÃ¶ÅŸkÃ¼Ù-(                                          0
-Redferne KÃ¶ÅŸkÃ¼gt-(                                       0
-Aslan Kalesi(ë-(                                            0
-TÃ¼ze KonaÄŸÄ±°Â-(                                          0
-ÅžÃ¶valye Kalesib</(                                        0
-Ã–fke\]/(                                                   0
-TÄ±lsÄ±mæc/(                                                0
-Ä°stilaãx/(                                                 0
-Kaos Ã‡emberiì‹/(                                           0
-AvcÄ± KonaÄŸÄ±£ž/(                                          0
-Wyvern Kulesiö¦/(                                           0
-YÃ¼ksek BÃ¼yÃ¼cÃ¼lÃ¼k Kulesi.æ/(                            0
-Mahn-Tor'un Kalesi¡,1(                                      0
-Solas Kenti¤2(                                             0
-CadÄ±lar Meclisiy§2(                                        0
-Nirvana¸|3(                                                 0
-AnthariaTÚ3(                                                0
-Piramit„¡4(                                                 0
-Serbest LimanJß4(                                           0
-YeraltÄ±¼5(                                                0
-Camelot\                                                     0
-The Abyss¬h;(                                               0
-Descent to Hellâ<(                                         0
-Jher'in Lahitiº<(                                          0
-Sumut Ä°stihkamÄ±–T=(                                       0
-Selenge CezaeviaŸ=(                                         0
-Korsan AdalarÄ±ˆÂ=(                                         0
-Garp Diyar] ?(                                              0
-Thera HapishanesiªŠ=(                                       0
-Ruhlar NehriÆå?(                                            0
-Beyaz Lotus TapÄ±naÄŸÄ±K8@(                                 0
-Okyanus/·@(                                                 0
+Limbo                                                        23
+Mekanik DÃ¼ÅŸler                                             0
+Zooloji                                                      0
+Havada                                                       0
+Hayvanat BahÃ§esi                                            0
+Kuzeyin DÃ¼zlÃ¼kleri                                         0
+Goblin Kalesi                                                0
+Firetop Mountain                                             0
+BÃ¼yÃ¼k Gerighelm                                            0
+Yeni Ofcol                                                   0
+Valhalla                                                     0
+Selenge                                                      0
+Haon Dor                                                     0
+Arachnos                                                     0
+Hizmetkar Kanyonu                                            0
+Dylan's Area                                                 0
+CÃ¼ce MezarlÄ±ÄŸÄ±                                           0
+Chapel Catacombs                                             0
+BuÃ§ukluk Ãœlkesi                                            0
+KaranlÄ±k KÄ±ta                                              0
+Ejderha Kulesi                                               0
+SatranÃ§ TahtasÄ±                                            0
+Semavi DÃ¼zlem                                               0
+CÃ¼ce KrallÄ±ÄŸÄ±                                            0
+Drow City                                                    0
+Thalos                                                       0
+IstÄ±rap Ã‡Ã¶lÃ¼                                             0
+Arako Åžehri                                                 0
+Galaxy                                                       0
+The Keep of The Warlock                                      0
+Yggdrasil                                                    0
+Old Troya                                                    0
+Mirror of Realm                                              0
+Caverns                                                      0
+Titan Vadisi                                                 0
+Velmar'Ä±n Kalesi                                            0
+Blight                                                       0
+Ejderha Helezonu                                             0
+Canavar Bitkiler                                             0
+Ciquala'nÄ±n Ä°ni                                            0
+The Village of Anon                                          0
+Anon Åžehri                                                  0
+HÃ¼kÃ¼m DaÄŸÄ±                                               0
+Hayalet Åžehir                                               0
+Anon DuvarlarÄ±                                              0
+Lanetli ManastÄ±r                                            0
+LiÃ§ Kulesi                                                  0
+Arkadya                                                      0
+BÃ¶lÃ¼nmÃ¼ÅŸ Ruhlar                                          0
+Drakiri AdasÄ±                                               0
+KÄ±yamet                                                     0
+Mud Okulu                                                    32
+BakÄ±mevi                                                    0
+Acemi BÃ¶lgesi                                               0
+ZÃ¼mrÃ¼t KÃ¶yÃ¼                                              0
+MezarlÄ±k                                                    0
+Gnom KÃ¶yÃ¼                                                  0
+Selenge OrmanÄ±                                              0
+Moria                                                        0
+KorÄ±g                                                       0
+Mirkwood                                                     0
+Tehlikeli Semt                                               0
+Kutsal Koru                                                  0
+Elf Vadisi                                                   0
+Mega Åžehir                                                  0
+Eski Selenge                                                 0
+Sewers                                                       0
+Goblin Kavmi                                                 0
+Peri Ã‡emberi                                                0
+Trol Ä°ni                                                    0
+BataklÄ±k                                                    0
+New Thalos                                                   0
+Ofcol                                                        0
+Kufal KÃ¶ÅŸkÃ¼                                               0
+Redferne KÃ¶ÅŸkÃ¼                                            0
+Aslan Kalesi                                                 0
+TÃ¼ze KonaÄŸÄ±                                               0
+ÅžÃ¶valye Kalesi                                             0
+Ã–fke                                                        0
+TÄ±lsÄ±m                                                     0
+Ä°stila                                                      0
+Kaos Ã‡emberi                                                0
+AvcÄ± KonaÄŸÄ±                                               0
+Wyvern Kulesi                                                0
+YÃ¼ksek BÃ¼yÃ¼cÃ¼lÃ¼k Kulesi                                 0
+Mahn-Tor'un Kalesi                                           0
+Solas Kenti                                                  0
+CadÄ±lar Meclisi                                             0
+Nirvana                                                      0
+Antharia                                                     0
+Piramit                                                      0
+Serbest Liman                                                0
+YeraltÄ±                                                     0
+Camelot                                                      0
+The Abyss                                                    0
+Descent to Hell                                              0
+Jher'in Lahiti                                               0
+Sumut Ä°stihkamÄ±                                            0
+Selenge Cezaevi                                              0
+Korsan AdalarÄ±                                              0
+Garp Diyar                                                   0
+Thera Hapishanesi                                            0
+Ruhlar Nehri                                                 0
+Beyaz Lotus TapÄ±naÄŸÄ±                                      0
+Okyanus                                                      0
