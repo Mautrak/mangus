@@ -472,9 +472,34 @@ int find_material_index(char *material_name)
 
 int find_material_decay_days(OBJ_DATA *obj)
 {
+	char clean_material[256];
+	int j = 0;
+	
+	// Sanitize the material name by removing garbage characters
+	if(obj->material == NULL)
+	{
+		bugf( (char*)"Find material decay days: NULL material for object %d", obj->pIndexData->vnum );
+		return 240;
+	}
+	
+	// Copy only printable ASCII characters and stop at null or garbage
+	for(int i = 0; i < 255 && obj->material[i] != '\0'; i++)
+	{
+		if(obj->material[i] >= 32 && obj->material[i] <= 126)
+		{
+			clean_material[j++] = obj->material[i];
+		}
+		else
+		{
+			break; // Stop at first non-printable character
+		}
+	}
+	clean_material[j] = '\0';
+	
+	// Try exact match first with cleaned name
 	for(int i=0;i<MAX_MATERIALS-1;i++)
 	{
-		if(!strcmp(material_table[i].name,obj->material))
+		if(!strcmp(material_table[i].name, clean_material))
 		{
 			if(IS_WEAPON_STAT(obj,WEAPON_KATANA))
 				return material_table[i].decay_pt * 5;
@@ -482,8 +507,27 @@ int find_material_decay_days(OBJ_DATA *obj)
 				return material_table[i].decay_pt;
 		}
 	}
+	
+	// Try partial match for common corrupted materials
+	for(int i=0;i<MAX_MATERIALS-1;i++)
+	{
+		int len = strlen(material_table[i].name);
+		if(strncmp(material_table[i].name, clean_material, len) == 0)
+		{
+			// Found partial match, fix the object's material
+			free_string(obj->material);
+			obj->material = str_dup(material_table[i].name);
+			
+			if(IS_WEAPON_STAT(obj,WEAPON_KATANA))
+				return material_table[i].decay_pt * 5;
+			else
+				return material_table[i].decay_pt;
+		}
+	}
+	
 	// material bulunamadi. NULL'u gonder.
-	bugf( (char*)"Find material decay days: Unknown material name for %d '%s'", obj->pIndexData->vnum, obj->material );
+	bugf( (char*)"Find material decay days: Unknown material name for %d '%s' (cleaned: '%s')",
+		obj->pIndexData->vnum, obj->material, clean_material );
 	return 240;
 }
 

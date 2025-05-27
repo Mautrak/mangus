@@ -1,111 +1,111 @@
 
-Booted Fri May  2 04:52:40 2025
+Booted Mon May 26 23:43:16 2025
 Area popularity statistics (in char * ticks)
-Limbo”@                                                   0
-Mekanik DÃ¼ÅŸler-.@                                        0
-Zooloji×-@                                                 0
-HavadaÖd@                                                  0
-Hayvanat BahÃ§esi‹g@                                       0
-Kuzeyin DÃ¼zlÃ¼klerim@                                    0
-Goblin KalesišÍ@                                           0
-Firetop MountainôU@                                        0
-BÃ¼yÃ¼k Gerighelm;*@                                       0
-Yeni Ofcol9*@                                              0
-Valhallaƒ{@                                                0
-SelengeÇ@                                                 0
+Limbo”(                                                   0
+Mekanik DÃ¼ÅŸler-.(                                        0
+Zooloji×-(                                                 0
+HavadaÖd(                                                  0
+Hayvanat BahÃ§esi‹g(                                       0
+Kuzeyin DÃ¼zlÃ¼klerim(                                    0
+Goblin KalesišÍ(                                           0
+Firetop MountainôU(                                        0
+BÃ¼yÃ¼k Gerighelm;*(                                       0
+Yeni Ofcol9*(                                              0
+Valhallaƒ{(                                                0
+SelengeÇ(                                                 0
 Haon Dorˆ                                                    0
-Arachnos­É@                                                0
-Hizmetkar Kanyonu	c@                                       0
-Dylan's AreaÏ½@                                            0
-CÃ¼ce MezarlÄ±ÄŸÄ±h?	@                                      0
-Chapel CatacombsM«	@                                        0
-BuÃ§ukluk Ãœlkesiçñ	@                                       0
+Arachnos­É(                                                0
+Hizmetkar Kanyonu	c(                                       0
+Dylan's AreaÏ½(                                            0
+CÃ¼ce MezarlÄ±ÄŸÄ±h?	(                                      0
+Chapel CatacombsM«	(                                        0
+BuÃ§ukluk Ãœlkesiçñ	(                                       0
 KaranlÄ±k KÄ±tažK
-@                                         0
+(                                         0
 Ejderha Kulesi©é
-@                                          0
-SatranÃ§ TahtasÄ±¶\@                                       0
-Semavi DÃ¼zlemät@                                          0
-CÃ¼ce KrallÄ±ÄŸÄ±Å(@                                       0
-Drow Cityûè@                                               0
-Thalosï@                                                  0
-IstÄ±rap Ã‡Ã¶lÃ¼}9@                                        0
-Arako ÅžehriðÃ@                                            0
-Galaxy“·@                                                  0
-The Keep of The WarlockÙì@                                 0
-Yggdrasil?F@                                               0
-Old Troya‡@                                               0
-Mirror of RealmÇÑ@                                         0
-Caverns@                                                 0
-Titan VadisiË:@                                            0
-Velmar'Ä±n Kalesi—º@                                       0
-Blight6@                                                  0
-Ejderha Helezonu¤â@                                        0
+(                                          0
+SatranÃ§ TahtasÄ±¶\(                                       0
+Semavi DÃ¼zlemät(                                          0
+CÃ¼ce KrallÄ±ÄŸÄ±Å((                                       0
+Drow Cityûè(                                               0
+Thalosï(                                                  0
+IstÄ±rap Ã‡Ã¶lÃ¼}9(                                        0
+Arako ÅžehriðÃ(                                            0
+Galaxy“·(                                                  0
+The Keep of The WarlockÙì(                                 0
+Yggdrasil?F(                                               0
+Old Troya‡(                                               0
+Mirror of RealmÇÑ(                                         0
+Caverns(                                                 0
+Titan VadisiË:(                                            0
+Velmar'Ä±n Kalesi—º(                                       0
+Blight6(                                                  0
+Ejderha Helezonu¤â(                                        0
 Canavar Bitkiler8                                            0
-Ciquala'nÄ±n Ä°nic»@                                       0
-The Village of Anon¿@                                     0
-Anon ÅžehriK@                                             0
-HÃ¼kÃ¼m DaÄŸÄ±Þz@                                          0
-Hayalet Åžehir²D@                                          0
-Anon DuvarlarÄ±aù@                                         0
-Lanetli ManastÄ±rÛK@                                       0
-LiÃ§ KulesiÎ@@                                             0
-Arkadya`u@                                                 0
-BÃ¶lÃ¼nmÃ¼ÅŸ Ruhlaræ¡@                                     0
-Drakiri AdasÄ±Þ°@                                          0
-KÄ±yametæc @                                                0
-Mud Okulu¦¡!@                                               0
-BakÄ±mevi$Æ"@                                               0
-Acemi BÃ¶lgesiÅÜ"@                                          0
-ZÃ¼mrÃ¼t KÃ¶yÃ¼ìB#@                                         0
-MezarlÄ±kÖR#@                                               0
-Gnom KÃ¶yÃ¼ùƒ#@                                             0
-Selenge OrmanÄ±Oæ#@                                         0
-MoriaI $@                                                   0
-KorÄ±g‡!%@                                                  0
-Mirkwoodm6%@                                                0
-Tehlikeli SemtØ¥%@                                          0
-Kutsal KoruaM&@                                             0
-Elf Vadisi¹—&@                                              0
-Mega Åžehirw¿(@                                             0
-Eski Selenge5ù(@                                            0
-Sewers#Û)@                                                  0
+Ciquala'nÄ±n Ä°nic»(                                       0
+The Village of Anon¿(                                     0
+Anon ÅžehriK(                                             0
+HÃ¼kÃ¼m DaÄŸÄ±Þz(                                          0
+Hayalet Åžehir²D(                                          0
+Anon DuvarlarÄ±aù(                                         0
+Lanetli ManastÄ±rÛK(                                       0
+LiÃ§ KulesiÎ@(                                             0
+Arkadya`u(                                                 0
+BÃ¶lÃ¼nmÃ¼ÅŸ Ruhlaræ¡(                                     0
+Drakiri AdasÄ±Þ°(                                          0
+KÄ±yametæc (                                                0
+Mud Okulu¦¡!(                                               0
+BakÄ±mevi$Æ"(                                               0
+Acemi BÃ¶lgesiÅÜ"(                                          0
+ZÃ¼mrÃ¼t KÃ¶yÃ¼ìB#(                                         0
+MezarlÄ±kÖR#(                                               0
+Gnom KÃ¶yÃ¼ùƒ#(                                             0
+Selenge OrmanÄ±Oæ#(                                         0
+MoriaI $(                                                   0
+KorÄ±g‡!%(                                                  0
+Mirkwoodm6%(                                                0
+Tehlikeli SemtØ¥%(                                          0
+Kutsal KoruaM&(                                             0
+Elf Vadisi¹—&(                                              0
+Mega Åžehirw¿((                                             0
+Eski Selenge5ù((                                            0
+Sewers#Û)(                                                  0
 Goblin Kavmi
-+@                                            0
-Peri Ã‡emberi»+@                                           0
-Trol Ä°niÁŠ+@                                               0
-BataklÄ±kÍ§+@                                               0
-New Thalos$Ö+@                                              0
-Ofcol×5-@                                                   0
-Kufal KÃ¶ÅŸkÃ¼Ù-@                                          0
-Redferne KÃ¶ÅŸkÃ¼gt-@                                       0
-Aslan Kalesi(ë-@                                            0
-TÃ¼ze KonaÄŸÄ±°Â-@                                          0
-ÅžÃ¶valye Kalesib</@                                        0
-Ã–fke\]/@                                                   0
-TÄ±lsÄ±mæc/@                                                0
-Ä°stilaãx/@                                                 0
-Kaos Ã‡emberiì‹/@                                           0
-AvcÄ± KonaÄŸÄ±£ž/@                                          0
-Wyvern Kulesiö¦/@                                           0
-YÃ¼ksek BÃ¼yÃ¼cÃ¼lÃ¼k Kulesi.æ/@                            0
-Mahn-Tor'un Kalesi¡,1@                                      0
-Solas Kenti¤2@                                             0
-CadÄ±lar Meclisiy§2@                                        0
-Nirvana¸|3@                                                 0
-AnthariaTÚ3@                                                0
-Piramit„¡4@                                                 0
-Serbest LimanJß4@                                           0
-YeraltÄ±¼5@                                                0
++(                                            0
+Peri Ã‡emberi»+(                                           0
+Trol Ä°niÁŠ+(                                               0
+BataklÄ±kÍ§+(                                               0
+New Thalos$Ö+(                                              0
+Ofcol×5-(                                                   0
+Kufal KÃ¶ÅŸkÃ¼Ù-(                                          0
+Redferne KÃ¶ÅŸkÃ¼gt-(                                       0
+Aslan Kalesi(ë-(                                            0
+TÃ¼ze KonaÄŸÄ±°Â-(                                          0
+ÅžÃ¶valye Kalesib</(                                        0
+Ã–fke\]/(                                                   0
+TÄ±lsÄ±mæc/(                                                0
+Ä°stilaãx/(                                                 0
+Kaos Ã‡emberiì‹/(                                           0
+AvcÄ± KonaÄŸÄ±£ž/(                                          0
+Wyvern Kulesiö¦/(                                           0
+YÃ¼ksek BÃ¼yÃ¼cÃ¼lÃ¼k Kulesi.æ/(                            0
+Mahn-Tor'un Kalesi¡,1(                                      0
+Solas Kenti¤2(                                             0
+CadÄ±lar Meclisiy§2(                                        0
+Nirvana¸|3(                                                 0
+AnthariaTÚ3(                                                0
+Piramit„¡4(                                                 0
+Serbest LimanJß4(                                           0
+YeraltÄ±¼5(                                                0
 Camelot\                                                     0
-The Abyss¬h;@                                               0
-Descent to Hellâ<@                                         0
-Jher'in Lahitiº<@                                          0
-Sumut Ä°stihkamÄ±–T=@                                       0
-Selenge CezaeviaŸ=@                                         0
-Korsan AdalarÄ±ˆÂ=@                                         0
-Garp Diyar] ?@                                              0
-Thera HapishanesiªŠ=@                                       0
-Ruhlar NehriÆå?@                                            0
-Beyaz Lotus TapÄ±naÄŸÄ±K8@@                                 0
-Okyanus/·@@                                                 0
+The Abyss¬h;(                                               0
+Descent to Hellâ<(                                         0
+Jher'in Lahitiº<(                                          0
+Sumut Ä°stihkamÄ±–T=(                                       0
+Selenge CezaeviaŸ=(                                         0
+Korsan AdalarÄ±ˆÂ=(                                         0
+Garp Diyar] ?(                                              0
+Thera HapishanesiªŠ=(                                       0
+Ruhlar NehriÆå?(                                            0
+Beyaz Lotus TapÄ±naÄŸÄ±K8@(                                 0
+Okyanus/·@(                                                 0
