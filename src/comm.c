@@ -1382,12 +1382,12 @@ bool process_output( DESCRIPTOR_DATA *d, bool fPrompt )
 	if (!IS_SET(ch->comm, COMM_COMPACT) )
 	    write_to_buffer( d, "\n\r", 2 );
 
+        // Send IAC GA before the prompt
+	if (IS_SET(ch->comm,COMM_TELNET_GA))
+	    write_to_buffer(d,go_ahead_str,0);
 
         if ( IS_SET(ch->comm, COMM_PROMPT) )
             bust_a_prompt( d->character );
-
-	if (IS_SET(ch->comm,COMM_TELNET_GA))
-	    write_to_buffer(d,go_ahead_str,0);
     }
 
     /*
@@ -1688,6 +1688,27 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	return;
 
     case CON_GET_NAME:
+    // Skip BOMs
+    if (strlen(argument) >= 3 &&
+        (unsigned char)argument[0] == 0xEF &&
+        (unsigned char)argument[1] == 0xBB &&
+        (unsigned char)argument[2] == 0xBF)
+    {
+        argument += 3; // Skip UTF-8 BOM
+    }
+    else if (strlen(argument) >= 2 &&
+             (unsigned char)argument[0] == 0xFF &&
+             (unsigned char)argument[1] == 0xFE)
+    {
+        argument += 2; // Skip UTF-16 LE BOM
+    }
+    else if (strlen(argument) >= 2 &&
+             (unsigned char)argument[0] == 0xFE &&
+             (unsigned char)argument[1] == 0xFF)
+    {
+        argument += 2; // Skip UTF-16 BE BOM
+    }
+
 	if ( argument[0] == '\0' )
 	{
 	    close_socket( d );
@@ -3248,107 +3269,73 @@ int ethos_check(CHAR_DATA *ch)
 
 int colour( char type, CHAR_DATA *ch, char *string )
 {
-    char	code[ 20 ];
-    char	*p = NULL;
+    char code[20];
 
-    if( IS_NPC( ch ) )
-	return( 0 );
+    if ( IS_NPC(ch) )
+        return 0;
 
     switch( type )
     {
-	default:
-	    sprintf( code, CLEAR );
-	    break;
-	case 'x':
-	    sprintf( code, CLEAR );
-	    break;
-	case 'b':
-	    sprintf( code, C_BLUE );
-	    break;
-	case 'c':
-	    sprintf( code, C_CYAN );
-	    break;
-	case 'g':
-	    sprintf( code, C_GREEN );
-	    break;
-	case 'm':
-	    sprintf( code, C_MAGENTA );
-	    break;
-	case 'r':
-	    sprintf( code, C_RED );
-	    break;
-	case 'w':
-	    sprintf( code, C_WHITE );
-	    break;
-	case 'y':
-	    sprintf( code, C_YELLOW );
-	    break;
-	case 'B':
-	    sprintf( code, C_B_BLUE );
-	    break;
-	case 'C':
-	    sprintf( code, C_B_CYAN );
-	    break;
-	case 'G':
-	    sprintf( code, C_B_GREEN );
-	    break;
-	case 'M':
-	    sprintf( code, C_B_MAGENTA );
-	    break;
-	case 'R':
-	    sprintf( code, C_B_RED );
-	    break;
-	case 'W':
-	    sprintf( code, C_B_WHITE );
-	    break;
-	case 'Y':
-	    sprintf( code, C_B_YELLOW );
-	    break;
-	case 'D':
-	    sprintf( code, C_D_GREY );
-	    break;
-	case '*':
-	    sprintf( code, "%c", 007 );
-	    break;
-	case '/':
-	    sprintf( code, "%c", 012 );
-	    break;
-	case '{':
-	    sprintf( code, "%c", '{' );
-	    break;
+        default:    sprintf( code, CLEAR );     break;
+        case 'x':   sprintf( code, CLEAR );     break;
+        case 'b':   sprintf( code, C_BLUE );    break;
+        case 'c':   sprintf( code, C_CYAN );    break;
+        case 'g':   sprintf( code, C_GREEN );   break;
+        case 'm':   sprintf( code, C_MAGENTA ); break;
+        case 'r':   sprintf( code, C_RED );     break;
+        case 'w':   sprintf( code, C_WHITE );   break;
+        case 'y':   sprintf( code, C_YELLOW );  break;
+        case 'B':   sprintf( code, C_B_BLUE );  break;
+        case 'C':   sprintf( code, C_B_CYAN );  break;
+        case 'G':   sprintf( code, C_B_GREEN ); break;
+        case 'M':   sprintf( code, C_B_MAGENTA );break;
+        case 'R':   sprintf( code, C_B_RED );   break;
+        case 'W':   sprintf( code, C_B_WHITE ); break;
+        case 'Y':   sprintf( code, C_B_YELLOW );break;
+        case 'D':   sprintf( code, C_D_GREY );  break;
+        case '*':   sprintf( code, "%c", 007 ); break; // BEL character
+        case '/':   sprintf( code, "%c", 012 ); break; // Form Feed (often newline)
+        case '{':   sprintf( code, "%c", '{' ); break; // Literal '{'
     }
 
-    p = code;
-    while( *p != '\0' )
-    {
-	*string = *p++;
-	*++string = '\0';
-    }
-
-    return( strlen( code ) );
+    strcpy(string, code);
+    return strlen(code);
 }
 
 void colourconv( char *buffer, const char *txt, CHAR_DATA *ch )
 {
-    const	char	*point;
-		int	skip = 0;
+    const char *point;
+    int len_written = 0;
+    char *current_pos = buffer;
 
-    if( ch->desc && txt )
+    if (!buffer) // Should not happen if called correctly, but good for safety.
+        return;
+
+    if (ch->desc && txt)
     {
-	    for( point = txt ; *point ; point++ )
-	    {
-		if( *point == '{' )
-		{
-		    point++;
-		    skip = colour( *point, ch, buffer );
-		    while( skip-- > 0 )
-			++buffer;
-		    continue;
-		}
-		*buffer = *point;
-		*++buffer = '\0';
-	    }
-	    *buffer = '\0';
+        for (point = txt; *point; point++)
+        {
+            if (*point == '{')
+            {
+                point++; // Move to the character after '{'
+                if (*point == '\0') // Handle string ending with '{'
+                {
+                    break;
+                }
+                len_written = colour(*point, ch, current_pos);
+                current_pos += len_written;
+            }
+            else
+            {
+                *current_pos++ = *point;
+            }
+        }
+        *current_pos = '\0'; // Ensure final null termination
+    }
+    else
+    {
+        // If txt is NULL or ch->desc is NULL, ensure buffer is empty string.
+        *buffer = '\0';
     }
     return;
 }

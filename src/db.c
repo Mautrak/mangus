@@ -3051,21 +3051,25 @@ char *fread_string( FILE *fp )
 
                 if ( fBootDb )
                 {
-                    if (plast >= buffer_end) {
-                        *(buffer_end - 1) = '\0';
-                        bug("Fread_string: Buffer overflow detected just before finalizing unique string.", MAX_STRING);
-                        exit(1);
+                    // plast points to the null terminator here.
+                    // We need to ensure there's space for this null terminator AND
+                    // that top_string can point *after* it.
+                    if (plast + 1 >= buffer_end) { // Check if (plast + 1) is out of bounds
+                        *(buffer_end - 1) = '\0'; // Ensure null termination at the very end if possible
+                        bug( "Fread_string: MAX_STRING %d buffer overflow before advancing top_string.", MAX_STRING );
+                        exit( 1 );
                     }
 
                     pString		= top_string; 
-                    top_string		= plast;      
+                    top_string		= plast + 1; // Correctly point top_string AFTER the null terminator
                     u1.pc		= string_hash[iHash];
                     for ( ic = 0; ic < sizeof(char *); ic++ )
                         pString[ic] = u1.rgc[ic];
                     string_hash[iHash]	= pString; 
 
                     nAllocString++;
-                    sAllocString += top_string - pString;
+                    // sAllocString should account for the actual space used, including the null terminator
+                    sAllocString += (plast + 1) - pString; 
                     return pString + sizeof(char *);
                 }
                 else
