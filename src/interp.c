@@ -60,7 +60,7 @@
 #include <time.h>
 #include "merc.h"
 #include "interp.h"
-#include "ek.h"
+#include "turkish_morphology.h"
 
 #undef IMMORTALS_LOGS
 

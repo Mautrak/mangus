@@ -68,7 +68,7 @@
 #include "recycle.h"
 #include "lookup.h"
 #include "tables.h"
-#include "ek.h"
+#include "turkish_morphology.h"
 
 void load_limited_objects(void);
 

@@ -1,6 +1,7 @@
 #ifndef MERC_H
 #define MERC_H
-
+#include <time.h>   /* For time_t */
+#include <stdio.h>
 /***************************************************************************
  *                                                                         *
  * Uzak Diyarlar açık kaynak Türkçe Mud projesidir.                        *
