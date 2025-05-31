@@ -525,6 +525,12 @@ struct	descriptor_data
     int			outtop;
     char *		showstr_head;
     char *		showstr_point;
+    char *		client_name;	/* Client type for debugging */
+    bool		utf8_capable;	/* Client UTF-8 capability */
+    bool		binary_mode;	/* Binary mode negotiated */
+    bool		client_detected;	/* Whether client type has been detected */
+    bool		suppress_telnet;	/* Whether to suppress telnet for simple clients */
+    time_t		connect_time;	/* When connection was established */
 };
 
 
@@ -3123,6 +3129,14 @@ bool	check_ban	args( ( char *site, int type) );
 /* comm.c */
 void	show_string	args( ( struct descriptor_data *d, char *input) );
 void	close_socket	args( ( DESCRIPTOR_DATA *dclose ) );
+void	filter_ansi_sequences	args( ( char *buf ) );
+void	process_telnet_negotiations args( ( DESCRIPTOR_DATA *d ) );
+
+/* UTF-8 utility functions */
+bool	is_valid_utf8	args( ( const char *str, int len ) );
+int	utf8_strlen	args( ( const char *str ) );
+const char *get_client_description args( ( DESCRIPTOR_DATA *d ) );
+void	sanitize_utf8_string args( ( char *dest, const char *src, size_t dest_size ) );
 void	write_to_buffer	args( ( DESCRIPTOR_DATA *d, const char *txt,
 			    int length ) );
 void	send_to_char	args( ( const char *txt, CHAR_DATA *ch ) );

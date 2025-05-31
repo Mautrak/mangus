@@ -122,6 +122,7 @@ void free_descriptor(DESCRIPTOR_DATA *d)
 	return;
 
     free_string( d->host );
+    free_string( d->client_name );
     free_mem( d->outbuf, d->outsize );
     INVALIDATE(d);
     d->next = descriptor_free;

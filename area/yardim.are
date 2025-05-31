@@ -16,8 +16,8 @@ Yayına başlangıç  : 27 Temmuz 2022 22:17
 Web yardım        : https://mangusmud.wordpress.com     
 Discord           : https://discord.gg/7eBTKfnKZe
 
-Turkce karakterleri duzgun goruntuleyebilmek icin uygulamadan karakter setini
-ISO8859-9 yapmaniz gerekmektedir.
+Türkçe karakterleri düzgün görüntüleyebilmek için uygulamanızı UTF-8
+karakter kodlaması kullanacak şekilde ayarlayın.
 
 
 Hangi isimle anılmak istersin? ~

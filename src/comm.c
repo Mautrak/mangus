@@ -965,6 +965,9 @@ void init_descriptor( int control )
     dnew->showstr_point = NULL;
     dnew->outsize	= 2000;
     dnew->outbuf	= (char *)alloc_mem( dnew->outsize );
+    dnew->client_name	= str_dup("unknown");
+    dnew->utf8_capable	= TRUE;  /* Modern assumption: most clients are UTF-8 capable in 2025 */
+    dnew->binary_mode	= FALSE;
 
     size = sizeof(sock);
     if ( getpeername( desc, (struct sockaddr *) &sock, &size ) < 0 )
@@ -1015,35 +1018,86 @@ void init_descriptor( int control )
     descriptor_list		= dnew;
 
     {
-        // Using unsigned char for Telnet codes is safer
+        // Enhanced telnet negotiation for better UTF-8 support
         unsigned char iac_will_binary[3] = { IAC, WILL, TELOPT_BINARY };
+        unsigned char iac_do_binary[3]   = { IAC, DO,   TELOPT_BINARY };
         unsigned char iac_will_sga[3]    = { IAC, WILL, TELOPT_SGA };
         unsigned char iac_do_sga[3]      = { IAC, DO,   TELOPT_SGA };
+        unsigned char iac_will_echo[3]   = { IAC, WILL, TELOPT_ECHO };
+        unsigned char iac_do_ttype[3]    = { IAC, DO,   TELOPT_TTYPE };
 
-        /* Tell client: Server WILL use BINARY. Crucial for UTF-8. */
-        if (write(dnew->descriptor, iac_will_binary, 3) < 0) {
-            perror("init_descriptor: write IAC WILL BINARY");
-        }
+        /* Enhanced UTF-8 setup sequence */
+        
+        /* Step 1: Initialize modern client detection flags */
+        sprintf(log_buf, "DEBUG: Starting modern UTF-8 client detection for %s", dnew->host);
+        log_string(log_buf);
+        
+        /* Initialize client detection flags - default to modern UTF-8 capable client */
+        dnew->client_detected = FALSE; /* Will be set to TRUE after detection timeout or telnet response */
+        dnew->suppress_telnet = FALSE; /* Allow telnet negotiation for advanced clients */
+        dnew->connect_time = current_time;
+        dnew->utf8_capable = TRUE; /* Modern default: assume UTF-8 capable */
+        
+        /* For netcat and simple clients, avoid sending telnet negotiations immediately */
+        /* Wait briefly to detect if it's a telnet-capable client */
+        /* Send minimal telnet negotiations for client detection */
+        /* Modern clients will respond, legacy clients will ignore */
+        /* Commenting out immediate telnet to avoid question marks in netcat */
+        /* write( desc, (char*)iac_will_echo, 3 ); */
+        /* write( desc, (char*)iac_do_ttype, 3 ); */
+        
+        sprintf(log_buf, "DEBUG: Sent minimal telnet negotiations for client detection to %s", dnew->host);
+        log_string(log_buf);
 
-        /* Tell client: Server WILL Suppress Go-Ahead. Helps prompt display. */
-        if (write(dnew->descriptor, iac_will_sga, 3) < 0) {
-             perror("init_descriptor: write IAC WILL SGA");
-        }
-
-        /* Tell client: Client SHOULD Suppress Go-Ahead. */
-        if (write(dnew->descriptor, iac_do_sga, 3) < 0) {
-             perror("init_descriptor: write IAC DO SGA");
-        }
+        /* Log connection with modern client detection info */
+        sprintf(log_buf, "New connection from %s - Using modern UTF-8 detection (utf8_capable=%d)",
+                dnew->host, dnew->utf8_capable);
+        log_string(log_buf);
     }
     /*
-     * Send the greeting.
+     * Send the greeting with UTF-8 setup information.
      */
     {
-	extern char * help_greeting;
-	if ( help_greeting[0] == '.' )
-	    write_to_buffer( dnew, help_greeting+1, 0 );
-	else
-	    write_to_buffer( dnew, help_greeting  , 0 );
+ extern char * help_greeting;
+ 
+ /* Add diagnostic logging before sending any text */
+ sprintf(log_buf, "DEBUG: About to send greeting to %s, descriptor state: utf8_capable=%d, binary_mode=%d",
+         dnew->host, dnew->utf8_capable, dnew->binary_mode);
+ log_string(log_buf);
+ 
+ /* Log the first few bytes of help_greeting for encoding analysis */
+ if (help_greeting && strlen(help_greeting) > 0) {
+     sprintf(log_buf, "DEBUG: help_greeting first 20 bytes: ");
+     for (int i = 0; i < 20 && i < strlen(help_greeting); i++) {
+         sprintf(log_buf + strlen(log_buf), "%02X ", (unsigned char)help_greeting[i]);
+     }
+     log_string(log_buf);
+ }
+ 
+ /* Modern approach: assume UTF-8 capable until proven otherwise */
+ sprintf(log_buf, "DEBUG: Defaulting client %s to UTF-8 capable mode (modern assumption)", dnew->host);
+ log_string(log_buf);
+ 
+ dnew->client_detected = FALSE; /* Will be set after timeout or telnet response */
+ dnew->suppress_telnet = FALSE; /* Allow telnet for advanced features */
+ /* dnew->utf8_capable remains TRUE from initialization */
+ 
+ free_string(dnew->client_name);
+ dnew->client_name = str_dup("UTF-8 Capable Client (assumed)");
+ 
+ /* Modern UTF-8 capable greeting */
+ write_to_buffer( dnew, "\r\n=== Mangus MUD (UTF-8 Mode) ===\r\n", 0 );
+ write_to_buffer( dnew, "UTF-8 encoding enabled for Turkish character support.\r\n", 0 );
+ write_to_buffer( dnew, "Client detection in progress...\r\n\r\n", 0 );
+ 
+ if ( help_greeting[0] == '.' )
+     write_to_buffer( dnew, help_greeting+1, 0 );
+ else
+     write_to_buffer( dnew, help_greeting  , 0 );
+     
+ sprintf(log_buf, "DEBUG: Modern UTF-8 greeting sent to %s (suppress_telnet=%d, utf8_capable=%d)",
+         dnew->host, dnew->suppress_telnet, dnew->utf8_capable);
+ log_string(log_buf);
     }
 
     return;
@@ -1127,8 +1181,77 @@ void close_socket( DESCRIPTOR_DATA *dclose )
 #endif
     return;
 }
-
-
+/*
+ * Filter ANSI escape sequences from input buffer.
+ * This prevents arrow keys and other control sequences from appearing as literal text.
+ */
+void filter_ansi_sequences( char *buf )
+{
+    char *src, *dst;
+    bool found_escape = FALSE;
+    
+    src = dst = buf;
+    
+    while ( *src != '\0' )
+    {
+        /* Check for any ESC character - filter both complete sequences and lone ESC */
+        if ( *src == '\x1b' )
+        {
+            found_escape = TRUE;
+            
+            /* Check if this is a complete ANSI escape sequence (ESC[) */
+            if ( *(src + 1) == '[' )
+            {
+                /* Log what we're filtering for debugging */
+                sprintf(log_buf, "DEBUG: Filtering ANSI escape sequence starting at: ESC[");
+                for (int debug_i = 2; debug_i < 10 && *(src + debug_i) != '\0'; debug_i++) {
+                    sprintf(log_buf + strlen(log_buf), "%c", *(src + debug_i));
+                    if ((*(src + debug_i) >= 'A' && *(src + debug_i) <= 'Z') ||
+                        (*(src + debug_i) >= 'a' && *(src + debug_i) <= 'z') ||
+                        *(src + debug_i) == '~') {
+                        break;
+                    }
+                }
+                log_string(log_buf);
+                
+                /* Skip the escape sequence */
+                src += 2; /* Skip ESC and [ */
+                
+                /* Skip until we find the end character (A-Z, a-z, or ~) */
+                while ( *src != '\0' &&
+                       !( (*src >= 'A' && *src <= 'Z') ||
+                          (*src >= 'a' && *src <= 'z') ||
+                          *src == '~' ) )
+                {
+                    src++;
+                }
+                
+                /* Skip the final character */
+                if ( *src != '\0' )
+                    src++;
+            }
+            else
+            {
+                /* This is a lone ESC character - filter it out too */
+                sprintf(log_buf, "DEBUG: Filtering lone ESC character");
+                log_string(log_buf);
+                src++; /* Skip the lone ESC */
+            }
+        }
+        else
+        {
+            /* Copy normal character */
+            *dst++ = *src++;
+        }
+    }
+    
+    *dst = '\0';
+    
+    if (found_escape) {
+        sprintf(log_buf, "DEBUG: After ANSI filtering, buffer content: [%s]", buf);
+        log_string(log_buf);
+    }
+}
 
 bool read_from_descriptor( DESCRIPTOR_DATA *d )
 {
@@ -1199,7 +1322,155 @@ bool read_from_descriptor( DESCRIPTOR_DATA *d )
 #endif
 
 	d->inbuf[iStart] = '\0';
-    return TRUE;
+	
+	   /* Process any telnet negotiations */
+	   process_telnet_negotiations(d);
+	   
+	   /* Filter ANSI escape sequences from the raw input buffer */
+	   /* This is the crucial fix to ensure sequences like arrow keys are removed */
+	   filter_ansi_sequences(d->inbuf);
+	   
+	   return TRUE;
+}
+
+/*
+	* Process telnet option negotiations for client detection and UTF-8 setup
+	*/
+void process_telnet_negotiations( DESCRIPTOR_DATA *d )
+{
+	   char *src, *dest;
+	   int i, len;
+	   
+	   src = dest = d->inbuf;
+	   len = strlen(d->inbuf);
+	   
+	   for (i = 0; i < len; i++)
+	   {
+	       if ((unsigned char)src[i] == IAC && i + 2 < len)
+	       {
+	           unsigned char cmd = (unsigned char)src[i + 1];
+	           unsigned char opt = (unsigned char)src[i + 2];
+	           
+	           /* Handle telnet responses */
+	           sprintf(log_buf, "DEBUG: Processing telnet command: IAC %02X %02X from %s",
+	                   cmd, opt, d->host);
+	           log_string(log_buf);
+	           
+	           if (cmd == WILL && opt == TELOPT_BINARY)
+	           {
+	               d->binary_mode = TRUE;
+	               d->utf8_capable = TRUE;
+	               d->client_detected = TRUE;
+	               sprintf(log_buf, "DEBUG: Client %s accepted BINARY mode - UTF-8 capable, telnet negotiation working", d->host);
+	               log_string(log_buf);
+	           }
+	           else if (cmd == DO && opt == TELOPT_BINARY)
+	           {
+	               d->binary_mode = TRUE;
+	               d->client_detected = TRUE;
+	               sprintf(log_buf, "DEBUG: Client %s negotiated BINARY mode - telnet negotiation working", d->host);
+	               log_string(log_buf);
+	           }
+	           else if (cmd == WONT && opt == TELOPT_BINARY)
+	           {
+	               sprintf(log_buf, "WARNING: Client %s rejected BINARY mode - disabling UTF-8 for legacy compatibility", d->host);
+	               log_string(log_buf);
+	               d->utf8_capable = FALSE; /* Legacy client detected */
+	               d->client_detected = TRUE;
+	               free_string(d->client_name);
+	               d->client_name = str_dup("Legacy Client (BINARY rejected)");
+	           }
+	           else if (cmd == DONT && opt == TELOPT_BINARY)
+	           {
+	               sprintf(log_buf, "WARNING: Client %s refuses BINARY mode - disabling UTF-8 for legacy compatibility", d->host);
+	               log_string(log_buf);
+	               d->utf8_capable = FALSE; /* Legacy client detected */
+	               d->client_detected = TRUE;
+	               free_string(d->client_name);
+	               d->client_name = str_dup("Legacy Client (BINARY refused)");
+	           }
+	           else if (cmd == SB && opt == TELOPT_TTYPE && i + 5 < len)
+	           {
+	               /* Terminal type subnegotiation - extract client name */
+	               int sb_end = i + 3;
+	               while (sb_end < len - 1 && !((unsigned char)src[sb_end] == IAC && (unsigned char)src[sb_end + 1] == SE))
+	                   sb_end++;
+	               
+	               if (sb_end < len - 1 && (unsigned char)src[i + 3] == TELQUAL_IS)
+	               {
+	                   int name_len = sb_end - i - 4;
+	                   if (name_len > 0 && name_len < 64)
+	                   {
+	                       char client_type[64];
+	                       strncpy(client_type, &src[i + 4], name_len);
+	                       client_type[name_len] = '\0';
+	                       
+	                       free_string(d->client_name);
+	                       d->client_name = str_dup(client_type);
+	                       
+	                       sprintf(log_buf, "Client %s type detected: %s", d->host, client_type);
+	                       log_string(log_buf);
+	                       
+	                       /* Enhanced UTF-8 capability detection based on known clients */
+	                       if (strstr(client_type, "Mudlet") || strstr(client_type, "MUDLET") ||
+	                           strstr(client_type, "tintin") || strstr(client_type, "TINTIN") ||
+	                           strstr(client_type, "UTF-8") || strstr(client_type, "utf-8") ||
+	                           strstr(client_type, "MUSHclient") || strstr(client_type, "MUSHCLIENT"))
+	                       {
+	                           d->utf8_capable = TRUE;
+	                           d->client_detected = TRUE;
+	                           sprintf(log_buf, "DEBUG: Client %s confirmed as UTF-8 capable (known good client)", d->host);
+	                           log_string(log_buf);
+	                       }
+	                       else if (strstr(client_type, "telnet") || strstr(client_type, "TELNET") ||
+	                                strstr(client_type, "windows") || strstr(client_type, "WINDOWS"))
+	                       {
+	                           /* Known problematic clients - disable UTF-8 */
+	                           d->utf8_capable = FALSE;
+	                           d->client_detected = TRUE;
+	                           sprintf(log_buf, "DEBUG: Client %s detected as legacy - UTF-8 disabled", d->host);
+	                           log_string(log_buf);
+	                       }
+	                       else
+	                       {
+	                           /* Unknown client - keep UTF-8 enabled (modern assumption) */
+	                           d->client_detected = TRUE;
+	                           sprintf(log_buf, "DEBUG: Client %s detected but unknown type - keeping UTF-8 enabled", d->host);
+	                           log_string(log_buf);
+	                       }
+	                   }
+	                   i = sb_end + 1; /* Skip past the subnegotiation */
+	               }
+	           }
+	           
+	           /* Skip the 3-byte telnet command */
+	           i += 2;
+	       }
+	       else if ((unsigned char)src[i] != IAC)
+	       {
+	           /* Copy normal non-telnet data - ANSI filtering handled elsewhere */
+	           *dest++ = src[i];
+	       }
+	   }
+	   
+	   /* Check for non-responding clients (like netcat) after a timeout */
+	   if (!d->client_detected && (current_time - d->connect_time) > 2)
+	   {
+	       sprintf(log_buf, "DEBUG: Client %s timeout - no telnet response after 2 seconds, assuming modern UTF-8 client (netcat-like)", d->host);
+	       log_string(log_buf);
+	       
+	       d->client_detected = TRUE;
+	       d->suppress_telnet = TRUE; /* Suppress further telnet to avoid raw output */
+	       /* d->utf8_capable remains TRUE - modern assumption for netcat and similar tools */
+	       
+	       free_string(d->client_name);
+	       d->client_name = str_dup("Modern UTF-8 Client (netcat-like)");
+	       
+	       sprintf(log_buf, "DEBUG: Client %s marked as modern UTF-8 client - netcat and similar tools handle UTF-8 well", d->host);
+	       log_string(log_buf);
+	   }
+	   
+	   *dest = '\0';
 }
 
 
@@ -1255,6 +1526,7 @@ void read_from_buffer( DESCRIPTOR_DATA *d )
         }
         else if ( d->inbuf[i] != '\b' && d->inbuf[i] != '\x7F' )
         {
+            /* Copy all characters since ANSI filtering is now done in read_from_descriptor */
             d->incomm[k++] = d->inbuf[i];
         }
     }
@@ -1388,7 +1660,7 @@ bool process_output( DESCRIPTOR_DATA *d, bool fPrompt )
 	    write_to_buffer( d, "\n\r", 2 );
 
         // Send IAC GA before the prompt
-	if (IS_SET(ch->comm,COMM_TELNET_GA))
+	if (IS_SET(ch->comm,COMM_TELNET_GA) && !d->suppress_telnet)
 	    write_to_buffer(d,go_ahead_str,0);
 
         if ( IS_SET(ch->comm, COMM_PROMPT) )
@@ -1596,9 +1868,45 @@ bool write_to_descriptor( int desc, char *txt, int length )
     if ( length <= 0 )
 	length = strlen(txt);
 
+    /* Enhanced UTF-8 output handling */
     for ( iStart = 0; iStart < length; iStart += nWrite )
     {
 	nBlock = UMIN( length - iStart, 4096 );
+	
+	/* Ensure we don't split UTF-8 multi-byte sequences */
+	if (nBlock < length - iStart)
+	{
+	    /* Check if we're about to split a UTF-8 character */
+	    int end_pos = iStart + nBlock - 1;
+	    unsigned char byte = (unsigned char)txt[end_pos];
+	    
+	    /* If this byte is part of a multi-byte UTF-8 sequence, adjust block size */
+	    if (byte >= 0x80)
+	    {
+		/* Find the start of the current UTF-8 character */
+		int char_start = end_pos;
+		while (char_start > iStart && (txt[char_start] & 0xC0) == 0x80)
+		    char_start--;
+		
+		/* If we found a UTF-8 start byte, check if the character would be split */
+		if (char_start >= iStart)
+		{
+		    unsigned char start_byte = (unsigned char)txt[char_start];
+		    int char_len = 1;
+		    
+		    if ((start_byte & 0xE0) == 0xC0) char_len = 2;      /* 110xxxxx */
+		    else if ((start_byte & 0xF0) == 0xE0) char_len = 3; /* 1110xxxx */
+		    else if ((start_byte & 0xF8) == 0xF0) char_len = 4; /* 11110xxx */
+		    
+		    /* If character would be split, adjust block size */
+		    if (char_start + char_len > iStart + nBlock)
+		    {
+			nBlock = char_start - iStart;
+		    }
+		}
+	    }
+	}
+	
 	if ( ( nWrite = write( desc, txt + iStart, nBlock ) ) < 0 )
 	    { perror( "Write_to_descriptor" ); return FALSE; }
     }
@@ -1882,7 +2190,22 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	}
 
 
-	write_to_buffer( d, (char *) echo_on_str, 0 );
+	/* Only send telnet echo commands to telnet-capable clients */
+	if (!d->suppress_telnet) {
+		write_to_buffer( d, (char *) echo_on_str, 0 );
+		sprintf(log_buf, "DEBUG: Sent telnet echo_on to %s (login, utf8_capable=%d)", d->host, d->utf8_capable);
+		log_string(log_buf);
+	} else {
+		sprintf(log_buf, "DEBUG: Skipped telnet echo_on for client %s (login, utf8_capable=%d)", d->host, d->utf8_capable);
+		log_string(log_buf);
+	}
+	
+	/* Show encoding status based on actual UTF-8 capability */
+	if (!d->utf8_capable) {
+		write_to_buffer(d, "\r\n=== ASCII Mode Active ===\r\n", 0);
+		write_to_buffer(d, "Legacy client detected. Turkish characters may not display correctly.\r\n", 0);
+		write_to_buffer(d, "For full UTF-8 support, use a modern MUD client like Mudlet.\r\n\r\n", 0);
+	}
 
 	if ( check_reconnect( d, ch->name, TRUE ) )
 	    return;
@@ -2099,7 +2422,22 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	    return;
 	}
 
-	write_to_buffer( d, (char *) echo_on_str, 0 );
+	/* Only send telnet echo commands to telnet-capable clients */
+	if (!d->suppress_telnet) {
+		write_to_buffer( d, (char *) echo_on_str, 0 );
+		sprintf(log_buf, "DEBUG: Sent telnet echo_on to %s (utf8_capable=%d)", d->host, d->utf8_capable);
+		log_string(log_buf);
+	} else {
+		sprintf(log_buf, "DEBUG: Skipped telnet echo_on for client %s (utf8_capable=%d)", d->host, d->utf8_capable);
+		log_string(log_buf);
+	}
+	
+	/* Show encoding status for new character creation */
+	if (!d->utf8_capable) {
+		write_to_buffer(d, "\r\n=== ASCII Mode Active ===\r\n", 0);
+		write_to_buffer(d, "Legacy client detected. Turkish characters may not display correctly.\r\n", 0);
+		write_to_buffer(d, "For full UTF-8 support, use a modern MUD client like Mudlet.\r\n\r\n", 0);
+	}
 	sprintf(buf,
 "Mangus Mud %d farklı ırka ev sahipliği yapar. Irkların özeti:",
 			MAX_PC_RACE - 1);

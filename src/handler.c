@@ -3749,3 +3749,196 @@ bool room_has_exit( ROOM_INDEX_DATA *room )
 
   return FALSE;
 }
+
+/*
+ * Additional UTF-8 utility functions for enhanced compatibility
+ */
+
+/*
+ * Check if a byte sequence is valid UTF-8
+ */
+bool is_valid_utf8(const char *str, int len)
+{
+    const unsigned char *bytes = (const unsigned char *)str;
+    int i = 0;
+    
+    while (i < len)
+    {
+        if (bytes[i] <= 0x7F)
+        {
+            /* ASCII character */
+            i++;
+        }
+        else if ((bytes[i] & 0xE0) == 0xC0)
+        {
+            /* 2-byte sequence */
+            if (i + 1 >= len || (bytes[i + 1] & 0xC0) != 0x80)
+                return FALSE;
+            i += 2;
+        }
+        else if ((bytes[i] & 0xF0) == 0xE0)
+        {
+            /* 3-byte sequence */
+            if (i + 2 >= len ||
+                (bytes[i + 1] & 0xC0) != 0x80 ||
+                (bytes[i + 2] & 0xC0) != 0x80)
+                return FALSE;
+            i += 3;
+        }
+        else if ((bytes[i] & 0xF8) == 0xF0)
+        {
+            /* 4-byte sequence */
+            if (i + 3 >= len ||
+                (bytes[i + 1] & 0xC0) != 0x80 ||
+                (bytes[i + 2] & 0xC0) != 0x80 ||
+                (bytes[i + 3] & 0xC0) != 0x80)
+                return FALSE;
+            i += 4;
+        }
+        else
+        {
+            /* Invalid UTF-8 start byte */
+            return FALSE;
+        }
+    }
+    
+    return TRUE;
+}
+
+/*
+ * Count the number of UTF-8 characters in a string
+ */
+int utf8_strlen(const char *str)
+{
+    const unsigned char *s = (const unsigned char *)str;
+    int len = 0;
+    
+    while (*s)
+    {
+        if (*s <= 0x7F)
+        {
+            s++;
+        }
+        else if ((*s & 0xE0) == 0xC0)
+        {
+            s += 2;
+        }
+        else if ((*s & 0xF0) == 0xE0)
+        {
+            s += 3;
+        }
+        else if ((*s & 0xF8) == 0xF0)
+        {
+            s += 4;
+        }
+        else
+        {
+            /* Invalid UTF-8, skip byte */
+            s++;
+        }
+        len++;
+    }
+    
+    return len;
+}
+
+/*
+ * Get client type description for debugging
+ */
+const char *get_client_description(DESCRIPTOR_DATA *d)
+{
+    static char buf[256];
+    
+    if (!d)
+        return "Unknown";
+    
+    if (d->utf8_capable)
+    {
+        sprintf(buf, "%s (UTF-8)", d->client_name ? d->client_name : "Unknown");
+    }
+    else
+    {
+        sprintf(buf, "%s (Non-UTF-8)", d->client_name ? d->client_name : "Unknown");
+    }
+    
+    return buf;
+}
+
+/*
+ * Clean up invalid UTF-8 sequences in a string
+ */
+void sanitize_utf8_string(char *dest, const char *src, size_t dest_size)
+{
+    const unsigned char *s = (const unsigned char *)src;
+    char *d = dest;
+    size_t written = 0;
+    
+    if (dest_size == 0)
+        return;
+    
+    while (*s && written < dest_size - 1)
+    {
+        if (*s <= 0x7F)
+        {
+            /* Valid ASCII */
+            *d++ = *s++;
+            written++;
+        }
+        else if ((*s & 0xE0) == 0xC0 && s[1] && (s[1] & 0xC0) == 0x80)
+        {
+            /* Valid 2-byte UTF-8 */
+            if (written + 2 < dest_size)
+            {
+                *d++ = *s++;
+                *d++ = *s++;
+                written += 2;
+            }
+            else
+            {
+                break;
+            }
+        }
+        else if ((*s & 0xF0) == 0xE0 && s[1] && s[2] &&
+                 (s[1] & 0xC0) == 0x80 && (s[2] & 0xC0) == 0x80)
+        {
+            /* Valid 3-byte UTF-8 */
+            if (written + 3 < dest_size)
+            {
+                *d++ = *s++;
+                *d++ = *s++;
+                *d++ = *s++;
+                written += 3;
+            }
+            else
+            {
+                break;
+            }
+        }
+        else if ((*s & 0xF8) == 0xF0 && s[1] && s[2] && s[3] &&
+                 (s[1] & 0xC0) == 0x80 && (s[2] & 0xC0) == 0x80 && (s[3] & 0xC0) == 0x80)
+        {
+            /* Valid 4-byte UTF-8 */
+            if (written + 4 < dest_size)
+            {
+                *d++ = *s++;
+                *d++ = *s++;
+                *d++ = *s++;
+                *d++ = *s++;
+                written += 4;
+            }
+            else
+            {
+                break;
+            }
+        }
+        else
+        {
+            /* Invalid UTF-8 byte, replace with '?' */
+            *d++ = '?';
+            s++;
+            written++;
+        }
+    }
+    
+    *d = '\0';
+}
