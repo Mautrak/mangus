@@ -60,6 +60,7 @@
 #include <time.h>
 #include "merc.h"
 #include "magic.h"
+#include "turkish_suffix_helper.h"
 
 void	say_spell	args( ( CHAR_DATA *ch, int sn ) );
 void	one_hit(CHAR_DATA *ch, CHAR_DATA *victim, int dt, bool second );
@@ -1915,12 +1916,15 @@ bool spec_wishmaster( CHAR_DATA *ch )
 
 bool spec_kameni_dindar( CHAR_DATA *ch )
 {
+    char buf[MAX_STRING_LENGTH];
+    
     if ( !IS_AWAKE(ch) )
         return FALSE;
     if (number_range(0,100) == 0)
     {
         do_say(ch, (char*)"Merhaba tanrının merhametine muhtaç kişi.");
-        do_say(ch, (char*)"Kame'nin el yazmalarını arıyorum.");
+        sprintf(buf, "%s el yazmalarını arıyorum.", TR_GEN("Kame"));
+        do_say(ch, buf);
         do_say(ch, (char*)"Yeraltı'nda o el yazmalarından bahsedildiğini duydum.");
         do_say(ch, (char*)"Ama bulmak nasip olmadı.");
         return TRUE;
@@ -1930,12 +1934,15 @@ bool spec_kameni_dindar( CHAR_DATA *ch )
 
 bool spec_niryani_dindar( CHAR_DATA *ch )
 {
+    char buf[MAX_STRING_LENGTH];
+    
     if ( !IS_AWAKE(ch) )
         return FALSE;
     if (number_range(0,100) == 0)
     {
         do_say(ch, (char*)"Merhaba tanrının merhametine muhtaç kişi.");
-        do_say(ch, (char*)"Nir'in el yazmalarını arıyorum.");
+        sprintf(buf, "%s el yazmalarını arıyorum.", TR_GEN("Nir"));
+        do_say(ch, buf);
         do_say(ch, (char*)"Eski Thalos'ta o el yazmalarından bahsedildiğini duydum.");
         do_say(ch, (char*)"Ama bulmak nasip olmadı.");
         return TRUE;
@@ -1945,12 +1952,15 @@ bool spec_niryani_dindar( CHAR_DATA *ch )
 
 bool spec_nyahi_dindar( CHAR_DATA *ch )
 {
+    char buf[MAX_STRING_LENGTH];
+    
     if ( !IS_AWAKE(ch) )
         return FALSE;
     if (number_range(0,100) == 0)
     {
         do_say(ch, (char*)"Merhaba tanrının merhametine muhtaç kişi.");
-        do_say(ch, (char*)"Nyah'ın el yazmalarını arıyorum.");
+        sprintf(buf, "%s el yazmalarını arıyorum.", TR_GEN("Nyah"));
+        do_say(ch, buf);
         do_say(ch, (char*)"Bölümüş Ruhlar'da o el yazmalarından bahsedildiğini duydum.");
         do_say(ch, (char*)"Ama bulmak nasip olmadı.");
         return TRUE;
@@ -1960,12 +1970,15 @@ bool spec_nyahi_dindar( CHAR_DATA *ch )
 
 bool spec_sintaryan_dindar( CHAR_DATA *ch )
 {
+    char buf[MAX_STRING_LENGTH];
+    
     if ( !IS_AWAKE(ch) )
         return FALSE;
     if (number_range(0,100) == 0)
     {
         do_say(ch, (char*)"Merhaba tanrının merhametine muhtaç kişi.");
-        do_say(ch, (char*)"Sint'in el yazmalarını arıyorum.");
+        sprintf(buf, "%s el yazmalarını arıyorum.", TR_GEN("Sint"));
+        do_say(ch, buf);
         do_say(ch, (char*)"Haon Dor'da o el yazmalarından bahsedildiğini duydum.");
         do_say(ch, (char*)"Ama bulmak nasip olmadı.");
         return TRUE;

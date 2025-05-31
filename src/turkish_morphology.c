@@ -293,6 +293,21 @@ int get_softened_turkish_consonant(const char *utf8_char_ptr, int char_len, char
     return softened_len;
 }
 
+// Helper function to identify plural suffix types
+static bool is_plural_suffix_type(enum TurkishSuffixType type) {
+    switch (type) {
+        case SUFFIX_GENITIVE_PLURAL:
+        case SUFFIX_DATIVE_PLURAL:
+        case SUFFIX_ACCUSATIVE_PLURAL:
+        case SUFFIX_ABLATIVE_PLURAL:
+        case SUFFIX_INSTRUMENTAL_PLURAL:
+        case SUFFIX_LOCATIVE_PLURAL:
+            return true;
+        default:
+            return false;
+    }
+}
+
 // --- Main Suffix Generation Logic ---
 int generate_turkish_suffixed_word(
     const char *base_word,
@@ -406,11 +421,60 @@ int generate_turkish_suffixed_word(
             }
             break;
         }
+        case SUFFIX_INSTRUMENTAL: // -le, -la, -yle, -yla (with/by means of)
+            if (word_ends_v) strcpy(buffer_consonant, "y");
+            if (u_lv == 'a' || (u_lv == 0xC4 && u_lv2 == 0xB1) || u_lv == 'o' || u_lv == 'u') suffix_form = "la"; // a, ı, o, u
+            else if (u_lv == 'e' || u_lv == 'i' || (u_lv == 0xC3 && u_lv2 == 0xB6) || (u_lv == 0xC3 && u_lv2 == 0xBC)) suffix_form = "le"; // e, i, ö, ü
+            else suffix_form = "le"; // Default to front vowel harmony
+            break;
+        case SUFFIX_PLURAL: // -ler, -lar (plural)
+            // No buffer consonant needed for plurals (buffer_consonant remains empty)
+            if (u_lv == 'a' || (u_lv == 0xC4 && u_lv2 == 0xB1) || u_lv == 'o' || u_lv == 'u') suffix_form = "lar"; // a, ı, o, u
+            else if (u_lv == 'e' || u_lv == 'i' || (u_lv == 0xC3 && u_lv2 == 0xB6) || (u_lv == 0xC3 && u_lv2 == 0xBC)) suffix_form = "ler"; // e, i, ö, ü
+            else suffix_form = "ler"; // Default to front vowel harmony
+            break;
+        case SUFFIX_GENITIVE_PLURAL: // -ların, -lerin (of plurals)
+            // Direct combined suffix generation
+            if (u_lv == 'a' || (u_lv == 0xC4 && u_lv2 == 0xB1) || u_lv == 'o' || u_lv == 'u') suffix_form = "ların"; // a, ı, o, u
+            else if (u_lv == 'e' || u_lv == 'i' || (u_lv == 0xC3 && u_lv2 == 0xB6) || (u_lv == 0xC3 && u_lv2 == 0xBC)) suffix_form = "lerin"; // e, i, ö, ü
+            else suffix_form = "lerin"; // Default to front vowel harmony
+            break;
+        case SUFFIX_DATIVE_PLURAL: // -lara, -lere (to plurals)
+            // Direct combined suffix generation
+            if (u_lv == 'a' || (u_lv == 0xC4 && u_lv2 == 0xB1) || u_lv == 'o' || u_lv == 'u') suffix_form = "lara"; // a, ı, o, u
+            else if (u_lv == 'e' || u_lv == 'i' || (u_lv == 0xC3 && u_lv2 == 0xB6) || (u_lv == 0xC3 && u_lv2 == 0xBC)) suffix_form = "lere"; // e, i, ö, ü
+            else suffix_form = "lere"; // Default to front vowel harmony
+            break;
+        case SUFFIX_ACCUSATIVE_PLURAL: // -ları, -leri (direct object plurals)
+            // Direct combined suffix generation
+            if (u_lv == 'a' || (u_lv == 0xC4 && u_lv2 == 0xB1) || u_lv == 'o' || u_lv == 'u') suffix_form = "ları"; // a, ı, o, u
+            else if (u_lv == 'e' || u_lv == 'i' || (u_lv == 0xC3 && u_lv2 == 0xB6) || (u_lv == 0xC3 && u_lv2 == 0xBC)) suffix_form = "leri"; // e, i, ö, ü
+            else suffix_form = "leri"; // Default to front vowel harmony
+            break;
+        case SUFFIX_ABLATIVE_PLURAL: // -lardan, -lerden (from plurals)
+            // Direct combined suffix generation
+            if (u_lv == 'a' || (u_lv == 0xC4 && u_lv2 == 0xB1) || u_lv == 'o' || u_lv == 'u') suffix_form = "lardan"; // a, ı, o, u
+            else if (u_lv == 'e' || u_lv == 'i' || (u_lv == 0xC3 && u_lv2 == 0xB6) || (u_lv == 0xC3 && u_lv2 == 0xBC)) suffix_form = "lerden"; // e, i, ö, ü
+            else suffix_form = "lerden"; // Default to front vowel harmony
+            break;
+        case SUFFIX_INSTRUMENTAL_PLURAL: // -larla, -lerle (with plurals)
+            // Direct combined suffix generation
+            if (u_lv == 'a' || (u_lv == 0xC4 && u_lv2 == 0xB1) || u_lv == 'o' || u_lv == 'u') suffix_form = "larla"; // a, ı, o, u
+            else if (u_lv == 'e' || u_lv == 'i' || (u_lv == 0xC3 && u_lv2 == 0xB6) || (u_lv == 0xC3 && u_lv2 == 0xBC)) suffix_form = "lerle"; // e, i, ö, ü
+            else suffix_form = "lerle"; // Default to front vowel harmony
+            break;
+        case SUFFIX_LOCATIVE_PLURAL: // -larda, -lerde (in/on/at plurals)
+            // Direct combined suffix generation
+            if (u_lv == 'a' || (u_lv == 0xC4 && u_lv2 == 0xB1) || u_lv == 'o' || u_lv == 'u') suffix_form = "larda"; // a, ı, o, u
+            else if (u_lv == 'e' || u_lv == 'i' || (u_lv == 0xC3 && u_lv2 == 0xB6) || (u_lv == 0xC3 && u_lv2 == 0xBC)) suffix_form = "lerde"; // e, i, ö, ü
+            else suffix_form = "lerde"; // Default to front vowel harmony
+            break;
         default:
             return -2; // Should not happen
     }
     // Construct the final word
-    if (is_proper_noun) {
+    // Refined apostrophe logic: inflected plurals of proper nouns generally do NOT use apostrophes
+    if (is_proper_noun && !is_plural_suffix_type(type)) {
         snprintf(output_buffer, buffer_size, "%s'%s%s", current_base_word, buffer_consonant, suffix_form);
     } else {
         snprintf(output_buffer, buffer_size, "%s%s%s", current_base_word, buffer_consonant, suffix_form);

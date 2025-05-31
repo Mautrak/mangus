@@ -1,7 +1,7 @@
 
-Booted Tue May 27 22:24:22 2025
+Booted Fri May 30 20:57:50 2025
 Area popularity statistics (in char * ticks)
-Limbo                                                        23
+Limbo                                                        9
 Mekanik Düşler                                             0
 Zooloji                                                      0
 Havada                                                       0
@@ -52,7 +52,7 @@ Arkadya                                                      0
 Bölünmüş Ruhlar                                          0
 Drakiri Adası                                               0
 Kıyamet                                                     0
-Mud Okulu                                                    32
+Mud Okulu                                                    20
 Bakımevi                                                    0
 Acemi Bölgesi                                               0
 Zümrüt Köyü                                              0

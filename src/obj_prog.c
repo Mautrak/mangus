@@ -60,6 +60,7 @@
 #include "merc.h"
 #include "magic.h"
 #include "interp.h"
+#include "turkish_suffix_helper.h"
 
 void one_hit(CHAR_DATA *ch, CHAR_DATA *victim, int dt, bool second);
 bool cabal_area_check   args( (CHAR_DATA *ch) );
@@ -555,12 +556,15 @@ bool death_prog_excalibur(OBJ_DATA *obj, CHAR_DATA *ch)
 
 void speech_prog_excalibur(OBJ_DATA *obj, CHAR_DATA *ch, char *speech)
 {
+  char buf[MAX_STRING_LENGTH];
 
   if (!str_cmp(speech, "asit")
       && (ch->fighting) && is_wielded_char(ch,obj)  )
     {
-      send_to_char("Excalibur'un bıçağından asit fışkırıyor.\n\r",ch);
-      act("Excalibur'un bıçağından asit fışkırıyor.",ch,NULL,NULL,TO_ROOM);
+      sprintf(buf, "%s bıçağından asit fışkırıyor.\n\r", TR_GEN("Excalibur"));
+      send_to_char(buf, ch);
+      sprintf(buf, "%s bıçağından asit fışkırıyor.", TR_GEN("Excalibur"));
+      act(buf, ch, NULL, NULL, TO_ROOM);
       obj_cast_spell(gsn_acid_blast,ch->level,ch,ch->fighting,NULL);
       WAIT_STATE(ch, 2 * PULSE_VIOLENCE);
     }

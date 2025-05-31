@@ -62,6 +62,7 @@
 #include "magic.h"
 #include "interp.h"
 #include "recycle.h"
+#include "turkish_suffix_helper.h"
 
 void raw_kill args( (CHAR_DATA *victim) );
 DECLARE_DO_FUN(do_yell);
@@ -509,7 +510,8 @@ void give_prog_keeper(CHAR_DATA *mob, CHAR_DATA *ch, OBJ_DATA *obj)
       extract_obj(obj);
       if ((rug = get_obj_carry(ch, (char*)"rug")) != NULL)
 	{
-    do_say(mob, (char*)"Sanırım FireFlash'i ziyaret etmek isteyeceksin.");
+    sprintf(buf, "Sanırım %s ziyaret etmek isteyeceksin.", TR_ACC("FireFlash"));
+    do_say(mob, buf);
 	  do_say(mob, (char*)"Dikkatli ol, canı biraz sıkkın.");
 	  do_unlock (mob, (char*)"door");
 	  do_open (mob, (char*)"door");
@@ -649,8 +651,8 @@ bool death_prog_stalker(CHAR_DATA *mob)
   char buf[100];
 
   mob->cabal = CABAL_RULER;
-  sprintf(buf, "%syi öldürmeyi beceremedim, son nefesimi vermeliyimg.",
-	  mob->last_fought->name);
+  sprintf(buf, "%s öldürmeyi beceremedim, son nefesimi vermeliyimg.",
+   TR_ACC(mob->last_fought->name));
   do_cb(mob, buf);
   return FALSE;
 }
@@ -1028,7 +1030,11 @@ void greet_prog_armourer(CHAR_DATA *mob, CHAR_DATA *ch)
    "yolcu" : ch->name );
   do_say(mob,buf);
   do_say(mob,(char*)"Sana nasıl yardımcı olabilirim?");
-  do_say(mob,(char*)"Dükkanımda gördüğün zırhların tümü çok kalitelidir.");
+  {
+    char buf[MAX_STRING_LENGTH];
+    sprintf( buf, "Dükkanımda gördüğün %s tümü çok kalitelidir.", TR_PLU("zırh") );
+    do_say(mob, buf);
+  }
   interpret(mob,(char*)"emote gururla geriniyor.", FALSE);
 }
 

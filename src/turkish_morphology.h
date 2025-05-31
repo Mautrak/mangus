@@ -39,8 +39,15 @@ enum TurkishSuffixType {
     SUFFIX_DATIVE,      // -e, -a (to/for)
     SUFFIX_LOCATIVE,    // -de, -da, -te, -ta (in/on/at)
     SUFFIX_ABLATIVE,    // -den, -dan, -ten, -tan (from)
-    // TODO: Add other suffix types if identified as necessary from ek.c/ek2.c tables
-    // e.g., instrumental (-le, -la), plural (-ler, -lar) if they are also hardcoded.
+    SUFFIX_INSTRUMENTAL,// -le, -la, -yle, -yla (with/by means of)
+    SUFFIX_PLURAL,      // -ler, -lar (plural)
+    // New inflected plural types (plural + case suffix)
+    SUFFIX_GENITIVE_PLURAL,     // -ların, -lerin (of plurals)
+    SUFFIX_DATIVE_PLURAL,       // -lara, -lere (to plurals)
+    SUFFIX_ACCUSATIVE_PLURAL,   // -ları, -leri (direct object plurals)
+    SUFFIX_ABLATIVE_PLURAL,     // -lardan, -lerden (from plurals)
+    SUFFIX_INSTRUMENTAL_PLURAL, // -larla, -lerle (with plurals)
+    SUFFIX_LOCATIVE_PLURAL      // -larda, -lerde (in/on/at plurals)
 };
 
 // From ek.h

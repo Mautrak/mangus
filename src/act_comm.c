@@ -64,6 +64,7 @@
 #include "recycle.h"
 #include "tables.h"
 #include "interp.h"
+#include "turkish_suffix_helper.h"
 
 int unlink(const char *pathname);
 
@@ -176,7 +177,7 @@ void do_channels( CHAR_DATA *ch, char *argument)
     printf_to_char(ch,"KAPALI\n\r");
 
     if (IS_SET(ch->comm,COMM_SNOOP_PROOF))
-    printf_to_char(ch,"Snoop'tan muafsın.\n\r");
+    printf_to_char(ch,"SnoopZ muafsın.\n\r");
 
     if (ch->lines != PAGELEN)
     {
@@ -514,7 +515,7 @@ void do_kdg( CHAR_DATA *ch, char *argument )
 
     if (argument[0] == '\0' )
     {
-      send_to_char("Oyunculara ne gibi bi'şey söyleyeceksin?.\n\r",ch);
+      send_to_char("Oyunculara ne gibi bir şey söyleyeceksin?.\n\r",ch);
       return;
     }
 
@@ -1051,7 +1052,7 @@ void do_rent( CHAR_DATA *ch, char *argument )
 void do_qui( CHAR_DATA *ch, char *argument )
 {
   (void) argument; /* Unused parameter */
-  printf_to_char( ch,"Mangus'tan ayrılmak istiyorsan komutu eksiksiz yazmalısın.\n\r" );
+  printf_to_char( ch,"MangusZ ayrılmak istiyorsan komutu eksiksiz yazmalısın.\n\r" );
     return;
 }
 
@@ -2101,8 +2102,8 @@ void do_judge( CHAR_DATA *ch, char *argument )
         return;
     }
 
-    printf_to_char(ch,"%s'in etiği %s ve yönelimi %s.\n\r",
-	victim->name,
+    printf_to_char(ch,"%s etiği %s ve yönelimi %s.\n\r",
+ TR_GEN(victim->name),
         victim->ethos == 1 ? "Tüze" :
         victim->ethos == 2 ? "Yansız" :
         victim->ethos == 3 ? "Kaos" : "bilinmiyor",

@@ -56,6 +56,7 @@
 #include <stdio.h>
 #include "merc.h"
 #include "recycle.h"
+#include "turkish_suffix_helper.h"
 
 DECLARE_DO_FUN(do_yell		);
 DECLARE_DO_FUN(do_sleep		);
@@ -1108,40 +1109,40 @@ void do_kick( CHAR_DATA *ch, char *argument )
     if ( !IS_NPC(ch)
     &&   ch->level < skill_table[gsn_kick].skill_level[ch->iclass] )
     {
-	send_to_char(
-    "Savaş sanatlarını savaşçılara bırakmaya ne dersin?\n\r", ch );
-	return;
+        char buf[MAX_STRING_LENGTH];
+        sprintf( buf, "Savaş sanatları %s için değil mi?\n\r", TR_PLU("savaşçı") );
+        send_to_char( buf, ch );
+        return;
     }
 
     if (IS_NPC(ch) && !IS_SET(ch->off_flags,OFF_KICK))
-	return;
+        return;
 
     if ( ( victim = ch->fighting ) == NULL )
     {
-	send_to_char( "Kimseyle dövüşmüyorsun.\n\r", ch );
-	return;
+        send_to_char( "Kimseyle dövüşmüyorsun.\n\r", ch );
+        return;
     }
     chance = number_percent( );
     if ( IS_AFFECTED(ch,AFF_FLYING) ) chance = (int)((float)chance*1.1);
     WAIT_STATE( ch, skill_table[gsn_kick].beats );
     if ( IS_NPC(ch) || chance < get_skill(ch,gsn_kick) )
     {
-	kick_dam = number_range(1,ch->level);
-	if ((ch->iclass == 9) && ( get_eq_char(ch,WEAR_FEET) == NULL) )
-		kick_dam *= 2;
-	kick_dam += ch->damroll / 2;
-	damage( ch,victim,kick_dam,gsn_kick,DAM_BASH, TRUE );
-	check_improve(ch,gsn_kick,TRUE,1);
+        kick_dam = number_range(1,ch->level);
+        if ((ch->iclass == 9) && ( get_eq_char(ch,WEAR_FEET) == NULL) )
+            kick_dam *= 2;
+        kick_dam += ch->damroll / 2;
+        damage( ch,victim,kick_dam,gsn_kick,DAM_BASH, TRUE );
+        check_improve(ch,gsn_kick,TRUE,1);
     }
     else
     {
-	damage( ch, victim, 0, gsn_kick,DAM_BASH, TRUE );
-	check_improve(ch,gsn_kick,FALSE,1);
+        damage( ch, victim, 0, gsn_kick,DAM_BASH, TRUE );
+        check_improve(ch,gsn_kick,FALSE,1);
     }
 
     return;
 }
-
 void do_circle( CHAR_DATA *ch, char *argument )
 {
     (void) argument; /* Unused parameter */

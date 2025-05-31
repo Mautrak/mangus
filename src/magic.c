@@ -60,6 +60,7 @@
 #include "merc.h"
 #include "magic.h"
 #include "recycle.h"
+#include "turkish_suffix_helper.h"
 
 /* command procedures needed */
 DECLARE_DO_FUN(do_look		);
@@ -1244,9 +1245,13 @@ void spell_call_lightning( int sn, int level,CHAR_DATA *ch,void *vo,int target)
 
     dam = dice(level, 14);
 
-    send_to_char( "Tanrıların şimşeği düşmanlarını vuruyor!\n\r", ch );
-    act( "$n düşmanlarını vurması için şimşek çağırıyor!",
-	ch, NULL, NULL, TO_ROOM );
+    {
+    char buf[MAX_STRING_LENGTH];
+    sprintf(buf, "Tanrıların şimşeği %s vuruyor!\n\r", TR_ACC_PLU("düşman"));
+    send_to_char( buf, ch );
+    sprintf(buf, "$n %s vurması için şimşek çağırıyor!", TR_ACC_PLU("düşman"));
+    act( buf, ch, NULL, NULL, TO_ROOM );
+    }
 
     for ( vch = char_list; vch != NULL; vch = vch_next )
     {
@@ -1263,9 +1268,13 @@ void spell_call_lightning( int sn, int level,CHAR_DATA *ch,void *vo,int target)
 
 	    if (CAN_DETECT(vch, ADET_GROUNDING))
 	    {
-        send_to_char("Elektrik düşmanlarında yitip gidiyor.\n\r",vch);
-    		act("Bir yıldırım $S düşmanlarında yitip gidiyor.\n\r",
-			ch, NULL, vch, TO_ROOM);
+        {
+        char buf[MAX_STRING_LENGTH];
+        sprintf(buf, "Elektrik %s yitip gidiyor.\n\r", TR_LOC_PLU("düşman"));
+        send_to_char(buf,vch);
+        sprintf(buf, "Bir yıldırım $S %s yitip gidiyor.\n\r", TR_LOC_PLU("düşman"));
+        act(buf, ch, NULL, vch, TO_ROOM);
+        }
 		continue;
 	    }
 
@@ -1359,6 +1368,7 @@ void spell_cancellation( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     bool found = FALSE;
+    char buf[MAX_STRING_LENGTH];
 
     level += 2;
 
@@ -1366,7 +1376,8 @@ void spell_cancellation( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 	 !(IS_AFFECTED(ch, AFF_CHARM) && ch->master == victim) ) ||
 	(IS_NPC(ch) && !IS_NPC(victim)) )
     {
-      send_to_char("Başarısız oldun, BÜYÜ DEFET'i dene.\n\r",ch);
+      sprintf(buf, "Başarısız oldun, %s dene.\n\r", TR_ACC("BÜYÜ DEFET"));
+      send_to_char(buf, ch);
 	return;
     }
 
@@ -1621,9 +1632,13 @@ void spell_chain_lightning(int sn,int level,CHAR_DATA *ch, void *vo,int target)
 
     if (CAN_DETECT(victim, ADET_GROUNDING))
     {
-      send_to_char("Elektrik düşmanlarında sönüyor.\n\r",victim);
-    	act("Bir yıldırım $S düşmanlarında sönüyor.\n\r",
-		ch, NULL, victim, TO_ROOM);
+      {
+      char buf[MAX_STRING_LENGTH];
+      sprintf(buf, "Elektrik %s sönüyor.\n\r", TR_LOC_PLU("düşman"));
+      send_to_char(buf,victim);
+      sprintf(buf, "Bir yıldırım $S %s sönüyor.\n\r", TR_LOC_PLU("düşman"));
+      act(buf, ch, NULL, victim, TO_ROOM);
+      }
     }
     else
     {
@@ -1690,9 +1705,13 @@ void spell_chain_lightning(int sn,int level,CHAR_DATA *ch, void *vo,int target)
 
 	     if (CAN_DETECT(tmp_vict, ADET_GROUNDING))
 	     {
-         send_to_char("Elektrik düşmanlarında sönüyor.\n\r",tmp_vict);
-     		act("Bir yıldırım $S düşmanlarında sönüyor.\n\r",
-			ch, NULL, tmp_vict, TO_ROOM);
+         {
+         char buf[MAX_STRING_LENGTH];
+         sprintf(buf, "Elektrik %s sönüyor.\n\r", TR_LOC_PLU("düşman"));
+         send_to_char(buf,tmp_vict);
+         sprintf(buf, "Bir yıldırım $S %s sönüyor.\n\r", TR_LOC_PLU("düşman"));
+         act(buf, ch, NULL, tmp_vict, TO_ROOM);
+         }
 	     }
 	     else
 	     {
@@ -1725,9 +1744,10 @@ void spell_chain_lightning(int sn,int level,CHAR_DATA *ch, void *vo,int target)
 
 	  if (CAN_DETECT(ch, ADET_GROUNDING))
 	  {
-      send_to_char("Elektrik düşmanlarında sönüyor.\n\r",ch);
-  		act("Bir yıldırım $S düşmanlarında sönüyor.\n\r",
-			ch, NULL, ch, TO_ROOM);
+      sprintf(buf, "Elektrik %s sönüyor.\n\r", TR_LOC_PLU("düşman"));
+      send_to_char(buf, ch);
+      sprintf(buf, "Bir yıldırım $S %s sönüyor.\n\r", TR_LOC_PLU("düşman"));
+      act(buf, ch, NULL, ch, TO_ROOM);
 	  }
 	  else
 	  {
@@ -2180,7 +2200,7 @@ void spell_curse( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 
 	if (obj->wear_loc != WEAR_NONE)
 	{
-    act("Önce $p'yi çıkarmalısın.",ch,obj,NULL,TO_CHAR);
+    act("Önce $pA çıkarmalısın.",ch,obj,NULL,TO_CHAR);
 	    return;
 	}
 
@@ -2312,13 +2332,17 @@ void spell_detect_evil( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
+    char buf[MAX_STRING_LENGTH];
 
     if ( CAN_DETECT(victim, DETECT_EVIL) )
     {
 	if (victim == ch)
-  send_to_char("Zaten kem'i saptıyorsun.\n\r",ch);
-else
-  act("$N zaten kem'i saptıyor.",ch,NULL,victim,TO_CHAR);
+	{
+	    sprintf(buf, "Zaten %s saptıyorsun.\n\r", TR_ACC("kem"));
+	    send_to_char(buf, ch);
+	}
+	else
+	    act("$N zaten kemA saptıyor.",ch,NULL,victim,TO_CHAR);
 	return;
     }
     af.where     = TO_DETECTS;
@@ -3386,7 +3410,7 @@ void spell_fireproof(int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
     affect_to_obj(obj,&af);
 
-    act("$p'yi ateşe karşı koruyorsun.",ch,obj,NULL,TO_CHAR);
+    act("$pA ateşe karşı koruyorsun.",ch,obj,NULL,TO_CHAR);
     act("$p koruyucu bir aurayla çevrelendi.",ch,obj,NULL,TO_ROOM);
 }
 
@@ -3778,10 +3802,10 @@ void spell_heat_metal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 			number_range(1,2 * get_curr_stat(victim,STAT_DEX))
 		    &&  remove_obj( victim, obj_lose, TRUE ))
 		    {
-          act("$n bağırarak $p'yi yere atıyor!",
-    			    victim,obj_lose,NULL,TO_ROOM);
-    			act("Seni yakmadan önce $p'yi çıkarıp atıyorsun.",
-			    victim,obj_lose,NULL,TO_CHAR);
+          act("$n bağırarak $pA yere atıyor!",
+           victim,obj_lose,NULL,TO_ROOM);
+       act("Seni yakmadan önce $pA çıkarıp atıyorsun.",
+       victim,obj_lose,NULL,TO_CHAR);
 			dam += (number_range(1,obj_lose->level) / 3);
 			obj_from_char(obj_lose);
 			obj_to_room(obj_lose, victim->in_room);
@@ -3800,10 +3824,10 @@ void spell_heat_metal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 		{
 		    if (can_drop_obj(victim,obj_lose))
 		    {
-          act("$n bağırarak $p'yi yere atıyor!",
-    			    victim,obj_lose,NULL,TO_ROOM);
-    			act("Seni yakmadan önce $p'yi çıkarıp atıyorsun.",
-			    victim,obj_lose,NULL,TO_CHAR);
+          act("$n bağırarak $pA yere atıyor!",
+           victim,obj_lose,NULL,TO_ROOM);
+       act("Seni yakmadan önce $pA çıkarıp atıyorsun.",
+       victim,obj_lose,NULL,TO_CHAR);
 			dam += (number_range(1,obj_lose->level) / 6);
 			obj_from_char(obj_lose);
 			obj_to_room(obj_lose, victim->in_room);
@@ -3849,10 +3873,10 @@ void spell_heat_metal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 		{
 		    if (can_drop_obj(victim,obj_lose))
 		    {
-          act("$n kor halindeki $p'yi yere atıyor!",
-    			    victim,obj_lose,NULL,TO_ROOM);
-    			act("Seni yakmadan önce $p'yi çıkarıp atıyorsun.",
-			    victim,obj_lose,NULL,TO_CHAR);
+          act("$n kor halindeki $pA yere atıyor!",
+           victim,obj_lose,NULL,TO_ROOM);
+       act("Seni yakmadan önce $pA çıkarıp atıyorsun.",
+       victim,obj_lose,NULL,TO_CHAR);
 			dam += (number_range(1,obj_lose->level) / 6);
 			obj_from_char(obj_lose);
 			obj_to_room(obj_lose, victim->in_room);
@@ -4010,7 +4034,7 @@ void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     case ITEM_SCROLL:
     case ITEM_POTION:
     case ITEM_PILL:
-    sprintf( buf, "Seviye %d büyüleri:", obj->value[0] );
+    sprintf( buf, "Seviye %d %s:", obj->value[0], TR_PLU("büyü") );
 	send_to_char( buf, ch );
 
 	if ( obj->value[1] >= 0 && obj->value[1] < MAX_SKILL )
@@ -4324,13 +4348,15 @@ void spell_lightning_bolt(int sn,int level,CHAR_DATA *ch,void *vo,int target)
 {
     (void)target;
     CHAR_DATA *victim = (CHAR_DATA *) vo;
+    char buf[MAX_STRING_LENGTH];
     int dam;
 
     if (CAN_DETECT(victim, ADET_GROUNDING))
     {
-      send_to_char("Elektrik düşmanlarında sönüp gidiyor.\n\r",victim);
-    	act("Bir yıldırım $S düşmanlarında sönüp gidiyor.\n\r",
-		ch, NULL, victim, TO_ROOM);
+      sprintf(buf, "Elektrik %s sönüp gidiyor.\n\r", TR_LOC_PLU("düşman"));
+      send_to_char(buf, victim);
+      sprintf(buf, "Bir yıldırım $S %s sönüp gidiyor.\n\r", TR_LOC_PLU("düşman"));
+      act(buf, ch, NULL, victim, TO_ROOM);
 	return;
     }
     dam = dice(level,4) + 12;
@@ -4636,7 +4662,7 @@ void spell_poison( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 	    ||  IS_WEAPON_STAT(obj,WEAPON_HOLY)
 	    ||  IS_OBJ_STAT(obj,ITEM_BLESS) || IS_OBJ_STAT(obj,ITEM_BURN_PROOF))
 	    {
-        act("$p'yi zehirleyemezsin.",ch,obj,NULL,TO_CHAR);
+        act("$pA zehirleyemezsin.",ch,obj,NULL,TO_CHAR);
 		return;
 	    }
 
@@ -4659,7 +4685,7 @@ void spell_poison( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 	    return;
 	}
 
-  act("$p'yi zehirleyemezsin.",ch,obj,NULL,TO_CHAR);
+  act("$pA zehirleyemezsin.",ch,obj,NULL,TO_CHAR);
 	return;
     }
 
@@ -4796,6 +4822,7 @@ void spell_recharge( int sn, int level, CHAR_DATA *ch, void *vo,int target)
     (void)sn;
     (void)target;
     OBJ_DATA *obj = (OBJ_DATA *) vo;
+    char buf[MAX_STRING_LENGTH];
     int chance, percent;
 
     if (obj->item_type != ITEM_WAND && obj->item_type != ITEM_STAFF)
@@ -4806,7 +4833,8 @@ void spell_recharge( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
     if (obj->value[3] >= 3 * level / 2)
     {
-      send_to_char("Bu iş yeteneklerini aşar.\n\r",ch);
+      sprintf(buf, "Bu iş %s aşar.\n\r", TR_ACC_PLU("yetenek"));
+      send_to_char(buf, ch);
 	return;
     }
 
@@ -5253,7 +5281,7 @@ void spell_ventriloquate( int sn, int level, CHAR_DATA *ch,void *vo,int target)
     target_name = one_argument( target_name, speaker );
 
     sprintf( buf1, "%s '%s' dedi.\n\r",              speaker, target_name );
-    sprintf( buf2, "Biri %s'e zorla '%s' dedirtiyor.\n\r", speaker, target_name );
+    sprintf( buf2, "Biri %s zorla '%s' dedirtiyor.\n\r", TR_DAT(speaker), target_name );
     buf1[0] = UPPER(buf1[0]);
 
     for ( vch = ch->in_room->people; vch != NULL; vch = vch->next_in_room )
@@ -6069,7 +6097,7 @@ void spell_astral_walk( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 
 
   act("$n bir ışık parlamasıyla yokoluyor!",ch,NULL,NULL,TO_ROOM);
-  sprintf(buf,"Bir yıldız yolculuğuyla %s'e gidiyorsun.\n\r",victim->name);
+  sprintf(buf,"Bir yıldız yolculuğuyla %s gidiyorsun.\n\r",TR_DAT(victim->name));
     send_to_char(buf,ch);
     char_from_room(ch);
     char_to_room(ch,victim->in_room);
@@ -6127,7 +6155,7 @@ void spell_mist_walk( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     char_from_room(ch);
     char_to_room(ch,victim->in_room);
 
-    act("Parlayan sis bulutu sizi içine çekiyor, sonra $n'i açığa çıkarmak için geri çekiliyor!",ch,NULL,NULL,TO_ROOM);
+    act("Parlayan sis bulutu sizi içine çekiyor, sonra $nM açığa çıkarmak için geri çekiliyor!",ch,NULL,NULL,TO_ROOM);
     do_look(ch,(char*)"auto");
 
 }
@@ -6273,8 +6301,13 @@ void spell_hurricane(int sn,int level,CHAR_DATA *ch,void *vo,int target)
     char buf[MAX_STRING_LENGTH];
     int dam,hp_dam,dice_dam,hpch;
 
-    act("$n yıldırım tanrılarından yardım istiyor.",ch,NULL,NULL,TO_NOTVICT);
-    act("Yıldırım tanrılarından yardım istiyorsun.",ch,NULL,NULL,TO_CHAR);
+    {
+      char buf[MAX_STRING_LENGTH];
+      sprintf( buf, "$n yıldırım %s yardım istiyor.", TR_PLU("tanrı") );
+      act( buf, ch, NULL, NULL, TO_NOTVICT );
+      sprintf( buf, "Yıldırım %s yardım istiyorsun.", TR_PLU("tanrı") );
+      act( buf, ch, NULL, NULL, TO_CHAR );
+    }
 
     hpch = UMAX(16,ch->hit);
     hp_dam = number_range(hpch/15+1,8);
@@ -7129,7 +7162,8 @@ void spell_animate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target
   if (!(obj->item_type == ITEM_WEAPON ||
          obj->item_type == ITEM_ARMOR))
   {
-    send_to_char("Yalnız zırhları ve silahları canlandırabilirsin.\n\r",ch);
+    sprintf( buf, "Yalnız zırhları ve %s canlandırabilirsin.\n\r", TR_ACC_PLU("silah") );
+    send_to_char( buf, ch );
         return;
   }
 
@@ -7152,7 +7186,8 @@ void spell_animate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target
 	|| CAN_WEAR(obj, ITEM_WEAR_HANDS)
 	|| CAN_WEAR(obj, ITEM_WEAR_SHIELD)) )
   {
-    send_to_char( "Başka tip eşyaları canlandırabilirsin.\n\r", ch);
+    sprintf(buf, "Başka tip %s canlandırabilirsin.\n\r", TR_ACC_PLU("eşya"));
+    send_to_char(buf, ch);
       return;
   }
 
@@ -7232,8 +7267,8 @@ void spell_animate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target
   af.bitvector	= 0;
   affect_to_char(ch, &af);
 
-  act("Gücünle $p'ye yaşam veriyorsun!\n\r", ch, obj, NULL, TO_CHAR);
-  act("$n gücüyle $p'ye yaşam veriyor!\n\r", ch, obj, NULL, TO_ROOM);
+  act("Gücünle $pD yaşam veriyorsun!\n\r", ch, obj, NULL, TO_CHAR);
+  act("$n gücüyle $pD yaşam veriyor!\n\r", ch, obj, NULL, TO_ROOM);
 
   extract_obj( obj );
 	return;
@@ -7343,7 +7378,7 @@ void spell_earthmaw( int sn, int level, CHAR_DATA *ch, void *vo,int target)
     char buf[MAX_STRING_LENGTH];
     int dam;
 
-    sprintf(buf,"%s'in altındaki toprağı titretiyorsun.\n\r",victim->name);
+    sprintf(buf,"%s altındaki toprağı titretiyorsun.\n\r",TR_GEN(victim->name));
     send_to_char(buf, ch);
     act( "$n altındaki toprağı titretiyor!.", ch, NULL, victim, TO_VICT );
     if (IS_AFFECTED(victim,AFF_FLYING))
@@ -7500,7 +7535,7 @@ send_to_char("Bir an için uyuşukluk hissediyorsun.\n\r",victim);
 	if (can_drop_obj(victim,obj)
 	    &&  remove_obj(victim,obj,TRUE))
 	{
-    act("$n $p'yi daha fazla taşıyamayarak düşürüyor.", victim,obj,NULL,TO_ROOM);
+    act("$n $pA daha fazla taşıyamayarak düşürüyor.", victim,obj,NULL,TO_ROOM);
 	  send_to_char("Çifte silahını taşıyamayarak düşürüyorsun!\n\r", victim);
 	  obj_from_char(obj);
 	  obj_to_room(obj,victim->in_room);
@@ -7511,7 +7546,7 @@ send_to_char("Bir an için uyuşukluk hissediyorsun.\n\r",victim);
 	if (can_drop_obj(victim,obj)
 	    &&  remove_obj(victim,obj,TRUE))
 	{
-    act("$n $p'yi daha fazla taşıyamayarak düşürüyor.", victim,obj,NULL,TO_ROOM);
+    act("$n $pA daha fazla taşıyamayarak düşürüyor.", victim,obj,NULL,TO_ROOM);
 	  send_to_char("Silahını daha fazla taşıyamayarak düşürüyorsun!\n\r", victim);
 	  obj_from_char(obj);
 	  obj_to_room(obj,victim->in_room);

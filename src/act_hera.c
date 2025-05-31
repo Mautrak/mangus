@@ -67,6 +67,7 @@
 #include <ctype.h>
 #include <inttypes.h> /* For intptr_t */
 #include "merc.h"
+#include "turkish_suffix_helper.h"
 
 /* command procedures needed */
 DECLARE_DO_FUN(do_look		);
@@ -167,7 +168,7 @@ void do_enter( CHAR_DATA *ch, char *argument)
         }
 
         if (MOUNTED(ch))
-        sprintf(buf,"$n sürdüğü %s ile $p içine giriyor.",MOUNTED(ch)->short_descr );
+        sprintf(buf,"$n sürdüğü %s $p içine giriyor.",TR_INS(MOUNTED(ch)->short_descr) );
         sprintf(buf,"$n $p içine giriyor." );
 	act(buf,ch,portal,NULL,TO_ROOM);
 
@@ -1013,7 +1014,7 @@ void hunt_victim( CHAR_DATA *ch )
     }
     else
     {
-      act( "$n diyor ki '$M'i kaybettim!'", ch, NULL, ch->hunting, TO_ROOM );
+      act( "$n diyor ki '$MA kaybettim!'", ch, NULL, ch->hunting, TO_ROOM );
       ch->hunting = NULL;
       return;
     }
@@ -1271,7 +1272,7 @@ void damage_to_obj(CHAR_DATA *ch,OBJ_DATA *wield, OBJ_DATA *worn, int damage)
      && (IS_SET(worn->extra_flags,ITEM_ANTI_EVIL)
 	&& IS_SET(worn->extra_flags,ITEM_ANTI_NEUTRAL) ) )
  {
-   sprintf(buf,"$C$p $P'ye karşı dövüşmek istemiyor.$c");
+   sprintf(buf,"$C$p $PD karşı dövüşmek istemiyor.$c");
    act_color(buf,ch,wield,worn,TO_ROOM,POS_RESTING,CLR_GREEN);
    sprintf(buf,"$C$p kendisini senden kurtarıyor!$c.");
    act_color(buf,ch,wield,worn,TO_CHAR,POS_RESTING,CLR_GREEN);
@@ -1466,9 +1467,8 @@ void do_repair(CHAR_DATA *ch, char *argument)
 
     ch->silver -= cost;
     mob->silver += cost;
-    sprintf(buf, "$N $n'dan %s'ı alıyor, tamir ediyor ve $n'a geri veriyor.", obj->short_descr);
-    act(buf,ch,NULL,mob,TO_ROOM);
-    sprintf(buf, "%s %s'ı alıp, tamir edip sana geri veriyor.\n\r", mob->short_descr, obj->short_descr);
+    act("$N $nZ $pA alıyor, tamir ediyor ve $nE geri veriyor.",ch,obj,mob,TO_ROOM);
+    sprintf(buf, "%s %s alıp, tamir edip sana geri veriyor.\n\r", mob->short_descr, TR_ACC(obj->short_descr));
     send_to_char(buf, ch);
     obj->condition = 100;
 }
@@ -2290,9 +2290,12 @@ void do_auction (CHAR_DATA *ch, char *argument)
     {
 
     default:
-    act_color ("$C$T eşyaları mezata sürülemez.$c",ch, NULL, item_type_name(obj),
-		TO_CHAR,POS_SLEEPING,CLR_RED);
+    {
+        char buf[MAX_STRING_LENGTH];
+        sprintf(buf, "$C%s %s mezata sürülemez.$c", item_type_name(obj), TR_ACC_PLU("eşya"));
+        act_color(buf, ch, NULL, NULL, TO_CHAR, POS_SLEEPING, CLR_RED);
         return;
+    }
 
     case ITEM_WEAPON:
     case ITEM_ARMOR:

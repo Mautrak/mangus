@@ -60,6 +60,7 @@
 #include <stdlib.h>
 #include "merc.h"
 #include "magic.h"
+#include "turkish_suffix_helper.h"
 
 /* command procedures needed */
 DECLARE_DO_FUN(do_help		);
@@ -675,6 +676,10 @@ void do_teach( CHAR_DATA *ch, char *argument)
 	return;
   }
  ch->status = PC_PRACTICER;
- send_to_char("Artık %100 olan yeteneklerini gençlere öğretebilirsin.\n\r",ch);
+ {
+   char buf[MAX_STRING_LENGTH];
+   sprintf(buf, "Artık %%100 olan %s gençlere öğretebilirsin.\n\r", TR_ACC_PLU("yetenek"));
+   send_to_char(buf, ch);
+ }
  return;
 }

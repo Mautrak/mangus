@@ -10,6 +10,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "turkish_suffix_helper.h"
 #include "turkish_morphology.h"
 #include "merc.h"
 #include <string.h>
@@ -137,6 +138,134 @@ char *tr_ablative(const char *word, bool is_proper) {
     return buffer;
 }
 
+char *tr_instrumental(const char *word, bool is_proper) {
+    char *buffer = get_next_suffix_buffer();
+    if (!word || *word == '\0') {
+        buffer[0] = '\0';
+        return buffer;
+    }
+    
+    int result = generate_turkish_suffixed_word(word, SUFFIX_INSTRUMENTAL, is_proper, buffer, SUFFIX_BUF_SIZE);
+    if (result != 0) {
+        strncpy(buffer, word, SUFFIX_BUF_SIZE - 1);
+        buffer[SUFFIX_BUF_SIZE - 1] = '\0';
+    }
+    
+    return buffer;
+}
+
+char *tr_plural(const char *word, bool is_proper) {
+    char *buffer = get_next_suffix_buffer();
+    if (!word || *word == '\0') {
+        buffer[0] = '\0';
+        return buffer;
+    }
+    
+    int result = generate_turkish_suffixed_word(word, SUFFIX_PLURAL, is_proper, buffer, SUFFIX_BUF_SIZE);
+    if (result != 0) {
+        strncpy(buffer, word, SUFFIX_BUF_SIZE - 1);
+        buffer[SUFFIX_BUF_SIZE - 1] = '\0';
+    }
+    
+    return buffer;
+}
+
+char *tr_genitive_plural(const char *word, bool is_proper) {
+    char *buffer = get_next_suffix_buffer();
+    if (!word || *word == '\0') {
+        buffer[0] = '\0';
+        return buffer;
+    }
+    
+    int result = generate_turkish_suffixed_word(word, SUFFIX_GENITIVE_PLURAL, is_proper, buffer, SUFFIX_BUF_SIZE);
+    if (result != 0) {
+        strncpy(buffer, word, SUFFIX_BUF_SIZE - 1);
+        buffer[SUFFIX_BUF_SIZE - 1] = '\0';
+    }
+    
+    return buffer;
+}
+
+char *tr_dative_plural(const char *word, bool is_proper) {
+    char *buffer = get_next_suffix_buffer();
+    if (!word || *word == '\0') {
+        buffer[0] = '\0';
+        return buffer;
+    }
+    
+    int result = generate_turkish_suffixed_word(word, SUFFIX_DATIVE_PLURAL, is_proper, buffer, SUFFIX_BUF_SIZE);
+    if (result != 0) {
+        strncpy(buffer, word, SUFFIX_BUF_SIZE - 1);
+        buffer[SUFFIX_BUF_SIZE - 1] = '\0';
+    }
+    
+    return buffer;
+}
+
+char *tr_accusative_plural(const char *word, bool is_proper) {
+    char *buffer = get_next_suffix_buffer();
+    if (!word || *word == '\0') {
+        buffer[0] = '\0';
+        return buffer;
+    }
+    
+    int result = generate_turkish_suffixed_word(word, SUFFIX_ACCUSATIVE_PLURAL, is_proper, buffer, SUFFIX_BUF_SIZE);
+    if (result != 0) {
+        strncpy(buffer, word, SUFFIX_BUF_SIZE - 1);
+        buffer[SUFFIX_BUF_SIZE - 1] = '\0';
+    }
+    
+    return buffer;
+}
+
+char *tr_ablative_plural(const char *word, bool is_proper) {
+    char *buffer = get_next_suffix_buffer();
+    if (!word || *word == '\0') {
+        buffer[0] = '\0';
+        return buffer;
+    }
+    
+    int result = generate_turkish_suffixed_word(word, SUFFIX_ABLATIVE_PLURAL, is_proper, buffer, SUFFIX_BUF_SIZE);
+    if (result != 0) {
+        strncpy(buffer, word, SUFFIX_BUF_SIZE - 1);
+        buffer[SUFFIX_BUF_SIZE - 1] = '\0';
+    }
+    
+    return buffer;
+}
+
+char *tr_instrumental_plural(const char *word, bool is_proper) {
+    char *buffer = get_next_suffix_buffer();
+    if (!word || *word == '\0') {
+        buffer[0] = '\0';
+        return buffer;
+    }
+    
+    int result = generate_turkish_suffixed_word(word, SUFFIX_INSTRUMENTAL_PLURAL, is_proper, buffer, SUFFIX_BUF_SIZE);
+    if (result != 0) {
+        strncpy(buffer, word, SUFFIX_BUF_SIZE - 1);
+        buffer[SUFFIX_BUF_SIZE - 1] = '\0';
+    }
+    
+    return buffer;
+}
+
+char *tr_locative_plural(const char *word, bool is_proper) {
+    char *buffer = get_next_suffix_buffer();
+    if (!word || *word == '\0') {
+        buffer[0] = '\0';
+        return buffer;
+    }
+    
+    int result = generate_turkish_suffixed_word(word, SUFFIX_LOCATIVE_PLURAL, is_proper, buffer, SUFFIX_BUF_SIZE);
+    if (result != 0) {
+        strncpy(buffer, word, SUFFIX_BUF_SIZE - 1);
+        buffer[SUFFIX_BUF_SIZE - 1] = '\0';
+    }
+    
+    return buffer;
+}
+
 // Auto-detect versions
 char *tr_genitive_auto(const char *word) {
     return tr_genitive(word, is_proper_noun_auto(word));
@@ -156,6 +285,38 @@ char *tr_locative_auto(const char *word) {
 
 char *tr_ablative_auto(const char *word) {
     return tr_ablative(word, is_proper_noun_auto(word));
+}
+
+char *tr_instrumental_auto(const char *word) {
+    return tr_instrumental(word, is_proper_noun_auto(word));
+}
+
+char *tr_plural_auto(const char *word) {
+    return tr_plural(word, is_proper_noun_auto(word));
+}
+
+char *tr_genitive_plural_auto(const char *word) {
+    return tr_genitive_plural(word, is_proper_noun_auto(word));
+}
+
+char *tr_dative_plural_auto(const char *word) {
+    return tr_dative_plural(word, is_proper_noun_auto(word));
+}
+
+char *tr_accusative_plural_auto(const char *word) {
+    return tr_accusative_plural(word, is_proper_noun_auto(word));
+}
+
+char *tr_ablative_plural_auto(const char *word) {
+    return tr_ablative_plural(word, is_proper_noun_auto(word));
+}
+
+char *tr_instrumental_plural_auto(const char *word) {
+    return tr_instrumental_plural(word, is_proper_noun_auto(word));
+}
+
+char *tr_locative_plural_auto(const char *word) {
+    return tr_locative_plural(word, is_proper_noun_auto(word));
 }
 
 // Safe sprintf replacement

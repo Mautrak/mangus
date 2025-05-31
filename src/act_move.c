@@ -60,6 +60,7 @@
 #include <string.h>
 #include "merc.h"
 #include "recycle.h"
+#include "turkish_suffix_helper.h"
 
 /* command procedures needed */
 DECLARE_DO_FUN(do_look		);
@@ -879,8 +880,8 @@ void do_close( CHAR_DATA *ch, char *argument )
 	    }
 
 	    SET_BIT(obj->value[1],EX_CLOSED);
-      act("$p'yi kapatıyorsun.",ch,obj,NULL,TO_CHAR);
-	    act("$n $p'yi kapatıyor.",ch,obj,NULL,TO_ROOM);
+      act("$pA kapatıyorsun.",ch,obj,NULL,TO_CHAR);
+     act("$n $pA kapatıyor.",ch,obj,NULL,TO_ROOM);
 	    return;
 	}
 
@@ -893,8 +894,8 @@ void do_close( CHAR_DATA *ch, char *argument )
 	    { send_to_char("Bunu yapamazsın.\n\r",ch ); return; }
 
 	SET_BIT(obj->value[1], CONT_CLOSED);
-  act("$p'yi kapatıyorsun.",ch,obj,NULL,TO_CHAR);
-	act("$n $p'yi kapatıyor.", ch, obj, NULL, TO_ROOM );
+  act("$pA kapatıyorsun.",ch,obj,NULL,TO_CHAR);
+ act("$n $pA kapatıyor.", ch, obj, NULL, TO_ROOM );
 	return;
     }
 
@@ -1060,7 +1061,7 @@ void do_lock( CHAR_DATA *ch, char *argument )
 
 	SET_BIT(pexit->exit_info, EX_LOCKED);
   send_to_char("*Klik*\n\r", ch );
-	act( "$n $d'yi kilitliyor.", ch, NULL, pexit->keyword, TO_ROOM );
+	act( "$n $dA kilitliyor.", ch, NULL, pexit->keyword, TO_ROOM );
 
 	/* lock the other side */
 	if ( ( to_room   = pexit->u1.to_room            ) != NULL
@@ -1069,7 +1070,7 @@ void do_lock( CHAR_DATA *ch, char *argument )
 	{
 	    SET_BIT( pexit_rev->exit_info, EX_LOCKED );
 	    for ( rch = to_room->people; rch != NULL; rch = rch->next_in_room )
-      act("$d'nin kilitleniyor.", rch, NULL, pexit_rev->keyword, TO_CHAR );
+      act("$dG kilitleniyor.", rch, NULL, pexit_rev->keyword, TO_CHAR );
 
 	}
         return;
@@ -1174,7 +1175,7 @@ void do_unlock( CHAR_DATA *ch, char *argument )
 
 	REMOVE_BIT(pexit->exit_info, EX_LOCKED);
   send_to_char("*Klik*\n\r", ch );
-	act( "$n $d'nin kilidini açıyor.", ch, NULL, pexit->keyword, TO_ROOM );
+	act( "$n $dG kilidini açıyor.", ch, NULL, pexit->keyword, TO_ROOM );
 
 	/* unlock the other side */
 	if ( ( to_room   = pexit->u1.to_room            ) != NULL
@@ -1183,7 +1184,7 @@ void do_unlock( CHAR_DATA *ch, char *argument )
 	{
 	    REMOVE_BIT( pexit_rev->exit_info, EX_LOCKED );
 	    for ( rch = to_room->people; rch != NULL; rch = rch->next_in_room )
-      act( "$d'nin kilidi açılıyor.", rch, NULL, pexit_rev->keyword, TO_CHAR );
+      act( "$dG kilidi açılıyor.", rch, NULL, pexit_rev->keyword, TO_CHAR );
 	}
         return;
     }
@@ -1352,7 +1353,7 @@ void do_pick( CHAR_DATA *ch, char *argument )
 
     REMOVE_BIT(pexit->exit_info, EX_LOCKED);
     send_to_char( "*Klik*\n\r", ch );
-    act( "$n $d'nin kilidini maymuncukla açıyor.", ch, NULL, pexit->keyword, TO_ROOM );
+    act( "$n $dG kilidini maymuncukla açıyor.", ch, NULL, pexit->keyword, TO_ROOM );
     check_improve(ch,gsn_pick_lock,TRUE,2);
 
     /* pick the other side */
@@ -1415,8 +1416,8 @@ void do_stand( CHAR_DATA *ch, char *argument )
 	}
 	else if (IS_SET(obj->value[2],STAND_AT))
 	{
-    act_new("$p'de uyanıyor ve kalkıyorsun.",ch,obj,NULL,TO_CHAR,POS_DEAD);
-    act("$n $p'de uyanıyor ve kalkıyor.",ch,obj,NULL,TO_ROOM);
+    act_new("$pL uyanıyor ve kalkıyorsun.",ch,obj,NULL,TO_CHAR,POS_DEAD);
+    act("$n $pL uyanıyor ve kalkıyor.",ch,obj,NULL,TO_ROOM);
 	}
 	else if (IS_SET(obj->value[2],STAND_ON))
 	{
@@ -1448,8 +1449,8 @@ void do_stand( CHAR_DATA *ch, char *argument )
 	}
 	else if (IS_SET(obj->value[2],STAND_AT))
 	{
-    act("$p'de ayağa kalkıyorsun.",ch,obj,NULL,TO_CHAR);
-    act("$n $p'de ayağa kalkıyor.",ch,obj,NULL,TO_ROOM);
+    act("$pL ayağa kalkıyorsun.",ch,obj,NULL,TO_CHAR);
+    act("$n $pL ayağa kalkıyor.",ch,obj,NULL,TO_ROOM);
 	}
 	else if (IS_SET(obj->value[2],STAND_ON))
 	{
@@ -1545,9 +1546,9 @@ void do_rest( CHAR_DATA *ch, char *argument )
 	}
 	else if (IS_SET(obj->value[2],REST_AT))
 	{
-    act_new("Uyanıyor ve $p'de sinlenmeye başlıyorsun.",
+    act_new("Uyanıyor ve $pL sinlenmeye başlıyorsun.",
       ch,obj,NULL,TO_CHAR,POS_SLEEPING);
-    act("$n uyanıyor ve $p'de dinlenmeye başlıyor.",ch,obj,NULL,TO_ROOM);
+    act("$n uyanıyor ve $pL dinlenmeye başlıyor.",ch,obj,NULL,TO_ROOM);
 	}
         else if (IS_SET(obj->value[2],REST_ON))
         {
@@ -1576,8 +1577,8 @@ void do_rest( CHAR_DATA *ch, char *argument )
   	}
           else if (IS_SET(obj->value[2],REST_AT))
           {
-  	    act("$p'de oturuyor ve dinlenmeye başlıyorsun.",ch,obj,NULL,TO_CHAR);
-  	    act("$n $p'de oturuyor ve dinlenmeye başlıyor.",ch,obj,NULL,TO_ROOM);
+  	    act("$pL oturuyor ve dinlenmeye başlıyorsun.",ch,obj,NULL,TO_CHAR);
+  	    act("$n $pL oturuyor ve dinlenmeye başlıyor.",ch,obj,NULL,TO_ROOM);
           }
           else if (IS_SET(obj->value[2],REST_ON))
           {
@@ -1600,8 +1601,8 @@ void do_rest( CHAR_DATA *ch, char *argument )
   	}
           else if (IS_SET(obj->value[2],REST_AT))
           {
-  	    act("$p'de dinlenmeye başlıyorsun.",ch,obj,NULL,TO_CHAR);
-  	    act("$n $p'de dinlenmeye başlıyor.",ch,obj,NULL,TO_ROOM);
+  	    act("$pL dinlenmeye başlıyorsun.",ch,obj,NULL,TO_CHAR);
+  	    act("$n $pL dinlenmeye başlıyor.",ch,obj,NULL,TO_ROOM);
           }
           else if (IS_SET(obj->value[2],REST_ON))
           {
@@ -1695,8 +1696,8 @@ void do_sit (CHAR_DATA *ch, char *argument )
             }
             else if (IS_SET(obj->value[2],SIT_AT))
             {
-            	act_new("Uyanıyor ve $p'de oturuyorsun.",ch,obj,NULL,TO_CHAR,POS_DEAD);
-            	act("$n uyanıyor ve $p'de oturuyor.",ch,obj,NULL,TO_ROOM);
+            	act_new("Uyanıyor ve $pL oturuyorsun.",ch,obj,NULL,TO_CHAR,POS_DEAD);
+            	act("$n uyanıyor ve $pL oturuyor.",ch,obj,NULL,TO_ROOM);
             }
             else if (IS_SET(obj->value[2],SIT_ON))
             {
@@ -1716,8 +1717,8 @@ void do_sit (CHAR_DATA *ch, char *argument )
 		send_to_char("Dinlenmeyi bıraktın.\n\r",ch);
 	    else if (IS_SET(obj->value[2],SIT_AT))
 	    {
-		act("$p'de oturuyorsun.",ch,obj,NULL,TO_CHAR);
-		act("$n $p'de oturuyor.",ch,obj,NULL,TO_ROOM);
+		act("$pL oturuyorsun.",ch,obj,NULL,TO_CHAR);
+		act("$n $pL oturuyor.",ch,obj,NULL,TO_ROOM);
 	    }
 
 	    else if (IS_SET(obj->value[2],SIT_ON))
@@ -1738,8 +1739,8 @@ void do_sit (CHAR_DATA *ch, char *argument )
 	    }
 	    else if (IS_SET(obj->value[2],SIT_AT))
 	    {
-		act("$p'de oturuyorsun.",ch,obj,NULL,TO_CHAR);
-		act("$n $p'de oturuyor.",ch,obj,NULL,TO_ROOM);
+		act("$pL oturuyorsun.",ch,obj,NULL,TO_CHAR);
+		act("$n $pL oturuyor.",ch,obj,NULL,TO_ROOM);
 	    }
 	    else if (IS_SET(obj->value[2],SIT_ON))
 	    {
@@ -2082,7 +2083,8 @@ void do_recall( CHAR_DATA *ch, char *argument )
 
   if (IS_NPC(ch) && !IS_SET(ch->act,ACT_PET))
   {
-    send_to_char("Yalnız oyuncular anımsama kullanabilir.\n\r",ch);
+    sprintf( buf, "Yalnız %s anımsama kullanabilir.\n\r", TR_PLU("oyuncu") );
+    send_to_char( buf, ch );
     return;
   }
 
@@ -2842,10 +2844,10 @@ void do_bash_door( CHAR_DATA *ch, char *argument )
 
     chance += (get_skill(ch,gsn_bash_door) - 90);
 
-    act("$d'ye yükleniyor ve kırmaya çalışıyorsun!",
-		ch,NULL,pexit->keyword,TO_CHAR);
-    act("$n $d'ye yükleniyor ve kırmaya çalışıyor!",
-		ch,NULL,pexit->keyword,TO_ROOM);
+    act("$dD yükleniyor ve kırmaya çalışıyorsun!",
+  ch,NULL,pexit->keyword,TO_CHAR);
+    act("$n $dD yükleniyor ve kırmaya çalışıyor!",
+  ch,NULL,pexit->keyword,TO_ROOM);
 
     if (room_dark(ch->in_room))
 		chance /= 2;
@@ -2858,8 +2860,8 @@ void do_bash_door( CHAR_DATA *ch, char *argument )
 
 	REMOVE_BIT(pexit->exit_info, EX_LOCKED);
 	REMOVE_BIT(pexit->exit_info, EX_CLOSED);
-  act( "$n $d'ye yüklenerek kilidi kırıyor.", ch, NULL,
-		pexit->keyword, TO_ROOM );
+  act( "$n $dD yüklenerek kilidi kırıyor.", ch, NULL,
+  pexit->keyword, TO_ROOM );
 	send_to_char( "Kapıyı açmayı başardın.\n\r", ch );
 
 	/* open the other side */
@@ -3698,7 +3700,7 @@ void do_mount( CHAR_DATA *ch, char *argument )
   }
 
   if( (mount->mount) && (!mount->riding) && (mount->mount != ch)) {
-    sprintf(buf, "%s %s'e bağlı, sana değil.\n\r", mount->short_descr,mount->mount->name);
+    sprintf(buf, "%s %s bağlı, sana değil.\n\r", mount->short_descr, TR_DAT(mount->mount->name));
     send_to_char(buf,ch);
     return;
   }
@@ -4016,9 +4018,9 @@ void do_shoot( CHAR_DATA *ch, char *argument )
 	chance -= 40;
     chance += GET_HITROLL(ch);
 
-    sprintf( buf, "%s'e $p atıyorsun.", dir_name[ direction ] );
+    sprintf( buf, "%s $p atıyorsun.", TR_DAT(dir_name[ direction ]) );
       act( buf, ch, arrow, NULL, TO_CHAR );
-  	sprintf( buf, "$n %s'e $p atıyor.", dir_name[ direction ] );
+   sprintf( buf, "$n %s $p atıyor.", TR_DAT(dir_name[ direction ]) );
       act( buf, ch, arrow, NULL, TO_ROOM );
 
     obj_from_char(arrow);
@@ -4184,9 +4186,9 @@ void do_throw_spear( CHAR_DATA *ch, char *argument )
 	chance -= 40;
     chance += GET_HITROLL(ch);
 
-    sprintf( buf, "%s'e $p fırlatıyorsun.", dir_name[ direction ] );
+    sprintf( buf, "%s $p fırlatıyorsun.", TR_DAT(dir_name[ direction ]) );
       act( buf, ch, spear, NULL, TO_CHAR );
-      sprintf( buf, "$n %s'e $p fırlatıyor.", dir_name[ direction ] );
+      sprintf( buf, "$n %s $p fırlatıyor.", TR_DAT(dir_name[ direction ]) );
       act( buf, ch, spear, NULL, TO_ROOM );
 
     obj_from_char(spear);

@@ -60,6 +60,7 @@
 #include "merc.h"
 #include "magic.h"
 #include "recycle.h"
+#include "turkish_suffix_helper.h"
 
 DECLARE_DO_FUN(do_scan2);
 /* command procedures needed */
@@ -1253,7 +1254,8 @@ void spell_mirror( int sn, int level, CHAR_DATA *ch, void *vo, int target )
   int order;
 
   if (IS_NPC(victim)) {
-    send_to_char("Yalnız oyuncular aynalanabilir.\n\r",ch);
+    sprintf( long_buf, "Yalnız %s aynalanabilir.\n\r", TR_PLU("oyuncu") );
+    send_to_char( long_buf, ch );
     return;
   }
 
@@ -3239,9 +3241,9 @@ void spell_animate_dead(int sn,int level, CHAR_DATA *ch, void *vo,int target )
 		}
 	 }
 	}
-  sprintf(buf, "%s'in hortlak bedeni", buf3);
+  sprintf(buf, "%s hortlak bedeni", TR_GEN(buf3));
   undead->short_descr = str_dup(buf);
-  sprintf(buf, "%s'in hortlak bedeni yürürken sendeliyor.\n\r", buf3);
+  sprintf(buf, "%s hortlak bedeni yürürken sendeliyor.\n\r", TR_GEN(buf3));
   undead->long_descr = str_dup(buf);
 
   for(obj2 = obj->contains;obj2;obj2=next)
@@ -3262,7 +3264,7 @@ void spell_animate_dead(int sn,int level, CHAR_DATA *ch, void *vo,int target )
   affect_to_char( ch, &af );
 
   send_to_char("Mistik bir güçle onu canlandırıyorsun!\n\r",ch);
-  sprintf(buf,"Mistik bir güçle %s %s'i canlandırıyor!",ch->name,obj->name);
+  sprintf(buf,"Mistik bir güçle %s %s canlandırıyor!",ch->name,TR_ACC(obj->name));
   act(buf,ch,NULL,NULL,TO_ROOM);
   sprintf(buf,"%s sana bakarken onu rahatsız etmenin bedelini ödetmeyi planlıyor!",obj->short_descr);
   act(buf,ch,NULL,NULL,TO_CHAR);
@@ -3625,7 +3627,7 @@ void spell_shielding( int sn, int level, CHAR_DATA *ch, void *vo ,int target)
     affect_join( victim, &af );
 
     send_to_char( "Birşeylerle bağlantını yitirdiğini hissediyorsun.\n\r",victim );
-    act("$M Gerçek Kaynak'tan ayırıyorsun.", ch, NULL, victim, TO_CHAR);
+    act("$MA Gerçek KaynakZ ayırıyorsun.", ch, NULL, victim, TO_CHAR);
     return;
 }
 
@@ -3924,7 +3926,7 @@ void spell_magic_jar ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 	fire->cost = 0;
 	obj_to_char( fire , ch );
  SET_BIT(victim->act,PLR_NO_EXP);
- sprintf(buf,"%s'in ruhunu yakalayıp şişenin içine koyuyorsun.\n\r",victim->name);
+ sprintf(buf,"%s ruhunu yakalayıp şişenin içine koyuyorsun.\n\r",TR_GEN(victim->name));
  send_to_char( buf , ch);
  return;
 }
@@ -4308,10 +4310,10 @@ if ( IS_SET(pexit->exit_info, EX_NOPASS) )
 	      return; }
     chance = ch->level / 5 + get_curr_stat(ch,STAT_INT) + get_skill(ch,sn) / 5;
 
-    act("$d'yi çalıyor ve açmaya çalışıyorsun!",
-		ch,NULL,pexit->keyword,TO_CHAR);
-    act("$n $d'yi çalıyor ve açmaya çalışıyor!",
-		ch,NULL,pexit->keyword,TO_ROOM);
+    act("$dA çalıyor ve açmaya çalışıyorsun!",
+  ch,NULL,pexit->keyword,TO_CHAR);
+    act("$n $dA çalıyor ve açmaya çalışıyor!",
+  ch,NULL,pexit->keyword,TO_ROOM);
 
     if (room_dark(ch->in_room))
 		chance /= 2;
@@ -4321,8 +4323,8 @@ if ( IS_SET(pexit->exit_info, EX_NOPASS) )
      {
 	REMOVE_BIT(pexit->exit_info, EX_LOCKED);
 	REMOVE_BIT(pexit->exit_info, EX_CLOSED);
-  act("$n $d'yi çalıyor ve kapı açılıyor.", ch, NULL,
-		pexit->keyword, TO_ROOM );
+  act("$n $dA çalıyor ve kapı açılıyor.", ch, NULL,
+  pexit->keyword, TO_ROOM );
 	send_to_char( "Kapıyı açmayı başardın.\n\r", ch );
 
 	/* open the other side */
@@ -4340,10 +4342,10 @@ if ( IS_SET(pexit->exit_info, EX_NOPASS) )
      }
     else
      {
-       act("$d'yi açamadın!",
-     	    ch,NULL,pexit->keyword,TO_CHAR);
-     	act("$n $d'yi açamadı.",
-	    ch,NULL,pexit->keyword,TO_ROOM);
+       act("$dA açamadın!",
+          ch,NULL,pexit->keyword,TO_CHAR);
+      act("$n $dA açamadı.",
+     ch,NULL,pexit->keyword,TO_ROOM);
      }
     return;
     }
@@ -4541,7 +4543,11 @@ void spell_insanity ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 
     if (IS_NPC(ch))
 	{
-    send_to_char("Bu büyü oyunculara yapılabilir.\n\r",ch);
+    {
+        char buf[MAX_STRING_LENGTH];
+        sprintf( buf, "Bu büyü sadece %s yapılabilir.\n\r", TR_DAT_PLU("oyuncu") );
+        send_to_char( buf, ch );
+    }
 	 return;
 	}
 
@@ -4650,7 +4656,7 @@ void spell_severity_force( int sn, int level, CHAR_DATA *ch, void *vo,int target
     char buf[MAX_STRING_LENGTH];
     int dam;
 
-    sprintf(buf,"Arzı %s'e doğru kırıyorsun.\n\r",victim->name);
+    sprintf(buf,"Arzı %s doğru kırıyorsun.\n\r",TR_DAT(victim->name));
     send_to_char(buf, ch);
     act("$n arzı sana doğru kırıyor!", ch, NULL, victim, TO_VICT );
     if (IS_AFFECTED(victim,AFF_FLYING))
@@ -5255,7 +5261,11 @@ void spell_deadly_venom(int sn, int level, CHAR_DATA *ch, void *vo, int target)
 
   if (IS_SET(ch->in_room->room_flags, ROOM_LAW))
     {
-      send_to_char( "Oda tanrılarca korunuyor.\n\r",  ch);
+      {
+        char buf[MAX_STRING_LENGTH];
+        sprintf( buf, "Oda %s koruyor.\n\r", TR_PLU("tanrı") );
+        send_to_char( buf, ch );
+      }
       return;
     }
     if ( is_affected_room( ch->in_room, sn ))
@@ -6567,9 +6577,9 @@ void spell_mummify( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 		}
 	 }
 	}
-  sprintf(buf, "%s'in mumyalanmış bedeni", buf3);
+  sprintf(buf, "%s mumyalanmış bedeni", TR_GEN(buf3));
   undead->short_descr = str_dup(buf);
-  sprintf(buf, "%s'in mumyalanmış bedeni aksayarak dolaşıyor.\n\r", buf3);
+  sprintf(buf, "%s mumyalanmış bedeni aksayarak dolaşıyor.\n\r", TR_GEN(buf3));
   undead->long_descr = str_dup(buf);
 
   for(obj2 = obj->contains;obj2;obj2=next)
@@ -6590,8 +6600,8 @@ void spell_mummify( int sn, int level, CHAR_DATA *ch, void *vo, int target )
   affect_to_char( ch, &af );
 
   send_to_char("Mistik güçlerin yardımıyla ona yaşam veriyorsun!\n\r",ch);
-  sprintf(buf,"Mistik güçlerin yardımıyla %s %s'i mumyalayarak ona yaşam veriyor!",
-		ch->name,obj->name);
+  sprintf(buf,"Mistik güçlerin yardımıyla %s %s mumyalayarak ona yaşam veriyor!",
+  ch->name,TR_ACC(obj->name));
   act(buf,ch,NULL,NULL,TO_ROOM);
   sprintf(buf,"%s sana bakarak onu rahatsız etmenin bedelini ödetmenin planlarını yapıyor!",
 	obj->short_descr);

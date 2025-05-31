@@ -64,6 +64,7 @@
 #include "recycle.h"
 #include "tables.h"
 #include "lookup.h"
+#include "turkish_suffix_helper.h"
 
 /* command procedures needed */
 DECLARE_DO_FUN(	do_exits	);
@@ -601,7 +602,7 @@ void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
 	{
 	    if (IS_SET(victim->on->value[2],SLEEP_AT))
   	    {
-          sprintf(message," %s'de uyuyor.",victim->on->short_descr);
+          sprintf(message," %s uyuyor.",TR_LOC(victim->on->short_descr));
 		strcat(buf,message);
 	    }
 	    else if (IS_SET(victim->on->value[2],SLEEP_ON))
@@ -623,7 +624,7 @@ void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
 	{
             if (IS_SET(victim->on->value[2],REST_AT))
             {
-              sprintf(message," %s'de dinleniyor.",victim->on->short_descr);
+              sprintf(message," %s dinleniyor.",TR_LOC(victim->on->short_descr));
                 strcat(buf,message);
             }
             else if (IS_SET(victim->on->value[2],REST_ON))
@@ -645,7 +646,7 @@ void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
         {
             if (IS_SET(victim->on->value[2],SIT_AT))
             {
-              sprintf(message," %s'de oturuyor.",victim->on->short_descr);
+              sprintf(message," %s oturuyor.",TR_LOC(victim->on->short_descr));
                 strcat(buf,message);
             }
             else if (IS_SET(victim->on->value[2],SIT_ON))
@@ -667,7 +668,7 @@ void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
 	{
 	    if (IS_SET(victim->on->value[2],STAND_AT))
 	    {
-        sprintf(message," %s'de duruyor.",victim->on->short_descr);
+        sprintf(message," %s duruyor.",TR_LOC(victim->on->short_descr));
 		strcat(buf,message);
 	    }
 	    else if (IS_SET(victim->on->value[2],STAND_ON))
@@ -683,7 +684,7 @@ void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
 	}
 	else if (MOUNTED(victim))
 	{
-    sprintf(message," burada, %s'i sürüyor.",PERS(MOUNTED(victim),ch));
+    sprintf(message," burada, %s sürüyor.",TR_ACC(PERS(MOUNTED(victim),ch)));
 	  strcat(buf, message);
 	}
   else 
@@ -1201,7 +1202,11 @@ void do_autolist(CHAR_DATA *ch, char *argument)
 
 
     if (IS_SET(ch->act,PLR_NOSUMMON))
-    send_to_char("Ancak OK aralığının çağrı büyülerinden etkilenebilirsin.\n\r",ch);
+    {
+    char buf[MAX_STRING_LENGTH];
+    sprintf(buf, "Ancak OK aralığının çağrı %s etkilenebilirsin.\n\r", TR_ABL_PLU("büyü"));
+    send_to_char(buf,ch);
+    }
     else
     send_to_char("Herkesin çağrı büyüsünden etkilenebilirsin.\n\r",ch);
 
@@ -1211,7 +1216,11 @@ void do_autolist(CHAR_DATA *ch, char *argument)
 	send_to_char("Takipçileri kabul ediyorsun.\n\r",ch);
 
     if (IS_SET(ch->act,PLR_NOCANCEL))
-    send_to_char("Ancak OK aralığıın iptal büyülerininden etkilenebilirsin.\n\r",ch);
+    {
+    char buf[MAX_STRING_LENGTH];
+    sprintf(buf, "Ancak OK aralığının iptal %s etkilenebilirsin.\n\r", TR_ABL_PLU("büyü"));
+    send_to_char(buf,ch);
+    }
     else
     send_to_char("Herkesin iptal büüyüsünden etkilenebilirsin.\n\r",ch);
 }
@@ -1419,7 +1428,11 @@ void do_noloot(CHAR_DATA *ch, char *argument)
 
     if (IS_SET(ch->act,PLR_CANLOOT))
     {
-      printf_to_char(ch,"Cesedin hırsızlara karşı güvende.\n\r");
+      {
+        char buf[MAX_STRING_LENGTH];
+        sprintf( buf, "Cesedin %s tarafından yağmalanamaz.\n\r", TR_PLU("hırsız") );
+        printf_to_char(ch, buf);
+      }
       REMOVE_BIT(ch->act,PLR_CANLOOT);
     }
     else
@@ -1459,12 +1472,20 @@ void do_nosummon(CHAR_DATA *ch, char *argument)
     {
       if (IS_SET(ch->imm_flags,IMM_SUMMON))
       {
-        send_to_char("Çağrı büyülerine bağışıklı değilsin.\n\r",ch);
+        {
+        char buf[MAX_STRING_LENGTH];
+        sprintf(buf, "Çağrı %s bağışıklı değilsin.\n\r", TR_DAT_PLU("büyü"));
+        send_to_char(buf,ch);
+        }
 	REMOVE_BIT(ch->imm_flags,IMM_SUMMON);
       }
       else
       {
-        send_to_char("Çağrı büyülerine bağışıklısın.\n\r",ch);
+        {
+        char buf[MAX_STRING_LENGTH];
+        sprintf(buf, "Çağrı %s bağışıklısın.\n\r", TR_DAT_PLU("büyü"));
+        send_to_char(buf,ch);
+        }
 	SET_BIT(ch->imm_flags,IMM_SUMMON);
       }
     }
@@ -1477,7 +1498,9 @@ void do_nosummon(CHAR_DATA *ch, char *argument)
       }
       else
       {
-        send_to_char("Yalnız OK aralığının çağrı büyülerine açıksın.\n\r",ch);
+        char buf[MAX_STRING_LENGTH];
+        sprintf(buf, "Yalnız OK aralığının çağrı %s açıksın.\n\r", TR_DAT_PLU("büyü"));
+        send_to_char(buf, ch);
         SET_BIT(ch->act,PLR_NOSUMMON);
       }
     }
@@ -3194,7 +3217,7 @@ void do_wimpy( CHAR_DATA *ch, char *argument )
 
     ch->wimpy	= wimpy;
 
-    printf_to_char( ch, "Korkaklık %d Yp'ye ayarlandı.\n\r", wimpy );
+    printf_to_char( ch, "Korkaklık %d YpD ayarlandı.\n\r", wimpy );
     return;
 }
 
@@ -3710,7 +3733,7 @@ void do_identify( CHAR_DATA *ch, char *argument )
     }
     else if (ch->silver < cost)
     {
-      act( "$n $p'yi tanımlamaya devam ediyor.",rch, obj, 0, TO_ROOM );
+      act( "$n $pA tanımlamaya devam ediyor.",rch, obj, 0, TO_ROOM );
       printf_to_char(ch,"Yeterli akçen yok.\n\r");
       return;
     }
@@ -5142,12 +5165,16 @@ void do_nocancel(CHAR_DATA *ch, char *argument)
 
     if (IS_SET(ch->act,PLR_NOCANCEL))
     {
-      send_to_char("Başkalarının iptal büyülerini kabul ediyorsun.\n\r",ch);
+      char buf[MAX_STRING_LENGTH];
+      sprintf(buf, "Başkalarının iptal %s kabul ediyorsun.\n\r", TR_ACC_PLU("büyü"));
+      send_to_char(buf, ch);
       REMOVE_BIT(ch->act,PLR_NOCANCEL);
     }
     else
     {
-      send_to_char("Başkalarının iptal büyülerini kabul etmiyorsun.\n\r",ch);
+      char buf[MAX_STRING_LENGTH];
+      sprintf(buf, "Başkalarının iptal %s kabul etmiyorsun.\n\r", TR_ACC_PLU("büyü"));
+      send_to_char(buf, ch);
       SET_BIT(ch->act,PLR_NOCANCEL);
     }
 }
@@ -5222,11 +5249,11 @@ void do_discord( CHAR_DATA *ch, char *argument )
 	if(is_found == 1)
 	{
 		ch->pcdata->discord_id = str_dup( arg );
-		printf_to_char(ch,"Discord kullanıcı ID'si kaydedildi.\n\r");
+		printf_to_char(ch,"Discord kullanıcı IDG kaydedildi.\n\r");
 	}
 	else
 	{
-		printf_to_char(ch,"Discord Mangus loncasında %s ID'li bir üyemiz bulunmuyor. Discord ID'si kontrol ederek tekrar deneyin.\n\r",arg);
+		printf_to_char(ch,"Discord Mangus loncasında %s IDG bir üyemiz bulunmuyor. Discord IDG kontrol ederek tekrar deneyin.\n\r",arg);
 	}
 
 	return;

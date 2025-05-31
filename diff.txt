@@ -1,0 +1,2574 @@
+diff --git a/area/area_stat.txt b/area/area_stat.txt
+index d6f61ed..2dbe575 100644
+--- a/area/area_stat.txt
++++ b/area/area_stat.txt
+@@ -1,7 +1,7 @@
+ 
+-Booted Tue May 27 22:24:22 2025
++Booted Fri May 30 20:57:50 2025
+ Area popularity statistics (in char * ticks)
+-Limbo                                                        23
++Limbo                                                        9
+ Mekanik Düşler                                             0
+ Zooloji                                                      0
+ Havada                                                       0
+@@ -52,7 +52,7 @@ Arkadya                                                      0
+ Bölünmüş Ruhlar                                          0
+ Drakiri Adası                                               0
+ Kıyamet                                                     0
+-Mud Okulu                                                    32
++Mud Okulu                                                    20
+ Bakımevi                                                    0
+ Acemi Bölgesi                                               0
+ Zümrüt Köyü                                              0
+diff --git a/src/act_comm.c b/src/act_comm.c
+index 92d2aab..738843f 100644
+--- a/src/act_comm.c
++++ b/src/act_comm.c
+@@ -64,6 +64,7 @@
+ #include "recycle.h"
+ #include "tables.h"
+ #include "interp.h"
++#include "turkish_suffix_helper.h"
+ 
+ int unlink(const char *pathname);
+ 
+@@ -176,7 +177,7 @@ void do_channels( CHAR_DATA *ch, char *argument)
+     printf_to_char(ch,"KAPALI\n\r");
+ 
+     if (IS_SET(ch->comm,COMM_SNOOP_PROOF))
+-    printf_to_char(ch,"Snoop'tan muafsın.\n\r");
++    printf_to_char(ch,"SnoopZ muafsın.\n\r");
+ 
+     if (ch->lines != PAGELEN)
+     {
+@@ -514,7 +515,7 @@ void do_kdg( CHAR_DATA *ch, char *argument )
+ 
+     if (argument[0] == '\0' )
+     {
+-      send_to_char("Oyunculara ne gibi bi'şey söyleyeceksin?.\n\r",ch);
++      send_to_char("Oyunculara ne gibi bir şey söyleyeceksin?.\n\r",ch);
+       return;
+     }
+ 
+@@ -1051,7 +1052,7 @@ void do_rent( CHAR_DATA *ch, char *argument )
+ void do_qui( CHAR_DATA *ch, char *argument )
+ {
+   (void) argument; /* Unused parameter */
+-  printf_to_char( ch,"Mangus'tan ayrılmak istiyorsan komutu eksiksiz yazmalısın.\n\r" );
++  printf_to_char( ch,"MangusZ ayrılmak istiyorsan komutu eksiksiz yazmalısın.\n\r" );
+     return;
+ }
+ 
+@@ -2101,8 +2102,8 @@ void do_judge( CHAR_DATA *ch, char *argument )
+         return;
+     }
+ 
+-    printf_to_char(ch,"%s'in etiği %s ve yönelimi %s.\n\r",
+-	victim->name,
++    printf_to_char(ch,"%s etiği %s ve yönelimi %s.\n\r",
++ TR_GEN(victim->name),
+         victim->ethos == 1 ? "Tüze" :
+         victim->ethos == 2 ? "Yansız" :
+         victim->ethos == 3 ? "Kaos" : "bilinmiyor",
+diff --git a/src/act_hera.c b/src/act_hera.c
+index e96fae7..b687805 100644
+--- a/src/act_hera.c
++++ b/src/act_hera.c
+@@ -67,6 +67,7 @@
+ #include <ctype.h>
+ #include <inttypes.h> /* For intptr_t */
+ #include "merc.h"
++#include "turkish_suffix_helper.h"
+ 
+ /* command procedures needed */
+ DECLARE_DO_FUN(do_look		);
+@@ -167,7 +168,7 @@ void do_enter( CHAR_DATA *ch, char *argument)
+         }
+ 
+         if (MOUNTED(ch))
+-        sprintf(buf,"$n sürdüğü %s ile $p içine giriyor.",MOUNTED(ch)->short_descr );
++        sprintf(buf,"$n sürdüğü %s $p içine giriyor.",TR_INS(MOUNTED(ch)->short_descr) );
+         sprintf(buf,"$n $p içine giriyor." );
+ 	act(buf,ch,portal,NULL,TO_ROOM);
+ 
+@@ -1013,7 +1014,7 @@ void hunt_victim( CHAR_DATA *ch )
+     }
+     else
+     {
+-      act( "$n diyor ki '$M'i kaybettim!'", ch, NULL, ch->hunting, TO_ROOM );
++      act( "$n diyor ki '$MA kaybettim!'", ch, NULL, ch->hunting, TO_ROOM );
+       ch->hunting = NULL;
+       return;
+     }
+@@ -1271,7 +1272,7 @@ void damage_to_obj(CHAR_DATA *ch,OBJ_DATA *wield, OBJ_DATA *worn, int damage)
+      && (IS_SET(worn->extra_flags,ITEM_ANTI_EVIL)
+ 	&& IS_SET(worn->extra_flags,ITEM_ANTI_NEUTRAL) ) )
+  {
+-   sprintf(buf,"$C$p $P'ye karşı dövüşmek istemiyor.$c");
++   sprintf(buf,"$C$p $PD karşı dövüşmek istemiyor.$c");
+    act_color(buf,ch,wield,worn,TO_ROOM,POS_RESTING,CLR_GREEN);
+    sprintf(buf,"$C$p kendisini senden kurtarıyor!$c.");
+    act_color(buf,ch,wield,worn,TO_CHAR,POS_RESTING,CLR_GREEN);
+@@ -1466,9 +1467,8 @@ void do_repair(CHAR_DATA *ch, char *argument)
+ 
+     ch->silver -= cost;
+     mob->silver += cost;
+-    sprintf(buf, "$N $n'dan %s'ı alıyor, tamir ediyor ve $n'a geri veriyor.", obj->short_descr);
+-    act(buf,ch,NULL,mob,TO_ROOM);
+-    sprintf(buf, "%s %s'ı alıp, tamir edip sana geri veriyor.\n\r", mob->short_descr, obj->short_descr);
++    act("$N $nZ $pA alıyor, tamir ediyor ve $nE geri veriyor.",ch,obj,mob,TO_ROOM);
++    sprintf(buf, "%s %s alıp, tamir edip sana geri veriyor.\n\r", mob->short_descr, TR_ACC(obj->short_descr));
+     send_to_char(buf, ch);
+     obj->condition = 100;
+ }
+@@ -2290,9 +2290,12 @@ void do_auction (CHAR_DATA *ch, char *argument)
+     {
+ 
+     default:
+-    act_color ("$C$T eşyaları mezata sürülemez.$c",ch, NULL, item_type_name(obj),
+-		TO_CHAR,POS_SLEEPING,CLR_RED);
++    {
++        char buf[MAX_STRING_LENGTH];
++        sprintf(buf, "$C%s %s mezata sürülemez.$c", item_type_name(obj), TR_ACC_PLU("eşya"));
++        act_color(buf, ch, NULL, NULL, TO_CHAR, POS_SLEEPING, CLR_RED);
+         return;
++    }
+ 
+     case ITEM_WEAPON:
+     case ITEM_ARMOR:
+diff --git a/src/act_info.c b/src/act_info.c
+index aab316c..0fa978f 100644
+--- a/src/act_info.c
++++ b/src/act_info.c
+@@ -64,6 +64,7 @@
+ #include "recycle.h"
+ #include "tables.h"
+ #include "lookup.h"
++#include "turkish_suffix_helper.h"
+ 
+ /* command procedures needed */
+ DECLARE_DO_FUN(	do_exits	);
+@@ -601,7 +602,7 @@ void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
+ 	{
+ 	    if (IS_SET(victim->on->value[2],SLEEP_AT))
+   	    {
+-          sprintf(message," %s'de uyuyor.",victim->on->short_descr);
++          sprintf(message," %s uyuyor.",TR_LOC(victim->on->short_descr));
+ 		strcat(buf,message);
+ 	    }
+ 	    else if (IS_SET(victim->on->value[2],SLEEP_ON))
+@@ -623,7 +624,7 @@ void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
+ 	{
+             if (IS_SET(victim->on->value[2],REST_AT))
+             {
+-              sprintf(message," %s'de dinleniyor.",victim->on->short_descr);
++              sprintf(message," %s dinleniyor.",TR_LOC(victim->on->short_descr));
+                 strcat(buf,message);
+             }
+             else if (IS_SET(victim->on->value[2],REST_ON))
+@@ -645,7 +646,7 @@ void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
+         {
+             if (IS_SET(victim->on->value[2],SIT_AT))
+             {
+-              sprintf(message," %s'de oturuyor.",victim->on->short_descr);
++              sprintf(message," %s oturuyor.",TR_LOC(victim->on->short_descr));
+                 strcat(buf,message);
+             }
+             else if (IS_SET(victim->on->value[2],SIT_ON))
+@@ -667,7 +668,7 @@ void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
+ 	{
+ 	    if (IS_SET(victim->on->value[2],STAND_AT))
+ 	    {
+-        sprintf(message," %s'de duruyor.",victim->on->short_descr);
++        sprintf(message," %s duruyor.",TR_LOC(victim->on->short_descr));
+ 		strcat(buf,message);
+ 	    }
+ 	    else if (IS_SET(victim->on->value[2],STAND_ON))
+@@ -683,7 +684,7 @@ void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
+ 	}
+ 	else if (MOUNTED(victim))
+ 	{
+-    sprintf(message," burada, %s'i sürüyor.",PERS(MOUNTED(victim),ch));
++    sprintf(message," burada, %s sürüyor.",TR_ACC(PERS(MOUNTED(victim),ch)));
+ 	  strcat(buf, message);
+ 	}
+   else 
+@@ -1201,7 +1202,11 @@ void do_autolist(CHAR_DATA *ch, char *argument)
+ 
+ 
+     if (IS_SET(ch->act,PLR_NOSUMMON))
+-    send_to_char("Ancak OK aralığının çağrı büyülerinden etkilenebilirsin.\n\r",ch);
++    {
++    char buf[MAX_STRING_LENGTH];
++    sprintf(buf, "Ancak OK aralığının çağrı %s etkilenebilirsin.\n\r", TR_ABL_PLU("büyü"));
++    send_to_char(buf,ch);
++    }
+     else
+     send_to_char("Herkesin çağrı büyüsünden etkilenebilirsin.\n\r",ch);
+ 
+@@ -1211,7 +1216,11 @@ void do_autolist(CHAR_DATA *ch, char *argument)
+ 	send_to_char("Takipçileri kabul ediyorsun.\n\r",ch);
+ 
+     if (IS_SET(ch->act,PLR_NOCANCEL))
+-    send_to_char("Ancak OK aralığıın iptal büyülerininden etkilenebilirsin.\n\r",ch);
++    {
++    char buf[MAX_STRING_LENGTH];
++    sprintf(buf, "Ancak OK aralığının iptal %s etkilenebilirsin.\n\r", TR_ABL_PLU("büyü"));
++    send_to_char(buf,ch);
++    }
+     else
+     send_to_char("Herkesin iptal büüyüsünden etkilenebilirsin.\n\r",ch);
+ }
+@@ -1419,7 +1428,11 @@ void do_noloot(CHAR_DATA *ch, char *argument)
+ 
+     if (IS_SET(ch->act,PLR_CANLOOT))
+     {
+-      printf_to_char(ch,"Cesedin hırsızlara karşı güvende.\n\r");
++      {
++        char buf[MAX_STRING_LENGTH];
++        sprintf( buf, "Cesedin %s tarafından yağmalanamaz.\n\r", TR_PLU("hırsız") );
++        printf_to_char(ch, buf);
++      }
+       REMOVE_BIT(ch->act,PLR_CANLOOT);
+     }
+     else
+@@ -1459,12 +1472,20 @@ void do_nosummon(CHAR_DATA *ch, char *argument)
+     {
+       if (IS_SET(ch->imm_flags,IMM_SUMMON))
+       {
+-        send_to_char("Çağrı büyülerine bağışıklı değilsin.\n\r",ch);
++        {
++        char buf[MAX_STRING_LENGTH];
++        sprintf(buf, "Çağrı %s bağışıklı değilsin.\n\r", TR_DAT_PLU("büyü"));
++        send_to_char(buf,ch);
++        }
+ 	REMOVE_BIT(ch->imm_flags,IMM_SUMMON);
+       }
+       else
+       {
+-        send_to_char("Çağrı büyülerine bağışıklısın.\n\r",ch);
++        {
++        char buf[MAX_STRING_LENGTH];
++        sprintf(buf, "Çağrı %s bağışıklısın.\n\r", TR_DAT_PLU("büyü"));
++        send_to_char(buf,ch);
++        }
+ 	SET_BIT(ch->imm_flags,IMM_SUMMON);
+       }
+     }
+@@ -1477,7 +1498,9 @@ void do_nosummon(CHAR_DATA *ch, char *argument)
+       }
+       else
+       {
+-        send_to_char("Yalnız OK aralığının çağrı büyülerine açıksın.\n\r",ch);
++        char buf[MAX_STRING_LENGTH];
++        sprintf(buf, "Yalnız OK aralığının çağrı %s açıksın.\n\r", TR_DAT_PLU("büyü"));
++        send_to_char(buf, ch);
+         SET_BIT(ch->act,PLR_NOSUMMON);
+       }
+     }
+@@ -3194,7 +3217,7 @@ void do_wimpy( CHAR_DATA *ch, char *argument )
+ 
+     ch->wimpy	= wimpy;
+ 
+-    printf_to_char( ch, "Korkaklık %d Yp'ye ayarlandı.\n\r", wimpy );
++    printf_to_char( ch, "Korkaklık %d YpD ayarlandı.\n\r", wimpy );
+     return;
+ }
+ 
+@@ -3710,7 +3733,7 @@ void do_identify( CHAR_DATA *ch, char *argument )
+     }
+     else if (ch->silver < cost)
+     {
+-      act( "$n $p'yi tanımlamaya devam ediyor.",rch, obj, 0, TO_ROOM );
++      act( "$n $pA tanımlamaya devam ediyor.",rch, obj, 0, TO_ROOM );
+       printf_to_char(ch,"Yeterli akçen yok.\n\r");
+       return;
+     }
+@@ -5142,12 +5165,16 @@ void do_nocancel(CHAR_DATA *ch, char *argument)
+ 
+     if (IS_SET(ch->act,PLR_NOCANCEL))
+     {
+-      send_to_char("Başkalarının iptal büyülerini kabul ediyorsun.\n\r",ch);
++      char buf[MAX_STRING_LENGTH];
++      sprintf(buf, "Başkalarının iptal %s kabul ediyorsun.\n\r", TR_ACC_PLU("büyü"));
++      send_to_char(buf, ch);
+       REMOVE_BIT(ch->act,PLR_NOCANCEL);
+     }
+     else
+     {
+-      send_to_char("Başkalarının iptal büyülerini kabul etmiyorsun.\n\r",ch);
++      char buf[MAX_STRING_LENGTH];
++      sprintf(buf, "Başkalarının iptal %s kabul etmiyorsun.\n\r", TR_ACC_PLU("büyü"));
++      send_to_char(buf, ch);
+       SET_BIT(ch->act,PLR_NOCANCEL);
+     }
+ }
+@@ -5222,11 +5249,11 @@ void do_discord( CHAR_DATA *ch, char *argument )
+ 	if(is_found == 1)
+ 	{
+ 		ch->pcdata->discord_id = str_dup( arg );
+-		printf_to_char(ch,"Discord kullanıcı ID'si kaydedildi.\n\r");
++		printf_to_char(ch,"Discord kullanıcı IDG kaydedildi.\n\r");
+ 	}
+ 	else
+ 	{
+-		printf_to_char(ch,"Discord Mangus loncasında %s ID'li bir üyemiz bulunmuyor. Discord ID'si kontrol ederek tekrar deneyin.\n\r",arg);
++		printf_to_char(ch,"Discord Mangus loncasında %s IDG bir üyemiz bulunmuyor. Discord IDG kontrol ederek tekrar deneyin.\n\r",arg);
+ 	}
+ 
+ 	return;
+diff --git a/src/act_move.c b/src/act_move.c
+index e275c60..7d3c834 100644
+--- a/src/act_move.c
++++ b/src/act_move.c
+@@ -60,6 +60,7 @@
+ #include <string.h>
+ #include "merc.h"
+ #include "recycle.h"
++#include "turkish_suffix_helper.h"
+ 
+ /* command procedures needed */
+ DECLARE_DO_FUN(do_look		);
+@@ -879,8 +880,8 @@ void do_close( CHAR_DATA *ch, char *argument )
+ 	    }
+ 
+ 	    SET_BIT(obj->value[1],EX_CLOSED);
+-      act("$p'yi kapatıyorsun.",ch,obj,NULL,TO_CHAR);
+-	    act("$n $p'yi kapatıyor.",ch,obj,NULL,TO_ROOM);
++      act("$pA kapatıyorsun.",ch,obj,NULL,TO_CHAR);
++     act("$n $pA kapatıyor.",ch,obj,NULL,TO_ROOM);
+ 	    return;
+ 	}
+ 
+@@ -893,8 +894,8 @@ void do_close( CHAR_DATA *ch, char *argument )
+ 	    { send_to_char("Bunu yapamazsın.\n\r",ch ); return; }
+ 
+ 	SET_BIT(obj->value[1], CONT_CLOSED);
+-  act("$p'yi kapatıyorsun.",ch,obj,NULL,TO_CHAR);
+-	act("$n $p'yi kapatıyor.", ch, obj, NULL, TO_ROOM );
++  act("$pA kapatıyorsun.",ch,obj,NULL,TO_CHAR);
++ act("$n $pA kapatıyor.", ch, obj, NULL, TO_ROOM );
+ 	return;
+     }
+ 
+@@ -1060,7 +1061,7 @@ void do_lock( CHAR_DATA *ch, char *argument )
+ 
+ 	SET_BIT(pexit->exit_info, EX_LOCKED);
+   send_to_char("*Klik*\n\r", ch );
+-	act( "$n $d'yi kilitliyor.", ch, NULL, pexit->keyword, TO_ROOM );
++	act( "$n $dA kilitliyor.", ch, NULL, pexit->keyword, TO_ROOM );
+ 
+ 	/* lock the other side */
+ 	if ( ( to_room   = pexit->u1.to_room            ) != NULL
+@@ -1069,7 +1070,7 @@ void do_lock( CHAR_DATA *ch, char *argument )
+ 	{
+ 	    SET_BIT( pexit_rev->exit_info, EX_LOCKED );
+ 	    for ( rch = to_room->people; rch != NULL; rch = rch->next_in_room )
+-      act("$d'nin kilitleniyor.", rch, NULL, pexit_rev->keyword, TO_CHAR );
++      act("$dG kilitleniyor.", rch, NULL, pexit_rev->keyword, TO_CHAR );
+ 
+ 	}
+         return;
+@@ -1174,7 +1175,7 @@ void do_unlock( CHAR_DATA *ch, char *argument )
+ 
+ 	REMOVE_BIT(pexit->exit_info, EX_LOCKED);
+   send_to_char("*Klik*\n\r", ch );
+-	act( "$n $d'nin kilidini açıyor.", ch, NULL, pexit->keyword, TO_ROOM );
++	act( "$n $dG kilidini açıyor.", ch, NULL, pexit->keyword, TO_ROOM );
+ 
+ 	/* unlock the other side */
+ 	if ( ( to_room   = pexit->u1.to_room            ) != NULL
+@@ -1183,7 +1184,7 @@ void do_unlock( CHAR_DATA *ch, char *argument )
+ 	{
+ 	    REMOVE_BIT( pexit_rev->exit_info, EX_LOCKED );
+ 	    for ( rch = to_room->people; rch != NULL; rch = rch->next_in_room )
+-      act( "$d'nin kilidi açılıyor.", rch, NULL, pexit_rev->keyword, TO_CHAR );
++      act( "$dG kilidi açılıyor.", rch, NULL, pexit_rev->keyword, TO_CHAR );
+ 	}
+         return;
+     }
+@@ -1352,7 +1353,7 @@ void do_pick( CHAR_DATA *ch, char *argument )
+ 
+     REMOVE_BIT(pexit->exit_info, EX_LOCKED);
+     send_to_char( "*Klik*\n\r", ch );
+-    act( "$n $d'nin kilidini maymuncukla açıyor.", ch, NULL, pexit->keyword, TO_ROOM );
++    act( "$n $dG kilidini maymuncukla açıyor.", ch, NULL, pexit->keyword, TO_ROOM );
+     check_improve(ch,gsn_pick_lock,TRUE,2);
+ 
+     /* pick the other side */
+@@ -1415,8 +1416,8 @@ void do_stand( CHAR_DATA *ch, char *argument )
+ 	}
+ 	else if (IS_SET(obj->value[2],STAND_AT))
+ 	{
+-    act_new("$p'de uyanıyor ve kalkıyorsun.",ch,obj,NULL,TO_CHAR,POS_DEAD);
+-    act("$n $p'de uyanıyor ve kalkıyor.",ch,obj,NULL,TO_ROOM);
++    act_new("$pL uyanıyor ve kalkıyorsun.",ch,obj,NULL,TO_CHAR,POS_DEAD);
++    act("$n $pL uyanıyor ve kalkıyor.",ch,obj,NULL,TO_ROOM);
+ 	}
+ 	else if (IS_SET(obj->value[2],STAND_ON))
+ 	{
+@@ -1448,8 +1449,8 @@ void do_stand( CHAR_DATA *ch, char *argument )
+ 	}
+ 	else if (IS_SET(obj->value[2],STAND_AT))
+ 	{
+-    act("$p'de ayağa kalkıyorsun.",ch,obj,NULL,TO_CHAR);
+-    act("$n $p'de ayağa kalkıyor.",ch,obj,NULL,TO_ROOM);
++    act("$pL ayağa kalkıyorsun.",ch,obj,NULL,TO_CHAR);
++    act("$n $pL ayağa kalkıyor.",ch,obj,NULL,TO_ROOM);
+ 	}
+ 	else if (IS_SET(obj->value[2],STAND_ON))
+ 	{
+@@ -1545,9 +1546,9 @@ void do_rest( CHAR_DATA *ch, char *argument )
+ 	}
+ 	else if (IS_SET(obj->value[2],REST_AT))
+ 	{
+-    act_new("Uyanıyor ve $p'de sinlenmeye başlıyorsun.",
++    act_new("Uyanıyor ve $pL sinlenmeye başlıyorsun.",
+       ch,obj,NULL,TO_CHAR,POS_SLEEPING);
+-    act("$n uyanıyor ve $p'de dinlenmeye başlıyor.",ch,obj,NULL,TO_ROOM);
++    act("$n uyanıyor ve $pL dinlenmeye başlıyor.",ch,obj,NULL,TO_ROOM);
+ 	}
+         else if (IS_SET(obj->value[2],REST_ON))
+         {
+@@ -1576,8 +1577,8 @@ void do_rest( CHAR_DATA *ch, char *argument )
+   	}
+           else if (IS_SET(obj->value[2],REST_AT))
+           {
+-  	    act("$p'de oturuyor ve dinlenmeye başlıyorsun.",ch,obj,NULL,TO_CHAR);
+-  	    act("$n $p'de oturuyor ve dinlenmeye başlıyor.",ch,obj,NULL,TO_ROOM);
++  	    act("$pL oturuyor ve dinlenmeye başlıyorsun.",ch,obj,NULL,TO_CHAR);
++  	    act("$n $pL oturuyor ve dinlenmeye başlıyor.",ch,obj,NULL,TO_ROOM);
+           }
+           else if (IS_SET(obj->value[2],REST_ON))
+           {
+@@ -1600,8 +1601,8 @@ void do_rest( CHAR_DATA *ch, char *argument )
+   	}
+           else if (IS_SET(obj->value[2],REST_AT))
+           {
+-  	    act("$p'de dinlenmeye başlıyorsun.",ch,obj,NULL,TO_CHAR);
+-  	    act("$n $p'de dinlenmeye başlıyor.",ch,obj,NULL,TO_ROOM);
++  	    act("$pL dinlenmeye başlıyorsun.",ch,obj,NULL,TO_CHAR);
++  	    act("$n $pL dinlenmeye başlıyor.",ch,obj,NULL,TO_ROOM);
+           }
+           else if (IS_SET(obj->value[2],REST_ON))
+           {
+@@ -1695,8 +1696,8 @@ void do_sit (CHAR_DATA *ch, char *argument )
+             }
+             else if (IS_SET(obj->value[2],SIT_AT))
+             {
+-            	act_new("Uyanıyor ve $p'de oturuyorsun.",ch,obj,NULL,TO_CHAR,POS_DEAD);
+-            	act("$n uyanıyor ve $p'de oturuyor.",ch,obj,NULL,TO_ROOM);
++            	act_new("Uyanıyor ve $pL oturuyorsun.",ch,obj,NULL,TO_CHAR,POS_DEAD);
++            	act("$n uyanıyor ve $pL oturuyor.",ch,obj,NULL,TO_ROOM);
+             }
+             else if (IS_SET(obj->value[2],SIT_ON))
+             {
+@@ -1716,8 +1717,8 @@ void do_sit (CHAR_DATA *ch, char *argument )
+ 		send_to_char("Dinlenmeyi bıraktın.\n\r",ch);
+ 	    else if (IS_SET(obj->value[2],SIT_AT))
+ 	    {
+-		act("$p'de oturuyorsun.",ch,obj,NULL,TO_CHAR);
+-		act("$n $p'de oturuyor.",ch,obj,NULL,TO_ROOM);
++		act("$pL oturuyorsun.",ch,obj,NULL,TO_CHAR);
++		act("$n $pL oturuyor.",ch,obj,NULL,TO_ROOM);
+ 	    }
+ 
+ 	    else if (IS_SET(obj->value[2],SIT_ON))
+@@ -1738,8 +1739,8 @@ void do_sit (CHAR_DATA *ch, char *argument )
+ 	    }
+ 	    else if (IS_SET(obj->value[2],SIT_AT))
+ 	    {
+-		act("$p'de oturuyorsun.",ch,obj,NULL,TO_CHAR);
+-		act("$n $p'de oturuyor.",ch,obj,NULL,TO_ROOM);
++		act("$pL oturuyorsun.",ch,obj,NULL,TO_CHAR);
++		act("$n $pL oturuyor.",ch,obj,NULL,TO_ROOM);
+ 	    }
+ 	    else if (IS_SET(obj->value[2],SIT_ON))
+ 	    {
+@@ -2082,7 +2083,8 @@ void do_recall( CHAR_DATA *ch, char *argument )
+ 
+   if (IS_NPC(ch) && !IS_SET(ch->act,ACT_PET))
+   {
+-    send_to_char("Yalnız oyuncular anımsama kullanabilir.\n\r",ch);
++    sprintf( buf, "Yalnız %s anımsama kullanabilir.\n\r", TR_PLU("oyuncu") );
++    send_to_char( buf, ch );
+     return;
+   }
+ 
+@@ -2842,10 +2844,10 @@ void do_bash_door( CHAR_DATA *ch, char *argument )
+ 
+     chance += (get_skill(ch,gsn_bash_door) - 90);
+ 
+-    act("$d'ye yükleniyor ve kırmaya çalışıyorsun!",
+-		ch,NULL,pexit->keyword,TO_CHAR);
+-    act("$n $d'ye yükleniyor ve kırmaya çalışıyor!",
+-		ch,NULL,pexit->keyword,TO_ROOM);
++    act("$dD yükleniyor ve kırmaya çalışıyorsun!",
++  ch,NULL,pexit->keyword,TO_CHAR);
++    act("$n $dD yükleniyor ve kırmaya çalışıyor!",
++  ch,NULL,pexit->keyword,TO_ROOM);
+ 
+     if (room_dark(ch->in_room))
+ 		chance /= 2;
+@@ -2858,8 +2860,8 @@ void do_bash_door( CHAR_DATA *ch, char *argument )
+ 
+ 	REMOVE_BIT(pexit->exit_info, EX_LOCKED);
+ 	REMOVE_BIT(pexit->exit_info, EX_CLOSED);
+-  act( "$n $d'ye yüklenerek kilidi kırıyor.", ch, NULL,
+-		pexit->keyword, TO_ROOM );
++  act( "$n $dD yüklenerek kilidi kırıyor.", ch, NULL,
++  pexit->keyword, TO_ROOM );
+ 	send_to_char( "Kapıyı açmayı başardın.\n\r", ch );
+ 
+ 	/* open the other side */
+@@ -3698,7 +3700,7 @@ void do_mount( CHAR_DATA *ch, char *argument )
+   }
+ 
+   if( (mount->mount) && (!mount->riding) && (mount->mount != ch)) {
+-    sprintf(buf, "%s %s'e bağlı, sana değil.\n\r", mount->short_descr,mount->mount->name);
++    sprintf(buf, "%s %s bağlı, sana değil.\n\r", mount->short_descr, TR_DAT(mount->mount->name));
+     send_to_char(buf,ch);
+     return;
+   }
+@@ -4016,9 +4018,9 @@ void do_shoot( CHAR_DATA *ch, char *argument )
+ 	chance -= 40;
+     chance += GET_HITROLL(ch);
+ 
+-    sprintf( buf, "%s'e $p atıyorsun.", dir_name[ direction ] );
++    sprintf( buf, "%s $p atıyorsun.", TR_DAT(dir_name[ direction ]) );
+       act( buf, ch, arrow, NULL, TO_CHAR );
+-  	sprintf( buf, "$n %s'e $p atıyor.", dir_name[ direction ] );
++   sprintf( buf, "$n %s $p atıyor.", TR_DAT(dir_name[ direction ]) );
+       act( buf, ch, arrow, NULL, TO_ROOM );
+ 
+     obj_from_char(arrow);
+@@ -4184,9 +4186,9 @@ void do_throw_spear( CHAR_DATA *ch, char *argument )
+ 	chance -= 40;
+     chance += GET_HITROLL(ch);
+ 
+-    sprintf( buf, "%s'e $p fırlatıyorsun.", dir_name[ direction ] );
++    sprintf( buf, "%s $p fırlatıyorsun.", TR_DAT(dir_name[ direction ]) );
+       act( buf, ch, spear, NULL, TO_CHAR );
+-      sprintf( buf, "$n %s'e $p fırlatıyor.", dir_name[ direction ] );
++      sprintf( buf, "$n %s $p fırlatıyor.", TR_DAT(dir_name[ direction ]) );
+       act( buf, ch, spear, NULL, TO_ROOM );
+ 
+     obj_from_char(spear);
+diff --git a/src/act_obj.c b/src/act_obj.c
+index e8c373e..a85c6f7 100644
+--- a/src/act_obj.c
++++ b/src/act_obj.c
+@@ -59,6 +59,7 @@
+ #include <string.h>
+ #include <stdlib.h>
+ #include "merc.h"
++#include "turkish_suffix_helper.h"
+ 
+ /* command procedures needed */
+ DECLARE_DO_FUN(do_split		);
+@@ -722,7 +723,7 @@ void do_put( CHAR_DATA *ch, char *argument )
+ 
+ 		if ( obj->pIndexData->limit != -1 )
+ 		{
+-      act( "Bu değersiz taşıyıcı $p'yi alamaz.", ch,obj,NULL,TO_CHAR);
++      act( "Bu değersiz taşıyıcı $pA alamaz.", ch,obj,NULL,TO_CHAR);
+ 		  continue;
+ 		}
+ 
+@@ -867,8 +868,12 @@ act( "$p bırakıyorsun.", ch, obj, NULL, TO_CHAR );
+ 	       !IS_SET(ch->in_room->sector_type, SECT_AIR) &&
+ 	       !IS_WATER(ch->in_room) )
+ 	  {
+-      act( "$p küçük parçalara bölünüyor.", ch, obj, NULL,TO_ROOM );
+-	    act( "$p küçük parçalara bölünüyor.", ch, obj, NULL,TO_CHAR );
++      {
++        char buf[MAX_STRING_LENGTH];
++        sprintf( buf, "$p küçük %s bölünüyor.", TR_PLU("parça") );
++        act( buf, ch, obj, NULL, TO_ROOM );
++        act( buf, ch, obj, NULL, TO_CHAR );
++      }
+ 	    extract_obj( obj );
+ 	    return;
+ 	  }
+@@ -895,8 +900,12 @@ act( "$p bırakıyorsun.", ch, obj, NULL, TO_CHAR );
+ 		//PC'ler limit esya birakirsa esya kaybolsun.
+ 		if(IS_PC(ch))
+ 		{
+-			act( "$p küçük parçalara bölünüyor.", ch, obj, NULL,TO_ROOM );
+-			act( "$p küçük parçalara bölünüyor.", ch, obj, NULL,TO_CHAR );
++			{
++			  char buf[MAX_STRING_LENGTH];
++			  sprintf( buf, "$p küçük %s bölünüyor.", TR_PLU("parça") );
++			  act( buf, ch, obj, NULL, TO_ROOM );
++			  act( buf, ch, obj, NULL, TO_CHAR );
++			}
+ 			extract_obj( obj );
+ 		}
+ 	}
+@@ -929,8 +938,12 @@ act( "$p bırakıyorsun.", ch, obj, NULL, TO_CHAR );
+ 
+ 	  	{
+ 		  if ( !IS_AFFECTED(ch, AFF_SNEAK) )
+-      act( "$p küçük parçalara bölünüyor.", ch, obj, NULL,TO_ROOM );
+-    act( "$p küçük parçalara bölünüyor.", ch, obj, NULL,TO_CHAR );
++      {
++      char act_buf[MAX_STRING_LENGTH];
++      sprintf(act_buf, "$p küçük %s bölünüyor.", TR_DAT_PLU("parça"));
++      act( act_buf, ch, obj, NULL,TO_ROOM );
++      act( act_buf, ch, obj, NULL,TO_CHAR );
++      }
+ 	          extract_obj( obj );
+ 	          continue;
+ 		}
+@@ -957,8 +970,12 @@ act( "$p bırakıyorsun.", ch, obj, NULL, TO_CHAR );
+ 				//PC'ler limit esya birakirsa esya kaybolsun.
+ 				if(IS_PC(ch))
+ 				{
+-					act( "$p küçük parçalara bölünüyor.", ch, obj, NULL,TO_ROOM );
+-					act( "$p küçük parçalara bölünüyor.", ch, obj, NULL,TO_CHAR );
++					{
++					char act_buf[MAX_STRING_LENGTH];
++					sprintf(act_buf, "$p küçük %s bölünüyor.", TR_DAT_PLU("parça"));
++					act( act_buf, ch, obj, NULL,TO_ROOM );
++					act( act_buf, ch, obj, NULL,TO_CHAR );
++					}
+ 					extract_obj( obj );
+ 				}
+ 			}
+@@ -1085,11 +1102,11 @@ void do_drag( CHAR_DATA *ch, char *argument )
+        return;
+    }
+ 
+-   sprintf(buf,"$p'yi %s yönünde sürüklemek için kavradın.", dir_name[direction] );
++   sprintf(buf,"$pA %s sürüklemek için kavradın.", TR_DAT(dir_name[direction]) );
+    act( buf, ch, obj, NULL, TO_CHAR );
+    if (!IS_AFFECTED(ch,AFF_SNEAK))
+    {
+-     sprintf(buf,"$n $p'yi %s yönünde sürüklemek için kavradı.", dir_name[direction] );
++     sprintf(buf,"$n $pA %s sürüklemek için kavradı.", TR_DAT(dir_name[direction]) );
+          act( buf, ch, obj, NULL, TO_ROOM );
+    }
+ 
+@@ -1260,7 +1277,8 @@ void do_give( CHAR_DATA *ch, char *argument )
+ 	  //PC'ler limit esya veremesin.
+ 	  if(IS_PC(ch))
+ 	  {
+-		  send_to_char( "Limit eşyaları başkasına veremezsin.\n\r", ch );
++		  sprintf( buf, "Limit %s başkasına veremezsin.\n\r", TR_PLU("eşya") );
++		  send_to_char( buf, ch );
+ 		  return;
+ 	  }
+ 	  
+@@ -1364,8 +1382,8 @@ void do_bury( CHAR_DATA *ch, char *argument )
+     }
+     ch->move -= move;
+ 
+-    act( "$p'yi ayinle gömüyorsun...", ch, obj, NULL, TO_CHAR );
+-    act( "$n $p'yi ayinle gömüyor...", ch, obj, NULL, TO_ROOM );
++    act( "$pA ayinle gömüyorsun...", ch, obj, NULL, TO_CHAR );
++    act( "$n $pA ayinle gömüyor...", ch, obj, NULL, TO_ROOM );
+ 
+     SET_BIT( obj->extra_flags, ITEM_BURIED );
+     WAIT_STATE( ch, 4 * PULSE_VIOLENCE );
+@@ -1455,8 +1473,8 @@ void do_dig( CHAR_DATA *ch, char *argument )
+     }
+     ch->move -= move;
+ 
+-    act("$p'yi kazmaya başlıyorsun...", ch, obj, NULL, TO_CHAR );
+-    act("$n $p'yi kazmaya başlıyor...", ch, obj, NULL, TO_ROOM );
++    act("$pA kazmaya başlıyorsun...", ch, obj, NULL, TO_CHAR );
++    act("$n $pA kazmaya başlıyor...", ch, obj, NULL, TO_ROOM );
+ 
+     WAIT_STATE( ch, 4 * PULSE_VIOLENCE );
+ 
+@@ -1471,7 +1489,7 @@ void do_dig( CHAR_DATA *ch, char *argument )
+     obj_to_room( corpse, ch->in_room );
+     extract_obj( obj );
+     corpse->timer   = number_range( 25, 40 );
+-    act("Kazı $p'yi ortaya çıkarıyor.\n\r",ch, corpse, NULL, TO_ALL );
++    act("Kazı $pA ortaya çıkarıyor.\n\r",ch, corpse, NULL, TO_ALL );
+ 
+     return;
+ }
+@@ -1509,7 +1527,7 @@ void do_envenom(CHAR_DATA *ch, char *argument)
+     {
+ 	if (IS_OBJ_STAT(obj,ITEM_BLESS) || IS_OBJ_STAT(obj,ITEM_BURN_PROOF))
+ 	{
+-    act("$p'yi zehirleyemedin.",ch,obj,NULL,TO_CHAR);
++    act("$pA zehirleyemedin.",ch,obj,NULL,TO_CHAR);
+ 	    return;
+ 	}
+ 
+@@ -1526,7 +1544,7 @@ void do_envenom(CHAR_DATA *ch, char *argument)
+ 	    return;
+ 	}
+ 
+-  act("$p'yi zehirleyemedin.",ch,obj,NULL,TO_CHAR);
++  act("$pA zehirleyemedin.",ch,obj,NULL,TO_CHAR);
+ 	if (!obj->value[3])
+ 	    check_improve(ch,gsn_envenom,FALSE,4);
+ 	WAIT_STATE(ch,skill_table[gsn_envenom].beats);
+@@ -1551,7 +1569,11 @@ void do_envenom(CHAR_DATA *ch, char *argument)
+ 	if (obj->value[3] < 0
+ 	||  attack_table[obj->value[3]].damage == DAM_BASH)
+ 	{
+-    send_to_char("Yalnız kabzalı silahları zehirleyebilirsin.\n\r",ch);
++    {
++        char buf[MAX_STRING_LENGTH];
++        sprintf( buf, "Yalnız kabzalı %s zehirleyebilirsin.\n\r", TR_ACC_PLU("silah") );
++        send_to_char( buf, ch );
++    }
+ 	    return;
+ 	}
+ 
+@@ -1590,7 +1612,7 @@ act("$p objesini zehirle kaplıyorsun.",ch,obj,NULL,TO_CHAR);
+ 	}
+     }
+ 
+-    act("$p'yi zehirleyemezsin.",ch,obj,NULL,TO_CHAR);
++    act("$pA zehirleyemezsin.",ch,obj,NULL,TO_CHAR);
+     return;
+ }
+ 
+@@ -1651,11 +1673,11 @@ void do_fill( CHAR_DATA *ch, char *argument )
+ 	return;
+     }
+ 
+-    sprintf(buf,"$P içindeki %s ile $p'yi dolduruyorsun.",
+-	liq_table[fountain->value[2]].liq_name_tr);
++    sprintf(buf,"$P içindeki %s $pA dolduruyorsun.",
++ TR_INS(liq_table[fountain->value[2]].liq_name_tr));
+     act( buf, ch, obj,fountain, TO_CHAR );
+-    sprintf(buf,"$n $P içindeki %s ile $p'yi dolduruyor.",
+-	liq_table[fountain->value[2]].liq_name_tr);
++    sprintf(buf,"$n $P içindeki %s $pA dolduruyor.",
++ TR_INS(liq_table[fountain->value[2]].liq_name_tr));
+     act(buf,ch,obj,fountain,TO_ROOM);
+     obj->value[2] = fountain->value[2];
+     obj->value[1] = obj->value[0];
+@@ -1702,17 +1724,17 @@ void do_pour(CHAR_DATA *ch, char *argument)
+ 	out->value[3] = 0;
+         if ( !IS_WATER( ch->in_room ) )
+ 			{
+-			sprintf(buf,"$p'yi ters çevirip içindeki %s'yi yere boşaltıyorsun.",liq_table[out->value[2]].liq_name_tr);
++			sprintf(buf,"$pA ters çevirip içindeki %s yere boşaltıyorsun.",liq_table[out->value[2]].liq_name_tr);
+ 			act(buf,ch,out,NULL,TO_CHAR);
+ 
+-			sprintf(buf,"$n $p'yi ters çevirip içindeki %s'yi yere boşaltıyor.",liq_table[out->value[2]].liq_name_tr);
++			sprintf(buf,"$n $pA ters çevirip içindeki %s yere boşaltıyor.",liq_table[out->value[2]].liq_name_tr);
+ 			act(buf,ch,out,NULL,TO_ROOM);
+ 	}
+ 	else  {
+-	  sprintf(buf,"$p'yi ters çevirip %s'yi suya boşaltıyorsun.",liq_table[out->value[2]].liq_name_tr);
+-	  act(buf,ch,out,NULL,TO_CHAR);
++			sprintf(buf,"$pA ters çevirip %s suya boşaltıyorsun.",liq_table[out->value[2]].liq_name_tr);
++			act(buf,ch,out,NULL,TO_CHAR);
+ 
+-	  sprintf(buf,"$n $p'yi ters çevirip içindeki %s'yi yere boşaltıyor.",liq_table[out->value[2]].liq_name_tr);
++			sprintf(buf,"$n $pA ters çevirip içindeki %s yere boşaltıyor.",liq_table[out->value[2]].liq_name_tr);
+ 	  act(buf,ch,out,NULL,TO_ROOM);
+ 	}
+ 	return;
+@@ -1775,9 +1797,9 @@ void do_pour(CHAR_DATA *ch, char *argument)
+ 
+     if (vch == NULL)
+     {
+-    	sprintf(buf,"%s'i $p'den $P'ye döküyorsun.",liq_table[out->value[2]].liq_name_tr);
++    	sprintf(buf,"%s $pZ $PD döküyorsun.",liq_table[out->value[2]].liq_name_tr);
+     	act(buf,ch,out,in,TO_CHAR);
+-    	sprintf(buf,"$n %s'i $p'den $P'ye döküyor.",liq_table[out->value[2]].liq_name_tr);
++    	sprintf(buf,"$n %s $pZ $PD döküyor.",liq_table[out->value[2]].liq_name_tr);
+     	act(buf,ch,out,in,TO_ROOM);
+     }
+     else
+@@ -2043,8 +2065,8 @@ bool remove_obj_loc( CHAR_DATA *ch, int iWear, bool fReplace )
+ 	  if  (is_affected(ch,gsn_arrow)) affect_strip(ch,gsn_arrow);
+ 	  if  (is_affected(ch,gsn_spear)) affect_strip(ch,gsn_spear);
+ 	}
+-  act( "$p'yi acı içinde çıkarıyorsun.", ch, obj, NULL, TO_CHAR );
+-	act( "$n $p'yi acı içinde çıkarıyor.", ch, obj, NULL, TO_ROOM );
++  act( "$pA acı içinde çıkarıyorsun.", ch, obj, NULL, TO_CHAR );
++ act( "$n $pA acı içinde çıkarıyor.", ch, obj, NULL, TO_ROOM );
+ 	WAIT_STATE(ch,4);
+ 	return TRUE;
+     }
+@@ -2088,8 +2110,8 @@ bool remove_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace )
+ 	  if  (is_affected(ch,gsn_arrow)) affect_strip(ch,gsn_arrow);
+ 	  if  (is_affected(ch,gsn_spear)) affect_strip(ch,gsn_spear);
+ 	}
+-  act( "$p'yi acı içinde çıkarıyorsun.", ch, obj, NULL, TO_CHAR );
+-	act( "$n $p'yi acı içinde çıkarıyor.", ch, obj, NULL, TO_ROOM );
++  act( "$pA acı içinde çıkarıyorsun.", ch, obj, NULL, TO_CHAR );
++ act( "$n $pA acı içinde çıkarıyor.", ch, obj, NULL, TO_ROOM );
+ 	WAIT_STATE(ch,4);
+ 	return TRUE;
+     }
+@@ -2124,8 +2146,8 @@ void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace )
+       sprintf( buf, "Bunu kullanabilmek için seviyen en az %d olmalı.\n\r",
+ 	    obj->level );
+ 	send_to_char( buf, ch );
+-  act( "$n $p'yi kullanmayı denedi, ama çok deneyimsiz.",
+-	    ch, obj, NULL, TO_ROOM );
++  act( "$n $pA kullanmayı denedi, ama çok deneyimsiz.",
++     ch, obj, NULL, TO_ROOM );
+ 	return;
+     }
+ 
+@@ -2298,8 +2320,8 @@ void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace )
+     {
+ 	if (!remove_obj_loc(ch,WEAR_FLOAT, fReplace) )
+ 	    return;
+-      act("$n $p'yi yanında süzülmesi için bırakıyor.",ch,obj,NULL,TO_ROOM);
+-    	act("$p'yi yanında süzülmesi için bırakıyorsun.",ch,obj,NULL,TO_CHAR);
++      act("$n $pA yanında süzülmesi için bırakıyor.",ch,obj,NULL,TO_ROOM);
++     act("$pA yanında süzülmesi için bırakıyorsun.",ch,obj,NULL,TO_CHAR);
+ 	equip_char(ch,obj,WEAR_FLOAT);
+ 	return;
+     }
+@@ -2424,8 +2446,16 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
+ 
+ 	if ( arg[0] == '\0' || !str_cmp( arg, ch->name ) )
+ 	{
+-		act( "$n kendisini tanrılara sunuyor.", ch, NULL, NULL, TO_ROOM );
+-		printf_to_char(ch, "Tanrılar teklifini takdir ediyor...\n\r" );
++		{
++		char act_buf[MAX_STRING_LENGTH];
++		sprintf(act_buf, "$n kendisini %s sunuyor.", TR_DAT_PLU("tanrı"));
++		act( act_buf, ch, NULL, NULL, TO_ROOM );
++		}
++		{
++		  char buf[MAX_STRING_LENGTH];
++		  sprintf( buf, "%s teklifini takdir ediyor...\n\r", TR_PLU("tanrı") );
++		  printf_to_char(ch, buf );
++		}
+ 		return;
+ 	}
+ 
+@@ -2483,7 +2513,11 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
+ 		{
+ 			if(ch->religion == 0)
+ 			{
+-				printf_to_char(ch,"%d kurbanın için tanrılardan bir işaret gelmiyor.\n\r",count);
++				{
++				  char buf[MAX_STRING_LENGTH];
++				  sprintf( buf, "%d kurbanın için %s bir işaret vermiyor.\n\r", count, TR_PLU("tanrı") );
++				  printf_to_char(ch, buf);
++				}
+ 			}
+ 			else
+ 			{
+@@ -2553,7 +2587,11 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
+ 		}
+ 	}
+ 
+-	act( "$n tanrılara $p kurban ediyor.", ch, obj, NULL, TO_ROOM );
++	{
++	  char buf[MAX_STRING_LENGTH];
++	  sprintf( buf, "$n %s $p kurban ediyor.", TR_PLU("tanrı") );
++	  act( buf, ch, obj, NULL, TO_ROOM );
++	}
+ 
+ 	if (IS_SET(obj->progtypes,OPROG_SAC))
+ 	{
+@@ -2669,8 +2707,11 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
+ 
+     if ( arg[0] == '\0' || !str_cmp( arg, ch->name ) )
+     {
+-      act( "$n kendisini tanrılara sunuyor.",
+-	    ch, NULL, NULL, TO_ROOM );
++      {
++      char act_buf[MAX_STRING_LENGTH];
++      sprintf(act_buf, "$n kendisini %s sunuyor.", TR_DAT_PLU("tanrı"));
++      act( act_buf, ch, NULL, NULL, TO_ROOM );
++      }
+ 	send_to_char(
+     "Tanrılar teklifini takdir ediyor...\n\r", ch );
+ 	return;
+@@ -2698,7 +2739,7 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
+     {
+ 		if(ch->religion == 0)
+ 		{
+-			printf_to_char(ch,"%d kurbanın için tanrılardan bir işaret gelmiyor.\n\r",count);
++			printf_to_char(ch,"%d kurbanın için %s bir işaret gelmiyor.\n\r",count, TR_ABL_PLU("tanrı"));
+ 		}
+ 		else
+ 		{
+@@ -2767,7 +2808,11 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
+ 	}
+     }
+ 
+-    act( "$n tanrılara $p kurban ediyor.", ch, obj, NULL, TO_ROOM );
++    {
++    char act_buf[MAX_STRING_LENGTH];
++    sprintf(act_buf, "$n %s $p kurban ediyor.", TR_DAT_PLU("tanrı"));
++    act( act_buf, ch, obj, NULL, TO_ROOM );
++    }
+ 
+     if (IS_SET(obj->progtypes,OPROG_SAC))
+       if ( (obj->pIndexData->oprogs->sac_prog) (obj,ch) )
+@@ -3034,7 +3079,7 @@ void do_brandish( CHAR_DATA *ch, char *argument )
+ 	if ( ch->level+3 < staff->level
+ 	||   number_percent() >= 10 + get_skill(ch,gsn_staves) * 4/5)
+  	{
+-	    act ("$p'yi uyandırmayı başaramadın.",ch,staff,NULL,TO_CHAR);
++	    act ("$pA uyandırmayı başaramadın.",ch,staff,NULL,TO_CHAR);
+ 	    act ("...ve hiçbir şey olmuyor.",ch,NULL,NULL,TO_ROOM);
+ 	    check_improve(ch,gsn_staves,FALSE,2);
+ 	}
+@@ -3077,7 +3122,7 @@ void do_brandish( CHAR_DATA *ch, char *argument )
+ 
+     if ( --staff->value[2] <= 0 )
+     {
+-	act("$n's $p parlayarak yokoluyor.", ch, staff, NULL, TO_ROOM );
++	act("$nG $p parlayarak yokoluyor.", ch, staff, NULL, TO_ROOM );
+ 	act("$p parlayarak yokoluyor.", ch, staff, NULL, TO_CHAR );
+ 	extract_obj( staff );
+     }
+@@ -3153,8 +3198,8 @@ void do_zap( CHAR_DATA *ch, char *argument )
+ 	}
+ 	else
+ 	{
+-	    act( "$n $p ile $P'yi çarpıyor.", ch, wand, obj, TO_ROOM );
+-	    act( "$p ile $P'yi çarpıyorsun.", ch, wand, obj, TO_CHAR );
++	    act( "$n $p ile $PA çarpıyor.", ch, wand, obj, TO_ROOM );
++	    act( "$p ile $PA çarpıyorsun.", ch, wand, obj, TO_CHAR );
+ 	}
+ 
+  	if (ch->level+5 < wand->level
+@@ -3175,8 +3220,13 @@ void do_zap( CHAR_DATA *ch, char *argument )
+ 
+     if ( --wand->value[2] <= 0 )
+     {
+-	act( "$s $p'si patlayarak parçalara ayrılıyor.", ch, wand, NULL, TO_ROOM );
+-	act( "$p patlayarak parçalara ayrılıyor.", ch, wand, NULL, TO_CHAR );
++	{
++	char act_buf[MAX_STRING_LENGTH];
++	sprintf(act_buf, "$nG $pG patlayarak %s ayrılıyor.", TR_DAT_PLU("parça"));
++	act( act_buf, ch, wand, NULL, TO_ROOM );
++	sprintf(act_buf, "$p patlayarak %s ayrılıyor.", TR_DAT_PLU("parça"));
++	act( act_buf, ch, wand, NULL, TO_CHAR );
++	}
+ 	extract_obj( wand );
+     }
+ 
+@@ -3276,7 +3326,7 @@ void do_steal( CHAR_DATA *ch, char *argument )
+ 
+       if ( obj->pIndexData->limit < obj->pIndexData->count )
+       {
+-        act( "Tanrılar $p'nin araklanmasına izin vermez.", ch, obj, NULL, TO_CHAR );
++        act( "Tanrılar $pG araklanmasına izin vermez.", ch, obj, NULL, TO_CHAR );
+       	act( "Tanrılar $s davranışını onaylamıyor.",  ch, obj, NULL, TO_ROOM );
+ 	percent = 0;
+       }
+@@ -3741,7 +3791,7 @@ void do_buy( CHAR_DATA *ch, char *argument )
+ 	    pet->name = str_dup( buf );
+ 	}
+ 
+-  sprintf( buf, "%sin tasması diyor ki 'Ben %s'e aitim'.\n\r",pet->description, ch->name );
++  sprintf( buf, "%s tasması diyor ki 'Ben %s aitim'.\n\r",TR_GEN(pet->description), TR_DAT(ch->name) );
+ 	free_string( pet->description );
+ 	pet->description = str_dup( buf );
+ 
+@@ -3776,7 +3826,7 @@ void do_buy( CHAR_DATA *ch, char *argument )
+ 
+ 	if ( cost <= 0 || !can_see_obj( ch, obj ) )
+ 	{
+-    act( "$n 'Ondan satmıyorum, 'liste'yi dene' dedi.",
++    act( "$n 'Ondan satmıyorum, listeyi dene' dedi.",
+   keeper, NULL, ch, TO_VICT );
+ 	    ch->reply = keeper;
+ 	    return;
+@@ -4082,7 +4132,7 @@ void do_sell( CHAR_DATA *ch, char *argument )
+ 		// Eger pazarligi varsa dukkancida da akce olsun.
+ 		if(number_percent() > get_skill(ch, gsn_haggle))
+ 		{
+-		act("$n anlatıyor Üzgünüm '$p'nin ederini ödeyemem.",keeper,obj,ch,TO_VICT);
++		act("$n anlatıyor Üzgünüm $pG ederini ödeyemem.",keeper,obj,ch,TO_VICT);
+ 		return;
+ 		}
+ 	}
+@@ -4317,7 +4367,11 @@ void do_herbs(CHAR_DATA *ch, char *argument)
+ 	  if (check_dispel(ch->level,victim,gsn_plague))
+ 	    {
+ 	      send_to_char("Yaraların kayboluyor.\n\r",victim);
+-	      act("$n yaralarından kurtulmuş görünüyor.",victim,NULL,NULL,TO_ROOM);
++	      {
++	      char act_buf[MAX_STRING_LENGTH];
++	      sprintf(act_buf, "$n %s kurtulmuş görünüyor.", TR_ABL_PLU("yara"));
++	      act(act_buf,victim,NULL,NULL,TO_ROOM);
++	      }
+ 	    }
+ 	}
+     }
+@@ -4488,7 +4542,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
+ 	  }
+ 	}
+ 
+-      sprintf( buf, "Seviye %d büyüleri:", obj->value[0] );
++      sprintf( buf, "Seviye %d %s:", obj->value[0], TR_PLU("büyü") );
+       send_to_char(buf, ch);
+ 
+       if ( value1 >= 0 && value1 < MAX_SKILL )
+@@ -4734,19 +4788,19 @@ void do_butcher(CHAR_DATA *ch, char *argument)
+ 
+       if (numsteaks > 1)
+ 	{
+-	  sprintf(buf, "$n $p'yi doğruyor ve ondan %i biftek çıkartıyor.",numsteaks);
++	  sprintf(buf, "$n $pA doğruyor ve ondan %i biftek çıkartıyor.",numsteaks);
+ 	  act(buf,ch,obj,NULL,TO_ROOM);
+ 
+-	  sprintf(buf, "$p'yi doğruyor ve ondan %i biftek çıkartıyorsun.",numsteaks);
++	  sprintf(buf, "$pA doğruyor ve ondan %i biftek çıkartıyorsun.",numsteaks);
+ 	  act(buf,ch,obj,NULL,TO_CHAR);
+ 	}
+ 
+       else
+ 	{
+-	  act("$n $p'yi doğruyor ve ondan bir dilim biftek çıkartıyor."
++	  act("$n $pA doğruyor ve ondan bir dilim biftek çıkartıyor."
+ 	      ,ch,obj,NULL,TO_ROOM);
+ 
+-	  act("$p'yi doğruyor ve ondan bir dilim biftek çıkartıyorsun."
++	  act("$pA doğruyor ve ondan bir dilim biftek çıkartıyorsun."
+ 	      ,ch,obj,NULL,TO_CHAR);
+ 	}
+       check_improve(ch,gsn_butcher,TRUE,1);
+@@ -4767,9 +4821,9 @@ void do_butcher(CHAR_DATA *ch, char *argument)
+     }
+   else
+     {
+-      act("Başaramadın ve $p'yi yokettin.",ch,obj,NULL,TO_CHAR);
+-      act("$n $p'den biftek çıkarmayı beceremedi.",
+-	  ch,obj,NULL,TO_ROOM);
++      act("Başaramadın ve $pA yokettin.",ch,obj,NULL,TO_CHAR);
++      act("$n $pB biftek çıkarmayı beceremedi.",
++   ch,obj,NULL,TO_ROOM);
+ 
+       check_improve(ch,gsn_butcher,FALSE,1);
+     }
+@@ -4936,7 +4990,11 @@ void do_kasa(CHAR_DATA *ch, char *argument)
+ 	{
+ 		printf_to_char( ch, "Kasanla ilgili hangi işlemi yapacaksın?\n\r" );
+ 		printf_to_char( ch, "Kasana bir eşya koyabilir, kasandan bir eşya alabilir\n\r" );
+-		printf_to_char( ch, "veya kasandaki eşyaları listeleyebilirsin.\n\r" );
++		{
++			char buf[MAX_STRING_LENGTH];
++			sprintf( buf, "veya kasandaki %s listeleyebilirsin.\n\r", TR_PLU("eşya") );
++			send_to_char( buf, ch );
++		}
+ 		return;
+ 	}
+ 
+@@ -4966,7 +5024,11 @@ void do_kasa(CHAR_DATA *ch, char *argument)
+ 			obj->item_type == ITEM_CORPSE_NPC || obj->item_type == ITEM_CORPSE_PC || obj->item_type == ITEM_FOUNTAIN ||
+ 			obj->item_type == ITEM_PORTAL || obj->item_type == ITEM_JUKEBOX || obj->item_type == ITEM_TATTOO || obj->item_type == ITEM_KEY )
+ 		{
+-			send_to_char( "Kasaya bu tür eşyalar koyamazsın.\n\r", ch );
++			{
++				char buf[MAX_STRING_LENGTH];
++				sprintf( buf, "Kasaya bu tür %s koyamazsın.\n\r", TR_PLU("eşya") );
++				send_to_char( buf, ch );
++			}
+ 			return;
+ 		}
+ 
+@@ -5026,7 +5088,11 @@ void do_kasa(CHAR_DATA *ch, char *argument)
+ 	}
+ 	else if (!strcmp(arg1, "liste"))
+ 	{
+-		send_to_char( "Kasadaki eşyaların:\n\r", ch );
++		{
++			char buf[MAX_STRING_LENGTH];
++			sprintf( buf, "Kasadaki %s:\n\r", TR_PLU("eşya") );
++			send_to_char( buf, ch );
++		}
+ 		send_to_char( "-------------------\n\r", ch );
+ 		for ( obj = ch->pcdata->kasa_esyalari; obj != NULL; obj = obj->next_content )
+ 		{
+@@ -5178,7 +5244,7 @@ void hold_a_wield(CHAR_DATA *ch, OBJ_DATA *obj, int iWear)
+         else if (skill > 1)
+             act("$p kullanırken ellerin birbirine dolaşacak.",ch,obj,NULL,TO_CHAR);
+         else
+-            act("$p'nin ne tarafı tutulur bilmiyorsun.",
++            act("$pG ne tarafı tutulur bilmiyorsun.",
+                 ch,obj,NULL,TO_CHAR);
+       }
+ 
+diff --git a/src/act_wiz.c b/src/act_wiz.c
+index 0d0d96e..5856be1 100644
+--- a/src/act_wiz.c
++++ b/src/act_wiz.c
+@@ -64,6 +64,7 @@
+ #include "recycle.h"
+ #include "tables.h"
+ #include "lookup.h"
++#include "turkish_suffix_helper.h"
+ 
+ int unlink(const char *pathname);
+ 
+@@ -700,9 +701,15 @@ void do_outfit ( CHAR_DATA *ch, char *argument )
+     obj->condition = 100;
+     obj_to_char( obj, ch );
+ 
+-    send_to_char("Tanrılar sana bazı eşyalar bahşediyor.\n\r",ch);
+-    send_to_char("Taşıdığın eşyaları görüntülemek için 'envanter' yaz.\n\r",ch);
+-    send_to_char("Eşyalarını giymek için 'giy <eşya adı>' yazmayı dene.\n\r\n\r",ch);
++    {
++      char buf[MAX_STRING_LENGTH];
++      sprintf( buf, "%s sana bazı %s bahşediyor.\n\r", TR_PLU("tanrı"), TR_PLU("eşya") );
++      send_to_char( buf, ch );
++      sprintf( buf, "Taşıdığın %s görüntülemek için 'envanter' yaz.\n\r", TR_PLU("eşya") );
++      send_to_char( buf, ch );
++      sprintf( buf, "%s giymek için 'giy <eşya adı>' yazmayı dene.\n\r\n\r", TR_PLU("eşya") );
++      send_to_char( buf, ch );
++    }
+ }
+ 
+ 
+diff --git a/src/comm.c b/src/comm.c
+index c3a9803..1a239d6 100644
+--- a/src/comm.c
++++ b/src/comm.c
+@@ -87,6 +87,7 @@
+ #include "interp.h"
+ #include "recycle.h"
+ #include "tables.h"
++#include "turkish_morphology.h"
+ 
+ #include <sys/wait.h>
+ #include <stdlib.h>
+@@ -3110,9 +3111,75 @@ z : birisinden					*/
+ 				case 'Z':
+ 					i=ekler (to,vch, str);
+ 					break;
+-				case 'n': i = PERS( ch,  to  );
++				case 'n':
++					// Check for multi-character Turkish suffix codes like $nA, $nG, etc.
++					if (*(str+1) != '\0' && strchr("AGDLZ", *(str+1))) {
++						// Handle $nA, $nG, $nD, $nL, $nZ (character suffixes)
++						char suffix_char = *(str+1);
++						enum TurkishSuffixType suffix_type;
++						
++						switch(suffix_char) {
++							case 'A': suffix_type = SUFFIX_ACCUSATIVE; break;
++							case 'G': suffix_type = SUFFIX_GENITIVE; break;
++							case 'D': suffix_type = SUFFIX_DATIVE; break;
++							case 'L': suffix_type = SUFFIX_LOCATIVE; break;
++							case 'Z': suffix_type = SUFFIX_ABLATIVE; break;
++						}
++						
++						if (ch && can_see(to, ch)) {
++							static char suffix_buf4[MAX_STRING_LENGTH];
++							bool is_proper = !IS_NPC(ch); // Player characters are proper nouns
++							const char *name = PERS(ch, to);
++							
++							if (generate_turkish_suffixed_word(name, suffix_type,
++															 is_proper, suffix_buf4, sizeof(suffix_buf4)) == 0) {
++								i = suffix_buf4;
++							} else {
++								i = name; // fallback
++							}
++						} else {
++							i = "birisi";
++						}
++						str++; // Skip the suffix character
++					} else {
++						// Original single character handling
++						i = PERS( ch,  to  );
++					}
+ 					break;
+-                case 'N': i = PERS( vch, to  );
++				            case 'N':
++					// Check for multi-character Turkish suffix codes like $NA, $NG, etc.
++					if (*(str+1) != '\0' && strchr("AGDLZ", *(str+1))) {
++						// Handle $NA, $NG, $ND, $NL, $NZ (second character suffixes)
++						char suffix_char = *(str+1);
++						enum TurkishSuffixType suffix_type;
++						
++						switch(suffix_char) {
++							case 'A': suffix_type = SUFFIX_ACCUSATIVE; break;
++							case 'G': suffix_type = SUFFIX_GENITIVE; break;
++							case 'D': suffix_type = SUFFIX_DATIVE; break;
++							case 'L': suffix_type = SUFFIX_LOCATIVE; break;
++							case 'Z': suffix_type = SUFFIX_ABLATIVE; break;
++						}
++						
++						if (vch && can_see(to, vch)) {
++							static char suffix_buf5[MAX_STRING_LENGTH];
++							bool is_proper = !IS_NPC(vch); // Player characters are proper nouns
++							const char *name = PERS(vch, to);
++							
++							if (generate_turkish_suffixed_word(name, suffix_type,
++															 is_proper, suffix_buf5, sizeof(suffix_buf5)) == 0) {
++								i = suffix_buf5;
++							} else {
++								i = name; // fallback
++							}
++						} else {
++							i = "birisi";
++						}
++						str++; // Skip the suffix character
++					} else {
++						// Original single character handling
++						i = PERS( vch, to  );
++					}
+ 					break;
+ 				case 'C':
+ 				i = va_arg(colors,char *);
+@@ -3123,26 +3190,125 @@ z : birisinden					*/
+ 				//else i = "";
+ 				break;
+                 case 'p':
+-                    i = can_see_obj( to, obj1 )
+-                            ? obj1->short_descr
+-                            : "birşey";
++                    // Check for multi-character Turkish suffix codes like $pA, $pG, etc.
++                    if (*(str+1) != '\0' && strchr("AGDLZ", *(str+1))) {
++                        // Handle $pA, $pG, $pD, $pL, $pZ (object suffixes)
++                        char suffix_char = *(str+1);
++                        enum TurkishSuffixType suffix_type;
++                        
++                        switch(suffix_char) {
++                            case 'A': suffix_type = SUFFIX_ACCUSATIVE; break;
++                            case 'G': suffix_type = SUFFIX_GENITIVE; break;
++                            case 'D': suffix_type = SUFFIX_DATIVE; break;
++                            case 'L': suffix_type = SUFFIX_LOCATIVE; break;
++                            case 'Z': suffix_type = SUFFIX_ABLATIVE; break;
++                        }
++                        
++                        if (obj1 && can_see_obj(to, obj1)) {
++                            static char suffix_buf[MAX_STRING_LENGTH];
++                            bool is_proper = false; // Objects are common nouns
++                            
++                            if (generate_turkish_suffixed_word(obj1->short_descr, suffix_type,
++                                                             is_proper, suffix_buf, sizeof(suffix_buf)) == 0) {
++                                i = suffix_buf;
++                            } else {
++                                i = obj1->short_descr; // fallback
++                            }
++                        } else {
++                            i = "birşey";
++                        }
++                        str++; // Skip the suffix character
++                    } else {
++                        // Original single character handling
++                        i = can_see_obj( to, obj1 )
++                                ? obj1->short_descr
++                                : "birşey";
++                    }
+                     break;
+ 
+                 case 'P':
+-                    i = can_see_obj( to, obj2 )
+-                            ? obj2->short_descr
+-                            : "birşey";
++                    // Check for multi-character Turkish suffix codes like $PA, $PG, etc.
++                    if (*(str+1) != '\0' && strchr("AGDLZ", *(str+1))) {
++                        // Handle $PA, $PG, $PD, $PL, $PZ (second object suffixes)
++                        char suffix_char = *(str+1);
++                        enum TurkishSuffixType suffix_type;
++                        
++                        switch(suffix_char) {
++                            case 'A': suffix_type = SUFFIX_ACCUSATIVE; break;
++                            case 'G': suffix_type = SUFFIX_GENITIVE; break;
++                            case 'D': suffix_type = SUFFIX_DATIVE; break;
++                            case 'L': suffix_type = SUFFIX_LOCATIVE; break;
++                            case 'Z': suffix_type = SUFFIX_ABLATIVE; break;
++                        }
++                        
++                        if (obj2 && can_see_obj(to, obj2)) {
++                            static char suffix_buf2[MAX_STRING_LENGTH];
++                            bool is_proper = false; // Objects are common nouns
++                            
++                            if (generate_turkish_suffixed_word(obj2->short_descr, suffix_type,
++                                                             is_proper, suffix_buf2, sizeof(suffix_buf2)) == 0) {
++                                i = suffix_buf2;
++                            } else {
++                                i = obj2->short_descr; // fallback
++                            }
++                        } else {
++                            i = "birşey";
++                        }
++                        str++; // Skip the suffix character
++                    } else {
++                        // Original single character handling
++                        i = can_see_obj( to, obj2 )
++                                ? obj2->short_descr
++                                : "birşey";
++                    }
+                     break;
+ 
+                 case 'd':
+-                    if ( arg2 == NULL || ((char *) arg2)[0] == '\0' )
+-                    {
+-                        i = "kapı";
+-                    }
+-                    else
+-                    {
+-                        one_argument( (char *) arg2, fname );
+-                        i = fname;
++                    // Check for multi-character Turkish suffix codes like $dA, $dG, etc.
++                    if (*(str+1) != '\0' && strchr("AGDLZ", *(str+1))) {
++                        // Handle $dA, $dG, $dD, $dL, $dZ (direction suffixes)
++                        char suffix_char = *(str+1);
++                        enum TurkishSuffixType suffix_type;
++                        
++                        switch(suffix_char) {
++                            case 'A': suffix_type = SUFFIX_ACCUSATIVE; break;
++                            case 'G': suffix_type = SUFFIX_GENITIVE; break;
++                            case 'D': suffix_type = SUFFIX_DATIVE; break;
++                            case 'L': suffix_type = SUFFIX_LOCATIVE; break;
++                            case 'Z': suffix_type = SUFFIX_ABLATIVE; break;
++                        }
++                        
++                        static char suffix_buf3[MAX_STRING_LENGTH];
++                        bool is_proper = false; // Directions are common nouns
++                        
++                        if ( arg2 == NULL || ((char *) arg2)[0] == '\0' ) {
++                            if (generate_turkish_suffixed_word("kapı", suffix_type,
++                                                             is_proper, suffix_buf3, sizeof(suffix_buf3)) == 0) {
++                                i = suffix_buf3;
++                            } else {
++                                i = "kapı"; // fallback
++                            }
++                        } else {
++                            one_argument( (char *) arg2, fname );
++                            if (generate_turkish_suffixed_word(fname, suffix_type,
++                                                             is_proper, suffix_buf3, sizeof(suffix_buf3)) == 0) {
++                                i = suffix_buf3;
++                            } else {
++                                i = fname; // fallback
++                            }
++                        }
++                        str++; // Skip the suffix character
++                    } else {
++                        // Original single character handling
++                        if ( arg2 == NULL || ((char *) arg2)[0] == '\0' )
++                        {
++                            i = "kapı";
++                        }
++                        else
++                        {
++                            one_argument( (char *) arg2, fname );
++                            i = fname;
++                        }
+                     }
+                     break;
+ 				}
+diff --git a/src/const.c b/src/const.c
+index fcd9231..ac7ceaa 100644
+--- a/src/const.c
++++ b/src/const.c
+@@ -2523,7 +2523,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
+ 	spell_absorb,		TAR_CHAR_SELF,		POS_STANDING,
+ 	&gsn_absorb,		SLOT(707),	100,	12,
+   "",		"Çevrendeki enerji alanı yokoluyor!",
+-	"$p'in çevresindeki enerji alanı yokoluyor.",
++	"$pG çevresindeki enerji alanı yokoluyor.",
+  	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
+     },
+ 
+@@ -2676,7 +2676,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
+ 	spell_bless,		TAR_OBJ_CHAR_DEF,	POS_STANDING,
+ 	&gsn_bless,		SLOT( 3),	 5,	12,
+   "",			"Kutsallığını yitiriyorsun.",
+-	"$p'in kutsal aylası yokoluyor.", CABAL_NONE ,
++	"$pG kutsal aylası yokoluyor.", CABAL_NONE ,
+ 	RACE_NONE, ALIGN_NONE, GROUP_BENEDICTIONS
+     },
+ 
+@@ -4233,7 +4233,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
+ 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
+ 	spell_shielding,	TAR_CHAR_OFFENSIVE,	POS_STANDING,
+ 	&gsn_shielding,		SLOT(591),	250,	12,
+-  "",			"Gerçek Kaynak'tan uzaklaştığını hissediyorsun.",
++  "",			"Gerçek KaynakZ uzaklaştığını hissediyorsun.",
+ 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
+     },
+ 
+diff --git a/src/magic.c b/src/magic.c
+index 6750cc3..2aed549 100644
+--- a/src/magic.c
++++ b/src/magic.c
+@@ -60,6 +60,7 @@
+ #include "merc.h"
+ #include "magic.h"
+ #include "recycle.h"
++#include "turkish_suffix_helper.h"
+ 
+ /* command procedures needed */
+ DECLARE_DO_FUN(do_look		);
+@@ -1244,9 +1245,13 @@ void spell_call_lightning( int sn, int level,CHAR_DATA *ch,void *vo,int target)
+ 
+     dam = dice(level, 14);
+ 
+-    send_to_char( "Tanrıların şimşeği düşmanlarını vuruyor!\n\r", ch );
+-    act( "$n düşmanlarını vurması için şimşek çağırıyor!",
+-	ch, NULL, NULL, TO_ROOM );
++    {
++    char buf[MAX_STRING_LENGTH];
++    sprintf(buf, "Tanrıların şimşeği %s vuruyor!\n\r", TR_ACC_PLU("düşman"));
++    send_to_char( buf, ch );
++    sprintf(buf, "$n %s vurması için şimşek çağırıyor!", TR_ACC_PLU("düşman"));
++    act( buf, ch, NULL, NULL, TO_ROOM );
++    }
+ 
+     for ( vch = char_list; vch != NULL; vch = vch_next )
+     {
+@@ -1263,9 +1268,13 @@ void spell_call_lightning( int sn, int level,CHAR_DATA *ch,void *vo,int target)
+ 
+ 	    if (CAN_DETECT(vch, ADET_GROUNDING))
+ 	    {
+-        send_to_char("Elektrik düşmanlarında yitip gidiyor.\n\r",vch);
+-    		act("Bir yıldırım $S düşmanlarında yitip gidiyor.\n\r",
+-			ch, NULL, vch, TO_ROOM);
++        {
++        char buf[MAX_STRING_LENGTH];
++        sprintf(buf, "Elektrik %s yitip gidiyor.\n\r", TR_LOC_PLU("düşman"));
++        send_to_char(buf,vch);
++        sprintf(buf, "Bir yıldırım $S %s yitip gidiyor.\n\r", TR_LOC_PLU("düşman"));
++        act(buf, ch, NULL, vch, TO_ROOM);
++        }
+ 		continue;
+ 	    }
+ 
+@@ -1359,6 +1368,7 @@ void spell_cancellation( int sn, int level, CHAR_DATA *ch, void *vo,int target )
+     (void)target;
+     CHAR_DATA *victim = (CHAR_DATA *) vo;
+     bool found = FALSE;
++    char buf[MAX_STRING_LENGTH];
+ 
+     level += 2;
+ 
+@@ -1366,7 +1376,8 @@ void spell_cancellation( int sn, int level, CHAR_DATA *ch, void *vo,int target )
+ 	 !(IS_AFFECTED(ch, AFF_CHARM) && ch->master == victim) ) ||
+ 	(IS_NPC(ch) && !IS_NPC(victim)) )
+     {
+-      send_to_char("Başarısız oldun, BÜYÜ DEFET'i dene.\n\r",ch);
++      sprintf(buf, "Başarısız oldun, %s dene.\n\r", TR_ACC("BÜYÜ DEFET"));
++      send_to_char(buf, ch);
+ 	return;
+     }
+ 
+@@ -1621,9 +1632,13 @@ void spell_chain_lightning(int sn,int level,CHAR_DATA *ch, void *vo,int target)
+ 
+     if (CAN_DETECT(victim, ADET_GROUNDING))
+     {
+-      send_to_char("Elektrik düşmanlarında sönüyor.\n\r",victim);
+-    	act("Bir yıldırım $S düşmanlarında sönüyor.\n\r",
+-		ch, NULL, victim, TO_ROOM);
++      {
++      char buf[MAX_STRING_LENGTH];
++      sprintf(buf, "Elektrik %s sönüyor.\n\r", TR_LOC_PLU("düşman"));
++      send_to_char(buf,victim);
++      sprintf(buf, "Bir yıldırım $S %s sönüyor.\n\r", TR_LOC_PLU("düşman"));
++      act(buf, ch, NULL, victim, TO_ROOM);
++      }
+     }
+     else
+     {
+@@ -1690,9 +1705,13 @@ void spell_chain_lightning(int sn,int level,CHAR_DATA *ch, void *vo,int target)
+ 
+ 	     if (CAN_DETECT(tmp_vict, ADET_GROUNDING))
+ 	     {
+-         send_to_char("Elektrik düşmanlarında sönüyor.\n\r",tmp_vict);
+-     		act("Bir yıldırım $S düşmanlarında sönüyor.\n\r",
+-			ch, NULL, tmp_vict, TO_ROOM);
++         {
++         char buf[MAX_STRING_LENGTH];
++         sprintf(buf, "Elektrik %s sönüyor.\n\r", TR_LOC_PLU("düşman"));
++         send_to_char(buf,tmp_vict);
++         sprintf(buf, "Bir yıldırım $S %s sönüyor.\n\r", TR_LOC_PLU("düşman"));
++         act(buf, ch, NULL, tmp_vict, TO_ROOM);
++         }
+ 	     }
+ 	     else
+ 	     {
+@@ -1725,9 +1744,10 @@ void spell_chain_lightning(int sn,int level,CHAR_DATA *ch, void *vo,int target)
+ 
+ 	  if (CAN_DETECT(ch, ADET_GROUNDING))
+ 	  {
+-      send_to_char("Elektrik düşmanlarında sönüyor.\n\r",ch);
+-  		act("Bir yıldırım $S düşmanlarında sönüyor.\n\r",
+-			ch, NULL, ch, TO_ROOM);
++      sprintf(buf, "Elektrik %s sönüyor.\n\r", TR_LOC_PLU("düşman"));
++      send_to_char(buf, ch);
++      sprintf(buf, "Bir yıldırım $S %s sönüyor.\n\r", TR_LOC_PLU("düşman"));
++      act(buf, ch, NULL, ch, TO_ROOM);
+ 	  }
+ 	  else
+ 	  {
+@@ -2180,7 +2200,7 @@ void spell_curse( int sn, int level, CHAR_DATA *ch, void *vo,int target )
+ 
+ 	if (obj->wear_loc != WEAR_NONE)
+ 	{
+-    act("Önce $p'yi çıkarmalısın.",ch,obj,NULL,TO_CHAR);
++    act("Önce $pA çıkarmalısın.",ch,obj,NULL,TO_CHAR);
+ 	    return;
+ 	}
+ 
+@@ -2312,13 +2332,17 @@ void spell_detect_evil( int sn, int level, CHAR_DATA *ch, void *vo,int target )
+     (void)target;
+     CHAR_DATA *victim = (CHAR_DATA *) vo;
+     AFFECT_DATA af;
++    char buf[MAX_STRING_LENGTH];
+ 
+     if ( CAN_DETECT(victim, DETECT_EVIL) )
+     {
+ 	if (victim == ch)
+-  send_to_char("Zaten kem'i saptıyorsun.\n\r",ch);
+-else
+-  act("$N zaten kem'i saptıyor.",ch,NULL,victim,TO_CHAR);
++	{
++	    sprintf(buf, "Zaten %s saptıyorsun.\n\r", TR_ACC("kem"));
++	    send_to_char(buf, ch);
++	}
++	else
++	    act("$N zaten kemA saptıyor.",ch,NULL,victim,TO_CHAR);
+ 	return;
+     }
+     af.where     = TO_DETECTS;
+@@ -3386,7 +3410,7 @@ void spell_fireproof(int sn, int level, CHAR_DATA *ch, void *vo,int target)
+ 
+     affect_to_obj(obj,&af);
+ 
+-    act("$p'yi ateşe karşı koruyorsun.",ch,obj,NULL,TO_CHAR);
++    act("$pA ateşe karşı koruyorsun.",ch,obj,NULL,TO_CHAR);
+     act("$p koruyucu bir aurayla çevrelendi.",ch,obj,NULL,TO_ROOM);
+ }
+ 
+@@ -3778,10 +3802,10 @@ void spell_heat_metal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
+ 			number_range(1,2 * get_curr_stat(victim,STAT_DEX))
+ 		    &&  remove_obj( victim, obj_lose, TRUE ))
+ 		    {
+-          act("$n bağırarak $p'yi yere atıyor!",
+-    			    victim,obj_lose,NULL,TO_ROOM);
+-    			act("Seni yakmadan önce $p'yi çıkarıp atıyorsun.",
+-			    victim,obj_lose,NULL,TO_CHAR);
++          act("$n bağırarak $pA yere atıyor!",
++           victim,obj_lose,NULL,TO_ROOM);
++       act("Seni yakmadan önce $pA çıkarıp atıyorsun.",
++       victim,obj_lose,NULL,TO_CHAR);
+ 			dam += (number_range(1,obj_lose->level) / 3);
+ 			obj_from_char(obj_lose);
+ 			obj_to_room(obj_lose, victim->in_room);
+@@ -3800,10 +3824,10 @@ void spell_heat_metal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
+ 		{
+ 		    if (can_drop_obj(victim,obj_lose))
+ 		    {
+-          act("$n bağırarak $p'yi yere atıyor!",
+-    			    victim,obj_lose,NULL,TO_ROOM);
+-    			act("Seni yakmadan önce $p'yi çıkarıp atıyorsun.",
+-			    victim,obj_lose,NULL,TO_CHAR);
++          act("$n bağırarak $pA yere atıyor!",
++           victim,obj_lose,NULL,TO_ROOM);
++       act("Seni yakmadan önce $pA çıkarıp atıyorsun.",
++       victim,obj_lose,NULL,TO_CHAR);
+ 			dam += (number_range(1,obj_lose->level) / 6);
+ 			obj_from_char(obj_lose);
+ 			obj_to_room(obj_lose, victim->in_room);
+@@ -3849,10 +3873,10 @@ void spell_heat_metal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
+ 		{
+ 		    if (can_drop_obj(victim,obj_lose))
+ 		    {
+-          act("$n kor halindeki $p'yi yere atıyor!",
+-    			    victim,obj_lose,NULL,TO_ROOM);
+-    			act("Seni yakmadan önce $p'yi çıkarıp atıyorsun.",
+-			    victim,obj_lose,NULL,TO_CHAR);
++          act("$n kor halindeki $pA yere atıyor!",
++           victim,obj_lose,NULL,TO_ROOM);
++       act("Seni yakmadan önce $pA çıkarıp atıyorsun.",
++       victim,obj_lose,NULL,TO_CHAR);
+ 			dam += (number_range(1,obj_lose->level) / 6);
+ 			obj_from_char(obj_lose);
+ 			obj_to_room(obj_lose, victim->in_room);
+@@ -4010,7 +4034,7 @@ void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
+     case ITEM_SCROLL:
+     case ITEM_POTION:
+     case ITEM_PILL:
+-    sprintf( buf, "Seviye %d büyüleri:", obj->value[0] );
++    sprintf( buf, "Seviye %d %s:", obj->value[0], TR_PLU("büyü") );
+ 	send_to_char( buf, ch );
+ 
+ 	if ( obj->value[1] >= 0 && obj->value[1] < MAX_SKILL )
+@@ -4324,13 +4348,15 @@ void spell_lightning_bolt(int sn,int level,CHAR_DATA *ch,void *vo,int target)
+ {
+     (void)target;
+     CHAR_DATA *victim = (CHAR_DATA *) vo;
++    char buf[MAX_STRING_LENGTH];
+     int dam;
+ 
+     if (CAN_DETECT(victim, ADET_GROUNDING))
+     {
+-      send_to_char("Elektrik düşmanlarında sönüp gidiyor.\n\r",victim);
+-    	act("Bir yıldırım $S düşmanlarında sönüp gidiyor.\n\r",
+-		ch, NULL, victim, TO_ROOM);
++      sprintf(buf, "Elektrik %s sönüp gidiyor.\n\r", TR_LOC_PLU("düşman"));
++      send_to_char(buf, victim);
++      sprintf(buf, "Bir yıldırım $S %s sönüp gidiyor.\n\r", TR_LOC_PLU("düşman"));
++      act(buf, ch, NULL, victim, TO_ROOM);
+ 	return;
+     }
+     dam = dice(level,4) + 12;
+@@ -4636,7 +4662,7 @@ void spell_poison( int sn, int level, CHAR_DATA *ch, void *vo, int target )
+ 	    ||  IS_WEAPON_STAT(obj,WEAPON_HOLY)
+ 	    ||  IS_OBJ_STAT(obj,ITEM_BLESS) || IS_OBJ_STAT(obj,ITEM_BURN_PROOF))
+ 	    {
+-        act("$p'yi zehirleyemezsin.",ch,obj,NULL,TO_CHAR);
++        act("$pA zehirleyemezsin.",ch,obj,NULL,TO_CHAR);
+ 		return;
+ 	    }
+ 
+@@ -4659,7 +4685,7 @@ void spell_poison( int sn, int level, CHAR_DATA *ch, void *vo, int target )
+ 	    return;
+ 	}
+ 
+-  act("$p'yi zehirleyemezsin.",ch,obj,NULL,TO_CHAR);
++  act("$pA zehirleyemezsin.",ch,obj,NULL,TO_CHAR);
+ 	return;
+     }
+ 
+@@ -4796,6 +4822,7 @@ void spell_recharge( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+     (void)sn;
+     (void)target;
+     OBJ_DATA *obj = (OBJ_DATA *) vo;
++    char buf[MAX_STRING_LENGTH];
+     int chance, percent;
+ 
+     if (obj->item_type != ITEM_WAND && obj->item_type != ITEM_STAFF)
+@@ -4806,7 +4833,8 @@ void spell_recharge( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+ 
+     if (obj->value[3] >= 3 * level / 2)
+     {
+-      send_to_char("Bu iş yeteneklerini aşar.\n\r",ch);
++      sprintf(buf, "Bu iş %s aşar.\n\r", TR_ACC_PLU("yetenek"));
++      send_to_char(buf, ch);
+ 	return;
+     }
+ 
+@@ -5253,7 +5281,7 @@ void spell_ventriloquate( int sn, int level, CHAR_DATA *ch,void *vo,int target)
+     target_name = one_argument( target_name, speaker );
+ 
+     sprintf( buf1, "%s '%s' dedi.\n\r",              speaker, target_name );
+-    sprintf( buf2, "Biri %s'e zorla '%s' dedirtiyor.\n\r", speaker, target_name );
++    sprintf( buf2, "Biri %s zorla '%s' dedirtiyor.\n\r", TR_DAT(speaker), target_name );
+     buf1[0] = UPPER(buf1[0]);
+ 
+     for ( vch = ch->in_room->people; vch != NULL; vch = vch->next_in_room )
+@@ -6069,7 +6097,7 @@ void spell_astral_walk( int sn, int level, CHAR_DATA *ch, void *vo,int target )
+ 
+ 
+   act("$n bir ışık parlamasıyla yokoluyor!",ch,NULL,NULL,TO_ROOM);
+-  sprintf(buf,"Bir yıldız yolculuğuyla %s'e gidiyorsun.\n\r",victim->name);
++  sprintf(buf,"Bir yıldız yolculuğuyla %s gidiyorsun.\n\r",TR_DAT(victim->name));
+     send_to_char(buf,ch);
+     char_from_room(ch);
+     char_to_room(ch,victim->in_room);
+@@ -6127,7 +6155,7 @@ void spell_mist_walk( int sn, int level, CHAR_DATA *ch, void *vo,int target )
+     char_from_room(ch);
+     char_to_room(ch,victim->in_room);
+ 
+-    act("Parlayan sis bulutu sizi içine çekiyor, sonra $n'i açığa çıkarmak için geri çekiliyor!",ch,NULL,NULL,TO_ROOM);
++    act("Parlayan sis bulutu sizi içine çekiyor, sonra $nM açığa çıkarmak için geri çekiliyor!",ch,NULL,NULL,TO_ROOM);
+     do_look(ch,(char*)"auto");
+ 
+ }
+@@ -6273,8 +6301,13 @@ void spell_hurricane(int sn,int level,CHAR_DATA *ch,void *vo,int target)
+     char buf[MAX_STRING_LENGTH];
+     int dam,hp_dam,dice_dam,hpch;
+ 
+-    act("$n yıldırım tanrılarından yardım istiyor.",ch,NULL,NULL,TO_NOTVICT);
+-    act("Yıldırım tanrılarından yardım istiyorsun.",ch,NULL,NULL,TO_CHAR);
++    {
++      char buf[MAX_STRING_LENGTH];
++      sprintf( buf, "$n yıldırım %s yardım istiyor.", TR_PLU("tanrı") );
++      act( buf, ch, NULL, NULL, TO_NOTVICT );
++      sprintf( buf, "Yıldırım %s yardım istiyorsun.", TR_PLU("tanrı") );
++      act( buf, ch, NULL, NULL, TO_CHAR );
++    }
+ 
+     hpch = UMAX(16,ch->hit);
+     hp_dam = number_range(hpch/15+1,8);
+@@ -7129,7 +7162,8 @@ void spell_animate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target
+   if (!(obj->item_type == ITEM_WEAPON ||
+          obj->item_type == ITEM_ARMOR))
+   {
+-    send_to_char("Yalnız zırhları ve silahları canlandırabilirsin.\n\r",ch);
++    sprintf( buf, "Yalnız zırhları ve %s canlandırabilirsin.\n\r", TR_ACC_PLU("silah") );
++    send_to_char( buf, ch );
+         return;
+   }
+ 
+@@ -7152,7 +7186,8 @@ void spell_animate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target
+ 	|| CAN_WEAR(obj, ITEM_WEAR_HANDS)
+ 	|| CAN_WEAR(obj, ITEM_WEAR_SHIELD)) )
+   {
+-    send_to_char( "Başka tip eşyaları canlandırabilirsin.\n\r", ch);
++    sprintf(buf, "Başka tip %s canlandırabilirsin.\n\r", TR_ACC_PLU("eşya"));
++    send_to_char(buf, ch);
+       return;
+   }
+ 
+@@ -7232,8 +7267,8 @@ void spell_animate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target
+   af.bitvector	= 0;
+   affect_to_char(ch, &af);
+ 
+-  act("Gücünle $p'ye yaşam veriyorsun!\n\r", ch, obj, NULL, TO_CHAR);
+-  act("$n gücüyle $p'ye yaşam veriyor!\n\r", ch, obj, NULL, TO_ROOM);
++  act("Gücünle $pD yaşam veriyorsun!\n\r", ch, obj, NULL, TO_CHAR);
++  act("$n gücüyle $pD yaşam veriyor!\n\r", ch, obj, NULL, TO_ROOM);
+ 
+   extract_obj( obj );
+ 	return;
+@@ -7343,7 +7378,7 @@ void spell_earthmaw( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+     char buf[MAX_STRING_LENGTH];
+     int dam;
+ 
+-    sprintf(buf,"%s'in altındaki toprağı titretiyorsun.\n\r",victim->name);
++    sprintf(buf,"%s altındaki toprağı titretiyorsun.\n\r",TR_GEN(victim->name));
+     send_to_char(buf, ch);
+     act( "$n altındaki toprağı titretiyor!.", ch, NULL, victim, TO_VICT );
+     if (IS_AFFECTED(victim,AFF_FLYING))
+@@ -7500,7 +7535,7 @@ send_to_char("Bir an için uyuşukluk hissediyorsun.\n\r",victim);
+ 	if (can_drop_obj(victim,obj)
+ 	    &&  remove_obj(victim,obj,TRUE))
+ 	{
+-    act("$n $p'yi daha fazla taşıyamayarak düşürüyor.", victim,obj,NULL,TO_ROOM);
++    act("$n $pA daha fazla taşıyamayarak düşürüyor.", victim,obj,NULL,TO_ROOM);
+ 	  send_to_char("Çifte silahını taşıyamayarak düşürüyorsun!\n\r", victim);
+ 	  obj_from_char(obj);
+ 	  obj_to_room(obj,victim->in_room);
+@@ -7511,7 +7546,7 @@ send_to_char("Bir an için uyuşukluk hissediyorsun.\n\r",victim);
+ 	if (can_drop_obj(victim,obj)
+ 	    &&  remove_obj(victim,obj,TRUE))
+ 	{
+-    act("$n $p'yi daha fazla taşıyamayarak düşürüyor.", victim,obj,NULL,TO_ROOM);
++    act("$n $pA daha fazla taşıyamayarak düşürüyor.", victim,obj,NULL,TO_ROOM);
+ 	  send_to_char("Silahını daha fazla taşıyamayarak düşürüyorsun!\n\r", victim);
+ 	  obj_from_char(obj);
+ 	  obj_to_room(obj,victim->in_room);
+diff --git a/src/magic2.c b/src/magic2.c
+index 3e69bce..d3dbf2d 100644
+--- a/src/magic2.c
++++ b/src/magic2.c
+@@ -60,6 +60,7 @@
+ #include "merc.h"
+ #include "magic.h"
+ #include "recycle.h"
++#include "turkish_suffix_helper.h"
+ 
+ DECLARE_DO_FUN(do_scan2);
+ /* command procedures needed */
+@@ -1253,7 +1254,8 @@ void spell_mirror( int sn, int level, CHAR_DATA *ch, void *vo, int target )
+   int order;
+ 
+   if (IS_NPC(victim)) {
+-    send_to_char("Yalnız oyuncular aynalanabilir.\n\r",ch);
++    sprintf( long_buf, "Yalnız %s aynalanabilir.\n\r", TR_PLU("oyuncu") );
++    send_to_char( long_buf, ch );
+     return;
+   }
+ 
+@@ -3239,9 +3241,9 @@ void spell_animate_dead(int sn,int level, CHAR_DATA *ch, void *vo,int target )
+ 		}
+ 	 }
+ 	}
+-  sprintf(buf, "%s'in hortlak bedeni", buf3);
++  sprintf(buf, "%s hortlak bedeni", TR_GEN(buf3));
+   undead->short_descr = str_dup(buf);
+-  sprintf(buf, "%s'in hortlak bedeni yürürken sendeliyor.\n\r", buf3);
++  sprintf(buf, "%s hortlak bedeni yürürken sendeliyor.\n\r", TR_GEN(buf3));
+   undead->long_descr = str_dup(buf);
+ 
+   for(obj2 = obj->contains;obj2;obj2=next)
+@@ -3262,7 +3264,7 @@ void spell_animate_dead(int sn,int level, CHAR_DATA *ch, void *vo,int target )
+   affect_to_char( ch, &af );
+ 
+   send_to_char("Mistik bir güçle onu canlandırıyorsun!\n\r",ch);
+-  sprintf(buf,"Mistik bir güçle %s %s'i canlandırıyor!",ch->name,obj->name);
++  sprintf(buf,"Mistik bir güçle %s %s canlandırıyor!",ch->name,TR_ACC(obj->name));
+   act(buf,ch,NULL,NULL,TO_ROOM);
+   sprintf(buf,"%s sana bakarken onu rahatsız etmenin bedelini ödetmeyi planlıyor!",obj->short_descr);
+   act(buf,ch,NULL,NULL,TO_CHAR);
+@@ -3625,7 +3627,7 @@ void spell_shielding( int sn, int level, CHAR_DATA *ch, void *vo ,int target)
+     affect_join( victim, &af );
+ 
+     send_to_char( "Birşeylerle bağlantını yitirdiğini hissediyorsun.\n\r",victim );
+-    act("$M Gerçek Kaynak'tan ayırıyorsun.", ch, NULL, victim, TO_CHAR);
++    act("$MA Gerçek KaynakZ ayırıyorsun.", ch, NULL, victim, TO_CHAR);
+     return;
+ }
+ 
+@@ -3924,7 +3926,7 @@ void spell_magic_jar ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
+ 	fire->cost = 0;
+ 	obj_to_char( fire , ch );
+  SET_BIT(victim->act,PLR_NO_EXP);
+- sprintf(buf,"%s'in ruhunu yakalayıp şişenin içine koyuyorsun.\n\r",victim->name);
++ sprintf(buf,"%s ruhunu yakalayıp şişenin içine koyuyorsun.\n\r",TR_GEN(victim->name));
+  send_to_char( buf , ch);
+  return;
+ }
+@@ -4308,10 +4310,10 @@ if ( IS_SET(pexit->exit_info, EX_NOPASS) )
+ 	      return; }
+     chance = ch->level / 5 + get_curr_stat(ch,STAT_INT) + get_skill(ch,sn) / 5;
+ 
+-    act("$d'yi çalıyor ve açmaya çalışıyorsun!",
+-		ch,NULL,pexit->keyword,TO_CHAR);
+-    act("$n $d'yi çalıyor ve açmaya çalışıyor!",
+-		ch,NULL,pexit->keyword,TO_ROOM);
++    act("$dA çalıyor ve açmaya çalışıyorsun!",
++  ch,NULL,pexit->keyword,TO_CHAR);
++    act("$n $dA çalıyor ve açmaya çalışıyor!",
++  ch,NULL,pexit->keyword,TO_ROOM);
+ 
+     if (room_dark(ch->in_room))
+ 		chance /= 2;
+@@ -4321,8 +4323,8 @@ if ( IS_SET(pexit->exit_info, EX_NOPASS) )
+      {
+ 	REMOVE_BIT(pexit->exit_info, EX_LOCKED);
+ 	REMOVE_BIT(pexit->exit_info, EX_CLOSED);
+-  act("$n $d'yi çalıyor ve kapı açılıyor.", ch, NULL,
+-		pexit->keyword, TO_ROOM );
++  act("$n $dA çalıyor ve kapı açılıyor.", ch, NULL,
++  pexit->keyword, TO_ROOM );
+ 	send_to_char( "Kapıyı açmayı başardın.\n\r", ch );
+ 
+ 	/* open the other side */
+@@ -4340,10 +4342,10 @@ if ( IS_SET(pexit->exit_info, EX_NOPASS) )
+      }
+     else
+      {
+-       act("$d'yi açamadın!",
+-     	    ch,NULL,pexit->keyword,TO_CHAR);
+-     	act("$n $d'yi açamadı.",
+-	    ch,NULL,pexit->keyword,TO_ROOM);
++       act("$dA açamadın!",
++          ch,NULL,pexit->keyword,TO_CHAR);
++      act("$n $dA açamadı.",
++     ch,NULL,pexit->keyword,TO_ROOM);
+      }
+     return;
+     }
+@@ -4541,7 +4543,11 @@ void spell_insanity ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
+ 
+     if (IS_NPC(ch))
+ 	{
+-    send_to_char("Bu büyü oyunculara yapılabilir.\n\r",ch);
++    {
++        char buf[MAX_STRING_LENGTH];
++        sprintf( buf, "Bu büyü sadece %s yapılabilir.\n\r", TR_DAT_PLU("oyuncu") );
++        send_to_char( buf, ch );
++    }
+ 	 return;
+ 	}
+ 
+@@ -4650,7 +4656,7 @@ void spell_severity_force( int sn, int level, CHAR_DATA *ch, void *vo,int target
+     char buf[MAX_STRING_LENGTH];
+     int dam;
+ 
+-    sprintf(buf,"Arzı %s'e doğru kırıyorsun.\n\r",victim->name);
++    sprintf(buf,"Arzı %s doğru kırıyorsun.\n\r",TR_DAT(victim->name));
+     send_to_char(buf, ch);
+     act("$n arzı sana doğru kırıyor!", ch, NULL, victim, TO_VICT );
+     if (IS_AFFECTED(victim,AFF_FLYING))
+@@ -5255,7 +5261,11 @@ void spell_deadly_venom(int sn, int level, CHAR_DATA *ch, void *vo, int target)
+ 
+   if (IS_SET(ch->in_room->room_flags, ROOM_LAW))
+     {
+-      send_to_char( "Oda tanrılarca korunuyor.\n\r",  ch);
++      {
++        char buf[MAX_STRING_LENGTH];
++        sprintf( buf, "Oda %s koruyor.\n\r", TR_PLU("tanrı") );
++        send_to_char( buf, ch );
++      }
+       return;
+     }
+     if ( is_affected_room( ch->in_room, sn ))
+@@ -6567,9 +6577,9 @@ void spell_mummify( int sn, int level, CHAR_DATA *ch, void *vo, int target )
+ 		}
+ 	 }
+ 	}
+-  sprintf(buf, "%s'in mumyalanmış bedeni", buf3);
++  sprintf(buf, "%s mumyalanmış bedeni", TR_GEN(buf3));
+   undead->short_descr = str_dup(buf);
+-  sprintf(buf, "%s'in mumyalanmış bedeni aksayarak dolaşıyor.\n\r", buf3);
++  sprintf(buf, "%s mumyalanmış bedeni aksayarak dolaşıyor.\n\r", TR_GEN(buf3));
+   undead->long_descr = str_dup(buf);
+ 
+   for(obj2 = obj->contains;obj2;obj2=next)
+@@ -6590,8 +6600,8 @@ void spell_mummify( int sn, int level, CHAR_DATA *ch, void *vo, int target )
+   affect_to_char( ch, &af );
+ 
+   send_to_char("Mistik güçlerin yardımıyla ona yaşam veriyorsun!\n\r",ch);
+-  sprintf(buf,"Mistik güçlerin yardımıyla %s %s'i mumyalayarak ona yaşam veriyor!",
+-		ch->name,obj->name);
++  sprintf(buf,"Mistik güçlerin yardımıyla %s %s mumyalayarak ona yaşam veriyor!",
++  ch->name,TR_ACC(obj->name));
+   act(buf,ch,NULL,NULL,TO_ROOM);
+   sprintf(buf,"%s sana bakarak onu rahatsız etmenin bedelini ödetmenin planlarını yapıyor!",
+ 	obj->short_descr);
+diff --git a/src/martial_art.c b/src/martial_art.c
+index 832c6fe..a652339 100644
+--- a/src/martial_art.c
++++ b/src/martial_art.c
+@@ -56,6 +56,7 @@
+ #include <stdio.h>
+ #include "merc.h"
+ #include "recycle.h"
++#include "turkish_suffix_helper.h"
+ 
+ DECLARE_DO_FUN(do_yell		);
+ DECLARE_DO_FUN(do_sleep		);
+@@ -1108,40 +1109,40 @@ void do_kick( CHAR_DATA *ch, char *argument )
+     if ( !IS_NPC(ch)
+     &&   ch->level < skill_table[gsn_kick].skill_level[ch->iclass] )
+     {
+-	send_to_char(
+-    "Savaş sanatlarını savaşçılara bırakmaya ne dersin?\n\r", ch );
+-	return;
++        char buf[MAX_STRING_LENGTH];
++        sprintf( buf, "Savaş sanatları %s için değil mi?\n\r", TR_PLU("savaşçı") );
++        send_to_char( buf, ch );
++        return;
+     }
+ 
+     if (IS_NPC(ch) && !IS_SET(ch->off_flags,OFF_KICK))
+-	return;
++        return;
+ 
+     if ( ( victim = ch->fighting ) == NULL )
+     {
+-	send_to_char( "Kimseyle dövüşmüyorsun.\n\r", ch );
+-	return;
++        send_to_char( "Kimseyle dövüşmüyorsun.\n\r", ch );
++        return;
+     }
+     chance = number_percent( );
+     if ( IS_AFFECTED(ch,AFF_FLYING) ) chance = (int)((float)chance*1.1);
+     WAIT_STATE( ch, skill_table[gsn_kick].beats );
+     if ( IS_NPC(ch) || chance < get_skill(ch,gsn_kick) )
+     {
+-	kick_dam = number_range(1,ch->level);
+-	if ((ch->iclass == 9) && ( get_eq_char(ch,WEAR_FEET) == NULL) )
+-		kick_dam *= 2;
+-	kick_dam += ch->damroll / 2;
+-	damage( ch,victim,kick_dam,gsn_kick,DAM_BASH, TRUE );
+-	check_improve(ch,gsn_kick,TRUE,1);
++        kick_dam = number_range(1,ch->level);
++        if ((ch->iclass == 9) && ( get_eq_char(ch,WEAR_FEET) == NULL) )
++            kick_dam *= 2;
++        kick_dam += ch->damroll / 2;
++        damage( ch,victim,kick_dam,gsn_kick,DAM_BASH, TRUE );
++        check_improve(ch,gsn_kick,TRUE,1);
+     }
+     else
+     {
+-	damage( ch, victim, 0, gsn_kick,DAM_BASH, TRUE );
+-	check_improve(ch,gsn_kick,FALSE,1);
++        damage( ch, victim, 0, gsn_kick,DAM_BASH, TRUE );
++        check_improve(ch,gsn_kick,FALSE,1);
+     }
+ 
+     return;
+ }
+-
+ void do_circle( CHAR_DATA *ch, char *argument )
+ {
+     (void) argument; /* Unused parameter */
+diff --git a/src/mob_prog.c b/src/mob_prog.c
+index 539dc99..3de6edb 100644
+--- a/src/mob_prog.c
++++ b/src/mob_prog.c
+@@ -62,6 +62,7 @@
+ #include "magic.h"
+ #include "interp.h"
+ #include "recycle.h"
++#include "turkish_suffix_helper.h"
+ 
+ void raw_kill args( (CHAR_DATA *victim) );
+ DECLARE_DO_FUN(do_yell);
+@@ -509,7 +510,8 @@ void give_prog_keeper(CHAR_DATA *mob, CHAR_DATA *ch, OBJ_DATA *obj)
+       extract_obj(obj);
+       if ((rug = get_obj_carry(ch, (char*)"rug")) != NULL)
+ 	{
+-    do_say(mob, (char*)"Sanırım FireFlash'i ziyaret etmek isteyeceksin.");
++    sprintf(buf, "Sanırım %s ziyaret etmek isteyeceksin.", TR_ACC("FireFlash"));
++    do_say(mob, buf);
+ 	  do_say(mob, (char*)"Dikkatli ol, canı biraz sıkkın.");
+ 	  do_unlock (mob, (char*)"door");
+ 	  do_open (mob, (char*)"door");
+@@ -649,8 +651,8 @@ bool death_prog_stalker(CHAR_DATA *mob)
+   char buf[100];
+ 
+   mob->cabal = CABAL_RULER;
+-  sprintf(buf, "%syi öldürmeyi beceremedim, son nefesimi vermeliyimg.",
+-	  mob->last_fought->name);
++  sprintf(buf, "%s öldürmeyi beceremedim, son nefesimi vermeliyimg.",
++   TR_ACC(mob->last_fought->name));
+   do_cb(mob, buf);
+   return FALSE;
+ }
+@@ -1028,7 +1030,11 @@ void greet_prog_armourer(CHAR_DATA *mob, CHAR_DATA *ch)
+    "yolcu" : ch->name );
+   do_say(mob,buf);
+   do_say(mob,(char*)"Sana nasıl yardımcı olabilirim?");
+-  do_say(mob,(char*)"Dükkanımda gördüğün zırhların tümü çok kalitelidir.");
++  {
++    char buf[MAX_STRING_LENGTH];
++    sprintf( buf, "Dükkanımda gördüğün %s tümü çok kalitelidir.", TR_PLU("zırh") );
++    do_say(mob, buf);
++  }
+   interpret(mob,(char*)"emote gururla geriniyor.", FALSE);
+ }
+ 
+diff --git a/src/obj_prog.c b/src/obj_prog.c
+index 29a4ab5..9433f97 100644
+--- a/src/obj_prog.c
++++ b/src/obj_prog.c
+@@ -60,6 +60,7 @@
+ #include "merc.h"
+ #include "magic.h"
+ #include "interp.h"
++#include "turkish_suffix_helper.h"
+ 
+ void one_hit(CHAR_DATA *ch, CHAR_DATA *victim, int dt, bool second);
+ bool cabal_area_check   args( (CHAR_DATA *ch) );
+@@ -555,12 +556,15 @@ bool death_prog_excalibur(OBJ_DATA *obj, CHAR_DATA *ch)
+ 
+ void speech_prog_excalibur(OBJ_DATA *obj, CHAR_DATA *ch, char *speech)
+ {
++  char buf[MAX_STRING_LENGTH];
+ 
+   if (!str_cmp(speech, "asit")
+       && (ch->fighting) && is_wielded_char(ch,obj)  )
+     {
+-      send_to_char("Excalibur'un bıçağından asit fışkırıyor.\n\r",ch);
+-      act("Excalibur'un bıçağından asit fışkırıyor.",ch,NULL,NULL,TO_ROOM);
++      sprintf(buf, "%s bıçağından asit fışkırıyor.\n\r", TR_GEN("Excalibur"));
++      send_to_char(buf, ch);
++      sprintf(buf, "%s bıçağından asit fışkırıyor.", TR_GEN("Excalibur"));
++      act(buf, ch, NULL, NULL, TO_ROOM);
+       obj_cast_spell(gsn_acid_blast,ch->level,ch,ch->fighting,NULL);
+       WAIT_STATE(ch, 2 * PULSE_VIOLENCE);
+     }
+diff --git a/src/skills.c b/src/skills.c
+index 6260375..52aed82 100644
+--- a/src/skills.c
++++ b/src/skills.c
+@@ -60,6 +60,7 @@
+ #include <stdlib.h>
+ #include "merc.h"
+ #include "magic.h"
++#include "turkish_suffix_helper.h"
+ 
+ /* command procedures needed */
+ DECLARE_DO_FUN(do_help		);
+@@ -675,6 +676,10 @@ void do_teach( CHAR_DATA *ch, char *argument)
+ 	return;
+   }
+  ch->status = PC_PRACTICER;
+- send_to_char("Artık %100 olan yeteneklerini gençlere öğretebilirsin.\n\r",ch);
++ {
++   char buf[MAX_STRING_LENGTH];
++   sprintf(buf, "Artık %%100 olan %s gençlere öğretebilirsin.\n\r", TR_ACC_PLU("yetenek"));
++   send_to_char(buf, ch);
++ }
+  return;
+ }
+diff --git a/src/special.c b/src/special.c
+index b0be38f..16f11b8 100644
+--- a/src/special.c
++++ b/src/special.c
+@@ -60,6 +60,7 @@
+ #include <time.h>
+ #include "merc.h"
+ #include "magic.h"
++#include "turkish_suffix_helper.h"
+ 
+ void	say_spell	args( ( CHAR_DATA *ch, int sn ) );
+ void	one_hit(CHAR_DATA *ch, CHAR_DATA *victim, int dt, bool second );
+@@ -1915,12 +1916,15 @@ bool spec_wishmaster( CHAR_DATA *ch )
+ 
+ bool spec_kameni_dindar( CHAR_DATA *ch )
+ {
++    char buf[MAX_STRING_LENGTH];
++    
+     if ( !IS_AWAKE(ch) )
+         return FALSE;
+     if (number_range(0,100) == 0)
+     {
+         do_say(ch, (char*)"Merhaba tanrının merhametine muhtaç kişi.");
+-        do_say(ch, (char*)"Kame'nin el yazmalarını arıyorum.");
++        sprintf(buf, "%s el yazmalarını arıyorum.", TR_GEN("Kame"));
++        do_say(ch, buf);
+         do_say(ch, (char*)"Yeraltı'nda o el yazmalarından bahsedildiğini duydum.");
+         do_say(ch, (char*)"Ama bulmak nasip olmadı.");
+         return TRUE;
+@@ -1930,12 +1934,15 @@ bool spec_kameni_dindar( CHAR_DATA *ch )
+ 
+ bool spec_niryani_dindar( CHAR_DATA *ch )
+ {
++    char buf[MAX_STRING_LENGTH];
++    
+     if ( !IS_AWAKE(ch) )
+         return FALSE;
+     if (number_range(0,100) == 0)
+     {
+         do_say(ch, (char*)"Merhaba tanrının merhametine muhtaç kişi.");
+-        do_say(ch, (char*)"Nir'in el yazmalarını arıyorum.");
++        sprintf(buf, "%s el yazmalarını arıyorum.", TR_GEN("Nir"));
++        do_say(ch, buf);
+         do_say(ch, (char*)"Eski Thalos'ta o el yazmalarından bahsedildiğini duydum.");
+         do_say(ch, (char*)"Ama bulmak nasip olmadı.");
+         return TRUE;
+@@ -1945,12 +1952,15 @@ bool spec_niryani_dindar( CHAR_DATA *ch )
+ 
+ bool spec_nyahi_dindar( CHAR_DATA *ch )
+ {
++    char buf[MAX_STRING_LENGTH];
++    
+     if ( !IS_AWAKE(ch) )
+         return FALSE;
+     if (number_range(0,100) == 0)
+     {
+         do_say(ch, (char*)"Merhaba tanrının merhametine muhtaç kişi.");
+-        do_say(ch, (char*)"Nyah'ın el yazmalarını arıyorum.");
++        sprintf(buf, "%s el yazmalarını arıyorum.", TR_GEN("Nyah"));
++        do_say(ch, buf);
+         do_say(ch, (char*)"Bölümüş Ruhlar'da o el yazmalarından bahsedildiğini duydum.");
+         do_say(ch, (char*)"Ama bulmak nasip olmadı.");
+         return TRUE;
+@@ -1960,12 +1970,15 @@ bool spec_nyahi_dindar( CHAR_DATA *ch )
+ 
+ bool spec_sintaryan_dindar( CHAR_DATA *ch )
+ {
++    char buf[MAX_STRING_LENGTH];
++    
+     if ( !IS_AWAKE(ch) )
+         return FALSE;
+     if (number_range(0,100) == 0)
+     {
+         do_say(ch, (char*)"Merhaba tanrının merhametine muhtaç kişi.");
+-        do_say(ch, (char*)"Sint'in el yazmalarını arıyorum.");
++        sprintf(buf, "%s el yazmalarını arıyorum.", TR_GEN("Sint"));
++        do_say(ch, buf);
+         do_say(ch, (char*)"Haon Dor'da o el yazmalarından bahsedildiğini duydum.");
+         do_say(ch, (char*)"Ama bulmak nasip olmadı.");
+         return TRUE;
+diff --git a/src/turkish_morphology.c b/src/turkish_morphology.c
+index ed01702..147e328 100644
+--- a/src/turkish_morphology.c
++++ b/src/turkish_morphology.c
+@@ -293,6 +293,21 @@ int get_softened_turkish_consonant(const char *utf8_char_ptr, int char_len, char
+     return softened_len;
+ }
+ 
++// Helper function to identify plural suffix types
++static bool is_plural_suffix_type(enum TurkishSuffixType type) {
++    switch (type) {
++        case SUFFIX_GENITIVE_PLURAL:
++        case SUFFIX_DATIVE_PLURAL:
++        case SUFFIX_ACCUSATIVE_PLURAL:
++        case SUFFIX_ABLATIVE_PLURAL:
++        case SUFFIX_INSTRUMENTAL_PLURAL:
++        case SUFFIX_LOCATIVE_PLURAL:
++            return true;
++        default:
++            return false;
++    }
++}
++
+ // --- Main Suffix Generation Logic ---
+ int generate_turkish_suffixed_word(
+     const char *base_word,
+@@ -406,11 +421,60 @@ int generate_turkish_suffixed_word(
+             }
+             break;
+         }
++        case SUFFIX_INSTRUMENTAL: // -le, -la, -yle, -yla (with/by means of)
++            if (word_ends_v) strcpy(buffer_consonant, "y");
++            if (u_lv == 'a' || (u_lv == 0xC4 && u_lv2 == 0xB1) || u_lv == 'o' || u_lv == 'u') suffix_form = "la"; // a, ı, o, u
++            else if (u_lv == 'e' || u_lv == 'i' || (u_lv == 0xC3 && u_lv2 == 0xB6) || (u_lv == 0xC3 && u_lv2 == 0xBC)) suffix_form = "le"; // e, i, ö, ü
++            else suffix_form = "le"; // Default to front vowel harmony
++            break;
++        case SUFFIX_PLURAL: // -ler, -lar (plural)
++            // No buffer consonant needed for plurals (buffer_consonant remains empty)
++            if (u_lv == 'a' || (u_lv == 0xC4 && u_lv2 == 0xB1) || u_lv == 'o' || u_lv == 'u') suffix_form = "lar"; // a, ı, o, u
++            else if (u_lv == 'e' || u_lv == 'i' || (u_lv == 0xC3 && u_lv2 == 0xB6) || (u_lv == 0xC3 && u_lv2 == 0xBC)) suffix_form = "ler"; // e, i, ö, ü
++            else suffix_form = "ler"; // Default to front vowel harmony
++            break;
++        case SUFFIX_GENITIVE_PLURAL: // -ların, -lerin (of plurals)
++            // Direct combined suffix generation
++            if (u_lv == 'a' || (u_lv == 0xC4 && u_lv2 == 0xB1) || u_lv == 'o' || u_lv == 'u') suffix_form = "ların"; // a, ı, o, u
++            else if (u_lv == 'e' || u_lv == 'i' || (u_lv == 0xC3 && u_lv2 == 0xB6) || (u_lv == 0xC3 && u_lv2 == 0xBC)) suffix_form = "lerin"; // e, i, ö, ü
++            else suffix_form = "lerin"; // Default to front vowel harmony
++            break;
++        case SUFFIX_DATIVE_PLURAL: // -lara, -lere (to plurals)
++            // Direct combined suffix generation
++            if (u_lv == 'a' || (u_lv == 0xC4 && u_lv2 == 0xB1) || u_lv == 'o' || u_lv == 'u') suffix_form = "lara"; // a, ı, o, u
++            else if (u_lv == 'e' || u_lv == 'i' || (u_lv == 0xC3 && u_lv2 == 0xB6) || (u_lv == 0xC3 && u_lv2 == 0xBC)) suffix_form = "lere"; // e, i, ö, ü
++            else suffix_form = "lere"; // Default to front vowel harmony
++            break;
++        case SUFFIX_ACCUSATIVE_PLURAL: // -ları, -leri (direct object plurals)
++            // Direct combined suffix generation
++            if (u_lv == 'a' || (u_lv == 0xC4 && u_lv2 == 0xB1) || u_lv == 'o' || u_lv == 'u') suffix_form = "ları"; // a, ı, o, u
++            else if (u_lv == 'e' || u_lv == 'i' || (u_lv == 0xC3 && u_lv2 == 0xB6) || (u_lv == 0xC3 && u_lv2 == 0xBC)) suffix_form = "leri"; // e, i, ö, ü
++            else suffix_form = "leri"; // Default to front vowel harmony
++            break;
++        case SUFFIX_ABLATIVE_PLURAL: // -lardan, -lerden (from plurals)
++            // Direct combined suffix generation
++            if (u_lv == 'a' || (u_lv == 0xC4 && u_lv2 == 0xB1) || u_lv == 'o' || u_lv == 'u') suffix_form = "lardan"; // a, ı, o, u
++            else if (u_lv == 'e' || u_lv == 'i' || (u_lv == 0xC3 && u_lv2 == 0xB6) || (u_lv == 0xC3 && u_lv2 == 0xBC)) suffix_form = "lerden"; // e, i, ö, ü
++            else suffix_form = "lerden"; // Default to front vowel harmony
++            break;
++        case SUFFIX_INSTRUMENTAL_PLURAL: // -larla, -lerle (with plurals)
++            // Direct combined suffix generation
++            if (u_lv == 'a' || (u_lv == 0xC4 && u_lv2 == 0xB1) || u_lv == 'o' || u_lv == 'u') suffix_form = "larla"; // a, ı, o, u
++            else if (u_lv == 'e' || u_lv == 'i' || (u_lv == 0xC3 && u_lv2 == 0xB6) || (u_lv == 0xC3 && u_lv2 == 0xBC)) suffix_form = "lerle"; // e, i, ö, ü
++            else suffix_form = "lerle"; // Default to front vowel harmony
++            break;
++        case SUFFIX_LOCATIVE_PLURAL: // -larda, -lerde (in/on/at plurals)
++            // Direct combined suffix generation
++            if (u_lv == 'a' || (u_lv == 0xC4 && u_lv2 == 0xB1) || u_lv == 'o' || u_lv == 'u') suffix_form = "larda"; // a, ı, o, u
++            else if (u_lv == 'e' || u_lv == 'i' || (u_lv == 0xC3 && u_lv2 == 0xB6) || (u_lv == 0xC3 && u_lv2 == 0xBC)) suffix_form = "lerde"; // e, i, ö, ü
++            else suffix_form = "lerde"; // Default to front vowel harmony
++            break;
+         default:
+             return -2; // Should not happen
+     }
+     // Construct the final word
+-    if (is_proper_noun) {
++    // Refined apostrophe logic: inflected plurals of proper nouns generally do NOT use apostrophes
++    if (is_proper_noun && !is_plural_suffix_type(type)) {
+         snprintf(output_buffer, buffer_size, "%s'%s%s", current_base_word, buffer_consonant, suffix_form);
+     } else {
+         snprintf(output_buffer, buffer_size, "%s%s%s", current_base_word, buffer_consonant, suffix_form);
+diff --git a/src/turkish_morphology.h b/src/turkish_morphology.h
+index d69636f..a7a969b 100644
+--- a/src/turkish_morphology.h
++++ b/src/turkish_morphology.h
+@@ -39,8 +39,15 @@ enum TurkishSuffixType {
+     SUFFIX_DATIVE,      // -e, -a (to/for)
+     SUFFIX_LOCATIVE,    // -de, -da, -te, -ta (in/on/at)
+     SUFFIX_ABLATIVE,    // -den, -dan, -ten, -tan (from)
+-    // TODO: Add other suffix types if identified as necessary from ek.c/ek2.c tables
+-    // e.g., instrumental (-le, -la), plural (-ler, -lar) if they are also hardcoded.
++    SUFFIX_INSTRUMENTAL,// -le, -la, -yle, -yla (with/by means of)
++    SUFFIX_PLURAL,      // -ler, -lar (plural)
++    // New inflected plural types (plural + case suffix)
++    SUFFIX_GENITIVE_PLURAL,     // -ların, -lerin (of plurals)
++    SUFFIX_DATIVE_PLURAL,       // -lara, -lere (to plurals)
++    SUFFIX_ACCUSATIVE_PLURAL,   // -ları, -leri (direct object plurals)
++    SUFFIX_ABLATIVE_PLURAL,     // -lardan, -lerden (from plurals)
++    SUFFIX_INSTRUMENTAL_PLURAL, // -larla, -lerle (with plurals)
++    SUFFIX_LOCATIVE_PLURAL      // -larda, -lerde (in/on/at plurals)
+ };
+ 
+ // From ek.h
+diff --git a/src/turkish_suffix_helper.c b/src/turkish_suffix_helper.c
+index d2da386..294ef1f 100644
+--- a/src/turkish_suffix_helper.c
++++ b/src/turkish_suffix_helper.c
+@@ -10,6 +10,7 @@
+  *                                                                         *
+  ***************************************************************************/
+ 
++#include "turkish_suffix_helper.h"
+ #include "turkish_morphology.h"
+ #include "merc.h"
+ #include <string.h>
+@@ -137,6 +138,134 @@ char *tr_ablative(const char *word, bool is_proper) {
+     return buffer;
+ }
+ 
++char *tr_instrumental(const char *word, bool is_proper) {
++    char *buffer = get_next_suffix_buffer();
++    if (!word || *word == '\0') {
++        buffer[0] = '\0';
++        return buffer;
++    }
++    
++    int result = generate_turkish_suffixed_word(word, SUFFIX_INSTRUMENTAL, is_proper, buffer, SUFFIX_BUF_SIZE);
++    if (result != 0) {
++        strncpy(buffer, word, SUFFIX_BUF_SIZE - 1);
++        buffer[SUFFIX_BUF_SIZE - 1] = '\0';
++    }
++    
++    return buffer;
++}
++
++char *tr_plural(const char *word, bool is_proper) {
++    char *buffer = get_next_suffix_buffer();
++    if (!word || *word == '\0') {
++        buffer[0] = '\0';
++        return buffer;
++    }
++    
++    int result = generate_turkish_suffixed_word(word, SUFFIX_PLURAL, is_proper, buffer, SUFFIX_BUF_SIZE);
++    if (result != 0) {
++        strncpy(buffer, word, SUFFIX_BUF_SIZE - 1);
++        buffer[SUFFIX_BUF_SIZE - 1] = '\0';
++    }
++    
++    return buffer;
++}
++
++char *tr_genitive_plural(const char *word, bool is_proper) {
++    char *buffer = get_next_suffix_buffer();
++    if (!word || *word == '\0') {
++        buffer[0] = '\0';
++        return buffer;
++    }
++    
++    int result = generate_turkish_suffixed_word(word, SUFFIX_GENITIVE_PLURAL, is_proper, buffer, SUFFIX_BUF_SIZE);
++    if (result != 0) {
++        strncpy(buffer, word, SUFFIX_BUF_SIZE - 1);
++        buffer[SUFFIX_BUF_SIZE - 1] = '\0';
++    }
++    
++    return buffer;
++}
++
++char *tr_dative_plural(const char *word, bool is_proper) {
++    char *buffer = get_next_suffix_buffer();
++    if (!word || *word == '\0') {
++        buffer[0] = '\0';
++        return buffer;
++    }
++    
++    int result = generate_turkish_suffixed_word(word, SUFFIX_DATIVE_PLURAL, is_proper, buffer, SUFFIX_BUF_SIZE);
++    if (result != 0) {
++        strncpy(buffer, word, SUFFIX_BUF_SIZE - 1);
++        buffer[SUFFIX_BUF_SIZE - 1] = '\0';
++    }
++    
++    return buffer;
++}
++
++char *tr_accusative_plural(const char *word, bool is_proper) {
++    char *buffer = get_next_suffix_buffer();
++    if (!word || *word == '\0') {
++        buffer[0] = '\0';
++        return buffer;
++    }
++    
++    int result = generate_turkish_suffixed_word(word, SUFFIX_ACCUSATIVE_PLURAL, is_proper, buffer, SUFFIX_BUF_SIZE);
++    if (result != 0) {
++        strncpy(buffer, word, SUFFIX_BUF_SIZE - 1);
++        buffer[SUFFIX_BUF_SIZE - 1] = '\0';
++    }
++    
++    return buffer;
++}
++
++char *tr_ablative_plural(const char *word, bool is_proper) {
++    char *buffer = get_next_suffix_buffer();
++    if (!word || *word == '\0') {
++        buffer[0] = '\0';
++        return buffer;
++    }
++    
++    int result = generate_turkish_suffixed_word(word, SUFFIX_ABLATIVE_PLURAL, is_proper, buffer, SUFFIX_BUF_SIZE);
++    if (result != 0) {
++        strncpy(buffer, word, SUFFIX_BUF_SIZE - 1);
++        buffer[SUFFIX_BUF_SIZE - 1] = '\0';
++    }
++    
++    return buffer;
++}
++
++char *tr_instrumental_plural(const char *word, bool is_proper) {
++    char *buffer = get_next_suffix_buffer();
++    if (!word || *word == '\0') {
++        buffer[0] = '\0';
++        return buffer;
++    }
++    
++    int result = generate_turkish_suffixed_word(word, SUFFIX_INSTRUMENTAL_PLURAL, is_proper, buffer, SUFFIX_BUF_SIZE);
++    if (result != 0) {
++        strncpy(buffer, word, SUFFIX_BUF_SIZE - 1);
++        buffer[SUFFIX_BUF_SIZE - 1] = '\0';
++    }
++    
++    return buffer;
++}
++
++char *tr_locative_plural(const char *word, bool is_proper) {
++    char *buffer = get_next_suffix_buffer();
++    if (!word || *word == '\0') {
++        buffer[0] = '\0';
++        return buffer;
++    }
++    
++    int result = generate_turkish_suffixed_word(word, SUFFIX_LOCATIVE_PLURAL, is_proper, buffer, SUFFIX_BUF_SIZE);
++    if (result != 0) {
++        strncpy(buffer, word, SUFFIX_BUF_SIZE - 1);
++        buffer[SUFFIX_BUF_SIZE - 1] = '\0';
++    }
++    
++    return buffer;
++}
++
+ // Auto-detect versions
+ char *tr_genitive_auto(const char *word) {
+     return tr_genitive(word, is_proper_noun_auto(word));
+@@ -158,6 +287,38 @@ char *tr_ablative_auto(const char *word) {
+     return tr_ablative(word, is_proper_noun_auto(word));
+ }
+ 
++char *tr_instrumental_auto(const char *word) {
++    return tr_instrumental(word, is_proper_noun_auto(word));
++}
++
++char *tr_plural_auto(const char *word) {
++    return tr_plural(word, is_proper_noun_auto(word));
++}
++
++char *tr_genitive_plural_auto(const char *word) {
++    return tr_genitive_plural(word, is_proper_noun_auto(word));
++}
++
++char *tr_dative_plural_auto(const char *word) {
++    return tr_dative_plural(word, is_proper_noun_auto(word));
++}
++
++char *tr_accusative_plural_auto(const char *word) {
++    return tr_accusative_plural(word, is_proper_noun_auto(word));
++}
++
++char *tr_ablative_plural_auto(const char *word) {
++    return tr_ablative_plural(word, is_proper_noun_auto(word));
++}
++
++char *tr_instrumental_plural_auto(const char *word) {
++    return tr_instrumental_plural(word, is_proper_noun_auto(word));
++}
++
++char *tr_locative_plural_auto(const char *word) {
++    return tr_locative_plural(word, is_proper_noun_auto(word));
++}
++
+ // Safe sprintf replacement
+ int tr_sprintf(char *buffer, size_t size, const char *format, ...) {
+     va_list args;
+diff --git a/src/turkish_suffix_helper.h b/src/turkish_suffix_helper.h
+index 9ac868e..cf36c33 100644
+--- a/src/turkish_suffix_helper.h
++++ b/src/turkish_suffix_helper.h
+@@ -56,6 +56,54 @@ char *tr_locative(const char *word, bool is_proper);
+  */
+ char *tr_ablative(const char *word, bool is_proper);
+ 
++/**
++ * Generate a string with Turkish instrumental suffix (replaces 'le, 'la, etc.)
++ * Usage: TR_INS(word, is_proper)
++ */
++char *tr_instrumental(const char *word, bool is_proper);
++
++/**
++ * Generate a string with Turkish plural suffix (replaces hardcoded plurals)
++ * Usage: TR_PLU(word, is_proper)
++ */
++char *tr_plural(const char *word, bool is_proper);
++
++/**
++ * Generate a string with Turkish genitive plural suffix (replaces hardcoded inflected plurals)
++ * Usage: TR_GEN_PLU(word, is_proper)
++ */
++char *tr_genitive_plural(const char *word, bool is_proper);
++
++/**
++ * Generate a string with Turkish dative plural suffix (replaces hardcoded inflected plurals)
++ * Usage: TR_DAT_PLU(word, is_proper)
++ */
++char *tr_dative_plural(const char *word, bool is_proper);
++
++/**
++ * Generate a string with Turkish accusative plural suffix (replaces hardcoded inflected plurals)
++ * Usage: TR_ACC_PLU(word, is_proper)
++ */
++char *tr_accusative_plural(const char *word, bool is_proper);
++
++/**
++ * Generate a string with Turkish ablative plural suffix (replaces hardcoded inflected plurals)
++ * Usage: TR_ABL_PLU(word, is_proper)
++ */
++char *tr_ablative_plural(const char *word, bool is_proper);
++
++/**
++ * Generate a string with Turkish instrumental plural suffix (replaces hardcoded inflected plurals)
++ * Usage: TR_INS_PLU(word, is_proper)
++ */
++char *tr_instrumental_plural(const char *word, bool is_proper);
++
++/**
++ * Generate a string with Turkish locative plural suffix (replaces hardcoded inflected plurals)
++ * Usage: TR_LOC_PLU(word, is_proper)
++ */
++char *tr_locative_plural(const char *word, bool is_proper);
++
+ /**
+  * Auto-detect proper noun and generate genitive
+  */
+@@ -81,12 +129,60 @@ char *tr_locative_auto(const char *word);
+  */
+ char *tr_ablative_auto(const char *word);
+ 
++/**
++ * Auto-detect proper noun and generate instrumental
++ */
++char *tr_instrumental_auto(const char *word);
++
++/**
++ * Auto-detect proper noun and generate plural
++ */
++char *tr_plural_auto(const char *word);
++
++/**
++ * Auto-detect proper noun and generate genitive plural
++ */
++char *tr_genitive_plural_auto(const char *word);
++
++/**
++ * Auto-detect proper noun and generate dative plural
++ */
++char *tr_dative_plural_auto(const char *word);
++
++/**
++ * Auto-detect proper noun and generate accusative plural
++ */
++char *tr_accusative_plural_auto(const char *word);
++
++/**
++ * Auto-detect proper noun and generate ablative plural
++ */
++char *tr_ablative_plural_auto(const char *word);
++
++/**
++ * Auto-detect proper noun and generate instrumental plural
++ */
++char *tr_instrumental_plural_auto(const char *word);
++
++/**
++ * Auto-detect proper noun and generate locative plural
++ */
++char *tr_locative_plural_auto(const char *word);
++
+ // Convenience macros for cleaner code
+ #define TR_GEN(word) tr_genitive_auto(word)
+ #define TR_ACC(word) tr_accusative_auto(word)
+ #define TR_DAT(word) tr_dative_auto(word)
+ #define TR_LOC(word) tr_locative_auto(word)
+ #define TR_ABL(word) tr_ablative_auto(word)
++#define TR_INS(word) tr_instrumental_auto(word)
++#define TR_PLU(word) tr_plural_auto(word)
++#define TR_GEN_PLU(word) tr_genitive_plural_auto(word)
++#define TR_DAT_PLU(word) tr_dative_plural_auto(word)
++#define TR_ACC_PLU(word) tr_accusative_plural_auto(word)
++#define TR_ABL_PLU(word) tr_ablative_plural_auto(word)
++#define TR_INS_PLU(word) tr_instrumental_plural_auto(word)
++#define TR_LOC_PLU(word) tr_locative_plural_auto(word)
+ 
+ /**
+  * Safe sprintf replacement that handles Turkish suffixes

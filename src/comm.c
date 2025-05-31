@@ -87,6 +87,7 @@
 #include "interp.h"
 #include "recycle.h"
 #include "tables.h"
+#include "turkish_morphology.h"
 
 #include <sys/wait.h>
 #include <stdlib.h>
@@ -3110,9 +3111,75 @@ z : birisinden					*/
 				case 'Z':
 					i=ekler (to,vch, str);
 					break;
-				case 'n': i = PERS( ch,  to  );
+				case 'n':
+					// Check for multi-character Turkish suffix codes like $nA, $nG, etc.
+					if (*(str+1) != '\0' && strchr("AGDLZ", *(str+1))) {
+						// Handle $nA, $nG, $nD, $nL, $nZ (character suffixes)
+						char suffix_char = *(str+1);
+						enum TurkishSuffixType suffix_type;
+						
+						switch(suffix_char) {
+							case 'A': suffix_type = SUFFIX_ACCUSATIVE; break;
+							case 'G': suffix_type = SUFFIX_GENITIVE; break;
+							case 'D': suffix_type = SUFFIX_DATIVE; break;
+							case 'L': suffix_type = SUFFIX_LOCATIVE; break;
+							case 'Z': suffix_type = SUFFIX_ABLATIVE; break;
+						}
+						
+						if (ch && can_see(to, ch)) {
+							static char suffix_buf4[MAX_STRING_LENGTH];
+							bool is_proper = !IS_NPC(ch); // Player characters are proper nouns
+							const char *name = PERS(ch, to);
+							
+							if (generate_turkish_suffixed_word(name, suffix_type,
+															 is_proper, suffix_buf4, sizeof(suffix_buf4)) == 0) {
+								i = suffix_buf4;
+							} else {
+								i = name; // fallback
+							}
+						} else {
+							i = "birisi";
+						}
+						str++; // Skip the suffix character
+					} else {
+						// Original single character handling
+						i = PERS( ch,  to  );
+					}
 					break;
-                case 'N': i = PERS( vch, to  );
+				            case 'N':
+					// Check for multi-character Turkish suffix codes like $NA, $NG, etc.
+					if (*(str+1) != '\0' && strchr("AGDLZ", *(str+1))) {
+						// Handle $NA, $NG, $ND, $NL, $NZ (second character suffixes)
+						char suffix_char = *(str+1);
+						enum TurkishSuffixType suffix_type;
+						
+						switch(suffix_char) {
+							case 'A': suffix_type = SUFFIX_ACCUSATIVE; break;
+							case 'G': suffix_type = SUFFIX_GENITIVE; break;
+							case 'D': suffix_type = SUFFIX_DATIVE; break;
+							case 'L': suffix_type = SUFFIX_LOCATIVE; break;
+							case 'Z': suffix_type = SUFFIX_ABLATIVE; break;
+						}
+						
+						if (vch && can_see(to, vch)) {
+							static char suffix_buf5[MAX_STRING_LENGTH];
+							bool is_proper = !IS_NPC(vch); // Player characters are proper nouns
+							const char *name = PERS(vch, to);
+							
+							if (generate_turkish_suffixed_word(name, suffix_type,
+															 is_proper, suffix_buf5, sizeof(suffix_buf5)) == 0) {
+								i = suffix_buf5;
+							} else {
+								i = name; // fallback
+							}
+						} else {
+							i = "birisi";
+						}
+						str++; // Skip the suffix character
+					} else {
+						// Original single character handling
+						i = PERS( vch, to  );
+					}
 					break;
 				case 'C':
 				i = va_arg(colors,char *);
@@ -3123,26 +3190,125 @@ z : birisinden					*/
 				//else i = "";
 				break;
                 case 'p':
-                    i = can_see_obj( to, obj1 )
-                            ? obj1->short_descr
-                            : "birşey";
+                    // Check for multi-character Turkish suffix codes like $pA, $pG, etc.
+                    if (*(str+1) != '\0' && strchr("AGDLZ", *(str+1))) {
+                        // Handle $pA, $pG, $pD, $pL, $pZ (object suffixes)
+                        char suffix_char = *(str+1);
+                        enum TurkishSuffixType suffix_type;
+                        
+                        switch(suffix_char) {
+                            case 'A': suffix_type = SUFFIX_ACCUSATIVE; break;
+                            case 'G': suffix_type = SUFFIX_GENITIVE; break;
+                            case 'D': suffix_type = SUFFIX_DATIVE; break;
+                            case 'L': suffix_type = SUFFIX_LOCATIVE; break;
+                            case 'Z': suffix_type = SUFFIX_ABLATIVE; break;
+                        }
+                        
+                        if (obj1 && can_see_obj(to, obj1)) {
+                            static char suffix_buf[MAX_STRING_LENGTH];
+                            bool is_proper = false; // Objects are common nouns
+                            
+                            if (generate_turkish_suffixed_word(obj1->short_descr, suffix_type,
+                                                             is_proper, suffix_buf, sizeof(suffix_buf)) == 0) {
+                                i = suffix_buf;
+                            } else {
+                                i = obj1->short_descr; // fallback
+                            }
+                        } else {
+                            i = "birşey";
+                        }
+                        str++; // Skip the suffix character
+                    } else {
+                        // Original single character handling
+                        i = can_see_obj( to, obj1 )
+                                ? obj1->short_descr
+                                : "birşey";
+                    }
                     break;
 
                 case 'P':
-                    i = can_see_obj( to, obj2 )
-                            ? obj2->short_descr
-                            : "birşey";
+                    // Check for multi-character Turkish suffix codes like $PA, $PG, etc.
+                    if (*(str+1) != '\0' && strchr("AGDLZ", *(str+1))) {
+                        // Handle $PA, $PG, $PD, $PL, $PZ (second object suffixes)
+                        char suffix_char = *(str+1);
+                        enum TurkishSuffixType suffix_type;
+                        
+                        switch(suffix_char) {
+                            case 'A': suffix_type = SUFFIX_ACCUSATIVE; break;
+                            case 'G': suffix_type = SUFFIX_GENITIVE; break;
+                            case 'D': suffix_type = SUFFIX_DATIVE; break;
+                            case 'L': suffix_type = SUFFIX_LOCATIVE; break;
+                            case 'Z': suffix_type = SUFFIX_ABLATIVE; break;
+                        }
+                        
+                        if (obj2 && can_see_obj(to, obj2)) {
+                            static char suffix_buf2[MAX_STRING_LENGTH];
+                            bool is_proper = false; // Objects are common nouns
+                            
+                            if (generate_turkish_suffixed_word(obj2->short_descr, suffix_type,
+                                                             is_proper, suffix_buf2, sizeof(suffix_buf2)) == 0) {
+                                i = suffix_buf2;
+                            } else {
+                                i = obj2->short_descr; // fallback
+                            }
+                        } else {
+                            i = "birşey";
+                        }
+                        str++; // Skip the suffix character
+                    } else {
+                        // Original single character handling
+                        i = can_see_obj( to, obj2 )
+                                ? obj2->short_descr
+                                : "birşey";
+                    }
                     break;
 
                 case 'd':
-                    if ( arg2 == NULL || ((char *) arg2)[0] == '\0' )
-                    {
-                        i = "kapı";
-                    }
-                    else
-                    {
-                        one_argument( (char *) arg2, fname );
-                        i = fname;
+                    // Check for multi-character Turkish suffix codes like $dA, $dG, etc.
+                    if (*(str+1) != '\0' && strchr("AGDLZ", *(str+1))) {
+                        // Handle $dA, $dG, $dD, $dL, $dZ (direction suffixes)
+                        char suffix_char = *(str+1);
+                        enum TurkishSuffixType suffix_type;
+                        
+                        switch(suffix_char) {
+                            case 'A': suffix_type = SUFFIX_ACCUSATIVE; break;
+                            case 'G': suffix_type = SUFFIX_GENITIVE; break;
+                            case 'D': suffix_type = SUFFIX_DATIVE; break;
+                            case 'L': suffix_type = SUFFIX_LOCATIVE; break;
+                            case 'Z': suffix_type = SUFFIX_ABLATIVE; break;
+                        }
+                        
+                        static char suffix_buf3[MAX_STRING_LENGTH];
+                        bool is_proper = false; // Directions are common nouns
+                        
+                        if ( arg2 == NULL || ((char *) arg2)[0] == '\0' ) {
+                            if (generate_turkish_suffixed_word("kapı", suffix_type,
+                                                             is_proper, suffix_buf3, sizeof(suffix_buf3)) == 0) {
+                                i = suffix_buf3;
+                            } else {
+                                i = "kapı"; // fallback
+                            }
+                        } else {
+                            one_argument( (char *) arg2, fname );
+                            if (generate_turkish_suffixed_word(fname, suffix_type,
+                                                             is_proper, suffix_buf3, sizeof(suffix_buf3)) == 0) {
+                                i = suffix_buf3;
+                            } else {
+                                i = fname; // fallback
+                            }
+                        }
+                        str++; // Skip the suffix character
+                    } else {
+                        // Original single character handling
+                        if ( arg2 == NULL || ((char *) arg2)[0] == '\0' )
+                        {
+                            i = "kapı";
+                        }
+                        else
+                        {
+                            one_argument( (char *) arg2, fname );
+                            i = fname;
+                        }
                     }
                     break;
 				}

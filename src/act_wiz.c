@@ -64,6 +64,7 @@
 #include "recycle.h"
 #include "tables.h"
 #include "lookup.h"
+#include "turkish_suffix_helper.h"
 
 int unlink(const char *pathname);
 
@@ -700,9 +701,15 @@ void do_outfit ( CHAR_DATA *ch, char *argument )
     obj->condition = 100;
     obj_to_char( obj, ch );
 
-    send_to_char("Tanrılar sana bazı eşyalar bahşediyor.\n\r",ch);
-    send_to_char("Taşıdığın eşyaları görüntülemek için 'envanter' yaz.\n\r",ch);
-    send_to_char("Eşyalarını giymek için 'giy <eşya adı>' yazmayı dene.\n\r\n\r",ch);
+    {
+      char buf[MAX_STRING_LENGTH];
+      sprintf( buf, "%s sana bazı %s bahşediyor.\n\r", TR_PLU("tanrı"), TR_PLU("eşya") );
+      send_to_char( buf, ch );
+      sprintf( buf, "Taşıdığın %s görüntülemek için 'envanter' yaz.\n\r", TR_PLU("eşya") );
+      send_to_char( buf, ch );
+      sprintf( buf, "%s giymek için 'giy <eşya adı>' yazmayı dene.\n\r\n\r", TR_PLU("eşya") );
+      send_to_char( buf, ch );
+    }
 }
 
 

@@ -2523,7 +2523,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	spell_absorb,		TAR_CHAR_SELF,		POS_STANDING,
 	&gsn_absorb,		SLOT(707),	100,	12,
   "",		"Çevrendeki enerji alanı yokoluyor!",
-	"$p'in çevresindeki enerji alanı yokoluyor.",
+	"$pG çevresindeki enerji alanı yokoluyor.",
  	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -2676,7 +2676,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	spell_bless,		TAR_OBJ_CHAR_DEF,	POS_STANDING,
 	&gsn_bless,		SLOT( 3),	 5,	12,
   "",			"Kutsallığını yitiriyorsun.",
-	"$p'in kutsal aylası yokoluyor.", CABAL_NONE ,
+	"$pG kutsal aylası yokoluyor.", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_BENEDICTIONS
     },
 
@@ -4233,7 +4233,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_shielding,	TAR_CHAR_OFFENSIVE,	POS_STANDING,
 	&gsn_shielding,		SLOT(591),	250,	12,
-  "",			"Gerçek Kaynak'tan uzaklaştığını hissediyorsun.",
+  "",			"Gerçek KaynakZ uzaklaştığını hissediyorsun.",
 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
