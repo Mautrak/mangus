@@ -242,6 +242,14 @@ int race_lookup (const char *name)
            if (!strcmp(input_lower, table_name_lower))
                return race;
        }
+
+       if (race_table[race].who_name[0] != '\0')
+       {
+           turkish_tolower_utf8(table_name_lower, race_table[race].who_name, sizeof(table_name_lower));
+
+           if (!strcmp(input_lower, table_name_lower))
+               return race;
+       }
    }
 
    sprintf(buf, "Race_lookup: race not found '%s'.", name);
@@ -566,6 +574,16 @@ int class_lookup (const char *name)
             if (!strcmp(input_lower, table_name_lower))
             {
                  return iclass;
+            }
+        }
+
+        if (class_table[iclass].who_name[0] != '\0')
+        {
+            turkish_tolower_utf8(table_name_lower, class_table[iclass].who_name, sizeof(table_name_lower));
+
+            if (!strcmp(input_lower, table_name_lower))
+            {
+                return iclass;
             }
         }
     }

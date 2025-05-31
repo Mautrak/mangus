@@ -325,7 +325,7 @@ const 	struct	race_type	race_table	[]		=
     },
 
 	{ /* 6 */
-	  {"duergar","duergar"},"Duergar",LANG_DWARVISH,        TRUE,TRUE, 		SIZE_MEDIUM, 0,
+	  {"duergar","duergar"},"Duerg",LANG_DWARVISH,        TRUE,TRUE, 		SIZE_MEDIUM, 0,
 	  0,                AFF_INFRARED,   0,
 	  0,                RES_MAGIC|RES_POISON|RES_DISEASE, VULN_DROWNING,
 	  A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 250, { "berserk", "pick lock" }, {20, 20, 21, 19, 23, 20 }
