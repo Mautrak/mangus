@@ -76,18 +76,18 @@ DECLARE_DO_FUN(do_mount		);
 
 DECLARE_SPELL_FUN(	spell_enchant_weapon	);
 
-bool	remove_obj	args( (CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace ) );
-bool	remove_obj_loc	args( (CHAR_DATA *ch, int iWear, bool fReplace ) );
-void	wear_obj	args( (CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace ) );
-CD *	find_keeper	args( (CHAR_DATA *ch ) );
-int	get_cost	args( (CHAR_DATA *keeper, OBJ_DATA *obj, bool fBuy ) );
-void 	obj_to_keeper	args( (OBJ_DATA *obj, CHAR_DATA *ch ) );
-OD *	get_obj_keeper	args( (CHAR_DATA *ch,CHAR_DATA *keeper,char *argument));
-void	hold_a_light	args( (CHAR_DATA *ch,OBJ_DATA *obj, int iWear) );
-void	hold_a_shield	args( (CHAR_DATA *ch,OBJ_DATA *obj, int iWear) );
-void	hold_a_thing	args( (CHAR_DATA *ch,OBJ_DATA *obj, int iWear) );
-void	wear_multi	args( (CHAR_DATA *ch,OBJ_DATA *obj,int iWear,bool fReplace) );
-void	wear_a_wield	args( (CHAR_DATA *ch,OBJ_DATA *obj, bool fReplace) );
+bool	remove_obj	(CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace );
+bool	remove_obj_loc	(CHAR_DATA *ch, int iWear, bool fReplace );
+void	wear_obj	(CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace );
+CD *	find_keeper	(CHAR_DATA *ch );
+int	get_cost	(CHAR_DATA *keeper, OBJ_DATA *obj, bool fBuy );
+void 	obj_to_keeper	(OBJ_DATA *obj, CHAR_DATA *ch );
+OD *	get_obj_keeper	(CHAR_DATA *ch,CHAR_DATA *keeper,char *argument);
+void	hold_a_light	(CHAR_DATA *ch,OBJ_DATA *obj, int iWear);
+void	hold_a_shield	(CHAR_DATA *ch,OBJ_DATA *obj, int iWear);
+void	hold_a_thing	(CHAR_DATA *ch,OBJ_DATA *obj, int iWear);
+void	wear_multi	(CHAR_DATA *ch,OBJ_DATA *obj,int iWear,bool fReplace);
+void	wear_a_wield	(CHAR_DATA *ch,OBJ_DATA *obj, bool fReplace);
 
 #undef OD
 #undef CD
@@ -258,7 +258,7 @@ void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container )
 
 	  if ( members > 1 && (obj->value[0] > 1 || obj->value[1]))
 	  {
-	    sprintf(buffer,"%d", obj->value[0] + ( obj->value[1] / 2 ) );
+	    snprintf(buffer, sizeof(buffer),"%d", obj->value[0] + ( obj->value[1] / 2 ) );
 	    do_split(ch,buffer);
 	  }
         }
@@ -412,7 +412,7 @@ void do_get( CHAR_DATA *ch, char *argument )
 
       if ( members > 1 && (amount > 1) )
       {
-        sprintf(buffer,"%d",silver);
+        snprintf(buffer, sizeof(buffer),"%d",silver);
         do_split(ch,buffer);
       }
     }
@@ -1085,11 +1085,11 @@ void do_drag( CHAR_DATA *ch, char *argument )
        return;
    }
 
-   sprintf(buf,"$p'yi %s yönünde sürüklemek için kavradın.", dir_name[direction] );
+   snprintf(buf, sizeof(buf),"$p'yi %s yönünde sürüklemek için kavradın.", dir_name[direction] );
    act( buf, ch, obj, NULL, TO_CHAR );
    if (!IS_AFFECTED(ch,AFF_SNEAK))
    {
-     sprintf(buf,"$n $p'yi %s yönünde sürüklemek için kavradı.", dir_name[direction] );
+     snprintf(buf, sizeof(buf),"$n $p'yi %s yönünde sürüklemek için kavradı.", dir_name[direction] );
          act( buf, ch, obj, NULL, TO_ROOM );
    }
 
@@ -1131,7 +1131,7 @@ void do_give( CHAR_DATA *ch, char *argument )
     OBJ_DATA  *obj;
 
     argument = one_argument( argument, arg1 );
-    sprintf(buf2,"%s",argument);
+    snprintf(buf2, sizeof(buf2),"%s",argument);
     argument = one_argument( argument, arg2 );
 
     if ( arg1[0] == '\0' || arg2[0] == '\0' )
@@ -1184,10 +1184,10 @@ void do_give( CHAR_DATA *ch, char *argument )
   ch->silver		-= amount;
   victim->silver 	+= amount;
 
-  sprintf(buf,"$n sana %d akçe veriyor.",amount);
+  snprintf(buf, sizeof(buf),"$n sana %d akçe veriyor.",amount);
 	act( buf, ch, NULL, victim, TO_VICT    );
 	act( "$n $E bir miktar akçe veriyor.",  ch, NULL, victim, TO_NOTVICT );
-	sprintf(buf,"$E %d akçe veriyorsun.",amount);
+	snprintf(buf, sizeof(buf),"$E %d akçe veriyorsun.",amount);
 	act( buf, ch, NULL, victim, TO_CHAR    );
         if (IS_SET(victim->progtypes,MPROG_BRIBE))
           (victim->pIndexData->mprogs->bribe_prog) (victim,ch,amount);
@@ -1321,7 +1321,7 @@ void do_bury( CHAR_DATA *ch, char *argument )
     }
 
     if ( (shovel = get_weapon_char(ch, WEAPON_MACE)) == NULL
-         || !is_name((char*)"kürek",shovel->name) )
+         || !is_name("kürek",shovel->name) )
     {
       send_to_char( "Kazmak için küreğin yok!\n\r", ch );
         return;
@@ -1386,15 +1386,15 @@ void do_bury( CHAR_DATA *ch, char *argument )
         }
      }
     }
-    sprintf(arg, "%s", buf);
+    snprintf(arg, sizeof(arg), "%s", buf);
 
     stone = create_object( get_obj_index(OBJ_VNUM_GRAVE_STONE), ch->level);
 
-    sprintf(buf, stone->description, arg);
+    snprintf(buf, sizeof(buf), stone->description, arg);
     free_string( stone->description );
     stone->description = str_dup( buf );
 
-    sprintf(buf, stone->short_descr, arg);
+    snprintf(buf, sizeof(buf), stone->short_descr, arg);
     free_string( stone->short_descr );
     stone->short_descr = str_dup( buf );
 
@@ -1427,7 +1427,7 @@ void do_dig( CHAR_DATA *ch, char *argument )
     }
 
     if ( (shovel = get_weapon_char(ch, WEAPON_MACE)) == NULL
-         || !is_name((char*)"kürek",shovel->name) )
+         || !is_name("kürek",shovel->name) )
     {
       send_to_char("Kazmak için küreğin yok!\n\r", ch );
         return;
@@ -1651,10 +1651,10 @@ void do_fill( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    sprintf(buf,"$P içindeki %s ile $p'yi dolduruyorsun.",
+    snprintf(buf, sizeof(buf),"$P içindeki %s ile $p'yi dolduruyorsun.",
 	liq_table[fountain->value[2]].liq_name_tr);
     act( buf, ch, obj,fountain, TO_CHAR );
-    sprintf(buf,"$n $P içindeki %s ile $p'yi dolduruyor.",
+    snprintf(buf, sizeof(buf),"$n $P içindeki %s ile $p'yi dolduruyor.",
 	liq_table[fountain->value[2]].liq_name_tr);
     act(buf,ch,obj,fountain,TO_ROOM);
     obj->value[2] = fountain->value[2];
@@ -1702,17 +1702,17 @@ void do_pour(CHAR_DATA *ch, char *argument)
 	out->value[3] = 0;
         if ( !IS_WATER( ch->in_room ) )
 			{
-			sprintf(buf,"$p'yi ters çevirip içindeki %s'yi yere boşaltıyorsun.",liq_table[out->value[2]].liq_name_tr);
+			snprintf(buf, sizeof(buf),"$p'yi ters çevirip içindeki %s'yi yere boşaltıyorsun.",liq_table[out->value[2]].liq_name_tr);
 			act(buf,ch,out,NULL,TO_CHAR);
 
-			sprintf(buf,"$n $p'yi ters çevirip içindeki %s'yi yere boşaltıyor.",liq_table[out->value[2]].liq_name_tr);
+			snprintf(buf, sizeof(buf),"$n $p'yi ters çevirip içindeki %s'yi yere boşaltıyor.",liq_table[out->value[2]].liq_name_tr);
 			act(buf,ch,out,NULL,TO_ROOM);
 	}
 	else  {
-	  sprintf(buf,"$p'yi ters çevirip %s'yi suya boşaltıyorsun.",liq_table[out->value[2]].liq_name_tr);
+	  snprintf(buf, sizeof(buf),"$p'yi ters çevirip %s'yi suya boşaltıyorsun.",liq_table[out->value[2]].liq_name_tr);
 	  act(buf,ch,out,NULL,TO_CHAR);
 
-	  sprintf(buf,"$n $p'yi ters çevirip içindeki %s'yi yere boşaltıyor.",liq_table[out->value[2]].liq_name_tr);
+	  snprintf(buf, sizeof(buf),"$n $p'yi ters çevirip içindeki %s'yi yere boşaltıyor.",liq_table[out->value[2]].liq_name_tr);
 	  act(buf,ch,out,NULL,TO_ROOM);
 	}
 	return;
@@ -1775,18 +1775,18 @@ void do_pour(CHAR_DATA *ch, char *argument)
 
     if (vch == NULL)
     {
-    	sprintf(buf,"%s'i $p'den $P'ye döküyorsun.",liq_table[out->value[2]].liq_name_tr);
+    	snprintf(buf, sizeof(buf),"%s'i $p'den $P'ye döküyorsun.",liq_table[out->value[2]].liq_name_tr);
     	act(buf,ch,out,in,TO_CHAR);
-    	sprintf(buf,"$n %s'i $p'den $P'ye döküyor.",liq_table[out->value[2]].liq_name_tr);
+    	snprintf(buf, sizeof(buf),"$n %s'i $p'den $P'ye döküyor.",liq_table[out->value[2]].liq_name_tr);
     	act(buf,ch,out,in,TO_ROOM);
     }
     else
     {
-        sprintf(buf,"$N için %s döküyorsun.",liq_table[out->value[2]].liq_name_tr);
+        snprintf(buf, sizeof(buf),"$N için %s döküyorsun.",liq_table[out->value[2]].liq_name_tr);
         act(buf,ch,NULL,vch,TO_CHAR);
-		sprintf(buf,"$n senin için biraz %s döküyor.",liq_table[out->value[2]].liq_name_tr);
+		snprintf(buf, sizeof(buf),"$n senin için biraz %s döküyor.",liq_table[out->value[2]].liq_name_tr);
 		act(buf,ch,NULL,vch,TO_VICT);
-        sprintf(buf,"$n $N için biraz %s döküyor.",liq_table[out->value[2]].liq_name_tr);
+        snprintf(buf, sizeof(buf),"$n $N için biraz %s döküyor.",liq_table[out->value[2]].liq_name_tr);
         act(buf,ch,NULL,vch,TO_NOTVICT);
     }
 
@@ -2121,7 +2121,7 @@ void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace )
 
     if ( wear_level < obj->level )
     {
-      sprintf( buf, "Bunu kullanabilmek için seviyen en az %d olmalı.\n\r",
+      snprintf(buf, sizeof(buf), "Bunu kullanabilmek için seviyen en az %d olmalı.\n\r",
 	    obj->level );
 	send_to_char( buf, ch );
   act( "$n $p'yi kullanmayı denedi, ama çok deneyimsiz.",
@@ -2548,7 +2548,7 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
 
 		if ( members > 1 && silver > 1)
 		{
-			sprintf(buffer,"%d",silver);
+			snprintf(buffer, sizeof(buffer),"%d",silver);
 			do_split(ch,buffer);
 		}
 	}
@@ -2586,8 +2586,8 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
 			act( "Kurban etmenin ardından $p ve $P ortaya çıkıyor.", ch, two_objs[0], two_objs[1], TO_CHAR);
 			act( "$s kurbanının ardından $p ve $P ortaya çıkıyor.", ch, two_objs[0], two_objs[1], TO_ROOM);
 		}
-		sprintf( buf, "Cesedi kurban ettiğinde " );
-		sprintf( buf2, "$s cesedi kurban etmesiyle " );
+		snprintf(buf, sizeof(buf), "Cesedi kurban ettiğinde " );
+		snprintf(buf2, sizeof(buf2), "$s cesedi kurban etmesiyle " );
 		if ( iScatter < 3 )
 		{
 			fScatter = FALSE;
@@ -2745,7 +2745,7 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
           "Tanrılar kurbanın için 1 akçe veriyor.\n\r", ch );
     else
     {
-      sprintf(buf,"Tanrılar kurbanın için %d akçe veriyor.\n\r",silver);
+      snprintf(buf, sizeof(buf),"Tanrılar kurbanın için %d akçe veriyor.\n\r",silver);
 	send_to_char(buf,ch);
     }
 
@@ -2762,7 +2762,7 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
 
 	if ( members > 1 && silver > 1)
 	{
-	    sprintf(buffer,"%d",silver);
+	    snprintf(buffer, sizeof(buffer),"%d",silver);
 	    do_split(ch,buffer);
 	}
     }
@@ -2796,8 +2796,8 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
         act( "Kurban etmenin ardından $p ve $P ortaya çıkıyor.", ch, two_objs[0], two_objs[1], TO_CHAR);
       	act( "$s kurbanının ardından $p ve $P ortaya çıkıyor.", ch, two_objs[0], two_objs[1], TO_ROOM);
       }
-      sprintf( buf, "Cesedi kurban ettiğinde " );
-      sprintf( buf2, "$s cesedi kurban etmesiyle " );
+      snprintf(buf, sizeof(buf), "Cesedi kurban ettiğinde " );
+      snprintf(buf2, sizeof(buf2), "$s cesedi kurban etmesiyle " );
       if ( iScatter < 3 )
 		   fScatter = FALSE;
 	else if ( iScatter < 5 )  {
@@ -2901,7 +2901,7 @@ void do_quaff( CHAR_DATA *ch, char *argument )
     extract_obj( obj );
     obj_to_char( create_object(get_obj_index(OBJ_VNUM_POTION_VIAL),0),ch);
 
-    if (IS_NPC(ch))	do_drop(ch, (char*)"vial");
+    if (IS_NPC(ch))	do_drop(ch, "vial");
 
     return;
 }
@@ -3323,16 +3323,16 @@ void do_steal( CHAR_DATA *ch, char *argument )
 	switch(number_range(0,3))
 	{
     case 0 :
-		sprintf( buf, "Rezil bir hırsızsın %s!", tmp_ch->name );
+		snprintf(buf, sizeof(buf), "Rezil bir hırsızsın %s!", tmp_ch->name );
 		break;
         case 1 :
-		sprintf( buf, "%s beni soyamadı!",tmp_ch->name);
+		snprintf(buf, sizeof(buf), "%s beni soyamadı!",tmp_ch->name);
 		break;
 		case 2 :
-	    sprintf( buf,"%s beni soymaya çalıştı!",tmp_ch->name );
+	    snprintf(buf, sizeof(buf),"%s beni soymaya çalıştı!",tmp_ch->name );
 	    break;
 		case 3 :
-	    sprintf(buf,"Ellerini oradan çek %s!",tmp_ch->name);
+	    snprintf(buf, sizeof(buf),"Ellerini oradan çek %s!",tmp_ch->name);
 	    break;
         }
 	if ( IS_AWAKE( victim ) )
@@ -3362,7 +3362,7 @@ void do_steal( CHAR_DATA *ch, char *argument )
 
     ch->silver     += amount_s;
     victim->silver -= amount_s;
-    sprintf( buf, "Bingo!  %d akçe arakladın.\n\r",amount_s);
+    snprintf(buf, sizeof(buf), "Bingo!  %d akçe arakladın.\n\r",amount_s);
 
     send_to_char( buf, ch );
     check_improve(ch,gsn_steal,TRUE,2);
@@ -3437,8 +3437,8 @@ CHAR_DATA *find_keeper( CHAR_DATA *ch )
     if ( IS_SET(keeper->in_room->area->area_flag,AREA_HOMETOWN)
 	 && !IS_NPC(ch) && IS_SET(ch->act,PLR_WANTED) )
     {
-	do_say( keeper, (char*)"Şuçluları hoş karşılamayız!" );
-  sprintf( buf, "%s bir SUÇLU! Gördüm Onu!\n\r", ch->name );
+	do_say( keeper, "Şuçluları hoş karşılamayız!" );
+  snprintf(buf, sizeof(buf), "%s bir SUÇLU! Gördüm Onu!\n\r", ch->name );
 	do_yell( keeper, buf );
 	return NULL;
     }
@@ -3448,13 +3448,13 @@ CHAR_DATA *find_keeper( CHAR_DATA *ch )
      */
     if ( time_info.hour < pShop->open_hour )
     {
-	do_say( keeper, (char*)"Üzgünüm kapattım. Daha sonra gel." );
+	do_say( keeper, "Üzgünüm kapattım. Daha sonra gel." );
 	return NULL;
     }
 
     if ( time_info.hour > pShop->close_hour )
     {
-	do_say( keeper, (char*)"Üzgünüm kapattım. Yarın gel." );
+	do_say( keeper, "Üzgünüm kapattım. Yarın gel." );
 	return NULL;
     }
 
@@ -3463,7 +3463,7 @@ CHAR_DATA *find_keeper( CHAR_DATA *ch )
      */
     if ( !can_see( keeper, ch ) && !IS_IMMORTAL( ch ) )
     {
-	do_say( keeper, (char*)"Göremediğim tiplerle ticaret yapmam." );
+	do_say( keeper, "Göremediğim tiplerle ticaret yapmam." );
 	return NULL;
     }
 
@@ -3699,7 +3699,7 @@ void do_buy( CHAR_DATA *ch, char *argument )
 	if (roll < get_skill(ch,gsn_haggle))
 	{
 	    cost -= cost / 2 * roll / 100;
-      sprintf(buf,"pazarlık ederek fiyatı %d sikkeye çekiyorsun.\n\r",cost);
+      snprintf(buf, sizeof(buf),"pazarlık ederek fiyatı %d sikkeye çekiyorsun.\n\r",cost);
 	    send_to_char(buf,ch);
 	    check_improve(ch,gsn_haggle,TRUE,4);
 
@@ -3735,12 +3735,12 @@ void do_buy( CHAR_DATA *ch, char *argument )
 	argument = one_argument( argument, arg );
 	if ( arg[0] != '\0' )
 	{
-	    sprintf( buf, "%s %s", pet->name, arg );
+	    snprintf(buf, sizeof(buf), "%s %s", pet->name, arg );
 	    free_string( pet->name );
 	    pet->name = str_dup( buf );
 	}
 
-  sprintf( buf, "%sin tasması diyor ki 'Ben %s'e aitim'.\n\r",pet->description, ch->name );
+  snprintf(buf, sizeof(buf), "%sin tasması diyor ki 'Ben %s'e aitim'.\n\r",pet->description, ch->name );
 	free_string( pet->description );
 	pet->description = str_dup( buf );
 
@@ -3877,15 +3877,15 @@ void do_buy( CHAR_DATA *ch, char *argument )
 
 	if (number > 1)
 	{
-    sprintf(buf,"$n $p[%d] satın alıyor.",number);
+    snprintf(buf, sizeof(buf),"$n $p[%d] satın alıyor.",number);
     act(buf,ch,obj,NULL,TO_ROOM);
-    sprintf(buf,"%d akçeye $p[%d] satın alıyorsun.",cost * number,number);
+    snprintf(buf, sizeof(buf),"%d akçeye $p[%d] satın alıyorsun.",cost * number,number);
     act(buf,ch,obj,NULL,TO_CHAR);
 	}
 	else
 	{
     act( "$n $p satın alıyor.", ch, obj, NULL, TO_ROOM );
-    sprintf(buf,"%d akçeye $p satın alıyorsun.",cost);
+    snprintf(buf, sizeof(buf),"%d akçeye $p satın alıyorsun.",cost);
 	    act( buf, ch, obj, NULL, TO_CHAR );
 	}
 	
@@ -3965,7 +3965,7 @@ void do_list( CHAR_DATA *ch, char *argument )
 		    found = TRUE;
         send_to_char( "Satılık hayvanlar:\n\r", ch );
 		}
-		sprintf( buf, "[%2d] %8d - %s\n\r",
+		snprintf(buf, sizeof(buf), "[%2d] %8d - %s\n\r",
 		    pet->level,
 		    10 * pet->level * pet->level,
 		    pet->short_descr );
@@ -4004,7 +4004,7 @@ void do_list( CHAR_DATA *ch, char *argument )
 		}
 
 		if (IS_OBJ_STAT(obj,ITEM_INVENTORY))
-		    sprintf(buf,"[%2d %5d -- ] %s%s\n\r",
+		    snprintf(buf, sizeof(buf),"[%2d %5d -- ] %s%s\n\r",
 			obj->level,cost,obj->short_descr,
 			(obj->pIndexData->limit != -1) ?  (obj->pIndexData->count > obj->pIndexData->limit) ? " (NOT AVAILABLE NOW)" : " (AVAILABLE)" : "" );
 		else
@@ -4019,7 +4019,7 @@ void do_list( CHAR_DATA *ch, char *argument )
 			obj = obj->next_content;
 			count++;
 		    }
-		    sprintf(buf,"[%2d %5d %2d ] %s\n\r",
+		    snprintf(buf, sizeof(buf),"[%2d %5d %2d ] %s\n\r",
 			obj->level,cost,count,obj->short_descr);
 		}
 		send_to_char( buf, ch );
@@ -4100,7 +4100,7 @@ void do_sell( CHAR_DATA *ch, char *argument )
 		check_improve(ch,gsn_haggle,TRUE,4);
 	}
 
-	sprintf( buf, "$p eşyasını %d akçeye satıyorsun.",cost);
+	snprintf(buf, sizeof(buf), "$p eşyasını %d akçeye satıyorsun.",cost);
 
 	act( buf, ch, obj, NULL, TO_CHAR );
 	ch->silver 	 += cost;
@@ -4171,7 +4171,7 @@ void do_value( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    sprintf( buf,
+    snprintf(buf, sizeof(buf),
 	"$n sana anlatıyor '$p için sana %d akçe veririm'.",cost);
     act( buf, keeper, obj, ch, TO_VICT );
     ch->reply = keeper;
@@ -4363,7 +4363,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
 
   if (get_skill(ch,gsn_lore) < 20)
     {
-      sprintf( buf, "Eşya '%s'.\n\r", obj->name);
+      snprintf(buf, sizeof(buf), "Eşya '%s'.\n\r", obj->name);
       send_to_char(buf, ch);
       ch->mana -= 30;
       check_improve(ch,gsn_lore,TRUE,8);
@@ -4372,7 +4372,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
 
   else if (get_skill(ch,gsn_lore) < 40)
     {
-      sprintf( buf,
+      snprintf(buf, sizeof(buf),
 	  "Eşya '%s'.  Ağırlığı %d gr., değeri %d.\n\r",
 	      obj->name,
 	      chance < 60 ? obj->weight : number_range(1, 2 * obj->weight),
@@ -4380,7 +4380,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
 	      );
       send_to_char(buf, ch);
       if ( str_cmp( obj->material, "oldstyle" ) )  {
-        sprintf( buf, "Materyali %s.\n\r", obj->material );
+        snprintf(buf, sizeof(buf), "Materyali %s.\n\r", obj->material );
         send_to_char(buf, ch);
       }
       ch->mana -= 30;
@@ -4390,7 +4390,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
 
   else if (get_skill(ch,gsn_lore) < 60)
     {
-      sprintf( buf,
+      snprintf(buf, sizeof(buf),
 	      "Obje '%s', ağırlığı %d gr.\n\rDeğeri %d, seviyesi %d.\n\rMateryali %s.\n\r",
 	      obj->name,
 	      obj->weight,
@@ -4406,7 +4406,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
 
   else if (get_skill(ch,gsn_lore) < 80)
     {
-      sprintf( buf,
+      snprintf(buf, sizeof(buf),
 	      "Obje '%s', tipi %s, ekstra özellikleri %s.\n\rAğırlığı %d gr., değeri %d, seviyesi %d.\n\rMateryali %s.\n\r",
 	      obj->name,
 	      item_type_name( obj ),
@@ -4424,7 +4424,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
 
   else if (get_skill(ch,gsn_lore) < 85)
     {
-      sprintf( buf,
+      snprintf(buf, sizeof(buf),
 	      "Obje '%s', tipi %s, ekstra özellikleri %s.\n\rAğırlığı %d gr., değeri %d, seviyesi %d.\n\rMateryali %s.\n\r",
 	      obj->name,
 	      item_type_name( obj ),
@@ -4438,7 +4438,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
     }
   else
     {
-      sprintf( buf,
+      snprintf(buf, sizeof(buf),
 	      "Obje '%s', tipi %s, ekstra özellikleri %s.\n\rAğırlığı %d gr., değeri %d, seviyesi %d.\n\rMateryali %s.\n\r",
 	      obj->name,
 	      item_type_name( obj ),
@@ -4487,7 +4487,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
 	  }
 	}
 
-      sprintf( buf, "Seviye %d büyüleri:", obj->value[0] );
+      snprintf(buf, sizeof(buf), "Seviye %d büyüleri:", obj->value[0] );
       send_to_char(buf, ch);
 
       if ( value1 >= 0 && value1 < MAX_SKILL )
@@ -4540,7 +4540,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
 	  }
 	}
 
-      sprintf( buf, "%d seviyesinde %d(%d) şarjı var",value0, value1, value2 );
+      snprintf(buf, sizeof(buf), "%d seviyesinde %d(%d) şarjı var",value0, value1, value2 );
       send_to_char(buf, ch);
 
       if ( value3 >= 0 && value3 < MAX_SKILL )
@@ -4591,13 +4591,13 @@ void do_lore( CHAR_DATA *ch, char *argument )
  	}
       if (obj->pIndexData->new_format)
 		{
-	sprintf(buf,"Zarar %dd%d (ortalama %d).\n\r",
+	snprintf(buf, sizeof(buf),"Zarar %dd%d (ortalama %d).\n\r",
 		value1,value2,
 		(1 + value2) * value1 / 2);
 		}
       else
 		{
-	sprintf( buf, "Zarar %d - %d (ortalama %d).\n\r",
+	snprintf(buf, sizeof(buf), "Zarar %d - %d (ortalama %d).\n\r",
 	    	value1, value2,
 	    	( value1 + value2 ) / 2 );
 		}
@@ -4634,7 +4634,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
 	  }
 	}
 
-      sprintf( buf,
+      snprintf(buf, sizeof(buf),
 	      "Zırh sınıfı: delici %d, omuz %d, kesme %d ve büyü  türleri %d.\n\r",
 	      value0, value1, value2, value3 );
       send_to_char(buf, ch);
@@ -4650,7 +4650,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
       {
 	if ( paf->location != APPLY_NONE && paf->modifier != 0 )
 	  {
-	    sprintf( buf, "%s özelliğini %d etkiler.\n\r",
+	    snprintf(buf, sizeof(buf), "%s özelliğini %d etkiler.\n\r",
 		    affect_loc_name( paf->location ), paf->modifier );
 	    send_to_char(buf, ch);
 	  }
@@ -4660,7 +4660,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
     {
       if ( paf->location != APPLY_NONE && paf->modifier != 0 )
 	{
-	  sprintf( buf, "%s özelliğini %d etkiler.\n\r",
+	  snprintf(buf, sizeof(buf), "%s özelliğini %d etkiler.\n\r",
 		  affect_loc_name( paf->location ), paf->modifier );
 	  send_to_char(buf, ch);
 	}
@@ -4733,10 +4733,10 @@ void do_butcher(CHAR_DATA *ch, char *argument)
 
       if (numsteaks > 1)
 	{
-	  sprintf(buf, "$n $p'yi doğruyor ve ondan %i biftek çıkartıyor.",numsteaks);
+	  snprintf(buf, sizeof(buf), "$n $p'yi doğruyor ve ondan %i biftek çıkartıyor.",numsteaks);
 	  act(buf,ch,obj,NULL,TO_ROOM);
 
-	  sprintf(buf, "$p'yi doğruyor ve ondan %i biftek çıkartıyorsun.",numsteaks);
+	  snprintf(buf, sizeof(buf), "$p'yi doğruyor ve ondan %i biftek çıkartıyorsun.",numsteaks);
 	  act(buf,ch,obj,NULL,TO_CHAR);
 	}
 
@@ -4753,11 +4753,11 @@ void do_butcher(CHAR_DATA *ch, char *argument)
       for (i=0; i < numsteaks; i++)
 	{
 	  steak = create_object(get_obj_index(OBJ_VNUM_STEAK),0);
-	  sprintf( buf, steak->short_descr, obj->short_descr);
+	  snprintf(buf, sizeof(buf), steak->short_descr, obj->short_descr);
 	  free_string( steak->short_descr );
 	  steak->short_descr = str_dup( buf );
 
-	  sprintf( buf, steak->description, obj->short_descr );
+	  snprintf(buf, sizeof(buf), steak->description, obj->short_descr );
 	  free_string( steak->description );
 	  steak->description = str_dup( buf );
 
@@ -4890,11 +4890,11 @@ void do_deposit(CHAR_DATA *ch, char *argument)
 
   if (amount_s == 1)
 	{
-    sprintf(buf, "Şuna bak! Bir sikkeymiş!\n\r");
+    snprintf(buf, sizeof(buf), "Şuna bak! Bir sikkeymiş!\n\r");
 	}
   else
 	{
-	  sprintf(buf, "%ld akçe hesabına geçti. Yine beklerim!\n\r",amount_s);
+	  snprintf(buf, sizeof(buf), "%ld akçe hesabına geçti. Yine beklerim!\n\r",amount_s);
 	}
 
   send_to_char(buf, ch);
@@ -5081,7 +5081,7 @@ void do_enchant(CHAR_DATA *ch, char *argument)
 
     if ( wear_level < obj->level )
     {
-  sprintf( buf, "Onu yükseltmek için %d. seviye olmalısın.\n\r",
+  snprintf(buf, sizeof(buf), "Onu yükseltmek için %d. seviye olmalısın.\n\r",
             obj->level );
         send_to_char(buf, ch);
         act( "$n $p eşyasını yükseltmeye çalışıyor, ama yeterince tecrübeli değil.",

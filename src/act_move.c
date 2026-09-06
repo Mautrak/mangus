@@ -66,13 +66,13 @@ DECLARE_DO_FUN(do_look		);
 DECLARE_DO_FUN(do_recall	);
 DECLARE_DO_FUN(do_stand		);
 DECLARE_DO_FUN(do_yell		);
-void	one_hit		args( ( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary) );
-int 	mount_success 	args( ( CHAR_DATA *ch, CHAR_DATA *mount, int canattack) );
-int 	find_path	args( ( int in_room_vnum, int out_room_vnum, CHAR_DATA *ch, int depth, int in_zone ) );
-int	check_obj_dodge	args( ( CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *obj, int bonus) );
-OBJ_DATA *	get_weapon_char	args( ( CHAR_DATA *ch, int wType ) );
-bool cabal_area_check   args( (CHAR_DATA *ch) );
-bool is_at_cabal_area   args( (CHAR_DATA *ch) );
+void	one_hit		( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary);
+int 	mount_success 	( CHAR_DATA *ch, CHAR_DATA *mount, int canattack);
+int 	find_path	( int in_room_vnum, int out_room_vnum, CHAR_DATA *ch, int depth, int in_zone );
+int	check_obj_dodge	( CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *obj, int bonus);
+OBJ_DATA *	get_weapon_char	( CHAR_DATA *ch, int wType );
+bool cabal_area_check   (CHAR_DATA *ch);
+bool is_at_cabal_area   (CHAR_DATA *ch);
 
 
 
@@ -97,9 +97,9 @@ const	sh_int	movement_loss	[SECT_MAX]	=
 /*
  * Local functions.
  */
-int	find_door	args( ( CHAR_DATA *ch, char *arg ) );
-int 	find_exit	args( ( CHAR_DATA *ch, char *arg ) );
-bool	has_key		args( ( CHAR_DATA *ch, int key ) );
+int	find_door	( CHAR_DATA *ch, char *arg );
+int 	find_exit	( CHAR_DATA *ch, char *arg );
+bool	has_key		( CHAR_DATA *ch, int key );
 
 
 
@@ -385,17 +385,17 @@ void move_char( CHAR_DATA *ch, int door, bool follow )
             number_percent() < get_skill(ch,gsn_quiet_movement) )
           {
 	    if (MOUNTED(ch))
-      sprintf(buf,"$n %s üzerinde ilerliyor.", MOUNTED(ch)->short_descr );
+      snprintf(buf, sizeof(buf),"$n %s üzerinde ilerliyor.", MOUNTED(ch)->short_descr );
             else
-            sprintf(buf,"$n ilerliyor.");
+            snprintf(buf, sizeof(buf),"$n ilerliyor.");
             check_improve(ch,gsn_quiet_movement,TRUE,1);
           }
 	else
 	  {
            if (MOUNTED(ch))
-           sprintf(buf,"$n %s üzerinde $T yönünde ilerliyor.",MOUNTED(ch)->short_descr );
+           snprintf(buf, sizeof(buf),"$n %s üzerinde $T yönünde ilerliyor.",MOUNTED(ch)->short_descr );
   	   else
-       sprintf(buf,"$n $T yönünde ilerliyor." );
+       snprintf(buf, sizeof(buf),"$n $T yönünde ilerliyor." );
 	  }
   	  act( buf, ch, NULL, dir_name[door], TO_ROOM );
      }
@@ -441,7 +441,7 @@ void move_char( CHAR_DATA *ch, int door, bool follow )
   act("$n $M sürerek geldi.", ch, NULL, mount,TO_ROOM );
 else act( "$n geldi.", ch, NULL, NULL, TO_ROOM );
       }
-    do_look( ch, (char*)"auto" );
+    do_look( ch, "auto" );
 
     if (mount)
 	{
@@ -493,7 +493,7 @@ else act( "$n geldi.", ch, NULL, NULL, TO_ROOM );
 
 	if ( fch->master == ch && IS_AFFECTED(fch,AFF_CHARM)
 	&&   fch->position < POS_STANDING)
-	    do_stand(fch,(char*)"");
+	    do_stand(fch,"");
 
 	if ( fch->master == ch && fch->position == POS_STANDING
 	&&   can_see_room(fch,to_room))
@@ -674,10 +674,10 @@ const char * distance[4]=
   "burada.", "%s yönünde.", "%s yönünde ilerde.", "%s yönünde uzakta."
 };
 
-void scan_list           args((ROOM_INDEX_DATA *scan_room, CHAR_DATA *ch,
-                               sh_int depth, sh_int door));
-void scan_char           args((CHAR_DATA *victim, CHAR_DATA *ch,
-                               sh_int depth, sh_int door));
+void scan_list           (ROOM_INDEX_DATA *scan_room, CHAR_DATA *ch,
+                               sh_int depth, sh_int door);
+void scan_char           (CHAR_DATA *victim, CHAR_DATA *ch,
+                               sh_int depth, sh_int door);
 void do_scan2(CHAR_DATA *ch, char *argument)
 {
    //extern   char *  const   dir_name        [];
@@ -724,7 +724,7 @@ void scan_char(CHAR_DATA *victim, CHAR_DATA *ch, sh_int depth, sh_int door)
  	(is_affected(victim,gsn_doppelganger) && !IS_SET(ch->act,PLR_HOLYLIGHT))
 		 ? PERS(victim->doppel, ch) : PERS(victim, ch));
    strcat(buf, ", ");
-   sprintf(buf2, distance[depth], dir_name[door]);
+   snprintf(buf2, sizeof(buf2), distance[depth], dir_name[door]);
    strcat(buf, buf2);
    strcat(buf, "\n\r");
 
@@ -1429,7 +1429,7 @@ void do_stand( CHAR_DATA *ch, char *argument )
 	}
 
 	ch->position = POS_STANDING;
-	do_look(ch,(char*)"auto");
+	do_look(ch,"auto");
 	break;
 
     case POS_RESTING: case POS_SITTING:
@@ -1866,7 +1866,7 @@ void do_wake( CHAR_DATA *ch, char *argument )
 	{ act("Onu uyandıramazsın!",   ch, NULL, victim, TO_CHAR );  return; }
 
     act_new("$n seni uyandırıyor.", ch, NULL, victim, TO_VICT,POS_SLEEPING );
-    do_stand(victim,(char*)"");
+    do_stand(victim,"");
     return;
 }
 
@@ -2133,7 +2133,7 @@ void do_recall( CHAR_DATA *ch, char *argument )
 	{
 	    check_improve(ch,gsn_recall,FALSE,6);
 	    WAIT_STATE( ch, 4 );
-      sprintf( buf, "Başaramadın.\n\r");
+      snprintf(buf, sizeof(buf), "Başaramadın.\n\r");
 	    send_to_char( buf, ch );
 	    return;
 	}
@@ -2141,7 +2141,7 @@ void do_recall( CHAR_DATA *ch, char *argument )
 	lose = 25;
 	gain_exp( ch, 0 - lose );
 	check_improve(ch,gsn_recall,TRUE,4);
-  sprintf( buf, "Dövüşürken anımsama kullandın!  %d TP kaybettin.\n\r", lose );
+  snprintf(buf, sizeof(buf), "Dövüşürken anımsama kullandın!  %d TP kaybettin.\n\r", lose );
 	send_to_char( buf, ch );
 	stop_fighting( ch, TRUE );
     }
@@ -2151,13 +2151,13 @@ void do_recall( CHAR_DATA *ch, char *argument )
     char_from_room( ch );
     char_to_room( ch, location );
     act( "$n ortaya çıkıyor.", ch, NULL, NULL, TO_ROOM );
-    do_look( ch, (char*)"auto" );
+    do_look( ch, "auto" );
 
     if (ch->pet != NULL)
       {
  	char_from_room( ch->pet );
 	char_to_room( ch->pet, location );
-	do_look(ch->pet, (char*)"auto" );
+	do_look(ch->pet, "auto" );
       }
 
     return;
@@ -2193,9 +2193,9 @@ void do_train( CHAR_DATA *ch, char *argument )
 
     if ( argument[0] == '\0' )
     {
-      sprintf( buf, "%d eğitim seansın var.\n\r", ch->train );
+      snprintf(buf, sizeof(buf), "%d eğitim seansın var.\n\r", ch->train );
 	send_to_char( buf, ch );
-	argument = (char*)"foo";
+	argument = "foo";
     }
 
     cost = 1;
@@ -2205,7 +2205,7 @@ void do_train( CHAR_DATA *ch, char *argument )
 	if ( class_table[ch->iclass].attr_prime == STAT_STR )
 	    cost    = 1;
 	stat        = STAT_STR;
-	pOutput     = (char*)"Gücün";
+	pOutput     = "Gücün";
     }
 
     else if ( !str_cmp( argument, "zek" ) || !str_cmp( argument, "zeka" ) )
@@ -2213,7 +2213,7 @@ void do_train( CHAR_DATA *ch, char *argument )
 	if ( class_table[ch->iclass].attr_prime == STAT_INT )
 	    cost    = 1;
 	stat	    = STAT_INT;
-	pOutput     = (char*)"Zekan";
+	pOutput     = "Zekan";
     }
 
     else if ( !str_cmp( argument, "bil" ) || !str_cmp( argument, "bilgelik" ) )
@@ -2221,7 +2221,7 @@ void do_train( CHAR_DATA *ch, char *argument )
 	if ( class_table[ch->iclass].attr_prime == STAT_WIS )
 	    cost    = 1;
 	stat	    = STAT_WIS;
-	pOutput     = (char*)"Bilgeliğin";
+	pOutput     = "Bilgeliğin";
     }
 
     else if ( !str_cmp( argument, "çev" ) || !str_cmp( argument, "çeviklik" ) )
@@ -2229,7 +2229,7 @@ void do_train( CHAR_DATA *ch, char *argument )
 	if ( class_table[ch->iclass].attr_prime == STAT_DEX )
 	    cost    = 1;
 	stat  	    = STAT_DEX;
-	pOutput     = (char*)"Çevikliğin";
+	pOutput     = "Çevikliğin";
     }
 
     else if ( !str_cmp( argument, "bün" ) || !str_cmp( argument, "bünye" ) )
@@ -2237,7 +2237,7 @@ void do_train( CHAR_DATA *ch, char *argument )
 	if ( class_table[ch->iclass].attr_prime == STAT_CON )
 	    cost    = 1;
 	stat	    = STAT_CON;
-	pOutput     = (char*)"Bünyen";
+	pOutput     = "Bünyen";
     }
 
     else if ( !str_cmp( argument, "kar") || !str_cmp( argument, "karizma") )
@@ -2245,9 +2245,9 @@ void do_train( CHAR_DATA *ch, char *argument )
 	if ( class_table[ch->iclass].attr_prime == STAT_CHA )
 	    cost    = 1;
 	stat	    = STAT_CHA;
-	pOutput     = (char*)"Karizman";
+	pOutput     = "Karizman";
 /*
-	sprintf( buf,
+	snprintf(buf, sizeof(buf),
  "You can't train charisma. That is about your behaviour.\n\r");
 	send_to_char( buf, ch );
 	return;
@@ -2380,13 +2380,13 @@ void do_track(CHAR_DATA *ch, char *argument)
          {
           check_improve(ch,gsn_track,TRUE,1);
 	  if ((d = rh->went) == -1) continue;
-    sprintf(buf,"%s kişisine ait izler %s uzanıyor.\n\r",capitalize(rh->name),door[d]);
+    snprintf(buf, sizeof(buf),"%s kişisine ait izler %s uzanıyor.\n\r",capitalize(rh->name),door[d]);
         send_to_char(buf, ch);
 	  if ( ( pexit = ch->in_room->exit[d] ) != NULL
 	    &&   IS_SET(pexit->exit_info, EX_ISDOOR)
 	    &&   pexit->keyword != NULL )
 	    {
-	     sprintf(buf,"%s",door[d]);
+	     snprintf(buf, sizeof(buf),"%s",door[d]);
 	     do_open(ch,buf);
 	    }
           move_char(ch,rh->went,FALSE);
@@ -2737,7 +2737,7 @@ void do_vbite( CHAR_DATA *ch, char *argument )
     if (!(IS_NPC(victim)) && !(IS_NPC(ch))
 	&& victim->position == POS_FIGHTING )
       {
-        sprintf( buf, "İmdat, bir vampir beni ısırmaya çalıştı!");
+        snprintf(buf, sizeof(buf), "İmdat, bir vampir beni ısırmaya çalıştı!");
 	    do_yell( victim, buf );
       }
     return;
@@ -2903,7 +2903,7 @@ void do_blink( CHAR_DATA *ch, char *argument )
 
     if (arg[0] == '\0' )
     {
-      sprintf(buf,"Zayi durumu : %s.\n\r",
+      snprintf(buf, sizeof(buf),"Zayi durumu : %s.\n\r",
    	IS_BLINK_ON(ch) ? "AÇIK" : "KAPALI");
      send_to_char(buf,ch);
      return;
@@ -2912,7 +2912,7 @@ void do_blink( CHAR_DATA *ch, char *argument )
     if ( !str_cmp(arg,"açık") || !str_cmp(arg,"aç") )
 	{
 	 SET_BIT(ch->act,PLR_BLINK_ON);
-   sprintf(buf,"Zayi artık AÇIK.\n\r");
+   snprintf(buf, sizeof(buf),"Zayi artık AÇIK.\n\r");
 	 send_to_char(buf,ch);
 	 return;
 	}
@@ -2920,12 +2920,12 @@ void do_blink( CHAR_DATA *ch, char *argument )
   if ( !str_cmp(arg,"kapalı") || !str_cmp(arg,"kapa") )
 	{
 	 REMOVE_BIT(ch->act,PLR_BLINK_ON);
-   sprintf(buf,"Zayi artık KAPALI.\n\r");
+   snprintf(buf, sizeof(buf),"Zayi artık KAPALI.\n\r");
 	 send_to_char(buf,ch);
 	 return;
 	}
 
-  sprintf(buf,"%s da nedir? Bir durum mu?\n\r",arg);
+  snprintf(buf, sizeof(buf),"%s da nedir? Bir durum mu?\n\r",arg);
    send_to_char(buf,ch);
    return;
 }
@@ -2999,7 +2999,7 @@ void do_vanish( CHAR_DATA *ch, char *argument )
   char_from_room( ch );
   char_to_room( ch, pRoomIndex );
   act("$n ortaya çıkıyor.", ch, NULL, NULL, TO_ROOM );
-  do_look( ch, (char*)"auto" );
+  do_look( ch, "auto" );
   stop_fighting(ch,TRUE);
   return;
 }
@@ -3137,10 +3137,10 @@ void do_vtouch(CHAR_DATA *ch, char *argument)
 	damage(ch,victim,0,gsn_vampiric_touch,DAM_NONE, TRUE);
 	check_improve(ch,gsn_vampiric_touch,FALSE,1);
         if (!can_see(victim, ch))
-        do_yell(victim,  (char*)"İmdat! Biri beni boğazladı!");
+        do_yell(victim,  "İmdat! Biri beni boğazladı!");
         else
         {
-          sprintf(buf, "İmdat! %s bana saldırdı!",
+          snprintf(buf, sizeof(buf), "İmdat! %s bana saldırdı!",
                     (is_affected(ch,gsn_doppelganger)&& !IS_IMMORTAL(victim))?
                     ch->doppel->name : ch->name );
             if (!IS_NPC(victim)) do_yell(victim,buf);
@@ -3327,7 +3327,7 @@ if ( ( door = find_exit( ch, arg2 ) ) >= 0 )
         }
         act( "$n $M itmeyi denedi.\n\r",  ch, NULL, victim,TO_NOTVICT);
 
-        sprintf(buf,"Ellerini benden uzak tut %s!",ch->name);
+        snprintf(buf, sizeof(buf),"Ellerini benden uzak tut %s!",ch->name);
 
 	if ( IS_AWAKE( victim ) )
 	  	do_yell( victim, buf );
@@ -3344,11 +3344,11 @@ if ( ( door = find_exit( ch, arg2 ) ) >= 0 )
     }
 
 
-    sprintf(buf,"$C$M %s yönüne ittin.$c",dir_name[door]);
+    snprintf(buf, sizeof(buf),"$C$M %s yönüne ittin.$c",dir_name[door]);
       act_color(buf,ch,NULL,victim,TO_CHAR,POS_SLEEPING,CLR_YELLOW);
-  	sprintf(buf,"$C$n seni %s yönüne itti.$c", dir_name[door]);
+  	snprintf(buf, sizeof(buf),"$C$n seni %s yönüne itti.$c", dir_name[door]);
       act_color(buf,ch,NULL,victim,TO_VICT,POS_SLEEPING,CLR_YELLOW);
-  	sprintf(buf,"$C$n $M %s yönüne itti.$c", dir_name[door]);
+  	snprintf(buf, sizeof(buf),"$C$n $M %s yönüne itti.$c", dir_name[door]);
       act_color(buf,ch,NULL,victim,TO_NOTVICT,POS_SLEEPING,CLR_YELLOW);
       move_char( victim , door , FALSE );
 
@@ -3418,13 +3418,13 @@ void do_crecall( CHAR_DATA *ch, char *argument )
     char_from_room( ch );
     char_to_room( ch, location );
     act( "$n beliriyor.", ch, NULL, NULL, TO_ROOM );
-    do_look( ch, (char*)"auto" );
+    do_look( ch, "auto" );
 
     if (ch->pet != NULL)
       {
  	char_from_room( ch->pet );
 	char_to_room( ch->pet, location );
-	do_look(ch->pet, (char*)"auto" );
+	do_look(ch->pet, "auto" );
       }
 
     af.type      = gsn_cabal_recall;
@@ -3680,7 +3680,7 @@ void do_mount( CHAR_DATA *ch, char *argument )
   }
 
   if( (mount->mount) && (!mount->riding) && (mount->mount != ch)) {
-    sprintf(buf, "%s %s'e bağlı, sana değil.\n\r", mount->short_descr,mount->mount->name);
+    snprintf(buf, sizeof(buf), "%s %s'e bağlı, sana değil.\n\r", mount->short_descr,mount->mount->name);
     send_to_char(buf,ch);
     return;
   }
@@ -3897,7 +3897,7 @@ int send_arrow( CHAR_DATA *ch, CHAR_DATA *victim,OBJ_DATA *arrow , int door, int
 	  dest_room = pExit->u1.to_room;
 	  if ( dest_room->people )
 		{
-      sprintf(buf,"$p %s yönünden odaya giriyor!",dir_name[rev_dir[door]]);
+      snprintf(buf, sizeof(buf),"$p %s yönünden odaya giriyor!",dir_name[rev_dir[door]]);
 		 act(buf, dest_room->people, arrow, NULL, TO_ALL );
 		}
 	 }
@@ -3969,7 +3969,7 @@ void do_shoot( CHAR_DATA *ch, char *argument )
 
     if (is_safe(ch,victim))
     {
-      sprintf(buf,"%s tanrılar tarafından korunuyor.\n\r",victim->name);
+      snprintf(buf, sizeof(buf),"%s tanrılar tarafından korunuyor.\n\r",victim->name);
 	send_to_char(buf,ch);
 	return;
     }
@@ -3997,9 +3997,9 @@ void do_shoot( CHAR_DATA *ch, char *argument )
 	chance -= 40;
     chance += GET_HITROLL(ch);
 
-    sprintf( buf, "%s'e $p atıyorsun.", dir_name[ direction ] );
+    snprintf(buf, sizeof(buf), "%s'e $p atıyorsun.", dir_name[ direction ] );
       act( buf, ch, arrow, NULL, TO_CHAR );
-  	sprintf( buf, "$n %s'e $p atıyor.", dir_name[ direction ] );
+  	snprintf(buf, sizeof(buf), "$n %s'e $p atıyor.", dir_name[ direction ] );
       act( buf, ch, arrow, NULL, TO_ROOM );
 
     obj_from_char(arrow);
@@ -4016,7 +4016,7 @@ char *find_way(CHAR_DATA *ch,ROOM_INDEX_DATA *rstart, ROOM_INDEX_DATA *rend)
  char buf2[2];
  int i;
 
- sprintf(buf,"Find: ");
+ snprintf(buf, sizeof(buf),"Find: ");
  for(i=0; i<65535; i++)
  {
  if ( (rend == rstart))
@@ -4141,7 +4141,7 @@ void do_throw_spear( CHAR_DATA *ch, char *argument )
 
     if (is_safe(ch,victim))
     {
-      sprintf(buf,"%s tanrılar tarafından korunuyor.\n\r",victim->name);
+      snprintf(buf, sizeof(buf),"%s tanrılar tarafından korunuyor.\n\r",victim->name);
 	send_to_char(buf,ch);
 	return;
     }
@@ -4164,9 +4164,9 @@ void do_throw_spear( CHAR_DATA *ch, char *argument )
 	chance -= 40;
     chance += GET_HITROLL(ch);
 
-    sprintf( buf, "%s'e $p fırlatıyorsun.", dir_name[ direction ] );
+    snprintf(buf, sizeof(buf), "%s'e $p fırlatıyorsun.", dir_name[ direction ] );
       act( buf, ch, spear, NULL, TO_CHAR );
-      sprintf( buf, "$n %s'e $p fırlatıyor.", dir_name[ direction ] );
+      snprintf(buf, sizeof(buf), "$n %s'e $p fırlatıyor.", dir_name[ direction ] );
       act( buf, ch, spear, NULL, TO_ROOM );
 
     obj_from_char(spear);

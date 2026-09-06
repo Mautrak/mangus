@@ -20,7 +20,7 @@
 
 DECLARE_DO_FUN( do_say );
 
-CHAR_DATA *  find_mafya	args( ( CHAR_DATA * ch ) );
+CHAR_DATA *  find_mafya	( CHAR_DATA * ch );
 
 CHAR_DATA * find_mafya ( CHAR_DATA *ch )
 {
@@ -55,9 +55,9 @@ void do_iste( CHAR_DATA *ch, char *argument )
 
 	if (argument[0] == '\0')
 	{
-		do_say(mafya, (char*)"Lakap kaldırtmak:");
-		do_say(mafya, (char*)"aranıyor:  20000 akçe");
-		do_say(mafya, (char*)"talep lakapkaldır <aranıyor>");
+		do_say(mafya, "Lakap kaldırtmak:");
+		do_say(mafya, "aranıyor:  20000 akçe");
+		do_say(mafya, "talep lakapkaldır <aranıyor>");
 		return;
     }
 
@@ -71,28 +71,28 @@ void do_iste( CHAR_DATA *ch, char *argument )
 			cost = 20000;
 			if ( !IS_SET(ch->act, PLR_WANTED) )
 			{
-				do_say(mafya, (char*)"Aranmıyorsun ki! Hatta oldukça zararsız bi tipe benziyorsun!");
+				do_say(mafya, "Aranmıyorsun ki! Hatta oldukça zararsız bi tipe benziyorsun!");
 				return;
 			}
 			if ( cost > ch->pcdata->bank_s )
 			{
-				do_say(mafya, (char*)"Bankada yeterli akçen yok.");
+				do_say(mafya, "Bankada yeterli akçen yok.");
 				return;
 			}
 			REMOVE_BIT( ch->act, PLR_WANTED );
 			ch->pcdata->bank_s 	    -= cost;
 			mafya->silver  += cost;
-			do_say(mafya, (char*)"Temiz iş oldu. Yüzbaşının ofisindeki kayıtları sildik. Artık aranmıyorsun!");
-			do_say(mafya, (char*)"Yine bekleriz.");
+			do_say(mafya, "Temiz iş oldu. Yüzbaşının ofisindeki kayıtları sildik. Artık aranmıyorsun!");
+			do_say(mafya, "Yine bekleriz.");
 			return;
 		}
 	}
 	else
 	{
-		do_say(mafya, (char*)"Ne söylediğini anlamıyorum, ama şunlar ilgini çekebilir...");
-		do_say(mafya, (char*)"Lakap kaldırtmak:");
-		do_say(mafya, (char*)"aranıyor:  20000 akçe");
-		do_say(mafya, (char*)"talep lakapkaldır <aranıyor>");
+		do_say(mafya, "Ne söylediğini anlamıyorum, ama şunlar ilgini çekebilir...");
+		do_say(mafya, "Lakap kaldırtmak:");
+		do_say(mafya, "aranıyor:  20000 akçe");
+		do_say(mafya, "talep lakapkaldır <aranıyor>");
 		return;
 	}
 }

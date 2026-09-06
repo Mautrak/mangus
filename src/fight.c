@@ -90,39 +90,39 @@ extern void do_visible( CHAR_DATA *ch, char *argument );
 /*
  * Local functions.
  */
-void	check_assist	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-bool	check_dodge	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-bool	check_parry	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-bool	check_block	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-bool	check_blink	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-bool	check_hand	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-bool	check_cross	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-void	dam_message	args( ( CHAR_DATA *ch, CHAR_DATA *victim, int dam,
-			    int dt, bool immune ,int dam_type) );
-void	death_cry	args( ( CHAR_DATA *ch ) );
-void	death_cry_org	args( ( CHAR_DATA *ch, int part) );
-void	group_gain	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-int	xp_compute	args( ( CHAR_DATA *gch, CHAR_DATA *victim,
-			    int total_levels,int members ) );
-bool	is_safe		args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-void	make_corpse	args( ( CHAR_DATA *ch ) );
-void	one_hit		args( ( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary) );
-void    mob_hit		args( ( CHAR_DATA *ch, CHAR_DATA *victim, int dt ) );
-void	raw_kill	args( ( CHAR_DATA *victim ) );
-void	raw_kill_org	args( ( CHAR_DATA *victim, int part ) );
-void	set_fighting	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-void	disarm		args( ( CHAR_DATA *ch, CHAR_DATA *victim ,int disarm_second) );
-void	check_weapon_destroy	args( (CHAR_DATA *ch, CHAR_DATA *victim, bool second) );
-void	damage_to_object	args( (CHAR_DATA *ch, OBJ_DATA *wield, OBJ_DATA *worn, int damage) );
-int	critical_strike	args( ( CHAR_DATA *ch, CHAR_DATA *victim, int dam ) );
-int	ground_strike	args( ( CHAR_DATA *ch, CHAR_DATA *victim, int dam ) );
-void	check_shield_destroyed	args( (CHAR_DATA *ch, CHAR_DATA *victim, bool second) );
-void	check_weapon_destroyed	args( (CHAR_DATA *ch, CHAR_DATA *victim, bool second) );
+void	check_assist	( CHAR_DATA *ch, CHAR_DATA *victim );
+bool	check_dodge	( CHAR_DATA *ch, CHAR_DATA *victim );
+bool	check_parry	( CHAR_DATA *ch, CHAR_DATA *victim );
+bool	check_block	( CHAR_DATA *ch, CHAR_DATA *victim );
+bool	check_blink	( CHAR_DATA *ch, CHAR_DATA *victim );
+bool	check_hand	( CHAR_DATA *ch, CHAR_DATA *victim );
+bool	check_cross	( CHAR_DATA *ch, CHAR_DATA *victim );
+void	dam_message	( CHAR_DATA *ch, CHAR_DATA *victim, int dam,
+			    int dt, bool immune ,int dam_type);
+void	death_cry	( CHAR_DATA *ch );
+void	death_cry_org	( CHAR_DATA *ch, int part);
+void	group_gain	( CHAR_DATA *ch, CHAR_DATA *victim );
+int	xp_compute	( CHAR_DATA *gch, CHAR_DATA *victim,
+			    int total_levels,int members );
+bool	is_safe		( CHAR_DATA *ch, CHAR_DATA *victim );
+void	make_corpse	( CHAR_DATA *ch );
+void	one_hit		( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary);
+void    mob_hit		( CHAR_DATA *ch, CHAR_DATA *victim, int dt );
+void	raw_kill	( CHAR_DATA *victim );
+void	raw_kill_org	( CHAR_DATA *victim, int part );
+void	set_fighting	( CHAR_DATA *ch, CHAR_DATA *victim );
+void	disarm		( CHAR_DATA *ch, CHAR_DATA *victim ,int disarm_second);
+void	check_weapon_destroy	(CHAR_DATA *ch, CHAR_DATA *victim, bool second);
+void	damage_to_object	(CHAR_DATA *ch, OBJ_DATA *wield, OBJ_DATA *worn, int damage);
+int	critical_strike	( CHAR_DATA *ch, CHAR_DATA *victim, int dam );
+int	ground_strike	( CHAR_DATA *ch, CHAR_DATA *victim, int dam );
+void	check_shield_destroyed	(CHAR_DATA *ch, CHAR_DATA *victim, bool second);
+void	check_weapon_destroyed	(CHAR_DATA *ch, CHAR_DATA *victim, bool second);
 
 
-bool	mob_cast_mage	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-bool	mob_cast_cleric	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-void    say_spell       args( ( CHAR_DATA *ch, int sn ) );
+bool	mob_cast_mage	( CHAR_DATA *ch, CHAR_DATA *victim );
+bool	mob_cast_cleric	( CHAR_DATA *ch, CHAR_DATA *victim );
+void    say_spell       ( CHAR_DATA *ch, int sn );
 
 
 /*
@@ -206,7 +206,7 @@ void check_assist(CHAR_DATA *ch,CHAR_DATA *victim)
 	    && IS_SET(rch->off_flags,ASSIST_PLAYERS)
 	    &&  rch->level + 6 > victim->level)
 	    {
-		do_emote(rch,(char*)"çığlık atarak saldırıyor!");
+		do_emote(rch,"çığlık atarak saldırıyor!");
 		multi_hit(rch,victim,TYPE_UNDEFINED);
 		continue;
 	    }
@@ -270,7 +270,7 @@ void check_assist(CHAR_DATA *ch,CHAR_DATA *victim)
 
 		    if (target != NULL)
 		    {
-			do_emote(rch,(char*)"çığlık atarak saldırıyor!");
+			do_emote(rch,"çığlık atarak saldırıyor!");
 			multi_hit(rch,target,TYPE_UNDEFINED);
 		    }
 		}
@@ -301,7 +301,7 @@ void multi_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
 	 if (victim->mount->fighting == NULL
 	     || victim->mount->fighting == ch)
 	 victim = victim->mount;
-	 else do_dismount(victim->mount,(char*)"");
+	 else do_dismount(victim->mount,"");
 	}
 
     /* no attacks on ghosts or attacks by ghosts */
@@ -552,12 +552,12 @@ void mob_hit (CHAR_DATA *ch, CHAR_DATA *victim, int dt)
     {
     case (0) :
 	if (IS_SET(ch->off_flags,OFF_BASH))
-	    do_bash(ch,(char*)"");
+	    do_bash(ch,"");
 	break;
 
     case (1) :
 	if (IS_SET(ch->off_flags,OFF_BERSERK) && !IS_AFFECTED(ch,AFF_BERSERK))
-	    do_berserk(ch,(char*)"");
+	    do_berserk(ch,"");
 	break;
 
 
@@ -566,31 +566,31 @@ void mob_hit (CHAR_DATA *ch, CHAR_DATA *victim, int dt)
 	|| (get_weapon_sn(ch,FALSE) != gsn_hand_to_hand
 	&& (IS_SET(ch->act,ACT_WARRIOR)
    	||  IS_SET(ch->act,ACT_THIEF))))
-	    do_disarm(ch,(char*)"");
+	    do_disarm(ch,"");
 	break;
 
     case (3) :
 	if (IS_SET(ch->off_flags,OFF_KICK))
-	    do_kick(ch,(char*)"");
+	    do_kick(ch,"");
 	break;
 
     case (4) :
 	if (IS_SET(ch->off_flags,OFF_KICK_DIRT))
-	    do_dirt(ch,(char*)"");
+	    do_dirt(ch,"");
 	break;
 
     case (5) :
 	if (IS_SET(ch->off_flags,OFF_TAIL))
-	  do_tail(ch,(char*)"");
+	  do_tail(ch,"");
 	break;
 
     case (6) :
 	if (IS_SET(ch->off_flags,OFF_TRIP))
-	    do_trip(ch,(char*)"");
+	    do_trip(ch,"");
 	break;
     case (7) :
 	if (IS_SET(ch->off_flags,OFF_CRUSH))
-	    do_crush(ch,(char*)"");
+	    do_crush(ch,"");
 	break;
     }
 }
@@ -1009,7 +1009,7 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
 		/* event */
 		if (!IS_NPC(victim))
 		{
-		sprintf(eventbuf,"%s, %s tarafından ikiye bölünerek öldürüldü.",victim->name,ch->name);
+		snprintf(eventbuf, sizeof(eventbuf),"%s, %s tarafından ikiye bölünerek öldürüldü.",victim->name,ch->name);
 		write_event_log(eventbuf);
 		}
 
@@ -1017,16 +1017,16 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
 	    raw_kill(victim);
 	    if ( !IS_NPC(ch) && IS_NPC(victim) )
 	      {
-		corpse = get_obj_list( ch, (char*)"ceset", ch->in_room->contents );
+		corpse = get_obj_list( ch, "ceset", ch->in_room->contents );
 
 		if ( IS_SET(ch->act, PLR_AUTOLOOT) &&
 		    corpse && corpse->contains) /* exists and not empty */
-		  do_get( ch, (char*)"tümü ceset" );
+		  do_get( ch, "tümü ceset" );
 
 		if (IS_SET(ch->act,PLR_AUTOAKCE) &&
 		    corpse && corpse->contains ) /* exists and not empty */
 		 {
-		  do_get(ch, (char*)"akçe ceset");
+		  do_get(ch, "akçe ceset");
 		}
 
 		if ( IS_SET(ch->act, PLR_AUTOSAC) )
@@ -1035,7 +1035,7 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
 		      && corpse->contains)
 		    return;  /* leave if corpse has treasure */
 		  else
-		    do_sacrifice( ch, (char*)"ceset" );
+		    do_sacrifice( ch, "ceset" );
 		    }
 	      }
 	    return;
@@ -1060,7 +1060,7 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
 		/* event */
 		if (!IS_NPC(victim))
 		{
-		sprintf(eventbuf,"%s, %s tarafından suikastle öldürüldü.",victim->name,ch->name);
+		snprintf(eventbuf, sizeof(eventbuf),"%s, %s tarafından suikastle öldürüldü.",victim->name,ch->name);
 		write_event_log(eventbuf);
 		}
 
@@ -1068,16 +1068,16 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
 	    raw_kill(victim);
 	    if ( !IS_NPC(ch) && IS_NPC(victim) )
 	      {
-		corpse = get_obj_list( ch, (char*)"ceset", ch->in_room->contents );
+		corpse = get_obj_list( ch, "ceset", ch->in_room->contents );
 
 		if ( IS_SET(ch->act, PLR_AUTOLOOT) &&
 		    corpse && corpse->contains) /* exists and not empty */
-		  do_get( ch, (char*)"tümü ceset" );
+		  do_get( ch, "tümü ceset" );
 
 		if (IS_SET(ch->act,PLR_AUTOAKCE) &&
 		    corpse && corpse->contains ) /* exists and not empty */
 		  {
-				do_get(ch, (char*)"akçe ceset");
+				do_get(ch, "akçe ceset");
 			}
 
 		if ( IS_SET(ch->act, PLR_AUTOSAC) )
@@ -1086,7 +1086,7 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
 		      && corpse->contains)
 		    return;  /* leave if corpse has treasure */
 		  else
-		    do_sacrifice( ch, (char*)"ceset" );
+		    do_sacrifice( ch, "ceset" );
 		    }
 	      }
 	    return;
@@ -1158,14 +1158,14 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
 			 */
 			if(IS_NPC(ch))
 			{
-				if( ch->spec_fun == spec_lookup( (char*)"spec_fight_enforcer" ) ||
-			  		ch->spec_fun == spec_lookup( (char*)"spec_fight_invader" ) ||
-						ch->spec_fun == spec_lookup( (char*)"spec_fight_ivan" ) ||
-						ch->spec_fun == spec_lookup( (char*)"spec_fight_seneschal" ) ||
-						ch->spec_fun == spec_lookup( (char*)"spec_fight_powerman" ) ||
-						ch->spec_fun == spec_lookup( (char*)"spec_fight_protector" ) ||
-						ch->spec_fun == spec_lookup( (char*)"spec_fight_hunter" ) ||
-						ch->spec_fun == spec_lookup( (char*)"spec_fight_lionguard" ) )
+				if( ch->spec_fun == spec_lookup( "spec_fight_enforcer" ) ||
+			  		ch->spec_fun == spec_lookup( "spec_fight_invader" ) ||
+						ch->spec_fun == spec_lookup( "spec_fight_ivan" ) ||
+						ch->spec_fun == spec_lookup( "spec_fight_seneschal" ) ||
+						ch->spec_fun == spec_lookup( "spec_fight_powerman" ) ||
+						ch->spec_fun == spec_lookup( "spec_fight_protector" ) ||
+						ch->spec_fun == spec_lookup( "spec_fight_hunter" ) ||
+						ch->spec_fun == spec_lookup( "spec_fight_lionguard" ) )
 						{
 							dam *= 4;
 						}
@@ -1313,7 +1313,7 @@ bool damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt, int dam_type, bo
 	if ( dam > 1000 && !IS_IMMORTAL(ch))
 	{
 		char buf[MAX_STRING_LENGTH];
-		sprintf(buf,"%s:Damage more than 1000 points :%d",ch->name,dam);
+		snprintf(buf, sizeof(buf),"%s:Damage more than 1000 points :%d",ch->name,dam);
 		bug( buf,0);
 		if (IS_NPC(ch) && !IS_NPC(ch))
 		{
@@ -1388,7 +1388,7 @@ bool damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt, int dam_type, bo
 			|| IS_SET(ch->affected_by, AFF_CAMOUFLAGE) || IS_SET(ch->affected_by, AFF_IMP_INVIS)
 			|| CAN_DETECT(ch, ADET_EARTHFADE) )
 	{
-		do_visible(ch, (char*)"");
+		do_visible(ch, "");
 	}
 
 	/*
@@ -1598,7 +1598,7 @@ bool damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt, int dam_type, bo
 			/* event */
 			if (!IS_NPC(victim))
 			{
-			sprintf(eventbuf,"%s öldü.",victim->name);
+			snprintf(eventbuf, sizeof(eventbuf),"%s öldü.",victim->name);
 			write_event_log(eventbuf);
 			}
 			break;
@@ -1676,9 +1676,9 @@ bool damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt, int dam_type, bo
 						victim->last_fight_time = -1;
 						victim->hit = 1;
 						victim->position = POS_STANDING;
-						sprintf( strsave, "%s%s", PLAYER_DIR, capitalize( victim->name ) );
+						snprintf(strsave, sizeof(strsave), "%s%s", PLAYER_DIR, capitalize( victim->name ) );
 						wiznet("$N bünyesi yetersiz geldiği için silindi.",ch,NULL,0,0,0);
-						do_quit_count(victim,(char*)"");
+						do_quit_count(victim,"");
 						unlink(strsave);
 						return TRUE;
 					}
@@ -1691,9 +1691,9 @@ bool damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt, int dam_type, bo
 						victim->last_fight_time = -1;
 						victim->hit = 1;
 						victim->position = POS_STANDING;
-						sprintf( strsave, "%s%s", PLAYER_DIR, capitalize( victim->name ) );
+						snprintf(strsave, sizeof(strsave), "%s%s", PLAYER_DIR, capitalize( victim->name ) );
 						wiznet("$N 15 ölümü geçtiği için silindi.",ch,NULL,0,0,0);
-						do_quit_count(victim,(char*)"");
+						do_quit_count(victim,"");
 						unlink(strsave);
 						return TRUE;
 					}
@@ -1722,16 +1722,16 @@ bool damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt, int dam_type, bo
 
 		if ( !IS_NPC(ch) && IS_NPC(victim) )
 		{
-			corpse = get_obj_list( ch, (char*)"ceset", ch->in_room->contents );
+			corpse = get_obj_list( ch, "ceset", ch->in_room->contents );
 
 			if ( IS_SET(ch->act, PLR_AUTOLOOT) && corpse && corpse->contains) /* exists and not empty */
 			{
-				do_get( ch, (char*)"tümü ceset" );
+				do_get( ch, "tümü ceset" );
 			}
 
 			if (IS_SET(ch->act,PLR_AUTOAKCE) && corpse && corpse->contains ) /* exists and not empty */
 			{
-				do_get(ch, (char*)"akçe ceset");
+				do_get(ch, "akçe ceset");
 			}
 
 			if ( ch->iclass == CLASS_VAMPIRE && ch->level > 10 && corpse)
@@ -1775,7 +1775,7 @@ bool damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt, int dam_type, bo
 				}
 				else
 				{
-					do_sacrifice( ch, (char*)"ceset" );
+					do_sacrifice( ch, "ceset" );
 				}
 			}
 		}
@@ -1797,11 +1797,11 @@ bool damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt, int dam_type, bo
 		{
 		if (victim->level < 11)
 		{
-			do_recall( victim, (char*)"" );
+			do_recall( victim, "" );
 		}
 		else
 		{
-			do_flee( victim, (char*)"" );
+			do_flee( victim, "" );
 		}
 		return TRUE;
 		}
@@ -1818,7 +1818,7 @@ bool damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt, int dam_type, bo
 				&&     victim->master->in_room != victim->in_room ) )
 				|| ( CAN_DETECT(victim,ADET_FEAR) && !IS_SET(victim->act,ACT_NOTRACK) ))
 		{
-			do_flee( victim, (char*)"" );
+			do_flee( victim, "" );
 			victim->last_fought = NULL;
 		}
 	}
@@ -1827,7 +1827,7 @@ bool damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt, int dam_type, bo
 	  && ( victim->hit <= victim->wimpy || CAN_DETECT(victim, ADET_FEAR) )
 	  && victim->wait < PULSE_VIOLENCE / 2 )
 	{
-		do_flee( victim, (char*)"" );
+		do_flee( victim, "" );
 	}
 
 	tail_chain( );
@@ -2377,11 +2377,11 @@ void make_corpse( CHAR_DATA *ch )
 
     corpse->level = ch->level;
 
-    sprintf( buf, corpse->short_descr, name );
+    snprintf(buf, sizeof(buf), corpse->short_descr, name );
     free_string( corpse->short_descr );
     corpse->short_descr = str_dup( buf );
 
-    sprintf( buf, corpse->description, name );
+    snprintf(buf, sizeof(buf), corpse->description, name );
     free_string( corpse->description );
     corpse->description = str_dup( buf );
 
@@ -2507,11 +2507,11 @@ void death_cry_org( CHAR_DATA *ch, int part )
 	obj		= create_object( get_obj_index( vnum ), 0 );
 	obj->timer	= number_range( 4, 7 );
 
-	sprintf( buf, obj->short_descr, name );
+	snprintf(buf, sizeof(buf), obj->short_descr, name );
 	free_string( obj->short_descr );
 	obj->short_descr = str_dup( buf );
 
-	sprintf( buf, obj->description, name );
+	snprintf(buf, sizeof(buf), obj->description, name );
 	free_string( obj->description );
 	obj->description = str_dup( buf );
 
@@ -2766,7 +2766,7 @@ void group_gain( CHAR_DATA *ch, CHAR_DATA *victim )
 					xp *= 2;
 			}
 
-			sprintf( buf, "{g%d tecrübe puanı kazandın.{x\n\r", xp );
+			snprintf(buf, sizeof(buf), "{g%d tecrübe puanı kazandın.{x\n\r", xp );
 			send_to_char( buf, gch );
 			gain_exp( gch, xp );
 		}
@@ -3032,35 +3032,35 @@ void dam_message( CHAR_DATA *ch, CHAR_DATA *victim,int dam,int dt,bool immune ,i
 	{
 	  if ( dam_type == DAM_HUNGER )
 	  {
-			sprintf( buf1, "Açlığı $m $C%s$c%c [%d]",vp,punct,dam);
-		    sprintf( buf2, "Açlığın seni $C%s$c%c [%d]",vs,punct,dam);
+			snprintf(buf1, sizeof(buf1), "Açlığı $m $C%s$c%c [%d]",vp,punct,dam);
+		    snprintf(buf2, sizeof(buf2), "Açlığın seni $C%s$c%c [%d]",vs,punct,dam);
 	  }
 
 	  else if ( dam_type == DAM_THIRST )
 	  {
-			sprintf( buf1, "Susuzluğu $m $C%s$c%c [%d]",vp,punct,dam);
-		    sprintf( buf2, "Susuzluğun seni $C%s$c%c [%d]",vs,punct,dam);
+			snprintf(buf1, sizeof(buf1), "Susuzluğu $m $C%s$c%c [%d]",vp,punct,dam);
+		    snprintf(buf2, sizeof(buf2), "Susuzluğun seni $C%s$c%c [%d]",vs,punct,dam);
 	  }
 	  else if ( dam_type == DAM_LIGHT_V )
 	  {
-			sprintf( buf1, "Odadaki ışık $m $C%s$c%c [%d]",vp,punct,dam);
-		    sprintf( buf2, "Odadaki ışık seni $C%s$c%c [%d]",vs,punct,dam);
+			snprintf(buf1, sizeof(buf1), "Odadaki ışık $m $C%s$c%c [%d]",vp,punct,dam);
+		    snprintf(buf2, sizeof(buf2), "Odadaki ışık seni $C%s$c%c [%d]",vs,punct,dam);
 	  }
 	  else if ( dam_type == DAM_TRAP_ROOM )
 	  {
-			sprintf( buf1, "Odadaki tuzak $m $C%s$c%c [%d]",vp,punct,dam);
-		    sprintf( buf2, "Odadaki tuzak seni $C%s$c%c [%d]",vs,punct,dam);
+			snprintf(buf1, sizeof(buf1), "Odadaki tuzak $m $C%s$c%c [%d]",vp,punct,dam);
+		    snprintf(buf2, sizeof(buf2), "Odadaki tuzak seni $C%s$c%c [%d]",vs,punct,dam);
 	  }
 	  else {
-			sprintf( buf1, "$n kendini $C%s$c%c [%d]",vp,punct,dam);
-		    sprintf( buf2, "Sen kendini $C%s$c%c [%d]",vs,punct,dam);
+			snprintf(buf1, sizeof(buf1), "$n kendini $C%s$c%c [%d]",vp,punct,dam);
+		    snprintf(buf2, sizeof(buf2), "Sen kendini $C%s$c%c [%d]",vs,punct,dam);
 		}
 	}
 	else
 	{
-		sprintf( buf1, "$n $M $C%s$c%c [%d]",  vp, punct,dam );
-	    sprintf( buf2, "Sen $M $C%s$c%c [%d]", vs, punct,dam );
-	    sprintf( buf3, "$n seni $C%s$c%c [%d]", vp, punct,dam );
+		snprintf(buf1, sizeof(buf1), "$n $M $C%s$c%c [%d]",  vp, punct,dam );
+	    snprintf(buf2, sizeof(buf2), "Sen $M $C%s$c%c [%d]", vs, punct,dam );
+	    snprintf(buf3, sizeof(buf3), "$n seni $C%s$c%c [%d]", vp, punct,dam );
 	}
     }
 
@@ -3082,28 +3082,28 @@ void dam_message( CHAR_DATA *ch, CHAR_DATA *victim,int dam,int dt,bool immune ,i
 	{
 	    if (ch == victim)
 	    {
-				sprintf(buf1,"$n kendi %s saldırısından etkilenmedi.",attack);
-				sprintf(buf2,"Şans eseri bu tip bir saldırı seni etkilemiyor.");
+				snprintf(buf1, sizeof(buf1),"$n kendi %s saldırısından etkilenmedi.",attack);
+				snprintf(buf2, sizeof(buf2),"Şans eseri bu tip bir saldırı seni etkilemiyor.");
 	    }
 	    else
 	    {
-				sprintf(buf1,"$N $s %s saldırısından etkilenmedi!",attack);
-		    	sprintf(buf2,"$N senin %s saldırından etkilenmedi!",attack);
-		    	sprintf(buf3,"$s %s saldırısı sana karşı güçsüz kaldı.",attack);
+				snprintf(buf1, sizeof(buf1),"$N $s %s saldırısından etkilenmedi!",attack);
+		    	snprintf(buf2, sizeof(buf2),"$N senin %s saldırından etkilenmedi!",attack);
+		    	snprintf(buf3, sizeof(buf3),"$s %s saldırısı sana karşı güçsüz kaldı.",attack);
 	    }
 	}
 	else
 	{
 	    if (ch == victim)
 	    {
-				sprintf( buf1, "$s %s saldırısıyla kendini $C%s$c%c [%d]",attack,vp,punct,dam);
-				sprintf( buf2, "%s saldırınla kendini $C%s$c%c [%d]",attack,vp,punct,dam);
+				snprintf(buf1, sizeof(buf1), "$s %s saldırısıyla kendini $C%s$c%c [%d]",attack,vp,punct,dam);
+				snprintf(buf2, sizeof(buf2), "%s saldırınla kendini $C%s$c%c [%d]",attack,vp,punct,dam);
 	    }
 	    else
 	    {
-				sprintf( buf1, "$s %s saldırısı $M $C%s$c%c [%d]",  attack, vp, punct,dam );
-		    	sprintf( buf2, "%s saldırın $M $C%s$c%c [%d]",  attack, vp, punct,dam );
-		    	sprintf( buf3, "$s %s saldırısı seni $C%s$c%c [%d]", attack, vp, punct,dam );
+				snprintf(buf1, sizeof(buf1), "$s %s saldırısı $M $C%s$c%c [%d]",  attack, vp, punct,dam );
+		    	snprintf(buf2, sizeof(buf2), "%s saldırın $M $C%s$c%c [%d]",  attack, vp, punct,dam );
+		    	snprintf(buf3, sizeof(buf3), "$s %s saldırısı seni $C%s$c%c [%d]", attack, vp, punct,dam );
 	    }
 	}
     }
@@ -3267,13 +3267,13 @@ void do_murder( CHAR_DATA *ch, char *argument )
 
     WAIT_STATE( ch, 1 * PULSE_VIOLENCE );
     if (!can_see(victim, ch))
-      do_yell(victim, (char*)"İmdat! Biri bana saldırıyor!");
+      do_yell(victim, "İmdat! Biri bana saldırıyor!");
     else
       {
 	if (IS_NPC(ch))
-	sprintf(buf, "İmdat! %s bana saldırıyor!",ch->short_descr);
+	snprintf(buf, sizeof(buf), "İmdat! %s bana saldırıyor!",ch->short_descr);
 	else
-	  sprintf( buf, "İmdat!  %s bana saldırıyor!",
+	  snprintf(buf, sizeof(buf), "İmdat!  %s bana saldırıyor!",
 		  (is_affected(ch,gsn_doppelganger) && !IS_IMMORTAL(victim)) ?
 		  ch->doppel->name : ch->name );
 	do_yell( victim, buf );
@@ -3320,7 +3320,7 @@ void do_flee( CHAR_DATA *ch, char *argument )
     }
 
     if (MOUNTED(ch))
-	do_dismount(ch,(char*)"");
+	do_dismount(ch,"");
 
     if ( ( victim = ch->fighting ) == NULL )
     {
@@ -3428,7 +3428,7 @@ void do_slay( CHAR_DATA *ch, char *argument )
 	/* event */
 	if (!IS_NPC(victim))
 	{
-	sprintf(eventbuf,"%s, tanrılar tarafından ölümle cezalandırıldı!",victim->name);
+	snprintf(eventbuf, sizeof(eventbuf),"%s, tanrılar tarafından ölümle cezalandırıldı!",victim->name);
 	write_event_log(eventbuf);
 	}
 
@@ -3555,7 +3555,7 @@ void do_dishonor( CHAR_DATA *ch, char *argument )
 	if ( !IS_NPC(ch) )
 	{
 		send_to_char( "Dövüşten kaçarak kendini rezil ettin.\n\r",ch);
-	  sprintf(buf,"%d TP kaybettin.\n\r",ch->level);
+	  snprintf(buf, sizeof(buf),"%d TP kaybettin.\n\r",ch->level);
 	  send_to_char( buf, ch );
 	  gain_exp( ch, -(ch->level) );
 	}
@@ -3564,7 +3564,7 @@ void do_dishonor( CHAR_DATA *ch, char *argument )
 
 	stop_fighting( ch, TRUE );
     	if (MOUNTED(ch))
-		do_dismount(ch,(char*)"");
+		do_dismount(ch,"");
 
 	return;
     }

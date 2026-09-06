@@ -167,8 +167,8 @@ void do_enter( CHAR_DATA *ch, char *argument)
         }
 
         if (MOUNTED(ch))
-        sprintf(buf,"$n sürdüğü %s ile $p içine giriyor.",MOUNTED(ch)->short_descr );
-        sprintf(buf,"$n $p içine giriyor." );
+        snprintf(buf, sizeof(buf),"$n sürdüğü %s ile $p içine giriyor.",MOUNTED(ch)->short_descr );
+        snprintf(buf, sizeof(buf),"$n $p içine giriyor." );
 	act(buf,ch,portal,NULL,TO_ROOM);
 
 	if (IS_SET(portal->value[2],GATE_NORMAL_EXIT))
@@ -199,7 +199,7 @@ void do_enter( CHAR_DATA *ch, char *argument)
   else  act("$n $p içinden geldi.",ch,portal,NULL,TO_ROOM);
 	 }
 
-	do_look(ch,(char*)"auto");
+	do_look(ch,"auto");
 
         if (mount)
 	 {
@@ -231,7 +231,7 @@ void do_enter( CHAR_DATA *ch, char *argument)
 
             if ( fch->master == ch && IS_AFFECTED(fch,AFF_CHARM)
             &&   fch->position < POS_STANDING)
-            	do_stand(fch,(char*)"");
+            	do_stand(fch,"");
 
             if ( fch->master == ch && fch->position == POS_STANDING)
             {
@@ -946,11 +946,11 @@ void hunt_victim( CHAR_DATA *ch )
     {
      if( get_char_area( ch, ch->hunting->name) != NULL )
         {
-           sprintf( tBuf, "portal %s", ch->hunting->name );
+           snprintf(tBuf, sizeof(tBuf), "portal %s", ch->hunting->name );
            log_string("mob portal");
            do_cast( ch, tBuf );
            log_string("do_enter1");
-           do_enter( ch, (char*)"portal" );
+           do_enter( ch, "portal" );
 	   if (ch->in_room==NULL || ch->hunting==NULL) return;
 	   if( ch->in_room == ch->hunting->in_room )
 	    {
@@ -969,7 +969,7 @@ void hunt_victim( CHAR_DATA *ch )
         }
        else
 	{
-         do_say( ch, (char*)"Ahhhh!  Avım gitti!!" );
+         do_say( ch, "Ahhhh!  Avım gitti!!" );
          ch->hunting = NULL;
          return;
         }
@@ -986,11 +986,11 @@ void hunt_victim( CHAR_DATA *ch )
     if( get_char_area( ch, ch->hunting->name) != NULL
         && ch-> level > 35 )
     {
-      sprintf( tBuf, "portal %s", ch->hunting->name );
+      snprintf(tBuf, sizeof(tBuf), "portal %s", ch->hunting->name );
       log_string("mob portal");
       do_cast( ch, tBuf );
       log_string("do_enter2");
-      do_enter( ch, (char*)"portal" );
+      do_enter( ch, "portal" );
       if (ch->in_room==NULL || ch->hunting==NULL) return;
       if( ch->in_room == ch->hunting->in_room )
        {
@@ -1076,11 +1076,11 @@ void hunt_victim_old( CHAR_DATA *ch )
 /*1 */  if( get_char_world( ch, ch->hunting->name) != NULL
             && ch-> level > 35 )
         {
-           sprintf( tBuf, "portal %s", ch->hunting->name );
+           snprintf(tBuf, sizeof(tBuf), "portal %s", ch->hunting->name );
            log_string("mob portal");
            do_cast( ch, tBuf );
            log_string("do_enter1");
-           do_enter( ch, (char*)"portal" );
+           do_enter( ch, "portal" );
   /* Deth...this shouldn't have to be here..but it got
   here in a core file with ch->hunting==null.. */
   if (ch->in_room==NULL || ch->hunting==NULL) return;
@@ -1112,7 +1112,7 @@ void hunt_victim_old( CHAR_DATA *ch )
     	  }
          }
 
-         do_say( ch, (char*)"Ahhhh!  Avım gitti!!" );
+         do_say( ch, "Ahhhh!  Avım gitti!!" );
          ch->hunting = NULL;
          return;
         }
@@ -1129,11 +1129,11 @@ void hunt_victim_old( CHAR_DATA *ch )
     if( get_char_area( ch, ch->hunting->name) != NULL
         && ch-> level > 35 )
     {
-      sprintf( tBuf, "portal %s", ch->hunting->name );
+      snprintf(tBuf, sizeof(tBuf), "portal %s", ch->hunting->name );
       log_string("mob portal");
       do_cast( ch, tBuf );
       log_string("do_enter2");
-      do_enter( ch, (char*)"portal" );
+      do_enter( ch, "portal" );
   /* Deth...this shouldn't have to be here..but it got
   here in a core file with ch->hunting==null.. */
   if (ch->in_room==NULL || ch->hunting==NULL) return;
@@ -1267,11 +1267,11 @@ void damage_to_obj(CHAR_DATA *ch,OBJ_DATA *wield, OBJ_DATA *worn, int damage)
      && (IS_SET(worn->extra_flags,ITEM_ANTI_EVIL)
 	&& IS_SET(worn->extra_flags,ITEM_ANTI_NEUTRAL) ) )
  {
-   sprintf(buf,"$C$p $P'ye karşı dövüşmek istemiyor.$c");
+   snprintf(buf, sizeof(buf),"$C$p $P'ye karşı dövüşmek istemiyor.$c");
    act_color(buf,ch,wield,worn,TO_ROOM,POS_RESTING,CLR_GREEN);
-   sprintf(buf,"$C$p kendisini senden kurtarıyor!$c.");
+   snprintf(buf, sizeof(buf),"$C$p kendisini senden kurtarıyor!$c.");
    act_color(buf,ch,wield,worn,TO_CHAR,POS_RESTING,CLR_GREEN);
-   sprintf(buf,"$C$p kendisini $z kurtarıyor$c.");
+   snprintf(buf, sizeof(buf),"$C$p kendisini $z kurtarıyor$c.");
   act_color(buf,ch,wield,worn,TO_ROOM,POS_RESTING,CLR_GREEN);
   unequip_char( ch, wield );
   return;
@@ -1280,7 +1280,7 @@ void damage_to_obj(CHAR_DATA *ch,OBJ_DATA *wield, OBJ_DATA *worn, int damage)
  if (IS_SET(wield->extra_flags,ITEM_ANTI_EVIL)
 	&& IS_SET(worn->extra_flags,ITEM_ANTI_EVIL))
  {
-   sprintf(buf,"$C$p $P üzerine zarar uygulamaktan korkuyor.$c");
+   snprintf(buf, sizeof(buf),"$C$p $P üzerine zarar uygulamaktan korkuyor.$c");
   act_color(buf,ch,wield,worn,TO_ROOM,POS_RESTING,CLR_GREEN);
   return;
  }
@@ -1309,15 +1309,15 @@ void check_weapon_destroy(CHAR_DATA *ch, CHAR_DATA *victim,bool second)
 		|| number_percent() > 94
 	 	|| number_percent() > skill
 		|| ch->level < (victim->level - 10)
-		|| check_material(destroy,(char*)"platinum")
+		|| check_material(destroy,"platinum")
 		|| destroy->pIndexData->limit != -1
 		|| (i == WEAR_LEFT || i== WEAR_RIGHT || i== WEAR_BOTH
 			|| i == WEAR_TATTOO || i == WEAR_STUCK_IN) )
 	 continue;
 
 	 chance += 20;
-	 if ( check_material(wield, (char*)"platinium") ||
-	      check_material(wield, (char*)"titanium") )
+	 if ( check_material(wield, "platinium") ||
+	      check_material(wield, "titanium") )
 	 chance += 5;
 
 	 if ( is_metal(destroy) )  chance -= 20;
@@ -1355,7 +1355,7 @@ void check_weapon_destroy(CHAR_DATA *ch, CHAR_DATA *victim,bool second)
 		|| number_percent() > 94
 	 	|| number_percent() < skill
 		|| ch->level < (victim->level - 10)
-		|| check_material(destroy,(char*)"platinum")
+		|| check_material(destroy,"platinum")
 		|| destroy->pIndexData->limit != -1
 		|| (i == WEAR_LEFT || i== WEAR_RIGHT || i==WEAR_BOTH
 			|| i == WEAR_TATTOO || i == WEAR_STUCK_IN ) )
@@ -1406,7 +1406,7 @@ void do_repair(CHAR_DATA *ch, char *argument)
     for ( mob = ch->in_room->people; mob; mob = mob->next_in_room )
     {
         if (!IS_NPC(mob)) continue;
-	if (mob->spec_fun == spec_lookup((char*)"spec_repairman") )
+	if (mob->spec_fun == spec_lookup("spec_repairman") )
             break;
     }
 
@@ -1420,31 +1420,31 @@ void do_repair(CHAR_DATA *ch, char *argument)
 
     if (arg[0] == '\0')
     {
-	do_say(mob,(char*)"Senin için bir silahı onarabilirim. Tabii ücret karşılığında.");
+	do_say(mob,"Senin için bir silahı onarabilirim. Tabii ücret karşılığında.");
 	send_to_char("Type estimate <weapon> to be assessed for damage.\n\r",ch);
 	return;
     }
     if (( obj = get_obj_carry(ch, arg)) == NULL)
     {
-	do_say(mob,(char*)"Sende bu eşya yok.");
+	do_say(mob,"Sende bu eşya yok.");
 	return;
     }
 
     if (obj->pIndexData->vnum == OBJ_VNUM_HAMMER)
     {
-     do_say(mob,(char*)"Bu çekiç benim ustalığımın üstünde.");
+     do_say(mob,"Bu çekiç benim ustalığımın üstünde.");
      return;
     }
 
     if (obj->condition >= 100)
     {
-	do_say(mob,(char*)"Bu eşya zaten iyi durumda.");
+	do_say(mob,"Bu eşya zaten iyi durumda.");
         return;
     }
 
     if (obj->cost == 0)
     {
-	sprintf(buf ,"%s tamir edilemeyecek durumda.\n\r", obj->short_descr);
+	snprintf(buf, sizeof(buf),"%s tamir edilemeyecek durumda.\n\r", obj->short_descr);
 	do_say(mob,buf);
    	return;
     }
@@ -1454,7 +1454,7 @@ void do_repair(CHAR_DATA *ch, char *argument)
 
     if (cost > ch->silver)
     {
-	do_say(mob,(char*)"Hizmetlerimden yararlanmak için yeterince paran yok.");
+	do_say(mob,"Hizmetlerimden yararlanmak için yeterince paran yok.");
 	return;
     }
 
@@ -1462,9 +1462,9 @@ void do_repair(CHAR_DATA *ch, char *argument)
 
     ch->silver -= cost;
     mob->silver += cost;
-    sprintf(buf, "$N $n'dan %s'ı alıyor, tamir ediyor ve $n'a geri veriyor.", obj->short_descr);
+    snprintf(buf, sizeof(buf), "$N $n'dan %s'ı alıyor, tamir ediyor ve $n'a geri veriyor.", obj->short_descr);
     act(buf,ch,NULL,mob,TO_ROOM);
-    sprintf(buf, "%s %s'ı alıp, tamir edip sana geri veriyor.\n\r", mob->short_descr, obj->short_descr);
+    snprintf(buf, sizeof(buf), "%s %s'ı alıp, tamir edip sana geri veriyor.\n\r", mob->short_descr, obj->short_descr);
     send_to_char(buf, ch);
     obj->condition = 100;
 }
@@ -1480,7 +1480,7 @@ void do_estimate(CHAR_DATA *ch, char *argument)
     for ( mob = ch->in_room->people; mob; mob = mob->next_in_room )
     {
         if (!IS_NPC(mob)) continue;
-	if (mob->spec_fun == spec_lookup((char*)"spec_repairman") )
+	if (mob->spec_fun == spec_lookup("spec_repairman") )
             break;
     }
 
@@ -1494,34 +1494,34 @@ void do_estimate(CHAR_DATA *ch, char *argument)
 
     if (arg[0] == '\0')
     {
-	do_say(mob,(char*)"Ücret <eşya> yazmayı dene.");
+	do_say(mob,"Ücret <eşya> yazmayı dene.");
    	return;
     }
     if ((obj = (get_obj_carry(ch, arg))) == NULL)
     {
-	do_say(mob,(char*)"Sende bu eşya yok.");
+	do_say(mob,"Sende bu eşya yok.");
 	return;
     }
     if (obj->pIndexData->vnum == OBJ_VNUM_HAMMER)
 	{
-	    do_say(mob,(char*)"Bu çekiç benim ustalığımın üstünde.");
+	    do_say(mob,"Bu çekiç benim ustalığımın üstünde.");
 	    return;
 	}
     if (obj->condition >= 100)
     {
-	do_say(mob,(char*)"Bu eşya zaten iyi durumda.");
+	do_say(mob,"Bu eşya zaten iyi durumda.");
 	return;
     }
     if (obj->cost == 0)
     {
-	do_say(mob,(char*)"Bu eşya tamir edilemeyecek durumda.");
+	do_say(mob,"Bu eşya tamir edilemeyecek durumda.");
     	return;
     }
 
     cost = ( (obj->level * 10) +
 		((obj->cost * (100 - obj->condition)) /100)    );
 
-    sprintf(buf, "Bu eşyayı tamir etmek sana %d akçeye patlar.", cost);
+    snprintf(buf, sizeof(buf), "Bu eşyayı tamir etmek sana %d akçeye patlar.", cost);
     do_say(mob,buf);
 }
 
@@ -1603,9 +1603,9 @@ void do_restring( CHAR_DATA *ch, char *argument )
 
     ch->silver -= cost;
     mob->silver += cost;
-    sprintf(buf, "$N $s eşyasını alıyor, üzerine bir şeyler kazıyıp geri veriyor.");
+    snprintf(buf, sizeof(buf), "$N $s eşyasını alıyor, üzerine bir şeyler kazıyıp geri veriyor.");
 	act(buf,ch,NULL,mob,TO_ROOM);
-  sprintf(buf,"%s eşyanı alıyor, üzerine bir şeyler kazıyıp geri veriyor.\n\r", mob->short_descr);
+  snprintf(buf, sizeof(buf),"%s eşyanı alıyor, üzerine bir şeyler kazıyıp geri veriyor.\n\r", mob->short_descr);
   send_to_char(buf,ch);
   send_to_char("Eşya isimlendirmede saldırgan ve hakaret içeren isimler vermek kurallara aykırıdır.\n\r", ch);
 }
@@ -1631,13 +1631,13 @@ void check_shield_destroyed(CHAR_DATA *ch, CHAR_DATA *victim,bool second)
 	 if (   number_percent() > 94
 	 	|| number_percent() > skill
 		|| ch->level < (victim->level - 10)
-		|| check_material(destroy,(char*)"platinum")
+		|| check_material(destroy,"platinum")
 		|| destroy->pIndexData->limit != -1 )
 	 return;
 
 	 chance += 20;
-	 if ( check_material(wield, (char*)"platinium") ||
-	      check_material(wield, (char*)"titanium") )
+	 if ( check_material(wield, "platinium") ||
+	      check_material(wield, "titanium") )
 	 chance += 5;
 
 	 if ( is_metal(destroy) )  chance -= 20;
@@ -1670,7 +1670,7 @@ void check_shield_destroyed(CHAR_DATA *ch, CHAR_DATA *victim,bool second)
 	 if (   number_percent() > 94
 	 	|| number_percent() < skill
 		|| ch->level < (victim->level - 10)
-		|| check_material(destroy,(char*)"platinum")
+		|| check_material(destroy,"platinum")
 		|| destroy->pIndexData->limit != -1 )
 	 return;
 
@@ -1725,13 +1725,13 @@ void check_weapon_destroyed(CHAR_DATA *ch, CHAR_DATA *victim,bool second)
 	 if (   number_percent() > 94
 	 	|| number_percent() > skill
 		|| ch->level < (victim->level - 10)
-		|| check_material(destroy,(char*)"platinum")
+		|| check_material(destroy,"platinum")
 		|| destroy->pIndexData->limit != -1 )
 	 return;
 
 	 chance += 20;
-	 if ( check_material(wield, (char*)"platinium") ||
-	      check_material(wield, (char*)"titanium") )
+	 if ( check_material(wield, "platinium") ||
+	      check_material(wield, "titanium") )
 	 chance += 5;
 
 	 if ( is_metal(destroy) )  chance -= 20;
@@ -1764,7 +1764,7 @@ void check_weapon_destroyed(CHAR_DATA *ch, CHAR_DATA *victim,bool second)
 	 if (   number_percent() > 94
 	 	|| number_percent() < skill
 		|| ch->level < (victim->level - 10)
-		|| check_material(destroy,(char*)"platinum")
+		|| check_material(destroy,"platinum")
 		|| destroy->pIndexData->limit != -1 )
 	 return;
 
@@ -1857,18 +1857,18 @@ void do_smithing(CHAR_DATA *ch, char *argument)
     if ( number_percent() > get_skill(ch,gsn_smithing) )
      {
       check_improve(ch,gsn_smithing,FALSE,8);
-      sprintf(buf, "$n %s eşyasını çekiçle tamir etmeyi denedi fakat beceremedi.", obj->short_descr);
+      snprintf(buf, sizeof(buf), "$n %s eşyasını çekiçle tamir etmeyi denedi fakat beceremedi.", obj->short_descr);
     act(buf,ch,NULL,obj,TO_ROOM);
-    sprintf(buf, "%s eşyasını tamir etmeyi beceremedin.\n\r", obj->short_descr);
+    snprintf(buf, sizeof(buf), "%s eşyasını tamir etmeyi beceremedin.\n\r", obj->short_descr);
     send_to_char(buf, ch);
     hammer->condition -= 25;
      }
     else
      {
     check_improve(ch,gsn_smithing,TRUE,4);
-    sprintf(buf, "$n %s eşyasını çekiçle tamir etti.", obj->short_descr);
+    snprintf(buf, sizeof(buf), "$n %s eşyasını çekiçle tamir etti.", obj->short_descr);
     act(buf,ch,NULL,NULL,TO_ROOM);
-    sprintf(buf, "%s eşyasını tamir ettin.\n\r", obj->short_descr);
+    snprintf(buf, sizeof(buf), "%s eşyasını tamir ettin.\n\r", obj->short_descr);
     send_to_char(buf, ch);
     obj->condition = UMAX( 100 ,
 	 obj->condition + ( get_skill(ch,gsn_smithing) / 2) );
@@ -1896,7 +1896,7 @@ void talk_auction(char *argument)
     char buf[MAX_STRING_LENGTH];
     CHAR_DATA *original;
 
-    sprintf (buf,"MEZAT: %s", argument);
+    snprintf(buf, sizeof(buf),"MEZAT: %s", argument);
 
     for (d = descriptor_list; d != NULL; d = d->next)
     {
@@ -2038,7 +2038,7 @@ int parsebet (const int currentbet, const char *argument)
       }
       else
         {
-        sprintf (buf2,"considering: * x \n\r");
+        snprintf(buf2, sizeof(buf2),"considering: * x \n\r");
         if ((*stringptr == '*') || (*stringptr == 'x')) /* multiply */
         {
           if (strlen (stringptr) == 1) /* only x specified, assume default */
@@ -2068,10 +2068,10 @@ void auction_update (void)
             case 1 : /* going once */
             case 2 : /* going twice */
             if (auction->bet > 0)
-            sprintf (buf, "%s: %d akçeye gidiyor.", auction->item->short_descr,auction->bet);
+            snprintf(buf, sizeof(buf), "%s: %d akçeye gidiyor.", auction->item->short_descr,auction->bet);
             else
-            sprintf (buf, "%s: henüz teklif yok.", auction->item->short_descr);
-	          sprintf(bufc,"%s%s%s",CLR_CYAN,buf,CLR_WHITE_BOLD);
+            snprintf(buf, sizeof(buf), "%s: henüz teklif yok.", auction->item->short_descr);
+	          snprintf(bufc, sizeof(bufc),"%s%s%s",CLR_CYAN,buf,CLR_WHITE_BOLD);
             talk_auction (bufc);
             break;
 
@@ -2079,11 +2079,11 @@ void auction_update (void)
 
             if (auction->bet > 0)
             {
-              sprintf (buf, "%s: %s %d akçeye satın aldı.",
+              snprintf(buf, sizeof(buf), "%s: %s %d akçeye satın aldı.",
                     auction->item->short_descr,
                     IS_NPC(auction->buyer) ? auction->buyer->short_descr : auction->buyer->name,
                     auction->bet);
-	        sprintf(bufc,"%s%s%s",CLR_CYAN,buf,CLR_WHITE_BOLD);
+	        snprintf(bufc, sizeof(bufc),"%s%s%s",CLR_CYAN,buf,CLR_WHITE_BOLD);
                 talk_auction(bufc);
                 obj_to_char (auction->item,auction->buyer);
                 act ("Mezatçı yanında belirerek $p eşyasını sana veriyor.",
@@ -2098,11 +2098,11 @@ void auction_update (void)
             }
             else /* not sold */
             {
-              sprintf (buf, "%s teklif gelmediği için mezattan çekildi.",auction->item->short_descr);
-			  sprintf(bufc,"%s%s%s",CLR_CYAN,buf,CLR_WHITE_BOLD);
+              snprintf(buf, sizeof(buf), "%s teklif gelmediği için mezattan çekildi.",auction->item->short_descr);
+			  snprintf(bufc, sizeof(bufc),"%s%s%s",CLR_CYAN,buf,CLR_WHITE_BOLD);
               talk_auction(bufc);
-              sprintf (buf, "Mezatçı satılmayan eşyayı depoya kaldırıyor.");
-			  sprintf(bufc,"%s%s%s",CLR_RED,buf,CLR_WHITE_BOLD);
+              snprintf(buf, sizeof(buf), "Mezatçı satılmayan eşyayı depoya kaldırıyor.");
+			  snprintf(bufc, sizeof(bufc),"%s%s%s",CLR_RED,buf,CLR_WHITE_BOLD);
               talk_auction(bufc);
                 extract_obj(auction->item);
                 auction->item = NULL; /* clear auction */
@@ -2150,10 +2150,10 @@ void do_auction (CHAR_DATA *ch, char *argument)
         {
             /* show item data here */
             if (auction->bet > 0)
-            sprintf (buf, "Bu objeye son verilen teklif %d akçe.\n\r",auction->bet);
+            snprintf(buf, sizeof(buf), "Bu objeye son verilen teklif %d akçe.\n\r",auction->bet);
             else
-            sprintf (buf, "Henüz teklif verilmedi.\n\r");
-	    sprintf(bufc,"%s%s%s",CLR_GREEN,buf,CLR_WHITE_BOLD);
+            snprintf(buf, sizeof(buf), "Henüz teklif verilmedi.\n\r");
+	    snprintf(bufc, sizeof(bufc),"%s%s%s",CLR_GREEN,buf,CLR_WHITE_BOLD);
             send_to_char (bufc,ch);
 	    spell_identify(0, 0, ch, auction->item,0);
             return;
@@ -2181,8 +2181,8 @@ void do_auction (CHAR_DATA *ch, char *argument)
     }
     else /* stop the auction */
     {
-      sprintf(buf,"%s objesinin satışı bir ölümsüz tarafından durduruldu.",auction->item->short_descr);
-	sprintf(bufc,"%s%s%s",CLR_WHITE,buf,CLR_WHITE_BOLD);
+      snprintf(buf, sizeof(buf),"%s objesinin satışı bir ölümsüz tarafından durduruldu.",auction->item->short_descr);
+	snprintf(bufc, sizeof(bufc),"%s%s%s",CLR_WHITE,buf,CLR_WHITE_BOLD);
         talk_auction(bufc);
         obj_to_char(auction->item, auction->seller);
         auction->item = NULL;
@@ -2214,7 +2214,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
             }
 
             newbet = parsebet (auction->bet, argument);
-            sprintf (betbuf,"Teklif: %d\n\r",newbet);
+            snprintf(betbuf, sizeof(betbuf),"Teklif: %d\n\r",newbet);
 
             if (newbet < (auction->bet + 1))
             {
@@ -2242,8 +2242,8 @@ void do_auction (CHAR_DATA *ch, char *argument)
             auction->going = 0;
             auction->pulse = PULSE_AUCTION; /* start the auction over again */
 
-            sprintf (buf,"%s için %d akçe teklif edildi.\n\r",auction->item->short_descr,newbet);
-	    sprintf(bufc,"%s%s%s",CLR_MAGENTA,buf,CLR_WHITE_BOLD);
+            snprintf(buf, sizeof(buf),"%s için %d akçe teklif edildi.\n\r",auction->item->short_descr,newbet);
+	    snprintf(bufc, sizeof(bufc),"%s%s%s",CLR_MAGENTA,buf,CLR_WHITE_BOLD);
             talk_auction (bufc);
             return;
 
@@ -2303,8 +2303,8 @@ void do_auction (CHAR_DATA *ch, char *argument)
         auction->pulse = PULSE_AUCTION;
         auction->going = 0;
 
-        sprintf(buf, "%s mezatta.", obj->short_descr);
-	sprintf(bufc,"%s%s%s",CLR_YELLOW,buf,CLR_WHITE_BOLD);
+        snprintf(buf, sizeof(buf), "%s mezatta.", obj->short_descr);
+	snprintf(bufc, sizeof(bufc),"%s%s%s",CLR_YELLOW,buf,CLR_WHITE_BOLD);
         talk_auction(bufc);
 
         return;

@@ -172,7 +172,7 @@ void do_vlist (CHAR_DATA *ch, char *argument)
 			if (vnum < MAX_SHOW_VNUM)
 			{
 				room = get_room_index (vnum * 100 + 1); /* each zone has to have a XXX01 room */
-				sprintf (buf2, "%3d %-8.8s  ", vnum, 
+				snprintf(buf2, sizeof(buf2), "%3d %-8.8s  ", vnum, 
 						 room ? area_name(room->area) : "-" ); 
 						 /* something there or unused ? */
 				strcat (buffer,buf2);				

@@ -71,12 +71,12 @@ int unlink(const char *pathname);
 DECLARE_DO_FUN(do_quit	);
 DECLARE_DO_FUN(do_quit_count);
 
-bool quit_org	args( (CHAR_DATA *ch, char *argument, bool Count, bool Remort));
-bool proper_order	args( (CHAR_DATA *ch, char *argument ) );
+bool quit_org	(CHAR_DATA *ch, char *argument, bool Count, bool Remort);
+bool proper_order	(CHAR_DATA *ch, char *argument );
 char *translate(CHAR_DATA *ch, CHAR_DATA *victim, char *argument);
-int lang_lookup		args( (const char *name ) );
-bool cabal_area_check	args( (CHAR_DATA *ch) );
-void update_total_played	args( ( CHAR_DATA *ch) );
+int lang_lookup		(const char *name );
+bool cabal_area_check	(CHAR_DATA *ch);
+void update_total_played	( CHAR_DATA *ch);
 
 
 /* RT code to delete yourself */
@@ -103,10 +103,10 @@ void do_delete( CHAR_DATA *ch, char *argument)
 	}
 	else
 	{
-    	    sprintf( strsave, "%s%s", PLAYER_DIR, capitalize( ch->name ) );
+    	    snprintf(strsave, sizeof(strsave), "%s%s", PLAYER_DIR, capitalize( ch->name ) );
           wiznet("$N intihar etti.",ch,NULL,0,0,0);
 	    ch->last_fight_time = -1;
-	    do_quit_count(ch,(char*)"");
+	    do_quit_count(ch,"");
 	    unlink(strsave);
 	    return;
  	}
@@ -357,7 +357,7 @@ void do_kd( CHAR_DATA *ch, char *argument )
     {
 	act("$N bağlantısını kaybetmiş görünüyor...daha sonra tekrar dene.",
 	    ch,NULL,victim,TO_CHAR);
-        sprintf(buf,"%s: %s%s%s\n\r",PERS(ch,victim),CLR_RED_BOLD,argument,CLR_NORMAL);
+        snprintf(buf, sizeof(buf),"%s: %s%s%s\n\r",PERS(ch,victim),CLR_RED_BOLD,argument,CLR_NORMAL);
         buf[0] = UPPER(buf[0]);
         add_buf(victim->pcdata->buffer,buf);
 	return;
@@ -433,7 +433,7 @@ void do_kdcevapla( CHAR_DATA *ch, char *argument )
     {
 	act("$N bağlantısını kaybetmiş görünüyor...daha sonra tekrar dene.",
 	    ch,NULL,victim,TO_CHAR);
-        sprintf(buf,"%s: %s%s%s\n\r",PERS(ch,victim),CLR_RED_BOLD,argument,CLR_NORMAL);
+        snprintf(buf, sizeof(buf),"%s: %s%s%s\n\r",PERS(ch,victim),CLR_RED_BOLD,argument,CLR_NORMAL);
         buf[0] = UPPER(buf[0]);
         add_buf(victim->pcdata->buffer,buf);
 	return;
@@ -576,7 +576,7 @@ void do_say( CHAR_DATA *ch, char *argument )
     {
         if (!is_affected(vch, gsn_deafen))
 	{
-	  sprintf(trans,"%s",translate(ch,vch,buf));
+	  snprintf(trans, sizeof(trans),"%s",translate(ch,vch,buf));
     act_color( "$C$n '{y$t{x' dedi.$c",ch, trans, vch, TO_VICT,POS_RESTING, CLR_GREEN);
 	}
     }
@@ -643,7 +643,7 @@ void do_yell( CHAR_DATA *ch, char *argument )
 	&&   d->character->in_room->area == ch->in_room->area
         &&   !is_affected(d->character, gsn_deafen))
 	{
-	    sprintf(trans,"%s",translate(ch,d->character,buf));
+	    snprintf(trans, sizeof(trans),"%s",translate(ch,d->character,buf));
       act_color("$n '$C$t$c' diye haykırdı.",
                 ch,trans,d->character,TO_VICT,POS_DEAD, CLR_BROWN );
 	}
@@ -1143,7 +1143,7 @@ bool quit_org( CHAR_DATA *ch, char *argument, bool Count , bool Remort)
     {
       printf_to_char(ch,"Her güzel şeyin bir sonu vardır.\n\r");
       act_color("$C$n oyundan ayrıldı.$c", ch, NULL, NULL,TO_ROOM ,POS_DEAD,CLR_GREEN);
-      sprintf( log_buf, "%s oyundan ayrıldı.", ch->name );
+      snprintf(log_buf, sizeof(log_buf), "%s oyundan ayrıldı.", ch->name );
 	log_string( log_buf );
   wiznet("$N oyundan ayrıldı.",ch,NULL,WIZ_LOGINS,0,get_trust(ch));    }
 
@@ -1471,7 +1471,7 @@ void do_order( CHAR_DATA *ch, char *argument )
 	    found = TRUE;
 	    if ( !proper_order( och, argument ) )
 		continue;
-    sprintf( buf, "$n sana '%s' diye emrediyor, ve sen de yapıyorsun.", argument );
+    snprintf(buf, sizeof(buf), "$n sana '%s' diye emrediyor, ve sen de yapıyorsun.", argument );
 	    act( buf, ch, NULL, och, TO_VICT );
 	    interpret( och, argument, TRUE );
 	}
@@ -1787,7 +1787,7 @@ void do_split( CHAR_DATA *ch, char *argument )
  	    amount_silver,share_silver + extra_silver);
     }
 
-    sprintf(buf,"$n %d akçe dağıttı. Senin payına %d akçe düştü.",amount_silver,share_silver);
+    snprintf(buf, sizeof(buf),"$n %d akçe dağıttı. Senin payına %d akçe düştü.",amount_silver,share_silver);
 
 
     for ( gch = ch->in_room->people; gch != NULL; gch = gch->next_in_room )
@@ -1909,7 +1909,7 @@ void do_cb( CHAR_DATA *ch, char *argument )
 	return;
       }
 
-      sprintf(buf, "[%s] $n: $C$t$c",cabal_table[ch->cabal].short_name);
+      snprintf(buf, sizeof(buf), "[%s] $n: $C$t$c",cabal_table[ch->cabal].short_name);
 
     if (is_affected(ch,gsn_garble))
       garble(buf2,argument);
@@ -1999,7 +1999,7 @@ char *translate(CHAR_DATA *ch, CHAR_DATA *victim, char *argument)
       || ch->language == race_table[ORG_RACE(victim)].language)
    {
     if (IS_IMMORTAL(victim))
-	sprintf(trans,"(%s) %s",language_table[ch->language].name,argument);
+	snprintf(trans, sizeof(trans),"(%s) %s",language_table[ch->language].name,argument);
     else strcpy(trans,argument);
     return trans;
    }
@@ -2011,7 +2011,7 @@ char *translate(CHAR_DATA *ch, CHAR_DATA *victim, char *argument)
     }
   buf[i] = '\0';
 
-  sprintf(trans,"(%s) %s",language_table[ch->language].name,buf);
+  snprintf(trans, sizeof(trans),"(%s) %s",language_table[ch->language].name,buf);
   return trans;
 }
 
@@ -2147,10 +2147,10 @@ ch->pcdata->confirm_remort = FALSE;
 		printf_to_char(ch,"Yeni yaşamında 6 yüzük takabileceksin.\n\r");
 		printf_to_char(ch,"             Ve fazladan 10 eğitim seansın olacak.\n\r");
 
-		sprintf( pbuf, "%s", ch->pcdata->pwd );
-		sprintf( remstr, "%s%s", PLAYER_DIR, capitalize( ch->name ) );
-		sprintf( mkstr, "%s%s", REMORT_DIR, capitalize( ch->name ) );
-		sprintf( name, "%s", ch->name );
+		snprintf(pbuf, sizeof(pbuf), "%s", ch->pcdata->pwd );
+		snprintf(remstr, sizeof(remstr), "%s%s", PLAYER_DIR, capitalize( ch->name ) );
+		snprintf(mkstr, sizeof(mkstr), "%s%s", REMORT_DIR, capitalize( ch->name ) );
+		snprintf(name, sizeof(name), "%s", ch->name );
 		d = ch->desc;
 		banks	= ch->pcdata->bank_s;
 		qp	= ch->pcdata->questpoints;

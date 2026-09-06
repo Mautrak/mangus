@@ -464,7 +464,7 @@ int find_material_index(char *material_name)
 			return i;
 	}
 	// material bulunamadi. NULL'u gonder.
-	bugf( (char*)"Find material index: Unknown material name '%s'", material_name );
+	bugf( "Find material index: Unknown material name '%s'", material_name );
 	return 66;
 }
 
@@ -481,7 +481,7 @@ int find_material_decay_days(OBJ_DATA *obj)
 		}
 	}
 	// material bulunamadi. NULL'u gonder.
-	bugf( (char*)"Find material decay days: Unknown material name for %d '%s'", obj->pIndexData->vnum, obj->material );
+	bugf( "Find material decay days: Unknown material name for %d '%s'", obj->pIndexData->vnum, obj->material );
 	return 240;
 }
 

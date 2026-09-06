@@ -401,7 +401,7 @@ void fire_effect(void *vo, int level, int dam, int target)
             chance -= 5;
         chance -= obj->level * 2;
 
-        if  ( check_material( obj, (char*)"ice" ) )  {
+        if  ( check_material( obj, "ice" ) )  {
           chance += 30;
           msg = "$p eriyerek buharlaşıyor!";
         }
@@ -914,13 +914,13 @@ void scream_effect(void *vo, int level, int dam, int target)
             chance -= 5;
         chance -= obj->level * 2;
 
-        if  ( check_material( obj, (char*)"ice" ) )
+        if  ( check_material( obj, "ice" ) )
 	{
           chance += 30;
           msg = "$p parçalanarak buharlaşıyor!";
         }
         else
-	if ( check_material ( obj, (char*)"glass" ) )
+	if ( check_material ( obj, "glass" ) )
 	{
 	 chance += 30;
    msg = "$p küçük parçalara ayrılıyor.";

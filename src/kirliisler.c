@@ -37,11 +37,11 @@ void do_zar (CHAR_DATA * ch, char *argument)
     {
 		if (!IS_NPC(duzenbaz))
 			continue;
-        if (duzenbaz->spec_fun == spec_lookup( (char*)"spec_duzenbaz" ))
+        if (duzenbaz->spec_fun == spec_lookup( "spec_duzenbaz" ))
 			break;
     }
 	
-	if (duzenbaz == NULL || duzenbaz->spec_fun != spec_lookup( (char*)"spec_duzenbaz" ))
+	if (duzenbaz == NULL || duzenbaz->spec_fun != spec_lookup( "spec_duzenbaz" ))
     {
 		send_to_char("Odada bu işlerden anlayan bir düzenbaz göremiyorum.\n\r", ch);
 		return;

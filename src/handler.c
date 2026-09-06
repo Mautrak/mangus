@@ -73,8 +73,8 @@ DECLARE_DO_FUN(do_track		);
 /*
  * Local functions.
  */
-void	affect_modify	args( ( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd ) );
-ROOM_INDEX_DATA *	find_location	args( ( CHAR_DATA *ch, char *arg ) );
+void	affect_modify	( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd );
+ROOM_INDEX_DATA *	find_location	( CHAR_DATA *ch, char *arg );
 
 /* returns number of people on an object */
 int count_users(OBJ_DATA *obj)
@@ -111,7 +111,7 @@ int race_lookup (const char *name)
 	    return race;
    }
 
-   sprintf(buf, "Race_lookup: race not found %s.", name);
+   snprintf(buf, sizeof(buf), "Race_lookup: race not found %s.", name);
    bug(buf, 0);
    return 0;
 }
@@ -274,19 +274,19 @@ bool check_material( OBJ_DATA *obj, char *material )
 bool is_metal( OBJ_DATA *obj )
 {
 
-  if ( check_material(obj, (char*)"silver") ||
-       check_material(obj, (char*)"gold") ||
-       check_material(obj, (char*)"iron") ||
-       check_material(obj, (char*)"mithril") ||
-       check_material(obj, (char*)"adamantite") ||
-       check_material(obj, (char*)"steel") ||
-       check_material(obj, (char*)"lead") ||
-       check_material(obj, (char*)"bronze") ||
-       check_material(obj, (char*)"copper") ||
-       check_material(obj, (char*)"brass") ||
-       check_material(obj, (char*)"platinium") ||
-       check_material(obj, (char*)"titanium") ||
-       check_material(obj, (char*)"aliminum") )
+  if ( check_material(obj, "silver") ||
+       check_material(obj, "gold") ||
+       check_material(obj, "iron") ||
+       check_material(obj, "mithril") ||
+       check_material(obj, "adamantite") ||
+       check_material(obj, "steel") ||
+       check_material(obj, "lead") ||
+       check_material(obj, "bronze") ||
+       check_material(obj, "copper") ||
+       check_material(obj, "brass") ||
+       check_material(obj, "platinium") ||
+       check_material(obj, "titanium") ||
+       check_material(obj, "aliminum") )
     return TRUE;
 
   return FALSE;
@@ -296,20 +296,20 @@ bool is_metal( OBJ_DATA *obj )
 bool may_float( OBJ_DATA *obj )
 {
 
-    if ( check_material( obj, (char*)"wood" )  ||
-         check_material( obj, (char*)"ebony" )  ||
-         check_material( obj, (char*)"ice" )  ||
-         check_material( obj, (char*)"energy" )  ||
-         check_material( obj, (char*)"hardwood" )  ||
-         check_material( obj, (char*)"softwood" )  ||
-         check_material( obj, (char*)"flesh" )  ||
-         check_material( obj, (char*)"silk" )  ||
-         check_material( obj, (char*)"wool" )  ||
-         check_material( obj, (char*)"cloth" )  ||
-         check_material( obj, (char*)"fur" )  ||
-         check_material( obj, (char*)"water" )  ||
-         check_material( obj, (char*)"ice" )  ||
-         check_material( obj, (char*)"oak" ) )
+    if ( check_material( obj, "wood" )  ||
+         check_material( obj, "ebony" )  ||
+         check_material( obj, "ice" )  ||
+         check_material( obj, "energy" )  ||
+         check_material( obj, "hardwood" )  ||
+         check_material( obj, "softwood" )  ||
+         check_material( obj, "flesh" )  ||
+         check_material( obj, "silk" )  ||
+         check_material( obj, "wool" )  ||
+         check_material( obj, "cloth" )  ||
+         check_material( obj, "fur" )  ||
+         check_material( obj, "water" )  ||
+         check_material( obj, "ice" )  ||
+         check_material( obj, "oak" ) )
        return TRUE;
 
     if ( obj->item_type == ITEM_BOAT )
@@ -321,23 +321,23 @@ bool may_float( OBJ_DATA *obj )
 
 bool cant_float( OBJ_DATA *obj )
 {
-    if ( check_material( obj, (char*)"steel" ) ||
-         check_material( obj, (char*)"iron" ) ||
-         check_material( obj, (char*)"brass" ) ||
-         check_material( obj, (char*)"silver" ) ||
-         check_material( obj, (char*)"gold" ) ||
-         check_material( obj, (char*)"ivory" ) ||
-         check_material( obj, (char*)"copper" ) ||
-         check_material( obj, (char*)"diamond" ) ||
-         check_material( obj, (char*)"pearl" ) ||
-         check_material( obj, (char*)"gem" ) ||
-         check_material( obj, (char*)"platinium" ) ||
-         check_material( obj, (char*)"ruby" ) ||
-         check_material( obj, (char*)"bronze" ) ||
-         check_material( obj, (char*)"titanium" ) ||
-         check_material( obj, (char*)"mithril" ) ||
-         check_material( obj, (char*)"obsidian" ) ||
-         check_material( obj, (char*)"lead" ) )
+    if ( check_material( obj, "steel" ) ||
+         check_material( obj, "iron" ) ||
+         check_material( obj, "brass" ) ||
+         check_material( obj, "silver" ) ||
+         check_material( obj, "gold" ) ||
+         check_material( obj, "ivory" ) ||
+         check_material( obj, "copper" ) ||
+         check_material( obj, "diamond" ) ||
+         check_material( obj, "pearl" ) ||
+         check_material( obj, "gem" ) ||
+         check_material( obj, "platinium" ) ||
+         check_material( obj, "ruby" ) ||
+         check_material( obj, "bronze" ) ||
+         check_material( obj, "titanium" ) ||
+         check_material( obj, "mithril" ) ||
+         check_material( obj, "obsidian" ) ||
+         check_material( obj, "lead" ) )
        return TRUE;
 
     return FALSE;
@@ -1856,7 +1856,7 @@ void extract_obj_1( OBJ_DATA *obj, bool count )
 
     if (obj->extracted)  /* if the object has already been extracted once */
       {
-        sprintf(buf, "Warning! Extraction of %s, vnum %d.", obj->name,
+        snprintf(buf, sizeof(buf), "Warning! Extraction of %s, vnum %d.", obj->name,
                 obj->pIndexData->vnum);
         bug(buf, 0);
         return; /* if it's already been extracted, something bad is going on */
@@ -1958,7 +1958,7 @@ void extract_char_org( CHAR_DATA *ch, bool fPull, bool Count )
     {
     if (ch->extracted)  /* if the char has already been extracted once */
       {
-        sprintf(buf, "Warning! Extraction of %s.", ch->name);
+        snprintf(buf, sizeof(buf), "Warning! Extraction of %s.", ch->name);
         bug(buf, 0);
         return; /* if it's already been extracted, something bad is going on */
       }
@@ -2014,7 +2014,7 @@ void extract_char_org( CHAR_DATA *ch, bool fPull, bool Count )
 
     if ( ch->desc != NULL && ch->desc->original != NULL )
     {
-	do_return( ch, (char*)"" );
+	do_return( ch, "" );
 	ch->desc = NULL;
     }
 
@@ -2269,7 +2269,7 @@ OBJ_DATA *create_money( int silver )
     else
     {
         obj = create_object( get_obj_index( OBJ_VNUM_SILVER_SOME ), 0 );
-        sprintf( buf, obj->short_descr, silver );
+        snprintf(buf, sizeof(buf), obj->short_descr, silver );
         free_string( obj->short_descr );
         obj->short_descr        = str_dup( buf );
         obj->value[0]           = silver;
@@ -2351,7 +2351,7 @@ bool can_see( CHAR_DATA *ch, CHAR_DATA *victim )
 	return TRUE;
 
     if ( ch == NULL || victim == NULL )
-	dump_to_scr( (char*)">>>>>>>> CAN_ SEE ERROR <<<<<<<<<<<\n\r" );
+	dump_to_scr( ">>>>>>>> CAN_ SEE ERROR <<<<<<<<<<<\n\r" );
 
     if ( get_trust(ch) < victim->invis_level)
 	return FALSE;
@@ -2480,39 +2480,39 @@ char *item_type_name( OBJ_DATA *obj )
 {
     switch ( obj->item_type )
     {
-    case ITEM_LIGHT:		return (char*)"light";
-    case ITEM_SCROLL:		return (char*)"scroll";
-    case ITEM_WAND:		return (char*)"wand";
-    case ITEM_STAFF:		return (char*)"staff";
-    case ITEM_WEAPON:		return (char*)"weapon";
-    case ITEM_TREASURE:		return (char*)"treasure";
-    case ITEM_ARMOR:		return (char*)"armor";
-    case ITEM_CLOTHING:		return (char*)"clothing";
-    case ITEM_POTION:		return (char*)"potion";
-    case ITEM_FURNITURE:	return (char*)"furniture";
-    case ITEM_TRASH:		return (char*)"trash";
-    case ITEM_CONTAINER:	return (char*)"container";
-    case ITEM_DRINK_CON:	return (char*)"drink container";
-    case ITEM_KEY:		return (char*)"key";
-    case ITEM_MAYMUNCUK:		return (char*)"maymuncuk";
-    case ITEM_FOOD:		return (char*)"food";
-    case ITEM_MONEY:		return (char*)"money";
-    case ITEM_BOAT:		return (char*)"boat";
-    case ITEM_CORPSE_NPC:	return (char*)"npc corpse";
-    case ITEM_CORPSE_PC:	return (char*)"pc corpse";
-    case ITEM_FOUNTAIN:		return (char*)"fountain";
-    case ITEM_PILL:		return (char*)"pill";
-    case ITEM_MAP:		return (char*)"map";
-    case ITEM_PORTAL:		return (char*)"portal";
-    case ITEM_WARP_STONE:	return (char*)"warp stone";
-    case ITEM_GEM:		return (char*)"gem";
-    case ITEM_JEWELRY:		return (char*)"jewelry";
-    case ITEM_JUKEBOX:		return (char*)"juke box";
-    case ITEM_TATTOO:		return (char*)"tattoo";
+    case ITEM_LIGHT:		return "light";
+    case ITEM_SCROLL:		return "scroll";
+    case ITEM_WAND:		return "wand";
+    case ITEM_STAFF:		return "staff";
+    case ITEM_WEAPON:		return "weapon";
+    case ITEM_TREASURE:		return "treasure";
+    case ITEM_ARMOR:		return "armor";
+    case ITEM_CLOTHING:		return "clothing";
+    case ITEM_POTION:		return "potion";
+    case ITEM_FURNITURE:	return "furniture";
+    case ITEM_TRASH:		return "trash";
+    case ITEM_CONTAINER:	return "container";
+    case ITEM_DRINK_CON:	return "drink container";
+    case ITEM_KEY:		return "key";
+    case ITEM_MAYMUNCUK:		return "maymuncuk";
+    case ITEM_FOOD:		return "food";
+    case ITEM_MONEY:		return "money";
+    case ITEM_BOAT:		return "boat";
+    case ITEM_CORPSE_NPC:	return "npc corpse";
+    case ITEM_CORPSE_PC:	return "pc corpse";
+    case ITEM_FOUNTAIN:		return "fountain";
+    case ITEM_PILL:		return "pill";
+    case ITEM_MAP:		return "map";
+    case ITEM_PORTAL:		return "portal";
+    case ITEM_WARP_STONE:	return "warp stone";
+    case ITEM_GEM:		return "gem";
+    case ITEM_JEWELRY:		return "jewelry";
+    case ITEM_JUKEBOX:		return "juke box";
+    case ITEM_TATTOO:		return "tattoo";
     }
 
     bug( "Item_type_name: unknown type %d.", obj->item_type );
-    return (char*)"(unknown)";
+    return "(unknown)";
 }
 
 
@@ -2524,35 +2524,35 @@ char *affect_loc_name( int location )
 {
     switch ( location )
     {
-    case APPLY_NONE:		return (char*)"none";
-    case APPLY_STR:		return (char*)"strength";
-    case APPLY_DEX:		return (char*)"dexterity";
-    case APPLY_INT:		return (char*)"intelligence";
-    case APPLY_WIS:		return (char*)"wisdom";
-    case APPLY_CON:		return (char*)"constitution";
-    case APPLY_CHA:		return (char*)"charisma";
-    case APPLY_CLASS:		return (char*)"class";
-    case APPLY_LEVEL:		return (char*)"level";
-    case APPLY_AGE:		return (char*)"age";
-    case APPLY_MANA:		return (char*)"mana";
-    case APPLY_HIT:		return (char*)"hp";
-    case APPLY_MOVE:		return (char*)"moves";
-    case APPLY_GOLD:		return (char*)"gold";
-    case APPLY_EXP:		return (char*)"experience";
-    case APPLY_AC:		return (char*)"armor class";
-    case APPLY_HITROLL:		return (char*)"hit roll";
-    case APPLY_DAMROLL:		return (char*)"damage roll";
-    case APPLY_SIZE:		return (char*)"size";
-    case APPLY_SAVES:		return (char*)"saves";
-    case APPLY_SAVING_ROD:	return (char*)"save vs rod";
-    case APPLY_SAVING_PETRI:	return (char*)"save vs petrification";
-    case APPLY_SAVING_BREATH:	return (char*)"save vs breath";
-    case APPLY_SAVING_SPELL:	return (char*)"save vs spell";
-    case APPLY_SPELL_AFFECT:	return (char*)"none";
+    case APPLY_NONE:		return "none";
+    case APPLY_STR:		return "strength";
+    case APPLY_DEX:		return "dexterity";
+    case APPLY_INT:		return "intelligence";
+    case APPLY_WIS:		return "wisdom";
+    case APPLY_CON:		return "constitution";
+    case APPLY_CHA:		return "charisma";
+    case APPLY_CLASS:		return "class";
+    case APPLY_LEVEL:		return "level";
+    case APPLY_AGE:		return "age";
+    case APPLY_MANA:		return "mana";
+    case APPLY_HIT:		return "hp";
+    case APPLY_MOVE:		return "moves";
+    case APPLY_GOLD:		return "gold";
+    case APPLY_EXP:		return "experience";
+    case APPLY_AC:		return "armor class";
+    case APPLY_HITROLL:		return "hit roll";
+    case APPLY_DAMROLL:		return "damage roll";
+    case APPLY_SIZE:		return "size";
+    case APPLY_SAVES:		return "saves";
+    case APPLY_SAVING_ROD:	return "save vs rod";
+    case APPLY_SAVING_PETRI:	return "save vs petrification";
+    case APPLY_SAVING_BREATH:	return "save vs breath";
+    case APPLY_SAVING_SPELL:	return "save vs spell";
+    case APPLY_SPELL_AFFECT:	return "none";
     }
 
     bug( "Affect_location_name: unknown location %d.", location );
-    return (char*)"(unknown)";
+    return "(unknown)";
 }
 
 
@@ -3057,12 +3057,12 @@ void add_mind(CHAR_DATA *ch, char *str)
 
  if (ch->in_mind == NULL)
   {
-   sprintf(buf,"%d",ch->in_room->vnum);
+   snprintf(buf, sizeof(buf),"%d",ch->in_room->vnum);
    ch->in_mind = str_dup(buf);
   }
  if (!is_name(str,ch->in_mind))
   {
-    sprintf(buf,"%s %s",ch->in_mind,str);
+    snprintf(buf, sizeof(buf),"%s %s",ch->in_mind,str);
     free_string(ch->in_mind); ch->in_mind = str_dup(buf);
   }
 
@@ -3084,13 +3084,13 @@ void remove_mind(CHAR_DATA *ch, char *str)
    if (!is_name(str,arg))
    {
     if (buf[0] == '\0') strcpy(buff,arg);
-    else sprintf(buff,"%s %s",buf,arg);
+    else snprintf(buff, sizeof(buff),"%s %s",buf,arg);
     strcpy(buf,buff);
    }
   }
  while ( mind[0] != '\0' );
 
- do_say(ch,(char*)"Sonunda intikamımı aldım!");
+ do_say(ch,"Sonunda intikamımı aldım!");
  free_string(ch->in_mind);
  ch->in_mind = str_dup( buf );
  if (is_number(buf)) back_home(ch);
@@ -3259,13 +3259,13 @@ void path_to_track( CHAR_DATA *ch, CHAR_DATA *victim, int door)
         if ((pExit = temp->exit[opdoor]) == NULL
 	    || (temp = pExit->u1.to_room) == NULL )
 	{
-	 sprintf(log_buf,"Path to track: Range: %d Room: %d opdoor:%d",
+	 snprintf(log_buf, sizeof(log_buf),"Path to track: Range: %d Room: %d opdoor:%d",
 		range,temp->vnum,opdoor);
 	 bug(log_buf,0);
 	 return;
 	}
        }
-    do_track(victim,(char*)"");
+    do_track(victim,"");
   }
  return;
 }

@@ -74,8 +74,8 @@ DECLARE_DO_FUN(do_wake		);
 
 DECLARE_SPEC_FUN(       spec_special_guard      );
 
-void	raw_kill		args( ( CHAR_DATA *victim ) );
-void	back_home		args( ( CHAR_DATA *ch ) );
+void	raw_kill		( CHAR_DATA *victim );
+void	back_home		( CHAR_DATA *ch );
 int 	check_time_sync		( );
 
 //#include <unistd.h>
@@ -84,28 +84,28 @@ int 	check_time_sync		( );
 /*
  * Local functions.
  */
-int	hit_gain	args( ( CHAR_DATA *ch ) );
-int	mana_gain	args( ( CHAR_DATA *ch ) );
-int	move_gain	args( ( CHAR_DATA *ch ) );
-void	mobile_update	args( ( void ) );
-void	weather_update	args( ( void ) );
-void	char_update	args( ( void ) );
-void	obj_update	args( ( void ) );
-void	aggr_update	args( ( void ) );
-int	potion_cure_level	args( ( OBJ_DATA *potion ) );
-int	potion_arm_level	args( ( OBJ_DATA *potion ) );
-bool	potion_cure_blind	args( ( OBJ_DATA *potion ) );
-bool	potion_cure_poison	args( ( OBJ_DATA *potion ) );
-bool	potion_cure_disease	args( ( OBJ_DATA *potion ) );
+int	hit_gain	( CHAR_DATA *ch );
+int	mana_gain	( CHAR_DATA *ch );
+int	move_gain	( CHAR_DATA *ch );
+void	mobile_update	( void );
+void	weather_update	( void );
+void	char_update	( void );
+void	obj_update	( void );
+void	aggr_update	( void );
+int	potion_cure_level	( OBJ_DATA *potion );
+int	potion_arm_level	( OBJ_DATA *potion );
+bool	potion_cure_blind	( OBJ_DATA *potion );
+bool	potion_cure_poison	( OBJ_DATA *potion );
+bool	potion_cure_disease	( OBJ_DATA *potion );
 
 /* below done by chronos */
-void    quest_update    args( ( void ) );
-void	auction_update	args( ( void ) );
-void	light_update	args( ( void ) );
-void	room_update	args( ( void ) );
-void	room_affect_update	args( ( void ) );
-void	check_reboot	args( ( void ) );
-void	track_update	args( ( void ) );
+void    quest_update    ( void );
+void	auction_update	( void );
+void	light_update	( void );
+void	room_update	( void );
+void	room_affect_update	( void );
+void	check_reboot	( void );
+void	track_update	( void );
 
 /* used for saving */
 
@@ -138,7 +138,7 @@ void advance_level( CHAR_DATA *ch )
 	title_table[ch->iclass][ch->level-1])
 	|| CANT_CHANGE_TITLE(ch) )
     {
-      sprintf( buf, ", %s",
+      snprintf(buf, sizeof(buf), ", %s",
 	title_table [ch->iclass] [ch->level]  );
       set_title( ch, buf );
     }
@@ -216,11 +216,11 @@ void gain_exp( CHAR_DATA *ch, int gain )
 
         if (ch->level == 90)
           {
-            sprintf(log_buf, "%s seviye 90 oldu.", ch->name);
+            snprintf(log_buf, sizeof(log_buf), "%s seviye 90 oldu.", ch->name);
             log_string(log_buf);
           }
 
-	sprintf(buf,"$N seviye %d oldu!",ch->level);
+	snprintf(buf, sizeof(buf),"$N seviye %d oldu!",ch->level);
 	wiznet(buf,ch,NULL,WIZ_LEVELS,0,0);
 	advance_level( ch );
 	save_char_obj(ch);
@@ -535,7 +535,7 @@ void gain_condition( CHAR_DATA *ch, int iCond, int value )
 	    act("Kana olan açlığı $m öldürüyor!", ch,NULL,NULL,TO_ROOM );
 	    if (ch->in_room && ch->in_room->people && !ch->fighting)
 	    {
-		if (!IS_AWAKE(ch)) do_stand(ch,(char*)"");
+		if (!IS_AWAKE(ch)) do_stand(ch,"");
                 for ( vch = ch->in_room->people;
                		vch != NULL && ch->fighting == NULL; vch = vch_next)
                 {
@@ -543,7 +543,7 @@ void gain_condition( CHAR_DATA *ch, int iCond, int value )
                   if ( ch != vch && can_see(ch,vch) &&
                         !is_safe_nomessage(ch,vch) )
                    {
-                     do_yell(ch,(char*)"KAN! Kana ihtiyacım var!");
+                     do_yell(ch,"KAN! Kana ihtiyacım var!");
                     do_murder(ch,vch->name);
 		    fdone = 1;
 		    break;
@@ -920,7 +920,7 @@ milat: sunucu alindiktan sonra oyunun ilk acildigi gun
 
 	if( eski_gun != time_info.day )
 	{
-		sprintf( buf,"Oyun tarihi: %ld/%ld/%ld Saat: %ld",time_info.day,time_info.month,time_info.year,time_info.hour);
+		snprintf(buf, sizeof(buf),"Oyun tarihi: %ld/%ld/%ld Saat: %ld",time_info.day,time_info.month,time_info.year,time_info.hour);
 		log_string( buf );
 	}
 }
@@ -997,7 +997,7 @@ void weather_update()
 	{
 		case  0:
 			strcat( buf, "Yeni bir gün başladı.\n\r" );
-			write_event_log((char *)"Yeni bir gün başladı.");
+			write_event_log("Yeni bir gün başladı.");
 			break;
 
 		case  5:
@@ -1195,7 +1195,7 @@ void char_update( void )
 
 	if (!IS_NPC(ch) && ch->cabal == CABAL_BATTLE)
 	{
-	 if (!is_affected(ch,gsn_spellbane)) do_spellbane(ch,(char*)"");
+	 if (!is_affected(ch,gsn_spellbane)) do_spellbane(ch,"");
 	}
 
         /* Remove caltraps effect after fight off */
@@ -1206,7 +1206,7 @@ void char_update( void )
         if (IS_VAMPIRE(ch) &&
 	    (weather_info.sunlight == SUN_LIGHT ||
 		weather_info.sunlight == SUN_RISE) )
-          do_human(ch,(char*)"");
+          do_human(ch,"");
 
         /* Reset sneak for vampire */
         if ( !(ch->fighting) && !IS_AFFECTED(ch,AFF_SNEAK) &&
@@ -1356,7 +1356,7 @@ void char_update( void )
 			AFFECT_DATA neck_af;
 
 			REMOVE_BIT(ch->affected_by, AFF_SLEEP);
-			do_wake(ch, (char*)"");
+			do_wake(ch, "");
 			neck_af.type = gsn_neckguard;
 			neck_af.where = TO_AFFECTS;
 			neck_af.level = ch->level;
@@ -1371,7 +1371,7 @@ void char_update( void )
 			AFFECT_DATA head_af;
 
 			REMOVE_BIT(ch->affected_by, AFF_SLEEP);
-			do_wake(ch,(char*) "");
+			do_wake(ch,"");
 			head_af.type = gsn_headguard;
 			head_af.where = TO_AFFECTS;
 			head_af.level = ch->level;
@@ -1386,7 +1386,7 @@ void char_update( void )
 			AFFECT_DATA b_af;
 
 			REMOVE_BIT(ch->affected_by, AFF_SLEEP);
-			do_wake(ch, (char*)"");
+			do_wake(ch, "");
 			b_af.type = gsn_blackguard;
 			b_af.where = TO_AFFECTS;
 			b_af.level = ch->level;
@@ -1553,7 +1553,7 @@ void char_update( void )
 	    if ( !IS_NPC(ch) )
               save_char_obj(ch);
             if ( ch == ch_quit || ch->timer > 20 )
-              do_quit(ch, (char*)"");
+              do_quit(ch, "");
           }
     }
 
@@ -1573,7 +1573,7 @@ bool fChar;
     {
  	obj_next = obj->next;
 
-	if ( obj == NULL ) {dump_to_scr((char*)"NULL OBJ encounter!\n\r");break;}
+	if ( obj == NULL ) {dump_to_scr("NULL OBJ encounter!\n\r");break;}
 
 	if ( obj->in_room == NULL )
 	  continue;
@@ -1695,7 +1695,7 @@ void obj_update( void )
 				(obj->pIndexData->oprogs->area_prog) (obj);
 			}
 
-		if ( check_material( obj, (char*)"ice" ) && obj->kasada_duruyor == FALSE)
+		if ( check_material( obj, "ice" ) && obj->kasada_duruyor == FALSE)
 		{
 			if ( obj->carried_by != NULL )
 			{
@@ -1721,7 +1721,7 @@ void obj_update( void )
 					}
 		}
 
-		if ( !check_material( obj, (char*)"glass" ) && obj->item_type==ITEM_POTION && obj->kasada_duruyor == FALSE) 
+		if ( !check_material( obj, "glass" ) && obj->item_type==ITEM_POTION && obj->kasada_duruyor == FALSE) 
 		{
 			if ( obj->carried_by != NULL ) 
 			{
@@ -1958,7 +1958,7 @@ void aggr_update( void )
           /* Mad mob attacks! */
           if ( ch->last_fought == wch )
 	   {
-       sprintf(buf,"%s! Öleceksin!",
+       snprintf(buf, sizeof(buf),"%s! Öleceksin!",
                     (is_affected(wch,gsn_doppelganger) &&
                      !IS_SET(ch->act,PLR_HOLYLIGHT))?
                     PERS(wch->doppel,ch) : PERS(wch,ch));
@@ -2558,8 +2558,8 @@ void check_reboot( void )
   case 5:
   case 10:
   case 15:
-  sprintf(buf,"\007***** %i DAKİKA SONRA MANGUS YENİDEN BAŞLATILACAK *****\007\n\r",reboot_counter);
-  sprintf(buf2,"%i dakika sonra Mangus yeniden başlatılacak.",reboot_counter);
+  snprintf(buf, sizeof(buf),"\007***** %i DAKİKA SONRA MANGUS YENİDEN BAŞLATILACAK *****\007\n\r",reboot_counter);
+  snprintf(buf2, sizeof(buf2),"%i dakika sonra Mangus yeniden başlatılacak.",reboot_counter);
   write_event_log(buf2);
     for (d = descriptor_list; d != NULL; d = d->next)
 	  write_to_buffer(d,buf,0);
@@ -2601,7 +2601,7 @@ void track_update( void )
 	     if ( !IS_IMMORTAL(vch) && can_see(ch,vch) &&
 		!is_safe_nomessage(ch,vch)  && is_name(vch->name,ch->in_mind) )
 	     {
-         sprintf(buf,"İşte yine karşılaştık %s!",vch->name);
+         snprintf(buf, sizeof(buf),"İşte yine karşılaştık %s!",vch->name);
 	      do_yell(ch,buf);
 	      do_murder(ch,vch->name);
 	      break; /* one fight at a time */

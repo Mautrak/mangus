@@ -73,7 +73,7 @@ void load_limited_objects();
 
 
 #if !defined(macintosh)
-extern	int	_filbuf		args( (FILE *) );
+extern	int	_filbuf		(FILE *);
 #endif
 
 #if !defined(linux)
@@ -440,31 +440,31 @@ AREA_DATA		*Serarea;	/* currently read area */
 /*
  * Local booting procedures.
 */
-void    init_random_number_generator  args( ( void ) );
-void	load_areadata	args( ( FILE *fp ) );
-void	load_helps	args( ( FILE *fp ) );
-void    load_omprogs    args( ( FILE *fp ) );
-void 	load_new_mobiles	args( ( FILE *fp ) );
-void	load_old_obj	args( ( FILE *fp ) );
-void	load_new_old_obj	args( ( FILE *fp ) );
-void 	load_objects	args( ( FILE *fp ) );
-void 	load_new_objects	args( ( FILE *fp ) );
-void	load_resets	args( ( FILE *fp ) );
-void	load_rooms	args( ( FILE *fp ) );
-void	load_shops	args( ( FILE *fp ) );
-void 	load_socials	args( ( FILE *fp ) );
-void	load_specials	args( ( FILE *fp ) );
-void	load_bans	args( ( void ) );
-void    load_olimits    args( ( FILE *fp ) );
-void    load_practicer  args( ( FILE *fp ) );
-void    load_resetmsg   args( ( FILE *fp ) );
-void    load_aflag	args( ( FILE *fp ) );
+void    init_random_number_generator  ( void );
+void	load_areadata	( FILE *fp );
+void	load_helps	( FILE *fp );
+void    load_omprogs    ( FILE *fp );
+void 	load_new_mobiles	( FILE *fp );
+void	load_old_obj	( FILE *fp );
+void	load_new_old_obj	( FILE *fp );
+void 	load_objects	( FILE *fp );
+void 	load_new_objects	( FILE *fp );
+void	load_resets	( FILE *fp );
+void	load_rooms	( FILE *fp );
+void	load_shops	( FILE *fp );
+void 	load_socials	( FILE *fp );
+void	load_specials	( FILE *fp );
+void	load_bans	( void );
+void    load_olimits    ( FILE *fp );
+void    load_practicer  ( FILE *fp );
+void    load_resetmsg   ( FILE *fp );
+void    load_aflag	( FILE *fp );
 
-void	fix_exits	args( ( void ) );
+void	fix_exits	( void );
 
-void	reset_area	args( ( AREA_DATA * pArea ) );
+void	reset_area	( AREA_DATA * pArea );
 
-int	wear_convert	args( ( int oldwear ) );
+int	wear_convert	( int oldwear );
 
 /*
  * Big mama top level function.
@@ -642,7 +642,7 @@ void boot_db( void )
     {
       fix_exits( );
       load_limited_objects();
-      sprintf(buf,"Total non-immortal levels > 5: %li",total_levels);
+      snprintf(buf, sizeof(buf),"Total non-immortal levels > 5: %li",total_levels);
       log_string(buf);
 
       fBootDb	= FALSE;
@@ -670,7 +670,7 @@ void boot_db( void )
 void load_areadata( FILE *fp )
 {
 	AREA_DATA *pArea;
-    char *word=(char*)"End";
+    char *word="End";
 	bool fMatch;
 
 	pArea		= (AREA_DATA *)alloc_perm( sizeof(*pArea) );
@@ -830,7 +830,7 @@ void load_old_obj( FILE *fp )
 	pObjIndex->description		= fread_string( fp );
 	/* Action description */	  fread_string( fp );
 
-	pObjIndex->material		= (char*)"copper";
+	pObjIndex->material		= "copper";
 	pObjIndex->short_descr[0]	= LOWER(pObjIndex->short_descr[0]);
 	pObjIndex->description[0]	= UPPER(pObjIndex->description[0]);
 	pObjIndex->material		= str_dup("");
@@ -853,12 +853,12 @@ void load_old_obj( FILE *fp )
 
 	if (pObjIndex->item_type == ITEM_WEAPON)
 	{
-	    if (is_name((char*)"two",pObjIndex->name)
-	    ||  is_name((char*)"two-handed",pObjIndex->name)
-	    ||  is_name((char*)"claymore",pObjIndex->name)
-      ||  is_name((char*)"iki-el",pObjIndex->name)
-      ||  is_name((char*)"ikiel",pObjIndex->name)
-      ||  is_name((char*)"�ift-el",pObjIndex->name))
+	    if (is_name("two",pObjIndex->name)
+	    ||  is_name("two-handed",pObjIndex->name)
+	    ||  is_name("claymore",pObjIndex->name)
+      ||  is_name("iki-el",pObjIndex->name)
+      ||  is_name("ikiel",pObjIndex->name)
+      ||  is_name("�ift-el",pObjIndex->name))
 		SET_BIT(pObjIndex->value[4],WEAPON_TWO_HANDS);
 	}
 
@@ -979,7 +979,7 @@ void load_new_old_obj( FILE *fp )
 	pObjIndex->description		= fread_string( fp );
 	/* Action description */	  fread_string( fp );
 
-	pObjIndex->material		= (char*)"copper";
+	pObjIndex->material		= "copper";
 	pObjIndex->short_descr[0]	= LOWER(pObjIndex->short_descr[0]);
 	pObjIndex->description[0]	= UPPER(pObjIndex->description[0]);
 	pObjIndex->material		= str_dup("");
@@ -1002,12 +1002,12 @@ void load_new_old_obj( FILE *fp )
 
 	if (pObjIndex->item_type == ITEM_WEAPON)
 	{
-	    if (is_name((char*)"two",pObjIndex->name)
-	    ||  is_name((char*)"two-handed",pObjIndex->name)
-	    ||  is_name((char*)"claymore",pObjIndex->name)
-      ||  is_name((char*)"iki-el",pObjIndex->name)
-      ||  is_name((char*)"ikiel",pObjIndex->name)
-      ||  is_name((char*)"�ift-el",pObjIndex->name))
+	    if (is_name("two",pObjIndex->name)
+	    ||  is_name("two-handed",pObjIndex->name)
+	    ||  is_name("claymore",pObjIndex->name)
+      ||  is_name("iki-el",pObjIndex->name)
+      ||  is_name("ikiel",pObjIndex->name)
+      ||  is_name("�ift-el",pObjIndex->name))
 		SET_BIT(pObjIndex->value[4],WEAPON_TWO_HANDS);
 	}
 
@@ -1502,7 +1502,7 @@ void fix_exits( void )
 		&&   pexit_rev->u1.to_room != pRoomIndex
 		&&   (pRoomIndex->vnum < 1200 || pRoomIndex->vnum > 1299))
 		{
-		    sprintf( buf, "Fix_exits: %d:%d -> %d:%d -> %d.",
+		    snprintf(buf, sizeof(buf), "Fix_exits: %d:%d -> %d:%d -> %d.",
 			pRoomIndex->vnum, door,
 			to_room->vnum,    rev_dir[door],
 			(pexit_rev->u1.to_room == NULL)
@@ -1543,13 +1543,13 @@ void area_update( void )
 	    ROOM_INDEX_DATA *pRoomIndex;
 
 	    reset_area( pArea );
-      sprintf(buf,"%s b�lgesi reset'lendi.",pArea->name);
+      snprintf(buf, sizeof(buf),"%s b�lgesi reset'lendi.",pArea->name);
 	    wiznet(buf,NULL,NULL,WIZ_RESETS,0,0);
 
 	    if (pArea->resetmsg)
-	    	 sprintf(buf,"%s\n\r",pArea->resetmsg);
+	    	 snprintf(buf, sizeof(buf),"%s\n\r",pArea->resetmsg);
 	    else
-      sprintf(buf,"Ya�am�n yeni seslerini duyuyorsun...\n\r");
+      snprintf(buf, sizeof(buf),"Ya�am�n yeni seslerini duyuyorsun...\n\r");
 
             for ( d = descriptor_list; d != NULL; d = d->next )
 	       {
@@ -1627,10 +1627,10 @@ void reset_area( AREA_DATA *pArea )
       {
         continue;
       }
-      room_record( (char*)"erased", room, -1 );
+      room_record( "erased", room, -1 );
       if (number_percent() < 50)
       {
-        room_record( (char*)"erased", room, -1 );
+        room_record( "erased", room, -1 );
       }
     }
   }
@@ -1814,7 +1814,7 @@ void reset_area( AREA_DATA *pArea )
                  ( pObjIndex->count >= pObjIndex->limit ) )
               {
                 last = FALSE;
-                dump_to_scr((char*)"Reseting area: [P] OBJ limit reached\n\r");
+                dump_to_scr("Reseting area: [P] OBJ limit reached\n\r");
                 break;
               }
 
@@ -2103,7 +2103,7 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex , AREA_DATA *	pArea)
       }
   else
     {
-        if( (mob->spec_fun != spec_lookup( (char*)"spec_questmaster" )) || IS_SET(mob->act, ACT_MAFYA) || IS_SET(mob->act, ACT_TRAIN) ||
+        if( (mob->spec_fun != spec_lookup( "spec_questmaster" )) || IS_SET(mob->act, ACT_MAFYA) || IS_SET(mob->act, ACT_TRAIN) ||
             IS_SET(mob->act, ACT_PRACTICE) || IS_SET(mob->act, ACT_CLERIC) || IS_SET(mob->act, ACT_MAGE) ||
             IS_SET(mob->act, ACT_THIEF) || IS_SET(mob->act, ACT_WARRIOR) || IS_SET(mob->act, ACT_IS_HEALER) ||
             IS_SET(mob->act, ACT_GAIN) )
@@ -2368,7 +2368,7 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
 	 ( obj->pIndexData->count >= obj->pIndexData->limit ) )
 
     if ( pObjIndex->new_format == 1 )
-       dump_to_scr( (char*)"" );
+       dump_to_scr( "" );
 
     if ( pObjIndex->new_format == 1 )
  	obj->level = pObjIndex->level;
@@ -3394,26 +3394,26 @@ void do_memory( CHAR_DATA *ch, char *argument )
 {
     char buf[MAX_STRING_LENGTH];
 
-    sprintf( buf, "Affects %5d\n\r", top_affect    ); send_to_char( buf, ch );
-    sprintf( buf, "Areas   %5d\n\r", top_area      ); send_to_char( buf, ch );
-    sprintf( buf, "ExDes   %5d\n\r", top_ed        ); send_to_char( buf, ch );
-    sprintf( buf, "Exits   %5d\n\r", top_exit      ); send_to_char( buf, ch );
-    sprintf( buf, "Helps   %5d\n\r", top_help      ); send_to_char( buf, ch );
-    sprintf( buf, "Socials %5d\n\r", social_count  ); send_to_char( buf, ch );
-    sprintf( buf, "Mobs    %5d(%d new format)\n\r", top_mob_index,newmobs );
+    snprintf(buf, sizeof(buf), "Affects %5d\n\r", top_affect    ); send_to_char( buf, ch );
+    snprintf(buf, sizeof(buf), "Areas   %5d\n\r", top_area      ); send_to_char( buf, ch );
+    snprintf(buf, sizeof(buf), "ExDes   %5d\n\r", top_ed        ); send_to_char( buf, ch );
+    snprintf(buf, sizeof(buf), "Exits   %5d\n\r", top_exit      ); send_to_char( buf, ch );
+    snprintf(buf, sizeof(buf), "Helps   %5d\n\r", top_help      ); send_to_char( buf, ch );
+    snprintf(buf, sizeof(buf), "Socials %5d\n\r", social_count  ); send_to_char( buf, ch );
+    snprintf(buf, sizeof(buf), "Mobs    %5d(%d new format)\n\r", top_mob_index,newmobs );
     send_to_char( buf, ch );
-    sprintf( buf, "(in use)%5d\n\r", mobile_count  ); send_to_char( buf, ch );
-    sprintf( buf, "Objs    %5d(%d new format)\n\r", top_obj_index,newobjs );
+    snprintf(buf, sizeof(buf), "(in use)%5d\n\r", mobile_count  ); send_to_char( buf, ch );
+    snprintf(buf, sizeof(buf), "Objs    %5d(%d new format)\n\r", top_obj_index,newobjs );
     send_to_char( buf, ch );
-    sprintf( buf, "Resets  %5d\n\r", top_reset     ); send_to_char( buf, ch );
-    sprintf( buf, "Rooms   %5d\n\r", top_room      ); send_to_char( buf, ch );
-    sprintf( buf, "Shops   %5d\n\r", top_shop      ); send_to_char( buf, ch );
+    snprintf(buf, sizeof(buf), "Resets  %5d\n\r", top_reset     ); send_to_char( buf, ch );
+    snprintf(buf, sizeof(buf), "Rooms   %5d\n\r", top_room      ); send_to_char( buf, ch );
+    snprintf(buf, sizeof(buf), "Shops   %5d\n\r", top_shop      ); send_to_char( buf, ch );
 
-    sprintf( buf, "Strings %5d strings of %7d bytes (max %d).\n\r",
+    snprintf(buf, sizeof(buf), "Strings %5d strings of %7d bytes (max %d).\n\r",
 	nAllocString, sAllocString, MAX_STRING );
     send_to_char( buf, ch );
 
-    sprintf( buf, "Perms   %5d blocks  of %7d bytes.\n\r",
+    snprintf(buf, sizeof(buf), "Perms   %5d blocks  of %7d bytes.\n\r",
 	nAllocPerm, sAllocPerm );
     send_to_char( buf, ch );
 
@@ -3863,7 +3863,7 @@ void bug( const char *str, int param )
 	    fseek( fpArea, iChar, 0 );
 	}
 
-	sprintf( buf, "[*****] FILE: %s LINE: %d", strArea, iLine );
+	snprintf(buf, sizeof(buf), "[*****] FILE: %s LINE: %d", strArea, iLine );
 	log_string( buf );
 /* RT removed because we don't want bugs shutting the mud
 	if ( ( fp = fopen( "shutdown.txt", "a" ) ) != NULL )
@@ -3993,11 +3993,11 @@ void load_limited_objects()
   {
     if (strlen(dp->d_name) >= 3)
     {
-      sprintf(buf, "%s/",PLAYER_DIR);
+      snprintf(buf, sizeof(buf), "%s/",PLAYER_DIR);
       strcat(buf, dp->d_name);
       fReadLevel = FALSE;
       tplayed = 0;
-      sprintf(log_buf,"[%s] okunacak.\n\r",buf);
+      snprintf(log_buf, sizeof(log_buf),"[%s] okunacak.\n\r",buf);
       dump_to_scr(log_buf);
       if ( (pfile = fopen(buf, "r")) == NULL)
       {
@@ -4018,7 +4018,7 @@ void load_limited_objects()
                 i = fread_number(pfile);
                 fReadLevel = TRUE;
                 total_levels += UMAX(0,i - 5);
-                sprintf(log_buf,"[%s]'s file +: %d\n\r",buf, UMAX(0,i-5));
+                snprintf(log_buf, sizeof(log_buf),"[%s]'s file +: %d\n\r",buf, UMAX(0,i-5));
                 dump_to_scr(log_buf);
                 continue;
               }
@@ -4069,7 +4069,7 @@ void load_limited_objects()
             {
               if ( tplayed < MIN_TIME_LIMIT )
               {
-                sprintf(log_buf,"Discarding the player %s for limited equipments!.\n",buf);
+                snprintf(log_buf, sizeof(log_buf),"Discarding the player %s for limited equipments!.\n",buf);
                 dump_to_scr( log_buf );
                 break;
               }
@@ -4081,7 +4081,7 @@ void load_limited_objects()
                 get_obj_index(vnum)->count++;
                 if( get_obj_index(vnum)->limit != -1 )
                 {
-                    sprintf(log_buf,"**** Limit eq in player file: %d.\n",vnum);
+                    snprintf(log_buf, sizeof(log_buf),"**** Limit eq in player file: %d.\n",vnum);
                     dump_to_scr( log_buf );
                 }
               }

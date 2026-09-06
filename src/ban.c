@@ -84,7 +84,7 @@ void save_bans(void)
 	if (IS_SET(pban->ban_flags,BAN_PERMANENT))
 	{
 	    found = TRUE;
-	    sprintf( buf, "%-20s %-2d %s\n\r", pban->name, pban->level,print_flags(pban->ban_flags) );
+	    snprintf(buf, sizeof(buf), "%-20s %-2d %s\n\r", pban->name, pban->level,print_flags(pban->ban_flags) );
 	    dump_to_scr( buf );
 	    fprintf(fp,"%-20s %-2d %s\n",pban->name,pban->level,
 		print_flags(pban->ban_flags));
@@ -186,14 +186,14 @@ void ban_site(CHAR_DATA *ch, char *argument, bool fPerm)
   	}
 	buffer = new_buf();
 
-        add_buf(buffer,(char*)"Banned sites  level  type     status\n\r");
+        add_buf(buffer,"Banned sites  level  type     status\n\r");
         for (pban = ban_list;pban != NULL;pban = pban->next)
         {
-	    sprintf(buf2,"%s%s%s",
+	    snprintf(buf2, sizeof(buf2),"%s%s%s",
 		IS_SET(pban->ban_flags,BAN_PREFIX) ? "*" : "",
 		pban->name,
 		IS_SET(pban->ban_flags,BAN_SUFFIX) ? "*" : "");
-	    sprintf(buf,"%-12s    %-3d  %-7s  %s\n\r",
+	    snprintf(buf, sizeof(buf),"%-12s    %-3d  %-7s  %s\n\r",
 		buf2, pban->level,
 		IS_SET(pban->ban_flags,BAN_NEWBIES) ? "newbies" :
 		IS_SET(pban->ban_flags,BAN_PLAYER)  ? "player" :
@@ -282,7 +282,7 @@ void ban_site(CHAR_DATA *ch, char *argument, bool fPerm)
     pban->next  = ban_list;
     ban_list    = pban;
     save_bans();
-    sprintf(buf,"%s has been banned.\n\r",pban->name);
+    snprintf(buf, sizeof(buf),"%s has been banned.\n\r",pban->name);
     send_to_char( buf, ch );
     return;
 }
@@ -329,7 +329,7 @@ void do_allow( CHAR_DATA *ch, char *argument )
                 prev->next = curr->next;
 
             free_ban(curr);
-	    sprintf(buf,"Ban on %s lifted.\n\r",arg);
+	    snprintf(buf, sizeof(buf),"Ban on %s lifted.\n\r",arg);
             send_to_char( buf, ch );
 	    save_bans();
             return;

@@ -92,9 +92,9 @@ void do_gain(CHAR_DATA *ch, char *argument)
 
     if (arg[0] == '\0')
     {
-      do_say(trainer,(char*)"10 pratiği 1 eğitime dönüştürebilirsin.");
-    	do_say(trainer,(char*)"1 eğitimi 10 pratiğe dönüştürebilirsin.");
-    	do_say(trainer,(char*)"Şunları kullan: 'kazan eğitim','kazan pratik'");
+      do_say(trainer,"10 pratiği 1 eğitime dönüştürebilirsin.");
+    	do_say(trainer,"1 eğitimi 10 pratiğe dönüştürebilirsin.");
+    	do_say(trainer,"Şunları kullan: 'kazan eğitim','kazan pratik'");
 	return;
     }
 
@@ -170,12 +170,12 @@ void do_spells(CHAR_DATA *ch, char *argument)
 	found = TRUE;
 	lev = skill_table[sn].skill_level[ch->iclass];
 	if (ch->level < lev)
-	  sprintf(buf,"%-18s  n/a      ", skill_table[sn].name[1]);
+	  snprintf(buf, sizeof(buf),"%-18s  n/a      ", skill_table[sn].name[1]);
 	else
 	{
 	  mana = UMAX(skill_table[sn].min_mana,
 		      100/(2 + ch->level - lev));
-	  sprintf(buf,"%-18s  %3d mana  ",skill_table[sn].name[1],mana);
+	  snprintf(buf, sizeof(buf),"%-18s  %3d mana  ",skill_table[sn].name[1],mana);
 	}
 
 	if (spell_list[lev][0] == '\0')
@@ -236,9 +236,9 @@ void do_skills(CHAR_DATA *ch, char *argument)
         found = TRUE;
         lev = skill_table[sn].skill_level[ch->iclass];
         if (ch->level < lev)
-          sprintf(buf,"%-18s n/a      ", skill_table[sn].name[1]);
+          snprintf(buf, sizeof(buf),"%-18s n/a      ", skill_table[sn].name[1]);
         else
-          sprintf(buf,"%-18s %3d%%      ",skill_table[sn].name[1],
+          snprintf(buf, sizeof(buf),"%-18s %3d%%      ",skill_table[sn].name[1],
 					 ch->pcdata->learned[sn]);
 
         if (skill_list[lev][0] == '\0')
@@ -339,7 +339,7 @@ void check_improve( CHAR_DATA *ch, int sn, bool success, int multiplier )
 	chance = URANGE(5,100 - ch->pcdata->learned[sn], 95);
 	if (number_percent() < chance)
 	{
-    sprintf(buf,"$C%s gelişiyor!$c",
+    snprintf(buf, sizeof(buf),"$C%s gelişiyor!$c",
 		    skill_table[sn].name[1]);
 	    act_color(buf,ch,NULL,NULL,TO_CHAR,POS_DEAD, CLR_GREEN);
 	    ch->pcdata->learned[sn]++;
@@ -352,7 +352,7 @@ void check_improve( CHAR_DATA *ch, int sn, bool success, int multiplier )
 	chance = URANGE(5,ch->pcdata->learned[sn]/2,30);
 	if (number_percent() < chance)
 	{
-	    sprintf(buf,
+	    snprintf(buf, sizeof(buf),
         "$CHatalarından ders alıyorsun ve %s gelişiyor.$c",
 		skill_table[sn].name[1]);
 	    act_color(buf,ch,NULL,NULL,TO_CHAR,POS_DEAD,CLR_GREEN);
@@ -427,7 +427,7 @@ void do_slist(CHAR_DATA *ch, char *argument)
       {
         found = TRUE;
         lev = skill_table[sn].skill_level[iclass];
-        sprintf(buf,"%-18s          ",skill_table[sn].name[1]);
+        snprintf(buf, sizeof(buf),"%-18s          ",skill_table[sn].name[1]);
         if (skill_list[lev][0] == '\0')
           sprintf(skill_list[lev],"\n\rrSeviye %2d: %s",lev,buf);
         else /* append */
@@ -490,7 +490,7 @@ void do_glist( CHAR_DATA *ch , char *argument)
    return;
   }
 
-  sprintf(buf,"%s grubunu listeliyor :\n\r",prac_table[group].sh_name);
+  snprintf(buf, sizeof(buf),"%s grubunu listeliyor :\n\r",prac_table[group].sh_name);
  send_to_char(buf,ch);
  buf[0] = '\0';
  for(count = 0 ; count < MAX_SKILL; count++)
@@ -501,11 +501,11 @@ void do_glist( CHAR_DATA *ch , char *argument)
      continue;
    if ( buf[0] != '\0')
     {
-     sprintf(buf , "%-18s%-18s\n\r", buf,skill_table[count].name[1]);
+     snprintf(buf, sizeof(buf), "%-18s%-18s\n\r", buf,skill_table[count].name[1]);
      send_to_char(buf,ch);
      buf[0] = '\0';
     }
-   else sprintf(buf, "%-18s",skill_table[count].name[1]);
+   else snprintf(buf, sizeof(buf), "%-18s",skill_table[count].name[1]);
   }
 
 }
@@ -529,7 +529,7 @@ void do_slook( CHAR_DATA *ch, char *argument)
 	 return;
 	}
 
-     sprintf(buf,"Yetenek: %s, Grup: %s.\n\r",
+     snprintf(buf, sizeof(buf),"Yetenek: %s, Grup: %s.\n\r",
 	skill_table[sn].name[1],prac_table[skill_table[sn].group].sh_name);
      send_to_char(buf,ch);
 
@@ -621,7 +621,7 @@ void do_learn( CHAR_DATA *ch, char *argument )
 
 	if ( ch->pcdata->learned[sn] >= adept )
 	{
-    sprintf( buf, "%s konusunu zaten öğrendin.\n\r",
+    snprintf(buf, sizeof(buf), "%s konusunu zaten öğrendin.\n\r",
 		skill_table[sn].name[1] );
 	    send_to_char( buf, ch );
 	}

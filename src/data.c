@@ -50,24 +50,24 @@ void ud_data_read(void)
 
 	for ( ; ; )
 	{
-		word   = feof( fp ) ? (char*)"End" : fread_word( fp );
-		if (!str_cmp( word, (char*)"Encokcevrimici"))
+		word   = feof( fp ) ? "End" : fread_word( fp );
+		if (!str_cmp( word, "Encokcevrimici"))
 		{
 			max_on_so_far = fread_number( fp );
 		}
-		else if (!str_cmp( word, (char*)"IkikatTP"))
+		else if (!str_cmp( word, "IkikatTP"))
 		{
 			ikikat_tp = fread_number( fp );
 		}
-		else if (!str_cmp( word, (char*)"IkikatGP"))
+		else if (!str_cmp( word, "IkikatGP"))
 		{
 			ikikat_gp = fread_number( fp );
 		}
-		else if(!str_cmp( word, (char*)"*"))
+		else if(!str_cmp( word, "*"))
 		{
 			fread_to_eol(fp);
 		}
-		else if(!str_cmp( word, (char*)"End"))
+		else if(!str_cmp( word, "End"))
 		{
 			fclose(fp);
 			return;
@@ -94,7 +94,7 @@ void write_channel_log(CHAR_DATA *ch, CHAR_DATA *vc, int kanal, char *argument)
 
 	if( kanal<0 || kanal>6 )
 	{
-		sprintf( buf, "write_channel_log: hatali kanal %d", kanal );
+		snprintf(buf, sizeof(buf), "write_channel_log: hatali kanal %d", kanal );
 		bug(buf,0);
 		return;
 	}
@@ -102,19 +102,19 @@ void write_channel_log(CHAR_DATA *ch, CHAR_DATA *vc, int kanal, char *argument)
 	switch(kanal)
 	{
 		case KANAL_SOYLE:
-			sprintf(filename, "../log/kanal/soyle_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
+			snprintf(filename, sizeof(filename), "../log/kanal/soyle_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
 		case KANAL_KD:
-			sprintf(filename, "../log/kanal/kd_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
+			snprintf(filename, sizeof(filename), "../log/kanal/kd_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
 		case KANAL_ACEMI:
-			sprintf(filename, "../log/kanal/acemi_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
+			snprintf(filename, sizeof(filename), "../log/kanal/acemi_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
 		case KANAL_HAYKIR:
-			sprintf(filename, "../log/kanal/haykir_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
+			snprintf(filename, sizeof(filename), "../log/kanal/haykir_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
 		case KANAL_IMM:
-			sprintf(filename, "../log/kanal/imm_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
+			snprintf(filename, sizeof(filename), "../log/kanal/imm_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
 		case KANAL_GSOYLE:
-			sprintf(filename, "../log/kanal/gsoyle_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
+			snprintf(filename, sizeof(filename), "../log/kanal/gsoyle_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
 		case KANAL_DUYGU:
-			sprintf(filename, "../log/kanal/duygu_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
+			snprintf(filename, sizeof(filename), "../log/kanal/duygu_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
 	}
 
 	if (vc == NULL)
@@ -123,7 +123,7 @@ void write_channel_log(CHAR_DATA *ch, CHAR_DATA *vc, int kanal, char *argument)
 	}
 
 	data=fopen(filename,"a");
-	sprintf(buf,"%02d/%02d/%02d %02d:%02d:%02d, Oda:%6d, Char: %10s, Victim: %10s, Log: %s\n",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec,ch->in_room->vnum,ch->name,(vc != NULL)?vc->name:"None",argument);
+	snprintf(buf, sizeof(buf),"%02d/%02d/%02d %02d:%02d:%02d, Oda:%6d, Char: %10s, Victim: %10s, Log: %s\n",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec,ch->in_room->vnum,ch->name,(vc != NULL)?vc->name:"None",argument);
 	fprintf(data,buf);
 	fclose(data);
 	return;
@@ -131,18 +131,18 @@ void write_channel_log(CHAR_DATA *ch, CHAR_DATA *vc, int kanal, char *argument)
 
 char *	const	month_name	[] =
 {
-	(char*)"Albars",
-	(char*)"Kadimler",
-    (char*)"Büyük Acı",
-	(char*)"Zeytin",
-	(char*)"Yılan",
-	(char*)"Yelbüke",
-	(char*)"Pusu",
-	(char*)"Savaş",
-	(char*)"Albastı",
-	(char*)"Gölge",
-	(char*)"Kara Ölüm",
-	(char*)"Alacakaranlık",
+	"Albars",
+	"Kadimler",
+    "Büyük Acı",
+	"Zeytin",
+	"Yılan",
+	"Yelbüke",
+	"Pusu",
+	"Savaş",
+	"Albastı",
+	"Gölge",
+	"Kara Ölüm",
+	"Alacakaranlık",
 };
 
 void write_event_log(char *argument)
@@ -160,7 +160,7 @@ void write_event_log(char *argument)
 
 	data=fopen("../log/events/events","a");
 
-	sprintf(buf,"%02d/%02d/%02d %02d:%02d:%02d|%ld|%s|%ld|%ld|%s\n",\
+	snprintf(buf, sizeof(buf),"%02d/%02d/%02d %02d:%02d:%02d|%ld|%s|%ld|%ld|%s\n",\
 				tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, \
 				time_info.year,month_name[time_info.month-1],time_info.day, time_info.hour, argument);
 	fprintf(data,(char *)buf);

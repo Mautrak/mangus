@@ -65,7 +65,7 @@
 #include "tables.h"
 
 #if !defined(macintosh)
-extern  int     _filbuf         args( (FILE *) );
+extern  int     _filbuf         (FILE *);
 #endif
 
 int system(const char *command);
@@ -115,14 +115,14 @@ static	OBJ_DATA *	rgObjNest	[MAX_NEST];
 /*
  * Local functions.
  */
-void	fwrite_char	args( ( CHAR_DATA *ch,  FILE *fp ) );
-void	fwrite_obj	args( ( CHAR_DATA *ch,  OBJ_DATA  *obj, FILE *fp, int iNest ) );
-void	fwrite_kasa args( ( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest ) );
-void	fwrite_pet	args( ( CHAR_DATA *pet, FILE *fp) );
-void	fread_char	args( ( CHAR_DATA *ch,  FILE *fp ) );
-void    fread_pet	args( ( CHAR_DATA *ch,  FILE *fp ) );
-void	fread_obj	args( ( CHAR_DATA *ch,  FILE *fp ) );
-void	fread_kasa	args( ( CHAR_DATA *ch, FILE *fp ) );
+void	fwrite_char	( CHAR_DATA *ch,  FILE *fp );
+void	fwrite_obj	( CHAR_DATA *ch,  OBJ_DATA  *obj, FILE *fp, int iNest );
+void	fwrite_kasa ( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest );
+void	fwrite_pet	( CHAR_DATA *pet, FILE *fp);
+void	fread_char	( CHAR_DATA *ch,  FILE *fp );
+void    fread_pet	( CHAR_DATA *ch,  FILE *fp );
+void	fread_obj	( CHAR_DATA *ch,  FILE *fp );
+void	fread_kasa	( CHAR_DATA *ch, FILE *fp );
 
 
 
@@ -148,7 +148,7 @@ void save_char_obj( CHAR_DATA *ch )
     if (IS_IMMORTAL(ch) || ch->level >= LEVEL_IMMORTAL)
     {
 	fclose(fpReserve);
-	sprintf(strsave, "%s%s",GOD_DIR, capitalize(ch->name));
+	snprintf(strsave, sizeof(strsave), "%s%s",GOD_DIR, capitalize(ch->name));
 	if ((fp = fopen(strsave,"w")) == NULL)
 	{
 	    bug("Save_char_obj: fopen",0);
@@ -166,7 +166,7 @@ void save_char_obj( CHAR_DATA *ch )
 #endif
 
     fclose( fpReserve );
-    sprintf( strsave, "%s%s", PLAYER_DIR, capitalize( ch->name ) );
+    snprintf(strsave, sizeof(strsave), "%s%s", PLAYER_DIR, capitalize( ch->name ) );
     if ( ( fp = fopen( TEMP_FILE, "w" ) ) == NULL )
     {
 	bug( "Save_char_obj: fopen", 0 );
@@ -898,16 +898,16 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
 
     #if defined(unix)
     /* decompress if .gz file exists */
-    sprintf( strsave, "%s%s%s", PLAYER_DIR, capitalize(name),".gz");
+    snprintf(strsave, sizeof(strsave), "%s%s%s", PLAYER_DIR, capitalize(name),".gz");
     if ( ( fp = fopen( strsave, "r" ) ) != NULL )
     {
 	fclose(fp);
-	sprintf(buf,"gzip -dfq %s",strsave);
+	snprintf(buf, sizeof(buf),"gzip -dfq %s",strsave);
 	system(buf);
     }
     #endif
 
-    sprintf( strsave, "%s%s", PLAYER_DIR, capitalize( name ) );
+    snprintf(strsave, sizeof(strsave), "%s%s", PLAYER_DIR, capitalize( name ) );
     if ( ( fp = fopen( strsave, "r" ) ) != NULL )
     {
 	int iNest;
@@ -1029,7 +1029,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp )
     long tmp_silver;
 
 
-    sprintf(buf,"Karakter yukleme: %s.",ch->name);
+    snprintf(buf, sizeof(buf),"Karakter yukleme: %s.",ch->name);
     log_string(buf);
     ch->pcdata->bank_s = 0;
 	ch->pcdata->yeniyasam_sayisi = 0;
@@ -1510,7 +1510,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp )
     		if (ch->pcdata->title[0] != '.' && ch->pcdata->title[0] != ','
 		&&  ch->pcdata->title[0] != '!' && ch->pcdata->title[0] != '?')
 		{
-		    sprintf( buf, " %s", ch->pcdata->title );
+		    snprintf(buf, sizeof(buf), " %s", ch->pcdata->title );
 		    free_string( ch->pcdata->title );
 		    ch->pcdata->title = str_dup( buf );
 		}
@@ -1962,7 +1962,7 @@ void fread_obj( CHAR_DATA *ch, FILE *fp )
 		else if (obj->pIndexData->limit != -1
 			&& get_total_played(ch) < MIN_TIME_LIMIT )
 		{
-		    sprintf(log_buf, "Ignoring limited %d for %s.",
+		    snprintf(log_buf, sizeof(log_buf), "Ignoring limited %d for %s.",
 			obj->pIndexData->vnum, ch->name );
 		    log_string( log_buf );
 		    extract_obj_nocount(obj);
@@ -2341,7 +2341,7 @@ void fread_kasa( CHAR_DATA *ch, FILE *fp )
 		else if (obj->pIndexData->limit != -1
 			&& get_total_played(ch) < MIN_TIME_LIMIT )
 		{
-		    sprintf(log_buf, "Ignoring limited %d for %s.",
+		    snprintf(log_buf, sizeof(log_buf), "Ignoring limited %d for %s.",
 			obj->pIndexData->vnum, ch->name );
 		    log_string( log_buf );
 		    extract_obj_nocount(obj);

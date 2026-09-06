@@ -14,11 +14,11 @@
 
 const struct pers_suffix_type pers_suffix_table[] =
 {
-	{(char*)"sS"	,(char*)"birisinin"	,(char*)"bir ölümsüzün"	,(char*)"n"	,(char*)"ın",(char*)"in",(char*)"un",(char*)"ün"	},
-	{(char*)"mM"	,(char*)"birisini"	,(char*)"bir ölümsüzü"	,(char*)"y"	,(char*)"ı"	,(char*)"i"	,(char*)"u"	,(char*)"ü"	},
-	{(char*)"eE"	,(char*)"birisine"	,(char*)"bir ölümsüze"	,(char*)"y"	,(char*)"a"	,(char*)"e"	,(char*)"a"	,(char*)"e"	},
-	{(char*)"yY"	,(char*)"birisinde"	,(char*)"bir ölümsüzde"	,(char*)"d"	,(char*)"a"	,(char*)"e"	,(char*)"a"	,(char*)"e"	},
-	{(char*)"zZ"	,(char*)"birisinden",(char*)"bir ölümsüzden",(char*)"d"	,(char*)"an",(char*)"en",(char*)"an",(char*)"en"	},
+	{"sS"	,"birisinin"	,"bir ölümsüzün"	,"n"	,"ın","in","un","ün"	},
+	{"mM"	,"birisini"	,"bir ölümsüzü"	,"y"	,"ı"	,"i"	,"u"	,"ü"	},
+	{"eE"	,"birisine"	,"bir ölümsüze"	,"y"	,"a"	,"e"	,"a"	,"e"	},
+	{"yY"	,"birisinde"	,"bir ölümsüzde"	,"d"	,"a"	,"e"	,"a"	,"e"	},
+	{"zZ"	,"birisinden","bir ölümsüzden","d"	,"an","en","an","en"	},
     {NULL	,NULL			,NULL				,NULL	,NULL	,NULL	,NULL	,NULL	}
 };
 
@@ -40,7 +40,7 @@ char *ekler (CHAR_DATA *to, CHAR_DATA *ch, char *format)
 	i=NULL;
 	if(can_see(to,ch))
 	{
-		sprintf(buf,"%s%s",	!IS_NPC(ch)?ch->name:ch->short_descr,
+		snprintf(buf, sizeof(buf),"%s%s",	!IS_NPC(ch)?ch->name:ch->short_descr,
 							!IS_NPC(ch)?"'":"");
 		/*  sondaki sessizin yumuşaması. aslında tek heceli kelimelerde
 		 *  yumusama olmaz. ama tek hece kontrolü yok.
@@ -92,37 +92,37 @@ char * son_harf_unlu(CHAR_DATA *ch, int say)
 			case 'a': case 'ı':
 				if(say>2)
 				{
-					sprintf(buf,"d%s",pers_suffix_table[say].bir);
+					snprintf(buf, sizeof(buf),"d%s",pers_suffix_table[say].bir);
 					return ptr;
 				}
-				sprintf(buf,"%s%s",(number==1)?(pers_suffix_table[say].sesli_eki):(""),pers_suffix_table[say].bir);
+				snprintf(buf, sizeof(buf),"%s%s",(number==1)?(pers_suffix_table[say].sesli_eki):(""),pers_suffix_table[say].bir);
 				return ptr;
 			case 'e': case 'i':
 				if(say>2)
 				{
-					sprintf(buf,"d%s",pers_suffix_table[say].iki);
+					snprintf(buf, sizeof(buf),"d%s",pers_suffix_table[say].iki);
 					return ptr;
 				}
-				sprintf(buf,"%s%s",(number==1)?(pers_suffix_table[say].sesli_eki):(""),pers_suffix_table[say].iki);
+				snprintf(buf, sizeof(buf),"%s%s",(number==1)?(pers_suffix_table[say].sesli_eki):(""),pers_suffix_table[say].iki);
 				return ptr;
 			case 'o': case 'u':
 				if(say>2)
 				{
-					sprintf(buf,"d%s",pers_suffix_table[say].uc);
+					snprintf(buf, sizeof(buf),"d%s",pers_suffix_table[say].uc);
 					return ptr;
 				}
-				sprintf(buf,"%s%s",(number==1)?(pers_suffix_table[say].sesli_eki):(""),pers_suffix_table[say].uc);
+				snprintf(buf, sizeof(buf),"%s%s",(number==1)?(pers_suffix_table[say].sesli_eki):(""),pers_suffix_table[say].uc);
 				return ptr;
 			case 'ö': case 'ü':
 				if(say>2)
 				{
-					sprintf(buf,"d%s",pers_suffix_table[say].dort);
+					snprintf(buf, sizeof(buf),"d%s",pers_suffix_table[say].dort);
 					return ptr;
 				}
-				sprintf(buf,"%s%s",(number==1)?(pers_suffix_table[say].sesli_eki):(""),pers_suffix_table[say].dort);
+				snprintf(buf, sizeof(buf),"%s%s",(number==1)?(pers_suffix_table[say].sesli_eki):(""),pers_suffix_table[say].dort);
 				return ptr;
 		}
 	}
-	sprintf(buf,"%s",pers_suffix_table[say].bir);
+	snprintf(buf, sizeof(buf),"%s",pers_suffix_table[say].bir);
 	return ptr;
 }

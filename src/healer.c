@@ -78,7 +78,7 @@ void do_heal(CHAR_DATA *ch, char *argument)
     {
         if ( IS_NPC(mob) && IS_SET(mob->act, ACT_IS_HEALER))
 	 {
-	  if (ch->cabal && (is_name((char*)"cabal",mob->name)||is_name((char*)"kabal",mob->name)))
+	  if (ch->cabal && (is_name("cabal",mob->name)||is_name("kabal",mob->name)))
 		{
     		 if (is_name((char*)cabal_table[ch->cabal].short_name,mob->name) )
 		 	break;
@@ -283,15 +283,15 @@ void heal_battle(CHAR_DATA *mob, CHAR_DATA *ch )
 
     if (IS_NPC(ch) || ch->cabal != CABAL_BATTLE)
        {
-         do_say(mob,(char*)"Sana yardım etmem.");
+         do_say(mob,"Sana yardım etmem.");
 	return;
        }
 
     if (!IS_AFFECTED(ch,AFF_BLIND) && !IS_AFFECTED(ch,AFF_PLAGUE)
 	 && !IS_AFFECTED(ch,AFF_POISON) && !IS_AFFECTED(ch,AFF_CURSE) )
        {
-	do_say(mob,(char*)"Benim yardımıma ihtiyacın yok evladım. Fakat...");
-	sn = skill_lookup((char*)"remove curse");
+	do_say(mob,"Benim yardımıma ihtiyacın yok evladım. Fakat...");
+	sn = skill_lookup("remove curse");
 	spell_remove_curse(sn,mob->level,mob,ch,TARGET_CHAR);
 	return;
        }

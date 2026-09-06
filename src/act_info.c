@@ -109,13 +109,13 @@ int max_on_so_far;
 /*
  * Local functions.
  */
-void	show_list_to_char	args( ( OBJ_DATA *list, CHAR_DATA *ch,
-				    bool fShort, bool fShowNothing ) );
-void	show_char_to_char_0	args( ( CHAR_DATA *victim, CHAR_DATA *ch ) );
-void	show_char_to_char_1	args( ( CHAR_DATA *victim, CHAR_DATA *ch ) );
-void	show_char_to_char	args( ( CHAR_DATA *list, CHAR_DATA *ch ) );
-bool	check_blind		args( ( CHAR_DATA *ch ) );
-bool	show_cwear_to_char	args( ( CHAR_DATA *ch, OBJ_DATA *obj ) );
+void	show_list_to_char	( OBJ_DATA *list, CHAR_DATA *ch,
+				    bool fShort, bool fShowNothing );
+void	show_char_to_char_0	( CHAR_DATA *victim, CHAR_DATA *ch );
+void	show_char_to_char_1	( CHAR_DATA *victim, CHAR_DATA *ch );
+void	show_char_to_char	( CHAR_DATA *list, CHAR_DATA *ch );
+bool	check_blind		( CHAR_DATA *ch );
+bool	show_cwear_to_char	( CHAR_DATA *ch, OBJ_DATA *obj );
 
 
 bool show_cwear_to_char( CHAR_DATA *ch, OBJ_DATA *obj )
@@ -124,8 +124,8 @@ bool show_cwear_to_char( CHAR_DATA *ch, OBJ_DATA *obj )
 
   if ((obj->wear_loc == WEAR_LEFT && LEFT_HANDER(ch))
 	|| (obj->wear_loc == WEAR_RIGHT && RIGHT_HANDER(ch)))
-       sprintf(buf,where_name[obj->wear_loc], '*');
-  else sprintf(buf,where_name[obj->wear_loc], ' ');
+       snprintf(buf, sizeof(buf),where_name[obj->wear_loc], '*');
+  else snprintf(buf, sizeof(buf),where_name[obj->wear_loc], ' ');
   send_to_char(buf, ch );
   if ( can_see_obj( ch, obj ) )
 	send_to_char( format_obj_to_char( obj, ch, TRUE ), ch );
@@ -154,7 +154,7 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 
   if (obj->pIndexData->vnum > 5)	/* money  etc */
   {
-    sprintf(buf_con," [%s%s%s]",
+    snprintf(buf_con, sizeof(buf_con)," [%s%s%s]",
       CLR_GREEN,
       get_cond_alias(obj),
       CLR_WHITE_BOLD);
@@ -166,7 +166,7 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 
   if (obj->pIndexData->vnum > 5)	/* money  etc */
   {
-    sprintf(buf_eskime," [%s%d%s]",
+    snprintf(buf_eskime, sizeof(buf_eskime)," [%s%d%s]",
       CLR_GREEN,
       esya_kac_gunluk(obj->creation_time),
       CLR_WHITE_BOLD);
@@ -176,7 +176,7 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
     buf_eskime[0] = '\0';
   }
 
-  sprintf(buf_material," [%s%s%s]",CLR_GREEN,obj->material,CLR_WHITE_BOLD);
+  snprintf(buf_material, sizeof(buf_material)," [%s%s%s]",CLR_GREEN,obj->material,CLR_WHITE_BOLD);
 
     if ((fShort && (obj->short_descr == NULL || obj->short_descr[0] == '\0'))
     ||  (obj->description == NULL || obj->description[0] == '\0'))
@@ -231,7 +231,7 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 	strcat( buf, CLR_WHITE );
   if (IS_IMMORTAL(ch))
   {
-    sprintf(buf,"[%-5d]",obj->pIndexData->vnum);
+    snprintf(buf, sizeof(buf),"[%-5d]",obj->pIndexData->vnum);
   }
 	strcat( buf, "["     );
 	
@@ -467,16 +467,16 @@ void show_list_to_char( OBJ_DATA *list, CHAR_DATA *ch, bool fShort, bool fShowNo
 	{
 	    if ( prgnShow[iShow] != 1 )
 	    {
-		sprintf( buf, "(%2d) ", prgnShow[iShow] );
+		snprintf(buf, sizeof(buf), "(%2d) ", prgnShow[iShow] );
 		add_buf(output,buf);
 	    }
 	    else
 	    {
-		add_buf(output,(char*)"     ");
+		add_buf(output,"     ");
 	    }
 	}
 	add_buf(output,prgpstrShow[iShow]);
-	add_buf(output,(char*)"\n\r");
+	add_buf(output,"\n\r");
 	free_string( prgpstrShow[iShow] );
     }
 
@@ -747,34 +747,34 @@ char *show_char_to_char_1_health_check(CHAR_DATA *ch , CHAR_DATA *victim)
 
   if (percent >= 100)
   {
-    return (char*)"mükemmel durumda";
+    return "mükemmel durumda";
   }
   else if (percent >= 90)
   {
-    return (char*)"birkaç çiziği var";
+    return "birkaç çiziği var";
   }
   else if (percent >= 75)
   {
-    return (char*)"birkaç küçük yarası var";
+    return "birkaç küçük yarası var";
   }
   else if (percent >=  50)
   {
-    return (char*)"kanayan yaralarla kaplanmış";
+    return "kanayan yaralarla kaplanmış";
   }
   else if (percent >= 30)
   {
-    return (char*)"kötü kanıyor";
+    return "kötü kanıyor";
   }
   else if (percent >= 15)
   {
-    return (char*)"acı içinde kıvranıyor";
+    return "acı içinde kıvranıyor";
   }
   else if (percent >= 0 )
   {
-    return (char*)"yerde sürünüyor";
+    return "yerde sürünüyor";
   }
 
-  return (char*)"ölmek üzere";
+  return "ölmek üzere";
 }
 
 char *show_char_to_char_1_alignment(CHAR_DATA *ch , CHAR_DATA *victim)
@@ -799,18 +799,18 @@ char *show_char_to_char_1_alignment(CHAR_DATA *ch , CHAR_DATA *victim)
 
   if (alignment >= 350)
   {
-    return (char*)"'iyi' olabilir";
+    return "'iyi' olabilir";
   }
   else if (alignment <= -350)
   {
-    return (char*)"'kem' olabilir";
+    return "'kem' olabilir";
   }
   else
   {
-    return (char*)"'yansız' olabilir";
+    return "'yansız' olabilir";
   }
 
-  return (char*)"'yansız' olabilir";
+  return "'yansız' olabilir";
 }
 
 
@@ -970,18 +970,18 @@ void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch )
         {
           if (can_see_obj( ch, obj ) )
           {
-            sprintf(buf,where_name[obj->wear_loc], ' ');
+            snprintf(buf, sizeof(buf),where_name[obj->wear_loc], ' ');
             printf_to_char(ch,"%s %s\n\r",buf,format_obj_to_char( obj, ch, TRUE ));
           }
           else
           {
-            sprintf(buf,where_name[iWear], ' ');
+            snprintf(buf, sizeof(buf),where_name[iWear], ' ');
             printf_to_char(ch,"%s\n\r",buf);
           }
         }
         else
         {
-          sprintf(buf,where_name[iWear], ' ');
+          snprintf(buf, sizeof(buf),where_name[iWear], ' ');
           printf_to_char(ch,"%s\n\r",buf);
         }
       }
@@ -1030,7 +1030,7 @@ void show_char_to_char( CHAR_DATA *list, CHAR_DATA *ch )
     if (life_count && CAN_DETECT(ch,DETECT_LIFE) )
 	{
 	 char buf[MAX_STRING_LENGTH];
-   sprintf(buf,"Odada %d yaşam formu seziyorsun.\n\r",life_count);
+   snprintf(buf, sizeof(buf),"Odada %d yaşam formu seziyorsun.\n\r",life_count);
 	 send_to_char(buf,ch);
 	}
     return;
@@ -1075,7 +1075,7 @@ void do_scroll(CHAR_DATA *ch, char *argument)
 	    send_to_char("You do not page long messages.\n\r",ch);
 	else
 	{
-	    sprintf(buf,"You currently display %d lines per page.\n\r",
+	    snprintf(buf, sizeof(buf),"You currently display %d lines per page.\n\r",
 		    ch->lines + 2);
 	    send_to_char(buf,ch);
 	}
@@ -1103,7 +1103,7 @@ void do_scroll(CHAR_DATA *ch, char *argument)
 	return;
     }
 
-    sprintf(buf,"Scroll set to %d lines.\n\r",lines);
+    snprintf(buf, sizeof(buf),"Scroll set to %d lines.\n\r",lines);
     send_to_char(buf,ch);
     ch->lines = lines - 2;
 }
@@ -1119,7 +1119,7 @@ void do_socials(CHAR_DATA *ch, char *argument)
 
     for (iSocial = 0; social_table[iSocial].name[0] != '\0'; iSocial++)
     {
-	sprintf(buf,"%-12s",social_table[iSocial].name);
+	snprintf(buf, sizeof(buf),"%-12s",social_table[iSocial].name);
 	send_to_char(buf,ch);
 	if (++col % 6 == 0)
 	    send_to_char("\n\r",ch);
@@ -1574,7 +1574,7 @@ void do_look( CHAR_DATA *ch, char *argument )
     if ( IS_PC(ch) && IS_SET(ch->act, PLR_AUTOEXIT) )
     {
       printf_to_char(ch,"\n\r");
-      do_exits( ch, (char*)"auto" );
+      do_exits( ch, "auto" );
     }
 
     show_list_to_char( ch->in_room->contents, ch, FALSE, FALSE );
@@ -1852,21 +1852,21 @@ void do_examine( CHAR_DATA *ch, char *argument )
 	    if (obj->value[0] == 0)
 	    {
         if (obj->value[1] == 0)
-        sprintf(buf,"Tuhaf...yığın içinde akçe yok.\n\r");
+        snprintf(buf, sizeof(buf),"Tuhaf...yığın içinde akçe yok.\n\r");
         else if (obj->value[1] == 1)
-        sprintf(buf,"Vayy. Bir akçe.\n\r");
+        snprintf(buf, sizeof(buf),"Vayy. Bir akçe.\n\r");
         else
-        sprintf(buf,"Yığında %d akçe var.\n\r",obj->value[1]);
+        snprintf(buf, sizeof(buf),"Yığında %d akçe var.\n\r",obj->value[1]);
 	    }
 	    else if (obj->value[1] == 0)
 	    {
 		if (obj->value[0] == 1)
-    sprintf(buf,"Vayy. Bir akçe.\n\r");
+    snprintf(buf, sizeof(buf),"Vayy. Bir akçe.\n\r");
 		else
-    sprintf(buf,"Yığında %d akçe var.\n\r",obj->value[0]);
+    snprintf(buf, sizeof(buf),"Yığında %d akçe var.\n\r",obj->value[0]);
 	    }
 	    else
-		sprintf(buf,
+		snprintf(buf, sizeof(buf),
       "Yığında %d akçe var.\n\r",obj->value[1] + obj->value[0]);
 	    send_to_char(buf,ch);
 	    break;
@@ -1875,7 +1875,7 @@ void do_examine( CHAR_DATA *ch, char *argument )
 	case ITEM_CONTAINER:
 	case ITEM_CORPSE_NPC:
 	case ITEM_CORPSE_PC:
-	    sprintf(buf,"in %s",argument);
+	    snprintf(buf, sizeof(buf),"in %s",argument);
 	    do_look( ch, buf );
 	}
     }
@@ -1904,16 +1904,16 @@ void do_exits( CHAR_DATA *ch, char *argument )
 
   if (fAuto)
   {
-    sprintf(buf,CLR_CYAN);
+    snprintf(buf, sizeof(buf),CLR_CYAN);
     strcat(buf,"[");
   }
   else if (IS_IMMORTAL(ch))
   {
-    sprintf(buf,"%d nolu odadan çıkışlar:\n\r",ch->in_room->vnum);
+    snprintf(buf, sizeof(buf),"%d nolu odadan çıkışlar:\n\r",ch->in_room->vnum);
   }
   else
   {
-    sprintf(buf,"Görünen çıkışlar:\n\r");
+    snprintf(buf, sizeof(buf),"Görünen çıkışlar:\n\r");
   }
 
   found = FALSE;
@@ -1999,7 +1999,7 @@ void do_worth( CHAR_DATA *ch, char *argument )
     printf_to_char(ch,
     "%ld akçen ve %d Tecrübe Puanın var (seviye atlamaya %d).\n\r",ch->silver,ch->exp,
 	(ch->level + 1) * exp_per_level(ch,ch->pcdata->points) - ch->exp);
-    sprintf(buf,"Şimdiye kadar %3d %s and %3d %s öldürdün.\n\r",
+    snprintf(buf, sizeof(buf),"Şimdiye kadar %3d %s and %3d %s öldürdün.\n\r",
 		ch->pcdata->has_killed,
 		IS_GOOD(ch) ? "iyi olmayan" :
 				IS_EVIL(ch) ? "kem olmayan" : "yansız olmayan",
@@ -2008,7 +2008,7 @@ void do_worth( CHAR_DATA *ch, char *argument )
     send_to_char(buf, ch);
 
     total_played = get_total_played(ch);
-    sprintf(buf,
+    snprintf(buf, sizeof(buf),
 	"Son 14 günde, %d saat ve %d dakika oynadın.\n\r",
 	(int) (total_played / 60), (total_played % 60) );
     send_to_char(buf, ch);
@@ -2018,7 +2018,7 @@ void do_worth( CHAR_DATA *ch, char *argument )
 
 	for( l=0; l<MAX_TIME_LOG; l++)
 	{
-	   sprintf(buf, "Gün: %3d Oynama zamanı: %3d\n",
+	   snprintf(buf, sizeof(buf), "Gün: %3d Oynama zamanı: %3d\n",
 		ch->pcdata->log_date[l], ch->pcdata->log_time[l]);
 	   send_to_char(buf, ch);
 	}
@@ -2128,7 +2128,7 @@ void do_score( CHAR_DATA *ch, char *argument )
 	}
   }
 
-  sprintf( yonelim_etik, "%s/%s", IS_GOOD((victim==NULL?ch:victim)) ? "iyi" :	IS_EVIL((victim==NULL?ch:victim)) ? "kem" : "yansız",((victim==NULL?ch:victim)->ethos==1?"tüze":(victim==NULL?ch:victim)->ethos==2?"yansız":"kaos") );
+  snprintf(yonelim_etik, sizeof(yonelim_etik), "%s/%s", IS_GOOD((victim==NULL?ch:victim)) ? "iyi" :	IS_EVIL((victim==NULL?ch:victim)) ? "kem" : "yansız",((victim==NULL?ch:victim)->ethos==1?"tüze":(victim==NULL?ch:victim)->ethos==2?"yansız":"kaos") );
 
   printf_to_char(ch,"{c,---------------------------------------------------------------------,{w\n\r");
   printf_to_char(ch,"{c|{w%+12s%-30s{cDiscord:%-19s|\n\r",(victim==NULL?ch:victim)->name,(victim==NULL?ch:victim)->pcdata->title,(victim==NULL?ch:victim)->pcdata->discord_id);
@@ -2204,18 +2204,18 @@ void mob_score(CHAR_DATA *ch,CHAR_DATA *mob)
 
 char *	const	month_name	[] =
 {
-	(char*)"Albars",
-	(char*)"Kadimler",
-    (char*)"Büyük Acı",
-	(char*)"Zeytin",
-	(char*)"Yılan",
-	(char*)"Yelbüke",
-	(char*)"Pusu",
-	(char*)"Savaş",
-	(char*)"Albastı",
-	(char*)"Gölge",
-	(char*)"Kara Ölüm",
-	(char*)"Alacakaranlık",
+	"Albars",
+	"Kadimler",
+    "Büyük Acı",
+	"Zeytin",
+	"Yılan",
+	"Yelbüke",
+	"Pusu",
+	"Savaş",
+	"Albastı",
+	"Gölge",
+	"Kara Ölüm",
+	"Alacakaranlık",
 };
 
 
@@ -2238,7 +2238,7 @@ void do_time( CHAR_DATA *ch, char *argument )
     if ( !IS_SET(ch->in_room->room_flags,ROOM_INDOORS) ||
          IS_IMMORTAL(ch) )
     {
-      sprintf( buf, "$C %s vakti. $c",
+      snprintf(buf, sizeof(buf), "$C %s vakti. $c",
          (time_info.hour>=4 && time_info.hour<6)? "şafak":
          (time_info.hour>=6 && time_info.hour<10)? "sabah":
          (time_info.hour>=10 && time_info.hour<16)? "öğlen":
@@ -2257,8 +2257,8 @@ void do_time( CHAR_DATA *ch, char *argument )
 	{
       return;
   }
-    sprintf(buf2, "%s", (char *) ctime( &boot_time ));
-    sprintf(buf,"Mangus %s tarihinde başlatıldı.\n\rSistem zamanı, %s.\n\r",
+    snprintf(buf2, sizeof(buf2), "%s", (char *) ctime( &boot_time ));
+    snprintf(buf, sizeof(buf),"Mangus %s tarihinde başlatıldı.\n\rSistem zamanı, %s.\n\r",
 	buf2, (char *) ctime( &current_time ) );
     send_to_char( buf, ch );
 
@@ -2301,7 +2301,7 @@ void do_help( CHAR_DATA *ch, char *argument )
     char argall[MAX_INPUT_LENGTH],argone[MAX_INPUT_LENGTH];
 
     if ( argument[0] == '\0' )
-	argument = (char*)"summary";
+	argument = "summary";
 
     /* this parts handles help a b so that it returns help 'a b' */
     argall[0] = '\0';
@@ -2408,7 +2408,7 @@ void do_whois (CHAR_DATA *ch, char *argument)
 	    if ((wch->cabal && (ch->cabal == wch->cabal ||
 			       IS_TRUSTED(ch,LEVEL_IMMORTAL))) ||
                                wch->level >= LEVEL_HERO)
-	      sprintf(cabalbuf, "[%s] ",cabal_table[wch->cabal].short_name);
+	      snprintf(cabalbuf, sizeof(cabalbuf), "[%s] ",cabal_table[wch->cabal].short_name);
 	    else cabalbuf[0] = '\0';
 		*/
 	if (( wch->cabal && ch->cabal == wch->cabal) || IS_IMMORTAL(ch)
@@ -2417,7 +2417,7 @@ void do_whois (CHAR_DATA *ch, char *argument)
 		|| (wch->cabal == CABAL_RULER
 		   && is_equiped_n_char(wch, OBJ_VNUM_RULER_BADGE, WEAR_NECK)) )
 	{
-	  sprintf(cabalbuf, "[%s%s%s] ",
+	  snprintf(cabalbuf, sizeof(cabalbuf), "[%s%s%s] ",
 		CLR_CYAN,
 		cabal_table[wch->cabal].short_name,
 		CLR_WHITE_BOLD
@@ -2429,18 +2429,18 @@ void do_whois (CHAR_DATA *ch, char *argument)
 	pk_buf[0] = '\0';
 	if (!((ch==wch && ch->level < KIDEMLI_OYUNCU_SEVIYESI) || is_safe_nomessage(ch,wch)))
 	 {
-	  sprintf(pk_buf,"%s(OK) %s",
+	  snprintf(pk_buf, sizeof(pk_buf),"%s(OK) %s",
 		CLR_RED,CLR_WHITE_BOLD);
 	 }
 	act_buf[0] = '\0';
-	sprintf(act_buf,"%s%s%s",CLR_WHITE,
+	snprintf(act_buf, sizeof(act_buf),"%s%s%s",CLR_WHITE,
 		    IS_SET(wch->act, PLR_WANTED) ? "(ARANIYOR) " : "",CLR_WHITE_BOLD);
 
 	if (IS_NPC(wch))
-		sprintf(titlebuf,"Believer of Chronos.");
+		snprintf(titlebuf, sizeof(titlebuf),"Believer of Chronos.");
 	else {
 		char tempbuf[MAX_INPUT_LENGTH];
-		sprintf(tempbuf,"%s", wch->pcdata->title );
+		snprintf(tempbuf, sizeof(tempbuf),"%s", wch->pcdata->title );
 		if (strlen(tempbuf) > 45 )
 		 {
 			tempbuf[44] = '\0';
@@ -2448,20 +2448,20 @@ void do_whois (CHAR_DATA *ch, char *argument)
 			wch->pcdata->title = str_dup( tempbuf );
 			bug("Title length more than 45",0);
 		 }
-		sprintf(titlebuf,"%s%s%s",CLR_WHITE,tempbuf,CLR_WHITE_BOLD);
+		snprintf(titlebuf, sizeof(titlebuf),"%s%s%s",CLR_WHITE,tempbuf,CLR_WHITE_BOLD);
 	     }
 	/*
 	 * Format it up.
 	 */
 
-	sprintf( level_buf, "%s%2d%s",CLR_CYAN,wch->level,CLR_WHITE_BOLD);
-	sprintf(classbuf,"%s%s%s",CLR_YELLOW,iclass,CLR_WHITE_BOLD);
+	snprintf(level_buf, sizeof(level_buf), "%s%2d%s",CLR_CYAN,wch->level,CLR_WHITE_BOLD);
+	snprintf(classbuf, sizeof(classbuf),"%s%s%s",CLR_YELLOW,iclass,CLR_WHITE_BOLD);
 	    /* a little formatting */
 
 	    if (IS_TRUSTED(ch,LEVEL_IMMORTAL) || ch==wch ||
                       wch->level >= LEVEL_HERO)
 
-	      sprintf(buf, "[%2d %s %s] %s%s%s%s%s\n\r",
+	      snprintf(buf, sizeof(buf), "[%2d %s %s] %s%s%s%s%s\n\r",
 		      wch->level,
 		      RACE(wch) < MAX_PC_RACE ?
 		        race_table[RACE(wch)].who_name: "     ",
@@ -2474,7 +2474,7 @@ void do_whois (CHAR_DATA *ch, char *argument)
 
 
 		else
-	  sprintf( buf, "[%s %s    ] %s%s%s%s%s\n\r",
+	  snprintf(buf, sizeof(buf), "[%s %s    ] %s%s%s%s%s\n\r",
 		(get_curr_stat(wch, STAT_CHA) < 18 ) ? level_buf : "  ",
  		      RACE(wch) < MAX_PC_RACE ?
  		        race_table[RACE(wch)].who_name: "     ",
@@ -2514,10 +2514,10 @@ void do_count ( CHAR_DATA *ch, char *argument )
     max_on = UMAX(count,max_on);
 
     if (max_on == count)
-        sprintf(buf,"Oyunda %d karakter var, bugünün rekoru.\n\r",
+        snprintf(buf, sizeof(buf),"Oyunda %d karakter var, bugünün rekoru.\n\r",
 	    count);
     else
-	sprintf(buf,"Oyunda %d karakter var, bugün en çok %d.\n\r",
+	snprintf(buf, sizeof(buf),"Oyunda %d karakter var, bugün en çok %d.\n\r",
 	    count,max_on);
 
     send_to_char(buf,ch);
@@ -2579,7 +2579,7 @@ void do_equipment( CHAR_DATA *ch, char *argument )
       }
       else
       {
-        sprintf(buf,where_name[iWear], ' ');
+        snprintf(buf, sizeof(buf),where_name[iWear], ' ');
         printf_to_char(ch,"%s\n\r",buf);
       }
     }
@@ -2647,18 +2647,18 @@ void do_compare( CHAR_DATA *ch, char *argument )
 
     if ( obj1 == obj2 )
     {
-	msg = (char*)"$p ile kendisini kıyaslıyorsun... Hmm, aynı gibiler.";
+	msg = "$p ile kendisini kıyaslıyorsun... Hmm, aynı gibiler.";
     }
     else if ( obj1->item_type != obj2->item_type )
     {
-	msg = (char*)"$p ile $P kıyaslanamaz.";
+	msg = "$p ile $P kıyaslanamaz.";
     }
     else
     {
 	switch ( obj1->item_type )
 	{
 	default:
-	    msg = (char*)"$p ile $P kıyaslanamaz.";
+	    msg = "$p ile $P kıyaslanamaz.";
 	    break;
 
 	case ITEM_ARMOR:
@@ -2682,9 +2682,9 @@ void do_compare( CHAR_DATA *ch, char *argument )
 
     if ( msg == NULL )
     {
-	     if ( value1 == value2 ) msg = (char*)"$p ile $P aynı gibiler.";
-	else if ( value1  > value2 ) msg = (char*)"$p daha iyi gibi.";
-	else                         msg = (char*)"$p daha kötü gibi.";
+	     if ( value1 == value2 ) msg = "$p ile $P aynı gibiler.";
+	else if ( value1  > value2 ) msg = "$p daha iyi gibi.";
+	else                         msg = "$p daha kötü gibi.";
     }
 
     act( msg, ch, obj1, obj2, TO_CHAR );
@@ -2724,7 +2724,7 @@ void do_where( CHAR_DATA *ch, char *argument )
     if (!str_cmp(arg,"ok"))
       fPKonly = TRUE;
 
-    sprintf(pkbuf,"%s%s%s",CLR_RED,"(OK) ",CLR_WHITE_BOLD);
+    snprintf(pkbuf, sizeof(pkbuf),"%s%s%s",CLR_RED,"(OK) ",CLR_WHITE_BOLD);
 
     if ( arg[0] == '\0' || fPKonly)
     {
@@ -2742,7 +2742,7 @@ void do_where( CHAR_DATA *ch, char *argument )
 
 	    {
 		found = TRUE;
-		sprintf( buf, "%s%-28s %s\n\r",
+		snprintf(buf, sizeof(buf), "%s%-28s %s\n\r",
 		 (is_safe_nomessage(ch,
 (is_affected(victim,gsn_doppelganger) && victim->doppel) ?
 	victim->doppel : victim) || IS_NPC(victim)) ?
@@ -2771,7 +2771,7 @@ void do_where( CHAR_DATA *ch, char *argument )
 	    &&   is_name( arg, victim->name ) )
 	    {
 		found = TRUE;
-		sprintf( buf, "%-28s %s\n\r",
+		snprintf(buf, sizeof(buf), "%-28s %s\n\r",
 		    PERS(victim, ch), victim->in_room->name );
 		send_to_char( buf, ch );
 		break;
@@ -2817,30 +2817,30 @@ void do_consider( CHAR_DATA *ch, char *argument )
 
     diff = victim->level - ch->level;
 
-     if ( diff <= -10 ) msg = (char*)"$G çıplak ve silahsızken bile öldürürsün.";
-else if ( diff <=  -5 ) msg = (char*)"$N sana antrenman bile yaptıramaz.";
-else if ( diff <=  -2 ) msg = (char*)"$N kolayca öldürülebilir.";
-else if ( diff <=   1 ) msg = (char*)"Tam dişine göre!";
-else if ( diff <=   4 ) msg = (char*)"Kendini şanslı hissediyor musun?";
-else if ( diff <=   9 ) msg = (char*)"$N acımasızca gülüyor.";
-else                    msg = (char*)"İntihar günahtır!";
+     if ( diff <= -10 ) msg = "$G çıplak ve silahsızken bile öldürürsün.";
+else if ( diff <=  -5 ) msg = "$N sana antrenman bile yaptıramaz.";
+else if ( diff <=  -2 ) msg = "$N kolayca öldürülebilir.";
+else if ( diff <=   1 ) msg = "Tam dişine göre!";
+else if ( diff <=   4 ) msg = "Kendini şanslı hissediyor musun?";
+else if ( diff <=   9 ) msg = "$N acımasızca gülüyor.";
+else                    msg = "İntihar günahtır!";
 
     if (IS_EVIL(ch) && IS_EVIL(victim))
-      align = (char*)"$N seninle birlikte kötücül şekilde sırıtıyor.";
+      align = "$N seninle birlikte kötücül şekilde sırıtıyor.";
     else if (IS_GOOD(victim) && IS_GOOD(ch))
-      align = (char*)"$N seni sıcak şekilde selamlıyor.";
+      align = "$N seni sıcak şekilde selamlıyor.";
     else if (IS_GOOD(victim) && IS_EVIL(ch))
-      align = (char*)"$N sana gülümsüyor ve kem yoldan dönmen için dua ediyor.";
+      align = "$N sana gülümsüyor ve kem yoldan dönmen için dua ediyor.";
     else if (IS_EVIL(victim) && IS_GOOD(ch))
-      align = (char*)"$N sana şeytani şekilde gülümsüyor.";
+      align = "$N sana şeytani şekilde gülümsüyor.";
     else if (IS_NEUTRAL(ch) && IS_EVIL(victim))
-      align = (char*)"$N yüzüne kötücül bir gülümseme yerleştiriyor.";
+      align = "$N yüzüne kötücül bir gülümseme yerleştiriyor.";
     else if (IS_NEUTRAL(ch) && IS_GOOD(victim))
-      align = (char*)"$N mutlulukla gülümsüyor.";
+      align = "$N mutlulukla gülümsüyor.";
     else if (IS_NEUTRAL(ch) && IS_NEUTRAL(victim))
-      align = (char*)"$N seninle ilgilenmiyor.";
+      align = "$N seninle ilgilenmiyor.";
     else
-      align = (char*)"$N çok ilgisiz görünüyor.";
+      align = "$N çok ilgisiz görünüyor.";
 
     act( msg, ch, NULL, victim, TO_CHAR );
     act( align, ch, NULL, victim, TO_CHAR);
@@ -2893,7 +2893,7 @@ void do_title( CHAR_DATA *ch, char *argument )
   if ( argument[0] == '\0' )
   {
     printf_to_char(ch, "İsteğin üzerine lakabın sıfırlandı.\n\r");
-    set_title( ch, (char*)"" );
+    set_title( ch, "" );
 
       return;
   }
@@ -2901,7 +2901,7 @@ void do_title( CHAR_DATA *ch, char *argument )
     if (!str_cmp(argument, "sıfırla"))
     {
         char buf[MAX_STRING_LENGTH];
-        sprintf(buf, ", %s", title_table[ch->iclass][ch->level]);
+        snprintf(buf, sizeof(buf), ", %s", title_table[ch->iclass][ch->level]);
         set_title(ch, buf);
         printf_to_char(ch, "Lakabın sıfırlandı.\n\r");
         return;
@@ -2954,7 +2954,7 @@ void do_description( CHAR_DATA *ch, char *argument )
 			free_string(ch->description);
 			ch->description = str_dup(buf);
       printf_to_char(ch, "Tanımın:\n\r");
-      printf_to_char(ch, ch->description ? ch->description :(char *)"(Hiç).\n\r");
+      printf_to_char(ch, ch->description ? ch->description :"(Hiç).\n\r");
                         return;
                     }
                 }
@@ -2993,7 +2993,7 @@ void do_description( CHAR_DATA *ch, char *argument )
     }
 
     printf_to_char(ch, "Tanımın:\n\r");
-    printf_to_char(ch, ch->description ? ch->description : (char *)"(Hiç).\n\r");
+    printf_to_char(ch, ch->description ? ch->description : "(Hiç).\n\r");
 
     return;
 }
@@ -3004,7 +3004,7 @@ void do_report( CHAR_DATA *ch, char *argument )
 {
     char buf[MAX_INPUT_LENGTH];
 
-    sprintf( buf, "%d/%d Yp %d/%d Mp %d/%d Zp %d Tp",
+    snprintf(buf, sizeof(buf), "%d/%d Yp %d/%d Mp %d/%d Zp %d Tp",
 	ch->hit,  ch->max_hit,
 	ch->mana, ch->max_mana,
 	ch->move, ch->max_move,
@@ -3042,15 +3042,15 @@ void do_practice( CHAR_DATA *ch, char *argument )
 		continue;
 
     if(ch->pcdata->learned[sn]<75)
-    sprintf( buf, "{r%-18s %3d%%  {x",skill_table[sn].name[1], ch->pcdata->learned[sn] );
+    snprintf(buf, sizeof(buf), "{r%-18s %3d%%  {x",skill_table[sn].name[1], ch->pcdata->learned[sn] );
   else if(ch->pcdata->learned[sn]>=75 && ch->pcdata->learned[sn]<85)
-    sprintf( buf, "{g%-18s %3d%%  {x",skill_table[sn].name[1], ch->pcdata->learned[sn] );
+    snprintf(buf, sizeof(buf), "{g%-18s %3d%%  {x",skill_table[sn].name[1], ch->pcdata->learned[sn] );
   else if(ch->pcdata->learned[sn]>=85 && ch->pcdata->learned[sn]<100)
-    sprintf( buf, "{G%-18s %3d%%  {x",skill_table[sn].name[1], ch->pcdata->learned[sn] );
+    snprintf(buf, sizeof(buf), "{G%-18s %3d%%  {x",skill_table[sn].name[1], ch->pcdata->learned[sn] );
   else if(ch->pcdata->learned[sn]==100)
-    sprintf( buf, "{C%-18s %3d%%  {x",skill_table[sn].name[1], ch->pcdata->learned[sn] );
+    snprintf(buf, sizeof(buf), "{C%-18s %3d%%  {x",skill_table[sn].name[1], ch->pcdata->learned[sn] );
   else
-    sprintf( buf, "%-18s %3d%%  ",skill_table[sn].name[1], ch->pcdata->learned[sn] );
+    snprintf(buf, sizeof(buf), "%-18s %3d%%  ",skill_table[sn].name[1], ch->pcdata->learned[sn] );
 	    strcat( buf2, buf );
 	    if ( ++col % 3 == 0 )
 		strcat( buf2, "\n\r" );
@@ -3059,7 +3059,7 @@ void do_practice( CHAR_DATA *ch, char *argument )
 	if ( col % 3 != 0 )
 	    strcat( buf2, "\n\r" );
 
-	sprintf( buf, "%d pratik seansı var.\n\r",
+	snprintf(buf, sizeof(buf), "%d pratik seansı var.\n\r",
 	    ch->practice );
 	strcat( buf2, buf );
 
@@ -3307,26 +3307,26 @@ void do_scan(CHAR_DATA *ch, char *argument)
  if (dir[0] == '\0')
 
    {
-	do_scan2(ch,(char*)"");
+	do_scan2(ch,"");
 	return;
    }
 
   switch (dir[0])
     {
-    case 'K':    case 'k':      door = 0;      dir2 = (char*)"kuzey";	break;
-    case 'D':    case 'd':      door = 1;      dir2 = (char*)"doğu";	break;
-    case 'G':    case 'g':      door = 2;      dir2 = (char*)"güney";	break;
-    case 'B':    case 'b':      door = 3;      dir2 = (char*)"batı";	break;
-    case 'Y':    case 'y':      door = 4;      dir2 = (char*)"yukarı";	break;
-    case 'A':    case 'a':      door = 5;      dir2 = (char*)"aşağı";	break;
+    case 'K':    case 'k':      door = 0;      dir2 = "kuzey";	break;
+    case 'D':    case 'd':      door = 1;      dir2 = "doğu";	break;
+    case 'G':    case 'g':      door = 2;      dir2 = "güney";	break;
+    case 'B':    case 'b':      door = 3;      dir2 = "batı";	break;
+    case 'Y':    case 'y':      door = 4;      dir2 = "yukarı";	break;
+    case 'A':    case 'a':      door = 5;      dir2 = "aşağı";	break;
     default:
       send_to_char("Bu bir yön değil.\n\r",ch);
       return;
     }
 
-  sprintf(buf, "%s yönünü tarıyorsun.\n\r",dir2);
+  snprintf(buf, sizeof(buf), "%s yönünü tarıyorsun.\n\r",dir2);
   send_to_char(buf,ch);
-  sprintf(buf, "$n %s yönünü tarıyor.",dir2);
+  snprintf(buf, sizeof(buf), "$n %s yönünü tarıyor.",dir2);
   act(buf,ch,NULL,NULL,TO_ROOM);
 
   if (!check_blind(ch))
@@ -3349,7 +3349,7 @@ void do_scan(CHAR_DATA *ch, char *argument)
 
       if (numpeople)
 	{
-	  sprintf(buf, "***** Uzaklık %d *****\n\r",i);
+	  snprintf(buf, sizeof(buf), "***** Uzaklık %d *****\n\r",i);
 	  send_to_char(buf,ch);
 	  show_char_to_char(to_room->people, ch);
 	  send_to_char("\n\r", ch);
@@ -3399,13 +3399,13 @@ void do_request( CHAR_DATA *ch, char *argument)
 
   if (!IS_GOOD(ch))
     {
-      do_say(victim, (char*)"Böyle ahlaksız birine hiçbir şey vermem.");
+      do_say(victim, "Böyle ahlaksız birine hiçbir şey vermem.");
       return;
     }
 
   if (ch->move < (50 + ch->level))
     {
-      do_say(victim, (char*)"Yorgun görünüyorsun. Önce dinlenmelisin.");
+      do_say(victim, "Yorgun görünüyorsun. Önce dinlenmelisin.");
       return;
     }
 
@@ -3415,7 +3415,7 @@ void do_request( CHAR_DATA *ch, char *argument)
 
   if (victim->level >= ch->level + 10 || victim->level >= ch->level * 2)
     {
-      do_say(victim, (char*)"Henüz erken, çocuğum.");
+      do_say(victim, "Henüz erken, çocuğum.");
       return;
     }
 
@@ -3423,13 +3423,13 @@ void do_request( CHAR_DATA *ch, char *argument)
       && (obj = get_obj_wear(victim, arg1)) == NULL)
       || IS_SET(obj->extra_flags, ITEM_INVENTORY))
     {
-      do_say(victim, (char*)"Üzgünüm o şeyden bende yok.");
+      do_say(victim, "Üzgünüm o şeyden bende yok.");
       return;
     }
 
   if (!IS_GOOD(victim))
     {
-      do_say(victim, (char*)"Sana birşey vermek zorunda değilim!");
+      do_say(victim, "Sana birşey vermek zorunda değilim!");
       do_murder(victim, ch->name);
       return;
     }
@@ -3439,7 +3439,7 @@ void do_request( CHAR_DATA *ch, char *argument)
 
   if ( !can_drop_obj( ch, obj ) )
     {
-      do_say(victim, (char*)"Üzgünüm o lanetli şeyi kendimden ayıramıyorum.");
+      do_say(victim, "Üzgünüm o lanetli şeyi kendimden ayıramıyorum.");
       return;
     }
 
@@ -3735,17 +3735,17 @@ void do_affects_col(CHAR_DATA *ch, char *argument )
       {
         if( firstAffect == TRUE )
         {
-          sprintf( buf, "");
+          snprintf(buf, sizeof(buf), "");
           firstAffect = FALSE;
         }
         else
         {
-          sprintf( buf, "                      ");
+          snprintf(buf, sizeof(buf), "                      ");
         }
       }
       else
       {
-        sprintf( buf, "%sEtki%s: %s%-16s%s",
+        snprintf(buf, sizeof(buf), "%sEtki%s: %s%-16s%s",
           CLR_RED,CLR_WHITE_BOLD,CLR_YELLOW,
           skill_table[paf->type].name[1] ,CLR_WHITE_BOLD);
       }
@@ -4030,12 +4030,12 @@ char *get_cond_alias( OBJ_DATA *obj)
 
  istat = obj->condition;
 
- if      ( istat >  90 ) stat = (char*)"kusursuz";
- else if ( istat >= 80 ) stat = (char*)"iyi";
- else if ( istat >= 60 ) stat = (char*)"fena değil";
- else if ( istat >= 40 ) stat = (char*)"vasat";
- else if ( istat >= 20 ) stat = (char*)"hasarlı";
- else                    stat = (char*)"kırılgan";
+ if      ( istat >  90 ) stat = "kusursuz";
+ else if ( istat >= 80 ) stat = "iyi";
+ else if ( istat >= 60 ) stat = "fena değil";
+ else if ( istat >= 40 ) stat = "vasat";
+ else if ( istat >= 20 ) stat = "hasarlı";
+ else                    stat = "kırılgan";
 
  return stat;
 }
@@ -4053,25 +4053,25 @@ void do_raffects(CHAR_DATA *ch, char *argument )
 	{
 	    if (paf_last != NULL && paf->type == paf_last->type)
 		if (ch->level >= 20 )
-		    sprintf( buf, "                      ");
+		    snprintf(buf, sizeof(buf), "                      ");
 		else
 		    continue;
 	    else
-      sprintf( buf, "Büyü: %-15s", skill_table[paf->type].name[1] );
+      snprintf(buf, sizeof(buf), "Büyü: %-15s", skill_table[paf->type].name[1] );
 
 	    send_to_char( buf, ch );
 
 	    if ( ch->level >= 20 )
 	    {
-		sprintf( buf,
+		snprintf(buf, sizeof(buf),
       ": %s yönünü %d değiştirir ",
 		    raffect_loc_name( paf->location ),
 		    paf->modifier);
 		send_to_char( buf, ch );
 		if ( paf->duration == -1 || paf->duration == -2 )
-    sprintf( buf, "sürekli" );
+    snprintf(buf, sizeof(buf), "sürekli" );
 		else
-    sprintf( buf, "%d saat", paf->duration );
+    snprintf(buf, sizeof(buf), "%d saat", paf->duration );
 		send_to_char( buf, ch );
 	    }
 	    send_to_char( "\n\r", ch );
@@ -4110,7 +4110,7 @@ void do_pracnew( CHAR_DATA *ch, char *argument )
 	      )
 		continue;
 
-	    sprintf( buf, "%-18s %3d%%  ",
+	    snprintf(buf, sizeof(buf), "%-18s %3d%%  ",
 		skill_table[sn].name[1], ch->pcdata->learned[sn] );
 	    strcat( buf2, buf );
 	    if ( ++col % 3 == 0 )
@@ -4120,7 +4120,7 @@ void do_pracnew( CHAR_DATA *ch, char *argument )
 	if ( col % 3 != 0 )
 	    strcat( buf2, "\n\r" );
 
-      sprintf( buf, "%d pratik seansın kaldı.\n\r",
+      snprintf(buf, sizeof(buf), "%d pratik seansın kaldı.\n\r",
 	    ch->practice );
 	strcat( buf2, buf );
 
@@ -4193,7 +4193,7 @@ void do_pracnew( CHAR_DATA *ch, char *argument )
 
 	if ( ch->pcdata->learned[sn] >= adept )
 	{
-    sprintf( buf, "Zaten %s konusunu öğrendin.\n\r",
+    snprintf(buf, sizeof(buf), "Zaten %s konusunu öğrendin.\n\r",
 		skill_table[sn].name[1] );
 	    send_to_char( buf, ch );
 	}
@@ -4535,7 +4535,7 @@ void do_who_col( CHAR_DATA *ch, char *argument )
 		|| (wch->cabal == CABAL_RULER
 		   && is_equiped_n_char(wch, OBJ_VNUM_RULER_BADGE, WEAR_NECK)) )
 	{
-	  sprintf(cabalbuf, "[%s%s%s] ",
+	  snprintf(cabalbuf, sizeof(cabalbuf), "[%s%s%s] ",
 		CLR_CYAN,
 		cabal_table[wch->cabal].short_name,
 		CLR_WHITE_BOLD	);
@@ -4545,17 +4545,17 @@ void do_who_col( CHAR_DATA *ch, char *argument )
 
 	pk_buf[0] = '\0';
 	if (!((ch==wch && ch->level< KIDEMLI_OYUNCU_SEVIYESI ) || is_safe_nomessage(ch,wch)))
-	  sprintf(pk_buf,"%s(OK) %s", CLR_RED , CLR_WHITE_BOLD );
+	  snprintf(pk_buf, sizeof(pk_buf),"%s(OK) %s", CLR_RED , CLR_WHITE_BOLD );
 
 	act_buf[0] = '\0';
-	sprintf(act_buf,"%s%s%s", CLR_WHITE ,
+	snprintf(act_buf, sizeof(act_buf),"%s%s%s", CLR_WHITE ,
 		    IS_SET(wch->act, PLR_WANTED) ? "(ARANIYOR) " : "",
 	        CLR_WHITE_BOLD );
 
 	if (IS_NPC(wch))
-		sprintf(titlebuf,"Tanrılara inanan.");
+		snprintf(titlebuf, sizeof(titlebuf),"Tanrılara inanan.");
 	else {
-		sprintf(titlebuf,"%s", wch->pcdata->title );
+		snprintf(titlebuf, sizeof(titlebuf),"%s", wch->pcdata->title );
 		if (strlen(titlebuf) > 45 )
 		 {
 			free_string(wch->pcdata->title);
@@ -4568,13 +4568,13 @@ void do_who_col( CHAR_DATA *ch, char *argument )
 	 * Format it up.
 	 */
 
-	sprintf( level_buf, "%s%3d%s", CLR_CYAN,wch->level, CLR_WHITE_BOLD);
-	sprintf(classbuf,"%s%s%s",CLR_YELLOW,iclass, CLR_WHITE_BOLD);
+	snprintf(level_buf, sizeof(level_buf), "%s%3d%s", CLR_CYAN,wch->level, CLR_WHITE_BOLD);
+	snprintf(classbuf, sizeof(classbuf),"%s%s%s",CLR_YELLOW,iclass, CLR_WHITE_BOLD);
 
 	if (IS_TRUSTED(ch,LEVEL_IMMORTAL) || ch==wch ||
                    wch->level >= LEVEL_HERO)
 
-	  sprintf( buf, "[%3d %8s %3s] %s%s%s%s%s\n\r",
+	  snprintf(buf, sizeof(buf), "[%3d %8s %3s] %s%s%s%s%s\n\r",
 	    wch->level,
 	    RACE(wch) < MAX_PC_RACE ? race_table[RACE(wch)].who_name
 				    : "     ",
@@ -4586,8 +4586,8 @@ void do_who_col( CHAR_DATA *ch, char *argument )
 	    titlebuf);
 
 	else
-/*	  sprintf( buf, "[%s %s %s] %s%s%s%s%s\n\r",	*/
-	  sprintf( buf, "[%3s %8s    ] %s%s%s%s%s\n\r",
+/*	  snprintf(buf, sizeof(buf), "[%s %s %s] %s%s%s%s%s\n\r",	*/
+	  snprintf(buf, sizeof(buf), "[%3s %8s    ] %s%s%s%s%s\n\r",
 		(get_curr_stat(wch, STAT_CHA) < 18 ) ? level_buf : "  ",
 	    RACE(wch) < MAX_PC_RACE ? race_table[RACE(wch)].who_name
 				    : "     ",
@@ -4606,7 +4606,7 @@ void do_who_col( CHAR_DATA *ch, char *argument )
         if ( d->connected == CON_PLAYING )    count++;
 
     max_on = UMAX(count,max_on);
-    sprintf( buf2, "\n\rOyuncular: %d, bugün: %d, en çok:%d.\n\r",
+    snprintf(buf2, sizeof(buf2), "\n\rOyuncular: %d, bugün: %d, en çok:%d.\n\r",
 		nMatch,max_on,max_on_so_far );
     strcat(output,buf2);
     page_to_char( output, ch );
@@ -4739,7 +4739,7 @@ void do_demand( CHAR_DATA *ch, char *argument)
 
   if ( number_percent() > chance )
 	{
-    do_say(victim,(char*)"Sana birşey vermek zorunda değilim.");
+    do_say(victim,"Sana birşey vermek zorunda değilim.");
          do_murder(victim, ch->name);
 	 return;
 	}
@@ -4748,7 +4748,7 @@ void do_demand( CHAR_DATA *ch, char *argument)
       && (obj = get_obj_wear(victim, arg1)) == NULL)
       || IS_SET(obj->extra_flags, ITEM_INVENTORY))
     {
-      do_say(victim,(char*)"Üzgünüm, o şeyden bende yok.");
+      do_say(victim,"Üzgünüm, o şeyden bende yok.");
       return;
     }
 
@@ -4758,7 +4758,7 @@ void do_demand( CHAR_DATA *ch, char *argument)
 
   if ( !can_drop_obj( ch, obj ) )
     {
-      do_say(victim,(char*)"O lanetli, kendimden ayıramıyorum. Affedin, efendim.");
+      do_say(victim,"O lanetli, kendimden ayıramıyorum. Affedin, efendim.");
 	  if(number_percent()<30)
 	  {
 		printf_to_char(ch,"Rol yapma puanının arttığını hissediyorsun.\n\r");
@@ -4869,7 +4869,7 @@ void do_control( CHAR_DATA *ch, char *argument)
     ||   (IS_NPC(victim) && victim->pIndexData->pShop != NULL) )
 	{
 	 check_improve(ch,gsn_control_animal,FALSE,2);
-	 do_say(victim,(char*)"Seni izlemek istemiyorum.");
+	 do_say(victim,"Seni izlemek istemiyorum.");
          do_murder(victim, ch->name);
 	 return;
 	}
@@ -4990,35 +4990,35 @@ void do_make_arrow( CHAR_DATA *ch, char *argument )
     if (color == gsn_green_arrow)
 	{
 	 saf.bitvector	= WEAPON_POISON;
-	 str = (char*)"yeşil";
+	 str = "yeşil";
 	}
      else if (color == gsn_red_arrow)
 	{
 	 saf.bitvector	= WEAPON_FLAMING;
-	 str = (char*)"kızıl";
+	 str = "kızıl";
 	}
      else if (color == gsn_white_arrow)
 	{
 	 saf.bitvector	= WEAPON_FROST;
-	 str = (char*)"beyaz";
+	 str = "beyaz";
 	}
      else
 	{
 	 saf.bitvector	= WEAPON_SHOCKING;
-	 str = (char*)"mavi";
+	 str = "mavi";
 	}
    }
-   else str = (char*)"tahta";
+   else str = "tahta";
 
-   sprintf( buf, arrow->name, str );
+   snprintf(buf, sizeof(buf), arrow->name, str );
    free_string( arrow->name );
    arrow->name = str_dup( buf );
 
-   sprintf( buf, arrow->short_descr, str );
+   snprintf(buf, sizeof(buf), arrow->short_descr, str );
    free_string( arrow->short_descr );
    arrow->short_descr = str_dup( buf );
 
-   sprintf( buf, arrow->description, str );
+   snprintf(buf, sizeof(buf), arrow->description, str );
    free_string( arrow->description );
    arrow->description = str_dup( buf );
 
@@ -5113,7 +5113,7 @@ void do_make( CHAR_DATA *ch, char *argument )
 
   if (!str_prefix(arg,"ok")) do_make_arrow(ch,argument);
   else if (!str_prefix(arg,"yay")) do_make_bow(ch,argument);
-  else do_make(ch,(char*)"");
+  else do_make(ch,"");
 }
 
 

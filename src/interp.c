@@ -63,7 +63,7 @@
 
 #undef IMMORTALS_LOGS
 
-bool	check_social	args( ( CHAR_DATA *ch, char *command,char *argument ) );
+bool	check_social	( CHAR_DATA *ch, char *command,char *argument );
 
 
 /*
@@ -481,7 +481,7 @@ void interpret( CHAR_DATA *ch, char *argument, bool is_order )
 	  strtime = (char *) malloc(100);
 	  strtime = ctime( &current_time);
 	  strtime[strlen(strtime) -1] = '\0';
-	  sprintf(buf,"%s :[%s]:%s\n", strtime,ch->name,logline);
+	  snprintf(buf, sizeof(buf),"%s :[%s]:%s\n", strtime,ch->name,logline);
 	  fprintf(imm_log,buf);
 	  fclose(imm_log);
 	  free(strtime);
@@ -589,7 +589,7 @@ void interpret( CHAR_DATA *ch, char *argument, bool is_order )
     ||   cmd_table[cmd].log == LOG_ALWAYS ) && logline[0] != '\0' &&
 	 logline[0] != '\n' )
     {
-	sprintf( log_buf, "Log %s: %s", ch->name, logline );
+	snprintf(log_buf, sizeof(log_buf), "Log %s: %s", ch->name, logline );
 	wiznet(log_buf,ch,NULL,WIZ_SECURE,0,get_trust(ch));
 	log_string( log_buf );
     }
@@ -934,7 +934,7 @@ void do_commands( CHAR_DATA *ch, char *argument )
         &&   cmd_table[cmd].level <= get_trust( ch )
 	&&   cmd_table[cmd].show)
 	{
-	    sprintf( buf, "%-12s", cmd_table[cmd].name );
+	    snprintf(buf, sizeof(buf), "%-12s", cmd_table[cmd].name );
 	    strcat( output, buf );
 	    if ( ++col % 6 == 0 )
 		strcat(output, "\n\r" );
@@ -969,7 +969,7 @@ void do_wizhelp( CHAR_DATA *ch, char *argument )
         &&   cmd_table[cmd].level <= get_trust( ch )
         &&   cmd_table[cmd].show)
 	{
-	    sprintf( buf, "%-12s", cmd_table[cmd].name );
+	    snprintf(buf, sizeof(buf), "%-12s", cmd_table[cmd].name );
 	    strcat(output, buf);
 	    if ( ++col % 6 == 0 )
 		strcat( output, "\n\r");
@@ -1010,7 +1010,7 @@ void substitute_alias(DESCRIPTOR_DATA *d, char *argument)
 	    send_to_char("Line to long, prefix not processed.\r\n",ch);
 	else
 	{
-	    sprintf(prefix,"%s %s",ch->prefix,argument);
+	    snprintf(prefix, sizeof(prefix),"%s %s",ch->prefix,argument);
 	    argument = prefix;
 	}
     }
@@ -1092,7 +1092,7 @@ void do_alias(CHAR_DATA *ch, char *argument)
 	    ||	rch->pcdata->alias_sub[pos] == NULL)
 		break;
 
-	    sprintf(buf,"    %s:  %s\n\r",rch->pcdata->alias[pos],
+	    snprintf(buf, sizeof(buf),"    %s:  %s\n\r",rch->pcdata->alias[pos],
 		    rch->pcdata->alias_sub[pos]);
 	    send_to_char(buf,ch);
 	}
@@ -1115,7 +1115,7 @@ void do_alias(CHAR_DATA *ch, char *argument)
 
 	    if (!str_cmp(arg,rch->pcdata->alias[pos]))
 	    {
-        sprintf(buf,"%s = '%s'.\n\r",rch->pcdata->alias[pos],
+        snprintf(buf, sizeof(buf),"%s = '%s'.\n\r",rch->pcdata->alias[pos],
     			rch->pcdata->alias_sub[pos]);
 		send_to_char(buf,ch);
 		return;
@@ -1141,7 +1141,7 @@ void do_alias(CHAR_DATA *ch, char *argument)
 	{
 	    free_string(rch->pcdata->alias_sub[pos]);
 	    rch->pcdata->alias_sub[pos] = str_dup(argument);
-      sprintf(buf,"%s artık '%s' demek.\n\r",arg,argument);
+      snprintf(buf, sizeof(buf),"%s artık '%s' demek.\n\r",arg,argument);
 	    send_to_char(buf,ch);
 	    return;
 	}
@@ -1156,7 +1156,7 @@ void do_alias(CHAR_DATA *ch, char *argument)
      /* make a new alias */
      rch->pcdata->alias[pos]		= str_dup(arg);
      rch->pcdata->alias_sub[pos]	= str_dup(argument);
-     sprintf(buf,"%s artık '%s' demek.\n\r",arg,argument);
+     snprintf(buf, sizeof(buf),"%s artık '%s' demek.\n\r",arg,argument);
      send_to_char(buf,ch);
 }
 

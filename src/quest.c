@@ -80,9 +80,9 @@ extern	MOB_INDEX_DATA	*mob_index_hash	[MAX_KEY_HASH];
 
 /* Local functions */
 
-void generate_quest	args(( CHAR_DATA *ch, CHAR_DATA *questman ));
-void quest_update	args(( void ));
-bool chance		args(( int num ));
+void generate_quest	( CHAR_DATA *ch, CHAR_DATA *questman );
+void quest_update	( void );
+bool chance		( int num );
 
 /* CHANCE function. I use this everywhere in my code, very handy :> */
 
@@ -116,7 +116,7 @@ bool quest_item_buy_object(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num, in
 	
 	if (IS_SET(ch->quest,quest_num))
     {
-      do_tell_quest(ch,questman,(char*)"Bu eşyayı zaten almışsın. Kaybettiysen sigortadan faydalan.");
+      do_tell_quest(ch,questman,"Bu eşyayı zaten almışsın. Kaybettiysen sigortadan faydalan.");
       return FALSE;
     }
 	
@@ -127,11 +127,11 @@ bool quest_item_buy_object(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num, in
 		SET_BIT(ch->quest,quest_num);
 		if(quest_obj_vnum == QUEST_ITEM_SILAH2)
 		{
-			sprintf( buf, obj->short_descr, IS_GOOD(ch) ? "mat-mavi" : IS_NEUTRAL(ch) ? "mat-yeşil" : "mat-kızıl", ch->name);
+			snprintf(buf, sizeof(buf), obj->short_descr, IS_GOOD(ch) ? "mat-mavi" : IS_NEUTRAL(ch) ? "mat-yeşil" : "mat-kızıl", ch->name);
 		}
 		else
 		{
-			sprintf( buf, obj->short_descr, IS_GOOD(ch) ? "parlak-mavi" : IS_NEUTRAL(ch) ? "parlak-yeşil" : "parlak-kızıl", ch->name);
+			snprintf(buf, sizeof(buf), obj->short_descr, IS_GOOD(ch) ? "parlak-mavi" : IS_NEUTRAL(ch) ? "parlak-yeşil" : "parlak-kızıl", ch->name);
 		}
 		free_string( obj->short_descr );
 		obj->short_descr = str_dup( buf );
@@ -147,7 +147,7 @@ bool quest_item_buy_object(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num, in
 	}
 	else
 	{
-		sprintf(buf, "Üzgünüm %s, bunun için yeterli görev puanın yok.",ch->name);
+		snprintf(buf, sizeof(buf), "Üzgünüm %s, bunun için yeterli görev puanın yok.",ch->name);
 		do_tell_quest(ch,questman,buf);
 		return FALSE;
 	}
@@ -162,7 +162,7 @@ bool quest_item_sigorta_object(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num
 
 	if (!IS_SET(ch->quest,quest_num))
 	{
-		sprintf(buf,"Üzgünüm %s, fakat bahsettiğin ödülü henüz almamışsın.\n\r",ch->name);
+		snprintf(buf, sizeof(buf),"Üzgünüm %s, fakat bahsettiğin ödülü henüz almamışsın.\n\r",ch->name);
 		do_tell_quest(ch,questman,buf);
 		return FALSE;
 	}
@@ -173,11 +173,11 @@ bool quest_item_sigorta_object(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num
 	
 	if(quest_obj_vnum == QUEST_ITEM_SILAH2)
 	{
-		sprintf( buf, obj->short_descr, IS_GOOD(ch) ? "mat-mavi" : IS_NEUTRAL(ch) ? "mat-yeşil" : "mat-kızıl", ch->name);
+		snprintf(buf, sizeof(buf), obj->short_descr, IS_GOOD(ch) ? "mat-mavi" : IS_NEUTRAL(ch) ? "mat-yeşil" : "mat-kızıl", ch->name);
 	}
 	else
 	{
-		sprintf( buf, obj->short_descr, IS_GOOD(ch) ? "parlak-mavi" : IS_NEUTRAL(ch) ? "parlak-yeşil" : "parlak-kızıl", ch->name);
+		snprintf(buf, sizeof(buf), obj->short_descr, IS_GOOD(ch) ? "parlak-mavi" : IS_NEUTRAL(ch) ? "parlak-yeşil" : "parlak-kızıl", ch->name);
 	}
 	
 	free_string( obj->short_descr );
@@ -200,7 +200,7 @@ bool quest_item_iade(CHAR_DATA *ch, CHAR_DATA *questman, int quest_num, int ques
 
 	if (!IS_SET(ch->quest,quest_num))
 	{
-		sprintf(buf,"Üzgünüm %s, fakat bahsettiğin ödülü henüz almamışsın.\n\r",ch->name);
+		snprintf(buf, sizeof(buf),"Üzgünüm %s, fakat bahsettiğin ödülü henüz almamışsın.\n\r",ch->name);
 		do_tell_quest(ch,questman,buf);
 		return FALSE;
 	}
@@ -272,7 +272,7 @@ void do_quest(CHAR_DATA *ch, char *argument)
   }
     if (!strcmp(arg1, "puan"))
     {
-      sprintf(buf, "%d görev puanın var.\n\r",ch->pcdata->questpoints);
+      snprintf(buf, sizeof(buf), "%d görev puanın var.\n\r",ch->pcdata->questpoints);
 	send_to_char(buf, ch);
 	return;
     }
@@ -283,18 +283,18 @@ void do_quest(CHAR_DATA *ch, char *argument)
     send_to_char("Henüz bir görevin yok.\n\r",ch);
 	    if (ch->pcdata->nextquest > 1)
 	    {
-        sprintf(buf, "Yeni bir görev isteyebilmen için %d dakika kaldı.\n\r",ch->pcdata->nextquest);
+        snprintf(buf, sizeof(buf), "Yeni bir görev isteyebilmen için %d dakika kaldı.\n\r",ch->pcdata->nextquest);
 		send_to_char(buf, ch);
 	    }
 	    else if (ch->pcdata->nextquest == 1)
 	    {
-        sprintf(buf, "Yeni bir görev isteyebilmen için bir dakikadan az zaman kaldı.\n\r");
+        snprintf(buf, sizeof(buf), "Yeni bir görev isteyebilmen için bir dakikadan az zaman kaldı.\n\r");
 		send_to_char(buf, ch);
 	    }
 	}
         else if (ch->pcdata->countdown > 0)
         {
-          sprintf(buf, "Görevi bitirmek için kalan zaman: %d dakika.\n\r",ch->pcdata->countdown);
+          snprintf(buf, sizeof(buf), "Görevi bitirmek için kalan zaman: %d dakika.\n\r",ch->pcdata->countdown);
 	    send_to_char(buf, ch);
 	}
 	return;
@@ -307,10 +307,10 @@ void do_quest(CHAR_DATA *ch, char *argument)
     for ( questman = ch->in_room->people; questman != NULL; questman = questman->next_in_room )
     {
 	if (!IS_NPC(questman)) continue;
-        if (questman->spec_fun == spec_lookup( (char*)"spec_questmaster" )) break;
+        if (questman->spec_fun == spec_lookup( "spec_questmaster" )) break;
     }
 
-    if (questman == NULL || questman->spec_fun != spec_lookup( (char*)"spec_questmaster" ))
+    if (questman == NULL || questman->spec_fun != spec_lookup( "spec_questmaster" ))
     {
       send_to_char("Odada görevci göremiyorum.\n\r", ch);
         return;
@@ -374,91 +374,91 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
   			printf_to_char(ch,"Hangi görev ekipmanının özelliklerini öğrenmek istiyorsun?\n\rKullanım: {Rgörev özellik <ekipman>{x\n\r");
   			return;
   		}
-  		else if (is_name(arg2, (char*)"çanta"))
+  		else if (is_name(arg2, "çanta"))
   		{
   			obj = create_object(get_obj_index(QUEST_ITEM4),ch->level);
   			spell_identify( 0, 0, ch, obj ,0);
   			extract_obj(obj);
   			return;
   		}
-  		else if (is_name(arg2, (char*)"kemer"))
+  		else if (is_name(arg2, "kemer"))
   		{
   			obj = create_object(get_obj_index(QUEST_ITEM1),ch->level);
   			spell_identify( 0, 0, ch, obj ,0);
   			extract_obj(obj);
   			return;
   		}
-		else if (is_name(arg2, (char*)"miğfer"))
+		else if (is_name(arg2, "miğfer"))
   		{
   			obj = create_object(get_obj_index(QUEST_ITEM_MIGFER),ch->level);
   			spell_identify( 0, 0, ch, obj ,0);
   			extract_obj(obj);
   			return;
   		}
-		else if (is_name(arg2, (char*)"kolluk"))
+		else if (is_name(arg2, "kolluk"))
   		{
   			obj = create_object(get_obj_index(QUEST_ITEM_KOLLUK),ch->level);
   			spell_identify( 0, 0, ch, obj ,0);
   			extract_obj(obj);
   			return;
   		}
-		else if (is_name(arg2, (char*)"bacaklık"))
+		else if (is_name(arg2, "bacaklık"))
   		{
   			obj = create_object(get_obj_index(QUEST_ITEM_BACAKLIK),ch->level);
   			spell_identify( 0, 0, ch, obj ,0);
   			extract_obj(obj);
   			return;
   		}
-		else if (is_name(arg2, (char*)"kalkan"))
+		else if (is_name(arg2, "kalkan"))
   		{
   			obj = create_object(get_obj_index(QUEST_ITEM_KALKAN),ch->level);
   			spell_identify( 0, 0, ch, obj ,0);
   			extract_obj(obj);
   			return;
   		}
-  		else if (is_name(arg2, (char*)"parlak"))
+  		else if (is_name(arg2, "parlak"))
   		{
   			obj = create_object(get_obj_index(QUEST_ITEM_SILAH1),ch->level);
   			spell_identify( 0, 0, ch, obj ,0);
   			extract_obj(obj);
   			return;
   		}
-  		else if (is_name(arg2, (char*)"mat"))
+  		else if (is_name(arg2, "mat"))
   		{
   			obj = create_object(get_obj_index(QUEST_ITEM_SILAH2),ch->level);
   			spell_identify( 0, 0, ch, obj ,0);
   			extract_obj(obj);
   			return;
   		}
-  		else if (is_name(arg2, (char*)"işlemeli"))
+  		else if (is_name(arg2, "işlemeli"))
   		{
   			obj = create_object(get_obj_index(QUEST_ITEM_YUZUK1),ch->level);
   			spell_identify( 0, 0, ch, obj ,0);
   			extract_obj(obj);
   			return;
   		}
-  		else if (is_name(arg2, (char*)"desenli"))
+  		else if (is_name(arg2, "desenli"))
   		{
   			obj = create_object(get_obj_index(QUEST_ITEM_YUZUK2),ch->level);
   			spell_identify( 0, 0, ch, obj ,0);
   			extract_obj(obj);
   			return;
   		}
-  		else if (is_name(arg2, (char*)"oymalı"))
+  		else if (is_name(arg2, "oymalı"))
   		{
   			obj = create_object(get_obj_index(QUEST_ITEM_YUZUK3),ch->level);
   			spell_identify( 0, 0, ch, obj ,0);
   			extract_obj(obj);
   			return;
   		}
-      else if (is_name(arg2, (char*)"kakmalı"))
+      else if (is_name(arg2, "kakmalı"))
   		{
   			obj = create_object(get_obj_index(QUEST_ITEM_YUZUK4),ch->level);
   			spell_identify( 0, 0, ch, obj ,0);
   			extract_obj(obj);
   			return;
   		}
-      else if (is_name(arg2, (char*)"testi"))
+      else if (is_name(arg2, "testi"))
   		{
   			obj = create_object(get_obj_index(QUEST_ITEM5),ch->level);
   			spell_identify( 0, 0, ch, obj ,0);
@@ -481,11 +481,11 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 			return;
 		}
 	
-		else if (is_name(arg2, (char*)"ateist"))
+		else if (is_name(arg2, "ateist"))
 		{
 			if (ch->religion == 0)
 			{
-			do_tell_quest(ch,questman,(char*)"Zaten herhangi bir tanrıya inanmıyorsun.");
+			do_tell_quest(ch,questman,"Zaten herhangi bir tanrıya inanmıyorsun.");
 			return;
 			}
 
@@ -506,11 +506,11 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 			}
 		}
 
-		else if (is_name(arg2, (char*)"kasa"))
+		else if (is_name(arg2, "kasa"))
 		{
 			if (ch->pcdata->kisisel_kasa == 1)
 			{
-			do_tell_quest(ch,questman,(char*)"Zaten kişisel bir kasan var. İnanmıyorsan Otho'ya sorabilirsin.");
+			do_tell_quest(ch,questman,"Zaten kişisel bir kasan var. İnanmıyorsan Otho'ya sorabilirsin.");
 			return;
 			}
 
@@ -530,11 +530,11 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 			}
 		}
 	
-		else if (is_name(arg2, (char*)"katlet"))
+		else if (is_name(arg2, "katlet"))
 		{
 			if (ch->pcdata->oyuncu_katli == 1)
 			{
-			do_tell_quest(ch,questman,(char*)"Zaten oyuncu katli sözleşmesini kabul etmişsin.");
+			do_tell_quest(ch,questman,"Zaten oyuncu katli sözleşmesini kabul etmişsin.");
 			return;
 			}
 
@@ -554,65 +554,65 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 			}
 		}
 
-		else if (is_name(arg2, (char*)"çanta"))
+		else if (is_name(arg2, "çanta"))
 		{
 			quest_item_buy_object(ch, questman, QUEST_BACKPACK, QUEST_ITEM4, 5000,0,0);
 			return;
 		}
 
-		else if (is_name(arg2, (char*)"testi"))
+		else if (is_name(arg2, "testi"))
 		{
 			quest_item_buy_object(ch, questman, QUEST_DECANTER, QUEST_ITEM5, 500,0,0);
 			return;
 		}
 
-		else if (is_name(arg2, (char*)"kemer"))
+		else if (is_name(arg2, "kemer"))
 		{
 			quest_item_buy_object(ch, questman, QUEST_GIRTH, QUEST_ITEM1, 1000,0,0);
 			return;
 		}
-		else if (is_name(arg2, (char*)"miğfer"))
+		else if (is_name(arg2, "miğfer"))
 		{
 			quest_item_buy_object(ch, questman, QUEST_MIGFER, QUEST_ITEM_MIGFER, 1000,0,0);
 			return;
 		}
-		else if (is_name(arg2, (char*)"kolluk"))
+		else if (is_name(arg2, "kolluk"))
 		{
 			quest_item_buy_object(ch, questman, QUEST_KOLLUK, QUEST_ITEM_KOLLUK, 1000,0,0);
 			return;
 		}
-		else if (is_name(arg2, (char*)"bacaklık"))
+		else if (is_name(arg2, "bacaklık"))
 		{
 			quest_item_buy_object(ch, questman, QUEST_BACAKLIK, QUEST_ITEM_BACAKLIK, 1000,0,0);
 			return;
 		}
-		else if (is_name(arg2, (char*)"kalkan"))
+		else if (is_name(arg2, "kalkan"))
 		{
 			quest_item_buy_object(ch, questman, QUEST_KALKAN, QUEST_ITEM_KALKAN, 1000,0,0);
 			return;
 		}
-		else if (is_name(arg2, (char*)"işlemeli"))
+		else if (is_name(arg2, "işlemeli"))
 		{
 			quest_item_buy_object(ch, questman, QUEST_YUZUK1, QUEST_ITEM_YUZUK1, 750,0,0);
 			return;
 		}
-		else if (is_name(arg2, (char*)"desenli"))
+		else if (is_name(arg2, "desenli"))
 		{
 			quest_item_buy_object(ch, questman, QUEST_YUZUK2, QUEST_ITEM_YUZUK2, 750,0,0);
 			return;
 		}
-		else if (is_name(arg2, (char*)"oymalı"))
+		else if (is_name(arg2, "oymalı"))
 		{
 			quest_item_buy_object(ch, questman, QUEST_YUZUK3, QUEST_ITEM_YUZUK3, 750,0,0);
 			return;
 		}
-		else if (is_name(arg2, (char*)"kakmalı"))
+		else if (is_name(arg2, "kakmalı"))
 		{
 			quest_item_buy_object(ch, questman, QUEST_YUZUK4, QUEST_ITEM_YUZUK4, 750,0,0);
 			return;
 		}
 
-		else if (is_name(arg2, (char*)"parlak"))
+		else if (is_name(arg2, "parlak"))
 		{
 			if (arg3[0] == '\0')
 			{
@@ -621,22 +621,22 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 				printf_to_char(ch,"Örn: görev satınal parlak kılıç\n\r");
 				return;
 			}
-			if (is_name (arg3, (char*)"kılıç"))
+			if (is_name (arg3, "kılıç"))
 			{
 				quest_item_buy_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1000, 1, 3);
 				return;
 			}
-			else if (is_name (arg3, (char*)"hançer"))
+			else if (is_name (arg3, "hançer"))
 			{
 				quest_item_buy_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1000, 2, 11);
 				return;
 			}
-			else if (is_name (arg3, (char*)"kırbaç"))
+			else if (is_name (arg3, "kırbaç"))
 			{
 				quest_item_buy_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1000, 7, 4);
 				return;
 			}
-			else if (is_name (arg3, (char*)"balta"))
+			else if (is_name (arg3, "balta"))
 			{
 				quest_item_buy_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1000, 5, 8);
 				return;
@@ -647,7 +647,7 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 				return;
 			}
 		}
-		else if (is_name(arg2, (char*)"mat"))
+		else if (is_name(arg2, "mat"))
 		{
 			if (arg3[0] == '\0')
 			{
@@ -656,22 +656,22 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 				printf_to_char(ch,"Örn: görev satınal mat kılıç\n\r");
 				return;
 			}
-			if (is_name (arg3, (char*)"kılıç"))
+			if (is_name (arg3, "kılıç"))
 			{
 				quest_item_buy_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1000, 1, 3);
 				return;
 			}
-			else if (is_name (arg3, (char*)"hançer"))
+			else if (is_name (arg3, "hançer"))
 			{
 				quest_item_buy_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1000, 2, 11);
 				return;
 			}
-			else if (is_name (arg3, (char*)"kırbaç"))
+			else if (is_name (arg3, "kırbaç"))
 			{
 				quest_item_buy_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1000, 7, 4);
 				return;
 			}
-			else if (is_name (arg3, (char*)"balta"))
+			else if (is_name (arg3, "balta"))
 			{
 				quest_item_buy_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1000, 5, 8);
 				return;
@@ -683,7 +683,7 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 			}
 		}
 
-		else if (is_name(arg2, (char*)"pratik"))
+		else if (is_name(arg2, "pratik"))
 		{
 			if (ch->pcdata->questpractice == 10)
 			{
@@ -708,7 +708,7 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 			return;
 			}
 		}
-		else if (is_name(arg2, (char*)"vampir"))
+		else if (is_name(arg2, "vampir"))
 		{
 			if (ch->iclass != CLASS_VAMPIRE)
 			{
@@ -734,7 +734,7 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 			return;
 			}
 		}
-		else if (is_name(arg2, (char*)"bün bünye"))
+		else if (is_name(arg2, "bün bünye"))
 		{
 			if (ch->perm_stat[STAT_CON] >= get_max_train(ch, STAT_CON))
 			{
@@ -755,7 +755,7 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 			return;
 			}
 		}
-		else if (is_name(arg2, (char*)"akçe"))
+		else if (is_name(arg2, "akçe"))
 		{
 			if(ch->pcdata->bank_s > 39985000)
 			{
@@ -776,7 +776,7 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 			return;
 			}
 		}
-		else if (is_name(arg2, (char*)"samuray ölüm"))
+		else if (is_name(arg2, "samuray ölüm"))
 		{
 			if (ch->iclass != CLASS_SAMURAI)
 			{
@@ -804,7 +804,7 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 			return;
 			}
 		}
-		else if (is_name(arg2, (char*)"katana"))
+		else if (is_name(arg2, "katana"))
 		{
 			AFFECT_DATA af;
 			OBJ_DATA *katana;
@@ -816,7 +816,7 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 				return;
 			}
 
-			if ( (katana = get_obj_list(ch,(char*)"katana",ch->carrying)) == NULL)
+			if ( (katana = get_obj_list(ch,"katana",ch->carrying)) == NULL)
 			{
 				sprintf(buf, "Üzgünüm %s, fakat katanan yanında değil.",ch->name);
 				do_tell_quest(ch,questman,buf);
@@ -852,7 +852,7 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 				return;
 			}
 		}
-		else if (is_name(arg2, (char*)"keskin ikinci"))
+		else if (is_name(arg2, "keskin ikinci"))
 		{
 			AFFECT_DATA af;
 			OBJ_DATA *katana;
@@ -864,7 +864,7 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 				return;
 			}
 
-			if ( (katana = get_obj_list(ch,(char*)"katana",ch->carrying)) == NULL)
+			if ( (katana = get_obj_list(ch,"katana",ch->carrying)) == NULL)
 			{
 				sprintf(buf, "Üzgünüm %s, fakat katanan yanında değil.",ch->name);
 				do_tell_quest(ch,questman,buf);
@@ -1058,42 +1058,42 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 			return;
 		}
 
-		if (is_name(arg2, (char*)"kemer"))
+		if (is_name(arg2, "kemer"))
 		{
 			quest_item_sigorta_object(ch, questman, QUEST_GIRTH, QUEST_ITEM1,0,0);
 			return;
 		}
-		else if (is_name(arg2, (char*)"miğfer"))
+		else if (is_name(arg2, "miğfer"))
 		{
 			quest_item_sigorta_object(ch, questman, QUEST_MIGFER, QUEST_ITEM_MIGFER,0,0);
 			return;
 		}
-		else if (is_name(arg2, (char*)"kolluk"))
+		else if (is_name(arg2, "kolluk"))
 		{
 			quest_item_sigorta_object(ch, questman, QUEST_KOLLUK, QUEST_ITEM_KOLLUK,0,0);
 			return;
 		}
-		else if (is_name(arg2, (char*)"bacaklık"))
+		else if (is_name(arg2, "bacaklık"))
 		{
 			quest_item_sigorta_object(ch, questman, QUEST_BACAKLIK, QUEST_ITEM_BACAKLIK,0,0);
 			return;
 		}
-		else if (is_name(arg2, (char*)"kalkan"))
+		else if (is_name(arg2, "kalkan"))
 		{
 			quest_item_sigorta_object(ch, questman, QUEST_KALKAN, QUEST_ITEM_KALKAN,0,0);
 			return;
 		}
-		else if (is_name(arg2, (char*)"çanta"))
+		else if (is_name(arg2, "çanta"))
 		{
 			quest_item_sigorta_object(ch, questman, QUEST_BACKPACK, QUEST_ITEM4,0,0);
 			return;
 		}
-		else if (is_name(arg2, (char*)"testi"))
+		else if (is_name(arg2, "testi"))
 		{
 			quest_item_sigorta_object(ch, questman, QUEST_DECANTER, QUEST_ITEM5,0,0);
 			return;
 		}
-		else if (is_name(arg2, (char*)"parlak"))
+		else if (is_name(arg2, "parlak"))
 		{
 			if (arg3[0] == '\0')
 			{
@@ -1103,22 +1103,22 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 				return;
 			}
 
-			if (is_name (arg3, (char*)"kılıç"))
+			if (is_name (arg3, "kılıç"))
 			{
 				quest_item_sigorta_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 1, 3);
 				return;
 			}
-			else if (is_name (arg3, (char*)"hançer"))
+			else if (is_name (arg3, "hançer"))
 			{
 				quest_item_sigorta_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 2, 11);
 				return;
 			}
-			else if (is_name (arg3, (char*)"kırbaç"))
+			else if (is_name (arg3, "kırbaç"))
 			{
 				quest_item_sigorta_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 7, 4);
 				return;
 			}
-			else if (is_name (arg3,(char*) "balta"))
+			else if (is_name (arg3,"balta"))
 			{
 				quest_item_sigorta_object(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 5, 8);
 				return;
@@ -1130,7 +1130,7 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 			}
 			
 		}
-		else if (is_name(arg2, (char*)"mat"))
+		else if (is_name(arg2, "mat"))
 		{
 			if (arg3[0] == '\0')
 			{
@@ -1140,22 +1140,22 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 				return;
 			}
 
-			if (is_name (arg3, (char*)"kılıç"))
+			if (is_name (arg3, "kılıç"))
 			{
 				quest_item_sigorta_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 1, 3);
 				return;
 			}
-			else if (is_name (arg3, (char*)"hançer"))
+			else if (is_name (arg3, "hançer"))
 			{
 				quest_item_sigorta_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 2, 11);
 				return;
 			}
-			else if (is_name (arg3, (char*)"kırbaç"))
+			else if (is_name (arg3, "kırbaç"))
 			{
 				quest_item_sigorta_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 7, 4);
 				return;
 			}
-			else if (is_name (arg3, (char*)"balta"))
+			else if (is_name (arg3, "balta"))
 			{
 				quest_item_sigorta_object(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 5, 8);
 				return;
@@ -1167,22 +1167,22 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 			}
 			
 		}
-		else if (is_name(arg2, (char*)"işlemeli"))
+		else if (is_name(arg2, "işlemeli"))
 		{
 			quest_item_sigorta_object(ch, questman, QUEST_YUZUK1, QUEST_ITEM_YUZUK1,0,0);
 			return;
 		}
-		else if (is_name(arg2, (char*)"desenli"))
+		else if (is_name(arg2, "desenli"))
 		{
 			quest_item_sigorta_object(ch, questman, QUEST_YUZUK2, QUEST_ITEM_YUZUK2,0,0);
 			return;
 		}
-		else if (is_name(arg2, (char*)"oymalı"))
+		else if (is_name(arg2, "oymalı"))
 		{
 			quest_item_sigorta_object(ch, questman, QUEST_YUZUK3, QUEST_ITEM_YUZUK3,0,0);
 			return;
 		}
-		else if (is_name(arg2, (char*)"kakmalı"))
+		else if (is_name(arg2, "kakmalı"))
 		{
 			quest_item_sigorta_object(ch, questman, QUEST_YUZUK4, QUEST_ITEM_YUZUK4,0,0);
 			return;
@@ -1197,67 +1197,67 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
   			printf_to_char(ch,"Hangi görev ekipmanını iade etmek istiyorsun?\n\rKullanım: {Rgörev iade <ekipman>{x\n\r");
   			return;
   		}
-  		else if (is_name(arg2, (char*)"kemer"))
+  		else if (is_name(arg2, "kemer"))
   		{
 			quest_item_iade(ch, questman, QUEST_GIRTH, QUEST_ITEM1, 900);
   			return;
   		}
-		else if (is_name(arg2, (char*)"miğfer"))
+		else if (is_name(arg2, "miğfer"))
   		{
 			quest_item_iade(ch, questman, QUEST_MIGFER, QUEST_ITEM_MIGFER, 900);
   			return;
   		}
-		else if (is_name(arg2, (char*)"kolluk"))
+		else if (is_name(arg2, "kolluk"))
   		{
 			quest_item_iade(ch, questman, QUEST_KOLLUK, QUEST_ITEM_KOLLUK, 900);
   			return;
   		}
-		else if (is_name(arg2, (char*)"bacaklık"))
+		else if (is_name(arg2, "bacaklık"))
   		{
 			quest_item_iade(ch, questman, QUEST_BACAKLIK, QUEST_ITEM_BACAKLIK, 900);
   			return;
   		}
-		else if (is_name(arg2, (char*)"kalkan"))
+		else if (is_name(arg2, "kalkan"))
   		{
 			quest_item_iade(ch, questman, QUEST_KALKAN, QUEST_ITEM_KALKAN, 900);
   			return;
   		}
-  		else if (is_name(arg2, (char*)"çanta"))
+  		else if (is_name(arg2, "çanta"))
   		{
 			quest_item_iade(ch, questman, QUEST_BACKPACK, QUEST_ITEM4, 4500);
   			return;
   		}
-  		else if (is_name(arg2, (char*)"testi"))
+  		else if (is_name(arg2, "testi"))
   		{
 			quest_item_iade(ch, questman, QUEST_DECANTER, QUEST_ITEM5, 450);
 			return;
   		}
-  		else if (is_name(arg2, (char*)"parlak"))
+  		else if (is_name(arg2, "parlak"))
   		{
 			quest_item_iade(ch, questman, QUEST_SILAH1, QUEST_ITEM_SILAH1, 900);
 			return;
   		}
-		else if (is_name(arg2, (char*)"mat"))
+		else if (is_name(arg2, "mat"))
   		{
 			quest_item_iade(ch, questman, QUEST_SILAH2, QUEST_ITEM_SILAH2, 900);
 			return;
   		}
-		else if (is_name(arg2, (char*)"işlemeli"))
+		else if (is_name(arg2, "işlemeli"))
   		{
 			quest_item_iade(ch, questman, QUEST_YUZUK1, QUEST_ITEM_YUZUK1, 675);
 			return;
   		}
-		else if (is_name(arg2, (char*)"desenli"))
+		else if (is_name(arg2, "desenli"))
   		{
 			quest_item_iade(ch, questman, QUEST_YUZUK2, QUEST_ITEM_YUZUK2, 675);
 			return;
   		}
-		else if (is_name(arg2, (char*)"oymalı"))
+		else if (is_name(arg2, "oymalı"))
   		{
 			quest_item_iade(ch, questman, QUEST_YUZUK3, QUEST_ITEM_YUZUK3, 675);
 			return;
   		}
-		else if (is_name(arg2, (char*)"kakmalı"))
+		else if (is_name(arg2, "kakmalı"))
   		{
 			quest_item_iade(ch, questman, QUEST_YUZUK4, QUEST_ITEM_YUZUK4, 675);
 			return;
@@ -1377,9 +1377,9 @@ void generate_quest(CHAR_DATA *ch, CHAR_DATA *questman)
 
     if (victim == NULL)
     {
-      sprintf(buf, "Üzgünüm ama şu an sana verebileceğim bir görev yok.");
+      snprintf(buf, sizeof(buf), "Üzgünüm ama şu an sana verebileceğim bir görev yok.");
       do_tell_quest(ch,questman,buf);
-      sprintf(buf, "Daha sonra tekrar dene.");
+      snprintf(buf, sizeof(buf), "Daha sonra tekrar dene.");
       do_tell_quest(ch,questman,buf);
       ch->pcdata->nextquest = 5;
       return;
@@ -1387,30 +1387,30 @@ void generate_quest(CHAR_DATA *ch, CHAR_DATA *questman)
 
     if (IS_GOOD(ch))
     {
-      sprintf(buf, "Diyarın azılı asilerinden %s,	zindandan kaçtı!",victim->short_descr);
+      snprintf(buf, sizeof(buf), "Diyarın azılı asilerinden %s,	zindandan kaçtı!",victim->short_descr);
       do_tell_quest(ch,questman,buf);
-      sprintf(buf, "Kaçışından bu yana tahminimizce %d sivili katletti!", number_range(2,20));
+      snprintf(buf, sizeof(buf), "Kaçışından bu yana tahminimizce %d sivili katletti!", number_range(2,20));
       do_tell_quest(ch,questman,buf);
-      do_tell_quest(ch,questman,(char*)"Bunun cezası ölümdür!");
+      do_tell_quest(ch,questman,"Bunun cezası ölümdür!");
     }
     else
     {
-      sprintf(buf, "Şahsi düşmanım %s, kraliyet tacına karşı tehdit oluşturuyor.",victim->short_descr);
+      snprintf(buf, sizeof(buf), "Şahsi düşmanım %s, kraliyet tacına karşı tehdit oluşturuyor.",victim->short_descr);
       do_tell_quest(ch,questman,buf);
-      sprintf(buf, "Bu tehdit yokedilmeli!");
+      snprintf(buf, sizeof(buf), "Bu tehdit yokedilmeli!");
       do_tell_quest(ch,questman,buf);
     }
 
     if (victim->in_room->name != NULL)
     {
-      sprintf(buf, "%s şu sıralar %s bölgesindedir!",victim->short_descr,victim->in_room->area->name);
+      snprintf(buf, sizeof(buf), "%s şu sıralar %s bölgesindedir!",victim->short_descr,victim->in_room->area->name);
       do_tell_quest(ch,questman,buf);
 
       /* I changed my area names so that they have just the name of the area
       and none of the level stuff. You may want to comment these next two
       lines. - Vassago */
 
-      sprintf(buf, "Yeri %s civarında.",victim->in_room->name);
+      snprintf(buf, sizeof(buf), "Yeri %s civarında.",victim->in_room->name);
       do_tell_quest(ch,questman,buf);
     }
 
@@ -1519,10 +1519,10 @@ void do_eniyi(CHAR_DATA *ch,char *argument)
 	for ( questman = ch->in_room->people; questman != NULL; questman = questman->next_in_room )
     {
 	if (!IS_NPC(questman)) continue;
-        if (questman->spec_fun == spec_lookup( (char*)"spec_questmaster" )) break;
+        if (questman->spec_fun == spec_lookup( "spec_questmaster" )) break;
     }
 
-    if (questman == NULL || questman->spec_fun != spec_lookup( (char*)"spec_questmaster" ))
+    if (questman == NULL || questman->spec_fun != spec_lookup( "spec_questmaster" ))
     {
         send_to_char("Odada bu işleri yapan bir görevci göremiyorum.\n\r", ch);
         return;
@@ -1678,45 +1678,45 @@ if ( argument[0] == '\0' )
 	}//for
 	if(zz1== NULL && ac1==NULL)
 	{
-		do_tell_quest(ch,questman,(char*)"Şu an birşey hatırlayamıyorum. Sanırım yaşlanıyorum.");
-		do_tell_quest(ch,questman,(char*)"Daha sonra tekrar uğra lütfen.");
+		do_tell_quest(ch,questman,"Şu an birşey hatırlayamıyorum. Sanırım yaşlanıyorum.");
+		do_tell_quest(ch,questman,"Daha sonra tekrar uğra lütfen.");
 		ch->silver += cost;
 		printf_to_char(ch,"%d akçeni geri alıyorsun.\n\r", cost);
 		return;
 	}
-	do_tell_quest(ch,questman,(char*)"Bir düşüneyim... Evet sanırım birşeyler hatırladım.");
-	do_tell_quest(ch,questman,(char*)"Bazı ekipmanlar hatırlıyorum, senin giyebileceğin seviyede ekipmanlar.");
+	do_tell_quest(ch,questman,"Bir düşüneyim... Evet sanırım birşeyler hatırladım.");
+	do_tell_quest(ch,questman,"Bazı ekipmanlar hatırlıyorum, senin giyebileceğin seviyede ekipmanlar.");
 
 	if(zz1 != NULL)
 	{
-		do_tell_quest(ch,questman,(char*)"Vuruşlarının gücünü ve isabetini artıracak ekipmanlar. Mesela...");
-		sprintf(buf,"[%s] %s",( zz1->carried_by != NULL )?(zz1->carried_by->in_room->area->name):"Bir yerlerde",zz1->short_descr);
+		do_tell_quest(ch,questman,"Vuruşlarının gücünü ve isabetini artıracak ekipmanlar. Mesela...");
+		snprintf(buf, sizeof(buf),"[%s] %s",( zz1->carried_by != NULL )?(zz1->carried_by->in_room->area->name):"Bir yerlerde",zz1->short_descr);
 		do_tell_quest(ch,questman,(char*)buf);
 	}
 	if(zz2 != NULL)
 	{
-		sprintf(buf,"[%s] %s",( zz2->carried_by != NULL )?(zz2->carried_by->in_room->area->name):"Bir yerlerde",zz2->short_descr);
+		snprintf(buf, sizeof(buf),"[%s] %s",( zz2->carried_by != NULL )?(zz2->carried_by->in_room->area->name):"Bir yerlerde",zz2->short_descr);
 		do_tell_quest(ch,questman,(char*)buf);
 	}
 	if(zz3 != NULL)
 	{
-		sprintf(buf,"[%s] %s",( zz3->carried_by != NULL )?(zz3->carried_by->in_room->area->name):"Bir yerlerde",zz3->short_descr);
+		snprintf(buf, sizeof(buf),"[%s] %s",( zz3->carried_by != NULL )?(zz3->carried_by->in_room->area->name):"Bir yerlerde",zz3->short_descr);
 		do_tell_quest(ch,questman,(char*)buf);
 	}
 	if(ac1 != NULL)
 	{
-		do_tell_quest(ch,questman,(char*)"Bir de seni koruyacak ekipmanlar var aklıma gelen. Mesela...");
-		sprintf(buf,"[%s] %s",( ac1->carried_by != NULL )?(ac1->carried_by->in_room->area->name):"Bir yerlerde",ac1->short_descr);
+		do_tell_quest(ch,questman,"Bir de seni koruyacak ekipmanlar var aklıma gelen. Mesela...");
+		snprintf(buf, sizeof(buf),"[%s] %s",( ac1->carried_by != NULL )?(ac1->carried_by->in_room->area->name):"Bir yerlerde",ac1->short_descr);
 		do_tell_quest(ch,questman,(char*)buf);
 	}
 	if(ac2 != NULL)
 	{
-		sprintf(buf,"[%s] %s",( ac2->carried_by != NULL )?(ac2->carried_by->in_room->area->name):"Bir yerlerde",ac2->short_descr);
+		snprintf(buf, sizeof(buf),"[%s] %s",( ac2->carried_by != NULL )?(ac2->carried_by->in_room->area->name):"Bir yerlerde",ac2->short_descr);
 		do_tell_quest(ch,questman,(char*)buf);
 	}
 	if(ac3 != NULL)
 	{
-		sprintf(buf,"[%s] %s",( ac3->carried_by != NULL )?(ac3->carried_by->in_room->area->name):"Bir yerlerde",ac3->short_descr);
+		snprintf(buf, sizeof(buf),"[%s] %s",( ac3->carried_by != NULL )?(ac3->carried_by->in_room->area->name):"Bir yerlerde",ac3->short_descr);
 		do_tell_quest(ch,questman,(char*)buf);
 	}
 }

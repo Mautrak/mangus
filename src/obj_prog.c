@@ -62,7 +62,7 @@
 #include "interp.h"
 
 void one_hit(CHAR_DATA *ch, CHAR_DATA *victim, int dt, bool second);
-bool cabal_area_check   args( (CHAR_DATA *ch) );
+bool cabal_area_check   (CHAR_DATA *ch);
 
 DECLARE_OPROG_FUN_WEAR( wear_prog_excalibur 	);
 DECLARE_OPROG_FUN_REMOVE( remove_prog_excalibur );
@@ -168,8 +168,8 @@ DECLARE_OPROG_FUN_WEAR( wear_prog_blackguard );
 DECLARE_OPROG_FUN_REMOVE( remove_prog_blackguard );
 
 
-void    raw_kill        args( ( CHAR_DATA *victim ) );
-void    raw_kill_org    args( ( CHAR_DATA *victim, int part ) );
+void    raw_kill        ( CHAR_DATA *victim );
+void    raw_kill_org    ( CHAR_DATA *victim, int part );
 
 
 void oprog_set(OBJ_INDEX_DATA *objindex,const char *progtype, const char *name)
@@ -719,7 +719,7 @@ bool sac_prog_cabal_item(OBJ_DATA *obj, CHAR_DATA *ch)
 
     obj_to_obj( obj, container );
     obj_to_room( container, get_room_index(cabal_table[i].room_vnum) );
-    sprintf( buf, "%s yavaşça tekrar oluşuyor.\n\r",
+    snprintf(buf, sizeof(buf), "%s yavaşça tekrar oluşuyor.\n\r",
 	container->short_descr );
     if ( get_room_index(cabal_table[i].room_vnum)->people != NULL )
     {
@@ -814,7 +814,7 @@ void fight_prog_tattoo_kame(OBJ_DATA *obj, CHAR_DATA *ch)
     case 2:
     act_color("$COmzundaki dövme kızıl renkte parlıyor.$c",
 		   ch,NULL,NULL,TO_CHAR,POS_DEAD,CLR_RED);
-       do_yell( ch, (char*)"Kutsal güçle dans etme....");
+       do_yell( ch, "Kutsal güçle dans etme....");
       sn = skill_lookup("holy word");
       spell_holy_word(sn,ch->level,ch,NULL,TARGET_CHAR);
       break;
@@ -1160,7 +1160,7 @@ char eventbuf[MAX_STRING_LENGTH];
   /* event */
   if (!IS_NPC(victim))
 	{
-	sprintf(eventbuf,"%s, %s tarafından öldürüldü.",victim->name, ch->name);
+	snprintf(eventbuf, sizeof(eventbuf),"%s, %s tarafından öldürüldü.",victim->name, ch->name);
 	write_event_log(eventbuf);
   }
 

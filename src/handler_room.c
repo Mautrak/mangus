@@ -345,13 +345,13 @@ void affect_check_room(ROOM_INDEX_DATA *room,int where,int vector)
  {
      switch ( location )
      {
-     case APPLY_ROOM_NONE:	return (char*)"none";
-     case APPLY_ROOM_HEAL:	return (char*)"heal rate";
-     case APPLY_ROOM_MANA:	return (char*)"mana rate";
+     case APPLY_ROOM_NONE:	return "none";
+     case APPLY_ROOM_HEAL:	return "heal rate";
+     case APPLY_ROOM_MANA:	return "mana rate";
      }
 
      bug( "Affect_location_name: unknown location %d.", location );
-     return (char*)"(unknown)";
+     return "(unknown)";
  }
 
 
@@ -443,7 +443,7 @@ void affect_check_room(ROOM_INDEX_DATA *room,int where,int vector)
       {
         send_to_char("Odadaki koruma kalkanı seni engelliyor.\n\r",ch);
         act("$N odaya girdi.",vch,NULL,ch,TO_CHAR);
-       do_wake(vch,(char*)"");
+       do_wake(vch,"");
 
        if ( (paf = affect_find(room->affected,sn)) == NULL )
  	 { bug("Bad paf for lightning shield",0); return; }
@@ -867,7 +867,7 @@ void raffect_back_char( ROOM_INDEX_DATA *room, CHAR_DATA *ch)
      if ( ch->in_room->affected_by )
  	{
  	 if (IS_IMMORTAL(ch))
- 		do_raffects(ch,(char*)"");
+ 		do_raffects(ch,"");
  	 else raffect_to_char( ch->in_room, ch);
  	}
 

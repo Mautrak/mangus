@@ -40,11 +40,11 @@ void do_dilek(CHAR_DATA *ch, char *argument)
     {
         if (!IS_NPC( wishmaster ))
 			continue;
-        if (wishmaster->spec_fun == spec_lookup( (char*)"spec_wishmaster" ))
+        if (wishmaster->spec_fun == spec_lookup( "spec_wishmaster" ))
 			break;
     }
 
-    if (wishmaster == NULL || wishmaster->spec_fun != spec_lookup( (char*)"spec_wishmaster" ))
+    if (wishmaster == NULL || wishmaster->spec_fun != spec_lookup( "spec_wishmaster" ))
     {
         printf_to_char(ch,"Burada dilek dileyemezsin. Bir dilek taşı uzmanı bul.\n\r");
         return;
@@ -73,12 +73,12 @@ void do_dilek(CHAR_DATA *ch, char *argument)
 			printf_to_char(ch,"Hangi dilek taşının özelliklerini öğrenmek istiyorsun?\n\rKullanım: {Rdilek özellik <taş>{x\n\r");
 			return;
 		}
-		else if (is_name(arg2, (char*)"tecrübe"))
+		else if (is_name(arg2, "tecrübe"))
 		{
 			printf_to_char(ch,"Tecrübe taşı ile dilenen dilekten sonra kişi her defasında iki kat tecrübe kazanır.\n\r");
 			return;
 		}
-		else if (is_name(arg2, (char*)"görev"))
+		else if (is_name(arg2, "görev"))
 		{
 			printf_to_char(ch,"Görev taşı ile dilenen dilekten sonra kişi her görev tamamlayışında iki kat GP kazanır.\n\r");
 			return;
@@ -96,11 +96,11 @@ void do_dilek(CHAR_DATA *ch, char *argument)
 			printf_to_char( ch , "Dilek satın almak için {Rdilek satınal <taş>{x kullanılabilir.\n\r");
 			return;
 		}
-		else if (is_name(arg2, (char*)"tecrübe"))
+		else if (is_name(arg2, "tecrübe"))
 		{
 			if(IS_SET(ch->pcdata->dilek,DILEK_FLAG_TECRUBE))
 			{
-				do_say(wishmaster,(char*)"Bu dileği zaten dilemişsin.");
+				do_say(wishmaster,"Bu dileği zaten dilemişsin.");
 				return;
 			}
 			if (ch->pcdata->questpoints >= 3000 && ch->pcdata->bank_s >= 500000)
@@ -108,23 +108,23 @@ void do_dilek(CHAR_DATA *ch, char *argument)
 				ch->pcdata->questpoints -= 3000;
 				ch->pcdata->bank_s -= 500000;
 				SET_BIT(ch->pcdata->dilek,DILEK_FLAG_TECRUBE);
-				do_say(wishmaster,(char*)"İşte bu taş senin dileğin için...");
+				do_say(wishmaster,"İşte bu taş senin dileğin için...");
 				printf_to_char( ch , "\n\r{CHüssam mavi bir dilek taşına son şeklini verdikten sonra kuyuya atıyor.{x\n\r");
 				printf_to_char( ch , "{CKuyudan yükselen bir ışık yavaşça bedenini sarıp seninle bütünleşiyor.{x\n\r");
 				return;
 			}
 			else
 			{
-				sprintf(buf, "Üzgünüm %s, o kadar puanın veya bankada akçen yok.",ch->name);
+				snprintf(buf, sizeof(buf), "Üzgünüm %s, o kadar puanın veya bankada akçen yok.",ch->name);
 				do_say(wishmaster,buf);
 				return;
 			}
 		}
-		else if (is_name(arg2, (char*)"görev"))
+		else if (is_name(arg2, "görev"))
 		{
 			if(IS_SET(ch->pcdata->dilek,DILEK_FLAG_GOREV))
 			{
-				do_say(wishmaster,(char*)"Bu dileği zaten dilemişsin.");
+				do_say(wishmaster,"Bu dileği zaten dilemişsin.");
 				return;
 			}
 			if (ch->pcdata->questpoints >= 3000 && ch->pcdata->bank_s >= 500000)
@@ -132,14 +132,14 @@ void do_dilek(CHAR_DATA *ch, char *argument)
 				ch->pcdata->questpoints -= 3000;
 				ch->pcdata->bank_s -= 500000;
 				SET_BIT(ch->pcdata->dilek,DILEK_FLAG_GOREV);
-				do_say(wishmaster,(char*)"İşte bu taş senin dileğin için...");
+				do_say(wishmaster,"İşte bu taş senin dileğin için...");
 				printf_to_char( ch , "\n\r{CHüssam kızıl bir dilek taşına son şeklini verdikten sonra kuyuya atıyor.{x\n\r");
 				printf_to_char( ch , "{CKuyudan yükselen bir ışık yavaşça bedenini sarıp seninle bütünleşiyor.{x\n\r");
 				return;
 			}
 			else
 			{
-				sprintf(buf, "Üzgünüm %s, o kadar puanın veya bankada akçen yok.",ch->name);
+				snprintf(buf, sizeof(buf), "Üzgünüm %s, o kadar puanın veya bankada akçen yok.",ch->name);
 				do_say(wishmaster,buf);
 				return;
 			}

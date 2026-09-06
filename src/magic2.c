@@ -70,8 +70,8 @@ DECLARE_DO_FUN(do_murder	);
 DECLARE_DO_FUN(do_kill		);
 
 void	raw_kill(CHAR_DATA *victim);
-int	find_door	args( ( CHAR_DATA *ch, char *arg ) );
-int	check_exit	args( ( char *argument ) );
+int	find_door	( CHAR_DATA *ch, char *arg );
+int	check_exit	( char *argument );
 
 extern char *target_name;
 
@@ -257,7 +257,7 @@ void spell_disintegrate( int sn, int level, CHAR_DATA *ch, void *vo, int target)
   /* event */
   if (!IS_NPC(victim))
 	{
-	sprintf(eventbuf,"%s, %s tarafından öldürüldü.",victim->name, ch->name);
+	snprintf(eventbuf, sizeof(eventbuf),"%s, %s tarafından öldürüldü.",victim->name, ch->name);
 	write_event_log(eventbuf);
   }
   
@@ -299,7 +299,7 @@ void spell_arz_yutagi( int sn, int level, CHAR_DATA *ch, void *vo, int target)
   /* event */
   if (!IS_NPC(victim))
 	{
-	sprintf(eventbuf,"%s, %s tarafından öldürüldü.",victim->name, ch->name);
+	snprintf(eventbuf, sizeof(eventbuf),"%s, %s tarafından öldürüldü.",victim->name, ch->name);
 	write_event_log(eventbuf);
   }
 
@@ -324,10 +324,10 @@ void spell_poison_smoke( int sn, int level, CHAR_DATA *ch, void *vo, int target)
 	    (IS_SET(tmp_vict->affected_by,AFF_CHARM) || !IS_NPC(tmp_vict)))
 	  {
 	    if (!can_see(tmp_vict, ch))
-		do_yell(tmp_vict, (char*)"İmdat biri bana saldırıyor!");
+		do_yell(tmp_vict, "İmdat biri bana saldırıyor!");
 	    else
 	      {
-	         sprintf(buf,"Geber %s, seni büyücü köpek!",
+	         snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
 		    (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(tmp_vict))?
 		     ch->doppel->name : ch->name);
 	         do_yell(tmp_vict,buf);
@@ -361,10 +361,10 @@ void spell_blindness_dust( int sn, int level, CHAR_DATA *ch, void *vo, int targe
 	    (IS_SET(tmp_vict->affected_by,AFF_CHARM) || !IS_NPC(tmp_vict)))
 	  {
 	    if (!can_see(tmp_vict, ch))
-		do_yell(tmp_vict, (char*)"İmdat biri bana saldırıyor!");
+		do_yell(tmp_vict, "İmdat biri bana saldırıyor!");
 	    else
 	      {
-	         sprintf(buf,"Geber %s, seni büyücü köpek!",
+	         snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
 		    (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(tmp_vict))?
 		     ch->doppel->name : ch->name);
 	         do_yell(tmp_vict,buf);
@@ -558,7 +558,7 @@ void spell_vanish( int sn, int level, CHAR_DATA *ch, void *vo, int target )
   char_from_room( victim );
   char_to_room( victim, pRoomIndex );
   act( "$n ortaya çıkıyor.", victim, NULL, NULL, TO_ROOM );
-  do_look( victim, (char*)"auto" );
+  do_look( victim, "auto" );
   stop_fighting(victim,TRUE);
   return;
 }
@@ -714,9 +714,9 @@ void spell_demon_summon( int sn, int level, CHAR_DATA *ch, void *vo, int target 
   if (number_percent() < 40)
     {
       if ( can_see( demon, ch ) )
-      do_say(demon, (char*)"Beni rahatsız etmeye nasıl cüret edersin?!!!");
+      do_say(demon, "Beni rahatsız etmeye nasıl cüret edersin?!!!");
     else
-      do_say(demon, (char*)"Beni rahatsız etmeye cüret eden kim?!!!");
+      do_say(demon, "Beni rahatsız etmeye cüret eden kim?!!!");
       do_murder(demon, ch->name);
     }
   else {
@@ -751,10 +751,10 @@ void spell_scourge( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 	      (IS_SET(tmp_vict->affected_by,AFF_CHARM) || !IS_NPC(tmp_vict)))
 	    {
 	      if (!can_see(tmp_vict, ch))
-		do_yell(tmp_vict, (char*)"İmdat biri bana saldırıyor!");
+		do_yell(tmp_vict, "İmdat biri bana saldırıyor!");
 	      else
 		{
-		  sprintf(buf,"Geber %s, seni büyücü köpek!",
+		  snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
 		    (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(tmp_vict))?
 		     ch->doppel->name : ch->name);
 		  do_yell(tmp_vict,buf);
@@ -954,7 +954,7 @@ void spell_guard_call( int sn, int level, CHAR_DATA *ch, void *vo, int target )
       if (IS_NPC(gch) && IS_AFFECTED(gch,AFF_CHARM) && gch->master == ch
 	  && gch->pIndexData->vnum == MOB_VNUM_SPECIAL_GUARD)
 	{
-	  do_say(gch, (char*)"Nasıl yani? Ben yeterince iyi değil miyim?");
+	  do_say(gch, "Nasıl yani? Ben yeterince iyi değil miyim?");
 	  return;
 	}
     }
@@ -1068,9 +1068,9 @@ void spell_nightwalker( int sn, int level, CHAR_DATA *ch, void *vo, int target )
   char_to_room(walker,ch->in_room);
   send_to_char("Gölgelerin içinden bir solucan yükseliyor!\n\r",ch);
   act("Gölgelerin içinden bir solucan yükseliyor!",ch,NULL,NULL,TO_ROOM);
-  sprintf(buf, "Bir solucan önünde eğiliyor.");
+  snprintf(buf, sizeof(buf), "Bir solucan önünde eğiliyor.");
   send_to_char(buf, ch);
-  sprintf(buf, "Bir solucan %s önünde eğiliyor!", ch->name );
+  snprintf(buf, sizeof(buf), "Bir solucan %s önünde eğiliyor!", ch->name );
   act( buf, ch, NULL, NULL, TO_ROOM );
 
   af.where		= TO_AFFECTS;
@@ -1106,12 +1106,12 @@ void spell_eyes( int sn, int level, CHAR_DATA *ch, void *vo, int target )
       }
 
     if (ch==victim)
-      do_look( ch, (char*)"auto" );
+      do_look( ch, "auto" );
     else {
       ori_room = ch->in_room;
       char_from_room( ch );
       char_to_room( ch, victim->in_room );
-      do_look( ch, (char*)"auto" );
+      do_look( ch, "auto" );
       char_from_room( ch );
       char_to_room( ch, ori_room );
     }
@@ -1711,7 +1711,7 @@ void spell_old_randomizer(int sn, int level, CHAR_DATA *ch, void *vo, int target
   send_to_char( "Çabanın ardından tükendiğini hissediyorsun.\n\r", ch);
   ch->hit -= UMIN(200, ch->hit/2);
 
-  sprintf(log_buf, "%s used randomizer in room %d", ch->name, ch->in_room->vnum);
+  snprintf(log_buf, sizeof(log_buf), "%s used randomizer in room %d", ch->name, ch->in_room->vnum);
   log_string(log_buf);
 
 }
@@ -1793,7 +1793,7 @@ void spell_stalker( int sn, int level, CHAR_DATA *ch, void *vo, int target )
   act("Görünmez bir avcı $m avlamaya geldi!",victim,NULL,NULL,TO_ROOM);
   send_to_char("Görünmez bir avcı gönderildi.\n\r", ch);
 
-  sprintf(log_buf, "%s used stalker on %s", ch->name, victim->name);
+  snprintf(log_buf, sizeof(log_buf), "%s used stalker on %s", ch->name, victim->name);
   log_string(log_buf);
 }
 
@@ -1852,7 +1852,7 @@ void spell_tesseract( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 	  if (wch->in_room == NULL)
 	     bug("Tesseract: other char sent to NULL room",0);
 	  else
-	     do_look(wch,(char*)"auto");
+	     do_look(wch,"auto");
 	}
     }
 
@@ -1865,7 +1865,7 @@ void spell_tesseract( int sn, int level, CHAR_DATA *ch, void *vo, int target )
   if (ch->in_room == NULL)
      bug("Tesseract: char sent to NULL room",0);
   else
-     do_look(ch,(char*)"auto");
+     do_look(ch,"auto");
 
   if (gate_pet)
     {
@@ -1876,7 +1876,7 @@ void spell_tesseract( int sn, int level, CHAR_DATA *ch, void *vo, int target )
       if (ch->pet->in_room == NULL)
          bug("Tesseract: pet sent to NULL room",0);
       else
-         do_look(ch->pet,(char*)"auto");
+         do_look(ch->pet,"auto");
     }
 }
 
@@ -2038,15 +2038,15 @@ void spell_shadowlife( int sn, int level, CHAR_DATA *ch, void *vo, int target )
   shadow->silver = 0;
 
   name		= IS_NPC(victim) ? victim->short_descr : victim->name;
-  sprintf( buf, shadow->short_descr, name );
+  snprintf(buf, sizeof(buf), shadow->short_descr, name );
   free_string( shadow->short_descr );
   shadow->short_descr = str_dup( buf );
 
-  sprintf( buf, shadow->long_descr, name );
+  snprintf(buf, sizeof(buf), shadow->long_descr, name );
   free_string( shadow->long_descr );
   shadow->long_descr = str_dup( buf );
 
-  sprintf( buf, shadow->description, name );
+  snprintf(buf, sizeof(buf), shadow->description, name );
   free_string( shadow->description );
   shadow->description = str_dup( buf );
 
@@ -2335,15 +2335,15 @@ void spell_squire( int sn, int level, CHAR_DATA *ch, void *vo, int target )
   squire->armor[3] = interpolate(squire->level,100,0);
   squire->silver = 0;
 
-  sprintf( buf, squire->short_descr, ch->name );
+  snprintf(buf, sizeof(buf), squire->short_descr, ch->name );
   free_string( squire->short_descr );
   squire->short_descr = str_dup( buf );
 
-  sprintf( buf, squire->long_descr, ch->name );
+  snprintf(buf, sizeof(buf), squire->long_descr, ch->name );
   free_string( squire->long_descr );
   squire->long_descr = str_dup( buf );
 
-  sprintf( buf, squire->description, ch->name );
+  snprintf(buf, sizeof(buf), squire->description, ch->name );
   free_string( squire->description );
   squire->description = str_dup( buf );
 
@@ -2613,7 +2613,7 @@ void spell_disperse( int sn, int level, CHAR_DATA *ch, void *vo, int target )
   	  char_from_room( vch );
   	  char_to_room( vch, pRoomIndex );
   	  act( "$n yavaşça beliriyor.", vch, NULL, NULL, TO_ROOM );
-	  do_look( vch, (char*)"auto" );
+	  do_look( vch, "auto" );
 	}
     }
   af.where		= TO_AFFECTS;
@@ -2821,10 +2821,10 @@ switch( dice(1,5) )
               (IS_SET(vch->affected_by,AFF_CHARM) || !IS_NPC(vch)))
             {
             if (!can_see(vch, ch))
-                do_yell(vch, (char*)"İmdat biri bana saldırıyor!");
+                do_yell(vch, "İmdat biri bana saldırıyor!");
             else
               {
-                 sprintf(buf,"Geber %s, seni büyücü köpek!",
+                 snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
                     (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(vch))?
                      ch->doppel->name : ch->name);
                  do_yell(vch,buf);
@@ -3111,9 +3111,9 @@ void spell_animate_dead(int sn,int level, CHAR_DATA *ch, void *vo,int target )
   undead->master = ch;
   undead->leader = ch;
 
-  sprintf(buf, "%s beden hortlak", obj->name);
+  snprintf(buf, sizeof(buf), "%s beden hortlak", obj->name);
   undead->name = str_dup(buf);
-  sprintf(buf2,"%s",obj->short_descr);
+  snprintf(buf2, sizeof(buf2),"%s",obj->short_descr);
   argument = (char*)alloc_perm ( MAX_STRING_LENGTH );
   arg = (char*)alloc_perm ( MAX_STRING_LENGTH );
   argument = buf2;
@@ -3131,9 +3131,9 @@ void spell_animate_dead(int sn,int level, CHAR_DATA *ch, void *vo,int target )
 		}
 	 }
 	}
-  sprintf(buf, "%s'in hortlak bedeni", buf3);
+  snprintf(buf, sizeof(buf), "%s'in hortlak bedeni", buf3);
   undead->short_descr = str_dup(buf);
-  sprintf(buf, "%s'in hortlak bedeni yürürken sendeliyor.\n\r", buf3);
+  snprintf(buf, sizeof(buf), "%s'in hortlak bedeni yürürken sendeliyor.\n\r", buf3);
   undead->long_descr = str_dup(buf);
 
   for(obj2 = obj->contains;obj2;obj2=next)
@@ -3142,7 +3142,7 @@ void spell_animate_dead(int sn,int level, CHAR_DATA *ch, void *vo,int target )
 	obj_from_obj(obj2);
 	obj_to_char(obj2, undead);
     }
-    interpret( undead,(char*)"giy tümü", TRUE);
+    interpret( undead,"giy tümü", TRUE);
 
   af.where	 = TO_AFFECTS;
   af.type      = sn;
@@ -3154,9 +3154,9 @@ void spell_animate_dead(int sn,int level, CHAR_DATA *ch, void *vo,int target )
   affect_to_char( ch, &af );
 
   send_to_char("Mistik bir güçle onu canlandırıyorsun!\n\r",ch);
-  sprintf(buf,"Mistik bir güçle %s %s'i canlandırıyor!",ch->name,obj->name);
+  snprintf(buf, sizeof(buf),"Mistik bir güçle %s %s'i canlandırıyor!",ch->name,obj->name);
   act(buf,ch,NULL,NULL,TO_ROOM);
-  sprintf(buf,"%s sana bakarken onu rahatsız etmenin bedelini ödetmeyi planlıyor!",obj->short_descr);
+  snprintf(buf, sizeof(buf),"%s sana bakarken onu rahatsız etmenin bedelini ödetmeyi planlıyor!",obj->short_descr);
   act(buf,ch,NULL,NULL,TO_CHAR);
   extract_obj (obj);
 	return;
@@ -3549,7 +3549,7 @@ void spell_power_kill ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
   /* event */
   if (!IS_NPC(victim))
 	{
-	sprintf(eventbuf,"%s, %s tarafından öldürüldü.",victim->name, ch->name);
+	snprintf(eventbuf, sizeof(eventbuf),"%s, %s tarafından öldürüldü.",victim->name, ch->name);
 	write_event_log(eventbuf);
   }
 
@@ -3586,15 +3586,15 @@ void spell_eyed_sword ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 	eyed->pit = hometown_table[ch->hometown].pit[i];
 	eyed->level = ch->level;
 
-	sprintf( buf, eyed->short_descr, ch->name );
+	snprintf(buf, sizeof(buf), eyed->short_descr, ch->name );
 	free_string( eyed->short_descr );
 	eyed->short_descr = str_dup( buf );
 
-	sprintf( buf, eyed->description, ch->name	 );
+	snprintf(buf, sizeof(buf), eyed->description, ch->name	 );
 	free_string( eyed->description );
 	eyed->description = str_dup( buf );
 
-        sprintf( buf, eyed->pIndexData->extra_descr->description, ch->name );
+        snprintf(buf, sizeof(buf), eyed->pIndexData->extra_descr->description, ch->name );
         eyed->extra_descr = new_extra_descr();
         eyed->extra_descr->keyword =
 		str_dup(eyed->pIndexData->extra_descr->keyword);
@@ -3764,19 +3764,19 @@ void spell_magic_jar ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 	fire->pit = hometown_table[ch->hometown].pit[i];
 	fire->level = ch->level;
 
-	sprintf( buf, fire->name, victim->name);
+	snprintf(buf, sizeof(buf), fire->name, victim->name);
 	free_string( fire->name );
 	fire->name = str_dup( buf );
 
-	sprintf( buf, fire->short_descr, victim->name);
+	snprintf(buf, sizeof(buf), fire->short_descr, victim->name);
 	free_string( fire->short_descr );
 	fire->short_descr = str_dup( buf );
 
-	sprintf( buf, fire->description, victim->name );
+	snprintf(buf, sizeof(buf), fire->description, victim->name );
 	free_string( fire->description );
 	fire->description = str_dup( buf );
 
-        sprintf( buf,fire->pIndexData->extra_descr->description, victim->name );
+        snprintf(buf, sizeof(buf),fire->pIndexData->extra_descr->description, victim->name );
         fire->extra_descr = new_extra_descr();
 	fire->extra_descr->keyword =
 		str_dup( fire->pIndexData->extra_descr->keyword );
@@ -3788,7 +3788,7 @@ void spell_magic_jar ( int sn, int level, CHAR_DATA *ch, void *vo , int target)
 	fire->cost = 0;
 	obj_to_char( fire , ch );
  SET_BIT(victim->act,PLR_NO_EXP);
- sprintf(buf,"%s'in ruhunu yakalayıp şişenin içine koyuyorsun.\n\r",victim->name);
+ snprintf(buf, sizeof(buf),"%s'in ruhunu yakalayıp şişenin içine koyuyorsun.\n\r",victim->name);
  send_to_char( buf , ch);
  return;
 }
@@ -4052,15 +4052,15 @@ void spell_fire_shield ( int sn, int level, CHAR_DATA *ch, void *vo , int target
 	fire->pit = hometown_table[ch->hometown].pit[i];
 	fire->level = ch->level;
 
-	sprintf( buf, fire->short_descr, arg);
+	snprintf(buf, sizeof(buf), fire->short_descr, arg);
 	free_string( fire->short_descr );
 	fire->short_descr = str_dup( buf );
 
-	sprintf( buf, fire->description, arg	 );
+	snprintf(buf, sizeof(buf), fire->description, arg	 );
 	free_string( fire->description );
 	fire->description = str_dup( buf );
 
-        sprintf( buf, fire->pIndexData->extra_descr->description, arg );
+        snprintf(buf, sizeof(buf), fire->pIndexData->extra_descr->description, arg );
         fire->extra_descr = new_extra_descr();
 	fire->extra_descr->keyword =
 		str_dup( fire->pIndexData->extra_descr->keyword );
@@ -4478,7 +4478,7 @@ void spell_severity_force( int sn, int level, CHAR_DATA *ch, void *vo,int target
     char buf[MAX_STRING_LENGTH];
     int dam;
 
-    sprintf(buf,"Arzı %s'e doğru kırıyorsun.\n\r",victim->name);
+    snprintf(buf, sizeof(buf),"Arzı %s'e doğru kırıyorsun.\n\r",victim->name);
     send_to_char(buf, ch);
     act("$n arzı sana doğru kırıyor!", ch, NULL, victim, TO_VICT );
     if (IS_AFFECTED(victim,AFF_FLYING))
@@ -5298,10 +5298,10 @@ void spell_blade_barrier(int sn,int level,CHAR_DATA *ch, void *vo,int target)
         (IS_SET(victim->affected_by,AFF_CHARM) || !IS_NPC(victim)))
       {
         if (!can_see(victim, ch))
-          do_yell(victim, (char*)"İmdat biri bana saldırıyor!");
+          do_yell(victim, "İmdat biri bana saldırıyor!");
         else
           {
-            sprintf(buf,"Geber %s, seni büyücü köpek!",
+            snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
                     (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(victim))?
                     ch->doppel->name : ch->name);
             do_yell(victim,buf);
@@ -5614,14 +5614,14 @@ void spell_farsight( int sn, int level, CHAR_DATA *ch, void *vo, int target )
       }
 
     if (ch->in_room == room)
-      do_look( ch, (char*)"auto" );
+      do_look( ch, "auto" );
     else
     {
       mount = MOUNTED(ch) ? 1 : 0;
       oldr = ch->in_room;
       char_from_room( ch );
       char_to_room( ch, room );
-      do_look( ch, (char*)"auto" );
+      do_look( ch, "auto" );
       char_from_room( ch );
       char_to_room( ch, oldr );
       if (mount)
@@ -5865,7 +5865,7 @@ void spell_sword_of_justice( int sn, int level, CHAR_DATA *ch, void *vo, int tar
   if (saves_spell(level,victim, DAM_MENTAL))
 	      dam /= 2;
 
-  do_yell(ch, (char*)"Adalet Kılıcı!");
+  do_yell(ch, "Adalet Kılıcı!");
   act("Adalet kılıcı ortaya çıkarak $E vuruyor!",ch,NULL,victim,TO_ALL);
 
   damage(ch,victim,dam,sn,DAM_MENTAL, TRUE);
@@ -5971,12 +5971,12 @@ void spell_eyes_of_tiger( int sn, int level, CHAR_DATA *ch, void *vo, int target
       }
 
     if (ch==victim)
-      do_look( ch, (char*)"auto" );
+      do_look( ch, "auto" );
     else {
       ori_room = ch->in_room;
       char_from_room( ch );
       char_to_room( ch, victim->in_room );
-      do_look( ch, (char*)"auto" );
+      do_look( ch, "auto" );
       char_from_room( ch );
       char_to_room( ch, ori_room );
     }
@@ -6293,9 +6293,9 @@ void spell_mummify( int sn, int level, CHAR_DATA *ch, void *vo, int target )
   undead->master = ch;
   undead->leader = ch;
 
-  sprintf(buf, "%s beden hortlak", obj->name);
+  snprintf(buf, sizeof(buf), "%s beden hortlak", obj->name);
   undead->name = str_dup(buf);
-  sprintf(buf2,"%s",obj->short_descr);
+  snprintf(buf2, sizeof(buf2),"%s",obj->short_descr);
   argument = (char *)alloc_perm ( MAX_STRING_LENGTH );
   arg = (char *)alloc_perm ( MAX_STRING_LENGTH );
   argument = buf2;
@@ -6313,9 +6313,9 @@ void spell_mummify( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 		}
 	 }
 	}
-  sprintf(buf, "%s'in mumyalanmış bedeni", buf3);
+  snprintf(buf, sizeof(buf), "%s'in mumyalanmış bedeni", buf3);
   undead->short_descr = str_dup(buf);
-  sprintf(buf, "%s'in mumyalanmış bedeni aksayarak dolaşıyor.\n\r", buf3);
+  snprintf(buf, sizeof(buf), "%s'in mumyalanmış bedeni aksayarak dolaşıyor.\n\r", buf3);
   undead->long_descr = str_dup(buf);
 
   for(obj2 = obj->contains;obj2;obj2=next)
@@ -6324,7 +6324,7 @@ void spell_mummify( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 	obj_from_obj(obj2);
 	obj_to_char(obj2, undead);
     }
-    interpret( undead,(char*)"giy tümü", TRUE);
+    interpret( undead,"giy tümü", TRUE);
 
   af.where	 = TO_AFFECTS;
   af.type      = sn;
@@ -6336,10 +6336,10 @@ void spell_mummify( int sn, int level, CHAR_DATA *ch, void *vo, int target )
   affect_to_char( ch, &af );
 
   send_to_char("Mistik güçlerin yardımıyla ona yaşam veriyorsun!\n\r",ch);
-  sprintf(buf,"Mistik güçlerin yardımıyla %s %s'i mumyalayarak ona yaşam veriyor!",
+  snprintf(buf, sizeof(buf),"Mistik güçlerin yardımıyla %s %s'i mumyalayarak ona yaşam veriyor!",
 		ch->name,obj->name);
   act(buf,ch,NULL,NULL,TO_ROOM);
-  sprintf(buf,"%s sana bakarak onu rahatsız etmenin bedelini ödetmenin planlarını yapıyor!",
+  snprintf(buf, sizeof(buf),"%s sana bakarak onu rahatsız etmenin bedelini ödetmenin planlarını yapıyor!",
 	obj->short_descr);
   act(buf,ch,NULL,NULL,TO_CHAR);
   extract_obj (obj);

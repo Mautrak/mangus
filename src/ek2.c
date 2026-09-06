@@ -36,11 +36,11 @@ büdü-de
 
 const struct sonek_type sonek_table[] =
 {
-	{{(char*)"n",(char*)"ın" ,(char*)"in"	,(char*)"un" ,(char*)"ün"	}},//f - un
- 	{{(char*)"y",(char*)"ı"	 ,(char*)"i"	,(char*)"u"	 ,(char*)"ü"	}},//g - u
-  {{(char*)"y",(char*)"a"	 ,(char*)"e"	,(char*)"a"	 ,(char*)"e"	}},//h - e
-  {{(char*)""	,(char*)"da" ,(char*)"de"	,(char*)"da" ,(char*)"de"	}},//j - de
-  {{(char*)""	,(char*)"dan",(char*)"den",(char*)"dan",(char*)"den"	}},//k - den
+	{{"n","ın" ,"in"	,"un" ,"ün"	}},//f - un
+ 	{{"y","ı"	 ,"i"	,"u"	 ,"ü"	}},//g - u
+  {{"y","a"	 ,"e"	,"a"	 ,"e"	}},//h - e
+  {{""	,"da" ,"de"	,"da" ,"de"	}},//j - de
+  {{""	,"dan","den","dan","den"	}},//k - den
      	{{NULL	,NULL	,NULL	,NULL	,NULL	}}
 };
 
@@ -108,19 +108,19 @@ char *ek_olustur(char *sozcuk, char tip)
 		switch(son_unlu)
 		{
 			case 'a':case 'ı':
-				sprintf(buf,"%s%s%s",sozcuk,sonek_table[i].ek[0],sonek_table[i].ek[1]);
+				snprintf(buf, sizeof(buf),"%s%s%s",sozcuk,sonek_table[i].ek[0],sonek_table[i].ek[1]);
 				break;
 			case 'e':case 'i':
-				sprintf(buf,"%s%s%s",sozcuk,sonek_table[i].ek[0],sonek_table[i].ek[2]);
+				snprintf(buf, sizeof(buf),"%s%s%s",sozcuk,sonek_table[i].ek[0],sonek_table[i].ek[2]);
 				break;
 			case 'o':case 'u':
-				sprintf(buf,"%s%s%s",sozcuk,sonek_table[i].ek[0],sonek_table[i].ek[3]);
+				snprintf(buf, sizeof(buf),"%s%s%s",sozcuk,sonek_table[i].ek[0],sonek_table[i].ek[3]);
 				break;
 			case 'ö':case 'ü':
-				sprintf(buf,"%s%s%s",sozcuk,sonek_table[i].ek[0],sonek_table[i].ek[4]);
+				snprintf(buf, sizeof(buf),"%s%s%s",sozcuk,sonek_table[i].ek[0],sonek_table[i].ek[4]);
 				break;
 			default:
-				sprintf(buf,"%s%s%s",sozcuk,sonek_table[i].ek[0],sonek_table[i].ek[1]);
+				snprintf(buf, sizeof(buf),"%s%s%s",sozcuk,sonek_table[i].ek[0],sonek_table[i].ek[1]);
 				break;
 		}
 	}
@@ -129,19 +129,19 @@ char *ek_olustur(char *sozcuk, char tip)
 		switch(son_unlu)
 		{
 			case 'a':case 'ı':
-				sprintf(buf,"%s%s",sozcuk,sonek_table[i].ek[1]);
+				snprintf(buf, sizeof(buf),"%s%s",sozcuk,sonek_table[i].ek[1]);
 				break;
 			case 'e':case 'i':
-				sprintf(buf,"%s%s",sozcuk,sonek_table[i].ek[2]);
+				snprintf(buf, sizeof(buf),"%s%s",sozcuk,sonek_table[i].ek[2]);
 				break;
 			case 'o':case 'u':
-				sprintf(buf,"%s%s%s",sozcuk,sonek_table[i].ek[0],sonek_table[i].ek[3]);
+				snprintf(buf, sizeof(buf),"%s%s%s",sozcuk,sonek_table[i].ek[0],sonek_table[i].ek[3]);
 				break;
 			case 'ö':case 'ü':
-				sprintf(buf,"%s%s%s",sozcuk,sonek_table[i].ek[0],sonek_table[i].ek[4]);
+				snprintf(buf, sizeof(buf),"%s%s%s",sozcuk,sonek_table[i].ek[0],sonek_table[i].ek[4]);
 				break;
 			default:
-				sprintf(buf,"%s%s",sozcuk,sonek_table[i].ek[1]);
+				snprintf(buf, sizeof(buf),"%s%s",sozcuk,sonek_table[i].ek[1]);
 				break;
 		}
 	}

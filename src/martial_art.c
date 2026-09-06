@@ -66,8 +66,8 @@ DECLARE_DO_FUN(do_throw_spear	);
 DECLARE_SPELL_FUN(	spell_poison	);
 DECLARE_SPELL_FUN(	spell_blindness	);
 
-void	one_hit		args( ( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary) );
-void	set_fighting	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
+void	one_hit		( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary);
+void	set_fighting	( CHAR_DATA *ch, CHAR_DATA *victim );
 
 /*
  * Disarm a creature.
@@ -402,10 +402,10 @@ void do_bash( CHAR_DATA *ch, char *argument )
 		&& !FightingCheck)
       {
 	if (!can_see(victim, ch))
-	  do_yell(victim, (char*)"İmdat! Biri bana omuz atıyor!");
+	  do_yell(victim, "İmdat! Biri bana omuz atıyor!");
 	else
 	  {
-      sprintf(buf, "İmdat! %s bana omuz atıyor!",
+      snprintf(buf, sizeof(buf), "İmdat! %s bana omuz atıyor!",
 		(is_affected(ch,gsn_doppelganger) && !IS_IMMORTAL(victim)) ?
 		ch->doppel->name : ch->name);
 	    do_yell(victim, buf);
@@ -562,10 +562,10 @@ void do_dirt( CHAR_DATA *ch, char *argument )
 		&& !FightingCheck)
       {
     	if (!can_see(victim,ch))
-	  do_yell(victim, (char*)"Biri gözlerime toz attı!");
+	  do_yell(victim, "Biri gözlerime toz attı!");
 	else
 	  {
-      sprintf(buf, "Geber %s!  Seni hilekar!", (is_affected(ch,
+      snprintf(buf, sizeof(buf), "Geber %s!  Seni hilekar!", (is_affected(ch,
 		gsn_doppelganger) && !IS_IMMORTAL(victim)) ? ch->doppel->name
 		: ch->name);
 	    do_yell(victim, buf);
@@ -704,10 +704,10 @@ void do_trip( CHAR_DATA *ch, char *argument )
 		&& !FightingCheck)
       {
 	if (!can_see(victim, ch))
-	  do_yell(victim, (char*)"İmdat! Biri bana çelme taktı!");
+	  do_yell(victim, "İmdat! Biri bana çelme taktı!");
 	else
 	  {
-      sprintf(buf, "İmdat! %s bana çelme taktı!",
+      snprintf(buf, sizeof(buf), "İmdat! %s bana çelme taktı!",
 		(is_affected(ch,gsn_doppelganger) && !IS_IMMORTAL(victim)) ?
 		ch->doppel->name : ch->name);
 	    do_yell(victim, buf);
@@ -822,10 +822,10 @@ void do_backstab( CHAR_DATA *ch, char *argument )
 	&& victim->position == POS_FIGHTING )
       {
 	if (!can_see(victim, ch))
-	  do_yell(victim, (char*)"İmdat! Biri beni ardılanla vurdu!");
+	  do_yell(victim, "İmdat! Biri beni ardılanla vurdu!");
 	else
 	  {
-      sprintf( buf, "Geber %s, seni kahrolası madrabaz!",
+      snprintf(buf, sizeof(buf), "Geber %s, seni kahrolası madrabaz!",
 		(is_affected(ch,gsn_doppelganger) && !IS_IMMORTAL(victim)) ?
 		ch->doppel->name : ch->name );
 	    do_yell( victim, buf );
@@ -918,10 +918,10 @@ void do_cleave( CHAR_DATA *ch, char *argument )
     if (!(IS_NPC(victim)) && !(IS_NPC(ch)) && victim->position == POS_FIGHTING)
       {
 	if (!can_see(victim, ch))
-	  do_yell(victim, (char*)"İmdat! Biri bana saldırıyor!");
+	  do_yell(victim, "İmdat! Biri bana saldırıyor!");
 	else
 	  {
-	    sprintf( buf, "Geber %s, seni kasap kılıklı aptal!",
+	    snprintf(buf, sizeof(buf), "Geber %s, seni kasap kılıklı aptal!",
 		(is_affected(ch,gsn_doppelganger) && !IS_IMMORTAL(victim)) ?
 		ch->doppel->name : ch->name );
 	    do_yell( victim, buf );
@@ -999,10 +999,10 @@ void do_ambush( CHAR_DATA *ch, char *argument )
 	&& victim->position == POS_FIGHTING )
       {
 	if (!can_see(victim, ch))
-	  do_yell(victim, (char*)"İmdat! Pusuya düştüm!");
+	  do_yell(victim, "İmdat! Pusuya düştüm!");
 	else
 	  {
-      sprintf( buf, "İmdat! %s tarafından pusuya düşürüldüm!",
+      snprintf(buf, sizeof(buf), "İmdat! %s tarafından pusuya düşürüldüm!",
 		    (is_affected(ch,gsn_doppelganger)&& !IS_IMMORTAL(victim)) ?
 		    ch->doppel->name : ch->name );
 	    do_yell( victim, buf );
@@ -1250,7 +1250,7 @@ void do_disarm( CHAR_DATA *ch, char *argument )
     argument = one_argument(argument,arg);
     if (!IS_NPC(ch) && arg[0] != '\0')
     {
-    	 if (is_name(arg,(char*)"second") ) disarm_second = 1;
+    	 if (is_name(arg,"second") ) disarm_second = 1;
 	 else disarm_second = 0;
     }
 
@@ -1375,10 +1375,10 @@ void do_nerve(CHAR_DATA *ch, char *argument)
 	&& victim->position != POS_FIGHTING )
       {
 	if (!can_see(victim, ch))
-	  do_yell(victim, (char*)"İmdat! Biri bana saldırıyor!");
+	  do_yell(victim, "İmdat! Biri bana saldırıyor!");
 	else
 	{
-    sprintf( buf, "İmdat! %s bana saldırdı!",
+    snprintf(buf, sizeof(buf), "İmdat! %s bana saldırdı!",
 		  (is_affected(ch,gsn_doppelganger) && !IS_IMMORTAL(victim)) ?
 		  ch->doppel->name : ch->name );
 	  do_yell( victim, buf );
@@ -1603,10 +1603,10 @@ void do_assassinate( CHAR_DATA *ch, char *argument )
 	&& victim->position == POS_FIGHTING)
       {
 	if (!can_see(victim, ch))
-	  do_yell(victim, (char*)"İmdat! Biri bana suikast denedi!");
+	  do_yell(victim, "İmdat! Biri bana suikast denedi!");
 	else
 	  {
-      sprintf( buf, "İmdat! %s bana suikast düzenlemeye çalıştı!",
+      snprintf(buf, sizeof(buf), "İmdat! %s bana suikast düzenlemeye çalıştı!",
 		    (is_affected(ch,gsn_doppelganger) && !IS_IMMORTAL(victim)) ?
 		    ch->doppel->name : ch->name );
 	    do_yell( victim, buf );
@@ -1889,10 +1889,10 @@ void do_strangle(CHAR_DATA *ch, char *argument)
 	damage(ch,victim,0,gsn_strangle,DAM_NONE, TRUE);
 	check_improve(ch,gsn_strangle,FALSE,1);
 	if (!can_see(victim, ch))
-	  do_yell(victim, (char*)"İmdat! Biri beni boğuyor!");
+	  do_yell(victim, "İmdat! Biri beni boğuyor!");
 	else
 	{
-    sprintf(buf, "İmdat! %s beni boğazlıyor!",
+    snprintf(buf, sizeof(buf), "İmdat! %s beni boğazlıyor!",
 		    (is_affected(ch,gsn_doppelganger)&& !IS_IMMORTAL(victim))?
 		    ch->doppel->name : ch->name );
 	    if (!IS_NPC(victim)) do_yell(victim,buf);
@@ -2003,10 +2003,10 @@ void do_blackjack(CHAR_DATA *ch, char *argument)
 	if (!IS_NPC(victim))
 	{
 	if (!can_see(victim, ch))
-	  do_yell(victim, (char*)"İmdat! Biri beni copluyor!");
+	  do_yell(victim, "İmdat! Biri beni copluyor!");
 	else
 	{
-    sprintf(buf, "İmdat! %s beni copluyor!",
+    snprintf(buf, sizeof(buf), "İmdat! %s beni copluyor!",
 		    (is_affected(ch,gsn_doppelganger)&& !IS_IMMORTAL(victim))?
 		    ch->doppel->name : ch->name );
 	    if (!IS_NPC(victim)) do_yell(victim,buf);
@@ -2285,11 +2285,11 @@ void do_trophy(CHAR_DATA *ch, char *argument)
 	  trophy = create_object( get_obj_index( trophy_vnum ), level );
 	  trophy->timer = ch->level * 2;
 
-	  sprintf( buf, trophy->short_descr, part->from );
+	  snprintf(buf, sizeof(buf), trophy->short_descr, part->from );
 	  free_string( trophy->short_descr );
 	  trophy->short_descr = str_dup( buf );
 
-	  sprintf( buf, trophy->description, part->from );
+	  snprintf(buf, sizeof(buf), trophy->description, part->from );
 	  free_string( trophy->description );
 	  trophy->description = str_dup( buf );
 	  trophy->cost  = 0;
@@ -2902,7 +2902,7 @@ void do_hara( CHAR_DATA *ch, char *argument)
   act_color("$C$n vücudunu kesti ve şimdi bir ölü figürü canlandırıyor.$c",ch,NULL,NULL,TO_ROOM,
 	POS_FIGHTING,CLR_RED);
 	check_improve(ch,gsn_hara_kiri,TRUE,2);
-	do_sleep( ch, (char*)"");
+	do_sleep( ch, "");
 	SET_BIT(ch->act,PLR_HARA_KIRI);
 
                af.where     = TO_AFFECTS;
@@ -3123,7 +3123,7 @@ void do_shield( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    if ( check_material(shield,(char*)"platinum") || shield->pIndexData->limit != -1)
+    if ( check_material(shield,"platinum") || shield->pIndexData->limit != -1)
 	return;
 
     if (axe->value[0] == WEAPON_AXE )
@@ -3207,7 +3207,7 @@ void do_weapon( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    if ( check_material(wield,(char*)"platinum") || wield->pIndexData->limit != -1 )
+    if ( check_material(wield,"platinum") || wield->pIndexData->limit != -1 )
 	return;
 
 
@@ -3413,10 +3413,10 @@ void do_tail( CHAR_DATA *ch, char *argument )
 		&& !FightingCheck)
       {
 	if (!can_see(victim, ch))
-	  do_yell(victim, (char*)"İmdat! Biri bana vurdu!");
+	  do_yell(victim, "İmdat! Biri bana vurdu!");
 	else
 	  {
-      sprintf(buf, "İmdat! %s bana kuyruğuyla vurmaya çalıştı!",
+      snprintf(buf, sizeof(buf), "İmdat! %s bana kuyruğuyla vurmaya çalıştı!",
 		(is_affected(ch,gsn_doppelganger) && !IS_IMMORTAL(victim)) ?
 		ch->doppel->name : ch->name);
 	    do_yell(victim, buf);
@@ -3470,7 +3470,7 @@ void do_concentrate( CHAR_DATA *ch, char *argument)
 	ch->mana -= 50;
 	ch->move /= 2;
 
-	do_sit(ch,(char*)"");
+	do_sit(ch,"");
   send_to_char("Oturarak rahatlıyor, bir sonraki dövüşe konsantre oluyorsun.!\n\r",ch);
 	act_color("$C$n bir sonraki dövüşe konsantre oluyor.$c",ch,NULL,NULL,TO_ROOM,
 	POS_FIGHTING,CLR_RED);
@@ -3641,7 +3641,7 @@ void do_katana(CHAR_DATA *ch, char *argument)
 
       katana->value[2] = ch->level / 10;
 
-      sprintf( buf,katana->pIndexData->extra_descr->description,ch->name );
+      snprintf(buf, sizeof(buf),katana->pIndexData->extra_descr->description,ch->name );
       katana->extra_descr = new_extra_descr();
       katana->extra_descr->keyword =
 		str_dup( katana->pIndexData->extra_descr->keyword );
@@ -3865,10 +3865,10 @@ void do_poison_smoke( CHAR_DATA *ch, char *argument)
 	    (IS_SET(tmp_vict->affected_by,AFF_CHARM) || !IS_NPC(tmp_vict)))
 	  {
 	    if (!can_see(tmp_vict, ch))
-		do_yell(tmp_vict, (char*)"İmdat! Biri bana saldırıyor!");
+		do_yell(tmp_vict, "İmdat! Biri bana saldırıyor!");
 	    else
 	      {
-          sprintf(buf,"Geber %s, seni büyücü köpek!",
+          snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
 		    (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(tmp_vict))?
 		     ch->doppel->name : ch->name);
 	         do_yell(tmp_vict,buf);
@@ -3920,10 +3920,10 @@ void do_blindness_dust( CHAR_DATA *ch, char *argument)
 	    (IS_SET(tmp_vict->affected_by,AFF_CHARM) || !IS_NPC(tmp_vict)))
 	  {
 	    if (!can_see(tmp_vict, ch))
-      do_yell(tmp_vict,(char*)"İmdat! Biri bana saldırıyor!");
+      do_yell(tmp_vict,"İmdat! Biri bana saldırıyor!");
 	    else
 	      {
-          sprintf(buf,"Geber %s, seni büyücü köpek!",
+          snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
 		    (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(tmp_vict))?
 		     ch->doppel->name : ch->name);
 	         do_yell(tmp_vict,buf);
@@ -4047,10 +4047,10 @@ void do_lash( CHAR_DATA *ch, char *argument )
 		&& !FightingCheck)
       {
 	if (!can_see(victim, ch))
-	  do_yell(victim, (char*)"İmdat! Biri beni kamçılıyor!");
+	  do_yell(victim, "İmdat! Biri beni kamçılıyor!");
 	else
 	  {
-      sprintf(buf, "İmdat! %s beni kamçılıyor!",
+      snprintf(buf, sizeof(buf), "İmdat! %s beni kamçılıyor!",
 		(is_affected(ch,gsn_doppelganger) && !IS_IMMORTAL(victim)) ?
 		ch->doppel->name : ch->name);
 	    do_yell(victim, buf);

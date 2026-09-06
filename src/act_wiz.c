@@ -96,9 +96,9 @@ extern int max_on;
 /*
  * Local functions.
  */
-ROOM_INDEX_DATA *	find_location	args( ( CHAR_DATA *ch, char *arg ) );
-bool write_to_descriptor  args(( int desc, char *txt, int length ));
-void update_total_played        args( ( CHAR_DATA *ch) );
+ROOM_INDEX_DATA *	find_location	( CHAR_DATA *ch, char *arg );
+bool write_to_descriptor  ( int desc, char *txt, int length );
+void update_total_played        ( CHAR_DATA *ch);
 
 void do_cabal_scan( CHAR_DATA *ch, char *argument )
 {
@@ -120,7 +120,7 @@ void do_cabal_scan( CHAR_DATA *ch, char *argument )
     if (IS_IMMORTAL(ch) || ch->cabal == i)
 	show = 1;
     else show = 0;
-    sprintf(buf1, " Cabal: %-11s, room %4d, item %4d, ptr: %-20s ",
+    snprintf(buf1, sizeof(buf1), " Cabal: %-11s, room %4d, item %4d, ptr: %-20s ",
 	cabal_table[i].short_name,
         cabal_table[i].room_vnum,
         cabal_table[i].obj_vnum,
@@ -132,10 +132,10 @@ void do_cabal_scan( CHAR_DATA *ch, char *argument )
 		in_obj->in_obj != NULL; in_obj = in_obj->in_obj )
 		;
 	if (in_obj->carried_by)
-	 sprintf(buf2,"\n\r\t\tcarried_by: %s\n\r",PERS(in_obj->carried_by,ch));
+	 snprintf(buf2, sizeof(buf2),"\n\r\t\tcarried_by: %s\n\r",PERS(in_obj->carried_by,ch));
 	else
 	{
-	 sprintf(buf2,"\n\r\t\t\t\t\tin_room: %s\n\r", in_obj->in_room != NULL ?
+	 snprintf(buf2, sizeof(buf2),"\n\r\t\t\t\t\tin_room: %s\n\r", in_obj->in_room != NULL ?
 		in_obj->in_room->name : "BUG!!" );
 	 if (in_obj->in_room != NULL
 		&& in_obj->in_room->vnum == cabal_table[ch->cabal].room_vnum)
@@ -417,7 +417,7 @@ void do_limited( CHAR_DATA *ch, char *argument )
       return;
     }
     nMatch = 0;
-    sprintf( buf, "%-35s [%5d]  Limit: %3d  Current: %3d\n\r",
+    snprintf(buf, sizeof(buf), "%-35s [%5d]  Limit: %3d  Current: %3d\n\r",
 		   obj_index->short_descr,
 		   obj_index->vnum,
 	           obj_index->limit,
@@ -430,14 +430,14 @@ void do_limited( CHAR_DATA *ch, char *argument )
             {
 	      ingameCount++;
 	      if ( obj->carried_by != NULL )
-		sprintf(buf, "Carried by %-30s\n\r", obj->carried_by->name);
+		snprintf(buf, sizeof(buf), "Carried by %-30s\n\r", obj->carried_by->name);
 	      if ( obj->in_room != NULL )
-		sprintf(buf, "At %-20s [%d]\n\r", obj->in_room->name, obj->in_room->vnum);
+		snprintf(buf, sizeof(buf), "At %-20s [%d]\n\r", obj->in_room->name, obj->in_room->vnum);
 	      if ( obj->in_obj != NULL )
-		sprintf(buf, "In %-20s [%d] \n\r", obj->in_obj->short_descr, obj->in_obj->pIndexData->vnum);
+		snprintf(buf, sizeof(buf), "In %-20s [%d] \n\r", obj->in_obj->short_descr, obj->in_obj->pIndexData->vnum);
 	      send_to_char( buf, ch );
 	    }
-	    sprintf(buf, "  %d found in game. %d should be in pFiles.\n\r",
+	    snprintf(buf, sizeof(buf), "  %d found in game. %d should be in pFiles.\n\r",
 			ingameCount, obj_index->count-ingameCount);
 	    send_to_char( buf, ch );
    return;
@@ -451,7 +451,7 @@ void do_limited( CHAR_DATA *ch, char *argument )
         nMatch++;
 	if ( obj_index->limit != -1 )  {
 	  lCount++;
-          sprintf( buf, "%-37s [%5d]  Limit: %3d  Current: %3d\n\r",
+          snprintf(buf, sizeof(buf), "%-37s [%5d]  Limit: %3d  Current: %3d\n\r",
 		   obj_index->short_descr,
 		   obj_index->vnum,
 	           obj_index->limit,
@@ -460,7 +460,7 @@ void do_limited( CHAR_DATA *ch, char *argument )
 	  strcat( output, buf );
 	}
       }
-  sprintf( buf, "\n\r%d of %d objects are limited.\n\r", lCount, nMatch );
+  snprintf(buf, sizeof(buf), "\n\r%d of %d objects are limited.\n\r", lCount, nMatch );
   strcat( output, buf );
   page_to_char(output,ch);
   return;
@@ -553,7 +553,7 @@ void do_wiznet( CHAR_DATA *ch, char *argument )
 
     if (IS_SET(ch->wiznet,wiznet_table[flag].flag))
     {
-	sprintf(buf,"You will no longer see %s on wiznet.\n\r",
+	snprintf(buf, sizeof(buf),"You will no longer see %s on wiznet.\n\r",
 	        wiznet_table[flag].name);
 	send_to_char(buf,ch);
 	REMOVE_BIT(ch->wiznet,wiznet_table[flag].flag);
@@ -561,7 +561,7 @@ void do_wiznet( CHAR_DATA *ch, char *argument )
     }
     else
     {
-    	sprintf(buf,"You will now see %s on wiznet.\n\r",
+    	snprintf(buf, sizeof(buf),"You will now see %s on wiznet.\n\r",
 		wiznet_table[flag].name);
 	send_to_char(buf,ch);
     	SET_BIT(ch->wiznet,wiznet_table[flag].flag);
@@ -607,32 +607,32 @@ void do_tick( CHAR_DATA *ch, char *argument )
 	send_to_char("tick track: track update\n\r",ch);
 	return;
     }
-    if (is_name(arg, (char*)"area") )  {
+    if (is_name(arg, "area") )  {
 	area_update( );
 	send_to_char("Area updated.\n\r", ch );
 	return;
     }
-    if (is_name(arg, (char*)"char player") )  {
+    if (is_name(arg, "char player") )  {
 	char_update( );
 	send_to_char("Players updated.\n\r", ch );
 	return;
     }
-    if (is_name(arg, (char*)"obj") )  {
+    if (is_name(arg, "obj") )  {
 	obj_update( );
 	send_to_char("Obj updated.\n\r", ch );
 	return;
     }
-    if (is_name(arg, (char*)"room") )  {
+    if (is_name(arg, "room") )  {
 	room_update( );
 	send_to_char("Room updated.\n\r", ch );
 	return;
     }
-    if (is_name(arg, (char*)"track") )  {
+    if (is_name(arg, "track") )  {
 	track_update( );
 	send_to_char("Track updated.\n\r", ch );
 	return;
     }
-    do_tick(ch,(char*)"");
+    do_tick(ch,"");
     return;
 }
 
@@ -736,7 +736,7 @@ void do_nochannels( CHAR_DATA *ch, char *argument )
         send_to_char( "The gods have restored your channel priviliges.\n\r",
 		      victim );
         send_to_char( "NOCHANNELS removed.\n\r", ch );
-	sprintf(buf,"$N restores channels to %s",victim->name);
+	snprintf(buf, sizeof(buf),"$N restores channels to %s",victim->name);
 	wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
     }
     else
@@ -745,7 +745,7 @@ void do_nochannels( CHAR_DATA *ch, char *argument )
         send_to_char( "The gods have revoked your channel priviliges.\n\r",
 		       victim );
         send_to_char( "NOCHANNELS set.\n\r", ch );
-	sprintf(buf,"$N revokes %s's channels.",victim->name);
+	snprintf(buf, sizeof(buf),"$N revokes %s's channels.",victim->name);
 	wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
     }
 
@@ -856,7 +856,7 @@ void do_bamfin( CHAR_DATA *ch, char *argument )
 
 	if (argument[0] == '\0')
 	{
-	    sprintf(buf,"Your poofin is %s\n\r",ch->pcdata->bamfin);
+	    snprintf(buf, sizeof(buf),"Your poofin is %s\n\r",ch->pcdata->bamfin);
 	    send_to_char(buf,ch);
 	    return;
 	}
@@ -870,7 +870,7 @@ void do_bamfin( CHAR_DATA *ch, char *argument )
 	free_string( ch->pcdata->bamfin );
 	ch->pcdata->bamfin = str_dup( argument );
 
-        sprintf(buf,"Your poofin is now %s\n\r",ch->pcdata->bamfin);
+        snprintf(buf, sizeof(buf),"Your poofin is now %s\n\r",ch->pcdata->bamfin);
         send_to_char(buf,ch);
     }
     return;
@@ -888,7 +888,7 @@ void do_bamfout( CHAR_DATA *ch, char *argument )
 
         if (argument[0] == '\0')
         {
-            sprintf(buf,"Your poofout is %s\n\r",ch->pcdata->bamfout);
+            snprintf(buf, sizeof(buf),"Your poofout is %s\n\r",ch->pcdata->bamfout);
             send_to_char(buf,ch);
             return;
         }
@@ -902,7 +902,7 @@ void do_bamfout( CHAR_DATA *ch, char *argument )
         free_string( ch->pcdata->bamfout );
         ch->pcdata->bamfout = str_dup( argument );
 
-        sprintf(buf,"Your poofout is now %s\n\r",ch->pcdata->bamfout);
+        snprintf(buf, sizeof(buf),"Your poofout is now %s\n\r",ch->pcdata->bamfout);
         send_to_char(buf,ch);
     }
     return;
@@ -942,12 +942,12 @@ void do_deny( CHAR_DATA *ch, char *argument )
 
     SET_BIT(victim->act, PLR_DENY);
     send_to_char( "You are denied access!\n\r", victim );
-    sprintf(buf,"$N denies access to %s",victim->name);
+    snprintf(buf, sizeof(buf),"$N denies access to %s",victim->name);
     wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
     send_to_char( "OK.\n\r", ch );
     save_char_obj(victim);
     stop_fighting(victim,TRUE);
-    do_quit( victim, (char*)"" );
+    do_quit( victim, "" );
 
     return;
 }
@@ -1033,7 +1033,7 @@ void do_duyuru( CHAR_DATA *ch, char *argument )
     }
 
     /* event */
-    sprintf(eventbuf,"DUYURU: %s", argument);
+    snprintf(eventbuf, sizeof(eventbuf),"DUYURU: %s", argument);
     write_event_log(eventbuf);
 
     return;
@@ -1087,7 +1087,7 @@ void do_transfer( CHAR_DATA *ch, char *argument )
 	    &&   can_see( ch, d->character ) )
 	    {
 		char buf[MAX_STRING_LENGTH];
-		sprintf( buf, "%s %s", d->character->name, arg2 );
+		snprintf(buf, sizeof(buf), "%s %s", d->character->name, arg2 );
 		do_transfer( ch, buf );
 	    }
 	}
@@ -1138,7 +1138,7 @@ void do_transfer( CHAR_DATA *ch, char *argument )
     act( "$n arrives from a puff of smoke.", victim, NULL, NULL, TO_ROOM );
     if ( ch != victim )
 	act( "$n has transferred you.", ch, NULL, victim, TO_VICT );
-    do_look( victim, (char*)"auto" );
+    do_look( victim, "auto" );
     send_to_char( "Ok.\n\r", ch );
 }
 
@@ -1259,7 +1259,7 @@ void do_goto( CHAR_DATA *ch, char *argument )
         }
     }
 
-    do_look( ch, (char*)"auto" );
+    do_look( ch, "auto" );
     return;
 }
 
@@ -1315,7 +1315,7 @@ void do_violate( CHAR_DATA *ch, char *argument )
         }
     }
 
-    do_look( ch, (char*)"auto" );
+    do_look( ch, "auto" );
     return;
 }
 
@@ -1416,25 +1416,25 @@ void do_rstat( CHAR_DATA *ch, char *argument )
 
     if (ch->in_room->affected_by)
     {
-	sprintf(buf, "Affected by %s\n\r",
+	snprintf(buf, sizeof(buf), "Affected by %s\n\r",
 	    raffect_bit_name(ch->in_room->affected_by));
 	send_to_char(buf,ch);
     }
 
     if (ch->in_room->room_flags)
     {
-	sprintf(buf, "Roomflags %s\n\r",
+	snprintf(buf, sizeof(buf), "Roomflags %s\n\r",
 	    flag_room_name(ch->in_room->room_flags));
 	send_to_char(buf,ch);
     }
 
-    sprintf( buf, "Name: '%s'\n\rArea: '%s'\n\rOwner: '%s'\n\r",
+    snprintf(buf, sizeof(buf), "Name: '%s'\n\rArea: '%s'\n\rOwner: '%s'\n\r",
 	location->name,
 	location->area->name ,
 	location->owner );
     send_to_char( buf, ch );
 
-    sprintf( buf,
+    snprintf(buf, sizeof(buf),
 	"Vnum: %d  Sector: %d  Light: %d  Healing: %d  Mana: %d\n\r",
 	location->vnum,
 	location->sector_type,
@@ -1443,7 +1443,7 @@ void do_rstat( CHAR_DATA *ch, char *argument )
 	location->mana_rate );
     send_to_char( buf, ch );
 
-    sprintf( buf,
+    snprintf(buf, sizeof(buf),
 	"Room flags: %ld.\n\rDescription:\n\r%s",
 	location->room_flags,
 	location->description );
@@ -1489,7 +1489,7 @@ void do_rstat( CHAR_DATA *ch, char *argument )
 
 	if ( ( pexit = location->exit[door] ) != NULL )
 	{
-	    sprintf( buf,
+	    snprintf(buf, sizeof(buf),
 		"Door: %d.  To: %d.  Key: %d.  Exit flags: %d.\n\rKeyword: '%s'.  Description: %s",
 
 		door,
@@ -1504,7 +1504,7 @@ void do_rstat( CHAR_DATA *ch, char *argument )
     }
     send_to_char("Tracks:\n\r",ch);
     for (rh = location->history;rh != NULL;rh = rh->next) {
-      sprintf(buf,"%s took door %i.\n\r",rh->name,rh->went);
+      snprintf(buf, sizeof(buf),"%s took door %i.\n\r",rh->name,rh->went);
       send_to_char(buf,ch);
     }
     return;
@@ -1533,36 +1533,36 @@ void do_ostat( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    sprintf( buf, "Name(s): %s\n\r",
+    snprintf(buf, sizeof(buf), "Name(s): %s\n\r",
 	obj->name );
     send_to_char( buf, ch );
 
-    sprintf( buf, "Vnum: %d  Type: %s  Material: %s\n\r",
+    snprintf(buf, sizeof(buf), "Vnum: %d  Type: %s  Material: %s\n\r",
 	obj->pIndexData->vnum, item_type_name(obj), obj->material );
     send_to_char( buf, ch );
 
-    sprintf( buf, "Format: %s  Random: %s  Resets: %d\n\r",
+    snprintf(buf, sizeof(buf), "Format: %s  Random: %s  Resets: %d\n\r",
 	obj->pIndexData->new_format ? "new" : "old", obj->pIndexData->random_object ? "yes" : "no", obj->pIndexData->reset_num );
     send_to_char( buf, ch );
 
-    sprintf( buf, "Short description: %s\n\rLong description: %s\n\r",
+    snprintf(buf, sizeof(buf), "Short description: %s\n\rLong description: %s\n\r",
 	obj->short_descr, obj->description );
     send_to_char( buf, ch );
 
-    sprintf( buf, "Wear bits: %s\n\rExtra bits: %s\n\r",
+    snprintf(buf, sizeof(buf), "Wear bits: %s\n\rExtra bits: %s\n\r",
 	wear_bit_name(obj->wear_flags), extra_bit_name( obj->extra_flags ) );
     send_to_char( buf, ch );
 
-    sprintf( buf, "Number: %d/%d  Weight: %d/%d/%d gr.\n\r",
+    snprintf(buf, sizeof(buf), "Number: %d/%d  Weight: %d/%d/%d gr.\n\r",
 	1,           get_obj_number( obj ),
 	obj->weight, get_obj_weight( obj ),get_true_weight(obj) );
     send_to_char( buf, ch );
 
-    sprintf( buf, "Level: %d  Cost: %d  Condition: %d  Timer: %d Count: %d\n\r",
+    snprintf(buf, sizeof(buf), "Level: %d  Cost: %d  Condition: %d  Timer: %d Count: %d\n\r",
 	obj->level, obj->cost, obj->condition, obj->timer, obj->pIndexData->count );
     send_to_char( buf, ch );
 
-    sprintf( buf,
+    snprintf(buf, sizeof(buf),
 	"In room: %d  In object: %s  Carried by: %s  Wear_loc: %d\n\r",
 	obj->in_room    == NULL    ?        0 : obj->in_room->vnum,
 	obj->in_obj     == NULL    ? "(none)" : obj->in_obj->short_descr,
@@ -1572,7 +1572,7 @@ void do_ostat( CHAR_DATA *ch, char *argument )
 	obj->wear_loc );
     send_to_char( buf, ch );
 
-    sprintf( buf, "Values: %d %d %d %d %d\n\r",
+    snprintf(buf, sizeof(buf), "Values: %d %d %d %d %d\n\r",
 	obj->value[0], obj->value[1], obj->value[2], obj->value[3],
 	obj->value[4] );
     send_to_char( buf, ch );
@@ -1584,7 +1584,7 @@ void do_ostat( CHAR_DATA *ch, char *argument )
     	case ITEM_SCROLL:
     	case ITEM_POTION:
     	case ITEM_PILL:
-	    sprintf( buf, "Level %d spells of:", obj->value[0] );
+	    snprintf(buf, sizeof(buf), "Level %d spells of:", obj->value[0] );
 	    send_to_char( buf, ch );
 
 	    if ( obj->value[1] >= 0 && obj->value[1] < MAX_SKILL )
@@ -1620,7 +1620,7 @@ void do_ostat( CHAR_DATA *ch, char *argument )
 
     	case ITEM_WAND:
     	case ITEM_STAFF:
-	    sprintf( buf, "Has %d(%d) charges of level %d",
+	    snprintf(buf, sizeof(buf), "Has %d(%d) charges of level %d",
 	    	obj->value[1], obj->value[2], obj->value[0] );
 	    send_to_char( buf, ch );
 
@@ -1635,7 +1635,7 @@ void do_ostat( CHAR_DATA *ch, char *argument )
 	break;
 
 	case ITEM_DRINK_CON:
-	    sprintf(buf,"It holds %s-colored %s.\n\r",
+	    snprintf(buf, sizeof(buf),"It holds %s-colored %s.\n\r",
 		liq_table[obj->value[2]].liq_color,
 		liq_table[obj->value[2]].liq_name);
 	    send_to_char(buf,ch);
@@ -1687,41 +1687,41 @@ void do_ostat( CHAR_DATA *ch, char *argument )
 		    break;
  	    }
 	    if (obj->pIndexData->new_format)
-	    	sprintf(buf,"Damage is %dd%d (average %d)\n\r",
+	    	snprintf(buf, sizeof(buf),"Damage is %dd%d (average %d)\n\r",
 		    obj->value[1],obj->value[2],
 		    (1 + obj->value[2]) * obj->value[1] / 2);
 	    else
-	    	sprintf( buf, "Damage is %d to %d (average %d)\n\r",
+	    	snprintf(buf, sizeof(buf), "Damage is %d to %d (average %d)\n\r",
 	    	    obj->value[1], obj->value[2],
 	    	    ( obj->value[1] + obj->value[2] ) / 2 );
 	    send_to_char( buf, ch );
 
-	    sprintf(buf,"Damage noun is %s.\n\r",
+	    snprintf(buf, sizeof(buf),"Damage noun is %s.\n\r",
 		attack_table[obj->value[3]].noun);
 	    send_to_char(buf,ch);
 
 	    if (obj->value[4])  /* weapon flags */
 	    {
-	        sprintf(buf,"Weapons flags: %s\n\r",
+	        snprintf(buf, sizeof(buf),"Weapons flags: %s\n\r",
 		    weapon_bit_name(obj->value[4]));
 	        send_to_char(buf,ch);
             }
 	break;
 
     	case ITEM_ARMOR:
-	    sprintf( buf,
+	    snprintf(buf, sizeof(buf),
 	    "Armor class is %d pierce, %d bash, %d slash, and %d vs. magic\n\r",
 	        obj->value[0], obj->value[1], obj->value[2], obj->value[3] );
 	    send_to_char( buf, ch );
 	break;
 
         case ITEM_CONTAINER:
-            sprintf(buf,"Capacity: %d#  Maximum weight: %d#  flags: %s\n\r",
+            snprintf(buf, sizeof(buf),"Capacity: %d#  Maximum weight: %d#  flags: %s\n\r",
                 obj->value[0], obj->value[3], cont_bit_name(obj->value[1]));
             send_to_char(buf,ch);
             if (obj->value[4] != 100)
             {
-                sprintf(buf,"Weight multiplier: %d%%\n\r",
+                snprintf(buf, sizeof(buf),"Weight multiplier: %d%%\n\r",
 		    obj->value[4]);
                 send_to_char(buf,ch);
             }
@@ -1754,48 +1754,48 @@ void do_ostat( CHAR_DATA *ch, char *argument )
 
     for ( paf = obj->affected; paf != NULL; paf = paf->next )
     {
-	sprintf( buf, "Affects %s by %d, level %d",
+	snprintf(buf, sizeof(buf), "Affects %s by %d, level %d",
 	    affect_loc_name( paf->location ), paf->modifier,paf->level );
 	send_to_char(buf,ch);
 	if ( paf->duration > -1)
-	    sprintf(buf,", %d hours.\n\r",paf->duration);
+	    snprintf(buf, sizeof(buf),", %d hours.\n\r",paf->duration);
 	else
-	    sprintf(buf,".\n\r");
+	    snprintf(buf, sizeof(buf),".\n\r");
 	send_to_char( buf, ch );
 	if (paf->bitvector)
 	{
 	    switch(paf->where)
 	    {
 		case TO_AFFECTS:
-		    sprintf(buf,"Adds %s affect.\n",
+		    snprintf(buf, sizeof(buf),"Adds %s affect.\n",
 			affect_bit_name(paf->bitvector));
 		    break;
                 case TO_WEAPON:
-                    sprintf(buf,"Adds %s weapon flags.\n",
+                    snprintf(buf, sizeof(buf),"Adds %s weapon flags.\n",
                         weapon_bit_name(paf->bitvector));
 		    break;
 		case TO_OBJECT:
-		    sprintf(buf,"Adds %s object flag.\n",
+		    snprintf(buf, sizeof(buf),"Adds %s object flag.\n",
 			extra_bit_name(paf->bitvector));
 		    break;
 		case TO_IMMUNE:
-		    sprintf(buf,"Adds immunity to %s.\n",
+		    snprintf(buf, sizeof(buf),"Adds immunity to %s.\n",
 			imm_bit_name(paf->bitvector));
 		    break;
 		case TO_RESIST:
-		    sprintf(buf,"Adds resistance to %s.\n\r",
+		    snprintf(buf, sizeof(buf),"Adds resistance to %s.\n\r",
 			imm_bit_name(paf->bitvector));
 		    break;
 		case TO_VULN:
-		    sprintf(buf,"Adds vulnerability to %s.\n\r",
+		    snprintf(buf, sizeof(buf),"Adds vulnerability to %s.\n\r",
 			imm_bit_name(paf->bitvector));
 		    break;
 		case TO_DETECTS:
-		    sprintf(buf,"Adds %s detection.\n\r",
+		    snprintf(buf, sizeof(buf),"Adds %s detection.\n\r",
 			detect_bit_name(paf->bitvector));
 		    break;
 		default:
-		    sprintf(buf,"Unknown bit %d: %d\n\r",
+		    snprintf(buf, sizeof(buf),"Unknown bit %d: %d\n\r",
 			paf->where,paf->bitvector);
 		    break;
 	    }
@@ -1806,7 +1806,7 @@ void do_ostat( CHAR_DATA *ch, char *argument )
     if (!obj->enchanted)
     for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
     {
-	sprintf( buf, "Affects %s by %d, level %d.\n\r",
+	snprintf(buf, sizeof(buf), "Affects %s by %d, level %d.\n\r",
 	    affect_loc_name( paf->location ), paf->modifier,paf->level );
 	send_to_char( buf, ch );
         if (paf->bitvector)
@@ -1814,38 +1814,38 @@ void do_ostat( CHAR_DATA *ch, char *argument )
             switch(paf->where)
             {
                 case TO_AFFECTS:
-                    sprintf(buf,"Adds %s affect.\n",
+                    snprintf(buf, sizeof(buf),"Adds %s affect.\n",
                         affect_bit_name(paf->bitvector));
                     break;
                 case TO_OBJECT:
-                    sprintf(buf,"Adds %s object flag.\n",
+                    snprintf(buf, sizeof(buf),"Adds %s object flag.\n",
                         extra_bit_name(paf->bitvector));
                     break;
                 case TO_IMMUNE:
-                    sprintf(buf,"Adds immunity to %s.\n",
+                    snprintf(buf, sizeof(buf),"Adds immunity to %s.\n",
                         imm_bit_name(paf->bitvector));
                     break;
                 case TO_RESIST:
-                    sprintf(buf,"Adds resistance to %s.\n\r",
+                    snprintf(buf, sizeof(buf),"Adds resistance to %s.\n\r",
                         imm_bit_name(paf->bitvector));
                     break;
                 case TO_VULN:
-                    sprintf(buf,"Adds vulnerability to %s.\n\r",
+                    snprintf(buf, sizeof(buf),"Adds vulnerability to %s.\n\r",
                         imm_bit_name(paf->bitvector));
                     break;
                 case TO_DETECTS:
-                    sprintf(buf,"Adds %s detection.\n\r",
+                    snprintf(buf, sizeof(buf),"Adds %s detection.\n\r",
                         detect_bit_name(paf->bitvector));
                     break;
                 default:
-                    sprintf(buf,"Unknown bit %d: %d\n\r",
+                    snprintf(buf, sizeof(buf),"Unknown bit %d: %d\n\r",
                         paf->where,paf->bitvector);
                     break;
             }
             send_to_char(buf,ch);
         }
     }
-    sprintf( buf, "Object progs: " );
+    snprintf(buf, sizeof(buf), "Object progs: " );
     if ( obj->pIndexData->progtypes != 0 )  {
 	if ( IS_SET(obj->progtypes, OPROG_GET ) )
 	   strcat( buf, "get " );
@@ -1866,7 +1866,7 @@ void do_ostat( CHAR_DATA *ch, char *argument )
     }
     strcat( buf, "\n\r" );
     send_to_char( buf, ch );
-    sprintf(buf,"Damage condition : %d (%s) ", obj->condition,
+    snprintf(buf, sizeof(buf),"Damage condition : %d (%s) ", obj->condition,
 			get_cond_alias(obj) );
     send_to_char(buf,ch);
     send_to_char("\n\r",ch);
@@ -1921,13 +1921,13 @@ void do_mstat( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    sprintf( buf, "Name: [%s] Reset Zone: [%s] Logon: %s\r",
+    snprintf(buf, sizeof(buf), "Name: [%s] Reset Zone: [%s] Logon: %s\r",
 	victim->name,
 	(IS_NPC(victim) &&victim->zone) ? victim->zone->name : "?",
 	ctime( &ch->logon ) );
     send_to_char( buf, ch );
 
-    sprintf( buf,
+    snprintf(buf, sizeof(buf),
 	"Vnum: %d  Format: %s  Race: %s(%s)  Sex: %s  Room: %d\n\r",
 	IS_NPC(victim) ? victim->pIndexData->vnum : 0,
 	IS_NPC(victim) ? "NPC" : "PC",
@@ -1939,13 +1939,13 @@ void do_mstat( CHAR_DATA *ch, char *argument )
 
     if (IS_NPC(victim))
     {
-	sprintf(buf,"Count: %d  Killed: %d  ---  Status: %d  Cabal: %d\n\r",
+	snprintf(buf, sizeof(buf),"Count: %d  Killed: %d  ---  Status: %d  Cabal: %d\n\r",
 	    victim->pIndexData->count,victim->pIndexData->killed,
 	    victim->status, victim->cabal);
 	send_to_char(buf,ch);
     }
 
-    sprintf( buf,
+    snprintf(buf, sizeof(buf),
 "Str: %d(%d)  Int: %d(%d)  Wis: %d(%d)  Dex: %d(%d)  Con: %d(%d) Cha: %d(%d)\n\r",
 	victim->perm_stat[STAT_STR],
 	get_curr_stat(victim,STAT_STR),
@@ -1962,7 +1962,7 @@ void do_mstat( CHAR_DATA *ch, char *argument )
     send_to_char( buf, ch );
 
 
-    sprintf( buf, "Yp: %d/%d  Mp: %d/%d  Zp: %d/%d  Practices: %d\n\r",
+    snprintf(buf, sizeof(buf), "Yp: %d/%d  Mp: %d/%d  Zp: %d/%d  Practices: %d\n\r",
 	victim->hit,         victim->max_hit,
 	victim->mana,        victim->max_mana,
 	victim->move,        victim->max_move,
@@ -1970,9 +1970,9 @@ void do_mstat( CHAR_DATA *ch, char *argument )
     send_to_char( buf, ch );
 
     if ( IS_NPC(victim) )
-      sprintf( buf2, "%d", victim->alignment );
+      snprintf(buf2, sizeof(buf2), "%d", victim->alignment );
     else  {
-      sprintf( buf2, "%s",
+      snprintf(buf2, sizeof(buf2), "%s",
 	victim->ethos==1?"Law-":
 	victim->ethos==2?"Neut-":
 	victim->ethos==3?"Cha-":"none-" );
@@ -1981,10 +1981,10 @@ void do_mstat( CHAR_DATA *ch, char *argument )
 	IS_NEUTRAL(victim)?"Neut":
 	IS_EVIL(victim)?"Evil":"Other" );
     }
-    sprintf(buf,"It belives the religion of %s.\n\r",
+    snprintf(buf, sizeof(buf),"It belives the religion of %s.\n\r",
 	IS_NPC(victim) ? "None" : religion_table[victim->religion].name);
     send_to_char(buf,ch);
-    sprintf( buf,
+    snprintf(buf, sizeof(buf),
 	"Lv: %d  Class: %s  Align: %s  Silver: %ld  Exp: %d\n\r",
 	victim->level,
 	IS_NPC(victim) ? "mobile" : class_table[victim->iclass].name[1],
@@ -1992,12 +1992,12 @@ void do_mstat( CHAR_DATA *ch, char *argument )
 	victim->silver, victim->exp );
     send_to_char( buf, ch );
 
-    sprintf(buf,"Armor: pierce: %d  bash: %d  slash: %d  magic: %d\n\r",
+    snprintf(buf, sizeof(buf),"Armor: pierce: %d  bash: %d  slash: %d  magic: %d\n\r",
 	    GET_AC(victim,AC_PIERCE), GET_AC(victim,AC_BASH),
 	    GET_AC(victim,AC_SLASH),  GET_AC(victim,AC_EXOTIC));
     send_to_char(buf,ch);
 
-    sprintf( buf,
+    snprintf(buf, sizeof(buf),
 	"Hit: %d  Dam: %d  Saves: %d  Size: %s  Position: %s  Wimpy: %d\n\r",
 	GET_HITROLL(victim), GET_DAMROLL(victim), victim->saving_throw,
 	size_table[victim->size].name, position_table[victim->position].name,
@@ -2006,12 +2006,12 @@ void do_mstat( CHAR_DATA *ch, char *argument )
 
     if (IS_NPC(victim))
     {
-	sprintf(buf, "Damage: %dd%d  Message:  %s\n\r",
+	snprintf(buf, sizeof(buf), "Damage: %dd%d  Message:  %s\n\r",
 	    victim->damage[DICE_NUMBER],victim->damage[DICE_TYPE],
 	    attack_table[victim->dam_type].noun);
 	send_to_char(buf,ch);
     }
-    sprintf( buf, "Fighting: %s Death: %d Carry number: %d  Carry weight: %ld\n\r",
+    snprintf(buf, sizeof(buf), "Fighting: %s Death: %d Carry number: %d  Carry weight: %ld\n\r",
 	victim->fighting ? victim->fighting->name : "(none)"
 	,IS_NPC(victim) ? 0 : victim->pcdata->death,
 	victim->carry_number, get_carry_weight(victim) / 10 );
@@ -2019,7 +2019,7 @@ void do_mstat( CHAR_DATA *ch, char *argument )
 
     if ( !IS_NPC(victim) )
     {
-	sprintf( buf,
+	snprintf(buf, sizeof(buf),
 "Thirst: %d  Hunger: %d  Full: %d  Drunk: %d Bloodlust: %d Desire: %d\n\r",
 	    victim->pcdata->condition[COND_THIRST],
 	    victim->pcdata->condition[COND_HUNGER],
@@ -2033,7 +2033,7 @@ void do_mstat( CHAR_DATA *ch, char *argument )
 
     if (!IS_NPC(victim))
     {
-    	sprintf( buf,
+    	snprintf(buf, sizeof(buf),
 	    "Age: %d  Played: %d  Last Level: %d  Timer: %d\n\r",
 	    get_age(victim),
 	    (int) (victim->played + current_time - victim->logon) / 3600,
@@ -2042,78 +2042,78 @@ void do_mstat( CHAR_DATA *ch, char *argument )
     	send_to_char( buf, ch );
     }
 
-    sprintf(buf, "Act: %s\n\r",act_bit_name(victim->act));
+    snprintf(buf, sizeof(buf), "Act: %s\n\r",act_bit_name(victim->act));
     send_to_char(buf,ch);
 
     if (victim->comm)
     {
-    	sprintf(buf,"Comm: %s\n\r",comm_bit_name(victim->comm));
+    	snprintf(buf, sizeof(buf),"Comm: %s\n\r",comm_bit_name(victim->comm));
     	send_to_char(buf,ch);
     }
 
     if (IS_NPC(victim) && victim->off_flags)
     {
-    	sprintf(buf, "Offense: %s\n\r",off_bit_name(victim->off_flags));
+    	snprintf(buf, sizeof(buf), "Offense: %s\n\r",off_bit_name(victim->off_flags));
 	send_to_char(buf,ch);
     }
 
     if (victim->imm_flags)
     {
-	sprintf(buf, "Immune: %s\n\r",imm_bit_name(victim->imm_flags));
+	snprintf(buf, sizeof(buf), "Immune: %s\n\r",imm_bit_name(victim->imm_flags));
 	send_to_char(buf,ch);
     }
 
     if (victim->res_flags)
     {
-	sprintf(buf, "Resist: %s\n\r", imm_bit_name(victim->res_flags));
+	snprintf(buf, sizeof(buf), "Resist: %s\n\r", imm_bit_name(victim->res_flags));
 	send_to_char(buf,ch);
     }
 
     if (victim->vuln_flags)
     {
-	sprintf(buf, "Vulnerable: %s\n\r", imm_bit_name(victim->vuln_flags));
+	snprintf(buf, sizeof(buf), "Vulnerable: %s\n\r", imm_bit_name(victim->vuln_flags));
 	send_to_char(buf,ch);
     }
 
     if (victim->detection)
     {
-     sprintf(buf, "Detection: %s\n\r",
+     snprintf(buf, sizeof(buf), "Detection: %s\n\r",
 	(victim->detection) ? detect_bit_name(victim->detection) : "(none)");
      send_to_char(buf,ch);
     }
 
-    sprintf(buf, "Form: %s\n\rParts: %s\n\r",
+    snprintf(buf, sizeof(buf), "Form: %s\n\rParts: %s\n\r",
 	form_bit_name(victim->form), part_bit_name(victim->parts));
     send_to_char(buf,ch);
 
     if (victim->affected_by)
     {
-	sprintf(buf, "Affected by %s\n\r",
+	snprintf(buf, sizeof(buf), "Affected by %s\n\r",
 	    affect_bit_name(victim->affected_by));
 	send_to_char(buf,ch);
     }
 
-    sprintf( buf, "Master: %s  Leader: %s  Pet: %s\n\r",
+    snprintf(buf, sizeof(buf), "Master: %s  Leader: %s  Pet: %s\n\r",
 	victim->master      ? victim->master->name   : "(none)",
 	victim->leader      ? victim->leader->name   : "(none)",
 	victim->pet 	    ? victim->pet->name	     : "(none)");
     send_to_char( buf, ch );
 
-    sprintf( buf, "Short description: %s\n\rLong  description: %s",
+    snprintf(buf, sizeof(buf), "Short description: %s\n\rLong  description: %s",
 	victim->short_descr,
 	victim->long_descr[0] != '\0' ? victim->long_descr : "(none)\n\r" );
     send_to_char( buf, ch );
 
     if ( IS_NPC(victim) && victim->spec_fun != 0 )
     {
-	sprintf(buf,"Mobile has special procedure %s.\n\r",
+	snprintf(buf, sizeof(buf),"Mobile has special procedure %s.\n\r",
 		spec_name(victim->spec_fun));
 	send_to_char(buf,ch);
     }
 
     for ( paf = victim->affected; paf != NULL; paf = paf->next )
     {
-	sprintf( buf,
+	snprintf(buf, sizeof(buf),
 	    "Spell: '%s' modifies %s by %d for %d hours with bits %s, level %d.\n\r",
 	    skill_table[(int) paf->type].name[1],
 	    affect_loc_name( paf->location ),
@@ -2129,17 +2129,17 @@ void do_mstat( CHAR_DATA *ch, char *argument )
        {
 	if (IS_SET(victim->act,PLR_QUESTOR))
 	{
-	 sprintf(buf,"Questgiver: %d QuestPnts: %d	Questnext: %d\n\r",
+	 snprintf(buf, sizeof(buf),"Questgiver: %d QuestPnts: %d	Questnext: %d\n\r",
 		victim->pcdata->questgiver,victim->pcdata->questpoints,
 		victim->pcdata->nextquest);
 	 send_to_char(buf, ch);
-	 sprintf(buf,"QuestCntDown: %d	Questmob: %d\n\r",
+	 snprintf(buf, sizeof(buf),"QuestCntDown: %d	Questmob: %d\n\r",
 		victim->pcdata->countdown,victim->pcdata->questmob);
 	 send_to_char(buf, ch);
 	}
 	if  (!IS_SET(victim->act,PLR_QUESTOR))
 	{
-	 sprintf(buf,"QuestPnts: %d	Questnext: %d    NOT QUESTING\n\r",
+	 snprintf(buf, sizeof(buf),"QuestPnts: %d	Questnext: %d    NOT QUESTING\n\r",
 		victim->pcdata->questpoints,victim->pcdata->nextquest);
 	 send_to_char(buf, ch);
 	}
@@ -2147,7 +2147,7 @@ void do_mstat( CHAR_DATA *ch, char *argument )
 
     if ( IS_NPC(victim)  )
       if ( victim->pIndexData->progtypes != 0 )  {
-        sprintf( buf, "Mobile progs: " );
+        snprintf(buf, sizeof(buf), "Mobile progs: " );
 	if ( IS_SET( victim->progtypes, MPROG_BRIBE ) )
 	  strcat( buf, "bribe " );
 	if ( IS_SET( victim->progtypes, MPROG_SPEECH ) )
@@ -2167,11 +2167,11 @@ void do_mstat( CHAR_DATA *ch, char *argument )
         strcat( buf, "\n\r" );
         send_to_char( buf, ch );
     }
-    sprintf(buf, "Last fought: %10s  Last fight time: %s",
+    snprintf(buf, sizeof(buf), "Last fought: %10s  Last fight time: %s",
 	victim->last_fought!=NULL?victim->last_fought->name:"none",
 	ctime( &(victim->last_fight_time) )     );
     send_to_char( buf, ch );
-    sprintf(buf, "In_mind: [%s] Hunting: [%s]\n\r",
+    snprintf(buf, sizeof(buf), "In_mind: [%s] Hunting: [%s]\n\r",
 		victim->in_mind != NULL ? victim->in_mind : "none",
 		victim->hunting != NULL ? victim->hunting->name : "none");
     send_to_char(buf,ch);
@@ -2247,7 +2247,7 @@ void do_mfind( CHAR_DATA *ch, char *argument )
 	    if ( fAll || is_name( argument, pMobIndex->player_name ) )
 	    {
 		found = TRUE;
-		sprintf( buf, "[%5d] %s\n\r",
+		snprintf(buf, sizeof(buf), "[%5d] %s\n\r",
 		    pMobIndex->vnum, pMobIndex->short_descr );
 		send_to_char( buf, ch );
 	    }
@@ -2298,7 +2298,7 @@ void do_ofind( CHAR_DATA *ch, char *argument )
 	    if ( fAll || is_name( argument, pObjIndex->name ) )
 	    {
 		found = TRUE;
-		sprintf( buf, "[%5d] %s%s\n\r",
+		snprintf(buf, sizeof(buf), "[%5d] %s%s\n\r",
 		    pObjIndex->vnum, pObjIndex->short_descr,
 	(IS_OBJ_STAT(pObjIndex,ITEM_GLOW) && CAN_WEAR(pObjIndex,ITEM_WEAR_HEAD))
 		? " [parlayan]" : "" );
@@ -2349,15 +2349,15 @@ void do_owhere(CHAR_DATA *ch, char *argument )
 
         if ( in_obj->carried_by != NULL && can_see(ch,in_obj->carried_by)
 	&&   in_obj->carried_by->in_room != NULL)
-            sprintf( buf, "%3d) %s is carried by %s [Room %d]\n\r",
+            snprintf(buf, sizeof(buf), "%3d) %s is carried by %s [Room %d]\n\r",
                 number, obj->short_descr,PERS(in_obj->carried_by, ch),
 		in_obj->carried_by->in_room->vnum );
         else if (in_obj->in_room != NULL && can_see_room(ch,in_obj->in_room))
-            sprintf( buf, "%3d) %s is in %s [Room %d]\n\r",
+            snprintf(buf, sizeof(buf), "%3d) %s is in %s [Room %d]\n\r",
                 number, obj->short_descr,in_obj->in_room->name,
 	   	in_obj->in_room->vnum);
 	else
-            sprintf( buf, "%3d) %s is somewhere\n\r",number, obj->short_descr);
+            snprintf(buf, sizeof(buf), "%3d) %s is somewhere\n\r",number, obj->short_descr);
 
         buf[0] = UPPER(buf[0]);
         add_buf(buffer,buf);
@@ -2399,11 +2399,11 @@ void do_mwhere( CHAR_DATA *ch, char *argument )
 		victim = d->character;
 		count++;
 		if (d->original != NULL)
-		    sprintf(buf,"%3d) %s (in the body of %s) is in %s [%d]\n\r",
+		    snprintf(buf, sizeof(buf),"%3d) %s (in the body of %s) is in %s [%d]\n\r",
 			count, d->original->name,victim->short_descr,
 			victim->in_room->name,victim->in_room->vnum);
 		else
-		    sprintf(buf,"%3d) %s is in %s [%d]\n\r",
+		    snprintf(buf, sizeof(buf),"%3d) %s is in %s [%d]\n\r",
 			count, victim->name,victim->in_room->name,
 			victim->in_room->vnum);
 		add_buf(buffer,buf);
@@ -2424,7 +2424,7 @@ void do_mwhere( CHAR_DATA *ch, char *argument )
 	{
 	    found = TRUE;
 	    count++;
-	    sprintf( buf, "%3d) [%5d] %-28s [%5d] %s\n\r", count,
+	    snprintf(buf, sizeof(buf), "%3d) [%5d] %-28s [%5d] %s\n\r", count,
 		IS_NPC(victim) ? victim->pIndexData->vnum : 0,
 		IS_NPC(victim) ? victim->short_descr : victim->name,
 		victim->in_room->vnum,
@@ -2466,7 +2466,7 @@ void do_shutdown( CHAR_DATA *ch, char *argument )
     char buf[MAX_STRING_LENGTH];
 
     if (ch->invis_level < LEVEL_HERO)
-    sprintf( buf, "Shutdown by %s.", ch->name );
+    snprintf(buf, sizeof(buf), "Shutdown by %s.", ch->name );
     append_file( ch, (char*)SHUTDOWN_FILE, buf );
     strcat( buf, "\n\r" );
     if (ch->invis_level < LEVEL_HERO)
@@ -2580,7 +2580,7 @@ void do_snoop( CHAR_DATA *ch, char *argument )
     }
 
     victim->desc->snoop_by = ch->desc;
-    sprintf(buf,"$N starts snooping on %s",
+    snprintf(buf, sizeof(buf),"$N starts snooping on %s",
 	(IS_NPC(ch) ? victim->short_descr : victim->name));
     wiznet(buf,ch,NULL,WIZ_SNOOPS,WIZ_SECURE,get_trust(ch));
     send_to_char( "Ok.\n\r", ch );
@@ -2642,7 +2642,7 @@ void do_switch( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    sprintf(buf,"$N switches into %s",victim->short_descr);
+    snprintf(buf, sizeof(buf),"$N switches into %s",victim->short_descr);
     wiznet(buf,ch,NULL,WIZ_SWITCHES,WIZ_SECURE,get_trust(ch));
 
     ch->desc->character = victim;
@@ -2682,7 +2682,7 @@ void do_return( CHAR_DATA *ch, char *argument )
 	ch->prompt = NULL;
     }
 
-    sprintf(buf,"$N returns from %s.",ch->short_descr);
+    snprintf(buf, sizeof(buf),"$N returns from %s.",ch->short_descr);
     wiznet(buf,ch->desc->original,0,WIZ_SWITCHES,WIZ_SECURE,get_trust(ch));
     ch->desc->character       = ch->desc->original;
     ch->desc->original        = NULL;
@@ -2834,7 +2834,7 @@ void do_clone(CHAR_DATA *ch, char *argument )
 	char_to_room(clone,ch->in_room);
         act("$n has created $N.",ch,NULL,clone,TO_ROOM);
         act("You clone $N.",ch,NULL,clone,TO_CHAR);
-	sprintf(buf,"$N clones %s.",clone->short_descr);
+	snprintf(buf, sizeof(buf),"$N clones %s.",clone->short_descr);
 	wiznet(buf,ch,NULL,WIZ_LOAD,WIZ_SECURE,get_trust(ch));
         return;
     }
@@ -2868,7 +2868,7 @@ void do_load(CHAR_DATA *ch, char *argument )
 	return;
     }
     /* echo syntax */
-    do_load(ch,(char*)"");
+    do_load(ch,"");
 }
 
 
@@ -2896,7 +2896,7 @@ void do_mload( CHAR_DATA *ch, char *argument )
     victim = create_mobile( pMobIndex , NULL);
     char_to_room( victim, ch->in_room );
     act( "$n has created $N!", ch, NULL, victim, TO_ROOM );
-    sprintf(buf,"$N loads %s.",victim->short_descr);
+    snprintf(buf, sizeof(buf),"$N loads %s.",victim->short_descr);
     wiznet(buf,ch,NULL,WIZ_LOAD,WIZ_SECURE,get_trust(ch));
     send_to_char( "Ok.\n\r", ch );
     return;
@@ -3010,7 +3010,7 @@ void do_purge( CHAR_DATA *ch, char *argument )
 	if (get_trust(ch) <= get_trust(victim))
 	{
 	  send_to_char("Maybe that wasn't a good idea...\n\r",ch);
-	  sprintf(buf,"%s tried to purge you!\n\r",ch->name);
+	  snprintf(buf, sizeof(buf),"%s tried to purge you!\n\r",ch->name);
 	  send_to_char(buf,victim);
 	  return;
 	}
@@ -3100,7 +3100,7 @@ void do_restore( CHAR_DATA *ch, char *argument )
             act("$n has restored you.",ch,NULL,vch,TO_VICT);
         }
 
-        sprintf(buf,"$N restored room %d.",ch->in_room->vnum);
+        snprintf(buf, sizeof(buf),"$N restored room %d.",ch->in_room->vnum);
         wiznet(buf,ch,NULL,WIZ_RESTORE,WIZ_SECURE,get_trust(ch));
 
         send_to_char("Room restored.\n\r",ch);
@@ -3152,7 +3152,7 @@ void do_restore( CHAR_DATA *ch, char *argument )
     victim->move = victim->max_move;
     update_pos( victim );
     act( "$n has restored you.", ch, NULL, victim, TO_VICT );
-    sprintf(buf,"$N restored %s",
+    snprintf(buf, sizeof(buf),"$N restored %s",
 	IS_NPC(victim) ? victim->short_descr : victim->name);
     wiznet(buf,ch,NULL,WIZ_RESTORE,WIZ_SECURE,get_trust(ch));
     send_to_char( "Ok.\n\r", ch );
@@ -3196,7 +3196,7 @@ void do_freeze( CHAR_DATA *ch, char *argument )
 	REMOVE_BIT(victim->act, PLR_FREEZE);
 	send_to_char( "You can play again.\n\r", victim );
 	send_to_char( "FREEZE removed.\n\r", ch );
-	sprintf(buf,"$N thaws %s.",victim->name);
+	snprintf(buf, sizeof(buf),"$N thaws %s.",victim->name);
 	wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
     }
     else
@@ -3204,7 +3204,7 @@ void do_freeze( CHAR_DATA *ch, char *argument )
 	SET_BIT(victim->act, PLR_FREEZE);
 	send_to_char( "You can't do ANYthing!\n\r", victim );
 	send_to_char( "FREEZE set.\n\r", ch );
-	sprintf(buf,"$N puts %s in the deep freeze.",victim->name);
+	snprintf(buf, sizeof(buf),"$N puts %s in the deep freeze.",victim->name);
 	wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
     }
 
@@ -3305,7 +3305,7 @@ void do_noemote( CHAR_DATA *ch, char *argument )
 	REMOVE_BIT(victim->comm, COMM_NOEMOTE);
 	send_to_char( "You can emote again.\n\r", victim );
 	send_to_char( "NOEMOTE removed.\n\r", ch );
-	sprintf(buf,"$N restores emotes to %s.",victim->name);
+	snprintf(buf, sizeof(buf),"$N restores emotes to %s.",victim->name);
 	wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
     }
     else
@@ -3313,7 +3313,7 @@ void do_noemote( CHAR_DATA *ch, char *argument )
 	SET_BIT(victim->comm, COMM_NOEMOTE);
 	send_to_char( "You can't emote!\n\r", victim );
 	send_to_char( "NOEMOTE set.\n\r", ch );
-	sprintf(buf,"$N revokes %s's emotes.",victim->name);
+	snprintf(buf, sizeof(buf),"$N revokes %s's emotes.",victim->name);
 	wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
     }
 
@@ -3358,7 +3358,7 @@ void do_noshout( CHAR_DATA *ch, char *argument )
 	REMOVE_BIT(victim->comm, COMM_NOSHOUT);
 	send_to_char( "You can shout again.\n\r", victim );
 	send_to_char( "NOSHOUT removed.\n\r", ch );
-	sprintf(buf,"$N restores shouts to %s.",victim->name);
+	snprintf(buf, sizeof(buf),"$N restores shouts to %s.",victim->name);
 	wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
     }
     else
@@ -3366,7 +3366,7 @@ void do_noshout( CHAR_DATA *ch, char *argument )
 	SET_BIT(victim->comm, COMM_NOSHOUT);
 	send_to_char( "You can't shout!\n\r", victim );
 	send_to_char( "NOSHOUT set.\n\r", ch );
-	sprintf(buf,"$N revokes %s's shouts.",victim->name);
+	snprintf(buf, sizeof(buf),"$N revokes %s's shouts.",victim->name);
 	wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
     }
 
@@ -3405,7 +3405,7 @@ void do_notell( CHAR_DATA *ch, char *argument )
 	REMOVE_BIT(victim->comm, COMM_NOTELL);
 	send_to_char( "You can tell again.\n\r", victim );
 	send_to_char( "NOTELL removed.\n\r", ch );
-	sprintf(buf,"$N restores tells to %s.",victim->name);
+	snprintf(buf, sizeof(buf),"$N restores tells to %s.",victim->name);
 	wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
     }
     else
@@ -3413,7 +3413,7 @@ void do_notell( CHAR_DATA *ch, char *argument )
 	SET_BIT(victim->comm, COMM_NOTELL);
 	send_to_char( "You can't tell!\n\r", victim );
 	send_to_char( "NOTELL set.\n\r", ch );
-	sprintf(buf,"$N revokes %s's tells.",victim->name);
+	snprintf(buf, sizeof(buf),"$N revokes %s's tells.",victim->name);
 	wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
     }
 
@@ -3498,7 +3498,7 @@ void do_slookup( CHAR_DATA *ch, char *argument )
 	{
 	    if ( skill_table[sn].name == NULL )
 		break;
-	    sprintf( buf, "Sn: %3d  Slot: %3d  Skill/spell: '%s'\n\r",
+	    snprintf(buf, sizeof(buf), "Sn: %3d  Slot: %3d  Skill/spell: '%s'\n\r",
 		sn, skill_table[sn].slot, skill_table[sn].name[1] );
 	    send_to_char( buf, ch );
 	}
@@ -3511,7 +3511,7 @@ void do_slookup( CHAR_DATA *ch, char *argument )
 	    return;
 	}
 
-	sprintf( buf, "Sn: %3d  Slot: %3d  Skill/spell: '%s'\n\r",
+	snprintf(buf, sizeof(buf), "Sn: %3d  Slot: %3d  Skill/spell: '%s'\n\r",
 	    sn, skill_table[sn].slot, skill_table[sn].name[1] );
 	send_to_char( buf, ch );
     }
@@ -3562,7 +3562,7 @@ void do_set( CHAR_DATA *ch, char *argument )
 	return;
     }
     /* echo syntax */
-    do_set(ch,(char*)"");
+    do_set(ch,"");
 }
 
 
@@ -3805,7 +3805,7 @@ void do_string( CHAR_DATA *ch, char *argument )
 
 
     /* echo bad use message */
-    do_string(ch,(char*)"");
+    do_string(ch,"");
 }
 
 
@@ -3916,7 +3916,7 @@ void do_oset( CHAR_DATA *ch, char *argument )
     /*
      * Generate usage message.
      */
-    do_oset( ch, (char*)"" );
+    do_oset( ch, "" );
     return;
 }
 
@@ -3986,7 +3986,7 @@ void do_rset( CHAR_DATA *ch, char *argument )
     /*
      * Generate usage message.
      */
-    do_rset( ch, (char*)"" );
+    do_rset( ch, "" );
     return;
 }
 
@@ -4025,7 +4025,7 @@ void do_sockets( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    sprintf( buf2, "%d user%s\n\r", count, count == 1 ? "" : "s" );
+    snprintf(buf2, sizeof(buf2), "%d user%s\n\r", count, count == 1 ? "" : "s" );
     strcat(buf,buf2);
     page_to_char( buf, ch );
     return;
@@ -4058,7 +4058,7 @@ void do_force( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    sprintf( buf, "$n forces you to '%s'.", argument );
+    snprintf(buf, sizeof(buf), "$n forces you to '%s'.", argument );
 
     if ( !str_cmp( arg, "all" ) )
     {
@@ -4315,12 +4315,12 @@ void do_prefix (CHAR_DATA *ch, char *argument)
 
     if (ch->prefix[0] != '\0')
     {
-	sprintf(buf,"Prefix changed to %s.\r\n",argument);
+	snprintf(buf, sizeof(buf),"Prefix changed to %s.\r\n",argument);
 	free_string(ch->prefix);
     }
     else
     {
-	sprintf(buf,"Prefix set to %s.\r\n",argument);
+	snprintf(buf, sizeof(buf),"Prefix set to %s.\r\n",argument);
     }
 
     ch->prefix = str_dup(argument);
@@ -4387,7 +4387,7 @@ void do_cecho( CHAR_DATA *ch, char *argument )
     }
 
     if (!bFound) {
-      sprintf(buf,"Usage: cecho <color> <message>.\n\rChoose from one of these colors:\n\r");
+      snprintf(buf, sizeof(buf),"Usage: cecho <color> <message>.\n\rChoose from one of these colors:\n\r");
 
       for (i=0;color_table[i].name != NULL;i++) {
            strcat(buf,color_table[i].name);
@@ -4553,14 +4553,14 @@ void do_ikikat( CHAR_DATA *ch, char *argument )
     {
       printf_to_char(ch,"İki kat TP %d dakikalığına açıldı.", value);
       /* event */
-      sprintf(eventbuf,"İki kat TP %d dakikalığına açıldı.", value);
+      snprintf(eventbuf, sizeof(eventbuf),"İki kat TP %d dakikalığına açıldı.", value);
 	  write_event_log(eventbuf);
     }
     else
     {
       printf_to_char(ch,"İki kat TP kapatıldı.");
       /* event */
-	  write_event_log((char*)"İki kat TP etkinliği kapatıldı.");
+	  write_event_log("İki kat TP etkinliği kapatıldı.");
     }
     return;
   }
@@ -4572,14 +4572,14 @@ void do_ikikat( CHAR_DATA *ch, char *argument )
     {
       printf_to_char(ch,"İki kat GP %d dakikalığına açıldı.", value);
       /* event */
-      sprintf(eventbuf,"İki kat GP %d dakikalığına açıldı.", value);
+      snprintf(eventbuf, sizeof(eventbuf),"İki kat GP %d dakikalığına açıldı.", value);
 	  write_event_log(eventbuf);
     }
     else
     {
       printf_to_char(ch,"İki kat GP kapatıldı.");
       /* event */
-	  write_event_log((char*)"İki kat TP etkinliği kapatıldı.");
+	  write_event_log("İki kat TP etkinliği kapatıldı.");
     }
     return;
   }
@@ -5050,7 +5050,7 @@ void do_mset( CHAR_DATA *ch, char *argument )
     /*
      * Generate usage message.
      */
-    do_mset( ch, (char*)"" );
+    do_mset( ch, "" );
     return;
 }
 
@@ -5144,13 +5144,13 @@ void do_induct( CHAR_DATA *ch, char *argument)
     }
 
 
-  sprintf(buf, "$n has been inducted into %s.", cabal);
+  snprintf(buf, sizeof(buf), "$n has been inducted into %s.", cabal);
   act(buf,victim, NULL, NULL, TO_NOTVICT);
-  sprintf(buf, "You have been inducted into %s.", cabal);
+  snprintf(buf, sizeof(buf), "You have been inducted into %s.", cabal);
   act(buf, victim, NULL, NULL, TO_CHAR);
   if (ch->in_room != victim->in_room)
     {
-      sprintf(buf, "%s has been inducted into %s.\n\r",
+      snprintf(buf, sizeof(buf), "%s has been inducted into %s.\n\r",
 	      IS_NPC(victim) ? victim->short_descr : victim->name, cabal);
       send_to_char(buf, ch);
     }
@@ -5163,20 +5163,20 @@ void do_induct( CHAR_DATA *ch, char *argument)
 	 default:
 	  return;
 	 case CABAL_BATTLE:
-	  sprintf(name,"The LOVER OF MAGIC.");
+	  snprintf(name, sizeof(name),"The LOVER OF MAGIC.");
 	  break;
 	 case CABAL_SHALAFI:
-	  sprintf(name,"The HATER OF MAGIC.");
+	  snprintf(name, sizeof(name),"The HATER OF MAGIC.");
 	  break;
 	 case CABAL_KNIGHT:
-	  sprintf(name,"The UNHONOURABLE FIGHTER.");
+	  snprintf(name, sizeof(name),"The UNHONOURABLE FIGHTER.");
 	  break;
 	 case CABAL_INVADER:
 	 case CABAL_CHAOS:
 	 case CABAL_LIONS:
 	 case CABAL_HUNTER:
 	 case CABAL_RULER:
-	  sprintf(name,"NO MORE CABALS.");
+	  snprintf(name, sizeof(name),"NO MORE CABALS.");
 	  break;
 	}
 	set_title( victim, name );
@@ -5224,7 +5224,7 @@ void do_desocket(CHAR_DATA *ch, char *argument)
 		  return;
 		}
 	      write_to_descriptor(d->descriptor,
-				  (char*)"You are being disconnected by an immortal.",
+				  "You are being disconnected by an immortal.",
 				  0);
 	      close_socket(d);
 	      send_to_char("Done.\n\r", ch);
@@ -5287,13 +5287,13 @@ AREA_DATA *area;
 extern AREA_DATA *area_first;
 int i;
 
-    sprintf(buf,"Area popularity statistics (in char * ticks)\n\r" );
+    snprintf(buf, sizeof(buf),"Area popularity statistics (in char * ticks)\n\r" );
 
     for (area = area_first,i=0; area != NULL; area = area->next,i++) {
       if (area->count >= 5000000)
-        sprintf(buf2,"%-20s overflow       ",area->name);
+        snprintf(buf2, sizeof(buf2),"%-20s overflow       ",area->name);
       else
-        sprintf(buf2,"%-20s %-8lu       ",area->name,area->count);
+        snprintf(buf2, sizeof(buf2),"%-20s %-8lu       ",area->name,area->count);
       if ( i % 2 == 0)
 	strcat( buf, "\n\r" );
       strcat( buf, buf2 );
@@ -5409,7 +5409,7 @@ void do_rename (CHAR_DATA* ch, char* argument)
 		return;
 	}
 
-        sprintf( strsave, "%s%s", PLAYER_DIR, capitalize( new_name ) );
+        snprintf(strsave, sizeof(strsave), "%s%s", PLAYER_DIR, capitalize( new_name ) );
 
 	fclose (fpReserve);
 	file = fopen (strsave, "r");
@@ -5423,7 +5423,7 @@ void do_rename (CHAR_DATA* ch, char* argument)
    	fpReserve = fopen( NULL_FILE, "r" );
 
 	/* Check .gz file ! */
-        sprintf( strsave, "%s%s.gz", PLAYER_DIR, capitalize( new_name ) );
+        snprintf(strsave, sizeof(strsave), "%s%s.gz", PLAYER_DIR, capitalize( new_name ) );
 
 	fclose (fpReserve);
 	file = fopen (strsave, "r");
@@ -5442,7 +5442,7 @@ void do_rename (CHAR_DATA* ch, char* argument)
 		return;
 	}
 
-	sprintf( strsave, "%s%s", PLAYER_DIR, capitalize( victim->name ) );
+	snprintf(strsave, sizeof(strsave), "%s%s", PLAYER_DIR, capitalize( victim->name ) );
 
   for(obj = object_list; obj != NULL; obj = obj_next)
   {
@@ -5565,7 +5565,7 @@ void do_affrooms(CHAR_DATA *ch, char *argument)
     {
 	room_next = room->aff_next;
 	count++;
-	sprintf(buf,"%d) [Vnum : %5d] %s\n\r",
+	snprintf(buf, sizeof(buf),"%d) [Vnum : %5d] %s\n\r",
 		count, room->vnum , room->name);
 	send_to_char(buf,ch);
     }
@@ -5592,9 +5592,9 @@ void do_find( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    sprintf(buf,"%s.\n\r",find_way(ch,ch->in_room,location));
+    snprintf(buf, sizeof(buf),"%s.\n\r",find_way(ch,ch->in_room,location));
     send_to_char(buf,ch);
-    sprintf(lbuf,"From %d to %d: %s",ch->in_room->vnum,location->vnum,buf);
+    snprintf(lbuf, sizeof(lbuf),"From %d to %d: %s",ch->in_room->vnum,location->vnum,buf);
     log_string(lbuf);
     return;
 }
@@ -5616,7 +5616,7 @@ void do_reboot( CHAR_DATA *ch, char *argument )
       return;
     }
 
-    if (is_name(arg,(char*)"cancel"))
+    if (is_name(arg,"cancel"))
      {
       if (time_sync)
       {
@@ -5628,13 +5628,13 @@ void do_reboot( CHAR_DATA *ch, char *argument )
       return;
     }
 
-    if (is_name(arg, (char*)"now"))
+    if (is_name(arg, "now"))
      {
       reboot_uzakdiyarlar(TRUE);
       return;
     }
 
-    if (is_name(arg, (char*)"status"))
+    if (is_name(arg, "status"))
     {
       if (time_sync)
       {
@@ -5642,9 +5642,9 @@ void do_reboot( CHAR_DATA *ch, char *argument )
 	return;
       }
       if (reboot_counter == -1)
-	sprintf(buf, "Only time synchronization reboot is activated.\n\r");
+	snprintf(buf, sizeof(buf), "Only time synchronization reboot is activated.\n\r");
       else
-	sprintf(buf,"Reboot in %i minutes.\n\r",reboot_counter);
+	snprintf(buf, sizeof(buf),"Reboot in %i minutes.\n\r",reboot_counter);
       send_to_char(buf,ch);
       return;
     }
@@ -5661,7 +5661,7 @@ void do_reboot( CHAR_DATA *ch, char *argument )
      return;
     }
 
- do_reboot(ch,(char*)"");
+ do_reboot(ch,"");
 }
 
 
@@ -5670,7 +5670,7 @@ void reboot_uzakdiyarlar( bool fmessage )
     extern bool merc_down;
     DESCRIPTOR_DATA *d,*d_next;
 
-    sprintf( log_buf, "Oyun yeniden baslatiliyor.");
+    snprintf(log_buf, sizeof(log_buf), "Oyun yeniden baslatiliyor.");
     log_string(log_buf);
     merc_down = TRUE;
     for ( d = descriptor_list; d != NULL; d = d_next )
@@ -5706,60 +5706,60 @@ void do_maximum( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if (is_name(arg, (char*)"status"))
+  if (is_name(arg, "status"))
     {
-      sprintf(buf, "Maximum oldies allowed: %d.\n\r", max_oldies);
+      snprintf(buf, sizeof(buf), "Maximum oldies allowed: %d.\n\r", max_oldies);
       send_to_char(buf,ch);
-      sprintf(buf,"Maximum newbies allowed: %d.\n\r", max_newbies);
+      snprintf(buf, sizeof(buf),"Maximum newbies allowed: %d.\n\r", max_newbies);
       send_to_char(buf,ch);
-      sprintf(buf,"Current number of players: %d.\n\r", iNumPlayers);
+      snprintf(buf, sizeof(buf),"Current number of players: %d.\n\r", iNumPlayers);
       send_to_char(buf,ch);
       return;
     }
 
-  if (is_name(arg, (char*)"reset"))
+  if (is_name(arg, "reset"))
     {
       max_newbies = MAX_NEWBIES;
       max_oldies = MAX_OLDIES;
-      sprintf(buf,"Maximum newbies and oldies have been reset.\n\r");
+      snprintf(buf, sizeof(buf),"Maximum newbies and oldies have been reset.\n\r");
       send_to_char(buf,ch);
-      do_maximum( ch, (char*)"status" );
+      do_maximum( ch, "status" );
       return;
     }
 
-  if (is_name(arg, (char*)"newbies"))
+  if (is_name(arg, "newbies"))
     {
       argument = one_argument(argument, arg);
       if ( !is_number(arg) )
 	{
-	 do_maximum(ch, (char*)"");
+	 do_maximum(ch, "");
 	 return;
 	}
       max_newbies = atoi(arg);
       if ( max_newbies < 0 )
-        sprintf(buf, "No newbies are allowed!!!\n\r");
+        snprintf(buf, sizeof(buf), "No newbies are allowed!!!\n\r");
       else
-        sprintf(buf,"Now maximum newbies allowed: %d.\n\r", max_newbies);
+        snprintf(buf, sizeof(buf),"Now maximum newbies allowed: %d.\n\r", max_newbies);
       send_to_char(buf,ch);
       return;
     }
 
-  if (is_name(arg, (char*)"oldies"))
+  if (is_name(arg, "oldies"))
     {
       argument = one_argument(argument, arg);
       if ( !is_number(arg) )
 	{
-	 do_maximum(ch, (char*)"");
+	 do_maximum(ch, "");
 	 return;
 	}
       max_oldies = atoi(arg);
       if ( max_oldies < 0 )
-        sprintf(buf, "No oldies are allowed!!!\n\r");
+        snprintf(buf, sizeof(buf), "No oldies are allowed!!!\n\r");
       else
-        sprintf(buf,"Now maximum oldies allowed: %d.\n\r", max_oldies);
+        snprintf(buf, sizeof(buf),"Now maximum oldies allowed: %d.\n\r", max_oldies);
       send_to_char(buf,ch);
       return;
     }
 
- do_maximum( ch, (char*)"" );
+ do_maximum( ch, "" );
 }

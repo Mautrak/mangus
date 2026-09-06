@@ -61,7 +61,7 @@
 #include "merc.h"
 #include "tables.h"
 
-int flag_lookup args( ( const char *name, const struct flag_type *flag_table) );
+int flag_lookup ( const char *name, const struct flag_type *flag_table);
 
 void do_flag(CHAR_DATA *ch, char *argument)
 {
