@@ -1,21 +1,27 @@
-CC      = g++
-PROF    = -O -g
-NOCRYPT =
-C_FLAGS = -Wall $(PROF) $(NOCRYPT) -Wno-misleading-indentation -Wno-format-overflow
-L_FLAGS =  $(PROF)
+# Hızlı POSIX derlemesi (CMake gerektirmez):  make -C src
+# Tam derleme, testler ve Windows için üst dizindeki CMakeLists.txt kullanılır.
+CC      ?= cc
+CFLAGS  ?= -O2 -g
+WARN     = -Wall -Wextra -Wno-unused-parameter
+CPPFLAGS += -DHAVE_CRYPT=1
+LDLIBS   =
 
-O_FILES = act_comm.o act_hera.o act_info.o act_move.o act_obj.o act_wiz.o ban.o \
-          cJSON.o comm.o const.o data.c db.o db2.o dilek.o kirliisler.o effects.o ek.o ek2.o \
-          exlist.o fight.o flags.o handler.o handler_room.o healer.o interp.o lookup.o mafya.o \
-          magic.o magic2.o martial_art.o mob_creator.o mob_prog.o obj_creator.o obj_prog.o \
-          quest.o recycle.o save.o  skills.o special.o tables.o update.o -lcrypt
+UNAME := $(shell uname -s)
+ifeq ($(UNAME),Linux)
+  CPPFLAGS += -DHAVE_CRYPT_H=1
+  LDLIBS   += -lcrypt
+endif
 
-mangus: $(O_FILES)
-	rm -f mangus
-	$(CC) $(L_FLAGS) -o mangus $(O_FILES)
+SRCS = $(wildcard *.c)
+OBJS = $(SRCS:.c=.o)
 
-.c.o: merc.h
-	$(CC) -c $(C_FLAGS) $<
+mangus: $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDLIBS)
+
+%.o: %.c $(wildcard *.h)
+	$(CC) -std=gnu11 $(CPPFLAGS) $(CFLAGS) $(WARN) -c $<
 
 clean:
-	@rm -f *.o mangus
+	rm -f $(OBJS) mangus
+
+.PHONY: clean

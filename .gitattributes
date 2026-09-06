@@ -1,0 +1,9 @@
+* text=auto eol=lf
+*.are text eol=lf
+*.c text eol=lf
+*.h text eol=lf
+*.pdf binary
+*.zip binary
+*.xlsx binary
+*.doc binary
+tests/e2e/fixtures/* -text

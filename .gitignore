@@ -1,13 +1,29 @@
-.vscode/configurationCache.log
-.vscode/dryrun.log
-.vscode/settings.json
-.vscode/targets.log
+# derleme çıktıları
+build/
 src/*.o
-area/mangus
 src/mangus
+src/mangus.exe
+area/mangus
+.DS_Store
+
+# çalışma zamanı verileri
+player/
+remort/
 gods/*
 log/ip/*
 log/kanal/*
-player/*
-data
 log/events/events
+area/bugs.txt
+area/typos.txt
+area/shutdown.txt
+area/area_stat.txt
+area/core*
+data/ud_data
+
+# araçlar
+.vscode/
+.venv/
+__pycache__/
+.pytest_cache/
+tests/e2e/_runs/
+*.dSYM/
