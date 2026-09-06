@@ -797,7 +797,6 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
 bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
 {
     char strsave[MAX_INPUT_LENGTH];
-    char buf[100];
     CHAR_DATA *ch;
     FILE *fp;
     bool found;
@@ -884,6 +883,8 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
 
 #ifndef _WIN32
     /* decompress if .gz file exists */
+    {
+	char buf[MAX_INPUT_LENGTH + 16];
     snprintf(strsave, sizeof(strsave), "%s%s%s", PLAYER_DIR, capitalize(name),".gz");
     if ( ( fp = fopen( strsave, "r" ) ) != NULL )
     {
@@ -891,6 +892,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
 	snprintf(buf, sizeof(buf),"gzip -dfq %s",strsave);
 	if ( system( buf ) != 0 )
 	    log_string( "gzip ile oyuncu dosyası açılamadı." );
+    }
     }
 #endif
 
