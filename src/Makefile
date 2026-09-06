@@ -9,7 +9,7 @@ LDLIBS   =
 UNAME := $(shell uname -s)
 ifeq ($(UNAME),Linux)
   CPPFLAGS += -DHAVE_CRYPT_H=1
-  LDLIBS   += -lcrypt
+  LDLIBS   += -lcrypt -lm
 endif
 ifeq ($(OS),Windows_NT)           # MSYS2 / MinGW-w64: çıktı mangus.exe olur
   CPPFLAGS := $(filter-out -DHAVE_CRYPT=1,$(CPPFLAGS)) -D_WIN32_WINNT=0x0601

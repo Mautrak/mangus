@@ -3189,7 +3189,7 @@ char *fread_word( FILE *fp )
 void *alloc_mem( int sMem )
 {
     void *pMem;
-    long *magic;
+    intptr_t *magic;
     long iList;
 
     sMem += sizeof(*magic);
@@ -3216,10 +3216,9 @@ void *alloc_mem( int sMem )
         rgFreeList[iList] = * ((void **) rgFreeList[iList]);
     }
 
-    magic = (long *) pMem;
+    magic = (intptr_t *) pMem;
     *magic = MAGIC_NUM;
-    //pMem += sizeof(*magic);
-	pMem = (void *) ((long) pMem + (long) (sizeof(*magic)));
+    pMem = (char *) pMem + sizeof(*magic);
 
     return pMem;
 }
@@ -3233,10 +3232,10 @@ void *alloc_mem( int sMem )
 void free_mem( void *pMem, int sMem )
 {
     long iList;
-    long *magic;
+    intptr_t *magic;
 
-    pMem = (void *) ((long) pMem - (long) sizeof(*magic));
-    magic = (long *) pMem;
+    pMem = (char *) pMem - sizeof(*magic);
+    magic = (intptr_t *) pMem;
 
     if (*magic != MAGIC_NUM)
     {
