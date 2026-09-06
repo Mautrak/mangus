@@ -1,9 +1,9 @@
 #AREADATA
 Filename drakiri_adasi.are~
-Name Drakiri Adası~
+Name Drakiri AdasÄ±~
 Builder Ydri~
 Translator Bilinmiyor~
-Language Yarı Türkçe~
+Language YarÄ± TÃ¼rkÃ§e~
 Lowlevel 65
 Highlevel 90
 Minvnum 11800
@@ -16,9 +16,9 @@ END
 
 #NEW_MOBILES
 #11800
-drakiri leçantra bayan~
+drakiri leÃ§antra bayan~
 Lechandre~
-Parıldayan mavi cüppesinin içinde kanatlı bir bayan birşey üzerinde çalışıyor.
+ParÄ±ldayan mavi cÃ¼ppesinin iÃ§inde kanatlÄ± bir bayan birÅŸey Ã¼zerinde Ã§alÄ±ÅŸÄ±yor.
 ~
 Sparkling silver eyes regard you serenely from a fine boned elf face.
 Iridescent wings arch from the shoulder blades, spreading behind the lady
@@ -33,7 +33,7 @@ ABGR DFH 93
 #11801
 drakiri deriki norek lord~
 Norek~
-Karanlık ve yakışıklı bir drakiri merakla seni izliyor.
+KaranlÄ±k ve yakÄ±ÅŸÄ±klÄ± bir drakiri merakla seni izliyor.
 ~
 Wavy black hair frames a sharp featured elf face, in stark contrast
 with the pale skin.  Intelligent silver eyes regard you warily.  A
@@ -45,7 +45,7 @@ ABGR DFH 93
 #11802
 drakiri deriki dirli bayan~
 Dirli~
-Bir drakiri bayanı burada, çalışıyor.
+Bir drakiri bayanÄ± burada, Ã§alÄ±ÅŸÄ±yor.
 ~
 Golden blonde hair is tied securely back, revealing pointed ears and
 flowing in waves over delicate iridescent wings.  The lady, engrossed in
@@ -68,7 +68,7 @@ ABGR BDFT 85
 #11804
 drakiri deriki zanil erkek~
 Zanil~
-Mavi cüppesiyle bir drakiri erkeği birşeyler karalıyor.
+Mavi cÃ¼ppesiyle bir drakiri erkeÄŸi birÅŸeyler karalÄ±yor.
 ~
 A ponytail of silvery hair hangs over the man's shoulder as he bends over
 a stack of parchment.  He bears the mark of the treye, third in command,
@@ -79,7 +79,7 @@ ABGR DF 82
 #11805
 drakiri deriki tirena bayan~
 Tirena~
-Genç bir drakiri bayanı burada çalışıyor.
+GenÃ§ bir drakiri bayanÄ± burada Ã§alÄ±ÅŸÄ±yor.
 ~
 You notice raven black hair and delicate iridescent wings.  Apparently
 noticing your scrutiny, the girl turns towards you, fixing you with
@@ -90,9 +90,9 @@ dot will be replaced by the house crest.
 elf~
 ABGR DFH 87
 #11806
-drakiri deriki nalis kız~
+drakiri deriki nalis kÄ±z~
 Nalis~
-Bir drakiri kızı sena şeytanca gülümsüyor.
+Bir drakiri kÄ±zÄ± sena ÅŸeytanca gÃ¼lÃ¼msÃ¼yor.
 ~
 The girl's silver eyes sparkle with laughter as she watches you watching
 her.  A narrow mark along one cheekbone denotes her as one of the
@@ -101,9 +101,9 @@ younger siblings (ira'deia) of the heir.
 elf~
 ABCGR DFPTV 83
 #11807
-drakiri deriki deman genç~
+drakiri deriki deman genÃ§~
 Deman~
-Genç bir drakiri bir büyüye konsantre oluyor.
+GenÃ§ bir drakiri bir bÃ¼yÃ¼ye konsantre oluyor.
 ~
 The intelligent silver eyes are narrowed in concentration as he practices,
 seemingly oblivious to your presence.  A blue mark along his cheekbone
@@ -112,9 +112,9 @@ indicates that he is a younger sibling of the Deriki heir.
 elf~
 ABGR BDFT 84
 #11808
-drakiri deriki yıkades genç~
-Yıkades~
-Kanatlı bir genç bir yokoluyor bir varoluyor.
+drakiri deriki yÄ±kades genÃ§~
+YÄ±kades~
+KanatlÄ± bir genÃ§ bir yokoluyor bir varoluyor.
 ~
 He seems to be perfecting his invisibility and cancellation spells.
 Noticing your intrusion, the youth glances up, flipping back short
@@ -124,27 +124,27 @@ bears the mark of an ira'deian, or younger child, along one cheekbone.
 elf~
 ACGR BDFTV 83
 #11809
-zeyon kar baykuş~
+zeyon kar baykuÅŸ~
 Zeyon~
-Mavi buz renginde bir kay baykuşu seni izliyor, DİKKATLE!.
+Mavi buz renginde bir kay baykuÅŸu seni izliyor, DÄ°KKATLE!.
 ~
 Huge dark eyes examine you curiously.
 ~
 unique~
 AC TZ 90
 #11810
-drakiri laboratuvar asistanı~
-laboratuvar asistanı~
-Bir asistan heyecanla deney düzenekleri oluşturuyor.
+drakiri laboratuvar asistanÄ±~
+laboratuvar asistanÄ±~
+Bir asistan heyecanla deney dÃ¼zenekleri oluÅŸturuyor.
 ~
 He seems a little harried and glares at you for getting in the way.
 ~
 elf~
 ABCGR DT 81
 #11811
-eğitim yapan büyücü~
-eğitim yapan büyücü~
-Eğitim yapan bir büyücü görüyorsun, konsantre olmaya çalışıyor.
+eÄŸitim yapan bÃ¼yÃ¼cÃ¼~
+eÄŸitim yapan bÃ¼yÃ¼cÃ¼~
+EÄŸitim yapan bir bÃ¼yÃ¼cÃ¼ gÃ¶rÃ¼yorsun, konsantre olmaya Ã§alÄ±ÅŸÄ±yor.
 ~
 The mage seems intent on a spell and unaware of your scrutiny.
 Suddenly, one hand flicks forward and a fireball whooshes past your
@@ -155,9 +155,9 @@ your left ear.
 elf~
 ACGR DFT 80
 #11812
-hayaletimsi kıvranan şekil~
-kıvranan şekil~
-Hayaletimsi bir şekil burada, kıvranıyor.
+hayaletimsi kÄ±vranan ÅŸekil~
+kÄ±vranan ÅŸekil~
+Hayaletimsi bir ÅŸekil burada, kÄ±vranÄ±yor.
 ~
 A transparent form hovers here, writhing and moaning.  It seems
 to be trapped in one place by some kind of magic which apparently
@@ -178,7 +178,7 @@ ABG BDFQTUZ 90
 #11814
 drakiri lord dosande~
 Dosande~
-Parlak beyaz bir drakiri lordu ani varlığını fakedince bir kaşını kaldırıyor.
+Parlak beyaz bir drakiri lordu ani varlÄ±ÄŸÄ±nÄ± fakedince bir kaÅŸÄ±nÄ± kaldÄ±rÄ±yor.
 ~
 Light seems to focus on this figure, surrounding the lord with an aura
 of gold.  Shining hair is held back by a slender circlet, revealing
@@ -192,7 +192,7 @@ ABGT CHN 90
 #11815
 drakiri denilis bayan~
 Denilis~
-Kanatlı güzel bir bayan şehrin dışını izliyor.
+KanatlÄ± gÃ¼zel bir bayan ÅŸehrin dÄ±ÅŸÄ±nÄ± izliyor.
 ~
 Shining gold hair catches the light, surrounding the lady with a faint
 golden halo.  Bright blue eyes gaze back at you serenely.  You sense
@@ -203,7 +203,7 @@ ABGQ CHNT 89
 #11816
 drakiri kayele~
 Kayele~
-Bir drakiri burada, bir komut aurası yayıyor.
+Bir drakiri burada, bir komut aurasÄ± yayÄ±yor.
 ~
 Powerful golden eyes catch and hold your gaze for a moment, and
 one eyebrow raises in question.  He bears the mark of a sh'ayan
@@ -212,9 +212,9 @@ on his collar.
 elf~
 ACGT CHNT 85
 #11817
-drakiri reksena dişi~
+drakiri reksena diÅŸi~
 Reksena~
-Dişi bir drakiri burada bekliyor.
+DiÅŸi bir drakiri burada bekliyor.
 ~
 A cascade of white streaked golden hair flows in waves over one shoulder.
 Despite the white strands, the pale face betrays a youthful power,
@@ -235,9 +235,9 @@ of house Treniste.
 elf~
 AGQ CNT 80
 #11819
-drakiri liren kız~
+drakiri liren kÄ±z~
 Liren~
-Narin bir drakiri kızı birşeyler okuyor.
+Narin bir drakiri kÄ±zÄ± birÅŸeyler okuyor.
 ~
 Golden hair frames a narrow fine boned face and large tawny eyes.
 Though slight, honed muscles betray continuous weapons training and
@@ -247,9 +247,9 @@ the Treniste na'deia, or heir.
 elf~
 AGT CHNT 86
 #11820
-drakiri josreke genç~
+drakiri josreke genÃ§~
 Josreke~
-Beyazlara bürünmüş bir genç notlar alıyor.
+Beyazlara bÃ¼rÃ¼nmÃ¼ÅŸ bir genÃ§ notlar alÄ±yor.
 ~
 He seems focused on a huge blue bound tome.  A glance at the lettering
 along the spine indicates that it has something to do with magic.
@@ -258,9 +258,9 @@ Along one cheekbone, you notice the tiny mark of a Treniste ira'deian.
 elf~
 ACGR CDFNT 81
 #11821
-drakiri rodven kız~
+drakiri rodven kÄ±z~
 Rodven~
-Genç bir kız kılıç hakimiyetini geliştiriyor.
+GenÃ§ bir kÄ±z kÄ±lÄ±Ã§ hakimiyetini geliÅŸtiriyor.
 ~
 Steel flashes like lightning as the girl moves through several
 maneuvers with a speed and agility that make it seem like a dance.
@@ -271,8 +271,8 @@ elf~
 AGT CNT 82
 #11822
 drakiri beyaz paladin~
-beyazlara bürünmüş paladin~
-Beyazlara bürünmüş bir paladin seni izliyor.
+beyazlara bÃ¼rÃ¼nmÃ¼ÅŸ paladin~
+Beyazlara bÃ¼rÃ¼nmÃ¼ÅŸ bir paladin seni izliyor.
 ~
 The paladin seems to follow your every move, as if measuring your
 worth.
@@ -282,7 +282,7 @@ ABGT CNT 85
 #11823
 drakiri racal bayan~
 Racal~
-Kuzgun gibi saçlara sahip bir drakiri bayanı şeytanlık yayıyor.
+Kuzgun gibi saÃ§lara sahip bir drakiri bayanÄ± ÅŸeytanlÄ±k yayÄ±yor.
 ~
 Raven black hair seems to absorb the little light in the room, framing
 a dark, fine boned face and dark slitted eyes.  An aura of power and
@@ -297,7 +297,7 @@ ABFGR DFGHOT 90
 #11824
 drakiri toryan erkek~
 Toryan~
-Uzun kanatlara sahip, siyahlara bürünmüş bir erkek burada bekliyor.
+Uzun kanatlara sahip, siyahlara bÃ¼rÃ¼nmÃ¼ÅŸ bir erkek burada bekliyor.
 ~
 Slitted eyes like slashes of darkness gaze back at you.  You sense
 an aura of complete evil and corruption radiating from this man..
@@ -308,7 +308,7 @@ ABFGT GHOT 89
 #11825
 drakiri janalis bayan~
 Janalis~
-Bir kumandan drakiri bayanı burada bekliyor.
+Bir kumandan drakiri bayanÄ± burada bekliyor.
 ~
 An aura of power and command radiate from the slender figure.
 Despite her beauty, you sense something evil and deadly behind the
@@ -318,9 +318,9 @@ is emblazoned along her collar.
 elf~
 AFG GHOT 86
 #11826
-drakiri dıreyva~
-Dıreyva~
-Karalara bürünmüş bir drakiri seni izliyor.
+drakiri dÄ±reyva~
+DÄ±reyva~
+Karalara bÃ¼rÃ¼nmÃ¼ÅŸ bir drakiri seni izliyor.
 ~
 Dark slitted eyes seem to follow your every move.  You notice the
 mark of the Reykaris sequas on her collar.
@@ -330,7 +330,7 @@ AFG GOT 83
 #11827
 drakiri delirus erkek~
 Delirus~
-Kara bir drakiri erkeği burada, büyü mırıldanıyor.
+Kara bir drakiri erkeÄŸi burada, bÃ¼yÃ¼ mÄ±rÄ±ldanÄ±yor.
 ~
 He notices you watching him and smiles nastily, sending a shiver
 of warning down your spine.  Along the collar is the mark of the
@@ -339,9 +339,9 @@ Reykaris treye, the third in command.
 elf~
 ACFGQ BGOT 81
 #11828
-drakiri kıranal~
-Kıranal~
-Bir drakiri varlığını kanatlarını açarak karşılıyor.
+drakiri kÄ±ranal~
+KÄ±ranal~
+Bir drakiri varlÄ±ÄŸÄ±nÄ± kanatlarÄ±nÄ± aÃ§arak karÅŸÄ±lÄ±yor.
 ~
 Jet black hair frames a handsome elf face.  Dark slitted eyes
 glare at you angrily.  Between his eyebrows shimmers the black dot
@@ -350,9 +350,9 @@ of the heir to Reykaris.
 elf~
 ABCFGR BDFGHOT 85
 #11829
-drakiri sorina çocuk~
+drakiri sorina Ã§ocuk~
 Sorina~
-Bir drakiri çocuğu kirlenmiş kemiklerle oynuyor.
+Bir drakiri Ã§ocuÄŸu kirlenmiÅŸ kemiklerle oynuyor.
 ~
 She seems to be playing with a collection of humanoid bones, polished
 to a ghastly white gleam.  Noticing your gaze, she giggles and hurls
@@ -363,9 +363,9 @@ her status as an ira'deia, younger child, of house Reykaris.
 elf~
 ACG GPTV 81
 #11830
-drakiri lorin kız~
+drakiri lorin kÄ±z~
 Lorin~
-Narin bir kız gölgelerin ardından seni izliyor.
+Narin bir kÄ±z gÃ¶lgelerin ardÄ±ndan seni izliyor.
 ~
 Dark slitted eyes gleam from the shadows, and the thin lips part in
 a bitter not-smile.  One hand draws back, and the light glints off
@@ -375,9 +375,9 @@ is the mark of an ira'deia of house Reykaris.
 elf~
 ABCFGS FGPQTV 80
 #11831
-drakiri çake erkek~
-çake~
-Genç bir drakiri erkeği burada, çalışıyor.
+drakiri Ã§ake erkek~
+Ã§ake~
+GenÃ§ bir drakiri erkeÄŸi burada, Ã§alÄ±ÅŸÄ±yor.
 ~
 Short, jet black hair frames a narrow face with high cheekbones and dark
 slitted eyes.  The mark of an ira'deian glimmers along one cheekbone.
@@ -385,18 +385,18 @@ slitted eyes.  The mark of an ira'deian glimmers along one cheekbone.
 elf~
 ABCFG GOT 82
 #11832
-tamu muhafızı~
-tamu muhafızı~
-Bir tamu muhafızı av arıyor.
+tamu muhafÄ±zÄ±~
+tamu muhafÄ±zÄ±~
+Bir tamu muhafÄ±zÄ± av arÄ±yor.
 ~
 A rabid reddish light flickers behind narrow green cat eyes.
 ~
 pig~
 ACFG G 79
 #11833
-uluyan eğilmiş canavar figürü~
+uluyan eÄŸilmiÅŸ canavar figÃ¼rÃ¼~
 uluyan canavar~
-Eğilmiş bir figür uluyor!
+EÄŸilmiÅŸ bir figÃ¼r uluyor!
 ~
 A warped figure resembling a huge dog with glowing red eyes and
 four long muscular legs ending in wicked claws stands here, straining
@@ -406,9 +406,9 @@ the long muzzle opens to emit a furious, ear-piercing screech!
 pig~
 ABCFG O 82
 #11834
-şeytani figür gözler~
-şeytani figür~
-Delirmiş kızıl gözler karanlığın içinden seni seyrediyor.
+ÅŸeytani figÃ¼r gÃ¶zler~
+ÅŸeytani figÃ¼r~
+DelirmiÅŸ kÄ±zÄ±l gÃ¶zler karanlÄ±ÄŸÄ±n iÃ§inden seni seyrediyor.
 ~
 Barely visible in the darkness, you notice a disfigured shape behind
 the eyes.  Twisted lips part to reveal cruel white canines.  The
@@ -417,9 +417,9 @@ figure emits a threatening snarl..
 pig~
 ABCFG GTQ 81
 #11835
-balmumu heykel barudi kara figür~
+balmumu heykel barudi kara figÃ¼r~
 barudi~
-Karalara bürünmüş bir figürün balmumundan heykeli burada bekliyor.
+Karalara bÃ¼rÃ¼nmÃ¼ÅŸ bir figÃ¼rÃ¼n balmumundan heykeli burada bekliyor.
 ~
 The statue is intricately molded and seems almost alive..
 The blood red eyes seem to glow with a hellish fire.  Long,
@@ -431,9 +431,9 @@ the gleaming white fangs!
 human~
 ABFGR DGOZ 80
 #11836
-sürünen dokunaçlar~
-sürünen dokunaçlar~
-Sürünen dokunaçlar üzerine doğru ilerliyor!
+sÃ¼rÃ¼nen dokunaÃ§lar~
+sÃ¼rÃ¼nen dokunaÃ§lar~
+SÃ¼rÃ¼nen dokunaÃ§lar Ã¼zerine doÄŸru ilerliyor!
 ~
 Thick black tentacles the width of your head twine and writh
 menacingly.  The tentacles part momentarily, and you notice a
@@ -442,18 +442,18 @@ round, fanged mouth at the center, dripping blood.
 unique~
 ABCFG OZV 81
 #11837
-çağrılmış şeytan figür iri~
-çağrılmış şeytan~
-İri bir figür seni süzüyor.
+Ã§aÄŸrÄ±lmÄ±ÅŸ ÅŸeytan figÃ¼r iri~
+Ã§aÄŸrÄ±lmÄ±ÅŸ ÅŸeytan~
+Ä°ri bir figÃ¼r seni sÃ¼zÃ¼yor.
 ~
 You catch a glimpse of hellish red eyes and wickedly sharp black talons.
 ~
 unique~
 ABG EZc 95
 #11838
-drakiri jena gözler~
+drakiri jena gÃ¶zler~
 Jena~
-Karanlığın içinde her an tetikte olan gözler farkediyorsun.
+KaranlÄ±ÄŸÄ±n iÃ§inde her an tetikte olan gÃ¶zler farkediyorsun.
 ~
 You make out a slender shape crouched warily in the darkness.  The
 silver eyes gleam from a dark, narrow face like twin daggers.
@@ -464,9 +464,9 @@ silver eyes gleam from a dark, narrow face like twin daggers.
 elf~
 ABFGS FHPQTVZ 73
 #11839
-drakiri nerakis şekil~
+drakiri nerakis ÅŸekil~
 Nerakis~
-İnce yapılı bir şekil gölgelerin içine sinmiş.
+Ä°nce yapÄ±lÄ± bir ÅŸekil gÃ¶lgelerin iÃ§ine sinmiÅŸ.
 ~
 The slender form of a drakyri is nearly invisible in the shadows.
 His wary stance betrays a dangerous catlike grace.  You notice
@@ -475,9 +475,9 @@ that he bears the mark of a deiayan of house Myrxes.
 elf~
 ABFGS FHJPQT 73
 #11840
-drakiri katire figür~
+drakiri katire figÃ¼r~
 Katire~
-Karalara bürünmüş bir figür sessizce seni izliyor.
+Karalara bÃ¼rÃ¼nmÃ¼ÅŸ bir figÃ¼r sessizce seni izliyor.
 ~
 Lean honed muscles balance with the grace of a cat.  The dark slitted
 eyes seem to follow your every move.  Along one dark collar, you notice
@@ -488,7 +488,7 @@ ACGS FHPQT 70
 #11841
 drakiri riksis~
 Riksis~
-Bir drakiri gölgelerin içinde dolaşıyor.
+Bir drakiri gÃ¶lgelerin iÃ§inde dolaÅŸÄ±yor.
 ~
 Slitted emerald green eyes watch you measuringly from a darkly handsome
 elvish face.  The figure seems at home in the shadows and occasionally
@@ -498,9 +498,9 @@ wears the mark of a sequen, second in command of Myrxes.
 elf~
 ACGS FPQTV 66
 #11842
-drakiri gideyas şekil~
+drakiri gideyas ÅŸekil~
 Gideyas~
-Narin bir şekil gölgelerin içine süzülüyor.
+Narin bir ÅŸekil gÃ¶lgelerin iÃ§ine sÃ¼zÃ¼lÃ¼yor.
 ~
 In the darkness, you can barely make out a slim figure and the arches of
 dark wings.  Dark slitted eyes glitter dangerously from a fair, fine
@@ -512,7 +512,7 @@ ACGS FPQTZ 64
 #11843
 drakiri bayan dirayna~
 Dirayna~
-Bir drakiri bayanı sessizce yürüyor.
+Bir drakiri bayanÄ± sessizce yÃ¼rÃ¼yor.
 ~
 Long hair so black it blends into the shadows frames a pretty, high
 cheekboned face and dark, wary silver eyes.  Though not looking
@@ -523,9 +523,9 @@ Between her eyebrows is the mark of the Myrxes heir.
 elf~
 ABCFGS FHPQTZ 71
 #11844
-drakiri niksi kız~
+drakiri niksi kÄ±z~
 Niksi~
-Narin yapılı bir kız gölgelerin içinde geziniyor.
+Narin yapÄ±lÄ± bir kÄ±z gÃ¶lgelerin iÃ§inde geziniyor.
 ~
 The girl moves with a powerful agility that reminds you of a panther.
 Slitted silver eyes pierce the darkness to bore into your own.  Along
@@ -536,7 +536,7 @@ ABCGS FPQTZ 68
 #11845
 drakiri delise~
 Delise~
-Bir drakiri gölgelerin içinden beliriyor.
+Bir drakiri gÃ¶lgelerin iÃ§inden beliriyor.
 ~
 Pale green cat eyes seem to glow with a silent power.
 ~
@@ -545,16 +545,16 @@ ABCGS FPQTZ 68
 #11846
 kara panter~
 kara panter~
-Kara bir panter hiç ses çıkarmadan yeryüzünü adımlıyor.~
+Kara bir panter hiÃ§ ses Ã§Ä±karmadan yeryÃ¼zÃ¼nÃ¼ adÄ±mlÄ±yor.~
 Powerful muscles ripple beneath a shadow black coat.  Emerald green
 cat eyes flicker constantly around the room, taking in everything.
 ~
 cat~
 AFG DFPQ 63
 #11847
-gölge vaşak~
-gölge vaşağı~
-Bir gölge vaşağı gölgelerin içinde dolaşıyor.
+gÃ¶lge vaÅŸak~
+gÃ¶lge vaÅŸaÄŸÄ±~
+Bir gÃ¶lge vaÅŸaÄŸÄ± gÃ¶lgelerin iÃ§inde dolaÅŸÄ±yor.
 ~
 The form of a huge, dark lynx is barely visible in the shadows.
 Slitted silver eyes flicker towards you, and she hisses in warning.
@@ -563,8 +563,8 @@ cat~
 AFG DFPQ 63
 #11848
 gece kara atmaca~
-gece atmacası~
-Kocaman kara bir atmaca havada asılı duruyor.
+gece atmacasÄ±~
+Kocaman kara bir atmaca havada asÄ±lÄ± duruyor.
 ~
 She hovers silently, powerful wings outspread.  Beneath the intelligent
 dark eyes, a cruel black beak opens to emit a shrill scream of challenge!
@@ -572,9 +572,9 @@ dark eyes, a cruel black beak opens to emit a shrill scream of challenge!
 bird~
 ACFG PQTZ 75
 #11849
-avcı gölge şekil~
-gölge avcı~
-Gölgelerin içinde bir figür sessizce dolaşıyor.
+avcÄ± gÃ¶lge ÅŸekil~
+gÃ¶lge avcÄ±~
+GÃ¶lgelerin iÃ§inde bir figÃ¼r sessizce dolaÅŸÄ±yor.
 ~
 The form flits through the shadows with a dangerous silent speed.
 The head turns towards you for a moment, fixing you with a sinister
@@ -583,9 +583,9 @@ silver gaze that sends a chill up your spine.
 elf~
 ACFGS FPQTZ 71
 #11850
-avcı ok~
-avcı~
-Gümüşten bir okun seni izlediğini farkediyorsun.
+avcÄ± ok~
+avcÄ±~
+GÃ¼mÃ¼ÅŸten bir okun seni izlediÄŸini farkediyorsun.
 ~
 A lithe humanoid form crouches in the shadows, aiming a silvery
 arrow at you with dangerous accuracy.
@@ -595,7 +595,7 @@ ACFG FPQTZ 72
 #11851
 drakiri bayan diyana~
 Diyana~
-Güçlü bir drakiri bayanı dikkatle seni izliyor.
+GÃ¼Ã§lÃ¼ bir drakiri bayanÄ± dikkatle seni izliyor.
 ~
 Your eyes are held by a commanding grey gaze.  The lady seems to assess
 you even as you watch her.  She bears the weight of full armor, betraying
@@ -609,7 +609,7 @@ ABGT HT 80
 #11852
 drakiri rike lord~
 Rike~
-Bir drakiri lordu güç yayıyor.
+Bir drakiri lordu gÃ¼Ã§ yayÄ±yor.
 ~
 Lean, powerful muscles indicate a lifetime of physical training
 and weapons work.  Along the collar is the mark of the deiayan (consort)
@@ -620,7 +620,7 @@ ABGT HT 79
 #11853
 drakiri niksil~
 Niksil~
-Altın saçlı bir drakiri pratik yapıyor.
+AltÄ±n saÃ§lÄ± bir drakiri pratik yapÄ±yor.
 ~
 Flashing swords gleam in a fast, dangerous dance as the lady skims
 through sword maneuvers that seem as easy to her as breathing.  Slitted
@@ -631,9 +631,9 @@ Xaek's first commander (sh'aya).
 elf~
 AGT T 67
 #11854
-drakiri rakayel dişi savaşçı~
+drakiri rakayel diÅŸi savaÅŸÃ§Ä±~
 Rakayel~
-Dişi bir drakiri savaşçısı kılıç yeteneğini geliştiriyor.
+DiÅŸi bir drakiri savaÅŸÃ§Ä±sÄ± kÄ±lÄ±Ã§ yeteneÄŸini geliÅŸtiriyor.
 ~
 Silver hair and silver eyes flash in the light as the warrior works
 gracefully through sword maneuvers.  As she spins and parries with
@@ -645,7 +645,7 @@ AGT T 74
 #11855
 drakiri yeven erkek~
 Yeven~
-Kaslı vücuduyla bir drakiri erkeği işiyle uğraşıyor.
+KaslÄ± vÃ¼cuduyla bir drakiri erkeÄŸi iÅŸiyle uÄŸraÅŸÄ±yor.
 ~
 He seems to be going over some sort of maps.  Powerful muscles bulge
 beneath leather practice armor, yet he moves with a quickness that
@@ -655,9 +655,9 @@ the mark of the Xaek treye, third commander.
 elf~
 AGT TZ 71
 #11856
-drakiri versant çocuk~
+drakiri versant Ã§ocuk~
 Versant~
-Uzunca bir drakiri çocuğu kız kardeşiyle tartışıyor.
+Uzunca bir drakiri Ã§ocuÄŸu kÄ±z kardeÅŸiyle tartÄ±ÅŸÄ±yor.
 ~
 Short golden hair frames a handsome, sculpted elf face and brilliant
 green eyes.  He towers several inches above you, yet his honed
@@ -667,9 +667,9 @@ center of his forehead marks him as the na'deia (heir) to Xaek.
 elf~
 ABGT Z 76
 #11857
-drakiri sayera kız~
+drakiri sayera kÄ±z~
 Sayera~
-Narin vücuduyla bir drakiri kızı erkek kardeşiyle tartışıyor.
+Narin vÃ¼cuduyla bir drakiri kÄ±zÄ± erkek kardeÅŸiyle tartÄ±ÅŸÄ±yor.
 ~
 Mithril flashes in a silvery blur as the girl slashes and dodges with
 deadly speed and accuracy.  Along her cheekbone is the mark of
@@ -680,7 +680,7 @@ ABGT Z 72
 #11858
 gri aslan~
 gri aslan~
-İrice bir gri aslan burada bekliyor.
+Ä°rice bir gri aslan burada bekliyor.
 ~
 Grey fur shimmers over powerful muscles.  Intelligent golden eyes
 follow you warily.
@@ -690,7 +690,7 @@ AB 0 82
 #11859
 beyaz aslan~
 beyaz aslan~
-İrice bir beyaz aslan burada duruyor.
+Ä°rice bir beyaz aslan burada duruyor.
 ~
 The lion moves with a powerful, silent grace which is strangely at odds
 with her size.  Deep emerald eyes flicker around the room.
@@ -698,18 +698,18 @@ with her size.  Deep emerald eyes flicker around the room.
 cat~
 AB 0 81
 #11860
-muhafız şövalye~
-muhafız şövalye~
-Bir şövalye etrafı gözlüyor.
+muhafÄ±z ÅŸÃ¶valye~
+muhafÄ±z ÅŸÃ¶valye~
+Bir ÅŸÃ¶valye etrafÄ± gÃ¶zlÃ¼yor.
 ~
 The knight is tall, powerful, and quite ready to defend.
 ~
 elf~
 ABT 0 71
 #11861
-drakiri savaşçı~
-savaşçı~
-Bir drakiri savaşçı savunma yeteneklerini geliştiriyor.
+drakiri savaÅŸÃ§Ä±~
+savaÅŸÃ§Ä±~
+Bir drakiri savaÅŸÃ§Ä± savunma yeteneklerini geliÅŸtiriyor.
 ~
 The drakyri works through defensive maneuvers over and over, with
 growing agility and quickness.
@@ -717,9 +717,9 @@ growing agility and quickness.
 elf~
 ABGT 0 70
 #11862
-drakiri savaşçı tartışan~
-tartışan savaşçı~
-Bir drakiri savaşçısı burada, tartışıyor.
+drakiri savaÅŸÃ§Ä± tartÄ±ÅŸan~
+tartÄ±ÅŸan savaÅŸÃ§Ä±~
+Bir drakiri savaÅŸÃ§Ä±sÄ± burada, tartÄ±ÅŸÄ±yor.
 ~
 The warrior seems quite intent on weapons work.
 ~
@@ -728,7 +728,7 @@ AGT 0 86
 #11863
 drakiri yiksanes erkek~
 Yiksanes~
-Uzun boylu bir drakiri erkeği burada duruyor.
+Uzun boylu bir drakiri erkeÄŸi burada duruyor.
 ~
 A thin niobium circlet confines short golden hair, framing brilliant
 green eyes and a powerfully sculpted elf face.  Centered between
@@ -741,7 +741,7 @@ AGQ DFHT 88
 #11864
 drakiri nerayel bayan~
 Nerayel~
-Beyazlar içinde bir drakiri bayanı burada duruyor.
+Beyazlar iÃ§inde bir drakiri bayanÄ± burada duruyor.
 ~
 Cascades of shimmering hair the color of white gold fall in waves down
 the lady's white clad back, between delicate iridescent wings.
@@ -751,9 +751,9 @@ On her collar, the lady bears the mark of the deiaya of myr'vale Noriva.
 elf~
 AGQ DFHT 84
 #11865
-drakiri jorine kadın~
+drakiri jorine kadÄ±n~
 Jorine~
-Bir drakiri kadını meditasyon yapıyor.
+Bir drakiri kadÄ±nÄ± meditasyon yapÄ±yor.
 ~
 An aura of health and power surrounds her.  A mark on her collar
 indicates her rank as sh'aya of myr'vale (minor house) Noriva.
@@ -775,7 +775,7 @@ ABGQT DFNOT 74
 #11867
 drakiri nerra erkek~
 Nerra~
-Bir drakiri erkeği yabani ot topluyor.
+Bir drakiri erkeÄŸi yabani ot topluyor.
 ~
 Despite his scruffy work clothing, Nerr emanates health and power.
 His slitted golden eyes are narrowed in concentration as he heightens
@@ -786,7 +786,7 @@ ABGQ DFT 72
 #11868
 drakiri yiliyra bayan~
 Yllyra~
-Uzun boylu bir drakiri bayanı şifalı otlar üzerine çalışıyor.
+Uzun boylu bir drakiri bayanÄ± ÅŸifalÄ± otlar Ã¼zerine Ã§alÄ±ÅŸÄ±yor.
 ~
 She twirls a lock of shiny white gold hair between her fingers as she
 concentrates.  Iridescent wings drape down her back, lifting
@@ -796,9 +796,9 @@ dot of the Noriva na'deia.
 elf~
 ABQ DFH 77
 #11869
-drakiri dirina kız~
+drakiri dirina kÄ±z~
 Dirina~
-Genç bir drakiri kızı gülüyor.
+GenÃ§ bir drakiri kÄ±zÄ± gÃ¼lÃ¼yor.
 ~
 Shimmering golden hair falls in a curtain down her back, between
 fluttering iridescent wings.  Lively green gold eyes sparkle
@@ -808,9 +808,9 @@ On one cheekbone, she bears the mark of an ira'deia of Noriva.
 elf~
 ACGQ DFPT 72
 #11870
-drakiri voril oğlan~
+drakiri voril oÄŸlan~
 Voril~
-Uzun boylu bir drakiri oğlanı burada, çalışıyor.
+Uzun boylu bir drakiri oÄŸlanÄ± burada, Ã§alÄ±ÅŸÄ±yor.
 ~
 He seems to be engrossed in a tome on healing.  Wavy white gold hair,
 cut short, frames a handsome, youthful face and sparkling green eyes.
@@ -821,7 +821,7 @@ ACGQ DFT 86
 #11871
 beyaz kedi~
 beyaz kedi~
-Beyaz bir kedi dolaşıyor.
+Beyaz bir kedi dolaÅŸÄ±yor.
 ~
 Snowy white fur gleams softly in the light.  You feel the urge to pet
 it.. but as you reach out your hand, the slitted green eyes snap open
@@ -830,9 +830,9 @@ and the cat hisses warningly.
 cat~
 ABC PZ 72
 #11872
-gri kedi gümüşi~
+gri kedi gÃ¼mÃ¼ÅŸi~
 gri kedi~
-Gümüşi bir gri kedi sessizce ilerliyor.
+GÃ¼mÃ¼ÅŸi bir gri kedi sessizce ilerliyor.
 ~
 Silvery grey fur shimmers in the light.  Bright silver cat eyes
 follow you warily.
@@ -840,9 +840,9 @@ follow you warily.
 cat~
 AB FPZ 73
 #11873
-drakiri muhafız ruh şekil hayalet~
-muhafızın ruhu~
-Hayalete benzer bir şekil burada bekliyor.
+drakiri muhafÄ±z ruh ÅŸekil hayalet~
+muhafÄ±zÄ±n ruhu~
+Hayalete benzer bir ÅŸekil burada bekliyor.
 ~
 As you gaze at it, the form seems to sharpen and come into focus.
 It appears to be the spirit of a drakyri, long dead and set to
@@ -851,9 +851,9 @@ guard here.
 unique~
 ABGQ BDFTUZ 89
 #11874
-drakiri büyücü alev~
+drakiri bÃ¼yÃ¼cÃ¼ alev~
 Alev~
-Güçlü bir drakiri büyücüsü alev aurasının içinde bekliyor.
+GÃ¼Ã§lÃ¼ bir drakiri bÃ¼yÃ¼cÃ¼sÃ¼ alev aurasÄ±nÄ±n iÃ§inde bekliyor.
 ~
 Even her eyes seem to glow with a strange, reddish light.  You
 sense an aura of raw magical power around her, controllable only
@@ -864,7 +864,7 @@ AGR HT 95
 #11875
 drakiri paladin kalkan~
 Kalkan~
-Bir drakiri paladini kontrol ettiği güçle parlıyor.
+Bir drakiri paladini kontrol ettiÄŸi gÃ¼Ã§le parlÄ±yor.
 ~
 He seems almost too bright to look at, and you are forced to avert your
 gaze after a brief glance.  He is the Shield, one of the most
@@ -874,9 +874,9 @@ elite force of drakyri, the Laerkai.
 elf~
 AGT DHNT 92
 #11876
-pençe drakiri şövalye uğursuz~
-Pençe~
-Karalara bürünmüş uğursuz bir şövalye burada bekliyor.
+penÃ§e drakiri ÅŸÃ¶valye uÄŸursuz~
+PenÃ§e~
+Karalara bÃ¼rÃ¼nmÃ¼ÅŸ uÄŸursuz bir ÅŸÃ¶valye burada bekliyor.
 ~
 The drakyri emanates an aura of pure evil power.  Noting your gaze,
 she smiles a cruel not-smile and flexes wickedly sharp taloned hands.
@@ -884,9 +884,9 @@ she smiles a cruel not-smile and flexes wickedly sharp taloned hands.
 elf~
 ACGT DHOT 92
 #11877
-gölge gölgeler drakiri~
-Gölge~
-Buradaki gölgeler koyu ve derin.
+gÃ¶lge gÃ¶lgeler drakiri~
+GÃ¶lge~
+Buradaki gÃ¶lgeler koyu ve derin.
 ~
 You notice a slim figure shrouded in the deep shadows.  He turns, and
 sharp silver eyes pierce the darkness like knife blades.  His movements
@@ -896,9 +896,9 @@ power and agility, both dangerous.
 elf~
 ACGS FHPQT 92
 #11878
-savaşçı drakiri yumruk~
+savaÅŸÃ§Ä± drakiri yumruk~
 Yumruk~
-Güçlü bir drakiri savaşçısı burada bekliyor.
+GÃ¼Ã§lÃ¼ bir drakiri savaÅŸÃ§Ä±sÄ± burada bekliyor.
 ~
 She towers at least a head above you, muscles rippling beneath the
 plates of her armor.  Her sheer might would best most warriors in
@@ -908,9 +908,9 @@ to be a master.
 elf~
 AGT HT 91
 #11879
-din adamı el drakiri~
+din adamÄ± el drakiri~
 El~
-Güçlü bir drakiri din adamı beyaz bir ışığa bürünmüş.
+GÃ¼Ã§lÃ¼ bir drakiri din adamÄ± beyaz bir Ä±ÅŸÄ±ÄŸa bÃ¼rÃ¼nmÃ¼ÅŸ.
 ~
 Though not much taller than yourself, the drakyri seems to tower
 far above you, as if possessed by some divine presense.
@@ -920,7 +920,7 @@ AGQ DFHNOT 91
 #11880
 drakiri efendi layerkayi~
 Layerkayi Efendi~
-Narin yapılı bir drakiri güç oluşturuyor.
+Narin yapÄ±lÄ± bir drakiri gÃ¼Ã§ oluÅŸturuyor.
 ~
 The brilliant silver eyes of the master Laerkai look deep into your
 own, as if scouring your soul.  She is the leader of the Laerkai, the
@@ -933,9 +933,9 @@ Trained by both, she has become a lethal blend of sorcery and stealth.
 elf~
 ABCFGRS BDFHPQT 100
 #11881
-drakiri muhafızı~
-Muhafız~
-Muhafız seni izliyor.
+drakiri muhafÄ±zÄ±~
+MuhafÄ±z~
+MuhafÄ±z seni izliyor.
 ~
 The Guardian is a drakyri raised and trained specially to guard and serve
 the drakyri council.  She excels at many skills, due to decades of
@@ -944,9 +944,9 @@ devotion and training, and is a formidable opponent.
 elf~
 ABGQT DFHT 94
 #11882
-drakiri arabulucu ışık gri~
+drakiri arabulucu Ä±ÅŸÄ±k gri~
 Arabulucu~
-Gri bir ışık odayı dolduruyor.
+Gri bir Ä±ÅŸÄ±k odayÄ± dolduruyor.
 ~
 The light seems to shift and change even as you look at it.  This is
 the drakyri Mediator, a blend of the souls of those drakyri who devoted
@@ -958,9 +958,9 @@ it passes the final judgment on all issues that affect the race as a whole.
 unique~
 ABGQRU BCDEFGHTUZ 90
 #11883
-drakiri şövalye koruyucu~
-şövalye koruyucu~
-Bir drakiri şövalyesi burada bekliyor.
+drakiri ÅŸÃ¶valye koruyucu~
+ÅŸÃ¶valye koruyucu~
+Bir drakiri ÅŸÃ¶valyesi burada bekliyor.
 ~
 This is a knight trained by myr'vale Xaek and sworn to guard and
 protect the land and its inhabitants til death.
@@ -968,9 +968,9 @@ protect the land and its inhabitants til death.
 elf~
 AGT T 66
 #11884
-drakiri koruyuvu büyücü~
-büyücü koruyucu~
-Bir drakiri büyücüsü burada bekliyor.
+drakiri koruyuvu bÃ¼yÃ¼cÃ¼~
+bÃ¼yÃ¼cÃ¼ koruyucu~
+Bir drakiri bÃ¼yÃ¼cÃ¼sÃ¼ burada bekliyor.
 ~
 Trained by she'vale Deriki, this mage is sworn to protect the land
 and its inhabitants until death.
@@ -978,9 +978,9 @@ and its inhabitants until death.
 elf~
 AGR DT 68
 #11885
-drakiri şifacı~
-şifacı~
-Bir drakiri şifacısı burada duruyor.
+drakiri ÅŸifacÄ±~
+ÅŸifacÄ±~
+Bir drakiri ÅŸifacÄ±sÄ± burada duruyor.
 ~
 This is a cleric trained by myr'vale Noriva to tend to the health
 of the land and its inhabitants.  The healer has no allegiances
@@ -990,9 +990,9 @@ master, the mediator, and the warden.
 elf~
 AGQ DNOT 68
 #11886
-drakiri suikastçi~
-suikastçi~
-Bir drakiri suikastçisi gölgelerin içinde bekliyor.
+drakiri suikastÃ§i~
+suikastÃ§i~
+Bir drakiri suikastÃ§isi gÃ¶lgelerin iÃ§inde bekliyor.
 ~
 This drakyri has been trained by myr'vale Myrxes to perform special
 jobs in the outside world.  The assassin answers mainly to the laerkai
@@ -1001,9 +1001,9 @@ master, and occasionally to the mediator or warden.
 elf~
 ACS FPQT 67
 #11887
-zayıf drakiri yaşlı adam~
-zayıf ve yaşlı adam~
-Zayıf ve yaşlı bir adam sana gülümsüyor.
+zayÄ±f drakiri yaÅŸlÄ± adam~
+zayÄ±f ve yaÅŸlÄ± adam~
+ZayÄ±f ve yaÅŸlÄ± bir adam sana gÃ¼lÃ¼msÃ¼yor.
 ~
 You sense something strange about this old man..  Aware of your
 scrutiny, he glances up, revealing sparkling blue eyes which hold
@@ -1013,9 +1013,9 @@ He winks at you and returns to his work.
 elf~
 ABG DFT 65
 #11888
-drakiri bekçi~
-Bekçi~
-Bekçi burada, kapıları koruyor.
+drakiri bekÃ§i~
+BekÃ§i~
+BekÃ§i burada, kapÄ±larÄ± koruyor.
 ~
 The Warden is one of the most powerful drakyri, assigned to guard the
 gates to the isle against hostile invasion.  Her sharp silver eyes,
@@ -1030,9 +1030,9 @@ ABGT DFHNOTZ 88
 
 #NEW_OBJECTS
 #11800
-mavi mermer çeşme~
-mavi mermer çeşme~
-Mavi mermer bir çeşmeden sessizce su akıyor.~
+mavi mermer Ã§eÅŸme~
+mavi mermer Ã§eÅŸme~
+Mavi mermer bir Ã§eÅŸmeden sessizce su akÄ±yor.~
 marble~
 fountain 0 0
 1000 1000 water 0 0
@@ -1048,17 +1048,17 @@ elven, but twin wings rise from the shoulderblades, sculpted feathers
 cascading over the sorceress' back like a cloak.
 ~
 #11801
-siyah mermer anahtar taş~
+siyah mermer anahtar taÅŸ~
 siyah mermer anahtar~
-Küçük bir mermer taşı burada bırakılmış.~
+KÃ¼Ã§Ã¼k bir mermer taÅŸÄ± burada bÄ±rakÄ±lmÄ±ÅŸ.~
 stone~
 key 0 A
 0 0 0 0 0
 1 10 0 P
 #11802
-taş siyah dokunaç anahtar~
-dokunaçlı anahtar~
-Üzerinde beş dokunacın olduğu siyah taştan anahtar burada bırakılmış.~
+taÅŸ siyah dokunaÃ§ anahtar~
+dokunaÃ§lÄ± anahtar~
+Ãœzerinde beÅŸ dokunacÄ±n olduÄŸu siyah taÅŸtan anahtar burada bÄ±rakÄ±lmÄ±ÅŸ.~
 stone~
 key B A
 0 0 0 0 0
@@ -1066,7 +1066,7 @@ key B A
 #11803
 drakiri heykeli~
 drakiri heykeli~
-Dizlerinin üzerine çökmüş bir drakiri heykeli burada duruyor.~
+Dizlerinin Ã¼zerine Ã§Ã¶kmÃ¼ÅŸ bir drakiri heykeli burada duruyor.~
 stone~
 fountain 0 0
 1000 1000 milk 0 0
@@ -1081,7 +1081,7 @@ the hands is a carved bowl filled with cloudy white liquid.
 #11804
 su havuzu~
 su havuzu~
-Bir su havuzu ışıkta parlıyor.~
+Bir su havuzu Ä±ÅŸÄ±kta parlÄ±yor.~
 water~
 portal 0 0
 0 0 A 11802 0
@@ -1095,9 +1095,9 @@ ripples and clears, leaving only your reflection.. or perhaps the vision
 was just your imagination?  The water sparkles in the light.
 ~
 #11805
-gümüş muhafızın anahtarı~
-muhafızın anahtarı~
-Gümüş bir anahtar burada unutulmuş.~
+gÃ¼mÃ¼ÅŸ muhafÄ±zÄ±n anahtarÄ±~
+muhafÄ±zÄ±n anahtarÄ±~
+GÃ¼mÃ¼ÅŸ bir anahtar burada unutulmuÅŸ.~
 silver~
 key A A
 0 0 0 0 0
@@ -1105,15 +1105,15 @@ key A A
 #11806
 siyah tezgah~
 siyah tezgah~
-Siyah bir tezgah havada süzülüyor. Tepesine bir işaret iliştirilmiş.~
+Siyah bir tezgah havada sÃ¼zÃ¼lÃ¼yor. Tepesine bir iÅŸaret iliÅŸtirilmiÅŸ.~
 stone~
 portal B 0
 0 0 A 11818 0
 0 0 0 P
 E
 siyah tezgah~
-Tezgahı yere bağlayan birşey yok. Garip bir şekilde havada süzülüyor.
-Biraz yaklaştığında siyah taşın üzerinde kendi yansını görüyorsun...
+TezgahÄ± yere baÄŸlayan birÅŸey yok. Garip bir ÅŸekilde havada sÃ¼zÃ¼lÃ¼yor.
+Biraz yaklaÅŸtÄ±ÄŸÄ±nda siyah taÅŸÄ±n Ã¼zerinde kendi yansÄ±nÄ± gÃ¶rÃ¼yorsun...
 ~
 E
 sign~
@@ -1125,9 +1125,9 @@ Type list to list items.
 Type buy to buy something.
 ~
 #11807
-parlayan ışık perde~
+parlayan Ä±ÅŸÄ±k perde~
 parlayan perde~
-Bir ışık kaynağını içine hapsetmiş gibi parlayan perde havada asılı duruyor.~
+Bir Ä±ÅŸÄ±k kaynaÄŸÄ±nÄ± iÃ§ine hapsetmiÅŸ gibi parlayan perde havada asÄ±lÄ± duruyor.~
 light~
 portal A 0
 0 1 A 11801 0
@@ -1137,9 +1137,9 @@ shimmering curtain light~
 Peering through the curtain, you see a grove of trees.
 ~
 #11808
-taş masa~
-büyük taş masa~
-Büyük taş bir masa burada duruyor.~
+taÅŸ masa~
+bÃ¼yÃ¼k taÅŸ masa~
+BÃ¼yÃ¼k taÅŸ bir masa burada duruyor.~
 stone~
 portal 0 0
 0 0 A 11812 0
@@ -1153,7 +1153,7 @@ Engraved across the center of the table are the words:
 #11809
 mitril ((+*+)) tork~
 mitril ((+*+)) tork~
-Oymalı bir mitril tork parlıyor.~
+OymalÄ± bir mitril tork parlÄ±yor.~
 mithril~
 armor AI AC
 28 28 29 23 0
@@ -1173,9 +1173,9 @@ An inscription along the edge reads:
                Sh'evale Deriki Lechandre Deia
 ~
 #11810
-parlak mavi cüppe~
-parlak mavi cüppe~
-Mavi bir cüppe parlıyor.~
+parlak mavi cÃ¼ppe~
+parlak mavi cÃ¼ppe~
+Mavi bir cÃ¼ppe parlÄ±yor.~
 light~
 armor A AK
 28 27 27 25 0
@@ -1191,8 +1191,8 @@ An inscription along the edge reads:
                Sh'evale Deriki Lechandre Deia
 ~
 #11811
-büyülü alev~
-büyülü alev~
+bÃ¼yÃ¼lÃ¼ alev~
+bÃ¼yÃ¼lÃ¼ alev~
 Garip bir alev burada bekliyor.~
 fire~
 light A A
@@ -1203,9 +1203,9 @@ A
 A
 19 5
 #11812
-oymalı ((+*+)) yüzük~
-oymalı ((+*+)) yüzük~
-Karmaşık oymalarla bezenmiş bir yüzük burada yatıyor.~
+oymalÄ± ((+*+)) yÃ¼zÃ¼k~
+oymalÄ± ((+*+)) yÃ¼zÃ¼k~
+KarmaÅŸÄ±k oymalarla bezenmiÅŸ bir yÃ¼zÃ¼k burada yatÄ±yor.~
 mithril~
 armor B AB
 28 28 28 25 0
@@ -1227,7 +1227,7 @@ An inscription along the inside of the band reads:
 #11813
 ((+*+)) ibik~
 ((+*+)) ibik~
-Süslü bir ibik burada bekliyor.~
+SÃ¼slÃ¼ bir ibik burada bekliyor.~
 mithril~
 armor A AO
 27 27 28 15 0
@@ -1251,7 +1251,7 @@ An inscription along the inside of the band reads:
 #11814
 mitril ((+*+)) bileklik~
 ((+*+)) bileklik~
-Süslü bir mitril bileklik parlıyor.~
+SÃ¼slÃ¼ bir mitril bileklik parlÄ±yor.~
 mithril~
 armor A AM
 27 28 27 25 0
@@ -1263,7 +1263,7 @@ A
 #11815
 ((+*+)) zincir kemer~
 ((+*+)) zincir kemer~
-Oymalı bir kemer parlıyor.~
+OymalÄ± bir kemer parlÄ±yor.~
 mithril~
 armor A AL
 27 27 27 24 0
@@ -1275,9 +1275,9 @@ A
 A
 19 7
 #11816
-((+*+)) ayakkabılar~
-bir çift ((+*+)) ayakkabı~
-Bir çift parlayan ayakkabı burada bekliyor.~
+((+*+)) ayakkabÄ±lar~
+bir Ã§ift ((+*+)) ayakkabÄ±~
+Bir Ã§ift parlayan ayakkabÄ± burada bekliyor.~
 mithril~
 armor A AG
 26 27 26 24 0
@@ -1293,9 +1293,9 @@ A
 A
 18 -2
 #11817
-((+*+)) bacaklık~
-bir çift ((+*+)) bacaklık~
-Bir çift bacaklık parlıyor.~
+((+*+)) bacaklÄ±k~
+bir Ã§ift ((+*+)) bacaklÄ±k~
+Bir Ã§ift bacaklÄ±k parlÄ±yor.~
 mithril~
 armor AI AF
 27 27 27 23 0
@@ -1309,9 +1309,9 @@ A
 A
 19 7
 #11818
-parlak((+*+)) miğfer~
-parlak ((+*+)) miğfer~
-Karmaşık oymalarla bezenmiş bir miğfer parlıyor.~
+parlak((+*+)) miÄŸfer~
+parlak ((+*+)) miÄŸfer~
+KarmaÅŸÄ±k oymalarla bezenmiÅŸ bir miÄŸfer parlÄ±yor.~
 mithril~
 armor AG AE
 26 26 26 23 0
@@ -1327,9 +1327,9 @@ A
 A
 19 6
 #11819
-parlak ((+*+)) küre~
-parlak ((+*+)) küre~
-Ürkütücü bir ışıkla parlayan bir küre burada bekliyor.~
+parlak ((+*+)) kÃ¼re~
+parlak ((+*+)) kÃ¼re~
+ÃœrkÃ¼tÃ¼cÃ¼ bir Ä±ÅŸÄ±kla parlayan bir kÃ¼re burada bekliyor.~
 light~
 armor ABI AQ
 26 25 26 24 0
@@ -1345,7 +1345,7 @@ A
 #11820
 ((+*+)) tunik~
 ((+*+)) tunik~
-Bir tunik burada bırakılmış.~
+Bir tunik burada bÄ±rakÄ±lmÄ±ÅŸ.~
 silk~
 armor 0 AD
 26 26 25 25 0
@@ -1359,9 +1359,9 @@ A
 A
 20 -5
 #11821
-baykuşun gözleri~
-Baykuşun gözleri~
-Tüylerle bezenmiş bir çift göz burada dinleniyor.~
+baykuÅŸun gÃ¶zleri~
+BaykuÅŸun gÃ¶zleri~
+TÃ¼ylerle bezenmiÅŸ bir Ã§ift gÃ¶z burada dinleniyor.~
 feather~
 armor GI AE
 28 28 27 24 0
@@ -1376,8 +1376,8 @@ A
 20 -5
 #11822
 mitril koruma asa~
-koruma asası~
-Kirlenmiş mitril bir asa burada bekliyor.~
+koruma asasÄ±~
+KirlenmiÅŸ mitril bir asa burada bekliyor.~
 mithril~
 staff B AO
 100 11 11 'sanctuary' 0
@@ -1385,9 +1385,9 @@ staff B AO
 A
 17 -20
 #11823
-parlak ((-*-)) taç~
-parlak ((-*-)) taç~
-Oymalı bir altın taç parlıyor.~
+parlak ((-*-)) taÃ§~
+parlak ((-*-)) taÃ§~
+OymalÄ± bir altÄ±n taÃ§ parlÄ±yor.~
 gold~
 armor AIKL AE
 28 27 29 24 0
@@ -1401,9 +1401,9 @@ A
 A
 19 8
 #11824
-((-*-)) zırh~
-((-*-)) zırh~
-Oymalı bir zırh burada yatıyor.~
+((-*-)) zÄ±rh~
+((-*-)) zÄ±rh~
+OymalÄ± bir zÄ±rh burada yatÄ±yor.~
 gold~
 armor IKL AD
 28 25 27 24 0
@@ -1417,7 +1417,7 @@ A
 #11825
 beyaz ((-*-)) kemer~
 beyaz ((-*-)) kemer~
-Parlak beyaz bir kemer burada yatıyor.~
+Parlak beyaz bir kemer burada yatÄ±yor.~
 leather~
 armor IKL AL
 28 27 25 24 0
@@ -1432,8 +1432,8 @@ A
 19 7
 #11826
 ((-*-)) eldiven~
-bir çift ((-*-)) eldiven~
-Oymalı bir çift eldiven parlıyor.~
+bir Ã§ift ((-*-)) eldiven~
+OymalÄ± bir Ã§ift eldiven parlÄ±yor.~
 gold~
 armor IKL AH
 26 27 27 24 0
@@ -1447,9 +1447,9 @@ A
 A
 19 8
 #11827
-((-*-)) bacaklık~
-bir çift ((-*-)) bacaklık~
-Bir çift oymalı bacaklık burada bekliyor.~
+((-*-)) bacaklÄ±k~
+bir Ã§ift ((-*-)) bacaklÄ±k~
+Bir Ã§ift oymalÄ± bacaklÄ±k burada bekliyor.~
 gold~
 armor IKL AF
 26 27 27 23 0
@@ -1479,9 +1479,9 @@ A
 A
 19 7
 #11829
-altın ((-*-)) bilek bağı~
-altın ((-*-)) bilek bağı~
-Karmaşık oymalarla bezenmiş bir bilek bağı burada yatıyor.~
+altÄ±n ((-*-)) bilek baÄŸÄ±~
+altÄ±n ((-*-)) bilek baÄŸÄ±~
+KarmaÅŸÄ±k oymalarla bezenmiÅŸ bir bilek baÄŸÄ± burada yatÄ±yor.~
 gold~
 armor IKL AM
 28 27 27 24 0
@@ -1495,9 +1495,9 @@ A
 A
 19 7
 #11830
-nakışlı ((-*-)) pelerin~
-nakışlı ((-*-)) pelerin~
-Güzel nakışlarla süslenmiş bir pelerin kıvrılmış yatıyor.~
+nakÄ±ÅŸlÄ± ((-*-)) pelerin~
+nakÄ±ÅŸlÄ± ((-*-)) pelerin~
+GÃ¼zel nakÄ±ÅŸlarla sÃ¼slenmiÅŸ bir pelerin kÄ±vrÄ±lmÄ±ÅŸ yatÄ±yor.~
 linen~
 armor IKL AK
 26 25 26 23 0
@@ -1517,15 +1517,15 @@ A
 #11831
 eski kitap~
 eski kitap~
-Tozla kaplanmış eski bir kitap burada yatıyor.~
+Tozla kaplanmÄ±ÅŸ eski bir kitap burada yatÄ±yor.~
 parchment~
 staff BFG AO
 85 3 3 'detect hidden' 0
 79 50 28000 P
 #11832
-süslü maske~
-süslü maske~
-Süslü bir maske burada yatıyor.~
+sÃ¼slÃ¼ maske~
+sÃ¼slÃ¼ maske~
+SÃ¼slÃ¼ bir maske burada yatÄ±yor.~
 wood~
 armor BFI AE
 26 26 26 23 0
@@ -1539,9 +1539,9 @@ A
 A
 19 6
 #11833
-((-*-)) altın kolluk~
-bir çift ((-*-)) kolluk~
-Bir çift altın kolluk burada yatıyor.~
+((-*-)) altÄ±n kolluk~
+bir Ã§ift ((-*-)) kolluk~
+Bir Ã§ift altÄ±n kolluk burada yatÄ±yor.~
 gold~
 armor IKL AI
 25 26 26 25 0
@@ -1555,9 +1555,9 @@ A
 A
 19 7
 #11834
-parlak beyaz kılıç~
-parlak beyaz kılıç~
-Beyaz bir kılıç parlıyor.~
+parlak beyaz kÄ±lÄ±Ã§~
+parlak beyaz kÄ±lÄ±Ã§~
+Beyaz bir kÄ±lÄ±Ã§ parlÄ±yor.~
 mithril~
 weapon IK AN
 sword 9 12 cleave 0
@@ -1569,7 +1569,7 @@ A
 #11835
 parlak beyaz kalkan~
 parlak beyaz kalkan~
-Beyaz bir kalkan parlıyor.~
+Beyaz bir kalkan parlÄ±yor.~
 mithril~
 armor IK AJ
 27 27 27 23 0
@@ -1581,17 +1581,17 @@ A
 A
 19 7
 #11836
-derin indigo hapı~
-derin indigo hapı~
-Derin bir indigo hapı burada bekliyor.~
+derin indigo hapÄ±~
+derin indigo hapÄ±~
+Derin bir indigo hapÄ± burada bekliyor.~
 wheat~
 pill 0 A
 65 'sanctuary' 'bless' '' ''
 55 10 850 P
 #11837
-siyah kehribar ->*<- miğfer~
-siyah kehribar ->*<- miğfer~
-Oymalı siyah bir miğfer ışığı emiyor.~
+siyah kehribar ->*<- miÄŸfer~
+siyah kehribar ->*<- miÄŸfer~
+OymalÄ± siyah bir miÄŸfer Ä±ÅŸÄ±ÄŸÄ± emiyor.~
 obsidian~
 armor CJL AE
 28 28 28 24 0
@@ -1605,9 +1605,9 @@ A
 A
 19 8
 #11838
-pençeli eldiven~
-bir çift pençeli eldiven~
-Uzun sivri pençeleriyle bir çift eldiven burada bırakılmış.~
+penÃ§eli eldiven~
+bir Ã§ift penÃ§eli eldiven~
+Uzun sivri penÃ§eleriyle bir Ã§ift eldiven burada bÄ±rakÄ±lmÄ±ÅŸ.~
 obsidian~
 armor JL AH
 28 25 27 24 0
@@ -1619,9 +1619,9 @@ A
 A
 19 13
 #11839
-->*<- göğüslük~
-->*<- göğüslük~
-Kara bir göğüslük burada bekliyor.~
+->*<- gÃ¶ÄŸÃ¼slÃ¼k~
+->*<- gÃ¶ÄŸÃ¼slÃ¼k~
+Kara bir gÃ¶ÄŸÃ¼slÃ¼k burada bekliyor.~
 obsidian~
 armor EJL AD
 27 28 28 24 0
@@ -1635,9 +1635,9 @@ A
 A
 19 8
 #11840
-kara ->*<- küre~
-kara ->*<- küre~
-Kara bir küre şeytanlık yayarak havada asılı duruyor.~
+kara ->*<- kÃ¼re~
+kara ->*<- kÃ¼re~
+Kara bir kÃ¼re ÅŸeytanlÄ±k yayarak havada asÄ±lÄ± duruyor.~
 nothingness~
 armor CEJL AQ
 27 26 28 24 0
@@ -1651,9 +1651,9 @@ A
 A
 19 6
 #11841
-->*<- bacaklık~
-bir çift  ->*<-  bacaklık~
-Şeytani görünümüyle bir çift bacaklık burada bekliyor.~
+->*<- bacaklÄ±k~
+bir Ã§ift  ->*<-  bacaklÄ±k~
+Åeytani gÃ¶rÃ¼nÃ¼mÃ¼yle bir Ã§ift bacaklÄ±k burada bekliyor.~
 obsidian~
 armor EJLM AF
 27 27 27 23 0
@@ -1667,9 +1667,9 @@ A
 A
 19 7
 #11842
-oymalı ->*<- yüzük~
-oymalı ->*<- yüzük~
-Oymalı kara bir yüzük burada yatıyor.~
+oymalÄ± ->*<- yÃ¼zÃ¼k~
+oymalÄ± ->*<- yÃ¼zÃ¼k~
+OymalÄ± kara bir yÃ¼zÃ¼k burada yatÄ±yor.~
 obsidian~
 armor EJLM AB
 16 16 16 13 0
@@ -1685,7 +1685,7 @@ A
 #11843
 kabus pelerin~
 kabus pelerini~
-Gölgelerle bezenmiş bir pelerin acıyla kıvranıyor.~
+GÃ¶lgelerle bezenmiÅŸ bir pelerin acÄ±yla kÄ±vranÄ±yor.~
 shadows~
 armor CEFJ AK
 24 23 23 23 0
@@ -1707,7 +1707,7 @@ A
 #11844
 abanoz ->*<- bileklik~
 abanoz ->*<- bileklik~
-Oymalı bir abanoz bileklik burada bekliyor.~
+OymalÄ± bir abanoz bileklik burada bekliyor.~
 ebony~
 armor EJL AM
 27 26 24 24 0
@@ -1721,7 +1721,7 @@ A
 #11845
 kara ->*<- fular~
 kara ->*<- fular~
-Kara bir fular burada yatıyor.~
+Kara bir fular burada yatÄ±yor.~
 obsidian~
 treasure EL AC
 0 0 0 0 0
@@ -1733,9 +1733,9 @@ A
 A
 13 175
 #11846
-kafatası~
-kafatası~
-İnsansı bir kafatası burada bırakılmış.~
+kafatasÄ±~
+kafatasÄ±~
+Ä°nsansÄ± bir kafatasÄ± burada bÄ±rakÄ±lmÄ±ÅŸ.~
 bone~
 treasure E AO
 0 0 0 0 0
@@ -1749,9 +1749,9 @@ A
 A
 19 8
 #11847
-aytaşı ->*<- çizme~
-bir çift  ->*<-  çizme~
-Oymalı bir çift çizme burada yatıyor.~
+aytaÅŸÄ± ->*<- Ã§izme~
+bir Ã§ift  ->*<-  Ã§izme~
+OymalÄ± bir Ã§ift Ã§izme burada yatÄ±yor.~
 obsidian~
 armor EJL AG
 23 23 22 22 0
@@ -1763,9 +1763,9 @@ A
 A
 13 75
 #11848
-tavlanmış gümüş hançer fırlatma~
-tavlanmış fırlatma hançeri~
-Tavlanmış gümüş bir hançer burada bekliyor.~
+tavlanmÄ±ÅŸ gÃ¼mÃ¼ÅŸ hanÃ§er fÄ±rlatma~
+tavlanmÄ±ÅŸ fÄ±rlatma hanÃ§eri~
+TavlanmÄ±ÅŸ gÃ¼mÃ¼ÅŸ bir hanÃ§er burada bekliyor.~
 silver~
 weapon CE AN
 dagger 9 11 pierce DH
@@ -1776,8 +1776,8 @@ A
 19 10
 #11849
 ->*<- kolluk~
-bir çift  ->*<-  kolluk~
-Oymalı bir çift kolluk burada bekliyor.~
+bir Ã§ift  ->*<-  kolluk~
+OymalÄ± bir Ã§ift kolluk burada bekliyor.~
 obsidian~
 armor EJL AI
 29 29 29 23 0
@@ -1791,9 +1791,9 @@ A
 A
 19 9
 #11850
-kara tasma rünlü deri~
-kara rünlü tasma~
-Rünlerle bezenmiş siyah deriden bir tasma burada bırakılmış.~
+kara tasma rÃ¼nlÃ¼ deri~
+kara rÃ¼nlÃ¼ tasma~
+RÃ¼nlerle bezenmiÅŸ siyah deriden bir tasma burada bÄ±rakÄ±lmÄ±ÅŸ.~
 leather~
 armor BEGHM AC
 27 27 27 22 0
@@ -1818,9 +1818,9 @@ The runes are in no language that you recognize.  As you gaze at them,
 they shimmer, and you feel the urge to wear this collar..
 ~
 #11851
-şeytan kanatları kara~
-şeytan kanatları~
-Bir çift kara kanat burada yatıyor.~
+ÅŸeytan kanatlarÄ± kara~
+ÅŸeytan kanatlarÄ±~
+Bir Ã§ift kara kanat burada yatÄ±yor.~
 leather~
 armor BE AI
 29 29 27 26 0
@@ -1842,9 +1842,9 @@ A
 A
 19 6
 #11852
-akik -=+)> küpe~
-akik -=+)> küpe~
-Akikten bir küpe gölgenin içinde parlıyor.~
+akik -=+)> kÃ¼pe~
+akik -=+)> kÃ¼pe~
+Akikten bir kÃ¼pe gÃ¶lgenin iÃ§inde parlÄ±yor.~
 stone~
 armor CFI AE
 25 25 25 21 0
@@ -1865,8 +1865,8 @@ Below the Myrxes crest is the inscription:
 ~
 #11853
 kara -=+)> eldiven~
-bir çift kara -=+)> eldiven~
-Bir çift kara eldiven ışığı emiyor.~
+bir Ã§ift kara -=+)> eldiven~
+Bir Ã§ift kara eldiven Ä±ÅŸÄ±ÄŸÄ± emiyor.~
 leather~
 armor CFI AH
 25 26 26 21 0
@@ -1880,9 +1880,9 @@ A
 A
 19 6
 #11854
-sivriltilmiş hançer~
-sivriltilmiş hançer~
-Oldukça keskin bir hançer parlıyor.~
+sivriltilmiÅŸ hanÃ§er~
+sivriltilmiÅŸ hanÃ§er~
+OldukÃ§a keskin bir hanÃ§er parlÄ±yor.~
 silver~
 weapon CIH AN
 dagger 10 11 pierce DH
@@ -1892,9 +1892,9 @@ A
 A
 19 15
 #11855
-görünmez alev~
-görünmez alev~
-Görünmez bir alev sessizce yanıyor.~
+gÃ¶rÃ¼nmez alev~
+gÃ¶rÃ¼nmez alev~
+GÃ¶rÃ¼nmez bir alev sessizce yanÄ±yor.~
 fire~
 light CF A
 0 0 -1 0 0
@@ -1907,8 +1907,8 @@ A
 19 7
 #11856
 -=+)> kolluk~
-bir çift -=+)> kolluk~
-Bir çift kara kolluk gölgenin içinde kayboluyor.~
+bir Ã§ift -=+)> kolluk~
+Bir Ã§ift kara kolluk gÃ¶lgenin iÃ§inde kayboluyor.~
 leather~
 armor CFI AI
 26 26 26 21 0
@@ -1922,9 +1922,9 @@ A
 A
 19 6
 #11857
-oymalı platin ][+][ yüzük~
-oymalı platin ][+][ yüzük~
-Oymalı platin bir yüzük burada yatıyor.~
+oymalÄ± platin ][+][ yÃ¼zÃ¼k~
+oymalÄ± platin ][+][ yÃ¼zÃ¼k~
+OymalÄ± platin bir yÃ¼zÃ¼k burada yatÄ±yor.~
 platinum~
 armor G AB
 23 23 20 19 0
@@ -1938,9 +1938,9 @@ A
 A
 19 7
 #11858
--=+)> kefen gölge derin~
+-=+)> kefen gÃ¶lge derin~
 -=+)> kefen~
-Derin gölgeler ışığı emiyor.~
+Derin gÃ¶lgeler Ä±ÅŸÄ±ÄŸÄ± emiyor.~
 shadow~
 armor CFI AK
 25 25 24 20 0
@@ -1954,7 +1954,7 @@ A
 #11859
 ince kara -=+)> ince-kara bileklik~
 ince-kara -=+)> bileklik~
-Kara bir bileklik şeytanca parlıyor.~
+Kara bir bileklik ÅŸeytanca parlÄ±yor.~
 stone~
 armor CFI AM
 23 21 24 20 0
@@ -1968,9 +1968,9 @@ A
 A
 19 6
 #11860
-gölge -=+)> kolye~
-gölge -=+)> kolye~
-Kara bir kolye gölgelerle kaplanmış.~
+gÃ¶lge -=+)> kolye~
+gÃ¶lge -=+)> kolye~
+Kara bir kolye gÃ¶lgelerle kaplanmÄ±ÅŸ.~
 adamantite~
 armor CFI AC
 24 24 24 20 0
@@ -1984,9 +1984,9 @@ A
 A
 19 6
 #11861
-kara -=+)> bacaklık deri~
-bir çift kara -=+)> bacaklık~
-Deriden bir çift kara bacaklık gölge havuzunun içinde yüzüyor.~
+kara -=+)> bacaklÄ±k deri~
+bir Ã§ift kara -=+)> bacaklÄ±k~
+Deriden bir Ã§ift kara bacaklÄ±k gÃ¶lge havuzunun iÃ§inde yÃ¼zÃ¼yor.~
 leather~
 armor CFI AF
 24 25 25 21 0
@@ -2000,9 +2000,9 @@ A
 A
 19 6
 #11862
-sessiz -=+)> çizme~
-bir çift sessiz -=+)> çizme~
-Sessiz görünüşlü bir çift çizme burada bekliyor.~
+sessiz -=+)> Ã§izme~
+bir Ã§ift sessiz -=+)> Ã§izme~
+Sessiz gÃ¶rÃ¼nÃ¼ÅŸlÃ¼ bir Ã§ift Ã§izme burada bekliyor.~
 leather~
 armor CFI AG
 25 24 25 20 0
@@ -2014,9 +2014,9 @@ A
 A
 19 6
 #11863
-panter yüzük kara~
-panter yüzüğü~
-Kara pantere ait bir yüzük şeytanca parlıyor.~
+panter yÃ¼zÃ¼k kara~
+panter yÃ¼zÃ¼ÄŸÃ¼~
+Kara pantere ait bir yÃ¼zÃ¼k ÅŸeytanca parlÄ±yor.~
 fur~
 armor CFI AB
 24 24 23 20 0
@@ -2032,7 +2032,7 @@ A
 #11864
 kara -=+)> kemer~
 kara -=+)> kemer~
-Oymalı kara bir kemer burada bekliyor.~
+OymalÄ± kara bir kemer burada bekliyor.~
 leather~
 armor CFI AL
 20 21 20 20 0
@@ -2046,9 +2046,9 @@ A
 A
 13 -200
 #11865
-vaşak yüzük~
-vaşak yüzüğü~
-Güzel bir vaşak yüzüğü burada yatıyor.~
+vaÅŸak yÃ¼zÃ¼k~
+vaÅŸak yÃ¼zÃ¼ÄŸÃ¼~
+GÃ¼zel bir vaÅŸak yÃ¼zÃ¼ÄŸÃ¼ burada yatÄ±yor.~
 fur~
 armor CFGI AB
 10 11 11 10 0
@@ -2062,9 +2062,9 @@ A
 A
 19 5
 #11866
-gece atmaca pençeler~
-gece atmacası pençeleri~
-Gece atmacasına ait pençeler karanlıkta ilerliyor.~
+gece atmaca penÃ§eler~
+gece atmacasÄ± penÃ§eleri~
+Gece atmacasÄ±na ait penÃ§eler karanlÄ±kta ilerliyor.~
 bone~
 armor CFI AH
 24 24 24 20 0
@@ -2078,9 +2078,9 @@ A
 A
 19 7
 #11867
-avcı mitril oku~
-avcının oku~
-Mitrilden yapılmış sivri bir ok parlıyor.~
+avcÄ± mitril oku~
+avcÄ±nÄ±n oku~
+Mitrilden yapÄ±lmÄ±ÅŸ sivri bir ok parlÄ±yor.~
 mithril~
 weapon A AN
 spear 7 12 pierce E
@@ -2090,9 +2090,9 @@ A
 A
 19 10
 #11868
-][+][ zırh oymalı~
-oymalı ][+][ zırh~
-Oymalı bir zırh burada bırakılmış.~
+][+][ zÄ±rh oymalÄ±~
+oymalÄ± ][+][ zÄ±rh~
+OymalÄ± bir zÄ±rh burada bÄ±rakÄ±lmÄ±ÅŸ.~
 adamantite~
 armor 0 AD
 26 26 26 20 0
@@ -2102,9 +2102,9 @@ A
 A
 19 7
 #11869
-güç bileklik~
-güç bilekliği~
-Bir bileklik burada, güçle parlıyor.~
+gÃ¼Ã§ bileklik~
+gÃ¼Ã§ bilekliÄŸi~
+Bir bileklik burada, gÃ¼Ã§le parlÄ±yor.~
 adamantite~
 armor B AM
 26 26 26 20 0
@@ -2114,9 +2114,9 @@ A
 A
 13 150
 #11870
-oymalı ][+][ kalkan~
-oymalı ][+][ kalkan~
-Oymalı bir kalkan burada bırakılmış.~
+oymalÄ± ][+][ kalkan~
+oymalÄ± ][+][ kalkan~
+OymalÄ± bir kalkan burada bÄ±rakÄ±lmÄ±ÅŸ.~
 adamantite~
 armor 0 AJ
 25 26 25 21 0
@@ -2128,9 +2128,9 @@ A
 A
 19 7
 #11871
-gri ][+][ bacaklık~
-bir çift gri ][+][ bacaklık~
-Bir çift gri bacaklık burada bırakılmış.~
+gri ][+][ bacaklÄ±k~
+bir Ã§ift gri ][+][ bacaklÄ±k~
+Bir Ã§ift gri bacaklÄ±k burada bÄ±rakÄ±lmÄ±ÅŸ.~
 platinum~
 armor 0 AF
 25 25 25 20 0
@@ -2144,9 +2144,9 @@ A
 A
 19 6
 #11872
-sağlam ][+][ miğfer~
-sağlam ][+][ miğfer~
-Sağlam bir miğfer burada bırakılmış.~
+saÄŸlam ][+][ miÄŸfer~
+saÄŸlam ][+][ miÄŸfer~
+SaÄŸlam bir miÄŸfer burada bÄ±rakÄ±lmÄ±ÅŸ.~
 adamantite~
 armor 0 AE
 23 24 23 19 0
@@ -2160,9 +2160,9 @@ A
 A
 19 4
 #11873
-oymalı ][+][ ibik~
-oymalı ][+][ ibik~
-Oymalı bir ibik parlıyor.~
+oymalÄ± ][+][ ibik~
+oymalÄ± ][+][ ibik~
+OymalÄ± bir ibik parlÄ±yor.~
 platinum~
 armor 0 AO
 22 22 23 19 0
@@ -2174,9 +2174,9 @@ A
 A
 19 5
 #11874
-güçlü ][+][ kolluk~
-bir çift güçlü ][+][ kolluk~
-Bir çift güçlü kolluk burada bekliyor.~
+gÃ¼Ã§lÃ¼ ][+][ kolluk~
+bir Ã§ift gÃ¼Ã§lÃ¼ ][+][ kolluk~
+Bir Ã§ift gÃ¼Ã§lÃ¼ kolluk burada bekliyor.~
 adamantite~
 armor 0 AI
 24 24 24 20 0
@@ -2190,9 +2190,9 @@ A
 A
 19 7
 #11875
-adamant dengeli uzunkılıç~
-dengeli adamant uzunkılıç~
-Adamanttan yapılmış bir uzunkılıç parlıyor.~
+adamant dengeli uzunkÄ±lÄ±Ã§~
+dengeli adamant uzunkÄ±lÄ±Ã§~
+Adamanttan yapÄ±lmÄ±ÅŸ bir uzunkÄ±lÄ±Ã§ parlÄ±yor.~
 adamantite~
 weapon AI AN
 sword 10 8 cleave D
@@ -2202,9 +2202,9 @@ A
 A
 19 12
 #11876
-oymalı gümüş -(+)- mühürlü yüzük~
-oymalı -(+)- mühürlü yüzük~
-Gümüşten bir yüzük burada yatıyor.~
+oymalÄ± gÃ¼mÃ¼ÅŸ -(+)- mÃ¼hÃ¼rlÃ¼ yÃ¼zÃ¼k~
+oymalÄ± -(+)- mÃ¼hÃ¼rlÃ¼ yÃ¼zÃ¼k~
+GÃ¼mÃ¼ÅŸten bir yÃ¼zÃ¼k burada yatÄ±yor.~
 silver~
 armor AI AB
 25 25 25 21 0
@@ -2218,9 +2218,9 @@ A
 A
 13 75
 #11877
-nobiyum -(+)- taç~
-nobiyum -(+)- tacı~
-Güzel bir taç burada yatıyor.~
+nobiyum -(+)- taÃ§~
+nobiyum -(+)- tacÄ±~
+GÃ¼zel bir taÃ§ burada yatÄ±yor.~
 silver~
 armor AI AE
 25 25 25 21 0
@@ -2232,9 +2232,9 @@ A
 A
 18 5
 #11878
-parlayan -(+)- küre~
-parlayan -(+)- küre~
-Parlayan bir küre havada asılı duruyor.~
+parlayan -(+)- kÃ¼re~
+parlayan -(+)- kÃ¼re~
+Parlayan bir kÃ¼re havada asÄ±lÄ± duruyor.~
 light~
 armor ABI AQ
 25 25 26 21 0
@@ -2248,9 +2248,9 @@ A
 A
 18 10
 #11879
-işlemeli gümüş -(+)- bileklik~
-işlemeli gümüş -(+)- bileklik~
-İşlemeli gümüş bir bileklik burada bırakılmış.~
+iÅŸlemeli gÃ¼mÃ¼ÅŸ -(+)- bileklik~
+iÅŸlemeli gÃ¼mÃ¼ÅŸ -(+)- bileklik~
+Ä°ÅŸlemeli gÃ¼mÃ¼ÅŸ bir bileklik burada bÄ±rakÄ±lmÄ±ÅŸ.~
 silver~
 armor AI AM
 24 24 24 20 0
@@ -2264,9 +2264,9 @@ A
 A
 13 100
 #11880
--(+)- kuşak oymalı güzel~
--(+)- kuşak~
-Oymalı güzel bir kuşak burada bırakılmış.~
+-(+)- kuÅŸak oymalÄ± gÃ¼zel~
+-(+)- kuÅŸak~
+OymalÄ± gÃ¼zel bir kuÅŸak burada bÄ±rakÄ±lmÄ±ÅŸ.~
 silver~
 armor AI AL
 23 23 22 19 0
@@ -2281,8 +2281,8 @@ A
 18 12
 #11881
 -(+)- kolluk~
-bir çift -(+)- kolluk~
-Bir çift kolluk parlıyor.~
+bir Ã§ift -(+)- kolluk~
+Bir Ã§ift kolluk parlÄ±yor.~
 silver~
 armor AI AI
 23 22 22 19 0
@@ -2294,9 +2294,9 @@ A
 A
 19 5
 #11882
-işlemeli -(+)- eldiven~
-bir çift işlemeli -(+)- eldiven~
-Bir çift eldiven burada bırakılmış.~
+iÅŸlemeli -(+)- eldiven~
+bir Ã§ift iÅŸlemeli -(+)- eldiven~
+Bir Ã§ift eldiven burada bÄ±rakÄ±lmÄ±ÅŸ.~
 leather~
 armor I AH
 20 20 20 20 0
@@ -2310,9 +2310,9 @@ A
 A
 18 9
 #11883
-işlemeli -(+)- kolye~
-işlemeli -(+)- kolye~
-İşlemeli bir kolye burada bırakılmış.~
+iÅŸlemeli -(+)- kolye~
+iÅŸlemeli -(+)- kolye~
+Ä°ÅŸlemeli bir kolye burada bÄ±rakÄ±lmÄ±ÅŸ.~
 silver~
 armor AI AC
 22 22 22 19 0
@@ -2324,9 +2324,9 @@ A
 A
 5 4
 #11884
-işlemeli -(+)- çizme~
-bir çift işlemeli -(+)- çizme~
-Bir çift işlemeli çizme burada bekliyor.~
+iÅŸlemeli -(+)- Ã§izme~
+bir Ã§ift iÅŸlemeli -(+)- Ã§izme~
+Bir Ã§ift iÅŸlemeli Ã§izme burada bekliyor.~
 leather~
 armor I AG
 19 19 19 19 0
@@ -2340,9 +2340,9 @@ A
 A
 19 4
 #11885
-korkunç layerkayi öfke~
-Layerkayi'nin öfkesi~
-Öfkeyi hissediyorsun!~
+korkunÃ§ layerkayi Ã¶fke~
+Layerkayi'nin Ã¶fkesi~
+Ã–fkeyi hissediyorsun!~
 fire~
 armor AI AQ
 29 29 29 26 0
@@ -2354,9 +2354,9 @@ A
 A
 19 6
 #11886
-layerkayi adalet kalkan işlemeli~
+layerkayi adalet kalkan iÅŸlemeli~
 Layerkayi'nin adaleti~
-İşlemeli bir kalkan burada bekliyor.~
+Ä°ÅŸlemeli bir kalkan burada bekliyor.~
 mithril~
 armor AI AJ
 29 29 29 26 0
@@ -2370,9 +2370,9 @@ A
 A
 20 -15
 #11887
-layerkayi acı~
-Layerkayi'nin acısı~
-Bir acı dalgası içine işliyor!~
+layerkayi acÄ±~
+Layerkayi'nin acÄ±sÄ±~
+Bir acÄ± dalgasÄ± iÃ§ine iÅŸliyor!~
 nothingness~
 armor BI AH
 40 40 39 26 0
@@ -2384,9 +2384,9 @@ A
 A
 19 20
 #11888
-gölge gizi kenji~
+gÃ¶lge gizi kenji~
 Kenji'nin gizi~
-Gölgelerin içine saklanmış bir gizin fısıldamalarını duyuyorsun!~
+GÃ¶lgelerin iÃ§ine saklanmÄ±ÅŸ bir gizin fÄ±sÄ±ldamalarÄ±nÄ± duyuyorsun!~
 shadows~
 armor CI AG
 29 29 28 26 0
@@ -2400,9 +2400,9 @@ A
 F
 A 0 0 P
 #11889
-layerkayi kudreti zırh~
+layerkayi kudreti zÄ±rh~
 Layerkayi'nin kudreti~
-Güçlü görünümlü bir zırh burada bırakılmış.~
+GÃ¼Ã§lÃ¼ gÃ¶rÃ¼nÃ¼mlÃ¼ bir zÄ±rh burada bÄ±rakÄ±lmÄ±ÅŸ.~
 mithril~
 armor BI AD
 28 28 30 26 0
@@ -2414,9 +2414,9 @@ A
 A
 19 10
 #11890
-layerkayi yaşam aura~
-Layerkayi'nin yaşamı~
-Bir yaşam aurası odayı sarıyor.~
+layerkayi yaÅŸam aura~
+Layerkayi'nin yaÅŸamÄ±~
+Bir yaÅŸam aurasÄ± odayÄ± sarÄ±yor.~
 etherealness~
 armor AI AC
 29 29 30 26 0
@@ -2428,9 +2428,9 @@ A
 A
 18 15
 #11891
-elendil güç kadim~
-Elendil'in kadim gücü~
-Eski bir ruha ait yoğun güç odayı titretiyor.~
+elendil gÃ¼Ã§ kadim~
+Elendil'in kadim gÃ¼cÃ¼~
+Eski bir ruha ait yoÄŸun gÃ¼Ã§ odayÄ± titretiyor.~
 nothingness~
 armor BI AM
 40 40 40 26 0
@@ -2460,9 +2460,9 @@ skull:
 	       D'lan Treviki Drakyri Laerkai
 ~
 #11892
-kılıç zedrayikis bilenmiş~
-'Zedrayikis' adında kılıç~
-Bilenmiş bir kılıç burada bırakılmış.~
+kÄ±lÄ±Ã§ zedrayikis bilenmiÅŸ~
+'Zedrayikis' adÄ±nda kÄ±lÄ±Ã§~
+BilenmiÅŸ bir kÄ±lÄ±Ã§ burada bÄ±rakÄ±lmÄ±ÅŸ.~
 mithril~
 weapon BCI AN
 sword 12 10 pierce ADH
@@ -2482,9 +2482,9 @@ hilt.  An inscription in the face of the blade reads:
               And Zedraikis' wrath!
 ~
 #11893
-alevi denge gümüş~
+alevi denge gÃ¼mÃ¼ÅŸ~
 denge alevi~
-Parlak gümüş bir alev yanıyor.~
+Parlak gÃ¼mÃ¼ÅŸ bir alev yanÄ±yor.~
 platinum~
 light AFIJK A
 0 0 -1 0 0
@@ -2502,9 +2502,9 @@ flame balance silver~
 The flame flickers blindingly, and you are forced to look away.
 ~
 #11894
-drakiri kolluk gümüş~
-bir çift drakiri kolluğu~
-Bir çift gümüş kolluk parlıyor.~
+drakiri kolluk gÃ¼mÃ¼ÅŸ~
+bir Ã§ift drakiri kolluÄŸu~
+Bir Ã§ift gÃ¼mÃ¼ÅŸ kolluk parlÄ±yor.~
 mithril~
 armor A AI
 20 20 21 16 0
@@ -2516,9 +2516,9 @@ A
 A
 19 5
 #11895
-drakiri gümüş kuşak~
-drakiri kuşağı~
-Gümüş bir kuşak parlıyor.~
+drakiri gÃ¼mÃ¼ÅŸ kuÅŸak~
+drakiri kuÅŸaÄŸÄ±~
+GÃ¼mÃ¼ÅŸ bir kuÅŸak parlÄ±yor.~
 mithril~
 armor AI AL
 21 20 20 16 0
@@ -2531,8 +2531,8 @@ A
 19 5
 #11896
 drakiri bileklik mitril~
-drakiri bilekliği~
-Mitril bir bileklik parlıyor.~
+drakiri bilekliÄŸi~
+Mitril bir bileklik parlÄ±yor.~
 mithril~
 armor AI AM
 20 21 21 16 0
@@ -2546,9 +2546,9 @@ A
 A
 19 5
 #11897
-drakiri hançer mitril~
-drakiri hançeri~
-Mitrilden yapılmış keskin bir hançer burada bekliyor.~
+drakiri hanÃ§er mitril~
+drakiri hanÃ§eri~
+Mitrilden yapÄ±lmÄ±ÅŸ keskin bir hanÃ§er burada bekliyor.~
 mithril~
 weapon AI AN
 dagger 8 8 pierce 0
@@ -2560,17 +2560,17 @@ A
 A
 19 5
 #11898
-yeşil enerji hapı~
-enerji hapı~
-Yeşil bir hap enerjiyle parlıyor.~
+yeÅŸil enerji hapÄ±~
+enerji hapÄ±~
+YeÅŸil bir hap enerjiyle parlÄ±yor.~
 wheat~
 pill B A
 65 'haste' 'enhanced armor' '' ''
 55 10 500 P
 #11899
-yumuşak hap~
-yumuşak hap~
-Garip görünüşlü bir hap burada bekliyor.~
+yumuÅŸak hap~
+yumuÅŸak hap~
+Garip gÃ¶rÃ¼nÃ¼ÅŸlÃ¼ bir hap burada bekliyor.~
 wheat~
 pill B A
 61 'teleport' 'curse' 'heal' 'invisibility'
@@ -2578,7 +2578,7 @@ pill B A
 #11900
 yay adamant~
 adamant yay~
-Büyük adamant bir yay duvara dayanmış dinleniyor.~
+BÃ¼yÃ¼k adamant bir yay duvara dayanmÄ±ÅŸ dinleniyor.~
 adamantite~
 weapon B AN
 bow 10 9 pierce 0
@@ -2588,9 +2588,9 @@ A
 A
 18 10
 #11901
-drakiri adamant mızrak~
-drakiri adamant mızrak~
-Büyük bir mızrak duvara dayanmış dinleniyor.~
+drakiri adamant mÄ±zrak~
+drakiri adamant mÄ±zrak~
+BÃ¼yÃ¼k bir mÄ±zrak duvara dayanmÄ±ÅŸ dinleniyor.~
 adamantite~
 weapon Y AN
 lance 10 9 crush DF
@@ -2600,7 +2600,7 @@ A
 #11902
 beyaz ok adamant~
 beyaz adamant ok~
-Uzun beyaz bir ok duvara dayanmış dinleniyor.~
+Uzun beyaz bir ok duvara dayanmÄ±ÅŸ dinleniyor.~
 adamantite~
 weapon B AN
 arrow 9 10 blast D
@@ -2612,7 +2612,7 @@ A
 #11903
 adamant ok~
 adamant ok~
-Uzun bir ok duvara dayanmış dinleniyor.~
+Uzun bir ok duvara dayanmÄ±ÅŸ dinleniyor.~
 adamantite~
 weapon B AN
 arrow 9 9 blast 0
@@ -2622,8 +2622,8 @@ A
 A
 18 7
 #11904
-giz yayı kara~
-giz yayı~
+giz yayÄ± kara~
+giz yayÄ±~
 Kara bir yay yerde oturuyor.~
 iron~
 weapon B AN
@@ -2634,9 +2634,9 @@ A
 A
 18 18
 #11905
-kara adamant ok çubuk~
+kara adamant ok Ã§ubuk~
 kara adamant ok~
-Gölge kadar karanlık bir çubuk duvara dayanmış dinleniyor.~
+GÃ¶lge kadar karanlÄ±k bir Ã§ubuk duvara dayanmÄ±ÅŸ dinleniyor.~
 iron~
 weapon B AN
 arrow 10 11 blast D
@@ -2692,17 +2692,17 @@ Drakyri Isle written by Ydri,  4/96.
 ~
 S
 #11802
-Gümüş Kapılar~
-Kendini yüksek bir kapının önündeki bir patikada buldun. En iyi mithril
-barlarla bükülerek örülmüş Kapılar ışık altında mavi,gümüşi bir parıltıyla
-parlıyorlar.  Barlar genişçe birbirinden ayrık dursa da arkasında ne olduğunu
-göremiyorsun.
+GÃ¼mÃ¼ÅŸ KapÄ±lar~
+Kendini yÃ¼ksek bir kapÄ±nÄ±n Ã¶nÃ¼ndeki bir patikada buldun. En iyi mithril
+barlarla bÃ¼kÃ¼lerek Ã¶rÃ¼lmÃ¼ÅŸ KapÄ±lar Ä±ÅŸÄ±k altÄ±nda mavi,gÃ¼mÃ¼ÅŸi bir parÄ±ltÄ±yla
+parlÄ±yorlar.  Barlar geniÅŸÃ§e birbirinden ayrÄ±k dursa da arkasÄ±nda ne olduÄŸunu
+gÃ¶remiyorsun.
 ~
 0 0 1
 D1
-Kapılara göz attığında,materyali kıvranarak değişiyormuş gibi geliyor.
+KapÄ±lara gÃ¶z attÄ±ÄŸÄ±nda,materyali kÄ±vranarak deÄŸiÅŸiyormuÅŸ gibi geliyor.
 ~
-ikili mitril kapılar~
+ikili mitril kapÄ±lar~
 1 -1 11803
 D5
 Strange grow.
@@ -2710,59 +2710,59 @@ Strange grow.
 ~
 0 -1 11801
 E
-Mitril kapılar~
-Kapılara göz attığında,materyali kıvranarak değişiyormuş gibi geliyor.
+Mitril kapÄ±lar~
+KapÄ±lara gÃ¶z attÄ±ÄŸÄ±nda,materyali kÄ±vranarak deÄŸiÅŸiyormuÅŸ gibi geliyor.
 ~
 S
 #11803
-Parıldayan patika~
-Ayaklarının altındaki toprak garip,donuk bir ışıkla parıldarken patika
-doğu-batı doğrultusunda sık ağaçlarla yönlendiriliyor. Daha dar patikalar
-kuzey ve güneye doğru ilerliyor,ayrıca patika doğuya devam ediyor.
+ParÄ±ldayan patika~
+AyaklarÄ±nÄ±n altÄ±ndaki toprak garip,donuk bir Ä±ÅŸÄ±kla parÄ±ldarken patika
+doÄŸu-batÄ± doÄŸrultusunda sÄ±k aÄŸaÃ§larla yÃ¶nlendiriliyor. Daha dar patikalar
+kuzey ve gÃ¼neye doÄŸru ilerliyor,ayrÄ±ca patika doÄŸuya devam ediyor.
 ~
 0 0 1
 D0
-Dar bir patika kuzeye doğru açılıyor.
+Dar bir patika kuzeye doÄŸru aÃ§Ä±lÄ±yor.
 ~
 ~
 0 -1 11804
 D1
-Patika doğuya devam ediyor.
+Patika doÄŸuya devam ediyor.
 ~
 ~
 0 -1 11808
 D2
-Dar bir patika güneye doğru açılıyor.
+Dar bir patika gÃ¼neye doÄŸru aÃ§Ä±lÄ±yor.
 ~
 ~
 0 -1 11807
 D3
-Patika batıda yüksek gümüşi kapılarla son buluyor.
+Patika batÄ±da yÃ¼ksek gÃ¼mÃ¼ÅŸi kapÄ±larla son buluyor.
 ~
-ikili mitril kapılar~
+ikili mitril kapÄ±lar~
 1 -1 11802
 S
 #11804
-Patika sapağı~
-Güneye ve doğuya ilerleyen gümüş kıyılı dar bir patikadasın.
-Kuzey yönünde büyük bir ev seçilebiliyor.
+Patika sapaÄŸÄ±~
+GÃ¼neye ve doÄŸuya ilerleyen gÃ¼mÃ¼ÅŸ kÄ±yÄ±lÄ± dar bir patikadasÄ±n.
+Kuzey yÃ¶nÃ¼nde bÃ¼yÃ¼k bir ev seÃ§ilebiliyor.
 ~
 0 0 3
 D1
-Patika doğuya devam ediyor.
+Patika doÄŸuya devam ediyor.
 ~
 ~
 0 -1 11805
 D2
-Patika güneyde başka bir yolla kesişiyor.
+Patika gÃ¼neyde baÅŸka bir yolla kesiÅŸiyor.
 ~
 ~
 0 -1 11803
 S
 #11805
-Patika Sapağı~
-Patika burada doğu ve kuzey olmak üzere iki yöne devam ediyor.
-Kuzeyde uzak mesafede mavi bir ev gözüne çarpıyor.
+Patika SapaÄŸÄ±~
+Patika burada doÄŸu ve kuzey olmak Ã¼zere iki yÃ¶ne devam ediyor.
+Kuzeyde uzak mesafede mavi bir ev gÃ¶zÃ¼ne Ã§arpÄ±yor.
 ~
 0 0 3
 D0
@@ -2771,46 +2771,46 @@ Patika kuzeye devam ediyor.
 ~
 0 -1 11806
 D3
-Patika batıya doğru gidiyor.
+Patika batÄ±ya doÄŸru gidiyor.
 ~
 ~
 0 -1 11804
 S
 #11806
-Geniş açıklık~
-Patika burada ağaçlarla çevrelenmiş geniş bir açıklığa dönüşüyor. Toprak
-güneye doğru bir patikayı işaretleyen gümüşi parlaklığını kaybetmiyor.
-Kuzeyde, açıklıktan az uzakta, mavi bir avlu görülüyor aynı zamanda yüksek
-beyaz meşe bir kapı da batıdaki beyaz evin içine doğru olan yolun önündeki
+GeniÅŸ aÃ§Ä±klÄ±k~
+Patika burada aÄŸaÃ§larla Ã§evrelenmiÅŸ geniÅŸ bir aÃ§Ä±klÄ±ÄŸa dÃ¶nÃ¼ÅŸÃ¼yor. Toprak
+gÃ¼neye doÄŸru bir patikayÄ± iÅŸaretleyen gÃ¼mÃ¼ÅŸi parlaklÄ±ÄŸÄ±nÄ± kaybetmiyor.
+Kuzeyde, aÃ§Ä±klÄ±ktan az uzakta, mavi bir avlu gÃ¶rÃ¼lÃ¼yor aynÄ± zamanda yÃ¼ksek
+beyaz meÅŸe bir kapÄ± da batÄ±daki beyaz evin iÃ§ine doÄŸru olan yolun Ã¶nÃ¼ndeki
 tek engel.
 ~
 0 0 3
 D0
-Kuzeyde mavi bir avlu görülüyor.
+Kuzeyde mavi bir avlu gÃ¶rÃ¼lÃ¼yor.
 ~
 ~
 0 -1 11819
 D2
-Dar bir patika güneye doğru ağaçların arasında kayboluyor.
+Dar bir patika gÃ¼neye doÄŸru aÄŸaÃ§larÄ±n arasÄ±nda kayboluyor.
 ~
 ~
 0 -1 11805
 D3
-Batıda evin girişi olan beyaz meşe kapı var. Kapının üstünde altın kakma
-yazılar var:
+BatÄ±da evin giriÅŸi olan beyaz meÅŸe kapÄ± var. KapÄ±nÄ±n Ã¼stÃ¼nde altÄ±n kakma
+yazÄ±lar var:
 
                  - She'vale Treniste -
 
                         {Y((-*-)){x
 ~
-beyaz meşe kapı~
+beyaz meÅŸe kapÄ±~
 1 -1 11836
 S
 #11807
-Patika Sapağı~
-Gümüşi materyal ile parıldayan dar bir patikadasın. Güneyde, bronz bir kapı
-tamamen yeşimden yapılma bir evin içine gidiyor. Altın bir yazıt kapının
-üstünde donuk bir biçimde parıldıyor.
+Patika SapaÄŸÄ±~
+GÃ¼mÃ¼ÅŸi materyal ile parÄ±ldayan dar bir patikadasÄ±n. GÃ¼neyde, bronz bir kapÄ±
+tamamen yeÅŸimden yapÄ±lma bir evin iÃ§ine gidiyor. AltÄ±n bir yazÄ±t kapÄ±nÄ±n
+Ã¼stÃ¼nde donuk bir biÃ§imde parÄ±ldÄ±yor.
 ~
 0 0 3
 D0
@@ -2819,17 +2819,17 @@ The path leads north to a larger pathway.
 ~
 0 -1 11803
 D2
-Güneydeki yeşim evin dış kapısı.  Kapının üstünde şu harfler işlenmiş:
+GÃ¼neydeki yeÅŸim evin dÄ±ÅŸ kapÄ±sÄ±.  KapÄ±nÄ±n Ã¼stÃ¼nde ÅŸu harfler iÅŸlenmiÅŸ:
 
                   - Myr'vale Noriva -
 
                          {G-(+)-{x
 ~
-bronz kapı~
+bronz kapÄ±~
 1 -1 11890
 E
-Altın yazıt~
-Yazıtta yazıyor ki:
+AltÄ±n yazÄ±t~
+YazÄ±tta yazÄ±yor ki:
 
                   - Myr'vale Noriva -
 
@@ -2837,81 +2837,81 @@ Yazıtta yazıyor ki:
 ~
 S
 #11808
-Parıldayan Patika~
-Gümüşi materyal ile parıldayan dar bir patikadasın. Ağaçlarla çevrelenmiş
-patika doğuya ve batıya devam ediyor
+ParÄ±ldayan Patika~
+GÃ¼mÃ¼ÅŸi materyal ile parÄ±ldayan dar bir patikadasÄ±n. AÄŸaÃ§larla Ã§evrelenmiÅŸ
+patika doÄŸuya ve batÄ±ya devam ediyor
 ~
 0 0 3
 D1
-Patika doğuya devam ediyor.
+Patika doÄŸuya devam ediyor.
 ~
 ~
 0 -1 11809
 D3
-Patika batıya devam ediyor.
+Patika batÄ±ya devam ediyor.
 ~
 ~
 0 -1 11803
 S
 #11809
-Parıldayan Patika~
-Dar bir patika kolu güneye açılıyor.  Ağaçların arasından küçük ev şekilleri
-görebiliyorsun. Diğerlerinden daha büyük bir ağaç kuzeye olan patikanın üstünde
-yükseliyor.
+ParÄ±ldayan Patika~
+Dar bir patika kolu gÃ¼neye aÃ§Ä±lÄ±yor.  AÄŸaÃ§larÄ±n arasÄ±ndan kÃ¼Ã§Ã¼k ev ÅŸekilleri
+gÃ¶rebiliyorsun. DiÄŸerlerinden daha bÃ¼yÃ¼k bir aÄŸaÃ§ kuzeye olan patikanÄ±n Ã¼stÃ¼nde
+yÃ¼kseliyor.
 ~
 0 0 3
 D0
-Patikanın kuzey sınırında büyük bir ağaç yükseliyor. Bir kapının silueti pütürlü
+PatikanÄ±n kuzey sÄ±nÄ±rÄ±nda bÃ¼yÃ¼k bir aÄŸaÃ§ yÃ¼kseliyor. Bir kapÄ±nÄ±n silueti pÃ¼tÃ¼rlÃ¼
 kabukta zor belli oluyor.
 ~
-ağaç~
+aÄŸaÃ§~
 1 -1 11817
 D1
-Patika doğuya devam ediyor.
+Patika doÄŸuya devam ediyor.
 ~
 ~
 0 -1 11813
 D2
-Güneye doğru dar bir patika yollanıyor.
+GÃ¼neye doÄŸru dar bir patika yollanÄ±yor.
 ~
 ~
 0 -1 11810
 D3
-Patika batıya devam ediyor.
+Patika batÄ±ya devam ediyor.
 ~
 ~
 0 -1 11808
 S
 #11810
 Dar Patika~
-Kuzey güney doğrultusunda gümüşi parıldıyla örülmüş bir patika ağaçların
-arasında gözüküyor.  Yüksek kıvrılan demir kapılar patikanın batısında
-duruyor, granit bir avluya açılıyor.  Patika güneye devam ediyor.
+Kuzey gÃ¼ney doÄŸrultusunda gÃ¼mÃ¼ÅŸi parÄ±ldÄ±yla Ã¶rÃ¼lmÃ¼ÅŸ bir patika aÄŸaÃ§larÄ±n
+arasÄ±nda gÃ¶zÃ¼kÃ¼yor.  YÃ¼ksek kÄ±vrÄ±lan demir kapÄ±lar patikanÄ±n batÄ±sÄ±nda
+duruyor, granit bir avluya aÃ§Ä±lÄ±yor.  Patika gÃ¼neye devam ediyor.
 ~
 0 0 3
 D0
-Patika kuzeyde daha geniş bir patikayla kesişiyor.
+Patika kuzeyde daha geniÅŸ bir patikayla kesiÅŸiyor.
 ~
 ~
 0 -1 11809
 D2
-Patika güneye devam ediyor.
+Patika gÃ¼neye devam ediyor.
 ~
 ~
 0 -1 11811
 D3
-Devasa gri bir evin önündeki devasa gri bir avlu batıdaki demir kapıların
-ardında görülüyor. Kapının tepesinde kazınmış bazı yazılar görüyorsun:
+Devasa gri bir evin Ã¶nÃ¼ndeki devasa gri bir avlu batÄ±daki demir kapÄ±larÄ±n
+ardÄ±nda gÃ¶rÃ¼lÃ¼yor. KapÄ±nÄ±n tepesinde kazÄ±nmÄ±ÅŸ bazÄ± yazÄ±lar gÃ¶rÃ¼yorsun:
 
                        Myr'vale Xaek   {w][+][{x
 ~
-kıvrılan demir kapılar~
+kÄ±vrÄ±lan demir kapÄ±lar~
 1 -1 11880
 S
 #11811
-Dar patikanın sonu~
-Kası bir yürüyüşyolu patikanın doğusunda yükselen kara kapılarla birleşiyor.
-Patika kuzeye doğru devam ediyor.
+Dar patikanÄ±n sonu~
+KasÄ± bir yÃ¼rÃ¼yÃ¼ÅŸyolu patikanÄ±n doÄŸusunda yÃ¼kselen kara kapÄ±larla birleÅŸiyor.
+Patika kuzeye doÄŸru devam ediyor.
 ~
 0 0 3
 D0
@@ -2920,30 +2920,30 @@ Patika kuzeye devam ediyor.
 ~
 0 -1 11810
 D1
-Devasa kara kapılar doğuda görülüyor.
+Devasa kara kapÄ±lar doÄŸuda gÃ¶rÃ¼lÃ¼yor.
 ~
 ~
 0 -1 11853
 S
 #11812
-Uzayın dışı~
-Formsuz çok renkli boşluktaki herhangi bir şeye odaklanmaya çalışınca
-başdönmesi dalgası sana çarparak dikkatini dağıtıyor. Değişik türde
-objeler etrafında havada yüzüyor,seni ayartmaya çalışıyorlar fakat
-ulaşılmazlar. Arkanda simsiyah bir sayaç yarıhavada asılı duruyor.
+UzayÄ±n dÄ±ÅŸÄ±~
+Formsuz Ã§ok renkli boÅŸluktaki herhangi bir ÅŸeye odaklanmaya Ã§alÄ±ÅŸÄ±nca
+baÅŸdÃ¶nmesi dalgasÄ± sana Ã§arparak dikkatini daÄŸÄ±tÄ±yor. DeÄŸiÅŸik tÃ¼rde
+objeler etrafÄ±nda havada yÃ¼zÃ¼yor,seni ayartmaya Ã§alÄ±ÅŸÄ±yorlar fakat
+ulaÅŸÄ±lmazlar. Arkanda simsiyah bir sayaÃ§ yarÄ±havada asÄ±lÄ± duruyor.
 ~
 0 D 0
 D5
-Bir ip merdiven aşağıdaki patikaya iniyor.
+Bir ip merdiven aÅŸaÄŸÄ±daki patikaya iniyor.
 ~
 ~
 0 -1 11813
 S
 #11813
-Parıldayan Patika~
-Patika buradan doğuya ve batıya açılıyor. Patikayla aynı maddeden yapılma
-gibi görünen bir ip merdiven patikanın üstünde havada asılı duruyor,görünüşe
-göre tutunduğu bir yer de yok.
+ParÄ±ldayan Patika~
+Patika buradan doÄŸuya ve batÄ±ya aÃ§Ä±lÄ±yor. Patikayla aynÄ± maddeden yapÄ±lma
+gibi gÃ¶rÃ¼nen bir ip merdiven patikanÄ±n Ã¼stÃ¼nde havada asÄ±lÄ± duruyor,gÃ¶rÃ¼nÃ¼ÅŸe
+gÃ¶re tutunduÄŸu bir yer de yok.
 ~
 0 0 3
 D1
@@ -2957,127 +2957,127 @@ The pathway continues west.
 ~
 0 -1 11809
 D4
-Garip bir ip merdiven burada sarkıyor,görünüşe göre tutunduğu
-bir desteği de yok.
+Garip bir ip merdiven burada sarkÄ±yor,gÃ¶rÃ¼nÃ¼ÅŸe gÃ¶re tutunduÄŸu
+bir desteÄŸi de yok.
 ~
 ~
 0 -1 11812
 S
 #11814
-Gri Kulenin Önünde~
-Patika burada yüksek gri bir kulede sona eriyor. Açık kapıdan kulenin
-merkezine giden mermer merdivenler görülüyor.
+Gri Kulenin Ã–nÃ¼nde~
+Patika burada yÃ¼ksek gri bir kulede sona eriyor. AÃ§Ä±k kapÄ±dan kulenin
+merkezine giden mermer merdivenler gÃ¶rÃ¼lÃ¼yor.
 ~
 0 0 3
 D3
-Patika batıya devam ediyor.
+Patika batÄ±ya devam ediyor.
 ~
 ~
 0 -1 11813
 D4
-Mermer merdivenler kuleye tırmanıyor.
+Mermer merdivenler kuleye tÄ±rmanÄ±yor.
 ~
 ~
 0 -1 11815
 S
 #11815
-Gardiyanın Bölümü~
-Soluk meşale ışığı odaya sızıyor,onu garip gri bir parlaklıkla dolduruyor.
-Mermere benzer bir maddeden yapılma duvarlar zedelenmesi imkansız görünüyor.
-İlginçtir ki duvarlarda hiç ek yeri göremiyorsun, sanki tüm kule tek parça
-taştan oluşmuş. Mermer merdivenler yukarıdaki ikili kapılara çıkıyor.
+GardiyanÄ±n BÃ¶lÃ¼mÃ¼~
+Soluk meÅŸale Ä±ÅŸÄ±ÄŸÄ± odaya sÄ±zÄ±yor,onu garip gri bir parlaklÄ±kla dolduruyor.
+Mermere benzer bir maddeden yapÄ±lma duvarlar zedelenmesi imkansÄ±z gÃ¶rÃ¼nÃ¼yor.
+Ä°lginÃ§tir ki duvarlarda hiÃ§ ek yeri gÃ¶remiyorsun, sanki tÃ¼m kule tek parÃ§a
+taÅŸtan oluÅŸmuÅŸ. Mermer merdivenler yukarÄ±daki ikili kapÄ±lara Ã§Ä±kÄ±yor.
 ~
 0 D 0
 D4
-Duvara monte edilmiş ikili gümüş kapılar oraya kazınmış gibi duruyorlar.
+Duvara monte edilmiÅŸ ikili gÃ¼mÃ¼ÅŸ kapÄ±lar oraya kazÄ±nmÄ±ÅŸ gibi duruyorlar.
 ~
-ikili gümüş kapılar~
+ikili gÃ¼mÃ¼ÅŸ kapÄ±lar~
 1 11805 11816
 D5
-Mermer merdiven aşağıya iniyor.
+Mermer merdiven aÅŸaÄŸÄ±ya iniyor.
 ~
 ~
 0 -1 11814
 S
 #11816
-Konsey Odası~
-Kendini kulenin gerisi gibi gri taşlardan yapılma geniş dairesel bir odada
-buldun.  Hilal şekilli bir masa odanın ortasına egemen. Hilalin dışında oniki
-tane sandalye, iç tarafında ise tek bir büyük sandalye bulunuyor. Altı Drakyri
-evinin sancağı dıştaki sandalyelere ikili ikili kazınmış durumda.  İçteki
-sandalyenin üstü kazımalarla iki eşit parçaya bölünen bir hilal ile betinmlenmiş
+Konsey OdasÄ±~
+Kendini kulenin gerisi gibi gri taÅŸlardan yapÄ±lma geniÅŸ dairesel bir odada
+buldun.  Hilal ÅŸekilli bir masa odanÄ±n ortasÄ±na egemen. Hilalin dÄ±ÅŸÄ±nda oniki
+tane sandalye, iÃ§ tarafÄ±nda ise tek bir bÃ¼yÃ¼k sandalye bulunuyor. AltÄ± Drakyri
+evinin sancaÄŸÄ± dÄ±ÅŸtaki sandalyelere ikili ikili kazÄ±nmÄ±ÅŸ durumda.  Ä°Ã§teki
+sandalyenin Ã¼stÃ¼ kazÄ±malarla iki eÅŸit parÃ§aya bÃ¶lÃ¼nen bir hilal ile betinmlenmiÅŸ
 durumda.
 ~
 0 D 0
 D5
-İkili gümüş kapılar aşağıya inen bir merdiven boşluğuna açılıyor.
+Ä°kili gÃ¼mÃ¼ÅŸ kapÄ±lar aÅŸaÄŸÄ±ya inen bir merdiven boÅŸluÄŸuna aÃ§Ä±lÄ±yor.
 ~
-ikili gümüş kapılar~
+ikili gÃ¼mÃ¼ÅŸ kapÄ±lar~
 1 11805 11815
 E
 sancaklar~
-Sancaklar altı Drakyri evinin timsali.  Önemli evlerin batı sandalyelerdeki
-sancakları:  She'valen Deriki, Treniste, ve Reykaris.  Doğudaki altı sandalye
-ise küçük evlerin sancaklarını taşıyor: She'valen Myrxes, Xaek, ve Noriva.
+Sancaklar altÄ± Drakyri evinin timsali.  Ã–nemli evlerin batÄ± sandalyelerdeki
+sancaklarÄ±:  She'valen Deriki, Treniste, ve Reykaris.  DoÄŸudaki altÄ± sandalye
+ise kÃ¼Ã§Ã¼k evlerin sancaklarÄ±nÄ± taÅŸÄ±yor: She'valen Myrxes, Xaek, ve Noriva.
 ~
 S
 #11817
-Gizli geçit~
-Güneye doğru devasa birağaca ve doğuya doğru siyah meşe kapıya giden gümüşten
-şeridi andıran bir yoldasın. Hava garip bir biçimde durgun ve sessiz.
+Gizli geÃ§it~
+GÃ¼neye doÄŸru devasa biraÄŸaca ve doÄŸuya doÄŸru siyah meÅŸe kapÄ±ya giden gÃ¼mÃ¼ÅŸten
+ÅŸeridi andÄ±ran bir yoldasÄ±n. Hava garip bir biÃ§imde durgun ve sessiz.
 ~
 0 A 3
 D1
-Siyah meşe kapı doğudaki gri yapıya gidiyor.
+Siyah meÅŸe kapÄ± doÄŸudaki gri yapÄ±ya gidiyor.
 ~
-siyah meşe kapı~
+siyah meÅŸe kapÄ±~
 1 -1 11870
 D2
-Geçit güneyde devasa bir ağaçta bitiyor.
+GeÃ§it gÃ¼neyde devasa bir aÄŸaÃ§ta bitiyor.
 ~
-ağaç~
+aÄŸaÃ§~
 1 -1 11809
 S
 #11818
-Laerkai Karargâhı~
-Kendini simsihay onix duvarlı geniş bir odada buldun.  Odanın ortasında 7
-kara taş sandalye ile çevrelenmiş devasa bir masa bulunuyor.Hepsinin üstünde
-farklı bir arma var.
+Laerkai KarargÃ¢hÄ±~
+Kendini simsihay onix duvarlÄ± geniÅŸ bir odada buldun.  OdanÄ±n ortasÄ±nda 7
+kara taÅŸ sandalye ile Ã§evrelenmiÅŸ devasa bir masa bulunuyor.Hepsinin Ã¼stÃ¼nde
+farklÄ± bir arma var.
 ~
 0 AD 0
 E
-taştan kara sandalyeler ve semboller~
-6 sandalyenin her birinin arkasına bir sembol işlenmiş:
-alev, kalkan, pençe, gölge, yumruk, ve el.  Yedinci sandalyeye ise Larkei
-Efendisinin dönen kılıç nişanları kakılmış.
+taÅŸtan kara sandalyeler ve semboller~
+6 sandalyenin her birinin arkasÄ±na bir sembol iÅŸlenmiÅŸ:
+alev, kalkan, penÃ§e, gÃ¶lge, yumruk, ve el.  Yedinci sandalyeye ise Larkei
+Efendisinin dÃ¶nen kÄ±lÄ±Ã§ niÅŸanlarÄ± kakÄ±lmÄ±ÅŸ.
 ~
 S
 #11819
-Mavi taş avlu~
-Buz mavisi gibi parıldayan kaldırımlar geniş dairesel avlunun etrafını
-sararken ortasında da mermer heykel fıskiye var.  Gümüşi yeşil sarmaşıklar
-sütunların çevresine dolanmış halde.Bu onların ilk bakışta çok iyi oyulmuş
-narin hatlarını belli ediyor.  Kuzeyde gözüne parıldayan ikili kapılar
-çarpıyor. Görkemli gümüş semboller kapıların etrafında yer alıyor.
+Mavi taÅŸ avlu~
+Buz mavisi gibi parÄ±ldayan kaldÄ±rÄ±mlar geniÅŸ dairesel avlunun etrafÄ±nÄ±
+sararken ortasÄ±nda da mermer heykel fÄ±skiye var.  GÃ¼mÃ¼ÅŸi yeÅŸil sarmaÅŸÄ±klar
+sÃ¼tunlarÄ±n Ã§evresine dolanmÄ±ÅŸ halde.Bu onlarÄ±n ilk bakÄ±ÅŸta Ã§ok iyi oyulmuÅŸ
+narin hatlarÄ±nÄ± belli ediyor.  Kuzeyde gÃ¶zÃ¼ne parÄ±ldayan ikili kapÄ±lar
+Ã§arpÄ±yor. GÃ¶rkemli gÃ¼mÃ¼ÅŸ semboller kapÄ±larÄ±n etrafÄ±nda yer alÄ±yor.
 ~
 0 0 1
 D0
-İkili gümüş kapılar kuzeydeki devasa eve gidiyor. Kapı eşiğinde görkemli
-bir sembol görüyorsun.
+Ä°kili gÃ¼mÃ¼ÅŸ kapÄ±lar kuzeydeki devasa eve gidiyor. KapÄ± eÅŸiÄŸinde gÃ¶rkemli
+bir sembol gÃ¶rÃ¼yorsun.
 ~
-ikili gümüş kapılar~
+ikili gÃ¼mÃ¼ÅŸ kapÄ±lar~
 1 -1 11820
 D2
-Geniş taş basamaklar güneydeki geniş açıklığa doğru alçalıyor.
+GeniÅŸ taÅŸ basamaklar gÃ¼neydeki geniÅŸ aÃ§Ä±klÄ±ÄŸa doÄŸru alÃ§alÄ±yor.
 ~
 ~
 0 -1 11806
 E
-Görkemli gümüş sembol~
-Kara mermer duvara kakılmış gümüş sembolün üstünde bazı yazılar görüyorsun:
+GÃ¶rkemli gÃ¼mÃ¼ÅŸ sembol~
+Kara mermer duvara kakÄ±lmÄ±ÅŸ gÃ¼mÃ¼ÅŸ sembolÃ¼n Ã¼stÃ¼nde bazÄ± yazÄ±lar gÃ¶rÃ¼yorsun:
 
                        Bedenimi zincire vurabilirsin
-              ama benim ruhumu asla ve asla ele geçiremezsin
+              ama benim ruhumu asla ve asla ele geÃ§iremezsin
 
                           {B((+*+)){x
 
@@ -3086,273 +3086,273 @@ Kara mermer duvara kakılmış gümüş sembolün üstünde bazı yazılar görüyorsun:
 S
 #11820
 Mavi Mermer Koridor~
-Okyanus mavisi mermer duvarlar kuzey güney koridoru boyunca uzanıyorlar.
-Görkemli beyaz işleme yolları daha karanlık olan mavi taşın üstünde yıldırım
-ışınları gibi görünüyor. Gri ve siyahın birbirine karışan tonları beyaza
-gölge katıyor. Yol doğuya ve batıya uzanıyorken koridor kuzeye devam ediyor.
-Güneyde ise duvara geçme gümüş kapılar görüyorsun.
+Okyanus mavisi mermer duvarlar kuzey gÃ¼ney koridoru boyunca uzanÄ±yorlar.
+GÃ¶rkemli beyaz iÅŸleme yollarÄ± daha karanlÄ±k olan mavi taÅŸÄ±n Ã¼stÃ¼nde yÄ±ldÄ±rÄ±m
+Ä±ÅŸÄ±nlarÄ± gibi gÃ¶rÃ¼nÃ¼yor. Gri ve siyahÄ±n birbirine karÄ±ÅŸan tonlarÄ± beyaza
+gÃ¶lge katÄ±yor. Yol doÄŸuya ve batÄ±ya uzanÄ±yorken koridor kuzeye devam ediyor.
+GÃ¼neyde ise duvara geÃ§me gÃ¼mÃ¼ÅŸ kapÄ±lar gÃ¶rÃ¼yorsun.
 ~
 0 D 0
 D0
-Kuzeyde bir merdiven boşluğu görülüyor.
+Kuzeyde bir merdiven boÅŸluÄŸu gÃ¶rÃ¼lÃ¼yor.
 ~
 ~
 0 -1 11824
 D1
-Yol doğuda devasa bir hole açılıyor.
+Yol doÄŸuda devasa bir hole aÃ§Ä±lÄ±yor.
 ~
 ~
 0 -1 11822
 D2
-İkili gümüş kapılar etraflarını parıltılarıyla aydnlatıyorlar.
+Ä°kili gÃ¼mÃ¼ÅŸ kapÄ±lar etraflarÄ±nÄ± parÄ±ltÄ±larÄ±yla aydnlatÄ±yorlar.
 ~
-ikili gümüş kapılar~
+ikili gÃ¼mÃ¼ÅŸ kapÄ±lar~
 1 -1 11819
 D3
-Yol batıda daha büyük bir odaya açılıyor.
+Yol batÄ±da daha bÃ¼yÃ¼k bir odaya aÃ§Ä±lÄ±yor.
 ~
 ~
 0 -1 11821
 S
 #11821
-Ahşap Panelli Balo Odası~
-Dans alanının cilalı kara taşlarının parlaklığı ile göze çarpan meşe
-kaplamalı duvarlar balo odasını çevreliyor. Gümüş duvarhalıları duvarları
-sarıyor, karartılmış ahşaba nispet yaparcasına parlıyorlar. Tavanın
-ortasından abartılı boyutlarda bir kristal avize sarkıyor.
+AhÅŸap Panelli Balo OdasÄ±~
+Dans alanÄ±nÄ±n cilalÄ± kara taÅŸlarÄ±nÄ±n parlaklÄ±ÄŸÄ± ile gÃ¶ze Ã§arpan meÅŸe
+kaplamalÄ± duvarlar balo odasÄ±nÄ± Ã§evreliyor. GÃ¼mÃ¼ÅŸ duvarhalÄ±larÄ± duvarlarÄ±
+sarÄ±yor, karartÄ±lmÄ±ÅŸ ahÅŸaba nispet yaparcasÄ±na parlÄ±yorlar. TavanÄ±n
+ortasÄ±ndan abartÄ±lÄ± boyutlarda bir kristal avize sarkÄ±yor.
 ~
 0 D 0
 D1
-Doğuda mavi bir koridor gözüküyor.
+DoÄŸuda mavi bir koridor gÃ¶zÃ¼kÃ¼yor.
 ~
 ~
 0 -1 11820
 E
 Kristal Avize~
-Avize karmakarışık hatlara sahip fakat devasa boyuna rağmen hala zarif bir
-görüntüsü var. Tavandan sarkarak ışıkları yansıtarak etrafta sonbahar
-ortasında uçuşan kartanelerine benzer bir görüntü çıkartıyor.
+Avize karmakarÄ±ÅŸÄ±k hatlara sahip fakat devasa boyuna raÄŸmen hala zarif bir
+gÃ¶rÃ¼ntÃ¼sÃ¼ var. Tavandan sarkarak Ä±ÅŸÄ±klarÄ± yansÄ±tarak etrafta sonbahar
+ortasÄ±nda uÃ§uÅŸan kartanelerine benzer bir gÃ¶rÃ¼ntÃ¼ Ã§Ä±kartÄ±yor.
 ~
 S
 #11822
-Yemek Odası~
-Kara, beyaz çizgili mavi mermer doğuya ve batıya genişleyen devasa bir odayı
-çevreliyor. Odanın ortasında buzmavisi renkli tanımlayamadığın bir materyalden
-devasa bir masa bulunuyor. Üstündeki yemekler başından sonuna kadar masayı
-donatıyor,şölen havası veriyor.  Masadan bir metre ötede tüm tepeyi örten
-sönük bir ışık farkediyorsun.
+Yemek OdasÄ±~
+Kara, beyaz Ã§izgili mavi mermer doÄŸuya ve batÄ±ya geniÅŸleyen devasa bir odayÄ±
+Ã§evreliyor. OdanÄ±n ortasÄ±nda buzmavisi renkli tanÄ±mlayamadÄ±ÄŸÄ±n bir materyalden
+devasa bir masa bulunuyor. ÃœstÃ¼ndeki yemekler baÅŸÄ±ndan sonuna kadar masayÄ±
+donatÄ±yor,ÅŸÃ¶len havasÄ± veriyor.  Masadan bir metre Ã¶tede tÃ¼m tepeyi Ã¶rten
+sÃ¶nÃ¼k bir Ä±ÅŸÄ±k farkediyorsun.
 ~
 0 D 0
 D1
-Doğudaki sallanan kapının ardından yemek yapma sesleri geliyor.
+DoÄŸudaki sallanan kapÄ±nÄ±n ardÄ±ndan yemek yapma sesleri geliyor.
 ~
-sallanan kapı~
+sallanan kapÄ±~
 1 -1 11823
 D3
-Batıda mavi bir koridor gözüküyor.
+BatÄ±da mavi bir koridor gÃ¶zÃ¼kÃ¼yor.
 ~
 ~
 0 -1 11820
 E
-sönük ışık~
-Bu ışık görünüşe göre yemekleri davetsiz misafirlerden korumak ve hep taze
-saklamak için yaratılmış bir büyü kalkanı.
+sÃ¶nÃ¼k Ä±ÅŸÄ±k~
+Bu Ä±ÅŸÄ±k gÃ¶rÃ¼nÃ¼ÅŸe gÃ¶re yemekleri davetsiz misafirlerden korumak ve hep taze
+saklamak iÃ§in yaratÄ±lmÄ±ÅŸ bir bÃ¼yÃ¼ kalkanÄ±.
 ~
 S
 #11823
 Mutfak~
-Devasa mavi duvarlı bir mutfaktasın.  Duvardan çanaklar ve tavalar
-parmaklıklı raflardan sarkıyor, çevrede ise bıçaklar ve diğer mutfak
-malzemeleri yer alıyor.Hepsinin üstünde mavi parıltıyla parıldayan bir
-güç kalkanı yer alıyor.  Devasa bir dövme tahtası mutfağın ortasını
-kaplıyor,üstünde et kalıntıları var. Bir tarafta kuzu parçası cızırdayarak
-pişiyor.
+Devasa mavi duvarlÄ± bir mutfaktasÄ±n.  Duvardan Ã§anaklar ve tavalar
+parmaklÄ±klÄ± raflardan sarkÄ±yor, Ã§evrede ise bÄ±Ã§aklar ve diÄŸer mutfak
+malzemeleri yer alÄ±yor.Hepsinin Ã¼stÃ¼nde mavi parÄ±ltÄ±yla parÄ±ldayan bir
+gÃ¼Ã§ kalkanÄ± yer alÄ±yor.  Devasa bir dÃ¶vme tahtasÄ± mutfaÄŸÄ±n ortasÄ±nÄ±
+kaplÄ±yor,Ã¼stÃ¼nde et kalÄ±ntÄ±larÄ± var. Bir tarafta kuzu parÃ§asÄ± cÄ±zÄ±rdayarak
+piÅŸiyor.
 ~
 0 D 0
 D3
-Sallanan kapı batıya açılıyor.  Kapının üstündeki küçük pencereden devasa
-oda grünüyor.
+Sallanan kapÄ± batÄ±ya aÃ§Ä±lÄ±yor.  KapÄ±nÄ±n Ã¼stÃ¼ndeki kÃ¼Ã§Ã¼k pencereden devasa
+oda grÃ¼nÃ¼yor.
 ~
-sallanan kapı~
+sallanan kapÄ±~
 1 -1 11822
 S
 #11824
 Mavi Mermer Koridor~
-Meşale ışığı mavi mermer üzerinde oynaşırken gri ve siyahın tonlarını da
-zaman zaman açığa vuruyor. Mavi mermere kazınış gümüşten rütbeler görüyorsun:
+MeÅŸale Ä±ÅŸÄ±ÄŸÄ± mavi mermer Ã¼zerinde oynaÅŸÄ±rken gri ve siyahÄ±n tonlarÄ±nÄ± da
+zaman zaman aÃ§Ä±ÄŸa vuruyor. Mavi mermere kazÄ±nÄ±ÅŸ gÃ¼mÃ¼ÅŸten rÃ¼tbeler gÃ¶rÃ¼yorsun:
 
                 {B((+*+)){x
 
-Kuzeyde bir merdiven boşluğu görünüyor.
+Kuzeyde bir merdiven boÅŸluÄŸu gÃ¶rÃ¼nÃ¼yor.
 ~
 0 D 0
 D0
-Spiral bir merdiven görüyorsun.
+Spiral bir merdiven gÃ¶rÃ¼yorsun.
 ~
 ~
 0 -1 11825
 D2
-Koridor güneye devam ediyor.
+Koridor gÃ¼neye devam ediyor.
 ~
 ~
 0 -1 11820
 S
 #11825
 Spiral Merdiven~
-Verniklenmiş,tahta spiral bir merdiven kuzey duvarında bulunuyor, yukarıya
-ve aşağıya doğru spiraller çizerek ilerliyor. Mavi mermer bir koridor güneyde.
+VerniklenmiÅŸ,tahta spiral bir merdiven kuzey duvarÄ±nda bulunuyor, yukarÄ±ya
+ve aÅŸaÄŸÄ±ya doÄŸru spiraller Ã§izerek ilerliyor. Mavi mermer bir koridor gÃ¼neyde.
 ~
 0 D 0
 D2
-Koridor güneye devam ediyor.
+Koridor gÃ¼neye devam ediyor.
 ~
 ~
 0 -1 11824
 D4
-Merdiven basamakları yukarıda kayboluyor.
+Merdiven basamaklarÄ± yukarÄ±da kayboluyor.
 ~
 ~
 0 -1 11830
 D5
-Merdiven basamakları zeminden aşağıya spiraller çizerek yokoluyor.
+Merdiven basamaklarÄ± zeminden aÅŸaÄŸÄ±ya spiraller Ã§izerek yokoluyor.
 ~
 ~
 0 -1 11826
 S
 #11826
-Granit Depo Odası~
-Saf granitten yapılma mağaramsı az ışıklı bir yerdesin.  Taş duvara monte
-edilmiş raflarda değişik boyda kutular bulunuyor. Uzun kasalar doğu ve batı
-duvarlarda dizilmiş halde,raflar arasındaki boşluğu dolduruyorlar. Spiral
-bir merdiven yukarıya ışığa doğru yükseliyor.
+Granit Depo OdasÄ±~
+Saf granitten yapÄ±lma maÄŸaramsÄ± az Ä±ÅŸÄ±klÄ± bir yerdesin.  TaÅŸ duvara monte
+edilmiÅŸ raflarda deÄŸiÅŸik boyda kutular bulunuyor. Uzun kasalar doÄŸu ve batÄ±
+duvarlarda dizilmiÅŸ halde,raflar arasÄ±ndaki boÅŸluÄŸu dolduruyorlar. Spiral
+bir merdiven yukarÄ±ya Ä±ÅŸÄ±ÄŸa doÄŸru yÃ¼kseliyor.
 ~
 0 AD 0
 D4
-Yukarıdan spiral merdivene ışık süzülüyor.
+YukarÄ±dan spiral merdivene Ä±ÅŸÄ±k sÃ¼zÃ¼lÃ¼yor.
 ~
 ~
 0 -1 11825
 D1
-Birkaç uzun kasa doğu duvarında bulunuyor.
+BirkaÃ§ uzun kasa doÄŸu duvarÄ±nda bulunuyor.
 ~
 kasa kasalar~
 1 -1 11827
 E
 Kasalar kutular~
-Donuk bir parlaklık var olan koruyucu kalkanı ele veriyor.
+Donuk bir parlaklÄ±k var olan koruyucu kalkanÄ± ele veriyor.
 ~
 S
 #11827
-Büyülü Çalışma Odası~
-Tozlu kitapları ve parşömenleri barındıran raflar doğu ve batı duvarlarında
-sıra sıra dizilmiş durumda.  Uzun masalar geriye kalan iki ve odanın ortasını
-kaplıyor. İçlerinde yarım yazılmış dökümanlar ve garip aletler bulunduruyor
+BÃ¼yÃ¼lÃ¼ Ã‡alÄ±ÅŸma OdasÄ±~
+Tozlu kitaplarÄ± ve parÅŸÃ¶menleri barÄ±ndÄ±ran raflar doÄŸu ve batÄ± duvarlarÄ±nda
+sÄ±ra sÄ±ra dizilmiÅŸ durumda.  Uzun masalar geriye kalan iki ve odanÄ±n ortasÄ±nÄ±
+kaplÄ±yor. Ä°Ã§lerinde yarÄ±m yazÄ±lmÄ±ÅŸ dÃ¶kÃ¼manlar ve garip aletler bulunduruyor
 ~
 0 AD 0
 D1
-Kitaplarla dolu bir kitaplık doğu duvarında bulunuyor.
+Kitaplarla dolu bir kitaplÄ±k doÄŸu duvarÄ±nda bulunuyor.
 ~
-kitaplık raf~
+kitaplÄ±k raf~
 1 -1 11828
 D2
-Uzun bir masa güney duvarına kadar ulaşıyor.
+Uzun bir masa gÃ¼ney duvarÄ±na kadar ulaÅŸÄ±yor.
 ~
 table wall~
 1 -1 11829
 D3
-Parşömenlerle dolu raflar batı duvarında duruyor.
+ParÅŸÃ¶menlerle dolu raflar batÄ± duvarÄ±nda duruyor.
 ~
 raflar~
 1 -1 11826
 E
-kitaplar parşömenler raflar raf~
-Raflara ulaşmaya çalıştığında büyülü bir kalkan seni çarpıyor.
+kitaplar parÅŸÃ¶menler raflar raf~
+Raflara ulaÅŸmaya Ã§alÄ±ÅŸtÄ±ÄŸÄ±nda bÃ¼yÃ¼lÃ¼ bir kalkan seni Ã§arpÄ±yor.
 ~
 E
-dökümanlar aletler~
-Garip türde anlaşılmaz öğretiler halihazırda bekliyormuş gibi görünüyor.
+dÃ¶kÃ¼manlar aletler~
+Garip tÃ¼rde anlaÅŸÄ±lmaz Ã¶ÄŸretiler halihazÄ±rda bekliyormuÅŸ gibi gÃ¶rÃ¼nÃ¼yor.
 ~
 S
 #11828
-Kimya Laboratuvarı~
-Bir nefes alış ile içine çektiğin iğrenç koku neredeyse seni düşürüyordu.
-Deney şişelerindeki fokurdayan ve damlayan sıvı sesleri havayı dolduruyor.
-Buna eşlik edercesine beyaz dumanlar ve kokunun nedeni renkli buharlar
-havada süzülüyor. Kimyagerler...
+Kimya LaboratuvarÄ±~
+Bir nefes alÄ±ÅŸ ile iÃ§ine Ã§ektiÄŸin iÄŸrenÃ§ koku neredeyse seni dÃ¼ÅŸÃ¼rÃ¼yordu.
+Deney ÅŸiÅŸelerindeki fokurdayan ve damlayan sÄ±vÄ± sesleri havayÄ± dolduruyor.
+Buna eÅŸlik edercesine beyaz dumanlar ve kokunun nedeni renkli buharlar
+havada sÃ¼zÃ¼lÃ¼yor. Kimyagerler...
 ~
 0 AD 0
 D3
-Bir çalışma masası batı duvarında bulunuyor.
+Bir Ã§alÄ±ÅŸma masasÄ± batÄ± duvarÄ±nda bulunuyor.
 ~
-çalışma masası~
+Ã§alÄ±ÅŸma masasÄ±~
 1 -1 11827
 S
 #11829
-Çağrı Odası~
-Bir uyarı dalgası kara duvarlı taş odaya girer girmez omurgandan yukarıya
-doğru soğuk bir biçimde yayılıyor.  Odanın tam ortasında gümüş renkli bir
-pentagram ile üstüne işlenmiş rünler yere çizilmiş durumda.  Duvarlar düz,
-siyah taştan yapılma ve sanki meşale ışığını emiyor gibiler. Taş raflar
-kuzey ve doğu duvarlarında bulunuyor.
+Ã‡aÄŸrÄ± OdasÄ±~
+Bir uyarÄ± dalgasÄ± kara duvarlÄ± taÅŸ odaya girer girmez omurgandan yukarÄ±ya
+doÄŸru soÄŸuk bir biÃ§imde yayÄ±lÄ±yor.  OdanÄ±n tam ortasÄ±nda gÃ¼mÃ¼ÅŸ renkli bir
+pentagram ile Ã¼stÃ¼ne iÅŸlenmiÅŸ rÃ¼nler yere Ã§izilmiÅŸ durumda.  Duvarlar dÃ¼z,
+siyah taÅŸtan yapÄ±lma ve sanki meÅŸale Ä±ÅŸÄ±ÄŸÄ±nÄ± emiyor gibiler. TaÅŸ raflar
+kuzey ve doÄŸu duvarlarÄ±nda bulunuyor.
 ~
 0 AD 0
 D0
-Kuzey duvarı boyunca bir taş raf yer alıyor.
+Kuzey duvarÄ± boyunca bir taÅŸ raf yer alÄ±yor.
 ~
-raf taş~
+raf taÅŸ~
 1 -1 11827
 E
-taş raflar~
-Doğu ve kuzey duvarlarında bel boyunda taştan işlemeli raflar bulunmakta.
-Garip aletler ve kalın siyah ciltli kitaplar birlikte taş raflarda bulunuyor.
-Bir iki tanesinin başlığına göz gezdirince 'Yaratık Çağırıcılık' ve
-'dış dünyalar' kelimelerini seçiyorsun. Karanlıkta çok az görülebilen bir güç
-kalkanı rafları koruyor.
+taÅŸ raflar~
+DoÄŸu ve kuzey duvarlarÄ±nda bel boyunda taÅŸtan iÅŸlemeli raflar bulunmakta.
+Garip aletler ve kalÄ±n siyah ciltli kitaplar birlikte taÅŸ raflarda bulunuyor.
+Bir iki tanesinin baÅŸlÄ±ÄŸÄ±na gÃ¶z gezdirince 'YaratÄ±k Ã‡aÄŸÄ±rÄ±cÄ±lÄ±k' ve
+'dÄ±ÅŸ dÃ¼nyalar' kelimelerini seÃ§iyorsun. KaranlÄ±kta Ã§ok az gÃ¶rÃ¼lebilen bir gÃ¼Ã§
+kalkanÄ± raflarÄ± koruyor.
 ~
 S
 #11830
-Aynalı Koridor~
-Uzun bir koridordasın. Kuzey,güney,doğu ve batı yönlerine açılan kapılar
-var. Kapıların arasındaki duvarlar garip görünüşlü aynalarla dolu,odayı
-garip ilüzyonlarla dolduruyorlar. Kuzey duvarında bir merdiven yukarıya
-ve aşağıya doğru ilerliyor.
+AynalÄ± Koridor~
+Uzun bir koridordasÄ±n. Kuzey,gÃ¼ney,doÄŸu ve batÄ± yÃ¶nlerine aÃ§Ä±lan kapÄ±lar
+var. KapÄ±larÄ±n arasÄ±ndaki duvarlar garip gÃ¶rÃ¼nÃ¼ÅŸlÃ¼ aynalarla dolu,odayÄ±
+garip ilÃ¼zyonlarla dolduruyorlar. Kuzey duvarÄ±nda bir merdiven yukarÄ±ya
+ve aÅŸaÄŸÄ±ya doÄŸru ilerliyor.
 ~
 0 D 0
 D0
-Uzun meşeden bir kapı kuzey duvarında bulunuyor.  Kapının üstünde kırmızı
-bir yakut ışıldıyor, üstündeki yazıları fark edip okuyorsun:
+Uzun meÅŸeden bir kapÄ± kuzey duvarÄ±nda bulunuyor.  KapÄ±nÄ±n Ã¼stÃ¼nde kÄ±rmÄ±zÄ±
+bir yakut Ä±ÅŸÄ±ldÄ±yor, Ã¼stÃ¼ndeki yazÄ±larÄ± fark edip okuyorsun:
 
                 She'vale Deriki Tyrena Na'deia
 ~
-meşe kapı yakut~
+meÅŸe kapÄ± yakut~
 1 -1 11834
 D1
-Yıldızvari bir safir doğudaki kırmızı ahşap kapının üstünde bulunuyor.
-Safirin altında bazı yazılar görüyorsun:
+YÄ±ldÄ±zvari bir safir doÄŸudaki kÄ±rmÄ±zÄ± ahÅŸap kapÄ±nÄ±n Ã¼stÃ¼nde bulunuyor.
+Safirin altÄ±nda bazÄ± yazÄ±lar gÃ¶rÃ¼yorsun:
 
                 She'vale Deriki Daeman Ira'deian
 ~
-kırmızı kapı safir~
+kÄ±rmÄ±zÄ± kapÄ± safir~
 1 -1 11833
 D2
-Güneydeki beyaz kapının üstündeki ametist kristal etrafa kapı kadar beyaz
-ışıltılar saçıyor. Kristalin altında bir yazı var:
+GÃ¼neydeki beyaz kapÄ±nÄ±n Ã¼stÃ¼ndeki ametist kristal etrafa kapÄ± kadar beyaz
+Ä±ÅŸÄ±ltÄ±lar saÃ§Ä±yor. Kristalin altÄ±nda bir yazÄ± var:
 
                 She'vale Deriki Ykandres Ira'deian
 ~
-beyaz meşe kapı ametist~
+beyaz meÅŸe kapÄ± ametist~
 1 -1 11832
 D3
-Batıdaki siyah meşe kapıya monte edilmiş bir zümrüt altında da bazı yazılar
-görüyorsun:
+BatÄ±daki siyah meÅŸe kapÄ±ya monte edilmiÅŸ bir zÃ¼mrÃ¼t altÄ±nda da bazÄ± yazÄ±lar
+gÃ¶rÃ¼yorsun:
 
                 She'vale Deriki Nalyss Ira'deia
 ~
-siyah meşe kapı zümrüt~
+siyah meÅŸe kapÄ± zÃ¼mrÃ¼t~
 1 -1 11831
 D4
-Merdivenler üstünde yükseliyor.  Yarıyolda bir kristal üstünde de bazı yazılar
-görüyorsun:
+Merdivenler Ã¼stÃ¼nde yÃ¼kseliyor.  YarÄ±yolda bir kristal Ã¼stÃ¼nde de bazÄ± yazÄ±lar
+gÃ¶rÃ¼yorsun:
 
                 She'vale Deriki Lechandre Deia
 
@@ -3363,113 +3363,113 @@ görüyorsun:
 ~
 0 -1 11835
 D5
-Merdiven basamakları aşağıda yokoluyor.
+Merdiven basamaklarÄ± aÅŸaÄŸÄ±da yokoluyor.
 ~
 ~
 0 -1 11825
 E
 ayna aynalar~
-Eğik,yamuk yumuk aynalar odayı ilüzyonlarla dolduruyolar,bakınca sana
-benzeyen eciş,bücüş formlar görüyorsun.
+EÄŸik,yamuk yumuk aynalar odayÄ± ilÃ¼zyonlarla dolduruyolar,bakÄ±nca sana
+benzeyen eciÅŸ,bÃ¼cÃ¼ÅŸ formlar gÃ¶rÃ¼yorsun.
 ~
 S
 #11831
-Zümrüt Süit~
-Koyu yeşil duvar halıları siyah meşe duvarları kaplıyor. Yerdeki taşa
-işlenmiş küçük zümrüt parçalarından çıkan yeşil renkler odayı dolduruyor.
-Doğudaki kapının üstünde gümüşten kakma bir yazı görüyorsun.
+ZÃ¼mrÃ¼t SÃ¼it~
+Koyu yeÅŸil duvar halÄ±larÄ± siyah meÅŸe duvarlarÄ± kaplÄ±yor. Yerdeki taÅŸa
+iÅŸlenmiÅŸ kÃ¼Ã§Ã¼k zÃ¼mrÃ¼t parÃ§alarÄ±ndan Ã§Ä±kan yeÅŸil renkler odayÄ± dolduruyor.
+DoÄŸudaki kapÄ±nÄ±n Ã¼stÃ¼nde gÃ¼mÃ¼ÅŸten kakma bir yazÄ± gÃ¶rÃ¼yorsun.
 ~
 0 D 0
 D1
-Siyah meşe kapı doğuda süitten bir çıkış olarak gözüne çarpıyor.
+Siyah meÅŸe kapÄ± doÄŸuda sÃ¼itten bir Ã§Ä±kÄ±ÅŸ olarak gÃ¶zÃ¼ne Ã§arpÄ±yor.
 ~
-siyah meşe kapı zümrüt~
+siyah meÅŸe kapÄ± zÃ¼mrÃ¼t~
 1 -1 11830
 E
-gümüş kakma yazı~
-Gümüş harfleri diyor ki:
+gÃ¼mÃ¼ÅŸ kakma yazÄ±~
+GÃ¼mÃ¼ÅŸ harfleri diyor ki:
 
                 She'vale Deriki Nalyss Ira'deia
 ~
 S
 #11832
-Ametist Süit~
-Beyaz meşe duvarlar zengin,pembe duvarhalıları ile zenginleştirilmiş halde
-göz alıcı bir güzellik yaratıyor.  Tavana işlenmiş yüzlerce parlak ametist
-odayı sanki bir yıldız yağmuruna tutulmuş gibi bir izlenim veriyor.
-Kuzeydeki kapıda parlak gümüş bir yazıt gözüne çarpıyor.
+Ametist SÃ¼it~
+Beyaz meÅŸe duvarlar zengin,pembe duvarhalÄ±larÄ± ile zenginleÅŸtirilmiÅŸ halde
+gÃ¶z alÄ±cÄ± bir gÃ¼zellik yaratÄ±yor.  Tavana iÅŸlenmiÅŸ yÃ¼zlerce parlak ametist
+odayÄ± sanki bir yÄ±ldÄ±z yaÄŸmuruna tutulmuÅŸ gibi bir izlenim veriyor.
+Kuzeydeki kapÄ±da parlak gÃ¼mÃ¼ÅŸ bir yazÄ±t gÃ¶zÃ¼ne Ã§arpÄ±yor.
 ~
 0 D 0
 D0
-Beyaz meşe bir kapı kuzeyde,süitten dışarı çıkan yolda duruyor.
+Beyaz meÅŸe bir kapÄ± kuzeyde,sÃ¼itten dÄ±ÅŸarÄ± Ã§Ä±kan yolda duruyor.
 ~
-beyaz meşe kapı ametist~
+beyaz meÅŸe kapÄ± ametist~
 1 -1 11830
 E
-gümüş yazıt~
-Yazıt diyor ki:
+gÃ¼mÃ¼ÅŸ yazÄ±t~
+YazÄ±t diyor ki:
 
                 She'vale Deriki Ykandres Ira'deian
 ~
 S
 #11833
-Safir Süit~
-Kendini gökmavisi duvarhalılarıyla bezenmiş müthiş bir odada buldun. Pirinç
-tutaçlarda yanan meşaleler kızıl panelli duvarlar boyunca uzanıyor,hepsi
-ortalarında küçük bir safir barındırıyor.  Tavanın tam ortasında ise
-ötekilere göre çok daha büyük bir safir var. Batıdaki kapının üstünde
-gümüşi harfler parıldıyor.
+Safir SÃ¼it~
+Kendini gÃ¶kmavisi duvarhalÄ±larÄ±yla bezenmiÅŸ mÃ¼thiÅŸ bir odada buldun. PirinÃ§
+tutaÃ§larda yanan meÅŸaleler kÄ±zÄ±l panelli duvarlar boyunca uzanÄ±yor,hepsi
+ortalarÄ±nda kÃ¼Ã§Ã¼k bir safir barÄ±ndÄ±rÄ±yor.  TavanÄ±n tam ortasÄ±nda ise
+Ã¶tekilere gÃ¶re Ã§ok daha bÃ¼yÃ¼k bir safir var. BatÄ±daki kapÄ±nÄ±n Ã¼stÃ¼nde
+gÃ¼mÃ¼ÅŸi harfler parÄ±ldÄ±yor.
 ~
 0 D 0
 D3
-Kızılağaçtan bir kapı batıda süitten çıkıyor.
+KÄ±zÄ±laÄŸaÃ§tan bir kapÄ± batÄ±da sÃ¼itten Ã§Ä±kÄ±yor.
 ~
-kızılağaç kapı safir~
+kÄ±zÄ±laÄŸaÃ§ kapÄ± safir~
 1 -1 11830
 E
-gümüş harfler~
-Gümüş harfleri birleştirince karşına bir yazı çıkıyor:
+gÃ¼mÃ¼ÅŸ harfler~
+GÃ¼mÃ¼ÅŸ harfleri birleÅŸtirince karÅŸÄ±na bir yazÄ± Ã§Ä±kÄ±yor:
 
                 She'vale Deriki Daeman Ira'deian
 ~
 S
 #11834
-Yakut Süit~
-Koyu kırmızı duvarlar meşe panelli duvarlardaki meşale ışığında dans eden
-altın varakları göz önüne seriyor. Tavanda beşgen oluşturacak şekilde
-işlenmiş beş dairesel yakut var. Güneydeki kapının üstünde,ahşabın üstünde
-ışıkla neşeyle dans eden yazıttan gelen gümüş parıltılar görüyorsun.
+Yakut SÃ¼it~
+Koyu kÄ±rmÄ±zÄ± duvarlar meÅŸe panelli duvarlardaki meÅŸale Ä±ÅŸÄ±ÄŸÄ±nda dans eden
+altÄ±n varaklarÄ± gÃ¶z Ã¶nÃ¼ne seriyor. Tavanda beÅŸgen oluÅŸturacak ÅŸekilde
+iÅŸlenmiÅŸ beÅŸ dairesel yakut var. GÃ¼neydeki kapÄ±nÄ±n Ã¼stÃ¼nde,ahÅŸabÄ±n Ã¼stÃ¼nde
+Ä±ÅŸÄ±kla neÅŸeyle dans eden yazÄ±ttan gelen gÃ¼mÃ¼ÅŸ parÄ±ltÄ±lar gÃ¶rÃ¼yorsun.
 ~
 0 D 0
 D2
-Kızılağaçtan bir kapı güneyde süitten çıkıyor.
+KÄ±zÄ±laÄŸaÃ§tan bir kapÄ± gÃ¼neyde sÃ¼itten Ã§Ä±kÄ±yor.
 ~
-kızılağaç kapı yakut~
+kÄ±zÄ±laÄŸaÃ§ kapÄ± yakut~
 1 -1 11830
 E
-gümüş yazıt~
-Gümüş yazıt diyor ki:
+gÃ¼mÃ¼ÅŸ yazÄ±t~
+GÃ¼mÃ¼ÅŸ yazÄ±t diyor ki:
 
                 She'vale Deriki Tyrena Na'deia
 ~
 S
 #11835
-Elmas Süit~
-Beyaz çizgili mavi,mermer duvarlar parıldayan beyaz duvarhalıları ile
-bezenmiş devasa süiti kaplıyor. Duvarlarda ilginç rünler ve kazınmış
-dekorlar eşliğinde savaşan büyücüler betimlenmiş. Kara mermer duvarda
-elmas harflerle işlenmiş yazıtlar görüyorsun.
+Elmas SÃ¼it~
+Beyaz Ã§izgili mavi,mermer duvarlar parÄ±ldayan beyaz duvarhalÄ±larÄ± ile
+bezenmiÅŸ devasa sÃ¼iti kaplÄ±yor. Duvarlarda ilginÃ§ rÃ¼nler ve kazÄ±nmÄ±ÅŸ
+dekorlar eÅŸliÄŸinde savaÅŸan bÃ¼yÃ¼cÃ¼ler betimlenmiÅŸ. Kara mermer duvarda
+elmas harflerle iÅŸlenmiÅŸ yazÄ±tlar gÃ¶rÃ¼yorsun.
 ~
 0 D 0
 D5
-Spiral basamaklar aşağıya iniyor.
+Spiral basamaklar aÅŸaÄŸÄ±ya iniyor.
 ~
 ~
 0 -1 11830
 E
-elmas harfler yazıtlar~
-Parıldayan elmasların gözünü almasından dolayı zorla okuyabildiğin duvardaki
-kelimeleri birleştiriyorsun:
+elmas harfler yazÄ±tlar~
+ParÄ±ldayan elmaslarÄ±n gÃ¶zÃ¼nÃ¼ almasÄ±ndan dolayÄ± zorla okuyabildiÄŸin duvardaki
+kelimeleri birleÅŸtiriyorsun:
 
                 She'vale Deriki Lechandre Deia
 
@@ -3479,215 +3479,215 @@ kelimeleri birleştiriyorsun:
 ~
 S
 #11836
-Fildişi Antre~
-Odanın ortasında kristal bir avizenin ışığı cilalı fildişinin ve altın
-süslemelerin üstünde adeta dans ediyor. Devasa beyaz meşeden giriş kapısı
-onu çevreleyen eşikten doğuya açılıyor.Kapının üstüne işlenmiş bir altın
-bir taç ve onun çevresinde de bazı harfler var.Kuzeye bir eşik,batıya ise
+FildiÅŸi Antre~
+OdanÄ±n ortasÄ±nda kristal bir avizenin Ä±ÅŸÄ±ÄŸÄ± cilalÄ± fildiÅŸinin ve altÄ±n
+sÃ¼slemelerin Ã¼stÃ¼nde adeta dans ediyor. Devasa beyaz meÅŸeden giriÅŸ kapÄ±sÄ±
+onu Ã§evreleyen eÅŸikten doÄŸuya aÃ§Ä±lÄ±yor.KapÄ±nÄ±n Ã¼stÃ¼ne iÅŸlenmiÅŸ bir altÄ±n
+bir taÃ§ ve onun Ã§evresinde de bazÄ± harfler var.Kuzeye bir eÅŸik,batÄ±ya ise
 bir koridor var.
 ~
 0 D 0
 D0
-Kuzeyde bir oda görülüyor.
+Kuzeyde bir oda gÃ¶rÃ¼lÃ¼yor.
 ~
 ~
 0 -1 11837
 D1
-Beyaz meşe giriş kapısını görüyorsun.
+Beyaz meÅŸe giriÅŸ kapÄ±sÄ±nÄ± gÃ¶rÃ¼yorsun.
 ~
-beyaz meşe kapı~
+beyaz meÅŸe kapÄ±~
 1 -1 11806
 D3
-Bir koridor batıya gidiyor.
+Bir koridor batÄ±ya gidiyor.
 ~
 ~
 0 -1 11838
 E
-altın taç~
-Sembolun yontulmuş hali:
+altÄ±n taÃ§~
+Sembolun yontulmuÅŸ hali:
 
                            {Y((-*-)){x
 ~
 E
-gümüş harfler~
-Harfleri birleştirince bir yazı çıkıyor:
+gÃ¼mÃ¼ÅŸ harfler~
+Harfleri birleÅŸtirince bir yazÄ± Ã§Ä±kÄ±yor:
 
                     - She'vale Treniste -
 ~
 S
 #11837
 Sanat Galerisi~
-Galerinin beyaz meşe duvarları sırayla dizilmiş sığ oyuklarla kaplı,
-hepsi birbirinden değerli ve bu nedenle cam koruma ile kaplo figürler
-ve resimlerle dolu.  Zayıf mermer kaideler odanın ortasındaki büyükçene
+Galerinin beyaz meÅŸe duvarlarÄ± sÄ±rayla dizilmiÅŸ sÄ±ÄŸ oyuklarla kaplÄ±,
+hepsi birbirinden deÄŸerli ve bu nedenle cam koruma ile kaplo figÃ¼rler
+ve resimlerle dolu.  ZayÄ±f mermer kaideler odanÄ±n ortasÄ±ndaki bÃ¼yÃ¼kÃ§ene
 bir heykeli destekliyorlar.
 ~
 0 D 0
 D2
-Fildişinden bir giriş güneyde görünüyor.
+FildiÅŸinden bir giriÅŸ gÃ¼neyde gÃ¶rÃ¼nÃ¼yor.
 ~
 ~
 0 -1 11836
 E
-figürler heykeller~
-Karmakarışık bir biçimde değerli madenlerden ve ahşaptan yapılmış figürler
-ve büyük heykeller duvardaki oyukları ve kaideleri süslüyor.
+figÃ¼rler heykeller~
+KarmakarÄ±ÅŸÄ±k bir biÃ§imde deÄŸerli madenlerden ve ahÅŸaptan yapÄ±lmÄ±ÅŸ figÃ¼rler
+ve bÃ¼yÃ¼k heykeller duvardaki oyuklarÄ± ve kaideleri sÃ¼slÃ¼yor.
 ~
 E
 portreler~
-Büyük artistlerce çizilmiş ve bir herbiri servet değerinde olan portreler
-savaştan çiçeklere herşeyi betimliyor.
+BÃ¼yÃ¼k artistlerce Ã§izilmiÅŸ ve bir herbiri servet deÄŸerinde olan portreler
+savaÅŸtan Ã§iÃ§eklere herÅŸeyi betimliyor.
 ~
 S
 #11838
 Beyaz Koridor~
-Doğu-batı yönlerinde ilerleyen parlak mermerden,işlemeli duvarlı bir
-koridordasın. Meşalelerin parıltısı duvarlardaki tutaçlarında duran
-meşalelerden gelip duvar halılarından yansıyor. Doğuya ve güneye kapı
-eşiği açılmış,koridor ise batıya devam ediyor.
+DoÄŸu-batÄ± yÃ¶nlerinde ilerleyen parlak mermerden,iÅŸlemeli duvarlÄ± bir
+koridordasÄ±n. MeÅŸalelerin parÄ±ltÄ±sÄ± duvarlardaki tutaÃ§larÄ±nda duran
+meÅŸalelerden gelip duvar halÄ±larÄ±ndan yansÄ±yor. DoÄŸuya ve gÃ¼neye kapÄ±
+eÅŸiÄŸi aÃ§Ä±lmÄ±ÅŸ,koridor ise batÄ±ya devam ediyor.
 ~
 0 D 0
 D1
-Beyaz bir giriş doğuda görülebiliyor.
+Beyaz bir giriÅŸ doÄŸuda gÃ¶rÃ¼lebiliyor.
 ~
 ~
 0 -1 11836
 D2
-Güney yönünde büyük bir oda var.
+GÃ¼ney yÃ¶nÃ¼nde bÃ¼yÃ¼k bir oda var.
 ~
 ~
 0 -1 11839
 D3
-Koridor batıya devam ediyor.
+Koridor batÄ±ya devam ediyor.
 ~
 ~
 0 -1 11840
 E
-dokuma duvarhalıları duvarhalısı~
-Duvarhalılarının üstüne kanatlı,savaşan,ince figürler çizlimiş.
+dokuma duvarhalÄ±larÄ± duvarhalÄ±sÄ±~
+DuvarhalÄ±larÄ±nÄ±n Ã¼stÃ¼ne kanatlÄ±,savaÅŸan,ince figÃ¼rler Ã§izlimiÅŸ.
 ~
 S
 #11839
-Yemek Odası~
-Zayıf mum ışığında parıldayan masanın gümüşten işleme zerreleri gözüne
-çarpıyor. Büyük bir eşik kuzeydeki büyük koridora açılıyor.
+Yemek OdasÄ±~
+ZayÄ±f mum Ä±ÅŸÄ±ÄŸÄ±nda parÄ±ldayan masanÄ±n gÃ¼mÃ¼ÅŸten iÅŸleme zerreleri gÃ¶zÃ¼ne
+Ã§arpÄ±yor. BÃ¼yÃ¼k bir eÅŸik kuzeydeki bÃ¼yÃ¼k koridora aÃ§Ä±lÄ±yor.
 ~
 0 D 0
 D0
-Kuzeyde mermer bir koridor gözüküyor.
+Kuzeyde mermer bir koridor gÃ¶zÃ¼kÃ¼yor.
 ~
 ~
 0 -1 11838
 S
 #11840
 Beyaz Koridor~
-Koridor batıya,sprial merdivenlerin merkezine ve doğuya,girişe gidiyor.
-Cilalanmış altın varaklı meşeden bir kapı eşiği kuzeyde dairesel taş bir
-odaya açılıyor.
+Koridor batÄ±ya,sprial merdivenlerin merkezine ve doÄŸuya,giriÅŸe gidiyor.
+CilalanmÄ±ÅŸ altÄ±n varaklÄ± meÅŸeden bir kapÄ± eÅŸiÄŸi kuzeyde dairesel taÅŸ bir
+odaya aÃ§Ä±lÄ±yor.
 ~
 0 D 0
 D0
-Dairesel bir oda kuzeyde görülebiliyor.
+Dairesel bir oda kuzeyde gÃ¶rÃ¼lebiliyor.
 ~
 ~
 0 -1 11841
 D1
-Koridor doğuya devam ediyor.
+Koridor doÄŸuya devam ediyor.
 ~
 ~
 0 -1 11838
 D3
-Spiral merdivenler batıda bulunuyor.
+Spiral merdivenler batÄ±da bulunuyor.
 ~
 ~
 0 -1 11844
 S
 #11841
 Kulenin Temeli~
-Büyük ihtimalle koca kulenin temeli olan dairesel bembeyaz mermerden
-bir odada duruyorsun.Merdiven basamakları odanın ortasından yukarıya
-yükseliyorlar. Altın meşe bir eşik güneyde beyaz bir koridora açılıyor.
+BÃ¼yÃ¼k ihtimalle koca kulenin temeli olan dairesel bembeyaz mermerden
+bir odada duruyorsun.Merdiven basamaklarÄ± odanÄ±n ortasÄ±ndan yukarÄ±ya
+yÃ¼kseliyorlar. AltÄ±n meÅŸe bir eÅŸik gÃ¼neyde beyaz bir koridora aÃ§Ä±lÄ±yor.
 ~
 0 D 0
 D2
-Güneyde beyaz bir koridor görünüyor.
+GÃ¼neyde beyaz bir koridor gÃ¶rÃ¼nÃ¼yor.
 ~
 ~
 0 -1 11840
 D4
-Spiral merdivenler yukarı doğru çıkıyor.
+Spiral merdivenler yukarÄ± doÄŸru Ã§Ä±kÄ±yor.
 ~
 ~
 0 -1 11842
 S
 #11842
 Kulenin Merkezi~
-Kavisli beyaz mermer duvarlar dairesel bir odayı çevreliyorlar.Odadaki
-küçük pencerelerden bakınca yerden 15-20 metre yukarıda olduğunu anlıyorsun,
-yani kulenin ikinci katında. Spiral merdivenler odanın ortasından yukarı ve
-aşağıya gidiyor.Cam ile kaplanmış bir tünel kulenin batıdaki duvarından
-çıkıyor.
+Kavisli beyaz mermer duvarlar dairesel bir odayÄ± Ã§evreliyorlar.Odadaki
+kÃ¼Ã§Ã¼k pencerelerden bakÄ±nca yerden 15-20 metre yukarÄ±da olduÄŸunu anlÄ±yorsun,
+yani kulenin ikinci katÄ±nda. Spiral merdivenler odanÄ±n ortasÄ±ndan yukarÄ± ve
+aÅŸaÄŸÄ±ya gidiyor.Cam ile kaplanmÄ±ÅŸ bir tÃ¼nel kulenin batÄ±daki duvarÄ±ndan
+Ã§Ä±kÄ±yor.
 ~
 0 0 0
 D3
-Cam kaplı bir tünel batıda kule ile evin ikinci katı arasındaki boşluğu
-kaplıyor.
+Cam kaplÄ± bir tÃ¼nel batÄ±da kule ile evin ikinci katÄ± arasÄ±ndaki boÅŸluÄŸu
+kaplÄ±yor.
 ~
 ~
 0 -1 11852
 D4
-Merdivenler yukarı tırmanıyor.
+Merdivenler yukarÄ± tÄ±rmanÄ±yor.
 ~
 ~
 0 -1 11843
 D5
-Merdivenler aşağıya iniyor.
+Merdivenler aÅŸaÄŸÄ±ya iniyor.
 ~
 ~
 0 -1 11841
 S
 #11843
-Gözlemevi~
-Kendini yerden 25 metre yüksekte cam duvarlı kubbe tavanlı bir odada buldun.
-Bu odadan etraftaki manzara muhteşem şekilde görünüyor. Bir şehir güneye ve
-doğuya uzanırken koyu mavi ve gümüş bir ev kuzeydoğuda yükseliyor.  Şehrin
-etrafı batıda çalkalanan ve değişen formsuz bir boşlukla kaplı.Spiral bir
-merdiven odanın ortasından aşağıya doğru iniyor.
+GÃ¶zlemevi~
+Kendini yerden 25 metre yÃ¼ksekte cam duvarlÄ± kubbe tavanlÄ± bir odada buldun.
+Bu odadan etraftaki manzara muhteÅŸem ÅŸekilde gÃ¶rÃ¼nÃ¼yor. Bir ÅŸehir gÃ¼neye ve
+doÄŸuya uzanÄ±rken koyu mavi ve gÃ¼mÃ¼ÅŸ bir ev kuzeydoÄŸuda yÃ¼kseliyor.  Åehrin
+etrafÄ± batÄ±da Ã§alkalanan ve deÄŸiÅŸen formsuz bir boÅŸlukla kaplÄ±.Spiral bir
+merdiven odanÄ±n ortasÄ±ndan aÅŸaÄŸÄ±ya doÄŸru iniyor.
 ~
 0 0 0
 D5
-Burada bir merdiven aşağıya doğru iniyor.
+Burada bir merdiven aÅŸaÄŸÄ±ya doÄŸru iniyor.
 ~
 ~
 0 -1 11842
 S
 #11844
 Spiral Merdiven~
-İkinci kata doğru çıkan geniş spiral bir merdivenin tam ortasında duruyorsun.
-Beyaz mermerden bir koridor doğuya doğru uzanıyor.
+Ä°kinci kata doÄŸru Ã§Ä±kan geniÅŸ spiral bir merdivenin tam ortasÄ±nda duruyorsun.
+Beyaz mermerden bir koridor doÄŸuya doÄŸru uzanÄ±yor.
 ~
 0 D 0
 D1
-Koridor doğuya doğru gidiyor.
+Koridor doÄŸuya doÄŸru gidiyor.
 ~
 ~
 0 -1 11840
 D4
-Merdivenler yukarıya doğru kayboluyor.
+Merdivenler yukarÄ±ya doÄŸru kayboluyor.
 ~
 ~
 0 -1 11845
 S
 #11845
-İkinci Kat Koridoru~
-Geniş bir koridor buradan batıya doğru gidiyor.Koridorun parıldayan mermer
-duvarları aralıklarla kırılmış,kuzey ve güneyde kapılara yol veriyor. Kuzey
-duvarında meşeden bir kapı var,onun karşısında daha küçük maundan bir kapı
-bulunuyor.Spiral merdivenler aşağıya,ilk kata doğru iniyor.
+Ä°kinci Kat Koridoru~
+GeniÅŸ bir koridor buradan batÄ±ya doÄŸru gidiyor.Koridorun parÄ±ldayan mermer
+duvarlarÄ± aralÄ±klarla kÄ±rÄ±lmÄ±ÅŸ,kuzey ve gÃ¼neyde kapÄ±lara yol veriyor. Kuzey
+duvarÄ±nda meÅŸeden bir kapÄ± var,onun karÅŸÄ±sÄ±nda daha kÃ¼Ã§Ã¼k maundan bir kapÄ±
+bulunuyor.Spiral merdivenler aÅŸaÄŸÄ±ya,ilk kata doÄŸru iniyor.
 ~
 0 D 0
 D0
-Kuzeydeki kapıya bazı harfler kazınmış:
+Kuzeydeki kapÄ±ya bazÄ± harfler kazÄ±nmÄ±ÅŸ:
 
               She'vale Treniste Dosandre Deian
 
@@ -3695,46 +3695,46 @@ Kuzeydeki kapıya bazı harfler kazınmış:
 
               She'vale Treniste Denylis Deiayan
 ~
-meşe kapı~
+meÅŸe kapÄ±~
 1 -1 11850
 D2
-Güneydeki maun kapıda birşeyler yazıyor:
+GÃ¼neydeki maun kapÄ±da birÅŸeyler yazÄ±yor:
 
               She'vale Treniste Lyrene Na'deia
 ~
-maun kapı~
+maun kapÄ±~
 1 -1 11846
 D3
-Koridor batıya devam ediyor.
+Koridor batÄ±ya devam ediyor.
 ~
 ~
 0 -1 11847
 D5
-Merdiven aşağı doğru iniyor.
+Merdiven aÅŸaÄŸÄ± doÄŸru iniyor.
 ~
 ~
 0 -1 11844
 S
 #11846
-Kulenin Varisinin Yatak Odası~
-Devasa,lüksçe döşenmiş bir odadasın. Bembeyaz perdeleri bağlamak için
-kullanılmış altın ipler meşale ışığında parıldıyorlar. Kuzeye doğru
-maundan bir kapı açılmış durumda.Yaklaşınca kapının ortasına işlenmiş
-yazıtlar görüyorsun.
+Kulenin Varisinin Yatak OdasÄ±~
+Devasa,lÃ¼ksÃ§e dÃ¶ÅŸenmiÅŸ bir odadasÄ±n. Bembeyaz perdeleri baÄŸlamak iÃ§in
+kullanÄ±lmÄ±ÅŸ altÄ±n ipler meÅŸale Ä±ÅŸÄ±ÄŸÄ±nda parÄ±ldÄ±yorlar. Kuzeye doÄŸru
+maundan bir kapÄ± aÃ§Ä±lmÄ±ÅŸ durumda.YaklaÅŸÄ±nca kapÄ±nÄ±n ortasÄ±na iÅŸlenmiÅŸ
+yazÄ±tlar gÃ¶rÃ¼yorsun.
 ~
 0 D 0
 D0
-Maun kapı kuzey duvarında duruyor.Ortasındaki yazıtlarda yazıyor ki:
+Maun kapÄ± kuzey duvarÄ±nda duruyor.OrtasÄ±ndaki yazÄ±tlarda yazÄ±yor ki:
 
               She'vale Treniste Lyrene Na'deia
 
                     (Treniste'nin Varisi)
 ~
-maun kapı~
+maun kapÄ±~
 1 -1 11845
 E
-yazıt~
-Yazıtlarda diyor ki:
+yazÄ±t~
+YazÄ±tlarda diyor ki:
 
               She'vale Treniste Lyrene Na'deia
 
@@ -3742,134 +3742,134 @@ Yazıtlarda diyor ki:
 ~
 S
 #11847
-Geniş Koridor~
-Beyaz mermerden geniş bir koridorun batı sonundasın. Kara meşe bir kapı
-kuzeye açılıyor ve dişbudaktan bir kapı batıya açılıyor.
+GeniÅŸ Koridor~
+Beyaz mermerden geniÅŸ bir koridorun batÄ± sonundasÄ±n. Kara meÅŸe bir kapÄ±
+kuzeye aÃ§Ä±lÄ±yor ve diÅŸbudaktan bir kapÄ± batÄ±ya aÃ§Ä±lÄ±yor.
 ~
 0 D 0
 D0
-Kuzeydeki meşe kapıya birşeyler kazınmış:
+Kuzeydeki meÅŸe kapÄ±ya birÅŸeyler kazÄ±nmÄ±ÅŸ:
 
               She'vale Treniste Rodwen Ira'deia
 ~
-meşe kara kapı~
+meÅŸe kara kapÄ±~
 1 -1 11849
 D1
-Koridor doğuya ilerliyor.
+Koridor doÄŸuya ilerliyor.
 ~
 ~
 0 -1 11845
 D3
-Batıdaki dişbudak kapıya birşeyler kazınmış:
+BatÄ±daki diÅŸbudak kapÄ±ya birÅŸeyler kazÄ±nmÄ±ÅŸ:
 
               She'vale Treniste Josreke Ira'deian
 ~
-dişbudak kapı~
+diÅŸbudak kapÄ±~
 1 -1 11848
 S
 #11848
-Dişbudak Panelli Yatak Odası~
-Verniklenmiş beyaz dişbudaktan duvarlar geniş,iyi dekore edilmiş bir odayı
-sınırlandırıyor. Savaşan kahramanların kara duvarhalıları duvarları süslüyor.
-Batı duvarına iliştirilmiş cam kutunın içine aşırı süslü maskeler tıkılmış
-durumda.Doğuda, dişbudaktan bir kapı var. Kapının üstünde bir yazı gözüne
-ilişiyor.
+DiÅŸbudak Panelli Yatak OdasÄ±~
+VerniklenmiÅŸ beyaz diÅŸbudaktan duvarlar geniÅŸ,iyi dekore edilmiÅŸ bir odayÄ±
+sÄ±nÄ±rlandÄ±rÄ±yor. SavaÅŸan kahramanlarÄ±n kara duvarhalÄ±larÄ± duvarlarÄ± sÃ¼slÃ¼yor.
+BatÄ± duvarÄ±na iliÅŸtirilmiÅŸ cam kutunÄ±n iÃ§ine aÅŸÄ±rÄ± sÃ¼slÃ¼ maskeler tÄ±kÄ±lmÄ±ÅŸ
+durumda.DoÄŸuda, diÅŸbudaktan bir kapÄ± var. KapÄ±nÄ±n Ã¼stÃ¼nde bir yazÄ± gÃ¶zÃ¼ne
+iliÅŸiyor.
 ~
 0 D 0
 D1
-Doğudaki dişbudak kapıda bazı yazılar görüyorsun:
+DoÄŸudaki diÅŸbudak kapÄ±da bazÄ± yazÄ±lar gÃ¶rÃ¼yorsun:
 
               She'vale Treniste Josreke Ira'deian
 ~
-dişbudak kapı~
+diÅŸbudak kapÄ±~
 1 -1 11847
 E
-dişbudak kapı yazıt~
-Doğudaki dişbudak kapıda birşeyler yazıyor:
+diÅŸbudak kapÄ± yazÄ±t~
+DoÄŸudaki diÅŸbudak kapÄ±da birÅŸeyler yazÄ±yor:
 
               She'vale Treniste Josreke Ira'deian
 ~
 E
-Duvarhalıları duvarhalısı kahramanlar~
-Kahramanların hepsi elf yapılı,sıska tipler.Hepsinin kanatları var,bazıları
-havada çarpışıyor.
+DuvarhalÄ±larÄ± duvarhalÄ±sÄ± kahramanlar~
+KahramanlarÄ±n hepsi elf yapÄ±lÄ±,sÄ±ska tipler.Hepsinin kanatlarÄ± var,bazÄ±larÄ±
+havada Ã§arpÄ±ÅŸÄ±yor.
 ~
 E
 koleksiyon maske~
-Çoğu simsiyah ahşaptan oyulmuş renkli renklerle bezenmiş maskeler.
+Ã‡oÄŸu simsiyah ahÅŸaptan oyulmuÅŸ renkli renklerle bezenmiÅŸ maskeler.
 ~
 S
 #11849
-Kara Meşe Panelli Yatak Odası~
-Kadife perdelerden odadaki birkaç meşaleden yayılan ışık yansıyor ve ipek
-halılara düşüyor.Bir kılıç koleksiyonu kuzey duvarına asılı duruyor. Güneydeki
-kara meşe kapıya birşeyler yazılmış.
+Kara MeÅŸe Panelli Yatak OdasÄ±~
+Kadife perdelerden odadaki birkaÃ§ meÅŸaleden yayÄ±lan Ä±ÅŸÄ±k yansÄ±yor ve ipek
+halÄ±lara dÃ¼ÅŸÃ¼yor.Bir kÄ±lÄ±Ã§ koleksiyonu kuzey duvarÄ±na asÄ±lÄ± duruyor. GÃ¼neydeki
+kara meÅŸe kapÄ±ya birÅŸeyler yazÄ±lmÄ±ÅŸ.
 ~
 0 D 0
 D2
-Güneydeki kara meşe kapının üstünde gümüşle yazılmış harfler var:
+GÃ¼neydeki kara meÅŸe kapÄ±nÄ±n Ã¼stÃ¼nde gÃ¼mÃ¼ÅŸle yazÄ±lmÄ±ÅŸ harfler var:
 
                She'vale Treniste Rodwen Ira'deia
 ~
-meşe kara kapı~
+meÅŸe kara kapÄ±~
 1 -1 11847
 E
-koleksiyon kılıçlar~
-Kılıçların hepsi mitril veya gümüşten yapılmış gibi duruyor,hepsi Treniste
-nişanına benzer nişanlar taşıyor.
+koleksiyon kÄ±lÄ±Ã§lar~
+KÄ±lÄ±Ã§larÄ±n hepsi mitril veya gÃ¼mÃ¼ÅŸten yapÄ±lmÄ±ÅŸ gibi duruyor,hepsi Treniste
+niÅŸanÄ±na benzer niÅŸanlar taÅŸÄ±yor.
 ~
 E
-nişan~
+niÅŸan~
                       ((-*-))
 ~
 E
-meşe kara kapı yazıt~
-Güneydeki kara meşe kapının üstünde gümüşle yazılmış harfler var:
+meÅŸe kara kapÄ± yazÄ±t~
+GÃ¼neydeki kara meÅŸe kapÄ±nÄ±n Ã¼stÃ¼nde gÃ¼mÃ¼ÅŸle yazÄ±lmÄ±ÅŸ harfler var:
 
                She'vale Treniste Rodwen Ira'deia
 ~
 S
 #11850
-Mermer Oturma Odası~
-Devasa mermer duvarlı bir odada duruyorsun.Altın tutaçlar kısa aralıklarla
-dizilmiş uzun beyaz mumlar taşıyorlar. Cam kaplamalı bir tünel doğuda
-görünebilirken bir çift altın kapı kuzeye açılıyor.
+Mermer Oturma OdasÄ±~
+Devasa mermer duvarlÄ± bir odada duruyorsun.AltÄ±n tutaÃ§lar kÄ±sa aralÄ±klarla
+dizilmiÅŸ uzun beyaz mumlar taÅŸÄ±yorlar. Cam kaplamalÄ± bir tÃ¼nel doÄŸuda
+gÃ¶rÃ¼nebilirken bir Ã§ift altÄ±n kapÄ± kuzeye aÃ§Ä±lÄ±yor.
 ~
 0 D 0
 D0
-Bir çift altın kapı kuzeye açılıyor.Kapıların üstündeki beyaz mermerdeki bir
-nişan dikkatini çekiyor:
+Bir Ã§ift altÄ±n kapÄ± kuzeye aÃ§Ä±lÄ±yor.KapÄ±larÄ±n Ã¼stÃ¼ndeki beyaz mermerdeki bir
+niÅŸan dikkatini Ã§ekiyor:
 
                           ((-*-))
 ~
-altın ikili kapılar çift~
+altÄ±n ikili kapÄ±lar Ã§ift~
 1 -1 11851
 D1
-Bir sürgülü kapı doğudaki cam kaplamalı tünele gidiyor.
+Bir sÃ¼rgÃ¼lÃ¼ kapÄ± doÄŸudaki cam kaplamalÄ± tÃ¼nele gidiyor.
 ~
-sürgülü kapı~
+sÃ¼rgÃ¼lÃ¼ kapÄ±~
 1 -1 11852
 D2
-Güneye doğru meşe bir kapı var.
+GÃ¼neye doÄŸru meÅŸe bir kapÄ± var.
 ~
-meşe kapı~
+meÅŸe kapÄ±~
 1 -1 11845
 E
-cam tünel~
-Tünel doğudaki kule ile kesişiyor.
+cam tÃ¼nel~
+TÃ¼nel doÄŸudaki kule ile kesiÅŸiyor.
 ~
 S
 #11851
-Altın Yatak Odası~
-Parıldayan altın duvarhalıları duvarlardan sarkıyor ve meşale ışığını altın
-renkli yumuşak bir parıltıyla yansıtıyorlar.  Duvarhalıları kuzey duvarında
-halılar kesişerek altın ile mermer duvara işlenmiş bir dizayn oluşturuyorlar.
-Çift altın kapı güney duvarından açılıyor.  Kapıların ortasında cafcaflı bir
-yazı var.
+AltÄ±n Yatak OdasÄ±~
+ParÄ±ldayan altÄ±n duvarhalÄ±larÄ± duvarlardan sarkÄ±yor ve meÅŸale Ä±ÅŸÄ±ÄŸÄ±nÄ± altÄ±n
+renkli yumuÅŸak bir parÄ±ltÄ±yla yansÄ±tÄ±yorlar.  DuvarhalÄ±larÄ± kuzey duvarÄ±nda
+halÄ±lar kesiÅŸerek altÄ±n ile mermer duvara iÅŸlenmiÅŸ bir dizayn oluÅŸturuyorlar.
+Ã‡ift altÄ±n kapÄ± gÃ¼ney duvarÄ±ndan aÃ§Ä±lÄ±yor.  KapÄ±larÄ±n ortasÄ±nda cafcaflÄ± bir
+yazÄ± var.
 ~
 0 D 0
 D2
-Güneyeki kapılar arasındaki yazıyı okuyorsun:
+GÃ¼neyeki kapÄ±lar arasÄ±ndaki yazÄ±yÄ± okuyorsun:
 
               She'vale Treniste Dosandre Deian
 
@@ -3877,11 +3877,11 @@ Güneyeki kapılar arasındaki yazıyı okuyorsun:
 
               She'vale Treniste Denylis Deiayan
 ~
-altın ikili kapılar çift~
+altÄ±n ikili kapÄ±lar Ã§ift~
 1 -1 11850
 E
-ikili altın kaplar cafcaflı yazılar~
-Güneydeki kapılar arasındaki yazıyı okuyorsun:
+ikili altÄ±n kaplar cafcaflÄ± yazÄ±lar~
+GÃ¼neydeki kapÄ±lar arasÄ±ndaki yazÄ±yÄ± okuyorsun:
 
               She'vale Treniste Dosandre Deian
 
@@ -3890,51 +3890,51 @@ Güneydeki kapılar arasındaki yazıyı okuyorsun:
               She'vale Treniste Denylis Deiayan
 ~
 E
-altın dizayn kuzey~
-Dizayn kanatlı,meleğe benzeyen bir savaşçı kadının elinde bir kılıç tutarak
-havada süzülmesini betimliyor.
+altÄ±n dizayn kuzey~
+Dizayn kanatlÄ±,meleÄŸe benzeyen bir savaÅŸÃ§Ä± kadÄ±nÄ±n elinde bir kÄ±lÄ±Ã§ tutarak
+havada sÃ¼zÃ¼lmesini betimliyor.
 ~
 S
 #11852
-Cam Tünel~
-Kendini dar,doğu-batı yönlerinde ilerleyen,doğuda kuleyle batıda ise bir
-evin ikinci katı ile teğet geçiyor. Yer yaklaşık 25 metre aşağıda olmasına
-rağmen tünelin  yapısı onu olduğundan uzakta gösteriyor.
+Cam TÃ¼nel~
+Kendini dar,doÄŸu-batÄ± yÃ¶nlerinde ilerleyen,doÄŸuda kuleyle batÄ±da ise bir
+evin ikinci katÄ± ile teÄŸet geÃ§iyor. Yer yaklaÅŸÄ±k 25 metre aÅŸaÄŸÄ±da olmasÄ±na
+raÄŸmen tÃ¼nelin  yapÄ±sÄ± onu olduÄŸundan uzakta gÃ¶steriyor.
 ~
 0 D 0
 D1
-Tünel doğuda beyaz bir kuleye giriyor.
+TÃ¼nel doÄŸuda beyaz bir kuleye giriyor.
 ~
 ~
 0 -1 11842
 D3
-Batıda sürgülü bir kapı büyük bir mermer odaya açılıyor.
+BatÄ±da sÃ¼rgÃ¼lÃ¼ bir kapÄ± bÃ¼yÃ¼k bir mermer odaya aÃ§Ä±lÄ±yor.
 ~
 ~
 1 -1 11850
 S
 #11853
-Kara Kapıların Önünde~
-Devasa kara kapılar doğudaki patikanın önünde olduğundan daha korkunç bir
-görüntü ile içini ürperterek duruyorlar. İnsansı kafasına benzeyen bir şekil
-kapıların üstündeki eşiğe gömülmek sureti ile takılmış ve etrafı gümüşten bir
-yazıt ile çevrilmiş durumda.  Arka planda gözüken kuleyi simsiyah devasa bir
-ikametgah olarak görüyorsun.
+Kara KapÄ±larÄ±n Ã–nÃ¼nde~
+Devasa kara kapÄ±lar doÄŸudaki patikanÄ±n Ã¶nÃ¼nde olduÄŸundan daha korkunÃ§ bir
+gÃ¶rÃ¼ntÃ¼ ile iÃ§ini Ã¼rperterek duruyorlar. Ä°nsansÄ± kafasÄ±na benzeyen bir ÅŸekil
+kapÄ±larÄ±n Ã¼stÃ¼ndeki eÅŸiÄŸe gÃ¶mÃ¼lmek sureti ile takÄ±lmÄ±ÅŸ ve etrafÄ± gÃ¼mÃ¼ÅŸten bir
+yazÄ±t ile Ã§evrilmiÅŸ durumda.  Arka planda gÃ¶zÃ¼ken kuleyi simsiyah devasa bir
+ikametgah olarak gÃ¶rÃ¼yorsun.
 ~
 0 0 1
 D1
-Kara kapılar doğudaki patikayı sona erdirerek duruyorlar.
+Kara kapÄ±lar doÄŸudaki patikayÄ± sona erdirerek duruyorlar.
 ~
-kapılar kara~
+kapÄ±lar kara~
 1 -1 11854
 D3
-Parıldayan bir patika batında yer alıyor.
+ParÄ±ldayan bir patika batÄ±nda yer alÄ±yor.
 ~
 ~
 0 -1 11811
 E
-gümüş yazıtlar~
-Yazıtları okuyorsun:
+gÃ¼mÃ¼ÅŸ yazÄ±tlar~
+YazÄ±tlarÄ± okuyorsun:
 
                             {D->*<-{x
 
@@ -3942,591 +3942,591 @@ Yazıtları okuyorsun:
 ~
 S
 #11854
-Kara Mermerden Giriş~
-Sadece batıda,kara kapılarla ve doğuda,devasa bir eşikle bölünen obsidiyan
-duvarlar yetersiz meşale ışığında soğukça parlıyorlar. Eşiğin üstünde,duvarda
-bir oyma sembol görüyorsun.
+Kara Mermerden GiriÅŸ~
+Sadece batÄ±da,kara kapÄ±larla ve doÄŸuda,devasa bir eÅŸikle bÃ¶lÃ¼nen obsidiyan
+duvarlar yetersiz meÅŸale Ä±ÅŸÄ±ÄŸÄ±nda soÄŸukÃ§a parlÄ±yorlar. EÅŸiÄŸin Ã¼stÃ¼nde,duvarda
+bir oyma sembol gÃ¶rÃ¼yorsun.
 ~
 0 AD 0
 D1
-Kara bir kapı eşiği doğuya açılıyor.
+Kara bir kapÄ± eÅŸiÄŸi doÄŸuya aÃ§Ä±lÄ±yor.
 ~
 ~
 0 -1 11855
 D3
-Kara kapılar batıya açılıyor.
+Kara kapÄ±lar batÄ±ya aÃ§Ä±lÄ±yor.
 ~
-kapılar kara~
+kapÄ±lar kara~
 1 -1 11853
 E
 sembol~
-Kara taşa oyulmuş sembolde yazıyor ki:
+Kara taÅŸa oyulmuÅŸ sembolde yazÄ±yor ki:
 
                            {D->*<-{x
 ~
 S
 #11855
 Kubbeli Oda~
-Obsidiyan duvarlar yukarıda aynı materyalden bir kubbe ile birleşiyor ve
-devasa odanın dairesel dış hatlarını ortaya çıkartıyorlar. Obsidiyana
-işlenmiş küçük gümüş ve kristal parçaları donuk meşale ışığında parıldayarak
-sonsuz gökyüzünün bir ilüzyonunu ortaya çıkartıyorlar.
+Obsidiyan duvarlar yukarÄ±da aynÄ± materyalden bir kubbe ile birleÅŸiyor ve
+devasa odanÄ±n dairesel dÄ±ÅŸ hatlarÄ±nÄ± ortaya Ã§Ä±kartÄ±yorlar. Obsidiyana
+iÅŸlenmiÅŸ kÃ¼Ã§Ã¼k gÃ¼mÃ¼ÅŸ ve kristal parÃ§alarÄ± donuk meÅŸale Ä±ÅŸÄ±ÄŸÄ±nda parÄ±ldayarak
+sonsuz gÃ¶kyÃ¼zÃ¼nÃ¼n bir ilÃ¼zyonunu ortaya Ã§Ä±kartÄ±yorlar.
 ~
 0 AD 0
 D0
-Kuzeyde kara obsidiyan bir koridor yer alıyor.
+Kuzeyde kara obsidiyan bir koridor yer alÄ±yor.
 ~
 ~
 0 -1 11862
 D2
-Kara bir tünel güneye doğru gidiyor.
+Kara bir tÃ¼nel gÃ¼neye doÄŸru gidiyor.
 ~
 ~
 0 -1 11856
 D3
-Batıda devasa büyüklükte kara kapılar görüyorsun.
+BatÄ±da devasa bÃ¼yÃ¼klÃ¼kte kara kapÄ±lar gÃ¶rÃ¼yorsun.
 ~
 ~
 0 -1 11854
 S
 #11856
-Kara Tünel~
-Düz siyah obsidiyan duvarlar bir kuzey-güney doğrultulu tüneli oluşturuyorlar.
-Duvardaki oyuklar güneye,kuzeye,doğuya ve batıya gidişler açıyor. Kuzeyde
-tünel devasa kubbeli bir odaya açılıyor.
+Kara TÃ¼nel~
+DÃ¼z siyah obsidiyan duvarlar bir kuzey-gÃ¼ney doÄŸrultulu tÃ¼neli oluÅŸturuyorlar.
+Duvardaki oyuklar gÃ¼neye,kuzeye,doÄŸuya ve batÄ±ya gidiÅŸler aÃ§Ä±yor. Kuzeyde
+tÃ¼nel devasa kubbeli bir odaya aÃ§Ä±lÄ±yor.
 ~
 0 AD 0
 D0
-Kubbeli bir oda kuzeyde görülüyor.
+Kubbeli bir oda kuzeyde gÃ¶rÃ¼lÃ¼yor.
 ~
 ~
 0 -1 11855
 D1
-Derin bir oyuk doğuda.
+Derin bir oyuk doÄŸuda.
 ~
 ~
 0 -1 11857
 D2
-Güneyde derin bir oyuk görüyorsun.
+GÃ¼neyde derin bir oyuk gÃ¶rÃ¼yorsun.
 ~
 ~
 0 -1 11859
 D3
-Batında derin bir oyuk var.
+BatÄ±nda derin bir oyuk var.
 ~
 ~
 0 -1 11858
 S
 #11857
 Kara Oyuk~
-Kendini düz kara taşlardan yapılma,dar bir oyukta buldun. Geniş siyah
-mermerden bir sunak sanki büyük bir nesneyi gözler önüne sermek için
-odanın ortasında duruyor.
+Kendini dÃ¼z kara taÅŸlardan yapÄ±lma,dar bir oyukta buldun. GeniÅŸ siyah
+mermerden bir sunak sanki bÃ¼yÃ¼k bir nesneyi gÃ¶zler Ã¶nÃ¼ne sermek iÃ§in
+odanÄ±n ortasÄ±nda duruyor.
 ~
 0 ADJ 0
 D3
-Kara bir tünel batında kalıyor.
+Kara bir tÃ¼nel batÄ±nda kalÄ±yor.
 ~
 ~
 0 -1 11856
 E
 mermer sunak~
-Kara mermerden yapılma kısa,geniş bir sunak önünde duruyor.Çizikler ve
-yıpranmanın izleri her yanını kaplamış durumda,üstündeki cilalı tabakanın
-güzelliğini bozuyorlar. İlginçtir ki sunağın yanlarından, kan lekeleri
-süzülerek aşağı dökülürken kurumuş izlenimi veren lekeler var.
+Kara mermerden yapÄ±lma kÄ±sa,geniÅŸ bir sunak Ã¶nÃ¼nde duruyor.Ã‡izikler ve
+yÄ±pranmanÄ±n izleri her yanÄ±nÄ± kaplamÄ±ÅŸ durumda,Ã¼stÃ¼ndeki cilalÄ± tabakanÄ±n
+gÃ¼zelliÄŸini bozuyorlar. Ä°lginÃ§tir ki sunaÄŸÄ±n yanlarÄ±ndan, kan lekeleri
+sÃ¼zÃ¼lerek aÅŸaÄŸÄ± dÃ¶kÃ¼lÃ¼rken kurumuÅŸ izlenimi veren lekeler var.
 ~
 S
 #11858
 Kara Oyuk~
-Kendini düz kara taşlardan yapılma,dar bir oyukta buldun. Geniş siyah
-mermerden bir sunak sanki büyük bir nesneyi gözler önüne sermek için
-odanın ortasında duruyor.
+Kendini dÃ¼z kara taÅŸlardan yapÄ±lma,dar bir oyukta buldun. GeniÅŸ siyah
+mermerden bir sunak sanki bÃ¼yÃ¼k bir nesneyi gÃ¶zler Ã¶nÃ¼ne sermek iÃ§in
+odanÄ±n ortasÄ±nda duruyor.
 ~
 0 ADJ 0
 D1
-Kara bir tünel doğunda kalıyor.
+Kara bir tÃ¼nel doÄŸunda kalÄ±yor.
 ~
 ~
 0 -1 11856
 E
 mermer sunak~
-Kara mermerden yapılma kısa,geniş bir sunak önünde duruyor.Çizikler ve
-yıpranmanın izleri her yanını kaplamış durumda,üstündeki cilalı tabakanın
-güzelliğini bozuyorlar. İlginçtir ki sunağın yanlarından, kan lekeleri
-süzülerek aşağı dökülürken kurumuş izlenimi veren lekeler var.
+Kara mermerden yapÄ±lma kÄ±sa,geniÅŸ bir sunak Ã¶nÃ¼nde duruyor.Ã‡izikler ve
+yÄ±pranmanÄ±n izleri her yanÄ±nÄ± kaplamÄ±ÅŸ durumda,Ã¼stÃ¼ndeki cilalÄ± tabakanÄ±n
+gÃ¼zelliÄŸini bozuyorlar. Ä°lginÃ§tir ki sunaÄŸÄ±n yanlarÄ±ndan, kan lekeleri
+sÃ¼zÃ¼lerek aÅŸaÄŸÄ± dÃ¶kÃ¼lÃ¼rken kurumuÅŸ izlenimi veren lekeler var.
 ~
 S
 #11859
 Kara Oyuk~
-Kendini düz kara taşlardan yapılma,dar bir oyukta buldun. Geniş siyah
-mermerden bir sunak sanki büyük bir nesneyi gözler önüne sermek için
-odanın ortasında duruyor.
+Kendini dÃ¼z kara taÅŸlardan yapÄ±lma,dar bir oyukta buldun. GeniÅŸ siyah
+mermerden bir sunak sanki bÃ¼yÃ¼k bir nesneyi gÃ¶zler Ã¶nÃ¼ne sermek iÃ§in
+odanÄ±n ortasÄ±nda duruyor.
 ~
 0 AD 0
 D0
-Kara bir tünel kuzeyinde kalıyor.
+Kara bir tÃ¼nel kuzeyinde kalÄ±yor.
 ~
 ~
 0 -1 11856
 D5
-Sürtünme ve aşınma izleri sunağın her yanını kaplamış bulunmakta.
+SÃ¼rtÃ¼nme ve aÅŸÄ±nma izleri sunaÄŸÄ±n her yanÄ±nÄ± kaplamÄ±ÅŸ bulunmakta.
 ~
 sunak mermer~
 1 11801 11860
 E
 mermer sunak~
-Kara mermerden yapılma kısa,geniş bir sunak önünde duruyor.Çizikler ve
-yıpranmanın izleri her yanını kaplamış durumda,üstündeki cilalı tabakanın
-güzelliğini bozuyorlar. İlginçtir ki sunağın yanlarından, kan lekeleri
-süzülerek aşağı dökülürken kurumuş izlenimi veren lekeler var. Bir çatlak
-sunağın doğusunda aşağıya doğru yarılarak iniyor.
+Kara mermerden yapÄ±lma kÄ±sa,geniÅŸ bir sunak Ã¶nÃ¼nde duruyor.Ã‡izikler ve
+yÄ±pranmanÄ±n izleri her yanÄ±nÄ± kaplamÄ±ÅŸ durumda,Ã¼stÃ¼ndeki cilalÄ± tabakanÄ±n
+gÃ¼zelliÄŸini bozuyorlar. Ä°lginÃ§tir ki sunaÄŸÄ±n yanlarÄ±ndan, kan lekeleri
+sÃ¼zÃ¼lerek aÅŸaÄŸÄ± dÃ¶kÃ¼lÃ¼rken kurumuÅŸ izlenimi veren lekeler var. Bir Ã§atlak
+sunaÄŸÄ±n doÄŸusunda aÅŸaÄŸÄ±ya doÄŸru yarÄ±larak iniyor.
 ~
 E
-çatlak~
-Çatlağın içine doğru dikkatle bakınca gizlenmiş bir anahtar deliği fark
+Ã§atlak~
+Ã‡atlaÄŸÄ±n iÃ§ine doÄŸru dikkatle bakÄ±nca gizlenmiÅŸ bir anahtar deliÄŸi fark
 ediyorsun.
 ~
 S
 #11860
-Tehlikeli Görünüşlü Kapı Girişi~
-Cilalı kara taştan devasa ikili kapılar tehditkar bir biçimde güneyde
-yükseliyor.Kapıyı çevreleyen eşik  kıvranan 5 kalın dokungaç gibi oyulmuş
-ve en üstünde ise kötücül görünüşlü bir ağız var. Kan -kuru ve taze- kapı
-kulplarından damlıyor ve kapının şaşalı görünüşünü korkunç bir hale getiriyor.
-Korkunç pençe izleri yerde gelişigüzel duruyor,büyüklükleri onların sahibinin
-korkunçluğunu simgeliyor.
+Tehlikeli GÃ¶rÃ¼nÃ¼ÅŸlÃ¼ KapÄ± GiriÅŸi~
+CilalÄ± kara taÅŸtan devasa ikili kapÄ±lar tehditkar bir biÃ§imde gÃ¼neyde
+yÃ¼kseliyor.KapÄ±yÄ± Ã§evreleyen eÅŸik  kÄ±vranan 5 kalÄ±n dokungaÃ§ gibi oyulmuÅŸ
+ve en Ã¼stÃ¼nde ise kÃ¶tÃ¼cÃ¼l gÃ¶rÃ¼nÃ¼ÅŸlÃ¼ bir aÄŸÄ±z var. Kan -kuru ve taze- kapÄ±
+kulplarÄ±ndan damlÄ±yor ve kapÄ±nÄ±n ÅŸaÅŸalÄ± gÃ¶rÃ¼nÃ¼ÅŸÃ¼nÃ¼ korkunÃ§ bir hale getiriyor.
+KorkunÃ§ penÃ§e izleri yerde geliÅŸigÃ¼zel duruyor,bÃ¼yÃ¼klÃ¼kleri onlarÄ±n sahibinin
+korkunÃ§luÄŸunu simgeliyor.
 ~
 0 ADN 0
 D2
-Tehditkar kara kapıların kulplarından damlayan kan onların garip parıldısını
-ürkütücü bir hale sokuyor.
+Tehditkar kara kapÄ±larÄ±n kulplarÄ±ndan damlayan kan onlarÄ±n garip parÄ±ldÄ±sÄ±nÄ±
+Ã¼rkÃ¼tÃ¼cÃ¼ bir hale sokuyor.
 ~
-kapılar kara ikili~
+kapÄ±lar kara ikili~
 1 11802 11861
 D4
-Dairesel bir açıklık yukarıda.
+Dairesel bir aÃ§Ä±klÄ±k yukarÄ±da.
 ~
-sunak dairesel açıklık~
+sunak dairesel aÃ§Ä±klÄ±k~
 1 11801 11859
 S
 #11861
-Pentagram Odası~
-Kendini dairesel kara taştan yapılmış devasa bir odada buldun.Odanın ortasını
-asitle yakılarak kazınmış bir pentagram işgal ediyor. Dikgörtgen bir sunak
-pentagramın tam ortasına konmuş durumda.Kapılardan ve sunaktan damlayan kanlar
-odayı kaplamış,ürkünç bir görüntü ortaya çıkartıyor.
+Pentagram OdasÄ±~
+Kendini dairesel kara taÅŸtan yapÄ±lmÄ±ÅŸ devasa bir odada buldun.OdanÄ±n ortasÄ±nÄ±
+asitle yakÄ±larak kazÄ±nmÄ±ÅŸ bir pentagram iÅŸgal ediyor. DikgÃ¶rtgen bir sunak
+pentagramÄ±n tam ortasÄ±na konmuÅŸ durumda.KapÄ±lardan ve sunaktan damlayan kanlar
+odayÄ± kaplamÄ±ÅŸ,Ã¼rkÃ¼nÃ§ bir gÃ¶rÃ¼ntÃ¼ ortaya Ã§Ä±kartÄ±yor.
 ~
 0 ADN 0
 D0
-Devasa kara ikili kapılar kuzeye açılıyor.
+Devasa kara ikili kapÄ±lar kuzeye aÃ§Ä±lÄ±yor.
 ~
-kapılar kara ikili~
+kapÄ±lar kara ikili~
 1 11802 11860
 E
 sunak~
-Sunağın yüzüne ve çevresine ilginç rünler kazınmış durumda. Sunağın üstü
-kalıcı bir biçimde kanla lekelenmiş durumda,taze olan kanlar ise etrafından
-damlıyor.
+SunaÄŸÄ±n yÃ¼zÃ¼ne ve Ã§evresine ilginÃ§ rÃ¼nler kazÄ±nmÄ±ÅŸ durumda. SunaÄŸÄ±n Ã¼stÃ¼
+kalÄ±cÄ± bir biÃ§imde kanla lekelenmiÅŸ durumda,taze olan kanlar ise etrafÄ±ndan
+damlÄ±yor.
 ~
 E
 pentagram~
-Devasa bir pentagram odanın ortasına kazınmış durumda.Garip semboller ve
-rünler belirli alanlara arasına işlenmiş halde.
+Devasa bir pentagram odanÄ±n ortasÄ±na kazÄ±nmÄ±ÅŸ durumda.Garip semboller ve
+rÃ¼nler belirli alanlara arasÄ±na iÅŸlenmiÅŸ halde.
 ~
 S
 #11862
 Kara Mermerden Koridor~
-Kara mermer duvarlar etrafında yükselerek güney ve doğuya giden bir koridoru
-oluşturuyorlar.  Ortama sinmiş olan kötü kan kokusu burnunu dolduruyor,odanın
-karanlık doğasını daha da güçlendiriyor.
+Kara mermer duvarlar etrafÄ±nda yÃ¼kselerek gÃ¼ney ve doÄŸuya giden bir koridoru
+oluÅŸturuyorlar.  Ortama sinmiÅŸ olan kÃ¶tÃ¼ kan kokusu burnunu dolduruyor,odanÄ±n
+karanlÄ±k doÄŸasÄ±nÄ± daha da gÃ¼Ã§lendiriyor.
 ~
 0 AD 0
 D1
-Koridor doğuya devam ediyor.
+Koridor doÄŸuya devam ediyor.
 ~
 ~
 0 -1 11863
 D2
-Güneyde eğikten bakınca büyük,dairesel bir oda görüyorsun.
+GÃ¼neyde eÄŸikten bakÄ±nca bÃ¼yÃ¼k,dairesel bir oda gÃ¶rÃ¼yorsun.
 ~
 ~
 0 -1 11855
 S
 #11863
 Kara Mermer Koridor~
-Kara mermer duvarlar yetersiz ışıkta donukça parlıyorlar.Uzun meşe bir kapı
-kuzeye açılırken aynısının dişbudağından yapılmış bir kapı da ters yönünde
-güneye açılıyor.Koridor doğuya ve batıya devam ediyor.
+Kara mermer duvarlar yetersiz Ä±ÅŸÄ±kta donukÃ§a parlÄ±yorlar.Uzun meÅŸe bir kapÄ±
+kuzeye aÃ§Ä±lÄ±rken aynÄ±sÄ±nÄ±n diÅŸbudaÄŸÄ±ndan yapÄ±lmÄ±ÅŸ bir kapÄ± da ters yÃ¶nÃ¼nde
+gÃ¼neye aÃ§Ä±lÄ±yor.Koridor doÄŸuya ve batÄ±ya devam ediyor.
 ~
 0 AD 0
 D0
-Uzun bir meşe kapı kuzey duvarında bulunuyor.Kapının çerçevesindeki tacın
-etrafında altın yazılar görüyorsun:
+Uzun bir meÅŸe kapÄ± kuzey duvarÄ±nda bulunuyor.KapÄ±nÄ±n Ã§erÃ§evesindeki tacÄ±n
+etrafÄ±nda altÄ±n yazÄ±lar gÃ¶rÃ¼yorsun:
 
                   She'vale Reykaris Loryn Ira'deia
 ~
-meşe kapı~
+meÅŸe kapÄ±~
 1 -1 11865
 D1
-Koridor doğuya devam ediyor.
+Koridor doÄŸuya devam ediyor.
 ~
 ~
 0 -1 11866
 D2
-Dişbudak bir kapı güneyde bulunuyor.Dikkatli bakınca kapının üstünde bir
-yazıt görüyorsun:
+DiÅŸbudak bir kapÄ± gÃ¼neyde bulunuyor.Dikkatli bakÄ±nca kapÄ±nÄ±n Ã¼stÃ¼nde bir
+yazÄ±t gÃ¶rÃ¼yorsun:
 
                   She'vale Reykaris Sorina Ira'deia
 ~
-dişbudak kapı~
+diÅŸbudak kapÄ±~
 1 -1 11864
 D3
-Koridor batıya devam ediyor.
+Koridor batÄ±ya devam ediyor.
 ~
 ~
 0 -1 11862
 S
 #11864
-Kara Dişbudak Yatakodası~
-Tek bir kankırmızısı mum odaya ürkütücü kırmızı bir parıltı yayarken kara
-panelli yatak odasına olduğundan tehlikeli bir hava veriyor.Kırmızımsı ipek
-kumaşlar doğudaki duvarla bitişik olan geniş yatağın üstünü örtüyor. Kuzeyde
-uzun dişbudaktan bir kapı var.Kapının üstündeki altın yazıt kırmızı ışığın
-parıldısıyla parlıyor.
+Kara DiÅŸbudak YatakodasÄ±~
+Tek bir kankÄ±rmÄ±zÄ±sÄ± mum odaya Ã¼rkÃ¼tÃ¼cÃ¼ kÄ±rmÄ±zÄ± bir parÄ±ltÄ± yayarken kara
+panelli yatak odasÄ±na olduÄŸundan tehlikeli bir hava veriyor.KÄ±rmÄ±zÄ±msÄ± ipek
+kumaÅŸlar doÄŸudaki duvarla bitiÅŸik olan geniÅŸ yataÄŸÄ±n Ã¼stÃ¼nÃ¼ Ã¶rtÃ¼yor. Kuzeyde
+uzun diÅŸbudaktan bir kapÄ± var.KapÄ±nÄ±n Ã¼stÃ¼ndeki altÄ±n yazÄ±t kÄ±rmÄ±zÄ± Ä±ÅŸÄ±ÄŸÄ±n
+parÄ±ldÄ±sÄ±yla parlÄ±yor.
 ~
 0 D 0
 D0
-Kapının üstündeki yazıda diyor ki:
+KapÄ±nÄ±n Ã¼stÃ¼ndeki yazÄ±da diyor ki:
 
                   She'vale Reykaris Sorina Ira'deia
 ~
-dişbudak kapı~
+diÅŸbudak kapÄ±~
 1 -1 11863
 E
-mum kan kırmızı~
-Tek kankırmızısı bir mum şifonyerin üstünde parıltı saçıyor.
+mum kan kÄ±rmÄ±zÄ±~
+Tek kankÄ±rmÄ±zÄ±sÄ± bir mum ÅŸifonyerin Ã¼stÃ¼nde parÄ±ltÄ± saÃ§Ä±yor.
 ~
 E
-altın yazılar~
-Kapının üstündeki yazıları okuyorsun:
+altÄ±n yazÄ±lar~
+KapÄ±nÄ±n Ã¼stÃ¼ndeki yazÄ±larÄ± okuyorsun:
 
                   She'vale Reykaris Sorina Ira'deia
 ~
 S
 #11865
-Kara Meşe Yatakodası~
-Kara meşe duvar panelleri oda duvarlarındaki birkaç meşaleden gelen
-yetersiz ışığı emmek için yapılmış gibi görünüyor.Kuzey duvarındaki
-fırlatma hançer koleksiyonunu destekleyen destekler ışıkta cam bir
-haznenin arkasından parıldıyor.  Güneydeki uzun meşe kapının üstünde
-kıza bir yazı parıldıyor.
+Kara MeÅŸe YatakodasÄ±~
+Kara meÅŸe duvar panelleri oda duvarlarÄ±ndaki birkaÃ§ meÅŸaleden gelen
+yetersiz Ä±ÅŸÄ±ÄŸÄ± emmek iÃ§in yapÄ±lmÄ±ÅŸ gibi gÃ¶rÃ¼nÃ¼yor.Kuzey duvarÄ±ndaki
+fÄ±rlatma hanÃ§er koleksiyonunu destekleyen destekler Ä±ÅŸÄ±kta cam bir
+haznenin arkasÄ±ndan parÄ±ldÄ±yor.  GÃ¼neydeki uzun meÅŸe kapÄ±nÄ±n Ã¼stÃ¼nde
+kÄ±za bir yazÄ± parÄ±ldÄ±yor.
 ~
 0 D 0
 D2
-Kapının üstündeki altın yazıtta diyor ki:
+KapÄ±nÄ±n Ã¼stÃ¼ndeki altÄ±n yazÄ±tta diyor ki:
 
                   She'vale Reykaris Loryn Ira'deia
 ~
-meşe kapı~
+meÅŸe kapÄ±~
 1 -1 11863
 E
-altın yazıt~
-Kapının üstündeki yazıtta diyor ki:
+altÄ±n yazÄ±t~
+KapÄ±nÄ±n Ã¼stÃ¼ndeki yazÄ±tta diyor ki:
 
                   She'vale Reykaris Loryn Ira'deia
 ~
 E
-destekler fırlatma hançerleri koleksiyon~
-Bu hançerler görünüşe göre çok iyi bilenmiş ve çok ölümcüller..
+destekler fÄ±rlatma hanÃ§erleri koleksiyon~
+Bu hanÃ§erler gÃ¶rÃ¼nÃ¼ÅŸe gÃ¶re Ã§ok iyi bilenmiÅŸ ve Ã§ok Ã¶lÃ¼mcÃ¼ller..
 ~
 S
 #11866
 Kara Mermer Koridor~
-Uzun kara mermer duvarlar doğuda,güneyde ve kuzeyde sonlanıyor. Kuzeydeki
-kapı maundan,güneydeki ise dişbudaktan yapılma. Çift kara demir kapı
-doğudaki duvarda bulunuyor. Kapıların üstündeki eşiğe işlenmiş bir insansı
-kafatası,onun çevresinde de yazılar fark ediyorsun.
+Uzun kara mermer duvarlar doÄŸuda,gÃ¼neyde ve kuzeyde sonlanÄ±yor. Kuzeydeki
+kapÄ± maundan,gÃ¼neydeki ise diÅŸbudaktan yapÄ±lma. Ã‡ift kara demir kapÄ±
+doÄŸudaki duvarda bulunuyor. KapÄ±larÄ±n Ã¼stÃ¼ndeki eÅŸiÄŸe iÅŸlenmiÅŸ bir insansÄ±
+kafatasÄ±,onun Ã§evresinde de yazÄ±lar fark ediyorsun.
 ~
 0 AD 0
 D0
-Maun kapı karartılmış ahşabın çizgilerini taşımakta.Kapının üstünde bazı
-yazılar var:
+Maun kapÄ± karartÄ±lmÄ±ÅŸ ahÅŸabÄ±n Ã§izgilerini taÅŸÄ±makta.KapÄ±nÄ±n Ã¼stÃ¼nde bazÄ±
+yazÄ±lar var:
 
                   She'vale Reykaris Kranali Na'deian
 ~
-maun kapı~
+maun kapÄ±~
 1 -1 11868
 D1
-Kule gibi yükselen ikili gümüş kapılar doğunda kalıyor.Kapının üstündeki
-kafatasının çevresinde bir yazı fark ediyorsun:
+Kule gibi yÃ¼kselen ikili gÃ¼mÃ¼ÅŸ kapÄ±lar doÄŸunda kalÄ±yor.KapÄ±nÄ±n Ã¼stÃ¼ndeki
+kafatasÄ±nÄ±n Ã§evresinde bir yazÄ± fark ediyorsun:
 
    She'vale Reykaris Rachal Deia  {D->*<-{x  She'vale Reykaris Toryan Deiayan
 ~
-kapılar ikili kara gümüş~
+kapÄ±lar ikili kara gÃ¼mÃ¼ÅŸ~
 1 -1 11869
 D2
-Güneydeki dişbudak kapının üstünde bazı yazılar fark ediyorsun:
+GÃ¼neydeki diÅŸbudak kapÄ±nÄ±n Ã¼stÃ¼nde bazÄ± yazÄ±lar fark ediyorsun:
 
                   She'vale Reykaris Chake Ira'deian
 ~
-dişbudak kapı~
+diÅŸbudak kapÄ±~
 1 -1 11867
 D3
-Koridor batıya devam ediyor.
+Koridor batÄ±ya devam ediyor.
 ~
 ~
 0 -1 11863
 E
-insansı kafatası~
-Kara mermer eşikteki kafa beyaz beyaz parlıyor.Biraz inceleyince ağzının
-sonsuz rüyasına göçen insansının ölürkenki yabani sırıtışını halen taşıdığını
-ürpererek fark ediyorsun.
+insansÄ± kafatasÄ±~
+Kara mermer eÅŸikteki kafa beyaz beyaz parlÄ±yor.Biraz inceleyince aÄŸzÄ±nÄ±n
+sonsuz rÃ¼yasÄ±na gÃ¶Ã§en insansÄ±nÄ±n Ã¶lÃ¼rkenki yabani sÄ±rÄ±tÄ±ÅŸÄ±nÄ± halen taÅŸÄ±dÄ±ÄŸÄ±nÄ±
+Ã¼rpererek fark ediyorsun.
 ~
 E
-altın yazılar~
-Yazılar diyor ki:
+altÄ±n yazÄ±lar~
+YazÄ±lar diyor ki:
 
    She'vale Reykaris Rachal Deia  {D->*<-{x  She'vale Reykaris Toryan Deiayan
 ~
 S
 #11867
-Dişbudak Yatakodası~
-Bir insansı kafatası tavandan sarkarken ışık onun gözlerine doğal bir
-parlaklık getiriyor.Garip figürlerle kaplı kara dişbudak duvar panelleri
-odayı çevreliyor.  Kuzeyde dişbudak bir kapı duvarda bulunuyor.Kapının
-üstünde altından kısa bir yazı var.
+DiÅŸbudak YatakodasÄ±~
+Bir insansÄ± kafatasÄ± tavandan sarkarken Ä±ÅŸÄ±k onun gÃ¶zlerine doÄŸal bir
+parlaklÄ±k getiriyor.Garip figÃ¼rlerle kaplÄ± kara diÅŸbudak duvar panelleri
+odayÄ± Ã§evreliyor.  Kuzeyde diÅŸbudak bir kapÄ± duvarda bulunuyor.KapÄ±nÄ±n
+Ã¼stÃ¼nde altÄ±ndan kÄ±sa bir yazÄ± var.
 ~
 0 D 0
 D0
-Kapının üstündeki yazıda diyor ki:
+KapÄ±nÄ±n Ã¼stÃ¼ndeki yazÄ±da diyor ki:
 
                   She'vale Reykaris Chake Ira'deian
 ~
-dişbudak kapı~
+diÅŸbudak kapÄ±~
 1 -1 11866
 E
-insansı kafatası~
-Kızıl ışık kafatasının içinde parlarken göz boşluklarına ürkütücü kırmızı
-bir görüntü verirken dudaksız ağzına sanki kan varmış gibi bir görüntü
+insansÄ± kafatasÄ±~
+KÄ±zÄ±l Ä±ÅŸÄ±k kafatasÄ±nÄ±n iÃ§inde parlarken gÃ¶z boÅŸluklarÄ±na Ã¼rkÃ¼tÃ¼cÃ¼ kÄ±rmÄ±zÄ±
+bir gÃ¶rÃ¼ntÃ¼ verirken dudaksÄ±z aÄŸzÄ±na sanki kan varmÄ±ÅŸ gibi bir gÃ¶rÃ¼ntÃ¼
 veriyor.
 ~
 E
-garip figürler~
-Karmakarışık figürler şekilde oyulmuş cehennemden çıkma yaratıklar duvarı
-kaplıyor.
+garip figÃ¼rler~
+KarmakarÄ±ÅŸÄ±k figÃ¼rler ÅŸekilde oyulmuÅŸ cehennemden Ã§Ä±kma yaratÄ±klar duvarÄ±
+kaplÄ±yor.
 ~
 E
-altın yazı~
-Kapının üstündeki yazıda diyor ki:
+altÄ±n yazÄ±~
+KapÄ±nÄ±n Ã¼stÃ¼ndeki yazÄ±da diyor ki:
 
                   She'vale Reykaris Chake Ira'deian
 ~
 S
 #11868
-Kömürleşmiş Maun Yatakodası~
-Odanın kömürleşmiş ve kararmış kızılvari maun duvarlarına bakınca aklına
-gelen ilk düşünce buraya düşmüş olabilecek bir şimşeğin mi böyle bir yıkıma
-yol açtığı oluyor. Dumanın keskin kokusu odayı dolduruyor. Güneydeki kapının
-üstünde parıldayan altın harfler var,nedense ısı buraya dokunmamış.
+KÃ¶mÃ¼rleÅŸmiÅŸ Maun YatakodasÄ±~
+OdanÄ±n kÃ¶mÃ¼rleÅŸmiÅŸ ve kararmÄ±ÅŸ kÄ±zÄ±lvari maun duvarlarÄ±na bakÄ±nca aklÄ±na
+gelen ilk dÃ¼ÅŸÃ¼nce buraya dÃ¼ÅŸmÃ¼ÅŸ olabilecek bir ÅŸimÅŸeÄŸin mi bÃ¶yle bir yÄ±kÄ±ma
+yol aÃ§tÄ±ÄŸÄ± oluyor. DumanÄ±n keskin kokusu odayÄ± dolduruyor. GÃ¼neydeki kapÄ±nÄ±n
+Ã¼stÃ¼nde parÄ±ldayan altÄ±n harfler var,nedense Ä±sÄ± buraya dokunmamÄ±ÅŸ.
 ~
 0 AD 0
 D2
-Kapının üstünde yazılar var:
+KapÄ±nÄ±n Ã¼stÃ¼nde yazÄ±lar var:
 
                   She'vale Reykaris Kranali Na'deian
 ~
-maun kapı~
+maun kapÄ±~
 1 -1 11866
 E
-altın harfler~
-Kapının üstüne altın harlferle birşeyler yazılmış:
+altÄ±n harfler~
+KapÄ±nÄ±n Ã¼stÃ¼ne altÄ±n harlferle birÅŸeyler yazÄ±lmÄ±ÅŸ:
 
                   She'vale Reykaris Kranali Na'deian
 ~
 S
 #11869
 Kara Oda~
-Simsiyah obsidiyan duvarlar odadaki tüm ışığı tüketiyor ve geriye sadece
-tehlike içerebilen bir karanlık kalıyor.Tam insansı iskeletleri odanın
-etrafındaki duvarlara sokulmuş durumda,hayaletî bir beyaz ile parlıyorlar.
-Devasa ikili kara kapılar batıda bulunuyor. Karanlığın içinde zor seçilebilen
-bir yazı kapının üstüne işlenmiş.
+Simsiyah obsidiyan duvarlar odadaki tÃ¼m Ä±ÅŸÄ±ÄŸÄ± tÃ¼ketiyor ve geriye sadece
+tehlike iÃ§erebilen bir karanlÄ±k kalÄ±yor.Tam insansÄ± iskeletleri odanÄ±n
+etrafÄ±ndaki duvarlara sokulmuÅŸ durumda,hayaletÃ® bir beyaz ile parlÄ±yorlar.
+Devasa ikili kara kapÄ±lar batÄ±da bulunuyor. KaranlÄ±ÄŸÄ±n iÃ§inde zor seÃ§ilebilen
+bir yazÄ± kapÄ±nÄ±n Ã¼stÃ¼ne iÅŸlenmiÅŸ.
 ~
 0 AD 0
 D3
-Kara kapının üstünde bir yazı var:
+Kara kapÄ±nÄ±n Ã¼stÃ¼nde bir yazÄ± var:
 
  She'vale Reykaris Rachal Deia
                                 {D->*<-{x
                                        She'vale Reykaris Toryan Deiayan
 ~
-kapılar gümüş kara ikili~
+kapÄ±lar gÃ¼mÃ¼ÅŸ kara ikili~
 1 -1 11866
 E
-yazı~
-Kapının üstünde bir yazı var:
+yazÄ±~
+KapÄ±nÄ±n Ã¼stÃ¼nde bir yazÄ± var:
 
  She'vale Reykaris Rachal Deia
                                 {D->*<-{x
                                        She'vale Reykaris Toryan Deiayan
 ~
 E
-insansı iskeletleri~
-Köprücük kemiklerinden yükselen kemikler fark ediyorsun,büyük ihtimalle
-zamanında kanatları destekliyorlardı.
+insansÄ± iskeletleri~
+KÃ¶prÃ¼cÃ¼k kemiklerinden yÃ¼kselen kemikler fark ediyorsun,bÃ¼yÃ¼k ihtimalle
+zamanÄ±nda kanatlarÄ± destekliyorlardÄ±.
 ~
 S
 #11870
-Sessiz Giriş~
-Odaya sadece ayak seslerinle ve çatırdayan meşalelerce bozulan sessizlik
-hüküm sürüyor.Doğudaki kapı eşiğinde alçalan bir atmaca duvara çizilmiş.
-Eşikler kuzeye,güneye ve batıya açılıyor,ve batıdaki eşikte bazı yazılar
-görüyorsun.
+Sessiz GiriÅŸ~
+Odaya sadece ayak seslerinle ve Ã§atÄ±rdayan meÅŸalelerce bozulan sessizlik
+hÃ¼kÃ¼m sÃ¼rÃ¼yor.DoÄŸudaki kapÄ± eÅŸiÄŸinde alÃ§alan bir atmaca duvara Ã§izilmiÅŸ.
+EÅŸikler kuzeye,gÃ¼neye ve batÄ±ya aÃ§Ä±lÄ±yor,ve batÄ±daki eÅŸikte bazÄ± yazÄ±lar
+gÃ¶rÃ¼yorsun.
 ~
 0 D 0
 D0
-Küçük bir bölüm kuzeyde görülüyor.
+KÃ¼Ã§Ã¼k bir bÃ¶lÃ¼m kuzeyde gÃ¶rÃ¼lÃ¼yor.
 ~
 ~
 0 -1 11871
 D1
-Doğuda küçük bir bölüm var.
+DoÄŸuda kÃ¼Ã§Ã¼k bir bÃ¶lÃ¼m var.
 ~
 ~
 0 -1 11872
 D2
-Güney tarafında küçük bir bölüm dikkatini çekiyor.
+GÃ¼ney tarafÄ±nda kÃ¼Ã§Ã¼k bir bÃ¶lÃ¼m dikkatini Ã§ekiyor.
 ~
 ~
 0 -1 11873
 D3
-Batı duvarına yerleştirilmiş kara bir meşe kapı bulunuyor..
-Kapının üstünde bazı yazılar görüyorsun:
+BatÄ± duvarÄ±na yerleÅŸtirilmiÅŸ kara bir meÅŸe kapÄ± bulunuyor..
+KapÄ±nÄ±n Ã¼stÃ¼nde bazÄ± yazÄ±lar gÃ¶rÃ¼yorsun:
 
                        Myr'vale Myrxes
 
-               hızlı      {W-=+)>{x      sessiz
+               hÄ±zlÄ±      {W-=+)>{x      sessiz
 
-                        ..veya ölü
+                        ..veya Ã¶lÃ¼
 
-                     - hançerin uçuşu -
+                     - hanÃ§erin uÃ§uÅŸu -
 ~
-kara kapılar meşe~
+kara kapÄ±lar meÅŸe~
 1 -1 11817
 E
-yazılar~
-Kapı eşiğinde bazı yazılar görüyorsun:
+yazÄ±lar~
+KapÄ± eÅŸiÄŸinde bazÄ± yazÄ±lar gÃ¶rÃ¼yorsun:
 
                        Myr'vale Myrxes
 
-                hızlı      {W-=+)>{x      sessiz
+                hÄ±zlÄ±      {W-=+)>{x      sessiz
 
-                         ..veya ölü
+                         ..veya Ã¶lÃ¼
 
-                      - hançerin uçuşu -
+                      - hanÃ§erin uÃ§uÅŸu -
 ~
 S
 #11871
-Küçük Bölüm~
-Yetersiz meşale ışığı sessiz,karanlık küçük açıklığı ışıklandırıyor.
-Sıralar doğu,kuzey ve batı duvarlarında sıra sıra dizilmiş durumda
-ve güneyde ise bir eşik var.
+KÃ¼Ã§Ã¼k BÃ¶lÃ¼m~
+Yetersiz meÅŸale Ä±ÅŸÄ±ÄŸÄ± sessiz,karanlÄ±k kÃ¼Ã§Ã¼k aÃ§Ä±klÄ±ÄŸÄ± Ä±ÅŸÄ±klandÄ±rÄ±yor.
+SÄ±ralar doÄŸu,kuzey ve batÄ± duvarlarÄ±nda sÄ±ra sÄ±ra dizilmiÅŸ durumda
+ve gÃ¼neyde ise bir eÅŸik var.
 ~
 0 D 0
 D2
-Sessiz bir giriş güneyde bulunuyor.
+Sessiz bir giriÅŸ gÃ¼neyde bulunuyor.
 ~
 ~
 0 -1 11870
 S
 #11872
-Küçük Bölüm~
-Yetersiz meşale ışığı sessiz,karanlık küçük açıklığı ışıklandırıyor.
-Sıralar doğu,kuzey ve batı duvarlarında sıra sıra dizilmiş durumda
-ve güneyde ise bir eşik var.
+KÃ¼Ã§Ã¼k BÃ¶lÃ¼m~
+Yetersiz meÅŸale Ä±ÅŸÄ±ÄŸÄ± sessiz,karanlÄ±k kÃ¼Ã§Ã¼k aÃ§Ä±klÄ±ÄŸÄ± Ä±ÅŸÄ±klandÄ±rÄ±yor.
+SÄ±ralar doÄŸu,kuzey ve batÄ± duvarlarÄ±nda sÄ±ra sÄ±ra dizilmiÅŸ durumda
+ve gÃ¼neyde ise bir eÅŸik var.
 ~
 0 D 0
 D3
-Sessiz bir giriş batında bulunuyor.
+Sessiz bir giriÅŸ batÄ±nda bulunuyor.
 ~
 ~
 0 -1 11870
 S
 #11873
-Küçük Bölüm~
-Yetersiz meşale ışığı sessiz,karanlık küçük açıklığı ışıklandırıyor.
-Sıralar doğu,kuzey ve batı duvarlarında sıra sıra dizilmiş durumda
-ve güneyde ise bir eşik var.
+KÃ¼Ã§Ã¼k BÃ¶lÃ¼m~
+Yetersiz meÅŸale Ä±ÅŸÄ±ÄŸÄ± sessiz,karanlÄ±k kÃ¼Ã§Ã¼k aÃ§Ä±klÄ±ÄŸÄ± Ä±ÅŸÄ±klandÄ±rÄ±yor.
+SÄ±ralar doÄŸu,kuzey ve batÄ± duvarlarÄ±nda sÄ±ra sÄ±ra dizilmiÅŸ durumda
+ve gÃ¼neyde ise bir eÅŸik var.
 ~
 0 D 0
 D0
-Sessiz bir giriş kuzeyinde bulunuyor.
+Sessiz bir giriÅŸ kuzeyinde bulunuyor.
 ~
 ~
 0 -1 11870
 D5
-Dairesel şekilli bir çatlak ayakların altındaki taşta zarla zorla görülüyor.
+Dairesel ÅŸekilli bir Ã§atlak ayaklarÄ±n altÄ±ndaki taÅŸta zarla zorla gÃ¶rÃ¼lÃ¼yor.
 ~
-taş dairesel çatlak~
+taÅŸ dairesel Ã§atlak~
 1 -1 11874
 S
 #11874
-Süssüz Taş Oda~
-Kara gri taştan oluşma bir odadasın.Duvara iliştirilmiş tahta hedeflerde
-birçok kesik barındırıyor.Büyük ihtimalle bıçak konulan boş raflar kuzey
-duvarını kaplıyor.
+SÃ¼ssÃ¼z TaÅŸ Oda~
+Kara gri taÅŸtan oluÅŸma bir odadasÄ±n.Duvara iliÅŸtirilmiÅŸ tahta hedeflerde
+birÃ§ok kesik barÄ±ndÄ±rÄ±yor.BÃ¼yÃ¼k ihtimalle bÄ±Ã§ak konulan boÅŸ raflar kuzey
+duvarÄ±nÄ± kaplÄ±yor.
 ~
 0 AD 0
 D1
-Hedeflerin birisinin arkasında,doğu duvarında bir ek yeri fark ediyorsun.
+Hedeflerin birisinin arkasÄ±nda,doÄŸu duvarÄ±nda bir ek yeri fark ediyorsun.
 ~
 duvar hedef~
 1 -1 11875
 D4
-Tavandaki çatlaktan ışık sızıyor.
+Tavandaki Ã§atlaktan Ä±ÅŸÄ±k sÄ±zÄ±yor.
 ~
-taş dairesel çatlak~
+taÅŸ dairesel Ã§atlak~
 1 -1 11873
 E
 tahta hedefler hedef~
-Kalın tahta parçaları duvarda bulunuyor.Tahtalarda hedef pratiği için
-kullanıldıklarını gösteren kesik izleri var.  Sayısız kesik tahtanın
-ortalarına doğru fazlalaşıyor.
+KalÄ±n tahta parÃ§alarÄ± duvarda bulunuyor.Tahtalarda hedef pratiÄŸi iÃ§in
+kullanÄ±ldÄ±klarÄ±nÄ± gÃ¶steren kesik izleri var.  SayÄ±sÄ±z kesik tahtanÄ±n
+ortalarÄ±na doÄŸru fazlalaÅŸÄ±yor.
 ~
 S
 #11875
-Kara mağara~
-Odanın her yanını -duvarları,tavanı,yerleri- çeşitli çizimler kaplamakta.
-Çoğu figür irbirini izleyen figürler topluluklarından oluşurken bazıları
-seçilebilir şekilde sade duruyorlar.. bir okçu, bir panter, bir atmaca ve
-bir hançer aralarından birkaçı.
+Kara maÄŸara~
+OdanÄ±n her yanÄ±nÄ± -duvarlarÄ±,tavanÄ±,yerleri- Ã§eÅŸitli Ã§izimler kaplamakta.
+Ã‡oÄŸu figÃ¼r irbirini izleyen figÃ¼rler topluluklarÄ±ndan oluÅŸurken bazÄ±larÄ±
+seÃ§ilebilir ÅŸekilde sade duruyorlar.. bir okÃ§u, bir panter, bir atmaca ve
+bir hanÃ§er aralarÄ±ndan birkaÃ§Ä±.
 ~
 0 AD 0
 D0
-Avlanan bir panter kuzey duvarına kazınmış.
+Avlanan bir panter kuzey duvarÄ±na kazÄ±nmÄ±ÅŸ.
 ~
 panter duvar~
 1 -1 11876
 D1
-Bir vaşak resmi doğu duvarına çizilmiş.
+Bir vaÅŸak resmi doÄŸu duvarÄ±na Ã§izilmiÅŸ.
 ~
-vaşak duvar~
+vaÅŸak duvar~
 1 -1 11878
 D3
-Oyma resimler batı duvarına çizilmiş.
+Oyma resimler batÄ± duvarÄ±na Ã§izilmiÅŸ.
 ~
 oyma duvar~
 1 -1 11874
 D5
-Odanın ortasında alçalarak pike yapan bir atmaca resmedilmiş.
+OdanÄ±n ortasÄ±nda alÃ§alarak pike yapan bir atmaca resmedilmiÅŸ.
 ~
 atmaca yer~
 1 -1 11879
 E
-çizimler~
-Çizimleri gözlerinle takip etmeye çalışıyorsun fakat her seferinde
-şaşırıyorsun.
+Ã§izimler~
+Ã‡izimleri gÃ¶zlerinle takip etmeye Ã§alÄ±ÅŸÄ±yorsun fakat her seferinde
+ÅŸaÅŸÄ±rÄ±yorsun.
 ~
 S
 #11876
@@ -4548,84 +4548,84 @@ Carved above the leaping panther, you notice the inscription:
 
                      Myr'vale Myrxes Nyxi Ira'deia
 ~
-kapı~
+kapÄ±~
 1 -1 11875
 S
 #11877
-Hançerin Odası~
-Gri çizgili kara mermer duvarlar sadece bir fırlatma hançerinin çizildiği
-kuzey duvarı dışında yetersiz meşale ışığında parlamaya çalışıyorlar. Odanın
-ortasındaki kısa masanın üstünde 3 hançer kara kumaşlar içinde cam koruma
-geçirilmiş halde duruyorlar.
+HanÃ§erin OdasÄ±~
+Gri Ã§izgili kara mermer duvarlar sadece bir fÄ±rlatma hanÃ§erinin Ã§izildiÄŸi
+kuzey duvarÄ± dÄ±ÅŸÄ±nda yetersiz meÅŸale Ä±ÅŸÄ±ÄŸÄ±nda parlamaya Ã§alÄ±ÅŸÄ±yorlar. OdanÄ±n
+ortasÄ±ndaki kÄ±sa masanÄ±n Ã¼stÃ¼nde 3 hanÃ§er kara kumaÅŸlar iÃ§inde cam koruma
+geÃ§irilmiÅŸ halde duruyorlar.
 ~
 0 AD 0
 D2
-Yumuşak gri çizgilerle bezeli kara mermer görüyorsun.
+YumuÅŸak gri Ã§izgilerle bezeli kara mermer gÃ¶rÃ¼yorsun.
 ~
 duvar~
 1 -1 11878
 D3
-Yumuşak gri çizgilerle bezeli kara mermer görüyorsun.
+YumuÅŸak gri Ã§izgilerle bezeli kara mermer gÃ¶rÃ¼yorsun.
 ~
 duvar~
 1 -1 11876
 E
-hançer~
-Bir fırlatma hançeri güzel bir biçimde kuzey duvarına resmedilmiş. Dikkatle
-bakınca kabzasında bazı kelimeler görüyorsun:
+hanÃ§er~
+Bir fÄ±rlatma hanÃ§eri gÃ¼zel bir biÃ§imde kuzey duvarÄ±na resmedilmiÅŸ. Dikkatle
+bakÄ±nca kabzasÄ±nda bazÄ± kelimeler gÃ¶rÃ¼yorsun:
 
                     Myr'vale Myrxes Dyraena Na'deia
 ~
 E
-cam koruma hançerler~
-Küçük cam bir koruma ile kaplanmış 3 hançer görüyorsun.Ortadaki hançer dar
-kabzalı,ince bir tane,büyük ihtimalle bir fırlatma hançeri.Mithrilin gümüşi
-mavi parıltısıyla parlıyorlar. Myrxes'in arması hançerin kabzasının ortasına
-işlenmiş durumda. Sağdaki hançer ötekisinden daha uzun ve oniksten yapılma.
-Bir panter resmi hançerin soğuk çeliği boyunca işlenmiş. Bilenmiş çelik solda
-üçüncü hançeri oluşturuyor,neredeyse bir kısakılıç büyüklüğünde.Kara kabzasında
-bir vaşak resmi var.Bir tür büyülü korumanın tehditkar parıltısı cam koruma ve
-masa üstünde oynaşıyor.
+cam koruma hanÃ§erler~
+KÃ¼Ã§Ã¼k cam bir koruma ile kaplanmÄ±ÅŸ 3 hanÃ§er gÃ¶rÃ¼yorsun.Ortadaki hanÃ§er dar
+kabzalÄ±,ince bir tane,bÃ¼yÃ¼k ihtimalle bir fÄ±rlatma hanÃ§eri.Mithrilin gÃ¼mÃ¼ÅŸi
+mavi parÄ±ltÄ±sÄ±yla parlÄ±yorlar. Myrxes'in armasÄ± hanÃ§erin kabzasÄ±nÄ±n ortasÄ±na
+iÅŸlenmiÅŸ durumda. SaÄŸdaki hanÃ§er Ã¶tekisinden daha uzun ve oniksten yapÄ±lma.
+Bir panter resmi hanÃ§erin soÄŸuk Ã§eliÄŸi boyunca iÅŸlenmiÅŸ. BilenmiÅŸ Ã§elik solda
+Ã¼Ã§Ã¼ncÃ¼ hanÃ§eri oluÅŸturuyor,neredeyse bir kÄ±sakÄ±lÄ±Ã§ bÃ¼yÃ¼klÃ¼ÄŸÃ¼nde.Kara kabzasÄ±nda
+bir vaÅŸak resmi var.Bir tÃ¼r bÃ¼yÃ¼lÃ¼ korumanÄ±n tehditkar parÄ±ltÄ±sÄ± cam koruma ve
+masa Ã¼stÃ¼nde oynaÅŸÄ±yor.
 ~
 S
 #11878
-Vaşağın Odası~
-Saldıran bir vaşak doğu duvarını kaplarken süssüz kara oniks duvarları
-bölüyor. Batıdaki odanın kapısının üstünü saldıran bir vaşak kaplıyor.
-Tek bir elmas vaşağın bir gözünü betimliyor,bu elmas karanlığa karşı
-parlıyor.
+VaÅŸaÄŸÄ±n OdasÄ±~
+SaldÄ±ran bir vaÅŸak doÄŸu duvarÄ±nÄ± kaplarken sÃ¼ssÃ¼z kara oniks duvarlarÄ±
+bÃ¶lÃ¼yor. BatÄ±daki odanÄ±n kapÄ±sÄ±nÄ±n Ã¼stÃ¼nÃ¼ saldÄ±ran bir vaÅŸak kaplÄ±yor.
+Tek bir elmas vaÅŸaÄŸÄ±n bir gÃ¶zÃ¼nÃ¼ betimliyor,bu elmas karanlÄ±ÄŸa karÅŸÄ±
+parlÄ±yor.
 ~
 0 AD 0
 D0
-Kuzey duvarı cilalı oniks taşından yapılma.
+Kuzey duvarÄ± cilalÄ± oniks taÅŸÄ±ndan yapÄ±lma.
 ~
 duvar~
 1 -1 11877
 D3
-Saldıran vaşağın altında bir yazı fark ediyorsun:
+SaldÄ±ran vaÅŸaÄŸÄ±n altÄ±nda bir yazÄ± fark ediyorsun:
 
                    Myr'vale Myrxes Delise Ira'deia
 ~
-kapı~
+kapÄ±~
 1 -1 11875
 S
 #11879
-Karanlığın Odası~
-Karanlık burada aşılmaz bir varlık gibi duruyor,oniks duvarları kaplayan
-tüm parıldıyı ve güzelliği sönükleştiriyor.Güney duvarında iki atmaca
-görüyorsun,birisi avlanıyor,diğeri ise öldürmek için duruyor. Kapkaranlık
-odada zorla seçebildiğin bir halı odadaki tüm sesleri hafif fısıltılara
-dönüştürüyor.
+KaranlÄ±ÄŸÄ±n OdasÄ±~
+KaranlÄ±k burada aÅŸÄ±lmaz bir varlÄ±k gibi duruyor,oniks duvarlarÄ± kaplayan
+tÃ¼m parÄ±ldÄ±yÄ± ve gÃ¼zelliÄŸi sÃ¶nÃ¼kleÅŸtiriyor.GÃ¼ney duvarÄ±nda iki atmaca
+gÃ¶rÃ¼yorsun,birisi avlanÄ±yor,diÄŸeri ise Ã¶ldÃ¼rmek iÃ§in duruyor. KapkaranlÄ±k
+odada zorla seÃ§ebildiÄŸin bir halÄ± odadaki tÃ¼m sesleri hafif fÄ±sÄ±ltÄ±lara
+dÃ¶nÃ¼ÅŸtÃ¼rÃ¼yor.
 ~
 0 AD 0
 D4
-Oniks tavana kadar her yer karanlık.
+Oniks tavana kadar her yer karanlÄ±k.
 ~
 oniks tavan~
 1 -1 11875
 E
-atmaca atmacalar güney s~
-Çizilmiş atmacaların altında bir yazı fark ediyorsun:
+atmaca atmacalar gÃ¼ney s~
+Ã‡izilmiÅŸ atmacalarÄ±n altÄ±nda bir yazÄ± fark ediyorsun:
 
                   Myr'vale Myrxes Jaena Deia
 
@@ -4636,57 +4636,57 @@ atmaca atmacalar güney s~
 S
 #11880
 Granit Avlu~
-Granitle kaplı bir kubbeyle korunan,kalın geniş sütunlarla çevrili bir
-odadasın.Sarmal demir kapılar doğuda avluya girişi belirtiyorlar ve
-batıdaki büyük eve de bir meşe kapı açılıyor.
+Granitle kaplÄ± bir kubbeyle korunan,kalÄ±n geniÅŸ sÃ¼tunlarla Ã§evrili bir
+odadasÄ±n.Sarmal demir kapÄ±lar doÄŸuda avluya giriÅŸi belirtiyorlar ve
+batÄ±daki bÃ¼yÃ¼k eve de bir meÅŸe kapÄ± aÃ§Ä±lÄ±yor.
 ~
 0 0 1
 D1
-Güçlü demir kapılar doğuda duvarda bulunuyorlar.Demir barlar bükülerek
-bir kapıda kılıç simgesini diğerinde de kalkan simgesini oluşturuyorlar.
+GÃ¼Ã§lÃ¼ demir kapÄ±lar doÄŸuda duvarda bulunuyorlar.Demir barlar bÃ¼kÃ¼lerek
+bir kapÄ±da kÄ±lÄ±Ã§ simgesini diÄŸerinde de kalkan simgesini oluÅŸturuyorlar.
 ~
-kapılar sarmal demir~
+kapÄ±lar sarmal demir~
 1 -1 11810
 D3
-Batıdaki eve bir kapı açılıyor.Kapının üstüne bazı harfler kazınmış:
+BatÄ±daki eve bir kapÄ± aÃ§Ä±lÄ±yor.KapÄ±nÄ±n Ã¼stÃ¼ne bazÄ± harfler kazÄ±nmÄ±ÅŸ:
 
                        Myr'vale Xaek   {w][+][{x
 ~
-kapı meşe~
+kapÄ± meÅŸe~
 1 -1 11881
 S
 #11881
 Demir koridor~
-Kuleler üstündeki kuzey-güney doğrultusunda bir koridordasın. Kalın çelik
-kapılar batıya uzanıyor, işlemeli bir meşe kapı ise doğuya. Koridor kuzeye
-ve güneye devam ediyor.
+Kuleler Ã¼stÃ¼ndeki kuzey-gÃ¼ney doÄŸrultusunda bir koridordasÄ±n. KalÄ±n Ã§elik
+kapÄ±lar batÄ±ya uzanÄ±yor, iÅŸlemeli bir meÅŸe kapÄ± ise doÄŸuya. Koridor kuzeye
+ve gÃ¼neye devam ediyor.
 ~
 0 D 0
 D0
-Büyük taş kapılar uzakta seçilebiliyor.
+BÃ¼yÃ¼k taÅŸ kapÄ±lar uzakta seÃ§ilebiliyor.
 ~
 ~
 0 -1 11888
 D1
-Üstünde Xaek arması olan meşe bir kapı doğuda uzanıyor.
+ÃœstÃ¼nde Xaek armasÄ± olan meÅŸe bir kapÄ± doÄŸuda uzanÄ±yor.
 ~
-kapı meşe~
+kapÄ± meÅŸe~
 1 -1 11880
 D2
-Koridor güneye devam ediyor.
+Koridor gÃ¼neye devam ediyor.
 ~
 ~
 0 -1 11882
 D3
-Batı duvarında ikili çelik kapılar bulunuyor.
+BatÄ± duvarÄ±nda ikili Ã§elik kapÄ±lar bulunuyor.
 ~
-kapılar ikili çelik~
+kapÄ±lar ikili Ã§elik~
 1 -1 11884
 S
 #11882
 Demir Koridor~
-Koridor güneyde kalın,çelik kapılarla son buluyor. Kapının üstünde Xaek'in
-arması kılıç ve kalkanın üstünde bulunuyor.
+Koridor gÃ¼neyde kalÄ±n,Ã§elik kapÄ±larla son buluyor. KapÄ±nÄ±n Ã¼stÃ¼nde Xaek'in
+armasÄ± kÄ±lÄ±Ã§ ve kalkanÄ±n Ã¼stÃ¼nde bulunuyor.
 ~
 0 D 0
 D0
@@ -4695,9 +4695,9 @@ Koridor kuzeye gidiyor.
 ~
 0 -1 11881
 D2
-Kalın çelik bir kapı güneye açılıyor.
+KalÄ±n Ã§elik bir kapÄ± gÃ¼neye aÃ§Ä±lÄ±yor.
 ~
-kapı kalın çelik~
+kapÄ± kalÄ±n Ã§elik~
 1 -1 11883
 S
 #11883

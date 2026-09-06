@@ -1,17 +1,17 @@
-İYİ
-İyi öldürürse     -> Negatif
-Yansız öldürürse  -> Pozitif
-Kem öldürürse     -> Pozitif
+Ä°YÄ°
+Ä°yi Ã¶ldÃ¼rÃ¼rse     -> Negatif
+YansÄ±z Ã¶ldÃ¼rÃ¼rse  -> Pozitif
+Kem Ã¶ldÃ¼rÃ¼rse     -> Pozitif
 
 YANSIZ
-İyi öldürürse     -> Pozitif
-Yansız öldürürse  -> Negatif
-Kem öldürürse     -> Pozitif
+Ä°yi Ã¶ldÃ¼rÃ¼rse     -> Pozitif
+YansÄ±z Ã¶ldÃ¼rÃ¼rse  -> Negatif
+Kem Ã¶ldÃ¼rÃ¼rse     -> Pozitif
 
 KEM
-İyi öldürürse     -> Pozitif
-Yansız öldürürse  -> Pozitif
-Kem öldürürse     -> Negatif
+Ä°yi Ã¶ldÃ¼rÃ¼rse     -> Pozitif
+YansÄ±z Ã¶ldÃ¼rÃ¼rse  -> Pozitif
+Kem Ã¶ldÃ¼rÃ¼rse     -> Negatif
 
-Her 100 negatifte karakterin karizması 1 azalır.
-Her 200 pozitifte karakterin karizması 1 artar.
+Her 100 negatifte karakterin karizmasÄ± 1 azalÄ±r.
+Her 200 pozitifte karakterin karizmasÄ± 1 artar.
