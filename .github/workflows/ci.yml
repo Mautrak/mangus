@@ -51,7 +51,13 @@ jobs:
         run: python3 -m pip install --quiet pytest ninja
 
       - name: Yapılandır
-        run: cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DMANGUS_WERROR=ON
+        run: |
+          extra=""
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            # pytest MSYS2 Python'unda kurulu; CMake runner'ın kendi Python'unu bulmasın.
+            extra="-DPython3_EXECUTABLE=$(cygpath -m "$(command -v python3)")"
+          fi
+          cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DMANGUS_WERROR=ON $extra
 
       - name: Derle
         run: cmake --build build --parallel
