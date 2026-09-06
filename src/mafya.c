@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açık kaynak Türkçe Mud projesidir.                        *
- * Oyun geliştirmesi Jai ve Maru tarafından yönetilmektedir.               *
- * Unutulmaması gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aÃ§Ä±k kaynak TÃ¼rkÃ§e Mud projesidir.                        *
+ * Oyun geliÅŸtirmesi Jai ve Maru tarafÄ±ndan yÃ¶netilmektedir.               *
+ * UnutulmamasÄ± gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -55,44 +55,44 @@ void do_iste( CHAR_DATA *ch, char *argument )
 
 	if (argument[0] == '\0')
 	{
-		do_say(mafya, (char*)"Lakap kaldırtmak:");
-		do_say(mafya, (char*)"aranıyor:  20000 akçe");
-		do_say(mafya, (char*)"talep lakapkaldır <aranıyor>");
+		do_say(mafya, (char*)"Lakap kaldÄ±rtmak:");
+		do_say(mafya, (char*)"aranÄ±yor:  20000 akÃ§e");
+		do_say(mafya, (char*)"talep lakapkaldÄ±r <aranÄ±yor>");
 		return;
     }
 
 	argument = one_argument( argument, arg1 );
     argument = one_argument( argument, arg2 );
 
-	if (!str_prefix(arg1,"lakapkaldır"))
+	if (!str_prefix(arg1,"lakapkaldÄ±r"))
 	{
-		if (!str_prefix(arg2,"aranıyor"))
+		if (!str_prefix(arg2,"aranÄ±yor"))
 		{
 			cost = 20000;
 			if ( !IS_SET(ch->act, PLR_WANTED) )
 			{
-				do_say(mafya, (char*)"Aranmıyorsun ki! Hatta oldukça zararsız bi tipe benziyorsun!");
+				do_say(mafya, (char*)"AranmÄ±yorsun ki! Hatta oldukÃ§a zararsÄ±z bi tipe benziyorsun!");
 				return;
 			}
 			if ( cost > ch->pcdata->bank_s )
 			{
-				do_say(mafya, (char*)"Bankada yeterli akçen yok.");
+				do_say(mafya, (char*)"Bankada yeterli akÃ§en yok.");
 				return;
 			}
 			REMOVE_BIT( ch->act, PLR_WANTED );
 			ch->pcdata->bank_s 	    -= cost;
 			mafya->silver  += cost;
-			do_say(mafya, (char*)"Temiz iş oldu. Yüzbaşının ofisindeki kayıtları sildik. Artık aranmıyorsun!");
+			do_say(mafya, (char*)"Temiz iÅŸ oldu. YÃ¼zbaÅŸÄ±nÄ±n ofisindeki kayÄ±tlarÄ± sildik. ArtÄ±k aranmÄ±yorsun!");
 			do_say(mafya, (char*)"Yine bekleriz.");
 			return;
 		}
 	}
 	else
 	{
-		do_say(mafya, (char*)"Ne söylediğini anlamıyorum, ama şunlar ilgini çekebilir...");
-		do_say(mafya, (char*)"Lakap kaldırtmak:");
-		do_say(mafya, (char*)"aranıyor:  20000 akçe");
-		do_say(mafya, (char*)"talep lakapkaldır <aranıyor>");
+		do_say(mafya, (char*)"Ne sÃ¶ylediÄŸini anlamÄ±yorum, ama ÅŸunlar ilgini Ã§ekebilir...");
+		do_say(mafya, (char*)"Lakap kaldÄ±rtmak:");
+		do_say(mafya, (char*)"aranÄ±yor:  20000 akÃ§e");
+		do_say(mafya, (char*)"talep lakapkaldÄ±r <aranÄ±yor>");
 		return;
 	}
 }

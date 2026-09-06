@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
- * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
- * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aÃ§Ä±k kaynak TÃ¼rkÃ§e Mud projesidir.                        *
+ * Oyun geliÅŸtirmesi Jai ve Maru tarafÄ±ndan yÃ¶netilmektedir.               *
+ * UnutulmamasÄ± gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -878,7 +878,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
     ch->pcdata->questgiver = 0;
     ch->pcdata->countdown = 0;
     ch->pcdata->questmob = 0;
-    ch->pcdata->birth_time = current_time - 14688000;// 17 oyun yýlýný çýkarýyoruz ki doðum yýlý doðru olsun
+    ch->pcdata->birth_time = current_time - 14688000;// 17 oyun yÄ±lÄ±nÄ± Ã§Ä±karÄ±yoruz ki doÄŸum yÄ±lÄ± doÄŸru olsun
     ch->religion = RELIGION_NONE;
     ch->pcdata->has_killed = 0;
     ch->pcdata->anti_killed = 0;

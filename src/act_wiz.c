@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açık kaynak Türkçe Mud projesidir.                        *
- * Oyun geliştirmesi Jai ve Maru tarafından yönetilmektedir.               *
- * Unutulmaması gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aÃ§Ä±k kaynak TÃ¼rkÃ§e Mud projesidir.                        *
+ * Oyun geliÅŸtirmesi Jai ve Maru tarafÄ±ndan yÃ¶netilmektedir.               *
+ * UnutulmamasÄ± gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -183,7 +183,7 @@ void do_objlist( CHAR_DATA *ch, char *argument )
         }
         else
         {
-            send_to_char("altseviye argümanı bir sayı olmalıdır.\n\r",ch);
+            send_to_char("altseviye argÃ¼manÄ± bir sayÄ± olmalÄ±dÄ±r.\n\r",ch);
             return;
         }
     }
@@ -196,7 +196,7 @@ void do_objlist( CHAR_DATA *ch, char *argument )
         }
         else
         {
-            send_to_char("ustseviye argümanı bir sayı olmalıdır.\n\r",ch);
+            send_to_char("ustseviye argÃ¼manÄ± bir sayÄ± olmalÄ±dÄ±r.\n\r",ch);
             return;
         }
     }
@@ -209,7 +209,7 @@ void do_objlist( CHAR_DATA *ch, char *argument )
         }
         else
         {
-            send_to_char("enaz argümanı bir sayı olmalıdır.\n\r",ch);
+            send_to_char("enaz argÃ¼manÄ± bir sayÄ± olmalÄ±dÄ±r.\n\r",ch);
             return;
         }
     }
@@ -698,9 +698,9 @@ void do_outfit ( CHAR_DATA *ch, char *argument )
     obj->condition = 100;
     obj_to_char( obj, ch );
 
-    send_to_char("Tanrılar sana bazı eşyalar bahşediyor.\n\r",ch);
-    send_to_char("Taşıdığın eşyaları görüntülemek için 'envanter' yaz.\n\r",ch);
-    send_to_char("Eşyalarını giymek için 'giy <eşya adı>' yazmayı dene.\n\r\n\r",ch);
+    send_to_char("TanrÄ±lar sana bazÄ± eÅŸyalar bahÅŸediyor.\n\r",ch);
+    send_to_char("TaÅŸÄ±dÄ±ÄŸÄ±n eÅŸyalarÄ± gÃ¶rÃ¼ntÃ¼lemek iÃ§in 'envanter' yaz.\n\r",ch);
+    send_to_char("EÅŸyalarÄ±nÄ± giymek iÃ§in 'giy <eÅŸya adÄ±>' yazmayÄ± dene.\n\r\n\r",ch);
 }
 
 
@@ -1020,7 +1020,7 @@ void do_duyuru( CHAR_DATA *ch, char *argument )
 
     if ( argument[0] == '\0' )
     {
-        send_to_char( "Neyi duyuracaksın?\n\r", ch );
+        send_to_char( "Neyi duyuracaksÄ±n?\n\r", ch );
         return;
     }
 
@@ -1529,7 +1529,7 @@ void do_ostat( CHAR_DATA *ch, char *argument )
 
     if ( ( obj = get_obj_world( ch, argument ) ) == NULL )
     {
-	send_to_char( "Ne bu dünyada ne de diğerinde böyle bir şey yok.\n\r", ch );
+	send_to_char( "Ne bu dÃ¼nyada ne de diÄŸerinde bÃ¶yle bir ÅŸey yok.\n\r", ch );
 	return;
     }
 
@@ -1883,7 +1883,7 @@ void do_mobstat( CHAR_DATA *ch, char *argument )
 
   if ( arg1[0] == '\0' )
   {
-    printf_to_char(ch,"Eksik argüman.\n\r");
+    printf_to_char(ch,"Eksik argÃ¼man.\n\r");
     return;
   }
 
@@ -2367,7 +2367,7 @@ void do_owhere(CHAR_DATA *ch, char *argument )
     }
 
     if ( !found )
-        send_to_char( "Ne bu dünyada ne de diğerinde böyle bir şey yok.\n\r", ch );
+        send_to_char( "Ne bu dÃ¼nyada ne de diÄŸerinde bÃ¶yle bir ÅŸey yok.\n\r", ch );
     else
         page_to_char(buf_string(buffer),ch);
 
@@ -3754,7 +3754,7 @@ void do_string( CHAR_DATA *ch, char *argument )
 
    	if ( ( obj = get_obj_world( ch, arg1 ) ) == NULL )
     	{
-	    send_to_char( "Ne bu dünyada ne de diğerinde böyle bir şey yok.\n\r", ch );
+	    send_to_char( "Ne bu dÃ¼nyada ne de diÄŸerinde bÃ¶yle bir ÅŸey yok.\n\r", ch );
 	    return;
     	}
 
@@ -3835,7 +3835,7 @@ void do_oset( CHAR_DATA *ch, char *argument )
 
     if ( ( obj = get_obj_world( ch, arg1 ) ) == NULL )
     {
-	send_to_char( "Ne bu dünyada ne de diğerinde böyle bir şey yok.\n\r", ch );
+	send_to_char( "Ne bu dÃ¼nyada ne de diÄŸerinde bÃ¶yle bir ÅŸey yok.\n\r", ch );
 	return;
     }
 
@@ -4525,14 +4525,14 @@ void do_ikikat( CHAR_DATA *ch, char *argument )
 
   if ( arg1[0] == '\0')
   {
-    send_to_char("Kullanım:\n\r",ch);
+    send_to_char("KullanÄ±m:\n\r",ch);
     send_to_char("  ikikat <tp | gp> <dakika>\n\r",ch);
-    send_to_char("Dakika olarak 0 veya pozitif bir değer verilmelidir.\n\r",ch);
+    send_to_char("Dakika olarak 0 veya pozitif bir deÄŸer verilmelidir.\n\r",ch);
 
     if(ikikat_gp >= 0)
-        printf_to_char(ch,"İki kat GP etkinliğinin bitmesine kalan: %d.\n\r", ikikat_gp);
+        printf_to_char(ch,"Ä°ki kat GP etkinliÄŸinin bitmesine kalan: %d.\n\r", ikikat_gp);
     if(ikikat_tp >= 0)
-        printf_to_char(ch,"İki kat TP etkinliğinin bitmesine kalan: %d.\n\r", ikikat_tp);
+        printf_to_char(ch,"Ä°ki kat TP etkinliÄŸinin bitmesine kalan: %d.\n\r", ikikat_tp);
     return;
   }
 
@@ -4540,9 +4540,9 @@ void do_ikikat( CHAR_DATA *ch, char *argument )
 
   if (value < 0 )
   {
-    send_to_char("Kullanım:\n\r",ch);
+    send_to_char("KullanÄ±m:\n\r",ch);
     send_to_char("  ikikat <tp | gp> <dakika>\n\r",ch);
-    send_to_char("Dakika olarak 0 veya pozitif bir değer verilmelidir.\n\r",ch);
+    send_to_char("Dakika olarak 0 veya pozitif bir deÄŸer verilmelidir.\n\r",ch);
     return;
   }
 
@@ -4551,16 +4551,16 @@ void do_ikikat( CHAR_DATA *ch, char *argument )
     ikikat_tp = value;
     if (value != 0)
     {
-      printf_to_char(ch,"İki kat TP %d dakikalığına açıldı.", value);
+      printf_to_char(ch,"Ä°ki kat TP %d dakikalÄ±ÄŸÄ±na aÃ§Ä±ldÄ±.", value);
       /* event */
-      sprintf(eventbuf,"İki kat TP %d dakikalığına açıldı.", value);
+      sprintf(eventbuf,"Ä°ki kat TP %d dakikalÄ±ÄŸÄ±na aÃ§Ä±ldÄ±.", value);
 	  write_event_log(eventbuf);
     }
     else
     {
-      printf_to_char(ch,"İki kat TP kapatıldı.");
+      printf_to_char(ch,"Ä°ki kat TP kapatÄ±ldÄ±.");
       /* event */
-	  write_event_log((char*)"İki kat TP etkinliği kapatıldı.");
+	  write_event_log((char*)"Ä°ki kat TP etkinliÄŸi kapatÄ±ldÄ±.");
     }
     return;
   }
@@ -4570,16 +4570,16 @@ void do_ikikat( CHAR_DATA *ch, char *argument )
     ikikat_gp = value;
     if (value != 0)
     {
-      printf_to_char(ch,"İki kat GP %d dakikalığına açıldı.", value);
+      printf_to_char(ch,"Ä°ki kat GP %d dakikalÄ±ÄŸÄ±na aÃ§Ä±ldÄ±.", value);
       /* event */
-      sprintf(eventbuf,"İki kat GP %d dakikalığına açıldı.", value);
+      sprintf(eventbuf,"Ä°ki kat GP %d dakikalÄ±ÄŸÄ±na aÃ§Ä±ldÄ±.", value);
 	  write_event_log(eventbuf);
     }
     else
     {
-      printf_to_char(ch,"İki kat GP kapatıldı.");
+      printf_to_char(ch,"Ä°ki kat GP kapatÄ±ldÄ±.");
       /* event */
-	  write_event_log((char*)"İki kat TP etkinliği kapatıldı.");
+	  write_event_log((char*)"Ä°ki kat TP etkinliÄŸi kapatÄ±ldÄ±.");
     }
     return;
   }
@@ -4634,7 +4634,7 @@ void do_mset( CHAR_DATA *ch, char *argument )
     {
     	if ( value < 3 || value > get_max_train(victim,STAT_STR) )
     	{
-        printf_to_char(ch,"Güç 3 ile %d arasında olabilir.\n\r",get_max_train(victim,STAT_STR));
+        printf_to_char(ch,"GÃ¼Ã§ 3 ile %d arasÄ±nda olabilir.\n\r",get_max_train(victim,STAT_STR));
         return;
     	}
 
@@ -4647,7 +4647,7 @@ void do_mset( CHAR_DATA *ch, char *argument )
     {
     	if ( value < 3 || value > get_max_train(victim,STAT_INT) )
     	{
-        printf_to_char(ch,"Zeka 3 ile %d arasında olabilir.\n\r",get_max_train(victim,STAT_INT));
+        printf_to_char(ch,"Zeka 3 ile %d arasÄ±nda olabilir.\n\r",get_max_train(victim,STAT_INT));
         return;
     	}
 
@@ -4660,7 +4660,7 @@ void do_mset( CHAR_DATA *ch, char *argument )
     {
     	if ( value < 3 || value > get_max_train(victim,STAT_WIS) )
     	{
-        printf_to_char(ch,"Bilgelik 3 ile %d arasında olabilir.\n\r",get_max_train(victim,STAT_WIS));
+        printf_to_char(ch,"Bilgelik 3 ile %d arasÄ±nda olabilir.\n\r",get_max_train(victim,STAT_WIS));
         return;
     	}
 
@@ -4673,7 +4673,7 @@ void do_mset( CHAR_DATA *ch, char *argument )
     {
     	if ( value < 3 || value > get_max_train(victim,STAT_DEX) )
     	{
-        printf_to_char(ch,"Çeviklik 3 ile %d arasında olabilir.\n\r",get_max_train(victim,STAT_DEX));
+        printf_to_char(ch,"Ã‡eviklik 3 ile %d arasÄ±nda olabilir.\n\r",get_max_train(victim,STAT_DEX));
         return;
     	}
 
@@ -4686,7 +4686,7 @@ void do_mset( CHAR_DATA *ch, char *argument )
     {
     	if ( value < 3 || value > get_max_train(victim,STAT_CON) )
     	{
-        printf_to_char(ch,"Bünye 3 ile %d arasında olabilir.\n\r",get_max_train(victim,STAT_CON));
+        printf_to_char(ch,"BÃ¼nye 3 ile %d arasÄ±nda olabilir.\n\r",get_max_train(victim,STAT_CON));
         return;
     	}
 
@@ -4699,7 +4699,7 @@ void do_mset( CHAR_DATA *ch, char *argument )
     {
     	if ( value < 3 || value > get_max_train(victim,STAT_CHA) )
     	{
-        printf_to_char(ch,"Karizma 3 ile %d arasında olabilir.\n\r",get_max_train(victim,STAT_CHA));
+        printf_to_char(ch,"Karizma 3 ile %d arasÄ±nda olabilir.\n\r",get_max_train(victim,STAT_CHA));
         return;
     	}
 
@@ -5107,13 +5107,13 @@ void do_induct( CHAR_DATA *ch, char *argument)
   
   if (victim->iclass == CLASS_WARRIOR  && i == CABAL_SHALAFI )
   {
-    act("Fakat $N pis bir büyücü!",ch,NULL,victim,TO_CHAR);
+    act("Fakat $N pis bir bÃ¼yÃ¼cÃ¼!",ch,NULL,victim,TO_CHAR);
     return;
   }
 
   if (i == CABAL_RULER && get_curr_stat(victim,STAT_INT) < 19)
   {
-   act("$N Tüze için yeterince zeki değil!",ch,NULL,victim,TO_CHAR);
+   act("$N TÃ¼ze iÃ§in yeterince zeki deÄŸil!",ch,NULL,victim,TO_CHAR);
    return;
   }
 
@@ -5657,7 +5657,7 @@ void do_reboot( CHAR_DATA *ch, char *argument )
 	return;
       }
      reboot_counter = atoi(arg);
-     printf_to_char(ch,"{cMangus %i dakika sonra yeniden başlatılacak.{x\n\r",reboot_counter);
+     printf_to_char(ch,"{cMangus %i dakika sonra yeniden baÅŸlatÄ±lacak.{x\n\r",reboot_counter);
      return;
     }
 
@@ -5677,7 +5677,7 @@ void reboot_uzakdiyarlar( bool fmessage )
     {
 	d_next = d->next;
 	if (fmessage)
-	   write_to_buffer(d,"***** MANGUS ŞİMDİ YENİDEN BAŞLATILIYOR! *****\n\r",0);
+	   write_to_buffer(d,"***** MANGUS ÅÄ°MDÄ° YENÄ°DEN BAÅLATILIYOR! *****\n\r",0);
         if (d->character != NULL)
 	{
 	   update_total_played(d->character);

@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
- * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
- * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aÃ§Ä±k kaynak TÃ¼rkÃ§e Mud projesidir.                        *
+ * Oyun geliÅŸtirmesi Jai ve Maru tarafÄ±ndan yÃ¶netilmektedir.               *
+ * UnutulmamasÄ± gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -83,7 +83,7 @@ void update_total_played	args( ( CHAR_DATA *ch) );
 
 void do_delet( CHAR_DATA *ch, char *argument)
 {
-  printf_to_char(ch,"Ýntihar etmek için komutu eksiksiz yazmalýsýn.\n\r");
+  printf_to_char(ch,"Ä°ntihar etmek iÃ§in komutu eksiksiz yazmalÄ±sÄ±n.\n\r");
 }
 
 void do_delete( CHAR_DATA *ch, char *argument)
@@ -97,7 +97,7 @@ void do_delete( CHAR_DATA *ch, char *argument)
    {
 	if (argument[0] != '\0')
 	{
-    printf_to_char(ch,"Ýntihardan vazgeçildi.\n\r");
+    printf_to_char(ch,"Ä°ntihardan vazgeÃ§ildi.\n\r");
 	    ch->pcdata->confirm_delete = FALSE;
 	    return;
 	}
@@ -114,15 +114,15 @@ void do_delete( CHAR_DATA *ch, char *argument)
 
     if (argument[0] != '\0')
     {
-      printf_to_char(ch,"Yalnýzca {Rintihar{x yaz, parametreye gerek yok.\n\r");
+      printf_to_char(ch,"YalnÄ±zca {Rintihar{x yaz, parametreye gerek yok.\n\r");
 	return;
     }
 
-    printf_to_char(ch,"Karakterini silmek için komutu tekrarlamalýsýn.\n\r");
-    printf_to_char(ch,"UYARI: Bu komutun geri dönüþü yoktur.\n\r");
-    printf_to_char(ch,"Komutu parametreyle kullanmak intihardan vazgeçildiði anlamýna gelir.\n\r");
+    printf_to_char(ch,"Karakterini silmek iÃ§in komutu tekrarlamalÄ±sÄ±n.\n\r");
+    printf_to_char(ch,"UYARI: Bu komutun geri dÃ¶nÃ¼ÅŸÃ¼ yoktur.\n\r");
+    printf_to_char(ch,"Komutu parametreyle kullanmak intihardan vazgeÃ§ildiÄŸi anlamÄ±na gelir.\n\r");
     ch->pcdata->confirm_delete = TRUE;
-    wiznet("$N intihar etmek üzere.",ch,NULL,0,0,get_trust(ch));
+    wiznet("$N intihar etmek Ã¼zere.",ch,NULL,0,0,get_trust(ch));
 }
 
 
@@ -136,65 +136,65 @@ void do_channels( CHAR_DATA *ch, char *argument)
 
     printf_to_char(ch,"{dmezat{x         ");
     if (!IS_SET(ch->comm,COMM_NOAUCTION))
-    printf_to_char(ch,"AÇIK\n\r");
+    printf_to_char(ch,"AÃ‡IK\n\r");
     else
     printf_to_char(ch,"KAPALI\n\r");
 
     if (IS_IMMORTAL(ch))
     {
-      printf_to_char(ch,"{iölümsüz kanalý{x    ");
+      printf_to_char(ch,"{iÃ¶lÃ¼msÃ¼z kanalÄ±{x    ");
       if(!IS_SET(ch->comm,COMM_NOWIZ))
-      printf_to_char(ch,"AÇIK\n\r");
+      printf_to_char(ch,"AÃ‡IK\n\r");
       else
       printf_to_char(ch,"KAPALI\n\r");
     }
 
     printf_to_char(ch,"{kanlat{x          ");
     if (!IS_SET(ch->comm,COMM_DEAF))
-    printf_to_char(ch,"AÇIK\n\r");
+    printf_to_char(ch,"AÃ‡IK\n\r");
     else
     printf_to_char(ch,"KAPALI\n\r");
 
     printf_to_char(ch,"{kkd{x          ");
     if (!IS_SET(ch->comm,COMM_NOKD))
-    printf_to_char(ch,"AÇIK\n\r");
+    printf_to_char(ch,"AÃ‡IK\n\r");
     else
     printf_to_char(ch,"KAPALI\n\r");
 
     printf_to_char(ch,"{kkdg{x          ");
     if (!IS_SET(ch->comm,COMM_NOKDG))
-    printf_to_char(ch,"AÇIK\n\r");
+    printf_to_char(ch,"AÃ‡IK\n\r");
     else
     printf_to_char(ch,"KAPALI\n\r");
 
     printf_to_char(ch,"{tsessiz modu{x     ");
     if (IS_SET(ch->comm,COMM_QUIET))
-    printf_to_char(ch,"AÇIK\n\r");
+    printf_to_char(ch,"AÃ‡IK\n\r");
     else
     printf_to_char(ch,"KAPALI\n\r");
 
     if (IS_SET(ch->comm,COMM_SNOOP_PROOF))
-    printf_to_char(ch,"Snoop'tan muafsýn.\n\r");
+    printf_to_char(ch,"Snoop'tan muafsÄ±n.\n\r");
 
     if (ch->lines != PAGELEN)
     {
 	if (ch->lines)
 	{
-    printf_to_char(ch,"%d satýrlýk skrol görüntülüyorsun.\n\r",ch->lines+2);
+    printf_to_char(ch,"%d satÄ±rlÄ±k skrol gÃ¶rÃ¼ntÃ¼lÃ¼yorsun.\n\r",ch->lines+2);
  	}
 	else
-  printf_to_char(ch,"Skrol tamponlama kapalý.\n\r");
+  printf_to_char(ch,"Skrol tamponlama kapalÄ±.\n\r");
     }
 
 
     if (IS_SET(ch->comm,COMM_NOTELL))
-    printf_to_char(ch,"Anlatamazsýn.\n\r");
+    printf_to_char(ch,"AnlatamazsÄ±n.\n\r");
 
     if (IS_SET(ch->comm,COMM_NOCHANNELS))
-    printf_to_char(ch,"Kanallarý kullanamazsýn.\n\r");
+    printf_to_char(ch,"KanallarÄ± kullanamazsÄ±n.\n\r");
 
     if (IS_SET(ch->comm,COMM_NOEMOTE))
-    printf_to_char(ch,"Duygularýný gösteremezsin.\n\r");
+    printf_to_char(ch,"DuygularÄ±nÄ± gÃ¶steremezsin.\n\r");
 
 }
 
@@ -220,12 +220,12 @@ void do_deaf( CHAR_DATA *ch, char *argument)
 
    if (IS_SET(ch->comm,COMM_DEAF))
    {
-     printf_to_char(ch,"Anlatýlanlarý almaya baþladýn.\n\r");
+     printf_to_char(ch,"AnlatÄ±lanlarÄ± almaya baÅŸladÄ±n.\n\r");
      REMOVE_BIT(ch->comm,COMM_DEAF);
    }
    else
    {
-     printf_to_char(ch,"Þu andan sonra anlatýlanlarý alamayacaksýn.\n\r");
+     printf_to_char(ch,"Åžu andan sonra anlatÄ±lanlarÄ± alamayacaksÄ±n.\n\r");
      SET_BIT(ch->comm,COMM_DEAF);
    }
 }
@@ -236,12 +236,12 @@ void do_quiet ( CHAR_DATA *ch, char * argument)
 {
     if (IS_SET(ch->comm,COMM_QUIET))
     {
-      printf_to_char(ch,"Sessiz moddan çýkýldý.\n\r");
+      printf_to_char(ch,"Sessiz moddan Ã§Ä±kÄ±ldÄ±.\n\r");
       REMOVE_BIT(ch->comm,COMM_QUIET);
     }
    else
    {
-     printf_to_char(ch,"Bundan böyle yalnýz söylenenleri ve duygularý algýlayabileceksin.\n\r");
+     printf_to_char(ch,"Bundan bÃ¶yle yalnÄ±z sÃ¶ylenenleri ve duygularÄ± algÄ±layabileceksin.\n\r");
      SET_BIT(ch->comm,COMM_QUIET);
    }
 }
@@ -250,7 +250,7 @@ void do_replay (CHAR_DATA *ch, char *argument)
 {
     if (IS_NPC(ch))
     {
-      printf_to_char(ch,"Tekrarlayamazsýn.\n\r");
+      printf_to_char(ch,"TekrarlayamazsÄ±n.\n\r");
 	return;
     }
 
@@ -266,12 +266,12 @@ void do_immtalk( CHAR_DATA *ch, char *argument )
     {
       if (IS_SET(ch->comm,COMM_NOWIZ))
       {
-        printf_to_char(ch,"Ölümsüz kanalý açýldý.\n\r");
+        printf_to_char(ch,"Ã–lÃ¼msÃ¼z kanalÄ± aÃ§Ä±ldÄ±.\n\r");
 	REMOVE_BIT(ch->comm,COMM_NOWIZ);
       }
       else
       {
-        printf_to_char(ch,"Ölümsüz kanalý kapandý.\n\r");
+        printf_to_char(ch,"Ã–lÃ¼msÃ¼z kanalÄ± kapandÄ±.\n\r");
 	SET_BIT(ch->comm,COMM_NOWIZ);
       }
       return;
@@ -305,12 +305,12 @@ void do_kd( CHAR_DATA *ch, char *argument )
     {
       if (IS_SET(ch->comm,COMM_NOKD))
       {
-        printf_to_char(ch,"KD kanalý açýldý.\n\r");
+        printf_to_char(ch,"KD kanalÄ± aÃ§Ä±ldÄ±.\n\r");
 	REMOVE_BIT(ch->comm,COMM_NOKD);
       }
       else
       {
-        printf_to_char(ch,"KD kanalý kapandý.\n\r");
+        printf_to_char(ch,"KD kanalÄ± kapandÄ±.\n\r");
 	SET_BIT(ch->comm,COMM_NOKD);
       }
       return;
@@ -318,13 +318,13 @@ void do_kd( CHAR_DATA *ch, char *argument )
 
 	if ( IS_AFFECTED(ch, AFF_CHARM) &&   ch->master != NULL )
     {
-		printf_to_char( ch , "Teshirliyken kd kanalýný kullanamazsýn.\n\r" );
+		printf_to_char( ch , "Teshirliyken kd kanalÄ±nÄ± kullanamazsÄ±n.\n\r" );
 		return;
     }
 
     if (IS_SET(ch->comm,COMM_NOKD))
     {
-	printf_to_char(ch,"Önce KD kanalýný açmalýsýn.\n\r");
+	printf_to_char(ch,"Ã–nce KD kanalÄ±nÄ± aÃ§malÄ±sÄ±n.\n\r");
 	return;
     }
 
@@ -332,7 +332,7 @@ void do_kd( CHAR_DATA *ch, char *argument )
 
     if ( arg[0] == '\0' || argument[0] == '\0' )
     {
-	printf_to_char(ch,"Kime ne mesaj göndereceksin?\n\r" );
+	printf_to_char(ch,"Kime ne mesaj gÃ¶ndereceksin?\n\r" );
 	return;
     }
 
@@ -343,19 +343,19 @@ void do_kd( CHAR_DATA *ch, char *argument )
      if ( ( victim = get_char_world( ch, arg ) ) == NULL
      || ( IS_NPC(victim) && victim->in_room != ch->in_room ) )
     {
-	printf_to_char( ch,"Burada deðil.\n\r" );
+	printf_to_char( ch,"Burada deÄŸil.\n\r" );
 	return;
     }
 
 	if( victim == ch )
 	{
-		printf_to_char( ch,"Kendine KD mesajý atamazsýn.\n\r" );
+		printf_to_char( ch,"Kendine KD mesajÄ± atamazsÄ±n.\n\r" );
 		return;
 	}
 
     if ( victim->desc == NULL && !IS_NPC(victim))
     {
-	act("$N baðlantýsýný kaybetmiþ görünüyor...daha sonra tekrar dene.",
+	act("$N baÄŸlantÄ±sÄ±nÄ± kaybetmiÅŸ gÃ¶rÃ¼nÃ¼yor...daha sonra tekrar dene.",
 	    ch,NULL,victim,TO_CHAR);
         sprintf(buf,"%s: %s%s%s\n\r",PERS(ch,victim),CLR_RED_BOLD,argument,CLR_NORMAL);
         buf[0] = UPPER(buf[0]);
@@ -365,7 +365,7 @@ void do_kd( CHAR_DATA *ch, char *argument )
 
     if ((IS_SET(victim->comm,COMM_NOKD)) && !IS_IMMORTAL(ch))
     {
-	act( "$N KD kanalýný almýyor.", ch, 0, victim, TO_CHAR );
+	act( "$N KD kanalÄ±nÄ± almÄ±yor.", ch, 0, victim, TO_CHAR );
   	return;
     }
 
@@ -401,37 +401,37 @@ void do_kdcevapla( CHAR_DATA *ch, char *argument )
 
     if (IS_SET(ch->comm,COMM_NOKD))
     {
-	printf_to_char(ch,"Önce KD kanalýný açmalýsýn.\n\r");
+	printf_to_char(ch,"Ã–nce KD kanalÄ±nÄ± aÃ§malÄ±sÄ±n.\n\r");
 	return;
     }
 
 	if ( IS_AFFECTED(ch, AFF_CHARM) &&   ch->master != NULL )
     {
-		printf_to_char( ch , "Teshirliyken kd kanalýný kullanamazsýn.\n\r" );
+		printf_to_char( ch , "Teshirliyken kd kanalÄ±nÄ± kullanamazsÄ±n.\n\r" );
 		return;
     }
 	
 	if ( ( victim = ch->reply ) == NULL )
     {
-		printf_to_char(ch, "Cevap verebileceðin biri yok.\n\r" );
+		printf_to_char(ch, "Cevap verebileceÄŸin biri yok.\n\r" );
 		return;
     }
 	
     if ( argument[0] == '\0' )
     {
-		printf_to_char(ch,"Ne mesaj göndereceksin?\n\r");
+		printf_to_char(ch,"Ne mesaj gÃ¶ndereceksin?\n\r");
 		return;
     }
 
 	if( victim == ch )
 	{
-		printf_to_char( ch,"Kendine KD mesajý atamazsýn.\n\r" );
+		printf_to_char( ch,"Kendine KD mesajÄ± atamazsÄ±n.\n\r" );
 		return;
 	}
 
     if ( victim->desc == NULL && !IS_NPC(victim))
     {
-	act("$N baðlantýsýný kaybetmiþ görünüyor...daha sonra tekrar dene.",
+	act("$N baÄŸlantÄ±sÄ±nÄ± kaybetmiÅŸ gÃ¶rÃ¼nÃ¼yor...daha sonra tekrar dene.",
 	    ch,NULL,victim,TO_CHAR);
         sprintf(buf,"%s: %s%s%s\n\r",PERS(ch,victim),CLR_RED_BOLD,argument,CLR_NORMAL);
         buf[0] = UPPER(buf[0]);
@@ -441,7 +441,7 @@ void do_kdcevapla( CHAR_DATA *ch, char *argument )
 
     if ((IS_SET(victim->comm,COMM_NOKD)) && !IS_IMMORTAL(ch))
     {
-	act( "$N KD kanalýný almýyor.", ch, 0, victim, TO_CHAR );
+	act( "$N KD kanalÄ±nÄ± almÄ±yor.", ch, 0, victim, TO_CHAR );
   	return;
     }
 
@@ -484,12 +484,12 @@ void do_kdg( CHAR_DATA *ch, char *argument )
     {
       if (IS_SET(ch->comm,COMM_NOKDG))
       {
-        printf_to_char(ch,"KDG kanalý açýldý.\n\r");
+        printf_to_char(ch,"KDG kanalÄ± aÃ§Ä±ldÄ±.\n\r");
 	REMOVE_BIT(ch->comm,COMM_NOKDG);
       }
       else
       {
-        printf_to_char(ch,"KDG kanalý kapandý.\n\r");
+        printf_to_char(ch,"KDG kanalÄ± kapandÄ±.\n\r");
 	SET_BIT(ch->comm,COMM_NOKDG);
       }
       return;
@@ -497,19 +497,19 @@ void do_kdg( CHAR_DATA *ch, char *argument )
 
 	if ( IS_AFFECTED(ch, AFF_CHARM) &&   ch->master != NULL )
     {
-		printf_to_char( ch , "Teshirliyken kdg kanalýný kullanamazsýn.\n\r" );
+		printf_to_char( ch , "Teshirliyken kdg kanalÄ±nÄ± kullanamazsÄ±n.\n\r" );
 		return;
     }
 
 	if ( IS_SET(ch->comm, COMM_NOKDG) )
     {
-	printf_to_char(ch,"Önce kdg kanalýný açmalýsýn.\n\r" );
+	printf_to_char(ch,"Ã–nce kdg kanalÄ±nÄ± aÃ§malÄ±sÄ±n.\n\r" );
 	return;
     }
 
     if (argument[0] == '\0' )
     {
-      send_to_char("Oyunculara ne gibi bi'þey söyleyeceksin?.\n\r",ch);
+      send_to_char("Oyunculara ne gibi bi'ÅŸey sÃ¶yleyeceksin?.\n\r",ch);
       return;
     }
 
@@ -557,11 +557,11 @@ void do_say( CHAR_DATA *ch, char *argument )
 
     if ( argument[0] == '\0' )
     {
-      printf_to_char(ch, "Ne söyleyeceksin?\n\r");
+      printf_to_char(ch, "Ne sÃ¶yleyeceksin?\n\r");
 	return;
     }
     if ( ch->in_room == NULL )  {
-      printf_to_char(ch, "Fakat bir odada deðilsin!\n\r");
+      printf_to_char(ch, "Fakat bir odada deÄŸilsin!\n\r");
       return;
     }
 
@@ -620,7 +620,7 @@ void do_yell( CHAR_DATA *ch, char *argument )
 
     if ( argument[0] == '\0' )
     {
-      printf_to_char( ch,"Ne haykýracaksýn?\n\r" );
+      printf_to_char( ch,"Ne haykÄ±racaksÄ±n?\n\r" );
 	return;
     }
 
@@ -632,7 +632,7 @@ void do_yell( CHAR_DATA *ch, char *argument )
       strcpy(buf,argument);
 
    if (!is_affected(ch, gsn_deafen))
-   act_color("Sen '$C$t$c' diye haykýrdýn.",
+   act_color("Sen '$C$t$c' diye haykÄ±rdÄ±n.",
              ch,buf,NULL,TO_CHAR,POS_DEAD, CLR_BROWN );
 
     for ( d = descriptor_list; d != NULL; d = d->next )
@@ -644,7 +644,7 @@ void do_yell( CHAR_DATA *ch, char *argument )
         &&   !is_affected(d->character, gsn_deafen))
 	{
 	    sprintf(trans,"%s",translate(ch,d->character,buf));
-      act_color("$n '$C$t$c' diye haykýrdý.",
+      act_color("$n '$C$t$c' diye haykÄ±rdÄ±.",
                 ch,trans,d->character,TO_VICT,POS_DEAD, CLR_BROWN );
 	}
     }
@@ -659,13 +659,13 @@ char buf[MAX_INPUT_LENGTH];
 
     if ( !IS_NPC(ch) && IS_SET(ch->comm, COMM_NOEMOTE) )
     {
-      printf_to_char( ch,"Duygularýný belli edemezsin.\n\r" );
+      printf_to_char( ch,"DuygularÄ±nÄ± belli edemezsin.\n\r" );
         return;
     }
 
     if ( argument[0] == '\0' )
     {
-      printf_to_char(ch,"Nasýl bir duygu vereceksin?\n\r" );
+      printf_to_char(ch,"NasÄ±l bir duygu vereceksin?\n\r" );
         return;
     }
 
@@ -691,13 +691,13 @@ void do_pmote( CHAR_DATA *ch, char *argument )
 
     if ( !IS_NPC(ch) && IS_SET(ch->comm, COMM_NOEMOTE) )
     {
-      printf_to_char( ch,"Duygularýný belli edemezsin.\n\r" );
+      printf_to_char( ch,"DuygularÄ±nÄ± belli edemezsin.\n\r" );
         return;
     }
 
     if ( argument[0] == '\0' )
     {
-      printf_to_char(ch,"Nasýl bir duygu vereceksin?\n\r" );
+      printf_to_char(ch,"NasÄ±l bir duygu vereceksin?\n\r" );
         return;
     }
 
@@ -779,53 +779,53 @@ const	struct	pose_table_type	pose_table	[]	=
 {
     {
 	{
-    "Enerjiyle cýzýrdýyorsun.",
-    "$n enerjiyle cýzýrdýyor.",
+    "Enerjiyle cÄ±zÄ±rdÄ±yorsun.",
+    "$n enerjiyle cÄ±zÄ±rdÄ±yor.",
     "Kendini fevkalade kutsal hissediyorsun.",
-    "$n fevkalade kutsal görünüyor.",
-    "Birkaç küçük hünerini gösteriyorsun.",
-    "$n birkaç hünerini gösteriyor, vayy bee.",
-    "Þiþmiþ kaslarýný gösteriyorsun.",
-    "$n þiþkin kaslarýný sergiliyor."
+    "$n fevkalade kutsal gÃ¶rÃ¼nÃ¼yor.",
+    "BirkaÃ§ kÃ¼Ã§Ã¼k hÃ¼nerini gÃ¶steriyorsun.",
+    "$n birkaÃ§ hÃ¼nerini gÃ¶steriyor, vayy bee.",
+    "ÅžiÅŸmiÅŸ kaslarÄ±nÄ± gÃ¶steriyorsun.",
+    "$n ÅŸiÅŸkin kaslarÄ±nÄ± sergiliyor."
 	}
     },
 
     {
 	{
-    "Kýsa süreliðine bir kelebeðe dönüþüyorsun.",
-    "$n kýsa süreliðine bir kelebeðe dönüþüyor.",
-    "Canýn sýkýlýnca þarabý suya dönüþtürüyorsun.",
-    "$n can sýkýntýsýndan þarabý suya dönüþtürüyor.",
-    "Kulaklarýný birbirinden baðýmsýz hareket ettiriyorsun.",
-    "$n tavþan gibi kulaklarýný birbirinden baðýmsýz hareket ettiriyor.",
-    "Bir fýndýðý parmaklarýnla kýrýyorsun.",
-    "$n parmaklarýnýn arasýna koyduðu fýndýðý kýrýyor."
+    "KÄ±sa sÃ¼reliÄŸine bir kelebeÄŸe dÃ¶nÃ¼ÅŸÃ¼yorsun.",
+    "$n kÄ±sa sÃ¼reliÄŸine bir kelebeÄŸe dÃ¶nÃ¼ÅŸÃ¼yor.",
+    "CanÄ±n sÄ±kÄ±lÄ±nca ÅŸarabÄ± suya dÃ¶nÃ¼ÅŸtÃ¼rÃ¼yorsun.",
+    "$n can sÄ±kÄ±ntÄ±sÄ±ndan ÅŸarabÄ± suya dÃ¶nÃ¼ÅŸtÃ¼rÃ¼yor.",
+    "KulaklarÄ±nÄ± birbirinden baÄŸÄ±msÄ±z hareket ettiriyorsun.",
+    "$n tavÅŸan gibi kulaklarÄ±nÄ± birbirinden baÄŸÄ±msÄ±z hareket ettiriyor.",
+    "Bir fÄ±ndÄ±ÄŸÄ± parmaklarÄ±nla kÄ±rÄ±yorsun.",
+    "$n parmaklarÄ±nÄ±n arasÄ±na koyduÄŸu fÄ±ndÄ±ÄŸÄ± kÄ±rÄ±yor."
 	}
     },
 
     {
 	{
-    "Parmaklarýndan mavi kývýlcýmlar çýkýyor.",
-    "$s parmaklarýndan mavi kývýlcýmlar çýkýyor.",
-    "Kafanýn üstünde bir hale oluþuyor.",
-    "$s kafasýnýn üstünde bir hale oluþuyor.",
-    "Kendi kendini baðlýyorsun.",
-    "$n kendisini baðlýyor. Garip biri.",
-    "Diþlerini gösteriyorsun.",
-    "$n diþlerini gösteriyor. Iýýyyyy..."
+    "ParmaklarÄ±ndan mavi kÄ±vÄ±lcÄ±mlar Ã§Ä±kÄ±yor.",
+    "$s parmaklarÄ±ndan mavi kÄ±vÄ±lcÄ±mlar Ã§Ä±kÄ±yor.",
+    "KafanÄ±n Ã¼stÃ¼nde bir hale oluÅŸuyor.",
+    "$s kafasÄ±nÄ±n Ã¼stÃ¼nde bir hale oluÅŸuyor.",
+    "Kendi kendini baÄŸlÄ±yorsun.",
+    "$n kendisini baÄŸlÄ±yor. Garip biri.",
+    "DiÅŸlerini gÃ¶steriyorsun.",
+    "$n diÅŸlerini gÃ¶steriyor. IÄ±Ä±yyyy..."
 	}
     },
 
     {
 	{
-    "Gözlerinde küçük kýrmýzý ýþýklar dans ediyor.",
-    "$s gözlerinde küçük kýrmýzý ýþýklar dans ediyor.",
-    "Bilgece sözler telaffuz ediyorsun.",
-    "$n bilgece sözler telaffuz ediyor.",
-    "Kamalar ve elmalarla hokkabazlýk yapýyorsun.",
-    "$n kama ve elmalarla hokkabazlýk yapýyor.",
-    "Kafaný vurunca gözlerin fýrýl fýrýl dönüyor.",
-    "$n kafasýný vuruyor ve gözleri fýrýl fýrýl dönmeye baþlýyor."
+    "GÃ¶zlerinde kÃ¼Ã§Ã¼k kÄ±rmÄ±zÄ± Ä±ÅŸÄ±klar dans ediyor.",
+    "$s gÃ¶zlerinde kÃ¼Ã§Ã¼k kÄ±rmÄ±zÄ± Ä±ÅŸÄ±klar dans ediyor.",
+    "Bilgece sÃ¶zler telaffuz ediyorsun.",
+    "$n bilgece sÃ¶zler telaffuz ediyor.",
+    "Kamalar ve elmalarla hokkabazlÄ±k yapÄ±yorsun.",
+    "$n kama ve elmalarla hokkabazlÄ±k yapÄ±yor.",
+    "KafanÄ± vurunca gÃ¶zlerin fÄ±rÄ±l fÄ±rÄ±l dÃ¶nÃ¼yor.",
+    "$n kafasÄ±nÄ± vuruyor ve gÃ¶zleri fÄ±rÄ±l fÄ±rÄ±l dÃ¶nmeye baÅŸlÄ±yor."
 	}
     },
 
@@ -961,14 +961,14 @@ const	struct	pose_table_type	pose_table	[]	=
 
     {
 	{
-    "Bir süreliðine herkesin giysisi transparan oluyor. Ve sen herþeyi görüyorsun.",
-    "Giysilerin transparan oluyor. $n kahkahalar atýyor.",
-    "Piramitteki göz sana göz kýrpýyor.",
-    "Piramitteki göz $e göz kýrpýyor.",
-    "Birden herkes kamaný burunlarýnýn ucunda görüyorlar.",
-    "$s kamasýnýn burnunun ucunda durduðunu farkediyorsun. Ne kadar da hýzlý...",
-    "Emrini yerine getirmeye paralý askerler geliyor.",
-    "Paralý askerler $s emrini yerine getirmek için geliyor."
+    "Bir sÃ¼reliÄŸine herkesin giysisi transparan oluyor. Ve sen herÅŸeyi gÃ¶rÃ¼yorsun.",
+    "Giysilerin transparan oluyor. $n kahkahalar atÄ±yor.",
+    "Piramitteki gÃ¶z sana gÃ¶z kÄ±rpÄ±yor.",
+    "Piramitteki gÃ¶z $e gÃ¶z kÄ±rpÄ±yor.",
+    "Birden herkes kamanÄ± burunlarÄ±nÄ±n ucunda gÃ¶rÃ¼yorlar.",
+    "$s kamasÄ±nÄ±n burnunun ucunda durduÄŸunu farkediyorsun. Ne kadar da hÄ±zlÄ±...",
+    "Emrini yerine getirmeye paralÄ± askerler geliyor.",
+    "ParalÄ± askerler $s emrini yerine getirmek iÃ§in geliyor."
 	}
     },
 
@@ -987,14 +987,14 @@ const	struct	pose_table_type	pose_table	[]	=
 
     {
 	{
-    "Dünya ýslýðýnla parýldýyor.",
-    "Dünya $s ýslýðýyla parýldýyor.",
-    "Tanrýlar sana bir asa veriyor.",
-    "Tanrýlar $s bir asa veriyor.",
-    "Týkýrtý.",
-    "Týkýrtý.",
-    "Atlas kendisine yardým edip edemeyeceðini soruyor.",
-    "Atlas $z yükünü taþýmada yardým istiyor."
+    "DÃ¼nya Ä±slÄ±ÄŸÄ±nla parÄ±ldÄ±yor.",
+    "DÃ¼nya $s Ä±slÄ±ÄŸÄ±yla parÄ±ldÄ±yor.",
+    "TanrÄ±lar sana bir asa veriyor.",
+    "TanrÄ±lar $s bir asa veriyor.",
+    "TÄ±kÄ±rtÄ±.",
+    "TÄ±kÄ±rtÄ±.",
+    "Atlas kendisine yardÄ±m edip edemeyeceÄŸini soruyor.",
+    "Atlas $z yÃ¼kÃ¼nÃ¼ taÅŸÄ±mada yardÄ±m istiyor."
 	}
     }
 };
@@ -1043,7 +1043,7 @@ void do_rent( CHAR_DATA *ch, char *argument )
 
 void do_qui( CHAR_DATA *ch, char *argument )
 {
-  printf_to_char( ch,"Mangus'tan ayrýlmak istiyorsan komutu eksiksiz yazmalýsýn.\n\r" );
+  printf_to_char( ch,"Mangus'tan ayrÄ±lmak istiyorsan komutu eksiksiz yazmalÄ±sÄ±n.\n\r" );
     return;
 }
 
@@ -1078,26 +1078,26 @@ bool quit_org( CHAR_DATA *ch, char *argument, bool Count , bool Remort)
 
     if ( ch->position == POS_FIGHTING )
     {
-      printf_to_char(ch, "Ýmkansýz! Dövüþüyorsun.\n\r" );
+      printf_to_char(ch, "Ä°mkansÄ±z! DÃ¶vÃ¼ÅŸÃ¼yorsun.\n\r" );
 	return FALSE;
     }
 
     if ( IS_AFFECTED(ch, AFF_SLEEP) )
     {
-      printf_to_char( ch,"Yatmaya devam et! Henüz uyanmadýn.\n\r" );
+      printf_to_char( ch,"Yatmaya devam et! HenÃ¼z uyanmadÄ±n.\n\r" );
 	return FALSE;
     }
 
     if ( ch->position  < POS_STUNNED  )
     {
-      printf_to_char( ch,"Henüz ölmedin.\n\r" );
+      printf_to_char( ch,"HenÃ¼z Ã¶lmedin.\n\r" );
 	return FALSE;
     }
 
     if ( ch->last_fight_time != -1 && !IS_IMMORTAL(ch) &&
         (current_time - ch->last_fight_time)<FIGHT_DELAY_TIME)
       {
-        printf_to_char(ch,"Adrenalin salgýlarken ayrýlamazsýn! Biraz sakinleþmeyi dene.\n\r");
+        printf_to_char(ch,"Adrenalin salgÄ±larken ayrÄ±lamazsÄ±n! Biraz sakinleÅŸmeyi dene.\n\r");
         return FALSE;
       }
 
@@ -1122,30 +1122,30 @@ bool quit_org( CHAR_DATA *ch, char *argument, bool Count , bool Remort)
     if ( !IS_IMMORTAL(ch) &&
 		ch->in_room && IS_RAFFECTED( ch->in_room, AFF_ROOM_ESPIRIT ) )
     {
-      printf_to_char( ch,"Bölgenin þer güçleri ayrýlmaný engelliyor.\n\r" );
+      printf_to_char( ch,"BÃ¶lgenin ÅŸer gÃ¼Ã§leri ayrÄ±lmanÄ± engelliyor.\n\r" );
 	return FALSE;
     }
 
     if ( !IS_IMMORTAL(ch) &&
 	ch->cabal != CABAL_INVADER && is_affected(ch, gsn_evil_spirit ))
     {
-      printf_to_char(ch,"Ýçindeki þer güçler ayrýlmaný engelliyor.\n\r" );
+      printf_to_char(ch,"Ä°Ã§indeki ÅŸer gÃ¼Ã§ler ayrÄ±lmanÄ± engelliyor.\n\r" );
 	return FALSE;
     }
 
     if ( cabal_area_check(ch) )
     {
-      printf_to_char(ch,"Baþka bir kabalýn bölgesinde ayrýlamazsýn.\n\r" );
+      printf_to_char(ch,"BaÅŸka bir kabalÄ±n bÃ¶lgesinde ayrÄ±lamazsÄ±n.\n\r" );
 	return FALSE;
     }
 
     if ( !Remort )
     {
-      printf_to_char(ch,"Her güzel þeyin bir sonu vardýr.\n\r");
-      act_color("$C$n oyundan ayrýldý.$c", ch, NULL, NULL,TO_ROOM ,POS_DEAD,CLR_GREEN);
-      sprintf( log_buf, "%s oyundan ayrýldý.", ch->name );
+      printf_to_char(ch,"Her gÃ¼zel ÅŸeyin bir sonu vardÄ±r.\n\r");
+      act_color("$C$n oyundan ayrÄ±ldÄ±.$c", ch, NULL, NULL,TO_ROOM ,POS_DEAD,CLR_GREEN);
+      sprintf( log_buf, "%s oyundan ayrÄ±ldÄ±.", ch->name );
 	log_string( log_buf );
-  wiznet("$N oyundan ayrýldý.",ch,NULL,WIZ_LOGINS,0,get_trust(ch));    }
+  wiznet("$N oyundan ayrÄ±ldÄ±.",ch,NULL,WIZ_LOGINS,0,get_trust(ch));    }
 
     update_total_played( ch );
 
@@ -1163,15 +1163,15 @@ bool quit_org( CHAR_DATA *ch, char *argument, bool Count , bool Remort)
       vch_next = vch->next;
       if (is_affected(vch,gsn_doppelganger) && vch->doppel == ch)
       {
-        printf_to_char(vch,"Kurbanýn ayrýlýnca sen de gerçek formuna dönüyorsun.\n\r");
+        printf_to_char(vch,"KurbanÄ±n ayrÄ±lÄ±nca sen de gerÃ§ek formuna dÃ¶nÃ¼yorsun.\n\r");
         affect_strip(vch,gsn_doppelganger);
       }
 
       if (vch->guarding == ch)
       {
-        act("Sen $M korumayý býraktýn.", vch, NULL, ch, TO_CHAR);
-        act("$n seni korumayý býraktý.", vch, NULL, ch, TO_VICT);
-        act("$n $M korumayý býraktý.", vch, NULL, ch, TO_NOTVICT);
+        act("Sen $M korumayÄ± bÄ±raktÄ±n.", vch, NULL, ch, TO_CHAR);
+        act("$n seni korumayÄ± bÄ±raktÄ±.", vch, NULL, ch, TO_VICT);
+        act("$n $M korumayÄ± bÄ±raktÄ±.", vch, NULL, ch, TO_NOTVICT);
           vch->guarding  = NULL;
           ch->guarded_by = NULL;
       }
@@ -1238,11 +1238,11 @@ void do_save( CHAR_DATA *ch, char *argument )
 
     if (ch->level < 2 && !IS_SET(ch->act, PLR_REMORTED) )
 	{
-    printf_to_char(ch,"Kaydetmek için seviyen en az 2 olmalý.\n\r");
+    printf_to_char(ch,"Kaydetmek iÃ§in seviyen en az 2 olmalÄ±.\n\r");
 	 return;
 	}
     save_char_obj( ch );
-    printf_to_char(ch,"Kaydediyor. Unutma ki otomatik kayýt vardýr.\n\r");
+    printf_to_char(ch,"Kaydediyor. Unutma ki otomatik kayÄ±t vardÄ±r.\n\r");
     WAIT_STATE(ch, PULSE_VIOLENCE);
     return;
 }
@@ -1265,7 +1265,7 @@ void do_follow( CHAR_DATA *ch, char *argument )
 
     if ( ( victim = get_char_room( ch, arg ) ) == NULL )
     {
-      printf_to_char(ch, "Burada deðil.\n\r" );
+      printf_to_char(ch, "Burada deÄŸil.\n\r" );
 	return;
     }
 
@@ -1288,7 +1288,7 @@ void do_follow( CHAR_DATA *ch, char *argument )
 
     if (!IS_NPC(victim) && IS_SET(victim->act,PLR_NOFOLLOW) && !IS_IMMORTAL(ch))
     {
-      act("$N takipçi istemiyor.\n\r",
+      act("$N takipÃ§i istemiyor.\n\r",
                  ch,NULL,victim, TO_CHAR);
         return;
     }
@@ -1341,9 +1341,9 @@ void stop_follower( CHAR_DATA *ch )
 
     if ( can_see( ch->master, ch ) && ch->in_room != NULL)
     {
-      act_color( "$C$n seni takip etmeyi býraktý.$c",ch, NULL, ch->master,
+      act_color( "$C$n seni takip etmeyi bÄ±raktÄ±.$c",ch, NULL, ch->master,
       		TO_VICT,POS_RESTING,CLR_BLUE);
-      act_color( "$CSen $M takip etmeyi býraktýn.$c", ch, NULL, ch->master,
+      act_color( "$CSen $M takip etmeyi bÄ±raktÄ±n.$c", ch, NULL, ch->master,
       		TO_CHAR,POS_RESTING,CLR_BLUE);
     }
     if (ch->master->pet == ch)
@@ -1363,7 +1363,7 @@ void nuke_pets( CHAR_DATA *ch )
     {
     	stop_follower(pet);
     	if (pet->in_room != NULL)
-      act("$N yavaþça yok oluyor.",ch,NULL,pet,TO_NOTVICT);
+      act("$N yavaÅŸÃ§a yok oluyor.",ch,NULL,pet,TO_NOTVICT);
     	extract_char_nocount(pet,TRUE);
     }
     ch->pet = NULL;
@@ -1427,11 +1427,11 @@ void do_order( CHAR_DATA *ch, char *argument )
 
     if ( IS_AFFECTED( ch, AFF_CHARM ) )
     {
-      printf_to_char(ch,"Emir vermekten ziyade almaktan hoþlanýyorsun.\n\r" );
+      printf_to_char(ch,"Emir vermekten ziyade almaktan hoÅŸlanÄ±yorsun.\n\r" );
 	return;
     }
 
-    if ( !str_cmp( arg,"tümü" ))//ozi
+    if ( !str_cmp( arg,"tÃ¼mÃ¼" ))//ozi
     {
 	fAll   = TRUE;
 	victim = NULL;
@@ -1441,7 +1441,7 @@ void do_order( CHAR_DATA *ch, char *argument )
 	fAll   = FALSE;
 	if ( ( victim = get_char_room( ch, arg ) ) == NULL )
 	{
-    printf_to_char(ch, "Burada deðil.\n\r" );
+    printf_to_char(ch, "Burada deÄŸil.\n\r" );
 	    return;
 	}
 
@@ -1471,7 +1471,7 @@ void do_order( CHAR_DATA *ch, char *argument )
 	    found = TRUE;
 	    if ( !proper_order( och, argument ) )
 		continue;
-    sprintf( buf, "$n sana '%s' diye emrediyor, ve sen de yapýyorsun.", argument );
+    sprintf( buf, "$n sana '%s' diye emrediyor, ve sen de yapÄ±yorsun.", argument );
 	    act( buf, ch, NULL, och, TO_VICT );
 	    interpret( och, argument, TRUE );
 	}
@@ -1483,7 +1483,7 @@ void do_order( CHAR_DATA *ch, char *argument )
   printf_to_char(ch,"Tamam.\n\r" );
     }
     else
-    printf_to_char( ch,"Seni takip eden birini göremiyorum.\n\r" );
+    printf_to_char( ch,"Seni takip eden birini gÃ¶remiyorum.\n\r" );
     return;
 }
 
@@ -1572,7 +1572,7 @@ void do_group( CHAR_DATA *ch, char *argument )
 	CHAR_DATA *leader;
 
 	leader = (ch->leader != NULL) ? ch->leader : ch;
-  printf_to_char( ch,"%s liderliðindeki grup:\n\r", PERS(leader, ch));
+  printf_to_char( ch,"%s liderliÄŸindeki grup:\n\r", PERS(leader, ch));
 
 	for ( gch = char_list; gch != NULL; gch = gch->next )
 	{
@@ -1594,13 +1594,13 @@ void do_group( CHAR_DATA *ch, char *argument )
 
     if ( ( victim = get_char_room( ch, arg ) ) == NULL )
     {
-      printf_to_char(ch ,"Burada deðil.\n\r" );
+      printf_to_char(ch ,"Burada deÄŸil.\n\r" );
 	return;
     }
 
     if ( ch->master != NULL || ( ch->leader != NULL && ch->leader != ch ) )
     {
-      printf_to_char( ch,"Fakat sen baþka birini takip ediyorsun!\n\r" );
+      printf_to_char( ch,"Fakat sen baÅŸka birini takip ediyorsun!\n\r" );
 	return;
     }
 
@@ -1612,13 +1612,13 @@ void do_group( CHAR_DATA *ch, char *argument )
 
     if (IS_AFFECTED(victim,AFF_CHARM))
     {
-      printf_to_char(ch,"Tesirli moblarý grubundan ayýramazsýn.\n\r");
+      printf_to_char(ch,"Tesirli moblarÄ± grubundan ayÄ±ramazsÄ±n.\n\r");
         return;
     }
 
     if (IS_AFFECTED(ch,AFF_CHARM))
     {
-      act("Efendini öylesine seviyorsun ki, terketmeyi aklýndan bile geçirmezsin!",ch,NULL,victim,TO_VICT);
+      act("Efendini Ã¶ylesine seviyorsun ki, terketmeyi aklÄ±ndan bile geÃ§irmezsin!",ch,NULL,victim,TO_VICT);
     	return;
     }
 
@@ -1627,27 +1627,27 @@ void do_group( CHAR_DATA *ch, char *argument )
     {
       if (ch->guarding == victim || victim->guarded_by == ch)
         {
-          act("Sen $M korumayý býraktýn.", ch, NULL, victim, TO_CHAR);
-          act("$n seni korumayý býraktý.", ch, NULL, victim, TO_VICT);
-          act("$n $M korumayý býraktý.", ch, NULL, victim, TO_NOTVICT);
+          act("Sen $M korumayÄ± bÄ±raktÄ±n.", ch, NULL, victim, TO_CHAR);
+          act("$n seni korumayÄ± bÄ±raktÄ±.", ch, NULL, victim, TO_VICT);
+          act("$n $M korumayÄ± bÄ±raktÄ±.", ch, NULL, victim, TO_NOTVICT);
           victim->guarded_by = NULL;
           ch->guarding       = NULL;
         }
 
       victim->leader = NULL;
-      act_color( "$C$n $M grubundan ayýrdý.$c",   ch, NULL, victim,
+      act_color( "$C$n $M grubundan ayÄ±rdÄ±.$c",   ch, NULL, victim,
       		TO_NOTVICT,POS_SLEEPING,CLR_YELLOW );
-      act_color( "$C$n seni grubundan ayýrdý.$c",  ch, NULL, victim,
+      act_color( "$C$n seni grubundan ayÄ±rdÄ±.$c",  ch, NULL, victim,
       		TO_VICT,POS_SLEEPING,CLR_YELLOW);
-      act_color( "$CSen $M grubundan ayýrdýn.$c", ch, NULL, victim,
+      act_color( "$CSen $M grubundan ayÄ±rdÄ±n.$c", ch, NULL, victim,
       		TO_CHAR,POS_SLEEPING,CLR_BLUE);
 
       if (victim->guarded_by != NULL &&
           !is_same_group(victim,victim->guarded_by))
         {
-          act("Sen $M korumayý býraktýn.",victim->guarded_by,NULL,victim,TO_CHAR);
-          act("$n seni korumayý býraktý.",victim->guarded_by,NULL,victim,TO_VICT);
-          act("$n $M korumayý býraktý.",victim->guarded_by,NULL,victim,TO_NOTVICT);
+          act("Sen $M korumayÄ± bÄ±raktÄ±n.",victim->guarded_by,NULL,victim,TO_CHAR);
+          act("$n seni korumayÄ± bÄ±raktÄ±.",victim->guarded_by,NULL,victim,TO_VICT);
+          act("$n $M korumayÄ± bÄ±raktÄ±.",victim->guarded_by,NULL,victim,TO_NOTVICT);
           victim->guarded_by->guarding = NULL;
           victim->guarded_by           = NULL;
         }
@@ -1668,9 +1668,9 @@ void do_group( CHAR_DATA *ch, char *argument )
 
   if (IS_GOOD(ch) && IS_EVIL(victim))
     {
-      act_color("$CSen $s grubu için fazla þer yanlýsýsýn.$c", ch, NULL, victim,
+      act_color("$CSen $s grubu iÃ§in fazla ÅŸer yanlÄ±sÄ±sÄ±n.$c", ch, NULL, victim,
       	TO_VICT,POS_SLEEPING,CLR_RED);
-      act_color("$C$N grubun için fazla þer yanlýsý!$c", ch, NULL, victim,
+      act_color("$C$N grubun iÃ§in fazla ÅŸer yanlÄ±sÄ±!$c", ch, NULL, victim,
       	TO_CHAR,POS_SLEEPING,CLR_RED);
       ch->pcdata->rk_puani -= 1;
       return;
@@ -1678,9 +1678,9 @@ void do_group( CHAR_DATA *ch, char *argument )
 
   if (IS_GOOD(victim) && IS_EVIL(ch))
     {
-      act_color("$CSen $s grubu için fazla masumsun!$c", ch, NULL, victim,
+      act_color("$CSen $s grubu iÃ§in fazla masumsun!$c", ch, NULL, victim,
       	TO_VICT,POS_SLEEPING,CLR_RED);
-      act_color("$C$N grubun için fazla masum!$c", ch, NULL, victim,
+      act_color("$C$N grubun iÃ§in fazla masum!$c", ch, NULL, victim,
       	TO_CHAR,POS_SLEEPING,CLR_RED);
       ch->pcdata->rk_puani -= 1;
       return;
@@ -1693,9 +1693,9 @@ void do_group( CHAR_DATA *ch, char *argument )
 	(ch->cabal == CABAL_SHALAFI  && victim->cabal == CABAL_BATTLE) ||
 	(ch->cabal == CABAL_BATTLE  && victim->cabal == CABAL_SHALAFI) )
     {
-      act_color("$CSen $s kabalýndan nefret ediyorsun, onun grubuna nasýl gireceksin?!$c",
+      act_color("$CSen $s kabalÄ±ndan nefret ediyorsun, onun grubuna nasÄ±l gireceksin?!$c",
       	ch,NULL, victim,TO_VICT,POS_SLEEPING,CLR_RED);
-      act_color("$CSen $S kabalýndan nefret ediyorsun, onu grubuna nasýl alabilirsin?!$c",ch, NULL, victim, TO_CHAR,POS_SLEEPING,CLR_RED);
+      act_color("$CSen $S kabalÄ±ndan nefret ediyorsun, onu grubuna nasÄ±l alabilirsin?!$c",ch, NULL, victim, TO_CHAR,POS_SLEEPING,CLR_RED);
       ch->pcdata->rk_puani -= 20;
       return;
     }
@@ -1731,7 +1731,7 @@ void do_split( CHAR_DATA *ch, char *argument )
 
     if ( arg1[0] == '\0' )
     {
-      printf_to_char(ch, "Ne kadar daðýtacaksýn?\n\r" );
+      printf_to_char(ch, "Ne kadar daÄŸÄ±tacaksÄ±n?\n\r" );
 	return;
     }
 
@@ -1739,19 +1739,19 @@ void do_split( CHAR_DATA *ch, char *argument )
 
     if ( amount_silver < 0)
     {
-      printf_to_char(ch,"Grubun bundan hoþlanmaz.\n\r" );
+      printf_to_char(ch,"Grubun bundan hoÅŸlanmaz.\n\r" );
 	return;
     }
 
     if ( amount_silver == 0 )
     {
-      printf_to_char( ch,"Sýfýr sikke daðýttýn ve kimse çakozlamadý.\n\r" );
+      printf_to_char( ch,"SÄ±fÄ±r sikke daÄŸÄ±ttÄ±n ve kimse Ã§akozlamadÄ±.\n\r" );
 	return;
     }
 
     if ( ch->silver < amount_silver)
     {
-      printf_to_char(ch,"Üzerinde bu kadar yok.\n\r" );
+      printf_to_char(ch,"Ãœzerinde bu kadar yok.\n\r" );
 	return;
     }
 
@@ -1764,7 +1764,7 @@ void do_split( CHAR_DATA *ch, char *argument )
 
     if ( members < 2 )
     {
-      printf_to_char( ch,"Sende kalsýn.\n\r" );
+      printf_to_char( ch,"Sende kalsÄ±n.\n\r" );
 	return;
     }
 
@@ -1783,11 +1783,11 @@ void do_split( CHAR_DATA *ch, char *argument )
     if (share_silver > 0)
     {
 	printf_to_char(ch,
-    "Sen %d akçe daðýttýn. Senin payýna %d akçe düþtü.\n\r",
+    "Sen %d akÃ§e daÄŸÄ±ttÄ±n. Senin payÄ±na %d akÃ§e dÃ¼ÅŸtÃ¼.\n\r",
  	    amount_silver,share_silver + extra_silver);
     }
 
-    sprintf(buf,"$n %d akçe daðýttý. Senin payýna %d akçe düþtü.",amount_silver,share_silver);
+    sprintf(buf,"$n %d akÃ§e daÄŸÄ±ttÄ±. Senin payÄ±na %d akÃ§e dÃ¼ÅŸtÃ¼.",amount_silver,share_silver);
 
 
     for ( gch = ch->in_room->people; gch != NULL; gch = gch->next_in_room )
@@ -1812,13 +1812,13 @@ void do_gtell( CHAR_DATA *ch, char *argument )
 
     if ( argument[0] == '\0' )
     {
-      printf_to_char(ch,"Gruba ne anlatacaksýn?\n\r" );
+      printf_to_char(ch,"Gruba ne anlatacaksÄ±n?\n\r" );
 	return;
     }
 
     if ( IS_SET( ch->comm, COMM_NOTELL ) )
     {
-      printf_to_char(ch,"Mesajýn ulaþmadý!\n\r" );
+      printf_to_char(ch,"MesajÄ±n ulaÅŸmadÄ±!\n\r" );
 	return;
     }
 
@@ -1849,7 +1849,7 @@ void do_gtell( CHAR_DATA *ch, char *argument )
     if (i > 1 && !is_affected(ch, gsn_deafen))
     act_color("$CSen gruba '$t' dedin.$c",
               ch,buf,NULL,TO_CHAR,POS_DEAD,CLR_CYAN);
-  else printf_to_char( ch,"Kendi kendine konuþmayý býrak.");
+  else printf_to_char( ch,"Kendi kendine konuÅŸmayÄ± bÄ±rak.");
 
     return;
 }
@@ -1905,7 +1905,7 @@ void do_cb( CHAR_DATA *ch, char *argument )
 
     if ( !(ch->cabal) )
       {
-        printf_to_char(ch,"Bir kabala üye deðilsin.\n\r");
+        printf_to_char(ch,"Bir kabala Ã¼ye deÄŸilsin.\n\r");
 	return;
       }
 
@@ -1943,12 +1943,12 @@ void do_pray(CHAR_DATA *ch, char *argument)
 
     if (IS_SET(ch->comm,COMM_NOCHANNELS))
 	{
-    printf_to_char(ch,"Tanrýlar seni dinlemek istemiyorlar.");
+    printf_to_char(ch,"TanrÄ±lar seni dinlemek istemiyorlar.");
 	  return;
 	}
 
-  printf_to_char(ch,"Yüzünü gökyüzüne dönüp kadimlerin yardýmý için dua ediyorsun!\n\r");
-  printf_to_char(ch,"Bu bir duygu deðil, ölümsüzlerin diyarýna uzanan bir kývýlcým.\n\r");
+  printf_to_char(ch,"YÃ¼zÃ¼nÃ¼ gÃ¶kyÃ¼zÃ¼ne dÃ¶nÃ¼p kadimlerin yardÄ±mÄ± iÃ§in dua ediyorsun!\n\r");
+  printf_to_char(ch,"Bu bir duygu deÄŸil, Ã¶lÃ¼msÃ¼zlerin diyarÄ±na uzanan bir kÄ±vÄ±lcÄ±m.\n\r");
 
     for (d = descriptor_list; d != NULL; d = d->next)
       {
@@ -1957,7 +1957,7 @@ void do_pray(CHAR_DATA *ch, char *argument)
 	  {
 	    if (argument[0] == '\0')
 	      {
-          act_color("$C$n DUA ediyor: Oyunda hiç tanrý var mý?$c",
+          act_color("$C$n DUA ediyor: Oyunda hiÃ§ tanrÄ± var mÄ±?$c",
       			ch,argument,d->character,TO_VICT,POS_DEAD,CLR_CYAN);
 	      }
 	    else
@@ -2026,7 +2026,7 @@ void do_speak( CHAR_DATA *ch, char *argument )
  argument = one_argument(argument,arg);
  if (arg[0] == '\0')
      {
-       printf_to_char(ch, "Þu an %s dili konuþuyorsun.\n\r",
+       printf_to_char(ch, "Åžu an %s dili konuÅŸuyorsun.\n\r",
      			language_table[ch->language].name);
         printf_to_char(ch,"You can speak :\n\r");
         printf_to_char(ch, "       ortak, %s\n\r",
@@ -2038,7 +2038,7 @@ void do_speak( CHAR_DATA *ch, char *argument )
 
  if (language == -1)
      {
-       printf_to_char( ch,"Böyle bir dil duymadýn.\n\r");
+       printf_to_char( ch,"BÃ¶yle bir dil duymadÄ±n.\n\r");
         return;
      }
 
@@ -2046,7 +2046,7 @@ void do_speak( CHAR_DATA *ch, char *argument )
   ch->language = race_table[ORG_RACE(ch)].language;
  else ch->language = language;
 
- printf_to_char(ch,"Artýk %s dili konuþuyorsun.\n\r",language_table[ch->language].name);
+ printf_to_char(ch,"ArtÄ±k %s dili konuÅŸuyorsun.\n\r",language_table[ch->language].name);
 }
 
 /* Thanx zihni@karmi.emu.edu.tr for the code of do_judge */
@@ -2059,7 +2059,7 @@ void do_judge( CHAR_DATA *ch, char *argument )
 
  if ( ch->cabal != CABAL_RULER )
     {
-      printf_to_char( ch,"Hý?\n\r" );
+      printf_to_char( ch,"HÄ±?\n\r" );
      return;
     }
 
@@ -2067,14 +2067,14 @@ void do_judge( CHAR_DATA *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      printf_to_char( ch,"Kimi yargýlayacaksýn?\n\r" );
+      printf_to_char( ch,"Kimi yargÄ±layacaksÄ±n?\n\r" );
      return;
     }
 
   /* judge thru world */
   if ( ( victim = get_char_world( ch, arg ) ) == NULL )
     {
-      printf_to_char( ch,"Burada deðil.\n\r" );
+      printf_to_char( ch,"Burada deÄŸil.\n\r" );
       return;
     }
 
@@ -2087,23 +2087,23 @@ void do_judge( CHAR_DATA *ch, char *argument )
 
    if (IS_IMMORTAL(victim) && !IS_IMMORTAL(ch))
     {
-      printf_to_char( ch,"Ölümsüzleri yargýlayabilecek gücü kendinde göremiyorsun.\n\r");
+      printf_to_char( ch,"Ã–lÃ¼msÃ¼zleri yargÄ±layabilecek gÃ¼cÃ¼ kendinde gÃ¶remiyorsun.\n\r");
         return;
     }
 
-    printf_to_char(ch,"%s'in etiði %s ve yönelimi %s.\n\r",
+    printf_to_char(ch,"%s'in etiÄŸi %s ve yÃ¶nelimi %s.\n\r",
 	victim->name,
-        victim->ethos == 1 ? "Tüze" :
-        victim->ethos == 2 ? "Yansýz" :
+        victim->ethos == 1 ? "TÃ¼ze" :
+        victim->ethos == 2 ? "YansÄ±z" :
         victim->ethos == 3 ? "Kaos" : "bilinmiyor",
-        IS_GOOD(victim) ? "Ýyi" :
-        IS_EVIL(victim) ? "Kem" : "Yansýz" );
+        IS_GOOD(victim) ? "Ä°yi" :
+        IS_EVIL(victim) ? "Kem" : "YansÄ±z" );
     return;
 }
 
 void do_remor( CHAR_DATA *ch, char *argument )
 {
-  printf_to_char(ch,"Yeniyaþam istiyorsan eksiksiz yaz.\n\r" );
+  printf_to_char(ch,"YeniyaÅŸam istiyorsan eksiksiz yaz.\n\r" );
     return;
 }
 
@@ -2121,14 +2121,14 @@ void do_remort( CHAR_DATA *ch, char *argument )
 
     if ( ch->level != LEVEL_HERO)
     {
-      printf_to_char( ch,"Yeniyaþam için seviye 91 olmalýsýn.\n\r" );
+      printf_to_char( ch,"YeniyaÅŸam iÃ§in seviye 91 olmalÄ±sÄ±n.\n\r" );
         return;
     }
 
     if (argument[0] != '\0')
     {
 	if (!ch->pcdata->confirm_remort)
-  printf_to_char(ch,"Sadece yeniyaþam yaz, argüman kullanma.\n\r");
+  printf_to_char(ch,"Sadece yeniyaÅŸam yaz, argÃ¼man kullanma.\n\r");
 ch->pcdata->confirm_remort = FALSE;
         return;
     }
@@ -2137,15 +2137,15 @@ ch->pcdata->confirm_remort = FALSE;
     {
 		ch->pcdata->questpoints -= 100;
 		SET_BIT(ch->act, PLR_REMORTED);
-		printf_to_char(ch,"\n\r...YENÝYAÞAM...\n\r");
-		printf_to_char(ch,"Yeni ýrk, sýnýf ve zarlarla yeni bir karakter yaratacaksýn.\n\r");
-		printf_to_char(ch,"Bu sýrada muddan koparsan veya mud çökerse:\n\r");
-		printf_to_char(ch,"    AYNI ÝSÝMLE YENÝ BÝR KARAKTER YARAT VE ÖLÜMSÜZLERE DURUMU BÝLDÝR.\n\r");
-		printf_to_char(ch,"Unutma ki, eski karaktere ait aþaðýdaki özellikler aynen korunur:\n\r");
-		printf_to_char(ch,"        bankadakiler dahil tüm akçe\n\r");
-		printf_to_char(ch,"        pratik, eðitim seanslarý, görev pratik deðeri ve görev puaný\n\r");
-		printf_to_char(ch,"Yeni yaþamýnda 6 yüzük takabileceksin.\n\r");
-		printf_to_char(ch,"             Ve fazladan 10 eðitim seansýn olacak.\n\r");
+		printf_to_char(ch,"\n\r...YENÄ°YAÅžAM...\n\r");
+		printf_to_char(ch,"Yeni Ä±rk, sÄ±nÄ±f ve zarlarla yeni bir karakter yaratacaksÄ±n.\n\r");
+		printf_to_char(ch,"Bu sÄ±rada muddan koparsan veya mud Ã§Ã¶kerse:\n\r");
+		printf_to_char(ch,"    AYNI Ä°SÄ°MLE YENÄ° BÄ°R KARAKTER YARAT VE Ã–LÃœMSÃœZLERE DURUMU BÄ°LDÄ°R.\n\r");
+		printf_to_char(ch,"Unutma ki, eski karaktere ait aÅŸaÄŸÄ±daki Ã¶zellikler aynen korunur:\n\r");
+		printf_to_char(ch,"        bankadakiler dahil tÃ¼m akÃ§e\n\r");
+		printf_to_char(ch,"        pratik, eÄŸitim seanslarÄ±, gÃ¶rev pratik deÄŸeri ve gÃ¶rev puanÄ±\n\r");
+		printf_to_char(ch,"Yeni yaÅŸamÄ±nda 6 yÃ¼zÃ¼k takabileceksin.\n\r");
+		printf_to_char(ch,"             Ve fazladan 10 eÄŸitim seansÄ±n olacak.\n\r");
 
 		sprintf( pbuf, "%s", ch->pcdata->pwd );
 		sprintf( remstr, "%s%s", PLAYER_DIR, capitalize( ch->name ) );
@@ -2181,20 +2181,20 @@ ch->pcdata->confirm_remort = FALSE;
 	ch->pcdata->oyuncu_katli = 0;
   ch->pcdata->kisisel_kasa = kasa;
 
-  write_to_buffer( d, "\n\r[Devam etmek için ENTER]\n\r",0);
+  write_to_buffer( d, "\n\r[Devam etmek iÃ§in ENTER]\n\r",0);
 	return;
     }
 
-    printf_to_char(ch,"Komutu onaylamak için tekrar yeniyaþam yaz.\n\r");
-    printf_to_char(ch,"UYARI: bu komutun geri dönüþü yoktur.\n\r");
-    printf_to_char(ch,"Yeniyaþam komutunu argümanla yazmak yeniyaþam durumunu iptal edecektir.\n\r");
-    printf_to_char(ch,"Unutma ki, eski karaktere ait aþaðýdaki özellikler aynen korunur:\n\r");
-  	printf_to_char(ch,"        bankadakiler dahil tüm akçe\n\r");
-  	printf_to_char(ch,"        görev pratik deðeri ve görev puaný\n\r");
-  	printf_to_char(ch,"Yeni yaþamýnda 6 yüzük takabileceksin.\n\r");
-  	printf_to_char(ch,"             Ve fazladan 10 eðitim seansýn olacak.\n\r");
+    printf_to_char(ch,"Komutu onaylamak iÃ§in tekrar yeniyaÅŸam yaz.\n\r");
+    printf_to_char(ch,"UYARI: bu komutun geri dÃ¶nÃ¼ÅŸÃ¼ yoktur.\n\r");
+    printf_to_char(ch,"YeniyaÅŸam komutunu argÃ¼manla yazmak yeniyaÅŸam durumunu iptal edecektir.\n\r");
+    printf_to_char(ch,"Unutma ki, eski karaktere ait aÅŸaÄŸÄ±daki Ã¶zellikler aynen korunur:\n\r");
+  	printf_to_char(ch,"        bankadakiler dahil tÃ¼m akÃ§e\n\r");
+  	printf_to_char(ch,"        gÃ¶rev pratik deÄŸeri ve gÃ¶rev puanÄ±\n\r");
+  	printf_to_char(ch,"Yeni yaÅŸamÄ±nda 6 yÃ¼zÃ¼k takabileceksin.\n\r");
+  	printf_to_char(ch,"             Ve fazladan 10 eÄŸitim seansÄ±n olacak.\n\r");
     ch->pcdata->confirm_remort = TRUE;
-    wiznet("$N yeniyaþam almak üzere.",ch,NULL,0,0,get_trust(ch));
+    wiznet("$N yeniyaÅŸam almak Ã¼zere.",ch,NULL,0,0,get_trust(ch));
 
 }
 
@@ -2204,25 +2204,25 @@ bool cabal_area_check(CHAR_DATA *ch)
    if (ch->in_room == NULL || IS_IMMORTAL(ch))	return FALSE;
 
    if ( ch->cabal != CABAL_RULER &&
-	!str_cmp(ch->in_room->area->name,"Tüze Konaðý"))
+	!str_cmp(ch->in_room->area->name,"TÃ¼ze KonaÄŸÄ±"))
 	return TRUE;
    else if ( ch->cabal != CABAL_INVADER &&
-	!str_cmp(ch->in_room->area->name,"Ýstila"))
+	!str_cmp(ch->in_room->area->name,"Ä°stila"))
 	return TRUE;
    else if ( ch->cabal != CABAL_CHAOS &&
 	!str_cmp(ch->in_room->area->name,"Kaos"))
 	return TRUE;
    else if ( ch->cabal != CABAL_SHALAFI &&
-	!str_cmp(ch->in_room->area->name,"Týlsým"))
+	!str_cmp(ch->in_room->area->name,"TÄ±lsÄ±m"))
 	return TRUE;
    else if ( ch->cabal != CABAL_BATTLE &&
-	!str_cmp(ch->in_room->area->name,"Öfke"))
+	!str_cmp(ch->in_room->area->name,"Ã–fke"))
 	return TRUE;
    else if ( ch->cabal != CABAL_KNIGHT &&
-	!str_cmp(ch->in_room->area->name,"Þövalye"))
+	!str_cmp(ch->in_room->area->name,"ÅžÃ¶valye"))
 	return TRUE;
    else if ( ch->cabal != CABAL_HUNTER &&
-	!str_cmp(ch->in_room->area->name,"Avcý"))
+	!str_cmp(ch->in_room->area->name,"AvcÄ±"))
 	return TRUE;
    else if ( ch->cabal != CABAL_LIONS &&
 	!str_cmp(ch->in_room->area->name,"Aslan"))
@@ -2234,13 +2234,13 @@ bool is_at_cabal_area(CHAR_DATA *ch)
 {
    if (ch->in_room == NULL || IS_IMMORTAL(ch))	return FALSE;
 
-   if ( !str_cmp(ch->in_room->area->name,"Tüze Konaðý") ||
-	!str_cmp(ch->in_room->area->name,"Ýstila") ||
+   if ( !str_cmp(ch->in_room->area->name,"TÃ¼ze KonaÄŸÄ±") ||
+	!str_cmp(ch->in_room->area->name,"Ä°stila") ||
 	!str_cmp(ch->in_room->area->name,"Kaos") ||
-	!str_cmp(ch->in_room->area->name,"Týlsým") ||
-	!str_cmp(ch->in_room->area->name,"Öfke") ||
-	!str_cmp(ch->in_room->area->name,"Þövalye") ||
-	!str_cmp(ch->in_room->area->name,"Avcý") ||
+	!str_cmp(ch->in_room->area->name,"TÄ±lsÄ±m") ||
+	!str_cmp(ch->in_room->area->name,"Ã–fke") ||
+	!str_cmp(ch->in_room->area->name,"ÅžÃ¶valye") ||
+	!str_cmp(ch->in_room->area->name,"AvcÄ±") ||
 	!str_cmp(ch->in_room->area->name,"Aslan") )
 	return TRUE;
    else return FALSE;

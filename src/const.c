@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
- * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
- * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aÃ§Ä±k kaynak TÃ¼rkÃ§e Mud projesidir.                        *
+ * Oyun geliÅŸtirmesi Jai ve Maru tarafÄ±ndan yÃ¶netilmektedir.               *
+ * UnutulmamasÄ± gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -122,17 +122,17 @@ const   struct  language_type       language_table      [ MAX_LANGUAGE ] =
   { "ortak",	LANG_COMMON	},
   { "insan",	LANG_HUMAN	},
   { "elf",	LANG_ELVISH	},
-  { "cüce",	LANG_DWARVISH	},
-  { "kuþ",	LANG_BIRD	},
+  { "cÃ¼ce",	LANG_DWARVISH	},
+  { "kuÅŸ",	LANG_BIRD	},
   { "kedi",	LANG_CAT	},
   { "asura",	LANG_ASURA	},
-  { "sürüngen",	LANG_SURUNGEN	},
+  { "sÃ¼rÃ¼ngen",	LANG_SURUNGEN	},
   { "astral",	LANG_ASTRAL	},
   { "dev",	LANG_GIANT	},
   { "ejderha",	LANG_DRAGON	},
   { "su",	LANG_WATER	},
   { "su",	LANG_WATER	},
-  { "köpek",	LANG_DOG	},
+  { "kÃ¶pek",	LANG_DOG	},
 };
 
 /* item type list */
@@ -221,43 +221,43 @@ const   struct wiznet_type      wiznet_table    []              =
 /* attack table */
 const 	struct attack_type	attack_table	[]		=
 {
-    { 	"none",		"vuruþ",		-1		},  /*  0 */
+    { 	"none",		"vuruÅŸ",		-1		},  /*  0 */
     {	"slice",	"dilme", 	DAM_SLASH	},
     {   "stab",		"saplama",		DAM_PIERCE	},
     {	"slash",	"kesici",	DAM_SLASH	},
-    {	"whip",		"kamçý",		DAM_SLASH	},
-    {   "claw",		"pençe",		DAM_SLASH	},  /*  5 */
+    {	"whip",		"kamÃ§Ä±",		DAM_SLASH	},
+    {   "claw",		"penÃ§e",		DAM_SLASH	},  /*  5 */
     {	"blast",	"patlama",	DAM_BASH	},
-    {   "pound",	"çarpma",	DAM_BASH	},
+    {   "pound",	"Ã§arpma",	DAM_BASH	},
     {	"crush",	"ezme",	DAM_BASH	},
     {   "grep",		"kesici",		DAM_SLASH	},
-    {	"bite",		"ýsýrma",		DAM_PIERCE	},  /* 10 */
+    {	"bite",		"Ä±sÄ±rma",		DAM_PIERCE	},  /* 10 */
     {   "pierce",	"delici",	DAM_PIERCE	},
     {   "suction",	"emici",	DAM_BASH	},
     {	"beating",	"beating",	DAM_BASH	},
-    {   "digestion",	"öðütücü",	DAM_ACID	},
-    {	"charge",	"yüklenme",	DAM_BASH	},  /* 15 */
+    {   "digestion",	"Ã¶ÄŸÃ¼tÃ¼cÃ¼",	DAM_ACID	},
+    {	"charge",	"yÃ¼klenme",	DAM_BASH	},  /* 15 */
     { 	"slap",		"tokat",		DAM_BASH	},
     {	"punch",	"yumruk",	DAM_BASH	},
     {	"wrath",	"gazap",	DAM_ENERGY	},
-    {	"magic",	"büyü",	DAM_ENERGY	},
-    {   "divine",	"ilahi güç",	DAM_HOLY	},  /* 20 */
+    {	"magic",	"bÃ¼yÃ¼",	DAM_ENERGY	},
+    {   "divine",	"ilahi gÃ¼Ã§",	DAM_HOLY	},  /* 20 */
     {	"cleave",	"yarma",	DAM_SLASH	},
-    {	"scratch",	"týrmalama",	DAM_PIERCE	},
+    {	"scratch",	"tÄ±rmalama",	DAM_PIERCE	},
     {   "peck",		"gaga",		DAM_PIERCE	},
     {   "peckb",	"gaga",		DAM_BASH	},
     {   "chop",		"chop",		DAM_SLASH	},  /* 25 */
     {   "sting",	"sokma",	DAM_PIERCE	},
     {   "smash",	 "smash",	DAM_BASH	},
-    {   "shbite",	"þok ýsýrýþý",DAM_LIGHTNING	},
-    {	"flbite",	"alev ýsýrýþý", DAM_FIRE	},
-    {	"frbite",	"ayaz ýsýrýþý", DAM_COLD	},  /* 30 */
-    {	"acbite",	"asit ýsýrýþý", 	DAM_ACID	},
-    {	"chomp",	"çiðneme",	DAM_PIERCE	},
-    {  	"drain",	"yaþam emici",	DAM_NEGATIVE	},
+    {   "shbite",	"ÅŸok Ä±sÄ±rÄ±ÅŸÄ±",DAM_LIGHTNING	},
+    {	"flbite",	"alev Ä±sÄ±rÄ±ÅŸÄ±", DAM_FIRE	},
+    {	"frbite",	"ayaz Ä±sÄ±rÄ±ÅŸÄ±", DAM_COLD	},  /* 30 */
+    {	"acbite",	"asit Ä±sÄ±rÄ±ÅŸÄ±", 	DAM_ACID	},
+    {	"chomp",	"Ã§iÄŸneme",	DAM_PIERCE	},
+    {  	"drain",	"yaÅŸam emici",	DAM_NEGATIVE	},
     {   "thrust",	"thrust",	DAM_PIERCE	},
-    {   "slime",	"balçýk",	DAM_ACID	},
-    {	"shock",	"þok",	DAM_LIGHTNING	},
+    {   "slime",	"balÃ§Ä±k",	DAM_ACID	},
+    {	"shock",	"ÅŸok",	DAM_LIGHTNING	},
     {   "thwack",	"thwack",	DAM_BASH	},
     {   "flame",	"alev",	DAM_FIRE	},
     {   "chill",	"ayaz",	DAM_COLD	},
@@ -287,10 +287,10 @@ const 	struct	race_type	race_table	[]		=
 		const char *	skills[5];		// bonus skills for the race
 		sh_int 	stats[MAX_STATS];	// starting stats
 */
-    { {"unique","eþsiz"},	"",	0, FALSE,FALSE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,{ "" }, {0,0,0,0,0,0 } },
+    { {"unique","eÅŸsiz"},	"",	0, FALSE,FALSE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,{ "" }, {0,0,0,0,0,0 } },
 
     { /* 1 */
-	{"human","insan"},"Ýnsan",LANG_HUMAN,	TRUE,TRUE, 		SIZE_MEDIUM, 0,
+	{"human","insan"},"Ä°nsan",LANG_HUMAN,	TRUE,TRUE, 		SIZE_MEDIUM, 0,
 	0,		0, 		0,
 	0, 		0,		0,
 	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "identify", "steal" }, { 20, 21, 20, 21, 21 ,20}
@@ -339,7 +339,7 @@ const 	struct	race_type	race_table	[]		=
     },
 
     { /* 8 */
-	{"dwarf","cüce"},"Cüce",LANG_DWARVISH,	TRUE,TRUE, 		SIZE_MEDIUM, 0,
+	{"dwarf","cÃ¼ce"},"CÃ¼ce",LANG_DWARVISH,	TRUE,TRUE, 		SIZE_MEDIUM, 0,
 	0,		AFF_INFRARED,	0,
 	0,		RES_POISON|RES_DISEASE, VULN_DROWNING,
 	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 250, { "berserk" }, { 21, 20, 21, 18, 23, 20 }
@@ -360,7 +360,7 @@ const 	struct	race_type	race_table	[]		=
 	},
 
         { /* 11 */
-    	{"bear","ayý"},	"",	LANG_DOG, FALSE,FALSE, 		SIZE_LARGE, 0,
+    	{"bear","ayÄ±"},	"",	LANG_DOG, FALSE,FALSE, 		SIZE_LARGE, 0,
     	0,		0,		OFF_CRUSH|OFF_DISARM|OFF_BERSERK,
     	0,		RES_BASH|RES_COLD,	0,
     	A|G|V,		A|B|C|D|E|F|H|J|K|U|V, 0, { "" }, {20, 20, 20, 20, 20, 20 }
@@ -374,7 +374,7 @@ const 	struct	race_type	race_table	[]		=
         },
 
         {  /* 13 */
-    	{"dog","köpek"},"",LANG_DOG,		FALSE,FALSE, 		SIZE_SMALL, 0,
+    	{"dog","kÃ¶pek"},"",LANG_DOG,		FALSE,FALSE, 		SIZE_SMALL, 0,
     	0,		0,		OFF_FAST,
     	0,		0,		0,
     	A|G|V,		A|C|D|E|F|H|J|K|U|V, 0, { "" }, {20, 20, 20, 20, 20, 20 }
@@ -395,21 +395,21 @@ const 	struct	race_type	race_table	[]		=
         },
 
         { /* 16 */
-    	{"rabbit","tavþan"},"",LANG_DOG,	FALSE,FALSE, 		SIZE_SMALL, 0,
+    	{"rabbit","tavÅŸan"},"",LANG_DOG,	FALSE,FALSE, 		SIZE_SMALL, 0,
     	0,		0,		OFF_DODGE|OFF_FAST,
     	0,		0,		0,
     	A|G|V,		A|C|D|E|F|H|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
         {  /* 17 */
-    	{"snake","sürüngen"},"",LANG_SURUNGEN,	FALSE,FALSE, 		SIZE_SMALL, 0,
+    	{"snake","sÃ¼rÃ¼ngen"},"",LANG_SURUNGEN,	FALSE,FALSE, 		SIZE_SMALL, 0,
     	0,		0,		0,
     	0,		RES_POISON,	VULN_COLD,
     	A|G|X|Y|cc,	A|D|E|F|K|L|Q|V|X, 0, { "" }, {20, 20, 20, 20, 20, 20 }
         },
 
         {  /* 18 */
-    	{"bird","kuþ"},"",LANG_BIRD,	FALSE,FALSE, 		SIZE_TINY, 0,
+    	{"bird","kuÅŸ"},"",LANG_BIRD,	FALSE,FALSE, 		SIZE_TINY, 0,
     	0,		AFF_FLYING,		OFF_FAST|OFF_DODGE,
     	0,		0,		0,
     	A|G|W,		A|C|D|E|F|H|K|P, 0, { "" }, {20, 20, 20, 20, 20, 20 }
@@ -430,7 +430,7 @@ const 	struct	race_type	race_table	[]		=
         },
 
         {  /* 21 */
-        {"fish","balýk"},	"",LANG_WATER,		FALSE,FALSE,		SIZE_TINY, 0,
+        {"fish","balÄ±k"},	"",LANG_WATER,		FALSE,FALSE,		SIZE_TINY, 0,
         0,		AFF_SWIM,	0,
         0,		0,		VULN_COLD|VULN_FIRE,
         A|H|Z,		A|D|E|F|J|K|O|X, 0, { "" }, {20, 20, 20, 20, 20, 20 }
@@ -473,7 +473,7 @@ const 	struct	race_type	race_table	[]		=
         },
 
         {  /* 27 */
-        {"elemental","uþak"},"",LANG_ASTRAL,FALSE,TRUE,		SIZE_HUGE, 0,
+        {"elemental","uÅŸak"},"",LANG_ASTRAL,FALSE,TRUE,		SIZE_HUGE, 0,
         0,		0,		OFF_FADE,
         0,		RES_WEAPON|RES_SUMMON|RES_FIRE|RES_COLD,		0,
         A|H|Z,		A|D, 0, { "" }, {20, 20, 20, 20, 20, 20 }
@@ -510,7 +510,7 @@ const 	struct	race_type	race_table	[]		=
         },
 
     {  /* 32 */
-    {"unique","eþsiz"},"",0,	FALSE,FALSE,		0, 0,
+    {"unique","eÅŸsiz"},"",0,	FALSE,FALSE,		0, 0,
     0,		0,		0,
     0,		0,		0,
     0,		0, 0, { "" }, {20, 20, 20, 20, 20, 20 }
@@ -538,19 +538,19 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
     },
  
     {
-		{"cleric","ermiþ"}, "Erm",  STAT_WIS,  OBJ_VNUM_SCHOOL_SWORD,
+		{"cleric","ermiÅŸ"}, "Erm",  STAT_WIS,  OBJ_VNUM_SCHOOL_SWORD,
 		{ 3003, 9619, 9619, 9619, 9619, 9619},  75,  18, 2,  70, 80, TRUE,
 		100,{1,2,2,0,0,5},CR_ALL
     },
 
     {
-		{"thief","hýrsýz"}, "Hýr",  STAT_DEX,  OBJ_VNUM_SCHOOL_DAGGER,
+		{"thief","hÄ±rsÄ±z"}, "HÄ±r",  STAT_DEX,  OBJ_VNUM_SCHOOL_DAGGER,
 		{ 3028, 9639, 9639, 9639, 9639, 9639 },  75,  18,  -4, 100, 50, FALSE,
 			0,{0,0,0,3,0,5},CR_ALL
     },
 
     {
-		{"warrior","savaþçý"}, "Sav",  STAT_STR,  OBJ_VNUM_SCHOOL_SWORD,
+		{"warrior","savaÅŸÃ§Ä±"}, "Sav",  STAT_STR,  OBJ_VNUM_SCHOOL_SWORD,
 		{ 3022, 9633, 9633, 9633, 9633, 9633 },  75,  18,  -10, 100,50,FALSE,
 		0,{3,0,0,0,1,5},CR_ALL
     },
@@ -580,7 +580,7 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
     },
 
     {
-        {"transmuter","biçimci"}, "Biç",  STAT_INT,  OBJ_VNUM_SCHOOL_DAGGER,
+        {"transmuter","biÃ§imci"}, "BiÃ§",  STAT_INT,  OBJ_VNUM_SCHOOL_DAGGER,
         { 3073, 0, 0, 0, 0, 0 },  75,  18, 2,  60,  100, TRUE,
         0,{0,3,0,0,1,5},CR_ALL
     },
@@ -604,7 +604,7 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
    },
 
    {
-        {"elementalist","ögeci"}, "Öge",  STAT_INT,  OBJ_VNUM_SCHOOL_DAGGER,
+        {"elementalist","Ã¶geci"}, "Ã–ge",  STAT_INT,  OBJ_VNUM_SCHOOL_DAGGER,
         { 9618, 0, 0, 0, 0, 0 },  75,  18, 6,  60,  100, TRUE,
         0,{0,3,0,0,0,5},CR_ALL
    }
@@ -622,161 +622,161 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
      {
        "Man",
 
-       "Büyü Çýraðý"		,
-       "Büyü Öðrencisi"	,
-        "Büyü Asistaný"	,
-        "Büyü Araþtýran"		,
+       "BÃ¼yÃ¼ Ã‡Ä±raÄŸÄ±"		,
+       "BÃ¼yÃ¼ Ã–ÄŸrencisi"	,
+        "BÃ¼yÃ¼ AsistanÄ±"	,
+        "BÃ¼yÃ¼ AraÅŸtÄ±ran"		,
         "Sihirbaz"	,
 
-        "Büyü Katibi"	,
-        "Falcý"		,
+        "BÃ¼yÃ¼ Katibi"	,
+        "FalcÄ±"		,
         "Arif"		,
-        "Ýlüzyonist"		,
-        "Tövbekar"		,
+        "Ä°lÃ¼zyonist"		,
+        "TÃ¶vbekar"		,
 
-       "Duacý"		,
-        "Duacý"		,
-        "Büyü Yapýcý"		,
-        "Büyü Yapýcý"		,
+       "DuacÄ±"		,
+        "DuacÄ±"		,
+        "BÃ¼yÃ¼ YapÄ±cÄ±"		,
+        "BÃ¼yÃ¼ YapÄ±cÄ±"		,
         "Hokkabaz"		,
 
         "Hokkabaz"		,
-        "Büyücü"		,
-        "Büyücü"		,
-        "Oluþturan"     ,
-        "Oluþturan"       ,
+        "BÃ¼yÃ¼cÃ¼"		,
+        "BÃ¼yÃ¼cÃ¼"		,
+        "OluÅŸturan"     ,
+        "OluÅŸturan"       ,
 
         "Alim"		,
         "Alim"		,
-        "Büyü Ustasý"			,
-        "Büyü Ustasý"			,
-        "Büyü Alimi"		,
+        "BÃ¼yÃ¼ UstasÄ±"			,
+        "BÃ¼yÃ¼ UstasÄ±"			,
+        "BÃ¼yÃ¼ Alimi"		,
 
-        "Büyü Alimi"		,
-        "Savaþçý Arif"		,
-        "Savaþçý Arif"		,
-        "Durendiþ"	,
-        "Durendiþ"	,
+        "BÃ¼yÃ¼ Alimi"		,
+        "SavaÅŸÃ§Ä± Arif"		,
+        "SavaÅŸÃ§Ä± Arif"		,
+        "DurendiÅŸ"	,
+        "DurendiÅŸ"	,
 
-        "Kýdemli Büyücü"		,
-        "Kýdemli Büyücü"		,
-        "Büyük Büyücü"		,
-        "Büyük Büyücü"	,
-        "Yüce Büyücü"		,
+        "KÄ±demli BÃ¼yÃ¼cÃ¼"		,
+        "KÄ±demli BÃ¼yÃ¼cÃ¼"		,
+        "BÃ¼yÃ¼k BÃ¼yÃ¼cÃ¼"		,
+        "BÃ¼yÃ¼k BÃ¼yÃ¼cÃ¼"	,
+        "YÃ¼ce BÃ¼yÃ¼cÃ¼"		,
 
-        "Yüce Büyücü"	,
+        "YÃ¼ce BÃ¼yÃ¼cÃ¼"	,
         "Golem Efendisi"		,
         "Golem Efendisi"	,
-        "Yüce Golem Efendisi"		,
-        "Yüce Golem Efendisi"	,
+        "YÃ¼ce Golem Efendisi"		,
+        "YÃ¼ce Golem Efendisi"	,
 
- 	 "Taþ Efendisi"	,
- 	 "Taþ Efendisi"	,
- 	 "Ýksir Ustasý"	,
- 	 "Ýksir Ustasý"	,
- 	 "Parþömen Ustasý"	,
+ 	 "TaÅŸ Efendisi"	,
+ 	 "TaÅŸ Efendisi"	,
+ 	 "Ä°ksir UstasÄ±"	,
+ 	 "Ä°ksir UstasÄ±"	,
+ 	 "ParÅŸÃ¶men UstasÄ±"	,
 
- 	 "Parþömen Ustasý"	,
- 	 "Sopa Ustasý"	,
- 	 "Sopa Ustasý"		,
- 	 "Deðnek Ustasý"	,
- 	 "Deðnek Ustasý"		,
+ 	 "ParÅŸÃ¶men UstasÄ±"	,
+ 	 "Sopa UstasÄ±"	,
+ 	 "Sopa UstasÄ±"		,
+ 	 "DeÄŸnek UstasÄ±"	,
+ 	 "DeÄŸnek UstasÄ±"		,
 
- 	 "Ýblis Çaðýran"	,
- 	 "Ýblis Çaðýran"		,
- 	 "Yüce Ýblis Çaðýran"	,
- 	 "Yüce Ýblis Çaðýran",
+ 	 "Ä°blis Ã‡aÄŸÄ±ran"	,
+ 	 "Ä°blis Ã‡aÄŸÄ±ran"		,
+ 	 "YÃ¼ce Ä°blis Ã‡aÄŸÄ±ran"	,
+ 	 "YÃ¼ce Ä°blis Ã‡aÄŸÄ±ran",
  	 "Ejderha Efendisi"		,
 
  	 "Ejderha Efendisi"		,
  	 "Ejderha Efendisi"	,
  	 "Ejderha Efendisi",
-        "Karýþým Efendisi",
-        "Karýþým Efendisi",
+        "KarÄ±ÅŸÄ±m Efendisi",
+        "KarÄ±ÅŸÄ±m Efendisi",
 
-        "Büyülerin Efendisi",
-        "Büyülerin Efendisi",
-        "Büyüleme Efendisi",
-        "Büyüleme Efendisi",
-        "Çaðrý Ustasý",
+        "BÃ¼yÃ¼lerin Efendisi",
+        "BÃ¼yÃ¼lerin Efendisi",
+        "BÃ¼yÃ¼leme Efendisi",
+        "BÃ¼yÃ¼leme Efendisi",
+        "Ã‡aÄŸrÄ± UstasÄ±",
 
-        "Çaðrý Ustasý",
-        "Büyük Kahin",
-        "Büyük Kahin",
-        "Deðiþim Ustasý",
-        "Deðiþim Ustasý",
+        "Ã‡aÄŸrÄ± UstasÄ±",
+        "BÃ¼yÃ¼k Kahin",
+        "BÃ¼yÃ¼k Kahin",
+        "DeÄŸiÅŸim UstasÄ±",
+        "DeÄŸiÅŸim UstasÄ±",
 
-        "Fiþek Efendisi",
-        "Fiþek Efendisi",
-        "Ölülerin Efendisi",
-        "Ölülerin Efendisi",
-        "Simyacý",
+        "FiÅŸek Efendisi",
+        "FiÅŸek Efendisi",
+        "Ã–lÃ¼lerin Efendisi",
+        "Ã–lÃ¼lerin Efendisi",
+        "SimyacÄ±",
 
-        "Simyacý",
-        "Bað Ustasý",
-        "Bað Ustasý",
-        "Söz Efendisi",
-        "Söz Efendisi",
+        "SimyacÄ±",
+        "BaÄŸ UstasÄ±",
+        "BaÄŸ UstasÄ±",
+        "SÃ¶z Efendisi",
+        "SÃ¶z Efendisi",
 
-        "Geçmiþe hükmeden",
-        "Geçmiþe hükmeden",
-        "Bugüne hükmeden",
-        "Bugüne hükmeden",
-        "Geleceðe hükmeden",
+        "GeÃ§miÅŸe hÃ¼kmeden",
+        "GeÃ§miÅŸe hÃ¼kmeden",
+        "BugÃ¼ne hÃ¼kmeden",
+        "BugÃ¼ne hÃ¼kmeden",
+        "GeleceÄŸe hÃ¼kmeden",
 
-        "Geleceðe hükmeden",
-        "Baþ Büyücü",
-        "Baþ Büyücü",
+        "GeleceÄŸe hÃ¼kmeden",
+        "BaÅŸ BÃ¼yÃ¼cÃ¼",
+        "BaÅŸ BÃ¼yÃ¼cÃ¼",
         "Bilinmeyen",
         "Bilinmeyen",
 
  	 "Kahraman"		,
  	 "Melek"		,
  	 "Melek"		,
- 	 "Elçi"		,
- 	 "Ölümsüz"		,
- 	"Yüce"		,
- 	"Yüce",
- 	"Yüce",
- 	"Yüce",
+ 	 "ElÃ§i"		,
+ 	 "Ã–lÃ¼msÃ¼z"		,
+ 	"YÃ¼ce"		,
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
  	 "Tek"	},
 
      {
  	  "Man"			 ,
 
- 	"Ýnanan"		 ,
- 	"Yardýmcý"		 ,
+ 	"Ä°nanan"		 ,
+ 	"YardÄ±mcÄ±"		 ,
  	"Hizmetli"		 ,
- 	"Çýrak"			 ,
+ 	"Ã‡Ä±rak"			 ,
  	"Misyoner"		 ,
 
  	"Usta"		 ,
  	"Diyakoz"		 ,
- 	"Önder"			 ,
- 	"Üstat"		 ,
- 	"Orta Elçi"			 ,
+ 	"Ã–nder"			 ,
+ 	"Ãœstat"		 ,
+ 	"Orta ElÃ§i"			 ,
 
  	"Dindar"			 ,
  	"Dindar"			 ,
- 	"Yükselen"		 ,
- 	"Yükselen"			 ,
- 	"Din Adamý"		 ,
+ 	"YÃ¼kselen"		 ,
+ 	"YÃ¼kselen"			 ,
+ 	"Din AdamÄ±"		 ,
 
- 	"Din Adamý"			 ,
- 	"Keþiþ"			 ,
- 	"Keþiþ"			 ,
- 	"Ýyileþtiren"			 ,
- 	"Ýyileþtiren"		 ,
+ 	"Din AdamÄ±"			 ,
+ 	"KeÅŸiÅŸ"			 ,
+ 	"KeÅŸiÅŸ"			 ,
+ 	"Ä°yileÅŸtiren"			 ,
+ 	"Ä°yileÅŸtiren"		 ,
 
  	"Vaiz"		 ,
  	"Vaiz"		 ,
- 	"Açýklayan"		 ,
- 	"Açýklayan"			 ,
+ 	"AÃ§Ä±klayan"		 ,
+ 	"AÃ§Ä±klayan"			 ,
  	"Duyan"		 ,
 
  	"Duyan"		 ,
- 	"Gören"	 ,
- 	"Gören" ,
+ 	"GÃ¶ren"	 ,
+ 	"GÃ¶ren" ,
  	"Bilen"		 ,
  	"Bilen"		 ,
 
@@ -787,262 +787,262 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
  	"Arif"	 ,
 
  	"Arif"		 ,
- 	"Ýblis Katili"		 ,
- 	"Ýblis Katili"			 ,
- 	"Yüce Ýblis Katili"		 ,
- 	"Yüce Ýblis Katili"		 ,
+ 	"Ä°blis Katili"		 ,
+ 	"Ä°blis Katili"			 ,
+ 	"YÃ¼ce Ä°blis Katili"		 ,
+ 	"YÃ¼ce Ä°blis Katili"		 ,
 
  	"Denizlerin Efendisi"		 ,
  	"Denizlerin Efendisi"		 ,
- 	"Topraðýn Efendisi" ,
- 	"Topraðýn Efendisi"		 ,
- 	"Havanýn Efendisi"		 ,
+ 	"TopraÄŸÄ±n Efendisi" ,
+ 	"TopraÄŸÄ±n Efendisi"		 ,
+ 	"HavanÄ±n Efendisi"		 ,
 
- 	"Havanýn Efendisi"		 ,
+ 	"HavanÄ±n Efendisi"		 ,
  	"Lokman Ruhu"	 ,
  	"Lokman Ruhu"	 ,
- 	"Cennet Bekçisi"	 ,
- 	"Cennet Bekçisi"	 ,
+ 	"Cennet BekÃ§isi"	 ,
+ 	"Cennet BekÃ§isi"	 ,
 
- 	"Iþýyan" ,
- 	"Iþýyan" ,
+ 	"IÅŸÄ±yan" ,
+ 	"IÅŸÄ±yan" ,
  	"Kutsal" ,
  	"Kutsal" ,
- 	"Ýlahi" ,
+ 	"Ä°lahi" ,
 
- 	"Ýlahi" ,
+ 	"Ä°lahi" ,
  	"Aziz" ,
  	"Aziz" ,
- 	"Köklerin Efendisi" ,
- 	"Köklerin Efendisi" ,
+ 	"KÃ¶klerin Efendisi" ,
+ 	"KÃ¶klerin Efendisi" ,
 
  	"Suyun Efendisi" ,
  	"Suyun Efendisi" ,
- 	"Ateþin Efendisi" ,
- 	"Ateþin Efendisi" ,
+ 	"AteÅŸin Efendisi" ,
+ 	"AteÅŸin Efendisi" ,
  	"Buzun Efendisi" ,
 
  	"Buzun Efendisi" ,
- 	"Rüzgarýn Efendisi" ,
- 	"Rüzgarýn Efendisi" ,
- 	"Fýrtýna Efendisi" ,
- 	"Fýrtýna Efendisi" ,
+ 	"RÃ¼zgarÄ±n Efendisi" ,
+ 	"RÃ¼zgarÄ±n Efendisi" ,
+ 	"FÄ±rtÄ±na Efendisi" ,
+ 	"FÄ±rtÄ±na Efendisi" ,
 
- 	"Topraða Hükmeden" ,
- 	"Topraða Hükmeden" ,
- 	"Denize Hükmeden" ,
- 	"Denize Hükmeden" ,
- 	"Zamana Hükmeden" ,
+ 	"TopraÄŸa HÃ¼kmeden" ,
+ 	"TopraÄŸa HÃ¼kmeden" ,
+ 	"Denize HÃ¼kmeden" ,
+ 	"Denize HÃ¼kmeden" ,
+ 	"Zamana HÃ¼kmeden" ,
 
- 	"Zamana Hükmeden" ,
+ 	"Zamana HÃ¼kmeden" ,
  	"Kutsal Ruh" ,
  	"Kutsal Ruh" ,
  	"Kutsal Bilge" ,
  	"Kutsal Bilge" ,
 
- 	"Ölümsüz Elçisi"		 ,
- 	"Ölümsüz Elçisi"	 ,
- 	"Ölümsüz Elçisi"	 ,
- 	"Ölümsüz Elçisi"	 ,
- 	"Ölümsüz Elçisi"	 ,
+ 	"Ã–lÃ¼msÃ¼z ElÃ§isi"		 ,
+ 	"Ã–lÃ¼msÃ¼z ElÃ§isi"	 ,
+ 	"Ã–lÃ¼msÃ¼z ElÃ§isi"	 ,
+ 	"Ã–lÃ¼msÃ¼z ElÃ§isi"	 ,
+ 	"Ã–lÃ¼msÃ¼z ElÃ§isi"	 ,
 
- 	"Ölümsüz Elçisi"	 ,
- 	"Ölümsüz Elçisi"	 ,
- 	"Ölümsüz Elçisi"	 ,
- 	"Kutsanmýþ Olan" ,
- 	"Kutsanmýþ Olan" ,
+ 	"Ã–lÃ¼msÃ¼z ElÃ§isi"	 ,
+ 	"Ã–lÃ¼msÃ¼z ElÃ§isi"	 ,
+ 	"Ã–lÃ¼msÃ¼z ElÃ§isi"	 ,
+ 	"KutsanmÄ±ÅŸ Olan" ,
+ 	"KutsanmÄ±ÅŸ Olan" ,
 
  	"Kahraman"		,
  	 "Melek"		,
  	 "Melek"		,
- 	 "Elçi"		,
- 	 "Ölümsüz"		,
- 	"Yüce"		,
- 	"Yüce",
- 	"Yüce",
- 	"Yüce",
+ 	 "ElÃ§i"		,
+ 	 "Ã–lÃ¼msÃ¼z"		,
+ 	"YÃ¼ce"		,
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
  	 "Tek"},
 
      {
  	  "Man"			 ,
 
- 		  "Çocuk"			 ,
- 		  "Sessiz Adým"		 ,
- 		  "Aþýran"			 ,
+ 		  "Ã‡ocuk"			 ,
+ 		  "Sessiz AdÄ±m"		 ,
+ 		  "AÅŸÄ±ran"			 ,
  		  "Yan Kesici"		 ,
- 		  "Süzülen"		 ,
+ 		  "SÃ¼zÃ¼len"		 ,
 
- 		 "Kýstýran"	 ,
- 		  "Cepçi"	 ,
- 		  "Kapkaççý"	 ,
- 		  "Dolandýrýcý"	 ,
+ 		 "KÄ±stÄ±ran"	 ,
+ 		  "CepÃ§i"	 ,
+ 		  "KapkaÃ§Ã§Ä±"	 ,
+ 		  "DolandÄ±rÄ±cÄ±"	 ,
  		  "Haydut"		 ,
 
  		 "Soyguncu" ,
  		  "Soyguncu" ,
  		  "Hilebaz"		 ,
  		  "Hilebaz"	 ,
- 		  "Eþkiya"		 ,
+ 		  "EÅŸkiya"		 ,
 
- 		 "Eþkiya"	 ,
+ 		 "EÅŸkiya"	 ,
  		  "Dessas"	 ,
  		  "Dessas"	 ,
- 		  "Hýrsýz"	 ,
- 		  "Hýrsýz"	 ,
+ 		  "HÄ±rsÄ±z"	 ,
+ 		  "HÄ±rsÄ±z"	 ,
 
- 		  "Keskin Býçak" ,
- 		  "Keskin Býçak" ,
- 		  "Hýzlý Býçak"	 ,
- 		  "Hýzlý Býçak"	 ,
+ 		  "Keskin BÄ±Ã§ak" ,
+ 		  "Keskin BÄ±Ã§ak" ,
+ 		  "HÄ±zlÄ± BÄ±Ã§ak"	 ,
+ 		  "HÄ±zlÄ± BÄ±Ã§ak"	 ,
  		  "Katil"		 ,
 
  		  "Katil"			 ,
  		  "Kanunsuz"		 ,
  		  "Kanunsuz"		 ,
- 		  "Gýrtlak Kesen"			 ,
- 		  "Gýrtlak Kesen"			 ,
+ 		  "GÄ±rtlak Kesen"			 ,
+ 		  "GÄ±rtlak Kesen"			 ,
 
- 		  "Ýftiracý"	 ,
- 		  "Ýftiracý"	 ,
+ 		  "Ä°ftiracÄ±"	 ,
+ 		  "Ä°ftiracÄ±"	 ,
  		  "Muhbir"	 ,
  		  "Muhbir"	 ,
  		  "Hafiye"	 ,
 
  		  "Hafiye"	 ,
- 		  "Suikastçi" ,
- 		  "Suikastçi" ,
- 		  "Büyük Suikastçi" ,
- 		  "Büyük Suikastçi" ,
+ 		  "SuikastÃ§i" ,
+ 		  "SuikastÃ§i" ,
+ 		  "BÃ¼yÃ¼k SuikastÃ§i" ,
+ 		  "BÃ¼yÃ¼k SuikastÃ§i" ,
 
- 		 "Görüþ Ustasý"	 ,
- 		  "Görüþ Ustasý"	 ,
- 		  "Duyuþ Ustasý" ,
- 		  "Duyuþ Ustasý" ,
- 		  "Koku Ustasý"	 ,
+ 		 "GÃ¶rÃ¼ÅŸ UstasÄ±"	 ,
+ 		  "GÃ¶rÃ¼ÅŸ UstasÄ±"	 ,
+ 		  "DuyuÅŸ UstasÄ±" ,
+ 		  "DuyuÅŸ UstasÄ±" ,
+ 		  "Koku UstasÄ±"	 ,
 
-    		 "Koku Ustasý"	 ,
- 		  "Tat Ustasý"	,
- 		  "Tat Ustasý"	 ,
- 		  "Temas Ustasý"	 ,
- 		  "Temas Ustasý"	 ,
+    		 "Koku UstasÄ±"	 ,
+ 		  "Tat UstasÄ±"	,
+ 		  "Tat UstasÄ±"	 ,
+ 		  "Temas UstasÄ±"	 ,
+ 		  "Temas UstasÄ±"	 ,
 
- 		  "Suçlu"		 ,
- 		  "Suçlu"	 ,
- 		  "Suç Ustasý"	 ,
- 		  "Suç Ustasý" ,
- 		  "Suç Üstadý",
+ 		  "SuÃ§lu"		 ,
+ 		  "SuÃ§lu"	 ,
+ 		  "SuÃ§ UstasÄ±"	 ,
+ 		  "SuÃ§ UstasÄ±" ,
+ 		  "SuÃ§ ÃœstadÄ±",
 
- 		  "Suç Üstadý"	 ,
- 		  "Suç Efendisi"	 ,
- 		  "Suç Efendisi"		 ,
+ 		  "SuÃ§ ÃœstadÄ±"	 ,
+ 		  "SuÃ§ Efendisi"	 ,
+ 		  "SuÃ§ Efendisi"		 ,
  		  "Patron"			 ,
  		  "Patron"		 ,
 
- 		  "Elebaþý" ,
- 		  "Elebaþý" ,
- 		  "Büyük Patron" ,
- 		  "Büyük Patron" ,
- 		  "Yeraltýnýn Gölgesi" ,
+ 		  "ElebaÅŸÄ±" ,
+ 		  "ElebaÅŸÄ±" ,
+ 		  "BÃ¼yÃ¼k Patron" ,
+ 		  "BÃ¼yÃ¼k Patron" ,
+ 		  "YeraltÄ±nÄ±n GÃ¶lgesi" ,
 
- 		  "Yeraltýnýn Gölgesi" ,
- 		  "Gölge" ,
- 		  "Gölge" ,
- 		  "Karanlýðýn Sesi" ,
- 		  "Karanlýðýn Sesi" ,
+ 		  "YeraltÄ±nÄ±n GÃ¶lgesi" ,
+ 		  "GÃ¶lge" ,
+ 		  "GÃ¶lge" ,
+ 		  "KaranlÄ±ÄŸÄ±n Sesi" ,
+ 		  "KaranlÄ±ÄŸÄ±n Sesi" ,
 
- 		  "Sessizliðin Efendisi" ,
- 		  "Sessizliðin Efendisi" ,
+ 		  "SessizliÄŸin Efendisi" ,
+ 		  "SessizliÄŸin Efendisi" ,
  		  "Hile Efendisi" ,
  		  "Hile Efendisi" ,
- 		  "Býçak Efendisi" ,
+ 		  "BÄ±Ã§ak Efendisi" ,
 
- 		"Býçak Efendisi" ,
+ 		"BÄ±Ã§ak Efendisi" ,
  		"Zehir Efendisi" ,
  		"Zehir Efendisi" ,
  		"Giz Efendisi" ,
  		"Giz Efendisi" ,
 
- 	        "Hýrsýz Efendi" ,
- 		"Hýrsýz Efendi" ,
- 		"Suikastçi Efendi" ,
- 		"Suikastçi Efendi" ,
- 		"Görünmeyen" ,
+ 	        "HÄ±rsÄ±z Efendi" ,
+ 		"HÄ±rsÄ±z Efendi" ,
+ 		"SuikastÃ§i Efendi" ,
+ 		"SuikastÃ§i Efendi" ,
+ 		"GÃ¶rÃ¼nmeyen" ,
 
- 		"Görünmeyen" ,
- 		"Hýrsýzlarýn Efendisi" ,
- 		"Hýrsýzlarýn Efendisi" ,
- 		"Suikastçilerin Efendisi" ,
- 		"Suikastçilerin Efendisi" ,
+ 		"GÃ¶rÃ¼nmeyen" ,
+ 		"HÄ±rsÄ±zlarÄ±n Efendisi" ,
+ 		"HÄ±rsÄ±zlarÄ±n Efendisi" ,
+ 		"SuikastÃ§ilerin Efendisi" ,
+ 		"SuikastÃ§ilerin Efendisi" ,
 
  		"Kahraman"		,
  	 "Melek"		,
  	 "Melek"		,
- 	 "Elçi"		,
- 	 "Ölümsüz"		,
- 	"Yüce"		,
- 	"Yüce",
- 	"Yüce",
- 	"Yüce",
+ 	 "ElÃ§i"		,
+ 	 "Ã–lÃ¼msÃ¼z"		,
+ 	"YÃ¼ce"		,
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
  	 "Tek" },
 
      {
            "Man"			 ,
 
  	  "Acemi"		 ,
- 	  "Çaylak"		 ,
- 	  "Nöbetçi"		 ,
- 	  "Dövüþçü"		 ,
+ 	  "Ã‡aylak"		 ,
+ 	  "NÃ¶betÃ§i"		 ,
+ 	  "DÃ¶vÃ¼ÅŸÃ§Ã¼"		 ,
  	  "Asker"			 ,
 
- 	  "Savaþan"		 ,
- 	  "Kýdemli"			 ,
- 	  "Kýlýç Çeken"		 ,
+ 	  "SavaÅŸan"		 ,
+ 	  "KÄ±demli"			 ,
+ 	  "KÄ±lÄ±Ã§ Ã‡eken"		 ,
  	  "Eskrimci"	 ,
- 	  "Savaþçý"		 ,
+ 	  "SavaÅŸÃ§Ä±"		 ,
 
  	  "Kahraman"		 ,
  	  "Kahraman"		 ,
- 	  "Þanlý"		 ,
- 	  "Þanlý"		 ,
+ 	  "ÅžanlÄ±"		 ,
+ 	  "ÅžanlÄ±"		 ,
  	  "Gri Kalkan"		 ,
 
  	  "Gri Kalkan"				 ,
- 	  "Paralý Asker"					 ,
- 	  "Paralý Asker"						 ,
- 	  "Kýlýç Ustasý"				 ,
- 	  "Kýlýç Ustasý"				 ,
+ 	  "ParalÄ± Asker"					 ,
+ 	  "ParalÄ± Asker"						 ,
+ 	  "KÄ±lÄ±Ã§ UstasÄ±"				 ,
+ 	  "KÄ±lÄ±Ã§ UstasÄ±"				 ,
 
- 	  "Teðmen"						 ,
- 	  "Teðmen"					 ,
+ 	  "TeÄŸmen"						 ,
+ 	  "TeÄŸmen"					 ,
  	  "Savunan"				 ,
  	  "Savunan"					 ,
  	  "Dragon"					 ,
 
  	  "Dragon"					 ,
- 	  "Saygýsýz"						 ,
- 	  "Saygýsýz"						 ,
- 	  "Þövalye"					 ,
- 	  "Þövalye"				 ,
+ 	  "SaygÄ±sÄ±z"						 ,
+ 	  "SaygÄ±sÄ±z"						 ,
+ 	  "ÅžÃ¶valye"					 ,
+ 	  "ÅžÃ¶valye"				 ,
 
- 	  "Büyük Þövalye"				 ,
- 	  "Büyük Þövalye"				 ,
- 	  "Efendi Þövalye"					 ,
- 	  "Efendi Þövalye"				 ,
- 	  "Gladyatör"					 ,
+ 	  "BÃ¼yÃ¼k ÅžÃ¶valye"				 ,
+ 	  "BÃ¼yÃ¼k ÅžÃ¶valye"				 ,
+ 	  "Efendi ÅžÃ¶valye"					 ,
+ 	  "Efendi ÅžÃ¶valye"				 ,
+ 	  "GladyatÃ¶r"					 ,
 
- 	  "Gladyatör"				 ,
- 	  "Efendi Gladyatör"				 ,
- 	  "Efendi Gladyatör"			 ,
- 	  "Ýblis Katleden"					 ,
- 	  "Ýblis Katleden"				 ,
+ 	  "GladyatÃ¶r"				 ,
+ 	  "Efendi GladyatÃ¶r"				 ,
+ 	  "Efendi GladyatÃ¶r"			 ,
+ 	  "Ä°blis Katleden"					 ,
+ 	  "Ä°blis Katleden"				 ,
 
- 	  "Büyük Ýblis Katleden"		 ,
- 	  "Büyük Ýblis Katleden"			 ,
+ 	  "BÃ¼yÃ¼k Ä°blis Katleden"		 ,
+ 	  "BÃ¼yÃ¼k Ä°blis Katleden"			 ,
  	  "Ejder Katili"				 ,
  	  "Ejder Katili"				 ,
- 	  "Büyük Ejder Katili"		 ,
+ 	  "BÃ¼yÃ¼k Ejder Katili"		 ,
 
- 	  "Büyük Ejder Katili"		 ,
+ 	  "BÃ¼yÃ¼k Ejder Katili"		 ,
  	  "Lord"						 ,
  	  "Lord"				 ,
  	  "Efendi"						 ,
@@ -1050,184 +1050,184 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
 
  	  "Baron"			 ,
  	  "Baron"		 ,
- 	  "Rüzgar Baron"			 ,
- 	  "Rüzgar Baron"				 ,
- 	  "Fýrtýna Baron"			 ,
+ 	  "RÃ¼zgar Baron"			 ,
+ 	  "RÃ¼zgar Baron"				 ,
+ 	  "FÄ±rtÄ±na Baron"			 ,
 
- 	  "Fýrtýna Baron"			 ,
- 	  "Kasýrga Baron"		 ,
- 	  "Kasýrga Baron"		 ,
+ 	  "FÄ±rtÄ±na Baron"			 ,
+ 	  "KasÄ±rga Baron"		 ,
+ 	  "KasÄ±rga Baron"		 ,
  	  "Kudretli Baron"	 ,
  	  "Kudretli Baron"	 ,
 
- 	  "Ateþ Baron"   ,
- 	  "Ateþ Baron"   ,
+ 	  "AteÅŸ Baron"   ,
+ 	  "AteÅŸ Baron"   ,
  	  "Buz Baron"   ,
  	  "Buz Baron"   ,
- 	  "Þimþek Baron"  ,
+ 	  "ÅžimÅŸek Baron"  ,
 
- 	  "Þimþek Baron"  ,
+ 	  "ÅžimÅŸek Baron"  ,
  	  "Elementlerin Efendisi"   ,
  	  "Elementlerin Efendisi"   ,
- 	  "Bakýr Efendi"   ,
- 	  "Bakýr Efendi"  ,
+ 	  "BakÄ±r Efendi"   ,
+ 	  "BakÄ±r Efendi"  ,
 
  	  "Bronz Efendi"  ,
  	  "Bronz Efendi"   ,
- 	  "Pirinç Efendi"  ,
- 	  "Pirinç Efendi"   ,
+ 	  "PirinÃ§ Efendi"  ,
+ 	  "PirinÃ§ Efendi"   ,
  	  "Demir Efendi"   ,
 
  	  "Demir Efendi"   ,
- 	  "Çelik Efendi"  ,
- 	  "Çelik Efendi"   ,
+ 	  "Ã‡elik Efendi"  ,
+ 	  "Ã‡elik Efendi"   ,
  	  "Mitril Efendi"   ,
  	  "Mitril Efendi"  ,
 
  	  "Adamantit Efendi"   ,
  	  "Adamantit Efendi"  ,
- 	  "Yüzbaþý"   ,
- 	  "Yüzbaþý"  ,
+ 	  "YÃ¼zbaÅŸÄ±"   ,
+ 	  "YÃ¼zbaÅŸÄ±"  ,
  	  "General"   ,
 
  	  "General"  ,
- 	  "Kara Mareþali"  ,
- 	  "Kara Mareþali"  ,
- 	  "Savaþ Ustasý"   ,
- 	  "Savaþ Ustasý"  ,
+ 	  "Kara MareÅŸali"  ,
+ 	  "Kara MareÅŸali"  ,
+ 	  "SavaÅŸ UstasÄ±"   ,
+ 	  "SavaÅŸ UstasÄ±"  ,
 
  	  "Kahraman"		,
  	 "Melek"		,
  	 "Melek"		,
- 	 "Elçi"		,
- 	 "Ölümsüz"		,
- 	"Yüce"		,
- 	"Yüce",
- 	"Yüce",
- 	"Yüce",
+ 	 "ElÃ§i"		,
+ 	 "Ã–lÃ¼msÃ¼z"		,
+ 	"YÃ¼ce"		,
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
  	 "Tek"     },
 
        {
 
          "Man"                ,
 
-         "Paladin Yamaðý"		  ,
-         "Paladin Çýraðý"			 ,
+         "Paladin YamaÄŸÄ±"		  ,
+         "Paladin Ã‡Ä±raÄŸÄ±"			 ,
          "Kalkan"		   ,
          "Kalkan"		 ,
-         "Kýlýç"			 ,
+         "KÄ±lÄ±Ã§"			 ,
 
          "Yay"			 ,
-         "Taþýyýcý"		  ,
-         "Atlý"			 ,
-         "Bey Adayý"		 ,
+         "TaÅŸÄ±yÄ±cÄ±"		  ,
+         "AtlÄ±"			 ,
+         "Bey AdayÄ±"		 ,
          "Bey"		 ,
 
          "Piyade Neferi"   ,
          "Piyade Neferi"  ,
-         "Mýzrak Taþýyan" ,
-         "Mýzrak Taþýyan" ,
-         "Yay Taþýyan"  ,
+         "MÄ±zrak TaÅŸÄ±yan" ,
+         "MÄ±zrak TaÅŸÄ±yan" ,
+         "Yay TaÅŸÄ±yan"  ,
 
-         "Yay Taþýyan"   ,
-         "Kýlýç Taþýyan"   ,
-         "Kýlýç Taþýyan"  ,
+         "Yay TaÅŸÄ±yan"   ,
+         "KÄ±lÄ±Ã§ TaÅŸÄ±yan"   ,
+         "KÄ±lÄ±Ã§ TaÅŸÄ±yan"  ,
          "Onurlu"   ,
          "Onurlu"   ,
 
          "Soylu"   ,
          "Soylu"  ,
-         "Güvenilir"   ,
-         "Güvenilir"   ,
-         "Doðrucu"   ,
+         "GÃ¼venilir"   ,
+         "GÃ¼venilir"   ,
+         "DoÄŸrucu"   ,
 
-         "Doðrucu"  ,
-         "Yiðit"  ,
-         "Yiðit"  ,
+         "DoÄŸrucu"  ,
+         "YiÄŸit"  ,
+         "YiÄŸit"  ,
          "Paladin"   ,
          "Paladin"   ,
 
-         "Görevci"  ,
-         "Görevci"  ,
-         "Saygýn"   ,
-         "Saygýn"  ,
+         "GÃ¶revci"  ,
+         "GÃ¶revci"  ,
+         "SaygÄ±n"   ,
+         "SaygÄ±n"  ,
          "Savunan" ,
 
          "Savunan"  ,
-         "Þanlý Þövalye"  ,
-         "Þanlý Þövalye"   ,
-         "Paladin Þövalye"  ,
-         "Paladin Þövalye"   ,
+         "ÅžanlÄ± ÅžÃ¶valye"  ,
+         "ÅžanlÄ± ÅžÃ¶valye"   ,
+         "Paladin ÅžÃ¶valye"  ,
+         "Paladin ÅžÃ¶valye"   ,
 
-         "Arna Adayý"  ,
-         "Arna Adayý"   ,
-         "Dindar Þövalye"   ,
-         "Dindar Þövalye"  ,
-         "Dindar Þövalye"  ,
+         "Arna AdayÄ±"  ,
+         "Arna AdayÄ±"   ,
+         "Dindar ÅžÃ¶valye"   ,
+         "Dindar ÅžÃ¶valye"  ,
+         "Dindar ÅžÃ¶valye"  ,
 
-         "Dindar Þövalye"  ,
+         "Dindar ÅžÃ¶valye"  ,
          "Dindar Savunma"  ,
          "Dindar Savunma"   ,
-         "Þövalye Arna"  ,
-         "Þövalye Arna"   ,
+         "ÅžÃ¶valye Arna"  ,
+         "ÅžÃ¶valye Arna"   ,
 
-         "Arna Çýraðý"  ,
-         "Arna Çýraðý"   ,
+         "Arna Ã‡Ä±raÄŸÄ±"  ,
+         "Arna Ã‡Ä±raÄŸÄ±"   ,
          "Arna"   ,
          "Arna"  ,
-         "Arna Teðmen"  ,
+         "Arna TeÄŸmen"  ,
 
-         "Arna Teðmen"   ,
-         "Arna Yüzbaþý"  ,
-         "Arna Yüzbaþý"   ,
+         "Arna TeÄŸmen"   ,
+         "Arna YÃ¼zbaÅŸÄ±"  ,
+         "Arna YÃ¼zbaÅŸÄ±"   ,
          "Arna Albay"   ,
          "Arna Albay"   ,
 
          "Arna General"  ,
          "Arna General"  ,
-         "Arna Kara Mareþali"   ,
-         "Arna Kara Mareþali"   ,
-         "Þifacý Þövalye"  ,
+         "Arna Kara MareÅŸali"   ,
+         "Arna Kara MareÅŸali"   ,
+         "ÅžifacÄ± ÅžÃ¶valye"  ,
 
-         "Þifacý Þövalye"   ,
-         "Öc Alan"   ,
-         "Öc Alan"  ,
-         "Öncü"   ,
-         "Öncü"   ,
+         "ÅžifacÄ± ÅžÃ¶valye"   ,
+         "Ã–c Alan"   ,
+         "Ã–c Alan"  ,
+         "Ã–ncÃ¼"   ,
+         "Ã–ncÃ¼"   ,
 
-         "Öncü Lideri"  ,
-         "Öncü Lideri"   ,
-         "Öncülerin Lideri"  ,
-         "Öncülerin Lideri"  ,
+         "Ã–ncÃ¼ Lideri"  ,
+         "Ã–ncÃ¼ Lideri"   ,
+         "Ã–ncÃ¼lerin Lideri"  ,
+         "Ã–ncÃ¼lerin Lideri"  ,
          "Arna Lideri"   ,
 
          "Arna Lideri"  ,
-         "Arnalarýn Lideri"   ,
-         "Arnalarýn Lideri"   ,
-         "Arnalarýn Þanlý Lideri"   ,
-         "Arnalarýn Þanlý Lideri" ,
+         "ArnalarÄ±n Lideri"   ,
+         "ArnalarÄ±n Lideri"   ,
+         "ArnalarÄ±n ÅžanlÄ± Lideri"   ,
+         "ArnalarÄ±n ÅžanlÄ± Lideri" ,
 
-         "Arnalarýn Lordu"  ,
-         "Arnalarýn Lordu"  ,
-         "Ýnancýn Çekici"   ,
-         "Ýnancýn Çekici"  ,
+         "ArnalarÄ±n Lordu"  ,
+         "ArnalarÄ±n Lordu"  ,
+         "Ä°nancÄ±n Ã‡ekici"   ,
+         "Ä°nancÄ±n Ã‡ekici"  ,
          "Kafirlerin Katili"   ,
 
          "Kafirlerin Katili"  ,
          "Dindar"   ,
          "Dindar"   ,
-         "Kutsal Þövalye"  ,
-         "Kutsal Þövalye"   ,
+         "Kutsal ÅžÃ¶valye"  ,
+         "Kutsal ÅžÃ¶valye"   ,
 
          "Kahraman"		,
  	 "Melek"		,
  	 "Melek"		,
- 	 "Elçi"		,
- 	 "Ölümsüz"		,
- 	"Yüce"		,
- 	"Yüce",
- 	"Yüce",
- 	"Yüce",
+ 	 "ElÃ§i"		,
+ 	 "Ã–lÃ¼msÃ¼z"		,
+ 	"YÃ¼ce"		,
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
  	 "Tek"
       },
        {
@@ -1239,21 +1239,21 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
          "Cani"   ,
          "Cani"  ,
 
-         "Yaðmacý"   ,
+         "YaÄŸmacÄ±"   ,
          "Yokeden"  ,
          "Yakan"   ,
-         "Kiralýk Katil"   ,
+         "KiralÄ±k Katil"   ,
          "Kanunsuz"  				 ,
 
-         "Paralý Asker"   ,
-         "Paralý Asker"   ,
-         "Kara Kýlýç"  ,
-         "Kara Kýlýç"   ,
-         "Kýzýl Kýlýç"  ,
+         "ParalÄ± Asker"   ,
+         "ParalÄ± Asker"   ,
+         "Kara KÄ±lÄ±Ã§"  ,
+         "Kara KÄ±lÄ±Ã§"   ,
+         "KÄ±zÄ±l KÄ±lÄ±Ã§"  ,
 
-         "Kýzýl Kýlýç"   ,
-         "Süzülen" ,
-         "Süzülen"  ,
+         "KÄ±zÄ±l KÄ±lÄ±Ã§"   ,
+         "SÃ¼zÃ¼len" ,
+         "SÃ¼zÃ¼len"  ,
          "Gaddar"   ,
          "Gaddar" ,
 
@@ -1264,92 +1264,92 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
          "Nefret Edilen"  ,
 
          "Nefret Edilen"   ,
-         "Alçak"   ,
-         "Alçak"  ,
-         "Paladin Düþmaný"   ,
-         "Paladin Düþmaný" ,
+         "AlÃ§ak"   ,
+         "AlÃ§ak"  ,
+         "Paladin DÃ¼ÅŸmanÄ±"   ,
+         "Paladin DÃ¼ÅŸmanÄ±" ,
 
-         "Þeytani Dövüþçü"  ,
-         "Þeytani Dövüþçü"  ,
-         "Haydut Þövalye"  ,
-         "Haydut Þövalye"  ,
-         "Þeytani Savunucu"   ,
+         "Åžeytani DÃ¶vÃ¼ÅŸÃ§Ã¼"  ,
+         "Åžeytani DÃ¶vÃ¼ÅŸÃ§Ã¼"  ,
+         "Haydut ÅžÃ¶valye"  ,
+         "Haydut ÅžÃ¶valye"  ,
+         "Åžeytani Savunucu"   ,
 
-         "Þeytani Savunucu"  ,
-         "Kanlý"  ,
-         "Kanlý"   ,
-         "Kara Þövalye"   ,
-         "Kara Þövalye"   ,
+         "Åžeytani Savunucu"  ,
+         "KanlÄ±"  ,
+         "KanlÄ±"   ,
+         "Kara ÅžÃ¶valye"   ,
+         "Kara ÅžÃ¶valye"   ,
 
-         "Kýzýl Þövalye"  ,
-         "Kýzýl Þövalye"  ,
-         "Büyük Þövalye"  ,
-         "Büyük Þövalye"   ,
-         "Ýnançsýz Þövalye"   ,
+         "KÄ±zÄ±l ÅžÃ¶valye"  ,
+         "KÄ±zÄ±l ÅžÃ¶valye"  ,
+         "BÃ¼yÃ¼k ÅžÃ¶valye"  ,
+         "BÃ¼yÃ¼k ÅžÃ¶valye"   ,
+         "Ä°nanÃ§sÄ±z ÅžÃ¶valye"   ,
 
-         "Ýnançsýz Þövalye"   ,
-         "Acýnýn Þövalyesi"   ,
-         "Acýnýn Þövalyesi"  ,
-         "Lejyon Þövalyesi"   ,
-         "Lejyon Þövalyesi"   ,
+         "Ä°nanÃ§sÄ±z ÅžÃ¶valye"   ,
+         "AcÄ±nÄ±n ÅžÃ¶valyesi"   ,
+         "AcÄ±nÄ±n ÅžÃ¶valyesi"  ,
+         "Lejyon ÅžÃ¶valyesi"   ,
+         "Lejyon ÅžÃ¶valyesi"   ,
 
-         "Lejyon Þövalyesi"   ,
-         "Lejyon Þövalyesi"  ,
-         "Lejyon Savunmasý"  ,
-         "Lejyon Savunmasý"  ,
-         "Lejyon Yüzbaþýsý"   ,
+         "Lejyon ÅžÃ¶valyesi"   ,
+         "Lejyon ÅžÃ¶valyesi"  ,
+         "Lejyon SavunmasÄ±"  ,
+         "Lejyon SavunmasÄ±"  ,
+         "Lejyon YÃ¼zbaÅŸÄ±sÄ±"   ,
 
-         "Lejyon Yüzbaþýsý"   ,
+         "Lejyon YÃ¼zbaÅŸÄ±sÄ±"   ,
          "Lejyon Generali"   ,
          "Lejyon Generali"   ,
-         "Lejyon Kara Mareþali" ,
-         "Lejyon Kara Mareþali"   ,
+         "Lejyon Kara MareÅŸali" ,
+         "Lejyon Kara MareÅŸali"   ,
 
-         "Kýyamet Þövalyesi"  ,
-         "Kýyamet Þövalyesi" ,
-         "Iþýðý kesen"   ,
-         "Iþýðý Kesen"   ,
-         "Acýnýn Efendisi"   ,
+         "KÄ±yamet ÅžÃ¶valyesi"  ,
+         "KÄ±yamet ÅžÃ¶valyesi" ,
+         "IÅŸÄ±ÄŸÄ± kesen"   ,
+         "IÅŸÄ±ÄŸÄ± Kesen"   ,
+         "AcÄ±nÄ±n Efendisi"   ,
 
-         "Acýnýn Efendisi"   ,
-         "Ölü Efendisi"   ,
-         "Ölü Efendisi"   ,
-         "Karanlýk Þövalye"  ,
-         "Karanlýk Þövalye"   ,
+         "AcÄ±nÄ±n Efendisi"   ,
+         "Ã–lÃ¼ Efendisi"   ,
+         "Ã–lÃ¼ Efendisi"   ,
+         "KaranlÄ±k ÅžÃ¶valye"  ,
+         "KaranlÄ±k ÅžÃ¶valye"   ,
 
-         "Karanlýk Lord"   ,
-         "Karanlýk Lord"   ,
-         "Karanlýk Kral"   ,
-         "Karanlýk Kral"   ,
-         "Ölüm Habercisi"   ,
+         "KaranlÄ±k Lord"   ,
+         "KaranlÄ±k Lord"   ,
+         "KaranlÄ±k Kral"   ,
+         "KaranlÄ±k Kral"   ,
+         "Ã–lÃ¼m Habercisi"   ,
 
-         "Ölüm Habercisi"   ,
-         "Ölüm Yayan"   ,
-         "Ölüm Yayan"   ,
-         "Kýtlýk Getiren"   ,
-         "Kýtlýk Getiren"   ,
+         "Ã–lÃ¼m Habercisi"   ,
+         "Ã–lÃ¼m Yayan"   ,
+         "Ã–lÃ¼m Yayan"   ,
+         "KÄ±tlÄ±k Getiren"   ,
+         "KÄ±tlÄ±k Getiren"   ,
 
-         "Ölüm Getiren"   ,
-         "Ölüm Getiren"   ,
-         "Onursuz Ýnançsýz"  ,
-         "Onursuz Ýnançsýz"  ,
+         "Ã–lÃ¼m Getiren"   ,
+         "Ã–lÃ¼m Getiren"   ,
+         "Onursuz Ä°nanÃ§sÄ±z"  ,
+         "Onursuz Ä°nanÃ§sÄ±z"  ,
          "Katleden"   ,
 
          "Katleden"   ,
-         "Karanlýk Tohum"   ,
-         "Karanlýk Tohum"  ,
-         "Onursuz Þövalye"   ,
-         "Onursuz Þövalye"  ,
+         "KaranlÄ±k Tohum"   ,
+         "KaranlÄ±k Tohum"  ,
+         "Onursuz ÅžÃ¶valye"   ,
+         "Onursuz ÅžÃ¶valye"  ,
 
          "Kahraman"		,
  	 "Melek"		,
  	 "Melek"		,
- 	 "Elçi"		,
- 	 "Ölümsüz"		,
- 	"Yüce"		,
- 	"Yüce",
- 	"Yüce",
- 	"Yüce",
+ 	 "ElÃ§i"		,
+ 	 "Ã–lÃ¼msÃ¼z"		,
+ 	"YÃ¼ce"		,
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
  	 "Tek"	 },
 
        {
@@ -1357,15 +1357,15 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
 
          "Uke"   ,
          "Tori"   ,
-         "Beyaz Kuþak"  ,
-         "Sarý Kuþak"   ,
-         "Yeþil Kuþak"   ,
+         "Beyaz KuÅŸak"  ,
+         "SarÄ± KuÅŸak"   ,
+         "YeÅŸil KuÅŸak"   ,
 
-         "Kahverengi Üç"   ,
-         "Kahverengi Ýki" ,
+         "Kahverengi ÃœÃ§"   ,
+         "Kahverengi Ä°ki" ,
          "Kahverengi Bir"  ,
-         "Siyah Üç"   ,
-         "Siyah Ýki"   ,
+         "Siyah ÃœÃ§"   ,
+         "Siyah Ä°ki"   ,
 
          "Okuiri"   ,
          "Okuiri"   ,
@@ -1391,25 +1391,25 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
          "Kasokutei"   ,
          "Kasokutei"  ,
 
-         "Atemi Waza Ustasý"   ,
-         "Atemi Waza Ustasý"  ,
-         "Kotegaeshi Ustasý"   ,
-         "Kotegaeshi Ustasý"  ,
-         "Kansetsuwaza Ustasý"   ,
+         "Atemi Waza UstasÄ±"   ,
+         "Atemi Waza UstasÄ±"  ,
+         "Kotegaeshi UstasÄ±"   ,
+         "Kotegaeshi UstasÄ±"  ,
+         "Kansetsuwaza UstasÄ±"   ,
 
-         "Kansetsuwaza Ustasý"  ,
-         "Taisabaki Ustasý"   ,
-         "Taisabaki Ustasý"  ,
-         "Kyusho Ustasý"   ,
-         "Kyusho Ustasý"  ,
+         "Kansetsuwaza UstasÄ±"  ,
+         "Taisabaki UstasÄ±"   ,
+         "Taisabaki UstasÄ±"  ,
+         "Kyusho UstasÄ±"   ,
+         "Kyusho UstasÄ±"  ,
 
-         "Kamae Öðrencisi"  ,
-         "Kamae Öðrencisi"   ,
-         "Kamae Ustasý"  ,
-         "Kamae Ustasý"  ,
-         "Ukemi Ustasý"   ,
+         "Kamae Ã–ÄŸrencisi"  ,
+         "Kamae Ã–ÄŸrencisi"   ,
+         "Kamae UstasÄ±"  ,
+         "Kamae UstasÄ±"  ,
+         "Ukemi UstasÄ±"   ,
 
-         "Ukemi Ustasý"  ,
+         "Ukemi UstasÄ±"  ,
          "Mokuroku"   ,
          "Mokuroku"  ,
          "Ogoshi"  ,
@@ -1434,20 +1434,20 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
          "Yama Arashi"   ,
 
          "Yama Arashi"   ,
-         "Nage Waza Ustasý"   ,
-         "Nage Waza Ustasý"   ,
-         "Owazaya Giriþ"  ,
-         "Owazaya Giriþ"   ,
+         "Nage Waza UstasÄ±"   ,
+         "Nage Waza UstasÄ±"   ,
+         "Owazaya GiriÅŸ"  ,
+         "Owazaya GiriÅŸ"   ,
 
-         "Owaza Çýraðý" ,
-         "Owaza Çýraðý"   ,
-         "Owaza Öðrencisi"  ,
-         "Owaza Öðrencisi"   ,
+         "Owaza Ã‡Ä±raÄŸÄ±" ,
+         "Owaza Ã‡Ä±raÄŸÄ±"   ,
+         "Owaza Ã–ÄŸrencisi"  ,
+         "Owaza Ã–ÄŸrencisi"   ,
          "Owaza"   ,
 
          "Owaza"   ,
-         "Owaza Ustasý"  ,
-         "Owaza Ustasý"  ,
+         "Owaza UstasÄ±"  ,
+         "Owaza UstasÄ±"  ,
          "Menkyo"  ,
          "Menkyo"   ,
 
@@ -1460,18 +1460,18 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
          "Shihan"   ,
          "Kaiden"   ,
          "Kaiden"   ,
-         "Miyama Ryu Ustasý"  ,
-         "Miyama Ryu Ustasý" ,
+         "Miyama Ryu UstasÄ±"  ,
+         "Miyama Ryu UstasÄ±" ,
 
          "Kahraman"		,
  	 "Melek"		,
  	 "Melek"		,
- 	 "Elçi"		,
- 	 "Ölümsüz"		,
- 	"Yüce"		,
- 	"Yüce",
- 	"Yüce",
- 	"Yüce",
+ 	 "ElÃ§i"		,
+ 	 "Ã–lÃ¼msÃ¼z"		,
+ 	"YÃ¼ce"		,
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
  	 "Tek"
       },
       {
@@ -1480,37 +1480,37 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
 
          "Yavru Kurt"   ,
          "Yavru Kurt"   ,
-         "Ýzci"   ,
-         "Ýzci"   ,
+         "Ä°zci"   ,
+         "Ä°zci"   ,
          "Korucu"  ,
 
          "Korucu"   ,
-         "Tuzakçý"  ,
-         "Tuzakçý"  ,
-         "Avcý"  ,
-         "Avcý"			 			 ,
+         "TuzakÃ§Ä±"  ,
+         "TuzakÃ§Ä±"  ,
+         "AvcÄ±"  ,
+         "AvcÄ±"			 			 ,
 
-         "Ýz Sürücü"   ,
-         "Ýz Sürücü"  ,
-         "Öncü" ,
-         "Öncü"  ,
-         "Yeþil Adam"   ,
+         "Ä°z SÃ¼rÃ¼cÃ¼"   ,
+         "Ä°z SÃ¼rÃ¼cÃ¼"  ,
+         "Ã–ncÃ¼" ,
+         "Ã–ncÃ¼"  ,
+         "YeÅŸil Adam"   ,
 
-         "Yeþil Adam"  ,
-         "Okçu"   ,
-         "Okçu"   ,
-         "Aðaç Adam"   ,
-         "Aðaç Adam"  ,
+         "YeÅŸil Adam"  ,
+         "OkÃ§u"   ,
+         "OkÃ§u"   ,
+         "AÄŸaÃ§ Adam"   ,
+         "AÄŸaÃ§ Adam"  ,
 
-         "Aðaç Ustasý"  ,
-         "Aðaç Ustasý"  ,
-         "Kolcu Çýrak"  ,
-         "Kolcu Çýrak"  ,
-         "Kolcu Adayý"   ,
+         "AÄŸaÃ§ UstasÄ±"  ,
+         "AÄŸaÃ§ UstasÄ±"  ,
+         "Kolcu Ã‡Ä±rak"  ,
+         "Kolcu Ã‡Ä±rak"  ,
+         "Kolcu AdayÄ±"   ,
 
-         "Kolcu Adayý"   ,
-         "Kolcu Kalfasý"   ,
-         "Kolcu Kalfasý"  ,
+         "Kolcu AdayÄ±"   ,
+         "Kolcu KalfasÄ±"   ,
+         "Kolcu KalfasÄ±"  ,
          "Kolcu"   ,
          "Kolcu"   ,
 
@@ -1521,25 +1521,25 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
          "Kolcu"   ,
 
          "Kolcu"  ,
-         "Kolcu Yüzbaþý"  ,
-         "Kolcu Yüzbaþý"   ,
-         "Büyük Korucu"  ,
-         "Büyük Korucu"  ,
+         "Kolcu YÃ¼zbaÅŸÄ±"  ,
+         "Kolcu YÃ¼zbaÅŸÄ±"   ,
+         "BÃ¼yÃ¼k Korucu"  ,
+         "BÃ¼yÃ¼k Korucu"  ,
 
-         "Korucu Yüzbaþý" ,
-         "Korucu Yüzbaþý"   ,
+         "Korucu YÃ¼zbaÅŸÄ±" ,
+         "Korucu YÃ¼zbaÅŸÄ±"   ,
          "Korucu General"   ,
          "Korucu General"   ,
-         "Korucularýn Efendisi"   ,
+         "KorucularÄ±n Efendisi"   ,
 
-         "Korucularýn Efendisi"   ,
-         "Ormanýn Þövalyesi"   ,
-         "Ormanýn Þövalyesi" ,
-         "Ormanýn Kýlýcý"  ,
-         "Ormanýn Kýlýcý"   ,
+         "KorucularÄ±n Efendisi"   ,
+         "OrmanÄ±n ÅžÃ¶valyesi"   ,
+         "OrmanÄ±n ÅžÃ¶valyesi" ,
+         "OrmanÄ±n KÄ±lÄ±cÄ±"  ,
+         "OrmanÄ±n KÄ±lÄ±cÄ±"   ,
 
-         "Orman Gardý"   ,
-         "Orman Gardý"  ,
+         "Orman GardÄ±"   ,
+         "Orman GardÄ±"  ,
          "Orman Lordu"   ,
          "Orman Lordu"  ,
          "Orman Lordu"   ,
@@ -1547,20 +1547,20 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
          "Orman Lordu"   ,
          "Orman Baronu"   ,
          "Orman Baronu"  ,
-         "Ormanlarýn Baronu"  ,
-         "Ormanlarýn Baronu"  ,
+         "OrmanlarÄ±n Baronu"  ,
+         "OrmanlarÄ±n Baronu"  ,
 
          "Avlayan"  ,
          "Avlayan"  ,
- 	"Sakýnan" ,
- 	"Sakýnan" ,
+ 	"SakÄ±nan" ,
+ 	"SakÄ±nan" ,
  	"Koruyan" ,
 
  	"Koruyan",
-         "Kolcu Þövalye"   ,
-         "Kolcu Þövalye" ,
-         "Kolcu Þövalye"   ,
-         "Kolcu Þövalye"  ,
+         "Kolcu ÅžÃ¶valye"   ,
+         "Kolcu ÅžÃ¶valye" ,
+         "Kolcu ÅžÃ¶valye"   ,
+         "Kolcu ÅžÃ¶valye"  ,
 
          "Kolcu Lord"   ,
          "Kolcu Lord"  ,
@@ -1576,147 +1576,147 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
 
          "Selvan",
  	"Selvan" ,
-         "Ormanlarýn Sesi"  ,
-         "Ormanlarýn Sesi"   ,
- 	"Ormanlarýn Sesi"   ,
+         "OrmanlarÄ±n Sesi"  ,
+         "OrmanlarÄ±n Sesi"   ,
+ 	"OrmanlarÄ±n Sesi"   ,
 
-         "Ýzleyen"   ,
-         "Ýzleyen"   ,
- 	"Ýzleyen"
- 	"Ýzleyen"
- 	"Ýzleyen"
+         "Ä°zleyen"   ,
+         "Ä°zleyen"   ,
+ 	"Ä°zleyen"
+ 	"Ä°zleyen"
+ 	"Ä°zleyen"
 
          "Kahraman"		,
  	 "Melek"		,
  	 "Melek"		,
- 	 "Elçi"		,
- 	 "Ölümsüz"		,
- 	"Yüce"		,
- 	"Yüce",
- 	"Yüce",
- 	"Yüce",
+ 	 "ElÃ§i"		,
+ 	 "Ã–lÃ¼msÃ¼z"		,
+ 	"YÃ¼ce"		,
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
  	 "Tek"
       },
        {
          "Man" ,
 
-         "Büyü Çýraðý"		 ,
-         "Büyü Öðrencisi"	 ,
-         "Büyü Asistaný"	 ,
-         "Büyü Araþtýran"		 ,
+         "BÃ¼yÃ¼ Ã‡Ä±raÄŸÄ±"		 ,
+         "BÃ¼yÃ¼ Ã–ÄŸrencisi"	 ,
+         "BÃ¼yÃ¼ AsistanÄ±"	 ,
+         "BÃ¼yÃ¼ AraÅŸtÄ±ran"		 ,
          "Sihirbaz"	 ,
 
-         "Büyü Katibi"	 ,
-         "Falcý"		 ,
+         "BÃ¼yÃ¼ Katibi"	 ,
+         "FalcÄ±"		 ,
          "Arif"		 ,
-         "Ýlüzyonist"		 ,
-         "Tövbekar"		 ,
+         "Ä°lÃ¼zyonist"		 ,
+         "TÃ¶vbekar"		 ,
 
-         "Duacý"		 ,
-         "Duacý"		 ,
-         "Büyü Yapan"		 ,
-         "Büyü Yapan"		 ,
+         "DuacÄ±"		 ,
+         "DuacÄ±"		 ,
+         "BÃ¼yÃ¼ Yapan"		 ,
+         "BÃ¼yÃ¼ Yapan"		 ,
          "Hokkabaz"		 ,
 
          "Hokkabaz" ,
-         "Büyücü"	 ,
-         "Büyücü"	 ,
- 	"Oluþturan" ,
- 	"Oluþturan" ,
+         "BÃ¼yÃ¼cÃ¼"	 ,
+         "BÃ¼yÃ¼cÃ¼"	 ,
+ 	"OluÅŸturan" ,
+ 	"OluÅŸturan" ,
 
          "Alim"		 ,
          "Alim"		 ,
-         "Büyü Ustasý"			 ,
-         "Büyü Ustasý"			 ,
-         "Büyü Alimi"		 ,
+         "BÃ¼yÃ¼ UstasÄ±"			 ,
+         "BÃ¼yÃ¼ UstasÄ±"			 ,
+         "BÃ¼yÃ¼ Alimi"		 ,
 
-         "Büyü Alimi"		 ,
-         "Savaþçý Arif"		 ,
-         "Savaþçý Arif"		 ,
-         "Durendiþ"	 ,
-         "Durendiþ"	 ,
+         "BÃ¼yÃ¼ Alimi"		 ,
+         "SavaÅŸÃ§Ä± Arif"		 ,
+         "SavaÅŸÃ§Ä± Arif"		 ,
+         "DurendiÅŸ"	 ,
+         "DurendiÅŸ"	 ,
 
-         "Kýdemli Büyücü"		 ,
-         "Kýdemli Büyücü"		 ,
-         "Büyük Büyücü"		 ,
-         "Büyük Büyücü"	 ,
-         "Yüce Büyücü"		 ,
+         "KÄ±demli BÃ¼yÃ¼cÃ¼"		 ,
+         "KÄ±demli BÃ¼yÃ¼cÃ¼"		 ,
+         "BÃ¼yÃ¼k BÃ¼yÃ¼cÃ¼"		 ,
+         "BÃ¼yÃ¼k BÃ¼yÃ¼cÃ¼"	 ,
+         "YÃ¼ce BÃ¼yÃ¼cÃ¼"		 ,
 
-         "Yüce Büyücü"	 ,
+         "YÃ¼ce BÃ¼yÃ¼cÃ¼"	 ,
          "Golem Efendisi"		 ,
          "Golem Efendisi"	 ,
-         "Yüce Golem Efendisi"		 ,
-         "Yüce Golem Efendisi"	 ,
+         "YÃ¼ce Golem Efendisi"		 ,
+         "YÃ¼ce Golem Efendisi"	 ,
 
- 	  "Taþ Efendisi"	 ,
- 	  "Taþ Efendisi"	 ,
- 	  "Ýksir Ustasý"	 ,
- 	  "Ýksir Ustasý"	 ,
- 	  "Parþömen Ustasý"	 ,
+ 	  "TaÅŸ Efendisi"	 ,
+ 	  "TaÅŸ Efendisi"	 ,
+ 	  "Ä°ksir UstasÄ±"	 ,
+ 	  "Ä°ksir UstasÄ±"	 ,
+ 	  "ParÅŸÃ¶men UstasÄ±"	 ,
 
- 	  "Parþömen Ustasý"	 ,
- 	  "Deðnek Ustasý"	 ,
- 	  "Deðnek Ustasý"		 ,
- 	  "Deðnek Ustasý"	 ,
- 	  "Deðnek Ustasý"		 ,
+ 	  "ParÅŸÃ¶men UstasÄ±"	 ,
+ 	  "DeÄŸnek UstasÄ±"	 ,
+ 	  "DeÄŸnek UstasÄ±"		 ,
+ 	  "DeÄŸnek UstasÄ±"	 ,
+ 	  "DeÄŸnek UstasÄ±"		 ,
 
- 	  "Ýblis Çaðýran"	 ,
- 	  "Ýblis Çaðýran"		 ,
- 	  "Yüce Ýblis Çaðýran"	 ,
- 	  "Yüce Ýblis Çaðýran" ,
+ 	  "Ä°blis Ã‡aÄŸÄ±ran"	 ,
+ 	  "Ä°blis Ã‡aÄŸÄ±ran"		 ,
+ 	  "YÃ¼ce Ä°blis Ã‡aÄŸÄ±ran"	 ,
+ 	  "YÃ¼ce Ä°blis Ã‡aÄŸÄ±ran" ,
  	  "Ejderha Efendisi"		 ,
 
  	  "Ejderha Efendisi"		 ,
  	  "Ejderha Efendisi"	 ,
  	  "Ejderha Efendisi" ,
-         "Karýþým Efendisi" ,
-         "Karýþým Efendisi" ,
+         "KarÄ±ÅŸÄ±m Efendisi" ,
+         "KarÄ±ÅŸÄ±m Efendisi" ,
 
-         "Büyülerin Efendisi" ,
-         "Büyülerin Efendisi" ,
-         "Büyüleme Efendisi" ,
-         "Büyüleme Efendisi" ,
-         "Çaðrý Ustasý" ,
+         "BÃ¼yÃ¼lerin Efendisi" ,
+         "BÃ¼yÃ¼lerin Efendisi" ,
+         "BÃ¼yÃ¼leme Efendisi" ,
+         "BÃ¼yÃ¼leme Efendisi" ,
+         "Ã‡aÄŸrÄ± UstasÄ±" ,
 
-         "Çaðrý Ustasý" ,
-         "Büyük Kahin" ,
-         "Büyük Kahin" ,
-         "Deðiþim Ustasý" ,
-         "Deðiþim Ustasý" ,
+         "Ã‡aÄŸrÄ± UstasÄ±" ,
+         "BÃ¼yÃ¼k Kahin" ,
+         "BÃ¼yÃ¼k Kahin" ,
+         "DeÄŸiÅŸim UstasÄ±" ,
+         "DeÄŸiÅŸim UstasÄ±" ,
 
-         "Fiþek Efendisi" ,
-         "Fiþek Efendisi" ,
-         "Ölülerin Efendisi" ,
-         "Ölülerin Efendisi" ,
-         "Simyacý" ,
+         "FiÅŸek Efendisi" ,
+         "FiÅŸek Efendisi" ,
+         "Ã–lÃ¼lerin Efendisi" ,
+         "Ã–lÃ¼lerin Efendisi" ,
+         "SimyacÄ±" ,
 
-         "Simyacý" ,
-         "Bað Ustasý" ,
-         "Bað Ustasý" ,
-         "Söz Efendisi" ,
-         "Söz Efendisi" ,
+         "SimyacÄ±" ,
+         "BaÄŸ UstasÄ±" ,
+         "BaÄŸ UstasÄ±" ,
+         "SÃ¶z Efendisi" ,
+         "SÃ¶z Efendisi" ,
 
-         "Geçmiþe hükmeden" ,
-         "Geçmiþe hükmeden" ,
-         "Bugüne hükmeden" ,
-         "Bugüne hükmeden" ,
-         "Geleceðe hükmeden" ,
+         "GeÃ§miÅŸe hÃ¼kmeden" ,
+         "GeÃ§miÅŸe hÃ¼kmeden" ,
+         "BugÃ¼ne hÃ¼kmeden" ,
+         "BugÃ¼ne hÃ¼kmeden" ,
+         "GeleceÄŸe hÃ¼kmeden" ,
 
-         "Geleceðe hükmeden" ,
-         "Baþ Büyücü" ,
-         "Baþ Büyücü" ,
+         "GeleceÄŸe hÃ¼kmeden" ,
+         "BaÅŸ BÃ¼yÃ¼cÃ¼" ,
+         "BaÅŸ BÃ¼yÃ¼cÃ¼" ,
          "Bilinmeyen" ,
          "Bilinmeyen" ,
 
  	  "Kahraman"		,
  	 "Melek"		,
  	 "Melek"		,
- 	 "Elçi"		,
- 	 "Ölümsüz"		,
- 	"Yüce"		,
- 	"Yüce",
- 	"Yüce",
- 	"Yüce",
+ 	 "ElÃ§i"		,
+ 	 "Ã–lÃ¼msÃ¼z"		,
+ 	"YÃ¼ce"		,
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
  	 "Tek"
       },
       {
@@ -1724,60 +1724,60 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
            "Man"		 ,
 
  	  "Acemi"	 ,
- 	  "Çaylak"	 ,
- 	  "Nöbetçi" ,
- 	  "Dövüþçü" ,
+ 	  "Ã‡aylak"	 ,
+ 	  "NÃ¶betÃ§i" ,
+ 	  "DÃ¶vÃ¼ÅŸÃ§Ã¼" ,
  	  "Asker"		 ,
 
- 	  "Savaþan"	 ,
- 	  "Kýdemli"		 ,
- 	  "Kýlýç Çeken"	 ,
+ 	  "SavaÅŸan"	 ,
+ 	  "KÄ±demli"		 ,
+ 	  "KÄ±lÄ±Ã§ Ã‡eken"	 ,
  	  "Eskrimci"	 ,
- 	  "Savaþçý"		 ,
+ 	  "SavaÅŸÃ§Ä±"		 ,
 
  	  "Kahraman"	 ,
  	  "Kahraman"	 ,
- 	  "Þanlý"	 ,
- 	  "Þanlý"	 ,
+ 	  "ÅžanlÄ±"	 ,
+ 	  "ÅžanlÄ±"	 ,
  	  "Gri Kalkan"	 ,
 
  	  "Gri Kalkan"		 ,
- 	  "Paralý Asker"		 ,
- 	  "Paralý Asker"		 ,
- 	  "Kýlýç Ustasý"	 ,
- 	  "Kýlýç Ustasý"	 ,
+ 	  "ParalÄ± Asker"		 ,
+ 	  "ParalÄ± Asker"		 ,
+ 	  "KÄ±lÄ±Ã§ UstasÄ±"	 ,
+ 	  "KÄ±lÄ±Ã§ UstasÄ±"	 ,
 
- 	  "Teðmen"		 ,
- 	  "Teðmen"		 ,
+ 	  "TeÄŸmen"		 ,
+ 	  "TeÄŸmen"		 ,
  	  "Savunan"	 ,
  	  "Savunan"	 ,
  	  "Dragon"		 ,
 
  	  "Dragon"			 ,
- 	  "Saygýsýz"		 ,
- 	  "Saygýsýz"	 ,
- 	  "Þövalye"		 ,
- 	  "Þövalye"	 ,
+ 	  "SaygÄ±sÄ±z"		 ,
+ 	  "SaygÄ±sÄ±z"	 ,
+ 	  "ÅžÃ¶valye"		 ,
+ 	  "ÅžÃ¶valye"	 ,
 
- 	  "Büyük Þövalye"				 ,
- 	  "Büyük Þövalye"				 ,
- 	  "Efendi Þövalye"					 ,
- 	  "Efendi Þövalye"				 ,
- 	  "Gladyatör"					 ,
+ 	  "BÃ¼yÃ¼k ÅžÃ¶valye"				 ,
+ 	  "BÃ¼yÃ¼k ÅžÃ¶valye"				 ,
+ 	  "Efendi ÅžÃ¶valye"					 ,
+ 	  "Efendi ÅžÃ¶valye"				 ,
+ 	  "GladyatÃ¶r"					 ,
 
- 	  "Gladyatör"				 ,
- 	  "Efendi Gladyatör"				 ,
- 	  "Efendi Gladyatör"			 ,
- 	  "Ýblis Katleden"					 ,
- 	  "Ýblis Katleden"				 ,
+ 	  "GladyatÃ¶r"				 ,
+ 	  "Efendi GladyatÃ¶r"				 ,
+ 	  "Efendi GladyatÃ¶r"			 ,
+ 	  "Ä°blis Katleden"					 ,
+ 	  "Ä°blis Katleden"				 ,
 
- 	  "Büyük Ýblis Katleden"		 ,
- 	  "Büyük Ýblis Katleden"			 ,
+ 	  "BÃ¼yÃ¼k Ä°blis Katleden"		 ,
+ 	  "BÃ¼yÃ¼k Ä°blis Katleden"			 ,
  	  "Ejder Katili"				 ,
  	  "Ejder Katili"				 ,
- 	  "Büyük Ejder Katili"		 ,
+ 	  "BÃ¼yÃ¼k Ejder Katili"		 ,
 
- 	  "Büyük Ejder Katili"		 ,
+ 	  "BÃ¼yÃ¼k Ejder Katili"		 ,
  	  "Lord"						 ,
  	  "Lord"				 ,
  	  "Efendi"						 ,
@@ -1785,429 +1785,429 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
 
  	  "Baron"			 ,
  	  "Baron"		 ,
- 	  "Rüzgar Baron"			 ,
- 	  "Rüzgar Baron"				 ,
- 	  "Fýrtýna Baron"			 ,
+ 	  "RÃ¼zgar Baron"			 ,
+ 	  "RÃ¼zgar Baron"				 ,
+ 	  "FÄ±rtÄ±na Baron"			 ,
 
- 	  "Fýrtýna Baron"			 ,
- 	  "Kasýrga Baron"		 ,
- 	  "Kasýrga Baron"		 ,
+ 	  "FÄ±rtÄ±na Baron"			 ,
+ 	  "KasÄ±rga Baron"		 ,
+ 	  "KasÄ±rga Baron"		 ,
  	  "Kudretli Baron"  ,
  	  "Kudretli Baron" ,
 
- 	  "Ateþ Baron"   ,
- 	  "Ateþ Baron"   ,
+ 	  "AteÅŸ Baron"   ,
+ 	  "AteÅŸ Baron"   ,
  	  "Buz Baron"   ,
  	  "Buz Baron"   ,
- 	  "Þimþek Baron"  ,
+ 	  "ÅžimÅŸek Baron"  ,
 
- 	  "Þimþek Baron"  ,
+ 	  "ÅžimÅŸek Baron"  ,
  	  "Elementlerin Efendisi"   ,
  	  "Elementlerin Efendisi"   ,
- 	  "Bakýr Efendi"   ,
- 	  "Bakýr Efendi"  ,
+ 	  "BakÄ±r Efendi"   ,
+ 	  "BakÄ±r Efendi"  ,
 
  	  "Bronz Efendi"  ,
  	  "Bronz Efendi"   ,
- 	  "Pirinç Efendi"  ,
- 	  "Pirinç Efendi"   ,
+ 	  "PirinÃ§ Efendi"  ,
+ 	  "PirinÃ§ Efendi"   ,
  	  "Demir Efendi"   ,
 
  	  "Demir Efendi"   ,
- 	  "Çelik Efendi"  ,
- 	  "Çelik Efendi"   ,
+ 	  "Ã‡elik Efendi"  ,
+ 	  "Ã‡elik Efendi"   ,
  	  "Mitril Efendi"   ,
  	  "Mitril Efendi"  ,
 
  	  "Adamantit Efendi"   ,
  	  "Adamantit Efendi"  ,
- 	  "Yüzbaþý"   ,
- 	  "Yüzbaþý"  ,
+ 	  "YÃ¼zbaÅŸÄ±"   ,
+ 	  "YÃ¼zbaÅŸÄ±"  ,
  	  "General"   ,
 
  	  "General"  ,
- 	  "Kara Mareþali"  ,
- 	  "Kara Mareþali"  ,
- 	  "Savaþ Ustasý"   ,
- 	  "Savaþ Ustasý"  ,
+ 	  "Kara MareÅŸali"  ,
+ 	  "Kara MareÅŸali"  ,
+ 	  "SavaÅŸ UstasÄ±"   ,
+ 	  "SavaÅŸ UstasÄ±"  ,
 
  	  "Kahraman"		,
  	 "Melek"		,
  	 "Melek"		,
- 	 "Elçi"		,
- 	 "Ölümsüz"		,
- 	"Yüce"		,
- 	"Yüce",
- 	"Yüce",
- 	"Yüce",
+ 	 "ElÃ§i"		,
+ 	 "Ã–lÃ¼msÃ¼z"		,
+ 	"YÃ¼ce"		,
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
  	 "Tek"
       },
        {
          "Man" ,
 
-         "Büyü Çýraðý"		 ,
-         "Büyü Öðrencisi"	 ,
-         "Büyü Asistaný"	 ,
-         "Büyü Araþtýran"		 ,
+         "BÃ¼yÃ¼ Ã‡Ä±raÄŸÄ±"		 ,
+         "BÃ¼yÃ¼ Ã–ÄŸrencisi"	 ,
+         "BÃ¼yÃ¼ AsistanÄ±"	 ,
+         "BÃ¼yÃ¼ AraÅŸtÄ±ran"		 ,
          "Sihirbaz"	 ,
 
-         "Büyü Katibi"	 ,
-         "Falcý"		 ,
+         "BÃ¼yÃ¼ Katibi"	 ,
+         "FalcÄ±"		 ,
          "Arif"		 ,
-         "Ýlüzyonist"		 ,
-         "Tövbekar"		 ,
+         "Ä°lÃ¼zyonist"		 ,
+         "TÃ¶vbekar"		 ,
 
-         "Duacý"		 ,
-         "Duacý"		 ,
-         "Büyü Yapan"		 ,
-         "Büyü Yapan"		 ,
+         "DuacÄ±"		 ,
+         "DuacÄ±"		 ,
+         "BÃ¼yÃ¼ Yapan"		 ,
+         "BÃ¼yÃ¼ Yapan"		 ,
          "Hokkabaz"		 ,
 
          "Hokkabaz"		 ,
-         "Büyücü"		 ,
-         "Büyücü"		 ,
- 	"Oluþturan"    ,
- 	"Oluþturan" ,
+         "BÃ¼yÃ¼cÃ¼"		 ,
+         "BÃ¼yÃ¼cÃ¼"		 ,
+ 	"OluÅŸturan"    ,
+ 	"OluÅŸturan" ,
 
          "Alim"	 ,
          "Alim"	 ,
-         "Büyü Ustasý"		 ,
-         "Büyü Ustasý"		 ,
-         "Büyü Alimi"	 ,
+         "BÃ¼yÃ¼ UstasÄ±"		 ,
+         "BÃ¼yÃ¼ UstasÄ±"		 ,
+         "BÃ¼yÃ¼ Alimi"	 ,
 
-         "Büyü Alimi"		 ,
-         "Savaþçý Arif"		 ,
-         "Savaþçý Arif"		 ,
-         "Durendiþ"	 ,
-         "Durendiþ"	 ,
+         "BÃ¼yÃ¼ Alimi"		 ,
+         "SavaÅŸÃ§Ä± Arif"		 ,
+         "SavaÅŸÃ§Ä± Arif"		 ,
+         "DurendiÅŸ"	 ,
+         "DurendiÅŸ"	 ,
 
-         "Kýdemli Büyücü"		 ,
-         "Kýdemli Büyücü"		 ,
-         "Büyük Büyücü"		 ,
-         "Büyük Büyücü"	 ,
-         "Yüce Büyücü"		 ,
+         "KÄ±demli BÃ¼yÃ¼cÃ¼"		 ,
+         "KÄ±demli BÃ¼yÃ¼cÃ¼"		 ,
+         "BÃ¼yÃ¼k BÃ¼yÃ¼cÃ¼"		 ,
+         "BÃ¼yÃ¼k BÃ¼yÃ¼cÃ¼"	 ,
+         "YÃ¼ce BÃ¼yÃ¼cÃ¼"		 ,
 
-         "Yüce Büyücü"	 ,
+         "YÃ¼ce BÃ¼yÃ¼cÃ¼"	 ,
          "Golem Efendisi"		 ,
          "Golem Efendisi"	 ,
-         "Yüce Golem Efendisi"		 ,
-         "Yüce Golem Efendisi"	 ,
+         "YÃ¼ce Golem Efendisi"		 ,
+         "YÃ¼ce Golem Efendisi"	 ,
 
- 	  "Taþ Efendisi"	 ,
- 	  "Taþ Efendisi"	 ,
- 	  "Ýksir Ustasý"	 ,
- 	  "Ýksir Ustasý"	 ,
- 	  "Parþömen Ustasý"	 ,
+ 	  "TaÅŸ Efendisi"	 ,
+ 	  "TaÅŸ Efendisi"	 ,
+ 	  "Ä°ksir UstasÄ±"	 ,
+ 	  "Ä°ksir UstasÄ±"	 ,
+ 	  "ParÅŸÃ¶men UstasÄ±"	 ,
 
- 	  "Parþömen Ustasý"	 ,
- 	  "Deðnek Ustasý"	 ,
- 	  "Deðnek Ustasý"		 ,
- 	  "Deðnek Ustasý"	 ,
- 	  "Deðnek Ustasý"		 ,
+ 	  "ParÅŸÃ¶men UstasÄ±"	 ,
+ 	  "DeÄŸnek UstasÄ±"	 ,
+ 	  "DeÄŸnek UstasÄ±"		 ,
+ 	  "DeÄŸnek UstasÄ±"	 ,
+ 	  "DeÄŸnek UstasÄ±"		 ,
 
- 	  "Ýblis Çaðýran"	 ,
- 	  "Ýblis Çaðýran"		 ,
- 	  "Yüce Ýblis Çaðýran"	 ,
- 	  "Yüce Ýblis Çaðýran" ,
+ 	  "Ä°blis Ã‡aÄŸÄ±ran"	 ,
+ 	  "Ä°blis Ã‡aÄŸÄ±ran"		 ,
+ 	  "YÃ¼ce Ä°blis Ã‡aÄŸÄ±ran"	 ,
+ 	  "YÃ¼ce Ä°blis Ã‡aÄŸÄ±ran" ,
  	  "Ejderha Efendisi"		 ,
 
  	  "Ejderha Efendisi"		 ,
  	  "Ejderha Efendisi"	 ,
  	  "Ejderha Efendisi" ,
-         "Karýþým Efendisi" ,
-         "Karýþým Efendisi" ,
+         "KarÄ±ÅŸÄ±m Efendisi" ,
+         "KarÄ±ÅŸÄ±m Efendisi" ,
 
-         "Büyülerin Efendisi" ,
-         "Büyülerin Efendisi" ,
-         "Büyüleme Efendisi" ,
-         "Büyüleme Efendisi" ,
-         "Çaðrý Ustasý" ,
+         "BÃ¼yÃ¼lerin Efendisi" ,
+         "BÃ¼yÃ¼lerin Efendisi" ,
+         "BÃ¼yÃ¼leme Efendisi" ,
+         "BÃ¼yÃ¼leme Efendisi" ,
+         "Ã‡aÄŸrÄ± UstasÄ±" ,
 
-         "Çaðrý Ustasý" ,
-         "Büyük Kahin" ,
-         "Büyük Kahin" ,
-         "Deðiþim Ustasý" ,
-         "Deðiþim Ustasý" ,
+         "Ã‡aÄŸrÄ± UstasÄ±" ,
+         "BÃ¼yÃ¼k Kahin" ,
+         "BÃ¼yÃ¼k Kahin" ,
+         "DeÄŸiÅŸim UstasÄ±" ,
+         "DeÄŸiÅŸim UstasÄ±" ,
 
-         "Fiþek Efendisi" ,
-         "Fiþek Efendisi" ,
-         "Ölülerin Efendisi" ,
-         "Ölülerin Efendisi" ,
-         "Simyacý" ,
+         "FiÅŸek Efendisi" ,
+         "FiÅŸek Efendisi" ,
+         "Ã–lÃ¼lerin Efendisi" ,
+         "Ã–lÃ¼lerin Efendisi" ,
+         "SimyacÄ±" ,
 
-         "Simyacý" ,
-         "Bað Ustasý" ,
-         "Bað Ustasý" ,
-         "Söz Efendisi" ,
-         "Söz Efendisi" ,
+         "SimyacÄ±" ,
+         "BaÄŸ UstasÄ±" ,
+         "BaÄŸ UstasÄ±" ,
+         "SÃ¶z Efendisi" ,
+         "SÃ¶z Efendisi" ,
 
-         "Geçmiþe hükmeden" ,
-         "Geçmiþe hükmeden" ,
-         "Bugüne hükmeden" ,
-         "Bugüne hükmeden" ,
-         "Geleceðe hükmeden" ,
+         "GeÃ§miÅŸe hÃ¼kmeden" ,
+         "GeÃ§miÅŸe hÃ¼kmeden" ,
+         "BugÃ¼ne hÃ¼kmeden" ,
+         "BugÃ¼ne hÃ¼kmeden" ,
+         "GeleceÄŸe hÃ¼kmeden" ,
 
-         "Geleceðe hükmeden" ,
-         "Baþ Büyücü" ,
-         "Baþ Büyücü" ,
+         "GeleceÄŸe hÃ¼kmeden" ,
+         "BaÅŸ BÃ¼yÃ¼cÃ¼" ,
+         "BaÅŸ BÃ¼yÃ¼cÃ¼" ,
          "Bilinmeyen" ,
          "Bilinmeyen" ,
 
  	  "Kahraman"		,
  	 "Melek"		,
  	 "Melek"		,
- 	 "Elçi"		,
- 	 "Ölümsüz"		,
- 	"Yüce"		,
- 	"Yüce",
- 	"Yüce",
- 	"Yüce",
+ 	 "ElÃ§i"		,
+ 	 "Ã–lÃ¼msÃ¼z"		,
+ 	"YÃ¼ce"		,
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
  	 "Tek"
       },
        {
 
          "Man" ,
 
-         "Büyü Çýraðý"		 ,
-         "Büyü Öðrencisi"	 ,
-         "Büyü Asistaný"	 ,
-         "Büyü Araþtýran"		 ,
+         "BÃ¼yÃ¼ Ã‡Ä±raÄŸÄ±"		 ,
+         "BÃ¼yÃ¼ Ã–ÄŸrencisi"	 ,
+         "BÃ¼yÃ¼ AsistanÄ±"	 ,
+         "BÃ¼yÃ¼ AraÅŸtÄ±ran"		 ,
          "Sihirbaz"	 ,
 
-         "Büyü Katibi"	 ,
-         "Falcý"		 ,
+         "BÃ¼yÃ¼ Katibi"	 ,
+         "FalcÄ±"		 ,
          "Arif"		 ,
-         "Ýlüzyonist"		 ,
-         "Tövbekar"		 ,
+         "Ä°lÃ¼zyonist"		 ,
+         "TÃ¶vbekar"		 ,
 
-         "Duacý"		 ,
-         "Duacý"		 ,
-         "Büyü Yapan"		 ,
-         "Büyü Yapan"		 ,
+         "DuacÄ±"		 ,
+         "DuacÄ±"		 ,
+         "BÃ¼yÃ¼ Yapan"		 ,
+         "BÃ¼yÃ¼ Yapan"		 ,
          "Hokkabaz"		 ,
 
          "Hokkabaz" ,
-         "Büyücü"	 ,
-         "Büyücü"	 ,
- 	"Oluþturan" ,
- 	"Oluþturan" ,
+         "BÃ¼yÃ¼cÃ¼"	 ,
+         "BÃ¼yÃ¼cÃ¼"	 ,
+ 	"OluÅŸturan" ,
+ 	"OluÅŸturan" ,
 
          "Alim"		 ,
          "Alim"		 ,
-         "Büyü Ustasý"			 ,
-         "Büyü Ustasý"			 ,
-         "Büyü Alimi"		 ,
+         "BÃ¼yÃ¼ UstasÄ±"			 ,
+         "BÃ¼yÃ¼ UstasÄ±"			 ,
+         "BÃ¼yÃ¼ Alimi"		 ,
 
-         "Büyü Alimi"		 ,
-         "Savaþçý Arif"		 ,
-         "Savaþçý Arif"		 ,
-         "Durendiþ"	 ,
-         "Durendiþ"	 ,
+         "BÃ¼yÃ¼ Alimi"		 ,
+         "SavaÅŸÃ§Ä± Arif"		 ,
+         "SavaÅŸÃ§Ä± Arif"		 ,
+         "DurendiÅŸ"	 ,
+         "DurendiÅŸ"	 ,
 
-         "Kýdemli Büyücü"		 ,
-         "Kýdemli Büyücü"		 ,
-         "Büyük Büyücü"		 ,
-         "Büyük Büyücü"	 ,
-         "Yüce Büyücü"		 ,
+         "KÄ±demli BÃ¼yÃ¼cÃ¼"		 ,
+         "KÄ±demli BÃ¼yÃ¼cÃ¼"		 ,
+         "BÃ¼yÃ¼k BÃ¼yÃ¼cÃ¼"		 ,
+         "BÃ¼yÃ¼k BÃ¼yÃ¼cÃ¼"	 ,
+         "YÃ¼ce BÃ¼yÃ¼cÃ¼"		 ,
 
-         "Yüce Büyücü"	 ,
+         "YÃ¼ce BÃ¼yÃ¼cÃ¼"	 ,
          "Golem Efendisi"		 ,
          "Golem Efendisi"	 ,
-         "Yüce Golem Efendisi"		 ,
-         "Yüce Golem Efendisi"	 ,
+         "YÃ¼ce Golem Efendisi"		 ,
+         "YÃ¼ce Golem Efendisi"	 ,
 
- 	  "Taþ Efendisi"	 ,
- 	  "Taþ Efendisi"	 ,
- 	  "Ýksir Ustasý"	 ,
- 	  "Ýksir Ustasý"	 ,
- 	  "Parþömen Ustasý"	 ,
+ 	  "TaÅŸ Efendisi"	 ,
+ 	  "TaÅŸ Efendisi"	 ,
+ 	  "Ä°ksir UstasÄ±"	 ,
+ 	  "Ä°ksir UstasÄ±"	 ,
+ 	  "ParÅŸÃ¶men UstasÄ±"	 ,
 
- 	  "Parþömen Ustasý"	 ,
- 	  "Deðnek Ustasý"	 ,
- 	  "Deðnek Ustasý"		 ,
- 	  "Deðnek Ustasý"	 ,
- 	  "Deðnek Ustasý"		 ,
+ 	  "ParÅŸÃ¶men UstasÄ±"	 ,
+ 	  "DeÄŸnek UstasÄ±"	 ,
+ 	  "DeÄŸnek UstasÄ±"		 ,
+ 	  "DeÄŸnek UstasÄ±"	 ,
+ 	  "DeÄŸnek UstasÄ±"		 ,
 
- 	  "Ýblis Çaðýran"	 ,
- 	  "Ýblis Çaðýran"		 ,
- 	  "Yüce Ýblis Çaðýran"	 ,
- 	  "Yüce Ýblis Çaðýran" ,
+ 	  "Ä°blis Ã‡aÄŸÄ±ran"	 ,
+ 	  "Ä°blis Ã‡aÄŸÄ±ran"		 ,
+ 	  "YÃ¼ce Ä°blis Ã‡aÄŸÄ±ran"	 ,
+ 	  "YÃ¼ce Ä°blis Ã‡aÄŸÄ±ran" ,
  	  "Ejderha Efendisi"		 ,
 
  	  "Ejderha Efendisi"		 ,
  	  "Ejderha Efendisi"	 ,
  	  "Ejderha Efendisi" ,
-         "Karýþým Efendisi" ,
-         "Karýþým Efendisi" ,
+         "KarÄ±ÅŸÄ±m Efendisi" ,
+         "KarÄ±ÅŸÄ±m Efendisi" ,
 
-         "Büyülerin Efendisi" ,
-         "Büyülerin Efendisi" ,
-         "Büyüleme Efendisi" ,
-         "Büyüleme Efendisi" ,
-         "Çaðrý Ustasý" ,
+         "BÃ¼yÃ¼lerin Efendisi" ,
+         "BÃ¼yÃ¼lerin Efendisi" ,
+         "BÃ¼yÃ¼leme Efendisi" ,
+         "BÃ¼yÃ¼leme Efendisi" ,
+         "Ã‡aÄŸrÄ± UstasÄ±" ,
 
-         "Çaðrý Ustasý" ,
-         "Büyük Kahin" ,
-         "Büyük Kahin" ,
-         "Deðiþim Ustasý" ,
-         "Deðiþim Ustasý" ,
+         "Ã‡aÄŸrÄ± UstasÄ±" ,
+         "BÃ¼yÃ¼k Kahin" ,
+         "BÃ¼yÃ¼k Kahin" ,
+         "DeÄŸiÅŸim UstasÄ±" ,
+         "DeÄŸiÅŸim UstasÄ±" ,
 
-         "Fiþek Efendisi" ,
-         "Fiþek Efendisi" ,
-         "Ölülerin Efendisi" ,
-         "Ölülerin Efendisi" ,
-         "Simyacý" ,
+         "FiÅŸek Efendisi" ,
+         "FiÅŸek Efendisi" ,
+         "Ã–lÃ¼lerin Efendisi" ,
+         "Ã–lÃ¼lerin Efendisi" ,
+         "SimyacÄ±" ,
 
-         "Simyacý" ,
-         "Bað Ustasý" ,
-         "Bað Ustasý" ,
-         "Söz Efendisi" ,
-         "Söz Efendisi" ,
+         "SimyacÄ±" ,
+         "BaÄŸ UstasÄ±" ,
+         "BaÄŸ UstasÄ±" ,
+         "SÃ¶z Efendisi" ,
+         "SÃ¶z Efendisi" ,
 
-         "Geçmiþe hükmeden" ,
-         "Geçmiþe hükmeden" ,
-         "Bugüne hükmeden" ,
-         "Bugüne hükmeden" ,
-         "Geleceðe hükmeden" ,
+         "GeÃ§miÅŸe hÃ¼kmeden" ,
+         "GeÃ§miÅŸe hÃ¼kmeden" ,
+         "BugÃ¼ne hÃ¼kmeden" ,
+         "BugÃ¼ne hÃ¼kmeden" ,
+         "GeleceÄŸe hÃ¼kmeden" ,
 
-         "Geleceðe hükmeden" ,
-         "Baþ Büyücü" ,
-         "Baþ Büyücü" ,
+         "GeleceÄŸe hÃ¼kmeden" ,
+         "BaÅŸ BÃ¼yÃ¼cÃ¼" ,
+         "BaÅŸ BÃ¼yÃ¼cÃ¼" ,
          "Bilinmeyen" ,
          "Bilinmeyen" ,
 
  	  "Kahraman"		,
  	 "Melek"		,
  	 "Melek"		,
- 	 "Elçi"		,
- 	 "Ölümsüz"		,
- 	"Yüce"		,
- 	"Yüce",
- 	"Yüce",
- 	"Yüce",
+ 	 "ElÃ§i"		,
+ 	 "Ã–lÃ¼msÃ¼z"		,
+ 	"YÃ¼ce"		,
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
  	 "Tek"
       },
       {
 
          "Man" ,
 
-         "Büyü Çýraðý"		 ,
-         "Büyü Öðrencisi"	 ,
-         "Büyü Asistaný"	 ,
-         "Büyü Araþtýran"		 ,
+         "BÃ¼yÃ¼ Ã‡Ä±raÄŸÄ±"		 ,
+         "BÃ¼yÃ¼ Ã–ÄŸrencisi"	 ,
+         "BÃ¼yÃ¼ AsistanÄ±"	 ,
+         "BÃ¼yÃ¼ AraÅŸtÄ±ran"		 ,
          "Sihirbaz"	 ,
 
-         "Büyü Katibi"	 ,
-         "Falcý"		 ,
+         "BÃ¼yÃ¼ Katibi"	 ,
+         "FalcÄ±"		 ,
          "Arif"		 ,
-         "Ýlüzyonist"		 ,
-         "Tövbekar"		 ,
+         "Ä°lÃ¼zyonist"		 ,
+         "TÃ¶vbekar"		 ,
 
-         "Duacý"		 ,
-         "Duacý"		 ,
-         "Büyü Yapan"		 ,
-         "Büyü Yapan"		 ,
+         "DuacÄ±"		 ,
+         "DuacÄ±"		 ,
+         "BÃ¼yÃ¼ Yapan"		 ,
+         "BÃ¼yÃ¼ Yapan"		 ,
          "Hokkabaz"		 ,
 
          "Hokkabaz" ,
-         "Büyücü"	 ,
-         "Büyücü"	 ,
- 	"Oluþturan" ,
- 	"Oluþturan" ,
+         "BÃ¼yÃ¼cÃ¼"	 ,
+         "BÃ¼yÃ¼cÃ¼"	 ,
+ 	"OluÅŸturan" ,
+ 	"OluÅŸturan" ,
 
          "Alim"		 ,
          "Alim"		 ,
-         "Büyü Ustasý"			 ,
-         "Büyü Ustasý"			 ,
-         "Büyü Alimi"		 ,
+         "BÃ¼yÃ¼ UstasÄ±"			 ,
+         "BÃ¼yÃ¼ UstasÄ±"			 ,
+         "BÃ¼yÃ¼ Alimi"		 ,
 
-         "Büyü Alimi"		 ,
-         "Savaþçý Arif"		 ,
-         "Savaþçý Arif"		 ,
-         "Durendiþ"	 ,
-         "Durendiþ"	 ,
+         "BÃ¼yÃ¼ Alimi"		 ,
+         "SavaÅŸÃ§Ä± Arif"		 ,
+         "SavaÅŸÃ§Ä± Arif"		 ,
+         "DurendiÅŸ"	 ,
+         "DurendiÅŸ"	 ,
 
-         "Kýdemli Büyücü"		 ,
-         "Kýdemli Büyücü"		 ,
-         "Büyük Büyücü"		 ,
-         "Büyük Büyücü"	 ,
-         "Yüce Büyücü"		 ,
+         "KÄ±demli BÃ¼yÃ¼cÃ¼"		 ,
+         "KÄ±demli BÃ¼yÃ¼cÃ¼"		 ,
+         "BÃ¼yÃ¼k BÃ¼yÃ¼cÃ¼"		 ,
+         "BÃ¼yÃ¼k BÃ¼yÃ¼cÃ¼"	 ,
+         "YÃ¼ce BÃ¼yÃ¼cÃ¼"		 ,
 
-         "Yüce Büyücü"	 ,
+         "YÃ¼ce BÃ¼yÃ¼cÃ¼"	 ,
          "Golem Efendisi"		 ,
          "Golem Efendisi"	 ,
-         "Yüce Golem Efendisi"		 ,
-         "Yüce Golem Efendisi"	 ,
+         "YÃ¼ce Golem Efendisi"		 ,
+         "YÃ¼ce Golem Efendisi"	 ,
 
- 	  "Taþ Efendisi"	 ,
- 	  "Taþ Efendisi"	 ,
- 	  "Ýksir Ustasý"	 ,
- 	  "Ýksir Ustasý"	 ,
- 	  "Parþömen Ustasý"	 ,
+ 	  "TaÅŸ Efendisi"	 ,
+ 	  "TaÅŸ Efendisi"	 ,
+ 	  "Ä°ksir UstasÄ±"	 ,
+ 	  "Ä°ksir UstasÄ±"	 ,
+ 	  "ParÅŸÃ¶men UstasÄ±"	 ,
 
- 	  "Parþömen Ustasý"	 ,
- 	  "Deðnek Ustasý"	 ,
- 	  "Deðnek Ustasý"		 ,
- 	  "Deðnek Ustasý"	 ,
- 	  "Deðnek Ustasý"		 ,
+ 	  "ParÅŸÃ¶men UstasÄ±"	 ,
+ 	  "DeÄŸnek UstasÄ±"	 ,
+ 	  "DeÄŸnek UstasÄ±"		 ,
+ 	  "DeÄŸnek UstasÄ±"	 ,
+ 	  "DeÄŸnek UstasÄ±"		 ,
 
- 	  "Ýblis Çaðýran"	 ,
- 	  "Ýblis Çaðýran"		 ,
- 	  "Yüce Ýblis Çaðýran"	 ,
- 	  "Yüce Ýblis Çaðýran" ,
+ 	  "Ä°blis Ã‡aÄŸÄ±ran"	 ,
+ 	  "Ä°blis Ã‡aÄŸÄ±ran"		 ,
+ 	  "YÃ¼ce Ä°blis Ã‡aÄŸÄ±ran"	 ,
+ 	  "YÃ¼ce Ä°blis Ã‡aÄŸÄ±ran" ,
  	  "Ejderha Efendisi"		 ,
 
  	  "Ejderha Efendisi"		 ,
  	  "Ejderha Efendisi"	 ,
  	  "Ejderha Efendisi" ,
-         "Karýþým Efendisi" ,
-         "Karýþým Efendisi" ,
+         "KarÄ±ÅŸÄ±m Efendisi" ,
+         "KarÄ±ÅŸÄ±m Efendisi" ,
 
-         "Büyülerin Efendisi" ,
-         "Büyülerin Efendisi" ,
-         "Büyüleme Efendisi" ,
-         "Büyüleme Efendisi" ,
-         "Çaðrý Ustasý" ,
+         "BÃ¼yÃ¼lerin Efendisi" ,
+         "BÃ¼yÃ¼lerin Efendisi" ,
+         "BÃ¼yÃ¼leme Efendisi" ,
+         "BÃ¼yÃ¼leme Efendisi" ,
+         "Ã‡aÄŸrÄ± UstasÄ±" ,
 
-         "Çaðrý Ustasý" ,
-         "Büyük Kahin" ,
-         "Büyük Kahin" ,
-         "Deðiþim Ustasý" ,
-         "Deðiþim Ustasý" ,
+         "Ã‡aÄŸrÄ± UstasÄ±" ,
+         "BÃ¼yÃ¼k Kahin" ,
+         "BÃ¼yÃ¼k Kahin" ,
+         "DeÄŸiÅŸim UstasÄ±" ,
+         "DeÄŸiÅŸim UstasÄ±" ,
 
-         "Fiþek Efendisi" ,
-         "Fiþek Efendisi" ,
-         "Ölülerin Efendisi" ,
-         "Ölülerin Efendisi" ,
-         "Simyacý" ,
+         "FiÅŸek Efendisi" ,
+         "FiÅŸek Efendisi" ,
+         "Ã–lÃ¼lerin Efendisi" ,
+         "Ã–lÃ¼lerin Efendisi" ,
+         "SimyacÄ±" ,
 
-         "Simyacý" ,
-         "Bað Ustasý" ,
-         "Bað Ustasý" ,
-         "Söz Efendisi" ,
-         "Söz Efendisi" ,
+         "SimyacÄ±" ,
+         "BaÄŸ UstasÄ±" ,
+         "BaÄŸ UstasÄ±" ,
+         "SÃ¶z Efendisi" ,
+         "SÃ¶z Efendisi" ,
 
-         "Geçmiþe hükmeden" ,
-         "Geçmiþe hükmeden" ,
-         "Bugüne hükmeden" ,
-         "Bugüne hükmeden" ,
-         "Geleceðe hükmeden" ,
+         "GeÃ§miÅŸe hÃ¼kmeden" ,
+         "GeÃ§miÅŸe hÃ¼kmeden" ,
+         "BugÃ¼ne hÃ¼kmeden" ,
+         "BugÃ¼ne hÃ¼kmeden" ,
+         "GeleceÄŸe hÃ¼kmeden" ,
 
-         "Geleceðe hükmeden" ,
-         "Baþ Büyücü" ,
-         "Baþ Büyücü" ,
+         "GeleceÄŸe hÃ¼kmeden" ,
+         "BaÅŸ BÃ¼yÃ¼cÃ¼" ,
+         "BaÅŸ BÃ¼yÃ¼cÃ¼" ,
          "Bilinmeyen" ,
          "Bilinmeyen" ,
 
  	 "Kahraman"		,
  	 "Melek"		,
  	 "Melek"		,
- 	 "Elçi"		,
- 	 "Ölümsüz"		,
- 	"Yüce"		,
- 	"Yüce",
- 	"Yüce",
- 	"Yüce",
+ 	 "ElÃ§i"		,
+ 	 "Ã–lÃ¼msÃ¼z"		,
+ 	"YÃ¼ce"		,
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
+ 	"YÃ¼ce",
  	 "Tek"
      }
  ,
@@ -2234,14 +2234,14 @@ const struct religion_type religion_table [] =
   { "Kamenilik", "Kameniler", "Kame", OBJ_VNUM_TATTOO_KAME },
   { "Niryanilik", "Niryaniler", "Nir", OBJ_VNUM_TATTOO_NIR },
   { "Nyahilik", "Nyahiler", "Nyah", OBJ_VNUM_TATTOO_NYAH },
-  { "Sintiyanlýk", "Sintiyanlar", "Sint", OBJ_VNUM_TATTOO_SINT },
+  { "SintiyanlÄ±k", "Sintiyanlar", "Sint", OBJ_VNUM_TATTOO_SINT },
 };
 
 const struct ethos_type ethos_table [] =
 {
   { "Null" },
-  { "Tüze" },
-  { "Yansýz" },
+  { "TÃ¼ze" },
+  { "YansÄ±z" },
   { "Kaos" }
 };
 
@@ -2455,47 +2455,47 @@ const	struct	cha_app_type	cha_app		[26]		=
  /*    name			color	proof, full, thirst, food, ssize */
      { "water","su",			"clear",	{   0, 1, 10, 0, 16 }	},
      { "beer","bira",			"amber",	{  12, 1,  8, 1, 12 }	},
-     { "red wine","kýrmýzý þarap",		"burgundy",	{  30, 1,  8, 1,  5 }	},
+     { "red wine","kÄ±rmÄ±zÄ± ÅŸarap",		"burgundy",	{  30, 1,  8, 1,  5 }	},
      { "ale","bira",			"brown",	{  15, 1,  8, 1, 12 }	},
      { "dark ale","siyah bira",		"dark",		{  16, 1,  8, 1, 12 }	},
 
      { "whisky","viski",			"golden",	{ 120, 1,  5, 0,  2 }	},
      { "lemonade","limonata",		"pink",		{   0, 1,  9, 2, 12 }	},
-     { "firebreather","ateþnefesi",		"boiling",	{ 190, 0,  4, 0,  2 }	},
-     { "local specialty","yerel içki",	"clear",	{ 151, 1,  3, 0,  2 }	},
-     { "slime mold juice","balçýk suyu",	"green",	{   0, 2, -8, 1,  2 }	},
+     { "firebreather","ateÅŸnefesi",		"boiling",	{ 190, 0,  4, 0,  2 }	},
+     { "local specialty","yerel iÃ§ki",	"clear",	{ 151, 1,  3, 0,  2 }	},
+     { "slime mold juice","balÃ§Ä±k suyu",	"green",	{   0, 2, -8, 1,  2 }	},
 
-     { "milk","süt",			"white",	{   0, 2,  9, 3, 12 }	},
-     { "tea","çay",			"tan",		{   0, 1,  8, 0,  6 }	},
+     { "milk","sÃ¼t",			"white",	{   0, 2,  9, 3, 12 }	},
+     { "tea","Ã§ay",			"tan",		{   0, 1,  8, 0,  6 }	},
      { "coffee",	"kahve",		"black",	{   0, 1,  8, 0,  6 }	},
      { "blood","kan",			"red",		{   0, 2, -1, 2,  6 }	},
      { "salt water","tuzlu su",		"clear",	{   0, 1, -2, 0,  1 }	},
 
      { "coke","kola",			"brown",	{   0, 2,  9, 2, 12 }	},
-     { "root beer","kök birasý",		"brown",	{   0, 2,  9, 2, 12 }   },
-     { "elvish wine","yel þarabý",		"green",	{  35, 2,  8, 1,  5 }   },
-     { "white wine","beyaz þarap",		"golden",	{  28, 1,  8, 1,  5 }   },
-     { "champagne","þampanya",		"golden",	{  32, 1,  8, 1,  5 }   },
+     { "root beer","kÃ¶k birasÄ±",		"brown",	{   0, 2,  9, 2, 12 }   },
+     { "elvish wine","yel ÅŸarabÄ±",		"green",	{  35, 2,  8, 1,  5 }   },
+     { "white wine","beyaz ÅŸarap",		"golden",	{  28, 1,  8, 1,  5 }   },
+     { "champagne","ÅŸampanya",		"golden",	{  32, 1,  8, 1,  5 }   },
 
-     { "mead","bal likörü",			"honey-colored",{  34, 2,  8, 2, 12 }   },
-     { "rose wine","gül þarabý",		"pink",		{  26, 1,  8, 1,  5 }	},
-     { "benedictine wine","kutsal þarap",	"burgundy",	{  40, 1,  8, 1,  5 }   },
+     { "mead","bal likÃ¶rÃ¼",			"honey-colored",{  34, 2,  8, 2, 12 }   },
+     { "rose wine","gÃ¼l ÅŸarabÄ±",		"pink",		{  26, 1,  8, 1,  5 }	},
+     { "benedictine wine","kutsal ÅŸarap",	"burgundy",	{  40, 1,  8, 1,  5 }   },
      { "vodka","votka",			"clear",	{ 130, 1,  5, 0,  2 }   },
-     { "cranberry juice","kýzýlcýk suyu",	"red",		{   0, 1,  9, 2, 12 }	},
+     { "cranberry juice","kÄ±zÄ±lcÄ±k suyu",	"red",		{   0, 1,  9, 2, 12 }	},
 
      { "orange juice","portakal suyu",		"orange",	{   0, 2,  9, 3, 12 }   },
-     { "absinthe","raký",		"clear",	{ 200, 1,  4, 0,  2 }	},
+     { "absinthe","rakÄ±",		"clear",	{ 200, 1,  4, 0,  2 }	},
      { "brandy","brendi",			"golden",	{  80, 1,  5, 0,  4 }	},
-     { "aquavit","kimyon likörü",		"clear",	{ 140, 1,  5, 0,  2 }	},
-     { "schnapps","patates likörü",		"clear",	{  90, 1,  5, 0,  2 }   },
+     { "aquavit","kimyon likÃ¶rÃ¼",		"clear",	{ 140, 1,  5, 0,  2 }	},
+     { "schnapps","patates likÃ¶rÃ¼",		"clear",	{  90, 1,  5, 0,  2 }   },
 
-     { "icewine","buzbað",		"purple",	{  50, 2,  6, 1,  5 }	},
-     { "amontillado","kiraz likörü",		"burgundy",	{  35, 2,  8, 1,  5 }	},
-     { "sherry","þeri",			"red",		{  38, 2,  7, 1,  5 }   },
-     { "framboise","çilek likörü",		"red",		{  50, 1,  7, 1,  5 }   },
+     { "icewine","buzbaÄŸ",		"purple",	{  50, 2,  6, 1,  5 }	},
+     { "amontillado","kiraz likÃ¶rÃ¼",		"burgundy",	{  35, 2,  8, 1,  5 }	},
+     { "sherry","ÅŸeri",			"red",		{  38, 2,  7, 1,  5 }   },
+     { "framboise","Ã§ilek likÃ¶rÃ¼",		"red",		{  50, 1,  7, 1,  5 }   },
      { "rum","rom",			"amber",	{ 151, 1,  4, 0,  2 }	},
 
-     { "cordial","þeftali likörü",		"clear",	{ 100, 1,  5, 0,  2 }   },
+     { "cordial","ÅŸeftali likÃ¶rÃ¼",		"clear",	{ 100, 1,  5, 0,  2 }   },
      { NULL,NULL,			NULL,		{   0, 0,  0, 0,  0 }	}
  };
 
@@ -2524,12 +2524,12 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"absorb","soðurma"},	{ 67, 93, 93, 93, 93, 93,93,93,93,93,93,93,93},
+	{"absorb","soÄŸurma"},	{ 67, 93, 93, 93, 93, 93,93,93,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_absorb,		TAR_CHAR_SELF,		POS_STANDING,
 	&gsn_absorb,		SLOT(707),	100,	12,
-  "",		"Çevrendeki enerji alaný yokoluyor!",
-	"$p'in çevresindeki enerji alaný yokoluyor.",
+  "",		"Ã‡evrendeki enerji alanÄ± yokoluyor!",
+	"$p'in Ã§evresindeki enerji alanÄ± yokoluyor.",
  	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -2552,7 +2552,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"acid blast","asit patlamasý"},		{ 63, 93, 93, 93, 93,93,93,93,63,93,93,63,63},
+	{"acid blast","asit patlamasÄ±"},		{ 63, 93, 93, 93, 93,93,93,93,63,93,93,63,63},
 	{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_acid_blast,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	&gsn_acid_blast,	SLOT(70),	40,	12,
@@ -2561,11 +2561,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"acute vision","güçlü görüþ"},         {  93,93,93,93, 93, 93, 93, 7 ,93,93,93,93,93},
+	{"acute vision","gÃ¼Ã§lÃ¼ gÃ¶rÃ¼ÅŸ"},         {  93,93,93,93, 93, 93, 93, 7 ,93,93,93,93,93},
         { 3,  2,  1,  1, 1, 1, 2, 1, 1, 1,1,1,1},
         spell_acute_vision,        TAR_CHAR_SELF,          POS_STANDING,
         NULL,                    SLOT(514),        10,       0,
-	"",         "Görüþün sönükleþti.", "",	CABAL_NONE ,
+	"",         "GÃ¶rÃ¼ÅŸÃ¼n sÃ¶nÃ¼kleÅŸti.", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -2574,16 +2574,16 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_adamantite_golem,	TAR_IGNORE,	POS_STANDING,
 	NULL,		SLOT(665),	500,		30,
-	"",	"Yeni golemler yapmak için yeterli gücü topladýn.","",
+	"",	"Yeni golemler yapmak iÃ§in yeterli gÃ¼cÃ¼ topladÄ±n.","",
 	CABAL_NONE , 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"aid","ilk yardým"},			{ 93, 53,93, 93,93,93,93,93 ,93,93,93,93,93},
+	{"aid","ilk yardÄ±m"},			{ 93, 53,93, 93,93,93,93,93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_aid,        TAR_CHAR_DEFENSIVE,          POS_FIGHTING,
 	NULL,		SLOT(680),	100,		12,
-	"",	"Daha fazla kiþiyi iyileþtirebilirsin.",	"",
+	"",	"Daha fazla kiÅŸiyi iyileÅŸtirebilirsin.",	"",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_HEALING
     },
 
@@ -2596,29 +2596,29 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"animate dead","ölü canlandýrma"},			{ 93, 93, 93, 93,93,93,93,93,93,93,42,38,93 },
+	{"animate dead","Ã¶lÃ¼ canlandÄ±rma"},			{ 93, 93, 93, 93,93,93,93,93,93,93,42,38,93 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_animate_dead,	TAR_OBJ_CHAR_OFF,	POS_STANDING,
 	NULL,		SLOT(581),	50,	12,
-	"",	"Yeni ölüleri canlandýrmak için gerekli enerjiyi topladýn.", "", CABAL_NONE ,
+	"",	"Yeni Ã¶lÃ¼leri canlandÄ±rmak iÃ§in gerekli enerjiyi topladÄ±n.", "", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"animate object","nesne canlandýrma"},	{ 70, 93, 93, 93, 93, 93,93,93,93,93,93,93,93},
+	{"animate object","nesne canlandÄ±rma"},	{ 70, 93, 93, 93, 93, 93,93,93,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_animate_object,	TAR_OBJ_CHAR_OFF,	POS_STANDING,
 	NULL,		SLOT(709),	50,	12,
-	"",		"Yeni nesneleri canlandýrmak için gerekli enerjiyi topladýn.", "",
+	"",		"Yeni nesneleri canlandÄ±rmak iÃ§in gerekli enerjiyi topladÄ±n.", "",
  	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"armor","zýrh"},		{  13,1,93,93, 12,93,13,93 , 93, 10,13,13,13},
+	{"armor","zÄ±rh"},		{  13,1,93,93, 12,93,13,93 , 93, 10,13,13,13},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_armor,		TAR_CHAR_DEFENSIVE,	POS_STANDING,
 	NULL,			SLOT( 1),	 5,	12,
-	"",			"Zýrhýnýn zayýfladýðýný hissediyorsun.",	"", CABAL_NONE ,
+	"",			"ZÄ±rhÄ±nÄ±n zayÄ±fladÄ±ÄŸÄ±nÄ± hissediyorsun.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_PROTECTIVE
     },
 
@@ -2632,7 +2632,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"astral walk","yýldýz yürüyüþü"},		{31,93,93,93,93,93,93,93,93,93,93,93,93},
+	{"astral walk","yÄ±ldÄ±z yÃ¼rÃ¼yÃ¼ÅŸÃ¼"},		{31,93,93,93,93,93,93,93,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_astral_walk,	TAR_IGNORE,	POS_FIGHTING,
 	NULL,			SLOT(622),	80,	12,
@@ -2641,25 +2641,25 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"attract other","kiþi etkileme"},	{ 93, 93, 93, 93,93,93,93,93,93,93,30,93,93 },
+	{"attract other","kiÅŸi etkileme"},	{ 93, 93, 93, 93,93,93,93,93,93,93,30,93,93 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_attract_other,	TAR_CHAR_OFFENSIVE,	POS_STANDING,
 	NULL,		SLOT(580),	5,	12,
-	"",	"Efendinin seni terkettiðini hissediyorsun.",	"", CABAL_NONE ,
+	"",	"Efendinin seni terkettiÄŸini hissediyorsun.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_BEGUILING
     },
 
     {
-	{"bark skin","aðaç deri"},        {  93, 93, 93, 93, 93, 93, 93, 22 ,93,93,93,93,93},
+	{"bark skin","aÄŸaÃ§ deri"},        {  93, 93, 93, 93, 93, 93, 93, 22 ,93,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_bark_skin,        TAR_CHAR_SELF,          POS_STANDING,
         NULL,             SLOT(515),        40,       0,
-	"", "Aðaç derin yokoluyor.", "",	CABAL_NONE ,
+	"", "AÄŸaÃ§ derin yokoluyor.", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-		{"black death","kara ölüm"},    { 93, 93, 93, 93,93, 64, 93, 93 ,93,93,93,93,93},
+		{"black death","kara Ã¶lÃ¼m"},    { 93, 93, 93, 93,93, 64, 93, 93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_black_death,	TAR_IGNORE,	POS_STANDING,
 	&gsn_black_death,	SLOT(677),	200,	24,
@@ -2668,11 +2668,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"blade barrier","býçak duvarý"},	{93,60,93,93,93,93,93,93,93,93,93,93,93},
+	{"blade barrier","bÄ±Ã§ak duvarÄ±"},	{93,60,93,93,93,93,93,93,93,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_blade_barrier,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,			SLOT(679),	40,	12,
-	"býçak duvarý",	"!Blade Barrier!",	"",CABAL_NONE ,
+	"bÄ±Ã§ak duvarÄ±",	"!Blade Barrier!",	"",CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_ATTACK
     },
 
@@ -2681,8 +2681,8 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_bless,		TAR_OBJ_CHAR_DEF,	POS_STANDING,
 	&gsn_bless,		SLOT( 3),	 5,	12,
-  "",			"Kutsallýðýný yitiriyorsun.",
-	"$p'in kutsal aylasý yokoluyor.", CABAL_NONE ,
+  "",			"KutsallÄ±ÄŸÄ±nÄ± yitiriyorsun.",
+	"$p'in kutsal aylasÄ± yokoluyor.", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_BENEDICTIONS
     },
 
@@ -2696,11 +2696,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"blindness","körlük"},	{  93,  14, 93, 93,93,14,16,93, 20,93,20,19,93},
+	{"blindness","kÃ¶rlÃ¼k"},	{  93,  14, 93, 93,93,14,16,93, 20,93,20,19,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_blindness,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	&gsn_blindness,		SLOT( 4),	 5,	12,
-	"",			"Yeniden görebiliyorsun.",	"", CABAL_NONE ,
+	"",			"Yeniden gÃ¶rebiliyorsun.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_MALADICTIONS
     },
 
@@ -2723,20 +2723,20 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"call lightning","þimþek çaðrýsý"},	{ 93, 44, 93, 93, 41,93,50, 93 , 93,93,93,93,33},
+	{"call lightning","ÅŸimÅŸek Ã§aÄŸrÄ±sÄ±"},	{ 93, 44, 93, 93, 41,93,50, 93 , 93,93,93,93,33},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_call_lightning,	TAR_IGNORE,		POS_FIGHTING,
 	NULL,			SLOT( 6),	15,	12,
-  "þimþek çaðrýsý",	"!Call Lightning!",	"", CABAL_NONE ,
+  "ÅŸimÅŸek Ã§aÄŸrÄ±sÄ±",	"!Call Lightning!",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_WEATHER
     },
 
     {
-    {"calm","yatýþtýrma"},	{ 93, 26, 93, 93, 63, 93, 93, 93 ,93,60,93,93,93},
+    {"calm","yatÄ±ÅŸtÄ±rma"},	{ 93, 26, 93, 93, 63, 93, 93, 93 ,93,60,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_calm,		TAR_IGNORE,		POS_FIGHTING,
 	NULL,			SLOT(509),	30,	12,
-  "",			"Sakinliðini yitiriyorsun.",	"", CABAL_NONE ,
+  "",			"SakinliÄŸini yitiriyorsun.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_BENEDICTIONS
     },
 
@@ -2777,20 +2777,20 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"caustic font","yakýcý su"},{ 93, 93, 93, 93, 93, 93, 93,93,41,93,93,93,93},
+	{"caustic font","yakÄ±cÄ± su"},{ 93, 93, 93, 93, 93, 93, 93,93,41,93,93,93,93},
 	{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_caustic_font,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,		SLOT(653),	20,	12,
-  "yakýcý su",	"!caustic font!", "", CABAL_NONE ,
+  "yakÄ±cÄ± su",	"!caustic font!", "", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_COMBAT
     },
 
     {
-	{"chain lightning","þimþek zinciri"},		{ 33, 93, 93, 93,93,93,93,93, 33 ,93,33,33,33},
+	{"chain lightning","ÅŸimÅŸek zinciri"},		{ 33, 93, 93, 93,93,93,93,93, 33 ,93,33,33,33},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_chain_lightning,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,			SLOT(500),	25,	12,
-  "þimþek",		"!Chain Lightning!",	"", CABAL_NONE ,
+  "ÅŸimÅŸek",		"!Chain Lightning!",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_COMBAT
     },
 
@@ -2799,25 +2799,25 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_charm_person,	TAR_CHAR_OFFENSIVE,	POS_STANDING,
 	&gsn_charm_person,	SLOT( 7),	 5,	12,
-  "",		"Kendine güvenin artýyor.",	"",
+  "",		"Kendine gÃ¼venin artÄ±yor.",	"",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_BEGUILING
     },
 
     {
-	{"chromatic orb","krom küre"},	{ 93, 93, 93, 93, 93,93,93,93,63,93,93,93,93},
+	{"chromatic orb","krom kÃ¼re"},	{ 93, 93, 93, 93, 93,93,93,93,63,93,93,93,93},
 	{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_chromatic_orb,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,		SLOT(714),	50,	12,
-  "krom küre",		"!Chromatic Orb!", "", CABAL_NONE ,
+  "krom kÃ¼re",		"!Chromatic Orb!", "", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_COMBAT
     },
 
     {
-	{"control undead","hortlak kontrolü"},      {  93, 93,93,93,93,93,93,93,93,93,93,57,93},
+	{"control undead","hortlak kontrolÃ¼"},      {  93, 93,93,93,93,93,93,93,93,93,93,57,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_control_undead,   TAR_CHAR_OFFENSIVE,          POS_STANDING,
         NULL,             SLOT(669),        20,       12,
-        "", "Kendine güvenin artýyor.", "",	CABAL_NONE ,
+        "", "Kendine gÃ¼venin artÄ±yor.", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -2826,7 +2826,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_chill_touch,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	&gsn_chill_touch,		SLOT( 8),	15,	12,
-  "ayaz",	"Üþümen azalýyor.",	"", CABAL_NONE ,
+  "ayaz",	"ÃœÅŸÃ¼men azalÄ±yor.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_COMBAT
     },
 
@@ -2840,7 +2840,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"continual light","daimi ýþýk"},		{  11,  5, 93, 93,93,93,93,93 , 11,93,93,93,93},
+	{"continual light","daimi Ä±ÅŸÄ±k"},		{  11,  5, 93, 93,93,93,93,93 , 11,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_continual_light,	TAR_IGNORE,		POS_STANDING,
 	NULL,			SLOT(57),	 7,	12,
@@ -2849,7 +2849,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"control weather","hava kontrolü"},	{ 93,21,93,93, 93,93,11,33, 30,93,24,24,20},
+	{"control weather","hava kontrolÃ¼"},	{ 93,21,93,93, 93,93,11,33, 30,93,24,24,20},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_control_weather,	TAR_IGNORE,		POS_STANDING,
 	NULL,			SLOT(11),	25,	12,
@@ -2858,11 +2858,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"corruption","çürüme"},      {  93, 93, 93, 93, 93,93,93,93,93,93,93,63,93},
+	{"corruption","Ã§Ã¼rÃ¼me"},      {  93, 93, 93, 93, 93,93,93,93,93,93,93,63,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_corruption,    TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
         NULL,             SLOT(671),        20,       12,
-        "çürüme", "Kendini saðlýklý hissediyorsun.", "",CABAL_NONE,
+        "Ã§Ã¼rÃ¼me", "Kendini saÄŸlÄ±klÄ± hissediyorsun.", "",CABAL_NONE,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -2876,7 +2876,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"create rose","gül"},		{ 26, 93, 93, 93, 20, 93, 93, 93,93,93,26,26,26},
+	{"create rose","gÃ¼l"},		{ 26, 93, 93, 93, 20, 93, 93, 93,93,93,26,26,26},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_create_rose,	TAR_IGNORE,		POS_STANDING,
 	NULL,			SLOT(511),	30, 	12,
@@ -2885,7 +2885,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"create spring","pýnar"},		{ 24, 27, 93, 93,93,93,93,93 ,93,93,93,31,31},
+	{"create spring","pÄ±nar"},		{ 24, 27, 93, 93,93,93,93,93 ,93,93,93,31,31},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_create_spring,	TAR_IGNORE,		POS_STANDING,
 	NULL,			SLOT(80),	20,	12,
@@ -2903,7 +2903,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"cure blindness","körlük tedavi"},		{ 93,11,93,93, 7,93,9,13, 93,20,93,93,93},
+	{"cure blindness","kÃ¶rlÃ¼k tedavi"},		{ 93,11,93,93, 7,93,9,13, 93,20,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_cure_blindness,	TAR_CHAR_DEFENSIVE,	POS_FIGHTING,
 	NULL,			SLOT(14),	 5,	12,
@@ -2921,7 +2921,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"cure disease","hastalýk tedavi"},		{  93, 19, 93, 93,33,93,93,93 ,93,93,93,93,93},
+	{"cure disease","hastalÄ±k tedavi"},		{  93, 19, 93, 93,33,93,93,93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_cure_disease,	TAR_CHAR_DEFENSIVE,	POS_STANDING,
 	NULL,			SLOT(501),	20,	12,
@@ -2943,8 +2943,8 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_poison,		TAR_OBJ_CHAR_OFF,	POS_FIGHTING,
 	&gsn_poison,		SLOT(33),	10,	12,
-  "zehir",		"Üzerindeki zehir kuruyor.",
-	"$p üzerindeki zehir kuruyor.", CABAL_NONE ,
+  "zehir",		"Ãœzerindeki zehir kuruyor.",
+	"$p Ã¼zerindeki zehir kuruyor.", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_MALADICTIONS
     },
 
@@ -2971,8 +2971,8 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_curse,		TAR_OBJ_CHAR_OFF,	POS_FIGHTING,
 	&gsn_curse,		SLOT(17),	20,	12,
-  "lanet",		"Üzerindeki lanet çürüyor.",
-	"$p üzerindeki lanet çürüyor.", CABAL_NONE , RACE_NONE,
+  "lanet",		"Ãœzerindeki lanet Ã§Ã¼rÃ¼yor.",
+	"$p Ã¼zerindeki lanet Ã§Ã¼rÃ¼yor.", CABAL_NONE , RACE_NONE,
 	ALIGN_NONE, GROUP_MALADICTIONS
     },
 
@@ -2986,7 +2986,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"deadly venom","ölüm zehri"},   { 93, 93, 93, 93,93, 58, 93, 93 ,93,93,93,93,93},
+	{"deadly venom","Ã¶lÃ¼m zehri"},   { 93, 93, 93, 93,93, 58, 93, 93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_deadly_venom,	TAR_IGNORE,	POS_STANDING,
 	&gsn_deadly_venom,		SLOT(674),	200,	24,
@@ -2995,29 +2995,29 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"deafen","saðýrlýk"},       {  93,93,93,93,93,42,93,93 ,93,93,93,93,93},
+	{"deafen","saÄŸÄ±rlÄ±k"},       {  93,93,93,93,93,42,93,93 ,93,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_deafen,      TAR_CHAR_OFFENSIVE,   POS_FIGHTING,
         &gsn_deafen,       SLOT(570),        40,       12,
-        "saðýrlýk", "Kulaklarýndaki çýnlama sonunda yokoluyor.", "", CABAL_NONE ,
+        "saÄŸÄ±rlÄ±k", "KulaklarÄ±ndaki Ã§Ä±nlama sonunda yokoluyor.", "", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"demonfire","iblis ateþi"},		{  93, 37, 93, 93,93,93,93,93,93,93,93,93,93},
+	{"demonfire","iblis ateÅŸi"},		{  93, 37, 93, 93,93,93,93,93,93,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_demonfire,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	&gsn_demonfire,			SLOT(505),	20,	12,
-  "iblis ateþi",		"!Demonfire!",		"", CABAL_NONE ,
+  "iblis ateÅŸi",		"!Demonfire!",		"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_ATTACK
     },
 
     {
-	{"desert fist","çöl yumruðu"},		{ 93, 58, 93,93,93,93,93,93,93,93,93,93,55 },
+	{"desert fist","Ã§Ã¶l yumruÄŸu"},		{ 93, 58, 93,93,93,93,93,93,93,93,93,93,55 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_desert_fist, 	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,		SLOT(681),	50,	12,
-  "çöl yumruðu",	"!desert fist!", "", CABAL_NONE ,
+  "Ã§Ã¶l yumruÄŸu",	"!desert fist!", "", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE,GROUP_NONE
     },
 
@@ -3026,7 +3026,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_detect_evil,	TAR_CHAR_SELF,		POS_STANDING,
 	NULL,			SLOT(18),	 5,	12,
-  "",			"Kem saptama sönüyor.",	"", CABAL_NONE ,
+  "",			"Kem saptama sÃ¶nÃ¼yor.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_DETECTION
     },
 
@@ -3035,34 +3035,34 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_detect_good,      TAR_CHAR_SELF,          POS_STANDING,
         NULL,                   SLOT(513),        5,     12,
-        "",                     "Ýyiyi saptama sönüyor.",	"", CABAL_NONE ,
+        "",                     "Ä°yiyi saptama sÃ¶nÃ¼yor.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_DETECTION
     },
 
     {
-	{"detect hide","saklýyý saptama"},	{ 93, 93, 10, 93, 93, 93, 10, 93 ,93,93,93,93,93},
+	{"detect hide","saklÄ±yÄ± saptama"},	{ 93, 93, 10, 93, 93, 93, 10, 93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_CHAR_SELF,		POS_STANDING,
 	&gsn_detect_hidden,	SLOT(0),	 5,	12,
-  "",			"Saklýyý saptama sönüyor.",
+  "",			"SaklÄ±yÄ± saptama sÃ¶nÃ¼yor.",
 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_DETECTION
     },
 
     {
-	{"detect invis","görünmezi saptama"},		{  5,  17, 93, 93,23,13,93,93 ,10,93,23,13,8},
+	{"detect invis","gÃ¶rÃ¼nmezi saptama"},		{  5,  17, 93, 93,23,13,93,93 ,10,93,23,13,8},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_detect_invis,	TAR_CHAR_SELF,		POS_STANDING,
 	NULL,			SLOT(19),	 5,	12,
-  "",			"Görünmezi saptama sönüyor.",
+  "",			"GÃ¶rÃ¼nmezi saptama sÃ¶nÃ¼yor.",
 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_DETECTION
     },
 
     {
-	{"detect magic","büyü saptama"},	{  8,  12, 93, 93,93,93,93,93,6,30,93,15,12},
+	{"detect magic","bÃ¼yÃ¼ saptama"},	{  8,  12, 93, 93,93,93,93,93,6,30,93,15,12},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_detect_magic,	TAR_CHAR_SELF,		POS_STANDING,
 	NULL,			SLOT(20),	 5,	12,
-  "",			"Büyü saptama sönüyor.",	"", CABAL_NONE ,
+  "",			"BÃ¼yÃ¼ saptama sÃ¶nÃ¼yor.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_DETECTION
     },
 
@@ -3080,12 +3080,12 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_detect_undead,	TAR_CHAR_SELF,		POS_STANDING,
 	NULL,		SLOT(594),	5,	12,
-  "",		"Hortlak saptama sönüyor.", "",
+  "",		"Hortlak saptama sÃ¶nÃ¼yor.", "",
 	CABAL_NONE, 	RACE_NONE, ALIGN_NONE, GROUP_DETECTION
     },
 
     {
-	{"disenchant armor","zýrh alçalt"},	{ 27, 93, 93, 93, 93, 93,93,93,93,93,93,93,93},
+	{"disenchant armor","zÄ±rh alÃ§alt"},	{ 27, 93, 93, 93, 93, 93,93,93,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_disenchant_armor,		TAR_OBJ_INV,		POS_STANDING,
 	NULL,			SLOT(705),	50,	24,
@@ -3094,7 +3094,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"disenchant weapon","silah alçalt"},		{ 34, 93, 93, 93, 93, 93,93,93,93,93,93,93,93},
+	{"disenchant weapon","silah alÃ§alt"},		{ 34, 93, 93, 93, 93, 93,93,93,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_disenchant_weapon,	TAR_OBJ_INV,		POS_STANDING,
 	NULL,			SLOT(706),	50,	24,
@@ -3102,26 +3102,26 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
-    { /* Ani ölüm */
+    { /* Ani Ã¶lÃ¼m */
 	{"disintegrate","ufala"},       {  75,93,93,93,93,93,93,93,93,93 ,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_disintegrate,      TAR_CHAR_OFFENSIVE,   POS_STANDING,
         NULL,                    SLOT(574),    100,       18,
-        "ince ýþýk ýþýný", "!disintegrate!", "",	CABAL_NONE ,
+        "ince Ä±ÅŸÄ±k Ä±ÅŸÄ±nÄ±", "!disintegrate!", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
-    { /* Ani ölüm */
-	{"arz yutaðý","arz yutaðý"},       {  93,93,93,93,93,93,93,93,93,93 ,93,93,75},
+    { /* Ani Ã¶lÃ¼m */
+	{"arz yutaÄŸÄ±","arz yutaÄŸÄ±"},       {  93,93,93,93,93,93,93,93,93,93 ,93,93,75},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_arz_yutagi,      TAR_CHAR_OFFENSIVE,   POS_STANDING,
         NULL,                    SLOT(574),    100,       18,
-        "arz yutaðý", "!arz yutaðý!", "",	CABAL_NONE ,
+        "arz yutaÄŸÄ±", "!arz yutaÄŸÄ±!", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"dismantle","parçala"},	{ 93, 93,93, 93,93,93,93,93 ,93,93,93,93,93},
+	{"dismantle","parÃ§ala"},	{ 93, 93,93, 93,93,93,93,93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,	TAR_CHAR_SELF,		POS_STANDING,
 	NULL,		SLOT(621),	200,	24,
@@ -3148,7 +3148,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"dispel magic","büyü defet"},	{ 36, 43, 93, 93,93,93,93,93 ,41,93,24,24,93},
+	{"dispel magic","bÃ¼yÃ¼ defet"},	{ 36, 43, 93, 93,93,93,93,93 ,41,93,24,24,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_dispel_magic,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,			SLOT(59),	15,	12,
@@ -3179,16 +3179,16 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_dragon_skin,	TAR_CHAR_SELF,		POS_STANDING,
 	NULL,			SLOT(612),	50,	24,
-  "",	"Derin yumuþuyor.",	"",
+  "",	"Derin yumuÅŸuyor.",	"",
 	CABAL_NONE , RACE_TOP, ALIGN_NONE, GROUP_PROTECTIVE
     },
 
     {
-	{"dragon strength","ejderha gücü"}, {93,93,93,93,93,93,93,93,93,93,93,93,93},
+	{"dragon strength","ejderha gÃ¼cÃ¼"}, {93,93,93,93,93,93,93,93,93,93,93,93,93},
 	{1,1,1,1,1,1,1,1, 1, 1,1,1,1},
         spell_dragon_strength, TAR_CHAR_SELF, POS_FIGHTING,
         &gsn_dragon_strength, SLOT(562),    75,    12,
-        "", "Ejderha gücünün seni terkettiðini hissediyorsun.", "",	CABAL_NONE ,
+        "", "Ejderha gÃ¼cÃ¼nÃ¼n seni terkettiÄŸini hissediyorsun.", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -3197,7 +3197,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_dragons_breath,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,			SLOT(576),	200,	24,
-  "ejderha nefesi",	"Saðlýðýna kavuþuyorsun.",
+  "ejderha nefesi",	"SaÄŸlÄ±ÄŸÄ±na kavuÅŸuyorsun.",
 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_DRACONIAN
     },
 
@@ -3211,11 +3211,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"earthfade","arz soluþu"},		{ 93, 93, 93, 93, 93, 93,93,93,93,93,93,93,73},
+	{"earthfade","arz soluÅŸu"},		{ 93, 93, 93, 93, 93, 93,93,93,93,93,93,93,73},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_earthfade,	TAR_CHAR_OFFENSIVE,		POS_FIGHTING,
 	&gsn_earthfade,			SLOT(702),	100,	12,
-  "",		"Doðal formuna dönüyorsun.",	"",
+  "",		"DoÄŸal formuna dÃ¶nÃ¼yorsun.",	"",
  	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -3238,16 +3238,16 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"elemental sphere","uþak küresi"},	{ 93, 93,93,93, 93,93,93,93 ,93,93,93,93,29},
+	{"elemental sphere","uÅŸak kÃ¼resi"},	{ 93, 93,93,93, 93,93,93,93 ,93,93,93,93,29},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_elemental_sphere,	TAR_CHAR_DEFENSIVE,	POS_STANDING,
 	NULL,			SLOT(719),	75,	12,
-  "",	"Koruyucu uþak küresi yokoluyor.",	"",
+  "",	"Koruyucu uÅŸak kÃ¼resi yokoluyor.",	"",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"enchant armor","zýrh yükselt"},	{  26, 25, 93, 93,93,93,93,93 ,93,93,93,93,93},
+	{"enchant armor","zÄ±rh yÃ¼kselt"},	{  26, 25, 93, 93,93,93,93,93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_enchant_armor,	TAR_OBJ_INV,		POS_STANDING,
 	NULL,			SLOT(510),	100,	24,
@@ -3256,7 +3256,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"enchant weapon","silah yükselt"},{  33, 25, 93, 93,93,93,93,93,17,93,93,93,93 },
+	{"enchant weapon","silah yÃ¼kselt"},{  33, 25, 93, 93,93,93,93,93,17,93,93,93,93 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_enchant_weapon,	TAR_OBJ_INV,		POS_STANDING,
 	NULL,			SLOT(24),	100,	24,
@@ -3265,29 +3265,29 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"energy drain","yaþam kurut"},		{ 38,42,93,93,93,26,93,93,93,93,93,45,93},
+	{"energy drain","yaÅŸam kurut"},		{ 38,42,93,93,93,26,93,93,93,93,93,45,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_energy_drain,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,			SLOT(25),	35,	12,
-  "yaþam kurut",		"!Energy Drain!",	"", CABAL_NONE ,
+  "yaÅŸam kurut",		"!Energy Drain!",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_MALADICTIONS
     },
 
     {
-	{"enhanced armor","geliþmiþ zýrh"},	{ 48, 33, 93,93,93,93,93,93,93,93,93,93,93},
+	{"enhanced armor","geliÅŸmiÅŸ zÄ±rh"},	{ 48, 33, 93,93,93,93,93,93,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1},
 	spell_enhanced_armor, 	TAR_CHAR_DEFENSIVE,	POS_FIGHTING,
 	&gsn_enhanced_armor,	SLOT(583),	20,	12,
-  "",	"Korunmasýz hissediyorsun.", "", CABAL_NONE ,
+  "",	"KorunmasÄ±z hissediyorsun.", "", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_PROTECTIVE
     },
 
     {
-	{"enlarge","geniþleme"},		{  93,93,93,93, 93,93,93,93, 38,93,93,93,93},
+	{"enlarge","geniÅŸleme"},		{  93,93,93,93, 93,93,93,93, 38,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_enlarge,		TAR_CHAR_DEFENSIVE,	POS_STANDING,
 	NULL,			SLOT(711),	 50,	12,
-  "",	"Doðal boyutlarýna dönüyorsun.",	"", CABAL_NONE,
+  "",	"DoÄŸal boyutlarÄ±na dÃ¶nÃ¼yorsun.",	"", CABAL_NONE,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -3301,20 +3301,20 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"evolve bear","ayýya dönüþme"},	{   93, 93, 93, 93,93,93,93,65,93 ,93,93,93,93},
+	{"evolve bear","ayÄ±ya dÃ¶nÃ¼ÅŸme"},	{   93, 93, 93, 93,93,93,93,65,93 ,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	        spell_null,      TAR_IGNORE,       POS_STANDING,
 	&gsn_evolve_bear,       SLOT(0),        100,       12,
-    "",	"Doðallaþýyorsun.",	"", CABAL_NONE ,
+    "",	"DoÄŸallaÅŸÄ±yorsun.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"faerie fire","cin ateþi"},		{ 11,  6, 93, 93,93,93,8,93 ,15 ,93,93,93,11},
+	{"faerie fire","cin ateÅŸi"},		{ 11,  6, 93, 93,93,93,8,93 ,15 ,93,93,93,11},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_faerie_fire,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	&gsn_faerie_fire,		SLOT(72),	 5,	12,
-  "cin ateþi",		"Pembe aylandan kurtuluyorsun.",
+  "cin ateÅŸi",		"Pembe aylandan kurtuluyorsun.",
 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_WEATHER
     },
 
@@ -3328,11 +3328,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"farsight","uzak görüþ"},	{  22, 93, 93, 93,93,93,93,93,22,93,93,93,93 },
+	{"farsight","uzak gÃ¶rÃ¼ÅŸ"},	{  22, 93, 93, 93,93,93,93,93,22,93,93,93,93 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_farsight,		TAR_IGNORE,		POS_STANDING,
 	NULL,			SLOT(521),	20,	12,
-  "uzak görüþ",		"!Farsight!",		"", CABAL_NONE ,
+  "uzak gÃ¶rÃ¼ÅŸ",		"!Farsight!",		"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_DETECTION
     },
 
@@ -3346,11 +3346,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"fire and ice","ateþ ve buz"},		{ 93, 93, 93, 93, 93, 93,93,93,93,93,93,93,65},
+	{"fire and ice","ateÅŸ ve buz"},		{ 93, 93, 93, 93, 93, 93,93,93,93,93,93,93,65},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_fire_and_ice,	TAR_CHAR_OFFENSIVE,		POS_FIGHTING,
 	NULL,			SLOT(699),	40,	12,
-  "ateþ ve buz",		"!fire and ice!",	"", 	CABAL_NONE ,
+  "ateÅŸ ve buz",		"!fire and ice!",	"", 	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_COMBAT
     },
 
@@ -3364,16 +3364,16 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"fireproof","ateþ geçirmez"},		{ 25, 16, 93, 93, 20, 93,93,93,21,93,93,42,93},
+	{"fireproof","ateÅŸ geÃ§irmez"},		{ 25, 16, 93, 93, 20, 93,93,93,21,93,93,42,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_fireproof,	TAR_OBJ_INV,		POS_STANDING,
 	NULL,			SLOT(523),	10,	12,
-  "",		"",	"$p üzerindeki koruyucu ayla yokoluyor.", CABAL_NONE ,
+  "",		"",	"$p Ã¼zerindeki koruyucu ayla yokoluyor.", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_ENCHANTMENT
     },
 
     {
-	{"firestream","alev akýmý"},	{ 93, 93, 93, 93, 93, 93,93,93,93,93,93,93,35},
+	{"firestream","alev akÄ±mÄ±"},	{ 93, 93, 93, 93, 93, 93,93,93,93,93,93,93,35},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_firestream,	TAR_CHAR_OFFENSIVE,		POS_FIGHTING,
 	NULL,			SLOT(692),	20,	12,
@@ -3382,7 +3382,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"fire shield","alev kalkaný"},			{   93, 93, 93, 93,93,93,93,93,93 ,93,93,93,68},
+	{"fire shield","alev kalkanÄ±"},			{   93, 93, 93, 93,93,93,93,93,93 ,93,93,93,68},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_fire_shield,	TAR_IGNORE,	POS_STANDING,
 	&gsn_fire_shield,		SLOT(601),	200,	24,
@@ -3391,16 +3391,16 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"flamestrike","alev saldýrýsý"},			{93,42,93,93,32,93,93,93,93,93,93,93,93},
+	{"flamestrike","alev saldÄ±rÄ±sÄ±"},			{93,42,93,93,32,93,93,93,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_flamestrike,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,			SLOT(65),	20,	12,
-  "alev saldýrýsý",		"!Flamestrike!",		"", CABAL_NONE ,
+  "alev saldÄ±rÄ±sÄ±",		"!Flamestrike!",		"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_ATTACK
     },
 
     {
-	{"fly","uçma"},				{ 19, 30, 93,93,93,93,93,93,19,93,43,23,21},
+	{"fly","uÃ§ma"},				{ 19, 30, 93,93,93,93,93,93,19,93,43,23,21},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_fly,		TAR_CHAR_DEFENSIVE,	POS_STANDING,
 	&gsn_fly,			SLOT(56),	10,	18,
@@ -3409,7 +3409,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"floating disc","asýlý disk"},		{ 4, 10, 93, 93, 93, 93, 93, 93 ,4,93,93,93,4},
+	{"floating disc","asÄ±lÄ± disk"},		{ 4, 10, 93, 93, 93, 93, 93, 93 ,4,93,93,93,4},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_floating_disc,	TAR_IGNORE,		POS_STANDING,
 	NULL,			SLOT(522),	40,	24,
@@ -3418,11 +3418,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"forcecage","güç kafesi"},			{ 29, 93,93,93, 93,93,93,93 ,93,93,93,93,93},
+	{"forcecage","gÃ¼Ã§ kafesi"},			{ 29, 93,93,93, 93,93,93,93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_forcecage,	TAR_CHAR_DEFENSIVE,	POS_STANDING,
 	NULL,			SLOT(717),	75,	12,
-  "",	"Çevrendeki güç kafesi yokoluyor.",	"",
+  "",	"Ã‡evrendeki gÃ¼Ã§ kafesi yokoluyor.",	"",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -3431,7 +3431,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_frenzy,           TAR_CHAR_DEFENSIVE,     POS_STANDING,
         NULL,                   SLOT(504),      30,     24,
-        "",                     "Cinnetin geçiyor.",	"", CABAL_NONE ,
+        "",                     "Cinnetin geÃ§iyor.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_BENEDICTIONS
     },
 
@@ -3449,21 +3449,21 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_fumble,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,			SLOT(712), 	25,	18,
-  "",		"Hýzlanýyor ve eski gücüne kavuþuyorsun!",	"",
+  "",		"HÄ±zlanÄ±yor ve eski gÃ¼cÃ¼ne kavuÅŸuyorsun!",	"",
 	CABAL_NONE, RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"galvanic whip","enerji kýrbacý"},	{ 28, 93, 93, 93, 93, 93,93,93,93,93,93,93,93},
+	{"galvanic whip","enerji kÄ±rbacÄ±"},	{ 28, 93, 93, 93, 93, 93,93,93,93,93,93,93,93},
 	{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_galvanic_whip,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,		SLOT(655),	20,	12,
-  "enerji kýrbacý",	"!galvanic whip!", "", CABAL_NONE ,
+  "enerji kÄ±rbacÄ±",	"!galvanic whip!", "", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_COMBAT
     },
 
     {
-	{"gate","geçit"},			{93,63,93,93,93,93,93,93,27,93,93,93,93},
+	{"gate","geÃ§it"},			{93,63,93,93,93,93,93,93,27,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_gate,		TAR_IGNORE,		POS_FIGHTING,
 	NULL,			SLOT(83),	80,	12,
@@ -3472,11 +3472,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"giant strength","dev gücü"},{  20, 39, 93, 93,93,93,93,93, 30,93,93,28,93},
+	{"giant strength","dev gÃ¼cÃ¼"},{  20, 39, 93, 93,93,93,93,93, 30,93,93,28,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_giant_strength,	TAR_CHAR_DEFENSIVE,	POS_STANDING,
 	&gsn_giant_strength,		SLOT(39),	20,	12,
-  "",			"Gücün azalýyor.",	"", CABAL_NONE ,
+  "",			"GÃ¼cÃ¼n azalÄ±yor.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_ENHANCEMENT
     },
 
@@ -3485,7 +3485,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_grounding,	TAR_CHAR_SELF,		POS_FIGHTING,
 	NULL,			SLOT(700),	50,	12,
-  "",		"Topraklamaný yitiriyorsun.",	"",
+  "",		"TopraklamanÄ± yitiriyorsun.",	"",
  	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -3494,12 +3494,12 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_group_defense,		TAR_IGNORE,		POS_STANDING,
 	NULL,		SLOT(586),	100,	36,
-  "",			"Korunmasýz hissediyorsun.",	"", CABAL_NONE ,
+  "",			"KorunmasÄ±z hissediyorsun.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_BENEDICTIONS
     },
 
     {
-	{"group heal","grup þifa"},			{  93,65,93,93,75,93,93,93,93,93,93,93,93},
+	{"group heal","grup ÅŸifa"},			{  93,65,93,93,75,93,93,93,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_group_healing,	TAR_CHAR_DEFENSIVE, POS_FIGHTING,
 	NULL,			SLOT(642),	500,	24,
@@ -3508,11 +3508,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"hallucination","sanrý"},	{   93, 93, 93, 93,93,93,93,93,93,93,93,93,93},
+	{"hallucination","sanrÄ±"},	{   93, 93, 93, 93,93,93,93,93,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_hallucination,	TAR_CHAR_SELF,	POS_STANDING,
 	NULL,		SLOT(606),	200,	12,
-  "",			"Büyüye karþý yine savunmasýzsýn.",
+  "",			"BÃ¼yÃ¼ye karÅŸÄ± yine savunmasÄ±zsÄ±n.",
 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_ILLUSION
     },
 
@@ -3535,16 +3535,16 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"haste","hýz"},	{ 24, 93, 93,93,93,93,93,93,24,93,93,93,93},
+	{"haste","hÄ±z"},	{ 24, 93, 93,93,93,93,93,93,24,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_haste,		TAR_CHAR_DEFENSIVE,	POS_FIGHTING,
 	&gsn_haste,		SLOT(502),	30,	12,
-  "",			"Yavaþladýðýný hissediyorsun.",	"", CABAL_NONE ,
+  "",			"YavaÅŸladÄ±ÄŸÄ±nÄ± hissediyorsun.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_ENHANCEMENT
     },
 
     {
-	{"heal","þifa"},		{  93, 28, 93, 93,29,93,93,93 ,93 ,93,93,93,93},
+	{"heal","ÅŸifa"},		{  93, 28, 93, 93,29,93,93,93 ,93 ,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_heal,		TAR_CHAR_DEFENSIVE,	POS_FIGHTING,
 	NULL,			SLOT(28),	50,	12,
@@ -3553,25 +3553,25 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"healing light","þifa ýþýðý"},    { 93, 41, 93, 93,93, 93, 93, 93 ,93,93,93,93,93},
+	{"healing light","ÅŸifa Ä±ÅŸÄ±ÄŸÄ±"},    { 93, 41, 93, 93,93, 93, 93, 93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_healing_light,	TAR_IGNORE,	POS_STANDING,
 	NULL,			SLOT(613),	200,	24,
-  "",			"Bir odayý yeniden ýþýðýnla doldurabilirsin.",	"",
+  "",			"Bir odayÄ± yeniden Ä±ÅŸÄ±ÄŸÄ±nla doldurabilirsin.",	"",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_BENEDICTIONS
     },
 
     {
-	{"heat metal","metali ýsýtma"},		{ 93,26,93,93, 93,93,93,93 ,93,93,93,93,93},
+	{"heat metal","metali Ä±sÄ±tma"},		{ 93,26,93,93, 93,93,93,93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_heat_metal,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,			SLOT(516), 	25,	18,
-  "metali ýsýtma",		"!Heat Metal!",		"", CABAL_NONE ,
+  "metali Ä±sÄ±tma",		"!Heat Metal!",		"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"helical flow","sarmal akým"},		{93,93,93,93,93,93,93,93,93,93,93,93,43},
+	{"helical flow","sarmal akÄ±m"},		{93,93,93,93,93,93,93,93,93,93,93,93,43},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_helical_flow,		TAR_IGNORE,	POS_FIGHTING,
 	NULL,			SLOT(661),	80,	12,
@@ -3580,11 +3580,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"hellfire","cehennem ateþi"},     {  93, 93, 93, 93, 93, 93, 45, 93 ,93,93,93,93,93},
+	{"hellfire","cehennem ateÅŸi"},     {  93, 93, 93, 93, 93, 93, 45, 93 ,93,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_hellfire,      TAR_CHAR_OFFENSIVE,          POS_FIGHTING,
         NULL,       SLOT(520),        20,       12,
-        "cehennem ateþi", "!hellfire!", "",	CABAL_NONE ,
+        "cehennem ateÅŸi", "!hellfire!", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_ATTACK
     },
 
@@ -3602,34 +3602,34 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_holy_fury,	TAR_CHAR_DEFENSIVE,	POS_STANDING,
 	NULL,		SLOT(682),	50,	24,
-  "",	"Artýk daha merhametlisin.",	"",
+  "",	"ArtÄ±k daha merhametlisin.",	"",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"holy word","kutsal söz"},		{ 93,48,93,93,38,93,93,93 ,93,93,93,93,93},
+	{"holy word","kutsal sÃ¶z"},		{ 93,48,93,93,38,93,93,93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_holy_word,	TAR_IGNORE,	POS_FIGHTING,
 	NULL,			SLOT(506), 	200,	24,
-  "kutsal söz",		"!Holy Word!",		"", CABAL_NONE ,
+  "kutsal sÃ¶z",		"!Holy Word!",		"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_BENEDICTIONS
     },
 
     {
-	{"hurricane","kasýrga"},	{  93, 93, 93, 93, 93,53,93,93,93,93,93,65,93},
+	{"hurricane","kasÄ±rga"},	{  93, 93, 93, 93, 93,53,93,93,93,93,93,65,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_hurricane,	TAR_IGNORE,	POS_FIGHTING,
 	NULL,		SLOT(672),	200,	24,
-  "kasýrga",	"!Hurricane!",	"", CABAL_NONE ,
+  "kasÄ±rga",	"!Hurricane!",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"hydroblast","su patlamasý"},	{  93,93,93,93, 93,93,93,46, 93,93,93,93,93},
+	{"hydroblast","su patlamasÄ±"},	{  93,93,93,93, 93,93,93,46, 93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_hydroblast,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,		SLOT(684),	50,	12,
-  "su patlamasý",	"!Hydroblast!",	"", CABAL_NONE ,
+  "su patlamasÄ±",	"!Hydroblast!",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -3643,7 +3643,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"identify","tanýmlama"},		{ 18, 36, 93, 93,93,93,93,93 ,25,93,93,93,18},
+	{"identify","tanÄ±mlama"},		{ 18, 36, 93, 93,93,93,93,93 ,25,93,93,93,18},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_identify,		TAR_OBJ_INV,		POS_STANDING,
 	NULL,			SLOT(53),	12,	24,
@@ -3652,29 +3652,29 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"improved detect","geliþmiþ saptama"},	{ 40, 93, 93, 93, 93,93,93, 93 ,40,93,93,40,40},
+	{"improved detect","geliÅŸmiÅŸ saptama"},	{ 40, 93, 93, 93, 93,93,93, 93 ,40,93,93,40,40},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_improved_detection,	TAR_CHAR_SELF,		POS_STANDING,
 	NULL,		SLOT(626),	 20,	12,
-  "",			"Artýk çevrende olup bitenden daha az haberdarsýn.",
+  "",			"ArtÄ±k Ã§evrende olup bitenden daha az haberdarsÄ±n.",
 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_DETECTION
     },
 
     {
-	{"improved invis","geliþmiþ görünmezlik"},	{  43, 93, 93, 93,93,93,93,93,43,93,93,93,43 },
+	{"improved invis","geliÅŸmiÅŸ gÃ¶rÃ¼nmezlik"},	{  43, 93, 93, 93,93,93,93,93,43,93,93,93,43 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_improved_invis,		TAR_CHAR_DEFENSIVE,	POS_STANDING,
 	&gsn_imp_invis,		SLOT(627),	 20,	12,
-  "",			"Görünmezliðin yitiyor.",
-	"$p görünürleþiyor.", CABAL_NONE , RACE_NONE,ALIGN_NONE, GROUP_ILLUSION
+  "",			"GÃ¶rÃ¼nmezliÄŸin yitiyor.",
+	"$p gÃ¶rÃ¼nÃ¼rleÅŸiyor.", CABAL_NONE , RACE_NONE,ALIGN_NONE, GROUP_ILLUSION
     },
 
     {
-	{"infravision","ýsý görüþü"},		{  17,  25, 93, 93,93,93,5,93,18,93,93,21,17},
+	{"infravision","Ä±sÄ± gÃ¶rÃ¼ÅŸÃ¼"},		{  17,  25, 93, 93,93,93,5,93,18,93,93,21,17},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_infravision,	TAR_CHAR_DEFENSIVE,	POS_STANDING,
 	NULL,			SLOT(77),	 5,	18,
-  "",			"Artýk karanlýkta göremeyeceksin.",	"", CABAL_NONE ,
+  "",			"ArtÄ±k karanlÄ±kta gÃ¶remeyeceksin.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_ENHANCEMENT
     },
 
@@ -3683,7 +3683,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_insanity,		TAR_CHAR_OFFENSIVE,	POS_STANDING,
 	NULL,		SLOT(616),	100,	24,
-  "",	"Sakinleþtiðini hissediyorsun.",	"",
+  "",	"SakinleÅŸtiÄŸini hissediyorsun.",	"",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -3692,25 +3692,25 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_inspire,		TAR_IGNORE,		POS_STANDING,
 	NULL,		SLOT(587),	75,	24,
-  "",			"Ýlhamýn azalýyor.",	"", CABAL_NONE ,
+  "",			"Ä°lhamÄ±n azalÄ±yor.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_BENEDICTIONS
     },
 
     {
-	{"invisibility","görünmezlik"},		{  10, 93, 93, 93,93,9,93,93,13,93,93,93,10 },
+	{"invisibility","gÃ¶rÃ¼nmezlik"},		{  10, 93, 93, 93,93,9,93,93,13,93,93,93,10 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_invis,		TAR_OBJ_CHAR_DEF,	POS_STANDING,
 	&gsn_invis,		SLOT(29),	 5,	12,
-	"",			"Artýk görünmez deðilsin.",
-	"$p görünür oluyor.", CABAL_NONE , RACE_NONE,ALIGN_NONE, GROUP_ILLUSION
+	"",			"ArtÄ±k gÃ¶rÃ¼nmez deÄŸilsin.",
+	"$p gÃ¶rÃ¼nÃ¼r oluyor.", CABAL_NONE , RACE_NONE,ALIGN_NONE, GROUP_ILLUSION
     },
 
     {
-{"iron body","demir gövde"},	{ 93, 93,93,93, 93,93,93,93 ,29,93,93,93,93},
+{"iron body","demir gÃ¶vde"},	{ 93, 93,93,93, 93,93,93,93 ,29,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_iron_body,	TAR_CHAR_DEFENSIVE,	POS_STANDING,
 	NULL,			SLOT(718),	75,	12,
-  "",	"Derin yumuþuyor.",	"",
+  "",	"Derin yumuÅŸuyor.",	"",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -3719,7 +3719,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_iron_golem,	TAR_IGNORE,		POS_STANDING,
 	NULL,		SLOT(664),	400,		24,
-  "",	"Yeni golemler yapmak için yeterli gücü topladýn.","",
+  "",	"Yeni golemler yapmak iÃ§in yeterli gÃ¼cÃ¼ topladÄ±n.","",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -3733,7 +3733,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"know alignment","yönelim saptama"},	{  22,  13,93,93,1,5,93,93,29,93,93,22,93},
+	{"know alignment","yÃ¶nelim saptama"},	{  22,  13,93,93,1,5,93,93,29,93,93,22,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_know_alignment,	TAR_CHAR_DEFENSIVE,	POS_FIGHTING,
 	NULL,			SLOT(58),	 9,	12,
@@ -3742,16 +3742,16 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"lesser golem","küçük golem"},		{93,93,93,93,93,93,93,93,93,93,93,25,93},
+	{"lesser golem","kÃ¼Ã§Ã¼k golem"},		{93,93,93,93,93,93,93,93,93,93,93,25,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_lesser_golem,	TAR_IGNORE,		POS_STANDING,
 	NULL,		SLOT(662),	200,		12,
-  "",	"Yeni golemler yapmak için yeterli gücü topladýn.","",
+  "",	"Yeni golemler yapmak iÃ§in yeterli gÃ¼cÃ¼ topladÄ±n.","",
 	CABAL_NONE , 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"lethargic mist","uyuþukluk sisi"},   { 52, 93,93,93,93, 62, 93,93,56,93,93,93,93},
+	{"lethargic mist","uyuÅŸukluk sisi"},   { 52, 93,93,93,93, 62, 93,93,56,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_lethargic_mist,	TAR_IGNORE,	POS_STANDING,
 	&gsn_lethargic_mist,	SLOT(676),	200,	24,
@@ -3760,34 +3760,34 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"light arrow", "ýþýk oku"},	{  93, 93, 93, 93,64,93,93,93 ,93,93,93,93,93},
+	{"light arrow", "Ä±ÅŸÄ±k oku"},	{  93, 93, 93, 93,64,93,93,93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_light_arrow,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,		SLOT(683),	40,	12,
-	"ýþýk oku",	"!light arrow!",	"", CABAL_NONE ,
+	"Ä±ÅŸÄ±k oku",	"!light arrow!",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_COMBAT
     },
 
     {
-	{"lightning bolt","yýldýrým"},	{  23, 93, 93, 93,93,13,93,93 ,23,93,93,23,23},
+	{"lightning bolt","yÄ±ldÄ±rÄ±m"},	{  23, 93, 93, 93,93,13,93,93 ,23,93,93,23,23},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_lightning_bolt,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	&gsn_lightning_bolt,		SLOT(30),	15,	12,
-  "yýldýrým",	"!Lightning Bolt!",	"", CABAL_NONE ,
+  "yÄ±ldÄ±rÄ±m",	"!Lightning Bolt!",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_COMBAT
     },
 
     {
-	{"lightning shield","þimþek kalkaný"},	{ 41, 93,93, 93,93,93,93,93 ,93,93,93,41,93},
+	{"lightning shield","ÅŸimÅŸek kalkanÄ±"},	{ 41, 93,93, 93,93,93,93,93 ,93,93,93,41,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_lightning_shield,	TAR_IGNORE,	POS_STANDING,
 	NULL,		SLOT(614),	150,	24,
-  "þimþek kalkaný",	"Bir odayý yeniden kalkanlayabilirsin.",	"",
+  "ÅŸimÅŸek kalkanÄ±",	"Bir odayÄ± yeniden kalkanlayabilirsin.",	"",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"link","bað"},	{   31, 93, 93, 93,93,93,93,93,33 ,93,93,33,33},
+	{"link","baÄŸ"},	{   31, 93, 93, 93,93,93,93,93,33 ,93,93,33,33},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_link,		TAR_CHAR_DEFENSIVE,		POS_STANDING,
 	NULL,		SLOT(588),	125,	18,
@@ -3796,11 +3796,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"lion help","aslan yardýmý"},	{   93, 93, 93, 93,93,93,93,63,93 ,93,93,93,93},
+	{"lion help","aslan yardÄ±mÄ±"},	{   93, 93, 93, 93,93,93,93,63,93 ,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_lion_help,	TAR_IGNORE,		POS_STANDING,
 	NULL,		SLOT(595),	100,	12,
-  "",	"Yeniden aslan yardýmýna baþvurabilirsin.",	"",
+  "",	"Yeniden aslan yardÄ±mÄ±na baÅŸvurabilirsin.",	"",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -3814,16 +3814,16 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"love potion","aþk iksiri"},           { 93, 93, 93,93,93,93,93,93 ,93,93,93,93,93},
+	{"love potion","aÅŸk iksiri"},           { 93, 93, 93,93,93,93,93,93 ,93,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_love_potion, TAR_CHAR_SELF,       POS_STANDING,
         &gsn_love_potion,  SLOT(666),        10,       0,
-        "", "Gözlerindeki rüya sönüyor.", "",	CABAL_NONE ,
+        "", "GÃ¶zlerindeki rÃ¼ya sÃ¶nÃ¼yor.", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"magic jar","büyülü þiþe"},		{   93, 93, 93, 93,93,93,93,93,93 ,93,93,68,93},
+	{"magic jar","bÃ¼yÃ¼lÃ¼ ÅŸiÅŸe"},		{   93, 93, 93, 93,93,93,93,93,93 ,93,93,68,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_magic_jar,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,		SLOT(596),	20,	12,
@@ -3832,20 +3832,20 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"magic missile","fiþek"},	{ 1, 93, 93, 93,93,1,93,93 ,1,93,93,2,1},
+	{"magic missile","fiÅŸek"},	{ 1, 93, 93, 93,93,1,93,93 ,1,93,93,2,1},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_magic_missile,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	&gsn_magic_missile,		SLOT(32),	15,	12,
-	"fiþek",	"!Magic Missile!",	"", CABAL_NONE ,
+	"fiÅŸek",	"!Magic Missile!",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_COMBAT
     },
 
     {
-	{"magic resistance","büyü direnci"},	{   68, 93, 93, 93,93,93,93,93,72 ,93,93,69,71},
+	{"magic resistance","bÃ¼yÃ¼ direnci"},	{   68, 93, 93, 93,93,93,93,93,72 ,93,93,69,71},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_magic_resistance,	TAR_CHAR_SELF,	POS_STANDING,
 	NULL,		SLOT(605),	200,	24,
-  "",			"Büyüye karþý yeniden savunmasýzsýn.",
+  "",			"BÃ¼yÃ¼ye karÅŸÄ± yeniden savunmasÄ±zsÄ±n.",
 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_PROTECTIVE
     },
 
@@ -3859,7 +3859,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"mass healing","toplu þifa"},	{ 93, 54, 93, 93,93,93,93,93,93 ,93,93,93,93},
+	{"mass healing","toplu ÅŸifa"},	{ 93, 54, 93, 93,93,93,93,93,93 ,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_mass_healing,	TAR_IGNORE,		POS_STANDING,
 	NULL,			SLOT(508),	100,	36,
@@ -3868,11 +3868,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"mass invis","toplu görünmezlik"},		{ 43, 47, 93, 93,93,93,93,93 ,42,93,93,93,46},
+	{"mass invis","toplu gÃ¶rÃ¼nmezlik"},		{ 43, 47, 93, 93,93,93,93,93 ,42,93,93,93,46},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_mass_invis,	TAR_IGNORE,		POS_STANDING,
 	&gsn_mass_invis,	SLOT(69),	20,	24,
-  "",			"Görünmezliðin yitiyor.",		"", CABAL_NONE ,
+  "",			"GÃ¶rÃ¼nmezliÄŸin yitiyor.",		"", CABAL_NONE ,
 	RACE_NONE,ALIGN_NONE, GROUP_ILLUSION
     },
 
@@ -3886,7 +3886,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"master healing","yüksek tedavi"},	{  93,58,93,93,70,93,93,93,93,93,93,93,93},
+	{"master healing","yÃ¼ksek tedavi"},	{  93,58,93,93,70,93,93,93,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_master_heal,	TAR_CHAR_DEFENSIVE,POS_FIGHTING,
 	NULL,			SLOT(641),	300,	12,
@@ -3895,11 +3895,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"meld into stone","taþa dönüþme"},	{ 93, 93,93, 93,93,93,93,93 ,93,93,93,93,93},
+	{"meld into stone","taÅŸa dÃ¶nÃ¼ÅŸme"},	{ 93, 93,93, 93,93,93,93,93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_meld_into_stone,	TAR_CHAR_SELF,		POS_STANDING,
 	NULL,			SLOT(584),	12,	18,
-  "",	"Derindeki taþlar kumlaþarak dökülüyor.",	"",
+  "",	"Derindeki taÅŸlar kumlaÅŸarak dÃ¶kÃ¼lÃ¼yor.",	"",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_PROTECTIVE
     },
 
@@ -3913,11 +3913,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"mind light","zihin ýþýðý"},	{ 93, 83,93, 93,93,93,93,93 ,93,93,93,93,93},
+	{"mind light","zihin Ä±ÅŸÄ±ÄŸÄ±"},	{ 93, 83,93, 93,93,93,93,93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_mind_light,	TAR_IGNORE,		POS_STANDING,
 	NULL,		SLOT(82),	200,	24,
-  "",	"Artýk yeni odalarý hýzlandýrabilirsin.",	"",
+  "",	"ArtÄ±k yeni odalarÄ± hÄ±zlandÄ±rabilirsin.",	"",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -3931,16 +3931,16 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"mind wrench","zihin bükümü"},	{ 93, 93, 93, 93, 93, 40, 93,93,93,93,93,93,93},
+	{"mind wrench","zihin bÃ¼kÃ¼mÃ¼"},	{ 93, 93, 93, 93, 93, 40, 93,93,93,93,93,93,93},
 	{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_mind_wrench,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,		SLOT(651),	20,	12,
-  "zihin bükümü",	"!mind wrench!", "", CABAL_NONE ,
+  "zihin bÃ¼kÃ¼mÃ¼",	"!mind wrench!", "", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_COMBAT
     },
 
     {
-	{"mist walk","gizemli yürüyüþ"},		{  93,93,93,93,93,93,93,93,93,93,47,47,93},
+	{"mist walk","gizemli yÃ¼rÃ¼yÃ¼ÅŸ"},		{  93,93,93,93,93,93,93,93,93,93,47,47,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_mist_walk,	TAR_IGNORE,	POS_FIGHTING,
 	NULL,			SLOT(658),	80,	12,
@@ -3953,12 +3953,12 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_mummify,	TAR_OBJ_CHAR_OFF,	POS_STANDING,
 	NULL,		SLOT(715),	50,	12,
-  "",	"Yeni ölülere hayat verebilirsin.", 	"",
+  "",	"Yeni Ã¶lÃ¼lere hayat verebilirsin.", 	"",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"mysterious dream","gizemli düþ"}, 	{ 93, 93,93,93,93,35,93,93,49,93,93,27,93},
+	{"mysterious dream","gizemli dÃ¼ÅŸ"}, 	{ 93, 93,93,93,93,35,93,93,49,93,93,27,93},
 		{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_mysterious_dream,	TAR_IGNORE,	POS_STANDING,
 	&gsn_mysterious_dream,	SLOT(678),	200,	24,
@@ -3976,11 +3976,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"pass door","saydamlýk"},		{  24, 32, 93, 93,93,93,93,93 ,24,24,93,27,24},
+	{"pass door","saydamlÄ±k"},		{  24, 32, 93, 93,93,93,93,93 ,24,24,93,27,24},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_pass_door,	TAR_CHAR_SELF,		POS_STANDING,
 	&gsn_pass_door,			SLOT(74),	20,	12,
-  "",			"Cisimleþiyorsun.",	"", CABAL_NONE ,
+  "",			"CisimleÅŸiyorsun.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_TRANSPORTATION
     },
 
@@ -3989,21 +3989,21 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_plague,		TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	&gsn_plague,		SLOT(503),	20,	12,
-  "veba",		"Hastalýðýn çürüyor.",	"", CABAL_NONE ,
+  "veba",		"HastalÄ±ÄŸÄ±n Ã§Ã¼rÃ¼yor.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_MALADICTIONS
     },
 
     {
-	{"polymorph","binbir þekil"},      { 93, 93, 93, 93,93, 93,93,93,73,93,93,93,93},
+	{"polymorph","binbir ÅŸekil"},      { 93, 93, 93, 93,93, 93,93,93,73,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_polymorph,	TAR_IGNORE,	POS_STANDING,
 	NULL,			SLOT(639),	250,	24,
-  "",			"Doðal ýrkýna dönüyorsun.","",
+  "",			"DoÄŸal Ä±rkÄ±na dÃ¶nÃ¼yorsun.","",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_BENEDICTIONS
     },
 
     {
-	{"portal","köprü"},                { 54, 93, 93, 93, 93,93,93,93,40,93,93,43,93},
+	{"portal","kÃ¶prÃ¼"},                { 54, 93, 93, 93, 93,93,93,93,40,93,93,43,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_portal,           TAR_IGNORE,             POS_STANDING,
         NULL,                   SLOT(519),       100,     24,
@@ -4012,11 +4012,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"protection cold","soðuktan korunma"},{   93, 44, 93, 93, 93,93,93,25, 93,93,93,50,44},
+	{"protection cold","soÄŸuktan korunma"},{   93, 44, 93, 93, 93,93,93,25, 93,93,93,50,44},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_protection_cold,	TAR_CHAR_SELF,	POS_STANDING,
 	&gsn_protection_cold,		SLOT(600),	5,	12,
-  "",			"Daha az korunmasýz hissediyorsun.",
+  "",			"Daha az korunmasÄ±z hissediyorsun.",
 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_PROTECTIVE
     },
 
@@ -4025,7 +4025,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_protection_evil,	TAR_CHAR_SELF,		POS_STANDING,
 	NULL,			SLOT(34), 	5,	12,
-  "",			"Daha az korunmasýz hissediyorsun.",	"", CABAL_NONE ,
+  "",			"Daha az korunmasÄ±z hissediyorsun.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_PROTECTIVE
     },
 
@@ -4034,16 +4034,16 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_protection_good,	TAR_CHAR_SELF,		POS_STANDING,
 	NULL,			SLOT(666), 	5,	12,
-  "",			"Daha az korunmasýz hissediyorsun.",	"", CABAL_NONE ,
+  "",			"Daha az korunmasÄ±z hissediyorsun.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_PROTECTIVE
     },
 
     {
-	{"protection heat","sýcaktan korunma"},	{ 93, 39, 93, 93,93,93,93,93, 93,93,93,48,39},
+	{"protection heat","sÄ±caktan korunma"},	{ 93, 39, 93, 93,93,93,93,93, 93,93,93,48,39},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_protection_heat,	TAR_CHAR_SELF,	POS_STANDING,
 	&gsn_protection_heat,		SLOT(599),	5,	12,
-  "",			"Daha az korunmasýz hissediyorsun.",
+  "",			"Daha az korunmasÄ±z hissediyorsun.",
 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_PROTECTIVE
     },
 
@@ -4052,30 +4052,30 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_protection_negative,	TAR_CHAR_SELF,	POS_STANDING,
 	NULL,		SLOT(636),	20,	12,
-  "",		"Kendi saldýrýlarýna karþý daha az korunmasýz hissediyorsun.",
+  "",		"Kendi saldÄ±rÄ±larÄ±na karÅŸÄ± daha az korunmasÄ±z hissediyorsun.",
 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_PROTECTIVE
     },
 
     {
-	{"protective shield","koruma kalkaný"},     { 26,38,93,93, 93,93,93,93 ,26,93,93,18,26},
+	{"protective shield","koruma kalkanÄ±"},     { 26,38,93,93, 93,93,93,93 ,26,93,93,18,26},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_protective_shield,      TAR_CHAR_SELF,   POS_STANDING,
         &gsn_protective_shield,       SLOT(572),        70,       12,
-        "", "Kalkanýn sönüyor.", "", CABAL_NONE ,
+        "", "KalkanÄ±n sÃ¶nÃ¼yor.", "", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_PROTECTIVE
     },
 
-    { /* Ani ölüm */
-	{"power word kill","ölüm sözcüðü"},		{   93, 93, 93, 93,93,93,93,93,93 ,93,93,78,93},
+    { /* Ani Ã¶lÃ¼m */
+	{"power word kill","Ã¶lÃ¼m sÃ¶zcÃ¼ÄŸÃ¼"},		{   93, 93, 93, 93,93,93,93,93,93 ,93,93,78,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_power_kill,	TAR_CHAR_OFFENSIVE,	POS_STANDING,
 	NULL,		SLOT(604),	200,	18,
-  "ölüm sözcüðü",		"Dayanýklýlýðýn artýyor.",
+  "Ã¶lÃ¼m sÃ¶zcÃ¼ÄŸÃ¼",		"DayanÄ±klÄ±lÄ±ÄŸÄ±n artÄ±yor.",
 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"power word stun","bayýltma sözcüðü"},{ 93, 93,93, 93,93, 62,93,93 ,93,93,93,93,93},
+	{"power word stun","bayÄ±ltma sÃ¶zcÃ¼ÄŸÃ¼"},{ 93, 93,93, 93,93, 62,93,93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_power_stun,	TAR_CHAR_OFFENSIVE,	POS_STANDING,
 	&gsn_power_stun,		SLOT(625),	200,	24,
@@ -4093,7 +4093,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"ranger staff","korucu asasý"},          {  93, 93, 93, 93, 93, 93, 93, 32 ,93,93,93,93,93},
+	{"ranger staff","korucu asasÄ±"},          {  93, 93, 93, 93, 93, 93, 93, 32 ,93,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_ranger_staff,      TAR_IGNORE,          POS_FIGHTING,
         NULL,             SLOT(519),        75,       0,
@@ -4110,7 +4110,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"recharge","þarj"},		{ 29,93,93,93, 93, 93, 93, 93, 29,93,93,93,93},
+	{"recharge","ÅŸarj"},		{ 29,93,93,93, 93, 93, 93, 93, 29,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_recharge,		TAR_OBJ_INV,		POS_STANDING,
 	NULL,			SLOT(517),	60,	24,
@@ -4137,7 +4137,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"remove curse","lanet kaldýr"},	{  93, 32, 93, 93,13,93,93,93,93,93,93,93,93 },
+	{"remove curse","lanet kaldÄ±r"},	{  93, 32, 93, 93,13,93,93,93,93,93,93,93,93 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_remove_curse,	TAR_OBJ_CHAR_DEF,	POS_STANDING,
 	&gsn_remove_curse,	SLOT(35),	 5,	12,
@@ -4146,7 +4146,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"remove fear","korku kaldýr"},		{ 93, 34, 93,93,41,93,93,93,93,93,93,93,93 },
+	{"remove fear","korku kaldÄ±r"},		{ 93, 34, 93,93,41,93,93,93,93,93,93,93,93 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_remove_fear, 	TAR_CHAR_DEFENSIVE,	POS_STANDING,
 	NULL,		SLOT(582),	5,	12,
@@ -4154,7 +4154,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"remove tattoo","dövme kaldýr"},    { 93, 93, 93,93,93,93,93,93,93,93,93,93,93 },
+	{"remove tattoo","dÃ¶vme kaldÄ±r"},    { 93, 93, 93,93,93,93,93,93,93,93,93,93,93 },
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_remove_tattoo, TAR_CHAR_DEFENSIVE,       POS_STANDING,
         NULL,       SLOT(552),        10,       0,
@@ -4167,12 +4167,12 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_resilience,	TAR_CHAR_DEFENSIVE, POS_STANDING,
 	NULL,			SLOT( 638),	 50,	12,
-  "",	"Emici saldýrýlara karþý koruman azalýyor.", "",
+  "",	"Emici saldÄ±rÄ±lara karÅŸÄ± koruman azalÄ±yor.", "",
 	CABAL_NONE ,RACE_NONE, ALIGN_NONE, GROUP_PROTECTIVE
     },
 
     {
-	{"restoring light","iyileþtiren ýþýk"},   { 93, 71, 93,93,93,93,93,93,93,93,93,93,93},
+	{"restoring light","iyileÅŸtiren Ä±ÅŸÄ±k"},   { 93, 71, 93,93,93,93,93,93,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_restoring_light,	TAR_CHAR_DEFENSIVE,	POS_STANDING,
 	NULL,			SLOT(643),	50,	24,
@@ -4199,29 +4199,29 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"sand storm","kum fýrtýnasý"},	{ 93, 93, 93, 93,93,93,93,93,93,93,93,93,51 },
+	{"sand storm","kum fÄ±rtÄ±nasÄ±"},	{ 93, 93, 93, 93,93,93,93,93,93,93,93,93,51 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_sand_storm,	TAR_IGNORE,	POS_FIGHTING,
 	&gsn_sand_storm,		SLOT(577),	200,	24,
-  "kum fýrtýnasý",	"Gözlerindeki kum dökülüyor.","", CABAL_NONE ,
+  "kum fÄ±rtÄ±nasÄ±",	"GÃ¶zlerindeki kum dÃ¶kÃ¼lÃ¼yor.","", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"scream","çýðlýk"},		{ 52, 93, 93,93,93,93,93,93,48,93,93,93,93 },
+	{"scream","Ã§Ä±ÄŸlÄ±k"},		{ 52, 93, 93,93,93,93,93,93,48,93,93,93,93 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_scream,	TAR_IGNORE,	POS_FIGHTING,
 	&gsn_scream,		SLOT(578),	200,	24,
-  "çýðlýk",	"Yeniden duyabiliyorsun.",	"", CABAL_NONE ,
+  "Ã§Ä±ÄŸlÄ±k",	"Yeniden duyabiliyorsun.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"severity force","arz kýrýmý"},	{ 93, 45,93,93,93, 93, 93, 93,93,93 ,93,93,41},
+	{"severity force","arz kÄ±rÄ±mÄ±"},	{ 93, 45,93,93,93, 93, 93, 93,93,93 ,93,93,41},
 	{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_severity_force,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,		SLOT(622),	20,	12,
-  "arz kýrýmý",		"!severity force!", "", CABAL_NONE ,
+  "arz kÄ±rÄ±mÄ±",		"!severity force!", "", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -4230,7 +4230,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_shield,		TAR_CHAR_DEFENSIVE,	POS_STANDING,
 	&gsn_shield,		SLOT(67),	12,	18,
-  "",	"Güç kalkanýn parlayarak yokoluyor.", 	"",
+  "",	"GÃ¼Ã§ kalkanÄ±n parlayarak yokoluyor.", 	"",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_PROTECTIVE
     },
 
@@ -4239,25 +4239,25 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_shielding,	TAR_CHAR_OFFENSIVE,	POS_STANDING,
 	&gsn_shielding,		SLOT(591),	250,	12,
-  "",			"Gerçek Kaynak'tan uzaklaþtýðýný hissediyorsun.",
+  "",			"GerÃ§ek Kaynak'tan uzaklaÅŸtÄ±ÄŸÄ±nÄ± hissediyorsun.",
 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"shocking grasp","þok kavrayýþý"},		{ 8, 93, 93, 93,93,93,93,93 ,9,93,93,93,8},
+	{"shocking grasp","ÅŸok kavrayÄ±ÅŸÄ±"},		{ 8, 93, 93, 93,93,93,93,93 ,9,93,93,93,8},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_shocking_grasp,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,			SLOT(53),	15,	12,
-  "þok kavrayýþý",	"!Shocking Grasp!",	"", CABAL_NONE ,
+  "ÅŸok kavrayÄ±ÅŸÄ±",	"!Shocking Grasp!",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_COMBAT
     },
 
     {
-	{"shocking trap","þokçu tuzak"},	{ 37, 93,93, 93,93,93,93,93 ,40,93,93,37,93},
+	{"shocking trap","ÅŸokÃ§u tuzak"},	{ 37, 93,93, 93,93,93,93,93 ,40,93,93,37,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_shocking_trap,	TAR_IGNORE,	POS_STANDING,
 	NULL,		SLOT(615),	150,	24,
-  "þokçu tuzak",	"Daha fazla odayý þokla doldurabilirsin.","",
+  "ÅŸokÃ§u tuzak",	"Daha fazla odayÄ± ÅŸokla doldurabilirsin.","",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -4266,30 +4266,30 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_sleep,		TAR_CHAR_OFFENSIVE,	POS_STANDING,
 	&gsn_sleep,		SLOT(38),	15,	12,
-  "",			"Yorgunluðun geçiyor.",	"", CABAL_NONE ,
+  "",			"YorgunluÄŸun geÃ§iyor.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_BEGUILING
     },
 
     {
-	{"slow","yavaþlatma"},       { 28,38,93,93, 93, 28, 93, 93 ,23,93,28,29,93},
+	{"slow","yavaÅŸlatma"},       { 28,38,93,93, 93, 28, 93, 93 ,23,93,28,29,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_slow,             TAR_CHAR_OFFENSIVE,     POS_FIGHTING,
         &gsn_slow,                   SLOT(515),      30,     12,
-        "",                     "Hýzlandýðýný hissediyorsun.",	"", CABAL_NONE ,
+        "",                     "HÄ±zlandÄ±ÄŸÄ±nÄ± hissediyorsun.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_MALADICTIONS
     },
 
     {
-	{"soften","yumuþatma"},		{ 93, 93, 93, 93,93,93,93,93 ,58,93,93,93,93},
+	{"soften","yumuÅŸatma"},		{ 93, 93, 93, 93,93,93,93,93 ,58,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_soften,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,		SLOT(713),	 75,	12,
-  "yumuþatma",	"Derin sertleþiyor.",
+  "yumuÅŸatma",	"Derin sertleÅŸiyor.",
 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_WEATHER
     },
 
     {
-	{"solar flight","güneþ uçuþu"},		{93,35,93,93,93,93,93,93,93,93,93,93,93},
+	{"solar flight","gÃ¼neÅŸ uÃ§uÅŸu"},		{93,35,93,93,93,93,93,93,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_solar_flight,	TAR_IGNORE,	POS_FIGHTING,
 	NULL,			SLOT(659),	80,	12,
@@ -4307,124 +4307,124 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"soul bind","ruh baðý"},		{ 93, 93, 93, 93,93,39,93,93, 93,93,93,54,93 },
+	{"soul bind","ruh baÄŸÄ±"},		{ 93, 93, 93, 93,93,39,93,93, 93,93,93,54,93 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_soul_bind,	TAR_CHAR_OFFENSIVE,	POS_STANDING,
 	NULL,		SLOT(716),	 5,	12,
-  "",		"Kendine güvenin artýyor.",	"",
+  "",		"Kendine gÃ¼venin artÄ±yor.",	"",
 	CABAL_NONE, RACE_NONE, ALIGN_NONE, GROUP_BEGUILING
     },
 
     {
-	{"spectral furor","hayali öfke"},	{ 93, 93, 93, 93, 93, 93,93,93,93,93,93,35,93},
+	{"spectral furor","hayali Ã¶fke"},	{ 93, 93, 93, 93, 93, 93,93,93,93,93,93,35,93},
 	{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_spectral_furor,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,		SLOT(646),	20,	12,
-  "hayali öfke",	"!spectral furor!", "", CABAL_NONE ,
+  "hayali Ã¶fke",	"!spectral furor!", "", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_COMBAT
     },
 
     {
-	{"stone golem","taþ golem"},		{93,93,93,93,93,93,93,93,93,93,93,39,93},
+	{"stone golem","taÅŸ golem"},		{93,93,93,93,93,93,93,93,93,93,93,39,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_stone_golem,	TAR_IGNORE,		POS_STANDING,
 	NULL,		SLOT(663),	300,		18,
-  "",	"Yeni golemler yapmak için yeterli gücü topladýn.","",
+  "",	"Yeni golemler yapmak iÃ§in yeterli gÃ¼cÃ¼ topladÄ±n.","",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"stone skin","taþ deri"},	{ 25, 36, 93,93,93,93,35,93,93,93,60,30,25},
+	{"stone skin","taÅŸ deri"},	{ 25, 36, 93,93,93,93,35,93,93,93,60,30,25},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_stone_skin,	TAR_CHAR_SELF,		POS_STANDING,
 	NULL,			SLOT(66),	12,	18,
-  "",			"Derin yumuþuyor.",	"", CABAL_NONE ,
+  "",			"Derin yumuÅŸuyor.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_PROTECTIVE
     },
 
     {
-	{"suffocate","boðma"},    {  93,93,93,93, 93,93,93,93, 48,93,93,93,93},
+	{"suffocate","boÄŸma"},    {  93,93,93,93, 93,93,93,93, 48,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_suffocate,    TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
         NULL,             SLOT(714),        50,       12,
-        "boðma",     "Yeniden soluyabilirsin.", "",CABAL_NONE,
+        "boÄŸma",     "Yeniden soluyabilirsin.", "",CABAL_NONE,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"sulfurus spray","sülfür spreyi"},	{ 93, 93, 93, 93, 93,93,93,93,28,93,93,93,93},
+	{"sulfurus spray","sÃ¼lfÃ¼r spreyi"},	{ 93, 93, 93, 93, 93,93,93,93,28,93,93,93,93},
 	{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_sulfurus_spray,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,		SLOT(652),	20,	12,
-  "sülfür spreyi",	"!sulfurus spray!", "", CABAL_NONE ,
+  "sÃ¼lfÃ¼r spreyi",	"!sulfurus spray!", "", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_COMBAT
     },
 
     {
-	{"summon","çaðrý"},		{  23, 22, 93, 93,51,50,93,93,24,93,93,93,93},
+	{"summon","Ã§aÄŸrÄ±"},		{  23, 22, 93, 93,51,50,93,93,24,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_summon,		TAR_IGNORE,		POS_STANDING,
 	NULL,			SLOT(40),	50,	12,
-	"",			"!Çaðrý!",		"", CABAL_NONE ,
+	"",			"!Ã‡aÄŸrÄ±!",		"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_TRANSPORTATION
     },
 
     {
-	{"summon air elemental","hava uþaðý"},  { 93, 93, 93, 93, 93, 93,93,93,93,93,93,93,42},
+	{"summon air elemental","hava uÅŸaÄŸÄ±"},  { 93, 93, 93, 93, 93, 93,93,93,93,93,93,93,42},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_summon_air_elm,	TAR_IGNORE,		POS_STANDING,
 	NULL,			SLOT(696),	50,	12,
-  "",	"Hava uþaðý çaðýrabilecek gücü kazanýyorsun.",
+  "",	"Hava uÅŸaÄŸÄ± Ã§aÄŸÄ±rabilecek gÃ¼cÃ¼ kazanÄ±yorsun.",
 	"", 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"summon earth elemental","toprak uþaðý"},{ 93, 93, 93, 93, 93, 93,93,93,93,93,93,93,38},
+	{"summon earth elemental","toprak uÅŸaÄŸÄ±"},{ 93, 93, 93, 93, 93, 93,93,93,93,93,93,93,38},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_summon_earth_elm,	TAR_IGNORE,		POS_STANDING,
 	NULL,			SLOT(693),	50,	12,
-  "",	"Toprak uþaðý çaðýrabilecek gücü kazanýyorsun.",
+  "",	"Toprak uÅŸaÄŸÄ± Ã§aÄŸÄ±rabilecek gÃ¼cÃ¼ kazanÄ±yorsun.",
 	"", 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"summon fire elemental","ateþ uþaðý"},{ 93, 93, 93, 93, 93, 93,93,93,93,93,93,93,58},
+	{"summon fire elemental","ateÅŸ uÅŸaÄŸÄ±"},{ 93, 93, 93, 93, 93, 93,93,93,93,93,93,93,58},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_summon_fire_elm,	TAR_IGNORE,		POS_STANDING,
 	NULL,			SLOT(697),	50,	12,
-  "",	"Ateþ uþaðý çaðýrabilecek gücü kazanýyorsun.",
+  "",	"AteÅŸ uÅŸaÄŸÄ± Ã§aÄŸÄ±rabilecek gÃ¼cÃ¼ kazanÄ±yorsun.",
 	"", 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"summon lightning elemental","enerji uþaðý"},{ 93,93,93,93,93, 93,93,93,93,93,93,93,68},
+	{"summon lightning elemental","enerji uÅŸaÄŸÄ±"},{ 93,93,93,93,93, 93,93,93,93,93,93,93,68},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_summon_light_elm,	TAR_IGNORE,		POS_STANDING,
 	NULL,			SLOT(710),	50,	12,
-  "", "Enerji uþaðý çaðýrabilecek gücü kazanýyorsun.",
+  "", "Enerji uÅŸaÄŸÄ± Ã§aÄŸÄ±rabilecek gÃ¼cÃ¼ kazanÄ±yorsun.",
 	"", 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"summon water elemental","su uþaðý"},{ 93, 93, 93, 93, 93, 93,93,93,93,93,93,93,48},
+	{"summon water elemental","su uÅŸaÄŸÄ±"},{ 93, 93, 93, 93, 93, 93,93,93,93,93,93,93,48},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_summon_water_elm,	TAR_IGNORE,		POS_STANDING,
 	NULL,			SLOT(698),	50,	12,
-  "",	"Su uþaðý çaðýrabilecek gücü kazanýyorsun.",
+  "",	"Su uÅŸaÄŸÄ± Ã§aÄŸÄ±rabilecek gÃ¼cÃ¼ kazanÄ±yorsun.",
 	"", 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"summon shadow","gölge çaðrýsý"},{ 93, 93,93,93,93,93,93,93,93,93,93,50,93},
+	{"summon shadow","gÃ¶lge Ã§aÄŸrÄ±sÄ±"},{ 93, 93,93,93,93,93,93,93,93,93,93,50,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_summon_shadow,	TAR_CHAR_SELF,		POS_STANDING,
 	NULL,		SLOT(620),	200,	24,
-  "",	"Yeni gölgeler çaðýrabilirsin.",	"",
+  "",	"Yeni gÃ¶lgeler Ã§aÄŸÄ±rabilirsin.",	"",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"superior heal","yüksek þifa"},{  93, 38, 93,93,43,93,93,93,93,93,93,93,93},
+	{"superior heal","yÃ¼ksek ÅŸifa"},{  93, 38, 93,93,43,93,93,93,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_super_heal,	TAR_CHAR_DEFENSIVE,POS_FIGHTING,
 	NULL,			SLOT(640),	100,	12,
@@ -4433,7 +4433,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"tattoo","dövme"},    { 93, 93, 93,93,93,93,93,93,93,93,93,93,93},
+	{"tattoo","dÃ¶vme"},    { 93, 93, 93,93,93,93,93,93,93,93,93,93,93},
 	{1,1,1,1,1,1,1,1,1, 1,1,1,1},
         spell_tattoo, TAR_CHAR_DEFENSIVE,       POS_STANDING,
         NULL,       SLOT(551),        10,       0,
@@ -4472,16 +4472,16 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_turn,	TAR_IGNORE,	POS_FIGHTING,
 	NULL,		SLOT(597),	50,	12,
-  "",	"Devir büyüsünü yeniden kullanabilirsin.",	"", CABAL_NONE ,
+  "",	"Devir bÃ¼yÃ¼sÃ¼nÃ¼ yeniden kullanabilirsin.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"vampiric blast","yarasa öfkesi"},	{ 93, 93, 93, 93, 93, 93, 93, 93,93,93 ,38,93,93},
+	{"vampiric blast","yarasa Ã¶fkesi"},	{ 93, 93, 93, 93, 93, 93, 93, 93,93,93 ,38,93,93},
 	{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_vam_blast,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,		SLOT(611),	20,	12,
-  "yarasa öfkesi",	"!Vampiric Blast!", "",CABAL_NONE ,
+  "yarasa Ã¶fkesi",	"!Vampiric Blast!", "",CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -4495,29 +4495,29 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"web","að"},		{   93, 93, 93, 93,93,93,93,93,69 ,93,93,58,93},
+	{"web","aÄŸ"},		{   93, 93, 93, 93,93,93,93,93,69 ,93,93,58,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_web,		TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	&gsn_web,		SLOT(592),	50,	12,
-	"",		"Seni saran aðlar eriyor.",
+	"",		"Seni saran aÄŸlar eriyor.",
 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_ATTACK
     },
 
     {
-	{"windwall","rüzgar duvarý"},		{ 93, 93, 93, 93, 93, 93,93,93,93,93,93,93,47},
+	{"windwall","rÃ¼zgar duvarÄ±"},		{ 93, 93, 93, 93, 93, 93,93,93,93,93,93,93,47},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_windwall,		TAR_IGNORE,		POS_FIGHTING,
 	NULL,			SLOT(694),	20,	12,
-  "rüzgar duvarý",		"Gözlerin iyileþiyor.",	"",
+  "rÃ¼zgar duvarÄ±",		"GÃ¶zlerin iyileÅŸiyor.",	"",
  	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_COMBAT
     },
 
     {
-	{"witch curse","cadý laneti"},	{   93, 93, 93, 93,93,93,93,93,93 ,93,93,93,93},
+	{"witch curse","cadÄ± laneti"},	{   93, 93, 93, 93,93,93,93,93,93 ,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_witch_curse,	TAR_CHAR_OFFENSIVE,	POS_STANDING,
 	&gsn_witch_curse,		SLOT(602),	150,	24,
-  "",			"Dayanýklýlýðýn artýyor.",
+  "",			"DayanÄ±klÄ±lÄ±ÄŸÄ±n artÄ±yor.",
 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -4531,16 +4531,16 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"weaken","zayýflatma"},	{   93, 24, 93, 93,93,93,93,93 ,19,93,16,29,93},
+	{"weaken","zayÄ±flatma"},	{   93, 24, 93, 93,93,93,93,93 ,19,93,16,29,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_weaken,		TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	&gsn_weaken,		SLOT(68),	20,	12,
-  "zayýflatma",		"Güçlendiðini hissediyorsun.",	"", CABAL_NONE ,
+  "zayÄ±flatma",		"GÃ¼Ã§lendiÄŸini hissediyorsun.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_MALADICTIONS
     },
 
     {
-	{"word of recall","anýmsama sözcüðü"},		{ 32, 28, 93, 93,32,93,29,93 ,32,38,10,10,32},
+	{"word of recall","anÄ±msama sÃ¶zcÃ¼ÄŸÃ¼"},		{ 32, 28, 93, 93,32,93,29,93 ,32,38,10,10,32},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_word_of_recall,	TAR_CHAR_SELF,		POS_RESTING,
 	NULL,			SLOT(42),	 5,	12,
@@ -4562,20 +4562,20 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"desert heat","çöl sýcaðý"},		{ 69, 69, 69, 69,69,69,69,69,69,69,69,69,69 },
+	{"desert heat","Ã§Ã¶l sÄ±caÄŸÄ±"},		{ 69, 69, 69, 69,69,69,69,69,69,69,69,69,69 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,		SLOT(629),	200,	24,
-  "çöl sýcaðý","Gözlerindeki duman yokoluyor.",	"", CABAL_NONE ,
+  "Ã§Ã¶l sÄ±caÄŸÄ±","GÃ¶zlerindeki duman yokoluyor.",	"", CABAL_NONE ,
 	RACE_TOP, ALIGN_NONE, GROUP_DRACONIAN
     },
 
     {
-	{"fire breath","ateþ nefesi"},	{ 69, 69, 69, 69,69,69,69,69,69,69,69,69,69 },
+	{"fire breath","ateÅŸ nefesi"},	{ 69, 69, 69, 69,69,69,69,69,69,69,69,69,69 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_fire_breath,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	&gsn_fire_breath,		SLOT(201),	200,	24,
-  "ateþ nefesi",	"Gözlerindeki duman yokoluyor.",	"", CABAL_NONE ,
+  "ateÅŸ nefesi",	"GÃ¶zlerindeki duman yokoluyor.",	"", CABAL_NONE ,
 	RACE_TOP, ALIGN_NONE, GROUP_DRACONIAN
     },
 
@@ -4598,38 +4598,38 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"lightning breath","þimþek nefesi"},	{ 64,64,64,64,64,64,64,64,64,64,64,64,64  },
+	{"lightning breath","ÅŸimÅŸek nefesi"},	{ 64,64,64,64,64,64,64,64,64,64,64,64,64  },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_lightning_breath,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	&gsn_lightning_breath,		SLOT(204),	150,	24,
-  "þimþek nefesi",	"!Lightning Breath!",	"", CABAL_NONE ,
+  "ÅŸimÅŸek nefesi",	"!Lightning Breath!",	"", CABAL_NONE ,
 	RACE_TOP, ALIGN_NONE, GROUP_DRACONIAN
     },
 
     {
-	{"lightning stroke","çelik darbe"},		{ 69, 69, 69, 69,69,69,69,69,69,69,69,69,69 },
+	{"lightning stroke","Ã§elik darbe"},		{ 69, 69, 69, 69,69,69,69,69,69,69,69,69,69 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,		SLOT(632),	200,	24,
-  "çelik darbe",	"!lightning stroke!",	"", CABAL_NONE ,
+  "Ã§elik darbe",	"!lightning stroke!",	"", CABAL_NONE ,
 	RACE_TOP, ALIGN_NONE, GROUP_DRACONIAN
     },
 
     {
-   {"luck bonus","þans bonusu"},{ 67, 67, 67, 67,67,67,67,67,67,67,67,67,67 },
+   {"luck bonus","ÅŸans bonusu"},{ 67, 67, 67, 67,67,67,67,67,67,67,67,67,67 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,	TAR_CHAR_DEFENSIVE,	POS_STANDING,
 	NULL,		SLOT( 630),	 20,	12,
-  "",		"Büyüye karþý zýrhýnýn azaldýðýný hissediyorsun.",	"", CABAL_NONE,
+  "",		"BÃ¼yÃ¼ye karÅŸÄ± zÄ±rhÄ±nÄ±n azaldÄ±ÄŸÄ±nÄ± hissediyorsun.",	"", CABAL_NONE,
 	RACE_TOP, ALIGN_NONE, GROUP_PROTECTIVE
     },
 
     {
-	{"paralyzation","felç"},	{ 69, 69, 69, 69,69,69,69,69,69,69,69,69,69 },
+	{"paralyzation","felÃ§"},	{ 69, 69, 69, 69,69,69,69,69,69,69,69,69,69 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,	TAR_IGNORE,	POS_FIGHTING,
 	NULL,		SLOT(631),	200,	24,
-  "felç",	"Yeniden hareket edebiliyorsun.",	"", CABAL_NONE ,
+  "felÃ§",	"Yeniden hareket edebiliyorsun.",	"", CABAL_NONE ,
 	RACE_TOP, ALIGN_NONE, GROUP_DRACONIAN
     },
 
@@ -4643,11 +4643,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"sleep gas","uyku gazý"},	{ 67, 67, 67, 67,67,67,67,67,67,67,67,67,67 },
+	{"sleep gas","uyku gazÄ±"},	{ 67, 67, 67, 67,67,67,67,67,67,67,67,67,67 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,	TAR_IGNORE,	POS_FIGHTING,
 	NULL,		SLOT(628),	200,	24,
-  "uyku gazý",	"Kendini kurumuþ hissediyorsun.",	"", CABAL_NONE ,
+  "uyku gazÄ±",	"Kendini kurumuÅŸ hissediyorsun.",	"", CABAL_NONE ,
 	RACE_TOP, ALIGN_NONE, GROUP_DRACONIAN
     },
 
@@ -4656,7 +4656,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,		SLOT(634),	200,	24,
-  "slow gas",	"Eski hýzýný kazanýyorsun.",	"", CABAL_NONE ,
+  "slow gas",	"Eski hÄ±zÄ±nÄ± kazanÄ±yorsun.",	"", CABAL_NONE ,
 	RACE_TOP, ALIGN_NONE, GROUP_DRACONIAN
     },
 
@@ -4665,29 +4665,29 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
  * Glop/Erkenbrand
  */
     {
-	{"crush","baský"},	{93,93,93,93,93,93,93,93,93,93,93,93,93},
+	{"crush","baskÄ±"},	{93,93,93,93,93,93,93,93,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1,1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_crush,            	SLOT( 0),       0,      18,
-        "baský",                 "!crush!",		"", CABAL_NONE ,
+        "baskÄ±",                 "!crush!",		"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_FIGHTMASTER
     },
 
     {
-	{"general purpose","genel amaç"},       { 93, 93, 93, 93, 93, 93, 93, 93 ,93,93,93,93,93},
+	{"general purpose","genel amaÃ§"},       { 93, 93, 93, 93, 93, 93, 93, 93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_general_purpose,  TAR_CHAR_OFFENSIVE,     POS_FIGHTING,
         NULL,                   SLOT(401),      0,      12,
-	"genel amaç", "!General Purpose Ammo!",	"", CABAL_NONE ,
+	"genel amaÃ§", "!General Purpose Ammo!",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"high explosive","yüksek patlayýcý"},       { 93, 93, 93, 93, 93, 93, 93, 93 ,93,93,93,93,93},
+	{"high explosive","yÃ¼ksek patlayÄ±cÄ±"},       { 93, 93, 93, 93, 93, 93, 93, 93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_high_explosive,   TAR_CHAR_OFFENSIVE,     POS_FIGHTING,
         NULL,                   SLOT(402),      0,      12,
-        "yüksek patlayýcý",  "!High Explosive Ammo!",	"", CABAL_NONE ,
+        "yÃ¼ksek patlayÄ±cÄ±",  "!High Explosive Ammo!",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -4730,7 +4730,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"dagger","hançer"},             { 1,  1,  1,  1,1,1,1,1 ,1 ,1,1,1,1},
+	{"dagger","hanÃ§er"},             { 1,  1,  1,  1,1,1,1,1 ,1 ,1,1,1,1},
 	{ 2, 2, 1, 1,1,1,1,1,1,1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_dagger,            SLOT( 0),       0,      0,
@@ -4739,7 +4739,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"flail","döven"},		{ 93,  1, 93,  1,93,1,93,93 ,93,93,93,93,1},
+	{"flail","dÃ¶ven"},		{ 93,  1, 93,  1,93,1,93,93 ,93,93,93,93,1},
 	{ 2, 2, 1, 1,1,1,1,1,1,1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_flail,            	SLOT( 0),       0,      0,
@@ -4748,7 +4748,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"lance","kargý"},	{ 33,33,33,33,33,33,33,33,33,33,33,33,33},
+	{"lance","kargÄ±"},	{ 33,33,33,33,33,33,33,33,33,33,33,33,33},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,	TAR_IGNORE,	POS_STANDING,
 	&gsn_lance,	SLOT(0),	0,	0,
@@ -4775,7 +4775,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"shield block","kalkan bloðu"},		{ 93,17,7,1,1,1,12,10,93 ,10,93,93,93},
+	{"shield block","kalkan bloÄŸu"},		{ 93,17,7,1,1,1,12,10,93 ,10,93,93,93},
 	{ 2, 1, 1, 1,1,1,1,1,1,1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_FIGHTING,
 	&gsn_shield_block,	SLOT(0),	0,	0,
@@ -4784,16 +4784,16 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"spear","mýzrak"},			{  93,  93,  1,  1,93,1,1,1 ,93,1,8,93,93 },
+	{"spear","mÄ±zrak"},			{  93,  93,  1,  1,93,1,1,1 ,93,1,8,93,93 },
 	{ 2, 2, 1, 1,1,1,1,1,1,1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_spear,            	SLOT( 0),       0,      12,
-        "mýzrak",                     "!Spear!",		"", CABAL_NONE ,
+        "mÄ±zrak",                     "!Spear!",		"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_WEAPONSMASTER
     },
 
     {
-	{"sword","kýlýç"},		{  93, 1,  1,  1,1,1,1,1,93 ,1,1,93,93},
+	{"sword","kÄ±lÄ±Ã§"},		{  93, 1,  1,  1,1,1,1,1,93 ,1,1,93,93},
 	{ 2, 2, 1, 1,1,1,1,1,1,1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_sword,            	SLOT( 0),       0,      0,
@@ -4802,7 +4802,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"whip","kýrbaç"},		{  1, 1,  93,  1,1,1,93,1 ,1,93,1,1,1},
+	{"whip","kÄ±rbaÃ§"},		{  1, 1,  93,  1,1,1,93,1 ,1,93,1,1,1},
 	{ 2, 2, 1, 1,1,1,1,1,1,1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_whip,            	SLOT( 0),       0,      0,
@@ -4829,7 +4829,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"area attack","alan saldýrýsý"},      {93, 93, 93, 73,93,93,93,93,93,69,93,93,93},
+	{"area attack","alan saldÄ±rÄ±sÄ±"},      {93, 93, 93, 73,93,93,93,93,93,69,93,93,93},
 	{1,1,1,1,1,1,1,1,1,1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_area_attack,     SLOT(0),        0,      0,
@@ -4837,7 +4837,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	RACE_NONE, ALIGN_NONE, GROUP_FIGHTMASTER
     },
 
-    { /* Ani ölüm */
+    { /* Ani Ã¶lÃ¼m */
 	{"assassinate","suikast"},       {  93, 93, 93, 93, 93, 93, 65, 93 ,93,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,      TAR_IGNORE,          POS_STANDING,
@@ -4847,11 +4847,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"backstab","ardýlan"},          {  93, 93,  11, 93,93,93,93,93 ,93,93,93,93,93 },
+	{"backstab","ardÄ±lan"},          {  93, 93,  11, 93,93,93,93,93 ,93,93,93,93,93 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1,1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_STANDING,
         &gsn_backstab,          SLOT( 0),        0,     12,
-        "ardýlan",             "!Backstab!",		"", CABAL_NONE ,
+        "ardÄ±lan",             "!Backstab!",		"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -4865,29 +4865,29 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"bash door","kapýkýrma"},	{  93, 93, 93,  1,6,1,1,93 ,93,93,11,93,93},
+	{"bash door","kapÄ±kÄ±rma"},	{  93, 93, 93,  1,6,1,1,93 ,93,93,11,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1,1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_bash_door,        	SLOT( 0),       0,      18,
-        "kapýkýrma",                 "!Bash Door!",		"", CABAL_NONE ,
+        "kapÄ±kÄ±rma",                 "!Bash Door!",		"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_FIGHTMASTER
     },
 
     {
-	{"bearcall","ayý çaðýrma"},      {  93, 93, 93, 93, 93, 93, 93, 31,93,93,93,93,93 },
+	{"bearcall","ayÄ± Ã§aÄŸÄ±rma"},      {  93, 93, 93, 93, 93, 93, 93, 31,93,93,93,93,93 },
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,		TAR_IGNORE,          POS_FIGHTING,
         &gsn_bear_call,		SLOT(518),	50,       0,
-        "", "Yeni ayýlarla baþa çýkabilirsin.", "",	CABAL_NONE ,
+        "", "Yeni ayÄ±larla baÅŸa Ã§Ä±kabilirsin.", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"berserk","vahþileþme"},		{ 93, 93, 93, 18,93,93,93,93 ,93,20,93,93,93 },
+	{"berserk","vahÅŸileÅŸme"},		{ 93, 93, 93, 18,93,93,93,93 ,93,20,93,93,93 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1,1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_berserk,        	SLOT( 0),       0,      24,
-        "",                     "Nabzýnýn yavaþladýðýný hissediyorsun.",	"", CABAL_NONE ,
+        "",                     "NabzÄ±nÄ±n yavaÅŸladÄ±ÄŸÄ±nÄ± hissediyorsun.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -4896,7 +4896,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_CHAR_OFFENSIVE,   POS_STANDING,
 	&gsn_blackguard,		SLOT(0),    0,       12,
-  "karagard",		"Karagardýn yokoluyor.","", CABAL_NONE ,
+  "karagard",		"KaragardÄ±n yokoluyor.","", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -4905,12 +4905,12 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_CHAR_OFFENSIVE,   POS_STANDING,
 	&gsn_blackjack,		SLOT(0),    0,       8,
-  "copla",		"Kafandaki aðrý geçiyor.","", CABAL_NONE ,
+  "copla",		"Kafandaki aÄŸrÄ± geÃ§iyor.","", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"blind fighting","kör dövüþü"},	{   93, 93, 93, 13,32,93,11,43,93 ,23,93,93,93},
+	{"blind fighting","kÃ¶r dÃ¶vÃ¼ÅŸÃ¼"},	{   93, 93, 93, 13,32,93,11,43,93 ,23,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_STANDING,
 	&gsn_blind_fighting,		SLOT(0),	0,	0,
@@ -4919,7 +4919,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"blindness dust","körlük tozu"},       {  93, 93, 93, 93, 93, 93, 28, 93,93,93,93,93,93 },
+	{"blindness dust","kÃ¶rlÃ¼k tozu"},       {  93, 93, 93, 93, 93, 93, 28, 93,93,93,93,93,93 },
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,   		TAR_IGNORE,             POS_FIGHTING,
         &gsn_blindness_dust,    SLOT(0),        20,       18,
@@ -4946,11 +4946,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"caltraps","çivi"},        {  93, 93, 93, 93, 93, 93, 18, 93 ,93,36,93,93,93},
+	{"caltraps","Ã§ivi"},        {  93, 93, 93, 93, 93, 93, 18, 93 ,93,36,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,      TAR_IGNORE,          POS_FIGHTING,
         &gsn_caltraps,       SLOT(0),        0,       18,
-        "çivi", "Bacaklarýndaki acý sönüyor.", "",	CABAL_NONE ,
+        "Ã§ivi", "BacaklarÄ±ndaki acÄ± sÃ¶nÃ¼yor.", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -4982,20 +4982,20 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"circle","çevrel"},          {  93, 93, 7, 93, 93, 93, 93, 93,93 ,93,93,93,93},
+	{"circle","Ã§evrel"},          {  93, 93, 7, 93, 93, 93, 93, 93,93 ,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,        TAR_CHAR_OFFENSIVE,          POS_FIGHTING,
         &gsn_circle,             SLOT(0),        0,       18,
-        "çevrel", "!Circle!", "",		CABAL_NONE ,
+        "Ã§evrel", "!Circle!", "",		CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"control animal","hayvan kontrolü"},	{ 93, 93, 93, 93,93,93,93,93,93,93,43,93,93 },
+	{"control animal","hayvan kontrolÃ¼"},	{ 93, 93, 93, 93,93,93,93,93,93,93,43,93,93 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,	TAR_CHAR_OFFENSIVE,	POS_STANDING,
 	&gsn_control_animal,	SLOT( 0),	 5,	12,
-  "",			"Kendine güvenin artýyor.",	"", CABAL_NONE ,
+  "",			"Kendine gÃ¼venin artÄ±yor.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_BEGUILING
     },
 
@@ -5013,7 +5013,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_concentrate,        SLOT( 0),        0,     18,
-        "",      "Yeni dövüþlere konsantre olabilirsin.",	"",CABAL_NONE ,
+        "",      "Yeni dÃ¶vÃ¼ÅŸlere konsantre olabilirsin.",	"",CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_FIGHTMASTER
     },
 
@@ -5027,7 +5027,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"critical strike","kritik vuruþ"},	{   93, 93, 93, 93,93,93,58,93,93 ,62,93,93,93},
+	{"critical strike","kritik vuruÅŸ"},	{   93, 93, 93, 93,93,93,58,93,93 ,62,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_STANDING,
 	&gsn_critical,			SLOT(0),	0,	18,
@@ -5036,7 +5036,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"cross block","çapraz blok"},       {  93,93,93,31,56,56,93,31,93,32,93,93,93},
+	{"cross block","Ã§apraz blok"},       {  93,93,93,31,56,56,93,31,93,32,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_cross_block,       SLOT( 0),        0,     0,
@@ -5045,16 +5045,16 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"detect hidden","saklýyý saptama"},	{ 93, 93, 93, 93, 93, 93, 93, 93 ,93,93,93,93,93},
+	{"detect hidden","saklÄ±yÄ± saptama"},	{ 93, 93, 93, 93, 93, 93, 93, 93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_detect_hidden,	TAR_CHAR_SELF,		POS_STANDING,
 	NULL,		SLOT(44),	 5,	12,
-  "",			"Saklýyý saptaman sönüyor.",
+  "",			"SaklÄ±yÄ± saptaman sÃ¶nÃ¼yor.",
 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_DETECTION
     },
 
     {
-	{"detect sneak","süzüleni saptama"},		{   93, 93, 93, 93,93,93,93,93,93 ,93,93,93,93},
+	{"detect sneak","sÃ¼zÃ¼leni saptama"},		{   93, 93, 93, 93,93,93,93,93,93 ,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_CHAR_SELF,		POS_STANDING,
 	&gsn_detect_sneak,		SLOT(0),	20,	18,
@@ -5067,12 +5067,12 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_FIGHTING,
 	&gsn_dirt,		SLOT( 0),	0,	12,
-  "toz atma",		"Gözlerindeki toz dökülüyor.",	"", CABAL_NONE ,
+  "toz atma",		"GÃ¶zlerindeki toz dÃ¶kÃ¼lÃ¼yor.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"disarm","silahsýzlandýr"},              {  93, 93, 28, 20,20,21,23,21,93,21,93,93,93},
+	{"disarm","silahsÄ±zlandÄ±r"},              {  93, 93, 28, 20,20,21,23,21,93,21,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_disarm,            SLOT( 0),        0,     18,
@@ -5081,7 +5081,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"dodge","sýyrýlma"},           {  33,93,1,13, 21,21,1,9, 93,15,8,93,27},
+	{"dodge","sÄ±yrÄ±lma"},           {  33,93,1,13, 21,21,1,9, 93,15,8,93,27},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_dodge,             SLOT( 0),        0,     0,
@@ -5090,16 +5090,16 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
    {
-	{"dual backstab","çift ardýlan"},       {  93, 93, 38, 93, 93, 93, 93, 93 ,93,93,93,93,93},
+	{"dual backstab","Ã§ift ardÄ±lan"},       {  93, 93, 38, 93, 93, 93, 93, 93 ,93,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,             TAR_CHAR_OFFENSIVE,           POS_STANDING,
         &gsn_dual_backstab,       SLOT(0),        0,       0,
-        "çift ardýlan",      "!dual backstab!", "",		CABAL_NONE ,
+        "Ã§ift ardÄ±lan",      "!dual backstab!", "",		CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"enchant sword","kýlýç yücelt"},		{ 93, 93, 93, 93,93,93,93,93,93,42,93,93,93 },
+	{"enchant sword","kÄ±lÄ±Ã§ yÃ¼celt"},		{ 93, 93, 93, 93,93,93,93,93,93,42,93,93,93 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_OBJ_INV,		POS_STANDING,
 	&gsn_enchant_sword,	SLOT(0),	100,	24,
@@ -5108,16 +5108,16 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"endure","dayaným"},          {  93, 93, 93, 93, 93, 93, 20, 93 ,93,93,93,93,93},
+	{"endure","dayanÄ±m"},          {  93, 93, 93, 93, 93, 93, 20, 93 ,93,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,        TAR_CHAR_SELF,          POS_FIGHTING,
         &gsn_endure,             SLOT(0),        0,       24,
-        "", "Büyüye karþý dayanýmýn azalýyor.", "",	CABAL_NONE ,
+        "", "BÃ¼yÃ¼ye karÅŸÄ± dayanÄ±mÄ±n azalÄ±yor.", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"enhanced damage","yüksek zarar"},      {  93, 33, 25,  3,6,3,16,15 ,93,8,14,93,93},
+	{"enhanced damage","yÃ¼ksek zarar"},      {  93, 33, 25,  3,6,3,16,15 ,93,8,14,93,93},
 	{ 1,  2,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_enhanced_damage,   SLOT( 0),        0,     0,
@@ -5126,11 +5126,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"entangle","sarmaþýk"},        {  93,93,93,93,93,93,93,26 ,93,93,93,93,93},
+	{"entangle","sarmaÅŸÄ±k"},        {  93,93,93,93,93,93,93,26 ,93,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_entangle,      TAR_CHAR_OFFENSIVE,   POS_FIGHTING,
         &gsn_entangle,       SLOT(568),        40,       12,
-        "sarmaþýk", "Sarmaþýklardan kurtulduðunu hissediyorsun.", "",	CABAL_NONE ,
+        "sarmaÅŸÄ±k", "SarmaÅŸÄ±klardan kurtulduÄŸunu hissediyorsun.", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -5144,7 +5144,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"escape","sývýþ"},		{93,93,45,93,93,93,55,93,93,93,93,93,93},
+	{"escape","sÄ±vÄ±ÅŸ"},		{93,93,45,93,93,93,55,93,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_STANDING,
 	&gsn_escape,		SLOT( 0),	0,	24,
@@ -5157,12 +5157,12 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,      TAR_CHAR_OFFENSIVE,          POS_FIGHTING,
         &gsn_explode,       SLOT(0),        100,       24,
-        "patlat", "Gözlerindeki duman yokoluyor.", "",	CABAL_NONE ,
+        "patlat", "GÃ¶zlerindeki duman yokoluyor.", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-{"ground strike","zemin vuruþu"},	{ 93,93,93,93, 93,93,93,52, 93,93,93,93,93},
+{"ground strike","zemin vuruÅŸu"},	{ 93,93,93,93, 93,93,93,52, 93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_STANDING,
 	&gsn_ground_strike,	SLOT(0),	0,	18,
@@ -5171,7 +5171,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"hand block","el bloðu"},            { 93,93,93,93,93,93,22,93,93,93,93,93,93},
+	{"hand block","el bloÄŸu"},            { 93,93,93,93,93,93,22,93,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_hand_block,             SLOT( 0),        0,     0,
@@ -5180,7 +5180,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"hand to hand","çýplak el"},		{ 45,  30, 18, 9,11,18,3,24,45,12,19,45,35 },
+	{"hand to hand","Ã§Ä±plak el"},		{ 45,  30, 18, 9,11,18,3,24,45,12,19,45,35 },
 	{ 2,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_FIGHTING,
 	&gsn_hand_to_hand,	SLOT( 0),	0,	0,
@@ -5193,7 +5193,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null, 	TAR_IGNORE,	POS_FIGHTING,
 	&gsn_hara_kiri,		SLOT(0),	50,	12,
-  "",	"Yaþamaya yeniden baþladýðýný hissediyorsun.", "", CABAL_NONE ,
+  "",	"YaÅŸamaya yeniden baÅŸladÄ±ÄŸÄ±nÄ± hissediyorsun.", "", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -5211,7 +5211,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,        TAR_CHAR_DEFENSIVE,          POS_STANDING,
         &gsn_herbs,             SLOT(0),        0,       30,
-        "", "Yine bitkilerle uðraþabilirsin.", "",	CABAL_NONE ,
+        "", "Yine bitkilerle uÄŸraÅŸabilirsin.", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -5225,16 +5225,16 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"lash","kýrbaçla"},			{ 48,48,93,93, 48,93,48,93, 48,93,48,48,48},
+	{"lash","kÄ±rbaÃ§la"},			{ 48,48,93,93, 48,93,48,93, 48,93,48,48,48},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1,1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_lash,            	SLOT( 0),       0,      4,
-        "kýrbaç",                 "!Lash!",		"", CABAL_NONE ,
+        "kÄ±rbaÃ§",                 "!Lash!",		"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_FIGHTMASTER
     },
 
     {
-	{"light resistance","ýþýk direnci"},	{  93,  93, 93, 93,93,93,93,93,93,93,50,93,93},
+	{"light resistance","Ä±ÅŸÄ±k direnci"},	{  93,  93, 93, 93,93,93,93,93,93,93,50,93,93},
 	{ 1,  1,  2,  2, 1, 1, 1, 1,1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_SLEEPING,
 	&gsn_light_res,		SLOT( 0),	0,	0,
@@ -5243,7 +5243,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"lion call","aslan çaðýrma"},	{ 93, 93, 93, 93,93,93,93,55,93,93,93,93,93 },
+	{"lion call","aslan Ã§aÄŸÄ±rma"},	{ 93, 93, 93, 93,93,93,93,55,93,93,93,93,93 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null, 	TAR_CHAR_DEFENSIVE,	POS_FIGHTING,
 	&gsn_lion_call,		SLOT(0),	50,	12,
@@ -5270,7 +5270,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"mental attack","zihin saldýrýsý"},{ 93, 93,93, 93,93,93,93,93 ,93,93,93,93,93},
+	{"mental attack","zihin saldÄ±rÄ±sÄ±"},{ 93, 93,93, 93,93,93,93,93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,	TAR_CHAR_SELF,		POS_STANDING,
 	&gsn_mental_attack,		SLOT(0),	200,	24,
@@ -5292,12 +5292,12 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,        TAR_CHAR_OFFENSIVE,          POS_FIGHTING,
         &gsn_nerve,             SLOT(0),        0,       18,
-        "", "Sinirlerin iyileþiyor.", "",	CABAL_NONE ,
+        "", "Sinirlerin iyileÅŸiyor.", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"parry","karþýlama"},              { 93,25,19,1, 3,5,93,3, 23,1,22,93,93},
+	{"parry","karÅŸÄ±lama"},              { 93,25,19,1, 3,5,93,3, 23,1,22,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_parry,             SLOT( 0),        0,     0,
@@ -5306,7 +5306,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"perception","algý"},  {  93, 93, 23, 93, 93,93,93,93,93,93,93,93,93},
+	{"perception","algÄ±"},  {  93, 93, 23, 93, 93,93,93,93,93,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,        TAR_IGNORE,          POS_STANDING,
         &gsn_perception,             SLOT(0),        0,       0,
@@ -5333,11 +5333,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"sense life","yaþam sezme"},{ 93, 93,93, 93,93,93,93,93 ,93,93,13,93,93},
+	{"sense life","yaÅŸam sezme"},{ 93, 93,93, 93,93,93,93,93 ,93,93,13,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,	TAR_CHAR_SELF,		POS_STANDING,
 	&gsn_sense_life,	SLOT(623),	20,	12,
-  "",	"Yaþam sezme gücünü yitiriyorsun.",	"",
+  "",	"YaÅŸam sezme gÃ¼cÃ¼nÃ¼ yitiriyorsun.",	"",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -5369,25 +5369,25 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"spell craft","büyü tanýma"},			{ 10,30,93,93, 93,93,93,93, 10,93,93,10,10 },
+	{"spell craft","bÃ¼yÃ¼ tanÄ±ma"},			{ 10,30,93,93, 93,93,93,93, 10,93,93,10,10 },
 	{ 1,  1,  1,  1, 1, 1, 2, 2, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_FIGHTING,
 	&gsn_spell_craft,	SLOT(0),    0,       0,
-  "büyü tanýma",		"!spell craft!","", CABAL_NONE ,
+  "bÃ¼yÃ¼ tanÄ±ma",		"!spell craft!","", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"strangle","bayýltma"},          {  93,  93,  93,  93,93,93,26,93 ,93,93,93,93,93},
+	{"strangle","bayÄ±ltma"},          {  93,  93,  93,  93,93,93,26,93 ,93,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,      TAR_CHAR_OFFENSIVE,          POS_STANDING,
         &gsn_strangle,       SLOT(0),        0,       8,
-        "bayýltma", "Boynunu yeniden hareket ettirebiliyorsun.", "",	CABAL_NONE ,
+        "bayÄ±ltma", "Boynunu yeniden hareket ettirebiliyorsun.", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"swimming","yüzme"},	{   93, 93, 93, 93,93,93,93,93,93 ,93,93,93,93},
+	{"swimming","yÃ¼zme"},	{   93, 93, 93, 93,93,93,93,93,93 ,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_STANDING,
 	&gsn_swimming,		SLOT(0),	0,	0,
@@ -5405,19 +5405,19 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"throw","fýrlatma"},        {  93, 93, 93, 93, 93, 93, 25, 93 ,93,37,93,93,93},
+	{"throw","fÄ±rlatma"},        {  93, 93, 93, 93, 93, 93, 25, 93 ,93,37,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,      TAR_CHAR_OFFENSIVE,       POS_FIGHTING,
         &gsn_throw,       SLOT(0),        0,       18,
-        "fýrlatma", "!throw!", "",	CABAL_NONE , RACE_NONE,ALIGN_NONE, GROUP_NONE
+        "fÄ±rlatma", "!throw!", "",	CABAL_NONE , RACE_NONE,ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"tiger power","kaplan gücü"},		{ 93,93,93,93, 93,93,93,61, 93,93,93,93,93 },
+	{"tiger power","kaplan gÃ¼cÃ¼"},		{ 93,93,93,93, 93,93,93,61, 93,93,93,93,93 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null, 	TAR_IGNORE,	POS_FIGHTING,
 	&gsn_tiger_power,	SLOT(0),	0,	12,
-  "",	"Kaplanlarýnýn kaçtýðýný hissediyorsun.", "", CABAL_NONE ,
+  "",	"KaplanlarÄ±nÄ±n kaÃ§tÄ±ÄŸÄ±nÄ± hissediyorsun.", "", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -5430,11 +5430,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"trip","çelme"},		{  93, 93,  3, 25,93,10,8,93 ,93,20,93,93,93},
+	{"trip","Ã§elme"},		{  93, 93,  3, 25,93,10,8,93 ,93,20,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_FIGHTING,
 	&gsn_trip,		SLOT( 0),	0,	12,
-  "çelme",			"!Trip!",		"", CABAL_NONE ,
+  "Ã§elme",			"!Trip!",		"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_FIGHTMASTER
     },
 
@@ -5443,25 +5443,25 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,	TAR_IGNORE,		POS_STANDING,
 	&gsn_vampire,		SLOT(0),	100,	12,
-  "",	"Doðallaþýyorsun.",	"", CABAL_NONE ,
+  "",	"DoÄŸallaÅŸÄ±yorsun.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"vampiric bite","vampir ýsýrýðý"},          {  93, 93,  93, 93,93,93,93,93 ,93,93,10,93,93 },
+	{"vampiric bite","vampir Ä±sÄ±rÄ±ÄŸÄ±"},          {  93, 93,  93, 93,93,93,93,93 ,93,93,10,93,93 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1,1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_STANDING,
         &gsn_vampiric_bite,          SLOT( 0),        0,     12,
-        "vampir ýsýrýðý",             "!vampiric bite!",	"", CABAL_NONE ,
+        "vampir Ä±sÄ±rÄ±ÄŸÄ±",             "!vampiric bite!",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"vampiric touch","vampir temasý"},      {  93,  93,  93,  93,93,93,93,93 ,93,93,15,93,93},
+	{"vampiric touch","vampir temasÄ±"},      {  93,  93,  93,  93,93,93,93,93 ,93,93,15,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,      TAR_CHAR_OFFENSIVE,          POS_STANDING,
 	&gsn_vampiric_touch,       SLOT(0),        0,       12,
-  "vampir temasý", "Kabuslardan uyanýyorsun.", "",	CABAL_NONE ,
+  "vampir temasÄ±", "Kabuslardan uyanÄ±yorsun.", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -5478,7 +5478,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,      TAR_IGNORE,       POS_FIGHTING,
         &gsn_warcry,       SLOT(0),        30,       12,
-        "", "Naranýn etkisi yokoluyor.", "",	CABAL_NONE ,
+        "", "NaranÄ±n etkisi yokoluyor.", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -5510,7 +5510,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"third attack","üçlü hamle"},        { 93, 93,36,19,27,26,26,45,93,20,32,93,93},
+	{"third attack","Ã¼Ã§lÃ¼ hamle"},        { 93, 93,36,19,27,26,26,45,93,20,32,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_third_attack,      SLOT( 0),        0,     0,
@@ -5519,7 +5519,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"fourth attack","dörtlü hamle"},       {93,93,93,30, 93,93,48,93, 93,93,93,93,93},
+	{"fourth attack","dÃ¶rtlÃ¼ hamle"},       {93,93,93,30, 93,93,48,93, 93,93,93,93,93},
 	{1,1,1,1,1,1,1,1,1,1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_fourth_attack,     SLOT(0),        0,      0,
@@ -5528,7 +5528,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"fifth attack","beþli hamle"},         {93, 93, 93, 52, 93, 93, 93,93,93,93,93,93,93},
+	{"fifth attack","beÅŸli hamle"},         {93, 93, 93, 52, 93, 93, 93,93,93,93,93,93,93},
 	{1,1,1,1,1,1,1,1,1,1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_fifth_attack,     SLOT(0),        0,      0,
@@ -5548,7 +5548,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"fast healing","hýzlý iyileþme"},	{  15, 9, 16,  6,7,7,9,6 ,15 ,3,9,9,9},
+	{"fast healing","hÄ±zlÄ± iyileÅŸme"},	{  15, 9, 16,  6,7,7,9,6 ,15 ,3,9,9,9},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_SLEEPING,
 	&gsn_fast_healing,	SLOT( 0),	0,	0,
@@ -5557,7 +5557,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"green arrow","yeþil ok"},			{ 93, 93, 93,93,93,93,93,40,93,93,93,93,93 },
+	{"green arrow","yeÅŸil ok"},			{ 93, 93, 93,93,93,93,93,40,93,93,93,93,93 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_STANDING,
 	&gsn_green_arrow,	SLOT(0),	 50,	12,
@@ -5575,7 +5575,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"haggle","pazarlýk"},		{  7, 18,  1, 14,12,8,17,15 ,7 ,19,5,5,5},
+	{"haggle","pazarlÄ±k"},		{  7, 18,  1, 14,12,8,17,15 ,7 ,19,5,5,5},
 	{ 2,  2,  1,  2, 2, 2, 1, 2, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_RESTING,
 	&gsn_haggle,		SLOT( 0),	0,	0,
@@ -5602,11 +5602,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"lay hands","þifalýeller"},		{93,93,93,93,63,93,93,93,93,93,93,93,93},
+	{"lay hands","ÅŸifalÄ±eller"},		{93,93,93,93,63,93,93,93,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_FIGHTING,
 	&gsn_lay_hands,		SLOT( 0),	0,	12,
-  "",	"Yeniden masum iyileþtirebilirsin.",	"",CABAL_NONE ,
+  "",	"Yeniden masum iyileÅŸtirebilirsin.",	"",CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -5620,7 +5620,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"mastering pound","vuruþ ustalýðý"},	{ 93,93,93,93,93,93,61,93,93,93,93,93,93},
+	{"mastering pound","vuruÅŸ ustalÄ±ÄŸÄ±"},	{ 93,93,93,93,93,93,61,93,93,93,93,93,93},
 	{ 2,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_FIGHTING,
 	&gsn_master_hand,	SLOT( 0),	0,	0,
@@ -5629,7 +5629,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"mastering sword","kýlýç ustalýðý"},	{ 93,93,93,93,93,93,93,93,93,61,93,93,93},
+	{"mastering sword","kÄ±lÄ±Ã§ ustalÄ±ÄŸÄ±"},	{ 93,93,93,93,93,93,93,93,93,61,93,93,93},
 	{ 2, 2, 1, 1,1,1,1,1,1,1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_FIGHTING,
         &gsn_master_sword,           SLOT( 0),       0,      0,
@@ -5674,7 +5674,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"quiet movement","sessiz yürüyüþ"},      {  93, 93, 93, 93, 93, 93, 93, 15 ,93,93,10,93,93},
+	{"quiet movement","sessiz yÃ¼rÃ¼yÃ¼ÅŸ"},      {  93, 93, 93, 93, 93, 93, 93, 15 ,93,93,10,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,        TAR_IGNORE,          POS_STANDING,
         &gsn_quiet_movement,             SLOT(0),        0,       0,
@@ -5683,7 +5683,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"recall","anýmsa"},{  1,  1,  1,  1,1,1,1,1 ,1,1,1,1,1},
+	{"recall","anÄ±msa"},{  1,  1,  1,  1,1,1,1,1 ,1,1,1,1,1},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_STANDING,
 	&gsn_recall,		SLOT( 0),	0,	24,
@@ -5692,7 +5692,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"red arrow","kýzýl ok"},		{ 93, 93, 93,93,93,93,93,44,93,93,93,93,93 },
+	{"red arrow","kÄ±zÄ±l ok"},		{ 93, 93, 93,93,93,93,93,44,93,93,93,93,93 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_STANDING,
 	&gsn_red_arrow,	SLOT(0),	 50,	12,
@@ -5701,11 +5701,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"sneak","süzül"},	{  93, 93, 4, 93, 93, 93, 18, 93 ,93,93,93,93,93},
+	{"sneak","sÃ¼zÃ¼l"},	{  93, 93, 4, 93, 93, 93, 18, 93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_STANDING,
 	&gsn_sneak,		SLOT( 0),	 0,	12,
-  "",			"Artýk süzülmüyorsun.",	"", CABAL_NONE ,
+  "",			"ArtÄ±k sÃ¼zÃ¼lmÃ¼yorsun.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -5719,7 +5719,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"scrolls","parþömen"},		{  1,  1,  1,  93,93,1,93,1 , 1,6,1,1,1},
+	{"scrolls","parÅŸÃ¶men"},		{  1,  1,  1,  93,93,1,93,1 , 1,6,1,1,1},
 	{ 1,  1,  2,  2, 2, 2, 2, 2, 2, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_STANDING,
 	&gsn_scrolls,		SLOT( 0),	0,	12,
@@ -5728,7 +5728,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"staves","týlsýmlar"},		{  1,  1,  93,  93,93,93,1,1 ,1,1,1,1,1},
+	{"staves","tÄ±lsÄ±mlar"},		{  1,  1,  93,  93,93,93,1,1 ,1,1,1,1,1},
 	{ 1,  1,  2,  2, 2, 2, 2, 2, 2, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_STANDING,
 	&gsn_staves,		SLOT( 0),	0,	12,
@@ -5737,7 +5737,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"tame","uysallaþtýr"},        {  93, 93, 93, 93, 93, 93, 93, 39 ,93,93,93,93,93},
+	{"tame","uysallaÅŸtÄ±r"},        {  93, 93, 93, 93, 93, 93, 93, 39 ,93,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,        TAR_CHAR_DEFENSIVE,          POS_FIGHTING,
         &gsn_tame,             SLOT(0),        0,       24,
@@ -5762,7 +5762,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"wands","deðnekler"},	{  1,  1,  93,  93,93,1,93,93 ,1,5,1,1,1},
+	{"wands","deÄŸnekler"},	{  1,  1,  93,  93,93,1,93,93 ,1,5,1,1,1},
 	{ 1,  1,  2,  2, 2, 2, 2, 2, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_STANDING,
 	&gsn_wands,		SLOT( 0),	0,	12,
@@ -5773,20 +5773,20 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 /* cabals */
 
     {
-	{"mortal strike","ölümcül atak"},	{ 63,63,63,63,63,63,63,63,63,63,63,63,63},
+	{"mortal strike","Ã¶lÃ¼mcÃ¼l atak"},	{ 63,63,63,63,63,63,63,63,63,63,63,63,63},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,	TAR_CHAR_SELF,		POS_STANDING,
 	&gsn_mortal_strike,		SLOT(0),	200,	24,
-  "ölümcül atak",	"!mortal strike!",	"",
+  "Ã¶lÃ¼mcÃ¼l atak",	"!mortal strike!",	"",
 	CABAL_BATTLE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"disgrace","gözden düþür"},{  33, 33, 33, 33, 33,33,33,33,33,33,33,33,33},
+	{"disgrace","gÃ¶zden dÃ¼ÅŸÃ¼r"},{  33, 33, 33, 33, 33,33,33,33,33,33,33,33,33},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_disgrace,	TAR_CHAR_OFFENSIVE,		POS_STANDING,
 	NULL,		SLOT(619),	200,	12,
-  "",	"Onurunu kazandýðýný hissediyorsun.",	"",
+  "",	"Onurunu kazandÄ±ÄŸÄ±nÄ± hissediyorsun.",	"",
 	CABAL_CHAOS , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -5795,48 +5795,48 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_evil_spirit,	TAR_IGNORE,		POS_STANDING,
 	&gsn_evil_spirit,		SLOT(618),	800,	36,
-  "kem ruh",	"Vücudunla ruhun yeniden bir oluyor.",	"",
+  "kem ruh",	"VÃ¼cudunla ruhun yeniden bir oluyor.",	"",
 	CABAL_INVADER , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
     {
-	{"ruler aura","tüze aurasý"},     {  33, 33, 33, 33, 33,33,33,33,33,33,33,33,33},
+	{"ruler aura","tÃ¼ze aurasÄ±"},     {  33, 33, 33, 33, 33,33,33,33,33,33,33,33,33},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_ruler_aura,    TAR_CHAR_SELF,          POS_STANDING,
         NULL,             SLOT(667),        20,       12,
-        "", "Tüze auran yokoluyor.", 	"",	CABAL_RULER ,
+        "", "TÃ¼ze auran yokoluyor.", 	"",	CABAL_RULER ,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-	{"sword of justice","adalet kýlýcý"},	{48,48,48,48, 48,48,48,48,48,48,48,48,48},
+	{"sword of justice","adalet kÄ±lÄ±cÄ±"},	{48,48,48,48, 48,48,48,48,48,48,48,48,48},
 	{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_sword_of_justice,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,		SLOT(686),	50,	12,
-  "adalet kýlýcý",	"!sword of justice!", "", CABAL_RULER ,
+  "adalet kÄ±lÄ±cÄ±",	"!sword of justice!", "", CABAL_RULER ,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-	{"bandage","sargý"},       {23, 23, 23, 23,23,23,23,23,23,23,23,23,23},
+	{"bandage","sargÄ±"},       {23, 23, 23, 23,23,23,23,23,23,23,23,23,23},
 	{1,1,1,1,1,1,1,1,1,1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_STANDING,
         &gsn_bandage,     SLOT(0),        0,      0,
-	"",        "Daha az saðlýklý hissediyorsun.", 	"",	CABAL_BATTLE,
+	"",        "Daha az saÄŸlÄ±klÄ± hissediyorsun.", 	"",	CABAL_BATTLE,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-	{"cabal recall","kabal anýmsa"},	{ 10,10,10,10,10,10,10,10,10,10,10,10,10},
+	{"cabal recall","kabal anÄ±msa"},	{ 10,10,10,10,10,10,10,10,10,10,10,10,10},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_STANDING,
 	&gsn_cabal_recall,		SLOT( 0),	0,	24,
-  "",	"Anýmsama için yeniden dua edebilirsin.","", CABAL_BATTLE ,
+  "",	"AnÄ±msama iÃ§in yeniden dua edebilirsin.","", CABAL_BATTLE ,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-        {"wanted","aranýyor"},                {  1,  1,  1,  1, 1, 1, 1, 1 ,1,1,1,1,1},
+        {"wanted","aranÄ±yor"},                {  1,  1,  1,  1, 1, 1, 1, 1 ,1,1,1,1,1},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_DEAD,
         &gsn_wanted,                   SLOT(0),        0,       0,
@@ -5845,7 +5845,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-        {"judge","yargýlama"},               {  1,  1,  1,  1, 1, 1, 1, 1 ,1,1,1,1,1},
+        {"judge","yargÄ±lama"},               {  1,  1,  1,  1, 1, 1, 1, 1 ,1,1,1,1,1},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,             TAR_IGNORE,             POS_DEAD,
         &gsn_judge,              SLOT(0),        0,       0,
@@ -5858,30 +5858,30 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,      TAR_CHAR_SELF,       POS_FIGHTING,
         &gsn_bloodthirst,       SLOT(0),        0,       12,
-        "", "Artýk kana susamýyorsun.", "",	CABAL_BATTLE,
+        "", "ArtÄ±k kana susamÄ±yorsun.", "",	CABAL_BATTLE,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-        {"spellbane","büyüyýkýmý"},       { 10,10,10,10,10,10,10,10,10,10,10,10,10 },
+        {"spellbane","bÃ¼yÃ¼yÄ±kÄ±mÄ±"},       { 10,10,10,10,10,10,10,10,10,10,10,10,10 },
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,      TAR_CHAR_SELF,       POS_STANDING,
         &gsn_spellbane,       SLOT(0),        0,       12,
-        "büyüyýkýmý", "Büyüye karþý direncin azalýyor.", "",	CABAL_BATTLE,
+        "bÃ¼yÃ¼yÄ±kÄ±mÄ±", "BÃ¼yÃ¼ye karÅŸÄ± direncin azalÄ±yor.", "",	CABAL_BATTLE,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-        {"resistance","direnç"},      {  12, 12, 12,12,12,12,12,12 ,12,12,12,12,12},
+        {"resistance","direnÃ§"},      {  12, 12, 12,12,12,12,12,12 ,12,12,12,12,12},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,      TAR_CHAR_SELF,       POS_FIGHTING,
         &gsn_resistance,       SLOT(0),        0,       24,
-        "", "Sertliðin yokoluyor.", "",	CABAL_BATTLE,
+        "", "SertliÄŸin yokoluyor.", "",	CABAL_BATTLE,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-       { "deathblow","ölüm rüzgarý"},          {  20,20,20,20,20,20,20,20 ,20,20,20,20,20},
+       { "deathblow","Ã¶lÃ¼m rÃ¼zgarÄ±"},          {  20,20,20,20,20,20,20,20 ,20,20,20,20,20},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,      TAR_IGNORE,       POS_STANDING,
         &gsn_deathblow,       SLOT(0),        0,       0,
@@ -5890,43 +5890,43 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-        {"transform", "dönüþüm"},          {  10, 10, 10,10,10,10,10,10 ,10,10,10,10,10},
+        {"transform", "dÃ¶nÃ¼ÅŸÃ¼m"},          {  10, 10, 10,10,10,10,10,10 ,10,10,10,10,10},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_transform,      TAR_CHAR_SELF,       POS_STANDING,
         NULL,       SLOT(522),        100,       24,
-        "", "Saðlýðýn azalýyor.", "",	CABAL_SHALAFI,
+        "", "SaÄŸlÄ±ÄŸÄ±n azalÄ±yor.", "",	CABAL_SHALAFI,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-	{"mental knife","zihin býçaðý"},        {  15, 15, 15,93,15,15,15,15,15,15,15,15,15 },
+	{"mental knife","zihin bÄ±Ã§aÄŸÄ±"},        {  15, 15, 15,93,15,15,15,15,15,15,15,15,15 },
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_mental_knife,      TAR_CHAR_OFFENSIVE,       POS_FIGHTING,
         &gsn_mental_knife,       SLOT(524),        35,       12,
-        "zihin býçaðý", "Zihnindeki acý yokoluyor.", "",CABAL_SHALAFI,
+        "zihin bÄ±Ã§aÄŸÄ±", "Zihnindeki acÄ± yokoluyor.", "",CABAL_SHALAFI,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-	{"demon summon","iblis çaðrýsý"},         {  25, 25, 25,93,25,25,25,25 ,25,25,25,25,25},
+	{"demon summon","iblis Ã§aÄŸrÄ±sÄ±"},         {  25, 25, 25,93,25,25,25,25 ,25,25,25,25,25},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_demon_summon,      TAR_CHAR_SELF,       POS_FIGHTING,
         &gsn_demon_summon,       SLOT(525),        100,       12,
-        "", "Çaðrý gücünün geri geldiðini hissediyorsun.", "", CABAL_SHALAFI,
+        "", "Ã‡aÄŸrÄ± gÃ¼cÃ¼nÃ¼n geri geldiÄŸini hissediyorsun.", "", CABAL_SHALAFI,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-	{"scourge","ceza kýrbacý"},     {  30, 30, 30,93,30,30,30,30,30,30,30,30,30 },
+	{"scourge","ceza kÄ±rbacÄ±"},     {  30, 30, 30,93,30,30,30,30,30,30,30,30,30 },
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_scourge,      TAR_IGNORE,       POS_FIGHTING,
         NULL,       SLOT(526),        50,       18,
-        "ceza kýrbacý", "!scourge!", "",CABAL_SHALAFI,
+        "ceza kÄ±rbacÄ±", "!scourge!", "",CABAL_SHALAFI,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-        {"manacles","kelepçe"},        {  20, 20, 20,20,20,20,20,20 ,20,20,20,20,20},
+        {"manacles","kelepÃ§e"},        {  20, 20, 20,20,20,20,20,20 ,20,20,20,20,20},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_manacles,      TAR_CHAR_OFFENSIVE,       POS_FIGHTING,
         NULL,       SLOT(528),        75,       12,
@@ -5935,7 +5935,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-      {"shield of ruler","tüze kalkaný"},        {  10, 10, 10,10,10,10,10,10 ,10,10,10,10,10},
+      {"shield of ruler","tÃ¼ze kalkanÄ±"},        {  10, 10, 10,10,10,10,10,10 ,10,10,10,10,10},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_shield_ruler,      TAR_IGNORE,       POS_FIGHTING,
         NULL,       SLOT(529),        100,       12,
@@ -5953,11 +5953,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-      {"guard call","muhafýz çaðrýsý"},          {  15, 15, 15,15,15,15,15,15 ,15,15,15,15,15},
+      {"guard call","muhafÄ±z Ã§aÄŸrÄ±sÄ±"},          {  15, 15, 15,15,15,15,15,15 ,15,15,15,15,15},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_guard_call,      TAR_IGNORE,       POS_FIGHTING,
 	&gsn_guard_call,       SLOT(530),        75,       12,
-  "", 	"Yeniden muhafýz çaðýrabilirsin.", 	"",	CABAL_RULER,
+  "", 	"Yeniden muhafÄ±z Ã§aÄŸÄ±rabilirsin.", 	"",	CABAL_RULER,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
@@ -5966,7 +5966,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_nightwalker,      TAR_IGNORE,       POS_FIGHTING,
 	&gsn_nightwalker,       SLOT(531),        75,       12,
-  "", "Çaðrý gücünün geri geldiðini hissediyorsun.", "",CABAL_INVADER,
+  "", "Ã‡aÄŸrÄ± gÃ¼cÃ¼nÃ¼n geri geldiÄŸini hissediyorsun.", "",CABAL_INVADER,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
@@ -5980,7 +5980,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-        {"fade", "soluþ"},       {  20, 20, 20,20,20,20,20,20 ,20,20,20,20,20},
+        {"fade", "soluÅŸ"},       {  20, 20, 20,20,20,20,20,20 ,20,20,20,20,20},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,      TAR_IGNORE,       POS_STANDING,
         &gsn_fade,       SLOT(0),        0,       24,
@@ -5989,29 +5989,29 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-       { "shadow cloak","gölge pelerini"},        {  10, 10, 10,10,10,10,10,10,10,10,10,10,10 },
+       { "shadow cloak","gÃ¶lge pelerini"},        {  10, 10, 10,10,10,10,10,10,10,10,10,10,10 },
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_shadow_cloak,      TAR_CHAR_DEFENSIVE,       POS_STANDING,
 	NULL,       SLOT(533),        10,       12,
-  "", "Gölgeler seni korumuyor.", "",	CABAL_INVADER,
+  "", "GÃ¶lgeler seni korumuyor.", "",	CABAL_INVADER,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-      {"nightfall", "alacakaranlýk"},     {  16, 16, 16,16,16,16,16,16,16,16,16,16,16 },
+      {"nightfall", "alacakaranlÄ±k"},     {  16, 16, 16,16,16,16,16,16,16,16,16,16,16 },
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_nightfall,      TAR_IGNORE,       POS_STANDING,
 	NULL,       	SLOT(534),        50,       12,
-  "", "Iþýklarý kontrol edemiyorsun.", "",	CABAL_INVADER,
+  "", "IÅŸÄ±klarÄ± kontrol edemiyorsun.", "",	CABAL_INVADER,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-        {"aura of chaos","kaos aurasý"},    {  16, 16, 16,16,16,16,16,16,16,16,16,16,16 },
+        {"aura of chaos","kaos aurasÄ±"},    {  16, 16, 16,16,16,16,16,16,16,16,16,16,16 },
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_aura_of_chaos,      TAR_CHAR_DEFENSIVE,       POS_STANDING,
 	NULL,       	SLOT(720),        20,       12,
-  "", "Karmaþa tanrýsý artýk seni korumuyor.", 	"",
+  "", "KarmaÅŸa tanrÄ±sÄ± artÄ±k seni korumuyor.", 	"",
 	CABAL_CHAOS, RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
@@ -6020,7 +6020,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_garble,      TAR_CHAR_DEFENSIVE,       POS_FIGHTING,
 	&gsn_garble,       SLOT(535),        30,       12,
-  "", "Dilin normale dönüyor.", "",	CABAL_CHAOS,
+  "", "Dilin normale dÃ¶nÃ¼yor.", "",	CABAL_CHAOS,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
@@ -6029,30 +6029,30 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_mirror,      TAR_CHAR_DEFENSIVE,       POS_STANDING,
 	&gsn_mirror,       SLOT(536),        40,       12,
-  "", "Yokolma hissini yaþýyorsun.", "",	CABAL_CHAOS,
+  "", "Yokolma hissini yaÅŸÄ±yorsun.", "",	CABAL_CHAOS,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-	{"confuse","þaþýrtma"},        {  20, 20, 20,20,20,20,20,20 ,20,20,20,20,20},
+	{"confuse","ÅŸaÅŸÄ±rtma"},        {  20, 20, 20,20,20,20,20,20 ,20,20,20,20,20},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_confuse,      TAR_CHAR_OFFENSIVE,       POS_FIGHTING,
 	&gsn_confuse,       SLOT(537),        20,       12,
-  "", "Þaþkýnlýðýn azalýyor.", "",	CABAL_CHAOS,
+  "", "ÅžaÅŸkÄ±nlÄ±ÄŸÄ±n azalÄ±yor.", "",	CABAL_CHAOS,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-	{"doppelganger","dönüþüm"},        {  25, 25, 25,25,25,25,25,25 ,25,25,25,25,25},
+	{"doppelganger","dÃ¶nÃ¼ÅŸÃ¼m"},        {  25, 25, 25,25,25,25,25,25 ,25,25,25,25,25},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_doppelganger,      TAR_CHAR_DEFENSIVE,       POS_STANDING,
 	&gsn_doppelganger,       SLOT(527),        75,       12,
-  "", "Doðal formuna döndün.", "",	CABAL_CHAOS,
+  "", "DoÄŸal formuna dÃ¶ndÃ¼n.", "",	CABAL_CHAOS,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-       {   "chaos blade","yataðan"},      {  23, 23, 23,23,23,23,23,23,23,23,23,23,23 },
+       {   "chaos blade","yataÄŸan"},      {  23, 23, 23,23,23,23,23,23,23,23,23,23,23 },
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_chaos_blade,      TAR_IGNORE,       POS_STANDING,
         &gsn_chaos_blade,       SLOT(550),        60,       12,
@@ -6061,11 +6061,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
    {
-          {    "stalker","avcý"},    {  93, 93, 93,93,93,93,93,93 ,93,93,93,93,93},
+          {    "stalker","avcÄ±"},    {  93, 93, 93,93,93,93,93,93 ,93,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_stalker,      TAR_IGNORE,       POS_STANDING,
         &gsn_stalker,       SLOT(554),        100,       12,
-        "", "Yeni bir avcý çaðýrabilirsin.", "",
+        "", "Yeni bir avcÄ± Ã§aÄŸÄ±rabilirsin.", "",
 	CABAL_RULER, 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
@@ -6079,7 +6079,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"tesseract","öte boyut"},          {  29, 29, 29,93,29,29,29,29 ,29,29,29,29,29},
+	{"tesseract","Ã¶te boyut"},          {  29, 29, 29,93,29,29,29,29 ,29,29,29,29,29},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_tesseract,      TAR_IGNORE,       POS_STANDING,
         &gsn_tesseract,       SLOT(556),        150,       12,
@@ -6088,52 +6088,52 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-       {   "trophy","andaç"},       {  23, 23, 23,23,23,23,23,23 ,23,23,23,23,23},
+       {   "trophy","andaÃ§"},       {  23, 23, 23,23,23,23,23,23 ,23,23,23,23,23},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,      TAR_IGNORE,       POS_STANDING,
         &gsn_trophy,       SLOT(0),        30,       12,
-        "", "Yeni bir andaçýn hayalini kuruyorsun.", "",	CABAL_BATTLE,
+        "", "Yeni bir andaÃ§Ä±n hayalini kuruyorsun.", "",	CABAL_BATTLE,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-         {   "truesight","keskingörüþ"},         {  25, 25, 25,25,25,25,25,25 ,25,25,25,25,25},
+         {   "truesight","keskingÃ¶rÃ¼ÅŸ"},         {  25, 25, 25,25,25,25,25,25 ,25,25,25,25,25},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,      TAR_IGNORE,       POS_STANDING,
         &gsn_truesight,       SLOT(0),        50,       12,
-        "", "Gözlerin keskinliðini yitiriyor.", "",	CABAL_BATTLE,
+        "", "GÃ¶zlerin keskinliÄŸini yitiriyor.", "",	CABAL_BATTLE,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-        {  "brew","mayacý"},     {  23, 23, 23,23,23,23,23,23,23 ,23,23,23,23},
+        {  "brew","mayacÄ±"},     {  23, 23, 23,23,23,23,23,23,23 ,23,23,23,23},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_brew,      TAR_OBJ_INV,       POS_STANDING,
         &gsn_brew,       SLOT(557),        25,       12,
-        "", "Yeniden mayalamaya baþlayabilirsin.", "",
+        "", "Yeniden mayalamaya baÅŸlayabilirsin.", "",
 	CABAL_SHALAFI,	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-        {  "shadowlife","gölgeyaþam"},         {  30, 30, 30,30,30,30,30,30 ,30,30,30,30,30},
+        {  "shadowlife","gÃ¶lgeyaÅŸam"},         {  30, 30, 30,30,30,30,30,30 ,30,30,30,30,30},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_shadowlife,      TAR_CHAR_OFFENSIVE,       POS_STANDING,
         &gsn_shadowlife,       SLOT(558),        80,       12,
-        "", "Kendini daha gölgeli hisssediyorsun.", "",	CABAL_INVADER,
+        "", "Kendini daha gÃ¶lgeli hisssediyorsun.", "",	CABAL_INVADER,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-         {   "ruler badge", "tüze niþaný"},        {  25, 25, 25,25,25,25,25,25 ,25,25,25,25,25},
+         {   "ruler badge", "tÃ¼ze niÅŸanÄ±"},        {  25, 25, 25,25,25,25,25,25 ,25,25,25,25,25},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_ruler_badge,      TAR_CHAR_SELF,   POS_STANDING,
         &gsn_ruler_badge,       SLOT(560),        50,       12,
-        "", "!tüze niþaný!", "",	CABAL_RULER,
+        "", "!tÃ¼ze niÅŸanÄ±!", "",	CABAL_RULER,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-         {   "remove badge","niþan kaldýr"},        {  28, 28, 28,28,28,28,28,28,28,28,28,28,28 },
+         {   "remove badge","niÅŸan kaldÄ±r"},        {  28, 28, 28,28,28,28,28,28,28,28,28,28,28 },
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_remove_badge,      TAR_CHAR_SELF,   POS_STANDING,
         &gsn_remove_badge,       SLOT(561),        100,       12,
@@ -6142,16 +6142,16 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-      {  "golden aura","altýn ayla"},         {  10,10,10,10,10,10,10,10,10,10,10,10,10 },
+      {  "golden aura","altÄ±n ayla"},         {  10,10,10,10,10,10,10,10,10,10,10,10,10 },
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_golden_aura,      TAR_IGNORE,   POS_STANDING,
         NULL,       SLOT(564),        25,       12,
-        "", "Altýn aylanýn yokolduðunu hissediyorsun.", "",	CABAL_KNIGHT,
+        "", "AltÄ±n aylanÄ±n yokolduÄŸunu hissediyorsun.", "",	CABAL_KNIGHT,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-        {  "dragonplate", "ejderha zýrhý"},       {  15,15,15,15,15,15,15,15 ,15,15,15,15,15},
+        {  "dragonplate", "ejderha zÄ±rhÄ±"},       {  15,15,15,15,15,15,15,15 ,15,15,15,15,15},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_dragonplate,      TAR_IGNORE,   POS_STANDING,
         NULL,       SLOT(565),        60,       12,
@@ -6164,12 +6164,12 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_squire,      TAR_IGNORE,   POS_STANDING,
         &gsn_squire,       SLOT(566),        100,       12,
-        "", "Yeni bir beyi düþünmeye baþlýyorsun.", "",	CABAL_KNIGHT,
+        "", "Yeni bir beyi dÃ¼ÅŸÃ¼nmeye baÅŸlÄ±yorsun.", "",	CABAL_KNIGHT,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-     {   "dragonsword", "ejderha kýlýcý"},          {  25,25,25,25,25,25,25,25 ,25,25,25,25,25},
+     {   "dragonsword", "ejderha kÄ±lÄ±cÄ±"},          {  25,25,25,25,25,25,25,25 ,25,25,25,25,25},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_dragonsword,      TAR_IGNORE,   POS_STANDING,
         &gsn_dragonsword,       SLOT(567),        70,       12,
@@ -6177,21 +6177,21 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-         {   "holy armor", "kutsal zýrh"},         {  10,10,10,10,10,10,10,10,10 ,10,10,10,10},
+         {   "holy armor", "kutsal zÄ±rh"},         {  10,10,10,10,10,10,10,10,10 ,10,10,10,10},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_holy_armor,      TAR_CHAR_SELF,   POS_RESTING,
         &gsn_knight,       SLOT(569),        20,       12,
-        "", "Zarara karþý daha az korumalýsýn.", "",	CABAL_KNIGHT,
+        "", "Zarara karÅŸÄ± daha az korumalÄ±sÄ±n.", "",	CABAL_KNIGHT,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
 
     {
-      {  "disperse","daðýtma"},       {  20,20,20,20,20,20,20,20,20,20,20,20,20 },
+      {  "disperse","daÄŸÄ±tma"},       {  20,20,20,20,20,20,20,20,20,20,20,20,20 },
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_disperse,      TAR_IGNORE,   	POS_FIGHTING,
         &gsn_disperse,       SLOT(573),        100,       24,
-        "", "Yeniden daðýtabilirsin.", "",CABAL_CHAOS,
+        "", "Yeniden daÄŸÄ±tabilirsin.", "",CABAL_CHAOS,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
@@ -6236,7 +6236,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_wolf,	TAR_IGNORE,		POS_STANDING,
 	NULL,		SLOT(593),	100,	12,
-  "",	"Daha çok kurdu kontrol edebileceðini hissediyorsun.",	"", CABAL_HUNTER ,
+  "",	"Daha Ã§ok kurdu kontrol edebileceÄŸini hissediyorsun.",	"", CABAL_HUNTER ,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
@@ -6245,12 +6245,12 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_wolf_spirit,	TAR_CHAR_SELF,		POS_STANDING,
 	NULL,			SLOT(685),	50,	12,
-  "",	"Damarlarýndaki kan tekrar eskisi gibi akmaya baþladý.",	"",
+  "",	"DamarlarÄ±ndaki kan tekrar eskisi gibi akmaya baÅŸladÄ±.",	"",
 	CABAL_HUNTER , RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-	{"armor use","zýrh kullanýmý"},		{ 17,17,17,17,17,17,17,17,17 ,17,17,17,17},
+	{"armor use","zÄ±rh kullanÄ±mÄ±"},		{ 17,17,17,17,17,17,17,17,17 ,17,17,17,17},
 	{ 2, 1, 1, 1,1,1,1,1,1,1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_FIGHTING,
 	&gsn_armor_use,	SLOT(0),	0,	0,
@@ -6277,16 +6277,16 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"mastering spell","büyü ustalýðý"},	{37,37,37,37,37,37,37,37,37,37,37,37,37},
+	{"mastering spell","bÃ¼yÃ¼ ustalÄ±ÄŸÄ±"},	{37,37,37,37,37,37,37,37,37,37,37,37,37},
 	{ 1,  1,  1,  1, 1, 1, 2, 2, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_FIGHTING,
 	&gsn_mastering_spell,	SLOT(0),    0,       0,
-  "büyü ustalýðý",		"!mastering spell!","",
+  "bÃ¼yÃ¼ ustalÄ±ÄŸÄ±",		"!mastering spell!","",
 	CABAL_SHALAFI, RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-       { "guard dogs","muhafýz köpekler"},        {  15, 15, 15,15,15,15,15,15 ,15,15,15,15,15},
+       { "guard dogs","muhafÄ±z kÃ¶pekler"},        {  15, 15, 15,15,15,15,15,15 ,15,15,15,15,15},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_guard_dogs,      TAR_IGNORE,       POS_FIGHTING,
 	NULL,       SLOT(687),        100,       12,
@@ -6295,7 +6295,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-  {  "eyes of tiger","kaplan gözleri"},        {  25, 25, 25,25,25,25,25,25 ,25,25,25,25,25},
+  {  "eyes of tiger","kaplan gÃ¶zleri"},        {  25, 25, 25,25,25,25,25,25 ,25,25,25,25,25},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_eyes_of_tiger,      TAR_IGNORE,       POS_FIGHTING,
 	NULL,       SLOT(688),        20,       12,
@@ -6304,7 +6304,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-    {  "lion shield","aslan kalkaný"},       {  24, 24, 24,24,24,24,24,24 ,24,24,24,24,24},
+    {  "lion shield","aslan kalkanÄ±"},       {  24, 24, 24,24,24,24,24,24 ,24,24,24,24,24},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_lion_shield,      TAR_IGNORE,       POS_FIGHTING,
 	NULL,       SLOT(689),        200,       12,
@@ -6313,7 +6313,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-      {  "evolve lion","aslana dönüþme"},        {  18, 18, 18,18,18,18,18,18 ,18,18,18,18,18},
+      {  "evolve lion","aslana dÃ¶nÃ¼ÅŸme"},        {  18, 18, 18,18,18,18,18,18 ,18,18,18,18,18},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_evolve_lion,      TAR_IGNORE,       POS_FIGHTING,
 	NULL,       SLOT(690),        50,       12,
@@ -6322,16 +6322,16 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-{   "claw","pençe"},      {  20, 20, 20,20,20,20,20,20 ,20,20,20,20,20},
+{   "claw","penÃ§e"},      {  20, 20, 20,20,20,20,20,20 ,20,20,20,20,20},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,      TAR_IGNORE,       POS_FIGHTING,
 	&gsn_claw,       SLOT(0),        50,       24,
-  "pençe", 	"", 	"",
+  "penÃ§e", 	"", 	"",
 	CABAL_LIONS, RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
     {
-  {  "prevent","intikam baðý"},   {  35, 35, 35,35,35,35,35,35 ,35,35,35,35,35},
+  {  "prevent","intikam baÄŸÄ±"},   {  35, 35, 35,35,35,35,35,35 ,35,35,35,35,35},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_prevent,      TAR_IGNORE,       POS_FIGHTING,
 	NULL,       SLOT(691),        75,       12,
@@ -6342,11 +6342,11 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 /* object spells */
 
     {
-	{"terangreal","uyuþturma"},		{ 93,  93, 93, 93,93,93,93,93 ,93,93,93,93,93},
+	{"terangreal","uyuÅŸturma"},		{ 93,  93, 93, 93,93,93,93,93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_terangreal,	TAR_CHAR_OFFENSIVE,	POS_STANDING,
 	&gsn_terangreal,	SLOT(607),	 5,	12,
-  "uyuþturma",		"Artýk uyanýksýn.",	"", CABAL_NONE ,
+  "uyuÅŸturma",		"ArtÄ±k uyanÄ±ksÄ±n.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -6355,7 +6355,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_kassandra,	TAR_CHAR_SELF,		POS_STANDING,
 	&gsn_kassandra,	SLOT(608),	 5,	12,
-  "",		"Kendini yine iyileþtirebilirsin.",	"", CABAL_NONE ,
+  "",		"Kendini yine iyileÅŸtirebilirsin.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -6373,7 +6373,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_matandra,	TAR_CHAR_OFFENSIVE,	POS_STANDING,
 	&gsn_matandra,		SLOT(610),	 5,	12,
-  "matandra",	"Kasandrayý tekrar kullanabilirsin.",	"", CABAL_NONE ,
+  "matandra",	"KasandrayÄ± tekrar kullanabilirsin.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     }
 

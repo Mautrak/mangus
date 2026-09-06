@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
- * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
- * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aÃ§Ä±k kaynak TÃ¼rkÃ§e Mud projesidir.                        *
+ * Oyun geliÅŸtirmesi Jai ve Maru tarafÄ±ndan yÃ¶netilmektedir.               *
+ * UnutulmamasÄ± gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -25,19 +25,19 @@
 #include "ek2.h"
 /*
 hassan-da
-ercüment-de
-ýtýr-da
-iyþi-de
+ercÃ¼ment-de
+Ä±tÄ±r-da
+iyÅŸi-de
 bozo-da
-gözö-de
+gÃ¶zÃ¶-de
 kuzu-da
-büdü-de
+bÃ¼dÃ¼-de
 */
 
 const struct sonek_type sonek_table[] =
 {
-	{{(char*)"n",(char*)"ýn" ,(char*)"in"	,(char*)"un" ,(char*)"ün"	}},//f - un
- 	{{(char*)"y",(char*)"ý"	 ,(char*)"i"	,(char*)"u"	 ,(char*)"ü"	}},//g - u
+	{{(char*)"n",(char*)"Ä±n" ,(char*)"in"	,(char*)"un" ,(char*)"Ã¼n"	}},//f - un
+ 	{{(char*)"y",(char*)"Ä±"	 ,(char*)"i"	,(char*)"u"	 ,(char*)"Ã¼"	}},//g - u
   {{(char*)"y",(char*)"a"	 ,(char*)"e"	,(char*)"a"	 ,(char*)"e"	}},//h - e
   {{(char*)""	,(char*)"da" ,(char*)"de"	,(char*)"da" ,(char*)"de"	}},//j - de
   {{(char*)""	,(char*)"dan",(char*)"den",(char*)"dan",(char*)"den"	}},//k - den
@@ -46,7 +46,7 @@ const struct sonek_type sonek_table[] =
 
 bool bu_harf_unlu_mu(char harf)
 {
-	if(harf=='a' || harf=='A' || harf=='e' || harf=='E' || harf=='ý' || harf=='I' || harf=='i' || harf=='Ý' || harf=='o' || harf=='O' || harf=='ö' || harf=='Ö' || harf=='u' || harf=='U' || harf=='ü' || harf=='Ü')
+	if(harf=='a' || harf=='A' || harf=='e' || harf=='E' || harf=='Ä±' || harf=='I' || harf=='i' || harf=='Ä°' || harf=='o' || harf=='O' || harf=='Ã¶' || harf=='Ã–' || harf=='u' || harf=='U' || harf=='Ã¼' || harf=='Ãœ')
 		return TRUE;
 	return FALSE;
 }
@@ -60,7 +60,7 @@ bool son_harf_unlu_mu(char *sozcuk)
 	{
 		++str;
 	}
-	//son harf þu:
+	//son harf ÅŸu:
 	--str;
 
 	if(bu_harf_unlu_mu(*str))
@@ -73,7 +73,7 @@ char son_unlu_harf_hangisi(char *sozcuk)
 	const 	char 	*str;
 	char unlu=0;
 	str=sozcuk;
-	// son harfe ilerleyelim. ilerlerken de son ünlüyü bulalým...
+	// son harfe ilerleyelim. ilerlerken de son Ã¼nlÃ¼yÃ¼ bulalÄ±m...
 	while(*str != '\0')
 	{
 		if(bu_harf_unlu_mu(*str))
@@ -107,7 +107,7 @@ char *ek_olustur(char *sozcuk, char tip)
 	{
 		switch(son_unlu)
 		{
-			case 'a':case 'ý':
+			case 'a':case 'Ä±':
 				sprintf(buf,"%s%s%s",sozcuk,sonek_table[i].ek[0],sonek_table[i].ek[1]);
 				break;
 			case 'e':case 'i':
@@ -116,7 +116,7 @@ char *ek_olustur(char *sozcuk, char tip)
 			case 'o':case 'u':
 				sprintf(buf,"%s%s%s",sozcuk,sonek_table[i].ek[0],sonek_table[i].ek[3]);
 				break;
-			case 'ö':case 'ü':
+			case 'Ã¶':case 'Ã¼':
 				sprintf(buf,"%s%s%s",sozcuk,sonek_table[i].ek[0],sonek_table[i].ek[4]);
 				break;
 			default:
@@ -128,7 +128,7 @@ char *ek_olustur(char *sozcuk, char tip)
 	{
 		switch(son_unlu)
 		{
-			case 'a':case 'ý':
+			case 'a':case 'Ä±':
 				sprintf(buf,"%s%s",sozcuk,sonek_table[i].ek[1]);
 				break;
 			case 'e':case 'i':
@@ -137,7 +137,7 @@ char *ek_olustur(char *sozcuk, char tip)
 			case 'o':case 'u':
 				sprintf(buf,"%s%s%s",sozcuk,sonek_table[i].ek[0],sonek_table[i].ek[3]);
 				break;
-			case 'ö':case 'ü':
+			case 'Ã¶':case 'Ã¼':
 				sprintf(buf,"%s%s%s",sozcuk,sonek_table[i].ek[0],sonek_table[i].ek[4]);
 				break;
 			default:

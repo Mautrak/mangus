@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
- * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
- * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aÃ§Ä±k kaynak TÃ¼rkÃ§e Mud projesidir.                        *
+ * Oyun geliÅŸtirmesi Jai ve Maru tarafÄ±ndan yÃ¶netilmektedir.               *
+ * UnutulmamasÄ± gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -275,20 +275,20 @@ bool spec_patrolman(CHAR_DATA *ch)
     switch (number_range(0,6))
     {
 	default:	message = NULL;		break;
-  case 0:	message = "$n 'Hey hey heey, ayrýlýn!' diye baðýrýyor";
+  case 0:	message = "$n 'Hey hey heey, ayrÄ±lÄ±n!' diye baÄŸÄ±rÄ±yor";
 		break;
 	case 1: message =
-		"$n 'Sorumlu olan toplum, tek baþýma ne yapabilirim ki?' dedi";
+		"$n 'Sorumlu olan toplum, tek baÅŸÄ±ma ne yapabilirim ki?' dedi";
 		break;
 	case 2: message =
-		"$n 'Bu serseriler hepimizi mahvedecek.' diye mýrýldanýyor";
+		"$n 'Bu serseriler hepimizi mahvedecek.' diye mÄ±rÄ±ldanÄ±yor";
 		break;
-	case 3: message = "$n 'Durun! Durun!' diye baðýrýyor ve saldýrýyor.";
+	case 3: message = "$n 'Durun! Durun!' diye baÄŸÄ±rÄ±yor ve saldÄ±rÄ±yor.";
 		break;
-	case 4: message = "$n sopasýný eline alarak iþe giriþiyor.";
+	case 4: message = "$n sopasÄ±nÄ± eline alarak iÅŸe giriÅŸiyor.";
 		break;
 	case 5: message =
-		"$n iç çekerek kavgayý ayýrmaya giriþiyor.";
+		"$n iÃ§ Ã§ekerek kavgayÄ± ayÄ±rmaya giriÅŸiyor.";
 		break;
 	case 6: message = "$n 'Sakin olun, sizi fanatikler!' diyor.";
 		break;
@@ -425,40 +425,40 @@ bool spec_cast_adept( CHAR_DATA *ch )
     switch ( number_range(0,15) )
     {
     case 0:
-    act( "$n sihirli sözcükler söylüyor 'abrazak'.", ch, NULL, NULL, TO_ROOM );
+    act( "$n sihirli sÃ¶zcÃ¼kler sÃ¶ylÃ¼yor 'abrazak'.", ch, NULL, NULL, TO_ROOM );
 	spell_armor( skill_lookup( "armor" ), ch->level,ch,victim,TARGET_CHAR);
 	return TRUE;
 
     case 1:
-    act( "$n sihirli sözcükler söylüyor 'fido'.", ch, NULL, NULL, TO_ROOM );
+    act( "$n sihirli sÃ¶zcÃ¼kler sÃ¶ylÃ¼yor 'fido'.", ch, NULL, NULL, TO_ROOM );
 	spell_bless( skill_lookup( "bless" ), ch->level,ch,victim,TARGET_CHAR);
 	return TRUE;
 
     case 2:
-    act("$n sihirli sözcükler söylüyor 'judicandus noselacri'.",ch,NULL,NULL,TO_ROOM);
+    act("$n sihirli sÃ¶zcÃ¼kler sÃ¶ylÃ¼yor 'judicandus noselacri'.",ch,NULL,NULL,TO_ROOM);
 	spell_cure_blindness( skill_lookup( "cure blindness" ),
 	    ch->level, ch, victim,TARGET_CHAR);
 	return TRUE;
 
     case 3:
-    act("$n sihirli sözcükler söylüyor 'judicandus dies'.", ch,NULL, NULL, TO_ROOM );
+    act("$n sihirli sÃ¶zcÃ¼kler sÃ¶ylÃ¼yor 'judicandus dies'.", ch,NULL, NULL, TO_ROOM );
 	spell_cure_light( skill_lookup( "cure light" ),
 	    ch->level, ch, victim,TARGET_CHAR);
 	return TRUE;
 
     case 4:
-    act( "$n sihirli sözcükler söylüyor 'judicandus sausabru'.",ch,NULL,NULL,TO_ROOM);
+    act( "$n sihirli sÃ¶zcÃ¼kler sÃ¶ylÃ¼yor 'judicandus sausabru'.",ch,NULL,NULL,TO_ROOM);
 	spell_cure_poison( skill_lookup( "cure poison" ),
 	    ch->level, ch, victim,TARGET_CHAR);
 	return TRUE;
 
     case 5:
-    act("$n sihirli sözcükler söylüyor 'candusima'.", ch, NULL, NULL, TO_ROOM );
+    act("$n sihirli sÃ¶zcÃ¼kler sÃ¶ylÃ¼yor 'candusima'.", ch, NULL, NULL, TO_ROOM );
 	spell_refresh( skill_lookup("refresh"),ch->level,ch,victim,TARGET_CHAR);
 	return TRUE;
 
     case 6:
-    act("$n sihirli sözcükler söylüyor 'judicandus eugzagz'.",ch,NULL,NULL,TO_ROOM);
+    act("$n sihirli sÃ¶zcÃ¼kler sÃ¶ylÃ¼yor 'judicandus eugzagz'.",ch,NULL,NULL,TO_ROOM);
 	spell_cure_disease(skill_lookup("cure disease"),
 	    ch->level,ch,victim,TARGET_CHAR);
     }
@@ -610,7 +610,7 @@ bool spec_executioner( CHAR_DATA *ch )
 
 	if ( !IS_NPC(victim) && IS_SET(victim->act, PLR_WANTED)
 	&&   can_see(ch,victim))
-	    { crime = "SUÇLU"; break; }
+	    { crime = "SUÃ‡LU"; break; }
     }
 
     if ( victim == NULL )
@@ -641,7 +641,7 @@ bool spec_fido( CHAR_DATA *ch )
 	if ( corpse->item_type != ITEM_CORPSE_NPC )
 	    continue;
 
-      act( "$n cesedi vahþice parçalayýp yiyor.", ch, NULL, NULL, TO_ROOM );
+      act( "$n cesedi vahÅŸice parÃ§alayÄ±p yiyor.", ch, NULL, NULL, TO_ROOM );
 	for ( obj = corpse->contains; obj; obj = obj_next )
 	{
 	    obj_next = obj->next_content;
@@ -673,7 +673,7 @@ bool spec_janitor( CHAR_DATA *ch )
 	||   trash->item_type == ITEM_TRASH
 	||   trash->cost < 10 )
 	{
-    act( "$n çöpleri topluyor.", ch, NULL, NULL, TO_ROOM );
+    act( "$n Ã§Ã¶pleri topluyor.", ch, NULL, NULL, TO_ROOM );
 	    obj_from_room( trash );
 	    obj_to_char( trash, ch );
 	    if (IS_SET(trash->progtypes,OPROG_GET))
@@ -731,42 +731,42 @@ bool spec_mayor( CHAR_DATA *ch )
 
     case 'W':
 	ch->position = POS_STANDING;
-  act("$n uyanýyor ve gürültülü bir inilti koparýyor.", ch, NULL, NULL, TO_ROOM );
+  act("$n uyanÄ±yor ve gÃ¼rÃ¼ltÃ¼lÃ¼ bir inilti koparÄ±yor.", ch, NULL, NULL, TO_ROOM );
 	break;
 
     case 'S':
 	ch->position = POS_SLEEPING;
-  act("$n yatýp uyuyor.", ch, NULL, NULL, TO_ROOM );
+  act("$n yatÄ±p uyuyor.", ch, NULL, NULL, TO_ROOM );
 	break;
 
     case 'a':
-    do_say( ch,(char*) "Merhaba tatlým!" );
+    do_say( ch,(char*) "Merhaba tatlÄ±m!" );
 	break;
 
     case 'b':
-    do_say(ch,(char*)"Þu rezilliðe bak! Çöpler konusunda birþey yapmalýyým!");
+    do_say(ch,(char*)"Åžu rezilliÄŸe bak! Ã‡Ã¶pler konusunda birÅŸey yapmalÄ±yÄ±m!");
 	break;
 
     case 'c':
-    do_say(ch,(char*)"Gençlerde saygý denen þey kalmadý.");
+    do_say(ch,(char*)"GenÃ§lerde saygÄ± denen ÅŸey kalmadÄ±.");
 	break;
 
     case 'd':
-    do_say(ch,(char*)"Ýyi günler, vatandaþlar!");
+    do_say(ch,(char*)"Ä°yi gÃ¼nler, vatandaÅŸlar!");
 	break;
 
     case 'e':
-    do_say(ch,(char*)"Selenge þehir kapýlarýnýn açýldýðýný bildiririm.");
+    do_say(ch,(char*)"Selenge ÅŸehir kapÄ±larÄ±nÄ±n aÃ§Ä±ldÄ±ÄŸÄ±nÄ± bildiririm.");
 	break;
 
     case 'E':
-    do_say(ch,(char*)"Selenge þehir kapýlarýnýn kapandýðýný bildiririm.");
+    do_say(ch,(char*)"Selenge ÅŸehir kapÄ±larÄ±nÄ±n kapandÄ±ÄŸÄ±nÄ± bildiririm.");
 	break;
 
     case 'O':
-	do_unlock( ch, (char*)"kapý" );
-	do_open( ch, (char*)"kapý" );
-  interpret( ch, (char*)"duygu þehir kapýsýnýn kilidini açýyor.",FALSE);
+	do_unlock( ch, (char*)"kapÄ±" );
+	do_open( ch, (char*)"kapÄ±" );
+  interpret( ch, (char*)"duygu ÅŸehir kapÄ±sÄ±nÄ±n kilidini aÃ§Ä±yor.",FALSE);
 	for( key=ch->in_room->contents; key!=NULL; key=key->next_content )
 	  if ( key->pIndexData->vnum == 3379 )
 	    break;
@@ -776,10 +776,10 @@ bool spec_mayor( CHAR_DATA *ch )
 	break;
 
     case 'C':
-	do_close( ch, (char*)"kapý" );
-	do_lock( ch, (char*)"kapý" );
+	do_close( ch, (char*)"kapÄ±" );
+	do_lock( ch, (char*)"kapÄ±" );
 	do_drop( ch, (char*)"anahtar" );
-  interpret( ch, (char*)"duygu þehir kapýsýný zincirliyor.",FALSE);
+  interpret( ch, (char*)"duygu ÅŸehir kapÄ±sÄ±nÄ± zincirliyor.",FALSE);
 	for( key=ch->in_room->contents; key!=NULL; key=key->next_content )
 	  if ( key->pIndexData->vnum == 3379 )
 	    break;
@@ -807,9 +807,9 @@ bool spec_poison( CHAR_DATA *ch )
     ||   number_percent( ) > 2 * ch->level )
 	return FALSE;
 
-  act( "$M ýsýrýyorsun!",  ch, NULL, victim, TO_CHAR    );
-  act( "$n $M ýsýrýyor!",  ch, NULL, victim, TO_NOTVICT );
-  act( "$n seni ýsýrýyor!", ch, NULL, victim, TO_VICT    );
+  act( "$M Ä±sÄ±rÄ±yorsun!",  ch, NULL, victim, TO_CHAR    );
+  act( "$n $M Ä±sÄ±rÄ±yor!",  ch, NULL, victim, TO_NOTVICT );
+  act( "$n seni Ä±sÄ±rÄ±yor!", ch, NULL, victim, TO_VICT    );
     spell_poison( gsn_poison, ch->level, ch, victim,TARGET_CHAR);
     return TRUE;
 }
@@ -837,9 +837,9 @@ bool spec_thief( CHAR_DATA *ch )
 
 	if ( IS_AWAKE(victim) && number_range( 0, ch->level ) == 0 )
 	{
-    act( "$s ellerinin para keseni kurcaladýðýný farkediyorsun!",
+    act( "$s ellerinin para keseni kurcaladÄ±ÄŸÄ±nÄ± farkediyorsun!",
   ch, NULL, victim, TO_VICT );
-    act( "$N $s ellerinin para kesesini kurcaladýðýný farkediyor!",
+    act( "$N $s ellerinin para kesesini kurcaladÄ±ÄŸÄ±nÄ± farkediyor!",
 		ch, NULL, victim, TO_NOTVICT );
 	    return TRUE;
 	}
@@ -879,36 +879,36 @@ bool spec_cast_cabal( CHAR_DATA *ch )
     switch ( number_range(0,15) )
     {
     case 0:
-    act( "$n sihirli sözcükler söylüyor 'abracal'.", ch, NULL, NULL, TO_ROOM );
+    act( "$n sihirli sÃ¶zcÃ¼kler sÃ¶ylÃ¼yor 'abracal'.", ch, NULL, NULL, TO_ROOM );
 	spell_armor( skill_lookup( "armor" ), ch->level, ch, victim, TARGET_CHAR );
 	return TRUE;
 
     case 1:
-    act(  "$n sihirli sözcükler söylüyor 'balc'.", ch, NULL, NULL, TO_ROOM );
+    act(  "$n sihirli sÃ¶zcÃ¼kler sÃ¶ylÃ¼yor 'balc'.", ch, NULL, NULL, TO_ROOM );
 	spell_bless( skill_lookup( "bless" ), ch->level, ch, victim, TARGET_CHAR );
 	return TRUE;
 
     case 2:
-    act("$n sihirli sözcükler söylüyor 'judicandus noselacba'.", ch, NULL, NULL, TO_ROOM );
+    act("$n sihirli sÃ¶zcÃ¼kler sÃ¶ylÃ¼yor 'judicandus noselacba'.", ch, NULL, NULL, TO_ROOM );
 	spell_cure_blindness( skill_lookup( "cure blindness" ),
 	    ch->level, ch, victim, TARGET_CHAR );
 	return TRUE;
 
     case 3:
-    act( "$n sihirli sözcükler söylüyor 'judicandus bacla'.", ch, NULL, NULL,TO_ROOM);
+    act( "$n sihirli sÃ¶zcÃ¼kler sÃ¶ylÃ¼yor 'judicandus bacla'.", ch, NULL, NULL,TO_ROOM);
 	spell_cure_light( skill_lookup( "cure light" ),
 	    ch->level, ch, victim, TARGET_CHAR );
 	return TRUE;
 
     case 4:
-    act( "$n sihirli sözcükler söylüyor 'judicandus sausabcla'.",
+    act( "$n sihirli sÃ¶zcÃ¼kler sÃ¶ylÃ¼yor 'judicandus sausabcla'.",
 	    ch, NULL, NULL, TO_ROOM );
 	spell_cure_poison( skill_lookup( "cure poison" ),
 	    ch->level, ch, victim, TARGET_CHAR );
 	return TRUE;
 
     case 5:
-    act( "$n sihirli sözcükler söylüyor 'candabala'.", ch, NULL, NULL, TO_ROOM );
+    act( "$n sihirli sÃ¶zcÃ¼kler sÃ¶ylÃ¼yor 'candabala'.", ch, NULL, NULL, TO_ROOM );
 	spell_refresh( skill_lookup( "refresh" ), ch->level, ch, victim,
 TARGET_CHAR );
 	return TRUE;
@@ -943,21 +943,21 @@ bool spec_guard( CHAR_DATA *ch )
 	if (IS_SET(ch->in_room->area->area_flag,AREA_HOMETOWN)
 		&& number_percent() < 2 )
 	 {
-     do_say( ch, (char*)"Seni tanýyor muyum?");
+     do_say( ch, (char*)"Seni tanÄ±yor muyum?");
  	  if (str_cmp(ch->in_room->area->name,
 		hometown_table[victim->hometown].name) )
 	   {
-       do_say( ch,(char*)"Seni hatýrlamýyorum. Uzaklaþ!");
+       do_say( ch,(char*)"Seni hatÄ±rlamÄ±yorum. UzaklaÅŸ!");
 	   }
 	  else
 	   {
-       do_say(ch, (char*)"Tamam, þimdi hatýrladým.");
-		 interpret( ch, (char*)"gülümse",FALSE);
+       do_say(ch, (char*)"Tamam, ÅŸimdi hatÄ±rladÄ±m.");
+		 interpret( ch, (char*)"gÃ¼lÃ¼mse",FALSE);
 	   }
 	 }
 
 	if ( !IS_NPC(victim) && IS_SET(victim->act, PLR_WANTED) )
-	  { crime = "SUÇLU"; break; }
+	  { crime = "SUÃ‡LU"; break; }
 
 	if ( victim->fighting != NULL
 	     && victim->fighting != ch
@@ -977,7 +977,7 @@ bool spec_guard( CHAR_DATA *ch )
 
     if ( ech != NULL )
       {
-        act( "$n baðýrýyor 'MASUMU KORU!!  SALDIR!!!'",
+        act( "$n baÄŸÄ±rÄ±yor 'MASUMU KORU!!  SALDIR!!!'",
 			ch, NULL, NULL, TO_ROOM );
 	multi_hit( ch, ech, TYPE_UNDEFINED );
 	return TRUE;
@@ -1009,7 +1009,7 @@ bool spec_special_guard( CHAR_DATA *ch )
         if (!can_see(ch,victim)) continue;
 
 	if ( !IS_NPC(victim) && IS_SET(victim->act, PLR_WANTED) )
-	  { crime = "SUÇLU"; break; }
+	  { crime = "SUÃ‡LU"; break; }
 
 	if ( victim->fighting != NULL
 	     && victim->fighting != ch
@@ -1028,7 +1028,7 @@ bool spec_special_guard( CHAR_DATA *ch )
 
     if ( ech != NULL )
     {
-      act( "$n baðýrýyor 'MASUMU KORU!  SALDIR!!!'",
+      act( "$n baÄŸÄ±rÄ±yor 'MASUMU KORU!  SALDIR!!!'",
 			ch, NULL, NULL, TO_ROOM );
 	multi_hit( ch, ech, TYPE_UNDEFINED );
 	return TRUE;
@@ -1053,7 +1053,7 @@ bool spec_stalker(CHAR_DATA *ch)
   if (ch->status == 10)
     {
       ch->cabal = CABAL_RULER;
-      do_cb(ch, (char*)"Kurbanýmý öldürdüðüme göre geldiðim yere dönebilirim.");
+      do_cb(ch, (char*)"KurbanÄ±mÄ± Ã¶ldÃ¼rdÃ¼ÄŸÃ¼me gÃ¶re geldiÄŸim yere dÃ¶nebilirim.");
       extract_char(ch, TRUE);
       return TRUE;
     }
@@ -1061,7 +1061,7 @@ bool spec_stalker(CHAR_DATA *ch)
   if (victim == NULL)
     {
       ch->cabal = CABAL_RULER;
-      do_cb(ch,(char*) "Kurbaným oyundan ayrýldý. Bu benim gitme vaktimin geldiðinin de göstergesi.");
+      do_cb(ch,(char*) "KurbanÄ±m oyundan ayrÄ±ldÄ±. Bu benim gitme vaktimin geldiÄŸinin de gÃ¶stergesi.");
       extract_char(ch, TRUE);
       return TRUE;
     }
@@ -1078,7 +1078,7 @@ bool spec_stalker(CHAR_DATA *ch)
      wch_next = wch->next_in_room;
      if (victim == wch)
       {
-        sprintf(buf,"Sen bir suçlusun %s! Ve öleceksin!!!", victim->name);
+        sprintf(buf,"Sen bir suÃ§lusun %s! Ve Ã¶leceksin!!!", victim->name);
        do_yell(ch,buf);
        multi_hit(ch,wch,TYPE_UNDEFINED);
        return TRUE;
@@ -1100,7 +1100,7 @@ get_room_index(hometown_table[victim->hometown].recall[1]))
        else
     	{
       	  ch->cabal = CABAL_RULER;
-          sprintf(buf, "Üzgünüm ama %s izini kaybettirdi. Gitmeliyim.",
+          sprintf(buf, "ÃœzgÃ¼nÃ¼m ama %s izini kaybettirdi. Gitmeliyim.",
 	      victim->name);
       	  do_cb(ch, buf);
       	  extract_char(ch, TRUE);
@@ -1143,11 +1143,11 @@ bool spec_nasty( CHAR_DATA *ch )
 
     switch ( number_range(0,3) )
     {
-      case 0:  act("$n para keseni yýrtýp atarak paranýn saçýlmasýna neden oluyor!",
+      case 0:  act("$n para keseni yÄ±rtÄ±p atarak paranÄ±n saÃ§Ä±lmasÄ±na neden oluyor!",
                    ch, NULL, victim, TO_VICT);
-               act("$S para kesesini yýrtýyor ve akçelerini topluyorsun.",
+               act("$S para kesesini yÄ±rtÄ±yor ve akÃ§elerini topluyorsun.",
                    ch, NULL, victim, TO_CHAR);
-               act("$S para kesesi yýrtýlýyor!",
+               act("$S para kesesi yÄ±rtÄ±lÄ±yor!",
                      ch, NULL, victim, TO_NOTVICT);
                  silver = victim->silver / 2;  /* steal half of his silver */
                  victim->silver -= silver;
@@ -1166,7 +1166,7 @@ bool spec_questmaster( CHAR_DATA *ch )
     if ( !IS_AWAKE(ch) )
         return FALSE;
     if (number_range(0,100) == 0) {
-      do_say(ch, (char*)"Bir görev istemez misin?");
+      do_say(ch, (char*)"Bir gÃ¶rev istemez misin?");
         return TRUE;
     }
     return FALSE;
@@ -1177,7 +1177,7 @@ bool spec_duzenbaz( CHAR_DATA *ch )
     if ( !IS_AWAKE(ch) )
         return FALSE;
     if (number_range(0,100) == 0) {
-      do_say(ch, (char*)"Hoþgeldin, var mýdýr bir sýkýntý? Yardýmcý olalým.");
+      do_say(ch, (char*)"HoÅŸgeldin, var mÄ±dÄ±r bir sÄ±kÄ±ntÄ±? YardÄ±mcÄ± olalÄ±m.");
         return TRUE;
     }
     return FALSE;
@@ -1214,22 +1214,22 @@ bool spec_assassinater( CHAR_DATA *ch )
    switch (rnd_say)
 	{
     case  5:
-           sprintf( buf, "Ölüm tek sondur...");
+           sprintf( buf, "Ã–lÃ¼m tek sondur...");
      break;
   case  6:
-           sprintf( buf, "Ölme zamaný....");
+           sprintf( buf, "Ã–lme zamanÄ±....");
      break;
   case  7:
-           sprintf( buf, "Ölme zamaný....");
+           sprintf( buf, "Ã–lme zamanÄ±....");
      break;
   case  8:
            sprintf( buf, "Kaderin seni bekliyor....");
      break;
   case  9:
-     sprintf( buf, "Ölümsüzlere bir kurban.... ");
+     sprintf( buf, "Ã–lÃ¼msÃ¼zlere bir kurban.... ");
      break;
   case 10:
-           sprintf( buf, "Hiç þeytanla raks ettin mi....");
+           sprintf( buf, "HiÃ§ ÅŸeytanla raks ettin mi....");
 	    break;
 	 default:
 	   return FALSE;
@@ -1246,7 +1246,7 @@ bool spec_repairman( CHAR_DATA *ch )
         return FALSE;
     if (number_range(0,100) == 0)
     {
-      do_say(ch, (char*)"Þimdi diðer ekipmanlarý tamir etme zamaný.");
+      do_say(ch, (char*)"Åžimdi diÄŸer ekipmanlarÄ± tamir etme zamanÄ±.");
         return TRUE;
     }
     return FALSE;
@@ -1299,55 +1299,55 @@ bool spec_captain( CHAR_DATA *ch )
 
     case 'W':
 	ch->position = POS_STANDING;
-  act_color( "$C$n uyanýyor ve esniyor.$c", ch, NULL, NULL, TO_ROOM,
+  act_color( "$C$n uyanÄ±yor ve esniyor.$c", ch, NULL, NULL, TO_ROOM,
 POS_RESTING,CLR_WHITE );
 	break;
 
     case 'S':
 	ch->position = POS_SLEEPING;
-  act_color( "$C$n yatýp uyumaya baþlýyor.$c", ch, NULL, NULL, TO_ROOM,
+  act_color( "$C$n yatÄ±p uyumaya baÅŸlÄ±yor.$c", ch, NULL, NULL, TO_ROOM,
 POS_RESTING,CLR_WHITE );
 	break;
 
     case 'a':
-    act_color( "$C$n 'Selamlar! Ýyi avlar dilerim!' dedi$c", ch, NULL,
+    act_color( "$C$n 'Selamlar! Ä°yi avlar dilerim!' dedi$c", ch, NULL,
         NULL,TO_ROOM,POS_RESTING, CLR_YELLOW );
 	break;
 
     case 'b':
-    act_color("$C$n 'Caddeleri temiz tutalým ki Solace temiz olsun,' dedi.$c",ch,NULL, NULL, TO_ROOM, POS_RESTING,CLR_YELLOW );
+    act_color("$C$n 'Caddeleri temiz tutalÄ±m ki Solace temiz olsun,' dedi.$c",ch,NULL, NULL, TO_ROOM, POS_RESTING,CLR_YELLOW );
 	break;
 
     case 'c':
-    act_color( "$C$n 'Bu kapýlara bir çare bulmalýyým,' dedi.$c",ch,
+    act_color( "$C$n 'Bu kapÄ±lara bir Ã§are bulmalÄ±yÄ±m,' dedi.$c",ch,
     NULL, NULL, TO_ROOM, POS_RESTING,CLR_YELLOW );
-    act_color("$C$n 'Buradan hiç ayrýlmayacaðým,' dedi.$c", ch, NULL, NULL,
+    act_color("$C$n 'Buradan hiÃ§ ayrÄ±lmayacaÄŸÄ±m,' dedi.$c", ch, NULL, NULL,
         TO_ROOM,POS_RESTING,CLR_YELLOW );
 	break;
 
     case 'd':
-    act_color("$C$n says 'Selamlar Solace vatadaþlarý!' dedi.$c", ch, NULL, NULL,
+    act_color("$C$n says 'Selamlar Solace vatadaÅŸlarÄ±!' dedi.$c", ch, NULL, NULL,
         TO_ROOM, POS_RESTING,CLR_YELLOW );
 	break;
 
     case 'y':
-    act_color( "$C$n 'Solace þehrinin açýldýðýný bildiririm!' dedi.$c", ch,
+    act_color( "$C$n 'Solace ÅŸehrinin aÃ§Ä±ldÄ±ÄŸÄ±nÄ± bildiririm!' dedi.$c", ch,
 NULL, NULL, TO_ROOM, POS_RESTING,CLR_YELLOW );
 	break;
 
     case 'E':
-    act_color( "$C$n 'Solace þehrinin kapandýðýný deklare ederim!' dedi.$c", ch,
+    act_color( "$C$n 'Solace ÅŸehrinin kapandÄ±ÄŸÄ±nÄ± deklare ederim!' dedi.$c", ch,
 NULL, NULL, TO_ROOM, POS_RESTING,CLR_YELLOW );
 	break;
 
     case 'O':
-	do_unlock( ch, (char*)"kapý" );
-	do_open( ch, (char*)"kapý" );
+	do_unlock( ch, (char*)"kapÄ±" );
+	do_open( ch, (char*)"kapÄ±" );
 	break;
 
     case 'C':
-	do_close( ch, (char*)"kapý" );
-	do_lock( ch, (char*)"kapý" );
+	do_close( ch, (char*)"kapÄ±" );
+	do_lock( ch, (char*)"kapÄ±" );
 	break;
 
     case 'n':
@@ -1355,11 +1355,11 @@ NULL, NULL, TO_ROOM, POS_RESTING,CLR_YELLOW );
 	break;
 
     case 'o':
-        do_close( ch, (char*)"güney" );
+        do_close( ch, (char*)"gÃ¼ney" );
         break;
 
     case 's':
-	do_open( ch, (char*)"güney" );
+	do_open( ch, (char*)"gÃ¼ney" );
 	break;
 
     case 't':
@@ -1367,19 +1367,19 @@ NULL, NULL, TO_ROOM, POS_RESTING,CLR_YELLOW );
         break;
 
     case 'e':
-	do_open( ch, (char*)"doðu" );
+	do_open( ch, (char*)"doÄŸu" );
 	break;
 
     case 'f':
-        do_close( ch, (char*)"batý" );
+        do_close( ch, (char*)"batÄ±" );
         break;
 
     case 'w':
-	do_open( ch, (char*)"batý" );
+	do_open( ch, (char*)"batÄ±" );
 	break;
 
     case 'x':
-        do_close( ch, (char*)"doðu" );
+        do_close( ch, (char*)"doÄŸu" );
         break;
 
     case '.' :
@@ -1732,8 +1732,8 @@ bool spec_fight_powerman( CHAR_DATA *ch )
 
     if ( number_percent() < 33)
     {
-        act("Ölümcül üçlü saldýrýyý yapýyorsun!",ch,NULL,NULL,TO_CHAR);
-        act("$n ölümcül üçlü saldýrýyý yapýyor!",ch,NULL,NULL,TO_ROOM);
+        act("Ã–lÃ¼mcÃ¼l Ã¼Ã§lÃ¼ saldÄ±rÄ±yÄ± yapÄ±yorsun!",ch,NULL,NULL,TO_CHAR);
+        act("$n Ã¶lÃ¼mcÃ¼l Ã¼Ã§lÃ¼ saldÄ±rÄ±yÄ± yapÄ±yor!",ch,NULL,NULL,TO_ROOM);
         one_hit( ch, victim, TYPE_UNDEFINED, FALSE );
         one_hit( ch, victim, TYPE_UNDEFINED, FALSE );
         one_hit( ch, victim, TYPE_UNDEFINED, FALSE );
@@ -1904,10 +1904,10 @@ bool spec_wishmaster( CHAR_DATA *ch )
     switch(i)
     {
         case 0:
-            do_say(ch, (char*)"Bir dilek tutmak istemez misin? Öyleyse dilek listeme bakmalýsýn.");
+            do_say(ch, (char*)"Bir dilek tutmak istemez misin? Ã–yleyse dilek listeme bakmalÄ±sÄ±n.");
             return TRUE;
         case 1:
-            do_say(ch, (char*)"Uygun bir ücrete harika bir dilek dilemek istemez misin? Listeme bakmalýsýn.");
+            do_say(ch, (char*)"Uygun bir Ã¼crete harika bir dilek dilemek istemez misin? Listeme bakmalÄ±sÄ±n.");
             return TRUE;
     }
     return FALSE;
@@ -1919,10 +1919,10 @@ bool spec_kameni_dindar( CHAR_DATA *ch )
         return FALSE;
     if (number_range(0,100) == 0)
     {
-        do_say(ch, (char*)"Merhaba tanrýnýn merhametine muhtaç kiþi.");
-        do_say(ch, (char*)"Kame'nin el yazmalarýný arýyorum.");
-        do_say(ch, (char*)"Yeraltý'nda o el yazmalarýndan bahsedildiðini duydum.");
-        do_say(ch, (char*)"Ama bulmak nasip olmadý.");
+        do_say(ch, (char*)"Merhaba tanrÄ±nÄ±n merhametine muhtaÃ§ kiÅŸi.");
+        do_say(ch, (char*)"Kame'nin el yazmalarÄ±nÄ± arÄ±yorum.");
+        do_say(ch, (char*)"YeraltÄ±'nda o el yazmalarÄ±ndan bahsedildiÄŸini duydum.");
+        do_say(ch, (char*)"Ama bulmak nasip olmadÄ±.");
         return TRUE;
     }
     return FALSE;
@@ -1934,10 +1934,10 @@ bool spec_niryani_dindar( CHAR_DATA *ch )
         return FALSE;
     if (number_range(0,100) == 0)
     {
-        do_say(ch, (char*)"Merhaba tanrýnýn merhametine muhtaç kiþi.");
-        do_say(ch, (char*)"Nir'in el yazmalarýný arýyorum.");
-        do_say(ch, (char*)"Eski Thalos'ta o el yazmalarýndan bahsedildiðini duydum.");
-        do_say(ch, (char*)"Ama bulmak nasip olmadý.");
+        do_say(ch, (char*)"Merhaba tanrÄ±nÄ±n merhametine muhtaÃ§ kiÅŸi.");
+        do_say(ch, (char*)"Nir'in el yazmalarÄ±nÄ± arÄ±yorum.");
+        do_say(ch, (char*)"Eski Thalos'ta o el yazmalarÄ±ndan bahsedildiÄŸini duydum.");
+        do_say(ch, (char*)"Ama bulmak nasip olmadÄ±.");
         return TRUE;
     }
     return FALSE;
@@ -1949,10 +1949,10 @@ bool spec_nyahi_dindar( CHAR_DATA *ch )
         return FALSE;
     if (number_range(0,100) == 0)
     {
-        do_say(ch, (char*)"Merhaba tanrýnýn merhametine muhtaç kiþi.");
-        do_say(ch, (char*)"Nyah'ýn el yazmalarýný arýyorum.");
-        do_say(ch, (char*)"Bölümüþ Ruhlar'da o el yazmalarýndan bahsedildiðini duydum.");
-        do_say(ch, (char*)"Ama bulmak nasip olmadý.");
+        do_say(ch, (char*)"Merhaba tanrÄ±nÄ±n merhametine muhtaÃ§ kiÅŸi.");
+        do_say(ch, (char*)"Nyah'Ä±n el yazmalarÄ±nÄ± arÄ±yorum.");
+        do_say(ch, (char*)"BÃ¶lÃ¼mÃ¼ÅŸ Ruhlar'da o el yazmalarÄ±ndan bahsedildiÄŸini duydum.");
+        do_say(ch, (char*)"Ama bulmak nasip olmadÄ±.");
         return TRUE;
     }
     return FALSE;
@@ -1964,10 +1964,10 @@ bool spec_sintaryan_dindar( CHAR_DATA *ch )
         return FALSE;
     if (number_range(0,100) == 0)
     {
-        do_say(ch, (char*)"Merhaba tanrýnýn merhametine muhtaç kiþi.");
-        do_say(ch, (char*)"Sint'in el yazmalarýný arýyorum.");
-        do_say(ch, (char*)"Haon Dor'da o el yazmalarýndan bahsedildiðini duydum.");
-        do_say(ch, (char*)"Ama bulmak nasip olmadý.");
+        do_say(ch, (char*)"Merhaba tanrÄ±nÄ±n merhametine muhtaÃ§ kiÅŸi.");
+        do_say(ch, (char*)"Sint'in el yazmalarÄ±nÄ± arÄ±yorum.");
+        do_say(ch, (char*)"Haon Dor'da o el yazmalarÄ±ndan bahsedildiÄŸini duydum.");
+        do_say(ch, (char*)"Ama bulmak nasip olmadÄ±.");
         return TRUE;
     }
     return FALSE;

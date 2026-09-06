@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açık kaynak Türkçe Mud projesidir.                        *
- * Oyun geliştirmesi Jai ve Maru tarafından yönetilmektedir.               *
- * Unutulmaması gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aÃ§Ä±k kaynak TÃ¼rkÃ§e Mud projesidir.                        *
+ * Oyun geliÅŸtirmesi Jai ve Maru tarafÄ±ndan yÃ¶netilmektedir.               *
+ * UnutulmamasÄ± gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -145,7 +145,7 @@ int weapon_lookup (const char *name)
 }
 
 /*
- * Belirtilen büyü/yetenek için ch'nin cabal durumu OK midir?
+ * Belirtilen bÃ¼yÃ¼/yetenek iÃ§in ch'nin cabal durumu OK midir?
  */
 bool cabal_ok(CHAR_DATA *ch, sh_int sn)
 {
@@ -155,31 +155,31 @@ bool cabal_ok(CHAR_DATA *ch, sh_int sn)
   if (IS_NPC(ch))
     return TRUE;
 
-  // belirtilen yetenek/büyü kabal bağımlı değil.
+  // belirtilen yetenek/bÃ¼yÃ¼ kabal baÄŸÄ±mlÄ± deÄŸil.
   if (skill_table[sn].cabal == CABAL_NONE)
     return TRUE;
 
-  // kabal eşyasının tablodaki pointer'ı henüz boş.
-  // kabal eşyası extract edilmiş olabilir.
+  // kabal eÅŸyasÄ±nÄ±n tablodaki pointer'Ä± henÃ¼z boÅŸ.
+  // kabal eÅŸyasÄ± extract edilmiÅŸ olabilir.
   if (cabal_table[ch->cabal].obj_ptr == NULL)
     return TRUE;
 
-  // Kabal eşyası bir odaya bırakılmamış.
-  // Alan kişi envanterinde taşıyor olabilir.
+  // Kabal eÅŸyasÄ± bir odaya bÄ±rakÄ±lmamÄ±ÅŸ.
+  // Alan kiÅŸi envanterinde taÅŸÄ±yor olabilir.
   if (cabal_table[ch->cabal].obj_ptr->in_room == NULL )
     return TRUE;
 
-  // Kabal eşyası olması gereken odada duruyor.
+  // Kabal eÅŸyasÄ± olmasÄ± gereken odada duruyor.
   if (cabal_table[ch->cabal].obj_ptr->in_room->vnum == cabal_table[ch->cabal].room_vnum)
     return TRUE;
 
   for (i=1;i < MAX_CABAL; i++)
   {
-    // Kabal eşyası başka bir kabalın hedef odasına koyulmuş.
-    // Artık eşyası alınan kabalın güçleri iptal edilebilir.
+    // Kabal eÅŸyasÄ± baÅŸka bir kabalÄ±n hedef odasÄ±na koyulmuÅŸ.
+    // ArtÄ±k eÅŸyasÄ± alÄ±nan kabalÄ±n gÃ¼Ã§leri iptal edilebilir.
     if (cabal_table[ch->cabal].obj_ptr->in_room->vnum == cabal_table[i].room_vnum)
     {
-      send_to_char( "Kabal gücünün varolmadığını hissediyorsun.\n\r",ch);
+      send_to_char( "Kabal gÃ¼cÃ¼nÃ¼n varolmadÄ±ÄŸÄ±nÄ± hissediyorsun.\n\r",ch);
       return FALSE;
     }
   }
@@ -255,7 +255,7 @@ void familya_check_improve(CHAR_DATA* ch,CHAR_DATA* victim)
     return;
   }
   ch->pcdata->familya[victim->race]++;
-  printf_to_char(ch,"{g%s ırkına ilişkin irfanın artıyor!{x\n\r",race_table[victim->race].name[1]);
+  printf_to_char(ch,"{g%s Ä±rkÄ±na iliÅŸkin irfanÄ±n artÄ±yor!{x\n\r",race_table[victim->race].name[1]);
   return;
 }
 
@@ -727,8 +727,8 @@ void reset_char(CHAR_DATA *ch)
   {
     ch->pcdata->ghost_mode_counter = 0;
     REMOVE_BIT(ch->act,PLR_GHOST);
-    printf_to_char(ch,"Ete kemiğe büründüğünü hissediyorsun. Arkanı kollamaya başlasan iyi olur!\n\r");
-    act ("$n ete kemiğe bürünüyor!",ch,NULL,NULL,TO_ROOM);
+    printf_to_char(ch,"Ete kemiÄŸe bÃ¼rÃ¼ndÃ¼ÄŸÃ¼nÃ¼ hissediyorsun. ArkanÄ± kollamaya baÅŸlasan iyi olur!\n\r");
+    act ("$n ete kemiÄŸe bÃ¼rÃ¼nÃ¼yor!",ch,NULL,NULL,TO_ROOM);
     while ( ch->affected )
       affect_remove( ch, ch->affected );
     ch->affected_by	= 0;
@@ -1028,8 +1028,8 @@ void affect_modify( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd )
 	if ( depth == 0 )
 	{
 	    depth++;
-      act( "$p objesini bırakıyorsun.", ch, hold, NULL, TO_CHAR );
-	    act( "$n $p objesini bırakıyor.", ch, hold, NULL, TO_ROOM );
+      act( "$p objesini bÄ±rakÄ±yorsun.", ch, hold, NULL, TO_CHAR );
+	    act( "$n $p objesini bÄ±rakÄ±yor.", ch, hold, NULL, TO_ROOM );
 	    obj_from_char( hold );
 	    obj_to_room( hold, ch->in_room );
 	    depth--;
@@ -1042,8 +1042,8 @@ void affect_modify( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd )
 	if ( depth == 0 )
 	{
 	    depth++;
-      act("$p objesini bırakıyorsun.", ch, hold, NULL, TO_CHAR );
-	    act("$n $p objesini bırakıyor.", ch, hold, NULL, TO_ROOM );
+      act("$p objesini bÄ±rakÄ±yorsun.", ch, hold, NULL, TO_CHAR );
+	    act("$n $p objesini bÄ±rakÄ±yor.", ch, hold, NULL, TO_ROOM );
 	    obj_from_char( hold );
 	    obj_to_room( hold, ch->in_room );
 	    depth--;
@@ -1056,8 +1056,8 @@ void affect_modify( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd )
 	if ( depth == 0 )
 	{
 	    depth++;
-      act( "$p objesini bırakıyorsun.", ch, hold, NULL, TO_CHAR );
-	    act( "$n $p objesini bırakıyor.", ch, hold, NULL, TO_ROOM );
+      act( "$p objesini bÄ±rakÄ±yorsun.", ch, hold, NULL, TO_CHAR );
+	    act( "$n $p objesini bÄ±rakÄ±yor.", ch, hold, NULL, TO_ROOM );
 	    obj_from_char( hold );
 	    obj_to_room( hold, ch->in_room );
 	    depth--;
@@ -1598,8 +1598,8 @@ void equip_char( CHAR_DATA *ch, OBJ_DATA *obj, int iWear )
 		/*
 		* Thanks to Morgenes for the bug fix here!
 		*/
-		act("$p seni çarparak elinden düşüyor.", ch, obj, NULL, TO_CHAR );
-		act("$p $m çarparak elinden düşüyor.",  ch, obj, NULL, TO_ROOM );
+		act("$p seni Ã§arparak elinden dÃ¼ÅŸÃ¼yor.", ch, obj, NULL, TO_CHAR );
+		act("$p $m Ã§arparak elinden dÃ¼ÅŸÃ¼yor.",  ch, obj, NULL, TO_ROOM );
 		obj_from_char( obj );
 		obj_to_room( obj, ch->in_room );
 		return;
@@ -1896,7 +1896,7 @@ void extract_obj_1( OBJ_DATA *obj, bool count )
 	   if (is_name(obj->name,wch->name) )
 		{
 		 REMOVE_BIT(wch->act,PLR_NO_EXP);
-     send_to_char("Ruhunu yakalıyorsun...\n\r",wch);
+     send_to_char("Ruhunu yakalÄ±yorsun...\n\r",wch);
 		 break;
 		}
 	  }
@@ -2994,7 +2994,7 @@ int ch_skill_nok( CHAR_DATA *ch, int skill )
 {
    if (ch_skill_nok_nomessage(ch,skill))
    {
-     send_to_char("Hı?\n\r",ch);
+     send_to_char("HÄ±?\n\r",ch);
 	 return 1;
    }
    return 0;
@@ -3042,7 +3042,7 @@ int count_charmed( CHAR_DATA *ch )
 
   if (count >= MAX_CHARM(ch) )
   {
-    send_to_char("Emrindekilerden fazlasını kontrol etmeye gücün yetmez!\n\r",ch);
+    send_to_char("Emrindekilerden fazlasÄ±nÄ± kontrol etmeye gÃ¼cÃ¼n yetmez!\n\r",ch);
     return count;
   }
 
@@ -3090,7 +3090,7 @@ void remove_mind(CHAR_DATA *ch, char *str)
   }
  while ( mind[0] != '\0' );
 
- do_say(ch,(char*)"Sonunda intikamımı aldım!");
+ do_say(ch,(char*)"Sonunda intikamÄ±mÄ± aldÄ±m!");
  free_string(ch->in_mind);
  ch->in_mind = str_dup( buf );
  if (is_number(buf)) back_home(ch);
@@ -3128,7 +3128,7 @@ void back_home( CHAR_DATA *ch )
 
  if ( ch->fighting == NULL && location != ch->in_room )
   {
-    act("$n nakil için dua ediyor.",ch,NULL,NULL,TO_ROOM);
+    act("$n nakil iÃ§in dua ediyor.",ch,NULL,NULL,TO_ROOM);
    char_from_room( ch );
    char_to_room( ch, location );
    act("$n odada beliriyor.",ch,NULL,NULL,TO_ROOM);
@@ -3156,7 +3156,7 @@ CHAR_DATA * find_char( CHAR_DATA *ch, char *argument,int door, int range )
  if ( (opdoor = opposite_door( door )) == -1)
   {
    bug("In find_char wrong door: %d",door);
-   send_to_char("Onu orada görmüyorsun.\n\r",ch);
+   send_to_char("Onu orada gÃ¶rmÃ¼yorsun.\n\r",ch);
    return NULL;
  }
  while (range > 0)
@@ -3171,14 +3171,14 @@ CHAR_DATA * find_char( CHAR_DATA *ch, char *argument,int door, int range )
   if ( (bExit = dest_room->exit[opdoor]) == NULL
       || bExit->u1.to_room != back_room)
    {
-     send_to_char("Seçtiğin yol gücünün yoldan geçmesine izin vermiyor.\n\r",ch);
+     send_to_char("SeÃ§tiÄŸin yol gÃ¼cÃ¼nÃ¼n yoldan geÃ§mesine izin vermiyor.\n\r",ch);
     return NULL;
    }
   if ((target = get_char_room2(ch,dest_room,arg,&number)) != NULL )
 	return target;
  }
 
- send_to_char("Onu orada görmüyorsun.\n\r",ch);
+ send_to_char("Onu orada gÃ¶rmÃ¼yorsun.\n\r",ch);
  return NULL;
 }
 
@@ -3187,11 +3187,11 @@ int check_exit( char *arg )
     int door = -1;
 
     if ( !str_cmp( arg, "k" ) || !str_cmp( arg, "kuzey" ) ) door = 0;
-     else if ( !str_cmp( arg, "d" ) || !str_cmp( arg, "doğu"  ) ) door = 1;
-     else if ( !str_cmp( arg, "g" ) || !str_cmp( arg, "güney" ) ) door = 2;
-     else if ( !str_cmp( arg, "b" ) || !str_cmp( arg, "batı"  ) ) door = 3;
-     else if ( !str_cmp( arg, "y" ) || !str_cmp( arg, "yukarı"    ) ) door = 4;
-     else if ( !str_cmp( arg, "a" ) || !str_cmp( arg, "aşağı"  ) ) door = 5;
+     else if ( !str_cmp( arg, "d" ) || !str_cmp( arg, "doÄŸu"  ) ) door = 1;
+     else if ( !str_cmp( arg, "g" ) || !str_cmp( arg, "gÃ¼ney" ) ) door = 2;
+     else if ( !str_cmp( arg, "b" ) || !str_cmp( arg, "batÄ±"  ) ) door = 3;
+     else if ( !str_cmp( arg, "y" ) || !str_cmp( arg, "yukarÄ±"    ) ) door = 4;
+     else if ( !str_cmp( arg, "a" ) || !str_cmp( arg, "aÅŸaÄŸÄ±"  ) ) door = 5;
 
     return door;
 }

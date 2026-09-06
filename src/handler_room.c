@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar açýk kaynak Türkçe Mud projesidir.                        *
- * Oyun geliþtirmesi Jai ve Maru tarafýndan yönetilmektedir.               *
- * Unutulmamasý gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar aÃ§Ä±k kaynak TÃ¼rkÃ§e Mud projesidir.                        *
+ * Oyun geliÅŸtirmesi Jai ve Maru tarafÄ±ndan yÃ¶netilmektedir.               *
+ * UnutulmamasÄ± gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -407,8 +407,8 @@ void affect_check_room(ROOM_INDEX_DATA *room,int where,int vector)
  {
    if (is_safe_rspell_nom(level,victim))
      {
-       act("Tanrýlar $m koruyor.",victim,NULL,NULL,TO_CHAR);
-       act("Tanrýlar $m odanýn büyüsünden koruyor.",victim,NULL,NULL,TO_ROOM);
+       act("TanrÄ±lar $m koruyor.",victim,NULL,NULL,TO_CHAR);
+       act("TanrÄ±lar $m odanÄ±n bÃ¼yÃ¼sÃ¼nden koruyor.",victim,NULL,NULL,TO_ROOM);
        return TRUE;
      }
    else return FALSE;
@@ -441,7 +441,7 @@ void affect_check_room(ROOM_INDEX_DATA *room,int where,int vector)
  	}
       else
       {
-        send_to_char("Odadaki koruma kalkaný seni engelliyor.\n\r",ch);
+        send_to_char("Odadaki koruma kalkanÄ± seni engelliyor.\n\r",ch);
         act("$N odaya girdi.",vch,NULL,ch,TO_CHAR);
        do_wake(vch,(char*)"");
 
@@ -453,8 +453,8 @@ void affect_check_room(ROOM_INDEX_DATA *room,int where,int vector)
 
           if (CAN_DETECT(ch, ADET_GROUNDING))
           {
-            send_to_char("Enerji düþmanlarýnda yitip gidiyor.\n\r",ch);
-            act("Bir yýldýrým $S düþmanlarýnda yitip gidiyor.\n\r",ch, NULL, ch, TO_ROOM);
+            send_to_char("Enerji dÃ¼ÅŸmanlarÄ±nda yitip gidiyor.\n\r",ch);
+            act("Bir yÄ±ldÄ±rÄ±m $S dÃ¼ÅŸmanlarÄ±nda yitip gidiyor.\n\r",ch, NULL, ch, TO_ROOM);
           }
  	 else
  	 {
@@ -474,7 +474,7 @@ void affect_check_room(ROOM_INDEX_DATA *room,int where,int vector)
       if ( (sn = skill_lookup("shocking trap")) == -1 )
  	{ bug("Bad sn for shocking shield",0); return; }
 
-   send_to_char("Odadaki þok dalgalarý seni þokluyor.\n\r",ch);
+   send_to_char("Odadaki ÅŸok dalgalarÄ± seni ÅŸokluyor.\n\r",ch);
 
       if ( (paf = affect_find(room->affected,sn)) == NULL )
  	 { bug("Bad paf for shocking shield",0); return; }
@@ -489,7 +489,7 @@ void affect_check_room(ROOM_INDEX_DATA *room,int where,int vector)
 
    if ( IS_ROOM_AFFECTED( room, AFF_ROOM_THIEF_TRAP) )
    {
-     send_to_char("Birisi tarafýndan kurulmuþ tuzak seni engelliyor.\n\r",ch);
+     send_to_char("Birisi tarafÄ±ndan kurulmuÅŸ tuzak seni engelliyor.\n\r",ch);
 
       if ( (paf = affect_find(room->affected,gsn_settraps)) == NULL )
  	 { bug("Bad paf for settraps",0); return; }
@@ -504,7 +504,7 @@ void affect_check_room(ROOM_INDEX_DATA *room,int where,int vector)
 
    if ( IS_ROOM_AFFECTED( room, AFF_ROOM_SLOW)
  	|| IS_ROOM_AFFECTED( room, AFF_ROOM_SLEEP) )
-   send_ch_color("$CHavayý dolduran gizemi hissediyorsun.$c\n\r",ch,POS_SLEEPING,CLR_YELLOW);
+   send_ch_color("$CHavayÄ± dolduran gizemi hissediyorsun.$c\n\r",ch,POS_SLEEPING,CLR_YELLOW);
 
    return;
   }
@@ -621,7 +621,7 @@ void raffect_back_char( ROOM_INDEX_DATA *room, CHAR_DATA *ch)
      ugly   = 0;
      if ( !str_cmp( arg, "self" ) || !str_cmp( arg, "kendimi" ) || !str_cmp( arg, "bana" ) )
  	   return ch;
-     if ( !str_cmp( arg, "ugly" ) || !str_cmp( arg, "çirkin" ) )
+     if ( !str_cmp( arg, "ugly" ) || !str_cmp( arg, "Ã§irkin" ) )
  	   ugly = 1;
 
      for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
@@ -771,9 +771,9 @@ void raffect_back_char( ROOM_INDEX_DATA *room, CHAR_DATA *ch)
  	  obj->timer = -1;
  	  if (pRoomIndex->people)
  	  {
-       act("$p saydamlýðýný yitirerek katýlaþýyor.",
+       act("$p saydamlÄ±ÄŸÄ±nÄ± yitirerek katÄ±laÅŸÄ±yor.",
  		pRoomIndex->people, obj, NULL, TO_CHAR);
- 	    act("$p saydamlýðýný yitirerek katýlaþýyor.",
+ 	    act("$p saydamlÄ±ÄŸÄ±nÄ± yitirerek katÄ±laÅŸÄ±yor.",
  		pRoomIndex->people, obj, NULL, TO_ROOM);
  	  }
          }
@@ -856,8 +856,8 @@ void raffect_back_char( ROOM_INDEX_DATA *room, CHAR_DATA *ch)
  	    &&  !IS_IMMORTAL(vch) &&
              	!IS_AFFECTED(vch,AFF_PLAGUE) && number_range(0,63) == 0)
              {
-               send_to_char("Ateþinin yükseldiðini hissediyorsun.\n\r",vch);
-             	act("$n çok hasta görünüyor.",vch,NULL,NULL,TO_ROOM);
+               send_to_char("AteÅŸinin yÃ¼kseldiÄŸini hissediyorsun.\n\r",vch);
+             	act("$n Ã§ok hasta gÃ¶rÃ¼nÃ¼yor.",vch,NULL,NULL,TO_ROOM);
              	affect_join(vch,&plague);
              }
          }

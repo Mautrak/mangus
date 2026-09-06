@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar aÁ˝k kaynak T¸rkÁe Mud projesidir.                        *
- * Oyun geli˛tirmesi Jai ve Maru taraf˝ndan yˆnetilmektedir.               *
- * Unutulmamas˝ gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar a√ßƒ±k kaynak T√ºrk√ße Mud projesidir.                        *
+ * Oyun geli≈ütirmesi Jai ve Maru tarafƒ±ndan y√∂netilmektedir.               *
+ * Unutulmamasƒ± gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -43,13 +43,13 @@ void do_zar (CHAR_DATA * ch, char *argument)
 	
 	if (duzenbaz == NULL || duzenbaz->spec_fun != spec_lookup( (char*)"spec_duzenbaz" ))
     {
-		send_to_char("Odada bu i˛lerden anlayan bir d¸zenbaz gˆremiyorum.\n\r", ch);
+		send_to_char("Odada bu i≈ülerden anlayan bir d√ºzenbaz g√∂remiyorum.\n\r", ch);
 		return;
     }
 	
 	if (ch->silver < 1000)
     {
-        printf_to_char (ch,"Zar oynamak iÁin en az 1000 akÁen ihtiyac˝n var.\n\r");
+        printf_to_char (ch,"Zar oynamak i√ßin en az 1000 ak√ßen ihtiyacƒ±n var.\n\r");
         return;
     }
 
@@ -58,49 +58,49 @@ void do_zar (CHAR_DATA * ch, char *argument)
 
 	if( arg1[0]=='\0' )
 	{
-		printf_to_char (ch,"Hangi zardan ne kadar oynayacaks˝n? Mevcutlar˝ gˆrmek iÁin {Rzar liste{x yaz.\n\r");
+		printf_to_char (ch,"Hangi zardan ne kadar oynayacaksƒ±n? Mevcutlarƒ± g√∂rmek i√ßin {Rzar liste{x yaz.\n\r");
         return;
 	}
 	if(!str_cmp(arg1,"liste"))
 	{
-		printf_to_char (ch,"Zar t¸rleri:\n\r");
-		printf_to_char (ch,"Zar Tipi  AÁ˝klama\n\r");
+		printf_to_char (ch,"Zar t√ºrleri:\n\r");
+		printf_to_char (ch,"Zar Tipi  A√ßƒ±klama\n\r");
 		printf_to_char (ch,"--------  ------------\n\r");
-		printf_to_char (ch,"alt˝      Alt˝l˝k zar\n\r");
+		printf_to_char (ch,"altƒ±      Altƒ±lƒ±k zar\n\r");
 		printf_to_char (ch,"on        Onluk zar\n\r");
 		printf_to_char (ch,"yirmi     Yirmilik zar\n\r");
-		printf_to_char (ch,"y¸z       Y¸zl¸k zar\n\r\n\r");
-		printf_to_char (ch,"Oynamak iÁin {Gzar <zar_tipi> <yat˝r˝lan_akÁe>\n\r");
+		printf_to_char (ch,"y√ºz       Y√ºzl√ºk zar\n\r\n\r");
+		printf_to_char (ch,"Oynamak i√ßin {Gzar <zar_tipi> <yatƒ±rƒ±lan_ak√ße>\n\r");
 		return;
 	}
 	if( arg2[0]=='\0' )
 	{
-		printf_to_char (ch,"Hangi zardan ne kadar oynayacaks˝n? Mevcutlar˝ gˆrmek iÁin {Rzar liste{x yaz.\n\r");
+		printf_to_char (ch,"Hangi zardan ne kadar oynayacaksƒ±n? Mevcutlarƒ± g√∂rmek i√ßin {Rzar liste{x yaz.\n\r");
         return;
 	}
 	zar_tipi=0;
-	if(!str_cmp(arg1,"alt˝"))
+	if(!str_cmp(arg1,"altƒ±"))
 		zar_tipi=6;
 	else if(!str_cmp(arg1,"on"))
 		zar_tipi=10;
 	else if(!str_cmp(arg1,"yirmi"))
 		zar_tipi=20;
-	else if(!str_cmp(arg1,"y¸z"))
+	else if(!str_cmp(arg1,"y√ºz"))
 		zar_tipi=100;
 	else
 	{
-		printf_to_char (ch,"Hangi zardan ne kadar oynayacaks˝n? Mevcutlar˝ gˆrmek iÁin {Rzar liste{x yaz.\n\r");
+		printf_to_char (ch,"Hangi zardan ne kadar oynayacaksƒ±n? Mevcutlarƒ± g√∂rmek i√ßin {Rzar liste{x yaz.\n\r");
         return;
 	}
 	yatirilan=advatoi (arg2);
 	if(ch->silver<yatirilan)
 	{
-		send_to_char ("Bu oyun lafla deil akÁeyle oynan˝r!\n\r", ch);
+		send_to_char ("Bu oyun lafla deƒüil ak√ßeyle oynanƒ±r!\n\r", ch);
         	return;
 	}
 	if( (yatirilan>500000)||(yatirilan<1000) )
 	{
-		send_to_char ("Zar en az 1000, en Áok 500,000 akÁeyle oynan˝r.\n\r", ch);
+		send_to_char ("Zar en az 1000, en √ßok 500,000 ak√ßeyle oynanƒ±r.\n\r", ch);
         return;
 	}
 	ch->silver -= yatirilan;
@@ -114,19 +114,19 @@ void do_zar (CHAR_DATA * ch, char *argument)
 	}
 	WAIT_STATE (ch, PULSE_VIOLENCE);
 
-	printf_to_char(ch,"Mekanc˝ %d y¸zl¸ bir zar˝ sallay˝p at˝yor... %d geldi.\n\r",zar_tipi,mekanci_zar);
-	printf_to_char(ch,"%d y¸zl¸ bir zar˝ sallay˝p at˝yorsun... %d geldi.\n\r",zar_tipi,ch_zar);
-    act ("$n ve mekanc˝ ellerindeki zarlar˝ sallayarak masaya at˝yorlar.\n\r", ch,NULL,NULL,TO_ROOM);
+	printf_to_char(ch,"Mekancƒ± %d y√ºzl√º bir zarƒ± sallayƒ±p atƒ±yor... %d geldi.\n\r",zar_tipi,mekanci_zar);
+	printf_to_char(ch,"%d y√ºzl√º bir zarƒ± sallayƒ±p atƒ±yorsun... %d geldi.\n\r",zar_tipi,ch_zar);
+    act ("$n ve mekancƒ± ellerindeki zarlarƒ± sallayarak masaya atƒ±yorlar.\n\r", ch,NULL,NULL,TO_ROOM);
 	if (mekanci_zar > ch_zar)
     {
         printf_to_char (ch,"Kaybettin.\n\r");
         act ("$n kaybetti.", ch, NULL, NULL, TO_ROOM);
         return;
     }
-	/* ch kazand˝ */
+	/* ch kazandƒ± */
 	kazanc=2*yatirilan;
-    printf_to_char (ch, "%d akÁe KAZANDIN.\n\r", yatirilan);
-    act ("$n zar att˝ ve kazand˝. Vay beee...\n\r", ch, NULL, NULL, TO_ROOM);
+    printf_to_char (ch, "%d ak√ße KAZANDIN.\n\r", yatirilan);
+    act ("$n zar attƒ± ve kazandƒ±. Vay beee...\n\r", ch, NULL, NULL, TO_ROOM);
     ch->silver += kazanc;
     return;
 }
