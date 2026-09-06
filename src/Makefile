@@ -11,6 +11,10 @@ ifeq ($(UNAME),Linux)
   CPPFLAGS += -DHAVE_CRYPT_H=1
   LDLIBS   += -lcrypt
 endif
+ifeq ($(OS),Windows_NT)           # MSYS2 / MinGW-w64: çıktı mangus.exe olur
+  CPPFLAGS := $(filter-out -DHAVE_CRYPT=1,$(CPPFLAGS)) -D_WIN32_WINNT=0x0601
+  LDLIBS   += -lws2_32
+endif
 
 SRCS = $(wildcard *.c)
 OBJS = $(SRCS:.c=.o)
@@ -22,6 +26,6 @@ mangus: $(OBJS)
 	$(CC) -std=gnu11 $(CPPFLAGS) $(CFLAGS) $(WARN) -c $<
 
 clean:
-	rm -f $(OBJS) mangus
+	rm -f $(OBJS) mangus mangus.exe
 
 .PHONY: clean
