@@ -1,0 +1,80 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-test:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Linux (gcc)
+            os: ubuntu-latest
+            shell: bash
+          - name: macOS (Apple Silicon, clang)
+            os: macos-latest
+            shell: bash
+          - name: Windows (MinGW-w64 gcc)
+            os: windows-latest
+            shell: msys2 {0}
+    defaults:
+      run:
+        shell: ${{ matrix.shell }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: MSYS2 kurulumu (Windows)
+        if: runner.os == 'Windows'
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: false
+          install: >-
+            mingw-w64-ucrt-x86_64-gcc
+            mingw-w64-ucrt-x86_64-cmake
+            mingw-w64-ucrt-x86_64-ninja
+            mingw-w64-ucrt-x86_64-python
+            mingw-w64-ucrt-x86_64-python-pytest
+
+      - name: Python (Linux/macOS)
+        if: runner.os != 'Windows'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Bağımlılıklar (Linux/macOS)
+        if: runner.os != 'Windows'
+        run: python3 -m pip install --quiet pytest ninja
+
+      - name: Yapılandır
+        run: cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DMANGUS_WERROR=ON
+
+      - name: Derle
+        run: cmake --build build --parallel
+
+      - name: Birim testleri
+        run: ctest --test-dir build -R unit --output-on-failure
+
+      - name: Uçtan uca ve görsel regresyon testleri
+        run: ctest --test-dir build -R e2e --output-on-failure
+
+      - name: Görsel regresyon raporu
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gorsel-rapor-${{ runner.os }}
+          path: tests/e2e/_runs/report.html
+          if-no-files-found: ignore
+
+      - name: Binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: mangus-${{ runner.os }}-${{ runner.arch }}
+          path: |
+            build/mangus
+            build/mangus.exe
+          if-no-files-found: error
