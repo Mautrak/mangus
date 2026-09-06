@@ -108,15 +108,12 @@ void	free_pcdata (PC_DATA *pcdata);
 #define MD MEM_DATA
 long 	get_pc_id (void);
 long	get_mob_id (void);
-MD	*new_mem_data (void);
-void	free_mem_data ( MEM_DATA *memory);
 MD	*find_memory (MEM_DATA *memory, long id);
 #undef MD
 
 /* buffer procedures */
 
 BUFFER	*new_buf (void);
-BUFFER  *new_buf_size (int size);
 void	free_buf (BUFFER *buffer);
 bool	add_buf (BUFFER *buffer, char *string);
 void	clear_buf (BUFFER *buffer);

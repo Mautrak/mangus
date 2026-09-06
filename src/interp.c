@@ -47,21 +47,15 @@
 *	By using this code, you have agreed to follow the terms of the	   *
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
-
-#if defined(macintosh)
-#include <types.h>
-#else
-#include <sys/types.h>
-#endif
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include "merc.h"
+#include "utf8.h"
 #include "interp.h"
 
-#undef IMMORTALS_LOGS
 
 bool	check_social	( CHAR_DATA *ch, char *command,char *argument );
 
@@ -80,12 +74,6 @@ bool	check_social	( CHAR_DATA *ch, char *command,char *argument );
  */
 bool				fLogAll		= FALSE;
 
-#ifdef IMMORTALS_LOGS
-/*
- * immortals log file
- */
-FILE				*imm_log;
-#endif
 
 /*
  * Command table.
@@ -315,7 +303,6 @@ const	struct	cmd_type	cmd_table	[] =
   { "poofout",	do_bamfout,	POS_DEAD,	L8,  LOG_NORMAL, 1, CMD_KEEP_HIDE|CMD_GHOST },
   { "popularity",	do_popularity,	POS_DEAD,	L2,  LOG_ALWAYS, 1, CMD_KEEP_HIDE|CMD_GHOST },
   { "poz",		do_pose,	POS_RESTING,	 0,  LOG_NORMAL, 1, CMD_GHOST },
-  //{ "pracnew",        do_pracnew,	POS_SLEEPING,    ML, LOG_NORMAL, 1, CMD_KEEP_HIDE },
   { "pratik",       do_practice,	POS_SLEEPING,    0,  LOG_NORMAL, 1, CMD_KEEP_HIDE },
   { "prefi",		do_prefi,	POS_DEAD,	IM,  LOG_NORMAL, 0, CMD_KEEP_HIDE|CMD_GHOST },
   { "prefix",		do_prefix,	POS_DEAD,	IM,  LOG_NORMAL, 1, CMD_KEEP_HIDE|CMD_GHOST },
@@ -358,7 +345,7 @@ const	struct	cmd_type	cmd_table	[] =
   { "smite",		do_smite,	POS_DEAD,	L7,  LOG_ALWAYS, 1,0 },
   { "smote",		do_smote,	POS_DEAD,	IM,  LOG_NORMAL, 1, CMD_KEEP_HIDE|CMD_GHOST },
   { "snoop",		do_snoop,	POS_DEAD,	L5,  LOG_ALWAYS, 1, CMD_KEEP_HIDE|CMD_GHOST},
-  { "sockets",	do_sockets,	POS_DEAD,	L4,  LOG_NORMAL, 1 },
+  { "sockets",	do_sockets,	POS_DEAD,	L4,  LOG_NORMAL, 1, 0 },
   { "sockets",        do_sockets,	POS_DEAD,       L4,  LOG_NORMAL, 1, CMD_KEEP_HIDE|CMD_GHOST},
   { "soluş",		do_fade,	POS_RESTING,	 0,  LOG_NORMAL, 1, CMD_KEEP_HIDE },
   { "sosyaller",	do_socials,	POS_DEAD,	 0,  LOG_NORMAL, 1, CMD_KEEP_HIDE|CMD_GHOST },
@@ -436,10 +423,6 @@ void interpret( CHAR_DATA *ch, char *argument, bool is_order )
 {
     char command[MAX_INPUT_LENGTH];
     char logline[MAX_INPUT_LENGTH];
-#ifdef IMMORTALS_LOGS
-    char buf[MAX_INPUT_LENGTH];
-    char *strtime;
-#endif
     int cmd;
     int trust;
     bool found;
@@ -469,31 +452,12 @@ void interpret( CHAR_DATA *ch, char *argument, bool is_order )
      */
     strcpy( logline, argument );
 
-#ifdef IMMORTALS_LOGS
-    if (IS_IMMORTAL(ch))
-	{
-	if ( (imm_log = fopen(IMM_LOG_FILE,"a+")) == NULL )
-	   {
-	    bug("cannot open imm_log_file",0);
-	   }
-	 else
-	 {
-	  strtime = (char *) malloc(100);
-	  strtime = ctime( &current_time);
-	  strtime[strlen(strtime) -1] = '\0';
-	  snprintf(buf, sizeof(buf),"%s :[%s]:%s\n", strtime,ch->name,logline);
-	  fprintf(imm_log,buf);
-	  fclose(imm_log);
-	  free(strtime);
-	 }
-	}
-#endif
 
-    if ( !isalpha(argument[0]) && !isdigit(argument[0]) && !(argument[0]=='ı')
-&& !(argument[0]=='ğ') && !(argument[0]=='ü') && !(argument[0]=='ş')
-&& !(argument[0]=='ö') && !(argument[0]=='ç') && !(argument[0]=='İ')
-&& !(argument[0]=='Ğ') && !(argument[0]=='Ü') && !(argument[0]=='Ş') && !(argument[0]=='Ö')
-&& !(argument[0]=='Ç'))
+    {
+	uint32_t first;
+
+	utf8_decode( argument, &first );
+	if ( !utf8_is_alpha_cp( first ) && !isdigit( (unsigned char) argument[0] ) )
     {
 	command[0] = argument[0];
 	command[1] = '\0';
@@ -505,6 +469,7 @@ void interpret( CHAR_DATA *ch, char *argument, bool is_order )
     {
 	argument = one_argument( argument, command );
     }
+    }
 
     /*
      * Look for command in command table.
@@ -513,7 +478,7 @@ void interpret( CHAR_DATA *ch, char *argument, bool is_order )
     trust = get_trust( ch );
     for ( cmd = 0; cmd_table[cmd].name[0] != '\0'; cmd++ )
     {
-	if ( command[0] == cmd_table[cmd].name[0]
+	if ( utf8_first_eq( command, cmd_table[cmd].name )
 	&&   !str_prefix( command, cmd_table[cmd].name )
 	&&   cmd_table[cmd].level <= trust )
 	{
@@ -573,8 +538,8 @@ void interpret( CHAR_DATA *ch, char *argument, bool is_order )
               && !(cmd_table[cmd].extra & CMD_GHOST) )
             continue;
 
-	    found = TRUE;
-	    break;
+          found = TRUE;
+          break;
 	}
     }
 
@@ -674,7 +639,7 @@ bool check_social( CHAR_DATA *ch, char *command, char *argument )
     found  = FALSE;
     for ( cmd = 0; social_table[cmd].name[0] != '\0'; cmd++ )
     {
-	if ( command[0] == social_table[cmd].name[0]
+	if ( utf8_first_eq( command, social_table[cmd].name )
 	&&   !str_prefix( command, social_table[cmd].name ) )
 	{
 	    found = TRUE;
@@ -912,6 +877,24 @@ char *one_argument( char *argument, char *arg_first )
 }
 
 /*
+ * Komut listeleri için Türk alfabesi sırası ve ilk harf denetimi.
+ */
+static const uint32_t turkish_alphabet[] =
+{
+    'a', 'b', 'c', 0xE7, 'd', 'e', 'f', 'g', 0x11F, 'h', 0x131, 'i', 'j', 'k',
+    'l', 'm', 'n', 'o', 0xF6, 'p', 'q', 'r', 's', 0x15F, 't', 'u', 0xFC, 'v',
+    'w', 'x', 'y', 'z', 0
+};
+
+static bool starts_with_letter( const char *name, uint32_t letter )
+{
+    uint32_t cp;
+
+    utf8_decode( name, &cp );
+    return utf8_tolower_cp( cp ) == letter;
+}
+
+/*
  * Contributed by Alander.
  */
 void do_commands( CHAR_DATA *ch, char *argument )
@@ -925,16 +908,16 @@ void do_commands( CHAR_DATA *ch, char *argument )
     col = 0;
     output[0] = '\0';
 
-    for(letter = 'a'; letter <= 'z'; letter++)
+    for ( letter = 0; turkish_alphabet[letter] != 0; letter++ )
     {
       for ( cmd = 0; cmd_table[cmd].name[0] != '\0'; cmd++ )
       {
-        if ( cmd_table[cmd].name[0] == letter
+        if ( starts_with_letter( cmd_table[cmd].name, turkish_alphabet[letter] )
 	&&   cmd_table[cmd].level <  LEVEL_HERO
         &&   cmd_table[cmd].level <= get_trust( ch )
 	&&   cmd_table[cmd].show)
 	{
-	    snprintf(buf, sizeof(buf), "%-12s", cmd_table[cmd].name );
+	    snprintf(buf, sizeof(buf), "%-*s", utf8_width(cmd_table[cmd].name, 12), cmd_table[cmd].name);
 	    strcat( output, buf );
 	    if ( ++col % 6 == 0 )
 		strcat(output, "\n\r" );
@@ -953,23 +936,23 @@ void do_wizhelp( CHAR_DATA *ch, char *argument )
 {
     char buf[MAX_STRING_LENGTH];
     char output[4 * MAX_STRING_LENGTH];
-    char letter;
+    int letter;
     int cmd;
     int col;
 
     col = 0;
     output[0] = '\0';
 
-    for(letter = 'a'; letter <= 'z'; letter++)
+    for ( letter = 0; turkish_alphabet[letter] != 0; letter++ )
     {
       for ( cmd = 0; cmd_table[cmd].name[0] != '\0'; cmd++ )
       {
-        if ( cmd_table[cmd].name[0] == letter
+        if ( starts_with_letter( cmd_table[cmd].name, turkish_alphabet[letter] )
 	&&   cmd_table[cmd].level >= LEVEL_HERO
         &&   cmd_table[cmd].level <= get_trust( ch )
         &&   cmd_table[cmd].show)
 	{
-	    snprintf(buf, sizeof(buf), "%-12s", cmd_table[cmd].name );
+	    snprintf(buf, sizeof(buf), "%-*s", utf8_width(cmd_table[cmd].name, 12), cmd_table[cmd].name);
 	    strcat(output, buf);
 	    if ( ++col % 6 == 0 )
 		strcat( output, "\n\r");
@@ -985,11 +968,6 @@ void do_wizhelp( CHAR_DATA *ch, char *argument )
 }
 
 
-void do_reture( CHAR_DATA *ch, char *argument)
-{
-  send_to_char("Tamam.\n\r",ch);
-  return;
-}
 
 /*********** alias.c **************/
 
@@ -1178,7 +1156,7 @@ void do_unalias(CHAR_DATA *ch, char *argument)
 
     argument = one_argument(argument,arg);
 
-    if (arg == NULL)
+    if (arg[0] == '\0')
     {
       send_to_char("Hangi kısayolu kaldıracaksınız?\n\r",ch);
 	return;

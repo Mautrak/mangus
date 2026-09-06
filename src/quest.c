@@ -75,7 +75,6 @@
 DECLARE_SPELL_FUN(	spell_identify	);
 
 void do_tell_quest( CHAR_DATA *ch, CHAR_DATA *victim, char *argument);
-CHAR_DATA *get_quest_world( CHAR_DATA *ch, MOB_INDEX_DATA *victim );
 extern	MOB_INDEX_DATA	*mob_index_hash	[MAX_KEY_HASH];
 
 /* Local functions */
@@ -999,8 +998,8 @@ printf_to_char(ch, "Bir eşya satın almak için {Rgörev satınal <eşya_adı>{
 				if(ch->pcdata->discord_id[0] == '\0')
 				{
 					printf_to_char( ch , "{CDiscord ID girmediğin için kazandığın GP ve akçe azalıyor.{x\n\r" );
-					pointreward = int(pointreward / 3);
-					reward = int(reward / 3);
+					pointreward = (int)(pointreward / 3);
+					reward = (int)(reward / 3);
 				}
 
 				sprintf(buf, "Tebrikler!");
@@ -1371,7 +1370,7 @@ CHAR_DATA * find_a_quest_mob( CHAR_DATA *ch )
 void generate_quest(CHAR_DATA *ch, CHAR_DATA *questman)
 {
     char buf [MAX_STRING_LENGTH];
-    char_data *victim;
+    CHAR_DATA *victim;
 
     victim = find_a_quest_mob(ch);
 
@@ -1471,22 +1470,6 @@ void do_tell_quest( CHAR_DATA *ch, CHAR_DATA *victim, char *argument )
 	    act_color("$N: $C$t$c",ch,argument,victim,TO_CHAR,POS_DEAD, CLR_MAGENTA_BOLD );
 
 		return;
-}
-
-CHAR_DATA *get_quest_world( CHAR_DATA *ch, MOB_INDEX_DATA *victim)
-{
-    CHAR_DATA *wch;
-
-    for ( wch = char_list; wch != NULL ; wch = wch->next )
-    {
-        if ( wch->in_room == NULL
-		|| wch->pIndexData != victim)
-            continue;
-
-	return wch;
-    }
-
-    return NULL;
 }
 
 bool gorev_ekipmani_mi( OBJ_DATA *obj )

@@ -47,12 +47,6 @@
 *	By using this code, you have agreed to follow the terms of the	   *
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
-#if defined(macintosh)
-#include <types.h>
-#include <time.h>
-#else
-#include <sys/types.h>
-#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

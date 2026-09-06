@@ -53,15 +53,9 @@
 *	By using this code, you have agreed to follow the terms of the	   *
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
-
-#if defined(macintosh)
-#include <types.h>
-#else
-#include <sys/types.h>
-#include <sys/time.h>
-#endif
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 #include <stdlib.h>
 #include <time.h>
 #include <ctype.h>
@@ -353,13 +347,6 @@ void do_settraps( CHAR_DATA *ch, char *argument )
  *  Adopted to ANATOLIA by Chronos.                                        *
  ***************************************************************************/
 
-#if	defined(linux)
-void bcopy(const void *src,void *dest,int n);
-void bzero(void *s,int n);
-#else
-void bcopy(char *s1,char* s2,int len);
-void bzero(char *sp,int len);
-#endif
 
 extern const char* dir_name[];
 
@@ -415,12 +402,6 @@ void init_hash_table(struct hash_header	*ht,int rec_size,int table_size)
   ht->buckets	= (struct hash_link**)calloc(sizeof(struct hash_link**),table_size);
   ht->keylist	= (int*)malloc(sizeof(ht->keylist)*(ht->klistsize=128));
   ht->klistlen	= 0;
-}
-
-void init_world(ROOM_INDEX_DATA *room_db[])
-{
-  /* zero out the world */
-  bzero((char *)room_db,sizeof(ROOM_INDEX_DATA *)*WORLD_SIZE);
 }
 
 CHAR_DATA *get_char_area( CHAR_DATA *ch, char *argument )
@@ -500,10 +481,6 @@ void _hash_enter(struct hash_header *ht,int key,void *data)
   ht->klistlen++;
 }
 
-ROOM_INDEX_DATA *room_find(ROOM_INDEX_DATA *room_db[],int key)
-{
-  return((key<WORLD_SIZE&&key>-1)?room_db[key]:0);
-}
 
 void *hash_find(struct hash_header *ht,int key)
 {
@@ -517,17 +494,6 @@ void *hash_find(struct hash_header *ht,int key)
   return scan ? scan->data : NULL;
 }
 
-int room_enter(ROOM_INDEX_DATA *rb[],int key,ROOM_INDEX_DATA *rm)
-{
-  ROOM_INDEX_DATA *temp;
-
-  temp = room_find(rb,key);
-  if(temp) return(0);
-
-  rb[key] = rm;
-  return(1);
-}
-
 int hash_enter(struct hash_header *ht,int key,void *data)
 {
   void *temp;
@@ -537,112 +503,6 @@ int hash_enter(struct hash_header *ht,int key,void *data)
 
   _hash_enter(ht,key,data);
   return 1;
-}
-
-ROOM_INDEX_DATA *room_find_or_create(ROOM_INDEX_DATA *rb[],int key)
-{
-  ROOM_INDEX_DATA *rv;
-
-  rv = room_find(rb,key);
-  if(rv) return rv;
-
-  rv = (ROOM_INDEX_DATA *)malloc(sizeof(ROOM_INDEX_DATA));
-  rb[key] = rv;
-
-  return rv;
-}
-
-void *hash_find_or_create(struct hash_header *ht,int key)
-{
-  void *rval;
-
-  rval = hash_find(ht, key);
-  if(rval) return rval;
-
-  rval = (void*)malloc(ht->rec_size);
-  _hash_enter(ht,key,rval);
-
-  return rval;
-}
-
-int room_remove(ROOM_INDEX_DATA *rb[],int key)
-{
-  ROOM_INDEX_DATA *tmp;
-
-  tmp = room_find(rb,key);
-  if(tmp)
-    {
-      rb[key] = 0;
-      free(tmp);
-    }
-  return(0);
-}
-
-void *hash_remove(struct hash_header *ht,int key)
-{
-  struct hash_link **scan;
-
-  scan = ht->buckets+HASH_KEY(ht,key);
-
-  while(*scan && (*scan)->key!=key)
-    scan = &(*scan)->next;
-
-  if(*scan)
-    {
-      int		i;
-      struct hash_link	*temp, *aux;
-
-      temp	= (hash_link*)(*scan)->data;
-      aux	= *scan;
-      *scan	= aux->next;
-      free(aux);
-
-      for(i=0;i<ht->klistlen;i++)
-	if(ht->keylist[i]==key)
-	  break;
-
-      if(i<ht->klistlen)
-	{
-	  bcopy((char *)ht->keylist+i+1,(char *)ht->keylist+i,(ht->klistlen-i)
-		*sizeof(*ht->keylist));
-	  ht->klistlen--;
-	}
-
-      return temp;
-    }
-
-  return NULL;
-}
-
-void room_iterate(ROOM_INDEX_DATA *rb[],void (*func)(int, ROOM_INDEX_DATA *, void * ),void *cdata)
-{
-  register int i;
-
-  for(i=0;i<WORLD_SIZE;i++)
-    {
-      ROOM_INDEX_DATA *temp;
-
-      temp = room_find(rb,i);
-      if(temp)
-		(*func)(i,temp,cdata);
-    }
-}
-
-void hash_iterate(struct hash_header *ht,void (*func)(int, void*,void*),void *cdata)
-{
-  int i;
-
-  for(i=0;i<ht->klistlen;i++)
-    {
-      void		*temp;
-      register int	key;
-
-      key = ht->keylist[i];
-      temp = hash_find(ht,key);
-      (*func)(key,temp,cdata);
-      if(ht->keylist[i]!=key) /* They must have deleted this room */
-	i--;		      /* Hit this slot again. */
-    }
 }
 
 
@@ -730,7 +590,7 @@ int find_path( int in_room_vnum, int out_room_vnum, CHAR_DATA *ch,
 
 			  /* ancestor for first layer is the direction */
 			  hash_enter( &x_room, tmp_room,
-				     ((intptr_t)hash_find(&x_room,q_head->room_nr)== -1) ? reinterpret_cast<void*>(i+1) : hash_find(&x_room,q_head->room_nr));
+				     ((intptr_t)hash_find(&x_room,q_head->room_nr)== -1) ? (void*)(intptr_t)(i+1) : hash_find(&x_room,q_head->room_nr));
 			}
 		    }
 		  else
@@ -1027,193 +887,6 @@ void hunt_victim( CHAR_DATA *ch )
 		return;
 		}
   move_char( ch, dir, FALSE );
-  if (ch->in_room==NULL || ch->hunting==NULL) return;
-  if( ch->in_room == ch->hunting->in_room )
-    {
-      act( "$n $E dik dik bakarak diyor ki, 'Öleceksin!'",
-	  ch, NULL, ch->hunting, TO_NOTVICT );
-      act("$n sana dik dik bakarak diyor ki, 'Öleceksin!'",
-	  ch, NULL, ch->hunting, TO_VICT );
-      act( "$E dik dik bakarak diyorsun ki, 'Öleceksin!'",
-	  ch, NULL, ch->hunting, TO_CHAR);
-      multi_hit( ch, ch->hunting, TYPE_UNDEFINED );
-      ch->hunting = NULL;
-      return;
-    }
-  return;
-}
-
-void hunt_victim_old( CHAR_DATA *ch )
-{
-  int		dir,i;
-  bool		found,ok;
-  CHAR_DATA	*tmp;
-  char		tBuf[MAX_INPUT_LENGTH];
-
-  if( ch == NULL || ch->hunting == NULL || !IS_NPC(ch) )
-   {
-    if (IS_NPC(ch))
-      {
-    	if ((ROOM_INDEX_DATA*)ch->logon!=ch->in_room)
-    	log_string("HUNT: Return creature to original home!");
-       	act("\n\rA glowing portal appears.",ch,NULL,NULL,TO_ROOM);
-    	act("$n steps through a glowing portal.\n\r",ch,NULL,NULL,TO_ROOM);
-       	char_from_room(ch);
-    	char_to_room(ch,(ROOM_INDEX_DATA*)ch->logon);
-        }
-    return;
-   }
-
-  /*
-   * Make sure the victim still exists.
-   */
-  for( found = 0, tmp = char_list; tmp && !found; tmp = tmp->next )
-    if( ch->hunting == tmp )
-      found = 1;
-
-  if( !found || !can_see( ch, ch->hunting ) )
-    {
-/*1 */  if( get_char_world( ch, ch->hunting->name) != NULL
-            && ch-> level > 35 )
-        {
-           snprintf(tBuf, sizeof(tBuf), "portal %s", ch->hunting->name );
-           log_string("mob portal");
-           do_cast( ch, tBuf );
-           log_string("do_enter1");
-           do_enter( ch, "portal" );
-  /* Deth...this shouldn't have to be here..but it got
-  here in a core file with ch->hunting==null.. */
-  if (ch->in_room==NULL || ch->hunting==NULL) return;
-  if( ch->in_room == ch->hunting->in_room )
-    {
-      act( "$n $E dik dik bakarak diyor ki, 'Öleceksin!'",
-	  ch, NULL, ch->hunting, TO_NOTVICT );
-      act("$n sana dik dik bakarak diyor ki, 'Öleceksin!'",
-	  ch, NULL, ch->hunting, TO_VICT );
-      act( "$E dik dik bakarak diyorsun ki, 'Öleceksin!'",
-	  ch, NULL, ch->hunting, TO_CHAR);
-      multi_hit( ch, ch->hunting, TYPE_UNDEFINED );
-      ch->hunting = NULL;
-      return;
-    }
-	   log_string("done1");
-	   	return;
-        }
-       else {
-       if (IS_NPC(ch))
-	 {
-          if ( (ROOM_INDEX_DATA*)ch->logon!=ch->in_room)
-          {
-     	   log_string("HUNT: Send mob home");
-    	   act("\n\rA glowing portal appears.",ch,NULL,NULL,TO_ROOM);
-    	   act("$n steps through a glowing portal.\n\r",ch,NULL,NULL,TO_ROOM);
-       	   char_from_room(ch);
-    	   char_to_room(ch,(ROOM_INDEX_DATA*)ch->logon);
-    	  }
-         }
-
-         do_say( ch, "Ahhhh!  Avım gitti!!" );
-         ch->hunting = NULL;
-         return;
-        }
-    }   /* end if !found or !can_see */
-
-
-
-  dir = find_path( ch->in_room->vnum, ch->hunting->in_room->vnum,
-		  ch, -40000, TRUE );
-
-  if( dir < 0 || dir > 5 )
-  {
-/* 1 */
-    if( get_char_area( ch, ch->hunting->name) != NULL
-        && ch-> level > 35 )
-    {
-      snprintf(tBuf, sizeof(tBuf), "portal %s", ch->hunting->name );
-      log_string("mob portal");
-      do_cast( ch, tBuf );
-      log_string("do_enter2");
-      do_enter( ch, "portal" );
-  /* Deth...this shouldn't have to be here..but it got
-  here in a core file with ch->hunting==null.. */
-  if (ch->in_room==NULL || ch->hunting==NULL) return;
-  if( ch->in_room == ch->hunting->in_room )
-    {
-      act( "$n $E dik dik bakarak diyor ki, 'Öleceksin!'",
-	  ch, NULL, ch->hunting, TO_NOTVICT );
-      act("$n sana dik dik bakarak diyor ki, 'Öleceksin!'",
-	  ch, NULL, ch->hunting, TO_VICT );
-      act( "$E dik dik bakarak diyorsun ki, 'Öleceksin!'",
-	  ch, NULL, ch->hunting, TO_CHAR);
-      multi_hit( ch, ch->hunting, TYPE_UNDEFINED );
-      ch->hunting = NULL;
-      return;
-    }
-      log_string("done2");
-      return;
-    }
-    else
-    {
-     if (IS_NPC(ch))
-       {
-    	if ((ROOM_INDEX_DATA*)ch->logon!=ch->in_room)
-        {
-          log_string("HUNT: return creature to original room");
-	  act("\n\rA glowing portal appears.",ch,NULL,NULL,TO_ROOM);
-	  act("$n steps through a glowing portal.\n\r",ch,NULL,NULL,TO_ROOM);
-	  char_from_room(ch);
-    	  char_to_room(ch,(ROOM_INDEX_DATA*)ch->logon);
-    	}
-      }
-
-      act( "$n says 'I have lost $M!'", ch, NULL, ch->hunting, TO_ROOM );
-      ch->hunting = NULL;
-      return;
-    }
-   } /* if dir < 0 or > 5 */
-
-  /*
-   * Give a random direction if the mob misses the die roll.
-   */
-  if( number_percent () > 75 )        /* @ 25% */
-    {
-    	ok=FALSE;
-        for(i=0;i<6;i++) {
-    	if (ch->in_room->exit[dir]!=NULL) {
-    		ok=TRUE;
-    		break;
-    		}
-    	}
-	if(ok) {
-      do
-        {
-	  dir = number_door();
-        }
-      while( ( ch->in_room->exit[dir] == NULL )
-	    || ( ch->in_room->exit[dir]->u1.to_room == NULL ) );
-	   }
-	  else {
-	  log_string("Do hunt, player hunt, no exits from room!");
-  	  ch->hunting=NULL;
-  	  send_to_char("Your room has not exits!!!!\n\r",ch);
-  	  return;
-  	}
-    }
-
-
-
-  if( ch->in_room->exit[dir] && IS_SET( ch->in_room->exit[dir]->exit_info, EX_CLOSED ) )
-    {
-      do_open( ch,(char *)dir_name[dir]);
-      return;
-    }
-	if (!ch->in_room->exit[dir]) {
-		log_string("BUG:  hunt through null door");
-		return;
-		}
-  move_char( ch, dir, FALSE );
-  /* Deth...this shouldn't have to be here..but it got
-  here in a core file with ch->hunting==null.. */
   if (ch->in_room==NULL || ch->hunting==NULL) return;
   if( ch->in_room == ch->hunting->in_room )
     {

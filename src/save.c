@@ -47,28 +47,16 @@
 *	By using this code, you have agreed to follow the terms of the	   *
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
-
-#if defined(macintosh)
-#include <types.h>
-#else
-#include <sys/types.h>
-#endif
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <malloc.h>
 #include "merc.h"
 #include "recycle.h"
 #include "lookup.h"
 #include "tables.h"
 
-#if !defined(macintosh)
-extern  int     _filbuf         (FILE *);
-#endif
-
-int system(const char *command);
 
 
 int rename(const char *oldfname, const char *newfname);
@@ -143,7 +131,6 @@ void save_char_obj( CHAR_DATA *ch )
     if ( ch->desc != NULL && ch->desc->original != NULL )
 	ch = ch->desc->original;
 
-#if defined(unix)
     /* create god log */
     if (IS_IMMORTAL(ch) || ch->level >= LEVEL_IMMORTAL)
     {
@@ -163,7 +150,6 @@ void save_char_obj( CHAR_DATA *ch )
       bug("save_char_obj: Can't open null file.", 0 );
 
     }
-#endif
 
     fclose( fpReserve );
     snprintf(strsave, sizeof(strsave), "%s%s", PLAYER_DIR, capitalize( ch->name ) );
@@ -208,8 +194,8 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
     fprintf( fp, "Name %s~\n",	ch->name		);
     fprintf( fp, "Id   %ld\n", ch->id			);
 	fprintf( fp, "Discord %s~\n", ch->pcdata->discord_id );
-    fprintf( fp, "Birth  %ld\n", ch->pcdata->birth_time	);
-    fprintf( fp, "LogO %ld\n",	current_time		);
+    fprintf( fp, "Birth  %lld\n", (long long) ch->pcdata->birth_time );
+    fprintf( fp, "LogO %lld\n", (long long) current_time );
     fprintf( fp, "Vers %d\n",   7			);
     fprintf( fp, "Etho %d\n",   ch->ethos		);
     fprintf( fp, "Home %d\n",   0		);
@@ -312,7 +298,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
 
 	for ( sn = 0; sn < MAX_SKILL; sn++ )
 	{
-	    if ( skill_table[sn].name != NULL && ch->pcdata->learned[sn] > 0 )
+	    if ( skill_table[sn].name[0] != NULL && ch->pcdata->learned[sn] > 0 )
 	    {
 		fprintf( fp, "Sk %d '%s'\n",
 		    ch->pcdata->learned[sn], skill_table[sn].name[0] );
@@ -325,11 +311,11 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
       break;
     if(!str_cmp(race_table[sn].name[0],"unique"))
       continue;
-      if ( ch->pcdata->familya[sn] > 0 )
-      {
-    fprintf( fp, "Fm %d '%s'\n",
-        ch->pcdata->familya[sn], race_table[sn].name[0] );
-      }
+    if ( ch->pcdata->familya[sn] > 0 )
+    {
+      fprintf( fp, "Fm %d '%s'\n",
+          ch->pcdata->familya[sn], race_table[sn].name[0] );
+    }
   }
 
     for ( paf = ch->affected; paf != NULL; paf = paf->next )
@@ -357,7 +343,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
 
     if (ch->pcdata->questpoints !=0)
         fprintf( fp, "QuestPnts %d\n", ch->pcdata->questpoints	);
-	fprintf( fp, "QuestPractice %d\n", ch->pcdata->questpractice	);
+    fprintf( fp, "QuestPractice %d\n", ch->pcdata->questpractice	);
     if (ch->pcdata->nextquest !=0)
         fprintf( fp ,"QuestNext %d\n", ch->pcdata->nextquest	);
     if (IS_QUESTOR(ch))
@@ -407,7 +393,7 @@ void fwrite_pet( CHAR_DATA *pet, FILE *fp)
     fprintf(fp,"Vnum %d\n",pet->pIndexData->vnum);
 
     fprintf(fp,"Name %s~\n", pet->name);
-    fprintf(fp,"LogO %ld\n", current_time);
+    fprintf(fp,"LogO %lld\n", (long long) current_time);
     fprintf(fp,"Cab  %d\n", pet->cabal );
     if (pet->short_descr != pet->pIndexData->short_descr)
     	fprintf(fp,"ShD  %s~\n", pet->short_descr);
@@ -678,7 +664,7 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
     fprintf( fp, "#O\n" );
     fprintf( fp, "Vnum %d\n",   	obj->pIndexData->vnum		);
     fprintf( fp, "Cond %d\n",		obj->condition			);
-	fprintf( fp, "Creation  %ld\n", obj->creation_time	);
+	fprintf( fp, "Creation  %lld\n", (long long) obj->creation_time );
 
     if (!obj->pIndexData->new_format)
 	fprintf( fp, "Oldstyle\n");
@@ -896,7 +882,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
     found = FALSE;
     fclose( fpReserve );
 
-    #if defined(unix)
+#ifndef _WIN32
     /* decompress if .gz file exists */
     snprintf(strsave, sizeof(strsave), "%s%s%s", PLAYER_DIR, capitalize(name),".gz");
     if ( ( fp = fopen( strsave, "r" ) ) != NULL )
@@ -905,7 +891,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
 	snprintf(buf, sizeof(buf),"gzip -dfq %s",strsave);
 	system(buf);
     }
-    #endif
+#endif
 
     snprintf(strsave, sizeof(strsave), "%s%s", PLAYER_DIR, capitalize( name ) );
     if ( ( fp = fopen( strsave, "r" ) ) != NULL )
@@ -959,7 +945,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
     if (found)
     {
 	if (ORG_RACE(ch) == 0)
-	    ORG_RACE(ch) = race_lookup("human");
+	    SET_ORG_RACE(ch, race_lookup("human"));
 	if (RACE(ch) == 0)
 	    RACE(ch) = race_lookup("human");
 
@@ -1440,7 +1426,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp )
 	    if ( !str_cmp( word, "Race" ) )
 	    {
 		RACE(ch) = race_lookup(fread_string(fp));
-		ORG_RACE(ch) = RACE(ch);
+		SET_ORG_RACE(ch, RACE(ch));
 		fMatch = TRUE;
 		break;
 	    }
@@ -1750,7 +1736,7 @@ void fread_pet( CHAR_DATA *ch, FILE *fp )
 	    if ( !str_cmp( word, "Race" ) )
 	    {
 		RACE(pet) = race_lookup(fread_string(fp));
-		ORG_RACE(pet) = RACE(pet);
+		SET_ORG_RACE(pet, RACE(pet));
 		fMatch = TRUE;
 		break;
 	    }
@@ -1890,7 +1876,6 @@ void fread_obj( CHAR_DATA *ch, FILE *fp )
 			if (!str_cmp(word,"Affs"))
             {
 				AFFECT_DATA *paf;
-				int sn;
 
 				paf = new_affect();
 
@@ -2270,7 +2255,6 @@ void fread_kasa( CHAR_DATA *ch, FILE *fp )
 			if (!str_cmp(word,"Affs"))
             {
 				AFFECT_DATA *paf;
-				int sn;
 
 				paf = new_affect();
 

@@ -47,18 +47,13 @@
 *	By using this code, you have agreed to follow the terms of the	   *
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
-
-#if defined(macintosh)
-#include <types.h>
-#else
-#include <sys/types.h>
-#endif
 #include <ctype.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
 #include "merc.h"
+#include "utf8.h"
 #include "magic.h"
 #include "recycle.h"
 #include "tables.h"
@@ -106,8 +101,8 @@ int race_lookup (const char *name)
 
    for ( race = 0; race_table[race].name[1] != NULL; race++)
    {
-     if (((LOWER(name[0]) == LOWER(race_table[race].name[0][0])) &&  !str_prefix( name,race_table[race].name[0])) ||
-        ((LOWER(name[0]) == LOWER(race_table[race].name[1][0])) &&  !str_prefix( name,race_table[race].name[1])) )
+     if (((utf8_first_eq(name, race_table[race].name[0])) &&  !str_prefix( name,race_table[race].name[0])) ||
+        ((utf8_first_eq(name, race_table[race].name[1])) &&  !str_prefix( name,race_table[race].name[1])) )
 	    return race;
    }
 
@@ -122,7 +117,7 @@ int liq_lookup (const char *name)
 
     for ( liq = 0; liq_table[liq].liq_name != NULL; liq++)
     {
-	if (LOWER(name[0]) == LOWER(liq_table[liq].liq_name[0])
+	if (utf8_first_eq(name, liq_table[liq].liq_name)
 	&& !str_prefix(name,liq_table[liq].liq_name))
 	    return liq;
     }
@@ -136,7 +131,7 @@ int weapon_lookup (const char *name)
 
     for (type = 0; weapon_table[type].name != NULL; type++)
     {
-	if (LOWER(name[0]) == LOWER(weapon_table[type].name[0])
+	if (utf8_first_eq(name, weapon_table[type].name)
 	&&  !str_prefix(name,weapon_table[type].name))
 	    return type;
     }
@@ -193,7 +188,7 @@ int weapon_type (const char *name)
 
     for (type = 0; weapon_table[type].name != NULL; type++)
     {
-        if (LOWER(name[0]) == LOWER(weapon_table[type].name[0])
+        if (utf8_first_eq(name, weapon_table[type].name)
         &&  !str_prefix(name,weapon_table[type].name))
             return weapon_table[type].type;
     }
@@ -208,7 +203,7 @@ int item_lookup(const char *name)
 
     for (type = 0; item_table[type].name != NULL; type++)
     {
-        if (LOWER(name[0]) == LOWER(item_table[type].name[0])
+        if (utf8_first_eq(name, item_table[type].name)
         &&  !str_prefix(name,item_table[type].name))
             return item_table[type].type;
     }
@@ -374,7 +369,7 @@ int attack_lookup  (const char *name)
 
     for ( att = 0; attack_table[att].name != NULL; att++)
     {
-	if (LOWER(name[0]) == LOWER(attack_table[att].name[0])
+	if (utf8_first_eq(name, attack_table[att].name)
 	&&  !str_prefix(name,attack_table[att].name))
 	    return att;
     }
@@ -389,7 +384,7 @@ long wiznet_lookup (const char *name)
 
     for (flag = 0; wiznet_table[flag].name != NULL; flag++)
     {
-	if (LOWER(name[0]) == LOWER(wiznet_table[flag].name[0])
+	if (utf8_first_eq(name, wiznet_table[flag].name)
 	&& !str_prefix(name,wiznet_table[flag].name))
 	    return flag;
     }
@@ -404,8 +399,8 @@ int class_lookup (const char *name)
 
    for ( iclass = 0; iclass < MAX_CLASS; iclass++)
    {
-        if ( (LOWER(name[0]) == LOWER(class_table[iclass].name[0][0]) &&  !str_prefix( name,class_table[iclass].name[0])) ||
-              (LOWER(name[0]) == LOWER(class_table[iclass].name[1][0]) &&  !str_prefix( name,class_table[iclass].name[1])) )
+        if ( (utf8_first_eq(name, class_table[iclass].name[0]) &&  !str_prefix( name,class_table[iclass].name[0])) ||
+              (utf8_first_eq(name, class_table[iclass].name[1]) &&  !str_prefix( name,class_table[iclass].name[1])) )
 	{
             return iclass;
 	}
@@ -1142,7 +1137,7 @@ void affect_check(CHAR_DATA *ch,int where,int vector)
 	if (obj->wear_loc == -1 || obj->wear_loc == WEAR_STUCK_IN)
 	    continue;
 
-            for (paf = obj->affected; paf != NULL; paf = paf->next)
+        for (paf = obj->affected; paf != NULL; paf = paf->next)
             if (paf->where == where && paf->bitvector == vector)
             {
                 switch (where)
@@ -2941,7 +2936,7 @@ int cabal_lookup (const char *argument)
 
    for ( cabal = 0; cabal < MAX_CABAL; cabal++)
    {
-        if (LOWER(argument[0]) == LOWER(cabal_table[cabal].short_name[0])
+        if (utf8_first_eq(argument, cabal_table[cabal].short_name)
         &&  !str_prefix( argument,cabal_table[cabal].short_name))
             return cabal;
    }

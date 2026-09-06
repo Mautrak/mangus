@@ -1,8 +1,8 @@
 /***************************************************************************
  *                                                                         *
- * Uzak Diyarlar a��k kaynak T�rk�e Mud projesidir.                        *
- * Oyun geli�tirmesi Jai ve Maru taraf�ndan y�netilmektedir.               *
- * Unutulmamas� gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
+ * Uzak Diyarlar açık kaynak Türkçe Mud projesidir.                        *
+ * Oyun geliştirmesi Jai ve Maru tarafından yönetilmektedir.               *
+ * Unutulmaması gerekenler: Nir, Kame, Randalin, Nyah, Sint                          *
  *                                                                         *
  * Github  : https://github.com/yelbuke/UzakDiyarlar                       *
  * Web     : http://www.uzakdiyarlar.net                                   *
@@ -53,35 +53,19 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <time.h>
-#include <unistd.h>
-#if defined(macintosh)
-#include <types.h>
-#else
-#include <sys/types.h>
-#include <sys/time.h>
-#include <sys/resource.h>
-#include <sys/dir.h>
-#endif
+#include <dirent.h>
+#include <stdint.h>
 
 #include "merc.h"
 #include "db.h"
 #include "recycle.h"
 #include "lookup.h"
 #include "tables.h"
+#include "utf8.h"
 
-void load_limited_objects();
-
-
-#if !defined(macintosh)
-extern	int	_filbuf		(FILE *);
-#endif
-
-#if !defined(linux)
-long random();
-#endif
-void srandom(unsigned int);
-int getpid();
-time_t time(time_t *tloc);
+void load_limited_objects( void );
+static uint32_t rng_next( void );
+#define RNG_MAX 0x7fffffffL
 
 
 /* externals for counting purposes */
@@ -411,7 +395,7 @@ int			newobjs = 0;
  * Increase MAX_STRING if you have too.
  * Tune the others only if you understand what you're doing.
  */
-#define			MAX_STRING	3500000
+#define			MAX_STRING	8000000
 #define			MAX_PERM_BLOCK	150000
 #define			MAX_MEM_LIST	11
 
@@ -831,8 +815,8 @@ void load_old_obj( FILE *fp )
 	/* Action description */	  fread_string( fp );
 
 	pObjIndex->material		= "copper";
-	pObjIndex->short_descr[0]	= LOWER(pObjIndex->short_descr[0]);
-	pObjIndex->description[0]	= UPPER(pObjIndex->description[0]);
+	pObjIndex->short_descr	= first_case( pObjIndex->short_descr, FALSE );
+	pObjIndex->description	= first_case( pObjIndex->description, TRUE );
 	pObjIndex->material		= str_dup("");
 
 	pObjIndex->item_type		= fread_number( fp );
@@ -858,7 +842,7 @@ void load_old_obj( FILE *fp )
 	    ||  is_name("claymore",pObjIndex->name)
       ||  is_name("iki-el",pObjIndex->name)
       ||  is_name("ikiel",pObjIndex->name)
-      ||  is_name("�ift-el",pObjIndex->name))
+      ||  is_name("çift-el",pObjIndex->name))
 		SET_BIT(pObjIndex->value[4],WEAPON_TWO_HANDS);
 	}
 
@@ -980,8 +964,8 @@ void load_new_old_obj( FILE *fp )
 	/* Action description */	  fread_string( fp );
 
 	pObjIndex->material		= "copper";
-	pObjIndex->short_descr[0]	= LOWER(pObjIndex->short_descr[0]);
-	pObjIndex->description[0]	= UPPER(pObjIndex->description[0]);
+	pObjIndex->short_descr	= first_case( pObjIndex->short_descr, FALSE );
+	pObjIndex->description	= first_case( pObjIndex->description, TRUE );
 	pObjIndex->material		= str_dup("");
 
 	pObjIndex->item_type		= fread_number( fp );
@@ -1007,7 +991,7 @@ void load_new_old_obj( FILE *fp )
 	    ||  is_name("claymore",pObjIndex->name)
       ||  is_name("iki-el",pObjIndex->name)
       ||  is_name("ikiel",pObjIndex->name)
-      ||  is_name("�ift-el",pObjIndex->name))
+      ||  is_name("çift-el",pObjIndex->name))
 		SET_BIT(pObjIndex->value[4],WEAPON_TWO_HANDS);
 	}
 
@@ -1543,13 +1527,13 @@ void area_update( void )
 	    ROOM_INDEX_DATA *pRoomIndex;
 
 	    reset_area( pArea );
-      snprintf(buf, sizeof(buf),"%s b�lgesi reset'lendi.",pArea->name);
+      snprintf(buf, sizeof(buf),"%s bölgesi reset'lendi.",pArea->name);
 	    wiznet(buf,NULL,NULL,WIZ_RESETS,0,0);
 
 	    if (pArea->resetmsg)
 	    	 snprintf(buf, sizeof(buf),"%s\n\r",pArea->resetmsg);
 	    else
-      snprintf(buf, sizeof(buf),"Ya�am�n yeni seslerini duyuyorsun...\n\r");
+      snprintf(buf, sizeof(buf),"Yaşamın yeni seslerini duyuyorsun...\n\r");
 
             for ( d = descriptor_list; d != NULL; d = d->next )
 	       {
@@ -1613,7 +1597,7 @@ void reset_area( AREA_DATA *pArea )
         ( get_skill(ch, gsn_track)>50) &&
         ( !IS_SET(ch->in_room->room_flags, ROOM_INDOORS) ) )
       {
-        send_to_char("Ya�mur izleri temizliyor.\n\r", ch );
+        send_to_char("Yağmur izleri temizliyor.\n\r", ch );
       }
     }
     for (i=pArea->min_vnum; i<pArea->max_vnum; i++)
@@ -2537,16 +2521,16 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
                 obj_random_name(obj);
             break;
             case ITEM_ARMOR:
-                obj->value[0]	= number_range( UMAX(1,int((obj->level+4)/5)) , UMAX(1,int((obj->level+3)/2)) );	// armor vs. pierce
-                obj->value[1]	= number_range( UMAX(1,int((obj->level+4)/5)) , UMAX(1,int((obj->level+3)/2)) );	// armor vs. bash
-                obj->value[2]	= number_range( UMAX(1,int((obj->level+4)/5)) , UMAX(1,int((obj->level+3)/2)) );	// armor vs. slash
-                obj->value[3]	= number_range( UMAX(1,int((obj->level+4)/5)) , UMAX(1,int((obj->level+3)/2)) );	// armor vs. exotic weapons
+                obj->value[0]	= number_range( UMAX(1,(int)((obj->level+4)/5)) , UMAX(1,(int)((obj->level+3)/2)) );	// armor vs. pierce
+                obj->value[1]	= number_range( UMAX(1,(int)((obj->level+4)/5)) , UMAX(1,(int)((obj->level+3)/2)) );	// armor vs. bash
+                obj->value[2]	= number_range( UMAX(1,(int)((obj->level+4)/5)) , UMAX(1,(int)((obj->level+3)/2)) );	// armor vs. slash
+                obj->value[3]	= number_range( UMAX(1,(int)((obj->level+4)/5)) , UMAX(1,(int)((obj->level+3)/2)) );	// armor vs. exotic weapons
                 obj->value[4]	= 0;										// unused
             break;
             case ITEM_WAND:
             case ITEM_STAFF:
                 obj->value[0]	= (number_percent()<95)?(obj->level):(number_range(5,90)); // spell level
-                obj->value[1]	= number_range( UMAX(1,int((obj->level+4)/5)) , UMAX(1,int((obj->level+3)/2)) );	// maximum number of charges
+                obj->value[1]	= number_range( UMAX(1,(int)((obj->level+4)/5)) , UMAX(1,(int)((obj->level+3)/2)) );	// maximum number of charges
                 obj->value[2]	= obj->value[1];	// current number of charges
                 obj->value[3]	= skill_lookup(obj_random_wand_potion_spell());
                 obj->value[4]	= 0;					// unused
@@ -2662,42 +2646,6 @@ void clone_object(OBJ_DATA *parent, OBJ_DATA *clone)
 
 
 
-/*
- * Clear a new character.
- */
-void clear_char( CHAR_DATA *ch )
-{
-    static CHAR_DATA ch_zero;
-    int i;
-
-    *ch				= ch_zero;
-    ch->name			= &str_empty[0];
-    ch->short_descr		= &str_empty[0];
-    ch->long_descr		= &str_empty[0];
-    ch->description		= &str_empty[0];
-    ch->prompt                  = &str_empty[0];
-    ch->logon			= current_time;
-    ch->lines			= PAGELEN;
-    for (i = 0; i < 4; i++)
-    	ch->armor[i]		= 100;
-    ch->position		= POS_STANDING;
-    ch->hit			= 20;
-    ch->max_hit			= 20;
-    ch->mana			= 100;
-    ch->max_mana		= 100;
-    ch->move			= 100;
-    ch->max_move		= 100;
-    ch->last_fought             = NULL;
-    ch->last_fight_time         = -1;
-    ch->last_death_time         = -1;
-    ch->on			= NULL;
-    for (i = 0; i < MAX_STATS; i ++)
-    {
-	ch->perm_stat[i] = 13;
-	ch->mod_stat[i] = 0;
-    }
-    return;
-}
 
 /*
  * Get an extra description from a list.
@@ -3012,6 +2960,16 @@ char *fread_string( FILE *fp )
 		char *pString;
 
 		plast[-1] = '\0';
+
+		{
+
+		    char *pStart = top_string + sizeof(char *);
+
+		    utf8_from_latin5( pStart, (size_t) ( &string_space[MAX_STRING] - pStart ) );
+
+		    plast = pStart + strlen( pStart ) + 1;
+
+		}
 		iHash     = UMIN( MAX_KEY_HASH - 1, plast - 1 - top_string );
 		for ( pHash = string_hash[iHash]; pHash; pHash = pHashPrev )
 		{
@@ -3109,6 +3067,16 @@ char *fread_string_eol( FILE *fp )
                 char *pString;
 
                 plast[-1] = '\0';
+
+                {
+
+                    char *pStart = top_string + sizeof(char *);
+
+                    utf8_from_latin5( pStart, (size_t) ( &string_space[MAX_STRING] - pStart ) );
+
+                    plast = pStart + strlen( pStart ) + 1;
+
+                }
                 iHash     = UMIN( MAX_KEY_HASH - 1, plast - 1 - top_string );
                 for ( pHash = string_hash[iHash]; pHash; pHash = pHashPrev )
                 {
@@ -3379,10 +3347,10 @@ void do_areas( CHAR_DATA *ch, char *argument )
 {
     AREA_DATA *pArea;
 
-    printf_to_char(ch,"B�lgeler:\n\r\n\r");
+    printf_to_char(ch,"Bölgeler:\n\r\n\r");
     for ( pArea = area_first; pArea != NULL; pArea = pArea->next )
     {
-        printf_to_char(ch,"[{W%2d %3d{x] {c%25s{x - {c%s{x\n\r",pArea->low_range,pArea->high_range,pArea->name,pArea->path);
+        printf_to_char(ch,"[{W%2d %3d{x] {c%*s{x - {c%s{x\n\r",pArea->low_range,pArea->high_range,utf8_width(pArea->name, 25), pArea->name,pArea->path);
     }
 
     return;
@@ -3599,8 +3567,8 @@ int number_range( int from, int to )
   }
 
   do {
-    x = random();
-  } while (x >= (RAND_MAX - (RAND_MAX % (fark+1))));
+    x = rng_next() & RNG_MAX;
+  } while (x >= (RNG_MAX - (RNG_MAX % (fark+1))));
 
   x %= (fark+1);
 
@@ -3627,10 +3595,36 @@ int number_door( void )
     return number_range(0,5);
 }
 
-void init_random_number_generator( )
+/*
+ * Taşınabilir xorshift128 üreteci (rand()/random() farklılıklarından bağımsız).
+ */
+static uint32_t rng_state[4] = { 0x12345678u, 0x9abcdef0u, 0xdeadbeefu, 0xcafebabeu };
+
+static uint32_t rng_next( void )
 {
-  srandom(time(NULL)^getpid());
-  return;
+    uint32_t t = rng_state[3];
+    uint32_t s = rng_state[0];
+
+    rng_state[3] = rng_state[2];
+    rng_state[2] = rng_state[1];
+    rng_state[1] = s;
+    t ^= t << 11;
+    t ^= t >> 8;
+    return rng_state[0] = t ^ s ^ ( s >> 19 );
+}
+
+void init_random_number_generator( void )
+{
+    uint64_t z = (uint64_t) time( NULL ) ^ ( (uint64_t) platform_pid( ) << 32 );
+    int i;
+
+    for ( i = 0; i < 4; i++ )
+    {
+	z += 0x9e3779b97f4a7c15ULL;
+	z = ( z ^ ( z >> 30 ) ) * 0xbf58476d1ce4e5b9ULL;
+	z = ( z ^ ( z >> 27 ) ) * 0x94d049bb133111ebULL;
+	rng_state[i] = (uint32_t) ( z ^ ( z >> 31 ) ) | 1u;
+    }
 }
 
 /*
@@ -3700,13 +3694,7 @@ bool str_cmp( const char *astr, const char *bstr )
 	return TRUE;
     }
 
-    for ( ; *astr || *bstr; astr++, bstr++ )
-    {
-	if ( LOWER(*astr) != LOWER(*bstr) )
-	    return TRUE;
-    }
-
-    return FALSE;
+    return utf8_str_cmp( astr, bstr );
 }
 
 
@@ -3730,43 +3718,11 @@ bool str_prefix( const char *astr, const char *bstr )
 	return TRUE;
     }
 
-    for ( ; *astr; astr++, bstr++ )
-    {
-	if ( LOWER(*astr) != LOWER(*bstr) )
-	    return TRUE;
-    }
-
-    return FALSE;
+    return utf8_str_prefix( astr, bstr );
 }
 
 
 
-/*
- * Compare strings, case insensitive, for match anywhere.
- * Returns TRUE is astr not part of bstr.
- *   (compatibility with historical functions).
- */
-bool str_infix( const char *astr, const char *bstr )
-{
-    int sstr1;
-    int sstr2;
-    int ichar;
-    char c0;
-
-    if ( ( c0 = LOWER(astr[0]) ) == '\0' )
-	return FALSE;
-
-    sstr1 = strlen(astr);
-    sstr2 = strlen(bstr);
-
-    for ( ichar = 0; ichar <= sstr2 - sstr1; ichar++ )
-    {
-	if ( c0 == LOWER(bstr[ichar]) && !str_prefix( astr, bstr + ichar ) )
-	    return FALSE;
-    }
-
-    return TRUE;
-}
 
 
 
@@ -3791,17 +3747,65 @@ bool str_suffix( const char *astr, const char *bstr )
 
 
 /*
+ * İlk harfi büyütür ya da küçültür. UTF-8'de harfin bayt uzunluğu
+ * değişirse (i/İ, ı/I) yerinde değiştirilemez; yeni dizgi döndürülür.
+ */
+char *first_case( char *str, bool upper )
+{
+    static char buf[MAX_STRING_LENGTH];
+    uint32_t cp, cp2;
+    int len, len2;
+    char enc[4];
+
+    if ( str == NULL || ( len = utf8_decode( str, &cp ) ) <= 0 )
+	return str;
+    cp2 = upper ? utf8_toupper_cp( cp ) : utf8_tolower_cp( cp );
+    if ( cp2 == cp )
+	return str;
+    len2 = utf8_encode( cp2, enc );
+    if ( len2 == len )
+    {
+	memcpy( str, enc, (size_t) len );
+	return str;
+    }
+    if ( strlen( str ) + 2 > sizeof(buf) )
+	return str;
+    memcpy( buf, enc, (size_t) len2 );
+    strcpy( buf + len2, str + len );
+    return str_dup( buf );
+}
+
+/*
  * Returns an initial-capped string.
  */
 char *capitalize( const char *str )
 {
     static char strcap[MAX_STRING_LENGTH];
-    int i;
+    size_t o = 0;
+    bool first = TRUE;
+    uint32_t cp;
+    int len, n;
+    char enc[4];
 
-    for ( i = 0; str[i] != '\0'; i++ )
-	strcap[i] = LOWER(str[i]);
-    strcap[i] = '\0';
-    strcap[0] = UPPER(strcap[0]);
+    /*
+     * ASCII harfler eski davranışı korur (oyuncu dosya adları buna dayanır:
+     * 'i' -> 'I'); Türkçe harfler UTF-8 kurallarıyla dönüştürülür.
+     */
+    while ( ( len = utf8_decode( str, &cp ) ) > 0 )
+    {
+	str += len;
+	if ( cp < 0x80 )
+	    cp = first ? (uint32_t) UPPER( (int) cp ) : (uint32_t) LOWER( (int) cp );
+	else if ( cp != UTF8_REPLACEMENT )
+	    cp = first ? utf8_toupper_cp( cp ) : utf8_tolower_cp( cp );
+	n = utf8_encode( cp, enc );
+	if ( o + (size_t) n + 1 >= sizeof(strcap) )
+	    break;
+	memcpy( strcap + o, enc, (size_t) n );
+	o += (size_t) n;
+	first = FALSE;
+    }
+    strcap[o] = '\0';
     return strcap;
 }
 
@@ -3820,7 +3824,7 @@ void append_file( CHAR_DATA *ch, char *file, char *str )
     if ( ( fp = fopen( file, "a" ) ) == NULL )
     {
 	perror( file );
-	send_to_char( "Dosya a��lamad�!\n\r", ch );
+	send_to_char( "Dosya açılamadı!\n\r", ch );
     }
     else
     {
@@ -3965,11 +3969,7 @@ void load_olimits(FILE *fp)
  */
 void load_limited_objects()
 {
-  #if defined(linux)
   struct dirent *dp;
-  #else
-  struct direct *dp;
-  #endif
 
   int i;
   DIR *dirp;
@@ -4106,7 +4106,7 @@ long prac_lookup( const char *name )
 
    for ( i = 0; prac_table[i].name != NULL; i++)
    {
-        if (LOWER(name[0]) == LOWER(prac_table[i].name[0])
+        if (utf8_first_eq(name, prac_table[i].name)
         &&  !str_prefix( name,prac_table[i].name))
             return (1 << prac_table[i].number);
    }

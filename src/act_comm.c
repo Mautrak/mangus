@@ -47,13 +47,6 @@
 *	By using this code, you have agreed to follow the terms of the	   *
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
-
-#if defined(macintosh)
-#include <types.h>
-#else
-#include <sys/types.h>
-#include <sys/time.h>
-#endif
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -61,11 +54,11 @@
 #include <unistd.h>
 
 #include "merc.h"
+#include "utf8.h"
 #include "recycle.h"
 #include "tables.h"
 #include "interp.h"
 
-int unlink(const char *pathname);
 
 /* command procedures needed */
 DECLARE_DO_FUN(do_quit	);
@@ -202,7 +195,7 @@ void garble(char *garbled,char *speech)
 {
   int i;
 
-  for (i = 0; speech[i] != (char) NULL; i++) {
+  for (i = 0; speech[i] != '\0'; i++) {
     if (speech[i] >= 'a' && speech[i] <= 'z')
       garbled[i] = 'a' + number_range(0,25);
     else if (speech[i] >= 'A' && speech[i] <= 'Z')
@@ -358,7 +351,7 @@ void do_kd( CHAR_DATA *ch, char *argument )
 	act("$N bağlantısını kaybetmiş görünüyor...daha sonra tekrar dene.",
 	    ch,NULL,victim,TO_CHAR);
         snprintf(buf, sizeof(buf),"%s: %s%s%s\n\r",PERS(ch,victim),CLR_RED_BOLD,argument,CLR_NORMAL);
-        buf[0] = UPPER(buf[0]);
+        utf8_upper_first(buf, sizeof(buf));
         add_buf(victim->pcdata->buffer,buf);
 	return;
     }
@@ -434,7 +427,7 @@ void do_kdcevapla( CHAR_DATA *ch, char *argument )
 	act("$N bağlantısını kaybetmiş görünüyor...daha sonra tekrar dene.",
 	    ch,NULL,victim,TO_CHAR);
         snprintf(buf, sizeof(buf),"%s: %s%s%s\n\r",PERS(ch,victim),CLR_RED_BOLD,argument,CLR_NORMAL);
-        buf[0] = UPPER(buf[0]);
+        utf8_upper_first(buf, sizeof(buf));
         add_buf(victim->pcdata->buffer,buf);
 	return;
     }
@@ -469,80 +462,6 @@ void do_kdcevapla( CHAR_DATA *ch, char *argument )
     return;
 }
 
-
-void do_kdg( CHAR_DATA *ch, char *argument )
-{
-    DESCRIPTOR_DATA *d;
-    char buf[MAX_INPUT_LENGTH];
-
-	if( IS_NPC( ch ) )
-	{
-		return;
-	}
-
-    if ( argument[0] == '\0' )
-    {
-      if (IS_SET(ch->comm,COMM_NOKDG))
-      {
-        printf_to_char(ch,"KDG kanalı açıldı.\n\r");
-	REMOVE_BIT(ch->comm,COMM_NOKDG);
-      }
-      else
-      {
-        printf_to_char(ch,"KDG kanalı kapandı.\n\r");
-	SET_BIT(ch->comm,COMM_NOKDG);
-      }
-      return;
-    }
-
-	if ( IS_AFFECTED(ch, AFF_CHARM) &&   ch->master != NULL )
-    {
-		printf_to_char( ch , "Teshirliyken kdg kanalını kullanamazsın.\n\r" );
-		return;
-    }
-
-	if ( IS_SET(ch->comm, COMM_NOKDG) )
-    {
-	printf_to_char(ch,"Önce kdg kanalını açmalısın.\n\r" );
-	return;
-    }
-
-    if (argument[0] == '\0' )
-    {
-      send_to_char("Oyunculara ne gibi bi'şey söyleyeceksin?.\n\r",ch);
-      return;
-    }
-
-    if (is_affected(ch,gsn_garble))
-	{
-      garble(buf,argument);
-  	}
-    else
-	{
-      strcpy(buf,argument);
-  	}
-
-      ch->pcdata->rk_puani -= 4;
-
-
-     act_color( "$n kdg: $C$T$c", ch, NULL, buf, TO_CHAR,POS_DEAD, CLR_MAGENTA_BOLD );
-
-    for ( d = descriptor_list; d != NULL; d = d->next )
-    {
-		if( d->connected == CON_PLAYING )
-		{
-			if( d->character != ch )
-			{
-				if( !IS_SET( d->character->comm , COMM_NOKDG) )
-				{
-					printf_to_char ( d->character , "%s kdg: {G%s{x\n\r" , ch->name , buf  );
-				}
-			}
-		}
-    }
-
-    return;
-}
 
 
 
@@ -1060,12 +979,6 @@ void do_quit_count( CHAR_DATA *ch, char *argument )
    return;
 }
 
-void do_quit_remort( CHAR_DATA *ch, char *argument )
-{
-   quit_org(ch, argument, TRUE, TRUE );
-   return;
-}
-
 bool quit_org( CHAR_DATA *ch, char *argument, bool Count , bool Remort)
 {
     DESCRIPTOR_DATA *d, *dr, *d_next;
@@ -1579,14 +1492,14 @@ void do_group( CHAR_DATA *ch, char *argument )
 	    if ( is_same_group( gch, ch ) )
 	    {
 		  printf_to_char( ch,
-		  "[%2d %s] %-16s %d/%d yp %d/%d mp %d/%d zp   %5d xp\n\r",
+		  "[%2d %s] %-*s %d/%d yp %d/%d mp %d/%d zp   %5d xp\n\r",
 		    gch->level,
 		    IS_NPC(gch) ? "Mob" : class_table[gch->iclass].who_name,
-		    capitalize( PERS(gch, ch) ),
+		    utf8_width(capitalize( PERS(gch, ch) ), 16), capitalize( PERS(gch, ch) ),
 		    gch->hit,   gch->max_hit,
 		    gch->mana,  gch->max_mana,
 		    gch->move,  gch->max_move,
-		    gch->exp );
+		    gch->exp);
 	    }
 	}
 	return;
@@ -1855,22 +1768,6 @@ void do_gtell( CHAR_DATA *ch, char *argument )
 }
 
 
-
-/*
- * It is very important that this be an equivalence relation:
- * (1) A ~ A
- * (2) if A ~ B then B ~ A
- * (3) if A ~ B  and B ~ C, then A ~ C
- */
-bool is_same_group_old( CHAR_DATA *ach, CHAR_DATA *bch )
-{
-    if ( ach == NULL || bch == NULL)
-	return FALSE;
-
-    if ( ach->leader != NULL ) ach = ach->leader;
-    if ( bch->leader != NULL ) bch = bch->leader;
-    return ach == bch;
-}
 
 
 /*

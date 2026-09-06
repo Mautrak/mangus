@@ -47,14 +47,6 @@
 *	By using this code, you have agreed to follow the terms of the	   *
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
-
-#if defined(macintosh)
-#include <types.h>
-#include <time.h>
-#else
-#include <sys/types.h>
-#include <sys/time.h>
-#endif
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -4643,7 +4635,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
 
   if (get_skill(ch,gsn_lore) < 87)
     check_improve(ch,gsn_lore,TRUE,5);
-    return;
+  return;
 
   if (!obj->enchanted)
     for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
@@ -4844,7 +4836,7 @@ void do_withdraw(CHAR_DATA *ch, char *argument)
   ch->pcdata->bank_s -= amount_s;
   ch->silver += (long)(0.95 * amount_s);
 
-  printf_to_char(ch,"İşte %ld akçe, hesap işlemi olarak %ld sikkeni alıyorum.\n\r",(long)(0.95 * amount_s),UMAX(1, long(amount_s * 0.05)) );
+  printf_to_char(ch,"İşte %ld akçe, hesap işlemi olarak %ld sikkeni alıyorum.\n\r",(long)(0.95 * amount_s),UMAX(1, (long)(amount_s * 0.05)) );
   act("$n vezneye yaklaşıyor.",ch,NULL,NULL,TO_ROOM);
 }
 
@@ -4906,7 +4898,7 @@ void do_kasa(CHAR_DATA *ch, char *argument)
 {
 	char arg1[MAX_INPUT_LENGTH];
 	char arg2[MAX_INPUT_LENGTH];
-	OBJ_DATA *obj,*obj_tmp;
+	OBJ_DATA *obj;
 	int pcount = 0;
 
 	if (IS_NPC(ch))

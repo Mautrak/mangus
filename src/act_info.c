@@ -46,13 +46,6 @@
 *	By using this code, you have agreed to follow the terms of the	   *
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
-
-#if defined(macintosh)
-#include <types.h>
-#else
-#include <sys/types.h>
-#include <sys/time.h>
-#endif
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -60,6 +53,8 @@
 #include <time.h>
 #include <unistd.h>
 #include "merc.h"
+#include "utf8.h"
+#include "password.h"
 #include "magic.h"
 #include "recycle.h"
 #include "tables.h"
@@ -76,7 +71,6 @@ DECLARE_DO_FUN( do_affects_col 	);
 DECLARE_DO_FUN( do_who_col	);
 DECLARE_DO_FUN( do_autolist_col	);
 
-char *get_stat_alias( CHAR_DATA *ch, int which );
 
 const char *	where_name	[] =
 {
@@ -181,8 +175,8 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
     if ((fShort && (obj->short_descr == NULL || obj->short_descr[0] == '\0'))
     ||  (obj->description == NULL || obj->description[0] == '\0'))
 	return buf;
-	
-	if (obj->enchanted)
+
+    if (obj->enchanted)
 	{
 		for (paf = obj->affected; paf != NULL; paf = paf->next)
 		{
@@ -354,7 +348,7 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 	    if ( IS_WATER( obj->in_room ) )
 	    {
 	      strcpy( tmp, obj->short_descr );
-              tmp[0] = UPPER(tmp[0]);
+              utf8_upper_first(tmp, sizeof(tmp));
               strcat( buf, tmp );
 	      switch(dice(1,3))
 	      {
@@ -517,7 +511,7 @@ void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
 }
 /*
     sprintf(message,"(%s) ",race_table[RACE(victim)].name);
-    message[1] = UPPER( message[1]);
+    utf8_upper_first(message + 1, sizeof(message) - 1);
     strcat(buf,message);
 */
     if ( RIDDEN(victim)  ) 			strcat( buf, "[binek] "     );
@@ -708,7 +702,7 @@ void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
     }
 
     strcat( buf, "\n\r" );
-    buf[0] = UPPER(buf[0]);
+    utf8_upper_first(buf, sizeof(buf));
     send_to_char( buf, ch );
     return;
 }
@@ -1119,7 +1113,7 @@ void do_socials(CHAR_DATA *ch, char *argument)
 
     for (iSocial = 0; social_table[iSocial].name[0] != '\0'; iSocial++)
     {
-	snprintf(buf, sizeof(buf),"%-12s",social_table[iSocial].name);
+	snprintf(buf, sizeof(buf),"%-*s",utf8_width(social_table[iSocial].name, 12), social_table[iSocial].name);
 	send_to_char(buf,ch);
 	if (++col % 6 == 0)
 	    send_to_char("\n\r",ch);
@@ -1932,12 +1926,11 @@ void do_exits( CHAR_DATA *ch, char *argument )
         }
         else
         {
-          sprintf( buf + strlen(buf), "%-5s - %s",
-          capitalize( dir_name[door] ),
+          sprintf( buf + strlen(buf), "%-*s - %s",
+          utf8_width(capitalize( dir_name[door] ), 5), capitalize( dir_name[door] ),
           room_dark( pexit->u1.to_room )
           ?  "Zifiri karanlık"
-			: pexit->u1.to_room->name
-		    );
+			: pexit->u1.to_room->name);
 		if (IS_IMMORTAL(ch))
 		    sprintf(buf + strlen(buf),
 			" (oda %d)\n\r",pexit->u1.to_room->vnum);
@@ -1960,9 +1953,9 @@ void do_exits( CHAR_DATA *ch, char *argument )
 	    }
 	    else
 	    {
-		sprintf( buf + strlen(buf), "%-5s * (%s)",
-		    capitalize( dir_name[door] ),
-		    pexit->keyword   );
+		sprintf( buf + strlen(buf), "%-*s * (%s)",
+		    utf8_width(capitalize( dir_name[door] ), 5), capitalize( dir_name[door] ),
+		    pexit->keyword);
 		if (IS_IMMORTAL(ch))
 		    sprintf(buf + strlen(buf),
 			" (oda %d)\n\r",pexit->u1.to_room->vnum);
@@ -2030,7 +2023,7 @@ void do_worth( CHAR_DATA *ch, char *argument )
 void do_score( CHAR_DATA *ch, char *argument )
 {
 	char sex[8];
-	char oyuncukatli[6];
+	char oyuncukatli[16];
   char dogumGunu[20];
   char yonelim_etik[20];
 	sex[0]='\0';
@@ -2131,14 +2124,14 @@ void do_score( CHAR_DATA *ch, char *argument )
   snprintf(yonelim_etik, sizeof(yonelim_etik), "%s/%s", IS_GOOD((victim==NULL?ch:victim)) ? "iyi" :	IS_EVIL((victim==NULL?ch:victim)) ? "kem" : "yansız",((victim==NULL?ch:victim)->ethos==1?"tüze":(victim==NULL?ch:victim)->ethos==2?"yansız":"kaos") );
 
   printf_to_char(ch,"{c,---------------------------------------------------------------------,{w\n\r");
-  printf_to_char(ch,"{c|{w%+12s%-30s{cDiscord:%-19s|\n\r",(victim==NULL?ch:victim)->name,(victim==NULL?ch:victim)->pcdata->title,(victim==NULL?ch:victim)->pcdata->discord_id);
+  printf_to_char(ch,"{c|{w%*s%-*s{cDiscord:%-*s|\n\r",utf8_width((victim==NULL?ch:victim)->name, 12), (victim==NULL?ch:victim)->name,utf8_width((victim==NULL?ch:victim)->pcdata->title, 30), (victim==NULL?ch:victim)->pcdata->title,utf8_width((victim==NULL?ch:victim)->pcdata->discord_id, 19), (victim==NULL?ch:victim)->pcdata->discord_id);
   printf_to_char(ch,"{c|-------------------------,-------------------------------------------,{w\n\r");
-  printf_to_char(ch,"{c| Irk     : {w%-13s{c | ZIRH         | PARA                       |\n\r",race_table[(victim==NULL?ch:victim)->race].name[1]);
+  printf_to_char(ch,"{c| Irk     : {w%-*s{c | ZIRH         | PARA                       |\n\r",utf8_width(race_table[(victim==NULL?ch:victim)->race].name[1], 13), race_table[(victim==NULL?ch:victim)->race].name[1]);
   printf_to_char(ch,"{c| Yaş     : {w%-13d{c | Delici : {w%-4d{c| Akçe        : {w%-7ld{c      |\n\r",get_age(victim==NULL?ch:victim),GET_AC((victim==NULL?ch:victim),AC_PIERCE),(victim==NULL?ch:victim)->silver);
-  printf_to_char(ch,"{c| Cinsiyet: {w%-13s{c | Ezici  : {w%-4d{c| Akçe (Banka): {w%-7ld{c      |\n\r",sex,GET_AC((victim==NULL?ch:victim),AC_BASH),(victim==NULL?ch:victim)->pcdata->bank_s);
-  printf_to_char(ch,"{c| Sınıf   : {w%-13s{c | Kesici : {w%-4d{c|                            |\n\r",class_table[(victim==NULL?ch:victim)->iclass].name[1],GET_AC((victim==NULL?ch:victim),AC_SLASH));
-  printf_to_char(ch,"{c| Yön/Etk : {w%-13s{c | Egzotik: {w%-4d{c|                            |\n\r",yonelim_etik,GET_AC((victim==NULL?ch:victim),AC_EXOTIC));
-  printf_to_char(ch,"{c| Doğum   : {w%-12s{c  | Büyü K.: {w%-4d{c|                            |\n\r",dogumGunu,(victim==NULL?ch:victim)->saving_throw);
+  printf_to_char(ch,"{c| Cinsiyet: {w%-*s{c | Ezici  : {w%-4d{c| Akçe (Banka): {w%-7ld{c      |\n\r",utf8_width(sex, 13), sex,GET_AC((victim==NULL?ch:victim),AC_BASH),(victim==NULL?ch:victim)->pcdata->bank_s);
+  printf_to_char(ch,"{c| Sınıf   : {w%-*s{c | Kesici : {w%-4d{c|                            |\n\r",utf8_width(class_table[(victim==NULL?ch:victim)->iclass].name[1], 13), class_table[(victim==NULL?ch:victim)->iclass].name[1],GET_AC((victim==NULL?ch:victim),AC_SLASH));
+  printf_to_char(ch,"{c| Yön/Etk : {w%-*s{c | Egzotik: {w%-4d{c|                            |\n\r",utf8_width(yonelim_etik, 13), yonelim_etik,GET_AC((victim==NULL?ch:victim),AC_EXOTIC));
+  printf_to_char(ch,"{c| Doğum   : {w%-*s{c  | Büyü K.: {w%-4d{c|                            |\n\r",utf8_width(dogumGunu, 12), dogumGunu,(victim==NULL?ch:victim)->saving_throw);
   printf_to_char(ch,"{c|-------------------------'--------------|----------------------------,{w\n\r");
   printf_to_char(ch,"{c| Yp    : {w%-7d/%-7d{c | Güç: {w%-2d(%-2d){c  | Pratik : {w%-3d{c               |\n\r",(victim==NULL?ch:victim)->hit,(victim==NULL?ch:victim)->max_hit,(victim==NULL?ch:victim)->perm_stat[STAT_STR],get_curr_stat((victim==NULL)?ch:victim,STAT_STR),((victim==NULL)?ch:victim)->practice);
   printf_to_char(ch,"{c| Mana  : {w%-7d/%-7d{c | Zek: {w%-2d(%-2d){c  | Eğitim : {w%-3d{c               |\n\r",(victim==NULL?ch:victim)->mana, (victim==NULL?ch:victim)->max_mana,(victim==NULL?ch:victim)->perm_stat[STAT_INT],get_curr_stat((victim==NULL?ch:victim),STAT_INT),(victim==NULL?ch:victim)->train);
@@ -2148,7 +2141,7 @@ void do_score( CHAR_DATA *ch, char *argument )
   printf_to_char(ch,"{c| TP    : {w%-12ld{c    | Kar: {w%-2d(%-2d){c  | GörevZ : {w%-2d{c                |\n\r",(victim==NULL?ch:victim)->exp,(victim==NULL?ch:victim)->perm_stat[STAT_CHA],get_curr_stat((victim==NULL?ch:victim),STAT_CHA),((IS_SET((victim==NULL?ch:victim)->act, PLR_QUESTOR))?((victim==NULL?ch:victim)->pcdata->countdown):((victim==NULL?ch:victim)->pcdata->nextquest)));
   printf_to_char(ch,"{c| Korkak: {w%-10d{c      | ZZ : {w%-3d{c     | GörevPr: {w%-2d{c                |\n\r",(victim==NULL?ch:victim)->wimpy,GET_DAMROLL((victim==NULL?ch:victim)),(victim==NULL?ch:victim)->pcdata->questpractice);
   printf_to_char(ch,"{c| Ölüm  : {w%-3d{c             | VZ : {w%-3d{c     | RolP   : {w%-6ld{c            |\n\r",(victim==NULL?ch:victim)->pcdata->death,GET_HITROLL((victim==NULL?ch:victim)), (victim==NULL?ch:victim)->pcdata->rk_puani);
-  printf_to_char(ch,"{c| Din   : {w%-12s{c    | OK : {w%-6s{c  | DinP   : {w%-6ld{c            |\n\r",religion_table[(victim==NULL?ch:victim)->religion].name, oyuncukatli, (victim==NULL?ch:victim)->pcdata->din_puani);
+  printf_to_char(ch,"{c| Din   : {w%-*s{c    | OK : {w%-*s{c  | DinP   : {w%-6ld{c            |\n\r",utf8_width(religion_table[(victim==NULL?ch:victim)->religion].name, 12), religion_table[(victim==NULL?ch:victim)->religion].name, utf8_width(oyuncukatli, 6), oyuncukatli, (victim==NULL?ch:victim)->pcdata->din_puani);
   printf_to_char(ch,"{c|-------------------------'--------------'----------------------------|{w\n\r");
   printf_to_char(ch,"{c| {wBağışıklıklar, Dayanıklılıklar, Zayıflıklar{c                         |{x\n\r");
   printf_to_char(ch,"{c| {cteshir:%s%s%s {cçağrı  :%s%s%s {cbüyü  :%s%s%s {csilah :%s%s%s {cezici :%s%s%s {cdelici  :%s%s%s{c|{x\n\r",((victim==NULL?ch:victim)->imm_flags  & IMM_CHARM)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_CHARM)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_CHARM)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_SUMMON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_SUMMON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_SUMMON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_MAGIC)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_MAGIC)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_MAGIC)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_WEAPON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_WEAPON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_WEAPON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_BASH)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_BASH)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_BASH)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_PIERCE)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_PIERCE)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_PIERCE)?"{w+{x":"{D-{x");
@@ -2157,7 +2150,7 @@ void do_score( CHAR_DATA *ch, char *argument )
   printf_to_char(ch,"{c| {cışık  :%s%s%s {cses    :%s%s%s {ctahta :%s%s%s {cgümüş :%s%s%s {cdemir :%s%s%s             {c|{x\n\r",((victim==NULL?ch:victim)->imm_flags  & IMM_LIGHT)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_LIGHT)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_LIGHT)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_SOUND)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_SOUND)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_SOUND)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_WOOD)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_WOOD)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_WOOD)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_SILVER)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_SILVER)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_SILVER)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_IRON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_IRON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_IRON)?"{w+{x":"{D-{x");
   printf_to_char(ch,"{c|---------------------------------------------------------------------|{x\n\r");
   printf_to_char(ch,"{c| Susuzluk   : {w%-3d{c Açlık    : {w%-3d{c Memleket Özlemi: {w%-3d{c                |\n\r",(victim==NULL?ch:victim)->pcdata->condition[COND_THIRST],(victim==NULL?ch:victim)->pcdata->condition[COND_HUNGER],(victim==NULL?ch:victim)->pcdata->condition[COND_DESIRE]);
-  printf_to_char(ch,"{c| Kana susama: {w%-3d{c Sarhoşluk: {w%-3d{c Adrenalin      : {w%-5s{c              |\n\r",(victim==NULL?ch:victim)->pcdata->condition[COND_BLOODLUST],(victim==NULL?ch:victim)->pcdata->condition[COND_DRUNK],(ch->last_fight_time == -1)?"Hayır":(((current_time - ch->last_fight_time) <FIGHT_DELAY_TIME)?"Evet":"Hayır"));
+  printf_to_char(ch,"{c| Kana susama: {w%-3d{c Sarhoşluk: {w%-3d{c Adrenalin      : {w%-*s{c              |\n\r",(victim==NULL?ch:victim)->pcdata->condition[COND_BLOODLUST],(victim==NULL?ch:victim)->pcdata->condition[COND_DRUNK],utf8_width((ch->last_fight_time == -1)?"Hayır":(((current_time - ch->last_fight_time) <FIGHT_DELAY_TIME)?"Evet":"Hayır"), 5), (ch->last_fight_time == -1)?"Hayır":(((current_time - ch->last_fight_time) <FIGHT_DELAY_TIME)?"Evet":"Hayır"));
   printf_to_char(ch,"{c'---------------------------------------------------------------------'{x\n\r");
 }
 
@@ -2180,16 +2173,16 @@ void mob_score(CHAR_DATA *ch,CHAR_DATA *mob)
 	}
 
 	printf_to_char(ch,"{c,---------------------------------------------------------------------,\n\r");
-	printf_to_char(ch,"{c| {w%-12s                                 {c                       |\n\r",mob->short_descr);
+	printf_to_char(ch,"{c| {w%-*s                                 {c                       |\n\r",utf8_width(mob->short_descr, 12), mob->short_descr);
 	printf_to_char(ch,"{c|--------------------,------------------------------------------------|\n\r");
-  printf_to_char(ch,"{c| Vnum    : {w%-8d{c | Güç: {w%-2d{c        | Delici : {w%-4d {c| Büyücü : %1s    |\n\r",mob->pIndexData->vnum, mob->perm_stat[STAT_STR],GET_AC(mob,AC_PIERCE), (IS_SET(mob->act,ACT_MAGE))?"{w+{c":"");
-  printf_to_char(ch,"{c| Irk     : {w%-8s{c | Zek: {w%-2d{c        | Ezici  : {w%-4d {c| Ermiş  : %1s    |\n\r",race_table[mob->race].name[1],mob->perm_stat[STAT_INT],GET_AC(mob,AC_BASH),(IS_SET(mob->act,ACT_CLERIC))?"{w+{c":"");
-  printf_to_char(ch,"{c| Cinsiyet: {w%-8s{c | Bil: {w%-2d{c        | Kesici : {w%-4d {c| Savaşçı: %1s    |\n\r",sex,mob->perm_stat[STAT_WIS],GET_AC(mob,AC_SLASH),(IS_SET(mob->act,ACT_WARRIOR))?"{w+{c":"");
-  printf_to_char(ch,"{c| Sınıf   : {wmobil{c    | Çev: {w%-2d{c        | Egzotik: {w%-4d {c| Hırsız : %1s    |\n\r",mob->perm_stat[STAT_DEX],GET_AC(mob,AC_EXOTIC),(IS_SET(mob->act,ACT_THIEF))?"{w+{c":"");
+  printf_to_char(ch,"{c| Vnum    : {w%-8d{c | Güç: {w%-2d{c        | Delici : {w%-4d {c| Büyücü : %*s    |\n\r",mob->pIndexData->vnum, mob->perm_stat[STAT_STR],GET_AC(mob,AC_PIERCE), utf8_width((IS_SET(mob->act,ACT_MAGE))?"{w+{c":"", 1), (IS_SET(mob->act,ACT_MAGE))?"{w+{c":"");
+  printf_to_char(ch,"{c| Irk     : {w%-*s{c | Zek: {w%-2d{c        | Ezici  : {w%-4d {c| Ermiş  : %*s    |\n\r",utf8_width(race_table[mob->race].name[1], 8), race_table[mob->race].name[1],mob->perm_stat[STAT_INT],GET_AC(mob,AC_BASH),utf8_width((IS_SET(mob->act,ACT_CLERIC))?"{w+{c":"", 1), (IS_SET(mob->act,ACT_CLERIC))?"{w+{c":"");
+  printf_to_char(ch,"{c| Cinsiyet: {w%-*s{c | Bil: {w%-2d{c        | Kesici : {w%-4d {c| Savaşçı: %*s    |\n\r",utf8_width(sex, 8), sex,mob->perm_stat[STAT_WIS],GET_AC(mob,AC_SLASH),utf8_width((IS_SET(mob->act,ACT_WARRIOR))?"{w+{c":"", 1), (IS_SET(mob->act,ACT_WARRIOR))?"{w+{c":"");
+  printf_to_char(ch,"{c| Sınıf   : {wmobil{c    | Çev: {w%-2d{c        | Egzotik: {w%-4d {c| Hırsız : %*s    |\n\r",mob->perm_stat[STAT_DEX],GET_AC(mob,AC_EXOTIC),utf8_width((IS_SET(mob->act,ACT_THIEF))?"{w+{c":"", 1), (IS_SET(mob->act,ACT_THIEF))?"{w+{c":"");
   printf_to_char(ch,"{c| Yönelim : {w%-8d{c | Bün: {w%-2d{c        | ZZ     : {w%-4d {c|               |\n\r",mob->alignment,mob->perm_stat[STAT_CON],GET_DAMROLL(mob));
   printf_to_char(ch,"{c|                    | Kar: {w%-2d{c        | VZ     : {w%-4d {c|               |\n\r",mob->perm_stat[STAT_CHA],GET_HITROLL(mob));
 	printf_to_char(ch,"{c|--------------------|----------------|---------------'---------------'{x\n\r");
-	printf_to_char(ch,"{c| Yp    : {w%-5d/%-5d{c| Akçe : {w%-7ld {c| Din: {w%-12s{c             |\n\r",mob->hit,  mob->max_hit,mob->silver,religion_table[mob->religion].name);
+	printf_to_char(ch,"{c| Yp    : {w%-5d/%-5d{c| Akçe : {w%-7ld {c| Din: {w%-*s{c             |\n\r",mob->hit,  mob->max_hit,mob->silver,utf8_width(religion_table[mob->religion].name, 12), religion_table[mob->religion].name);
 	printf_to_char(ch,"{c| Mana  : {w%-5d/%-5d{c| Beden: {w%-8d{c|                               |\n\r",mob->mana, mob->max_mana,mob->size);
 	printf_to_char(ch,"{c| Zp    : {w%-5d/%-5d{c|                |                               |\n\r",mob->move, mob->max_move);
 	printf_to_char(ch,"{c| Seviye: {w%-7ld{c    |                |                               |\n\r",mob->level);
@@ -2742,15 +2735,17 @@ void do_where( CHAR_DATA *ch, char *argument )
 
 	    {
 		found = TRUE;
-		snprintf(buf, sizeof(buf), "%s%-28s %s\n\r",
+		snprintf(buf, sizeof(buf), "%s%-*s %s\n\r",
 		 (is_safe_nomessage(ch,
 (is_affected(victim,gsn_doppelganger) && victim->doppel) ?
 	victim->doppel : victim) || IS_NPC(victim)) ?
 			"  " :  pkbuf,
-	         (is_affected(victim,gsn_doppelganger)
+	         utf8_width((is_affected(victim,gsn_doppelganger)
+		  && !IS_SET(ch->act,PLR_HOLYLIGHT)) ?
+		    victim->doppel->name : victim->name, 28), (is_affected(victim,gsn_doppelganger)
 		  && !IS_SET(ch->act,PLR_HOLYLIGHT)) ?
 		    victim->doppel->name : victim->name,
-		 victim->in_room->name );
+		 victim->in_room->name);
 		send_to_char( buf, ch );
 	    }
 	}
@@ -2771,8 +2766,8 @@ void do_where( CHAR_DATA *ch, char *argument )
 	    &&   is_name( arg, victim->name ) )
 	    {
 		found = TRUE;
-		snprintf(buf, sizeof(buf), "%-28s %s\n\r",
-		    PERS(victim, ch), victim->in_room->name );
+		snprintf(buf, sizeof(buf), "%-*s %s\n\r",
+		    utf8_width(PERS(victim, ch), 28), PERS(victim, ch), victim->in_room->name);
 		send_to_char( buf, ch );
 		break;
 	    }
@@ -3033,7 +3028,7 @@ void do_practice( CHAR_DATA *ch, char *argument )
         strcpy( buf2, "" );
 	for ( sn = 0; sn < MAX_SKILL; sn++ )
 	{
-	    if ( skill_table[sn].name == NULL )
+	    if ( skill_table[sn].name[0] == NULL )
 		break;
 	    if ( ch->level < skill_table[sn].skill_level[ch->iclass] ||
 		!RACE_OK(ch,sn) ||
@@ -3042,15 +3037,15 @@ void do_practice( CHAR_DATA *ch, char *argument )
 		continue;
 
     if(ch->pcdata->learned[sn]<75)
-    snprintf(buf, sizeof(buf), "{r%-18s %3d%%  {x",skill_table[sn].name[1], ch->pcdata->learned[sn] );
+    snprintf(buf, sizeof(buf), "{r%-*s %3d%%  {x",utf8_width(skill_table[sn].name[1], 18), skill_table[sn].name[1], ch->pcdata->learned[sn]);
   else if(ch->pcdata->learned[sn]>=75 && ch->pcdata->learned[sn]<85)
-    snprintf(buf, sizeof(buf), "{g%-18s %3d%%  {x",skill_table[sn].name[1], ch->pcdata->learned[sn] );
+    snprintf(buf, sizeof(buf), "{g%-*s %3d%%  {x",utf8_width(skill_table[sn].name[1], 18), skill_table[sn].name[1], ch->pcdata->learned[sn]);
   else if(ch->pcdata->learned[sn]>=85 && ch->pcdata->learned[sn]<100)
-    snprintf(buf, sizeof(buf), "{G%-18s %3d%%  {x",skill_table[sn].name[1], ch->pcdata->learned[sn] );
+    snprintf(buf, sizeof(buf), "{G%-*s %3d%%  {x",utf8_width(skill_table[sn].name[1], 18), skill_table[sn].name[1], ch->pcdata->learned[sn]);
   else if(ch->pcdata->learned[sn]==100)
-    snprintf(buf, sizeof(buf), "{C%-18s %3d%%  {x",skill_table[sn].name[1], ch->pcdata->learned[sn] );
+    snprintf(buf, sizeof(buf), "{C%-*s %3d%%  {x",utf8_width(skill_table[sn].name[1], 18), skill_table[sn].name[1], ch->pcdata->learned[sn]);
   else
-    snprintf(buf, sizeof(buf), "%-18s %3d%%  ",skill_table[sn].name[1], ch->pcdata->learned[sn] );
+    snprintf(buf, sizeof(buf), "%-*s %3d%%  ",utf8_width(skill_table[sn].name[1], 18), skill_table[sn].name[1], ch->pcdata->learned[sn]);
 	    strcat( buf2, buf );
 	    if ( ++col % 3 == 0 )
 		strcat( buf2, "\n\r" );
@@ -3252,7 +3247,7 @@ void do_password( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    if ( strcmp( crypt( arg1, ch->pcdata->pwd ), ch->pcdata->pwd ) )
+    if ( !pwd_check( ch->pcdata->pwd, arg1 ) )
     {
 	WAIT_STATE( ch, 40 );
   printf_to_char(ch, "Yanlış şifre.  10 saniye bekle.\n\r" );
@@ -3268,7 +3263,7 @@ void do_password( CHAR_DATA *ch, char *argument )
     /*
      * No tilde allowed because of player file format.
      */
-    pwdnew = crypt( arg2, ch->name );
+    pwdnew = (char *) pwd_hash( arg2 );
     for ( p = pwdnew; *p != '\0'; p++ )
     {
 	if ( *p == '~' )
@@ -3745,9 +3740,9 @@ void do_affects_col(CHAR_DATA *ch, char *argument )
       }
       else
       {
-        snprintf(buf, sizeof(buf), "%sEtki%s: %s%-16s%s",
+        snprintf(buf, sizeof(buf), "%sEtki%s: %s%-*s%s",
           CLR_RED,CLR_WHITE_BOLD,CLR_YELLOW,
-          skill_table[paf->type].name[1] ,CLR_WHITE_BOLD);
+          utf8_width(skill_table[paf->type].name[1], 16), skill_table[paf->type].name[1],CLR_WHITE_BOLD);
       }
 
       send_to_char( buf, ch );
@@ -3898,7 +3893,7 @@ void do_familya(CHAR_DATA *ch, char *argument )
 			continue;
 		if(str_cmp(race_table[sn].name[1],"unique"))
 		{
-			printf_to_char(ch,"%-18s %3d%%  ",race_table[sn].name[1], ch->pcdata->familya[sn]);
+			printf_to_char(ch,"%-*s %3d%%  ",utf8_width(race_table[sn].name[1], 18), race_table[sn].name[1], ch->pcdata->familya[sn]);
 			if ( ++col % 3 == 0 )
 				printf_to_char(ch, "\n\r" );
 		}
@@ -4057,7 +4052,7 @@ void do_raffects(CHAR_DATA *ch, char *argument )
 		else
 		    continue;
 	    else
-      snprintf(buf, sizeof(buf), "Büyü: %-15s", skill_table[paf->type].name[1] );
+      snprintf(buf, sizeof(buf), "Büyü: %-*s", utf8_width(skill_table[paf->type].name[1], 15), skill_table[paf->type].name[1]);
 
 	    send_to_char( buf, ch );
 
@@ -4084,145 +4079,6 @@ void do_raffects(CHAR_DATA *ch, char *argument )
     return;
 }
 
-/* new practice */
-void do_pracnew( CHAR_DATA *ch, char *argument )
-{
-    char buf2[10*MAX_STRING_LENGTH];
-    char buf[MAX_STRING_LENGTH];
-    int sn;
-
-    if ( IS_NPC(ch) )
-	return;
-
-    if ( argument[0] == '\0' )
-    {
-	int col;
-
-	col    = 0;
-        strcpy( buf2, "" );
-	for ( sn = 0; sn < MAX_SKILL; sn++ )
-	{
-	    if ( skill_table[sn].name == NULL )
-		break;
-	    if ( ch->level < skill_table[sn].skill_level[ch->iclass] ||
-	!RACE_OK(ch,sn) ||
-(skill_table[sn].cabal != ch->cabal && skill_table[sn].cabal != CABAL_NONE)
-	      )
-		continue;
-
-	    snprintf(buf, sizeof(buf), "%-18s %3d%%  ",
-		skill_table[sn].name[1], ch->pcdata->learned[sn] );
-	    strcat( buf2, buf );
-	    if ( ++col % 3 == 0 )
-		strcat( buf2, "\n\r" );
-	}
-
-	if ( col % 3 != 0 )
-	    strcat( buf2, "\n\r" );
-
-      snprintf(buf, sizeof(buf), "%d pratik seansın kaldı.\n\r",
-	    ch->practice );
-	strcat( buf2, buf );
-
-        page_to_char( buf2, ch );
-    }
-    else
-    {
-	CHAR_DATA *mob;
-	int adept;
-
-	if ( !IS_AWAKE(ch) )
-	{
-    send_to_char("Rüyanda mı?\n\r", ch );
-	    return;
-	}
-
-	if ( ch->practice <= 0 )
-	{
-    send_to_char("Pratik seansın yok.\n\r", ch );
-	    return;
-	}
-
-	if ( ( sn = find_spell( ch,argument ) ) < 0
-	|| ( !IS_NPC(ch)
-	&&   (ch->level < skill_table[sn].skill_level[ch->iclass]
- 	|| !RACE_OK(ch,sn) ||
-(skill_table[sn].cabal != ch->cabal && skill_table[sn].cabal != CABAL_NONE) )))
-	{
-    send_to_char("Onu pratik edemezsin.\n\r", ch );
-	    return;
-	}
-
-	if (!str_cmp("vampir",skill_table[sn].name[1]) )
-	{
-    send_to_char( "Yalnız görevci sana yardım edebilir.\n\r",ch);
-	 return;
-	}
-
-	for ( mob = ch->in_room->people; mob != NULL; mob = mob->next_in_room )
-	{
-	    if ( IS_NPC(mob) && IS_SET(mob->act, ACT_PRACTICE) )
-	      {
-	        if (skill_table[sn].cabal == CABAL_NONE)
-		 {
-		  if ( ( mob->pIndexData->practicer == 0 &&
-			( skill_table[sn].group == GROUP_NONE
-			  || skill_table[sn].group == GROUP_CREATION
-			  || skill_table[sn].group == GROUP_HARMFUL
-			  || skill_table[sn].group == GROUP_PROTECTIVE
-			  || skill_table[sn].group == GROUP_DETECTION
-			  || skill_table[sn].group == GROUP_WEATHER ))
-		      || (mob->pIndexData->practicer &
-			 (1 << prac_table[skill_table[sn].group].number) ) )
-		  break;
-		 }
-		else
-		 {
-		  if (ch->cabal == mob->cabal)	break;
-	     	 }
-	     }
-	}
-
-	if ( mob == NULL )
-	{
-    send_to_char( "Burada yapamazsın. Daha fazla bilgi için glist ve slook komutlarını kullan.\n\r", ch );
-	    return;
-	}
-
-	adept = IS_NPC(ch) ? 100 : class_table[ch->iclass].skill_adept;
-
-	if ( ch->pcdata->learned[sn] >= adept )
-	{
-    snprintf(buf, sizeof(buf), "Zaten %s konusunu öğrendin.\n\r",
-		skill_table[sn].name[1] );
-	    send_to_char( buf, ch );
-	}
-	else
-	{
-	    if (!ch->pcdata->learned[sn]) ch->pcdata->learned[sn] = 1;
-	    ch->practice--;
-	    ch->pcdata->learned[sn] +=
-		int_app[get_curr_stat(ch,STAT_INT)].learn /
-	        UMAX(skill_table[sn].rating[ch->iclass],1);
-	    if ( ch->pcdata->learned[sn] < adept )
-	    {
-        act( "$T pratik ediyorsun.",
-		    ch, NULL, skill_table[sn].name, TO_CHAR );
-        act( "$n $T pratik ediyor.",
-		    ch, NULL, skill_table[sn].name, TO_ROOM );
-	    }
-	    else
-	    {
-		ch->pcdata->learned[sn] = adept;
-    act("$T konusunu öğrendin.",
-		    ch, NULL, skill_table[sn].name, TO_CHAR );
-        act("$n $T konusunu öğrendi.",
-		    ch, NULL, skill_table[sn].name, TO_ROOM );
-	    }
-	}
-    }
-    return;
-}
 
 
 /*
@@ -4574,11 +4430,12 @@ void do_who_col( CHAR_DATA *ch, char *argument )
 	if (IS_TRUSTED(ch,LEVEL_IMMORTAL) || ch==wch ||
                    wch->level >= LEVEL_HERO)
 
-	  snprintf(buf, sizeof(buf), "[%3d %8s %3s] %s%s%s%s%s\n\r",
+	  snprintf(buf, sizeof(buf), "[%3d %*s %*s] %s%s%s%s%s\n\r",
 	    wch->level,
-	    RACE(wch) < MAX_PC_RACE ? race_table[RACE(wch)].who_name
+	    utf8_width(RACE(wch) < MAX_PC_RACE ? race_table[RACE(wch)].who_name
+				    : "     ", 8), RACE(wch) < MAX_PC_RACE ? race_table[RACE(wch)].who_name
 				    : "     ",
-	    classbuf,
+	    utf8_width(classbuf, 3), classbuf,
 	    pk_buf,
 	    cabalbuf,
 	    act_buf,
@@ -4587,8 +4444,9 @@ void do_who_col( CHAR_DATA *ch, char *argument )
 
 	else
 /*	  snprintf(buf, sizeof(buf), "[%s %s %s] %s%s%s%s%s\n\r",	*/
-	  snprintf(buf, sizeof(buf), "[%3s %8s    ] %s%s%s%s%s\n\r",
+	  snprintf(buf, sizeof(buf), "[%3s %*s    ] %s%s%s%s%s\n\r",
 		(get_curr_stat(wch, STAT_CHA) < 18 ) ? level_buf : "  ",
+	    utf8_width(RACE(wch) < MAX_PC_RACE ? race_table[RACE(wch)].who_name : "     ", 8),
 	    RACE(wch) < MAX_PC_RACE ? race_table[RACE(wch)].who_name
 				    : "     ",
 /*	    classbuf, 	*/
@@ -5166,7 +5024,6 @@ void do_discord( CHAR_DATA *ch, char *argument )
 	FILE *fp;
 	char line[30];
 	int is_found;
-	ssize_t read;
 
 	argument = one_argument(argument,arg);
 	if (arg[0] == '\0')

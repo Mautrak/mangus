@@ -47,17 +47,12 @@
 *	By using this code, you have agreed to follow the terms of the	   *
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
-
-#if defined(macintosh)
-#include <types.h>
-#else
-#include <sys/types.h>
-#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include "merc.h"
+#include "utf8.h"
 #include "magic.h"
 #include "recycle.h"
 
@@ -93,12 +88,12 @@ int skill_lookup( const char *name )
 
     for ( sn = 0; sn < MAX_SKILL; sn++ )
     {
-	if ( skill_table[sn].name == NULL )
+	if ( skill_table[sn].name[0] == NULL )
 	    break;
-	if ( LOWER(name[0]) == LOWER(skill_table[sn].name[0][0])
+	if ( utf8_first_eq(name, skill_table[sn].name[0])
 	&&   !str_prefix( name, skill_table[sn].name[0] ) )
 	    return sn;
-      if ( LOWER(name[0]) == LOWER(skill_table[sn].name[1][0])
+      if ( utf8_first_eq(name, skill_table[sn].name[1])
       &&   !str_prefix( name, skill_table[sn].name[1] ) )
           return sn;
     }
@@ -116,9 +111,9 @@ int find_spell( CHAR_DATA *ch, const char *name )
 
     for ( sn = 0; sn < MAX_SKILL; sn++ )
     {
-	if (skill_table[sn].name == NULL)
+	if (skill_table[sn].name[0] == NULL)
 	    break;
-	if (LOWER(name[0]) == LOWER(skill_table[sn].name[0][0])
+	if (utf8_first_eq(name, skill_table[sn].name[0])
 	&&  !str_prefix(name,skill_table[sn].name[0]))
 	{
 	    if ( found == -1)
@@ -127,7 +122,7 @@ int find_spell( CHAR_DATA *ch, const char *name )
 	    &&  ch->pcdata->learned[sn] > 0)
 		    return sn;
 	}
-  if (LOWER(name[0]) == LOWER(skill_table[sn].name[1][0])
+  if (utf8_first_eq(name, skill_table[sn].name[1])
 	&&  !str_prefix(name,skill_table[sn].name[1]))
 	{
 	    if ( found == -1)
@@ -336,14 +331,6 @@ bool check_dispel( int dis_level, CHAR_DATA *victim, int sn)
         }
     }
     return FALSE;
-}
-
-/* for finding mana costs -- temporary version */
-int mana_cost (CHAR_DATA *ch, int min_mana, int level)
-{
-    if (ch->level + 2 == level)
-	return 1000;
-    return UMAX(min_mana,(100/(2 + ch->level - level)));
 }
 
 /*
@@ -2552,7 +2539,7 @@ void spell_dispel_magic( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     if (check_dispel(level,victim,skill_lookup("detect invis")))
         found = TRUE;
 
-        found = TRUE;
+    found = TRUE;
 
     if (check_dispel(level,victim,skill_lookup("detect hidden")))
         found = TRUE;
@@ -2704,7 +2691,7 @@ void spell_dispel_magic( int sn, int level, CHAR_DATA *ch, void *vo,int target )
         send_to_char("Tamam.\n\r",ch);
     else
         send_to_char("Büyü işe yaramadı.\n\r",ch);
-	return;
+    return;
 }
 
 void spell_earthquake( int sn, int level, CHAR_DATA *ch, void *vo,int target )
@@ -2728,10 +2715,10 @@ void spell_earthquake( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 		continue;
 	    if ( ch == vch )
 		continue;
-		if (IS_AFFECTED(vch,AFF_FLYING))
-		    damage(ch,vch,0,sn,DAM_BASH,TRUE);
-		else
-		    damage( ch,vch,level + dice(2, 8), sn, DAM_BASH,TRUE);
+	    if (IS_AFFECTED(vch,AFF_FLYING))
+		damage(ch,vch,0,sn,DAM_BASH,TRUE);
+	    else
+		damage( ch,vch,level + dice(2, 8), sn, DAM_BASH,TRUE);
 	    continue;
 	}
 
@@ -4279,7 +4266,7 @@ void spell_locate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 			? "bir yer" : in_obj->in_room->name );
 	}
 
-	buf[0] = UPPER(buf[0]);
+	utf8_upper_first(buf, sizeof(buf));
 	add_buf(buffer,buf);
 
 	if (number >= max_found)
@@ -5109,7 +5096,7 @@ void spell_ventriloquate( int sn, int level, CHAR_DATA *ch,void *vo,int target)
 
     snprintf(buf1, sizeof(buf1), "%s '%s' dedi.\n\r",              speaker, target_name );
     snprintf(buf2, sizeof(buf2), "Biri %s'e zorla '%s' dedirtiyor.\n\r", speaker, target_name );
-    buf1[0] = UPPER(buf1[0]);
+    utf8_upper_first(buf1, sizeof(buf1));
 
     for ( vch = ch->in_room->people; vch != NULL; vch = vch->next_in_room )
     {
@@ -5394,20 +5381,20 @@ void spell_gas_breath( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 	    continue;
 	if ( is_safe(ch, vch) )
           continue;
-          if (!IS_NPC(ch) && vch != ch &&
-              ch->fighting != vch && vch->fighting != ch &&
-              (IS_SET(vch->affected_by,AFF_CHARM) || !IS_NPC(vch)))
+        if (!IS_NPC(ch) && vch != ch &&
+            ch->fighting != vch && vch->fighting != ch &&
+            (IS_SET(vch->affected_by,AFF_CHARM) || !IS_NPC(vch)))
+          {
+          if (!can_see(vch, ch))
+              do_yell(vch, "İmdat! Biri bana saldırıyor!");
+          else
             {
-            if (!can_see(vch, ch))
-                do_yell(vch, "İmdat! Biri bana saldırıyor!");
-            else
-              {
-                 snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
-                    (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(vch))?
-                     ch->doppel->name : ch->name);
-                 do_yell(vch,buf);
-              }
-          }
+               snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
+                  (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(vch))?
+                   ch->doppel->name : ch->name);
+               do_yell(vch,buf);
+            }
+        }
 
 	if (saves_spell(level,vch,DAM_POISON))
 	{
@@ -5530,7 +5517,7 @@ void spell_find_object( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 			? "[bilinmeyen]" : in_obj->in_room->name );
 	}
 
-	buf[0] = UPPER(buf[0]);
+	utf8_upper_first(buf, sizeof(buf));
 	add_buf(buffer,buf);
 
 	if (number >= max_found)
@@ -6098,20 +6085,20 @@ void spell_hurricane(int sn,int level,CHAR_DATA *ch,void *vo,int target)
 	    continue;
 	if ( is_safe(ch, vch) )
           continue;
-          if (!IS_NPC(ch) && vch != ch &&
-              ch->fighting != vch && vch->fighting != ch &&
-              (IS_SET(vch->affected_by,AFF_CHARM) || !IS_NPC(vch)))
+        if (!IS_NPC(ch) && vch != ch &&
+            ch->fighting != vch && vch->fighting != ch &&
+            (IS_SET(vch->affected_by,AFF_CHARM) || !IS_NPC(vch)))
+          {
+          if (!can_see(vch, ch))
+              do_yell(vch, "İmdat! Biri bana saldırıyor!");
+          else
             {
-            if (!can_see(vch, ch))
-                do_yell(vch, "İmdat! Biri bana saldırıyor!");
-            else
-              {
-                 snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
-                    (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(vch))?
-                     ch->doppel->name : ch->name);
-                 do_yell(vch,buf);
-              }
-          }
+               snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
+                  (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(vch))?
+                   ch->doppel->name : ch->name);
+               do_yell(vch,buf);
+            }
+        }
 
 	if (!IS_AFFECTED(vch,AFF_FLYING)) dam /= 2;
 
@@ -6709,7 +6696,7 @@ else
     send_to_char( "Vücut elektiriğin topraklanıyor.\n\r", victim );
     if ( ch != victim )
 	act("$N büyünle topraklanıyor.",ch,NULL,victim,TO_CHAR);
-	return;
+    return;
 }
 
 void spell_tsunami( int sn, int level, CHAR_DATA *ch, void *vo,int target)
@@ -7039,20 +7026,20 @@ void spell_windwall( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 	    continue;
 	if ( is_safe(ch, vch) )
           continue;
-          if (!IS_NPC(ch) && vch != ch &&
-              ch->fighting != vch && vch->fighting != ch &&
-              (IS_SET(vch->affected_by,AFF_CHARM) || !IS_NPC(vch)))
+        if (!IS_NPC(ch) && vch != ch &&
+            ch->fighting != vch && vch->fighting != ch &&
+            (IS_SET(vch->affected_by,AFF_CHARM) || !IS_NPC(vch)))
+          {
+          if (!can_see(vch, ch))
+              do_yell(vch, "İmdat! Biri bana saldırıyor!");
+          else
             {
-            if (!can_see(vch, ch))
-                do_yell(vch, "İmdat! Biri bana saldırıyor!");
-            else
-              {
-                 snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
-                    (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(vch))?
-                     ch->doppel->name : ch->name);
-                 do_yell(vch,buf);
-              }
-          }
+               snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
+                  (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(vch))?
+                   ch->doppel->name : ch->name);
+               do_yell(vch,buf);
+            }
+        }
 
 	if (!IS_AFFECTED(vch,AFF_FLYING)) dam /= 2;
 

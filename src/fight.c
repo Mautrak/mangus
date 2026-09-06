@@ -47,12 +47,6 @@
 *	By using this code, you have agreed to follow the terms of the	   *
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
-
-#if defined(macintosh)
-#include <types.h>
-#else
-#include <sys/types.h>
-#endif
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -60,7 +54,6 @@
 #include <unistd.h>
 #include "merc.h"
 
-int unlink(const char *pathname);
 
 #define MAX_DAMAGE_MESSAGE 34
 
@@ -99,7 +92,6 @@ bool	check_hand	( CHAR_DATA *ch, CHAR_DATA *victim );
 bool	check_cross	( CHAR_DATA *ch, CHAR_DATA *victim );
 void	dam_message	( CHAR_DATA *ch, CHAR_DATA *victim, int dam,
 			    int dt, bool immune ,int dam_type);
-void	death_cry	( CHAR_DATA *ch );
 void	death_cry_org	( CHAR_DATA *ch, int part);
 void	group_gain	( CHAR_DATA *ch, CHAR_DATA *victim );
 int	xp_compute	( CHAR_DATA *gch, CHAR_DATA *victim,
@@ -631,10 +623,10 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
      * Can't beat a dead char!
      * Guard against weird room-leavings.
      */
-	if ( victim->position == POS_DEAD || ch->in_room != victim->in_room )
-		return;
+    if ( victim->position == POS_DEAD || ch->in_room != victim->in_room )
+	return;
 
-	familya_check_improve(ch, victim);
+    familya_check_improve(ch, victim);
 
     /*
      * Figure out the type of damage message.
@@ -1144,7 +1136,7 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary)
 					}
 					else
 					{
-						dam = int(dam * 3 / 2);
+						dam = (int)(dam * 3 / 2);
 					}
 					printf_to_char(ch,"{gBirden %s ırkına ilişkin bilgini kullanabileceğin bir an yakalıyorsun.{x\n\r",race_table[victim->race].name[1]);
 				}
@@ -1757,7 +1749,7 @@ bool damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt, int dam_type, bo
 				}
 				else if(ch->level - victim->level < 10)
 				{
-					ch->hit += int(ch->level / 3);
+					ch->hit += (int)(ch->level / 3);
 					ch->hit = UMIN(ch->hit,ch->max_hit);
 					send_to_char("Emdiğin kanla şifa buluyorsun!\n\r",ch);
 				}
@@ -2420,11 +2412,6 @@ void make_corpse( CHAR_DATA *ch )
 }
 
 
-void death_cry( CHAR_DATA *ch )
-{
-	death_cry_org( ch, -1 );
-}
-
 /*
 * Improved Death_cry contributed by Diavolo.
 */
@@ -2452,6 +2439,7 @@ void death_cry_org( CHAR_DATA *ch, int part )
 				msg  = "$s kanı zırhına sıçrıyor.";
 				break;
 			}
+			FALLTHROUGH;
 		case  2:
 			if (IS_SET(ch->parts,PART_GUTS))
 			{
@@ -2967,7 +2955,7 @@ int xp_compute(CHAR_DATA *gch, CHAR_DATA *victim, int total_levels,int members)
 	if(gch->pcdata->discord_id[0] == '\0')
 	{
 		printf_to_char( gch , "{CDiscord ID girmediğin için kazandığın TP azalıyor.{x\n\r" );
-		xp = int((float)xp / (float)3);
+		xp = (int)((float)xp / (float)3);
 	}
 
 	return xp;

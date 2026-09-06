@@ -47,12 +47,6 @@
 *	By using this code, you have agreed to follow the terms of the	   *
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
-
-#if defined(macintosh)
-#include <types.h>
-#else
-#include <sys/types.h>
-#endif
 #include <stdio.h>
 #include "merc.h"
 #include "recycle.h"
@@ -1569,10 +1563,10 @@ void do_assassinate( CHAR_DATA *ch, char *argument )
 
   WAIT_STATE( ch, skill_table[gsn_assassinate].beats );
 
-  chance += int( get_curr_stat( ch , STAT_STR ) / 4 );
-  chance += int( get_curr_stat( ch , STAT_DEX ) / 2 );
-  chance += int( ch->pcdata->familya[victim->race] / 25 ) ;
-  chance += int( ( get_skill( ch , gsn_assassinate ) - 75 ) / 2 ) ;
+  chance += (int)( get_curr_stat( ch , STAT_STR ) / 4 );
+  chance += (int)( get_curr_stat( ch , STAT_DEX ) / 2 );
+  chance += (int)( ch->pcdata->familya[victim->race] / 25 ) ;
+  chance += (int)( ( get_skill( ch , gsn_assassinate ) - 75 ) / 2 ) ;
   
 	// en azindan bir eli dolu
 	if ( get_eq_char(ch, WEAR_LEFT) != NULL
@@ -1635,10 +1629,10 @@ void do_caltraps(CHAR_DATA *ch, char *argument)
   if (is_safe(ch,victim))
     return;
 
-    act("$S bacaklarına bir avuç çivi fırlatıyorsun.",
-        ch,NULL,victim,TO_CHAR);
-    act("$n bacaklarına bir avuç çivi fırlatıyor!",
-      ch,NULL,victim,TO_VICT);
+  act("$S bacaklarına bir avuç çivi fırlatıyorsun.",
+      ch,NULL,victim,TO_CHAR);
+  act("$n bacaklarına bir avuç çivi fırlatıyor!",
+    ch,NULL,victim,TO_VICT);
 
   WAIT_STATE(ch,skill_table[gsn_caltraps].beats);
 
@@ -3140,8 +3134,8 @@ void do_shield( CHAR_DATA *ch, char *argument )
     /* modifiers */
 
     /* skill */
-   chance = int(chance * ch_weapon / 200);
-   chance = int(chance * 100 / vict_shield);
+   chance = (int)(chance * ch_weapon / 200);
+   chance = (int)(chance * 100 / vict_shield);
 
     /* dex vs. strength */
     chance += get_curr_stat(ch,STAT_DEX);
@@ -4066,11 +4060,11 @@ void do_claw( CHAR_DATA *ch, char *argument )
     int chance;
     int damage_claw;
 
-  if (ch_skill_nok(ch,gsn_claw) )
-      return;
+    if (ch_skill_nok(ch,gsn_claw) )
+        return;
 
-  if (!cabal_ok(ch,gsn_claw))
-    return;
+    if (!cabal_ok(ch,gsn_claw))
+        return;
 
     argument = one_argument(argument,arg);
 

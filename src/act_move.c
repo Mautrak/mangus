@@ -47,14 +47,6 @@
 *	By using this code, you have agreed to follow the terms of the	   *
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
-
-#if defined(macintosh)
-#include <types.h>
-#include <time.h>
-#else
-#include <sys/types.h>
-#include <sys/time.h>
-#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1238,10 +1230,10 @@ void do_pick( CHAR_DATA *ch, char *argument )
 
   WAIT_STATE( ch, skill_table[gsn_pick_lock].beats );
 
-  chance += int( get_curr_stat( ch , STAT_INT ) / 3 );
-  chance += int( get_curr_stat( ch , STAT_WIS ) / 3 );
-  chance += int( get_curr_stat( ch , STAT_DEX ) / 3 );
-  chance += int( ( get_skill( ch , gsn_pick_lock ) - 75 ) / 2 ) ;
+  chance += (int)( get_curr_stat( ch , STAT_INT ) / 3 );
+  chance += (int)( get_curr_stat( ch , STAT_WIS ) / 3 );
+  chance += (int)( get_curr_stat( ch , STAT_DEX ) / 3 );
+  chance += (int)( ( get_skill( ch , gsn_pick_lock ) - 75 ) / 2 ) ;
 
   obj_eldiven = get_eq_char( ch, WEAR_HANDS );
 
@@ -2113,12 +2105,12 @@ void do_recall( CHAR_DATA *ch, char *argument )
   if ( ch->in_room == location )
     return;
 
-    if ( ( IS_SET(ch->in_room->room_flags, ROOM_NO_RECALL) || IS_AFFECTED(ch, AFF_CURSE) ||
-        IS_RAFFECTED(ch->in_room, AFF_ROOM_CURSE) ) && ch->level >= KIDEMLI_OYUNCU_SEVIYESI )
-    {
-      send_to_char( "Tanrılar seni terketti.\n\r", ch );
-      return;
-    }
+  if ( ( IS_SET(ch->in_room->room_flags, ROOM_NO_RECALL) || IS_AFFECTED(ch, AFF_CURSE) ||
+      IS_RAFFECTED(ch->in_room, AFF_ROOM_CURSE) ) && ch->level >= KIDEMLI_OYUNCU_SEVIYESI )
+  {
+    send_to_char( "Tanrılar seni terketti.\n\r", ch );
+    return;
+  }
 
     if ( ( victim = ch->fighting ) != NULL )
     {
@@ -2528,7 +2520,7 @@ void do_evolve_bear( CHAR_DATA *ch, char *argument )
     af.duration  = duration;
     af.location  = APPLY_NONE;
     af.modifier  = 0;
-    af.bitvector = PLR_BEAR;
+    af.bitvector = (int) PLR_BEAR;
     affect_to_char( ch, &af );
 
     send_to_char( "Ayılaştığını hissediyorsun.\n\r", ch );
@@ -3004,26 +2996,6 @@ void do_vanish( CHAR_DATA *ch, char *argument )
   return;
 }
 
-void do_detect_sneak( CHAR_DATA *ch, char *argument)
-{
-    AFFECT_DATA af;
-
-    if ( is_affected(ch, gsn_detect_sneak) )
-    {
-      send_to_char("Zaten süzülenleri saptayabiliyorsun.\n\r",ch);
-    }
-    af.where	 = TO_DETECTS;
-    af.type      = gsn_detect_sneak;
-    af.level     = ch->level;
-    af.duration  = ch->level / 10;
-    af.location  = APPLY_NONE;
-    af.modifier  = 0;
-    af.bitvector = DETECT_SNEAK;
-    affect_to_char( ch, &af );
-    send_to_char("Artık süzülenleri saptıyorsun.\n\r", ch );
-    return;
-}
-
 
 void do_fade( CHAR_DATA *ch, char *argument )
 {
@@ -3451,7 +3423,7 @@ void do_escape( CHAR_DATA *ch, char *argument )
     {
         if ( ch->position == POS_FIGHTING )
             ch->position = POS_STANDING;
-            send_to_char("Kimseyle dövüşmüyorsun.\n\r", ch );
+        send_to_char("Kimseyle dövüşmüyorsun.\n\r", ch );
 	return;
     }
 
@@ -4019,7 +3991,7 @@ char *find_way(CHAR_DATA *ch,ROOM_INDEX_DATA *rstart, ROOM_INDEX_DATA *rend)
  snprintf(buf, sizeof(buf),"Find: ");
  for(i=0; i<65535; i++)
  {
- if ( (rend == rstart))
+ if ( rend == rstart )
 	 return buf;
   if ( (direction = find_path(rstart->vnum,rend->vnum,ch,-40000,0)) == -1)
 	{

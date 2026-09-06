@@ -48,39 +48,26 @@
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
 
-/*
- * Accommodate old non-Ansi compilers.
- */
-#if defined(TRADITIONAL)
-#define const
-#define args( list )			( )
-#define DECLARE_DO_FUN( fun )		void fun( )
-#define DECLARE_SPEC_FUN( fun )		bool fun( )
-#define DECLARE_SPELL_FUN( fun )	void fun( )
+#ifndef MERC_H
+#define MERC_H
 
-#define DECLARE_MPROG_FUN_BRIBE( fun ) void fun( )
-#define DECLARE_MPROG_FUN_ENTRY( fun ) void fun( )
-#define DECLARE_MPROG_FUN_GREET( fun ) void fun( )
-#define DECLARE_MPROG_FUN_GIVE( fun ) void fun( )
-#define DECLARE_MPROG_FUN_FIGHT( fun ) void fun( )
-#define DECLARE_MPROG_FUN_DEATH( fun ) bool fun( )
-#define DECLARE_MPROG_FUN_AREA( fun ) void fun( )
-#define DECLARE_MPROG_FUN_SPEECH( fun ) void fun( )
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <time.h>
+#include "platform.h"
 
-#define DECLARE_OPROG_FUN_WEAR(fun) void fun()
-#define DECLARE_OPROG_FUN_REMOVE(fun) void fun()
-#define DECLARE_OPROG_FUN_GET(fun) void fun()
-#define DECLARE_OPROG_FUN_DROP(fun) void fun()
-#define DECLARE_OPROG_FUN_SAC(fun) bool fun()
-#define DECLARE_OPROG_FUN_ENTRY(fun) void fun()
-#define DECLARE_OPROG_FUN_GIVE(fun) void fun()
-#define DECLARE_OPROG_FUN_GREET(fun) void fun()
-#define DECLARE_OPROG_FUN_FIGHT(fun) void fun()
-#define DECLARE_OPROG_FUN_DEATH(fun) bool fun()
-#define DECLARE_OPROG_FUN_SPEECH(fun) void fun()
-#define DECLARE_OPROG_FUN_AREA(fun) void fun()
-#else
-#define args( list )			list
+/* switch içinde bilinçli düşüş (gcc/clang -Wimplicit-fallthrough için). */
+#if defined(__has_attribute)
+#  if __has_attribute(fallthrough)
+#    define FALLTHROUGH __attribute__((fallthrough))
+#  endif
+#endif
+#ifndef FALLTHROUGH
+#  define FALLTHROUGH ((void) 0)
+#endif
+
 #define DECLARE_DO_FUN( fun )		DO_FUN    fun
 #define DECLARE_SPEC_FUN( fun )		SPEC_FUN  fun
 #define DECLARE_SPELL_FUN( fun )	SPELL_FUN fun
@@ -106,7 +93,6 @@
 #define DECLARE_OPROG_FUN_DEATH(fun)	OPROG_FUN_DEATH fun
 #define DECLARE_OPROG_FUN_SPEECH(fun)	OPROG_FUN_SPEECH fun
 #define DECLARE_OPROG_FUN_AREA(fun)	OPROG_FUN_AREA fun
-#endif
 
 
 /*
@@ -121,16 +107,7 @@
 #define TRUE	 1
 #endif
 
-#if	defined(_AIX)
-#if	!defined(const)
-#define const
-#endif
-typedef int				sh_int;
-typedef int				bool;
-#define unix
-#else
-typedef short   int			sh_int;
-#endif
+typedef short int			sh_int;
 
 /* ea */
 #define MSL MAX_STRING_LENGTH
@@ -615,7 +592,7 @@ struct	shop_data
 struct	class_type
 {
     const char *	name[2];			/* the full name of the class */
-    const char 	who_name	[4];	/* Three-letter name for 'who'	*/
+    const char	who_name[8];	/* Three-letter name for 'who'	*/
     sh_int	attr_prime;		/* Prime attribute		*/
     sh_int	weapon;			/* First weapon			*/
     sh_int	guild[MAX_GUILD];	/* Vnum of guild rooms		*/
@@ -2782,6 +2759,7 @@ extern sh_int  gsn_mental_knife;
 
 #define RACE(ch)		(ch->race)
 #define ORG_RACE(ch)		(IS_NPC(ch) ? ch->pIndexData->race : ch->pcdata->race)
+#define SET_ORG_RACE(ch, r)	do { if (IS_NPC(ch)) (ch)->pIndexData->race = (r); else (ch)->pcdata->race = (r); } while (0)
 
 #define IS_GOOD(ch)		(ch->alignment >= 350)
 #define IS_EVIL(ch)		(ch->alignment <= -350)
@@ -2876,7 +2854,6 @@ extern	const	struct	cha_app_type	cha_app		[26];
 
 extern  const   struct  language_type   language_table     [MAX_LANGUAGE];
 extern	const	struct	translation_type translation_table	[];
-extern	const	struct	cmd_type	cmd_table	[];
 extern	const	struct	class_type	class_table	[MAX_CLASS];
 extern	const	struct	weapon_type	weapon_table	[];
 extern  const   struct  item_type	item_table	[];
@@ -2913,13 +2890,13 @@ extern		OBJ_DATA	  *	object_list;
 extern		AUCTION_DATA	  *	auction;
 extern		ROOM_INDEX_DATA   *	top_affected_room;
 
-extern		char			bug_buf		[];
+extern	char			bug_buf		[2*MAX_INPUT_LENGTH];
 extern		time_t			current_time;
 extern		time_t			boot_time;
 extern		bool			fLogAll;
 extern		FILE *			fpReserve;
 extern		KILL_DATA		kill_table	[];
-extern		char			log_buf		[];
+extern	char			log_buf		[2*MAX_INPUT_LENGTH];
 extern		TIME_INFO_DATA		time_info;
 extern		WEATHER_DATA		weather_info;
 extern          long                    total_levels;
@@ -2932,120 +2909,21 @@ extern		int     ikikat_tp;
 extern		int     ikikat_gp;
 
 /*
- * OS-dependent declarations.
- * These are all very standard library functions,
- *   but some systems have incomplete or non-ansi header files.
- */
-#if	defined(_AIX)
-char *	crypt		( const char *key, const char *salt );
-#endif
-
-#if	defined(apollo)
-int	atoi		( const char *string );
-void *	calloc		( unsigned nelem, size_t size );
-char *	crypt		( const char *key, const char *salt );
-#endif
-
-#if	defined(hpux)
-char *	crypt		( const char *key, const char *salt );
-#endif
-
-#if	defined(macintosh)
-#define NOCRYPT
-#if	defined(unix)
-#undef	unix
-#endif
-#endif
-
-#if	defined(MIPS_OS)
-char *	crypt		( const char *key, const char *salt );
-#endif
-
-#if	defined(MSDOS)
-#define NOCRYPT
-#if	defined(unix)
-#undef	unix
-#endif
-#endif
-
-#if	defined(NeXT)
-char *	crypt		( const char *key, const char *salt );
-#endif
-
-#if	defined(sequent)
-char *	crypt		( const char *key, const char *salt );
-int	fclose		( FILE *stream );
-int	fprintf		( FILE *stream, const char *format, ... );
-int	fread		( void *ptr, int size, int n, FILE *stream );
-int	fseek		( FILE *stream, long offset, int ptrname );
-void	perror		( const char *s );
-int	ungetc		( int c, FILE *stream );
-#endif
-
-#if	defined(sun)
-char *	crypt		( const char *key, const char *salt );
-int	fclose		( FILE *stream );
-int	fprintf		( FILE *stream, const char *format, ... );
-#if	defined(SYSV)
-size_t	fread		( void *ptr, size_t size, size_t n,
-			    FILE *stream);
-#elif !defined(__SVR4)
-int	fread		( void *ptr, int size, int n, FILE *stream );
-#endif
-int	fseek		( FILE *stream, long offset, int ptrname );
-void	perror		( const char *s );
-int	ungetc		( int c, FILE *stream );
-#endif
-
-#if	defined(ultrix)
-char *	crypt		( const char *key, const char *salt );
-#endif
-
-
-
-/*
- * The crypt(3) function is not available on some operating systems.
- * In particular, the U.S. Government prohibits its export from the
- *   United States to foreign countries.
- * Turn on NOCRYPT to keep passwords in plain text.
- */
-#if	defined(NOCRYPT)
-#define crypt(s1, s2)	(s1)
-#endif
-
-
-
-/*
  * Data files used by the server.
  *
  * AREA_LIST contains a list of areas to boot.
  * All files are read in completely at bootup.
  * Most output files (bug, idea, typo, shutdown) are append-only.
  *
- * The NULL_FILE is held open so that we have a stream handle in reserve,
- *   so players can go ahead and telnet to all the other descriptors.
- * Then we close it whenever we need to open a file (e.g. a save file).
+ * The NULL_FILE (platform.h) is held open so that we have a stream handle
+ *   in reserve, so players can go ahead and telnet to all the other
+ *   descriptors.  We close it whenever we need to open a file.
  */
-#if defined(macintosh)
-#define PLAYER_DIR	""			/* Player files	*/
-#define TEMP_FILE	"romtmp"
-#define NULL_FILE	"proto.are"		/* To reserve one stream */
-#endif
-
-#if defined(MSDOS)
-#define PLAYER_DIR	""			/* Player files */
-#define TEMP_FILE	"romtmp"
-#define NULL_FILE	"nul"			/* To reserve one stream */
-#endif
-
-#if defined(unix)
 #define IP_DIR		"../log/ip/"
 #define PLAYER_DIR      "../player/"        	/* Player files */
 #define REMORT_DIR      "../remort/"  		/* list of remorted heros */
 #define GOD_DIR         "../gods/"  		/* list of gods */
 #define TEMP_FILE	"../player/romtmp"
-#define NULL_FILE	"/dev/null"		/* To reserve one stream */
-#endif
 
 #define AREA_LIST       "area.lst"  /* List of areas*/
 #define BUG_FILE        "bugs.txt" /* For 'bug' and bug()*/
@@ -3133,8 +3011,6 @@ void    dump_to_scr	( char *text );
  */
 int	colour		( char type, CHAR_DATA *ch, char *string );
 void	colourconv	( char *buffer, const char *txt, CHAR_DATA *ch );
-void	send_to_char_bw	( const char *txt, CHAR_DATA *ch );
-void	page_to_char_bw	( const char *txt, CHAR_DATA *ch );
 	//act_color: format1 for english, format2 for turkish
 void    dump_to_scr	( char *text );
 void	init_signals	();
@@ -3159,7 +3035,6 @@ OD *	create_object	( OBJ_INDEX_DATA *pObjIndex, int level );
 OD *    create_object_nocount ( OBJ_INDEX_DATA *pObjIndex, int level );
 OD *    create_object_org (OBJ_INDEX_DATA *pObjIndex,int level,bool Count);
 void	clone_object	 ( OBJ_DATA *parent, OBJ_DATA *clone );
-void	clear_char	( CHAR_DATA *ch );
 char *	get_extra_descr	( const char *name, EXTRA_DESCR_DATA *ed );
 MID *	get_mob_index	( int vnum );
 OID *	get_obj_index	( int vnum );
@@ -3186,9 +3061,9 @@ int	interpolate	( int level, int value_00, int value_32 );
 void	smash_tilde	( char *str );
 bool	str_cmp		( const char *astr, const char *bstr );
 bool	str_prefix	( const char *astr, const char *bstr );
-bool	str_infix	( const char *astr, const char *bstr );
 bool	str_suffix	( const char *astr, const char *bstr );
 char *	capitalize	( const char *str );
+char *	first_case	( char *str, bool upper );
 void	append_file	( CHAR_DATA *ch, char *file, char *str );
 void	bug		( const char *str, int param );
 void	log_string	( const char *str );
@@ -3204,7 +3079,6 @@ void	sand_effect	(void *vo, int level, int dam, int target);
 void	scream_effect	(void *vo, int level, int dam, int target);
 
 /* ek.c */
-char *	ekler (CHAR_DATA *to, CHAR_DATA *ch, char *format);
 
 /* fight.c */
 bool 	is_safe		(CHAR_DATA *ch, CHAR_DATA *victim );
@@ -3377,7 +3251,6 @@ void 	substitute_alias (DESCRIPTOR_DATA *d, char *input);
 
 /* magic.c */
 int	find_spell ( CHAR_DATA *ch, const char *name);
-int 	mana_cost 	(CHAR_DATA *ch, int min_mana, int level);
 int	skill_lookup	( const char *name );
 int	slot_lookup	( int slot );
 bool	saves_spell	( int level, CHAR_DATA *victim, int dam_type );
@@ -3463,3 +3336,5 @@ void mprog_set(MOB_INDEX_DATA *, const char *, const char *);
 #undef	RID
 #undef	SF
 #undef  AD
+
+#endif /* MERC_H */

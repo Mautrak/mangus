@@ -53,12 +53,6 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <time.h>
-#if defined(macintosh)
-#include <types.h>
-#else
-#include <sys/types.h>
-#include <sys/time.h>
-#endif
 
 #include "merc.h"
 #include "db.h"
@@ -247,8 +241,8 @@ void load_new_mobiles( FILE *fp )
     if (pMobIndex->level <= 0)
       bug( "Load_new_mobiles: Level %d found.", pMobIndex->level );
 
-		pMobIndex->long_descr[0]        = UPPER(pMobIndex->long_descr[0]);
-        pMobIndex->description[0]       = UPPER(pMobIndex->description[0]);
+		pMobIndex->long_descr        = first_case( pMobIndex->long_descr, TRUE );
+        pMobIndex->description       = first_case( pMobIndex->description, TRUE );
 
 		pMobIndex->practicer			= 0;
 		pMobIndex->detection			= race_table[pMobIndex->race].det;

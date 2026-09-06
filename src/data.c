@@ -26,11 +26,12 @@ extern int ikikat_gp;
 void ud_data_write(void)
 {
 	FILE *data;
-	int suan;
 
 	cevrimici_oyuncu_sayisi();
-	system("rm -f ../data/ud_data");
-	data=fopen("../data/ud_data","a");
+	remove("../data/ud_data");
+	data = fopen("../data/ud_data","a");
+	if ( data == NULL )
+		return;
 	fprintf(data,"* Cevrimici oyuncu rekoru\n");
 	fprintf(data,"Encokcevrimici %d\n",max_on_so_far);
 	fprintf(data,"IkikatTP %d\n",ikikat_tp);
@@ -122,28 +123,16 @@ void write_channel_log(CHAR_DATA *ch, CHAR_DATA *vc, int kanal, char *argument)
 
 	}
 
-	data=fopen(filename,"a");
+	data = fopen(filename,"a");
+	if ( data == NULL )
+		return;
 	snprintf(buf, sizeof(buf),"%02d/%02d/%02d %02d:%02d:%02d, Oda:%6d, Char: %10s, Victim: %10s, Log: %s\n",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec,ch->in_room->vnum,ch->name,(vc != NULL)?vc->name:"None",argument);
-	fprintf(data,buf);
+	fprintf(data,"%s",buf);
 	fclose(data);
 	return;
 }
 
-char *	const	month_name	[] =
-{
-	"Albars",
-	"Kadimler",
-    "Büyük Acı",
-	"Zeytin",
-	"Yılan",
-	"Yelbüke",
-	"Pusu",
-	"Savaş",
-	"Albastı",
-	"Gölge",
-	"Kara Ölüm",
-	"Alacakaranlık",
-};
+extern char * const month_name[];
 
 void write_event_log(char *argument)
 {
@@ -158,12 +147,14 @@ void write_event_log(char *argument)
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
 
-	data=fopen("../log/events/events","a");
+	data = fopen("../log/events/events","a");
+	if ( data == NULL )
+		return;
 
 	snprintf(buf, sizeof(buf),"%02d/%02d/%02d %02d:%02d:%02d|%ld|%s|%ld|%ld|%s\n",\
 				tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, \
 				time_info.year,month_name[time_info.month-1],time_info.day, time_info.hour, argument);
-	fprintf(data,(char *)buf);
+	fprintf(data,"%s",buf);
 	fclose(data);
 	return;
 

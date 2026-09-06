@@ -9,14 +9,6 @@
  * Discord : https://discord.gg/kXyZzv                                     *
  *                                                                         *
  ***************************************************************************/
-
-#if defined(macintosh)
-#include <types.h>
-#include <time.h>
-#else
-#include <sys/types.h>
-#include <sys/time.h>
-#endif
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -44,11 +36,11 @@ int obj_random_paf_modifier(int location, int level)
 	}
 	if (location == APPLY_MANA || location == APPLY_HIT || location == APPLY_MOVE)
 	{
-		return number_range( UMAX(1,int((level+5)*3/2)) , UMAX(1,int((level+5)*5)) );
+		return number_range( UMAX(1,(int)((level+5)*3/2)) , UMAX(1,(int)((level+5)*5)) );
 	}
 	if (location == APPLY_HITROLL || location == APPLY_DAMROLL)
 	{
-		return number_range( UMAX(1,int((level+4)/5)) , UMAX(1,int((level+3)/2)) );
+		return number_range( UMAX(1,(int)((level+4)/5)) , UMAX(1,(int)((level+3)/2)) );
 	}
 	return 1;
 }

@@ -14,12 +14,6 @@
  *  benefiting.  We hope that you share your changes too.  What goes       *
  *  around, comes around.                                                  *
  ***************************************************************************/
-
-#if defined(macintosh)
-#include <types.h>
-#else
-#include <sys/types.h>
-#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -97,7 +91,7 @@ void checkexits (ROOM_INDEX_DATA *room, AREA_DATA *pArea, char* buffer)
 			to_room = exit->u1.to_room;
 		
 		if (to_room)  /* there is something on the other side */
-
+		{
 			if ( (room->area == pArea) && (to_room->area != pArea) )
 			{ /* an exit from our area to another area */
 			  /* check first if it is a two-way exit */
@@ -125,6 +119,7 @@ void checkexits (ROOM_INDEX_DATA *room, AREA_DATA *pArea, char* buffer)
 				}
 				
 			} /* if room->area */
+		}
 			
 	} /* for */
 	

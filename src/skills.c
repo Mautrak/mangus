@@ -47,18 +47,11 @@
 *	By using this code, you have agreed to follow the terms of the	   *
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
-
-#if defined(macintosh)
-#include <types.h>
-#include <time.h>
-#else
-#include <sys/types.h>
-#include <sys/time.h>
-#endif
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include "merc.h"
+#include "utf8.h"
 #include "magic.h"
 
 /* command procedures needed */
@@ -159,7 +152,7 @@ void do_spells(CHAR_DATA *ch, char *argument)
 
     for (sn = 0; sn < MAX_SKILL; sn++)
     {
-      if (skill_table[sn].name == NULL)
+      if (skill_table[sn].name[0] == NULL)
         break;
 
       if (skill_table[sn].skill_level[ch->iclass] < LEVEL_HERO &&
@@ -170,12 +163,12 @@ void do_spells(CHAR_DATA *ch, char *argument)
 	found = TRUE;
 	lev = skill_table[sn].skill_level[ch->iclass];
 	if (ch->level < lev)
-	  snprintf(buf, sizeof(buf),"%-18s  n/a      ", skill_table[sn].name[1]);
+	  snprintf(buf, sizeof(buf),"%-*s  n/a      ", utf8_width(skill_table[sn].name[1], 18), skill_table[sn].name[1]);
 	else
 	{
 	  mana = UMAX(skill_table[sn].min_mana,
 		      100/(2 + ch->level - lev));
-	  snprintf(buf, sizeof(buf),"%-18s  %3d mana  ",skill_table[sn].name[1],mana);
+	  snprintf(buf, sizeof(buf),"%-*s  %3d mana  ",utf8_width(skill_table[sn].name[1], 18), skill_table[sn].name[1],mana);
 	}
 
 	if (spell_list[lev][0] == '\0')
@@ -224,7 +217,7 @@ void do_skills(CHAR_DATA *ch, char *argument)
 
     for (sn = 0; sn < MAX_SKILL; sn++)
     {
-      if (skill_table[sn].name == NULL )
+      if (skill_table[sn].name[0] == NULL )
         break;
 
 
@@ -236,9 +229,9 @@ void do_skills(CHAR_DATA *ch, char *argument)
         found = TRUE;
         lev = skill_table[sn].skill_level[ch->iclass];
         if (ch->level < lev)
-          snprintf(buf, sizeof(buf),"%-18s n/a      ", skill_table[sn].name[1]);
+          snprintf(buf, sizeof(buf),"%-*s n/a      ", utf8_width(skill_table[sn].name[1], 18), skill_table[sn].name[1]);
         else
-          snprintf(buf, sizeof(buf),"%-18s %3d%%      ",skill_table[sn].name[1],
+          snprintf(buf, sizeof(buf),"%-*s %3d%%      ",utf8_width(skill_table[sn].name[1], 18), skill_table[sn].name[1],
 					 ch->pcdata->learned[sn]);
 
         if (skill_list[lev][0] == '\0')
@@ -417,7 +410,7 @@ void do_slist(CHAR_DATA *ch, char *argument)
 
     for (sn = 0; sn < MAX_SKILL; sn++)
     {
-      if (skill_table[sn].name == NULL )
+      if (skill_table[sn].name[0] == NULL )
         break;
 
 
@@ -427,7 +420,7 @@ void do_slist(CHAR_DATA *ch, char *argument)
       {
         found = TRUE;
         lev = skill_table[sn].skill_level[iclass];
-        snprintf(buf, sizeof(buf),"%-18s          ",skill_table[sn].name[1]);
+        snprintf(buf, sizeof(buf),"%-*s          ",utf8_width(skill_table[sn].name[1], 18), skill_table[sn].name[1]);
         if (skill_list[lev][0] == '\0')
           sprintf(skill_list[lev],"\n\rrSeviye %2d: %s",lev,buf);
         else /* append */
@@ -462,7 +455,7 @@ int group_lookup (const char *name)
 
    for ( gr = 0; prac_table[gr].sh_name != NULL; gr++)
    {
-	if (LOWER(name[0]) == LOWER(prac_table[gr].sh_name[0])
+	if (utf8_first_eq(name, prac_table[gr].sh_name)
 	&&  !str_prefix( name,prac_table[gr].sh_name))
 	    return gr;
    }
@@ -474,6 +467,7 @@ void do_glist( CHAR_DATA *ch , char *argument)
 {
  char arg[MAX_INPUT_LENGTH];
  char buf[MAX_STRING_LENGTH];
+  char line[MAX_STRING_LENGTH];
  int group,count;
 
  one_argument(argument,arg);
@@ -501,11 +495,12 @@ void do_glist( CHAR_DATA *ch , char *argument)
      continue;
    if ( buf[0] != '\0')
     {
-     snprintf(buf, sizeof(buf), "%-18s%-18s\n\r", buf,skill_table[count].name[1]);
-     send_to_char(buf,ch);
+     snprintf(line, sizeof(line), "%-*s%-*s\n\r", utf8_width(buf, 18), buf,
+	      utf8_width(skill_table[count].name[1], 18), skill_table[count].name[1]);
+     send_to_char(line,ch);
      buf[0] = '\0';
     }
-   else snprintf(buf, sizeof(buf), "%-18s",skill_table[count].name[1]);
+   else snprintf(buf, sizeof(buf), "%s",skill_table[count].name[1]);
   }
 
 }
@@ -549,7 +544,7 @@ void do_learn( CHAR_DATA *ch, char *argument )
     if ( IS_NPC(ch) )
 	return;
 
-	if ( !IS_AWAKE(ch) )
+    if ( !IS_AWAKE(ch) )
 	{
     send_to_char("Rüyalarında mı?\n\r", ch);
 	    return;

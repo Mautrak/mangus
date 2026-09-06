@@ -47,18 +47,12 @@
 *	By using this code, you have agreed to follow the terms of the	   *
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
-
-#if defined(macintosh)
-#include <types.h>
-#include <time.h>
-#else
-#include <sys/types.h>
-#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include "merc.h"
+#include "utf8.h"
 #include "magic.h"
 
 void	say_spell	( CHAR_DATA *ch, int sn );
@@ -202,7 +196,7 @@ SPEC_FUN *spec_lookup( char *name )
 
    for ( i = 0; spec_table[i].name != NULL; i++)
    {
-        if (LOWER(name[0]) == LOWER(spec_table[i].name[0])
+        if (utf8_first_eq(name, spec_table[i].name)
         &&  !str_prefix( name,spec_table[i].name))
             return spec_table[i].function;
    }

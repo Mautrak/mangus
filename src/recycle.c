@@ -47,14 +47,6 @@
 *	By using this code, you have agreed to follow the terms of the	   *
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
-
-#if defined(macintosh)
-#include <types.h>
-#include <time.h>
-#else
-#include <sys/types.h>
-#include <sys/time.h>
-#endif
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -432,42 +424,10 @@ long get_mob_id(void)
     return last_mob_id;
 }
 
-MEM_DATA *mem_data_free;
 
 /* procedures and constants needed for buffering */
 
 BUFFER *buf_free;
-
-MEM_DATA *new_mem_data(void)
-{
-    MEM_DATA *memory;
-
-    if (mem_data_free == NULL)
-	memory = (MEM_DATA *)alloc_mem(sizeof(*memory));
-    else
-    {
-	memory = mem_data_free;
-	mem_data_free = mem_data_free->next;
-    }
-
-    memory->next = NULL;
-    memory->id = 0;
-    memory->reaction = 0;
-    memory->when = 0;
-    VALIDATE(memory);
-
-    return memory;
-}
-
-void free_mem_data(MEM_DATA *memory)
-{
-    if (!IS_VALID(memory))
-	return;
-
-    memory->next = mem_data_free;
-    mem_data_free = memory;
-    INVALIDATE(memory);
-}
 
 
 
@@ -510,33 +470,6 @@ BUFFER *new_buf()
 
     buffer->string	= (char *)alloc_mem(buffer->size);
     buffer->string[0]	= '\0';
-    VALIDATE(buffer);
-
-    return buffer;
-}
-
-BUFFER *new_buf_size(int size)
-{
-    BUFFER *buffer;
-
-    if (buf_free == NULL)
-        buffer = (BUFFER *)alloc_perm(sizeof(*buffer));
-    else
-    {
-        buffer = buf_free;
-        buf_free = buf_free->next;
-    }
-
-    buffer->next        = NULL;
-    buffer->state       = BUFFER_SAFE;
-    buffer->size        = get_size(size);
-    if (buffer->size == -1)
-    {
-        bug("new_buf: buffer size %d too large.",size);
-        exit(1);
-    }
-    buffer->string      = (char *)alloc_mem(buffer->size);
-    buffer->string[0]   = '\0';
     VALIDATE(buffer);
 
     return buffer;

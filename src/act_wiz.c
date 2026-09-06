@@ -47,25 +47,18 @@
 *	By using this code, you have agreed to follow the terms of the	   *
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
-
-#if defined(macintosh)
-#include <types.h>
-#else
-#include <sys/types.h>
-#include <sys/time.h>
-#endif
 #include <time.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "merc.h"
+#include "utf8.h"
 #include "magic.h"
 #include "recycle.h"
 #include "tables.h"
 #include "lookup.h"
 
-int unlink(const char *pathname);
 
 /* command procedures needed */
 DECLARE_DO_FUN(do_rstat		);
@@ -120,12 +113,13 @@ void do_cabal_scan( CHAR_DATA *ch, char *argument )
     if (IS_IMMORTAL(ch) || ch->cabal == i)
 	show = 1;
     else show = 0;
-    snprintf(buf1, sizeof(buf1), " Cabal: %-11s, room %4d, item %4d, ptr: %-20s ",
-	cabal_table[i].short_name,
+    snprintf(buf1, sizeof(buf1), " Cabal: %-*s, room %4d, item %4d, ptr: %-*s ",
+	utf8_width(cabal_table[i].short_name, 11), cabal_table[i].short_name,
         cabal_table[i].room_vnum,
         cabal_table[i].obj_vnum,
-	cabal_table[i].obj_ptr != NULL ?
-	cabal_table[i].obj_ptr->short_descr : "(NULL)" );
+	utf8_width(cabal_table[i].obj_ptr != NULL ?
+	cabal_table[i].obj_ptr->short_descr : "(NULL)", 20), cabal_table[i].obj_ptr != NULL ?
+	cabal_table[i].obj_ptr->short_descr : "(NULL)");
     if ( cabal_table[i].obj_ptr!=NULL )
     {
 	for ( in_obj = cabal_table[i].obj_ptr;
@@ -417,12 +411,12 @@ void do_limited( CHAR_DATA *ch, char *argument )
       return;
     }
     nMatch = 0;
-    snprintf(buf, sizeof(buf), "%-35s [%5d]  Limit: %3d  Current: %3d\n\r",
-		   obj_index->short_descr,
+    snprintf(buf, sizeof(buf), "%-*s [%5d]  Limit: %3d  Current: %3d\n\r",
+		   utf8_width(obj_index->short_descr, 35), obj_index->short_descr,
 		   obj_index->vnum,
 	           obj_index->limit,
-		   obj_index->count );
-    buf[0] = UPPER( buf[0] );
+		   obj_index->count);
+    utf8_upper_first(buf, sizeof(buf));
     send_to_char( buf, ch );
     ingameCount = 0;
     for ( obj=object_list; obj != NULL; obj=obj->next )
@@ -430,11 +424,11 @@ void do_limited( CHAR_DATA *ch, char *argument )
             {
 	      ingameCount++;
 	      if ( obj->carried_by != NULL )
-		snprintf(buf, sizeof(buf), "Carried by %-30s\n\r", obj->carried_by->name);
+		snprintf(buf, sizeof(buf), "Carried by %-*s\n\r", utf8_width(obj->carried_by->name, 30), obj->carried_by->name);
 	      if ( obj->in_room != NULL )
-		snprintf(buf, sizeof(buf), "At %-20s [%d]\n\r", obj->in_room->name, obj->in_room->vnum);
+		snprintf(buf, sizeof(buf), "At %-*s [%d]\n\r", utf8_width(obj->in_room->name, 20), obj->in_room->name, obj->in_room->vnum);
 	      if ( obj->in_obj != NULL )
-		snprintf(buf, sizeof(buf), "In %-20s [%d] \n\r", obj->in_obj->short_descr, obj->in_obj->pIndexData->vnum);
+		snprintf(buf, sizeof(buf), "In %-*s [%d] \n\r", utf8_width(obj->in_obj->short_descr, 20), obj->in_obj->short_descr, obj->in_obj->pIndexData->vnum);
 	      send_to_char( buf, ch );
 	    }
 	    snprintf(buf, sizeof(buf), "  %d found in game. %d should be in pFiles.\n\r",
@@ -451,12 +445,12 @@ void do_limited( CHAR_DATA *ch, char *argument )
         nMatch++;
 	if ( obj_index->limit != -1 )  {
 	  lCount++;
-          snprintf(buf, sizeof(buf), "%-37s [%5d]  Limit: %3d  Current: %3d\n\r",
-		   obj_index->short_descr,
+          snprintf(buf, sizeof(buf), "%-*s [%5d]  Limit: %3d  Current: %3d\n\r",
+		   utf8_width(obj_index->short_descr, 37), obj_index->short_descr,
 		   obj_index->vnum,
 	           obj_index->limit,
-		   obj_index->count );
-	  buf[0] = UPPER( buf[0] );
+		   obj_index->count);
+	  utf8_upper_first(buf, sizeof(buf));
 	  strcat( output, buf );
 	}
       }
@@ -1205,7 +1199,6 @@ void do_goto( CHAR_DATA *ch, char *argument )
 {
     ROOM_INDEX_DATA *location;
     CHAR_DATA *rch;
-    int count = 0;
 
     if ( argument[0] == '\0' )
     {
@@ -1219,16 +1212,6 @@ void do_goto( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    count = 0;
-    for ( rch = location->people; rch != NULL; rch = rch->next_in_room )
-        count++;
-/*
-    if (!is_room_owner(ch,location) && room_is_private(location)
-    &&  (count > 1 || get_trust(ch) < MAX_LEVEL))
-    {
-	send_to_char( "That room is private right now.\n\r", ch );
-	return;
-    } */
 
     if ( ch->fighting != NULL )
 	stop_fighting( ch, TRUE );
@@ -2167,9 +2150,9 @@ void do_mstat( CHAR_DATA *ch, char *argument )
         strcat( buf, "\n\r" );
         send_to_char( buf, ch );
     }
-    snprintf(buf, sizeof(buf), "Last fought: %10s  Last fight time: %s",
-	victim->last_fought!=NULL?victim->last_fought->name:"none",
-	ctime( &(victim->last_fight_time) )     );
+    snprintf(buf, sizeof(buf), "Last fought: %*s  Last fight time: %s",
+	utf8_width(victim->last_fought!=NULL?victim->last_fought->name:"none", 10), victim->last_fought!=NULL?victim->last_fought->name:"none",
+	ctime( &(victim->last_fight_time) ));
     send_to_char( buf, ch );
     snprintf(buf, sizeof(buf), "In_mind: [%s] Hunting: [%s]\n\r",
 		victim->in_mind != NULL ? victim->in_mind : "none",
@@ -2359,7 +2342,7 @@ void do_owhere(CHAR_DATA *ch, char *argument )
 	else
             snprintf(buf, sizeof(buf), "%3d) %s is somewhere\n\r",number, obj->short_descr);
 
-        buf[0] = UPPER(buf[0]);
+        utf8_upper_first(buf, sizeof(buf));
         add_buf(buffer,buf);
 
         if (number >= max_found)
@@ -2424,11 +2407,11 @@ void do_mwhere( CHAR_DATA *ch, char *argument )
 	{
 	    found = TRUE;
 	    count++;
-	    snprintf(buf, sizeof(buf), "%3d) [%5d] %-28s [%5d] %s\n\r", count,
+	    snprintf(buf, sizeof(buf), "%3d) [%5d] %-*s [%5d] %s\n\r", count,
 		IS_NPC(victim) ? victim->pIndexData->vnum : 0,
-		IS_NPC(victim) ? victim->short_descr : victim->name,
+		utf8_width(IS_NPC(victim) ? victim->short_descr : victim->name, 28), IS_NPC(victim) ? victim->short_descr : victim->name,
 		victim->in_room->vnum,
-		victim->in_room->name );
+		victim->in_room->name);
 	    add_buf(buffer,buf);
 	}
     }
@@ -3496,7 +3479,7 @@ void do_slookup( CHAR_DATA *ch, char *argument )
     {
 	for ( sn = 0; sn < MAX_SKILL; sn++ )
 	{
-	    if ( skill_table[sn].name == NULL )
+	    if ( skill_table[sn].name[0] == NULL )
 		break;
 	    snprintf(buf, sizeof(buf), "Sn: %3d  Slot: %3d  Skill/spell: '%s'\n\r",
 		sn, skill_table[sn].slot, skill_table[sn].name[1] );
@@ -3629,7 +3612,7 @@ void do_sset( CHAR_DATA *ch, char *argument )
     {
 	for ( sn = 0; sn < MAX_SKILL; sn++ )
 	{
-	    if ( ( skill_table[sn].name != NULL )
+	    if ( ( skill_table[sn].name[0] != NULL )
 		&& ( (victim->cabal == skill_table[sn].cabal )
 		|| (skill_table[sn].cabal == CABAL_NONE) )
 		&& ( RACE_OK(victim,sn) )
@@ -4363,54 +4346,6 @@ void do_grant( CHAR_DATA *ch, char *argument )
     return;
 }
 
-void do_cecho( CHAR_DATA *ch, char *argument )
-{
-    DESCRIPTOR_DATA *d;
-    char buf[MAX_INPUT_LENGTH];
-    char color[MAX_INPUT_LENGTH];
-    bool bFound = FALSE;
-    int i;
-
-    if ( argument[0] == '\0' )
-    {
-	send_to_char( "Color echo what?\n\r", ch );
-	return;
-    }
-
-    argument = one_argument(argument, color);
-
-    for (i=0;color_table[i].name != NULL;i++) {
-      if (!str_cmp(color,color_table[i].name)) {
-	bFound = TRUE;
-	break;
-      }
-    }
-
-    if (!bFound) {
-      snprintf(buf, sizeof(buf),"Usage: cecho <color> <message>.\n\rChoose from one of these colors:\n\r");
-
-      for (i=0;color_table[i].name != NULL;i++) {
-           strcat(buf,color_table[i].name);
-           strcat(buf," ");
-      }
-      send_to_char(buf, ch);
-      return;
-    }
-
-
-    for ( d = descriptor_list; d; d = d->next )
-    {
-	if ( d->connected == CON_PLAYING )
-	{
-	    if (get_trust(d->character) >= get_trust(ch))
-		send_to_char( "global> ",d->character);
-	    act_color("$C$t$c",d->character,argument,NULL,TO_CHAR,POS_RESTING,
-		      color_table[i].code);
-	}
-    }
-
-    return;
-}
 
 
 void do_advance( CHAR_DATA *ch, char *argument )
@@ -5029,18 +4964,18 @@ void do_mset( CHAR_DATA *ch, char *argument )
 	if (!IS_NPC(victim))
 	for ( sn = 0; sn < MAX_SKILL; sn++ )
 	{
-	    if ( ( skill_table[sn].name != NULL )
+	    if ( ( skill_table[sn].name[0] != NULL )
 		&& !RACE_OK(victim,sn)	)
 		victim->pcdata->learned[sn]	= 0;
 
-	    if ( ( skill_table[sn].name != NULL )
+	    if ( ( skill_table[sn].name[0] != NULL )
 		&&  (ORG_RACE(victim) == skill_table[sn].race )
 		)
 		victim->pcdata->learned[sn]	= 70;
 	}
 
 	if (ORG_RACE(victim) == RACE(victim)) RACE(victim) = race;
-	ORG_RACE(victim) = race;
+	if (IS_NPC(victim)) victim->pIndexData->race = race; else victim->pcdata->race = race;
 
 	victim->exp = victim->level * exp_per_level(victim, 0);
 	return;
@@ -5184,57 +5119,6 @@ void do_induct( CHAR_DATA *ch, char *argument)
     }
 }
 
-void do_desocket(CHAR_DATA *ch, char *argument)
-{
-  DESCRIPTOR_DATA *d, *d_next;
-  int socket;
-  char arg[MAX_INPUT_LENGTH];
-
-  one_argument(argument, arg);
-
-  if (!is_number(arg))
-
-    {
-      send_to_char("The argument must be a number.\n\r", ch);
-      return;
-    }
-
-  if (arg[0] == '\0')
-    {
-      send_to_char("Disconnect which socket?\n\r", ch);
-      return;
-    }
-
-  else
-    {
-      socket = atoi(arg);
-      for ( d = descriptor_list; d != NULL; d = d_next )
-	{
-	  d_next = d->next;
-	  if (d->descriptor == socket)
-	    {
-	      if (d->character == ch)
-		{
-		  send_to_char("It would be foolish to disconnect yourself.\n\r", ch);
-		  return;
-		}
-	      if (d->connected == CON_PLAYING)
-		{
-		  send_to_char("Why don't you just use disconnect?\n\r", ch);
-		  return;
-		}
-	      write_to_descriptor(d->descriptor,
-				  "You are being disconnected by an immortal.",
-				  0);
-	      close_socket(d);
-	      send_to_char("Done.\n\r", ch);
-	      return;
-	    }
-	}
-      send_to_char("No such socket is connected.\n\r", ch);
-      return;
-    }
-}
 
 void do_smite(CHAR_DATA *ch, char *argument)
 {
@@ -5291,9 +5175,9 @@ int i;
 
     for (area = area_first,i=0; area != NULL; area = area->next,i++) {
       if (area->count >= 5000000)
-        snprintf(buf2, sizeof(buf2),"%-20s overflow       ",area->name);
+        snprintf(buf2, sizeof(buf2),"%-*s overflow       ",utf8_width(area->name, 20), area->name);
       else
-        snprintf(buf2, sizeof(buf2),"%-20s %-8lu       ",area->name,area->count);
+        snprintf(buf2, sizeof(buf2),"%-*s %-8lu       ",utf8_width(area->name, 20), area->name,area->count);
       if ( i % 2 == 0)
 	strcat( buf, "\n\r" );
       strcat( buf, buf2 );

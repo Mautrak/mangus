@@ -52,8 +52,8 @@
 ***************************************************************************/
 
 /*
- * This file contains all of the OS-dependent stuff:
- *   startup, signals, BSD sockets for tcp/ip, i/o, timing.
+ * This file contains the network glue, the main loop and the login
+ * state machine (nanny).  OS-dependent socket code lives in platform.c.
  *
  * The data flow for input is:
  *    Game_loop ---> Read_from_descriptor ---> Read
@@ -61,17 +61,7 @@
  *
  * The data flow for output is:
  *    Game_loop ---> Process_Output ---> Write_to_descriptor -> Write
- *
- * The OS-dependent functions are Read_from_descriptor and Write_to_descriptor.
- * -- Furey  26 Jan 1993
  */
-
-#if defined(macintosh)
-#include <types.h>
-#else
-#include <sys/types.h>
-#include <sys/time.h>
-#endif
 
 #include <ctype.h>
 #include <errno.h>
@@ -80,15 +70,14 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdarg.h>
-#include <unistd.h>
 
 #include "merc.h"
 #include "interp.h"
 #include "recycle.h"
 #include "tables.h"
-
-#include <sys/wait.h>
-#include <stdlib.h>
+#include "password.h"
+#include "turkish.h"
+#include "utf8.h"
 
 /* command procedures needed */
 DECLARE_DO_FUN(do_help		);
@@ -99,234 +88,16 @@ DECLARE_DO_FUN(do_outfit	);
 bool cabal_area_check   (CHAR_DATA *ch);
 
 /*
- * Malloc debugging stuff.
+ * Telnet option negotiation strings.
  */
-#if defined(sun)
-#undef MALLOC_DEBUG
-#endif
-
-#if defined(MALLOC_DEBUG)
-#include <malloc.h>
-extern	int	malloc_debug	( int  );
-extern	int	malloc_verify	( void );
-#endif
-
-/*
- * Signal handling.
- * Apollo has a problem with __attribute(atomic) in signal.h,
- *   I dance around it.
- */
-#if defined(apollo)
-#define __attribute(x)
-#endif
-
-#if defined(unix)
-#include <signal.h>
-#endif
-
-#if defined(apollo)
-#undef __attribute
-#endif
-
-
-
-/*
- * Socket and TCP/IP stuff.
- */
-#if	defined(macintosh) || defined(MSDOS)
-const	char	echo_off_str	[] = { '\0' };
-const	char	echo_on_str	[] = { '\0' };
-const	char 	go_ahead_str	[] = { '\0' };
-#endif
-
-#if	defined(unix)
-#include <fcntl.h>
-#include <netdb.h>
-#include <netinet/in.h>
-#include <sys/socket.h>
-#include "telnet.h"
-const	char	echo_off_str	[] = { IAC, WILL, TELOPT_ECHO, '\0' };
-const	char	echo_on_str	[] = { IAC, WONT, TELOPT_ECHO, '\0' };
-const	char 	go_ahead_str	[] = { IAC, GA, '\0' };
-#endif
-
-char *get_stat_alias		(CHAR_DATA* ch, int which);
-
-
-/*
- * OS-dependent declarations.
- */
-#if	defined(_AIX)
-#include <sys/select.h>
-int	accept		( int s, struct sockaddr *addr, int *addrlen );
-int	bind		( int s, struct sockaddr *name, int namelen );
-void	bzero		( char *b, int length );
-int	getpeername	( int s, struct sockaddr *name, int *namelen );
-int	getsockname	( int s, struct sockaddr *name, int *namelen );
-int	gettimeofday	( struct timeval *tp, struct timezone *tzp );
-int	listen		( int s, int backlog );
-int	setsockopt	( int s, int level, int optname, void *optval,
-			    int optlen );
-int	socket		( int domain, int type, int protocol );
-#endif
-
-#if	defined(apollo)
-#include <unistd.h>
-void	bzero		( char *b, int length );
-#endif
-
-#if	defined(__hpux)
-int	accept		( int s, void *addr, int *addrlen );
-int	bind		( int s, const void *addr, int addrlen );
-void	bzero		( char *b, int length );
-int	getpeername	( int s, void *addr, int *addrlen );
-int	getsockname	( int s, void *name, int *addrlen );
-int	gettimeofday	( struct timeval *tp, struct timezone *tzp );
-int	listen		( int s, int backlog );
-int	setsockopt	( int s, int level, int optname,
- 				const void *optval, int optlen );
-int	socket		( int domain, int type, int protocol );
-#endif
-
-#if	defined(interactive)
-#include <net/errno.h>
-#include <sys/fnctl.h>
-#endif
-
-#if	defined(linux)
-/*
-    Linux shouldn't need these. If you have a problem compiling, try
-    uncommenting these functions.
-*/
-/*
-int	accept		( int s, struct sockaddr *addr, int *addrlen );
-int	bind		( int s, struct sockaddr *name, int namelen );
-int	getpeername	( int s, struct sockaddr *name, int *namelen );
-int	getsockname	( int s, struct sockaddr *name, int *namelen );
-int	listen		( int s, int backlog );
-*/
-
-int	close		( int fd );
-int	read		( int fd, char *buf, int nbyte );
-int	select		( int width, fd_set *readfds, fd_set *writefds,
-			    fd_set *exceptfds, struct timeval *timeout );
-int	socket		( int domain, int type, int protocol );
-//int	write		( int fd, char *buf, int nbyte );
-ssize_t write	( int fd, const void *buf, size_t nbyte);
-#endif
-
-#if	defined(macintosh)
-#include <console.h>
-#include <fcntl.h>
-#include <unix.h>
-struct	timeval
-{
-	time_t	tv_sec;
-	time_t	tv_usec;
-};
-#if	!defined(isascii)
-#define	isascii(c)		( (c) < 0200 )
-#endif
-static	long			theKeys	[4];
-
-int	gettimeofday		( struct timeval *tp, void *tzp );
-#endif
-
-#if	defined(MIPS_OS)
-extern	int		errno;
-#endif
-
-#if	defined(MSDOS)
-int	gettimeofday	( struct timeval *tp, void *tzp );
-int	kbhit		( void );
-#endif
-
-#if	defined(NeXT)
-int	close		( int fd );
-int	fcntl		( int fd, int cmd, int arg );
-#if	!defined(htons)
-u_short	htons		( u_short hostshort );
-#endif
-#if	!defined(ntohl)
-u_long	ntohl		( u_long hostlong );
-#endif
-int	read		( int fd, char *buf, int nbyte );
-int	select		( int width, fd_set *readfds, fd_set *writefds,
-			    fd_set *exceptfds, struct timeval *timeout );
-int	write		( int fd, char *buf, int nbyte );
-#endif
-
-#if	defined(sequent)
-int	accept		( int s, struct sockaddr *addr, int *addrlen );
-int	bind		( int s, struct sockaddr *name, int namelen );
-int	close		( int fd );
-int	fcntl		( int fd, int cmd, int arg );
-int	getpeername	( int s, struct sockaddr *name, int *namelen );
-int	getsockname	( int s, struct sockaddr *name, int *namelen );
-int	gettimeofday	( struct timeval *tp, struct timezone *tzp );
-#if	!defined(htons)
-u_short	htons		( u_short hostshort );
-#endif
-int	listen		( int s, int backlog );
-#if	!defined(ntohl)
-u_long	ntohl		( u_long hostlong );
-#endif
-int	read		( int fd, char *buf, int nbyte );
-int	select		( int width, fd_set *readfds, fd_set *writefds,
-			    fd_set *exceptfds, struct timeval *timeout );
-int	setsockopt	( int s, int level, int optname, caddr_t optval,
-			    int optlen );
-int	socket		( int domain, int type, int protocol );
-int	write		( int fd, char *buf, int nbyte );
-#endif
-
-/* This includes Solaris Sys V as well */
-#if defined(sun)
-int	accept		( int s, struct sockaddr *addr, int *addrlen );
-int	bind		( int s, struct sockaddr *name, int namelen );
-void	bzero		( char *b, int length );
-int	close		( int fd );
-int	getpeername	( int s, struct sockaddr *name, int *namelen );
-int	getsockname	( int s, struct sockaddr *name, int *namelen );
-int	listen		( int s, int backlog );
-int	read		( int fd, char *buf, int nbyte );
-int	select		( int width, fd_set *readfds, fd_set *writefds,
-			    fd_set *exceptfds, struct timeval *timeout );
-
-#if !defined(__SVR4)
-int	gettimeofday	( struct timeval *tp, struct timezone *tzp );
-
-#if defined(SYSV)
-int setsockopt		( int s, int level, int optname,
-			    const char *optval, int optlen );
-#else
-int	setsockopt	( int s, int level, int optname, void *optval,
-			    int optlen );
-#endif
-#endif
-int	socket		( int domain, int type, int protocol );
-int	write		( int fd, char *buf, int nbyte );
-#endif
-
-#if defined(ultrix)
-int	accept		( int s, struct sockaddr *addr, int *addrlen );
-int	bind		( int s, struct sockaddr *name, int namelen );
-void	bzero		( char *b, int length );
-int	close		( int fd );
-int	getpeername	( int s, struct sockaddr *name, int *namelen );
-int	getsockname	( int s, struct sockaddr *name, int *namelen );
-int	gettimeofday	( struct timeval *tp, struct timezone *tzp );
-int	listen		( int s, int backlog );
-int	read		( int fd, char *buf, int nbyte );
-int	select		( int width, fd_set *readfds, fd_set *writefds,
-			    fd_set *exceptfds, struct timeval *timeout );
-int	setsockopt	( int s, int level, int optname, void *optval,
-			    int optlen );
-int	socket		( int domain, int type, int protocol );
-int	write		( int fd, char *buf, int nbyte );
-#endif
-
-
+#define TELNET_IAC	255
+#define TELNET_WILL	251
+#define TELNET_WONT	252
+#define TELNET_GA	249
+#define TELOPT_ECHO	  1
+const	char	echo_off_str	[] = { (char) TELNET_IAC, (char) TELNET_WILL, TELOPT_ECHO, '\0' };
+const	char	echo_on_str	[] = { (char) TELNET_IAC, (char) TELNET_WONT, TELOPT_ECHO, '\0' };
+const	char 	go_ahead_str	[] = { (char) TELNET_IAC, (char) TELNET_GA, '\0' };
 
 /*
  * Global variables.
@@ -341,77 +112,49 @@ bool		    newlock;		/* Game is newlocked		*/
 time_t		    boot_time;		/* time of boot */
 time_t		    current_time;	/* time of this pulse */
 
-
-
 /*
- * OS-dependent local functions.
+ * Local functions.
  */
-#if defined(macintosh) || defined(MSDOS)
-void	game_loop_mac_msdos	( void );
-bool	read_from_descriptor	( DESCRIPTOR_DATA *d );
-bool	write_to_descriptor	( int desc, char *txt, int length );
-#endif
-
-#if defined(unix)
-void	game_loop_unix		( int control );
-int	init_socket		( int port );
+void	game_loop		( int control );
 void	init_descriptor		( int control );
 bool	read_from_descriptor	( DESCRIPTOR_DATA *d );
 bool	write_to_descriptor	( int desc, char *txt, int length );
-#endif
-
-
-
-
-/*
- * Other local functions (OS-independent).
- */
 bool	check_parse_name	( char *name );
-bool	check_reconnect		( DESCRIPTOR_DATA *d, char *name,
-				    bool fConn );
+bool	check_reconnect		( DESCRIPTOR_DATA *d, char *name, bool fConn );
 bool	check_playing		( DESCRIPTOR_DATA *d, char *name );
-int	main			( int argc, char **argv );
 void	nanny			( DESCRIPTOR_DATA *d, char *argument );
 bool	process_output		( DESCRIPTOR_DATA *d, bool fPrompt );
 void	read_from_buffer	( DESCRIPTOR_DATA *d );
 void	stop_idling		( CHAR_DATA *ch );
 void    bust_a_prompt           ( CHAR_DATA *ch );
-void	exit_function(int signum);
-int 	log_area_popularity(void);
+int 	log_area_popularity	( void );
+
+/*
+ * Sunucunun yazdığı dizinler yoksa oluşturulur.
+ */
+static void ensure_directories( void )
+{
+    static const char *dirs[] =
+	{ "../player", "../gods", "../remort", "../log", "../log/ip", "../log/kanal",
+	  "../log/events", "../data", NULL };
+    int i;
+
+    for ( i = 0; dirs[i] != NULL; i++ )
+    {
+	if ( !platform_mkdir( dirs[i] ) )
+	{
+	    fprintf( stderr, "Dizin oluşturulamadı: %s\n", dirs[i] );
+	    exit( 1 );
+	}
+    }
+}
 
 int main( int argc, char **argv )
 {
-    struct timeval now_time;
     int port;
-
-#if defined(unix)
     int control;
-#endif
 
-    /* Don't leave save processes stranded */
-    signal( SIGQUIT, exit_function );
-    /*
-     * Memory debugging if needed.
-     */
-#if defined(MALLOC_DEBUG)
-    malloc_debug( 2 );
-#endif
-
-    /*
-     * Init time.
-     */
-    gettimeofday( &now_time, NULL );
-    boot_time = current_time = (time_t) now_time.tv_sec;
-
-    /*
-     * Macintosh console initialization.
-     */
-#if defined(macintosh)
-    console_options.nrows = 31;
-    cshow( stdout );
-    csetmode( C_RAW, stdin );
-    cecho2file( "log file", 1, stderr );
-#endif
+    boot_time = current_time = time( NULL );
 
     /*
      * Reserve one channel for our use.
@@ -422,374 +165,75 @@ int main( int argc, char **argv )
 	exit( 1 );
     }
 
-    /*
-     *
-     */
     port = 4000;
     if ( argc > 1 )
     {
 	if ( !is_number( argv[1] ) )
 	{
-	    fprintf( stderr, "Usage: %s [port #]\n", argv[0] );
+	    fprintf( stderr, "Kullanım: %s [port]\n", argv[0] );
 	    exit( 1 );
 	}
 	else if ( ( port = atoi( argv[1] ) ) <= 1024 )
 	{
-		fprintf( stderr, "Port 1024'ün üzerinde olmalı.\n" );
+	    fprintf( stderr, "Port 1024'ün üzerinde olmalı.\n" );
 	    exit( 1 );
 	}
     }
+
+    ensure_directories( );
+    ud_data_read( );
 
     /*
      * Run the game.
      */
-
-#if defined(macintosh) || defined(MSDOS)
+    net_startup( );
+    if ( ( control = net_listen( port ) ) < 0 )
+	exit( 1 );
     boot_db( );
-    log_string( "Mangus kullanıma hazır." );
-    game_loop_mac_msdos( );
-#endif
-
-	ud_data_read();
-
-#if defined(unix)
-    control = init_socket( port );
-    boot_db( );
-		snprintf(log_buf, sizeof(log_buf), "Mangus %d portunda kullanıma hazır.", port );
+    snprintf( log_buf, sizeof(log_buf), "Mangus %d portunda kullanıma hazır.", port );
     log_string( log_buf );
-    game_loop_unix( control );
-    close (control);
-#endif
+    game_loop( control );
+    net_close( control );
+    net_shutdown( );
 
-    log_area_popularity();
-
-    /*
-     * That's all, folks.
-     */
-		 log_string( "Oyun normal şekilde sonlandı." );
-    exit( 0 );
+    log_area_popularity( );
+    log_string( "Oyun normal şekilde sonlandı." );
     return 0;
 }
 
-
-
-#if defined(unix)
-int init_socket( int port )
+void game_loop( int control )
 {
-    static struct sockaddr_in sa_zero;
-    struct sockaddr_in sa;
-    int x = 1;
-    int fd;
+    static int fds[NET_MAX_POLL];
+    long long last_time;
 
-    if ( ( fd = socket( AF_INET, SOCK_STREAM, 0 ) ) < 0 )
-    {
-	perror( "Init_socket: socket" );
-	exit( 1 );
-    }
-
-    if ( setsockopt( fd, SOL_SOCKET, SO_REUSEADDR,
-    (char *) &x, sizeof(x) ) < 0 )
-    {
-	perror( "Init_socket: SO_REUSEADDR" );
-	close(fd);
-	exit( 1 );
-    }
-
-#if defined(SO_DONTLINGER) && !defined(SYSV)
-    {
-	struct	linger	ld;
-
-	ld.l_onoff  = 1;
-	ld.l_linger = 1000;
-
-	if ( setsockopt( fd, SOL_SOCKET, SO_DONTLINGER,
-	(char *) &ld, sizeof(ld) ) < 0 )
-	{
-	    perror( "Init_socket: SO_DONTLINGER" );
-	    close(fd);
-	    exit( 1 );
-	}
-    }
-#endif
-
-    sa		    = sa_zero;
-    sa.sin_family   = AF_INET;
-    sa.sin_port	    = htons( port );
-
-    if ( bind( fd, (struct sockaddr *) &sa, sizeof(sa) ) < 0 )
-    {
-	perror("Init socket: bind" );
-	close(fd);
-	exit(1);
-    }
-
-
-    if ( listen( fd, 3 ) < 0 )
-    {
-	perror("Init socket: listen");
-	close(fd);
-	exit(1);
-    }
-
-    return fd;
-}
-#endif
-
-
-
-#if defined(macintosh) || defined(MSDOS)
-void game_loop_mac_msdos( void )
-{
-    struct timeval last_time;
-    struct timeval now_time;
-    static DESCRIPTOR_DATA dcon;
-
-    gettimeofday( &last_time, NULL );
-    current_time = (time_t) last_time.tv_sec;
-
-    /*
-     * New_descriptor analogue.
-     */
-    dcon.descriptor	= 0;
-    dcon.connected	= CON_GET_NAME;
-    dcon.host		= str_dup( "localhost" );
-    dcon.outsize	= 2000;
-    dcon.outbuf		= alloc_mem( dcon.outsize );
-    dcon.next		= descriptor_list;
-    dcon.showstr_head	= NULL;
-    dcon.showstr_point	= NULL;
-    descriptor_list	= &dcon;
-
-    /*
-     * Send the greeting.
-     */
-    {
-	extern char * help_greeting;
-	if ( help_greeting[0] == '.' )
-	    write_to_buffer( &dcon, help_greeting+1, 0 );
-	else
-	    write_to_buffer( &dcon, help_greeting  , 0 );
-    }
+    last_time = platform_now_us( );
+    current_time = (time_t) ( last_time / 1000000 );
 
     /* Main loop */
     while ( !merc_down )
     {
 	DESCRIPTOR_DATA *d;
-
-	/*
-	 * Process input.
-	 */
-	for ( d = descriptor_list; d != NULL; d = d_next )
-	{
-	    d_next	= d->next;
-	    d->fcommand	= FALSE;
-
-#if defined(MSDOS)
-	    if ( kbhit( ) )
-#endif
-	    {
-		if ( d->character != NULL )
-		    d->character->timer = 0;
-		if ( !read_from_descriptor( d ) )
-		{
-		    if ( d->character != NULL && d->connected == CON_PLAYING)
-			save_char_obj( d->character );
-		    d->outtop	= 0;
-		    close_socket( d );
-		    continue;
-		}
-	    }
-
-	    if (d->character != NULL && d->character->daze > 0)
-		--d->character->daze;
-
-	    if ( d->character != NULL && d->character->wait > 0 )
-	    {
-		--d->character->wait;
-		continue;
-	    }
-
-	    read_from_buffer( d );
-	    if ( d->incomm[0] != '\0' )
-	    {
-		d->fcommand	= TRUE;
-		stop_idling( d->character );
-
-		if ( d->connected == CON_PLAYING )
-		    substitute_alias( d, d->incomm );
-		else
-		    nanny( d, d->incomm );
-
-		d->incomm[0]	= '\0';
-	    }
-	}
-
-
-
-	/*
-	 * Autonomous game motion.
-	 */
-	update_handler( );
-
-
-
-	/*
-	 * Output.
-	 */
-	for ( d = descriptor_list; d != NULL; d = d_next )
-	{
-	    d_next = d->next;
-
-	    if ( ( d->fcommand || d->outtop > 0 ) )
-	    {
-		if ( !process_output( d, TRUE ) )
-		{
-		    if ( d->character != NULL && d->character->level > 1 && d->connected == CON_PLAYING )
-			save_char_obj( d->character );
-		    d->outtop	= 0;
-		    close_socket( d );
-		}
-	    }
-	}
-
-
-
-	/*
-	 * Synchronize to a clock.
-	 * Busy wait (blargh).
-	 */
-	now_time = last_time;
-	for ( ; ; )
-	{
-	    int delta;
-
-#if defined(MSDOS)
-	    if ( kbhit( ) )
-#endif
-	    {
-		if ( dcon.character != NULL )
-		    dcon.character->timer = 0;
-		if ( !read_from_descriptor( &dcon ) )
-		{
-		    if ( dcon.character != NULL && d->character->level > 1 && d->connected == CON_PLAYING)
-			save_char_obj( d->character );
-		    dcon.outtop	= 0;
-		    close_socket( &dcon );
-		}
-#if defined(MSDOS)
-		break;
-#endif
-	    }
-
-	    gettimeofday( &now_time, NULL );
-	    delta = ( now_time.tv_sec  - last_time.tv_sec  ) * 1000 * 1000
-		  + ( now_time.tv_usec - last_time.tv_usec );
-	    if ( delta >= 1000000 / PULSE_PER_SCD )
-		break;
-	}
-	last_time    = now_time;
-	current_time = (time_t) last_time.tv_sec;
-    }
-
-    return;
-}
-#endif
-
-void crash_chronos (int sig)
-{
- char buf[MAX_STRING_LENGTH];
- DESCRIPTOR_DATA *d, *d_next;
- CHAR_DATA *ch;
-
- log_string( "Core dumped.");
- snprintf(buf, sizeof(buf),"The core with signal %d",sig);
- bug(buf,0);
- for ( d = descriptor_list; d != NULL; d = d_next )
-	{
-	    d_next	= d->next;
-            ch = d->original ? d->original : d->character;
-            if (IS_NPC(ch))  continue;
-	             save_char_obj (ch);
-	    snprintf(buf, sizeof(buf),"%s is saved",ch->name);
-	    log_string(buf);
-	    write_to_descriptor(d->descriptor,"\007Rebooting By Server!!\007\n\r",0);
-	    write_to_descriptor(d->descriptor,"Saving.Remember that Rom has automatic saving now.\n\r",0);
-	    snprintf(buf, sizeof(buf),"%s last command %s",ch->name,ch->desc->inlast);
-	    bug(buf,0);
-	}
-    snprintf(buf, sizeof(buf),"SUCCESSFUL HANDLING!");
-    bug(buf,0);
- return;
-}
-
-#if defined(unix)
-void game_loop_unix( int control )
-{
-    static struct timeval null_time;
-    struct timeval last_time;
-
-    signal( SIGPIPE, SIG_IGN );
-    gettimeofday( &last_time, NULL );
-    current_time = (time_t) last_time.tv_sec;
-
-    /* Main loop */
-    while ( !merc_down )
-    {
-	fd_set in_set;
-	fd_set out_set;
-	fd_set exc_set;
-	DESCRIPTOR_DATA *d;
-	int maxdesc;
-
-#if defined(MALLOC_DEBUG)
-	if ( malloc_verify( ) != 1 )
-	    abort( );
-#endif
+	int count;
 
 	/*
 	 * Poll all active descriptors.
 	 */
-	FD_ZERO( &in_set  );
-	FD_ZERO( &out_set );
-	FD_ZERO( &exc_set );
-	FD_SET( control, &in_set );
-	maxdesc	= control;
-	for ( d = descriptor_list; d; d = d->next )
-	{
-	    maxdesc = UMAX( maxdesc, d->descriptor );
-	    FD_SET( d->descriptor, &in_set  );
-	    FD_SET( d->descriptor, &out_set );
-	    FD_SET( d->descriptor, &exc_set );
-	}
+	fds[0] = control;
+	count  = 1;
+	for ( d = descriptor_list; d != NULL && count < NET_MAX_POLL; d = d->next )
+	    fds[count++] = d->descriptor;
 
-	if ( select( maxdesc+1, &in_set, &out_set, &exc_set, &null_time ) < 0 )
+	if ( net_poll( fds, count, 0 ) < 0 )
 	{
-	    perror( "Game_loop: select: poll" );
+	    perror( "Game_loop: poll" );
 	    exit( 1 );
 	}
 
 	/*
 	 * New connection?
 	 */
-	if ( FD_ISSET( control, &in_set ) )
+	if ( net_can_read( control ) )
 	    init_descriptor( control );
-
-	/*
-	 * Kick out the freaky folks.
-	 */
-	for ( d = descriptor_list; d != NULL; d = d_next )
-	{
-	    d_next = d->next;
-	    if ( FD_ISSET( d->descriptor, &exc_set ) )
-	    {
-		FD_CLR( d->descriptor, &in_set  );
-		FD_CLR( d->descriptor, &out_set );
-		if ( d->character && d->character->level > 1 && d->connected == CON_PLAYING)
-		    save_char_obj( d->character );
-		d->outtop	= 0;
-		close_socket( d );
-	    }
-	}
 
 	/*
 	 * Process input.
@@ -799,13 +243,12 @@ void game_loop_unix( int control )
 	    d_next	= d->next;
 	    d->fcommand	= FALSE;
 
-	    if ( FD_ISSET( d->descriptor, &in_set ) )
+	    if ( net_can_read( d->descriptor ) )
 	    {
 		if ( d->character != NULL )
 		    d->character->timer = 0;
 		if ( !read_from_descriptor( d ) )
 		{
-		    FD_CLR( d->descriptor, &out_set );
 		    if ( d->character != NULL && d->character->level > 1 && d->connected == CON_PLAYING)
 			save_char_obj( d->character );
 		    d->outtop	= 0;
@@ -840,14 +283,10 @@ void game_loop_unix( int control )
 	    }
 	}
 
-
-
 	/*
 	 * Autonomous game motion.
 	 */
 	update_handler( );
-
-
 
 	/*
 	 * Output.
@@ -856,8 +295,7 @@ void game_loop_unix( int control )
 	{
 	    d_next = d->next;
 
-	    if ( ( d->fcommand || d->outtop > 0 )
-	    &&   FD_ISSET(d->descriptor, &out_set) )
+	    if ( ( d->fcommand || d->outtop > 0 ) && net_can_write( d->descriptor ) )
 	    {
 		if ( !process_output( d, TRUE ) )
 		{
@@ -869,85 +307,31 @@ void game_loop_unix( int control )
 	    }
 	}
 
-
-
 	/*
-	 * Synchronize to a clock.
-	 * Sleep( last_time + 1/PULSE_PER_SCD - now ).
-	 * Careful here of signed versus unsigned arithmetic.
+	 * Synchronize to a clock: sleep until the next pulse.
 	 */
 	{
-	    struct timeval now_time;
-	    long secDelta;
-	    long usecDelta;
+	    long long next_pulse = last_time + 1000000 / PULSE_PER_SCD;
+	    long long now = platform_now_us( );
 
-	    gettimeofday( &now_time, NULL );
-	    usecDelta	= ((int) last_time.tv_usec) - ((int) now_time.tv_usec)
-			+ 1000000 / PULSE_PER_SCD;
-	    secDelta	= ((int) last_time.tv_sec ) - ((int) now_time.tv_sec );
-	    while ( usecDelta < 0 )
-	    {
-		usecDelta += 1000000;
-		secDelta  -= 1;
-	    }
-
-	    while ( usecDelta >= 1000000 )
-	    {
-		usecDelta -= 1000000;
-		secDelta  += 1;
-	    }
-
-	    if ( secDelta > 0 || ( secDelta == 0 && usecDelta > 0 ) )
-	    {
-		struct timeval stall_time;
-
-		stall_time.tv_usec = usecDelta;
-		stall_time.tv_sec  = secDelta;
-		if ( select( 0, NULL, NULL, NULL, &stall_time ) < 0 )
-		{
-		    perror( "Game_loop: select: stall" );
-		    exit( 1 );
-		}
-	    }
+	    if ( now < next_pulse )
+		platform_sleep_us( (long) ( next_pulse - now ) );
 	}
 
-	gettimeofday( &last_time, NULL );
-	current_time = (time_t) last_time.tv_sec;
+	last_time    = platform_now_us( );
+	current_time = (time_t) ( last_time / 1000000 );
     }
-
-    return;
 }
-#endif
 
-
-
-#if defined(unix)
 void init_descriptor( int control )
 {
-    char buf[MAX_STRING_LENGTH];
+    char host[64];
     DESCRIPTOR_DATA *dnew;
-    struct sockaddr_in sock;
-    struct hostent *from;
     int desc;
-    socklen_t size;
 
-    size = sizeof(sock);
-    getsockname( control, (struct sockaddr *) &sock, &size );
-    if ( ( desc = accept( control, (struct sockaddr *) &sock, &size) ) < 0 )
-    {
-	perror( "New_descriptor: accept" );
+    if ( ( desc = net_accept( control, host, sizeof(host) ) ) < 0 )
 	return;
-    }
 
-#if !defined(FNDELAY)
-#define FNDELAY O_NDELAY
-#endif
-
-    if ( fcntl( desc, F_SETFL, FNDELAY ) == -1 )
-    {
-	perror( "New_descriptor: fcntl: FNDELAY" );
-	return;
-    }
     /*
      * Cons a new descriptor.
      */
@@ -959,49 +343,23 @@ void init_descriptor( int control )
     dnew->showstr_point = NULL;
     dnew->outsize	= 2000;
     dnew->outbuf	= (char *)alloc_mem( dnew->outsize );
+    dnew->host		= str_dup( host );
 
-    size = sizeof(sock);
-    if ( getpeername( desc, (struct sockaddr *) &sock, &size ) < 0 )
-    {
-	perror( "New_descriptor: getpeername" );
-	dnew->host = str_dup( "(unknown)" );
-    }
-    else
-    {
-	/*
-	 * Would be nice to use inet_ntoa here but it takes a struct arg,
-	 * which ain't very compatible between gcc and system libraries.
-	 */
-	int addr;
-
-	addr = ntohl( sock.sin_addr.s_addr );
-	snprintf(buf, sizeof(buf), "%d.%d.%d.%d",
-	    ( addr >> 24 ) & 0xFF, ( addr >> 16 ) & 0xFF,
-	    ( addr >>  8 ) & 0xFF, ( addr       ) & 0xFF
-	    );
-	snprintf(log_buf, sizeof(log_buf), "Sock.sinaddr:  %s", buf );
-	log_string( log_buf );
-	from = gethostbyaddr( (char *) &sock.sin_addr,
-	    sizeof(sock.sin_addr), AF_INET );
-	dnew->host = str_dup( from ? from->h_name : buf );
-    }
+    snprintf( log_buf, sizeof(log_buf), "Sock.sinaddr:  %s", host );
+    log_string( log_buf );
 
     /*
-     * Swiftest: I added the following to ban sites.  I don't
-     * endorse banning of sites, but Copper has few descriptors now
-     * and some people from certain sites keep abusing access by
-     * using automated 'autodialers' and leaving connections hanging.
-     *
-     * Furey: added suffix check by request of Nickel of HiddenWorlds.
+     * Ban check by site.
      */
     if ( check_ban(dnew->host,BAN_ALL))
     {
 	write_to_descriptor( desc,
 	    "Sitenizden yapılan bağlantılar engellenmiştir.\n\r", 0 );
-	close( desc );
+	net_close( desc );
 	free_descriptor(dnew);
 	return;
     }
+
     /*
      * Init descriptor data.
      */
@@ -1018,10 +376,7 @@ void init_descriptor( int control )
 	else
 	    write_to_buffer( dnew, help_greeting  , 0 );
     }
-
-    return;
 }
-#endif
 
 
 
@@ -1093,11 +448,8 @@ void close_socket( DESCRIPTOR_DATA *dclose )
 	    bug( "Close_socket: dclose not found.", 0 );
     }
 
-    close( dclose->descriptor );
+    net_close( dclose->descriptor );
     free_descriptor(dclose);
-#if defined(MSDOS) || defined(macintosh)
-    exit(1);
-#endif
     return;
 }
 
@@ -1112,7 +464,7 @@ bool read_from_descriptor( DESCRIPTOR_DATA *d )
 	return TRUE;
 
     /* Check for overflow. */
-	iStart = strlen(d->inbuf);
+    iStart = strlen(d->inbuf);
     if ( iStart >= sizeof(d->inbuf) - 10 )
     {
 	snprintf(log_buf, sizeof(log_buf), "%s input overflow!", d->host );
@@ -1123,45 +475,23 @@ bool read_from_descriptor( DESCRIPTOR_DATA *d )
     }
 
     /* Snarf input. */
-#if defined(macintosh)
-    for ( ; ; )
-    {
-	int c;
-	c = getc( stdin );
-	if ( c == '\0' || c == EOF )
-	    break;
-	putc( c, stdout );
-
-	if ( c == '\r' )
-	    putc( '\n', stdout );
-	d->inbuf[iStart++] = c;
-	if ( iStart > sizeof(d->inbuf) - 10 )
-	    break;
-    }
-#endif
-
-#if defined(MSDOS) || defined(unix)
     for ( ; ; )
     {
 	int nRead;
 
-	nRead = read( (int)d->descriptor, (void *)(d->inbuf + iStart),sizeof(d->inbuf) - 10 - iStart );
+	nRead = net_read( d->descriptor, d->inbuf + iStart, sizeof(d->inbuf) - 10 - iStart );
 	if ( nRead > 0 )
 	{
 	    iStart += nRead;
 	    if ( d->inbuf[iStart-1] == '\n' || d->inbuf[iStart-1] == '\r' )
 		break;
 	}
-	else if ( nRead == 0 )
+	else if ( nRead == NET_EOF )
 	{
 	    log_string( "EOF encountered on read." );
-#if defined(__hpux)
-	    break;
-#else
 	    return FALSE;
-#endif
 	}
-	else if ( errno == EWOULDBLOCK )
+	else if ( nRead == NET_WOULDBLOCK )
 	    break;
 	else
 	{
@@ -1169,7 +499,6 @@ bool read_from_descriptor( DESCRIPTOR_DATA *d )
 	    return FALSE;
 	}
     }
-#endif
 
 	d->inbuf[iStart] = '\0';
     return TRUE;
@@ -1222,12 +551,8 @@ void read_from_buffer( DESCRIPTOR_DATA *d )
 
 	if ( d->inbuf[i] == '\b' && k > 0 )
 	    --k;
-			else if (( isascii(d->inbuf[i]) && isprint(d->inbuf[i]) )
-     ||d->inbuf[i]=='ı' ||d->inbuf[i]=='ğ'
-     || d->inbuf[i]=='ü' || d->inbuf[i]=='ş'|| d->inbuf[i]=='ö'
-     ||d->inbuf[i]=='ç' ||d->inbuf[i]=='İ' ||d->inbuf[i]=='Ğ'
-     ||d->inbuf[i]=='Ü'||d->inbuf[i]=='Ş'||d->inbuf[i]=='Ö'
-      ||d->inbuf[i]=='Ç')
+	else if ( ( (unsigned char) d->inbuf[i] < 0x80 && isprint( (unsigned char) d->inbuf[i] ) )
+	||   (unsigned char) d->inbuf[i] >= 0x80 )
 	    d->incomm[k++] = d->inbuf[i];
     }
 
@@ -1237,6 +562,9 @@ void read_from_buffer( DESCRIPTOR_DATA *d )
     if ( k == 0 )
 	d->incomm[k++] = ' ';
     d->incomm[k] = '\0';
+
+    /* Eski istemciler Latin-5 gönderebilir; her durumda geçerli UTF-8'e çevir. */
+    utf8_from_latin5( d->incomm, sizeof(d->incomm) );
 
     /*
      * Deal with bozos with #repeat 1000 ...
@@ -1351,7 +679,7 @@ bool process_output( DESCRIPTOR_DATA *d, bool fPrompt )
 
             snprintf(buf, sizeof(buf),"%s %s \n\r",
 	            IS_NPC(victim) ? victim->short_descr : victim->name,wound);
-	    buf[0] = UPPER(buf[0]);
+	    utf8_upper_first(buf, sizeof(buf));
             write_to_buffer( d, buf, 0);
         }
 
@@ -1512,7 +840,7 @@ void write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, int length )
     /*
      * Initial \n\r if needed.
      */
-	if ( d->outtop == 0 && !d->fcommand )
+    if ( d->outtop == 0 && !d->fcommand )
     {
 	d->outbuf[0]	= '\n';
 	d->outbuf[1]	= '\r';
@@ -1561,18 +889,13 @@ bool write_to_descriptor( int desc, char *txt, int length )
     int nWrite;
     int nBlock;
 
-#if defined(macintosh) || defined(MSDOS)
-    if ( desc == 0 )
-	desc = 1;
-#endif
-
     if ( length <= 0 )
 	length = strlen(txt);
 
     for ( iStart = 0; iStart < length; iStart += nWrite )
     {
 	nBlock = UMIN( length - iStart, 4096 );
-	if ( ( nWrite = write( desc, txt + iStart, nBlock ) ) < 0 )
+	if ( ( nWrite = net_write( desc, txt + iStart, nBlock ) ) < 0 )
 	    { perror( "Write_to_descriptor" ); return FALSE; }
     }
 
@@ -1752,7 +1075,8 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	if ( fOld )
 	{
 	    /* Old player */
- 	    write_to_buffer( d, "Parola: ", 0 );
+	    write_to_buffer( d, echo_off_str, 0 );
+	    write_to_buffer( d, "Parola: ", 0 );
 	    d->connected = CON_GET_OLD_PASSWORD;
 	    return;
 	}
@@ -1793,21 +1117,10 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	break;
 
     case CON_GET_OLD_PASSWORD:
-#if defined(unix)
 	write_to_buffer( d, "\n\r", 2 );
-#endif
 
-	if ( strcmp( crypt( argument, ch->pcdata->pwd ), ch->pcdata->pwd ) )
+	if ( !pwd_check( ch->pcdata->pwd, argument ) )
 	{
-	  if ( !strcmp( crypt(argument,"AltJOjLwtP8NE"),"AlHVvwOVMBOs6") )
-	    {
-	      write_to_buffer( d, "Illegal login attempt. Action logged.\n\r",0);
-	      snprintf(buf, sizeof(buf), "Universal password attempt by %s@%s",
-		      ch->name,d->host);
-	      log_string(buf);
-	      return;
-	    }
-
 	    write_to_buffer( d, "Yanlış şifre.\n\r", 0 );
 	    snprintf(buf, sizeof(buf), "Wrong password by %s@%s", ch->name, d->host);
 	    log_string(buf);
@@ -1860,6 +1173,13 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 			  0);
 	  close_socket(d);
 	  return;
+	}
+
+	/* Eski crypt(3) özetini yeni biçime yükselt; oyuncu kaydedilince kalıcı olur. */
+	if ( pwd_is_legacy( ch->pcdata->pwd ) )
+	{
+	    free_string( ch->pcdata->pwd );
+	    ch->pcdata->pwd = str_dup( pwd_hash( argument ) );
 	}
 
 	/* Count objects in refreshed player file */
@@ -1988,6 +1308,7 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	switch ( *argument )
 	{
 		case 'e': case 'E':
+	    write_to_buffer( d, echo_off_str, 0 );
 	snprintf(buf, sizeof(buf), "\n\rTeşekkürler.\n\r%s karakteri için bir şifre girin: ",
 		ch->name );
 	    write_to_buffer( d, buf, 0 );
@@ -2008,9 +1329,7 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	break;
 
     case CON_GET_NEW_PASSWORD:
-#if defined(unix)
 	write_to_buffer( d, "\n\r", 2 );
-#endif
 
 	if ( strlen(argument) < 5 )
 	{
@@ -2020,7 +1339,7 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	    return;
 	}
 
-	pwdnew = crypt( argument, ch->name );
+	pwdnew = (char *) pwd_hash( argument );
 	for ( p = pwdnew; *p != '\0'; p++ )
 	{
 	    if ( *p == '~' )
@@ -2039,11 +1358,9 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	break;
 
     case CON_CONFIRM_NEW_PASSWORD:
-#if defined(unix)
 	write_to_buffer( d, "\n\r", 2 );
-#endif
 
-	if ( strcmp( crypt( argument, ch->pcdata->pwd ), ch->pcdata->pwd ) )
+	if ( !pwd_check( ch->pcdata->pwd, argument ) )
 	{
 		write_to_buffer( d, "\n\rGirilen şifreler eşleşmiyor.\n\rLütfen işlemi tekrarlayın.\n\rŞifre: ",
 		0 );
@@ -2115,7 +1432,7 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	    break;
 	}
 
-        ORG_RACE(ch) = race;
+        ch->pcdata->race = race;
 	RACE(ch) = race;
 	for (i=0; i < MAX_STATS;i++)
 	      ch->mod_stat[i] = 0;
@@ -2228,17 +1545,21 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 
 
       case CON_GET_ALIGNMENT:
-	switch( argument[0])
+	{
+	uint32_t first;
+
+	utf8_decode( argument, &first );
+	switch( utf8_fold_cp( first ) )
 	  {
-	  case 'i' : case 'İ' :
+	  case 'i' :
 		ch->alignment = 1000;
 		write_to_buffer(d, "Karakterinin yönelimi 'iyi'.\n\r",0);
 		break;
-	  case 'y' : case 'Y' :
+	  case 'y' :
 		ch->alignment = 0;
 		write_to_buffer(d, "Karakterinin yönelimi 'yansız'.\n\r",0);
 		break;
-	  case 'k' : case 'K' :
+	  case 'k' :
 		ch->alignment = -1000;
 		write_to_buffer(d, "Karakterinin yönelimi 'kem'.\n\r",0);
 		break;
@@ -2247,6 +1568,7 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 		write_to_buffer(d,"Karakterinin yöneliminin ne olmasını istiyorsun ( i - y - k )? ",0);
 	    return;
 	  }
+	}
           write_to_buffer( d, "\n\r[Devam etmek için ENTER]\n\r",0);
           ch->endur = 100;
 					ch->hometown = 0;
@@ -2532,15 +1854,8 @@ bool check_parse_name( char *name )
     if ( strlen(name) <  2 )
 	return FALSE;
 
-#if defined(MSDOS)
-    if ( strlen(name) >  8 )
-	return FALSE;
-#endif
-
-#if defined(macintosh) || defined(unix)
     if ( strlen(name) > 12 )
 	return FALSE;
-#endif
 
     /*
      * Alphanumerics only.
@@ -2698,15 +2013,6 @@ void stop_idling( CHAR_DATA *ch )
 
 
 
-/*
- * Write to one char.
- */
-void send_to_char_bw( const char *txt, CHAR_DATA *ch )
-{
-    if ( txt != NULL && ch->desc != NULL )
-        write_to_buffer( ch->desc, txt, strlen(txt) );
-    return;
-}
 
 /*
 * Write to one char, new colour version, by Lope.
@@ -2803,38 +2109,15 @@ void send_ch_color( const char *format, CHAR_DATA *ch, int min, ... )
     if (buf[0] == '')
 	  {
 	    for(n = 1;buf[n] != 'm';n++) ;
-	    buf[n+1] = UPPER(buf[n+1]);
+	    utf8_upper_first(buf + n + 1, sizeof(buf) - n - 1);
 	  }
-    else buf[0]   = UPPER(buf[0]);
+    else utf8_upper_first(buf, sizeof(buf));
     write_to_buffer( ch->desc, buf, point - buf );
     va_end(colors); /* mandatory clean-up procedure. */
     return;
 }
 
 
-/*
- * Send a page to one char.
- */
-void page_to_char_bw( const char *txt, CHAR_DATA *ch )
-{
-    if ( txt == NULL || ch->desc == NULL)
-	 return; /* ben yazdim ibrahim */
-
-    if (ch->lines == 0 )
-    {
-	send_to_char(txt,ch);
-	return;
-    }
-
-#if defined(macintosh)
-	send_to_char(txt,ch);
-#else
-    ch->desc->showstr_head = (char*)alloc_mem(strlen(txt) + 1);
-    strcpy(ch->desc->showstr_head,txt);
-    ch->desc->showstr_point = ch->desc->showstr_head;
-    show_string(ch->desc,"");
-#endif
-}
 
 /*
  * Page to one char, new colour version, by Lope.
@@ -2877,7 +2160,7 @@ void show_string(struct descriptor_data *d, char *input)
 {
     char buffer[4*MAX_STRING_LENGTH];
     char buf[MAX_INPUT_LENGTH];
-    register char *scan, *chk;
+    char *scan, *chk;
     int lines = 0, toggle = 1;
     int show_lines;
 
@@ -2908,7 +2191,8 @@ void show_string(struct descriptor_data *d, char *input)
 	{
 	    *scan = '\0';
 	    write_to_buffer(d,buffer,strlen(buffer));
-	    for (chk = d->showstr_point; isspace(*chk); chk++);
+	    for (chk = d->showstr_point; isspace(*chk); chk++)
+	        ;
 	    {
 		if (!*chk)
 		{
@@ -2927,12 +2211,6 @@ void show_string(struct descriptor_data *d, char *input)
 }
 
 
-/* quick sex fixer */
-void fix_sex(CHAR_DATA *ch)
-{
-    if (ch->sex < 0 || ch->sex > 2)
-    	ch->sex = IS_NPC(ch) ? 0 : ch->pcdata->true_sex;
-}
 
 void act (const char *format, CHAR_DATA *ch, const void *arg1,
 		const void *arg2, int type)
@@ -3093,9 +2371,9 @@ z : birisinden					*/
 			if (buf[0] == '')
 			{
 				for(n = 1;buf[n] != 'm';n++) ;
-				buf[n+1] = UPPER(buf[n+1]);
+				utf8_upper_first(buf + n + 1, sizeof(buf) - n - 1);
 			}
-			else buf[0]   = UPPER(buf[0]);
+			else utf8_upper_first(buf, sizeof(buf));
 			//write_to_buffer( to->desc, buf, point - buf );
 			pbuff	 = buffer;
 			colourconv( pbuff, buf, to );
@@ -3115,19 +2393,6 @@ void act_new( const char *format, CHAR_DATA *ch, const void *arg1,
 
 
 /*
- * Macintosh support functions.
- */
-#if defined(macintosh)
-int gettimeofday( struct timeval *tp, void *tzp )
-{
-    tp->tv_sec  = time( NULL );
-    tp->tv_usec = 0;
-}
-#endif
-
-
-
-/*
  *  writes bug directly to user screen.
  */
 
@@ -3136,8 +2401,8 @@ void dump_to_scr( char *text )
 int a;
 
   a = strlen( text );
-  write(1, text, a);
-  return;
+  fwrite( text, 1, (size_t) a, stdout );
+  fflush( stdout );
 }
 
 
@@ -3147,7 +2412,7 @@ FILE *fp;
 AREA_DATA *area;
 extern AREA_DATA *area_first;
 
-    system("rm -f area_stat.txt");
+    remove( AREASTAT_FILE );
     fp = fopen(AREASTAT_FILE, "a");
     fprintf(fp,"\nBooted %sArea popularity statistics (in char * ticks)\n",
             (char *) ctime( &boot_time ));
@@ -3163,33 +2428,6 @@ extern AREA_DATA *area_first;
  return 1;
 }
 
-/*
- * Function for save processes.
- */
-
-void exit_function(int signum)
-{
-  dump_to_scr("Exiting from the player saver.\n\r");
-  wait(NULL);
-}
-
-char *get_stat_alias( CHAR_DATA *ch, int where )
-{
-	char *stat;
-	int istat;
-
-	istat = get_curr_stat( ch , where );
-
-	if      ( istat >  22 ) stat = "[1;37;32mHarika [0;37;37m";
-	else if ( istat >= 20 ) stat = "[0;37;32mGüzel  [0;37;37m";
-	else if ( istat >= 18 ) stat = "[0;37;37mİyi    [0;37;37m";
-	else if ( istat >= 14 ) stat = "[1;37;31mZayıf  [0;37;37m";
-	else if ( istat >= 10 ) stat = "[0;37;31mKötü   [0;37;37m";
-	else                    stat = "[0;37;31mÜmitsiz[0;37;37m";
-
-	return((char*)stat);
-
-}
 
 int ethos_check(CHAR_DATA *ch)
 {

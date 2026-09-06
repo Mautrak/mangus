@@ -47,15 +47,10 @@
 *	By using this code, you have agreed to follow the terms of the	   *
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
-
-#if defined(macintosh)
-#include <types.h>
-#else
-#include <sys/types.h>
-#endif
 #include <stdio.h>
 #include <time.h>
 #include "merc.h"
+#include "utf8.h"
 #include "tables.h"
 
 int flag_lookup (const char *name, const struct flag_type *flag_table)
@@ -64,7 +59,7 @@ int flag_lookup (const char *name, const struct flag_type *flag_table)
 
     for (flag = 0; flag_table[flag].name != NULL; flag++)
     {
-	if (LOWER(name[0]) == LOWER(flag_table[flag].name[0])
+	if (utf8_first_eq(name, flag_table[flag].name)
 	&&  !str_prefix(name,flag_table[flag].name))
 	    return flag_table[flag].bit;
     }
@@ -79,7 +74,7 @@ int position_lookup (const char *name)
 
    for (pos = 0; position_table[pos].name != NULL; pos++)
    {
-	if (LOWER(name[0]) == LOWER(position_table[pos].name[0])
+	if (utf8_first_eq(name, position_table[pos].name)
 	&&  !str_prefix(name,position_table[pos].name))
 	    return pos;
    }
@@ -93,7 +88,7 @@ int sex_lookup (const char *name)
 
    for (sex = 0; sex_table[sex].name != NULL; sex++)
    {
-	if (LOWER(name[0]) == LOWER(sex_table[sex].name[0])
+	if (utf8_first_eq(name, sex_table[sex].name)
 	&&  !str_prefix(name,sex_table[sex].name))
 	    return sex;
    }
@@ -107,7 +102,7 @@ int size_lookup (const char *name)
 
    for ( size = 0; size_table[size].name != NULL; size++)
    {
-        if (LOWER(name[0]) == LOWER(size_table[size].name[0])
+        if (utf8_first_eq(name, size_table[size].name)
         &&  !str_prefix( name,size_table[size].name))
             return size;
    }
@@ -124,7 +119,7 @@ int lang_lookup (const char *name)
 
    for (lang = 0; lang < MAX_LANGUAGE; lang++)
    {
-	if (LOWER(name[0]) == LOWER(language_table[lang].name[0])
+	if (utf8_first_eq(name, language_table[lang].name)
 	&&  !str_prefix(name,language_table[lang].name))
 	    return lang;
    }

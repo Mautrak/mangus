@@ -47,13 +47,6 @@
 *	By using this code, you have agreed to follow the terms of the	   *
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
-
-#if defined(macintosh)
-#include <types.h>
-#include <time.h>
-#else
-#include <sys/types.h>
-#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -715,7 +708,7 @@ void greet_prog_keeper(CHAR_DATA *mob, CHAR_DATA *ch)
   if (!can_see(mob, ch))
     return;
 
-    do_say(mob,"Burada ne işin var? O şey sipariş ettiğim giysi mi?");
+  do_say(mob,"Burada ne işin var? O şey sipariş ettiğim giysi mi?");
 }
 
 void speech_prog_templeman(CHAR_DATA *mob, CHAR_DATA *ch, char *speech)
@@ -802,32 +795,6 @@ void greet_prog_lions(CHAR_DATA *mob, CHAR_DATA *ch)
   if (ch->cabal == CABAL_LIONS )
   {
     do_say(mob, "Hoşgeldiniz aslan efendiler.");
-    return;
-  }
-  if (ch->last_death_time != -1 && current_time - ch->last_death_time < 600)
-    {
-      do_say(mob,"Hayaletler buraya giremez.");
-      do_slay(mob, ch->name);
-      return;
-    }
-
-  if (IS_IMMORTAL(ch))	return;
-
-  do_cb(mob, "Dikkat!!! Davetsiz Misafir!!!");
-  do_say(mob, "Kabalımı rahatsız etmemeliydin!");
-}
-
-void greet_prog_hunter_old(CHAR_DATA *mob, CHAR_DATA *ch)
-{
-  if ( IS_NPC(ch))
-    return;
-
-  mob->cabal = CABAL_HUNTER;
-  SET_BIT(mob->off_flags,OFF_AREA_ATTACK);
-
-  if (ch->cabal == CABAL_HUNTER )
-  {
-    do_say(mob, "Merhaba sevgili avcı.");
     return;
   }
   if (ch->last_death_time != -1 && current_time - ch->last_death_time < 600)
@@ -1163,9 +1130,9 @@ void speech_prog_crier(CHAR_DATA *mob, CHAR_DATA *ch, char *speech)
 void area_prog_drunk(CHAR_DATA *mob)
 {
   if (number_percent() < 5)
-  interpret(mob, "dans", FALSE);
-else if (number_percent() < 10)
-  interpret(mob,"şarkı", FALSE);
+    interpret(mob, "dans", FALSE);
+  else if (number_percent() < 10)
+    interpret(mob,"şarkı", FALSE);
   return;
 }
 
