@@ -51,7 +51,7 @@ jobs:
         run: python3 -m pip install --quiet pytest ninja
 
       - name: Yapılandır
-        run: cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DMANGUS_WERROR=ON
+        run: cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DMANGUS_WERROR=ON
 
       - name: Derle
         run: cmake --build build --parallel

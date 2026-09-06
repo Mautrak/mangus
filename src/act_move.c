@@ -1934,7 +1934,7 @@ int forest;
     else  {
       if ( IS_AFFECTED(ch, AFF_HIDE) )
 	REMOVE_BIT(ch->affected_by, AFF_HIDE);
-	check_improve(ch,gsn_hide,FALSE,3);
+      check_improve(ch,gsn_hide,FALSE,3);
     }
 
     return;

@@ -431,7 +431,7 @@ void do_limited( CHAR_DATA *ch, char *argument )
 		snprintf(buf, sizeof(buf), "In %-*s [%d] \n\r", utf8_width(obj->in_obj->short_descr, 20), obj->in_obj->short_descr, obj->in_obj->pIndexData->vnum);
 	      send_to_char( buf, ch );
 	    }
-	    snprintf(buf, sizeof(buf), "  %d found in game. %d should be in pFiles.\n\r",
+    snprintf(buf, sizeof(buf), "  %d found in game. %d should be in pFiles.\n\r",
 			ingameCount, obj_index->count-ingameCount);
 	    send_to_char( buf, ch );
    return;

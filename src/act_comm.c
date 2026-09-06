@@ -2058,8 +2058,9 @@ ch->pcdata->confirm_remort = FALSE;
 
 	if (!quit_org(ch, argument, TRUE, TRUE ))	return;
 
-	link( remstr, mkstr );
-	unlink( remstr );
+	remove( mkstr );
+	if ( rename( remstr, mkstr ) != 0 )
+	    bug( "do_remort: oyuncu dosyası remort dizinine taşınamadı.", 0 );
 
 	load_char_obj( d, name );
 

@@ -764,7 +764,7 @@ void greet_prog_templeman(CHAR_DATA *mob, CHAR_DATA *ch)
   if (!can_see(mob,ch) || IS_NPC(ch) || IS_IMMORTAL(ch))
     return;
 
-    snprintf(arg, sizeof(arg),"gülümse %s",ch->name);
+  snprintf(arg, sizeof(arg),"gülümse %s",ch->name);
   interpret(mob, arg, FALSE);
 }
 
@@ -1018,7 +1018,7 @@ void greet_prog_beggar(CHAR_DATA *mob, CHAR_DATA *ch)
 
   if (!can_see(mob,ch) || IS_NPC(ch) || IS_IMMORTAL(ch))
     return;
-    snprintf(buf, sizeof(buf),"Allah rızası için %s,",
+  snprintf(buf, sizeof(buf),"Allah rızası için %s,",
    str_cmp(mob->in_room->area->name,hometown_table[ch->hometown].name) ?
    "yolcu" : ch->name );
   do_say(mob,buf);
@@ -1042,7 +1042,7 @@ void greet_prog_grocer(CHAR_DATA *mob, CHAR_DATA *ch)
 
   if (!can_see(mob,ch) || IS_NPC(ch) || IS_IMMORTAL(ch))
     return;
-    snprintf(buf, sizeof(buf),"Dükkanıma hoşgeldin %s.",
+  snprintf(buf, sizeof(buf),"Dükkanıma hoşgeldin %s.",
    str_cmp(mob->in_room->area->name,hometown_table[ch->hometown].name) ?
    "yolcu" : ch->name );
   do_say(mob,buf);

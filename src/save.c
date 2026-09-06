@@ -889,7 +889,8 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
     {
 	fclose(fp);
 	snprintf(buf, sizeof(buf),"gzip -dfq %s",strsave);
-	system(buf);
+	if ( system( buf ) != 0 )
+	    log_string( "gzip ile oyuncu dosyası açılamadı." );
     }
 #endif
 

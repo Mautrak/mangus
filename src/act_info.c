@@ -2983,7 +2983,7 @@ void do_description( CHAR_DATA *ch, char *argument )
 	ch->description = str_dup( buf );
   if (!IS_NPC(ch) && (strlen(ch->description)>=350) && (IS_SET(ch->act, PLR_NO_DESCRIPTION)))
     REMOVE_BIT(ch->act, PLR_NO_DESCRIPTION);
-    if (!IS_NPC(ch) && (strlen(ch->description)<350) && (!IS_SET(ch->act, PLR_NO_DESCRIPTION)))
+  if (!IS_NPC(ch) && (strlen(ch->description)<350) && (!IS_SET(ch->act, PLR_NO_DESCRIPTION)))
       SET_BIT(ch->act, PLR_NO_DESCRIPTION);
     }
 
@@ -3730,7 +3730,7 @@ void do_affects_col(CHAR_DATA *ch, char *argument )
       {
         if( firstAffect == TRUE )
         {
-          snprintf(buf, sizeof(buf), "");
+          buf[0] = '\0';
           firstAffect = FALSE;
         }
         else

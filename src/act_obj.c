@@ -2532,8 +2532,8 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
 	if (IS_SET(ch->act,PLR_AUTOSPLIT) )
 	
 		members = 0;
-		for (gch = ch->in_room->people; gch != NULL; gch = gch->next_in_room )
-		{
+	for (gch = ch->in_room->people; gch != NULL; gch = gch->next_in_room )
+	{
 			if ( is_same_group( gch, ch ) )
 			members++;
 		}
