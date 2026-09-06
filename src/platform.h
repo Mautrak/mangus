@@ -39,6 +39,8 @@ bool net_can_write(int fd);
 long long platform_now_us(void);
 void      platform_sleep_us(long usec);
 bool      platform_mkdir(const char *path);
+/* Hedef varsa üzerine yazarak taşır (Windows'ta rename hedef varsa başarısız olur). */
+bool      platform_replace_file(const char *from, const char *to);
 int       platform_pid(void);
 
 #endif

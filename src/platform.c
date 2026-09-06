@@ -249,3 +249,12 @@ int platform_pid(void)
     return (int)getpid();
 #endif
 }
+
+bool platform_replace_file(const char *from, const char *to)
+{
+#ifdef _WIN32
+    return MoveFileExA(from, to, MOVEFILE_REPLACE_EXISTING | MOVEFILE_COPY_ALLOWED) != 0;
+#else
+    return rename(from, to) == 0;
+#endif
+}

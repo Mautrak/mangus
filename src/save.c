@@ -59,7 +59,6 @@
 
 
 
-int rename(const char *oldfname, const char *newfname);
 int wear_convert( int oldwear );
 
 char *print_flags(int flag)
@@ -171,7 +170,8 @@ void save_char_obj( CHAR_DATA *ch )
 	fprintf( fp, "#END\n" );
     }
     fclose( fp );
-    rename(TEMP_FILE,strsave);
+    if ( !platform_replace_file( TEMP_FILE, strsave ) )
+	bug( "Save_char_obj: oyuncu dosyası yerine konulamadı.", 0 );
     fpReserve = fopen( NULL_FILE, "r" );
     if ( fpReserve == NULL )
       bug("save_char_obj: Can't open null file.", 0 );
