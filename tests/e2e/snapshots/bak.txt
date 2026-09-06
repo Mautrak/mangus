@@ -1,0 +1,9 @@
+[0;33mMud Okulu Girişi[0;37m [İçeri] [[0;33mMud Okulu[0;37m]
+  Mangus'a hoşgeldin. Eğer MUD'a yabancıysan bu yazıları dikkatle okumalısın.
+Burada sana oyunu nasıl oynayabileceğin öğretilecek.
+Bu oda MUD Okulu Girişi'dir. Burası gerçekten bir okuldur. Burada
+öğrendiklerini pratik eder ve en sonunda diplomanı alarak mezun olursun.
+Hazır olduğunda 'kuzey' yaz. Unutma sadece tırnak içini yazmalısın.
+
+[36m[ kuzey doğu güney* aşağı ]
+[37;0m

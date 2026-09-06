@@ -1,0 +1,24 @@
+____________________________________________________________________________
+|| HAREKET                        |    GRUP                               ||
+|| kuzey güney doğu batı yukarı   |    takip grup ganlat dağıt            ||
+|| aşağı çıkışlar anımsa uyu      |                                       ||
+|| dinlen kalk                    |                                       ||
+||________________________________|_______________________________________||
+|| OBJELER                        |    BİLGİ / İLETİŞİM                   ||
+|| koy bırak ver kurban           |    yardım komutlar bölge              ||
+|| giy tut oku                    |    rapor skor zaman havadurumu nerede ||
+|| yudumla çarp savur             |    kim tanim şifre lakap              ||
+|| kilitle kilitaç aç kapat       |    bug söyle bağır anlat              ||
+|| maymuncuk envanter ekipman     |    haykır duygu poz                   ||
+|| bak ye iç doldur kıyasla       |    not oda günce odaetki etki         ||
+|| liste satınal sat değer        |                                       ||
+||________________________________|_______________________________________||
+|| DÖVÜŞ                          |    DİĞER                              ||
+|| öldür kaç tekme kurtar büyü    |    ! kaydet ayrıl talep rica          ||
+|| silahsızlandır ardılan         |    pratik eğitim görev                ||
+|| korkaklık                      |                                       ||
+||________________________________|_______________________________________||
+     Herhangi bir komut, beceri veya büyü hakkında daha
+     fazla yardım için 'yardım <komut>' yazın.
+[Devam etmek için ENTER]
+     Ayrıca: HASAR DEATH TECRÜBE TICK WIZLIST QUESTS

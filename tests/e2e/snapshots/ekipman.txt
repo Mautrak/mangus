@@ -1,0 +1,24 @@
+Ekipmanların:
+< parmak   >
+< parmak   >
+< parmak   >
+< parmak   >
+< boyun    >
+< boyun    >
+< gövde    >
+< kafa     >
+< bacaklar >
+< ayaklar  >
+< eller    >
+< kollar   >
+< vücut    >
+< bel      >
+< bilek    >
+< bilek    >
+< sol el   >
+< sağ el   >
+< çift el  >
+< süzülen  >
+< dövme    >
+< dövme    >
+Hiçbir şey.

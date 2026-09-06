@@ -1,0 +1,21 @@
+
+
+      ___  ___                                  ___  ___            _
+      |  \/  |                                  |  \/  |           | |
+      | .  . |  __ _  _ __    __ _  _   _  ___  | .  . | _   _   __| |
+      | |\/| | / _` || '_ \  / _` || | | |/ __| | |\/| || | | | / _` |
+      | |  | || (_| || | | || (_| || |_| |\__ \ | |  | || |_| || (_| |
+      \_|  |_/ \__,_||_| |_| \__, | \__,_||___/ \_|  |_/ \__,_| \__,_|
+                              __/ |
+                             |___/
+
+Uzak Diyarlar tabanlı Türkçe MUD.
+Yayına başlangıç  : 27 Temmuz 2022 22:17
+Web yardım        : https://mangusmud.wordpress.com
+Discord           : https://discord.gg/7eBTKfnKZe
+
+Türkçe karakterlerin düzgün görünmesi için istemcinizin karakter setini
+UTF-8 yapın (çoğu modern istemcide varsayılan ayar budur).
+
+
+Hangi isimle anılmak istersin?

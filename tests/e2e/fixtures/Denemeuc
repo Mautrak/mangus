@@ -1,0 +1,256 @@
+#PLAYER
+Name Denemeuc~
+Id   1788732654
+Discord ~
+Birth  1774044654
+LogO 1788732663
+Vers 7
+Etho 1
+Home 0
+Cab  0
+Dead 0
+GhostCounter 0
+Ques 0
+Prom Yp:%h/%H Mp:%m/%M Zp:%v/%V <%o>{x ~
+Race human~
+Sex  1
+Cla  3
+Levl 2
+OyuncuKatli 0
+KisiselKasa 0
+YeniyasamSayisi 0
+Plyd 0
+Scro 22
+Room 3700
+HMV  20 100 100
+Silv 0
+Banks 0
+Dilek 0
+Exp  1000
+Act  DGOQ
+Comm NO
+Pos  8
+Prac 5
+Trai 3
+Alig  1000
+Attr 23 21 20 21 22 15
+Pass $m1$ed1c9e8720b8480a$84bfcf5f22dea925f9ff033afbca230fef62820400646be466b02611170241f7~
+Titl  Acemi~
+Pnts 0
+TSex 1
+LLev 0
+HMVP 20 100 100
+CndC  0 48 48 48 48 48
+Sk 100 'identify'
+Sk 1 'axe'
+Sk 1 'bow'
+Sk 1 'dagger'
+Sk 1 'flail'
+Sk 1 'mace'
+Sk 1 'polearm'
+Sk 1 'shield block'
+Sk 1 'spear'
+Sk 1 'sword'
+Sk 1 'whip'
+Sk 1 'second weapon'
+Sk 1 'area attack'
+Sk 1 'bash'
+Sk 1 'bash door'
+Sk 1 'berserk'
+Sk 1 'blind fighting'
+Sk 1 'concentrate'
+Sk 1 'counter'
+Sk 1 'cross block'
+Sk 1 'dirt kicking'
+Sk 1 'disarm'
+Sk 1 'dodge'
+Sk 1 'enhanced damage'
+Sk 40 'hand to hand'
+Sk 1 'kick'
+Sk 1 'parry'
+Sk 1 'rescue'
+Sk 1 'shield cleave'
+Sk 1 'smithing'
+Sk 1 'trip'
+Sk 1 'warcry'
+Sk 1 'weapon cleave'
+Sk 1 'second attack'
+Sk 1 'secondary attack'
+Sk 1 'third attack'
+Sk 1 'fourth attack'
+Sk 1 'fifth attack'
+Sk 1 'fast healing'
+Sk 1 'grip'
+Sk 1 'haggle'
+Sk 1 'lore'
+Sk 1 'meditation'
+Sk 75 'recall'
+Sk 100 'steal'
+Fm 75 'human'
+QuestPractice 0
+Relig 0
+Haskilled 0
+Antkilled 0
+PlayLog 1
+249 60
+248 60
+247 60
+246 60
+245 60
+244 60
+243 60
+242 60
+241 60
+240 60
+239 60
+238 60
+237 60
+236 60
+-1
+End
+
+#O
+Vnum 3162
+Cond 100
+Creation  1788732663
+Nest 0
+Name harita selenge~
+ShD  Selenge şehrinin bir haritası~
+Desc Kıvrılmış bir harita yerde duruyor.~
+ExtF 0
+WeaF 1
+Ityp 28
+Wt   8
+Material   dragonskin~
+WLoc -1
+Cost 4
+Val  1 0 0 0 0
+End
+
+#O
+Vnum 3385
+Cond 35
+Creation  1788732663
+Nest 0
+Name acemi harita~
+ShD  Acemiler için Doğu Mangus haritası~
+Desc Kıvrılmış bir harita görüyorsun.~
+ExtF 0
+WeaF 1
+Ityp 28
+Wt   8
+Material   bearskin~
+WLoc -1
+Cost 40
+Val  1 0 0 0 0
+End
+
+#O
+Vnum 3386
+Cond 100
+Creation  1788732663
+Nest 0
+Name acemi harita~
+ShD  Acemiler için Batı Mangus haritası~
+Desc Kıvrılmış bir harita görüyorsun.~
+ExtF 0
+WeaF 1
+Ityp 28
+Wt   2
+Material   cashmire~
+WLoc -1
+Cost 45
+Val  1 0 0 0 0
+End
+
+#O
+Vnum 3164
+Cond 75
+Creation  1788732663
+Nest 0
+Name harita güney selenge~
+ShD  Güney Selenge'nin bir haritası~
+Desc Kıvrılmış bir harita burada duruyor.~
+ExtF 16384
+WeaF 1
+Ityp 28
+Wt   2
+Material   bamboo~
+WLoc -1
+Cost 23
+Val  1 0 0 0 0
+End
+
+#O
+Vnum 3716
+Cond 100
+Creation  1788732663
+Nest 0
+Name savaş bayrak bayrağı~
+ShD  bir savaş bayrağı~
+Desc Burada bir savaş bayrağı var.~
+ExtF 0
+WeaF 1
+Ityp 1
+Wt   8
+Material   wood~
+WLoc -1
+Cost 0
+Val  0 0 -1 0 0
+End
+
+#O
+Vnum 3703
+Cond 100
+Creation  1788732663
+Nest 0
+Name kalitesiz yelek~
+ShD  bir kalitesiz yelek~
+Desc Burada bir kalitesiz yelek görüyorsun.~
+ExtF 4096
+WeaF 9
+Ityp 9
+Wt   950
+Material   wood~
+WLoc -1
+Cost 0
+Val  1 1 1 1 0
+End
+
+#O
+Vnum 3702
+Cond 100
+Creation  1788732663
+Nest 0
+Name egzotik silah~
+ShD  egzotik bir silah~
+Desc Egzotik bir silah burada duruyor.~
+ExtF 0
+WeaF 8193
+Ityp 5
+Wt   657
+Material   gem~
+WLoc -1
+Cost 41
+Val  0 3 1 9 0
+End
+
+#O
+Vnum 3704
+Cond 100
+Creation  1788732663
+Nest 0
+Name kalitesiz kalkan~
+ShD  bir kalitesiz kalkan~
+Desc Burada bir kalitesiz kalkan görüyorsun.~
+ExtF 0
+WeaF 513
+Ityp 9
+Wt   400
+Material   crystal~
+WLoc -1
+Cost 0
+Val  1 1 1 1 0
+End
+
+#END

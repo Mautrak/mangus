@@ -1,0 +1,34 @@
+
+Seviye  1: balta                1%      hançer               1%
+          döven                1%      topuz                1%
+          teber                1%      kalkan bloğu         1%
+          mızrak               1%      kılıç                1%
+          kırbaç               1%      omuz                 1%
+          kapıkırma            1%      karşılama            1%
+          kurtar               1%      anımsa              75%
+Seviye  3: yüksek zarar       n/a
+Seviye  5: tekme              n/a
+Seviye  6: hızlı iyileşme     n/a
+Seviye  8: toz atma           n/a
+Seviye  9: çıplak el          n/a
+Seviye 10: ikili hamle        n/a
+Seviye 13: kör dövüşü         n/a      sıyrılma           n/a
+Seviye 14: pazarlık           n/a
+Seviye 15: meditasyon         n/a
+Seviye 18: vahşileşme         n/a
+Seviye 19: üçlü hamle         n/a
+Seviye 20: silahsızlandır     n/a
+Seviye 21: irfan              n/a
+Seviye 23: ikinci silah       n/a
+Seviye 25: çelme              n/a
+Seviye 26: kalkan yarma       n/a
+Seviye 28: kontra             n/a
+Seviye 29: silah yarma        n/a
+Seviye 30: dörtlü hamle       n/a
+Seviye 31: çapraz blok        n/a      nara               n/a
+Seviye 43: kavrama            n/a
+Seviye 44: yay                n/a
+Seviye 50: demirci            n/a
+Seviye 52: ikincil hamle      n/a      beşli hamle        n/a
+Seviye 59: konsantrasyon      n/a
+Seviye 73: alan saldırısı     n/a

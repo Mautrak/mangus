@@ -1,0 +1,9 @@
+Taşıdıkların:
+     [37;1m[***][37;0mbir kalitesiz kalkan[37;0m […] […] […]
+     [37;1m[***][37;0m<silah>[37;0m […] […] […]
+     [37;1m[***][37;0mbir kalitesiz yelek[37;0m […] […] […]
+     [37;1m[***][37;0mbir savaş bayrağı[37;0m […] […] […]
+     [37;1m[***][37;0mGüney Selenge'nin bir haritası[37;0m […] […] […]
+     [37;1m[***][37;0mAcemiler için Batı Mangus haritası[37;0m […] […] […]
+     [37;1m[***][37;0mAcemiler için Doğu Mangus haritası[37;0m […] […] […]
+     [37;1m[***][37;0mSelenge şehrinin bir haritası[37;0m […] […] […]

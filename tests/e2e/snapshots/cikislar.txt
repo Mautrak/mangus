@@ -1,0 +1,5 @@
+Görünen çıkışlar:
+Kuzey - MUD okulunda bir oda
+Doğu  - Müze Girişi
+Güney * (kapı)
+Aşağı - Selenge Tapınağı
