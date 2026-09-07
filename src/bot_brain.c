@@ -1434,12 +1434,21 @@ static bool bot_eat_drink( BOT_DATA *bot )
         }
         SET_BIT( bot->town_tasks, BOT_TOWN_FOUNTAIN );
     }
-    /* çeşme başındaysa matarayı doldur */
-    if ( room_fountain( ch ) != NULL )
+    /* çeşme başındaysa matarayı doldur (başarısız olursa bir süre deneme: sonsuz döngü yok) */
+    if ( room_fountain( ch ) != NULL && bot_pulse >= bot->fill_block_until )
     {
         for ( obj = ch->carrying; obj != NULL; obj = obj->next_content )
             if ( obj->item_type == ITEM_DRINK_CON && obj->value[1] < obj->value[0] / 2 && can_see_obj( ch, obj ) )
             {
+                if ( bot->fill_vnum == obj->pIndexData->vnum && bot->fill_amount == obj->value[1] )
+                {
+                    /* son deneme bir şey değiştirmedi */
+                    bot->fill_block_until = bot_pulse + 4 * 60 * 15;
+                    bot->fill_vnum = 0;
+                    return FALSE;
+                }
+                bot->fill_vnum   = obj->pIndexData->vnum;
+                bot->fill_amount = obj->value[1];
                 bot_obj_keyword( ch, obj, ch->carrying, kw, sizeof(kw) );
                 bot_cmd( bot, "doldur %s", kw );
                 return TRUE;

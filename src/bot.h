@@ -213,6 +213,9 @@ struct bot_data
     long        meet_id;
     int         meet_until;
     int         hold_until;        /* konuşmak için durdu (odada kal) */
+    int         fill_block_until;  /* çeşmede doldurma başarısızsa bekle */
+    int         fill_vnum;
+    int         fill_amount;
     /* kabal yaşamı */
     int         cabal_ask_pulse;
     long        induct_id;
