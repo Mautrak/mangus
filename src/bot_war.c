@@ -1020,6 +1020,30 @@ bool bot_war_goal( BOT_DATA *bot )
     if ( !pk_capable( ch ) )
         return FALSE;
 
+    /* yarım kalmış baskın (yolculuk kesildi vb.): kaldığı yerden sürdür */
+    if ( bot->raid_cabal > CABAL_NONE && bot->raid_cabal < MAX_CABAL
+      && bot_pulse - bot->raid_pulse < 4 * 60 * 40 && pct( ch->hit, ch->max_hit ) >= 50 )
+    {
+        bot_set_state( bot, BOT_ST_RAID );
+        return TRUE;
+    }
+    bot->raid_cabal = CABAL_NONE;
+
+    /* kabal arkadaşları baskına çıkmış: hazırsan sen de katıl (geç katılım) */
+    if ( raid_ready( bot ) && ch->level >= BOT_RAID_LEVEL )
+    {
+        BOT_DATA *b;
+
+        for ( b = bot_list; b != NULL; b = b->next )
+            if ( b != bot && b->ch != NULL && b->ch->cabal == ch->cabal && b->state == BOT_ST_RAID
+              && b->raid_cabal != ch->cabal && b->raid_step <= 1 && bot_pulse - b->raid_pulse < 4 * 60 * 8 )
+            {
+                raid_join( bot, b->raid_cabal, b->raid_leader_id );
+                bot_talk( bot, BOT_CH_CABAL, NULL, "ben de geliyorum" );
+                return TRUE;
+            }
+    }
+
     /* kendi eşyası çalınmışsa kurtarma */
     if ( !item_at_home( ch->cabal ) && bot_pulse - bot->raid_pulse > 4 * 60 * 15
       && pct( ch->hit, ch->max_hit ) >= 70 && ch->level >= BOT_RAID_LEVEL )
