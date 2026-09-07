@@ -16,6 +16,7 @@
 #include "interp.h"
 #include "recycle.h"
 #include "magic.h"
+#include "db.h"
 #include "bot.h"
 
 extern AREA_DATA *area_first;
@@ -39,6 +40,13 @@ static SPEC_FUN *spec_questmaster_fn = NULL;
 static bool bot_blind_in_dark( CHAR_DATA *ch );
 static bool is_night( void );
 static void bot_travel_step( BOT_DATA *bot );
+static bool bot_prey_ok( CHAR_DATA *ch, CHAR_DATA *mob, int lo, int hi );
+static int bot_prey_score( CHAR_DATA *ch, CHAR_DATA *mob, int dist );
+static int level_bonus( CHAR_DATA *ch );
+static void bot_mark_visited( BOT_DATA *bot, ROOM_INDEX_DATA *room );
+static void bot_remember_spawn( BOT_DATA *bot, ROOM_INDEX_DATA *room );
+static CHAR_DATA *prey_in_room( BOT_DATA *bot, ROOM_INDEX_DATA *room, int dist, int *best_score );
+static ROOM_INDEX_DATA *bot_explore_target( BOT_DATA *bot );
 
 /* aç ya da susuz: yenilenme durur, dinlenmek boşuna */
 static bool is_starving( CHAR_DATA *ch )
@@ -775,197 +783,290 @@ static int bot_prey_score( CHAR_DATA *ch, CHAR_DATA *mob, int dist )
     return score + number_range( 0, 15 );
 }
 
-/* bulunduğu odada uygun av var mı? */
-static CHAR_DATA *bot_prey_here( BOT_DATA *bot )
+/* ---------------------------------------------------------------------
+ * algı ve hafıza: bot dünya listesine bakmaz; odasını, tara menzilini ve
+ * kendi hatırladıklarını kullanır (oyuncu gibi).
+ * ------------------------------------------------------------------ */
+static void bot_mark_visited( BOT_DATA *bot, ROOM_INDEX_DATA *room )
+{
+    if ( room == NULL || room->vnum < 0 )
+        return;
+    if ( bot->visited == NULL )
+        bot->visited = (unsigned char *) calloc( 4096, 1 );
+    if ( room->area != bot->visited_area )
+    {
+        memset( bot->visited, 0, 4096 );
+        bot->visited_area = room->area;
+    }
+    bot->visited[room->vnum >> 3] |= (unsigned char) ( 1 << ( room->vnum & 7 ) );
+}
+
+static bool bot_was_visited( BOT_DATA *bot, ROOM_INDEX_DATA *room )
+{
+    if ( bot->visited == NULL || room == NULL || room->vnum < 0 || room->area != bot->visited_area )
+        return FALSE;
+    return ( bot->visited[room->vnum >> 3] & ( 1 << ( room->vnum & 7 ) ) ) != 0;
+}
+
+static void bot_forget_visits( BOT_DATA *bot )
+{
+    if ( bot->visited != NULL )
+        memset( bot->visited, 0, 4096 );
+}
+
+/* av görülen odayı hatırla */
+static void bot_remember_spawn( BOT_DATA *bot, ROOM_INDEX_DATA *room )
+{
+    int i;
+
+    if ( room == NULL )
+        return;
+    for ( i = 0; i < BOT_SPAWN_MAX; i++ )
+        if ( bot->spawn_vnum[i] == room->vnum )
+        {
+            bot->spawn_seen[i] = bot_pulse;
+            return;
+        }
+    bot->spawn_vnum[bot->spawn_pos]  = room->vnum;
+    bot->spawn_seen[bot->spawn_pos]  = bot_pulse;
+    bot->spawn_visit[bot->spawn_pos] = 0;
+    bot->spawn_pos = ( bot->spawn_pos + 1 ) % BOT_SPAWN_MAX;
+}
+
+static void bot_note_spawn_visit( BOT_DATA *bot, ROOM_INDEX_DATA *room )
+{
+    int i;
+
+    for ( i = 0; i < BOT_SPAWN_MAX; i++ )
+        if ( bot->spawn_vnum[i] == room->vnum )
+            bot->spawn_visit[i] = bot_pulse;
+}
+
+static struct bot_area_mem *bot_area_memory( BOT_DATA *bot, AREA_DATA *area, bool create )
+{
+    int i, oldest = 0;
+
+    for ( i = 0; i < BOT_AREA_MEM; i++ )
+        if ( bot->area_mem[i].area == area )
+            return &bot->area_mem[i];
+    if ( !create )
+        return NULL;
+    for ( i = 0; i < BOT_AREA_MEM; i++ )
+    {
+        if ( bot->area_mem[i].area == NULL )
+        {
+            oldest = i;
+            break;
+        }
+        if ( bot->area_mem[i].last_pulse < bot->area_mem[oldest].last_pulse )
+            oldest = i;
+    }
+    memset( &bot->area_mem[oldest], 0, sizeof(bot->area_mem[oldest]) );
+    bot->area_mem[oldest].area = area;
+    bot->area_mem[oldest].last_pulse = bot_pulse;
+    return &bot->area_mem[oldest];
+}
+
+void bot_note_kill( BOT_DATA *bot, CHAR_DATA *victim )
+{
+    struct bot_area_mem *mem;
+
+    if ( bot->ch == NULL || bot->ch->in_room == NULL )
+        return;
+    mem = bot_area_memory( bot, bot->ch->in_room->area, TRUE );
+    mem->kills++;
+    mem->last_pulse = bot_pulse;
+    bot_remember_spawn( bot, bot->ch->in_room );
+}
+
+/* bir odada uygun av var mı (bakış açısı: bot'un kendi odası) */
+static CHAR_DATA *prey_in_room( BOT_DATA *bot, ROOM_INDEX_DATA *room, int dist, int *best_score )
 {
     CHAR_DATA *ch = bot->ch, *rch, *best = NULL;
     int lo = UMAX( 1, ch->level - ( ch->level >= 6 ? 1 : 3 ) - UMIN( bot->hunt_fail, 2 ) );
     int hi = UMAX( 2, ch->level + level_bonus( ch ) );
-    int best_score = -1000;
 
-    for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
+    for ( rch = room->people; rch != NULL; rch = rch->next_in_room )
     {
         int s;
 
         if ( !bot_prey_ok( ch, rch, lo, hi ) )
             continue;
-        s = bot_prey_score( ch, rch, 0 );
-        if ( s > best_score )
+        s = bot_prey_score( ch, rch, dist );
+        if ( best == NULL || s > *best_score )
         {
-            best_score = s;
+            *best_score = s;
             best = rch;
         }
     }
     return best;
 }
 
-/* yakın odalarda av: hedef odayı döndürür */
-static ROOM_INDEX_DATA *bot_prey_near( BOT_DATA *bot, int depth )
+/*
+ * 'tara' gibi: altı yönde düz hat boyunca, kapalı kapıda durarak,
+ * 1 + seviye/10 oda uzağa bakar. En iyi av odasını döndürür.
+ */
+static ROOM_INDEX_DATA *bot_scan_prey( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch;
-    int n = bot_near_rooms( ch, depth, TRUE );
-    int i, best_score = -1000;
+    int range = 1 + ch->level / 10;
+    int d, i, best_score = -1000;
     ROOM_INDEX_DATA *best = NULL;
-    int lo = UMAX( 1, ch->level - ( ch->level >= 6 ? 1 : 3 ) - UMIN( bot->hunt_fail, 2 ) );
-    int hi = UMAX( 2, ch->level + level_bonus( ch ) );
 
-    for ( i = 1; i < n; i++ )
+    if ( bot_blind_in_dark( ch ) )
+        return NULL;
+    for ( d = 0; d < 6; d++ )
     {
-        CHAR_DATA *rch;
+        ROOM_INDEX_DATA *room = ch->in_room, *prev;
 
-        for ( rch = near_room[i]->people; rch != NULL; rch = rch->next_in_room )
+        for ( i = 1; i <= range; i++ )
         {
-            int s;
+            EXIT_DATA *pexit = room->exit[d];
+            int score = -1000;
 
-            if ( !bot_prey_ok( ch, rch, lo, hi ) )
-                continue;
-            s = bot_prey_score( ch, rch, near_dist[i] );
-            if ( s > best_score )
+            prev = room;
+            if ( pexit == NULL || pexit->u1.to_room == NULL || IS_SET( pexit->exit_info, EX_CLOSED ) )
+                break;
+            room = pexit->u1.to_room;
+            if ( prey_in_room( bot, room, i, &score ) != NULL )
             {
-                best_score = s;
-                best = near_room[i];
+                bot_remember_spawn( bot, room );
+                if ( score > best_score && bot_room_passable( ch, room, FALSE ) && bot_exit_back( room, prev ) )
+                {
+                    best_score = score;
+                    best = room;
+                }
             }
         }
     }
     return best;
 }
 
-/* ---------------------------------------------------------------------
- * av bölgesi seçimi
- * ------------------------------------------------------------------ */
-static int area_suitable_mobs( CHAR_DATA *ch, AREA_DATA *area, int lo, int hi )
+/* hafızadaki, bu bölgede, bir süredir uğranmamış en yakın av odası */
+static ROOM_INDEX_DATA *bot_recall_spawn( BOT_DATA *bot )
 {
-    CHAR_DATA *mob;
-    int n = 0;
+    CHAR_DATA *ch = bot->ch;
+    ROOM_INDEX_DATA *best = NULL;
+    int i, best_len = 100000;
+    sh_int tmp[BOT_MAX_PATH];
 
-    for ( mob = char_list; mob != NULL; mob = mob->next )
+    for ( i = 0; i < BOT_SPAWN_MAX; i++ )
     {
-        if ( !IS_NPC(mob) || mob->in_room == NULL || mob->in_room->area != area )
+        ROOM_INDEX_DATA *room;
+        int len;
+
+        if ( bot->spawn_vnum[i] <= 0 || bot_pulse - bot->spawn_seen[i] > 4 * 60 * 40 )
             continue;
-        if ( bot_prey_ok( ch, mob, lo, hi ) )
-            n++;
-    }
-    return n;
-}
-
-/* botun seviyesinden belirgin güçlü saldırgan yaratık sayısı */
-static int area_danger( CHAR_DATA *ch, AREA_DATA *area )
-{
-    CHAR_DATA *mob;
-    int n = 0;
-
-    for ( mob = char_list; mob != NULL; mob = mob->next )
-    {
-        if ( !IS_NPC(mob) || mob->in_room == NULL || mob->in_room->area != area )
+        if ( bot_pulse - bot->spawn_visit[i] < 4 * 60 * 2 )
             continue;
-        if ( IS_SET( mob->act, ACT_AGGRESSIVE ) && mob->level > ch->level + 2 )
-            n++;
-    }
-    return n;
-}
-
-static ROOM_INDEX_DATA *area_entry_room( CHAR_DATA *ch, AREA_DATA *area )
-{
-    CHAR_DATA *mob;
-    ROOM_INDEX_DATA *pick = NULL;
-    int count = 0;
-    int lo = UMAX( 1, ch->level - ( ch->level >= 6 ? 1 : 3 ) );
-    int hi = UMAX( 2, ch->level + level_bonus( ch ) );
-
-    /* önce bota en yakın, uygun av bulunan oda (dünya çapında sınırlı tarama) */
-    if ( ch->in_room != NULL )
-    {
-        int n = bot_near_rooms( ch, 90, FALSE ), i;
-
-        for ( i = 1; i < n; i++ )
+        if ( ( room = get_room_index( bot->spawn_vnum[i] ) ) == NULL || room == ch->in_room )
+            continue;
+        if ( room->area != ch->in_room->area )
+            continue;
+        len = bot_find_path( ch, ch->in_room, room, tmp, 60, FALSE );
+        if ( len >= 0 && len < best_len )
         {
-            CHAR_DATA *rch;
-
-            if ( near_room[i]->area != area )
-                continue;
-            for ( rch = near_room[i]->people; rch != NULL; rch = rch->next_in_room )
-                if ( bot_prey_ok( ch, rch, lo, hi ) )
-                    return near_room[i];
+            best_len = len;
+            best = room;
         }
     }
+    return best;
+}
 
-    /* alanda uygun bir mobun bulunduğu rastgele bir oda */
-    for ( mob = char_list; mob != NULL; mob = mob->next )
-    {
-        if ( !IS_NPC(mob) || mob->in_room == NULL || mob->in_room->area != area )
-            continue;
-        if ( !bot_room_passable( ch, mob->in_room, FALSE ) )
-            continue;
-        if ( number_range( 0, count++ ) == 0 )
-            pick = mob->in_room;
-    }
-    return pick;
+/* bölgede henüz uğranmamış en yakın oda (harita bilgisi) */
+static ROOM_INDEX_DATA *bot_explore_target( BOT_DATA *bot )
+{
+    CHAR_DATA *ch = bot->ch;
+    int n = bot_near_rooms( ch, 30, TRUE ), i;
+
+    for ( i = 1; i < n; i++ )
+        if ( !bot_was_visited( bot, near_room[i] ) )
+            return near_room[i];
+    return NULL;
+}
+
+/* ---------------------------------------------------------------------
+ * av bölgesi seçimi: 'bölge' listesindeki seviye aralıkları (kamusal
+ * bilgi), botun kendi deneyimi (kesim/ölüm) ve yol uzunluğu.
+ * ------------------------------------------------------------------ */
+/* bölgenin bota en yakın odası (harita bilgisi) */
+ROOM_INDEX_DATA *area_entry_room( BOT_DATA *bot, AREA_DATA *area )
+{
+    CHAR_DATA *ch = bot->ch;
+    ROOM_INDEX_DATA *room, *best = NULL;
+    int i, iHash, best_len = 100000, tries = 0;
+    sh_int tmp[BOT_MAX_PATH];
+
+    /* hatırlanan av odası */
+    for ( i = 0; i < BOT_SPAWN_MAX; i++ )
+        if ( bot->spawn_vnum[i] > 0 && ( room = get_room_index( bot->spawn_vnum[i] ) ) != NULL
+          && room->area == area && bot_pulse - bot->spawn_seen[i] < 4 * 60 * 60 )
+        {
+            int len = bot_find_path( ch, ch->in_room, room, tmp, BOT_MAX_PATH, FALSE );
+            if ( len >= 0 && len < best_len )
+            {
+                best_len = len;
+                best = room;
+            }
+        }
+    if ( best != NULL )
+        return best;
+
+    /* bölgenin geçilebilir bir odası; birkaç aday arasından en yakını */
+    for ( iHash = 0; iHash < MAX_KEY_HASH && tries < 6; iHash++ )
+        for ( room = room_index_hash[iHash]; room != NULL && tries < 6; room = room->next )
+        {
+            int len;
+
+            if ( room->area != area || !bot_room_passable( ch, room, FALSE ) || !room_has_exit( room ) )
+                continue;
+            if ( number_percent() > 20 )
+                continue;
+            tries++;
+            len = bot_find_path( ch, ch->in_room, room, tmp, BOT_MAX_PATH, FALSE );
+            if ( len >= 0 && len < best_len )
+            {
+                best_len = len;
+                best = room;
+            }
+        }
+    return best;
 }
 
 static AREA_DATA *bot_pick_hunt_area( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch;
     AREA_DATA *area, *best = NULL;
-    int best_score = -1;
-    int lo = UMAX( 1, ch->level - ( ch->level >= 6 ? 1 : 3 ) );
-    int hi = UMAX( 2, ch->level + level_bonus( ch ) );
-    int tries = 0;
+    int best_score = -1000;
 
     for ( area = area_first; area != NULL; area = area->next )
     {
-        int score, mobs;
+        int score, mid;
+        struct bot_area_mem *mem;
 
         if ( IS_SET( area->area_flag, AREA_CABAL | AREA_HOMETOWN ) )
             continue;
         if ( area->low_range > ch->level || area->high_range < ch->level )
             continue;
-        if ( area->high_range - area->low_range > 60 )
+        if ( area->high_range - area->low_range > 60 || area->min_vnum < 100 )
             continue;
-        if ( area->min_vnum < 100 )
-            continue;
-        if ( area == bot->hunt_area && bot->hunt_fail > 2 )
-            continue;
-        mobs = area_suitable_mobs( ch, area, lo, hi );
-        if ( mobs < 3 )
-            continue;
-        score = UMIN( mobs, 40 ) * 3;
-        {
-            int danger = area_danger( ch, area );
-            if ( ch->level < 10 && danger > 5 )
-                continue;
-            score -= danger * ( ch->level < 10 ? 20 : 6 ) * ( is_caster( ch ) ? 3 : 2 ) / 2;
-        }
-        {
-            BOT_DATA *ob;
-            for ( ob = bot_list; ob != NULL; ob = ob->next )
-                if ( ob != bot && ob->ch != NULL && ob->hunt_area == area && !is_same_group( ch, ob->ch ) )
-                    score -= 18;
-        }
-        if ( ch->level < 10 && area->high_range - area->low_range > 20 )
-            score -= 25;
+        /* deneyimsiz oyuncu bilgisi: seviyesinin çok üstüne çıkan derin bölgelere girme */
         if ( ch->level < 12 && area->high_range > ch->level + 12 && area->high_range - area->low_range > 15 )
-            continue;                                  /* düşük seviyede geniş/derin bölgelere girme */
-        /* seviye aralığının alt-orta kısmını tercih et */
-        if ( ch->level <= area->low_range + ( area->high_range - area->low_range ) / 2 )
-            score += 30;
+            continue;
+
+        mid = area->low_range + ( area->high_range - area->low_range ) / 3;
+        score = 60 - abs( ch->level - mid ) * 3;
+        if ( ( mem = bot_area_memory( bot, area, FALSE ) ) != NULL )
+        {
+            score += UMIN( mem->kills, 30 ) * 2 - mem->deaths * 30;
+            if ( mem->deaths >= 2 && bot_pulse - mem->last_pulse < 4 * 60 * 60 )
+                continue;
+        }
         if ( area == bot->hunt_area )
-            score += 20;
+            score += 15;
         if ( ch->in_room != NULL && ch->in_room->area == area )
             score += 25;
-        score += number_range( 0, 40 );
-        if ( ch->in_room != NULL && ch->in_room->area != area )
-        {
-            /* uzak bölgeler pahalı: yürümek hareket puanı ve zaman ister */
-            ROOM_INDEX_DATA *entry = area_entry_room( ch, area );
-            sh_int tmp[BOT_MAX_PATH];
-            int len = entry != NULL ? bot_find_path( ch, ch->in_room, entry, tmp, BOT_MAX_PATH, FALSE ) : -1;
-
-            if ( len < 0 )
-                continue;
-            score -= len / 2;
-        }
-        if ( ++tries > 60 )
-            break;
+        score += number_range( 0, 25 );
         if ( score > best_score )
         {
             best_score = score;
@@ -980,37 +1081,34 @@ void bot_debug_areas( CHAR_DATA *viewer, BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch;
     AREA_DATA *area;
-    int lo, hi, shown = 0;
+    int shown = 0, i;
 
     if ( ch == NULL )
     {
         send_to_char( "Bot çevrimdışı.\n\r", viewer );
         return;
     }
-    lo = UMAX( 1, ch->level - ( ch->level >= 6 ? 1 : 3 ) );
-    hi = UMAX( 2, ch->level + level_bonus( ch ) );
-    printf_to_char( viewer, "Seviye %d, av bandı %d-%d, oda %d (%s), av bölgesi %s, başarısızlık %d\n\r",
-                    ch->level, lo, hi, ch->in_room->vnum, ch->in_room->area->name,
+    printf_to_char( viewer, "Seviye %d, oda %d (%s), av bölgesi %s, başarısızlık %d\n\r",
+                    ch->level, ch->in_room->vnum, ch->in_room->area->name,
                     bot->hunt_area != NULL ? bot->hunt_area->name : "-", bot->hunt_fail );
     for ( area = area_first; area != NULL; area = area->next )
     {
-        int mobs;
-        ROOM_INDEX_DATA *entry;
-        sh_int tmp[BOT_MAX_PATH];
-        int len = -2;
+        struct bot_area_mem *mem;
 
         if ( area->low_range > ch->level || area->high_range < ch->level )
             continue;
-        mobs = area_suitable_mobs( ch, area, lo, hi );
-        entry = area_entry_room( ch, area );
-        if ( entry != NULL )
-            len = bot_find_path( ch, ch->in_room, entry, tmp, BOT_MAX_PATH, FALSE );
-        printf_to_char( viewer, "%-28.28s %3d-%-3d vnum %5d bayrak %2ld uygun mob %3d giriş %5d yol %d\n\r",
-                        area->name, area->low_range, area->high_range, area->min_vnum, area->area_flag,
-                        mobs, entry != NULL ? entry->vnum : 0, len );
+        mem = bot_area_memory( bot, area, FALSE );
+        printf_to_char( viewer, "%-28.28s %3d-%-3d kesim %3d ölüm %2d\n\r",
+                        area->name, area->low_range, area->high_range,
+                        mem != NULL ? mem->kills : 0, mem != NULL ? mem->deaths : 0 );
         if ( ++shown > 40 )
             break;
     }
+    send_to_char( "Hatırlanan av odaları:", viewer );
+    for ( i = 0; i < BOT_SPAWN_MAX; i++ )
+        if ( bot->spawn_vnum[i] > 0 )
+            printf_to_char( viewer, " %d", bot->spawn_vnum[i] );
+    send_to_char( "\n\r", viewer );
 }
 
 /* ---------------------------------------------------------------------
@@ -1065,7 +1163,7 @@ static void bot_travel_step( BOT_DATA *bot )
         int len;
 
         if ( to == NULL || ++bot->stuck > 4
-          || ( len = bot_find_path( ch, from, to, bot->path, BOT_MAX_PATH, bot->state == BOT_ST_PK ) ) < 0 )
+          || ( len = bot_find_path( ch, from, to, bot->path, BOT_MAX_PATH, bot->after_travel == BOT_ST_PK || bot->after_travel == BOT_ST_RAID ) ) < 0 )
         {
             bot->path_len = bot->path_pos = 0;
             bot_set_state( bot, BOT_ST_IDLE );
@@ -1093,9 +1191,15 @@ static void bot_travel_step( BOT_DATA *bot )
         return;
     if ( ch->in_room == pexit->u1.to_room )
     {
+        int sc = -1000;
+
         bot->path_pos++;
         bot->stuck = 0;
         bot->last_room_vnum = ch->in_room->vnum;
+        bot_mark_visited( bot, ch->in_room );
+        if ( prey_in_room( bot, ch->in_room, 0, &sc ) != NULL )
+            bot_remember_spawn( bot, ch->in_room );
+        bot_war_note_room( bot );
     }
     else if ( ch->in_room != from )
     {
@@ -1212,8 +1316,14 @@ static void bot_resting( BOT_DATA *bot )
     if ( bot_blind_in_dark( ch ) && is_night() && ch->silver < 20
       && bot_pulse - bot->state_pulse < 4 * 60 * 14 )
     {
-        if ( ch->position > POS_SLEEPING && !IS_AFFECTED( ch, AFF_SLEEP ) && bot_rested_enough( bot ) )
-            bot_cmd( bot, "uyu" );
+        /* karanlıkta bekle: yorgunsa uyu, değilse dinlen (her ikisi de yenilenme sağlar) */
+        if ( ch->position > POS_SLEEPING && !IS_AFFECTED( ch, AFF_SLEEP ) )
+        {
+            if ( !bot_rested_enough( bot ) )
+                bot_cmd( bot, "uyu" );
+            else if ( ch->position != POS_RESTING )
+                bot_cmd( bot, "dinlen" );
+        }
         return;
     }
     if ( bot_rested_enough( bot ) || bot_pulse - bot->state_pulse > 4 * 60 * 14 )
@@ -1486,6 +1596,9 @@ static void bot_escape( BOT_DATA *bot )
 static void bot_combat( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch;
+
+    if ( ch->fighting != NULL && !IS_NPC(ch->fighting) )
+        bot_war_attacked( bot, ch->fighting );
     CHAR_DATA *victim = ch->fighting;
     int hp = pct( ch->hit, ch->max_hit );
     int vhp = pct( victim->hit, victim->max_hit );
@@ -1582,7 +1695,7 @@ static void bot_combat( BOT_DATA *bot )
 }
 
 /* dövüş öncesi güçlendirmeler; komut ürettiyse TRUE */
-static bool bot_cast_buffs( BOT_DATA *bot )
+bool bot_cast_buffs( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch;
     int i;
@@ -1603,7 +1716,7 @@ static bool bot_cast_buffs( BOT_DATA *bot )
     return FALSE;
 }
 
-static void bot_attack( BOT_DATA *bot, CHAR_DATA *victim )
+void bot_attack( BOT_DATA *bot, CHAR_DATA *victim )
 {
     CHAR_DATA *ch = bot->ch;
     char kw[MAX_INPUT_LENGTH];
@@ -1653,13 +1766,11 @@ static bool bot_escape_pocket( BOT_DATA *bot )
         bot_cmd( bot, "anımsa" );
         return TRUE;
     }
-    if ( bot_pulse - bot->nopath_pulse > 4 * 60 * 5 )
+    /* kıdemli: anımsa yok; oyuncu gibi yardım ister, sonra elinden geleni yapmayı sürdürür */
+    if ( bot->nopath_pulse == bot_pulse )
     {
-        bot_log( bot, "oda %d'den çıkış yolu yok; oyundan çıkıp tapınaktan dönecek.", ch->in_room->vnum );
-        bot->nopath_pulse = 0;
-        bot_logout( bot, TRUE );
-        if ( bot->ch == NULL )
-            bot->next_login_try = current_time + number_range( 60, 180 );
+        bot_log( bot, "oda %d'den çıkış yolu yok; yardım istiyor.", ch->in_room->vnum );
+        bot_cmd( bot, "dua Sıkıştım, %s'den çıkış bulamıyorum.", ch->in_room->name );
         return TRUE;
     }
     return FALSE;
@@ -1746,8 +1857,9 @@ static bool bot_seek_group( BOT_DATA *bot )
                 continue;
             if ( bot_pulse - ob->group_offer_pulse < 4 * 60 * 5 )
                 continue;
-            if ( och->in_room->area != ch->in_room->area
-              && bot_find_path( ch, ch->in_room, och->in_room, tmp, 40, FALSE ) < 0 )
+            /* 'nerede' gibi: yalnızca aynı bölgedekileri görebilir */
+            if ( och->in_room->area != ch->in_room->area || !can_see( ch, och )
+              || bot_find_path( ch, ch->in_room, och->in_room, tmp, 40, FALSE ) < 0 )
                 continue;
             if ( number_range( 0, count++ ) == 0 )
                 pick = ob;
@@ -1809,15 +1921,18 @@ static void bot_hunt( BOT_DATA *bot )
     CHAR_DATA *ch = bot->ch;
     CHAR_DATA *prey;
     ROOM_INDEX_DATA *room;
+    int score = -1000;
 
-    if ( bot->hunt_area == NULL || bot_pulse - bot->hunt_area_pulse > 4 * 60 * 25
+    bot_mark_visited( bot, ch->in_room );
+    bot_note_spawn_visit( bot, ch->in_room );
+
+    if ( bot->hunt_area == NULL || bot_pulse - bot->hunt_area_pulse > 4 * 60 * 30
       || ( ch->in_room->area != bot->hunt_area && bot->hunt_fail > 1 ) )
     {
         AREA_DATA *area = bot_pick_hunt_area( bot );
 
         if ( area == NULL )
         {
-            /* uygun bölge yok: dünyaya dönüş yolu var mı? yoksa anımsa */
             if ( bot_escape_pocket( bot ) )
                 return;
             bot->hunt_fail++;
@@ -1825,17 +1940,22 @@ static void bot_hunt( BOT_DATA *bot )
             return;
         }
         if ( area != bot->hunt_area )
+        {
             bot->hunt_fail = 0;
+            bot_forget_visits( bot );
+        }
         bot->hunt_area = area;
         bot->hunt_area_pulse = bot_pulse;
     }
 
     if ( ch->in_room->area != bot->hunt_area )
     {
-        ROOM_INDEX_DATA *entry = area_entry_room( ch, bot->hunt_area );
+        ROOM_INDEX_DATA *entry = area_entry_room( bot, bot->hunt_area );
 
         if ( entry == NULL || !bot_set_travel( bot, entry->vnum, BOT_ST_HUNT ) )
         {
+            if ( bot_escape_pocket( bot ) )
+                return;
             bot->hunt_fail += 2;
             bot->hunt_area = NULL;
             bot_set_state( bot, BOT_ST_IDLE );
@@ -1845,11 +1965,14 @@ static void bot_hunt( BOT_DATA *bot )
 
     if ( bot_group_followers( bot ) )
         return;
+    if ( bot_war_opportunity( bot ) )
+        return;
     if ( bot_cast_buffs( bot ) )
         return;
 
-    if ( ( prey = bot_prey_here( bot ) ) != NULL )
+    if ( ( prey = prey_in_room( bot, ch->in_room, 0, &score ) ) != NULL )
     {
+        bot_remember_spawn( bot, ch->in_room );
         bot_attack( bot, prey );
         bot->hunt_fail = 0;
         return;
@@ -1859,50 +1982,29 @@ static void bot_hunt( BOT_DATA *bot )
     if ( bot_seek_group( bot ) )
         return;
 
-    if ( bot_debug )
-    {
-        CHAR_DATA *rch;
-        int lo = UMAX( 1, ch->level - 2 - bot->hunt_fail );
-        int hi = UMAX( 2, ch->level + level_bonus( ch ) );
-        for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
-        {
-            if ( !IS_NPC(rch) )
-                continue;
-            bot_log( bot, "odadaki %s (lvl %d, yp %d/%d) av değil: bant %d-%d gör=%d dövüş=%d shop=%d spec=%d hp_sınır=%d yön=%d",
-                     rch->short_descr, rch->level, rch->hit, rch->max_hit, lo, hi,
-                     can_see( ch, rch ), rch->fighting != NULL, rch->pIndexData->pShop != NULL,
-                     !spec_allowed( rch->spec_fun ),
-                     ch->level < 5 ? rch->max_hit > ch->max_hit * 2 + 15 : rch->max_hit > ch->max_hit * 3 + 40,
-                     ( IS_GOOD(ch) && IS_GOOD(rch) ) || ( IS_EVIL(ch) && IS_EVIL(rch) ) );
-        }
-    }
-    if ( ( room = bot_prey_near( bot, 9 ) ) != NULL )
-    {
-        if ( bot_debug )
-            bot_log( bot, "yakın av: oda %d (%s), uzaklık ?", room->vnum, room->name );
-        if ( bot_set_travel( bot, room->vnum, BOT_ST_HUNT ) )
-            return;
-    }
+    /* tara menzilinde av */
+    if ( ( room = bot_scan_prey( bot ) ) != NULL && bot_set_travel( bot, room->vnum, BOT_ST_HUNT ) )
+        return;
+    /* hatırlanan av odaları */
+    if ( ( room = bot_recall_spawn( bot ) ) != NULL && bot_set_travel( bot, room->vnum, BOT_ST_HUNT ) )
+        return;
+    /* keşfet */
+    if ( ( room = bot_explore_target( bot ) ) != NULL && bot_set_travel( bot, room->vnum, BOT_ST_HUNT ) )
+        return;
 
-    /* yakında av yok: bölgede biraz dolaş, birkaç denemeden sonra bölge değiştir */
-    if ( ++bot->hunt_fail > 4 )
+    /* bölge gezildi ve av yok: biraz bekle, sonra yeniden keşfet ya da bölge değiştir */
+    if ( ++bot->hunt_fail > 3 )
     {
+        struct bot_area_mem *mem = bot_area_memory( bot, bot->hunt_area, TRUE );
+        mem->last_pulse = bot_pulse;
         bot->hunt_area = NULL;
         bot->hunt_fail = 0;
         bot_set_state( bot, BOT_ST_IDLE );
         return;
     }
-    {
-        int n = bot_near_rooms( ch, 12, TRUE );
-        ROOM_INDEX_DATA *dest = NULL;
-
-        if ( n > 3 )
-            dest = near_room[number_range( n / 2, n - 1 )];
-        if ( dest == NULL || dest == ch->in_room )
-            dest = area_entry_room( ch, bot->hunt_area );
-        if ( dest == NULL || dest == ch->in_room || !bot_set_travel( bot, dest->vnum, BOT_ST_HUNT ) )
-            bot_set_state( bot, BOT_ST_REST );
-    }
+    bot_forget_visits( bot );
+    bot->rest_reason = 1;
+    bot_set_state( bot, BOT_ST_REST );
 }
 
 /* ---------------------------------------------------------------------
@@ -2651,18 +2753,35 @@ static void bot_quest( BOT_DATA *bot )
         return;
     }
 
-    /* görev yaratığı nerede? */
+    /* görev yaratığı nerede? Görevci odayı söyledi; oradan sonra 'nerede' gibi
+       yalnızca aynı bölgede bakılır. */
     for ( mob = char_list; mob != NULL; mob = mob->next )
-        if ( IS_NPC(mob) && mob->pIndexData->vnum == ch->pcdata->questmob && mob->in_room != NULL )
+        if ( IS_NPC(mob) && mob->pIndexData->vnum == ch->pcdata->questmob && mob->in_room != NULL
+          && mob->in_room->area == ch->in_room->area && can_see( ch, mob ) )
             break;
 
     if ( mob == NULL )
     {
-        if ( ++bot->quest_tries > 20 )
+        ROOM_INDEX_DATA *qroom = get_room_index( ch->pcdata->questroom );
+
+        if ( qroom != NULL && qroom != ch->in_room && bot->quest_tries < 3 )
+        {
+            bot->quest_tries++;
+            if ( !bot_set_travel( bot, qroom->vnum, BOT_ST_QUEST ) )
+                bot_set_state( bot, BOT_ST_IDLE );
+            return;
+        }
+        /* odada değil: bölgeyi biraz dolaşarak ara */
+        if ( ++bot->quest_tries > 14 )
         {
             bot_set_state( bot, BOT_ST_IDLE );
             bot->quest_tries = 0;
+            return;
         }
+        bot_mark_visited( bot, ch->in_room );
+        if ( ( qroom = bot_explore_target( bot ) ) != NULL && bot_set_travel( bot, qroom->vnum, BOT_ST_QUEST ) )
+            return;
+        bot_set_state( bot, BOT_ST_IDLE );
         return;
     }
 
@@ -2711,6 +2830,16 @@ static OBJ_DATA *bot_own_corpse( CHAR_DATA *ch )
 
 void bot_after_death( BOT_DATA *bot )
 {
+    /* öldüğüm bölgeyi hatırla */
+    {
+        ROOM_INDEX_DATA *droom = get_room_index( bot->death_room );
+        if ( droom != NULL )
+        {
+            struct bot_area_mem *mem = bot_area_memory( bot, droom->area, TRUE );
+            mem->deaths++;
+            mem->last_pulse = bot_pulse;
+        }
+    }
     /* beni öldüren yaratık türünden bir süre uzak dur */
     if ( bot->last_opp_vnum > 0 )
     {
@@ -2780,7 +2909,9 @@ bool bot_wants_group_with( BOT_DATA *bot, CHAR_DATA *other )
         return FALSE;
     if ( abs( ch->level - other->level ) > 8 )
         return FALSE;
-    if ( bot->state == BOT_ST_FOLLOW || bot->state == BOT_ST_CORPSE || bot->state == BOT_ST_PK )
+    if ( bot->state == BOT_ST_FOLLOW || bot->state == BOT_ST_CORPSE || bot->state == BOT_ST_PK || bot->state == BOT_ST_RAID )
+        return FALSE;
+    if ( bot->state == BOT_ST_MEET && bot->meet_id != other->id )
         return FALSE;
     if ( IS_SET( ch->act, PLR_GHOST ) )
         return FALSE;
@@ -2813,6 +2944,52 @@ void bot_stop_follow( BOT_DATA *bot, bool say )
         bot_cmd( bot, "takip %s", ch->name );
     if ( bot->ch != NULL )
         bot_set_state( bot, BOT_ST_IDLE );
+}
+
+/* uzaktaki biri grup istedi: bulunduğu yerde bekle, gelirse takip et */
+void bot_offer_meeting( BOT_DATA *bot, CHAR_DATA *other )
+{
+    CHAR_DATA *ch = bot->ch;
+
+    if ( ch == NULL || other == NULL || ch->fighting != NULL )
+        return;
+    if ( bot->state == BOT_ST_FOLLOW || bot->state == BOT_ST_CORPSE || bot->state == BOT_ST_PK
+      || bot->state == BOT_ST_MEET )
+        return;
+    bot->meet_id = other->id;
+    bot->meet_until = bot_pulse + 4 * 60 * 6;
+    bot->path_len = bot->path_pos = 0;
+    bot_set_state( bot, BOT_ST_MEET );
+}
+
+static void bot_meeting( BOT_DATA *bot )
+{
+    CHAR_DATA *ch = bot->ch;
+    CHAR_DATA *other = bot_char_by_id( bot->meet_id );
+
+    if ( other == NULL || other->in_room == NULL || bot_pulse > bot->meet_until
+      || ( !IS_BOT(other) && ( other->desc == NULL || other->desc->connected != CON_PLAYING ) ) )
+    {
+        bot->meet_id = 0;
+        bot_set_state( bot, BOT_ST_IDLE );
+        return;
+    }
+    if ( other->in_room == ch->in_room && can_see( ch, other ) )
+    {
+        bot->meet_id = 0;
+        bot_talk( bot, BOT_CH_SAY, other, "İşte geldin. Ardındayım." );
+        bot_start_follow( bot, other );
+        return;
+    }
+    /* beklerken odada av varsa kes */
+    {
+        int score = -1000;
+        CHAR_DATA *prey = prey_in_room( bot, ch->in_room, 0, &score );
+        if ( prey != NULL )
+            bot_attack( bot, prey );
+        else if ( ch->position == POS_STANDING && ch->hit < ch->max_hit && number_percent() < 30 )
+            bot_cmd( bot, "dinlen" );
+    }
 }
 
 static void bot_following( BOT_DATA *bot )
@@ -2933,131 +3110,6 @@ static void bot_following( BOT_DATA *bot )
 /* ---------------------------------------------------------------------
  * kabal ve oyuncu katli
  * ------------------------------------------------------------------ */
-static int bot_choose_cabal( CHAR_DATA *ch )
-{
-    if ( is_caster( ch ) )
-    {
-        if ( ch->ethos == 1 && get_curr_stat( ch, STAT_INT ) >= 19 && number_percent() < 40 )
-            return CABAL_RULER;
-        return CABAL_SHALAFI;
-    }
-    if ( IS_EVIL(ch) )
-        return number_percent() < 50 ? CABAL_INVADER : CABAL_CHAOS;
-    if ( ch->iclass == CLASS_PALADIN || ( IS_GOOD(ch) && ch->ethos == 1 ) )
-        return CABAL_KNIGHT;
-    if ( ch->iclass == CLASS_RANGER || ch->iclass == CLASS_THIEF || ch->iclass == CLASS_NINJA )
-        return IS_GOOD(ch) ? CABAL_LIONS : CABAL_HUNTER;
-    if ( ch->iclass == CLASS_WARRIOR || ch->iclass == CLASS_SAMURAI )
-        return number_percent() < 70 ? CABAL_BATTLE : CABAL_KNIGHT;
-    return CABAL_HUNTER;
-}
-
-static void bot_announce( const char *text )
-{
-    DESCRIPTOR_DATA *d;
-    char buf[MAX_STRING_LENGTH];
-
-    snprintf( buf, sizeof(buf), "{C[Kabal] %s{x\n\r", text );
-    for ( d = descriptor_list; d != NULL; d = d->next )
-        if ( d->connected == CON_PLAYING && d->character != NULL )
-            send_to_char( buf, d->character );
-}
-
-static void bot_check_cabal( BOT_DATA *bot )
-{
-    CHAR_DATA *ch = bot->ch;
-    char buf[MAX_STRING_LENGTH];
-    int cabal;
-
-    bot->cabal_check_pulse = bot_pulse;
-    if ( !bot->pk_istekli || ch->cabal != CABAL_NONE || ch->level < 18 )
-        return;
-    if ( ch->pcdata->oyuncu_katli == 0 )
-        return;
-    cabal = bot_choose_cabal( ch );
-    if ( ch->iclass == CLASS_WARRIOR && cabal == CABAL_SHALAFI )
-        cabal = CABAL_BATTLE;
-    ch->cabal = cabal;
-    snprintf( buf, sizeof(buf), "%s, %s kabalına kabul edildi!", ch->name, cabal_table[cabal].long_name );
-    bot_announce( buf );
-    bot_log( bot, "%s kabalına katıldı.", cabal_table[cabal].short_name );
-    bot_chat_event( bot, BOT_EV_CABAL, NULL );
-    save_char_obj( ch );
-}
-
-static bool pk_target_ok( CHAR_DATA *ch, CHAR_DATA *victim )
-{
-    if ( victim == NULL || victim == ch || IS_NPC(victim) || victim->in_room == NULL )
-        return FALSE;
-    if ( victim->cabal == CABAL_NONE || victim->cabal == ch->cabal )
-        return FALSE;
-    if ( victim->pcdata->oyuncu_katli == 0 || IS_SET( victim->act, PLR_GHOST ) )
-        return FALSE;
-    if ( IS_IMMORTAL(victim) || victim->level < 10 )
-        return FALSE;
-    if ( is_safe_nomessage( ch, victim ) )
-        return FALSE;
-    if ( IS_SET( victim->in_room->area->area_flag, AREA_CABAL ) )
-        return FALSE;
-    if ( !IS_BOT(victim) && ( victim->desc == NULL || number_percent() < 60 ) )
-        return FALSE;
-    return TRUE;
-}
-
-static CHAR_DATA *bot_pick_pk_target( BOT_DATA *bot )
-{
-    CHAR_DATA *ch = bot->ch, *vch, *pick = NULL;
-    int count = 0;
-
-    for ( vch = char_list; vch != NULL; vch = vch->next )
-    {
-        if ( !pk_target_ok( ch, vch ) )
-            continue;
-        if ( number_range( 0, count++ ) == 0 )
-            pick = vch;
-    }
-    return pick;
-}
-
-static void bot_pk( BOT_DATA *bot )
-{
-    CHAR_DATA *ch = bot->ch;
-    CHAR_DATA *victim = bot_char_by_id( bot->pk_target_id );
-
-    if ( victim == NULL || bot_pulse > bot->pk_until || !pk_target_ok( ch, victim )
-      || pct( ch->hit, ch->max_hit ) < 60 )
-    {
-        bot->pk_target_id = 0;
-        bot_set_state( bot, BOT_ST_IDLE );
-        return;
-    }
-    if ( victim->in_room == ch->in_room )
-    {
-        if ( bot_cast_buffs( bot ) )
-            return;
-        if ( bot->substate == 0 )
-        {
-            bot->substate = 1;
-            if ( number_percent() < 50 )
-            {
-                bot_chat_event( bot, BOT_EV_PK_TAUNT, victim );
-                return;
-            }
-        }
-        bot_attack( bot, victim );
-        return;
-    }
-    if ( bot->path_len == 0 || get_room_index( bot->target_vnum ) != victim->in_room )
-    {
-        if ( !bot_set_travel( bot, victim->in_room->vnum, BOT_ST_PK ) )
-        {
-            bot->pk_target_id = 0;
-            bot_set_state( bot, BOT_ST_IDLE );
-            return;
-        }
-    }
-}
-
 /* ---------------------------------------------------------------------
  * hedef seçimi
  * ------------------------------------------------------------------ */
@@ -3065,8 +3117,8 @@ static void bot_choose_goal( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch;
 
-    if ( bot_pulse - bot->cabal_check_pulse > 4 * 60 * 5 )
-        bot_check_cabal( bot );
+    if ( bot_war_goal( bot ) )
+        return;
 
     bot_compute_town_tasks( bot );
     if ( bot_town_worth_it( bot ) )
@@ -3078,21 +3130,6 @@ static void bot_choose_goal( BOT_DATA *bot )
     {
         bot_set_state( bot, BOT_ST_QUEST );
         return;
-    }
-    if ( ch->cabal != CABAL_NONE && ch->pcdata->oyuncu_katli == 1 && bot_pulse > bot->next_pk
-      && pct( ch->hit, ch->max_hit ) > 85 )
-    {
-        CHAR_DATA *victim = bot_pick_pk_target( bot );
-
-        bot->next_pk = bot_pulse + number_range( 4 * 60 * 25, 4 * 60 * 70 );
-        if ( victim != NULL && number_percent() < 60 )
-        {
-            bot->pk_target_id = victim->id;
-            bot->pk_until = bot_pulse + 4 * 60 * 15;
-            bot_set_state( bot, BOT_ST_PK );
-            bot_log( bot, "kabal savaşı: hedef %s.", victim->name );
-            return;
-        }
     }
     bot_set_state( bot, BOT_ST_HUNT );
 }
@@ -3125,6 +3162,15 @@ void bot_think( BOT_DATA *bot )
         bot_combat( bot );
         return;
     }
+
+    /* kabal yaşamı: liderlik, üyelik, bekleyen induct */
+    bot_war_tick( bot );
+    if ( bot->ch == NULL || ch->in_room == NULL )
+        return;
+
+    /* biriyle konuşuyor: cevabı verene dek odada kal */
+    if ( bot_pulse < bot->hold_until && !IS_SET( ch->act, PLR_GHOST ) )
+        return;
 
     /* gevezelik */
     if ( bot_pulse >= bot->next_chat )
@@ -3212,6 +3258,8 @@ void bot_think( BOT_DATA *bot )
     case BOT_ST_QUEST:  bot_quest( bot );       return;
     case BOT_ST_CORPSE: bot_corpse( bot );      return;
     case BOT_ST_PK:     bot_pk( bot );          return;
+    case BOT_ST_MEET:   bot_meeting( bot );     return;
+    case BOT_ST_RAID:   bot_raid( bot );        return;
     case BOT_ST_HUNT:   bot_hunt( bot );        return;
     case BOT_ST_LOGOUT:
         bot_set_state( bot, BOT_ST_IDLE );

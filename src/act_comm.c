@@ -390,6 +390,75 @@ void do_kd( CHAR_DATA *ch, char *argument )
 }
 
 
+/*
+ * kdg: herkese açık konu dışı (OOC) sohbet kanalı.
+ * Bağımsız 'kdg' açıp kapatır; 'kdg <ileti>' kanalı açık olan herkese ulaşır.
+ */
+void do_kdg( CHAR_DATA *ch, char *argument )
+{
+    DESCRIPTOR_DATA *d;
+    char buf[MAX_STRING_LENGTH];
+
+    if ( argument[0] == '\0' )
+    {
+	if ( IS_SET( ch->comm, COMM_NOKDG ) )
+	{
+	    printf_to_char( ch, "KDG kanalı açıldı.\n\r" );
+	    REMOVE_BIT( ch->comm, COMM_NOKDG );
+	}
+	else
+	{
+	    printf_to_char( ch, "KDG kanalı kapandı.\n\r" );
+	    SET_BIT( ch->comm, COMM_NOKDG );
+	}
+	return;
+    }
+
+    if ( IS_SET( ch->comm, COMM_NOKDG ) )
+    {
+	printf_to_char( ch, "Önce KDG kanalını açmalısın.\n\r" );
+	return;
+    }
+    if ( IS_SET( ch->comm, COMM_NOCHANNELS ) )
+    {
+	printf_to_char( ch, "Tanrılar kanal kullanma hakkını elinden almış.\n\r" );
+	return;
+    }
+    if ( IS_AFFECTED( ch, AFF_CHARM ) && ch->master != NULL )
+    {
+	printf_to_char( ch, "Teshirliyken kdg kanalını kullanamazsın.\n\r" );
+	return;
+    }
+
+    write_channel_log( ch, NULL, KANAL_KD, argument );
+
+    if ( is_affected( ch, gsn_garble ) )
+	garble( buf, argument );
+    else
+	strcpy( buf, argument );
+
+    if ( !is_affected( ch, gsn_deafen ) )
+	act_color( "[KDG] Sen: $C$t$c", ch, buf, NULL, TO_CHAR, POS_DEAD, CLR_CYAN_BOLD );
+
+    for ( d = descriptor_list; d != NULL; d = d->next )
+    {
+	if ( d->connected == CON_PLAYING
+	&&   d->character != ch
+	&&   !IS_SET( d->character->comm, COMM_NOKDG )
+	&&   !IS_SET( d->character->comm, COMM_QUIET )
+	&&   !is_affected( d->character, gsn_deafen ) )
+	    act_color( "[KDG] $n: $C$t$c", ch, buf, d->character, TO_VICT, POS_DEAD, CLR_CYAN_BOLD );
+    }
+
+    {
+	CHAR_DATA *bch;
+
+	for ( bch = char_list; bch != NULL; bch = bch->next )
+	    if ( IS_BOT( bch ) && bch != ch && !IS_SET( bch->comm, COMM_NOKDG ) )
+		bot_hear( bch, ch, BOT_CH_KDG, buf );
+    }
+}
+
 void do_kdcevapla( CHAR_DATA *ch, char *argument )
 {
     char buf[MAX_STRING_LENGTH];

@@ -16,6 +16,10 @@
 #define BOT_WHO_MAX       256
 #define BOT_WEAR_FAIL_MAX 8
 #define BOT_AVOID_MAX     4
+#define BOT_SPAWN_MAX     24
+#define BOT_AREA_MEM      16
+#define BOT_SEENPC_MAX      8
+#define BOT_PK_AREAS      4
 
 /* durumlar */
 #define BOT_ST_IDLE       0
@@ -28,6 +32,8 @@
 #define BOT_ST_FOLLOW     7
 #define BOT_ST_PK         8
 #define BOT_ST_LOGOUT     9
+#define BOT_ST_MEET       10
+#define BOT_ST_RAID       11
 
 /* kişilikler */
 #define BOT_K_SAKIN       0
@@ -47,6 +53,7 @@
 #define BOT_CH_CABAL      4
 #define BOT_CH_SOCIAL     5
 #define BOT_CH_EMOTE      6
+#define BOT_CH_KDG        7
 
 /* olaylar */
 #define BOT_EV_LEVEL      0
@@ -80,6 +87,14 @@
 #define BOT_TOWN_FOUNTAIN   (L)
 #define BOT_TOWN_UPGRADE    (M)
 
+struct bot_area_mem
+{
+    AREA_DATA * area;
+    int         kills;
+    int         deaths;
+    int         last_pulse;
+};
+
 struct bot_reply
 {
     char        to[BOT_NAME_LEN];
@@ -107,6 +122,7 @@ struct bot_data
     char *      lakap;
     bool        disabled;
     bool        pk_istekli;
+    int         leader_cabal;      /* kadro: tanrıların atadığı liderlik */
 
     /* çalışma zamanı */
     CHAR_DATA * ch;
@@ -171,6 +187,14 @@ struct bot_data
     int         avoid_vnum[BOT_AVOID_MAX];
     int         avoid_until[BOT_AVOID_MAX];
     int         avoid_pos;
+    /* algı hafızası */
+    int         spawn_vnum[BOT_SPAWN_MAX];
+    int         spawn_seen[BOT_SPAWN_MAX];
+    int         spawn_visit[BOT_SPAWN_MAX];
+    int         spawn_pos;
+    unsigned char *visited;
+    AREA_DATA * visited_area;
+    struct bot_area_mem area_mem[BOT_AREA_MEM];
 
     /* sohbet */
     struct bot_reply replies[BOT_MAX_REPLIES];
@@ -186,6 +210,26 @@ struct bot_data
 
     /* takip / grup */
     long        leader_id;
+    long        meet_id;
+    int         meet_until;
+    int         hold_until;        /* konuşmak için durdu (odada kal) */
+    /* kabal yaşamı */
+    int         cabal_ask_pulse;
+    long        induct_id;
+    int         induct_pulse;
+    long        revenge_id;
+    int         revenge_pulse;
+    int         help_call_pulse;
+    AREA_DATA * pk_areas[BOT_PK_AREAS];
+    int         pk_area_n;
+    int         pk_area_i;
+    long        seen_id[BOT_SEENPC_MAX];
+    int         seen_vnum[BOT_SEENPC_MAX];
+    int         seen_pulse[BOT_SEENPC_MAX];
+    int         raid_cabal;
+    long        raid_leader_id;
+    int         raid_pulse;
+    int         raid_step;
     int         follow_since;
     int         follow_until;
     int         leader_last_action;
@@ -245,10 +289,29 @@ void    bot_brain_boot      ( void );
 void    bot_brain_login     ( BOT_DATA *bot, bool fresh );
 bool    bot_wants_group_with( BOT_DATA *bot, CHAR_DATA *other );
 void    bot_start_follow    ( BOT_DATA *bot, CHAR_DATA *leader );
+void    bot_offer_meeting   ( BOT_DATA *bot, CHAR_DATA *other );
 void    bot_stop_follow     ( BOT_DATA *bot, bool say );
 bool    bot_in_group        ( CHAR_DATA *ch );
 const char *bot_area_name   ( BOT_DATA *bot );
 void    bot_note_loot       ( BOT_DATA *bot );
+void    bot_note_kill       ( BOT_DATA *bot, CHAR_DATA *victim );
+/* bot_brain.c dışa açılanlar */
+void    bot_attack          ( BOT_DATA *bot, CHAR_DATA *victim );
+bool    bot_cast_buffs      ( BOT_DATA *bot );
+ROOM_INDEX_DATA *area_entry_room( BOT_DATA *bot, AREA_DATA *area );
+/* bot_war.c */
+bool    bot_cabal_fits      ( CHAR_DATA *ch, int cabal );
+int     bot_choose_cabal    ( CHAR_DATA *ch );
+bool    bot_leader_handle   ( BOT_DATA *leader, CHAR_DATA *speaker, int channel );
+bool    bot_war_opportunity ( BOT_DATA *bot );
+void    bot_war_attacked    ( BOT_DATA *bot, CHAR_DATA *attacker );
+bool    bot_war_help        ( BOT_DATA *bot, CHAR_DATA *speaker, const char *text );
+void    bot_war_note_room   ( BOT_DATA *bot );
+void    bot_pk              ( BOT_DATA *bot );
+void    bot_raid            ( BOT_DATA *bot );
+bool    bot_war_goal        ( BOT_DATA *bot );
+void    bot_war_tick        ( BOT_DATA *bot );
+void    bot_cabal_alarm     ( int cabal, CHAR_DATA *thief );
 void    bot_after_death     ( BOT_DATA *bot );
 void    bot_debug_areas     ( CHAR_DATA *viewer, BOT_DATA *bot );
 int     bot_sell_candidates ( BOT_DATA *bot );
@@ -260,7 +323,9 @@ void    bot_chat_idle       ( BOT_DATA *bot );
 void    bot_chat_react      ( BOT_DATA *bot, CHAR_DATA *speaker, int channel, const char *text );
 void    bot_chat_event      ( BOT_DATA *bot, int event, CHAR_DATA *other );
 void    bot_style           ( BOT_DATA *bot, const char *in, char *out, size_t size );
+void    bot_style_ch        ( BOT_DATA *bot, const char *in, char *out, size_t size, bool ic );
 void    bot_fill            ( BOT_DATA *bot, const char *tmpl, CHAR_DATA *other, char *out, size_t size );
+void    bot_fill_ch         ( BOT_DATA *bot, const char *tmpl, CHAR_DATA *other, char *out, size_t size, bool ic );
 void    bot_talk            ( BOT_DATA *bot, int channel, CHAR_DATA *to, const char *text );
 
 #endif /* BOT_H */

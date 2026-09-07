@@ -51,6 +51,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "merc.h"
+#include "bot.h"
 
 /* command procedures needed */
 DECLARE_DO_FUN(do_split		);
@@ -212,6 +213,12 @@ void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container )
              cabal_table[d->character->cabal].obj_ptr == obj)
              act_color("$CKabal gücünde titreme hissediyorsun!$c",
                    d->character,NULL,NULL,TO_CHAR,POS_DEAD,CLR_GREEN);
+          }
+          {
+            int ci;
+            for ( ci = 1; ci < MAX_CABAL; ci++ )
+              if ( cabal_table[ci].obj_ptr == obj )
+                bot_cabal_alarm( ci, ch );
           }
           if (IS_SET(obj->progtypes,OPROG_GET))
             (obj->pIndexData->oprogs->get_prog) (obj,ch);

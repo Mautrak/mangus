@@ -226,6 +226,7 @@ DECLARE_DO_FUN(	do_judge	);
 DECLARE_DO_FUN(	do_kasa	);
 DECLARE_DO_FUN(	do_katana	);
 DECLARE_DO_FUN(	do_kd	);
+DECLARE_DO_FUN(	do_kdg	);
 DECLARE_DO_FUN(	do_kdcevapla	);
 DECLARE_DO_FUN(	do_kick		);
 DECLARE_DO_FUN(	do_kill		);

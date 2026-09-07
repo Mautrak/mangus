@@ -108,6 +108,8 @@ const char *bot_state_name( int state )
     case BOT_ST_CORPSE: return "ceset peşinde";
     case BOT_ST_FOLLOW: return "takipte";
     case BOT_ST_PK:     return "kabal savaşında";
+    case BOT_ST_MEET:   return "buluşmada";
+    case BOT_ST_RAID:   return "baskında";
     case BOT_ST_LOGOUT: return "çıkıyor";
     }
     return "?";
@@ -350,8 +352,9 @@ static void bot_load_roster( void )
 {
     FILE *fp;
     char line[1024];
-    int count = 0;
+    int count = 0, leader_count = 0, i;
     BOT_DATA *rev = NULL, *bot, *next;
+    struct { char name[64]; char cabal[64]; } leaders[16];
 
     if ( ( fp = fopen( BOT_ROSTER_FILE, "r" ) ) == NULL )
         return;
@@ -371,6 +374,18 @@ static void bot_load_roster( void )
             {
                 if ( !str_cmp( key, "enaz" ) )  bot_min_online = URANGE( 0, val, 60 );
                 if ( !str_cmp( key, "encok" ) ) bot_max_online = URANGE( 0, val, 60 );
+            }
+            else if ( !str_prefix( "lider ", s + 1 ) && leader_count < 16 )
+            {
+                /* !lider <bot> <kabal>: tanrıların atadığı kabal lideri */
+                char who[64], cab[64];
+
+                if ( sscanf( s + 7, "%63s %63s", who, cab ) == 2 )
+                {
+                    snprintf( leaders[leader_count].name, sizeof(leaders[leader_count].name), "%s", who );
+                    snprintf( leaders[leader_count].cabal, sizeof(leaders[leader_count].cabal), "%s", cab );
+                    leader_count++;
+                }
             }
             continue;
         }
@@ -393,6 +408,24 @@ static void bot_load_roster( void )
         rev = bot;
     }
     bot_list = rev;
+
+    for ( i = 0; i < leader_count; i++ )
+    {
+        int cabal = cabal_lookup( leaders[i].cabal );
+
+        for ( bot = bot_list; bot != NULL; bot = bot->next )
+            if ( !str_cmp( bot->name, leaders[i].name ) )
+                break;
+        if ( bot == NULL || cabal <= CABAL_NONE )
+        {
+            char buf[256];
+            snprintf( buf, sizeof(buf), "[bot] lider satırı tanınmadı: %s %s", leaders[i].name, leaders[i].cabal );
+            log_string( buf );
+            continue;
+        }
+        bot->leader_cabal = cabal;
+        bot->pk_istekli = TRUE;
+    }
 
     if ( bot_max_online < bot_min_online )
         bot_max_online = bot_min_online;
@@ -562,20 +595,11 @@ static void bot_enter_world( BOT_DATA *bot, CHAR_DATA *ch, bool fresh )
     }
     else if ( ch->in_room != NULL )
     {
-        sh_int tmp[BOT_MAX_PATH];
-        ROOM_INDEX_DATA *temple = get_room_index( ROOM_VNUM_TEMPLE );
-
+        /* oyuncuların girişiyle aynı kural: kaydedildiği odaya döner */
         if ( cabal_area_check( ch ) )
         {
             int idx = IS_GOOD(ch) ? 0 : IS_EVIL(ch) ? 2 : 1;
             char_to_room( ch, get_room_index( hometown_table[ch->hometown].altar[idx] ) );
-        }
-        else if ( temple != NULL && ch->in_room != temple
-               && bot_find_path( ch, ch->in_room, temple, tmp, BOT_MAX_PATH, FALSE ) < 0 )
-        {
-            /* kaydedildiği odadan dünyaya dönüş yolu yok (tek yönlü cep): tapınaktan başla */
-            bot_log( bot, "kayıtlı oda %d'den çıkış yolu yok; tapınağa yerleştirildi.", ch->in_room->vnum );
-            char_to_room( ch, temple );
         }
         else
             char_to_room( ch, ch->in_room );
@@ -944,7 +968,7 @@ bool bot_set_travel( BOT_DATA *bot, int vnum, int after )
     if ( bot->ch == NULL || bot->ch->in_room == NULL || to == NULL )
         return FALSE;
     len = bot_find_path( bot->ch, bot->ch->in_room, to, bot->path, BOT_MAX_PATH,
-                         bot->state == BOT_ST_PK );
+                         after == BOT_ST_PK || after == BOT_ST_RAID );
     if ( len < 0 )
         return FALSE;
     bot->path_len       = len;
@@ -1002,6 +1026,7 @@ void bot_on_kill( CHAR_DATA *killer, CHAR_DATA *victim )
                      victim->short_descr, victim->level, victim->alignment, killer->level, killer->exp,
                      killer->exp - bot->last_kill_exp );
         bot->last_kill_exp = killer->exp;
+        bot_note_kill( bot, victim );
         bot_chat_event( bot, BOT_EV_KILL, victim );
     }
     else
@@ -1476,5 +1501,12 @@ void do_botlar( CHAR_DATA *ch, char *argument )
                     bot->ch->pcdata->condition[COND_HUNGER], bot->ch->pcdata->condition[COND_THIRST] );
     printf_to_char( ch, "Öldürme %d, ölüm %d, görev %d, pk %d, kasaba işleri %ld, son mob %s\n\r",
                     bot->kills, bot->deaths, bot->quests, bot->pk_kills, bot->town_tasks, bot->last_mob );
+    printf_to_char( ch, "Kabal %s%s, katil hakkı %d, lider ataması %s, intikam %s, baskın %s/%d\n\r",
+                    bot->ch->cabal != CABAL_NONE ? cabal_table[bot->ch->cabal].short_name : "-",
+                    IS_SET( bot->ch->act, PLR_CANINDUCT ) ? " (lider)" : "",
+                    bot->ch->pcdata->oyuncu_katli,
+                    bot->leader_cabal > CABAL_NONE ? cabal_table[bot->leader_cabal].short_name : "-",
+                    bot->revenge_id != 0 && bot_char_by_id( bot->revenge_id ) != NULL ? bot_char_by_id( bot->revenge_id )->name : "-",
+                    bot->raid_cabal > CABAL_NONE ? cabal_table[bot->raid_cabal].short_name : "-", bot->raid_step );
     printf_to_char( ch, "Oturum bitişi %ld sn sonra.\n\r", (long) ( bot->session_end - current_time ) );
 }

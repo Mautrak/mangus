@@ -102,6 +102,50 @@ def test_bot_answers_a_tell(bot_server, screens):
         c.quit()
 
 
+def test_kdg_channel_reaches_bots(bot_server, screens):
+    """kdg herkese açık konu dışı kanaldır; botlar duyar ve (kd ya da kdg ile) cevap verir."""
+    names = wait_for_bot_logins(bot_server, 2)
+    c = bot_server.connect()
+    try:
+        mud.login(c, IMM_NAME, PASSWORD)
+        scr = c.command("kdg")
+        if "kapandı" in scr.plain:          # kanal kapalıysa aç
+            c.command("kdg")
+        scr = c.command("kdg selam millet, kim var oyunda?")
+        assert "[KDG] Sen:" in scr.plain, scr.plain
+        scr = c.read_idle(idle=40.0, max_wait=45.0)
+        screens.add("kdg cevabı", scr.text)
+        assert re.search(r"(\[KDG\] (%s)|(%s) kd:)" % ("|".join(names), "|".join(names)), scr.plain), (
+            "Hiçbir bot kdg'ye cevap vermedi.\n%s" % scr.plain)
+    finally:
+        c.quit()
+
+
+def test_bot_answers_say_in_character(bot_server, screens):
+    """söyle kanalı rol içidir: bot aynı odada söylenene diyarın diliyle, oyun dışı kısaltma
+    ve surat kullanmadan 'söyle' ile cevap verir."""
+    names = wait_for_bot_logins(bot_server, 2)
+    c = bot_server.connect()
+    try:
+        mud.login(c, IMM_NAME, PASSWORD)
+        c.command("goto 3001")
+        reply = None
+        for name in names[:3]:
+            c.command("transfer %s" % name.lower())
+            c.command("söyle selam %s, nasılsın?" % name)
+            scr = c.read_idle(idle=25.0, max_wait=28.0)
+            m = re.search(r"%s '(.+?)' dedi\." % name, scr.plain)
+            if m:
+                reply = m.group(1)
+                screens.add("botun söyle cevabı", scr.text)
+                break
+        assert reply is not None, "Botlar 'söyle'ye cevap vermedi."
+        assert not re.search(r":\)|:P|xd|\blvl\b|\beq\b|kanka|\bbb\b", reply), (
+            "Rol içi kanalda oyun dışı ifade: %r" % reply)
+    finally:
+        c.quit()
+
+
 def test_bots_move_and_act_on_their_own(bot_server, screens):
     wait_for_bot_logins(bot_server, 2)
     c = bot_server.connect()

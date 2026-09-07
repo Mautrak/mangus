@@ -8,6 +8,15 @@
 # !enaz / !encok : aynı anda çevrimiçi bot sayısı sınırları
 !enaz 10
 !encok 16
+# !lider <bot> <kabal> : tanrıların atadığı kabal lideri (seviye 20 ve katil hakkı alınca göreve başlar,
+#   üyeleri gerçek 'induct' komutuyla alır). Kabal kısa adları: tüze istila kaos tılsım öfke şövalye aslan tüccar
+!lider Tugrul öfke
+!lider Ilgaz şövalye
+!lider Karabey istila
+!lider Balamir tılsım
+!lider Zifir kaos
+!lider Kutay tüccar
+!lider Kursad aslan
 Tugrul|insan|savaşçı|e|i|t|sakin|19|2|1|0|1|Selenge'nin Kılıcı
 Aybars|insan|adbolar|e|i|t|yardımsever|18|1|1|0|1|Işığın Muhafızı
 Karabey|kara-elf|hırsız|e|k|k|agresif|21|4|0|1|1|Gölgelerin Efendisi

@@ -86,7 +86,7 @@ etki listesi (act_obj.c), `spell_dispel_magic` her zaman başarılı der (`found
 `spell_entangle`'da kullanılmayan `dam`, `QuestPractice` koşulsuz kaydedilir (save.c),
 12 karakterden uzun komut adları `komutlar` sütununa sığmaz.
 
-## Botlar (src/bot.c, bot_brain.c, bot_chat.c)
+## Botlar (src/bot.c, bot_brain.c, bot_chat.c, bot_war.c)
 
 - Botlar descriptor'sız PC'lerdir: `IS_BOT(ch)` (`pcdata->bot != NULL`). `who`/`whois`/
   `where` listeleri `bot_who_collect()` ile hem soketleri hem botları gezer; `kd`, `söyle`,
@@ -102,3 +102,16 @@ etki listesi (act_obj.c), `spell_dispel_magic` her zaman başarılı der (`found
   adlı dosya varsa bot devre dışı kalır (gerçek oyuncu korunur).
 - Hata ayıklama: ölümsüz olarak `botlar debug` (komut ve durum geçişleri günlüğe),
   `botlar av <isim>` (av bölgesi adayları), `botlar <isim>` (durum, yol, istatistik).
+- Adalet kuralı: bot yalnızca oyuncunun bilebileceğini bilir. Av: oda + `tara` menzili
+  (`bot_scan_prey`), hatırlanan av odaları, keşif; bölge seçimi kamusal seviye aralığı +
+  kendi kesim/ölüm hafızası. Görev yaratığı ve grup arkadaşı yalnızca aynı bölgede
+  (`nerede`), PK hedefi `kim` listesinden, konumu devriye/`nerede` ile. `char_list`
+  üzerinden konum okuyan yeni mantık ekleme.
+- Kanallar: `söyle`/`haykır`/`duygu` rol içi havuzlar (`ic_*`), `kd`/`kdg` konu dışı
+  (`ooc_*`); `bot_fill_ch(..., ic)` üslubu kanala göre seçer. `kdg` (`do_kdg`,
+  `COMM_NOKDG`) herkese açık konu dışı kanaldır; botlar `bot_hear(BOT_CH_KDG)` ile duyar.
+- Kabal (bot_war.c): kadrodaki `!lider` botu şartlar sağlanınca kabal + `PLR_CANINDUCT`
+  alır (tanrı ataması, bir kez); üyelik `kd` isteği + gerçek `induct` komutuyla. PK hedefi
+  `kim`'den, bölge devriyesi; `kk` yardım çağrısı ("yardım! <isim> <bölge>'de ..."). Baskın
+  `BOT_ST_RAID` (alt durum 0-3 saldırı, 10+ savunma); `act_obj.c` altar kancası
+  `bot_cabal_alarm()`.

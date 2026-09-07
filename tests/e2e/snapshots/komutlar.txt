@@ -15,24 +15,25 @@ irfan       isimlendir  iste        itekle      iyileştir   kaç
 kalk        kalk        kalkan      kamp        kamuflaj    kanallar
 kanasusama  kanımsa     kapat       kapıkır     kaplan      kasa
 katana      katlet      kaydet      kaz         kazan       kd
-kilitaç     kilitle     kim         kimdir      kırbaçla    kısayol
-kısayolkaldırkıyasla     kk          kompakt     komutlar    konsantrasyon
-kontrol     korkaklık   körlüktozu  koy         kullan      kurban
-kuyruk      lakap       lisan       liste       maymuncuk   mezat
-nara        nerede      odaetki     oku         omuz        onar
+kdg         kilitaç     kilitle     kim         kimdir      kırbaçla
+kısayol     kısayolkaldırkıyasla     kk          kompakt     komutlar
+konsantrasyonkontrol     korkaklık   körlüktozu  koy         kullan
+kurban      kuyruk      lakap       lisan       liste       maymuncuk
+mezat       nara        nerede      odaetki     oku         omuz
 [Devam etmek için ENTER]
-otoliste    otoakçe     otoçıkış    otodağıt    otodestek   otokurban
-otoyağma    otur        öğren       öğret       öldür       özet
-paraçek     parayatır   patlat      pençe       pmote       poz
-pratik      pusu        rapor       read        rezil       rica
-sağır       saklan      sapta       sargı       sat         satınal
-savun       savur       sem         sessiz      sez         silah
-silahsızlandırsinir       sıvış       skor        skrol       slook
-soluş       sosyaller   söyle       suflör      suikast     sürükle
-süzül       syetenek    şifalıeller şifre       take        takip
-takipyok    talep       tamir       tanımla     tara        tart
-tekme       tekrarla    toz         tut         tuzak       typo
-uç          uysallaştır uyu         ücret       vahşileş    vampir
-ver         vur         yağmayok    yap         yardım      yargıla
-yarma       ye          yeniyaşa    yeniyaşam   yetenekler  yokol
-yudumla     yükselt     zaman       zar         zayi        zehir
+onar        otoliste    otoakçe     otoçıkış    otodağıt    otodestek
+otokurban   otoyağma    otur        öğren       öğret       öldür
+özet        paraçek     parayatır   patlat      pençe       pmote
+poz         pratik      pusu        rapor       read        rezil
+rica        sağır       saklan      sapta       sargı       sat
+satınal     savun       savur       sem         sessiz      sez
+silah       silahsızlandırsinir       sıvış       skor        skrol
+slook       soluş       sosyaller   söyle       suflör      suikast
+sürükle     süzül       syetenek    şifalıeller şifre       take
+takip       takipyok    talep       tamir       tanımla     tara
+tart        tekme       tekrarla    toz         tut         tuzak
+typo        uç          uysallaştır uyu         ücret       vahşileş
+vampir      ver         vur         yağmayok    yap         yardım
+yargıla     yarma       ye          yeniyaşa    yeniyaşam   yetenekler
+yokol       yudumla     yükselt     zaman       zar         zayi
+zehir

@@ -64,14 +64,30 @@ eski istemcilerin girdisi sunucuda otomatik olarak UTF-8'e çevrilir.
 `area/botlar.txt` varsa sunucu açılışta bir bot kadrosu yükler: botlar gerçek oyuncu
 karakterleridir (`player/` altında kaydedilir, seviye atlar, pratik ve eğitim yapar,
 alışveriş ve görev yapar, cesetlerini toplar, kabal savaşına girer) ve `kim`, `kimdir`,
-`nerede` listelerinde görünür; `söyle`, `haykır`, `kd` ve sosyallere Türkçe cevap verir,
-insan oyuncuyu gruba davet eder ya da "gel/grup" dendiğinde takip eder. Soketleri yoktur;
-her oyun pulse'ında `bot_update()` (src/bot.c) çalışır ve komutlarını sıradan oyuncu
-komutu olarak `interpret()` üzerinden verir.
+`nerede` listelerinde görünür; `söyle`, `haykır`, `kd`, `kdg` ve sosyallere Türkçe cevap
+verir, insan oyuncuyu gruba davet eder ya da "gel/grup" dendiğinde takip eder. Soketleri
+yoktur; her oyun pulse'ında `bot_update()` (src/bot.c) çalışır ve komutlarını sıradan
+oyuncu komutu olarak `interpret()` üzerinden verir.
+
+Botlar hile yapmaz: dünya listesine bakmaz; odasını, `tara` menzilini, aynı bölgedeki
+oyuncuları (`nerede`), `kim` listesini ve kendi hafızasını (av odaları, bölge deneyimi,
+görülen düşmanlar) kullanır; girişte ışınlanmaz, sıkışınca `anımsa` eder ya da yardım
+ister. `söyle`/`haykır`/`duygu` yalnızca rol içi (diyarın dili), `kd`/`kdg` konu dışı;
+`ganlat`/`kk` taktik konuşmadır. `kdg` herkese açık konu dışı kanaldır (`kdg` yazarak
+açılıp kapanır).
+
+Kabal yaşamı: kadrodaki `!lider <bot> <kabal>` satırı, tanrıların o botu (20. seviyeye
+ulaşıp görevciden katil hakkı alınca) kabal lideri atadığı anlamına gelir. Diğer botlar ve
+oyuncular lidere `kd <lider> <kabal> kabalına katılmak istiyorum` diyerek başvurur; lider
+oyunun kurallarını (katil hakkı, seviye, sınıf/yönelim uyumu) uygulayıp gerçek `induct`
+komutuyla üye alır. Kabal üyeleri `kim` listesinden düşman kabal üyelerini seçip
+bölgelerde devriye gezer, saldırıya uğrayınca `kk` ile yardım ister (arkadaşları gelir),
+zaman zaman karargâh baskını düzenler (düşman kabal eşyasını sunağından alıp kendi
+karargâhına bırakır) ve çalınan kendi eşyalarının peşine düşer.
 
 Kadro dosyasının biçimi dosyanın başında açıklanmıştır (`isim|ırk|sınıf|cinsiyet|yönelim|
 etik|kişilik|saat|saat|Türkçe|küçük harf|katil|lakap`); `!enaz`/`!encok` aynı anda
-çevrimiçi bot sayısını sınırlar. Dosyayı silmek botları tamamen kapatır. Ölümsüzler
+çevrimiçi bot sayısını sınırlar, `!lider` kabal liderlerini belirler. Dosyayı silmek botları tamamen kapatır. Ölümsüzler
 `botlar`, `botlar <isim>`, `botlar av <isim>`, `botlar bağla/ayır <isim>` ve
 `botlar debug` komutlarını kullanabilir. Bot adları oyuncular tarafından alınamaz;
 bot oyuncu dosyalarında `Bot 1` satırı bulunur.
