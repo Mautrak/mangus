@@ -274,6 +274,14 @@ bool bot_leader_handle( BOT_DATA *leader, CHAR_DATA *speaker, int channel )
         return FALSE;
     if ( ch->cabal == CABAL_NONE || !IS_SET( ch->act, PLR_CANINDUCT ) )
     {
+        /* bir liderin cevabı (kabul/ret) bize geldi: teşekkür et ya da sus */
+        if ( IS_SET( speaker->act, PLR_CANINDUCT ) )
+        {
+            if ( number_percent() < 50 )
+                bot_queue_reply( leader, speaker->name, reply_ch, 4 + number_range( 0, 6 ),
+                                 reply_ch == BOT_CH_SAY ? "Sağ ol, bekliyorum." : "sağ ol, bekliyorum" );
+            return TRUE;
+        }
         reply = ch->cabal == CABAL_NONE ? "ben de bir kabalda değilim ki" : "ben lider değilim, lidere sor";
         if ( reply_ch == BOT_CH_SAY )
             reply = ch->cabal == CABAL_NONE ? "Ben de bir kabalın üyesi değilim." : "Lider ben değilim; ona sor.";
@@ -296,7 +304,7 @@ bool bot_leader_handle( BOT_DATA *leader, CHAR_DATA *speaker, int channel )
         leader->induct_pulse = bot_pulse + 4 * number_range( 10, 25 );
         snprintf( out, sizeof(out), reply_ch == BOT_CH_SAY
                   ? "Peki. Seni %s saflarına kabul ediyorum; birazdan yeminini alacağım."
-                  : "tamam, seni %s kabalına alıyorum, birazdan induct ediyorum",
+                  : "tamam, seni %s kabalına alıyorum, birazdan yemin töreni :)",
                   cabal_table[ch->cabal].long_name );
         reply = out;
     }
