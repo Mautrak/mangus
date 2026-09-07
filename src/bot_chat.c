@@ -485,7 +485,11 @@ void bot_chat_react( BOT_DATA *bot, CHAR_DATA *speaker, int channel, const char 
     case INTENT_CLASS:   tmpl = pick( class_reply, PN(class_reply) );       break;
     case INTENT_HELP:    tmpl = pick( help_reply, PN(help_reply) );         break;
     case INTENT_THANKS:  tmpl = pick( thanks_reply, PN(thanks_reply) );     break;
-    case INTENT_BYE:     tmpl = pick( bye_reply, PN(bye_reply) );           break;
+    case INTENT_BYE:
+        tmpl = pick( bye_reply, PN(bye_reply) );
+        if ( bot->state == BOT_ST_FOLLOW && bot_char_by_id( bot->leader_id ) == speaker )
+            bot_stop_follow( bot, FALSE );
+        break;
     case INTENT_YES:     tmpl = pick( yes_reply, PN(yes_reply) );           break;
     case INTENT_NO:      tmpl = pick( no_reply, PN(no_reply) );             break;
     case INTENT_INSULT:  tmpl = pick( insult_reply, PN(insult_reply) );     break;
