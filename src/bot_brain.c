@@ -776,7 +776,7 @@ static int bot_prey_score( CHAR_DATA *ch, CHAR_DATA *mob, int dist )
 static CHAR_DATA *bot_prey_here( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch, *rch, *best = NULL;
-    int lo = UMAX( 1, ch->level - 3 - bot->hunt_fail );
+    int lo = UMAX( 1, ch->level - ( ch->level >= 6 ? 1 : 3 ) - UMIN( bot->hunt_fail, 2 ) );
     int hi = UMAX( 2, ch->level + level_bonus( ch ) );
     int best_score = -1000;
 
@@ -803,7 +803,7 @@ static ROOM_INDEX_DATA *bot_prey_near( BOT_DATA *bot, int depth )
     int n = bot_near_rooms( ch, depth, TRUE );
     int i, best_score = -1000;
     ROOM_INDEX_DATA *best = NULL;
-    int lo = UMAX( 1, ch->level - 3 - bot->hunt_fail );
+    int lo = UMAX( 1, ch->level - ( ch->level >= 6 ? 1 : 3 ) - UMIN( bot->hunt_fail, 2 ) );
     int hi = UMAX( 2, ch->level + level_bonus( ch ) );
 
     for ( i = 1; i < n; i++ )
@@ -866,7 +866,7 @@ static ROOM_INDEX_DATA *area_entry_room( CHAR_DATA *ch, AREA_DATA *area )
     CHAR_DATA *mob;
     ROOM_INDEX_DATA *pick = NULL;
     int count = 0;
-    int lo = UMAX( 1, ch->level - 3 );
+    int lo = UMAX( 1, ch->level - ( ch->level >= 6 ? 1 : 3 ) );
     int hi = UMAX( 2, ch->level + level_bonus( ch ) );
 
     /* önce bota en yakın, uygun av bulunan oda (dünya çapında sınırlı tarama) */
@@ -904,7 +904,7 @@ static AREA_DATA *bot_pick_hunt_area( BOT_DATA *bot )
     CHAR_DATA *ch = bot->ch;
     AREA_DATA *area, *best = NULL;
     int best_score = -1;
-    int lo = UMAX( 1, ch->level - 3 );
+    int lo = UMAX( 1, ch->level - ( ch->level >= 6 ? 1 : 3 ) );
     int hi = UMAX( 2, ch->level + level_bonus( ch ) );
     int tries = 0;
 
@@ -984,7 +984,7 @@ void bot_debug_areas( CHAR_DATA *viewer, BOT_DATA *bot )
         send_to_char( "Bot çevrimdışı.\n\r", viewer );
         return;
     }
-    lo = UMAX( 1, ch->level - 2 );
+    lo = UMAX( 1, ch->level - ( ch->level >= 6 ? 1 : 3 ) );
     hi = UMAX( 2, ch->level + level_bonus( ch ) );
     printf_to_char( viewer, "Seviye %d, av bandı %d-%d, oda %d (%s), av bölgesi %s, başarısızlık %d\n\r",
                     ch->level, lo, hi, ch->in_room->vnum, ch->in_room->area->name,
