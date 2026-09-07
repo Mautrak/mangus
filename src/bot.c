@@ -859,10 +859,14 @@ bool bot_room_passable( CHAR_DATA *ch, ROOM_INDEX_DATA *room, bool allow_cabal )
         return FALSE;
     if ( IS_SET( room->room_flags, ROOM_PRIVATE | ROOM_SOLITARY | ROOM_IMP_ONLY | ROOM_GODS_ONLY ) )
         return FALSE;
-    if ( room->area != NULL && IS_SET( room->area->area_flag, AREA_CABAL ) && !allow_cabal )
-        return FALSE;
+    if ( room->area != NULL && IS_SET( room->area->area_flag, AREA_CABAL ) )
+    {
+        /* kabal bölgesi: yalnızca kabal işi (PK/baskın) için; seviye aralığı kuralı uygulanmaz */
+        if ( !allow_cabal )
+            return FALSE;
+    }
     /* seviyesinin çok üstündeki bölgelerden geçme (yolda ölmesin) */
-    if ( room->area != NULL && room->area->low_range > ch->level + 8 && !IS_IMMORTAL(ch) )
+    else if ( room->area != NULL && room->area->low_range > ch->level + 8 && !IS_IMMORTAL(ch) )
         return FALSE;
     if ( room->sector_type == SECT_AIR && !IS_AFFECTED( ch, AFF_FLYING ) )
         return FALSE;
