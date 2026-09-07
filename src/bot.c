@@ -1009,6 +1009,8 @@ void bot_on_death( CHAR_DATA *victim )
     if ( bot == NULL )
         return;
     bot->deaths++;
+    if ( bot->state == BOT_ST_RAID || bot->raid_cabal != CABAL_NONE )
+        bot_raid_failed( bot );
     bot->death_room = victim->in_room != NULL ? victim->in_room->vnum : 0;
     bot->corpse_tries = 0;
     bot->target_id = 0;

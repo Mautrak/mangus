@@ -19,9 +19,11 @@
 #include "bot.h"
 
 #define BOT_CABAL_LEVEL   20      /* kabala girmek için asgari seviye (botların kendi kuralı) */
-#define BOT_RAID_LEVEL    25      /* baskına katılmak için asgari seviye */
+#define BOT_RAID_LEVEL    60      /* baskına katılmak için asgari seviye (karargâh muhafızları 90+) */
+#define BOT_RAID_MIN_MATES 3     /* baskın için çevrimiçi asgari üye */
 
 static int raid_next_pulse[MAX_CABAL];     /* kabal başına baskın soğuması */
+static int raid_fail_pulse[MAX_CABAL];     /* hedef kabal başına: son başarısız (ölümlü) baskın */
 
 /* ---------------------------------------------------------------------
  * yardımcılar
@@ -668,7 +670,7 @@ static bool bot_raid_consider( BOT_DATA *bot )
         return FALSE;
     if ( !item_at_home( cabal ) )
         return FALSE;                                 /* önce kendi eşyanı kurtar */
-    if ( online_members( cabal, BOT_RAID_LEVEL ) < 2 )
+    if ( online_members( cabal, BOT_RAID_LEVEL ) < BOT_RAID_MIN_MATES )
     {
         if ( bot_debug )
             bot_log( bot, "baskın düşünüldü: yeterli üye yok." );
@@ -682,6 +684,8 @@ static bool bot_raid_consider( BOT_DATA *bot )
 
         if ( i == cabal || !item_at_home( i ) || cabal_table[i].obj_ptr == NULL )
             continue;
+        if ( bot_pulse - raid_fail_pulse[i] < 4 * 60 * 60 * 12 && raid_fail_pulse[i] != 0 )
+            continue;                                 /* son baskında ölüm: 12 saat uzak dur */
         {
             ROOM_INDEX_DATA *hq = get_room_index( cabal_table[i].room_vnum );
             sh_int tmp[BOT_MAX_PATH];
@@ -987,6 +991,46 @@ void bot_raid( BOT_DATA *bot )
             raid_take_item( bot, item );
         bot->raid_step = 13;
     }
+}
+
+/*
+ * Baskın yolculuğunda bir sonraki odaya bakış: kabal muhafızı gibi seviyesinin
+ * çok üstünde bir yaratık varsa ('tart' ile görülebilir) geri çekil.
+ */
+bool bot_raid_scout( BOT_DATA *bot, ROOM_INDEX_DATA *next )
+{
+    CHAR_DATA *ch = bot->ch, *rch;
+
+    if ( ch == NULL || next == NULL || bot->raid_cabal <= CABAL_NONE )
+        return FALSE;
+    for ( rch = next->people; rch != NULL; rch = rch->next_in_room )
+    {
+        if ( !IS_NPC(rch) || !can_see( ch, rch ) )
+            continue;
+        if ( rch->level > ch->level + 5
+          && ( IS_SET( rch->act, ACT_AGGRESSIVE ) || rch->spec_fun != NULL
+            || ( rch->pIndexData->vnum >= 500 && rch->pIndexData->vnum <= 580 ) ) )
+        {
+            bot_log( bot, "baskın: %s (seviye %d) yolu kesiyor, geri çekildi.", rch->short_descr, rch->level );
+            bot_talk( bot, BOT_CH_CABAL, NULL, "muhafız çok güçlü, geri çekiliyorum" );
+            raid_fail_pulse[bot->raid_cabal] = bot_pulse;
+            raid_end( bot, "muhafız" );
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+/* baskın sırasında ölüm: hedef kabala uzun süre yaklaşma */
+void bot_raid_failed( BOT_DATA *bot )
+{
+    if ( bot->raid_cabal > CABAL_NONE && bot->raid_cabal < MAX_CABAL && bot->raid_cabal != ( bot->ch != NULL ? bot->ch->cabal : CABAL_NONE ) )
+    {
+        raid_fail_pulse[bot->raid_cabal] = bot_pulse;
+        bot_log( bot, "baskında öldü: %s kabalına 12 saat yaklaşılmayacak.", cabal_table[bot->raid_cabal].short_name );
+    }
+    bot->raid_cabal = CABAL_NONE;
+    bot->raid_step = 0;
 }
 
 /* ---------------------------------------------------------------------

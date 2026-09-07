@@ -83,7 +83,9 @@ oyunun kurallarını (katil hakkı, seviye, sınıf/yönelim uyumu) uygulayıp g
 komutuyla üye alır. Kabal üyeleri `kim` listesinden düşman kabal üyelerini seçip
 bölgelerde devriye gezer, saldırıya uğrayınca `kk` ile yardım ister (arkadaşları gelir),
 zaman zaman karargâh baskını düzenler (düşman kabal eşyasını sunağından alıp kendi
-karargâhına bırakır) ve çalınan kendi eşyalarının peşine düşer.
+karargâhına bırakır; karargâh muhafızları çok güçlü olduğundan baskın için 60. seviye ve en
+az üç üye gerekir, yolda güçlü muhafız görülürse geri çekilinir) ve çalınan kendi
+eşyalarının peşine düşer.
 
 Kadro dosyasının biçimi dosyanın başında açıklanmıştır (`isim|ırk|sınıf|cinsiyet|yönelim|
 etik|kişilik|saat|saat|Türkçe|küçük harf|katil|lakap`); `!enaz`/`!encok` aynı anda

@@ -319,6 +319,8 @@ void    bot_raid            ( BOT_DATA *bot );
 bool    bot_war_goal        ( BOT_DATA *bot );
 void    bot_war_tick        ( BOT_DATA *bot );
 void    bot_cabal_alarm     ( int cabal, CHAR_DATA *thief );
+bool    bot_raid_scout      ( BOT_DATA *bot, ROOM_INDEX_DATA *next );
+void    bot_raid_failed     ( BOT_DATA *bot );
 void    bot_after_death     ( BOT_DATA *bot );
 void    bot_debug_areas     ( CHAR_DATA *viewer, BOT_DATA *bot );
 int     bot_sell_candidates ( BOT_DATA *bot );

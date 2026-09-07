@@ -1186,6 +1186,8 @@ static void bot_travel_step( BOT_DATA *bot )
         return;
     }
 
+    if ( bot->after_travel == BOT_ST_RAID && pexit->u1.to_room != NULL && bot_raid_scout( bot, pexit->u1.to_room ) )
+        return;
     bot_cmd( bot, "%s", dir_name[dir] );
     if ( bot->ch == NULL )
         return;

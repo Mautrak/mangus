@@ -113,5 +113,9 @@ etki listesi (act_obj.c), `spell_dispel_magic` her zaman başarılı der (`found
 - Kabal (bot_war.c): kadrodaki `!lider` botu şartlar sağlanınca kabal + `PLR_CANINDUCT`
   alır (tanrı ataması, bir kez); üyelik `kd` isteği + gerçek `induct` komutuyla. PK hedefi
   `kim`'den, bölge devriyesi; `kk` yardım çağrısı ("yardım! <isim> <bölge>'de ..."). Baskın
-  `BOT_ST_RAID` (alt durum 0-3 saldırı, 10+ savunma); `act_obj.c` altar kancası
-  `bot_cabal_alarm()`.
+  `BOT_ST_RAID` (`raid_step` 0-3 saldırı, 10+ savunma; `bot_set_state` substate'i sıfırladığı
+  için ayrı alan); `act_obj.c` altar kancası `bot_cabal_alarm()`. Karargâh muhafızları 90+
+  seviyedir (İstila kumandanı: haste+sanctuary): baskın 60. seviye ve 3 çevrimiçi üye ister,
+  yolda seviyesinin 5+ üstünde muhafız görünce geri çekilir, baskında ölüm hedef kabalı 12 saat
+  kapatır. İstila karargâhı tek yönlü iniştir (562→564), çıkış 568'deki portallar; yol bulma
+  yalnızca `allow_cabal` ile oraya girer (`botlar yol <bot> <oda> kabal`).
