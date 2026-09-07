@@ -471,7 +471,6 @@ void bot_war_attacked( BOT_DATA *bot, CHAR_DATA *attacker )
         return;
     bot->revenge_id    = attacker->id;
     bot->revenge_pulse = bot_pulse;
-    bot->pk_tries      = 0;
     if ( ch->cabal == CABAL_NONE || bot_pulse - bot->help_call_pulse < 4 * 60 * 3 )
         return;
     bot->help_call_pulse = bot_pulse;
@@ -546,10 +545,11 @@ void bot_pk( BOT_DATA *bot )
                 return;
             }
         }
-        /* saldırı dövüş başlatmıyorsa (tanrılar koruyor vb.) ısrar etme */
-        if ( ++bot->pk_tries > 4 )
+        /* bir kovalamacada en fazla sekiz saldırı: dövüş başlamıyorsa ya da hedef
+           hep kaçıyorsa vazgeç (bölge 'İmdat' çığlığıyla dolmasın) */
+        if ( ++bot->pk_tries > 8 )
         {
-            bot_log( bot, "kabal savaşı: %s'e saldırı başlamıyor, vazgeçti.", victim->name );
+            bot_log( bot, "kabal savaşı: %s'den vazgeçti (%d deneme).", victim->name, bot->pk_tries - 1 );
             bot->pk_tries = 0;
             bot->pk_target_id = 0;
             bot->revenge_id = 0;
