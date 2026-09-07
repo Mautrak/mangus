@@ -1264,24 +1264,24 @@ void do_botlar( CHAR_DATA *ch, char *argument )
             printf_to_char( ch, "{WÇevrimiçi %d / kadro %d  (en az %d, en çok %d, pulse %d){x\n\r",
                             bot_online_count(), kadro, bot_min_online, bot_max_online, bot_pulse );
         }
-        printf_to_char( ch, "{c%-12s %-4s %-6s %-16s %-5s %-24s %s{x\n\r",
-                        "isim", "lvl", "sınıf", "durum", "yp%", "oda", "öldürme/ölüm/görev" );
+        printf_to_char( ch, "{c%-12s %-4s %-6s %-16s %-5s %-5s %-24s %s{x\n\r",
+                        "isim", "lvl", "sınıf", "durum", "sn", "yp%", "oda", "öldürme/ölüm/görev" );
         for ( bot = bot_list; bot != NULL; bot = bot->next )
         {
             CHAR_DATA *bch = bot->ch;
 
             if ( bch == NULL )
             {
-                printf_to_char( ch, "%-12s %-4s %-6s %-16s %-5s %-24s %s\n\r", bot->name, "-",
+                printf_to_char( ch, "%-12s %-4s %-6s %-16s %-5s %-5s %-24s %s\n\r", bot->name, "-",
                                 class_table[bot->iclass].who_name,
-                                bot->disabled ? "devre dışı" : "çevrimdışı", "", "",
+                                bot->disabled ? "devre dışı" : "çevrimdışı", "", "", "",
                                 "" );
                 continue;
             }
             snprintf( buf, sizeof(buf), "%d/%d/%d", bot->kills, bot->deaths, bot->quests );
-            printf_to_char( ch, "%-12s %-4d %-6s %-16s %-5d %-24.24s %s\n\r",
+            printf_to_char( ch, "%-12s %-4d %-6s %-16s %-5d %-5d %-24.24s %s\n\r",
                             bch->name, bch->level, class_table[bch->iclass].who_name,
-                            bot_state_name( bot->state ),
+                            bot_state_name( bot->state ), ( bot_pulse - bot->state_pulse ) / 4,
                             bch->max_hit > 0 ? bch->hit * 100 / bch->max_hit : 0,
                             bch->in_room != NULL ? bch->in_room->name : "?", buf );
         }

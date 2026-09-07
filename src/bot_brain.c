@@ -38,6 +38,12 @@ static int spec_ok_count = 0;
 static SPEC_FUN *spec_questmaster_fn = NULL;
 static bool bot_blind_in_dark( CHAR_DATA *ch );
 
+/* aç ya da susuz: yenilenme durur, dinlenmek boşuna */
+static bool is_starving( CHAR_DATA *ch )
+{
+    return ch->pcdata->condition[COND_HUNGER] < 0 || ch->pcdata->condition[COND_THIRST] < 0;
+}
+
 #define BOT_JUNK_MAX 40
 
 /* ---------------------------------------------------------------------
@@ -989,7 +995,7 @@ static void bot_travel_step( BOT_DATA *bot )
         return;
     }
 
-    if ( ch->move < 12 )
+    if ( ch->move < ( is_starving( ch ) ? 3 : 12 ) )
     {
         if ( ch->position != POS_RESTING )
             bot_cmd( bot, "dinlen" );
@@ -997,7 +1003,7 @@ static void bot_travel_step( BOT_DATA *bot )
     }
     if ( ch->position >= POS_SLEEPING && ch->position < POS_STANDING )
     {
-        if ( ch->move < ch->max_move / 2 && ch->position != POS_SLEEPING )
+        if ( ch->move < ch->max_move / 2 && ch->position != POS_SLEEPING && !is_starving( ch ) )
             return;
         if ( !IS_AFFECTED( ch, AFF_SLEEP ) )
             bot_cmd( bot, "kalk" );
@@ -1077,6 +1083,8 @@ static bool bot_need_rest( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch;
 
+    if ( is_starving( ch ) )
+        return pct( ch->hit, ch->max_hit ) < 25;
     if ( pct( ch->hit, ch->max_hit ) < 45 )
         return TRUE;
     if ( is_caster( ch ) && pct( ch->mana, ch->max_mana ) < 25 )
@@ -1142,6 +1150,18 @@ static void bot_start_rest( BOT_DATA *bot )
 static void bot_resting( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch;
+
+    /* açlıktan yenilenme durmuş: yatmak boşuna, yiyecek bulmaya git */
+    if ( is_starving( ch ) && pct( ch->hit, ch->max_hit ) >= 25 )
+    {
+        if ( ch->position < POS_STANDING && !IS_AFFECTED( ch, AFF_SLEEP ) )
+        {
+            bot_cmd( bot, "kalk" );
+            return;
+        }
+        bot_set_state( bot, BOT_ST_IDLE );
+        return;
+    }
 
     /* ışıksız karanlıkta: sabahı bekle (14 dk sınırı da uygulanır) */
     if ( bot_blind_in_dark( ch ) && ch->silver < 20
@@ -1234,7 +1254,15 @@ static bool bot_eat_drink( BOT_DATA *bot )
             bot_cmd( bot, "ye %s", kw );
             return TRUE;
         }
-        SET_BIT( bot->town_tasks, BOT_TOWN_FOOD );
+        if ( obj != NULL && bot->state != BOT_ST_TRAVEL && bot->state != BOT_ST_FOLLOW && ch->position == POS_STANDING )
+        {
+            /* yiyeceği göremiyor (karanlık): aydınlık bir yere, tapınağa git */
+            ROOM_INDEX_DATA *temple = get_room_index( ROOM_VNUM_TEMPLE );
+            if ( temple != NULL && temple != ch->in_room && bot_set_travel( bot, temple->vnum, BOT_ST_IDLE ) )
+                return TRUE;
+        }
+        if ( obj == NULL )
+            SET_BIT( bot->town_tasks, BOT_TOWN_FOOD );
     }
     if ( ch->pcdata->condition[COND_THIRST] < 14 )
     {
@@ -1974,10 +2002,12 @@ static void bot_compute_town_tasks( BOT_DATA *bot )
         SET_BIT( tasks, BOT_TOWN_TRAIN );
     if ( bot_sell_candidates( bot ) >= 4 || ch->carry_number >= can_carry_n( ch ) - 2 )
         SET_BIT( tasks, BOT_TOWN_SELL );
-    if ( carried_type( ch, ITEM_FOOD ) == NULL && ch->silver >= 15 )
+    if ( carried_type( ch, ITEM_FOOD ) == NULL && ch->silver >= 5 )
         SET_BIT( tasks, BOT_TOWN_FOOD );
     if ( carried_drink( ch ) == NULL && ch->silver >= 40 )
         SET_BIT( tasks, BOT_TOWN_DRINK );
+    if ( ch->pcdata->condition[COND_THIRST] < 25 && carried_drink( ch ) == NULL )
+        SET_BIT( tasks, BOT_TOWN_FOUNTAIN );
     if ( get_light_char( ch ) == NULL && carried_type( ch, ITEM_LIGHT ) == NULL && ch->silver >= 20 )
         SET_BIT( tasks, BOT_TOWN_LIGHT );
     if ( bot_count_potions( ch ) < 2 && ch->silver >= 400 && ch->level >= 5 && ch->cabal != CABAL_BATTLE )
@@ -2004,9 +2034,9 @@ static bool bot_town_worth_it( BOT_DATA *bot )
 
     if ( IS_SET( t, BOT_TOWN_QUEST_DONE | BOT_TOWN_LIGHT | BOT_TOWN_FOUNTAIN ) )
         return TRUE;
-    if ( IS_SET( t, BOT_TOWN_FOOD ) && bot->ch->pcdata->condition[COND_HUNGER] < 20 )
+    if ( IS_SET( t, BOT_TOWN_FOOD ) && bot->ch->pcdata->condition[COND_HUNGER] < 25 )
         return TRUE;
-    if ( IS_SET( t, BOT_TOWN_DRINK ) && bot->ch->pcdata->condition[COND_THIRST] < 20 )
+    if ( IS_SET( t, BOT_TOWN_DRINK ) && bot->ch->pcdata->condition[COND_THIRST] < 25 )
         return TRUE;
     if ( IS_SET( t, BOT_TOWN_PRACTICE ) && bot->ch->practice >= 4 )
         return TRUE;
@@ -2023,8 +2053,8 @@ static long bot_town_next_task( BOT_DATA *bot )
 {
     static const long order[] =
     {
-        BOT_TOWN_QUEST_DONE, BOT_TOWN_FOUNTAIN, BOT_TOWN_SELL, BOT_TOWN_FOOD, BOT_TOWN_DRINK,
-        BOT_TOWN_LIGHT, BOT_TOWN_PRACTICE, BOT_TOWN_TRAIN, BOT_TOWN_POTION, BOT_TOWN_UPGRADE,
+        BOT_TOWN_FOOD, BOT_TOWN_FOUNTAIN, BOT_TOWN_DRINK, BOT_TOWN_QUEST_DONE, BOT_TOWN_LIGHT,
+        BOT_TOWN_SELL, BOT_TOWN_PRACTICE, BOT_TOWN_TRAIN, BOT_TOWN_POTION, BOT_TOWN_UPGRADE,
         BOT_TOWN_HEAL, BOT_TOWN_QUEST_BUY, BOT_TOWN_QUEST_GET, 0
     };
     int i;
@@ -2360,7 +2390,7 @@ static void bot_town( BOT_DATA *bot )
             for ( fo = ch->carrying; fo != NULL; fo = fo->next_content )
                 if ( fo->item_type == ITEM_FOOD )
                     nfood++;
-            have = nfood >= 2 ? 1 : 0;
+            have = nfood >= 3 ? 1 : 0;
         }
         else if ( task == BOT_TOWN_DRINK ) have = carried_type( ch, ITEM_DRINK_CON ) != NULL ? 1 : 0;
         else if ( task == BOT_TOWN_LIGHT ) have = get_light_char( ch ) != NULL ? 1 : 0;
