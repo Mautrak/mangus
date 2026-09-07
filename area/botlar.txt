@@ -6,8 +6,8 @@
 #   oyuncu katline istekli(1/0) | lakap
 # Kişilikler: sakin, geveze, agresif, yardımsever, esprili, gizemli, acemi
 # !enaz / !encok : aynı anda çevrimiçi bot sayısı sınırları
-!enaz 7
-!encok 14
+!enaz 10
+!encok 16
 Tugrul|insan|savaşçı|e|i|t|sakin|19|2|1|0|1|Selenge'nin Kılıcı
 Aybars|insan|adbolar|e|i|t|yardımsever|18|1|1|0|1|Işığın Muhafızı
 Karabey|kara-elf|hırsız|e|k|k|agresif|21|4|0|1|1|Gölgelerin Efendisi

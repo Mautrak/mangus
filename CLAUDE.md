@@ -85,3 +85,20 @@ ve lisanslar · `.github/workflows/ci.yml` CI. Çalışma zamanı dizinleri (`pl
 etki listesi (act_obj.c), `spell_dispel_magic` her zaman başarılı der (`found = TRUE`),
 `spell_entangle`'da kullanılmayan `dam`, `QuestPractice` koşulsuz kaydedilir (save.c),
 12 karakterden uzun komut adları `komutlar` sütununa sığmaz.
+
+## Botlar (src/bot.c, bot_brain.c, bot_chat.c)
+
+- Botlar descriptor'sız PC'lerdir: `IS_BOT(ch)` (`pcdata->bot != NULL`). `who`/`whois`/
+  `where` listeleri `bot_who_collect()` ile hem soketleri hem botları gezer; `kd`, `söyle`,
+  `haykır`, `ganlat`, `kk` ve sosyaller `bot_hear()` kancasıyla botlara ulaşır.
+- `bot_update()` her pulse'ta `wait`/`daze` azaltır, `timer`'ı sıfırlar (hiçliğe
+  sürüklenme yok) ve ~saniyede bir `bot_think()` çağırır. Tek karar = tek komut.
+- Botlar `act()` çıktısı almaz; kararlar veri yapılarından verilir. Oyun çıktısına
+  dayanan mantık yazma.
+- Kadro `area/botlar.txt`; testler onu kopyadan siler (`MudServer.prepare(bots=False)`).
+  Bot testleri kendi sunucusunu `bots=True` ile açar (`tests/e2e/test_bots.py`).
+- Bot adı `check_parse_name()` ile denetlenir (yaratık anahtar kelimesiyle çakışan ad
+  devre dışı kalır, günlüğe yazılır). Oyuncu dosyasında `Bot 1` satırı olmayan aynı
+  adlı dosya varsa bot devre dışı kalır (gerçek oyuncu korunur).
+- Hata ayıklama: ölümsüz olarak `botlar debug` (komut ve durum geçişleri günlüğe),
+  `botlar av <isim>` (av bölgesi adayları), `botlar <isim>` (durum, yol, istatistik).

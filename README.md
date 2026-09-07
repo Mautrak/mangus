@@ -59,6 +59,23 @@ Günlükler `log/<numara>.log` dosyalarına yazılır. Kapatmak için oyun için
 İstemcinizin karakter setini **UTF-8** olarak ayarlayın. Hâlâ ISO-8859-9 gönderen
 eski istemcilerin girdisi sunucuda otomatik olarak UTF-8'e çevrilir.
 
+## Botlar
+
+`area/botlar.txt` varsa sunucu açılışta bir bot kadrosu yükler: botlar gerçek oyuncu
+karakterleridir (`player/` altında kaydedilir, seviye atlar, pratik ve eğitim yapar,
+alışveriş ve görev yapar, cesetlerini toplar, kabal savaşına girer) ve `kim`, `kimdir`,
+`nerede` listelerinde görünür; `söyle`, `haykır`, `kd` ve sosyallere Türkçe cevap verir,
+insan oyuncuyu gruba davet eder ya da "gel/grup" dendiğinde takip eder. Soketleri yoktur;
+her oyun pulse'ında `bot_update()` (src/bot.c) çalışır ve komutlarını sıradan oyuncu
+komutu olarak `interpret()` üzerinden verir.
+
+Kadro dosyasının biçimi dosyanın başında açıklanmıştır (`isim|ırk|sınıf|cinsiyet|yönelim|
+etik|kişilik|saat|saat|Türkçe|küçük harf|katil|lakap`); `!enaz`/`!encok` aynı anda
+çevrimiçi bot sayısını sınırlar. Dosyayı silmek botları tamamen kapatır. Ölümsüzler
+`botlar`, `botlar <isim>`, `botlar av <isim>`, `botlar bağla/ayır <isim>` ve
+`botlar debug` komutlarını kullanabilir. Bot adları oyuncular tarafından alınamaz;
+bot oyuncu dosyalarında `Bot 1` satırı bulunur.
+
 ## Testler
 
 ```bash
@@ -69,7 +86,8 @@ ctest --test-dir build --output-on-failure
 - `unit`: `tests/unit/test_unit.c` — UTF-8 yardımcıları ve parola özeti.
 - `e2e`: `tests/e2e/` — sunucuyu geçici bir dizinde başlatır, TCP üzerinden bağlanır,
   karakter yaratır, komut çalıştırır ve ekran çıktılarını `tests/e2e/snapshots/`
-  altındaki altın (golden) dosyalarla karşılaştırır (görsel regresyon).
+  altındaki altın (golden) dosyalarla karşılaştırır (görsel regresyon). Botlu sunucu
+  testleri `tests/e2e/test_bots.py` içindedir; diğer testler bot kadrosunu kapalı tutar.
 
 Yalnızca uçtan uca testleri çalıştırmak ya da altın dosyaları yenilemek için:
 

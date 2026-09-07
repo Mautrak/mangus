@@ -89,7 +89,8 @@ static bool can_cast_sn( CHAR_DATA *ch, int sn )
         return FALSE;
     if ( !CABAL_OK( ch, sn ) || !RACE_OK( ch, sn ) )
         return FALSE;
-    if ( ch->mana < skill_table[sn].min_mana )
+    if ( ch->mana < UMAX( skill_table[sn].min_mana,
+                          100 / ( 2 + ch->level - skill_table[sn].skill_level[ch->iclass] ) ) )
         return FALSE;
     return TRUE;
 }
@@ -731,7 +732,7 @@ static int bot_prey_score( CHAR_DATA *ch, CHAR_DATA *mob, int dist )
 static CHAR_DATA *bot_prey_here( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch, *rch, *best = NULL;
-    int lo = UMAX( 1, ch->level - 4 - bot->hunt_fail );
+    int lo = UMAX( 1, ch->level - 2 - bot->hunt_fail );
     int hi = UMAX( 2, ch->level + level_bonus( ch ) );
     int best_score = -1000;
 
@@ -758,7 +759,7 @@ static ROOM_INDEX_DATA *bot_prey_near( BOT_DATA *bot, int depth )
     int n = bot_near_rooms( ch, depth, TRUE );
     int i, best_score = -1000;
     ROOM_INDEX_DATA *best = NULL;
-    int lo = UMAX( 1, ch->level - 4 - bot->hunt_fail );
+    int lo = UMAX( 1, ch->level - 2 - bot->hunt_fail );
     int hi = UMAX( 2, ch->level + level_bonus( ch ) );
 
     for ( i = 1; i < n; i++ )
@@ -840,7 +841,7 @@ static AREA_DATA *bot_pick_hunt_area( BOT_DATA *bot )
     CHAR_DATA *ch = bot->ch;
     AREA_DATA *area, *best = NULL;
     int best_score = -1;
-    int lo = UMAX( 1, ch->level - 4 );
+    int lo = UMAX( 1, ch->level - 2 );
     int hi = UMAX( 2, ch->level + level_bonus( ch ) );
     int tries = 0;
 
@@ -896,7 +897,7 @@ void bot_debug_areas( CHAR_DATA *viewer, BOT_DATA *bot )
         send_to_char( "Bot çevrimdışı.\n\r", viewer );
         return;
     }
-    lo = UMAX( 1, ch->level - 4 );
+    lo = UMAX( 1, ch->level - 2 );
     hi = UMAX( 2, ch->level + level_bonus( ch ) );
     printf_to_char( viewer, "Seviye %d, av bandı %d-%d, oda %d (%s), av bölgesi %s, başarısızlık %d\n\r",
                     ch->level, lo, hi, ch->in_room->vnum, ch->in_room->area->name,
@@ -1457,18 +1458,23 @@ static void bot_hunt( BOT_DATA *bot )
             return;
     }
 
-    /* bu bölgede av kalmadı */
-    if ( ++bot->hunt_fail > 2 )
+    /* yakında av yok: bölgede biraz dolaş, birkaç denemeden sonra bölge değiştir */
+    if ( ++bot->hunt_fail > 4 )
     {
         bot->hunt_area = NULL;
+        bot->hunt_fail = 0;
         bot_set_state( bot, BOT_ST_IDLE );
+        return;
     }
-    else
     {
-        ROOM_INDEX_DATA *entry = area_entry_room( ch, bot->hunt_area );
-        if ( entry != NULL && entry != ch->in_room )
-            bot_set_travel( bot, entry->vnum, BOT_ST_HUNT );
-        else
+        int n = bot_near_rooms( ch, 12, TRUE );
+        ROOM_INDEX_DATA *dest = NULL;
+
+        if ( n > 3 )
+            dest = near_room[number_range( n / 2, n - 1 )];
+        if ( dest == NULL || dest == ch->in_room )
+            dest = area_entry_room( ch, bot->hunt_area );
+        if ( dest == NULL || dest == ch->in_room || !bot_set_travel( bot, dest->vnum, BOT_ST_HUNT ) )
             bot_set_state( bot, BOT_ST_REST );
     }
 }
