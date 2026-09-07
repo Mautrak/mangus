@@ -863,6 +863,25 @@ static ROOM_INDEX_DATA *area_entry_room( CHAR_DATA *ch, AREA_DATA *area )
     CHAR_DATA *mob;
     ROOM_INDEX_DATA *pick = NULL;
     int count = 0;
+    int lo = UMAX( 1, ch->level - 3 );
+    int hi = UMAX( 2, ch->level + level_bonus( ch ) );
+
+    /* önce bota en yakın, uygun av bulunan oda (dünya çapında sınırlı tarama) */
+    if ( ch->in_room != NULL )
+    {
+        int n = bot_near_rooms( ch, 90, FALSE ), i;
+
+        for ( i = 1; i < n; i++ )
+        {
+            CHAR_DATA *rch;
+
+            if ( near_room[i]->area != area )
+                continue;
+            for ( rch = near_room[i]->people; rch != NULL; rch = rch->next_in_room )
+                if ( bot_prey_ok( ch, rch, lo, hi ) )
+                    return near_room[i];
+        }
+    }
 
     /* alanda uygun bir mobun bulunduğu rastgele bir oda */
     for ( mob = char_list; mob != NULL; mob = mob->next )
