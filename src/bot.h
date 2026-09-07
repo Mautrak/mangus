@@ -159,6 +159,7 @@ struct bot_data
     long        town_keeper_id;
     int         last_town_pulse;
     int         practice_block_until;
+    int         town_retry[16];
     int         inv_signature;
     int         wear_fail[BOT_WEAR_FAIL_MAX];
     int         wear_fail_pos;

@@ -954,11 +954,12 @@ static void bot_travel_step( BOT_DATA *bot )
             bot_cmd( bot, "dinlen" );
         return;
     }
-    if ( ch->position == POS_RESTING || ch->position == POS_SITTING )
+    if ( ch->position >= POS_SLEEPING && ch->position < POS_STANDING )
     {
-        if ( ch->move < ch->max_move / 2 )
+        if ( ch->move < ch->max_move / 2 && ch->position != POS_SLEEPING )
             return;
-        bot_cmd( bot, "kalk" );
+        if ( !IS_AFFECTED( ch, AFF_SLEEP ) )
+            bot_cmd( bot, "kalk" );
         return;
     }
     if ( ch->position != POS_STANDING )
@@ -1709,10 +1710,28 @@ static CHAR_DATA *keeper_here( CHAR_DATA *ch )
 /* ---------------------------------------------------------------------
  * şehir işleri
  * ------------------------------------------------------------------ */
+static int task_index( long task )
+{
+    int i;
+
+    for ( i = 0; i < 16; i++ )
+        if ( task == ( 1L << i ) )
+            return i;
+    return 0;
+}
+
+/* bu iş bir süre denenmesin */
+static void bot_task_defer( BOT_DATA *bot, long task, int minutes )
+{
+    bot->town_retry[task_index( task )] = bot_pulse + 4 * 60 * minutes;
+    REMOVE_BIT( bot->town_tasks, task );
+}
+
 static void bot_compute_town_tasks( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch;
     long tasks = bot->town_tasks;
+    int i;
 
     if ( ch->practice >= 3 && bot_pulse > bot->practice_block_until )
         SET_BIT( tasks, BOT_TOWN_PRACTICE );
@@ -1738,6 +1757,9 @@ static void bot_compute_town_tasks( BOT_DATA *bot )
         SET_BIT( tasks, BOT_TOWN_QUEST_BUY );
     if ( ch->silver >= 1500 && ch->level >= 6 && bot_pulse - bot->last_town_pulse > 4 * 60 * 30 )
         SET_BIT( tasks, BOT_TOWN_UPGRADE );
+    for ( i = 0; i < 16; i++ )
+        if ( bot_pulse < bot->town_retry[i] )
+            REMOVE_BIT( tasks, 1L << i );
     bot->town_tasks = tasks;
 }
 
@@ -2014,7 +2036,7 @@ static void bot_town( BOT_DATA *bot )
         room = bot_town_target_room( bot, task );
         if ( room == NULL )
         {
-            REMOVE_BIT( bot->town_tasks, task );
+            bot_task_defer( bot, task, 20 );
             if ( task == BOT_TOWN_PRACTICE || task == BOT_TOWN_TRAIN )
                 bot->practice_block_until = bot_pulse + 4 * 60 * 20;
             return;
@@ -2025,7 +2047,7 @@ static void bot_town( BOT_DATA *bot )
         {
             if ( !bot_set_travel( bot, room->vnum, BOT_ST_TOWN ) )
             {
-                REMOVE_BIT( bot->town_tasks, task );
+                bot_task_defer( bot, task, 20 );
                 bot->substate = 0;
             }
             else
@@ -2035,14 +2057,15 @@ static void bot_town( BOT_DATA *bot )
     }
 
     /* hedef odadayız: işi yap */
-    if ( ch->position < POS_STANDING && ch->position >= POS_RESTING )
+    if ( ch->position < POS_STANDING && ch->position >= POS_SLEEPING )
     {
-        bot_cmd( bot, "kalk" );
+        if ( !IS_AFFECTED( ch, AFF_SLEEP ) )
+            bot_cmd( bot, "kalk" );
         return;
     }
     if ( ++bot->town_step > 40 )
     {
-        REMOVE_BIT( bot->town_tasks, task );
+        bot_task_defer( bot, task, 15 );
         bot->substate = 0;
         return;
     }
@@ -2237,7 +2260,7 @@ static void bot_town( BOT_DATA *bot )
     }
     }
 
-    REMOVE_BIT( bot->town_tasks, task );
+    bot_task_defer( bot, task, 10 );
     bot->substate = 0;
 }
 
@@ -2773,7 +2796,7 @@ void bot_think( BOT_DATA *bot )
     {
         if ( IS_AFFECTED( ch, AFF_SLEEP ) )
             return;
-        if ( ch->position >= POS_RESTING )
+        if ( ch->position >= POS_SLEEPING )
             bot_cmd( bot, "kalk" );
         return;
     }
