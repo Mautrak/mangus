@@ -38,6 +38,7 @@ static int spec_ok_count = 0;
 static SPEC_FUN *spec_questmaster_fn = NULL;
 static bool bot_blind_in_dark( CHAR_DATA *ch );
 static bool is_night( void );
+static void bot_travel_step( BOT_DATA *bot );
 
 /* aç ya da susuz: yenilenme durur, dinlenmek boşuna */
 static bool is_starving( CHAR_DATA *ch )
@@ -1035,7 +1036,7 @@ static void bot_travel_step( BOT_DATA *bot )
         return;
     }
 
-    if ( ch->move < ( is_starving( ch ) ? 3 : 6 ) )
+    if ( ch->move < ( is_starving( ch ) ? 2 : 6 ) )
     {
         if ( ch->position != POS_SLEEPING && !room_has_aggressor( ch ) )
             bot_cmd( bot, "uyu" );
@@ -1126,7 +1127,7 @@ static bool bot_need_rest( BOT_DATA *bot )
     CHAR_DATA *ch = bot->ch;
 
     if ( is_starving( ch ) )
-        return pct( ch->hit, ch->max_hit ) < 25;
+        return pct( ch->hit, ch->max_hit ) < 15;
     if ( pct( ch->hit, ch->max_hit ) < 45 )
         return TRUE;
     if ( is_caster( ch ) && pct( ch->mana, ch->max_mana ) < 25 )
@@ -1194,7 +1195,7 @@ static void bot_resting( BOT_DATA *bot )
     CHAR_DATA *ch = bot->ch;
 
     /* açlıktan yenilenme durmuş: yatmak boşuna, yiyecek bulmaya git */
-    if ( is_starving( ch ) && pct( ch->hit, ch->max_hit ) >= 25 )
+    if ( is_starving( ch ) && pct( ch->hit, ch->max_hit ) >= 15 )
     {
         if ( ch->position < POS_STANDING && !IS_AFFECTED( ch, AFF_SLEEP ) )
         {
@@ -1394,6 +1395,23 @@ static bool bot_handle_darkness( BOT_DATA *bot )
         SET_BIT( bot->town_tasks, BOT_TOWN_LIGHT );
         bot_set_state( bot, BOT_ST_TOWN );
         return TRUE;
+    }
+    if ( is_night() && ch->level <= 10 )
+    {
+        /* parasız: aydınlık okul arenasında ufak avdan para topla */
+        ROOM_INDEX_DATA *school = get_room_index( ROOM_VNUM_SCHOOL );
+
+        if ( school != NULL && school->area != NULL )
+        {
+            bot->hunt_area = school->area;
+            bot->hunt_area_pulse = bot_pulse;
+            bot->hunt_fail = 2;
+            if ( ch->in_room->area == school->area )
+                bot_set_state( bot, BOT_ST_HUNT );
+            else if ( !bot_set_travel( bot, school->vnum, BOT_ST_HUNT ) )
+                bot_set_state( bot, BOT_ST_REST );
+            return TRUE;
+        }
     }
     temple = get_room_index( ROOM_VNUM_TEMPLE );
     if ( temple != NULL && temple != ch->in_room
@@ -2073,7 +2091,8 @@ static void bot_compute_town_tasks( BOT_DATA *bot )
         SET_BIT( tasks, BOT_TOWN_PRACTICE );
     if ( ch->train >= 2 && bot_pulse > bot->practice_block_until )
         SET_BIT( tasks, BOT_TOWN_TRAIN );
-    if ( bot_sell_candidates( bot ) >= 4 || ch->carry_number >= can_carry_n( ch ) - 2 )
+    if ( bot_sell_candidates( bot ) >= 4 || ch->carry_number >= can_carry_n( ch ) - 2
+      || ( ch->silver < 60 && bot_sell_candidates( bot ) >= 2 ) )
         SET_BIT( tasks, BOT_TOWN_SELL );
     if ( carried_type( ch, ITEM_FOOD ) == NULL && ch->silver >= 5 )
         SET_BIT( tasks, BOT_TOWN_FOOD );
@@ -2113,7 +2132,7 @@ static bool bot_town_worth_it( BOT_DATA *bot )
         return TRUE;
     if ( IS_SET( t, BOT_TOWN_PRACTICE ) && ( bot->ch->practice >= 6 || bot->ch->level <= 3 ) )
         return TRUE;
-    if ( IS_SET( t, BOT_TOWN_SELL ) && bot_sell_candidates( bot ) >= 5 )
+    if ( IS_SET( t, BOT_TOWN_SELL ) && ( bot_sell_candidates( bot ) >= 5 || bot->ch->silver < 60 ) )
         return TRUE;
     if ( IS_SET( t, BOT_TOWN_QUEST_GET | BOT_TOWN_QUEST_BUY | BOT_TOWN_UPGRADE ) )
         return TRUE;
@@ -3149,6 +3168,11 @@ void bot_think( BOT_DATA *bot )
     {
         if ( IS_AFFECTED( ch, AFF_SLEEP ) )
             return;
+        if ( bot->state == BOT_ST_TRAVEL && ch->position >= POS_SLEEPING )
+        {
+            bot_travel_step( bot );          /* hareket puanı için uyuyorsa o karar verir */
+            return;
+        }
         if ( ch->position >= POS_SLEEPING )
             bot_cmd( bot, "kalk" );
         return;
