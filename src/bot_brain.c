@@ -37,6 +37,7 @@ static SPEC_FUN *spec_ok[4];
 static int spec_ok_count = 0;
 static SPEC_FUN *spec_questmaster_fn = NULL;
 static bool bot_blind_in_dark( CHAR_DATA *ch );
+static bool is_night( void );
 
 /* aç ya da susuz: yenilenme durur, dinlenmek boşuna */
 static bool is_starving( CHAR_DATA *ch )
@@ -1199,8 +1200,8 @@ static void bot_resting( BOT_DATA *bot )
         return;
     }
 
-    /* ışıksız karanlıkta: sabahı bekle (14 dk sınırı da uygulanır) */
-    if ( bot_blind_in_dark( ch ) && ch->silver < 20
+    /* gece ışıksız karanlıkta: sabahı bekle (14 dk sınırı da uygulanır) */
+    if ( bot_blind_in_dark( ch ) && is_night() && ch->silver < 20
       && bot_pulse - bot->state_pulse < 4 * 60 * 14 )
     {
         if ( ch->position > POS_SLEEPING && !IS_AFFECTED( ch, AFF_SLEEP ) && bot_rested_enough( bot ) )
@@ -1390,9 +1391,18 @@ static bool bot_handle_darkness( BOT_DATA *bot )
         return TRUE;
     }
     temple = get_room_index( ROOM_VNUM_TEMPLE );
-    if ( temple != NULL && temple != ch->in_room && bot_set_travel( bot, temple->vnum, BOT_ST_REST ) )
+    if ( temple != NULL && temple != ch->in_room
+      && bot_set_travel( bot, temple->vnum, is_night() ? BOT_ST_REST : BOT_ST_IDLE ) )
         return TRUE;
-    bot_set_state( bot, BOT_ST_REST );
+    if ( is_night() )
+        bot_set_state( bot, BOT_ST_REST );
+    else
+    {
+        /* gündüz karanlık odada (bayraklı): burada av olmaz, bölge değiştir */
+        bot->hunt_area = NULL;
+        bot->hunt_fail += 2;
+        bot_set_state( bot, BOT_ST_IDLE );
+    }
     return TRUE;
 }
 
@@ -2051,9 +2061,9 @@ static void bot_compute_town_tasks( BOT_DATA *bot )
     long tasks = bot->town_tasks;
     int i;
 
-    if ( ch->practice >= 3 && bot_pulse > bot->practice_block_until )
+    if ( ( ch->practice >= 6 || ( ch->practice >= 3 && ch->level <= 3 ) ) && bot_pulse > bot->practice_block_until )
         SET_BIT( tasks, BOT_TOWN_PRACTICE );
-    if ( ch->train >= 1 && bot_pulse > bot->practice_block_until )
+    if ( ch->train >= 2 && bot_pulse > bot->practice_block_until )
         SET_BIT( tasks, BOT_TOWN_TRAIN );
     if ( bot_sell_candidates( bot ) >= 4 || ch->carry_number >= can_carry_n( ch ) - 2 )
         SET_BIT( tasks, BOT_TOWN_SELL );
@@ -2093,7 +2103,7 @@ static bool bot_town_worth_it( BOT_DATA *bot )
         return TRUE;
     if ( IS_SET( t, BOT_TOWN_DRINK ) && bot->ch->pcdata->condition[COND_THIRST] < 25 )
         return TRUE;
-    if ( IS_SET( t, BOT_TOWN_PRACTICE ) && bot->ch->practice >= 4 )
+    if ( IS_SET( t, BOT_TOWN_PRACTICE ) && ( bot->ch->practice >= 6 || bot->ch->level <= 3 ) )
         return TRUE;
     if ( IS_SET( t, BOT_TOWN_SELL ) && bot_sell_candidates( bot ) >= 5 )
         return TRUE;
