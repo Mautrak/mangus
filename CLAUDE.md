@@ -86,7 +86,7 @@ etki listesi (act_obj.c), `spell_dispel_magic` her zaman başarılı der (`found
 `spell_entangle`'da kullanılmayan `dam`, `QuestPractice` koşulsuz kaydedilir (save.c),
 12 karakterden uzun komut adları `komutlar` sütununa sığmaz.
 
-## Botlar (src/bot.c, bot_brain.c, bot_chat.c, bot_war.c)
+## Botlar (src/bot.c, bot_brain.c, bot_chat.c, bot_war.c, bot_god.c)
 
 - Botlar descriptor'sız PC'lerdir: `IS_BOT(ch)` (`pcdata->bot != NULL`). `who`/`whois`/
   `where` listeleri `bot_who_collect()` ile hem soketleri hem botları gezer; `kd`, `söyle`,
@@ -110,6 +110,10 @@ etki listesi (act_obj.c), `spell_dispel_magic` her zaman başarılı der (`found
 - Kanallar: `söyle`/`haykır`/`duygu` rol içi havuzlar (`ic_*`), `kd`/`kdg` konu dışı
   (`ooc_*`); `bot_fill_ch(..., ic)` üslubu kanala göre seçer. `kdg` (`do_kdg`,
   `COMM_NOKDG`) herkese açık konu dışı kanaldır; botlar `bot_hear(BOT_CH_KDG)` ile duyar.
+- Tanrı botu (bot_god.c): kadroda `!tanrı <bot> <seviye>`; `bot_think` ve `bot_hear` en başta
+  `bot_is_god` ile ayrılır; `do_pray` `BOT_CH_PRAY` kancasıyla ulaşır. Yalnızca transfer
+  (dua ile sıkışan ölümlü, tapınağa), restore (yalnız insan, saatte bir), duyuru, immtalk,
+  kd/kdg/söyle, goto tapınak kullanır; ölümlü botlara yardım etmez.
 - Kabal (bot_war.c): kadrodaki `!lider` botu şartlar sağlanınca kabal + `PLR_CANINDUCT`
   alır (tanrı ataması, bir kez); üyelik `kd` isteği + gerçek `induct` komutuyla. PK hedefi
   `kim`'den, bölge devriyesi; `kk` yardım çağrısı ("yardım! <isim> <bölge>'de ..."). Baskın

@@ -1964,6 +1964,14 @@ void do_pray(CHAR_DATA *ch, char *argument)
 	      }
 	  }
       }
+
+    {
+	CHAR_DATA *bch;
+
+	for ( bch = char_list; bch != NULL; bch = bch->next )
+	    if ( IS_BOT(bch) && bch != ch && IS_IMMORTAL(bch) )
+		bot_hear( bch, ch, BOT_CH_PRAY, argument );
+    }
    return;
 }
 

@@ -89,7 +89,10 @@ eşyalarının peşine düşer.
 
 Kadro dosyasının biçimi dosyanın başında açıklanmıştır (`isim|ırk|sınıf|cinsiyet|yönelim|
 etik|kişilik|saat|saat|Türkçe|küçük harf|katil|lakap`); `!enaz`/`!encok` aynı anda
-çevrimiçi bot sayısını sınırlar, `!lider` kabal liderlerini belirler. Dosyayı silmek botları tamamen kapatır. Ölümsüzler
+çevrimiçi bot sayısını sınırlar, `!lider` kabal liderlerini belirler, `!tanrı <bot> <seviye>`
+bir botu ölümsüz yapar: tapınakta görünür durur, `dua` edenleri duyar (sıkışan ölümlüyü
+tapınağa alır, dua eden insan oyuncuyu saatte bir iyileştirir), insan oyuncuyu `kd` ile,
+ölümsüzü `immtalk` ile karşılar, ara sıra `duyuru` yapar. Ölümlü botlara başka yardım etmez. Dosyayı silmek botları tamamen kapatır. Ölümsüzler
 `botlar`, `botlar <isim>`, `botlar av <isim>`, `botlar bağla/ayır <isim>` ve
 `botlar debug` komutlarını kullanabilir. Bot adları oyuncular tarafından alınamaz;
 bot oyuncu dosyalarında `Bot 1` satırı bulunur.

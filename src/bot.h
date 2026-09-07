@@ -43,7 +43,8 @@
 #define BOT_K_ESPRILI     4
 #define BOT_K_GIZEMLI     5
 #define BOT_K_ACEMI       6
-#define BOT_K_MAX         7
+#define BOT_K_BILGE       7
+#define BOT_K_MAX         8
 
 /* duyma kanalları */
 #define BOT_CH_SAY        0
@@ -54,6 +55,8 @@
 #define BOT_CH_SOCIAL     5
 #define BOT_CH_EMOTE      6
 #define BOT_CH_KDG        7
+#define BOT_CH_PRAY       8
+#define BOT_CH_IMM        9
 
 /* olaylar */
 #define BOT_EV_LEVEL      0
@@ -123,6 +126,7 @@ struct bot_data
     bool        disabled;
     bool        pk_istekli;
     int         leader_cabal;      /* kadro: tanrıların atadığı liderlik */
+    int         god_level;         /* kadro: !tanrı <bot> <seviye> (0 = ölümlü) */
 
     /* çalışma zamanı */
     CHAR_DATA * ch;
@@ -236,6 +240,13 @@ struct bot_data
     int         opp_pk_pulse;      /* son fırsat PK kararı */
     int         pk_tries;          /* dövüş başlamayan saldırı denemeleri */
     int         next_raid_check;   /* baskın değerlendirme zamanı (PK'dan bağımsız) */
+    /* tanrı botu */
+    int         god_next_act;
+    int         god_next_gecho;
+    long        god_pending_id;
+    int         god_pending_kind;
+    int         god_pending_pulse;
+    int         god_last_restore;
     int         follow_since;
     int         follow_until;
     int         leader_last_action;
@@ -320,6 +331,12 @@ bool    bot_war_goal        ( BOT_DATA *bot );
 void    bot_war_tick        ( BOT_DATA *bot );
 void    bot_cabal_alarm     ( int cabal, CHAR_DATA *thief );
 bool    bot_raid_scout      ( BOT_DATA *bot, ROOM_INDEX_DATA *next );
+/* bot_god.c */
+bool    bot_is_god          ( BOT_DATA *bot );
+void    bot_god_enter       ( BOT_DATA *bot, CHAR_DATA *ch, bool fresh );
+void    bot_god_think       ( BOT_DATA *bot );
+void    bot_god_hear        ( BOT_DATA *bot, CHAR_DATA *speaker, int channel, const char *text );
+void    bot_god_greet       ( BOT_DATA *bot, CHAR_DATA *human );
 void    bot_raid_failed     ( BOT_DATA *bot );
 void    bot_after_death     ( BOT_DATA *bot );
 void    bot_debug_areas     ( CHAR_DATA *viewer, BOT_DATA *bot );

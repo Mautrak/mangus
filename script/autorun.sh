@@ -16,7 +16,12 @@ rm -f shutdown.txt
 while :; do
     index=1000
     while [ -e "$ROOT/log/$index.log" ]; do index=$((index + 1)); done
-    "$BIN" "$PORT" > "$ROOT/log/$index.log" 2>&1
+    # macOS: sunucu çalışırken makine uykuya girmesin (botlar oynamaya devam etsin)
+    if command -v caffeinate >/dev/null 2>&1; then
+        caffeinate -i -s "$BIN" "$PORT" > "$ROOT/log/$index.log" 2>&1
+    else
+        "$BIN" "$PORT" > "$ROOT/log/$index.log" 2>&1
+    fi
     if [ -e shutdown.txt ]; then
         rm -f shutdown.txt
         exit 0

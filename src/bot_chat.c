@@ -413,6 +413,7 @@ void bot_talk( BOT_DATA *bot, int channel, CHAR_DATA *to, const char *text )
     case BOT_CH_GTELL:  bot_cmd( bot, "ganlat %s", text ); break;
     case BOT_CH_CABAL:  if ( ch->cabal != CABAL_NONE ) bot_cmd( bot, "kk %s", text ); break;
     case BOT_CH_EMOTE:  bot_cmd( bot, "duygu %s", text ); break;
+    case BOT_CH_IMM:    if ( IS_IMMORTAL(ch) ) bot_cmd( bot, "immtalk %s", text ); break;
     case BOT_CH_SOCIAL:
         if ( to != NULL && to->in_room == ch->in_room )
             bot_cmd( bot, "%s %s", text, to->name );

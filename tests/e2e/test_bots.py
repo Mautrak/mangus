@@ -146,6 +146,32 @@ def test_bot_answers_say_in_character(bot_server, screens):
         c.quit()
 
 
+def test_god_bot_answers_a_prayer(bot_server, screens):
+    """Kadrodaki tanrı botu ('!tanrı') dua eden sıkışmış ölümlüye kd ile cevap verip onu
+    tapınağa alır (ölümsüzlerin duası dikkate alınmaz; bu yüzden bir ölümlü dua eder)."""
+    wait_for_bot_logins(bot_server, 1)
+    imm = bot_server.connect()
+    mortal = None
+    try:
+        mud.login(imm, IMM_NAME, PASSWORD)
+        scr = imm.command("botlar bağla Ulgen")
+        assert re.search(r"Bot oyuna girdi|Zaten oyunda", scr.plain), scr.plain
+        who = imm.command("kim")
+        assert "Ulgen" in who.plain, who.plain
+        time.sleep(0.6)
+        mortal = bot_server.connect()
+        mud.create_character(mortal, "Duaci", PASSWORD)
+        mortal.command("dua Sıkıştım, çıkış yolu bulamıyorum!")
+        scr = mortal.read_idle(idle=40.0, max_wait=45.0)
+        screens.add("tanrı botunun dua cevabı", scr.text)
+        assert re.search(r"Ulgen kd:", scr.plain), "Tanrı botu duaya cevap vermedi.\n%s" % scr.plain
+        assert "transferred you" in scr.plain or "Selenge Tapınağı" in scr.plain, scr.plain
+    finally:
+        if mortal is not None:
+            mortal.close()
+        imm.quit()
+
+
 def test_bots_move_and_act_on_their_own(bot_server, screens):
     wait_for_bot_logins(bot_server, 2)
     c = bot_server.connect()

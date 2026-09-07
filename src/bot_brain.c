@@ -3154,6 +3154,11 @@ void bot_think( BOT_DATA *bot )
 
     if ( ch == NULL || ch->in_room == NULL )
         return;
+    if ( bot_is_god( bot ) )
+    {
+        bot_god_think( bot );
+        return;
+    }
 
     /* seviye atlama */
     if ( ch->level > bot->last_level )

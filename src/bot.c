@@ -274,6 +274,7 @@ static int kisilik_lookup( const char *s )
     if ( !str_prefix( s, "esprili" ) )      return BOT_K_ESPRILI;
     if ( !str_prefix( s, "gizemli" ) )      return BOT_K_GIZEMLI;
     if ( !str_prefix( s, "acemi" ) )        return BOT_K_ACEMI;
+    if ( !str_prefix( s, "bilge" ) )        return BOT_K_BILGE;
     return BOT_K_SAKIN;
 }
 
@@ -352,9 +353,10 @@ static void bot_load_roster( void )
 {
     FILE *fp;
     char line[1024];
-    int count = 0, leader_count = 0, i;
+    int count = 0, leader_count = 0, god_count = 0, i;
     BOT_DATA *rev = NULL, *bot, *next;
     struct { char name[64]; char cabal[64]; } leaders[16];
+    struct { char name[64]; int level; } gods[8];
 
     if ( ( fp = fopen( BOT_ROSTER_FILE, "r" ) ) == NULL )
         return;
@@ -374,6 +376,20 @@ static void bot_load_roster( void )
             {
                 if ( !str_cmp( key, "enaz" ) )  bot_min_online = URANGE( 0, val, 60 );
                 if ( !str_cmp( key, "encok" ) ) bot_max_online = URANGE( 0, val, 60 );
+            }
+            else if ( ( !str_prefix( "tanrı ", s + 1 ) || !str_prefix( "tanri ", s + 1 ) ) && god_count < 8 )
+            {
+                /* !tanrı <bot> <seviye>: ölümsüz bot */
+                char who[64];
+                int lvl = 0;
+                const char *rest = strchr( s + 1, ' ' );
+
+                if ( rest != NULL && sscanf( rest + 1, "%63s %d", who, &lvl ) >= 1 )
+                {
+                    snprintf( gods[god_count].name, sizeof(gods[god_count].name), "%s", who );
+                    gods[god_count].level = lvl > 0 ? lvl : LEVEL_IMMORTAL;
+                    god_count++;
+                }
             }
             else if ( !str_prefix( "lider ", s + 1 ) && leader_count < 16 )
             {
@@ -425,6 +441,23 @@ static void bot_load_roster( void )
         }
         bot->leader_cabal = cabal;
         bot->pk_istekli = TRUE;
+    }
+
+    for ( i = 0; i < god_count; i++ )
+    {
+        for ( bot = bot_list; bot != NULL; bot = bot->next )
+            if ( !str_cmp( bot->name, gods[i].name ) )
+                break;
+        if ( bot == NULL )
+        {
+            char buf[256];
+            snprintf( buf, sizeof(buf), "[bot] tanrı satırı tanınmadı: %s", gods[i].name );
+            log_string( buf );
+            continue;
+        }
+        bot->god_level = URANGE( LEVEL_IMMORTAL, gods[i].level, MAX_LEVEL - 1 );
+        bot->pk_istekli = FALSE;
+        bot->leader_cabal = 0;
     }
 
     if ( bot_max_online < bot_min_online )
@@ -556,7 +589,28 @@ static void bot_enter_world( BOT_DATA *bot, CHAR_DATA *ch, bool fresh )
     REMOVE_BIT( ch->act, PLR_NOFOLLOW );
     REMOVE_BIT( ch->comm, COMM_NOKD | COMM_QUIET | COMM_DEAF );
 
-    if ( ch->level == 0 )
+    if ( bot->god_level > 0 )
+    {
+        bool fresh = ( ch->level == 0 );
+
+        if ( fresh )
+        {
+            int l, today, day;
+
+            ch->level = 1;
+            ch->exp   = base_exp( ch, ch->pcdata->points );
+            ch->pcdata->death = 0;
+            today = parse_date( current_time );
+            for ( l = 0; l < MAX_TIME_LOG; l++ )
+            {
+                day = ( ( 365 + today - l ) % 365 );
+                ch->pcdata->log_date[l] = day ? day : 365;
+                ch->pcdata->log_time[l] = 60;
+            }
+        }
+        bot_god_enter( bot, ch, fresh );
+    }
+    else if ( ch->level == 0 )
     {
         int l, today, day;
 
@@ -997,6 +1051,13 @@ void bot_hear( CHAR_DATA *listener, CHAR_DATA *speaker, int channel, const char 
 
     if ( bot == NULL || speaker == NULL || speaker == listener || text == NULL )
         return;
+    if ( bot_is_god( bot ) )
+    {
+        bot_god_hear( bot, speaker, channel, text );
+        return;
+    }
+    if ( channel == BOT_CH_PRAY )
+        return;
     if ( listener->position <= POS_SLEEPING && channel != BOT_CH_TELL )
         return;
     bot_chat_react( bot, speaker, channel, text );
@@ -1215,6 +1276,11 @@ static void bot_watch_humans( void )
             {
                 if ( bot->ch == NULL || bot->ch->position < POS_RESTING )
                     continue;
+                if ( bot_is_god( bot ) )
+                {
+                    bot_god_greet( bot, wch );
+                    continue;
+                }
                 if ( number_percent() < 45 )
                 {
                     bot_chat_event( bot, BOT_EV_HUMAN_LOGIN, wch );

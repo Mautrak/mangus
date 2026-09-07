@@ -4,7 +4,7 @@
 #   isim | ırk | sınıf | cinsiyet(e/k) | yönelim(i/y/k) | etik(t/y/k) | kişilik |
 #   aktif saat başı | aktif saat sonu | Türkçe karakter(1/0) | küçük harf(1/0) |
 #   oyuncu katline istekli(1/0) | lakap
-# Kişilikler: sakin, geveze, agresif, yardımsever, esprili, gizemli, acemi
+# Kişilikler: sakin, geveze, agresif, yardımsever, esprili, gizemli, acemi, bilge
 # !enaz / !encok : aynı anda çevrimiçi bot sayısı sınırları
 !enaz 10
 !encok 16
@@ -17,6 +17,8 @@
 !lider Zifir kaos
 !lider Kutay tüccar
 !lider Kursad aslan
+# !tanrı <bot> <seviye> : ölümsüz bot (tapınakta durur, duaları duyar, sıkışanı tapınağa alır, duyuru yapar)
+!tanrı Ulgen 96
 Tugrul|insan|savaşçı|e|i|t|sakin|19|2|1|0|1|Selenge'nin Kılıcı
 Aybars|insan|adbolar|e|i|t|yardımsever|18|1|1|0|1|Işığın Muhafızı
 Karabey|kara-elf|hırsız|e|k|k|agresif|21|4|0|1|1|Gölgelerin Efendisi
@@ -43,3 +45,4 @@ Cerenay|insan|hırsız|k|y|y|acemi|16|22|0|1|0|
 Yildirimhan|insan|ninja|e|k|k|agresif|0|6|0|0|1|Kara Şimşek
 Erdemcan|insan|ermiş|e|i|t|sakin|8|14|1|0|0|Sabırlı Derviş
 Sungurbey|felar|korucu|e|y|k|esprili|11|18|1|0|1|Uçan Pençe
+Ulgen|insan|savaşçı|e|i|t|bilge|18|2|1|0|0|Göklerin Efendisi
