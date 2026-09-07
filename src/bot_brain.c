@@ -1472,6 +1472,9 @@ static void bot_combat( BOT_DATA *bot )
     int roll;
 
     bot->last_fight_pulse = bot_pulse;
+    snprintf( bot->last_opp, sizeof(bot->last_opp), "%s (lvl %d)",
+              IS_NPC(victim) ? victim->short_descr : victim->name, victim->level );
+    bot->last_opp_vnum = IS_NPC(victim) ? victim->pIndexData->vnum : 0;
 
     if ( ch->position < POS_FIGHTING )
     {
@@ -2687,12 +2690,10 @@ static OBJ_DATA *bot_own_corpse( CHAR_DATA *ch )
 
 void bot_after_death( BOT_DATA *bot )
 {
-    CHAR_DATA *killer = bot_char_by_id( bot->target_id );
-
     /* beni öldüren yaratık türünden bir süre uzak dur */
-    if ( killer != NULL && IS_NPC(killer) )
+    if ( bot->last_opp_vnum > 0 )
     {
-        bot->avoid_vnum[bot->avoid_pos]  = killer->pIndexData->vnum;
+        bot->avoid_vnum[bot->avoid_pos]  = bot->last_opp_vnum;
         bot->avoid_until[bot->avoid_pos] = bot_pulse + 4 * 60 * 90;
         bot->avoid_pos = ( bot->avoid_pos + 1 ) % BOT_AVOID_MAX;
     }

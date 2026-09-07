@@ -983,7 +983,8 @@ void bot_on_death( CHAR_DATA *victim )
     bot->target_id = 0;
     bot->pk_target_id = 0;
     bot->path_len = bot->path_pos = 0;
-    bot_log( bot, "öldü (oda %d, seviye %d).", bot->death_room, victim->level );
+    bot_log( bot, "öldü (oda %d, seviye %d, son rakip %s).", bot->death_room, victim->level,
+             bot->last_opp[0] != '\0' ? bot->last_opp : "?" );
 }
 
 void bot_on_kill( CHAR_DATA *killer, CHAR_DATA *victim )

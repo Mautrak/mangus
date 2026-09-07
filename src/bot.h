@@ -139,6 +139,8 @@ struct bot_data
     long        target_id;
     int         kills;
     int         last_kill_exp;
+    char        last_opp[96];
+    int         last_opp_vnum;
     int         deaths;
     int         quests;
     int         pk_kills;
