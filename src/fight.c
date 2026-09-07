@@ -56,7 +56,7 @@
 #include "bot.h"
 
 
-#define MAX_DAMAGE_MESSAGE 34
+#define MAX_DAMAGE_MESSAGE 39
 
 /* command procedures needed */
 DECLARE_DO_FUN(do_emote		);
