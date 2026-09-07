@@ -1133,6 +1133,14 @@ static void bot_resting( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch;
 
+    /* ışıksız karanlıkta: sabahı bekle (14 dk sınırı da uygulanır) */
+    if ( room_is_dark( ch ) && get_light_char( ch ) == NULL && ch->silver < 20
+      && bot_pulse - bot->state_pulse < 4 * 60 * 14 )
+    {
+        if ( ch->position > POS_SLEEPING && !IS_AFFECTED( ch, AFF_SLEEP ) && bot_rested_enough( bot ) )
+            bot_cmd( bot, "uyu" );
+        return;
+    }
     if ( bot_rested_enough( bot ) || bot_pulse - bot->state_pulse > 4 * 60 * 14 )
     {
         if ( ch->position < POS_STANDING )
@@ -1210,7 +1218,7 @@ static bool bot_eat_drink( BOT_DATA *bot )
         return FALSE;
     if ( ch->pcdata->condition[COND_HUNGER] < 14 )
     {
-        if ( ( obj = carried_type( ch, ITEM_FOOD ) ) != NULL )
+        if ( ( obj = carried_type( ch, ITEM_FOOD ) ) != NULL && can_see_obj( ch, obj ) )
         {
             bot_obj_keyword( ch, obj, ch->carrying, kw, sizeof(kw) );
             bot_cmd( bot, "ye %s", kw );
@@ -1220,7 +1228,7 @@ static bool bot_eat_drink( BOT_DATA *bot )
     }
     if ( ch->pcdata->condition[COND_THIRST] < 14 )
     {
-        if ( ( obj = carried_drink( ch ) ) != NULL )
+        if ( ( obj = carried_drink( ch ) ) != NULL && can_see_obj( ch, obj ) )
         {
             bot_obj_keyword( ch, obj, ch->carrying, kw, sizeof(kw) );
             bot_cmd( bot, "iç %s", kw );
@@ -1237,7 +1245,7 @@ static bool bot_eat_drink( BOT_DATA *bot )
     if ( room_fountain( ch ) != NULL )
     {
         for ( obj = ch->carrying; obj != NULL; obj = obj->next_content )
-            if ( obj->item_type == ITEM_DRINK_CON && obj->value[1] < obj->value[0] / 2 )
+            if ( obj->item_type == ITEM_DRINK_CON && obj->value[1] < obj->value[0] / 2 && can_see_obj( ch, obj ) )
             {
                 bot_obj_keyword( ch, obj, ch->carrying, kw, sizeof(kw) );
                 bot_cmd( bot, "doldur %s", kw );
@@ -1245,6 +1253,68 @@ static bool bot_eat_drink( BOT_DATA *bot )
             }
     }
     return FALSE;
+}
+
+/* ---------------------------------------------------------------------
+ * ışık ve karanlık
+ * ------------------------------------------------------------------ */
+static bool is_night( void )
+{
+    return weather_info.sunlight == SUN_DARK || weather_info.sunlight == SUN_SET;
+}
+
+/* gece ışık tut (gerekirse kalkanı çıkar); komut ürettiyse TRUE */
+static bool bot_manage_light( BOT_DATA *bot )
+{
+    CHAR_DATA *ch = bot->ch;
+    OBJ_DATA *light, *left;
+    char kw[MAX_INPUT_LENGTH];
+
+    if ( get_light_char( ch ) != NULL || !is_night() || room_is_dark( ch ) )
+        return FALSE;
+    if ( ( light = carried_type( ch, ITEM_LIGHT ) ) == NULL || light->value[2] == 0 || !can_see_obj( ch, light ) )
+        return FALSE;
+    if ( bot_wear_failed( bot, light->pIndexData->vnum ) )
+        return FALSE;
+    if ( get_eq_char( ch, WEAR_BOTH ) != NULL )
+        return FALSE;
+    if ( ( left = get_eq_char( ch, WEAR_LEFT ) ) != NULL )
+    {
+        if ( left->item_type == ITEM_LIGHT )
+            return FALSE;
+        bot_obj_keyword( ch, left, ch->carrying, kw, sizeof(kw) );
+        bot_cmd( bot, "çıkar %s", kw );
+        return TRUE;
+    }
+    bot_obj_keyword( ch, light, ch->carrying, kw, sizeof(kw) );
+    bot_cmd( bot, "giy %s", kw );
+    if ( bot->ch != NULL && light->wear_loc == WEAR_NONE )
+        bot_wear_fail_add( bot, light->pIndexData->vnum );
+    return TRUE;
+}
+
+/* karanlıkta ışıksız kalan bot: ışık al, yoksa tapınakta sabahı bekle; komut/durum ürettiyse TRUE */
+static bool bot_handle_darkness( BOT_DATA *bot )
+{
+    CHAR_DATA *ch = bot->ch;
+    ROOM_INDEX_DATA *temple;
+
+    if ( !room_is_dark( ch ) || get_light_char( ch ) != NULL )
+        return FALSE;
+    if ( bot->state == BOT_ST_TRAVEL || bot->state == BOT_ST_TOWN || bot->state == BOT_ST_FOLLOW
+      || bot->state == BOT_ST_CORPSE || bot->state == BOT_ST_REST )
+        return FALSE;
+    if ( ch->silver >= 20 && bot_pulse >= bot->town_retry[6] )      /* BOT_TOWN_LIGHT = bit 6 */
+    {
+        SET_BIT( bot->town_tasks, BOT_TOWN_LIGHT );
+        bot_set_state( bot, BOT_ST_TOWN );
+        return TRUE;
+    }
+    temple = get_room_index( ROOM_VNUM_TEMPLE );
+    if ( temple != NULL && temple != ch->in_room && bot_set_travel( bot, temple->vnum, BOT_ST_REST ) )
+        return TRUE;
+    bot_set_state( bot, BOT_ST_REST );
+    return TRUE;
 }
 
 /* ---------------------------------------------------------------------
@@ -2268,7 +2338,15 @@ static void bot_town( BOT_DATA *bot )
 
         if ( keeper == NULL )
             break;
-        if ( task == BOT_TOWN_FOOD ) have = carried_type( ch, ITEM_FOOD ) != NULL ? 1 : 0;
+        if ( task == BOT_TOWN_FOOD )
+        {
+            OBJ_DATA *fo;
+            int nfood = 0;
+            for ( fo = ch->carrying; fo != NULL; fo = fo->next_content )
+                if ( fo->item_type == ITEM_FOOD )
+                    nfood++;
+            have = nfood >= 2 ? 1 : 0;
+        }
         else if ( task == BOT_TOWN_DRINK ) have = carried_type( ch, ITEM_DRINK_CON ) != NULL ? 1 : 0;
         else if ( task == BOT_TOWN_LIGHT ) have = get_light_char( ch ) != NULL ? 1 : 0;
         else if ( task == BOT_TOWN_POTION ) have = bot_count_potions( ch ) >= 3 ? 1 : 0;
@@ -2959,6 +3037,12 @@ void bot_think( BOT_DATA *bot )
             bot_cmd( bot, "kalk" );
         return;
     }
+
+    /* ışık */
+    if ( bot_manage_light( bot ) )
+        return;
+    if ( bot_handle_darkness( bot ) )
+        return;
 
     /* karın / matara */
     if ( bot->state != BOT_ST_TOWN && bot_eat_drink( bot ) )

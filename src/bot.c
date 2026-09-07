@@ -837,6 +837,9 @@ bool bot_room_passable( CHAR_DATA *ch, ROOM_INDEX_DATA *room, bool allow_cabal )
         return FALSE;
     if ( room->area != NULL && IS_SET( room->area->area_flag, AREA_CABAL ) && !allow_cabal )
         return FALSE;
+    /* seviyesinin çok üstündeki bölgelerden geçme (yolda ölmesin) */
+    if ( room->area != NULL && room->area->low_range > ch->level + 8 && !IS_IMMORTAL(ch) )
+        return FALSE;
     if ( room->sector_type == SECT_AIR && !IS_AFFECTED( ch, AFF_FLYING ) )
         return FALSE;
     if ( room->sector_type == SECT_WATER_NOSWIM && !IS_AFFECTED( ch, AFF_FLYING ) )
@@ -1447,6 +1450,11 @@ void do_botlar( CHAR_DATA *ch, char *argument )
                     bot->ch->hit, bot->ch->max_hit, bot->ch->mana, bot->ch->max_mana,
                     bot->ch->move, bot->ch->max_move, bot->ch->silver,
                     bot->ch->pcdata->questpoints, bot->ch->practice, bot->ch->train );
+    printf_to_char( ch, "Pozisyon %d, bekleme %d, sersemlik %d, etkiler %s, ışık %s, açlık %d, susuzluk %d\n\r",
+                    bot->ch->position, bot->ch->wait, bot->ch->daze,
+                    affect_bit_name( bot->ch->affected_by ),
+                    get_light_char( bot->ch ) != NULL ? "var" : "YOK",
+                    bot->ch->pcdata->condition[COND_HUNGER], bot->ch->pcdata->condition[COND_THIRST] );
     printf_to_char( ch, "Öldürme %d, ölüm %d, görev %d, pk %d, kasaba işleri %ld, son mob %s\n\r",
                     bot->kills, bot->deaths, bot->quests, bot->pk_kills, bot->town_tasks, bot->last_mob );
     printf_to_char( ch, "Oturum bitişi %ld sn sonra.\n\r", (long) ( bot->session_end - current_time ) );
