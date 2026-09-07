@@ -996,6 +996,11 @@ void bot_on_kill( CHAR_DATA *killer, CHAR_DATA *victim )
     {
         bot->kills++;
         snprintf( bot->last_mob, sizeof(bot->last_mob), "%s", victim->short_descr != NULL ? victim->short_descr : "bir yaratık" );
+        if ( bot_debug )
+            bot_log( bot, "öldürdü: %s (lvl %d, yön %d) - bot lvl %d tp %d (son kesimden bu yana +%d)",
+                     victim->short_descr, victim->level, victim->alignment, killer->level, killer->exp,
+                     killer->exp - bot->last_kill_exp );
+        bot->last_kill_exp = killer->exp;
         bot_chat_event( bot, BOT_EV_KILL, victim );
     }
     else

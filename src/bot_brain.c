@@ -126,7 +126,7 @@ static int level_bonus( CHAR_DATA *ch )
         return ch->level < 12 ? 0 : 1;
     if ( is_rogue( ch ) )
         return ch->level < 8 ? 0 : 1;
-    return ch->level < 8 ? 1 : 2;
+    return ch->level < 8 ? 1 : 3;
 }
 
 static int inventory_signature( CHAR_DATA *ch )
@@ -757,7 +757,7 @@ static bool bot_prey_ok( CHAR_DATA *ch, CHAR_DATA *mob, int lo, int hi )
 
 static int bot_prey_score( CHAR_DATA *ch, CHAR_DATA *mob, int dist )
 {
-    int score = 100 + ( mob->level - ch->level ) * 15 - dist * 14;
+    int score = 100 + ( mob->level - ch->level ) * 30 - dist * 12;
 
     if ( ( IS_GOOD(ch) && IS_EVIL(mob) ) || ( IS_EVIL(ch) && IS_GOOD(mob) ) )
         score += 35;
@@ -926,7 +926,12 @@ static AREA_DATA *bot_pick_hunt_area( BOT_DATA *bot )
         if ( mobs < 3 )
             continue;
         score = UMIN( mobs, 40 ) * 3;
-        score -= area_danger( ch, area ) * ( ch->level < 10 ? 12 : 5 );
+        {
+            int danger = area_danger( ch, area );
+            if ( ch->level < 10 && danger > 5 )
+                continue;
+            score -= danger * ( ch->level < 10 ? 20 : 6 ) * ( is_caster( ch ) ? 3 : 2 ) / 2;
+        }
         {
             BOT_DATA *ob;
             for ( ob = bot_list; ob != NULL; ob = ob->next )

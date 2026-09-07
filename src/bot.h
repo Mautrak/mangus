@@ -138,6 +138,7 @@ struct bot_data
     int         nopath_pulse;
     long        target_id;
     int         kills;
+    int         last_kill_exp;
     int         deaths;
     int         quests;
     int         pk_kills;
