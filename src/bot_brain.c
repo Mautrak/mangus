@@ -118,7 +118,7 @@ static int level_bonus( CHAR_DATA *ch )
     int grp = ch->in_room != NULL ? group_size_here( ch ) : 0;
 
     if ( grp > 0 )
-        return ( ch->level < 4 ? 1 : 2 ) + UMIN( grp, 2 );
+        return ( ch->level < 4 ? 1 : 2 ) + 1;
     if ( ch->level < 4 )
         return 0;
     if ( is_caster( ch ) )
@@ -716,6 +716,8 @@ static bool bot_prey_ok( CHAR_DATA *ch, CHAR_DATA *mob, int lo, int hi )
         return FALSE;
     if ( mob->fighting != NULL || mob->position <= POS_STUNNED )
         return FALSE;
+    if ( IS_SET( mob->act, ACT_AGGRESSIVE ) && mob->level > ch->level )
+        return FALSE;
     if ( mob->pIndexData->pShop != NULL || mob->pIndexData->vnum < 100 )
         return FALSE;
     if ( mob->pIndexData->vnum >= 500 && mob->pIndexData->vnum <= 580 )
@@ -932,6 +934,8 @@ static AREA_DATA *bot_pick_hunt_area( BOT_DATA *bot )
         }
         if ( ch->level < 10 && area->high_range - area->low_range > 20 )
             score -= 25;
+        if ( ch->level < 12 && area->high_range > ch->level + 12 )
+            score -= 40;
         /* seviye aralığının alt-orta kısmını tercih et */
         if ( ch->level <= area->low_range + ( area->high_range - area->low_range ) / 2 )
             score += 30;
