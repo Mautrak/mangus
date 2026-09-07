@@ -1403,6 +1403,71 @@ static void bot_attack( BOT_DATA *bot, CHAR_DATA *victim )
 }
 
 /* ---------------------------------------------------------------------
+ * botlar arası grup
+ * ------------------------------------------------------------------ */
+bool bot_in_group( CHAR_DATA *ch )
+{
+    CHAR_DATA *rch;
+
+    if ( ch->leader != NULL || ch->master != NULL )
+        return TRUE;
+    for ( rch = char_list; rch != NULL; rch = rch->next )
+        if ( rch != ch && ( rch->leader == ch || rch->master == ch ) )
+            return TRUE;
+    return FALSE;
+}
+
+/* odadaki uygun bir bota grup teklif et; komut ürettiyse TRUE */
+static bool bot_consider_grouping( BOT_DATA *bot )
+{
+    CHAR_DATA *ch = bot->ch, *rch;
+    char out[MAX_STRING_LENGTH];
+
+    if ( ch->master != NULL || ch->leader != NULL )
+        return FALSE;
+    if ( bot_pulse - bot->group_offer_pulse < 4 * 60 * 15 )
+        return FALSE;
+    for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
+    {
+        BOT_DATA *other = bot_of( rch );
+
+        if ( other == NULL || other == bot || rch->master != NULL || rch->leader != NULL )
+            continue;
+        if ( other->state != BOT_ST_HUNT && other->state != BOT_ST_IDLE && other->state != BOT_ST_TRAVEL )
+            continue;
+        if ( abs( ch->level - rch->level ) > 4 || rch->fighting != NULL )
+            continue;
+        if ( bot_pulse - other->group_offer_pulse < 4 * 60 * 15 )
+            continue;
+        if ( number_percent() > 30 )
+            continue;
+        bot->group_offer_pulse = bot_pulse;
+        other->group_offer_pulse = bot_pulse;
+        bot_fill( bot, number_percent() < 50 ? "grup olalım mı?" : "{hedef}, beraber keselim mi?", rch, out, sizeof(out) );
+        bot_talk( bot, BOT_CH_SAY, NULL, out );
+        return TRUE;
+    }
+    return FALSE;
+}
+
+/* beni takip eden botları gruba al; komut ürettiyse TRUE */
+static bool bot_group_followers( BOT_DATA *bot )
+{
+    CHAR_DATA *ch = bot->ch, *rch;
+
+    for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
+    {
+        if ( rch == ch || rch->master != ch || !IS_BOT(rch) )
+            continue;
+        if ( is_same_group( ch, rch ) )
+            continue;
+        bot_cmd( bot, "grup %s", rch->name );
+        return TRUE;
+    }
+    return FALSE;
+}
+
+/* ---------------------------------------------------------------------
  * av
  * ------------------------------------------------------------------ */
 static void bot_hunt( BOT_DATA *bot )
@@ -1442,6 +1507,8 @@ static void bot_hunt( BOT_DATA *bot )
         return;
     }
 
+    if ( bot_group_followers( bot ) )
+        return;
     if ( bot_cast_buffs( bot ) )
         return;
 
@@ -1451,6 +1518,8 @@ static void bot_hunt( BOT_DATA *bot )
         bot->hunt_fail = 0;
         return;
     }
+    if ( bot_consider_grouping( bot ) )
+        return;
 
     if ( ( room = bot_prey_near( bot, 14 ) ) != NULL )
     {
@@ -1499,12 +1568,12 @@ static ROOM_INDEX_DATA *nearest_of( CHAR_DATA *ch, ROOM_INDEX_DATA **rooms, int 
     return best >= 0 ? rooms[best] : NULL;
 }
 
-static bool trainer_here( CHAR_DATA *ch )
+static bool trainer_here( CHAR_DATA *ch, long flags )
 {
     CHAR_DATA *mob;
 
     for ( mob = ch->in_room->people; mob != NULL; mob = mob->next_in_room )
-        if ( IS_NPC(mob) && IS_SET( mob->act, ACT_PRACTICE | ACT_TRAIN | ACT_GAIN ) && can_see( ch, mob ) )
+        if ( IS_NPC(mob) && IS_SET( mob->act, flags ) && can_see( ch, mob ) )
             return TRUE;
     return FALSE;
 }
@@ -1513,19 +1582,32 @@ static ROOM_INDEX_DATA *bot_mob_room( CHAR_DATA *ch, bool (*pred)( CHAR_DATA *, 
 {
     CHAR_DATA *mob;
     ROOM_INDEX_DATA *rooms[16];
-    int n = 0;
+    int n = 0, pass;
 
-    for ( mob = char_list; mob != NULL && n < 16; mob = mob->next )
+    /* önce bulunduğu bölge, sonra memleket, sonra her yer */
+    for ( pass = 0; pass < 3 && n == 0; pass++ )
     {
-        if ( !IS_NPC(mob) || mob->in_room == NULL || mob->position < POS_RESTING )
-            continue;
-        if ( !pred( ch, mob ) )
-            continue;
-        if ( !bot_room_passable( ch, mob->in_room, FALSE ) )
-            continue;
-        rooms[n++] = mob->in_room;
+        for ( mob = char_list; mob != NULL && n < 16; mob = mob->next )
+        {
+            if ( !IS_NPC(mob) || mob->in_room == NULL || mob->position < POS_RESTING )
+                continue;
+            if ( pass == 0 && mob->in_room->area != ch->in_room->area )
+                continue;
+            if ( pass == 1 && !IS_SET( mob->in_room->area->area_flag, AREA_HOMETOWN ) )
+                continue;
+            if ( !pred( ch, mob ) )
+                continue;
+            if ( !bot_room_passable( ch, mob->in_room, FALSE ) )
+                continue;
+            rooms[n++] = mob->in_room;
+        }
     }
     return nearest_of( ch, rooms, n );
+}
+
+static bool pred_practicer( CHAR_DATA *ch, CHAR_DATA *mob )
+{
+    return IS_SET( mob->act, ACT_PRACTICE ) && mob->pIndexData->pShop == NULL;
 }
 
 static bool pred_trainer( CHAR_DATA *ch, CHAR_DATA *mob )
@@ -1743,6 +1825,7 @@ static ROOM_INDEX_DATA *bot_town_target_room( BOT_DATA *bot, long task )
     switch ( task )
     {
     case BOT_TOWN_PRACTICE:
+        return bot_mob_room( ch, pred_practicer );
     case BOT_TOWN_TRAIN:
         return bot_mob_room( ch, pred_trainer );
     case BOT_TOWN_QUEST_GET:
@@ -2044,27 +2127,47 @@ static void bot_town( BOT_DATA *bot )
         break;
     case BOT_TOWN_PRACTICE:
     {
-        int sn;
-        if ( !trainer_here( ch ) )
+        int sn, before = ch->practice;
+        if ( !trainer_here( ch, ACT_PRACTICE ) )
+        {
+            bot->practice_block_until = bot_pulse + 4 * 60 * 20;
             break;
+        }
         if ( ch->practice <= 0 || ( sn = bot_pick_practice( ch ) ) < 0 )
         {
             REMOVE_BIT( bot->town_tasks, BOT_TOWN_PRACTICE );
+            if ( ch->practice > 0 )
+                bot->practice_block_until = bot_pulse + 4 * 60 * 30;
             bot->substate = IS_SET( bot->town_tasks, BOT_TOWN_TRAIN ) ? BOT_TOWN_TRAIN : 0;
             bot->town_step = 0;
             return;
         }
         bot_cmd( bot, "pratik %s", skill_table[sn].name[1] );
+        if ( bot->ch != NULL && ch->practice == before && ++bot->quest_tries > 3 )
+        {
+            /* pratik ilerlemiyor: bir süre deneme */
+            bot->quest_tries = 0;
+            bot->practice_block_until = bot_pulse + 4 * 60 * 20;
+            REMOVE_BIT( bot->town_tasks, BOT_TOWN_PRACTICE );
+            bot->substate = 0;
+        }
+        else if ( bot->ch != NULL && ch->practice < before )
+            bot->quest_tries = 0;
         return;
     }
     case BOT_TOWN_TRAIN:
     {
         int prime = class_table[ch->iclass].attr_prime;
         const char *what;
-        if ( !trainer_here( ch ) )
+        int before = ch->train;
+        if ( !trainer_here( ch, ACT_PRACTICE | ACT_TRAIN | ACT_GAIN ) )
+        {
+            bot->practice_block_until = bot_pulse + 4 * 60 * 20;
             break;
-        if ( ch->train <= 0 )
+        }
+        if ( ch->train <= 0 || bot->town_step > 8 )
             break;
+        (void) before;
         if ( ch->perm_stat[prime] < get_max_train( ch, prime ) )
             what = prime == STAT_STR ? "güç" : prime == STAT_INT ? "zeka" : prime == STAT_WIS ? "bilgelik"
                  : prime == STAT_DEX ? "çeviklik" : "bünye";
@@ -2295,6 +2398,7 @@ void bot_start_follow( BOT_DATA *bot, CHAR_DATA *leader )
         return;
     bot->leader_id = leader->id;
     bot->follow_since = bot_pulse;
+    bot->follow_until = bot_pulse + number_range( 4 * 60 * 25, 4 * 60 * 50 );
     bot->leader_last_action = bot_pulse;
     bot->path_len = bot->path_pos = 0;
     bot_set_state( bot, BOT_ST_FOLLOW );
@@ -2327,6 +2431,13 @@ static void bot_following( BOT_DATA *bot )
     }
     if ( IS_SET( ch->act, PLR_GHOST ) )
     {
+        bot_stop_follow( bot, TRUE );
+        return;
+    }
+
+    if ( IS_BOT(leader) && bot_pulse > bot->follow_until )
+    {
+        bot_chat_event( bot, BOT_EV_LOGOUT, leader );
         bot_stop_follow( bot, TRUE );
         return;
     }
@@ -2462,7 +2573,7 @@ static void bot_check_cabal( BOT_DATA *bot )
     int cabal;
 
     bot->cabal_check_pulse = bot_pulse;
-    if ( !bot->pk_istekli || ch->cabal != CABAL_NONE || ch->level < 20 )
+    if ( !bot->pk_istekli || ch->cabal != CABAL_NONE || ch->level < 18 )
         return;
     if ( ch->pcdata->oyuncu_katli == 0 )
         return;

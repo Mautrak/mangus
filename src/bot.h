@@ -178,6 +178,7 @@ struct bot_data
     /* takip / grup */
     long        leader_id;
     int         follow_since;
+    int         follow_until;
     int         leader_last_action;
     int         group_offer_pulse;
 
@@ -233,6 +234,7 @@ void    bot_brain_login     ( BOT_DATA *bot, bool fresh );
 bool    bot_wants_group_with( BOT_DATA *bot, CHAR_DATA *other );
 void    bot_start_follow    ( BOT_DATA *bot, CHAR_DATA *leader );
 void    bot_stop_follow     ( BOT_DATA *bot, bool say );
+bool    bot_in_group        ( CHAR_DATA *ch );
 const char *bot_area_name   ( BOT_DATA *bot );
 void    bot_note_loot       ( BOT_DATA *bot );
 void    bot_after_death     ( BOT_DATA *bot );

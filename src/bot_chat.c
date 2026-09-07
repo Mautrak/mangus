@@ -451,12 +451,15 @@ void bot_chat_react( BOT_DATA *bot, CHAR_DATA *speaker, int channel, const char 
     /* botlar birbirleriyle sonsuza dek konuşmasın */
     if ( speaker_bot )
     {
-        if ( bot_pulse - bot->last_bot_talk < 4 * 90 )
-            return;
-        if ( intent == INTENT_NONE || intent == INTENT_YES || intent == INTENT_NO || intent == INTENT_THANKS )
-            return;
-        if ( number_percent() > 40 )
-            return;
+        if ( intent != INTENT_GROUP )
+        {
+            if ( bot_pulse - bot->last_bot_talk < 4 * 90 )
+                return;
+            if ( intent == INTENT_NONE || intent == INTENT_YES || intent == INTENT_NO || intent == INTENT_THANKS )
+                return;
+            if ( number_percent() > 40 )
+                return;
+        }
         bot->last_bot_talk = bot_pulse;
     }
     else if ( !human )
@@ -488,7 +491,14 @@ void bot_chat_react( BOT_DATA *bot, CHAR_DATA *speaker, int channel, const char 
     case INTENT_INSULT:  tmpl = pick( insult_reply, PN(insult_reply) );     break;
     case INTENT_QUESTION: tmpl = pick( question_reply, PN(question_reply) ); break;
     case INTENT_GROUP:
-        if ( human && bot_wants_group_with( bot, speaker ) )
+        if ( speaker_bot && bot_wants_group_with( bot, speaker ) && speaker->in_room == ch->in_room
+          && ch->master == NULL && speaker->master == NULL && number_percent() < 80 )
+        {
+            tmpl = pick( group_accept, PN(group_accept) );
+            bot_start_follow( bot, speaker );
+            reply_ch = BOT_CH_SAY;
+        }
+        else if ( human && bot_wants_group_with( bot, speaker ) )
         {
             if ( speaker->in_room == ch->in_room )
             {
@@ -776,6 +786,11 @@ void bot_chat_idle( BOT_DATA *bot )
     {
         bot->next_kd = bot_pulse + 4 * 60 * ( bot->kisilik == BOT_K_GEVEZE ? 12 : 25 ) + number_range( 0, 4 * 60 * 10 );
         say_later( bot, BOT_CH_TELL, any_h, pick( idle_kd, PN(idle_kd) ), number_range( 2, 12 ) );
+        return;
+    }
+    if ( bot_in_group( ch ) && number_percent() < 40 )
+    {
+        say_later( bot, BOT_CH_GTELL, NULL, pick( idle_say, PN(idle_say) ), number_range( 2, 12 ) );
         return;
     }
     if ( ch->cabal != CABAL_NONE && number_percent() < 25 )
