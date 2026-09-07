@@ -767,17 +767,18 @@ static void raid_take_item( BOT_DATA *bot, OBJ_DATA *item )
 }
 
 
-/* eve (karargâha) yol yoksa portal vb. ile cepten çık; çıkış da yoksa FALSE */
-static bool raid_go_home( BOT_DATA *bot, ROOM_INDEX_DATA *home )
+/* hedefe yol yoksa (karargâhlar çıkmaz sokak olabilir) portal vb. ile cepten çık; o da yoksa FALSE */
+static bool raid_go( BOT_DATA *bot, ROOM_INDEX_DATA *to )
 {
     if ( bot->path_len != 0 )
         return TRUE;
-    if ( bot_set_travel( bot, home->vnum, BOT_ST_RAID ) )
+    if ( bot_set_travel( bot, to->vnum, BOT_ST_RAID ) )
         return TRUE;
     if ( bot_escape_pocket( bot ) )
         return TRUE;
     return FALSE;
 }
+#define raid_go_home( bot, home ) raid_go( (bot), (home) )
 
 static void raid_end( BOT_DATA *bot, const char *why )
 {
@@ -840,7 +841,7 @@ void bot_raid( BOT_DATA *bot )
         case 0:                                       /* karargâhta toplan */
             if ( ch->in_room != home )
             {
-                if ( bot->path_len == 0 && !bot_set_travel( bot, home->vnum, BOT_ST_RAID ) )
+                if ( !raid_go( bot, home ) )
                     raid_end( bot, "karargâha yol yok" );
                 return;
             }
@@ -872,7 +873,7 @@ void bot_raid( BOT_DATA *bot )
             }
             if ( ch->in_room != enemy_hq )
             {
-                if ( bot->path_len == 0 && !bot_set_travel( bot, enemy_hq->vnum, BOT_ST_RAID ) )
+                if ( !raid_go( bot, enemy_hq ) )
                     raid_end( bot, "düşman karargâhına yol yok" );
                 return;
             }
@@ -970,15 +971,15 @@ void bot_raid( BOT_DATA *bot )
             return;                                   /* arkadaş getiriyor */
         if ( in_my_area( ch, carrier ) )
         {
-            if ( carrier->in_room != ch->in_room && bot->path_len == 0 )
-                bot_set_travel( bot, carrier->in_room->vnum, BOT_ST_RAID );
+            if ( carrier->in_room != ch->in_room )
+                raid_go( bot, carrier->in_room );
             return;
         }
         if ( carrier->cabal != CABAL_NONE )
         {
             ROOM_INDEX_DATA *their = get_room_index( cabal_table[carrier->cabal].room_vnum );
-            if ( their != NULL && ch->in_room != their && bot->path_len == 0 )
-                bot_set_travel( bot, their->vnum, BOT_ST_RAID );
+            if ( their != NULL && ch->in_room != their )
+                raid_go( bot, their );
         }
         bot->raid_step = 12;
         return;
@@ -988,7 +989,7 @@ void bot_raid( BOT_DATA *bot )
     {
         if ( ch->in_room != iroom )
         {
-            if ( bot->path_len == 0 && !bot_set_travel( bot, iroom->vnum, BOT_ST_RAID ) )
+            if ( !raid_go( bot, iroom ) )
                 raid_end( bot, "eşyanın odasına yol yok" );
             return;
         }
