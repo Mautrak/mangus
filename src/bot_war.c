@@ -669,7 +669,11 @@ static bool bot_raid_consider( BOT_DATA *bot )
     if ( !item_at_home( cabal ) )
         return FALSE;                                 /* önce kendi eşyanı kurtar */
     if ( online_members( cabal, BOT_RAID_LEVEL ) < 2 )
+    {
+        if ( bot_debug )
+            bot_log( bot, "baskın düşünüldü: yeterli üye yok." );
         return FALSE;
+    }
 
     /* hedef: eşyası yerinde duran, tercihen üyesi çevrimiçi bir kabal */
     for ( i = 1; i < MAX_CABAL; i++ )
@@ -691,7 +695,11 @@ static bool bot_raid_consider( BOT_DATA *bot )
             target = i;
     }
     if ( target == CABAL_NONE )
+    {
+        if ( bot_debug )
+            bot_log( bot, "baskın düşünüldü: uygun/ulaşılabilir hedef kabal yok." );
         return FALSE;
+    }
 
     raid_next_pulse[cabal] = bot_pulse + number_range( 4 * 60 * 90, 4 * 60 * 240 );
     snprintf( buf, sizeof(buf), "baskın! hedef %s, karargâhta toplanıyoruz", cabal_table[target].short_name );
@@ -1024,11 +1032,18 @@ bool bot_war_goal( BOT_DATA *bot )
         return TRUE;
     }
 
+    /* baskın: PK soğumasından bağımsız, boştayken 10 dk'da bir değerlendirilir */
+    if ( bot_pulse > bot->next_raid_check && pct( ch->hit, ch->max_hit ) > 85 )
+    {
+        bot->next_raid_check = bot_pulse + 4 * 60 * 10;
+        if ( bot_debug )
+            bot_log( bot, "kabal kararı: baskın değerlendiriliyor." );
+        if ( bot_raid_consider( bot ) )
+            return TRUE;
+    }
     if ( bot_pulse > bot->next_pk && pct( ch->hit, ch->max_hit ) > 85 )
     {
         bot->next_pk = bot_pulse + number_range( 4 * 60 * 20, 4 * 60 * 60 );
-        if ( bot_raid_consider( bot ) )
-            return TRUE;
         if ( bot->pk_istekli || bot->revenge_id != 0 )
         {
             CHAR_DATA *victim = bot_pk_candidate( bot );
