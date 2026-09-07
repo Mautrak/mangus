@@ -234,6 +234,7 @@ struct bot_data
     int         raid_pulse;
     int         raid_step;
     int         opp_pk_pulse;      /* son fırsat PK kararı */
+    int         pk_tries;          /* dövüş başlamayan saldırı denemeleri */
     int         follow_since;
     int         follow_until;
     int         leader_last_action;

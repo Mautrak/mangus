@@ -421,6 +421,7 @@ static void bot_pk_plan_areas( BOT_DATA *bot, CHAR_DATA *victim )
 
 static void bot_pk_start( BOT_DATA *bot, CHAR_DATA *victim, const char *why )
 {
+    bot->pk_tries     = 0;
     bot->pk_target_id = victim->id;
     bot->pk_until     = bot_pulse + 4 * 60 * 15;
     bot->substate     = 0;
@@ -470,6 +471,7 @@ void bot_war_attacked( BOT_DATA *bot, CHAR_DATA *attacker )
         return;
     bot->revenge_id    = attacker->id;
     bot->revenge_pulse = bot_pulse;
+    bot->pk_tries      = 0;
     if ( ch->cabal == CABAL_NONE || bot_pulse - bot->help_call_pulse < 4 * 60 * 3 )
         return;
     bot->help_call_pulse = bot_pulse;
@@ -543,6 +545,17 @@ void bot_pk( BOT_DATA *bot )
                 bot_chat_event( bot, BOT_EV_PK_TAUNT, victim );
                 return;
             }
+        }
+        /* saldırı dövüş başlatmıyorsa (tanrılar koruyor vb.) ısrar etme */
+        if ( ++bot->pk_tries > 4 )
+        {
+            bot_log( bot, "kabal savaşı: %s'e saldırı başlamıyor, vazgeçti.", victim->name );
+            bot->pk_tries = 0;
+            bot->pk_target_id = 0;
+            bot->revenge_id = 0;
+            bot->next_pk = bot_pulse + number_range( 4 * 60 * 10, 4 * 60 * 30 );
+            bot_set_state( bot, BOT_ST_IDLE );
+            return;
         }
         bot_attack( bot, victim );
         return;
