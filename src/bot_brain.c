@@ -736,6 +736,8 @@ static bool bot_prey_ok( CHAR_DATA *ch, CHAR_DATA *mob, int lo, int hi )
         return FALSE;
     if ( ch->level < 5 ? mob->max_hit > ch->max_hit * 2 + 15 : mob->max_hit > ch->max_hit * 3 + 40 )
         return FALSE;
+    if ( is_caster( ch ) && mob->max_hit > ch->max_hit * 2 + 20 )
+        return FALSE;
     if ( mob->cabal != CABAL_NONE )
         return FALSE;
     {
@@ -1501,7 +1503,7 @@ static void bot_combat( BOT_DATA *bot )
         return;
     }
 
-    if ( hp < 22 && vhp > 25 )
+    if ( hp < ( is_caster( ch ) ? 30 : 22 ) && vhp > 25 )
     {
         bot_escape( bot );
         return;
