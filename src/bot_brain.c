@@ -935,8 +935,8 @@ static AREA_DATA *bot_pick_hunt_area( BOT_DATA *bot )
         }
         if ( ch->level < 10 && area->high_range - area->low_range > 20 )
             score -= 25;
-        if ( ch->level < 12 && area->high_range > ch->level + 12 )
-            score -= 40;
+        if ( ch->level < 12 && area->high_range > ch->level + 12 && area->high_range - area->low_range > 15 )
+            continue;                                  /* düşük seviyede geniş/derin bölgelere girme */
         /* seviye aralığının alt-orta kısmını tercih et */
         if ( ch->level <= area->low_range + ( area->high_range - area->low_range ) / 2 )
             score += 30;

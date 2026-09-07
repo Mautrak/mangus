@@ -1285,6 +1285,18 @@ void do_botlar( CHAR_DATA *ch, char *argument )
                             bch->max_hit > 0 ? bch->hit * 100 / bch->max_hit : 0,
                             bch->in_room != NULL ? bch->in_room->name : "?", buf );
         }
+        {
+            long total_exp = 0;
+            int total_lvl = 0, online = 0;
+            for ( bot = bot_list; bot != NULL; bot = bot->next )
+                if ( bot->ch != NULL )
+                {
+                    total_exp += bot->ch->exp;
+                    total_lvl += bot->ch->level;
+                    online++;
+                }
+            printf_to_char( ch, "Toplam tp %ld, toplam seviye %d (%d çevrimiçi)\n\r", total_exp, total_lvl, online );
+        }
         send_to_char( "Kullanım: botlar <isim> | botlar bağla <isim> | botlar ayır <isim>\n\r", ch );
         return;
     }
@@ -1446,6 +1458,7 @@ void do_botlar( CHAR_DATA *ch, char *argument )
                     bot->ch->in_room != NULL ? bot->ch->in_room->name : "?",
                     bot->ch->in_room != NULL ? bot->ch->in_room->area->name : "?",
                     bot->hunt_area != NULL ? bot->hunt_area->name : "-" );
+    printf_to_char( ch, "Tp %d (seviye başına %d)\n\r", bot->ch->exp, exp_per_level( bot->ch, bot->ch->pcdata->points ) );
     printf_to_char( ch, "Yp %d/%d Mp %d/%d Zp %d/%d akçe %ld gp %d pratik %d eğitim %d\n\r",
                     bot->ch->hit, bot->ch->max_hit, bot->ch->mana, bot->ch->max_mana,
                     bot->ch->move, bot->ch->max_move, bot->ch->silver,
