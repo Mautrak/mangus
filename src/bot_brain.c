@@ -95,8 +95,23 @@ static bool can_cast_sn( CHAR_DATA *ch, int sn )
     return TRUE;
 }
 
+static int group_size_here( CHAR_DATA *ch )
+{
+    CHAR_DATA *rch;
+    int n = 0;
+
+    for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
+        if ( rch != ch && !IS_NPC(rch) && is_same_group( ch, rch ) && rch->position >= POS_STANDING )
+            n++;
+    return n;
+}
+
 static int level_bonus( CHAR_DATA *ch )
 {
+    int grp = ch->in_room != NULL ? group_size_here( ch ) : 0;
+
+    if ( grp > 0 )
+        return ( ch->level < 4 ? 1 : 2 ) + UMIN( grp, 2 );
     if ( ch->level < 4 )
         return 0;
     if ( is_caster( ch ) )
@@ -713,7 +728,7 @@ static bool bot_prey_ok( CHAR_DATA *ch, CHAR_DATA *mob, int lo, int hi )
 
 static int bot_prey_score( CHAR_DATA *ch, CHAR_DATA *mob, int dist )
 {
-    int score = 100 + ( mob->level - ch->level ) * 15 - dist * 6;
+    int score = 100 + ( mob->level - ch->level ) * 15 - dist * 14;
 
     if ( ( IS_GOOD(ch) && IS_EVIL(mob) ) || ( IS_EVIL(ch) && IS_GOOD(mob) ) )
         score += 35;
@@ -864,6 +879,12 @@ static AREA_DATA *bot_pick_hunt_area( BOT_DATA *bot )
             continue;
         score = UMIN( mobs, 40 ) * 3;
         score -= area_danger( ch, area ) * ( ch->level < 10 ? 12 : 5 );
+        {
+            BOT_DATA *ob;
+            for ( ob = bot_list; ob != NULL; ob = ob->next )
+                if ( ob != bot && ob->ch != NULL && ob->hunt_area == area && !is_same_group( ch, ob->ch ) )
+                    score -= 18;
+        }
         if ( ch->level < 10 && area->high_range - area->low_range > 20 )
             score -= 25;
         /* seviye aralığının alt-orta kısmını tercih et */
@@ -1426,7 +1447,7 @@ static bool bot_consider_grouping( BOT_DATA *bot )
 
     if ( ch->master != NULL || ch->leader != NULL )
         return FALSE;
-    if ( bot_pulse - bot->group_offer_pulse < 4 * 60 * 15 )
+    if ( bot_pulse - bot->group_offer_pulse < 4 * 60 * 6 )
         return FALSE;
     for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
     {
@@ -1438,9 +1459,9 @@ static bool bot_consider_grouping( BOT_DATA *bot )
             continue;
         if ( abs( ch->level - rch->level ) > 4 || rch->fighting != NULL )
             continue;
-        if ( bot_pulse - other->group_offer_pulse < 4 * 60 * 15 )
+        if ( bot_pulse - other->group_offer_pulse < 4 * 60 * 6 )
             continue;
-        if ( number_percent() > 30 )
+        if ( number_percent() > 65 )
             continue;
         bot->group_offer_pulse = bot_pulse;
         other->group_offer_pulse = bot_pulse;
@@ -2421,7 +2442,7 @@ void bot_start_follow( BOT_DATA *bot, CHAR_DATA *leader )
         return;
     bot->leader_id = leader->id;
     bot->follow_since = bot_pulse;
-    bot->follow_until = bot_pulse + number_range( 4 * 60 * 25, 4 * 60 * 50 );
+    bot->follow_until = bot_pulse + number_range( 4 * 60 * 40, 4 * 60 * 90 );
     bot->leader_last_action = bot_pulse;
     bot->path_len = bot->path_pos = 0;
     bot_set_state( bot, BOT_ST_FOLLOW );
