@@ -1472,6 +1472,77 @@ static bool bot_consider_grouping( BOT_DATA *bot )
     return FALSE;
 }
 
+/* seviyesi yakın, gruba girmemiş bir bota yürüyüp grup teklif et; komut ürettiyse TRUE */
+static bool bot_seek_group( BOT_DATA *bot )
+{
+    CHAR_DATA *ch = bot->ch;
+    CHAR_DATA *target;
+    char out[MAX_STRING_LENGTH];
+
+    if ( ch->master != NULL || ch->leader != NULL || bot_in_group( ch ) )
+        return FALSE;
+    if ( bot_pulse - bot->group_offer_pulse < 4 * 60 * 5 )
+        return FALSE;
+
+    target = bot_char_by_id( bot->invite_id );
+    if ( target == NULL || !IS_BOT(target) || target->master != NULL || target->leader != NULL
+      || abs( ch->level - target->level ) > 4 || bot_pulse - bot->invite_pulse > 4 * 60 * 4 )
+    {
+        BOT_DATA *ob, *pick = NULL;
+        int count = 0;
+
+        bot->invite_id = 0;
+        for ( ob = bot_list; ob != NULL; ob = ob->next )
+        {
+            CHAR_DATA *och = ob->ch;
+            sh_int tmp[BOT_MAX_PATH];
+
+            if ( ob == bot || och == NULL || och->in_room == NULL )
+                continue;
+            if ( ob->state != BOT_ST_HUNT && ob->state != BOT_ST_TRAVEL && ob->state != BOT_ST_IDLE )
+                continue;
+            if ( och->master != NULL || och->leader != NULL || abs( ch->level - och->level ) > 4 )
+                continue;
+            if ( bot_pulse - ob->group_offer_pulse < 4 * 60 * 5 )
+                continue;
+            if ( och->in_room->area != ch->in_room->area
+              && bot_find_path( ch, ch->in_room, och->in_room, tmp, 40, FALSE ) < 0 )
+                continue;
+            if ( number_range( 0, count++ ) == 0 )
+                pick = ob;
+        }
+        if ( pick == NULL )
+        {
+            bot->group_offer_pulse = bot_pulse - 4 * 60 * 3;    /* 2 dk sonra tekrar bak */
+            return FALSE;
+        }
+        bot->invite_id = pick->ch->id;
+        bot->invite_pulse = bot_pulse;
+        target = pick->ch;
+    }
+
+    if ( target->in_room == ch->in_room )
+    {
+        BOT_DATA *other = bot_of( target );
+
+        bot->group_offer_pulse = bot_pulse;
+        if ( other != NULL )
+            other->group_offer_pulse = bot_pulse;
+        bot->invite_id = 0;
+        if ( target->fighting != NULL )
+            return FALSE;
+        bot_fill( bot, number_percent() < 50 ? "grup olalım mı?" : "{hedef}, beraber keselim mi?", target, out, sizeof(out) );
+        bot_talk( bot, BOT_CH_SAY, NULL, out );
+        return TRUE;
+    }
+    if ( !bot_set_travel( bot, target->in_room->vnum, BOT_ST_HUNT ) )
+    {
+        bot->invite_id = 0;
+        return FALSE;
+    }
+    return TRUE;
+}
+
 /* beni takip eden botları gruba al; komut ürettiyse TRUE */
 static bool bot_group_followers( BOT_DATA *bot )
 {
@@ -1541,6 +1612,8 @@ static void bot_hunt( BOT_DATA *bot )
         return;
     }
     if ( bot_consider_grouping( bot ) )
+        return;
+    if ( bot_seek_group( bot ) )
         return;
 
     if ( ( room = bot_prey_near( bot, 14 ) ) != NULL )

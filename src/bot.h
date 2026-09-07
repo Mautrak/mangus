@@ -182,6 +182,8 @@ struct bot_data
     int         follow_until;
     int         leader_last_action;
     int         group_offer_pulse;
+    long        invite_id;
+    int         invite_pulse;
 
     /* PK / kabal */
     long        pk_target_id;
