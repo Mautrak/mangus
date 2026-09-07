@@ -53,6 +53,7 @@
 #include <string.h>
 #include <time.h>
 #include "merc.h"
+#include "bot.h"
 #include "utf8.h"
 #include "interp.h"
 
@@ -118,6 +119,7 @@ const	struct	cmd_type	cmd_table	[] =
   { "bitki",          do_herbs,       POS_STANDING,    0,  LOG_NORMAL, 1,0 },
   { "bırak",		do_drop,	POS_RESTING,	 0,  LOG_NORMAL, 1,CMD_GHOST },
   { "bölge",		do_areas,	POS_DEAD,	 0,  LOG_NORMAL, 1, CMD_KEEP_HIDE|CMD_GHOST },
+  { "botlar",		do_botlar,	POS_DEAD,	IM,  LOG_ALWAYS, 1, CMD_KEEP_HIDE|CMD_GHOST },
   { "bug",		do_bug,		POS_DEAD,	 0,  LOG_NORMAL, 1, CMD_KEEP_HIDE|CMD_GHOST },
   { "büyü",		do_cast,	POS_FIGHTING,	 0,  LOG_NORMAL, 1,0},
   { "büyüler",		do_spells,	POS_DEAD,	 0,  LOG_NORMAL, 1, CMD_KEEP_HIDE|CMD_GHOST },
@@ -735,6 +737,8 @@ bool check_social( CHAR_DATA *ch, char *command, char *argument )
 	act( social_table[cmd].others_found,  ch, NULL, victim, TO_NOTVICT );
 	act( social_table[cmd].char_found,    ch, NULL, victim, TO_CHAR    );
 	act( social_table[cmd].vict_found,    ch, NULL, victim, TO_VICT    );
+	if ( IS_BOT(victim) )
+	    bot_hear( victim, ch, BOT_CH_SOCIAL, (char *) social_table[cmd].name );
 
 	if ( !IS_NPC(ch) && IS_NPC(victim)
 	&&   !IS_AFFECTED(victim, AFF_CHARM)

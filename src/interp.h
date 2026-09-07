@@ -95,6 +95,7 @@ DECLARE_DO_FUN( do_alias	);
 DECLARE_DO_FUN(	do_allow	);
 DECLARE_DO_FUN( do_ambush       );
 DECLARE_DO_FUN(	do_areas	);
+DECLARE_DO_FUN(	do_botlar	);
 DECLARE_DO_FUN( do_assassinate  );
 DECLARE_DO_FUN(	do_at		);
 DECLARE_DO_FUN(	do_auction	);

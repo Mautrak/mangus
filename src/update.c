@@ -52,6 +52,7 @@
 #include <time.h>
 #include <math.h>
 #include "merc.h"
+#include "bot.h"
 
 /* command procedures needed */
 DECLARE_DO_FUN(do_human		);
@@ -2106,6 +2107,7 @@ void update_handler( void )
 	}
 
     aggr_update( );
+    bot_update( );
     auction_update( );
 
     tail_chain( );
@@ -2618,6 +2620,7 @@ void cevrimici_oyuncu_sayisi( void )
         	if (d->connected == CON_PLAYING )
 			count++;
 	}
+  count += bot_online_count();
   max_on = UMAX(count,max_on);
 	max_on_so_far  = UMAX(count,max_on_so_far);
 	return;

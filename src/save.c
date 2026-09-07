@@ -192,6 +192,8 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
     fprintf( fp, "#%s\n", IS_NPC(ch) ? "MOB" : "PLAYER"	);
 
     fprintf( fp, "Name %s~\n",	ch->name		);
+    if ( ch->pcdata->bot != NULL || ch->pcdata->bot_file )
+	fprintf( fp, "Bot  1\n" );
     fprintf( fp, "Id   %ld\n", ch->id			);
 	fprintf( fp, "Discord %s~\n", ch->pcdata->discord_id );
     fprintf( fp, "Birth  %lld\n", (long long) ch->pcdata->birth_time );
@@ -1172,6 +1174,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp )
 
 	case 'B':
 	    KEY( "Bamfin",	ch->pcdata->bamfin,	fread_string( fp ) );
+	    KEY( "Bot",	ch->pcdata->bot_file,	fread_number( fp ) != 0 );
       if ( !str_cmp( word, "Bankg" ) )
       {
         tmp_silver = fread_number( fp );

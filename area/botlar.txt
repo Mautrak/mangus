@@ -1,0 +1,36 @@
+# Mangus bot kadrosu.
+# Bu dosya varsa sunucu açılışta botları yükler; silinirse botlar devre dışı kalır.
+# Alanlar '|' ile ayrılır:
+#   isim | ırk | sınıf | cinsiyet(e/k) | yönelim(i/y/k) | etik(t/y/k) | kişilik |
+#   aktif saat başı | aktif saat sonu | Türkçe karakter(1/0) | küçük harf(1/0) |
+#   oyuncu katline istekli(1/0) | lakap
+# Kişilikler: sakin, geveze, agresif, yardımsever, esprili, gizemli, acemi
+# !enaz / !encok : aynı anda çevrimiçi bot sayısı sınırları
+!enaz 7
+!encok 14
+Tugrul|insan|savaşçı|e|i|t|sakin|19|2|1|0|1|Selenge'nin Kılıcı
+Aybars|insan|adbolar|e|i|t|yardımsever|18|1|1|0|1|Işığın Muhafızı
+Karabey|kara-elf|hırsız|e|k|k|agresif|21|4|0|1|1|Gölgelerin Efendisi
+Umay|elf|ermiş|k|i|y|yardımsever|17|23|1|0|0|Şifalı Eller
+Ilgaz|cüce|savaşçı|e|y|t|esprili|20|3|0|0|1|Demir Yumruk
+Nehir|insan|gan|k|y|y|geveze|16|22|1|0|0|Meraklı Çırak
+Sarpkan|trol|samuray|e|y|t|sakin|22|5|1|0|1|Onurun Kılıcı
+Zifir|kara-elf|kembolar|e|k|k|agresif|23|6|0|1|1|Karanlığın Sesi
+Defne|elf|korucu|k|i|y|gizemli|18|0|1|0|0|Ormanın Kızı
+Balamir|githyanki|ögeci|e|y|k|gizemli|0|8|1|0|1|Ögelerin Ustası
+Kutay|insan|ninja|e|y|k|sakin|21|3|0|0|1|Sessiz Adım
+Toygar|duergar|savaşçı|e|k|t|agresif|19|1|0|1|1|Derinlerin Baltası
+Eylul|insan|ermiş|k|i|t|geveze|15|21|1|0|0|Tapınağın Gülü
+Baturalp|insan|savaşçı|e|i|t|acemi|17|23|0|1|0|
+Gecekusu|felar|hırsız|k|k|k|esprili|22|4|0|0|1|Kedi Gibi Sessiz
+Ozanbey|gnom|biçimci|e|y|y|geveze|14|20|1|0|0|Sözün Efendisi
+Kursad|insan|korucu|e|y|t|sakin|6|12|1|0|1|Bozkırın Oğlu
+Sahmeran|kara-elf|gan|k|k|k|gizemli|1|7|1|0|1|Yılanların Anası
+Bumin|trol|savaşçı|e|k|k|agresif|20|2|0|1|1|Kemik Kıran
+Alevnur|arial|ögeci|k|i|y|esprili|18|0|1|0|0|Ateşin Kızı
+Demirhan|cüce|adbolar|e|i|t|yardımsever|9|15|1|0|1|Örs ve Çekiç
+Tanrikut|githyanki|samuray|e|y|t|gizemli|21|5|1|0|1|Uzak Diyarların Prensi
+Cerenay|insan|hırsız|k|y|y|acemi|16|22|0|1|0|
+Yildirimhan|insan|ninja|e|k|k|agresif|0|6|0|0|1|Kara Şimşek
+Erdemcan|insan|ermiş|e|i|t|sakin|8|14|1|0|0|Sabırlı Derviş
+Sungurbey|felar|korucu|e|y|k|esprili|11|18|1|0|1|Uçan Pençe

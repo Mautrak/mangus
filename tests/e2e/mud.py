@@ -16,6 +16,8 @@ import time
 from pathlib import Path
 
 READY_MARKER = "kullanıma hazır"
+BOT_ROSTER = "botlar.txt"          # area/ altındaki bot kadrosu
+BOT_LOGIN_RE = re.compile(r"(\w+)@bot baglandi")
 NAME_PROMPT = "Hangi isimle anılmak istersin? "
 PASSWORD_PROMPT = "Parola: "
 PAGER = "[Devam etmek için ENTER]"
@@ -158,8 +160,11 @@ class MudServer(object):
         self._log_handle = None
 
     # ---- hazırlık --------------------------------------------------------
-    def prepare(self, runtime_dirs=None):
-        """Depodaki area/ dizinini ve veri dosyalarını çalışma dizinine kopyala."""
+    def prepare(self, runtime_dirs=None, bots=False):
+        """Depodaki area/ dizinini ve veri dosyalarını çalışma dizinine kopyala.
+
+        ``bots`` False ise bot kadrosu (area/botlar.txt) kopyadan silinir; böylece
+        botlar oyuna girip altın ekranları ve oda içeriklerini değiştiremez."""
         if runtime_dirs is not None:
             self.RUNTIME_DIRS = tuple(runtime_dirs)
         self.run_dir.mkdir(parents=True, exist_ok=True)
@@ -168,6 +173,9 @@ class MudServer(object):
         if dst_area.exists():
             shutil.rmtree(dst_area)
         shutil.copytree(src_area, dst_area)
+        roster = dst_area / BOT_ROSTER
+        if not bots and roster.exists():
+            roster.unlink()
         # Depodaki log/ düzeni aynen kurulur: log/kanal eksikse 'söyle' vb. kanal
         # komutları sunucuyu çökertir (data.c write_channel_log, NULL FILE*).
         for name in self.RUNTIME_DIRS:

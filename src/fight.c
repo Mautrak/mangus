@@ -53,6 +53,7 @@
 #include <math.h>
 #include <unistd.h>
 #include "merc.h"
+#include "bot.h"
 
 
 #define MAX_DAMAGE_MESSAGE 34
@@ -280,7 +281,7 @@ void multi_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
     int     chance;
 
     /* decrement the wait */
-    if (ch->desc == NULL)
+    if (ch->desc == NULL && !IS_BOT(ch))
 	ch->wait = UMAX(0,ch->wait - PULSE_VIOLENCE);
 
     /* no attacks for stunnies -- just a check */
@@ -1783,7 +1784,7 @@ bool damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt, int dam_type, bo
 	/*
 	* Take care of link dead people.
 	*/
-	if ( !IS_NPC(victim) && victim->desc == NULL )
+	if ( !IS_NPC(victim) && victim->desc == NULL && !IS_BOT(victim) )
 	{
 		if ( number_range( 0, victim->wait ) == 0 )
 		{
@@ -1852,7 +1853,7 @@ bool is_safe_nomessage(CHAR_DATA *ch, CHAR_DATA *victim )
   /* link dead players whose adrenalin is not gushing are safe */
   if (!IS_NPC(victim) && ((victim->last_fight_time == -1) ||
 	((current_time - victim->last_fight_time) > FIGHT_DELAY_TIME)) &&
-	victim->desc == NULL)
+	victim->desc == NULL && !IS_BOT(victim))
     return TRUE;
 
      if  ((!IS_NPC(ch) &&  !IS_NPC(victim) && victim->level < 5 ) ||
@@ -2587,6 +2588,8 @@ void raw_kill_org( CHAR_DATA *victim, int part )
 
   death_cry_org( victim, part );
   make_corpse( victim );
+  if ( IS_BOT(victim) )
+    bot_on_death( victim );
 
 
   if ( IS_NPC(victim) )
@@ -2682,6 +2685,9 @@ void group_gain( CHAR_DATA *ch, CHAR_DATA *victim )
 
 	if ( victim == ch || (IS_NPC(victim) && victim->pIndexData->vnum < 100 ) )
 		return;
+
+	if ( IS_BOT(ch) )
+		bot_on_kill( ch, victim );
 
 	/* quest */
 	if (IS_GOLEM(ch) && ch->master != NULL && ch->master->iclass == CLASS_NECROMANCER)

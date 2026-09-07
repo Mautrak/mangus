@@ -54,6 +54,7 @@
 #include <unistd.h>
 
 #include "merc.h"
+#include "bot.h"
 #include "utf8.h"
 #include "recycle.h"
 #include "tables.h"
@@ -346,7 +347,7 @@ void do_kd( CHAR_DATA *ch, char *argument )
 		return;
 	}
 
-    if ( victim->desc == NULL && !IS_NPC(victim))
+    if ( victim->desc == NULL && !IS_NPC(victim) && !IS_BOT(victim))
     {
 	act("$N bağlantısını kaybetmiş görünüyor...daha sonra tekrar dene.",
 	    ch,NULL,victim,TO_CHAR);
@@ -380,6 +381,8 @@ void do_kd( CHAR_DATA *ch, char *argument )
      act_color("$N kd: $C$t$c",ch,buf,victim,TO_CHAR,POS_DEAD, CLR_MAGENTA_BOLD );
 
    act_color( "$n kd: $C$t$c",ch,buf,victim,TO_VICT,POS_DEAD, CLR_RED_BOLD );
+   if ( IS_BOT(victim) )
+       bot_hear( victim, ch, BOT_CH_TELL, buf );
 
     victim->reply	= ch;
 
@@ -422,7 +425,7 @@ void do_kdcevapla( CHAR_DATA *ch, char *argument )
 		return;
 	}
 
-    if ( victim->desc == NULL && !IS_NPC(victim))
+    if ( victim->desc == NULL && !IS_NPC(victim) && !IS_BOT(victim))
     {
 	act("$N bağlantısını kaybetmiş görünüyor...daha sonra tekrar dene.",
 	    ch,NULL,victim,TO_CHAR);
@@ -456,6 +459,8 @@ void do_kdcevapla( CHAR_DATA *ch, char *argument )
      act_color("$N kd: $C$t$c",ch,buf,victim,TO_CHAR,POS_DEAD, CLR_MAGENTA_BOLD );
 
    act_color( "$n kd: $C$t$c",ch,buf,victim,TO_VICT,POS_DEAD, CLR_RED_BOLD );
+   if ( IS_BOT(victim) )
+       bot_hear( victim, ch, BOT_CH_TELL, buf );
 
     victim->reply	= ch;
 
@@ -526,6 +531,13 @@ void do_say( CHAR_DATA *ch, char *argument )
         (char_obj->pIndexData->oprogs->speech_prog) (char_obj,ch,buf);
     }
 
+    for (room_char = ch->in_room->people; room_char != NULL;
+         room_char = room_char->next_in_room)
+    {
+      if (IS_BOT(room_char) && room_char != ch)
+        bot_hear(room_char, ch, BOT_CH_SAY, buf);
+    }
+
     return;
 }
 
@@ -566,6 +578,15 @@ void do_yell( CHAR_DATA *ch, char *argument )
       act_color("$n '$C$t$c' diye haykırdı.",
                 ch,trans,d->character,TO_VICT,POS_DEAD, CLR_BROWN );
 	}
+    }
+
+    {
+	CHAR_DATA *bch;
+
+	for ( bch = char_list; bch != NULL; bch = bch->next )
+	    if ( IS_BOT(bch) && bch != ch && bch->in_room != NULL && ch->in_room != NULL
+	    &&   bch->in_room->area == ch->in_room->area )
+		bot_hear( bch, ch, BOT_CH_YELL, buf );
     }
 
     return;
@@ -1756,6 +1777,8 @@ void do_gtell( CHAR_DATA *ch, char *argument )
           act_color("$C$n gruba '$t' dedi.$c",
                   ch,buf,gch,TO_VICT,POS_DEAD,CLR_MAGENTA);
           i++;
+          if ( IS_BOT(gch) && gch != ch )
+            bot_hear( gch, ch, BOT_CH_GTELL, buf );
         }
     }
 
@@ -1829,6 +1852,14 @@ void do_cb( CHAR_DATA *ch, char *argument )
 	    act_color(buf,
 		      ch,buf2,d->character,TO_VICT,POS_DEAD, CLR_BROWN );
 	}
+    }
+
+    {
+	CHAR_DATA *bch;
+
+	for ( bch = char_list; bch != NULL; bch = bch->next )
+	    if ( IS_BOT(bch) && bch != ch && bch->cabal == ch->cabal )
+		bot_hear( bch, ch, BOT_CH_CABAL, buf2 );
     }
 
     return;

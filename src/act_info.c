@@ -53,6 +53,7 @@
 #include <time.h>
 #include <unistd.h>
 #include "merc.h"
+#include "bot.h"
 #include "utf8.h"
 #include "password.h"
 #include "magic.h"
@@ -2346,9 +2347,10 @@ void do_whois (CHAR_DATA *ch, char *argument)
     char classbuf[MAX_STRING_LENGTH];
     char pk_buf[100];
     char act_buf[100];
-    DESCRIPTOR_DATA *d;
     bool found = FALSE;
     char cabalbuf[MAX_STRING_LENGTH];
+    static CHAR_DATA *who_dch[BOT_WHO_MAX], *who_wch[BOT_WHO_MAX];
+    int who_n, who_i;
 
     one_argument(argument,arg);
 
@@ -2360,19 +2362,20 @@ void do_whois (CHAR_DATA *ch, char *argument)
 
     output[0] = '\0';
 
-    for (d = descriptor_list; d != NULL; d = d->next)
+    who_n = bot_who_collect( who_dch, who_wch, BOT_WHO_MAX );
+    for ( who_i = 0; who_i < who_n; who_i++ )
     {
 	CHAR_DATA *wch;
+	CHAR_DATA *dch = who_dch[who_i];
 	char const *iclass;
 
- 	if (d->connected != CON_PLAYING || !can_see(ch,d->character))
+ 	if (!can_see(ch,dch))
 	    continue;
 
-	if ( d->connected != CON_PLAYING ||
-((IS_VAMPIRE( d->character ) || IS_BEAR( d->character ) ) && !IS_IMMORTAL(ch) && (ch != d->character) ) )
+	if ( ((IS_VAMPIRE( dch ) || IS_BEAR( dch ) ) && !IS_IMMORTAL(ch) && (ch != dch) ) )
 	    continue;
 
-	wch = ( d->original != NULL ) ? d->original : d->character;
+	wch = who_wch[who_i];
 
  	if (!can_see(ch,wch))
 	    continue;
@@ -2495,14 +2498,18 @@ void do_whois (CHAR_DATA *ch, char *argument)
 void do_count ( CHAR_DATA *ch, char *argument )
 {
     int count;
-    DESCRIPTOR_DATA *d;
     char buf[MAX_STRING_LENGTH];
 
     count = 0;
 
-    for ( d = descriptor_list; d != NULL; d = d->next )
-        if ( d->connected == CON_PLAYING && can_see( ch, d->character ) )
-	    count++;
+    {
+	static CHAR_DATA *who_dch[BOT_WHO_MAX], *who_wch[BOT_WHO_MAX];
+	int who_n = bot_who_collect( who_dch, who_wch, BOT_WHO_MAX ), who_i;
+
+	for ( who_i = 0; who_i < who_n; who_i++ )
+	    if ( can_see( ch, who_dch[who_i] ) )
+		count++;
+    }
 
     max_on = UMAX(count,max_on);
 
@@ -2690,7 +2697,8 @@ void do_where( CHAR_DATA *ch, char *argument )
     char pkbuf[100];
     char arg[MAX_INPUT_LENGTH];
     CHAR_DATA *victim;
-    DESCRIPTOR_DATA *d;
+    static CHAR_DATA *who_dch[BOT_WHO_MAX], *who_wch[BOT_WHO_MAX];
+    int who_n, who_i;
     bool found;
     bool fPKonly = FALSE;
 
@@ -2723,10 +2731,10 @@ void do_where( CHAR_DATA *ch, char *argument )
     {
 	send_to_char( "Yakınındaki karakterler:\n\r", ch );
 	found = FALSE;
-	for ( d = descriptor_list; d; d = d->next )
+	who_n = bot_who_collect( who_dch, who_wch, BOT_WHO_MAX );
+	for ( who_i = 0; who_i < who_n; who_i++ )
 	{
-	    if ( d->connected == CON_PLAYING
-	    && ( victim = d->character ) != NULL
+	    if ( ( victim = who_dch[who_i] ) != NULL
 	    &&   !IS_NPC(victim)
 	    && !(fPKonly && is_safe_nomessage(ch,victim))
 	    &&   victim->in_room != NULL
@@ -4095,7 +4103,8 @@ void do_who_col( CHAR_DATA *ch, char *argument )
     char pk_buf[100];
     char act_buf[100];
     char level_buf[100];
-    DESCRIPTOR_DATA *d;
+    static CHAR_DATA *who_dch[BOT_WHO_MAX], *who_wch[BOT_WHO_MAX];
+    int who_n, who_i;
     int iClass;
     int iRace;
     int iLevelLower;
@@ -4322,23 +4331,24 @@ void do_who_col( CHAR_DATA *ch, char *argument )
     nMatch = 0;
     buf[0] = '\0';
     output[0] = '\0';
-    for ( d = descriptor_list; d != NULL; d = d->next )
+    who_n = bot_who_collect( who_dch, who_wch, BOT_WHO_MAX );
+    for ( who_i = 0; who_i < who_n; who_i++ )
     {
 	CHAR_DATA *wch;
+	CHAR_DATA *dch = who_dch[who_i];
 	char const *iclass;
 
 	/*
 	 * Check for match against restrictions.
 	 * Don't use trust as that exposes trusted mortals.
 	 */
-	if ( d->connected != CON_PLAYING || !can_see( ch, d->character ) )
+	if ( !can_see( ch, dch ) )
 	    continue;
 
-	if ( d->connected != CON_PLAYING ||
-((IS_VAMPIRE( d->character ) || IS_BEAR( d->character )) && !IS_IMMORTAL(ch) && (ch != d->character) ) )
+	if ( ((IS_VAMPIRE( dch ) || IS_BEAR( dch )) && !IS_IMMORTAL(ch) && (ch != dch) ) )
 	    continue;
 
-	wch   = ( d->original != NULL ) ? d->original : d->character;
+	wch   = who_wch[who_i];
 	if (!can_see(ch, wch)) /* can't see switched wizi imms */
 	  continue;
 
@@ -4459,9 +4469,7 @@ void do_who_col( CHAR_DATA *ch, char *argument )
 	strcat(output,buf);
     }
 
-    count = 0;
-    for ( d = descriptor_list; d != NULL; d = d->next )
-        if ( d->connected == CON_PLAYING )    count++;
+    count = who_n;
 
     max_on = UMAX(count,max_on);
     snprintf(buf2, sizeof(buf2), "\n\rOyuncular: %d, bugün: %d, en çok:%d.\n\r",

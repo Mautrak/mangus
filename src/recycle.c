@@ -51,6 +51,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "merc.h"
+#include "bot.h"
 #include "recycle.h"
 
 /* stuff for recycling ban structures */
@@ -383,6 +384,8 @@ void free_pcdata(PC_DATA *pcdata)
 
     if (!IS_VALID(pcdata))
 	return;
+
+    bot_pcdata_freed(pcdata);
 
     free_string(pcdata->pwd);
     free_string(pcdata->bamfin);

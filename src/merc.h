@@ -118,6 +118,7 @@ typedef short int			sh_int;
  */
 typedef struct	affect_data		AFFECT_DATA;
 typedef struct	area_data		AREA_DATA;
+typedef struct	bot_data		BOT_DATA;
 typedef struct	ban_data		BAN_DATA;
 typedef struct 	buf_type	 	BUFFER;
 typedef struct	char_data		CHAR_DATA;
@@ -2202,7 +2203,8 @@ struct	pc_data
 	long		din_puani;
 	long		yardim_puani;
 	char * 		discord_id;
-	
+	BOT_DATA *	bot;		/* otonom bot ise beyin verisi (bot.c) */
+	bool		bot_file;	/* oyuncu dosyasında "Bot 1" işareti vardı */
 };
 
 
@@ -2749,6 +2751,7 @@ extern sh_int  gsn_mental_knife;
  */
 #define IS_NPC(ch)		(IS_SET((ch)->act, ACT_IS_NPC))
 #define IS_PC(ch)			(!IS_NPC(ch))
+#define IS_BOT(ch)		(!IS_NPC(ch) && (ch)->pcdata != NULL && (ch)->pcdata->bot != NULL)
 #define IS_IMMORTAL(ch)		(get_trust(ch) >= LEVEL_IMMORTAL)
 #define IS_HERO(ch)		(get_trust(ch) >= LEVEL_HERO)
 #define IS_TRUSTED(ch,level)	(get_trust((ch)) >= (level))

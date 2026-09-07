@@ -72,6 +72,7 @@
 #include <stdarg.h>
 
 #include "merc.h"
+#include "bot.h"
 #include "interp.h"
 #include "recycle.h"
 #include "tables.h"
@@ -190,6 +191,7 @@ int main( int argc, char **argv )
     if ( ( control = net_listen( port ) ) < 0 )
 	exit( 1 );
     boot_db( );
+    bot_boot( );
     snprintf( log_buf, sizeof(log_buf), "Mangus %d portunda kullanıma hazır.", port );
     log_string( log_buf );
     game_loop( control );
@@ -1002,6 +1004,12 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 	    return;
 	}
 
+
+	if ( bot_name_taken( argument ) )
+	{
+	    write_to_buffer( d, "Bu karakter oyunda, başka bir tane deneyin.\n\rİsim: ", 0 );
+	    return;
+	}
 
 	fOld = load_char_obj( d, argument );
 	ch   = d->character;
@@ -1929,6 +1937,7 @@ bool check_reconnect( DESCRIPTOR_DATA *d, char *name, bool fConn )
     {
 	if ( !IS_NPC(ch)
 	&&   (!fConn || ch->desc == NULL)
+	&&   !IS_BOT(ch)
 	&&   !str_cmp( d->character->name, ch->name ) )
 	{
 	    if ( fConn == FALSE )
