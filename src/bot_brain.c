@@ -213,6 +213,8 @@ static int bot_near_rooms( CHAR_DATA *ch, int max_depth, bool same_area )
                 continue;
             if ( !bot_room_passable( ch, next, FALSE ) )
                 continue;
+            if ( !bot_exit_back( next, room ) )
+                continue;
             near_stamp[next->vnum] = near_cur;
             near_room[tail] = next;
             near_dist[tail] = dist + 1;
@@ -716,6 +718,14 @@ static bool bot_prey_ok( CHAR_DATA *ch, CHAR_DATA *mob, int lo, int hi )
         return FALSE;
     if ( mob->cabal != CABAL_NONE )
         return FALSE;
+    {
+        BOT_DATA *bot = bot_of( ch );
+        int i;
+        if ( bot != NULL )
+            for ( i = 0; i < BOT_AVOID_MAX; i++ )
+                if ( bot->avoid_vnum[i] == mob->pIndexData->vnum && bot_pulse < bot->avoid_until[i] )
+                    return FALSE;
+    }
     if ( !IS_SET( mob->act, ACT_NOALIGN ) )
     {
         if ( IS_GOOD(ch) && IS_GOOD(mob) )
@@ -1424,6 +1434,50 @@ static void bot_attack( BOT_DATA *bot, CHAR_DATA *victim )
         bot_cmd( bot, "öldür %s", kw );
 }
 
+/* Tapınağa yol yoksa (tek yönlü cep) oradan kurtul; komut ürettiyse TRUE */
+static bool bot_escape_pocket( BOT_DATA *bot )
+{
+    CHAR_DATA *ch = bot->ch;
+    ROOM_INDEX_DATA *temple = get_room_index( ROOM_VNUM_TEMPLE );
+    sh_int tmp[BOT_MAX_PATH];
+    OBJ_DATA *obj;
+
+    if ( temple == NULL || ch->in_room == temple )
+        return FALSE;
+    if ( bot_find_path( ch, ch->in_room, temple, tmp, BOT_MAX_PATH, FALSE ) >= 0 )
+    {
+        bot->nopath_pulse = 0;
+        return FALSE;
+    }
+    if ( bot->nopath_pulse == 0 )
+        bot->nopath_pulse = bot_pulse;
+
+    for ( obj = ch->in_room->contents; obj != NULL; obj = obj->next_content )
+        if ( obj->item_type == ITEM_PORTAL && can_see_obj( ch, obj ) )
+        {
+            char kw[MAX_INPUT_LENGTH];
+            bot_obj_keyword( ch, obj, ch->in_room->contents, kw, sizeof(kw) );
+            bot_cmd( bot, "gir %s", kw );
+            return TRUE;
+        }
+    if ( ch->level < KIDEMLI_OYUNCU_SEVIYESI )
+    {
+        bot_log( bot, "oda %d'den çıkış yolu yok; anımsa.", ch->in_room->vnum );
+        bot_cmd( bot, "anımsa" );
+        return TRUE;
+    }
+    if ( bot_pulse - bot->nopath_pulse > 4 * 60 * 5 )
+    {
+        bot_log( bot, "oda %d'den çıkış yolu yok; oyundan çıkıp tapınaktan dönecek.", ch->in_room->vnum );
+        bot->nopath_pulse = 0;
+        bot_logout( bot, TRUE );
+        if ( bot->ch == NULL )
+            bot->next_login_try = current_time + number_range( 60, 180 );
+        return TRUE;
+    }
+    return FALSE;
+}
+
 /* ---------------------------------------------------------------------
  * botlar arası grup
  * ------------------------------------------------------------------ */
@@ -1576,7 +1630,9 @@ static void bot_hunt( BOT_DATA *bot )
 
         if ( area == NULL )
         {
-            /* uygun bölge yok: biraz dolaş / dinlen */
+            /* uygun bölge yok: dünyaya dönüş yolu var mı? yoksa anımsa */
+            if ( bot_escape_pocket( bot ) )
+                return;
             bot->hunt_fail++;
             bot_set_state( bot, BOT_ST_REST );
             return;
@@ -1833,11 +1889,11 @@ static void bot_compute_town_tasks( BOT_DATA *bot )
         SET_BIT( tasks, BOT_TOWN_TRAIN );
     if ( bot_sell_candidates( bot ) >= 4 || ch->carry_number >= can_carry_n( ch ) - 2 )
         SET_BIT( tasks, BOT_TOWN_SELL );
-    if ( carried_type( ch, ITEM_FOOD ) == NULL && ch->silver >= 40 )
+    if ( carried_type( ch, ITEM_FOOD ) == NULL && ch->silver >= 15 )
         SET_BIT( tasks, BOT_TOWN_FOOD );
     if ( carried_drink( ch ) == NULL && ch->silver >= 40 )
         SET_BIT( tasks, BOT_TOWN_DRINK );
-    if ( get_light_char( ch ) == NULL && ch->silver >= 60 && ch->level >= 3 )
+    if ( get_light_char( ch ) == NULL && carried_type( ch, ITEM_LIGHT ) == NULL && ch->silver >= 20 )
         SET_BIT( tasks, BOT_TOWN_LIGHT );
     if ( bot_count_potions( ch ) < 2 && ch->silver >= 400 && ch->level >= 5 && ch->cabal != CABAL_BATTLE )
         SET_BIT( tasks, BOT_TOWN_POTION );
@@ -2438,6 +2494,15 @@ static OBJ_DATA *bot_own_corpse( CHAR_DATA *ch )
 
 void bot_after_death( BOT_DATA *bot )
 {
+    CHAR_DATA *killer = bot_char_by_id( bot->target_id );
+
+    /* beni öldüren yaratık türünden bir süre uzak dur */
+    if ( killer != NULL && IS_NPC(killer) )
+    {
+        bot->avoid_vnum[bot->avoid_pos]  = killer->pIndexData->vnum;
+        bot->avoid_until[bot->avoid_pos] = bot_pulse + 4 * 60 * 90;
+        bot->avoid_pos = ( bot->avoid_pos + 1 ) % BOT_AVOID_MAX;
+    }
     bot->hunt_area = NULL;
     bot->target_id = 0;
     bot->leader_id = 0;

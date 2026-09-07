@@ -15,6 +15,7 @@
 #define BOT_ROSTER_FILE   "botlar.txt"     /* area/ dizininde */
 #define BOT_WHO_MAX       256
 #define BOT_WEAR_FAIL_MAX 8
+#define BOT_AVOID_MAX     4
 
 /* durumlar */
 #define BOT_ST_IDLE       0
@@ -134,6 +135,7 @@ struct bot_data
     AREA_DATA * hunt_area;
     int         hunt_area_pulse;
     int         hunt_fail;
+    int         nopath_pulse;
     long        target_id;
     int         kills;
     int         deaths;
@@ -163,6 +165,9 @@ struct bot_data
     int         inv_signature;
     int         wear_fail[BOT_WEAR_FAIL_MAX];
     int         wear_fail_pos;
+    int         avoid_vnum[BOT_AVOID_MAX];
+    int         avoid_until[BOT_AVOID_MAX];
+    int         avoid_pos;
 
     /* sohbet */
     struct bot_reply replies[BOT_MAX_REPLIES];
@@ -221,6 +226,7 @@ void    bot_queue_reply     ( BOT_DATA *bot, const char *to, int channel, int de
 int     bot_find_path       ( CHAR_DATA *ch, ROOM_INDEX_DATA *from, ROOM_INDEX_DATA *to,
                               sh_int *dirs, int max, bool allow_cabal );
 bool    bot_room_passable   ( CHAR_DATA *ch, ROOM_INDEX_DATA *room, bool allow_cabal );
+bool    bot_exit_back       ( ROOM_INDEX_DATA *next, ROOM_INDEX_DATA *room );
 bool    bot_set_travel      ( BOT_DATA *bot, int vnum, int after );
 CHAR_DATA *bot_char_by_id   ( long id );
 CHAR_DATA *bot_room_char_by_id ( ROOM_INDEX_DATA *room, long id );

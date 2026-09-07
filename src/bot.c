@@ -562,10 +562,20 @@ static void bot_enter_world( BOT_DATA *bot, CHAR_DATA *ch, bool fresh )
     }
     else if ( ch->in_room != NULL )
     {
+        sh_int tmp[BOT_MAX_PATH];
+        ROOM_INDEX_DATA *temple = get_room_index( ROOM_VNUM_TEMPLE );
+
         if ( cabal_area_check( ch ) )
         {
             int idx = IS_GOOD(ch) ? 0 : IS_EVIL(ch) ? 2 : 1;
             char_to_room( ch, get_room_index( hometown_table[ch->hometown].altar[idx] ) );
+        }
+        else if ( temple != NULL && ch->in_room != temple
+               && bot_find_path( ch, ch->in_room, temple, tmp, BOT_MAX_PATH, FALSE ) < 0 )
+        {
+            /* kaydedildiği odadan dünyaya dönüş yolu yok (tek yönlü cep): tapınaktan başla */
+            bot_log( bot, "kayıtlı oda %d'den çıkış yolu yok; tapınağa yerleştirildi.", ch->in_room->vnum );
+            char_to_room( ch, temple );
         }
         else
             char_to_room( ch, ch->in_room );
@@ -804,6 +814,17 @@ static void bfs_alloc( void )
     bfs_queue = (int *) calloc( BOT_VNUM_MAX + 1, sizeof(int) );
 }
 
+/* next odasından room odasına geri dönen bir çıkış var mı? (tek yönlü tuzaklara girme) */
+bool bot_exit_back( ROOM_INDEX_DATA *next, ROOM_INDEX_DATA *room )
+{
+    int d;
+
+    for ( d = 0; d < 6; d++ )
+        if ( next->exit[d] != NULL && next->exit[d]->u1.to_room == room )
+            return TRUE;
+    return FALSE;
+}
+
 bool bot_room_passable( CHAR_DATA *ch, ROOM_INDEX_DATA *room, bool allow_cabal )
 {
     int iClass, iGuild;
@@ -884,6 +905,8 @@ int bot_find_path( CHAR_DATA *ch, ROOM_INDEX_DATA *from, ROOM_INDEX_DATA *to,
             if ( IS_SET( pexit->exit_info, EX_LOCKED ) && !IS_AFFECTED( ch, AFF_PASS_DOOR ) )
                 continue;
             if ( next != to && !bot_room_passable( ch, next, allow_cabal ) )
+                continue;
+            if ( !bot_exit_back( next, room ) )
                 continue;
             bfs_stamp[next->vnum] = bfs_cur_stamp;
             bfs_prev[next->vnum]  = room->vnum;
@@ -1305,6 +1328,81 @@ void do_botlar( CHAR_DATA *ch, char *argument )
     {
         bot_debug = !bot_debug;
         printf_to_char( ch, "Bot hata ayıklama günlüğü %s.\n\r", bot_debug ? "açık" : "kapalı" );
+        return;
+    }
+
+    if ( !str_cmp( arg, "yol" ) )
+    {
+        char who[MAX_INPUT_LENGTH], where[MAX_INPUT_LENGTH];
+        ROOM_INDEX_DATA *to;
+        sh_int dirs[BOT_MAX_PATH];
+        int len, d;
+        CHAR_DATA *walker;
+
+        argument = one_argument( argument, who );
+        one_argument( argument, where );
+        if ( ( bot = bot_find( who ) ) == NULL || bot->ch == NULL || bot->ch->in_room == NULL )
+        {
+            send_to_char( "Öyle bir çevrimiçi bot yok.\n\r", ch );
+            return;
+        }
+        walker = bot->ch;
+        if ( ( to = get_room_index( atoi( where ) ) ) == NULL )
+        {
+            send_to_char( "Öyle bir oda yok.\n\r", ch );
+            return;
+        }
+        for ( d = 0; d < 6; d++ )
+        {
+            EXIT_DATA *pexit = walker->in_room->exit[d];
+            if ( pexit == NULL || pexit->u1.to_room == NULL )
+                continue;
+            printf_to_char( ch, "%s -> %d: %s%s\n\r", dir_name[d], pexit->u1.to_room->vnum,
+                            bot_room_passable( walker, pexit->u1.to_room, FALSE ) ? "geçilebilir" : "GEÇİLEMEZ",
+                            IS_SET( pexit->exit_info, EX_LOCKED ) ? " (kilitli)" : "" );
+        }
+        len = bot_find_path( walker, walker->in_room, to, dirs, BOT_MAX_PATH, FALSE );
+        printf_to_char( ch, "%d -> %d: yol %d\n\r", walker->in_room->vnum, to->vnum, len );
+        if ( len < 0 )
+        {
+            /* erişilebilen bileşeni gez, reddedilen sınır odalarını yaz */
+            int shown = 0, visited = 0;
+            bot_find_path( walker, walker->in_room, to, dirs, BOT_MAX_PATH, FALSE );
+            {
+                int q[4096], qh = 0, qt = 0;
+                static unsigned char seen[32768];
+                memset( seen, 0, sizeof(seen) );
+                q[qt++] = walker->in_room->vnum; seen[walker->in_room->vnum] = 1;
+                while ( qh < qt && qt < 4000 )
+                {
+                    ROOM_INDEX_DATA *r = get_room_index( q[qh++] );
+                    int di;
+                    if ( r == NULL ) continue;
+                    visited++;
+                    for ( di = 0; di < 6; di++ )
+                    {
+                        EXIT_DATA *px = r->exit[di];
+                        ROOM_INDEX_DATA *nx;
+                        if ( px == NULL || ( nx = px->u1.to_room ) == NULL || nx->vnum < 0 || seen[nx->vnum] )
+                            continue;
+                        seen[nx->vnum] = 1;
+                        if ( IS_SET( px->exit_info, EX_LOCKED ) || !bot_room_passable( walker, nx, FALSE ) )
+                        {
+                            if ( shown++ < 15 )
+                                printf_to_char( ch, "  sınır: %d -> %s -> %d (%s) sektör %d bayrak %ld%s\n\r",
+                                                r->vnum, dir_name[di], nx->vnum, nx->name, nx->sector_type,
+                                                nx->room_flags, IS_SET( px->exit_info, EX_LOCKED ) ? " KİLİTLİ" : "" );
+                            continue;
+                        }
+                        q[qt++] = nx->vnum;
+                    }
+                }
+                printf_to_char( ch, "  erişilebilen oda sayısı: %d\n\r", visited );
+            }
+        }
+        for ( d = 0; d < len && d < 30; d++ )
+            printf_to_char( ch, "%s ", dir_name[dirs[d]] );
+        send_to_char( "\n\r", ch );
         return;
     }
 
