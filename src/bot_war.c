@@ -350,6 +350,9 @@ static bool pk_target_ok( CHAR_DATA *ch, CHAR_DATA *victim )
         return FALSE;
     if ( IS_IMMORTAL(victim) || is_safe_nomessage( ch, victim ) )
         return FALSE;
+    /* güvenli odada (lonca, tapınak) dövüş yasak: orada saldırmayı deneme */
+    if ( IS_SET( victim->in_room->room_flags, ROOM_SAFE ) )
+        return FALSE;
     if ( !IS_BOT(victim) && ( victim->desc == NULL || victim->desc->connected != CON_PLAYING ) )
         return FALSE;
     return TRUE;
