@@ -627,13 +627,17 @@ void bot_chat_event( BOT_DATA *bot, int event, CHAR_DATA *other )
             say_later( bot, BOT_CH_TELL, any_h, pick( ev_quest_done, PN(ev_quest_done) ), number_range( 20, 60 ) );
         break;
     case BOT_EV_LOOT:
+        if ( current_time - boot_time < 600 || current_time - bot->login_time < 180 )
+            break;                                    /* açılış/giriş teçhizatı için övünme */
         if ( room_h != NULL && number_percent() < 35 )
             say_later( bot, BOT_CH_SAY, NULL, pick( ev_loot, PN(ev_loot) ), number_range( 8, 20 ) );
         else if ( any_h != NULL && number_percent() < 8 )
             say_later( bot, BOT_CH_TELL, any_h, pick( ev_loot, PN(ev_loot) ), number_range( 20, 60 ) );
         break;
     case BOT_EV_LOGIN:
-        if ( any_h != NULL && number_percent() < 30 )
+        if ( current_time - boot_time < 600 )
+            break;                                    /* açılışta toplu girişlerde susulur */
+        if ( any_h != NULL && number_percent() < 15 )
             say_later( bot, BOT_CH_TELL, any_h, pick( ev_login, PN(ev_login) ), number_range( 120, 360 ) );
         break;
     case BOT_EV_LOGOUT:

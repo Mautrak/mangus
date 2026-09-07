@@ -36,6 +36,7 @@ static int buff_count = 0;
 static SPEC_FUN *spec_ok[4];
 static int spec_ok_count = 0;
 static SPEC_FUN *spec_questmaster_fn = NULL;
+static bool bot_blind_in_dark( CHAR_DATA *ch );
 
 #define BOT_JUNK_MAX 40
 
@@ -512,11 +513,17 @@ static int bot_slot_score( CHAR_DATA *ch, OBJ_DATA *obj, int slot )
     }
     if ( CAN_WEAR( obj, ITEM_WEAR_SHIELD ) )
     {
+        OBJ_DATA *left;
+
         worn = get_shield_char( ch );
         if ( worn != NULL )
             return bot_obj_score( ch, worn );
         /* iki elli silah kullanıyorsa kalkan tutamaz */
         if ( get_eq_char( ch, WEAR_BOTH ) != NULL )
+            return 1000;
+        /* gece elindeki ışık kalkandan değerli */
+        if ( ( left = get_eq_char( ch, WEAR_LEFT ) ) != NULL && left->item_type == ITEM_LIGHT
+          && ( weather_info.sunlight == SUN_DARK || weather_info.sunlight == SUN_SET ) )
             return 1000;
         return 0;
     }
@@ -675,7 +682,10 @@ static bool bot_wear_upgrades( BOT_DATA *bot )
         if ( bot->ch == NULL )
             return TRUE;
         if ( best->wear_loc != WEAR_NONE )
-            bot_chat_event( bot, BOT_EV_LOOT, NULL );
+        {
+            if ( best->cost >= 60 || best->level >= 4 )
+                bot_chat_event( bot, BOT_EV_LOOT, NULL );
+        }
         else
             bot_wear_fail_add( bot, vnum );
     }
@@ -1134,7 +1144,7 @@ static void bot_resting( BOT_DATA *bot )
     CHAR_DATA *ch = bot->ch;
 
     /* ışıksız karanlıkta: sabahı bekle (14 dk sınırı da uygulanır) */
-    if ( room_is_dark( ch ) && get_light_char( ch ) == NULL && ch->silver < 20
+    if ( bot_blind_in_dark( ch ) && ch->silver < 20
       && bot_pulse - bot->state_pulse < 4 * 60 * 14 )
     {
         if ( ch->position > POS_SLEEPING && !IS_AFFECTED( ch, AFF_SLEEP ) && bot_rested_enough( bot ) )
@@ -1294,12 +1304,17 @@ static bool bot_manage_light( BOT_DATA *bot )
 }
 
 /* karanlıkta ışıksız kalan bot: ışık al, yoksa tapınakta sabahı bekle; komut/durum ürettiyse TRUE */
+static bool bot_blind_in_dark( CHAR_DATA *ch )
+{
+    return room_is_dark( ch ) && get_light_char( ch ) == NULL && !IS_AFFECTED( ch, AFF_INFRARED );
+}
+
 static bool bot_handle_darkness( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch;
     ROOM_INDEX_DATA *temple;
 
-    if ( !room_is_dark( ch ) || get_light_char( ch ) != NULL )
+    if ( !bot_blind_in_dark( ch ) )
         return FALSE;
     if ( bot->state == BOT_ST_TRAVEL || bot->state == BOT_ST_TOWN || bot->state == BOT_ST_FOLLOW
       || bot->state == BOT_ST_CORPSE || bot->state == BOT_ST_REST )
