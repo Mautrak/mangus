@@ -443,6 +443,17 @@ bool bot_war_opportunity( BOT_DATA *bot )
         if ( rch != ch && pk_target_ok( ch, rch ) && can_see( ch, rch )
           && ( bot->pk_istekli || rch->id == bot->revenge_id ) )
         {
+            int chance = bot->kisilik == BOT_K_AGRESIF ? 90 : bot->kisilik == BOT_K_SAKIN ? 35 : 60;
+
+            /* her karşılaşmada saldırmaz: 5 dakikada bir karar, kişiliğe göre şans; intikam kesin */
+            if ( rch->id != bot->revenge_id )
+            {
+                if ( bot_pulse - bot->opp_pk_pulse < 4 * 60 * 5 )
+                    return FALSE;
+                bot->opp_pk_pulse = bot_pulse;
+                if ( number_percent() > chance )
+                    return FALSE;
+            }
             bot_pk_start( bot, rch, "odada karşılaştı" );
             return TRUE;
         }
