@@ -1744,7 +1744,7 @@ void bot_attack( BOT_DATA *bot, CHAR_DATA *victim )
 }
 
 /* Tapınağa yol yoksa (tek yönlü cep) oradan kurtul; komut ürettiyse TRUE */
-static bool bot_escape_pocket( BOT_DATA *bot )
+bool bot_escape_pocket( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch;
     ROOM_INDEX_DATA *temple = get_room_index( ROOM_VNUM_TEMPLE );

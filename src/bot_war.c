@@ -651,6 +651,13 @@ static bool bot_raid_consider( BOT_DATA *bot )
 
         if ( i == cabal || !item_at_home( i ) || cabal_table[i].obj_ptr == NULL )
             continue;
+        {
+            ROOM_INDEX_DATA *hq = get_room_index( cabal_table[i].room_vnum );
+            sh_int tmp[BOT_MAX_PATH];
+
+            if ( hq == NULL || bot_find_path( ch, ch->in_room, hq, tmp, BOT_MAX_PATH, TRUE ) < 0 )
+                continue;                             /* karargâhına yol bilinmiyor */
+        }
         w = 1 + online_members( i, 1 ) * 3;
         count += w;
         if ( number_range( 1, count ) <= w )
@@ -718,6 +725,19 @@ static void raid_take_item( BOT_DATA *bot, OBJ_DATA *item )
         bot_obj_keyword( ch, item, ch->in_room->contents, kw, sizeof(kw) );
         bot_cmd( bot, "al %s", kw );
     }
+}
+
+
+/* eve (karargâha) yol yoksa portal vb. ile cepten çık; çıkış da yoksa FALSE */
+static bool raid_go_home( BOT_DATA *bot, ROOM_INDEX_DATA *home )
+{
+    if ( bot->path_len != 0 )
+        return TRUE;
+    if ( bot_set_travel( bot, home->vnum, BOT_ST_RAID ) )
+        return TRUE;
+    if ( bot_escape_pocket( bot ) )
+        return TRUE;
+    return FALSE;
 }
 
 static void raid_end( BOT_DATA *bot, const char *why )
@@ -843,7 +863,7 @@ void bot_raid( BOT_DATA *bot )
         case 3:                                       /* eve dön */
             if ( ch->in_room != home )
             {
-                if ( bot->path_len == 0 && !bot_set_travel( bot, home->vnum, BOT_ST_RAID ) )
+                if ( !raid_go_home( bot, home ) )
                     raid_end( bot, "eve yol yok" );
                 return;
             }
@@ -881,7 +901,7 @@ void bot_raid( BOT_DATA *bot )
     {
         if ( ch->in_room != home )
         {
-            if ( bot->path_len == 0 && !bot_set_travel( bot, home->vnum, BOT_ST_RAID ) )
+            if ( !raid_go_home( bot, home ) )
                 raid_end( bot, "eve yol yok" );
             return;
         }

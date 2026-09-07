@@ -937,7 +937,10 @@ int bot_find_path( CHAR_DATA *ch, ROOM_INDEX_DATA *from, ROOM_INDEX_DATA *to,
                 continue;
             if ( next != to && !bot_room_passable( ch, next, allow_cabal ) )
                 continue;
-            if ( !bot_exit_back( next, room ) )
+            /* geri dönüşü olmayan çıkışlardan geçme; kabal karargâhları tek yönlü iniş
+               olabilir (çıkış portalla), kabal işi için oraya girmeye izin verilir */
+            if ( !bot_exit_back( next, room )
+              && !( allow_cabal && next->area != NULL && IS_SET( next->area->area_flag, AREA_CABAL ) ) )
                 continue;
             bfs_stamp[next->vnum] = bfs_cur_stamp;
             bfs_prev[next->vnum]  = room->vnum;

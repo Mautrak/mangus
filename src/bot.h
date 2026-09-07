@@ -302,6 +302,7 @@ void    bot_note_kill       ( BOT_DATA *bot, CHAR_DATA *victim );
 void    bot_attack          ( BOT_DATA *bot, CHAR_DATA *victim );
 bool    bot_cast_buffs      ( BOT_DATA *bot );
 ROOM_INDEX_DATA *area_entry_room( BOT_DATA *bot, AREA_DATA *area );
+bool    bot_escape_pocket   ( BOT_DATA *bot );
 /* bot_war.c */
 bool    bot_cabal_fits      ( CHAR_DATA *ch, int cabal );
 int     bot_choose_cabal    ( CHAR_DATA *ch );
