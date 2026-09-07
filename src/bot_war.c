@@ -1007,6 +1007,8 @@ bool bot_raid_scout( BOT_DATA *bot, ROOM_INDEX_DATA *next )
     {
         if ( !IS_NPC(rch) || !can_see( ch, rch ) )
             continue;
+        if ( rch->cabal != CABAL_NONE && rch->cabal == ch->cabal )
+            continue;                                 /* kendi kabalının muhafızı */
         if ( rch->level > ch->level + 5
           && ( IS_SET( rch->act, ACT_AGGRESSIVE ) || rch->spec_fun != NULL
             || ( rch->pIndexData->vnum >= 500 && rch->pIndexData->vnum <= 580 ) ) )
