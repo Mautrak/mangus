@@ -802,6 +802,11 @@ void bot_raid( BOT_DATA *bot )
         return;
     }
     defend = ( target == ch->cabal );
+    if ( !defend && raid_fail_pulse[target] > bot->raid_pulse )
+    {
+        raid_end( bot, "arkadaş muhafız bildirdi" );
+        return;
+    }
     home = get_room_index( cabal_table[ch->cabal].room_vnum );
     enemy_hq = get_room_index( cabal_table[target].room_vnum );
     if ( home == NULL || enemy_hq == NULL || bot_pulse - bot->raid_pulse > 4 * 60 * 40 )
@@ -1018,7 +1023,7 @@ bool bot_raid_scout( BOT_DATA *bot, ROOM_INDEX_DATA *next )
                 continue;                             /* kendi kabalının muhafızı */
         }
         if ( rch->level > ch->level + 5
-          && ( IS_SET( rch->act, ACT_AGGRESSIVE ) || rch->spec_fun != NULL
+          && ( IS_SET( rch->act, ACT_AGGRESSIVE )
             || ( rch->pIndexData->vnum >= 500 && rch->pIndexData->vnum <= 580 ) ) )
         {
             bot_log( bot, "baskın: %s (seviye %d) yolu kesiyor, geri çekildi.", rch->short_descr, rch->level );
@@ -1090,7 +1095,8 @@ bool bot_war_goal( BOT_DATA *bot )
 
         for ( b = bot_list; b != NULL; b = b->next )
             if ( b != bot && b->ch != NULL && b->ch->cabal == ch->cabal && b->state == BOT_ST_RAID
-              && b->raid_cabal != ch->cabal && b->raid_step <= 1 && bot_pulse - b->raid_pulse < 4 * 60 * 8 )
+              && b->raid_cabal != ch->cabal && b->raid_step <= 1 && bot_pulse - b->raid_pulse < 4 * 60 * 8
+              && !( raid_fail_pulse[b->raid_cabal] != 0 && bot_pulse - raid_fail_pulse[b->raid_cabal] < 4 * 60 * 60 * 12 ) )
             {
                 raid_join( bot, b->raid_cabal, b->raid_leader_id );
                 bot_talk( bot, BOT_CH_CABAL, NULL, "ben de geliyorum" );
