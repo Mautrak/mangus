@@ -1278,6 +1278,7 @@ void bot_update( void )
  * ------------------------------------------------------------------ */
 void do_botlar( CHAR_DATA *ch, char *argument )
 {
+    bool kabal = FALSE;
     char arg[MAX_INPUT_LENGTH];
     char buf[MAX_STRING_LENGTH];
     BOT_DATA *bot;
@@ -1390,7 +1391,8 @@ void do_botlar( CHAR_DATA *ch, char *argument )
         CHAR_DATA *walker;
 
         argument = one_argument( argument, who );
-        one_argument( argument, where );
+        argument = one_argument( argument, where );
+        kabal = argument[0] != '\0' && !str_prefix( argument, "kabal" );
         if ( ( bot = bot_find( who ) ) == NULL || bot->ch == NULL || bot->ch->in_room == NULL )
         {
             send_to_char( "Öyle bir çevrimiçi bot yok.\n\r", ch );
@@ -1408,16 +1410,16 @@ void do_botlar( CHAR_DATA *ch, char *argument )
             if ( pexit == NULL || pexit->u1.to_room == NULL )
                 continue;
             printf_to_char( ch, "%s -> %d: %s%s\n\r", dir_name[d], pexit->u1.to_room->vnum,
-                            bot_room_passable( walker, pexit->u1.to_room, FALSE ) ? "geçilebilir" : "GEÇİLEMEZ",
+                            bot_room_passable( walker, pexit->u1.to_room, kabal ) ? "geçilebilir" : "GEÇİLEMEZ",
                             IS_SET( pexit->exit_info, EX_LOCKED ) ? " (kilitli)" : "" );
         }
-        len = bot_find_path( walker, walker->in_room, to, dirs, BOT_MAX_PATH, FALSE );
+        len = bot_find_path( walker, walker->in_room, to, dirs, BOT_MAX_PATH, kabal );
         printf_to_char( ch, "%d -> %d: yol %d\n\r", walker->in_room->vnum, to->vnum, len );
         if ( len < 0 )
         {
             /* erişilebilen bileşeni gez, reddedilen sınır odalarını yaz */
             int shown = 0, visited = 0;
-            bot_find_path( walker, walker->in_room, to, dirs, BOT_MAX_PATH, FALSE );
+            bot_find_path( walker, walker->in_room, to, dirs, BOT_MAX_PATH, kabal );
             {
                 int q[4096], qh = 0, qt = 0;
                 static unsigned char seen[32768];
@@ -1436,7 +1438,7 @@ void do_botlar( CHAR_DATA *ch, char *argument )
                         if ( px == NULL || ( nx = px->u1.to_room ) == NULL || nx->vnum < 0 || seen[nx->vnum] )
                             continue;
                         seen[nx->vnum] = 1;
-                        if ( IS_SET( px->exit_info, EX_LOCKED ) || !bot_room_passable( walker, nx, FALSE ) )
+                        if ( IS_SET( px->exit_info, EX_LOCKED ) || !bot_room_passable( walker, nx, kabal ) )
                         {
                             if ( shown++ < 15 )
                                 printf_to_char( ch, "  sınır: %d -> %s -> %d (%s) sektör %d bayrak %ld%s\n\r",
