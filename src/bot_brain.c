@@ -773,7 +773,7 @@ static int bot_prey_score( CHAR_DATA *ch, CHAR_DATA *mob, int dist )
 static CHAR_DATA *bot_prey_here( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch, *rch, *best = NULL;
-    int lo = UMAX( 1, ch->level - 2 - bot->hunt_fail );
+    int lo = UMAX( 1, ch->level - 3 - bot->hunt_fail );
     int hi = UMAX( 2, ch->level + level_bonus( ch ) );
     int best_score = -1000;
 
@@ -800,7 +800,7 @@ static ROOM_INDEX_DATA *bot_prey_near( BOT_DATA *bot, int depth )
     int n = bot_near_rooms( ch, depth, TRUE );
     int i, best_score = -1000;
     ROOM_INDEX_DATA *best = NULL;
-    int lo = UMAX( 1, ch->level - 2 - bot->hunt_fail );
+    int lo = UMAX( 1, ch->level - 3 - bot->hunt_fail );
     int hi = UMAX( 2, ch->level + level_bonus( ch ) );
 
     for ( i = 1; i < n; i++ )
@@ -882,7 +882,7 @@ static AREA_DATA *bot_pick_hunt_area( BOT_DATA *bot )
     CHAR_DATA *ch = bot->ch;
     AREA_DATA *area, *best = NULL;
     int best_score = -1;
-    int lo = UMAX( 1, ch->level - 2 );
+    int lo = UMAX( 1, ch->level - 3 );
     int hi = UMAX( 2, ch->level + level_bonus( ch ) );
     int tries = 0;
 
@@ -921,6 +921,17 @@ static AREA_DATA *bot_pick_hunt_area( BOT_DATA *bot )
         if ( ch->in_room != NULL && ch->in_room->area == area )
             score += 25;
         score += number_range( 0, 40 );
+        if ( ch->in_room != NULL && ch->in_room->area != area )
+        {
+            /* uzak bölgeler pahalı: yürümek hareket puanı ve zaman ister */
+            ROOM_INDEX_DATA *entry = area_entry_room( ch, area );
+            sh_int tmp[BOT_MAX_PATH];
+            int len = entry != NULL ? bot_find_path( ch, ch->in_room, entry, tmp, BOT_MAX_PATH, FALSE ) : -1;
+
+            if ( len < 0 )
+                continue;
+            score -= len / 2;
+        }
         if ( ++tries > 60 )
             break;
         if ( score > best_score )
@@ -995,15 +1006,17 @@ static void bot_travel_step( BOT_DATA *bot )
         return;
     }
 
-    if ( ch->move < ( is_starving( ch ) ? 3 : 12 ) )
+    if ( ch->move < ( is_starving( ch ) ? 3 : 6 ) )
     {
-        if ( ch->position != POS_RESTING )
+        if ( ch->position != POS_SLEEPING && !room_has_aggressor( ch ) )
+            bot_cmd( bot, "uyu" );
+        else if ( ch->position != POS_RESTING && ch->position != POS_SLEEPING )
             bot_cmd( bot, "dinlen" );
         return;
     }
     if ( ch->position >= POS_SLEEPING && ch->position < POS_STANDING )
     {
-        if ( ch->move < ch->max_move / 2 && ch->position != POS_SLEEPING && !is_starving( ch ) )
+        if ( ch->move < ch->max_move * 3 / 10 && !is_starving( ch ) )
             return;
         if ( !IS_AFFECTED( ch, AFF_SLEEP ) )
             bot_cmd( bot, "kalk" );
@@ -1089,7 +1102,7 @@ static bool bot_need_rest( BOT_DATA *bot )
         return TRUE;
     if ( is_caster( ch ) && pct( ch->mana, ch->max_mana ) < 25 )
         return TRUE;
-    if ( pct( ch->move, ch->max_move ) < 15 )
+    if ( ch->move < 8 )
         return TRUE;
     return FALSE;
 }
@@ -1102,7 +1115,7 @@ static bool bot_rested_enough( BOT_DATA *bot )
         return FALSE;
     if ( is_caster( ch ) && pct( ch->mana, ch->max_mana ) < 70 )
         return FALSE;
-    if ( pct( ch->move, ch->max_move ) < 60 )
+    if ( pct( ch->move, ch->max_move ) < 40 )
         return FALSE;
     return TRUE;
 }
@@ -1785,8 +1798,27 @@ static void bot_hunt( BOT_DATA *bot )
     if ( bot_seek_group( bot ) )
         return;
 
-    if ( ( room = bot_prey_near( bot, 14 ) ) != NULL )
+    if ( bot_debug )
     {
+        CHAR_DATA *rch;
+        int lo = UMAX( 1, ch->level - 2 - bot->hunt_fail );
+        int hi = UMAX( 2, ch->level + level_bonus( ch ) );
+        for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
+        {
+            if ( !IS_NPC(rch) )
+                continue;
+            bot_log( bot, "odadaki %s (lvl %d, yp %d/%d) av değil: bant %d-%d gör=%d dövüş=%d shop=%d spec=%d hp_sınır=%d yön=%d",
+                     rch->short_descr, rch->level, rch->hit, rch->max_hit, lo, hi,
+                     can_see( ch, rch ), rch->fighting != NULL, rch->pIndexData->pShop != NULL,
+                     !spec_allowed( rch->spec_fun ),
+                     ch->level < 5 ? rch->max_hit > ch->max_hit * 2 + 15 : rch->max_hit > ch->max_hit * 3 + 40,
+                     ( IS_GOOD(ch) && IS_GOOD(rch) ) || ( IS_EVIL(ch) && IS_EVIL(rch) ) );
+        }
+    }
+    if ( ( room = bot_prey_near( bot, 9 ) ) != NULL )
+    {
+        if ( bot_debug )
+            bot_log( bot, "yakın av: oda %d (%s), uzaklık ?", room->vnum, room->name );
         if ( bot_set_travel( bot, room->vnum, BOT_ST_HUNT ) )
             return;
     }
