@@ -5569,6 +5569,19 @@ void reboot_uzakdiyarlar( bool fmessage )
 	}
     	close_socket(d);
     }
+
+    /* soketsiz oyuncular (botlar) da kaydedilsin; etkinlik sayaçları kalıcı olsun */
+    {
+	CHAR_DATA *ch;
+
+	for ( ch = char_list; ch != NULL; ch = ch->next )
+	    if ( IS_BOT(ch) )
+	    {
+		update_total_played( ch );
+		save_char_obj( ch );
+	    }
+    }
+    ud_data_write();
     return;
 }
 
