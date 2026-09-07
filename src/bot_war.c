@@ -1007,8 +1007,16 @@ bool bot_raid_scout( BOT_DATA *bot, ROOM_INDEX_DATA *next )
     {
         if ( !IS_NPC(rch) || !can_see( ch, rch ) )
             continue;
-        if ( rch->cabal != CABAL_NONE && rch->cabal == ch->cabal )
-            continue;                                 /* kendi kabalının muhafızı */
+        {
+            /* muhafızın kabalı: ilk dövüşe dek 'cabal' alanı boş kalır; vnum bloğundan (56x = İstila) anla */
+            int mob_cabal = rch->cabal, ci;
+
+            for ( ci = 1; mob_cabal == CABAL_NONE && ci < MAX_CABAL; ci++ )
+                if ( rch->pIndexData->vnum / 10 == cabal_table[ci].room_vnum / 10 )
+                    mob_cabal = ci;
+            if ( mob_cabal != CABAL_NONE && mob_cabal == ch->cabal )
+                continue;                             /* kendi kabalının muhafızı */
+        }
         if ( rch->level > ch->level + 5
           && ( IS_SET( rch->act, ACT_AGGRESSIVE ) || rch->spec_fun != NULL
             || ( rch->pIndexData->vnum >= 500 && rch->pIndexData->vnum <= 580 ) ) )
