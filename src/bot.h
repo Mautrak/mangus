@@ -191,6 +191,9 @@ struct bot_data
     int         avoid_vnum[BOT_AVOID_MAX];
     int         avoid_until[BOT_AVOID_MAX];
     int         avoid_pos;
+    int         avoid_room[BOT_AVOID_MAX];   /* tehlikeli/ölümcül odalar */
+    int         avoid_room_until[BOT_AVOID_MAX];
+    int         avoid_room_pos;
     /* algı hafızası */
     int         spawn_vnum[BOT_SPAWN_MAX];
     int         spawn_seen[BOT_SPAWN_MAX];
@@ -312,6 +315,8 @@ bool    bot_in_group        ( CHAR_DATA *ch );
 const char *bot_area_name   ( BOT_DATA *bot );
 void    bot_note_loot       ( BOT_DATA *bot );
 void    bot_note_kill       ( BOT_DATA *bot, CHAR_DATA *victim );
+bool    bot_room_avoided    ( BOT_DATA *bot, ROOM_INDEX_DATA *room );
+void    bot_avoid_room      ( BOT_DATA *bot, ROOM_INDEX_DATA *room, int pulses );
 /* bot_brain.c dışa açılanlar */
 void    bot_attack          ( BOT_DATA *bot, CHAR_DATA *victim );
 bool    bot_cast_buffs      ( BOT_DATA *bot );

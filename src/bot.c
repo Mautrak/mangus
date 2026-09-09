@@ -924,6 +924,8 @@ bool bot_room_passable( CHAR_DATA *ch, ROOM_INDEX_DATA *room, bool allow_cabal )
         return FALSE;
     if ( room->sector_type == SECT_AIR && !IS_AFFECTED( ch, AFF_FLYING ) )
         return FALSE;
+    if ( IS_BOT(ch) && bot_room_avoided( ch->pcdata->bot, room ) )
+        return FALSE;
     if ( room->sector_type == SECT_WATER_NOSWIM && !IS_AFFECTED( ch, AFF_FLYING ) )
     {
         OBJ_DATA *obj;

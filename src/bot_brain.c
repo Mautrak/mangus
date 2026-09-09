@@ -127,15 +127,14 @@ static int level_bonus( CHAR_DATA *ch )
 {
     int grp = ch->in_room != NULL ? group_size_here( ch ) : 0;
 
+    /* veteran kuralı: yalnızken seviyesinin en fazla bir üstü; grupla iki-üç üstü */
     if ( grp > 0 )
         return ( ch->level < 4 ? 1 : 2 ) + 1;
     if ( ch->level < 4 )
         return 0;
-    if ( is_caster( ch ) )
-        return ch->level < 12 ? 0 : 1;
-    if ( is_rogue( ch ) )
-        return ch->level < 8 ? 0 : 1;
-    return ch->level < 8 ? 1 : 3;
+    if ( is_caster( ch ) || is_rogue( ch ) )
+        return ch->level < 15 ? 0 : 1;
+    return 1;
 }
 
 static int inventory_signature( CHAR_DATA *ch )
@@ -748,13 +747,40 @@ static bool bot_prey_ok( CHAR_DATA *ch, CHAR_DATA *mob, int lo, int hi )
         return FALSE;
     if ( mob->cabal != CABAL_NONE )
         return FALSE;
+    /* 'tart' ile görülen: kutsanmış/hızlı yaratığa seviyesinden düşük değilse girişme */
+    if ( ( IS_AFFECTED( mob, AFF_SANCTUARY ) || IS_AFFECTED( mob, AFF_HASTE ) ) && mob->level >= ch->level - 1 )
+        return FALSE;
     {
         BOT_DATA *bot = bot_of( ch );
         int i;
         if ( bot != NULL )
+        {
             for ( i = 0; i < BOT_AVOID_MAX; i++ )
                 if ( bot->avoid_vnum[i] == mob->pIndexData->vnum && bot_pulse < bot->avoid_until[i] )
                     return FALSE;
+            if ( bot_room_avoided( bot, mob->in_room ) )
+                return FALSE;
+        }
+    }
+    /* odada yardıma gelecek başka yaratıklar (aynı tür ya da saldırgan): kalabalığa dalma */
+    if ( group_size_here( ch ) == 0 )
+    {
+        CHAR_DATA *rch;
+        int helpers = 0, helper_levels = 0;
+
+        for ( rch = mob->in_room->people; rch != NULL; rch = rch->next_in_room )
+        {
+            if ( rch == mob || !IS_NPC(rch) || rch->position <= POS_SLEEPING )
+                continue;
+            if ( rch->pIndexData == mob->pIndexData || IS_SET( rch->act, ACT_AGGRESSIVE )
+              || ( rch->off_flags & ( ASSIST_ALL | ASSIST_ALIGN | ASSIST_RACE | ASSIST_VNUM | ASSIST_PLAYERS ) ) )
+            {
+                helpers++;
+                helper_levels += rch->level;
+            }
+        }
+        if ( helpers >= 1 && mob->level + helper_levels > ch->level + 2 )
+            return FALSE;
     }
     if ( !IS_SET( mob->act, ACT_NOALIGN ) )
     {
@@ -768,7 +794,9 @@ static bool bot_prey_ok( CHAR_DATA *ch, CHAR_DATA *mob, int lo, int hi )
 
 static int bot_prey_score( CHAR_DATA *ch, CHAR_DATA *mob, int dist )
 {
-    int score = 100 + ( mob->level - ch->level ) * 30 - dist * 12;
+    /* veteran tercihi: seviyesine denk av en verimlisi; bir üstü iyi, altı zayıf */
+    int d = mob->level - ch->level;
+    int score = 100 - abs( d ) * 12 + ( d >= 0 ? 10 : 0 ) - dist * 12;
 
     if ( ( IS_GOOD(ch) && IS_EVIL(mob) ) || ( IS_EVIL(ch) && IS_GOOD(mob) ) )
         score += 35;
@@ -877,6 +905,46 @@ void bot_note_kill( BOT_DATA *bot, CHAR_DATA *victim )
     mem->kills++;
     mem->last_pulse = bot_pulse;
     bot_remember_spawn( bot, bot->ch->in_room );
+}
+
+bool bot_room_avoided( BOT_DATA *bot, ROOM_INDEX_DATA *room )
+{
+    int i;
+
+    if ( room == NULL )
+        return FALSE;
+    for ( i = 0; i < BOT_AVOID_MAX; i++ )
+        if ( bot->avoid_room[i] == room->vnum && bot_pulse < bot->avoid_room_until[i] )
+            return TRUE;
+    return FALSE;
+}
+
+void bot_avoid_room( BOT_DATA *bot, ROOM_INDEX_DATA *room, int pulses )
+{
+    if ( room == NULL )
+        return;
+    bot->avoid_room[bot->avoid_room_pos]       = room->vnum;
+    bot->avoid_room_until[bot->avoid_room_pos] = bot_pulse + pulses;
+    bot->avoid_room_pos = ( bot->avoid_room_pos + 1 ) % BOT_AVOID_MAX;
+}
+
+/* yola devam etmeden önce bir sonraki odaya bakış: seviyesinin üstünde saldırgan varsa girme */
+static bool bot_travel_scout( BOT_DATA *bot, ROOM_INDEX_DATA *next )
+{
+    CHAR_DATA *ch = bot->ch, *rch;
+
+    if ( next == NULL || group_size_here( ch ) > 0 )
+        return FALSE;
+    for ( rch = next->people; rch != NULL; rch = rch->next_in_room )
+        if ( IS_NPC(rch) && IS_SET( rch->act, ACT_AGGRESSIVE ) && rch->level >= ch->level + 3
+          && can_see( ch, rch ) && !IS_AFFECTED( rch, AFF_CHARM ) )
+        {
+            if ( bot_debug )
+                bot_log( bot, "yolda tehlike: %s (seviye %d) oda %d; dolaşılıyor.", rch->short_descr, rch->level, next->vnum );
+            bot_avoid_room( bot, next, 4 * 60 * 20 );
+            return TRUE;
+        }
+    return FALSE;
 }
 
 /* bir odada uygun av var mı (bakış açısı: bot'un kendi odası) */
@@ -1059,7 +1127,8 @@ static AREA_DATA *bot_pick_hunt_area( BOT_DATA *bot )
         if ( ( mem = bot_area_memory( bot, area, FALSE ) ) != NULL )
         {
             score += UMIN( mem->kills, 30 ) * 2 - mem->deaths * 30;
-            if ( mem->deaths >= 2 && bot_pulse - mem->last_pulse < 4 * 60 * 60 )
+            /* bir ölüm: üç saat uzak dur; iki ve üstü: on iki saat */
+            if ( mem->deaths >= 1 && bot_pulse - mem->last_pulse < 4 * 60 * 60 * ( mem->deaths >= 2 ? 12 : 3 ) )
                 continue;
         }
         if ( area == bot->hunt_area )
@@ -1188,6 +1257,17 @@ static void bot_travel_step( BOT_DATA *bot )
 
     if ( bot->after_travel == BOT_ST_RAID && pexit->u1.to_room != NULL && bot_raid_scout( bot, pexit->u1.to_room ) )
         return;
+    if ( bot->after_travel != BOT_ST_RAID && bot->after_travel != BOT_ST_PK && pexit->u1.to_room != NULL
+      && bot_travel_scout( bot, pexit->u1.to_room ) )
+    {
+        /* tehlikeli odayı dolaşan yeni yol; yoksa vazgeç */
+        int target = bot->target_vnum, after = bot->after_travel;
+
+        bot->path_len = bot->path_pos = 0;
+        if ( !bot_set_travel( bot, target, after ) )
+            bot_set_state( bot, BOT_ST_IDLE );
+        return;
+    }
     bot_cmd( bot, "%s", dir_name[dir] );
     if ( bot->ch == NULL )
         return;
@@ -1236,9 +1316,9 @@ static bool bot_need_rest( BOT_DATA *bot )
 
     if ( is_starving( ch ) )
         return pct( ch->hit, ch->max_hit ) < 15;
-    if ( pct( ch->hit, ch->max_hit ) < 45 )
+    if ( pct( ch->hit, ch->max_hit ) < 60 )
         return TRUE;
-    if ( is_caster( ch ) && pct( ch->mana, ch->max_mana ) < 25 )
+    if ( is_caster( ch ) && pct( ch->mana, ch->max_mana ) < 35 )
         return TRUE;
     if ( ch->move < 8 )
         return TRUE;
@@ -1249,9 +1329,9 @@ static bool bot_rested_enough( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch;
 
-    if ( pct( ch->hit, ch->max_hit ) < 88 )
+    if ( pct( ch->hit, ch->max_hit ) < 92 )
         return FALSE;
-    if ( is_caster( ch ) && pct( ch->mana, ch->max_mana ) < 70 )
+    if ( is_caster( ch ) && pct( ch->mana, ch->max_mana ) < 75 )
         return FALSE;
     if ( pct( ch->move, ch->max_move ) < 40 )
         return FALSE;
@@ -1627,7 +1707,13 @@ static void bot_combat( BOT_DATA *bot )
         return;
     }
 
-    if ( hp < ( is_caster( ch ) ? 30 : 22 ) && vhp > 25 )
+    if ( hp < ( is_caster( ch ) ? 40 : 32 ) && vhp > 25 )
+    {
+        bot_escape( bot );
+        return;
+    }
+    /* kaybedilen dövüş: rakip güçlü ve ben ondan çok daha hızlı eriyorum */
+    if ( hp < 55 && vhp > 70 && victim->level >= ch->level + 1 && IS_NPC(victim) )
     {
         bot_escape( bot );
         return;
@@ -1984,6 +2070,12 @@ static void bot_hunt( BOT_DATA *bot )
     if ( ( prey = prey_in_room( bot, ch->in_room, 0, &score ) ) != NULL )
     {
         bot_remember_spawn( bot, ch->in_room );
+        /* veteran: yaralıyken dövüşe girme, önce topla */
+        if ( pct( ch->hit, ch->max_hit ) < 70 || ( is_caster( ch ) && pct( ch->mana, ch->max_mana ) < 40 ) )
+        {
+            bot_start_rest( bot );
+            return;
+        }
         bot_attack( bot, prey );
         bot->hunt_fail = 0;
         return;
@@ -2841,7 +2933,7 @@ static OBJ_DATA *bot_own_corpse( CHAR_DATA *ch )
 
 void bot_after_death( BOT_DATA *bot )
 {
-    /* öldüğüm bölgeyi hatırla */
+    /* öldüğüm bölgeyi ve odayı hatırla */
     {
         ROOM_INDEX_DATA *droom = get_room_index( bot->death_room );
         if ( droom != NULL )
@@ -2849,13 +2941,14 @@ void bot_after_death( BOT_DATA *bot )
             struct bot_area_mem *mem = bot_area_memory( bot, droom->area, TRUE );
             mem->deaths++;
             mem->last_pulse = bot_pulse;
+            bot_avoid_room( bot, droom, 4 * 60 * 60 * 3 );
         }
     }
     /* beni öldüren yaratık türünden bir süre uzak dur */
     if ( bot->last_opp_vnum > 0 )
     {
         bot->avoid_vnum[bot->avoid_pos]  = bot->last_opp_vnum;
-        bot->avoid_until[bot->avoid_pos] = bot_pulse + 4 * 60 * 90;
+        bot->avoid_until[bot->avoid_pos] = bot_pulse + 4 * 60 * 60 * 6;
         bot->avoid_pos = ( bot->avoid_pos + 1 ) % BOT_AVOID_MAX;
     }
     bot->hunt_area = NULL;

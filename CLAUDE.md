@@ -107,6 +107,13 @@ etki listesi (act_obj.c), `spell_dispel_magic` her zaman başarılı der (`found
   kendi kesim/ölüm hafızası. Görev yaratığı ve grup arkadaşı yalnızca aynı bölgede
   (`nerede`), PK hedefi `kim` listesinden, konumu devriye/`nerede` ile. `char_list`
   üzerinden konum okuyan yeni mantık ekleme.
+- Veteran kuralları (ölüm analizi: 121 ölümün yarısı seviyesinin 1-5 üstündeki avdan): yalnızken
+  av en fazla seviye+1 (`level_bonus`), denk seviye tercih edilir (`bot_prey_score`), kutsanmış/
+  hızlı yaratığa ve yardımcısı olan kalabalığa (`ASSIST_*`, aynı tür, saldırgan) girilmez,
+  dövüşe %70 yp altında başlanmaz, %60 altında dinlenilir (%92'ye kadar), kaçış %32/%40,
+  kaybedilen dövüşten erken çıkılır; ölüm: bölge 3 saat (2+ ölümde 12), yaratık 6 saat, oda
+  3 saat kaçınılır; yolda bir sonraki odada seviye+3 saldırgan görünce oda 20 dk kaçınılıp
+  yeniden yol bulunur (`bot_travel_scout`, `bot_room_avoided` yol bulmaya bağlı).
 - Kanallar: `söyle`/`haykır`/`duygu` rol içi havuzlar (`ic_*`), `kd`/`kdg` konu dışı
   (`ooc_*`); `bot_fill_ch(..., ic)` üslubu kanala göre seçer. `kdg` (`do_kdg`,
   `COMM_NOKDG`) herkese açık konu dışı kanaldır; botlar `bot_hear(BOT_CH_KDG)` ile duyar.
