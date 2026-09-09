@@ -2284,13 +2284,199 @@ void spell_earthquake( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     return;
 }
 
+/* Yükseltme (enchant) zarının sonucu. */
+enum enchant_result
+{
+    ENCH_DESTROYED,	/* nesne yok oldu */
+    ENCH_DISENCHANTED,	/* tüm etkiler ve bayraklar silindi */
+    ENCH_NOTHING,	/* değişiklik yok */
+    ENCH_SUCCESS,
+    ENCH_EXCEPTIONAL
+};
+
+/* Yükseltilecek konum ve bonus-kare katsayısı. */
+struct enchant_loc
+{
+    int  location;
+    int  per_bonus;	/* fail += per_bonus * bonus^2 */
+    bool found;
+};
+
+/*
+ * Nesnenin etkilerini tarar: konumu eşleşen etkiler found işaretler ve
+ * bonusun karesiyle, diğer etkiler per_other ile başarısızlık şansını artırır.
+ * Nesne henüz kendi kopyasını almadıysa prototipin etkileri de sayılır.
+ */
+static int enchant_scan( OBJ_DATA *obj, struct enchant_loc *locs, int nlocs, int per_other )
+{
+    AFFECT_DATA *paf;
+    int fail = 0, i, pass;
+
+    for ( pass = 0; pass < 2; pass++ )
+    {
+	if ( pass == 0 && obj->enchanted )
+	    continue;
+	for ( paf = pass == 0 ? obj->pIndexData->affected : obj->affected;
+	      paf != NULL; paf = paf->next )
+	{
+	    for ( i = 0; i < nlocs; i++ )
+		if ( paf->location == locs[i].location )
+		    break;
+	    if ( i < nlocs )
+	    {
+		locs[i].found = TRUE;
+		fail += locs[i].per_bonus * paf->modifier * paf->modifier;
+	    }
+	    else  /* things get a little harder */
+		fail += per_other;
+	}
+    }
+    return fail;
+}
+
+/* Nesnenin kendi etki listesini boşaltır. */
+static void obj_strip_affects( OBJ_DATA *obj )
+{
+    AFFECT_DATA *paf, *paf_next;
+
+    for (paf = obj->affected; paf != NULL; paf = paf_next)
+    {
+	paf_next = paf->next;
+	free_affect(paf);
+    }
+    obj->affected = NULL;
+}
+
+/* Prototipin etkilerini nesnenin kendi listesine kopyalar (ilk yükseltmede). */
+static void enchant_copy_affects( OBJ_DATA *obj )
+{
+    AFFECT_DATA *paf, *af_new;
+
+    if ( obj->enchanted )
+	return;
+    obj->enchanted = TRUE;
+
+    for (paf = obj->pIndexData->affected; paf != NULL; paf = paf->next)
+    {
+	af_new = new_affect();
+
+	af_new->next = obj->affected;
+	obj->affected = af_new;
+
+	af_new->where	= paf->where;
+	af_new->type 	= UMAX(0,paf->type);
+	af_new->level	= paf->level;
+	af_new->duration	= paf->duration;
+	af_new->location	= paf->location;
+	af_new->modifier	= paf->modifier;
+	af_new->bitvector	= paf->bitvector;
+    }
+}
+
+/*
+ * Yükseltme zarı: yok etme (fail/5), büyü bozma (fail/disenchant_div),
+ * başarısız (<= fail), başarı (<= success_max) ya da olağanüstü. Mesajlar ve
+ * nesne değişiklikleri burada; başarıda ITEM_MAGIC (olağanüstüde ITEM_GLOW da)
+ * eklenir, seviye bir artar, prototip etkileri nesneye kopyalanır.
+ */
+static enum enchant_result enchant_roll( CHAR_DATA *ch, OBJ_DATA *obj, int level, int fail,
+					 int disenchant_div, int success_max,
+					 const char *destroy_msg, const char *success_msg,
+					 const char *exceptional_msg )
+{
+    int result = number_percent();
+
+    /* the moment of truth */
+    if (result < (fail / 5))  /* item destroyed */
+    {
+	act(destroy_msg,ch,obj,NULL,TO_CHAR);
+	act(destroy_msg,ch,obj,NULL,TO_ROOM);
+	extract_obj(obj);
+	return ENCH_DESTROYED;
+    }
+
+    if (result < (fail / disenchant_div)) /* item disenchanted */
+    {
+	act("$p parlak bir ışık vererek yokoluyor.",ch,obj,NULL,TO_CHAR);
+	act("$p parlak bir ışık vererek yokoluyor.",ch,obj,NULL,TO_ROOM);
+	obj->enchanted = TRUE;
+	obj_strip_affects(obj);
+	obj->extra_flags = 0;
+	return ENCH_DISENCHANTED;
+    }
+
+    if ( result <= fail )  /* failed, no bad result */
+    {
+	send_to_char("Değişen bir şey yok.\n\r",ch);
+	return ENCH_NOTHING;
+    }
+
+    /* okay, move all the old flags into new vectors if we have to */
+    enchant_copy_affects(obj);
+
+    if (obj->level < LEVEL_HERO)
+	obj->level = UMIN(LEVEL_HERO - 1,obj->level + 1);
+
+    SET_BIT(obj->extra_flags, ITEM_MAGIC);
+    if (result <= success_max)  /* success! */
+    {
+	act(success_msg,ch,obj,NULL,TO_CHAR);
+	act(success_msg,ch,obj,NULL,TO_ROOM);
+	return ENCH_SUCCESS;
+    }
+
+    /* exceptional enchant */
+    act(exceptional_msg,ch,obj,NULL,TO_CHAR);
+    act(exceptional_msg,ch,obj,NULL,TO_ROOM);
+    SET_BIT(obj->extra_flags,ITEM_GLOW);
+    return ENCH_EXCEPTIONAL;
+}
+
+/*
+ * Konumdaki mevcut etkiyi added kadar artırır (found), yoksa yeni bir nesne
+ * etkisi ekler. hum: bonus 4'ü aşınca ITEM_HUM.
+ */
+static void enchant_bump( OBJ_DATA *obj, int sn, int level, int location, int added,
+			  bool found, bool hum )
+{
+    AFFECT_DATA *paf;
+
+    if ( found )
+    {
+	for ( paf = obj->affected; paf != NULL; paf = paf->next)
+	{
+	    if ( paf->location == location )
+	    {
+		paf->type = sn;
+		paf->modifier += added;
+		paf->level = UMAX(paf->level,level);
+		if ( hum && paf->modifier > 4 )
+		    SET_BIT(obj->extra_flags,ITEM_HUM);
+	    }
+	}
+	return;
+    }
+
+    /* add a new affect */
+    paf = new_affect();
+
+    paf->where	= TO_OBJECT;
+    paf->type	= sn;
+    paf->level	= level;
+    paf->duration	= -1;
+    paf->location	= location;
+    paf->modifier	=  added;
+    paf->bitvector  = 0;
+    paf->next	= obj->affected;
+    obj->affected	= paf;
+}
+
 void spell_enchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
     OBJ_DATA *obj = (OBJ_DATA *) vo;
-    AFFECT_DATA *paf;
-    int result, fail;
-    int ac_bonus, added;
-    bool ac_found = FALSE;
+    struct enchant_loc locs[1] = { { APPLY_AC, 5, FALSE } };
+    enum enchant_result result;
+    int fail;
 
     if (obj->item_type != ITEM_ARMOR)
     {
@@ -2304,38 +2490,8 @@ void spell_enchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 	return;
     }
 
-    /* this means they have no bonus */
-    ac_bonus = 0;
     fail = 25;	/* base 25% chance of failure */
-
-    /* find the bonuses */
-
-    if (!obj->enchanted)
-	for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
-	{
-	    if ( paf->location == APPLY_AC )
-	    {
-	    	ac_bonus = paf->modifier;
-		ac_found = TRUE;
-	    	fail += 5 * (ac_bonus * ac_bonus);
- 	    }
-
-	    else  /* things get a little harder */
-	    	fail += 20;
-    	}
-
-    for ( paf = obj->affected; paf != NULL; paf = paf->next )
-    {
-	if ( paf->location == APPLY_AC )
-  	{
-	    ac_bonus = paf->modifier;
-	    ac_found = TRUE;
-	    fail += 5 * (ac_bonus * ac_bonus);
-	}
-
-	else /* things get a little harder */
-	    fail += 20;
-    }
+    fail += enchant_scan( obj, locs, 1, 20 );
 
     /* apply other modifiers */
     fail -= level;
@@ -2347,128 +2503,23 @@ void spell_enchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
     fail = URANGE(5,fail,85);
 
-    result = number_percent();
-
-    /* the moment of truth */
-    if (result < (fail / 5))  /* item destroyed */
-    {
-      act("$p kör edici bir ışıkla alev alarak buharlaşıyor!",ch,obj,NULL,TO_CHAR);
-    	act("$p kör edici bir ışıkla alev alarak buharlaşıyor!",ch,obj,NULL,TO_ROOM);
-	extract_obj(obj);
+    result = enchant_roll( ch, obj, level, fail, 3, 90 - level/5,
+	"$p kör edici bir ışıkla alev alarak buharlaşıyor!",
+	"$p altın renginde parlıyor.",
+	"$p parlak altın renginde parlıyor!" );
+    if ( result < ENCH_SUCCESS )
 	return;
-    }
 
-    if (result < (fail / 3)) /* item disenchanted */
-    {
-	AFFECT_DATA *paf_next;
-
-  act("$p parlak bir ışık vererek yokoluyor.",ch,obj,NULL,TO_CHAR);
-	act("$p parlak bir ışık vererek yokoluyor.",ch,obj,NULL,TO_ROOM);
-	obj->enchanted = TRUE;
-
-	/* remove all affects */
-	for (paf = obj->affected; paf != NULL; paf = paf_next)
-	{
-	    paf_next = paf->next;
-	    free_affect(paf);
-	}
-	obj->affected = NULL;
-
-	/* clear all flags */
-	obj->extra_flags = 0;
-	return;
-    }
-
-    if ( result <= fail )  /* failed, no bad result */
-    {
-      send_to_char("Değişen bir şey yok.\n\r",ch);
-	return;
-    }
-
-    /* okay, move all the old flags into new vectors if we have to */
-    if (!obj->enchanted)
-    {
-	AFFECT_DATA *af_new;
-	obj->enchanted = TRUE;
-
-	for (paf = obj->pIndexData->affected; paf != NULL; paf = paf->next)
-	{
-	    af_new = new_affect();
-
-	    af_new->next = obj->affected;
-	    obj->affected = af_new;
-
-	    af_new->where	= paf->where;
-	    af_new->type 	= UMAX(0,paf->type);
-	    af_new->level	= paf->level;
-	    af_new->duration	= paf->duration;
-	    af_new->location	= paf->location;
-	    af_new->modifier	= paf->modifier;
-	    af_new->bitvector	= paf->bitvector;
-	}
-    }
-
-    if (result <= (90 - level/5))  /* success! */
-    {
-      act("$p altın renginde parlıyor.",ch,obj,NULL,TO_CHAR);
-    	act("$p altın renginde parlıyor.",ch,obj,NULL,TO_ROOM);
-	SET_BIT(obj->extra_flags, ITEM_MAGIC);
-	added = -1;
-    }
-
-    else  /* exceptional enchant */
-    {
-      act("$p parlak altın renginde parlıyor!",ch,obj,NULL,TO_CHAR);
-    	act("$p parlak altın renginde parlıyor!",ch,obj,NULL,TO_ROOM);
-	SET_BIT(obj->extra_flags,ITEM_MAGIC);
-	SET_BIT(obj->extra_flags,ITEM_GLOW);
-	added = -2;
-    }
-
-    /* now add the enchantments */
-
-    if (obj->level < LEVEL_HERO)
-	obj->level = UMIN(LEVEL_HERO - 1,obj->level + 1);
-
-    if (ac_found)
-    {
-	for ( paf = obj->affected; paf != NULL; paf = paf->next)
-	{
-	    if ( paf->location == APPLY_AC)
-	    {
-		paf->type = sn;
-		paf->modifier += added;
-		paf->level = UMAX(paf->level,level);
-	    }
-	}
-    }
-    else /* add a new affect */
-    {
- 	paf = new_affect();
-
-	paf->where	= TO_OBJECT;
-	paf->type	= sn;
-	paf->level	= level;
-	paf->duration	= -1;
-	paf->location	= APPLY_AC;
-	paf->modifier	=  added;
-	paf->bitvector  = 0;
-    	paf->next	= obj->affected;
-    	obj->affected	= paf;
-    }
-
+    enchant_bump( obj, sn, level, APPLY_AC, result == ENCH_SUCCESS ? -1 : -2,
+		  locs[0].found, FALSE );
 }
-
-
-
 
 void spell_enchant_weapon(int sn,int level,CHAR_DATA *ch, void *vo,int target)
 {
     OBJ_DATA *obj = (OBJ_DATA *) vo;
-    AFFECT_DATA *paf;
-    int result, fail;
-    int hit_bonus, dam_bonus, added;
-    bool hit_found = FALSE, dam_found = FALSE;
+    struct enchant_loc locs[2] = { { APPLY_HITROLL, 2, FALSE }, { APPLY_DAMROLL, 2, FALSE } };
+    enum enchant_result result;
+    int fail, added;
 
     if (obj->item_type != ITEM_WEAPON)
     {
@@ -2482,53 +2533,8 @@ void spell_enchant_weapon(int sn,int level,CHAR_DATA *ch, void *vo,int target)
 	return;
     }
 
-    /* this means they have no bonus */
-    hit_bonus = 0;
-    dam_bonus = 0;
     fail = 25;	/* base 25% chance of failure */
-
-    /* find the bonuses */
-
-    if (!obj->enchanted)
-    	for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
-    	{
-            if ( paf->location == APPLY_HITROLL )
-            {
-	    	hit_bonus = paf->modifier;
-		hit_found = TRUE;
-	    	fail += 2 * (hit_bonus * hit_bonus);
- 	    }
-
-	    else if (paf->location == APPLY_DAMROLL )
-	    {
-	    	dam_bonus = paf->modifier;
-		dam_found = TRUE;
-	    	fail += 2 * (dam_bonus * dam_bonus);
-	    }
-
-	    else  /* things get a little harder */
-	    	fail += 25;
-    	}
-
-    for ( paf = obj->affected; paf != NULL; paf = paf->next )
-    {
-	if ( paf->location == APPLY_HITROLL )
-  	{
-	    hit_bonus = paf->modifier;
-	    hit_found = TRUE;
-	    fail += 2 * (hit_bonus * hit_bonus);
-	}
-
-	else if (paf->location == APPLY_DAMROLL )
-  	{
-	    dam_bonus = paf->modifier;
-	    dam_found = TRUE;
-	    fail += 2 * (dam_bonus * dam_bonus);
-	}
-
-	else /* things get a little harder */
-	    fail += 25;
-    }
+    fail += enchant_scan( obj, locs, 2, 25 );
 
     /* apply other modifiers */
     fail -= 3 * level/2;
@@ -2540,147 +2546,18 @@ void spell_enchant_weapon(int sn,int level,CHAR_DATA *ch, void *vo,int target)
 
     fail = URANGE(5,fail,95);
 
-    result = number_percent();
-
-    /* the moment of truth */
-    if (result < (fail / 5))  /* item destroyed */
-    {
-      act("$p şiddetle titreyerek patlıyor!",ch,obj,NULL,TO_CHAR);
-    	act("$p şiddetle titreyerek patlıyor!",ch,obj,NULL,TO_ROOM);
-	extract_obj(obj);
+    result = enchant_roll( ch, obj, level, fail, 2, 100 - level/5,
+	"$p şiddetle titreyerek patlıyor!",
+	"$p mavi renkte parlıyor.",
+	"$p parlak mavi renkte parlıyor!" );
+    if ( result < ENCH_SUCCESS )
 	return;
-    }
 
-    if (result < (fail / 2)) /* item disenchanted */
-    {
-	AFFECT_DATA *paf_next;
-
-  act("$p parlak bir ışık vererek yokoluyor.",ch,obj,NULL,TO_CHAR);
-	act("$p parlak bir ışık vererek yokoluyor.",ch,obj,NULL,TO_ROOM);
-	obj->enchanted = TRUE;
-
-	/* remove all affects */
-	for (paf = obj->affected; paf != NULL; paf = paf_next)
-	{
-	    paf_next = paf->next;
-	    free_affect(paf);
-	}
-	obj->affected = NULL;
-
-	/* clear all flags */
-	obj->extra_flags = 0;
-	return;
-    }
-
-    if ( result <= fail )  /* failed, no bad result */
-    {
-      send_to_char("Değişen bir şey yok.\n\r",ch);
-	return;
-    }
-
-    /* okay, move all the old flags into new vectors if we have to */
-    if (!obj->enchanted)
-    {
-	AFFECT_DATA *af_new;
-	obj->enchanted = TRUE;
-
-	for (paf = obj->pIndexData->affected; paf != NULL; paf = paf->next)
-	{
-	    af_new = new_affect();
-
-	    af_new->next = obj->affected;
-	    obj->affected = af_new;
-
-	    af_new->where	= paf->where;
-	    af_new->type 	= UMAX(0,paf->type);
-	    af_new->level	= paf->level;
-	    af_new->duration	= paf->duration;
-	    af_new->location	= paf->location;
-	    af_new->modifier	= paf->modifier;
-	    af_new->bitvector	= paf->bitvector;
-	}
-    }
-
-    if (result <= (100 - level/5))  /* success! */
-    {
-      act("$p mavi renkte parlıyor.",ch,obj,NULL,TO_CHAR);
-    	act("$p mavi renkte parlıyor.",ch,obj,NULL,TO_ROOM);
-	SET_BIT(obj->extra_flags, ITEM_MAGIC);
-	added = 1;
-    }
-
-    else  /* exceptional enchant */
-    {
-      act("$p parlak mavi renkte parlıyor!",ch,obj,NULL,TO_CHAR);
-    	act("$p parlak mavi renkte parlıyor!",ch,obj,NULL,TO_ROOM);
-	SET_BIT(obj->extra_flags,ITEM_MAGIC);
-	SET_BIT(obj->extra_flags,ITEM_GLOW);
-	added = 2;
-    }
-
-    /* now add the enchantments */
-
-    if (obj->level < LEVEL_HERO - 1)
-	obj->level = UMIN(LEVEL_HERO - 1,obj->level + 1);
-
-    if (dam_found)
-    {
-	for ( paf = obj->affected; paf != NULL; paf = paf->next)
-	{
-	    if ( paf->location == APPLY_DAMROLL)
-	    {
-		paf->type = sn;
-		paf->modifier += added;
-		paf->level = UMAX(paf->level,level);
-		if (paf->modifier > 4)
-		    SET_BIT(obj->extra_flags,ITEM_HUM);
-	    }
-	}
-    }
-    else /* add a new affect */
-    {
-	paf = new_affect();
-
-	paf->where	= TO_OBJECT;
-	paf->type	= sn;
-	paf->level	= level;
-	paf->duration	= -1;
-	paf->location	= APPLY_DAMROLL;
-	paf->modifier	=  added;
-	paf->bitvector  = 0;
-    	paf->next	= obj->affected;
-    	obj->affected	= paf;
-    }
-
-    if (hit_found)
-    {
-        for ( paf = obj->affected; paf != NULL; paf = paf->next)
-	{
-            if ( paf->location == APPLY_HITROLL)
-            {
-		paf->type = sn;
-                paf->modifier += added;
-                paf->level = UMAX(paf->level,level);
-                if (paf->modifier > 4)
-                    SET_BIT(obj->extra_flags,ITEM_HUM);
-            }
-	}
-    }
-    else /* add a new affect */
-    {
-        paf = new_affect();
-
-        paf->type       = sn;
-        paf->level      = level;
-        paf->duration   = -1;
-        paf->location   = APPLY_HITROLL;
-        paf->modifier   =  added;
-        paf->bitvector  = 0;
-        paf->next       = obj->affected;
-        obj->affected   = paf;
-    }
-
+    added = result == ENCH_SUCCESS ? 1 : 2;
+    enchant_bump( obj, sn, level, APPLY_DAMROLL, added, locs[1].found, TRUE );
+    enchant_bump( obj, sn, level, APPLY_HITROLL, added, locs[0].found, TRUE );
 }
+
 
 
 
@@ -5997,10 +5874,12 @@ void spell_tsunami( int sn, int level, CHAR_DATA *ch, void *vo,int target)
     damage(ch,victim,dam,sn,DAM_DROWNING,TRUE);
 }
 
-void spell_disenchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+/*
+ * Büyü bozma (disenchant armor/weapon): yok etme (fail/5), başarı (> fail/2:
+ * tüm etkiler ve büyülü bayraklar silinir, nesne prototipine döner).
+ */
+static void disenchant_obj( int level, CHAR_DATA *ch, OBJ_DATA *obj, const char *destroy_msg )
 {
-    OBJ_DATA *obj = (OBJ_DATA *) vo;
-    AFFECT_DATA *paf;
     int result, fail;
 
     if (obj->wear_loc != -1)
@@ -6022,28 +5901,17 @@ void spell_disenchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int targ
     /* the moment of truth */
     if (result < (fail / 5))  /* item destroyed */
     {
-      act("$p kör edici alevlerle buharlaşıyor!",ch,obj,NULL,TO_CHAR);
-    	act("$p kör edici alevlerle buharlaşıyor!",ch,obj,NULL,TO_ROOM);
+	act(destroy_msg,ch,obj,NULL,TO_CHAR);
+	act(destroy_msg,ch,obj,NULL,TO_ROOM);
 	extract_obj(obj);
 	return;
     }
 
     if (result > (fail / 2)) /* item disenchanted */
     {
-	AFFECT_DATA *paf_next;
-
-  act("$p ışıldayarak yokoluyor.",ch,obj,NULL,TO_CHAR);
+	act("$p ışıldayarak yokoluyor.",ch,obj,NULL,TO_CHAR);
 	act("$p ışıldayarak yokoluyor.",ch,obj,NULL,TO_ROOM);
-	obj->enchanted = TRUE;
-
-	/* remove all affects */
-	for (paf = obj->affected; paf != NULL; paf = paf_next)
-	{
-	    paf_next = paf->next;
-	    free_affect(paf);
-	}
-	obj->affected = NULL;
-
+	obj_strip_affects(obj);
 	obj->enchanted = FALSE;
 
 	/* clear some flags */
@@ -6053,19 +5921,28 @@ void spell_disenchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int targ
 	REMOVE_BIT(obj->extra_flags, ITEM_INVIS);
 	REMOVE_BIT(obj->extra_flags, ITEM_NODROP);
 	REMOVE_BIT(obj->extra_flags, ITEM_NOREMOVE);
-
 	return;
     }
 
     send_to_char("Hiçbir şey değişmiyor.\n\r",ch);
-    return;
+}
+
+void spell_disenchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+{
+    OBJ_DATA *obj = (OBJ_DATA *) vo;
+
+    if (obj->item_type != ITEM_ARMOR)
+    {
+      send_to_char("O bir zırh değil.\n\r",ch);
+	return;
+    }
+
+    disenchant_obj( level, ch, obj, "$p kör edici alevlerle buharlaşıyor!" );
 }
 
 void spell_disenchant_weapon( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
     OBJ_DATA *obj = (OBJ_DATA *) vo;
-    AFFECT_DATA *paf;
-    int result, fail;
 
     if (obj->item_type != ITEM_WEAPON)
     {
@@ -6073,62 +5950,7 @@ void spell_disenchant_weapon( int sn, int level, CHAR_DATA *ch, void *vo,int tar
 	return;
     }
 
-    if (obj->wear_loc != -1)
-    {
-      send_to_char("Yükseltilecek eşya envanterde taşınıyor olmalı.\n\r",ch);
-	return;
-    }
-
-    /* find the bonuses */
-    fail = 75;
-    fail -= (level - obj->level) * 5;
-    if (IS_SET(obj->extra_flags, ITEM_MAGIC))
-	fail += 25;
-
-    fail = URANGE(5,fail,95);
-
-    result = number_percent();
-
-    /* the moment of truth */
-    if (result < (fail / 5))  /* item destroyed */
-    {
-      act("$p şiddetle parlayarak patlıyor!",ch,obj,NULL,TO_CHAR);
-    	act("$p şiddetle parlayarak patlıyor!",ch,obj,NULL,TO_ROOM);
-	extract_obj(obj);
-	return;
-    }
-
-    if (result > (fail / 2)) /* item disenchanted */
-    {
-	AFFECT_DATA *paf_next;
-
-  act("$p ışıldayarak yokoluyor.",ch,obj,NULL,TO_CHAR);
-	act("$p ışıldayarak yokoluyor.",ch,obj,NULL,TO_ROOM);
-	obj->enchanted = TRUE;
-
-	/* remove all affects */
-	for (paf = obj->affected; paf != NULL; paf = paf_next)
-	{
-	    paf_next = paf->next;
-	    free_affect(paf);
-	}
-	obj->affected = NULL;
-
-	obj->enchanted = FALSE;
-
-	/* clear some flags */
-	REMOVE_BIT(obj->extra_flags, ITEM_GLOW);
-	REMOVE_BIT(obj->extra_flags, ITEM_HUM);
-	REMOVE_BIT(obj->extra_flags, ITEM_MAGIC);
-	REMOVE_BIT(obj->extra_flags, ITEM_INVIS);
-	REMOVE_BIT(obj->extra_flags, ITEM_NODROP);
-	REMOVE_BIT(obj->extra_flags, ITEM_NOREMOVE);
-
-	return;
-    }
-
-    send_to_char("Hiçbir şey değişmiyor.\n\r",ch);
-    return;
+    disenchant_obj( level, ch, obj, "$p şiddetle parlayarak patlıyor!" );
 }
 
 void spell_absorb( int sn, int level, CHAR_DATA *ch, void *vo,int target)
