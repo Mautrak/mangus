@@ -783,6 +783,64 @@ void do_put( CHAR_DATA *ch, char *argument )
 
 
 
+/*
+ * Yere bırakılan eşyanın akıbeti: iksir şişesi kırılması (yumuşak zemin ve
+ * su hariç), OPROG_DROP, suya batma, MELT_DROP, oyuncunun bıraktığı limitli
+ * eşyanın parçalanması. Tekil ve "tümü" dalları aynı yolu izler.
+ */
+static void drop_obj_effects( CHAR_DATA *ch, OBJ_DATA *obj )
+{
+    if ( obj->pIndexData->vnum == OBJ_VNUM_POTION_VIAL
+    &&   number_percent() < 40
+    &&   ch->in_room->sector_type != SECT_FOREST
+    &&   ch->in_room->sector_type != SECT_DESERT
+    &&   ch->in_room->sector_type != SECT_AIR
+    &&   !IS_WATER( ch->in_room ) )
+    {
+	if ( !IS_AFFECTED(ch, AFF_SNEAK) )
+	    act( "$p küçük parçalara bölünüyor.", ch, obj, NULL, TO_ROOM );
+	act( "$p küçük parçalara bölünüyor.", ch, obj, NULL, TO_CHAR );
+	extract_obj( obj );
+	return;
+    }
+
+    if ( IS_SET(obj->progtypes, OPROG_DROP) )
+	(obj->pIndexData->oprogs->drop_prog) (obj, ch);
+
+    if ( !may_float( obj ) && cant_float( obj ) && IS_WATER( ch->in_room ) )
+    {
+	if ( !IS_AFFECTED(ch, AFF_SNEAK) )
+	    act( "$p suyun içinde kayboluyor.", ch, obj, NULL, TO_ROOM );
+	act( "$p suyun içinde kayboluyor.", ch, obj, NULL, TO_CHAR );
+	extract_obj( obj );
+    }
+    else if ( IS_OBJ_STAT(obj, ITEM_MELT_DROP) )
+    {
+	if ( !IS_AFFECTED(ch, AFF_SNEAK) )
+	    act( "$p dumana dönüşüyor.", ch, obj, NULL, TO_ROOM );
+	act( "$p dumana dönüşüyor.", ch, obj, NULL, TO_CHAR );
+	extract_obj( obj );
+    }
+    else if ( obj->pIndexData->limit != -1 && IS_PC(ch) )
+    {
+	/* Oyuncunun bıraktığı limitli eşya kaybolur. */
+	act( "$p küçük parçalara bölünüyor.", ch, obj, NULL, TO_ROOM );
+	act( "$p küçük parçalara bölünüyor.", ch, obj, NULL, TO_CHAR );
+	extract_obj( obj );
+    }
+}
+
+/* Eşyayı elden yere bırakır, mesajları basar ve akıbetini uygular. */
+static void drop_one_obj( CHAR_DATA *ch, OBJ_DATA *obj )
+{
+    obj_from_char( obj );
+    obj_to_room( obj, ch->in_room );
+    if ( !IS_AFFECTED(ch, AFF_SNEAK) )
+	act( "$n $p bırakıyor.", ch, obj, NULL, TO_ROOM );
+    act( "$p bırakıyorsun.", ch, obj, NULL, TO_CHAR );
+    drop_obj_effects( ch, obj );
+}
+
 void do_drop( CHAR_DATA *ch, char *argument )
 {
     char arg[MAX_INPUT_LENGTH];
@@ -872,51 +930,7 @@ void do_drop( CHAR_DATA *ch, char *argument )
 	    return;
 	}
 
-	obj_from_char( obj );
-	obj_to_room( obj, ch->in_room );
-	if ( !IS_AFFECTED(ch, AFF_SNEAK) )
-  act( "$n $p bırakıyor.", ch, obj, NULL, TO_ROOM );
-act( "$p bırakıyorsun.", ch, obj, NULL, TO_CHAR );
-	if ( obj->pIndexData->vnum == OBJ_VNUM_POTION_VIAL &&
-              number_percent( ) < 40 )
-	  if ( !IS_SET(ch->in_room->sector_type, SECT_FOREST) &&
-	       !IS_SET(ch->in_room->sector_type, SECT_DESERT) &&
-	       !IS_SET(ch->in_room->sector_type, SECT_AIR) &&
-	       !IS_WATER(ch->in_room) )
-	  {
-      act( "$p küçük parçalara bölünüyor.", ch, obj, NULL,TO_ROOM );
-	    act( "$p küçük parçalara bölünüyor.", ch, obj, NULL,TO_CHAR );
-	    extract_obj( obj );
-	    return;
-	  }
-        if (IS_SET(obj->progtypes,OPROG_DROP))
-          (obj->pIndexData->oprogs->drop_prog) (obj,ch);
-
-	if ( !may_float(obj) && cant_float(obj) && IS_WATER( ch->in_room ))
-	{
-	  if ( !IS_AFFECTED(ch, AFF_SNEAK) )
-    act( "$p suyun içinde kayboluyor.", ch, obj, NULL, TO_ROOM);
-  act( "$p suyun içinde kayboluyor.", ch, obj, NULL, TO_CHAR);
-	  extract_obj( obj );
-	}
-
-	else if (IS_OBJ_STAT(obj,ITEM_MELT_DROP) )
-	{
-	  if ( !IS_AFFECTED(ch, AFF_SNEAK) )
-    act("$p dumana dönüşüyor.",ch,obj,NULL,TO_ROOM);
-  act("$p dumana dönüşüyor.",ch,obj,NULL,TO_CHAR);
-	  extract_obj(obj);
-	}
-	else if (obj->pIndexData->limit != -1)
-	{
-		//PC'ler limit esya birakirsa esya kaybolsun.
-		if(IS_PC(ch))
-		{
-			act( "$p küçük parçalara bölünüyor.", ch, obj, NULL,TO_ROOM );
-			act( "$p küçük parçalara bölünüyor.", ch, obj, NULL,TO_CHAR );
-			extract_obj( obj );
-		}
-	}
+	drop_one_obj( ch, obj );
     }
     else
     {
@@ -932,53 +946,7 @@ act( "$p bırakıyorsun.", ch, obj, NULL, TO_CHAR );
 	    &&   can_drop_obj( ch, obj ) )
 	    {
 		found = TRUE;
-		obj_from_char( obj );
-		obj_to_room( obj, ch->in_room );
-	  	if ( !IS_AFFECTED(ch, AFF_SNEAK) )
-      act( "$n $p bırakıyor.", ch, obj, NULL, TO_ROOM );
-		act( "$p bırakıyorsun.", ch, obj, NULL, TO_CHAR );
-	        if ( obj->pIndexData->vnum == OBJ_VNUM_POTION_VIAL &&
-		     number_percent( )  < 70 )
-		  if ( !IS_SET(ch->in_room->sector_type, SECT_FOREST) &&
-		       !IS_SET(ch->in_room->sector_type, SECT_DESERT) &&
-			!IS_SET(ch->in_room->sector_type, SECT_AIR) &&
-		       !IS_WATER(ch->in_room) )
-
-	  	{
-		  if ( !IS_AFFECTED(ch, AFF_SNEAK) )
-      act( "$p küçük parçalara bölünüyor.", ch, obj, NULL,TO_ROOM );
-    act( "$p küçük parçalara bölünüyor.", ch, obj, NULL,TO_CHAR );
-	          extract_obj( obj );
-	          continue;
-		}
-
-                if (IS_SET(obj->progtypes,OPROG_DROP))
-                  (obj->pIndexData->oprogs->drop_prog) (obj,ch);
-
-		if ( !may_float(obj) && cant_float(obj) && IS_WATER(ch->in_room) )
-		{
-		  if ( !IS_AFFECTED(ch, AFF_SNEAK) )
-      act( "$p suyun içinde kayboluyor.", ch, obj, NULL, TO_ROOM);
-    act("$p suyun içinde kayboluyor.", ch, obj, NULL, TO_CHAR);
-		  extract_obj( obj );
-		}
-        	else if (IS_OBJ_STAT(obj,ITEM_MELT_DROP))
-        	{
-		  if ( !IS_AFFECTED(ch, AFF_SNEAK) )
-      act("$p dumana dönüşüyor.",ch,obj,NULL,TO_ROOM);
-    act("$p dumana dönüşüyor.",ch,obj,NULL,TO_CHAR);
-            	  extract_obj(obj);
-        	}
-			else if (obj->pIndexData->limit != -1)
-			{
-				//PC'ler limit esya birakirsa esya kaybolsun.
-				if(IS_PC(ch))
-				{
-					act( "$p küçük parçalara bölünüyor.", ch, obj, NULL,TO_ROOM );
-					act( "$p küçük parçalara bölünüyor.", ch, obj, NULL,TO_CHAR );
-					extract_obj( obj );
-				}
-			}
+		drop_one_obj( ch, obj );
 	    }
 	}
 
