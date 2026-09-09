@@ -1309,7 +1309,7 @@ void spell_calm( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 	      return;
 
 	    if (IS_AFFECTED(vch,AFF_CALM) || IS_AFFECTED(vch,AFF_BERSERK)
-	    ||  is_affected(vch,skill_lookup("frenzy")))
+	    ||  is_affected(vch,msn(MSN_FRENZY)))
 	      return;
 
         send_to_char("Üzerinden bir sakinlik dalgası geçiyor.\n\r",vch);
@@ -1336,10 +1336,92 @@ void spell_calm( int sn, int level, CHAR_DATA *ch, void *vo,int target)
     }
 }
 
+/*
+ * Defedilebilir büyüler: büyü defet (dispel magic) ve büyü iptali
+ * (cancellation) aynı listeyi gezer. dispel_msg: büyü kalkınca odaya gösterilen
+ * mesaj (NULL: sessiz); cancel_msg: iptalde farklı mesaj (NULL: dispel_msg).
+ * sn ilk kullanımda bir kez çözülür.
+ */
+struct dispel_entry
+{
+    const char *skill;
+    const char *dispel_msg;
+    const char *cancel_msg;
+    int         sn;
+};
+
+static struct dispel_entry dispel_table[] =
+{
+    { "armor",		NULL, NULL, 0 },
+    { "enhanced armor",	NULL, NULL, 0 },
+    { "bless",		NULL, NULL, 0 },
+    { "blindness",	"$n artık kör değil.", NULL, 0 },
+    { "calm",		"$n eskisi kadar barışçıl görünmüyor...", "$n artık barışçıl görünmüyor...", 0 },
+    { "change sex",	"$n kendine gelmeye başlıyor.", "$n artık kendisi gibi görünüyor.", 0 },
+    { "charm person",	"$n özgür iradesini kazanıyor.", NULL, 0 },
+    { "chill touch",	"$n ısınmış görünüyor.", NULL, 0 },
+    { "curse",		NULL, NULL, 0 },
+    { "detect evil",	NULL, NULL, 0 },
+    { "detect good",	NULL, NULL, 0 },
+    { "detect hidden",	NULL, NULL, 0 },
+    { "detect invis",	NULL, NULL, 0 },
+    { "detect magic",	NULL, NULL, 0 },
+    { "faerie fire",	"$s aurası yokoluyor.", NULL, 0 },
+    { "fly",		"$n yere düşüyor!", NULL, 0 },
+    { "frenzy",		"$n eskisi kadar vahşi görünmüyor.", "$n artık vahşi görünmüyor.", 0 },
+    { "giant strength",	"$n eskisi kadar güçlü görünmüyor.", "$n gücünü yitirmiş görünüyor.", 0 },
+    { "haste",		"$n eskisi kadar çabuk hareket etmiyor.", "$n hızını yitirmiş görünüyor.", 0 },
+    { "infravision",	NULL, NULL, 0 },
+    { "invis",		"$n varlığa dönüyor.", NULL, 0 },
+    { "mass invis",	"$n varlığa dönüyor.", NULL, 0 },
+    { "pass door",	NULL, NULL, 0 },
+    { "protection evil", NULL, NULL, 0 },
+    { "protection good", NULL, NULL, 0 },
+    { "sanctuary",	"$s çevresindeki beyaz aura yokoluyor.", NULL, 0 },
+    { "shield",		"$m koruyan kalkan yokoluyor.", NULL, 0 },
+    { "sleep",		NULL, NULL, 0 },
+    { "slow",		"$n eskisi gibi yavaş hareket etmiyor.", "$n eski hızını kazanmış görünüyor.", 0 },
+    { "stone skin",	"$s derisi eski haline dönüyor.", NULL, 0 },
+    { "weaken",		"$n güçlenmiş görünüyor.", NULL, 0 },
+    { "shielding",	NULL, NULL, 0 },
+    { "fear",		NULL, NULL, 0 },
+    { "protection heat", NULL, NULL, 0 },
+    { "protection cold", NULL, NULL, 0 },
+    { "magic resistance", NULL, NULL, 0 },
+    { "hallucination",	NULL, NULL, 0 },
+    { "terangreal",	NULL, NULL, 0 },
+    { "power word stun", NULL, NULL, 0 },
+    { "corruption",	"$n daha sağlıklı görünüyor.", NULL, 0 },
+    { "web",		"$s çevresindeki ağlar eriyor.", NULL, 0 },
+    { NULL, NULL, NULL, 0 }
+};
+
+/* Tablodaki her büyü için check_dispel; en az biri kalktıysa TRUE. */
+static bool dispel_all( int level, CHAR_DATA *victim, bool cancel )
+{
+    struct dispel_entry *de;
+    bool found = FALSE;
+
+    for ( de = dispel_table; de->skill != NULL; de++ )
+    {
+	const char *msg;
+
+	if ( de->sn == 0 )
+	    de->sn = skill_lookup( de->skill );
+	if ( de->sn < 0 || !check_dispel( level, victim, de->sn ) )
+	    continue;
+
+	found = TRUE;
+	msg = ( cancel && de->cancel_msg != NULL ) ? de->cancel_msg : de->dispel_msg;
+	if ( msg != NULL )
+	    act( msg, victim, NULL, NULL, TO_ROOM );
+    }
+    return found;
+}
+
 void spell_cancellation( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
     CHAR_DATA *victim = (CHAR_DATA *) vo;
-    bool found = FALSE;
 
     level += 2;
 
@@ -1360,196 +1442,7 @@ void spell_cancellation( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 
     /* unlike dispel magic, the victim gets NO save */
 
-    /* begin running through the spells */
-
-    if (check_dispel(level,victim,skill_lookup("armor")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("enhanced armor")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("bless")))
-        found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("blindness")))
-    {
-        found = TRUE;
-        act("$n artık kör değil.",victim,NULL,NULL,TO_ROOM);
-    }
-
-    if (check_dispel(level,victim,skill_lookup("calm")))
-    {
-	found = TRUE;
-  act("$n artık barışçıl görünmüyor...",victim,NULL,NULL,TO_ROOM);
-    }
-
-    if (check_dispel(level,victim,skill_lookup("change sex")))
-    {
-        found = TRUE;
-        act("$n artık kendisi gibi görünüyor.",victim,NULL,NULL,TO_ROOM);
-    }
-
-    if (check_dispel(level,victim,skill_lookup("charm person")))
-    {
-	found = TRUE;
-  act("$n özgür iradesini kazanıyor.",victim,NULL,NULL,TO_ROOM);
-    }
-
-    if (check_dispel(level,victim,skill_lookup("chill touch")))
-    {
-	found = TRUE;
-  act("$n ısınmış görünüyor.",victim,NULL,NULL,TO_ROOM);
-    }
-
-    if (check_dispel(level,victim,skill_lookup("curse")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect evil")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect good")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect hidden")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect invis")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect hidden")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect magic")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("faerie fire")))
-    {
-      act("$s aurası yokoluyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("fly")))
-    {
-      act("$n yere düşüyor!",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("frenzy")))
-    {
-      act("$n artık vahşi görünmüyor.",victim,NULL,NULL,TO_ROOM);;
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("giant strength")))
-    {
-      act("$n gücünü yitirmiş görünüyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("haste")))
-    {
-      act("$n hızını yitirmiş görünüyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("infravision")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("invis")))
-    {
-      act("$n varlığa dönüyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("mass invis")))
-    {
-      act("$n varlığa dönüyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("pass door")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("protection evil")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("protection good")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("sanctuary")))
-    {
-      act("$s çevresindeki beyaz aura yokoluyor.",
-	    victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("shield")))
-    {
-      act("$m koruyan kalkan yokoluyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("sleep")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("slow")))
-    {
-      act("$n eski hızını kazanmış görünüyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("stone skin")))
-    {
-      act("$s derisi eski haline dönüyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("weaken")))
-    {
-      act("$n güçlenmiş görünüyor.",victim,NULL,NULL,TO_ROOM);
-        found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("shielding")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("web")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("fear")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("protection heat")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("protection cold")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("magic resistance")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("hallucination")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("terangreal")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("power word stun")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("corruption")))
-    {
-      act("$n daha sağlıklı görünüyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("web")))
-    {
-      act("$s çevresindeki ağlar eriyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (found)
+    if ( dispel_all( level, victim, TRUE ) )
         send_to_char("Tamam.\n\r",ch);
     else
         send_to_char("Büyü işe yaramadı.\n\r",ch);
@@ -1851,8 +1744,7 @@ void spell_colour_spray( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     if ( saves_spell( level, victim,DAM_LIGHT) )
 	dam /= 2;
     else
-	spell_blindness(skill_lookup("blindness"),
-	    level/2,ch,(void *) victim,TARGET_CHAR);
+	spell_blindness(gsn_blindness, level/2,ch,(void *) victim,TARGET_CHAR);
 
     damage( ch, victim, dam, sn, DAM_LIGHT,TRUE );
     return;
@@ -2134,7 +2026,7 @@ void spell_curse( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 	{
 	    AFFECT_DATA *paf;
 
-	    paf = affect_find(obj->affected,skill_lookup("bless"));
+	    paf = affect_find(obj->affected,gsn_bless);
 	    if (!saves_dispel(level,paf != NULL ? paf->level : obj->level,0))
 	    {
 		if (paf != NULL)
@@ -2479,7 +2371,7 @@ void spell_dispel_good( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 void spell_dispel_magic( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
     CHAR_DATA *victim = (CHAR_DATA *) vo;
-    bool found = FALSE;
+    bool found;
 
     if (saves_spell(level, victim,DAM_OTHER))
     {
@@ -2488,135 +2380,15 @@ void spell_dispel_magic( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 	return;
     }
 
-    /* begin running through the spells */
+    found = dispel_all( level, victim, FALSE );
 
-    if (check_dispel(level,victim,skill_lookup("armor")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("enhanced armor")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("bless")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("blindness")))
-    {
-	found = TRUE;
-  act("$n artık kör değil.",victim,NULL,NULL,TO_ROOM);
-    }
-
-    if (check_dispel(level,victim,skill_lookup("calm")))
-    {
-	found = TRUE;
-  act("$n eskisi kadar barışçıl görünmüyor...",victim,NULL,NULL,TO_ROOM);
-    }
-
-    if (check_dispel(level,victim,skill_lookup("change sex")))
-    {
-	found = TRUE;
-  act("$n kendine gelmeye başlıyor.",victim,NULL,NULL,TO_ROOM);
-    }
-
-    if (check_dispel(level,victim,skill_lookup("charm person")))
-    {
-        found = TRUE;
-        act("$n özgür iradesini kazanıyor.",victim,NULL,NULL,TO_ROOM);
-    }
-
-    if (check_dispel(level,victim,skill_lookup("chill touch")))
-    {
-        found = TRUE;
-        act("$n ısınmış görünüyor.",victim,NULL,NULL,TO_ROOM);
-    }
-
-    if (check_dispel(level,victim,skill_lookup("curse")))
-        found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect evil")))
-        found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect good")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect hidden")))
-        found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect invis")))
-        found = TRUE;
-
+    /* Bilinen eski davranış (oynanış kararı): büyü defet her zaman "Tamam." der. */
     found = TRUE;
 
-    if (check_dispel(level,victim,skill_lookup("detect hidden")))
-        found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect magic")))
-        found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("faerie fire")))
-    {
-      act("$s aurası yokoluyor.",victim,NULL,NULL,TO_ROOM);
-        found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("fly")))
-    {
-      act("$n yere düşüyor!",victim,NULL,NULL,TO_ROOM);
-        found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("frenzy")))
-    {
-      act("$n eskisi kadar vahşi görünmüyor.",victim,NULL,NULL,TO_ROOM);;
-        found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("giant strength")))
-    {
-      act("$n eskisi kadar güçlü görünmüyor.",victim,NULL,NULL,TO_ROOM);
-        found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("haste")))
-    {
-      act("$n eskisi kadar çabuk hareket etmiyor.",victim,NULL,NULL,TO_ROOM);
-        found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("infravision")))
-        found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("invis")))
-    {
-      act("$n varlığa dönüyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("mass invis")))
-    {
-      act("$n varlığa dönüyor.",victim,NULL,NULL,TO_ROOM);
-        found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("pass door")))
-        found = TRUE;
-
-
-    if (check_dispel(level,victim,skill_lookup("protection evil")))
-        found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("protection good")))
-        found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("sanctuary")))
-    {
-      act("$s çevresindeki beyaz aura yokoluyor.",
-            victim,NULL,NULL,TO_ROOM);
-        found = TRUE;
-    }
-
+    /* büyü olmadan (doğuştan/eşyadan) gelen takdis ayrıca defedilir */
     if (IS_AFFECTED(victim,AFF_SANCTUARY)
 	&& !saves_dispel(level, victim->level,-1)
-	&& !is_affected(victim,skill_lookup("sanctuary"))
+	&& !is_affected(victim,gsn_sanctuary)
 	&& !(victim->spec_fun == spec_special_guard
 		|| victim->spec_fun == spec_stalker) )
     {
@@ -2624,72 +2396,6 @@ void spell_dispel_magic( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   act("$s çevresindeki beyaz aura yokoluyor.",
             victim,NULL,NULL,TO_ROOM);
         found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("shield")))
-    {
-      act("$m koruyan kalkan yokoluyor.",victim,NULL,NULL,TO_ROOM);
-        found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("sleep")))
-        found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("slow")))
-    {
-      act("$n eskisi gibi yavaş hareket etmiyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("stone skin")))
-    {
-      act("$s derisi eski haline dönüyor.",victim,NULL,NULL,TO_ROOM);
-        found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("weaken")))
-    {
-      act("$n güçlenmiş görünüyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("shielding")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("web")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("fear")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("protection heat")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("protection cold")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("magic resistance")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("hallucination")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("terangreal")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("power word stun")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("corruption")))
-    {
-      act("$n daha sağlıklı görünüyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("web")))
-    {
-      act("$s çevresindeki ağlar eriyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
     }
 
     if (found)
@@ -3446,7 +3152,7 @@ else
 	return;
     }
 
-    if (is_affected(victim,skill_lookup("calm")))
+    if (is_affected(victim,msn(MSN_CALM)))
     {
 	if (victim == ch)
   send_to_char("Neden bir an için sakinleşmiyorsun?\n\r",ch);
@@ -3601,7 +3307,7 @@ else
 
     if (IS_AFFECTED(victim,AFF_SLOW))
     {
-	if (!check_dispel(level,victim,skill_lookup("slow")))
+	if (!check_dispel(level,victim,gsn_slow))
 	{
 	    if (victim != ch)
       send_to_char("Büyü işe yaramadı.\n\r",ch);
@@ -3786,11 +3492,7 @@ void spell_holy_word(int sn, int level, CHAR_DATA *ch, void *vo,int target)
     CHAR_DATA *vch_next;
     char buf[MAX_STRING_LENGTH];
     int dam;
-    int bless_num, curse_num, frenzy_num;
-
-    bless_num = skill_lookup("bless");
-    curse_num = skill_lookup("curse");
-    frenzy_num = skill_lookup("frenzy");
+    int bless_num = gsn_bless, curse_num = gsn_curse, frenzy_num = msn(MSN_FRENZY);
 
     act("$n kutsal sözler mırıldanıyor!",ch,NULL,NULL,TO_ROOM);
    send_to_char("Kutsal sözler mırıldanıyorsun.\n\r",ch);
@@ -4360,10 +4062,7 @@ void spell_magic_missile( int sn, int level, CHAR_DATA *ch,void *vo,int target)
 void spell_mass_healing(int sn, int level, CHAR_DATA *ch, void *vo, int target)
 {
     CHAR_DATA *gch;
-    int heal_num, refresh_num;
-
-    heal_num = skill_lookup("heal");
-    refresh_num = skill_lookup("refresh");
+    int heal_num = msn(MSN_HEAL), refresh_num = msn(MSN_REFRESH);
 
     for ( gch = ch->in_room->people; gch != NULL; gch = gch->next_in_room )
     {
@@ -4948,7 +4647,7 @@ send_to_char("Uyuşuk hissediyorsun.\n\r",victim);
 
     if (IS_AFFECTED(victim,AFF_HASTE))
     {
-	if (!check_dispel(level,victim,skill_lookup("haste")))
+	if (!check_dispel(level,victim,gsn_haste))
 	{
 	    if (victim != ch)
 		send_to_char("Büyü işe yaramadı.\n\r",ch);
@@ -7229,7 +6928,7 @@ send_to_char("Bir an için uyuşukluk hissediyorsun.\n\r",victim);
 
     if (IS_AFFECTED(victim,AFF_HASTE))
     {
-	if (!check_dispel(level,victim,skill_lookup("haste")))
+	if (!check_dispel(level,victim,gsn_haste))
 	{
 	    if (victim != ch)
       send_to_char("Büyü işe yaramadı.\n\r",ch);
