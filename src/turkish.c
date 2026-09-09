@@ -42,6 +42,7 @@ static const struct suffix_type suffix_table[] =
 };
 
 #define SUFFIX_COUNT ((int)(sizeof(suffix_table) / sizeof(suffix_table[0])))
+#define EKLER_BUFS   8
 
 static int vowel_class_cp(uint32_t cp)
 {
@@ -83,13 +84,44 @@ bool tr_ends_with_vowel(const char *word)
     return last >= 0;
 }
 
-/* Sözcük sonundaki sert ünsüzü ünlüyle başlayan ek önünde yumuşatır. */
-static void soften_last_consonant(char *word)
+static int vowel_count(const char *word)
+{
+    int n = 0, len;
+    uint32_t cp;
+
+    while ((len = utf8_decode(word, &cp)) > 0)
+    {
+        if (vowel_class_cp(cp) >= 0)
+            n++;
+        word += len;
+    }
+    return n;
+}
+
+/*
+ * Sözcük (ya da öbeğin son sözcüğü) sonundaki sert ünsüzü ünlüyle başlayan
+ * ek önünde yumuşatır: p/ç/t/k -> b/c/d/ğ, "nk" -> "ng" (renk -> rengi).
+ * Tek heceli sözcükler yumuşamaz (at -> atı, top -> topu, saç -> saçı).
+ */
+void tr_soften(char *word)
 {
     size_t len = strlen(word);
+    const char *last;
 
     if (len == 0)
         return;
+
+    if (len >= 2 && !strcmp(word + len - 2, "nk"))
+    {
+        word[len - 1] = 'g';
+        return;
+    }
+
+    last = strrchr(word, ' ');
+    last = last != NULL ? last + 1 : word;
+    if (vowel_count(last) < 2)
+        return;
+
     if (len >= 2 && !strcmp(word + len - 2, "ç"))
         strcpy(word + len - 2, "c");
     else if (word[len - 1] == 'p')
@@ -102,9 +134,11 @@ static void soften_last_consonant(char *word)
 
 const char *ekler(CHAR_DATA *to, CHAR_DATA *ch, const char *format)
 {
-    static char bufs[4][MAX_STRING_LENGTH];
+    /* act() tek biçimde en çok EKLER_BUFS ek isteyebilir; sonuçlar sırayla
+       bu döngüsel tamponlarda tutulur ve act'in kendi tamponuna kopyalanır. */
+    static char bufs[EKLER_BUFS][MAX_STRING_LENGTH];
     static int  which;
-    char *buf = bufs[which = (which + 1) % 4];
+    char *buf = bufs[which = (which + 1) % EKLER_BUFS];
     const struct suffix_type *s = &suffix_table[1];
     const char *name;
     int i, cls;
@@ -128,8 +162,8 @@ const char *ekler(CHAR_DATA *to, CHAR_DATA *ch, const char *format)
     cls  = tr_vowel_class(name);
     snprintf(buf, MAX_STRING_LENGTH, "%s%s", name, IS_NPC(ch) ? "" : "'");
 
-    if (IS_NPC(ch) && s->kaynastirma[0] != '\0')
-        soften_last_consonant(buf);
+    if (IS_NPC(ch) && s->kaynastirma[0] != '\0' && !tr_ends_with_vowel(name))
+        tr_soften(buf);
 
     if (cls < 0)
         cls = 0;
