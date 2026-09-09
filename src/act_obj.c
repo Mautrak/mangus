@@ -52,6 +52,7 @@
 #include <stdlib.h>
 #include "merc.h"
 #include "bot.h"
+#include "turkish.h"
 
 /* command procedures needed */
 DECLARE_DO_FUN(do_split		);
@@ -3161,63 +3162,107 @@ int get_cost( CHAR_DATA *keeper, OBJ_DATA *obj, bool fBuy )
 
 
 
-void do_buy( CHAR_DATA *ch, char *argument )
-{
-    char buf[MAX_STRING_LENGTH];
-    int cost,roll;
+/* Banka senediyle ödemede komisyon (yüzde). */
+#define BANK_NOTE_FEE_PCT	5
 
-    if ( argument[0] == '\0' )
+/* Senetle ödenecek tutar: komisyon eklenmiş, aşağı yuvarlanmış. */
+static int bank_note_cost( int cost )
+{
+    return (int) ( (long) cost * ( 100 + BANK_NOTE_FEE_PCT ) / 100 );
+}
+
+/* Nakit ya da (oyuncu için) senetle karşılanabilir mi? */
+static bool can_afford( CHAR_DATA *ch, int cost )
+{
+    return ch->silver >= cost
+	|| ( !IS_NPC(ch) && ch->pcdata->bank_s >= bank_note_cost( cost ) );
+}
+
+/*
+ * Ödemeyi yapar: önce nakit, yetmezse komisyonlu banka senedi. Ödeme
+ * yapılamazsa FALSE döner (çağıran can_afford ile önceden sormalı).
+ */
+static bool pay_cost( CHAR_DATA *ch, int cost )
+{
+    if ( ch->silver >= cost )
     {
-      send_to_char("Ne satın alacaksın?\n\r", ch );
+	deduct_cost( ch, cost );
+	return TRUE;
+    }
+
+    if ( !IS_NPC(ch) && ch->pcdata->bank_s >= bank_note_cost( cost ) )
+    {
+	ch->pcdata->bank_s -= bank_note_cost( cost );
+	printf_to_char( ch, "Ödemeyi yüzde %d komisyonla banka senedi imzalayarak yapıyorsun.\n\r",
+			BANK_NOTE_FEE_PCT );
+	return TRUE;
+    }
+
+    return FALSE;
+}
+
+/* Hayvan dükkânının satış odası: bir sonraki vnum (Thalos istisnasıyla). */
+static ROOM_INDEX_DATA *pet_shop_room( ROOM_INDEX_DATA *shop )
+{
+    if ( shop->vnum == 9621 )
+	return get_room_index( 9706 );
+    return get_room_index( shop->vnum + 1 );
+}
+
+/* Oyuncu adına yönelme eki: "Ali'ye", "Ahmet'e", "Ayşe'ye". */
+static const char *name_dative( const char *name, char *buf, size_t n )
+{
+    int cls = tr_vowel_class( name );
+
+    snprintf( buf, n, "%s'%s%s", name,
+	      tr_ends_with_vowel( name ) ? "y" : "",
+	      ( cls == 1 || cls == 3 ) ? "e" : "a" );
+    return buf;
+}
+
+static void buy_pet( CHAR_DATA *ch, char *argument )
+{
+    char arg[MAX_INPUT_LENGTH];
+    char buf[MAX_STRING_LENGTH];
+    char namebuf[MAX_INPUT_LENGTH];
+    CHAR_DATA *pet;
+    ROOM_INDEX_DATA *pRoomIndexNext;
+    ROOM_INDEX_DATA *in_room;
+    int cost, roll;
+
+    /* added by kio */
+    smash_tilde(argument);
+
+    if ( IS_NPC(ch) )
+	return;
+
+    argument = one_argument(argument,arg);
+
+    pRoomIndexNext = pet_shop_room( ch->in_room );
+    if ( pRoomIndexNext == NULL )
+    {
+	bug( "Do_buy: bad pet shop at vnum %d.", ch->in_room->vnum );
+      send_to_char( "Üzgünüm, buradan satın alamazsın.\n\r", ch );
 	return;
     }
 
-    if ( IS_SET(ch->in_room->room_flags, ROOM_PET_SHOP) )
+    in_room     = ch->in_room;
+    ch->in_room = pRoomIndexNext;
+    pet         = get_char_room( ch, arg );
+    ch->in_room = in_room;
+
+    if ( pet == NULL || !IS_SET(pet->act, ACT_PET) || !IS_NPC(pet) )
     {
-	char arg[MAX_INPUT_LENGTH];
-	char buf[MAX_STRING_LENGTH];
-	CHAR_DATA *pet;
-	ROOM_INDEX_DATA *pRoomIndexNext;
-	ROOM_INDEX_DATA *in_room;
-
-	/* added by kio */
-	smash_tilde(argument);
-
-	if ( IS_NPC(ch) )
-	    return;
-
-	argument = one_argument(argument,arg);
-
-	/* hack to make new thalos pets work */
-
-	if (ch->in_room->vnum == 9621)
-	    pRoomIndexNext = get_room_index(9706);
-	else
-	    pRoomIndexNext = get_room_index( ch->in_room->vnum + 1 );
-	if ( pRoomIndexNext == NULL )
-	{
-	    bug( "Do_buy: bad pet shop at vnum %d.", ch->in_room->vnum );
-      send_to_char( "Üzgünüm, buradan satın alamazsın.\n\r", ch );
-	    return;
-	}
-
-	in_room     = ch->in_room;
-	ch->in_room = pRoomIndexNext;
-	pet         = get_char_room( ch, arg );
-	ch->in_room = in_room;
-
-	if ( pet == NULL || !IS_SET(pet->act, ACT_PET) || !IS_NPC(pet) )
-	{
     send_to_char( "Üzgünüm, buradan satın alamazsın.\n\r", ch );
-	    return;
-	}
+	return;
+    }
 
-	if (IS_SET(pet->act,ACT_RIDEABLE)
-		&& ch->cabal == CABAL_KNIGHT
-		&& !MOUNTED(ch) )
-	{
- 	 cost = 10 * pet->level * pet->level;
+    cost = 10 * pet->level * pet->level;
 
+    if (IS_SET(pet->act,ACT_RIDEABLE)
+	&& ch->cabal == CABAL_KNIGHT
+	&& !MOUNTED(ch) )
+    {
 	 if ( ch->silver < cost )
 	 {
      send_to_char( "Onu satın almaya gücün yetmez.\n\r", ch );
@@ -3240,255 +3285,243 @@ void do_buy( CHAR_DATA *ch, char *argument )
    send_to_char( "Bineğin hayırlı olsun.\n\r", ch );
 	 act( "$n binek olarak $N satın aldı.", ch, NULL, pet, TO_ROOM );
 	 return;
-	}
+    }
 
-	if ( ch->pet != NULL )
-	{
+    if ( ch->pet != NULL )
+    {
     send_to_char("Zaten bir hayvanın var.\n\r",ch);
-	    return;
-	}
-
- 	cost = 10 * pet->level * pet->level;
-
-	if ( ch->level < pet->level )
-	{
-	    send_to_char(
-        "O hayvana hükmedecek güçte değilsin.\n\r", ch );
-	    return;
-	}
-
-	/* haggle */
-	roll = number_percent();
-	if (roll < get_skill(ch,gsn_haggle))
-	{
-	    cost -= cost / 2 * roll / 100;
-      snprintf(buf, sizeof(buf),"pazarlık ederek fiyatı %d sikkeye çekiyorsun.\n\r",cost);
-	    send_to_char(buf,ch);
-	    check_improve(ch,gsn_haggle,TRUE,4);
-
-	}
-
-	if ( ch->silver < cost && ch->pcdata->bank_s < (int)((float)cost*1.05))
-	{
-    	send_to_char( "Onu satın almaya gücün yetmez.\n\r", ch );
-	    return;
-	}
-
-	if ( ch->silver >= cost )
-	{
-		deduct_cost(ch,cost);
-	}
-	else if(ch->pcdata->bank_s >= (int)((float)cost*1.05))
-	{
-		ch->pcdata->bank_s -= (int)((float)cost*1.05);
-		printf_to_char(ch,"Ödemeyi yüzde 5 komisyonla banka senedi imzalayarak yapıyorsun.\n\r");
-	}
-	else
-	{
-		send_to_char( "Bir ödeme sorunu çıktı ve onu satın almaya gücün yetmiyor.\n\r", ch );
-	    return;
-	}
-
-
-	pet			= create_mobile( pet->pIndexData , NULL);
-	SET_BIT(pet->act, ACT_PET);
-	SET_BIT(pet->affected_by, AFF_CHARM);
-	pet->comm = COMM_NOTELL|COMM_NOSHOUT|COMM_NOCHANNELS;
-
-	argument = one_argument( argument, arg );
-	if ( arg[0] != '\0' )
-	{
-	    snprintf(buf, sizeof(buf), "%s %s", pet->name, arg );
-	    free_string( pet->name );
-	    pet->name = str_dup( buf );
-	}
-
-  snprintf(buf, sizeof(buf), "%sin tasması diyor ki 'Ben %s'e aitim'.\n\r",pet->description, ch->name );
-	free_string( pet->description );
-	pet->description = str_dup( buf );
-
-	char_to_room( pet, ch->in_room );
-	add_follower( pet, ch );
-	pet->leader = ch;
-	ch->pet = pet;
-  send_to_char( "Hayvanın hayırlı olsun.\n\r", ch );
-	act( "$n $N satın aldı.", ch, NULL, pet, TO_ROOM );
 	return;
     }
-    else
+
+    if ( ch->level < pet->level )
     {
-	CHAR_DATA *keeper;
-	OBJ_DATA *obj,*t_obj;
-	char arg[MAX_INPUT_LENGTH];
-	int number, count = 1;
+	send_to_char(
+        "O hayvana hükmedecek güçte değilsin.\n\r", ch );
+	return;
+    }
 
-	if ( ( keeper = find_keeper( ch ) ) == NULL )
-	    return;
+    /* haggle */
+    roll = number_percent();
+    if (roll < get_skill(ch,gsn_haggle))
+    {
+	cost -= cost / 2 * roll / 100;
+      snprintf(buf, sizeof(buf),"pazarlık ederek fiyatı %d sikkeye çekiyorsun.\n\r",cost);
+	send_to_char(buf,ch);
+	check_improve(ch,gsn_haggle,TRUE,4);
+    }
 
-	number = mult_argument(argument,arg);
-	if ( number < -1 || number > 100)
-	{
+    if ( !can_afford( ch, cost ) )
+    {
+    	send_to_char( "Onu satın almaya gücün yetmez.\n\r", ch );
+	return;
+    }
+
+    if ( !pay_cost( ch, cost ) )
+    {
+	send_to_char( "Bir ödeme sorunu çıktı ve onu satın almaya gücün yetmiyor.\n\r", ch );
+	return;
+    }
+
+    pet			= create_mobile( pet->pIndexData , NULL);
+    SET_BIT(pet->act, ACT_PET);
+    SET_BIT(pet->affected_by, AFF_CHARM);
+    pet->comm = COMM_NOTELL|COMM_NOSHOUT|COMM_NOCHANNELS;
+
+    argument = one_argument( argument, arg );
+    if ( arg[0] != '\0' )
+    {
+	snprintf(buf, sizeof(buf), "%s %s", pet->name, arg );
+	free_string( pet->name );
+	pet->name = str_dup( buf );
+    }
+
+    snprintf( buf, sizeof(buf), "%sTasmasında 'Ben %s aitim' yazıyor.\n\r",
+	      pet->description, name_dative( ch->name, namebuf, sizeof(namebuf) ) );
+    free_string( pet->description );
+    pet->description = str_dup( buf );
+
+    char_to_room( pet, ch->in_room );
+    add_follower( pet, ch );
+    pet->leader = ch;
+    ch->pet = pet;
+  send_to_char( "Hayvanın hayırlı olsun.\n\r", ch );
+    act( "$n $N satın aldı.", ch, NULL, pet, TO_ROOM );
+}
+
+static void buy_item( CHAR_DATA *ch, char *argument )
+{
+    char buf[MAX_STRING_LENGTH];
+    char arg[MAX_INPUT_LENGTH];
+    CHAR_DATA *keeper;
+    OBJ_DATA *obj,*t_obj;
+    int number, count = 1;
+    int cost, roll;
+
+    if ( ( keeper = find_keeper( ch ) ) == NULL )
+	return;
+
+    number = mult_argument(argument,arg);
+    if ( number < -1 || number > 100)
+    {
     act("$n sana anlatıyor 'Gerçekçi Ol!", keeper, NULL, ch, TO_VICT );
-	    ch->reply = keeper;
-	    return;
-	}
+	ch->reply = keeper;
+	return;
+    }
 
-	obj  = get_obj_keeper( ch,keeper, arg );
-	cost = get_cost( keeper, obj, TRUE );
+    obj  = get_obj_keeper( ch,keeper, arg );
+    cost = get_cost( keeper, obj, TRUE );
 
-	if ( cost <= 0 || !can_see_obj( ch, obj ) )
-	{
+    if ( cost <= 0 || !can_see_obj( ch, obj ) )
+    {
     act( "$n 'Ondan satmıyorum, 'liste'yi dene' dedi.",
   keeper, NULL, ch, TO_VICT );
-	    ch->reply = keeper;
-	    return;
-	}
+	ch->reply = keeper;
+	return;
+    }
 
-	if (!IS_OBJ_STAT(obj,ITEM_INVENTORY))
-	{
-	    for (t_obj = obj->next_content;
+    if (!IS_OBJ_STAT(obj,ITEM_INVENTORY))
+    {
+	for (t_obj = obj->next_content;
 	     	 count < number && t_obj != NULL;
 	     	 t_obj = t_obj->next_content)
-	    {
+	{
 	    	if (t_obj->pIndexData == obj->pIndexData
 	    	&&  !str_cmp(t_obj->short_descr,obj->short_descr))
 		    count++;
 	    	else
 		    break;
-	    }
+	}
 
-	    if (count < number)
-	    {
+	if (count < number)
+	{
         act("$n 'Stoğumda o kadar yok' dedi.",
 		    keeper,NULL,ch,TO_VICT);
 	    	ch->reply = keeper;
 	    	return;
-	    }
 	}
-	else if (obj->pIndexData->limit != -1)
+    }
+    else if (obj->pIndexData->limit != -1)
+    {
+	count = 1 + obj->pIndexData->limit - obj->pIndexData->count;
+	if (count < 1)
 	{
-	    count = 1 + obj->pIndexData->limit - obj->pIndexData->count;
-	    if (count < 1)
-	    {
         act("$n anlatıyor 'Tanrılar onu satmamı onaylamaz.'",
 		    keeper,NULL,ch,TO_VICT);
 	    	ch->reply = keeper;
 	    	return;
-	    }
-	    if (count < number)
-	    {
+	}
+	if (count < number)
+	{
         act("$n 'Stoğumda o kadar yok' dedi.",
 		    keeper,NULL,ch,TO_VICT);
 	    	ch->reply = keeper;
 	    	return;
-	    }
-		if(IS_PC(ch))
-		{
-			// oyuncu katlini kabul etmeyen karakter limit esya alamasin
-			if(ch->pcdata->oyuncu_katli == 0)
-			{
-				act("$n 'Sana limit eşya satamam' dedi.",keeper,NULL,ch,TO_VICT);
-				ch->reply = keeper;
-				return;
-			}
-		}
-      if( !limit_kontrol(ch,obj) )
-      {
-  			return;
-      }
 	}
-
-	if ( obj->level > ch->level )
+	/* oyuncu katlini kabul etmeyen karakter limitli eşya alamaz */
+	if ( IS_PC(ch) && ch->pcdata->oyuncu_katli == 0 )
 	{
-    act( "$n anlatıyor 'Henüz $p kullanamazsın'.",
-		keeper, obj, ch, TO_VICT );
+	    act("$n 'Sana limit eşya satamam' dedi.",keeper,NULL,ch,TO_VICT);
 	    ch->reply = keeper;
 	    return;
 	}
+	if ( !limit_kontrol( ch, obj ) )
+	    return;
+    }
 
-	if (ch->carry_number +  number * get_obj_number(obj) > can_carry_n(ch))
-	{
+    if ( obj->level > ch->level )
+    {
+    act( "$n anlatıyor 'Henüz $p kullanamazsın'.",
+		keeper, obj, ch, TO_VICT );
+	ch->reply = keeper;
+	return;
+    }
+
+    if (ch->carry_number +  number * get_obj_number(obj) > can_carry_n(ch))
+    {
     send_to_char("Bu kadar çok şeyi taşıyamazsın.\n\r", ch );
-	    return;
-	}
+	return;
+    }
 
-	if ( ch->carry_weight + number * get_obj_weight(obj) > can_carry_w(ch))
-	{
+    if ( ch->carry_weight + number * get_obj_weight(obj) > can_carry_w(ch))
+    {
     send_to_char( "Bu kadar ağırlığı taşıyamazsın.\n\r", ch );
-	    return;
-	}
+	return;
+    }
 
-	/* haggle */
-	roll = number_percent();
-	if (!IS_OBJ_STAT(obj,ITEM_SELL_EXTRACT)
-	&& roll < get_skill(ch,gsn_haggle))
-	{
-	    cost -= obj->cost / 2 * roll / 100;
+    /* haggle */
+    roll = number_percent();
+    if (!IS_OBJ_STAT(obj,ITEM_SELL_EXTRACT)
+    && roll < get_skill(ch,gsn_haggle))
+    {
+	cost -= obj->cost / 2 * roll / 100;
       act("$N ile pazarlık ediyorsun.",ch,NULL,keeper,TO_CHAR);
-	    check_improve(ch,gsn_haggle,TRUE,4);
-	}
+	check_improve(ch,gsn_haggle,TRUE,4);
+    }
 
-	if ( ch->silver < ( cost * number ) && ch->pcdata->bank_s < (int)((float)cost*(float)number*1.05))
-	{
+    if ( !can_afford( ch, cost * number ) )
+    {
     	if (number > 1)
 		act("$n anlatıyor 'Bu kadar çok alacak paran yok.",keeper,obj,ch,TO_VICT);
 	    else
 	    	act( "$n anlatıyor '$p satın alacak paran yok'.",keeper, obj, ch, TO_VICT );
-	    ch->reply = keeper;
-	    return;
-	}
+	ch->reply = keeper;
+	return;
+    }
 
-	if (number > 1)
-	{
+    if (number > 1)
+    {
     snprintf(buf, sizeof(buf),"$n $p[%d] satın alıyor.",number);
     act(buf,ch,obj,NULL,TO_ROOM);
     snprintf(buf, sizeof(buf),"%d akçeye $p[%d] satın alıyorsun.",cost * number,number);
     act(buf,ch,obj,NULL,TO_CHAR);
-	}
-	else
-	{
+    }
+    else
+    {
     act( "$n $p satın alıyor.", ch, obj, NULL, TO_ROOM );
     snprintf(buf, sizeof(buf),"%d akçeye $p satın alıyorsun.",cost);
-	    act( buf, ch, obj, NULL, TO_CHAR );
-	}
-	
-	if ( ch->silver >= ( cost * number ) )
-	{
-		deduct_cost(ch,cost * number);
-	}
-	else if(ch->pcdata->bank_s >= (int)((float)cost*(float)number*1.05))
-	{
-		ch->pcdata->bank_s -= (int)((float)cost*(float)number*1.05);
-		printf_to_char(ch,"Ödemeyi yüzde 5 komisyonla banka senedi imzalayarak yapıyorsun.\n\r");
-	}
+	act( buf, ch, obj, NULL, TO_CHAR );
+    }
+
+    if ( !pay_cost( ch, cost * number ) )
+    {
+	send_to_char( "Bir ödeme sorunu çıktı ve satın almaya gücün yetmiyor.\n\r", ch );
+	return;
+    }
+
+    keeper->silver += cost * number;
+
+    for (count = 0; count < number; count++)
+    {
+	if ( IS_SET( obj->extra_flags, ITEM_INVENTORY ) )
+	    t_obj = create_object( obj->pIndexData, obj->level );
 	else
 	{
-		send_to_char( "Bir ödeme sorunu çıktı ve satın almaya gücün yetmiyor.\n\r", ch );
-	    return;
+	    t_obj = obj;
+	    obj = obj->next_content;
+	    obj_from_char( t_obj );
 	}
 
-	keeper->silver += cost * number;
-
-
-	for (count = 0; count < number; count++)
-	{
-	    if ( IS_SET( obj->extra_flags, ITEM_INVENTORY ) )
-	    	t_obj = create_object( obj->pIndexData, obj->level );
-	    else
-	    {
-		t_obj = obj;
-		obj = obj->next_content;
-	    	obj_from_char( t_obj );
-	    }
-
-	    if (t_obj->timer > 0 && !IS_OBJ_STAT(t_obj,ITEM_HAD_TIMER))
-	    	t_obj->timer = 0;
-	    REMOVE_BIT(t_obj->extra_flags,ITEM_HAD_TIMER);
-	    obj_to_char( t_obj, ch );
-	    if (cost < t_obj->cost)
-	    	t_obj->cost = cost;
-	}
+	if (t_obj->timer > 0 && !IS_OBJ_STAT(t_obj,ITEM_HAD_TIMER))
+	    t_obj->timer = 0;
+	REMOVE_BIT(t_obj->extra_flags,ITEM_HAD_TIMER);
+	obj_to_char( t_obj, ch );
+	if (cost < t_obj->cost)
+	    t_obj->cost = cost;
     }
+}
+
+void do_buy( CHAR_DATA *ch, char *argument )
+{
+    if ( argument[0] == '\0' )
+    {
+      send_to_char("Ne satın alacaksın?\n\r", ch );
+	return;
+    }
+
+    if ( IS_SET(ch->in_room->room_flags, ROOM_PET_SHOP) )
+	buy_pet( ch, argument );
+    else
+	buy_item( ch, argument );
 }
 
 
@@ -3503,13 +3536,7 @@ void do_list( CHAR_DATA *ch, char *argument )
 	CHAR_DATA *pet;
 	bool found;
 
-        /* hack to make new thalos pets work */
-
-        if (ch->in_room->vnum == 9621)
-            pRoomIndexNext = get_room_index(9706);
-        else
-            pRoomIndexNext = get_room_index( ch->in_room->vnum + 1 );
-
+	pRoomIndexNext = pet_shop_room( ch->in_room );
 	if ( pRoomIndexNext == NULL )
 	{
 	    bug( "Do_list: bad pet shop at vnum %d.", ch->in_room->vnum );
