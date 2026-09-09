@@ -50,7 +50,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include "merc.h"
 #include "recycle.h"
 
@@ -62,33 +61,32 @@ void save_bans(void)
     BAN_DATA *pban;
     FILE *fp;
     bool found = FALSE;
-    char buf[160];
 
     fclose( fpReserve );
     if ( ( fp = fopen( BAN_FILE, "w" ) ) == NULL )
     {
-        perror( BAN_FILE );
+	perror( BAN_FILE );
+	bug( "save_bans: yasak dosyası yazılamadı.", 0 );
+    }
+    else
+    {
+	for ( pban = ban_list; pban != NULL; pban = pban->next )
+	{
+	    if ( IS_SET(pban->ban_flags, BAN_PERMANENT) )
+	    {
+		found = TRUE;
+		fprintf( fp, "%-20s %-2d %s\n", pban->name, pban->level,
+		    print_flags(pban->ban_flags) );
+	    }
+	}
+	fclose( fp );
+	if ( !found )
+	    remove( BAN_FILE );
     }
 
-    for (pban = ban_list; pban != NULL; pban = pban->next)
-    {
-	if (IS_SET(pban->ban_flags,BAN_PERMANENT))
-	{
-	    found = TRUE;
-	    snprintf(buf, sizeof(buf), "%-20s %-2d %s\n\r", pban->name, pban->level,print_flags(pban->ban_flags) );
-	    dump_to_scr( buf );
-	    fprintf(fp,"%-20s %-2d %s\n",pban->name,pban->level,
-		print_flags(pban->ban_flags));
-	}
-     }
-
-     fclose(fp);
-     fpReserve = fopen( NULL_FILE, "r" );
-     if (!found)
-	unlink(BAN_FILE);
-
-     if ( fpReserve == NULL )
-	bug("ban_save: can't open null file.", 0 );
+    fpReserve = fopen( NULL_FILE, "r" );
+    if ( fpReserve == NULL )
+	bug( "save_bans: null dosyası açılamadı.", 0 );
 }
 
 void load_bans(void)
@@ -128,9 +126,12 @@ bool check_ban(char *site,int type)
 {
     BAN_DATA *pban;
     char host[MAX_STRING_LENGTH];
+    size_t i;
 
-    strcpy(host,capitalize(site));
-    host[0] = LOWER(host[0]);
+    /* Host adları ASCII'dir: tümünü küçük harfe çevir. */
+    for ( i = 0; site[i] != '\0' && i < sizeof(host) - 1; i++ )
+	host[i] = LOWER(site[i]);
+    host[i] = '\0';
 
     for ( pban = ban_list; pban != NULL; pban = pban->next )
     {
@@ -154,6 +155,44 @@ bool check_ban(char *site,int type)
     return FALSE;
 }
 
+/*
+ * Adı eşleşen yasakları listeden çıkarır.
+ * Dönüş: BAN_RM_NONE (eşleşme yok), BAN_RM_HIGHER (daha yüksek seviyeli
+ * biri koymuş, hiçbir şey silinmedi), BAN_RM_DONE (silindi).
+ */
+#define BAN_RM_NONE   0
+#define BAN_RM_HIGHER 1
+#define BAN_RM_DONE   2
+
+static int ban_remove( const char *name, int trust )
+{
+    BAN_DATA *pban, *prev, *next;
+    int result = BAN_RM_NONE;
+
+    for ( pban = ban_list; pban != NULL; pban = pban->next )
+	if ( !str_cmp( name, pban->name ) && pban->level > trust )
+	    return BAN_RM_HIGHER;
+
+    prev = NULL;
+    for ( pban = ban_list; pban != NULL; pban = next )
+    {
+	next = pban->next;
+	if ( str_cmp( name, pban->name ) )
+	{
+	    prev = pban;
+	    continue;
+	}
+
+	if ( prev == NULL )
+	    ban_list = next;
+	else
+	    prev->next = next;
+	free_ban( pban );
+	result = BAN_RM_DONE;
+    }
+
+    return result;
+}
 
 void ban_site(CHAR_DATA *ch, char *argument, bool fPerm)
 {
@@ -161,7 +200,7 @@ void ban_site(CHAR_DATA *ch, char *argument, bool fPerm)
     char arg1[MAX_INPUT_LENGTH], arg2[MAX_INPUT_LENGTH];
     char *name;
     BUFFER *buffer;
-    BAN_DATA *pban, *prev;
+    BAN_DATA *pban;
     bool prefix = FALSE,suffix = FALSE;
     int type;
 
@@ -177,7 +216,7 @@ void ban_site(CHAR_DATA *ch, char *argument, bool fPerm)
   	}
 	buffer = new_buf();
 
-        add_buf(buffer,"Banned sites  level  type     status\n\r");
+        add_buf(buffer,"Yasaklı siteler seviye tür     durum\n\r");
         for (pban = ban_list;pban != NULL;pban = pban->next)
         {
 	    snprintf(buf2, sizeof(buf2),"%s%s%s",
@@ -190,7 +229,7 @@ void ban_site(CHAR_DATA *ch, char *argument, bool fPerm)
 		IS_SET(pban->ban_flags,BAN_PLAYER)  ? "player" :
 		IS_SET(pban->ban_flags,BAN_PERMIT)  ? "permit"  :
 		IS_SET(pban->ban_flags,BAN_ALL)     ? "all"	: "",
-	    	IS_SET(pban->ban_flags,BAN_PERMANENT) ? "perm" : "temp");
+	    	IS_SET(pban->ban_flags,BAN_PERMANENT) ? "kalıcı" : "geçici");
 	    add_buf(buffer,buf);
         }
 
@@ -210,7 +249,7 @@ void ban_site(CHAR_DATA *ch, char *argument, bool fPerm)
 	type = BAN_PERMIT;
     else
     {
-	send_to_char("Acceptable ban types are all, newbies, player, and permit.\n\r",
+	send_to_char("Geçerli yasak türleri: all, newbies, player, permit.\n\r",
 	    ch);
 	return;
     }
@@ -223,37 +262,22 @@ void ban_site(CHAR_DATA *ch, char *argument, bool fPerm)
 	name++;
     }
 
-    if (name[strlen(name) - 1] == '*')
+    if (name[0] != '\0' && name[strlen(name) - 1] == '*')
     {
 	suffix = TRUE;
 	name[strlen(name) - 1] = '\0';
     }
 
-    if (strlen(name) == 0)
+    if (name[0] == '\0')
     {
 	send_to_char("Bir şeyi yasaklaman gerekiyor.\n\r",ch);
 	return;
     }
 
-    prev = NULL;
-    for ( pban = ban_list; pban != NULL; prev = pban, pban = pban->next )
+    if ( ban_remove( name, get_trust(ch) ) == BAN_RM_HIGHER )
     {
-        if (!str_cmp(name,pban->name))
-        {
-	    if (pban->level > get_trust(ch))
-	    {
-            	send_to_char( "Bu yasak daha yüksek seviyeli biri tarafından koyulmuş.\n\r", ch );
-            	return;
-	    }
-	    else
-	    {
-		if (prev == NULL)
-		    ban_list = pban->next;
-		else
-		    prev->next = pban->next;
-		free_ban(pban);
-	    }
-        }
+	send_to_char( "Bu yasak daha yüksek seviyeli biri tarafından koyulmuş.\n\r", ch );
+	return;
     }
 
     pban = new_ban();
@@ -273,9 +297,7 @@ void ban_site(CHAR_DATA *ch, char *argument, bool fPerm)
     pban->next  = ban_list;
     ban_list    = pban;
     save_bans();
-    snprintf(buf, sizeof(buf),"%s has been banned.\n\r",pban->name);
-    send_to_char( buf, ch );
-    return;
+    printf_to_char( ch, "%s yasaklandı.\n\r", pban->name );
 }
 
 void do_ban(CHAR_DATA *ch, char *argument)
@@ -291,42 +313,26 @@ void do_permban(CHAR_DATA *ch, char *argument)
 void do_allow( CHAR_DATA *ch, char *argument )
 {
     char arg[MAX_INPUT_LENGTH];
-    char buf[MAX_STRING_LENGTH];
-    BAN_DATA *prev;
-    BAN_DATA *curr;
 
     one_argument( argument, arg );
 
     if ( arg[0] == '\0' )
     {
-        send_to_char( "Remove which site from the ban list?\n\r", ch );
+        send_to_char( "Hangi site yasak listesinden çıkarılsın?\n\r", ch );
         return;
     }
 
-    prev = NULL;
-    for ( curr = ban_list; curr != NULL; prev = curr, curr = curr->next )
+    switch ( ban_remove( arg, get_trust(ch) ) )
     {
-        if ( !str_cmp( arg, curr->name ) )
-        {
-	    if (curr->level > get_trust(ch))
-	    {
-		send_to_char(
-		   "You are not powerful enough to lift that ban.\n\r",ch);
-		return;
-	    }
-            if ( prev == NULL )
-                ban_list   = ban_list->next;
-            else
-                prev->next = curr->next;
-
-            free_ban(curr);
-	    snprintf(buf, sizeof(buf),"Ban on %s lifted.\n\r",arg);
-            send_to_char( buf, ch );
-	    save_bans();
-            return;
-        }
+    case BAN_RM_HIGHER:
+	send_to_char( "Bu yasağı kaldıracak kadar güçlü değilsin.\n\r", ch );
+	return;
+    case BAN_RM_DONE:
+	printf_to_char( ch, "%s üzerindeki yasak kaldırıldı.\n\r", arg );
+	save_bans();
+	return;
+    default:
+	send_to_char( "Bu site yasaklı değil.\n\r", ch );
+	return;
     }
-
-    send_to_char( "Bu site yasaklı değil.\n\r", ch );
-    return;
 }
