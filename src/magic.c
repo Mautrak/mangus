@@ -1839,119 +1839,83 @@ void spell_create_water( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
 
 
-void spell_cure_blindness(int sn,int level,CHAR_DATA *ch,void *vo,int target)
+/*
+ * Etki kaldıran tedavi büyüleri (körlük, hastalık, zehir): etki yoksa
+ * none_* mesajı; check_dispel başarılıysa kurbana ve odaya mesaj.
+ */
+static void cure_affect_spell( int level, CHAR_DATA *ch, CHAR_DATA *victim, int gsn,
+			       const char *none_self, const char *none_other,
+			       const char *cured_msg, const char *room_msg )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-
-    if ( !is_affected( victim, gsn_blindness ) )
+    if ( !is_affected( victim, gsn ) )
     {
 	if (victim == ch)
-  send_to_char("Kör değilsin.\n\r",ch);
-else
-  act("$N kör görünmüyor.",ch,NULL,victim,TO_CHAR);
+	    send_to_char(none_self,ch);
+	else
+	    act(none_other,ch,NULL,victim,TO_CHAR);
 	return;
     }
 
-    if (check_dispel(level,victim,gsn_blindness))
+    if (check_dispel(level,victim,gsn))
     {
-      send_to_char( "Yeniden görmeye başlıyorsun!\n\r", victim );
-    	act("$n artık kör değil.",victim,NULL,NULL,TO_ROOM);
+	send_to_char(cured_msg,victim);
+	act(room_msg,victim,NULL,NULL,TO_ROOM);
     }
     else
-    send_to_char("Büyü işe yaramadı.\n\r",ch);
+	send_to_char("Büyü işe yaramadı.\n\r",ch);
+}
+
+/* Yaşam puanı iyileştiren büyüler (cure light/serious/critical, heal). */
+static void heal_spell( CHAR_DATA *ch, CHAR_DATA *victim, int amount, const char *msg )
+{
+    victim->hit = UMIN( victim->hit + amount, victim->max_hit );
+    update_pos( victim );
+    send_to_char( msg, victim );
+    if ( ch != victim )
+	send_to_char( "Tamam.\n\r", ch );
+}
+
+void spell_cure_blindness(int sn,int level,CHAR_DATA *ch,void *vo,int target)
+{
+    cure_affect_spell( level, ch, (CHAR_DATA *) vo, gsn_blindness,
+	"Kör değilsin.\n\r", "$N kör görünmüyor.",
+	"Yeniden görmeye başlıyorsun!\n\r", "$n artık kör değil." );
 }
 
 
 
 void spell_cure_critical( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int heal;
-
-    heal = dice(3, 8) + level / 2 ;
-    victim->hit = UMIN( victim->hit + heal, victim->max_hit );
-    update_pos( victim );
-    send_to_char("Kendini iyi hissediyorsun!\n\r", victim );
-    if ( ch != victim )
-	send_to_char( "Tamam.\n\r", ch );
-    return;
+    heal_spell( ch, (CHAR_DATA *) vo, dice(3, 8) + level / 2, "Kendini iyi hissediyorsun!\n\r" );
 }
 
 /* RT added to cure plague */
 void spell_cure_disease( int sn, int level, CHAR_DATA *ch,void *vo,int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-
-    if ( !is_affected( victim, gsn_plague ) )
-    {
-	if (victim == ch)
-  send_to_char("Hasta değilsin.\n\r",ch);
-else
-  act("$N hasta görünmüyor.",ch,NULL,victim,TO_CHAR);
-	return;
-    }
-
-    if (check_dispel(level,victim,gsn_plague))
-    {
-      send_to_char("Yaraların yokoluyor.\n\r",victim);
-    	act("Yaraları yokolan $n rahatlamış görünüyor.",victim,NULL,NULL,TO_ROOM);
-    }
-    else
-    send_to_char("Büyü işe yaramadı.\n\r",ch);
+    cure_affect_spell( level, ch, (CHAR_DATA *) vo, gsn_plague,
+	"Hasta değilsin.\n\r", "$N hasta görünmüyor.",
+	"Yaraların yokoluyor.\n\r", "Yaraları yokolan $n rahatlamış görünüyor." );
 }
 
 
 
 void spell_cure_light( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int heal;
-
-    heal = dice(1, 8) + level / 4 + 5;
-    victim->hit = UMIN( victim->hit + heal, victim->max_hit );
-    update_pos( victim );
-    send_to_char( "Kendini iyi hissediyorsun!\n\r", victim );
-    if ( ch != victim )
-	send_to_char( "Tamam.\n\r", ch );
-    return;
+    heal_spell( ch, (CHAR_DATA *) vo, dice(1, 8) + level / 4 + 5, "Kendini iyi hissediyorsun!\n\r" );
 }
 
 
 
 void spell_cure_poison( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-
-    if ( !is_affected( victim, gsn_poison ) )
-    {
-	if (victim == ch)
-  send_to_char("Zehirlenmedin.\n\r",ch);
-else
-  act("$N zehirlenmiş görünmüyor.",ch,NULL,victim,TO_CHAR);
-	return;
-    }
-
-    if (check_dispel(level,victim,gsn_poison))
-    {
-      send_to_char("Vücudundan bir sıcaklık geçiyor.\n\r",victim);
-    	act("$n daha iyi görünüyor.",victim,NULL,NULL,TO_ROOM);
-    }
-    else
-	send_to_char("Büyü işe yaramadı.\n\r",ch);
+    cure_affect_spell( level, ch, (CHAR_DATA *) vo, gsn_poison,
+	"Zehirlenmedin.\n\r", "$N zehirlenmiş görünmüyor.",
+	"Vücudundan bir sıcaklık geçiyor.\n\r", "$n daha iyi görünüyor." );
 }
 
 void spell_cure_serious( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int heal;
-
-    heal = dice(2, 8) + level / 3 + 10 ;
-    victim->hit = UMIN( victim->hit + heal, victim->max_hit );
-    update_pos( victim );
-    send_to_char( "Kendini iyi hissediyorsun!\n\r", victim );
-    if ( ch != victim )
-	send_to_char( "Tamam.\n\r", ch );
-    return;
+    heal_spell( ch, (CHAR_DATA *) vo, dice(2, 8) + level / 3 + 10, "Kendini iyi hissediyorsun!\n\r" );
 }
 
 
@@ -2038,73 +2002,75 @@ void spell_curse( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 }
 
 
-/* RT replacement demonfire spell */
-
-void spell_demonfire(int sn, int level, CHAR_DATA *ch, void *vo,int target)
+/*
+ * Felsefeye bağlı ateş büyüleri (iblis ateşi, mavi alev): büyücü felsefeye
+ * uymuyorsa büyü kendine döner. Gerçek kurbanı döndürür.
+ */
+static CHAR_DATA *aligned_fire( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim,
+				bool misaligned, int dam_type, const char *turn_msg,
+				const char *room_msg, const char *vict_msg, const char *self_msg )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
     int dam;
 
-    if ( !IS_NPC(ch) && !IS_EVIL(ch) )
+    if ( !IS_NPC(ch) && misaligned )
     {
 	victim = ch;
-  send_to_char("İblisler sana dönüyor!\n\r",ch);
+	send_to_char( turn_msg, ch );
     }
 
     if (victim != ch)
     {
-      act("$n cehennem iblislerini $S üzerine salıyor!",
-    	    ch,NULL,victim,TO_ROOM);
-    	act("$n cehennem iblislerini senin üzerine salıyor!",
-    	    ch,NULL,victim,TO_VICT);
-    	send_to_char("Cehennem iblislerine sesleniyorsun!\n\r",ch);
+	act( room_msg, ch, NULL, victim, TO_ROOM );
+	act( vict_msg, ch, NULL, victim, TO_VICT );
+	send_to_char( self_msg, ch );
     }
+
     dam = dice( level, 10 );
-    if ( saves_spell( level, victim,DAM_NEGATIVE) )
+    if ( saves_spell( level, victim, dam_type ) )
 	dam /= 2;
-    damage( ch, victim, dam, sn, DAM_NEGATIVE ,TRUE);
+    damage( ch, victim, dam, sn, dam_type, TRUE );
+    return victim;
+}
+
+/* RT replacement demonfire spell */
+void spell_demonfire(int sn, int level, CHAR_DATA *ch, void *vo,int target)
+{
+    CHAR_DATA *victim = aligned_fire( sn, level, ch, (CHAR_DATA *) vo, !IS_EVIL(ch), DAM_NEGATIVE,
+	"İblisler sana dönüyor!\n\r",
+	"$n cehennem iblislerini $S üzerine salıyor!",
+	"$n cehennem iblislerini senin üzerine salıyor!",
+	"Cehennem iblislerine sesleniyorsun!\n\r" );
+
     spell_curse(gsn_curse, 3 * level / 4, ch, (void *) victim,TARGET_CHAR);
 }
 
 /* added by chronos */
 void spell_bluefire(int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    if ( !IS_NPC(ch) && !IS_NEUTRAL(ch) )
-    {
-	victim = ch;
-  send_to_char("Mavi alevin sana dönüyor!\n\r",ch);
-    }
-
-    if (victim != ch)
-    {
-      act("$n dünyanın mavi alevini $S üzerine salıyor!",
-    	    ch,NULL,victim,TO_ROOM);
-    	act("$n dünyanın yansızlarını üzerine salıyor!",
-    	    ch,NULL,victim,TO_VICT);
-    	send_to_char("Dünyanın yansızlarına sesleniyorsun!\n\r",ch);
-    }
-
-    dam = dice( level, 10 );
-    if ( saves_spell( level, victim,DAM_FIRE) )
-	dam /= 2;
-    damage( ch, victim, dam, sn, DAM_FIRE ,TRUE);
+    aligned_fire( sn, level, ch, (CHAR_DATA *) vo, !IS_NEUTRAL(ch), DAM_FIRE,
+	"Mavi alevin sana dönüyor!\n\r",
+	"$n dünyanın mavi alevini $S üzerine salıyor!",
+	"$n dünyanın yansızlarını üzerine salıyor!",
+	"Dünyanın yansızlarına sesleniyorsun!\n\r" );
 }
 
 
-void spell_detect_evil( int sn, int level, CHAR_DATA *ch, void *vo,int target )
+/*
+ * Saptama büyüleri: saptama biti zaten varsa already_* mesajı, yoksa
+ * TO_DETECTS etkisi ve on_msg.
+ */
+static void detect_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, int bit,
+			  const char *already_self, const char *already_other,
+			  const char *on_msg )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
-    if ( CAN_DETECT(victim, DETECT_EVIL) )
+    if ( CAN_DETECT(victim, bit) )
     {
 	if (victim == ch)
-  send_to_char("Zaten kem'i saptıyorsun.\n\r",ch);
-else
-  act("$N zaten kem'i saptıyor.",ch,NULL,victim,TO_CHAR);
+	    send_to_char(already_self,ch);
+	else
+	    act(already_other,ch,NULL,victim,TO_CHAR);
 	return;
     }
     af.where     = TO_DETECTS;
@@ -2113,129 +2079,50 @@ else
     af.duration  = (5 + level / 3);
     af.modifier  = 0;
     af.location  = APPLY_NONE;
-    af.bitvector = DETECT_EVIL;
+    af.bitvector = bit;
     affect_to_char( victim, &af );
-    send_to_char( "Gözlerin yanıyor.\n\r", victim );
+    send_to_char( on_msg, victim );
     if ( ch != victim )
 	send_to_char( "Tamam.\n\r", ch );
-    return;
+}
+
+void spell_detect_evil( int sn, int level, CHAR_DATA *ch, void *vo,int target )
+{
+    detect_spell( sn, level, ch, (CHAR_DATA *) vo, DETECT_EVIL,
+	"Zaten kem'i saptıyorsun.\n\r", "$N zaten kem'i saptıyor.", "Gözlerin yanıyor.\n\r" );
 }
 
 
 void spell_detect_good( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    AFFECT_DATA af;
-
-    if ( CAN_DETECT(victim, DETECT_GOOD) )
-    {
-	if (victim == ch)
-  send_to_char("Zaten iyiyi saptıyorsun.\n\r",ch);
-else
-  act("$N zaten iyiyi saptıyor.",ch,NULL,victim,TO_CHAR);
-	return;
-    }
-    af.where     = TO_DETECTS;
-    af.type      = sn;
-    af.level     = level;
-    af.duration  = (5 + level / 3);
-    af.modifier  = 0;
-    af.location  = APPLY_NONE;
-    af.bitvector = DETECT_GOOD;
-    affect_to_char( victim, &af );
-    send_to_char( "Gözlerin yanıyor.\n\r", victim );
-    if ( ch != victim )
-	send_to_char( "Tamam.\n\r", ch );
-    return;
+    detect_spell( sn, level, ch, (CHAR_DATA *) vo, DETECT_GOOD,
+	"Zaten iyiyi saptıyorsun.\n\r", "$N zaten iyiyi saptıyor.", "Gözlerin yanıyor.\n\r" );
 }
 
 
 
 void spell_detect_hidden(int sn,int level,CHAR_DATA *ch,void *vo,int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    AFFECT_DATA af;
-
-    if ( CAN_DETECT(victim, DETECT_HIDDEN) )
-    {
-	if (victim == ch)
-  send_to_char("Olabildiğince tetiktesin. \n\r",ch);
-else
-  act("$N zaten saklı yaşam formlarını saptayabiliyor.",ch,NULL,victim,TO_CHAR);
-	return;
-    }
-    af.where     = TO_DETECTS;
-    af.type      = sn;
-    af.level     = level;
-    af.duration  = (5 + level / 3);
-    af.location  = APPLY_NONE;
-    af.modifier  = 0;
-    af.bitvector = DETECT_HIDDEN;
-    affect_to_char( victim, &af );
-    send_to_char("Dikkatin artıyor.\n\r", victim );
-    if ( ch != victim )
-	send_to_char( "Tamam.\n\r", ch );
-    return;
+    detect_spell( sn, level, ch, (CHAR_DATA *) vo, DETECT_HIDDEN,
+	"Olabildiğince tetiktesin.\n\r", "$N zaten saklı yaşam formlarını saptayabiliyor.",
+	"Dikkatin artıyor.\n\r" );
 }
 
 
 
 void spell_detect_invis( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    AFFECT_DATA af;
-
-    if ( CAN_DETECT(victim, DETECT_INVIS) )
-    {
-	if (victim == ch)
-  send_to_char("Zaten görünmezi görüyorsun.\n\r",ch);
-else
-  act("$N zaten görünmezi görüyor.",ch,NULL,victim,TO_CHAR);
-	return;
-    }
-
-    af.where     = TO_DETECTS;
-    af.type      = sn;
-    af.level     = level;
-    af.duration  = (5 + level / 3);
-    af.modifier  = 0;
-    af.location  = APPLY_NONE;
-    af.bitvector = DETECT_INVIS;
-    affect_to_char( victim, &af );
-    send_to_char( "Gözlerin yanıyor.\n\r", victim );
-    if ( ch != victim )
-	send_to_char( "Tamam.\n\r", ch );
-    return;
+    detect_spell( sn, level, ch, (CHAR_DATA *) vo, DETECT_INVIS,
+	"Zaten görünmezi görüyorsun.\n\r", "$N zaten görünmezi görüyor.", "Gözlerin yanıyor.\n\r" );
 }
 
 
 
 void spell_detect_magic( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    AFFECT_DATA af;
-
-    if ( CAN_DETECT(victim, DETECT_MAGIC) )
-    {
-	if (victim == ch)
-  send_to_char("Zaten büyülü auraları saptayaibliyorsun.\n\r",ch);
-else
-  act("$N zaten büyülüleri saptayabiliyor.",ch,NULL,victim,TO_CHAR);
-	return;
-    }
-
-    af.where     = TO_DETECTS;
-    af.type      = sn;
-    af.level	 = level;
-    af.duration  = (5 + level / 3);
-    af.modifier  = 0;
-    af.location  = APPLY_NONE;
-    af.bitvector = DETECT_MAGIC;
-    affect_to_char( victim, &af );
-    send_to_char( "Gözlerin yanıyor.\n\r", victim );
-    if ( ch != victim )
-	send_to_char( "Tamam.\n\r", ch );
-    return;
+    detect_spell( sn, level, ch, (CHAR_DATA *) vo, DETECT_MAGIC,
+	"Zaten büyülü auraları saptayaibliyorsun.\n\r", "$N zaten büyülüleri saptayabiliyor.",
+	"Gözlerin yanıyor.\n\r" );
 }
 
 
@@ -2261,17 +2148,22 @@ else
 
 
 
-void spell_dispel_evil( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+/*
+ * Kem defet / iyi defet: karşıt felsefeye hasar. good_side: kem defet (kem
+ * büyücü kendine döner, iyi kurban korunur); FALSE: iyi defet.
+ */
+static void dispel_alignment( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, bool good_side )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
+    int dam_type = good_side ? DAM_HOLY : DAM_NEGATIVE;
     int dam;
 
-    if ( !IS_NPC(ch) && IS_EVIL(ch) )
+    if ( !IS_NPC(ch) && ( good_side ? IS_EVIL(ch) : IS_GOOD(ch) ) )
 	victim = ch;
 
-    if ( IS_GOOD(victim) )
+    if ( good_side ? IS_GOOD(victim) : IS_EVIL(victim) )
     {
-      act( "Tanrılar $M koruyor.", ch, NULL, victim, TO_ROOM );
+	act( good_side ? "Tanrılar $M koruyor." : "$N kem ile korunuyor.",
+	     ch, NULL, victim, TO_ROOM );
 	return;
     }
 
@@ -2285,41 +2177,20 @@ void spell_dispel_evil( int sn, int level, CHAR_DATA *ch, void *vo,int target)
       dam = dice( level, 4 );
     else
       dam = UMAX(victim->hit, dice(level,4));
-    if ( saves_spell( level, victim,DAM_HOLY) )
+    if ( saves_spell( level, victim, dam_type ) )
 	dam /= 2;
-    damage( ch, victim, dam, sn, DAM_HOLY ,TRUE);
-    return;
+    damage( ch, victim, dam, sn, dam_type, TRUE );
+}
+
+void spell_dispel_evil( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+{
+    dispel_alignment( sn, level, ch, (CHAR_DATA *) vo, TRUE );
 }
 
 
 void spell_dispel_good( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    if ( !IS_NPC(ch) && IS_GOOD(ch) )
-	victim = ch;
-
-    if ( IS_EVIL(victim) )
-    {
-      act("$N kem ile korunuyor.", ch, NULL, victim, TO_ROOM );
-	return;
-    }
-
-    if ( IS_NEUTRAL(victim) )
-    {
-      act("$N etkilenmiş görünmüyor.", ch, NULL, victim, TO_CHAR );
-	return;
-    }
-
-    if (victim->hit > (ch->level * 4))
-      dam = dice( level, 4 );
-    else
-      dam = UMAX(victim->hit, dice(level,4));
-    if ( saves_spell( level, victim,DAM_NEGATIVE) )
-	dam /= 2;
-    damage( ch, victim, dam, sn, DAM_NEGATIVE ,TRUE);
-    return;
+    dispel_alignment( sn, level, ch, (CHAR_DATA *) vo, FALSE );
 }
 
 
@@ -3252,13 +3123,7 @@ else
 
 void spell_heal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    victim->hit = UMIN( victim->hit + 100 + level / 10, victim->max_hit );
-    update_pos( victim );
-    send_to_char( "Sıcak bir duygu vücudunu sarıyor.\n\r", victim );
-    if ( ch != victim )
-	send_to_char( "Tamam.\n\r", ch );
-    return;
+    heal_spell( ch, (CHAR_DATA *) vo, 100 + level / 10, "Sıcak bir duygu vücudunu sarıyor.\n\r" );
 }
 
 void spell_heat_metal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
@@ -4133,18 +3998,19 @@ void spell_poison( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 
 
-void spell_protection_evil(int sn,int level,CHAR_DATA *ch,void *vo, int target)
+/* Kemden/iyiden koruma: iki koruma birden olmaz. */
+static void protection_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, int bit,
+			      const char *self_msg, const char *other_msg )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
     if ( IS_AFFECTED(victim, AFF_PROTECT_EVIL)
     ||   IS_AFFECTED(victim, AFF_PROTECT_GOOD))
     {
 	if (victim == ch)
-  send_to_char("Zaten korunuyorsun.\n\r",ch);
-else
-  act("$N zaten korunuyor.",ch,NULL,victim,TO_CHAR);
+	    send_to_char("Zaten korunuyorsun.\n\r",ch);
+	else
+	    act("$N zaten korunuyor.",ch,NULL,victim,TO_CHAR);
 	return;
     }
 
@@ -4154,41 +4020,23 @@ else
     af.duration  = (10 + level / 5);
     af.location  = APPLY_SAVING_SPELL;
     af.modifier  = -1;
-    af.bitvector = AFF_PROTECT_EVIL;
+    af.bitvector = bit;
     affect_to_char( victim, &af );
-    send_to_char("Kendini kutsal ve saf hissediyorsun.\n\r", victim );
+    send_to_char( self_msg, victim );
     if ( ch != victim )
-	act("$N kemden korunuyor.",ch,NULL,victim,TO_CHAR);
-    return;
+	act( other_msg, ch, NULL, victim, TO_CHAR );
+}
+
+void spell_protection_evil(int sn,int level,CHAR_DATA *ch,void *vo, int target)
+{
+    protection_spell( sn, level, ch, (CHAR_DATA *) vo, AFF_PROTECT_EVIL,
+	"Kendini kutsal ve saf hissediyorsun.\n\r", "$N kemden korunuyor." );
 }
 
 void spell_protection_good(int sn,int level,CHAR_DATA *ch,void *vo,int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    AFFECT_DATA af;
-
-    if ( IS_AFFECTED(victim, AFF_PROTECT_GOOD)
-    ||   IS_AFFECTED(victim, AFF_PROTECT_EVIL))
-    {
-	if (victim == ch)
-  send_to_char("Zaten korunuyorsun.\n\r",ch);
-else
-  act("$N zaten korunuyor.",ch,NULL,victim,TO_CHAR);
-	return;
-    }
-
-    af.where     = TO_AFFECTS;
-    af.type      = sn;
-    af.level     = level;
-    af.duration  = (10 + level / 5);
-    af.location  = APPLY_SAVING_SPELL;
-    af.modifier  = -1;
-    af.bitvector = AFF_PROTECT_GOOD;
-    affect_to_char( victim, &af );
-    send_to_char( "Karanlığa yaklaşıyorsun.\n\r", victim );
-    if ( ch != victim )
-	act("$N iyiden korunuyor.",ch,NULL,victim,TO_CHAR);
-    return;
+    protection_spell( sn, level, ch, (CHAR_DATA *) vo, AFF_PROTECT_GOOD,
+	"Karanlığa yaklaşıyorsun.\n\r", "$N iyiden korunuyor." );
 }
 
 
@@ -5684,30 +5532,8 @@ void spell_hurricane(int sn,int level,CHAR_DATA *ch,void *vo,int target)
 
 void spell_detect_undead( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    AFFECT_DATA af;
-
-    if ( CAN_DETECT(victim, DETECT_UNDEAD) )
-    {
-	if (victim == ch)
-  send_to_char("Zaten hortlakları saptıyorsun.\n\r",ch);
-else
-  act("$N zaten hortlakları saptıyor.",ch,NULL,victim,TO_CHAR);
-	return;
-    }
-
-    af.where     = TO_DETECTS;
-    af.type      = sn;
-    af.level	 = level;
-    af.duration  = (5 + level / 3);
-    af.modifier  = 0;
-    af.location  = APPLY_NONE;
-    af.bitvector = DETECT_UNDEAD;
-    affect_to_char( victim, &af );
-    send_to_char( "Gözlerin yanıyor.\n\r", victim );
-    if ( ch != victim )
-	send_to_char( "Tamam.\n\r", ch );
-    return;
+    detect_spell( sn, level, ch, (CHAR_DATA *) vo, DETECT_UNDEAD,
+	"Zaten hortlakları saptıyorsun.\n\r", "$N zaten hortlakları saptıyor.", "Gözlerin yanıyor.\n\r" );
 }
 
 
