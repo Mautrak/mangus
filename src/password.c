@@ -23,12 +23,6 @@
 #include <unistd.h>
 #endif
 
-#ifdef _WIN32
-#include <process.h>
-#else
-#include <unistd.h>
-#endif
-
 #define PWD_ROUNDS 10000
 #define PWD_PREFIX "$m1$"
 
@@ -150,7 +144,7 @@ static void to_hex(const unsigned char *in, size_t len, char *out)
     out[2 * len] = '\0';
 }
 
-void sha256_hex(const void *data, unsigned long len, char out[65])
+void sha256_hex(const void *data, size_t len, char out[65])
 {
     sha256_ctx c;
     unsigned char digest[32];
@@ -183,9 +177,10 @@ static void random_bytes(unsigned char *out, size_t len)
             return;
     }
     {
+        /* Yedek: /dev/urandom yoksa (yalnızca tuz için) zaman + yığın adresi tohumu. */
         static uint64_t state;
         if (state == 0)
-            state = (uint64_t)time(NULL) ^ ((uint64_t)getpid() << 32) ^ (uint64_t)clock();
+            state = (uint64_t)time(NULL) ^ ((uint64_t)(uintptr_t)out << 32) ^ (uint64_t)clock();
         for (i = 0; i < len; i++)
         {
             state ^= state << 13;
@@ -203,17 +198,18 @@ static void derive(const char *salt_hex, const char *plain, char out_hex[65])
 {
     sha256_ctx c;
     unsigned char digest[32];
+    size_t plen = strlen(plain);
     int i;
 
     sha256_init(&c);
     sha256_update(&c, salt_hex, strlen(salt_hex));
-    sha256_update(&c, plain, strlen(plain));
+    sha256_update(&c, plain, plen);
     sha256_final(&c, digest);
     for (i = 0; i < PWD_ROUNDS; i++)
     {
         sha256_init(&c);
         sha256_update(&c, digest, sizeof(digest));
-        sha256_update(&c, plain, strlen(plain));
+        sha256_update(&c, plain, plen);
         sha256_final(&c, digest);
     }
     to_hex(digest, 32, out_hex);
