@@ -53,10 +53,15 @@
 #include "merc.h"
 #include "utf8.h"
 #include "magic.h"
+#include "recycle.h"
+#include "lookup.h"
 
 /* command procedures needed */
 DECLARE_DO_FUN(do_help		);
 DECLARE_DO_FUN(do_say		);
+
+/* Liste sütunlarında yetenek adı için görsel genişlik. */
+#define SKILL_COL	18
 
 /* used to converter of prac and train */
 void do_gain(CHAR_DATA *ch, char *argument)
@@ -128,175 +133,175 @@ void do_gain(CHAR_DATA *ch, char *argument)
 }
 
 
+/*
+ * Seviyeye göre sıralı, iki sütunlu yetenek/büyü listesi.
+ * do_spells, do_skills ve do_slist aynı iskeleti paylaşır; yalnız süzgeç,
+ * satır biçimi ve sayfalama değişir.
+ */
+enum skill_list_kind { LIST_SPELLS, LIST_SKILLS, LIST_CLASS };
+
+static bool skill_list_keep(CHAR_DATA *ch, int iclass, int sn, enum skill_list_kind kind)
+{
+    if (skill_table[sn].skill_level[iclass] >= LEVEL_HERO)
+	return FALSE;
+
+    if (kind == LIST_CLASS)
+	return skill_table[sn].cabal == CABAL_NONE && skill_table[sn].race == RACE_NONE;
+
+    if ((skill_table[sn].spell_fun != spell_null) != (kind == LIST_SPELLS))
+	return FALSE;
+
+    return RACE_OK(ch,sn) && CABAL_OK(ch,sn);
+}
+
+static void skill_list_entry(CHAR_DATA *ch, int sn, int lev, enum skill_list_kind kind,
+			     char *buf, size_t cap)
+{
+    const char *name = skill_table[sn].name[1];
+    int width = utf8_width(name, SKILL_COL);
+
+    switch (kind)
+    {
+    case LIST_SPELLS:
+	if (ch->level < lev)
+	    snprintf(buf, cap, "%-*s  n/a      ", width, name);
+	else
+	    snprintf(buf, cap, "%-*s  %3d mana  ", width, name,
+		     UMAX(skill_table[sn].min_mana, 100/(2 + ch->level - lev)));
+	break;
+    case LIST_SKILLS:
+	if (ch->level < lev)
+	    snprintf(buf, cap, "%-*s n/a      ", width, name);
+	else
+	    snprintf(buf, cap, "%-*s %3d%%      ", width, name, ch->pcdata->learned[sn]);
+	break;
+    default:
+	snprintf(buf, cap, "%-*s          ", width, name);
+	break;
+    }
+}
+
+static void skill_list(CHAR_DATA *ch, int iclass, enum skill_list_kind kind,
+		       const char *none_msg, bool page)
+{
+    BUFFER *out;
+    char buf[MAX_STRING_LENGTH];
+    int sn, lev, columns;
+    bool found = FALSE;
+
+    if (IS_NPC(ch))
+	return;
+
+    out = new_buf();
+
+    for (lev = 0; lev < LEVEL_HERO; lev++)
+    {
+	columns = 0;
+	for (sn = 0; sn < MAX_SKILL; sn++)
+	{
+	    if (skill_table[sn].name[0] == NULL)
+		break;
+	    if (skill_table[sn].skill_level[iclass] != lev
+	    ||  !skill_list_keep(ch, iclass, sn, kind))
+		continue;
+
+	    if (columns == 0)
+		snprintf(buf, sizeof(buf), "\n\rSeviye %2d: ", lev);
+	    else if (columns % 2 == 0)
+		snprintf(buf, sizeof(buf), "\n\r          ");
+	    else
+		buf[0] = '\0';
+	    add_buf(out, buf);
+
+	    skill_list_entry(ch, sn, lev, kind, buf, sizeof(buf));
+	    add_buf(out, buf);
+	    columns++;
+	    found = TRUE;
+	}
+    }
+
+    if (!found)
+	send_to_char(none_msg, ch);
+    else
+    {
+	add_buf(out, "\n\r");
+	if (page)
+	    page_to_char(buf_string(out), ch);
+	else
+	    send_to_char(buf_string(out), ch);
+    }
+    free_buf(out);
+}
+
 /* RT spells and skills show the players spells (or skills) */
 
 void do_spells(CHAR_DATA *ch, char *argument)
 {
-    char spell_list[LEVEL_HERO][MAX_STRING_LENGTH];
-    char spell_columns[LEVEL_HERO];
-    int sn,lev,mana;
-    bool found = FALSE;
-    char buf[MAX_STRING_LENGTH];
-    char output[4*MAX_STRING_LENGTH];
-
-    if (IS_NPC(ch))
-      return;
-
-    /* initilize data */
-    output[0] = '\0';
-    for (lev = 0; lev < LEVEL_HERO; lev++)
-    {
-	spell_columns[lev] = 0;
-	spell_list[lev][0] = '\0';
-    }
-
-    for (sn = 0; sn < MAX_SKILL; sn++)
-    {
-      if (skill_table[sn].name[0] == NULL)
-        break;
-
-      if (skill_table[sn].skill_level[ch->iclass] < LEVEL_HERO &&
-	  skill_table[sn].spell_fun != spell_null && RACE_OK(ch,sn) &&
-(skill_table[sn].cabal == ch->cabal || skill_table[sn].cabal == CABAL_NONE)
-	)
-      {
-	found = TRUE;
-	lev = skill_table[sn].skill_level[ch->iclass];
-	if (ch->level < lev)
-	  snprintf(buf, sizeof(buf),"%-*s  n/a      ", utf8_width(skill_table[sn].name[1], 18), skill_table[sn].name[1]);
-	else
-	{
-	  mana = UMAX(skill_table[sn].min_mana,
-		      100/(2 + ch->level - lev));
-	  snprintf(buf, sizeof(buf),"%-*s  %3d mana  ",utf8_width(skill_table[sn].name[1], 18), skill_table[sn].name[1],mana);
-	}
-
-	if (spell_list[lev][0] == '\0')
-	  sprintf(spell_list[lev],"\n\rSeviye %2d: %s",lev,buf);
-        else /* append */
-	{
-	  if ( ++spell_columns[lev] % 2 == 0)
-            strcat(spell_list[lev],"\n\r          ");
-	  strcat(spell_list[lev],buf);
-        }
-      }
-    }
-
-    /* return results */
-
-    if (!found)
-    {
-      send_to_char("Büyü bilmiyorsun.\n\r",ch);
-      return;
-    }
-
-    for (lev = 0; lev < LEVEL_HERO; lev++)
-      if (spell_list[lev][0] != '\0')
-        strcat(output,spell_list[lev]);
-    strcat(output,"\n\r");
-    page_to_char(output,ch);
+    skill_list(ch, ch->iclass, LIST_SPELLS, "Büyü bilmiyorsun.\n\r", TRUE);
 }
 
 void do_skills(CHAR_DATA *ch, char *argument)
 {
-    char skill_list[LEVEL_HERO][MAX_STRING_LENGTH];
-    char skill_columns[LEVEL_HERO];
-    int sn,lev;
-    bool found = FALSE;
-    char buf[MAX_STRING_LENGTH];
+    skill_list(ch, ch->iclass, LIST_SKILLS, "Yetenek bilmiyorsun.\n\r", FALSE);
+}
+
+void do_slist(CHAR_DATA *ch, char *argument)
+{
+    char arg[MAX_INPUT_LENGTH];
+    int iclass;
 
     if (IS_NPC(ch))
       return;
 
-    /* initilize data */
-    for (lev = 0; lev < LEVEL_HERO; lev++)
+    one_argument(argument, arg);
+    if (arg[0] == '\0')
     {
-        skill_columns[lev] = 0;
-        skill_list[lev][0] = '\0';
+	send_to_char("Yazım: syetenek <sınıf>.\n\r",ch);
+	return;
+    }
+    iclass = class_lookup(arg);
+    if (iclass == -1)
+    {
+	send_to_char("Geçerli bir sınıf değil.\n\r",ch);
+	return;
     }
 
-    for (sn = 0; sn < MAX_SKILL; sn++)
-    {
-      if (skill_table[sn].name[0] == NULL )
-        break;
-
-
-      if (skill_table[sn].skill_level[ch->iclass] < LEVEL_HERO &&
-	  skill_table[sn].spell_fun == spell_null && RACE_OK(ch,sn) &&
-(skill_table[sn].cabal == ch->cabal || skill_table[sn].cabal == CABAL_NONE)
-	  )
-      {
-        found = TRUE;
-        lev = skill_table[sn].skill_level[ch->iclass];
-        if (ch->level < lev)
-          snprintf(buf, sizeof(buf),"%-*s n/a      ", utf8_width(skill_table[sn].name[1], 18), skill_table[sn].name[1]);
-        else
-          snprintf(buf, sizeof(buf),"%-*s %3d%%      ",utf8_width(skill_table[sn].name[1], 18), skill_table[sn].name[1],
-					 ch->pcdata->learned[sn]);
-
-        if (skill_list[lev][0] == '\0')
-          sprintf(skill_list[lev],"\n\rSeviye %2d: %s",lev,buf);
-        else /* append */
-        {
-          if ( ++skill_columns[lev] % 2 == 0)
-            strcat(skill_list[lev],"\n\r          ");
-          strcat(skill_list[lev],buf);
-        }
-      }
-    }
-
-    /* return results */
-
-    if (!found)
-    {
-      send_to_char("Büyü bilmiyorsun.\n\r",ch);
-      return;
-    }
-
-    for (lev = 0; lev < LEVEL_HERO; lev++)
-      if (skill_list[lev][0] != '\0')
-        send_to_char(skill_list[lev],ch);
-    send_to_char("\n\r",ch);
+    skill_list(ch, iclass, LIST_CLASS, "O sınıfta yetenek yok.\n\r", TRUE);
 }
 
+
+/*
+ * Tecrübe yardımcıları. ROM'un yaratılış puanı sistemi kaldırıldığından
+ * 'points' parametresi kullanılmaz; imza eski çağıranlar için korunur.
+ */
+#define NPC_BASE_EXP		1500
+#define NPC_EXP_PER_LEVEL	1000
+
+static int pc_exp_per_level(CHAR_DATA *ch)
+{
+    return 1000 + race_table[ORG_RACE(ch)].points + class_table[ch->iclass].points;
+}
 
 int base_exp(CHAR_DATA *ch, int points)
 {
-  int expl;
-
-  if (IS_NPC(ch))    return 1500;
-  expl = 1000 + race_table[ORG_RACE(ch)].points + class_table[ch->iclass].points;
-
-  return expl;
+    (void)points;
+    return IS_NPC(ch) ? NPC_BASE_EXP : pc_exp_per_level(ch);
 }
 
-int exp_to_level(CHAR_DATA *ch, int points)
+int exp_per_level(CHAR_DATA *ch, int points)
 {
- int base;
-
-  base = base_exp(ch,points);
-  return ( base - exp_this_level(ch,ch->level,points) );
+    (void)points;
+    return IS_NPC(ch) ? NPC_EXP_PER_LEVEL : pc_exp_per_level(ch);
 }
 
 int exp_this_level(CHAR_DATA *ch, int level, int points)
 {
-  int base;
-
-  base = base_exp(ch,points);
-  return (ch->exp - (ch->level * base ) );
+    return ch->exp - level * base_exp(ch, points);
 }
 
-
-int exp_per_level(CHAR_DATA *ch, int points)
+int exp_to_level(CHAR_DATA *ch, int points)
 {
-    int expl;
-
-    if (IS_NPC(ch))
-	return 1000;
-
-    expl = 1000 + race_table[ORG_RACE(ch)].points + class_table[ch->iclass].points;
-
-    return expl;
+    return base_exp(ch, points) - exp_this_level(ch, ch->level, points);
 }
 
 
@@ -375,92 +380,10 @@ void group_add( CHAR_DATA *ch )
 }
 
 
-void do_slist(CHAR_DATA *ch, char *argument)
-{
-    char skill_list[LEVEL_HERO][MAX_STRING_LENGTH];
-    char skill_columns[LEVEL_HERO];
-    int sn,lev,iclass;
-    bool found = FALSE;
-    char output[4*MAX_STRING_LENGTH];
-    char buf[MAX_STRING_LENGTH];
-    char arg[MAX_INPUT_LENGTH];
-
-    if (IS_NPC(ch))
-      return;
-
-    output[0] = '\0';
-    argument = one_argument(argument, arg);
-    if (arg[0] == '\0')
-	{
-    send_to_char("Yazım: syetenek <sınıf>.\n\r",ch);
-	 return;
-	}
-    iclass = class_lookup(arg);
-    if (iclass == -1)
-	{
-    send_to_char("Geçerli bir sınıf değil.\n\r",ch);
-	 return;
-	}
-    /* initilize data */
-    for (lev = 0; lev < LEVEL_HERO; lev++)
-    {
-        skill_columns[lev] = 0;
-        skill_list[lev][0] = '\0';
-    }
-
-    for (sn = 0; sn < MAX_SKILL; sn++)
-    {
-      if (skill_table[sn].name[0] == NULL )
-        break;
-
-
-      if (skill_table[sn].skill_level[iclass] < LEVEL_HERO &&
-	  skill_table[sn].cabal == CABAL_NONE &&
-	  skill_table[sn].race == RACE_NONE )
-      {
-        found = TRUE;
-        lev = skill_table[sn].skill_level[iclass];
-        snprintf(buf, sizeof(buf),"%-*s          ",utf8_width(skill_table[sn].name[1], 18), skill_table[sn].name[1]);
-        if (skill_list[lev][0] == '\0')
-          sprintf(skill_list[lev],"\n\rrSeviye %2d: %s",lev,buf);
-        else /* append */
-        {
-          if ( ++skill_columns[lev] % 2 == 0)
-            strcat(skill_list[lev],"\n\r          ");
-          strcat(skill_list[lev],buf);
-        }
-      }
-    }
-
-    /* return results */
-
-    if (!found)
-    {
-      send_to_char("O sınıfta yetenek yok.\n\r",ch);
-      return;
-    }
-
-    for (lev = 0; lev < LEVEL_HERO; lev++)
-      if (skill_list[lev][0] != '\0')
-        strcat(output,skill_list[lev]);
-    strcat(output,"\n\r");
-    page_to_char(output,ch);
-}
-
-
-/* returns group number */
+/* returns group number (kısa ada göre; db.c prac_lookup uzun adla bit döndürür) */
 int group_lookup (const char *name)
 {
-   int gr;
-
-   for ( gr = 0; prac_table[gr].sh_name != NULL; gr++)
-   {
-	if (utf8_first_eq(name, prac_table[gr].sh_name)
-	&&  !str_prefix( name,prac_table[gr].sh_name))
-	    return gr;
-   }
-
-   return -1;
+    return name_table_lookup(name, &prac_table[0].sh_name, sizeof prac_table[0]);
 }
 
 void do_glist( CHAR_DATA *ch , char *argument)
@@ -468,7 +391,7 @@ void do_glist( CHAR_DATA *ch , char *argument)
  char arg[MAX_INPUT_LENGTH];
  char buf[MAX_STRING_LENGTH];
   char line[MAX_STRING_LENGTH];
- int group,count;
+ int group,sn;
 
  one_argument(argument,arg);
 
@@ -487,20 +410,20 @@ void do_glist( CHAR_DATA *ch , char *argument)
   snprintf(buf, sizeof(buf),"%s grubunu listeliyor :\n\r",prac_table[group].sh_name);
  send_to_char(buf,ch);
  buf[0] = '\0';
- for(count = 0 ; count < MAX_SKILL; count++)
+ for(sn = 0 ; sn < MAX_SKILL; sn++)
   {
-   if ( (group == GROUP_NONE && !CLEVEL_OK(ch,count) &&
-	skill_table[count].group == GROUP_NONE ) ||
-	(group != skill_table[count].group) || !CABAL_OK(ch,count) )
+   if ( (group == GROUP_NONE && !CLEVEL_OK(ch,sn) &&
+	skill_table[sn].group == GROUP_NONE ) ||
+	(group != skill_table[sn].group) || !CABAL_OK(ch,sn) )
      continue;
    if ( buf[0] != '\0')
     {
-     snprintf(line, sizeof(line), "%-*s%-*s\n\r", utf8_width(buf, 18), buf,
-	      utf8_width(skill_table[count].name[1], 18), skill_table[count].name[1]);
+     snprintf(line, sizeof(line), "%-*s%-*s\n\r", utf8_width(buf, SKILL_COL), buf,
+	      utf8_width(skill_table[sn].name[1], SKILL_COL), skill_table[sn].name[1]);
      send_to_char(line,ch);
      buf[0] = '\0';
     }
-   else snprintf(buf, sizeof(buf), "%s",skill_table[count].name[1]);
+   else snprintf(buf, sizeof(buf), "%s",skill_table[sn].name[1]);
   }
 
 }
@@ -514,7 +437,7 @@ void do_slook( CHAR_DATA *ch, char *argument)
      one_argument(argument,arg);
      if (arg[0] == '\0')
 	{
-	 send_to_char("Yazım : slook <skill or spell name>.\n\r",ch);
+	 send_to_char("Yazım : slook <yetenek ya da büyü adı>.\n\r",ch);
 	 return;
 	}
 
@@ -531,6 +454,10 @@ void do_slook( CHAR_DATA *ch, char *argument)
      return;
 }
 
+/*
+ * ch->status "öğretmen modu" değeri. Aynı alanı act_move.c (5: stalker),
+ * fight.c (10) ve mob_prog.c (16/17: din) de kullanır; çakışmasın.
+ */
 #define PC_PRACTICER	123
 
 void do_learn( CHAR_DATA *ch, char *argument )
@@ -574,13 +501,7 @@ void do_learn( CHAR_DATA *ch, char *argument )
 	    return;
 	}
 
-	if ( sn == gsn_vampire )
-	{
-    send_to_char( "Bu konuda ancak görevci yardım edebilir.\n\r",ch);
-	 return;
-	}
-
-	if ( sn == gsn_evolve_bear )
+	if ( sn == gsn_vampire || sn == gsn_evolve_bear )
 	{
     send_to_char( "Bu konuda ancak görevci yardım edebilir.\n\r",ch);
 	 return;
@@ -594,7 +515,7 @@ void do_learn( CHAR_DATA *ch, char *argument )
 	    return;
 	}
 
-	if ( IS_NPC(mob) || mob->level != HERO )
+	if ( IS_NPC(mob) || mob->level != LEVEL_HERO )
 	{
     send_to_char( "Bir kahraman bulmalısın, sıradan birini değil.\n\r",ch);
 	  return;
