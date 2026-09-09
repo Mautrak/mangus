@@ -642,7 +642,7 @@ struct	class_type
 #define LANG_DOG 16
 #define LANG_ELVISH 17
 #define LANG_TROLLISH 18
-#define MAX_LANGUAGE	     14
+#define MAX_LANGUAGE	     19   /* LANG_TROLLISH + 1; language_table bu sabitle indekslenir */
 
 struct item_type
 {

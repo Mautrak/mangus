@@ -111,22 +111,28 @@ const struct translation_type translation_table[]=
         {"",            	"" }
 };
 
+/* LANG_* sabitiyle indekslenir; sıra merc.h'deki sabitlerle aynı olmalıdır. */
 const   struct  language_type       language_table      [ MAX_LANGUAGE ] =
 {
   { "ortak",	LANG_COMMON	},
   { "insan",	LANG_HUMAN	},
-  { "elf",	LANG_ELVISH	},
+  { "cora",	LANG_CORA	},
   { "cüce",	LANG_DWARVISH	},
   { "kuş",	LANG_BIRD	},
-  { "kedi",	LANG_CAT	},
+  { "yeg",	LANG_YEG	},
+  { "gamayun",	LANG_GAMAYUN	},
+  { "pardus",	LANG_PARDUS	},
   { "asura",	LANG_ASURA	},
+  { "gnom",	LANG_GNOMISH	},
+  { "dev",	LANG_GIANT	},
+  { "kedi",	LANG_CAT	},
   { "sürüngen",	LANG_SURUNGEN	},
   { "astral",	LANG_ASTRAL	},
-  { "dev",	LANG_GIANT	},
   { "ejderha",	LANG_DRAGON	},
   { "su",	LANG_WATER	},
-  { "su",	LANG_WATER	},
   { "köpek",	LANG_DOG	},
+  { "elf",	LANG_ELVISH	},
+  { "trol",	LANG_TROLLISH	},
 };
 
 /* item type list */

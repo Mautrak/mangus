@@ -121,7 +121,7 @@ int lang_lookup (const char *name)
    {
 	if (utf8_first_eq(name, language_table[lang].name)
 	&&  !str_prefix(name,language_table[lang].name))
-	    return lang;
+	    return language_table[lang].vnum;
    }
 
    return -1;
