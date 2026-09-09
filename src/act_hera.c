@@ -163,6 +163,7 @@ void do_enter( CHAR_DATA *ch, char *argument)
 
         if (MOUNTED(ch))
         snprintf(buf, sizeof(buf),"$n sürdüğü %s ile $p içine giriyor.",MOUNTED(ch)->short_descr );
+        else
         snprintf(buf, sizeof(buf),"$n $p içine giriyor." );
 	act(buf,ch,portal,NULL,TO_ROOM);
 
@@ -412,8 +413,8 @@ void do_hunt( CHAR_DATA *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_STRING_LENGTH];
   CHAR_DATA *victim;
-  int direction,i;
-  bool fArea,ok;
+  int direction;
+  bool fArea;
 
 
     if ( ch_skill_nok(ch,gsn_hunt) )
@@ -507,43 +508,35 @@ act("$n dikkatle toprağı inceliyor.", ch, NULL, NULL, TO_ROOM );
       return;
     }
 
-  /*
-   * Give a random direction if the player misses the die roll.
-   */
-  if ( IS_NPC (ch) && number_percent () > 75)        /* NPC @ 25% */
-    {
-    log_string("Do PC hunt");
-    ok=FALSE;
-    for(i=0;i<6;i++) {
-    	if (ch->in_room->exit[direction]!=NULL) {
-    		ok=TRUE;
-    		break;
-    		}
-    	}
-    if (ok)
-    {
-      do
-	{
-	  direction = number_door();
-	}
-      while( ( ch->in_room->exit[direction] == NULL )
-	    || ( ch->in_room->exit[direction]->u1.to_room == NULL) );
-    }
-else {
-	  log_string("Do hunt, player hunt, no exits from room!");
-  	  ch->hunting=NULL;
-      send_to_char("Odanın çıkışı yok!!!!\n\r",ch);
-  	  return;
-  	}
-  /*
-   * Display the results of the search.
-   */
-  }
-  sprintf( buf, "$N %s yönünde.", dir_name[direction] );
+  snprintf( buf, sizeof(buf), "$N %s yönünde.", dir_name[direction] );
   act( buf, ch, NULL, victim, TO_CHAR );
   return;
 }
 
+
+/* avını yakaladı: bağırıp saldırır, takip biter */
+static void hunt_caught( CHAR_DATA *ch )
+{
+  act( "$n $E dik dik bakarak diyor ki, 'Öleceksin!'", ch, NULL, ch->hunting, TO_NOTVICT );
+  act( "$n sana dik dik bakarak diyor ki, 'Öleceksin!'", ch, NULL, ch->hunting, TO_VICT );
+  act( "$E dik dik bakarak diyorsun ki, 'Öleceksin!'", ch, NULL, ch->hunting, TO_CHAR );
+  multi_hit( ch, ch->hunting, TYPE_UNDEFINED );
+  ch->hunting = NULL; /* No more hunting, now tracking */
+}
+
+/* portal büyüsüyle avının yanına geçmeyi dener; aynı odaya düşerse saldırır */
+static void hunt_via_portal( CHAR_DATA *ch )
+{
+  char tBuf[MAX_INPUT_LENGTH];
+
+  snprintf( tBuf, sizeof(tBuf), "portal %s", ch->hunting->name );
+  do_cast( ch, tBuf );
+  do_enter( ch, "portal" );
+  if ( ch->in_room == NULL || ch->hunting == NULL )
+    return;
+  if ( ch->in_room == ch->hunting->in_room )
+    hunt_caught( ch );
+}
 
 /*
  * revised by chronos.
@@ -551,90 +544,49 @@ else {
 void hunt_victim( CHAR_DATA *ch )
 {
   int		dir;
-  bool		found;
   CHAR_DATA	*tmp;
-  char		tBuf[MAX_INPUT_LENGTH];
+
+  if ( ch->hunting == NULL )
+    return;
 
   /*
-   * Make sure the victim still exists.
+   * Make sure the victim still exists (serbest bırakılmış işaretçiye dokunma).
    */
-  for( found = 0, tmp = char_list; tmp && !found; tmp = tmp->next )
+  for( tmp = char_list; tmp != NULL; tmp = tmp->next )
     if( ch->hunting == tmp )
-      found = 1;
-
-  if( !found || !can_see( ch, ch->hunting ) )
+      break;
+  if( tmp == NULL || ch->hunting->in_room == NULL )
     {
-     if( get_char_area( ch, ch->hunting->name) != NULL )
-        {
-           snprintf(tBuf, sizeof(tBuf), "portal %s", ch->hunting->name );
-           log_string("mob portal");
-           do_cast( ch, tBuf );
-           log_string("do_enter1");
-           do_enter( ch, "portal" );
-	   if (ch->in_room==NULL || ch->hunting==NULL) return;
-	   if( ch->in_room == ch->hunting->in_room )
-	    {
-        act( "$n $E dik dik bakarak diyor ki, 'Öleceksin!'",
-  	  ch, NULL, ch->hunting, TO_NOTVICT );
-        act("$n sana dik dik bakarak diyor ki, 'Öleceksin!'",
-  	  ch, NULL, ch->hunting, TO_VICT );
-        act( "$E dik dik bakarak diyorsun ki, 'Öleceksin!'",
-  	  ch, NULL, ch->hunting, TO_CHAR);
-	      multi_hit( ch, ch->hunting, TYPE_UNDEFINED );
-      	      ch->hunting = NULL; /* No more hunting, now tracking */
-	      return;
-	    }
-	   log_string("done1");
-	   return;
-        }
-       else
+      ch->hunting = NULL;
+      return;
+    }
+
+  if( !can_see( ch, ch->hunting ) )
+    {
+      if( get_char_area( ch, ch->hunting->name ) != NULL )
+        hunt_via_portal( ch );
+      else
 	{
          do_say( ch, "Ahhhh!  Avım gitti!!" );
          ch->hunting = NULL;
-         return;
         }
-    }   /* end if !found or !can_see */
-
-
+      return;
+    }
 
   dir = find_path( ch->in_room->vnum, ch->hunting->in_room->vnum,
 		  ch, -40000, TRUE );
 
   if( dir < 0 || dir > 5 )
   {
-/* 1 */
-    if( get_char_area( ch, ch->hunting->name) != NULL
-        && ch-> level > 35 )
-    {
-      snprintf(tBuf, sizeof(tBuf), "portal %s", ch->hunting->name );
-      log_string("mob portal");
-      do_cast( ch, tBuf );
-      log_string("do_enter2");
-      do_enter( ch, "portal" );
-      if (ch->in_room==NULL || ch->hunting==NULL) return;
-      if( ch->in_room == ch->hunting->in_room )
-       {
-         act( "$n $E dik dik bakarak diyor ki, 'Öleceksin!'",
-   	  ch, NULL, ch->hunting, TO_NOTVICT );
-         act("$n sana dik dik bakarak diyor ki, 'Öleceksin!'",
-   	  ch, NULL, ch->hunting, TO_VICT );
-         act( "$E dik dik bakarak diyorsun ki, 'Öleceksin!'",
-   	  ch, NULL, ch->hunting, TO_CHAR);
-        multi_hit( ch, ch->hunting, TYPE_UNDEFINED );
-        ch->hunting = NULL;
-        return;
-       }
-      log_string("done2");
-      return;
-    }
+    if( get_char_area( ch, ch->hunting->name ) != NULL && ch->level > 35 )
+      hunt_via_portal( ch );
     else
     {
       act( "$n diyor ki '$M'i kaybettim!'", ch, NULL, ch->hunting, TO_ROOM );
       ch->hunting = NULL;
-      return;
     }
-   } /* if dir < 0 or > 5 */
-
+    return;
+  }
 
   if( ch->in_room->exit[dir] && IS_SET( ch->in_room->exit[dir]->exit_info, EX_CLOSED ) )
     {
@@ -649,18 +601,7 @@ void hunt_victim( CHAR_DATA *ch )
   move_char( ch, dir, FALSE );
   if (ch->in_room==NULL || ch->hunting==NULL) return;
   if( ch->in_room == ch->hunting->in_room )
-    {
-      act( "$n $E dik dik bakarak diyor ki, 'Öleceksin!'",
-	  ch, NULL, ch->hunting, TO_NOTVICT );
-      act("$n sana dik dik bakarak diyor ki, 'Öleceksin!'",
-	  ch, NULL, ch->hunting, TO_VICT );
-      act( "$E dik dik bakarak diyorsun ki, 'Öleceksin!'",
-	  ch, NULL, ch->hunting, TO_CHAR);
-      multi_hit( ch, ch->hunting, TYPE_UNDEFINED );
-      ch->hunting = NULL;
-      return;
-    }
-  return;
+    hunt_caught( ch );
 }
 
 
@@ -721,112 +662,146 @@ void damage_to_obj(CHAR_DATA *ch,OBJ_DATA *wield, OBJ_DATA *worn, int damage)
 }
 
 
+/* dövüşte kırılabilecek zırh yuvaları (eller, dövme, saplanmış eşya hariç) */
+static bool armor_slot_breakable( int wear )
+{
+ return wear != WEAR_LEFT && wear != WEAR_RIGHT && wear != WEAR_BOTH
+     && wear != WEAR_TATTOO && wear != WEAR_STUCK_IN;
+}
+
+/*
+ * wield silahının destroy eşyasına hasar verme şansı; ön denetimlerden
+ * geçemezse 0. Metal silah: taban 20, seviye farkları yarım/beşte bir;
+ * metal olmayan: taban 10, tam farklar ve ters beceri zarı (özgün kural).
+ */
+static int destroy_chance( CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *wield, OBJ_DATA *destroy,
+			   int sn, int skill )
+{
+ bool metal = is_metal( wield );
+ int chance;
+
+ if ( number_percent() > 94
+   || ( metal ? number_percent() > skill : number_percent() < skill )
+   || ch->level < victim->level - 10
+   || check_material( destroy, "platinum" )
+   || destroy->pIndexData->limit != -1 )
+   return 0;
+
+ if ( metal )
+ {
+   chance = 20;
+   if ( check_material( wield, "platinum" ) || check_material( wield, "titanium" ) )
+     chance += 5;
+   chance += is_metal( destroy ) ? -20 : 20;
+   chance += ( ch->level - victim->level ) / 5;
+   chance += ( wield->level - destroy->level ) / 2;
+ }
+ else
+ {
+   chance = 10;
+   if ( is_metal( destroy ) )
+     chance -= 20;
+   chance += ch->level - victim->level;
+   chance += wield->level - destroy->level;
+ }
+
+ /* sharpness */
+ if ( IS_WEAPON_STAT( wield, WEAPON_SHARP ) )
+   chance += 10;
+ if ( sn == gsn_axe )
+   chance += 10;
+ /* spell affects */
+ if ( IS_OBJ_STAT( destroy, ITEM_BLESS ) )
+   chance -= 10;
+ if ( IS_OBJ_STAT( destroy, ITEM_MAGIC ) )
+   chance -= 20;
+
+ chance += skill - 85;
+ chance += get_curr_stat( ch, STAT_STR );
+ return chance;
+}
+
+/* saldıranın silahı ve becerisi; kurban yaratıksa ya da %94 zar tutmazsa NULL */
+static OBJ_DATA *destroy_weapon( CHAR_DATA *ch, CHAR_DATA *victim, bool second, int *sn, int *skill )
+{
+ OBJ_DATA *wield;
+
+ if ( IS_NPC( victim ) || number_percent() < 94 )
+   return NULL;
+ if ( ( wield = get_wield_char( ch, second ) ) == NULL )
+   return NULL;
+ *sn = get_weapon_sn( ch, second );
+ *skill = get_skill( ch, *sn );
+ return wield;
+}
+
+/* kurbanın giydiği zırhlardan birine hasar */
 void check_weapon_destroy(CHAR_DATA *ch, CHAR_DATA *victim,bool second)
 {
  OBJ_DATA *wield,*destroy;
- int skill,chance=0,sn,i;
+ int skill,chance,sn,i;
 
- if (IS_NPC(victim) || number_percent() < 94 )  return;
-
- if ( (wield = get_wield_char(ch,second)) == NULL)
+ if ( ( wield = destroy_weapon( ch, victim, second, &sn, &skill ) ) == NULL )
    return;
- sn = get_weapon_sn(ch,second);
- skill = get_skill(ch, sn );
 
- if (is_metal(wield))
-      {
-	for (i=0;i < MAX_WEAR; i++)
-	{
-	 if ( ( destroy = get_eq_char(victim,i) ) == NULL
-		|| number_percent() > 95
-		|| number_percent() > 94
-	 	|| number_percent() > skill
-		|| ch->level < (victim->level - 10)
-		|| check_material(destroy,"platinum")
-		|| destroy->pIndexData->limit != -1
-		|| (i == WEAR_LEFT || i== WEAR_RIGHT || i== WEAR_BOTH
-			|| i == WEAR_TATTOO || i == WEAR_STUCK_IN) )
-	 continue;
-
-	 chance += 20;
-	 if ( check_material(wield, "platinium") ||
-	      check_material(wield, "titanium") )
-	 chance += 5;
-
-	 if ( is_metal(destroy) )  chance -= 20;
-	 else 			chance += 20;
-
-	 chance += ( (ch->level - victim->level) / 5);
-
-	 chance += ( (wield->level - destroy->level) / 2 );
-
-	/* sharpness	*/
-	 if ( IS_WEAPON_STAT(wield,WEAPON_SHARP) )
-		chance += 10;
-
-	 if ( sn == gsn_axe ) chance += 10;
-	/* spell affects */
-	 if ( IS_OBJ_STAT( destroy, ITEM_BLESS) ) chance -= 10;
-	 if ( IS_OBJ_STAT( destroy, ITEM_MAGIC) ) chance -= 20;
-
-	 chance += skill - 85 ;
-	 chance += get_curr_stat( ch, STAT_STR);
-
-/*	 chance /= 2;	*/
-	 if (number_percent() < chance && chance > 50)
-		{
-		 damage_to_obj(ch,wield,destroy, (chance / 5) );
-		 break;
-		}
-	}
-      }
- else {
-	for (i=0;i < MAX_WEAR;i++)
-	{
-	 if ( ( destroy = get_eq_char(victim,i) ) == NULL
-		|| number_percent() > 95
-		|| number_percent() > 94
-	 	|| number_percent() < skill
-		|| ch->level < (victim->level - 10)
-		|| check_material(destroy,"platinum")
-		|| destroy->pIndexData->limit != -1
-		|| (i == WEAR_LEFT || i== WEAR_RIGHT || i==WEAR_BOTH
-			|| i == WEAR_TATTOO || i == WEAR_STUCK_IN ) )
-	 continue;
-
-	 chance += 10;
-
-	 if ( is_metal(destroy) )  chance -= 20;
-
-	 chance += (ch->level - victim->level);
-
-	 chance += (wield->level - destroy->level);
-
-	/* sharpness	*/
-	 if ( IS_WEAPON_STAT(wield,WEAPON_SHARP) )
-		chance += 10;
-
-	 if ( sn == gsn_axe ) chance += 10;
-
-	/* spell affects */
-	 if ( IS_OBJ_STAT( destroy, ITEM_BLESS) ) chance -= 10;
-	 if ( IS_OBJ_STAT( destroy, ITEM_MAGIC) ) chance -= 20;
-
-	 chance += skill - 85 ;
-	 chance += get_curr_stat( ch, STAT_STR);
-
-/*	 chance /= 2;	*/
-	 if (number_percent() < chance && chance > 50)
-		{
-		 damage_to_obj(ch,wield,destroy, chance / 5 );
-		 break;
-		}
-	}
-      }
-
- return;
+ for ( i = 0; i < MAX_WEAR; i++ )
+ {
+   if ( !armor_slot_breakable( i ) || ( destroy = get_eq_char( victim, i ) ) == NULL
+     || number_percent() > 95 )
+     continue;
+   chance = destroy_chance( ch, victim, wield, destroy, sn, skill );
+   if ( chance > 50 && number_percent() < chance )
+   {
+     damage_to_obj( ch, wield, destroy, chance / 5 );
+     break;
+   }
+ }
 }
 
+/* odadaki tamirci (spec_repairman) */
+static CHAR_DATA *repairman_here( CHAR_DATA *ch )
+{
+    static SPEC_FUN *spec_repairman_fn = NULL;
+    CHAR_DATA *mob;
+
+    if ( spec_repairman_fn == NULL )
+        spec_repairman_fn = spec_lookup( "spec_repairman" );
+    if ( spec_repairman_fn == NULL )
+        return NULL;
+    for ( mob = ch->in_room->people; mob; mob = mob->next_in_room )
+        if ( IS_NPC(mob) && mob->spec_fun == spec_repairman_fn )
+            return mob;
+    return NULL;
+}
+
+static int repair_cost( OBJ_DATA *obj )
+{
+    return obj->level * 10 + obj->cost * ( 100 - obj->condition ) / 100;
+}
+
+/* tamircinin eşyaya itirazı varsa söyler ve TRUE döner */
+static bool repair_refused( CHAR_DATA *mob, OBJ_DATA *obj )
+{
+    char buf[MAX_INPUT_LENGTH];
+
+    if (obj->pIndexData->vnum == OBJ_VNUM_HAMMER)
+    {
+	do_say(mob,"Bu çekiç benim ustalığımın üstünde.");
+	return TRUE;
+    }
+    if (obj->condition >= 100)
+    {
+	do_say(mob,"Bu eşya zaten iyi durumda.");
+	return TRUE;
+    }
+    if (obj->cost == 0)
+    {
+	snprintf(buf, sizeof(buf),"%s tamir edilemeyecek durumda.", obj->short_descr);
+	do_say(mob,buf);
+	return TRUE;
+    }
+    return FALSE;
+}
 
 void do_repair(CHAR_DATA *ch, char *argument)
 {
@@ -836,14 +811,7 @@ void do_repair(CHAR_DATA *ch, char *argument)
     OBJ_DATA *obj;
     int cost;
 
-    for ( mob = ch->in_room->people; mob; mob = mob->next_in_room )
-    {
-        if (!IS_NPC(mob)) continue;
-	if (mob->spec_fun == spec_lookup("spec_repairman") )
-            break;
-    }
-
-    if ( mob == NULL )
+    if ( ( mob = repairman_here( ch ) ) == NULL )
     {
       send_to_char( "Burada yapamazsın.\n\r", ch );
         return;
@@ -854,7 +822,7 @@ void do_repair(CHAR_DATA *ch, char *argument)
     if (arg[0] == '\0')
     {
 	do_say(mob,"Senin için bir silahı onarabilirim. Tabii ücret karşılığında.");
-	send_to_char("Type estimate <weapon> to be assessed for damage.\n\r",ch);
+	send_to_char("Hasar tespiti için 'ücret <eşya>' yaz.\n\r",ch);
 	return;
     }
     if (( obj = get_obj_carry(ch, arg)) == NULL)
@@ -863,27 +831,10 @@ void do_repair(CHAR_DATA *ch, char *argument)
 	return;
     }
 
-    if (obj->pIndexData->vnum == OBJ_VNUM_HAMMER)
-    {
-     do_say(mob,"Bu çekiç benim ustalığımın üstünde.");
-     return;
-    }
+    if ( repair_refused( mob, obj ) )
+	return;
 
-    if (obj->condition >= 100)
-    {
-	do_say(mob,"Bu eşya zaten iyi durumda.");
-        return;
-    }
-
-    if (obj->cost == 0)
-    {
-	snprintf(buf, sizeof(buf),"%s tamir edilemeyecek durumda.\n\r", obj->short_descr);
-	do_say(mob,buf);
-   	return;
-    }
-
-    cost = ( (obj->level * 10) +
-		((obj->cost * (100 - obj->condition)) /100)    );
+    cost = repair_cost( obj );
 
     if (cost > ch->silver)
     {
@@ -908,18 +859,10 @@ void do_estimate(CHAR_DATA *ch, char *argument)
     OBJ_DATA *obj;
     CHAR_DATA *mob;
     char arg[MAX_INPUT_LENGTH];
-    int cost;
 
-    for ( mob = ch->in_room->people; mob; mob = mob->next_in_room )
+    if ( ( mob = repairman_here( ch ) ) == NULL )
     {
-        if (!IS_NPC(mob)) continue;
-	if (mob->spec_fun == spec_lookup("spec_repairman") )
-            break;
-    }
-
-    if ( mob == NULL )
-    {
-        send_to_char( "Burada yapamazsın..\n\r", ch );
+        send_to_char( "Burada yapamazsın.\n\r", ch );
         return;
     }
 
@@ -935,26 +878,10 @@ void do_estimate(CHAR_DATA *ch, char *argument)
 	do_say(mob,"Sende bu eşya yok.");
 	return;
     }
-    if (obj->pIndexData->vnum == OBJ_VNUM_HAMMER)
-	{
-	    do_say(mob,"Bu çekiç benim ustalığımın üstünde.");
-	    return;
-	}
-    if (obj->condition >= 100)
-    {
-	do_say(mob,"Bu eşya zaten iyi durumda.");
+    if ( repair_refused( mob, obj ) )
 	return;
-    }
-    if (obj->cost == 0)
-    {
-	do_say(mob,"Bu eşya tamir edilemeyecek durumda.");
-    	return;
-    }
 
-    cost = ( (obj->level * 10) +
-		((obj->cost * (100 - obj->condition)) /100)    );
-
-    snprintf(buf, sizeof(buf), "Bu eşyayı tamir etmek sana %d akçeye patlar.", cost);
+    snprintf(buf, sizeof(buf), "Bu eşyayı tamir etmek sana %d akçeye patlar.", repair_cost( obj ));
     do_say(mob,buf);
 }
 
@@ -983,7 +910,7 @@ void do_restring( CHAR_DATA *ch, char *argument )
     smash_tilde( argument );
     argument = one_argument( argument, arg );
     argument = one_argument( argument, arg1 );
-    strcpy( arg2, argument );
+    snprintf( arg2, sizeof(arg2), "%s", argument );
 
 	if ( arg[0] == '\0' || arg1[0] == '\0' || arg2[0] == '\0' )
 	{
@@ -996,7 +923,7 @@ void do_restring( CHAR_DATA *ch, char *argument )
 
     if ((obj = (get_obj_carry(ch, arg))) == NULL)
     {
-      send_to_char("Stringer '`Sende ondan yok`` dedi.'\n\r",ch);
+      act("$N 'Sende ondan yok,' dedi.",ch,NULL,mob,TO_CHAR);
 		return;
     }
 
@@ -1043,193 +970,36 @@ void do_restring( CHAR_DATA *ch, char *argument )
   send_to_char("Eşya isimlendirmede saldırgan ve hakaret içeren isimler vermek kurallara aykırıdır.\n\r", ch);
 }
 
+/* kurbanın kalkanına hasar */
 void check_shield_destroyed(CHAR_DATA *ch, CHAR_DATA *victim,bool second)
 {
  OBJ_DATA *wield,*destroy;
- int skill,chance=0,sn;
+ int skill,chance,sn;
 
- if (IS_NPC(victim) || number_percent() < 94 )  return;
-
- if ( (wield = get_wield_char(ch,second)) == NULL)
+ if ( ( wield = destroy_weapon( ch, victim, second, &sn, &skill ) ) == NULL )
    return;
- sn = get_weapon_sn(ch,second);
- skill = get_skill(ch, sn );
+ if ( ( destroy = get_shield_char( victim ) ) == NULL )
+   return;
 
- destroy = get_shield_char(victim);
-
- if (destroy == NULL) return;
-
- if (is_metal(wield))
-      {
-	 if (   number_percent() > 94
-	 	|| number_percent() > skill
-		|| ch->level < (victim->level - 10)
-		|| check_material(destroy,"platinum")
-		|| destroy->pIndexData->limit != -1 )
-	 return;
-
-	 chance += 20;
-	 if ( check_material(wield, "platinium") ||
-	      check_material(wield, "titanium") )
-	 chance += 5;
-
-	 if ( is_metal(destroy) )  chance -= 20;
-	 else 			chance += 20;
-
-	 chance += ( (ch->level - victim->level) / 5);
-
-	 chance += ( (wield->level - destroy->level) / 2 );
-
-	/* sharpness	*/
-	 if ( IS_WEAPON_STAT(wield,WEAPON_SHARP) )
-		chance += 10;
-
-	 if ( sn == gsn_axe ) chance += 10;
-	/* spell affects */
-	 if ( IS_OBJ_STAT( destroy, ITEM_BLESS) ) chance -= 10;
-	 if ( IS_OBJ_STAT( destroy, ITEM_MAGIC) ) chance -= 20;
-
-	 chance += skill - 85 ;
-	 chance += get_curr_stat( ch, STAT_STR);
-
-/* 	 chance /= 2;	*/
-	 if (number_percent() < chance && chance > 20 )
-		{
-		 damage_to_obj(ch,wield,destroy, (chance / 4) );
-		 return;
-		}
-      }
- else {
-	 if (   number_percent() > 94
-	 	|| number_percent() < skill
-		|| ch->level < (victim->level - 10)
-		|| check_material(destroy,"platinum")
-		|| destroy->pIndexData->limit != -1 )
-	 return;
-
-	 chance += 10;
-
-	 if ( is_metal(destroy) )  chance -= 20;
-
-	 chance += (ch->level - victim->level);
-
-	 chance += (wield->level - destroy->level);
-
-	/* sharpness	*/
-	 if ( IS_WEAPON_STAT(wield,WEAPON_SHARP) )
-		chance += 10;
-
-	 if ( sn == gsn_axe ) chance += 10;
-
-	/* spell affects */
-	 if ( IS_OBJ_STAT( destroy, ITEM_BLESS) ) chance -= 10;
-	 if ( IS_OBJ_STAT( destroy, ITEM_MAGIC) ) chance -= 20;
-
-	 chance += skill - 85 ;
-	 chance += get_curr_stat( ch, STAT_STR);
-
-/*	 chance /= 2;	*/
-	 if (number_percent() < chance && chance > 20)
-		{
-		 damage_to_obj(ch,wield,destroy, (chance / 4) );
-		 return;
-		}
-      }
- return;
+ chance = destroy_chance( ch, victim, wield, destroy, sn, skill );
+ if ( chance > 20 && number_percent() < chance )
+   damage_to_obj( ch, wield, destroy, chance / 4 );
 }
 
+/* kurbanın silahına hasar (kalkana göre yarı olasılık) */
 void check_weapon_destroyed(CHAR_DATA *ch, CHAR_DATA *victim,bool second)
 {
  OBJ_DATA *wield,*destroy;
- int skill,chance=0,sn;
+ int skill,chance,sn;
 
- if (IS_NPC(victim) || number_percent() < 94 )  return;
-
- if ( (wield = get_wield_char(ch,second)) == NULL)
+ if ( ( wield = destroy_weapon( ch, victim, second, &sn, &skill ) ) == NULL )
    return;
- sn = get_weapon_sn(ch, second);
- skill = get_skill(ch, sn );
+ if ( ( destroy = get_wield_char( victim, FALSE ) ) == NULL )
+   return;
 
- destroy = get_wield_char(victim,FALSE);
- if (destroy == NULL ) return;
-
- if (is_metal(wield))
-      {
-	 if (   number_percent() > 94
-	 	|| number_percent() > skill
-		|| ch->level < (victim->level - 10)
-		|| check_material(destroy,"platinum")
-		|| destroy->pIndexData->limit != -1 )
-	 return;
-
-	 chance += 20;
-	 if ( check_material(wield, "platinium") ||
-	      check_material(wield, "titanium") )
-	 chance += 5;
-
-	 if ( is_metal(destroy) )  chance -= 20;
-	 else 			chance += 20;
-
-	 chance += ( (ch->level - victim->level) / 5);
-
-	 chance += ( (wield->level - destroy->level) / 2 );
-
-	/* sharpness	*/
-	 if ( IS_WEAPON_STAT(wield,WEAPON_SHARP) )
-		chance += 10;
-
-	 if ( sn == gsn_axe ) chance += 10;
-	/* spell affects */
-	 if ( IS_OBJ_STAT( destroy, ITEM_BLESS) ) chance -= 10;
-	 if ( IS_OBJ_STAT( destroy, ITEM_MAGIC) ) chance -= 20;
-
-	 chance += skill - 85 ;
-	 chance += get_curr_stat( ch, STAT_STR);
-
-/*	 chance /= 2;	*/
-	 if (number_percent() < (chance / 2) && chance > 20 )
-		{
-		 damage_to_obj(ch,wield,destroy, (chance / 4) );
-		 return;
-		}
-      }
- else {
-	 if (   number_percent() > 94
-	 	|| number_percent() < skill
-		|| ch->level < (victim->level - 10)
-		|| check_material(destroy,"platinum")
-		|| destroy->pIndexData->limit != -1 )
-	 return;
-
-	 chance += 10;
-
-	 if ( is_metal(destroy) )  chance -= 20;
-
-	 chance += (ch->level - victim->level);
-
-	 chance += (wield->level - destroy->level);
-
-	/* sharpness	*/
-	 if ( IS_WEAPON_STAT(wield,WEAPON_SHARP) )
-		chance += 10;
-
-	 if ( sn == gsn_axe ) chance += 10;
-
-	/* spell affects */
-	 if ( IS_OBJ_STAT( destroy, ITEM_BLESS) ) chance -= 10;
-	 if ( IS_OBJ_STAT( destroy, ITEM_MAGIC) ) chance -= 20;
-
-	 chance += skill - 85 ;
-	 chance += get_curr_stat( ch, STAT_STR);
-
-/*	 chance /= 2;	*/
-	 if (number_percent() < (chance / 2) && chance > 20 )
-		{
-		 damage_to_obj(ch,wield,destroy, chance / 4 );
-		 return;
-		}
-      }
- return;
+ chance = destroy_chance( ch, victim, wield, destroy, sn, skill );
+ if ( chance > 20 && number_percent() < chance / 2 )
+   damage_to_obj( ch, wield, destroy, chance / 4 );
 }
 
 
@@ -1303,7 +1073,7 @@ void do_smithing(CHAR_DATA *ch, char *argument)
     act(buf,ch,NULL,NULL,TO_ROOM);
     snprintf(buf, sizeof(buf), "%s eşyasını tamir ettin.\n\r", obj->short_descr);
     send_to_char(buf, ch);
-    obj->condition = UMAX( 100 ,
+    obj->condition = UMIN( 100 ,
 	 obj->condition + ( get_skill(ch,gsn_smithing) / 2) );
     hammer->condition -= 25;
      }
@@ -1406,17 +1176,15 @@ int advatoi (const char *s)
 
   char string[MAX_INPUT_LENGTH]; /* a buffer to hold a copy of the argument */
   char *stringptr = string; /* a pointer to the buffer so we can move around */
-  char tempstring[2];       /* a small temp buffer to pass to atoi*/
   int number = 0;           /* number to be returned */
   int multiplier = 0;       /* multiplier used to get the extra digits right */
 
 
-  strcpy (string,s);        /* working copy */
+  snprintf (string, sizeof(string), "%s", s);   /* working copy */
 
-  while ( isdigit (*stringptr)) /* as long as the current character is a digit */
+  while ( isdigit ((unsigned char) *stringptr)) /* as long as the current character is a digit */
   {
-      strncpy (tempstring,stringptr,1);           /* copy first digit */
-      number = (number * 10) + atoi (tempstring); /* add to current number */
+      number = (number * 10) + (*stringptr - '0'); /* add to current number */
       stringptr++;                                /* advance */
   }
 
@@ -1427,15 +1195,14 @@ int advatoi (const char *s)
       default   : return 0; /* not k nor m nor NUL - return 0! */
   }
 
-  while ( isdigit (*stringptr) && (multiplier > 1)) /* if any digits follow k/m, add those too */
+  while ( isdigit ((unsigned char) *stringptr) && (multiplier > 1)) /* if any digits follow k/m, add those too */
   {
-      strncpy (tempstring,stringptr,1);           /* copy first digit */
       multiplier = multiplier / 10;  /* the further we get to right, the less are the digit 'worth' */
-      number = number + (atoi (tempstring) * multiplier);
+      number = number + ((*stringptr - '0') * multiplier);
       stringptr++;
   }
 
-  if (*stringptr != '\0' && !isdigit(*stringptr)) /* a non-digit character was found, other than NUL */
+  if (*stringptr != '\0' && !isdigit((unsigned char) *stringptr)) /* a non-digit character was found, other than NUL */
     return 0; /* If a digit is found, it means the multiplier is 1 - i.e. extra
                  digits that just have to be ignore, liked 14k4443 -> 3 is ignored */
 
@@ -1450,15 +1217,14 @@ int parsebet (const int currentbet, const char *argument)
   int newbet = 0;                /* a variable to temporarily hold the new bet */
   char string[MAX_INPUT_LENGTH]; /* a buffer to modify the bet string */
   char *stringptr = string;      /* a pointer we can move around */
-  char buf2[MAX_STRING_LENGTH];
 
-  strcpy (string,argument);      /* make a work copy of argument */
+  snprintf (string, sizeof(string), "%s", argument);   /* make a work copy of argument */
 
 
   if (*stringptr)               /* check for an empty string */
   {
 
-    if (isdigit (*stringptr)) /* first char is a digit assume e.g. 433k */
+    if (isdigit ((unsigned char) *stringptr)) /* first char is a digit assume e.g. 433k */
       newbet = advatoi (stringptr); /* parse and set newbet to that value */
 
     else
@@ -1469,16 +1235,12 @@ int parsebet (const int currentbet, const char *argument)
         else
           newbet = (currentbet * (100 + atoi (++stringptr))) / 100; /* cut off the first char */
       }
-      else
-        {
-        snprintf(buf2, sizeof(buf2),"considering: * x \n\r");
-        if ((*stringptr == '*') || (*stringptr == 'x')) /* multiply */
+      else if ((*stringptr == '*') || (*stringptr == 'x')) /* multiply */
         {
           if (strlen (stringptr) == 1) /* only x specified, assume default */
             newbet = currentbet * 2 ; /* default: twice */
           else /* user specified a number */
             newbet = currentbet * atoi (++stringptr); /* cut off the first char */
-        }
         }
   }
 
@@ -1486,6 +1248,22 @@ int parsebet (const int currentbet, const char *argument)
 }
 
 
+
+/*
+ * Mezattaki satıcı/alıcı hâlâ oyunda mı? Karakter oyundan çıkarılmışsa
+ * (bot ayırma, silme) işaretçisi serbest bırakılmıştır; ona dokunulmaz.
+ */
+static bool auction_char_ok( CHAR_DATA *ch )
+{
+    CHAR_DATA *wch;
+
+    if ( ch == NULL )
+        return FALSE;
+    for ( wch = char_list; wch != NULL; wch = wch->next )
+        if ( wch == ch )
+            return !IS_NPC(wch) && wch->in_room != NULL;
+    return FALSE;
+}
 
 void auction_update (void)
 {
@@ -1496,6 +1274,12 @@ void auction_update (void)
         if (--auction->pulse <= 0) /* decrease pulse */
         {
             auction->pulse = PULSE_AUCTION;
+            if ( auction->bet > 0 && !auction_char_ok( auction->buyer ) )
+            {
+                /* alıcı oyundan çıkmış: teklif düşer */
+                auction->buyer = NULL;
+                auction->bet   = 0;
+            }
             switch (++auction->going) /* increase the going state */
             {
             case 1 : /* going once */
@@ -1524,7 +1308,8 @@ void auction_update (void)
                 act ("Mezatçı beliriyor ve $p eşyasını $e veriyor.",
                      auction->buyer,auction->item,NULL,TO_ROOM);
 
-                auction->seller->silver += auction->bet; /* give him the money */
+                if ( auction_char_ok( auction->seller ) )
+                    auction->seller->silver += auction->bet; /* give him the money */
 
                 auction->item = NULL; /* reset item */
 
@@ -1553,7 +1338,6 @@ void do_auction (CHAR_DATA *ch, char *argument)
     char arg1[MAX_INPUT_LENGTH];
     char buf[MAX_STRING_LENGTH - 20];
     char bufc[MAX_STRING_LENGTH - 10];
-    char betbuf[MAX_STRING_LENGTH];
     int i;
 
     argument = one_argument (argument, arg1);
@@ -1571,7 +1355,6 @@ void do_auction (CHAR_DATA *ch, char *argument)
 	 }
 	 else
 	 {
-     send_to_char("Mezat kanalı kapandı.\n\r",ch);
  	  send_to_char( "Mezat kanalın açık değil.\n\r",ch);
 	  return;
 	 }
@@ -1617,9 +1400,12 @@ void do_auction (CHAR_DATA *ch, char *argument)
       snprintf(buf, sizeof(buf),"%s objesinin satışı bir ölümsüz tarafından durduruldu.",auction->item->short_descr);
 	snprintf(bufc, sizeof(bufc),"%s%s%s",CLR_WHITE,buf,CLR_WHITE_BOLD);
         talk_auction(bufc);
-        obj_to_char(auction->item, auction->seller);
+        if (auction_char_ok(auction->seller))
+            obj_to_char(auction->item, auction->seller);
+        else
+            extract_obj(auction->item);
         auction->item = NULL;
-        if (auction->buyer != NULL) /* return money to the buyer */
+        if (auction_char_ok(auction->buyer)) /* return money to the buyer */
         {
             auction->buyer->silver += auction->bet;
             printf_to_char (auction->buyer,"%d akçen iade edildi.\n\r",auction->bet);
@@ -1647,7 +1433,6 @@ void do_auction (CHAR_DATA *ch, char *argument)
             }
 
             newbet = parsebet (auction->bet, argument);
-            snprintf(betbuf, sizeof(betbuf),"Teklif: %d\n\r",newbet);
 
             if (newbet < (auction->bet + 1))
             {
@@ -1666,7 +1451,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
             /* acik artirma devam ediyor. son yapilan teklifin
              * uzerine cikildi. son teklifi yapana parasini geri ver.
              */
-            if (auction->buyer != NULL)
+            if (auction_char_ok(auction->buyer))
                 auction->buyer->silver += auction->bet;
 
             ch->silver -= newbet; /* substract the silver - important :) */
