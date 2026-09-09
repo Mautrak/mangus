@@ -54,23 +54,38 @@
 #include "bot.h"
 #include "recycle.h"
 
+/*
+ * Serbest liste kalıbı tek yerde: listeden al ya da kalıcı bellekten ayır,
+ * her durumda yapıyı sıfırla; serbest bırakırken listenin başına ekle.
+ */
+#define FREELIST_POP(head, p, T)				\
+    do							\
+    {							\
+	if ((head) == NULL)				\
+	    (p) = (T *) alloc_perm(sizeof(*(p)));	\
+	else						\
+	{						\
+	    (p) = (head);				\
+	    (head) = (head)->next;			\
+	}						\
+	memset((p), 0, sizeof(*(p)));			\
+    } while (0)
+
+#define FREELIST_PUSH(head, p)				\
+    do							\
+    {							\
+	(p)->next = (head);				\
+	(head) = (p);					\
+    } while (0)
+
 /* stuff for recycling ban structures */
 BAN_DATA *ban_free;
 
 BAN_DATA *new_ban(void)
 {
-    static BAN_DATA ban_zero;
     BAN_DATA *ban;
 
-    if (ban_free == NULL)
-	ban = (BAN_DATA *)alloc_perm(sizeof(*ban));
-    else
-    {
-	ban = ban_free;
-	ban_free = ban_free->next;
-    }
-
-    *ban = ban_zero;
+    FREELIST_POP(ban_free, ban, BAN_DATA);
     VALIDATE(ban);
     ban->name = &str_empty[0];
     return ban;
@@ -83,9 +98,7 @@ void free_ban(BAN_DATA *ban)
 
     free_string(ban->name);
     INVALIDATE(ban);
-
-    ban->next = ban_free;
-    ban_free = ban;
+    FREELIST_PUSH(ban_free, ban);
 }
 
 /* stuff for recycling descriptors */
@@ -93,18 +106,9 @@ DESCRIPTOR_DATA *descriptor_free;
 
 DESCRIPTOR_DATA *new_descriptor(void)
 {
-    static DESCRIPTOR_DATA d_zero;
     DESCRIPTOR_DATA *d;
 
-    if (descriptor_free == NULL)
-	d = (DESCRIPTOR_DATA *)alloc_perm(sizeof(*d));
-    else
-    {
-	d = descriptor_free;
-	descriptor_free = descriptor_free->next;
-    }
-
-    *d = d_zero;
+    FREELIST_POP(descriptor_free, d, DESCRIPTOR_DATA);
     VALIDATE(d);
     return d;
 }
@@ -117,8 +121,7 @@ void free_descriptor(DESCRIPTOR_DATA *d)
     free_string( d->host );
     free_mem( d->outbuf, d->outsize );
     INVALIDATE(d);
-    d->next = descriptor_free;
-    descriptor_free = d;
+    FREELIST_PUSH(descriptor_free, d);
 }
 
 /* stuff for recycling extended descs */
@@ -128,14 +131,7 @@ EXTRA_DESCR_DATA *new_extra_descr(void)
 {
     EXTRA_DESCR_DATA *ed;
 
-    if (extra_descr_free == NULL)
-	ed = (EXTRA_DESCR_DATA *)alloc_perm(sizeof(*ed));
-    else
-    {
-	ed = extra_descr_free;
-	extra_descr_free = extra_descr_free->next;
-    }
-
+    FREELIST_POP(extra_descr_free, ed, EXTRA_DESCR_DATA);
     ed->keyword = &str_empty[0];
     ed->description = &str_empty[0];
     VALIDATE(ed);
@@ -150,9 +146,7 @@ void free_extra_descr(EXTRA_DESCR_DATA *ed)
     free_string(ed->keyword);
     free_string(ed->description);
     INVALIDATE(ed);
-
-    ed->next = extra_descr_free;
-    extra_descr_free = ed;
+    FREELIST_PUSH(extra_descr_free, ed);
 }
 
 
@@ -161,20 +155,9 @@ AFFECT_DATA *affect_free;
 
 AFFECT_DATA *new_affect(void)
 {
-    static AFFECT_DATA af_zero;
     AFFECT_DATA *af;
 
-    if (affect_free == NULL)
-	af = (AFFECT_DATA *)alloc_perm(sizeof(*af));
-    else
-    {
-	af = affect_free;
-	affect_free = affect_free->next;
-    }
-
-    *af = af_zero;
-
-
+    FREELIST_POP(affect_free, af, AFFECT_DATA);
     VALIDATE(af);
     return af;
 }
@@ -185,8 +168,7 @@ void free_affect(AFFECT_DATA *af)
 	return;
 
     INVALIDATE(af);
-    af->next = affect_free;
-    affect_free = af;
+    FREELIST_PUSH(affect_free, af);
 }
 
 /* stuff for recycling objects */
@@ -194,19 +176,10 @@ OBJ_DATA *obj_free;
 
 OBJ_DATA *new_obj(void)
 {
-    static OBJ_DATA obj_zero;
     OBJ_DATA *obj;
 
-    if (obj_free == NULL)
-	obj = (OBJ_DATA *)alloc_perm(sizeof(*obj));
-    else
-    {
-	obj = obj_free;
-	obj_free = obj_free->next;
-    }
-    *obj = obj_zero;
+    FREELIST_POP(obj_free, obj, OBJ_DATA);
     VALIDATE(obj);
-
     return obj;
 }
 
@@ -214,7 +187,6 @@ void free_obj(OBJ_DATA *obj)
 {
     AFFECT_DATA *paf, *paf_next;
     EXTRA_DESCR_DATA *ed, *ed_next;
-
 
     if (!IS_VALID(obj))
 	return;
@@ -230,39 +202,34 @@ void free_obj(OBJ_DATA *obj)
     {
 	ed_next = ed->next;
 	free_extra_descr(ed);
-     }
-     obj->extra_descr = NULL;
+    }
+    obj->extra_descr = NULL;
 
     free_string( obj->name        );
     free_string( obj->description );
     free_string( obj->short_descr );
     free_string( obj->owner     );
     INVALIDATE(obj);
-
-    obj->next   = obj_free;
-    obj_free    = obj;
-
+    FREELIST_PUSH(obj_free, obj);
 }
 
 
 /* stuff for recyling characters */
 CHAR_DATA *char_free;
 
+/* Yeni karakterin başlangıç değerleri. */
+#define NEW_CHAR_ARMOR	100
+#define NEW_CHAR_HIT	 20
+#define NEW_CHAR_MANA	100
+#define NEW_CHAR_MOVE	100
+#define NEW_CHAR_STAT	 13
+
 CHAR_DATA *new_char (void)
 {
-    static CHAR_DATA ch_zero;
     CHAR_DATA *ch;
-    int i;
+    size_t i;
 
-    if (char_free == NULL)
-	ch = (CHAR_DATA *)alloc_perm(sizeof(*ch));
-    else
-    {
-	ch = char_free;
-	char_free = char_free->next;
-    }
-
-    *ch				= ch_zero;
+    FREELIST_POP(char_free, ch, CHAR_DATA);
     VALIDATE(ch);
     ch->name                    = &str_empty[0];
     ch->short_descr             = &str_empty[0];
@@ -272,29 +239,19 @@ CHAR_DATA *new_char (void)
     ch->prefix			= &str_empty[0];
     ch->logon                   = current_time;
     ch->lines                   = PAGELEN;
-    for (i = 0; i < 4; i++)
-        ch->armor[i]            = 100;
+    for (i = 0; i < sizeof(ch->armor) / sizeof(ch->armor[0]); i++)
+        ch->armor[i]            = NEW_CHAR_ARMOR;
     ch->position                = POS_STANDING;
-    ch->hit                     = 20;
-    ch->max_hit                 = 20;
-    ch->mana                    = 100;
-    ch->max_mana                = 100;
-    ch->move                    = 100;
-    ch->max_move                = 100;
-
-    ch->ethos			= 0;
-    ch->cabal			= 0;
-    ch->hometown		= 0;
-    ch->guarded_by		= NULL;
-    ch->guarding		= NULL;
-    ch->doppel			= NULL;
+    ch->hit                     = NEW_CHAR_HIT;
+    ch->max_hit                 = NEW_CHAR_HIT;
+    ch->mana                    = NEW_CHAR_MANA;
+    ch->max_mana                = NEW_CHAR_MANA;
+    ch->move                    = NEW_CHAR_MOVE;
+    ch->max_move                = NEW_CHAR_MOVE;
     ch->language		= LANG_COMMON;
 
     for (i = 0; i < MAX_STATS; i ++)
-    {
-        ch->perm_stat[i] = 13;
-        ch->mod_stat[i] = 0;
-    }
+        ch->perm_stat[i] = NEW_CHAR_STAT;
 
     return ch;
 }
@@ -338,8 +295,7 @@ void free_char (CHAR_DATA *ch)
     if (ch->pcdata != NULL)
     	free_pcdata(ch->pcdata);
 
-    ch->next = char_free;
-    char_free  = ch;
+    FREELIST_PUSH(char_free, ch);
 
     ch->extracted = FALSE;
     INVALIDATE(ch);
@@ -350,27 +306,9 @@ PC_DATA *pcdata_free;
 
 PC_DATA *new_pcdata(void)
 {
-    int alias;
-
-    static PC_DATA pcdata_zero;
     PC_DATA *pcdata;
 
-    if (pcdata_free == NULL)
-	pcdata = (PC_DATA *)alloc_perm(sizeof(*pcdata));
-    else
-    {
-	pcdata = pcdata_free;
-	pcdata_free = pcdata_free->next;
-    }
-
-    *pcdata = pcdata_zero;
-
-    for (alias = 0; alias < MAX_ALIAS; alias++)
-    {
-	pcdata->alias[alias] = NULL;
-	pcdata->alias_sub[alias] = NULL;
-    }
-
+    FREELIST_POP(pcdata_free, pcdata, PC_DATA);
     pcdata->buffer = new_buf();
 
     VALIDATE(pcdata);
@@ -391,6 +329,7 @@ void free_pcdata(PC_DATA *pcdata)
     free_string(pcdata->bamfin);
     free_string(pcdata->bamfout);
     free_string(pcdata->title);
+    free_string(pcdata->discord_id);
     free_buf(pcdata->buffer);
 
     for (alias = 0; alias < MAX_ALIAS; alias++)
@@ -399,8 +338,7 @@ void free_pcdata(PC_DATA *pcdata)
 	free_string(pcdata->alias_sub[alias]);
     }
     INVALIDATE(pcdata);
-    pcdata->next = pcdata_free;
-    pcdata_free = pcdata;
+    FREELIST_PUSH(pcdata_free, pcdata);
 
     return;
 }
@@ -414,9 +352,11 @@ long	last_mob_id;
 
 long get_pc_id(void)
 {
-    int val;
+    long val;
 
-    val = (current_time <= last_pc_id) ? last_pc_id + 1 : current_time;
+    val = (long) current_time;
+    if (val <= last_pc_id)
+	val = last_pc_id + 1;
     last_pc_id = val;
     return val;
 }
@@ -435,14 +375,14 @@ BUFFER *buf_free;
 
 
 /* buffer sizes */
-const int buf_size[MAX_BUF_LIST] =
+static const int buf_size[MAX_BUF_LIST] =
 {
     16,32,64,128,256,1024,2048,4096,8192,16384
 };
 
 /* local procedure for finding the next acceptable size */
 /* -1 indicates out-of-boundary error */
-int get_size (int val)
+static int buf_size_for (int val)
 {
     int i;
 
@@ -459,17 +399,9 @@ BUFFER *new_buf()
 {
     BUFFER *buffer;
 
-    if (buf_free == NULL)
-	buffer = (BUFFER *)alloc_perm(sizeof(*buffer));
-    else
-    {
-	buffer = buf_free;
-	buf_free = buf_free->next;
-    }
-
-    buffer->next	= NULL;
+    FREELIST_POP(buf_free, buffer, BUFFER);
     buffer->state	= BUFFER_SAFE;
-    buffer->size	= get_size(BASE_BUF);
+    buffer->size	= buf_size_for(BASE_BUF);
 
     buffer->string	= (char *)alloc_mem(buffer->size);
     buffer->string[0]	= '\0';
@@ -489,50 +421,46 @@ void free_buf(BUFFER *buffer)
     buffer->size   = 0;
     buffer->state  = BUFFER_FREED;
     INVALIDATE(buffer);
-
-    buffer->next  = buf_free;
-    buf_free      = buffer;
+    FREELIST_PUSH(buf_free, buffer);
 }
 
 
 bool add_buf(BUFFER *buffer, char *string)
 {
-    int len;
-    char *oldstr;
-    int oldsize;
-
-    oldstr = buffer->string;
-    oldsize = buffer->size;
+    size_t cur, add;
+    int newsize;
+    char *newstr;
 
     if (buffer->state == BUFFER_OVERFLOW) /* don't waste time on bad strings! */
 	return FALSE;
 
-    len = strlen(buffer->string) + strlen(string) + 1;
-
-    while (len >= buffer->size) /* increase the buffer size */
+    if (string == NULL)
     {
-	buffer->size 	= get_size(buffer->size + 1);
+	bug("Add_buf: NULL string.", 0);
+	return FALSE;
+    }
+
+    cur = strlen(buffer->string);
+    add = strlen(string);
+
+    if (cur + add + 1 > (size_t) buffer->size) /* increase the buffer size */
+    {
+	newsize = buf_size_for((int) (cur + add + 1));
+	if (newsize < 0) /* overflow */
 	{
-	    if (buffer->size == -1) /* overflow */
-	    {
-		buffer->size = oldsize;
-		buffer->state = BUFFER_OVERFLOW;
-		bug("buffer overflow past size %d",buffer->size);
-		if (!string) bug(string,0);
-		return FALSE;
-	    }
-  	}
+	    buffer->state = BUFFER_OVERFLOW;
+	    bug("Add_buf: buffer overflow past size %d.", buffer->size);
+	    return FALSE;
+	}
+
+	newstr = (char *)alloc_mem(newsize);
+	memcpy(newstr, buffer->string, cur + 1);
+	free_mem(buffer->string, buffer->size);
+	buffer->string = newstr;
+	buffer->size   = newsize;
     }
 
-    if (buffer->size != oldsize)
-    {
-	buffer->string	= (char *)alloc_mem(buffer->size);
-
-	strcpy(buffer->string,oldstr);
-	free_mem(oldstr,oldsize);
-    }
-
-    strcat(buffer->string,string);
+    memcpy(buffer->string + cur, string, add + 1);
     return TRUE;
 }
 
