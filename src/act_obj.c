@@ -82,6 +82,7 @@ static int	pick_free_hand	(CHAR_DATA *ch, bool fReplace, int first, int second,
 				 const char *busy_msg);
 static void	wear_multi	(CHAR_DATA *ch,OBJ_DATA *obj,int iWear,bool fReplace);
 static void	wear_a_wield	(CHAR_DATA *ch,OBJ_DATA *obj, bool fReplace);
+static void	autosplit_silver(CHAR_DATA *ch, int amount);
 
 #undef OD
 #undef CD
@@ -166,10 +167,8 @@ bool can_loot(CHAR_DATA *ch, OBJ_DATA *obj)
 
 void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container )
 {
-    /* variables for AUTOSPLIT */
     CHAR_DATA *gch;
-    int members;
-    char buffer[100];
+
 	if ( !CAN_WEAR(obj, ITEM_TAKE) )
 	{
 		send_to_char( "Onu alamazsın.\n\r", ch );
@@ -261,23 +260,10 @@ void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container )
 
     if ( obj->item_type == ITEM_MONEY)
     {
-	ch->silver += ( obj->value[0] + ( obj->value[1] / 2 ) ) ;
-        if (IS_SET(ch->act,PLR_AUTOSPLIT))
-        { /* AUTOSPLIT code */
-    	  members = 0;
-    	  for (gch = ch->in_room->people; gch != NULL; gch = gch->next_in_room )
-    	  {
-            if (!IS_AFFECTED(gch,AFF_CHARM) && is_same_group( gch, ch ) )
-              members++;
-    	  }
+	int amount = obj->value[0] + obj->value[1] / 2;
 
-	  if ( members > 1 && (obj->value[0] > 1 || obj->value[1]))
-	  {
-	    snprintf(buffer, sizeof(buffer),"%d", obj->value[0] + ( obj->value[1] / 2 ) );
-	    do_split(ch,buffer);
-	  }
-        }
-
+	ch->silver += amount;
+	autosplit_silver( ch, amount );
 	extract_obj( obj );
     }
     else
@@ -414,24 +400,7 @@ void do_get( CHAR_DATA *ch, char *argument )
       act("$n yerden bir miktar para aldı.", ch, NULL, NULL, TO_ROOM );
     }
 
-    if (IS_SET(ch->act,PLR_AUTOSPLIT))
-    {
-      int members = 0;
-      CHAR_DATA *gch;
-      char buffer[MAX_INPUT_LENGTH];
-
-      for (gch = ch->in_room->people; gch != NULL; gch = gch->next_in_room )
-      {
-        if (!IS_AFFECTED(gch,AFF_CHARM) && is_same_group( gch, ch ) )
-        members++;
-      }
-
-      if ( members > 1 && (amount > 1) )
-      {
-        snprintf(buffer, sizeof(buffer),"%d",silver);
-        do_split(ch,buffer);
-      }
-    }
+    autosplit_silver( ch, amount );
 
     return;
   }
@@ -2237,273 +2206,124 @@ void do_remove( CHAR_DATA *ch, char *argument )
 }
 
 
-/* hatali kod
-void do_sacrifice( CHAR_DATA *ch, char *argument )
+/*
+ * AUTOSPLIT: aynı gruptaki (büyülenmemiş) üye sayısı 1'den fazlaysa
+ * kazanılan akçe 'dağıt' komutuyla paylaştırılır.
+ */
+static void autosplit_silver( CHAR_DATA *ch, int amount )
 {
-	char arg[MAX_INPUT_LENGTH];
-	char buf[MAX_STRING_LENGTH];
-	char buf2[MAX_STRING_LENGTH];
-	OBJ_DATA *obj;
-	OBJ_DATA *obj_content;
-	OBJ_DATA *obj_next;
-	OBJ_DATA *two_objs[2];
-	int silver;
-	int iScatter;
-	bool fScatter;
-	int count;
-	long toplam_silver;
+    CHAR_DATA *gch;
+    char buffer[MAX_INPUT_LENGTH];
+    int members = 0;
 
-
-	
-	CHAR_DATA *gch;
-	int members;
-	char buffer[100];
-
-
-	one_argument( argument, arg );
-
-	if ( arg[0] == '\0' || !str_cmp( arg, ch->name ) )
-	{
-		act( "$n kendisini tanrılara sunuyor.", ch, NULL, NULL, TO_ROOM );
-		printf_to_char(ch, "Tanrılar teklifini takdir ediyor...\n\r" );
-		return;
-	}
-
-	
-	count=0;
-	toplam_silver=0;
-	if ( !str_cmp( arg, "tümü" ) )
-	{
-		for ( obj = ch->in_room->contents; obj != NULL; obj = obj_next )
-		{
-			obj_next = obj->next_content;
-			printf_to_char(ch,"%s\n\r",obj->name);
-		}
-		printf_to_char(ch,"---\n\r");
-		obj = ch->in_room->contents;
-		while(obj != NULL)
-		{
-			printf_to_char(ch,"tumu for: %s\n\r",obj->name);
-			if ( can_see_obj( ch, obj ) && !IS_OBJ_STAT(obj,ITEM_NOPURGE) && obj->item_type != ITEM_CORPSE_PC  && CAN_WEAR(obj, ITEM_TAKE) && !CAN_WEAR(obj, ITEM_NO_SAC) )
-			{
-				silver = number_range(1,obj->cost);
-				if (obj->item_type != ITEM_CORPSE_NPC && obj->item_type != ITEM_CORPSE_PC)
-				{
-					silver = number_range(1,100);
-				}
-				if (obj->item_type == ITEM_CORPSE_NPC || obj->item_type == ITEM_CORPSE_PC)
-				{
-					for ( obj_content = obj->contains; obj_content; obj_content = obj_next )
-					{
-						obj_next = obj_content->next_content;
-						
-						if ( can_see_obj( ch, obj_content ) && !IS_OBJ_STAT(obj_content,ITEM_NOPURGE) && obj_content->item_type != ITEM_CORPSE_PC  && CAN_WEAR(obj_content, ITEM_TAKE) && !CAN_WEAR(obj_content, ITEM_NO_SAC) )
-						{
-							silver = number_range(1,100);
-							count++;
-							toplam_silver+=silver;
-							extract_obj( obj_content );
-						}
-						else
-						{
-							printf_to_char(ch,"ceset else: %s\n\r",obj_content->name);
-							obj_from_obj( obj_content );
-							obj_to_room( obj_content, ch->in_room );
-						}
-					}
-				}
-				count++;//kurban edilen eşya sayısı
-				toplam_silver+=silver;//kurban etme işleminden toplanan akçe sayısı
-				obj_next = obj->next_content;
-				extract_obj( obj );
-				obj = obj_next;
-			}
-		}
-		if (count>0)//eger birşeyler kurban edilebilmişse
-		{
-			if(ch->religion == 0)
-			{
-				printf_to_char(ch,"%d kurbanın için tanrılardan bir işaret gelmiyor.\n\r",count);
-			}
-			else
-			{
-				printf_to_char(ch,"Tanrılar %d kurbanın için %ld akçe veriyor.\n\r",count,toplam_silver);
-				ch->silver += toplam_silver;
-				if(number_percent()<5)
-				{
-					printf_to_char(ch,"Din puanın artınca kendini tanrına yaklaşmış hissediyorsun.\n\r");
-					ch->pcdata->din_puani += 1;
-				}
-			}
-		}
-		return;
-	}
-	
-
-	obj = get_obj_list( ch, arg, ch->in_room->contents );
-	if ( obj == NULL )
-	{
-		send_to_char( "Onu bulamıyorsun.\n\r", ch );
-		return;
-	}
-
-	if ( obj->item_type == ITEM_CORPSE_PC && ch->level < MAX_LEVEL )
-	{
-		send_to_char("Tanrılar bundan hoşlanmaz.\n\r",ch);
-		return;
-	}
-
-	if ( !CAN_WEAR(obj, ITEM_TAKE) || CAN_WEAR(obj, ITEM_NO_SAC))
-	{
-		act( "$p kabul edilebilir bir kurban değil.", ch, obj, 0, TO_CHAR );
-		return;
-	}
-
-	silver = UMAX(1,number_fuzzy(obj->level));
-
-	if (obj->item_type != ITEM_CORPSE_NPC && obj->item_type != ITEM_CORPSE_PC)
-	{
-		silver = UMIN(silver,obj->cost);
-	}
-
-	if (silver == 1)
-	{
-		printf_to_char(ch, "Tanrılar kurbanın için 1 akçe veriyor.\n\r" );
-	}
-	else
-	{
-		printf_to_char(ch, "Tanrılar kurbanın için %d akçe veriyor.\n\r", silver );
-	}
-
-	ch->silver += silver;
-
-	if (IS_SET(ch->act,PLR_AUTOSPLIT) )
-	
-		members = 0;
-	for (gch = ch->in_room->people; gch != NULL; gch = gch->next_in_room )
-	{
-			if ( is_same_group( gch, ch ) )
-			members++;
-		}
-
-		if ( members > 1 && silver > 1)
-		{
-			snprintf(buffer, sizeof(buffer),"%d",silver);
-			do_split(ch,buffer);
-		}
-	}
-
-	act( "$n tanrılara $p kurban ediyor.", ch, obj, NULL, TO_ROOM );
-
-	if (IS_SET(obj->progtypes,OPROG_SAC))
-	{
-		if ( (obj->pIndexData->oprogs->sac_prog) (obj,ch) )
-		{
-			return;
-		}
-	}
-
-	wiznet("$N sends up $p as a burnt offering.", ch,obj,WIZ_SACCING,0,0);
-	fScatter = TRUE;
-	if ( (obj->item_type == ITEM_CORPSE_NPC ) || (obj->item_type == ITEM_CORPSE_PC  ) )
-	{
-		iScatter = 0;
-		for ( obj_content = obj->contains; obj_content; obj_content = obj_next )
-		{
-			obj_next = obj_content->next_content;
-			two_objs[iScatter<1?0:1] = obj_content;
-			obj_from_obj( obj_content );
-			obj_to_room( obj_content, ch->in_room );
-			iScatter++;
-		}
-		if ( iScatter == 1 )
-		{
-			act(  "Kurban etmenin ardından $p ortaya çıkıyor.", ch, two_objs[0], NULL, TO_CHAR);
-			act(  "$s kurbanının ardından $p ortaya çıkıyor.", ch, two_objs[0], NULL, TO_ROOM);
-		}
-		if ( iScatter == 2 )
-		{
-			act( "Kurban etmenin ardından $p ve $P ortaya çıkıyor.", ch, two_objs[0], two_objs[1], TO_CHAR);
-			act( "$s kurbanının ardından $p ve $P ortaya çıkıyor.", ch, two_objs[0], two_objs[1], TO_ROOM);
-		}
-		snprintf(buf, sizeof(buf), "Cesedi kurban ettiğinde " );
-		snprintf(buf2, sizeof(buf2), "$s cesedi kurban etmesiyle " );
-		if ( iScatter < 3 )
-		{
-			fScatter = FALSE;
-		}
-		else if ( iScatter < 5 )
-		{
-			strcat( buf, "üzerindeki birkaç şey " );
-			strcat( buf2, "üzerindeki birkaç şey " );
-		}
-		else if ( iScatter < 9 )
-		{
-			strcat( buf, "üzerindeki bir miktar eşya " );
-			strcat( buf2, "üzerindeki bir miktar eşya " );
-		}
-		else if ( iScatter < 15 )
-		{
-			strcat( buf, "üzerindeki bir sürü şey " );
-			strcat( buf2, "üzerindeki bir sürü şey " );
-		}
-		else
-		{
-			strcat( buf, "üzerindeki bir sürü şey " );
-			strcat( buf2, "üzerindeki bir sürü şey " );
-		}
-
-		switch( ch->in_room->sector_type )
-		{
-			case SECT_FIELD: strcat( buf, "yere saçılıyor." );
-				strcat( buf2, "yere saçılıyor." );
-				break;
-			case SECT_FOREST: strcat( buf, "yere saçılıyor." );
-				strcat( buf2, "yere saçılıyor." );
-				break;
-			case SECT_WATER_SWIM: strcat( buf, "suya saçılıyor." );
-				strcat( buf2, "suya saçılıyor." );
-				break;
-			case SECT_WATER_NOSWIM: strcat( buf, "suya saçılıyor." );
-				strcat( buf2, "suya saçılıyor." );
-				break;
-			default: strcat( buf, "etrafa saçılıyor." );
-				strcat( buf2, "etrafa saçılıyor." );
-				break;
-		}
-		if ( fScatter )
-		{
-			act( buf, ch, NULL, NULL, TO_CHAR );
-			act( buf2, ch, NULL, NULL, TO_ROOM );
-		}
-
-	}
-
-	extract_obj( obj );
+    if ( !IS_SET(ch->act, PLR_AUTOSPLIT) || amount <= 1 )
 	return;
+
+    for ( gch = ch->in_room->people; gch != NULL; gch = gch->next_in_room )
+	if ( !IS_AFFECTED(gch, AFF_CHARM) && is_same_group( gch, ch ) )
+	    members++;
+
+    if ( members > 1 )
+    {
+	snprintf( buffer, sizeof(buffer), "%d", amount );
+	do_split( ch, buffer );
+    }
 }
-*/
+
+/* Kurban edilebilir mi: alınabilir, kurban yasağı yok, oyuncu cesedi değil. */
+static bool can_sacrifice_obj( CHAR_DATA *ch, OBJ_DATA *obj )
+{
+    return can_see_obj( ch, obj )
+	&& !IS_OBJ_STAT(obj, ITEM_NOPURGE)
+	&& obj->item_type != ITEM_CORPSE_PC
+	&& CAN_WEAR(obj, ITEM_TAKE)
+	&& !CAN_WEAR(obj, ITEM_NO_SAC);
+}
+
+/* Kurban edilen cesedin içindekileri yere saçar ve mesajını basar. */
+static void sacrifice_scatter( CHAR_DATA *ch, OBJ_DATA *obj )
+{
+    static const char *amount_words[] =
+    {
+	"üzerindeki birkaç şey ",		/* < 5  */
+	"üzerindeki bir miktar eşya ",		/* < 9  */
+	"üzerindeki bir sürü şey ",		/* < 15 */
+	"üzerindeki bir sürü şey ",		/* 15+  */
+    };
+    char buf[MAX_STRING_LENGTH];
+    char buf2[MAX_STRING_LENGTH];
+    OBJ_DATA *obj_content, *obj_next;
+    OBJ_DATA *two_objs[2] = { NULL, NULL };
+    const char *amount, *where;
+    int iScatter = 0;
+
+    for ( obj_content = obj->contains; obj_content; obj_content = obj_next )
+    {
+	obj_next = obj_content->next_content;
+	two_objs[iScatter < 1 ? 0 : 1] = obj_content;
+	obj_from_obj( obj_content );
+	obj_to_room( obj_content, ch->in_room );
+	iScatter++;
+    }
+
+    if ( iScatter == 1 )
+    {
+	act( "Kurban etmenin ardından $p ortaya çıkıyor.", ch, two_objs[0], NULL, TO_CHAR );
+	act( "$s kurbanının ardından $p ortaya çıkıyor.", ch, two_objs[0], NULL, TO_ROOM );
+    }
+    else if ( iScatter == 2 )
+    {
+	act( "Kurban etmenin ardından $p ve $P ortaya çıkıyor.", ch, two_objs[0], two_objs[1], TO_CHAR );
+	act( "$s kurbanının ardından $p ve $P ortaya çıkıyor.", ch, two_objs[0], two_objs[1], TO_ROOM );
+    }
+
+    if ( iScatter < 3 )
+	return;
+
+    amount = amount_words[iScatter < 5 ? 0 : iScatter < 9 ? 1 : iScatter < 15 ? 2 : 3];
+    switch ( ch->in_room->sector_type )
+    {
+    case SECT_FIELD:
+    case SECT_FOREST:		where = "yere saçılıyor.";	break;
+    case SECT_WATER_SWIM:
+    case SECT_WATER_NOSWIM:	where = "suya saçılıyor.";	break;
+    default:			where = "etrafa saçılıyor.";	break;
+    }
+
+    snprintf( buf,  sizeof(buf),  "Cesedi kurban ettiğinde %s%s", amount, where );
+    snprintf( buf2, sizeof(buf2), "$s cesedi kurban etmesiyle %s%s", amount, where );
+    act( buf,  ch, NULL, NULL, TO_CHAR );
+    act( buf2, ch, NULL, NULL, TO_ROOM );
+}
+
+/*
+ * Tek eşyayı kurban eder: oda mesajı, OPROG_SAC, ceset içeriğinin
+ * saçılması ve yok etme. OPROG_SAC eşyayı kendisi hallettiyse FALSE döner.
+ */
+static bool sacrifice_one( CHAR_DATA *ch, OBJ_DATA *obj )
+{
+    act( "$n tanrılara $p kurban ediyor.", ch, obj, NULL, TO_ROOM );
+
+    if ( IS_SET(obj->progtypes, OPROG_SAC)
+    &&   (obj->pIndexData->oprogs->sac_prog) (obj, ch) )
+	return FALSE;
+
+    wiznet( "$N $p'yi yakmalık sunu olarak gönderiyor.",
+	    ch, obj, WIZ_SACCING, 0, 0 );
+
+    if ( obj->item_type == ITEM_CORPSE_NPC || obj->item_type == ITEM_CORPSE_PC )
+	sacrifice_scatter( ch, obj );
+
+    extract_obj( obj );
+    return TRUE;
+}
+
 void do_sacrifice( CHAR_DATA *ch, char *argument )
 {
     char arg[MAX_INPUT_LENGTH];
-    char buf[MAX_STRING_LENGTH];
-    char buf2[MAX_STRING_LENGTH];
     OBJ_DATA *obj;
-    OBJ_DATA *obj_content;
     OBJ_DATA *obj_next;
-    OBJ_DATA *two_objs[2];
     int silver;
-    int iScatter;
-    bool fScatter;
-    int count;
-    long toplam_silver;
-
-
-    /* variables for AUTOSPLIT */
-    CHAR_DATA *gch;
-    int members;
-    char buffer[100];
-
 
     one_argument( argument, arg );
 
@@ -2517,43 +2337,45 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
     }
 
     /* kurban tümü */
-    count=0;
-    toplam_silver=0;
     if ( !str_cmp( arg, "tümü" ) )
-      {
-      for ( obj = ch->in_room->contents; obj != NULL; obj = obj_next )
-      {
-        obj_next = obj->next_content;
-        if ( can_see_obj( ch, obj ) && !IS_OBJ_STAT(obj,ITEM_NOPURGE) && obj->item_type != ITEM_CORPSE_PC  && CAN_WEAR(obj, ITEM_TAKE) && !CAN_WEAR(obj, ITEM_NO_SAC) )
-        {
-          silver = number_range(1,obj->cost);
-          if (obj->item_type != ITEM_CORPSE_NPC && obj->item_type != ITEM_CORPSE_PC)
-              silver = number_range(1,100);
-          count++;//kurban edilen eşya sayısı
-          toplam_silver+=silver;//kurban etme işleminden toplanan akçe sayısı
-          extract_obj( obj );
-        }
-      }
-    if (count>0)//eger birşeyler kurban edilebilmişse
     {
-		if(ch->religion == 0)
+	int count = 0;
+	long toplam_silver = 0;
+
+	for ( obj = ch->in_room->contents; obj != NULL; obj = obj_next )
+	{
+	    obj_next = obj->next_content;
+	    if ( !can_sacrifice_obj( ch, obj ) )
+		continue;
+
+	    if ( obj->item_type == ITEM_CORPSE_NPC )
+		silver = number_range( 1, UMAX( 1, obj->cost ) );
+	    else
+		silver = number_range( 1, 100 );
+
+	    if ( !sacrifice_one( ch, obj ) )
+		continue;
+	    count++;			/* kurban edilen eşya sayısı */
+	    toplam_silver += silver;	/* toplanan akçe */
+	}
+
+	if ( count > 0 )
+	{
+	    if ( ch->religion == 0 )
+		printf_to_char( ch, "%d kurbanın için tanrılardan bir işaret gelmiyor.\n\r", count );
+	    else
+	    {
+		printf_to_char( ch, "Tanrılar %d kurbanın için %ld akçe veriyor.\n\r", count, toplam_silver );
+		ch->silver += toplam_silver;
+		if ( !IS_NPC(ch) && number_percent() < 5 )
 		{
-			printf_to_char(ch,"%d kurbanın için tanrılardan bir işaret gelmiyor.\n\r",count);
+		    send_to_char( "Din puanın artınca kendini tanrına yaklaşmış hissediyorsun.\n\r", ch );
+		    ch->pcdata->din_puani += 1;
 		}
-		else
-		{
-			printf_to_char(ch,"Tanrılar %d kurbanın için %ld akçe veriyor.\n\r",count,toplam_silver);
-			ch->silver += toplam_silver;
-			if(number_percent()<5)
-			{
-				printf_to_char(ch,"Din puanın artınca kendini tanrına yaklaşmış hissediyorsun.\n\r");
-				ch->pcdata->din_puani += 1;
-			}
-		}
+	    }
+	}
+	return;
     }
-    return;
-      }
-    /* kurban tümü bitti */
 
     obj = get_obj_list( ch, arg, ch->in_room->contents );
     if ( obj == NULL )
@@ -2584,104 +2406,12 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
         send_to_char(
           "Tanrılar kurbanın için 1 akçe veriyor.\n\r", ch );
     else
-    {
-      snprintf(buf, sizeof(buf),"Tanrılar kurbanın için %d akçe veriyor.\n\r",silver);
-	send_to_char(buf,ch);
-    }
+	printf_to_char( ch, "Tanrılar kurbanın için %d akçe veriyor.\n\r", silver );
 
     ch->silver += silver;
+    autosplit_silver( ch, silver );
 
-    if (IS_SET(ch->act,PLR_AUTOSPLIT) )
-    { /* AUTOSPLIT code */
-    	members = 0;
-	for (gch = ch->in_room->people; gch != NULL; gch = gch->next_in_room )
-    	{
-    	    if ( is_same_group( gch, ch ) )
-            members++;
-    	}
-
-	if ( members > 1 && silver > 1)
-	{
-	    snprintf(buffer, sizeof(buffer),"%d",silver);
-	    do_split(ch,buffer);
-	}
-    }
-
-    act( "$n tanrılara $p kurban ediyor.", ch, obj, NULL, TO_ROOM );
-
-    if (IS_SET(obj->progtypes,OPROG_SAC))
-      if ( (obj->pIndexData->oprogs->sac_prog) (obj,ch) )
-        return;
-
-    wiznet("$N sends up $p as a burnt offering.",
-	   ch,obj,WIZ_SACCING,0,0);
-    fScatter = TRUE;
-    if ( (obj->item_type == ITEM_CORPSE_NPC ) ||
-	  (obj->item_type == ITEM_CORPSE_PC  ) )
-    {
-      iScatter = 0;
-      for ( obj_content = obj->contains; obj_content; obj_content = obj_next )
-      {
-  	obj_next = obj_content->next_content;
-	two_objs[iScatter<1?0:1] = obj_content;
-	obj_from_obj( obj_content );
-	obj_to_room( obj_content, ch->in_room );
-	iScatter++;
-      }
-      if ( iScatter == 1 )  {
-        act(  "Kurban etmenin ardından $p ortaya çıkıyor.", ch, two_objs[0], NULL, TO_CHAR);
-      	act(  "$s kurbanının ardından $p ortaya çıkıyor.", ch, two_objs[0], NULL, TO_ROOM);
-      }
-      if ( iScatter == 2 )  {
-        act( "Kurban etmenin ardından $p ve $P ortaya çıkıyor.", ch, two_objs[0], two_objs[1], TO_CHAR);
-      	act( "$s kurbanının ardından $p ve $P ortaya çıkıyor.", ch, two_objs[0], two_objs[1], TO_ROOM);
-      }
-      snprintf(buf, sizeof(buf), "Cesedi kurban ettiğinde " );
-      snprintf(buf2, sizeof(buf2), "$s cesedi kurban etmesiyle " );
-      if ( iScatter < 3 )
-		   fScatter = FALSE;
-	else if ( iScatter < 5 )  {
-    strcat( buf, "üzerindeki birkaç şey " );
-strcat( buf2, "üzerindeki birkaç şey " );
- 	}
-	else if ( iScatter < 9 )  {
-    strcat( buf, "üzerindeki bir miktar eşya " );
-                strcat( buf2, "üzerindeki bir miktar eşya " );
-        }
-	else if ( iScatter < 15 )  {
-    strcat( buf, "üzerindeki bir sürü şey " );
-                strcat( buf2, "üzerindeki bir sürü şey " );
-        }
-	else  {
-    strcat( buf, "üzerindeki bir sürü şey " );
-                strcat( buf2, "üzerindeki bir sürü şey " );
-        }
-
-      switch( ch->in_room->sector_type )  {
-        case SECT_FIELD: strcat( buf, "yere saçılıyor." );
-                               strcat( buf2, "yere saçılıyor." );
-                               break;
-      	case SECT_FOREST: strcat( buf, "yere saçılıyor." );
-                                strcat( buf2, "yere saçılıyor." );
-                                break;
-      	case SECT_WATER_SWIM: strcat( buf, "suya saçılıyor." );
-                                strcat( buf2, "suya saçılıyor." );
-                                break;
-      	case SECT_WATER_NOSWIM: strcat( buf, "suya saçılıyor." );
-                                strcat( buf2, "suya saçılıyor." );
-                                break;
-      	default: strcat( buf, "etrafa saçılıyor." );
-                            strcat( buf2, "etrafa saçılıyor." );
-                            break;
-      }
-      if ( fScatter )  {
-	act( buf, ch, NULL, NULL, TO_CHAR );
-	act( buf2, ch, NULL, NULL, TO_ROOM );
-      }
-
-    }
-
-    extract_obj( obj );
+    sacrifice_one( ch, obj );
     return;
 }
 
