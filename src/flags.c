@@ -48,6 +48,7 @@
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
 #include <stdio.h>
+#include <stddef.h>
 #include <string.h>
 #include <stdlib.h>
 #include "merc.h"
@@ -55,14 +56,40 @@
 
 int flag_lookup ( const char *name, const struct flag_type *flag_table);
 
+/* Karakter üzerinde 'flag' komutuyla değiştirilebilen bayrak alanları. */
+struct flag_field
+{
+    const char *name;
+    size_t offset;			/* CHAR_DATA içindeki long alan */
+    const struct flag_type *table;
+    int who;				/* 1 yalnız yaratık, -1 yalnız oyuncu, 0 ikisi */
+    const char *wrong;			/* yanlış tür için ileti */
+};
+
+static const struct flag_field flag_fields[] =
+{
+    { "act",	  offsetof(CHAR_DATA, act),	    act_flags,     1, "Oyuncular için plr kullan.\n\r" },
+    { "plr",	  offsetof(CHAR_DATA, act),	    plr_flags,    -1, "Yaratıklar için act kullan.\n\r" },
+    { "aff",	  offsetof(CHAR_DATA, affected_by), affect_flags,  0, NULL },
+    { "immunity", offsetof(CHAR_DATA, imm_flags),   imm_flags,     0, NULL },
+    { "resist",	  offsetof(CHAR_DATA, res_flags),   imm_flags,     0, NULL },
+    { "vuln",	  offsetof(CHAR_DATA, vuln_flags),  imm_flags,     0, NULL },
+    { "form",	  offsetof(CHAR_DATA, form),	    form_flags,    1, "Oyuncuya form verilemez.\n\r" },
+    { "parts",	  offsetof(CHAR_DATA, parts),	    part_flags,    1, "Oyuncuya parts verilemez.\n\r" },
+    { "comm",	  offsetof(CHAR_DATA, comm),	    comm_flags,   -1, "Yaratığa comm verilemez.\n\r" },
+    { NULL, 0, NULL, 0, NULL }
+};
+
 void do_flag(CHAR_DATA *ch, char *argument)
 {
     char arg1[MAX_INPUT_LENGTH],arg2[MAX_INPUT_LENGTH],arg3[MAX_INPUT_LENGTH];
     char word[MAX_INPUT_LENGTH];
     CHAR_DATA *victim;
-    long *flag, old = 0, inew = 0, marked = 0, pos;
-    char type;
+    const struct flag_field *f;
     const struct flag_type *flag_table;
+    long *flag, old, inew = 0, marked = 0, bit;
+    int pos;
+    char type;
 
     argument = one_argument(argument,arg1);
     argument = one_argument(argument,arg2);
@@ -75,190 +102,118 @@ void do_flag(CHAR_DATA *ch, char *argument)
 
     if (arg1[0] == '\0')
     {
-	send_to_char("Syntax:\n\r",ch);
-	send_to_char("  flag mob  <name> <field> <flags>\n\r",ch);
-	send_to_char("  flag char <name> <field> <flags>\n\r",ch);
-	send_to_char("  flag obj  <name> <field> <flags>\n\r",ch);
-	send_to_char("  flag room <room> <field> <flags>\n\r",ch);
-	send_to_char("  mob  flags: act,aff,off,imm,res,vuln,form,part\n\r",ch);
-	send_to_char("  char flags: plr,comm,aff,imm,res,vuln,\n\r",ch);
-	send_to_char("  obj  flags: extra,wear,weap,cont,gate,exit\n\r",ch);
-	send_to_char("  room flags: room\n\r",ch);
-	send_to_char("  +: add flag, -: remove flag, = set equal to\n\r",ch);
-	send_to_char("  otherwise flag toggles the flags listed.\n\r",ch);
+	send_to_char("Yazım:\n\r",ch);
+	send_to_char("  flag mob  <isim> <alan> <bayraklar>\n\r",ch);
+	send_to_char("  flag char <isim> <alan> <bayraklar>\n\r",ch);
+	send_to_char("  yaratık alanları: act,aff,imm,res,vuln,form,parts\n\r",ch);
+	send_to_char("  oyuncu alanları : plr,comm,aff,imm,res,vuln\n\r",ch);
+	send_to_char("  +: bayrak ekler, -: kaldırır, =: yalnız verilenleri bırakır,\n\r",ch);
+	send_to_char("  işaretsiz: sayılan bayrakları tersine çevirir.\n\r",ch);
+	return;
+    }
+
+    if (str_prefix(arg1,"mob") && str_prefix(arg1,"char"))
+    {
+	send_to_char("Yalnız mob ya da char üzerinde bayrak değiştirilebilir.\n\r",ch);
 	return;
     }
 
     if (arg2[0] == '\0')
     {
-	send_to_char("What do you wish to set flags on?\n\r",ch);
+	send_to_char("Kimin bayraklarını değiştireceksin?\n\r",ch);
 	return;
     }
 
     if (arg3[0] == '\0')
     {
-	send_to_char("You need to specify a flag to set.\n\r",ch);
+	send_to_char("Hangi alanı değiştireceğini belirtmelisin.\n\r",ch);
 	return;
     }
 
     if (argument[0] == '\0')
     {
-	send_to_char("Which flags do you wish to change?\n\r",ch);
+	send_to_char("Hangi bayrakları değiştirmek istiyorsun?\n\r",ch);
 	return;
     }
 
-    if (!str_prefix(arg1,"mob") || !str_prefix(arg1,"char"))
+    victim = get_char_world(ch,arg2);
+    if (victim == NULL)
     {
-	victim = get_char_world(ch,arg2);
-	if (victim == NULL)
-	{
-	    send_to_char("You can't find them.\n\r",ch);
-	    return;
-	}
-
-        /* select a flag to set */
-	if (!str_prefix(arg3,"act"))
-	{
-	    if (!IS_NPC(victim))
-	    {
-		send_to_char("Use plr for PCs.\n\r",ch);
-		return;
-	    }
-
-	    flag = &victim->act;
-	    flag_table = act_flags;
-	}
-
-	else if (!str_prefix(arg3,"plr"))
-	{
-	    if (IS_NPC(victim))
-	    {
-		send_to_char("Use act for NPCs.\n\r",ch);
-		return;
-	    }
-
-	    flag = &victim->act;
-	    flag_table = plr_flags;
-	}
-
- 	else if (!str_prefix(arg3,"aff"))
-	{
-	    flag = &victim->affected_by;
-	    flag_table = affect_flags;
-	}
-
-  	else if (!str_prefix(arg3,"immunity"))
-	{
-	    flag = &victim->imm_flags;
-	    flag_table = imm_flags;
-	}
-
-	else if (!str_prefix(arg3,"resist"))
-	{
-	    flag = &victim->res_flags;
-	    flag_table = imm_flags;
-	}
-
-	else if (!str_prefix(arg3,"vuln"))
-	{
-	    flag = &victim->vuln_flags;
-	    flag_table = imm_flags;
-	}
-
-	else if (!str_prefix(arg3,"form"))
-	{
-	    if (!IS_NPC(victim))
-	    {
-	 	send_to_char("Form can't be set on PCs.\n\r",ch);
-		return;
-	    }
-
-	    flag = &victim->form;
-	    flag_table = form_flags;
-	}
-
-	else if (!str_prefix(arg3,"parts"))
-	{
-	    if (!IS_NPC(victim))
-	    {
-		send_to_char("Parts can't be set on PCs.\n\r",ch);
-		return;
-	    }
-
-	    flag = &victim->parts;
-	    flag_table = part_flags;
-	}
-
-	else if (!str_prefix(arg3,"comm"))
-	{
-	    if (IS_NPC(victim))
-	    {
-		send_to_char("Comm can't be set on NPCs.\n\r",ch);
-		return;
-	    }
-
-	    flag = &victim->comm;
-	    flag_table = comm_flags;
-	}
-
-	else
-	{
-	    send_to_char("That's not an acceptable flag.\n\r",ch);
-	    return;
-	}
-
-	old = *flag;
-	victim->zone = NULL;
-
-	if (type != '=')
-	    inew = old;
-
-        /* mark the words */
-        for (; ;)
-        {
-	    argument = one_argument(argument,word);
-
-	    if (word[0] == '\0')
-		break;
-
-	    pos = flag_lookup(word,flag_table);
-	    if (pos == 0)
-	    {
-		send_to_char("That flag doesn't exist!\n\r",ch);
-		return;
-	    }
-	    else
-		SET_BIT(marked,pos);
-	}
-
-	for (pos = 0; flag_table[pos].name != NULL; pos++)
-	{
-	    if (!flag_table[pos].settable && IS_SET(old,flag_table[pos].bit))
-	    {
-		SET_BIT(inew,flag_table[pos].bit);
-		continue;
-	    }
-
-	    if (IS_SET(marked,flag_table[pos].bit))
-	    {
-		switch(type)
-		{
-		    case '=':
-		    case '+':
-			SET_BIT(inew,flag_table[pos].bit);
-			break;
-		    case '-':
-			REMOVE_BIT(inew,flag_table[pos].bit);
-			break;
-		    default:
-			if (IS_SET(inew,flag_table[pos].bit))
-			    REMOVE_BIT(inew,flag_table[pos].bit);
-			else
-			    SET_BIT(inew,flag_table[pos].bit);
-		}
-	    }
-	}
-	*flag = inew;
+	send_to_char("Onu bulamıyorsun.\n\r",ch);
 	return;
     }
+
+    for (f = flag_fields; f->name != NULL; f++)
+	if (!str_prefix(arg3, f->name))
+	    break;
+
+    if (f->name == NULL)
+    {
+	send_to_char("Böyle bir bayrak alanı yok.\n\r",ch);
+	return;
+    }
+
+    if ((f->who > 0 && !IS_NPC(victim)) || (f->who < 0 && IS_NPC(victim)))
+    {
+	send_to_char(f->wrong,ch);
+	return;
+    }
+
+    flag = (long *)((char *)victim + f->offset);
+    flag_table = f->table;
+
+    old = *flag;
+    /* Bayrakları elle değiştirilen yaratık bölgesine bağlı kalmaz (mset gibi). */
+    victim->zone = NULL;
+
+    if (type != '=')
+	inew = old;
+
+    /* verilen sözcükleri işaretle */
+    for (; ;)
+    {
+	argument = one_argument(argument,word);
+
+	if (word[0] == '\0')
+	    break;
+
+	bit = flag_lookup(word,flag_table);
+	if (bit == 0)
+	{
+	    send_to_char("Böyle bir bayrak yok!\n\r",ch);
+	    return;
+	}
+	SET_BIT(marked,bit);
+    }
+
+    for (pos = 0; flag_table[pos].name != NULL; pos++)
+    {
+	bit = flag_table[pos].bit;
+
+	if (!flag_table[pos].settable && IS_SET(old,bit))
+	{
+	    SET_BIT(inew,bit);
+	    continue;
+	}
+
+	if (!IS_SET(marked,bit))
+	    continue;
+
+	switch(type)
+	{
+	    case '=':
+	    case '+':
+		SET_BIT(inew,bit);
+		break;
+	    case '-':
+		REMOVE_BIT(inew,bit);
+		break;
+	    default:
+		if (IS_SET(inew,bit))
+		    REMOVE_BIT(inew,bit);
+		else
+		    SET_BIT(inew,bit);
+	}
+    }
+    *flag = inew;
 }
