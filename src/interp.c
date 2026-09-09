@@ -418,6 +418,65 @@ const	struct	cmd_type	cmd_table	[] =
 
 
 /*
+ * Gizlenmeyi bozan komut: gölgelerden çık (break_hide), dövüş komutuysa
+ * geliştirilmiş görünmezlik ve toprak solması da düşer (break_invis).
+ * interpret ve check_social ortak kullanır.
+ */
+static void cmd_break_stealth( CHAR_DATA *ch, bool break_hide, bool break_invis )
+{
+    if ( break_hide && IS_AFFECTED(ch, AFF_HIDE) )
+    {
+	REMOVE_BIT(ch->affected_by, AFF_HIDE);
+	send_to_char("Gölgelerden çıkıyorsun.\n\r", ch);
+	act("$n gölgelerden çıkıyor.", ch, NULL, NULL, TO_ROOM);
+    }
+
+    if ( break_hide && IS_AFFECTED(ch, AFF_FADE) )
+    {
+	REMOVE_BIT(ch->affected_by, AFF_FADE);
+	send_to_char("Gölgelerden çıkıyorsun.\n\r", ch);
+	act("$n gölgelerden çıkıyor.", ch, NULL, NULL, TO_ROOM);
+    }
+
+    if ( !break_invis || IS_NPC(ch) )
+	return;
+
+    if ( IS_AFFECTED(ch, AFF_IMP_INVIS) )
+    {
+	affect_strip(ch,gsn_imp_invis);
+	REMOVE_BIT(ch->affected_by, AFF_IMP_INVIS);
+	send_to_char("Görünür oluyorsun.\n\r", ch);
+	act("$n Görünür oluyor.", ch, NULL, NULL, TO_ROOM);
+    }
+
+    if ( CAN_DETECT(ch, ADET_EARTHFADE) )
+    {
+	affect_strip(ch,gsn_earthfade);
+	REMOVE_BIT(ch->detection, ADET_EARTHFADE);
+	WAIT_STATE(ch, (PULSE_VIOLENCE / 2) );
+	send_to_char("Doğal formuna dönüyorsun.\n\r", ch);
+	act("$n şekilleniyor.", ch, NULL, NULL, TO_ROOM);
+    }
+}
+
+/* Komut için pozisyon yetersizse gösterilecek ileti. */
+static const char *position_message( int position )
+{
+    switch ( position )
+    {
+    case POS_DEAD:     return "Yatmaya devam et; sen ÖLÜsün.\n\r";
+    case POS_MORTAL:
+    case POS_INCAP:    return "Bunu yapamayacak kan kaybettin.\n\r";
+    case POS_STUNNED:  return "Bunu yapamayacak kadar yaralısın.\n\r";
+    case POS_SLEEPING: return "Rüyalarında mı?\n\r";
+    case POS_RESTING:  return "Haayır... Çok rahatlamış durumdasın...\n\r";
+    case POS_SITTING:  return "Önce ayağa kalkmalısın.\n\r";
+    case POS_FIGHTING: return "Olmaz!  Hala dövüşüyorsun!\n\r";
+    }
+    return "";
+}
+
+/*
  * The main entry point for executing commands.
  * Can be recursively called from 'at', 'order', 'force'.
  */
@@ -433,7 +492,7 @@ void interpret( CHAR_DATA *ch, char *argument, bool is_order )
      * Strip leading spaces.
      */
     smash_tilde(argument);
-    while ( isspace(*argument) )
+    while ( isspace( (unsigned char) *argument ) )
 	argument++;
     if ( argument[0] == '\0' )
 	return;
@@ -452,25 +511,22 @@ void interpret( CHAR_DATA *ch, char *argument, bool is_order )
      * Special parsing so ' can be a command,
      * also no spaces needed after punctuation.
      */
-    strcpy( logline, argument );
-
+    snprintf( logline, sizeof(logline), "%s", argument );
 
     {
 	uint32_t first;
 
 	utf8_decode( argument, &first );
 	if ( !utf8_is_alpha_cp( first ) && !isdigit( (unsigned char) argument[0] ) )
-    {
-	command[0] = argument[0];
-	command[1] = '\0';
-	argument++;
-	while ( isspace(*argument) )
+	{
+	    command[0] = argument[0];
+	    command[1] = '\0';
 	    argument++;
-    }
-    else
-    {
-	argument = one_argument( argument, command );
-    }
+	    while ( isspace( (unsigned char) *argument ) )
+		argument++;
+	}
+	else
+	    argument = one_argument_n( argument, command, sizeof(command) );
     }
 
     /*
@@ -499,41 +555,8 @@ void interpret( CHAR_DATA *ch, char *argument, bool is_order )
       send_to_char("Bunu yapamayacak kadar baygınsın.\n\r",ch);
 	   return;
 	  }
-          /* Come out of hiding for most commands */
-          if ( IS_AFFECTED(ch, AFF_HIDE) && !IS_NPC(ch)
-              && !(cmd_table[cmd].extra & CMD_KEEP_HIDE) )
-          {
-              REMOVE_BIT(ch->affected_by, AFF_HIDE);
-              send_to_char("Gölgelerden çıkıyorsun.\n\r", ch);
-              act("$n gölgelerden çıkıyor.", ch, NULL, NULL, TO_ROOM);
-          }
-
-          if ( IS_AFFECTED(ch, AFF_FADE) && !IS_NPC(ch)
-              && !(cmd_table[cmd].extra & CMD_KEEP_HIDE) )
-          {
-              REMOVE_BIT(ch->affected_by, AFF_FADE);
-              send_to_char("Gölgelerden çıkıyorsun.\n\r", ch);
-              act("$n gölgelerden çıkıyor.", ch, NULL, NULL, TO_ROOM);
-          }
-
-          if ( IS_AFFECTED(ch, AFF_IMP_INVIS) && !IS_NPC(ch)
-              && (cmd_table[cmd].position == POS_FIGHTING) )
-          {
-	      affect_strip(ch,gsn_imp_invis);
-              REMOVE_BIT(ch->affected_by, AFF_IMP_INVIS);
-              send_to_char("Görünür oluyorsun.\n\r", ch);
-              act("$n Görünür oluyor.", ch, NULL, NULL, TO_ROOM);
-          }
-
-          if ( CAN_DETECT(ch, ADET_EARTHFADE) && !IS_NPC(ch)
-              && (cmd_table[cmd].position == POS_FIGHTING) )
-          {
-	      affect_strip(ch,gsn_earthfade);
-              REMOVE_BIT(ch->detection, ADET_EARTHFADE);
-	      WAIT_STATE(ch, (PULSE_VIOLENCE / 2) );
-        send_to_char("Doğal formuna dönüyorsun.\n\r", ch);
-        act("$n şekilleniyor.", ch, NULL, NULL, TO_ROOM);
-          }
+          cmd_break_stealth( ch, !IS_NPC(ch) && !(cmd_table[cmd].extra & CMD_KEEP_HIDE),
+                             cmd_table[cmd].position == POS_FIGHTING );
 
           /* prevent ghosts from doing a bunch of commands */
           if (IS_SET(ch->act, PLR_GHOST) && !IS_NPC(ch)
@@ -586,38 +609,7 @@ void interpret( CHAR_DATA *ch, char *argument, bool is_order )
      */
     if ( ch->position < cmd_table[cmd].position )
     {
-	switch( ch->position )
-	{
-	case POS_DEAD:
-  send_to_char( "Yatmaya devam et; sen ÖLÜsün.\n\r", ch );
-	    break;
-
-	case POS_MORTAL:
-	case POS_INCAP:
-  send_to_char( "Bunu yapamayacak kan kaybettin.\n\r", ch );
-	    break;
-
-	case POS_STUNNED:
-  send_to_char( "Bunu yapamayacak kadar yaralısın.\n\r", ch );
-	    break;
-
-	case POS_SLEEPING:
-  send_to_char( "Rüyalarında mı?\n\r", ch );
-	    break;
-
-	case POS_RESTING:
-  send_to_char( "Haayır... Çok rahatlamış durumdasın...\n\r", ch);
-	    break;
-
-	case POS_SITTING:
-  send_to_char("Önce ayağa kalkmalısın.\n\r",ch);
-	    break;
-
-	case POS_FIGHTING:
-  send_to_char( "Olmaz!  Hala dövüşüyorsun!\n\r", ch);
-	    break;
-
-	}
+	send_to_char( position_message( ch->position ), ch );
 	return;
     }
 
@@ -658,65 +650,21 @@ bool check_social( CHAR_DATA *ch, char *command, char *argument )
 	return TRUE;
     }
 
-    switch ( ch->position )
+    /*
+     * I just know this is the path to a 12" 'if' statement.  :(
+     * But two players asked for it already!  -- Furey
+     */
+    if ( ch->position <= POS_SLEEPING
+    &&   !( ch->position == POS_SLEEPING && !str_cmp( social_table[cmd].name, "snore" ) ) )
     {
-    case POS_DEAD:
-    send_to_char( "Yatmaya devam et; sen ÖLÜsün.\n\r", ch );
+	send_to_char( position_message( ch->position ), ch );
 	return TRUE;
-
-    case POS_INCAP:
-    case POS_MORTAL:
-    send_to_char("Bunu yapamayacak kan kaybettin.\n\r", ch );
-	return TRUE;
-
-    case POS_STUNNED:
-    send_to_char( "Bunu yapamayacak kadar yaralısın.\n\r", ch );
-	return TRUE;
-
-    case POS_SLEEPING:
-	/*
-	 * I just know this is the path to a 12" 'if' statement.  :(
-	 * But two players asked for it already!  -- Furey
-	 */
-	if ( !str_cmp( social_table[cmd].name, "snore" ) )
-	    break;
-      send_to_char( "Rüyalarında mı?\n\r", ch );
-	return TRUE;
-
     }
 
-    if ( IS_AFFECTED( ch, AFF_HIDE )  )  {
-      REMOVE_BIT( ch->affected_by, AFF_HIDE );
-      send_to_char( "Gölgelerden çıkıyorsun.\n\r", ch);
-      act( "$n gölgelerden çıkıyor.", ch, NULL, NULL, TO_ROOM);
-    }
+    /* sosyaller dövüş komutu değildir: görünmezliği bozmaz */
+    cmd_break_stealth( ch, TRUE, FALSE );
 
-    if ( IS_AFFECTED( ch, AFF_FADE )  )  {
-      REMOVE_BIT( ch->affected_by, AFF_FADE );
-      send_to_char("Gölgelerden çıkıyorsun.\n\r", ch);
-      act("$n gölgelerden çıkıyor.", ch, NULL, NULL, TO_ROOM);
-    }
-
-    if ( IS_AFFECTED(ch, AFF_IMP_INVIS) && !IS_NPC(ch)
-        && (cmd_table[cmd].position == POS_FIGHTING) )
-    {
-      affect_strip(ch,gsn_imp_invis);
-      REMOVE_BIT(ch->affected_by, AFF_IMP_INVIS);
-      send_to_char("Görünmeye başlıyorsun.\n\r", ch);
-      act("$n görünmeye başlıyor.", ch, NULL, NULL, TO_ROOM);
-    }
-
-    if ( CAN_DETECT(ch, ADET_EARTHFADE) && !IS_NPC(ch)
-        && (cmd_table[cmd].position == POS_FIGHTING) )
-    {
-      affect_strip(ch,gsn_earthfade);
-      REMOVE_BIT(ch->detection, ADET_EARTHFADE);
-      WAIT_STATE(ch, (PULSE_VIOLENCE / 2));
-      send_to_char("Doğal formuna dönüyorsun.\n\r", ch);
-      act("$n şekilleniyor.", ch, NULL, NULL, TO_ROOM);
-    }
-
-    one_argument( argument, arg );
+    one_argument_n( argument, arg, sizeof(arg) );
     victim = NULL;
     if ( arg[0] == '\0' )
     {
@@ -787,7 +735,7 @@ bool is_number ( char *arg )
 
     for ( ; *arg != '\0'; arg++ )
     {
-        if ( !isdigit( *arg ) )
+        if ( !isdigit( (unsigned char) *arg ) )
             return FALSE;
     }
 
@@ -797,64 +745,54 @@ bool is_number ( char *arg )
 
 
 /*
+ * "14.foo" ya da "14*foo" gibi bir dizgiyi ayırıcıya göre böler:
+ * sayıyı döndürür, kalanı arg'a yazar. Ayırıcı yoksa 1 ve dizginin tamamı.
+ */
+static int split_argument( char *argument, char *arg, char sep )
+{
+    char *pdot = strchr( argument, sep );
+    int number;
+
+    if ( pdot == NULL )
+    {
+	snprintf( arg, MAX_INPUT_LENGTH, "%s", argument );
+	return 1;
+    }
+    *pdot = '\0';
+    number = atoi( argument );
+    *pdot = sep;
+    snprintf( arg, MAX_INPUT_LENGTH, "%s", pdot + 1 );
+    return number;
+}
+
+/*
  * Given a string like 14.foo, return 14 and 'foo'
  */
 int number_argument( char *argument, char *arg )
 {
-    char *pdot;
-    int number;
-
-    for ( pdot = argument; *pdot != '\0'; pdot++ )
-    {
-	if ( *pdot == '.' )
-	{
-	    *pdot = '\0';
-	    number = atoi( argument );
-	    *pdot = '.';
-	    strcpy( arg, pdot+1 );
-	    return number;
-	}
-    }
-
-    strcpy( arg, argument );
-    return 1;
+    return split_argument( argument, arg, '.' );
 }
 
 /*
  * Given a string like 14*foo, return 14 and 'foo'
-*/
-int mult_argument(char *argument, char *arg)
+ */
+int mult_argument( char *argument, char *arg )
 {
-    char *pdot;
-    int number;
-
-    for ( pdot = argument; *pdot != '\0'; pdot++ )
-    {
-        if ( *pdot == '*' )
-        {
-            *pdot = '\0';
-            number = atoi( argument );
-            *pdot = '*';
-            strcpy( arg, pdot+1 );
-            return number;
-        }
-    }
-
-    strcpy( arg, argument );
-    return 1;
+    return split_argument( argument, arg, '*' );
 }
 
 
 
 /*
  * Pick off one argument from a string and return the rest.
- * Understands quotes.
+ * Understands quotes. arg_first en fazla size-1 bayt alır.
  */
-char *one_argument( char *argument, char *arg_first )
+char *one_argument_n( const char *argument, char *arg_first, size_t size )
 {
     char cEnd;
+    size_t n = 0;
 
-    while ( isspace(*argument) )
+    while ( isspace( (unsigned char) *argument ) )
 	argument++;
 
     cEnd = ' ';
@@ -868,16 +806,22 @@ char *one_argument( char *argument, char *arg_first )
 	    argument++;
 	    break;
 	}
-	*arg_first = LOWER(*argument);
-	arg_first++;
+	if ( n + 1 < size )
+	    arg_first[n++] = LOWER(*argument);
 	argument++;
     }
-    *arg_first = '\0';
+    if ( size > 0 )
+	arg_first[n] = '\0';
 
-    while ( isspace(*argument) )
+    while ( isspace( (unsigned char) *argument ) )
 	argument++;
 
-    return argument;
+    return (char *) argument;
+}
+
+char *one_argument( char *argument, char *arg_first )
+{
+    return one_argument_n( argument, arg_first, MAX_INPUT_LENGTH );
 }
 
 /*
@@ -900,16 +844,18 @@ static bool starts_with_letter( const char *name, uint32_t letter )
 
 /*
  * Contributed by Alander.
+ * Komut listesi: ölümlü (imm FALSE) ya da ölümsüz (imm TRUE) komutları.
  */
-void do_commands( CHAR_DATA *ch, char *argument )
+static void list_commands( CHAR_DATA *ch, bool imm )
 {
-    char buf[MAX_STRING_LENGTH];
     char output[4 * MAX_STRING_LENGTH];
     int letter;
     int cmd;
     int col;
+    size_t len;
 
     col = 0;
+    len = 0;
     output[0] = '\0';
 
     for ( letter = 0; turkish_alphabet[letter] != 0; letter++ )
@@ -917,69 +863,73 @@ void do_commands( CHAR_DATA *ch, char *argument )
       for ( cmd = 0; cmd_table[cmd].name[0] != '\0'; cmd++ )
       {
         if ( starts_with_letter( cmd_table[cmd].name, turkish_alphabet[letter] )
-	&&   cmd_table[cmd].level <  LEVEL_HERO
+	&&   ( cmd_table[cmd].level >= LEVEL_HERO ) == imm
         &&   cmd_table[cmd].level <= get_trust( ch )
 	&&   cmd_table[cmd].show)
 	{
-	    snprintf(buf, sizeof(buf), "%-*s", utf8_width(cmd_table[cmd].name, 12), cmd_table[cmd].name);
-	    strcat( output, buf );
-	    if ( ++col % 6 == 0 )
-		strcat(output, "\n\r" );
+	    len += (size_t) snprintf( output + len, sizeof(output) - len, "%-*s%s",
+				      utf8_width(cmd_table[cmd].name, 12), cmd_table[cmd].name,
+				      ++col % 6 == 0 ? "\n\r" : "" );
+	    if ( len >= sizeof(output) - 1 )
+		break;
 	}
       }
     }
 
-    if ( col % 6 != 0 )
-	strcat( output, "\n\r" );
+    if ( col % 6 != 0 && len < sizeof(output) - 1 )
+	snprintf( output + len, sizeof(output) - len, "\n\r" );
 
     page_to_char( output, ch );
-    return;
+}
+
+void do_commands( CHAR_DATA *ch, char *argument )
+{
+    list_commands( ch, FALSE );
 }
 
 void do_wizhelp( CHAR_DATA *ch, char *argument )
 {
-    char buf[MAX_STRING_LENGTH];
-    char output[4 * MAX_STRING_LENGTH];
-    int letter;
-    int cmd;
-    int col;
-
-    col = 0;
-    output[0] = '\0';
-
-    for ( letter = 0; turkish_alphabet[letter] != 0; letter++ )
-    {
-      for ( cmd = 0; cmd_table[cmd].name[0] != '\0'; cmd++ )
-      {
-        if ( starts_with_letter( cmd_table[cmd].name, turkish_alphabet[letter] )
-	&&   cmd_table[cmd].level >= LEVEL_HERO
-        &&   cmd_table[cmd].level <= get_trust( ch )
-        &&   cmd_table[cmd].show)
-	{
-	    snprintf(buf, sizeof(buf), "%-*s", utf8_width(cmd_table[cmd].name, 12), cmd_table[cmd].name);
-	    strcat(output, buf);
-	    if ( ++col % 6 == 0 )
-		strcat( output, "\n\r");
-	}
-      }
-    }
-
-    if ( col % 6 != 0 )
-	strcat(output, "\n\r");
-
-    page_to_char(output, ch);
-    return;
+    list_commands( ch, TRUE );
 }
 
 
 
 /*********** alias.c **************/
 
+/* kısayol adı olarak yasak sözcükler: kısayol komutlarının kendisi */
+static bool alias_name_reserved( const char *name )
+{
+    return !str_prefix( "kısayol", name );
+}
+
+/* rch'nin name adlı kısayolunun sırası; yoksa -1 */
+static int alias_find( CHAR_DATA *rch, const char *name )
+{
+    int pos;
+
+    for ( pos = 0; pos < MAX_ALIAS; pos++ )
+    {
+	if ( rch->pcdata->alias[pos] == NULL || rch->pcdata->alias_sub[pos] == NULL )
+	    break;
+	if ( !str_cmp( name, rch->pcdata->alias[pos] ) )
+	    return pos;
+    }
+    return -1;
+}
+
+/* kısayol komutlarını kullanan asıl karakter (switch'liyse orijinali) */
+static CHAR_DATA *alias_owner( CHAR_DATA *ch )
+{
+    if ( ch->desc == NULL )
+	return ch;
+    return ch->desc->original ? ch->desc->original : ch;
+}
+
 /* does aliasing and other fun stuff */
 void substitute_alias(DESCRIPTOR_DATA *d, char *argument)
 {
     CHAR_DATA *ch;
-    char buf[MAX_STRING_LENGTH],prefix[MAX_INPUT_LENGTH],name[MAX_INPUT_LENGTH];
+    char buf[MAX_INPUT_LENGTH],prefix[MAX_INPUT_LENGTH],name[MAX_INPUT_LENGTH];
     char *point;
     int alias;
 
@@ -988,8 +938,8 @@ void substitute_alias(DESCRIPTOR_DATA *d, char *argument)
     /* check for prefix */
     if (ch->prefix[0] != '\0' && str_prefix("prefix",argument))
     {
-	if (strlen(ch->prefix) + strlen(argument) > MAX_INPUT_LENGTH)
-	    send_to_char("Line to long, prefix not processed.\r\n",ch);
+	if (strlen(ch->prefix) + 1 + strlen(argument) >= MAX_INPUT_LENGTH)
+	    send_to_char("Satır çok uzun; önek uygulanmadı.\r\n",ch);
 	else
 	{
 	    snprintf(prefix, sizeof(prefix),"%s %s",ch->prefix,argument);
@@ -1005,7 +955,7 @@ void substitute_alias(DESCRIPTOR_DATA *d, char *argument)
 	return;
     }
 
-    strcpy(buf,argument);
+    snprintf(buf, sizeof(buf), "%s", argument);
 
     for (alias = 0; alias < MAX_ALIAS; alias++)	 /* go through the aliases */
     {
@@ -1014,19 +964,14 @@ void substitute_alias(DESCRIPTOR_DATA *d, char *argument)
 
 	if (!str_prefix(ch->pcdata->alias[alias],argument))
 	{
-	    point = one_argument(argument,name);
-	    if (!strcmp(ch->pcdata->alias[alias],name))
+	    point = one_argument_n(argument,name,sizeof(name));
+	    if (!str_cmp(ch->pcdata->alias[alias],name))
 	    {
-		buf[0] = '\0';
-		strcat(buf,ch->pcdata->alias_sub[alias]);
-		strcat(buf," ");
-		strcat(buf,point);
+		/* açılım da bir girdi satırıdır: MAX_INPUT_LENGTH sınırı korunur */
+		if (snprintf(buf, sizeof(buf), "%s %s", ch->pcdata->alias_sub[alias], point)
+		    >= (int) sizeof(buf))
+		    send_to_char("Kısayol açılımı çok uzun; kısaltıldı.\r\n",ch);
 		break;
-	    }
-	    if (strlen(buf) > MAX_INPUT_LENGTH)
-	    {
-		send_to_char("Alias substitution too long. Truncated.\r\n",ch);
-		buf[MAX_INPUT_LENGTH -1] = '\0';
 	    }
 	}
     }
@@ -1041,26 +986,19 @@ void do_alia(CHAR_DATA *ch, char *argument)
 
 void do_alias(CHAR_DATA *ch, char *argument)
 {
-    CHAR_DATA *rch;
-    char arg[MAX_INPUT_LENGTH],buf[MAX_STRING_LENGTH];
+    CHAR_DATA *rch = alias_owner( ch );
+    char arg[MAX_INPUT_LENGTH];
     int pos;
 
     smash_tilde( argument );
 
-    if (ch->desc == NULL)
-	rch = ch;
-    else
-	rch = ch->desc->original ? ch->desc->original : ch;
-
     if (IS_NPC(rch))
 	return;
 
-    argument = one_argument(argument,arg);
-
+    argument = one_argument_n(argument,arg,sizeof(arg));
 
     if (arg[0] == '\0')
     {
-
 	if (rch->pcdata->alias[0] == NULL)
 	{
     send_to_char("Tanımlı kısayolun yok.\n\r",ch);
@@ -1074,34 +1012,25 @@ void do_alias(CHAR_DATA *ch, char *argument)
 	    ||	rch->pcdata->alias_sub[pos] == NULL)
 		break;
 
-	    snprintf(buf, sizeof(buf),"    %s:  %s\n\r",rch->pcdata->alias[pos],
+	    printf_to_char(ch,"    %s:  %s\n\r",rch->pcdata->alias[pos],
 		    rch->pcdata->alias_sub[pos]);
-	    send_to_char(buf,ch);
 	}
 	return;
     }
 
-    if (!str_prefix("kısayolkaldır",arg) || !str_cmp("kısayol",arg))
+    if (alias_name_reserved(arg))
     {
-      send_to_char("Üzgünüm, ayrılmış(reserverd) sözcükler olmaz.\n\r",ch);
+      send_to_char("Üzgünüm, ayrılmış (reserved) sözcükler olmaz.\n\r",ch);
 	return;
     }
 
     if (argument[0] == '\0')
     {
-	for (pos = 0; pos < MAX_ALIAS; pos++)
+	if ((pos = alias_find(rch,arg)) >= 0)
 	{
-	    if (rch->pcdata->alias[pos] == NULL
-	    ||	rch->pcdata->alias_sub[pos] == NULL)
-		break;
-
-	    if (!str_cmp(arg,rch->pcdata->alias[pos]))
-	    {
-        snprintf(buf, sizeof(buf),"%s = '%s'.\n\r",rch->pcdata->alias[pos],
-    			rch->pcdata->alias_sub[pos]);
-		send_to_char(buf,ch);
-		return;
-	    }
+	    printf_to_char(ch,"%s = '%s'.\n\r",rch->pcdata->alias[pos],
+			rch->pcdata->alias_sub[pos]);
+	    return;
 	}
 
   send_to_char("Bu kısayol tanımlanmamış.\n\r",ch);
@@ -1114,20 +1043,17 @@ void do_alias(CHAR_DATA *ch, char *argument)
 	return;
     }
 
-    for (pos = 0; pos < MAX_ALIAS; pos++)
+    if ((pos = alias_find(rch,arg)) >= 0) /* redefine an alias */
     {
+	free_string(rch->pcdata->alias_sub[pos]);
+	rch->pcdata->alias_sub[pos] = str_dup(argument);
+	printf_to_char(ch,"%s artık '%s' demek.\n\r",arg,argument);
+	return;
+    }
+
+    for (pos = 0; pos < MAX_ALIAS; pos++)
 	if (rch->pcdata->alias[pos] == NULL)
 	    break;
-
-	if (!str_cmp(arg,rch->pcdata->alias[pos])) /* redefine an alias */
-	{
-	    free_string(rch->pcdata->alias_sub[pos]);
-	    rch->pcdata->alias_sub[pos] = str_dup(argument);
-      snprintf(buf, sizeof(buf),"%s artık '%s' demek.\n\r",arg,argument);
-	    send_to_char(buf,ch);
-	    return;
-	}
-     }
 
      if (pos >= MAX_ALIAS)
      {
@@ -1138,27 +1064,20 @@ void do_alias(CHAR_DATA *ch, char *argument)
      /* make a new alias */
      rch->pcdata->alias[pos]		= str_dup(arg);
      rch->pcdata->alias_sub[pos]	= str_dup(argument);
-     snprintf(buf, sizeof(buf),"%s artık '%s' demek.\n\r",arg,argument);
-     send_to_char(buf,ch);
+     printf_to_char(ch,"%s artık '%s' demek.\n\r",arg,argument);
 }
 
 
 void do_unalias(CHAR_DATA *ch, char *argument)
 {
-    CHAR_DATA *rch;
+    CHAR_DATA *rch = alias_owner( ch );
     char arg[MAX_INPUT_LENGTH];
-    int pos;
-    bool found = FALSE;
-
-    if (ch->desc == NULL)
-	rch = ch;
-    else
-	rch = ch->desc->original ? ch->desc->original : ch;
+    int pos, found;
 
     if (IS_NPC(rch))
 	return;
 
-    argument = one_argument(argument,arg);
+    argument = one_argument_n(argument,arg,sizeof(arg));
 
     if (arg[0] == '\0')
     {
@@ -1166,31 +1085,20 @@ void do_unalias(CHAR_DATA *ch, char *argument)
 	return;
     }
 
-    for (pos = 0; pos < MAX_ALIAS; pos++)
+    if ((found = alias_find(rch,arg)) < 0)
     {
-	if (rch->pcdata->alias[pos] == NULL)
-	    break;
-
-	if (found)
-	{
-	    rch->pcdata->alias[pos-1]		= rch->pcdata->alias[pos];
-	    rch->pcdata->alias_sub[pos-1]	= rch->pcdata->alias_sub[pos];
-	    rch->pcdata->alias[pos]		= NULL;
-	    rch->pcdata->alias_sub[pos]		= NULL;
-	    continue;
-	}
-
-	if(!strcmp(arg,rch->pcdata->alias[pos]))
-	{
-    send_to_char("Kısayol kaldırıldı.\n\r",ch);
-	    free_string(rch->pcdata->alias[pos]);
-	    free_string(rch->pcdata->alias_sub[pos]);
-	    rch->pcdata->alias[pos] = NULL;
-	    rch->pcdata->alias_sub[pos] = NULL;
-	    found = TRUE;
-	}
+    send_to_char("O isimde bir kısayol yok.\n\r",ch);
+	return;
     }
 
-    if (!found)
-    send_to_char("O isimde bir kısayol yok.\n\r",ch);
+    send_to_char("Kısayol kaldırıldı.\n\r",ch);
+    free_string(rch->pcdata->alias[found]);
+    free_string(rch->pcdata->alias_sub[found]);
+    for (pos = found; pos + 1 < MAX_ALIAS; pos++)
+    {
+	rch->pcdata->alias[pos]		= rch->pcdata->alias[pos+1];
+	rch->pcdata->alias_sub[pos]	= rch->pcdata->alias_sub[pos+1];
+    }
+    rch->pcdata->alias[MAX_ALIAS-1]	= NULL;
+    rch->pcdata->alias_sub[MAX_ALIAS-1]	= NULL;
 }
