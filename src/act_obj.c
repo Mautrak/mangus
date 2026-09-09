@@ -5318,113 +5318,84 @@ void wear_multi(CHAR_DATA *ch,OBJ_DATA *obj,int iWear,bool fReplace)
 
 }
 
-bool limit_kontrol (CHAR_DATA *ch, OBJ_DATA *obj)
+/* Limitli eşya: iksir/hap/parşömen ayrı kotaya tabidir. */
+static bool is_limited_consumable( OBJ_DATA *obj )
 {
-	OBJ_DATA *b_obj,*c_obj;
-    int limit_ekipman_sayisi, limit_iksir_sayisi;
+    return obj->item_type == ITEM_SCROLL
+	|| obj->item_type == ITEM_PILL
+	|| obj->item_type == ITEM_POTION;
+}
 
-	limit_ekipman_sayisi=0;
-  limit_iksir_sayisi = 0;
+/* Limitli ekipman kotası: kabal üyesi bir fazlasını taşıyabilir. */
+static int limit_quota_equipment( CHAR_DATA *ch )
+{
+    return ch->cabal ? MAKSIMUM_LIMIT_EKIPMAN_KABAL : MAKSIMUM_LIMIT_EKIPMAN;
+}
 
-  if(IS_NPC(ch))
-  {
-    return TRUE;
-  }
+/*
+ * Listedeki limitli eşyaları sayar; kota aşan fazlalık (ölümsüz hariç) yok
+ * edilir. Kap içi yalnızca bir düzey aşağı bakılır. extract_obj düğümü
+ * havuza verdiği için bir sonraki düğüm yinelemeden önce alınır.
+ */
+static void count_limited( CHAR_DATA *ch, OBJ_DATA *list, int *eq, int *potion, bool nested )
+{
+    OBJ_DATA *obj, *obj_next;
 
-	for ( b_obj = ch->carrying; b_obj != NULL; b_obj = b_obj->next_content)
+    for ( obj = list; obj != NULL; obj = obj_next )
+    {
+	obj_next = obj->next_content;
+
+	if ( !nested && obj->item_type == ITEM_CONTAINER )
+	    count_limited( ch, obj->contains, eq, potion, TRUE );
+
+	if ( obj->pIndexData->limit == -1 )
+	    continue;
+
+	if ( is_limited_consumable( obj ) )
 	{
-		if (b_obj->item_type==ITEM_CONTAINER)
-		{
-      c_obj = NULL;
-
-			for ( c_obj = b_obj->contains; c_obj != NULL; c_obj = c_obj->next_content )
-			{
-				if ( c_obj->pIndexData->limit != -1)
-				{
-          if( c_obj->item_type == ITEM_SCROLL || c_obj->item_type == ITEM_PILL || c_obj->item_type == ITEM_POTION )
-          {
-            limit_iksir_sayisi++;
-            if( limit_iksir_sayisi > MAKSIMUM_LIMIT_IKSIR_HAP_PARSOMEN && !IS_IMMORTAL(ch))
-  					{
-  						extract_obj( c_obj );
-  						limit_iksir_sayisi--;
-  					}
-          }
-          else
-          {
-  					limit_ekipman_sayisi++;
-  					if( !(ch->cabal) && limit_ekipman_sayisi > MAKSIMUM_LIMIT_EKIPMAN && !IS_IMMORTAL(ch))
-  					{
-  						extract_obj( c_obj );
-  						limit_ekipman_sayisi--;
-  					}
-            else if( (ch->cabal) && limit_ekipman_sayisi > MAKSIMUM_LIMIT_EKIPMAN_KABAL && !IS_IMMORTAL(ch))
-  					{
-  						extract_obj( c_obj );
-  						limit_ekipman_sayisi--;
-  					}
-          }
-				}
-			}
-		}
-		if ( b_obj->pIndexData->limit != -1)
-		{
-      if( b_obj->item_type == ITEM_SCROLL || b_obj->item_type == ITEM_PILL || b_obj->item_type == ITEM_POTION )
-      {
-        limit_iksir_sayisi++;
-        if( limit_iksir_sayisi > MAKSIMUM_LIMIT_IKSIR_HAP_PARSOMEN && !IS_IMMORTAL(ch))
-        {
-          extract_obj( b_obj );
-          limit_iksir_sayisi--;
-        }
-      }
-      else
-      {
-  			limit_ekipman_sayisi++;
-  			if( !(ch->cabal) && limit_ekipman_sayisi > MAKSIMUM_LIMIT_EKIPMAN && !IS_IMMORTAL(ch))
-  			{
-  				extract_obj( b_obj );
-  				limit_ekipman_sayisi--;
-  			}
-        else if( (ch->cabal) && limit_ekipman_sayisi > MAKSIMUM_LIMIT_EKIPMAN_KABAL && !IS_IMMORTAL(ch))
-        {
-          extract_obj( b_obj );
-          limit_ekipman_sayisi--;
-        }
-      }
-		}
+	    if ( ++*potion > MAKSIMUM_LIMIT_IKSIR_HAP_PARSOMEN && !IS_IMMORTAL(ch) )
+	    {
+		extract_obj( obj );
+		--*potion;
+	    }
 	}
-
-  if (obj->pIndexData->limit != -1)
-  {
-    if ((obj->item_type == ITEM_SCROLL) || (obj->item_type == ITEM_PILL) || (obj->item_type == ITEM_POTION))
-    {
-      if (limit_iksir_sayisi==MAKSIMUM_LIMIT_IKSIR_HAP_PARSOMEN && !IS_IMMORTAL(ch))
-      {
-        printf_to_char(ch,"Limit hap/parşömen/iksir kontenjanın dolu!\n\r");
-        return FALSE;
-      }
+	else if ( ++*eq > limit_quota_equipment( ch ) && !IS_IMMORTAL(ch) )
+	{
+	    extract_obj( obj );
+	    --*eq;
+	}
     }
-    else
-    {
-      if (ch->cabal && !IS_IMMORTAL(ch))
-      {
-        if (limit_ekipman_sayisi==MAKSIMUM_LIMIT_EKIPMAN_KABAL && !IS_IMMORTAL(ch))
-        {
-          printf_to_char(ch,"Limit ekipman kontenjanın dolu!\n\r");
-          return FALSE;
-        }
-      }
-      else
-      {
-        if (limit_ekipman_sayisi==MAKSIMUM_LIMIT_EKIPMAN && !IS_IMMORTAL(ch))
-        {
-          printf_to_char(ch,"Limit ekipman kontenjanın dolu!\n\r");
-          return FALSE;
-        }
-      }
-    }
-  }
+}
 
+/*
+ * Karakter 'obj'yi (limitli eşya) daha alabilir mi? Önce taşınan limitli
+ * eşyalar sayılır ve kota fazlası yok edilir, sonra kota sorgulanır.
+ */
+bool limit_kontrol( CHAR_DATA *ch, OBJ_DATA *obj )
+{
+    int eq = 0, potion = 0;
+
+    if ( IS_NPC(ch) )
 	return TRUE;
+
+    count_limited( ch, ch->carrying, &eq, &potion, FALSE );
+
+    if ( obj->pIndexData->limit == -1 || IS_IMMORTAL(ch) )
+	return TRUE;
+
+    if ( is_limited_consumable( obj ) )
+    {
+	if ( potion >= MAKSIMUM_LIMIT_IKSIR_HAP_PARSOMEN )
+	{
+	    send_to_char( "Limit hap/parşömen/iksir kontenjanın dolu!\n\r", ch );
+	    return FALSE;
+	}
+    }
+    else if ( eq >= limit_quota_equipment( ch ) )
+    {
+	send_to_char( "Limit ekipman kontenjanın dolu!\n\r", ch );
+	return FALSE;
+    }
+
+    return TRUE;
 }
