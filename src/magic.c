@@ -331,6 +331,47 @@ bool check_dispel( int dis_level, CHAR_DATA *victim, int sn)
 }
 
 /*
+ * Ada göre bir kez çözülen büyü numaraları. skill_table açılıştan sonra
+ * değişmez; bu yüzden her büyüde doğrusal skill_lookup yapmak yerine dosya
+ * içinde önbelleğe alınır (const.c'de gsn_* karşılığı olmayan büyüler için).
+ */
+enum
+{
+    MSN_CALM,
+    MSN_FRENZY,
+    MSN_HEAL,
+    MSN_REFRESH,
+    MSN_FIREBALL,
+    MSN_ICEBALL,
+    MSN_CHAIN_LIGHTNING,
+    MSN_VENTRILOQUATE,
+    MSN_MAX
+};
+
+static struct { const char *name; int sn; } msn_table[MSN_MAX] =
+{
+    [MSN_CALM]		= { "calm",		0 },
+    [MSN_FRENZY]	= { "frenzy",		0 },
+    [MSN_HEAL]		= { "heal",		0 },
+    [MSN_REFRESH]	= { "refresh",		0 },
+    [MSN_FIREBALL]	= { "fireball",		0 },
+    [MSN_ICEBALL]	= { "iceball",		0 },
+    [MSN_CHAIN_LIGHTNING] = { "chain lightning", 0 },
+    [MSN_VENTRILOQUATE]	= { "ventriloquate",	0 }
+};
+
+static int msn( int idx )
+{
+    if ( msn_table[idx].sn == 0 )
+    {
+	msn_table[idx].sn = skill_lookup( msn_table[idx].name );
+	if ( msn_table[idx].sn < 0 )
+	    bugf( "magic.c: '%s' büyüsü skill_table'da yok.", msn_table[idx].name );
+    }
+    return msn_table[idx].sn;
+}
+
+/*
  * for casting different rooms
  * returned value is the range
  */
@@ -338,7 +379,7 @@ int allowed_other( CHAR_DATA *ch, int sn)
 {
  if (skill_table[sn].minimum_position == POS_STANDING
   	|| skill_table[sn].skill_level[ch->iclass] < 26
-	|| sn == find_spell(ch,"chain lightning") ) return 0;
+	|| sn == msn(MSN_CHAIN_LIGHTNING) ) return 0;
  else return skill_table[sn].skill_level[ch->iclass] / 10;
 }
 
@@ -347,309 +388,323 @@ int allowed_other( CHAR_DATA *ch, int sn)
  */
 char *target_name;
 
-void do_cast( CHAR_DATA *ch, char *argument )
-{
-    char arg1[MAX_INPUT_LENGTH];
-    char arg2[MAX_INPUT_LENGTH];
-    char buf[MAX_STRING_LENGTH];
-    CHAR_DATA *victim;
-    OBJ_DATA *obj;
-    void *vo;
-    int mana;
-    int sn;
-    int target;
-    int cast_far = 0, door, range;
+/* Ölümden sonra bu kadar saniye karakter "yeni ölmüş" sayılır. */
+#define DEATH_GRACE_SECS	10
 
-    /*
-     * Switched NPC's can cast spells, but others can't.
-     */
-    if ( IS_NPC(ch) && ch->desc == NULL)
+/* Karakter az önce öldü mü? (yaratık: POS_DEAD, oyuncu: son ölüm zamanı) */
+static bool recently_dead( CHAR_DATA *ch )
+{
+    if ( IS_NPC(ch) )
+	return ch->position == POS_DEAD;
+    return ch->last_death_time != -1
+	&& current_time - ch->last_death_time < DEATH_GRACE_SECS;
+}
+
+/*
+ * Büyüyle saldırıya uğrayan kurban büyücüye bağırır: yalnızca büyücü oyuncuysa,
+ * ikisi zaten dövüşmüyorsa ve kurban oyuncu ya da büyülenmiş yaratıksa.
+ * Büyücüyü göremiyorsa "İmdat!" der; doppelganger'ın adı kullanılır.
+ */
+void victim_yell_at_caster( CHAR_DATA *victim, CHAR_DATA *ch )
+{
+    char buf[MAX_STRING_LENGTH];
+
+    if ( IS_NPC(ch) || victim == ch
+    ||   ch->fighting == victim || victim->fighting == ch
+    ||   !( IS_SET(victim->affected_by, AFF_CHARM) || !IS_NPC(victim) ) )
 	return;
 
-     if (is_affected(ch, gsn_shielding) )
+    if ( !can_see(victim, ch) )
+    {
+	do_yell(victim, "İmdat! Biri bana saldırıyor!");
+	return;
+    }
+
+    snprintf(buf, sizeof(buf), "Geber %s, seni büyücü köpek!",
+	( is_affected(ch, gsn_doppelganger) && !IS_IMMORTAL(victim) )
+	    ? ch->doppel->name : ch->name);
+    do_yell(victim, buf);
+}
+
+/*
+ * Büyücünün kendi büyüyıkımı hedefsiz (ya da eşyaya yapılan) büyüyü saptırır.
+ * wait: komutla atılan büyüde bekleme süresi uygulanır.
+ */
+static bool spellbane_backfire( CHAR_DATA *ch, int sn, bool wait )
+{
+    if ( !is_affected(ch, gsn_spellbane) )
+	return FALSE;
+
+    if ( wait )
+	WAIT_STATE( ch, skill_table[sn].beats );
+    act("Büyüyıkımın büyüyü saptırıyor!",ch,NULL,NULL,TO_CHAR);
+    act("$s büyüyıkımı büyüyü saptırıyor!",ch,NULL,NULL,TO_ROOM);
+    check_improve(ch,gsn_spellbane,TRUE,1);
+    damage(ch,ch,3 * ch->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
+    return TRUE;
+}
+
+/*
+ * Kurbanın büyüyıkımı büyüyü saptırır mı?
+ * roll: saldırgan büyüde beceri zarı atılır (zihin bıçağı ve şimşek nefesi
+ * saptırılamaz); dam_mult: hasar çarpanı (komutla 3x, eşyayla 10x);
+ * retaliate: kurban karşı saldırıya geçer; wait: bekleme süresi uygulanır.
+ */
+static bool spellbane_deflects( CHAR_DATA *ch, CHAR_DATA *victim, int sn,
+			        int dam_mult, bool roll, bool retaliate, bool wait )
+{
+    if ( !is_affected(victim, gsn_spellbane) )
+	return FALSE;
+    if ( roll
+    &&   ( number_percent() >= 2 * get_skill(victim, gsn_spellbane) / 3
+	|| sn == gsn_mental_knife || sn == gsn_lightning_breath ) )
+	return FALSE;
+
+    if ( wait )
+	WAIT_STATE( ch, skill_table[sn].beats );
+
+    if ( ch == victim )
+    {
+	act("Büyüyıkımın büyüyü yansıtıyor!",ch,NULL,NULL,TO_CHAR);
+	act("$s büyüyıkımı büyüyü saptırıyor!",ch,NULL,NULL,TO_ROOM);
+	check_improve(ch,gsn_spellbane,TRUE,1);
+	damage(ch,ch,dam_mult * ch->level,gsn_spellbane,DAM_NEGATIVE,TRUE);
+	return TRUE;
+    }
+
+    act("$N büyünü saptırıyor!",ch,NULL,victim,TO_CHAR);
+    act("$s büyüsünü saptırıyorsun!",ch,NULL,victim,TO_VICT);
+    act("$N $s büyüsünü saptırıyor!",ch,NULL,victim,TO_NOTVICT);
+    check_improve(victim,gsn_spellbane,TRUE,1);
+    damage(victim,ch,dam_mult * victim->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
+    if ( retaliate )
+	multi_hit(victim,ch,TYPE_UNDEFINED);
+    return TRUE;
+}
+
+/* Kurbanın soğurma alanı büyüyü emer mi? (harcanan mana kurbana geçer) */
+static bool absorb_check( CHAR_DATA *ch, CHAR_DATA *victim, int sn, int mana )
+{
+    if ( ch == victim || !CAN_DETECT(victim, ADET_ABSORB)
+    ||   number_percent() >= 2 * get_skill(victim, gsn_absorb) / 3
+    ||   sn == gsn_mental_knife || sn == gsn_lightning_breath )
+	return FALSE;
+
+    act("Büyün $S enerji alanını geçemiyor!",ch,NULL,victim,TO_CHAR);
+    act("$s büyüsünü soğuruyorsun!",ch,NULL,victim,TO_VICT);
+    act("$N $s büyüsünü soğuruyor!",ch,NULL,victim,TO_NOTVICT);
+    check_improve(victim,gsn_absorb,TRUE,1);
+    victim->mana += mana;
+    return TRUE;
+}
+
+/*
+ * Saldırgan büyüden sonra kurban (hâlâ odadaysa ve dövüşmüyorsa) büyücüye
+ * saldırır. skip_sleeping: komutla atılan büyüde uyuyan kurban saldırmaz.
+ */
+static void cast_retaliate( CHAR_DATA *ch, CHAR_DATA *victim, int sn, int target,
+			    bool skip_sleeping )
+{
+    CHAR_DATA *vch;
+
+    if ( ch->in_room == NULL || victim == NULL || victim == ch )
+	return;
+    if ( skill_table[sn].target != TAR_CHAR_OFFENSIVE
+    &&   !( skill_table[sn].target == TAR_OBJ_CHAR_OFF && target == TARGET_CHAR ) )
+	return;
+
+    for ( vch = ch->in_room->people; vch != NULL; vch = vch->next_in_room )
+    {
+	if ( vch == victim )
 	{
-    send_to_char( "Gerçek Kaynağa erişeceğin sırada birşeyin seni engellediğini hissediyorsun.\n\r",ch);
-	 return;
+	    if ( victim->fighting == NULL && victim->master != ch
+	    &&   ( !skip_sleeping || victim->position != POS_SLEEPING ) )
+		multi_hit( victim, ch, TYPE_UNDEFINED );
+	    break;
+	}
+    }
+}
+
+/* Büyünün mana bedeli. */
+static int cast_mana_cost( CHAR_DATA *ch, int sn )
+{
+    if ( ch->level + 2 == skill_table[sn].skill_level[ch->iclass] )
+	return 50;
+    return UMAX( skill_table[sn].min_mana,
+		 100 / ( 2 + ch->level - skill_table[sn].skill_level[ch->iclass] ) );
+}
+
+/*
+ * Büyünün atıldığı etkin seviye: sınıf, kabal, büyü ustalığı (spell craft),
+ * Tılsım'ın mastering spell'i ve zekâ ile belirlenir.
+ */
+static int cast_level( CHAR_DATA *ch, int sn )
+{
+    int slevel;
+
+    if (class_table[ch->iclass].fMana)
+	slevel = ch->level - UMAX(0,(ch->level / 20));
+    else
+	slevel = ch->level - UMAX(5,(ch->level / 10));
+
+    if (skill_table[sn].cabal != CABAL_NONE)
+	slevel = ch->level;
+
+    if ( ch->level > skill_table[gsn_spell_craft].skill_level[ch->iclass])
+    {
+	if (number_percent() < get_skill(ch,gsn_spell_craft) )
+	{
+	    slevel = ch->level;
+	    check_improve( ch, gsn_spell_craft, TRUE, 1 );
+	}
+	check_improve( ch, gsn_spell_craft, FALSE, 1);
+    }
+
+    if (ch->cabal == CABAL_SHALAFI &&
+	ch->level > skill_table[gsn_mastering_spell].skill_level[ch->iclass]
+	&& cabal_ok(ch,gsn_mastering_spell) )
+    {
+	if (number_percent() < get_skill(ch,gsn_mastering_spell) )
+	{
+	    slevel += number_range(1,4);
+	    check_improve( ch, gsn_mastering_spell, TRUE, 1 );
+	}
+    }
+
+    if (get_curr_stat(ch,STAT_INT) > 21 )
+	slevel += get_curr_stat(ch,STAT_INT) - 21;
+    return UMAX(1, slevel);
+}
+
+/*
+ * Saldırgan büyünün kurbanını bulur: hedef verilmemişse dövüşülen, uzak
+ * büyüde (allowed_other) komşu odalardan, yoksa odadan.
+ */
+static bool cast_find_offensive_victim( CHAR_DATA *ch, int sn, const char *arg2,
+					CHAR_DATA **pvictim, int *cast_far, int *door )
+{
+    CHAR_DATA *victim;
+    int range;
+
+    if ( arg2[0] == '\0' )
+    {
+	if ( ( victim = ch->fighting ) == NULL )
+	{
+	    send_to_char("Büyüyü kime yapacaksın?\n\r", ch );
+	    return FALSE;
+	}
+    }
+    else if ( (range = allowed_other(ch,sn)) > 0 )
+    {
+	if ((victim=get_char_spell(ch,target_name,door,range)) == NULL)
+	    return FALSE;
+
+	if (victim->in_room != ch->in_room
+	&& ( (IS_NPC(victim) && IS_SET(victim->act,ACT_NOTRACK))
+	   || is_at_cabal_area(ch) || is_at_cabal_area(victim) ) )
+	{
+	    act("Bu büyüyü $E bu mesafeden yapamazsın.", ch,NULL,victim,TO_CHAR);
+	    return FALSE;
 	}
 
-     if (is_affected(ch, gsn_garble) || is_affected(ch, gsn_deafen))
-     {
-       send_to_char("Doğru tınıyı yakalayamıyorsun.\n\r", ch);
-        return;
-     }
-
-    target_name = one_argument( argument, arg1 );
-    one_argument( target_name, arg2 );
-
-    if ( arg1[0] == '\0' )
+	*cast_far = 1;
+    }
+    else if ( ( victim = get_char_room( ch, target_name ) ) == NULL )
     {
-      send_to_char( "Hangi büyüyü nereye-kime yapacaksın?\n\r", ch );
-	return;
+	send_to_char( "O burada değil.\n\r", ch );
+	return FALSE;
     }
 
-    if (ch->cabal == CABAL_BATTLE && !IS_IMMORTAL(ch))
-    {
-      send_to_char("Sen Öfke Kabalı üyesisin, pis bir büyücü değil!\n\r",ch);
-      return;
-    }
+    if ( !IS_NPC(ch) && is_safe(ch,victim) )
+	return FALSE;
 
-    if (  ( sn = find_spell( ch,arg1 ) ) < 0
-          || ch_skill_nok_nomessage(ch,sn) )
-    {
-      send_to_char( "Bu isimde büyü bilmiyorsun.\n\r", ch );
-	return;
-    }
+    *pvictim = victim;
+    return TRUE;
+}
 
-    if ( ch->iclass == CLASS_VAMPIRE
-	&& !IS_VAMPIRE(ch) && skill_table[sn].cabal == CABAL_NONE)
-    {
-      send_to_char( "Büyüler için önce vampire dönüşmelisin!\n\r",ch);
-      return;
-    }
+/*
+ * Komutla atılan büyünün hedefini çözer; büyüyıkım/soğurma denetimlerini
+ * uygular. Büyü sürdürülmeyecekse FALSE döner (mesaj verilmiştir).
+ */
+static bool cast_find_target( CHAR_DATA *ch, int sn, const char *arg2, int mana,
+			      void **vo, int *target, CHAR_DATA **pvictim,
+			      OBJ_DATA **pobj, int *cast_far, int *door )
+{
+    CHAR_DATA *victim = NULL;
+    OBJ_DATA *obj = NULL;
 
-    if ( skill_table[sn].spell_fun == spell_null )
-    {
-      send_to_char("Bu bir büyü değil.\n\r",ch);
-        return;
-    }
-
-    if ( ch->position < skill_table[sn].minimum_position )
-    {
-      send_to_char( "Yeterince konsantre olamıyorsun.\n\r", ch );
-	return;
-    }
-
-    if (!cabal_ok(ch,sn))
-      return;
-
-    if (IS_SET(ch->in_room->room_flags,ROOM_NO_MAGIC))
-    {
-      send_to_char("Büyün başarısız oldu.\n\r",ch);
-      act("$s büyüsü başarısız oldu.", ch, NULL, NULL, TO_ROOM);
-        return;
-    }
-
-    if (ch->level + 2 == skill_table[sn].skill_level[ch->iclass])
-	mana = 50;
-    else
-	mana = UMAX(
-	    skill_table[sn].min_mana,
-	    100 / ( 2 + ch->level - skill_table[sn].skill_level[ch->iclass] ) );
-
-    /*
-     * Locate targets.
-     */
-    victim	= NULL;
-    obj		= NULL;
-    vo		= NULL;
-    target	= TARGET_NONE;
+    *vo = NULL;
+    *target = TARGET_NONE;
 
     switch ( skill_table[sn].target )
     {
     default:
 	bug( "Do_cast: bad target for sn %d.", sn );
-	return;
+	return FALSE;
 
     case TAR_IGNORE:
-        if ( is_affected(ch,gsn_spellbane))
-          {
-	    WAIT_STATE( ch, skill_table[sn].beats );
-      act("Büyüyıkımın büyüyü saptırıyor!",ch,NULL,NULL,TO_CHAR);
-      act("$s büyüyıkımı büyüyü saptırıyor!",ch,NULL,NULL,TO_ROOM);
-	    check_improve(ch,gsn_spellbane,TRUE,1);
-            damage(ch,ch,3 * ch->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
-            return;
-          }
- 	break;
+	if ( spellbane_backfire( ch, sn, TRUE ) )
+	    return FALSE;
+	break;
 
     case TAR_CHAR_OFFENSIVE:
-	if ( arg2[0] == '\0' )
-	{
-	    if ( ( victim = ch->fighting ) == NULL )
-	    {
-        send_to_char("Büyüyü kime yapacaksın?\n\r", ch );
-		return;
-	    }
-	}
-	else
-	{
-	    if ( (range = allowed_other(ch,sn)) > 0 )
-	    {
- 	     if ((victim=get_char_spell(ch,target_name,&door,range)) == NULL)
-	      return;
+	if ( !cast_find_offensive_victim( ch, sn, arg2, &victim, cast_far, door ) )
+	    return FALSE;
 
-	     if (victim->in_room != ch->in_room
-		&& ( (IS_NPC(victim) && IS_SET(victim->act,ACT_NOTRACK))
-		   || is_at_cabal_area(ch) || is_at_cabal_area(victim) ) )
-	     {
-         act("Bu büyüyü $E bu mesafeden yapamazsın.",
-			ch,NULL,victim,TO_CHAR);
-	      return;
-	     }
-
-	     cast_far = 1;
-	    }
-	    else if ( ( victim = get_char_room( ch, target_name ) ) == NULL )
-	    {
-		send_to_char( "O burada değil.\n\r", ch );
-		return;
-	    }
-	}
-
-	if ( !IS_NPC(ch) && is_safe(ch,victim) )
-		return;
-/*
-	if ( IS_AFFECTED(ch, AFF_CHARM) && ch->master == victim )
-	{
-	    send_to_char( "You can't do that on your own follower.\n\r",
-		ch );
-	    return;
-	}
-*/
-	vo = (void *) victim;
-	target = TARGET_CHAR;
-        if (!IS_NPC(ch) && victim != ch &&
-            ch->fighting != victim && victim->fighting != ch &&
-            (IS_SET(victim->affected_by,AFF_CHARM) || !IS_NPC(victim)))
-          {
-            if (!can_see(victim, ch))
-                do_yell(victim, "İmdat! Biri bana saldırıyor!");
-            else
-              {
-                snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
-                    (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(victim))?
-                     ch->doppel->name : ch->name);
-                 do_yell(victim,buf);
-              }
-          }
-        if ( is_affected(victim,gsn_spellbane) &&
-            (number_percent() < 2*get_skill(victim, gsn_spellbane)/3)
-		&& sn != slot_lookup(524)  && sn != slot_lookup(204) )
-          {
-	    WAIT_STATE( ch, skill_table[sn].beats );
-            if (ch==victim)
-            {
-              act("Büyüyıkımın büyüyü yansıtıyor!",ch,NULL,NULL,TO_CHAR);
-              act("$s büyüyıkımı büyüyü saptırıyor!",ch,NULL,NULL,TO_ROOM);
-	        check_improve(victim,gsn_spellbane,TRUE,1);
-                damage(ch,ch,3 * ch->level,gsn_spellbane,DAM_NEGATIVE,TRUE);
-            }
-            else
-	    {
-        act("$N büyünü saptırıyor!",ch,NULL,victim,TO_CHAR);
-				act("$s büyüsünü saptırıyorsun!",ch,NULL,victim,TO_VICT);
-				act("$N $s büyüsünü saptırıyor!",ch,NULL,victim,TO_NOTVICT);
-	      check_improve(victim,gsn_spellbane,TRUE,1);
-              damage(victim,ch,3 * victim->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
-              multi_hit(victim,ch,TYPE_UNDEFINED);
-            }
-            return;
-          }
-        if ( ch != victim && CAN_DETECT(victim, ADET_ABSORB) &&
-            (number_percent() < 2*get_skill(victim,gsn_absorb)/3)
-		&& sn != slot_lookup(524) && sn != slot_lookup(204))
-	{
-    act("Büyün $S enerji alanını geçemiyor!",ch,NULL,victim,TO_CHAR);
-          act("$s büyüsünü soğuruyorsun!",ch,NULL,victim,TO_VICT);
-          act("$N $s büyüsünü soğuruyor!",ch,NULL,victim,TO_NOTVICT);
-	    check_improve(victim,gsn_absorb,TRUE,1);
-	    victim->mana += mana;
-	    return;
-	}
+	*vo = (void *) victim;
+	*target = TARGET_CHAR;
+	victim_yell_at_caster( victim, ch );
+	if ( spellbane_deflects( ch, victim, sn, 3, TRUE, TRUE, TRUE )
+	||   absorb_check( ch, victim, sn, mana ) )
+	    return FALSE;
 	break;
 
     case TAR_CHAR_DEFENSIVE:
 	if ( arg2[0] == '\0' )
-	{
 	    victim = ch;
-	}
-	else
+	else if ( ( victim = get_char_room( ch, target_name ) ) == NULL )
 	{
-	    if ( ( victim = get_char_room( ch, target_name ) ) == NULL )
-	    {
-		send_to_char( "O burada değil.\n\r", ch );
-		return;
-	    }
+	    send_to_char( "O burada değil.\n\r", ch );
+	    return FALSE;
 	}
 
-	vo = (void *) victim;
-	target = TARGET_CHAR;
-        if ( is_affected(victim,gsn_spellbane) )
-          {
-	    WAIT_STATE( ch, skill_table[sn].beats );
-            if (ch==victim)
-              {
-                act("Büyüyıkımın büyüyü yansıtıyor!",ch,NULL,NULL,TO_CHAR);
-                act("$s büyüyıkımı büyüyü saptırıyor!",ch,NULL,NULL,TO_ROOM);
-	        check_improve(victim,gsn_spellbane,TRUE,1);
-                damage(victim,ch,3 * victim->level,gsn_spellbane,DAM_NEGATIVE, TRUE);              }
-            else {
-              act("$N büyünü saptırıyor!",ch,NULL,victim,TO_CHAR);
-              act("$s büyüsünü saptırıyorsun!",ch,NULL,victim,TO_VICT);
-              act("$N $s büyüsünü saptırıyor!",ch,NULL,victim,TO_NOTVICT);
-	      check_improve(victim,gsn_spellbane,TRUE,1);
-              damage(victim,ch,3 * victim->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
-            }
-            return;
-          }
-        if ( ch != victim && CAN_DETECT(victim, ADET_ABSORB) &&
-            (number_percent() < 2*get_skill(victim,gsn_absorb)/3) )
-	{
-    act("Büyün $S enerji alanını geçemiyor!",ch,NULL,victim,TO_CHAR);
-    act("$s büyüsünü soğuruyorsun!",ch,NULL,victim,TO_VICT);
-    act("$N $s büyüsünü soğuruyor!",ch,NULL,victim,TO_NOTVICT);
-	    check_improve(victim,gsn_absorb,TRUE,1);
-	    victim->mana += mana;
-	    return;
-	}
+	*vo = (void *) victim;
+	*target = TARGET_CHAR;
+	if ( spellbane_deflects( ch, victim, sn, 3, FALSE, FALSE, TRUE )
+	||   absorb_check( ch, victim, sn, mana ) )
+	    return FALSE;
 	break;
 
     case TAR_CHAR_SELF:
 	if ( arg2[0] != '\0' && !is_name( target_name, ch->name ) )
 	{
-    send_to_char( "Bu büyüyü başkasına yapamazsın.\n\r", ch );
-	    return;
+	    send_to_char( "Bu büyüyü başkasına yapamazsın.\n\r", ch );
+	    return FALSE;
 	}
 
-	vo = (void *) ch;
-	target = TARGET_CHAR;
-
-        if ( is_affected(ch,gsn_spellbane) )
-          {
-	    WAIT_STATE( ch, skill_table[sn].beats );
-      act("Büyüyıkımın büyüyü saptırıyor!",ch,NULL,NULL,TO_CHAR);
-      act("$s büyüyıkımı büyüyü saptırıyor!",ch,NULL,NULL,TO_ROOM);
-	    check_improve(ch,gsn_spellbane,TRUE,1);
-            damage(ch,ch,3 * ch->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
-            return;
-          }
-
+	*vo = (void *) ch;
+	*target = TARGET_CHAR;
+	if ( spellbane_backfire( ch, sn, TRUE ) )
+	    return FALSE;
 	break;
 
     case TAR_OBJ_INV:
 	if ( arg2[0] == '\0' )
 	{
-    send_to_char( "Büyü kime yapılacak?\n\r", ch );
-	    return;
+	    send_to_char( "Büyü kime yapılacak?\n\r", ch );
+	    return FALSE;
 	}
 
 	if ( ( obj = get_obj_carry( ch, target_name ) ) == NULL )
 	{
-    send_to_char( "Onu taşımıyorsun.\n\r", ch );
-	    return;
+	    send_to_char( "Onu taşımıyorsun.\n\r", ch );
+	    return FALSE;
 	}
 
-	vo = (void *) obj;
-	target = TARGET_OBJ;
-        if ( is_affected(ch,gsn_spellbane) )
-          {
-	    WAIT_STATE( ch, skill_table[sn].beats );
-      act("Büyüyıkımın büyüyü saptırıyor!",ch,NULL,NULL,TO_CHAR);
-      act("$s büyüyıkımı büyüyü saptırıyor!",ch,NULL,NULL,TO_ROOM);
-	    check_improve(ch,gsn_spellbane,TRUE,1);
-            damage(ch,ch,3 * ch->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
-            return;
-          }
+	*vo = (void *) obj;
+	*target = TARGET_OBJ;
+	if ( spellbane_backfire( ch, sn, TRUE ) )
+	    return FALSE;
 	break;
 
     case TAR_OBJ_CHAR_OFF:
@@ -658,158 +713,191 @@ void do_cast( CHAR_DATA *ch, char *argument )
 	    if ((victim = ch->fighting) == NULL)
 	    {
 		send_to_char("Büyüyü kime veya neye yapacaksın?\n\r",ch);
-		return;
+		return FALSE;
 	    }
-
-	    target = TARGET_CHAR;
+	    *target = TARGET_CHAR;
 	}
 	else if ((victim = get_char_room(ch,target_name)) != NULL)
-	{
-	    target = TARGET_CHAR;
-	}
+	    *target = TARGET_CHAR;
 
-	if (target == TARGET_CHAR) /* check the sanity of the attack */
+	if (*target == TARGET_CHAR) /* check the sanity of the attack */
 	{
 	    if(is_safe_spell(ch,victim,FALSE) && victim != ch)
 	    {
-        send_to_char("Büyün işe yaramadı.\n\r",ch);
-		return;
+		send_to_char("Büyün işe yaramadı.\n\r",ch);
+		return FALSE;
 	    }
 
 	    if ( IS_AFFECTED(ch, AFF_CHARM) && ch->master == victim )
 	    {
-        send_to_char("Takipçine bunu yapamazsın.\n\r",ch );
-
-		return;
+		send_to_char("Takipçine bunu yapamazsın.\n\r",ch );
+		return FALSE;
 	    }
 
 	    if ( is_safe(ch, victim) )
-		return;
+		return FALSE;
 
-	    vo = (void *) victim;
+	    *vo = (void *) victim;
 	}
 	else if ((obj = get_obj_here(ch,target_name)) != NULL)
 	{
-	    vo = (void *) obj;
-	    target = TARGET_OBJ;
+	    *vo = (void *) obj;
+	    *target = TARGET_OBJ;
 	}
 	else
 	{
-    send_to_char( "Öyle bir şey görmüyorsun.\n\r",ch );
-	    return;
+	    send_to_char( "Öyle bir şey görmüyorsun.\n\r",ch );
+	    return FALSE;
 	}
 	break;
 
     case TAR_OBJ_CHAR_DEF:
 	if (arg2[0] == '\0')
 	{
-	    vo = (void *) ch;
-	    target = TARGET_CHAR;
+	    *vo = (void *) ch;
+	    *target = TARGET_CHAR;
 	}
 	else if ((victim = get_char_room(ch,target_name)) != NULL)
 	{
-	    vo = (void *) victim;
-	    target = TARGET_CHAR;
+	    *vo = (void *) victim;
+	    *target = TARGET_CHAR;
 	}
 	else if ((obj = get_obj_carry(ch,target_name)) != NULL)
 	{
-	    vo = (void *) obj;
-	    target = TARGET_OBJ;
+	    *vo = (void *) obj;
+	    *target = TARGET_OBJ;
 	}
 	else
 	{
 	    send_to_char("Öyle bir şey görmüyorsun.\n\r",ch);
-	    return;
+	    return FALSE;
 	}
 	break;
     }
 
-    if ( !IS_NPC(ch) && ch->mana < mana )
+    *pvictim = victim;
+    *pobj = obj;
+    return TRUE;
+}
+
+void do_cast( CHAR_DATA *ch, char *argument )
+{
+    char arg1[MAX_INPUT_LENGTH];
+    char arg2[MAX_INPUT_LENGTH];
+    CHAR_DATA *victim = NULL;
+    OBJ_DATA *obj = NULL;
+    void *vo = NULL;
+    int mana;
+    int sn;
+    int target = TARGET_NONE;
+    int cast_far = 0, door = -1;
+
+    /*
+     * Switched NPC's can cast spells, but others can't.
+     */
+    if ( IS_NPC(ch) && ch->desc == NULL)
+	return;
+
+    if (is_affected(ch, gsn_shielding) )
     {
-      send_to_char( "Yeterli manan yok.\n\r", ch );
+	send_to_char( "Gerçek Kaynağa erişeceğin sırada birşeyin seni engellediğini hissediyorsun.\n\r",ch);
 	return;
     }
 
-    if ( str_cmp( skill_table[sn].name[0], "ventriloquate" ) )
+    if (is_affected(ch, gsn_garble) || is_affected(ch, gsn_deafen))
+    {
+	send_to_char("Doğru tınıyı yakalayamıyorsun.\n\r", ch);
+	return;
+    }
+
+    target_name = one_argument( argument, arg1 );
+    one_argument( target_name, arg2 );
+
+    if ( arg1[0] == '\0' )
+    {
+	send_to_char( "Hangi büyüyü nereye-kime yapacaksın?\n\r", ch );
+	return;
+    }
+
+    if (ch->cabal == CABAL_BATTLE && !IS_IMMORTAL(ch))
+    {
+	send_to_char("Sen Öfke Kabalı üyesisin, pis bir büyücü değil!\n\r",ch);
+	return;
+    }
+
+    if (  ( sn = find_spell( ch,arg1 ) ) < 0
+          || ch_skill_nok_nomessage(ch,sn) )
+    {
+	send_to_char( "Bu isimde büyü bilmiyorsun.\n\r", ch );
+	return;
+    }
+
+    if ( ch->iclass == CLASS_VAMPIRE
+	&& !IS_VAMPIRE(ch) && skill_table[sn].cabal == CABAL_NONE)
+    {
+	send_to_char( "Büyüler için önce vampire dönüşmelisin!\n\r",ch);
+	return;
+    }
+
+    if ( skill_table[sn].spell_fun == spell_null )
+    {
+	send_to_char("Bu bir büyü değil.\n\r",ch);
+	return;
+    }
+
+    if ( ch->position < skill_table[sn].minimum_position )
+    {
+	send_to_char( "Yeterince konsantre olamıyorsun.\n\r", ch );
+	return;
+    }
+
+    if (!cabal_ok(ch,sn))
+	return;
+
+    if (IS_SET(ch->in_room->room_flags,ROOM_NO_MAGIC))
+    {
+	send_to_char("Büyün başarısız oldu.\n\r",ch);
+	act("$s büyüsü başarısız oldu.", ch, NULL, NULL, TO_ROOM);
+	return;
+    }
+
+    mana = cast_mana_cost( ch, sn );
+
+    if ( !cast_find_target( ch, sn, arg2, mana, &vo, &target, &victim, &obj,
+			    &cast_far, &door ) )
+	return;
+
+    if ( !IS_NPC(ch) && ch->mana < mana )
+    {
+	send_to_char( "Yeterli manan yok.\n\r", ch );
+	return;
+    }
+
+    if ( sn != msn(MSN_VENTRILOQUATE) )
 	say_spell( ch, sn );
 
     WAIT_STATE( ch, skill_table[sn].beats );
 
     if ( number_percent( ) > get_skill(ch,sn) )
     {
-      send_to_char( "Konsantrasyonunu kaybettin.\n\r", ch );
+	send_to_char( "Konsantrasyonunu kaybettin.\n\r", ch );
 	check_improve(ch,sn,FALSE,1);
 	ch->mana -= mana / 2;
 	if (cast_far) cast_far = 2;
     }
     else
     {
-	int slevel;
-
-	if (class_table[ch->iclass].fMana)
-		slevel = ch->level - UMAX(0,(ch->level / 20));
-	else	slevel = ch->level - UMAX(5,(ch->level / 10));
-
-	if (skill_table[sn].cabal != CABAL_NONE)
-		slevel = ch->level;
-
-	if ( ch->level > skill_table[gsn_spell_craft].skill_level[ch->iclass])
-	 {
-	  if (number_percent() < get_skill(ch,gsn_spell_craft) )
-		{
-		 slevel = ch->level;
-		 check_improve( ch, gsn_spell_craft, TRUE, 1 );
-		}
-	  check_improve( ch, gsn_spell_craft, FALSE, 1);
-	 }
-
-	if (ch->cabal == CABAL_SHALAFI &&
-	    ch->level > skill_table[gsn_mastering_spell].skill_level[ch->iclass]
-	    && cabal_ok(ch,gsn_mastering_spell) )
-	 {
-	  if (number_percent() < get_skill(ch,gsn_mastering_spell) )
-		{
-		 slevel += number_range(1,4);
-		 check_improve( ch, gsn_mastering_spell, TRUE, 1 );
-		}
-	 }
+	int slevel = cast_level( ch, sn );
 
 	ch->mana -= mana;
-	if (get_curr_stat(ch,STAT_INT) > 21 )
-		slevel = UMAX(1,(slevel + (get_curr_stat(ch,STAT_INT) - 21)) );
-	else	slevel = UMAX(1, slevel );
-
-	if (IS_NPC(ch))
-	    (*skill_table[sn].spell_fun) ( sn, ch->level, ch, vo,target);
-	else
-	    (*skill_table[sn].spell_fun) (sn, slevel , ch, vo,target);
+	(*skill_table[sn].spell_fun) ( sn, IS_NPC(ch) ? ch->level : slevel, ch, vo, target );
 	check_improve(ch,sn,TRUE,1);
     }
 
     if (cast_far == 1 && door != -1)
 	path_to_track(ch,victim,door);
-    else if ((skill_table[sn].target == TAR_CHAR_OFFENSIVE
-    ||   (skill_table[sn].target == TAR_OBJ_CHAR_OFF && target == TARGET_CHAR))
-    &&   victim != ch
-    &&   victim->master != ch)
-    {
-	CHAR_DATA *vch;
-	CHAR_DATA *vch_next;
-
-	for ( vch = ch->in_room->people; vch; vch = vch_next )
-	{
-	    vch_next = vch->next_in_room;
-	    if ( victim == vch && victim->fighting == NULL )
-	    {
-		if ( victim->position != POS_SLEEPING )
-		multi_hit( victim, ch, TYPE_UNDEFINED );
-
-		break;
-	    }
-	}
-    }
-
-    return;
+    else
+	cast_retaliate( ch, victim, sn, target, TRUE );
 }
 
 
@@ -831,21 +919,16 @@ void obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DA
 	return;
     }
 
-    if ( (IS_NPC(ch) && ch->position == POS_DEAD) ||
-        (!IS_NPC(ch) && (current_time - ch->last_death_time) < 10))
+    if ( recently_dead( ch ) )
     {
-	bug( "Obj_cast_spell: Ch is dead! But it is Tamam.", sn);
+	bug( "Obj_cast_spell: büyücü ölü, sn %d.", sn );
 	return;
     }
 
-    if (victim != NULL)
+    if ( victim != NULL && recently_dead( victim ) )
     {
-      if ( (IS_NPC(victim) && victim->position == POS_DEAD) ||
-        (!IS_NPC(victim) && (current_time - victim->last_death_time) < 10))
-      {
-	bug( "Obj_cast_spell: Victim is dead! But it is Tamam.. ", sn);
+	bug( "Obj_cast_spell: kurban ölü, sn %d.", sn );
 	return;
-      }
     }
 
     switch ( skill_table[sn].target )
@@ -868,42 +951,14 @@ void obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DA
 	}
 	if (is_safe(ch,victim) && ch != victim)
 	{
-    send_to_char("Birşeyler yanlış...\n\r",ch);
+	    send_to_char("Birşeyler yanlış...\n\r",ch);
 	    return;
 	}
 	vo = (void *) victim;
 	target = TARGET_CHAR;
-        if ( is_affected(victim,gsn_spellbane) && (/*IS_NPC(victim) ||*/
-                number_percent() < 2*get_skill(victim, gsn_spellbane)/3) )
-        {
-            if (ch==victim)
-              {
-                act("Büyüyıkımın büyüyü yansıtıyor!",ch,NULL,NULL,TO_CHAR);
-                act("$s büyüyıkımı büyüyü saptırıyor!",ch,NULL,NULL,TO_ROOM);
-	        check_improve(victim,gsn_spellbane,TRUE,1);
-                damage(victim,ch,10 * level,gsn_spellbane,DAM_NEGATIVE, TRUE);
-              }
-            else {
-              act("$N büyünü saptırıyor!",ch,NULL,victim,TO_CHAR);
-              act("$s büyüsünü saptırıyorsun!",ch,NULL,victim,TO_VICT);
-              act("$N $s büyüsünü saptırıyor!",ch,NULL,victim,TO_NOTVICT);
-	      check_improve(victim,gsn_spellbane,TRUE,1);
-              damage(victim,ch,10 * victim->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
-            }
-            return;
-        }
-
-        if ( ch != victim && CAN_DETECT(victim, ADET_ABSORB) &&
-            (number_percent() < 2*get_skill(victim,gsn_absorb)/3)
-		&& sn != slot_lookup(524) && sn != slot_lookup(204))
-	{
-    act("Büyün $S enerji alanını geçemiyor!",ch,NULL,victim,TO_CHAR);
-    act("$s büyüsünü soğuruyorsun!",ch,NULL,victim,TO_VICT);
-    act("$N $s büyüsünü soğuruyor!",ch,NULL,victim,TO_NOTVICT);
-	    check_improve(victim,gsn_absorb,TRUE,1);
-	    victim->mana += skill_table[sn].min_mana;
+	if ( spellbane_deflects( ch, victim, sn, 10, TRUE, FALSE, FALSE )
+	||   absorb_check( ch, victim, sn, skill_table[sn].min_mana ) )
 	    return;
-	}
 	break;
 
     case TAR_CHAR_DEFENSIVE:
@@ -912,25 +967,9 @@ void obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DA
 	    victim = ch;
 	vo = (void *) victim;
 	target = TARGET_CHAR;
-        if ( is_affected(victim,gsn_spellbane) )
-          {
-            if (ch==victim)
-              {
-                act("Büyüyıkımın büyüyü yansıtıyor!",ch,NULL,NULL,TO_CHAR);
-                act("$s büyüyıkımı büyüyü saptırıyor!",ch,NULL,NULL,TO_ROOM);
-	        check_improve(victim,gsn_spellbane,TRUE,1);
-                damage(victim,ch,10 * victim->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
-              }
-            else {
-              act("$N büyünü saptırıyor!",ch,NULL,victim,TO_CHAR);
-              act("$s büyüsünü saptırıyorsun!",ch,NULL,victim,TO_VICT);
-              act("$N $s büyüsünü saptırıyor!",ch,NULL,victim,TO_NOTVICT);
-	      check_improve(victim,gsn_spellbane,TRUE,1);
-              damage(victim,ch,10 * victim->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
-            }
-            return;
-          }
-        break;
+	if ( spellbane_deflects( ch, victim, sn, 10, FALSE, FALSE, FALSE ) )
+	    return;
+	break;
 
     case TAR_OBJ_INV:
 	if ( obj == NULL )
@@ -940,15 +979,8 @@ void obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DA
 	}
 	vo = (void *) obj;
 	target = TARGET_OBJ;
-        if ( is_affected(ch,gsn_spellbane) )
-          {
-            act("Büyüyıkımın büyüyü saptırıyor!",ch,NULL,NULL,TO_CHAR);
-            act("$s büyüyıkımı büyüyü saptırıyor!",ch,NULL,NULL,TO_ROOM);
-	    check_improve(ch,gsn_spellbane,TRUE,1);
-            damage(ch,ch,3 * ch->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
-            return;
-          }
-
+	if ( spellbane_backfire( ch, sn, FALSE ) )
+	    return;
 	break;
 
     case TAR_OBJ_CHAR_OFF:
@@ -963,24 +995,23 @@ void obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DA
 	    }
 	}
 
-	    if (victim != NULL)
+	if (victim != NULL)
+	{
+	    if (is_safe_spell(ch,victim,FALSE) && ch != victim)
 	    {
-		if (is_safe_spell(ch,victim,FALSE) && ch != victim)
-		{
-      send_to_char("Bir şeyler yanlış...\n\r",ch);
-		    return;
-		}
+		send_to_char("Bir şeyler yanlış...\n\r",ch);
+		return;
+	    }
 
-		vo = (void *) victim;
-		target = TARGET_CHAR;
-	    }
-	    else
-	    {
-		vo = (void *) obj;
-		target = TARGET_OBJ;
-	    }
+	    vo = (void *) victim;
+	    target = TARGET_CHAR;
+	}
+	else
+	{
+	    vo = (void *) obj;
+	    target = TARGET_OBJ;
+	}
 	break;
-
 
     case TAR_OBJ_CHAR_DEF:
 	if (victim == NULL && obj == NULL)
@@ -998,36 +1029,13 @@ void obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DA
 	    vo = (void *) obj;
 	    target = TARGET_OBJ;
 	}
-
 	break;
     }
 
     target_name = "";
     (*skill_table[sn].spell_fun) ( sn, level, ch, vo,target);
 
-
-
-    if ( (skill_table[sn].target == TAR_CHAR_OFFENSIVE
-    ||   (skill_table[sn].target == TAR_OBJ_CHAR_OFF && target == TARGET_CHAR))
-    &&   victim != ch
-    &&   victim->master != ch )
-    {
-	CHAR_DATA *vch;
-	CHAR_DATA *vch_next;
-
-	for ( vch = ch->in_room->people; vch; vch = vch_next )
-	{
-	    vch_next = vch->next_in_room;
-	    if ( victim == vch && victim->fighting == NULL )
-	    {
-		multi_hit( victim, ch, TYPE_UNDEFINED );
-
-		break;
-	    }
-	}
-    }
-
-    return;
+    cast_retaliate( ch, victim, sn, target, FALSE );
 }
 
 

@@ -336,3 +336,6 @@ DECLARE_SPELL_FUN(	spell_eyes_of_tiger	);
 DECLARE_SPELL_FUN(	spell_lion_shield	);
 DECLARE_SPELL_FUN(	spell_evolve_lion	);
 DECLARE_SPELL_FUN(	spell_prevent		);
+
+/* Grup 01: magic.c ortak yardımcıları */
+void	victim_yell_at_caster	( CHAR_DATA *victim, CHAR_DATA *ch );
