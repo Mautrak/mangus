@@ -1,3 +1,4 @@
+import os
 import asyncio
 import discord
 
@@ -16,4 +17,4 @@ async def on_ready():
             discord_file.write(str(member.id)+"\n")
     await client.close()
 
-client.run("MTAwMzc4MDc3OTYzMDkyNzg3Mg.GYsVEl.Wy9NOVT2W374XP_3I6WVE9K-ucky7sCT9h4Xzk")
+client.run(os.environ["DISCORD_TOKEN"])

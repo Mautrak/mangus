@@ -1,3 +1,4 @@
+import os
 import asyncio
 import discord
 import csv
@@ -24,4 +25,4 @@ async def on_ready():
                 await channel.send(mesaj)
     await client.close()
 
-client.run("MTAwMzc4MDc3OTYzMDkyNzg3Mg.GYsVEl.Wy9NOVT2W374XP_3I6WVE9K-ucky7sCT9h4Xzk")
+client.run(os.environ["DISCORD_TOKEN"])
