@@ -174,10 +174,11 @@ void say_spell( CHAR_DATA *ch, int sn )
     char buf  [MAX_STRING_LENGTH];
     char buf2 [MAX_STRING_LENGTH];
     CHAR_DATA *rch;
-    char *pName;
+    const char *pName;
     int iSyl;
     int length;
     int skill;
+    size_t used;
 
     struct syl_type
     {
@@ -220,14 +221,18 @@ void say_spell( CHAR_DATA *ch, int sn )
 	{ "", "" }
     };
 
+    /* Büyünün İngilizce adı (name[0]) hece hece "sihirli sözcüklere" çevrilir. */
     buf[0]	= '\0';
-    for ( pName = (char*)skill_table[sn].name; *pName != '\0'; pName += length )
+    used	= 0;
+    for ( pName = skill_table[sn].name[0]; *pName != '\0'; pName += length )
     {
 	for ( iSyl = 0; (length = strlen(syl_table[iSyl].old)) != 0; iSyl++ )
 	{
 	    if ( !str_prefix( syl_table[iSyl].old, pName ) )
 	    {
-		strcat( buf, syl_table[iSyl].inew );
+		used += snprintf( buf + used, sizeof(buf) - used, "%s", syl_table[iSyl].inew );
+		if ( used >= sizeof(buf) - 1 )
+		    used = sizeof(buf) - 1;
 		break;
 	    }
 	}
@@ -243,17 +248,9 @@ void say_spell( CHAR_DATA *ch, int sn )
     {
 	if ( rch != ch )
 	{
-         skill = (get_skill(rch,gsn_spell_craft) * 9) / 10;
-	 if (skill < number_percent() )
-	  {
-	    act(buf2 , ch, NULL, rch, TO_VICT );
+	    skill = (get_skill(rch,gsn_spell_craft) * 9) / 10;
+	    act( skill < number_percent() ? buf2 : buf, ch, NULL, rch, TO_VICT );
 	    check_improve( rch, gsn_spell_craft, TRUE, 5 );
-	  }
-	 else
-	  {
-	    act( buf, ch, NULL, rch, TO_VICT );
-	    check_improve( rch, gsn_spell_craft, TRUE, 5 );
-	  }
 	}
     }
 
