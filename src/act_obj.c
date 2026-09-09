@@ -2416,18 +2416,36 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
 }
 
 
+/* Öfke Kabalı üyesi (ölümsüz değilse) büyülü eşya kullanamaz. */
+static bool magic_item_forbidden( CHAR_DATA *ch, const char *msg )
+{
+    if ( ch->cabal == CABAL_BATTLE && !IS_IMMORTAL(ch) )
+    {
+	send_to_char( msg, ch );
+	return TRUE;
+    }
+    return FALSE;
+}
+
+/* Dövüşte ya da son dövüşün hemen ardından büyülü eşya kullanımı bekletir. */
+static void post_magic_lag( CHAR_DATA *ch )
+{
+    if ( ( ch->last_fight_time != -1
+	&& current_time - ch->last_fight_time < FIGHT_DELAY_TIME )
+    ||   ch->fighting != NULL )
+	WAIT_STATE( ch, 2 * PULSE_VIOLENCE );
+}
+
 void do_quaff( CHAR_DATA *ch, char *argument )
 {
     char arg[MAX_INPUT_LENGTH];
     OBJ_DATA *obj;
+    OBJ_DATA *vial;
 
     one_argument( argument, arg );
 
-    if (ch->cabal == CABAL_BATTLE && !IS_IMMORTAL(ch))
-    {
-      send_to_char("Sen Öfke Kabalı üyesisin, pis bir büyücü değil!\n\r",ch);
-      return;
-    }
+    if ( magic_item_forbidden( ch, "Sen Öfke Kabalı üyesisin, pis bir büyücü değil!\n\r" ) )
+	return;
 
     if ( arg[0] == '\0' )
     {
@@ -2461,17 +2479,16 @@ void do_quaff( CHAR_DATA *ch, char *argument )
     obj_cast_spell( obj->value[2], obj->value[0], ch, ch, NULL );
     obj_cast_spell( obj->value[3], obj->value[0], ch, ch, NULL );
 
-    if (( ch->last_fight_time != -1 &&
-        (current_time - ch->last_fight_time)<FIGHT_DELAY_TIME) ||
-	(ch->fighting != NULL) )
-      {
-        WAIT_STATE( ch,2 * PULSE_VIOLENCE );
-      }
+    post_magic_lag( ch );
 
     extract_obj( obj );
-    obj_to_char( create_object(get_obj_index(OBJ_VNUM_POTION_VIAL),0),ch);
 
-    if (IS_NPC(ch))	do_drop(ch, "vial");
+    /* Boş şişe: oyuncuya kalır, yaratık yere bırakır. */
+    vial = create_object( get_obj_index( OBJ_VNUM_POTION_VIAL ), 0 );
+    if ( IS_NPC(ch) )
+	obj_to_room( vial, ch->in_room );
+    else
+	obj_to_char( vial, ch );
 
     return;
 }
@@ -2486,12 +2503,9 @@ void do_recite( CHAR_DATA *ch, char *argument )
     OBJ_DATA *scroll;
     OBJ_DATA *obj;
 
-    if ( ch->cabal == CABAL_BATTLE )
-    {
-	send_to_char(
-	"Parşömen okumak?!  Sen Öfke Kabalı üyesisin, pis bir büyücü değil!\n\r", ch );
+    if ( magic_item_forbidden( ch,
+	"Parşömen okumak?!  Sen Öfke Kabalı üyesisin, pis bir büyücü değil!\n\r" ) )
 	return;
-    }
 
     argument = one_argument( argument, arg1 );
     argument = one_argument( argument, arg2 );
@@ -2504,7 +2518,7 @@ void do_recite( CHAR_DATA *ch, char *argument )
 
     if ( scroll->item_type != ITEM_SCROLL )
     {
-	send_to_char( "Yalnız parşömenler recite edilebilir.\n\r", ch );
+	send_to_char( "Yalnız parşömenler okunabilir.\n\r", ch );
 	return;
     }
 
@@ -2546,13 +2560,7 @@ void do_recite( CHAR_DATA *ch, char *argument )
     	obj_cast_spell( scroll->value[2], scroll->value[0], ch, victim, obj );
     	obj_cast_spell( scroll->value[3], scroll->value[0], ch, victim, obj );
 	check_improve(ch,gsn_scrolls,TRUE,2);
-
-        if (( ch->last_fight_time != -1 &&
-          (current_time - ch->last_fight_time)<FIGHT_DELAY_TIME) ||
-          (ch->fighting != NULL) )
-	      {
-	        WAIT_STATE( ch, 2 * PULSE_VIOLENCE );
-	      }
+	post_magic_lag( ch );
     }
 
     extract_obj( scroll );
@@ -2568,11 +2576,8 @@ void do_brandish( CHAR_DATA *ch, char *argument )
     OBJ_DATA *staff;
     int sn;
 
-    if ( ch->cabal == CABAL_BATTLE )
-    {
-	send_to_char( "Pis bir büyücü değilsin!\n\r", ch );
+    if ( magic_item_forbidden( ch, "Pis bir büyücü değilsin!\n\r" ) )
 	return;
-    }
 
     if ( ( staff = get_hold_char( ch ) ) == NULL )
     {
@@ -2646,7 +2651,7 @@ void do_brandish( CHAR_DATA *ch, char *argument )
 
     if ( --staff->value[2] <= 0 )
     {
-	act("$n's $p parlayarak yokoluyor.", ch, staff, NULL, TO_ROOM );
+	act("$s $p parlayarak yokoluyor.", ch, staff, NULL, TO_ROOM );
 	act("$p parlayarak yokoluyor.", ch, staff, NULL, TO_CHAR );
 	extract_obj( staff );
     }
@@ -2663,11 +2668,8 @@ void do_zap( CHAR_DATA *ch, char *argument )
     OBJ_DATA *wand;
     OBJ_DATA *obj;
 
-    if ( ch->cabal == CABAL_BATTLE )
-    {
-	send_to_char("Büyüyü kullanmak yerine yoketmelisin!\n\r", ch );
+    if ( magic_item_forbidden( ch, "Büyüyü kullanmak yerine yoketmelisin!\n\r" ) )
 	return;
-    }
 
     one_argument( argument, arg );
     if ( arg[0] == '\0' && ch->fighting == NULL )
