@@ -116,10 +116,10 @@ extern	const	struct	flag_type	imm_flags[];
 extern	const	struct	flag_type	form_flags[];
 extern	const	struct	flag_type	part_flags[];
 extern	const	struct	flag_type	comm_flags[];
-extern	const	struct	flag_type	extra_flags[];
-extern	const	struct	flag_type	wear_flags[];
-extern	const	struct	flag_type	weapon_flags[];
-extern	const	struct	flag_type	container_flags[];
-extern	const	struct	flag_type	portal_flags[];
-extern	const	struct	flag_type	room_flags[];
-extern	const	struct	flag_type	exit_flags[];
+
+/* Yaratık seviyesine göre yp aralığı; seviye tablo sınırına kırpılır. */
+const struct yp_tip *yp_range(int level);
+/* wand_spell_table'daki büyü sayısı (NULL sonlandırıcı hariç). */
+extern const int wand_spell_count;
+/* İngilizce adına göre malzeme sırası; bulunamazsa -1. */
+int material_index(const char *name);
