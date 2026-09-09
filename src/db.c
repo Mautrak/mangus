@@ -55,6 +55,8 @@
 #include <time.h>
 #include <dirent.h>
 #include <stdint.h>
+#include <limits.h>
+#include <stddef.h>
 
 #include "merc.h"
 #include "db.h"
@@ -1436,7 +1438,6 @@ void load_specials( FILE *fp )
 void fix_exits( void )
 {
     extern const sh_int rev_dir [];
-    char buf[MAX_STRING_LENGTH];
     ROOM_INDEX_DATA *pRoomIndex;
     ROOM_INDEX_DATA *to_room;
     EXIT_DATA *pexit;
@@ -1486,12 +1487,11 @@ void fix_exits( void )
 		&&   pexit_rev->u1.to_room != pRoomIndex
 		&&   (pRoomIndex->vnum < 1200 || pRoomIndex->vnum > 1299))
 		{
-		    snprintf(buf, sizeof(buf), "Fix_exits: %d:%d -> %d:%d -> %d.",
+		    bugf( "Fix_exits: %d:%d -> %d:%d -> %d.",
 			pRoomIndex->vnum, door,
 			to_room->vnum,    rev_dir[door],
 			(pexit_rev->u1.to_room == NULL)
 			    ? 0 : pexit_rev->u1.to_room->vnum );
-		    bug( buf, 0 );
 		}
 	    }
 	}
@@ -2748,15 +2748,15 @@ ROOM_INDEX_DATA *get_room_index( int vnum )
  */
 char fread_letter( FILE *fp )
 {
-    char c;
+    int c;
 
     do
     {
 	c = getc( fp );
     }
-    while ( isspace(c) );
+    while ( c != EOF && isspace( c ) );
 
-    return c;
+    return (char) c;
 }
 
 
@@ -2766,15 +2766,15 @@ char fread_letter( FILE *fp )
  */
 int fread_number( FILE *fp )
 {
-    int number;
+    long long number;
     bool sign;
-    char c;
+    int c;
 
     do
     {
 	c = getc( fp );
     }
-    while ( isspace(c) );
+    while ( c != EOF && isspace( c ) );
 
     number = 0;
 
@@ -2789,15 +2789,20 @@ int fread_number( FILE *fp )
 	c = getc( fp );
     }
 
-    if ( !isdigit(c) )
+    if ( c == EOF || !isdigit( c ) )
     {
 	bug( "Fread_number: bad format.", 0 );
 	exit( 1 );
     }
 
-    while ( isdigit(c) )
+    while ( c != EOF && isdigit( c ) )
     {
 	number = number * 10 + c - '0';
+	if ( number > INT_MAX )
+	{
+	    bug( "Fread_number: number too large.", 0 );
+	    exit( 1 );
+	}
 	c      = getc( fp );
     }
 
@@ -2806,23 +2811,23 @@ int fread_number( FILE *fp )
 
     if ( c == '|' )
 	number += fread_number( fp );
-    else if ( c != ' ' )
+    else if ( c != ' ' && c != EOF )
 	ungetc( c, fp );
 
-    return number;
+    return (int) number;
 }
 
 long fread_flag( FILE *fp)
 {
-    int number;
-    char c;
+    long number;
+    int c;
     bool negative = FALSE;
 
     do
     {
-	c = getc(fp);
+	c = getc( fp );
     }
-    while ( isspace(c));
+    while ( c != EOF && isspace( c ) );
 
     if (c == '-')
     {
@@ -2832,16 +2837,16 @@ long fread_flag( FILE *fp)
 
     number = 0;
 
-    if (!isdigit(c))
+    if ( c == EOF || !isdigit( c ) )
     {
 	while (('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z'))
 	{
-	    number += flag_convert(c);
+	    number += flag_convert( (char) c );
 	    c = getc(fp);
 	}
     }
 
-    while (isdigit(c))
+    while ( c != EOF && isdigit( c ) )
     {
 	number = number * 10 + c - '0';
 	c = getc(fp);
@@ -2850,7 +2855,7 @@ long fread_flag( FILE *fp)
     if (c == '|')
 	number += fread_flag(fp);
 
-    else if  ( c != ' ')
+    else if  ( c != ' ' && c != EOF )
 	ungetc(c,fp);
 
     if (negative)
@@ -2859,29 +2864,112 @@ long fread_flag( FILE *fp)
     return number;
 }
 
+/*
+ * Bayrak harfi -> bit: A..Z = 2^0..2^25, a..z = 2^26..2^51.
+ * long'a sığmayan bit (Win64'te long 32 bit) 0 döner ve günlüğe yazılır.
+ */
 long flag_convert(char letter )
 {
-    long bitsum = 0;
-    char i;
+    int n;
 
     if ('A' <= letter && letter <= 'Z')
-    {
-	bitsum = 1;
-	for (i = letter; i > 'A'; i--)
-	    bitsum *= 2;
-    }
+	n = letter - 'A';
     else if ('a' <= letter && letter <= 'z')
+	n = 26 + letter - 'a';
+    else
+	return 0;
+
+    if ( n >= (int) ( sizeof(long) * CHAR_BIT - 1 ) )
     {
-	bitsum = 67108864; /* 2^26 */
-	for (i = letter; i > 'a'; i --)
-	    bitsum *= 2;
+	bug( "Flag_convert: bit %d does not fit in long.", n );
+	return 0;
     }
 
-    return bitsum;
+    return (long) ( 1UL << n );
 }
 
 
 
+/*
+ * Dizgi alanının sonu; ham okuma bu adrese dayanınca durulur.
+ */
+#define STRING_SPACE_END	( &string_space[MAX_STRING] )
+
+static void fread_string_overflow( void )
+{
+    bug( "Fread_string: MAX_STRING %d exceeded.", MAX_STRING );
+    exit( 1 );
+}
+
+/*
+ * top_string + sizeof(char *) adresinden başlayan, '\0' ile biten ham
+ * dizgiyi bitirir: eski Latin-5 girdiyi UTF-8'e çevirir, uzunluk karmasında
+ * arar; açılışta yeni dizgiyi alanda kalıcı kılar, sonrasında str_dup ile
+ * kopyalar. fread_string ve fread_string_eol'un ortak kuyruğu.
+ */
+static char *intern_read_string( void )
+{
+    union
+    {
+	char *	pc;
+	char	rgc[sizeof(char *)];
+    } u1;
+    size_t ic;
+    int iHash;
+    char *pHash;
+    char *pHashPrev;
+    char *pString;
+    char *plast;
+    char *pStart = top_string + sizeof(char *);
+    size_t need = strlen( pStart ) + 1;
+
+    /*
+     * Latin-5 dönüşümünde her yüksek bayt bir bayt büyür; alan yetmiyorsa
+     * sessizce kesmek yerine dur.
+     */
+    if ( !utf8_valid( pStart ) )
+    {
+	const unsigned char *p;
+
+	for ( p = (const unsigned char *) pStart; *p != '\0'; p++ )
+	    if ( *p >= 0x80 )
+		need++;
+	if ( pStart + need > STRING_SPACE_END )
+	    fread_string_overflow( );
+	utf8_from_latin5( pStart, need );
+    }
+
+    plast = pStart + strlen( pStart ) + 1;
+
+    iHash     = UMIN( MAX_KEY_HASH - 1, plast - 1 - top_string );
+    for ( pHash = string_hash[iHash]; pHash; pHash = pHashPrev )
+    {
+	for ( ic = 0; ic < sizeof(char *); ic++ )
+	    u1.rgc[ic] = pHash[ic];
+	pHashPrev = u1.pc;
+	pHash    += sizeof(char *);
+
+	if ( pStart[0] == pHash[0]
+	&&   !strcmp( pStart + 1, pHash + 1 ) )
+	    return pHash;
+    }
+
+    if ( fBootDb )
+    {
+	pString		= top_string;
+	top_string	= plast;
+	u1.pc		= string_hash[iHash];
+	for ( ic = 0; ic < sizeof(char *); ic++ )
+	    pString[ic] = u1.rgc[ic];
+	string_hash[iHash]	= pString;
+
+	nAllocString += 1;
+	sAllocString += top_string - pString;
+	return pString + sizeof(char *);
+    }
+
+    return str_dup( pStart );
+}
 
 /*
  * Read and allocate space for a string from a file.
@@ -2894,14 +2982,11 @@ long flag_convert(char letter )
 char *fread_string( FILE *fp )
 {
     char *plast;
-    char c;
+    int c;
 
     plast = top_string + sizeof(char *);
     if ( plast > &string_space[MAX_STRING - MAX_STRING_LENGTH] )
-    {
-	bug( "Fread_string: MAX_STRING %d exceeded.", MAX_STRING );
-	exit( 1 );
-    }
+	fread_string_overflow( );
 
     /*
      * Skip blanks.
@@ -2911,119 +2996,56 @@ char *fread_string( FILE *fp )
     {
 	c = getc( fp );
     }
-    while ( isspace(c) );
+    while ( c != EOF && isspace( c ) );
 
-    if ( ( *plast++ = c ) == '~' )
+    if ( c == '~' )
 	return &str_empty[0];
 
     for ( ;; )
     {
-        /*
-         * Back off the char type lookup,
-         *   it was too dirty for portability.
-         *   -- Furey
-         */
-
-	switch ( *plast = getc(fp) )
+	if ( c == EOF )
 	{
-        default:
-            plast++;
-            break;
-
-        case EOF:
-	/* temp fix */
-            bug( "Fread_string: EOF", 0 );
-	    return NULL;
-            /* exit( 1 ); */
-            break;
-
-        case '\n':
-            plast++;
-            *plast++ = '\r';
-            break;
-
-        case '\r':
-            break;
-
-        case '~':
-            plast++;
-	    {
-		union
-		{
-		    char *	pc;
-		    char	rgc[sizeof(char *)];
-		} u1;
-		size_t ic;
-		int iHash;
-		char *pHash;
-		char *pHashPrev;
-		char *pString;
-
-		plast[-1] = '\0';
-
-		{
-
-		    char *pStart = top_string + sizeof(char *);
-
-		    utf8_from_latin5( pStart, (size_t) ( &string_space[MAX_STRING] - pStart ) );
-
-		    plast = pStart + strlen( pStart ) + 1;
-
-		}
-		iHash     = UMIN( MAX_KEY_HASH - 1, plast - 1 - top_string );
-		for ( pHash = string_hash[iHash]; pHash; pHash = pHashPrev )
-		{
-		    for ( ic = 0; ic < sizeof(char *); ic++ )
-			u1.rgc[ic] = pHash[ic];
-		    pHashPrev = u1.pc;
-		    pHash    += sizeof(char *);
-
-		    if ( top_string[sizeof(char *)] == pHash[0]
-		    &&   !strcmp( top_string+sizeof(char *)+1, pHash+1 ) )
-			return pHash;
-		}
-
-		if ( fBootDb )
-		{
-		    pString		= top_string;
-		    top_string		= plast;
-		    u1.pc		= string_hash[iHash];
-		    for ( ic = 0; ic < sizeof(char *); ic++ )
-			pString[ic] = u1.rgc[ic];
-		    string_hash[iHash]	= pString;
-
-		    nAllocString += 1;
-		    sAllocString += top_string - pString;
-		    return pString + sizeof(char *);
-		}
-		else
-		{
-		    return str_dup( top_string + sizeof(char *) );
-		}
-	    }
+	    bug( "Fread_string: EOF", 0 );
+	    return &str_empty[0];
 	}
+
+	if ( plast >= STRING_SPACE_END - 2 )
+	    fread_string_overflow( );
+
+	switch ( c )
+	{
+	default:
+	    *plast++ = (char) c;
+	    break;
+
+	case '\n':
+	    *plast++ = '\n';
+	    *plast++ = '\r';
+	    break;
+
+	case '\r':
+	    break;
+
+	case '~':
+	    *plast = '\0';
+	    return intern_read_string( );
+	}
+
+	c = getc( fp );
     }
 }
 
+/*
+ * Satır sonuna kadar dizgi okur (sosyaller). '\n'/'\r' ile biter, '~' yok.
+ */
 char *fread_string_eol( FILE *fp )
 {
-    static bool char_special[256-EOF];
     char *plast;
-    char c;
-
-    if ( char_special[EOF-EOF] != TRUE )
-    {
-        char_special[EOF -  EOF] = TRUE;
-        char_special['\n' - EOF] = TRUE;
-        char_special['\r' - EOF] = TRUE;
-    }
+    int c;
 
     plast = top_string + sizeof(char *);
     if ( plast > &string_space[MAX_STRING - MAX_STRING_LENGTH] )
-    {
-        bug( "Fread_string: MAX_STRING %d exceeded.", MAX_STRING );
-        exit( 1 );
-    }
+	fread_string_overflow( );
 
     /*
      * Skip blanks.
@@ -3031,84 +3053,32 @@ char *fread_string_eol( FILE *fp )
      */
     do
     {
-        c = getc( fp );
+	c = getc( fp );
     }
-    while ( isspace(c) );
+    while ( c != EOF && isspace( c ) );
 
-    if ( ( *plast++ = c ) == '\n')
-        return &str_empty[0];
+    if ( c == '\n' )
+	return &str_empty[0];
 
     for ( ;; )
     {
-        if ( !char_special[ ( *plast++ = getc( fp ) ) - EOF ] )
-            continue;
+	if ( c == EOF )
+	{
+	    bug( "Fread_string_eol  EOF", 0 );
+	    exit( 1 );
+	}
 
-        switch ( plast[-1] )
-        {
-        default:
-            break;
+	if ( plast >= STRING_SPACE_END - 1 )
+	    fread_string_overflow( );
 
-        case EOF:
-            bug( "Fread_string_eol  EOF", 0 );
-            exit( 1 );
-            break;
+	if ( c == '\n' || c == '\r' )
+	{
+	    *plast = '\0';
+	    return intern_read_string( );
+	}
 
-        case '\n':  case '\r':
-            {
-                union
-                {
-                    char *      pc;
-                    char        rgc[sizeof(char *)];
-                } u1;
-                size_t ic;
-                int iHash;
-                char *pHash;
-                char *pHashPrev;
-                char *pString;
-
-                plast[-1] = '\0';
-
-                {
-
-                    char *pStart = top_string + sizeof(char *);
-
-                    utf8_from_latin5( pStart, (size_t) ( &string_space[MAX_STRING] - pStart ) );
-
-                    plast = pStart + strlen( pStart ) + 1;
-
-                }
-                iHash     = UMIN( MAX_KEY_HASH - 1, plast - 1 - top_string );
-                for ( pHash = string_hash[iHash]; pHash; pHash = pHashPrev )
-                {
-                    for ( ic = 0; ic < sizeof(char *); ic++ )
-                        u1.rgc[ic] = pHash[ic];
-                    pHashPrev = u1.pc;
-                    pHash    += sizeof(char *);
-
-                    if ( top_string[sizeof(char *)] == pHash[0]
-                    &&   !strcmp( top_string+sizeof(char *)+1, pHash+1 ) )
-                        return pHash;
-                }
-
-                if ( fBootDb )
-                {
-                    pString             = top_string;
-                    top_string          = plast;
-                    u1.pc               = string_hash[iHash];
-                    for ( ic = 0; ic < sizeof(char *); ic++ )
-                        pString[ic] = u1.rgc[ic];
-                    string_hash[iHash]  = pString;
-
-                    nAllocString += 1;
-                    sAllocString += top_string - pString;
-                    return pString + sizeof(char *);
-                }
-                else
-                {
-                    return str_dup( top_string + sizeof(char *) );
-                }
-            }
-        }
+	*plast++ = (char) c;
+	c = getc( fp );
     }
 }
 
@@ -3119,13 +3089,13 @@ char *fread_string_eol( FILE *fp )
  */
 void fread_to_eol( FILE *fp )
 {
-    char c;
+    int c;
 
     do
     {
 	c = getc( fp );
     }
-    while ( c != '\n' && c != '\r' );
+    while ( c != EOF && c != '\n' && c != '\r' );
 
     do
     {
@@ -3133,7 +3103,8 @@ void fread_to_eol( FILE *fp )
     }
     while ( c == '\n' || c == '\r' );
 
-    ungetc( c, fp );
+    if ( c != EOF )
+	ungetc( c, fp );
     return;
 }
 
@@ -3146,13 +3117,20 @@ char *fread_word( FILE *fp )
 {
     static char word[MAX_INPUT_LENGTH];
     char *pword;
-    char cEnd;
+    int cEnd;
+    int c;
 
     do
     {
 	cEnd = getc( fp );
     }
-    while ( isspace( cEnd ) );
+    while ( cEnd != EOF && isspace( cEnd ) );
+
+    if ( cEnd == EOF )
+    {
+	bug( "Fread_word: EOF.", 0 );
+	exit( 1 );
+    }
 
     if ( cEnd == '\'' || cEnd == '"' )
     {
@@ -3160,21 +3138,22 @@ char *fread_word( FILE *fp )
     }
     else
     {
-	word[0] = cEnd;
+	word[0] = (char) cEnd;
 	pword   = word+1;
 	cEnd    = ' ';
     }
 
     for ( ; pword < word + MAX_INPUT_LENGTH; pword++ )
     {
-	*pword = getc( fp );
-	if ( cEnd == ' ' ? isspace(*pword) : *pword == cEnd )
+	c = getc( fp );
+	if ( c == EOF || ( cEnd == ' ' ? isspace( c ) : c == cEnd ) )
 	{
-	    if ( cEnd == ' ' )
-		ungetc( *pword, fp );
+	    if ( cEnd == ' ' && c != EOF )
+		ungetc( c, fp );
 	    *pword = '\0';
 	    return word;
 	}
+	*pword = (char) c;
     }
 
     bug( "Fread_word: word too long.", 0 );
@@ -3190,7 +3169,7 @@ void *alloc_mem( int sMem )
 {
     void *pMem;
     intptr_t *magic;
-    long iList;
+    int iList;
 
     sMem += sizeof(*magic);
 
@@ -3231,7 +3210,7 @@ void *alloc_mem( int sMem )
  */
 void free_mem( void *pMem, int sMem )
 {
-    long iList;
+    int iList;
     intptr_t *magic;
 
     pMem = (char *) pMem - sizeof(*magic);
@@ -3240,7 +3219,7 @@ void free_mem( void *pMem, int sMem )
     if (*magic != MAGIC_NUM)
     {
         bug("Attempt to recyle invalid memory of size %d.",sMem);
-        bug((char*) pMem + sizeof(*magic),0);
+        bugf("%s", (char*) pMem + sizeof(*magic));
         return;
     }
 
@@ -3276,9 +3255,10 @@ void *alloc_perm( int sMem )
     static char *pMemPerm;
     static int iMemPerm;
     void *pMem;
+    const int align = (int) _Alignof(max_align_t);
 
-    while ( sMem % sizeof(long) != 0 )
-	sMem++;
+    /* Win64'te long 4 bayt: hizayı her türü kapsayan max_align_t belirler. */
+    sMem = ( sMem + align - 1 ) / align * align;
     if ( sMem > MAX_PERM_BLOCK )
     {
 	bug( "Alloc_perm: %d too large.", sMem );
@@ -3387,6 +3367,18 @@ void do_memory( CHAR_DATA *ch, char *argument )
     return;
 }
 
+/*
+ * Çalışma dizininde (area/) döküm dosyası açar; açılamazsa günlüğe yazar.
+ */
+static FILE *dump_open( const char *name )
+{
+    FILE *fp;
+
+    if ( ( fp = fopen( name, "w" ) ) == NULL )
+	bugf( "Do_dump: %s açılamadı.", name );
+    return fp;
+}
+
 void do_dump( CHAR_DATA *ch, char *argument )
 {
     int count,count2,num_pcs,aff_count;
@@ -3404,129 +3396,134 @@ void do_dump( CHAR_DATA *ch, char *argument )
 
     /* open file */
     fclose(fpReserve);
-    fp = fopen("mem.dmp","w");
 
-    /* report use of data structures */
-
-    num_pcs = 0;
-    aff_count = 0;
-
-    /* mobile prototypes */
-    fprintf(fp,"MobProt	%4d (%8d bytes)\n",
-	top_mob_index, (int)(top_mob_index * (sizeof(*pMobIndex))));
-
-    /* mobs */
-    count = 0;  count2 = 0;
-    for (fch = char_list; fch != NULL; fch = fch->next)
+    if ( ( fp = dump_open( "mem.dmp" ) ) != NULL )
     {
-	count++;
-	if (fch->pcdata != NULL)
-	    num_pcs++;
-	for (af = fch->affected; af != NULL; af = af->next)
-	    aff_count++;
-    }
-    for (fch = char_free; fch != NULL; fch = fch->next)
-	count2++;
+	/* report use of data structures */
 
-    fprintf(fp,"Mobs	%4d (%8d bytes), %2d free (%d bytes)\n",
-	count, (int)(count * (sizeof(*fch))), count2, (int)(count2 * (sizeof(*fch))));
+	num_pcs = 0;
+	aff_count = 0;
 
-    /* pcdata */
-    count = 0;
-    for (pc = pcdata_free; pc != NULL; pc = pc->next)
-	count++;
+	/* mobile prototypes */
+	fprintf(fp,"MobProt	%4d (%8d bytes)\n",
+	    top_mob_index, (int)(top_mob_index * (sizeof(*pMobIndex))));
 
-    fprintf(fp,"Pcdata	%4d (%8d bytes), %2d free (%d bytes)\n",
-	num_pcs, (int)(num_pcs * (sizeof(*pc))), count, (int)(count * (sizeof(*pc))));
-
-    /* descriptors */
-    count = 0; count2 = 0;
-    for (d = descriptor_list; d != NULL; d = d->next)
-	count++;
-    for (d= descriptor_free; d != NULL; d = d->next)
-	count2++;
-
-    fprintf(fp, "Descs	%4d (%8d bytes), %2d free (%d bytes)\n",
-	count, (int)(count * (sizeof(*d))), count2, (int)(count2 * (sizeof(*d))));
-
-    /* object prototypes */
-    for ( vnum = 0; nMatch < top_obj_index; vnum++ )
-        if ( ( pObjIndex = get_obj_index( vnum ) ) != NULL )
-        {
-	    for (af = pObjIndex->affected; af != NULL; af = af->next)
+	/* mobs */
+	count = 0;  count2 = 0;
+	for (fch = char_list; fch != NULL; fch = fch->next)
+	{
+	    count++;
+	    if (fch->pcdata != NULL)
+		num_pcs++;
+	    for (af = fch->affected; af != NULL; af = af->next)
 		aff_count++;
-            nMatch++;
-        }
+	}
+	for (fch = char_free; fch != NULL; fch = fch->next)
+	    count2++;
 
-    fprintf(fp,"ObjProt	%4d (%8d bytes)\n",
-	top_obj_index, (int)(top_obj_index * (sizeof(*pObjIndex))));
+	fprintf(fp,"Mobs	%4d (%8d bytes), %2d free (%d bytes)\n",
+	    count, (int)(count * (sizeof(*fch))), count2, (int)(count2 * (sizeof(*fch))));
+
+	/* pcdata */
+	count = 0;
+	for (pc = pcdata_free; pc != NULL; pc = pc->next)
+	    count++;
+
+	fprintf(fp,"Pcdata	%4d (%8d bytes), %2d free (%d bytes)\n",
+	    num_pcs, (int)(num_pcs * (sizeof(*pc))), count, (int)(count * (sizeof(*pc))));
+
+	/* descriptors */
+	count = 0; count2 = 0;
+	for (d = descriptor_list; d != NULL; d = d->next)
+	    count++;
+	for (d= descriptor_free; d != NULL; d = d->next)
+	    count2++;
+
+	fprintf(fp, "Descs	%4d (%8d bytes), %2d free (%d bytes)\n",
+	    count, (int)(count * (sizeof(*d))), count2, (int)(count2 * (sizeof(*d))));
+
+	/* object prototypes */
+	for ( vnum = 0; nMatch < top_obj_index; vnum++ )
+	    if ( ( pObjIndex = get_obj_index( vnum ) ) != NULL )
+	    {
+		for (af = pObjIndex->affected; af != NULL; af = af->next)
+		    aff_count++;
+		nMatch++;
+	    }
+
+	fprintf(fp,"ObjProt	%4d (%8d bytes)\n",
+	    top_obj_index, (int)(top_obj_index * (sizeof(*pObjIndex))));
 
 
-    /* objects */
-    count = 0;  count2 = 0;
-    for (obj = object_list; obj != NULL; obj = obj->next)
-    {
-	count++;
-	for (af = obj->affected; af != NULL; af = af->next)
-	    aff_count++;
+	/* objects */
+	count = 0;  count2 = 0;
+	for (obj = object_list; obj != NULL; obj = obj->next)
+	{
+	    count++;
+	    for (af = obj->affected; af != NULL; af = af->next)
+		aff_count++;
+	}
+	for (obj = obj_free; obj != NULL; obj = obj->next)
+	    count2++;
+
+	fprintf(fp,"Objs	%4d (%8d bytes), %2d free (%d bytes)\n",
+	    count, (int)(count * (sizeof(*obj))), count2, (int)(count2 * (sizeof(*obj))));
+
+	/* affects */
+	count = 0;
+	for (af = affect_free; af != NULL; af = af->next)
+	    count++;
+
+	fprintf(fp,"Affects	%4d (%8d bytes), %2d free (%d bytes)\n",
+	    aff_count, (int)(aff_count * (sizeof(*af))), count, (int)(count * (sizeof(*af))));
+
+	/* rooms */
+	fprintf(fp,"Rooms	%4d (%8d bytes)\n",
+	    top_room, (int)(top_room * (sizeof(*room))));
+
+	 /* exits */
+	fprintf(fp,"Exits	%4d (%8d bytes)\n",
+	    top_exit, (int)(top_exit * (sizeof(*exit))));
+
+	fclose(fp);
     }
-    for (obj = obj_free; obj != NULL; obj = obj->next)
-	count2++;
-
-    fprintf(fp,"Objs	%4d (%8d bytes), %2d free (%d bytes)\n",
-	count, (int)(count * (sizeof(*obj))), count2, (int)(count2 * (sizeof(*obj))));
-
-    /* affects */
-    count = 0;
-    for (af = affect_free; af != NULL; af = af->next)
-	count++;
-
-    fprintf(fp,"Affects	%4d (%8d bytes), %2d free (%d bytes)\n",
-	aff_count, (int)(aff_count * (sizeof(*af))), count, (int)(count * (sizeof(*af))));
-
-    /* rooms */
-    fprintf(fp,"Rooms	%4d (%8d bytes)\n",
-	top_room, (int)(top_room * (sizeof(*room))));
-
-     /* exits */
-    fprintf(fp,"Exits	%4d (%8d bytes)\n",
-	top_exit, (int)(top_exit * (sizeof(*exit))));
-
-    fclose(fp);
 
     /* start printing out mobile data */
-    fp = fopen("mob.dmp","w");
-
-    fprintf(fp,"\nMobile Analysis\n");
-    fprintf(fp,  "---------------\n");
-    nMatch = 0;
-    for (vnum = 0; nMatch < top_mob_index; vnum++)
-	if ((pMobIndex = get_mob_index(vnum)) != NULL)
-	{
-	    nMatch++;
-	    fprintf(fp,"#%-4d %3d active %3d killed     %s\n",
-		pMobIndex->vnum,pMobIndex->count,
-		pMobIndex->killed,pMobIndex->short_descr);
-	}
-    fclose(fp);
+    if ( ( fp = dump_open( "mob.dmp" ) ) != NULL )
+    {
+	fprintf(fp,"\nMobile Analysis\n");
+	fprintf(fp,  "---------------\n");
+	nMatch = 0;
+	for (vnum = 0; nMatch < top_mob_index; vnum++)
+	    if ((pMobIndex = get_mob_index(vnum)) != NULL)
+	    {
+		nMatch++;
+		fprintf(fp,"#%-4d %3d active %3d killed     %s\n",
+		    pMobIndex->vnum,pMobIndex->count,
+		    pMobIndex->killed,pMobIndex->short_descr);
+	    }
+	fclose(fp);
+    }
 
     /* start printing out object data */
-    fp = fopen("obj.dmp","w");
+    if ( ( fp = dump_open( "obj.dmp" ) ) != NULL )
+    {
+	fprintf(fp,"\nObject Analysis\n");
+	fprintf(fp,  "---------------\n");
+	nMatch = 0;
+	for (vnum = 0; nMatch < top_obj_index; vnum++)
+	    if ((pObjIndex = get_obj_index(vnum)) != NULL)
+	    {
+		nMatch++;
+		fprintf(fp,"#%-4d %3d active %3d reset      %s\n",
+		    pObjIndex->vnum,pObjIndex->count,
+		    pObjIndex->reset_num,pObjIndex->short_descr);
+	    }
 
-    fprintf(fp,"\nObject Analysis\n");
-    fprintf(fp,  "---------------\n");
-    nMatch = 0;
-    for (vnum = 0; nMatch < top_obj_index; vnum++)
-	if ((pObjIndex = get_obj_index(vnum)) != NULL)
-	{
-	    nMatch++;
-	    fprintf(fp,"#%-4d %3d active %3d reset      %s\n",
-		pObjIndex->vnum,pObjIndex->count,
-		pObjIndex->reset_num,pObjIndex->short_descr);
-	}
+	/* close file */
+	fclose(fp);
+    }
 
-    /* close file */
-    fclose(fp);
     fpReserve = fopen( NULL_FILE, "r" );
 }
 
@@ -3839,16 +3836,48 @@ void append_file( CHAR_DATA *ch, char *file, char *str )
 
 
 /*
+ * bug()'ın tek int parametresiyle güvenle biçimlenebilecek dizgi: hiç
+ * dönüşüm yok ya da yalnızca bir tane, o da tam sayı alan (%d %i %c %u %x,
+ * isteğe bağlı bayrak/genişlik/'l'). Başka her şey veri sayılıp olduğu gibi
+ * yazılır; böylece oda adı/oyuncu verisi taşıyan tamponlar biçim olamaz.
+ */
+static bool bug_format_ok( const char *str )
+{
+    int conversions = 0;
+
+    for ( ; *str != '\0'; str++ )
+    {
+	if ( *str != '%' )
+	    continue;
+	str++;
+	if ( *str == '%' )
+	    continue;
+	if ( ++conversions > 1 )
+	    return FALSE;
+	while ( *str == '-' || *str == '+' || *str == ' ' || *str == '#'
+	     || *str == '0' || *str == '.' || isdigit( (unsigned char) *str ) )
+	    str++;
+	if ( *str == 'l' )
+	    str++;
+	if ( *str == '\0' || strchr( "dicuxX", *str ) == NULL )
+	    return FALSE;
+    }
+
+    return TRUE;
+}
+
+/*
  * Reports a bug.
  */
 void bug( const char *str, int param )
 {
     char buf[MAX_STRING_LENGTH];
+    char msg[MAX_STRING_LENGTH];
 
     if ( fpArea != NULL )
     {
 	int iLine;
-	int iChar;
+	long iChar;
 
 	if ( fpArea == stdin )
 	{
@@ -3856,39 +3885,34 @@ void bug( const char *str, int param )
 	}
 	else
 	{
+	    int c;
+
 	    iChar = ftell( fpArea );
 	    fseek( fpArea, 0, 0 );
 	    for ( iLine = 0; ftell( fpArea ) < iChar; iLine++ )
 	    {
-		while ( getc( fpArea ) != '\n' )
+		while ( ( c = getc( fpArea ) ) != '\n' && c != EOF )
 		    ;
+		if ( c == EOF )
+		    break;
 	    }
 	    fseek( fpArea, iChar, 0 );
 	}
 
 	snprintf(buf, sizeof(buf), "[*****] FILE: %s LINE: %d", strArea, iLine );
 	log_string( buf );
-/* RT removed because we don't want bugs shutting the mud
-	if ( ( fp = fopen( "shutdown.txt", "a" ) ) != NULL )
-	{
-	    fprintf( fp, "[*****] %s\n", buf );
-	    fclose( fp );
-	}
-*/
     }
 
-    strcpy( buf, "[*****] BUG: " );
-    sprintf( buf + strlen(buf), str, param );
+    if ( str == NULL )
+	str = "(null)";
+
+    if ( bug_format_ok( str ) )
+	snprintf( msg, sizeof(msg), str, param );
+    else
+	snprintf( msg, sizeof(msg), "%s", str );
+
+    snprintf( buf, sizeof(buf), "[*****] BUG: %s", msg );
     log_string( buf );
-/* RT removed due to bug-file spamming
-    fclose( fpReserve );
-    if ( ( fp = fopen( BUG_FILE, "a" ) ) != NULL )
-    {
-	fprintf( fp, "%s\n", buf );
-	fclose( fp );
-    }
-    fpReserve = fopen( NULL_FILE, "r" );
-*/
 
     return;
 }
