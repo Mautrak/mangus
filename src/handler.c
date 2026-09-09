@@ -2702,7 +2702,6 @@ char *act_bit_name( int act_flags )
 	if (act_flags & PLR_NOFOLLOW	) strcat(buf, " no_follow");
 	if (act_flags & PLR_CANINDUCT	) strcat(buf, " Cabal_LEADER");
 	if (act_flags & PLR_GHOST	) strcat(buf, " ghost");
-	if (act_flags & PLR_PERMIT	) strcat(buf, " permit");
 	if (act_flags & PLR_REMORTED	) strcat(buf, " remorted");
 	if (act_flags & PLR_LOG		) strcat(buf, " log");
 	if (act_flags & PLR_FREEZE	) strcat(buf, " frozen");
