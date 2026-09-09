@@ -228,7 +228,7 @@ const 	struct attack_type	attack_table	[]		=
     {	"bite",		"ısırma",		DAM_PIERCE	},  /* 10 */
     {   "pierce",	"delici",	DAM_PIERCE	},
     {   "suction",	"emici",	DAM_BASH	},
-    {	"beating",	"beating",	DAM_BASH	},
+    {	"beating",	"dayak",	DAM_BASH	},
     {   "digestion",	"öğütücü",	DAM_ACID	},
     {	"charge",	"yüklenme",	DAM_BASH	},  /* 15 */
     { 	"slap",		"tokat",		DAM_BASH	},
@@ -240,19 +240,19 @@ const 	struct attack_type	attack_table	[]		=
     {	"scratch",	"tırmalama",	DAM_PIERCE	},
     {   "peck",		"gaga",		DAM_PIERCE	},
     {   "peckb",	"gaga",		DAM_BASH	},
-    {   "chop",		"chop",		DAM_SLASH	},  /* 25 */
+    {   "chop",		"doğrama",	DAM_SLASH	},  /* 25 */
     {   "sting",	"sokma",	DAM_PIERCE	},
-    {   "smash",	 "smash",	DAM_BASH	},
+    {   "smash",	 "parçalama",	DAM_BASH	},
     {   "shbite",	"şok ısırışı",DAM_LIGHTNING	},
     {	"flbite",	"alev ısırışı", DAM_FIRE	},
     {	"frbite",	"ayaz ısırışı", DAM_COLD	},  /* 30 */
     {	"acbite",	"asit ısırışı", 	DAM_ACID	},
     {	"chomp",	"çiğneme",	DAM_PIERCE	},
     {  	"drain",	"yaşam emici",	DAM_NEGATIVE	},
-    {   "thrust",	"thrust",	DAM_PIERCE	},
+    {   "thrust",	"hamle",	DAM_PIERCE	},
     {   "slime",	"balçık",	DAM_ACID	},
     {	"shock",	"şok",	DAM_LIGHTNING	},
-    {   "thwack",	"thwack",	DAM_BASH	},
+    {   "thwack",	"şaklatma",	DAM_BASH	},
     {   "flame",	"alev",	DAM_FIRE	},
     {   "chill",	"ayaz",	DAM_COLD	},
     {   NULL,		NULL,		0		}
@@ -281,7 +281,7 @@ const 	struct	race_type	race_table	[]		=
 		const char *	skills[5];		// bonus skills for the race
 		sh_int 	stats[MAX_STATS];	// starting stats
 */
-    { {"unique","eşsiz"},	"",	0, FALSE,FALSE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,{ "" }, {0,0,0,0,0,0 } },
+    { {"unique","eşsiz"},	"",	0, FALSE,FALSE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,{ NULL }, {0,0,0,0,0,0 } },
 
     { /* 1 */
 	{"human","insan"},"İnsan",LANG_HUMAN,	TRUE,TRUE, 		SIZE_MEDIUM, 0,
@@ -340,7 +340,7 @@ const 	struct	race_type	race_table	[]		=
     },
 
 	{ /* 9 */
-		{"gnome","gnom"},"",LANG_DWARVISH,        TRUE,TRUE, 		SIZE_MEDIUM, 0,
+		{"gnome","gnom"},"Gnom",LANG_DWARVISH,        TRUE,TRUE, 		SIZE_MEDIUM, 0,
 		0,              AFF_INFRARED,   0,
 		0,              RES_POISON,     VULN_BASH,
 		A|H|M|V,        A|B|C|D|E|F|G|H|I|J|K, 250, { "identify" }, { 18, 23, 25, 20, 18 ,25}
@@ -357,105 +357,105 @@ const 	struct	race_type	race_table	[]		=
     	{"bear","ayı"},	"",	LANG_DOG, FALSE,FALSE, 		SIZE_LARGE, 0,
     	0,		0,		OFF_CRUSH|OFF_DISARM|OFF_BERSERK,
     	0,		RES_BASH|RES_COLD,	0,
-    	A|G|V,		A|B|C|D|E|F|H|J|K|U|V, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+    	A|G|V,		A|B|C|D|E|F|H|J|K|U|V, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
         {  /* 12 */
     	{"cat","kedi"},"",LANG_CAT,		FALSE,FALSE, 		SIZE_SMALL, 0,
     	0,		/*AFF_DARK_VISION*/0,	OFF_FAST|OFF_DODGE,
     	0,		0,		0,
-    	A|G|V,		A|C|D|E|F|H|J|K|Q|U|V, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+    	A|G|V,		A|C|D|E|F|H|J|K|Q|U|V, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
         {  /* 13 */
     	{"dog","köpek"},"",LANG_DOG,		FALSE,FALSE, 		SIZE_SMALL, 0,
     	0,		0,		OFF_FAST,
     	0,		0,		0,
-    	A|G|V,		A|C|D|E|F|H|J|K|U|V, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+    	A|G|V,		A|C|D|E|F|H|J|K|U|V, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
         {  /* 14 */
     	{"orc","ork"},"",LANG_CORA,		FALSE,TRUE, 		SIZE_MEDIUM, 0,
     	0,		AFF_INFRARED,	0,
     	0,		RES_DISEASE,	VULN_LIGHT,
-    	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+    	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
         {  /* 15 */
     	{"pig","domuz"},"",	LANG_DOG,	FALSE,FALSE, 		SIZE_MEDIUM, 0,
     	0,		0,		0,
     	0,		0,		0,
-    	A|G|V,	 	A|C|D|E|F|H|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+    	A|G|V,	 	A|C|D|E|F|H|J|K, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
         { /* 16 */
     	{"rabbit","tavşan"},"",LANG_DOG,	FALSE,FALSE, 		SIZE_SMALL, 0,
     	0,		0,		OFF_DODGE|OFF_FAST,
     	0,		0,		0,
-    	A|G|V,		A|C|D|E|F|H|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+    	A|G|V,		A|C|D|E|F|H|J|K, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
         {  /* 17 */
     	{"snake","sürüngen"},"",LANG_SURUNGEN,	FALSE,FALSE, 		SIZE_SMALL, 0,
     	0,		0,		0,
     	0,		RES_POISON,	VULN_COLD,
-    	A|G|X|Y|cc,	A|D|E|F|K|L|Q|V|X, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+    	A|G|X|Y|cc,	A|D|E|F|K|L|Q|V|X, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
         {  /* 18 */
     	{"bird","kuş"},"",LANG_BIRD,	FALSE,FALSE, 		SIZE_TINY, 0,
     	0,		AFF_FLYING,		OFF_FAST|OFF_DODGE,
     	0,		0,		0,
-    	A|G|W,		A|C|D|E|F|H|K|P, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+    	A|G|W,		A|C|D|E|F|H|K|P, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
         {  /* 19 */
     	{"wolf","kurt"},"",LANG_DOG,		FALSE,FALSE, 		SIZE_MEDIUM, 0,
     	0,		/*AFF_DARK_VISION*/0,	OFF_FAST|OFF_DODGE,
     	0,		0,		0,
-    	A|G|V,		A|C|D|E|F|J|K|Q|V, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+    	A|G|V,		A|C|D|E|F|J|K|Q|V, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
         {  /* 20 */
     	{"lion","aslan"},"",LANG_CAT,		FALSE,FALSE,		SIZE_MEDIUM, 0,
     	ACT_SENTINEL,	/*AFF_DARK_VISION*/0,	OFF_FAST|OFF_DODGE,
     	0,		RES_WEAPON,		0,
-    	A|G|V,		A|C|D|E|F|H|J|K|Q|U|V, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+    	A|G|V,		A|C|D|E|F|H|J|K|Q|U|V, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
         {  /* 21 */
         {"fish","balık"},	"",LANG_WATER,		FALSE,FALSE,		SIZE_TINY, 0,
         0,		AFF_SWIM,	0,
         0,		0,		VULN_COLD|VULN_FIRE,
-        A|H|Z,		A|D|E|F|J|K|O|X, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+        A|H|Z,		A|D|E|F|J|K|O|X, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
         {  /* 22 */
         {"horse","at"},	"",LANG_DOG,FALSE, FALSE,		SIZE_LARGE, 0,
         0,		0,		OFF_FAST|OFF_DODGE,
         0,		0,		0,
-        A|G|V,		A|C|D|E|F|J|K|Q, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+        A|G|V,		A|C|D|E|F|J|K|Q, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
         { /* 23 */
     	{"golem","golem"},"",LANG_HUMAN,	FALSE,TRUE, 		SIZE_LARGE, 0,
     	0,		0,		0,
     	IMM_POISON|IMM_DISEASE,		RES_WEAPON,	VULN_MENTAL|VULN_MAGIC,
-    	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+    	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
         { /* 24 */
         {"goblin","gulyabani"},"",LANG_CORA,	FALSE,TRUE, 		SIZE_MEDIUM, 0,
         0,		AFF_INFRARED,	0,
         0,		RES_DISEASE,	VULN_MAGIC,
-        A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+        A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
         {  /* 25 */
         {"kobold","argun"},"",LANG_CORA,	FALSE,TRUE, 		SIZE_MEDIUM, 0,
         0,		AFF_INFRARED,	0,
         0,		RES_POISON,	VULN_MAGIC,
-        A|B|H|M|V,	A|B|C|D|E|F|G|H|I|J|K|Q, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+        A|B|H|M|V,	A|B|C|D|E|F|G|H|I|J|K|Q, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
         {  /* 26 */
@@ -463,35 +463,35 @@ const 	struct	race_type	race_table	[]		=
         0,		AFF_INFRARED,	ASSIST_RACE|ASSIST_ALIGN,
         IMM_CHARM|IMM_DISEASE|IMM_MENTAL|IMM_HOLY|IMM_NEGATIVE,
             RES_FIRE|RES_COLD|RES_ACID,	0,
-        H,		A|B|C|G|H|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+        H,		A|B|C|G|H|J|K, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
         {  /* 27 */
         {"elemental","uşak"},"",LANG_ASTRAL,FALSE,TRUE,		SIZE_HUGE, 0,
         0,		0,		OFF_FADE,
         0,		RES_WEAPON|RES_SUMMON|RES_FIRE|RES_COLD,		0,
-        A|H|Z,		A|D, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+        A|H|Z,		A|D, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
         {  /* 28 */
         {"ghoul","gul"},"",LANG_HUMAN,	FALSE,FALSE,		SIZE_MEDIUM, 0,
         0,		0,		0,
         IMM_DISEASE,	RES_CHARM,	VULN_MAGIC,
-        A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+        A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
         { /* 29 */
             {"dragon","ejderha"},"", LANG_DRAGON,	FALSE,TRUE,		SIZE_GARGANTUAN, 0,
     	0, 		AFF_INFRARED|AFF_FLYING,	0,
     	0,		RES_FIRE|RES_BASH|RES_CHARM,	VULN_PIERCE|VULN_COLD,
-    	A|H|Z,		A|C|D|E|F|G|H|I|J|K|P|Q|U|V|X, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+    	A|H|Z,		A|C|D|E|F|G|H|I|J|K|P|Q|U|V|X, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
         { /* 30 */
     	{"giant","dev"},"",LANG_GIANT,	FALSE,TRUE, 		SIZE_GIANT, 0,
     	0,		0,		0,
     	0,		RES_FIRE|RES_COLD,	VULN_MENTAL|VULN_LIGHTNING,
-    	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+    	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
         { /* 31 */
@@ -500,14 +500,14 @@ const 	struct	race_type	race_table	[]		=
     	0,		AFF_PASS_DOOR|AFF_INFRARED,	0,
     	IMM_DROWNING|IMM_DISEASE|IMM_POISON,	RES_NEGATIVE|RES_ENERGY,
     	VULN_SILVER|VULN_HOLY|VULN_LIGHT,
-    	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+    	A|H|M|V,	A|B|C|D|E|F|G|H|I|J|K, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
         },
 
     {  /* 32 */
     {"unique","eşsiz"},"",0,	FALSE,FALSE,		0, 0,
     0,		0,		0,
     0,		0,		0,
-    0,		0, 0, { "" }, {20, 20, 20, 20, 20, 20 }
+    0,		0, 0, { NULL }, {20, 20, 20, 20, 20, 20 }
     },
 	
     {
@@ -520,6 +520,9 @@ const 	struct	race_type	race_table	[]		=
 
 /*
  * Class table.
+ * Alanlar: {ad, Türkçe ad}, kim adı, ana nitelik, ilk silah vnum'u,
+ * lonca odaları[MAX_GUILD], yetenek tavanı, thac0_00, thac0_32, yp oranı,
+ * mana oranı, mana kazanır mı, tp maliyeti, nitelik ekleri[MAX_STATS], hizalama.
  */
 const	struct	class_type	class_table	[MAX_CLASS]	=
 {
@@ -613,7 +616,7 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
  const char *			title_table	[MAX_CLASS][MAX_LEVEL+1]=
  {
      {
-       "Man",
+       "Acemi",
 
        "Büyü Çırağı"		,
        "Büyü Öğrencisi"	,
@@ -735,7 +738,7 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
  	 "Tek"	},
 
      {
- 	  "Man"			 ,
+ 	  "Acemi"			 ,
 
  	"İnanan"		 ,
  	"Yardımcı"		 ,
@@ -857,7 +860,7 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
  	 "Tek"},
 
      {
- 	  "Man"			 ,
+ 	  "Acemi"			 ,
 
  		  "Çocuk"			 ,
  		  "Sessiz Adım"		 ,
@@ -979,7 +982,7 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
  	 "Tek" },
 
      {
-           "Man"			 ,
+           "Acemi"			 ,
 
  	  "Acemi"		 ,
  	  "Çaylak"		 ,
@@ -1036,8 +1039,8 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
  	  "Büyük Ejder Katili"		 ,
 
  	  "Büyük Ejder Katili"		 ,
- 	  "Lord"						 ,
- 	  "Lord"				 ,
+ 	  "Bey"						 ,
+ 	  "Bey"				 ,
  	  "Efendi"						 ,
  	  "Efendi"						 ,
 
@@ -1102,7 +1105,7 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
 
        {
 
-         "Man"                ,
+         "Acemi"                ,
 
          "Paladin Yamağı"		  ,
          "Paladin Çırağı"			 ,
@@ -1224,7 +1227,7 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
  	 "Tek"
       },
        {
-         "Man"						 ,
+         "Acemi"						 ,
 
          "Kirli"						 ,
          "Zorba"			 	 ,
@@ -1346,7 +1349,7 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
  	 "Tek"	 },
 
        {
-         "Man"  ,
+         "Acemi"  ,
 
          "Uke"   ,
          "Tori"   ,
@@ -1469,7 +1472,7 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
       },
       {
 
-         "Man"	 ,
+         "Acemi"	 ,
 
          "Yavru Kurt"   ,
          "Yavru Kurt"   ,
@@ -1591,7 +1594,7 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
  	 "Tek"
       },
        {
-         "Man" ,
+         "Acemi" ,
 
          "Büyü Çırağı"		 ,
          "Büyü Öğrencisi"	 ,
@@ -1714,7 +1717,7 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
       },
       {
 
-           "Man"		 ,
+           "Acemi"		 ,
 
  	  "Acemi"	 ,
  	  "Çaylak"	 ,
@@ -1771,8 +1774,8 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
  	  "Büyük Ejder Katili"		 ,
 
  	  "Büyük Ejder Katili"		 ,
- 	  "Lord"						 ,
- 	  "Lord"				 ,
+ 	  "Bey"						 ,
+ 	  "Bey"				 ,
  	  "Efendi"						 ,
  	  "Efendi"						 ,
 
@@ -1836,7 +1839,7 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
  	 "Tek"
       },
        {
-         "Man" ,
+         "Acemi" ,
 
          "Büyü Çırağı"		 ,
          "Büyü Öğrencisi"	 ,
@@ -1959,7 +1962,7 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
       },
        {
 
-         "Man" ,
+         "Acemi" ,
 
          "Büyü Çırağı"		 ,
          "Büyü Öğrencisi"	 ,
@@ -2082,7 +2085,7 @@ const	struct	class_type	class_table	[MAX_CLASS]	=
       },
       {
 
-         "Man" ,
+         "Acemi" ,
 
          "Büyü Çırağı"		 ,
          "Büyü Öğrencisi"	 ,
@@ -2229,6 +2232,8 @@ const struct religion_type religion_table [] =
   { "Nyahilik", "Nyahiler", "Nyah", OBJ_VNUM_TATTOO_NYAH },
   { "Sintiyanlık", "Sintiyanlar", "Sint", OBJ_VNUM_TATTOO_SINT },
 };
+_Static_assert(sizeof religion_table / sizeof religion_table[0] == MAX_RELIGION,
+	       "MAX_RELIGION religion_table ile uyuşmuyor");
 
 const struct ethos_type ethos_table [] =
 {
@@ -2247,6 +2252,9 @@ const struct hometown_type hometown_table [] =
   { "Yeni Ofcol", {669, 669, 669},      {698, 698, 698},   {669, 669, 669} },
   { "Eski Selenge",{5386, 5386,5386}, {5379,5379, 5379}, {5386,5386,5386} },
 };
+/* act_move.c do_recall rastgele memleket için number_range(0, 4) kullanır. */
+_Static_assert(sizeof hometown_table / sizeof hometown_table[0] == 5,
+	       "hometown_table boyu değişti: act_move.c number_range(0,4) güncellenmeli");
 
 /*
  * Attribute bonus tables.
@@ -2497,10 +2505,14 @@ const	struct	cha_app_type	cha_app		[26]		=
 /*
  * The skill and spell table.
  * Slot numbers must never be changed as they appear in #OBJECTS sections.
+ * Boş slotlar: 733 ve üstü (skill_table_verify açılışta yinelenen slotu bildirir).
  */
 #define SLOT(n)	n
 
-const	struct	skill_type	skill_table	[MAX_SKILL]	=
+/* skill_level değeri: bu sınıf yeteneği hiç öğrenemez (ölümsüz seviyesinin üstü). */
+#define SKILL_NA	93
+
+const	struct	skill_type	skill_table	[]	=
 {
 
 /*
@@ -3108,7 +3120,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{"arz yutağı","arz yutağı"},       {  93,93,93,93,93,93,93,93,93,93 ,93,93,75},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_arz_yutagi,      TAR_CHAR_OFFENSIVE,   POS_STANDING,
-        NULL,                    SLOT(574),    100,       18,
+        NULL,                    SLOT(725),    100,       18,
         "arz yutağı", "!arz yutağı!", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
@@ -3118,7 +3130,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,	TAR_CHAR_SELF,		POS_STANDING,
 	NULL,		SLOT(621),	200,	24,
-	"",	"!621!",	"",
+	"",	"",	"",
 	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -3159,7 +3171,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"dragon breath","ejderha nefesi"}, {93,93,93,93,93,93,93,93,93,93,93,93,93},
+	{"dragon breath","ejderha soluğu"}, {93,93,93,93,93,93,93,93,93,93,93,93,93},
 	{1,1,1,1,1,1,1,1,1, 1,1,1,1},
         spell_dragon_breath,  TAR_CHAR_OFFENSIVE, POS_FIGHTING,
         &gsn_dragon_breath,  SLOT(563),   75,   12,
@@ -3190,7 +3202,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_dragons_breath,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,			SLOT(576),	200,	24,
-  "ejderha nefesi",	"Sağlığına kavuşuyorsun.",
+  "ejderha nefesi",	"",
 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_DRACONIAN
     },
 
@@ -3217,7 +3229,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_earthmaw,		TAR_CHAR_OFFENSIVE,		POS_FIGHTING,
 	NULL,			SLOT(703),	30,	12,
-	"earthmaw",		"!earthmaw!",	"", 	CABAL_NONE ,
+	"fay",		"!earthmaw!",	"", 	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -3268,7 +3280,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 
     {
 	{"enhanced armor","gelişmiş zırh"},	{ 48, 33, 93,93,93,93,93,93,93,93,93,93,93},
-	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1},
+	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 	spell_enhanced_armor, 	TAR_CHAR_DEFENSIVE,	POS_FIGHTING,
 	&gsn_enhanced_armor,	SLOT(583),	20,	12,
   "",	"Korunmasız hissediyorsun.", "", CABAL_NONE ,
@@ -3630,7 +3642,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{"iceball","buztopu"},        {  93, 93, 93, 93, 93,58,93,93,93,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_iceball,     TAR_IGNORE,     POS_FIGHTING,
-        NULL,                   SLOT(513),        25,       12,
+        NULL,                   SLOT(724),        25,       12,
         "buztopu",         "!Iceball!", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_COMBAT
     },
@@ -3963,7 +3975,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{"nexus","neksus"},     { 93,93,93,93,93,93,93,93 ,60,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_nexus,            TAR_IGNORE,             POS_STANDING,
-        NULL,                   SLOT(520),       150,   36,
+        NULL,                   SLOT(728),       150,   36,
 	"",                     "!Nexus!",		"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_TRANSPORTATION
     },
@@ -4026,7 +4038,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{"protection good","iyiden korunma"},{ 93,9,93,93,93,13,93,93,93,93,27,17,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_protection_good,	TAR_CHAR_SELF,		POS_STANDING,
-	NULL,			SLOT(666), 	5,	12,
+	NULL,			SLOT(730), 	5,	12,
   "",			"Daha az korunmasız hissediyorsun.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_PROTECTIVE
     },
@@ -4063,7 +4075,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_power_kill,	TAR_CHAR_OFFENSIVE,	POS_STANDING,
 	NULL,		SLOT(604),	200,	18,
-  "ölüm sözcüğü",		"Dayanıklılığın artıyor.",
+  "ölüm sözcüğü",		"",
 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -4089,7 +4101,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{"ranger staff","korucu asası"},          {  93, 93, 93, 93, 93, 93, 93, 32 ,93,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_ranger_staff,      TAR_IGNORE,          POS_FIGHTING,
-        NULL,             SLOT(519),        75,       0,
+        NULL,             SLOT(731),        75,       0,
 	"", "!ranger staff!", "", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -4125,7 +4137,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,        TAR_IGNORE,          POS_STANDING,
         NULL,             SLOT(668),        0,       0,
-	"", "!!", "",	CABAL_NONE ,
+	"", "", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -4213,7 +4225,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{"severity force","arz kırımı"},	{ 93, 45,93,93,93, 93, 93, 93,93,93 ,93,93,41},
 	{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_severity_force,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
-	NULL,		SLOT(622),	20,	12,
+	NULL,		SLOT(721),	20,	12,
   "arz kırımı",		"!severity force!", "", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
@@ -4240,7 +4252,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{"shocking grasp","şok kavrayışı"},		{ 8, 93, 93, 93,93,93,93,93 ,9,93,93,93,8},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_shocking_grasp,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
-	NULL,			SLOT(53),	15,	12,
+	NULL,			SLOT(729),	15,	12,
   "şok kavrayışı",	"!Shocking Grasp!",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_COMBAT
     },
@@ -4267,7 +4279,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{"slow","yavaşlatma"},       { 28,38,93,93, 93, 28, 93, 93 ,23,93,28,29,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_slow,             TAR_CHAR_OFFENSIVE,     POS_FIGHTING,
-        &gsn_slow,                   SLOT(515),      30,     12,
+        &gsn_slow,                   SLOT(722),      30,     12,
         "",                     "Hızlandığını hissediyorsun.",	"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_MALADICTIONS
     },
@@ -4339,7 +4351,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{"suffocate","boğma"},    {  93,93,93,93, 93,93,93,93, 48,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_suffocate,    TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
-        NULL,             SLOT(714),        50,       12,
+        NULL,             SLOT(723),        50,       12,
         "boğma",     "Yeniden soluyabilirsin.", "",CABAL_NONE,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
@@ -4456,7 +4468,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_tsunami,		TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,			SLOT(701),	50,	12,
-	"raging tidal wave",	"!tsunami!",	"", 	CABAL_NONE ,
+	"azgın gelgit dalgası",	"!tsunami!",	"", 	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -4501,7 +4513,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_windwall,		TAR_IGNORE,		POS_FIGHTING,
 	NULL,			SLOT(694),	20,	12,
-  "rüzgar duvarı",		"Gözlerin iyileşiyor.",	"",
+  "rüzgar duvarı",		"",	"",
  	CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_COMBAT
     },
 
@@ -4510,7 +4522,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_witch_curse,	TAR_CHAR_OFFENSIVE,	POS_STANDING,
 	&gsn_witch_curse,		SLOT(602),	150,	24,
-  "",			"Dayanıklılığın artıyor.",
+  "",			"Cadı laneti üzerinden kalkıyor.",
 	"", CABAL_NONE , RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -4627,7 +4639,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"repulsion","repulsion"},		{ 65, 65, 65, 65,65,65,65,65,65,65,65,65,65 },
+	{"repulsion","geri itme"},		{ 65, 65, 65, 65,65,65,65,65,65,65,65,65,65 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,		SLOT(633),	200,	24,
@@ -4645,7 +4657,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"slow gas","slow gas"},{ 69, 69, 69, 69,69,69,69,69,69,69,69,69,69 },
+	{"slow gas","yavaşlatıcı gaz"},{ 69, 69, 69, 69,69,69,69,69,69,69,69,69,69 },
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,	TAR_CHAR_OFFENSIVE,	POS_FIGHTING,
 	NULL,		SLOT(634),	200,	24,
@@ -4745,7 +4757,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,	TAR_IGNORE,	POS_STANDING,
 	&gsn_lance,	SLOT(0),	0,	0,
-	"lance",	"!lance!",	"",
+	"kargı",	"!lance!",	"",
 	CABAL_KNIGHT , RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
@@ -4870,7 +4882,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{"bearcall","ayı çağırma"},      {  93, 93, 93, 93, 93, 93, 93, 31,93,93,93,93,93 },
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,		TAR_IGNORE,          POS_FIGHTING,
-        &gsn_bear_call,		SLOT(518),	50,       0,
+        &gsn_bear_call,		SLOT(732),	50,       0,
         "", "Yeni ayılarla başa çıkabilirsin.", "",	CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
@@ -5038,7 +5050,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"detect hidden","saklıyı saptama"},	{ 93, 93, 93, 93, 93, 93, 93, 93 ,93,93,93,93,93},
+	{"detect hidden","gizliyi saptama"},	{ 93, 93, 93, 93, 93, 93, 93, 93 ,93,93,93,93,93},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_detect_hidden,	TAR_CHAR_SELF,		POS_STANDING,
 	NULL,		SLOT(44),	 5,	12,
@@ -5231,7 +5243,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  2,  2, 1, 1, 1, 1,1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_SLEEPING,
 	&gsn_light_res,		SLOT( 0),	0,	0,
-	"",			"Light Resistance","", CABAL_NONE ,
+	"",			"","", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -5393,7 +5405,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,             TAR_CHAR_OFFENSIVE,     POS_FIGHTING,
         &gsn_target,              SLOT( 0),        0,     12,
-        "hedef",                 "!Kick!",		"", CABAL_NONE ,
+        "hedef",                 "",		"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_NONE
     },
 
@@ -5462,7 +5474,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{"vanish","yokol"},        {  93, 93, 93, 93, 93, 93, 18, 93 ,93,93,93,93,93},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_null,      TAR_CHAR_SELF,          POS_FIGHTING,
-        &gsn_vanish,       SLOT(521),        25,       18,
+        &gsn_vanish,       SLOT(726),        25,       18,
 	"", "!vanish!", "", 	CABAL_NONE , RACE_NONE,ALIGN_NONE, GROUP_NONE
     },
 
@@ -5635,7 +5647,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  2,  2, 1, 1, 1, 1,1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_SLEEPING,
 	&gsn_meditation,	SLOT( 0),	0,	0,
-	"",			"Meditation",		"", CABAL_NONE ,
+	"",			"",		"", CABAL_NONE ,
 	RACE_NONE, ALIGN_NONE, GROUP_MEDITATION
     },
 
@@ -5886,7 +5898,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
         {"transform", "dönüşüm"},          {  10, 10, 10,10,10,10,10,10 ,10,10,10,10,10},
         { 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
         spell_transform,      TAR_CHAR_SELF,       POS_STANDING,
-        NULL,       SLOT(522),        100,       24,
+        NULL,       SLOT(727),        100,       24,
         "", "Sağlığın azalıyor.", "",	CABAL_SHALAFI,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
@@ -6036,7 +6048,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     },
 
     {
-	{"doppelganger","dönüşüm"},        {  25, 25, 25,25,25,25,25,25 ,25,25,25,25,25},
+	{"doppelganger","taklit"},        {  25, 25, 25,25,25,25,25,25 ,25,25,25,25,25},
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_doppelganger,      TAR_CHAR_DEFENSIVE,       POS_STANDING,
 	&gsn_doppelganger,       SLOT(527),        75,       12,
@@ -6211,7 +6223,7 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
 	{ 1,  1,  1,  1, 1, 1, 1, 1, 1, 1,1,1,1},
 	spell_null,		TAR_IGNORE,		POS_SLEEPING,
 	&gsn_path_find,		SLOT( 0),	0,	0,
-	"",			"!endur!",	"", CABAL_HUNTER ,
+	"",			"",	"", CABAL_HUNTER ,
 	RACE_NONE, ALIGN_NONE, GROUP_CABAL
     },
 
@@ -6371,3 +6383,40 @@ const	struct	skill_type	skill_table	[MAX_SKILL]	=
     }
 
 };
+_Static_assert(sizeof skill_table / sizeof skill_table[0] == MAX_SKILL,
+	       "MAX_SKILL (merc.h) skill_table satır sayısıyla uyuşmuyor");
+
+/*
+ * Açılışta tablo bütünlüğü: boş ad, yinelenen SLOT ya da ad.
+ * Yinelenen slotta slot_lookup ilk kaydı seçer; alan dosyasındaki eşya
+ * sessizce yanlış büyüyü alır, bu yüzden günlüğe yazılır.
+ */
+__attribute__((constructor))
+static void skill_table_verify(void)
+{
+    int sn, j;
+
+    for (sn = 0; sn < MAX_SKILL; sn++)
+    {
+	if (skill_table[sn].name[0] == NULL || skill_table[sn].name[1] == NULL)
+	{
+	    bugf("skill_table_verify: %d. kaydın adı boş", sn);
+	    continue;
+	}
+
+	for (j = 0; j < sn; j++)
+	{
+	    if (skill_table[j].name[0] == NULL)
+		continue;
+	    if (skill_table[sn].slot != 0 && skill_table[sn].slot == skill_table[j].slot)
+		bugf("skill_table_verify: SLOT %d hem '%s' hem '%s' için kullanılmış",
+		     skill_table[sn].slot, skill_table[j].name[0], skill_table[sn].name[0]);
+	    if (!str_cmp(skill_table[sn].name[0], skill_table[j].name[0]))
+		bugf("skill_table_verify: '%s' adı iki kez (%d, %d)",
+		     skill_table[sn].name[0], j, sn);
+	    if (!str_cmp(skill_table[sn].name[1], skill_table[j].name[1]))
+		bugf("skill_table_verify: '%s' Türkçe adı hem '%s' hem '%s' için kullanılmış",
+		     skill_table[sn].name[1], skill_table[j].name[0], skill_table[sn].name[0]);
+	}
+    }
+}
