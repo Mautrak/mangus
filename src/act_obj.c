@@ -76,11 +76,12 @@ CD *	find_keeper	(CHAR_DATA *ch );
 int	get_cost	(CHAR_DATA *keeper, OBJ_DATA *obj, bool fBuy );
 void 	obj_to_keeper	(OBJ_DATA *obj, CHAR_DATA *ch );
 OD *	get_obj_keeper	(CHAR_DATA *ch,CHAR_DATA *keeper,char *argument);
-void	hold_a_light	(CHAR_DATA *ch,OBJ_DATA *obj, int iWear);
-void	hold_a_shield	(CHAR_DATA *ch,OBJ_DATA *obj, int iWear);
-void	hold_a_thing	(CHAR_DATA *ch,OBJ_DATA *obj, int iWear);
-void	wear_multi	(CHAR_DATA *ch,OBJ_DATA *obj,int iWear,bool fReplace);
-void	wear_a_wield	(CHAR_DATA *ch,OBJ_DATA *obj, bool fReplace);
+static void	hold_in_hand	(CHAR_DATA *ch, OBJ_DATA *obj, int iWear,
+				 const char *to_room, const char *to_char);
+static int	pick_free_hand	(CHAR_DATA *ch, bool fReplace, int first, int second,
+				 const char *busy_msg);
+static void	wear_multi	(CHAR_DATA *ch,OBJ_DATA *obj,int iWear,bool fReplace);
+static void	wear_a_wield	(CHAR_DATA *ch,OBJ_DATA *obj, bool fReplace);
 
 #undef OD
 #undef CD
@@ -1962,48 +1963,12 @@ void do_eat( CHAR_DATA *ch, char *argument )
 /*
  * Remove an object. Only for non-multi-wear locations
  */
+/*
+ * Remove the object worn at a location. Only for non-multi-wear locations.
+ */
 bool remove_obj_loc( CHAR_DATA *ch, int iWear, bool fReplace )
 {
-    OBJ_DATA *obj;
-
-    if ( ( obj = get_eq_char( ch, iWear ) ) == NULL )
-	return TRUE;
-
-    if ( !fReplace )
-	return FALSE;
-
-    if ( IS_SET(obj->extra_flags, ITEM_NOREMOVE) )
-    {
-      act( "$p çıkmıyor.", ch, obj, NULL, TO_CHAR );
-	return FALSE;
-    }
-
-    if (( obj->item_type == ITEM_TATTOO ) && ( !IS_IMMORTAL(ch) ) )
-    {
-      act( "$p ancak yırtılarak çıkarılabilir.", ch, obj, NULL, TO_CHAR );
-	return FALSE;
-    }
-
-    if ( iWear == WEAR_STUCK_IN )
-    {
-        unequip_char( ch, obj );
-
-	if ( get_eq_char(ch,WEAR_STUCK_IN) == NULL)
-	{
-	  if  (is_affected(ch,gsn_arrow)) affect_strip(ch,gsn_arrow);
-	  if  (is_affected(ch,gsn_spear)) affect_strip(ch,gsn_spear);
-	}
-  act( "$p'yi acı içinde çıkarıyorsun.", ch, obj, NULL, TO_CHAR );
-	act( "$n $p'yi acı içinde çıkarıyor.", ch, obj, NULL, TO_ROOM );
-	WAIT_STATE(ch,4);
-	return TRUE;
-    }
-
-    unequip_char( ch, obj );
-    act( "$n $p kullanmayı bırakıyor.", ch, obj, NULL, TO_ROOM );
-    act( "$p kullanmayı bırakıyorsun.", ch, obj, NULL, TO_CHAR );
-
-    return TRUE;
+    return remove_obj( ch, get_eq_char( ch, iWear ), fReplace );
 }
 
 /*
@@ -2058,10 +2023,65 @@ bool remove_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace )
  * Optional replacement of existing objects.
  * Big repetitive code, ick.
  */
+/*
+ * Giyim yerleri; sıra eski if zincirinin öncelik sırasıdır (birden çok
+ * giyim bayrağı taşıyan eşyada ilk eşleşen kazanır).
+ */
+enum { SLOT_SINGLE, SLOT_MULTI, SLOT_HAND, SLOT_WIELD, SLOT_TATTOO };
+
+static const struct wear_slot_type
+{
+    int		wear_bit;
+    int		wear_loc;
+    int		kind;
+    const char *to_room;
+    const char *to_char;
+    const char *busy;		/* SLOT_HAND: iki el de doluysa */
+} wear_slot_table[] =
+{
+    { ITEM_WEAR_FINGER, WEAR_FINGER, SLOT_MULTI,  NULL, NULL, NULL },
+    { ITEM_WEAR_NECK,   WEAR_NECK,   SLOT_MULTI,  NULL, NULL, NULL },
+    { ITEM_WEAR_BODY,   WEAR_BODY,   SLOT_SINGLE,
+	"$n gövdesine $p giyiyor.",   "Gövdene $p giyiyorsun.",     NULL },
+    { ITEM_WEAR_HEAD,   WEAR_HEAD,   SLOT_SINGLE,
+	"$n kafasına $p takıyor.",    "Kafana $p takıyorsun.",      NULL },
+    { ITEM_WEAR_LEGS,   WEAR_LEGS,   SLOT_SINGLE,
+	"$n bacaklarına $p giyiyor.", "Bacaklarına $p giyiyorsun.", NULL },
+    { ITEM_WEAR_FEET,   WEAR_FEET,   SLOT_SINGLE,
+	"$n ayaklarına $p giyiyor.",  "Ayaklarına $p giyiyorsun.",  NULL },
+    { ITEM_WEAR_HANDS,  WEAR_HANDS,  SLOT_SINGLE,
+	"$n ellerine $p giyiyor.",    "Ellerine $p giyiyorsun.",    NULL },
+    { ITEM_WEAR_ARMS,   WEAR_ARMS,   SLOT_SINGLE,
+	"$n kollarına $p takıyor.",   "Kollarına $p takıyorsun.",   NULL },
+    { ITEM_WEAR_ABOUT,  WEAR_ABOUT,  SLOT_SINGLE,
+	"$n üzerine $p geçiriyor.",   "Üzerine $p geçiriyorsun.",   NULL },
+    { ITEM_WEAR_WAIST,  WEAR_WAIST,  SLOT_SINGLE,
+	"$n beline $p takıyor.",      "Beline $p takıyorsun.",      NULL },
+    { ITEM_WEAR_WRIST,  WEAR_WRIST,  SLOT_MULTI,  NULL, NULL, NULL },
+    { ITEM_WEAR_SHIELD, WEAR_NONE,   SLOT_HAND,
+	"$n kalkan olarak $p kullanıyor.", "Kalkan olarak $p kullanıyorsun.",
+	"Şu an bir kalkan tutamazsın.\n\r" },
+    { ITEM_WIELD,       WEAR_NONE,   SLOT_WIELD,  NULL, NULL, NULL },
+    { ITEM_HOLD,        WEAR_NONE,   SLOT_HAND,
+	"$n elinde $p tutuyor.",      "Elinde $p tutuyorsun.",
+	"Şu an birşey tutamazsın.\n\r" },
+    { ITEM_WEAR_FLOAT,  WEAR_FLOAT,  SLOT_SINGLE,
+	"$n $p'yi yanında süzülmesi için bırakıyor.",
+	"$p'yi yanında süzülmesi için bırakıyorsun.", NULL },
+    { ITEM_WEAR_TATTOO, WEAR_TATTOO, SLOT_TATTOO, NULL, NULL, NULL },
+};
+
+#define WEAR_SLOT_COUNT ((int)(sizeof(wear_slot_table) / sizeof(wear_slot_table[0])))
+
+/*
+ * Wear one object.
+ * Optional replacement of existing objects.
+ */
 void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace )
 {
     char buf[MAX_STRING_LENGTH];
     int wear_level;
+    int iWear, i;
 
     wear_level = ch->level;
 
@@ -2081,183 +2101,49 @@ void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace )
 
     if ( obj->item_type == ITEM_LIGHT )
     {
-	if (get_eq_char(ch,WEAR_BOTH) != NULL )
-	 {
-	  if (!remove_obj_loc( ch, WEAR_BOTH, fReplace ) )
+	iWear = pick_free_hand( ch, fReplace, WEAR_LEFT, WEAR_RIGHT,
+				"Şu an bir ışık tutamazsın.\n\r" );
+	if ( iWear >= 0 )
+	    hold_in_hand( ch, obj, iWear,
+			  "$n $p yakıyor ve tutmaya başlıyor.",
+			  "$p yakıyor ve tutmaya başlıyorsun." );
+	return;
+    }
+
+    for ( i = 0; i < WEAR_SLOT_COUNT; i++ )
+    {
+	const struct wear_slot_type *slot = &wear_slot_table[i];
+
+	if ( !CAN_WEAR( obj, slot->wear_bit ) )
+	    continue;
+	if ( slot->kind == SLOT_TATTOO && !IS_IMMORTAL(ch) )
+	    continue;
+
+	switch ( slot->kind )
+	{
+	case SLOT_MULTI:
+	case SLOT_TATTOO:
+	    wear_multi( ch, obj, slot->wear_loc, fReplace );
+	    return;
+
+	case SLOT_SINGLE:
+	    if ( !remove_obj_loc( ch, slot->wear_loc, fReplace ) )
 		return;
-	  hold_a_light(ch, obj, WEAR_LEFT);
-	 }
-	else if (get_eq_char(ch,WEAR_LEFT) == NULL )
-		hold_a_light(ch, obj, WEAR_LEFT);
-	else if (get_eq_char(ch,WEAR_RIGHT) == NULL )
-		hold_a_light(ch, obj, WEAR_RIGHT);
-	else if ( remove_obj_loc( ch, WEAR_LEFT, fReplace ) )
-		hold_a_light(ch, obj, WEAR_LEFT);
-	else if ( remove_obj_loc( ch, WEAR_RIGHT, fReplace ) )
-		hold_a_light(ch, obj, WEAR_RIGHT);
-    else send_to_char("Şu an bir ışık tutamazsın.\n\r",ch);
-	return;
-    }
-
-    if ( CAN_WEAR( obj, ITEM_WEAR_FINGER ) )
-    {
-	wear_multi(ch, obj, WEAR_FINGER, fReplace);
-	return;
-    }
-
-    if ( CAN_WEAR( obj, ITEM_WEAR_NECK ) )
-    {
-	wear_multi(ch, obj, WEAR_NECK, fReplace);
-	return;
-    }
-
-    if ( CAN_WEAR( obj, ITEM_WEAR_BODY ) )
-    {
-	if ( !remove_obj_loc( ch, WEAR_BODY, fReplace ) )
+	    act( slot->to_room, ch, obj, NULL, TO_ROOM );
+	    act( slot->to_char, ch, obj, NULL, TO_CHAR );
+	    equip_char( ch, obj, slot->wear_loc );
 	    return;
-      act( "$n gövdesine $p giyiyor.",   ch, obj, NULL, TO_ROOM );
-    	act( "Gövdene $p giyiyorsun.", ch, obj, NULL, TO_CHAR );
-	equip_char( ch, obj, WEAR_BODY );
-	return;
-    }
 
-    if ( CAN_WEAR( obj, ITEM_WEAR_HEAD ) )
-    {
-	if ( !remove_obj_loc( ch, WEAR_HEAD, fReplace ) )
+	case SLOT_HAND:
+	    iWear = pick_free_hand( ch, fReplace, WEAR_LEFT, WEAR_RIGHT, slot->busy );
+	    if ( iWear >= 0 )
+		hold_in_hand( ch, obj, iWear, slot->to_room, slot->to_char );
 	    return;
-      act( "$n kafasına $p takıyor.",   ch, obj, NULL, TO_ROOM );
-    	act( "Kafana $p takıyorsun.", ch, obj, NULL, TO_CHAR );
-	equip_char( ch, obj, WEAR_HEAD );
-	return;
-    }
 
-    if ( CAN_WEAR( obj, ITEM_WEAR_LEGS ) )
-    {
-	if ( !remove_obj_loc( ch, WEAR_LEGS, fReplace ) )
+	case SLOT_WIELD:
+	    wear_a_wield( ch, obj, fReplace );
 	    return;
-      act( "$n bacaklarına $p giyiyor.",   ch, obj, NULL, TO_ROOM );
-    	act( "Bacaklarına $p giyiyorsun.", ch, obj, NULL, TO_CHAR );
-	equip_char( ch, obj, WEAR_LEGS );
-	return;
-    }
-
-    if ( CAN_WEAR( obj, ITEM_WEAR_FEET ) )
-    {
-	if ( !remove_obj_loc( ch, WEAR_FEET, fReplace ) )
-	    return;
-      act( "$n ayaklarına $p giyiyor.",   ch, obj, NULL, TO_ROOM );
-    	act( "Ayaklarına $p giyiyorsun.", ch, obj, NULL, TO_CHAR );
-	equip_char( ch, obj, WEAR_FEET );
-	return;
-    }
-
-    if ( CAN_WEAR( obj, ITEM_WEAR_HANDS ) )
-    {
-	if ( !remove_obj_loc( ch, WEAR_HANDS, fReplace ) )
-	    return;
-      act( "$n ellerine $p giyiyor.",   ch, obj, NULL, TO_ROOM );
-    	act( "Ellerine $p giyiyorsun.", ch, obj, NULL, TO_CHAR );
-	equip_char( ch, obj, WEAR_HANDS );
-	return;
-    }
-
-    if ( CAN_WEAR( obj, ITEM_WEAR_ARMS ) )
-    {
-	if ( !remove_obj_loc( ch, WEAR_ARMS, fReplace ) )
-	    return;
-      act( "$n kollarına $p takıyor.",   ch, obj, NULL, TO_ROOM );
-    	act( "Kollarına $p takıyorsun.", ch, obj, NULL, TO_CHAR );
-	equip_char( ch, obj, WEAR_ARMS );
-	return;
-    }
-
-    if ( CAN_WEAR( obj, ITEM_WEAR_ABOUT ) )
-    {
-	if ( !remove_obj_loc( ch, WEAR_ABOUT, fReplace ) )
-	    return;
-      act( "$n gövdesine $p giyiyor.",   ch, obj, NULL, TO_ROOM );
-    	act( "Gövdene $p giyiyorsun.", ch, obj, NULL, TO_CHAR );
-	equip_char( ch, obj, WEAR_ABOUT );
-	return;
-    }
-
-    if ( CAN_WEAR( obj, ITEM_WEAR_WAIST ) )
-    {
-	if ( !remove_obj_loc( ch, WEAR_WAIST, fReplace ) )
-	    return;
-      act( "$n beline $p takıyor.",   ch, obj, NULL, TO_ROOM );
-    	act( "Beline $p takıyorsun.", ch, obj, NULL, TO_CHAR );
-	equip_char( ch, obj, WEAR_WAIST );
-	return;
-    }
-
-    if ( CAN_WEAR( obj, ITEM_WEAR_WRIST ) )
-    {
-	wear_multi(ch, obj, WEAR_WRIST, fReplace);
-	return;
-    }
-
-    if ( CAN_WEAR( obj, ITEM_WEAR_SHIELD ) )
-    {
-	if (get_eq_char(ch,WEAR_BOTH) != NULL )
-	 {
-	  if (!remove_obj_loc( ch, WEAR_BOTH, fReplace ) )
-		return;
-	  hold_a_shield(ch, obj, WEAR_LEFT);
-	 }
-	else if (get_eq_char(ch,WEAR_LEFT) == NULL )
-		hold_a_shield(ch, obj, WEAR_LEFT);
-	else if (get_eq_char(ch,WEAR_RIGHT) == NULL )
-		hold_a_shield(ch, obj, WEAR_RIGHT);
-	else if ( remove_obj_loc( ch, WEAR_LEFT, fReplace ) )
-		hold_a_shield(ch, obj, WEAR_LEFT);
-	else if ( remove_obj_loc( ch, WEAR_RIGHT, fReplace ) )
-		hold_a_shield(ch, obj, WEAR_RIGHT);
-    else send_to_char("Şu an bir kalkan tutamazsın.\n\r",ch);
-	return;
-    }
-
-    if ( CAN_WEAR( obj, ITEM_WIELD ) )
-    {
-	wear_a_wield(ch, obj, fReplace);
-	return;
-    }
-
-    if ( CAN_WEAR( obj, ITEM_HOLD ) )
-    {
-	if (get_eq_char(ch,WEAR_BOTH) != NULL )
-	 {
-	  if (!remove_obj_loc( ch, WEAR_BOTH, fReplace ) )
-		return;
-	  hold_a_thing(ch, obj, WEAR_LEFT);
-	 }
-	else if (get_eq_char(ch,WEAR_LEFT) == NULL )
-		hold_a_thing(ch, obj, WEAR_LEFT);
-	else if (get_eq_char(ch,WEAR_RIGHT) == NULL )
-		hold_a_thing(ch, obj, WEAR_RIGHT);
-	else if ( remove_obj_loc( ch, WEAR_LEFT, fReplace ) )
-		hold_a_thing(ch, obj, WEAR_LEFT);
-	else if ( remove_obj_loc( ch, WEAR_RIGHT, fReplace ) )
-		hold_a_thing(ch, obj, WEAR_RIGHT);
-    else send_to_char("Şu an birşey tutamazsın.\n\r",ch);
-	return;
-    }
-
-
-    if ( CAN_WEAR(obj,ITEM_WEAR_FLOAT) )
-    {
-	if (!remove_obj_loc(ch,WEAR_FLOAT, fReplace) )
-	    return;
-      act("$n $p'yi yanında süzülmesi için bırakıyor.",ch,obj,NULL,TO_ROOM);
-    	act("$p'yi yanında süzülmesi için bırakıyorsun.",ch,obj,NULL,TO_CHAR);
-	equip_char(ch,obj,WEAR_FLOAT);
-	return;
-    }
-
-    if ( CAN_WEAR(obj,ITEM_WEAR_TATTOO)  && IS_IMMORTAL (ch) )
-    {
-	wear_multi(ch, obj, WEAR_TATTOO, fReplace);
-	return;
+	}
     }
 
     if ( fReplace )
@@ -5060,29 +4946,41 @@ void do_enchant(CHAR_DATA *ch, char *argument)
 
 
 
-void hold_a_light(CHAR_DATA *ch,OBJ_DATA *obj, int iWear)
+/* Eşyayı verilen ele yerleştirir ve mesajları basar. */
+static void hold_in_hand( CHAR_DATA *ch, OBJ_DATA *obj, int iWear,
+			  const char *to_room, const char *to_char )
 {
-    act( "$n $p yakıyor ve tutmaya başlıyor.", ch, obj, NULL, TO_ROOM );
-    act( "$p yakıyor ve tutmaya başlıyorsun.",  ch, obj, NULL, TO_CHAR );
+    act( to_room, ch, obj, NULL, TO_ROOM );
+    act( to_char, ch, obj, NULL, TO_CHAR );
     equip_char( ch, obj, iWear );
 }
 
-void hold_a_shield(CHAR_DATA *ch,OBJ_DATA *obj, int iWear)
+/*
+ * Boş (ya da boşaltılabilen) bir el seçer: çift el yuvası doluysa o
+ * boşaltılıp 'first' döner; yoksa sırayla boş el, sonra boşaltılabilen el.
+ * Başarısızlıkta -1 döner; iki el de boşaltılamıyorsa 'busy_msg' basılır.
+ */
+static int pick_free_hand( CHAR_DATA *ch, bool fReplace, int first, int second,
+			   const char *busy_msg )
 {
-	act( "$n kalkan olarak $p kullanıyor.", ch, obj, NULL, TO_ROOM );
-	act( "Kalkan olarak $p kullanıyorsun.", ch, obj, NULL, TO_CHAR );
-	equip_char( ch, obj, iWear );
-}
+    if ( get_eq_char( ch, WEAR_BOTH ) != NULL )
+	return remove_obj_loc( ch, WEAR_BOTH, fReplace ) ? first : -1;
 
-void hold_a_thing(CHAR_DATA *ch,OBJ_DATA *obj, int iWear)
-{
-	act( "$n elinde $p tutuyor.",   ch, obj, NULL, TO_ROOM );
-	act( "Elinde $p tutuyorsun.", ch, obj, NULL, TO_CHAR );
-	equip_char( ch, obj, iWear );
+    if ( get_eq_char( ch, first ) == NULL )
+	return first;
+    if ( get_eq_char( ch, second ) == NULL )
+	return second;
+    if ( remove_obj_loc( ch, first, fReplace ) )
+	return first;
+    if ( remove_obj_loc( ch, second, fReplace ) )
+	return second;
+
+    send_to_char( busy_msg, ch );
+    return -1;
 }
 
 /* wear object as a secondary weapon */
-void hold_a_wield(CHAR_DATA *ch, OBJ_DATA *obj, int iWear)
+static void hold_a_wield(CHAR_DATA *ch, OBJ_DATA *obj, int iWear)
 {
     int sn,skill;
 
@@ -5094,7 +4992,7 @@ void hold_a_wield(CHAR_DATA *ch, OBJ_DATA *obj, int iWear)
 
     if (obj->item_type != ITEM_WEAPON)
     {
-	hold_a_thing(ch, obj, iWear);
+	hold_in_hand( ch, obj, iWear, "$n elinde $p tutuyor.", "Elinde $p tutuyorsun." );
 	return;
     }
 
@@ -5129,74 +5027,74 @@ void hold_a_wield(CHAR_DATA *ch, OBJ_DATA *obj, int iWear)
 }
 
 
-void wear_a_wield(CHAR_DATA *ch,OBJ_DATA *obj, bool fReplace)
+static void wear_a_wield(CHAR_DATA *ch,OBJ_DATA *obj, bool fReplace)
 {
-	int EL_BIR,EL_IKI;
+    int hand_primary   = LEFT_HANDER(ch) ? WEAR_LEFT  : WEAR_RIGHT;
+    int hand_secondary = LEFT_HANDER(ch) ? WEAR_RIGHT : WEAR_LEFT;
+    int iWear;
 
-		if(LEFT_HANDER(ch))
-		{
-			EL_BIR=WEAR_LEFT;
-			EL_IKI=WEAR_RIGHT;
-		}
-		else
-		{
-			EL_BIR=WEAR_RIGHT;
-			EL_IKI=WEAR_LEFT;
-		}
-
-  if ( !IS_NPC(ch)
+    if ( !IS_NPC(ch)
 	&& get_obj_weight(obj) > str_app[get_curr_stat(ch,STAT_STR)].carry )
-  {
-    send_to_char( "Kuşanamayacağın kadar ağır.\n\r", ch );
-    return;
-  }
+    {
+	send_to_char( "Kuşanamayacağın kadar ağır.\n\r", ch );
+	return;
+    }
 
-  if (IS_WEAPON_STAT(obj,WEAPON_TWO_HANDS) &&
-         (!IS_NPC(ch) && ch->size < SIZE_LARGE) )
-   {
-    	if (get_eq_char(ch,WEAR_BOTH) != NULL )
-    	{
-     		if (!remove_obj_loc(ch,WEAR_BOTH,fReplace)) return;
-     		hold_a_wield(ch, obj, WEAR_BOTH);
-    	}
-    	else
-    	{
-     		if ( get_eq_char(ch,EL_BIR) )
-			if (!remove_obj_loc(ch,EL_BIR,fReplace)) return;
-     		if ( get_eq_char(ch,EL_IKI) )
-			if (!remove_obj_loc(ch,EL_IKI,fReplace)) return;
-     		hold_a_wield(ch, obj, WEAR_BOTH);
-    	}
-   }
-  else
-  {
-    	if (get_eq_char(ch,WEAR_BOTH) != NULL )
-    	{
-     		if (!remove_obj_loc( ch, WEAR_BOTH, fReplace ) )
-			return;
-		hold_a_wield(ch, obj, EL_BIR);
-    	}
-	else if (get_eq_char(ch,EL_BIR) == NULL )
-		hold_a_wield(ch, obj, EL_BIR);
-	else if (get_eq_char(ch,EL_IKI) == NULL )
-		hold_a_wield(ch, obj, EL_IKI);
-	else if ( remove_obj_loc( ch, EL_BIR, fReplace ) )
-		hold_a_wield(ch, obj, EL_BIR);
-	else if ( remove_obj_loc( ch, EL_IKI, fReplace ) )
-		hold_a_wield(ch, obj, EL_IKI);
-	else
-		send_to_char("Ellerin dolu.\n\r",ch);
-  }
+    if ( IS_WEAPON_STAT(obj,WEAPON_TWO_HANDS)
+    &&   !IS_NPC(ch) && ch->size < SIZE_LARGE )
+    {
+	/* İki el: çift el yuvası doluysa o, değilse iki el de boşaltılır. */
+	if ( get_eq_char( ch, WEAR_BOTH ) != NULL )
+	{
+	    if ( !remove_obj_loc( ch, WEAR_BOTH, fReplace ) )
+		return;
+	}
+	else if ( !remove_obj_loc( ch, hand_primary, fReplace )
+	     ||   !remove_obj_loc( ch, hand_secondary, fReplace ) )
+	    return;
+
+	hold_a_wield( ch, obj, WEAR_BOTH );
+	return;
+    }
+
+    iWear = pick_free_hand( ch, fReplace, hand_primary, hand_secondary, "Ellerin dolu.\n\r" );
+    if ( iWear >= 0 )
+	hold_a_wield( ch, obj, iWear );
 }
 
 
 
-void wear_multi(CHAR_DATA *ch,OBJ_DATA *obj,int iWear,bool fReplace)
+/* Çok yuvalı yerler (parmak, boyun, bilek, dövme); yer doluysa ve
+ * fReplace ise çıkarılabilen bir eşya çıkarılıp yenisi takılır. */
+static void wear_multi(CHAR_DATA *ch,OBJ_DATA *obj,int iWear,bool fReplace)
 {
- if (count_worn(ch, iWear) < max_can_wear(ch, iWear))
-  {
-   switch( iWear )
-   {
+    if ( count_worn( ch, iWear ) >= max_can_wear( ch, iWear ) )
+    {
+	OBJ_DATA *w;
+
+	if ( !fReplace )
+	    return;
+
+	for ( w = ch->carrying; w != NULL; w = w->next_content )
+	{
+	    if ( w->wear_loc == iWear
+		&& !IS_SET(w->extra_flags, ITEM_NOREMOVE)
+		&& (w->item_type != ITEM_TATTOO || IS_IMMORTAL(ch) ) )
+		break;
+	}
+
+	if ( w == NULL )
+	{
+	    act( "$p ile değiştirilebilecek birşey giymiyorsun.",
+		 ch, obj, NULL, TO_CHAR );
+	    return;
+	}
+
+	remove_obj( ch, w, TRUE );
+    }
+
+    switch( iWear )
+    {
     case WEAR_FINGER:
 	act( "$n parmaklarından birine $p takıyor.", ch, obj, NULL, TO_ROOM );
 	act( "Parmaklarından birine $p takıyorsun.", ch, obj, NULL, TO_CHAR );
@@ -5217,36 +5115,11 @@ void wear_multi(CHAR_DATA *ch,OBJ_DATA *obj,int iWear,bool fReplace)
 	act("$n bir yerine $p giyiyor.", ch, obj, NULL, TO_ROOM );
 	act("Bir yerine $p giyiyorsun.",ch, obj, NULL, TO_CHAR);
 	break;
-   }
-   equip_char(ch, obj, iWear);
-  }
-  else if (fReplace)
-  {
-    OBJ_DATA *w;
-    int not_worn = 1;
-
-    for ( w = ch->carrying; w != NULL; w = w->next_content )
-    {
-	if ( w->wear_loc == iWear
-		&& !IS_SET(w->extra_flags, ITEM_NOREMOVE)
-		&& (w->item_type != ITEM_TATTOO || IS_IMMORTAL(ch) ) )
-	{
-          unequip_char( ch, w );
-          act( "$n $p kullanmayı bıraktı.", ch, w, NULL, TO_ROOM );
-          act( "$p kullanmayı bıraktın.", ch, w, NULL, TO_CHAR );
-	  wear_multi(ch, obj, iWear, fReplace );
-	  not_worn = 0;
-          break;
-	}
     }
-
-    if ( not_worn )
-          act( "$p ile değiştirilebilecek birşey giymiyorsun.",
-		ch, obj, NULL, TO_CHAR );
-  }
-
+    equip_char(ch, obj, iWear);
 }
 
+/* wear object as a secondary weapon */
 /* Limitli eşya: iksir/hap/parşömen ayrı kotaya tabidir. */
 static bool is_limited_consumable( OBJ_DATA *obj )
 {
