@@ -91,37 +91,46 @@ int		find_exit( CHAR_DATA *ch, char *arg );
 
 extern const char *   dir_name        [];
 
+/*
+ * "tümü" / "tümü.<ad>" ayrıştırması (ROM'un all / all.x mantığı).
+ * "tümü" UTF-8'de 6 bayt olduğundan bayt sabiti yerine sözcük uzunluğuyla
+ * çalışır. TRUE dönerse argüman toplu seçimdir: *suffix hepsi için NULL,
+ * "tümü.kılıç" için "kılıç" olur.
+ */
+static bool parse_all_arg( char *arg, char **suffix )
+{
+    static const char all_word[] = "tümü";
+    const size_t all_len = sizeof(all_word) - 1;
+
+    *suffix = NULL;
+    if ( !str_cmp( arg, all_word ) )
+	return TRUE;
+
+    if ( !str_prefix( all_word, arg ) && arg[all_len] == '.' )
+    {
+	if ( arg[all_len + 1] != '\0' )
+	    *suffix = arg + all_len + 1;
+	return TRUE;
+    }
+
+    return FALSE;
+}
+
+/* Toplu seçimde eşya adı süzgeci: ek yoksa hepsi, varsa ada göre. */
+static bool all_arg_matches( char *suffix, OBJ_DATA *obj )
+{
+    return suffix == NULL || is_name( suffix, obj->name );
+}
+
 /* RT part of the corpse looting code */
 
 bool can_loot(CHAR_DATA *ch, OBJ_DATA *obj)
 {
-    CHAR_DATA *owner, *wch;
-
+    /*
+     * Oyuncu cesedi yağma koruması bilinçli olarak kapalı (oynanış kararı):
+     * ölümsüz/sahip/grup/PLR_CANLOOT denetimleri kaldırıldı, herkes yağmalar.
+     */
     return TRUE;
-    if (IS_IMMORTAL(ch))
-	return TRUE;
-
-    if (!obj->owner || obj->owner == NULL)
-	return TRUE;
-
-    owner = NULL;
-    for ( wch = char_list; wch != NULL ; wch = wch->next )
-        if (!str_cmp(wch->name,obj->owner))
-            owner = wch;
-
-    if (owner == NULL)
-	return TRUE;
-
-    if (!str_cmp(ch->name,owner->name))
-	return TRUE;
-
-    if (!IS_NPC(owner) && IS_SET(owner->act,PLR_CANLOOT))
-	return TRUE;
-
-    if (is_same_group(ch,owner))
-	return TRUE;
-
-    return FALSE;
 }
 
 
@@ -283,6 +292,7 @@ void do_get( CHAR_DATA *ch, char *argument )
 
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
+  char *all_suffix;
   OBJ_DATA *obj;
   OBJ_DATA *obj_next;
   OBJ_DATA *container;
@@ -421,7 +431,7 @@ void do_get( CHAR_DATA *ch, char *argument )
 
     if ( arg2[0] == '\0' )
     {
-	if ( str_cmp( arg1, "tümü" ) && str_prefix( "tümü.", arg1 ) )
+	if ( !parse_all_arg( arg1, &all_suffix ) )
 	{
 	    /* 'get obj' */
 	    obj = get_obj_list( ch, arg1, ch->in_room->contents );
@@ -439,7 +449,7 @@ void do_get( CHAR_DATA *ch, char *argument )
 	    for ( obj = ch->in_room->contents; obj != NULL; obj = obj_next )
 	    {
 		obj_next = obj->next_content;
-		if ( ( arg1[3] == '\0' || is_name( &arg1[4], obj->name ) )
+		if ( all_arg_matches( all_suffix, obj )
 		&&   can_see_obj( ch, obj ) )
 		{
 		    found = TRUE;
@@ -449,17 +459,17 @@ void do_get( CHAR_DATA *ch, char *argument )
 
 	    if ( !found )
 	    {
-		if ( arg1[3] == '\0' )
+		if ( all_suffix == NULL )
     send_to_char( "Bir şey görmüyorum.\n\r", ch );
 		else
-    act("Burada $T yok.", ch, NULL, &arg1[4], TO_CHAR );
+    act("Burada $T yok.", ch, NULL, all_suffix, TO_CHAR );
 	    }
 	}
     }
     else
     {
 	/* 'get ... container' */
-	if ( !str_cmp( arg2, "tümü" ) || !str_prefix( "tümü.", arg2 ) )
+	if ( parse_all_arg( arg2, &all_suffix ) )
 	{
     send_to_char( "Bunu yapamazsın.\n\r", ch );
 	    return;
@@ -498,7 +508,7 @@ void do_get( CHAR_DATA *ch, char *argument )
 	    return;
 	}
 
-	if ( str_cmp( arg1, "tümü" ) && str_prefix( "tümü.", arg1 ) )
+	if ( !parse_all_arg( arg1, &all_suffix ) )
 	{
 	    /* 'get obj container' */
 	    obj = get_obj_list( ch, arg1, container->contains );
@@ -517,7 +527,7 @@ void do_get( CHAR_DATA *ch, char *argument )
 	    for ( obj = container->contains; obj != NULL; obj = obj_next )
 	    {
 		obj_next = obj->next_content;
-		if ( ( arg1[3] == '\0' || is_name( &arg1[4], obj->name ) )
+		if ( all_arg_matches( all_suffix, obj )
 		&&   can_see_obj( ch, obj ) )
 		{
 		    found = TRUE;
@@ -533,7 +543,7 @@ void do_get( CHAR_DATA *ch, char *argument )
 
 	    if ( !found )
 	    {
-		if ( arg1[3] == '\0' )
+		if ( all_suffix == NULL )
     act( "$T içinde hiçbir şey yok.",
 			ch, NULL, arg2, TO_CHAR );
 		else
@@ -552,6 +562,7 @@ void do_put( CHAR_DATA *ch, char *argument )
 {
     char arg1[MAX_INPUT_LENGTH];
     char arg2[MAX_INPUT_LENGTH];
+    char *all_suffix;
     OBJ_DATA *container;
     OBJ_DATA *obj;
     OBJ_DATA *obj_next;
@@ -570,7 +581,7 @@ void do_put( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    if ( !str_cmp( arg2, "tümü" ) || !str_prefix( "tümü.", arg2 ) )
+    if ( parse_all_arg( arg2, &all_suffix ) )
     {
       send_to_char("Bunu yapamazsın.\n\r", ch );
 	return;
@@ -594,7 +605,7 @@ void do_put( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    if ( str_cmp( arg1, "tümü" ) && str_prefix( "tümü.", arg1 ) )
+    if ( !parse_all_arg( arg1, &all_suffix ) )
     {
 	/* 'put obj container' */
 	if ( ( obj = get_obj_carry( ch, arg1 ) ) == NULL )
@@ -700,7 +711,7 @@ void do_put( CHAR_DATA *ch, char *argument )
 	{
 	    obj_next = obj->next_content;
 
-	    if ( ( arg1[3] == '\0' || is_name( &arg1[4], obj->name ) )
+	    if ( all_arg_matches( all_suffix, obj )
 	    &&   can_see_obj( ch, obj )
 	    &&   WEIGHT_MULT(obj) == 100
 	    &&   obj->wear_loc == WEAR_NONE
@@ -769,6 +780,7 @@ void do_put( CHAR_DATA *ch, char *argument )
 void do_drop( CHAR_DATA *ch, char *argument )
 {
     char arg[MAX_INPUT_LENGTH];
+    char *all_suffix;
     OBJ_DATA *obj;
     OBJ_DATA *obj_next;
     bool found;
@@ -839,7 +851,7 @@ void do_drop( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    if ( str_cmp( arg, "tümü" ) && str_prefix( "tümü.", arg ) )
+    if ( !parse_all_arg( arg, &all_suffix ) )
     {
 	/* 'drop obj' */
 	if ( ( obj = get_obj_carry( ch, arg ) ) == NULL )
@@ -908,7 +920,7 @@ act( "$p bırakıyorsun.", ch, obj, NULL, TO_CHAR );
 	{
 	    obj_next = obj->next_content;
 
-	    if ( ( arg[3] == '\0' || is_name( &arg[4], obj->name ) )
+	    if ( all_arg_matches( all_suffix, obj )
 	    &&   can_see_obj( ch, obj )
 	    &&   obj->wear_loc == WEAR_NONE
 	    &&   can_drop_obj( ch, obj ) )
@@ -966,12 +978,12 @@ act( "$p bırakıyorsun.", ch, obj, NULL, TO_CHAR );
 
 	if ( !found )
 	{
-	    if ( arg[3] == '\0' )
+	    if ( all_suffix == NULL )
       act( "Hiçbir şey taşımıyorsun.",
 		    ch, NULL, arg, TO_CHAR );
 	    else
       act( "$T taşımıyorsun.",
-		    ch, NULL, &arg[4], TO_CHAR );
+		    ch, NULL, all_suffix, TO_CHAR );
 	}
     }
 
@@ -985,6 +997,7 @@ void do_drag( CHAR_DATA *ch, char *argument )
     char arg1[MAX_INPUT_LENGTH];
     char arg2[MAX_INPUT_LENGTH];
     char buf[MAX_STRING_LENGTH];
+    char *all_suffix;
     CHAR_DATA *gch;
     OBJ_DATA *obj;
     EXIT_DATA *pexit;
@@ -1002,7 +1015,7 @@ void do_drag( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    if ( !str_cmp( arg1, "tümü" ) || !str_prefix( "tümü.", arg1 ) )
+    if ( parse_all_arg( arg1, &all_suffix ) )
     {
       send_to_char( "Bunu yapamazsın.\n\r", ch );
         return;
@@ -2320,6 +2333,7 @@ void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace )
 void do_wear( CHAR_DATA *ch, char *argument )
 {
     char arg[MAX_INPUT_LENGTH];
+    char *all_suffix;
     OBJ_DATA *obj;
 
     one_argument( argument, arg );
@@ -2330,14 +2344,15 @@ void do_wear( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    if ( !str_cmp( arg, "tümü" ) )
+    if ( parse_all_arg( arg, &all_suffix ) )
     {
 	OBJ_DATA *obj_next;
 
 	for ( obj = ch->carrying; obj != NULL; obj = obj_next )
 	{
 	    obj_next = obj->next_content;
-	    if ( obj->wear_loc == WEAR_NONE && can_see_obj( ch, obj ) )
+	    if ( obj->wear_loc == WEAR_NONE && all_arg_matches( all_suffix, obj )
+	    &&   can_see_obj( ch, obj ) )
 		wear_obj( ch, obj, FALSE );
 	}
 	return;
@@ -2361,6 +2376,7 @@ void do_wear( CHAR_DATA *ch, char *argument )
 void do_remove( CHAR_DATA *ch, char *argument )
 {
     char arg[MAX_INPUT_LENGTH];
+    char *all_suffix;
     OBJ_DATA *obj;
 
     one_argument( argument, arg );
@@ -2372,14 +2388,15 @@ void do_remove( CHAR_DATA *ch, char *argument )
     }
 
 
-    if ( !str_cmp( arg, "tümü" ) )
+    if ( parse_all_arg( arg, &all_suffix ) )
     {
         OBJ_DATA *obj_next;
 
         for ( obj = ch->carrying; obj != NULL; obj = obj_next )
         {
             obj_next = obj->next_content;
-            if ( obj->wear_loc != WEAR_NONE && can_see_obj( ch, obj ) )
+            if ( obj->wear_loc != WEAR_NONE && all_arg_matches( all_suffix, obj )
+            &&   can_see_obj( ch, obj ) )
                 remove_obj( ch, obj, TRUE );
         }
         return;
