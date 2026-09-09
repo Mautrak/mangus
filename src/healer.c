@@ -52,33 +52,91 @@
 #include <stdlib.h>
 #include "merc.h"
 #include "magic.h"
+#include "utf8.h"
 
 DECLARE_DO_FUN(	do_say	);
+
+/* Şifacının hizmet türleri. */
+enum heal_kind
+{
+    HS_SPELL,		/* skill/spell çifti ile büyü atılır */
+    HS_MANA_SMALL,	/* 'mana': küçük mana yenileme */
+    HS_MANA_BIG		/* 'takat': büyük mana yenileme */
+};
+
+struct heal_service
+{
+    const char     *key;	/* komut anahtarı (str_prefix) */
+    const char     *alias;	/* ikinci anahtar, yoksa NULL */
+    const char     *label;	/* listede görünen ad, NULL ise key */
+    const char     *desc;	/* liste açıklaması */
+    const char     *skill;	/* skill_lookup adı (HS_SPELL) */
+    SPELL_FUN      *spell;
+    const char     *words;	/* mırıldanılan sözler */
+    int             cost;
+    enum heal_kind  kind;
+};
+
+static const struct heal_service heal_table[] =
+{
+    { "hafif",    NULL,      NULL,          "hafif yara tedavisi",  "cure light",     spell_cure_light,     "judicandus dies",      100, HS_SPELL      },
+    { "ciddi",    NULL,      NULL,          "ciddi yara tedavisi",  "cure serious",   spell_cure_serious,   "judicandus gzfuajg",   150, HS_SPELL      },
+    { "kritik",   NULL,      NULL,          "kritik yara tedavisi", "cure critical",  spell_cure_critical,  "judicandus qfuhuqar",  250, HS_SPELL      },
+    { "şifa",     NULL,      NULL,          "şifa büyüsü",          "heal",           spell_heal,           "pzar",                 500, HS_SPELL      },
+    { "körlük",   NULL,      NULL,          "körlük tedavisi",      "cure blindness", spell_cure_blindness, "judicandus noselacri", 200, HS_SPELL      },
+    { "hastalık", NULL,      NULL,          "hastalık tedavisi",    "cure disease",   spell_cure_disease,   "judicandus eugzagz",   150, HS_SPELL      },
+    { "zehir",    NULL,      NULL,          "zehir tedavisi",       "cure poison",    spell_cure_poison,    "judicandus sausabru",  250, HS_SPELL      },
+    { "lanet",    NULL,      NULL,          "lanet kaldırma",       "remove curse",   spell_remove_curse,   "candussido judifgz",   500, HS_SPELL      },
+    { "yenileme", "hareket", NULL,          "yorgunluk azaltma",    "refresh",        spell_refresh,        "candusima",             50, HS_SPELL      },
+    { "mana",     NULL,      NULL,          "mana yenileme",        NULL,             NULL,                 "candamira",            100, HS_MANA_SMALL },
+    { "yüksek",   NULL,      "yüksek şifa", "yüksek tedavi",        "master healing", spell_master_heal,    "candastra nikazubra", 2000, HS_SPELL      },
+    { "takat",    NULL,      NULL,          "ileri mana tedavi",    NULL,             NULL,                 "energizer",           2000, HS_MANA_BIG   },
+    { NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, HS_SPELL }
+};
+
+/* Bu şifacı bu karaktere hizmet verir mi? Kabal şifacıları alan dosyasında
+ * "kabal"/"cabal" + kabal kısa adı anahtar kelimeleriyle tanımlanır. */
+static bool healer_serves( CHAR_DATA *mob, CHAR_DATA *ch )
+{
+    if ( !IS_NPC( mob ) || !IS_SET( mob->act, ACT_IS_HEALER ) )
+	return FALSE;
+    if ( ch->cabal && ( is_name( "cabal", mob->name ) || is_name( "kabal", mob->name ) ) )
+	return is_name( (char *) cabal_table[ch->cabal].short_name, mob->name );
+    return TRUE;
+}
+
+static void heal_list( CHAR_DATA *ch, CHAR_DATA *mob )
+{
+    const struct heal_service *hs;
+
+    act( "Şifacı şu hizmetleri veriyor.", ch, NULL, mob, TO_CHAR );
+    for ( hs = heal_table; hs->key != NULL; hs++ )
+    {
+	const char *label = hs->label != NULL ? hs->label : hs->key;
+
+	printf_to_char( ch, "  %-*s: %-*s%4d akçe\n\r",
+	    utf8_width( label, 12 ), label,
+	    utf8_width( hs->desc, 21 ), hs->desc, hs->cost );
+    }
+    send_to_char( " Hizmet almak için: iyileş <tip>\n\r", ch );
+}
 
 void do_heal(CHAR_DATA *ch, char *argument)
 {
     CHAR_DATA *mob;
+    const struct heal_service *hs;
     char arg[MAX_INPUT_LENGTH];
     char arg2[MAX_INPUT_LENGTH];
     OBJ_DATA *obj = NULL;
-    int cost,sn;
-    SPELL_FUN *spell;
-    const char *words;
+    int sn = -1;
+
+    if ( ch->in_room == NULL )
+	return;
 
     /* check for healer */
     for ( mob = ch->in_room->people; mob; mob = mob->next_in_room )
-    {
-        if ( IS_NPC(mob) && IS_SET(mob->act, ACT_IS_HEALER))
-	 {
-	  if (ch->cabal && (is_name("cabal",mob->name)||is_name("kabal",mob->name)))
-		{
-    		 if (is_name((char*)cabal_table[ch->cabal].short_name,mob->name) )
-		 	break;
-		 else continue;
-		}
-          else  break;
-	 }
-    }
+	if ( healer_serves( mob, ch ) )
+	    break;
 
     if ( mob == NULL )
     {
@@ -96,138 +154,43 @@ void do_heal(CHAR_DATA *ch, char *argument)
 
     if (arg[0] == '\0')
     {
-        /* display price list */
-        act("Şifacı şu hizmetleri veriyor.",ch,NULL,mob,TO_CHAR);
-      	send_to_char("  hafif       : hafif yara tedavisi   100 akçe\n\r",ch);
-      	send_to_char("  ciddi       : ciddi yara tedavisi   150 akçe\n\r",ch);
-      	send_to_char( "  kritik      : kritik yara tedavisi  250 akçe\n\r",ch);
-      	send_to_char( "  şifa        : şifa büyüsü           500 akçe\n\r",ch);
-      	send_to_char( "  körlük      : körlük tedavisi       200 akçe\n\r",ch);
-      	send_to_char( "  hastalık    : hastalık tedavisi     150 akçe\n\r",ch);
-      	send_to_char( "  zehir       : zehir tedavisi        250 akçe\n\r",ch);
-      	send_to_char( "  lanet       : lanet kaldırma        500 akçe\n\r",ch);
-      	send_to_char( "  yenileme    : yorgunluk azaltma      50 akçe\n\r",ch);
-      	send_to_char( "  mana        : mana yenileme         100 akçe\n\r",ch);
-      	send_to_char( "  yüksek şifa : yüksek tedavi        2000 akçe\n\r",ch);
-      	send_to_char( "  takat       : ileri mana tedavi    2000 akçe\n\r",ch);
-      	send_to_char( " Hizmet almak için: iyileş <tip>\n\r",ch);
+	heal_list( ch, mob );
 	return;
     }
 
-    if (!str_prefix(arg,"hafif"))
-    {
-        spell = spell_cure_light;
-	sn    = skill_lookup("cure light");
-	words = "judicandus dies";
-	 cost  = 100;
-    }
+    for ( hs = heal_table; hs->key != NULL; hs++ )
+	if ( !str_prefix( arg, hs->key )
+	||   ( hs->alias != NULL && !str_prefix( arg, hs->alias ) ) )
+	    break;
 
-    else if (!str_prefix(arg,"ciddi"))
-    {
-	spell = spell_cure_serious;
-	sn    = skill_lookup("cure serious");
-	words = "judicandus gzfuajg";
-	cost  = 150;
-    }
-
-    else if (!str_prefix(arg,"kritik"))
-    {
-	spell = spell_cure_critical;
-	sn    = skill_lookup("cure critical");
-	words = "judicandus qfuhuqar";
-	cost  = 250;
-    }
-
-    else if (!str_prefix(arg,"şifa"))
-    {
-	spell = spell_heal;
-	sn = skill_lookup("heal");
-	words = "pzar";
-	cost  = 500;
-    }
-
-    else if (!str_prefix(arg,"körlük"))
-    {
-	spell = spell_cure_blindness;
-	sn    = skill_lookup("cure blindness");
-      	words = "judicandus noselacri";
-        cost  = 200;
-    }
-
-    else if (!str_prefix(arg,"hastalık"))
-    {
-	spell = spell_cure_disease;
-	sn    = skill_lookup("cure disease");
-	words = "judicandus eugzagz";
-	cost = 150;
-    }
-
-    else if (!str_prefix(arg,"zehir"))
-    {
-	spell = spell_cure_poison;
-	sn    = skill_lookup("cure poison");
-	words = "judicandus sausabru";
-	cost  = 250;
-    }
-
-    else if (!str_prefix(arg,"lanet") )
-    {
-      one_argument(argument,arg2);
-      if(arg2[0] != '\0')
-      {
-        if ( ( obj = get_obj_carry( ch, arg2 ) ) == NULL )
-        {
-          send_to_char( "Sende öyle birşey yok.\n\r", ch );
-            return;
-        }
-      }
-	spell = spell_remove_curse;
-	sn    = skill_lookup("remove curse");
-	words = "candussido judifgz";
-	cost  = 500;
-    }
-
-    else if (!str_prefix(arg,"mana"))
-    {
-        spell = NULL;
-        sn = -3;
-        words = "candamira";
-        cost = 100;
-    }
-
-
-    else if (!str_prefix(arg,"yenileme") || !str_prefix(arg,"hareket"))
-    {
-	spell =  spell_refresh;
-	sn    = skill_lookup("refresh");
-	words = "candusima";
-	cost  = 50;
-    }
-
-    else if (!str_prefix(arg,"yüksek") )
-    {
-	spell =  spell_master_heal;
-	sn    = skill_lookup("master healing");
-	words = "candastra nikazubra";
-	cost  = 2000;
-    }
-
-    else if (!str_prefix(arg,"takat") )
-    {
-	spell =  NULL;
-	sn    = -2;
-	words = "energizer";
-	cost  = 2000;
-    }
-
-    else
+    if ( hs->key == NULL )
     {
       act("Şifacı bu hizmeti vermiyor. Hizmet listesi için 'iyileş' yazın.",
 	    ch,NULL,mob,TO_CHAR);
 	return;
     }
 
-    if ( cost > ch->silver )
+    if ( hs->kind == HS_SPELL )
+    {
+	if ( ( sn = skill_lookup( hs->skill ) ) < 0 )
+	{
+	    bugf( "do_heal: '%s' yeteneği bulunamadı.", hs->skill );
+	    return;
+	}
+
+	if ( hs->spell == spell_remove_curse )
+	{
+	    one_argument( argument, arg2 );
+	    if ( arg2[0] != '\0'
+	    &&   ( obj = get_obj_carry( ch, arg2 ) ) == NULL )
+	    {
+		send_to_char( "Sende öyle birşey yok.\n\r", ch );
+		return;
+	    }
+	}
+    }
+
+    if ( hs->cost > ch->silver )
     {
       act("Yeterli akçen yok.",ch,NULL,mob,TO_CHAR);
 	return;
@@ -235,41 +198,66 @@ void do_heal(CHAR_DATA *ch, char *argument)
 
     WAIT_STATE(ch,PULSE_VIOLENCE);
 
-    deduct_cost(ch,cost);
-    mob->silver += cost;
+    deduct_cost(ch,hs->cost);
+    mob->silver += hs->cost;
 
-    act("$n mırıldanıyor, '$T'.",mob,NULL,words,TO_ROOM);
-    if (sn == -2)
-     {
+    act("$n mırıldanıyor, '$T'.",mob,NULL,hs->words,TO_ROOM);
+
+    switch ( hs->kind )
+    {
+    case HS_MANA_BIG:
 	ch->mana += 300;
 	ch->mana = UMIN(ch->mana,ch->max_mana);
-  send_to_char("Vücudundan şifalı bir sıcaklık geçiyor.\n\r",ch);
-     }
-    if (sn == -3)
-    {
+	send_to_char("Vücudundan şifalı bir sıcaklık geçiyor.\n\r",ch);
+	return;
+    case HS_MANA_SMALL:
 	ch->mana += dice(2,8) + mob->level / 3;
 	ch->mana = UMIN(ch->mana,ch->max_mana);
-  send_to_char("Vücudundan şifalı bir sıcaklık geçiyor.\n\r",ch);
-    }
-
-     if (sn < 0)
+	send_to_char("Vücudundan şifalı bir sıcaklık geçiyor.\n\r",ch);
 	return;
+    case HS_SPELL:
+	break;
+    }
 
-    if(spell == spell_remove_curse && obj != NULL)
-    {
-      spell(sn,mob->level,mob,obj,TARGET_OBJ);
-    }
+    if ( obj != NULL )
+	(*hs->spell)( sn, mob->level, mob, obj, TARGET_OBJ );
     else
-    {
-     spell(sn,mob->level,mob,ch,TARGET_CHAR);
-    }
+	(*hs->spell)( sn, mob->level, mob, ch, TARGET_CHAR );
 }
 
+/* Dövüşteki Öfke üyesine şifacının uyguladığı tedaviler. */
+static const struct
+{
+    int         aff;
+    const char *skill;
+    SPELL_FUN  *spell;
+} battle_cures[] =
+{
+    { AFF_BLIND,  "cure blindness", spell_cure_blindness },
+    { AFF_PLAGUE, "cure disease",   spell_cure_disease   },
+    { AFF_POISON, "cure poison",    spell_cure_poison    },
+    { AFF_CURSE,  "remove curse",   spell_remove_curse   },
+    { 0, NULL, NULL }
+};
+
+static void battle_cast( CHAR_DATA *mob, CHAR_DATA *ch, const char *skill, SPELL_FUN *spell )
+{
+    int sn = skill_lookup( skill );
+
+    if ( sn < 0 )
+    {
+	bugf( "heal_battle: '%s' yeteneği bulunamadı.", skill );
+	return;
+    }
+    (*spell)( sn, mob->level, mob, ch, TARGET_CHAR );
+}
 
 void heal_battle(CHAR_DATA *mob, CHAR_DATA *ch )
 {
-    int sn;
+    int i;
+    bool needs = FALSE;
 
+    /* kendi kabalinin şifacısıysa sessizce hiçbir şey yapma */
     if (is_name((char*)cabal_table[ch->cabal].short_name,mob->name) )
 	return;
 
@@ -279,12 +267,15 @@ void heal_battle(CHAR_DATA *mob, CHAR_DATA *ch )
 	return;
        }
 
-    if (!IS_AFFECTED(ch,AFF_BLIND) && !IS_AFFECTED(ch,AFF_PLAGUE)
-	 && !IS_AFFECTED(ch,AFF_POISON) && !IS_AFFECTED(ch,AFF_CURSE) )
+    for ( i = 0; battle_cures[i].skill != NULL; i++ )
+	if ( IS_AFFECTED( ch, battle_cures[i].aff ) )
+	    needs = TRUE;
+
+    if ( !needs )
        {
+	/* etki yok; yine de lanetli eşyalar için 'remove curse' denenir */
 	do_say(mob,"Benim yardımıma ihtiyacın yok evladım. Fakat...");
-	sn = skill_lookup("remove curse");
-	spell_remove_curse(sn,mob->level,mob,ch,TARGET_CHAR);
+	battle_cast( mob, ch, "remove curse", spell_remove_curse );
 	return;
        }
 
@@ -297,26 +288,7 @@ void heal_battle(CHAR_DATA *mob, CHAR_DATA *ch )
 
     WAIT_STATE(ch,PULSE_VIOLENCE);
 
-    if (IS_AFFECTED(ch,AFF_BLIND))
-      {
-       sn = skill_lookup("cure blindness");
-       spell_cure_blindness(sn,mob->level,mob,ch,TARGET_CHAR);
-      }
-
-    if (IS_AFFECTED(ch,AFF_PLAGUE))
-      {
-       sn = skill_lookup("cure disease");
-       spell_cure_disease(sn,mob->level,mob,ch,TARGET_CHAR);
-      }
-    if (IS_AFFECTED(ch,AFF_POISON))
-      {
-       sn = skill_lookup("cure poison");
-       spell_cure_poison(sn,mob->level,mob,ch,TARGET_CHAR);
-      }
-    if (IS_AFFECTED(ch,AFF_CURSE))
-      {
-       sn = skill_lookup("remove curse");
-       spell_remove_curse(sn,mob->level,mob,ch,TARGET_CHAR);
-      }
-    return;
+    for ( i = 0; battle_cures[i].skill != NULL; i++ )
+	if ( IS_AFFECTED( ch, battle_cures[i].aff ) )
+	    battle_cast( mob, ch, battle_cures[i].skill, battle_cures[i].spell );
 }
