@@ -97,10 +97,7 @@ struct material_type
     bool textile_ok;
     bool armor_ok;
     bool weapon_ok;
-    bool potion_ok;
     bool scroll_ok;
-    bool silent_ok;
-    bool swim_ok;
     sh_int weight_pt;
     int decay_pt;
 };
