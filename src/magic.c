@@ -2975,13 +2975,15 @@ else
     act("$n gözlerine vahşi bir bakış alıyor!",victim,NULL,NULL,TO_ROOM);
 }
 
-void spell_gate( int sn, int level, CHAR_DATA *ch, void *vo,int target )
+/*
+ * Işınlanma büyülerinde (gate, astral walk, mist walk, solar flight, helical
+ * flow) hedef uygun mu? level_margin: kurbanın seviyesi level + margin'i
+ * geçemez. Kurbanın kurtarış zarı bir kez atılır; görev yaratığı denetimi
+ * yalnızca oyuncu büyücüde (yaratıkta pcdata yoktur).
+ */
+static bool can_travel_to( CHAR_DATA *ch, CHAR_DATA *victim, int level, int level_margin )
 {
-    CHAR_DATA *victim;
-    bool gate_pet;
-
-
-    if ( ( victim = get_char_world( ch, target_name ) ) == NULL
+    if ( victim == NULL
     ||   victim == ch
     ||   victim->in_room == NULL
     ||   !can_see_room(ch,victim->in_room)
@@ -2990,40 +2992,58 @@ void spell_gate( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     ||   IS_SET(victim->in_room->room_flags, ROOM_SOLITARY)
     ||   IS_SET(ch->in_room->room_flags, ROOM_NOSUMMON)
     ||   IS_SET(victim->in_room->room_flags, ROOM_NOSUMMON)
-    ||   victim->level >= level + 3
+    ||   victim->level >= level + level_margin
     ||   saves_spell(level,victim,DAM_OTHER)
-/*    ||   (!IS_NPC(victim) && victim->level >= LEVEL_HERO)  * NOT trust */
     ||   (IS_NPC(victim) && is_safe_nomessage(ch, victim) && IS_SET(victim->imm_flags,IMM_SUMMON))
     ||   (!IS_NPC(victim) && is_safe_nomessage(ch, victim) && IS_SET(victim->act,PLR_NOSUMMON))
     ||   (!IS_NPC(victim) && ch->in_room->area != victim->in_room->area )
-    ||   (IS_NPC(victim) && (victim->pIndexData->vnum == ch->pcdata->questmob))
-    ||   (IS_NPC(victim) && saves_spell( level, victim,DAM_OTHER) ) )
+    ||   (IS_NPC(victim) && !IS_NPC(ch) && victim->pIndexData->vnum == ch->pcdata->questmob) )
+	return FALSE;
+    return TRUE;
+}
+
+/*
+ * Büyücüyü (with_pet ise aynı odadaki evcil hayvanını da) hedef odaya taşır;
+ * ayrılış/varış mesajları her ikisi için de gösterilir.
+ */
+static void travel_to( CHAR_DATA *ch, ROOM_INDEX_DATA *to, const char *leave_msg,
+		       const char *self_msg, const char *arrive_msg, bool with_pet )
+{
+    CHAR_DATA *pet = ( with_pet && ch->pet != NULL && ch->pet->in_room == ch->in_room )
+	? ch->pet : NULL;
+
+    act( leave_msg, ch, NULL, NULL, TO_ROOM );
+    send_to_char( self_msg, ch );
+    char_from_room( ch );
+    char_to_room( ch, to );
+    act( arrive_msg, ch, NULL, NULL, TO_ROOM );
+    do_look( ch, "auto" );
+
+    if ( pet != NULL )
+    {
+	act( leave_msg, pet, NULL, NULL, TO_ROOM );
+	send_to_char( self_msg, pet );
+	char_from_room( pet );
+	char_to_room( pet, to );
+	act( arrive_msg, pet, NULL, NULL, TO_ROOM );
+	do_look( pet, "auto" );
+    }
+}
+
+void spell_gate( int sn, int level, CHAR_DATA *ch, void *vo,int target )
+{
+    CHAR_DATA *victim = get_char_world( ch, target_name );
+
+    if ( !can_travel_to( ch, victim, level, 3 ) )
     {
 	send_to_char( "Başaramadın.\n\r", ch );
 	return;
     }
-    if (ch->pet != NULL && ch->in_room == ch->pet->in_room)
-	gate_pet = TRUE;
-    else
-	gate_pet = FALSE;
 
-    act("$n bir geçide girerek kayboluyor.",ch,NULL,NULL,TO_ROOM);
-    send_to_char("Bir geçide girerek kayboluyorsun.\n\r",ch);
-    char_from_room(ch);
-    char_to_room(ch,victim->in_room);
-
-    act("$n bir geçitten çıkıyor.",ch,NULL,NULL,TO_ROOM);
-    do_look(ch,"auto");
-
-    if (gate_pet)
-    {
-	act("$n bir geçide girerek kayboluyor.",ch->pet,NULL,NULL,TO_ROOM);
-	send_to_char("Bir geçide girerek kayboluyorsun.\n\r",ch->pet);
-	char_from_room(ch->pet);
-	char_to_room(ch->pet,victim->in_room);
-	act("$n bir geçitten çıkıyor.",ch->pet,NULL,NULL,TO_ROOM);
-	do_look(ch->pet,"auto");
-    }
+    travel_to( ch, victim->in_room,
+	"$n bir geçide girerek kayboluyor.",
+	"Bir geçide girerek kayboluyorsun.\n\r",
+	"$n bir geçitten çıkıyor.", TRUE );
 }
 
 
@@ -4453,12 +4473,8 @@ void spell_summon( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     ||   (!IS_NPC(victim) && is_safe_nomessage(ch,victim) && IS_SET(victim->act,PLR_NOSUMMON))
     ||   (saves_spell( level, victim,DAM_OTHER))
     ||   (ch->in_room->area != victim->in_room->area && !IS_NPC(victim))
-    ||   (IS_NPC(victim) && (victim->pIndexData->vnum == ch->pcdata->questmob))
-    ||   (victim->in_room->exit[0] == NULL &&
-          victim->in_room->exit[1] == NULL &&
-          victim->in_room->exit[2] == NULL &&
-          victim->in_room->exit[3] == NULL &&
-          victim->in_room->exit[4] == NULL && victim->in_room->exit[5] == NULL) )
+    ||   (IS_NPC(victim) && !IS_NPC(ch) && victim->pIndexData->vnum == ch->pcdata->questmob)
+    ||   !room_has_exit( victim->in_room ) )
     {
 	send_to_char( "Başaramadın.\n\r", ch );
 	return;
@@ -4569,19 +4585,17 @@ void spell_word_of_recall( int sn, int level, CHAR_DATA *ch,void *vo,int target)
     ROOM_INDEX_DATA *location;
     int to_room_vnum;
 
-    if ((ch->iclass == 9) && (ch->fighting) && (victim == NULL))
-	{
-    send_to_char( "Onurun anımsama kullanmana izin vermiyor!.\n\r",ch);
-	 return;
-	}
+    if ( victim == NULL )
+	victim = ch;
 
-    if (victim != NULL)
+    /* onuruyla dövüşen samuray anımsama kullanamaz */
+    if ( victim->fighting != NULL && victim->iclass == CLASS_SAMURAI )
     {
-        if  ((victim->fighting) && (victim->iclass == 9))
-	{
-    send_to_char("Bu büyüyü onuruyla dövüşen bir samuraya yapamazsın!.\n\r",ch);
-	 return;
-	}
+	if ( victim == ch )
+	    send_to_char( "Onurun anımsama kullanmana izin vermiyor!.\n\r",ch);
+	else
+	    send_to_char("Bu büyüyü onuruyla dövüşen bir samuraya yapamazsın!.\n\r",ch);
+	return;
     }
 
     if (IS_NPC(victim))
@@ -4594,14 +4608,7 @@ hometown_table[victim->hometown].recall[IS_GOOD(victim)?0:IS_NEUTRAL(victim)?1:I
       send_to_char("Tamamen kayboldun.\n\r",victim);
 	return;
     }
-/*
-    if (victim->desc != NULL &&
-	(current_time - victim->last_fight_time) < FIGHT_DELAY_TIME)
-      {
-	send_to_char("You are too pumped to pray now.\n\r",victim);
-	return;
-      }
-*/
+
     if (IS_SET(victim->in_room->room_flags,ROOM_NO_RECALL) ||
 	IS_AFFECTED(victim,AFF_CURSE) ||
 	IS_RAFFECTED(victim->in_room,AFF_ROOM_CURSE))
@@ -5256,97 +5263,38 @@ void spell_hand_of_undead( int sn, int level, CHAR_DATA *ch, void *vo, int targe
 /* travel via astral plains */
 void spell_astral_walk( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim;
-    bool gate_pet;
-    char buf[512];
+    CHAR_DATA *victim = get_char_world( ch, target_name );
+    char buf[MAX_STRING_LENGTH];
 
-
-    if ( ( victim = get_char_world( ch, target_name ) ) == NULL
-    ||   victim == ch
-    ||   victim->in_room == NULL
-    ||   !can_see_room(ch,victim->in_room)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_SAFE)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_PRIVATE)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_SOLITARY)
-    ||   IS_SET(ch->in_room->room_flags, ROOM_NOSUMMON)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_NOSUMMON)
-    ||   victim->level >= level + 3
-/*    ||   (!IS_NPC(victim) && victim->level >= LEVEL_HERO)  * NOT trust */
-    ||   saves_spell(level,victim,DAM_OTHER)
-    ||   (IS_NPC(victim) && is_safe_nomessage(ch, victim) && IS_SET(victim->imm_flags,IMM_SUMMON))
-    ||   (!IS_NPC(victim) && is_safe_nomessage(ch, victim) && IS_SET(victim->act,PLR_NOSUMMON))
-    ||   (!IS_NPC(victim) && ch->in_room->area != victim->in_room->area )
-    ||   (IS_NPC(victim) && (victim->pIndexData->vnum == ch->pcdata->questmob))
-    ||   (IS_NPC(victim) && saves_spell( level, victim,DAM_OTHER) ) )
+    if ( !can_travel_to( ch, victim, level, 3 ) )
     {
 	send_to_char( "Başaramadın.\n\r", ch );
 	return;
     }
-    if (ch->pet != NULL && ch->in_room == ch->pet->in_room)
-	gate_pet = TRUE;
-    else
-	gate_pet = FALSE;
 
-
-  act("$n bir ışık parlamasıyla yokoluyor!",ch,NULL,NULL,TO_ROOM);
-  snprintf(buf, sizeof(buf),"Bir yıldız yolculuğuyla %s'e gidiyorsun.\n\r",victim->name);
-    send_to_char(buf,ch);
-    char_from_room(ch);
-    char_to_room(ch,victim->in_room);
-
-    act("$n bir ışık parlamasıyla beliriyor!",ch,NULL,NULL,TO_ROOM);
-    do_look(ch,"auto");
-
-    if (gate_pet)
-    {
-      act("$n bir ışık parlamasıyla yokoluyor!",ch->pet,NULL,NULL,TO_ROOM);
-	send_to_char(buf,ch->pet);
-	char_from_room(ch->pet);
-	char_to_room(ch->pet,victim->in_room);
-  act("$n bir ışık parlamasıyla beliriyor!",ch->pet,NULL,NULL,TO_ROOM);
-	do_look(ch->pet,"auto");
-    }
+    snprintf(buf, sizeof(buf),"Bir yıldız yolculuğuyla %s'e gidiyorsun.\n\r",victim->name);
+    travel_to( ch, victim->in_room,
+	"$n bir ışık parlamasıyla yokoluyor!", buf,
+	"$n bir ışık parlamasıyla beliriyor!", TRUE );
 }
 
 
-/* vampire version astral walk */
+/* vampire version astral walk (Karakam da bu büyüye sahip) */
 void spell_mist_walk( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim;
+    CHAR_DATA *victim = get_char_world( ch, target_name );
 
-
-    if ( ( victim = get_char_world( ch, target_name ) ) == NULL
-    ||   victim == ch
-/*    ||   !IS_VAMPIRE(ch) Karakam da bu buyuye sahip */
-    ||   victim->in_room == NULL
-    ||   !can_see_room(ch,victim->in_room)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_SAFE)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_PRIVATE)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_SOLITARY)
-    ||   IS_SET(ch->in_room->room_flags, ROOM_NOSUMMON)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_NOSUMMON)
-    ||   victim->level >= level + 3
-/*    ||   (!IS_NPC(victim) && victim->level >= LEVEL_HERO)  * NOT trust */
-    ||   saves_spell(level,victim,DAM_OTHER)
-    ||   (IS_NPC(victim) && is_safe_nomessage(ch, victim) && IS_SET(victim->imm_flags,IMM_SUMMON))
-    ||   (!IS_NPC(victim) && is_safe_nomessage(ch, victim) && IS_SET(victim->act,PLR_NOSUMMON))
-    ||   (IS_NPC(victim) && (victim->pIndexData->vnum == ch->pcdata->questmob))
-    ||   (!IS_NPC(victim) && ch->in_room->area != victim->in_room->area )
-    ||   (IS_NPC(victim) && saves_spell( level, victim,DAM_OTHER) ) )
+    if ( !can_travel_to( ch, victim, level, 3 ) )
     {
 	send_to_char( "Başaramadın.\n\r", ch );
 	return;
     }
 
-    act("$n gizemli bir buluta girerek yokoluyor!",ch,NULL,NULL,TO_ROOM);
-    send_to_char("Gizemli bir buluta girerek hedefine akıyorsun!.\n\r",ch);
-
-    char_from_room(ch);
-    char_to_room(ch,victim->in_room);
-
-    act("Parlayan sis bulutu sizi içine çekiyor, sonra $n'i açığa çıkarmak için geri çekiliyor!",ch,NULL,NULL,TO_ROOM);
-    do_look(ch,"auto");
-
+    travel_to( ch, victim->in_room,
+	"$n gizemli bir buluta girerek yokoluyor!",
+	"Gizemli bir buluta girerek hedefine akıyorsun!.\n\r",
+	"Parlayan sis bulutu sizi içine çekiyor, sonra $n'i açığa çıkarmak için geri çekiliyor!",
+	FALSE );
 }
 
 /*  Cleric version of astra_walk  */
@@ -5354,44 +5302,23 @@ void spell_solar_flight( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
     CHAR_DATA *victim;
 
-
     if  (time_info.hour > 18 || time_info.hour < 8)
-	{
-    send_to_char("Güneş uçuşu için gün ışığına ihtiyacın var.\n\r",ch);
-	 return;
-	}
+    {
+	send_to_char("Güneş uçuşu için gün ışığına ihtiyacın var.\n\r",ch);
+	return;
+    }
 
-    if ( ( victim = get_char_world( ch, target_name ) ) == NULL
-    ||   victim == ch
-    ||   victim->in_room == NULL
-    ||   !can_see_room(ch,victim->in_room)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_SAFE)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_PRIVATE)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_SOLITARY)
-    ||   IS_SET(ch->in_room->room_flags, ROOM_NOSUMMON)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_NOSUMMON)
-    ||   victim->level >= level + 1
-/*    ||   (!IS_NPC(victim) && victim->level >= LEVEL_HERO)  * NOT trust */
-    ||   saves_spell(level,victim,DAM_OTHER)
-    ||   (IS_NPC(victim) && is_safe_nomessage(ch, victim) && IS_SET(victim->imm_flags,IMM_SUMMON))
-    ||   (!IS_NPC(victim) && is_safe_nomessage(ch, victim) && IS_SET(victim->act,PLR_NOSUMMON))
-    ||   (IS_NPC(victim) && (victim->pIndexData->vnum == ch->pcdata->questmob))
-    ||   (!IS_NPC(victim) && ch->in_room->area != victim->in_room->area )
-    ||   (IS_NPC(victim) && saves_spell( level, victim,DAM_OTHER) ) )
+    victim = get_char_world( ch, target_name );
+    if ( !can_travel_to( ch, victim, level, 1 ) )
     {
 	send_to_char( "Başaramadın.\n\r", ch );
 	return;
     }
 
-    act("$n kör edici bir ışık parlamasıyla yokoluyor!",ch,NULL,NULL,TO_ROOM);
-    send_to_char("Kör edici bir ışık parlamasına karışıyorsun!.\n\r",ch);
-
-    char_from_room(ch);
-    char_to_room(ch,victim->in_room);
-
-    act("$n kör edici bir ışık parlamasıyla beliriyor!",ch,NULL,NULL,TO_ROOM);
-    do_look(ch,"auto");
-
+    travel_to( ch, victim->in_room,
+	"$n kör edici bir ışık parlamasıyla yokoluyor!",
+	"Kör edici bir ışık parlamasına karışıyorsun!.\n\r",
+	"$n kör edici bir ışık parlamasıyla beliriyor!", FALSE );
 }
 
 
@@ -5399,40 +5326,19 @@ void spell_solar_flight( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 /* travel via astral plains */
 void spell_helical_flow( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim;
+    CHAR_DATA *victim = get_char_world( ch, target_name );
 
-
-    if ( ( victim = get_char_world( ch, target_name ) ) == NULL
-    ||   victim == ch
-    ||   victim->in_room == NULL
-    ||   !can_see_room(ch,victim->in_room)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_SAFE)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_PRIVATE)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_SOLITARY)
-    ||   IS_SET(ch->in_room->room_flags, ROOM_NOSUMMON)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_NOSUMMON)
-    ||   victim->level >= level + 3
-/*    ||   (!IS_NPC(victim) && victim->level >= LEVEL_HERO)  * NOT trust */
-    ||   saves_spell(level,victim,DAM_OTHER)
-    ||   (IS_NPC(victim) && is_safe_nomessage(ch, victim) && IS_SET(victim->imm_flags,IMM_SUMMON))
-    ||   (!IS_NPC(victim) && is_safe_nomessage(ch, victim) && IS_SET(victim->act,PLR_NOSUMMON))
-    ||   (IS_NPC(victim) && (victim->pIndexData->vnum == ch->pcdata->questmob))
-    ||   (!IS_NPC(victim) && ch->in_room->area != victim->in_room->area )
-    ||   (IS_NPC(victim) && saves_spell( level, victim,DAM_OTHER) ) )
+    if ( !can_travel_to( ch, victim, level, 3 ) )
     {
 	send_to_char( "Başaramadın.\n\r", ch );
 	return;
     }
 
-    act("$n yükselen bir renk sarmalına dolanarak havaya karışıyor.",ch,NULL,NULL,TO_ROOM);
-    send_to_char("Yükselen bir renk sarmalına dolanarak havaya karışıyor.\n\r",ch);
-
-    char_from_room(ch);
-    char_to_room(ch,victim->in_room);
-
-    act("Bir renk bobini yukarıdan aşağıya iniyor, dağıldığı gibi $n ortaya çıkıyor.",ch,NULL,NULL,TO_ROOM);
-    do_look(ch,"auto");
-
+    travel_to( ch, victim->in_room,
+	"$n yükselen bir renk sarmalına dolanarak havaya karışıyor.",
+	"Yükselen bir renk sarmalına dolanarak havaya karışıyor.\n\r",
+	"Bir renk bobini yukarıdan aşağıya iniyor, dağıldığı gibi $n ortaya çıkıyor.",
+	FALSE );
 }
 
 
