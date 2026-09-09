@@ -880,16 +880,26 @@ static unsigned int *bfs_stamp = NULL;
 static int          *bfs_prev  = NULL;    /* önceki odanın vnum'u */
 static signed char  *bfs_dir   = NULL;    /* önceki odadan gelinen yön */
 static int          *bfs_queue = NULL;
+static int          *bfs_dist  = NULL;    /* başlangıçtan uzaklık */
 static unsigned int  bfs_cur_stamp = 0;
 
-static void bfs_alloc( void )
+static bool bfs_alloc( void )
 {
     if ( bfs_stamp != NULL )
-        return;
+        return TRUE;
     bfs_stamp = (unsigned int *) calloc( BOT_VNUM_MAX + 1, sizeof(unsigned int) );
     bfs_prev  = (int *) calloc( BOT_VNUM_MAX + 1, sizeof(int) );
     bfs_dir   = (signed char *) calloc( BOT_VNUM_MAX + 1, sizeof(signed char) );
     bfs_queue = (int *) calloc( BOT_VNUM_MAX + 1, sizeof(int) );
+    bfs_dist  = (int *) calloc( BOT_VNUM_MAX + 1, sizeof(int) );
+    if ( bfs_stamp == NULL || bfs_prev == NULL || bfs_dir == NULL || bfs_queue == NULL || bfs_dist == NULL )
+    {
+        free( bfs_stamp ); free( bfs_prev ); free( bfs_dir ); free( bfs_queue ); free( bfs_dist );
+        bfs_stamp = NULL; bfs_prev = NULL; bfs_dir = NULL; bfs_queue = NULL; bfs_dist = NULL;
+        bug( "bfs_alloc: bellek yok", 0 );
+        return FALSE;
+    }
+    return TRUE;
 }
 
 /* next odasından room odasına geri dönen bir çıkış var mı? (tek yönlü tuzaklara girme) */
@@ -945,23 +955,54 @@ bool bot_room_passable( CHAR_DATA *ch, ROOM_INDEX_DATA *room, bool allow_cabal )
 }
 
 /*
- * from -> to arası en kısa yol; dirs'e yön dizisi yazar, uzunluğu döndürür.
- * Yol yoksa -1.
+ * Kenar geçilebilir mi? Reddedilirse neden dizgisini döndürür, geçilebilirse NULL.
+ * Hedef oda (o->to) geçilebilirlik kuralından muaftır (oraya varmak yeter).
  */
-int bot_find_path( CHAR_DATA *ch, ROOM_INDEX_DATA *from, ROOM_INDEX_DATA *to,
-                   sh_int *dirs, int max, bool allow_cabal )
+static const char *bfs_edge_reject( CHAR_DATA *ch, const struct bot_bfs *o, ROOM_INDEX_DATA *room,
+                                    EXIT_DATA *pexit, ROOM_INDEX_DATA *next, ROOM_INDEX_DATA *start )
 {
-    int head = 0, tail = 0;
-    int len, v, d;
+    if ( o->raw )
+    {
+        if ( o->block_closed && IS_SET( pexit->exit_info, EX_CLOSED ) )
+            return "kapalı";
+        return NULL;
+    }
+    if ( IS_SET( pexit->exit_info, EX_LOCKED ) && !IS_AFFECTED( ch, AFF_PASS_DOOR ) )
+        return "kilitli";
+    if ( next == o->to )
+        return NULL;
+    if ( o->same_area && next->area != start->area )
+        return "başka bölge";
+    if ( !bot_room_passable( ch, next, o->allow_cabal ) )
+        return "geçilemez";
+    /* geri dönüşü olmayan çıkışlardan geçme; kabal karargâhları tek yönlü iniş
+       olabilir (çıkış portalla), kabal işi için oraya girmeye izin verilir */
+    if ( !bot_exit_back( next, room )
+      && !( o->allow_cabal && next->area != NULL && IS_SET( next->area->area_flag, AREA_CABAL ) ) )
+        return "geri dönüşsüz";
+    return NULL;
+}
 
-    if ( from == NULL || to == NULL || ch == NULL )
+/*
+ * Genişlik öncelikli gezinti çekirdeği. o->to verilmişse en kısa yolun
+ * uzunluğunu döndürür (dirs != NULL ise yön dizisini yazar; max'ı aşarsa -1),
+ * yol yoksa -1. o->to NULL ise gezilen oda sayısını döndürür. Her durumda
+ * o->visited ve o->first_dir doldurulur.
+ */
+int bot_bfs( CHAR_DATA *ch, ROOM_INDEX_DATA *from, struct bot_bfs *o, sh_int *dirs, int max )
+{
+    int head = 0, tail = 0, d, v;
+
+    o->visited = 0;
+    o->first_dir = -1;
+    if ( from == NULL || ch == NULL || from->vnum < 0 || from->vnum > BOT_VNUM_MAX )
         return -1;
-    if ( from == to )
+    if ( o->to != NULL && ( o->to->vnum < 0 || o->to->vnum > BOT_VNUM_MAX ) )
+        return -1;
+    if ( o->to == from )
         return 0;
-    if ( to->vnum < 0 || from->vnum < 0 )
+    if ( !bfs_alloc() )
         return -1;
-
-    bfs_alloc();
     if ( ++bfs_cur_stamp == 0 )
     {
         memset( bfs_stamp, 0, ( BOT_VNUM_MAX + 1 ) * sizeof(unsigned int) );
@@ -970,57 +1011,87 @@ int bot_find_path( CHAR_DATA *ch, ROOM_INDEX_DATA *from, ROOM_INDEX_DATA *to,
 
     bfs_stamp[from->vnum] = bfs_cur_stamp;
     bfs_prev[from->vnum]  = -1;
+    bfs_dist[from->vnum]  = 0;
     bfs_queue[tail++]     = from->vnum;
 
     while ( head < tail )
     {
         ROOM_INDEX_DATA *room = get_room_index( bfs_queue[head++] );
+        int dist;
 
         if ( room == NULL )
+            continue;
+        o->visited++;
+        dist = bfs_dist[room->vnum];
+        if ( o->visit != NULL && !o->visit( room, dist, o->visit_ctx ) )
+            break;
+        if ( o->max_depth > 0 && dist >= o->max_depth )
             continue;
         for ( d = 0; d < 6; d++ )
         {
             EXIT_DATA *pexit = room->exit[d];
             ROOM_INDEX_DATA *next;
+            const char *why;
 
             if ( pexit == NULL || ( next = pexit->u1.to_room ) == NULL )
                 continue;
-            if ( next->vnum < 0 )
+            if ( next->vnum < 0 || next->vnum > BOT_VNUM_MAX )
                 continue;
             if ( bfs_stamp[next->vnum] == bfs_cur_stamp )
                 continue;
-            if ( IS_SET( pexit->exit_info, EX_LOCKED ) && !IS_AFFECTED( ch, AFF_PASS_DOOR ) )
+            if ( ( why = bfs_edge_reject( ch, o, room, pexit, next, from ) ) != NULL )
+            {
+                bfs_stamp[next->vnum] = bfs_cur_stamp;      /* aynı sınır bir kez raporlanır */
+                if ( o->reject != NULL )
+                    o->reject( room, d, next, why, o->reject_ctx );
                 continue;
-            if ( next != to && !bot_room_passable( ch, next, allow_cabal ) )
-                continue;
-            /* geri dönüşü olmayan çıkışlardan geçme; kabal karargâhları tek yönlü iniş
-               olabilir (çıkış portalla), kabal işi için oraya girmeye izin verilir */
-            if ( !bot_exit_back( next, room )
-              && !( allow_cabal && next->area != NULL && IS_SET( next->area->area_flag, AREA_CABAL ) ) )
-                continue;
+            }
             bfs_stamp[next->vnum] = bfs_cur_stamp;
             bfs_prev[next->vnum]  = room->vnum;
             bfs_dir[next->vnum]   = (signed char) d;
-            if ( next == to )
+            bfs_dist[next->vnum]  = dist + 1;
+            if ( next == o->to )
             {
-                /* geriye doğru yolu kur */
-                len = 0;
-                for ( v = to->vnum; v != from->vnum && v >= 0; v = bfs_prev[v] )
-                    len++;
-                if ( len > max )
-                    return -1;
+                int len = dist + 1;
+
+                for ( v = next->vnum; bfs_prev[v] != from->vnum; v = bfs_prev[v] )
+                    ;
+                o->first_dir = bfs_dir[v];
+                if ( dirs != NULL )
                 {
                     int pos = len;
-                    for ( v = to->vnum; v != from->vnum && v >= 0; v = bfs_prev[v] )
+
+                    if ( len > max )
+                        return -1;
+                    for ( v = next->vnum; v != from->vnum && v >= 0; v = bfs_prev[v] )
                         dirs[--pos] = bfs_dir[v];
                 }
                 return len;
             }
+            if ( o->max_rooms > 0 && tail >= o->max_rooms )
+                continue;
             if ( tail <= BOT_VNUM_MAX )
                 bfs_queue[tail++] = next->vnum;
         }
     }
-    return -1;
+    return o->to != NULL ? -1 : o->visited;
+}
+
+/*
+ * from -> to arası en kısa yol; dirs'e yön dizisi yazar, uzunluğu döndürür.
+ * Yol yoksa -1.
+ */
+int bot_find_path( CHAR_DATA *ch, ROOM_INDEX_DATA *from, ROOM_INDEX_DATA *to,
+                   sh_int *dirs, int max, bool allow_cabal )
+{
+    struct bot_bfs o;
+
+    if ( to == NULL )
+        return -1;
+    memset( &o, 0, sizeof(o) );
+    o.to = to;
+    o.allow_cabal = allow_cabal;
+    return bot_bfs( ch, from, &o, dirs, max );
 }
 
 bool bot_set_travel( BOT_DATA *bot, int vnum, int after )
@@ -1349,6 +1420,24 @@ void bot_update( void )
 /* ---------------------------------------------------------------------
  * ölümsüz komutu: botlar
  * ------------------------------------------------------------------ */
+struct botlar_border
+{
+    CHAR_DATA * viewer;
+    int         shown;
+};
+
+/* 'botlar yol' tanısı: BFS'in reddettiği kenarlar */
+static void botlar_border_reject( ROOM_INDEX_DATA *room, int dir, ROOM_INDEX_DATA *next,
+                                  const char *why, void *vctx )
+{
+    struct botlar_border *ctx = (struct botlar_border *) vctx;
+
+    if ( ctx->shown++ < 15 )
+        printf_to_char( ctx->viewer, "  sınır: %d -> %s -> %d (%s) sektör %d bayrak %ld: %s\n\r",
+                        room->vnum, dir_name[dir], next->vnum, next->name, next->sector_type,
+                        next->room_flags, why );
+}
+
 void do_botlar( CHAR_DATA *ch, char *argument )
 {
     bool kabal = FALSE;
@@ -1490,40 +1579,18 @@ void do_botlar( CHAR_DATA *ch, char *argument )
         printf_to_char( ch, "%d -> %d: yol %d\n\r", walker->in_room->vnum, to->vnum, len );
         if ( len < 0 )
         {
-            /* erişilebilen bileşeni gez, reddedilen sınır odalarını yaz */
-            int shown = 0, visited = 0;
-            bot_find_path( walker, walker->in_room, to, dirs, BOT_MAX_PATH, kabal );
-            {
-                int q[4096], qh = 0, qt = 0;
-                static unsigned char seen[32768];
-                memset( seen, 0, sizeof(seen) );
-                q[qt++] = walker->in_room->vnum; seen[walker->in_room->vnum] = 1;
-                while ( qh < qt && qt < 4000 )
-                {
-                    ROOM_INDEX_DATA *r = get_room_index( q[qh++] );
-                    int di;
-                    if ( r == NULL ) continue;
-                    visited++;
-                    for ( di = 0; di < 6; di++ )
-                    {
-                        EXIT_DATA *px = r->exit[di];
-                        ROOM_INDEX_DATA *nx;
-                        if ( px == NULL || ( nx = px->u1.to_room ) == NULL || nx->vnum < 0 || seen[nx->vnum] )
-                            continue;
-                        seen[nx->vnum] = 1;
-                        if ( IS_SET( px->exit_info, EX_LOCKED ) || !bot_room_passable( walker, nx, kabal ) )
-                        {
-                            if ( shown++ < 15 )
-                                printf_to_char( ch, "  sınır: %d -> %s -> %d (%s) sektör %d bayrak %ld%s\n\r",
-                                                r->vnum, dir_name[di], nx->vnum, nx->name, nx->sector_type,
-                                                nx->room_flags, IS_SET( px->exit_info, EX_LOCKED ) ? " KİLİTLİ" : "" );
-                            continue;
-                        }
-                        q[qt++] = nx->vnum;
-                    }
-                }
-                printf_to_char( ch, "  erişilebilen oda sayısı: %d\n\r", visited );
-            }
+            /* aynı BFS ile erişilebilen bileşeni gez, reddedilen sınır odalarını yaz */
+            struct bot_bfs o;
+            struct botlar_border ctx;
+
+            memset( &o, 0, sizeof(o) );
+            ctx.viewer = ch;
+            ctx.shown  = 0;
+            o.allow_cabal = kabal;
+            o.reject      = botlar_border_reject;
+            o.reject_ctx  = &ctx;
+            bot_bfs( walker, walker->in_room, &o, NULL, 0 );
+            printf_to_char( ch, "  erişilebilen oda sayısı: %d\n\r", o.visited );
         }
         for ( d = 0; d < len && d < 30; d++ )
             printf_to_char( ch, "%s ", dir_name[dirs[d]] );

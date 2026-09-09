@@ -61,6 +61,7 @@
 #include <ctype.h>
 #include <inttypes.h>
 #include "merc.h"
+#include "bot.h"
 
 /* command procedures needed */
 DECLARE_DO_FUN(do_look		);
@@ -350,60 +351,6 @@ void do_settraps( CHAR_DATA *ch, char *argument )
 
 extern const char* dir_name[];
 
-struct hash_link
-{
-  int			key;
-  struct hash_link	*next;
-  void			*data;
-};
-
-struct hash_header
-{
-  int			rec_size;
-  int			table_size;
-  int			*keylist, klistsize, klistlen; /* this is really lame,
-							  AMAZINGLY lame */
-  struct hash_link	**buckets;
-};
-
-#define WORLD_SIZE	32700
-#define	HASH_KEY(ht,key)((((unsigned int)(key))*17)%(ht)->table_size)
-
-
-
-struct hunting_data
-{
-  char			*name;
-  struct char_data	**victim;
-};
-
-struct room_q
-{
-  int		room_nr;
-  struct room_q	*next_q;
-};
-
-struct nodes
-{
-  int	visited;
-  int	ancestor;
-};
-
-#define IS_DIR		(get_room_index(q_head->room_nr)->exit[i])
-#define GO_OK		(!IS_SET( IS_DIR->exit_info, EX_CLOSED ))
-#define GO_OK_SMARTER	1
-
-
-
-void init_hash_table(struct hash_header	*ht,int rec_size,int table_size)
-{
-  ht->rec_size	= rec_size;
-  ht->table_size= table_size;
-  ht->buckets	= (struct hash_link**)calloc((size_t) table_size, sizeof(struct hash_link *));
-  ht->keylist	= (int*)malloc(sizeof(ht->keylist)*(ht->klistsize=128));
-  ht->klistlen	= 0;
-}
-
 CHAR_DATA *get_char_area( CHAR_DATA *ch, char *argument )
 {
    char arg[MAX_INPUT_LENGTH];
@@ -415,14 +362,11 @@ CHAR_DATA *get_char_area( CHAR_DATA *ch, char *argument )
      return NULL;
 
    number = number_argument( argument, arg );
-/*    if (arg[0] == NULL) return NULL; */
    if (arg[0] == '\0') return NULL;
    count = 0;
 
    if( ( ach = get_char_room( ch, argument ) ) != NULL )
      return ach;
-
-
 
    for( ach = char_list; ach != NULL; ach = ach->next )
    {
@@ -435,214 +379,30 @@ CHAR_DATA *get_char_area( CHAR_DATA *ch, char *argument )
    return NULL;
 }
 
-
-void destroy_hash_table(struct hash_header *ht,void (*gman)(void *))
-{
-  int			i;
-  struct hash_link	*scan,*temp;
-
-  for(i=0;i<ht->table_size;i++)
-    for(scan=ht->buckets[i];scan;)
-      {
-	temp = scan->next;
-	(*gman)(scan->data);
-	free(scan);
-	scan = temp;
-      }
-  free(ht->buckets);
-  free(ht->keylist);
-}
-
-void _hash_enter(struct hash_header *ht,int key,void *data)
-{
-  /* precondition: there is no entry for <key> yet */
-  struct hash_link	*temp;
-  int			i;
-
-  temp		= (struct hash_link *)malloc(sizeof(struct hash_link));
-  temp->key	= key;
-  temp->next	= ht->buckets[HASH_KEY(ht,key)];
-  temp->data	= data;
-  ht->buckets[HASH_KEY(ht,key)] = temp;
-  if(ht->klistlen>=ht->klistsize)
-    {
-      ht->keylist = (int*)realloc(ht->keylist,sizeof(*ht->keylist)*
-				   (ht->klistsize*=2));
-    }
-  for(i=ht->klistlen;i>=0;i--)
-    {
-      if(ht->keylist[i-1]<key)
-	{
-	  ht->keylist[i] = key;
-	  break;
-	}
-      ht->keylist[i] = ht->keylist[i-1];
-    }
-  ht->klistlen++;
-}
-
-
-void *hash_find(struct hash_header *ht,int key)
-{
-  struct hash_link *scan;
-
-  scan = ht->buckets[HASH_KEY(ht,key)];
-
-  while(scan && scan->key!=key)
-    scan = scan->next;
-
-  return scan ? scan->data : NULL;
-}
-
-int hash_enter(struct hash_header *ht,int key,void *data)
-{
-  void *temp;
-
-  temp = hash_find(ht,key);
-  if(temp) return 0;
-
-  _hash_enter(ht,key,data);
-  return 1;
-}
-
-
-
-int exit_ok( EXIT_DATA *pexit )
-{
-  ROOM_INDEX_DATA *to_room;
-
-  if ( ( pexit == NULL )
-  ||   ( to_room = pexit->u1.to_room ) == NULL )
-    return 0;
-
-  return 1;
-}
-
-void donothing(void *pDummy)
-{
-  return;
-}
-
+/*
+ * in_room_vnum'dan out_room_vnum'a giden en kısa yolun ilk adımı (yön) ya da -1.
+ * depth < 0: kapalı kapılardan da geçilir, |depth| en fazla kuyruğa alınan oda;
+ * in_zone: yalnızca başlangıç bölgesinde gezilir. Yaratık takibi olduğundan
+ * botların geçilebilirlik/kilit kuralı uygulanmaz (bot_bfs raw kipi).
+ */
 int find_path( int in_room_vnum, int out_room_vnum, CHAR_DATA *ch,
 	       int depth, int in_zone )
 {
-  struct room_q		*tmp_q, *q_head, *q_tail;
-  struct hash_header	x_room;
-  int			i, tmp_room, count=0, thru_doors;
-  ROOM_INDEX_DATA	*herep;
-  ROOM_INDEX_DATA	*startp;
-  EXIT_DATA		*exitp;
+  struct bot_bfs o;
+  ROOM_INDEX_DATA *from = get_room_index( in_room_vnum );
+  ROOM_INDEX_DATA *to   = get_room_index( out_room_vnum );
 
-  if ( depth <0 )
-    {
-      thru_doors = TRUE;
-      depth = -depth;
-    }
-  else
-    {
-      thru_doors = FALSE;
-    }
-
-  startp = get_room_index( in_room_vnum );
-
-  init_hash_table( &x_room, sizeof(int), 2048 );
-  hash_enter( &x_room, in_room_vnum, (void *) - 1 );
-
-  /* initialize queue */
-  q_head = (struct room_q *) malloc(sizeof(struct room_q));
-  q_tail = q_head;
-  q_tail->room_nr = in_room_vnum;
-  q_tail->next_q = 0;
-
-  while(q_head)
-    {
-      herep = get_room_index( q_head->room_nr );
-      /* for each room test all directions */
-      if (herep==NULL) fprintf(stderr,"BUG:  Null herep in hunt.c, room #%d",q_head->room_nr);
-      if( herep && (herep->area == startp->area || !in_zone) )
-		{
-	  /* only look in this zone...
-	     saves cpu time and  makes world safer for players  */
-	  for( i = 0; i <= 5; i++ )
-	    {
-	      exitp = herep->exit[i];
-	      if( exit_ok(exitp) && ( thru_doors ? GO_OK_SMARTER : GO_OK ) )
-		{
-		  /* next room */
-		  tmp_room = herep->exit[i]->u1.to_room->vnum;
-		  if( tmp_room != out_room_vnum )
-		    {
-		      /* shall we add room to queue ?
-			 count determines total breadth and depth */
-		      if( !hash_find( &x_room, tmp_room )
-			 && ( count < depth ) )
-			/* && !IS_SET( RM_FLAGS(tmp_room), DEATH ) ) */
-			{
-			  count++;
-			  /* mark room as visted and put on queue */
-
-			  tmp_q = (struct room_q *)
-			    malloc(sizeof(struct room_q));
-			  tmp_q->room_nr = tmp_room;
-			  tmp_q->next_q = 0;
-			  q_tail->next_q = tmp_q;
-			  q_tail = tmp_q;
-
-			  /* ancestor for first layer is the direction */
-			  hash_enter( &x_room, tmp_room,
-				     ((intptr_t)hash_find(&x_room,q_head->room_nr)== -1) ? (void*)(intptr_t)(i+1) : hash_find(&x_room,q_head->room_nr));
-			}
-		    }
-		  else
-		    {
-		      /* have reached our goal so free queue */
-		      tmp_room = q_head->room_nr;
-		      for(;q_head;q_head = tmp_q)
-			{
-			  tmp_q = q_head->next_q;
-			  free(q_head);
-			}
-		      /* return direction if first layer */
-		      if ((intptr_t)hash_find(&x_room,tmp_room)==-1)
-			{
-			  if (x_room.buckets)
-			    {
-			      /* junk left over from a previous track */
-			      destroy_hash_table(&x_room, donothing);
-			    }
-			  return(i);
-			}
-		      else
-			{
-			  /* else return the ancestor */
-			  int i;
-
-			  i = (intptr_t)hash_find(&x_room,tmp_room);
-			  if (x_room.buckets)
-			    {
-			      /* junk left over from a previous track */
-			      destroy_hash_table(&x_room, donothing);
-			    }
-			  return( -1+i);
-			}
-		    }
-		}
-	    }
-	}
-
-      /* free queue head and point to next entry */
-      tmp_q = q_head->next_q;
-      free(q_head);
-      q_head = tmp_q;
-    }
-
-  /* couldn't find path */
-  if( x_room.buckets )
-    {
-      /* junk left over from a previous track */
-      destroy_hash_table( &x_room, donothing );
-    }
-  return -1;
+  if ( from == NULL || to == NULL || ch == NULL || from == to )
+    return -1;
+  memset( &o, 0, sizeof(o) );
+  o.to           = to;
+  o.raw          = TRUE;
+  o.block_closed = depth >= 0;
+  o.max_rooms    = depth < 0 ? -depth : depth;
+  o.same_area    = in_zone != 0;
+  if ( bot_bfs( ch, from, &o, NULL, 0 ) < 0 )
+    return -1;
+  return o.first_dir;
 }
 
 

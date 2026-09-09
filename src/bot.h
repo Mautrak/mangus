@@ -90,6 +90,32 @@
 #define BOT_TOWN_FOUNTAIN   (L)
 #define BOT_TOWN_UPGRADE    (M)
 
+/*
+ * Oda grafiğinde genişlik öncelikli gezinti (tek çekirdek: yol bulma, yakın oda
+ * taraması, avcı yaratık takibi ve tanı çıktısı). Bkz. bot_bfs().
+ */
+typedef bool BOT_BFS_VISIT ( ROOM_INDEX_DATA *room, int dist, void *ctx );
+typedef void BOT_BFS_REJECT( ROOM_INDEX_DATA *room, int dir, ROOM_INDEX_DATA *next,
+                             const char *why, void *ctx );
+
+struct bot_bfs
+{
+    ROOM_INDEX_DATA *to;          /* hedef oda; NULL ise gezinti */
+    int         max_depth;        /* 0: sınırsız */
+    int         max_rooms;        /* 0: sınırsız (kuyruğa alınan oda sayısı) */
+    bool        same_area;        /* başlangıç bölgesinin dışına açılma */
+    bool        allow_cabal;      /* bot_room_passable: kabal bölgesine gir */
+    bool        raw;              /* yaratık takibi: geçilebilirlik/kilit kuralı yok */
+    bool        block_closed;     /* raw: kapalı kapıdan geçme */
+    BOT_BFS_VISIT  *visit;        /* her oda için (başlangıç dahil); FALSE: dur */
+    void *      visit_ctx;
+    BOT_BFS_REJECT *reject;       /* reddedilen kenar (tanı) */
+    void *      reject_ctx;
+    /* sonuç */
+    int         visited;          /* gezilen oda sayısı */
+    int         first_dir;        /* hedefe ilk adım (-1: yok) */
+};
+
 struct bot_area_mem
 {
     AREA_DATA * area;
@@ -292,6 +318,8 @@ const char *bot_state_name  ( int state );
 void    bot_queue_reply     ( BOT_DATA *bot, const char *to, int channel, int delay, const char *text );
 int     bot_find_path       ( CHAR_DATA *ch, ROOM_INDEX_DATA *from, ROOM_INDEX_DATA *to,
                               sh_int *dirs, int max, bool allow_cabal );
+int     bot_bfs             ( CHAR_DATA *ch, ROOM_INDEX_DATA *from, struct bot_bfs *o,
+                              sh_int *dirs, int max );
 bool    bot_room_passable   ( CHAR_DATA *ch, ROOM_INDEX_DATA *room, bool allow_cabal );
 bool    bot_exit_back       ( ROOM_INDEX_DATA *next, ROOM_INDEX_DATA *room );
 bool    bot_set_travel      ( BOT_DATA *bot, int vnum, int after );

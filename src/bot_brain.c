@@ -178,69 +178,6 @@ static bool room_has_aggressor( CHAR_DATA *ch )
 }
 
 /* ---------------------------------------------------------------------
- * yakın oda taraması (sınırlı BFS)
- * ------------------------------------------------------------------ */
-#define NEAR_MAX 500
-static ROOM_INDEX_DATA *near_room[NEAR_MAX];
-static int              near_dist[NEAR_MAX];
-static unsigned int    *near_stamp = NULL;
-static unsigned int     near_cur = 0;
-
-static int bot_near_rooms( CHAR_DATA *ch, int max_depth, bool same_area )
-{
-    int head = 0, tail = 0, d;
-    ROOM_INDEX_DATA *start = ch->in_room;
-
-    if ( near_stamp == NULL )
-        near_stamp = (unsigned int *) calloc( 32768, sizeof(unsigned int) );
-    if ( ++near_cur == 0 )
-    {
-        memset( near_stamp, 0, 32768 * sizeof(unsigned int) );
-        near_cur = 1;
-    }
-    if ( start == NULL || start->vnum < 0 )
-        return 0;
-
-    near_room[tail] = start;
-    near_dist[tail] = 0;
-    tail++;
-    near_stamp[start->vnum] = near_cur;
-
-    while ( head < tail && tail < NEAR_MAX )
-    {
-        ROOM_INDEX_DATA *room = near_room[head];
-        int dist = near_dist[head];
-
-        head++;
-        if ( dist >= max_depth )
-            continue;
-        for ( d = 0; d < 6 && tail < NEAR_MAX; d++ )
-        {
-            EXIT_DATA *pexit = room->exit[d];
-            ROOM_INDEX_DATA *next;
-
-            if ( pexit == NULL || ( next = pexit->u1.to_room ) == NULL )
-                continue;
-            if ( next->vnum < 0 || near_stamp[next->vnum] == near_cur )
-                continue;
-            if ( IS_SET( pexit->exit_info, EX_LOCKED ) )
-                continue;
-            if ( same_area && next->area != start->area )
-                continue;
-            if ( !bot_room_passable( ch, next, FALSE ) )
-                continue;
-            if ( !bot_exit_back( next, room ) )
-                continue;
-            near_stamp[next->vnum] = near_cur;
-            near_room[tail] = next;
-            near_dist[tail] = dist + 1;
-            tail++;
-        }
-    }
-    return tail;
-}
-
-/* ---------------------------------------------------------------------
  * açılış
  * ------------------------------------------------------------------ */
 static void add_buff( const char *name )
@@ -1042,15 +979,40 @@ static ROOM_INDEX_DATA *bot_recall_spawn( BOT_DATA *bot )
 }
 
 /* bölgede henüz uğranmamış en yakın oda (harita bilgisi) */
+#define EXPLORE_DEPTH 30
+#define EXPLORE_ROOMS 500
+
+struct explore_ctx
+{
+    BOT_DATA *          bot;
+    ROOM_INDEX_DATA *   found;
+};
+
+static bool explore_visit( ROOM_INDEX_DATA *room, int dist, void *vctx )
+{
+    struct explore_ctx *ctx = (struct explore_ctx *) vctx;
+
+    if ( dist == 0 || bot_was_visited( ctx->bot, room ) )
+        return TRUE;
+    ctx->found = room;
+    return FALSE;                                 /* en yakını bulundu: dur */
+}
+
 static ROOM_INDEX_DATA *bot_explore_target( BOT_DATA *bot )
 {
-    CHAR_DATA *ch = bot->ch;
-    int n = bot_near_rooms( ch, 30, TRUE ), i;
+    struct bot_bfs o;
+    struct explore_ctx ctx;
 
-    for ( i = 1; i < n; i++ )
-        if ( !bot_was_visited( bot, near_room[i] ) )
-            return near_room[i];
-    return NULL;
+    memset( &o, 0, sizeof(o) );
+    ctx.bot   = bot;
+    ctx.found = NULL;
+    o.max_depth = EXPLORE_DEPTH;
+    o.max_rooms = EXPLORE_ROOMS;
+    o.same_area = TRUE;
+    o.visit     = explore_visit;
+    o.visit_ctx = &ctx;
+    bot_bfs( bot->ch, bot->ch->in_room, &o, NULL, 0 );
+    return ctx.found;
 }
 
 /* ---------------------------------------------------------------------
