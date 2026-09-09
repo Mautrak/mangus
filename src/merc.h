@@ -3278,7 +3278,7 @@ int obj_random_extra_flag  (void);
 int obj_random_weapon_flag  (void);
 void obj_random_name (OBJ_DATA *obj);
 int find_material_index (char *material_name);
-char *obj_random_wand_potion_spell  (void);
+const char *obj_random_wand_potion_spell  (void);
 void obj_random_material (OBJ_DATA *obj);
 int find_material_decay_days (OBJ_DATA *obj);
 
