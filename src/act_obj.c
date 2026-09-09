@@ -122,6 +122,35 @@ static bool all_arg_matches( char *suffix, OBJ_DATA *obj )
     return suffix == NULL || is_name( suffix, obj->name );
 }
 
+/* Limitli eşyanın yönelim bayrağı karakterle çelişiyor mu? */
+static bool limited_obj_align_clash( CHAR_DATA *ch, OBJ_DATA *obj )
+{
+    return ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IS_EVIL(ch)    )
+	|| ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IS_GOOD(ch)    )
+	|| ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IS_NEUTRAL(ch) );
+}
+
+/*
+ * Limitli eşya alma politikası (al / sürükle): yönelim uyuşmazlığı ya da
+ * oyuncu katlini kabul etmeyen karakter eşyayı düşürür; sonra kota sorulur.
+ * Ölümsüz için bütün denetimler atlanır (limit_kontrol de ölümsüze dokunmaz).
+ */
+static bool limited_obj_take_ok( CHAR_DATA *ch, OBJ_DATA *obj )
+{
+    if ( obj->pIndexData->limit == -1 || IS_IMMORTAL(ch) )
+	return TRUE;
+
+    if ( limited_obj_align_clash( ch, obj )
+    ||   ( IS_PC(ch) && ch->pcdata->oyuncu_katli == 0 ) )
+    {
+	act( "$p tarafından çarpıldın ve onu yere düşürdün.", ch, obj, NULL, TO_CHAR );
+	act( "$n $p tarafından çarpıldı ve onu yere düşürdü.",  ch, obj, NULL, TO_ROOM );
+	return FALSE;
+    }
+
+    return limit_kontrol( ch, obj );
+}
+
 /* RT part of the corpse looting code */
 
 bool can_loot(CHAR_DATA *ch, OBJ_DATA *obj)
@@ -145,32 +174,9 @@ void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container )
 		send_to_char( "Onu alamazsın.\n\r", ch );
 		return;
 	}
-	if (obj->pIndexData->limit != -1)
-	{
-		if ((( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IS_EVIL(ch)    )
-		||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IS_GOOD(ch)    )
-		||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IS_NEUTRAL(ch) ) )
-		&& !IS_IMMORTAL(ch))
-		{
-			act( "$p tarafından çarpıldın ve onu yere düşürdün.", ch, obj, NULL, TO_CHAR );
-			act( "$n $p tarafından çarpıldı ve onu yere düşürdü.",  ch, obj, NULL, TO_ROOM );
-			return;
-		}
-		if(IS_PC(ch))
-		{
-			// oyuncu katlini kabul etmeyen karakter limit esya alamasin
-			if(ch->pcdata->oyuncu_katli == 0 && !IS_IMMORTAL(ch))
-			{
-				act( "$p tarafından çarpıldın ve onu yere düşürdün.", ch, obj, NULL, TO_CHAR );
-				act( "$n $p tarafından çarpıldı ve onu yere düşürdü.",  ch, obj, NULL, TO_ROOM );
-				return;
-			}
-		}
-		if( !limit_kontrol(ch,obj) )
-		{
-			return;
-		}
-	}
+	if ( !limited_obj_take_ok( ch, obj ) )
+	    return;
+
     if ( ch->carry_number + get_obj_number( obj ) > can_carry_n( ch ) )
     {
       act( "$d: bu kadar çok şey taşıyamazsın.",
@@ -1034,32 +1040,8 @@ void do_drag( CHAR_DATA *ch, char *argument )
         return;
    }
 
-   if (obj->pIndexData->limit != -1)
-   {
-      if ((( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IS_EVIL(ch)    )
-      ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IS_GOOD(ch)    )
-      ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IS_NEUTRAL(ch) ) )
-	  && !IS_IMMORTAL(ch))
-      {
-        act( "$p tarafından çarpıldın ve onu düşürdün.", ch, obj, NULL, TO_CHAR );
-        act( "$n $p tarafından çarpıldı ve onu düşürdü.",  ch, obj, NULL, TO_ROOM );
-        return;
-      }
-		if(IS_PC(ch))
-		{
-			// oyuncu katlini kabul etmeyen karakter limit esya alamasin
-			if(ch->pcdata->oyuncu_katli == 0 && !IS_IMMORTAL(ch))
-			{
-				act( "$p tarafından çarpıldın ve onu yere düşürdün.", ch, obj, NULL, TO_CHAR );
-				act( "$n $p tarafından çarpıldı ve onu yere düşürdü.",  ch, obj, NULL, TO_ROOM );
-				return;
-			}
-		}
-      if( !limit_kontrol(ch,obj) )
-      {
-  			return;
-      }
-   }
+   if ( !limited_obj_take_ok( ch, obj ) )
+	return;
 
    if (obj->in_room != NULL)
    {
@@ -1138,12 +1120,10 @@ void do_give( CHAR_DATA *ch, char *argument )
     char arg1 [MAX_INPUT_LENGTH];
     char arg2 [MAX_INPUT_LENGTH];
     char buf[MAX_STRING_LENGTH];
-    char buf2[MAX_STRING_LENGTH];
     CHAR_DATA *victim;
     OBJ_DATA  *obj;
 
     argument = one_argument( argument, arg1 );
-    snprintf(buf2, sizeof(buf2),"%s",argument);
     argument = one_argument( argument, arg2 );
 
     if ( arg1[0] == '\0' || arg2[0] == '\0' )
@@ -1259,36 +1239,26 @@ void do_give( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    if (obj->pIndexData->limit != -1)
+        if (obj->pIndexData->limit != -1)
     {
-      if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IS_EVIL(victim)    )
-      ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IS_GOOD(victim)    )
-      ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IS_NEUTRAL(victim) ) )
-      {
-        send_to_char( "Kurbanının yönelimi eşyanınkiyle uyuşmuyor.\n\r", ch );
-	return;
-      }
-	  
-	  //PC'ler limit esya veremesin.
-	  if(IS_PC(ch))
-	  {
-		  send_to_char( "Limit eşyaları başkasına veremezsin.\n\r", ch );
-		  return;
-	  }
-	  
-	  //NPC'ler pk kabul etmeyen PC'ye limit esya veremesin.
-	  if(IS_NPC(ch) && IS_PC(victim))
-	  {
-		  if(victim->pcdata->oyuncu_katli == 0)
-		  {
-			return;
-		  }
-	  }
-	  
-      if( !limit_kontrol(victim,obj) )
-      {
-  			return;
-      }
+	if ( limited_obj_align_clash( victim, obj ) )
+	{
+	    send_to_char( "Kurbanının yönelimi eşyanınkiyle uyuşmuyor.\n\r", ch );
+	    return;
+	}
+
+	/* Oyuncu limitli eşya veremez; yaratık da OK kabul etmeyen oyuncuya veremez. */
+	if ( IS_PC(ch) )
+	{
+	    send_to_char( "Limit eşyaları başkasına veremezsin.\n\r", ch );
+	    return;
+	}
+
+	if ( IS_PC(victim) && victim->pcdata->oyuncu_katli == 0 )
+	    return;
+
+	if ( !limit_kontrol( victim, obj ) )
+	    return;
     }
 
     obj_from_char( obj );
@@ -3279,10 +3249,7 @@ void do_steal( CHAR_DATA *ch, char *argument )
 
     if (obj != NULL && obj->pIndexData->limit != -1)
     {
-      if ((( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IS_EVIL(ch)    )
-      ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IS_GOOD(ch)    )
-      ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IS_NEUTRAL(ch) ) )
-	  && !IS_IMMORTAL(ch))
+      if ( limited_obj_align_clash( ch, obj ) && !IS_IMMORTAL(ch) )
       {
         act( "$p tarafından çarpıldın.", ch, obj, NULL, TO_CHAR );
       	act( "$n $p tarafından çarpıldı.",  ch, obj, NULL, TO_ROOM );
@@ -3393,13 +3360,7 @@ void do_steal( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    if ( ch->carry_number + get_obj_number( obj ) > can_carry_n( ch ) )
-    {
-      send_to_char( "Ellerin dolu.\n\r", ch );
-	return;
-    }
-
-    if ( ch->carry_weight + get_obj_weight( obj ) > can_carry_w( ch ) )
+    if ( get_carry_weight( ch ) + get_obj_weight( obj ) > can_carry_w( ch ) )
     {
       send_to_char( "O kadar ağırlık taşıyamazsın.\n\r", ch );
 	return;
