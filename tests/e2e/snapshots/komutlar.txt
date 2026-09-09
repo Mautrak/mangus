@@ -1,39 +1,38 @@
 aç          acıbana     al          andaç       anımsa      arakla
 aranıyor    ardılan     aslançağır  avla        ayı         ayıçağır
-ayrıl       ayril       bak         bakiye      bayılt      bileşik
-biniş       bitki       bırak       bölge       bug         büyü
-büyüler     cevapla     clear       cls         copla       çağrıyok
-çarp        çelme       çevrel      çivi        çıkar       çıkışlar
-dağıt       dayanım     değer       dilek       dinlen      diril
-discord     doğra       dök         doldur      dönüş       dua
-duygu       eğitim      ekipman     emret       envanter    eniyi
-etkiler     familya     fırlat      gir         giy         göm
-görev       görün       görünüm     göster      grup        grupliste
-ganlat      günce       harakiri    havadurumu  haykır      hedef
-iç          incele      induct      iniş        intihar     iptal
-irfan       isimlendir  iste        itekle      iyileştir   kaç
-kalk        kalk        kalkan      kamp        kamuflaj    kanallar
-kanasusama  kanımsa     kapat       kapıkır     kaplan      kasa
-katana      katlet      kaydet      kaz         kazan       kd
-kdg         kilitaç     kilitle     kim         kimdir      kırbaçla
-kısayol     kısayolkaldırkıyasla     kk          kompakt     komutlar
-konsantrasyonkontrol     korkaklık   körlüktozu  koy         kullan
-kurban      kuyruk      lakap       lisan       liste       maymuncuk
-mezat       nara        nerede      odaetki     oku         omuz
+ayrıl       bak         bakiye      bayılt      bileşik     biniş
+bitki       bırak       bölge       bug         büyü        büyüler
+cevapla     clear       cls         copla       çağrıyok    çarp
+çelme       çevrel      çivi        çıkar       çıkışlar    dağıt
+dayanım     değer       dilek       dinlen      diril       discord
+doğra       dök         doldur      dönüş       dua         duygu
+eğitim      ekipman     emret       envanter    eniyi       etkiler
+familya     fırlat      gir         giy         göm         görev
+görün       görünüm     göster      grup        grupliste   ganlat
+günce       harakiri    havadurumu  haykır      hedef       iç
+incele      induct      iniş        intihar     iptal       irfan
+isimlendir  iste        itekle      iyileştir   kaç         kalk
+kalkan      kamp        kamuflaj    kanallar    kanasusama  kanımsa
+kapat       kapıkır     kaplan      kasa        katana      katlet
+kaydet      kaz         kazan       kd          kdg         kilitaç
+kilitle     kim         kimdir      kırbaçla    kısayol     kısayolkaldır
+kıyasla     kk          kompakt     komutlar    konsantrasyonkontrol
+korkaklık   körlüktozu  koy         kullan      kurban      kuyruk
+lakap       lisan       liste       maymuncuk   mezat       nara
+nerede      odaetki     oku         omuz        onar        otoliste
 [Devam etmek için ENTER]
-onar        otoliste    otoakçe     otoçıkış    otodağıt    otodestek
-otokurban   otoyağma    otur        öğren       öğret       öldür
-özet        paraçek     parayatır   patlat      pençe       pmote
-poz         pratik      pusu        rapor       read        rezil
-rica        sağır       saklan      sapta       sargı       sat
-satınal     savun       savur       sem         sessiz      sez
-silah       silahsızlandırsinir       sıvış       skor        skrol
-slook       soluş       sosyaller   söyle       suflör      suikast
-sürükle     süzül       syetenek    şifalıeller şifre       take
-takip       takipyok    talep       tamir       tanımla     tara
-tart        tekme       tekrarla    toz         tut         tuzak
-typo        uç          uysallaştır uyu         ücret       vahşileş
-vampir      ver         vur         yağmayok    yap         yardım
-yargıla     yarma       ye          yeniyaşa    yeniyaşam   yetenekler
-yokol       yudumla     yükselt     zaman       zar         zayi
-zehir
+otoakçe     otoçıkış    otodağıt    otodestek   otokurban   otoyağma
+otur        öğren       öğret       öldür       özet        paraçek
+parayatır   patlat      pençe       pmote       poz         pratik
+pusu        rapor       read        rezil       rica        sağır
+saklan      sapta       sargı       sat         satınal     savun
+savur       sem         sessiz      sez         silah       silahsızlandır
+sinir       sıvış       skor        skrol       slook       soluş
+sosyaller   söyle       suflör      suikast     sürükle     süzül
+syetenek    şifalıeller şifre       take        takip       takipyok
+talep       tamir       tanımla     tara        tart        tekme
+tekrarla    toz         tut         tuzak       typo        uç
+uysallaştır uyan        uyu         ücret       vahşileş    vampir
+ver         vur         yağmayok    yap         yardım      yargıla
+yarma       ye          yeniyaşa    yeniyaşam   yetenekler  yokol
+yudumla     yükselt     zaman       zar         zayi        zehir

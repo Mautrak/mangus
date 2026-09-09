@@ -63,9 +63,6 @@
 #define IM	LEVEL_IMMORTAL 	/* angel */
 #define HE	LEVEL_HERO	/* hero */
 
-#define COM_INGORE	1
-
-
 /*
  * Structure for a command in the command lookup table.
  */
@@ -139,7 +136,6 @@ DECLARE_DO_FUN( do_cleave       );
 DECLARE_DO_FUN( do_clear	);
 DECLARE_DO_FUN( do_clone	);
 DECLARE_DO_FUN(	do_close	);
-DECLARE_DO_FUN( do_cls		);
 DECLARE_DO_FUN(	do_commands	);
 DECLARE_DO_FUN( do_combine	);
 DECLARE_DO_FUN( do_compact	);
@@ -282,7 +278,6 @@ DECLARE_DO_FUN(	do_practice	);
 DECLARE_DO_FUN(	do_pray		);
 DECLARE_DO_FUN( do_prefi	);
 DECLARE_DO_FUN( do_prefix	);
-DECLARE_DO_FUN( do_premort	);
 DECLARE_DO_FUN( do_prompt	);
 DECLARE_DO_FUN( do_protect	);
 DECLARE_DO_FUN(	do_purge	);
