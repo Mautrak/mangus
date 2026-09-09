@@ -50,79 +50,70 @@
 #include <stdio.h>
 #include <time.h>
 #include "merc.h"
-#include "utf8.h"
 #include "tables.h"
+#include "lookup.h"
+
+/*
+ * Ad alanı tablolarında ön ek araması. 'first' ilk kaydın ad alanını,
+ * 'stride' kayıt boyutunu gösterir; tablo NULL adla biter. Bulunan kaydın
+ * sırası, bulunamazsa -1 döner. Boş ad her şeyin ön eki sayılacağından
+ * baştan elenir (ROM'un ilk harf hızlandırmasının tek işlevi buydu).
+ */
+int name_table_lookup(const char *name, const char *const *first, size_t stride)
+{
+    const char *p = (const char *)first;
+    int i;
+
+    if (name[0] == '\0')
+        return -1;
+
+    for (i = 0; *(const char *const *)p != NULL; i++, p += stride)
+    {
+        if (!str_prefix(name, *(const char *const *)p))
+            return i;
+    }
+
+    return -1;
+}
 
 int flag_lookup (const char *name, const struct flag_type *flag_table)
 {
-    int flag;
+    int i = name_table_lookup(name, &flag_table[0].name, sizeof flag_table[0]);
 
-    for (flag = 0; flag_table[flag].name != NULL; flag++)
-    {
-	if (utf8_first_eq(name, flag_table[flag].name)
-	&&  !str_prefix(name,flag_table[flag].name))
-	    return flag_table[flag].bit;
-    }
-
-    return 0;
+    return i < 0 ? 0 : flag_table[i].bit;
 }
-
 
 int position_lookup (const char *name)
 {
-   int pos;
-
-   for (pos = 0; position_table[pos].name != NULL; pos++)
-   {
-	if (utf8_first_eq(name, position_table[pos].name)
-	&&  !str_prefix(name,position_table[pos].name))
-	    return pos;
-   }
-
-   return -1;
+    return name_table_lookup(name, &position_table[0].name, sizeof position_table[0]);
 }
 
 int sex_lookup (const char *name)
 {
-   int sex;
-
-   for (sex = 0; sex_table[sex].name != NULL; sex++)
-   {
-	if (utf8_first_eq(name, sex_table[sex].name)
-	&&  !str_prefix(name,sex_table[sex].name))
-	    return sex;
-   }
-
-   return -1;
+    return name_table_lookup(name, &sex_table[0].name, sizeof sex_table[0]);
 }
 
 int size_lookup (const char *name)
 {
-   int size;
-
-   for ( size = 0; size_table[size].name != NULL; size++)
-   {
-        if (utf8_first_eq(name, size_table[size].name)
-        &&  !str_prefix( name,size_table[size].name))
-            return size;
-   }
-
-   return 0;
+    return name_table_lookup(name, &size_table[0].name, sizeof size_table[0]);
 }
 
+/* Tablodaki konumu döndürür; "analisan" (ortak dil) için MAX_LANGUAGE. */
 int lang_lookup (const char *name)
 {
-   int lang;
+    int lang;
 
-   if (LOWER(name[0]) == 'a' && (!str_prefix(name,"analisan")) )
-    return MAX_LANGUAGE;
+    if (name[0] == '\0')
+        return -1;
 
-   for (lang = 0; lang < MAX_LANGUAGE; lang++)
-   {
-	if (utf8_first_eq(name, language_table[lang].name)
-	&&  !str_prefix(name,language_table[lang].name))
-	    return lang;
-   }
+    if (!str_prefix(name, "analisan"))
+        return MAX_LANGUAGE;
 
-   return -1;
+    for (lang = 0; lang < MAX_LANGUAGE; lang++)
+    {
+        if (!str_prefix(name, language_table[lang].name))
+            return lang;
+    }
+
+    return -1;
 }

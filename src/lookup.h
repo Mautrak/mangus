@@ -48,7 +48,17 @@
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
 
+#ifndef LOOKUP_H
+#define LOOKUP_H
 
+#include <stddef.h>
+
+/* Ad alanı tablolarında ön ek araması (bkz. lookup.c); bulunamazsa -1. */
+int	name_table_lookup(const char *name, const char *const *first, size_t stride);
 int	position_lookup	(const char *name);
 int 	sex_lookup	(const char *name);
+/* Bulunamazsa -1 (eskiden 0 = SIZE_TINY dönerdi). */
 int 	size_lookup	(const char *name);
+int	lang_lookup	(const char *name);
+
+#endif
