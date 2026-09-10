@@ -140,14 +140,15 @@ void save_char_obj( CHAR_DATA *ch )
 	    bug("Save_char_obj: fopen",0);
 	    perror(strsave);
  	}
-
-	fprintf(fp,"Lev %2d Trust %2d  %s%s\n",
-	    ch->level, get_trust(ch), ch->name, ch->pcdata->title);
-	fclose( fp );
+	else
+	{
+	    fprintf(fp,"Lev %2d Trust %2d  %s%s\n",
+		ch->level, get_trust(ch), ch->name, ch->pcdata->title);
+	    fclose( fp );
+	}
 	fpReserve = fopen( NULL_FILE, "r" );
-    if ( fpReserve == NULL )
-      bug("save_char_obj: Can't open null file.", 0 );
-
+	if ( fpReserve == NULL )
+	    bug("save_char_obj: Can't open null file.", 0 );
     }
 
     fclose( fpReserve );
@@ -168,10 +169,10 @@ void save_char_obj( CHAR_DATA *ch )
 	if (ch->pet != NULL && ch->pet->in_room == ch->in_room)
 	    fwrite_pet(ch->pet,fp);
 	fprintf( fp, "#END\n" );
+	fclose( fp );
+	if ( !platform_replace_file( TEMP_FILE, strsave ) )
+	    bug( "Save_char_obj: oyuncu dosyası yerine konulamadı.", 0 );
     }
-    fclose( fp );
-    if ( !platform_replace_file( TEMP_FILE, strsave ) )
-	bug( "Save_char_obj: oyuncu dosyası yerine konulamadı.", 0 );
     fpReserve = fopen( NULL_FILE, "r" );
     if ( fpReserve == NULL )
       bug("save_char_obj: Can't open null file.", 0 );
@@ -212,7 +213,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
 	fprintf( fp, "LnD  %s~\n",	ch->long_descr	);
     if (ch->description[0] != '\0')
     	fprintf( fp, "Desc %s~\n",	ch->description	);
-    if (ch->prompt != NULL || !str_cmp(ch->prompt,"<%hhp %mm %vmv> "))
+    if (ch->prompt != NULL)
         fprintf( fp, "Prom %s~\n",      ch->prompt  	);
     fprintf( fp, "Race %s~\n", race_table[ORG_RACE(ch)].name[0] );
     fprintf( fp, "Sex  %d\n",	ch->sex			);
@@ -422,7 +423,7 @@ void fwrite_pet( CHAR_DATA *pet, FILE *fp)
     	fprintf(fp, "Detect %s\n", print_flags(pet->detection));
     if (pet->comm != 0)
     	fprintf(fp, "Comm %s\n", print_flags(pet->comm));
-    fprintf(fp,"Pos  %d\n", pet->position = POS_FIGHTING ? POS_STANDING : pet->position);
+    fprintf(fp,"Pos  %d\n", pet->position == POS_FIGHTING ? POS_STANDING : pet->position);
     if (pet->saving_throw != 0)
     	fprintf(fp, "Save %d\n", pet->saving_throw);
     if (pet->alignment != pet->pIndexData->alignment)
@@ -901,22 +902,20 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
     found = FALSE;
     fclose( fpReserve );
 
-#ifndef _WIN32
-    /* decompress if .gz file exists */
-    {
-	char buf[MAX_INPUT_LENGTH + 16];
-    snprintf(strsave, sizeof(strsave), "%s%s%s", PLAYER_DIR, capitalize(name),".gz");
-    if ( ( fp = fopen( strsave, "r" ) ) != NULL )
-    {
-	fclose(fp);
-	snprintf(buf, sizeof(buf),"gzip -dfq %s",strsave);
-	if ( system( buf ) != 0 )
-	    log_string( "gzip ile oyuncu dosyası açılamadı." );
-    }
-    }
-#endif
-
     snprintf(strsave, sizeof(strsave), "%s%s", PLAYER_DIR, capitalize( name ) );
+
+    /* sıkıştırılmış (.gz) oyuncu dosyası varsa yerinde açılır (Windows'ta desteklenmez) */
+    {
+	char gzname[MAX_INPUT_LENGTH + 4];
+
+	snprintf( gzname, sizeof(gzname), "%s.gz", strsave );
+	if ( ( fp = fopen( gzname, "r" ) ) != NULL )
+	{
+	    fclose( fp );
+	    if ( !platform_gunzip( strsave ) )
+		log_string( "gzip ile oyuncu dosyası açılamadı." );
+	}
+    }
     if ( ( fp = fopen( strsave, "r" ) ) != NULL )
     {
 	int iNest;
@@ -1557,7 +1556,7 @@ void fread_pet( CHAR_DATA *ch, FILE *fp )
     char *word;
     CHAR_DATA *pet;
     bool fMatch;
-    int lastlogoff = current_time;
+    time_t lastlogoff = current_time;
     int percent;
 
     /* first entry had BETTER be the vnum or we barf */
@@ -1696,7 +1695,7 @@ void fread_pet( CHAR_DATA *ch, FILE *fp )
 		pet->master = ch;
 		ch->pet = pet;
     		/* adjust hp mana move up  -- here for speed's sake */
-    		percent = (current_time - lastlogoff) * 25 / ( 2 * 60 * 60);
+    		percent = (int) ((current_time - lastlogoff) * 25 / ( 2 * 60 * 60));
 
     		if (percent > 0 && !IS_AFFECTED(ch,AFF_POISON)
     		&&  !IS_AFFECTED(ch,AFF_PLAGUE))
@@ -1758,13 +1757,12 @@ void fread_pet( CHAR_DATA *ch, FILE *fp )
     	    KEY( "ShD",		pet->short_descr,	fread_string(fp));
             KEY( "Silv",        pet->silver,            fread_number( fp ) );
     	    break;
+    	}
 
     	if ( !fMatch )
     	{
     	    bug("Fread_pet: no match.",0);
     	    fread_to_eol(fp);
-    	}
-
     	}
     }
 }
