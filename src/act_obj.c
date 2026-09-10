@@ -53,6 +53,7 @@
 #include "merc.h"
 #include "bot.h"
 #include "turkish.h"
+#include "utf8.h"
 
 /* command procedures needed */
 DECLARE_DO_FUN(do_split		);
@@ -154,6 +155,48 @@ static bool limited_obj_take_ok( CHAR_DATA *ch, OBJ_DATA *obj )
     return limit_kontrol( ch, obj );
 }
 
+/*
+ * Alan dosyasından gelen şablondaki her "%s" yerine 'arg' konur; başka hiçbir
+ * yüzde dizisi yorumlanmaz (şablon asla biçim dizgisi olarak kullanılmaz).
+ */
+char *fill_template( char *out, size_t n, const char *tmpl, const char *arg )
+{
+    size_t len = 0;
+
+    if ( n == 0 )
+	return out;
+
+    while ( *tmpl != '\0' && len < n - 1 )
+    {
+	if ( tmpl[0] == '%' && tmpl[1] == 's' )
+	{
+	    len += snprintf( out + len, n - len, "%s", arg );
+	    tmpl += 2;
+	}
+	else
+	    out[len++] = *tmpl++;
+    }
+    out[UMIN(len, n - 1)] = '\0';
+    return out;
+}
+
+/* Kabal eşyasını barındıran sunak/taht taşıyıcıları (db.c ve obj_prog.c'deki liste). */
+static bool is_cabal_altar( OBJ_DATA *container )
+{
+    static const int altar_vnums[] =
+    {
+	OBJ_VNUM_INVADER_SKULL, OBJ_VNUM_RULER_STAND,  OBJ_VNUM_BATTLE_THRONE,
+	OBJ_VNUM_CHAOS_ALTAR,   OBJ_VNUM_SHALAFI_ALTAR, OBJ_VNUM_KNIGHT_ALTAR,
+	OBJ_VNUM_LIONS_ALTAR,   OBJ_VNUM_HUNTER_ALTAR
+    };
+    size_t i;
+
+    for ( i = 0; i < sizeof(altar_vnums) / sizeof(altar_vnums[0]); i++ )
+	if ( container->pIndexData->vnum == altar_vnums[i] )
+	    return TRUE;
+    return FALSE;
+}
+
 /* RT part of the corpse looting code */
 
 bool can_loot(CHAR_DATA *ch, OBJ_DATA *obj)
@@ -204,14 +247,7 @@ void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container )
 
     if ( container != NULL )
     {
-      if (container->pIndexData->vnum == OBJ_VNUM_INVADER_SKULL
-       || container->pIndexData->vnum == OBJ_VNUM_RULER_STAND
-       || container->pIndexData->vnum == OBJ_VNUM_BATTLE_THRONE
-       || container->pIndexData->vnum == OBJ_VNUM_CHAOS_ALTAR
-       || container->pIndexData->vnum == OBJ_VNUM_SHALAFI_ALTAR
-        || container->pIndexData->vnum == OBJ_VNUM_KNIGHT_ALTAR
-        || container->pIndexData->vnum == OBJ_VNUM_LIONS_ALTAR
-	|| container->pIndexData->vnum == OBJ_VNUM_HUNTER_ALTAR)
+      if ( is_cabal_altar( container ) )
         {
 	  DESCRIPTOR_DATA *d;
     act("$P içinden $p aldın.", ch, obj, container, TO_CHAR );
@@ -281,6 +317,52 @@ void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container )
 
 
 
+/* Odada yerde duran akçe toplamı. */
+static int room_silver( ROOM_INDEX_DATA *room )
+{
+    OBJ_DATA *obj;
+    int silver = 0;
+
+    for ( obj = room->contents; obj != NULL; obj = obj->next_content )
+    {
+	if ( obj->pIndexData->vnum == OBJ_VNUM_SILVER_ONE )
+	    silver += 1;
+	else if ( obj->pIndexData->vnum == OBJ_VNUM_SILVER_SOME )
+	    silver += obj->value[0];
+    }
+    return silver;
+}
+
+/* Yerden 'amount' akçe kaldırır (para nesnelerini eritir ya da azaltır). */
+static void take_room_silver( ROOM_INDEX_DATA *room, int amount )
+{
+    OBJ_DATA *obj, *obj_next;
+
+    for ( obj = room->contents; obj != NULL && amount > 0; obj = obj_next )
+    {
+	obj_next = obj->next_content;
+
+	if ( obj->pIndexData->vnum == OBJ_VNUM_SILVER_ONE )
+	{
+	    amount -= 1;
+	    extract_obj( obj );
+	}
+	else if ( obj->pIndexData->vnum == OBJ_VNUM_SILVER_SOME )
+	{
+	    if ( amount >= obj->value[0] )
+	    {
+		amount -= obj->value[0];
+		extract_obj( obj );
+	    }
+	    else
+	    {
+		obj->value[0] -= amount;
+		amount = 0;
+	    }
+	}
+    }
+}
+
 void do_get( CHAR_DATA *ch, char *argument )
 {
 
@@ -309,7 +391,8 @@ void do_get( CHAR_DATA *ch, char *argument )
 
   if ( is_number( arg1 ) )
   {
-    int amount, weight, silver = 0;
+    /* 'al <miktar> akçe' */
+    int amount, weight;
 
     amount = atoi( arg1 );
 
@@ -327,73 +410,14 @@ void do_get( CHAR_DATA *ch, char *argument )
       return;
     }
 
-
-    for ( obj = ch->in_room->contents; obj != NULL; obj = obj_next )
-    {
-      obj_next = obj->next_content;
-
-      switch ( obj->pIndexData->vnum )
-      {
-        case OBJ_VNUM_SILVER_ONE:
-          silver += 1;
-          break;
-
-        case OBJ_VNUM_SILVER_SOME:
-          silver += obj->value[0];
-          break;
-      }
-    }
-
-    if ( !str_cmp( arg2, "akçe") && (amount > silver)  )
+    if ( amount > room_silver( ch->in_room ) )
     {
       send_to_char("O kadar akçe yok.\n\r", ch);
       return;
     }
 
-    silver = amount;
-
-    for ( obj = ch->in_room->contents; obj != NULL; obj = obj_next )
-    {
-      obj_next = obj->next_content;
-
-      switch ( obj->pIndexData->vnum )
-      {
-        case OBJ_VNUM_SILVER_ONE:
-        if (silver)
-        {
-          silver -= 1;
-          extract_obj(obj);
-        }
-        break;
-
-        case OBJ_VNUM_SILVER_SOME:
-        if (silver)
-        {
-          if (silver >= obj->value[0])
-          {
-            silver -= obj->value[0];
-            extract_obj(obj);
-          }
-          else
-          {
-            obj->value[0] -= silver;
-            silver = 0;
-          }
-        }
-        break;
-      }
-      if (!silver)
-      {
-        break;
-      }
-    }
-
-    silver = amount;
-
-    if ( silver )
-    {
-      ch->silver += amount;
-    }
+    take_room_silver( ch->in_room, amount );
+    ch->silver += amount;
 
     act("Yerden bir miktar para aldın.", ch, NULL, NULL, TO_CHAR );
     if (!IS_AFFECTED(ch,AFF_SNEAK))
@@ -831,46 +855,27 @@ void do_drop( CHAR_DATA *ch, char *argument )
 
     if ( is_number( arg ) )
     {
-	/* 'drop NNNN coins' */
-	int amount, silver = 0;
+	/* 'bırak <miktar> akçe': yerdeki paralarla birleştirilir */
+	int amount, silver;
 
 	amount   = atoi(arg);
 	argument = one_argument( argument, arg );
-  if ( amount <= 0 || ( str_cmp( arg, "akçe"  ) ) )
+	if ( amount <= 0 || str_cmp( arg, "akçe" ) )
 	{
-    send_to_char( "Bunu yapamazsın.\n\r", ch );
+	    send_to_char( "Bunu yapamazsın.\n\r", ch );
 	    return;
 	}
 
-  if ( !str_cmp(arg,"akçe"))
+	if ( ch->silver < amount )
 	{
-	    if (ch->silver < amount)
-	    {
-        send_to_char("Bu kadar akçen yok.\n\r",ch);
-		return;
-	    }
-
-	    ch->silver -= amount;
-	    silver = amount;
+	    send_to_char( "Bu kadar akçen yok.\n\r", ch );
+	    return;
 	}
 
-	for ( obj = ch->in_room->contents; obj != NULL; obj = obj_next )
-	{
-	    obj_next = obj->next_content;
-
-	    switch ( obj->pIndexData->vnum )
-	    {
-	    case OBJ_VNUM_SILVER_ONE:
-		silver += 1;
-		extract_obj(obj);
-		break;
-
-	    case OBJ_VNUM_SILVER_SOME:
-		silver += obj->value[0];
-		extract_obj(obj);
-		break;
-	    }
-	}
+	ch->silver -= amount;
+	silver = room_silver( ch->in_room );
+	take_room_silver( ch->in_room, silver );
+	silver += amount;
 
 	obj = create_money( silver );
 	obj_to_room( obj, ch->in_room );
@@ -1226,6 +1231,7 @@ void do_bury( CHAR_DATA *ch, char *argument )
     char *bufp;
     OBJ_DATA *obj, *shovel, *stone;
     int move;
+    size_t len;
 
     one_argument( argument, arg );
 
@@ -1293,29 +1299,27 @@ void do_bury( CHAR_DATA *ch, char *argument )
 
     obj->timer = -1;
 
+    /* Cesedin kısa tanımından ölünün adı: "ceset/hortlak/..." sözcükleri atılır. */
     buf[0] = '\0';
+    len = 0;
     bufp = obj->short_descr;
-    while ( bufp[0] != '\0' )
+    while ( bufp[0] != '\0' && len < sizeof(buf) - 1 )
     {
-     bufp = one_argument(bufp, arg);
-     if (!( !str_cmp(arg,"hortlak") || !str_cmp(arg,"gövde") || !str_cmp(arg,"beden") || !str_cmp(arg,"ceset") ))
-     {
-	if (buf[0] == '\0')   strcat(buf,arg);
-        else  {
-                 strcat(buf," ");
-                 strcat(buf,arg);
-        }
-     }
+	bufp = one_argument( bufp, arg );
+	if ( !str_cmp(arg,"hortlak") || !str_cmp(arg,"gövde")
+	||   !str_cmp(arg,"beden")   || !str_cmp(arg,"ceset") )
+	    continue;
+	len += snprintf( buf + len, sizeof(buf) - len, "%s%s", len ? " " : "", arg );
     }
     snprintf(arg, sizeof(arg), "%s", buf);
 
     stone = create_object( get_obj_index(OBJ_VNUM_GRAVE_STONE), ch->level);
 
-    snprintf(buf, sizeof(buf), stone->description, arg);
+    fill_template( buf, sizeof(buf), stone->description, arg );
     free_string( stone->description );
     stone->description = str_dup( buf );
 
-    snprintf(buf, sizeof(buf), stone->short_descr, arg);
+    fill_template( buf, sizeof(buf), stone->short_descr, arg );
     free_string( stone->short_descr );
     stone->short_descr = str_dup( buf );
 
@@ -1406,7 +1410,7 @@ void do_envenom(CHAR_DATA *ch, char *argument)
     int percent,skill;
 
     /* find out what */
-    if (argument == NULL)
+    if (argument[0] == '\0')
     {
       send_to_char("Neyi zehirleyeceksin?\n\r",ch);
 	return;
@@ -1515,6 +1519,39 @@ act("$p objesini zehirle kaplıyorsun.",ch,obj,NULL,TO_CHAR);
     return;
 }
 
+/*
+ * Sıvı adına belirtme durumu eki ("su'yu", "bira'yı", "şarap'ı"): son ünlüye
+ * göre ünlü uyumu, sözcük ünlüyle bitiyorsa 'y' kaynaştırması.
+ */
+static const char *liq_accusative( const char *name, char *buf, size_t n )
+{
+    const char *p = name;
+    const char *vowel = "ı";
+    bool ends_vowel = FALSE;
+    uint32_t cp;
+    int len;
+
+    while ( *p != '\0' && ( len = utf8_decode( p, &cp ) ) > 0 )
+    {
+	const char *v = NULL;
+
+	switch ( utf8_tolower_cp( cp ) )
+	{
+	case 'a': case 0x131:  v = "ı"; break;	/* a, ı */
+	case 'e': case 'i':    v = "i"; break;
+	case 'o': case 'u':    v = "u"; break;
+	case 0xF6: case 0xFC:  v = "ü"; break;	/* ö, ü */
+	}
+	if ( v != NULL )
+	    vowel = v;
+	ends_vowel = ( v != NULL );
+	p += len;
+    }
+
+    snprintf( buf, n, "%s'%s%s", name, ends_vowel ? "y" : "", vowel );
+    return buf;
+}
+
 void do_fill( CHAR_DATA *ch, char *argument )
 {
     char arg[MAX_INPUT_LENGTH];
@@ -1585,7 +1622,7 @@ void do_fill( CHAR_DATA *ch, char *argument )
 
 void do_pour(CHAR_DATA *ch, char *argument)
 {
-    char arg[MAX_STRING_LENGTH],buf[MAX_STRING_LENGTH];
+    char arg[MAX_INPUT_LENGTH], buf[MAX_STRING_LENGTH], liq[MAX_INPUT_LENGTH];
     OBJ_DATA *out, *in;
     CHAR_DATA *vch = NULL;
     int amount;
@@ -1619,22 +1656,22 @@ void do_pour(CHAR_DATA *ch, char *argument)
 	    return;
 	}
 
+	liq_accusative( liq_table[out->value[2]].liq_name_tr, liq, sizeof(liq) );
 	out->value[1] = 0;
 	out->value[3] = 0;
-        if ( !IS_WATER( ch->in_room ) )
-			{
-			snprintf(buf, sizeof(buf),"$p'yi ters çevirip içindeki %s'yi yere boşaltıyorsun.",liq_table[out->value[2]].liq_name_tr);
-			act(buf,ch,out,NULL,TO_CHAR);
-
-			snprintf(buf, sizeof(buf),"$n $p'yi ters çevirip içindeki %s'yi yere boşaltıyor.",liq_table[out->value[2]].liq_name_tr);
-			act(buf,ch,out,NULL,TO_ROOM);
+	if ( !IS_WATER( ch->in_room ) )
+	{
+	    snprintf(buf, sizeof(buf),"$p'yi ters çevirip içindeki %s yere boşaltıyorsun.", liq);
+	    act(buf,ch,out,NULL,TO_CHAR);
+	    snprintf(buf, sizeof(buf),"$n $p'yi ters çevirip içindeki %s yere boşaltıyor.", liq);
+	    act(buf,ch,out,NULL,TO_ROOM);
 	}
-	else  {
-	  snprintf(buf, sizeof(buf),"$p'yi ters çevirip %s'yi suya boşaltıyorsun.",liq_table[out->value[2]].liq_name_tr);
-	  act(buf,ch,out,NULL,TO_CHAR);
-
-	  snprintf(buf, sizeof(buf),"$n $p'yi ters çevirip içindeki %s'yi yere boşaltıyor.",liq_table[out->value[2]].liq_name_tr);
-	  act(buf,ch,out,NULL,TO_ROOM);
+	else
+	{
+	    snprintf(buf, sizeof(buf),"$p'yi ters çevirip %s suya boşaltıyorsun.", liq);
+	    act(buf,ch,out,NULL,TO_CHAR);
+	    snprintf(buf, sizeof(buf),"$n $p'yi ters çevirip içindeki %s suya boşaltıyor.", liq);
+	    act(buf,ch,out,NULL,TO_ROOM);
 	}
 	return;
     }
@@ -1645,7 +1682,7 @@ void do_pour(CHAR_DATA *ch, char *argument)
 
 	if (vch == NULL)
 	{
-	    send_to_char("Neyin içine Pour edeceksin?\n\r",ch);
+	    send_to_char("Neyin içine dökeceksin?\n\r",ch);
 	    return;
 	}
 
@@ -1653,14 +1690,14 @@ void do_pour(CHAR_DATA *ch, char *argument)
 
 	if (in == NULL)
 	{
-	    send_to_char("Hiçbir şey tutmuyorsun.",ch);
+	    send_to_char("O hiçbir şey tutmuyor.\n\r",ch);
  	    return;
 	}
     }
 
     if (in->item_type != ITEM_DRINK_CON)
     {
-	send_to_char("Yalnızca içecek taşıyıcılarının içine pour yapabilirsin.\n\r",ch);
+	send_to_char("Yalnızca içecek taşıyıcılarının içine dökebilirsin.\n\r",ch);
 	return;
     }
 
@@ -1696,10 +1733,11 @@ void do_pour(CHAR_DATA *ch, char *argument)
 
     if (vch == NULL)
     {
-    	snprintf(buf, sizeof(buf),"%s'i $p'den $P'ye döküyorsun.",liq_table[out->value[2]].liq_name_tr);
-    	act(buf,ch,out,in,TO_CHAR);
-    	snprintf(buf, sizeof(buf),"$n %s'i $p'den $P'ye döküyor.",liq_table[out->value[2]].liq_name_tr);
-    	act(buf,ch,out,in,TO_ROOM);
+	liq_accusative( liq_table[out->value[2]].liq_name_tr, liq, sizeof(liq) );
+	snprintf(buf, sizeof(buf),"%s $p'den $P'ye döküyorsun.", liq);
+	act(buf,ch,out,in,TO_CHAR);
+	snprintf(buf, sizeof(buf),"$n %s $p'den $P'ye döküyor.", liq);
+	act(buf,ch,out,in,TO_ROOM);
     }
     else
     {
@@ -3624,6 +3662,49 @@ void do_list( CHAR_DATA *ch, char *argument )
 
 
 
+/*
+ * sat / değer ortak girişi: esnaf bulunur, eşya envanterde aranır ve
+ * satılabilirlik denetimleri yapılır. Başarıda eşya, esnaf ve fiyat döner.
+ */
+static OBJ_DATA *sell_prologue( CHAR_DATA *ch, char *arg, CHAR_DATA **pkeeper, int *pcost )
+{
+    CHAR_DATA *keeper;
+    OBJ_DATA *obj;
+    int cost;
+
+    if ( ( keeper = find_keeper( ch ) ) == NULL )
+	return NULL;
+
+    if ( ( obj = get_obj_carry( ch, arg ) ) == NULL )
+    {
+	act( "$n anlatıyor 'Sende ondan yok.'", keeper, NULL, ch, TO_VICT );
+	ch->reply = keeper;
+	return NULL;
+    }
+
+    if ( !can_drop_obj( ch, obj ) )
+    {
+	send_to_char( "Ondan kurtulamıyorsun.\n\r", ch );
+	return NULL;
+    }
+
+    if ( !can_see_obj( keeper, obj ) )
+    {
+	act( "$n teklif ettiğin şeyi göremiyor.", keeper, NULL, ch, TO_VICT );
+	return NULL;
+    }
+
+    if ( ( cost = get_cost( keeper, obj, FALSE ) ) <= 0 )
+    {
+	act( "$n $p ile ilgilenmiyor.", keeper, obj, ch, TO_VICT );
+	return NULL;
+    }
+
+    *pkeeper = keeper;
+    *pcost   = cost;
+    return obj;
+}
+
 void do_sell( CHAR_DATA *ch, char *argument )
 {
 	char buf[MAX_STRING_LENGTH];
@@ -3639,33 +3720,9 @@ void do_sell( CHAR_DATA *ch, char *argument )
 		return;
 	}
 
-	if ( ( keeper = find_keeper( ch ) ) == NULL )
+	if ( ( obj = sell_prologue( ch, arg, &keeper, &cost ) ) == NULL )
 		return;
 
-	if ( ( obj = get_obj_carry( ch, arg ) ) == NULL )
-	{
-		act( "$n anlatıyor 'Sende ondan yok.'", keeper, NULL, ch, TO_VICT );
-		ch->reply = keeper;
-		return;
-	}
-
-	if ( !can_drop_obj( ch, obj ) )
-	{
-		send_to_char("Ondan kurtulamıyorsun.\n\r", ch );
-		return;
-	}
-
-	if (!can_see_obj(keeper,obj))
-	{
-		act("$n teklif ettiğin şeyi göremiyor.",keeper,NULL,ch,TO_VICT);
-		return;
-	}
-
-	if ( ( cost = get_cost( keeper, obj, FALSE ) ) <= 0 )
-	{
-		act(  "$n $p ile ilgilenmiyor.", keeper, obj, ch, TO_VICT );
-		return;
-	}
 	if ( cost > keeper->silver )
 	{
 		// Eger pazarligi varsa dukkancida da akce olsun.
@@ -3732,34 +3789,8 @@ void do_value( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    if ( ( keeper = find_keeper( ch ) ) == NULL )
+    if ( ( obj = sell_prologue( ch, arg, &keeper, &cost ) ) == NULL )
 	return;
-
-    if ( ( obj = get_obj_carry( ch, arg ) ) == NULL )
-    {
-	act( "$n anlatıyor 'Sende ondan yok.'",
-	    keeper, NULL, ch, TO_VICT );
-	ch->reply = keeper;
-	return;
-    }
-
-    if (!can_see_obj(keeper,obj))
-    {
-        act("$n teklif ettiğin şeyi göremiyor.",keeper,NULL,ch,TO_VICT);
-        return;
-    }
-
-    if ( !can_drop_obj( ch, obj ) )
-    {
-	send_to_char( "Ondan kurtulamıyorsun.\n\r", ch );
-	return;
-    }
-
-    if ( ( cost = get_cost( keeper, obj, FALSE ) ) <= 0 )
-    {
-	act( "$n $p ile ilgilenmiyor.", keeper, obj, ch, TO_VICT );
-	return;
-    }
 
     snprintf(buf, sizeof(buf),
 	"$n sana anlatıyor '$p için sana %d akçe veririm'.",cost);
@@ -3918,13 +3949,42 @@ void do_herbs(CHAR_DATA *ch, char *argument)
     }
 }
 
+#define LORE_MANA_COST	30
+
+/* Silah türünün Türkçe adı (spell_identify ile aynı adlar). */
+static const char *lore_weapon_name( int type )
+{
+    static const struct { int type; const char *name; } names[] =
+    {
+	{ WEAPON_EXOTIC,  "egzotik"     },
+	{ WEAPON_SWORD,   "kılıç"       },
+	{ WEAPON_DAGGER,  "hançer"      },
+	{ WEAPON_SPEAR,   "mızrak/asa"  },
+	{ WEAPON_MACE,    "topuz/çomak" },
+	{ WEAPON_AXE,     "balta"       },
+	{ WEAPON_FLAIL,   "döven"       },
+	{ WEAPON_WHIP,    "kırbaç"      },
+	{ WEAPON_POLEARM, "teber"       },
+	{ WEAPON_BOW,     "yay"         },
+	{ WEAPON_ARROW,   "ok"          },
+	{ WEAPON_LANCE,   "kargı"       },
+    };
+    size_t i;
+
+    for ( i = 0; i < sizeof(names) / sizeof(names[0]); i++ )
+	if ( names[i].type == type )
+	    return names[i].name;
+    return "bilinmiyor";
+}
+
 void do_lore( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;
   char buf[MAX_STRING_LENGTH];
   AFFECT_DATA *paf;
-  int chance;
+  const char *material;
+  int chance, skill;
   int value0, value1, value2, value3;
 
   argument = one_argument( argument, arg1 );
@@ -3935,7 +3995,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if (ch->mana < 30)
+  if ( ch->mana < LORE_MANA_COST )
     {
       send_to_char("Yeterli manan yok.\n\r", ch);
       return;
@@ -3948,100 +4008,59 @@ void do_lore( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  /* a random lore */
-  chance = number_percent();
+  ch->mana -= LORE_MANA_COST;
+  skill    = get_skill( ch, gsn_lore );
+  chance   = number_percent();
+  material = str_cmp( obj->material, "oldstyle" ) ? obj->material : "bilinmiyor";
 
-  if (get_skill(ch,gsn_lore) < 20)
+  /* Beceri kademesine göre bilgi: düşük kademelerde bazı değerler yanıltıcıdır. */
+  if ( skill < 20 )
     {
-      snprintf(buf, sizeof(buf), "Eşya '%s'.\n\r", obj->name);
-      send_to_char(buf, ch);
-      ch->mana -= 30;
-      check_improve(ch,gsn_lore,TRUE,8);
+      printf_to_char( ch, "Eşya '%s'.\n\r", obj->name );
+      check_improve( ch, gsn_lore, TRUE, 8 );
       return;
     }
 
-  else if (get_skill(ch,gsn_lore) < 40)
+  if ( skill < 40 )
     {
-      snprintf(buf, sizeof(buf),
-	  "Eşya '%s'.  Ağırlığı %d gr., değeri %d.\n\r",
+      printf_to_char( ch, "Eşya '%s'.  Ağırlığı %d gr., değeri %d.\n\r",
 	      obj->name,
-	      chance < 60 ? obj->weight : number_range(1, 2 * obj->weight),
-	      chance < 60 ? number_range(1, 2 * obj->cost) : obj->cost
-	      );
-      send_to_char(buf, ch);
-      if ( str_cmp( obj->material, "oldstyle" ) )  {
-        snprintf(buf, sizeof(buf), "Materyali %s.\n\r", obj->material );
-        send_to_char(buf, ch);
-      }
-      ch->mana -= 30;
-      check_improve(ch,gsn_lore,TRUE,7);
+	      chance < 60 ? obj->weight : number_range( 1, 2 * obj->weight ),
+	      chance < 60 ? number_range( 1, 2 * obj->cost ) : obj->cost );
+      if ( str_cmp( obj->material, "oldstyle" ) )
+	printf_to_char( ch, "Materyali %s.\n\r", obj->material );
+      check_improve( ch, gsn_lore, TRUE, 7 );
       return;
     }
 
-  else if (get_skill(ch,gsn_lore) < 60)
+  if ( skill < 60 )
     {
-      snprintf(buf, sizeof(buf),
+      printf_to_char( ch,
 	      "Obje '%s', ağırlığı %d gr.\n\rDeğeri %d, seviyesi %d.\n\rMateryali %s.\n\r",
 	      obj->name,
 	      obj->weight,
-	      chance < 60 ? number_range(1, 2 * obj->cost) : obj->cost,
-	      chance < 60 ? obj->level : number_range(1, 2 * obj->level),
-	  str_cmp(obj->material,"oldstyle")?obj->material:"bilinmiyor"
-	      );
-      send_to_char(buf, ch);
-      ch->mana -= 30;
-      check_improve(ch,gsn_lore,TRUE,6);
+	      chance < 60 ? number_range( 1, 2 * obj->cost ) : obj->cost,
+	      chance < 60 ? obj->level : number_range( 1, 2 * obj->level ),
+	      material );
+      check_improve( ch, gsn_lore, TRUE, 6 );
       return;
     }
 
-  else if (get_skill(ch,gsn_lore) < 80)
+  printf_to_char( ch,
+	  "Obje '%s', tipi %s, ekstra özellikleri %s.\n\rAğırlığı %d gr., değeri %d, seviyesi %d.\n\rMateryali %s.\n\r",
+	  obj->name,
+	  item_type_name( obj ),
+	  extra_bit_name( obj->extra_flags ),
+	  obj->weight,
+	  ( skill < 80 && chance < 60 ) ? number_range( 1, 2 * obj->cost ) : obj->cost,
+	  ( skill < 80 && chance >= 60 ) ? number_range( 1, 2 * obj->level ) : obj->level,
+	  material );
+
+  if ( skill < 80 )
     {
-      snprintf(buf, sizeof(buf),
-	      "Obje '%s', tipi %s, ekstra özellikleri %s.\n\rAğırlığı %d gr., değeri %d, seviyesi %d.\n\rMateryali %s.\n\r",
-	      obj->name,
-	      item_type_name( obj ),
-	      extra_bit_name( obj->extra_flags ),
-	      obj->weight,
-	      chance < 60 ? number_range(1, 2 * obj->cost) : obj->cost,
-	      chance < 60 ? obj->level : number_range(1, 2 * obj->level),
-	  str_cmp(obj->material,"oldstyle")?obj->material:"bilinmiyor"
-	      );
-      send_to_char(buf, ch);
-      ch->mana -= 30;
-      check_improve(ch,gsn_lore,TRUE,5);
+      check_improve( ch, gsn_lore, TRUE, 5 );
       return;
     }
-
-  else if (get_skill(ch,gsn_lore) < 85)
-    {
-      snprintf(buf, sizeof(buf),
-	      "Obje '%s', tipi %s, ekstra özellikleri %s.\n\rAğırlığı %d gr., değeri %d, seviyesi %d.\n\rMateryali %s.\n\r",
-	      obj->name,
-	      item_type_name( obj ),
-	      extra_bit_name( obj->extra_flags ),
-	      obj->weight,
-	      obj->cost,
-	      obj->level,
-	  str_cmp(obj->material,"oldstyle")?obj->material:"bilinmiyor"
-	      );
-      send_to_char(buf, ch);
-    }
-  else
-    {
-      snprintf(buf, sizeof(buf),
-	      "Obje '%s', tipi %s, ekstra özellikleri %s.\n\rAğırlığı %d gr., değeri %d, seviyesi %d.\n\rMateryali %s.\n\r",
-	      obj->name,
-	      item_type_name( obj ),
-	      extra_bit_name( obj->extra_flags ),
-	      obj->weight,
-	      obj->cost,
-	      obj->level,
-	  str_cmp(obj->material,"oldstyle")?obj->material:"bilinmiyor"
-	      );
-      send_to_char(buf, ch);
-    }
-
-  ch->mana -= 30;
 
   value0 = obj->value[0];
   value1 = obj->value[1];
@@ -4053,7 +4072,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
     case ITEM_SCROLL:
     case ITEM_POTION:
     case ITEM_PILL:
-      if (get_skill(ch,gsn_lore) < 85)
+      if ( skill < 85 )
 	{
 	  value0 = number_range(1, 60);
 	  if (chance > 40) {
@@ -4106,7 +4125,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
 
     case ITEM_WAND:
     case ITEM_STAFF:
-      if (get_skill(ch,gsn_lore) < 85)
+      if ( skill < 85 )
 	{
 	  value0 = number_range(1, 60);
 	  if (chance > 40) {
@@ -4145,7 +4164,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
 
     case ITEM_WEAPON:
       send_to_char("Silah tipi ",ch);
-      if (get_skill(ch,gsn_lore) < 85)
+      if ( skill < 85 )
 	{
 	  value0 = number_range(0, 8);
 	  if (chance > 33) {
@@ -4163,22 +4182,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
 	  }
 	}
 
-      switch (value0)
-	{
-	case(WEAPON_EXOTIC) : send_to_char("egzotik.\n\r",ch);	break;
-	case(WEAPON_SWORD)  : send_to_char("kılıç.\n\r",ch);	break;
-	case(WEAPON_DAGGER) : send_to_char("hançer.\n\r",ch);	break;
-	case(WEAPON_SPEAR)	: send_to_char("spear/staff.\n\r",ch);	break;
-	case(WEAPON_MACE) 	: send_to_char("mace/club.\n\r",ch);	break;
-	case(WEAPON_AXE)	: send_to_char("balta.\n\r",ch);		break;
-	case(WEAPON_FLAIL)	: send_to_char("flail.\n\r",ch);	break;
-	case(WEAPON_WHIP)	: send_to_char("kırbaç.\n\r",ch);		break;
-	case(WEAPON_POLEARM): send_to_char("polearm.\n\r",ch);	break;
-	case(WEAPON_BOW)	: send_to_char("yay.\n\r",ch);	break;
-	case(WEAPON_ARROW)	: send_to_char("ok.\n\r",ch);	break;
-	case(WEAPON_LANCE)	: send_to_char("lance.\n\r",ch);	break;
-	default		: send_to_char("bilinmiyor.\n\r",ch);	break;
- 	}
+      printf_to_char( ch, "%s.\n\r", lore_weapon_name( value0 ) );
       if (obj->pIndexData->new_format)
 		{
 	snprintf(buf, sizeof(buf),"Zarar %dd%d (ortalama %d).\n\r",
@@ -4195,7 +4199,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
       break;
 
     case ITEM_ARMOR:
-      if (get_skill(ch,gsn_lore) < 85)
+      if ( skill < 85 )
 	{
 	  if (chance > 25) {
 	    value2 = number_range(0, 2 * obj->value[2]);
@@ -4231,7 +4235,7 @@ void do_lore( CHAR_DATA *ch, char *argument )
       break;
     }
 
-  if (get_skill(ch,gsn_lore) < 87)
+  if ( skill < 87 )
     check_improve(ch,gsn_lore,TRUE,5);
   return;
 
@@ -4265,7 +4269,7 @@ void do_butcher(CHAR_DATA *ch, char *argument)
 {
   OBJ_DATA *obj;
   char buf[MAX_STRING_LENGTH];
-  char arg[MAX_STRING_LENGTH];
+  char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *tmp_obj;
   OBJ_DATA *tmp_next;
 
@@ -4343,11 +4347,11 @@ void do_butcher(CHAR_DATA *ch, char *argument)
       for (i=0; i < numsteaks; i++)
 	{
 	  steak = create_object(get_obj_index(OBJ_VNUM_STEAK),0);
-	  snprintf(buf, sizeof(buf), steak->short_descr, obj->short_descr);
+	  fill_template( buf, sizeof(buf), steak->short_descr, obj->short_descr );
 	  free_string( steak->short_descr );
 	  steak->short_descr = str_dup( buf );
 
-	  snprintf(buf, sizeof(buf), steak->description, obj->short_descr );
+	  fill_template( buf, sizeof(buf), steak->description, obj->short_descr );
 	  free_string( steak->description );
 	  steak->description = str_dup( buf );
 
@@ -4365,6 +4369,9 @@ void do_butcher(CHAR_DATA *ch, char *argument)
   extract_obj(obj);
 }
 
+
+#define BANK_FEE_PCT		5		/* çekimde kesilen komisyon (%) */
+#define BANK_MAX_BALANCE	40000000L	/* hesap üst sınırı */
 
 void do_balance(CHAR_DATA *ch, char *argument)
 {
@@ -4393,7 +4400,7 @@ void do_balance(CHAR_DATA *ch, char *argument)
 
 void do_withdraw(CHAR_DATA *ch, char *argument)
 {
-  long  amount_s;
+  long  amount_s, fee;
   char arg[MAX_INPUT_LENGTH];
   int weight;
 
@@ -4431,18 +4438,18 @@ void do_withdraw(CHAR_DATA *ch, char *argument)
      return;
   }
 
+  fee = amount_s - amount_s * ( 100 - BANK_FEE_PCT ) / 100;
   ch->pcdata->bank_s -= amount_s;
-  ch->silver += (long)(0.95 * amount_s);
+  ch->silver += amount_s - fee;
 
-  printf_to_char(ch,"İşte %ld akçe, hesap işlemi olarak %ld sikkeni alıyorum.\n\r",(long)(0.95 * amount_s),UMAX(1, (long)(amount_s * 0.05)) );
+  printf_to_char(ch,"İşte %ld akçe, hesap işlemi olarak %ld sikkeni alıyorum.\n\r", amount_s - fee, UMAX(1, fee) );
   act("$n vezneye yaklaşıyor.",ch,NULL,NULL,TO_ROOM);
 }
 
 void do_deposit(CHAR_DATA *ch, char *argument)
 {
   long amount_s;
-  char buf[100];
-  char arg[200];
+  char arg[MAX_INPUT_LENGTH];
 
   if (IS_NPC(ch))
     {
@@ -4469,9 +4476,9 @@ void do_deposit(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if ( (amount_s + ch->pcdata->bank_s) > 40000000 )
+  if ( amount_s + ch->pcdata->bank_s > BANK_MAX_BALANCE )
     {
-      send_to_char("Bankamız 40 milyon akçeden fazlasını kabul etmez.\n\r",ch);
+      printf_to_char(ch, "Bankamız %ld milyon akçeden fazlasını kabul etmez.\n\r", BANK_MAX_BALANCE / 1000000L );
       return;
     }
 
@@ -4479,15 +4486,9 @@ void do_deposit(CHAR_DATA *ch, char *argument)
   ch->silver -= amount_s;
 
   if (amount_s == 1)
-	{
-    snprintf(buf, sizeof(buf), "Şuna bak! Bir sikkeymiş!\n\r");
-	}
+    send_to_char( "Şuna bak! Bir sikkeymiş!\n\r", ch );
   else
-	{
-	  snprintf(buf, sizeof(buf), "%ld akçe hesabına geçti. Yine beklerim!\n\r",amount_s);
-	}
-
-  send_to_char(buf, ch);
+    printf_to_char( ch, "%ld akçe hesabına geçti. Yine beklerim!\n\r", amount_s );
   act("$n vezneye yaklaşıyor.",ch,NULL,NULL,TO_ROOM);
 }
 
