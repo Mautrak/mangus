@@ -66,14 +66,21 @@ jobs:
         run: ctest --test-dir build -R unit --output-on-failure
 
       - name: Uçtan uca ve görsel regresyon testleri
-        run: ctest --test-dir build -R e2e --output-on-failure
+        # pytest doğrudan çalışır: özet günlükte görünür, JUnit raporu artifact olur.
+        # (ctest -R e2e kaydı yerel kullanım için CMakeLists.txt'de durur.)
+        run: |
+          bin=build/mangus
+          [ "$RUNNER_OS" = "Windows" ] && bin=build/mangus.exe
+          MANGUS_BIN=$bin python3 -m pytest -q tests/e2e --junitxml=tests/e2e/_runs/junit.xml
 
       - name: Görsel regresyon raporu
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: gorsel-rapor-${{ runner.os }}
-          path: tests/e2e/_runs/report.html
+          path: |
+            tests/e2e/_runs/report.html
+            tests/e2e/_runs/junit.xml
           if-no-files-found: ignore
 
       - name: Binary
