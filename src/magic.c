@@ -3021,8 +3021,29 @@ void spell_heal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     heal_spell( ch, (CHAR_DATA *) vo, 100 + level / 10, "Sıcak bir duygu vücudunu sarıyor.\n\r" );
 }
 
+/* Kızgın eşya: 'shed' doğruysa kurban eşyayı yere atar (mesajlar + oda), yoksa deri yanar.
+ * Eklenecek hasarı döndürür; shed_div 0 ise atma hasarı sabit 1'dir. */
+static int heat_metal_burn( CHAR_DATA *victim, OBJ_DATA *obj, bool shed,
+			    const char *shed_room, const char *shed_char, int shed_div,
+			    const char *burn_msg, int burn_div )
+{
+    if ( shed )
+    {
+	act( shed_room, victim, obj, NULL, TO_ROOM );
+	act( shed_char, victim, obj, NULL, TO_CHAR );
+	obj_from_char( obj );
+	obj_to_room( obj, victim->in_room );
+	return shed_div == 0 ? 1 : number_range( 1, obj->level ) / shed_div;
+    }
+    act( burn_msg, victim, obj, NULL, TO_CHAR );
+    return number_range( 1, obj->level ) / burn_div;
+}
+
 void spell_heat_metal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
+    static const char *shed_room = "$n bağırarak $p'yi yere atıyor!";
+    static const char *shed_char = "Seni yakmadan önce $p'yi çıkarıp atıyorsun.";
+    static const char *burn_msg  = "$p derini yakıyor!";
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     OBJ_DATA *obj_lose, *obj_next;
     int dam = 0;
@@ -3044,102 +3065,34 @@ void spell_heat_metal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 		switch ( obj_lose->item_type )
 		{
 		case ITEM_ARMOR:
-		if (obj_lose->wear_loc != -1) /* remove the item */
-		{
-		    if (can_drop_obj(victim,obj_lose)
-		    &&  (obj_lose->weight / 10) <
-			number_range(1,2 * get_curr_stat(victim,STAT_DEX))
-		    &&  remove_obj( victim, obj_lose, TRUE ))
-		    {
-          act("$n bağırarak $p'yi yere atıyor!",
-    			    victim,obj_lose,NULL,TO_ROOM);
-    			act("Seni yakmadan önce $p'yi çıkarıp atıyorsun.",
-			    victim,obj_lose,NULL,TO_CHAR);
-			dam += (number_range(1,obj_lose->level) / 3);
-			obj_from_char(obj_lose);
-			obj_to_room(obj_lose, victim->in_room);
-			fail = FALSE;
-		    }
-		    else /* stuck on the body! ouch! */
-		    {
-          act("$p derini yakıyor!",
-			    victim,obj_lose,NULL,TO_CHAR);
-			dam += (number_range(1,obj_lose->level));
-			fail = FALSE;
-		    }
-
-		}
-		else /* drop it if we can */
-		{
-		    if (can_drop_obj(victim,obj_lose))
-		    {
-          act("$n bağırarak $p'yi yere atıyor!",
-    			    victim,obj_lose,NULL,TO_ROOM);
-    			act("Seni yakmadan önce $p'yi çıkarıp atıyorsun.",
-			    victim,obj_lose,NULL,TO_CHAR);
-			dam += (number_range(1,obj_lose->level) / 6);
-			obj_from_char(obj_lose);
-			obj_to_room(obj_lose, victim->in_room);
-			fail = FALSE;
-		    }
-		    else /* cannot drop */
-		    {
-          act("$p derini yakıyor!",
-			    victim,obj_lose,NULL,TO_CHAR);
-			dam += (number_range(1,obj_lose->level) / 2);
-			fail = FALSE;
-		    }
-		}
-		break;
+		    if (obj_lose->wear_loc != -1) /* remove the item */
+			dam += heat_metal_burn( victim, obj_lose,
+			    can_drop_obj(victim,obj_lose)
+			    && (obj_lose->weight / 10) <
+				number_range(1,2 * get_curr_stat(victim,STAT_DEX))
+			    && remove_obj( victim, obj_lose, TRUE ),
+			    shed_room, shed_char, 3, burn_msg, 1 );
+		    else /* drop it if we can */
+			dam += heat_metal_burn( victim, obj_lose, can_drop_obj(victim,obj_lose),
+			    shed_room, shed_char, 6, burn_msg, 2 );
+		    fail = FALSE;
+		    break;
 		case ITEM_WEAPON:
-		if (obj_lose->wear_loc != -1) /* try to drop it */
-		{
-		    if (IS_WEAPON_STAT(obj_lose,WEAPON_FLAMING))
-			continue;
-
-		    if (can_drop_obj(victim,obj_lose)
-		    &&  remove_obj(victim,obj_lose,TRUE))
+		    if (obj_lose->wear_loc != -1) /* try to drop it */
 		    {
-          act("$n $p tarafından yakılınca onu yere attı.",
-    			    victim,obj_lose,NULL,TO_ROOM);
-    			send_to_char(
-    			    "Kor halindeki silahını yere atıyorsun!\n\r",
-			    victim);
-			dam += 1;
-			obj_from_char(obj_lose);
-			obj_to_room(obj_lose,victim->in_room);
-			fail = FALSE;
+			if (IS_WEAPON_STAT(obj_lose,WEAPON_FLAMING))
+			    continue;
+			dam += heat_metal_burn( victim, obj_lose,
+			    can_drop_obj(victim,obj_lose) && remove_obj(victim,obj_lose,TRUE),
+			    "$n $p tarafından yakılınca onu yere attı.",
+			    "Kor halindeki silahını yere atıyorsun!", 0,
+			    "Silahın etini yakıyor!", 1 );
 		    }
-		    else /* YOWCH! */
-		    {
-          send_to_char("Silahın etini yakıyor!\n\r",victim);
-
-			dam += number_range(1,obj_lose->level);
-			fail = FALSE;
-		    }
-		}
-		else /* drop it if we can */
-		{
-		    if (can_drop_obj(victim,obj_lose))
-		    {
-          act("$n kor halindeki $p'yi yere atıyor!",
-    			    victim,obj_lose,NULL,TO_ROOM);
-    			act("Seni yakmadan önce $p'yi çıkarıp atıyorsun.",
-			    victim,obj_lose,NULL,TO_CHAR);
-			dam += (number_range(1,obj_lose->level) / 6);
-			obj_from_char(obj_lose);
-			obj_to_room(obj_lose, victim->in_room);
-			fail = FALSE;
-		    }
-		    else /* cannot drop */
-		    {
-          act("$p derini yakıyor!",
-			    victim,obj_lose,NULL,TO_CHAR);
-			dam += (number_range(1,obj_lose->level) / 2);
-			fail = FALSE;
-		    }
-		}
-		break;
+		    else /* drop it if we can */
+			dam += heat_metal_burn( victim, obj_lose, can_drop_obj(victim,obj_lose),
+			    "$n kor halindeki $p'yi yere atıyor!", shed_char, 6, burn_msg, 2 );
+		    fail = FALSE;
+		    break;
 		}
 	    }
 	}
@@ -3207,11 +3160,83 @@ void spell_holy_word(int sn, int level, CHAR_DATA *ch, void *vo,int target)
     ch->hit = ch->hit * 3 / 4;
 }
 
+/* Silah türü (value[0]) Türkçe adı. */
+static const char *weapon_type_name( int type )
+{
+    static const struct { int type; const char *name; } names[] =
+    {
+	{ WEAPON_EXOTIC,  "egzotik"     },
+	{ WEAPON_SWORD,   "kılıç"       },
+	{ WEAPON_DAGGER,  "hançer"      },
+	{ WEAPON_SPEAR,   "mızrak/asa"  },
+	{ WEAPON_MACE,    "topuz/çomak" },
+	{ WEAPON_AXE,     "balta"       },
+	{ WEAPON_FLAIL,   "döven"       },
+	{ WEAPON_WHIP,    "kırbaç"      },
+	{ WEAPON_POLEARM, "teber"       },
+	{ WEAPON_BOW,     "yay"         },
+	{ WEAPON_ARROW,   "ok"          },
+	{ WEAPON_LANCE,   "kargı"       },
+	{ -1, NULL }
+    };
+    int i;
+
+    for ( i = 0; names[i].name != NULL; i++ )
+	if ( names[i].type == type )
+	    return names[i].name;
+    return "bilinmiyor";
+}
+
+/* identify: tek bir affect satırını yazdırır (show_duration: nesne affect'i, süreli). */
+static void identify_affect( CHAR_DATA *ch, AFFECT_DATA *paf, bool show_duration )
+{
+    if ( paf->location != APPLY_NONE && paf->modifier != 0 )
+    {
+	printf_to_char(ch,"%s etkisi %d birim", affect_loc_name( paf->location ), paf->modifier );
+	if ( show_duration && paf->duration > -1 )
+	    printf_to_char(ch,", %d saat.\n\r",paf->duration);
+	else
+	    send_to_char(".\n\r", ch);
+    }
+
+    if ( !paf->bitvector )
+	return;
+
+    switch(paf->where)
+    {
+    case TO_AFFECTS:
+	printf_to_char(ch,"%s etkisi ekler.\n\r",affect_bit_name(paf->bitvector));
+	break;
+    case TO_OBJECT:
+	printf_to_char(ch,"%s eşya özelliği ekler.\n\r",extra_bit_name(paf->bitvector));
+	break;
+    case TO_WEAPON:
+	printf_to_char(ch,"%s silah özelliği ekler.\n\r",weapon_bit_name(paf->bitvector));
+	break;
+    case TO_IMMUNE:
+	printf_to_char(ch,"%s bağışıklığı ekler.\n\r",imm_bit_name(paf->bitvector));
+	break;
+    case TO_RESIST:
+	printf_to_char(ch,"%s direnci ekler.\n\r",imm_bit_name(paf->bitvector));
+	break;
+    case TO_VULN:
+	printf_to_char(ch,"%s dayanıksızlığı ekler.\n\r",imm_bit_name(paf->bitvector));
+	break;
+    case TO_DETECTS:
+	printf_to_char(ch,"%s saptaması ekler.\n\r",detect_bit_name(paf->bitvector));
+	break;
+    default:
+	printf_to_char(ch,"Bilinmeyen bit %d: %d\n\r",paf->where,paf->bitvector);
+	break;
+    }
+}
+
 void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
     OBJ_DATA *obj = (OBJ_DATA *) vo;
     char buf[MAX_STRING_LENGTH];
     AFFECT_DATA *paf;
+    int i;
 
     snprintf(buf, sizeof(buf),
       "Obje '%s', tip %s, materyal %s, ekstra özellik %s.\n\rAğırlık %d gr, değer %d, seviye %d.\n\r",
@@ -3242,33 +3267,9 @@ void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     snprintf(buf, sizeof(buf), "Seviye %d büyüleri:", obj->value[0] );
 	send_to_char( buf, ch );
 
-	if ( obj->value[1] >= 0 && obj->value[1] < MAX_SKILL )
-	{
-	    send_to_char( " '", ch );
-	    send_to_char( skill_table[obj->value[1]].name[1], ch );
-	    send_to_char( "'", ch );
-	}
-
-	if ( obj->value[2] >= 0 && obj->value[2] < MAX_SKILL )
-	{
-	    send_to_char( " '", ch );
-	    send_to_char( skill_table[obj->value[2]].name[1], ch );
-	    send_to_char( "'", ch );
-	}
-
-	if ( obj->value[3] >= 0 && obj->value[3] < MAX_SKILL )
-	{
-	    send_to_char( " '", ch );
-	    send_to_char( skill_table[obj->value[3]].name[1], ch );
-	    send_to_char( "'", ch );
-	}
-
-	if (obj->value[4] >= 0 && obj->value[4] < MAX_SKILL)
-	{
-	    send_to_char(" '",ch);
-	    send_to_char(skill_table[obj->value[4]].name[1],ch);
-	    send_to_char("'",ch);
-	}
+	for ( i = 1; i <= 4; i++ )
+	    if ( obj->value[i] >= 0 && obj->value[i] < MAX_SKILL )
+		printf_to_char( ch, " '%s'", skill_table[obj->value[i]].name[1] );
 
 	send_to_char( ".\n\r", ch );
 	break;
@@ -3280,11 +3281,7 @@ void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 	send_to_char( buf, ch );
 
 	if ( obj->value[3] >= 0 && obj->value[3] < MAX_SKILL )
-	{
-	    send_to_char( " '", ch );
-	    send_to_char( skill_table[obj->value[3]].name[1], ch );
-	    send_to_char( "'", ch );
-	}
+	    printf_to_char( ch, " '%s'", skill_table[obj->value[3]].name[1] );
 
 	send_to_char( ".\n\r", ch );
 	break;
@@ -3309,23 +3306,7 @@ void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 	break;
 
     case ITEM_WEAPON:
-    send_to_char("Silah türü ",ch);
-	switch (obj->value[0])
-	{
-    case(WEAPON_EXOTIC) : send_to_char("egzotik.\n\r",ch);	break;
-    case(WEAPON_SWORD)  : send_to_char("kılıç.\n\r",ch);	break;
-    case(WEAPON_DAGGER) : send_to_char("hançer.\n\r",ch);	break;
-    case(WEAPON_SPEAR)	: send_to_char("mızrak/asa.\n\r",ch);	break;
-    case(WEAPON_MACE) 	: send_to_char("topuz/çomak.\n\r",ch);	break;
-    case(WEAPON_AXE)	: send_to_char("balta.\n\r",ch);		break;
-    case(WEAPON_FLAIL)	: send_to_char("döven.\n\r",ch);	break;
-    case(WEAPON_WHIP)	: send_to_char("kırbaç.\n\r",ch);		break;
-    case(WEAPON_POLEARM): send_to_char("teber.\n\r",ch);	break;
-    case(WEAPON_BOW)	: send_to_char("yay.\n\r",ch);		break;
-    case(WEAPON_ARROW)	: send_to_char("ok.\n\r",ch);	break;
-    case(WEAPON_LANCE)	: send_to_char("kargı.\n\r",ch);	break;
-    default		: send_to_char("bilinmiyor.\n\r",ch);	break;
- 	}
+	printf_to_char( ch, "Silah türü %s.\n\r", weapon_type_name( obj->value[0] ) );
 	if (obj->pIndexData->new_format)
   snprintf(buf, sizeof(buf),"Zarar %dd%d (ortalama %d).\n\r",
 		obj->value[1],obj->value[2],
@@ -3351,91 +3332,11 @@ void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     }
 
     if (!obj->enchanted)
-    {
         for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
-        {
-            if ( paf->location != APPLY_NONE && paf->modifier != 0 )
-            {
-                printf_to_char(ch,"%s etkisi %d birim.\n\r", affect_loc_name( paf->location ), paf->modifier );
-            }
-
-            if (paf->bitvector)
-            {
-                switch(paf->where)
-                {
-                    case TO_AFFECTS:
-                        printf_to_char(ch,"%s etkisi ekler.\n\r",affect_bit_name(paf->bitvector));
-                        break;
-                    case TO_OBJECT:
-                        printf_to_char(ch,"%s eşya özelliği ekler.\n\r",extra_bit_name(paf->bitvector));
-                        break;
-                    case TO_WEAPON:
-                        printf_to_char(ch,"%s silah özelliği ekler.\n\r",weapon_bit_name(paf->bitvector));
-                        break;
-                    case TO_IMMUNE:
-                        printf_to_char(ch,"%s bağışıklığı ekler.\n\r",imm_bit_name(paf->bitvector));
-                        break;
-                    case TO_RESIST:
-                        printf_to_char(ch,"%s direnci ekler.\n\r",imm_bit_name(paf->bitvector));
-                        break;
-                    case TO_VULN:
-                        printf_to_char(ch,"%s dayanıksızlığı ekler.\n\r",imm_bit_name(paf->bitvector));
-                        break;
-                    case TO_DETECTS:
-                        printf_to_char(ch,"%s saptaması ekler.\n\r",detect_bit_name(paf->bitvector));
-                        break;
-                    default:
-                        printf_to_char(ch,"Bilinmeyen bit %d: %d\n\r",paf->where,paf->bitvector);
-                        break;
-                }
-            }
-        }
-    }
+	    identify_affect( ch, paf, FALSE );
 
     for ( paf = obj->affected; paf != NULL; paf = paf->next )
-    {
-        if ( paf->location != APPLY_NONE && paf->modifier != 0 )
-        {
-            printf_to_char(ch,"%s etkisi %d birim", affect_loc_name( paf->location ), paf->modifier );
-            if ( paf->duration > -1)
-                printf_to_char(ch,", %d saat.\n\r",paf->duration);
-            else
-                printf_to_char(ch,".\n\r");
-        }
-
-        if (paf->bitvector)
-        {
-            switch(paf->where)
-            {
-                case TO_AFFECTS:
-                    printf_to_char(ch,"%s etkisi ekler.\n\r",affect_bit_name(paf->bitvector));
-                    break;
-                case TO_OBJECT:
-                    printf_to_char(ch,"%s eşya özelliği ekler.\n\r",extra_bit_name(paf->bitvector));
-                    break;
-                case TO_WEAPON:
-                    printf_to_char(ch,"%s silah özelliği ekler.\n\r",weapon_bit_name(paf->bitvector));
-                    break;
-                case TO_IMMUNE:
-                    printf_to_char(ch,"%s bağışıklığı ekler.\n\r",imm_bit_name(paf->bitvector));
-                    break;
-                case TO_RESIST:
-                    printf_to_char(ch,"%s direnci ekler.\n\r",imm_bit_name(paf->bitvector));
-                    break;
-                case TO_VULN:
-                    printf_to_char(ch,"%s dayanıksızlığı ekler.\n\r",imm_bit_name(paf->bitvector));
-                    break;
-                case TO_DETECTS:
-                    printf_to_char(ch,"%s saptaması ekler.\n\r",detect_bit_name(paf->bitvector));
-                    break;
-                default:
-                    printf_to_char(ch,"Bilinmeyen bit %d: %d\n\r",paf->where,paf->bitvector);
-                    break;
-            }
-        }
-    }
-
-    return;
+	identify_affect( ch, paf, TRUE );
 }
 
 
@@ -3561,25 +3462,27 @@ void spell_lightning_bolt(int sn,int level,CHAR_DATA *ch,void *vo,int target)
 
 
 
-void spell_locate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+/* locate/find object ortak gövdesi: target_name ile eşleşen nesnelerin yerini listeler. */
+static void locate_objects( CHAR_DATA *ch, int level, bool honour_nolocate,
+			    const char *carried_fmt, const char *room_imm_fmt,
+			    const char *room_fmt, const char *unknown_room )
 {
     char buf[MAX_INPUT_LENGTH];
     BUFFER *buffer;
     OBJ_DATA *obj;
     OBJ_DATA *in_obj;
-    bool found;
+    bool found = FALSE;
     int number = 0, max_found;
 
-    found = FALSE;
-    number = 0;
-    max_found = IS_IMMORTAL(ch) ? 200 : 2 * level;
+    max_found = IS_IMMORTAL(ch) ? LOCATE_IMM_MAX : 2 * level;
 
     buffer = new_buf();
 
     for ( obj = object_list; obj != NULL; obj = obj->next )
     {
 	if ( !can_see_obj( ch, obj ) || !is_name( target_name, obj->name )
-	||   IS_OBJ_STAT(obj,ITEM_NOLOCATE) || number_percent() > 2 * level
+	||   ( honour_nolocate && IS_OBJ_STAT(obj,ITEM_NOLOCATE) )
+	||   number_percent() > 2 * level
 	||   ch->level < obj->level)
 	    continue;
 
@@ -3590,20 +3493,13 @@ void spell_locate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 	    ;
 
 	if ( in_obj->carried_by != NULL && can_see(ch,in_obj->carried_by))
-	{
-    snprintf(buf, sizeof(buf), "bir tanesini taşıyan: %s\n\r",
-		PERS(in_obj->carried_by, ch) );
-	}
-	else
-	{
-	    if (IS_IMMORTAL(ch) && in_obj->in_room != NULL)
-      snprintf(buf, sizeof(buf), "bir tanesinin yeri: %s [Oda %d]\n\r",
+	    snprintf(buf, sizeof(buf), carried_fmt, PERS(in_obj->carried_by, ch) );
+	else if (IS_IMMORTAL(ch) && in_obj->in_room != NULL)
+	    snprintf(buf, sizeof(buf), room_imm_fmt,
 		    in_obj->in_room->name, in_obj->in_room->vnum);
-	    else
-      snprintf(buf, sizeof(buf), "bir tanesinin yeri: %s\n\r",
-		    in_obj->in_room == NULL
-			? "bir yer" : in_obj->in_room->name );
-	}
+	else
+	    snprintf(buf, sizeof(buf), room_fmt,
+		    in_obj->in_room == NULL ? unknown_room : in_obj->in_room->name );
 
 	utf8_upper_first(buf, sizeof(buf));
 	add_buf(buffer,buf);
@@ -3613,13 +3509,19 @@ void spell_locate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target)
     }
 
     if ( !found )
-    send_to_char( "Ne bu dünyada, ne de diğerinde böyle bir şey yok.\n\r", ch );
+	send_to_char( "Ne bu dünyada, ne de diğerinde böyle bir şey yok.\n\r", ch );
     else
 	page_to_char(buf_string(buffer),ch);
 
     free_buf(buffer);
+}
 
-    return;
+void spell_locate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+{
+    locate_objects( ch, level, TRUE,
+	"bir tanesini taşıyan: %s\n\r",
+	"bir tanesinin yeri: %s [Oda %d]\n\r",
+	"bir tanesinin yeri: %s\n\r", "bir yer" );
 }
 
 
@@ -4688,63 +4590,10 @@ void spell_high_explosive(int sn,int level,CHAR_DATA *ch,void *vo,int target)
 
 void spell_find_object( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    char buf[MAX_INPUT_LENGTH];
-    BUFFER *buffer;
-    OBJ_DATA *obj;
-    OBJ_DATA *in_obj;
-    bool found;
-    int number = 0, max_found;
-
-    found = FALSE;
-    number = 0;
-    max_found = IS_IMMORTAL(ch) ? 200 : 2 * level;
-
-    buffer = new_buf();
-
-    for ( obj = object_list; obj != NULL; obj = obj->next )
-    {
-	if ( !can_see_obj( ch, obj ) || !is_name( target_name, obj->name )
-		|| number_percent() > 2 * level
-		||   ch->level < obj->level)
-	    continue;
-
-	found = TRUE;
-	number++;
-
-	for ( in_obj = obj; in_obj->in_obj != NULL; in_obj = in_obj->in_obj )
-	    ;
-
-	if ( in_obj->carried_by != NULL && can_see(ch,in_obj->carried_by))
-	{
-    snprintf(buf, sizeof(buf), "bit tanesi %s tarafından taşınıyor\n\r",
-		PERS(in_obj->carried_by, ch) );
-	}
-	else
-	{
-	    if (IS_IMMORTAL(ch) && in_obj->in_room != NULL)
-      snprintf(buf, sizeof(buf), "bir tanesi %s odasında [Oda %d]\n\r",
-		    in_obj->in_room->name, in_obj->in_room->vnum);
-	    else
-      snprintf(buf, sizeof(buf), "bir tanesi %s odasında\n\r",
-		    in_obj->in_room == NULL
-			? "[bilinmeyen]" : in_obj->in_room->name );
-	}
-
-	utf8_upper_first(buf, sizeof(buf));
-	add_buf(buffer,buf);
-
-	if (number >= max_found)
-	    break;
-    }
-
-    if ( !found )
-    send_to_char("Ne bu dünyada, ne de diğerinde böyle bir şey yok.\n\r", ch );
-    else
-	page_to_char(buf_string(buffer),ch);
-
-    free_buf(buffer);
-
-    return;
+    locate_objects( ch, level, FALSE,
+	"bir tanesi %s tarafından taşınıyor\n\r",
+	"bir tanesi %s odasında [Oda %d]\n\r",
+	"bir tanesi %s odasında\n\r", "[bilinmeyen]" );
 }
 
 void spell_lightning_shield(int sn, int level, CHAR_DATA *ch, void *vo,int target )
