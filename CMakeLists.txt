@@ -4,6 +4,7 @@ project(mangus LANGUAGES C)
 # Mangus - Uzak Diyarlar tabanlı Türkçe MUD sunucusu.
 # Derleme:  cmake -B build && cmake --build build
 # Test:     ctest --test-dir build --output-on-failure
+#           (e2e: MANGUS_BIN=build/mangus python3 -m pytest -q tests/e2e)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
@@ -41,6 +42,8 @@ file(GLOB MANGUS_SOURCES CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/src/*.c)
 add_executable(mangus ${MANGUS_SOURCES})
 target_include_directories(mangus PRIVATE ${CMAKE_SOURCE_DIR}/src)
 
+# Uyarı bayrakları ve crypt tanımları tek yerde (mangus ve test_unit paylaşır).
+# src/Makefile aynı listeyi elle yansıtır; birini değiştirince diğerini de güncelle.
 set(MANGUS_WARNINGS -Wall -Wextra -Wno-unused-parameter)
 if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
   # gcc'nin bilinen gürültülü sezgisel denetimleri (yanlış pozitif üretir):
@@ -51,15 +54,19 @@ if(MANGUS_WERROR)
   list(APPEND MANGUS_WARNINGS -Werror)
 endif()
 
-foreach(tgt mangus)
-  target_compile_options(${tgt} PRIVATE ${MANGUS_WARNINGS})
-  if(HAVE_CRYPT)
-    target_compile_definitions(${tgt} PRIVATE HAVE_CRYPT=1)
-  endif()
-  if(HAVE_CRYPT_H)
-    target_compile_definitions(${tgt} PRIVATE HAVE_CRYPT_H=1)
-  endif()
-endforeach()
+add_library(mangus_common INTERFACE)
+target_compile_options(mangus_common INTERFACE ${MANGUS_WARNINGS})
+target_include_directories(mangus_common INTERFACE ${CMAKE_SOURCE_DIR}/src)
+if(HAVE_CRYPT)
+  target_compile_definitions(mangus_common INTERFACE HAVE_CRYPT=1)
+endif()
+if(HAVE_CRYPT_H)
+  target_compile_definitions(mangus_common INTERFACE HAVE_CRYPT_H=1)
+endif()
+if(MANGUS_CRYPT_LIB)
+  target_link_libraries(mangus_common INTERFACE ${MANGUS_CRYPT_LIB})
+endif()
+target_link_libraries(mangus PRIVATE mangus_common)
 
 if(WIN32)
   target_link_libraries(mangus PRIVATE ws2_32)
@@ -69,9 +76,6 @@ else()
   if(M_LIBRARY)
     target_link_libraries(mangus PRIVATE ${M_LIBRARY})
   endif()
-  if(MANGUS_CRYPT_LIB)
-    target_link_libraries(mangus PRIVATE ${MANGUS_CRYPT_LIB})
-  endif()
 endif()
 
 # ---------------------------------------------------------------- testler
@@ -80,9 +84,9 @@ enable_testing()
 add_executable(test_unit
   tests/unit/test_unit.c
   src/utf8.c
-  src/password.c)
-target_include_directories(test_unit PRIVATE ${CMAKE_SOURCE_DIR}/src)
-target_compile_options(test_unit PRIVATE ${MANGUS_WARNINGS})
+  src/password.c
+  src/prog_util.c)
+target_link_libraries(test_unit PRIVATE mangus_common)
 add_test(NAME unit COMMAND test_unit)
 
 find_package(Python3 COMPONENTS Interpreter)

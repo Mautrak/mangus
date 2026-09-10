@@ -4,8 +4,8 @@ tests/e2e/snapshots/<ad>.txt altın dosyalarıyla (ANSI renk kodları dahil) kar
 
 Normalleştirme (karşılaştırmadan önce):
 * telnet baytları ayıklanır, "\\n\\r" -> "\\n", satır sonu boşlukları atılır;
-* komut istemi satırı (^Yp:.*<.*>) ve Discord uyarısı atılır;
-* yalnızca dinamik sayı içeren ekranlarda (skor, kim) rakam dizileri "#" olur;
+* komut istemi satırı (mud.is_prompt_line) ve Discord uyarısı atılır;
+* yalnızca dinamik sayı içeren ekranlarda (skor) rakam dizileri "#" olur;
 * envanter: acemi eşyalarının rastgele üretilen malzeme/durum etiketleri, yıldız
   bloğu ve rastgele silah adı yer tutucuya çevrilir (bkz. src/db.c create_object).
 
@@ -21,9 +21,8 @@ import mud
 CHARACTER = "Gorsel"                      # sabit ad: skor ekranında görünür
 SCREENS = ["greeting", "bak", "skor", "yetenekler", "komutlar", "çıkışlar",
            "envanter", "ekipman", "yardım"]
-DIGIT_SCREENS = {"skor", "kim"}           # dinamik sayılar içerenler
+DIGIT_SCREENS = {"skor"}                  # dinamik sayılar içerenler
 
-PROMPT_LINE_RE = re.compile(r"^Yp:.*<.*>")
 DISCORD_MARK = "Discord ID'niz"
 ESC = r"\x1b\[[0-9;]*m"
 # "[ESC stone ESC]" gibi renkli malzeme/durum etiketleri -> "[…]" (renk de rastgele olabilir)
@@ -62,8 +61,7 @@ def normalise(name, text):
     text = mud.normalise_newlines(text)
     out = []
     for line in text.split("\n"):
-        plain = mud.strip_ansi(line)
-        if PROMPT_LINE_RE.match(plain) or DISCORD_MARK in plain:
+        if mud.is_prompt_line(line) or DISCORD_MARK in mud.strip_ansi(line):
             continue
         if name in DIGIT_SCREENS:
             line = mask_digits(line)

@@ -3336,6 +3336,15 @@ void oprog_set(OBJ_INDEX_DATA *, const char *, const char *);
 
 /* mob_prog.c */
 void mprog_set(MOB_INDEX_DATA *, const char *, const char *);
+/* Grup 10 */
+struct prog_type  { const char *name; int bit; };                    /* "greet_prog" -> MPROG_GREET */
+struct prog_entry { const char *name; int bit; void (*fun)(void); }; /* "greet_prog_x" -> işlev */
+const struct prog_entry *prog_lookup(char kind, int vnum, const struct prog_type *types,
+                                     const struct prog_entry *table,
+                                     const char *progtype, const char *name);
+OBJ_DATA *prog_create_object(int vnum, int level);
+void prog_set_owner(OBJ_DATA *obj, const char *name);
+bool prog_obj_owned_by(const OBJ_DATA *obj, const CHAR_DATA *ch);
 
 
 #undef	CD
