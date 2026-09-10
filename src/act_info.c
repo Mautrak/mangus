@@ -1731,7 +1731,7 @@ void do_score( CHAR_DATA *ch, char *argument )
   printf_to_char(ch,"{c| Zp    : {w%-7d/%-7d{c | Bil: {w%-2d(%-2d){c  | Eşya   : {w%-3d / %-4d{c        |\n\r",who->move, who->max_move,who->perm_stat[STAT_WIS],get_curr_stat(who,STAT_WIS),who->carry_number, can_carry_n(who));
   printf_to_char(ch,"{c| Seviye: {w%-10d{c      | Çev: {w%-2d(%-2d){c  | Ağırlık: {w%-6ld / %-8d{c |\n\r",who->level,who->perm_stat[STAT_DEX],get_curr_stat(who,STAT_DEX),get_carry_weight(who), can_carry_w(who));
   printf_to_char(ch,"{c| Kalan : {w%-10d{c      | Bün: {w%-2d(%-2d){c  | GörevP : {w%-5d{c             |\n\r",(who->level + 1) * exp_per_level(who,who->pcdata->points) - who->exp,who->perm_stat[STAT_CON],get_curr_stat(who,STAT_CON),who->pcdata->questpoints);
-  printf_to_char(ch,"{c| TP    : {w%-12ld{c    | Kar: {w%-2d(%-2d){c  | GörevZ : {w%-2d{c                |\n\r",who->exp,who->perm_stat[STAT_CHA],get_curr_stat(who,STAT_CHA),((IS_SET(who->act, PLR_QUESTOR))?(who->pcdata->countdown):(who->pcdata->nextquest)));
+  printf_to_char(ch,"{c| TP    : {w%-12d{c    | Kar: {w%-2d(%-2d){c  | GörevZ : {w%-2d{c                |\n\r",who->exp,who->perm_stat[STAT_CHA],get_curr_stat(who,STAT_CHA),((IS_SET(who->act, PLR_QUESTOR))?(who->pcdata->countdown):(who->pcdata->nextquest)));
   printf_to_char(ch,"{c| Korkak: {w%-10d{c      | ZZ : {w%-3d{c     | GörevPr: {w%-2d{c                |\n\r",who->wimpy,GET_DAMROLL(who),who->pcdata->questpractice);
   printf_to_char(ch,"{c| Ölüm  : {w%-3d{c             | VZ : {w%-3d{c     | RolP   : {w%-6ld{c            |\n\r",who->pcdata->death,GET_HITROLL(who), who->pcdata->rk_puani);
   printf_to_char(ch,"{c| Din   : {w%-*s{c    | OK : {w%-*s{c  | DinP   : {w%-6ld{c            |\n\r",utf8_width(religion_table[who->religion].name, 12), religion_table[who->religion].name, utf8_width(oyuncukatli, 6), oyuncukatli, who->pcdata->din_puani);
@@ -1760,7 +1760,7 @@ void mob_score(CHAR_DATA *ch,CHAR_DATA *mob)
 	printf_to_char(ch,"{c| Yp    : {w%-5d/%-5d{c| Akçe : {w%-7ld {c| Din: {w%-*s{c             |\n\r",mob->hit,  mob->max_hit,mob->silver,utf8_width(religion_table[mob->religion].name, 12), religion_table[mob->religion].name);
 	printf_to_char(ch,"{c| Mana  : {w%-5d/%-5d{c| Beden: {w%-8d{c|                               |\n\r",mob->mana, mob->max_mana,mob->size);
 	printf_to_char(ch,"{c| Zp    : {w%-5d/%-5d{c|                |                               |\n\r",mob->move, mob->max_move);
-	printf_to_char(ch,"{c| Seviye: {w%-7ld{c    |                |                               |\n\r",mob->level);
+	printf_to_char(ch,"{c| Seviye: {w%-7d{c    |                |                               |\n\r",mob->level);
 	printf_to_char(ch,"{c|--------------------'------------------'-----------------------------,{x\n\r");
   show_irv_rows( ch, mob );
   printf_to_char(ch,"{c'---------------------------------------------------------------------'{x\n\r");
@@ -1794,10 +1794,10 @@ void do_time( CHAR_DATA *ch, char *argument )
     char buf[MAX_STRING_LENGTH];
     char buf2[MAX_STRING_LENGTH - 20];
 
-	printf_to_char( ch , "Yıl  : %d\n\r", time_info.year );
-	printf_to_char( ch , "Ay   : %s (%d. ay)\n\r", month_name[time_info.month-1] , time_info.month );
-	printf_to_char( ch , "Gün  : %d\n\r", time_info.day );
-	printf_to_char( ch , "Saat : %d\n\r", time_info.hour );
+	printf_to_char( ch , "Yıl  : %ld\n\r", time_info.year );
+	printf_to_char( ch , "Ay   : %s (%ld. ay)\n\r", month_name[time_info.month-1] , time_info.month );
+	printf_to_char( ch , "Gün  : %ld\n\r", time_info.day );
+	printf_to_char( ch , "Saat : %ld\n\r", time_info.hour );
 
     if ( !IS_SET(ch->in_room->room_flags,ROOM_INDOORS) ||
          IS_IMMORTAL(ch) )

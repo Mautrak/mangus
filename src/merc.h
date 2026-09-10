@@ -3022,8 +3022,13 @@ int	colour		( char type, CHAR_DATA *ch, char *string );
 void	colourconv	( char *buffer, const char *txt, CHAR_DATA *ch );
 	//act_color: format1 for english, format2 for turkish
 
-void	printf_to_char	( CHAR_DATA *, const char *, ... );
-void	bugf		( char *, ... );
+#if defined(__GNUC__) || defined(__clang__)
+#define PRINTF_FMT(f, a) __attribute__((format(printf, f, a)))
+#else
+#define PRINTF_FMT(f, a)
+#endif
+void	printf_to_char	( CHAR_DATA *, const char *, ... ) PRINTF_FMT(2, 3);
+void	bugf		( const char *, ... ) PRINTF_FMT(1, 2);
 /* Grup 09 */
 #define DEFAULT_PROMPT	"Yp:%h/%H Mp:%m/%M Zp:%v/%V <%o>{x "
 

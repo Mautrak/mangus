@@ -2728,7 +2728,7 @@ void printf_to_char (CHAR_DATA *ch, const char *fmt, ...)
  * bug() ilk argümanını biçim dizgisi saydığından hazır metin ona verilmez;
  * aynı önekle doğrudan günlüğe yazılır.
  */
-void bugf (char * fmt, ...)
+void bugf (const char *fmt, ...)
 {
 	char buf [MAX_STRING_LENGTH];
 	char line [MAX_STRING_LENGTH + 16];
