@@ -27,6 +27,29 @@
 #define BOT_MIN(n)        ( BOT_SEC(60) * (n) )
 #define BOT_HOUR(n)       ( BOT_MIN(60) * (n) )
 
+/*
+ * Veteran kuralları (bkz. CLAUDE.md "Botlar"): yp/mana eşikleri yüzde,
+ * kaçınma süreleri pulse cinsindendir.
+ */
+#define BOT_HP_FIGHT        70    /* bu yp altında dövüşe/PK'ya/baskına girilmez */
+#define BOT_MANA_FIGHT      40    /* büyücü bu mana altında dövüşe girmez */
+#define BOT_HP_REST         60    /* bu yp altında dinlenmeye gidilir */
+#define BOT_HP_RESTED       92    /* dinlenme bu yp'ye dek sürer */
+#define BOT_HP_FLEE         32    /* kaçış eşiği (savaşçı sınıflar) */
+#define BOT_HP_FLEE_CASTER  40    /* kaçış eşiği (büyücü sınıflar) */
+#define BOT_HP_LOSING       55    /* rakip sağlamken bu yp altında erken çıkış */
+#define BOT_HP_PK_MIN       50    /* PK/baskın bu yp altında sürdürülmez */
+#define BOT_HP_RAID_QUIT    35    /* baskından geri çekilme */
+#define BOT_HP_IDLE_PK      85    /* boştayken PK/baskın planlaması için asgari yp */
+#define BOT_AVOID_AREA      BOT_HOUR(3)   /* ölünen bölge (tek ölüm) */
+#define BOT_AVOID_AREA_MULTI BOT_HOUR(12) /* ölünen bölge (2+ ölüm) */
+#define BOT_AVOID_MOB       BOT_HOUR(6)   /* öldüren yaratık türü */
+#define BOT_AVOID_ROOM      BOT_HOUR(3)   /* ölünen oda */
+#define BOT_AVOID_SCOUT     BOT_MIN(20)   /* yolda görülen güçlü saldırganın odası */
+#define BOT_RAID_FAIL_AVOID BOT_HOUR(12)  /* baskında ölüm: hedef kabal */
+#define BOT_REST_MAX        BOT_MIN(14)   /* dinlenme en çok */
+#define BOT_TRAVEL_MAX      BOT_MIN(12)   /* bir yolculuk en çok */
+
 /* yüzde ve rastgele havuz seçimi (tüm bot dosyalarında ortak) */
 #define BOT_PN(a)         ( (int) ( sizeof(a) / sizeof(a[0]) ) )
 #define BOT_PICK(a)       bot_pick( (a), BOT_PN(a) )

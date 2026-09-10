@@ -873,7 +873,7 @@ static bool bot_travel_scout( BOT_DATA *bot, ROOM_INDEX_DATA *next )
         {
             if ( bot_debug )
                 bot_log( bot, "yolda tehlike: %s (seviye %d) oda %d; dolaşılıyor.", rch->short_descr, rch->level, next->vnum );
-            bot_avoid_room( bot, next, BOT_MIN(20) );
+            bot_avoid_room( bot, next, BOT_AVOID_SCOUT );
             return TRUE;
         }
     return FALSE;
@@ -1085,7 +1085,7 @@ static AREA_DATA *bot_pick_hunt_area( BOT_DATA *bot )
         {
             score += UMIN( mem->kills, 30 ) * 2 - mem->deaths * 30;
             /* bir ölüm: üç saat uzak dur; iki ve üstü: on iki saat */
-            if ( mem->deaths >= 1 && bot_pulse - mem->last_pulse < BOT_HOUR( mem->deaths >= 2 ? 12 : 3 ) )
+            if ( mem->deaths >= 1 && bot_pulse - mem->last_pulse < ( mem->deaths >= 2 ? BOT_AVOID_AREA_MULTI : BOT_AVOID_AREA ) )
                 continue;
         }
         if ( area == bot->hunt_area )
@@ -1155,7 +1155,7 @@ static void bot_travel_step( BOT_DATA *bot )
         bot_set_state( bot, after );
         return;
     }
-    if ( bot_pulse - bot->travel_started > BOT_MIN(12) )     /* 12 dakika: vazgeç */
+    if ( bot_pulse - bot->travel_started > BOT_TRAVEL_MAX )    /* vazgeç */
     {
         bot->path_len = bot->path_pos = 0;
         bot_set_state( bot, BOT_ST_IDLE );
@@ -1273,7 +1273,7 @@ static bool bot_need_rest( BOT_DATA *bot )
 
     if ( is_starving( ch ) )
         return bot_pct( ch->hit, ch->max_hit ) < 15;
-    if ( bot_pct( ch->hit, ch->max_hit ) < 60 )
+    if ( bot_pct( ch->hit, ch->max_hit ) < BOT_HP_REST )
         return TRUE;
     if ( is_caster( ch ) && bot_pct( ch->mana, ch->max_mana ) < 35 )
         return TRUE;
@@ -1286,7 +1286,7 @@ static bool bot_rested_enough( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch;
 
-    if ( bot_pct( ch->hit, ch->max_hit ) < 92 )
+    if ( bot_pct( ch->hit, ch->max_hit ) < BOT_HP_RESTED )
         return FALSE;
     if ( is_caster( ch ) && bot_pct( ch->mana, ch->max_mana ) < 75 )
         return FALSE;
@@ -1353,7 +1353,7 @@ static void bot_resting( BOT_DATA *bot )
 
     /* gece ışıksız karanlıkta: sabahı bekle (14 dk sınırı da uygulanır) */
     if ( bot_blind_in_dark( ch ) && is_night() && ch->silver < 20
-      && bot_pulse - bot->state_pulse < BOT_MIN(14) )
+      && bot_pulse - bot->state_pulse < BOT_REST_MAX )
     {
         /* karanlıkta bekle: yorgunsa uyu, değilse dinlen (her ikisi de yenilenme sağlar) */
         if ( ch->position > POS_SLEEPING && !IS_AFFECTED( ch, AFF_SLEEP ) )
@@ -1365,7 +1365,7 @@ static void bot_resting( BOT_DATA *bot )
         }
         return;
     }
-    if ( bot_rested_enough( bot ) || bot_pulse - bot->state_pulse > BOT_MIN(14) )
+    if ( bot_rested_enough( bot ) || bot_pulse - bot->state_pulse > BOT_REST_MAX )
     {
         if ( ch->position < POS_STANDING )
         {
@@ -1664,13 +1664,13 @@ static void bot_combat( BOT_DATA *bot )
         return;
     }
 
-    if ( hp < ( is_caster( ch ) ? 40 : 32 ) && vhp > 25 )
+    if ( hp < ( is_caster( ch ) ? BOT_HP_FLEE_CASTER : BOT_HP_FLEE ) && vhp > 25 )
     {
         bot_escape( bot );
         return;
     }
     /* kaybedilen dövüş: rakip güçlü ve ben ondan çok daha hızlı eriyorum */
-    if ( hp < 55 && vhp > 70 && victim->level >= ch->level + 1 && IS_NPC(victim) )
+    if ( hp < BOT_HP_LOSING && vhp > 70 && victim->level >= ch->level + 1 && IS_NPC(victim) )
     {
         bot_escape( bot );
         return;
@@ -2028,7 +2028,7 @@ static void bot_hunt( BOT_DATA *bot )
     {
         bot_remember_spawn( bot, ch->in_room );
         /* veteran: yaralıyken dövüşe girme, önce topla */
-        if ( bot_pct( ch->hit, ch->max_hit ) < 70 || ( is_caster( ch ) && bot_pct( ch->mana, ch->max_mana ) < 40 ) )
+        if ( bot_pct( ch->hit, ch->max_hit ) < BOT_HP_FIGHT || ( is_caster( ch ) && bot_pct( ch->mana, ch->max_mana ) < BOT_MANA_FIGHT ) )
         {
             bot_start_rest( bot );
             return;
@@ -2898,14 +2898,14 @@ void bot_after_death( BOT_DATA *bot )
             struct bot_area_mem *mem = bot_area_memory( bot, droom->area, TRUE );
             mem->deaths++;
             mem->last_pulse = bot_pulse;
-            bot_avoid_room( bot, droom, BOT_HOUR(3) );
+            bot_avoid_room( bot, droom, BOT_AVOID_ROOM );
         }
     }
     /* beni öldüren yaratık türünden bir süre uzak dur */
     if ( bot->last_opp_vnum > 0 )
     {
         bot->avoid_vnum[bot->avoid_pos]  = bot->last_opp_vnum;
-        bot->avoid_until[bot->avoid_pos] = bot_pulse + BOT_HOUR(6);
+        bot->avoid_until[bot->avoid_pos] = bot_pulse + BOT_AVOID_MOB;
         bot->avoid_pos = ( bot->avoid_pos + 1 ) % BOT_AVOID_MAX;
     }
     bot->hunt_area = NULL;
