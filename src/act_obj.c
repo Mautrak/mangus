@@ -4492,6 +4492,86 @@ void do_deposit(CHAR_DATA *ch, char *argument)
 }
 
 
+#define KASA_MAX_ESYA	25
+
+/* Kasaya konamayan eşya türleri. */
+static const int kasa_yasak_tur[] =
+{
+    ITEM_CONTAINER, ITEM_MONEY, ITEM_POTION, ITEM_FURNITURE, ITEM_FOOD,
+    ITEM_BOAT, ITEM_CORPSE_NPC, ITEM_CORPSE_PC, ITEM_FOUNTAIN, ITEM_PORTAL,
+    ITEM_JUKEBOX, ITEM_TATTOO, ITEM_KEY
+};
+
+/* Eşya kasaya konabilir mi? Reddedilirse nedeni basılır. */
+static bool kasa_can_store( CHAR_DATA *ch, OBJ_DATA *obj )
+{
+    int i;
+
+    if ( obj->pIndexData->limit != -1 )
+    {
+	send_to_char( "Kasaya limit eşya koyamazsın.\n\r", ch );
+	return FALSE;
+    }
+
+    for ( i = 0; i < (int) ( sizeof(kasa_yasak_tur) / sizeof(kasa_yasak_tur[0]) ); i++ )
+    {
+	if ( obj->item_type == kasa_yasak_tur[i] )
+	{
+	    send_to_char( "Kasaya bu tür eşyalar koyamazsın.\n\r", ch );
+	    return FALSE;
+	}
+    }
+
+    if ( ch->level < obj->level - 3 )
+    {
+	send_to_char( "Seviyenin en fazla 3 üstü bir eşyayı kasaya koyabilirsin.\n\r", ch );
+	return FALSE;
+    }
+
+    if ( obj->item_type == ITEM_MAP && !obj->value[0] )
+    {
+	send_to_char( "Değersiz haritaları kasaya koyamazsın.\n\r", ch );
+	return FALSE;
+    }
+
+    return TRUE;
+}
+
+/* Eşyayı kasa listesinin başına ekler. */
+static void kasa_link( CHAR_DATA *ch, OBJ_DATA *obj )
+{
+    obj->next_content		= ch->pcdata->kasa_esyalari;
+    ch->pcdata->kasa_esyalari	= obj;
+    obj->carried_by		= ch;
+    obj->in_room		= NULL;
+    obj->in_obj			= NULL;
+    obj->kasada_duruyor		= TRUE;
+}
+
+/* Eşyayı kasa listesinden çıkarır. */
+static void kasa_unlink( CHAR_DATA *ch, OBJ_DATA *obj )
+{
+    OBJ_DATA *prev;
+
+    if ( ch->pcdata->kasa_esyalari == obj )
+	ch->pcdata->kasa_esyalari = obj->next_content;
+    else
+    {
+	for ( prev = ch->pcdata->kasa_esyalari; prev != NULL; prev = prev->next_content )
+	{
+	    if ( prev->next_content == obj )
+	    {
+		prev->next_content = obj->next_content;
+		break;
+	    }
+	}
+    }
+
+    obj->next_content	= NULL;
+    obj->carried_by	= NULL;
+    obj->kasada_duruyor	= FALSE;
+}
+
 void do_kasa(CHAR_DATA *ch, char *argument)
 {
 	char arg1[MAX_INPUT_LENGTH];
@@ -4522,19 +4602,18 @@ void do_kasa(CHAR_DATA *ch, char *argument)
 
 	if ( arg1[0] == '\0' )
 	{
-		printf_to_char( ch, "Kasanla ilgili hangi işlemi yapacaksın?\n\r" );
-		printf_to_char( ch, "Kasana bir eşya koyabilir, kasandan bir eşya alabilir\n\r" );
-		printf_to_char( ch, "veya kasandaki eşyaları listeleyebilirsin.\n\r" );
+		send_to_char( "Kasanla ilgili hangi işlemi yapacaksın?\n\r", ch );
+		send_to_char( "Kasana bir eşya koyabilir, kasandan bir eşya alabilir\n\r", ch );
+		send_to_char( "veya kasandaki eşyaları listeleyebilirsin.\n\r", ch );
 		return;
 	}
 
-	if (!strcmp(arg1, "koy"))
+	if ( !str_cmp( arg1, "koy" ) )
 	{
 		for ( obj = ch->pcdata->kasa_esyalari; obj != NULL; obj = obj->next_content )
-		{
 			pcount++;
-		}
-		if( pcount > 25 )
+
+		if ( pcount > KASA_MAX_ESYA )
 		{
 			send_to_char( "Kasaya bu kadar çok eşya koyamazsın.\n\r", ch );
 			return;
@@ -4544,75 +4623,44 @@ void do_kasa(CHAR_DATA *ch, char *argument)
 			send_to_char( "Sende öyle bir eşya yok.\n\r", ch );
 			return;
 		}
-		if ( obj->pIndexData->limit != -1)
-		{
-			send_to_char( "Kasaya limit eşya koyamazsın.\n\r", ch );
+		if ( !kasa_can_store( ch, obj ) )
 			return;
-		}
-		if( obj->item_type == ITEM_CONTAINER || obj->item_type == ITEM_MONEY || obj->item_type == ITEM_POTION ||
-			obj->item_type == ITEM_FURNITURE || obj->item_type == ITEM_FOOD || obj->item_type ==  ITEM_BOAT ||
-			obj->item_type == ITEM_CORPSE_NPC || obj->item_type == ITEM_CORPSE_PC || obj->item_type == ITEM_FOUNTAIN ||
-			obj->item_type == ITEM_PORTAL || obj->item_type == ITEM_JUKEBOX || obj->item_type == ITEM_TATTOO || obj->item_type == ITEM_KEY )
-		{
-			send_to_char( "Kasaya bu tür eşyalar koyamazsın.\n\r", ch );
-			return;
-		}
-
-		if((ch->level < obj->level -3) && (obj->item_type != ITEM_CONTAINER))
-		{
-			send_to_char( "Eğer bir taşıyıcı değilse, seviyenin en fazla 3 üstü bir eşyayı kasaya koyabilirsin.\n\r", ch );
-		}
-
-		if(obj->item_type == ITEM_MAP && !obj->value[0])
-		{
-			send_to_char( "Değersiz haritaları kasaya koyamazsın.\n\r", ch );
-		}
 
 		obj_from_char( obj );
-
-		obj->next_content	 = ch->pcdata->kasa_esyalari;
-		ch->pcdata->kasa_esyalari	 = obj;
-		obj->carried_by	 = ch;
-		obj->in_room	 = NULL;
-		obj->in_obj		 = NULL;
-		obj->kasada_duruyor		 = TRUE;
+		kasa_link( ch, obj );
 
 		printf_to_char(ch, "Kasaya %s koyuyorsun.\n\r", obj->short_descr );
 		return;
 	}
-	else if (!strcmp(arg1, "al"))
+	else if ( !str_cmp( arg1, "al" ) )
 	{
 		for ( obj = ch->pcdata->kasa_esyalari; obj != NULL; obj = obj->next_content )
 		{
-			if( is_name( arg2, obj->name ) && can_see_obj( ch, obj ) )
+			if ( !is_name( arg2, obj->name ) || !can_see_obj( ch, obj ) )
+				continue;
+
+			/* Önce taşıyabilir mi diye sor; eşya kasada kalsın. */
+			if ( ch->carry_number + get_obj_number( obj ) > can_carry_n( ch ) )
 			{
-				if ( obj == ch->pcdata->kasa_esyalari )
-				{
-					ch->pcdata->kasa_esyalari = obj->next_content;
-					get_obj( ch, obj, NULL );
-					obj->kasada_duruyor		 = FALSE;
-					return;
-				}
-				else
-				{
-					OBJ_DATA *prev;
-					for ( prev = ch->pcdata->kasa_esyalari; prev != NULL; prev = prev->next_content )
-					{
-						if ( prev->next_content == obj )
-						{
-							prev->next_content = obj->next_content;
-							get_obj( ch, obj, NULL );
-							obj->kasada_duruyor		 = FALSE;
-							return;
-						}
-					}
-				}
+				act( "$d: bu kadar çok şey taşıyamazsın.", ch, NULL, obj->name, TO_CHAR );
+				return;
 			}
+			if ( get_carry_weight( ch ) + get_obj_weight( obj ) > can_carry_w( ch ) )
+			{
+				act( "$d: bu kadar ağırlık taşıyamazsın.", ch, NULL, obj->name, TO_CHAR );
+				return;
+			}
+
+			kasa_unlink( ch, obj );
+			obj_to_char( obj, ch );
+			act( "Kasandan $p alıyorsun.", ch, obj, NULL, TO_CHAR );
+			act( "$n kasasından $p alıyor.", ch, obj, NULL, TO_ROOM );
+			return;
 		}
 		send_to_char( "Kasada o isimde bir eşya bulamıyorsun.\n\r", ch );
 		return;
 	}
-	else if (!strcmp(arg1, "liste"))
+	else if ( !str_cmp( arg1, "liste" ) )
 	{
 		send_to_char( "Kasadaki eşyaların:\n\r", ch );
 		send_to_char( "-------------------\n\r", ch );
@@ -4622,15 +4670,8 @@ void do_kasa(CHAR_DATA *ch, char *argument)
 		}
 		return;
 	}
-	else
-	{
-		send_to_char( "Böyle bir kasa işlemi bilmiyorum.\n\r", ch );
-		return;
-	}
 
-
-	return;
-
+	send_to_char( "Böyle bir kasa işlemi bilmiyorum.\n\r", ch );
 }
 
 
