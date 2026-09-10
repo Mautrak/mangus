@@ -178,12 +178,6 @@ static void heal_victim( CHAR_DATA *ch, CHAR_DATA *victim, int amount )
 }
 
 /* Hizalamaya göre hometown tablosu indeksi: 0 iyi, 1 nötr, 2 kötü. */
-static int align_index( CHAR_DATA *ch )
-{
-    if ( IS_GOOD( ch ) ) return 0;
-    if ( IS_EVIL( ch ) ) return 2;
-    return 1;
-}
 
 /*
  * Uzaktan bakma: karakter geçici olarak odaya taşınıp baktırılır ve geri

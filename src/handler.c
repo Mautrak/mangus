@@ -48,6 +48,7 @@
 *	ROM license, in the file Rom24/doc/rom.license			   *
 ***************************************************************************/
 #include <ctype.h>
+#include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -71,6 +72,9 @@ DECLARE_DO_FUN(do_track		);
 void	affect_modify	( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd );
 ROOM_INDEX_DATA *	find_location	( CHAR_DATA *ch, char *arg );
 
+/* reset_char sırasında ağır silah düşürme denetimi kapalı tutulur */
+static bool reset_in_progress;
+
 /* returns number of people on an object */
 int count_users(OBJ_DATA *obj)
 {
@@ -87,56 +91,86 @@ int count_users(OBJ_DATA *obj)
     return count;
 }
 
-/* returns material number */
-int material_lookup (const char *name)
+/*
+ * Ad tablolarında ortak arama: tablonun her satırı `stride` bayt, ad(lar)
+ * satırın `name_off` ofsetinde ardışık `nnames` işaretçidir. Son adın NULL
+ * olduğu satır tablonun sonudur; `max` >= 0 ise en çok o kadar satır gezilir.
+ * Eşleşen satırın indeksi, yoksa -1 döner.
+ */
+static int name_table_lookup(const char *name, const void *table, size_t stride,
+			     size_t name_off, int nnames, int max)
 {
-    return 0;
+    int i, k;
+
+    for (i = 0; max < 0 || i < max; i++)
+    {
+	const char *const *names =
+	    (const char *const *) ((const char *) table + i * stride + name_off);
+
+	if (names[nnames - 1] == NULL)
+	    return -1;
+	for (k = 0; k < nnames; k++)
+	    if (utf8_first_eq(name, names[k]) && !str_prefix(name, names[k]))
+		return i;
+    }
+    return -1;
 }
+
+#define TABLE_LOOKUP(name, tbl, field, nnames, max) \
+    name_table_lookup((name), (tbl), sizeof (tbl)[0], \
+		      offsetof(__typeof__((tbl)[0]), field), (nnames), (max))
 
 /* returns race number */
 int race_lookup (const char *name)
 {
-   int race;
-   char buf[MAX_STRING_LENGTH];
+    int race = TABLE_LOOKUP(name, race_table, name, 2, -1);
 
-   for ( race = 0; race_table[race].name[1] != NULL; race++)
-   {
-     if (((utf8_first_eq(name, race_table[race].name[0])) &&  !str_prefix( name,race_table[race].name[0])) ||
-        ((utf8_first_eq(name, race_table[race].name[1])) &&  !str_prefix( name,race_table[race].name[1])) )
-	    return race;
-   }
-
-   snprintf(buf, sizeof(buf), "Race_lookup: race not found %s.", name);
-   bug(buf, 0);
-   return 0;
+    if (race < 0)
+    {
+	bugf("Race_lookup: race not found %s.", name);
+	return 0;
+    }
+    return race;
 }
 
 int liq_lookup (const char *name)
 {
-    int liq;
+    int liq = TABLE_LOOKUP(name, liq_table, liq_name, 1, -1);
 
-    for ( liq = 0; liq_table[liq].liq_name != NULL; liq++)
-    {
-	if (utf8_first_eq(name, liq_table[liq].liq_name)
-	&& !str_prefix(name,liq_table[liq].liq_name))
-	    return liq;
-    }
-
-    return LIQ_WATER;
+    return liq < 0 ? LIQ_WATER : liq;
 }
 
 int weapon_lookup (const char *name)
 {
-    int type;
+    return TABLE_LOOKUP(name, weapon_table, name, 1, -1);
+}
 
-    for (type = 0; weapon_table[type].name != NULL; type++)
-    {
-	if (utf8_first_eq(name, weapon_table[type].name)
-	&&  !str_prefix(name,weapon_table[type].name))
-	    return type;
-    }
+/* Yönelim dizini: hometown_table altar/recall/pit dizileri için 0 iyi, 1 tarafsız, 2 kötü */
+int align_index( CHAR_DATA *ch )
+{
+    return IS_GOOD(ch) ? 0 : IS_EVIL(ch) ? 2 : 1;
+}
 
-    return -1;
+/* vnum bir kabal eşyasıysa kabalın indeksi (1..MAX_CABAL-1), değilse 0 */
+int cabal_obj_index( int vnum )
+{
+    int i;
+
+    for ( i = 1; i < MAX_CABAL; i++ )
+	if ( cabal_table[i].obj_vnum == vnum )
+	    return i;
+    return 0;
+}
+
+/* vnum bir kabalın sunak odasıysa kabalın indeksi, değilse 0 */
+int cabal_room_index( int vnum )
+{
+    int i;
+
+    for ( i = 1; i < MAX_CABAL; i++ )
+	if ( cabal_table[i].room_vnum == vnum )
+	    return i;
+    return 0;
 }
 
 /*
@@ -184,31 +218,17 @@ bool cabal_ok(CHAR_DATA *ch, sh_int sn)
 
 int weapon_type (const char *name)
 {
-    int type;
+    int type = TABLE_LOOKUP(name, weapon_table, name, 1, -1);
 
-    for (type = 0; weapon_table[type].name != NULL; type++)
-    {
-        if (utf8_first_eq(name, weapon_table[type].name)
-        &&  !str_prefix(name,weapon_table[type].name))
-            return weapon_table[type].type;
-    }
-
-    return WEAPON_EXOTIC;
+    return type < 0 ? WEAPON_EXOTIC : weapon_table[type].type;
 }
 
 
 int item_lookup(const char *name)
 {
-    int type;
+    int type = TABLE_LOOKUP(name, item_table, name, 1, -1);
 
-    for (type = 0; item_table[type].name != NULL; type++)
-    {
-        if (utf8_first_eq(name, item_table[type].name)
-        &&  !str_prefix(name,item_table[type].name))
-            return item_table[type].type;
-    }
-
-    return -1;
+    return type < 0 ? -1 : item_table[type].type;
 }
 
 const char *item_name(int item_type)
@@ -266,147 +286,89 @@ bool check_material( OBJ_DATA *obj, char *material )
 
 }
 
+/* obj->material listedeki adlardan birini içeriyor mu? (check_material gibi alt dizgi) */
+static bool material_in(OBJ_DATA *obj, const char *const *list)
+{
+    for (; *list != NULL; list++)
+	if (check_material(obj, (char *) *list))
+	    return TRUE;
+    return FALSE;
+}
+
+static const char *const metal_materials[] =
+{
+    "silver", "gold", "iron", "mithril", "adamantite", "steel", "lead",
+    "bronze", "copper", "brass", "platinum", "titanium", "aluminum", NULL
+};
+
+static const char *const floating_materials[] =
+{
+    "wood", "ebony", "ice", "energy", "hardwood", "softwood", "flesh",
+    "silk", "wool", "cloth", "fur", "water", "oak", NULL
+};
+
+static const char *const sinking_materials[] =
+{
+    "steel", "iron", "brass", "silver", "gold", "ivory", "copper", "diamond",
+    "pearl", "gem", "platinum", "ruby", "bronze", "titanium", "mithril",
+    "obsidian", "lead", NULL
+};
+
 bool is_metal( OBJ_DATA *obj )
 {
-
-  if ( check_material(obj, "silver") ||
-       check_material(obj, "gold") ||
-       check_material(obj, "iron") ||
-       check_material(obj, "mithril") ||
-       check_material(obj, "adamantite") ||
-       check_material(obj, "steel") ||
-       check_material(obj, "lead") ||
-       check_material(obj, "bronze") ||
-       check_material(obj, "copper") ||
-       check_material(obj, "brass") ||
-       check_material(obj, "platinium") ||
-       check_material(obj, "titanium") ||
-       check_material(obj, "aliminum") )
-    return TRUE;
-
-  return FALSE;
-
+    return material_in(obj, metal_materials);
 }
 
 bool may_float( OBJ_DATA *obj )
 {
-
-    if ( check_material( obj, "wood" )  ||
-         check_material( obj, "ebony" )  ||
-         check_material( obj, "ice" )  ||
-         check_material( obj, "energy" )  ||
-         check_material( obj, "hardwood" )  ||
-         check_material( obj, "softwood" )  ||
-         check_material( obj, "flesh" )  ||
-         check_material( obj, "silk" )  ||
-         check_material( obj, "wool" )  ||
-         check_material( obj, "cloth" )  ||
-         check_material( obj, "fur" )  ||
-         check_material( obj, "water" )  ||
-         check_material( obj, "ice" )  ||
-         check_material( obj, "oak" ) )
-       return TRUE;
-
-    if ( obj->item_type == ITEM_BOAT )
-	return TRUE;
-
-    return FALSE;
+    return material_in(obj, floating_materials) || obj->item_type == ITEM_BOAT;
 }
-
 
 bool cant_float( OBJ_DATA *obj )
 {
-    if ( check_material( obj, "steel" ) ||
-         check_material( obj, "iron" ) ||
-         check_material( obj, "brass" ) ||
-         check_material( obj, "silver" ) ||
-         check_material( obj, "gold" ) ||
-         check_material( obj, "ivory" ) ||
-         check_material( obj, "copper" ) ||
-         check_material( obj, "diamond" ) ||
-         check_material( obj, "pearl" ) ||
-         check_material( obj, "gem" ) ||
-         check_material( obj, "platinium" ) ||
-         check_material( obj, "ruby" ) ||
-         check_material( obj, "bronze" ) ||
-         check_material( obj, "titanium" ) ||
-         check_material( obj, "mithril" ) ||
-         check_material( obj, "obsidian" ) ||
-         check_material( obj, "lead" ) )
-       return TRUE;
-
-    return FALSE;
+    return material_in(obj, sinking_materials);
 }
 
 int floating_time( OBJ_DATA *obj )
 {
- int  ftime;
+    static const struct { sh_int item_type, ftime; } float_time_table[] =
+    {
+	{ ITEM_KEY, 1 },	{ ITEM_MAYMUNCUK, 1 },	{ ITEM_ARMOR, 2 },
+	{ ITEM_TREASURE, 2 },	{ ITEM_PILL, 2 },	{ ITEM_POTION, 3 },
+	{ ITEM_TRASH, 3 },	{ ITEM_FOOD, 4 },	{ ITEM_CONTAINER, 5 },
+	{ ITEM_CORPSE_NPC, 10 },{ ITEM_CORPSE_PC, 10 },	{ -1, 0 }
+    };
+    int i, ftime = 0;
 
- ftime = 0;
- switch( obj->item_type )
- {
-    default: break;
-    case ITEM_KEY 	: ftime = 1;	break;
-    case ITEM_MAYMUNCUK 	: ftime = 1;	break;
-    case ITEM_ARMOR 	: ftime = 2;	break;
-    case ITEM_TREASURE 	: ftime = 2;	break;
-    case ITEM_PILL 	: ftime = 2;	break;
-    case ITEM_POTION 	: ftime = 3;	break;
-    case ITEM_TRASH 	: ftime = 3;	break;
-    case ITEM_FOOD 	: ftime = 4;	break;
-    case ITEM_CONTAINER	: ftime = 5;	break;
-    case ITEM_CORPSE_NPC: ftime = 10;	break;
-    case ITEM_CORPSE_PC	: ftime = 10;	break;
- }
- ftime = number_fuzzy( ftime ) ;
+    for (i = 0; float_time_table[i].item_type != -1; i++)
+	if (float_time_table[i].item_type == obj->item_type)
+	{
+	    ftime = float_time_table[i].ftime;
+	    break;
+	}
 
- return ( ftime < 0 ? 0 : ftime);
+    ftime = number_fuzzy( ftime ) ;
+
+    return ( ftime < 0 ? 0 : ftime);
 }
 
 int attack_lookup  (const char *name)
 {
-    int att;
+    int att = TABLE_LOOKUP(name, attack_table, name, 1, -1);
 
-    for ( att = 0; attack_table[att].name != NULL; att++)
-    {
-	if (utf8_first_eq(name, attack_table[att].name)
-	&&  !str_prefix(name,attack_table[att].name))
-	    return att;
-    }
-
-    return 0;
+    return att < 0 ? 0 : att;
 }
 
-/* returns a flag for wiznet */
+/* wiznet_table indeksini döndürür (bayrak: wiznet_table[i].flag), yoksa -1 */
 long wiznet_lookup (const char *name)
 {
-    int flag;
-
-    for (flag = 0; wiznet_table[flag].name != NULL; flag++)
-    {
-	if (utf8_first_eq(name, wiznet_table[flag].name)
-	&& !str_prefix(name,wiznet_table[flag].name))
-	    return flag;
-    }
-
-    return -1;
+    return TABLE_LOOKUP(name, wiznet_table, name, 1, -1);
 }
 
 /* returns class number */
 int class_lookup (const char *name)
 {
-   int iclass;
-
-   for ( iclass = 0; iclass < MAX_CLASS; iclass++)
-   {
-        if ( (utf8_first_eq(name, class_table[iclass].name[0]) &&  !str_prefix( name,class_table[iclass].name[0])) ||
-              (utf8_first_eq(name, class_table[iclass].name[1]) &&  !str_prefix( name,class_table[iclass].name[1])) )
-	{
-            return iclass;
-	}
-   }
-
-   return -1;
+    return TABLE_LOOKUP(name, class_table, name, 2, MAX_CLASS);
 }
 
 /* for immunity, vulnerabiltiy, and resistant
@@ -415,8 +377,21 @@ int class_lookup (const char *name)
 
 int check_immune(CHAR_DATA *ch, int dam_type)
 {
+    /* DAM_* -> IMM_* eşlemesi; 0 = tabloda yok (DAM_LIGHT_V, DAM_TRAP_ROOM...) */
+    static const long dam_to_imm[] =
+    {
+	[DAM_BASH] = IMM_BASH,		[DAM_PIERCE] = IMM_PIERCE,
+	[DAM_SLASH] = IMM_SLASH,	[DAM_FIRE] = IMM_FIRE,
+	[DAM_COLD] = IMM_COLD,		[DAM_LIGHTNING] = IMM_LIGHTNING,
+	[DAM_ACID] = IMM_ACID,		[DAM_POISON] = IMM_POISON,
+	[DAM_NEGATIVE] = IMM_NEGATIVE,	[DAM_HOLY] = IMM_HOLY,
+	[DAM_ENERGY] = IMM_ENERGY,	[DAM_MENTAL] = IMM_MENTAL,
+	[DAM_DISEASE] = IMM_DISEASE,	[DAM_DROWNING] = IMM_DROWNING,
+	[DAM_LIGHT] = IMM_LIGHT,	[DAM_CHARM] = IMM_CHARM,
+	[DAM_SOUND] = IMM_SOUND,
+    };
     int immune, def;
-    int bit;
+    long bit;
 
     immune = -1;
     def = IS_NORMAL;
@@ -444,27 +419,9 @@ int check_immune(CHAR_DATA *ch, int dam_type)
     }
 
     /* set bits to check -- VULN etc. must ALL be the same or this will fail */
-    switch (dam_type)
-    {
-	case(DAM_BASH):		bit = IMM_BASH;		break;
-	case(DAM_PIERCE):	bit = IMM_PIERCE;	break;
-	case(DAM_SLASH):	bit = IMM_SLASH;	break;
-	case(DAM_FIRE):		bit = IMM_FIRE;		break;
-	case(DAM_COLD):		bit = IMM_COLD;		break;
-	case(DAM_LIGHTNING):	bit = IMM_LIGHTNING;	break;
-	case(DAM_ACID):		bit = IMM_ACID;		break;
-	case(DAM_POISON):	bit = IMM_POISON;	break;
-	case(DAM_NEGATIVE):	bit = IMM_NEGATIVE;	break;
-	case(DAM_HOLY):		bit = IMM_HOLY;		break;
-	case(DAM_ENERGY):	bit = IMM_ENERGY;	break;
-	case(DAM_MENTAL):	bit = IMM_MENTAL;	break;
-	case(DAM_DISEASE):	bit = IMM_DISEASE;	break;
-	case(DAM_DROWNING):	bit = IMM_DROWNING;	break;
-	case(DAM_LIGHT):	bit = IMM_LIGHT;	break;
-	case(DAM_CHARM):	bit = IMM_CHARM;	break;
-	case(DAM_SOUND):	bit = IMM_SOUND;	break;
-	default:		return def;
-    }
+    if (dam_type < 0 || dam_type >= (int) (sizeof dam_to_imm / sizeof dam_to_imm[0])
+    ||  (bit = dam_to_imm[dam_type]) == 0)
+	return def;
 
     if (IS_SET(ch->imm_flags,bit))
 	immune = IS_IMMUNE;
@@ -500,10 +457,10 @@ int get_skill(CHAR_DATA *ch, int sn)
 	skill = ch->level * 5 / 2;
     }
 
-    else if (sn < -1 || sn > MAX_SKILL)
+    else if (sn < -1 || sn >= MAX_SKILL)
     {
 	bug("Bad sn %d in get_skill.",sn);
-	skill = 0;
+	return 0;
     }
 
     else if (!IS_NPC(ch))
@@ -597,7 +554,7 @@ int get_skill(CHAR_DATA *ch, int sn)
 
     if (ch->daze > 0)
     {
-	if (skill_table[sn].spell_fun != spell_null)
+	if (sn >= 0 && skill_table[sn].spell_fun != spell_null)
 	    skill /= 2;
 	else
 	    skill = 2 * skill / 3;
@@ -687,15 +644,8 @@ void reset_char(CHAR_DATA *ch)
     ch->max_hit 	= ch->pcdata->perm_hit;
     ch->max_mana	= ch->pcdata->perm_mana;
     ch->max_move	= ch->pcdata->perm_move;
-/*
-    ch->hit		= ch->max_hit;
-    ch->mana		= ch->max_mana;
-    ch->move		= ch->max_move;
-*/
 
-/* a little hack */
-
-    ch->extracted = TRUE;
+    reset_in_progress = TRUE;
     /* now add back spell effects */
     for (af = ch->affected; af != NULL; af = af->next)
     {
@@ -713,7 +663,7 @@ void reset_char(CHAR_DATA *ch)
 	}
     }
 
-    ch->extracted = FALSE;
+    reset_in_progress = FALSE;
     /* make sure sex is RIGHT! */
     if (ch->sex < 0 || ch->sex > 2)
 	ch->sex = ch->pcdata->true_sex;
@@ -880,96 +830,96 @@ void affect_enchant(OBJ_DATA *obj)
 
 
 /*
+ * Irk değişimi: `from` ırkının bayraklarını kaldırıp `to` ırkınınkileri ekler.
+ */
+static void race_flags_apply(CHAR_DATA *ch, int from, int to)
+{
+    REMOVE_BIT(ch->affected_by, race_table[from].det);
+    SET_BIT(ch->affected_by, race_table[to].det);
+    REMOVE_BIT(ch->affected_by, race_table[from].aff);
+    SET_BIT(ch->affected_by, race_table[to].aff);
+    REMOVE_BIT(ch->imm_flags, race_table[from].imm);
+    SET_BIT(ch->imm_flags, race_table[to].imm);
+    REMOVE_BIT(ch->res_flags, race_table[from].res);
+    SET_BIT(ch->res_flags, race_table[to].res);
+    REMOVE_BIT(ch->vuln_flags, race_table[from].vuln);
+    SET_BIT(ch->vuln_flags, race_table[to].vuln);
+    ch->form	= race_table[to].form;
+    ch->parts	= race_table[to].parts;
+}
+
+/* TO_RACE etkisi: modifier yeni ırktır */
+static void race_affect_apply(CHAR_DATA *ch, AFFECT_DATA *paf)
+{
+    RACE(ch) = paf->modifier < MAX_PC_RACE ? paf->modifier : 1;
+    race_flags_apply(ch, ORG_RACE(ch), RACE(ch));
+}
+
+/* `where` alanının yazdığı bayrak alanı; TO_RACE ve bilinmeyenler için NULL */
+static long *flag_field_for(CHAR_DATA *ch, int where)
+{
+    switch (where)
+    {
+    case TO_AFFECTS:	return &ch->affected_by;
+    case TO_IMMUNE:	return &ch->imm_flags;
+    case TO_RESIST:	return &ch->res_flags;
+    case TO_ACT_FLAG:	return &ch->act;
+    case TO_VULN:	return &ch->vuln_flags;
+    case TO_DETECTS:	return &ch->detection;
+    }
+    return NULL;
+}
+
+/* Elindeki eşya gücünü aşıyorsa yere bırakır */
+static void drop_if_too_heavy(CHAR_DATA *ch, int iWear)
+{
+    OBJ_DATA *hold = get_eq_char(ch, iWear);
+
+    if (hold == NULL
+    ||  get_obj_weight(hold) <= str_app[get_curr_stat(ch, STAT_STR)].carry)
+	return;
+
+    act( "$p objesini bırakıyorsun.", ch, hold, NULL, TO_CHAR );
+    act( "$n $p objesini bırakıyor.", ch, hold, NULL, TO_ROOM );
+    obj_from_char( hold );
+    obj_to_room( hold, ch->in_room );
+}
+
+/*
  * Apply or remove an affect to a character.
  */
 void affect_modify( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd )
 {
-    OBJ_DATA *hold;
+    long *field;
     int mod,i;
 
     mod = paf->modifier;
 
-    if ( fAdd )
+    if ( paf->where == TO_RACE )
     {
-	switch (paf->where)
+	if ( fAdd )
+	    race_affect_apply(ch, paf);
+	else
 	{
-	case TO_AFFECTS:
-	     SET_BIT(ch->affected_by, paf->bitvector);
-	     if (IS_SET(paf->bitvector, AFF_FLYING) && !IS_NPC(ch))
-		REMOVE_BIT(ch->act,PLR_CHANGED_AFF);
-	    break;
-	case TO_IMMUNE:
-	    SET_BIT(ch->imm_flags,paf->bitvector);
-	    break;
-	case TO_RESIST:
-	    SET_BIT(ch->res_flags,paf->bitvector);
-	    break;
-	case TO_ACT_FLAG:
-	    SET_BIT(ch->act,paf->bitvector);
-	    break;
-	case TO_VULN:
-	    SET_BIT(ch->vuln_flags,paf->bitvector);
-	    break;
-	case TO_DETECTS:
-	    SET_BIT(ch->detection,paf->bitvector);
-	    break;
-	case TO_RACE:
-	    RACE(ch) = paf->modifier < MAX_PC_RACE ? paf->modifier : 1;
-	    REMOVE_BIT(ch->affected_by,race_table[ORG_RACE(ch)].det);
-	    SET_BIT(ch->affected_by,race_table[RACE(ch)].det);
-	    REMOVE_BIT(ch->affected_by,race_table[ORG_RACE(ch)].aff);
-	    SET_BIT(ch->affected_by,race_table[RACE(ch)].aff);
-	    REMOVE_BIT(ch->imm_flags,race_table[ORG_RACE(ch)].imm);
-	    SET_BIT(ch->imm_flags,race_table[RACE(ch)].imm);
-	    REMOVE_BIT(ch->res_flags,race_table[ORG_RACE(ch)].res);
-	    SET_BIT(ch->res_flags,race_table[RACE(ch)].res);
-	    REMOVE_BIT(ch->vuln_flags,race_table[ORG_RACE(ch)].vuln);
-	    SET_BIT(ch->vuln_flags,race_table[RACE(ch)].vuln);
-	    ch->form	= race_table[RACE(ch)].form;
-	    ch->parts	= race_table[RACE(ch)].parts;
-	    break;
+	    race_flags_apply(ch, RACE(ch), ORG_RACE(ch));
+	    RACE(ch) = ORG_RACE(ch);
 	}
     }
-    else
+    else if ( (field = flag_field_for(ch, paf->where)) != NULL )
     {
-        switch (paf->where)
-        {
-        case TO_AFFECTS:
-            REMOVE_BIT(ch->affected_by, paf->bitvector);
-            break;
-        case TO_IMMUNE:
-            REMOVE_BIT(ch->imm_flags,paf->bitvector);
-            break;
-        case TO_RESIST:
-            REMOVE_BIT(ch->res_flags,paf->bitvector);
-            break;
-	case TO_ACT_FLAG:
-	    REMOVE_BIT(ch->act,paf->bitvector);
-	    break;
-        case TO_VULN:
-            REMOVE_BIT(ch->vuln_flags,paf->bitvector);
-            break;
-        case TO_DETECTS:
-            REMOVE_BIT(ch->detection,paf->bitvector);
-            break;
-	case TO_RACE:
-	    REMOVE_BIT(ch->affected_by,race_table[RACE(ch)].det);
-	    SET_BIT(ch->affected_by,race_table[ORG_RACE(ch)].det);
-	    REMOVE_BIT(ch->affected_by,race_table[RACE(ch)].aff);
-	    SET_BIT(ch->affected_by,race_table[ORG_RACE(ch)].aff);
-	    REMOVE_BIT(ch->imm_flags,race_table[RACE(ch)].imm);
-	    SET_BIT(ch->imm_flags,race_table[ORG_RACE(ch)].imm);
-	    REMOVE_BIT(ch->res_flags,race_table[RACE(ch)].res);
-	    SET_BIT(ch->res_flags,race_table[ORG_RACE(ch)].res);
-	    REMOVE_BIT(ch->vuln_flags,race_table[RACE(ch)].vuln);
-	    SET_BIT(ch->vuln_flags,race_table[ORG_RACE(ch)].vuln);
-	    ch->form	= race_table[ORG_RACE(ch)].form;
-	    ch->parts	= race_table[ORG_RACE(ch)].parts;
-	    RACE(ch) = ORG_RACE(ch);
-	    break;
-        }
-	mod = 0 - mod;
+	if ( fAdd )
+	{
+	    SET_BIT(*field, paf->bitvector);
+	    if (paf->where == TO_AFFECTS
+	    &&  IS_SET(paf->bitvector, AFF_FLYING) && !IS_NPC(ch))
+		REMOVE_BIT(ch->act,PLR_CHANGED_AFF);
+	}
+	else
+	    REMOVE_BIT(*field, paf->bitvector);
     }
+
+    if ( !fAdd )
+	mod = 0 - mod;
 
     switch ( paf->location )
     {
@@ -1013,51 +963,18 @@ void affect_modify( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd )
      * Check for weapon wielding.
      * Guard against recursion (for weapons with affects).
      */
-    if ( !IS_NPC(ch) && !ch->extracted)
+    if ( !IS_NPC(ch) && !ch->extracted && !reset_in_progress )
     {
-      static int depth;
+	static const int hands[] = { WEAR_BOTH, WEAR_RIGHT, WEAR_LEFT };
+	static bool dropping;
 
-      if ( (hold = get_eq_char( ch, WEAR_BOTH ) ) != NULL
-      && get_obj_weight(hold) > str_app[get_curr_stat(ch,STAT_STR)].carry )
-      {
-	if ( depth == 0 )
+	if ( !dropping )
 	{
-	    depth++;
-      act( "$p objesini bırakıyorsun.", ch, hold, NULL, TO_CHAR );
-	    act( "$n $p objesini bırakıyor.", ch, hold, NULL, TO_ROOM );
-	    obj_from_char( hold );
-	    obj_to_room( hold, ch->in_room );
-	    depth--;
+	    dropping = TRUE;
+	    for ( i = 0; i < (int) (sizeof hands / sizeof hands[0]); i++ )
+		drop_if_too_heavy( ch, hands[i] );
+	    dropping = FALSE;
 	}
-      }
-
-      if ( (hold = get_eq_char( ch, WEAR_RIGHT ) ) != NULL
-      && get_obj_weight(hold) > str_app[get_curr_stat(ch,STAT_STR)].carry )
-      {
-	if ( depth == 0 )
-	{
-	    depth++;
-      act("$p objesini bırakıyorsun.", ch, hold, NULL, TO_CHAR );
-	    act("$n $p objesini bırakıyor.", ch, hold, NULL, TO_ROOM );
-	    obj_from_char( hold );
-	    obj_to_room( hold, ch->in_room );
-	    depth--;
-	}
-      }
-
-      if ( (hold = get_eq_char( ch, WEAR_LEFT ) ) != NULL
-      && get_obj_weight(hold) > str_app[get_curr_stat(ch,STAT_STR)].carry )
-      {
-	if ( depth == 0 )
-	{
-	    depth++;
-      act( "$p objesini bırakıyorsun.", ch, hold, NULL, TO_CHAR );
-	    act( "$n $p objesini bırakıyor.", ch, hold, NULL, TO_ROOM );
-	    obj_from_char( hold );
-	    obj_to_room( hold, ch->in_room );
-	    depth--;
-	}
-      }
     }
 
     return;
@@ -1078,158 +995,49 @@ AFFECT_DATA  *affect_find(AFFECT_DATA *paf, int sn)
     return NULL;
 }
 
+/* listede where/bitvector çifti eşleşen ilk etki */
+static AFFECT_DATA *affect_list_find(AFFECT_DATA *list, int where, int vector)
+{
+    AFFECT_DATA *paf;
+
+    for (paf = list; paf != NULL; paf = paf->next)
+	if (paf->where == where && paf->bitvector == vector)
+	    return paf;
+    return NULL;
+}
+
 /* fix object affects when removing one */
 void affect_check(CHAR_DATA *ch,int where,int vector)
 {
     AFFECT_DATA *paf;
     OBJ_DATA *obj;
+    long *field;
 
     if (where == TO_OBJECT || where == TO_WEAPON || vector == 0)
 	return;
 
-    for (paf = ch->affected; paf != NULL; paf = paf->next)
-	if (paf->where == where && paf->bitvector == vector)
-	{
-	    switch (where)
-	    {
-	        case TO_AFFECTS:
-		    SET_BIT(ch->affected_by,vector);
-		    break;
-	        case TO_IMMUNE:
-		    SET_BIT(ch->imm_flags,vector);
-		    break;
-	        case TO_RESIST:
-		    SET_BIT(ch->res_flags,vector);
-		    break;
-		case TO_ACT_FLAG:
-		    SET_BIT(ch->act,paf->bitvector);
-		    break;
-	        case TO_VULN:
-		    SET_BIT(ch->vuln_flags,vector);
-		    break;
-	        case TO_DETECTS:
-		    SET_BIT(ch->detection,vector);
-		    break;
-		case TO_RACE:
-		    if (RACE(ch) == ORG_RACE(ch))
-		    {
-		     RACE(ch) = paf->modifier<MAX_PC_RACE ? paf->modifier:1;
-		     REMOVE_BIT(ch->affected_by,race_table[ORG_RACE(ch)].det);
-		     SET_BIT(ch->affected_by,race_table[RACE(ch)].det);
-	     	     REMOVE_BIT(ch->affected_by,race_table[ORG_RACE(ch)].aff);
-		     SET_BIT(ch->affected_by,race_table[RACE(ch)].aff);
-		     REMOVE_BIT(ch->imm_flags,race_table[ORG_RACE(ch)].imm);
-		     SET_BIT(ch->imm_flags,race_table[RACE(ch)].imm);
-		     REMOVE_BIT(ch->res_flags,race_table[ORG_RACE(ch)].res);
-		     SET_BIT(ch->res_flags,race_table[RACE(ch)].res);
-		     REMOVE_BIT(ch->vuln_flags,race_table[ORG_RACE(ch)].vuln);
-		     SET_BIT(ch->vuln_flags,race_table[RACE(ch)].vuln);
-		     ch->form	= race_table[RACE(ch)].form;
-		     ch->parts	= race_table[RACE(ch)].parts;
-		    }
-		    break;
-	    }
-	    return;
-	}
+    paf = affect_list_find(ch->affected, where, vector);
 
-    for (obj = ch->carrying; obj != NULL; obj = obj->next_content)
+    for (obj = ch->carrying; paf == NULL && obj != NULL; obj = obj->next_content)
     {
 	if (obj->wear_loc == -1 || obj->wear_loc == WEAR_STUCK_IN)
 	    continue;
 
-        for (paf = obj->affected; paf != NULL; paf = paf->next)
-            if (paf->where == where && paf->bitvector == vector)
-            {
-                switch (where)
-                {
-                    case TO_AFFECTS:
-                        SET_BIT(ch->affected_by,vector);
-                        break;
-                    case TO_IMMUNE:
-                        SET_BIT(ch->imm_flags,vector);
-                        break;
-		    case TO_ACT_FLAG:
-		        SET_BIT(ch->act,paf->bitvector);
-		        break;
-                    case TO_RESIST:
-                        SET_BIT(ch->res_flags,vector);
-                        break;
-                    case TO_VULN:
-                        SET_BIT(ch->vuln_flags,vector);
-                  	break;
-                    case TO_DETECTS:
-                        SET_BIT(ch->detection,vector);
-                  	break;
-		    case TO_RACE:
-		    	if (RACE(ch) == ORG_RACE(ch))
-		    {
-		     RACE(ch) = paf->modifier<MAX_PC_RACE ? paf->modifier:1;
-		     REMOVE_BIT(ch->affected_by,race_table[ORG_RACE(ch)].det);
-		     SET_BIT(ch->affected_by,race_table[RACE(ch)].det);
-	     	     REMOVE_BIT(ch->affected_by,race_table[ORG_RACE(ch)].aff);
-		     SET_BIT(ch->affected_by,race_table[RACE(ch)].aff);
-		     REMOVE_BIT(ch->imm_flags,race_table[ORG_RACE(ch)].imm);
-		     SET_BIT(ch->imm_flags,race_table[RACE(ch)].imm);
-		     REMOVE_BIT(ch->res_flags,race_table[ORG_RACE(ch)].res);
-		     SET_BIT(ch->res_flags,race_table[RACE(ch)].res);
-		     REMOVE_BIT(ch->vuln_flags,race_table[ORG_RACE(ch)].vuln);
-		     SET_BIT(ch->vuln_flags,race_table[RACE(ch)].vuln);
-		     ch->form	= race_table[RACE(ch)].form;
-		     ch->parts	= race_table[RACE(ch)].parts;
-		    }
-		        break;
-                }
-                return;
-            }
-
-        if (obj->enchanted)
-	    continue;
-
-        for (paf = obj->pIndexData->affected; paf != NULL; paf = paf->next)
-            if (paf->where == where && paf->bitvector == vector)
-            {
-                switch (where)
-                {
-                    case TO_AFFECTS:
-                        SET_BIT(ch->affected_by,vector);
-	                break;
-                    case TO_IMMUNE:
-                        SET_BIT(ch->imm_flags,vector);
-                        break;
-		   case TO_ACT_FLAG:
-	                SET_BIT(ch->act,paf->bitvector);
-		        break;
-                    case TO_RESIST:
-                        SET_BIT(ch->res_flags,vector);
-                        break;
-                    case TO_VULN:
-                        SET_BIT(ch->vuln_flags,vector);
-                        break;
-                    case TO_DETECTS:
-                        SET_BIT(ch->detection,vector);
-                        break;
-		   case TO_RACE:
-		    	if (RACE(ch) == ORG_RACE(ch))
-		    {
-		     RACE(ch) = paf->modifier<MAX_PC_RACE ? paf->modifier:1;
-		     REMOVE_BIT(ch->affected_by,race_table[ORG_RACE(ch)].det);
-		     SET_BIT(ch->affected_by,race_table[RACE(ch)].det);
-	     	     REMOVE_BIT(ch->affected_by,race_table[ORG_RACE(ch)].aff);
-		     SET_BIT(ch->affected_by,race_table[RACE(ch)].aff);
-		     REMOVE_BIT(ch->imm_flags,race_table[ORG_RACE(ch)].imm);
-		     SET_BIT(ch->imm_flags,race_table[RACE(ch)].imm);
-		     REMOVE_BIT(ch->res_flags,race_table[ORG_RACE(ch)].res);
-		     SET_BIT(ch->res_flags,race_table[RACE(ch)].res);
-		     REMOVE_BIT(ch->vuln_flags,race_table[ORG_RACE(ch)].vuln);
-		     SET_BIT(ch->vuln_flags,race_table[RACE(ch)].vuln);
-		     ch->form	= race_table[RACE(ch)].form;
-		     ch->parts	= race_table[RACE(ch)].parts;
-		    }
-		        break;
-                }
-                return;
-            }
+	paf = affect_list_find(obj->affected, where, vector);
+	if (paf == NULL && !obj->enchanted)
+	    paf = affect_list_find(obj->pIndexData->affected, where, vector);
     }
+
+    if (paf == NULL)
+	return;
+
+    if (where == TO_RACE)
+    {
+	if (RACE(ch) == ORG_RACE(ch))
+	    race_affect_apply(ch, paf);
+    }
+    else if ((field = flag_field_for(ch, where)) != NULL)
+	SET_BIT(*field, vector);
 }
 
 /*
@@ -1297,28 +1105,10 @@ void affect_remove( CHAR_DATA *ch, AFFECT_DATA *paf )
     where = paf->where;
     vector = paf->bitvector;
 
-    if ( paf == ch->affected )
+    if ( !LIST_UNLINK(ch->affected, paf, next) )
     {
-	ch->affected	= paf->next;
-    }
-    else
-    {
-	AFFECT_DATA *prev;
-
-	for ( prev = ch->affected; prev != NULL; prev = prev->next )
-	{
-	    if ( prev->next == paf )
-	    {
-		prev->next = paf->next;
-		break;
-	    }
-	}
-
-	if ( prev == NULL )
-	{
-	    bug( "Affect_remove: cannot find paf.", 0 );
-	    return;
-	}
+	bug( "Affect_remove: cannot find paf.", 0 );
+	return;
     }
 
     free_affect(paf);
@@ -1355,28 +1145,10 @@ void affect_remove_obj( OBJ_DATA *obj, AFFECT_DATA *paf)
             break;
         }
 
-    if ( paf == obj->affected )
+    if ( !LIST_UNLINK(obj->affected, paf, next) )
     {
-        obj->affected    = paf->next;
-    }
-    else
-    {
-        AFFECT_DATA *prev;
-
-        for ( prev = obj->affected; prev != NULL; prev = prev->next )
-        {
-            if ( prev->next == paf )
-            {
-                prev->next = paf->next;
-                break;
-            }
-        }
-
-        if ( prev == NULL )
-        {
-            bug( "Affect_remove_object: cannot find paf.", 0 );
-            return;
-        }
+        bug( "Affect_remove_object: cannot find paf.", 0 );
+        return;
     }
 
     free_affect(paf);
@@ -1484,26 +1256,8 @@ void obj_from_char( OBJ_DATA *obj )
     if ( obj->wear_loc != WEAR_NONE )
 	unequip_char( ch, obj );
 
-    if ( ch->carrying == obj )
-    {
-	ch->carrying = obj->next_content;
-    }
-    else
-    {
-	OBJ_DATA *prev;
-
-	for ( prev = ch->carrying; prev != NULL; prev = prev->next_content )
-	{
-	    if ( prev->next_content == obj )
-	    {
-		prev->next_content = obj->next_content;
-		break;
-	    }
-	}
-
-	if ( prev == NULL )
-	    bug( "Obj_from_char: obj not in list.", 0 );
-    }
+    if ( !LIST_UNLINK(ch->carrying, obj, next_content) )
+	bug( "Obj_from_char: obj not in list.", 0 );
 
     obj->carried_by	 = NULL;
     obj->next_content	 = NULL;
@@ -1566,6 +1320,14 @@ OBJ_DATA *get_eq_char( CHAR_DATA *ch, int iWear )
 
 
 
+/* Eşyanın anti-iyi/kötü/tarafsız bayrağı karakterin yönelimiyle çelişiyor mu? */
+bool obj_zaps_char( OBJ_DATA *obj, CHAR_DATA *ch )
+{
+    return ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IS_EVIL(ch)    )
+	|| ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IS_GOOD(ch)    )
+	|| ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IS_NEUTRAL(ch) );
+}
+
 /*
  * Equip a char with an obj.
  */
@@ -1586,9 +1348,7 @@ void equip_char( CHAR_DATA *ch, OBJ_DATA *obj, int iWear )
 	return;
     }
 
-    if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IS_EVIL(ch)    )
-    ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IS_GOOD(ch)    )
-    ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IS_NEUTRAL(ch) ) )
+    if ( obj_zaps_char( obj, ch ) )
     {
 		/*
 		* Thanks to Morgenes for the bug fix here!
@@ -1629,14 +1389,45 @@ void equip_char( CHAR_DATA *ch, OBJ_DATA *obj, int iWear )
 
 
 
+/* Eşyanın APPLY_SPELL_AFFECT etkisiyle karaktere eklenmiş büyüyü söker */
+static void strip_spell_affect( CHAR_DATA *ch, AFFECT_DATA *paf )
+{
+    AFFECT_DATA *lpaf;
+
+    for ( lpaf = ch->affected; lpaf != NULL; lpaf = lpaf->next )
+    {
+	if ( lpaf->type == paf->type
+	&&   lpaf->level == paf->level
+	&&   lpaf->location == APPLY_SPELL_AFFECT )
+	{
+	    affect_remove( ch, lpaf );
+	    return;
+	}
+    }
+}
+
+/* Bir etki listesindeki tüm etkileri karakterden geri alır */
+static void unapply_affect_list( CHAR_DATA *ch, AFFECT_DATA *list )
+{
+    AFFECT_DATA *paf;
+
+    for ( paf = list; paf != NULL; paf = paf->next )
+    {
+	if ( paf->location == APPLY_SPELL_AFFECT )
+	    strip_spell_affect( ch, paf );
+	else
+	{
+	    affect_modify( ch, paf, FALSE );
+	    affect_check( ch, paf->where, paf->bitvector );
+	}
+    }
+}
+
 /*
  * Unequip a char with an obj.
  */
 void unequip_char( CHAR_DATA *ch, OBJ_DATA *obj )
 {
-    AFFECT_DATA *paf = NULL;
-    AFFECT_DATA *lpaf = NULL;
-    AFFECT_DATA *lpaf_next = NULL;
     int i, old_wear;
 
     if ( obj->wear_loc == WEAR_NONE )
@@ -1657,56 +1448,8 @@ void unequip_char( CHAR_DATA *ch, OBJ_DATA *obj )
     obj->wear_loc	 = -1;
 
     if (!obj->enchanted)
-    {
-        for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
-        {
-            if ( paf->location == APPLY_SPELL_AFFECT )
-            {
-                for ( lpaf = ch->affected; lpaf != NULL; lpaf = lpaf_next )
-                {
-                    lpaf_next = lpaf->next;
-                    if ((lpaf->type == paf->type) &&
-                        (lpaf->level == paf->level) &&
-                        (lpaf->location == APPLY_SPELL_AFFECT))
-                    {
-                        affect_remove( ch, lpaf );
-                    lpaf_next = NULL;
-                    }
-                }
-            }
-            else
-            {
-                affect_modify( ch, paf, FALSE );
-                affect_check(ch,paf->where,paf->bitvector);
-            }
-        }
-    }
-
-    for ( paf = obj->affected; paf != NULL; paf = paf->next )
-    {
-        if ( paf->location == APPLY_SPELL_AFFECT )
-        {
-            bug ( "Norm-Apply: %d", 0 );
-            for ( lpaf = ch->affected; lpaf != NULL; lpaf = lpaf_next )
-            {
-                lpaf_next = lpaf->next;
-                if ((lpaf->type == paf->type) &&
-                    (lpaf->level == paf->level) &&
-                    (lpaf->location == APPLY_SPELL_AFFECT))
-                {
-                    bug ( "location = %d", lpaf->location );
-                    bug ( "type = %d", lpaf->type );
-                    affect_remove( ch, lpaf );
-                    lpaf_next = NULL;
-                }
-            }
-        }
-        else
-        {
-            affect_modify( ch, paf, FALSE );
-            affect_check(ch,paf->where,paf->bitvector);
-        }
-    }
+	unapply_affect_list( ch, obj->pIndexData->affected );
+    unapply_affect_list( ch, obj->affected );
 
     if ( get_light_char(ch) == NULL && ch->in_room != NULL
 	&& ( (obj->item_type == ITEM_LIGHT && obj->value[2] != 0)
@@ -1759,7 +1502,6 @@ void obj_to_obj( OBJ_DATA *obj, OBJ_DATA *obj_to )
     {
 	if ( obj_to->carried_by != NULL )
 	{
-/*	    obj_to->carried_by->carry_number += get_obj_number( obj ); */
 	    obj_to->carried_by->carry_weight += get_obj_weight( obj )
 		* WEIGHT_MULT(obj_to) / 100;
 	}
@@ -1783,28 +1525,10 @@ void obj_from_obj( OBJ_DATA *obj )
 	return;
     }
 
-    if ( obj == obj_from->contains )
+    if ( !LIST_UNLINK(obj_from->contains, obj, next_content) )
     {
-	obj_from->contains = obj->next_content;
-    }
-    else
-    {
-	OBJ_DATA *prev;
-
-	for ( prev = obj_from->contains; prev; prev = prev->next_content )
-	{
-	    if ( prev->next_content == obj )
-	    {
-		prev->next_content = obj->next_content;
-		break;
-	    }
-	}
-
-	if ( prev == NULL )
-	{
-	    bug( "Obj_from_obj: obj not found.", 0 );
-	    return;
-	}
+	bug( "Obj_from_obj: obj not found.", 0 );
+	return;
     }
 
     obj->next_content = NULL;
@@ -1814,7 +1538,6 @@ void obj_from_obj( OBJ_DATA *obj )
     {
 	if ( obj_from->carried_by != NULL )
 	{
-/*	    obj_from->carried_by->carry_number -= get_obj_number( obj ); */
 	    obj_from->carried_by->carry_weight -= get_obj_weight( obj )
 		* WEIGHT_MULT(obj_from) / 100;
 	}
@@ -1847,13 +1570,11 @@ void extract_obj_1( OBJ_DATA *obj, bool count )
     OBJ_DATA *obj_content;
     OBJ_DATA *obj_next;
     int i;
-    char buf[MAX_STRING_LENGTH];
 
     if (obj->extracted)  /* if the object has already been extracted once */
       {
-        snprintf(buf, sizeof(buf), "Warning! Extraction of %s, vnum %d.", obj->name,
+        bugf("Warning! Extraction of %s, vnum %d.", obj->name,
                 obj->pIndexData->vnum);
-        bug(buf, 0);
         return; /* if it's already been extracted, something bad is going on */
       }
     else
@@ -1867,13 +1588,12 @@ void extract_obj_1( OBJ_DATA *obj, bool count )
     else if ( obj->in_obj != NULL )
 	obj_from_obj( obj );
 
-    for (i=1;i < MAX_CABAL;i++)
-      if (obj->pIndexData->vnum == cabal_table[i].obj_vnum
-	&& cabal_table[i].obj_ptr == obj )
-      {
+    if ( (i = cabal_obj_index(obj->pIndexData->vnum)) > 0
+    &&   cabal_table[i].obj_ptr == obj )
+    {
         obj->pIndexData->count--;
         cabal_table[i].obj_ptr = NULL;
-      }
+    }
 
     for ( obj_content = obj->contains; obj_content; obj_content = obj_next )
     {
@@ -1896,29 +1616,9 @@ void extract_obj_1( OBJ_DATA *obj, bool count )
 		}
 	  }
 	}
-    if ( object_list == obj )
-    {
-	object_list = obj->next;
-    }
-    else
-    {
-	OBJ_DATA *prev;
+    if ( !LIST_UNLINK(object_list, obj, next) )
+	bug( "Extract_obj: obj %d not found.", obj->pIndexData->vnum );
 
-	for ( prev = object_list; prev != NULL; prev = prev->next )
-	{
-	    if ( prev->next == obj )
-	    {
-		prev->next = obj->next;
-		break;
-	    }
-	}
-
-	if ( prev == NULL )
-	{
-	    bug( "Extract_obj: obj %d not found.", obj->pIndexData->vnum );
-	    return;
-	}
-    }
     if (count)
       --obj->pIndexData->count;
     free_obj(obj);
@@ -1946,22 +1646,6 @@ void extract_char_org( CHAR_DATA *ch, bool fPull, bool Count )
     CHAR_DATA *wch;
     OBJ_DATA *obj;
     OBJ_DATA *obj_next;
-    int i;
-    char buf[MAX_STRING_LENGTH];
-
-    if (fPull) /* only for total extractions should it check */
-    {
-    if (ch->extracted)  /* if the char has already been extracted once */
-      {
-        snprintf(buf, sizeof(buf), "Warning! Extraction of %s.", ch->name);
-        bug(buf, 0);
-        return; /* if it's already been extracted, something bad is going on */
-      }
-    else
-      ch->extracted = TRUE;  /* if it hasn't been extracted yet, now
-                               * it's being extracted. */
-    }
-
 
     if ( ch->in_room == NULL )
     {
@@ -1969,11 +1653,21 @@ void extract_char_org( CHAR_DATA *ch, bool fPull, bool Count )
 	return;
     }
 
+    if (fPull) /* only for total extractions should it check */
+    {
+	if (ch->extracted)  /* if the char has already been extracted once */
+	{
+	    bugf("Warning! Extraction of %s.", ch->name);
+	    return; /* if it's already been extracted, something bad is going on */
+	}
+	ch->extracted = TRUE;  /* if it hasn't been extracted yet, now
+				* it's being extracted. */
+    }
+
     nuke_pets(ch);
     ch->pet = NULL; /* just in case */
 
     if ( fPull )
-
 	die_follower( ch );
 
     stop_fighting( ch, TRUE );
@@ -1994,13 +1688,7 @@ void extract_char_org( CHAR_DATA *ch, bool fPull, bool Count )
 
     if ( !fPull )
     {
-        if (IS_GOOD(ch))
-          i = 0;
-        if (IS_EVIL(ch))
-          i = 2;
-        else
-          i = 1;
-        char_to_room(ch, get_room_index(hometown_table[ch->hometown].altar[i]));
+        char_to_room(ch, get_room_index(hometown_table[ch->hometown].altar[align_index(ch)]));
 	return;
     }
 
@@ -2019,28 +1707,10 @@ void extract_char_org( CHAR_DATA *ch, bool fPull, bool Count )
 	    wch->reply = NULL;
     }
 
-    if ( ch == char_list )
+    if ( !LIST_UNLINK(char_list, ch, next) )
     {
-       char_list = ch->next;
-    }
-    else
-    {
-	CHAR_DATA *prev;
-
-	for ( prev = char_list; prev != NULL; prev = prev->next )
-	{
-	    if ( prev->next == ch )
-	    {
-		prev->next = ch->next;
-		break;
-	    }
-	}
-
-	if ( prev == NULL )
-	{
-	    bug( "Extract_char: char not found.", 0 );
-	    return;
-	}
+	bug( "Extract_char: char not found.", 0 );
+	return;
     }
 
     if ( ch->desc != NULL )
@@ -2060,15 +1730,19 @@ CHAR_DATA *get_char_world( CHAR_DATA *ch, char *argument )
     int number;
     int count;
 
-    if ( ( wch = get_char_room( ch, argument ) ) != NULL )
+    number = number_argument( argument, arg );
+    if ( is_self_keyword( arg ) )
+	return ch;
+
+    /* önce oda; get_char_room2 odada bulunan sayıyı number'dan düşer */
+    if ( ( wch = get_char_room2( ch, ch->in_room, arg, &number ) ) != NULL )
 	return wch;
 
-    number = number_argument( argument, arg );
     count  = 0;
     for ( wch = char_list; wch != NULL ; wch = wch->next )
     {
-	if ( wch->in_room == NULL || !can_see( ch, wch )
-	||   !is_name( arg, wch->name ) )
+	if ( wch->in_room == NULL || wch->in_room == ch->in_room
+	||   !can_see( ch, wch ) || !is_name( arg, wch->name ) )
 	    continue;
 
 	if ( ++count == number )
@@ -2099,19 +1773,26 @@ OBJ_DATA *get_obj_type( OBJ_INDEX_DATA *pObjIndex )
 
 
 /*
- * Find an obj in a list.
+ * "numara.isim" biçimli aramanın ortak çekirdeği: listede görülebilen ve adı
+ * uyan `number`. eşyayı döndürür. wear_filter: OBJ_FIND_ANY hepsi,
+ * OBJ_FIND_CARRIED yalnızca envanter (giyilmemiş), OBJ_FIND_WORN yalnızca giyilen.
  */
-OBJ_DATA *get_obj_list( CHAR_DATA *ch, char *argument, OBJ_DATA *list )
-{
-    char arg[MAX_INPUT_LENGTH];
-    OBJ_DATA *obj;
-    int number;
-    int count;
+#define OBJ_FIND_ANY		0
+#define OBJ_FIND_CARRIED	1
+#define OBJ_FIND_WORN		2
 
-    number = number_argument( argument, arg );
-    count  = 0;
-    for ( obj = list; obj != NULL; obj = obj->next_content )
+static OBJ_DATA *find_obj_in( CHAR_DATA *ch, OBJ_DATA *list, char *arg,
+			      int number, int wear_filter, bool by_next )
+{
+    OBJ_DATA *obj;
+    int count = 0;
+
+    for ( obj = list; obj != NULL; obj = by_next ? obj->next : obj->next_content )
     {
+	if ( wear_filter == OBJ_FIND_CARRIED && obj->wear_loc != WEAR_NONE )
+	    continue;
+	if ( wear_filter == OBJ_FIND_WORN && obj->wear_loc == WEAR_NONE )
+	    continue;
 	if ( can_see_obj( ch, obj ) && is_name( arg, obj->name ) )
 	{
 	    if ( ++count == number )
@@ -2122,6 +1803,17 @@ OBJ_DATA *get_obj_list( CHAR_DATA *ch, char *argument, OBJ_DATA *list )
     return NULL;
 }
 
+/*
+ * Find an obj in a list.
+ */
+OBJ_DATA *get_obj_list( CHAR_DATA *ch, char *argument, OBJ_DATA *list )
+{
+    char arg[MAX_INPUT_LENGTH];
+    int number = number_argument( argument, arg );
+
+    return find_obj_in( ch, list, arg, number, OBJ_FIND_ANY, FALSE );
+}
+
 
 
 /*
@@ -2130,24 +1822,9 @@ OBJ_DATA *get_obj_list( CHAR_DATA *ch, char *argument, OBJ_DATA *list )
 OBJ_DATA *get_obj_carry( CHAR_DATA *ch, char *argument )
 {
     char arg[MAX_INPUT_LENGTH];
-    OBJ_DATA *obj;
-    int number;
-    int count;
+    int number = number_argument( argument, arg );
 
-    number = number_argument( argument, arg );
-    count  = 0;
-    for ( obj = ch->carrying; obj != NULL; obj = obj->next_content )
-    {
-	if ( obj->wear_loc == WEAR_NONE
-	&&   (can_see_obj( ch, obj ) )
-	&&   is_name( arg, obj->name ) )
-	{
-	    if ( ++count == number )
-		return obj;
-	}
-    }
-
-    return NULL;
+    return find_obj_in( ch, ch->carrying, arg, number, OBJ_FIND_CARRIED, FALSE );
 }
 
 
@@ -2158,24 +1835,9 @@ OBJ_DATA *get_obj_carry( CHAR_DATA *ch, char *argument )
 OBJ_DATA *get_obj_wear( CHAR_DATA *ch, char *argument )
 {
     char arg[MAX_INPUT_LENGTH];
-    OBJ_DATA *obj;
-    int number;
-    int count;
+    int number = number_argument( argument, arg );
 
-    number = number_argument( argument, arg );
-    count  = 0;
-    for ( obj = ch->carrying; obj != NULL; obj = obj->next_content )
-    {
-	if ( obj->wear_loc != WEAR_NONE
-	&&   can_see_obj( ch, obj )
-	&&   is_name( arg, obj->name ) )
-	{
-	    if ( ++count == number )
-		return obj;
-	}
-    }
-
-    return NULL;
+    return find_obj_in( ch, ch->carrying, arg, number, OBJ_FIND_WORN, FALSE );
 }
 
 
@@ -2210,24 +1872,12 @@ OBJ_DATA *get_obj_world( CHAR_DATA *ch, char *argument )
     char arg[MAX_INPUT_LENGTH];
     OBJ_DATA *obj;
     int number;
-    int count;
 
     if ( ( obj = get_obj_here( ch, argument ) ) != NULL )
 	return obj;
 
     number = number_argument( argument, arg );
-    count  = 0;
-    for ( obj = object_list; obj != NULL; obj = obj->next )
-    {
-	if ( can_see_obj( ch, obj ) && is_name( arg, obj->name ) )
-	{
-	    if ( ++count == number )
-		return obj;
-	}
-
-    }
-
-    return NULL;
+    return find_obj_in( ch, object_list, arg, number, OBJ_FIND_ANY, TRUE );
 }
 
 /* deduct cost from a character */
@@ -2246,9 +1896,24 @@ void deduct_cost(CHAR_DATA *ch, int cost)
 /*
  * Create a 'money' obj.
  */
+/*
+ * Alan dosyasından gelen tanım şablonunda `spec` ("%s"/"%d") yerine `value`
+ * yazar; şablon asla biçim dizgisi olarak kullanılmaz.
+ */
+void descr_subst( char *buf, size_t size, const char *tmpl, const char *spec, const char *value )
+{
+    const char *p = strstr( tmpl, spec );
+
+    if ( p == NULL )
+	snprintf( buf, size, "%s", tmpl );
+    else
+	snprintf( buf, size, "%.*s%s%s", (int) (p - tmpl), tmpl, value, p + strlen(spec) );
+}
+
 OBJ_DATA *create_money( int silver )
 {
     char buf[MAX_STRING_LENGTH];
+    char num[32];
     OBJ_DATA *obj;
 
     if ( silver < 0 || silver == 0 )
@@ -2264,7 +1929,8 @@ OBJ_DATA *create_money( int silver )
     else
     {
         obj = create_object( get_obj_index( OBJ_VNUM_SILVER_SOME ), 0 );
-        snprintf(buf, sizeof(buf), obj->short_descr, silver );
+	snprintf(num, sizeof(num), "%d", silver);
+	descr_subst( buf, sizeof(buf), obj->short_descr, "%d", num );
         free_string( obj->short_descr );
         obj->short_descr        = str_dup( buf );
         obj->value[0]           = silver;
@@ -2283,20 +1949,12 @@ OBJ_DATA *create_money( int silver )
 int get_obj_number( OBJ_DATA *obj )
 {
     int number;
-/*
-    if (obj->item_type == ITEM_CONTAINER || obj->item_type == ITEM_MONEY
-    ||  obj->item_type == ITEM_GEM || obj->item_type == ITEM_JEWELRY)
-        number = 0;
-*/
+
     if ( obj->item_type == ITEM_MONEY )
 	number = 0;
     else
         number = 1;
 
-/*
-    for ( obj = obj->contains; obj != NULL; obj = obj->next_content )
-        number += get_obj_number( obj );
-*/
     return number;
 }
 
@@ -2342,11 +2000,14 @@ int get_true_weight(OBJ_DATA *obj)
 bool can_see( CHAR_DATA *ch, CHAR_DATA *victim )
 {
 /* RT changed so that WIZ_INVIS has levels */
+    if ( ch == NULL || victim == NULL )
+    {
+	bug( "Can_see: NULL argument.", 0 );
+	return FALSE;
+    }
+
     if ( ch == victim )
 	return TRUE;
-
-    if ( ch == NULL || victim == NULL )
-	dump_to_scr( ">>>>>>>> CAN_ SEE ERROR <<<<<<<<<<<\n\r" );
 
     if ( get_trust(ch) < victim->invis_level)
 	return FALSE;
@@ -2375,23 +2036,6 @@ bool can_see( CHAR_DATA *ch, CHAR_DATA *victim )
     if ( IS_AFFECTED(victim, AFF_IMP_INVIS)
     &&   !CAN_DETECT(ch, DETECT_IMP_INVIS) )
 	return FALSE;
-
-/* sneaking
-
-    if ( IS_AFFECTED(victim, AFF_SNEAK)
-    &&   !CAN_DETECT(ch,DETECT_HIDDEN)
-    &&   victim->fighting == NULL)
-    {
-	int chance;
-	chance = get_skill(victim,gsn_sneak);
-	chance += get_curr_stat(ch,STAT_DEX) * 3/2;
- 	chance -= get_curr_stat(ch,STAT_INT) * 2;
-	chance += ch->level - victim->level * 3/2;
-
-	if (number_percent() < chance)
-	    return FALSE;
-    }
-*/
 
     if (IS_AFFECTED(victim,AFF_CAMOUFLAGE) &&
         !CAN_DETECT(ch,ACUTE_VISION))
@@ -2443,9 +2087,6 @@ bool can_see_obj( CHAR_DATA *ch, OBJ_DATA *obj )
 
     if ( room_is_dark( ch ) && !IS_AFFECTED(ch, AFF_INFRARED) )
 	return FALSE;
-
-    if ( obj->item_type == ITEM_TATTOO )
-	return TRUE;
 
     return TRUE;
 }
@@ -2552,382 +2193,378 @@ char *affect_loc_name( int location )
 
 
 
-/*
- * Return ascii name of an affect bit vector.
- */
-char *affect_bit_name( int vector )
+/* Bayrak tablosundaki adları ' ' ile ayırarak buf'un sonuna ekler */
+static void flag_bits_append( char *buf, size_t size, const struct flag_type *table, long bits )
 {
-    static char buf[512];
+    size_t len = strlen( buf );
 
-    buf[0] = '\0';
-    if ( vector & AFF_BLIND         ) strcat( buf, " blind"         );
-    if ( vector & AFF_INVISIBLE     ) strcat( buf, " invisible"     );
-    if ( vector & AFF_IMP_INVIS     ) strcat( buf, " imp_invis"     );
-    if ( vector & AFF_FADE	    ) strcat( buf, " fade"     	    );
-    if ( vector & AFF_SCREAM	    ) strcat( buf, " scream"        );
-    if ( vector & AFF_BLOODTHIRST   ) strcat( buf, " bloodthirst"   );
-    if ( vector & AFF_STUN	    ) strcat( buf, " stun"   );
-    if ( vector & AFF_SANCTUARY     ) strcat( buf, " sanctuary"     );
-    if ( vector & AFF_FAERIE_FIRE   ) strcat( buf, " faerie_fire"   );
-    if ( vector & AFF_INFRARED      ) strcat( buf, " infrared"      );
-    if ( vector & AFF_CURSE         ) strcat( buf, " curse"         );
-    if ( vector & AFF_POISON        ) strcat( buf, " poison"        );
-    if ( vector & AFF_PROTECT_EVIL  ) strcat( buf, " prot_evil"     );
-    if ( vector & AFF_PROTECT_GOOD  ) strcat( buf, " prot_good"     );
-    if ( vector & AFF_SLEEP         ) strcat( buf, " sleep"         );
-    if ( vector & AFF_SNEAK         ) strcat( buf, " sneak"         );
-    if ( vector & AFF_HIDE          ) strcat( buf, " hide"          );
-    if ( vector & AFF_CHARM         ) strcat( buf, " charm"         );
-    if ( vector & AFF_FLYING        ) strcat( buf, " flying"        );
-    if ( vector & AFF_PASS_DOOR     ) strcat( buf, " pass_door"     );
-    if ( vector & AFF_BERSERK	    ) strcat( buf, " berserk"	    );
-    if ( vector & AFF_CALM	    ) strcat( buf, " calm"	    );
-    if ( vector & AFF_HASTE	    ) strcat( buf, " haste"	    );
-    if ( vector & AFF_SLOW          ) strcat( buf, " slow"          );
-    if ( vector & AFF_WEAKEN        ) strcat( buf, " weaken"        );
-    if ( vector & AFF_PLAGUE	    ) strcat( buf, " plague" 	    );
-    if ( vector & AFF_REGENERATION  ) strcat( buf, " regeneration"  );
-    if ( vector & AFF_CAMOUFLAGE    ) strcat( buf, " camouflage"    );
-    if ( vector & AFF_SWIM          ) strcat( buf, " swim"          );
-    return (char *)(( buf[0] != '\0' ) ? buf+1 : "none");
+    for ( ; table->name != NULL && len < size; table++ )
+	if ( bits & table->bit )
+	    len += snprintf( buf + len, size - len, " %s", table->name );
 }
 
-
 /*
- * Return ascii name of an affect bit vector.
+ * bits içinde ayarlı bayrakların adları (boşlukla ayrılmış), hiçbiri yoksa "none".
+ * *_bit_name işlevlerinin ortak çekirdeği.
  */
-char *detect_bit_name( int vector )
+const char *flag_bits_name( char *buf, size_t size, const struct flag_type *table, long bits )
 {
-    static char buf[512];
-
     buf[0] = '\0';
-    if ( vector & DETECT_IMP_INVIS   ) strcat( buf, " detect_imp_inv"   );
-    if ( vector & DETECT_EVIL   ) strcat( buf, " detect_evil"   );
-    if ( vector & DETECT_GOOD   ) strcat( buf, " detect_good"   );
-    if ( vector & DETECT_INVIS  ) strcat( buf, " detect_invis"  );
-    if ( vector & DETECT_MAGIC  ) strcat( buf, " detect_magic"  );
-    if ( vector & DETECT_HIDDEN ) strcat( buf, " detect_hidden" );
-    if ( vector & DARK_VISION   ) strcat( buf, " dark_vision"   );
-    if ( vector & ACUTE_VISION  ) strcat( buf, " acute_vision"   );
-    if ( vector & ADET_FEAR  	) strcat( buf, " fear"   );
-    if ( vector & ADET_FORM_TREE  ) strcat( buf, " form_tree"   );
-    if ( vector & ADET_FORM_GRASS ) strcat( buf, " form_grass"   );
-    if ( vector & ADET_WEB	) strcat( buf, " web"   );
-    if ( vector & DETECT_LIFE 	) strcat( buf, " life"   );
-    if ( vector & DETECT_SNEAK 	) strcat( buf, " detect_sneak"   );
-    return (char *)(( buf[0] != '\0' ) ? buf+1 : "none");
+    flag_bits_append( buf, size, table, bits );
+    return buf[0] != '\0' ? buf + 1 : "none";
 }
 
+#define BIT_NAME_FUNC(fname, table) \
+    char *fname( int bits ) \
+    { \
+	static char buf[512]; \
+	return (char *) flag_bits_name( buf, sizeof buf, table, bits ); \
+    }
 
-
-/*
- * Return ascii name of extra flags vector.
- */
-char *extra_bit_name( int extra_flags )
+static const struct flag_type affect_bit_names[] =
 {
-    static char buf[512];
+    { "blind",		AFF_BLIND,		TRUE },
+    { "invisible",	AFF_INVISIBLE,		TRUE },
+    { "imp_invis",	AFF_IMP_INVIS,		TRUE },
+    { "fade",		AFF_FADE,		TRUE },
+    { "scream",		AFF_SCREAM,		TRUE },
+    { "bloodthirst",	AFF_BLOODTHIRST,	TRUE },
+    { "stun",		AFF_STUN,		TRUE },
+    { "sanctuary",	AFF_SANCTUARY,		TRUE },
+    { "faerie_fire",	AFF_FAERIE_FIRE,	TRUE },
+    { "infrared",	AFF_INFRARED,		TRUE },
+    { "curse",		AFF_CURSE,		TRUE },
+    { "poison",		AFF_POISON,		TRUE },
+    { "prot_evil",	AFF_PROTECT_EVIL,	TRUE },
+    { "prot_good",	AFF_PROTECT_GOOD,	TRUE },
+    { "sleep",		AFF_SLEEP,		TRUE },
+    { "sneak",		AFF_SNEAK,		TRUE },
+    { "hide",		AFF_HIDE,		TRUE },
+    { "charm",		AFF_CHARM,		TRUE },
+    { "flying",		AFF_FLYING,		TRUE },
+    { "pass_door",	AFF_PASS_DOOR,		TRUE },
+    { "berserk",	AFF_BERSERK,		TRUE },
+    { "calm",		AFF_CALM,		TRUE },
+    { "haste",		AFF_HASTE,		TRUE },
+    { "slow",		AFF_SLOW,		TRUE },
+    { "weaken",		AFF_WEAKEN,		TRUE },
+    { "plague",		AFF_PLAGUE,		TRUE },
+    { "regeneration",	AFF_REGENERATION,	TRUE },
+    { "camouflage",	AFF_CAMOUFLAGE,		TRUE },
+    { "swim",		AFF_SWIM,		TRUE },
+    { NULL, 0, FALSE }
+};
 
-    buf[0] = '\0';
-    if ( extra_flags & ITEM_GLOW         ) strcat( buf, " glow"         );
-    if ( extra_flags & ITEM_HUM          ) strcat( buf, " hum"          );
-    if ( extra_flags & ITEM_DARK         ) strcat( buf, " dark"         );
-    if ( extra_flags & ITEM_LOCK         ) strcat( buf, " lock"         );
-    if ( extra_flags & ITEM_EVIL         ) strcat( buf, " evil"         );
-    if ( extra_flags & ITEM_INVIS        ) strcat( buf, " invis"        );
-    if ( extra_flags & ITEM_MAGIC        ) strcat( buf, " magic"        );
-    if ( extra_flags & ITEM_NODROP       ) strcat( buf, " nodrop"       );
-    if ( extra_flags & ITEM_BLESS        ) strcat( buf, " bless"        );
-    if ( extra_flags & ITEM_ANTI_GOOD    ) strcat( buf, " anti-good"    );
-    if ( extra_flags & ITEM_ANTI_EVIL    ) strcat( buf, " anti-evil"    );
-    if ( extra_flags & ITEM_ANTI_NEUTRAL ) strcat( buf, " anti-neutral" );
-    if ( extra_flags & ITEM_NOREMOVE     ) strcat( buf, " noremove"     );
-    if ( extra_flags & ITEM_INVENTORY    ) strcat( buf, " inventory"    );
-    if ( extra_flags & ITEM_NOPURGE	 ) strcat( buf, " nopurge"	);
-    if ( extra_flags & ITEM_VIS_DEATH	 ) strcat( buf, " vis_death"	);
-    if ( extra_flags & ITEM_ROT_DEATH	 ) strcat( buf, " rot_death"	);
-    if ( extra_flags & ITEM_NOLOCATE	 ) strcat( buf, " no_locate"	);
-    if ( extra_flags & ITEM_SELL_EXTRACT ) strcat( buf, " sell_extract" );
-    if ( extra_flags & ITEM_BURN_PROOF	 ) strcat( buf, " burn_proof"	);
-    if ( extra_flags & ITEM_NOUNCURSE	 ) strcat( buf, " no_uncurse"	);
-    if ( extra_flags & ITEM_BURIED	 ) strcat( buf, " buried"	);
-    return (char *)(( buf[0] != '\0' ) ? buf+1 : "none");
-}
+static const struct flag_type detect_bit_names[] =
+{
+    { "detect_imp_inv",	DETECT_IMP_INVIS,	TRUE },
+    { "detect_evil",	DETECT_EVIL,		TRUE },
+    { "detect_good",	DETECT_GOOD,		TRUE },
+    { "detect_invis",	DETECT_INVIS,		TRUE },
+    { "detect_magic",	DETECT_MAGIC,		TRUE },
+    { "detect_hidden",	DETECT_HIDDEN,		TRUE },
+    { "dark_vision",	DARK_VISION,		TRUE },
+    { "acute_vision",	ACUTE_VISION,		TRUE },
+    { "fear",		ADET_FEAR,		TRUE },
+    { "form_tree",	ADET_FORM_TREE,		TRUE },
+    { "form_grass",	ADET_FORM_GRASS,	TRUE },
+    { "web",		ADET_WEB,		TRUE },
+    { "life",		DETECT_LIFE,		TRUE },
+    { "detect_sneak",	DETECT_SNEAK,		TRUE },
+    { NULL, 0, FALSE }
+};
 
-/* return ascii name of an act vector */
+static const struct flag_type extra_bit_names[] =
+{
+    { "glow",		ITEM_GLOW,		TRUE },
+    { "hum",		ITEM_HUM,		TRUE },
+    { "dark",		ITEM_DARK,		TRUE },
+    { "lock",		ITEM_LOCK,		TRUE },
+    { "evil",		ITEM_EVIL,		TRUE },
+    { "invis",		ITEM_INVIS,		TRUE },
+    { "magic",		ITEM_MAGIC,		TRUE },
+    { "nodrop",		ITEM_NODROP,		TRUE },
+    { "bless",		ITEM_BLESS,		TRUE },
+    { "anti-good",	ITEM_ANTI_GOOD,		TRUE },
+    { "anti-evil",	ITEM_ANTI_EVIL,		TRUE },
+    { "anti-neutral",	ITEM_ANTI_NEUTRAL,	TRUE },
+    { "noremove",	ITEM_NOREMOVE,		TRUE },
+    { "inventory",	ITEM_INVENTORY,		TRUE },
+    { "nopurge",	ITEM_NOPURGE,		TRUE },
+    { "vis_death",	ITEM_VIS_DEATH,		TRUE },
+    { "rot_death",	ITEM_ROT_DEATH,		TRUE },
+    { "no_locate",	ITEM_NOLOCATE,		TRUE },
+    { "sell_extract",	ITEM_SELL_EXTRACT,	TRUE },
+    { "burn_proof",	ITEM_BURN_PROOF,	TRUE },
+    { "no_uncurse",	ITEM_NOUNCURSE,		TRUE },
+    { "buried",		ITEM_BURIED,		TRUE },
+    { NULL, 0, FALSE }
+};
+
+static const struct flag_type npc_act_names[] =
+{
+    { "npc",		ACT_IS_NPC,		TRUE },
+    { "sentinel",	ACT_SENTINEL,		TRUE },
+    { "scavenger",	ACT_SCAVENGER,		TRUE },
+    { "aggressive",	ACT_AGGRESSIVE,		TRUE },
+    { "stay_area",	ACT_STAY_AREA,		TRUE },
+    { "wimpy",		ACT_WIMPY,		TRUE },
+    { "pet",		ACT_PET,		TRUE },
+    { "train",		ACT_TRAIN,		TRUE },
+    { "practice",	ACT_PRACTICE,		TRUE },
+    { "undead",		ACT_UNDEAD,		TRUE },
+    { "hunter",		ACT_HUNTER,		TRUE },
+    { "cleric",		ACT_CLERIC,		TRUE },
+    { "mage",		ACT_MAGE,		TRUE },
+    { "thief",		ACT_THIEF,		TRUE },
+    { "warrior",	ACT_WARRIOR,		TRUE },
+    { "no_align",	ACT_NOALIGN,		TRUE },
+    { "no_purge",	ACT_NOPURGE,		TRUE },
+    { "healer",		ACT_IS_HEALER,		TRUE },
+    { "skill_train",	ACT_GAIN,		TRUE },
+    { "update_always",	ACT_UPDATE_ALWAYS,	TRUE },
+    { NULL, 0, FALSE }
+};
+
+static const struct flag_type plr_act_names[] =
+{
+    { "autoassist",	PLR_AUTOASSIST,		TRUE },
+    { "autoexit",	PLR_AUTOEXIT,		TRUE },
+    { "autoloot",	PLR_AUTOLOOT,		TRUE },
+    { "autosac",	PLR_AUTOSAC,		TRUE },
+    { "autoakce",	PLR_AUTOAKCE,		TRUE },
+    { "autosplit",	PLR_AUTOSPLIT,		TRUE },
+    { "wanted",		PLR_WANTED,		TRUE },
+    { "no_title",	PLR_NO_TITLE,		TRUE },
+    { "no_exp",		PLR_NO_EXP,		TRUE },
+    { "holy_light",	PLR_HOLYLIGHT,		TRUE },
+    { "no_cancel",	PLR_NOCANCEL,		TRUE },
+    { "loot_corpse",	PLR_CANLOOT,		TRUE },
+    { "no_summon",	PLR_NOSUMMON,		TRUE },
+    { "no_follow",	PLR_NOFOLLOW,		TRUE },
+    { "Cabal_LEADER",	PLR_CANINDUCT,		TRUE },
+    { "ghost",		PLR_GHOST,		TRUE },
+    { "remorted",	PLR_REMORTED,		TRUE },
+    { "log",		PLR_LOG,		TRUE },
+    { "frozen",		PLR_FREEZE,		TRUE },
+    { "lefthand",	PLR_LEFTHAND,		TRUE },
+    { "questor",	PLR_QUESTOR,		TRUE },
+    { "VAMPIRE",	PLR_VAMPIRE,		TRUE },
+    { "harakiri",	PLR_HARA_KIRI,		TRUE },
+    { "blink_on",	PLR_BLINK_ON,		TRUE },
+    { NULL, 0, FALSE }
+};
+
+static const struct flag_type comm_bit_names[] =
+{
+    { "quiet",		COMM_QUIET,		TRUE },
+    { "deaf",		COMM_DEAF,		TRUE },
+    { "no_wiz",		COMM_NOWIZ,		TRUE },
+    { "no_auction",	COMM_NOAUCTION,		TRUE },
+    { "no_gossip",	COMM_NOGOSSIP,		TRUE },
+    { "no_question",	COMM_NOQUESTION,	TRUE },
+    { "no_music",	COMM_NOMUSIC,		TRUE },
+    { "no_quote",	COMM_NOQUOTE,		TRUE },
+    { "compact",	COMM_COMPACT,		TRUE },
+    { "brief",		COMM_BRIEF,		TRUE },
+    { "prompt",		COMM_PROMPT,		TRUE },
+    { "combine",	COMM_COMBINE,		TRUE },
+    { "no_emote",	COMM_NOEMOTE,		TRUE },
+    { "no_shout",	COMM_NOSHOUT,		TRUE },
+    { "no_tell",	COMM_NOTELL,		TRUE },
+    { "no_channels",	COMM_NOCHANNELS,	TRUE },
+    { NULL, 0, FALSE }
+};
+
+static const struct flag_type imm_bit_names[] =
+{
+    { "summon",		IMM_SUMMON,		TRUE },
+    { "charm",		IMM_CHARM,		TRUE },
+    { "magic",		IMM_MAGIC,		TRUE },
+    { "weapon",		IMM_WEAPON,		TRUE },
+    { "blunt",		IMM_BASH,		TRUE },
+    { "piercing",	IMM_PIERCE,		TRUE },
+    { "slashing",	IMM_SLASH,		TRUE },
+    { "fire",		IMM_FIRE,		TRUE },
+    { "cold",		IMM_COLD,		TRUE },
+    { "lightning",	IMM_LIGHTNING,		TRUE },
+    { "acid",		IMM_ACID,		TRUE },
+    { "poison",		IMM_POISON,		TRUE },
+    { "negative",	IMM_NEGATIVE,		TRUE },
+    { "holy",		IMM_HOLY,		TRUE },
+    { "energy",		IMM_ENERGY,		TRUE },
+    { "mental",		IMM_MENTAL,		TRUE },
+    { "disease",	IMM_DISEASE,		TRUE },
+    { "drowning",	IMM_DROWNING,		TRUE },
+    { "light",		IMM_LIGHT,		TRUE },
+    { "sound",		IMM_SOUND,		TRUE },
+    { "iron",		IMM_IRON,		TRUE },
+    { "wood",		IMM_WOOD,		TRUE },
+    { "silver",		IMM_SILVER,		TRUE },
+    { NULL, 0, FALSE }
+};
+
+static const struct flag_type wear_bit_names[] =
+{
+    { "take",		ITEM_TAKE,		TRUE },
+    { "finger",		ITEM_WEAR_FINGER,	TRUE },
+    { "neck",		ITEM_WEAR_NECK,		TRUE },
+    { "torso",		ITEM_WEAR_BODY,		TRUE },
+    { "head",		ITEM_WEAR_HEAD,		TRUE },
+    { "legs",		ITEM_WEAR_LEGS,		TRUE },
+    { "feet",		ITEM_WEAR_FEET,		TRUE },
+    { "hands",		ITEM_WEAR_HANDS,	TRUE },
+    { "arms",		ITEM_WEAR_ARMS,		TRUE },
+    { "shield",		ITEM_WEAR_SHIELD,	TRUE },
+    { "body",		ITEM_WEAR_ABOUT,	TRUE },
+    { "waist",		ITEM_WEAR_WAIST,	TRUE },
+    { "wrist",		ITEM_WEAR_WRIST,	TRUE },
+    { "wield",		ITEM_WIELD,		TRUE },
+    { "hold",		ITEM_HOLD,		TRUE },
+    { "float",		ITEM_WEAR_FLOAT,	TRUE },
+    { "tattoo",		ITEM_WEAR_TATTOO,	TRUE },
+    { NULL, 0, FALSE }
+};
+
+/* poison ile edible birlikte yazılmaz (form_bit_name) */
+static const struct flag_type form_bit_names[] =
+{
+    { "poison",		FORM_POISON,		TRUE },
+    { "edible",		FORM_EDIBLE,		TRUE },
+    { "magical",	FORM_MAGICAL,		TRUE },
+    { "instant_rot",	FORM_INSTANT_DECAY,	TRUE },
+    { "other",		FORM_OTHER,		TRUE },
+    { "animal",		FORM_ANIMAL,		TRUE },
+    { "sentient",	FORM_SENTIENT,		TRUE },
+    { "undead",		FORM_UNDEAD,		TRUE },
+    { "construct",	FORM_CONSTRUCT,		TRUE },
+    { "mist",		FORM_MIST,		TRUE },
+    { "intangible",	FORM_INTANGIBLE,	TRUE },
+    { "biped",		FORM_BIPED,		TRUE },
+    { "ciren",		FORM_CIREN,		TRUE },
+    { "insect",		FORM_INSECT,		TRUE },
+    { "spider",		FORM_SPIDER,		TRUE },
+    { "crustacean",	FORM_CRUSTACEAN,	TRUE },
+    { "worm",		FORM_WORM,		TRUE },
+    { "blob",		FORM_BLOB,		TRUE },
+    { "mammal",		FORM_MAMMAL,		TRUE },
+    { "bird",		FORM_BIRD,		TRUE },
+    { "reptile",	FORM_REPTILE,		TRUE },
+    { "snake",		FORM_SNAKE,		TRUE },
+    { "dragon",		FORM_DRAGON,		TRUE },
+    { "amphibian",	FORM_AMPHIBIAN,		TRUE },
+    { "fish",		FORM_FISH,		TRUE },
+    { "cold_blooded",	FORM_COLD_BLOOD,	TRUE },
+    { NULL, 0, FALSE }
+};
+
+static const struct flag_type part_bit_names[] =
+{
+    { "head",		PART_HEAD,		TRUE },
+    { "arms",		PART_ARMS,		TRUE },
+    { "legs",		PART_LEGS,		TRUE },
+    { "heart",		PART_HEART,		TRUE },
+    { "brains",		PART_BRAINS,		TRUE },
+    { "guts",		PART_GUTS,		TRUE },
+    { "hands",		PART_HANDS,		TRUE },
+    { "feet",		PART_FEET,		TRUE },
+    { "fingers",	PART_FINGERS,		TRUE },
+    { "ears",		PART_EAR,		TRUE },
+    { "eyes",		PART_EYE,		TRUE },
+    { "long_tongue",	PART_LONG_TONGUE,	TRUE },
+    { "eyestalks",	PART_EYESTALKS,		TRUE },
+    { "tentacles",	PART_TENTACLES,		TRUE },
+    { "fins",		PART_FINS,		TRUE },
+    { "wings",		PART_WINGS,		TRUE },
+    { "tail",		PART_TAIL,		TRUE },
+    { "claws",		PART_CLAWS,		TRUE },
+    { "fangs",		PART_FANGS,		TRUE },
+    { "horns",		PART_HORNS,		TRUE },
+    { "scales",		PART_SCALES,		TRUE },
+    { NULL, 0, FALSE }
+};
+
+static const struct flag_type weapon_bit_names[] =
+{
+    { "flaming",	WEAPON_FLAMING,		TRUE },
+    { "frost",		WEAPON_FROST,		TRUE },
+    { "vampiric",	WEAPON_VAMPIRIC,	TRUE },
+    { "sharp",		WEAPON_SHARP,		TRUE },
+    { "vorpal",		WEAPON_VORPAL,		TRUE },
+    { "two-handed",	WEAPON_TWO_HANDS,	TRUE },
+    { "shocking",	WEAPON_SHOCKING,	TRUE },
+    { "poison",		WEAPON_POISON,		TRUE },
+    { "holy",		WEAPON_HOLY,		TRUE },
+    { NULL, 0, FALSE }
+};
+
+static const struct flag_type cont_bit_names[] =
+{
+    { "closable",	CONT_CLOSEABLE,		TRUE },
+    { "pickproof",	CONT_PICKPROOF,		TRUE },
+    { "closed",		CONT_CLOSED,		TRUE },
+    { "locked",		CONT_LOCKED,		TRUE },
+    { NULL, 0, FALSE }
+};
+
+static const struct flag_type off_bit_names[] =
+{
+    { "area attack",	OFF_AREA_ATTACK,	TRUE },
+    { "backstab",	OFF_BACKSTAB,		TRUE },
+    { "bash",		OFF_BASH,		TRUE },
+    { "berserk",	OFF_BERSERK,		TRUE },
+    { "disarm",		OFF_DISARM,		TRUE },
+    { "dodge",		OFF_DODGE,		TRUE },
+    { "fade",		OFF_FADE,		TRUE },
+    { "fast",		OFF_FAST,		TRUE },
+    { "kick",		OFF_KICK,		TRUE },
+    { "kick_dirt",	OFF_KICK_DIRT,		TRUE },
+    { "parry",		OFF_PARRY,		TRUE },
+    { "rescue",		OFF_RESCUE,		TRUE },
+    { "tail",		OFF_TAIL,		TRUE },
+    { "trip",		OFF_TRIP,		TRUE },
+    { "crush",		OFF_CRUSH,		TRUE },
+    { "assist_all",	ASSIST_ALL,		TRUE },
+    { "assist_align",	ASSIST_ALIGN,		TRUE },
+    { "assist_race",	ASSIST_RACE,		TRUE },
+    { "assist_players",	ASSIST_PLAYERS,		TRUE },
+    { "assist_guard",	ASSIST_GUARD,		TRUE },
+    { "assist_vnum",	ASSIST_VNUM,		TRUE },
+    { NULL, 0, FALSE }
+};
+
+/* Return ascii name of an affect bit vector. */
+BIT_NAME_FUNC( affect_bit_name, affect_bit_names )
+BIT_NAME_FUNC( detect_bit_name, detect_bit_names )
+BIT_NAME_FUNC( extra_bit_name,  extra_bit_names  )
+BIT_NAME_FUNC( comm_bit_name,   comm_bit_names   )
+BIT_NAME_FUNC( imm_bit_name,    imm_bit_names    )
+BIT_NAME_FUNC( wear_bit_name,   wear_bit_names   )
+BIT_NAME_FUNC( part_bit_name,   part_bit_names   )
+BIT_NAME_FUNC( weapon_bit_name, weapon_bit_names )
+BIT_NAME_FUNC( cont_bit_name,   cont_bit_names   )
+BIT_NAME_FUNC( off_bit_name,    off_bit_names    )
+
+/* return ascii name of an act vector: "npc ..." ya da "player ..." */
 char *act_bit_name( int act_flags )
 {
     static char buf[512];
 
-    buf[0] = '\0';
+    if ( IS_SET(act_flags, ACT_IS_NPC) )
+	return (char *) flag_bits_name( buf, sizeof buf, npc_act_names, act_flags );
 
-    if (IS_SET(act_flags,ACT_IS_NPC))
-    {
- 	strcat(buf," npc");
-    	if (act_flags & ACT_SENTINEL 	) strcat(buf, " sentinel");
-    	if (act_flags & ACT_SCAVENGER	) strcat(buf, " scavenger");
-	if (act_flags & ACT_AGGRESSIVE	) strcat(buf, " aggressive");
-	if (act_flags & ACT_STAY_AREA	) strcat(buf, " stay_area");
-	if (act_flags & ACT_WIMPY	) strcat(buf, " wimpy");
-	if (act_flags & ACT_PET		) strcat(buf, " pet");
-	if (act_flags & ACT_TRAIN	) strcat(buf, " train");
-	if (act_flags & ACT_PRACTICE	) strcat(buf, " practice");
-	if (act_flags & ACT_UNDEAD	) strcat(buf, " undead");
-	if (act_flags & ACT_HUNTER	) strcat(buf, " hunter");
-	if (act_flags & ACT_CLERIC	) strcat(buf, " cleric");
-	if (act_flags & ACT_MAGE	) strcat(buf, " mage");
-	if (act_flags & ACT_THIEF	) strcat(buf, " thief");
-	if (act_flags & ACT_WARRIOR	) strcat(buf, " warrior");
-	if (act_flags & ACT_NOALIGN	) strcat(buf, " no_align");
-	if (act_flags & ACT_NOPURGE	) strcat(buf, " no_purge");
-	if (act_flags & ACT_IS_HEALER	) strcat(buf, " healer");
-	if (act_flags & ACT_GAIN	) strcat(buf, " skill_train");
-	if (act_flags & ACT_UPDATE_ALWAYS) strcat(buf," update_always");
-    }
-    else
-    {
-	strcat(buf," player");
-	if (act_flags & PLR_AUTOASSIST	) strcat(buf, " autoassist");
-	if (act_flags & PLR_AUTOEXIT	) strcat(buf, " autoexit");
-	if (act_flags & PLR_AUTOLOOT	) strcat(buf, " autoloot");
-	if (act_flags & PLR_AUTOSAC	) strcat(buf, " autosac");
-	if (act_flags & PLR_AUTOAKCE	) strcat(buf, " autoakce");
-	if (act_flags & PLR_AUTOSPLIT	) strcat(buf, " autosplit");
-	if (act_flags & PLR_WANTED	) strcat(buf, " wanted");
-	if (act_flags & PLR_NO_TITLE	) strcat(buf, " no_title");
-	if (act_flags & PLR_NO_EXP	) strcat(buf, " no_exp");
-	if (act_flags & PLR_HOLYLIGHT	) strcat(buf, " holy_light");
-	if (act_flags & PLR_NOCANCEL	) strcat(buf, " no_cancel");
-	if (act_flags & PLR_CANLOOT	) strcat(buf, " loot_corpse");
-	if (act_flags & PLR_NOSUMMON	) strcat(buf, " no_summon");
-	if (act_flags & PLR_NOFOLLOW	) strcat(buf, " no_follow");
-	if (act_flags & PLR_CANINDUCT	) strcat(buf, " Cabal_LEADER");
-	if (act_flags & PLR_GHOST	) strcat(buf, " ghost");
-	if (act_flags & PLR_PERMIT	) strcat(buf, " permit");
-	if (act_flags & PLR_REMORTED	) strcat(buf, " remorted");
-	if (act_flags & PLR_LOG		) strcat(buf, " log");
-	if (act_flags & PLR_FREEZE	) strcat(buf, " frozen");
-	if (act_flags & PLR_LEFTHAND	) strcat(buf, " lefthand");
-	if (act_flags & PLR_QUESTOR	) strcat(buf, " questor");
-	if (act_flags & PLR_VAMPIRE	) strcat(buf, " VAMPIRE");
-	if (act_flags & PLR_HARA_KIRI	) strcat(buf, " harakiri");
-	if (act_flags & PLR_BLINK_ON	) strcat(buf, " blink_on");
-    }
-    return (char *)(( buf[0] != '\0' ) ? buf+1 : "none");
+    snprintf( buf, sizeof buf, "player" );
+    flag_bits_append( buf, sizeof buf, plr_act_names, act_flags );
+    return buf;
 }
 
-char *comm_bit_name(int comm_flags)
+char *form_bit_name( int form_flags )
 {
     static char buf[512];
 
-    buf[0] = '\0';
-
-    if (comm_flags & COMM_QUIET		) strcat(buf, " quiet");
-    if (comm_flags & COMM_DEAF		) strcat(buf, " deaf");
-    if (comm_flags & COMM_NOWIZ		) strcat(buf, " no_wiz");
-    if (comm_flags & COMM_NOAUCTION	) strcat(buf, " no_auction");
-    if (comm_flags & COMM_NOGOSSIP	) strcat(buf, " no_gossip");
-    if (comm_flags & COMM_NOQUESTION	) strcat(buf, " no_question");
-    if (comm_flags & COMM_NOMUSIC	) strcat(buf, " no_music");
-    if (comm_flags & COMM_NOQUOTE	) strcat(buf, " no_quote");
-    if (comm_flags & COMM_COMPACT	) strcat(buf, " compact");
-    if (comm_flags & COMM_BRIEF		) strcat(buf, " brief");
-    if (comm_flags & COMM_PROMPT	) strcat(buf, " prompt");
-    if (comm_flags & COMM_COMBINE	) strcat(buf, " combine");
-    if (comm_flags & COMM_NOEMOTE	) strcat(buf, " no_emote");
-    if (comm_flags & COMM_NOSHOUT	) strcat(buf, " no_shout");
-    if (comm_flags & COMM_NOTELL	) strcat(buf, " no_tell");
-    if (comm_flags & COMM_NOCHANNELS	) strcat(buf, " no_channels");
-
-
-    return (char *)(( buf[0] != '\0' ) ? buf+1 : "none");
-}
-
-char *imm_bit_name(int imm_flags)
-{
-    static char buf[512];
-
-    buf[0] = '\0';
-
-    if (imm_flags & IMM_SUMMON		) strcat(buf, " summon");
-    if (imm_flags & IMM_CHARM		) strcat(buf, " charm");
-    if (imm_flags & IMM_MAGIC		) strcat(buf, " magic");
-    if (imm_flags & IMM_WEAPON		) strcat(buf, " weapon");
-    if (imm_flags & IMM_BASH		) strcat(buf, " blunt");
-    if (imm_flags & IMM_PIERCE		) strcat(buf, " piercing");
-    if (imm_flags & IMM_SLASH		) strcat(buf, " slashing");
-    if (imm_flags & IMM_FIRE		) strcat(buf, " fire");
-    if (imm_flags & IMM_COLD		) strcat(buf, " cold");
-    if (imm_flags & IMM_LIGHTNING	) strcat(buf, " lightning");
-    if (imm_flags & IMM_ACID		) strcat(buf, " acid");
-    if (imm_flags & IMM_POISON		) strcat(buf, " poison");
-    if (imm_flags & IMM_NEGATIVE	) strcat(buf, " negative");
-    if (imm_flags & IMM_HOLY		) strcat(buf, " holy");
-    if (imm_flags & IMM_ENERGY		) strcat(buf, " energy");
-    if (imm_flags & IMM_MENTAL		) strcat(buf, " mental");
-    if (imm_flags & IMM_DISEASE	) strcat(buf, " disease");
-    if (imm_flags & IMM_DROWNING	) strcat(buf, " drowning");
-    if (imm_flags & IMM_LIGHT		) strcat(buf, " light");
-    if (imm_flags & IMM_SOUND		) strcat(buf, " sound");
-    if (imm_flags & IMM_IRON		) strcat(buf, " iron");
-    if (imm_flags & IMM_WOOD		) strcat(buf, " wood");
-    if (imm_flags & IMM_SILVER	) strcat(buf, " silver");
-
-    return (char *)(( buf[0] != '\0' ) ? buf+1 : "none");
-}
-
-char *wear_bit_name(int wear_flags)
-{
-    static char buf[512];
-
-    buf [0] = '\0';
-    if (wear_flags & ITEM_TAKE		) strcat(buf, " take");
-    if (wear_flags & ITEM_WEAR_FINGER	) strcat(buf, " finger");
-    if (wear_flags & ITEM_WEAR_NECK	) strcat(buf, " neck");
-    if (wear_flags & ITEM_WEAR_BODY	) strcat(buf, " torso");
-    if (wear_flags & ITEM_WEAR_HEAD	) strcat(buf, " head");
-    if (wear_flags & ITEM_WEAR_LEGS	) strcat(buf, " legs");
-    if (wear_flags & ITEM_WEAR_FEET	) strcat(buf, " feet");
-    if (wear_flags & ITEM_WEAR_HANDS	) strcat(buf, " hands");
-    if (wear_flags & ITEM_WEAR_ARMS	) strcat(buf, " arms");
-    if (wear_flags & ITEM_WEAR_SHIELD	) strcat(buf, " shield");
-    if (wear_flags & ITEM_WEAR_ABOUT	) strcat(buf, " body");
-    if (wear_flags & ITEM_WEAR_WAIST	) strcat(buf, " waist");
-    if (wear_flags & ITEM_WEAR_WRIST	) strcat(buf, " wrist");
-    if (wear_flags & ITEM_WIELD		) strcat(buf, " wield");
-    if (wear_flags & ITEM_HOLD		) strcat(buf, " hold");
-    if (wear_flags & ITEM_WEAR_FLOAT	) strcat(buf, " float");
-    if (wear_flags & ITEM_WEAR_TATTOO	) strcat(buf, " tattoo");
-
-    return (char *)(( buf[0] != '\0' ) ? buf+1 : "none");
-}
-
-char *form_bit_name(int form_flags)
-{
-    static char buf[512];
-
-    buf[0] = '\0';
-    if (form_flags & FORM_POISON	) strcat(buf, " poison");
-    else if (form_flags & FORM_EDIBLE	) strcat(buf, " edible");
-    if (form_flags & FORM_MAGICAL	) strcat(buf, " magical");
-    if (form_flags & FORM_INSTANT_DECAY	) strcat(buf, " instant_rot");
-    if (form_flags & FORM_OTHER		) strcat(buf, " other");
-    if (form_flags & FORM_ANIMAL	) strcat(buf, " animal");
-    if (form_flags & FORM_SENTIENT	) strcat(buf, " sentient");
-    if (form_flags & FORM_UNDEAD	) strcat(buf, " undead");
-    if (form_flags & FORM_CONSTRUCT	) strcat(buf, " construct");
-    if (form_flags & FORM_MIST		) strcat(buf, " mist");
-    if (form_flags & FORM_INTANGIBLE	) strcat(buf, " intangible");
-    if (form_flags & FORM_BIPED		) strcat(buf, " biped");
-    if (form_flags & FORM_CIREN	    ) strcat(buf, " ciren");
-    if (form_flags & FORM_INSECT	) strcat(buf, " insect");
-    if (form_flags & FORM_SPIDER	) strcat(buf, " spider");
-    if (form_flags & FORM_CRUSTACEAN	) strcat(buf, " crustacean");
-    if (form_flags & FORM_WORM		) strcat(buf, " worm");
-    if (form_flags & FORM_BLOB		) strcat(buf, " blob");
-    if (form_flags & FORM_MAMMAL	) strcat(buf, " mammal");
-    if (form_flags & FORM_BIRD		) strcat(buf, " bird");
-    if (form_flags & FORM_REPTILE	) strcat(buf, " reptile");
-    if (form_flags & FORM_SNAKE		) strcat(buf, " snake");
-    if (form_flags & FORM_DRAGON	) strcat(buf, " dragon");
-    if (form_flags & FORM_AMPHIBIAN	) strcat(buf, " amphibian");
-    if (form_flags & FORM_FISH		) strcat(buf, " fish");
-    if (form_flags & FORM_COLD_BLOOD 	) strcat(buf, " cold_blooded");
-
-    return (char *)(( buf[0] != '\0' ) ? buf+1 : "none");
-}
-
-char *part_bit_name(int part_flags)
-{
-    static char buf[512];
-
-    buf[0] = '\0';
-    if (part_flags & PART_HEAD		) strcat(buf, " head");
-    if (part_flags & PART_ARMS		) strcat(buf, " arms");
-    if (part_flags & PART_LEGS		) strcat(buf, " legs");
-    if (part_flags & PART_HEART		) strcat(buf, " heart");
-    if (part_flags & PART_BRAINS	) strcat(buf, " brains");
-    if (part_flags & PART_GUTS		) strcat(buf, " guts");
-    if (part_flags & PART_HANDS		) strcat(buf, " hands");
-    if (part_flags & PART_FEET		) strcat(buf, " feet");
-    if (part_flags & PART_FINGERS	) strcat(buf, " fingers");
-    if (part_flags & PART_EAR		) strcat(buf, " ears");
-    if (part_flags & PART_EYE		) strcat(buf, " eyes");
-    if (part_flags & PART_LONG_TONGUE	) strcat(buf, " long_tongue");
-    if (part_flags & PART_EYESTALKS	) strcat(buf, " eyestalks");
-    if (part_flags & PART_TENTACLES	) strcat(buf, " tentacles");
-    if (part_flags & PART_FINS		) strcat(buf, " fins");
-    if (part_flags & PART_WINGS		) strcat(buf, " wings");
-    if (part_flags & PART_TAIL		) strcat(buf, " tail");
-    if (part_flags & PART_CLAWS		) strcat(buf, " claws");
-    if (part_flags & PART_FANGS		) strcat(buf, " fangs");
-    if (part_flags & PART_HORNS		) strcat(buf, " horns");
-    if (part_flags & PART_SCALES	) strcat(buf, " scales");
-
-    return (char *)(( buf[0] != '\0' ) ? buf+1 : "none");
-}
-
-char *weapon_bit_name(int weapon_flags)
-{
-    static char buf[512];
-
-    buf[0] = '\0';
-    if (weapon_flags & WEAPON_FLAMING	) strcat(buf, " flaming");
-    if (weapon_flags & WEAPON_FROST	) strcat(buf, " frost");
-    if (weapon_flags & WEAPON_VAMPIRIC	) strcat(buf, " vampiric");
-    if (weapon_flags & WEAPON_SHARP	) strcat(buf, " sharp");
-    if (weapon_flags & WEAPON_VORPAL	) strcat(buf, " vorpal");
-    if (weapon_flags & WEAPON_TWO_HANDS ) strcat(buf, " two-handed");
-    if (weapon_flags & WEAPON_SHOCKING 	) strcat(buf, " shocking");
-    if (weapon_flags & WEAPON_POISON	) strcat(buf, " poison");
-    if (weapon_flags & WEAPON_HOLY	) strcat(buf, " holy");
-
-    return (char *)(( buf[0] != '\0' ) ? buf+1 : "none");
-}
-
-char *cont_bit_name( int cont_flags)
-{
-    static char buf[512];
-
-    buf[0] = '\0';
-
-    if (cont_flags & CONT_CLOSEABLE	) strcat(buf, " closable");
-    if (cont_flags & CONT_PICKPROOF	) strcat(buf, " pickproof");
-    if (cont_flags & CONT_CLOSED	) strcat(buf, " closed");
-    if (cont_flags & CONT_LOCKED	) strcat(buf, " locked");
-
-    return (char *)(( buf[0] != '\0' ) ? buf+1 : "none");
-}
-
-
-char *off_bit_name(int off_flags)
-{
-    static char buf[512];
-
-    buf[0] = '\0';
-
-    if (off_flags & OFF_AREA_ATTACK	) strcat(buf, " area attack");
-    if (off_flags & OFF_BACKSTAB	) strcat(buf, " backstab");
-    if (off_flags & OFF_BASH		) strcat(buf, " bash");
-    if (off_flags & OFF_BERSERK		) strcat(buf, " berserk");
-    if (off_flags & OFF_DISARM		) strcat(buf, " disarm");
-    if (off_flags & OFF_DODGE		) strcat(buf, " dodge");
-    if (off_flags & OFF_FADE		) strcat(buf, " fade");
-    if (off_flags & OFF_FAST		) strcat(buf, " fast");
-    if (off_flags & OFF_KICK		) strcat(buf, " kick");
-    if (off_flags & OFF_KICK_DIRT	) strcat(buf, " kick_dirt");
-    if (off_flags & OFF_PARRY		) strcat(buf, " parry");
-    if (off_flags & OFF_RESCUE		) strcat(buf, " rescue");
-    if (off_flags & OFF_TAIL		) strcat(buf, " tail");
-    if (off_flags & OFF_TRIP		) strcat(buf, " trip");
-    if (off_flags & OFF_CRUSH		) strcat(buf, " crush");
-    if (off_flags & ASSIST_ALL		) strcat(buf, " assist_all");
-    if (off_flags & ASSIST_ALIGN	) strcat(buf, " assist_align");
-    if (off_flags & ASSIST_RACE		) strcat(buf, " assist_race");
-    if (off_flags & ASSIST_PLAYERS	) strcat(buf, " assist_players");
-    if (off_flags & ASSIST_GUARD	) strcat(buf, " assist_guard");
-    if (off_flags & ASSIST_VNUM		) strcat(buf, " assist_vnum");
-
-    return (char *)(( buf[0] != '\0' ) ? buf+1 : "none");
+    if ( form_flags & FORM_POISON )
+	form_flags &= ~FORM_EDIBLE;
+    return (char *) flag_bits_name( buf, sizeof buf, form_bit_names, form_flags );
 }
 
 int cabal_lookup (const char *argument)
@@ -2945,7 +2582,7 @@ int cabal_lookup (const char *argument)
 }
 
 
-bool isn_dark_safe( CHAR_DATA *ch)
+int isn_dark_safe( CHAR_DATA *ch)
 {
     CHAR_DATA *rch;
     OBJ_DATA *light;
@@ -3065,25 +2702,22 @@ void add_mind(CHAR_DATA *ch, char *str)
 void remove_mind(CHAR_DATA *ch, char *str)
 {
  char buf[MAX_STRING_LENGTH];
- char buff[MAX_STRING_LENGTH];
  char arg[MAX_INPUT_LENGTH];
  char *mind = ch->in_mind;
+ size_t len = 0;
 
  if (!IS_NPC(ch) || ch->in_room == NULL
 	|| mind == NULL || !is_name(str,mind) ) return;
 
+ /* str dışındaki adlar boşlukla yeniden birleştirilir */
  buf[0] = '\0';
  do
   {
    mind = one_argument(mind,arg);
    if (!is_name(str,arg))
-   {
-    if (buf[0] == '\0') strcpy(buff,arg);
-    else snprintf(buff, sizeof(buff),"%s %s",buf,arg);
-    strcpy(buf,buff);
-   }
+    len += snprintf(buf + len, sizeof(buf) - len, "%s%s", len ? " " : "", arg);
   }
- while ( mind[0] != '\0' );
+ while ( mind[0] != '\0' && len < sizeof(buf) );
 
  do_say(ch,"Sonunda intikamımı aldım!");
  free_string(ch->in_mind);
@@ -3252,13 +2886,13 @@ void path_to_track( CHAR_DATA *ch, CHAR_DATA *victim, int door)
        {
         room_record(ch->name,temp, opdoor);
         if ((pExit = temp->exit[opdoor]) == NULL
-	    || (temp = pExit->u1.to_room) == NULL )
+	    || pExit->u1.to_room == NULL )
 	{
-	 snprintf(log_buf, sizeof(log_buf),"Path to track: Range: %d Room: %d opdoor:%d",
+	 bugf("Path to track: Range: %d Room: %d opdoor:%d",
 		range,temp->vnum,opdoor);
-	 bug(log_buf,0);
 	 return;
 	}
+	temp = pExit->u1.to_room;
        }
     do_track(victim,"");
   }

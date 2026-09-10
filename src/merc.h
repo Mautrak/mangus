@@ -203,9 +203,8 @@ typedef void OPROG_FUN_AREA (OBJ_DATA *obj);
 #define CLR_CYAN "\033[36m"
 #define CLR_CYAN_BOLD "\033[36;1m"
 #define CLR_WHITE "\033[37;1m"
-#define CLR_WHITE_BOLD "\033[37;0m"
+#define CLR_WHITE_BOLD "\033[37;0m"   /* dikkat: kalın değil, nitelik sıfırlama kodu */
 
-#define CLR_BLINK "\033[5m"
 #define CLR_BOLD "\033[1m"
 #define CLR_NORMAL "\033[0;37;40m"
 
@@ -275,19 +274,9 @@ typedef void OPROG_FUN_AREA (OBJ_DATA *obj);
 #define LEVEL_IMMORTAL		   (MAX_LEVEL - 8)
 
 
-#undef ANATOLIA_MACHINE
-
-#if defined(ANATOLIA_MACHINE)
-#define PULSE_PER_SCD		    6  /* 6 for comm.c */
-#define PULSE_PER_SECOND	    4  /* for update.c */
-#define PULSE_VIOLENCE		  ( 2 *  PULSE_PER_SECOND)
-
-#else
 #define PULSE_PER_SECOND	    4
 #define PULSE_PER_SCD		    4
 #define PULSE_VIOLENCE		  ( 3 * PULSE_PER_SECOND)
-
-#endif
 
 #define PULSE_MOBILE		  ( 4 * PULSE_PER_SECOND)
 #define PULSE_WATER_FLOAT	  ( 4 * PULSE_PER_SECOND)
@@ -456,7 +445,6 @@ struct	weather_data
 #define CON_GET_NEW_CLASS		 8
 #define CON_GET_ALIGNMENT		 9
 #define CON_DEFAULT_CHOICE		10
-#define CON_GEN_GROUPS			11
 #define CON_PICK_WEAPON			12
 #define CON_READ_IMOTD			13
 #define CON_READ_MOTD			14
@@ -481,7 +469,7 @@ struct	descriptor_data
     CHAR_DATA *		original;
     bool		valid;
     char *		host;
-    sh_int		descriptor;
+    int			descriptor;	/* soket tanıtıcısı (platform.h int) */
     sh_int		connected;
     bool		fcommand;
     char		inbuf		[4 * MAX_INPUT_LENGTH];
@@ -567,8 +555,8 @@ struct	help_data
 struct	shop_data
 {
     SHOP_DATA *	next;			/* Next shop in list		*/
-    sh_int	keeper;			/* Vnum of shop keeper mob	*/
-    sh_int	buy_type [MAX_TRADE];	/* Item types shop will buy	*/
+    int		keeper;			/* Vnum of shop keeper mob	*/
+    int		buy_type [MAX_TRADE];	/* Item types shop will buy	*/
     sh_int	profit_buy;		/* Cost multiplier for buying	*/
     sh_int	profit_sell;		/* Cost multiplier for selling	*/
     sh_int	open_hour;		/* First opening hour		*/
@@ -593,7 +581,7 @@ struct	shop_data
 struct	class_type
 {
     const char *	name[2];			/* the full name of the class */
-    const char	who_name[8];	/* Three-letter name for 'who'	*/
+    const char *	who_name;	/* Kısa ad ('kim' listesi, UTF-8)	*/
     sh_int	attr_prime;		/* Prime attribute		*/
     sh_int	weapon;			/* First weapon			*/
     sh_int	guild[MAX_GUILD];	/* Vnum of guild rooms		*/
@@ -653,7 +641,7 @@ struct item_type
 struct weapon_type
 {
     const char *	name;
-    sh_int	vnum;
+    int		vnum;
     sh_int	type;
     sh_int	*gsn;
 };
@@ -675,7 +663,7 @@ struct attack_type
 struct race_type
 {
     const char *	name[2];			/* call name of the race */
-    const char 	who_name[8];
+    const char *	who_name;	/* Kısa ad ('kim' listesi, UTF-8)	*/
 		sh_int	language;		/* language		*/
     bool	pc_race;		/* can be chosen by pcs  */
     bool	humanoid;		/* intelligent humanoid races  */
@@ -772,7 +760,6 @@ struct	kill_data
 #define MOB_VNUM_FIDO		   3062
 #define MOB_VNUM_SAGE		   3162
 
-#define MOB_VNUM_VAMPIRE	    3404
 
 #define MOB_VNUM_SHADOW               10
 #define MOB_VNUM_SPECIAL_GUARD        11
@@ -843,7 +830,6 @@ struct	kill_data
 #define cc			268435456
 #define dd			536870912
 #define ee			1073741824
-#define ab          2147483648
 
 
 /* race table */
@@ -1320,7 +1306,6 @@ struct	kill_data
 #define OBJ_VNUM_NMAP1		   3385
 #define OBJ_VNUM_NMAP2		   3386
 #define OBJ_VNUM_MAP_NT		   3167
-#define OBJ_VNUM_MAP_OFCOL	   3162
 #define OBJ_VNUM_MAP_SM		   3164
 #define OBJ_VNUM_MAP_TITAN 	   3382
 #define OBJ_VNUM_MAP_OLD 	   5333
@@ -1566,7 +1551,6 @@ struct	kill_data
 #define APPLY_HITROLL		     18
 #define APPLY_DAMROLL		     19
 #define APPLY_SAVES		     20
-#define APPLY_SAVING_PARA	     20
 #define APPLY_SAVING_ROD	     21
 #define APPLY_SAVING_PETRI	     22
 #define APPLY_SAVING_BREATH	     23
@@ -1813,7 +1797,6 @@ struct	kill_data
 #define PLR_GHOST		(T)
 
 /* penalty flags */
-#define PLR_PERMIT		(U)
 #define PLR_REMORTED		(V)
 #define PLR_LOG			(W)
 #define PLR_DENY		(X)
@@ -1824,7 +1807,7 @@ struct	kill_data
 #define PLR_VAMPIRE		(cc)
 #define PLR_HARA_KIRI		(dd)
 #define PLR_BLINK_ON		(ee)
-#define PLR_BEAR		(ab)
+#define PLR_BEAR		(U)	/* eski PLR_PERMIT biti; 2^31 (ab) long/int taşıyordu */
 
 
 #define IS_QUESTOR(ch)		(IS_SET((ch)->act , PLR_QUESTOR))
@@ -1953,9 +1936,9 @@ struct	mob_index_data
     MPROG_DATA *        mprogs;
     int                 progtypes;
     SHOP_DATA *		pShop;
-    sh_int		vnum;
-    sh_int		count;
-    sh_int		killed;
+    int			vnum;
+    int			count;
+    int			killed;
     char *		player_name;
     char *		short_descr;
     char *		long_descr;
@@ -2182,13 +2165,13 @@ struct	pc_data
     int			played;
     int			anti_killed;
     int			has_killed;
-    sh_int		questgiver;	/* quest */
+    int			questgiver;	/* quest */
     int                 questpoints;	/* quest */
 	int			questpractice;
     sh_int              nextquest;	/* quest */
     sh_int              countdown;	/* quest */
-    sh_int              questmob;       /* quest */
-		sh_int              questroom;       /* quest */
+    int                 questmob;       /* quest */
+		int                 questroom;       /* quest */
 		sh_int              ghost_mode_counter;       /* hayalet modu */
     sh_int		race;		/* orginal race for polymorph */
     sh_int		time_flag;	/* time log problem */
@@ -2247,7 +2230,7 @@ struct	obj_index_data
     char *		name;
     char *		short_descr;
     char *		description;
-    sh_int		vnum;
+    int			vnum;
     sh_int		reset_num;
     char *		material;
     sh_int		item_type;
@@ -2255,7 +2238,7 @@ struct	obj_index_data
     int			wear_flags;
     sh_int		level;
     sh_int 		condition;
-    sh_int		count;
+    int			count;
     int		    weight;
     int			cost;
     int			value[5];
@@ -2319,10 +2302,10 @@ struct	exit_data
     union
     {
 	ROOM_INDEX_DATA *	to_room;
-	sh_int			vnum;
+	int			vnum;
     } u1;
     sh_int		exit_info;
-    sh_int		key;
+    int			key;
     char *		keyword;
     char *		description;
 };
@@ -2349,10 +2332,10 @@ struct	reset_data
 {
     RESET_DATA *	next;
     char		command;
-    sh_int		arg1;
-    sh_int		arg2;
-    sh_int		arg3;
-    sh_int		arg4;
+    int			arg1;
+    int			arg2;
+    int			arg3;
+    int			arg4;
 };
 
 
@@ -2372,8 +2355,8 @@ struct	area_data
     sh_int		nplayer;
     sh_int		low_range;
     sh_int		high_range;
-    sh_int 		min_vnum;
-    sh_int		max_vnum;
+    int 		min_vnum;
+    int			max_vnum;
     bool		empty;
     unsigned long	count;
     char *		resetmsg;
@@ -2410,7 +2393,7 @@ struct	room_index_data
     char *		name;
     char *		description;
     char *		owner;
-    sh_int		vnum;
+    int			vnum;
     long		room_flags;
     sh_int		light;
     sh_int		sector_type;
@@ -2654,7 +2637,6 @@ extern sh_int  gsn_protection_heat;
 extern sh_int  gsn_protection_cold;
 extern sh_int  gsn_teleport;
 extern sh_int  gsn_witch_curse;
-extern sh_int  gsn_terangreal;
 extern sh_int  gsn_sebat;
 extern sh_int  gsn_kassandra;
 extern sh_int  gsn_matandra;
@@ -2734,9 +2716,9 @@ extern sh_int  gsn_mental_knife;
 #define IS_VALID(data)		((data) != NULL && (data)->valid)
 #define VALIDATE(data)		((data)->valid = TRUE)
 #define INVALIDATE(data)	((data)->valid = FALSE)
-#define UMIN(a, b)		((a) < (b) ? (a) : (b))
-#define UMAX(a, b)		((a) > (b) ? (a) : (b))
-#define URANGE(a, b, c)		((b) < (a) ? (a) : ((b) > (c) ? (c) : (b)))
+#define UMIN(a, b)		__extension__ ({ __typeof__(a) _ua = (a); __typeof__(b) _ub = (b); _ua < _ub ? _ua : _ub; })
+#define UMAX(a, b)		__extension__ ({ __typeof__(a) _ua = (a); __typeof__(b) _ub = (b); _ua > _ub ? _ua : _ub; })
+#define URANGE(a, b, c)		__extension__ ({ __typeof__(a) _ra = (a); __typeof__(b) _rb = (b); __typeof__(c) _rc = (c); _rb < _ra ? _ra : (_rb > _rc ? _rc : _rb); })
 #define LOWER(c)		((c) >= 'A' && (c) <= 'Z' ? (c)+'a'-'A' : (c))
 #define UPPER(c)		((c) >= 'a' && (c) <= 'z' ? (c)+'A'-'a' : (c))
 #define IS_SET(flag, bit)	((flag) & (bit))
@@ -2744,7 +2726,24 @@ extern sh_int  gsn_mental_knife;
 #define REMOVE_BIT(var, bit)	((var) &= ~(bit))
 #define IS_WATER( var )		(((var)->sector_type == SECT_WATER_SWIM) || \
 				 ((var)->sector_type == SECT_WATER_NOSWIM) )
-#define PERCENT(cur, max)	(max==0?0:((cur)*100)/(max))
+#define PERCENT(cur, max)	((max) == 0 ? 0 : ((cur) * 100) / (max))
+
+/* Grup 07: tek yönlü bağlı listeden `node` düğümünü çıkarır; bulunduysa TRUE */
+#define LIST_UNLINK(head, node, field) __extension__ ({ \
+	bool _found = TRUE; \
+	if ((head) == (node)) \
+	    (head) = (node)->field; \
+	else \
+	{ \
+	    __typeof__(head) _prev; \
+	    for (_prev = (head); _prev != NULL && _prev->field != (node); _prev = _prev->field) \
+		; \
+	    if (_prev == NULL) \
+		_found = FALSE; \
+	    else \
+		_prev->field = (node)->field; \
+	} \
+	_found; })
 
 /*
  * Character macros.
@@ -2758,7 +2757,6 @@ extern sh_int  gsn_mental_knife;
 #define IS_AFFECTED(ch, sn)	(IS_SET((ch)->affected_by, (sn)))
 #define CAN_DETECT(ch, sn)	(IS_SET((ch)->detection, (sn)))
 
-#define	IS_PK(ch, vt)		(!IS_NPC((ch)) & !IS_NPC((vt)))
 
 #define RACE(ch)		(ch->race)
 #define ORG_RACE(ch)		(IS_NPC(ch) ? ch->pIndexData->race : ch->pcdata->race)
@@ -2789,7 +2787,7 @@ extern sh_int  gsn_mental_knife;
  */
 
 #define IS_ROOM_AFFECTED(room, sn) 	(IS_SET((room)->affected_by, (sn)))
-#define IS_RAFFECTED(room, sn) 	(IS_SET((room)->affected_by, (sn)))
+#define IS_RAFFECTED(room, sn) 	IS_ROOM_AFFECTED(room, sn)
 
 #define MOUNTED(ch)	((!IS_NPC(ch) && ch->mount && ch->riding) ? \
 				ch->mount : NULL)
@@ -3015,9 +3013,6 @@ void    dump_to_scr	( char *text );
 int	colour		( char type, CHAR_DATA *ch, char *string );
 void	colourconv	( char *buffer, const char *txt, CHAR_DATA *ch );
 	//act_color: format1 for english, format2 for turkish
-void    dump_to_scr	( char *text );
-void	init_signals	();
-void	sig_handler		(int sig);
 
 void	printf_to_char	( CHAR_DATA *, const char *, ... );
 void	bugf		( char *, ... );
@@ -3091,8 +3086,6 @@ void	violence_update	( void );
 void	multi_hit	( CHAR_DATA *ch, CHAR_DATA *victim, int dt );
 bool	damage		( CHAR_DATA *ch, CHAR_DATA *victim, int dam,
 			        int dt, int iclass, bool show );
-bool    damage_old      ( CHAR_DATA *ch, CHAR_DATA *victim, int dam,
-                                int dt, int iclass, bool show );
 void	update_pos	( CHAR_DATA *victim );
 void	stop_fighting	( CHAR_DATA *ch, bool fBoth );
 bool    can_kill 	( CHAR_DATA *ch, CHAR_DATA *victim);
@@ -3102,6 +3095,12 @@ CHAR_DATA *  check_guard     (CHAR_DATA *ch, CHAR_DATA *mob);
 void	victim_yell	( CHAR_DATA *victim, CHAR_DATA *ch,
 			  const char *blind_msg, const char *seen_fmt );
 void	str_fill_name	( char *dst, size_t n, const char *tmpl, const char *name );
+
+/* Grup 07 */
+#define DEATH_PROTECT_SECS	600	/* ölümden sonra saldırıdan korunma süresi (saniye) */
+#define NEWBIE_SAFE_LEVEL	5	/* bu seviyenin altındaki oyuncular korunur */
+bool	pc_is_shielded	( CHAR_DATA *victim );	/* hayalet ya da bağlantısı kopmuş oyuncu */
+bool	pc_recently_died( CHAR_DATA *ch );	/* DEATH_PROTECT_SECS içinde ölmüş oyuncu */
 
 /* handler.c */
 AD  	*affect_find (AFFECT_DATA *paf, int sn);
@@ -3115,7 +3114,6 @@ bool 	check_material	(OBJ_DATA *obj, char *material );
 bool 	is_metal	(OBJ_DATA *obj );
 bool	cabal_ok	( CHAR_DATA *ch, sh_int sn );
 int	liq_lookup	( const char *name);
-int 	material_lookup ( const char *name);
 int	weapon_lookup	( const char *name);
 int	weapon_type	( const char *name);
 const char 	*weapon_name	( int weapon_Type);
@@ -3173,7 +3171,7 @@ int	get_obj_number	( OBJ_DATA *obj );
 int	get_obj_realnumber	( OBJ_DATA *obj );
 int	get_obj_weight	( OBJ_DATA *obj );
 int	get_true_weight	( OBJ_DATA *obj );
-bool	isn_dark_safe	( CHAR_DATA *ch );
+int	isn_dark_safe	( CHAR_DATA *ch );	/* 0 güvenli, 1 büyülü ışık, 2 gün ışığı */
 bool	can_see		( CHAR_DATA *ch, CHAR_DATA *victim );
 bool	can_see_obj	( CHAR_DATA *ch, OBJ_DATA *obj );
 bool	can_drop_obj	( CHAR_DATA *ch, OBJ_DATA *obj );
@@ -3216,6 +3214,14 @@ int	parse_date	( time_t t );
 int	parse_time	( time_t t );
 int	parse_time_spec	( time_t t );
 bool room_has_exit ( ROOM_INDEX_DATA *room );
+/* Grup 07 */
+struct flag_type;
+int	align_index	( CHAR_DATA *ch );	/* 0 iyi, 1 tarafsız, 2 kötü (sunak/çukur/nakil dizini) */
+int	cabal_obj_index	( int vnum );		/* vnum bir kabal eşyasıysa kabal indeksi, değilse 0 */
+int	cabal_room_index( int vnum );		/* vnum bir kabal sunak odasıysa kabal indeksi, değilse 0 */
+const char *flag_bits_name ( char *buf, size_t size, const struct flag_type *table, long bits );
+void	descr_subst	( char *buf, size_t size, const char *tmpl, const char *spec, const char *value );
+bool	obj_zaps_char	( OBJ_DATA *obj, CHAR_DATA *ch );
 
 /* handler_room.c */
 bool	can_see_room	( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoomIndex);
@@ -3244,6 +3250,8 @@ void	obj_to_room	( OBJ_DATA *obj, ROOM_INDEX_DATA *pRoomIndex );
 void	char_from_room	( CHAR_DATA *ch );
 void	char_to_room	( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoomIndex );
 void    room_record     ( char *name, ROOM_INDEX_DATA *room,sh_int door);
+/* Grup 07 */
+bool	is_self_keyword	( const char *arg );	/* "self", "kendimi", "bana" */
 
 
 /* interp.c */
