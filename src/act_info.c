@@ -204,6 +204,14 @@ static const char *tier_color( int v, int lo, int hi )
     return CLR_MAGENTA;
 }
 
+/* Tampona ekler; taşarsa keser (strlen ile, kısa listeler için). */
+static void sappend( char *buf, size_t n, const char *str )
+{
+    size_t len = strlen( buf );
+    if ( len < n )
+	snprintf( buf + len, n - len, "%s", str );
+}
+
 /* Tampona ekler; taşarsa keser. */
 static void bufcat( char *buf, size_t n, size_t *len, const char *str )
 {
@@ -462,83 +470,83 @@ void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
 	&& ch->pcdata->questmob > 0
 	&& victim->pIndexData->vnum == ch->pcdata->questmob)
   {
-		strcat( buf, "{R[hedef]{x ");
+		sappend( buf, sizeof(buf), "{R[hedef]{x ");
 }
-    if ( RIDDEN(victim)  ) 			strcat( buf, "[binek] "     );
-    if ( IS_AFFECTED(victim, AFF_INVISIBLE)   ) strcat( buf, "[görünmez] "      );
-    if ( IS_AFFECTED(victim,AFF_IMP_INVIS )   ) strcat( buf, "[gelişmiş] "   );
-    if ( victim->invis_level >= LEVEL_HERO    ) strcat( buf, "[WiZ] "	     );
-    if ( IS_AFFECTED(victim, AFF_HIDE)        ) strcat( buf, "[saklı] "       );
-    if ( IS_AFFECTED(victim, AFF_FADE)        ) strcat( buf, "[solmuş] "       );
-    if ( IS_AFFECTED(victim, AFF_CAMOUFLAGE)  ) strcat( buf, "[kamufle] "       );
-    if ( CAN_DETECT(victim, ADET_EARTHFADE)   ) strcat( buf, "[arz] "      );
+    if ( RIDDEN(victim)  ) 			sappend( buf, sizeof(buf), "[binek] "     );
+    if ( IS_AFFECTED(victim, AFF_INVISIBLE)   ) sappend( buf, sizeof(buf), "[görünmez] "      );
+    if ( IS_AFFECTED(victim,AFF_IMP_INVIS )   ) sappend( buf, sizeof(buf), "[gelişmiş] "   );
+    if ( victim->invis_level >= LEVEL_HERO    ) sappend( buf, sizeof(buf), "[WiZ] "	     );
+    if ( IS_AFFECTED(victim, AFF_HIDE)        ) sappend( buf, sizeof(buf), "[saklı] "       );
+    if ( IS_AFFECTED(victim, AFF_FADE)        ) sappend( buf, sizeof(buf), "[solmuş] "       );
+    if ( IS_AFFECTED(victim, AFF_CAMOUFLAGE)  ) sappend( buf, sizeof(buf), "[kamufle] "       );
+    if ( CAN_DETECT(victim, ADET_EARTHFADE)   ) sappend( buf, sizeof(buf), "[arz] "      );
     if ( IS_AFFECTED(victim, AFF_CHARM)
-	&& victim->master == ch) 		strcat( buf, "[teshir] "    );
-    if ( IS_AFFECTED(victim, AFF_PASS_DOOR)   ) strcat( buf, "{W[yarısaydam]{x ");
-    if ( IS_AFFECTED(victim, AFF_FAERIE_FIRE) ) strcat( buf, "{M[pembe aura]{x "  );
+	&& victim->master == ch) 		sappend( buf, sizeof(buf), "[teshir] "    );
+    if ( IS_AFFECTED(victim, AFF_PASS_DOOR)   ) sappend( buf, sizeof(buf), "{W[yarısaydam]{x ");
+    if ( IS_AFFECTED(victim, AFF_FAERIE_FIRE) ) sappend( buf, sizeof(buf), "{M[pembe aura]{x "  );
     if ( IS_NPC(victim) && IS_SET(victim->act,ACT_UNDEAD)
-    &&   CAN_DETECT(ch, DETECT_UNDEAD)     ) strcat( buf, "{W[hortlak]{x ");
+    &&   CAN_DETECT(ch, DETECT_UNDEAD)     ) sappend( buf, sizeof(buf), "{W[hortlak]{x ");
     if ( IS_EVIL(victim)
-    &&   CAN_DETECT(ch, DETECT_EVIL)     ) strcat( buf, "{R[kızıl aura]{x "   );
+    &&   CAN_DETECT(ch, DETECT_EVIL)     ) sappend( buf, sizeof(buf), "{R[kızıl aura]{x "   );
     if ( IS_GOOD(victim)
-    &&   CAN_DETECT(ch, DETECT_GOOD)     ) strcat( buf, "{Y[altın aura]{x ");
-    if ( IS_AFFECTED(victim, AFF_SANCTUARY)   ) strcat( buf, "{W[beyaz aura]{x " );
+    &&   CAN_DETECT(ch, DETECT_GOOD)     ) sappend( buf, sizeof(buf), "{Y[altın aura]{x ");
+    if ( IS_AFFECTED(victim, AFF_SANCTUARY)   ) sappend( buf, sizeof(buf), "{W[beyaz aura]{x " );
     if ( !IS_NPC(victim) && IS_SET(victim->act, PLR_WANTED ) )
-						strcat( buf, "[SUÇLU] ");
+						sappend( buf, sizeof(buf), "[SUÇLU] ");
 
     if ( victim->position == victim->start_pos && victim->long_descr[0] != '\0' )
     {
-	strcat( buf, victim->long_descr );
+	sappend( buf, sizeof(buf), victim->long_descr );
 	printf_to_char( ch, "%s", buf );
 	return;
     }
 
     if ( IS_SET(ch->act,PLR_HOLYLIGHT) && is_affected(victim,gsn_doppelganger))
       {
-        strcat( buf, "{"); strcat(buf, PERS(victim,ch)); strcat(buf, "} ");
+        sappend( buf, sizeof(buf), "{"); sappend( buf, sizeof(buf), PERS(victim,ch)); sappend( buf, sizeof(buf), "} ");
       }
 
     if (is_affected(victim,gsn_doppelganger)  &&
         victim->doppel->long_descr[0] != '\0') {
-      strcat( buf, victim->doppel->long_descr);
+      sappend( buf, sizeof(buf), victim->doppel->long_descr);
       send_to_char(buf, ch);
       return;
       }
 
     if (victim->long_descr[0] != '\0' &&
         !is_affected(victim,gsn_doppelganger)) {
-      strcat( buf, victim->long_descr );
+      sappend( buf, sizeof(buf), victim->long_descr );
       send_to_char(buf, ch);
       return;
     }
 
     if (is_affected(victim, gsn_doppelganger))
       {
-        strcat(buf, PERS(victim->doppel, ch ));
+        sappend( buf, sizeof(buf), PERS(victim->doppel, ch ));
         if (!IS_NPC(victim->doppel) && !IS_SET(ch->comm, COMM_BRIEF))
-          strcat(buf, victim->doppel->pcdata->title);
+          sappend( buf, sizeof(buf), victim->doppel->pcdata->title);
       }
    else
    {
-     strcat( buf, PERS( victim, ch ) );
+     sappend( buf, sizeof(buf), PERS( victim, ch ) );
      if ( !IS_NPC(victim) && !IS_SET(ch->comm, COMM_BRIEF)
      &&   victim->position == POS_STANDING && ch->on == NULL )
- 	 strcat( buf, victim->pcdata->title );
+ 	 sappend( buf, sizeof(buf), victim->pcdata->title );
     }
 
     switch ( victim->position )
     {
       case POS_DEAD:
-  		strcat( buf, " ÖLDÜ!!" );
+  		sappend( buf, sizeof(buf), " ÖLDÜ!!" );
   		break;
       case POS_MORTAL:
-  		strcat( buf, " öldürücü yaralar almış." );
+  		sappend( buf, sizeof(buf), " öldürücü yaralar almış." );
   		break;
       case POS_INCAP:
-  		strcat( buf, " aciz durumda." );
+  		sappend( buf, sizeof(buf), " aciz durumda." );
   		break;
       case POS_STUNNED:
-  		strcat( buf, " sersemlemiş yatıyor." );
+  		sappend( buf, sizeof(buf), " sersemlemiş yatıyor." );
   		break;
     case POS_SLEEPING:
     case POS_RESTING:
@@ -553,25 +561,25 @@ void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
 	    snprintf( message, sizeof(message), " burada." );
 	else
 	    snprintf( message, sizeof(message), " burada %s.", pos_verb[victim->position] );
-	strcat( buf, message );
+	sappend( buf, sizeof(buf), message );
 	break;
     case POS_FIGHTING:
-    strcat( buf, " burada, " );
+    sappend( buf, sizeof(buf), " burada, " );
 	if ( victim->fighting == NULL )
-  strcat( buf, "havayla dövüşüyor??" );
+  sappend( buf, sizeof(buf), "havayla dövüşüyor??" );
 	else if ( victim->fighting == ch )
-  strcat( buf, "SENinle dövüşüyor!" );
+  sappend( buf, sizeof(buf), "SENinle dövüşüyor!" );
 	else if ( victim->in_room == victim->fighting->in_room )
 	{
-	    strcat( buf, PERS( victim->fighting, ch ) );
-	    strcat( buf, " ile dövüşüyor." );
+	    sappend( buf, sizeof(buf), PERS( victim->fighting, ch ) );
+	    sappend( buf, sizeof(buf), " ile dövüşüyor." );
 	}
 	else
-  strcat( buf, "kim kaldıysa onunla dövüşüyor??" );
+  sappend( buf, sizeof(buf), "kim kaldıysa onunla dövüşüyor??" );
 	break;
     }
 
-    strcat( buf, "\n\r" );
+    sappend( buf, sizeof(buf), "\n\r" );
     utf8_upper_first(buf, sizeof(buf));
     send_to_char( buf, ch );
     return;
@@ -1909,7 +1917,7 @@ void do_help( CHAR_DATA *ch, char *argument )
 void do_whois (CHAR_DATA *ch, char *argument)
 {
     char arg[MAX_INPUT_LENGTH];
-    char output[MAX_STRING_LENGTH];
+    BUFFER *output;
     char buf[MAX_STRING_LENGTH];
     char titlebuf[MAX_STRING_LENGTH];
     char level_buf[MAX_STRING_LENGTH];
@@ -1929,7 +1937,7 @@ void do_whois (CHAR_DATA *ch, char *argument)
 	return;
     }
 
-    output[0] = '\0';
+    output = new_buf();
 
     who_n = bot_who_collect( who_dch, who_wch, BOT_WHO_MAX );
     for ( who_i = 0; who_i < who_n; who_i++ )
@@ -2041,17 +2049,19 @@ void do_whois (CHAR_DATA *ch, char *argument)
  		      wch->name,
 		      titlebuf);
 
-	    strcat(output,buf);
+	    add_buf(output,buf);
 	}
     }
 
     if (!found)
     {
       printf_to_char(ch,"Bu isimde birini göremiyorum??\n\r");
+	free_buf(output);
 	return;
     }
 
-    page_to_char(output,ch);
+    page_to_char(buf_string(output),ch);
+    free_buf(output);
 }
 
 void do_count ( CHAR_DATA *ch, char *argument )
@@ -3645,7 +3655,7 @@ void do_who_col( CHAR_DATA *ch, char *argument )
     char cabalbuf[MAX_STRING_LENGTH];
     char titlebuf[MAX_STRING_LENGTH];
     char classbuf[100];
-    char output[4 * MAX_STRING_LENGTH];
+    BUFFER *output;
     char pk_buf[100];
     char act_buf[100];
     char level_buf[100];
@@ -3876,7 +3886,7 @@ void do_who_col( CHAR_DATA *ch, char *argument )
      */
     nMatch = 0;
     buf[0] = '\0';
-    output[0] = '\0';
+    output = new_buf();
     who_n = bot_who_collect( who_dch, who_wch, BOT_WHO_MAX );
     for ( who_i = 0; who_i < who_n; who_i++ )
     {
@@ -4006,7 +4016,7 @@ void do_who_col( CHAR_DATA *ch, char *argument )
 	    wch->name,
 	    titlebuf);
 
-	strcat(output,buf);
+	add_buf(output,buf);
     }
 
     count = who_n;
@@ -4014,8 +4024,9 @@ void do_who_col( CHAR_DATA *ch, char *argument )
     max_on = UMAX(count,max_on);
     snprintf(buf2, sizeof(buf2), "\n\rOyuncular: %d, bugün: %d, en çok:%d.\n\r",
 		nMatch,max_on,max_on_so_far );
-    strcat(output,buf2);
-    page_to_char( output, ch );
+    add_buf(output,buf2);
+    page_to_char( buf_string(output), ch );
+    free_buf(output);
     return;
 }
 

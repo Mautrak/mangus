@@ -535,7 +535,7 @@ static void bot_apply_creation( BOT_DATA *bot, CHAR_DATA *ch )
     int i, race = bot->race;
 
     /* parola: kimsenin bilmediği rastgele bir dizgi */
-    snprintf( buf, sizeof(buf), "bot-%s-%ld-%d", bot->name, (long) current_time, number_range( 1000, 999999 ) );
+    snprintf( buf, sizeof(buf), "bot-%s-%lld-%d", bot->name, (long long) current_time, number_range( 1000, 999999 ) );
     free_string( ch->pcdata->pwd );
     ch->pcdata->pwd = str_dup( pwd_hash( buf ) );
 
