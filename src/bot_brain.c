@@ -2068,23 +2068,85 @@ static void bot_hunt( BOT_DATA *bot )
 }
 
 /* ---------------------------------------------------------------------
- * hedef odalar (şehir)
+ * hedef odalar (şehir). Adalet kuralı: bot yalnızca yürüyerek ulaşabildiği
+ * odaları, yakından uzağa tarar (bir oyuncunun tanıdığı sokaklar); char_list
+ * ya da object_list gezilmez. Sıra: bulunduğu bölge, memleketler, her yer.
  * ------------------------------------------------------------------ */
-static ROOM_INDEX_DATA *nearest_of( CHAR_DATA *ch, ROOM_INDEX_DATA **rooms, int n )
-{
-    int i, best = -1, best_len = 100000;
-    sh_int tmp[BOT_MAX_PATH];
+typedef bool BOT_MOB_PRED( CHAR_DATA *ch, CHAR_DATA *mob );
 
-    for ( i = 0; i < n && i < 16; i++ )
+struct town_search
+{
+    CHAR_DATA *         ch;
+    BOT_MOB_PRED *      pred;       /* NULL: çeşme aranıyor */
+    int                 pass;       /* 0 bölge, 1 memleket, 2 her yer */
+    ROOM_INDEX_DATA *   found;
+};
+
+/* odada koşulu sağlayan (uyanık) bir yaratık var mı */
+static bool room_has_mob( CHAR_DATA *ch, ROOM_INDEX_DATA *room, BOT_MOB_PRED *pred )
+{
+    CHAR_DATA *mob;
+
+    for ( mob = room->people; mob != NULL; mob = mob->next_in_room )
+        if ( IS_NPC(mob) && mob->position >= POS_RESTING && pred( ch, mob ) )
+            return TRUE;
+    return FALSE;
+}
+
+static bool mob_here( CHAR_DATA *ch, BOT_MOB_PRED *pred )
+{
+    return room_has_mob( ch, ch->in_room, pred );
+}
+
+static bool room_has_fountain( ROOM_INDEX_DATA *room )
+{
+    OBJ_DATA *obj;
+
+    for ( obj = room->contents; obj != NULL; obj = obj->next_content )
+        if ( obj->item_type == ITEM_FOUNTAIN )
+            return TRUE;
+    return FALSE;
+}
+
+static bool town_visit( ROOM_INDEX_DATA *room, int dist, void *vctx )
+{
+    struct town_search *t = (struct town_search *) vctx;
+
+    (void) dist;
+    if ( t->pass == 1 && !IS_SET( room->area->area_flag, AREA_HOMETOWN ) )
+        return TRUE;
+    if ( t->pred != NULL ? room_has_mob( t->ch, room, t->pred ) : room_has_fountain( room ) )
     {
-        int len = bot_find_path( ch, ch->in_room, rooms[i], tmp, BOT_MAX_PATH, FALSE );
-        if ( len >= 0 && len < best_len )
-        {
-            best_len = len;
-            best = i;
-        }
+        t->found = room;                              /* BFS sırası: ilk bulunan en yakın */
+        return FALSE;
     }
-    return best >= 0 ? rooms[best] : NULL;
+    return TRUE;
+}
+
+/* koşulu sağlayan yaratığın (pred) ya da çeşmenin (pred NULL) en yakın odası */
+static ROOM_INDEX_DATA *bot_town_room( CHAR_DATA *ch, BOT_MOB_PRED *pred, int passes )
+{
+    struct town_search t;
+
+    t.ch    = ch;
+    t.pred  = pred;
+    t.found = NULL;
+    for ( t.pass = 0; t.pass < passes && t.found == NULL; t.pass++ )
+    {
+        struct bot_bfs o;
+
+        memset( &o, 0, sizeof(o) );
+        o.same_area = ( t.pass == 0 );
+        o.visit     = town_visit;
+        o.visit_ctx = &t;
+        bot_bfs( ch, ch->in_room, &o, NULL, 0 );
+    }
+    return t.found;
+}
+
+static ROOM_INDEX_DATA *bot_mob_room( CHAR_DATA *ch, BOT_MOB_PRED *pred )
+{
+    return bot_town_room( ch, pred, 3 );
 }
 
 static bool trainer_here( CHAR_DATA *ch, long flags )
@@ -2095,33 +2157,6 @@ static bool trainer_here( CHAR_DATA *ch, long flags )
         if ( IS_NPC(mob) && IS_SET( mob->act, flags ) && can_see( ch, mob ) )
             return TRUE;
     return FALSE;
-}
-
-static ROOM_INDEX_DATA *bot_mob_room( CHAR_DATA *ch, bool (*pred)( CHAR_DATA *, CHAR_DATA * ) )
-{
-    CHAR_DATA *mob;
-    ROOM_INDEX_DATA *rooms[16];
-    int n = 0, pass;
-
-    /* önce bulunduğu bölge, sonra memleket, sonra her yer */
-    for ( pass = 0; pass < 3 && n == 0; pass++ )
-    {
-        for ( mob = char_list; mob != NULL && n < 16; mob = mob->next )
-        {
-            if ( !IS_NPC(mob) || mob->in_room == NULL || mob->position < POS_RESTING )
-                continue;
-            if ( pass == 0 && mob->in_room->area != ch->in_room->area )
-                continue;
-            if ( pass == 1 && !IS_SET( mob->in_room->area->area_flag, AREA_HOMETOWN ) )
-                continue;
-            if ( !pred( ch, mob ) )
-                continue;
-            if ( !bot_room_passable( ch, mob->in_room, FALSE ) )
-                continue;
-            rooms[n++] = mob->in_room;
-        }
-    }
-    return nearest_of( ch, rooms, n );
 }
 
 static bool pred_practicer( CHAR_DATA *ch, CHAR_DATA *mob )
@@ -2194,24 +2229,10 @@ static bool pred_sells_type( CHAR_DATA *ch, CHAR_DATA *mob )
     return keeper_sells( mob, shop_want_type, ch->level + 3 );
 }
 
+/* çeşme: bulunduğu bölge ya da memleket */
 static ROOM_INDEX_DATA *bot_fountain_room( CHAR_DATA *ch )
 {
-    OBJ_DATA *obj;
-    ROOM_INDEX_DATA *rooms[16];
-    int n = 0;
-
-    for ( obj = object_list; obj != NULL && n < 16; obj = obj->next )
-    {
-        if ( obj->item_type != ITEM_FOUNTAIN || obj->in_room == NULL )
-            continue;
-        if ( obj->in_room->area != ch->in_room->area
-          && !IS_SET( obj->in_room->area->area_flag, AREA_HOMETOWN ) )
-            continue;
-        if ( !bot_room_passable( ch, obj->in_room, FALSE ) )
-            continue;
-        rooms[n++] = obj->in_room;
-    }
-    return nearest_of( ch, rooms, n );
+    return bot_town_room( ch, NULL, 2 );
 }
 
 /* odadaki dükkâncı */
@@ -2562,8 +2583,9 @@ static void bot_town( BOT_DATA *bot )
                 bot->practice_block_until = bot_pulse + BOT_MIN(20);
             return;
         }
-        bot->substate  = (int) task;
-        bot->town_step = 0;
+        bot->substate    = (int) task;                /* seyahat sonrası aynı iş */
+        bot->town_step   = 0;
+        bot->town_target = room->vnum;
         if ( room != ch->in_room )
         {
             if ( !bot_set_travel( bot, room->vnum, BOT_ST_TOWN ) )
@@ -2571,8 +2593,6 @@ static void bot_town( BOT_DATA *bot )
                 bot_task_defer( bot, task, 20 );
                 bot->substate = 0;
             }
-            else
-                bot->substate = (int) task;   /* seyahat sonrası aynı iş */
             return;
         }
     }
@@ -2624,7 +2644,8 @@ static void bot_town( BOT_DATA *bot )
               && room != ch->in_room && bot->town_step < 20 )
             {
                 SET_BIT( bot->town_tasks, BOT_TOWN_SELL );
-                bot->substate = BOT_TOWN_SELL;
+                bot->substate    = BOT_TOWN_SELL;
+                bot->town_target = room->vnum;
                 bot_set_travel( bot, room->vnum, BOT_ST_TOWN );
             }
         }
@@ -2711,7 +2732,6 @@ static void bot_town( BOT_DATA *bot )
     {
         int prime = class_table[ch->iclass].attr_prime;
         const char *what;
-        int before = ch->train;
         if ( !trainer_here( ch, ACT_PRACTICE | ACT_TRAIN | ACT_GAIN ) )
         {
             bot->practice_block_until = bot_pulse + BOT_MIN(20);
@@ -2719,7 +2739,6 @@ static void bot_town( BOT_DATA *bot )
         }
         if ( ch->train <= 0 || bot->town_step > 8 )
             break;
-        (void) before;
         if ( ch->perm_stat[prime] < get_max_train( ch, prime ) )
             what = prime == STAT_STR ? "güç" : prime == STAT_INT ? "zeka" : prime == STAT_WIS ? "bilgelik"
                  : prime == STAT_DEX ? "çeviklik" : "bünye";
@@ -2732,11 +2751,7 @@ static void bot_town( BOT_DATA *bot )
     }
     case BOT_TOWN_HEAL:
     {
-        CHAR_DATA *mob;
-        for ( mob = ch->in_room->people; mob != NULL; mob = mob->next_in_room )
-            if ( IS_NPC(mob) && IS_SET( mob->act, ACT_IS_HEALER ) )
-                break;
-        if ( mob == NULL || bot_pct( ch->hit, ch->max_hit ) > 85 || ch->silver < 100 )
+        if ( !mob_here( ch, pred_healer ) || bot_pct( ch->hit, ch->max_hit ) > 85 || ch->silver < 100 )
             break;
         if ( ch->max_hit > 200 && ch->silver >= 600 )
             bot_cmd( bot, "iyileştir şifa" );
@@ -2747,7 +2762,7 @@ static void bot_town( BOT_DATA *bot )
         return;
     }
     case BOT_TOWN_QUEST_GET:
-        if ( bot_mob_room( ch, pred_questmaster ) != ch->in_room )
+        if ( !mob_here( ch, pred_questmaster ) )
             break;
         if ( IS_QUESTOR(ch) || ch->pcdata->nextquest > 0 )
             break;
@@ -2760,7 +2775,7 @@ static void bot_town( BOT_DATA *bot )
         }
         break;
     case BOT_TOWN_QUEST_DONE:
-        if ( bot_mob_room( ch, pred_questmaster ) != ch->in_room )
+        if ( !mob_here( ch, pred_questmaster ) )
             break;
         if ( IS_QUESTOR(ch) && ch->pcdata->questmob == -1 )
         {
@@ -2777,7 +2792,7 @@ static void bot_town( BOT_DATA *bot )
     case BOT_TOWN_QUEST_BUY:
     {
         const char *item;
-        if ( bot_mob_room( ch, pred_questmaster ) != ch->in_room )
+        if ( !mob_here( ch, pred_questmaster ) )
             break;
         if ( ( item = bot_quest_buy_item( ch, bot ) ) == NULL )
             break;
@@ -3196,8 +3211,111 @@ static void bot_choose_goal( BOT_DATA *bot )
 }
 
 /* ---------------------------------------------------------------------
- * ana döngü
+ * ana döngü: her adım bir yardımcı; komut üreten (ya da bu adımda başka
+ * karar verilmemesi gereken) yardımcı TRUE döndürür.
  * ------------------------------------------------------------------ */
+/* seviye atladı: korkaklık eşiği, giyim hafızası, sohbet, bölgeyi yeniden değerlendir */
+static void bot_think_level_up( BOT_DATA *bot )
+{
+    CHAR_DATA *ch = bot->ch;
+
+    if ( ch->level <= bot->last_level )
+        return;
+    bot->last_level = ch->level;
+    ch->wimpy = UMAX( ch->wimpy, ch->max_hit / 8 );
+    memset( bot->wear_fail, 0, sizeof(bot->wear_fail) );
+    bot_chat_event( bot, BOT_EV_LEVEL, NULL );
+    if ( ch->level == 2 || ch->level == 5 || ch->level == 10 )
+        bot->last_town_pulse = 0;
+    bot->hunt_area_pulse = 0;
+}
+
+/* ölüm sonrası: cesede git, dinlen, toparlanınca diril */
+static bool bot_think_ghost( BOT_DATA *bot )
+{
+    CHAR_DATA *ch = bot->ch;
+
+    if ( !IS_SET( ch->act, PLR_GHOST ) )
+    {
+        if ( bot->state == BOT_ST_CORPSE && bot->death_room == 0 )
+            bot_set_state( bot, BOT_ST_REST );
+        return FALSE;
+    }
+    if ( bot->state != BOT_ST_CORPSE && bot->state != BOT_ST_REST && bot->state != BOT_ST_TRAVEL )
+        bot_after_death( bot );
+    if ( bot->state == BOT_ST_REST && bot_pct( ch->hit, ch->max_hit ) >= BOT_HP_REST && bot->death_room == 0 )
+    {
+        bot_cmd( bot, ch->position < POS_STANDING ? "kalk" : "diril" );
+        return TRUE;
+    }
+    return FALSE;
+}
+
+/* çok yorgun / yaralı: dinlen */
+static bool bot_think_rest( BOT_DATA *bot )
+{
+    if ( bot->state == BOT_ST_REST )
+    {
+        if ( !bot_eat_drink( bot ) )
+            bot_resting( bot );
+        return TRUE;
+    }
+    if ( bot_need_rest( bot ) && bot->state != BOT_ST_FOLLOW && bot->state != BOT_ST_CORPSE )
+    {
+        bot_start_rest( bot );
+        return TRUE;
+    }
+    return FALSE;
+}
+
+/* ayakta değil: uyuyorsa bekle, yoldaysa yol adımı karar versin, yoksa kalk */
+static bool bot_think_position( BOT_DATA *bot )
+{
+    CHAR_DATA *ch = bot->ch;
+
+    if ( ch->position >= POS_STANDING )
+        return FALSE;
+    if ( IS_AFFECTED( ch, AFF_SLEEP ) )
+        return TRUE;
+    if ( bot->state == BOT_ST_TRAVEL && ch->position >= POS_SLEEPING )
+        bot_travel_step( bot );          /* hareket puanı için uyuyorsa o karar verir */
+    else if ( ch->position >= POS_SLEEPING )
+        bot_cmd( bot, "kalk" );
+    return TRUE;
+}
+
+/* envanter değiştiyse daha iyi eşyayı giy */
+static bool bot_think_gear( BOT_DATA *bot )
+{
+    int sig = inventory_signature( bot->ch );
+
+    if ( sig == bot->inv_signature )
+        return FALSE;
+    bot->inv_signature = sig;
+    if ( !bot_wear_upgrades( bot ) )
+        return FALSE;
+    bot->inv_signature = -1;
+    return TRUE;
+}
+
+static void bot_think_state( BOT_DATA *bot )
+{
+    switch ( bot->state )
+    {
+    case BOT_ST_TRAVEL: bot_travel_step( bot ); return;
+    case BOT_ST_FOLLOW: bot_following( bot );   return;
+    case BOT_ST_TOWN:   bot_town( bot );        return;
+    case BOT_ST_QUEST:  bot_quest( bot );       return;
+    case BOT_ST_CORPSE: bot_corpse( bot );      return;
+    case BOT_ST_PK:     bot_pk( bot );          return;
+    case BOT_ST_MEET:   bot_meeting( bot );     return;
+    case BOT_ST_RAID:   bot_raid( bot );        return;
+    case BOT_ST_HUNT:   bot_hunt( bot );        return;
+    case BOT_ST_LOGOUT: bot_set_state( bot, BOT_ST_IDLE ); return;
+    default:            bot_choose_goal( bot ); return;
+    }
+}
+
 void bot_think( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch;
@@ -3210,19 +3328,7 @@ void bot_think( BOT_DATA *bot )
         return;
     }
 
-    /* seviye atlama */
-    if ( ch->level > bot->last_level )
-    {
-        bot->last_level = ch->level;
-        ch->wimpy = UMAX( ch->wimpy, ch->max_hit / 8 );
-        memset( bot->wear_fail, 0, sizeof(bot->wear_fail) );
-        bot_chat_event( bot, BOT_EV_LEVEL, NULL );
-        if ( ch->level == 2 || ch->level == 5 || ch->level == 10 )
-            bot->last_town_pulse = 0;
-        bot->hunt_area_pulse = 0;                    /* bölgeyi yeniden değerlendir */
-    }
-
-    /* dövüş */
+    bot_think_level_up( bot );
     if ( ch->fighting != NULL )
     {
         bot_combat( bot );
@@ -3246,92 +3352,17 @@ void bot_think( BOT_DATA *bot )
     if ( ch->position == POS_FIGHTING )
         ch->position = POS_STANDING;
 
-    /* ölüm sonrası */
-    if ( IS_SET( ch->act, PLR_GHOST ) )
-    {
-        if ( bot->state != BOT_ST_CORPSE && bot->state != BOT_ST_REST && bot->state != BOT_ST_TRAVEL )
-            bot_after_death( bot );
-        if ( bot->state == BOT_ST_REST && bot_pct( ch->hit, ch->max_hit ) >= 60 && bot->death_room == 0 )
-        {
-            if ( ch->position < POS_STANDING )
-                bot_cmd( bot, "kalk" );
-            else
-                bot_cmd( bot, "diril" );
-            return;
-        }
-    }
-    else if ( bot->state == BOT_ST_CORPSE && bot->death_room == 0 )
-        bot_set_state( bot, BOT_ST_REST );
-
-    /* çok yorgun / yaralı */
-    if ( bot->state == BOT_ST_REST )
-    {
-        if ( bot_eat_drink( bot ) )
-            return;
-        bot_resting( bot );
+    if ( bot_think_ghost( bot ) )
         return;
-    }
-    if ( bot_need_rest( bot ) && bot->state != BOT_ST_FOLLOW && bot->state != BOT_ST_CORPSE )
-    {
-        bot_start_rest( bot );
+    if ( bot_think_rest( bot ) )
         return;
-    }
-
-    /* pozisyon */
-    if ( ch->position < POS_STANDING )
-    {
-        if ( IS_AFFECTED( ch, AFF_SLEEP ) )
-            return;
-        if ( bot->state == BOT_ST_TRAVEL && ch->position >= POS_SLEEPING )
-        {
-            bot_travel_step( bot );          /* hareket puanı için uyuyorsa o karar verir */
-            return;
-        }
-        if ( ch->position >= POS_SLEEPING )
-            bot_cmd( bot, "kalk" );
+    if ( bot_think_position( bot ) )
         return;
-    }
-
-    /* ışık */
-    if ( bot_manage_light( bot ) )
+    if ( bot_manage_light( bot ) || bot_handle_darkness( bot ) )
         return;
-    if ( bot_handle_darkness( bot ) )
-        return;
-
-    /* karın / matara */
     if ( bot->state != BOT_ST_TOWN && bot_eat_drink( bot ) )
         return;
-
-    /* eşya değerlendirme (envanter değiştiyse) */
-    {
-        int sig = inventory_signature( ch );
-        if ( sig != bot->inv_signature )
-        {
-            bot->inv_signature = sig;
-            if ( bot_wear_upgrades( bot ) )
-            {
-                bot->inv_signature = -1;
-                return;
-            }
-        }
-    }
-
-    switch ( bot->state )
-    {
-    case BOT_ST_TRAVEL: bot_travel_step( bot ); return;
-    case BOT_ST_FOLLOW: bot_following( bot );   return;
-    case BOT_ST_TOWN:   bot_town( bot );        return;
-    case BOT_ST_QUEST:  bot_quest( bot );       return;
-    case BOT_ST_CORPSE: bot_corpse( bot );      return;
-    case BOT_ST_PK:     bot_pk( bot );          return;
-    case BOT_ST_MEET:   bot_meeting( bot );     return;
-    case BOT_ST_RAID:   bot_raid( bot );        return;
-    case BOT_ST_HUNT:   bot_hunt( bot );        return;
-    case BOT_ST_LOGOUT:
-        bot_set_state( bot, BOT_ST_IDLE );
+    if ( bot_think_gear( bot ) )
         return;
-    default:
-        bot_choose_goal( bot );
-        return;
-    }
+    bot_think_state( bot );
 }
