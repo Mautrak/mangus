@@ -51,8 +51,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <time.h>
-#include <unistd.h>
 #include "merc.h"
+#include "turkish.h"
 #include "bot.h"
 #include "utf8.h"
 #include "password.h"
@@ -70,7 +70,6 @@ DECLARE_DO_FUN( do_say  	);
 DECLARE_DO_FUN( do_scan2  	);
 DECLARE_DO_FUN( do_affects_col 	);
 DECLARE_DO_FUN( do_who_col	);
-DECLARE_DO_FUN( do_autolist_col	);
 
 
 const char *	where_name	[] =
@@ -343,14 +342,14 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
     {
 	if ( obj->description != NULL)
 	{
-	  char tmp[70];
 	  if ( obj->in_room != NULL )
 	  {
 	    if ( IS_WATER( obj->in_room ) )
 	    {
-	      strcpy( tmp, obj->short_descr );
-              utf8_upper_first(tmp, sizeof(tmp));
-              strcat( buf, tmp );
+	      size_t len = strlen( buf );
+
+	      snprintf( buf + len, sizeof(buf) - len, "%s", obj->short_descr );
+	      utf8_upper_first( buf + len, sizeof(buf) - len );
 	      switch(dice(1,3))
 	      {
           case 1: strcat(buf, " suyun üstünde yüzüyor.");break;
@@ -708,21 +707,26 @@ void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
     return;
 }
 
+/*
+ * Bakan, hedefin gerçek durumunu seçebiliyor mu? Önce bilgelik zarı (ölümsüz
+ * her zaman), sonra ırk irfanı; yaratıkların irfanı yoktur.
+ */
+static bool perceives_truly( CHAR_DATA *ch, CHAR_DATA *victim )
+{
+    if ( number_range( 1, 26 ) < get_curr_stat( ch, STAT_WIS ) || IS_IMMORTAL(ch) )
+	return TRUE;
+
+    if ( IS_NPC(ch) || victim->race < 0 || victim->race >= MAX_RACE )
+	return FALSE;
+
+    return number_range( 1, 100 ) < ch->pcdata->familya[victim->race];
+}
+
 char *show_char_to_char_1_health_check(CHAR_DATA *ch , CHAR_DATA *victim)
 {
   int percent;
 
-  // karakterin bilgeligi onemli olsun.
-  // zari tutturursa dogru sonuc ver
-  if( ( number_range(1,26) < get_curr_stat(ch,STAT_WIS) ) || IS_IMMORTAL(ch) )
-  {
-    if ( victim->max_hit > 0 )
-      percent = ( 100 * victim->hit ) / victim->max_hit;
-    else
-      percent = -1;
-  }
-  // irk tanima bilgisi de onemli olsun
-  else if ( number_range(1,100) < ch->pcdata->familya[victim->race] )
+  if ( perceives_truly( ch, victim ) )
   {
     if ( victim->max_hit > 0 )
       percent = ( 100 * victim->hit ) / victim->max_hit;
@@ -776,35 +780,15 @@ char *show_char_to_char_1_alignment(CHAR_DATA *ch , CHAR_DATA *victim)
 {
   int alignment;
 
-  // karakterin bilgeligi onemli olsun.
-  // zari tutturursa dogru sonuc ver
-  if( ( number_range(1,26) < get_curr_stat(ch,STAT_WIS) ) || IS_IMMORTAL(ch) )
-  {
+  if ( perceives_truly( ch, victim ) )
     alignment = victim->alignment;
-  }
-  // irk bilgisi de onemli olsun
-  else if ( number_range(1,100) < ch->pcdata->familya[victim->race] )
-  {
-    alignment = victim->alignment;
-  }
   else
-  {
     alignment = number_range(-1000,1000);
-  }
 
   if (alignment >= 350)
-  {
     return "'iyi' olabilir";
-  }
-  else if (alignment <= -350)
-  {
+  if (alignment <= -350)
     return "'kem' olabilir";
-  }
-  else
-  {
-    return "'yansız' olabilir";
-  }
-
   return "'yansız' olabilir";
 }
 
@@ -1059,7 +1043,6 @@ void do_clear( CHAR_DATA *ch, char *argument )
 void do_scroll(CHAR_DATA *ch, char *argument)
 {
     char arg[MAX_INPUT_LENGTH];
-    char buf[100];
     int lines;
 
     one_argument(argument,arg);
@@ -1067,19 +1050,16 @@ void do_scroll(CHAR_DATA *ch, char *argument)
     if (arg[0] == '\0')
     {
 	if (ch->lines == 0)
-	    send_to_char("You do not page long messages.\n\r",ch);
+	    send_to_char("Uzun mesajları sayfalamıyorsun.\n\r",ch);
 	else
-	{
-	    snprintf(buf, sizeof(buf),"You currently display %d lines per page.\n\r",
+	    printf_to_char(ch,"Sayfa başına %d satır gösteriyorsun.\n\r",
 		    ch->lines + 2);
-	    send_to_char(buf,ch);
-	}
 	return;
     }
 
     if (!is_number(arg))
     {
-	send_to_char("You must provide a number.\n\r",ch);
+	send_to_char("Bir sayı vermelisin.\n\r",ch);
 	return;
     }
 
@@ -1087,19 +1067,18 @@ void do_scroll(CHAR_DATA *ch, char *argument)
 
     if (lines == 0)
     {
-        send_to_char("Paging disabled.\n\r",ch);
+        send_to_char("Sayfalama kapatıldı.\n\r",ch);
         ch->lines = 0;
         return;
     }
 
     if (lines < 10 || lines > 100)
     {
-	send_to_char("You must provide a reasonable number.\n\r",ch);
+	send_to_char("Makul bir sayı vermelisin (10-100).\n\r",ch);
 	return;
     }
 
-    snprintf(buf, sizeof(buf),"Scroll set to %d lines.\n\r",lines);
-    send_to_char(buf,ch);
+    printf_to_char(ch,"Sayfa uzunluğu %d satıra ayarlandı.\n\r",lines);
     ch->lines = lines - 2;
 }
 
@@ -1354,29 +1333,22 @@ void do_show(CHAR_DATA *ch, char *argument)
 
 void do_prompt(CHAR_DATA *ch, char *argument)
 {
-
-  if ( argument[0] == '\0' )
+  if ( argument[0] != '\0' )
   {
-    if (IS_SET(ch->comm,COMM_PROMPT))
-    {
-      printf_to_char(ch,"Suflör kapatıldı.\n\r");
-      REMOVE_BIT(ch->comm,COMM_PROMPT);
-    }
-    else
-    {
-      printf_to_char(ch,"Suflör açıldı.\n\r");
-      SET_BIT(ch->comm,COMM_PROMPT);
-    }
-    return;
-  }
-
-  if(argument[0]!='\0')
-  {
-     printf_to_char(ch,"Bu komutla argüman kullanılmaz.\n\r");
+     send_to_char( "Bu komutla argüman kullanılmaz.\n\r", ch );
      return;
   }
 
-  return;
+  if (IS_SET(ch->comm,COMM_PROMPT))
+  {
+    send_to_char( "Suflör kapatıldı.\n\r", ch );
+    REMOVE_BIT(ch->comm,COMM_PROMPT);
+  }
+  else
+  {
+    send_to_char( "Suflör açıldı.\n\r", ch );
+    SET_BIT(ch->comm,COMM_PROMPT);
+  }
 }
 
 void do_combine(CHAR_DATA *ch, char *argument)
@@ -1415,7 +1387,7 @@ void do_nofollow(CHAR_DATA *ch, char *argument)
     if (IS_NPC(ch))
       return;
     if ( IS_AFFECTED( ch, AFF_CHARM ) )  {
-	send_to_char( "You don't want to leave your beloved master.\n\r",ch);
+	send_to_char( "Sevgili efendinden ayrılmak istemiyorsun.\n\r",ch);
 	return;
     }
 
@@ -1562,8 +1534,8 @@ void do_look( CHAR_DATA *ch, char *argument )
 
     if ( arg1[0] == '\0' || ( IS_PC(ch) && !IS_SET(ch->comm, COMM_BRIEF) ) )
     {
-      printf_to_char( ch , "  ");
-      printf_to_char( ch , ch->in_room->description );
+      send_to_char( "  ", ch );
+      send_to_char( ch->in_room->description, ch );
     }
 
     if ( IS_PC(ch) && IS_SET(ch->act, PLR_AUTOEXIT) )
@@ -1678,7 +1650,7 @@ void do_look( CHAR_DATA *ch, char *argument )
       {
         if (++count == number)
         {
-          printf_to_char( ch,pdesc );
+          send_to_char( pdesc, ch );
           return;
         }
         else
@@ -1693,7 +1665,7 @@ void do_look( CHAR_DATA *ch, char *argument )
       {
         if (++count == number)
         {
-          printf_to_char( ch,pdesc );
+          send_to_char( pdesc, ch );
           return;
         }
         else
@@ -1720,7 +1692,7 @@ void do_look( CHAR_DATA *ch, char *argument )
       {
         if (++count == number)
         {
-          printf_to_char( ch,pdesc );
+          send_to_char( pdesc, ch );
           return;
         }
       }
@@ -1730,7 +1702,7 @@ void do_look( CHAR_DATA *ch, char *argument )
       {
         if (++count == number)
         {
-          printf_to_char( ch,pdesc );
+          send_to_char( pdesc, ch );
           return;
         }
       }
@@ -1740,8 +1712,7 @@ void do_look( CHAR_DATA *ch, char *argument )
     {
       if (++count == number)
       {
-        printf_to_char( ch,obj->description );
-        printf_to_char(ch,"\n\r");
+        printf_to_char( ch, "%s\n\r", obj->description );
         return;
       }
     }
@@ -1752,7 +1723,7 @@ void do_look( CHAR_DATA *ch, char *argument )
   {
     if (++count == number)
     {
-      printf_to_char(ch,pdesc);
+      send_to_char( pdesc, ch );
       return;
     }
   }
@@ -1793,7 +1764,7 @@ void do_look( CHAR_DATA *ch, char *argument )
   }
 
   if ( pexit->description != NULL && pexit->description[0] != '\0' )
-    printf_to_char( ch, pexit->description );
+    send_to_char( pexit->description, ch );
   else
     printf_to_char( ch,"Özel bir şey yok.\n\r" );
 
@@ -2316,8 +2287,7 @@ void do_help( CHAR_DATA *ch, char *argument )
 	{
 	    if ( pHelp->level >= 0 && str_cmp( argall, "imotd" ) )
 	    {
-		printf_to_char( ch, pHelp->keyword );
-		printf_to_char( ch, "\n\r" );
+		printf_to_char( ch, "%s\n\r", pHelp->keyword );
 	    }
 
 	    /*
@@ -2433,19 +2403,9 @@ void do_whois (CHAR_DATA *ch, char *argument)
 		    IS_SET(wch->act, PLR_WANTED) ? "(ARANIYOR) " : "",CLR_WHITE_BOLD);
 
 	if (IS_NPC(wch))
-		snprintf(titlebuf, sizeof(titlebuf),"Believer of Chronos.");
-	else {
-		char tempbuf[MAX_INPUT_LENGTH];
-		snprintf(tempbuf, sizeof(tempbuf),"%s", wch->pcdata->title );
-		if (strlen(tempbuf) > 45 )
-		 {
-			tempbuf[44] = '\0';
-			free_string(wch->pcdata->title);
-			wch->pcdata->title = str_dup( tempbuf );
-			bug("Title length more than 45",0);
-		 }
-		snprintf(titlebuf, sizeof(titlebuf),"%s%s%s",CLR_WHITE,tempbuf,CLR_WHITE_BOLD);
-	     }
+		snprintf(titlebuf, sizeof(titlebuf),"Tanrılara inanan.");
+	else
+		snprintf(titlebuf, sizeof(titlebuf),"%s%s%s",CLR_WHITE,wch->pcdata->title,CLR_WHITE_BOLD);
 	/*
 	 * Format it up.
 	 */
@@ -2851,6 +2811,8 @@ else                    msg = "İntihar günahtır!";
 }
 
 
+#define TITLE_MAX_LEN	45	/* lakap üst sınırı (bayt) */
+
 void set_title( CHAR_DATA *ch, char *title )
 {
     char buf[MAX_STRING_LENGTH];
@@ -2861,15 +2823,9 @@ void set_title( CHAR_DATA *ch, char *title )
 	return;
     }
 
-    if ( title[0] != '.' && title[0] != ',' && title[0] != '!' && title[0] != '?' )
-    {
-	buf[0] = ' ';
-	strcpy( buf+1, title );
-    }
-    else
-    {
-	strcpy( buf, title );
-    }
+    snprintf( buf, sizeof(buf), "%s%s",
+	( title[0] != '.' && title[0] != ',' && title[0] != '!' && title[0] != '?' ) ? " " : "",
+	title );
 
     free_string( ch->pcdata->title );
     ch->pcdata->title = str_dup( buf );
@@ -2910,8 +2866,9 @@ void do_title( CHAR_DATA *ch, char *argument )
         return;
     }
 
-    if ( strlen(argument) > 45 )
-        argument[45] = '\0';
+    /* Bayt sınırı UTF-8 harf ortasında kesmesin */
+    if ( strlen(argument) > TITLE_MAX_LEN )
+	utf8_truncate( argument, TITLE_MAX_LEN );
 
     smash_tilde( argument );
     set_title( ch, argument );
@@ -2939,7 +2896,7 @@ void do_description( CHAR_DATA *ch, char *argument )
                 return;
             }
 
-  	    strcpy(buf,ch->description);
+	    snprintf( buf, sizeof(buf), "%s", ch->description );
 
             for (len = strlen(buf); len > 0; len--)
             {
@@ -2956,8 +2913,8 @@ void do_description( CHAR_DATA *ch, char *argument )
                         buf[len + 1] = '\0';
 			free_string(ch->description);
 			ch->description = str_dup(buf);
-      printf_to_char(ch, "Tanımın:\n\r");
-      printf_to_char(ch, ch->description ? ch->description :"(Hiç).\n\r");
+      send_to_char( "Tanımın:\n\r", ch );
+      send_to_char( ch->description ? ch->description : "(Hiç).\n\r", ch );
                         return;
                     }
                 }
@@ -2995,8 +2952,8 @@ void do_description( CHAR_DATA *ch, char *argument )
       SET_BIT(ch->act, PLR_NO_DESCRIPTION);
     }
 
-    printf_to_char(ch, "Tanımın:\n\r");
-    printf_to_char(ch, ch->description ? ch->description : "(Hiç).\n\r");
+    send_to_char( "Tanımın:\n\r", ch );
+    send_to_char( ch->description ? ch->description : "(Hiç).\n\r", ch );
 
     return;
 }
@@ -3163,7 +3120,7 @@ void do_wimpy( CHAR_DATA *ch, char *argument )
 
     one_argument( argument, arg );
 
-    if ((ch->iclass == 9) && (ch->level >=10))
+    if ( ch->iclass == CLASS_SAMURAI && ch->level >= 10 )
 	{
     printf_to_char( ch, "Korkaklık pek sana göre değil!\n\r" );
 
@@ -4336,6 +4293,7 @@ void do_who_col( CHAR_DATA *ch, char *argument )
     {
 	CHAR_DATA *wch;
 	CHAR_DATA *dch = who_dch[who_i];
+	OBJ_DATA *tattoo;
 	char const *iclass;
 
 	/*
@@ -4358,7 +4316,8 @@ void do_who_col( CHAR_DATA *ch, char *argument )
 	|| ( fClassRestrict && !rgfClass[wch->iclass])
 	|| ( fRaceRestrict && !rgfRace[RACE(wch)])
         || ( fPKRestrict && is_safe_nomessage(ch,wch) )
-	|| ( fTattoo &&(vnum == get_eq_char(wch,WEAR_TATTOO)->pIndexData->vnum))
+	|| ( fTattoo && ( ( tattoo = get_eq_char( wch, WEAR_TATTOO ) ) == NULL
+			|| tattoo->pIndexData->vnum != vnum ) )
 	    || (fRulerRestrict && wch->cabal != CABAL_RULER )
 	    || (fChaosRestrict && wch->cabal != CABAL_CHAOS)
 	    || (fBattleRestrict && wch->cabal != CABAL_BATTLE)
@@ -4420,16 +4379,8 @@ void do_who_col( CHAR_DATA *ch, char *argument )
 
 	if (IS_NPC(wch))
 		snprintf(titlebuf, sizeof(titlebuf),"Tanrılara inanan.");
-	else {
+	else
 		snprintf(titlebuf, sizeof(titlebuf),"%s", wch->pcdata->title );
-		if (strlen(titlebuf) > 45 )
-		 {
-			free_string(wch->pcdata->title);
-			titlebuf[44] = '\0';
-			wch->pcdata->title = str_dup( titlebuf );
-			bug("Title length more than 45",0);
-		 }
-	     }
 	/*
 	 * Format it up.
 	 */
@@ -4876,15 +4827,15 @@ void do_make_arrow( CHAR_DATA *ch, char *argument )
    }
    else str = "tahta";
 
-   snprintf(buf, sizeof(buf), arrow->name, str );
+   fill_template( buf, sizeof(buf), arrow->name, str );
    free_string( arrow->name );
    arrow->name = str_dup( buf );
 
-   snprintf(buf, sizeof(buf), arrow->short_descr, str );
+   fill_template( buf, sizeof(buf), arrow->short_descr, str );
    free_string( arrow->short_descr );
    arrow->short_descr = str_dup( buf );
 
-   snprintf(buf, sizeof(buf), arrow->description, str );
+   fill_template( buf, sizeof(buf), arrow->description, str );
    free_string( arrow->description );
    arrow->description = str_dup( buf );
 
@@ -4945,7 +4896,7 @@ void do_make_bow( CHAR_DATA *ch, char *argument )
   bow->value[2] = 4 + ch->level / 12;
 
   tohit.where		    = TO_OBJECT;
-  tohit.type               = gsn_make_arrow;
+  tohit.type               = gsn_make_bow;
   tohit.level              = ch->level;
   tohit.duration           = -1;
   tohit.location           = APPLY_HITROLL;
@@ -4954,7 +4905,7 @@ void do_make_bow( CHAR_DATA *ch, char *argument )
   affect_to_obj(bow,&tohit);
 
   todam.where		   = TO_OBJECT;
-  todam.type               = gsn_make_arrow;
+  todam.type               = gsn_make_bow;
   todam.level              = ch->level;
   todam.duration           = -1;
   todam.location           = APPLY_DAMROLL;
@@ -5059,7 +5010,7 @@ void do_discord( CHAR_DATA *ch, char *argument )
 	while(fgets (line, 30, fp) != NULL)
 	{
 		line[strcspn(line, "\r\n")] = 0;
-		if (!strcmp(arg,line))
+		if (!str_cmp(arg,line))
 		{
 			is_found = 1;
 		}
@@ -5067,6 +5018,7 @@ void do_discord( CHAR_DATA *ch, char *argument )
 	
 	if(is_found == 1)
 	{
+		free_string( ch->pcdata->discord_id );
 		ch->pcdata->discord_id = str_dup( arg );
 		printf_to_char(ch,"Discord kullanıcı ID'si kaydedildi.\n\r");
 	}
