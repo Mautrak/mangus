@@ -728,7 +728,14 @@ void do_tick( CHAR_DATA *ch, char *argument )
 /* Okul eşyası verir; taşıma sınırı dolduysa FALSE. */
 static bool outfit_give( CHAR_DATA *ch, int vnum, bool zero_cost )
 {
+    OBJ_INDEX_DATA *pObjIndex;
     OBJ_DATA *obj;
+
+    if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
+    {
+	bug( "outfit_give: eşya yok, vnum %d.", vnum );
+	return TRUE;
+    }
 
     if ( ch->carry_number + 1 > can_carry_n(ch) )
     {
@@ -736,7 +743,7 @@ static bool outfit_give( CHAR_DATA *ch, int vnum, bool zero_cost )
 	return FALSE;
     }
 
-    obj = create_object( get_obj_index(vnum), 0 );
+    obj = create_object( pObjIndex, 0 );
     if ( zero_cost )
 	obj->cost = 0;
     obj->condition = 100;
@@ -1302,25 +1309,23 @@ void do_rstat( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-/*    if (!is_room_owner(ch,location) && ch->in_room != location  */
-    if ( ch->in_room != location
-    &&  room_is_private( location ) && !IS_TRUSTED(ch,IMPLEMENTOR))
+    if ( wiz_room_blocked( ch, location ) )
     {
-	send_to_char( "That room is private right now.\n\r", ch );
+	send_to_char( MSG_PRIVATE_ROOM, ch );
 	return;
     }
 
-    if (ch->in_room->affected_by)
+    if (location->affected_by)
     {
 	snprintf(buf, sizeof(buf), "Affected by %s\n\r",
-	    raffect_bit_name(ch->in_room->affected_by));
+	    raffect_bit_name(location->affected_by));
 	send_to_char(buf,ch);
     }
 
-    if (ch->in_room->room_flags)
+    if (location->room_flags)
     {
 	snprintf(buf, sizeof(buf), "Roomflags %s\n\r",
-	    flag_room_name(ch->in_room->room_flags));
+	    flag_room_name(location->room_flags));
 	send_to_char(buf,ch);
     }
 
@@ -1758,9 +1763,9 @@ void do_mobstat( CHAR_DATA *ch, char *argument )
 
   one_argument( argument, arg1 );
 
-  if ( arg1[0] == '\0' )
+  if ( arg1[0] == '\0' || !is_number( arg1 ) )
   {
-    printf_to_char(ch,"Eksik argüman.\n\r");
+    printf_to_char(ch,"Kullanım: mobstat <seviye>\n\r");
     return;
   }
 
@@ -1769,8 +1774,7 @@ void do_mobstat( CHAR_DATA *ch, char *argument )
       if (!IS_NPC(gch))
           continue;
       if (gch->level == atoi(arg1))
-        printf_to_char(ch,"Level: %-3d  Damroll: %-4d  Hitroll: %-4d  Yp: %-6d Mp: %-6d Zp: %-6d\n\r",atoi( arg1 ),gch->damroll,gch->hitroll,gch->hit,gch->mana,gch->move);
-
+        printf_to_char(ch,"Level: %-3d  Damroll: %-4d  Hitroll: %-4d  Yp: %-6d Mp: %-6d Zp: %-6d\n\r",gch->level,gch->damroll,gch->hitroll,gch->hit,gch->mana,gch->move);
   }
 }
 
@@ -2321,14 +2325,11 @@ void do_shutdown( CHAR_DATA *ch, char *argument )
 {
     char buf[MAX_STRING_LENGTH];
 
-    if (ch->invis_level < LEVEL_HERO)
     snprintf(buf, sizeof(buf), "Shutdown by %s.", ch->name );
     append_file( ch, (char*)SHUTDOWN_FILE, buf );
-    strcat( buf, "\n\r" );
     if (ch->invis_level < LEVEL_HERO)
     	do_duyuru( ch, buf );
     reboot_uzakdiyarlar(FALSE);
-    return;
 }
 
 void do_protect( CHAR_DATA *ch, char *argument)
@@ -2505,7 +2506,11 @@ void do_switch( CHAR_DATA *ch, char *argument )
     ch->desc            = NULL;
     /* change communications to match */
     if (ch->prompt != NULL)
+    {
+	if (victim->prompt != NULL)
+	    free_string(victim->prompt);
         victim->prompt = str_dup(ch->prompt);
+    }
     victim->comm = ch->comm;
     victim->lines = ch->lines;
     send_to_char( "Ok.\n\r", victim );
@@ -3331,9 +3336,11 @@ void do_string( CHAR_DATA *ch, char *argument )
 
     	if ( !str_prefix( arg2, "long" ) )
     	{
+	    char buf[MAX_STRING_LENGTH];
+
+	    snprintf( buf, sizeof(buf), "%s\n\r", arg3 );
 	    free_string( victim->long_descr );
-	    strcat(arg3,"\n\r");
-	    victim->long_descr = str_dup( arg3 );
+	    victim->long_descr = str_dup( buf );
 	    return;
     	}
 
@@ -3401,21 +3408,21 @@ void do_string( CHAR_DATA *ch, char *argument )
     	if ( !str_prefix( arg2, "ed" ) || !str_prefix( arg2, "extended"))
     	{
 	    EXTRA_DESCR_DATA *ed;
+	    char buf[MAX_STRING_LENGTH];
 
 	    argument = one_argument( argument, arg3 );
-	    if ( argument == NULL )
+	    if ( arg3[0] == '\0' || argument[0] == '\0' )
 	    {
-	    	send_to_char( "Syntax: oset <object> ed <keyword> <string>\n\r",
+	    	send_to_char( "Syntax: string obj <object> ed <keyword> <string>\n\r",
 		    ch );
 	    	return;
 	    }
 
- 	    strcat(argument,"\n\r");
-
+	    snprintf( buf, sizeof(buf), "%s\n\r", argument );
 	    ed = new_extra_descr();
 
 	    ed->keyword		= str_dup( arg3     );
-	    ed->description	= str_dup( argument );
+	    ed->description	= str_dup( buf );
 	    ed->next		= obj->extra_descr;
 	    obj->extra_descr	= ed;
 	    return;
@@ -3611,41 +3618,40 @@ void do_rset( CHAR_DATA *ch, char *argument )
 
 void do_sockets( CHAR_DATA *ch, char *argument )
 {
-    char buf[2 * MAX_STRING_LENGTH];
-    char buf2[MAX_STRING_LENGTH];
+    BUFFER *output;
+    char buf[MAX_STRING_LENGTH];
     char arg[MAX_INPUT_LENGTH];
     DESCRIPTOR_DATA *d;
-    int count;
-
-    count	= 0;
-    buf[0]	= '\0';
+    int count = 0;
 
     one_argument(argument,arg);
+    output = new_buf();
     for ( d = descriptor_list; d != NULL; d = d->next )
     {
-		if ( d->character != NULL && can_see( ch, d->character )
-		&& (arg[0] == '\0' || is_name(arg,d->character->name)
-				   || (d->original && is_name(arg,d->original->name))))
-		{
-			count++;
-			sprintf( buf + strlen(buf), "[%3d %2d] %s@%s\n\r",
-			d->descriptor,
-			d->connected,
-			d->original  ? d->original->name  : d->character ? d->character->name : "(none)",
-			d->host
-			);
-		}
+	if ( d->character != NULL && can_see( ch, d->character )
+	&& (arg[0] == '\0' || is_name(arg,d->character->name)
+			   || (d->original && is_name(arg,d->original->name))))
+	{
+	    count++;
+	    snprintf( buf, sizeof(buf), "[%3d %2d] %s@%s\n\r",
+		d->descriptor,
+		d->connected,
+		d->original  ? d->original->name  : d->character->name,
+		d->host );
+	    add_buf( output, buf );
+	}
     }
     if (count == 0)
     {
-	send_to_char("No one by that name is connected.\n\r",ch);
+	send_to_char("O adda kimse bağlı değil.\n\r",ch);
+	free_buf( output );
 	return;
     }
 
-    snprintf(buf2, sizeof(buf2), "%d user%s\n\r", count, count == 1 ? "" : "s" );
-    strcat(buf,buf2);
-    page_to_char( buf, ch );
-    return;
+    snprintf(buf, sizeof(buf), "%d kullanıcı\n\r", count );
+    add_buf( output, buf );
+    page_to_char( buf_string(output), ch );
+    free_buf( output );
 }
 
 
@@ -3999,9 +4005,9 @@ void do_advance( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    if ( ( level = atoi( arg2 ) ) < 1 || level > 100 )
+    if ( ( level = atoi( arg2 ) ) < 1 || level > MAX_LEVEL )
     {
-	send_to_char( "Level must be 1 to 100.\n\r", ch );
+	printf_to_char( ch, "Level must be 1 to %d.\n\r", MAX_LEVEL );
 	return;
     }
 
@@ -4012,8 +4018,8 @@ void do_advance( CHAR_DATA *ch, char *argument )
     }
 
 
-    /* Level counting */
-    if (ch->level <= 5 || ch->level > LEVEL_HERO)
+    /* Seviye sayacı: ölümlü 5+ seviyeleri toplamı (kurbanın seviyesi) */
+    if (victim->level <= 5 || victim->level > LEVEL_HERO)
     {
       if (5 < level && level <= LEVEL_HERO)
 	total_levels += level - 5;
@@ -4021,8 +4027,8 @@ void do_advance( CHAR_DATA *ch, char *argument )
     else
     {
       if (5 < level && level <= LEVEL_HERO)
-	total_levels += level - ch->level;
-      else total_levels -= (ch->level - 5);
+	total_levels += level - victim->level;
+      else total_levels -= (victim->level - 5);
     }
 
     /*
@@ -4108,14 +4114,14 @@ void do_ikikat( CHAR_DATA *ch, char *argument )
     ikikat_tp = value;
     if (value != 0)
     {
-      printf_to_char(ch,"İki kat TP %d dakikalığına açıldı.", value);
+      printf_to_char(ch,"İki kat TP %d dakikalığına açıldı.\n\r", value);
       /* event */
       snprintf(eventbuf, sizeof(eventbuf),"İki kat TP %d dakikalığına açıldı.", value);
 	  write_event_log(eventbuf);
     }
     else
     {
-      printf_to_char(ch,"İki kat TP kapatıldı.");
+      printf_to_char(ch,"İki kat TP kapatıldı.\n\r");
       /* event */
 	  write_event_log("İki kat TP etkinliği kapatıldı.");
     }
@@ -4127,16 +4133,16 @@ void do_ikikat( CHAR_DATA *ch, char *argument )
     ikikat_gp = value;
     if (value != 0)
     {
-      printf_to_char(ch,"İki kat GP %d dakikalığına açıldı.", value);
+      printf_to_char(ch,"İki kat GP %d dakikalığına açıldı.\n\r", value);
       /* event */
       snprintf(eventbuf, sizeof(eventbuf),"İki kat GP %d dakikalığına açıldı.", value);
 	  write_event_log(eventbuf);
     }
     else
     {
-      printf_to_char(ch,"İki kat GP kapatıldı.");
+      printf_to_char(ch,"İki kat GP kapatıldı.\n\r");
       /* event */
-	  write_event_log("İki kat TP etkinliği kapatıldı.");
+	  write_event_log("İki kat GP etkinliği kapatıldı.");
     }
     return;
   }
@@ -4378,8 +4384,13 @@ void do_mset( CHAR_DATA *ch, char *argument )
 	return;
     }
 	
-	if ( !str_prefix( arg2, "bank" ) )
+    if ( !str_prefix( arg2, "bank" ) )
     {
+	if ( IS_NPC(victim) )
+	{
+	    send_to_char( "Not on NPC's.\n\r", ch );
+	    return;
+	}
 	victim->pcdata->bank_s = value;
 	return;
     }
@@ -4787,26 +4798,27 @@ void do_smite(CHAR_DATA *ch, char *argument)
 
 void do_popularity( CHAR_DATA *ch, char *argument )
 {
-char buf[4 * MAX_STRING_LENGTH];
-char buf2[MAX_STRING_LENGTH];
-AREA_DATA *area;
-extern AREA_DATA *area_first;
-int i;
+    BUFFER *output;
+    char buf[MAX_STRING_LENGTH];
+    AREA_DATA *area;
+    extern AREA_DATA *area_first;
+    int i;
 
-    snprintf(buf, sizeof(buf),"Area popularity statistics (in char * ticks)\n\r" );
+    output = new_buf();
+    add_buf( output, "Area popularity statistics (in char * ticks)\n\r" );
 
     for (area = area_first,i=0; area != NULL; area = area->next,i++) {
       if (area->count >= 5000000)
-        snprintf(buf2, sizeof(buf2),"%-*s overflow       ",utf8_width(area->name, 20), area->name);
+        snprintf(buf, sizeof(buf),"%-*s overflow       ",utf8_width(area->name, 20), area->name);
       else
-        snprintf(buf2, sizeof(buf2),"%-*s %-8lu       ",utf8_width(area->name, 20), area->name,area->count);
+        snprintf(buf, sizeof(buf),"%-*s %-8lu       ",utf8_width(area->name, 20), area->name,area->count);
       if ( i % 2 == 0)
-	strcat( buf, "\n\r" );
-      strcat( buf, buf2 );
+	add_buf( output, "\n\r" );
+      add_buf( output, buf );
     }
-    strcat( buf, "\n\r\n\r");
-    page_to_char( buf, ch );
-    return;
+    add_buf( output, "\n\r\n\r" );
+    page_to_char( buf_string(output), ch );
+    free_buf( output );
 }
 
 void do_ititle( CHAR_DATA *ch, char *argument )
@@ -4836,8 +4848,7 @@ void do_ititle( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    if ( strlen(argument) > 45 )
-	argument[45] = '\0';
+    utf8_truncate( argument, 45 );
 
     smash_tilde( argument );
     set_title( victim, argument );
