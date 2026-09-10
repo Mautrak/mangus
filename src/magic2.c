@@ -177,8 +177,6 @@ static void heal_victim( CHAR_DATA *ch, CHAR_DATA *victim, int amount )
 	send_to_char( "Tamam.\n\r", ch );
 }
 
-/* Hizalamaya göre hometown tablosu indeksi: 0 iyi, 1 nötr, 2 kötü. */
-
 /*
  * Uzaktan bakma: karakter geçici olarak odaya taşınıp baktırılır ve geri
  * getirilir; binek bayrakları korunur. (act_info.c'de taşımasız bir
