@@ -390,6 +390,14 @@ char *target_name;
 
 /* Ölümden sonra bu kadar saniye karakter "yeni ölmüş" sayılır. */
 #define DEATH_GRACE_SECS	10
+/* Ölümden sonra intikam (revenge) büyüsü için tanınan süre (saniye). */
+#define REVENGE_WINDOW_SECS	600
+/* Bir büyücünün aynı türden en çok kaç uşağı olabilir. */
+#define MAX_SUMMONED_ELM	2
+/* Çağrılan/canlandırılan yaratığın yaşam puanı tavanı. */
+#define MOB_MAX_HP		30000
+/* locate/find object'te ölümsüzler için sonuç sınırı. */
+#define LOCATE_IMM_MAX		200
 
 /* Karakter az önce öldü mü? (yaratık: POS_DEAD, oyuncu: son ölüm zamanı) */
 static bool recently_dead( CHAR_DATA *ch )
@@ -5316,7 +5324,7 @@ void spell_take_revenge( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
   if (IS_NPC(ch)
 	|| ch->last_death_time == -1
-	|| current_time - ch->last_death_time > 600)
+	|| current_time - ch->last_death_time > REVENGE_WINDOW_SECS)
    {
      send_to_char("İntikam için çok geç.\n\r",ch);
     return;
@@ -5386,79 +5394,115 @@ void spell_firestream( int sn, int level, CHAR_DATA *ch, void *vo,int target)
     return;
 }
 
+/* Uşak (elemental) çağırma tablosu: vnum, ad, yp formülü (mult*perm_hit+add) ve zar. */
+struct elm_type
+{
+    int		vnum;
+    const char *name;
+    int		hp_mult, hp_add;
+    int		dnum, dtype, dbonus_add;
+};
+
+static const struct elm_type elm_earth = { MOB_VNUM_ELM_EARTH, "toprak",  2,  400,  3, 10,  0 };
+static const struct elm_type elm_air   = { MOB_VNUM_ELM_AIR,   "hava",    4, 1000,  7,  4,  0 };
+static const struct elm_type elm_water = { MOB_VNUM_ELM_WATER, "su",      5, 2000,  8,  4,  0 };
+static const struct elm_type elm_fire  = { MOB_VNUM_ELM_FIRE,  "ateş",   10, 1000, 11,  5, 10 };
+static const struct elm_type elm_light = { MOB_VNUM_ELM_LIGHT, "enerji", 10, 4000, 13,  9, 10 };
+
+/* Beş uşak büyüsünün ortak gövdesi. */
+static void summon_elemental( int sn, int level, CHAR_DATA *ch, const struct elm_type *et )
+{
+    CHAR_DATA *gch;
+    CHAR_DATA *elm;
+    AFFECT_DATA af;
+    int i, count = 0;
+
+    if (is_affected(ch,sn))
+    {
+	send_to_char( "Başka bir uşak yaratacak güce sahip değilsin.\n\r",ch);
+	return;
+    }
+
+    printf_to_char( ch, "Bir %s uşağı yaratmayı denedin.\n\r", et->name );
+    act("$n bir $t uşağı yaratmayı denedi.",ch,et->name,NULL,TO_ROOM);
+
+    for (gch = char_list; gch != NULL; gch = gch->next)
+    {
+	if (IS_NPC(gch) && IS_AFFECTED(gch,AFF_CHARM) && gch->master == ch
+	&&  gch->pIndexData->vnum == et->vnum
+	&&  ++count > MAX_SUMMONED_ELM)
+	{
+	    printf_to_char( ch, "Daha fazla %s uşağını kontrol edemezsin!\n\r", et->name );
+	    return;
+	}
+    }
+
+    if (count_charmed(ch)) return;
+
+    elm = create_mobile( get_mob_index(et->vnum), NULL );
+
+    for (i = 0; i < MAX_STATS; i ++)
+	elm->perm_stat[i] = UMIN(25,15 + ch->level/10);
+
+    elm->perm_stat[STAT_STR] += 3;
+    elm->perm_stat[STAT_INT] -= 1;
+    elm->perm_stat[STAT_CON] += 2;
+
+    elm->max_hit = IS_NPC(ch) ? UMIN( ch->max_hit, MOB_MAX_HP )
+		: UMIN( et->hp_mult * ch->pcdata->perm_hit + et->hp_add, MOB_MAX_HP );
+    elm->hit = elm->max_hit;
+    elm->max_mana = IS_NPC(ch)? ch->max_mana : ch->pcdata->perm_mana;
+    elm->mana = elm->max_mana;
+    elm->level = ch->level;
+    for (i=0; i < 3; i++)
+	elm->armor[i] = interpolate(elm->level,100,-100);
+    elm->armor[3] = interpolate(elm->level,100,0);
+    elm->silver = 0;
+    elm->timer = 0;
+    elm->damage[DICE_NUMBER] = et->dnum;
+    elm->damage[DICE_TYPE] = et->dtype;
+    elm->damage[DICE_BONUS] = ch->level / 2 + et->dbonus_add;
+
+    char_to_room(elm,ch->in_room);
+    printf_to_char( ch, "Bir %s uşağı yarattın!\n\r", et->name );
+    act("$n bir $t uşağı yarattı!",ch,et->name,NULL,TO_ROOM);
+
+    af.where              = TO_AFFECTS;
+    af.type               = sn;
+    af.level              = level;
+    af.duration           = 24;
+    af.bitvector          = 0;
+    af.modifier           = 0;
+    af.location           = APPLY_NONE;
+    affect_to_char(ch, &af);
+
+    SET_BIT(elm->affected_by, AFF_CHARM);
+    elm->master = elm->leader = ch;
+}
+
 void spell_summon_earth_elm( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-  CHAR_DATA *gch;
-  CHAR_DATA *elm;
-  AFFECT_DATA af;
-  int i=0;
+    summon_elemental( sn, level, ch, &elm_earth );
+}
 
-  if (is_affected(ch,sn))
-    {
-      send_to_char( "Başka bir uşak yaratacak güce sahip değilsin.\n\r",ch);
-      return;
-    }
+void spell_summon_air_elm( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+{
+    summon_elemental( sn, level, ch, &elm_air );
+}
 
-    send_to_char( "Bir toprak uşağı yaratmayı denedin.\n\r",ch);
-    act("$n bir toprak uşağı yaratmayı denedi.",ch,NULL,NULL,TO_ROOM);
+void spell_summon_water_elm( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+{
+    summon_elemental( sn, level, ch, &elm_water );
+}
 
-  for (gch = char_list; gch != NULL; gch = gch->next)
-    {
-      if (IS_NPC(gch) && IS_AFFECTED(gch,AFF_CHARM) && gch->master == ch &&
-          ( gch->pIndexData->vnum == MOB_VNUM_ELM_EARTH ) )
-        {
-          i++;
-          if (i > 2)
-           {
-             send_to_char("Daha fazla toprak uşağını kontrol edemezsin!\n\r",ch);
-            return;
-           }
-        }
-    }
+void spell_summon_fire_elm( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+{
+    summon_elemental( sn, level, ch, &elm_fire );
+}
 
-  if (count_charmed(ch)) return;
-
-  elm = create_mobile( get_mob_index(MOB_VNUM_ELM_EARTH), NULL );
-
-
-  for (i = 0; i < MAX_STATS; i ++)
-       elm->perm_stat[i] = UMIN(25,15 + ch->level/10);
-
-  elm->perm_stat[STAT_STR] += 3;
-  elm->perm_stat[STAT_INT] -= 1;
-  elm->perm_stat[STAT_CON] += 2;
-
-  elm->max_hit = IS_NPC(ch)? URANGE(ch->max_hit,1 * ch->max_hit,30000)
-                : UMIN( (2 * ch->pcdata->perm_hit) + 400,30000);
-  elm->hit = elm->max_hit;
-  elm->max_mana = IS_NPC(ch)? ch->max_mana : ch->pcdata->perm_mana;
-  elm->mana = elm->max_mana;
-  elm->level = ch->level;
-  for (i=0; i < 3; i++)
-    elm->armor[i] = interpolate(elm->level,100,-100);
-  elm->armor[3] = interpolate(elm->level,100,0);
-  elm->silver = 0;
-  elm->timer = 0;
-  elm->damage[DICE_NUMBER] = 3;
-  elm->damage[DICE_TYPE] = 10;
-  elm->damage[DICE_BONUS] = ch->level / 2;
-
-  char_to_room(elm,ch->in_room);
-  send_to_char( "Bir toprak uşağı yarattın!\n\r",ch);
-  act("$n bir toprak uşağı yarattı!",ch,NULL,NULL,TO_ROOM);
-
-  af.where              = TO_AFFECTS;
-  af.type               = sn;
-  af.level              = level;
-  af.duration           = 24;
-  af.bitvector          = 0;
-  af.modifier           = 0;
-  af.location           = APPLY_NONE;
-  affect_to_char(ch, &af);
-
-  SET_BIT(elm->affected_by, AFF_CHARM);
-  elm->master = elm->leader = ch;
-
+void spell_summon_light_elm( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+{
+    summon_elemental( sn, level, ch, &elm_light );
 }
 
 void spell_frostbolt( int sn, int level, CHAR_DATA *ch, void *vo,int target)
@@ -5471,310 +5515,6 @@ void spell_frostbolt( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 	dam /= 2;
     damage( ch, victim, dam, sn,DAM_COLD,TRUE);
     return;
-}
-
-void spell_summon_air_elm( int sn, int level, CHAR_DATA *ch, void *vo,int target)
-{
-  CHAR_DATA *gch;
-  CHAR_DATA *elm;
-  AFFECT_DATA af;
-  int i=0;
-
-  if (is_affected(ch,sn))
-    {
-      send_to_char("Başka bir uşak yaratacak güce sahip değilsin.\n\r",ch);
-      return;
-    }
-
-    send_to_char( "Bir hava uşağı yaratmayı denedin.\n\r",ch);
-    act("$n bir hava uşağı yaratmayı denedi.",ch,NULL,NULL,TO_ROOM);
-
-  for (gch = char_list; gch != NULL; gch = gch->next)
-    {
-      if (IS_NPC(gch) && IS_AFFECTED(gch,AFF_CHARM) && gch->master == ch &&
-          ( gch->pIndexData->vnum == MOB_VNUM_ELM_AIR ) )
-        {
-          i++;
-          if (i > 2)
-           {
-             send_to_char("Daha fazla hava uşağını kontrol edemezsin!\n\r",ch);
-            return;
-           }
-        }
-    }
-
-  if (count_charmed(ch)) return;
-
-  elm = create_mobile( get_mob_index(MOB_VNUM_ELM_AIR), NULL );
-
-
-  for (i = 0; i < MAX_STATS; i ++)
-       elm->perm_stat[i] = UMIN(25,15 + ch->level/10);
-
-  elm->perm_stat[STAT_STR] += 3;
-  elm->perm_stat[STAT_INT] -= 1;
-  elm->perm_stat[STAT_CON] += 2;
-
-  elm->max_hit = IS_NPC(ch)? URANGE(ch->max_hit,1 * ch->max_hit,30000)
-                : UMIN( (4 * ch->pcdata->perm_hit) + 1000,30000);
-  elm->hit = elm->max_hit;
-  elm->max_mana = IS_NPC(ch)? ch->max_mana : ch->pcdata->perm_mana;
-  elm->mana = elm->max_mana;
-  elm->level = ch->level;
-  for (i=0; i < 3; i++)
-    elm->armor[i] = interpolate(elm->level,100,-100);
-  elm->armor[3] = interpolate(elm->level,100,0);
-  elm->silver = 0;
-  elm->timer = 0;
-  elm->damage[DICE_NUMBER] = 7;
-  elm->damage[DICE_TYPE] = 4;
-  elm->damage[DICE_BONUS] = ch->level / 2;
-
-  char_to_room(elm,ch->in_room);
-  send_to_char("Bir hava uşağı yaratmayı denedin!\n\r",ch);
-  act("$n bir hava uşağı yaratmayı denedi!",ch,NULL,NULL,TO_ROOM);
-
-  af.where              = TO_AFFECTS;
-  af.type               = sn;
-  af.level              = level;
-  af.duration           = 24;
-  af.bitvector          = 0;
-  af.modifier           = 0;
-  af.location           = APPLY_NONE;
-  affect_to_char(ch, &af);
-
-  SET_BIT(elm->affected_by, AFF_CHARM);
-  elm->master = elm->leader = ch;
-
-	return;
-}
-
-void spell_summon_water_elm( int sn, int level, CHAR_DATA *ch, void *vo,int target)
-{
-  CHAR_DATA *gch;
-  CHAR_DATA *elm;
-  AFFECT_DATA af;
-  int i=0;
-
-  if (is_affected(ch,sn))
-    {
-      send_to_char("Başka bir uşak yaratacak güce sahip değilsin.\n\r",ch);
-      return;
-    }
-
-    send_to_char("Bir su uşağı yaratmayı denedin.\n\r",ch);
-    act( "$n bir su uşağı yaratmayı denedi.",ch,NULL,NULL,TO_ROOM);
-
-  for (gch = char_list; gch != NULL; gch = gch->next)
-    {
-      if (IS_NPC(gch) && IS_AFFECTED(gch,AFF_CHARM) && gch->master == ch &&
-          ( gch->pIndexData->vnum == MOB_VNUM_ELM_WATER ) )
-        {
-          i++;
-          if (i > 2)
-           {
-             send_to_char("Daha fazla su uşağını kontrol edemezsin!\n\r",ch);
-            return;
-           }
-        }
-    }
-
-  if (count_charmed(ch)) return;
-
-  elm = create_mobile( get_mob_index(MOB_VNUM_ELM_WATER), NULL );
-
-
-  for (i = 0; i < MAX_STATS; i ++)
-       elm->perm_stat[i] = UMIN(25,15 + ch->level/10);
-
-  elm->perm_stat[STAT_STR] += 3;
-  elm->perm_stat[STAT_INT] -= 1;
-  elm->perm_stat[STAT_CON] += 2;
-
-  elm->max_hit = IS_NPC(ch)? URANGE(ch->max_hit,1 * ch->max_hit,30000)
-                : UMIN( (5 * ch->pcdata->perm_hit) + 2000,30000);
-  elm->hit = elm->max_hit;
-  elm->max_mana = IS_NPC(ch)? ch->max_mana : ch->pcdata->perm_mana;
-  elm->mana = elm->max_mana;
-  elm->level = ch->level;
-  for (i=0; i < 3; i++)
-    elm->armor[i] = interpolate(elm->level,100,-100);
-  elm->armor[3] = interpolate(elm->level,100,0);
-  elm->silver = 0;
-  elm->timer = 0;
-  elm->damage[DICE_NUMBER] = 8;
-  elm->damage[DICE_TYPE] = 4;
-  elm->damage[DICE_BONUS] = ch->level / 2;
-
-  char_to_room(elm,ch->in_room);
-  send_to_char("Bir su uşağı yarattın!\n\r",ch);
-  act("$n bir su uşağı yarattı!",ch,NULL,NULL,TO_ROOM);
-
-  af.where              = TO_AFFECTS;
-  af.type               = sn;
-  af.level              = level;
-  af.duration           = 24;
-  af.bitvector          = 0;
-  af.modifier           = 0;
-  af.location           = APPLY_NONE;
-  affect_to_char(ch, &af);
-
-  SET_BIT(elm->affected_by, AFF_CHARM);
-  elm->master = elm->leader = ch;
-
-	return;
-}
-
-void spell_summon_fire_elm( int sn, int level, CHAR_DATA *ch, void *vo,int target)
-{
-  CHAR_DATA *gch;
-  CHAR_DATA *elm;
-  AFFECT_DATA af;
-  int i=0;
-
-  if (is_affected(ch,sn))
-    {
-      send_to_char("Başka bir uşak yaratacak güce sahip değilsin.\n\r",ch);
-      return;
-    }
-
-    send_to_char( "Bir ateş uşağı yaratmayı denedin.\n\r",ch);
-    act("$n bir ateş uşağı yaratmayı denedi.",ch,NULL,NULL,TO_ROOM);
-
-  for (gch = char_list; gch != NULL; gch = gch->next)
-    {
-      if (IS_NPC(gch) && IS_AFFECTED(gch,AFF_CHARM) && gch->master == ch &&
-          ( gch->pIndexData->vnum == MOB_VNUM_ELM_FIRE ) )
-        {
-          i++;
-          if (i > 2)
-           {
-             send_to_char("Daha fazla ateş uşağını kontrol edemezsin!\n\r",ch);
-            return;
-           }
-        }
-    }
-
-  if (count_charmed(ch)) return;
-
-  elm = create_mobile( get_mob_index(MOB_VNUM_ELM_FIRE), NULL );
-
-
-  for (i = 0; i < MAX_STATS; i ++)
-       elm->perm_stat[i] = UMIN(25,15 + ch->level/10);
-
-  elm->perm_stat[STAT_STR] += 3;
-  elm->perm_stat[STAT_INT] -= 1;
-  elm->perm_stat[STAT_CON] += 2;
-
-  elm->max_hit = IS_NPC(ch)? URANGE(ch->max_hit,1 * ch->max_hit,30000)
-                : UMIN( (10 * ch->pcdata->perm_hit) + 1000,30000);
-  elm->hit = elm->max_hit;
-  elm->max_mana = IS_NPC(ch)? ch->max_mana : ch->pcdata->perm_mana;
-  elm->mana = elm->max_mana;
-  elm->level = ch->level;
-  for (i=0; i < 3; i++)
-    elm->armor[i] = interpolate(elm->level,100,-100);
-  elm->armor[3] = interpolate(elm->level,100,0);
-  elm->silver = 0;
-  elm->timer = 0;
-  elm->damage[DICE_NUMBER] = 11;
-  elm->damage[DICE_TYPE] = 5;
-  elm->damage[DICE_BONUS] = ch->level / 2 + 10;
-
-  char_to_room(elm,ch->in_room);
-  send_to_char("Bir ateş uşağı yarattın!\n\r",ch);
-  act("$n bir ateş uşağı yarattı!",ch,NULL,NULL,TO_ROOM);
-
-  af.where              = TO_AFFECTS;
-  af.type               = sn;
-  af.level              = level;
-  af.duration           = 24;
-  af.bitvector          = 0;
-  af.modifier           = 0;
-  af.location           = APPLY_NONE;
-  affect_to_char(ch, &af);
-
-  SET_BIT(elm->affected_by, AFF_CHARM);
-  elm->master = elm->leader = ch;
-
-	return;
-}
-
-void spell_summon_light_elm( int sn, int level, CHAR_DATA *ch, void *vo,int target)
-{
-  CHAR_DATA *gch;
-  CHAR_DATA *elm;
-  AFFECT_DATA af;
-  int i=0;
-
-  if (is_affected(ch,sn))
-    {
-      send_to_char("Başka bir uşak yaratacak güce sahip değilsin.\n\r",ch);
-      return;
-    }
-
-    send_to_char(  "Bir enerji uşağı yaratmayı denedin.\n\r",ch);
-    act("$n bir enerji uşağı yaratmayı denedi.",ch,NULL,NULL,TO_ROOM);
-
-  for (gch = char_list; gch != NULL; gch = gch->next)
-    {
-      if (IS_NPC(gch) && IS_AFFECTED(gch,AFF_CHARM) && gch->master == ch &&
-          ( gch->pIndexData->vnum == MOB_VNUM_ELM_LIGHT ) )
-        {
-          i++;
-          if (i > 2)
-           {
-             send_to_char("Daha fazla enerji uşağını kontrol edemezsin!\n\r",ch);
-            return;
-           }
-        }
-    }
-
-  if (count_charmed(ch)) return;
-
-  elm = create_mobile( get_mob_index(MOB_VNUM_ELM_LIGHT), NULL );
-
-
-  for (i = 0; i < MAX_STATS; i ++)
-       elm->perm_stat[i] = UMIN(25,15 + ch->level/10);
-
-  elm->perm_stat[STAT_STR] += 3;
-  elm->perm_stat[STAT_INT] -= 1;
-  elm->perm_stat[STAT_CON] += 2;
-
-  elm->max_hit = IS_NPC(ch)? URANGE(ch->max_hit,1 * ch->max_hit,30000)
-                : UMIN( (10 * ch->pcdata->perm_hit) + 4000,30000);
-  elm->hit = elm->max_hit;
-  elm->max_mana = IS_NPC(ch)? ch->max_mana : ch->pcdata->perm_mana;
-  elm->mana = elm->max_mana;
-  elm->level = ch->level;
-  for (i=0; i < 3; i++)
-    elm->armor[i] = interpolate(elm->level,100,-100);
-  elm->armor[3] = interpolate(elm->level,100,0);
-  elm->silver = 0;
-  elm->timer = 0;
-  elm->damage[DICE_NUMBER] = 13;
-  elm->damage[DICE_TYPE] = 9;
-  elm->damage[DICE_BONUS] = ch->level / 2 + 10;
-
-  char_to_room(elm,ch->in_room);
-  send_to_char("Bir enerji uşağı yarattın!\n\r",ch);
-  act( "$n bir enerji uşağı yarattı!",ch,NULL,NULL,TO_ROOM);
-
-  af.where              = TO_AFFECTS;
-  af.type               = sn;
-  af.level              = level;
-  af.duration           = 24;
-  af.bitvector          = 0;
-  af.modifier           = 0;
-  af.location           = APPLY_NONE;
-  affect_to_char(ch, &af);
-
-  SET_BIT(elm->affected_by, AFF_CHARM);
-  elm->master = elm->leader = ch;
-
-	return;
 }
 
 
@@ -6042,7 +5782,7 @@ void spell_animate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target
   if (obj->item_type == ITEM_WEAPON)
   {
      mob->hit = IS_NPC(ch) ? 100 :
-		UMIN( (25 * mob->level) + 1000, 30000);
+		UMIN( (25 * mob->level) + 1000, MOB_MAX_HP);
      mob->max_hit = mob->hit;
      mob->mana = ch->level * 40;
      mob->max_mana = mob->mana;
@@ -6057,7 +5797,7 @@ void spell_animate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target
   if (obj->item_type == ITEM_ARMOR)
   {
      mob->hit = IS_NPC(ch) ? 100:
-		UMIN( (100 * mob->level) + 2000, 30000);
+		UMIN( (100 * mob->level) + 2000, MOB_MAX_HP);
      mob->max_hit = mob->hit;
      mob->mana = ch->level * 40;
      mob->max_mana = mob->mana;
