@@ -58,8 +58,11 @@ ve lisanslar · `.github/workflows/ci.yml` CI. Çalışma zamanı dizinleri (`pl
 **Derleyici / platform**
 - gcc'nin clang'da olmayan denetimleri CI'ı kırar: glibc `warn_unused_result`
   (`system`, `link`, `fread`, `write`), `-Wmisleading-indentation` sezgiseli,
-  `-Wformat-zero-length`, `-Wcalloc-transposed-args`; Linux'ta `libm` ayrıca bağlanır.
-  Yerelde clang ile `-Wimplicit-fallthrough -Wformat-zero-length` ekleyerek yaklaş.
+  `-Wformat-zero-length`, `-Wcalloc-transposed-args`, `-Wsign-compare` (`UMIN/UMAX` içinde
+  işaretli/işaretsiz karışımı); Linux'ta `libm` ayrıca bağlanır. Bu Mac'te Homebrew
+  `gcc-16` var: push'tan önce `/opt/homebrew/bin/gcc-16` ile CI bayraklarını
+  (`-Wall -Wextra -Wno-unused-parameter -Wno-format-truncation -Wno-stringop-truncation
+  -Wno-maybe-uninitialized -Werror -DHAVE_CRYPT=1`) kullanarak dosya dosya derle.
 - Win64'te `long` 32 bittir: işaretçiyi asla `long`'a çevirme (allocator `intptr_t`
   kullanır); `time_t` 64 bittir (`%lld` + dönüşüm); `rename()` hedef varsa başarısız
   olur → `platform_replace_file()`; `link()`, `crypt()`, `fork()`, `SIGPIPE` yok;
