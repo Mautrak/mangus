@@ -1051,16 +1051,20 @@ void obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DA
 /*
  * Spell functions.
  */
+/* "Zar + kurtarış + (isteğe bağlı) oda mesajı + hasar" kalıbındaki saldırı büyüleri. */
+static void simple_damage_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim,
+				 int dam, int dam_type, const char *room_msg )
+{
+    if ( saves_spell( level, victim, dam_type ) )
+	dam /= 2;
+    if ( room_msg != NULL )
+	act( room_msg, ch, NULL, victim, TO_NOTVICT );
+    damage( ch, victim, dam, sn, dam_type, TRUE );
+}
+
 void spell_acid_blast( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 30 );
-    if ( saves_spell( level, victim, DAM_ACID ) )
-	    dam /= 2;
-    damage( ch, victim, dam, sn,DAM_ACID,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 30 ), DAM_ACID, NULL );
 }
 
 
@@ -1205,14 +1209,7 @@ void spell_blindness( int sn, int level, CHAR_DATA *ch, void *vo, int target)
 
 void spell_burning_hands(int sn,int level, CHAR_DATA *ch, void *vo, int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice(level , 2) + 7;
-    if ( saves_spell( level, victim,DAM_FIRE) )
-	dam /= 2;
-    damage( ch, victim, dam, sn, DAM_FIRE,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 2 ) + 7, DAM_FIRE, NULL );
 }
 
 
@@ -2683,14 +2680,7 @@ void spell_fireproof(int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
 void spell_flamestrike( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice(level, 10);
-    if ( saves_spell( level, victim,DAM_FIRE) )
-	dam /= 2;
-    damage( ch, victim, dam, sn, DAM_FIRE ,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 10 ), DAM_FIRE, NULL );
 }
 
 
@@ -3558,20 +3548,15 @@ void spell_know_alignment(int sn,int level,CHAR_DATA *ch,void *vo,int target )
 void spell_lightning_bolt(int sn,int level,CHAR_DATA *ch,void *vo,int target)
 {
     CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
 
     if (CAN_DETECT(victim, ADET_GROUNDING))
     {
-      send_to_char("Elektrik düşmanlarında sönüp gidiyor.\n\r",victim);
-    	act("Bir yıldırım $S düşmanlarında sönüp gidiyor.\n\r",
+	send_to_char("Elektrik düşmanlarında sönüp gidiyor.\n\r",victim);
+	act("Bir yıldırım $S düşmanlarında sönüp gidiyor.\n\r",
 		ch, NULL, victim, TO_ROOM);
 	return;
     }
-    dam = dice(level,4) + 12;
-    if ( saves_spell( level, victim,DAM_LIGHTNING) )
-	dam /= 2;
-    damage( ch, victim, dam, sn, DAM_LIGHTNING ,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, victim, dice( level, 4 ) + 12, DAM_LIGHTNING, NULL );
 }
 
 
@@ -4542,10 +4527,40 @@ void spell_acid_breath( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
 
 
+/* Ateş/buz nefesi: asıl kurban tam, odadakiler yarım hasar; kurtarış hasarı yarılar. */
+static void breath_area( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim,
+			 int dam, int dam_type, void (*effect)(void *, int, int, int) )
+{
+    CHAR_DATA *vch, *vch_next;
+
+    effect(victim->in_room,level,dam/2,TARGET_ROOM);
+
+    for (vch = victim->in_room->people; vch != NULL; vch = vch_next)
+    {
+	int div;	/* asıl kurban 1, diğerleri 2; kurtarış ikiye katlar */
+	bool saved;
+
+	vch_next = vch->next_in_room;
+
+	if (is_safe_spell(ch,vch,TRUE)
+	||  ( IS_NPC(vch) && IS_NPC(ch) && ch->fighting != vch ))
+	    continue;
+	if ( is_safe(ch, vch) )
+	    continue;
+
+	div = (vch == victim) ? 1 : 2;
+	saved = saves_spell(vch == victim ? level : level - 2,vch,dam_type);
+	if (saved)
+	    div *= 2;
+	/* kurtaranın yan etkisi (yanma/donma) hasarın yarısı kadar */
+	effect(vch,level/div,dam/(saved ? div * 2 : div),TARGET_CHAR);
+	damage(ch,vch,dam/div,sn,dam_type,TRUE);
+    }
+}
+
 void spell_fire_breath( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
     CHAR_DATA *victim = (CHAR_DATA *) vo;
-    CHAR_DATA *vch, *vch_next;
     int dam,hp_dam,dice_dam;
     int hpch;
 
@@ -4558,52 +4573,12 @@ void spell_fire_breath( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     dice_dam = dice(level,20);
 
     dam = UMAX(hp_dam + dice_dam /10, dice_dam + hp_dam / 10);
-    fire_effect(victim->in_room,level,dam/2,TARGET_ROOM);
-
-    for (vch = victim->in_room->people; vch != NULL; vch = vch_next)
-    {
-	vch_next = vch->next_in_room;
-
-	if (is_safe_spell(ch,vch,TRUE)
-	||  ( IS_NPC(vch) && IS_NPC(ch)
-	&&  (ch->fighting != vch /*|| vch->fighting != ch */)))
-	    continue;
-	if ( is_safe(ch, vch) )
-          continue;
-
-	if (vch == victim) /* full damage */
-	{
-	    if (saves_spell(level,vch,DAM_FIRE))
-	    {
-		fire_effect(vch,level/2,dam/4,TARGET_CHAR);
-		damage(ch,vch,dam/2,sn,DAM_FIRE,TRUE);
-	    }
-	    else
-	    {
-		fire_effect(vch,level,dam,TARGET_CHAR);
-		damage(ch,vch,dam,sn,DAM_FIRE,TRUE);
-	    }
-	}
-	else /* partial damage */
-	{
-	    if (saves_spell(level - 2,vch,DAM_FIRE))
-	    {
-		fire_effect(vch,level/4,dam/8,TARGET_CHAR);
-		damage(ch,vch,dam/4,sn,DAM_FIRE,TRUE);
-	    }
-	    else
-	    {
-		fire_effect(vch,level/2,dam/4,TARGET_CHAR);
-		damage(ch,vch,dam/2,sn,DAM_FIRE,TRUE);
-	    }
-	}
-    }
+    breath_area( sn, level, ch, victim, dam, DAM_FIRE, fire_effect );
 }
 
 void spell_frost_breath( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
     CHAR_DATA *victim = (CHAR_DATA *) vo;
-    CHAR_DATA *vch, *vch_next;
     int dam,hp_dam,dice_dam, hpch;
 
     act("$n buzdan bir nefes gönderiyor!",ch,NULL,victim,TO_NOTVICT);
@@ -4616,47 +4591,7 @@ void spell_frost_breath( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     dice_dam = dice(level,16);
 
     dam = UMAX(hp_dam + dice_dam/10,dice_dam + hp_dam/10);
-    cold_effect(victim->in_room,level,dam/2,TARGET_ROOM);
-
-    for (vch = victim->in_room->people; vch != NULL; vch = vch_next)
-    {
-	vch_next = vch->next_in_room;
-
-	if (is_safe_spell(ch,vch,TRUE)
-	||  (IS_NPC(vch) && IS_NPC(ch)
-	&&   (ch->fighting != vch /*|| vch->fighting != ch*/)))
-	    continue;
-	if ( is_safe(ch, vch) )
-          continue;
-
-
-	if (vch == victim) /* full damage */
-	{
-	    if (saves_spell(level,vch,DAM_COLD))
-	    {
-		cold_effect(vch,level/2,dam/4,TARGET_CHAR);
-		damage(ch,vch,dam/2,sn,DAM_COLD,TRUE);
-	    }
-	    else
-	    {
-		cold_effect(vch,level,dam,TARGET_CHAR);
-		damage(ch,vch,dam,sn,DAM_COLD,TRUE);
-	    }
-	}
-	else
-	{
-	    if (saves_spell(level - 2,vch,DAM_COLD))
-	    {
-		cold_effect(vch,level/4,dam/8,TARGET_CHAR);
-		damage(ch,vch,dam/4,sn,DAM_COLD,TRUE);
-	    }
-	    else
-	    {
-		cold_effect(vch,level/2,dam/4,TARGET_CHAR);
-		damage(ch,vch,dam/2,sn,DAM_COLD,TRUE);
-	    }
-	}
-    }
+    breath_area( sn, level, ch, victim, dam, DAM_COLD, cold_effect );
 }
 
 
@@ -4741,26 +4676,12 @@ void spell_lightning_breath(int sn,int level,CHAR_DATA *ch,void *vo,int target)
  */
 void spell_general_purpose(int sn,int level,CHAR_DATA *ch,void *vo,int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = number_range( 25, 100 );
-    if ( saves_spell( level, victim, DAM_PIERCE) )
-        dam /= 2;
-    damage( ch, victim, dam, sn, DAM_PIERCE ,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, number_range( 25, 100 ), DAM_PIERCE, NULL );
 }
 
 void spell_high_explosive(int sn,int level,CHAR_DATA *ch,void *vo,int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = number_range( 30, 120 );
-    if ( saves_spell( level, victim, DAM_PIERCE) )
-        dam /= 2;
-    damage( ch, victim, dam, sn, DAM_PIERCE ,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, number_range( 30, 120 ), DAM_PIERCE, NULL );
 }
 
 
@@ -4907,144 +4828,67 @@ void spell_shocking_trap(int sn, int level, CHAR_DATA *ch, void *vo,int target )
 
 void spell_acid_arrow( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 12 );
-    if ( saves_spell( level, victim, DAM_ACID ) )
-	dam /= 2;
-    damage( ch, victim, dam, sn,DAM_ACID,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 12 ), DAM_ACID, NULL );
 }
 
 
 /* energy spells */
 void spell_etheral_fist( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 12 );
-    if ( saves_spell( level, victim, DAM_ENERGY ) )
-	dam /= 2;
-  act("Başka bir dünyaya ait kara bir yumruk $E atılıyor ve onu hareketsiz bırakıyor!"
-  ,ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_ENERGY,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 12 ), DAM_ENERGY,
+	"Başka bir dünyaya ait kara bir yumruk $E atılıyor ve onu hareketsiz bırakıyor!" );
 }
 
 void spell_spectral_furor( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 8 );
-    if ( saves_spell( level, victim, DAM_ENERGY ) )
-	dam /= 2;
-  act("Evrenin özü $N için endişe duyuyor!",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_ENERGY,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 8 ), DAM_ENERGY,
+	"Evrenin özü $N için endişe duyuyor!" );
 }
 
 void spell_disruption( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 9 );
-    if ( saves_spell( level, victim, DAM_ENERGY ) )
-	dam /= 2;
-  act("Tuhaf bir enerji $M kuşatırken varlığı belirsizleşiyor.",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_ENERGY,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 9 ), DAM_ENERGY,
+	"Tuhaf bir enerji $M kuşatırken varlığı belirsizleşiyor." );
 }
 
 
 void spell_sonic_resonance( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
     CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
 
-    dam = dice( level, 7 );
-    if ( saves_spell( level, victim, DAM_ENERGY ) )
-	dam /= 2;
-  act("Bir hareket enerjisi silindiri $N çevrelerken çınlamasına neden oluyor.",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_ENERGY,TRUE);
+    simple_damage_spell( sn, level, ch, victim, dice( level, 7 ), DAM_ENERGY,
+	"Bir hareket enerjisi silindiri $N çevrelerken çınlamasına neden oluyor." );
     WAIT_STATE( victim, skill_table[sn].beats );
-    return;
 }
 /* mental */
 void spell_mind_wrack( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 7 );
-    if ( saves_spell( level, victim, DAM_MENTAL ) )
-	dam /= 2;
-  act("$n bakışlarıyla $M uyuşuklaştırıyor.",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_MENTAL,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 7 ), DAM_MENTAL,
+	"$n bakışlarıyla $M uyuşuklaştırıyor." );
 }
 
 void spell_mind_wrench( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 9 );
-    if ( saves_spell( level, victim, DAM_MENTAL ) )
-	dam /= 2;
-  act("$n bakışlarıyla $M hiperaktifleştiriyor.",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_MENTAL,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 9 ), DAM_MENTAL,
+	"$n bakışlarıyla $M hiperaktifleştiriyor." );
 }
 /* acid */
 void spell_sulfurus_spray( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 7 );
-    if ( saves_spell( level, victim, DAM_ACID ) )
-	dam /= 2;
-  act("Yakıcı kokusuyla bir sülfür yağmuru $S üzerine yağıyor.",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_ACID,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 7 ), DAM_ACID,
+	"Yakıcı kokusuyla bir sülfür yağmuru $S üzerine yağıyor." );
 }
 
 void spell_caustic_font( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 9 );
-    if ( saves_spell( level, victim, DAM_ACID ) )
-	dam /= 2;
-  act("Kaynaktan gelen yakıcı sıvı $S altında birikerek dokusunu eritiyor! ",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_ACID,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 9 ), DAM_ACID,
+	"Kaynaktan gelen yakıcı sıvı $S altında birikerek dokusunu eritiyor! " );
 }
 
 void spell_acetum_primus( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 8 );
-    if ( saves_spell( level, victim, DAM_ACID ) )
-	dam /= 2;
-  act("$S üzerine örtülen asit pelerini dokunduğu her bölgeyi yakıyor. ",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_ACID,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 8 ), DAM_ACID,
+	"$S üzerine örtülen asit pelerini dokunduğu her bölgeyi yakıyor. " );
 }
 
 
@@ -5052,45 +4896,21 @@ void spell_acetum_primus( int sn, int level, CHAR_DATA *ch, void *vo, int target
 
 void spell_galvanic_whip( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 7 );
-    if ( saves_spell( level, victim, DAM_LIGHTNING ) )
-	dam /= 2;
-  act("$n atom parçacıklarından oluşturduğu kırbaçla $E vuruyor.",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_LIGHTNING,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 7 ), DAM_LIGHTNING,
+	"$n atom parçacıklarından oluşturduğu kırbaçla $E vuruyor." );
 }
 
 
 void spell_magnetic_trust( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 8 );
-    if ( saves_spell( level, victim, DAM_LIGHTNING ) )
-	dam /= 2;
-  act("Bilinmeyen bir enerji ile saçların dikiliyor!",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_LIGHTNING,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 8 ), DAM_LIGHTNING,
+	"Bilinmeyen bir enerji ile saçların dikiliyor!" );
 }
 
 void spell_quantum_spike( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 9 );
-    if ( saves_spell( level, victim, DAM_LIGHTNING ) )
-	dam /= 2;
-  act("$N küçük ayrık parçalara ayrılıyor ve sonra tekrar birleşiyor.",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_LIGHTNING,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 9 ), DAM_LIGHTNING,
+	"$N küçük ayrık parçalara ayrılıyor ve sonra tekrar birleşiyor." );
 }
 
 /* negative */
@@ -5507,14 +5327,7 @@ void spell_summon_light_elm( int sn, int level, CHAR_DATA *ch, void *vo,int targ
 
 void spell_frostbolt( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 10 );
-    if ( saves_spell( level, victim, DAM_COLD ) )
-	dam /= 2;
-    damage( ch, victim, dam, sn,DAM_COLD,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 10 ), DAM_COLD, NULL );
 }
 
 
