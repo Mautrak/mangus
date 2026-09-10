@@ -53,12 +53,13 @@ static bool in_my_area( CHAR_DATA *ch, CHAR_DATA *victim )
         && victim->in_room->area == ch->in_room->area && can_see( ch, victim );
 }
 
-static CHAR_DATA *online_pc_by_name( const char *name )
+/* 'kim' listesinde görünen, adı verilen oyuncu (adalet: char_list'ten gizli oyuncu okunmaz) */
+static CHAR_DATA *online_pc_by_name( CHAR_DATA *viewer, const char *name )
 {
     CHAR_DATA *wch;
 
     for ( wch = char_list; wch != NULL; wch = wch->next )
-        if ( !IS_NPC(wch) && !str_cmp( wch->name, name ) )
+        if ( !IS_NPC(wch) && !str_cmp( wch->name, name ) && visible_in_who( viewer, wch ) )
             return wch;
     return NULL;
 }
@@ -256,16 +257,37 @@ static void bot_cabal_ask( BOT_DATA *bot )
     bot_talk( bot, BOT_CH_TELL, leader->ch, buf );
 }
 
+/* liderin üyelik isteğine cevapları: {söyle (rol içi), kd (konu dışı)} */
+enum
+{
+    LR_NO_CABAL, LR_NOT_LEADER, LR_ALREADY_US, LR_OTHER_CABAL, LR_NO_PK,
+    LR_LOW_LEVEL, LR_MISFIT, LR_BUSY, LR_ACCEPT
+};
+static const char *leader_reply[][2] =
+{
+    { "Ben de bir kabalın üyesi değilim.",                "ben de bir kabalda değilim ki" },
+    { "Lider ben değilim; ona sor.",                      "ben lider değilim, lidere sor" },
+    { "Zaten bizdensin.",                                 "zaten bizdensin :)" },
+    { "Sen başka bir kabala bağlısın.",                   "sen zaten başka kabaldasın" },
+    { "Önce görevciden katil hakkı almalısın.",           "önce görevciden katlet hakkını al (100 gp), sonra gel" },
+    { "Henüz erken. Biraz daha güçlen, sonra gel.",       "biraz erken, 20 level sonra gel" },
+    { "Senin yolun bizimkiyle uyuşmuyor.",                "senin yolun bizimkine uymuyor kusura bakma" },
+    { "Biraz bekle, önce başkasıyla ilgileniyorum.",      "biraz bekle, önce başkasını alıyorum" },
+    { "Peki. Seni %s saflarına kabul ediyorum; birazdan yeminini alacağım.",
+                                                          "tamam, seni %s kabalına alıyorum, birazdan yemin töreni :)" },
+};
+
 /*
- * Lider bir üyelik isteği duydu (kd/söyle). Yanıt kanalı: konu dışı (kd).
- * Uygunsa 10-25 sn sonra gerçek 'induct' komutu verir.
+ * Lider bir üyelik isteği duydu (kd/söyle). Yanıt kanalı: konu dışı (kd) ya da
+ * söyle. Uygunsa 10-25 sn sonra gerçek 'induct' komutu verir.
  */
 bool bot_leader_handle( BOT_DATA *leader, CHAR_DATA *speaker, int channel )
 {
     CHAR_DATA *ch = leader->ch;
-    const char *reply;
-    char out[MAX_STRING_LENGTH];
+    char out[MAX_INPUT_LENGTH];
     int reply_ch = ( channel == BOT_CH_SAY || channel == BOT_CH_YELL ) ? BOT_CH_SAY : BOT_CH_TELL;
+    int ic = reply_ch == BOT_CH_SAY ? 0 : 1;
+    int which;
 
     if ( ch == NULL || speaker == NULL || IS_NPC(speaker) )
         return FALSE;
@@ -279,33 +301,25 @@ bool bot_leader_handle( BOT_DATA *leader, CHAR_DATA *speaker, int channel )
                                  reply_ch == BOT_CH_SAY ? "Sağ ol, bekliyorum." : "sağ ol, bekliyorum" );
             return TRUE;
         }
-        reply = ch->cabal == CABAL_NONE ? "ben de bir kabalda değilim ki" : "ben lider değilim, lidere sor";
-        if ( reply_ch == BOT_CH_SAY )
-            reply = ch->cabal == CABAL_NONE ? "Ben de bir kabalın üyesi değilim." : "Lider ben değilim; ona sor.";
+        which = ch->cabal == CABAL_NONE ? LR_NO_CABAL : LR_NOT_LEADER;
     }
-    else if ( speaker->cabal == ch->cabal )
-        reply = reply_ch == BOT_CH_SAY ? "Zaten bizdensin." : "zaten bizdensin :)";
-    else if ( speaker->cabal != CABAL_NONE )
-        reply = reply_ch == BOT_CH_SAY ? "Sen başka bir kabala bağlısın." : "sen zaten başka kabaldasın";
-    else if ( speaker->pcdata->oyuncu_katli != 1 )
-        reply = reply_ch == BOT_CH_SAY ? "Önce görevciden katil hakkı almalısın." : "önce görevciden katlet hakkını al (100 gp), sonra gel";
-    else if ( speaker->level < BOT_CABAL_LEVEL )
-        reply = reply_ch == BOT_CH_SAY ? "Henüz erken. Biraz daha güçlen, sonra gel." : "biraz erken, 20 level sonra gel";
-    else if ( !bot_cabal_fits( speaker, ch->cabal ) )
-        reply = reply_ch == BOT_CH_SAY ? "Senin yolun bizimkiyle uyuşmuyor." : "senin yolun bizimkine uymuyor kusura bakma";
-    else if ( leader->induct_id != 0 && leader->induct_id != speaker->id )
-        reply = reply_ch == BOT_CH_SAY ? "Biraz bekle, önce başkasıyla ilgileniyorum." : "biraz bekle, önce başkasını alıyorum";
+    else if ( speaker->cabal == ch->cabal )              which = LR_ALREADY_US;
+    else if ( speaker->cabal != CABAL_NONE )             which = LR_OTHER_CABAL;
+    else if ( speaker->pcdata->oyuncu_katli != 1 )       which = LR_NO_PK;
+    else if ( speaker->level < BOT_CABAL_LEVEL )         which = LR_LOW_LEVEL;
+    else if ( !bot_cabal_fits( speaker, ch->cabal ) )    which = LR_MISFIT;
+    else if ( leader->induct_id != 0 && leader->induct_id != speaker->id ) which = LR_BUSY;
     else
     {
+        which = LR_ACCEPT;
         leader->induct_id    = speaker->id;
         leader->induct_pulse = bot_pulse + BOT_SEC( number_range( 10, 25 ) );
-        snprintf( out, sizeof(out), reply_ch == BOT_CH_SAY
-                  ? "Peki. Seni %s saflarına kabul ediyorum; birazdan yeminini alacağım."
-                  : "tamam, seni %s kabalına alıyorum, birazdan yemin töreni :)",
-                  cabal_table[ch->cabal].long_name );
-        reply = out;
     }
-    bot_queue_reply( leader, speaker->name, reply_ch, 6 + number_range( 0, 8 ), reply );
+    if ( which == LR_ACCEPT )
+        snprintf( out, sizeof(out), leader_reply[which][ic], cabal_table[ch->cabal].long_name );
+    else
+        snprintf( out, sizeof(out), "%s", leader_reply[which][ic] );
+    bot_queue_reply( leader, speaker->name, reply_ch, 6 + number_range( 0, 8 ), out );
     return TRUE;
 }
 
@@ -493,7 +507,7 @@ bool bot_war_help( BOT_DATA *bot, CHAR_DATA *speaker, const char *text )
         return FALSE;
     p += strlen( "yardım! " );
     one_argument( (char *) p, name );
-    if ( name[0] == '\0' || ( attacker = online_pc_by_name( capitalize( name ) ) ) == NULL )
+    if ( name[0] == '\0' || ( attacker = online_pc_by_name( ch, capitalize( name ) ) ) == NULL )
         return FALSE;
     if ( !pk_target_ok( ch, attacker ) )
         return FALSE;
@@ -773,7 +787,6 @@ static bool raid_go( BOT_DATA *bot, ROOM_INDEX_DATA *to )
         return TRUE;
     return FALSE;
 }
-#define raid_go_home( bot, home ) raid_go( (bot), (home) )
 
 static void raid_end( BOT_DATA *bot, const char *why )
 {
@@ -782,6 +795,184 @@ static void raid_end( BOT_DATA *bot, const char *why )
     bot->raid_cabal = CABAL_NONE;
     bot->raid_step = 0;
     bot_set_state( bot, BOT_ST_IDLE );
+}
+
+/* karargâhta toplanma: lider ve en az bir arkadaş hazırsa (ya da 5 dk geçtiyse) yola çık */
+static bool raid_gathered( BOT_DATA *bot, ROOM_INDEX_DATA *home )
+{
+    CHAR_DATA *ch = bot->ch, *rch;
+    CHAR_DATA *leader = bot_char_by_id( bot->raid_leader_id );
+    int mates = 0;
+
+    for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
+        if ( rch != ch && !IS_NPC(rch) && rch->cabal == ch->cabal )
+            mates++;
+    if ( bot_pulse - bot->raid_pulse > BOT_MIN(5) )
+        return TRUE;
+    if ( mates < 1 )
+        return FALSE;
+    if ( leader == ch )
+        return TRUE;
+    return leader != NULL && leader->in_room == home && leader->pcdata->bot != NULL
+        && leader->pcdata->bot->raid_step >= 1;
+}
+
+/* saldırı: 0 toplan, 1 düşman karargâhına, 2 eşyayı al, 3 eve dön */
+static void raid_attack( BOT_DATA *bot, OBJ_DATA *item, ROOM_INDEX_DATA *iroom, CHAR_DATA *carrier,
+                         ROOM_INDEX_DATA *home, ROOM_INDEX_DATA *enemy_hq )
+{
+    CHAR_DATA *ch = bot->ch;
+    char kw[MAX_INPUT_LENGTH];
+
+    switch ( bot->raid_step )
+    {
+    case 0:
+        if ( ch->in_room != home )
+        {
+            if ( !raid_go( bot, home ) )
+                raid_end( bot, "karargâha yol yok" );
+            return;
+        }
+        if ( raid_gathered( bot, home ) )
+        {
+            if ( bot_char_by_id( bot->raid_leader_id ) == ch )
+                bot_talk( bot, BOT_CH_CABAL, NULL, "hadi, gidiyoruz" );
+            bot->raid_step = 1;
+            return;
+        }
+        bot_cast_buffs( bot );
+        return;
+    case 1:
+        if ( item == NULL || ( carrier == NULL && iroom != enemy_hq )
+          || ( carrier != NULL && carrier->cabal != ch->cabal ) )
+        {
+            raid_end( bot, "eşya yerinde değil" );
+            return;
+        }
+        if ( ch->in_room != enemy_hq )
+        {
+            if ( !raid_go( bot, enemy_hq ) )
+                raid_end( bot, "düşman karargâhına yol yok" );
+            return;
+        }
+        bot->raid_step = 2;
+        bot_chat_event( bot, BOT_EV_PK_TAUNT, NULL );
+        return;
+    case 2:
+        if ( carrier == ch )
+        {
+            bot->raid_step = 3;
+            bot_talk( bot, BOT_CH_CABAL, NULL, "eşya bende, dönüyorum!" );
+            return;
+        }
+        if ( carrier != NULL )
+        {
+            /* bir kabal arkadaşı aldı: eşlik et */
+            if ( carrier->cabal == ch->cabal )
+                bot->raid_step = 3;
+            else
+                raid_end( bot, "eşyayı başkası aldı" );
+            return;
+        }
+        if ( iroom != ch->in_room )
+        {
+            raid_end( bot, "eşya burada değil" );
+            return;
+        }
+        if ( can_see_obj( ch, item ) )
+            raid_take_item( bot, item );
+        return;
+    case 3:
+        if ( ch->in_room != home )
+        {
+            if ( !raid_go( bot, home ) )
+                raid_end( bot, "eve yol yok" );
+            return;
+        }
+        if ( carrier == ch )
+        {
+            bot_obj_keyword( ch, item, ch->carrying, kw, sizeof(kw) );
+            bot_cmd( bot, "bırak %s", kw );
+            if ( item->in_room == home )
+            {
+                bot_talk( bot, BOT_CH_CABAL, NULL, "eşya karargâhta, güçleri kesildi!" );
+                bot_log( bot, "%s kabalının eşyasını karargâha getirdi.", cabal_table[bot->raid_cabal].short_name );
+                raid_end( bot, "başarılı" );
+            }
+            return;
+        }
+        if ( iroom == home || carrier == NULL )
+            raid_end( bot, "tamamlandı" );
+        return;
+    }
+    raid_end( bot, NULL );
+}
+
+/* savunma / kurtarma (raid_step 10+): eşya evde değilse peşine düş, getir, bırak */
+static void raid_defend( BOT_DATA *bot, OBJ_DATA *item, ROOM_INDEX_DATA *iroom, CHAR_DATA *carrier,
+                         ROOM_INDEX_DATA *home )
+{
+    CHAR_DATA *ch = bot->ch;
+    char kw[MAX_INPUT_LENGTH];
+
+    if ( item == NULL || ( iroom == home && carrier == NULL ) )
+    {
+        if ( bot->raid_step >= 12 )
+            bot_talk( bot, BOT_CH_CABAL, NULL, "eşya yerinde, sakin" );
+        raid_end( bot, "eşya yerinde" );
+        return;
+    }
+    if ( carrier == ch )
+    {
+        if ( ch->in_room != home )
+        {
+            if ( !raid_go( bot, home ) )
+                raid_end( bot, "eve yol yok" );
+            return;
+        }
+        bot_obj_keyword( ch, item, ch->carrying, kw, sizeof(kw) );
+        bot_cmd( bot, "bırak %s", kw );
+        if ( item->in_room == home )
+        {
+            bot_talk( bot, BOT_CH_CABAL, NULL, "eşyamız yerine döndü!" );
+            bot_log( bot, "kabal eşyasını geri getirdi." );
+            raid_end( bot, "kurtarıldı" );
+        }
+        return;
+    }
+    if ( carrier != NULL )
+    {
+        /* biri taşıyor: aynı bölgedeyse peşine düş, değilse onun karargâhında bekle */
+        if ( carrier->cabal == ch->cabal )
+            return;                                   /* arkadaş getiriyor */
+        if ( in_my_area( ch, carrier ) )
+        {
+            if ( carrier->in_room != ch->in_room )
+                raid_go( bot, carrier->in_room );
+            return;
+        }
+        if ( carrier->cabal != CABAL_NONE )
+        {
+            ROOM_INDEX_DATA *their = get_room_index( cabal_table[carrier->cabal].room_vnum );
+            if ( their != NULL && ch->in_room != their )
+                raid_go( bot, their );
+        }
+        bot->raid_step = 12;
+        return;
+    }
+    /* bir odada duruyor */
+    if ( iroom != NULL )
+    {
+        if ( ch->in_room != iroom )
+        {
+            if ( !raid_go( bot, iroom ) )
+                raid_end( bot, "eşyanın odasına yol yok" );
+            return;
+        }
+        if ( can_see_obj( ch, item ) )
+            raid_take_item( bot, item );
+        bot->raid_step = 13;
+    }
 }
 
 void bot_raid( BOT_DATA *bot )
@@ -828,170 +1019,10 @@ void bot_raid( BOT_DATA *bot )
         }
 
     item = cabal_item_root( target, &iroom, &carrier );
-
-    if ( !defend )
-    {
-        switch ( bot->raid_step )
-        {
-        case 0:                                       /* karargâhta toplan */
-            if ( ch->in_room != home )
-            {
-                if ( !raid_go( bot, home ) )
-                    raid_end( bot, "karargâha yol yok" );
-                return;
-            }
-            {
-                CHAR_DATA *leader = bot_char_by_id( bot->raid_leader_id );
-                int mates = 0;
-
-                for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
-                    if ( rch != ch && !IS_NPC(rch) && rch->cabal == ch->cabal )
-                        mates++;
-                if ( ( leader == ch && mates >= 1 ) || ( leader != NULL && leader->in_room == home && mates >= 1
-                     && leader->pcdata->bot != NULL && leader->pcdata->bot->raid_step >= 1 )
-                  || bot_pulse - bot->raid_pulse > BOT_MIN(5) )
-                {
-                    if ( leader == ch )
-                        bot_talk( bot, BOT_CH_CABAL, NULL, "hadi, gidiyoruz" );
-                    bot->raid_step = 1;
-                }
-                else if ( bot_cast_buffs( bot ) )
-                    return;
-            }
-            return;
-        case 1:                                       /* düşman karargâhına */
-            if ( item == NULL || ( carrier == NULL && iroom != enemy_hq )
-              || ( carrier != NULL && carrier->cabal != ch->cabal ) )
-            {
-                raid_end( bot, "eşya yerinde değil" );
-                return;
-            }
-            if ( ch->in_room != enemy_hq )
-            {
-                if ( !raid_go( bot, enemy_hq ) )
-                    raid_end( bot, "düşman karargâhına yol yok" );
-                return;
-            }
-            bot->raid_step = 2;
-            bot_chat_event( bot, BOT_EV_PK_TAUNT, NULL );
-            return;
-        case 2:                                       /* eşyayı al */
-            if ( carrier == ch )
-            {
-                bot->raid_step = 3;
-                bot_talk( bot, BOT_CH_CABAL, NULL, "eşya bende, dönüyorum!" );
-                return;
-            }
-            if ( carrier != NULL )
-            {
-                /* bir kabal arkadaşı aldı: eşlik et */
-                if ( carrier->cabal == ch->cabal )
-                    bot->raid_step = 3;
-                else
-                    raid_end( bot, "eşyayı başkası aldı" );
-                return;
-            }
-            if ( iroom != ch->in_room )
-            {
-                raid_end( bot, "eşya burada değil" );
-                return;
-            }
-            if ( !can_see_obj( ch, item ) )
-                return;
-            raid_take_item( bot, item );
-            return;
-        case 3:                                       /* eve dön */
-            if ( ch->in_room != home )
-            {
-                if ( !raid_go_home( bot, home ) )
-                    raid_end( bot, "eve yol yok" );
-                return;
-            }
-            if ( carrier == ch )
-            {
-                char kw[MAX_INPUT_LENGTH];
-
-                bot_obj_keyword( ch, item, ch->carrying, kw, sizeof(kw) );
-                bot_cmd( bot, "bırak %s", kw );
-                if ( item->in_room == home )
-                {
-                    bot_talk( bot, BOT_CH_CABAL, NULL, "eşya karargâhta, güçleri kesildi!" );
-                    bot_log( bot, "%s kabalının eşyasını karargâha getirdi.", cabal_table[target].short_name );
-                    raid_end( bot, "başarılı" );
-                }
-                return;
-            }
-            if ( iroom == home || carrier == NULL )
-                raid_end( bot, "tamamlandı" );
-            return;
-        }
-        raid_end( bot, NULL );
-        return;
-    }
-
-    /* savunma / kurtarma */
-    if ( item == NULL || ( iroom == home && carrier == NULL ) )
-    {
-        if ( bot->raid_step >= 12 )
-            bot_talk( bot, BOT_CH_CABAL, NULL, "eşya yerinde, sakin" );
-        raid_end( bot, "eşya yerinde" );
-        return;
-    }
-    if ( carrier == ch )
-    {
-        if ( ch->in_room != home )
-        {
-            if ( !raid_go_home( bot, home ) )
-                raid_end( bot, "eve yol yok" );
-            return;
-        }
-        {
-            char kw[MAX_INPUT_LENGTH];
-
-            bot_obj_keyword( ch, item, ch->carrying, kw, sizeof(kw) );
-            bot_cmd( bot, "bırak %s", kw );
-            if ( item->in_room == home )
-            {
-                bot_talk( bot, BOT_CH_CABAL, NULL, "eşyamız yerine döndü!" );
-                bot_log( bot, "kabal eşyasını geri getirdi." );
-                raid_end( bot, "kurtarıldı" );
-            }
-        }
-        return;
-    }
-    if ( carrier != NULL )
-    {
-        /* biri taşıyor: aynı bölgedeyse peşine düş, değilse onun karargâhında bekle */
-        if ( carrier->cabal == ch->cabal )
-            return;                                   /* arkadaş getiriyor */
-        if ( in_my_area( ch, carrier ) )
-        {
-            if ( carrier->in_room != ch->in_room )
-                raid_go( bot, carrier->in_room );
-            return;
-        }
-        if ( carrier->cabal != CABAL_NONE )
-        {
-            ROOM_INDEX_DATA *their = get_room_index( cabal_table[carrier->cabal].room_vnum );
-            if ( their != NULL && ch->in_room != their )
-                raid_go( bot, their );
-        }
-        bot->raid_step = 12;
-        return;
-    }
-    /* bir odada duruyor */
-    if ( iroom != NULL )
-    {
-        if ( ch->in_room != iroom )
-        {
-            if ( !raid_go( bot, iroom ) )
-                raid_end( bot, "eşyanın odasına yol yok" );
-            return;
-        }
-        if ( can_see_obj( ch, item ) )
-            raid_take_item( bot, item );
-        bot->raid_step = 13;
-    }
+    if ( defend )
+        raid_defend( bot, item, iroom, carrier, home );
+    else
+        raid_attack( bot, item, iroom, carrier, home, enemy_hq );
 }
 
 /*
