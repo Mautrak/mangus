@@ -103,12 +103,13 @@ static int vowel_count(const char *word)
  * ek önünde yumuşatır: p/ç/t/k -> b/c/d/ğ, "nk" -> "ng" (renk -> rengi).
  * Tek heceli sözcükler yumuşamaz (at -> atı, top -> topu, saç -> saçı).
  */
-void tr_soften(char *word)
+void tr_soften(char *word, size_t cap)
 {
     size_t len = strlen(word);
     const char *last;
 
-    if (len == 0)
+    /* "k" -> "ğ" bir bayt uzatır; tamponda yer yoksa dokunma. */
+    if (len == 0 || len + 2 > cap)
         return;
 
     if (len >= 2 && !strcmp(word + len - 2, "nk"))
@@ -163,7 +164,7 @@ const char *ekler(CHAR_DATA *to, CHAR_DATA *ch, const char *format)
     snprintf(buf, MAX_STRING_LENGTH, "%s%s", name, IS_NPC(ch) ? "" : "'");
 
     if (IS_NPC(ch) && s->kaynastirma[0] != '\0' && !tr_ends_with_vowel(name))
-        tr_soften(buf);
+        tr_soften(buf, MAX_STRING_LENGTH);
 
     if (cls < 0)
         cls = 0;

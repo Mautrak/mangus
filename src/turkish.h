@@ -12,7 +12,7 @@ int         tr_vowel_class(const char *word);
 /* Sözcük ünlüyle mi bitiyor? */
 bool        tr_ends_with_vowel(const char *word);
 /* Son sert ünsüzü yumuşatır (p/ç/t/k -> b/c/d/ğ, nk -> ng); tek heceliye dokunmaz. */
-void        tr_soften(char *word);
+void        tr_soften(char *word, size_t cap);
 /* act() için: 'to' görebiliyorsa 'ch' adına ek takılmış hali ("Ali'nin",
  * "goblinin"); göremiyorsa "birisinin" gibi genel biçim. Statik tampon. */
 const char *ekler(CHAR_DATA *to, CHAR_DATA *ch, const char *format);
