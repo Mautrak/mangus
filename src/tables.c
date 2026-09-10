@@ -325,6 +325,8 @@ struct cabal_type cabal_table [] =
   { "Ormanların efendileri", 		"aslan",		502,504,NULL 	},
   { "Tüccarlar",	"tüccar",	571,573,NULL 	}
 };
+_Static_assert(sizeof cabal_table / sizeof cabal_table[0] == MAX_CABAL,
+	       "MAX_CABAL cabal_table ile uyuşmuyor");
 
 const   struct  prac_type    prac_table[] =
 {
@@ -491,100 +493,112 @@ const struct yp_tip yp_tablo[] =
   {88000,93000}//130
 };
 
+#define YP_TABLO_MAX ((int)(sizeof yp_tablo / sizeof yp_tablo[0]))
+
+const struct yp_tip *yp_range(int level)
+{
+    return &yp_tablo[URANGE(0, level, YP_TABLO_MAX - 1)];
+}
+
 const   struct  material_type    material_table[] =
 {
-    // ISIM,
-    // YEMEK ICIN UYGUN MU (0 uygun değil, 9 cok uygun ve doyurucu),
-    // TEKSTIL URUNLERI ICIN UYGUN MU, (0 uygun değil, 9 cok uygun ve uzun omurlu),
-    // ARMOR ICIN UYGUN MU, (0 uygun değil, 9 cok uygun ve uzun omurlu, dayanikli),
-    // WEAPON ICIN UYGUN MU, (0 uygun değil, 9 cok uygun ve uzun omurlu, dayanikli),
-    // SESSIZ MI (0 cok gurultulu , 9 cok sessiz),
-    // YUZER MI (0 hızlı batar, 9 hic batmaz)
-    // PORTAL ICIN UYGUN MU (0 uygun değil, 9 cok uygun),
-    // ozgul agirlik. 1 cm3'ün agirligi. gr cinsinden.
-    {"adamantite", "adamant",        /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/TRUE,  /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/4, /*ESKIME*/480},  // 1
-    {"air",        "hava",           /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/0, /*ESKIME*/1000},
-    {"aluminum",   "aluminyum",      /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/3, /*ESKIME*/400},
-    {"amethyst",   "ametist",        /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/2, /*ESKIME*/350},
-    {"ash",        "kül",          /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE,  /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/50},
-    {"bamboo",     "bambu",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/TRUE,  /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/150},
-    {"bearskin",   "ayıderisi",      /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/TRUE,  /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/200},
-    {"bone",       "kemik",          /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/TRUE,  /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/2, /*ESKIME*/350},
-    {"brass",      "pirinç",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/9, /*ESKIME*/450},
-    {"bronze",     "bronz",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/9, /*ESKIME*/450},  // 10
-    {"cashmire",   "kaşmir",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/TRUE,  /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/120},
-    {"clay",       "kil",            /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/TRUE,  /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/2, /*ESKIME*/50},
-    {"coal",       "kömür",          /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/FALSE,  /*OAGIRLIK*/1, /*ESKIME*/100},
-    {"copper",     "bakır",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/9, /*ESKIME*/450},
-    {"coral",      "mercan",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/FALSE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/2, /*ESKIME*/240},
-    {"corundum",   "korindon",       /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/4, /*ESKIME*/600},
-    {"cotton",     "pamuk",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/TRUE,  /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/120},
-    {"crystal",    "kristal",        /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*IKSIR*/TRUE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/60},
-    {"diamond",    "elmas",          /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/3, /*ESKIME*/600},
-    {"dragonskin", "ejderhaderisi",  /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/TRUE,  /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/2, /*ESKIME*/700},  // 20
-    {"ebony",      "abanoz",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/400},
-    {"emerald",    "zümrüt",         /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/3, /*ESKIME*/400},
-    {"energy",     "enerji",         /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/0, /*ESKIME*/1000},
-    {"feather",    "tüy",            /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/TRUE,  /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/50},
-    {"felt",       "keçe",           /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/120},
-    {"fish",       "balık",          /*YEMEK*/TRUE,  /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/20},
-    {"fishskin",   "balıkderisi",    /*YEMEK*/TRUE,  /*TASIYICI*/FALSE, /*TEKSTIL*/TRUE,  /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/100},
-    {"flesh",      "beden",          /*YEMEK*/TRUE,  /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/20},
-    {"flower",     "çiçek",          /*YEMEK*/TRUE,  /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/2, /*ESKIME*/10},
-    {"fur",        "kürk",           /*YEMEK*/TRUE,  /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/200}, // 30
-    {"gem",        "mücevher",       /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/3, /*ESKIME*/500},
-    {"glass",      "cam",            /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*IKSIR*/TRUE,  /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/2, /*ESKIME*/40},
-    {"gold",       "altın",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/15, /*ESKIME*/550},
-    {"granite",    "granit",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/FALSE, /*OAGIRLIK*/3, /*ESKIME*/500},
-    {"gut",        "bağırsak",       /*YEMEK*/TRUE,  /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/20},
-    {"hair",       "kıl",            /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/TRUE,  /*ZIRH*/FALSE,  /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/80},
-    {"hardwood",   "serttahta",      /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/2, /*ESKIME*/180},
-    {"iron",       "demir",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/7, /*ESKIME*/600},
-    {"ivory",      "fildişi",        /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/2, /*ESKIME*/400},
-    {"lead",       "kurşun",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/11, /*ESKIME*/400},  // 40
-    {"leather",    "kösele",         /*YEMEK*/TRUE,  /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/240},
-    {"linen",      "keten",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/FALSE,  /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/ 100},
-    {"marble",     "mermer",         /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/3, /*ESKIME*/400},
-    {"meat",       "et",             /*YEMEK*/TRUE,  /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/20},
-    {"mithril",    "mitril",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/4, /*ESKIME*/700},
-    {"nothingness","hiçlik",         /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/0, /*ESKIME*/1000},
-    {"oak",        "meşe",           /*YEMEK*/FALSE, /*TASIYICI*/FALSE,  /*TEKSTIL*/FALSE, /*ZIRH*/FALSE,  /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/120},
-    {"obsidian",   "obsidiyen",      /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/2, /*ESKIME*/500},
-    {"oil",        "yağ",            /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/20},
-    {"onyx",       "oniks",          /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/300}, // 50
-    {"opal",       "opal",           /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/2, /*ESKIME*/300},
-    {"paper",      "kağıt",          /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/TRUE,  /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/60},
-    {"parafin",    "parafin",        /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/60},
-    {"parchment",  "tirşe",          /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE,  /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/60},
-    {"pearl",      "inci",           /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/3, /*ESKIME*/300},
-    {"plastic",    "plastik",        /*YEMEK*/FALSE, /*TASIYICI*/FALSE,  /*TEKSTIL*/FALSE,  /*ZIRH*/FALSE,  /*SILAH*/FALSE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/100},
-    {"platinum",   "platin",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/21, /*ESKIME*/700},
-    {"porcelain",  "porselen",       /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/2, /*ESKIME*/200},
-    {"quartz",     "kuvars",         /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/3, /*ESKIME*/350},
-    {"rubber",     "lastik",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/2, /*ESKIME*/120}, // 60
-    {"ruby",       "yakut",          /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/4, /*ESKIME*/350},
-    {"sandstone",  "kumtaşı",        /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/2, /*ESKIME*/40},
-    {"sapphire",   "safir",          /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/4, /*ESKIME*/400},
-    {"satin",      "saten",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/100},
-    {"silk",       "ipek",           /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/90},
-    {"silver",     "gümüş",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/10, /*ESKIME*/500},
-    {"skin",       "deri",           /*YEMEK*/TRUE,  /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/200},
-    {"snakeskin",  "yılanderisi",    /*YEMEK*/TRUE,  /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/350},
-    {"softwood",   "yumuşaktahta",   /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/200},
-    {"steel",      "çelik",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/8, /*ESKIME*/600}, // 70
-    {"stone",      "taş",            /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/3, /*ESKIME*/400},
-    //{"sulfur",     "sülfür",         /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/240},
-    {"tin",        "teneke",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/7, /*ESKIME*/300},
-    {"titanium",   "titanyum",       /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/5, /*ESKIME*/600},
-    {"vellum",     "tirşe",          /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/TRUE,  /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/60},
-    {"velvet",     "kadife",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/120},//kadife
-    {"water",      "su",             /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/1000},
-    {"wax",        "balmumu",        /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/100},//balmumu
-    {"wheat",      "buğday",         /*YEMEK*/TRUE,  /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/5},
-    {"wood",       "tahta",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/150},// 80
-    {"wool",       "yün",            /*YEMEK*/TRUE,  /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/240},
-    {NULL,         NULL,             /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*IKSIR*/FALSE, /*PARSOMEN*/FALSE, /*SESSIZ*/FALSE, /*YUZER*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/0}
+    /* İngilizce ad, Türkçe ad, yemek/taşıyıcı/tekstil/zırh/silah/parşömen
+       için uygun mu, özgül ağırlık (gr/cm3), eskime süresi (gün). */
+    {"adamantite", "adamant",        /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/TRUE,  /*OAGIRLIK*/4, /*ESKIME*/480},
+    {"air",        "hava",           /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/0, /*ESKIME*/1000},
+    {"aluminum",   "aluminyum",      /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/3, /*ESKIME*/400},
+    {"amethyst",   "ametist",        /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/2, /*ESKIME*/350},
+    {"ash",        "kül",          /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/FALSE,  /*OAGIRLIK*/1, /*ESKIME*/50},
+    {"bamboo",     "bambu",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*PARSOMEN*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/150},
+    {"bearskin",   "ayıderisi",      /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*PARSOMEN*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/200},
+    {"bone",       "kemik",          /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/TRUE,  /*OAGIRLIK*/2, /*ESKIME*/350},
+    {"brass",      "pirinç",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/9, /*ESKIME*/450},
+    {"bronze",     "bronz",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/9, /*ESKIME*/450},
+    {"cashmire",   "kaşmir",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/120},
+    {"clay",       "kil",            /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/TRUE,  /*OAGIRLIK*/2, /*ESKIME*/50},
+    {"coal",       "kömür",          /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/100},
+    {"copper",     "bakır",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/9, /*ESKIME*/450},
+    {"coral",      "mercan",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/FALSE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/2, /*ESKIME*/240},
+    {"corundum",   "korindon",       /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/4, /*ESKIME*/600},
+    {"cotton",     "pamuk",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/120},
+    {"crystal",    "kristal",        /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/60},
+    {"diamond",    "elmas",          /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/3, /*ESKIME*/600},
+    {"dragonskin", "ejderhaderisi",  /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/TRUE,  /*OAGIRLIK*/2, /*ESKIME*/700},
+    {"ebony",      "abanoz",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/400},
+    {"emerald",    "zümrüt",         /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/3, /*ESKIME*/400},
+    {"energy",     "enerji",         /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/0, /*ESKIME*/1000},
+    {"feather",    "tüy",            /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/TRUE,  /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/50},
+    {"felt",       "keçe",           /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/120},
+    {"fish",       "balık",          /*YEMEK*/TRUE,  /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/20},
+    {"fishskin",   "balıkderisi",    /*YEMEK*/TRUE,  /*TASIYICI*/FALSE, /*TEKSTIL*/TRUE,  /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/100},
+    {"flesh",      "beden",          /*YEMEK*/TRUE,  /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/20},
+    {"flower",     "çiçek",          /*YEMEK*/TRUE,  /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/2, /*ESKIME*/10},
+    {"fur",        "kürk",           /*YEMEK*/TRUE,  /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/200},
+    {"gem",        "mücevher",       /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/3, /*ESKIME*/500},
+    {"glass",      "cam",            /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/2, /*ESKIME*/40},
+    {"gold",       "altın",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/15, /*ESKIME*/550},
+    {"granite",    "granit",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/3, /*ESKIME*/500},
+    {"gut",        "bağırsak",       /*YEMEK*/TRUE,  /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/20},
+    {"hair",       "kıl",            /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/TRUE,  /*ZIRH*/FALSE,  /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/80},
+    {"hardwood",   "serttahta",      /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/2, /*ESKIME*/180},
+    {"iron",       "demir",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/7, /*ESKIME*/600},
+    {"ivory",      "fildişi",        /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/2, /*ESKIME*/400},
+    {"lead",       "kurşun",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/11, /*ESKIME*/400},
+    {"leather",    "kösele",         /*YEMEK*/TRUE,  /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/240},
+    {"linen",      "keten",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/FALSE,  /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/ 100},
+    {"marble",     "mermer",         /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/3, /*ESKIME*/400},
+    {"meat",       "et",             /*YEMEK*/TRUE,  /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/20},
+    {"mithril",    "mitril",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/4, /*ESKIME*/700},
+    {"nothingness","hiçlik",         /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/0, /*ESKIME*/1000},
+    {"oak",        "meşe",           /*YEMEK*/FALSE, /*TASIYICI*/FALSE,  /*TEKSTIL*/FALSE, /*ZIRH*/FALSE,  /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/120},
+    {"obsidian",   "obsidiyen",      /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/2, /*ESKIME*/500},
+    {"oil",        "yağ",            /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/20},
+    {"onyx",       "oniks",          /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/300},
+    {"opal",       "opal",           /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/2, /*ESKIME*/300},
+    {"paper",      "kağıt",          /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/60},
+    {"parafin",    "parafin",        /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/60},
+    {"parchment",  "parşömen",       /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/FALSE,  /*OAGIRLIK*/1, /*ESKIME*/60},
+    {"pearl",      "inci",           /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/3, /*ESKIME*/300},
+    {"plastic",    "plastik",        /*YEMEK*/FALSE, /*TASIYICI*/FALSE,  /*TEKSTIL*/FALSE,  /*ZIRH*/FALSE,  /*SILAH*/FALSE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/100},
+    {"platinum",   "platin",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/21, /*ESKIME*/700},
+    {"porcelain",  "porselen",       /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/2, /*ESKIME*/200},
+    {"quartz",     "kuvars",         /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/3, /*ESKIME*/350},
+    {"rubber",     "lastik",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/2, /*ESKIME*/120},
+    {"ruby",       "yakut",          /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/4, /*ESKIME*/350},
+    {"sandstone",  "kumtaşı",        /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/2, /*ESKIME*/40},
+    {"sapphire",   "safir",          /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/4, /*ESKIME*/400},
+    {"satin",      "saten",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/100},
+    {"silk",       "ipek",           /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/90},
+    {"silver",     "gümüş",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/10, /*ESKIME*/500},
+    {"skin",       "deri",           /*YEMEK*/TRUE,  /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/200},
+    {"snakeskin",  "yılanderisi",    /*YEMEK*/TRUE,  /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/350},
+    {"softwood",   "yumuşaktahta",   /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/200},
+    {"steel",      "çelik",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/8, /*ESKIME*/600},
+    {"stone",      "taş",            /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/3, /*ESKIME*/400},
+    {"tin",        "teneke",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/7, /*ESKIME*/300},
+    {"titanium",   "titanyum",       /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/TRUE,  /*PARSOMEN*/FALSE, /*OAGIRLIK*/5, /*ESKIME*/600},
+    {"vellum",     "tirşe",          /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/TRUE,  /*OAGIRLIK*/1, /*ESKIME*/60},
+    {"velvet",     "kadife",         /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/120},
+    {"water",      "su",             /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/1000},
+    {"wax",        "balmumu",        /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/100},
+    {"wheat",      "buğday",         /*YEMEK*/TRUE,  /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/5},
+    {"wood",       "tahta",          /*YEMEK*/FALSE, /*TASIYICI*/TRUE,  /*TEKSTIL*/FALSE, /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/150},
+    {"wool",       "yün",            /*YEMEK*/TRUE,  /*TASIYICI*/TRUE,  /*TEKSTIL*/TRUE,  /*ZIRH*/TRUE,  /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/240},
+    {NULL,         NULL,             /*YEMEK*/FALSE, /*TASIYICI*/FALSE, /*TEKSTIL*/FALSE, /*ZIRH*/FALSE, /*SILAH*/FALSE, /*PARSOMEN*/FALSE, /*OAGIRLIK*/1, /*ESKIME*/0}
 };
+_Static_assert(sizeof material_table / sizeof material_table[0] == MAX_MATERIALS,
+	       "MAX_MATERIALS material_table ile uyuşmuyor");
+
+int material_index(const char *name)
+{
+    int i;
+
+    for (i = 0; material_table[i].name != NULL; i++)
+	if (!str_cmp(name, material_table[i].name))
+	    return i;
+
+    return -1;
+}
 
 const   struct  wand_spell_type    wand_spell_table[] =
 {
@@ -666,3 +680,9 @@ const   struct  wand_spell_type    wand_spell_table[] =
     {"şimşek çağrısı"},
     {NULL}
 };
+
+const int wand_spell_count = (int)(sizeof wand_spell_table / sizeof wand_spell_table[0]) - 1;
+/* obj_creator.c:obj_random_wand_potion_spell hâlâ 76 sabitini kullanıyor;
+   wand_spell_count'a geçene kadar tablo boyu burada sabitlenir. */
+_Static_assert(sizeof wand_spell_table / sizeof wand_spell_table[0] == 76 + 1,
+	       "wand_spell_table boyu değişti: obj_creator.c'deki 76 sabitini wand_spell_count yap");

@@ -128,7 +128,7 @@ bool utf8_is_alpha_cp(uint32_t c)
         return true;
     if (c >= 0xC0 && c <= 0xFF && c != 0xD7 && c != 0xF7)
         return true;
-    return c == 0x11E || c == 0x11F || c == 0x130 || c == 0x131 || c == 0x15E || c == 0x15F;
+    return c >= 0x100 && c <= 0x17F;   /* Latin Extended-A: Ğ ğ İ ı Ş ş Ł ő ... */
 }
 
 bool utf8_is_upper_cp(uint32_t c)
@@ -206,6 +206,7 @@ static uint32_t latin5_to_cp(unsigned char b)
 
 void utf8_from_latin5(char *buf, size_t cap)
 {
+    char stack[4096];
     char *tmp;
     const char *p;
     size_t o = 0;
@@ -216,7 +217,7 @@ void utf8_from_latin5(char *buf, size_t cap)
     if (utf8_valid(buf))
         return;
 
-    tmp = (char *)malloc(cap);
+    tmp = cap <= sizeof stack ? stack : (char *)malloc(cap);
     if (tmp == NULL)
         return;
 
@@ -232,7 +233,8 @@ void utf8_from_latin5(char *buf, size_t cap)
     }
     tmp[o] = '\0';
     memcpy(buf, tmp, o + 1);
-    free(tmp);
+    if (tmp != stack)
+        free(tmp);
 }
 
 void utf8_truncate(char *s, size_t maxbytes)
@@ -248,6 +250,32 @@ void utf8_truncate(char *s, size_t maxbytes)
         i += (size_t)len;
     }
     s[i] = '\0';
+}
+
+void utf8_fit(const char *s, int width, char *out, size_t cap)
+{
+    size_t o = 0;
+    int cols = 0, len;
+    uint32_t cp;
+
+    if (cap == 0)
+        return;
+
+    while (cols < width && (len = utf8_decode(s, &cp)) > 0)
+    {
+        if (o + (size_t)len + 1 > cap)
+            break;
+        memcpy(out + o, s, (size_t)len);
+        o += (size_t)len;
+        s += len;
+        cols++;
+    }
+    while (cols < width && o + 2 <= cap)
+    {
+        out[o++] = ' ';
+        cols++;
+    }
+    out[o] = '\0';
 }
 
 bool utf8_str_cmp(const char *a, const char *b)

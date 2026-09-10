@@ -38,6 +38,9 @@ bool     utf8_valid(const char *s);
 void     utf8_from_latin5(char *buf, size_t cap);
 /* Dizgiyi kod noktası sınırında en fazla maxbytes bayta kısaltır. */
 void     utf8_truncate(char *s, size_t maxbytes);
+/* printf'in %-N.Ns kalıbının UTF-8 karşılığı: s'yi width görsel sütuna kod
+   noktası sınırında kesip boşlukla doldurarak out'a yazar (cap tampon boyutu). */
+void     utf8_fit(const char *s, int width, char *out, size_t cap);
 /* Büyük/küçük harf duyarsız karşılaştırmalar; farklıysa true (ROM geleneği). */
 bool     utf8_str_cmp(const char *a, const char *b);
 bool     utf8_str_prefix(const char *a, const char *b);
