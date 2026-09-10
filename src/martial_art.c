@@ -126,6 +126,16 @@ void str_fill_name( char *dst, size_t n, const char *tmpl, const char *name )
     dst[o] = '\0';
 }
 
+/* "frenzy" büyüsünün gsn karşılığı yok: bir kez arayıp sakla. */
+static int frenzy_sn( void )
+{
+    static sh_int sn;
+
+    if ( sn <= 0 )
+	sn = skill_lookup( "frenzy" );
+    return sn;
+}
+
 /*
  * Disarm a creature.
  * Caller must check for successful attack.
@@ -225,7 +235,7 @@ void do_berserk( CHAR_DATA *ch, char *argument)
     }
 
     if (IS_AFFECTED(ch,AFF_BERSERK) || is_affected(ch,gsn_berserk)
-    ||  is_affected(ch,skill_lookup("frenzy")))
+    ||  is_affected(ch,frenzy_sn()))
     {
       send_to_char("Biraz çıldırıyorsun.\n\r",ch);
 	return;
@@ -425,14 +435,7 @@ void do_bash( CHAR_DATA *ch, char *argument )
     		ch,NULL,victim,TO_NOTVICT);
 	check_improve(ch,gsn_bash,TRUE,1);
 
-	wait = 3;
-
-	switch(number_range(0,1)) {
-	case 0: wait = 1; break;
-	case 1: wait = 2; break;
-	case 2: wait = 4; break;
-	case 3: wait = 3; break;
-	}
+	wait = number_range(1,2);
 
 	WAIT_STATE(victim, wait * PULSE_VIOLENCE);
 	WAIT_STATE(ch,skill_table[gsn_bash].beats);
@@ -1129,12 +1132,12 @@ void do_kick( CHAR_DATA *ch, char *argument )
 	return;
     }
     chance = number_percent( );
-    if ( IS_AFFECTED(ch,AFF_FLYING) ) chance = (int)((float)chance*1.1);
+    if ( IS_AFFECTED(ch,AFF_FLYING) ) chance = chance * 11 / 10;
     WAIT_STATE( ch, skill_table[gsn_kick].beats );
     if ( IS_NPC(ch) || chance < get_skill(ch,gsn_kick) )
     {
 	kick_dam = number_range(1,ch->level);
-	if ((ch->iclass == 9) && ( get_eq_char(ch,WEAR_FEET) == NULL) )
+	if ((ch->iclass == CLASS_SAMURAI) && ( get_eq_char(ch,WEAR_FEET) == NULL) )
 		kick_dam *= 2;
 	kick_dam += ch->damroll / 2;
 	damage( ch,victim,kick_dam,gsn_kick,DAM_BASH, TRUE );
@@ -1326,7 +1329,7 @@ void do_nerve(CHAR_DATA *ch, char *argument)
 
   one_argument(argument,arg);
 
-  if (ch->level < skill_table[gsn_nerve].skill_level[ch->iclass] )
+  if (!IS_NPC(ch) && ch->level < skill_table[gsn_nerve].skill_level[ch->iclass] )
     {
       send_to_char( "Hı?\n\r", ch );
       return;
@@ -1452,7 +1455,7 @@ void do_tame(CHAR_DATA *ch, char *argument)
 
   if (IS_NPC(ch))
     {
-      send_to_char("Önce kendini uysallaştırsan????",ch);
+      send_to_char("Önce kendini uysallaştırsan????\n\r",ch);
       return;
     }
 
@@ -1569,10 +1572,11 @@ void do_assassinate( CHAR_DATA *ch, char *argument )
 
   WAIT_STATE( ch, skill_table[gsn_assassinate].beats );
 
-  chance += (int)( get_curr_stat( ch , STAT_STR ) / 4 );
-  chance += (int)( get_curr_stat( ch , STAT_DEX ) / 2 );
-  chance += (int)( ch->pcdata->familya[victim->race] / 25 ) ;
-  chance += (int)( ( get_skill( ch , gsn_assassinate ) - 75 ) / 2 ) ;
+  chance += get_curr_stat( ch , STAT_STR ) / 4;
+  chance += get_curr_stat( ch , STAT_DEX ) / 2;
+  if ( !IS_NPC(ch) )
+    chance += ch->pcdata->familya[victim->race] / 25;
+  chance += ( get_skill( ch , gsn_assassinate ) - 75 ) / 2;
   
 	// en azindan bir eli dolu
 	if ( get_eq_char(ch, WEAR_LEFT) != NULL
@@ -1666,6 +1670,7 @@ void do_caltraps(CHAR_DATA *ch, char *argument)
       todam.bitvector = 0;
       affect_to_char( victim, &todam);
 
+      todex.where = TO_AFFECTS;
       todex.type = gsn_caltraps;
       todex.level = ch->level;
       todex.duration = -1;
@@ -1848,7 +1853,7 @@ void do_strangle(CHAR_DATA *ch, char *argument)
     WAIT_STATE(ch,skill_table[gsn_strangle].beats);
 
     if (IS_NPC(ch)) chance = UMIN( 35, ch->level /2 );
-    else chance = (int)(0.6 * (float)get_skill(ch,gsn_strangle));
+    else chance = get_skill(ch,gsn_strangle) * 3 / 5;
 
     if ( IS_NPC(victim) && victim->pIndexData->pShop != NULL )
 	   chance -= 40;
@@ -1880,8 +1885,9 @@ void do_strangle(CHAR_DATA *ch, char *argument)
 
 	damage(ch,victim,0,gsn_strangle,DAM_NONE, TRUE);
 	check_improve(ch,gsn_strangle,FALSE,1);
-	victim_yell( victim, ch, "İmdat! Biri beni boğuyor!",
-		     "İmdat! %s beni boğazlıyor!" );
+	if (!IS_NPC(victim))
+	    victim_yell( victim, ch, "İmdat! Biri beni boğuyor!",
+			 "İmdat! %s beni boğazlıyor!" );
         af.type = gsn_neckguard;
         af.where = TO_AFFECTS;
         af.level = victim->level;
@@ -1938,7 +1944,7 @@ void do_blackjack(CHAR_DATA *ch, char *argument)
 
     if (is_affected(victim,gsn_headguard) )
     {
-      act( "$N boynunu koruyor!.", ch, NULL, victim, TO_CHAR );
+      act( "$N kafasını koruyor.", ch, NULL, victim, TO_CHAR );
 	return;
     }
 
@@ -1949,7 +1955,7 @@ void do_blackjack(CHAR_DATA *ch, char *argument)
 
     WAIT_STATE(ch,skill_table[gsn_blackjack].beats);
 
-    chance = (int)(0.5 * (float)get_skill(ch,gsn_blackjack));
+    chance = get_skill(ch,gsn_blackjack) / 2;
     chance += URANGE( 0, (get_curr_stat(ch,STAT_DEX)-20)*2, 10);
     chance += can_see(victim, ch) ? 0 : 5;
     if ( IS_NPC(victim) )
@@ -1985,10 +1991,8 @@ void do_blackjack(CHAR_DATA *ch, char *argument)
 	damage(ch,victim,ch->level / 2,gsn_blackjack,DAM_NONE, TRUE);
 	check_improve(ch,gsn_blackjack,FALSE,1);
 	if (!IS_NPC(victim))
-	{
-	victim_yell( victim, ch, "İmdat! Biri beni copluyor!",
-		     "İmdat! %s beni copluyor!" );
-	}
+	    victim_yell( victim, ch, "İmdat! Biri beni copluyor!",
+			 "İmdat! %s beni copluyor!" );
         af.type = gsn_headguard;
         af.where = TO_AFFECTS;
         af.level = victim->level;
@@ -2206,7 +2210,7 @@ void do_trophy(CHAR_DATA *ch, char *argument)
       return;
     }
 
-    if ( number_percent( ) < (get_skill( ch, gsn_trophy )/3)*2 )
+    if ( number_percent( ) > (get_skill( ch, gsn_trophy )/3)*2 )
     {
       send_to_char("Başaramadın ve onu parçaladın.\n\r", ch);
       extract_obj(part);
@@ -2262,11 +2266,11 @@ void do_trophy(CHAR_DATA *ch, char *argument)
 	  trophy = create_object( get_obj_index( trophy_vnum ), level );
 	  trophy->timer = ch->level * 2;
 
-	  snprintf(buf, sizeof(buf), trophy->short_descr, part->from );
+	  str_fill_name( buf, sizeof(buf), trophy->short_descr, part->from );
 	  free_string( trophy->short_descr );
 	  trophy->short_descr = str_dup( buf );
 
-	  snprintf(buf, sizeof(buf), trophy->description, part->from );
+	  str_fill_name( buf, sizeof(buf), trophy->description, part->from );
 	  free_string( trophy->description );
 	  trophy->description = str_dup( buf );
 	  trophy->cost  = 0;
@@ -2553,12 +2557,12 @@ CHAR_DATA *check_guard(CHAR_DATA *ch, CHAR_DATA *mob)
   else
     {
       chance = (get_skill(ch->guarded_by,gsn_guard) -
-		(int)(1.5 * (float)(ch->level - mob->level)));
+		(ch->level - mob->level) * 3 / 2);
       if (number_percent() < UMIN(100,chance))
 	{
     act("$n kendini $S önüne atıyor!",ch->guarded_by,NULL,ch,TO_NOTVICT);
 	  act("$n kendini senin önüne atıyor!",ch->guarded_by,NULL,ch,TO_VICT);
-	  act("Kendini $S önüne atıyorsunN!",ch->guarded_by,NULL,ch,TO_CHAR);
+	  act("Kendini $S önüne atıyorsun!",ch->guarded_by,NULL,ch,TO_CHAR);
 	  check_improve(ch->guarded_by,gsn_guard,TRUE,3);
 	  return ch->guarded_by;
 	}
@@ -2711,7 +2715,7 @@ void do_target (CHAR_DATA *ch, char *argument)
   if (!IS_NPC(ch) && number_percent() <
 	(get_skill(ch,gsn_target) / 2) )
     {
-      check_improve(ch,gsn_target,FALSE,1);
+      check_improve(ch,gsn_target,TRUE,1);
 
     ch->fighting = victim;
 
@@ -2743,7 +2747,7 @@ void do_tiger( CHAR_DATA *ch, char *argument)
     act("$n 10 kaplan gücünü çağırıyor!.",ch,NULL,NULL,TO_ROOM);
 
     if (IS_AFFECTED(ch,AFF_BERSERK) || is_affected(ch,gsn_berserk) ||
-    is_affected(ch,gsn_tiger_power) || is_affected(ch,skill_lookup("frenzy")))
+    is_affected(ch,gsn_tiger_power) || is_affected(ch,frenzy_sn()))
     {
       send_to_char("Azıcık delirdin.\n\r",ch);
 	return;
@@ -2835,7 +2839,8 @@ void do_hara( CHAR_DATA *ch, char *argument)
         return;
     }
 
-    if ( (chance = get_skill(ch,gsn_hara_kiri)) == 0
+    if ( IS_NPC(ch)
+    ||   (chance = get_skill(ch,gsn_hara_kiri)) == 0
     ||   ch->level < skill_table[gsn_hara_kiri].skill_level[ch->iclass])
     {
       send_to_char("Kendini öldürmeyi deniyorsun ama acıya dayanamayınca vazgeçiyorsun.\n\r",ch);
@@ -2855,15 +2860,8 @@ void do_hara( CHAR_DATA *ch, char *argument)
 	return;
     }
 
-    if (is_affected(ch,gsn_hara_kiri) )
-	{
-    send_to_char("Bir deneme daha seni öldürecek.\n\r",ch);
-	 return;
-	}
     if (number_percent() < chance)
     {
-	AFFECT_DATA af;
-
 	WAIT_STATE(ch,PULSE_VIOLENCE);
 
         ch->hit = 1;
@@ -2962,6 +2960,7 @@ int ground_strike( CHAR_DATA *ch, CHAR_DATA *victim,   int dam )
       check_improve( ch, gsn_ground_strike, TRUE, 4 );
       if (!IS_AFFECTED(victim,AFF_BLIND))
       {
+        baf.where = TO_AFFECTS;
         baf.type = gsn_dirt;
         baf.level = ch->level;
         baf.location = APPLY_HITROLL;
@@ -3040,6 +3039,7 @@ int critical_strike( CHAR_DATA *ch, CHAR_DATA *victim,   int dam )
 	check_improve( ch, gsn_critical, TRUE, 4 );
 	if (!IS_AFFECTED(victim,AFF_BLIND))
 	{
+          baf.where = TO_AFFECTS;
           baf.type = gsn_dirt;
 	  baf.level = ch->level;
 	  baf.location = APPLY_HITROLL;
@@ -3104,7 +3104,7 @@ void do_shield( CHAR_DATA *ch, char *argument )
 	return;
 
     if (axe->value[0] == WEAPON_AXE )
-	chance = (int)((float)chance*1.2);
+	chance = chance * 6 / 5;
     else if (axe->value[0] != WEAPON_SWORD)
 	{
     send_to_char( "Silahın bir kılıç veya bir balta olmalı.\n\r",ch);
@@ -3113,12 +3113,12 @@ void do_shield( CHAR_DATA *ch, char *argument )
 
     /* find weapon skills */
     ch_weapon = get_weapon_skill(ch,get_weapon_sn(ch,FALSE));
-    vict_shield = get_skill(ch,gsn_shield_block);
+    vict_shield = UMAX( 1, get_skill(victim,gsn_shield_block) );
     /* modifiers */
 
     /* skill */
-   chance = (int)(chance * ch_weapon / 200);
-   chance = (int)(chance * 100 / vict_shield);
+    chance = chance * ch_weapon / 200;
+    chance = chance * 100 / vict_shield;
 
     /* dex vs. strength */
     chance += get_curr_stat(ch,STAT_DEX);
@@ -3138,7 +3138,7 @@ void do_shield( CHAR_DATA *ch, char *argument )
     	act("$n senin kalkanını ikiye böldü.",ch,NULL,victim,TO_VICT);
     	act("$n $S kalkanını ikiye böldü.",ch,NULL,victim,TO_NOTVICT);
 	check_improve(ch,gsn_shield_cleave,TRUE,1);
-	extract_obj( get_shield_char(victim) );
+	extract_obj( shield );
     }
     else
     {
@@ -3189,7 +3189,7 @@ void do_weapon( CHAR_DATA *ch, char *argument )
 
 
     if (axe->value[0] == WEAPON_AXE )
-	chance = (int)((float)chance*1.2);
+	chance = chance * 6 / 5;
     else if (axe->value[0] != WEAPON_SWORD)
 	{
     send_to_char("Silahın bir kılıç veya bir balta olmalı.\n\r",ch);
@@ -3198,7 +3198,7 @@ void do_weapon( CHAR_DATA *ch, char *argument )
 
     /* find weapon skills */
     ch_weapon = get_weapon_skill(ch,get_weapon_sn(ch,FALSE));
-    vict_weapon = get_weapon_skill(victim,get_weapon_sn(victim,FALSE));
+    vict_weapon = UMAX( 1, get_weapon_skill(victim,get_weapon_sn(victim,FALSE)) );
     /* modifiers */
 
     /* skill */
@@ -3222,7 +3222,7 @@ void do_weapon( CHAR_DATA *ch, char *argument )
     	act("$n senin silahını ikiye böldü.",ch,NULL,victim,TO_VICT);
     	act("$n $S silahını ikiye böldü.",ch,NULL,victim,TO_NOTVICT);
 	check_improve(ch,gsn_weapon_cleave,TRUE,1);
-	extract_obj( get_wield_char(victim,FALSE) );
+	extract_obj( wield );
     }
     else
     {
@@ -3355,14 +3355,7 @@ void do_tail( CHAR_DATA *ch, char *argument )
 		ch,NULL,victim,TO_NOTVICT);
 	check_improve(ch,gsn_tail,TRUE,1);
 
-	wait = 3;
-
-	switch(number_range(0,1)) {
-	case 0: wait = 1; break;
-	case 1: wait = 2; break;
-	case 2: wait = 4; break;
-	case 3: wait = 3; break;
-	}
+	wait = number_range(1,2);
 
 	WAIT_STATE(victim, wait * PULSE_VIOLENCE);
 	WAIT_STATE(ch,skill_table[gsn_tail].beats);
@@ -3571,7 +3564,7 @@ void do_katana(CHAR_DATA *ch, char *argument)
       return;
     }
 
-    if ( number_percent( ) < (get_skill( ch, gsn_katana )/3)*2 )
+    if ( number_percent( ) > (get_skill( ch, gsn_katana )/3)*2 )
     {
       send_to_char( "Başaramadın ve onu yokettin.\n\r", ch);
       extract_obj(part);
@@ -3610,12 +3603,16 @@ void do_katana(CHAR_DATA *ch, char *argument)
 
       katana->value[2] = ch->level / 10;
 
-      snprintf(buf, sizeof(buf),katana->pIndexData->extra_descr->description,ch->name );
-      katana->extra_descr = new_extra_descr();
-      katana->extra_descr->keyword =
-		str_dup( katana->pIndexData->extra_descr->keyword );
-      katana->extra_descr->description = str_dup( buf );
-      katana->extra_descr->next = NULL;
+      if ( katana->pIndexData->extra_descr != NULL )
+      {
+	  EXTRA_DESCR_DATA *src = katana->pIndexData->extra_descr;
+
+	  str_fill_name( buf, sizeof(buf), src->description, ch->name );
+	  katana->extra_descr = new_extra_descr();
+	  katana->extra_descr->keyword = str_dup( src->keyword );
+	  katana->extra_descr->description = str_dup( buf );
+	  katana->extra_descr->next = NULL;
+      }
 
       obj_to_char(katana, ch);
       check_improve(ch, gsn_katana, TRUE, 1);
@@ -3711,14 +3708,7 @@ void do_crush( CHAR_DATA *ch, char *argument )
     	act("$n $M büyük bir güçle eziyor.",
 		ch,NULL,victim,TO_NOTVICT);
 
-	wait = 3;
-
-	switch(number_range(0,1)) {
-	case 0: wait = 1; break;
-	case 1: wait = 2; break;
-	case 2: wait = 4; break;
-	case 3: wait = 3; break;
-	}
+	wait = number_range(1,2);
 
 	WAIT_STATE(victim, wait * PULSE_VIOLENCE);
 	WAIT_STATE(ch,skill_table[gsn_crush].beats);
