@@ -174,10 +174,11 @@ void say_spell( CHAR_DATA *ch, int sn )
     char buf  [MAX_STRING_LENGTH];
     char buf2 [MAX_STRING_LENGTH];
     CHAR_DATA *rch;
-    char *pName;
+    const char *pName;
     int iSyl;
     int length;
     int skill;
+    size_t used;
 
     struct syl_type
     {
@@ -220,14 +221,18 @@ void say_spell( CHAR_DATA *ch, int sn )
 	{ "", "" }
     };
 
+    /* Büyünün İngilizce adı (name[0]) hece hece "sihirli sözcüklere" çevrilir. */
     buf[0]	= '\0';
-    for ( pName = (char*)skill_table[sn].name; *pName != '\0'; pName += length )
+    used	= 0;
+    for ( pName = skill_table[sn].name[0]; *pName != '\0'; pName += length )
     {
 	for ( iSyl = 0; (length = strlen(syl_table[iSyl].old)) != 0; iSyl++ )
 	{
 	    if ( !str_prefix( syl_table[iSyl].old, pName ) )
 	    {
-		strcat( buf, syl_table[iSyl].inew );
+		used += snprintf( buf + used, sizeof(buf) - used, "%s", syl_table[iSyl].inew );
+		if ( used >= sizeof(buf) - 1 )
+		    used = sizeof(buf) - 1;
 		break;
 	    }
 	}
@@ -243,17 +248,9 @@ void say_spell( CHAR_DATA *ch, int sn )
     {
 	if ( rch != ch )
 	{
-         skill = (get_skill(rch,gsn_spell_craft) * 9) / 10;
-	 if (skill < number_percent() )
-	  {
-	    act(buf2 , ch, NULL, rch, TO_VICT );
+	    skill = (get_skill(rch,gsn_spell_craft) * 9) / 10;
+	    act( skill < number_percent() ? buf2 : buf, ch, NULL, rch, TO_VICT );
 	    check_improve( rch, gsn_spell_craft, TRUE, 5 );
-	  }
-	 else
-	  {
-	    act( buf, ch, NULL, rch, TO_VICT );
-	    check_improve( rch, gsn_spell_craft, TRUE, 5 );
-	  }
 	}
     }
 
@@ -334,6 +331,47 @@ bool check_dispel( int dis_level, CHAR_DATA *victim, int sn)
 }
 
 /*
+ * Ada göre bir kez çözülen büyü numaraları. skill_table açılıştan sonra
+ * değişmez; bu yüzden her büyüde doğrusal skill_lookup yapmak yerine dosya
+ * içinde önbelleğe alınır (const.c'de gsn_* karşılığı olmayan büyüler için).
+ */
+enum
+{
+    MSN_CALM,
+    MSN_FRENZY,
+    MSN_HEAL,
+    MSN_REFRESH,
+    MSN_FIREBALL,
+    MSN_ICEBALL,
+    MSN_CHAIN_LIGHTNING,
+    MSN_VENTRILOQUATE,
+    MSN_MAX
+};
+
+static struct { const char *name; int sn; } msn_table[MSN_MAX] =
+{
+    [MSN_CALM]		= { "calm",		0 },
+    [MSN_FRENZY]	= { "frenzy",		0 },
+    [MSN_HEAL]		= { "heal",		0 },
+    [MSN_REFRESH]	= { "refresh",		0 },
+    [MSN_FIREBALL]	= { "fireball",		0 },
+    [MSN_ICEBALL]	= { "iceball",		0 },
+    [MSN_CHAIN_LIGHTNING] = { "chain lightning", 0 },
+    [MSN_VENTRILOQUATE]	= { "ventriloquate",	0 }
+};
+
+static int msn( int idx )
+{
+    if ( msn_table[idx].sn == 0 )
+    {
+	msn_table[idx].sn = skill_lookup( msn_table[idx].name );
+	if ( msn_table[idx].sn < 0 )
+	    bugf( "magic.c: '%s' büyüsü skill_table'da yok.", msn_table[idx].name );
+    }
+    return msn_table[idx].sn;
+}
+
+/*
  * for casting different rooms
  * returned value is the range
  */
@@ -341,7 +379,7 @@ int allowed_other( CHAR_DATA *ch, int sn)
 {
  if (skill_table[sn].minimum_position == POS_STANDING
   	|| skill_table[sn].skill_level[ch->iclass] < 26
-	|| sn == find_spell(ch,"chain lightning") ) return 0;
+	|| sn == msn(MSN_CHAIN_LIGHTNING) ) return 0;
  else return skill_table[sn].skill_level[ch->iclass] / 10;
 }
 
@@ -350,309 +388,331 @@ int allowed_other( CHAR_DATA *ch, int sn)
  */
 char *target_name;
 
-void do_cast( CHAR_DATA *ch, char *argument )
-{
-    char arg1[MAX_INPUT_LENGTH];
-    char arg2[MAX_INPUT_LENGTH];
-    char buf[MAX_STRING_LENGTH];
-    CHAR_DATA *victim;
-    OBJ_DATA *obj;
-    void *vo;
-    int mana;
-    int sn;
-    int target;
-    int cast_far = 0, door, range;
+/* Ölümden sonra bu kadar saniye karakter "yeni ölmüş" sayılır. */
+#define DEATH_GRACE_SECS	10
+/* Ölümden sonra intikam (revenge) büyüsü için tanınan süre (saniye). */
+#define REVENGE_WINDOW_SECS	600
+/* Bir büyücünün aynı türden en çok kaç uşağı olabilir. */
+#define MAX_SUMMONED_ELM	2
+/* Çağrılan/canlandırılan yaratığın yaşam puanı tavanı. */
+#define MOB_MAX_HP		30000
+/* locate/find object'te ölümsüzler için sonuç sınırı. */
+#define LOCATE_IMM_MAX		200
 
-    /*
-     * Switched NPC's can cast spells, but others can't.
-     */
-    if ( IS_NPC(ch) && ch->desc == NULL)
+/* Karakter az önce öldü mü? (yaratık: POS_DEAD, oyuncu: son ölüm zamanı) */
+static bool recently_dead( CHAR_DATA *ch )
+{
+    if ( IS_NPC(ch) )
+	return ch->position == POS_DEAD;
+    return ch->last_death_time != -1
+	&& current_time - ch->last_death_time < DEATH_GRACE_SECS;
+}
+
+/*
+ * Büyüyle saldırıya uğrayan kurban büyücüye bağırır: yalnızca büyücü oyuncuysa,
+ * ikisi zaten dövüşmüyorsa ve kurban oyuncu ya da büyülenmiş yaratıksa.
+ * Büyücüyü göremiyorsa "İmdat!" der; doppelganger'ın adı kullanılır.
+ */
+void victim_yell_at_caster( CHAR_DATA *victim, CHAR_DATA *ch )
+{
+    char buf[MAX_STRING_LENGTH];
+
+    if ( IS_NPC(ch) || victim == ch
+    ||   ch->fighting == victim || victim->fighting == ch
+    ||   !( IS_SET(victim->affected_by, AFF_CHARM) || !IS_NPC(victim) ) )
 	return;
 
-     if (is_affected(ch, gsn_shielding) )
+    if ( !can_see(victim, ch) )
+    {
+	do_yell(victim, "İmdat! Biri bana saldırıyor!");
+	return;
+    }
+
+    snprintf(buf, sizeof(buf), "Geber %s, seni büyücü köpek!",
+	( is_affected(ch, gsn_doppelganger) && !IS_IMMORTAL(victim) )
+	    ? ch->doppel->name : ch->name);
+    do_yell(victim, buf);
+}
+
+/*
+ * Büyücünün kendi büyüyıkımı hedefsiz (ya da eşyaya yapılan) büyüyü saptırır.
+ * wait: komutla atılan büyüde bekleme süresi uygulanır.
+ */
+static bool spellbane_backfire( CHAR_DATA *ch, int sn, bool wait )
+{
+    if ( !is_affected(ch, gsn_spellbane) )
+	return FALSE;
+
+    if ( wait )
+	WAIT_STATE( ch, skill_table[sn].beats );
+    act("Büyüyıkımın büyüyü saptırıyor!",ch,NULL,NULL,TO_CHAR);
+    act("$s büyüyıkımı büyüyü saptırıyor!",ch,NULL,NULL,TO_ROOM);
+    check_improve(ch,gsn_spellbane,TRUE,1);
+    damage(ch,ch,3 * ch->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
+    return TRUE;
+}
+
+/*
+ * Kurbanın büyüyıkımı büyüyü saptırır mı?
+ * roll: saldırgan büyüde beceri zarı atılır (zihin bıçağı ve şimşek nefesi
+ * saptırılamaz); dam_mult: hasar çarpanı (komutla 3x, eşyayla 10x);
+ * retaliate: kurban karşı saldırıya geçer; wait: bekleme süresi uygulanır.
+ */
+static bool spellbane_deflects( CHAR_DATA *ch, CHAR_DATA *victim, int sn,
+			        int dam_mult, bool roll, bool retaliate, bool wait )
+{
+    if ( !is_affected(victim, gsn_spellbane) )
+	return FALSE;
+    if ( roll
+    &&   ( number_percent() >= 2 * get_skill(victim, gsn_spellbane) / 3
+	|| sn == gsn_mental_knife || sn == gsn_lightning_breath ) )
+	return FALSE;
+
+    if ( wait )
+	WAIT_STATE( ch, skill_table[sn].beats );
+
+    if ( ch == victim )
+    {
+	act("Büyüyıkımın büyüyü yansıtıyor!",ch,NULL,NULL,TO_CHAR);
+	act("$s büyüyıkımı büyüyü saptırıyor!",ch,NULL,NULL,TO_ROOM);
+	check_improve(ch,gsn_spellbane,TRUE,1);
+	damage(ch,ch,dam_mult * ch->level,gsn_spellbane,DAM_NEGATIVE,TRUE);
+	return TRUE;
+    }
+
+    act("$N büyünü saptırıyor!",ch,NULL,victim,TO_CHAR);
+    act("$s büyüsünü saptırıyorsun!",ch,NULL,victim,TO_VICT);
+    act("$N $s büyüsünü saptırıyor!",ch,NULL,victim,TO_NOTVICT);
+    check_improve(victim,gsn_spellbane,TRUE,1);
+    damage(victim,ch,dam_mult * victim->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
+    if ( retaliate )
+	multi_hit(victim,ch,TYPE_UNDEFINED);
+    return TRUE;
+}
+
+/* Kurbanın soğurma alanı büyüyü emer mi? (harcanan mana kurbana geçer) */
+static bool absorb_check( CHAR_DATA *ch, CHAR_DATA *victim, int sn, int mana )
+{
+    if ( ch == victim || !CAN_DETECT(victim, ADET_ABSORB)
+    ||   number_percent() >= 2 * get_skill(victim, gsn_absorb) / 3
+    ||   sn == gsn_mental_knife || sn == gsn_lightning_breath )
+	return FALSE;
+
+    act("Büyün $S enerji alanını geçemiyor!",ch,NULL,victim,TO_CHAR);
+    act("$s büyüsünü soğuruyorsun!",ch,NULL,victim,TO_VICT);
+    act("$N $s büyüsünü soğuruyor!",ch,NULL,victim,TO_NOTVICT);
+    check_improve(victim,gsn_absorb,TRUE,1);
+    victim->mana += mana;
+    return TRUE;
+}
+
+/*
+ * Saldırgan büyüden sonra kurban (hâlâ odadaysa ve dövüşmüyorsa) büyücüye
+ * saldırır. skip_sleeping: komutla atılan büyüde uyuyan kurban saldırmaz.
+ */
+static void cast_retaliate( CHAR_DATA *ch, CHAR_DATA *victim, int sn, int target,
+			    bool skip_sleeping )
+{
+    CHAR_DATA *vch;
+
+    if ( ch->in_room == NULL || victim == NULL || victim == ch )
+	return;
+    if ( skill_table[sn].target != TAR_CHAR_OFFENSIVE
+    &&   !( skill_table[sn].target == TAR_OBJ_CHAR_OFF && target == TARGET_CHAR ) )
+	return;
+
+    for ( vch = ch->in_room->people; vch != NULL; vch = vch->next_in_room )
+    {
+	if ( vch == victim )
 	{
-    send_to_char( "Gerçek Kaynağa erişeceğin sırada birşeyin seni engellediğini hissediyorsun.\n\r",ch);
-	 return;
+	    if ( victim->fighting == NULL && victim->master != ch
+	    &&   ( !skip_sleeping || victim->position != POS_SLEEPING ) )
+		multi_hit( victim, ch, TYPE_UNDEFINED );
+	    break;
+	}
+    }
+}
+
+/* Büyünün mana bedeli. */
+static int cast_mana_cost( CHAR_DATA *ch, int sn )
+{
+    if ( ch->level + 2 == skill_table[sn].skill_level[ch->iclass] )
+	return 50;
+    return UMAX( skill_table[sn].min_mana,
+		 100 / ( 2 + ch->level - skill_table[sn].skill_level[ch->iclass] ) );
+}
+
+/*
+ * Büyünün atıldığı etkin seviye: sınıf, kabal, büyü ustalığı (spell craft),
+ * Tılsım'ın mastering spell'i ve zekâ ile belirlenir.
+ */
+static int cast_level( CHAR_DATA *ch, int sn )
+{
+    int slevel;
+
+    if (class_table[ch->iclass].fMana)
+	slevel = ch->level - UMAX(0,(ch->level / 20));
+    else
+	slevel = ch->level - UMAX(5,(ch->level / 10));
+
+    if (skill_table[sn].cabal != CABAL_NONE)
+	slevel = ch->level;
+
+    if ( ch->level > skill_table[gsn_spell_craft].skill_level[ch->iclass])
+    {
+	if (number_percent() < get_skill(ch,gsn_spell_craft) )
+	{
+	    slevel = ch->level;
+	    check_improve( ch, gsn_spell_craft, TRUE, 1 );
+	}
+	check_improve( ch, gsn_spell_craft, FALSE, 1);
+    }
+
+    if (ch->cabal == CABAL_SHALAFI &&
+	ch->level > skill_table[gsn_mastering_spell].skill_level[ch->iclass]
+	&& cabal_ok(ch,gsn_mastering_spell) )
+    {
+	if (number_percent() < get_skill(ch,gsn_mastering_spell) )
+	{
+	    slevel += number_range(1,4);
+	    check_improve( ch, gsn_mastering_spell, TRUE, 1 );
+	}
+    }
+
+    if (get_curr_stat(ch,STAT_INT) > 21 )
+	slevel += get_curr_stat(ch,STAT_INT) - 21;
+    return UMAX(1, slevel);
+}
+
+/*
+ * Saldırgan büyünün kurbanını bulur: hedef verilmemişse dövüşülen, uzak
+ * büyüde (allowed_other) komşu odalardan, yoksa odadan.
+ */
+static bool cast_find_offensive_victim( CHAR_DATA *ch, int sn, const char *arg2,
+					CHAR_DATA **pvictim, int *cast_far, int *door )
+{
+    CHAR_DATA *victim;
+    int range;
+
+    if ( arg2[0] == '\0' )
+    {
+	if ( ( victim = ch->fighting ) == NULL )
+	{
+	    send_to_char("Büyüyü kime yapacaksın?\n\r", ch );
+	    return FALSE;
+	}
+    }
+    else if ( (range = allowed_other(ch,sn)) > 0 )
+    {
+	if ((victim=get_char_spell(ch,target_name,door,range)) == NULL)
+	    return FALSE;
+
+	if (victim->in_room != ch->in_room
+	&& ( (IS_NPC(victim) && IS_SET(victim->act,ACT_NOTRACK))
+	   || is_at_cabal_area(ch) || is_at_cabal_area(victim) ) )
+	{
+	    act("Bu büyüyü $E bu mesafeden yapamazsın.", ch,NULL,victim,TO_CHAR);
+	    return FALSE;
 	}
 
-     if (is_affected(ch, gsn_garble) || is_affected(ch, gsn_deafen))
-     {
-       send_to_char("Doğru tınıyı yakalayamıyorsun.\n\r", ch);
-        return;
-     }
-
-    target_name = one_argument( argument, arg1 );
-    one_argument( target_name, arg2 );
-
-    if ( arg1[0] == '\0' )
+	*cast_far = 1;
+    }
+    else if ( ( victim = get_char_room( ch, target_name ) ) == NULL )
     {
-      send_to_char( "Hangi büyüyü nereye-kime yapacaksın?\n\r", ch );
-	return;
+	send_to_char( "O burada değil.\n\r", ch );
+	return FALSE;
     }
 
-    if (ch->cabal == CABAL_BATTLE && !IS_IMMORTAL(ch))
-    {
-      send_to_char("Sen Öfke Kabalı üyesisin, pis bir büyücü değil!\n\r",ch);
-      return;
-    }
+    if ( !IS_NPC(ch) && is_safe(ch,victim) )
+	return FALSE;
 
-    if (  ( sn = find_spell( ch,arg1 ) ) < 0
-          || ch_skill_nok_nomessage(ch,sn) )
-    {
-      send_to_char( "Bu isimde büyü bilmiyorsun.\n\r", ch );
-	return;
-    }
+    *pvictim = victim;
+    return TRUE;
+}
 
-    if ( ch->iclass == CLASS_VAMPIRE
-	&& !IS_VAMPIRE(ch) && skill_table[sn].cabal == CABAL_NONE)
-    {
-      send_to_char( "Büyüler için önce vampire dönüşmelisin!\n\r",ch);
-      return;
-    }
+/*
+ * Komutla atılan büyünün hedefini çözer; büyüyıkım/soğurma denetimlerini
+ * uygular. Büyü sürdürülmeyecekse FALSE döner (mesaj verilmiştir).
+ */
+static bool cast_find_target( CHAR_DATA *ch, int sn, const char *arg2, int mana,
+			      void **vo, int *target, CHAR_DATA **pvictim,
+			      OBJ_DATA **pobj, int *cast_far, int *door )
+{
+    CHAR_DATA *victim = NULL;
+    OBJ_DATA *obj = NULL;
 
-    if ( skill_table[sn].spell_fun == spell_null )
-    {
-      send_to_char("Bu bir büyü değil.\n\r",ch);
-        return;
-    }
-
-    if ( ch->position < skill_table[sn].minimum_position )
-    {
-      send_to_char( "Yeterince konsantre olamıyorsun.\n\r", ch );
-	return;
-    }
-
-    if (!cabal_ok(ch,sn))
-      return;
-
-    if (IS_SET(ch->in_room->room_flags,ROOM_NO_MAGIC))
-    {
-      send_to_char("Büyün başarısız oldu.\n\r",ch);
-      act("$s büyüsü başarısız oldu.", ch, NULL, NULL, TO_ROOM);
-        return;
-    }
-
-    if (ch->level + 2 == skill_table[sn].skill_level[ch->iclass])
-	mana = 50;
-    else
-	mana = UMAX(
-	    skill_table[sn].min_mana,
-	    100 / ( 2 + ch->level - skill_table[sn].skill_level[ch->iclass] ) );
-
-    /*
-     * Locate targets.
-     */
-    victim	= NULL;
-    obj		= NULL;
-    vo		= NULL;
-    target	= TARGET_NONE;
+    *vo = NULL;
+    *target = TARGET_NONE;
 
     switch ( skill_table[sn].target )
     {
     default:
 	bug( "Do_cast: bad target for sn %d.", sn );
-	return;
+	return FALSE;
 
     case TAR_IGNORE:
-        if ( is_affected(ch,gsn_spellbane))
-          {
-	    WAIT_STATE( ch, skill_table[sn].beats );
-      act("Büyüyıkımın büyüyü saptırıyor!",ch,NULL,NULL,TO_CHAR);
-      act("$s büyüyıkımı büyüyü saptırıyor!",ch,NULL,NULL,TO_ROOM);
-	    check_improve(ch,gsn_spellbane,TRUE,1);
-            damage(ch,ch,3 * ch->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
-            return;
-          }
- 	break;
+	if ( spellbane_backfire( ch, sn, TRUE ) )
+	    return FALSE;
+	break;
 
     case TAR_CHAR_OFFENSIVE:
-	if ( arg2[0] == '\0' )
-	{
-	    if ( ( victim = ch->fighting ) == NULL )
-	    {
-        send_to_char("Büyüyü kime yapacaksın?\n\r", ch );
-		return;
-	    }
-	}
-	else
-	{
-	    if ( (range = allowed_other(ch,sn)) > 0 )
-	    {
- 	     if ((victim=get_char_spell(ch,target_name,&door,range)) == NULL)
-	      return;
+	if ( !cast_find_offensive_victim( ch, sn, arg2, &victim, cast_far, door ) )
+	    return FALSE;
 
-	     if (victim->in_room != ch->in_room
-		&& ( (IS_NPC(victim) && IS_SET(victim->act,ACT_NOTRACK))
-		   || is_at_cabal_area(ch) || is_at_cabal_area(victim) ) )
-	     {
-         act("Bu büyüyü $E bu mesafeden yapamazsın.",
-			ch,NULL,victim,TO_CHAR);
-	      return;
-	     }
-
-	     cast_far = 1;
-	    }
-	    else if ( ( victim = get_char_room( ch, target_name ) ) == NULL )
-	    {
-		send_to_char( "O burada değil.\n\r", ch );
-		return;
-	    }
-	}
-
-	if ( !IS_NPC(ch) && is_safe(ch,victim) )
-		return;
-/*
-	if ( IS_AFFECTED(ch, AFF_CHARM) && ch->master == victim )
-	{
-	    send_to_char( "You can't do that on your own follower.\n\r",
-		ch );
-	    return;
-	}
-*/
-	vo = (void *) victim;
-	target = TARGET_CHAR;
-        if (!IS_NPC(ch) && victim != ch &&
-            ch->fighting != victim && victim->fighting != ch &&
-            (IS_SET(victim->affected_by,AFF_CHARM) || !IS_NPC(victim)))
-          {
-            if (!can_see(victim, ch))
-                do_yell(victim, "İmdat! Biri bana saldırıyor!");
-            else
-              {
-                snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
-                    (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(victim))?
-                     ch->doppel->name : ch->name);
-                 do_yell(victim,buf);
-              }
-          }
-        if ( is_affected(victim,gsn_spellbane) &&
-            (number_percent() < 2*get_skill(victim, gsn_spellbane)/3)
-		&& sn != slot_lookup(524)  && sn != slot_lookup(204) )
-          {
-	    WAIT_STATE( ch, skill_table[sn].beats );
-            if (ch==victim)
-            {
-              act("Büyüyıkımın büyüyü yansıtıyor!",ch,NULL,NULL,TO_CHAR);
-              act("$s büyüyıkımı büyüyü saptırıyor!",ch,NULL,NULL,TO_ROOM);
-	        check_improve(victim,gsn_spellbane,TRUE,1);
-                damage(ch,ch,3 * ch->level,gsn_spellbane,DAM_NEGATIVE,TRUE);
-            }
-            else
-	    {
-        act("$N büyünü saptırıyor!",ch,NULL,victim,TO_CHAR);
-				act("$s büyüsünü saptırıyorsun!",ch,NULL,victim,TO_VICT);
-				act("$N $s büyüsünü saptırıyor!",ch,NULL,victim,TO_NOTVICT);
-	      check_improve(victim,gsn_spellbane,TRUE,1);
-              damage(victim,ch,3 * victim->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
-              multi_hit(victim,ch,TYPE_UNDEFINED);
-            }
-            return;
-          }
-        if ( ch != victim && CAN_DETECT(victim, ADET_ABSORB) &&
-            (number_percent() < 2*get_skill(victim,gsn_absorb)/3)
-		&& sn != slot_lookup(524) && sn != slot_lookup(204))
-	{
-    act("Büyün $S enerji alanını geçemiyor!",ch,NULL,victim,TO_CHAR);
-          act("$s büyüsünü soğuruyorsun!",ch,NULL,victim,TO_VICT);
-          act("$N $s büyüsünü soğuruyor!",ch,NULL,victim,TO_NOTVICT);
-	    check_improve(victim,gsn_absorb,TRUE,1);
-	    victim->mana += mana;
-	    return;
-	}
+	*vo = (void *) victim;
+	*target = TARGET_CHAR;
+	victim_yell_at_caster( victim, ch );
+	if ( spellbane_deflects( ch, victim, sn, 3, TRUE, TRUE, TRUE )
+	||   absorb_check( ch, victim, sn, mana ) )
+	    return FALSE;
 	break;
 
     case TAR_CHAR_DEFENSIVE:
 	if ( arg2[0] == '\0' )
-	{
 	    victim = ch;
-	}
-	else
+	else if ( ( victim = get_char_room( ch, target_name ) ) == NULL )
 	{
-	    if ( ( victim = get_char_room( ch, target_name ) ) == NULL )
-	    {
-		send_to_char( "O burada değil.\n\r", ch );
-		return;
-	    }
+	    send_to_char( "O burada değil.\n\r", ch );
+	    return FALSE;
 	}
 
-	vo = (void *) victim;
-	target = TARGET_CHAR;
-        if ( is_affected(victim,gsn_spellbane) )
-          {
-	    WAIT_STATE( ch, skill_table[sn].beats );
-            if (ch==victim)
-              {
-                act("Büyüyıkımın büyüyü yansıtıyor!",ch,NULL,NULL,TO_CHAR);
-                act("$s büyüyıkımı büyüyü saptırıyor!",ch,NULL,NULL,TO_ROOM);
-	        check_improve(victim,gsn_spellbane,TRUE,1);
-                damage(victim,ch,3 * victim->level,gsn_spellbane,DAM_NEGATIVE, TRUE);              }
-            else {
-              act("$N büyünü saptırıyor!",ch,NULL,victim,TO_CHAR);
-              act("$s büyüsünü saptırıyorsun!",ch,NULL,victim,TO_VICT);
-              act("$N $s büyüsünü saptırıyor!",ch,NULL,victim,TO_NOTVICT);
-	      check_improve(victim,gsn_spellbane,TRUE,1);
-              damage(victim,ch,3 * victim->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
-            }
-            return;
-          }
-        if ( ch != victim && CAN_DETECT(victim, ADET_ABSORB) &&
-            (number_percent() < 2*get_skill(victim,gsn_absorb)/3) )
-	{
-    act("Büyün $S enerji alanını geçemiyor!",ch,NULL,victim,TO_CHAR);
-    act("$s büyüsünü soğuruyorsun!",ch,NULL,victim,TO_VICT);
-    act("$N $s büyüsünü soğuruyor!",ch,NULL,victim,TO_NOTVICT);
-	    check_improve(victim,gsn_absorb,TRUE,1);
-	    victim->mana += mana;
-	    return;
-	}
+	*vo = (void *) victim;
+	*target = TARGET_CHAR;
+	if ( spellbane_deflects( ch, victim, sn, 3, FALSE, FALSE, TRUE )
+	||   absorb_check( ch, victim, sn, mana ) )
+	    return FALSE;
 	break;
 
     case TAR_CHAR_SELF:
 	if ( arg2[0] != '\0' && !is_name( target_name, ch->name ) )
 	{
-    send_to_char( "Bu büyüyü başkasına yapamazsın.\n\r", ch );
-	    return;
+	    send_to_char( "Bu büyüyü başkasına yapamazsın.\n\r", ch );
+	    return FALSE;
 	}
 
-	vo = (void *) ch;
-	target = TARGET_CHAR;
-
-        if ( is_affected(ch,gsn_spellbane) )
-          {
-	    WAIT_STATE( ch, skill_table[sn].beats );
-      act("Büyüyıkımın büyüyü saptırıyor!",ch,NULL,NULL,TO_CHAR);
-      act("$s büyüyıkımı büyüyü saptırıyor!",ch,NULL,NULL,TO_ROOM);
-	    check_improve(ch,gsn_spellbane,TRUE,1);
-            damage(ch,ch,3 * ch->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
-            return;
-          }
-
+	*vo = (void *) ch;
+	*target = TARGET_CHAR;
+	if ( spellbane_backfire( ch, sn, TRUE ) )
+	    return FALSE;
 	break;
 
     case TAR_OBJ_INV:
 	if ( arg2[0] == '\0' )
 	{
-    send_to_char( "Büyü kime yapılacak?\n\r", ch );
-	    return;
+	    send_to_char( "Büyü kime yapılacak?\n\r", ch );
+	    return FALSE;
 	}
 
 	if ( ( obj = get_obj_carry( ch, target_name ) ) == NULL )
 	{
-    send_to_char( "Onu taşımıyorsun.\n\r", ch );
-	    return;
+	    send_to_char( "Onu taşımıyorsun.\n\r", ch );
+	    return FALSE;
 	}
 
-	vo = (void *) obj;
-	target = TARGET_OBJ;
-        if ( is_affected(ch,gsn_spellbane) )
-          {
-	    WAIT_STATE( ch, skill_table[sn].beats );
-      act("Büyüyıkımın büyüyü saptırıyor!",ch,NULL,NULL,TO_CHAR);
-      act("$s büyüyıkımı büyüyü saptırıyor!",ch,NULL,NULL,TO_ROOM);
-	    check_improve(ch,gsn_spellbane,TRUE,1);
-            damage(ch,ch,3 * ch->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
-            return;
-          }
+	*vo = (void *) obj;
+	*target = TARGET_OBJ;
+	if ( spellbane_backfire( ch, sn, TRUE ) )
+	    return FALSE;
 	break;
 
     case TAR_OBJ_CHAR_OFF:
@@ -661,158 +721,191 @@ void do_cast( CHAR_DATA *ch, char *argument )
 	    if ((victim = ch->fighting) == NULL)
 	    {
 		send_to_char("Büyüyü kime veya neye yapacaksın?\n\r",ch);
-		return;
+		return FALSE;
 	    }
-
-	    target = TARGET_CHAR;
+	    *target = TARGET_CHAR;
 	}
 	else if ((victim = get_char_room(ch,target_name)) != NULL)
-	{
-	    target = TARGET_CHAR;
-	}
+	    *target = TARGET_CHAR;
 
-	if (target == TARGET_CHAR) /* check the sanity of the attack */
+	if (*target == TARGET_CHAR) /* check the sanity of the attack */
 	{
 	    if(is_safe_spell(ch,victim,FALSE) && victim != ch)
 	    {
-        send_to_char("Büyün işe yaramadı.\n\r",ch);
-		return;
+		send_to_char("Büyün işe yaramadı.\n\r",ch);
+		return FALSE;
 	    }
 
 	    if ( IS_AFFECTED(ch, AFF_CHARM) && ch->master == victim )
 	    {
-        send_to_char("Takipçine bunu yapamazsın.\n\r",ch );
-
-		return;
+		send_to_char("Takipçine bunu yapamazsın.\n\r",ch );
+		return FALSE;
 	    }
 
 	    if ( is_safe(ch, victim) )
-		return;
+		return FALSE;
 
-	    vo = (void *) victim;
+	    *vo = (void *) victim;
 	}
 	else if ((obj = get_obj_here(ch,target_name)) != NULL)
 	{
-	    vo = (void *) obj;
-	    target = TARGET_OBJ;
+	    *vo = (void *) obj;
+	    *target = TARGET_OBJ;
 	}
 	else
 	{
-    send_to_char( "Öyle bir şey görmüyorsun.\n\r",ch );
-	    return;
+	    send_to_char( "Öyle bir şey görmüyorsun.\n\r",ch );
+	    return FALSE;
 	}
 	break;
 
     case TAR_OBJ_CHAR_DEF:
 	if (arg2[0] == '\0')
 	{
-	    vo = (void *) ch;
-	    target = TARGET_CHAR;
+	    *vo = (void *) ch;
+	    *target = TARGET_CHAR;
 	}
 	else if ((victim = get_char_room(ch,target_name)) != NULL)
 	{
-	    vo = (void *) victim;
-	    target = TARGET_CHAR;
+	    *vo = (void *) victim;
+	    *target = TARGET_CHAR;
 	}
 	else if ((obj = get_obj_carry(ch,target_name)) != NULL)
 	{
-	    vo = (void *) obj;
-	    target = TARGET_OBJ;
+	    *vo = (void *) obj;
+	    *target = TARGET_OBJ;
 	}
 	else
 	{
 	    send_to_char("Öyle bir şey görmüyorsun.\n\r",ch);
-	    return;
+	    return FALSE;
 	}
 	break;
     }
 
-    if ( !IS_NPC(ch) && ch->mana < mana )
+    *pvictim = victim;
+    *pobj = obj;
+    return TRUE;
+}
+
+void do_cast( CHAR_DATA *ch, char *argument )
+{
+    char arg1[MAX_INPUT_LENGTH];
+    char arg2[MAX_INPUT_LENGTH];
+    CHAR_DATA *victim = NULL;
+    OBJ_DATA *obj = NULL;
+    void *vo = NULL;
+    int mana;
+    int sn;
+    int target = TARGET_NONE;
+    int cast_far = 0, door = -1;
+
+    /*
+     * Switched NPC's can cast spells, but others can't.
+     */
+    if ( IS_NPC(ch) && ch->desc == NULL)
+	return;
+
+    if (is_affected(ch, gsn_shielding) )
     {
-      send_to_char( "Yeterli manan yok.\n\r", ch );
+	send_to_char( "Gerçek Kaynağa erişeceğin sırada birşeyin seni engellediğini hissediyorsun.\n\r",ch);
 	return;
     }
 
-    if ( str_cmp( skill_table[sn].name[0], "ventriloquate" ) )
+    if (is_affected(ch, gsn_garble) || is_affected(ch, gsn_deafen))
+    {
+	send_to_char("Doğru tınıyı yakalayamıyorsun.\n\r", ch);
+	return;
+    }
+
+    target_name = one_argument( argument, arg1 );
+    one_argument( target_name, arg2 );
+
+    if ( arg1[0] == '\0' )
+    {
+	send_to_char( "Hangi büyüyü nereye-kime yapacaksın?\n\r", ch );
+	return;
+    }
+
+    if (ch->cabal == CABAL_BATTLE && !IS_IMMORTAL(ch))
+    {
+	send_to_char("Sen Öfke Kabalı üyesisin, pis bir büyücü değil!\n\r",ch);
+	return;
+    }
+
+    if (  ( sn = find_spell( ch,arg1 ) ) < 0
+          || ch_skill_nok_nomessage(ch,sn) )
+    {
+	send_to_char( "Bu isimde büyü bilmiyorsun.\n\r", ch );
+	return;
+    }
+
+    if ( ch->iclass == CLASS_VAMPIRE
+	&& !IS_VAMPIRE(ch) && skill_table[sn].cabal == CABAL_NONE)
+    {
+	send_to_char( "Büyüler için önce vampire dönüşmelisin!\n\r",ch);
+	return;
+    }
+
+    if ( skill_table[sn].spell_fun == spell_null )
+    {
+	send_to_char("Bu bir büyü değil.\n\r",ch);
+	return;
+    }
+
+    if ( ch->position < skill_table[sn].minimum_position )
+    {
+	send_to_char( "Yeterince konsantre olamıyorsun.\n\r", ch );
+	return;
+    }
+
+    if (!cabal_ok(ch,sn))
+	return;
+
+    if (IS_SET(ch->in_room->room_flags,ROOM_NO_MAGIC))
+    {
+	send_to_char("Büyün başarısız oldu.\n\r",ch);
+	act("$s büyüsü başarısız oldu.", ch, NULL, NULL, TO_ROOM);
+	return;
+    }
+
+    mana = cast_mana_cost( ch, sn );
+
+    if ( !cast_find_target( ch, sn, arg2, mana, &vo, &target, &victim, &obj,
+			    &cast_far, &door ) )
+	return;
+
+    if ( !IS_NPC(ch) && ch->mana < mana )
+    {
+	send_to_char( "Yeterli manan yok.\n\r", ch );
+	return;
+    }
+
+    if ( sn != msn(MSN_VENTRILOQUATE) )
 	say_spell( ch, sn );
 
     WAIT_STATE( ch, skill_table[sn].beats );
 
     if ( number_percent( ) > get_skill(ch,sn) )
     {
-      send_to_char( "Konsantrasyonunu kaybettin.\n\r", ch );
+	send_to_char( "Konsantrasyonunu kaybettin.\n\r", ch );
 	check_improve(ch,sn,FALSE,1);
 	ch->mana -= mana / 2;
 	if (cast_far) cast_far = 2;
     }
     else
     {
-	int slevel;
-
-	if (class_table[ch->iclass].fMana)
-		slevel = ch->level - UMAX(0,(ch->level / 20));
-	else	slevel = ch->level - UMAX(5,(ch->level / 10));
-
-	if (skill_table[sn].cabal != CABAL_NONE)
-		slevel = ch->level;
-
-	if ( ch->level > skill_table[gsn_spell_craft].skill_level[ch->iclass])
-	 {
-	  if (number_percent() < get_skill(ch,gsn_spell_craft) )
-		{
-		 slevel = ch->level;
-		 check_improve( ch, gsn_spell_craft, TRUE, 1 );
-		}
-	  check_improve( ch, gsn_spell_craft, FALSE, 1);
-	 }
-
-	if (ch->cabal == CABAL_SHALAFI &&
-	    ch->level > skill_table[gsn_mastering_spell].skill_level[ch->iclass]
-	    && cabal_ok(ch,gsn_mastering_spell) )
-	 {
-	  if (number_percent() < get_skill(ch,gsn_mastering_spell) )
-		{
-		 slevel += number_range(1,4);
-		 check_improve( ch, gsn_mastering_spell, TRUE, 1 );
-		}
-	 }
+	int slevel = cast_level( ch, sn );
 
 	ch->mana -= mana;
-	if (get_curr_stat(ch,STAT_INT) > 21 )
-		slevel = UMAX(1,(slevel + (get_curr_stat(ch,STAT_INT) - 21)) );
-	else	slevel = UMAX(1, slevel );
-
-	if (IS_NPC(ch))
-	    (*skill_table[sn].spell_fun) ( sn, ch->level, ch, vo,target);
-	else
-	    (*skill_table[sn].spell_fun) (sn, slevel , ch, vo,target);
+	(*skill_table[sn].spell_fun) ( sn, IS_NPC(ch) ? ch->level : slevel, ch, vo, target );
 	check_improve(ch,sn,TRUE,1);
     }
 
     if (cast_far == 1 && door != -1)
 	path_to_track(ch,victim,door);
-    else if ((skill_table[sn].target == TAR_CHAR_OFFENSIVE
-    ||   (skill_table[sn].target == TAR_OBJ_CHAR_OFF && target == TARGET_CHAR))
-    &&   victim != ch
-    &&   victim->master != ch)
-    {
-	CHAR_DATA *vch;
-	CHAR_DATA *vch_next;
-
-	for ( vch = ch->in_room->people; vch; vch = vch_next )
-	{
-	    vch_next = vch->next_in_room;
-	    if ( victim == vch && victim->fighting == NULL )
-	    {
-		if ( victim->position != POS_SLEEPING )
-		multi_hit( victim, ch, TYPE_UNDEFINED );
-
-		break;
-	    }
-	}
-    }
-
-    return;
+    else
+	cast_retaliate( ch, victim, sn, target, TRUE );
 }
 
 
@@ -834,21 +927,16 @@ void obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DA
 	return;
     }
 
-    if ( (IS_NPC(ch) && ch->position == POS_DEAD) ||
-        (!IS_NPC(ch) && (current_time - ch->last_death_time) < 10))
+    if ( recently_dead( ch ) )
     {
-	bug( "Obj_cast_spell: Ch is dead! But it is Tamam.", sn);
+	bug( "Obj_cast_spell: büyücü ölü, sn %d.", sn );
 	return;
     }
 
-    if (victim != NULL)
+    if ( victim != NULL && recently_dead( victim ) )
     {
-      if ( (IS_NPC(victim) && victim->position == POS_DEAD) ||
-        (!IS_NPC(victim) && (current_time - victim->last_death_time) < 10))
-      {
-	bug( "Obj_cast_spell: Victim is dead! But it is Tamam.. ", sn);
+	bug( "Obj_cast_spell: kurban ölü, sn %d.", sn );
 	return;
-      }
     }
 
     switch ( skill_table[sn].target )
@@ -871,42 +959,14 @@ void obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DA
 	}
 	if (is_safe(ch,victim) && ch != victim)
 	{
-    send_to_char("Birşeyler yanlış...\n\r",ch);
+	    send_to_char("Birşeyler yanlış...\n\r",ch);
 	    return;
 	}
 	vo = (void *) victim;
 	target = TARGET_CHAR;
-        if ( is_affected(victim,gsn_spellbane) && (/*IS_NPC(victim) ||*/
-                number_percent() < 2*get_skill(victim, gsn_spellbane)/3) )
-        {
-            if (ch==victim)
-              {
-                act("Büyüyıkımın büyüyü yansıtıyor!",ch,NULL,NULL,TO_CHAR);
-                act("$s büyüyıkımı büyüyü saptırıyor!",ch,NULL,NULL,TO_ROOM);
-	        check_improve(victim,gsn_spellbane,TRUE,1);
-                damage(victim,ch,10 * level,gsn_spellbane,DAM_NEGATIVE, TRUE);
-              }
-            else {
-              act("$N büyünü saptırıyor!",ch,NULL,victim,TO_CHAR);
-              act("$s büyüsünü saptırıyorsun!",ch,NULL,victim,TO_VICT);
-              act("$N $s büyüsünü saptırıyor!",ch,NULL,victim,TO_NOTVICT);
-	      check_improve(victim,gsn_spellbane,TRUE,1);
-              damage(victim,ch,10 * victim->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
-            }
-            return;
-        }
-
-        if ( ch != victim && CAN_DETECT(victim, ADET_ABSORB) &&
-            (number_percent() < 2*get_skill(victim,gsn_absorb)/3)
-		&& sn != slot_lookup(524) && sn != slot_lookup(204))
-	{
-    act("Büyün $S enerji alanını geçemiyor!",ch,NULL,victim,TO_CHAR);
-    act("$s büyüsünü soğuruyorsun!",ch,NULL,victim,TO_VICT);
-    act("$N $s büyüsünü soğuruyor!",ch,NULL,victim,TO_NOTVICT);
-	    check_improve(victim,gsn_absorb,TRUE,1);
-	    victim->mana += skill_table[sn].min_mana;
+	if ( spellbane_deflects( ch, victim, sn, 10, TRUE, FALSE, FALSE )
+	||   absorb_check( ch, victim, sn, skill_table[sn].min_mana ) )
 	    return;
-	}
 	break;
 
     case TAR_CHAR_DEFENSIVE:
@@ -915,25 +975,9 @@ void obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DA
 	    victim = ch;
 	vo = (void *) victim;
 	target = TARGET_CHAR;
-        if ( is_affected(victim,gsn_spellbane) )
-          {
-            if (ch==victim)
-              {
-                act("Büyüyıkımın büyüyü yansıtıyor!",ch,NULL,NULL,TO_CHAR);
-                act("$s büyüyıkımı büyüyü saptırıyor!",ch,NULL,NULL,TO_ROOM);
-	        check_improve(victim,gsn_spellbane,TRUE,1);
-                damage(victim,ch,10 * victim->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
-              }
-            else {
-              act("$N büyünü saptırıyor!",ch,NULL,victim,TO_CHAR);
-              act("$s büyüsünü saptırıyorsun!",ch,NULL,victim,TO_VICT);
-              act("$N $s büyüsünü saptırıyor!",ch,NULL,victim,TO_NOTVICT);
-	      check_improve(victim,gsn_spellbane,TRUE,1);
-              damage(victim,ch,10 * victim->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
-            }
-            return;
-          }
-        break;
+	if ( spellbane_deflects( ch, victim, sn, 10, FALSE, FALSE, FALSE ) )
+	    return;
+	break;
 
     case TAR_OBJ_INV:
 	if ( obj == NULL )
@@ -943,15 +987,8 @@ void obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DA
 	}
 	vo = (void *) obj;
 	target = TARGET_OBJ;
-        if ( is_affected(ch,gsn_spellbane) )
-          {
-            act("Büyüyıkımın büyüyü saptırıyor!",ch,NULL,NULL,TO_CHAR);
-            act("$s büyüyıkımı büyüyü saptırıyor!",ch,NULL,NULL,TO_ROOM);
-	    check_improve(ch,gsn_spellbane,TRUE,1);
-            damage(ch,ch,3 * ch->level,gsn_spellbane,DAM_NEGATIVE, TRUE);
-            return;
-          }
-
+	if ( spellbane_backfire( ch, sn, FALSE ) )
+	    return;
 	break;
 
     case TAR_OBJ_CHAR_OFF:
@@ -966,24 +1003,23 @@ void obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DA
 	    }
 	}
 
-	    if (victim != NULL)
+	if (victim != NULL)
+	{
+	    if (is_safe_spell(ch,victim,FALSE) && ch != victim)
 	    {
-		if (is_safe_spell(ch,victim,FALSE) && ch != victim)
-		{
-      send_to_char("Bir şeyler yanlış...\n\r",ch);
-		    return;
-		}
+		send_to_char("Bir şeyler yanlış...\n\r",ch);
+		return;
+	    }
 
-		vo = (void *) victim;
-		target = TARGET_CHAR;
-	    }
-	    else
-	    {
-		vo = (void *) obj;
-		target = TARGET_OBJ;
-	    }
+	    vo = (void *) victim;
+	    target = TARGET_CHAR;
+	}
+	else
+	{
+	    vo = (void *) obj;
+	    target = TARGET_OBJ;
+	}
 	break;
-
 
     case TAR_OBJ_CHAR_DEF:
 	if (victim == NULL && obj == NULL)
@@ -1001,36 +1037,13 @@ void obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DA
 	    vo = (void *) obj;
 	    target = TARGET_OBJ;
 	}
-
 	break;
     }
 
     target_name = "";
     (*skill_table[sn].spell_fun) ( sn, level, ch, vo,target);
 
-
-
-    if ( (skill_table[sn].target == TAR_CHAR_OFFENSIVE
-    ||   (skill_table[sn].target == TAR_OBJ_CHAR_OFF && target == TARGET_CHAR))
-    &&   victim != ch
-    &&   victim->master != ch )
-    {
-	CHAR_DATA *vch;
-	CHAR_DATA *vch_next;
-
-	for ( vch = ch->in_room->people; vch; vch = vch_next )
-	{
-	    vch_next = vch->next_in_room;
-	    if ( victim == vch && victim->fighting == NULL )
-	    {
-		multi_hit( victim, ch, TYPE_UNDEFINED );
-
-		break;
-	    }
-	}
-    }
-
-    return;
+    cast_retaliate( ch, victim, sn, target, FALSE );
 }
 
 
@@ -1038,16 +1051,20 @@ void obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DA
 /*
  * Spell functions.
  */
+/* "Zar + kurtarış + (isteğe bağlı) oda mesajı + hasar" kalıbındaki saldırı büyüleri. */
+static void simple_damage_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim,
+				 int dam, int dam_type, const char *room_msg )
+{
+    if ( saves_spell( level, victim, dam_type ) )
+	dam /= 2;
+    if ( room_msg != NULL )
+	act( room_msg, ch, NULL, victim, TO_NOTVICT );
+    damage( ch, victim, dam, sn, dam_type, TRUE );
+}
+
 void spell_acid_blast( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 30 );
-    if ( saves_spell( level, victim, DAM_ACID ) )
-	    dam /= 2;
-    damage( ch, victim, dam, sn,DAM_ACID,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 30 ), DAM_ACID, NULL );
 }
 
 
@@ -1192,14 +1209,7 @@ void spell_blindness( int sn, int level, CHAR_DATA *ch, void *vo, int target)
 
 void spell_burning_hands(int sn,int level, CHAR_DATA *ch, void *vo, int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice(level , 2) + 7;
-    if ( saves_spell( level, victim,DAM_FIRE) )
-	dam /= 2;
-    damage( ch, victim, dam, sn, DAM_FIRE,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 2 ) + 7, DAM_FIRE, NULL );
 }
 
 
@@ -1208,7 +1218,7 @@ void spell_call_lightning( int sn, int level,CHAR_DATA *ch,void *vo,int target)
 {
     CHAR_DATA *vch;
     CHAR_DATA *vch_next;
-    int dam;
+    int dam, vdam;
 
     if ( !IS_OUTSIDE(ch) )
     {
@@ -1244,14 +1254,15 @@ void spell_call_lightning( int sn, int level,CHAR_DATA *ch,void *vo,int target)
 	    if (CAN_DETECT(vch, ADET_GROUNDING))
 	    {
         send_to_char("Elektrik düşmanlarında yitip gidiyor.\n\r",vch);
-    		act("Bir yıldırım $S düşmanlarında yitip gidiyor.\n\r",
+    		act("Bir yıldırım $S düşmanlarında yitip gidiyor.",
 			ch, NULL, vch, TO_ROOM);
 		continue;
 	    }
 
+	    vdam = dam;
 	    if (saves_spell(level, vch, DAM_LIGHTNING))
-		dam /= 2;
-	    damage( ch, vch, dam, sn, DAM_LIGHTNING,TRUE);
+		vdam /= 2;
+	    damage( ch, vch, vdam, sn, DAM_LIGHTNING,TRUE);
 	    continue;
 	}
 
@@ -1304,7 +1315,7 @@ void spell_calm( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 	      return;
 
 	    if (IS_AFFECTED(vch,AFF_CALM) || IS_AFFECTED(vch,AFF_BERSERK)
-	    ||  is_affected(vch,skill_lookup("frenzy")))
+	    ||  is_affected(vch,msn(MSN_FRENZY)))
 	      return;
 
         send_to_char("Üzerinden bir sakinlik dalgası geçiyor.\n\r",vch);
@@ -1331,10 +1342,92 @@ void spell_calm( int sn, int level, CHAR_DATA *ch, void *vo,int target)
     }
 }
 
+/*
+ * Defedilebilir büyüler: büyü defet (dispel magic) ve büyü iptali
+ * (cancellation) aynı listeyi gezer. dispel_msg: büyü kalkınca odaya gösterilen
+ * mesaj (NULL: sessiz); cancel_msg: iptalde farklı mesaj (NULL: dispel_msg).
+ * sn ilk kullanımda bir kez çözülür.
+ */
+struct dispel_entry
+{
+    const char *skill;
+    const char *dispel_msg;
+    const char *cancel_msg;
+    int         sn;
+};
+
+static struct dispel_entry dispel_table[] =
+{
+    { "armor",		NULL, NULL, 0 },
+    { "enhanced armor",	NULL, NULL, 0 },
+    { "bless",		NULL, NULL, 0 },
+    { "blindness",	"$n artık kör değil.", NULL, 0 },
+    { "calm",		"$n eskisi kadar barışçıl görünmüyor...", "$n artık barışçıl görünmüyor...", 0 },
+    { "change sex",	"$n kendine gelmeye başlıyor.", "$n artık kendisi gibi görünüyor.", 0 },
+    { "charm person",	"$n özgür iradesini kazanıyor.", NULL, 0 },
+    { "chill touch",	"$n ısınmış görünüyor.", NULL, 0 },
+    { "curse",		NULL, NULL, 0 },
+    { "detect evil",	NULL, NULL, 0 },
+    { "detect good",	NULL, NULL, 0 },
+    { "detect hidden",	NULL, NULL, 0 },
+    { "detect invis",	NULL, NULL, 0 },
+    { "detect magic",	NULL, NULL, 0 },
+    { "faerie fire",	"$s aurası yokoluyor.", NULL, 0 },
+    { "fly",		"$n yere düşüyor!", NULL, 0 },
+    { "frenzy",		"$n eskisi kadar vahşi görünmüyor.", "$n artık vahşi görünmüyor.", 0 },
+    { "giant strength",	"$n eskisi kadar güçlü görünmüyor.", "$n gücünü yitirmiş görünüyor.", 0 },
+    { "haste",		"$n eskisi kadar çabuk hareket etmiyor.", "$n hızını yitirmiş görünüyor.", 0 },
+    { "infravision",	NULL, NULL, 0 },
+    { "invis",		"$n varlığa dönüyor.", NULL, 0 },
+    { "mass invis",	"$n varlığa dönüyor.", NULL, 0 },
+    { "pass door",	NULL, NULL, 0 },
+    { "protection evil", NULL, NULL, 0 },
+    { "protection good", NULL, NULL, 0 },
+    { "sanctuary",	"$s çevresindeki beyaz aura yokoluyor.", NULL, 0 },
+    { "shield",		"$m koruyan kalkan yokoluyor.", NULL, 0 },
+    { "sleep",		NULL, NULL, 0 },
+    { "slow",		"$n eskisi gibi yavaş hareket etmiyor.", "$n eski hızını kazanmış görünüyor.", 0 },
+    { "stone skin",	"$s derisi eski haline dönüyor.", NULL, 0 },
+    { "weaken",		"$n güçlenmiş görünüyor.", NULL, 0 },
+    { "shielding",	NULL, NULL, 0 },
+    { "fear",		NULL, NULL, 0 },
+    { "protection heat", NULL, NULL, 0 },
+    { "protection cold", NULL, NULL, 0 },
+    { "magic resistance", NULL, NULL, 0 },
+    { "hallucination",	NULL, NULL, 0 },
+    { "terangreal",	NULL, NULL, 0 },
+    { "power word stun", NULL, NULL, 0 },
+    { "corruption",	"$n daha sağlıklı görünüyor.", NULL, 0 },
+    { "web",		"$s çevresindeki ağlar eriyor.", NULL, 0 },
+    { NULL, NULL, NULL, 0 }
+};
+
+/* Tablodaki her büyü için check_dispel; en az biri kalktıysa TRUE. */
+static bool dispel_all( int level, CHAR_DATA *victim, bool cancel )
+{
+    struct dispel_entry *de;
+    bool found = FALSE;
+
+    for ( de = dispel_table; de->skill != NULL; de++ )
+    {
+	const char *msg;
+
+	if ( de->sn == 0 )
+	    de->sn = skill_lookup( de->skill );
+	if ( de->sn < 0 || !check_dispel( level, victim, de->sn ) )
+	    continue;
+
+	found = TRUE;
+	msg = ( cancel && de->cancel_msg != NULL ) ? de->cancel_msg : de->dispel_msg;
+	if ( msg != NULL )
+	    act( msg, victim, NULL, NULL, TO_ROOM );
+    }
+    return found;
+}
+
 void spell_cancellation( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
     CHAR_DATA *victim = (CHAR_DATA *) vo;
-    bool found = FALSE;
 
     level += 2;
 
@@ -1355,196 +1448,7 @@ void spell_cancellation( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 
     /* unlike dispel magic, the victim gets NO save */
 
-    /* begin running through the spells */
-
-    if (check_dispel(level,victim,skill_lookup("armor")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("enhanced armor")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("bless")))
-        found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("blindness")))
-    {
-        found = TRUE;
-        act("$n artık kör değil.",victim,NULL,NULL,TO_ROOM);
-    }
-
-    if (check_dispel(level,victim,skill_lookup("calm")))
-    {
-	found = TRUE;
-  act("$n artık barışçıl görünmüyor...",victim,NULL,NULL,TO_ROOM);
-    }
-
-    if (check_dispel(level,victim,skill_lookup("change sex")))
-    {
-        found = TRUE;
-        act("$n artık kendisi gibi görünüyor.",victim,NULL,NULL,TO_ROOM);
-    }
-
-    if (check_dispel(level,victim,skill_lookup("charm person")))
-    {
-	found = TRUE;
-  act("$n özgür iradesini kazanıyor.",victim,NULL,NULL,TO_ROOM);
-    }
-
-    if (check_dispel(level,victim,skill_lookup("chill touch")))
-    {
-	found = TRUE;
-  act("$n ısınmış görünüyor.",victim,NULL,NULL,TO_ROOM);
-    }
-
-    if (check_dispel(level,victim,skill_lookup("curse")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect evil")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect good")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect hidden")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect invis")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect hidden")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect magic")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("faerie fire")))
-    {
-      act("$s aurası yokoluyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("fly")))
-    {
-      act("$n yere düşüyor!",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("frenzy")))
-    {
-      act("$n artık vahşi görünmüyor.",victim,NULL,NULL,TO_ROOM);;
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("giant strength")))
-    {
-      act("$n gücünü yitirmiş görünüyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("haste")))
-    {
-      act("$n hızını yitirmiş görünüyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("infravision")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("invis")))
-    {
-      act("$n varlığa dönüyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("mass invis")))
-    {
-      act("$n varlığa dönüyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("pass door")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("protection evil")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("protection good")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("sanctuary")))
-    {
-      act("$s çevresindeki beyaz aura yokoluyor.",
-	    victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("shield")))
-    {
-      act("$m koruyan kalkan yokoluyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("sleep")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("slow")))
-    {
-      act("$n eski hızını kazanmış görünüyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("stone skin")))
-    {
-      act("$s derisi eski haline dönüyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("weaken")))
-    {
-      act("$n güçlenmiş görünüyor.",victim,NULL,NULL,TO_ROOM);
-        found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("shielding")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("web")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("fear")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("protection heat")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("protection cold")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("magic resistance")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("hallucination")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("terangreal")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("power word stun")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("corruption")))
-    {
-      act("$n daha sağlıklı görünüyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("web")))
-    {
-      act("$s çevresindeki ağlar eriyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (found)
+    if ( dispel_all( level, victim, TRUE ) )
         send_to_char("Tamam.\n\r",ch);
     else
         send_to_char("Büyü işe yaramadı.\n\r",ch);
@@ -1572,13 +1476,40 @@ void spell_cause_serious(int sn,int level,CHAR_DATA *ch,void *vo,int target)
     return;
 }
 
+/* Kurban hâlâ büyücünün odasında mı? (damage() sonrası ölü/çıkmış denetimi) */
+static bool still_here( CHAR_DATA *ch, CHAR_DATA *victim )
+{
+    CHAR_DATA *vch;
+
+    if ( ch->in_room == NULL )
+	return FALSE;
+    for ( vch = ch->in_room->people; vch != NULL; vch = vch->next_in_room )
+	if ( vch == victim )
+	    return TRUE;
+    return FALSE;
+}
+
+/* Şimşek zincirinin bir halkası: topraklama, kurtarış (1/3) ve hasar. */
+static void chain_strike( CHAR_DATA *ch, CHAR_DATA *vict, int level, int sn )
+{
+    int dam = dice(level,6);
+
+    if (CAN_DETECT(vict, ADET_GROUNDING))
+    {
+	send_to_char("Elektrik düşmanlarında sönüyor.\n\r",vict);
+	act("Bir yıldırım $S düşmanlarında sönüyor.", ch, NULL, vict, TO_ROOM);
+	return;
+    }
+    if (saves_spell(level,vict,DAM_LIGHTNING))
+	dam /= 3;
+    damage(ch,vict,dam,sn,DAM_LIGHTNING,TRUE);
+}
+
 void spell_chain_lightning(int sn,int level,CHAR_DATA *ch, void *vo,int target)
 {
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     CHAR_DATA *tmp_vict,*last_vict,*next_vict;
-    char buf[MAX_STRING_LENGTH];
     bool found;
-    int dam;
 
     /* first strike */
 
@@ -1589,36 +1520,8 @@ void spell_chain_lightning(int sn,int level,CHAR_DATA *ch, void *vo,int target)
     act("Bir yıldırım $s elinden sana atlıyor!",
 	ch,NULL,victim,TO_VICT);
 
-    dam = dice(level,6);
-
-    if (CAN_DETECT(victim, ADET_GROUNDING))
-    {
-      send_to_char("Elektrik düşmanlarında sönüyor.\n\r",victim);
-    	act("Bir yıldırım $S düşmanlarında sönüyor.\n\r",
-		ch, NULL, victim, TO_ROOM);
-    }
-    else
-    {
-      if (saves_spell(level,victim,DAM_LIGHTNING))
-	dam /= 3;
-      damage(ch,victim,dam,sn,DAM_LIGHTNING,TRUE);
-    }
-
-    if (!IS_NPC(ch) && victim != ch &&
-        ch->fighting != victim && victim->fighting != ch &&
-        (IS_SET(victim->affected_by,AFF_CHARM) || !IS_NPC(victim)))
-      {
-        if (!can_see(victim, ch))
-          do_yell(victim, "İmdat! Biri bana saldırıyor!");
-        else
-          {
-            snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
-                    (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(victim))?
-                    ch->doppel->name : ch->name);
-            do_yell(victim,buf);
-          }
-      }
-
+    victim_yell_at_caster( victim, ch );
+    chain_strike( ch, victim, level, sn );
 
     last_vict = victim;
     level -= 4;   /* decrement damage */
@@ -1643,45 +1546,15 @@ void spell_chain_lightning(int sn,int level,CHAR_DATA *ch, void *vo,int target)
 	    else  {
         act("Yıldırım $e atlıyor!",tmp_vict,NULL,NULL,TO_ROOM);
 	      act("Yıldırım seni vuruyor!",tmp_vict,NULL,NULL,TO_CHAR);
-	      dam = dice(level,6);
-
-            if (!IS_NPC(ch) && tmp_vict != ch &&
-                ch->fighting != tmp_vict && tmp_vict->fighting != ch &&
-                (IS_SET(tmp_vict->affected_by,AFF_CHARM) || !IS_NPC(tmp_vict)))
-            {
-               if (!can_see(tmp_vict, ch))
-                    do_yell(tmp_vict, "İmdat! Biri bana saldırıyor!");
-               else
-               {
-                 snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
-		(is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(tmp_vict))?
-                     ch->doppel->name : ch->name);
-                 do_yell(tmp_vict,buf);
-               }
-             }
-
-	     if (CAN_DETECT(tmp_vict, ADET_GROUNDING))
-	     {
-         send_to_char("Elektrik düşmanlarında sönüyor.\n\r",tmp_vict);
-     		act("Bir yıldırım $S düşmanlarında sönüyor.\n\r",
-			ch, NULL, tmp_vict, TO_ROOM);
-	     }
-	     else
-	     {
-	      if (saves_spell(level,tmp_vict,DAM_LIGHTNING))
-		dam /= 3;
-	      damage(ch,tmp_vict,dam,sn,DAM_LIGHTNING,TRUE);
-             }
-	     level -= 4;  /* decrement damage */
+	      victim_yell_at_caster( tmp_vict, ch );
+	      chain_strike( ch, tmp_vict, level, sn );
+	      level -= 4;  /* decrement damage */
 	    }
 	  }
 	}   /* end target searching loop */
 
 	if (!found) /* no target found, hit the caster */
 	{
-	  if (ch == NULL )
-	    return;
-
 	  if (last_vict == ch) /* no double hits */
 	  {
       act("Yıldırım sönmüş görünüyor.",ch,NULL,NULL,TO_ROOM);
@@ -1693,22 +1566,9 @@ void spell_chain_lightning(int sn,int level,CHAR_DATA *ch, void *vo,int target)
 	  last_vict = ch;
     act("Yıldırım $e sıçrıyor...ahaa!",ch,NULL,NULL,TO_ROOM);
 	  send_to_char("Kendi yıldırımınla çarpıldın!\n\r",ch);
-	  dam = dice(level,6);
-
-	  if (CAN_DETECT(ch, ADET_GROUNDING))
-	  {
-      send_to_char("Elektrik düşmanlarında sönüyor.\n\r",ch);
-  		act("Bir yıldırım $S düşmanlarında sönüyor.\n\r",
-			ch, NULL, ch, TO_ROOM);
-	  }
-	  else
-	  {
-	     if (saves_spell(level,ch,DAM_LIGHTNING))
-	   	dam /= 3;
-	     damage(ch,ch,dam,sn,DAM_LIGHTNING,TRUE);
-	  }
+	  chain_strike( ch, ch, level, sn );
 	  level -= 4;  /* decrement damage */
-	  if (ch == NULL)
+	  if ( ch->in_room == NULL || ch->position == POS_DEAD ) /* kendi yıldırımı öldürdü */
 	    return;
 	}
     /* now go back and find more targets */
@@ -1846,8 +1706,7 @@ void spell_colour_spray( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     if ( saves_spell( level, victim,DAM_LIGHT) )
 	dam /= 2;
     else
-	spell_blindness(skill_lookup("blindness"),
-	    level/2,ch,(void *) victim,TARGET_CHAR);
+	spell_blindness(gsn_blindness, level/2,ch,(void *) victim,TARGET_CHAR);
 
     damage( ch, victim, dam, sn, DAM_LIGHT,TRUE );
     return;
@@ -1969,11 +1828,11 @@ void spell_create_water( int sn, int level, CHAR_DATA *ch, void *vo,int target)
     {
 	obj->value[2] = LIQ_WATER;
 	obj->value[1] += water;
-	if ( !is_name( "water", obj->name ) || !is_name( "su", obj->name ) )
+	if ( !is_name( "su", obj->name ) )
 	{
 	    char buf[MAX_STRING_LENGTH];
 
-	    snprintf(buf, sizeof(buf), "%s water", obj->name );
+	    snprintf(buf, sizeof(buf), "%s su", obj->name );
 	    free_string( obj->name );
 	    obj->name = str_dup( buf );
 	}
@@ -1985,119 +1844,83 @@ void spell_create_water( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
 
 
-void spell_cure_blindness(int sn,int level,CHAR_DATA *ch,void *vo,int target)
+/*
+ * Etki kaldıran tedavi büyüleri (körlük, hastalık, zehir): etki yoksa
+ * none_* mesajı; check_dispel başarılıysa kurbana ve odaya mesaj.
+ */
+static void cure_affect_spell( int level, CHAR_DATA *ch, CHAR_DATA *victim, int gsn,
+			       const char *none_self, const char *none_other,
+			       const char *cured_msg, const char *room_msg )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-
-    if ( !is_affected( victim, gsn_blindness ) )
+    if ( !is_affected( victim, gsn ) )
     {
 	if (victim == ch)
-  send_to_char("Kör değilsin.\n\r",ch);
-else
-  act("$N kör görünmüyor.",ch,NULL,victim,TO_CHAR);
+	    send_to_char(none_self,ch);
+	else
+	    act(none_other,ch,NULL,victim,TO_CHAR);
 	return;
     }
 
-    if (check_dispel(level,victim,gsn_blindness))
+    if (check_dispel(level,victim,gsn))
     {
-      send_to_char( "Yeniden görmeye başlıyorsun!\n\r", victim );
-    	act("$n artık kör değil.",victim,NULL,NULL,TO_ROOM);
+	send_to_char(cured_msg,victim);
+	act(room_msg,victim,NULL,NULL,TO_ROOM);
     }
     else
-    send_to_char("Büyü işe yaramadı.\n\r",ch);
+	send_to_char("Büyü işe yaramadı.\n\r",ch);
+}
+
+/* Yaşam puanı iyileştiren büyüler (cure light/serious/critical, heal). */
+static void heal_spell( CHAR_DATA *ch, CHAR_DATA *victim, int amount, const char *msg )
+{
+    victim->hit = UMIN( victim->hit + amount, victim->max_hit );
+    update_pos( victim );
+    send_to_char( msg, victim );
+    if ( ch != victim )
+	send_to_char( "Tamam.\n\r", ch );
+}
+
+void spell_cure_blindness(int sn,int level,CHAR_DATA *ch,void *vo,int target)
+{
+    cure_affect_spell( level, ch, (CHAR_DATA *) vo, gsn_blindness,
+	"Kör değilsin.\n\r", "$N kör görünmüyor.",
+	"Yeniden görmeye başlıyorsun!\n\r", "$n artık kör değil." );
 }
 
 
 
 void spell_cure_critical( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int heal;
-
-    heal = dice(3, 8) + level / 2 ;
-    victim->hit = UMIN( victim->hit + heal, victim->max_hit );
-    update_pos( victim );
-    send_to_char("Kendini iyi hissediyorsun!\n\r", victim );
-    if ( ch != victim )
-	send_to_char( "Tamam.\n\r", ch );
-    return;
+    heal_spell( ch, (CHAR_DATA *) vo, dice(3, 8) + level / 2, "Kendini iyi hissediyorsun!\n\r" );
 }
 
 /* RT added to cure plague */
 void spell_cure_disease( int sn, int level, CHAR_DATA *ch,void *vo,int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-
-    if ( !is_affected( victim, gsn_plague ) )
-    {
-	if (victim == ch)
-  send_to_char("Hasta değilsin.\n\r",ch);
-else
-  act("$N hasta görünmüyor.",ch,NULL,victim,TO_CHAR);
-	return;
-    }
-
-    if (check_dispel(level,victim,gsn_plague))
-    {
-      send_to_char("Yaraların yokoluyor.\n\r",victim);
-    	act("Yaraları yokolan $n rahatlamış görünüyor.",victim,NULL,NULL,TO_ROOM);
-    }
-    else
-    send_to_char("Büyü işe yaramadı.\n\r",ch);
+    cure_affect_spell( level, ch, (CHAR_DATA *) vo, gsn_plague,
+	"Hasta değilsin.\n\r", "$N hasta görünmüyor.",
+	"Yaraların yokoluyor.\n\r", "Yaraları yokolan $n rahatlamış görünüyor." );
 }
 
 
 
 void spell_cure_light( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int heal;
-
-    heal = dice(1, 8) + level / 4 + 5;
-    victim->hit = UMIN( victim->hit + heal, victim->max_hit );
-    update_pos( victim );
-    send_to_char( "Kendini iyi hissediyorsun!\n\r", victim );
-    if ( ch != victim )
-	send_to_char( "Tamam.\n\r", ch );
-    return;
+    heal_spell( ch, (CHAR_DATA *) vo, dice(1, 8) + level / 4 + 5, "Kendini iyi hissediyorsun!\n\r" );
 }
 
 
 
 void spell_cure_poison( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-
-    if ( !is_affected( victim, gsn_poison ) )
-    {
-	if (victim == ch)
-  send_to_char("Zehirlenmedin.\n\r",ch);
-else
-  act("$N zehirlenmiş görünmüyor.",ch,NULL,victim,TO_CHAR);
-	return;
-    }
-
-    if (check_dispel(level,victim,gsn_poison))
-    {
-      send_to_char("Vücudundan bir sıcaklık geçiyor.\n\r",victim);
-    	act("$n daha iyi görünüyor.",victim,NULL,NULL,TO_ROOM);
-    }
-    else
-	send_to_char("Büyü işe yaramadı.\n\r",ch);
+    cure_affect_spell( level, ch, (CHAR_DATA *) vo, gsn_poison,
+	"Zehirlenmedin.\n\r", "$N zehirlenmiş görünmüyor.",
+	"Vücudundan bir sıcaklık geçiyor.\n\r", "$n daha iyi görünüyor." );
 }
 
 void spell_cure_serious( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int heal;
-
-    heal = dice(2, 8) + level / 3 + 10 ;
-    victim->hit = UMIN( victim->hit + heal, victim->max_hit );
-    update_pos( victim );
-    send_to_char( "Kendini iyi hissediyorsun!\n\r", victim );
-    if ( ch != victim )
-	send_to_char( "Tamam.\n\r", ch );
-    return;
+    heal_spell( ch, (CHAR_DATA *) vo, dice(2, 8) + level / 3 + 10, "Kendini iyi hissediyorsun!\n\r" );
 }
 
 
@@ -2129,7 +1952,7 @@ void spell_curse( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 	{
 	    AFFECT_DATA *paf;
 
-	    paf = affect_find(obj->affected,skill_lookup("bless"));
+	    paf = affect_find(obj->affected,gsn_bless);
 	    if (!saves_dispel(level,paf != NULL ? paf->level : obj->level,0))
 	    {
 		if (paf != NULL)
@@ -2184,73 +2007,75 @@ void spell_curse( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 }
 
 
-/* RT replacement demonfire spell */
-
-void spell_demonfire(int sn, int level, CHAR_DATA *ch, void *vo,int target)
+/*
+ * Felsefeye bağlı ateş büyüleri (iblis ateşi, mavi alev): büyücü felsefeye
+ * uymuyorsa büyü kendine döner. Gerçek kurbanı döndürür.
+ */
+static CHAR_DATA *aligned_fire( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim,
+				bool misaligned, int dam_type, const char *turn_msg,
+				const char *room_msg, const char *vict_msg, const char *self_msg )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
     int dam;
 
-    if ( !IS_NPC(ch) && !IS_EVIL(ch) )
+    if ( !IS_NPC(ch) && misaligned )
     {
 	victim = ch;
-  send_to_char("İblisler sana dönüyor!\n\r",ch);
+	send_to_char( turn_msg, ch );
     }
 
     if (victim != ch)
     {
-      act("$n cehennem iblislerini $S üzerine salıyor!",
-    	    ch,NULL,victim,TO_ROOM);
-    	act("$n cehennem iblislerini senin üzerine salıyor!",
-    	    ch,NULL,victim,TO_VICT);
-    	send_to_char("Cehennem iblislerine sesleniyorsun!\n\r",ch);
+	act( room_msg, ch, NULL, victim, TO_ROOM );
+	act( vict_msg, ch, NULL, victim, TO_VICT );
+	send_to_char( self_msg, ch );
     }
+
     dam = dice( level, 10 );
-    if ( saves_spell( level, victim,DAM_NEGATIVE) )
+    if ( saves_spell( level, victim, dam_type ) )
 	dam /= 2;
-    damage( ch, victim, dam, sn, DAM_NEGATIVE ,TRUE);
+    damage( ch, victim, dam, sn, dam_type, TRUE );
+    return victim;
+}
+
+/* RT replacement demonfire spell */
+void spell_demonfire(int sn, int level, CHAR_DATA *ch, void *vo,int target)
+{
+    CHAR_DATA *victim = aligned_fire( sn, level, ch, (CHAR_DATA *) vo, !IS_EVIL(ch), DAM_NEGATIVE,
+	"İblisler sana dönüyor!\n\r",
+	"$n cehennem iblislerini $S üzerine salıyor!",
+	"$n cehennem iblislerini senin üzerine salıyor!",
+	"Cehennem iblislerine sesleniyorsun!\n\r" );
+
     spell_curse(gsn_curse, 3 * level / 4, ch, (void *) victim,TARGET_CHAR);
 }
 
 /* added by chronos */
 void spell_bluefire(int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    if ( !IS_NPC(ch) && !IS_NEUTRAL(ch) )
-    {
-	victim = ch;
-  send_to_char("Mavi alevin sana dönüyor!\n\r",ch);
-    }
-
-    if (victim != ch)
-    {
-      act("$n dünyanın mavi alevini $S üzerine salıyor!",
-    	    ch,NULL,victim,TO_ROOM);
-    	act("$n dünyanın yansızlarını üzerine salıyor!",
-    	    ch,NULL,victim,TO_VICT);
-    	send_to_char("Dünyanın yansızlarına sesleniyorsun!\n\r",ch);
-    }
-
-    dam = dice( level, 10 );
-    if ( saves_spell( level, victim,DAM_FIRE) )
-	dam /= 2;
-    damage( ch, victim, dam, sn, DAM_FIRE ,TRUE);
+    aligned_fire( sn, level, ch, (CHAR_DATA *) vo, !IS_NEUTRAL(ch), DAM_FIRE,
+	"Mavi alevin sana dönüyor!\n\r",
+	"$n dünyanın mavi alevini $S üzerine salıyor!",
+	"$n dünyanın yansızlarını üzerine salıyor!",
+	"Dünyanın yansızlarına sesleniyorsun!\n\r" );
 }
 
 
-void spell_detect_evil( int sn, int level, CHAR_DATA *ch, void *vo,int target )
+/*
+ * Saptama büyüleri: saptama biti zaten varsa already_* mesajı, yoksa
+ * TO_DETECTS etkisi ve on_msg.
+ */
+static void detect_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, int bit,
+			  const char *already_self, const char *already_other,
+			  const char *on_msg )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
-    if ( CAN_DETECT(victim, DETECT_EVIL) )
+    if ( CAN_DETECT(victim, bit) )
     {
 	if (victim == ch)
-  send_to_char("Zaten kem'i saptıyorsun.\n\r",ch);
-else
-  act("$N zaten kem'i saptıyor.",ch,NULL,victim,TO_CHAR);
+	    send_to_char(already_self,ch);
+	else
+	    act(already_other,ch,NULL,victim,TO_CHAR);
 	return;
     }
     af.where     = TO_DETECTS;
@@ -2259,129 +2084,50 @@ else
     af.duration  = (5 + level / 3);
     af.modifier  = 0;
     af.location  = APPLY_NONE;
-    af.bitvector = DETECT_EVIL;
+    af.bitvector = bit;
     affect_to_char( victim, &af );
-    send_to_char( "Gözlerin yanıyor.\n\r", victim );
+    send_to_char( on_msg, victim );
     if ( ch != victim )
 	send_to_char( "Tamam.\n\r", ch );
-    return;
+}
+
+void spell_detect_evil( int sn, int level, CHAR_DATA *ch, void *vo,int target )
+{
+    detect_spell( sn, level, ch, (CHAR_DATA *) vo, DETECT_EVIL,
+	"Zaten kem'i saptıyorsun.\n\r", "$N zaten kem'i saptıyor.", "Gözlerin yanıyor.\n\r" );
 }
 
 
 void spell_detect_good( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    AFFECT_DATA af;
-
-    if ( CAN_DETECT(victim, DETECT_GOOD) )
-    {
-	if (victim == ch)
-  send_to_char("Zaten iyiyi saptıyorsun.\n\r",ch);
-else
-  act("$N zaten iyiyi saptıyor.",ch,NULL,victim,TO_CHAR);
-	return;
-    }
-    af.where     = TO_DETECTS;
-    af.type      = sn;
-    af.level     = level;
-    af.duration  = (5 + level / 3);
-    af.modifier  = 0;
-    af.location  = APPLY_NONE;
-    af.bitvector = DETECT_GOOD;
-    affect_to_char( victim, &af );
-    send_to_char( "Gözlerin yanıyor.\n\r", victim );
-    if ( ch != victim )
-	send_to_char( "Tamam.\n\r", ch );
-    return;
+    detect_spell( sn, level, ch, (CHAR_DATA *) vo, DETECT_GOOD,
+	"Zaten iyiyi saptıyorsun.\n\r", "$N zaten iyiyi saptıyor.", "Gözlerin yanıyor.\n\r" );
 }
 
 
 
 void spell_detect_hidden(int sn,int level,CHAR_DATA *ch,void *vo,int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    AFFECT_DATA af;
-
-    if ( CAN_DETECT(victim, DETECT_HIDDEN) )
-    {
-	if (victim == ch)
-  send_to_char("Olabildiğince tetiktesin. \n\r",ch);
-else
-  act("$N zaten saklı yaşam formlarını saptayabiliyor.",ch,NULL,victim,TO_CHAR);
-	return;
-    }
-    af.where     = TO_DETECTS;
-    af.type      = sn;
-    af.level     = level;
-    af.duration  = (5 + level / 3);
-    af.location  = APPLY_NONE;
-    af.modifier  = 0;
-    af.bitvector = DETECT_HIDDEN;
-    affect_to_char( victim, &af );
-    send_to_char("Dikkatin artıyor.\n\r", victim );
-    if ( ch != victim )
-	send_to_char( "Tamam.\n\r", ch );
-    return;
+    detect_spell( sn, level, ch, (CHAR_DATA *) vo, DETECT_HIDDEN,
+	"Olabildiğince tetiktesin.\n\r", "$N zaten saklı yaşam formlarını saptayabiliyor.",
+	"Dikkatin artıyor.\n\r" );
 }
 
 
 
 void spell_detect_invis( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    AFFECT_DATA af;
-
-    if ( CAN_DETECT(victim, DETECT_INVIS) )
-    {
-	if (victim == ch)
-  send_to_char("Zaten görünmezi görüyorsun.\n\r",ch);
-else
-  act("$N zaten görünmezi görüyor.",ch,NULL,victim,TO_CHAR);
-	return;
-    }
-
-    af.where     = TO_DETECTS;
-    af.type      = sn;
-    af.level     = level;
-    af.duration  = (5 + level / 3);
-    af.modifier  = 0;
-    af.location  = APPLY_NONE;
-    af.bitvector = DETECT_INVIS;
-    affect_to_char( victim, &af );
-    send_to_char( "Gözlerin yanıyor.\n\r", victim );
-    if ( ch != victim )
-	send_to_char( "Tamam.\n\r", ch );
-    return;
+    detect_spell( sn, level, ch, (CHAR_DATA *) vo, DETECT_INVIS,
+	"Zaten görünmezi görüyorsun.\n\r", "$N zaten görünmezi görüyor.", "Gözlerin yanıyor.\n\r" );
 }
 
 
 
 void spell_detect_magic( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    AFFECT_DATA af;
-
-    if ( CAN_DETECT(victim, DETECT_MAGIC) )
-    {
-	if (victim == ch)
-  send_to_char("Zaten büyülü auraları saptayaibliyorsun.\n\r",ch);
-else
-  act("$N zaten büyülüleri saptayabiliyor.",ch,NULL,victim,TO_CHAR);
-	return;
-    }
-
-    af.where     = TO_DETECTS;
-    af.type      = sn;
-    af.level	 = level;
-    af.duration  = (5 + level / 3);
-    af.modifier  = 0;
-    af.location  = APPLY_NONE;
-    af.bitvector = DETECT_MAGIC;
-    affect_to_char( victim, &af );
-    send_to_char( "Gözlerin yanıyor.\n\r", victim );
-    if ( ch != victim )
-	send_to_char( "Tamam.\n\r", ch );
-    return;
+    detect_spell( sn, level, ch, (CHAR_DATA *) vo, DETECT_MAGIC,
+	"Zaten büyülü auraları saptayaibliyorsun.\n\r", "$N zaten büyülüleri saptayabiliyor.",
+	"Gözlerin yanıyor.\n\r" );
 }
 
 
@@ -2407,17 +2153,22 @@ else
 
 
 
-void spell_dispel_evil( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+/*
+ * Kem defet / iyi defet: karşıt felsefeye hasar. good_side: kem defet (kem
+ * büyücü kendine döner, iyi kurban korunur); FALSE: iyi defet.
+ */
+static void dispel_alignment( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, bool good_side )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
+    int dam_type = good_side ? DAM_HOLY : DAM_NEGATIVE;
     int dam;
 
-    if ( !IS_NPC(ch) && IS_EVIL(ch) )
+    if ( !IS_NPC(ch) && ( good_side ? IS_EVIL(ch) : IS_GOOD(ch) ) )
 	victim = ch;
 
-    if ( IS_GOOD(victim) )
+    if ( good_side ? IS_GOOD(victim) : IS_EVIL(victim) )
     {
-      act( "Tanrılar $M koruyor.", ch, NULL, victim, TO_ROOM );
+	act( good_side ? "Tanrılar $M koruyor." : "$N kem ile korunuyor.",
+	     ch, NULL, victim, TO_ROOM );
 	return;
     }
 
@@ -2431,41 +2182,20 @@ void spell_dispel_evil( int sn, int level, CHAR_DATA *ch, void *vo,int target)
       dam = dice( level, 4 );
     else
       dam = UMAX(victim->hit, dice(level,4));
-    if ( saves_spell( level, victim,DAM_HOLY) )
+    if ( saves_spell( level, victim, dam_type ) )
 	dam /= 2;
-    damage( ch, victim, dam, sn, DAM_HOLY ,TRUE);
-    return;
+    damage( ch, victim, dam, sn, dam_type, TRUE );
+}
+
+void spell_dispel_evil( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+{
+    dispel_alignment( sn, level, ch, (CHAR_DATA *) vo, TRUE );
 }
 
 
 void spell_dispel_good( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    if ( !IS_NPC(ch) && IS_GOOD(ch) )
-	victim = ch;
-
-    if ( IS_EVIL(victim) )
-    {
-      act("$N kem ile korunuyor.", ch, NULL, victim, TO_ROOM );
-	return;
-    }
-
-    if ( IS_NEUTRAL(victim) )
-    {
-      act("$N etkilenmiş görünmüyor.", ch, NULL, victim, TO_CHAR );
-	return;
-    }
-
-    if (victim->hit > (ch->level * 4))
-      dam = dice( level, 4 );
-    else
-      dam = UMAX(victim->hit, dice(level,4));
-    if ( saves_spell( level, victim,DAM_NEGATIVE) )
-	dam /= 2;
-    damage( ch, victim, dam, sn, DAM_NEGATIVE ,TRUE);
-    return;
+    dispel_alignment( sn, level, ch, (CHAR_DATA *) vo, FALSE );
 }
 
 
@@ -2474,7 +2204,7 @@ void spell_dispel_good( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 void spell_dispel_magic( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
     CHAR_DATA *victim = (CHAR_DATA *) vo;
-    bool found = FALSE;
+    bool found;
 
     if (saves_spell(level, victim,DAM_OTHER))
     {
@@ -2483,135 +2213,15 @@ void spell_dispel_magic( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 	return;
     }
 
-    /* begin running through the spells */
+    found = dispel_all( level, victim, FALSE );
 
-    if (check_dispel(level,victim,skill_lookup("armor")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("enhanced armor")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("bless")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("blindness")))
-    {
-	found = TRUE;
-  act("$n artık kör değil.",victim,NULL,NULL,TO_ROOM);
-    }
-
-    if (check_dispel(level,victim,skill_lookup("calm")))
-    {
-	found = TRUE;
-  act("$n eskisi kadar barışçıl görünmüyor...",victim,NULL,NULL,TO_ROOM);
-    }
-
-    if (check_dispel(level,victim,skill_lookup("change sex")))
-    {
-	found = TRUE;
-  act("$n kendine gelmeye başlıyor.",victim,NULL,NULL,TO_ROOM);
-    }
-
-    if (check_dispel(level,victim,skill_lookup("charm person")))
-    {
-        found = TRUE;
-        act("$n özgür iradesini kazanıyor.",victim,NULL,NULL,TO_ROOM);
-    }
-
-    if (check_dispel(level,victim,skill_lookup("chill touch")))
-    {
-        found = TRUE;
-        act("$n ısınmış görünüyor.",victim,NULL,NULL,TO_ROOM);
-    }
-
-    if (check_dispel(level,victim,skill_lookup("curse")))
-        found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect evil")))
-        found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect good")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect hidden")))
-        found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect invis")))
-        found = TRUE;
-
+    /* Bilinen eski davranış (oynanış kararı): büyü defet her zaman "Tamam." der. */
     found = TRUE;
 
-    if (check_dispel(level,victim,skill_lookup("detect hidden")))
-        found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("detect magic")))
-        found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("faerie fire")))
-    {
-      act("$s aurası yokoluyor.",victim,NULL,NULL,TO_ROOM);
-        found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("fly")))
-    {
-      act("$n yere düşüyor!",victim,NULL,NULL,TO_ROOM);
-        found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("frenzy")))
-    {
-      act("$n eskisi kadar vahşi görünmüyor.",victim,NULL,NULL,TO_ROOM);;
-        found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("giant strength")))
-    {
-      act("$n eskisi kadar güçlü görünmüyor.",victim,NULL,NULL,TO_ROOM);
-        found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("haste")))
-    {
-      act("$n eskisi kadar çabuk hareket etmiyor.",victim,NULL,NULL,TO_ROOM);
-        found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("infravision")))
-        found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("invis")))
-    {
-      act("$n varlığa dönüyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("mass invis")))
-    {
-      act("$n varlığa dönüyor.",victim,NULL,NULL,TO_ROOM);
-        found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("pass door")))
-        found = TRUE;
-
-
-    if (check_dispel(level,victim,skill_lookup("protection evil")))
-        found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("protection good")))
-        found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("sanctuary")))
-    {
-      act("$s çevresindeki beyaz aura yokoluyor.",
-            victim,NULL,NULL,TO_ROOM);
-        found = TRUE;
-    }
-
+    /* büyü olmadan (doğuştan/eşyadan) gelen takdis ayrıca defedilir */
     if (IS_AFFECTED(victim,AFF_SANCTUARY)
 	&& !saves_dispel(level, victim->level,-1)
-	&& !is_affected(victim,skill_lookup("sanctuary"))
+	&& !is_affected(victim,gsn_sanctuary)
 	&& !(victim->spec_fun == spec_special_guard
 		|| victim->spec_fun == spec_stalker) )
     {
@@ -2619,72 +2229,6 @@ void spell_dispel_magic( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   act("$s çevresindeki beyaz aura yokoluyor.",
             victim,NULL,NULL,TO_ROOM);
         found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("shield")))
-    {
-      act("$m koruyan kalkan yokoluyor.",victim,NULL,NULL,TO_ROOM);
-        found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("sleep")))
-        found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("slow")))
-    {
-      act("$n eskisi gibi yavaş hareket etmiyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("stone skin")))
-    {
-      act("$s derisi eski haline dönüyor.",victim,NULL,NULL,TO_ROOM);
-        found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("weaken")))
-    {
-      act("$n güçlenmiş görünüyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("shielding")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("web")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("fear")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("protection heat")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("protection cold")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("magic resistance")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("hallucination")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("terangreal")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("power word stun")))
-	found = TRUE;
-
-    if (check_dispel(level,victim,skill_lookup("corruption")))
-    {
-      act("$n daha sağlıklı görünüyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
-    }
-
-    if (check_dispel(level,victim,skill_lookup("web")))
-    {
-      act("$s çevresindeki ağlar eriyor.",victim,NULL,NULL,TO_ROOM);
-	found = TRUE;
     }
 
     if (found)
@@ -2738,20 +2282,206 @@ void spell_earthquake( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 		obj_to_room( corpse, ch->in_room );
 		extract_obj( obj );
 		corpse->timer   = number_range( 25, 40 );
-    act("Deprem nedeniyle $p açığa çıkıyor.\n\r",ch, corpse, NULL, TO_ALL );
+    act("Deprem nedeniyle $p açığa çıkıyor.",ch, corpse, NULL, TO_ALL );
 	}
     }
 
     return;
 }
 
+/* Yükseltme (enchant) zarının sonucu. */
+enum enchant_result
+{
+    ENCH_DESTROYED,	/* nesne yok oldu */
+    ENCH_DISENCHANTED,	/* tüm etkiler ve bayraklar silindi */
+    ENCH_NOTHING,	/* değişiklik yok */
+    ENCH_SUCCESS,
+    ENCH_EXCEPTIONAL
+};
+
+/* Yükseltilecek konum ve bonus-kare katsayısı. */
+struct enchant_loc
+{
+    int  location;
+    int  per_bonus;	/* fail += per_bonus * bonus^2 */
+    bool found;
+};
+
+/*
+ * Nesnenin etkilerini tarar: konumu eşleşen etkiler found işaretler ve
+ * bonusun karesiyle, diğer etkiler per_other ile başarısızlık şansını artırır.
+ * Nesne henüz kendi kopyasını almadıysa prototipin etkileri de sayılır.
+ */
+static int enchant_scan( OBJ_DATA *obj, struct enchant_loc *locs, int nlocs, int per_other )
+{
+    AFFECT_DATA *paf;
+    int fail = 0, i, pass;
+
+    for ( pass = 0; pass < 2; pass++ )
+    {
+	if ( pass == 0 && obj->enchanted )
+	    continue;
+	for ( paf = pass == 0 ? obj->pIndexData->affected : obj->affected;
+	      paf != NULL; paf = paf->next )
+	{
+	    for ( i = 0; i < nlocs; i++ )
+		if ( paf->location == locs[i].location )
+		    break;
+	    if ( i < nlocs )
+	    {
+		locs[i].found = TRUE;
+		fail += locs[i].per_bonus * paf->modifier * paf->modifier;
+	    }
+	    else  /* things get a little harder */
+		fail += per_other;
+	}
+    }
+    return fail;
+}
+
+/* Nesnenin kendi etki listesini boşaltır. */
+static void obj_strip_affects( OBJ_DATA *obj )
+{
+    AFFECT_DATA *paf, *paf_next;
+
+    for (paf = obj->affected; paf != NULL; paf = paf_next)
+    {
+	paf_next = paf->next;
+	free_affect(paf);
+    }
+    obj->affected = NULL;
+}
+
+/* Prototipin etkilerini nesnenin kendi listesine kopyalar (ilk yükseltmede). */
+static void enchant_copy_affects( OBJ_DATA *obj )
+{
+    AFFECT_DATA *paf, *af_new;
+
+    if ( obj->enchanted )
+	return;
+    obj->enchanted = TRUE;
+
+    for (paf = obj->pIndexData->affected; paf != NULL; paf = paf->next)
+    {
+	af_new = new_affect();
+
+	af_new->next = obj->affected;
+	obj->affected = af_new;
+
+	af_new->where	= paf->where;
+	af_new->type 	= UMAX(0,paf->type);
+	af_new->level	= paf->level;
+	af_new->duration	= paf->duration;
+	af_new->location	= paf->location;
+	af_new->modifier	= paf->modifier;
+	af_new->bitvector	= paf->bitvector;
+    }
+}
+
+/*
+ * Yükseltme zarı: yok etme (fail/5), büyü bozma (fail/disenchant_div),
+ * başarısız (<= fail), başarı (<= success_max) ya da olağanüstü. Mesajlar ve
+ * nesne değişiklikleri burada; başarıda ITEM_MAGIC (olağanüstüde ITEM_GLOW da)
+ * eklenir, seviye bir artar, prototip etkileri nesneye kopyalanır.
+ */
+static enum enchant_result enchant_roll( CHAR_DATA *ch, OBJ_DATA *obj, int level, int fail,
+					 int disenchant_div, int success_max,
+					 const char *destroy_msg, const char *success_msg,
+					 const char *exceptional_msg )
+{
+    int result = number_percent();
+
+    /* the moment of truth */
+    if (result < (fail / 5))  /* item destroyed */
+    {
+	act(destroy_msg,ch,obj,NULL,TO_CHAR);
+	act(destroy_msg,ch,obj,NULL,TO_ROOM);
+	extract_obj(obj);
+	return ENCH_DESTROYED;
+    }
+
+    if (result < (fail / disenchant_div)) /* item disenchanted */
+    {
+	act("$p parlak bir ışık vererek yokoluyor.",ch,obj,NULL,TO_CHAR);
+	act("$p parlak bir ışık vererek yokoluyor.",ch,obj,NULL,TO_ROOM);
+	obj->enchanted = TRUE;
+	obj_strip_affects(obj);
+	obj->extra_flags = 0;
+	return ENCH_DISENCHANTED;
+    }
+
+    if ( result <= fail )  /* failed, no bad result */
+    {
+	send_to_char("Değişen bir şey yok.\n\r",ch);
+	return ENCH_NOTHING;
+    }
+
+    /* okay, move all the old flags into new vectors if we have to */
+    enchant_copy_affects(obj);
+
+    if (obj->level < LEVEL_HERO)
+	obj->level = UMIN(LEVEL_HERO - 1,obj->level + 1);
+
+    SET_BIT(obj->extra_flags, ITEM_MAGIC);
+    if (result <= success_max)  /* success! */
+    {
+	act(success_msg,ch,obj,NULL,TO_CHAR);
+	act(success_msg,ch,obj,NULL,TO_ROOM);
+	return ENCH_SUCCESS;
+    }
+
+    /* exceptional enchant */
+    act(exceptional_msg,ch,obj,NULL,TO_CHAR);
+    act(exceptional_msg,ch,obj,NULL,TO_ROOM);
+    SET_BIT(obj->extra_flags,ITEM_GLOW);
+    return ENCH_EXCEPTIONAL;
+}
+
+/*
+ * Konumdaki mevcut etkiyi added kadar artırır (found), yoksa yeni bir nesne
+ * etkisi ekler. hum: bonus 4'ü aşınca ITEM_HUM.
+ */
+static void enchant_bump( OBJ_DATA *obj, int sn, int level, int location, int added,
+			  bool found, bool hum )
+{
+    AFFECT_DATA *paf;
+
+    if ( found )
+    {
+	for ( paf = obj->affected; paf != NULL; paf = paf->next)
+	{
+	    if ( paf->location == location )
+	    {
+		paf->type = sn;
+		paf->modifier += added;
+		paf->level = UMAX(paf->level,level);
+		if ( hum && paf->modifier > 4 )
+		    SET_BIT(obj->extra_flags,ITEM_HUM);
+	    }
+	}
+	return;
+    }
+
+    /* add a new affect */
+    paf = new_affect();
+
+    paf->where	= TO_OBJECT;
+    paf->type	= sn;
+    paf->level	= level;
+    paf->duration	= -1;
+    paf->location	= location;
+    paf->modifier	=  added;
+    paf->bitvector  = 0;
+    paf->next	= obj->affected;
+    obj->affected	= paf;
+}
+
 void spell_enchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
     OBJ_DATA *obj = (OBJ_DATA *) vo;
-    AFFECT_DATA *paf;
-    int result, fail;
-    int ac_bonus, added;
-    bool ac_found = FALSE;
+    struct enchant_loc locs[1] = { { APPLY_AC, 5, FALSE } };
+    enum enchant_result result;
+    int fail;
 
     if (obj->item_type != ITEM_ARMOR)
     {
@@ -2765,38 +2495,8 @@ void spell_enchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 	return;
     }
 
-    /* this means they have no bonus */
-    ac_bonus = 0;
     fail = 25;	/* base 25% chance of failure */
-
-    /* find the bonuses */
-
-    if (!obj->enchanted)
-	for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
-	{
-	    if ( paf->location == APPLY_AC )
-	    {
-	    	ac_bonus = paf->modifier;
-		ac_found = TRUE;
-	    	fail += 5 * (ac_bonus * ac_bonus);
- 	    }
-
-	    else  /* things get a little harder */
-	    	fail += 20;
-    	}
-
-    for ( paf = obj->affected; paf != NULL; paf = paf->next )
-    {
-	if ( paf->location == APPLY_AC )
-  	{
-	    ac_bonus = paf->modifier;
-	    ac_found = TRUE;
-	    fail += 5 * (ac_bonus * ac_bonus);
-	}
-
-	else /* things get a little harder */
-	    fail += 20;
-    }
+    fail += enchant_scan( obj, locs, 1, 20 );
 
     /* apply other modifiers */
     fail -= level;
@@ -2808,128 +2508,23 @@ void spell_enchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
     fail = URANGE(5,fail,85);
 
-    result = number_percent();
-
-    /* the moment of truth */
-    if (result < (fail / 5))  /* item destroyed */
-    {
-      act("$p kör edici bir ışıkla alev alarak buharlaşıyor!",ch,obj,NULL,TO_CHAR);
-    	act("$p kör edici bir ışıkla alev alarak buharlaşıyor!",ch,obj,NULL,TO_ROOM);
-	extract_obj(obj);
+    result = enchant_roll( ch, obj, level, fail, 3, 90 - level/5,
+	"$p kör edici bir ışıkla alev alarak buharlaşıyor!",
+	"$p altın renginde parlıyor.",
+	"$p parlak altın renginde parlıyor!" );
+    if ( result < ENCH_SUCCESS )
 	return;
-    }
 
-    if (result < (fail / 3)) /* item disenchanted */
-    {
-	AFFECT_DATA *paf_next;
-
-  act("$p parlak bir ışık vererek yokoluyor.",ch,obj,NULL,TO_CHAR);
-	act("$p parlak bir ışık vererek yokoluyor.",ch,obj,NULL,TO_ROOM);
-	obj->enchanted = TRUE;
-
-	/* remove all affects */
-	for (paf = obj->affected; paf != NULL; paf = paf_next)
-	{
-	    paf_next = paf->next;
-	    free_affect(paf);
-	}
-	obj->affected = NULL;
-
-	/* clear all flags */
-	obj->extra_flags = 0;
-	return;
-    }
-
-    if ( result <= fail )  /* failed, no bad result */
-    {
-      send_to_char("Değişen bir şey yok.\n\r",ch);
-	return;
-    }
-
-    /* okay, move all the old flags into new vectors if we have to */
-    if (!obj->enchanted)
-    {
-	AFFECT_DATA *af_new;
-	obj->enchanted = TRUE;
-
-	for (paf = obj->pIndexData->affected; paf != NULL; paf = paf->next)
-	{
-	    af_new = new_affect();
-
-	    af_new->next = obj->affected;
-	    obj->affected = af_new;
-
-	    af_new->where	= paf->where;
-	    af_new->type 	= UMAX(0,paf->type);
-	    af_new->level	= paf->level;
-	    af_new->duration	= paf->duration;
-	    af_new->location	= paf->location;
-	    af_new->modifier	= paf->modifier;
-	    af_new->bitvector	= paf->bitvector;
-	}
-    }
-
-    if (result <= (90 - level/5))  /* success! */
-    {
-      act("$p altın renginde parlıyor.",ch,obj,NULL,TO_CHAR);
-    	act("$p altın renginde parlıyor.",ch,obj,NULL,TO_ROOM);
-	SET_BIT(obj->extra_flags, ITEM_MAGIC);
-	added = -1;
-    }
-
-    else  /* exceptional enchant */
-    {
-      act("$p parlak altın renginde parlıyor!",ch,obj,NULL,TO_CHAR);
-    	act("$p parlak altın renginde parlıyor!",ch,obj,NULL,TO_ROOM);
-	SET_BIT(obj->extra_flags,ITEM_MAGIC);
-	SET_BIT(obj->extra_flags,ITEM_GLOW);
-	added = -2;
-    }
-
-    /* now add the enchantments */
-
-    if (obj->level < LEVEL_HERO)
-	obj->level = UMIN(LEVEL_HERO - 1,obj->level + 1);
-
-    if (ac_found)
-    {
-	for ( paf = obj->affected; paf != NULL; paf = paf->next)
-	{
-	    if ( paf->location == APPLY_AC)
-	    {
-		paf->type = sn;
-		paf->modifier += added;
-		paf->level = UMAX(paf->level,level);
-	    }
-	}
-    }
-    else /* add a new affect */
-    {
- 	paf = new_affect();
-
-	paf->where	= TO_OBJECT;
-	paf->type	= sn;
-	paf->level	= level;
-	paf->duration	= -1;
-	paf->location	= APPLY_AC;
-	paf->modifier	=  added;
-	paf->bitvector  = 0;
-    	paf->next	= obj->affected;
-    	obj->affected	= paf;
-    }
-
+    enchant_bump( obj, sn, level, APPLY_AC, result == ENCH_SUCCESS ? -1 : -2,
+		  locs[0].found, FALSE );
 }
-
-
-
 
 void spell_enchant_weapon(int sn,int level,CHAR_DATA *ch, void *vo,int target)
 {
     OBJ_DATA *obj = (OBJ_DATA *) vo;
-    AFFECT_DATA *paf;
-    int result, fail;
-    int hit_bonus, dam_bonus, added;
-    bool hit_found = FALSE, dam_found = FALSE;
+    struct enchant_loc locs[2] = { { APPLY_HITROLL, 2, FALSE }, { APPLY_DAMROLL, 2, FALSE } };
+    enum enchant_result result;
+    int fail, added;
 
     if (obj->item_type != ITEM_WEAPON)
     {
@@ -2943,53 +2538,8 @@ void spell_enchant_weapon(int sn,int level,CHAR_DATA *ch, void *vo,int target)
 	return;
     }
 
-    /* this means they have no bonus */
-    hit_bonus = 0;
-    dam_bonus = 0;
     fail = 25;	/* base 25% chance of failure */
-
-    /* find the bonuses */
-
-    if (!obj->enchanted)
-    	for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
-    	{
-            if ( paf->location == APPLY_HITROLL )
-            {
-	    	hit_bonus = paf->modifier;
-		hit_found = TRUE;
-	    	fail += 2 * (hit_bonus * hit_bonus);
- 	    }
-
-	    else if (paf->location == APPLY_DAMROLL )
-	    {
-	    	dam_bonus = paf->modifier;
-		dam_found = TRUE;
-	    	fail += 2 * (dam_bonus * dam_bonus);
-	    }
-
-	    else  /* things get a little harder */
-	    	fail += 25;
-    	}
-
-    for ( paf = obj->affected; paf != NULL; paf = paf->next )
-    {
-	if ( paf->location == APPLY_HITROLL )
-  	{
-	    hit_bonus = paf->modifier;
-	    hit_found = TRUE;
-	    fail += 2 * (hit_bonus * hit_bonus);
-	}
-
-	else if (paf->location == APPLY_DAMROLL )
-  	{
-	    dam_bonus = paf->modifier;
-	    dam_found = TRUE;
-	    fail += 2 * (dam_bonus * dam_bonus);
-	}
-
-	else /* things get a little harder */
-	    fail += 25;
-    }
+    fail += enchant_scan( obj, locs, 2, 25 );
 
     /* apply other modifiers */
     fail -= 3 * level/2;
@@ -3001,147 +2551,18 @@ void spell_enchant_weapon(int sn,int level,CHAR_DATA *ch, void *vo,int target)
 
     fail = URANGE(5,fail,95);
 
-    result = number_percent();
-
-    /* the moment of truth */
-    if (result < (fail / 5))  /* item destroyed */
-    {
-      act("$p şiddetle titreyerek patlıyor!",ch,obj,NULL,TO_CHAR);
-    	act("$p şiddetle titreyerek patlıyor!",ch,obj,NULL,TO_ROOM);
-	extract_obj(obj);
+    result = enchant_roll( ch, obj, level, fail, 2, 100 - level/5,
+	"$p şiddetle titreyerek patlıyor!",
+	"$p mavi renkte parlıyor.",
+	"$p parlak mavi renkte parlıyor!" );
+    if ( result < ENCH_SUCCESS )
 	return;
-    }
 
-    if (result < (fail / 2)) /* item disenchanted */
-    {
-	AFFECT_DATA *paf_next;
-
-  act("$p parlak bir ışık vererek yokoluyor.",ch,obj,NULL,TO_CHAR);
-	act("$p parlak bir ışık vererek yokoluyor.",ch,obj,NULL,TO_ROOM);
-	obj->enchanted = TRUE;
-
-	/* remove all affects */
-	for (paf = obj->affected; paf != NULL; paf = paf_next)
-	{
-	    paf_next = paf->next;
-	    free_affect(paf);
-	}
-	obj->affected = NULL;
-
-	/* clear all flags */
-	obj->extra_flags = 0;
-	return;
-    }
-
-    if ( result <= fail )  /* failed, no bad result */
-    {
-      send_to_char("Değişen bir şey yok.\n\r",ch);
-	return;
-    }
-
-    /* okay, move all the old flags into new vectors if we have to */
-    if (!obj->enchanted)
-    {
-	AFFECT_DATA *af_new;
-	obj->enchanted = TRUE;
-
-	for (paf = obj->pIndexData->affected; paf != NULL; paf = paf->next)
-	{
-	    af_new = new_affect();
-
-	    af_new->next = obj->affected;
-	    obj->affected = af_new;
-
-	    af_new->where	= paf->where;
-	    af_new->type 	= UMAX(0,paf->type);
-	    af_new->level	= paf->level;
-	    af_new->duration	= paf->duration;
-	    af_new->location	= paf->location;
-	    af_new->modifier	= paf->modifier;
-	    af_new->bitvector	= paf->bitvector;
-	}
-    }
-
-    if (result <= (100 - level/5))  /* success! */
-    {
-      act("$p mavi renkte parlıyor.",ch,obj,NULL,TO_CHAR);
-    	act("$p mavi renkte parlıyor.",ch,obj,NULL,TO_ROOM);
-	SET_BIT(obj->extra_flags, ITEM_MAGIC);
-	added = 1;
-    }
-
-    else  /* exceptional enchant */
-    {
-      act("$p parlak mavi renkte parlıyor!",ch,obj,NULL,TO_CHAR);
-    	act("$p parlak mavi renkte parlıyor!",ch,obj,NULL,TO_ROOM);
-	SET_BIT(obj->extra_flags,ITEM_MAGIC);
-	SET_BIT(obj->extra_flags,ITEM_GLOW);
-	added = 2;
-    }
-
-    /* now add the enchantments */
-
-    if (obj->level < LEVEL_HERO - 1)
-	obj->level = UMIN(LEVEL_HERO - 1,obj->level + 1);
-
-    if (dam_found)
-    {
-	for ( paf = obj->affected; paf != NULL; paf = paf->next)
-	{
-	    if ( paf->location == APPLY_DAMROLL)
-	    {
-		paf->type = sn;
-		paf->modifier += added;
-		paf->level = UMAX(paf->level,level);
-		if (paf->modifier > 4)
-		    SET_BIT(obj->extra_flags,ITEM_HUM);
-	    }
-	}
-    }
-    else /* add a new affect */
-    {
-	paf = new_affect();
-
-	paf->where	= TO_OBJECT;
-	paf->type	= sn;
-	paf->level	= level;
-	paf->duration	= -1;
-	paf->location	= APPLY_DAMROLL;
-	paf->modifier	=  added;
-	paf->bitvector  = 0;
-    	paf->next	= obj->affected;
-    	obj->affected	= paf;
-    }
-
-    if (hit_found)
-    {
-        for ( paf = obj->affected; paf != NULL; paf = paf->next)
-	{
-            if ( paf->location == APPLY_HITROLL)
-            {
-		paf->type = sn;
-                paf->modifier += added;
-                paf->level = UMAX(paf->level,level);
-                if (paf->modifier > 4)
-                    SET_BIT(obj->extra_flags,ITEM_HUM);
-            }
-	}
-    }
-    else /* add a new affect */
-    {
-        paf = new_affect();
-
-        paf->type       = sn;
-        paf->level      = level;
-        paf->duration   = -1;
-        paf->location   = APPLY_HITROLL;
-        paf->modifier   =  added;
-        paf->bitvector  = 0;
-        paf->next       = obj->affected;
-        obj->affected   = paf;
-    }
-
+    added = result == ENCH_SUCCESS ? 1 : 2;
+    enchant_bump( obj, sn, level, APPLY_DAMROLL, added, locs[1].found, TRUE );
+    enchant_bump( obj, sn, level, APPLY_HITROLL, added, locs[0].found, TRUE );
 }
+
 
 
 
@@ -3192,88 +2613,43 @@ void spell_hellfire( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 }
 
-void spell_iceball( int sn, int level, CHAR_DATA *ch, void *vo, int target )
+/*
+ * Odadaki (güvenli olmayan) herkese vuran top büyüleri: hasar bir kez atılır,
+ * her kurban kendi kurtarış zarına göre yarısını ya da tümünü alır; hareket
+ * puanı da düşer.
+ */
+static void area_blast( int sn, int level, CHAR_DATA *ch, int dam_type )
 {
     CHAR_DATA *tmp_vict;
     CHAR_DATA *tmp_next;
-    char buf[MAX_STRING_LENGTH];
-    int dam;
-    int movedam;
+    int dam = dice( level , 12);
+    int movedam = number_range( ch->level, 2 * ch->level );
 
-    dam = dice( level , 12);
-    movedam     = number_range( ch->level, 2 * ch->level );
-
-  for (tmp_vict = ch->in_room->people;tmp_vict != NULL;
-       tmp_vict = tmp_next)
+    for (tmp_vict = ch->in_room->people; tmp_vict != NULL; tmp_vict = tmp_next)
     {
-      tmp_next = tmp_vict->next_in_room;
+	int vdam = dam;
 
-      if ( !is_safe_spell(ch,tmp_vict,TRUE))
-        {
-          if (!IS_NPC(ch) && tmp_vict != ch &&
-              ch->fighting != tmp_vict && tmp_vict->fighting != ch &&
-              (IS_SET(tmp_vict->affected_by,AFF_CHARM) || !IS_NPC(tmp_vict)))
-            {
-            if (!can_see(tmp_vict, ch))
-                do_yell(tmp_vict, "İmdat! Biri bana saldırıyor!");
-            else
-              {
-                snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
-	(is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(tmp_vict))? ch->doppel->name : ch->name);
-                 do_yell(tmp_vict,buf);
-              }
-          }
+	tmp_next = tmp_vict->next_in_room;
+	if ( is_safe_spell(ch,tmp_vict,TRUE) )
+	    continue;
 
-          if (saves_spell(level,tmp_vict, DAM_COLD))
-            dam /= 2;
-          damage( ch, tmp_vict, dam, sn, DAM_COLD, TRUE );
-          tmp_vict->move -= UMIN(tmp_vict->move,movedam);
-
-        }
+	victim_yell_at_caster( tmp_vict, ch );
+	tmp_vict->move -= UMIN(tmp_vict->move,movedam);
+	if (saves_spell(level,tmp_vict, dam_type))
+	    vdam /= 2;
+	damage( ch, tmp_vict, vdam, sn, dam_type, TRUE );
     }
+}
+
+void spell_iceball( int sn, int level, CHAR_DATA *ch, void *vo, int target )
+{
+    area_blast( sn, level, ch, DAM_COLD );
 }
 
 void spell_fireball( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *tmp_vict;
-    CHAR_DATA *tmp_next;
-    char buf[MAX_STRING_LENGTH];
-    int dam;
-    int movedam;
-
-    dam = dice( level , 12);
-    movedam     = number_range( ch->level, 2 * ch->level );
-
-  for (tmp_vict = ch->in_room->people;tmp_vict != NULL;
-       tmp_vict = tmp_next)
-    {
-      tmp_next = tmp_vict->next_in_room;
-
-      if ( !is_safe_spell(ch,tmp_vict,TRUE))
-        {
-          if (!IS_NPC(ch) && tmp_vict != ch &&
-              ch->fighting != tmp_vict && tmp_vict->fighting != ch &&
-              (IS_SET(tmp_vict->affected_by,AFF_CHARM) || !IS_NPC(tmp_vict)))
-            {
-            if (!can_see(tmp_vict, ch))
-                do_yell(tmp_vict, "İmdat! Biri bana saldırıyor!");
-            else
-              {
-                snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
-	(is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(tmp_vict))? ch->doppel->name : ch->name);
-                 do_yell(tmp_vict,buf);
-              }
-          }
-
-          if (saves_spell(level,tmp_vict, DAM_FIRE))
-            dam /= 2;
-          damage( ch, tmp_vict, dam, sn, DAM_FIRE, TRUE );
-          tmp_vict->move -= UMIN(tmp_vict->move,movedam);
-
-        }
-    }
+    area_blast( sn, level, ch, DAM_FIRE );
 }
-
 
 void spell_fireproof(int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
@@ -3304,14 +2680,7 @@ void spell_fireproof(int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
 void spell_flamestrike( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice(level, 10);
-    if ( saves_spell( level, victim,DAM_FIRE) )
-	dam /= 2;
-    damage( ch, victim, dam, sn, DAM_FIRE ,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 10 ), DAM_FIRE, NULL );
 }
 
 
@@ -3441,7 +2810,7 @@ else
 	return;
     }
 
-    if (is_affected(victim,skill_lookup("calm")))
+    if (is_affected(victim,msn(MSN_CALM)))
     {
 	if (victim == ch)
   send_to_char("Neden bir an için sakinleşmiyorsun?\n\r",ch);
@@ -3481,13 +2850,15 @@ else
     act("$n gözlerine vahşi bir bakış alıyor!",victim,NULL,NULL,TO_ROOM);
 }
 
-void spell_gate( int sn, int level, CHAR_DATA *ch, void *vo,int target )
+/*
+ * Işınlanma büyülerinde (gate, astral walk, mist walk, solar flight, helical
+ * flow) hedef uygun mu? level_margin: kurbanın seviyesi level + margin'i
+ * geçemez. Kurbanın kurtarış zarı bir kez atılır; görev yaratığı denetimi
+ * yalnızca oyuncu büyücüde (yaratıkta pcdata yoktur).
+ */
+static bool can_travel_to( CHAR_DATA *ch, CHAR_DATA *victim, int level, int level_margin )
 {
-    CHAR_DATA *victim;
-    bool gate_pet;
-
-
-    if ( ( victim = get_char_world( ch, target_name ) ) == NULL
+    if ( victim == NULL
     ||   victim == ch
     ||   victim->in_room == NULL
     ||   !can_see_room(ch,victim->in_room)
@@ -3496,40 +2867,58 @@ void spell_gate( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     ||   IS_SET(victim->in_room->room_flags, ROOM_SOLITARY)
     ||   IS_SET(ch->in_room->room_flags, ROOM_NOSUMMON)
     ||   IS_SET(victim->in_room->room_flags, ROOM_NOSUMMON)
-    ||   victim->level >= level + 3
+    ||   victim->level >= level + level_margin
     ||   saves_spell(level,victim,DAM_OTHER)
-/*    ||   (!IS_NPC(victim) && victim->level >= LEVEL_HERO)  * NOT trust */
     ||   (IS_NPC(victim) && is_safe_nomessage(ch, victim) && IS_SET(victim->imm_flags,IMM_SUMMON))
     ||   (!IS_NPC(victim) && is_safe_nomessage(ch, victim) && IS_SET(victim->act,PLR_NOSUMMON))
     ||   (!IS_NPC(victim) && ch->in_room->area != victim->in_room->area )
-    ||   (IS_NPC(victim) && (victim->pIndexData->vnum == ch->pcdata->questmob))
-    ||   (IS_NPC(victim) && saves_spell( level, victim,DAM_OTHER) ) )
+    ||   (IS_NPC(victim) && !IS_NPC(ch) && victim->pIndexData->vnum == ch->pcdata->questmob) )
+	return FALSE;
+    return TRUE;
+}
+
+/*
+ * Büyücüyü (with_pet ise aynı odadaki evcil hayvanını da) hedef odaya taşır;
+ * ayrılış/varış mesajları her ikisi için de gösterilir.
+ */
+static void travel_to( CHAR_DATA *ch, ROOM_INDEX_DATA *to, const char *leave_msg,
+		       const char *self_msg, const char *arrive_msg, bool with_pet )
+{
+    CHAR_DATA *pet = ( with_pet && ch->pet != NULL && ch->pet->in_room == ch->in_room )
+	? ch->pet : NULL;
+
+    act( leave_msg, ch, NULL, NULL, TO_ROOM );
+    send_to_char( self_msg, ch );
+    char_from_room( ch );
+    char_to_room( ch, to );
+    act( arrive_msg, ch, NULL, NULL, TO_ROOM );
+    do_look( ch, "auto" );
+
+    if ( pet != NULL )
+    {
+	act( leave_msg, pet, NULL, NULL, TO_ROOM );
+	send_to_char( self_msg, pet );
+	char_from_room( pet );
+	char_to_room( pet, to );
+	act( arrive_msg, pet, NULL, NULL, TO_ROOM );
+	do_look( pet, "auto" );
+    }
+}
+
+void spell_gate( int sn, int level, CHAR_DATA *ch, void *vo,int target )
+{
+    CHAR_DATA *victim = get_char_world( ch, target_name );
+
+    if ( !can_travel_to( ch, victim, level, 3 ) )
     {
 	send_to_char( "Başaramadın.\n\r", ch );
 	return;
     }
-    if (ch->pet != NULL && ch->in_room == ch->pet->in_room)
-	gate_pet = TRUE;
-    else
-	gate_pet = FALSE;
 
-    act("$n bir geçide girerek kayboluyor.",ch,NULL,NULL,TO_ROOM);
-    send_to_char("Bir geçide girerek kayboluyorsun.\n\r",ch);
-    char_from_room(ch);
-    char_to_room(ch,victim->in_room);
-
-    act("$n bir geçitten çıkıyor.",ch,NULL,NULL,TO_ROOM);
-    do_look(ch,"auto");
-
-    if (gate_pet)
-    {
-	act("$n bir geçide girerek kayboluyor.",ch->pet,NULL,NULL,TO_ROOM);
-	send_to_char("Bir geçide girerek kayboluyorsun.\n\r",ch->pet);
-	char_from_room(ch->pet);
-	char_to_room(ch->pet,victim->in_room);
-	act("$n bir geçitten çıkıyor.",ch->pet,NULL,NULL,TO_ROOM);
-	do_look(ch->pet,"auto");
-    }
+    travel_to( ch, victim->in_room,
+	"$n bir geçide girerek kayboluyor.",
+	"Bir geçide girerek kayboluyorsun.\n\r",
+	"$n bir geçitten çıkıyor.", TRUE );
 }
 
 
@@ -3596,7 +2985,7 @@ else
 
     if (IS_AFFECTED(victim,AFF_SLOW))
     {
-	if (!check_dispel(level,victim,skill_lookup("slow")))
+	if (!check_dispel(level,victim,gsn_slow))
 	{
 	    if (victim != ch)
       send_to_char("Büyü işe yaramadı.\n\r",ch);
@@ -3629,17 +3018,32 @@ else
 
 void spell_heal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    victim->hit = UMIN( victim->hit + 100 + level / 10, victim->max_hit );
-    update_pos( victim );
-    send_to_char( "Sıcak bir duygu vücudunu sarıyor.\n\r", victim );
-    if ( ch != victim )
-	send_to_char( "Tamam.\n\r", ch );
-    return;
+    heal_spell( ch, (CHAR_DATA *) vo, 100 + level / 10, "Sıcak bir duygu vücudunu sarıyor.\n\r" );
+}
+
+/* Kızgın eşya: 'shed' doğruysa kurban eşyayı yere atar (mesajlar + oda), yoksa deri yanar.
+ * Eklenecek hasarı döndürür; shed_div 0 ise atma hasarı sabit 1'dir. */
+static int heat_metal_burn( CHAR_DATA *victim, OBJ_DATA *obj, bool shed,
+			    const char *shed_room, const char *shed_char, int shed_div,
+			    const char *burn_msg, int burn_div )
+{
+    if ( shed )
+    {
+	act( shed_room, victim, obj, NULL, TO_ROOM );
+	act( shed_char, victim, obj, NULL, TO_CHAR );
+	obj_from_char( obj );
+	obj_to_room( obj, victim->in_room );
+	return shed_div == 0 ? 1 : number_range( 1, obj->level ) / shed_div;
+    }
+    act( burn_msg, victim, obj, NULL, TO_CHAR );
+    return number_range( 1, obj->level ) / burn_div;
 }
 
 void spell_heat_metal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
+    static const char *shed_room = "$n bağırarak $p'yi yere atıyor!";
+    static const char *shed_char = "Seni yakmadan önce $p'yi çıkarıp atıyorsun.";
+    static const char *burn_msg  = "$p derini yakıyor!";
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     OBJ_DATA *obj_lose, *obj_next;
     int dam = 0;
@@ -3661,102 +3065,34 @@ void spell_heat_metal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 		switch ( obj_lose->item_type )
 		{
 		case ITEM_ARMOR:
-		if (obj_lose->wear_loc != -1) /* remove the item */
-		{
-		    if (can_drop_obj(victim,obj_lose)
-		    &&  (obj_lose->weight / 10) <
-			number_range(1,2 * get_curr_stat(victim,STAT_DEX))
-		    &&  remove_obj( victim, obj_lose, TRUE ))
-		    {
-          act("$n bağırarak $p'yi yere atıyor!",
-    			    victim,obj_lose,NULL,TO_ROOM);
-    			act("Seni yakmadan önce $p'yi çıkarıp atıyorsun.",
-			    victim,obj_lose,NULL,TO_CHAR);
-			dam += (number_range(1,obj_lose->level) / 3);
-			obj_from_char(obj_lose);
-			obj_to_room(obj_lose, victim->in_room);
-			fail = FALSE;
-		    }
-		    else /* stuck on the body! ouch! */
-		    {
-          act("$p derini yakıyor!",
-			    victim,obj_lose,NULL,TO_CHAR);
-			dam += (number_range(1,obj_lose->level));
-			fail = FALSE;
-		    }
-
-		}
-		else /* drop it if we can */
-		{
-		    if (can_drop_obj(victim,obj_lose))
-		    {
-          act("$n bağırarak $p'yi yere atıyor!",
-    			    victim,obj_lose,NULL,TO_ROOM);
-    			act("Seni yakmadan önce $p'yi çıkarıp atıyorsun.",
-			    victim,obj_lose,NULL,TO_CHAR);
-			dam += (number_range(1,obj_lose->level) / 6);
-			obj_from_char(obj_lose);
-			obj_to_room(obj_lose, victim->in_room);
-			fail = FALSE;
-		    }
-		    else /* cannot drop */
-		    {
-          act("$p derini yakıyor!",
-			    victim,obj_lose,NULL,TO_CHAR);
-			dam += (number_range(1,obj_lose->level) / 2);
-			fail = FALSE;
-		    }
-		}
-		break;
+		    if (obj_lose->wear_loc != -1) /* remove the item */
+			dam += heat_metal_burn( victim, obj_lose,
+			    can_drop_obj(victim,obj_lose)
+			    && (obj_lose->weight / 10) <
+				number_range(1,2 * get_curr_stat(victim,STAT_DEX))
+			    && remove_obj( victim, obj_lose, TRUE ),
+			    shed_room, shed_char, 3, burn_msg, 1 );
+		    else /* drop it if we can */
+			dam += heat_metal_burn( victim, obj_lose, can_drop_obj(victim,obj_lose),
+			    shed_room, shed_char, 6, burn_msg, 2 );
+		    fail = FALSE;
+		    break;
 		case ITEM_WEAPON:
-		if (obj_lose->wear_loc != -1) /* try to drop it */
-		{
-		    if (IS_WEAPON_STAT(obj_lose,WEAPON_FLAMING))
-			continue;
-
-		    if (can_drop_obj(victim,obj_lose)
-		    &&  remove_obj(victim,obj_lose,TRUE))
+		    if (obj_lose->wear_loc != -1) /* try to drop it */
 		    {
-          act("$n $p tarafından yakılınca onu yere attı.",
-    			    victim,obj_lose,NULL,TO_ROOM);
-    			send_to_char(
-    			    "Kor halindeki silahını yere atıyorsun!\n\r",
-			    victim);
-			dam += 1;
-			obj_from_char(obj_lose);
-			obj_to_room(obj_lose,victim->in_room);
-			fail = FALSE;
+			if (IS_WEAPON_STAT(obj_lose,WEAPON_FLAMING))
+			    continue;
+			dam += heat_metal_burn( victim, obj_lose,
+			    can_drop_obj(victim,obj_lose) && remove_obj(victim,obj_lose,TRUE),
+			    "$n $p tarafından yakılınca onu yere attı.",
+			    "Kor halindeki silahını yere atıyorsun!", 0,
+			    "Silahın etini yakıyor!", 1 );
 		    }
-		    else /* YOWCH! */
-		    {
-          send_to_char("Silahın etini yakıyor!\n\r",victim);
-
-			dam += number_range(1,obj_lose->level);
-			fail = FALSE;
-		    }
-		}
-		else /* drop it if we can */
-		{
-		    if (can_drop_obj(victim,obj_lose))
-		    {
-          act("$n kor halindeki $p'yi yere atıyor!",
-    			    victim,obj_lose,NULL,TO_ROOM);
-    			act("Seni yakmadan önce $p'yi çıkarıp atıyorsun.",
-			    victim,obj_lose,NULL,TO_CHAR);
-			dam += (number_range(1,obj_lose->level) / 6);
-			obj_from_char(obj_lose);
-			obj_to_room(obj_lose, victim->in_room);
-			fail = FALSE;
-		    }
-		    else /* cannot drop */
-		    {
-          act("$p derini yakıyor!",
-			    victim,obj_lose,NULL,TO_CHAR);
-			dam += (number_range(1,obj_lose->level) / 2);
-			fail = FALSE;
-		    }
-		}
-		break;
+		    else /* drop it if we can */
+			dam += heat_metal_burn( victim, obj_lose, can_drop_obj(victim,obj_lose),
+			    "$n kor halindeki $p'yi yere atıyor!", shed_char, 6, burn_msg, 2 );
+		    fail = FALSE;
+		    break;
 		}
 	    }
 	}
@@ -3774,18 +3110,24 @@ void spell_heat_metal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     }
 }
 
+/* Kutsal söz: karşı felsefeden kurban lanetlenir ve hasar alır. */
+static void holy_word_smite( CHAR_DATA *ch, CHAR_DATA *vch, int sn, int level,
+			     int curse_level, int dice_size )
+{
+    if ( is_safe_spell(ch,vch,TRUE) )
+	return;
+
+    victim_yell_at_caster( vch, ch );
+    spell_curse(gsn_curse,curse_level,ch,(void *) vch, TARGET_CHAR);
+    send_to_char("Dövülmüş durumdasın!\n\r",vch);
+    damage(ch,vch,dice(level,dice_size),sn,DAM_ENERGY, TRUE);
+}
+
 /* RT really nasty high-level attack spell */
 void spell_holy_word(int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
     CHAR_DATA *vch;
     CHAR_DATA *vch_next;
-    char buf[MAX_STRING_LENGTH];
-    int dam;
-    int bless_num, curse_num, frenzy_num;
-
-    bless_num = skill_lookup("bless");
-    curse_num = skill_lookup("curse");
-    frenzy_num = skill_lookup("frenzy");
 
     act("$n kutsal sözler mırıldanıyor!",ch,NULL,NULL,TO_ROOM);
    send_to_char("Kutsal sözler mırıldanıyorsun.\n\r",ch);
@@ -3799,68 +3141,94 @@ void spell_holy_word(int sn, int level, CHAR_DATA *ch, void *vo,int target)
 	    (IS_NEUTRAL(ch) && IS_NEUTRAL(vch)) )
 	{
     send_to_char("Kendini daha güçlü hissediyorsun.\n\r",vch);
-	  spell_frenzy(frenzy_num,level,ch,(void *) vch,TARGET_CHAR);
-	  spell_bless(bless_num,level,ch,(void *) vch,TARGET_CHAR);
+	  spell_frenzy(msn(MSN_FRENZY),level,ch,(void *) vch,TARGET_CHAR);
+	  spell_bless(gsn_bless,level,ch,(void *) vch,TARGET_CHAR);
 	}
 
 	else if ((IS_GOOD(ch) && IS_EVIL(vch)) ||
 		 (IS_EVIL(ch) && IS_GOOD(vch)) )
-	{
-          if (!is_safe_spell(ch,vch,TRUE))
-          {
-            if (!IS_NPC(ch) && vch != ch &&
-                ch->fighting != vch && vch->fighting != ch &&
-                (IS_SET(vch->affected_by,AFF_CHARM) || !IS_NPC(vch)))
-              {
-            if (!can_see(vch, ch))
-                do_yell(vch, "İmdat! Biri bana saldırıyor!");
-            else
-              {
-                 snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
-                    (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(vch))?
-                     ch->doppel->name : ch->name);
-                 do_yell(vch,buf);
-              }
-          }
-
-            spell_curse(curse_num,level,ch,(void *) vch, TARGET_CHAR);
-            send_to_char("Dövülmüş durumdasın!\n\r",vch);
-            dam = dice(level,6);
-            damage(ch,vch,dam,sn,DAM_ENERGY, TRUE);
-          }
-        }
+	    holy_word_smite( ch, vch, sn, level, level, 6 );
 
 	else if (IS_NEUTRAL(ch))
-	{
-          if (!is_safe_spell(ch,vch,TRUE))
-          {
-            if (!IS_NPC(ch) && vch != ch &&
-                ch->fighting != vch && vch->fighting != ch &&
-                (IS_SET(vch->affected_by,AFF_CHARM) || !IS_NPC(vch)))
-              {
-            if (!can_see(vch, ch))
-                do_yell(vch, "İmdat! Biri bana saldırıyor!");
-            else
-              {
-                 snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
-                    (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(vch))?
-                     ch->doppel->name : ch->name);
-                 do_yell(vch,buf);
-              }
-          }
-
-            spell_curse(curse_num,level/2,ch,(void *) vch, TARGET_CHAR);
-            send_to_char("Dövülmüş durumdasın!\n\r",vch);
-            dam = dice(level,4);
-            damage(ch,vch,dam,sn,DAM_ENERGY, TRUE);
-	  }
-	}
+	    holy_word_smite( ch, vch, sn, level, level / 2, 4 );
     }
 
     send_to_char("Gücünün akıp gittiğini hissediyorsun.\n\r",ch);
     gain_exp( ch, -1 * number_range(1,10) * 5);
-    ch->move /= (4/3);
-    ch->hit /= (4/3);
+    /* büyücünün hareket ve yaşam puanının dörtte biri gider ((4/3) tam sayı bölmesi 1'di) */
+    ch->move = ch->move * 3 / 4;
+    ch->hit = ch->hit * 3 / 4;
+}
+
+/* Silah türü (value[0]) Türkçe adı. */
+static const char *weapon_type_name( int type )
+{
+    static const struct { int type; const char *name; } names[] =
+    {
+	{ WEAPON_EXOTIC,  "egzotik"     },
+	{ WEAPON_SWORD,   "kılıç"       },
+	{ WEAPON_DAGGER,  "hançer"      },
+	{ WEAPON_SPEAR,   "mızrak/asa"  },
+	{ WEAPON_MACE,    "topuz/çomak" },
+	{ WEAPON_AXE,     "balta"       },
+	{ WEAPON_FLAIL,   "döven"       },
+	{ WEAPON_WHIP,    "kırbaç"      },
+	{ WEAPON_POLEARM, "teber"       },
+	{ WEAPON_BOW,     "yay"         },
+	{ WEAPON_ARROW,   "ok"          },
+	{ WEAPON_LANCE,   "kargı"       },
+	{ -1, NULL }
+    };
+    int i;
+
+    for ( i = 0; names[i].name != NULL; i++ )
+	if ( names[i].type == type )
+	    return names[i].name;
+    return "bilinmiyor";
+}
+
+/* identify: tek bir affect satırını yazdırır (show_duration: nesne affect'i, süreli). */
+static void identify_affect( CHAR_DATA *ch, AFFECT_DATA *paf, bool show_duration )
+{
+    if ( paf->location != APPLY_NONE && paf->modifier != 0 )
+    {
+	printf_to_char(ch,"%s etkisi %d birim", affect_loc_name( paf->location ), paf->modifier );
+	if ( show_duration && paf->duration > -1 )
+	    printf_to_char(ch,", %d saat.\n\r",paf->duration);
+	else
+	    send_to_char(".\n\r", ch);
+    }
+
+    if ( !paf->bitvector )
+	return;
+
+    switch(paf->where)
+    {
+    case TO_AFFECTS:
+	printf_to_char(ch,"%s etkisi ekler.\n\r",affect_bit_name(paf->bitvector));
+	break;
+    case TO_OBJECT:
+	printf_to_char(ch,"%s eşya özelliği ekler.\n\r",extra_bit_name(paf->bitvector));
+	break;
+    case TO_WEAPON:
+	printf_to_char(ch,"%s silah özelliği ekler.\n\r",weapon_bit_name(paf->bitvector));
+	break;
+    case TO_IMMUNE:
+	printf_to_char(ch,"%s bağışıklığı ekler.\n\r",imm_bit_name(paf->bitvector));
+	break;
+    case TO_RESIST:
+	printf_to_char(ch,"%s direnci ekler.\n\r",imm_bit_name(paf->bitvector));
+	break;
+    case TO_VULN:
+	printf_to_char(ch,"%s dayanıksızlığı ekler.\n\r",imm_bit_name(paf->bitvector));
+	break;
+    case TO_DETECTS:
+	printf_to_char(ch,"%s saptaması ekler.\n\r",detect_bit_name(paf->bitvector));
+	break;
+    default:
+	printf_to_char(ch,"Bilinmeyen bit %d: %d\n\r",paf->where,paf->bitvector);
+	break;
+    }
 }
 
 void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
@@ -3868,6 +3236,7 @@ void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     OBJ_DATA *obj = (OBJ_DATA *) vo;
     char buf[MAX_STRING_LENGTH];
     AFFECT_DATA *paf;
+    int i;
 
     snprintf(buf, sizeof(buf),
       "Obje '%s', tip %s, materyal %s, ekstra özellik %s.\n\rAğırlık %d gr, değer %d, seviye %d.\n\r",
@@ -3898,33 +3267,9 @@ void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     snprintf(buf, sizeof(buf), "Seviye %d büyüleri:", obj->value[0] );
 	send_to_char( buf, ch );
 
-	if ( obj->value[1] >= 0 && obj->value[1] < MAX_SKILL )
-	{
-	    send_to_char( " '", ch );
-	    send_to_char( skill_table[obj->value[1]].name[1], ch );
-	    send_to_char( "'", ch );
-	}
-
-	if ( obj->value[2] >= 0 && obj->value[2] < MAX_SKILL )
-	{
-	    send_to_char( " '", ch );
-	    send_to_char( skill_table[obj->value[2]].name[1], ch );
-	    send_to_char( "'", ch );
-	}
-
-	if ( obj->value[3] >= 0 && obj->value[3] < MAX_SKILL )
-	{
-	    send_to_char( " '", ch );
-	    send_to_char( skill_table[obj->value[3]].name[1], ch );
-	    send_to_char( "'", ch );
-	}
-
-	if (obj->value[4] >= 0 && obj->value[4] < MAX_SKILL)
-	{
-	    send_to_char(" '",ch);
-	    send_to_char(skill_table[obj->value[4]].name[1],ch);
-	    send_to_char("'",ch);
-	}
+	for ( i = 1; i <= 4; i++ )
+	    if ( obj->value[i] >= 0 && obj->value[i] < MAX_SKILL )
+		printf_to_char( ch, " '%s'", skill_table[obj->value[i]].name[1] );
 
 	send_to_char( ".\n\r", ch );
 	break;
@@ -3936,11 +3281,7 @@ void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 	send_to_char( buf, ch );
 
 	if ( obj->value[3] >= 0 && obj->value[3] < MAX_SKILL )
-	{
-	    send_to_char( " '", ch );
-	    send_to_char( skill_table[obj->value[3]].name[1], ch );
-	    send_to_char( "'", ch );
-	}
+	    printf_to_char( ch, " '%s'", skill_table[obj->value[3]].name[1] );
 
 	send_to_char( ".\n\r", ch );
 	break;
@@ -3965,23 +3306,7 @@ void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 	break;
 
     case ITEM_WEAPON:
-    send_to_char("Silah türü ",ch);
-	switch (obj->value[0])
-	{
-    case(WEAPON_EXOTIC) : send_to_char("egzotik.\n\r",ch);	break;
-    case(WEAPON_SWORD)  : send_to_char("kılıç.\n\r",ch);	break;
-    case(WEAPON_DAGGER) : send_to_char("hançer.\n\r",ch);	break;
-    case(WEAPON_SPEAR)	: send_to_char("mızrak/asa.\n\r",ch);	break;
-    case(WEAPON_MACE) 	: send_to_char("topuz/çomak.\n\r",ch);	break;
-    case(WEAPON_AXE)	: send_to_char("balta.\n\r",ch);		break;
-    case(WEAPON_FLAIL)	: send_to_char("döven.\n\r",ch);	break;
-    case(WEAPON_WHIP)	: send_to_char("kırbaç.\n\r",ch);		break;
-    case(WEAPON_POLEARM): send_to_char("teber.\n\r",ch);	break;
-    case(WEAPON_BOW)	: send_to_char("yay.\n\r",ch);		break;
-    case(WEAPON_ARROW)	: send_to_char("ok.\n\r",ch);	break;
-    case(WEAPON_LANCE)	: send_to_char("kargı.\n\r",ch);	break;
-    default		: send_to_char("bilinmiyor.\n\r",ch);	break;
- 	}
+	printf_to_char( ch, "Silah türü %s.\n\r", weapon_type_name( obj->value[0] ) );
 	if (obj->pIndexData->new_format)
   snprintf(buf, sizeof(buf),"Zarar %dd%d (ortalama %d).\n\r",
 		obj->value[1],obj->value[2],
@@ -4007,91 +3332,11 @@ void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     }
 
     if (!obj->enchanted)
-    {
         for ( paf = obj->pIndexData->affected; paf != NULL; paf = paf->next )
-        {
-            if ( paf->location != APPLY_NONE && paf->modifier != 0 )
-            {
-                printf_to_char(ch,"%s etkisi %d birim.\n\r", affect_loc_name( paf->location ), paf->modifier );
-            }
-
-            if (paf->bitvector)
-            {
-                switch(paf->where)
-                {
-                    case TO_AFFECTS:
-                        printf_to_char(ch,"%s etkisi ekler.\n\r",affect_bit_name(paf->bitvector));
-                        break;
-                    case TO_OBJECT:
-                        printf_to_char(ch,"%s eşya özelliği ekler.\n\r",extra_bit_name(paf->bitvector));
-                        break;
-                    case TO_WEAPON:
-                        printf_to_char(ch,"%s silah özelliği ekler.\n\r",weapon_bit_name(paf->bitvector));
-                        break;
-                    case TO_IMMUNE:
-                        printf_to_char(ch,"%s bağışıklığı ekler.\n\r",imm_bit_name(paf->bitvector));
-                        break;
-                    case TO_RESIST:
-                        printf_to_char(ch,"%s direnci ekler.\n\r",imm_bit_name(paf->bitvector));
-                        break;
-                    case TO_VULN:
-                        printf_to_char(ch,"%s dayanıksızlığı ekler.\n\r",imm_bit_name(paf->bitvector));
-                        break;
-                    case TO_DETECTS:
-                        printf_to_char(ch,"%s saptaması ekler.\n\r",detect_bit_name(paf->bitvector));
-                        break;
-                    default:
-                        printf_to_char(ch,"Bilinmeyen bit %d: %d\n\r",paf->where,paf->bitvector);
-                        break;
-                }
-            }
-        }
-    }
+	    identify_affect( ch, paf, FALSE );
 
     for ( paf = obj->affected; paf != NULL; paf = paf->next )
-    {
-        if ( paf->location != APPLY_NONE && paf->modifier != 0 )
-        {
-            printf_to_char(ch,"%s etkisi %d birim", affect_loc_name( paf->location ), paf->modifier );
-            if ( paf->duration > -1)
-                printf_to_char(ch,", %d saat.\n\r",paf->duration);
-            else
-                printf_to_char(ch,".\n\r");
-        }
-
-        if (paf->bitvector)
-        {
-            switch(paf->where)
-            {
-                case TO_AFFECTS:
-                    printf_to_char(ch,"%s etkisi ekler.\n\r",affect_bit_name(paf->bitvector));
-                    break;
-                case TO_OBJECT:
-                    printf_to_char(ch,"%s eşya özelliği ekler.\n\r",extra_bit_name(paf->bitvector));
-                    break;
-                case TO_WEAPON:
-                    printf_to_char(ch,"%s silah özelliği ekler.\n\r",weapon_bit_name(paf->bitvector));
-                    break;
-                case TO_IMMUNE:
-                    printf_to_char(ch,"%s bağışıklığı ekler.\n\r",imm_bit_name(paf->bitvector));
-                    break;
-                case TO_RESIST:
-                    printf_to_char(ch,"%s direnci ekler.\n\r",imm_bit_name(paf->bitvector));
-                    break;
-                case TO_VULN:
-                    printf_to_char(ch,"%s dayanıksızlığı ekler.\n\r",imm_bit_name(paf->bitvector));
-                    break;
-                case TO_DETECTS:
-                    printf_to_char(ch,"%s saptaması ekler.\n\r",detect_bit_name(paf->bitvector));
-                    break;
-                default:
-                    printf_to_char(ch,"Bilinmeyen bit %d: %d\n\r",paf->where,paf->bitvector);
-                    break;
-            }
-        }
-    }
-
-    return;
+	identify_affect( ch, paf, TRUE );
 }
 
 
@@ -4106,10 +3351,10 @@ void spell_infravision( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 	if (victim == ch)
   send_to_char("Zaten ısı görüşün var.\n\r",ch);
 else
-  act("$N zaten ısı görüşü var.\n\r",ch,NULL,victim,TO_CHAR);
+  act("$N zaten ısı görüşü var.",ch,NULL,victim,TO_CHAR);
 return;
   }
-  act( "$s gözleri kızıl renkte parlıyor.\n\r", ch, NULL, NULL, TO_ROOM );
+  act( "$s gözleri kızıl renkte parlıyor.", ch, NULL, NULL, TO_ROOM );
 
     af.where	 = TO_AFFECTS;
     af.type      = sn;
@@ -4204,43 +3449,40 @@ void spell_know_alignment(int sn,int level,CHAR_DATA *ch,void *vo,int target )
 void spell_lightning_bolt(int sn,int level,CHAR_DATA *ch,void *vo,int target)
 {
     CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
 
     if (CAN_DETECT(victim, ADET_GROUNDING))
     {
-      send_to_char("Elektrik düşmanlarında sönüp gidiyor.\n\r",victim);
-    	act("Bir yıldırım $S düşmanlarında sönüp gidiyor.\n\r",
+	send_to_char("Elektrik düşmanlarında sönüp gidiyor.\n\r",victim);
+	act("Bir yıldırım $S düşmanlarında sönüp gidiyor.",
 		ch, NULL, victim, TO_ROOM);
 	return;
     }
-    dam = dice(level,4) + 12;
-    if ( saves_spell( level, victim,DAM_LIGHTNING) )
-	dam /= 2;
-    damage( ch, victim, dam, sn, DAM_LIGHTNING ,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, victim, dice( level, 4 ) + 12, DAM_LIGHTNING, NULL );
 }
 
 
 
-void spell_locate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+/* locate/find object ortak gövdesi: target_name ile eşleşen nesnelerin yerini listeler. */
+static void locate_objects( CHAR_DATA *ch, int level, bool honour_nolocate,
+			    const char *carried_fmt, const char *room_imm_fmt,
+			    const char *room_fmt, const char *unknown_room )
 {
     char buf[MAX_INPUT_LENGTH];
     BUFFER *buffer;
     OBJ_DATA *obj;
     OBJ_DATA *in_obj;
-    bool found;
+    bool found = FALSE;
     int number = 0, max_found;
 
-    found = FALSE;
-    number = 0;
-    max_found = IS_IMMORTAL(ch) ? 200 : 2 * level;
+    max_found = IS_IMMORTAL(ch) ? LOCATE_IMM_MAX : 2 * level;
 
     buffer = new_buf();
 
     for ( obj = object_list; obj != NULL; obj = obj->next )
     {
 	if ( !can_see_obj( ch, obj ) || !is_name( target_name, obj->name )
-	||   IS_OBJ_STAT(obj,ITEM_NOLOCATE) || number_percent() > 2 * level
+	||   ( honour_nolocate && IS_OBJ_STAT(obj,ITEM_NOLOCATE) )
+	||   number_percent() > 2 * level
 	||   ch->level < obj->level)
 	    continue;
 
@@ -4251,20 +3493,13 @@ void spell_locate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 	    ;
 
 	if ( in_obj->carried_by != NULL && can_see(ch,in_obj->carried_by))
-	{
-    snprintf(buf, sizeof(buf), "bir tanesini taşıyan: %s\n\r",
-		PERS(in_obj->carried_by, ch) );
-	}
-	else
-	{
-	    if (IS_IMMORTAL(ch) && in_obj->in_room != NULL)
-      snprintf(buf, sizeof(buf), "bir tanesinin yeri: %s [Oda %d]\n\r",
+	    snprintf(buf, sizeof(buf), carried_fmt, PERS(in_obj->carried_by, ch) );
+	else if (IS_IMMORTAL(ch) && in_obj->in_room != NULL)
+	    snprintf(buf, sizeof(buf), room_imm_fmt,
 		    in_obj->in_room->name, in_obj->in_room->vnum);
-	    else
-      snprintf(buf, sizeof(buf), "bir tanesinin yeri: %s\n\r",
-		    in_obj->in_room == NULL
-			? "bir yer" : in_obj->in_room->name );
-	}
+	else
+	    snprintf(buf, sizeof(buf), room_fmt,
+		    in_obj->in_room == NULL ? unknown_room : in_obj->in_room->name );
 
 	utf8_upper_first(buf, sizeof(buf));
 	add_buf(buffer,buf);
@@ -4274,13 +3509,19 @@ void spell_locate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target)
     }
 
     if ( !found )
-    send_to_char( "Ne bu dünyada, ne de diğerinde böyle bir şey yok.\n\r", ch );
+	send_to_char( "Ne bu dünyada, ne de diğerinde böyle bir şey yok.\n\r", ch );
     else
 	page_to_char(buf_string(buffer),ch);
 
     free_buf(buffer);
+}
 
-    return;
+void spell_locate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+{
+    locate_objects( ch, level, TRUE,
+	"bir tanesini taşıyan: %s\n\r",
+	"bir tanesinin yeri: %s [Oda %d]\n\r",
+	"bir tanesinin yeri: %s\n\r", "bir yer" );
 }
 
 
@@ -4299,66 +3540,48 @@ void spell_magic_missile( int sn, int level, CHAR_DATA *ch,void *vo,int target)
 	13, 13, 13, 13, 13,	14, 14, 14, 14, 14
     };
 
-    int dam;
+    int dam, missiles, i;
 
-    if ( is_affected( ch, 67 ) )  {
-	if ( ch->level > 4 )  {
-    send_to_char("Büyülü fişeklerin düşmanına varmadan yitiyor.\n\r", ch );
-          act( "Kalkanın $S büyülü fişeklerini karşılıyor.", victim, NULL, ch, TO_CHAR);
-        }
-	else  {
-    send_to_char( "Büyülü fişeğin düşmanına varmadan yitiyor.\n\r", ch );
-          act("Kalkanın $S büyülü fişeğini karşılıyor.", victim, NULL, ch, TO_CHAR);
+    /* fişek sayısı: 1 + her 4 seviyede bir (5, 9, 13, 17. seviyelerde), en çok 5 */
+    missiles = 1 + (ch->level > 4) + (ch->level > 8) + (ch->level > 12) + (ch->level > 16);
+
+    /* kurbanın üzerindeki 'shield' büyüsü fişekleri karşılar
+     * (eski kod tablo dizini 67'ye, yani büyücünün 'dispel good' etkisine bakıyordu) */
+    if ( is_affected( victim, gsn_shield ) )
+    {
+	if ( missiles > 1 )
+	{
+	    send_to_char("Büyülü fişeklerin düşmanına varmadan yitiyor.\n\r", ch );
+	    act( "Kalkanın $S büyülü fişeklerini karşılıyor.", victim, NULL, ch, TO_CHAR);
+	}
+	else
+	{
+	    send_to_char( "Büyülü fişeğin düşmanına varmadan yitiyor.\n\r", ch );
+	    act("Kalkanın $S büyülü fişeğini karşılıyor.", victim, NULL, ch, TO_CHAR);
 	}
 	return;
     }
 
-
     level	= UMIN(level, (int)(sizeof(dam_each)/sizeof(dam_each[0])) - 1);
     level	= UMAX(0, level);
-	if (ch->level > 50)
-    dam		= level / 4;
+
+    for ( i = 0; i < missiles; i++ )
+    {
+	if ( i == 0 && ch->level > 50 )
+	    dam = level / 4;
 	else
-    dam		= number_range( dam_each[level] / 2, dam_each[level] * 2 );
+	    dam = number_range( dam_each[level] / 2, dam_each[level] * 2 );
 
-    if ( saves_spell( level, victim,DAM_ENERGY) )
-	dam /= 2;
-    damage( ch, victim, dam, sn, DAM_ENERGY ,TRUE);
-    if ( ch->level > 4 )  {
-      dam = number_range( dam_each[level] / 2, dam_each[level] * 2 );
-      if ( saves_spell( level, victim,DAM_ENERGY) )
-  	  dam /= 2;
-      damage( ch, victim, dam, sn, DAM_ENERGY ,TRUE);
+	if ( saves_spell( level, victim,DAM_ENERGY) )
+	    dam /= 2;
+	damage( ch, victim, dam, sn, DAM_ENERGY ,TRUE);
     }
-    if ( ch->level > 8 )  {
-      dam = number_range( dam_each[level] / 2, dam_each[level] * 2 );
-      if ( saves_spell( level, victim,DAM_ENERGY) )
-  	  dam /= 2;
-      damage( ch, victim, dam, sn, DAM_ENERGY ,TRUE);
-    }
-    if ( ch->level > 12 )  {
-      dam = number_range( dam_each[level] / 2, dam_each[level] * 2 );
-      if ( saves_spell( level, victim,DAM_ENERGY) )
-  	  dam /= 2;
-      damage( ch, victim, dam, sn, DAM_ENERGY ,TRUE);
-    }
-    if ( ch->level > 16 )  {
-      dam = number_range( dam_each[level] / 2, dam_each[level] * 2 );
-      if ( saves_spell( level, victim,DAM_ENERGY) )
-  	  dam /= 2;
-      damage( ch, victim, dam, sn, DAM_ENERGY ,TRUE);
-    }
-
-    return;
 }
 
 void spell_mass_healing(int sn, int level, CHAR_DATA *ch, void *vo, int target)
 {
     CHAR_DATA *gch;
-    int heal_num, refresh_num;
-
-    heal_num = skill_lookup("heal");
-    refresh_num = skill_lookup("refresh");
+    int heal_num = msn(MSN_HEAL), refresh_num = msn(MSN_REFRESH);
 
     for ( gch = ch->in_room->people; gch != NULL; gch = gch->next_in_room )
     {
@@ -4552,18 +3775,19 @@ void spell_poison( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
 
 
-void spell_protection_evil(int sn,int level,CHAR_DATA *ch,void *vo, int target)
+/* Kemden/iyiden koruma: iki koruma birden olmaz. */
+static void protection_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, int bit,
+			      const char *self_msg, const char *other_msg )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
     if ( IS_AFFECTED(victim, AFF_PROTECT_EVIL)
     ||   IS_AFFECTED(victim, AFF_PROTECT_GOOD))
     {
 	if (victim == ch)
-  send_to_char("Zaten korunuyorsun.\n\r",ch);
-else
-  act("$N zaten korunuyor.",ch,NULL,victim,TO_CHAR);
+	    send_to_char("Zaten korunuyorsun.\n\r",ch);
+	else
+	    act("$N zaten korunuyor.",ch,NULL,victim,TO_CHAR);
 	return;
     }
 
@@ -4573,41 +3797,23 @@ else
     af.duration  = (10 + level / 5);
     af.location  = APPLY_SAVING_SPELL;
     af.modifier  = -1;
-    af.bitvector = AFF_PROTECT_EVIL;
+    af.bitvector = bit;
     affect_to_char( victim, &af );
-    send_to_char("Kendini kutsal ve saf hissediyorsun.\n\r", victim );
+    send_to_char( self_msg, victim );
     if ( ch != victim )
-	act("$N kemden korunuyor.",ch,NULL,victim,TO_CHAR);
-    return;
+	act( other_msg, ch, NULL, victim, TO_CHAR );
+}
+
+void spell_protection_evil(int sn,int level,CHAR_DATA *ch,void *vo, int target)
+{
+    protection_spell( sn, level, ch, (CHAR_DATA *) vo, AFF_PROTECT_EVIL,
+	"Kendini kutsal ve saf hissediyorsun.\n\r", "$N kemden korunuyor." );
 }
 
 void spell_protection_good(int sn,int level,CHAR_DATA *ch,void *vo,int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    AFFECT_DATA af;
-
-    if ( IS_AFFECTED(victim, AFF_PROTECT_GOOD)
-    ||   IS_AFFECTED(victim, AFF_PROTECT_EVIL))
-    {
-	if (victim == ch)
-  send_to_char("Zaten korunuyorsun.\n\r",ch);
-else
-  act("$N zaten korunuyor.",ch,NULL,victim,TO_CHAR);
-	return;
-    }
-
-    af.where     = TO_AFFECTS;
-    af.type      = sn;
-    af.level     = level;
-    af.duration  = (10 + level / 5);
-    af.location  = APPLY_SAVING_SPELL;
-    af.modifier  = -1;
-    af.bitvector = AFF_PROTECT_GOOD;
-    affect_to_char( victim, &af );
-    send_to_char( "Karanlığa yaklaşıyorsun.\n\r", victim );
-    if ( ch != victim )
-	act("$N iyiden korunuyor.",ch,NULL,victim,TO_CHAR);
-    return;
+    protection_spell( sn, level, ch, (CHAR_DATA *) vo, AFF_PROTECT_GOOD,
+	"Karanlığa yaklaşıyorsun.\n\r", "$N iyiden korunuyor." );
 }
 
 
@@ -4699,8 +3905,8 @@ void spell_recharge( int sn, int level, CHAR_DATA *ch, void *vo,int target)
     {
 	int chargeback,chargemax;
 
-  act("$p hafifçe parlıyor.",ch,obj,NULL,TO_CHAR);
 	act("$p hafifçe parlıyor.",ch,obj,NULL,TO_CHAR);
+	act("$p hafifçe parlıyor.",ch,obj,NULL,TO_ROOM);
 
 	chargemax = obj->value[1] - obj->value[2];
 
@@ -4943,7 +4149,7 @@ send_to_char("Uyuşuk hissediyorsun.\n\r",victim);
 
     if (IS_AFFECTED(victim,AFF_HASTE))
     {
-	if (!check_dispel(level,victim,skill_lookup("haste")))
+	if (!check_dispel(level,victim,gsn_haste))
 	{
 	    if (victim != ch)
 		send_to_char("Büyü işe yaramadı.\n\r",ch);
@@ -4977,7 +4183,7 @@ void spell_stone_skin( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
-    if ( is_affected( ch, sn ) )
+    if ( is_affected( victim, sn ) )
     {
       if (victim == ch)
     	  send_to_char("Derin zaten kaya kadar sert.\n\r",ch);
@@ -5024,12 +4230,8 @@ void spell_summon( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     ||   (!IS_NPC(victim) && is_safe_nomessage(ch,victim) && IS_SET(victim->act,PLR_NOSUMMON))
     ||   (saves_spell( level, victim,DAM_OTHER))
     ||   (ch->in_room->area != victim->in_room->area && !IS_NPC(victim))
-    ||   (IS_NPC(victim) && (victim->pIndexData->vnum == ch->pcdata->questmob))
-    ||   (victim->in_room->exit[0] == NULL &&
-          victim->in_room->exit[1] == NULL &&
-          victim->in_room->exit[2] == NULL &&
-          victim->in_room->exit[3] == NULL &&
-          victim->in_room->exit[4] == NULL && victim->in_room->exit[5] == NULL) )
+    ||   (IS_NPC(victim) && !IS_NPC(ch) && victim->pIndexData->vnum == ch->pcdata->questmob)
+    ||   !room_has_exit( victim->in_room ) )
     {
 	send_to_char( "Başaramadın.\n\r", ch );
 	return;
@@ -5140,19 +4342,17 @@ void spell_word_of_recall( int sn, int level, CHAR_DATA *ch,void *vo,int target)
     ROOM_INDEX_DATA *location;
     int to_room_vnum;
 
-    if ((ch->iclass == 9) && (ch->fighting) && (victim == NULL))
-	{
-    send_to_char( "Onurun anımsama kullanmana izin vermiyor!.\n\r",ch);
-	 return;
-	}
+    if ( victim == NULL )
+	victim = ch;
 
-    if (victim != NULL)
+    /* onuruyla dövüşen samuray anımsama kullanamaz */
+    if ( victim->fighting != NULL && victim->iclass == CLASS_SAMURAI )
     {
-        if  ((victim->fighting) && (victim->iclass == 9))
-	{
-    send_to_char("Bu büyüyü onuruyla dövüşen bir samuraya yapamazsın!.\n\r",ch);
-	 return;
-	}
+	if ( victim == ch )
+	    send_to_char( "Onurun anımsama kullanmana izin vermiyor!.\n\r",ch);
+	else
+	    send_to_char("Bu büyüyü onuruyla dövüşen bir samuraya yapamazsın!.\n\r",ch);
+	return;
     }
 
     if (IS_NPC(victim))
@@ -5165,14 +4365,7 @@ hometown_table[victim->hometown].recall[IS_GOOD(victim)?0:IS_NEUTRAL(victim)?1:I
       send_to_char("Tamamen kayboldun.\n\r",victim);
 	return;
     }
-/*
-    if (victim->desc != NULL &&
-	(current_time - victim->last_fight_time) < FIGHT_DELAY_TIME)
-      {
-	send_to_char("You are too pumped to pray now.\n\r",victim);
-	return;
-      }
-*/
+
     if (IS_SET(victim->in_room->room_flags,ROOM_NO_RECALL) ||
 	IS_AFFECTED(victim,AFF_CURSE) ||
 	IS_RAFFECTED(victim->in_room,AFF_ROOM_CURSE))
@@ -5236,10 +4429,40 @@ void spell_acid_breath( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
 
 
+/* Ateş/buz nefesi: asıl kurban tam, odadakiler yarım hasar; kurtarış hasarı yarılar. */
+static void breath_area( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim,
+			 int dam, int dam_type, void (*effect)(void *, int, int, int) )
+{
+    CHAR_DATA *vch, *vch_next;
+
+    effect(victim->in_room,level,dam/2,TARGET_ROOM);
+
+    for (vch = victim->in_room->people; vch != NULL; vch = vch_next)
+    {
+	int div;	/* asıl kurban 1, diğerleri 2; kurtarış ikiye katlar */
+	bool saved;
+
+	vch_next = vch->next_in_room;
+
+	if (is_safe_spell(ch,vch,TRUE)
+	||  ( IS_NPC(vch) && IS_NPC(ch) && ch->fighting != vch ))
+	    continue;
+	if ( is_safe(ch, vch) )
+	    continue;
+
+	div = (vch == victim) ? 1 : 2;
+	saved = saves_spell(vch == victim ? level : level - 2,vch,dam_type);
+	if (saved)
+	    div *= 2;
+	/* kurtaranın yan etkisi (yanma/donma) hasarın yarısı kadar */
+	effect(vch,level/div,dam/(saved ? div * 2 : div),TARGET_CHAR);
+	damage(ch,vch,dam/div,sn,dam_type,TRUE);
+    }
+}
+
 void spell_fire_breath( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
     CHAR_DATA *victim = (CHAR_DATA *) vo;
-    CHAR_DATA *vch, *vch_next;
     int dam,hp_dam,dice_dam;
     int hpch;
 
@@ -5252,52 +4475,12 @@ void spell_fire_breath( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     dice_dam = dice(level,20);
 
     dam = UMAX(hp_dam + dice_dam /10, dice_dam + hp_dam / 10);
-    fire_effect(victim->in_room,level,dam/2,TARGET_ROOM);
-
-    for (vch = victim->in_room->people; vch != NULL; vch = vch_next)
-    {
-	vch_next = vch->next_in_room;
-
-	if (is_safe_spell(ch,vch,TRUE)
-	||  ( IS_NPC(vch) && IS_NPC(ch)
-	&&  (ch->fighting != vch /*|| vch->fighting != ch */)))
-	    continue;
-	if ( is_safe(ch, vch) )
-          continue;
-
-	if (vch == victim) /* full damage */
-	{
-	    if (saves_spell(level,vch,DAM_FIRE))
-	    {
-		fire_effect(vch,level/2,dam/4,TARGET_CHAR);
-		damage(ch,vch,dam/2,sn,DAM_FIRE,TRUE);
-	    }
-	    else
-	    {
-		fire_effect(vch,level,dam,TARGET_CHAR);
-		damage(ch,vch,dam,sn,DAM_FIRE,TRUE);
-	    }
-	}
-	else /* partial damage */
-	{
-	    if (saves_spell(level - 2,vch,DAM_FIRE))
-	    {
-		fire_effect(vch,level/4,dam/8,TARGET_CHAR);
-		damage(ch,vch,dam/4,sn,DAM_FIRE,TRUE);
-	    }
-	    else
-	    {
-		fire_effect(vch,level/2,dam/4,TARGET_CHAR);
-		damage(ch,vch,dam/2,sn,DAM_FIRE,TRUE);
-	    }
-	}
-    }
+    breath_area( sn, level, ch, victim, dam, DAM_FIRE, fire_effect );
 }
 
 void spell_frost_breath( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
     CHAR_DATA *victim = (CHAR_DATA *) vo;
-    CHAR_DATA *vch, *vch_next;
     int dam,hp_dam,dice_dam, hpch;
 
     act("$n buzdan bir nefes gönderiyor!",ch,NULL,victim,TO_NOTVICT);
@@ -5310,47 +4493,7 @@ void spell_frost_breath( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     dice_dam = dice(level,16);
 
     dam = UMAX(hp_dam + dice_dam/10,dice_dam + hp_dam/10);
-    cold_effect(victim->in_room,level,dam/2,TARGET_ROOM);
-
-    for (vch = victim->in_room->people; vch != NULL; vch = vch_next)
-    {
-	vch_next = vch->next_in_room;
-
-	if (is_safe_spell(ch,vch,TRUE)
-	||  (IS_NPC(vch) && IS_NPC(ch)
-	&&   (ch->fighting != vch /*|| vch->fighting != ch*/)))
-	    continue;
-	if ( is_safe(ch, vch) )
-          continue;
-
-
-	if (vch == victim) /* full damage */
-	{
-	    if (saves_spell(level,vch,DAM_COLD))
-	    {
-		cold_effect(vch,level/2,dam/4,TARGET_CHAR);
-		damage(ch,vch,dam/2,sn,DAM_COLD,TRUE);
-	    }
-	    else
-	    {
-		cold_effect(vch,level,dam,TARGET_CHAR);
-		damage(ch,vch,dam,sn,DAM_COLD,TRUE);
-	    }
-	}
-	else
-	{
-	    if (saves_spell(level - 2,vch,DAM_COLD))
-	    {
-		cold_effect(vch,level/4,dam/8,TARGET_CHAR);
-		damage(ch,vch,dam/4,sn,DAM_COLD,TRUE);
-	    }
-	    else
-	    {
-		cold_effect(vch,level/2,dam/4,TARGET_CHAR);
-		damage(ch,vch,dam/2,sn,DAM_COLD,TRUE);
-	    }
-	}
-    }
+    breath_area( sn, level, ch, victim, dam, DAM_COLD, cold_effect );
 }
 
 
@@ -5358,7 +4501,6 @@ void spell_gas_breath( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
     CHAR_DATA *vch;
     CHAR_DATA *vch_next;
-    char buf[MAX_STRING_LENGTH];
     int dam,hp_dam,dice_dam,hpch;
 
     act("$n zehirli bir nefes gönderiyor!",ch,NULL,NULL,TO_ROOM);
@@ -5381,20 +4523,7 @@ void spell_gas_breath( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 	    continue;
 	if ( is_safe(ch, vch) )
           continue;
-        if (!IS_NPC(ch) && vch != ch &&
-            ch->fighting != vch && vch->fighting != ch &&
-            (IS_SET(vch->affected_by,AFF_CHARM) || !IS_NPC(vch)))
-          {
-          if (!can_see(vch, ch))
-              do_yell(vch, "İmdat! Biri bana saldırıyor!");
-          else
-            {
-               snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
-                  (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(vch))?
-                   ch->doppel->name : ch->name);
-               do_yell(vch,buf);
-            }
-        }
+	victim_yell_at_caster( vch, ch );
 
 	if (saves_spell(level,vch,DAM_POISON))
 	{
@@ -5427,7 +4556,7 @@ void spell_lightning_breath(int sn,int level,CHAR_DATA *ch,void *vo,int target)
     if (CAN_DETECT(victim, ADET_GROUNDING))
     {
       send_to_char("Elektiriğin gücü düşmanında yitiyor.\n\r",victim);
-    	act("Bir yıldırım topu $S düşmanında yitiyor.\n\r",
+    	act("Bir yıldırım topu $S düşmanında yitiyor.",
 		ch, NULL, victim, TO_ROOM);
 	return;
     }
@@ -5449,89 +4578,22 @@ void spell_lightning_breath(int sn,int level,CHAR_DATA *ch,void *vo,int target)
  */
 void spell_general_purpose(int sn,int level,CHAR_DATA *ch,void *vo,int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = number_range( 25, 100 );
-    if ( saves_spell( level, victim, DAM_PIERCE) )
-        dam /= 2;
-    damage( ch, victim, dam, sn, DAM_PIERCE ,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, number_range( 25, 100 ), DAM_PIERCE, NULL );
 }
 
 void spell_high_explosive(int sn,int level,CHAR_DATA *ch,void *vo,int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = number_range( 30, 120 );
-    if ( saves_spell( level, victim, DAM_PIERCE) )
-        dam /= 2;
-    damage( ch, victim, dam, sn, DAM_PIERCE ,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, number_range( 30, 120 ), DAM_PIERCE, NULL );
 }
 
 
 
 void spell_find_object( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    char buf[MAX_INPUT_LENGTH];
-    BUFFER *buffer;
-    OBJ_DATA *obj;
-    OBJ_DATA *in_obj;
-    bool found;
-    int number = 0, max_found;
-
-    found = FALSE;
-    number = 0;
-    max_found = IS_IMMORTAL(ch) ? 200 : 2 * level;
-
-    buffer = new_buf();
-
-    for ( obj = object_list; obj != NULL; obj = obj->next )
-    {
-	if ( !can_see_obj( ch, obj ) || !is_name( target_name, obj->name )
-		|| number_percent() > 2 * level
-		||   ch->level < obj->level)
-	    continue;
-
-	found = TRUE;
-	number++;
-
-	for ( in_obj = obj; in_obj->in_obj != NULL; in_obj = in_obj->in_obj )
-	    ;
-
-	if ( in_obj->carried_by != NULL && can_see(ch,in_obj->carried_by))
-	{
-    snprintf(buf, sizeof(buf), "bit tanesi %s tarafından taşınıyor\n\r",
-		PERS(in_obj->carried_by, ch) );
-	}
-	else
-	{
-	    if (IS_IMMORTAL(ch) && in_obj->in_room != NULL)
-      snprintf(buf, sizeof(buf), "bir tanesi %s odasında [Oda %d]\n\r",
-		    in_obj->in_room->name, in_obj->in_room->vnum);
-	    else
-      snprintf(buf, sizeof(buf), "bir tanesi %s odasında\n\r",
-		    in_obj->in_room == NULL
-			? "[bilinmeyen]" : in_obj->in_room->name );
-	}
-
-	utf8_upper_first(buf, sizeof(buf));
-	add_buf(buffer,buf);
-
-	if (number >= max_found)
-	    break;
-    }
-
-    if ( !found )
-    send_to_char("Ne bu dünyada, ne de diğerinde böyle bir şey yok.\n\r", ch );
-    else
-	page_to_char(buf_string(buffer),ch);
-
-    free_buf(buffer);
-
-    return;
+    locate_objects( ch, level, FALSE,
+	"bir tanesi %s tarafından taşınıyor\n\r",
+	"bir tanesi %s odasında [Oda %d]\n\r",
+	"bir tanesi %s odasında\n\r", "[bilinmeyen]" );
 }
 
 void spell_lightning_shield(int sn, int level, CHAR_DATA *ch, void *vo,int target )
@@ -5568,6 +4630,7 @@ void spell_lightning_shield(int sn, int level, CHAR_DATA *ch, void *vo,int targe
     af2.bitvector = 0;
     affect_to_char( ch, &af2 );
 
+    free_string( ch->in_room->owner );
     ch->in_room->owner = str_dup( ch->name );
     send_to_char("Oda şimşeklerle dolmaya başlıyor.\n\r", ch );
     act("Oda $s şimşekleriyle dolmaya başlıyor.",ch,NULL,NULL,TO_ROOM);
@@ -5614,144 +4677,67 @@ void spell_shocking_trap(int sn, int level, CHAR_DATA *ch, void *vo,int target )
 
 void spell_acid_arrow( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 12 );
-    if ( saves_spell( level, victim, DAM_ACID ) )
-	dam /= 2;
-    damage( ch, victim, dam, sn,DAM_ACID,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 12 ), DAM_ACID, NULL );
 }
 
 
 /* energy spells */
 void spell_etheral_fist( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 12 );
-    if ( saves_spell( level, victim, DAM_ENERGY ) )
-	dam /= 2;
-  act("Başka bir dünyaya ait kara bir yumruk $E atılıyor ve onu hareketsiz bırakıyor!"
-  ,ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_ENERGY,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 12 ), DAM_ENERGY,
+	"Başka bir dünyaya ait kara bir yumruk $E atılıyor ve onu hareketsiz bırakıyor!" );
 }
 
 void spell_spectral_furor( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 8 );
-    if ( saves_spell( level, victim, DAM_ENERGY ) )
-	dam /= 2;
-  act("Evrenin özü $N için endişe duyuyor!",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_ENERGY,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 8 ), DAM_ENERGY,
+	"Evrenin özü $N için endişe duyuyor!" );
 }
 
 void spell_disruption( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 9 );
-    if ( saves_spell( level, victim, DAM_ENERGY ) )
-	dam /= 2;
-  act("Tuhaf bir enerji $M kuşatırken varlığı belirsizleşiyor.",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_ENERGY,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 9 ), DAM_ENERGY,
+	"Tuhaf bir enerji $M kuşatırken varlığı belirsizleşiyor." );
 }
 
 
 void spell_sonic_resonance( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
     CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
 
-    dam = dice( level, 7 );
-    if ( saves_spell( level, victim, DAM_ENERGY ) )
-	dam /= 2;
-  act("Bir hareket enerjisi silindiri $N çevrelerken çınlamasına neden oluyor.",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_ENERGY,TRUE);
+    simple_damage_spell( sn, level, ch, victim, dice( level, 7 ), DAM_ENERGY,
+	"Bir hareket enerjisi silindiri $N çevrelerken çınlamasına neden oluyor." );
     WAIT_STATE( victim, skill_table[sn].beats );
-    return;
 }
 /* mental */
 void spell_mind_wrack( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 7 );
-    if ( saves_spell( level, victim, DAM_MENTAL ) )
-	dam /= 2;
-  act("$n bakışlarıyla $M uyuşuklaştırıyor.",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_MENTAL,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 7 ), DAM_MENTAL,
+	"$n bakışlarıyla $M uyuşuklaştırıyor." );
 }
 
 void spell_mind_wrench( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 9 );
-    if ( saves_spell( level, victim, DAM_MENTAL ) )
-	dam /= 2;
-  act("$n bakışlarıyla $M hiperaktifleştiriyor.",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_MENTAL,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 9 ), DAM_MENTAL,
+	"$n bakışlarıyla $M hiperaktifleştiriyor." );
 }
 /* acid */
 void spell_sulfurus_spray( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 7 );
-    if ( saves_spell( level, victim, DAM_ACID ) )
-	dam /= 2;
-  act("Yakıcı kokusuyla bir sülfür yağmuru $S üzerine yağıyor.",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_ACID,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 7 ), DAM_ACID,
+	"Yakıcı kokusuyla bir sülfür yağmuru $S üzerine yağıyor." );
 }
 
 void spell_caustic_font( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 9 );
-    if ( saves_spell( level, victim, DAM_ACID ) )
-	dam /= 2;
-  act("Kaynaktan gelen yakıcı sıvı $S altında birikerek dokusunu eritiyor! ",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_ACID,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 9 ), DAM_ACID,
+	"Kaynaktan gelen yakıcı sıvı $S altında birikerek dokusunu eritiyor! " );
 }
 
 void spell_acetum_primus( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 8 );
-    if ( saves_spell( level, victim, DAM_ACID ) )
-	dam /= 2;
-  act("$S üzerine örtülen asit pelerini dokunduğu her bölgeyi yakıyor. ",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_ACID,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 8 ), DAM_ACID,
+	"$S üzerine örtülen asit pelerini dokunduğu her bölgeyi yakıyor. " );
 }
 
 
@@ -5759,45 +4745,21 @@ void spell_acetum_primus( int sn, int level, CHAR_DATA *ch, void *vo, int target
 
 void spell_galvanic_whip( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 7 );
-    if ( saves_spell( level, victim, DAM_LIGHTNING ) )
-	dam /= 2;
-  act("$n atom parçacıklarından oluşturduğu kırbaçla $E vuruyor.",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_LIGHTNING,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 7 ), DAM_LIGHTNING,
+	"$n atom parçacıklarından oluşturduğu kırbaçla $E vuruyor." );
 }
 
 
 void spell_magnetic_trust( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 8 );
-    if ( saves_spell( level, victim, DAM_LIGHTNING ) )
-	dam /= 2;
-  act("Bilinmeyen bir enerji ile saçların dikiliyor!",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_LIGHTNING,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 8 ), DAM_LIGHTNING,
+	"Bilinmeyen bir enerji ile saçların dikiliyor!" );
 }
 
 void spell_quantum_spike( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 9 );
-    if ( saves_spell( level, victim, DAM_LIGHTNING ) )
-	dam /= 2;
-  act("$N küçük ayrık parçalara ayrılıyor ve sonra tekrar birleşiyor.",
-		ch,NULL,victim,TO_NOTVICT);
-    damage( ch, victim, dam, sn,DAM_LIGHTNING,TRUE);
-    return;
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 9 ), DAM_LIGHTNING,
+	"$N küçük ayrık parçalara ayrılıyor ve sonra tekrar birleşiyor." );
 }
 
 /* negative */
@@ -5841,97 +4803,38 @@ void spell_hand_of_undead( int sn, int level, CHAR_DATA *ch, void *vo, int targe
 /* travel via astral plains */
 void spell_astral_walk( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim;
-    bool gate_pet;
-    char buf[512];
+    CHAR_DATA *victim = get_char_world( ch, target_name );
+    char buf[MAX_STRING_LENGTH];
 
-
-    if ( ( victim = get_char_world( ch, target_name ) ) == NULL
-    ||   victim == ch
-    ||   victim->in_room == NULL
-    ||   !can_see_room(ch,victim->in_room)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_SAFE)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_PRIVATE)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_SOLITARY)
-    ||   IS_SET(ch->in_room->room_flags, ROOM_NOSUMMON)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_NOSUMMON)
-    ||   victim->level >= level + 3
-/*    ||   (!IS_NPC(victim) && victim->level >= LEVEL_HERO)  * NOT trust */
-    ||   saves_spell(level,victim,DAM_OTHER)
-    ||   (IS_NPC(victim) && is_safe_nomessage(ch, victim) && IS_SET(victim->imm_flags,IMM_SUMMON))
-    ||   (!IS_NPC(victim) && is_safe_nomessage(ch, victim) && IS_SET(victim->act,PLR_NOSUMMON))
-    ||   (!IS_NPC(victim) && ch->in_room->area != victim->in_room->area )
-    ||   (IS_NPC(victim) && (victim->pIndexData->vnum == ch->pcdata->questmob))
-    ||   (IS_NPC(victim) && saves_spell( level, victim,DAM_OTHER) ) )
+    if ( !can_travel_to( ch, victim, level, 3 ) )
     {
 	send_to_char( "Başaramadın.\n\r", ch );
 	return;
     }
-    if (ch->pet != NULL && ch->in_room == ch->pet->in_room)
-	gate_pet = TRUE;
-    else
-	gate_pet = FALSE;
 
-
-  act("$n bir ışık parlamasıyla yokoluyor!",ch,NULL,NULL,TO_ROOM);
-  snprintf(buf, sizeof(buf),"Bir yıldız yolculuğuyla %s'e gidiyorsun.\n\r",victim->name);
-    send_to_char(buf,ch);
-    char_from_room(ch);
-    char_to_room(ch,victim->in_room);
-
-    act("$n bir ışık parlamasıyla beliriyor!",ch,NULL,NULL,TO_ROOM);
-    do_look(ch,"auto");
-
-    if (gate_pet)
-    {
-      act("$n bir ışık parlamasıyla yokoluyor!",ch->pet,NULL,NULL,TO_ROOM);
-	send_to_char(buf,ch->pet);
-	char_from_room(ch->pet);
-	char_to_room(ch->pet,victim->in_room);
-  act("$n bir ışık parlamasıyla beliriyor!",ch->pet,NULL,NULL,TO_ROOM);
-	do_look(ch->pet,"auto");
-    }
+    snprintf(buf, sizeof(buf),"Bir yıldız yolculuğuyla %s'e gidiyorsun.\n\r",victim->name);
+    travel_to( ch, victim->in_room,
+	"$n bir ışık parlamasıyla yokoluyor!", buf,
+	"$n bir ışık parlamasıyla beliriyor!", TRUE );
 }
 
 
-/* vampire version astral walk */
+/* vampire version astral walk (Karakam da bu büyüye sahip) */
 void spell_mist_walk( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim;
+    CHAR_DATA *victim = get_char_world( ch, target_name );
 
-
-    if ( ( victim = get_char_world( ch, target_name ) ) == NULL
-    ||   victim == ch
-/*    ||   !IS_VAMPIRE(ch) Karakam da bu buyuye sahip */
-    ||   victim->in_room == NULL
-    ||   !can_see_room(ch,victim->in_room)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_SAFE)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_PRIVATE)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_SOLITARY)
-    ||   IS_SET(ch->in_room->room_flags, ROOM_NOSUMMON)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_NOSUMMON)
-    ||   victim->level >= level + 3
-/*    ||   (!IS_NPC(victim) && victim->level >= LEVEL_HERO)  * NOT trust */
-    ||   saves_spell(level,victim,DAM_OTHER)
-    ||   (IS_NPC(victim) && is_safe_nomessage(ch, victim) && IS_SET(victim->imm_flags,IMM_SUMMON))
-    ||   (!IS_NPC(victim) && is_safe_nomessage(ch, victim) && IS_SET(victim->act,PLR_NOSUMMON))
-    ||   (IS_NPC(victim) && (victim->pIndexData->vnum == ch->pcdata->questmob))
-    ||   (!IS_NPC(victim) && ch->in_room->area != victim->in_room->area )
-    ||   (IS_NPC(victim) && saves_spell( level, victim,DAM_OTHER) ) )
+    if ( !can_travel_to( ch, victim, level, 3 ) )
     {
 	send_to_char( "Başaramadın.\n\r", ch );
 	return;
     }
 
-    act("$n gizemli bir buluta girerek yokoluyor!",ch,NULL,NULL,TO_ROOM);
-    send_to_char("Gizemli bir buluta girerek hedefine akıyorsun!.\n\r",ch);
-
-    char_from_room(ch);
-    char_to_room(ch,victim->in_room);
-
-    act("Parlayan sis bulutu sizi içine çekiyor, sonra $n'i açığa çıkarmak için geri çekiliyor!",ch,NULL,NULL,TO_ROOM);
-    do_look(ch,"auto");
-
+    travel_to( ch, victim->in_room,
+	"$n gizemli bir buluta girerek yokoluyor!",
+	"Gizemli bir buluta girerek hedefine akıyorsun!.\n\r",
+	"Parlayan sis bulutu sizi içine çekiyor, sonra $n'i açığa çıkarmak için geri çekiliyor!",
+	FALSE );
 }
 
 /*  Cleric version of astra_walk  */
@@ -5939,44 +4842,23 @@ void spell_solar_flight( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
     CHAR_DATA *victim;
 
-
     if  (time_info.hour > 18 || time_info.hour < 8)
-	{
-    send_to_char("Güneş uçuşu için gün ışığına ihtiyacın var.\n\r",ch);
-	 return;
-	}
+    {
+	send_to_char("Güneş uçuşu için gün ışığına ihtiyacın var.\n\r",ch);
+	return;
+    }
 
-    if ( ( victim = get_char_world( ch, target_name ) ) == NULL
-    ||   victim == ch
-    ||   victim->in_room == NULL
-    ||   !can_see_room(ch,victim->in_room)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_SAFE)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_PRIVATE)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_SOLITARY)
-    ||   IS_SET(ch->in_room->room_flags, ROOM_NOSUMMON)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_NOSUMMON)
-    ||   victim->level >= level + 1
-/*    ||   (!IS_NPC(victim) && victim->level >= LEVEL_HERO)  * NOT trust */
-    ||   saves_spell(level,victim,DAM_OTHER)
-    ||   (IS_NPC(victim) && is_safe_nomessage(ch, victim) && IS_SET(victim->imm_flags,IMM_SUMMON))
-    ||   (!IS_NPC(victim) && is_safe_nomessage(ch, victim) && IS_SET(victim->act,PLR_NOSUMMON))
-    ||   (IS_NPC(victim) && (victim->pIndexData->vnum == ch->pcdata->questmob))
-    ||   (!IS_NPC(victim) && ch->in_room->area != victim->in_room->area )
-    ||   (IS_NPC(victim) && saves_spell( level, victim,DAM_OTHER) ) )
+    victim = get_char_world( ch, target_name );
+    if ( !can_travel_to( ch, victim, level, 1 ) )
     {
 	send_to_char( "Başaramadın.\n\r", ch );
 	return;
     }
 
-    act("$n kör edici bir ışık parlamasıyla yokoluyor!",ch,NULL,NULL,TO_ROOM);
-    send_to_char("Kör edici bir ışık parlamasına karışıyorsun!.\n\r",ch);
-
-    char_from_room(ch);
-    char_to_room(ch,victim->in_room);
-
-    act("$n kör edici bir ışık parlamasıyla beliriyor!",ch,NULL,NULL,TO_ROOM);
-    do_look(ch,"auto");
-
+    travel_to( ch, victim->in_room,
+	"$n kör edici bir ışık parlamasıyla yokoluyor!",
+	"Kör edici bir ışık parlamasına karışıyorsun!.\n\r",
+	"$n kör edici bir ışık parlamasıyla beliriyor!", FALSE );
 }
 
 
@@ -5984,40 +4866,19 @@ void spell_solar_flight( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 /* travel via astral plains */
 void spell_helical_flow( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim;
+    CHAR_DATA *victim = get_char_world( ch, target_name );
 
-
-    if ( ( victim = get_char_world( ch, target_name ) ) == NULL
-    ||   victim == ch
-    ||   victim->in_room == NULL
-    ||   !can_see_room(ch,victim->in_room)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_SAFE)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_PRIVATE)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_SOLITARY)
-    ||   IS_SET(ch->in_room->room_flags, ROOM_NOSUMMON)
-    ||   IS_SET(victim->in_room->room_flags, ROOM_NOSUMMON)
-    ||   victim->level >= level + 3
-/*    ||   (!IS_NPC(victim) && victim->level >= LEVEL_HERO)  * NOT trust */
-    ||   saves_spell(level,victim,DAM_OTHER)
-    ||   (IS_NPC(victim) && is_safe_nomessage(ch, victim) && IS_SET(victim->imm_flags,IMM_SUMMON))
-    ||   (!IS_NPC(victim) && is_safe_nomessage(ch, victim) && IS_SET(victim->act,PLR_NOSUMMON))
-    ||   (IS_NPC(victim) && (victim->pIndexData->vnum == ch->pcdata->questmob))
-    ||   (!IS_NPC(victim) && ch->in_room->area != victim->in_room->area )
-    ||   (IS_NPC(victim) && saves_spell( level, victim,DAM_OTHER) ) )
+    if ( !can_travel_to( ch, victim, level, 3 ) )
     {
 	send_to_char( "Başaramadın.\n\r", ch );
 	return;
     }
 
-    act("$n yükselen bir renk sarmalına dolanarak havaya karışıyor.",ch,NULL,NULL,TO_ROOM);
-    send_to_char("Yükselen bir renk sarmalına dolanarak havaya karışıyor.\n\r",ch);
-
-    char_from_room(ch);
-    char_to_room(ch,victim->in_room);
-
-    act("Bir renk bobini yukarıdan aşağıya iniyor, dağıldığı gibi $n ortaya çıkıyor.",ch,NULL,NULL,TO_ROOM);
-    do_look(ch,"auto");
-
+    travel_to( ch, victim->in_room,
+	"$n yükselen bir renk sarmalına dolanarak havaya karışıyor.",
+	"Yükselen bir renk sarmalına dolanarak havaya karışıyor.\n\r",
+	"Bir renk bobini yukarıdan aşağıya iniyor, dağıldığı gibi $n ortaya çıkıyor.",
+	FALSE );
 }
 
 
@@ -6029,7 +4890,7 @@ void spell_corruption( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
     if (IS_AFFECTED(victim,AFF_CORRUPTION))
 	{
-    act("$N zaten çürüyor.\n\r",ch,NULL,victim,TO_CHAR);
+    act("$N zaten çürüyor.",ch,NULL,victim,TO_CHAR);
 	 return;
 	}
 
@@ -6059,15 +4920,15 @@ else
 }
 
 
-void spell_hurricane(int sn,int level,CHAR_DATA *ch,void *vo,int target)
+/*
+ * Rüzgâr büyüleri (kasırga, rüzgâr duvarı): odadaki herkese; uçmayan yarı
+ * hasar, boyuta göre çarpan, kurtarışta yarı. Hasar kurban başına hesaplanır.
+ */
+static void wind_area( int sn, int level, CHAR_DATA *ch )
 {
     CHAR_DATA *vch;
     CHAR_DATA *vch_next;
-    char buf[MAX_STRING_LENGTH];
     int dam,hp_dam,dice_dam,hpch;
-
-    act("$n yıldırım tanrılarından yardım istiyor.",ch,NULL,NULL,TO_NOTVICT);
-    act("Yıldırım tanrılarından yardım istiyorsun.",ch,NULL,NULL,TO_CHAR);
 
     hpch = UMAX(16,ch->hit);
     hp_dam = number_range(hpch/15+1,8);
@@ -6077,6 +4938,8 @@ void spell_hurricane(int sn,int level,CHAR_DATA *ch,void *vo,int target)
 
     for (vch = ch->in_room->people; vch != NULL; vch = vch_next)
     {
+	int vdam = dam;
+
 	vch_next = vch->next_in_room;
 
 	if (is_safe_spell(ch,vch,TRUE)
@@ -6085,64 +4948,38 @@ void spell_hurricane(int sn,int level,CHAR_DATA *ch,void *vo,int target)
 	    continue;
 	if ( is_safe(ch, vch) )
           continue;
-        if (!IS_NPC(ch) && vch != ch &&
-            ch->fighting != vch && vch->fighting != ch &&
-            (IS_SET(vch->affected_by,AFF_CHARM) || !IS_NPC(vch)))
-          {
-          if (!can_see(vch, ch))
-              do_yell(vch, "İmdat! Biri bana saldırıyor!");
-          else
-            {
-               snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
-                  (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(vch))?
-                   ch->doppel->name : ch->name);
-               do_yell(vch,buf);
-            }
-        }
+	victim_yell_at_caster( vch, ch );
 
-	if (!IS_AFFECTED(vch,AFF_FLYING)) dam /= 2;
+	if (!IS_AFFECTED(vch,AFF_FLYING)) vdam /= 2;
 
-	if (vch->size == SIZE_TINY)  dam = (int)((float)dam * 1.5);
-	else if (vch->size == SIZE_SMALL)  dam = (int)((float)dam * 1.3);
-	else if (vch->size == SIZE_MEDIUM)  dam *= 1;
-	else if (vch->size == SIZE_LARGE)  dam = (int)((float)dam * 0.9);
-	else if (vch->size == SIZE_HUGE)  dam = (int)((float)dam * 0.7);
-	else dam = (int)((float)dam * 0.5);
+	switch ( vch->size )
+	{
+	case SIZE_TINY:		vdam = vdam * 3 / 2;	break;
+	case SIZE_SMALL:	vdam = vdam * 13 / 10;	break;
+	case SIZE_MEDIUM:				break;
+	case SIZE_LARGE:	vdam = vdam * 9 / 10;	break;
+	case SIZE_HUGE:		vdam = vdam * 7 / 10;	break;
+	default:		vdam /= 2;		break;
+	}
 
 	if (saves_spell(level,vch,DAM_OTHER))
-	    damage(ch,vch,dam/2,sn,DAM_OTHER,TRUE);
-	else
-	    damage(ch,vch,dam,sn,DAM_OTHER,TRUE);
+	    vdam /= 2;
+	damage(ch,vch,vdam,sn,DAM_OTHER,TRUE);
     }
+}
+
+void spell_hurricane(int sn,int level,CHAR_DATA *ch,void *vo,int target)
+{
+    act("$n yıldırım tanrılarından yardım istiyor.",ch,NULL,NULL,TO_NOTVICT);
+    act("Yıldırım tanrılarından yardım istiyorsun.",ch,NULL,NULL,TO_CHAR);
+    wind_area( sn, level, ch );
 }
 
 
 void spell_detect_undead( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    AFFECT_DATA af;
-
-    if ( CAN_DETECT(victim, DETECT_UNDEAD) )
-    {
-	if (victim == ch)
-  send_to_char("Zaten hortlakları saptıyorsun.\n\r",ch);
-else
-  act("$N zaten hortlakları saptıyor.",ch,NULL,victim,TO_CHAR);
-	return;
-    }
-
-    af.where     = TO_DETECTS;
-    af.type      = sn;
-    af.level	 = level;
-    af.duration  = (5 + level / 3);
-    af.modifier  = 0;
-    af.location  = APPLY_NONE;
-    af.bitvector = DETECT_UNDEAD;
-    affect_to_char( victim, &af );
-    send_to_char( "Gözlerin yanıyor.\n\r", victim );
-    if ( ch != victim )
-	send_to_char( "Tamam.\n\r", ch );
-    return;
+    detect_spell( sn, level, ch, (CHAR_DATA *) vo, DETECT_UNDEAD,
+	"Zaten hortlakları saptıyorsun.\n\r", "$N zaten hortlakları saptıyor.", "Gözlerin yanıyor.\n\r" );
 }
 
 
@@ -6156,7 +4993,7 @@ void spell_take_revenge( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
   if (IS_NPC(ch)
 	|| ch->last_death_time == -1
-	|| current_time - ch->last_death_time > 600)
+	|| current_time - ch->last_death_time > REVENGE_WINDOW_SECS)
    {
      send_to_char("İntikam için çok geç.\n\r",ch);
     return;
@@ -6226,395 +5063,120 @@ void spell_firestream( int sn, int level, CHAR_DATA *ch, void *vo,int target)
     return;
 }
 
-void spell_summon_earth_elm( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+/* Uşak (elemental) çağırma tablosu: vnum, ad, yp formülü (mult*perm_hit+add) ve zar. */
+struct elm_type
 {
-  CHAR_DATA *gch;
-  CHAR_DATA *elm;
-  AFFECT_DATA af;
-  int i=0;
+    int		vnum;
+    const char *name;
+    int		hp_mult, hp_add;
+    int		dnum, dtype, dbonus_add;
+};
 
-  if (is_affected(ch,sn))
+static const struct elm_type elm_earth = { MOB_VNUM_ELM_EARTH, "toprak",  2,  400,  3, 10,  0 };
+static const struct elm_type elm_air   = { MOB_VNUM_ELM_AIR,   "hava",    4, 1000,  7,  4,  0 };
+static const struct elm_type elm_water = { MOB_VNUM_ELM_WATER, "su",      5, 2000,  8,  4,  0 };
+static const struct elm_type elm_fire  = { MOB_VNUM_ELM_FIRE,  "ateş",   10, 1000, 11,  5, 10 };
+static const struct elm_type elm_light = { MOB_VNUM_ELM_LIGHT, "enerji", 10, 4000, 13,  9, 10 };
+
+/* Beş uşak büyüsünün ortak gövdesi. */
+static void summon_elemental( int sn, int level, CHAR_DATA *ch, const struct elm_type *et )
+{
+    CHAR_DATA *gch;
+    CHAR_DATA *elm;
+    AFFECT_DATA af;
+    int i, count = 0;
+
+    if (is_affected(ch,sn))
     {
-      send_to_char( "Başka bir uşak yaratacak güce sahip değilsin.\n\r",ch);
-      return;
+	send_to_char( "Başka bir uşak yaratacak güce sahip değilsin.\n\r",ch);
+	return;
     }
 
-    send_to_char( "Bir toprak uşağı yaratmayı denedin.\n\r",ch);
-    act("$n bir toprak uşağı yaratmayı denedi.",ch,NULL,NULL,TO_ROOM);
+    printf_to_char( ch, "Bir %s uşağı yaratmayı denedin.\n\r", et->name );
+    act("$n bir $t uşağı yaratmayı denedi.",ch,et->name,NULL,TO_ROOM);
 
-  for (gch = char_list; gch != NULL; gch = gch->next)
+    for (gch = char_list; gch != NULL; gch = gch->next)
     {
-      if (IS_NPC(gch) && IS_AFFECTED(gch,AFF_CHARM) && gch->master == ch &&
-          ( gch->pIndexData->vnum == MOB_VNUM_ELM_EARTH ) )
-        {
-          i++;
-          if (i > 2)
-           {
-             send_to_char("Daha fazla toprak uşağını kontrol edemezsin!\n\r",ch);
-            return;
-           }
-        }
+	if (IS_NPC(gch) && IS_AFFECTED(gch,AFF_CHARM) && gch->master == ch
+	&&  gch->pIndexData->vnum == et->vnum
+	&&  ++count > MAX_SUMMONED_ELM)
+	{
+	    printf_to_char( ch, "Daha fazla %s uşağını kontrol edemezsin!\n\r", et->name );
+	    return;
+	}
     }
 
-  if (count_charmed(ch)) return;
+    if (count_charmed(ch)) return;
 
-  elm = create_mobile( get_mob_index(MOB_VNUM_ELM_EARTH), NULL );
+    elm = create_mobile( get_mob_index(et->vnum), NULL );
 
+    for (i = 0; i < MAX_STATS; i ++)
+	elm->perm_stat[i] = UMIN(25,15 + ch->level/10);
 
-  for (i = 0; i < MAX_STATS; i ++)
-       elm->perm_stat[i] = UMIN(25,15 + ch->level/10);
+    elm->perm_stat[STAT_STR] += 3;
+    elm->perm_stat[STAT_INT] -= 1;
+    elm->perm_stat[STAT_CON] += 2;
 
-  elm->perm_stat[STAT_STR] += 3;
-  elm->perm_stat[STAT_INT] -= 1;
-  elm->perm_stat[STAT_CON] += 2;
+    elm->max_hit = IS_NPC(ch) ? UMIN( ch->max_hit, MOB_MAX_HP )
+		: UMIN( et->hp_mult * ch->pcdata->perm_hit + et->hp_add, MOB_MAX_HP );
+    elm->hit = elm->max_hit;
+    elm->max_mana = IS_NPC(ch)? ch->max_mana : ch->pcdata->perm_mana;
+    elm->mana = elm->max_mana;
+    elm->level = ch->level;
+    for (i=0; i < 3; i++)
+	elm->armor[i] = interpolate(elm->level,100,-100);
+    elm->armor[3] = interpolate(elm->level,100,0);
+    elm->silver = 0;
+    elm->timer = 0;
+    elm->damage[DICE_NUMBER] = et->dnum;
+    elm->damage[DICE_TYPE] = et->dtype;
+    elm->damage[DICE_BONUS] = ch->level / 2 + et->dbonus_add;
 
-  elm->max_hit = IS_NPC(ch)? URANGE(ch->max_hit,1 * ch->max_hit,30000)
-                : UMIN( (2 * ch->pcdata->perm_hit) + 400,30000);
-  elm->hit = elm->max_hit;
-  elm->max_mana = IS_NPC(ch)? ch->max_mana : ch->pcdata->perm_mana;
-  elm->mana = elm->max_mana;
-  elm->level = ch->level;
-  for (i=0; i < 3; i++)
-    elm->armor[i] = interpolate(elm->level,100,-100);
-  elm->armor[3] = interpolate(elm->level,100,0);
-  elm->silver = 0;
-  elm->timer = 0;
-  elm->damage[DICE_NUMBER] = 3;
-  elm->damage[DICE_TYPE] = 10;
-  elm->damage[DICE_BONUS] = ch->level / 2;
+    char_to_room(elm,ch->in_room);
+    printf_to_char( ch, "Bir %s uşağı yarattın!\n\r", et->name );
+    act("$n bir $t uşağı yarattı!",ch,et->name,NULL,TO_ROOM);
 
-  char_to_room(elm,ch->in_room);
-  send_to_char( "Bir toprak uşağı yarattın!\n\r",ch);
-  act("$n bir toprak uşağı yarattı!",ch,NULL,NULL,TO_ROOM);
+    af.where              = TO_AFFECTS;
+    af.type               = sn;
+    af.level              = level;
+    af.duration           = 24;
+    af.bitvector          = 0;
+    af.modifier           = 0;
+    af.location           = APPLY_NONE;
+    affect_to_char(ch, &af);
 
-  af.where              = TO_AFFECTS;
-  af.type               = sn;
-  af.level              = level;
-  af.duration           = 24;
-  af.bitvector          = 0;
-  af.modifier           = 0;
-  af.location           = APPLY_NONE;
-  affect_to_char(ch, &af);
-
-  SET_BIT(elm->affected_by, AFF_CHARM);
-  elm->master = elm->leader = ch;
-
+    SET_BIT(elm->affected_by, AFF_CHARM);
+    elm->master = elm->leader = ch;
 }
 
-void spell_frostbolt( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+void spell_summon_earth_elm( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    CHAR_DATA *victim = (CHAR_DATA *) vo;
-    int dam;
-
-    dam = dice( level, 10 );
-    if ( saves_spell( level, victim, DAM_COLD ) )
-	dam /= 2;
-    damage( ch, victim, dam, sn,DAM_COLD,TRUE);
-    return;
+    summon_elemental( sn, level, ch, &elm_earth );
 }
 
 void spell_summon_air_elm( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-  CHAR_DATA *gch;
-  CHAR_DATA *elm;
-  AFFECT_DATA af;
-  int i=0;
-
-  if (is_affected(ch,sn))
-    {
-      send_to_char("Başka bir uşak yaratacak güce sahip değilsin.\n\r",ch);
-      return;
-    }
-
-    send_to_char( "Bir hava uşağı yaratmayı denedin.\n\r",ch);
-    act("$n bir hava uşağı yaratmayı denedi.",ch,NULL,NULL,TO_ROOM);
-
-  for (gch = char_list; gch != NULL; gch = gch->next)
-    {
-      if (IS_NPC(gch) && IS_AFFECTED(gch,AFF_CHARM) && gch->master == ch &&
-          ( gch->pIndexData->vnum == MOB_VNUM_ELM_AIR ) )
-        {
-          i++;
-          if (i > 2)
-           {
-             send_to_char("Daha fazla hava uşağını kontrol edemezsin!\n\r",ch);
-            return;
-           }
-        }
-    }
-
-  if (count_charmed(ch)) return;
-
-  elm = create_mobile( get_mob_index(MOB_VNUM_ELM_AIR), NULL );
-
-
-  for (i = 0; i < MAX_STATS; i ++)
-       elm->perm_stat[i] = UMIN(25,15 + ch->level/10);
-
-  elm->perm_stat[STAT_STR] += 3;
-  elm->perm_stat[STAT_INT] -= 1;
-  elm->perm_stat[STAT_CON] += 2;
-
-  elm->max_hit = IS_NPC(ch)? URANGE(ch->max_hit,1 * ch->max_hit,30000)
-                : UMIN( (4 * ch->pcdata->perm_hit) + 1000,30000);
-  elm->hit = elm->max_hit;
-  elm->max_mana = IS_NPC(ch)? ch->max_mana : ch->pcdata->perm_mana;
-  elm->mana = elm->max_mana;
-  elm->level = ch->level;
-  for (i=0; i < 3; i++)
-    elm->armor[i] = interpolate(elm->level,100,-100);
-  elm->armor[3] = interpolate(elm->level,100,0);
-  elm->silver = 0;
-  elm->timer = 0;
-  elm->damage[DICE_NUMBER] = 7;
-  elm->damage[DICE_TYPE] = 4;
-  elm->damage[DICE_BONUS] = ch->level / 2;
-
-  char_to_room(elm,ch->in_room);
-  send_to_char("Bir hava uşağı yaratmayı denedin!\n\r",ch);
-  act("$n bir hava uşağı yaratmayı denedi!",ch,NULL,NULL,TO_ROOM);
-
-  af.where              = TO_AFFECTS;
-  af.type               = sn;
-  af.level              = level;
-  af.duration           = 24;
-  af.bitvector          = 0;
-  af.modifier           = 0;
-  af.location           = APPLY_NONE;
-  affect_to_char(ch, &af);
-
-  SET_BIT(elm->affected_by, AFF_CHARM);
-  elm->master = elm->leader = ch;
-
-	return;
+    summon_elemental( sn, level, ch, &elm_air );
 }
 
 void spell_summon_water_elm( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-  CHAR_DATA *gch;
-  CHAR_DATA *elm;
-  AFFECT_DATA af;
-  int i=0;
-
-  if (is_affected(ch,sn))
-    {
-      send_to_char("Başka bir uşak yaratacak güce sahip değilsin.\n\r",ch);
-      return;
-    }
-
-    send_to_char("Bir su uşağı yaratmayı denedin.\n\r",ch);
-    act( "$n bir su uşağı yaratmayı denedi.",ch,NULL,NULL,TO_ROOM);
-
-  for (gch = char_list; gch != NULL; gch = gch->next)
-    {
-      if (IS_NPC(gch) && IS_AFFECTED(gch,AFF_CHARM) && gch->master == ch &&
-          ( gch->pIndexData->vnum == MOB_VNUM_ELM_WATER ) )
-        {
-          i++;
-          if (i > 2)
-           {
-             send_to_char("Daha fazla su uşağını kontrol edemezsin!\n\r",ch);
-            return;
-           }
-        }
-    }
-
-  if (count_charmed(ch)) return;
-
-  elm = create_mobile( get_mob_index(MOB_VNUM_ELM_WATER), NULL );
-
-
-  for (i = 0; i < MAX_STATS; i ++)
-       elm->perm_stat[i] = UMIN(25,15 + ch->level/10);
-
-  elm->perm_stat[STAT_STR] += 3;
-  elm->perm_stat[STAT_INT] -= 1;
-  elm->perm_stat[STAT_CON] += 2;
-
-  elm->max_hit = IS_NPC(ch)? URANGE(ch->max_hit,1 * ch->max_hit,30000)
-                : UMIN( (5 * ch->pcdata->perm_hit) + 2000,30000);
-  elm->hit = elm->max_hit;
-  elm->max_mana = IS_NPC(ch)? ch->max_mana : ch->pcdata->perm_mana;
-  elm->mana = elm->max_mana;
-  elm->level = ch->level;
-  for (i=0; i < 3; i++)
-    elm->armor[i] = interpolate(elm->level,100,-100);
-  elm->armor[3] = interpolate(elm->level,100,0);
-  elm->silver = 0;
-  elm->timer = 0;
-  elm->damage[DICE_NUMBER] = 8;
-  elm->damage[DICE_TYPE] = 4;
-  elm->damage[DICE_BONUS] = ch->level / 2;
-
-  char_to_room(elm,ch->in_room);
-  send_to_char("Bir su uşağı yarattın!\n\r",ch);
-  act("$n bir su uşağı yarattı!",ch,NULL,NULL,TO_ROOM);
-
-  af.where              = TO_AFFECTS;
-  af.type               = sn;
-  af.level              = level;
-  af.duration           = 24;
-  af.bitvector          = 0;
-  af.modifier           = 0;
-  af.location           = APPLY_NONE;
-  affect_to_char(ch, &af);
-
-  SET_BIT(elm->affected_by, AFF_CHARM);
-  elm->master = elm->leader = ch;
-
-	return;
+    summon_elemental( sn, level, ch, &elm_water );
 }
 
 void spell_summon_fire_elm( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-  CHAR_DATA *gch;
-  CHAR_DATA *elm;
-  AFFECT_DATA af;
-  int i=0;
-
-  if (is_affected(ch,sn))
-    {
-      send_to_char("Başka bir uşak yaratacak güce sahip değilsin.\n\r",ch);
-      return;
-    }
-
-    send_to_char( "Bir ateş uşağı yaratmayı denedin.\n\r",ch);
-    act("$n bir ateş uşağı yaratmayı denedi.",ch,NULL,NULL,TO_ROOM);
-
-  for (gch = char_list; gch != NULL; gch = gch->next)
-    {
-      if (IS_NPC(gch) && IS_AFFECTED(gch,AFF_CHARM) && gch->master == ch &&
-          ( gch->pIndexData->vnum == MOB_VNUM_ELM_FIRE ) )
-        {
-          i++;
-          if (i > 2)
-           {
-             send_to_char("Daha fazla ateş uşağını kontrol edemezsin!\n\r",ch);
-            return;
-           }
-        }
-    }
-
-  if (count_charmed(ch)) return;
-
-  elm = create_mobile( get_mob_index(MOB_VNUM_ELM_FIRE), NULL );
-
-
-  for (i = 0; i < MAX_STATS; i ++)
-       elm->perm_stat[i] = UMIN(25,15 + ch->level/10);
-
-  elm->perm_stat[STAT_STR] += 3;
-  elm->perm_stat[STAT_INT] -= 1;
-  elm->perm_stat[STAT_CON] += 2;
-
-  elm->max_hit = IS_NPC(ch)? URANGE(ch->max_hit,1 * ch->max_hit,30000)
-                : UMIN( (10 * ch->pcdata->perm_hit) + 1000,30000);
-  elm->hit = elm->max_hit;
-  elm->max_mana = IS_NPC(ch)? ch->max_mana : ch->pcdata->perm_mana;
-  elm->mana = elm->max_mana;
-  elm->level = ch->level;
-  for (i=0; i < 3; i++)
-    elm->armor[i] = interpolate(elm->level,100,-100);
-  elm->armor[3] = interpolate(elm->level,100,0);
-  elm->silver = 0;
-  elm->timer = 0;
-  elm->damage[DICE_NUMBER] = 11;
-  elm->damage[DICE_TYPE] = 5;
-  elm->damage[DICE_BONUS] = ch->level / 2 + 10;
-
-  char_to_room(elm,ch->in_room);
-  send_to_char("Bir ateş uşağı yarattın!\n\r",ch);
-  act("$n bir ateş uşağı yarattı!",ch,NULL,NULL,TO_ROOM);
-
-  af.where              = TO_AFFECTS;
-  af.type               = sn;
-  af.level              = level;
-  af.duration           = 24;
-  af.bitvector          = 0;
-  af.modifier           = 0;
-  af.location           = APPLY_NONE;
-  affect_to_char(ch, &af);
-
-  SET_BIT(elm->affected_by, AFF_CHARM);
-  elm->master = elm->leader = ch;
-
-	return;
+    summon_elemental( sn, level, ch, &elm_fire );
 }
 
 void spell_summon_light_elm( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-  CHAR_DATA *gch;
-  CHAR_DATA *elm;
-  AFFECT_DATA af;
-  int i=0;
+    summon_elemental( sn, level, ch, &elm_light );
+}
 
-  if (is_affected(ch,sn))
-    {
-      send_to_char("Başka bir uşak yaratacak güce sahip değilsin.\n\r",ch);
-      return;
-    }
-
-    send_to_char(  "Bir enerji uşağı yaratmayı denedin.\n\r",ch);
-    act("$n bir enerji uşağı yaratmayı denedi.",ch,NULL,NULL,TO_ROOM);
-
-  for (gch = char_list; gch != NULL; gch = gch->next)
-    {
-      if (IS_NPC(gch) && IS_AFFECTED(gch,AFF_CHARM) && gch->master == ch &&
-          ( gch->pIndexData->vnum == MOB_VNUM_ELM_LIGHT ) )
-        {
-          i++;
-          if (i > 2)
-           {
-             send_to_char("Daha fazla enerji uşağını kontrol edemezsin!\n\r",ch);
-            return;
-           }
-        }
-    }
-
-  if (count_charmed(ch)) return;
-
-  elm = create_mobile( get_mob_index(MOB_VNUM_ELM_LIGHT), NULL );
-
-
-  for (i = 0; i < MAX_STATS; i ++)
-       elm->perm_stat[i] = UMIN(25,15 + ch->level/10);
-
-  elm->perm_stat[STAT_STR] += 3;
-  elm->perm_stat[STAT_INT] -= 1;
-  elm->perm_stat[STAT_CON] += 2;
-
-  elm->max_hit = IS_NPC(ch)? URANGE(ch->max_hit,1 * ch->max_hit,30000)
-                : UMIN( (10 * ch->pcdata->perm_hit) + 4000,30000);
-  elm->hit = elm->max_hit;
-  elm->max_mana = IS_NPC(ch)? ch->max_mana : ch->pcdata->perm_mana;
-  elm->mana = elm->max_mana;
-  elm->level = ch->level;
-  for (i=0; i < 3; i++)
-    elm->armor[i] = interpolate(elm->level,100,-100);
-  elm->armor[3] = interpolate(elm->level,100,0);
-  elm->silver = 0;
-  elm->timer = 0;
-  elm->damage[DICE_NUMBER] = 13;
-  elm->damage[DICE_TYPE] = 9;
-  elm->damage[DICE_BONUS] = ch->level / 2 + 10;
-
-  char_to_room(elm,ch->in_room);
-  send_to_char("Bir enerji uşağı yarattın!\n\r",ch);
-  act( "$n bir enerji uşağı yarattı!",ch,NULL,NULL,TO_ROOM);
-
-  af.where              = TO_AFFECTS;
-  af.type               = sn;
-  af.level              = level;
-  af.duration           = 24;
-  af.bitvector          = 0;
-  af.modifier           = 0;
-  af.location           = APPLY_NONE;
-  affect_to_char(ch, &af);
-
-  SET_BIT(elm->affected_by, AFF_CHARM);
-  elm->master = elm->leader = ch;
-
-	return;
+void spell_frostbolt( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+{
+    simple_damage_spell( sn, level, ch, (CHAR_DATA *) vo, dice( level, 10 ), DAM_COLD, NULL );
 }
 
 
@@ -6622,54 +5184,36 @@ void spell_fire_and_ice( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
     CHAR_DATA *tmp_vict;
     CHAR_DATA *tmp_next;
-    char buf[MAX_STRING_LENGTH];
-    int dam,dam_sn;
-    int movedam;
+    int dam = dice( level , 8);
+    int movedam = number_range( ch->level, 2 * ch->level );
+    int fire_sn = msn(MSN_FIREBALL) < 0 ? sn : msn(MSN_FIREBALL);
+    int ice_sn  = msn(MSN_ICEBALL)  < 0 ? sn : msn(MSN_ICEBALL);
 
-    dam = dice( level , 8);
-    movedam = number_range( ch->level, 2 * ch->level );
-
-  for (tmp_vict = ch->in_room->people;tmp_vict != NULL;
-       tmp_vict = tmp_next)
+    for (tmp_vict = ch->in_room->people; tmp_vict != NULL; tmp_vict = tmp_next)
     {
-      tmp_next = tmp_vict->next_in_room;
+	int vdam;
 
-      if ( !is_safe_spell(ch,tmp_vict,TRUE))
-        {
-          if (!IS_NPC(ch) && tmp_vict != ch &&
-              ch->fighting != tmp_vict && tmp_vict->fighting != ch &&
-              (IS_SET(tmp_vict->affected_by,AFF_CHARM) || !IS_NPC(tmp_vict)))
-            {
-            if (!can_see(tmp_vict, ch))
-                do_yell(tmp_vict, "İmdat! Biri bana saldırıyor!");
-            else
-              {
-                 snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
-	(is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(tmp_vict))? ch->doppel->name : ch->name);
-                 do_yell(tmp_vict,buf);
-              }
-          }
+	tmp_next = tmp_vict->next_in_room;
+	if ( is_safe_spell(ch,tmp_vict,TRUE) )
+	    continue;
 
-          if (saves_spell(level,tmp_vict, DAM_FIRE))
-            dam /= 2;
-	  if ((dam_sn = skill_lookup("fireball")) < 0 )
-	    dam_sn = sn;
-          damage( ch, tmp_vict, dam, dam_sn, DAM_FIRE, TRUE );
-          tmp_vict->move -= UMIN(tmp_vict->move,movedam);
+	victim_yell_at_caster( tmp_vict, ch );
+	tmp_vict->move -= UMIN(tmp_vict->move,movedam);
 
-          if ( (IS_NPC(tmp_vict) && tmp_vict->position == POS_DEAD) ||
-             (!IS_NPC(tmp_vict) && (current_time - tmp_vict->last_death_time) < 10))
-	  {
-          if (saves_spell(level,tmp_vict, DAM_COLD))
-            dam /= 2;
-	  if ((dam_sn = skill_lookup("iceball")) < 0 )
-	    dam_sn = sn;
-          damage( ch, tmp_vict, dam, dam_sn, DAM_COLD, TRUE );
-          }
+	vdam = dam;
+	if (saves_spell(level,tmp_vict, DAM_FIRE))
+	    vdam /= 2;
+	damage( ch, tmp_vict, vdam, fire_sn, DAM_FIRE, TRUE );
 
-        }
+	/* ateş öldürdüyse (ya da kurban odadan çıktıysa) buz vurulmaz */
+	if ( !still_here( ch, tmp_vict ) )
+	    continue;
+
+	vdam = dam;
+	if (saves_spell(level,tmp_vict, DAM_COLD))
+	    vdam /= 2;
+	damage( ch, tmp_vict, vdam, ice_sn, DAM_COLD, TRUE );
     }
-	return;
 }
 
 void spell_grounding( int sn, int level, CHAR_DATA *ch, void *vo,int target)
@@ -6718,10 +5262,12 @@ void spell_tsunami( int sn, int level, CHAR_DATA *ch, void *vo,int target)
     damage(ch,victim,dam,sn,DAM_DROWNING,TRUE);
 }
 
-void spell_disenchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+/*
+ * Büyü bozma (disenchant armor/weapon): yok etme (fail/5), başarı (> fail/2:
+ * tüm etkiler ve büyülü bayraklar silinir, nesne prototipine döner).
+ */
+static void disenchant_obj( int level, CHAR_DATA *ch, OBJ_DATA *obj, const char *destroy_msg )
 {
-    OBJ_DATA *obj = (OBJ_DATA *) vo;
-    AFFECT_DATA *paf;
     int result, fail;
 
     if (obj->wear_loc != -1)
@@ -6743,28 +5289,17 @@ void spell_disenchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int targ
     /* the moment of truth */
     if (result < (fail / 5))  /* item destroyed */
     {
-      act("$p kör edici alevlerle buharlaşıyor!",ch,obj,NULL,TO_CHAR);
-    	act("$p kör edici alevlerle buharlaşıyor!",ch,obj,NULL,TO_ROOM);
+	act(destroy_msg,ch,obj,NULL,TO_CHAR);
+	act(destroy_msg,ch,obj,NULL,TO_ROOM);
 	extract_obj(obj);
 	return;
     }
 
     if (result > (fail / 2)) /* item disenchanted */
     {
-	AFFECT_DATA *paf_next;
-
-  act("$p ışıldayarak yokoluyor.",ch,obj,NULL,TO_CHAR);
+	act("$p ışıldayarak yokoluyor.",ch,obj,NULL,TO_CHAR);
 	act("$p ışıldayarak yokoluyor.",ch,obj,NULL,TO_ROOM);
-	obj->enchanted = TRUE;
-
-	/* remove all affects */
-	for (paf = obj->affected; paf != NULL; paf = paf_next)
-	{
-	    paf_next = paf->next;
-	    free_affect(paf);
-	}
-	obj->affected = NULL;
-
+	obj_strip_affects(obj);
 	obj->enchanted = FALSE;
 
 	/* clear some flags */
@@ -6774,19 +5309,28 @@ void spell_disenchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int targ
 	REMOVE_BIT(obj->extra_flags, ITEM_INVIS);
 	REMOVE_BIT(obj->extra_flags, ITEM_NODROP);
 	REMOVE_BIT(obj->extra_flags, ITEM_NOREMOVE);
-
 	return;
     }
 
     send_to_char("Hiçbir şey değişmiyor.\n\r",ch);
-    return;
+}
+
+void spell_disenchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+{
+    OBJ_DATA *obj = (OBJ_DATA *) vo;
+
+    if (obj->item_type != ITEM_ARMOR)
+    {
+      send_to_char("O bir zırh değil.\n\r",ch);
+	return;
+    }
+
+    disenchant_obj( level, ch, obj, "$p kör edici alevlerle buharlaşıyor!" );
 }
 
 void spell_disenchant_weapon( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
     OBJ_DATA *obj = (OBJ_DATA *) vo;
-    AFFECT_DATA *paf;
-    int result, fail;
 
     if (obj->item_type != ITEM_WEAPON)
     {
@@ -6794,62 +5338,7 @@ void spell_disenchant_weapon( int sn, int level, CHAR_DATA *ch, void *vo,int tar
 	return;
     }
 
-    if (obj->wear_loc != -1)
-    {
-      send_to_char("Yükseltilecek eşya envanterde taşınıyor olmalı.\n\r",ch);
-	return;
-    }
-
-    /* find the bonuses */
-    fail = 75;
-    fail -= (level - obj->level) * 5;
-    if (IS_SET(obj->extra_flags, ITEM_MAGIC))
-	fail += 25;
-
-    fail = URANGE(5,fail,95);
-
-    result = number_percent();
-
-    /* the moment of truth */
-    if (result < (fail / 5))  /* item destroyed */
-    {
-      act("$p şiddetle parlayarak patlıyor!",ch,obj,NULL,TO_CHAR);
-    	act("$p şiddetle parlayarak patlıyor!",ch,obj,NULL,TO_ROOM);
-	extract_obj(obj);
-	return;
-    }
-
-    if (result > (fail / 2)) /* item disenchanted */
-    {
-	AFFECT_DATA *paf_next;
-
-  act("$p ışıldayarak yokoluyor.",ch,obj,NULL,TO_CHAR);
-	act("$p ışıldayarak yokoluyor.",ch,obj,NULL,TO_ROOM);
-	obj->enchanted = TRUE;
-
-	/* remove all affects */
-	for (paf = obj->affected; paf != NULL; paf = paf_next)
-	{
-	    paf_next = paf->next;
-	    free_affect(paf);
-	}
-	obj->affected = NULL;
-
-	obj->enchanted = FALSE;
-
-	/* clear some flags */
-	REMOVE_BIT(obj->extra_flags, ITEM_GLOW);
-	REMOVE_BIT(obj->extra_flags, ITEM_HUM);
-	REMOVE_BIT(obj->extra_flags, ITEM_MAGIC);
-	REMOVE_BIT(obj->extra_flags, ITEM_INVIS);
-	REMOVE_BIT(obj->extra_flags, ITEM_NODROP);
-	REMOVE_BIT(obj->extra_flags, ITEM_NOREMOVE);
-
-	return;
-    }
-
-    send_to_char("Hiçbir şey değişmiyor.\n\r",ch);
-    return;
+    disenchant_obj( level, ch, obj, "$p şiddetle parlayarak patlıyor!" );
 }
 
 void spell_absorb( int sn, int level, CHAR_DATA *ch, void *vo,int target)
@@ -6933,11 +5422,13 @@ void spell_animate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target
   free_string( mob->name );
   mob->name = str_dup( buf );
 
-  snprintf(buf, sizeof(buf), mob->short_descr, obj->short_descr );
+  /* alan dosyasındaki kısa tanım biçim dizgisi olarak KULLANILMAZ */
+  snprintf(buf, sizeof(buf), "Canlandırılmış %s", obj->short_descr );
   free_string( mob->short_descr );
   mob->short_descr = str_dup( buf );
 
-  snprintf(buf, sizeof(buf), "%s burada, dik dik sana bakıyor!\n\r", capitalize(obj->short_descr) );
+  snprintf(buf, sizeof(buf), "%s burada, dik dik sana bakıyor!\n\r", obj->short_descr );
+  utf8_upper_first( buf, sizeof(buf) );
   free_string( mob->long_descr );
   mob->long_descr = str_dup( buf );
 
@@ -6953,7 +5444,7 @@ void spell_animate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target
   if (obj->item_type == ITEM_WEAPON)
   {
      mob->hit = IS_NPC(ch) ? 100 :
-		UMIN( (25 * mob->level) + 1000, 30000);
+		UMIN( (25 * mob->level) + 1000, MOB_MAX_HP);
      mob->max_hit = mob->hit;
      mob->mana = ch->level * 40;
      mob->max_mana = mob->mana;
@@ -6968,7 +5459,7 @@ void spell_animate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target
   if (obj->item_type == ITEM_ARMOR)
   {
      mob->hit = IS_NPC(ch) ? 100:
-		UMIN( (100 * mob->level) + 2000, 30000);
+		UMIN( (100 * mob->level) + 2000, MOB_MAX_HP);
      mob->max_hit = mob->hit;
      mob->mana = ch->level * 40;
      mob->max_mana = mob->mana;
@@ -6993,8 +5484,8 @@ void spell_animate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target
   af.bitvector	= 0;
   affect_to_char(ch, &af);
 
-  act("Gücünle $p'ye yaşam veriyorsun!\n\r", ch, obj, NULL, TO_CHAR);
-  act("$n gücüyle $p'ye yaşam veriyor!\n\r", ch, obj, NULL, TO_ROOM);
+  act("Gücünle $p'ye yaşam veriyorsun!", ch, obj, NULL, TO_CHAR);
+  act("$n gücüyle $p'ye yaşam veriyor!", ch, obj, NULL, TO_ROOM);
 
   extract_obj( obj );
 	return;
@@ -7002,60 +5493,9 @@ void spell_animate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target
 
 void spell_windwall( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
-    CHAR_DATA *vch;
-    CHAR_DATA *vch_next;
-    char buf[MAX_STRING_LENGTH];
-    int dam,hp_dam,dice_dam,hpch;
-
     act("$n herkese saldıran bir rüzgar duvarı yaratıyor.",ch,NULL,NULL,TO_ROOM);
     act("Bir rüzgar duvarı oluşturuyorsun.",ch,NULL,NULL,TO_CHAR);
-
-    hpch = UMAX(16,ch->hit);
-    hp_dam = number_range(hpch/15+1,8);
-    dice_dam = dice(level,12);
-
-    dam = UMAX(hp_dam + dice_dam/10,dice_dam + hp_dam/10);
-
-    for (vch = ch->in_room->people; vch != NULL; vch = vch_next)
-    {
-	vch_next = vch->next_in_room;
-
-	if (is_safe_spell(ch,vch,TRUE)
-	||  (IS_NPC(ch) && IS_NPC(vch)
-	&&   (ch->fighting == vch || vch->fighting == ch)))
-	    continue;
-	if ( is_safe(ch, vch) )
-          continue;
-        if (!IS_NPC(ch) && vch != ch &&
-            ch->fighting != vch && vch->fighting != ch &&
-            (IS_SET(vch->affected_by,AFF_CHARM) || !IS_NPC(vch)))
-          {
-          if (!can_see(vch, ch))
-              do_yell(vch, "İmdat! Biri bana saldırıyor!");
-          else
-            {
-               snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
-                  (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(vch))?
-                   ch->doppel->name : ch->name);
-               do_yell(vch,buf);
-            }
-        }
-
-	if (!IS_AFFECTED(vch,AFF_FLYING)) dam /= 2;
-
-	if (vch->size == SIZE_TINY)  dam = (int)((float)dam * 1.5);
-	else if (vch->size == SIZE_SMALL)  dam = (int)((float)dam * 1.3);
-	else if (vch->size == SIZE_MEDIUM)  dam *= 1;
-	else if (vch->size == SIZE_LARGE)  dam = (int)((float)dam * 0.9);
-	else if (vch->size == SIZE_HUGE)  dam = (int)((float)dam * 0.7);
-	else dam = (int)((float)dam * 0.5);
-
-	if (saves_spell(level,vch,DAM_OTHER))
-	    damage(ch,vch,dam/2,sn,DAM_OTHER,TRUE);
-	else
-	    damage(ch,vch,dam,sn,DAM_OTHER,TRUE);
-    }
-	return;
+    wind_area( sn, level, ch );
 }
 
 void spell_earthfade( int sn, int level, CHAR_DATA *ch, void *vo,int target)
@@ -7224,7 +5664,7 @@ send_to_char("Bir an için uyuşukluk hissediyorsun.\n\r",victim);
 
     if (IS_AFFECTED(victim,AFF_HASTE))
     {
-	if (!check_dispel(level,victim,skill_lookup("haste")))
+	if (!check_dispel(level,victim,gsn_haste))
 	{
 	    if (victim != ch)
       send_to_char("Büyü işe yaramadı.\n\r",ch);
