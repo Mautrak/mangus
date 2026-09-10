@@ -1823,11 +1823,11 @@ void spell_create_water( int sn, int level, CHAR_DATA *ch, void *vo,int target)
     {
 	obj->value[2] = LIQ_WATER;
 	obj->value[1] += water;
-	if ( !is_name( "water", obj->name ) || !is_name( "su", obj->name ) )
+	if ( !is_name( "su", obj->name ) )
 	{
 	    char buf[MAX_STRING_LENGTH];
 
-	    snprintf(buf, sizeof(buf), "%s water", obj->name );
+	    snprintf(buf, sizeof(buf), "%s su", obj->name );
 	    free_string( obj->name );
 	    obj->name = str_dup( buf );
 	}
@@ -3645,57 +3645,42 @@ void spell_magic_missile( int sn, int level, CHAR_DATA *ch,void *vo,int target)
 	13, 13, 13, 13, 13,	14, 14, 14, 14, 14
     };
 
-    int dam;
+    int dam, missiles, i;
 
-    if ( is_affected( ch, 67 ) )  {
-	if ( ch->level > 4 )  {
-    send_to_char("Büyülü fişeklerin düşmanına varmadan yitiyor.\n\r", ch );
-          act( "Kalkanın $S büyülü fişeklerini karşılıyor.", victim, NULL, ch, TO_CHAR);
-        }
-	else  {
-    send_to_char( "Büyülü fişeğin düşmanına varmadan yitiyor.\n\r", ch );
-          act("Kalkanın $S büyülü fişeğini karşılıyor.", victim, NULL, ch, TO_CHAR);
+    /* fişek sayısı: 1 + her 4 seviyede bir (5, 9, 13, 17. seviyelerde), en çok 5 */
+    missiles = 1 + (ch->level > 4) + (ch->level > 8) + (ch->level > 12) + (ch->level > 16);
+
+    /* kurbanın üzerindeki 'shield' büyüsü fişekleri karşılar
+     * (eski kod tablo dizini 67'ye, yani büyücünün 'dispel good' etkisine bakıyordu) */
+    if ( is_affected( victim, gsn_shield ) )
+    {
+	if ( missiles > 1 )
+	{
+	    send_to_char("Büyülü fişeklerin düşmanına varmadan yitiyor.\n\r", ch );
+	    act( "Kalkanın $S büyülü fişeklerini karşılıyor.", victim, NULL, ch, TO_CHAR);
+	}
+	else
+	{
+	    send_to_char( "Büyülü fişeğin düşmanına varmadan yitiyor.\n\r", ch );
+	    act("Kalkanın $S büyülü fişeğini karşılıyor.", victim, NULL, ch, TO_CHAR);
 	}
 	return;
     }
 
-
     level	= UMIN(level, (int)(sizeof(dam_each)/sizeof(dam_each[0])) - 1);
     level	= UMAX(0, level);
-	if (ch->level > 50)
-    dam		= level / 4;
+
+    for ( i = 0; i < missiles; i++ )
+    {
+	if ( i == 0 && ch->level > 50 )
+	    dam = level / 4;
 	else
-    dam		= number_range( dam_each[level] / 2, dam_each[level] * 2 );
+	    dam = number_range( dam_each[level] / 2, dam_each[level] * 2 );
 
-    if ( saves_spell( level, victim,DAM_ENERGY) )
-	dam /= 2;
-    damage( ch, victim, dam, sn, DAM_ENERGY ,TRUE);
-    if ( ch->level > 4 )  {
-      dam = number_range( dam_each[level] / 2, dam_each[level] * 2 );
-      if ( saves_spell( level, victim,DAM_ENERGY) )
-  	  dam /= 2;
-      damage( ch, victim, dam, sn, DAM_ENERGY ,TRUE);
+	if ( saves_spell( level, victim,DAM_ENERGY) )
+	    dam /= 2;
+	damage( ch, victim, dam, sn, DAM_ENERGY ,TRUE);
     }
-    if ( ch->level > 8 )  {
-      dam = number_range( dam_each[level] / 2, dam_each[level] * 2 );
-      if ( saves_spell( level, victim,DAM_ENERGY) )
-  	  dam /= 2;
-      damage( ch, victim, dam, sn, DAM_ENERGY ,TRUE);
-    }
-    if ( ch->level > 12 )  {
-      dam = number_range( dam_each[level] / 2, dam_each[level] * 2 );
-      if ( saves_spell( level, victim,DAM_ENERGY) )
-  	  dam /= 2;
-      damage( ch, victim, dam, sn, DAM_ENERGY ,TRUE);
-    }
-    if ( ch->level > 16 )  {
-      dam = number_range( dam_each[level] / 2, dam_each[level] * 2 );
-      if ( saves_spell( level, victim,DAM_ENERGY) )
-  	  dam /= 2;
-      damage( ch, victim, dam, sn, DAM_ENERGY ,TRUE);
-    }
-
-    return;
 }
 
 void spell_mass_healing(int sn, int level, CHAR_DATA *ch, void *vo, int target)
@@ -4025,8 +4010,8 @@ void spell_recharge( int sn, int level, CHAR_DATA *ch, void *vo,int target)
     {
 	int chargeback,chargemax;
 
-  act("$p hafifçe parlıyor.",ch,obj,NULL,TO_CHAR);
 	act("$p hafifçe parlıyor.",ch,obj,NULL,TO_CHAR);
+	act("$p hafifçe parlıyor.",ch,obj,NULL,TO_ROOM);
 
 	chargemax = obj->value[1] - obj->value[2];
 
@@ -4303,7 +4288,7 @@ void spell_stone_skin( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     AFFECT_DATA af;
 
-    if ( is_affected( ch, sn ) )
+    if ( is_affected( victim, sn ) )
     {
       if (victim == ch)
     	  send_to_char("Derin zaten kaya kadar sert.\n\r",ch);
@@ -4867,6 +4852,7 @@ void spell_lightning_shield(int sn, int level, CHAR_DATA *ch, void *vo,int targe
     af2.bitvector = 0;
     affect_to_char( ch, &af2 );
 
+    free_string( ch->in_room->owner );
     ch->in_room->owner = str_dup( ch->name );
     send_to_char("Oda şimşeklerle dolmaya başlıyor.\n\r", ch );
     act("Oda $s şimşekleriyle dolmaya başlıyor.",ch,NULL,NULL,TO_ROOM);
@@ -6034,11 +6020,13 @@ void spell_animate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target
   free_string( mob->name );
   mob->name = str_dup( buf );
 
-  snprintf(buf, sizeof(buf), mob->short_descr, obj->short_descr );
+  /* alan dosyasındaki kısa tanım biçim dizgisi olarak KULLANILMAZ */
+  snprintf(buf, sizeof(buf), "Canlandırılmış %s", obj->short_descr );
   free_string( mob->short_descr );
   mob->short_descr = str_dup( buf );
 
-  snprintf(buf, sizeof(buf), "%s burada, dik dik sana bakıyor!\n\r", capitalize(obj->short_descr) );
+  snprintf(buf, sizeof(buf), "%s burada, dik dik sana bakıyor!\n\r", obj->short_descr );
+  utf8_upper_first( buf, sizeof(buf) );
   free_string( mob->long_descr );
   mob->long_descr = str_dup( buf );
 
