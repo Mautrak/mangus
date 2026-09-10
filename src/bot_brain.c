@@ -265,20 +265,17 @@ static void bot_make_description( BOT_DATA *bot, CHAR_DATA *ch )
     for ( p = bot->name; *p != '\0'; p++ )
         seed = seed * 131 + (unsigned char) *p;
 
-    snprintf( buf, sizeof(buf), "%s, %s ırkından bir %s. ",
-              bot->name, race_table[bot->race].name[1], class_table[bot->iclass].name[1] );
-    len = (int) strlen( buf );
+    len = snprintf( buf, sizeof(buf), "%s, %s ırkından bir %s. ",
+                    bot->name, race_table[bot->race].name[1], class_table[bot->iclass].name[1] );
     for ( i = 0; i < DESC_POOL_N && len < 520; i++ )
     {
         const char *s = desc_pool[( seed + i * 7 ) % DESC_POOL_N];
 
         if ( strstr( buf, s ) != NULL )
             continue;
-        strncat( buf, s, sizeof(buf) - strlen( buf ) - 3 );
-        strcat( buf, " " );
-        len = (int) strlen( buf );
+        len += snprintf( buf + len, sizeof(buf) - (size_t) len, "%s ", s );
     }
-    strcat( buf, "\n\r" );
+    snprintf( buf + len, sizeof(buf) - (size_t) len, "\n\r" );
     free_string( ch->description );
     ch->description = str_dup( buf );
     REMOVE_BIT( ch->act, PLR_NO_DESCRIPTION );
@@ -292,7 +289,6 @@ void bot_brain_login( BOT_DATA *bot, bool fresh )
         bot_make_description( bot, ch );
     if ( ch->wimpy < ch->max_hit / 8 )
         ch->wimpy = ch->max_hit / 8;
-    ch->pcdata->oyuncu_katli = ch->pcdata->oyuncu_katli;   /* dosyadan geleni koru */
 
     if ( fresh )
         bot->last_town_pulse = bot_pulse;
@@ -1849,7 +1845,7 @@ bool bot_in_group( CHAR_DATA *ch )
 static bool bot_consider_grouping( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch, *rch;
-    char out[MAX_STRING_LENGTH];
+    char out[MAX_INPUT_LENGTH];
 
     if ( ch->master != NULL || ch->leader != NULL )
         return FALSE;
@@ -1883,7 +1879,7 @@ static bool bot_seek_group( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch;
     CHAR_DATA *target;
-    char out[MAX_STRING_LENGTH];
+    char out[MAX_INPUT_LENGTH];
 
     if ( ch->master != NULL || ch->leader != NULL || bot_in_group( ch ) )
         return FALSE;

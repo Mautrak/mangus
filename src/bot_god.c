@@ -11,7 +11,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 #include <time.h>
 #include "merc.h"
 #include "interp.h"
@@ -66,14 +65,13 @@ POOL(god_kdg_idle) {
     "Yardıma muhtaç olan var mı?", "Diyar bugün nasıl, ölümlüler?", "Dua edenin sesi göklere ulaşır."
 };
 
+/* ASCII küçük harfe indirgenmiş metinde sözcük */
 static bool text_has( const char *text, const char *word )
 {
-    char low[MAX_STRING_LENGTH];
-    int i;
+    char low[MAX_INPUT_LENGTH];
 
-    for ( i = 0; text[i] != '\0' && i < (int) sizeof(low) - 1; i++ )
-        low[i] = (char) ( (unsigned char) text[i] < 128 ? tolower( (unsigned char) text[i] ) : text[i] );
-    low[i] = '\0';
+    snprintf( low, sizeof(low), "%s", text );
+    bot_lower_ascii( low );
     return strstr( low, word ) != NULL;
 }
 
@@ -115,21 +113,10 @@ void bot_god_enter( BOT_DATA *bot, CHAR_DATA *ch, bool fresh )
     bot->god_pending_id = 0;
 }
 
-static CHAR_DATA *human_immortal_online( void )
-{
-    DESCRIPTOR_DATA *d;
-
-    for ( d = descriptor_list; d != NULL; d = d->next )
-        if ( d->connected == CON_PLAYING && d->character != NULL && IS_IMMORTAL(d->character)
-          && !IS_BOT(d->character) )
-            return d->character;
-    return NULL;
-}
-
 /* bir insan oyuncu girdi: birkaç dakika içinde kd ile karşıla (ölümsüzse imm kanalından) */
 void bot_god_greet( BOT_DATA *bot, CHAR_DATA *human )
 {
-    char out[MAX_STRING_LENGTH];
+    char out[MAX_INPUT_LENGTH];
 
     if ( bot->ch == NULL || human == NULL || number_percent() > 70 )
         return;
@@ -149,7 +136,7 @@ void bot_god_greet( BOT_DATA *bot, CHAR_DATA *human )
 void bot_god_hear( BOT_DATA *bot, CHAR_DATA *speaker, int channel, const char *text )
 {
     CHAR_DATA *ch = bot->ch;
-    char out[MAX_STRING_LENGTH];
+    char out[MAX_INPUT_LENGTH];
     bool human = bot_is_human( speaker );
 
     if ( ch == NULL || speaker == NULL || IS_NPC(speaker) )
@@ -266,7 +253,7 @@ void bot_god_think( BOT_DATA *bot )
     /* ara sıra: imm kanalında sohbet (insan ölümsüz varsa) ya da kdg */
     if ( bot_pulse >= bot->god_next_act )
     {
-        CHAR_DATA *imm = human_immortal_online();
+        CHAR_DATA *imm = bot_human_immortal();
 
         bot->god_next_act = bot_pulse + BOT_MIN( number_range( 15, 45 ) );
         if ( imm != NULL && number_percent() < 60 )
