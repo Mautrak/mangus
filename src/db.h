@@ -66,12 +66,18 @@ extern AREA_DATA 	* area_first;
 /* from db2.c */
 extern int	social_count;
 
-/* conversion from db.h */
-void	convert_mob(MOB_INDEX_DATA *mob);
-void	convert_obj(OBJ_INDEX_DATA *obj);
-
-/* macro for flag swapping */
-#define GET_UNSET(flag1,flag2)	(~(flag1)&((flag1)|(flag2)))
-
 /* Magic number for memory allocation */
 #define MAGIC_NUM 52571214
+
+/* Grup 06: db.c ile db2.c'nin paylaştığı yükleyici yardımcıları */
+MOB_INDEX_DATA	*find_mob_index	( int vnum );
+OBJ_INDEX_DATA	*find_obj_index	( int vnum );
+ROOM_INDEX_DATA	*find_room_index( int vnum );
+int	read_mob_vnum	( FILE *fp, const char *who );
+int	read_obj_vnum	( FILE *fp, const char *who );
+int	read_room_vnum	( FILE *fp, const char *who );
+void	hash_insert_mob	( MOB_INDEX_DATA *pMobIndex );
+void	hash_insert_obj	( OBJ_INDEX_DATA *pObjIndex );
+void	hash_insert_room( ROOM_INDEX_DATA *pRoomIndex );
+void	load_obj_affects( FILE *fp, OBJ_INDEX_DATA *pObjIndex, int paf_level, bool allow_f, bool keep );
+void	load_directives	( FILE *fp, const char *who, const char *letters, void (*fn)( FILE *fp, char letter ) );
