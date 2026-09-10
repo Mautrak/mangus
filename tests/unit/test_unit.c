@@ -1,23 +1,36 @@
 /*
- * Birim testleri: UTF-8 yardımcıları ve parola özeti.
+ * Birim testleri: UTF-8 yardımcıları, parola özeti ve prog/görev saf yardımcıları.
  * Sunucuya bağımlılığı yoktur; CTest tarafından çalıştırılır.
  */
 #include <stdio.h>
 #include <string.h>
 
 #include "password.h"
+#include "prog_util.h"
 #include "utf8.h"
 
 static int failures;
+static int checks;
 
 #define CHECK(cond)                                                           \
     do                                                                        \
     {                                                                         \
+        checks++;                                                             \
         if (!(cond))                                                          \
         {                                                                     \
             printf("BAŞARISIZ %s:%d: %s\n", __FILE__, __LINE__, #cond);       \
             failures++;                                                       \
         }                                                                     \
+    } while (0)
+
+/* Her alt test sonunda geçen/kalan sayısını yazar. */
+#define RUN(test)                                                             \
+    do                                                                        \
+    {                                                                         \
+        int before_checks = checks, before_failures = failures;               \
+        test();                                                               \
+        printf("%-22s %3d denetim, %d başarısız\n", #test,                    \
+               checks - before_checks, failures - before_failures);           \
     } while (0)
 
 static void test_decode_encode(void)
@@ -75,6 +88,14 @@ static void test_compare(void)
     CHECK(utf8_str_prefix("kılıç", "kıl"));
     CHECK(utf8_str_prefix("x", ""));
     CHECK(!utf8_str_prefix("", "abc"));
+
+    /* tablo aramalarında ilk harf: I/ı/İ/i eşdeğer, çok baytlı harf bayt bayt değil */
+    CHECK(utf8_first_eq("ışık", "Işık"));
+    CHECK(utf8_first_eq("işlemeli", "İşlemeli"));
+    CHECK(utf8_first_eq("ı", "i"));
+    CHECK(utf8_first_eq("şato", "Şato"));
+    CHECK(!utf8_first_eq("şato", "sato"));
+    CHECK(!utf8_first_eq("a", "b"));
 }
 
 static void test_latin5(void)
@@ -96,6 +117,13 @@ static void test_latin5(void)
     strcpy(buf, "\xFD\xFD\xFD");
     utf8_from_latin5(buf, 5);
     CHECK(strcmp(buf, "ıı") == 0);
+    /* tampon sınırı: hiç genişleme sığmıyorsa dizgi kırpılır ama sonlandırılır */
+    strcpy(buf, "a\xFD");
+    utf8_from_latin5(buf, 3);
+    CHECK(strlen(buf) <= 2 && buf[0] == 'a');
+    strcpy(buf, "\xFD");
+    utf8_from_latin5(buf, 1);
+    CHECK(buf[0] == '\0');
 
     strcpy(buf, "kılıç");
     utf8_truncate(buf, 4);
@@ -126,16 +154,71 @@ static void test_password(void)
     CHECK(pwd_is_legacy("AlHVvwOVMBOs6"));
     CHECK(!pwd_check("$m1$bozuk", "x"));
     CHECK(strcmp(copy, pwd_hash("gizli123")) != 0); /* farklı tuz */
+#if defined(HAVE_CRYPT) || defined(HAVE_CRYPT_H)
+    /* tests/e2e/fixtures/Denemeuc.legacy: DES crypt(3) özeti, parola sifre123 */
+    CHECK(pwd_check("De3UwHv1bUbFQ", "sifre123"));
+    CHECK(!pwd_check("De3UwHv1bUbFQ", "sifre124"));
+#endif
+}
+
+static void test_prog_subst(void)
+{
+    char buf[64];
+
+    prog_subst(buf, sizeof(buf), "%s kahraman kılıcı [%s]", "parlak-mavi", "Ali");
+    CHECK(strcmp(buf, "parlak-mavi kahraman kılıcı [Ali]") == 0);
+    prog_subst(buf, sizeof(buf), "%s's eyed sword", "Ali", NULL);
+    CHECK(strcmp(buf, "Ali's eyed sword") == 0);
+    /* fazla %s ve yabancı % dizileri biçim olarak yorumlanmaz */
+    prog_subst(buf, sizeof(buf), "%s %s %s %n %d %%", "a", "b");
+    CHECK(strcmp(buf, "a b %s %n %d %%") == 0);
+    prog_subst(buf, sizeof(buf), "ad: %s", NULL, NULL);
+    CHECK(strcmp(buf, "ad: ") == 0);
+    prog_subst(buf, 8, "%s uzun bir metin", "kılıç", NULL);
+    CHECK(strlen(buf) == 7 && strncmp(buf, "kılıç", 7) == 0);
+    prog_subst(buf, sizeof(buf), NULL, "x", "y");
+    CHECK(buf[0] == '\0');
+}
+
+static void test_prog_name_in_text(void)
+{
+    CHECK(prog_name_in_text("parlak-mavi kahraman kılıcı [Ali]", "Ali"));
+    CHECK(prog_name_in_text("Ali'nin kılıcı", "Ali"));
+    CHECK(prog_name_in_text("Ali", "Ali"));
+    CHECK(!prog_name_in_text("Alican'ın kılıcı", "Ali"));
+    CHECK(!prog_name_in_text("kahraman kılıcı [Alican]", "Ali"));
+    CHECK(!prog_name_in_text("Aliş", "Ali"));           /* çok baytlı harf bitişik */
+    CHECK(!prog_name_in_text("xAli", "Ali"));
+    CHECK(!prog_name_in_text("", "Ali"));
+    CHECK(!prog_name_in_text(NULL, "Ali"));
+    CHECK(!prog_name_in_text("Ali", ""));
+    CHECK(!prog_name_in_text("ali", "Ali"));            /* adlar büyük harfle saklanır */
+}
+
+static void test_weapon_dice(void)
+{
+    CHECK(prog_weapon_dice(1) == 2 && prog_weapon_dice(10) == 2);
+    CHECK(prog_weapon_dice(11) == 3 && prog_weapon_dice(20) == 3);
+    CHECK(prog_weapon_dice(21) == 4 && prog_weapon_dice(30) == 4);
+    CHECK(prog_weapon_dice(40) == 5 && prog_weapon_dice(50) == 6);
+    CHECK(prog_weapon_dice(60) == 7 && prog_weapon_dice(70) == 9);
+    CHECK(prog_weapon_dice(80) == 11 && prog_weapon_dice(81) == 12);
+    CHECK(prog_weapon_dice(100) == 12);
 }
 
 int main(void)
 {
-    test_decode_encode();
-    test_case_mapping();
-    test_compare();
-    test_latin5();
-    test_password();
+    RUN(test_decode_encode);
+    RUN(test_case_mapping);
+    RUN(test_compare);
+    RUN(test_latin5);
+    RUN(test_password);
+    RUN(test_prog_subst);
+    RUN(test_prog_name_in_text);
+    RUN(test_weapon_dice);
     if (failures == 0)
-        printf("Birim testleri: tümü geçti.\n");
+        printf("Birim testleri: tümü geçti (%d denetim).\n", checks);
+    else
+        printf("Birim testleri: %d/%d denetim başarısız.\n", failures, checks);
     return failures == 0 ? 0 : 1;
 }
