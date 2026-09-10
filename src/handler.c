@@ -2886,13 +2886,13 @@ void path_to_track( CHAR_DATA *ch, CHAR_DATA *victim, int door)
        {
         room_record(ch->name,temp, opdoor);
         if ((pExit = temp->exit[opdoor]) == NULL
-	    || (temp = pExit->u1.to_room) == NULL )
+	    || pExit->u1.to_room == NULL )
 	{
-	 snprintf(log_buf, sizeof(log_buf),"Path to track: Range: %d Room: %d opdoor:%d",
+	 bugf("Path to track: Range: %d Room: %d opdoor:%d",
 		range,temp->vnum,opdoor);
-	 bug(log_buf,0);
 	 return;
 	}
+	temp = pExit->u1.to_room;
        }
     do_track(victim,"");
   }

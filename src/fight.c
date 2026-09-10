@@ -2354,11 +2354,11 @@ void make_corpse( CHAR_DATA *ch )
 
     corpse->level = ch->level;
 
-    snprintf(buf, sizeof(buf), corpse->short_descr, name );
+    descr_subst( buf, sizeof(buf), corpse->short_descr, "%s", name );
     free_string( corpse->short_descr );
     corpse->short_descr = str_dup( buf );
 
-    snprintf(buf, sizeof(buf), corpse->description, name );
+    descr_subst( buf, sizeof(buf), corpse->description, "%s", name );
     free_string( corpse->description );
     corpse->description = str_dup( buf );
 
@@ -2480,11 +2480,11 @@ void death_cry_org( CHAR_DATA *ch, int part )
 	obj		= create_object( get_obj_index( vnum ), 0 );
 	obj->timer	= number_range( 4, 7 );
 
-	snprintf(buf, sizeof(buf), obj->short_descr, name );
+	descr_subst( buf, sizeof(buf), obj->short_descr, "%s", name );
 	free_string( obj->short_descr );
 	obj->short_descr = str_dup( buf );
 
-	snprintf(buf, sizeof(buf), obj->description, name );
+	descr_subst( buf, sizeof(buf), obj->description, "%s", name );
 	free_string( obj->description );
 	obj->description = str_dup( buf );
 
