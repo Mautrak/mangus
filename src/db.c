@@ -2796,7 +2796,16 @@ long flag_convert(char letter )
 
     if ( n >= (int) ( sizeof(long) * CHAR_BIT - 1 ) )
     {
-	bug( "Flag_convert: bit %d does not fit in long.", n );
+	/* Eski alan verisinde tanımsız harfler ('h' gibi) var; Win64'te long 32
+	 * bittir. Ayrıştırma sırasında bug() çağrılmaz: fpArea üzerindeki
+	 * ftell/fseek dansı Windows metin modunda akışı bozuyor. */
+	static bool warned = FALSE;
+
+	if ( !warned )
+	{
+	    warned = TRUE;
+	    log_string( "Flag_convert: long'a sığmayan bayrak harfi yok sayıldı (bir kez bildirilir)." );
+	}
 	return 0;
     }
 
