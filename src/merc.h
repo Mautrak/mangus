@@ -1624,6 +1624,7 @@ struct	kill_data
 #define DIR_WEST		      3
 #define DIR_UP			      4
 #define DIR_DOWN		      5
+#define MAX_DIR			      6	/* Grup 06 */
 
 
 

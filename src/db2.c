@@ -53,6 +53,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <time.h>
+#include <stddef.h>
 
 #include "merc.h"
 #include "db.h"
@@ -64,130 +65,53 @@
 struct		social_type	social_table		[MAX_SOCIALS];
 int		social_count;
 
-/* snarf a socials file */
+/*
+ * snarf a socials file: ad satırı, ardından sırayla sekiz ileti satırı
+ * ("$" = yok, "#" = kayıt burada biter).
+ */
 void load_socials( FILE *fp)
 {
+    static const size_t social_field[] =
+    {
+	offsetof(struct social_type, char_no_arg),
+	offsetof(struct social_type, others_no_arg),
+	offsetof(struct social_type, char_found),
+	offsetof(struct social_type, others_found),
+	offsetof(struct social_type, vict_found),
+	offsetof(struct social_type, char_not_found),
+	offsetof(struct social_type, char_auto),
+	offsetof(struct social_type, others_auto),
+    };
+
     for ( ; ; )
     {
     	struct social_type social;
     	char *temp;
-        /* clear social */
-	social.char_no_arg = NULL;
-	social.others_no_arg = NULL;
-	social.char_found = NULL;
-	social.others_found = NULL;
-	social.vict_found = NULL;
-	social.char_not_found = NULL;
-	social.char_auto = NULL;
-	social.others_auto = NULL;
+	size_t i;
+
+	memset( &social, 0, sizeof(social) );
 
     	temp = fread_word(fp);
     	if (!strcmp(temp,"#0"))
 	    return;  /* done */
-#if defined(social_debug)
-	else
-	    fprintf(stderr,"%s\n\r",temp);
-#endif
 
-    	strcpy(social.name,temp);
+    	snprintf(social.name, sizeof(social.name), "%s", temp);
     	fread_to_eol(fp);
 
-	temp = fread_string_eol(fp);
-	if (!strcmp(temp,"$"))
-	     social.char_no_arg = NULL;
-	else if (!strcmp(temp,"#"))
+	for ( i = 0; i < sizeof(social_field) / sizeof(social_field[0]); i++ )
 	{
-	     social_table[social_count] = social;
-	     social_count++;
-	     continue;
+	    temp = fread_string_eol(fp);
+	    if (!strcmp(temp,"#"))
+		break;
+	    if (strcmp(temp,"$"))
+		*(char **)((char *)&social + social_field[i]) = temp;
 	}
-        else
-	    social.char_no_arg = temp;
 
-        temp = fread_string_eol(fp);
-        if (!strcmp(temp,"$"))
-             social.others_no_arg = NULL;
-        else if (!strcmp(temp,"#"))
-        {
-	     social_table[social_count] = social;
-             social_count++;
-             continue;
-        }
-        else
-	    social.others_no_arg = temp;
-
-        temp = fread_string_eol(fp);
-        if (!strcmp(temp,"$"))
-             social.char_found = NULL;
-        else if (!strcmp(temp,"#"))
-        {
-	     social_table[social_count] = social;
-             social_count++;
-             continue;
-        }
-       	else
-	    social.char_found = temp;
-
-        temp = fread_string_eol(fp);
-        if (!strcmp(temp,"$"))
-             social.others_found = NULL;
-        else if (!strcmp(temp,"#"))
-        {
-	     social_table[social_count] = social;
-             social_count++;
-             continue;
-        }
-        else
-	    social.others_found = temp;
-
-        temp = fread_string_eol(fp);
-        if (!strcmp(temp,"$"))
-             social.vict_found = NULL;
-        else if (!strcmp(temp,"#"))
-        {
-	     social_table[social_count] = social;
-             social_count++;
-             continue;
-        }
-        else
-	    social.vict_found = temp;
-
-        temp = fread_string_eol(fp);
-        if (!strcmp(temp,"$"))
-             social.char_not_found = NULL;
-        else if (!strcmp(temp,"#"))
-        {
-	     social_table[social_count] = social;
-             social_count++;
-             continue;
-        }
-        else
-	    social.char_not_found = temp;
-
-        temp = fread_string_eol(fp);
-        if (!strcmp(temp,"$"))
-             social.char_auto = NULL;
-        else if (!strcmp(temp,"#"))
-        {
-	     social_table[social_count] = social;
-             social_count++;
-             continue;
-        }
-        else
-	    social.char_auto = temp;
-
-        temp = fread_string_eol(fp);
-        if (!strcmp(temp,"$"))
-             social.others_auto = NULL;
-        else if (!strcmp(temp,"#"))
-        {
-             social_table[social_count] = social;
-             social_count++;
-             continue;
-        }
-        else
-	    social.others_auto = temp;
-
+	if ( social_count >= MAX_SOCIALS )
+	{
+	    bug( "Load_socials: MAX_SOCIALS (%d) aşıldı.", MAX_SOCIALS );
+	    exit( 1 );
+	}
 	social_table[social_count] = social;
     	social_count++;
    }
@@ -202,28 +126,10 @@ void load_new_mobiles( FILE *fp )
 
     for ( ; ; )
     {
-        sh_int vnum;
-        char letter;
-        int iHash;
+        int vnum;
 
-        letter                          = fread_letter( fp );
-        if ( letter != '#' )
-        {
-            bug( "Load_new_mobiles: # not found.", 0 );
-            exit( 1 );
-        }
-
-        vnum                            = fread_number( fp );
-        if ( vnum == 0 )
+        if ( ( vnum = read_mob_vnum( fp, "Load_new_mobiles" ) ) == 0 )
             break;
-
-        fBootDb = FALSE;
-        if ( get_mob_index( vnum ) != NULL )
-        {
-            bug( "Load_new_mobiles: vnum %d duplicated.", vnum );
-            exit( 1 );
-        }
-        fBootDb = TRUE;
 
         pMobIndex                       = (MOB_INDEX_DATA *)alloc_perm( sizeof(*pMobIndex) );
         pMobIndex->vnum                 = vnum;
@@ -312,10 +218,7 @@ void load_new_mobiles( FILE *fp )
 	pMobIndex->mprogs			= NULL;
 	pMobIndex->progtypes		= 0;
 
-        iHash                   = vnum % MAX_KEY_HASH;
-        pMobIndex->next         = mob_index_hash[iHash];
-        mob_index_hash[iHash]   = pMobIndex;
-        top_mob_index++;
+        hash_insert_mob( pMobIndex );
         kill_table[URANGE(0, pMobIndex->level, MAX_LEVEL-1)].number++;
     }
 
@@ -323,40 +226,24 @@ void load_new_mobiles( FILE *fp )
 }
 
 /*
- * Snarf an obj section. new style
+ * Snarf an obj section. new style (OBJECTS sabit, NEW_OBJECTS rastgele eşya:
+ * A/F etkileri okunup atılır, eşya yaratılırken rastgele üretilir).
  */
-void load_objects( FILE *fp )
+static void load_obj_section( FILE *fp, bool random_object )
 {
     OBJ_INDEX_DATA *pObjIndex;
 
     for ( ; ; )
     {
-        sh_int vnum;
+        int vnum;
         char letter;
-        int iHash;
 
-        letter                          = fread_letter( fp );
-        if ( letter != '#' )
-        {
-            bug( "Load_objects: # not found.", 0 );
-            exit( 1 );
-        }
-
-        vnum                            = fread_number( fp );
-        if ( vnum == 0 )
+        if ( ( vnum = read_obj_vnum( fp, "Load_objects" ) ) == 0 )
             break;
-
-        fBootDb = FALSE;
-        if ( get_obj_index( vnum ) != NULL )
-        {
-            bug( "Load_objects: vnum %d duplicated.", vnum );
-            exit( 1 );
-        }
-        fBootDb = TRUE;
 
         pObjIndex                       = (OBJ_INDEX_DATA *)alloc_perm( sizeof(*pObjIndex) );
         pObjIndex->vnum                 = vnum;
-		pObjIndex->random_object		= FALSE;
+		pObjIndex->random_object		= random_object;
         pObjIndex->new_format           = TRUE;
 	pObjIndex->reset_num		= 0;
 	newobjs++;
@@ -438,305 +325,55 @@ void load_objects( FILE *fp )
 	    default:			pObjIndex->condition = 100; break;
 	}
 
-        for ( ; ; )
-        {
-            char letter;
+	load_obj_affects( fp, pObjIndex, pObjIndex->level, TRUE, !random_object );
 
-            letter = fread_letter( fp );
-
-            if ( letter == 'A' )
-            {
-                AFFECT_DATA *paf;
-
-                paf                     = (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
-		paf->where		= TO_OBJECT;
-                paf->type               = -1;
-                paf->level              = pObjIndex->level;
-                paf->duration           = -1;
-                paf->location           = fread_number( fp );
-                paf->modifier           = fread_number( fp );
-                paf->bitvector          = 0;
-                paf->next               = pObjIndex->affected;
-                pObjIndex->affected     = paf;
-                top_affect++;
-            }
-
-	    else if (letter == 'F')
-            {
-                AFFECT_DATA *paf;
-
-                paf                     = (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
-		letter 			= fread_letter(fp);
-		switch (letter)
-	 	{
-		case 'A':
-                    paf->where          = TO_AFFECTS;
-		    break;
-		case 'I':
-		    paf->where		= TO_IMMUNE;
-		    break;
-		case 'R':
-		    paf->where		= TO_RESIST;
-		    break;
-		case 'V':
-		    paf->where		= TO_VULN;
-		    break;
-		case 'D':
-		    paf->where		= TO_DETECTS;
-		    break;
-		default:
-            	    bug( "Load_objects: Bad where on flag set.", 0 );
-            	   exit( 1 );
-		}
-                paf->type               = -1;
-                paf->level              = pObjIndex->level;
-                paf->duration           = -1;
-                paf->location           = fread_number(fp);
-                paf->modifier           = fread_number(fp);
-                paf->bitvector          = fread_flag(fp);
-                paf->next               = pObjIndex->affected;
-                pObjIndex->affected     = paf;
-                top_affect++;
-            }
-
-            else if ( letter == 'E' )
-            {
-                EXTRA_DESCR_DATA *ed;
-
-                ed                      = (EXTRA_DESCR_DATA *)alloc_perm( sizeof(*ed) );
-                ed->keyword             = fread_string( fp );
-                ed->description         = fread_string( fp );
-                ed->next                = pObjIndex->extra_descr;
-                pObjIndex->extra_descr  = ed;
-                top_ed++;
-            }
-
-            else
-            {
-                ungetc( letter, fp );
-                break;
-            }
-        }
-
-        iHash                   = vnum % MAX_KEY_HASH;
-        pObjIndex->next         = obj_index_hash[iHash];
-        obj_index_hash[iHash]   = pObjIndex;
-        top_obj_index++;
+        hash_insert_obj( pObjIndex );
     }
 
     return;
 }
 
+void load_objects( FILE *fp )
+{
+    load_obj_section( fp, FALSE );
+}
+
 void load_new_objects( FILE *fp )
 {
-    OBJ_INDEX_DATA *pObjIndex;
-
-    for ( ; ; )
-    {
-        sh_int vnum;
-        char letter;
-        int iHash;
-
-        letter                          = fread_letter( fp );
-        if ( letter != '#' )
-        {
-            bug( "Load_objects: # not found.", 0 );
-            exit( 1 );
-        }
-
-        vnum                            = fread_number( fp );
-        if ( vnum == 0 )
-            break;
-
-        fBootDb = FALSE;
-        if ( get_obj_index( vnum ) != NULL )
-        {
-            bug( "Load_objects: vnum %d duplicated.", vnum );
-            exit( 1 );
-        }
-        fBootDb = TRUE;
-
-        pObjIndex                       = (OBJ_INDEX_DATA *)alloc_perm( sizeof(*pObjIndex) );
-        pObjIndex->vnum                 = vnum;
-		pObjIndex->random_object		= TRUE;
-        pObjIndex->new_format           = TRUE;
-		pObjIndex->reset_num		= 0;
-		newobjs++;
-        pObjIndex->name                 = fread_string( fp );
-        pObjIndex->short_descr          = fread_string( fp );
-        pObjIndex->description          = fread_string( fp );
-        pObjIndex->material		= fread_string( fp );
-
-        pObjIndex->item_type            = item_lookup(fread_word( fp ));
-        pObjIndex->extra_flags          = fread_flag( fp );
-        pObjIndex->wear_flags           = fread_flag( fp );
-		switch(pObjIndex->item_type)
-		{
-		case ITEM_WEAPON:
-			pObjIndex->value[0]		= weapon_type(fread_word(fp));
-			pObjIndex->value[1]		= fread_number(fp);
-			pObjIndex->value[2]		= fread_number(fp);
-			pObjIndex->value[3]		= attack_lookup(fread_word(fp));
-			pObjIndex->value[4]		= fread_flag(fp);
-			break;
-		case ITEM_CONTAINER:
-			pObjIndex->value[0]		= fread_number(fp);
-			pObjIndex->value[1]		= fread_flag(fp);
-			pObjIndex->value[2]		= fread_number(fp);
-			pObjIndex->value[3]		= fread_number(fp);
-			pObjIndex->value[4]		= fread_number(fp);
-			break;
-			case ITEM_DRINK_CON:
-		case ITEM_FOUNTAIN:
-				pObjIndex->value[0]         = fread_number(fp);
-				pObjIndex->value[1]         = fread_number(fp);
-				pObjIndex->value[2]         = liq_lookup(fread_word(fp));
-				pObjIndex->value[3]         = fread_number(fp);
-				pObjIndex->value[4]         = fread_number(fp);
-				break;
-		case ITEM_WAND:
-		case ITEM_STAFF:
-			pObjIndex->value[0]		= fread_number(fp);
-			pObjIndex->value[1]		= fread_number(fp);
-			pObjIndex->value[2]		= fread_number(fp);
-			pObjIndex->value[3]		= skill_lookup(fread_word(fp));
-			pObjIndex->value[4]		= fread_number(fp);
-			break;
-		case ITEM_POTION:
-		case ITEM_PILL:
-		case ITEM_SCROLL:
-			pObjIndex->value[0]		= fread_number(fp);
-			pObjIndex->value[1]		= skill_lookup(fread_word(fp));
-			pObjIndex->value[2]		= skill_lookup(fread_word(fp));
-			pObjIndex->value[3]		= skill_lookup(fread_word(fp));
-			pObjIndex->value[4]		= skill_lookup(fread_word(fp));
-			break;
-		default:
-				pObjIndex->value[0]             = fread_flag( fp );
-				pObjIndex->value[1]             = fread_flag( fp );
-				pObjIndex->value[2]             = fread_flag( fp );
-				pObjIndex->value[3]             = fread_flag( fp );
-			pObjIndex->value[4]		    = fread_flag( fp );
-			break;
-		}
-		pObjIndex->level		= fread_number( fp );
-        pObjIndex->weight               = fread_number( fp );
-        pObjIndex->cost                 = fread_number( fp );
-        pObjIndex->progtypes            = 0;
-        pObjIndex->oprogs               = NULL;
-        pObjIndex->limit                = -1;
-
-        /* condition */
-        letter 				= fread_letter( fp );
-		switch (letter)
-		{
-			case ('P') :		pObjIndex->condition = 100; break;
-			case ('G') :		pObjIndex->condition =  90; break;
-			case ('A') :		pObjIndex->condition =  75; break;
-			case ('W') :		pObjIndex->condition =  50; break;
-			case ('D') :		pObjIndex->condition =  25; break;
-			case ('B') :		pObjIndex->condition =  10; break;
-			case ('R') :		pObjIndex->condition =   0; break;
-			default:			pObjIndex->condition = 100; break;
-		}
-
-        for ( ; ; )
-        {
-            char letter;
-
-            letter = fread_letter( fp );
-
-            if ( letter == 'A' )
-            {
-				fread_number( fp );
-				fread_number( fp );
-            }
-
-			else if (letter == 'F')
-            {
-                fread_letter(fp);
-				fread_number(fp);
-                fread_number(fp);
-                fread_flag(fp);
-            }
-
-            else if ( letter == 'E' )
-            {
-                EXTRA_DESCR_DATA *ed;
-
-                ed                      = (EXTRA_DESCR_DATA *)alloc_perm( sizeof(*ed) );
-                ed->keyword             = fread_string( fp );
-                ed->description         = fread_string( fp );
-                ed->next                = pObjIndex->extra_descr;
-                pObjIndex->extra_descr  = ed;
-                top_ed++;
-            }
-
-            else
-            {
-                ungetc( letter, fp );
-                break;
-            }
-        }
-
-        iHash                   = vnum % MAX_KEY_HASH;
-        pObjIndex->next         = obj_index_hash[iHash];
-        obj_index_hash[iHash]   = pObjIndex;
-        top_obj_index++;
-    }
-
-    return;
+    load_obj_section( fp, TRUE );
 }
 
 /*
  * Snarf a mprog section
  */
+static void omprog_directive( FILE *fp, char letter )
+{
+    MOB_INDEX_DATA *pMobIndex;
+    OBJ_INDEX_DATA *pObjIndex;
+    char progtype[MAX_INPUT_LENGTH];
+    char progname[MAX_INPUT_LENGTH];
+    int vnum = fread_number( fp );
+
+    snprintf( progtype, sizeof(progtype), "%s", fread_word(fp) );
+    snprintf( progname, sizeof(progname), "%s", fread_word(fp) );
+
+    if ( letter == 'O' )
+    {
+	pObjIndex = get_obj_index( vnum );
+	if (pObjIndex->oprogs == NULL)
+	  pObjIndex->oprogs = (OPROG_DATA*)alloc_perm(sizeof(OPROG_DATA));
+	oprog_set( pObjIndex, progtype, progname);
+    }
+    else
+    {
+	pMobIndex = get_mob_index( vnum );
+	if (pMobIndex->mprogs == NULL)
+	  pMobIndex->mprogs = (MPROG_DATA*)alloc_perm(sizeof(MPROG_DATA));
+	mprog_set( pMobIndex,progtype,progname);
+    }
+}
 
 void load_omprogs( FILE *fp )
 {
-  char progtype[MAX_INPUT_LENGTH];
-  char progname[MAX_INPUT_LENGTH];
-
-    for ( ; ; )
-    {
-	MOB_INDEX_DATA *pMobIndex;
-	OBJ_INDEX_DATA *pObjIndex;
-	char letter;
-
-
-	switch ( letter = fread_letter( fp ) )
-	{
-	default:
-	    bug( "Load_omprogs: letter '%c' not *IMS.", letter );
-	    exit( 1 );
-
-	case 'S':
-	    return;
-
-	case '*':
-	    break;
-
-        case 'O':
-	    pObjIndex = get_obj_index ( fread_number ( fp ) );
-	    if (pObjIndex->oprogs == NULL)
-	      pObjIndex->oprogs = (OPROG_DATA*)alloc_perm(sizeof(OPROG_DATA));
-
-	    strcpy(progtype, fread_word(fp));
-	    strcpy(progname, fread_word(fp));
-	    oprog_set( pObjIndex, progtype, progname);
-	    break;
-
-	case 'M':
-	    pMobIndex		= get_mob_index	( fread_number ( fp ) );
-	    if (pMobIndex->mprogs == NULL)
-	      pMobIndex->mprogs = (MPROG_DATA*)alloc_perm(sizeof(MPROG_DATA));
-
-	    strcpy(progtype,fread_word(fp));
-	    strcpy(progname,fread_word(fp));
-	    mprog_set( pMobIndex,progtype,progname);
-	    break;
-	}
-
-	fread_to_eol( fp );
-    }
+    load_directives( fp, "Load_omprogs", "OM", omprog_directive );
 }

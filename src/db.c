@@ -55,6 +55,8 @@
 #include <time.h>
 #include <dirent.h>
 #include <stdint.h>
+#include <limits.h>
+#include <stddef.h>
 
 #include "merc.h"
 #include "db.h"
@@ -517,7 +519,7 @@ void boot_db( void )
 	auction = (AUCTION_DATA *) malloc (sizeof(AUCTION_DATA));
 	if (auction == NULL)
 	 {
-	  bug("malloc'ing AUCTION_DATA didn't give %d bytes",sizeof(AUCTION_DATA));
+	  bug("malloc'ing AUCTION_DATA didn't give %d bytes",(int) sizeof(AUCTION_DATA));
 	  exit(1);
 	 }
 
@@ -561,7 +563,7 @@ void boot_db( void )
 
 	for ( ; ; )
 	{
-	    strcpy( strArea, fread_word( fpList ) );
+	    snprintf( strArea, sizeof(strArea), "%s", fread_word( fpList ) );
 	    if ( strArea[0] == '$' )
 		break;
 
@@ -580,7 +582,29 @@ void boot_db( void )
 
 	    for ( ; ; )
 	    {
+		static const struct { const char *name; void (*fn)( FILE *fp ); }
+		section_table[] =
+		{
+		    { "AREADATA",	load_areadata	},
+		    { "HELPS",		load_helps	},
+		    { "NEW_MOBILES",	load_new_mobiles },
+		    { "OBJOLD",		load_old_obj	},
+		    { "NEW_OBJOLD",	load_new_old_obj },
+		    { "OBJECTS",	load_objects	},
+		    { "NEW_OBJECTS",	load_new_objects },
+		    { "RESETS",		load_resets	},
+		    { "ROOMS",		load_rooms	},
+		    { "SHOPS",		load_shops	},
+		    { "SOCIALS",	load_socials	},
+		    { "OMPROGS",	load_omprogs	},
+		    { "OLIMITS",	load_olimits	},
+		    { "SPECIALS",	load_specials	},
+		    { "PRACTICERS",	load_practicer	},
+		    { "RESETMESSAGE",	load_resetmsg	},
+		    { "FLAG",		load_aflag	},
+		};
 		char *word;
+		size_t i;
 
 		if ( fread_letter( fpArea ) != '#' )
 		{
@@ -589,26 +613,17 @@ void boot_db( void )
 		}
 
 		word = fread_word( fpArea );
+		if ( word[0] == '$' )
+		    break;
 
-		     if ( word[0] == '$'               )                 break;
-    else if ( !str_cmp( word, "AREADATA" ) ) load_areadata(fpArea);
-		else if ( !str_cmp( word, "HELPS"    ) ) load_helps   (fpArea);
-		else if ( !str_cmp( word, "NEW_MOBILES"  ) ) load_new_mobiles (fpArea);
-		else if ( !str_cmp( word, "OBJOLD"   ) ) load_old_obj (fpArea);
-        else if ( !str_cmp( word, "NEW_OBJOLD"   ) ) load_new_old_obj (fpArea);
-	  	else if ( !str_cmp( word, "OBJECTS"  ) ) load_objects (fpArea);
-		else if ( !str_cmp( word, "NEW_OBJECTS"  ) ) load_new_objects (fpArea);
-		else if ( !str_cmp( word, "RESETS"   ) ) load_resets  (fpArea);
-		else if ( !str_cmp( word, "ROOMS"    ) ) load_rooms   (fpArea);
-		else if ( !str_cmp( word, "SHOPS"    ) ) load_shops   (fpArea);
-		else if ( !str_cmp( word, "SOCIALS"  ) ) load_socials (fpArea);
-		else if ( !str_cmp( word, "OMPROGS"  ) ) load_omprogs (fpArea);
-                else if ( !str_cmp( word, "OLIMITS"  ) ) load_olimits (fpArea);
-		else if ( !str_cmp( word, "SPECIALS" ) ) load_specials(fpArea);
-		else if ( !str_cmp( word, "PRACTICERS" ) ) load_practicer(fpArea);
-		else if ( !str_cmp( word, "RESETMESSAGE" ) ) load_resetmsg(fpArea);
-		else if ( !str_cmp( word, "FLAG" ) )	 load_aflag(fpArea);
-		else
+		for ( i = 0; i < sizeof(section_table) / sizeof(section_table[0]); i++ )
+		    if ( !str_cmp( word, section_table[i].name ) )
+		    {
+			section_table[i].fn( fpArea );
+			break;
+		    }
+
+		if ( i == sizeof(section_table) / sizeof(section_table[0]) )
 		{
 		    bug( "Boot_db: bad section name.", 0 );
 		    exit( 1 );
@@ -654,7 +669,7 @@ void boot_db( void )
 void load_areadata( FILE *fp )
 {
 	AREA_DATA *pArea;
-    char *word="End";
+    char *word;
 	bool fMatch;
 
 	pArea		= (AREA_DATA *)alloc_perm( sizeof(*pArea) );
@@ -773,40 +788,22 @@ void load_helps( FILE *fp )
 }
 
 /*
- * Snarf an obj section.  old style
+ * Snarf an obj section.  old style (OBJOLD sabit, NEW_OBJOLD rastgele eşya).
  */
-void load_old_obj( FILE *fp )
+static void load_old_obj_section( FILE *fp, bool random_object )
 {
     OBJ_INDEX_DATA *pObjIndex;
 
     for ( ; ; )
     {
-	sh_int vnum;
-	char letter;
-	int iHash;
+	int vnum;
 
-	letter				= fread_letter( fp );
-	if ( letter != '#' )
-	{
-	    bug( "Load_old_objects: # not found.", 0 );
-	    exit( 1 );
-	}
-
-	vnum				= fread_number( fp );
-	if ( vnum == 0 )
+	if ( ( vnum = read_obj_vnum( fp, "Load_old_objects" ) ) == 0 )
 	    break;
-
-	fBootDb = FALSE;
-	if ( get_obj_index( vnum ) != NULL )
-	{
-	    bug( "Load_old_objects: vnum %d duplicated.", vnum );
-	    exit( 1 );
-	}
-	fBootDb = TRUE;
 
 	pObjIndex			= (OBJ_INDEX_DATA *)alloc_perm( sizeof(*pObjIndex) );
 	pObjIndex->vnum			= vnum;
-	pObjIndex->random_object		= FALSE;
+	pObjIndex->random_object	= random_object;
 	pObjIndex->new_format		= FALSE;
 	pObjIndex->reset_num	 	= 0;
 	pObjIndex->name			= fread_string( fp );
@@ -814,7 +811,6 @@ void load_old_obj( FILE *fp )
 	pObjIndex->description		= fread_string( fp );
 	/* Action description */	  fread_string( fp );
 
-	pObjIndex->material		= "copper";
 	pObjIndex->short_descr	= first_case( pObjIndex->short_descr, FALSE );
 	pObjIndex->description	= first_case( pObjIndex->description, TRUE );
 	pObjIndex->material		= str_dup("");
@@ -846,47 +842,7 @@ void load_old_obj( FILE *fp )
 		SET_BIT(pObjIndex->value[4],WEAPON_TWO_HANDS);
 	}
 
-	for ( ; ; )
-	{
-	    char letter;
-
-	    letter = fread_letter( fp );
-
-	    if ( letter == 'A' )
-	    {
-		AFFECT_DATA *paf;
-
-		paf			= (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
-		paf->where		= TO_OBJECT;
-		paf->type		= -1;
-		paf->level		= 20; /* RT temp fix */
-		paf->duration		= -1;
-		paf->location		= fread_number( fp );
-		paf->modifier		= fread_number( fp );
-		paf->bitvector		= 0;
-		paf->next		= pObjIndex->affected;
-		pObjIndex->affected	= paf;
-		top_affect++;
-	    }
-
-	    else if ( letter == 'E' )
-	    {
-		EXTRA_DESCR_DATA *ed;
-
-		ed			= (EXTRA_DESCR_DATA *)alloc_perm( sizeof(*ed) );
-		ed->keyword		= fread_string( fp );
-		ed->description		= fread_string( fp );
-		ed->next		= pObjIndex->extra_descr;
-		pObjIndex->extra_descr	= ed;
-		top_ed++;
-	    }
-
-	    else
-	    {
-		ungetc( letter, fp );
-		break;
-	    }
-	}
+	load_obj_affects( fp, pObjIndex, 20 /* RT temp fix */, FALSE, TRUE );
 
         /* fix armors */
         if (pObjIndex->item_type == ITEM_ARMOR)
@@ -915,162 +871,20 @@ void load_old_obj( FILE *fp )
 	    break;
 	}
 
-	iHash			= vnum % MAX_KEY_HASH;
-	pObjIndex->next		= obj_index_hash[iHash];
-	obj_index_hash[iHash]	= pObjIndex;
-	top_obj_index++;
+	hash_insert_obj( pObjIndex );
     }
 
     return;
 }
 
+void load_old_obj( FILE *fp )
+{
+    load_old_obj_section( fp, FALSE );
+}
+
 void load_new_old_obj( FILE *fp )
 {
-    OBJ_INDEX_DATA *pObjIndex;
-
-    for ( ; ; )
-    {
-	sh_int vnum;
-	char letter;
-	int iHash;
-
-	letter				= fread_letter( fp );
-	if ( letter != '#' )
-	{
-	    bug( "Load_old_objects: # not found.", 0 );
-	    exit( 1 );
-	}
-
-	vnum				= fread_number( fp );
-	if ( vnum == 0 )
-	    break;
-
-	fBootDb = FALSE;
-	if ( get_obj_index( vnum ) != NULL )
-	{
-	    bug( "Load_old_objects: vnum %d duplicated.", vnum );
-	    exit( 1 );
-	}
-	fBootDb = TRUE;
-
-	pObjIndex			= (OBJ_INDEX_DATA *)alloc_perm( sizeof(*pObjIndex) );
-	pObjIndex->vnum			= vnum;
-	pObjIndex->random_object		= TRUE;
-	pObjIndex->new_format		= FALSE;
-	pObjIndex->reset_num	 	= 0;
-	pObjIndex->name			= fread_string( fp );
-	pObjIndex->short_descr		= fread_string( fp );
-	pObjIndex->description		= fread_string( fp );
-	/* Action description */	  fread_string( fp );
-
-	pObjIndex->material		= "copper";
-	pObjIndex->short_descr	= first_case( pObjIndex->short_descr, FALSE );
-	pObjIndex->description	= first_case( pObjIndex->description, TRUE );
-	pObjIndex->material		= str_dup("");
-
-	pObjIndex->item_type		= fread_number( fp );
-	pObjIndex->extra_flags		= fread_flag( fp );
-	pObjIndex->wear_flags		= fread_flag( fp );
-	pObjIndex->value[0]		= fread_number( fp );
-	pObjIndex->value[1]		= fread_number( fp );
-	pObjIndex->value[2]		= fread_number( fp );
-	pObjIndex->value[3]		= fread_number( fp );
-	pObjIndex->value[4]		= 0;
-	pObjIndex->level		= 0;
-	pObjIndex->condition 		= 100;
-	pObjIndex->weight		= fread_number( fp );
-	pObjIndex->cost			= fread_number( fp );	/* Unused */
-	/* Cost per day */		  fread_number( fp );
-	pObjIndex->limit		= -1;
-	pObjIndex->oprogs		= NULL;
-
-	if (pObjIndex->item_type == ITEM_WEAPON)
-	{
-	    if (is_name("two",pObjIndex->name)
-	    ||  is_name("two-handed",pObjIndex->name)
-	    ||  is_name("claymore",pObjIndex->name)
-      ||  is_name("iki-el",pObjIndex->name)
-      ||  is_name("ikiel",pObjIndex->name)
-      ||  is_name("çift-el",pObjIndex->name))
-		SET_BIT(pObjIndex->value[4],WEAPON_TWO_HANDS);
-	}
-
-	for ( ; ; )
-	{
-	    char letter;
-
-	    letter = fread_letter( fp );
-
-	    if ( letter == 'A' )
-	    {
-		AFFECT_DATA *paf;
-
-		paf			= (AFFECT_DATA *)alloc_perm( sizeof(*paf) );
-		paf->where		= TO_OBJECT;
-		paf->type		= -1;
-		paf->level		= 20; /* RT temp fix */
-		paf->duration		= -1;
-		paf->location		= fread_number( fp );
-		paf->modifier		= fread_number( fp );
-		paf->bitvector		= 0;
-		paf->next		= pObjIndex->affected;
-		pObjIndex->affected	= paf;
-		top_affect++;
-	    }
-
-	    else if ( letter == 'E' )
-	    {
-		EXTRA_DESCR_DATA *ed;
-
-		ed			= (EXTRA_DESCR_DATA *)alloc_perm( sizeof(*ed) );
-		ed->keyword		= fread_string( fp );
-		ed->description		= fread_string( fp );
-		ed->next		= pObjIndex->extra_descr;
-		pObjIndex->extra_descr	= ed;
-		top_ed++;
-	    }
-
-	    else
-	    {
-		ungetc( letter, fp );
-		break;
-	    }
-	}
-
-        /* fix armors */
-        if (pObjIndex->item_type == ITEM_ARMOR)
-        {
-            pObjIndex->value[1] = pObjIndex->value[0];
-            pObjIndex->value[2] = pObjIndex->value[1];
-        }
-
-	/*
-	 * Translate spell "slot numbers" to internal "skill numbers."
-	 */
-	switch ( pObjIndex->item_type )
-	{
-	case ITEM_PILL:
-	case ITEM_POTION:
-	case ITEM_SCROLL:
-	    pObjIndex->value[1] = slot_lookup( pObjIndex->value[1] );
-	    pObjIndex->value[2] = slot_lookup( pObjIndex->value[2] );
-	    pObjIndex->value[3] = slot_lookup( pObjIndex->value[3] );
-	    pObjIndex->value[4] = slot_lookup( pObjIndex->value[4] );
-	    break;
-
-	case ITEM_STAFF:
-	case ITEM_WAND:
-	    pObjIndex->value[3] = slot_lookup( pObjIndex->value[3] );
-	    break;
-	}
-
-	iHash			= vnum % MAX_KEY_HASH;
-	pObjIndex->next		= obj_index_hash[iHash];
-	obj_index_hash[iHash]	= pObjIndex;
-	top_obj_index++;
-    }
-
-    return;
+    load_old_obj_section( fp, TRUE );
 }
 
 
@@ -1152,7 +966,7 @@ void load_resets( FILE *fp )
 	    pRoomIndex = get_room_index( pReset->arg1 );
 
 	    if ( pReset->arg2 < 0
-	    ||   pReset->arg2 > 5
+	    ||   pReset->arg2 >= MAX_DIR
 	    || ( pexit = pRoomIndex->exit[pReset->arg2] ) == NULL
 	    || !IS_SET( pexit->exit_info, EX_ISDOOR ) )
 	    {
@@ -1171,7 +985,7 @@ void load_resets( FILE *fp )
 	case 'R':
 	    pRoomIndex		= get_room_index( pReset->arg1 );
 
-	    if ( pReset->arg2 < 0 || pReset->arg2 > 6 )
+	    if ( pReset->arg2 < 0 || pReset->arg2 > MAX_DIR )
 	    {
 		bug( "Load_resets: 'R': bad exit %d.", pReset->arg2 );
 		exit( 1 );
@@ -1204,35 +1018,18 @@ void load_rooms( FILE *fp )
 
     if ( area_last == NULL )
     {
-	bug( "Load_resets: no #AREA seen yet.", 0 );
+	bug( "Load_rooms: no #AREA seen yet.", 0 );
 	exit( 1 );
     }
 
     for ( ; ; )
     {
-	sh_int vnum;
+	int vnum;
 	char letter;
 	int door;
-	int iHash;
 
-	letter				= fread_letter( fp );
-	if ( letter != '#' )
-	{
-	    bug( "Load_rooms: # not found.", 0 );
-	    exit( 1 );
-	}
-
-	vnum				= fread_number( fp );
-	if ( vnum == 0 )
+	if ( ( vnum = read_room_vnum( fp, "Load_rooms" ) ) == 0 )
 	    break;
-
-	fBootDb = FALSE;
-	if ( get_room_index( vnum ) != NULL )
-	{
-	    bug( "Load_rooms: vnum %d duplicated.", vnum );
-	    exit( 1 );
-	}
-	fBootDb = TRUE;
 
 	pRoomIndex			= (ROOM_INDEX_DATA *)alloc_perm( sizeof(*pRoomIndex) );
 	pRoomIndex->owner		= str_dup("");
@@ -1252,7 +1049,7 @@ void load_rooms( FILE *fp )
 
 	pRoomIndex->sector_type		= fread_number( fp );
 	pRoomIndex->light		= 0;
-	for ( door = 0; door <= 5; door++ )
+	for ( door = 0; door < MAX_DIR; door++ )
 	    pRoomIndex->exit[door] = NULL;
 
 	/* defaults */
@@ -1281,7 +1078,7 @@ void load_rooms( FILE *fp )
 		int locks;
 
 		door = fread_number( fp );
-		if ( door < 0 || door > 5 )
+		if ( door < 0 || door >= MAX_DIR )
 		{
 		    bug( "Fread_rooms: vnum %d has bad door number.", vnum );
 		    exit( 1 );
@@ -1339,10 +1136,7 @@ void load_rooms( FILE *fp )
 	    }
 	}
 
-	iHash			= vnum % MAX_KEY_HASH;
-	pRoomIndex->next	= room_index_hash[iHash];
-	room_index_hash[iHash]	= pRoomIndex;
-	top_room++;
+	hash_insert_room( pRoomIndex );
     }
 
     return;
@@ -1393,38 +1187,23 @@ void load_shops( FILE *fp )
 /*
  * Snarf spec proc declarations.
  */
+static void special_directive( FILE *fp, char letter )
+{
+    MOB_INDEX_DATA *pMobIndex;
+
+    (void) letter;	/* yalnızca 'M' */
+    pMobIndex		= get_mob_index	( fread_number ( fp ) );
+    pMobIndex->spec_fun	= spec_lookup	( fread_word   ( fp ) );
+    if ( pMobIndex->spec_fun == 0 )
+    {
+	bug( "Load_specials: 'M': vnum %d.", pMobIndex->vnum );
+	exit( 1 );
+    }
+}
+
 void load_specials( FILE *fp )
 {
-    for ( ; ; )
-    {
-	MOB_INDEX_DATA *pMobIndex;
-	char letter;
-
-	switch ( letter = fread_letter( fp ) )
-	{
-	default:
-	    bug( "Load_specials: letter '%c' not *MS.", letter );
-	    exit( 1 );
-
-	case 'S':
-	    return;
-
-	case '*':
-	    break;
-
-	case 'M':
-	    pMobIndex		= get_mob_index	( fread_number ( fp ) );
-	    pMobIndex->spec_fun	= spec_lookup	( fread_word   ( fp ) );
-	    if ( pMobIndex->spec_fun == 0 )
-	    {
-		bug( "Load_specials: 'M': vnum %d.", pMobIndex->vnum );
-		exit( 1 );
-	    }
-	    break;
-	}
-
-	fread_to_eol( fp );
-    }
+    load_directives( fp, "Load_specials", "M", special_directive );
 }
 
 
@@ -1436,7 +1215,6 @@ void load_specials( FILE *fp )
 void fix_exits( void )
 {
     extern const sh_int rev_dir [];
-    char buf[MAX_STRING_LENGTH];
     ROOM_INDEX_DATA *pRoomIndex;
     ROOM_INDEX_DATA *to_room;
     EXIT_DATA *pexit;
@@ -1453,7 +1231,7 @@ void fix_exits( void )
 	    bool fexit;
 
 	    fexit = FALSE;
-	    for ( door = 0; door <= 5; door++ )
+	    for ( door = 0; door < MAX_DIR; door++ )
 	    {
 		if ( ( pexit = pRoomIndex->exit[door] ) != NULL )
 		{
@@ -1478,7 +1256,7 @@ void fix_exits( void )
 	      pRoomIndex != NULL;
 	      pRoomIndex  = pRoomIndex->next )
 	{
-	    for ( door = 0; door <= 5; door++ )
+	    for ( door = 0; door < MAX_DIR; door++ )
 	    {
 		if ( ( pexit     = pRoomIndex->exit[door]       ) != NULL
 		&&   ( to_room   = pexit->u1.to_room            ) != NULL
@@ -1486,12 +1264,11 @@ void fix_exits( void )
 		&&   pexit_rev->u1.to_room != pRoomIndex
 		&&   (pRoomIndex->vnum < 1200 || pRoomIndex->vnum > 1299))
 		{
-		    snprintf(buf, sizeof(buf), "Fix_exits: %d:%d -> %d:%d -> %d.",
+		    bugf( "Fix_exits: %d:%d -> %d:%d -> %d.",
 			pRoomIndex->vnum, door,
 			to_room->vnum,    rev_dir[door],
 			(pexit_rev->u1.to_room == NULL)
 			    ? 0 : pexit_rev->u1.to_room->vnum );
-		    bug( buf, 0 );
 		}
 	    }
 	}
@@ -1544,23 +1321,23 @@ void area_update( void )
 			send_to_char( buf, d->character );
 	       }
 
-	    pArea->age = number_range( 0, 3 );
-	    pRoomIndex = get_room_index( 200 );
-	    if ( pRoomIndex != NULL && pArea == pRoomIndex->area )
-		pArea->age = 15 - 2;
-	    pRoomIndex = get_room_index( 210 );
-	    if ( pRoomIndex != NULL && pArea == pRoomIndex->area )
-		pArea->age = 15 - 2;
-	    pRoomIndex = get_room_index( 220 );
-	    if ( pRoomIndex != NULL && pArea == pRoomIndex->area )
-		pArea->age = 15 - 2;
-	    pRoomIndex = get_room_index( 230 );
-	    if ( pRoomIndex != NULL && pArea == pRoomIndex->area )
-		pArea->age = 15 - 2;
+	    /* Bu odaları içeren bölgeler daha sık (3 dakikada) reset'lenir. */
+	    {
+		static const int fast_reset_vnum[] = { 200, 210, 220, 230,
+						       ROOM_VNUM_SCHOOL };
+		size_t i;
+
+		pArea->age = number_range( 0, 3 );
+		for ( i = 0; i < sizeof(fast_reset_vnum) / sizeof(fast_reset_vnum[0]); i++ )
+		{
+		    pRoomIndex = get_room_index( fast_reset_vnum[i] );
+		    if ( pRoomIndex != NULL && pArea == pRoomIndex->area )
+			pArea->age = 15 - 2;
+		}
+	    }
 	    pRoomIndex = get_room_index( ROOM_VNUM_SCHOOL );
-	    if ( pRoomIndex != NULL && pArea == pRoomIndex->area )
-		pArea->age = 15 - 2;
-	    else if (pArea->nplayer == 0)
+	    if ( ( pRoomIndex == NULL || pArea != pRoomIndex->area )
+	    &&   pArea->nplayer == 0 )
 		pArea->empty = TRUE;
 	}
     }
@@ -1600,7 +1377,7 @@ void reset_area( AREA_DATA *pArea )
         send_to_char("Yağmur izleri temizliyor.\n\r", ch );
       }
     }
-    for (i=pArea->min_vnum; i<pArea->max_vnum; i++)
+    for (i=pArea->min_vnum; i<=pArea->max_vnum; i++)
     {
       room = get_room_index(i);
       if (room == NULL)
@@ -1648,7 +1425,7 @@ void reset_area( AREA_DATA *pArea )
 
 	    if ( ( pRoomIndex = get_room_index( pReset->arg3 ) ) == NULL )
 	    {
-		bug( "Reset_area: 'R': bad vnum %d.", pReset->arg3 );
+		bug( "Reset_area: 'M': bad room vnum %d.", pReset->arg3 );
 		continue;
 	    }
 
@@ -1703,7 +1480,7 @@ void reset_area( AREA_DATA *pArea )
 
 	    if ( ( pRoomIndex = get_room_index( pReset->arg3 ) ) == NULL )
 	    {
-		bug( "Reset_area: 'R': bad vnum %d.", pReset->arg3 );
+		bug( "Reset_area: 'O': bad room vnum %d.", pReset->arg3 );
 		continue;
 	    }
 
@@ -1714,36 +1491,29 @@ void reset_area( AREA_DATA *pArea )
 		break;
 	    }
 
-	    switch( pObjIndex->vnum )
+	    /* Kabal sunağı/tahtı, kabal eşyası dünyadayken yeniden konmaz. */
 	    {
-		case OBJ_VNUM_RULER_STAND:
-		  ci_vnum = cabal_table[CABAL_RULER].obj_vnum;
-		  break;
-		case OBJ_VNUM_INVADER_SKULL:
-		  ci_vnum = cabal_table[CABAL_INVADER].obj_vnum;
-		  break;
-		case OBJ_VNUM_SHALAFI_ALTAR:
-		  ci_vnum = cabal_table[CABAL_SHALAFI].obj_vnum;
-		  break;
-		case OBJ_VNUM_CHAOS_ALTAR:
-		  ci_vnum = cabal_table[CABAL_CHAOS].obj_vnum;
-		  break;
-		case OBJ_VNUM_KNIGHT_ALTAR:
-		  ci_vnum = cabal_table[CABAL_KNIGHT].obj_vnum;
-		  break;
-		case OBJ_VNUM_LIONS_ALTAR:
-		  ci_vnum = cabal_table[CABAL_LIONS].obj_vnum;
-		  break;
-		case OBJ_VNUM_BATTLE_THRONE:
-		  ci_vnum = cabal_table[CABAL_BATTLE].obj_vnum;
-		  break;
-		case OBJ_VNUM_HUNTER_ALTAR:
-		  ci_vnum = cabal_table[CABAL_HUNTER].obj_vnum;
-		  break;
+		static const struct { int altar_vnum; int cabal; } altar_cabal[] =
+		{
+		    { OBJ_VNUM_RULER_STAND,	CABAL_RULER	},
+		    { OBJ_VNUM_INVADER_SKULL,	CABAL_INVADER	},
+		    { OBJ_VNUM_SHALAFI_ALTAR,	CABAL_SHALAFI	},
+		    { OBJ_VNUM_CHAOS_ALTAR,	CABAL_CHAOS	},
+		    { OBJ_VNUM_KNIGHT_ALTAR,	CABAL_KNIGHT	},
+		    { OBJ_VNUM_LIONS_ALTAR,	CABAL_LIONS	},
+		    { OBJ_VNUM_BATTLE_THRONE,	CABAL_BATTLE	},
+		    { OBJ_VNUM_HUNTER_ALTAR,	CABAL_HUNTER	},
+		};
+		size_t ai;
+
+		for ( ai = 0; ai < sizeof(altar_cabal) / sizeof(altar_cabal[0]); ai++ )
+		    if ( pObjIndex->vnum == altar_cabal[ai].altar_vnum )
+			ci_vnum = cabal_table[altar_cabal[ai].cabal].obj_vnum;
 	    }
 
-	    cabal_item = get_obj_index( ci_vnum );
-	    if ( ci_vnum &&  cabal_item->count > 0 )
+	    if ( ci_vnum != 0
+	    &&   ( cabal_item = get_obj_index( ci_vnum ) ) != NULL
+	    &&   cabal_item->count > 0 )
 	     {
 		last = FALSE;
 		break;
@@ -1987,8 +1757,6 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex , AREA_DATA *	pArea)
     mob->cabal		= CABAL_NONE;
     mob->iclass		= CLASS_CLERIC;
 
-    mob->silver = number_range(mob->level*3,mob->level*20);
-
   mob->act 		= pMobIndex->act | ACT_IS_NPC;
   mob->comm		= COMM_NOCHANNELS|COMM_NOSHOUT|COMM_NOTELL;
   mob->affected_by	= pMobIndex->affected_by;
@@ -2022,6 +1790,8 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex , AREA_DATA *	pArea)
    */
 
   mob->level		= pMobIndex->level;
+  /* Seviye atanmadan hesaplanıyordu (her yaratık 0 gümüşle doğuyordu). */
+  mob->silver		= number_range(mob->level*3,mob->level*20);
   mob->hitroll		= hitroll_damroll_hesapla(pMobIndex->level);
   mob->damroll		= hitroll_damroll_hesapla(pMobIndex->level);
   mob->max_hit		= number_range( yp_tablo[ pMobIndex->level ].min_yp , yp_tablo[ pMobIndex->level ].max_yp );
@@ -2034,34 +1804,9 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex , AREA_DATA *	pArea)
   mob->dam_type		= dam_type_dice();
   mob->status		= 0;
   
-  /* mob icin din ayarlama */
-  
-  if(number_percent()<40)
-  {
-	  mob->religion = 0;
-  }
-  else
-  {
-	  switch(number_range(1,4))
-	  {
-		case 1:
-			mob->religion = 1;
-			break;
-		case 2:
-			mob->religion = 2;
-			break;
-		case 3:
-			mob->religion = 3;
-			break;
-		case 4:
-			mob->religion = 4;
-			break;
-	  }
-	
-  }
-  
-  /* mob icin din ayarlama bitti */
-  
+  /* mob icin din ayarlama: %40 dinsiz, kalanı 1-4 arasında rastgele */
+  mob->religion		= number_percent() < 40 ? 0 : number_range(1,4);
+
   if (mob->dam_type == 0)
     switch(number_range(1,3))
     {
@@ -2070,18 +1815,27 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex , AREA_DATA *	pArea)
     case (3): mob->dam_type = 11;       break;  /* pierce */
     }
   for (i = 0; i < 4; i++)
-    mob->armor[i]	= pMobIndex->ac[i];
-  mob->armor[AC_PIERCE]	= ac_dice(AC_PIERCE,pMobIndex->level);
-  mob->armor[AC_BASH]		= ac_dice(AC_BASH,pMobIndex->level);
-  mob->armor[AC_SLASH]		= ac_dice(AC_SLASH,pMobIndex->level);
-  mob->armor[AC_EXOTIC]	= ac_dice(AC_EXOTIC,pMobIndex->level);
+    mob->armor[i]	= ac_dice(i,pMobIndex->level);
 
-  if( pMobIndex->vnum == MOB_VNUM_ELM_EARTH || pMobIndex->vnum == MOB_VNUM_ELM_AIR || pMobIndex->vnum == MOB_VNUM_ELM_FIRE ||
-      pMobIndex->vnum == MOB_VNUM_ELM_WATER || pMobIndex->vnum == MOB_VNUM_ELM_LIGHT || pMobIndex->vnum == MOB_VNUM_WEAPON ||
-      pMobIndex->vnum == MOB_VNUM_ARMOR || pMobIndex->vnum == MOB_VNUM_DEMON || pMobIndex->vnum == MOB_VNUM_UNDEAD || 
-      pMobIndex->vnum == MOB_VNUM_LION || pMobIndex->vnum == MOB_VNUM_WOLF || pMobIndex->vnum == MOB_VNUM_LESSER_GOLEM || 
-      pMobIndex->vnum == MOB_VNUM_STONE_GOLEM || pMobIndex->vnum == MOB_VNUM_IRON_GOLEM || pMobIndex->vnum == MOB_VNUM_ADAMANTITE_GOLEM || 
-      pMobIndex->vnum == MOB_VNUM_HUNTER || pMobIndex->vnum == MOB_VNUM_SUM_SHADOW || pMobIndex->vnum == MOB_VNUM_DOG )
+  /* Büyüyle çağrılan/özel yaratıklar alan dosyasındaki ırkını korur. */
+  {
+    static const int fixed_race_vnum[] =
+    {
+      MOB_VNUM_ELM_EARTH, MOB_VNUM_ELM_AIR, MOB_VNUM_ELM_FIRE,
+      MOB_VNUM_ELM_WATER, MOB_VNUM_ELM_LIGHT, MOB_VNUM_WEAPON,
+      MOB_VNUM_ARMOR, MOB_VNUM_DEMON, MOB_VNUM_UNDEAD,
+      MOB_VNUM_LION, MOB_VNUM_WOLF, MOB_VNUM_LESSER_GOLEM,
+      MOB_VNUM_STONE_GOLEM, MOB_VNUM_IRON_GOLEM, MOB_VNUM_ADAMANTITE_GOLEM,
+      MOB_VNUM_HUNTER, MOB_VNUM_SUM_SHADOW, MOB_VNUM_DOG,
+    };
+    size_t fi;
+    bool fixed_race = FALSE;
+
+    for ( fi = 0; fi < sizeof(fixed_race_vnum) / sizeof(fixed_race_vnum[0]); fi++ )
+      if ( pMobIndex->vnum == fixed_race_vnum[fi] )
+        fixed_race = TRUE;
+
+  if ( fixed_race )
       {
         mob->race		= pMobIndex->race;
       }
@@ -2099,6 +1853,7 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex , AREA_DATA *	pArea)
             mob->race		= race_dice(mob->level, FALSE);
         }
     }
+  }
 
   mob->off_flags		= race_table[mob->race].off;
   mob->imm_flags		= race_table[mob->race].imm;
@@ -2340,21 +2095,12 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
     {
       if (pObjIndex->vnum == cabal_table[i].obj_vnum)
       {
-        /*
-        if ( count_obj_list( pObjIndex, object_list) > 0 )
-        return(NULL);
-        */
         cabal_table[i].obj_ptr = obj;
         break;
       }
     }
-    if ( ( obj->pIndexData->limit != -1 )  &&
-	 ( obj->pIndexData->count >= obj->pIndexData->limit ) )
 
-    if ( pObjIndex->new_format == 1 )
-       dump_to_scr( "" );
-
-    if ( pObjIndex->new_format == 1 )
+    if ( pObjIndex->new_format )
  	obj->level = pObjIndex->level;
     else
 	obj->level		= UMAX(0,level);
@@ -2493,29 +2239,17 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
                 obj->value[0]	= number_range(1,12)-1;			// weapon type
                 obj->value[1]	= UMAX(1,number_range(level/11,level/9)+3);				// number of dice
                 obj->value[2]	= UMAX(1,number_range(level/8,level/6));					// number of dice, each dice has
-                if(obj->value[0] == 2)//dagger
+                /* Hançer delici, kılıç kesici bir vuruş türü alır (en çok 100 deneme). */
                 {
-                    i=0;
-                    while(i<100)
+                    int want_dam = obj->value[0] == WEAPON_DAGGER ? DAM_PIERCE
+                                 : obj->value[0] == WEAPON_SWORD  ? DAM_SLASH : -1;
+
+                    for ( i = 0; i < 100; i++ )
                     {
                         obj->value[3] = number_range(1,40)-1;
-                        if(attack_table[obj->value[3]].damage == DAM_PIERCE)
+                        if ( want_dam < 0 || attack_table[obj->value[3]].damage == want_dam )
                             break;
                     }
-                }
-                else if(obj->value[0] == 0)//sword
-                {
-                    i=0;
-                    while(i<100)
-                    {
-                        obj->value[3] = number_range(1,40)-1;
-                        if(attack_table[obj->value[3]].damage == DAM_SLASH)
-                            break;
-                    }
-                }
-                else
-                {
-                    obj->value[3] = number_range(1,40)-1;
                 }
                 obj->value[4]   = obj_random_weapon_flag();
                 obj_random_name(obj);
@@ -2582,12 +2316,6 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
         obj->material	= str_dup(pObjIndex->material);
     }
 
-	/*
-    for (paf = pObjIndex->affected; paf != NULL; paf = paf->next)
-	if ( paf->location == APPLY_SPELL_AFFECT )
-	    affect_to_obj(obj,paf);
-	*/
-	
     obj->next		= object_list;
     object_list		= obj;
     if ( Count )
@@ -2668,23 +2396,15 @@ char *get_extra_descr( const char *name, EXTRA_DESCR_DATA *ed )
  */
 MOB_INDEX_DATA *get_mob_index( int vnum )
 {
-    MOB_INDEX_DATA *pMobIndex;
+    MOB_INDEX_DATA *pMobIndex = find_mob_index( vnum );
 
-    for ( pMobIndex  = mob_index_hash[vnum % MAX_KEY_HASH];
-	  pMobIndex != NULL;
-	  pMobIndex  = pMobIndex->next )
-    {
-	if ( pMobIndex->vnum == vnum )
-	    return pMobIndex;
-    }
-
-    if ( fBootDb )
+    if ( pMobIndex == NULL && fBootDb )
     {
 	bug( "Get_mob_index: bad vnum %d.", vnum );
 	exit( 1 );
     }
 
-    return NULL;
+    return pMobIndex;
 }
 
 
@@ -2695,23 +2415,15 @@ MOB_INDEX_DATA *get_mob_index( int vnum )
  */
 OBJ_INDEX_DATA *get_obj_index( int vnum )
 {
-    OBJ_INDEX_DATA *pObjIndex;
+    OBJ_INDEX_DATA *pObjIndex = find_obj_index( vnum );
 
-    for ( pObjIndex  = obj_index_hash[vnum % MAX_KEY_HASH];
-	  pObjIndex != NULL;
-	  pObjIndex  = pObjIndex->next )
-    {
-	if ( pObjIndex->vnum == vnum )
-	    return pObjIndex;
-    }
-
-    if ( fBootDb )
+    if ( pObjIndex == NULL && fBootDb )
     {
 	bug( "Get_obj_index: bad vnum %d.", vnum );
 	exit( 1 );
     }
 
-    return NULL;
+    return pObjIndex;
 }
 
 
@@ -2722,23 +2434,226 @@ OBJ_INDEX_DATA *get_obj_index( int vnum )
  */
 ROOM_INDEX_DATA *get_room_index( int vnum )
 {
-    ROOM_INDEX_DATA *pRoomIndex;
+    ROOM_INDEX_DATA *pRoomIndex = find_room_index( vnum );
 
-    for ( pRoomIndex  = room_index_hash[vnum % MAX_KEY_HASH];
-	  pRoomIndex != NULL;
-	  pRoomIndex  = pRoomIndex->next )
-    {
-	if ( pRoomIndex->vnum == vnum )
-	    return pRoomIndex;
-    }
-
-    if ( fBootDb )
+    if ( pRoomIndex == NULL && fBootDb )
     {
 	bug( "Get_room_index: bad vnum %d.", vnum );
 	exit( 1 );
     }
 
+    return pRoomIndex;
+}
+
+
+
+/*
+ * Salt hash araması: açılışta bile bulunamayınca NULL döner (bug/exit yok).
+ * Yükleyicilerdeki fBootDb aç/kapa dansının yerine.
+ */
+MOB_INDEX_DATA *find_mob_index( int vnum )
+{
+    MOB_INDEX_DATA *p;
+
+    for ( p = mob_index_hash[vnum % MAX_KEY_HASH]; p != NULL; p = p->next )
+	if ( p->vnum == vnum )
+	    return p;
     return NULL;
+}
+
+OBJ_INDEX_DATA *find_obj_index( int vnum )
+{
+    OBJ_INDEX_DATA *p;
+
+    for ( p = obj_index_hash[vnum % MAX_KEY_HASH]; p != NULL; p = p->next )
+	if ( p->vnum == vnum )
+	    return p;
+    return NULL;
+}
+
+ROOM_INDEX_DATA *find_room_index( int vnum )
+{
+    ROOM_INDEX_DATA *p;
+
+    for ( p = room_index_hash[vnum % MAX_KEY_HASH]; p != NULL; p = p->next )
+	if ( p->vnum == vnum )
+	    return p;
+    return NULL;
+}
+
+/*
+ * Bölüm kaydı başlığı: '#' ve vnum okur; 0 bölüm sonu demektir.
+ */
+static int read_vnum_header( FILE *fp, const char *who )
+{
+    if ( fread_letter( fp ) != '#' )
+    {
+	bugf( "%s: # not found.", who );
+	exit( 1 );
+    }
+    return fread_number( fp );
+}
+
+int read_mob_vnum( FILE *fp, const char *who )
+{
+    int vnum = read_vnum_header( fp, who );
+
+    if ( vnum != 0 && find_mob_index( vnum ) != NULL )
+    {
+	bugf( "%s: vnum %d duplicated.", who, vnum );
+	exit( 1 );
+    }
+    return vnum;
+}
+
+int read_obj_vnum( FILE *fp, const char *who )
+{
+    int vnum = read_vnum_header( fp, who );
+
+    if ( vnum != 0 && find_obj_index( vnum ) != NULL )
+    {
+	bugf( "%s: vnum %d duplicated.", who, vnum );
+	exit( 1 );
+    }
+    return vnum;
+}
+
+int read_room_vnum( FILE *fp, const char *who )
+{
+    int vnum = read_vnum_header( fp, who );
+
+    if ( vnum != 0 && find_room_index( vnum ) != NULL )
+    {
+	bugf( "%s: vnum %d duplicated.", who, vnum );
+	exit( 1 );
+    }
+    return vnum;
+}
+
+void hash_insert_mob( MOB_INDEX_DATA *pMobIndex )
+{
+    int iHash = pMobIndex->vnum % MAX_KEY_HASH;
+
+    pMobIndex->next	= mob_index_hash[iHash];
+    mob_index_hash[iHash] = pMobIndex;
+    top_mob_index++;
+}
+
+void hash_insert_obj( OBJ_INDEX_DATA *pObjIndex )
+{
+    int iHash = pObjIndex->vnum % MAX_KEY_HASH;
+
+    pObjIndex->next	= obj_index_hash[iHash];
+    obj_index_hash[iHash] = pObjIndex;
+    top_obj_index++;
+}
+
+void hash_insert_room( ROOM_INDEX_DATA *pRoomIndex )
+{
+    int iHash = pRoomIndex->vnum % MAX_KEY_HASH;
+
+    pRoomIndex->next	= room_index_hash[iHash];
+    room_index_hash[iHash] = pRoomIndex;
+    top_room++;
+}
+
+/*
+ * Bir eşya kaydının kuyruğu: 'A' (etki), allow_f ise 'F' (bayrak etkisi) ve
+ * 'E' (ek açıklama) satırları. keep FALSE ise etkiler okunup atılır (rastgele
+ * eşyalar kendi etkilerini üretir), açıklamalar yine saklanır.
+ */
+void load_obj_affects( FILE *fp, OBJ_INDEX_DATA *pObjIndex, int paf_level,
+		       bool allow_f, bool keep )
+{
+    for ( ; ; )
+    {
+	char letter = fread_letter( fp );
+
+	if ( letter == 'A' || ( letter == 'F' && allow_f ) )
+	{
+	    AFFECT_DATA discard;
+	    AFFECT_DATA *paf = keep ? (AFFECT_DATA *)alloc_perm( sizeof(*paf) )
+				    : &discard;
+
+	    paf->where = TO_OBJECT;
+	    if ( letter == 'F' )
+	    {
+		switch ( fread_letter( fp ) )
+		{
+		case 'A': paf->where = TO_AFFECTS;	break;
+		case 'I': paf->where = TO_IMMUNE;	break;
+		case 'R': paf->where = TO_RESIST;	break;
+		case 'V': paf->where = TO_VULN;		break;
+		case 'D': paf->where = TO_DETECTS;	break;
+		default:
+		    if ( keep )
+		    {
+			bug( "Load_objects: Bad where on flag set.", 0 );
+			exit( 1 );
+		    }
+		    break;
+		}
+	    }
+	    paf->type		= -1;
+	    paf->level		= paf_level;
+	    paf->duration	= -1;
+	    paf->location	= fread_number( fp );
+	    paf->modifier	= fread_number( fp );
+	    paf->bitvector	= letter == 'F' ? fread_flag( fp ) : 0;
+
+	    if ( keep )
+	    {
+		paf->next		= pObjIndex->affected;
+		pObjIndex->affected	= paf;
+		top_affect++;
+	    }
+	}
+	else if ( letter == 'E' )
+	{
+	    EXTRA_DESCR_DATA *ed;
+
+	    ed			= (EXTRA_DESCR_DATA *)alloc_perm( sizeof(*ed) );
+	    ed->keyword		= fread_string( fp );
+	    ed->description	= fread_string( fp );
+	    ed->next		= pObjIndex->extra_descr;
+	    pObjIndex->extra_descr = ed;
+	    top_ed++;
+	}
+	else
+	{
+	    ungetc( letter, fp );
+	    break;
+	}
+    }
+}
+
+/*
+ * "harf ..." satırlarından oluşan bölüm (SPECIALS, PRACTICERS, OMPROGS,
+ * OLIMITS): '*' yorum, 'S' son; letters içindeki harfler fn'e verilir,
+ * her satırın kalanı atlanır.
+ */
+void load_directives( FILE *fp, const char *who, const char *letters,
+		      void (*fn)( FILE *fp, char letter ) )
+{
+    for ( ; ; )
+    {
+	char letter = fread_letter( fp );
+
+	if ( letter == 'S' )
+	    return;
+
+	if ( letter != '*' )
+	{
+	    if ( letter == '\0' || strchr( letters, letter ) == NULL )
+	    {
+		bugf( "%s: letter '%c' not *%sS.", who, letter, letters );
+		exit( 1 );
+	    }
+	    fn( fp, letter );
+	}
+
+	fread_to_eol( fp );
+    }
 }
 
 
@@ -2748,15 +2663,15 @@ ROOM_INDEX_DATA *get_room_index( int vnum )
  */
 char fread_letter( FILE *fp )
 {
-    char c;
+    int c;
 
     do
     {
 	c = getc( fp );
     }
-    while ( isspace(c) );
+    while ( c != EOF && isspace( c ) );
 
-    return c;
+    return (char) c;
 }
 
 
@@ -2766,15 +2681,15 @@ char fread_letter( FILE *fp )
  */
 int fread_number( FILE *fp )
 {
-    int number;
+    long long number;
     bool sign;
-    char c;
+    int c;
 
     do
     {
 	c = getc( fp );
     }
-    while ( isspace(c) );
+    while ( c != EOF && isspace( c ) );
 
     number = 0;
 
@@ -2789,15 +2704,20 @@ int fread_number( FILE *fp )
 	c = getc( fp );
     }
 
-    if ( !isdigit(c) )
+    if ( c == EOF || !isdigit( c ) )
     {
 	bug( "Fread_number: bad format.", 0 );
 	exit( 1 );
     }
 
-    while ( isdigit(c) )
+    while ( c != EOF && isdigit( c ) )
     {
 	number = number * 10 + c - '0';
+	if ( number > INT_MAX )
+	{
+	    bug( "Fread_number: number too large.", 0 );
+	    exit( 1 );
+	}
 	c      = getc( fp );
     }
 
@@ -2806,23 +2726,23 @@ int fread_number( FILE *fp )
 
     if ( c == '|' )
 	number += fread_number( fp );
-    else if ( c != ' ' )
+    else if ( c != ' ' && c != EOF )
 	ungetc( c, fp );
 
-    return number;
+    return (int) number;
 }
 
 long fread_flag( FILE *fp)
 {
-    int number;
-    char c;
+    long number;
+    int c;
     bool negative = FALSE;
 
     do
     {
-	c = getc(fp);
+	c = getc( fp );
     }
-    while ( isspace(c));
+    while ( c != EOF && isspace( c ) );
 
     if (c == '-')
     {
@@ -2832,16 +2752,16 @@ long fread_flag( FILE *fp)
 
     number = 0;
 
-    if (!isdigit(c))
+    if ( c == EOF || !isdigit( c ) )
     {
 	while (('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z'))
 	{
-	    number += flag_convert(c);
+	    number += flag_convert( (char) c );
 	    c = getc(fp);
 	}
     }
 
-    while (isdigit(c))
+    while ( c != EOF && isdigit( c ) )
     {
 	number = number * 10 + c - '0';
 	c = getc(fp);
@@ -2850,7 +2770,7 @@ long fread_flag( FILE *fp)
     if (c == '|')
 	number += fread_flag(fp);
 
-    else if  ( c != ' ')
+    else if  ( c != ' ' && c != EOF )
 	ungetc(c,fp);
 
     if (negative)
@@ -2859,29 +2779,112 @@ long fread_flag( FILE *fp)
     return number;
 }
 
+/*
+ * Bayrak harfi -> bit: A..Z = 2^0..2^25, a..z = 2^26..2^51.
+ * long'a sığmayan bit (Win64'te long 32 bit) 0 döner ve günlüğe yazılır.
+ */
 long flag_convert(char letter )
 {
-    long bitsum = 0;
-    char i;
+    int n;
 
     if ('A' <= letter && letter <= 'Z')
-    {
-	bitsum = 1;
-	for (i = letter; i > 'A'; i--)
-	    bitsum *= 2;
-    }
+	n = letter - 'A';
     else if ('a' <= letter && letter <= 'z')
+	n = 26 + letter - 'a';
+    else
+	return 0;
+
+    if ( n >= (int) ( sizeof(long) * CHAR_BIT - 1 ) )
     {
-	bitsum = 67108864; /* 2^26 */
-	for (i = letter; i > 'a'; i --)
-	    bitsum *= 2;
+	bug( "Flag_convert: bit %d does not fit in long.", n );
+	return 0;
     }
 
-    return bitsum;
+    return (long) ( 1UL << n );
 }
 
 
 
+/*
+ * Dizgi alanının sonu; ham okuma bu adrese dayanınca durulur.
+ */
+#define STRING_SPACE_END	( &string_space[MAX_STRING] )
+
+static void fread_string_overflow( void )
+{
+    bug( "Fread_string: MAX_STRING %d exceeded.", MAX_STRING );
+    exit( 1 );
+}
+
+/*
+ * top_string + sizeof(char *) adresinden başlayan, '\0' ile biten ham
+ * dizgiyi bitirir: eski Latin-5 girdiyi UTF-8'e çevirir, uzunluk karmasında
+ * arar; açılışta yeni dizgiyi alanda kalıcı kılar, sonrasında str_dup ile
+ * kopyalar. fread_string ve fread_string_eol'un ortak kuyruğu.
+ */
+static char *intern_read_string( void )
+{
+    union
+    {
+	char *	pc;
+	char	rgc[sizeof(char *)];
+    } u1;
+    size_t ic;
+    int iHash;
+    char *pHash;
+    char *pHashPrev;
+    char *pString;
+    char *plast;
+    char *pStart = top_string + sizeof(char *);
+    size_t need = strlen( pStart ) + 1;
+
+    /*
+     * Latin-5 dönüşümünde her yüksek bayt bir bayt büyür; alan yetmiyorsa
+     * sessizce kesmek yerine dur.
+     */
+    if ( !utf8_valid( pStart ) )
+    {
+	const unsigned char *p;
+
+	for ( p = (const unsigned char *) pStart; *p != '\0'; p++ )
+	    if ( *p >= 0x80 )
+		need++;
+	if ( pStart + need > STRING_SPACE_END )
+	    fread_string_overflow( );
+	utf8_from_latin5( pStart, need );
+    }
+
+    plast = pStart + strlen( pStart ) + 1;
+
+    iHash     = UMIN( MAX_KEY_HASH - 1, plast - 1 - top_string );
+    for ( pHash = string_hash[iHash]; pHash; pHash = pHashPrev )
+    {
+	for ( ic = 0; ic < sizeof(char *); ic++ )
+	    u1.rgc[ic] = pHash[ic];
+	pHashPrev = u1.pc;
+	pHash    += sizeof(char *);
+
+	if ( pStart[0] == pHash[0]
+	&&   !strcmp( pStart + 1, pHash + 1 ) )
+	    return pHash;
+    }
+
+    if ( fBootDb )
+    {
+	pString		= top_string;
+	top_string	= plast;
+	u1.pc		= string_hash[iHash];
+	for ( ic = 0; ic < sizeof(char *); ic++ )
+	    pString[ic] = u1.rgc[ic];
+	string_hash[iHash]	= pString;
+
+	nAllocString += 1;
+	sAllocString += top_string - pString;
+	return pString + sizeof(char *);
+    }
+
+    return str_dup( pStart );
+}
 
 /*
  * Read and allocate space for a string from a file.
@@ -2894,14 +2897,11 @@ long flag_convert(char letter )
 char *fread_string( FILE *fp )
 {
     char *plast;
-    char c;
+    int c;
 
     plast = top_string + sizeof(char *);
     if ( plast > &string_space[MAX_STRING - MAX_STRING_LENGTH] )
-    {
-	bug( "Fread_string: MAX_STRING %d exceeded.", MAX_STRING );
-	exit( 1 );
-    }
+	fread_string_overflow( );
 
     /*
      * Skip blanks.
@@ -2911,119 +2911,56 @@ char *fread_string( FILE *fp )
     {
 	c = getc( fp );
     }
-    while ( isspace(c) );
+    while ( c != EOF && isspace( c ) );
 
-    if ( ( *plast++ = c ) == '~' )
+    if ( c == '~' )
 	return &str_empty[0];
 
     for ( ;; )
     {
-        /*
-         * Back off the char type lookup,
-         *   it was too dirty for portability.
-         *   -- Furey
-         */
-
-	switch ( *plast = getc(fp) )
+	if ( c == EOF )
 	{
-        default:
-            plast++;
-            break;
-
-        case EOF:
-	/* temp fix */
-            bug( "Fread_string: EOF", 0 );
-	    return NULL;
-            /* exit( 1 ); */
-            break;
-
-        case '\n':
-            plast++;
-            *plast++ = '\r';
-            break;
-
-        case '\r':
-            break;
-
-        case '~':
-            plast++;
-	    {
-		union
-		{
-		    char *	pc;
-		    char	rgc[sizeof(char *)];
-		} u1;
-		size_t ic;
-		int iHash;
-		char *pHash;
-		char *pHashPrev;
-		char *pString;
-
-		plast[-1] = '\0';
-
-		{
-
-		    char *pStart = top_string + sizeof(char *);
-
-		    utf8_from_latin5( pStart, (size_t) ( &string_space[MAX_STRING] - pStart ) );
-
-		    plast = pStart + strlen( pStart ) + 1;
-
-		}
-		iHash     = UMIN( MAX_KEY_HASH - 1, plast - 1 - top_string );
-		for ( pHash = string_hash[iHash]; pHash; pHash = pHashPrev )
-		{
-		    for ( ic = 0; ic < sizeof(char *); ic++ )
-			u1.rgc[ic] = pHash[ic];
-		    pHashPrev = u1.pc;
-		    pHash    += sizeof(char *);
-
-		    if ( top_string[sizeof(char *)] == pHash[0]
-		    &&   !strcmp( top_string+sizeof(char *)+1, pHash+1 ) )
-			return pHash;
-		}
-
-		if ( fBootDb )
-		{
-		    pString		= top_string;
-		    top_string		= plast;
-		    u1.pc		= string_hash[iHash];
-		    for ( ic = 0; ic < sizeof(char *); ic++ )
-			pString[ic] = u1.rgc[ic];
-		    string_hash[iHash]	= pString;
-
-		    nAllocString += 1;
-		    sAllocString += top_string - pString;
-		    return pString + sizeof(char *);
-		}
-		else
-		{
-		    return str_dup( top_string + sizeof(char *) );
-		}
-	    }
+	    bug( "Fread_string: EOF", 0 );
+	    return &str_empty[0];
 	}
+
+	if ( plast >= STRING_SPACE_END - 2 )
+	    fread_string_overflow( );
+
+	switch ( c )
+	{
+	default:
+	    *plast++ = (char) c;
+	    break;
+
+	case '\n':
+	    *plast++ = '\n';
+	    *plast++ = '\r';
+	    break;
+
+	case '\r':
+	    break;
+
+	case '~':
+	    *plast = '\0';
+	    return intern_read_string( );
+	}
+
+	c = getc( fp );
     }
 }
 
+/*
+ * Satır sonuna kadar dizgi okur (sosyaller). '\n'/'\r' ile biter, '~' yok.
+ */
 char *fread_string_eol( FILE *fp )
 {
-    static bool char_special[256-EOF];
     char *plast;
-    char c;
-
-    if ( char_special[EOF-EOF] != TRUE )
-    {
-        char_special[EOF -  EOF] = TRUE;
-        char_special['\n' - EOF] = TRUE;
-        char_special['\r' - EOF] = TRUE;
-    }
+    int c;
 
     plast = top_string + sizeof(char *);
     if ( plast > &string_space[MAX_STRING - MAX_STRING_LENGTH] )
-    {
-        bug( "Fread_string: MAX_STRING %d exceeded.", MAX_STRING );
-        exit( 1 );
-    }
+	fread_string_overflow( );
 
     /*
      * Skip blanks.
@@ -3031,84 +2968,32 @@ char *fread_string_eol( FILE *fp )
      */
     do
     {
-        c = getc( fp );
+	c = getc( fp );
     }
-    while ( isspace(c) );
+    while ( c != EOF && isspace( c ) );
 
-    if ( ( *plast++ = c ) == '\n')
-        return &str_empty[0];
+    if ( c == '\n' )
+	return &str_empty[0];
 
     for ( ;; )
     {
-        if ( !char_special[ ( *plast++ = getc( fp ) ) - EOF ] )
-            continue;
+	if ( c == EOF )
+	{
+	    bug( "Fread_string_eol  EOF", 0 );
+	    exit( 1 );
+	}
 
-        switch ( plast[-1] )
-        {
-        default:
-            break;
+	if ( plast >= STRING_SPACE_END - 1 )
+	    fread_string_overflow( );
 
-        case EOF:
-            bug( "Fread_string_eol  EOF", 0 );
-            exit( 1 );
-            break;
+	if ( c == '\n' || c == '\r' )
+	{
+	    *plast = '\0';
+	    return intern_read_string( );
+	}
 
-        case '\n':  case '\r':
-            {
-                union
-                {
-                    char *      pc;
-                    char        rgc[sizeof(char *)];
-                } u1;
-                size_t ic;
-                int iHash;
-                char *pHash;
-                char *pHashPrev;
-                char *pString;
-
-                plast[-1] = '\0';
-
-                {
-
-                    char *pStart = top_string + sizeof(char *);
-
-                    utf8_from_latin5( pStart, (size_t) ( &string_space[MAX_STRING] - pStart ) );
-
-                    plast = pStart + strlen( pStart ) + 1;
-
-                }
-                iHash     = UMIN( MAX_KEY_HASH - 1, plast - 1 - top_string );
-                for ( pHash = string_hash[iHash]; pHash; pHash = pHashPrev )
-                {
-                    for ( ic = 0; ic < sizeof(char *); ic++ )
-                        u1.rgc[ic] = pHash[ic];
-                    pHashPrev = u1.pc;
-                    pHash    += sizeof(char *);
-
-                    if ( top_string[sizeof(char *)] == pHash[0]
-                    &&   !strcmp( top_string+sizeof(char *)+1, pHash+1 ) )
-                        return pHash;
-                }
-
-                if ( fBootDb )
-                {
-                    pString             = top_string;
-                    top_string          = plast;
-                    u1.pc               = string_hash[iHash];
-                    for ( ic = 0; ic < sizeof(char *); ic++ )
-                        pString[ic] = u1.rgc[ic];
-                    string_hash[iHash]  = pString;
-
-                    nAllocString += 1;
-                    sAllocString += top_string - pString;
-                    return pString + sizeof(char *);
-                }
-                else
-                {
-                    return str_dup( top_string + sizeof(char *) );
-                }
-            }
-        }
+	*plast++ = (char) c;
+	c = getc( fp );
     }
 }
 
@@ -3119,13 +3004,13 @@ char *fread_string_eol( FILE *fp )
  */
 void fread_to_eol( FILE *fp )
 {
-    char c;
+    int c;
 
     do
     {
 	c = getc( fp );
     }
-    while ( c != '\n' && c != '\r' );
+    while ( c != EOF && c != '\n' && c != '\r' );
 
     do
     {
@@ -3133,7 +3018,8 @@ void fread_to_eol( FILE *fp )
     }
     while ( c == '\n' || c == '\r' );
 
-    ungetc( c, fp );
+    if ( c != EOF )
+	ungetc( c, fp );
     return;
 }
 
@@ -3146,13 +3032,20 @@ char *fread_word( FILE *fp )
 {
     static char word[MAX_INPUT_LENGTH];
     char *pword;
-    char cEnd;
+    int cEnd;
+    int c;
 
     do
     {
 	cEnd = getc( fp );
     }
-    while ( isspace( cEnd ) );
+    while ( cEnd != EOF && isspace( cEnd ) );
+
+    if ( cEnd == EOF )
+    {
+	bug( "Fread_word: EOF.", 0 );
+	exit( 1 );
+    }
 
     if ( cEnd == '\'' || cEnd == '"' )
     {
@@ -3160,21 +3053,22 @@ char *fread_word( FILE *fp )
     }
     else
     {
-	word[0] = cEnd;
+	word[0] = (char) cEnd;
 	pword   = word+1;
 	cEnd    = ' ';
     }
 
     for ( ; pword < word + MAX_INPUT_LENGTH; pword++ )
     {
-	*pword = getc( fp );
-	if ( cEnd == ' ' ? isspace(*pword) : *pword == cEnd )
+	c = getc( fp );
+	if ( c == EOF || ( cEnd == ' ' ? isspace( c ) : c == cEnd ) )
 	{
-	    if ( cEnd == ' ' )
-		ungetc( *pword, fp );
+	    if ( cEnd == ' ' && c != EOF )
+		ungetc( c, fp );
 	    *pword = '\0';
 	    return word;
 	}
+	*pword = (char) c;
     }
 
     bug( "Fread_word: word too long.", 0 );
@@ -3190,7 +3084,7 @@ void *alloc_mem( int sMem )
 {
     void *pMem;
     intptr_t *magic;
-    long iList;
+    int iList;
 
     sMem += sizeof(*magic);
 
@@ -3231,7 +3125,7 @@ void *alloc_mem( int sMem )
  */
 void free_mem( void *pMem, int sMem )
 {
-    long iList;
+    int iList;
     intptr_t *magic;
 
     pMem = (char *) pMem - sizeof(*magic);
@@ -3240,7 +3134,7 @@ void free_mem( void *pMem, int sMem )
     if (*magic != MAGIC_NUM)
     {
         bug("Attempt to recyle invalid memory of size %d.",sMem);
-        bug((char*) pMem + sizeof(*magic),0);
+        bugf("%s", (char*) pMem + sizeof(*magic));
         return;
     }
 
@@ -3276,9 +3170,10 @@ void *alloc_perm( int sMem )
     static char *pMemPerm;
     static int iMemPerm;
     void *pMem;
+    const int align = (int) _Alignof(max_align_t);
 
-    while ( sMem % sizeof(long) != 0 )
-	sMem++;
+    /* Win64'te long 4 bayt: hizayı her türü kapsayan max_align_t belirler. */
+    sMem = ( sMem + align - 1 ) / align * align;
     if ( sMem > MAX_PERM_BLOCK )
     {
 	bug( "Alloc_perm: %d too large.", sMem );
@@ -3387,6 +3282,18 @@ void do_memory( CHAR_DATA *ch, char *argument )
     return;
 }
 
+/*
+ * Çalışma dizininde (area/) döküm dosyası açar; açılamazsa günlüğe yazar.
+ */
+static FILE *dump_open( const char *name )
+{
+    FILE *fp;
+
+    if ( ( fp = fopen( name, "w" ) ) == NULL )
+	bugf( "Do_dump: %s açılamadı.", name );
+    return fp;
+}
+
 void do_dump( CHAR_DATA *ch, char *argument )
 {
     int count,count2,num_pcs,aff_count;
@@ -3404,129 +3311,134 @@ void do_dump( CHAR_DATA *ch, char *argument )
 
     /* open file */
     fclose(fpReserve);
-    fp = fopen("mem.dmp","w");
 
-    /* report use of data structures */
-
-    num_pcs = 0;
-    aff_count = 0;
-
-    /* mobile prototypes */
-    fprintf(fp,"MobProt	%4d (%8d bytes)\n",
-	top_mob_index, (int)(top_mob_index * (sizeof(*pMobIndex))));
-
-    /* mobs */
-    count = 0;  count2 = 0;
-    for (fch = char_list; fch != NULL; fch = fch->next)
+    if ( ( fp = dump_open( "mem.dmp" ) ) != NULL )
     {
-	count++;
-	if (fch->pcdata != NULL)
-	    num_pcs++;
-	for (af = fch->affected; af != NULL; af = af->next)
-	    aff_count++;
-    }
-    for (fch = char_free; fch != NULL; fch = fch->next)
-	count2++;
+	/* report use of data structures */
 
-    fprintf(fp,"Mobs	%4d (%8d bytes), %2d free (%d bytes)\n",
-	count, (int)(count * (sizeof(*fch))), count2, (int)(count2 * (sizeof(*fch))));
+	num_pcs = 0;
+	aff_count = 0;
 
-    /* pcdata */
-    count = 0;
-    for (pc = pcdata_free; pc != NULL; pc = pc->next)
-	count++;
+	/* mobile prototypes */
+	fprintf(fp,"MobProt	%4d (%8d bytes)\n",
+	    top_mob_index, (int)(top_mob_index * (sizeof(*pMobIndex))));
 
-    fprintf(fp,"Pcdata	%4d (%8d bytes), %2d free (%d bytes)\n",
-	num_pcs, (int)(num_pcs * (sizeof(*pc))), count, (int)(count * (sizeof(*pc))));
-
-    /* descriptors */
-    count = 0; count2 = 0;
-    for (d = descriptor_list; d != NULL; d = d->next)
-	count++;
-    for (d= descriptor_free; d != NULL; d = d->next)
-	count2++;
-
-    fprintf(fp, "Descs	%4d (%8d bytes), %2d free (%d bytes)\n",
-	count, (int)(count * (sizeof(*d))), count2, (int)(count2 * (sizeof(*d))));
-
-    /* object prototypes */
-    for ( vnum = 0; nMatch < top_obj_index; vnum++ )
-        if ( ( pObjIndex = get_obj_index( vnum ) ) != NULL )
-        {
-	    for (af = pObjIndex->affected; af != NULL; af = af->next)
+	/* mobs */
+	count = 0;  count2 = 0;
+	for (fch = char_list; fch != NULL; fch = fch->next)
+	{
+	    count++;
+	    if (fch->pcdata != NULL)
+		num_pcs++;
+	    for (af = fch->affected; af != NULL; af = af->next)
 		aff_count++;
-            nMatch++;
-        }
+	}
+	for (fch = char_free; fch != NULL; fch = fch->next)
+	    count2++;
 
-    fprintf(fp,"ObjProt	%4d (%8d bytes)\n",
-	top_obj_index, (int)(top_obj_index * (sizeof(*pObjIndex))));
+	fprintf(fp,"Mobs	%4d (%8d bytes), %2d free (%d bytes)\n",
+	    count, (int)(count * (sizeof(*fch))), count2, (int)(count2 * (sizeof(*fch))));
+
+	/* pcdata */
+	count = 0;
+	for (pc = pcdata_free; pc != NULL; pc = pc->next)
+	    count++;
+
+	fprintf(fp,"Pcdata	%4d (%8d bytes), %2d free (%d bytes)\n",
+	    num_pcs, (int)(num_pcs * (sizeof(*pc))), count, (int)(count * (sizeof(*pc))));
+
+	/* descriptors */
+	count = 0; count2 = 0;
+	for (d = descriptor_list; d != NULL; d = d->next)
+	    count++;
+	for (d= descriptor_free; d != NULL; d = d->next)
+	    count2++;
+
+	fprintf(fp, "Descs	%4d (%8d bytes), %2d free (%d bytes)\n",
+	    count, (int)(count * (sizeof(*d))), count2, (int)(count2 * (sizeof(*d))));
+
+	/* object prototypes */
+	for ( vnum = 0; nMatch < top_obj_index; vnum++ )
+	    if ( ( pObjIndex = get_obj_index( vnum ) ) != NULL )
+	    {
+		for (af = pObjIndex->affected; af != NULL; af = af->next)
+		    aff_count++;
+		nMatch++;
+	    }
+
+	fprintf(fp,"ObjProt	%4d (%8d bytes)\n",
+	    top_obj_index, (int)(top_obj_index * (sizeof(*pObjIndex))));
 
 
-    /* objects */
-    count = 0;  count2 = 0;
-    for (obj = object_list; obj != NULL; obj = obj->next)
-    {
-	count++;
-	for (af = obj->affected; af != NULL; af = af->next)
-	    aff_count++;
+	/* objects */
+	count = 0;  count2 = 0;
+	for (obj = object_list; obj != NULL; obj = obj->next)
+	{
+	    count++;
+	    for (af = obj->affected; af != NULL; af = af->next)
+		aff_count++;
+	}
+	for (obj = obj_free; obj != NULL; obj = obj->next)
+	    count2++;
+
+	fprintf(fp,"Objs	%4d (%8d bytes), %2d free (%d bytes)\n",
+	    count, (int)(count * (sizeof(*obj))), count2, (int)(count2 * (sizeof(*obj))));
+
+	/* affects */
+	count = 0;
+	for (af = affect_free; af != NULL; af = af->next)
+	    count++;
+
+	fprintf(fp,"Affects	%4d (%8d bytes), %2d free (%d bytes)\n",
+	    aff_count, (int)(aff_count * (sizeof(*af))), count, (int)(count * (sizeof(*af))));
+
+	/* rooms */
+	fprintf(fp,"Rooms	%4d (%8d bytes)\n",
+	    top_room, (int)(top_room * (sizeof(*room))));
+
+	 /* exits */
+	fprintf(fp,"Exits	%4d (%8d bytes)\n",
+	    top_exit, (int)(top_exit * (sizeof(*exit))));
+
+	fclose(fp);
     }
-    for (obj = obj_free; obj != NULL; obj = obj->next)
-	count2++;
-
-    fprintf(fp,"Objs	%4d (%8d bytes), %2d free (%d bytes)\n",
-	count, (int)(count * (sizeof(*obj))), count2, (int)(count2 * (sizeof(*obj))));
-
-    /* affects */
-    count = 0;
-    for (af = affect_free; af != NULL; af = af->next)
-	count++;
-
-    fprintf(fp,"Affects	%4d (%8d bytes), %2d free (%d bytes)\n",
-	aff_count, (int)(aff_count * (sizeof(*af))), count, (int)(count * (sizeof(*af))));
-
-    /* rooms */
-    fprintf(fp,"Rooms	%4d (%8d bytes)\n",
-	top_room, (int)(top_room * (sizeof(*room))));
-
-     /* exits */
-    fprintf(fp,"Exits	%4d (%8d bytes)\n",
-	top_exit, (int)(top_exit * (sizeof(*exit))));
-
-    fclose(fp);
 
     /* start printing out mobile data */
-    fp = fopen("mob.dmp","w");
-
-    fprintf(fp,"\nMobile Analysis\n");
-    fprintf(fp,  "---------------\n");
-    nMatch = 0;
-    for (vnum = 0; nMatch < top_mob_index; vnum++)
-	if ((pMobIndex = get_mob_index(vnum)) != NULL)
-	{
-	    nMatch++;
-	    fprintf(fp,"#%-4d %3d active %3d killed     %s\n",
-		pMobIndex->vnum,pMobIndex->count,
-		pMobIndex->killed,pMobIndex->short_descr);
-	}
-    fclose(fp);
+    if ( ( fp = dump_open( "mob.dmp" ) ) != NULL )
+    {
+	fprintf(fp,"\nMobile Analysis\n");
+	fprintf(fp,  "---------------\n");
+	nMatch = 0;
+	for (vnum = 0; nMatch < top_mob_index; vnum++)
+	    if ((pMobIndex = get_mob_index(vnum)) != NULL)
+	    {
+		nMatch++;
+		fprintf(fp,"#%-4d %3d active %3d killed     %s\n",
+		    pMobIndex->vnum,pMobIndex->count,
+		    pMobIndex->killed,pMobIndex->short_descr);
+	    }
+	fclose(fp);
+    }
 
     /* start printing out object data */
-    fp = fopen("obj.dmp","w");
+    if ( ( fp = dump_open( "obj.dmp" ) ) != NULL )
+    {
+	fprintf(fp,"\nObject Analysis\n");
+	fprintf(fp,  "---------------\n");
+	nMatch = 0;
+	for (vnum = 0; nMatch < top_obj_index; vnum++)
+	    if ((pObjIndex = get_obj_index(vnum)) != NULL)
+	    {
+		nMatch++;
+		fprintf(fp,"#%-4d %3d active %3d reset      %s\n",
+		    pObjIndex->vnum,pObjIndex->count,
+		    pObjIndex->reset_num,pObjIndex->short_descr);
+	    }
 
-    fprintf(fp,"\nObject Analysis\n");
-    fprintf(fp,  "---------------\n");
-    nMatch = 0;
-    for (vnum = 0; nMatch < top_obj_index; vnum++)
-	if ((pObjIndex = get_obj_index(vnum)) != NULL)
-	{
-	    nMatch++;
-	    fprintf(fp,"#%-4d %3d active %3d reset      %s\n",
-		pObjIndex->vnum,pObjIndex->count,
-		pObjIndex->reset_num,pObjIndex->short_descr);
-	}
+	/* close file */
+	fclose(fp);
+    }
 
-    /* close file */
-    fclose(fp);
     fpReserve = fopen( NULL_FILE, "r" );
 }
 
@@ -3839,16 +3751,48 @@ void append_file( CHAR_DATA *ch, char *file, char *str )
 
 
 /*
+ * bug()'ın tek int parametresiyle güvenle biçimlenebilecek dizgi: hiç
+ * dönüşüm yok ya da yalnızca bir tane, o da tam sayı alan (%d %i %c %u %x,
+ * isteğe bağlı bayrak/genişlik/'l'). Başka her şey veri sayılıp olduğu gibi
+ * yazılır; böylece oda adı/oyuncu verisi taşıyan tamponlar biçim olamaz.
+ */
+static bool bug_format_ok( const char *str )
+{
+    int conversions = 0;
+
+    for ( ; *str != '\0'; str++ )
+    {
+	if ( *str != '%' )
+	    continue;
+	str++;
+	if ( *str == '%' )
+	    continue;
+	if ( ++conversions > 1 )
+	    return FALSE;
+	while ( *str == '-' || *str == '+' || *str == ' ' || *str == '#'
+	     || *str == '0' || *str == '.' || isdigit( (unsigned char) *str ) )
+	    str++;
+	if ( *str == 'l' )
+	    str++;
+	if ( *str == '\0' || strchr( "dicuxX", *str ) == NULL )
+	    return FALSE;
+    }
+
+    return TRUE;
+}
+
+/*
  * Reports a bug.
  */
 void bug( const char *str, int param )
 {
     char buf[MAX_STRING_LENGTH];
+    char msg[MAX_STRING_LENGTH];
 
     if ( fpArea != NULL )
     {
 	int iLine;
-	int iChar;
+	long iChar;
 
 	if ( fpArea == stdin )
 	{
@@ -3856,39 +3800,34 @@ void bug( const char *str, int param )
 	}
 	else
 	{
+	    int c;
+
 	    iChar = ftell( fpArea );
 	    fseek( fpArea, 0, 0 );
 	    for ( iLine = 0; ftell( fpArea ) < iChar; iLine++ )
 	    {
-		while ( getc( fpArea ) != '\n' )
+		while ( ( c = getc( fpArea ) ) != '\n' && c != EOF )
 		    ;
+		if ( c == EOF )
+		    break;
 	    }
 	    fseek( fpArea, iChar, 0 );
 	}
 
 	snprintf(buf, sizeof(buf), "[*****] FILE: %s LINE: %d", strArea, iLine );
 	log_string( buf );
-/* RT removed because we don't want bugs shutting the mud
-	if ( ( fp = fopen( "shutdown.txt", "a" ) ) != NULL )
-	{
-	    fprintf( fp, "[*****] %s\n", buf );
-	    fclose( fp );
-	}
-*/
     }
 
-    strcpy( buf, "[*****] BUG: " );
-    sprintf( buf + strlen(buf), str, param );
+    if ( str == NULL )
+	str = "(null)";
+
+    if ( bug_format_ok( str ) )
+	snprintf( msg, sizeof(msg), str, param );
+    else
+	snprintf( msg, sizeof(msg), "%s", str );
+
+    snprintf( buf, sizeof(buf), "[*****] BUG: %s", msg );
     log_string( buf );
-/* RT removed due to bug-file spamming
-    fclose( fpReserve );
-    if ( ( fp = fopen( BUG_FILE, "a" ) ) != NULL )
-    {
-	fprintf( fp, "%s\n", buf );
-	fclose( fp );
-    }
-    fpReserve = fopen( NULL_FILE, "r" );
-*/
 
     return;
 }
@@ -3930,36 +3869,26 @@ void tail_chain( void )
 }
 
 
-void load_olimits(FILE *fp)
+static void olimit_directive( FILE *fp, char letter )
 {
   int vnum;
   int limit;
-  char ch;
   OBJ_INDEX_DATA *pIndex;
 
-  for (ch = fread_letter(fp); ch != 'S'; ch = fread_letter(fp) )
+  (void) letter;	/* yalnızca 'O' */
+  vnum = fread_number(fp);
+  limit = fread_number(fp);
+  if ( (pIndex = get_obj_index(vnum)) == NULL)
     {
-      switch(ch)
-	{
-	case 'O':
-	  vnum = fread_number(fp);
-	  limit = fread_number(fp);
-	  if ( (pIndex = get_obj_index(vnum)) == NULL)
-	    {
-	      bug("Load_olimits: bad vnum %d",vnum);
-	      exit(1);
-	    }
-	  else pIndex->limit = limit;
-	  break;
-
-	case '*':
-	  fread_to_eol(fp);
-	  break;
-	default:
-	  bug("Load_olimits: bad command '%c'",ch);
-	  exit(1);
-	}
+      bug("Load_olimits: bad vnum %d",vnum);
+      exit(1);
     }
+  pIndex->limit = limit;
+}
+
+void load_olimits(FILE *fp)
+{
+  load_directives( fp, "Load_olimits", "O", olimit_directive );
 }
 
 
@@ -3973,6 +3902,7 @@ void load_limited_objects()
   int i;
   DIR *dirp;
   FILE *pfile;
+  OBJ_INDEX_DATA *pIndex;
   char letter;
   char *word;
   char buf[MAX_INPUT_LENGTH];
@@ -3992,8 +3922,7 @@ void load_limited_objects()
   {
     if (strlen(dp->d_name) >= 3)
     {
-      snprintf(buf, sizeof(buf), "%s/",PLAYER_DIR);
-      strcat(buf, dp->d_name);
+      snprintf(buf, sizeof(buf), "%s/%s",PLAYER_DIR, dp->d_name);
       fReadLevel = FALSE;
       tplayed = 0;
       snprintf(log_buf, sizeof(log_buf),"[%s] okunacak.\n\r",buf);
@@ -4004,7 +3933,9 @@ void load_limited_objects()
       }
       else
       {
-        for (letter = fread_letter(pfile);letter != EOF;letter = fread_letter(pfile) )
+        /* fread_letter char döner: EOF'u feof ile yakala (unsigned char'lı
+           platformda (char)EOF != EOF olup döngü hiç bitmiyordu). */
+        for (letter = fread_letter(pfile); !feof(pfile); letter = fread_letter(pfile) )
         {
           if (letter == 'L')
           {
@@ -4073,18 +4004,16 @@ void load_limited_objects()
                 break;
               }
               fread_word(pfile);
-              fBootDb = FALSE;
               vnum = fread_number(pfile);
-              if (get_obj_index(vnum) != NULL)
+              if ( (pIndex = find_obj_index(vnum)) != NULL)
               {
-                get_obj_index(vnum)->count++;
-                if( get_obj_index(vnum)->limit != -1 )
+                pIndex->count++;
+                if( pIndex->limit != -1 )
                 {
                     snprintf(log_buf, sizeof(log_buf),"**** Limit eq in player file: %d.\n",vnum);
                     dump_to_scr( log_buf );
                 }
               }
-              fBootDb = TRUE;
             }
           }
           else fread_to_eol(pfile);
@@ -4116,38 +4045,23 @@ long prac_lookup( const char *name )
 /*
  * Snarf can prac declarations.
  */
+static void practicer_directive( FILE *fp, char letter )
+{
+    MOB_INDEX_DATA *pMobIndex;
+
+    (void) letter;	/* yalnızca 'M' */
+    pMobIndex	= get_mob_index	( fread_number ( fp ) );
+    SET_BIT(pMobIndex->practicer,prac_lookup( fread_word(fp) ) );
+    if ( pMobIndex->practicer == 0 )
+    {
+	bug( "Load_practicers: 'M': vnum %d.", pMobIndex->vnum );
+	exit( 1 );
+    }
+}
+
 void load_practicer( FILE *fp )
 {
-    for ( ; ; )
-    {
-	MOB_INDEX_DATA *pMobIndex;
-	char letter;
-
-	switch ( letter = fread_letter( fp ) )
-	{
-	default:
-	    bug( "Load_specials: letter '%c' not *MS.", letter );
-	    exit( 1 );
-
-	case 'S':
-	    return;
-
-	case '*':
-	    break;
-
-	case 'M':
-	    pMobIndex	= get_mob_index	( fread_number ( fp ) );
-	    SET_BIT(pMobIndex->practicer,prac_lookup( fread_word(fp) ) );
-	    if ( pMobIndex->practicer == 0 )
-	    {
-		bug( "Load_practicers: 'M': vnum %d.", pMobIndex->vnum );
-		exit( 1 );
-	    }
-	    break;
-	}
-
-	fread_to_eol( fp );
-    }
+    load_directives( fp, "Load_practicers", "M", practicer_directive );
 }
 
 
