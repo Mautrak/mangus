@@ -64,6 +64,69 @@ void	one_hit		( CHAR_DATA *ch, CHAR_DATA *victim, int dt ,bool secondary);
 void	set_fighting	( CHAR_DATA *ch, CHAR_DATA *victim );
 
 /*
+ * Kurbanın gördüğü saldırgan adı: doppelganger etkisindeki saldırgan,
+ * ölümsüz olmayan kurbana taklit ettiği kişinin adıyla görünür.
+ */
+static const char *attacker_name( CHAR_DATA *ch, CHAR_DATA *victim )
+{
+    if ( is_affected( ch, gsn_doppelganger ) && !IS_IMMORTAL( victim )
+    &&   ch->doppel != NULL )
+	return ch->doppel->name;
+    return ch->name;
+}
+
+/*
+ * Kurban yardım diye bağırır: saldırganı göremiyorsa blind_msg, görüyorsa
+ * seen_fmt (tek %s: saldırganın adı). Koşulları çağıran yer denetler.
+ */
+void victim_yell( CHAR_DATA *victim, CHAR_DATA *ch,
+		  const char *blind_msg, const char *seen_fmt )
+{
+    char buf[MAX_INPUT_LENGTH];
+
+    if ( !can_see( victim, ch ) )
+    {
+	snprintf( buf, sizeof(buf), "%s", blind_msg );
+	do_yell( victim, buf );
+	return;
+    }
+    snprintf( buf, sizeof(buf), seen_fmt, attacker_name( ch, victim ) );
+    do_yell( victim, buf );
+}
+
+/*
+ * Alan dosyasından gelen bir şablondaki her "%s"yi name ile doldurur.
+ * Şablon asla biçim dizgisi olarak kullanılmaz: başka '%' dizileri
+ * olduğu gibi kopyalanır.
+ */
+void str_fill_name( char *dst, size_t n, const char *tmpl, const char *name )
+{
+    size_t o = 0;
+
+    if ( n == 0 )
+	return;
+    if ( tmpl == NULL )
+	tmpl = "";
+    if ( name == NULL )
+	name = "";
+
+    while ( *tmpl != '\0' && o + 1 < n )
+    {
+	if ( tmpl[0] == '%' && tmpl[1] == 's' )
+	{
+	    const char *p;
+
+	    for ( p = name; *p != '\0' && o + 1 < n; p++ )
+		dst[o++] = *p;
+	    tmpl += 2;
+	    continue;
+	}
+	dst[o++] = *tmpl++;
+    }
+    dst[o] = '\0';
+}
+
+/*
  * Disarm a creature.
  * Caller must check for successful attack.
  */
@@ -241,7 +304,6 @@ void do_bash( CHAR_DATA *ch, char *argument )
     char arg[MAX_INPUT_LENGTH];
     CHAR_DATA *victim;
     int chance, wait;
-    char buf[MAX_STRING_LENGTH];
     bool FightingCheck;
     int damage_bash;
 
@@ -395,15 +457,8 @@ void do_bash( CHAR_DATA *ch, char *argument )
     if (!(IS_NPC(victim)) && !(IS_NPC(ch)) && victim->position > POS_STUNNED
 		&& !FightingCheck)
       {
-	if (!can_see(victim, ch))
-	  do_yell(victim, "İmdat! Biri bana omuz atıyor!");
-	else
-	  {
-      snprintf(buf, sizeof(buf), "İmdat! %s bana omuz atıyor!",
-		(is_affected(ch,gsn_doppelganger) && !IS_IMMORTAL(victim)) ?
-		ch->doppel->name : ch->name);
-	    do_yell(victim, buf);
-	  }
+	victim_yell( victim, ch, "İmdat! Biri bana omuz atıyor!",
+		     "İmdat! %s bana omuz atıyor!" );
       }
 }
 
@@ -412,7 +467,6 @@ void do_dirt( CHAR_DATA *ch, char *argument )
     char arg[MAX_INPUT_LENGTH];
     CHAR_DATA *victim;
     int chance;
-    char buf[MAX_STRING_LENGTH];
     bool FightingCheck;
 
     if ( MOUNTED(ch) )
@@ -555,15 +609,8 @@ void do_dirt( CHAR_DATA *ch, char *argument )
     if (!(IS_NPC(victim)) && !(IS_NPC(ch)) && victim->position > POS_STUNNED
 		&& !FightingCheck)
       {
-    	if (!can_see(victim,ch))
-	  do_yell(victim, "Biri gözlerime toz attı!");
-	else
-	  {
-      snprintf(buf, sizeof(buf), "Geber %s!  Seni hilekar!", (is_affected(ch,
-		gsn_doppelganger) && !IS_IMMORTAL(victim)) ? ch->doppel->name
-		: ch->name);
-	    do_yell(victim, buf);
-	  }
+    	victim_yell( victim, ch, "Biri gözlerime toz attı!",
+    		     "Geber %s!  Seni hilekar!" );
       }
 
 }
@@ -573,7 +620,6 @@ void do_trip( CHAR_DATA *ch, char *argument )
     char arg[MAX_INPUT_LENGTH];
     CHAR_DATA *victim;
     int chance;
-    char buf[MAX_STRING_LENGTH];
     bool FightingCheck;
 
     if ( MOUNTED(ch) )
@@ -697,15 +743,8 @@ void do_trip( CHAR_DATA *ch, char *argument )
     if (!(IS_NPC(victim)) && !(IS_NPC(ch)) && victim->position > POS_STUNNED
 		&& !FightingCheck)
       {
-	if (!can_see(victim, ch))
-	  do_yell(victim, "İmdat! Biri bana çelme taktı!");
-	else
-	  {
-      snprintf(buf, sizeof(buf), "İmdat! %s bana çelme taktı!",
-		(is_affected(ch,gsn_doppelganger) && !IS_IMMORTAL(victim)) ?
-		ch->doppel->name : ch->name);
-	    do_yell(victim, buf);
-	  }
+	victim_yell( victim, ch, "İmdat! Biri bana çelme taktı!",
+		     "İmdat! %s bana çelme taktı!" );
       }
 }
 
@@ -716,7 +755,6 @@ void do_backstab( CHAR_DATA *ch, char *argument )
     char arg[MAX_INPUT_LENGTH];
     CHAR_DATA *victim;
     OBJ_DATA *obj;
-    char buf[MAX_STRING_LENGTH];
 
     one_argument( argument, arg );
 
@@ -815,15 +853,8 @@ void do_backstab( CHAR_DATA *ch, char *argument )
     if (!(IS_NPC(victim)) && !(IS_NPC(ch))
 	&& victim->position == POS_FIGHTING )
       {
-	if (!can_see(victim, ch))
-	  do_yell(victim, "İmdat! Biri beni ardılanla vurdu!");
-	else
-	  {
-      snprintf(buf, sizeof(buf), "Geber %s, seni kahrolası madrabaz!",
-		(is_affected(ch,gsn_doppelganger) && !IS_IMMORTAL(victim)) ?
-		ch->doppel->name : ch->name );
-	    do_yell( victim, buf );
-          }
+	victim_yell( victim, ch, "İmdat! Biri beni ardılanla vurdu!",
+		     "Geber %s, seni kahrolası madrabaz!" );
       }
     return;
 }
@@ -833,7 +864,6 @@ void do_cleave( CHAR_DATA *ch, char *argument )
     char arg[MAX_INPUT_LENGTH];
     CHAR_DATA *victim;
     OBJ_DATA *obj;
-    char buf[MAX_STRING_LENGTH];
 
     if ( MOUNTED(ch) )
     {
@@ -911,15 +941,8 @@ void do_cleave( CHAR_DATA *ch, char *argument )
     /* Player shouts if he doesn't die */
     if (!(IS_NPC(victim)) && !(IS_NPC(ch)) && victim->position == POS_FIGHTING)
       {
-	if (!can_see(victim, ch))
-	  do_yell(victim, "İmdat! Biri bana saldırıyor!");
-	else
-	  {
-	    snprintf(buf, sizeof(buf), "Geber %s, seni kasap kılıklı aptal!",
-		(is_affected(ch,gsn_doppelganger) && !IS_IMMORTAL(victim)) ?
-		ch->doppel->name : ch->name );
-	    do_yell( victim, buf );
-	  }
+	victim_yell( victim, ch, "İmdat! Biri bana saldırıyor!",
+		     "Geber %s, seni kasap kılıklı aptal!" );
       }
     return;
 }
@@ -928,7 +951,6 @@ void do_ambush( CHAR_DATA *ch, char *argument )
 {
     char arg[MAX_INPUT_LENGTH];
     CHAR_DATA *victim;
-    char buf[MAX_STRING_LENGTH];
 
     if ( MOUNTED(ch) )
     {
@@ -992,15 +1014,8 @@ void do_ambush( CHAR_DATA *ch, char *argument )
     if (!(IS_NPC(victim)) && !(IS_NPC(ch))
 	&& victim->position == POS_FIGHTING )
       {
-	if (!can_see(victim, ch))
-	  do_yell(victim, "İmdat! Pusuya düştüm!");
-	else
-	  {
-      snprintf(buf, sizeof(buf), "İmdat! %s tarafından pusuya düşürüldüm!",
-		    (is_affected(ch,gsn_doppelganger)&& !IS_IMMORTAL(victim)) ?
-		    ch->doppel->name : ch->name );
-	    do_yell( victim, buf );
-	  }
+	victim_yell( victim, ch, "İmdat! Pusuya düştüm!",
+		     "İmdat! %s tarafından pusuya düşürüldüm!" );
       }
     return;
 }
@@ -1302,7 +1317,6 @@ void do_nerve(CHAR_DATA *ch, char *argument)
 {
   CHAR_DATA *victim;
   char arg[MAX_INPUT_LENGTH];
-  char buf[MAX_STRING_LENGTH];
 
     if ( MOUNTED(ch) )
     {
@@ -1368,15 +1382,8 @@ void do_nerve(CHAR_DATA *ch, char *argument)
     if (!(IS_NPC(victim)) && !(IS_NPC(ch))
 	&& victim->position != POS_FIGHTING )
       {
-	if (!can_see(victim, ch))
-	  do_yell(victim, "İmdat! Biri bana saldırıyor!");
-	else
-	{
-    snprintf(buf, sizeof(buf), "İmdat! %s bana saldırdı!",
-		  (is_affected(ch,gsn_doppelganger) && !IS_IMMORTAL(victim)) ?
-		  ch->doppel->name : ch->name );
-	  do_yell( victim, buf );
-	}
+	victim_yell( victim, ch, "İmdat! Biri bana saldırıyor!",
+		     "İmdat! %s bana saldırdı!" );
       }
   return;
 }
@@ -1487,7 +1494,6 @@ void do_assassinate( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   CHAR_DATA *victim;
-  char buf[MAX_STRING_LENGTH];
   int chance = 0;
 
 
@@ -1596,15 +1602,8 @@ void do_assassinate( CHAR_DATA *ch, char *argument )
     if (!(IS_NPC(victim)) && !(IS_NPC(ch))
 	&& victim->position == POS_FIGHTING)
       {
-	if (!can_see(victim, ch))
-	  do_yell(victim, "İmdat! Biri bana suikast denedi!");
-	else
-	  {
-      snprintf(buf, sizeof(buf), "İmdat! %s bana suikast düzenlemeye çalıştı!",
-		    (is_affected(ch,gsn_doppelganger) && !IS_IMMORTAL(victim)) ?
-		    ch->doppel->name : ch->name );
-	    do_yell( victim, buf );
-	  }
+	victim_yell( victim, ch, "İmdat! Biri bana suikast denedi!",
+		     "İmdat! %s bana suikast düzenlemeye çalıştı!" );
       }
     return;
   }
@@ -1878,19 +1877,11 @@ void do_strangle(CHAR_DATA *ch, char *argument)
       }
     else
       {
-	char buf[MAX_STRING_LENGTH];
 
 	damage(ch,victim,0,gsn_strangle,DAM_NONE, TRUE);
 	check_improve(ch,gsn_strangle,FALSE,1);
-	if (!can_see(victim, ch))
-	  do_yell(victim, "İmdat! Biri beni boğuyor!");
-	else
-	{
-    snprintf(buf, sizeof(buf), "İmdat! %s beni boğazlıyor!",
-		    (is_affected(ch,gsn_doppelganger)&& !IS_IMMORTAL(victim))?
-		    ch->doppel->name : ch->name );
-	    if (!IS_NPC(victim)) do_yell(victim,buf);
-	}
+	victim_yell( victim, ch, "İmdat! Biri beni boğuyor!",
+		     "İmdat! %s beni boğazlıyor!" );
         af.type = gsn_neckguard;
         af.where = TO_AFFECTS;
         af.level = victim->level;
@@ -1990,21 +1981,13 @@ void do_blackjack(CHAR_DATA *ch, char *argument)
       }
     else
       {
-	char buf[MAX_STRING_LENGTH];
 
 	damage(ch,victim,ch->level / 2,gsn_blackjack,DAM_NONE, TRUE);
 	check_improve(ch,gsn_blackjack,FALSE,1);
 	if (!IS_NPC(victim))
 	{
-	if (!can_see(victim, ch))
-	  do_yell(victim, "İmdat! Biri beni copluyor!");
-	else
-	{
-    snprintf(buf, sizeof(buf), "İmdat! %s beni copluyor!",
-		    (is_affected(ch,gsn_doppelganger)&& !IS_IMMORTAL(victim))?
-		    ch->doppel->name : ch->name );
-	    if (!IS_NPC(victim)) do_yell(victim,buf);
-	}
+	victim_yell( victim, ch, "İmdat! Biri beni copluyor!",
+		     "İmdat! %s beni copluyor!" );
 	}
         af.type = gsn_headguard;
         af.where = TO_AFFECTS;
@@ -3258,7 +3241,6 @@ void do_tail( CHAR_DATA *ch, char *argument )
     char arg[MAX_INPUT_LENGTH];
     CHAR_DATA *victim;
     int chance, wait;
-    char buf[MAX_STRING_LENGTH];
     bool FightingCheck;
     int damage_tail;
 
@@ -3406,15 +3388,8 @@ void do_tail( CHAR_DATA *ch, char *argument )
     if (!(IS_NPC(victim)) && !(IS_NPC(ch)) && victim->position > POS_STUNNED
 		&& !FightingCheck)
       {
-	if (!can_see(victim, ch))
-	  do_yell(victim, "İmdat! Biri bana vurdu!");
-	else
-	  {
-      snprintf(buf, sizeof(buf), "İmdat! %s bana kuyruğuyla vurmaya çalıştı!",
-		(is_affected(ch,gsn_doppelganger) && !IS_IMMORTAL(victim)) ?
-		ch->doppel->name : ch->name);
-	    do_yell(victim, buf);
-	  }
+	victim_yell( victim, ch, "İmdat! Biri bana vurdu!",
+		     "İmdat! %s bana kuyruğuyla vurmaya çalıştı!" );
       }
 }
 
@@ -3825,7 +3800,6 @@ void do_sense(CHAR_DATA *ch, char *argument)
 void do_poison_smoke( CHAR_DATA *ch, char *argument)
 {
   CHAR_DATA *tmp_vict;
-  char buf[MAX_STRING_LENGTH];
 
   if (IS_NPC(ch)) return;
   if (ch_skill_nok(ch,gsn_poison_smoke)) return;
@@ -3858,15 +3832,8 @@ void do_poison_smoke( CHAR_DATA *ch, char *argument)
 	    ch->fighting != tmp_vict && tmp_vict->fighting != ch &&
 	    (IS_SET(tmp_vict->affected_by,AFF_CHARM) || !IS_NPC(tmp_vict)))
 	  {
-	    if (!can_see(tmp_vict, ch))
-		do_yell(tmp_vict, "İmdat! Biri bana saldırıyor!");
-	    else
-	      {
-          snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
-		    (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(tmp_vict))?
-		     ch->doppel->name : ch->name);
-	         do_yell(tmp_vict,buf);
-	      }
+	    victim_yell( tmp_vict, ch, "İmdat! Biri bana saldırıyor!",
+	    	     "Geber %s, seni büyücü köpek!" );
 	  }
 
 	spell_poison(gsn_poison,ch->level,ch,tmp_vict, TARGET_CHAR);
@@ -3880,7 +3847,6 @@ void do_poison_smoke( CHAR_DATA *ch, char *argument)
 void do_blindness_dust( CHAR_DATA *ch, char *argument)
 {
   CHAR_DATA *tmp_vict;
-  char buf[MAX_STRING_LENGTH];
 
   if (IS_NPC(ch)) return;
   if (ch_skill_nok(ch,gsn_blindness_dust)) return;
@@ -3913,15 +3879,8 @@ void do_blindness_dust( CHAR_DATA *ch, char *argument)
 	    ch->fighting != tmp_vict && tmp_vict->fighting != ch &&
 	    (IS_SET(tmp_vict->affected_by,AFF_CHARM) || !IS_NPC(tmp_vict)))
 	  {
-	    if (!can_see(tmp_vict, ch))
-      do_yell(tmp_vict,"İmdat! Biri bana saldırıyor!");
-	    else
-	      {
-          snprintf(buf, sizeof(buf),"Geber %s, seni büyücü köpek!",
-		    (is_affected(ch,gsn_doppelganger)&&!IS_IMMORTAL(tmp_vict))?
-		     ch->doppel->name : ch->name);
-	         do_yell(tmp_vict,buf);
-	      }
+	    victim_yell( tmp_vict, ch, "İmdat! Biri bana saldırıyor!",
+	    	     "Geber %s, seni büyücü köpek!" );
 	  }
 
 	spell_blindness(gsn_blindness,ch->level,ch,tmp_vict, TARGET_CHAR);
@@ -3937,7 +3896,6 @@ void do_lash( CHAR_DATA *ch, char *argument )
     char arg[MAX_INPUT_LENGTH];
     CHAR_DATA *victim;
     int chance;
-    char buf[MAX_STRING_LENGTH];
     bool FightingCheck;
     int damage_lash;
 
@@ -4040,15 +3998,8 @@ void do_lash( CHAR_DATA *ch, char *argument )
     if (!(IS_NPC(victim)) && !(IS_NPC(ch)) && victim->position > POS_STUNNED
 		&& !FightingCheck)
       {
-	if (!can_see(victim, ch))
-	  do_yell(victim, "İmdat! Biri beni kamçılıyor!");
-	else
-	  {
-      snprintf(buf, sizeof(buf), "İmdat! %s beni kamçılıyor!",
-		(is_affected(ch,gsn_doppelganger) && !IS_IMMORTAL(victim)) ?
-		ch->doppel->name : ch->name);
-	    do_yell(victim, buf);
-	  }
+	victim_yell( victim, ch, "İmdat! Biri beni kamçılıyor!",
+		     "İmdat! %s beni kamçılıyor!" );
       }
 }
 
