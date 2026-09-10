@@ -21,6 +21,26 @@
 #define BOT_SEENPC_MAX      8
 #define BOT_PK_AREAS      4
 
+/* zaman: bot_pulse saniyede BOT_PULSE_SEC kez artar */
+#define BOT_PULSE_SEC     4
+#define BOT_SEC(n)        ( BOT_PULSE_SEC * (n) )
+#define BOT_MIN(n)        ( BOT_SEC(60) * (n) )
+#define BOT_HOUR(n)       ( BOT_MIN(60) * (n) )
+
+/* yüzde ve rastgele havuz seçimi (tüm bot dosyalarında ortak) */
+#define BOT_PN(a)         ( (int) ( sizeof(a) / sizeof(a[0]) ) )
+#define BOT_PICK(a)       bot_pick( (a), BOT_PN(a) )
+
+static inline int bot_pct( int cur, int max )
+{
+    return max <= 0 ? 100 : cur * 100 / max;
+}
+
+static inline const char *bot_pick( const char **pool, int n )
+{
+    return pool[number_range( 0, n - 1 )];
+}
+
 /* durumlar */
 #define BOT_ST_IDLE       0
 #define BOT_ST_TRAVEL     1

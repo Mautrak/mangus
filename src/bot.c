@@ -1479,7 +1479,7 @@ void do_botlar( CHAR_DATA *ch, char *argument )
             snprintf( buf, sizeof(buf), "%d/%d/%d", bot->kills, bot->deaths, bot->quests );
             printf_to_char( ch, "%-12s %-4d %-6s %-16s %-5d %-5d %-24.24s %s\n\r",
                             bch->name, bch->level, class_table[bch->iclass].who_name,
-                            bot_state_name( bot->state ), ( bot_pulse - bot->state_pulse ) / 4,
+                            bot_state_name( bot->state ), ( bot_pulse - bot->state_pulse ) / BOT_PULSE_SEC,
                             bch->max_hit > 0 ? bch->hit * 100 / bch->max_hit : 0,
                             bch->in_room != NULL ? bch->in_room->name : "?", buf );
         }

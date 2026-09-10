@@ -22,7 +22,6 @@
 #define GOD_ACT_RESTORE  2
 
 #define POOL(name) static const char *name[] =
-#define PN(a) ( (int) ( sizeof(a) / sizeof(a[0]) ) )
 
 POOL(god_pray_reply) {
     "Duanı duydum, evladım. Sabırlı ol.", "Gökler seni izliyor; yolundan sapma.",
@@ -66,11 +65,6 @@ POOL(god_duyuru) {
 POOL(god_kdg_idle) {
     "Yardıma muhtaç olan var mı?", "Diyar bugün nasıl, ölümlüler?", "Dua edenin sesi göklere ulaşır."
 };
-
-static const char *pick( const char **pool, int n )
-{
-    return pool[number_range( 0, n - 1 )];
-}
 
 static bool text_has( const char *text, const char *word )
 {
@@ -116,8 +110,8 @@ void bot_god_enter( BOT_DATA *bot, CHAR_DATA *ch, bool fresh )
     if ( ch->in_room != NULL )
         char_from_room( ch );
     char_to_room( ch, get_room_index( GOD_HOME_VNUM ) );
-    bot->god_next_act   = bot_pulse + 4 * number_range( 60, 180 );
-    bot->god_next_gecho = bot_pulse + 4 * 60 * number_range( 20, 60 );
+    bot->god_next_act   = bot_pulse + BOT_SEC( number_range( 60, 180 ) );
+    bot->god_next_gecho = bot_pulse + BOT_MIN( number_range( 20, 60 ) );
     bot->god_pending_id = 0;
 }
 
@@ -141,12 +135,12 @@ void bot_god_greet( BOT_DATA *bot, CHAR_DATA *human )
         return;
     if ( IS_IMMORTAL(human) )
     {
-        bot_fill_ch( bot, pick( god_greet_imm, PN(god_greet_imm) ), human, out, sizeof(out), TRUE );
+        bot_fill_ch( bot, BOT_PICK(god_greet_imm), human, out, sizeof(out), TRUE );
         bot_queue_reply( bot, "", BOT_CH_IMM, number_range( 20, 90 ), out );
     }
     else
     {
-        bot_fill_ch( bot, pick( god_greet_human, PN(god_greet_human) ), human, out, sizeof(out), TRUE );
+        bot_fill_ch( bot, BOT_PICK(god_greet_human), human, out, sizeof(out), TRUE );
         bot_queue_reply( bot, human->name, BOT_CH_TELL, number_range( 40, 150 ), out );
     }
 }
@@ -174,8 +168,8 @@ void bot_god_hear( BOT_DATA *bot, CHAR_DATA *speaker, int channel, const char *t
             {
                 bot->god_pending_id    = speaker->id;
                 bot->god_pending_kind  = GOD_ACT_TRANSFER;
-                bot->god_pending_pulse = bot_pulse + 4 * number_range( 8, 25 );
-                bot_fill_ch( bot, pick( god_transfer_reply, PN(god_transfer_reply) ), speaker, out, sizeof(out), TRUE );
+                bot->god_pending_pulse = bot_pulse + BOT_SEC( number_range( 8, 25 ) );
+                bot_fill_ch( bot, BOT_PICK(god_transfer_reply), speaker, out, sizeof(out), TRUE );
                 bot_queue_reply( bot, speaker->name, BOT_CH_TELL, number_range( 3, 8 ), out );
             }
             return;
@@ -184,22 +178,22 @@ void bot_god_hear( BOT_DATA *bot, CHAR_DATA *speaker, int channel, const char *t
         if ( human && ( text_has( text, "iyileş" ) || text_has( text, "iyiles" ) || text_has( text, "restore" )
                      || text_has( text, "yara" ) || text_has( text, "şifa" ) || text_has( text, "sifa" ) ) )
         {
-            if ( bot_pulse - bot->god_last_restore > 4 * 60 * 60 && bot->god_pending_id == 0 )
+            if ( bot_pulse - bot->god_last_restore > BOT_HOUR(1) && bot->god_pending_id == 0 )
             {
                 bot->god_pending_id    = speaker->id;
                 bot->god_pending_kind  = GOD_ACT_RESTORE;
-                bot->god_pending_pulse = bot_pulse + 4 * number_range( 6, 20 );
-                bot_fill_ch( bot, pick( god_restore_reply, PN(god_restore_reply) ), speaker, out, sizeof(out), TRUE );
+                bot->god_pending_pulse = bot_pulse + BOT_SEC( number_range( 6, 20 ) );
+                bot_fill_ch( bot, BOT_PICK(god_restore_reply), speaker, out, sizeof(out), TRUE );
                 bot_queue_reply( bot, speaker->name, BOT_CH_TELL, number_range( 3, 8 ), out );
             }
             else
                 bot_queue_reply( bot, speaker->name, BOT_CH_TELL, number_range( 4, 10 ),
-                                 pick( god_refuse_reply, PN(god_refuse_reply) ) );
+                                 BOT_PICK(god_refuse_reply) );
             return;
         }
         if ( number_percent() < ( human ? 75 : 25 ) )
         {
-            bot_fill_ch( bot, pick( god_pray_reply, PN(god_pray_reply) ), speaker, out, sizeof(out), TRUE );
+            bot_fill_ch( bot, BOT_PICK(god_pray_reply), speaker, out, sizeof(out), TRUE );
             bot_queue_reply( bot, speaker->name, BOT_CH_TELL, number_range( 6, 20 ), out );
         }
         return;
@@ -210,7 +204,7 @@ void bot_god_hear( BOT_DATA *bot, CHAR_DATA *speaker, int channel, const char *t
         return;
     if ( channel == BOT_CH_KDG && number_percent() > 40 )
         return;
-    bot_fill_ch( bot, pick( god_tell_reply, PN(god_tell_reply) ), speaker, out, sizeof(out), TRUE );
+    bot_fill_ch( bot, BOT_PICK(god_tell_reply), speaker, out, sizeof(out), TRUE );
     bot_queue_reply( bot, speaker->name, channel == BOT_CH_SAY ? BOT_CH_SAY : BOT_CH_TELL,
                      number_range( 5, 15 ), out );
 }
@@ -263,9 +257,9 @@ void bot_god_think( BOT_DATA *bot )
     /* ara sıra: duyuru (atmosfer) */
     if ( bot_pulse >= bot->god_next_gecho )
     {
-        bot->god_next_gecho = bot_pulse + 4 * 60 * number_range( 40, 120 );
+        bot->god_next_gecho = bot_pulse + BOT_MIN( number_range( 40, 120 ) );
         if ( bot_random_human() != NULL )
-            bot_cmd( bot, "duyuru %s", pick( god_duyuru, PN(god_duyuru) ) );
+            bot_cmd( bot, "duyuru %s", BOT_PICK(god_duyuru) );
         return;
     }
 
@@ -274,11 +268,11 @@ void bot_god_think( BOT_DATA *bot )
     {
         CHAR_DATA *imm = human_immortal_online();
 
-        bot->god_next_act = bot_pulse + 4 * 60 * number_range( 15, 45 );
+        bot->god_next_act = bot_pulse + BOT_MIN( number_range( 15, 45 ) );
         if ( imm != NULL && number_percent() < 60 )
-            bot_talk( bot, BOT_CH_IMM, NULL, pick( god_imm_idle, PN(god_imm_idle) ) );
+            bot_talk( bot, BOT_CH_IMM, NULL, BOT_PICK(god_imm_idle) );
         else if ( bot_random_human() != NULL && number_percent() < 30 )
-            bot_talk( bot, BOT_CH_KDG, NULL, pick( god_kdg_idle, PN(god_kdg_idle) ) );
+            bot_talk( bot, BOT_CH_KDG, NULL, BOT_PICK(god_kdg_idle) );
         return;
     }
 }

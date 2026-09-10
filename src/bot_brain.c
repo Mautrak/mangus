@@ -59,11 +59,6 @@ static bool is_starving( CHAR_DATA *ch )
 /* ---------------------------------------------------------------------
  * yardımcılar
  * ------------------------------------------------------------------ */
-static int pct( int cur, int max )
-{
-    return max <= 0 ? 100 : cur * 100 / max;
-}
-
 static bool is_caster( CHAR_DATA *ch )
 {
     switch ( ch->iclass )
@@ -878,7 +873,7 @@ static bool bot_travel_scout( BOT_DATA *bot, ROOM_INDEX_DATA *next )
         {
             if ( bot_debug )
                 bot_log( bot, "yolda tehlike: %s (seviye %d) oda %d; dolaşılıyor.", rch->short_descr, rch->level, next->vnum );
-            bot_avoid_room( bot, next, 4 * 60 * 20 );
+            bot_avoid_room( bot, next, BOT_MIN(20) );
             return TRUE;
         }
     return FALSE;
@@ -960,9 +955,9 @@ static ROOM_INDEX_DATA *bot_recall_spawn( BOT_DATA *bot )
         ROOM_INDEX_DATA *room;
         int len;
 
-        if ( bot->spawn_vnum[i] <= 0 || bot_pulse - bot->spawn_seen[i] > 4 * 60 * 40 )
+        if ( bot->spawn_vnum[i] <= 0 || bot_pulse - bot->spawn_seen[i] > BOT_MIN(40) )
             continue;
-        if ( bot_pulse - bot->spawn_visit[i] < 4 * 60 * 2 )
+        if ( bot_pulse - bot->spawn_visit[i] < BOT_MIN(2) )
             continue;
         if ( ( room = get_room_index( bot->spawn_vnum[i] ) ) == NULL || room == ch->in_room )
             continue;
@@ -1030,7 +1025,7 @@ ROOM_INDEX_DATA *area_entry_room( BOT_DATA *bot, AREA_DATA *area )
     /* hatırlanan av odası */
     for ( i = 0; i < BOT_SPAWN_MAX; i++ )
         if ( bot->spawn_vnum[i] > 0 && ( room = get_room_index( bot->spawn_vnum[i] ) ) != NULL
-          && room->area == area && bot_pulse - bot->spawn_seen[i] < 4 * 60 * 60 )
+          && room->area == area && bot_pulse - bot->spawn_seen[i] < BOT_HOUR(1) )
         {
             int len = bot_find_path( ch, ch->in_room, room, tmp, BOT_MAX_PATH, FALSE );
             if ( len >= 0 && len < best_len )
@@ -1090,7 +1085,7 @@ static AREA_DATA *bot_pick_hunt_area( BOT_DATA *bot )
         {
             score += UMIN( mem->kills, 30 ) * 2 - mem->deaths * 30;
             /* bir ölüm: üç saat uzak dur; iki ve üstü: on iki saat */
-            if ( mem->deaths >= 1 && bot_pulse - mem->last_pulse < 4 * 60 * 60 * ( mem->deaths >= 2 ? 12 : 3 ) )
+            if ( mem->deaths >= 1 && bot_pulse - mem->last_pulse < BOT_HOUR( mem->deaths >= 2 ? 12 : 3 ) )
                 continue;
         }
         if ( area == bot->hunt_area )
@@ -1160,7 +1155,7 @@ static void bot_travel_step( BOT_DATA *bot )
         bot_set_state( bot, after );
         return;
     }
-    if ( bot_pulse - bot->travel_started > 4 * 60 * 12 )     /* 12 dakika: vazgeç */
+    if ( bot_pulse - bot->travel_started > BOT_MIN(12) )     /* 12 dakika: vazgeç */
     {
         bot->path_len = bot->path_pos = 0;
         bot_set_state( bot, BOT_ST_IDLE );
@@ -1277,10 +1272,10 @@ static bool bot_need_rest( BOT_DATA *bot )
     CHAR_DATA *ch = bot->ch;
 
     if ( is_starving( ch ) )
-        return pct( ch->hit, ch->max_hit ) < 15;
-    if ( pct( ch->hit, ch->max_hit ) < 60 )
+        return bot_pct( ch->hit, ch->max_hit ) < 15;
+    if ( bot_pct( ch->hit, ch->max_hit ) < 60 )
         return TRUE;
-    if ( is_caster( ch ) && pct( ch->mana, ch->max_mana ) < 35 )
+    if ( is_caster( ch ) && bot_pct( ch->mana, ch->max_mana ) < 35 )
         return TRUE;
     if ( ch->move < 8 )
         return TRUE;
@@ -1291,11 +1286,11 @@ static bool bot_rested_enough( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch;
 
-    if ( pct( ch->hit, ch->max_hit ) < 92 )
+    if ( bot_pct( ch->hit, ch->max_hit ) < 92 )
         return FALSE;
-    if ( is_caster( ch ) && pct( ch->mana, ch->max_mana ) < 75 )
+    if ( is_caster( ch ) && bot_pct( ch->mana, ch->max_mana ) < 75 )
         return FALSE;
-    if ( pct( ch->move, ch->max_move ) < 40 )
+    if ( bot_pct( ch->move, ch->max_move ) < 40 )
         return FALSE;
     return TRUE;
 }
@@ -1309,7 +1304,7 @@ static void bot_start_rest( BOT_DATA *bot )
     if ( ch->position == POS_SLEEPING )
         return;
     /* önce şifa bilen kendini iyileştirsin */
-    if ( is_healer_class( ch ) && pct( ch->hit, ch->max_hit ) < 70 )
+    if ( is_healer_class( ch ) && bot_pct( ch->hit, ch->max_hit ) < 70 )
     {
         int sn = can_cast_sn( ch, sn_cure_critical ) ? sn_cure_critical
                : can_cast_sn( ch, sn_cure_serious ) ? sn_cure_serious
@@ -1345,7 +1340,7 @@ static void bot_resting( BOT_DATA *bot )
     CHAR_DATA *ch = bot->ch;
 
     /* açlıktan yenilenme durmuş: yatmak boşuna, yiyecek bulmaya git */
-    if ( is_starving( ch ) && pct( ch->hit, ch->max_hit ) >= 15 )
+    if ( is_starving( ch ) && bot_pct( ch->hit, ch->max_hit ) >= 15 )
     {
         if ( ch->position < POS_STANDING && !IS_AFFECTED( ch, AFF_SLEEP ) )
         {
@@ -1358,7 +1353,7 @@ static void bot_resting( BOT_DATA *bot )
 
     /* gece ışıksız karanlıkta: sabahı bekle (14 dk sınırı da uygulanır) */
     if ( bot_blind_in_dark( ch ) && is_night() && ch->silver < 20
-      && bot_pulse - bot->state_pulse < 4 * 60 * 14 )
+      && bot_pulse - bot->state_pulse < BOT_MIN(14) )
     {
         /* karanlıkta bekle: yorgunsa uyu, değilse dinlen (her ikisi de yenilenme sağlar) */
         if ( ch->position > POS_SLEEPING && !IS_AFFECTED( ch, AFF_SLEEP ) )
@@ -1370,7 +1365,7 @@ static void bot_resting( BOT_DATA *bot )
         }
         return;
     }
-    if ( bot_rested_enough( bot ) || bot_pulse - bot->state_pulse > 4 * 60 * 14 )
+    if ( bot_rested_enough( bot ) || bot_pulse - bot->state_pulse > BOT_MIN(14) )
     {
         if ( ch->position < POS_STANDING )
         {
@@ -1380,7 +1375,7 @@ static void bot_resting( BOT_DATA *bot )
         bot_set_state( bot, BOT_ST_IDLE );
         return;
     }
-    if ( is_healer_class( ch ) && pct( ch->hit, ch->max_hit ) < 75 && ch->position >= POS_RESTING )
+    if ( is_healer_class( ch ) && bot_pct( ch->hit, ch->max_hit ) < 75 && ch->position >= POS_RESTING )
     {
         int sn = can_cast_sn( ch, sn_cure_critical ) ? sn_cure_critical
                : can_cast_sn( ch, sn_cure_serious ) ? sn_cure_serious
@@ -1396,7 +1391,7 @@ static void bot_resting( BOT_DATA *bot )
     }
     if ( ch->position > POS_SLEEPING && !IS_AFFECTED( ch, AFF_SLEEP ) )
     {
-        if ( pct( ch->hit, ch->max_hit ) < 80 || pct( ch->move, ch->max_move ) < 50 )
+        if ( bot_pct( ch->hit, ch->max_hit ) < 80 || bot_pct( ch->move, ch->max_move ) < 50 )
             bot_cmd( bot, "uyu" );
         else if ( ch->position != POS_RESTING )
             bot_cmd( bot, "dinlen" );
@@ -1487,7 +1482,7 @@ static bool bot_eat_drink( BOT_DATA *bot )
                 if ( bot->fill_vnum == obj->pIndexData->vnum && bot->fill_amount == obj->value[1] )
                 {
                     /* son deneme bir şey değiştirmedi */
-                    bot->fill_block_until = bot_pulse + 4 * 60 * 15;
+                    bot->fill_block_until = bot_pulse + BOT_MIN(15);
                     bot->fill_vnum = 0;
                     return FALSE;
                 }
@@ -1653,8 +1648,8 @@ static void bot_combat( BOT_DATA *bot )
     if ( ch->fighting != NULL && !IS_NPC(ch->fighting) )
         bot_war_attacked( bot, ch->fighting );
     CHAR_DATA *victim = ch->fighting;
-    int hp = pct( ch->hit, ch->max_hit );
-    int vhp = pct( victim->hit, victim->max_hit );
+    int hp = bot_pct( ch->hit, ch->max_hit );
+    int vhp = bot_pct( victim->hit, victim->max_hit );
     int roll;
 
     bot->last_fight_pulse = bot_pulse;
@@ -1759,7 +1754,7 @@ bool bot_cast_buffs( BOT_DATA *bot )
     CHAR_DATA *ch = bot->ch;
     int i;
 
-    if ( ch->cabal == CABAL_BATTLE || pct( ch->mana, ch->max_mana ) < 45 )
+    if ( ch->cabal == CABAL_BATTLE || bot_pct( ch->mana, ch->max_mana ) < 45 )
         return FALSE;
     for ( i = 0; i < buff_count; i++ )
     {
@@ -1858,7 +1853,7 @@ static bool bot_consider_grouping( BOT_DATA *bot )
 
     if ( ch->master != NULL || ch->leader != NULL )
         return FALSE;
-    if ( bot_pulse - bot->group_offer_pulse < 4 * 60 * 6 )
+    if ( bot_pulse - bot->group_offer_pulse < BOT_MIN(6) )
         return FALSE;
     for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
     {
@@ -1870,7 +1865,7 @@ static bool bot_consider_grouping( BOT_DATA *bot )
             continue;
         if ( abs( ch->level - rch->level ) > 4 || rch->fighting != NULL )
             continue;
-        if ( bot_pulse - other->group_offer_pulse < 4 * 60 * 6 )
+        if ( bot_pulse - other->group_offer_pulse < BOT_MIN(6) )
             continue;
         if ( number_percent() > 65 )
             continue;
@@ -1892,12 +1887,12 @@ static bool bot_seek_group( BOT_DATA *bot )
 
     if ( ch->master != NULL || ch->leader != NULL || bot_in_group( ch ) )
         return FALSE;
-    if ( bot_pulse - bot->group_offer_pulse < 4 * 60 * 5 )
+    if ( bot_pulse - bot->group_offer_pulse < BOT_MIN(5) )
         return FALSE;
 
     target = bot_char_by_id( bot->invite_id );
     if ( target == NULL || !IS_BOT(target) || target->master != NULL || target->leader != NULL
-      || abs( ch->level - target->level ) > 4 || bot_pulse - bot->invite_pulse > 4 * 60 * 4 )
+      || abs( ch->level - target->level ) > 4 || bot_pulse - bot->invite_pulse > BOT_MIN(4) )
     {
         BOT_DATA *ob, *pick = NULL;
         int count = 0;
@@ -1914,7 +1909,7 @@ static bool bot_seek_group( BOT_DATA *bot )
                 continue;
             if ( och->master != NULL || och->leader != NULL || abs( ch->level - och->level ) > 4 )
                 continue;
-            if ( bot_pulse - ob->group_offer_pulse < 4 * 60 * 5 )
+            if ( bot_pulse - ob->group_offer_pulse < BOT_MIN(5) )
                 continue;
             /* 'nerede' gibi: yalnızca aynı bölgedekileri görebilir */
             if ( och->in_room->area != ch->in_room->area || !can_see( ch, och )
@@ -1925,7 +1920,7 @@ static bool bot_seek_group( BOT_DATA *bot )
         }
         if ( pick == NULL )
         {
-            bot->group_offer_pulse = bot_pulse - 4 * 60 * 3;    /* 2 dk sonra tekrar bak */
+            bot->group_offer_pulse = bot_pulse - BOT_MIN(3);    /* 2 dk sonra tekrar bak */
             return FALSE;
         }
         bot->invite_id = pick->ch->id;
@@ -1985,7 +1980,7 @@ static void bot_hunt( BOT_DATA *bot )
     bot_mark_visited( bot, ch->in_room );
     bot_note_spawn_visit( bot, ch->in_room );
 
-    if ( bot->hunt_area == NULL || bot_pulse - bot->hunt_area_pulse > 4 * 60 * 30
+    if ( bot->hunt_area == NULL || bot_pulse - bot->hunt_area_pulse > BOT_MIN(30)
       || ( ch->in_room->area != bot->hunt_area && bot->hunt_fail > 1 ) )
     {
         AREA_DATA *area = bot_pick_hunt_area( bot );
@@ -2033,7 +2028,7 @@ static void bot_hunt( BOT_DATA *bot )
     {
         bot_remember_spawn( bot, ch->in_room );
         /* veteran: yaralıyken dövüşe girme, önce topla */
-        if ( pct( ch->hit, ch->max_hit ) < 70 || ( is_caster( ch ) && pct( ch->mana, ch->max_mana ) < 40 ) )
+        if ( bot_pct( ch->hit, ch->max_hit ) < 70 || ( is_caster( ch ) && bot_pct( ch->mana, ch->max_mana ) < 40 ) )
         {
             bot_start_rest( bot );
             return;
@@ -2246,7 +2241,7 @@ static int task_index( long task )
 /* bu iş bir süre denenmesin */
 static void bot_task_defer( BOT_DATA *bot, long task, int minutes )
 {
-    bot->town_retry[task_index( task )] = bot_pulse + 4 * 60 * minutes;
+    bot->town_retry[task_index( task )] = bot_pulse + BOT_MIN(minutes);
     REMOVE_BIT( bot->town_tasks, task );
 }
 
@@ -2276,12 +2271,12 @@ static void bot_compute_town_tasks( BOT_DATA *bot )
     if ( IS_QUESTOR(ch) && ch->pcdata->questmob == -1 )
         SET_BIT( tasks, BOT_TOWN_QUEST_DONE );
     else if ( !IS_QUESTOR(ch) && ch->pcdata->nextquest == 0 && ch->level >= 5
-           && bot_pulse - bot->last_town_pulse > 4 * 60 * 10 )
+           && bot_pulse - bot->last_town_pulse > BOT_MIN(10) )
         SET_BIT( tasks, BOT_TOWN_QUEST_GET );
     if ( ch->pcdata->questpoints >= 1000
       || ( bot->pk_istekli && ch->pcdata->questpoints >= 100 && ch->pcdata->oyuncu_katli == 0 && ch->level >= 12 ) )
         SET_BIT( tasks, BOT_TOWN_QUEST_BUY );
-    if ( ch->silver >= 1500 && ch->level >= 6 && bot_pulse - bot->last_town_pulse > 4 * 60 * 30 )
+    if ( ch->silver >= 1500 && ch->level >= 6 && bot_pulse - bot->last_town_pulse > BOT_MIN(30) )
         SET_BIT( tasks, BOT_TOWN_UPGRADE );
     for ( i = 0; i < 16; i++ )
         if ( bot_pulse < bot->town_retry[i] )
@@ -2305,7 +2300,7 @@ static bool bot_town_worth_it( BOT_DATA *bot )
         return TRUE;
     if ( IS_SET( t, BOT_TOWN_QUEST_GET | BOT_TOWN_QUEST_BUY | BOT_TOWN_UPGRADE ) )
         return TRUE;
-    if ( t != 0 && bot_pulse - bot->last_town_pulse > 4 * 60 * 40 )
+    if ( t != 0 && bot_pulse - bot->last_town_pulse > BOT_MIN(40) )
         return TRUE;
     return FALSE;
 }
@@ -2564,7 +2559,7 @@ static void bot_town( BOT_DATA *bot )
         {
             bot_task_defer( bot, task, 20 );
             if ( task == BOT_TOWN_PRACTICE || task == BOT_TOWN_TRAIN )
-                bot->practice_block_until = bot_pulse + 4 * 60 * 20;
+                bot->practice_block_until = bot_pulse + BOT_MIN(20);
             return;
         }
         bot->substate  = (int) task;
@@ -2687,14 +2682,14 @@ static void bot_town( BOT_DATA *bot )
         int sn, before = ch->practice;
         if ( !trainer_here( ch, ACT_PRACTICE ) )
         {
-            bot->practice_block_until = bot_pulse + 4 * 60 * 20;
+            bot->practice_block_until = bot_pulse + BOT_MIN(20);
             break;
         }
         if ( ch->practice <= 0 || ( sn = bot_pick_practice( ch ) ) < 0 )
         {
             REMOVE_BIT( bot->town_tasks, BOT_TOWN_PRACTICE );
             if ( ch->practice > 0 )
-                bot->practice_block_until = bot_pulse + 4 * 60 * 30;
+                bot->practice_block_until = bot_pulse + BOT_MIN(30);
             bot->substate = IS_SET( bot->town_tasks, BOT_TOWN_TRAIN ) ? BOT_TOWN_TRAIN : 0;
             bot->town_step = 0;
             return;
@@ -2704,7 +2699,7 @@ static void bot_town( BOT_DATA *bot )
         {
             /* pratik ilerlemiyor: bir süre deneme */
             bot->quest_tries = 0;
-            bot->practice_block_until = bot_pulse + 4 * 60 * 20;
+            bot->practice_block_until = bot_pulse + BOT_MIN(20);
             REMOVE_BIT( bot->town_tasks, BOT_TOWN_PRACTICE );
             bot->substate = 0;
         }
@@ -2719,7 +2714,7 @@ static void bot_town( BOT_DATA *bot )
         int before = ch->train;
         if ( !trainer_here( ch, ACT_PRACTICE | ACT_TRAIN | ACT_GAIN ) )
         {
-            bot->practice_block_until = bot_pulse + 4 * 60 * 20;
+            bot->practice_block_until = bot_pulse + BOT_MIN(20);
             break;
         }
         if ( ch->train <= 0 || bot->town_step > 8 )
@@ -2741,7 +2736,7 @@ static void bot_town( BOT_DATA *bot )
         for ( mob = ch->in_room->people; mob != NULL; mob = mob->next_in_room )
             if ( IS_NPC(mob) && IS_SET( mob->act, ACT_IS_HEALER ) )
                 break;
-        if ( mob == NULL || pct( ch->hit, ch->max_hit ) > 85 || ch->silver < 100 )
+        if ( mob == NULL || bot_pct( ch->hit, ch->max_hit ) > 85 || ch->silver < 100 )
             break;
         if ( ch->max_hit > 200 && ch->silver >= 600 )
             bot_cmd( bot, "iyileştir şifa" );
@@ -2903,14 +2898,14 @@ void bot_after_death( BOT_DATA *bot )
             struct bot_area_mem *mem = bot_area_memory( bot, droom->area, TRUE );
             mem->deaths++;
             mem->last_pulse = bot_pulse;
-            bot_avoid_room( bot, droom, 4 * 60 * 60 * 3 );
+            bot_avoid_room( bot, droom, BOT_HOUR(3) );
         }
     }
     /* beni öldüren yaratık türünden bir süre uzak dur */
     if ( bot->last_opp_vnum > 0 )
     {
         bot->avoid_vnum[bot->avoid_pos]  = bot->last_opp_vnum;
-        bot->avoid_until[bot->avoid_pos] = bot_pulse + 4 * 60 * 60 * 6;
+        bot->avoid_until[bot->avoid_pos] = bot_pulse + BOT_HOUR(6);
         bot->avoid_pos = ( bot->avoid_pos + 1 ) % BOT_AVOID_MAX;
     }
     bot->hunt_area = NULL;
@@ -2992,7 +2987,7 @@ void bot_start_follow( BOT_DATA *bot, CHAR_DATA *leader )
         return;
     bot->leader_id = leader->id;
     bot->follow_since = bot_pulse;
-    bot->follow_until = bot_pulse + number_range( 4 * 60 * 40, 4 * 60 * 90 );
+    bot->follow_until = bot_pulse + number_range( BOT_MIN(40), BOT_MIN(90) );
     bot->leader_last_action = bot_pulse;
     bot->path_len = bot->path_pos = 0;
     bot_set_state( bot, BOT_ST_FOLLOW );
@@ -3023,7 +3018,7 @@ void bot_offer_meeting( BOT_DATA *bot, CHAR_DATA *other )
       || bot->state == BOT_ST_MEET )
         return;
     bot->meet_id = other->id;
-    bot->meet_until = bot_pulse + 4 * 60 * 6;
+    bot->meet_until = bot_pulse + BOT_MIN(6);
     bot->path_len = bot->path_pos = 0;
     bot_set_state( bot, BOT_ST_MEET );
 }
@@ -3097,20 +3092,20 @@ static void bot_following( BOT_DATA *bot )
             bot_attack( bot, leader->fighting );
             return;
         }
-        if ( ch->position < POS_STANDING && leader->position >= POS_STANDING && pct( ch->hit, ch->max_hit ) > 60 )
+        if ( ch->position < POS_STANDING && leader->position >= POS_STANDING && bot_pct( ch->hit, ch->max_hit ) > 60 )
         {
             bot_cmd( bot, "kalk" );
             return;
         }
         if ( leader->position == POS_SLEEPING || leader->position == POS_RESTING )
         {
-            if ( ch->position == POS_STANDING && pct( ch->hit, ch->max_hit ) < 95 )
+            if ( ch->position == POS_STANDING && bot_pct( ch->hit, ch->max_hit ) < 95 )
                 bot_cmd( bot, leader->position == POS_SLEEPING ? "uyu" : "dinlen" );
             return;
         }
         if ( bot_cast_buffs( bot ) )
             return;
-        if ( is_healer_class( ch ) && bot_is_human( leader ) && pct( leader->hit, leader->max_hit ) < 55
+        if ( is_healer_class( ch ) && bot_is_human( leader ) && bot_pct( leader->hit, leader->max_hit ) < 55
           && can_cast_sn( ch, sn_cure_light ) )
         {
             int sn = can_cast_sn( ch, sn_cure_critical ) ? sn_cure_critical
@@ -3120,13 +3115,13 @@ static void bot_following( BOT_DATA *bot )
         }
         if ( bot_eat_drink( bot ) )
             return;
-        if ( ch->position == POS_STANDING && pct( ch->hit, ch->max_hit ) < 40 && ch->fighting == NULL )
+        if ( ch->position == POS_STANDING && bot_pct( ch->hit, ch->max_hit ) < 40 && ch->fighting == NULL )
         {
             bot_cmd( bot, "dinlen" );
             return;
         }
         /* lider uzun süredir hiçbir şey yapmıyorsa kendi yoluna git */
-        if ( bot_pulse - bot->leader_last_action > 4 * 60 * ( bot_is_human( leader ) ? 40 : 15 ) )
+        if ( bot_pulse - bot->leader_last_action > BOT_MIN( bot_is_human( leader ) ? 40 : 15 ) )
         {
             bot_chat_event( bot, BOT_EV_LOGOUT, leader );     /* "ben kesmeye gidiyorum" tarzı */
             bot_stop_follow( bot, TRUE );
@@ -3256,7 +3251,7 @@ void bot_think( BOT_DATA *bot )
     {
         if ( bot->state != BOT_ST_CORPSE && bot->state != BOT_ST_REST && bot->state != BOT_ST_TRAVEL )
             bot_after_death( bot );
-        if ( bot->state == BOT_ST_REST && pct( ch->hit, ch->max_hit ) >= 60 && bot->death_room == 0 )
+        if ( bot->state == BOT_ST_REST && bot_pct( ch->hit, ch->max_hit ) >= 60 && bot->death_room == 0 )
         {
             if ( ch->position < POS_STANDING )
                 bot_cmd( bot, "kalk" );
