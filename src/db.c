@@ -1794,9 +1794,9 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex , AREA_DATA *	pArea)
   mob->silver		= number_range(mob->level*3,mob->level*20);
   mob->hitroll		= hitroll_damroll_hesapla(pMobIndex->level);
   mob->damroll		= hitroll_damroll_hesapla(pMobIndex->level);
-  mob->max_hit		= number_range( yp_tablo[ pMobIndex->level ].min_yp , yp_tablo[ pMobIndex->level ].max_yp );
+  mob->max_hit		= number_range( yp_range( pMobIndex->level )->min_yp , yp_range( pMobIndex->level )->max_yp );
   mob->hit		= mob->max_hit;
-  mob->max_mana		= number_range( yp_tablo[ pMobIndex->level ].min_yp , yp_tablo[ pMobIndex->level ].max_yp );
+  mob->max_mana		= number_range( yp_range( pMobIndex->level )->min_yp , yp_range( pMobIndex->level )->max_yp );
   mob->mana		= mob->max_mana;
   mob->damage[DICE_NUMBER]= damage_dice_0(pMobIndex->level);
   mob->damage[DICE_TYPE]	= damage_dice_1(pMobIndex->level);
