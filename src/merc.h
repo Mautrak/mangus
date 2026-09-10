@@ -2728,6 +2728,23 @@ extern sh_int  gsn_mental_knife;
 				 ((var)->sector_type == SECT_WATER_NOSWIM) )
 #define PERCENT(cur, max)	((max) == 0 ? 0 : ((cur) * 100) / (max))
 
+/* Grup 07: tek yönlü bağlı listeden `node` düğümünü çıkarır; bulunduysa TRUE */
+#define LIST_UNLINK(head, node, field) __extension__ ({ \
+	bool _found = TRUE; \
+	if ((head) == (node)) \
+	    (head) = (node)->field; \
+	else \
+	{ \
+	    __typeof__(head) _prev; \
+	    for (_prev = (head); _prev != NULL && _prev->field != (node); _prev = _prev->field) \
+		; \
+	    if (_prev == NULL) \
+		_found = FALSE; \
+	    else \
+		_prev->field = (node)->field; \
+	} \
+	_found; })
+
 /*
  * Character macros.
  */
@@ -3074,6 +3091,11 @@ void	stop_fighting	( CHAR_DATA *ch, bool fBoth );
 bool    can_kill 	( CHAR_DATA *ch, CHAR_DATA *victim);
 void   gods_protect_msg ( CHAR_DATA *ch, CHAR_DATA *victim);
 CHAR_DATA *  check_guard     (CHAR_DATA *ch, CHAR_DATA *mob);
+/* Grup 07 */
+#define DEATH_PROTECT_SECS	600	/* ölümden sonra saldırıdan korunma süresi (saniye) */
+#define NEWBIE_SAFE_LEVEL	5	/* bu seviyenin altındaki oyuncular korunur */
+bool	pc_is_shielded	( CHAR_DATA *victim );	/* hayalet ya da bağlantısı kopmuş oyuncu */
+bool	pc_recently_died( CHAR_DATA *ch );	/* DEATH_PROTECT_SECS içinde ölmüş oyuncu */
 
 /* handler.c */
 AD  	*affect_find (AFFECT_DATA *paf, int sn);
@@ -3087,7 +3109,6 @@ bool 	check_material	(OBJ_DATA *obj, char *material );
 bool 	is_metal	(OBJ_DATA *obj );
 bool	cabal_ok	( CHAR_DATA *ch, sh_int sn );
 int	liq_lookup	( const char *name);
-int 	material_lookup ( const char *name);
 int	weapon_lookup	( const char *name);
 int	weapon_type	( const char *name);
 const char 	*weapon_name	( int weapon_Type);
@@ -3145,7 +3166,7 @@ int	get_obj_number	( OBJ_DATA *obj );
 int	get_obj_realnumber	( OBJ_DATA *obj );
 int	get_obj_weight	( OBJ_DATA *obj );
 int	get_true_weight	( OBJ_DATA *obj );
-bool	isn_dark_safe	( CHAR_DATA *ch );
+int	isn_dark_safe	( CHAR_DATA *ch );	/* 0 güvenli, 1 büyülü ışık, 2 gün ışığı */
 bool	can_see		( CHAR_DATA *ch, CHAR_DATA *victim );
 bool	can_see_obj	( CHAR_DATA *ch, OBJ_DATA *obj );
 bool	can_drop_obj	( CHAR_DATA *ch, OBJ_DATA *obj );
@@ -3188,6 +3209,14 @@ int	parse_date	( time_t t );
 int	parse_time	( time_t t );
 int	parse_time_spec	( time_t t );
 bool room_has_exit ( ROOM_INDEX_DATA *room );
+/* Grup 07 */
+struct flag_type;
+int	align_index	( CHAR_DATA *ch );	/* 0 iyi, 1 tarafsız, 2 kötü (sunak/çukur/nakil dizini) */
+int	cabal_obj_index	( int vnum );		/* vnum bir kabal eşyasıysa kabal indeksi, değilse 0 */
+int	cabal_room_index( int vnum );		/* vnum bir kabal sunak odasıysa kabal indeksi, değilse 0 */
+const char *flag_bits_name ( char *buf, size_t size, const struct flag_type *table, long bits );
+void	descr_subst	( char *buf, size_t size, const char *tmpl, const char *spec, const char *value );
+bool	obj_zaps_char	( OBJ_DATA *obj, CHAR_DATA *ch );
 
 /* handler_room.c */
 bool	can_see_room	( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoomIndex);
@@ -3216,6 +3245,8 @@ void	obj_to_room	( OBJ_DATA *obj, ROOM_INDEX_DATA *pRoomIndex );
 void	char_from_room	( CHAR_DATA *ch );
 void	char_to_room	( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoomIndex );
 void    room_record     ( char *name, ROOM_INDEX_DATA *room,sh_int door);
+/* Grup 07 */
+bool	is_self_keyword	( const char *arg );	/* "self", "kendimi", "bana" */
 
 
 /* interp.c */

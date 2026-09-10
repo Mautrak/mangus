@@ -56,10 +56,6 @@ bool room_is_private( ROOM_INDEX_DATA *pRoomIndex )
     CHAR_DATA *rch;
     int count;
 
-/*
-    if (pRoomIndex->owner != NULL && pRoomIndex->owner[0] != '\0')
-	return TRUE;
-*/
     count = 0;
     for ( rch = pRoomIndex->people; rch != NULL; rch = rch->next_in_room )
 	count++;
@@ -213,57 +209,18 @@ void affect_remove_room( ROOM_INDEX_DATA *room, AFFECT_DATA *paf )
     where = paf->where;
     vector = paf->bitvector;
 
-    if ( paf == room->affected )
+    if ( !LIST_UNLINK(room->affected, paf, next) )
     {
-	room->affected	= paf->next;
-    }
-    else
-    {
-	AFFECT_DATA *prev;
-
-	for ( prev = room->affected; prev != NULL; prev = prev->next )
-	{
-	    if ( prev->next == paf )
-	    {
-		prev->next = paf->next;
-		break;
-	    }
-	}
-
-	if ( prev == NULL )
-	{
-	    bug( "Affect_remove_room: cannot find paf.", 0 );
-	    return;
-	}
+	bug( "Affect_remove_room: cannot find paf.", 0 );
+	return;
     }
 
     if ( !room->affected )
     {
-     ROOM_INDEX_DATA *prev;
-
-     if (top_affected_room  == room)
-	{
-	 top_affected_room = room->aff_next;
-	}
-     else
-        {
-         for(prev = top_affected_room; prev->aff_next; prev = prev->aff_next )
-	  {
-	    if ( prev->aff_next == room )
-	    {
-		prev->aff_next = room->aff_next;
-		break;
-	    }
-	  }
-	 if ( prev == NULL )
-	  {
+	if ( !LIST_UNLINK(top_affected_room, room, aff_next) )
 	    bug( "Affect_remove_room: cannot find room.", 0 );
-	    return;
-	  }
-        }
-      room->aff_next = NULL;
-
-     }
+	room->aff_next = NULL;
+    }
 
     free_affect(paf);
 
@@ -354,43 +311,41 @@ char *raffect_loc_name( int location )
  */
 char *raffect_bit_name( int vector )
 {
+    static const struct flag_type tbl[] =
+    {
+	{ "shocking",		AFF_ROOM_SHOCKING,	TRUE },
+	{ "lightning_shield",	AFF_ROOM_L_SHIELD,	TRUE },
+	{ "thief_trap",		AFF_ROOM_THIEF_TRAP,	TRUE },
+	{ "curse",		AFF_ROOM_CURSE,		TRUE },
+	{ "poison",		AFF_ROOM_POISON,	TRUE },
+	{ "plague",		AFF_ROOM_PLAGUE,	TRUE },
+	{ "sleep",		AFF_ROOM_SLEEP,		TRUE },
+	{ "slow",		AFF_ROOM_SLOW,		TRUE },
+	{ NULL, 0, FALSE }
+    };
     static char buf[512];
 
-    buf[0] = '\0';
-    if ( vector & AFF_ROOM_SHOCKING  ) strcat( buf, " shocking"        );
-    if ( vector & AFF_ROOM_L_SHIELD  ) strcat( buf, " lightning_shield");
-    if ( vector & AFF_ROOM_THIEF_TRAP) strcat( buf, " thief_trap"      );
-    if ( vector & AFF_ROOM_CURSE     ) strcat( buf, " curse"           );
-    if ( vector & AFF_ROOM_POISON    ) strcat( buf, " poison"          );
-    if ( vector & AFF_ROOM_PLAGUE    ) strcat( buf, " plague"          );
-    if ( vector & AFF_ROOM_SLEEP     ) strcat( buf, " sleep"           );
-    if ( vector & AFF_ROOM_SLOW      ) strcat( buf, " slow"            );
-    return (char *)(( buf[0] != '\0' ) ? buf+1 : "none");
+    return (char *) flag_bits_name( buf, sizeof buf, tbl, vector );
 }
 
 
 bool is_safe_rspell_nom(int level, CHAR_DATA *victim )
 {
-  /* ghosts are safe */
-  if ( !IS_NPC(victim) && IS_SET(victim->act, PLR_GHOST))
+  if ( IS_NPC(victim) )
+    return FALSE;
+
+  /* hayalet, bağlantısı kopmuş */
+  if ( pc_is_shielded(victim) )
     return TRUE;
 
-  /* link dead players who do not have rushing adrenalin are safe */
-  if (!IS_NPC(victim) && ((victim->last_fight_time == -1) ||
-	((current_time - victim->last_fight_time) > FIGHT_DELAY_TIME)) &&
-	victim->desc == NULL)
+  if ( victim->level < NEWBIE_SAFE_LEVEL )
     return TRUE;
 
-  if  ( victim->level < 5  && !IS_NPC(victim) )
+  if ( pc_recently_died(victim) )
     return TRUE;
 
-  if ( !IS_NPC(victim) &&
-      (victim->last_death_time != -1 && current_time - 	victim->last_death_time < 600))
-    return TRUE;
-
-
-  if ( !IS_NPC(victim) &&
-      ((level >= victim->level + 5) || (victim->level >= level + 5)))
+  /* seviye farkı */
+  if ( level >= victim->level + 5 || victim->level >= level + 5 )
     return TRUE;
 
   return FALSE;
@@ -409,6 +364,23 @@ bool is_safe_rspell(int level, CHAR_DATA *victim)
 }
 
 
+/* Oda büyülerinin sn'leri: bir kez çözülür (-2 henüz aranmadı) */
+static int room_spell_sn( const char *name, int *cache )
+{
+    if ( *cache == -2 )
+	*cache = skill_lookup( name );
+    return *cache;
+}
+
+static int sn_lightning_shield = -2;
+static int sn_shocking_trap    = -2;
+
+/* damage() sonrası ch hâlâ bu odada ve hayatta mı? (NPC ölünce serbest bırakılır) */
+static bool still_here( ROOM_INDEX_DATA *room, CHAR_DATA *ch )
+{
+    return IS_VALID(ch) && ch->in_room == room && ch->position != POS_DEAD;
+}
+
 void raffect_to_char( ROOM_INDEX_DATA *room, CHAR_DATA *ch)
  {
   AFFECT_DATA *paf;
@@ -418,7 +390,7 @@ void raffect_to_char( ROOM_INDEX_DATA *room, CHAR_DATA *ch)
      int sn;
      CHAR_DATA *vch;
 
-     if ( (sn = skill_lookup("lightning shield")) == -1 )
+     if ( (sn = room_spell_sn("lightning shield", &sn_lightning_shield)) == -1 )
 	{ bug("Bad sn for lightning shield",0); return; }
 
      for (vch=room->people;vch;vch=vch->next_in_room)
@@ -456,6 +428,8 @@ void raffect_to_char( ROOM_INDEX_DATA *room, CHAR_DATA *ch)
 	   free_string(room->owner);
 	   room->owner = str_dup("");
 	   affect_remove_room( room , paf);
+	   if ( !still_here( room, ch ) )
+	     return;
 	 }
 	}
      }
@@ -465,7 +439,7 @@ void raffect_to_char( ROOM_INDEX_DATA *room, CHAR_DATA *ch)
   {
      int sn;
 
-     if ( (sn = skill_lookup("shocking trap")) == -1 )
+     if ( (sn = room_spell_sn("shocking trap", &sn_shocking_trap)) == -1 )
 	{ bug("Bad sn for shocking shield",0); return; }
 
   send_to_char("Odadaki şok dalgaları seni şokluyor.\n\r",ch);
@@ -475,9 +449,12 @@ void raffect_to_char( ROOM_INDEX_DATA *room, CHAR_DATA *ch)
 
      if (!is_safe_rspell(paf->level,ch))
 	{
+	 /* dt TYPE_HUNGER: dam_message "odadaki tuzak" iletisini bu dt ile seçer */
 	 if ( check_immune(ch, DAM_LIGHTNING) != IS_IMMUNE )
 	 damage( ch,ch,dice(paf->level,4)+12,TYPE_HUNGER,DAM_TRAP_ROOM, TRUE);
 	 affect_remove_room( room , paf);
+	 if ( !still_here( room, ch ) )
+	   return;
 	}
    }
 
@@ -493,6 +470,8 @@ void raffect_to_char( ROOM_INDEX_DATA *room, CHAR_DATA *ch)
 	 if ( check_immune(ch, DAM_PIERCE) != IS_IMMUNE )
 	 damage( ch,ch,dice(paf->level,5)+12,TYPE_HUNGER,DAM_TRAP_ROOM, TRUE);
 	 affect_remove_room( room , paf);
+	 if ( !still_here( room, ch ) )
+	   return;
 	}
    }
 
@@ -509,7 +488,7 @@ void raffect_back_char( ROOM_INDEX_DATA *room, CHAR_DATA *ch)
   {
    int sn;
 
-    if ( (sn = skill_lookup("lightning shield")) == -1 )
+    if ( (sn = room_spell_sn("lightning shield", &sn_lightning_shield)) == -1 )
 	{ bug("Bad sn for lightning shield",0); return; }
     if (is_room_owner(ch,room))
 	{
@@ -527,28 +506,31 @@ void raffect_back_char( ROOM_INDEX_DATA *room, CHAR_DATA *ch)
  */
 char *flag_room_name( int vector )
 {
+    static const struct flag_type tbl[] =
+    {
+	{ "dark",	ROOM_DARK,		TRUE },
+	{ "nomob",	ROOM_NO_MOB,		TRUE },
+	{ "indoors",	ROOM_INDOORS,		TRUE },
+	{ "private",	ROOM_PRIVATE,		TRUE },
+	{ "safe",	ROOM_SAFE,		TRUE },
+	{ "solitary",	ROOM_SOLITARY,		TRUE },
+	{ "petshop",	ROOM_PET_SHOP,		TRUE },
+	{ "norecall",	ROOM_NO_RECALL,		TRUE },
+	{ "imp_only",	ROOM_IMP_ONLY,		TRUE },
+	{ "god_only",	ROOM_GODS_ONLY,		TRUE },
+	{ "heroes",	ROOM_HEROES_ONLY,	TRUE },
+	{ "newbies",	ROOM_NEWBIES_ONLY,	TRUE },
+	{ "law",	ROOM_LAW,		TRUE },
+	{ "nowhere",	ROOM_NOWHERE,		TRUE },
+	{ "bank",	ROOM_BANK,		TRUE },
+	{ "nomagic",	ROOM_NO_MAGIC,		TRUE },
+	{ "nosummon",	ROOM_NOSUMMON,		TRUE },
+	{ "registry",	ROOM_REGISTRY,		TRUE },
+	{ NULL, 0, FALSE }
+    };
     static char buf[512];
 
-    buf[0] = '\0';
-    if ( vector & ROOM_DARK         ) strcat( buf, " dark"         );
-    if ( vector & ROOM_NO_MOB        ) strcat( buf, " nomob"        );
-    if ( vector & ROOM_INDOORS      ) strcat( buf, " indoors"      );
-    if ( vector & ROOM_PRIVATE      ) strcat( buf, " private"      );
-    if ( vector & ROOM_SAFE         ) strcat( buf, " safe"         );
-    if ( vector & ROOM_SOLITARY     ) strcat( buf, " solitary"     );
-    if ( vector & ROOM_PET_SHOP     ) strcat( buf, " petshop"      );
-    if ( vector & ROOM_NO_RECALL    ) strcat( buf, " norecall"     );
-    if ( vector & ROOM_IMP_ONLY     ) strcat( buf, " imp_only"     );
-    if ( vector & ROOM_GODS_ONLY    ) strcat( buf, " god_only"     );
-    if ( vector & ROOM_HEROES_ONLY  ) strcat( buf, " heroes"       );
-    if ( vector & ROOM_NEWBIES_ONLY ) strcat( buf, " newbies"      );
-    if ( vector & ROOM_LAW          ) strcat( buf, " law"          );
-    if ( vector & ROOM_NOWHERE      ) strcat( buf, " nowhere"      );
-    if ( vector & ROOM_BANK         ) strcat( buf, " bank"         );
-    if ( vector & ROOM_NO_MAGIC     ) strcat( buf, " nomagic"      );
-    if ( vector & ROOM_NOSUMMON     ) strcat( buf, " nosummon"     );
-    if ( vector & ROOM_REGISTRY     ) strcat( buf, " registry"     );
-    return (char *)(( buf[0] != '\0' ) ? buf+1 : "none");
+    return (char *) flag_bits_name( buf, sizeof buf, tbl, vector );
 }
 
 bool room_dark( ROOM_INDEX_DATA *pRoomIndex )
@@ -575,28 +557,26 @@ bool room_dark( ROOM_INDEX_DATA *pRoomIndex )
  */
 bool room_is_dark( CHAR_DATA *ch )
 {
-    ROOM_INDEX_DATA * pRoomIndex = ch->in_room;
-
-    if ( IS_VAMPIRE (ch) )
-	{
-         return FALSE;
-	}
-
-    if ( pRoomIndex->light > 0 )
+    if ( IS_VAMPIRE (ch) || ch->in_room == NULL )
 	return FALSE;
 
-    if ( IS_SET(pRoomIndex->room_flags, ROOM_DARK) )
-	return TRUE;
+    return room_dark( ch->in_room );
+}
 
-    if ( pRoomIndex->sector_type == SECT_INSIDE
-    ||   pRoomIndex->sector_type == SECT_CITY )
-	return FALSE;
+/* "self", "kendimi", "bana": karakterin kendisi */
+bool is_self_keyword( const char *arg )
+{
+    return !str_cmp( arg, "self" ) || !str_cmp( arg, "kendimi" ) || !str_cmp( arg, "bana" );
+}
 
-    if ( weather_info.sunlight == SUN_SET
-    	   || weather_info.sunlight == SUN_DARK )
-	return TRUE;
-
-    return FALSE;
+/* looker'ın gördüğü ad: doppelganger etkisindeki karakter (holylight yoksa) kopyanın adıyla görünür */
+static const char *visible_name( CHAR_DATA *looker, CHAR_DATA *rch )
+{
+    if ( rch->doppel != NULL
+    &&   is_affected( rch, gsn_doppelganger )
+    &&   !IS_SET( looker->act, PLR_HOLYLIGHT ) )
+	return rch->doppel->name;
+    return rch->name;
 }
 
 /*
@@ -605,57 +585,30 @@ bool room_is_dark( CHAR_DATA *ch )
 CHAR_DATA *get_char_room( CHAR_DATA *ch, char *argument )
 {
     char arg[MAX_INPUT_LENGTH];
-    CHAR_DATA *rch;
     int number;
-    int count;
-    int ugly;
 
     number = number_argument( argument, arg );
-    count  = 0;
-    ugly   = 0;
-    if ( !str_cmp( arg, "self" ) || !str_cmp( arg, "kendimi" ) || !str_cmp( arg, "bana" ) )
-	   return ch;
-    if ( !str_cmp( arg, "ugly" ) || !str_cmp( arg, "çirkin" ) )
-	   ugly = 1;
+    if ( is_self_keyword( arg ) )
+	return ch;
 
-    for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
-    {
-	if ( !can_see( ch, rch ) )
-	    continue;
-
-	if ( ugly && (count + 1) == number && IS_VAMPIRE(rch) )
-	   return rch;
-
-        if ( (is_affected(rch,gsn_doppelganger)
-              && !IS_SET(ch->act,PLR_HOLYLIGHT))?
-            !is_name(arg,rch->doppel->name):!is_name(arg,rch->name) )
-          continue;
-
-	if ( ++count == number )
-	    return rch;
-    }
-
-    return NULL;
+    return get_char_room2( ch, ch->in_room, arg, &number );
 }
 
 
 
 /*
- * Find a char in the room.
- * Chronos uses in act_move.c
+ * Find a char in the room; `*number` odada bulunamayan sayıyı geri bildirir
+ * (bulunan kadar düşülür). Chronos uses in act_move.c
  */
 CHAR_DATA *get_char_room2( CHAR_DATA *ch, ROOM_INDEX_DATA *room, char *argument, int *number )
 {
     CHAR_DATA *rch;
     int count;
-    int ugly;
+    bool ugly;
 
     if (room == NULL ) return NULL;
     count  = 0;
-    ugly   = 0;
-
-    if ( !str_cmp( argument, "ugly" ) )
-	ugly = 1;
+    ugly   = !str_cmp( argument, "ugly" ) || !str_cmp( argument, "çirkin" );
 
     for ( rch = room->people; rch != NULL; rch = rch->next_in_room )
     {
@@ -665,10 +618,8 @@ CHAR_DATA *get_char_room2( CHAR_DATA *ch, ROOM_INDEX_DATA *room, char *argument,
 	if ( ugly && (count + 1) == *number && IS_VAMPIRE(rch) )
 	   return rch;
 
-        if ( (is_affected(rch,gsn_doppelganger)
-              && !IS_SET(ch->act,PLR_HOLYLIGHT))?
-	!is_name(argument,rch->doppel->name):!is_name(argument,rch->name) )
-          continue;
+	if ( !is_name( argument, (char *) visible_name( ch, rch ) ) )
+	    continue;
 
 	if ( ++count == *number )
 	    return rch;
@@ -696,28 +647,10 @@ void obj_from_room( OBJ_DATA *obj )
 	if (ch->on == obj)
 	    ch->on = NULL;
 
-    if ( obj == in_room->contents )
+    if ( !LIST_UNLINK(in_room->contents, obj, next_content) )
     {
-	in_room->contents = obj->next_content;
-    }
-    else
-    {
-	OBJ_DATA *prev;
-
-	for ( prev = in_room->contents; prev; prev = prev->next_content )
-	{
-	    if ( prev->next_content == obj )
-	    {
-		prev->next_content = obj->next_content;
-		break;
-	    }
-	}
-
-	if ( prev == NULL )
-	{
-	    bug( "Obj_from_room: obj not found.", 0 );
-	    return;
-	}
+	bug( "Obj_from_room: obj not found.", 0 );
+	return;
     }
 
     obj->in_room      = NULL;
@@ -732,8 +665,6 @@ void obj_from_room( OBJ_DATA *obj )
  */
 void obj_to_room( OBJ_DATA *obj, ROOM_INDEX_DATA *pRoomIndex )
 {
-    int i;
-
     obj->next_content		= pRoomIndex->contents;
     pRoomIndex->contents	= obj;
     obj->in_room		= pRoomIndex;
@@ -748,32 +679,57 @@ void obj_to_room( OBJ_DATA *obj, ROOM_INDEX_DATA *pRoomIndex )
 	  obj->water_float = floating_time( obj );
 	  }
 
-    if (obj->pIndexData->vnum < 600)
+    /* kabal eşyası bir kabal sunağına bırakıldı: artık çürümez */
+    if ( cabal_obj_index(obj->pIndexData->vnum) > 0
+    &&   cabal_room_index(pRoomIndex->vnum) > 0 )
     {
-      for (i=1;i < MAX_CABAL; i++)
-	if (cabal_table[i].obj_vnum == obj->pIndexData->vnum)
-	   break;
-
-      if (i < MAX_CABAL)
-      {
-        for (i=1;i < MAX_CABAL; i++)
-	  if (cabal_table[i].room_vnum == pRoomIndex->vnum)
-	    break;
-
-        if (i < MAX_CABAL)
-        {
-	  obj->timer = -1;
-	  if (pRoomIndex->people)
-	  {
-      act("$p saydamlığını yitirerek katılaşıyor.",
+	obj->timer = -1;
+	if (pRoomIndex->people)
+	{
+	    act("$p saydamlığını yitirerek katılaşıyor.",
 		pRoomIndex->people, obj, NULL, TO_CHAR);
 	    act("$p saydamlığını yitirerek katılaşıyor.",
 		pRoomIndex->people, obj, NULL, TO_ROOM);
-	  }
-        }
-      }
+	}
     }
     return;
+}
+
+/* Vebalı karakter odaya girince bulaştırır (bir kademe zayıflamış olarak) */
+static void plague_spread( CHAR_DATA *ch )
+{
+    AFFECT_DATA *af, plague;
+    CHAR_DATA *vch;
+
+    af = affect_find( ch->affected, gsn_plague );
+    if (af == NULL)
+    {
+	REMOVE_BIT(ch->affected_by,AFF_PLAGUE);
+	return;
+    }
+
+    if (af->level == 1)
+	return;
+
+    plague.where	= TO_AFFECTS;
+    plague.type 	= gsn_plague;
+    plague.level 	= af->level - 1;
+    plague.duration 	= number_range(1,2 * plague.level);
+    plague.location	= APPLY_STR;
+    plague.modifier 	= -5;
+    plague.bitvector 	= AFF_PLAGUE;
+
+    for ( vch = ch->in_room->people; vch != NULL; vch = vch->next_in_room)
+    {
+	if (!saves_spell(plague.level - 2,vch,DAM_DISEASE)
+	&&  !IS_IMMORTAL(vch) &&
+	    !IS_AFFECTED(vch,AFF_PLAGUE) && number_range(0,63) == 0)
+	{
+	    send_to_char("Ateşinin yükseldiğini hissediyorsun.\n\r",vch);
+	    act("$n çok hasta görünüyor.",vch,NULL,NULL,TO_ROOM);
+	    affect_join(vch,&plague);
+	}
+    }
 }
 
 /*
@@ -781,8 +737,6 @@ void obj_to_room( OBJ_DATA *obj, ROOM_INDEX_DATA *pRoomIndex )
  */
 void char_to_room( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoomIndex )
 {
-    OBJ_DATA *obj;
-
     if ( pRoomIndex == NULL )
     {
 	ROOM_INDEX_DATA *room;
@@ -809,54 +763,11 @@ void char_to_room( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoomIndex )
 	++ch->in_room->area->nplayer;
     }
 
-    if ( ( obj = get_light_char( ch ) ) != NULL )
-/*
-    &&   obj->item_type == ITEM_LIGHT
-    &&   obj->value[2] != 0 )
-*/
+    if ( get_light_char( ch ) != NULL )
 	++ch->in_room->light;
 
-    while (IS_AFFECTED(ch,AFF_PLAGUE))
-    {
-        AFFECT_DATA *af, plague;
-        CHAR_DATA *vch;
-
-        for ( af = ch->affected; af != NULL; af = af->next )
-        {
-            if (af->type == gsn_plague)
-                break;
-        }
-
-        if (af == NULL)
-        {
-            REMOVE_BIT(ch->affected_by,AFF_PLAGUE);
-            break;
-        }
-
-        if (af->level == 1)
-            break;
-
-	plague.where		= TO_AFFECTS;
-        plague.type 		= gsn_plague;
-        plague.level 		= af->level - 1;
-        plague.duration 	= number_range(1,2 * plague.level);
-        plague.location		= APPLY_STR;
-        plague.modifier 	= -5;
-        plague.bitvector 	= AFF_PLAGUE;
-
-        for ( vch = ch->in_room->people; vch != NULL; vch = vch->next_in_room)
-        {
-            if (!saves_spell(plague.level - 2,vch,DAM_DISEASE)
-	    &&  !IS_IMMORTAL(vch) &&
-            	!IS_AFFECTED(vch,AFF_PLAGUE) && number_range(0,63) == 0)
-            {
-              send_to_char("Ateşinin yükseldiğini hissediyorsun.\n\r",vch);
-            	act("$n çok hasta görünüyor.",vch,NULL,NULL,TO_ROOM);
-            	affect_join(vch,&plague);
-            }
-        }
-	break;
-    }
+    if (IS_AFFECTED(ch,AFF_PLAGUE))
+	plague_spread( ch );
 
     if ( ch->in_room->affected_by )
 	{
@@ -873,7 +784,6 @@ void char_to_room( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoomIndex )
  */
 void char_from_room( CHAR_DATA *ch )
 {
-    OBJ_DATA *obj;
     ROOM_INDEX_DATA *prev_room = ch->in_room;
 
     if ( ch->in_room == NULL )
@@ -885,34 +795,12 @@ void char_from_room( CHAR_DATA *ch )
     if ( !IS_NPC(ch) )
 	--ch->in_room->area->nplayer;
 
-    if ( ( obj = get_light_char( ch ) ) != NULL
-/*
-    &&   obj->item_type == ITEM_LIGHT
-    &&   obj->value[2] != 0
-*/
+    if ( get_light_char( ch ) != NULL
     &&   ch->in_room->light > 0 )
 	--ch->in_room->light;
 
-    if ( ch == ch->in_room->people )
-    {
-	ch->in_room->people = ch->next_in_room;
-    }
-    else
-    {
-	CHAR_DATA *prev;
-
-	for ( prev = ch->in_room->people; prev; prev = prev->next_in_room )
-	{
-	    if ( prev->next_in_room == ch )
-	    {
-		prev->next_in_room = ch->next_in_room;
-		break;
-	    }
-	}
-
-	if ( prev == NULL )
-	    bug( "Char_from_room: ch not found.", 0 );
-    }
+    if ( !LIST_UNLINK(ch->in_room->people, ch, next_in_room) )
+	bug( "Char_from_room: ch not found.", 0 );
 
     ch->in_room      = NULL;
     ch->next_in_room = NULL;
@@ -942,19 +830,27 @@ void char_from_room( CHAR_DATA *ch )
  * Else use the oldest one.
  */
 
+#define ROOM_HISTORY_MAX 5
+
 void room_record(char *name,ROOM_INDEX_DATA *room,sh_int door)
 {
-  ROOM_HISTORY_DATA *rh;
+  ROOM_HISTORY_DATA *rh, *last = NULL;
   int i=0;
 
-  for (rh = room->history; i < 5 && rh != NULL; i++,rh = rh->next);
+  for (rh = room->history; i < ROOM_HISTORY_MAX && rh != NULL; i++, rh = rh->next)
+    last = rh;
 
-  if (i < 5)
+  if (i < ROOM_HISTORY_MAX)
     rh = (ROOM_HISTORY_DATA *)alloc_perm(sizeof(ROOM_HISTORY_DATA));
   else
   {
-    rh = room->history->next->next->next->next;
-    room->history->next->next->next->next = NULL;
+    /* en eski (sondaki) kayıt yeniden kullanılır */
+    ROOM_HISTORY_DATA *prev;
+
+    for (prev = room->history; prev->next != last; prev = prev->next)
+      ;
+    rh = last;
+    prev->next = NULL;
     free_string(rh->name);
   }
 

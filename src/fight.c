@@ -1840,39 +1840,68 @@ bool is_safe(CHAR_DATA *ch, CHAR_DATA *victim)
 
 
 
+/* Yeni ölmüş oyuncu (DEATH_PROTECT_SECS içinde) */
+bool pc_recently_died(CHAR_DATA *ch)
+{
+  return !IS_NPC(ch) && ch->last_death_time != -1
+      && current_time - ch->last_death_time < DEATH_PROTECT_SECS;
+}
+
+/*
+ * Hayalet ve bağlantısı kopmuş (adrenalini inmiş, bot değil) oyuncular
+ * her türlü saldırı ve oda büyüsünden korunur.
+ */
+bool pc_is_shielded(CHAR_DATA *victim)
+{
+  if (IS_NPC(victim))
+    return FALSE;
+
+  if (IS_SET(victim->act, PLR_GHOST))
+    return TRUE;
+
+  /* link dead players whose adrenalin is not gushing are safe */
+  return (victim->last_fight_time == -1
+	  || current_time - victim->last_fight_time > FIGHT_DELAY_TIME)
+      && victim->desc == NULL && !IS_BOT(victim);
+}
+
+/*
+ * PK seviye aralığı: iki oyuncu birbirine en az 3 (yüksek seviyede
+ * seviye/18) seviye uzaksa dövüşemez.
+ */
+static bool pk_level_apart(int a, int b)
+{
+  int gap = UMAX(3, a / 18);
+
+  return a >= b + gap || a <= b - gap;
+}
+
 bool is_safe_nomessage(CHAR_DATA *ch, CHAR_DATA *victim )
 {
   if (victim->fighting == ch || ch==victim)
     return FALSE;
 
   /* Ghosts are safe */
-  if ((!IS_NPC(victim) && IS_SET(victim->act, PLR_GHOST)) ||
-      (!IS_NPC(ch) && IS_SET(ch->act, PLR_GHOST)))
+  if (!IS_NPC(ch) && IS_SET(ch->act, PLR_GHOST))
     return TRUE;
 
-  /* link dead players whose adrenalin is not gushing are safe */
-  if (!IS_NPC(victim) && ((victim->last_fight_time == -1) ||
-	((current_time - victim->last_fight_time) > FIGHT_DELAY_TIME)) &&
-	victim->desc == NULL && !IS_BOT(victim))
+  /* ghosts, link dead players */
+  if (pc_is_shielded(victim))
     return TRUE;
 
-     if  ((!IS_NPC(ch) &&  !IS_NPC(victim) && victim->level < 5 ) ||
-         ( !IS_NPC(ch) &&  !IS_NPC(victim) && ch->level < 5 ))
-  return TRUE;
+  if (!IS_NPC(ch) && !IS_NPC(victim)
+      && (victim->level < NEWBIE_SAFE_LEVEL || ch->level < NEWBIE_SAFE_LEVEL))
+    return TRUE;
 
   /* newly death staff */
-  if (!IS_IMMORTAL(ch) && !IS_NPC(victim) &&
-      ((ch->last_death_time != -1 && current_time - ch->last_death_time < 600 )
-      || (victim->last_death_time != -1 &&
-            current_time - victim->last_death_time < 600)) )
+  if (!IS_IMMORTAL(ch) && !IS_NPC(victim)
+      && (pc_recently_died(ch) || pc_recently_died(victim)))
     return TRUE;
 
   /* level adjustement */
-  if ( ch != victim && !IS_IMMORTAL(ch) && !IS_NPC(ch) && !IS_NPC(victim) &&
-  	( ch->level >= (victim->level + UMAX(3,(int)(ch->level/18)) )
-	  ||	 ch->level <= (victim->level - UMAX(3,(int)(ch->level/18))) )&&
-  	( victim->level >= (ch->level + UMAX(3,(int)(victim->level/18)) )
-		|| victim->level <= (ch->level - UMAX(3,(int)(victim->level/18))) ))
+  if ( ch != victim && !IS_IMMORTAL(ch) && !IS_NPC(ch) && !IS_NPC(victim)
+       && pk_level_apart(ch->level, victim->level)
+       && pk_level_apart(victim->level, ch->level) )
     return TRUE;
 	
 	// oyuncu katline katilmak istemeyen oyunculari haric tutalim
