@@ -429,5 +429,8 @@ void    bot_style_ch        ( BOT_DATA *bot, const char *in, char *out, size_t s
 void    bot_fill            ( BOT_DATA *bot, const char *tmpl, CHAR_DATA *other, char *out, size_t size );
 void    bot_fill_ch         ( BOT_DATA *bot, const char *tmpl, CHAR_DATA *other, char *out, size_t size, bool ic );
 void    bot_talk            ( BOT_DATA *bot, int channel, CHAR_DATA *to, const char *text );
+/* Grup 08 */
+void    bot_lower_ascii     ( char *s );
+CHAR_DATA *bot_human_immortal( void );
 
 #endif /* BOT_H */
