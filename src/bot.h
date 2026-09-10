@@ -21,6 +21,49 @@
 #define BOT_SEENPC_MAX      8
 #define BOT_PK_AREAS      4
 
+/* zaman: bot_pulse saniyede BOT_PULSE_SEC kez artar */
+#define BOT_PULSE_SEC     4
+#define BOT_SEC(n)        ( BOT_PULSE_SEC * (n) )
+#define BOT_MIN(n)        ( BOT_SEC(60) * (n) )
+#define BOT_HOUR(n)       ( BOT_MIN(60) * (n) )
+
+/*
+ * Veteran kuralları (bkz. CLAUDE.md "Botlar"): yp/mana eşikleri yüzde,
+ * kaçınma süreleri pulse cinsindendir.
+ */
+#define BOT_HP_FIGHT        70    /* bu yp altında dövüşe/PK'ya/baskına girilmez */
+#define BOT_MANA_FIGHT      40    /* büyücü bu mana altında dövüşe girmez */
+#define BOT_HP_REST         60    /* bu yp altında dinlenmeye gidilir */
+#define BOT_HP_RESTED       92    /* dinlenme bu yp'ye dek sürer */
+#define BOT_HP_FLEE         32    /* kaçış eşiği (savaşçı sınıflar) */
+#define BOT_HP_FLEE_CASTER  40    /* kaçış eşiği (büyücü sınıflar) */
+#define BOT_HP_LOSING       55    /* rakip sağlamken bu yp altında erken çıkış */
+#define BOT_HP_PK_MIN       50    /* PK/baskın bu yp altında sürdürülmez */
+#define BOT_HP_RAID_QUIT    35    /* baskından geri çekilme */
+#define BOT_HP_IDLE_PK      85    /* boştayken PK/baskın planlaması için asgari yp */
+#define BOT_AVOID_AREA      BOT_HOUR(3)   /* ölünen bölge (tek ölüm) */
+#define BOT_AVOID_AREA_MULTI BOT_HOUR(12) /* ölünen bölge (2+ ölüm) */
+#define BOT_AVOID_MOB       BOT_HOUR(6)   /* öldüren yaratık türü */
+#define BOT_AVOID_ROOM      BOT_HOUR(3)   /* ölünen oda */
+#define BOT_AVOID_SCOUT     BOT_MIN(20)   /* yolda görülen güçlü saldırganın odası */
+#define BOT_RAID_FAIL_AVOID BOT_HOUR(12)  /* baskında ölüm: hedef kabal */
+#define BOT_REST_MAX        BOT_MIN(14)   /* dinlenme en çok */
+#define BOT_TRAVEL_MAX      BOT_MIN(12)   /* bir yolculuk en çok */
+
+/* yüzde ve rastgele havuz seçimi (tüm bot dosyalarında ortak) */
+#define BOT_PN(a)         ( (int) ( sizeof(a) / sizeof(a[0]) ) )
+#define BOT_PICK(a)       bot_pick( (a), BOT_PN(a) )
+
+static inline int bot_pct( int cur, int max )
+{
+    return max <= 0 ? 100 : cur * 100 / max;
+}
+
+static inline const char *bot_pick( const char **pool, int n )
+{
+    return pool[number_range( 0, n - 1 )];
+}
+
 /* durumlar */
 #define BOT_ST_IDLE       0
 #define BOT_ST_TRAVEL     1
@@ -89,6 +132,32 @@
 #define BOT_TOWN_QUEST_BUY  (K)
 #define BOT_TOWN_FOUNTAIN   (L)
 #define BOT_TOWN_UPGRADE    (M)
+
+/*
+ * Oda grafiğinde genişlik öncelikli gezinti (tek çekirdek: yol bulma, yakın oda
+ * taraması, avcı yaratık takibi ve tanı çıktısı). Bkz. bot_bfs().
+ */
+typedef bool BOT_BFS_VISIT ( ROOM_INDEX_DATA *room, int dist, void *ctx );
+typedef void BOT_BFS_REJECT( ROOM_INDEX_DATA *room, int dir, ROOM_INDEX_DATA *next,
+                             const char *why, void *ctx );
+
+struct bot_bfs
+{
+    ROOM_INDEX_DATA *to;          /* hedef oda; NULL ise gezinti */
+    int         max_depth;        /* 0: sınırsız */
+    int         max_rooms;        /* 0: sınırsız (kuyruğa alınan oda sayısı) */
+    bool        same_area;        /* başlangıç bölgesinin dışına açılma */
+    bool        allow_cabal;      /* bot_room_passable: kabal bölgesine gir */
+    bool        raw;              /* yaratık takibi: geçilebilirlik/kilit kuralı yok */
+    bool        block_closed;     /* raw: kapalı kapıdan geçme */
+    BOT_BFS_VISIT  *visit;        /* her oda için (başlangıç dahil); FALSE: dur */
+    void *      visit_ctx;
+    BOT_BFS_REJECT *reject;       /* reddedilen kenar (tanı) */
+    void *      reject_ctx;
+    /* sonuç */
+    int         visited;          /* gezilen oda sayısı */
+    int         first_dir;        /* hedefe ilk adım (-1: yok) */
+};
 
 struct bot_area_mem
 {
@@ -285,13 +354,15 @@ int     bot_online_count    ( void );
 int     bot_who_collect     ( CHAR_DATA **dch, CHAR_DATA **wch, int max );
 BOT_DATA *bot_of            ( CHAR_DATA *ch );
 BOT_DATA *bot_find          ( const char *name );
-void    bot_cmd             ( BOT_DATA *bot, const char *fmt, ... );
-void    bot_log             ( BOT_DATA *bot, const char *fmt, ... );
+void    bot_cmd             ( BOT_DATA *bot, const char *fmt, ... ) __attribute__((format(printf,2,3)));
+void    bot_log             ( BOT_DATA *bot, const char *fmt, ... ) __attribute__((format(printf,2,3)));
 void    bot_set_state       ( BOT_DATA *bot, int state );
 const char *bot_state_name  ( int state );
 void    bot_queue_reply     ( BOT_DATA *bot, const char *to, int channel, int delay, const char *text );
 int     bot_find_path       ( CHAR_DATA *ch, ROOM_INDEX_DATA *from, ROOM_INDEX_DATA *to,
                               sh_int *dirs, int max, bool allow_cabal );
+int     bot_bfs             ( CHAR_DATA *ch, ROOM_INDEX_DATA *from, struct bot_bfs *o,
+                              sh_int *dirs, int max );
 bool    bot_room_passable   ( CHAR_DATA *ch, ROOM_INDEX_DATA *room, bool allow_cabal );
 bool    bot_exit_back       ( ROOM_INDEX_DATA *next, ROOM_INDEX_DATA *room );
 bool    bot_set_travel      ( BOT_DATA *bot, int vnum, int after );
@@ -358,5 +429,8 @@ void    bot_style_ch        ( BOT_DATA *bot, const char *in, char *out, size_t s
 void    bot_fill            ( BOT_DATA *bot, const char *tmpl, CHAR_DATA *other, char *out, size_t size );
 void    bot_fill_ch         ( BOT_DATA *bot, const char *tmpl, CHAR_DATA *other, char *out, size_t size, bool ic );
 void    bot_talk            ( BOT_DATA *bot, int channel, CHAR_DATA *to, const char *text );
+/* Grup 08 */
+void    bot_lower_ascii     ( char *s );
+CHAR_DATA *bot_human_immortal( void );
 
 #endif /* BOT_H */

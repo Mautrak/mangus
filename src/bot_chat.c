@@ -19,7 +19,6 @@ extern AUCTION_DATA *auction;
  * söz dağarcığı
  * ------------------------------------------------------------------ */
 #define POOL(name) static const char *name[] =
-#define PN(a) ( (int) ( sizeof(a) / sizeof(a[0]) ) )
 
 /* =====================================================================
  * ROL İÇİ (söyle / haykır / duygu): diyarın diliyle, oyun dışı sözcük yok
@@ -272,7 +271,8 @@ static void transliterate( const char *in, char *out, size_t size )
     out[o] = '\0';
 }
 
-static void lower_ascii( char *s )
+/* yalnızca ASCII harfleri küçültür (çok baytlı UTF-8 dokunulmaz) */
+void bot_lower_ascii( char *s )
 {
     for ( ; *s != '\0'; s++ )
         if ( (unsigned char) *s < 128 )
@@ -293,14 +293,14 @@ void bot_style( BOT_DATA *bot, const char *in, char *out, size_t size )
 /* ic: rol içi kanal (söyle/haykır) - oyun dışı kısaltma ve surat eklenmez */
 void bot_style_ch( BOT_DATA *bot, const char *in, char *out, size_t size, bool ic )
 {
-    char tmp[MAX_STRING_LENGTH];
+    char tmp[MAX_INPUT_LENGTH];        /* sonuç bir komut satırı olur */
 
     if ( !bot->turkce )
         transliterate( in, tmp, sizeof(tmp) );
     else
         snprintf( tmp, sizeof(tmp), "%s", in );
     if ( bot->kucuk_harf && !ic )
-        lower_ascii( tmp );
+        bot_lower_ascii( tmp );
 
     if ( ic )
     {
@@ -309,13 +309,13 @@ void bot_style_ch( BOT_DATA *bot, const char *in, char *out, size_t size, bool i
             size_t l = strlen( tmp );
             if ( l > 0 && tmp[l - 1] == '.' )
                 tmp[l - 1] = '\0';
-            strncat( tmp, ic_agresif_tail[number_range( 0, PN(ic_agresif_tail) - 1 )], sizeof(tmp) - strlen( tmp ) - 1 );
+            strncat( tmp, ic_agresif_tail[number_range( 0, BOT_PN(ic_agresif_tail) - 1 )], sizeof(tmp) - strlen( tmp ) - 1 );
         }
     }
     else if ( bot->kisilik == BOT_K_AGRESIF && number_percent() < 35 )
-        strncat( tmp, agresif_tail[number_range( 0, PN(agresif_tail) - 1 )], sizeof(tmp) - strlen( tmp ) - 1 );
+        strncat( tmp, agresif_tail[number_range( 0, BOT_PN(agresif_tail) - 1 )], sizeof(tmp) - strlen( tmp ) - 1 );
     else if ( bot->kisilik == BOT_K_ESPRILI && number_percent() < 35 )
-        strncat( tmp, esprili_tail[number_range( 0, PN(esprili_tail) - 1 )], sizeof(tmp) - strlen( tmp ) - 1 );
+        strncat( tmp, esprili_tail[number_range( 0, BOT_PN(esprili_tail) - 1 )], sizeof(tmp) - strlen( tmp ) - 1 );
     else if ( bot->kisilik == BOT_K_GEVEZE && number_percent() < 20 )
         strncat( tmp, " :)", sizeof(tmp) - strlen( tmp ) - 1 );
 
@@ -328,45 +328,63 @@ void bot_fill( BOT_DATA *bot, const char *tmpl, CHAR_DATA *other, char *out, siz
     bot_fill_ch( bot, tmpl, other, out, size, FALSE );
 }
 
-void bot_fill_ch( BOT_DATA *bot, const char *tmpl, CHAR_DATA *other, char *out, size_t size, bool ic )
+/* sınırlı ekleme: buf+*o'ya val'i sığdığı kadar yazar */
+static void fill_append( char *buf, size_t size, size_t *o, const char *val )
+{
+    size_t l = strlen( val );
+
+    if ( *o >= size - 1 )
+        return;
+    if ( l > size - 1 - *o )
+        l = size - 1 - *o;
+    memcpy( buf + *o, val, l );
+    *o += l;
+    buf[*o] = '\0';
+}
+
+/* {anahtar} değeri; sayılar num'a yazılır. Bilinmeyen anahtar: NULL */
+static const char *fill_value( BOT_DATA *bot, const char *key, size_t klen, CHAR_DATA *other,
+                               char *num, size_t nsize )
 {
     CHAR_DATA *ch = bot->ch;
-    char buf[MAX_STRING_LENGTH];
+#define KEY(k) ( klen == sizeof(k) - 1 && !strncmp( key, k, klen ) )
+    if ( KEY("isim") )   return ch != NULL ? ch->name : bot->name;
+    if ( KEY("hedef") )  return other != NULL ? ( IS_NPC(other) ? other->short_descr : other->name ) : "dostum";
+    if ( KEY("bolge") )  return bot_area_name( bot );
+    if ( KEY("sinif") )  return class_table[bot->iclass].name[1];
+    if ( KEY("mob") )    return bot->last_mob[0] != '\0' ? bot->last_mob : "bir yaratık";
+    if ( KEY("esya") )   return bot->last_item[0] != '\0' ? bot->last_item : "bir şey";
+    if ( KEY("kabal") )  return ch != NULL && ch->cabal != CABAL_NONE ? cabal_table[ch->cabal].long_name : "kabal";
+    if ( KEY("seviye") ) { snprintf( num, nsize, "%d", ch != NULL ? ch->level : 1 ); return num; }
+    if ( KEY("gp") )     { snprintf( num, nsize, "%d", ch != NULL ? ch->pcdata->questpoints : 0 ); return num; }
+    if ( KEY("yp") )     { snprintf( num, nsize, "%d", ch != NULL ? bot_pct( ch->hit, ch->max_hit ) : 100 ); return num; }
+#undef KEY
+    return NULL;
+}
+
+void bot_fill_ch( BOT_DATA *bot, const char *tmpl, CHAR_DATA *other, char *out, size_t size, bool ic )
+{
+    char buf[MAX_INPUT_LENGTH];
     size_t o = 0;
     const char *p = tmpl;
 
     buf[0] = '\0';
-    while ( *p != '\0' && o + 80 < sizeof(buf) )
+    while ( *p != '\0' && o < sizeof(buf) - 1 )
     {
         if ( *p == '{' )
         {
             const char *end = strchr( p, '}' );
-            const char *val = NULL;
             char num[32];
+            const char *val;
 
-            if ( end != NULL )
+            if ( end != NULL && ( val = fill_value( bot, p + 1, (size_t) ( end - p - 1 ), other, num, sizeof(num) ) ) != NULL )
             {
-                size_t klen = (size_t) ( end - p - 1 );
-                if ( klen == 4 && !strncmp( p + 1, "isim", 4 ) )       val = ch != NULL ? ch->name : bot->name;
-                else if ( klen == 5 && !strncmp( p + 1, "hedef", 5 ) ) val = other != NULL ? ( IS_NPC(other) ? other->short_descr : other->name ) : "dostum";
-                else if ( klen == 5 && !strncmp( p + 1, "bolge", 5 ) ) val = bot_area_name( bot );
-                else if ( klen == 6 && !strncmp( p + 1, "seviye", 6 ) ) { snprintf( num, sizeof(num), "%d", ch != NULL ? ch->level : 1 ); val = num; }
-                else if ( klen == 5 && !strncmp( p + 1, "sinif", 5 ) ) val = class_table[bot->iclass].name[1];
-                else if ( klen == 3 && !strncmp( p + 1, "mob", 3 ) )   val = bot->last_mob[0] != '\0' ? bot->last_mob : "bir yaratık";
-                else if ( klen == 4 && !strncmp( p + 1, "esya", 4 ) )  val = bot->last_item[0] != '\0' ? bot->last_item : "bir şey";
-                else if ( klen == 5 && !strncmp( p + 1, "kabal", 5 ) ) val = ch != NULL && ch->cabal != CABAL_NONE ? cabal_table[ch->cabal].long_name : "kabal";
-                else if ( klen == 2 && !strncmp( p + 1, "gp", 2 ) )    { snprintf( num, sizeof(num), "%d", ch != NULL ? ch->pcdata->questpoints : 0 ); val = num; }
-                else if ( klen == 2 && !strncmp( p + 1, "yp", 2 ) )    { snprintf( num, sizeof(num), "%d", ch != NULL && ch->max_hit > 0 ? ch->hit * 100 / ch->max_hit : 100 ); val = num; }
-                if ( val != NULL )
-                {
-                    o += (size_t) snprintf( buf + o, sizeof(buf) - o, "%s", val );
-                    p = end + 1;
-                    continue;
-                }
+                fill_append( buf, sizeof(buf), &o, val );
+                p = end + 1;
+                continue;
             }
         }
         buf[o++] = *p++;
-        buf[o] = '\0';
     }
     buf[o] = '\0';
     bot_style_ch( bot, buf, out, size, ic );
@@ -404,7 +422,7 @@ void bot_talk( BOT_DATA *bot, int channel, CHAR_DATA *to, const char *text )
         bot_cmd( bot, "kd %s %s", to->name, text );
         break;
     case BOT_CH_KDG:
-        if ( bot_pulse - last_kdg_pulse < 4 * 45 )
+        if ( bot_pulse - last_kdg_pulse < BOT_SEC(45) )
             return;
         last_kdg_pulse = bot_pulse;
         bot_cmd( bot, "kdg %s", text );
@@ -423,31 +441,21 @@ void bot_talk( BOT_DATA *bot, int channel, CHAR_DATA *to, const char *text )
     }
 }
 
-static const char *pick( const char **pool, int n )
-{
-    return pool[number_range( 0, n - 1 )];
-}
-
 static void say_later( BOT_DATA *bot, int channel, CHAR_DATA *to, const char *tmpl, int delay )
 {
-    char out[MAX_STRING_LENGTH];
+    char out[MAX_INPUT_LENGTH];
 
     bot_fill_ch( bot, tmpl, to, out, sizeof(out), channel_ic( channel ) );
     bot_queue_reply( bot, to != NULL ? to->name : "", channel, delay, out );
     /* odada birine cevap verecekse konuşmak için durur (yürüyüp gitmez) */
     if ( ( channel == BOT_CH_SAY || channel == BOT_CH_SOCIAL || channel == BOT_CH_EMOTE )
       && to != NULL && bot->ch != NULL && to->in_room == bot->ch->in_room && bot_is_human( to ) )
-        bot->hold_until = UMAX( bot->hold_until, bot_pulse + delay * 4 + 12 );
+        bot->hold_until = UMAX( bot->hold_until, bot_pulse + BOT_SEC(delay) + 12 );
 }
 
 /* ---------------------------------------------------------------------
  * anlama
  * ------------------------------------------------------------------ */
-static bool has_word( const char *text, const char *word )
-{
-    return strstr( text, word ) != NULL;
-}
-
 #define INTENT_NONE     0
 #define INTENT_GREET    1
 #define INTENT_HOW      2
@@ -465,67 +473,59 @@ static bool has_word( const char *text, const char *word )
 #define INTENT_QUESTION 14
 #define INTENT_CABAL    15
 
+/*
+ * Niyet tablosu: sıra önemlidir (ilk eşleşen kazanır). Sözcükler ASCII'ye
+ * indirgenmiş, küçük harfli ve iki yanı boşlukla çevrili metinde aranır.
+ * 'need' verilmişse o sözcük de geçmelidir.
+ */
+struct intent_words
+{
+    int         intent;
+    const char *need;
+    const char *words[10];
+};
+
+static const struct intent_words intent_table[] =
+{
+    { INTENT_INSULT,   NULL,    { "salak", "aptal", "gerizekali", " mal ", "gebert", "oldururum", "siktir", "ahmak", NULL } },
+    { INTENT_THANKS,   NULL,    { "sagol", "tesekkur", " eyv", " tsk", "eyvallah", NULL } },
+    { INTENT_BYE,      NULL,    { " bb ", "gorusuruz", " bay ", "hoscakal", "iyi geceler", "kactim", "cikiyorum", "yatiyorum", NULL } },
+    { INTENT_STOP,     NULL,    { " dur ", " kal ", "birak", "takibi", "ayril", " git ", NULL } },
+    { INTENT_CABAL,    "kabal", { "katil", "uye", "induct", "al beni", "alir mi", "girmek", "kabul", NULL } },
+    { INTENT_GROUP,    NULL,    { "grup", " gel ", "gelsene", "takip", "beraber", "birlikte", "party", "gel.", NULL } },
+    { INTENT_HELP,     NULL,    { "yardim", " help", "lazim", "imdat", NULL } },
+    { INTENT_WHERE,    NULL,    { "nerdesin", "neredesin", "nerde", "nerede", NULL } },
+    { INTENT_LEVEL,    NULL,    { "level", " lvl", "seviye", "kacsin", NULL } },
+    { INTENT_CLASS,    NULL,    { "sinif", "class", "nesin", NULL } },
+    { INTENT_HOW,      NULL,    { "nasilsin", "naber", "ne var ne yok", "napiyorsun", "ne yapiyorsun", "napiyon", NULL } },
+    { INTENT_GREET,    NULL,    { "selam", " slm", "merhaba", " mrb", " sa ", " hey ", "hosgeldin", "hos geldin", NULL } },
+    { INTENT_YES,      NULL,    { " evet", " tamam", " ok ", " olur", " hadi", " peki", NULL } },
+    { INTENT_NO,       NULL,    { " hayir", " yok ", "istemem", " olmaz", NULL } },
+    { INTENT_QUESTION, NULL,    { "?", " mi ", " mu ", " mi?", " mu?", NULL } },
+};
+
 static int detect_intent( const char *raw )
 {
-    char text[MAX_STRING_LENGTH];
-    char padded[MAX_STRING_LENGTH + 2];
+    char text[MAX_INPUT_LENGTH];
+    char padded[MAX_INPUT_LENGTH + 2];
+    int i, w;
 
     transliterate( raw, text, sizeof(text) );
-    lower_ascii( text );
+    bot_lower_ascii( text );
     snprintf( padded, sizeof(padded), " %s ", text );
 
-    if ( has_word( padded, "salak" ) || has_word( padded, "aptal" ) || has_word( padded, "gerizekali" )
-      || has_word( padded, " mal " ) || has_word( padded, "gebert" ) || has_word( padded, "oldururum" )
-      || has_word( padded, "siktir" ) || has_word( padded, "ahmak" ) )
-        return INTENT_INSULT;
-    if ( has_word( padded, "sagol" ) || has_word( padded, "tesekkur" ) || has_word( padded, " eyv" )
-      || has_word( padded, " tsk" ) || has_word( padded, "eyvallah" ) )
-        return INTENT_THANKS;
-    if ( has_word( padded, " bb " ) || has_word( padded, "gorusuruz" ) || has_word( padded, " bay " )
-      || has_word( padded, "hoscakal" ) || has_word( padded, "iyi geceler" ) || has_word( padded, "kactim" )
-      || has_word( padded, "cikiyorum" ) || has_word( padded, "yatiyorum" ) )
-        return INTENT_BYE;
-    if ( has_word( padded, " dur " ) || has_word( padded, " kal " ) || has_word( padded, "birak" )
-      || has_word( padded, "takibi" ) || has_word( padded, "ayril" ) || has_word( padded, " git " ) )
-        return INTENT_STOP;
-    if ( has_word( padded, "kabal" ) && ( has_word( padded, "katil" ) || has_word( padded, "uye" )
-      || has_word( padded, "induct" ) || has_word( padded, "al beni" ) || has_word( padded, "alir mi" )
-      || has_word( padded, "girmek" ) || has_word( padded, "kabul" ) ) )
-        return INTENT_CABAL;
-    if ( has_word( padded, "grup" ) || has_word( padded, " gel " ) || has_word( padded, "gelsene" )
-      || has_word( padded, "takip" ) || has_word( padded, "beraber" ) || has_word( padded, "birlikte" )
-      || has_word( padded, "party" ) || has_word( padded, "gel." ) )
-        return INTENT_GROUP;
-    if ( has_word( padded, "yardim" ) || has_word( padded, " help" ) || has_word( padded, "lazim" )
-      || has_word( padded, "imdat" ) )
-        return INTENT_HELP;
-    if ( has_word( padded, "nerdesin" ) || has_word( padded, "neredesin" ) || has_word( padded, "nerde" )
-      || has_word( padded, "nerede" ) )
-        return INTENT_WHERE;
-    if ( has_word( padded, "level" ) || has_word( padded, " lvl" ) || has_word( padded, "seviye" )
-      || has_word( padded, "kacsin" ) )
-        return INTENT_LEVEL;
-    if ( has_word( padded, "sinif" ) || has_word( padded, "class" ) || has_word( padded, "nesin" ) )
-        return INTENT_CLASS;
-    if ( has_word( padded, "nasilsin" ) || has_word( padded, "naber" ) || has_word( padded, "ne var ne yok" )
-      || has_word( padded, "napiyorsun" ) || has_word( padded, "ne yapiyorsun" ) || has_word( padded, "napiyon" ) )
-        return INTENT_HOW;
-    if ( has_word( padded, "selam" ) || has_word( padded, " slm" ) || has_word( padded, "merhaba" )
-      || has_word( padded, " mrb" ) || has_word( padded, " sa " ) || has_word( padded, " hey " )
-      || has_word( padded, "hosgeldin" ) || has_word( padded, "hos geldin" ) )
-        return INTENT_GREET;
-    if ( has_word( padded, " evet" ) || has_word( padded, " tamam" ) || has_word( padded, " ok " )
-      || has_word( padded, " olur" ) || has_word( padded, " hadi" ) || has_word( padded, " peki" ) )
-        return INTENT_YES;
-    if ( has_word( padded, " hayir" ) || has_word( padded, " yok " ) || has_word( padded, "istemem" )
-      || has_word( padded, " olmaz" ) )
-        return INTENT_NO;
-    if ( strchr( text, '?' ) != NULL || has_word( padded, " mi " ) || has_word( padded, " mu " )
-      || has_word( padded, " mi?" ) || has_word( padded, " mu?" ) )
-        return INTENT_QUESTION;
+    for ( i = 0; i < BOT_PN(intent_table); i++ )
+    {
+        const struct intent_words *t = &intent_table[i];
+
+        if ( t->need != NULL && strstr( padded, t->need ) == NULL )
+            continue;
+        for ( w = 0; t->words[w] != NULL; w++ )
+            if ( strstr( padded, t->words[w] ) != NULL )
+                return t->intent;
+    }
     return INTENT_NONE;
 }
-
 
 static int reply_delay( const char *text )
 {
@@ -533,17 +533,98 @@ static int reply_delay( const char *text )
 }
 
 /* rol içi / konu dışı havuz seçimi */
-#define PICK2(ic, icpool, oocpool) ( (ic) ? pick( icpool, PN(icpool) ) : pick( oocpool, PN(oocpool) ) )
+#define PICK2(ic, icpool, oocpool) ( (ic) ? BOT_PICK(icpool) : BOT_PICK(oocpool) )
+
+/* bot-bot sohbeti sınırlı: botlar birbirleriyle sonsuza dek konuşmasın. Cevap verilecekse TRUE */
+static bool react_bot_allowed( BOT_DATA *bot, int channel, int intent )
+{
+    if ( intent != INTENT_GROUP && intent != INTENT_CABAL && !( channel == BOT_CH_CABAL && intent == INTENT_HELP ) )
+    {
+        if ( channel == BOT_CH_KDG && number_percent() > 25 )
+            return FALSE;
+        if ( bot_pulse - bot->last_bot_talk < BOT_SEC(90) )
+            return FALSE;
+        if ( intent == INTENT_NONE || intent == INTENT_YES || intent == INTENT_NO || intent == INTENT_THANKS )
+            return FALSE;
+        if ( number_percent() > 40 )
+            return FALSE;
+    }
+    bot->last_bot_talk = bot_pulse;
+    return TRUE;
+}
+
+/* grup isteği: aynı odadaysa takibe başla, uzaktaysa buluşma teklif et; şablonu döndürür */
+static const char *react_group( BOT_DATA *bot, CHAR_DATA *speaker, bool ic, int *reply_ch )
+{
+    CHAR_DATA *ch = bot->ch;
+    bool wants = bot_wants_group_with( bot, speaker );
+
+    if ( IS_BOT(speaker) && wants && speaker->in_room == ch->in_room
+      && ch->master == NULL && speaker->master == NULL && number_percent() < 80 )
+    {
+        *reply_ch = BOT_CH_SAY;
+        bot_start_follow( bot, speaker );
+        return BOT_PICK(ic_group_accept);
+    }
+    if ( bot_is_human( speaker ) && wants )
+    {
+        if ( speaker->in_room == ch->in_room )
+        {
+            *reply_ch = BOT_CH_SAY;
+            bot_start_follow( bot, speaker );
+            return BOT_PICK(ic_group_accept);
+        }
+        bot_offer_meeting( bot, speaker );
+        return PICK2( ic, ic_group_far, ooc_group_far );
+    }
+    return PICK2( ic, ic_group_no, ooc_group_no );
+}
+
+/* niyete göre cevap şablonu (NULL: sus); reply_ch gerekirse değişir */
+static const char *react_template( BOT_DATA *bot, CHAR_DATA *speaker, int channel, int intent, int *reply_ch )
+{
+    bool ic = channel_ic( *reply_ch );
+    bool my_leader = bot->state == BOT_ST_FOLLOW && bot_char_by_id( bot->leader_id ) == speaker;
+
+    switch ( intent )
+    {
+    case INTENT_GREET:   return PICK2( ic, ic_greet, ooc_greet );
+    case INTENT_HOW:     return PICK2( ic, ic_how, ooc_how );
+    case INTENT_LEVEL:   return PICK2( ic, ic_level, ooc_level );
+    case INTENT_WHERE:   return PICK2( ic, ic_where, ooc_where );
+    case INTENT_CLASS:   return PICK2( ic, ic_class, ooc_class );
+    case INTENT_HELP:    return PICK2( ic, ic_help, ooc_help );
+    case INTENT_THANKS:  return PICK2( ic, ic_thanks, ooc_thanks );
+    case INTENT_YES:     return PICK2( ic, ic_yes, ooc_yes );
+    case INTENT_NO:      return PICK2( ic, ic_no, ooc_no );
+    case INTENT_INSULT:  return PICK2( ic, ic_insult, ooc_insult );
+    case INTENT_QUESTION:
+        return channel == BOT_CH_KDG ? BOT_PICK(ooc_kdg_reply) : PICK2( ic, ic_question, ooc_question );
+    case INTENT_BYE:
+        if ( my_leader )
+            bot_stop_follow( bot, FALSE );
+        return PICK2( ic, ic_bye, ooc_bye );
+    case INTENT_GROUP:
+        return react_group( bot, speaker, ic, reply_ch );
+    case INTENT_STOP:
+        if ( my_leader )
+        {
+            bot_stop_follow( bot, FALSE );
+            return PICK2( ic, ic_stop, ooc_stop );
+        }
+        return number_percent() < 30 ? PICK2( ic, ic_default, ooc_default ) : NULL;
+    default:
+        return ( channel == BOT_CH_TELL || number_percent() < 45 ) ? PICK2( ic, ic_default, ooc_default ) : NULL;
+    }
+}
 
 void bot_chat_react( BOT_DATA *bot, CHAR_DATA *speaker, int channel, const char *text )
 {
     CHAR_DATA *ch = bot->ch;
     int intent;
     int reply_ch = channel;
-    const char *tmpl = NULL;
-    bool speaker_bot = IS_BOT(speaker);
+    const char *tmpl;
     bool human = bot_is_human( speaker );
-    bool ic;
 
     if ( ch == NULL || IS_NPC(speaker) )
         return;
@@ -551,29 +632,12 @@ void bot_chat_react( BOT_DATA *bot, CHAR_DATA *speaker, int channel, const char 
     {
         /* sosyale sosyalle karşılık */
         if ( speaker->in_room == ch->in_room && number_percent() < ( human ? 60 : 15 ) )
-            say_later( bot, BOT_CH_SOCIAL, speaker, pick( ic_social, PN(ic_social) ), number_range( 6, 20 ) );
+            say_later( bot, BOT_CH_SOCIAL, speaker, BOT_PICK(ic_social), number_range( 6, 20 ) );
         return;
     }
 
     intent = detect_intent( text );
-
-    /* botlar birbirleriyle sonsuza dek konuşmasın */
-    if ( speaker_bot )
-    {
-        if ( intent != INTENT_GROUP && intent != INTENT_CABAL && !( channel == BOT_CH_CABAL && intent == INTENT_HELP ) )
-        {
-            if ( channel == BOT_CH_KDG && number_percent() > 25 )
-                return;
-            if ( bot_pulse - bot->last_bot_talk < 4 * 90 )
-                return;
-            if ( intent == INTENT_NONE || intent == INTENT_YES || intent == INTENT_NO || intent == INTENT_THANKS )
-                return;
-            if ( number_percent() > 40 )
-                return;
-        }
-        bot->last_bot_talk = bot_pulse;
-    }
-    else if ( !human )
+    if ( IS_BOT(speaker) ? !react_bot_allowed( bot, channel, intent ) : !human )
         return;
 
     /* uzaktan haykırana konu dışı kanaldan (kd) dönebilir; kdg'ye çoğunlukla kd ile cevap */
@@ -586,87 +650,23 @@ void bot_chat_react( BOT_DATA *bot, CHAR_DATA *speaker, int channel, const char 
         if ( number_percent() < 60 )
             reply_ch = BOT_CH_TELL;
     }
-    ic = channel_ic( reply_ch );
 
     snprintf( bot->last_speaker, BOT_NAME_LEN, "%s", speaker->name );
 
-    if ( intent == INTENT_CABAL && ( channel == BOT_CH_TELL || channel == BOT_CH_SAY ) )
-    {
-        if ( bot_leader_handle( bot, speaker, channel ) )
-            return;
-    }
+    if ( intent == INTENT_CABAL && ( channel == BOT_CH_TELL || channel == BOT_CH_SAY )
+      && bot_leader_handle( bot, speaker, channel ) )
+        return;
     if ( channel == BOT_CH_CABAL && intent == INTENT_HELP )
     {
         bot_war_help( bot, speaker, text );
         return;
     }
-
     if ( human && IS_IMMORTAL(speaker) && number_percent() < 60 )
     {
-        say_later( bot, reply_ch, speaker, PICK2( ic, ic_god, ooc_god ), reply_delay( text ) );
+        say_later( bot, reply_ch, speaker, PICK2( channel_ic( reply_ch ), ic_god, ooc_god ), reply_delay( text ) );
         return;
     }
-
-    switch ( intent )
-    {
-    case INTENT_GREET:   tmpl = PICK2( ic, ic_greet, ooc_greet );       break;
-    case INTENT_HOW:     tmpl = PICK2( ic, ic_how, ooc_how );           break;
-    case INTENT_LEVEL:   tmpl = PICK2( ic, ic_level, ooc_level );       break;
-    case INTENT_WHERE:   tmpl = PICK2( ic, ic_where, ooc_where );       break;
-    case INTENT_CLASS:   tmpl = PICK2( ic, ic_class, ooc_class );       break;
-    case INTENT_HELP:    tmpl = PICK2( ic, ic_help, ooc_help );         break;
-    case INTENT_THANKS:  tmpl = PICK2( ic, ic_thanks, ooc_thanks );     break;
-    case INTENT_BYE:
-        tmpl = PICK2( ic, ic_bye, ooc_bye );
-        if ( bot->state == BOT_ST_FOLLOW && bot_char_by_id( bot->leader_id ) == speaker )
-            bot_stop_follow( bot, FALSE );
-        break;
-    case INTENT_YES:     tmpl = PICK2( ic, ic_yes, ooc_yes );           break;
-    case INTENT_NO:      tmpl = PICK2( ic, ic_no, ooc_no );             break;
-    case INTENT_INSULT:  tmpl = PICK2( ic, ic_insult, ooc_insult );     break;
-    case INTENT_QUESTION: tmpl = channel == BOT_CH_KDG ? pick( ooc_kdg_reply, PN(ooc_kdg_reply) )
-                               : PICK2( ic, ic_question, ooc_question ); break;
-    case INTENT_GROUP:
-        if ( speaker_bot && bot_wants_group_with( bot, speaker ) && speaker->in_room == ch->in_room
-          && ch->master == NULL && speaker->master == NULL && number_percent() < 80 )
-        {
-            reply_ch = BOT_CH_SAY;
-            tmpl = pick( ic_group_accept, PN(ic_group_accept) );
-            bot_start_follow( bot, speaker );
-        }
-        else if ( human && bot_wants_group_with( bot, speaker ) )
-        {
-            if ( speaker->in_room == ch->in_room )
-            {
-                reply_ch = BOT_CH_SAY;
-                tmpl = pick( ic_group_accept, PN(ic_group_accept) );
-                bot_start_follow( bot, speaker );
-            }
-            else
-            {
-                tmpl = PICK2( ic, ic_group_far, ooc_group_far );
-                bot_offer_meeting( bot, speaker );
-            }
-        }
-        else
-            tmpl = PICK2( ic, ic_group_no, ooc_group_no );
-        break;
-    case INTENT_STOP:
-        if ( bot->state == BOT_ST_FOLLOW && bot_char_by_id( bot->leader_id ) == speaker )
-        {
-            tmpl = PICK2( ic, ic_stop, ooc_stop );
-            bot_stop_follow( bot, FALSE );
-        }
-        else if ( number_percent() < 30 )
-            tmpl = PICK2( ic, ic_default, ooc_default );
-        break;
-    default:
-        if ( channel == BOT_CH_TELL || number_percent() < 45 )
-            tmpl = PICK2( ic, ic_default, ooc_default );
-        break;
-    }
-
-    if ( tmpl != NULL )
+    if ( ( tmpl = react_template( bot, speaker, channel, intent, &reply_ch ) ) != NULL )
         say_later( bot, reply_ch, speaker, tmpl, reply_delay( text ) );
 }
 
@@ -718,11 +718,11 @@ void bot_chat_event( BOT_DATA *bot, int event, CHAR_DATA *other )
     {
     case BOT_EV_LEVEL:
         if ( area_h != NULL && number_percent() < talk )
-            say_later( bot, BOT_CH_YELL, NULL, pick( ic_level_up, PN(ic_level_up) ), number_range( 8, 30 ) );
+            say_later( bot, BOT_CH_YELL, NULL, BOT_PICK(ic_level_up), number_range( 8, 30 ) );
         else if ( any_h != NULL && number_percent() < 35 )
-            say_later( bot, BOT_CH_KDG, NULL, pick( ooc_level_up, PN(ooc_level_up) ), number_range( 20, 80 ) );
+            say_later( bot, BOT_CH_KDG, NULL, BOT_PICK(ooc_level_up), number_range( 20, 80 ) );
         else if ( number_percent() < 40 )
-            say_later( bot, BOT_CH_SAY, NULL, pick( ic_level_up, PN(ic_level_up) ), number_range( 8, 30 ) );
+            say_later( bot, BOT_CH_SAY, NULL, BOT_PICK(ic_level_up), number_range( 8, 30 ) );
         if ( ch->level >= 10 && bot->lakap != NULL && number_percent() < 25
           && ch->pcdata->title != NULL && strstr( ch->pcdata->title, title_table[ch->iclass][ch->level] ) != NULL )
         {
@@ -733,72 +733,72 @@ void bot_chat_event( BOT_DATA *bot, int event, CHAR_DATA *other )
         break;
     case BOT_EV_DEATH:
         if ( area_h != NULL && number_percent() < talk )
-            say_later( bot, BOT_CH_YELL, NULL, pick( ic_death, PN(ic_death) ), number_range( 12, 40 ) );
+            say_later( bot, BOT_CH_YELL, NULL, BOT_PICK(ic_death), number_range( 12, 40 ) );
         else if ( any_h != NULL && number_percent() < 35 )
-            say_later( bot, BOT_CH_KDG, NULL, pick( ooc_death, PN(ooc_death) ), number_range( 30, 120 ) );
+            say_later( bot, BOT_CH_KDG, NULL, BOT_PICK(ooc_death), number_range( 30, 120 ) );
         else if ( number_percent() < 50 )
-            say_later( bot, BOT_CH_SAY, NULL, pick( ic_death, PN(ic_death) ), number_range( 12, 40 ) );
+            say_later( bot, BOT_CH_SAY, NULL, BOT_PICK(ic_death), number_range( 12, 40 ) );
         break;
     case BOT_EV_KILL:
         if ( room_h != NULL && number_percent() < 12 )
-            say_later( bot, BOT_CH_SAY, NULL, pick( ic_kill, PN(ic_kill) ), number_range( 6, 20 ) );
+            say_later( bot, BOT_CH_SAY, NULL, BOT_PICK(ic_kill), number_range( 6, 20 ) );
         break;
     case BOT_EV_FLEE:
         if ( room_h != NULL && number_percent() < 50 )
-            say_later( bot, BOT_CH_SAY, NULL, pick( ic_flee, PN(ic_flee) ), number_range( 8, 20 ) );
+            say_later( bot, BOT_CH_SAY, NULL, BOT_PICK(ic_flee), number_range( 8, 20 ) );
         else if ( area_h != NULL && number_percent() < 25 )
-            say_later( bot, BOT_CH_YELL, NULL, pick( ic_flee, PN(ic_flee) ), number_range( 8, 20 ) );
+            say_later( bot, BOT_CH_YELL, NULL, BOT_PICK(ic_flee), number_range( 8, 20 ) );
         break;
     case BOT_EV_QUEST_GET:
         if ( room_h != NULL && number_percent() < 60 )
-            say_later( bot, BOT_CH_SAY, NULL, pick( ic_quest_get, PN(ic_quest_get) ), number_range( 8, 20 ) );
+            say_later( bot, BOT_CH_SAY, NULL, BOT_PICK(ic_quest_get), number_range( 8, 20 ) );
         break;
     case BOT_EV_QUEST_DONE:
         if ( room_h != NULL && number_percent() < 60 )
-            say_later( bot, BOT_CH_SAY, NULL, pick( ic_quest_done, PN(ic_quest_done) ), number_range( 8, 20 ) );
+            say_later( bot, BOT_CH_SAY, NULL, BOT_PICK(ic_quest_done), number_range( 8, 20 ) );
         else if ( any_h != NULL && number_percent() < 15 )
-            say_later( bot, BOT_CH_KDG, NULL, pick( ooc_quest_done, PN(ooc_quest_done) ), number_range( 20, 60 ) );
+            say_later( bot, BOT_CH_KDG, NULL, BOT_PICK(ooc_quest_done), number_range( 20, 60 ) );
         break;
     case BOT_EV_LOOT:
         if ( current_time - boot_time < 600 || current_time - bot->login_time < 180 )
             break;                                    /* açılış/giriş teçhizatı için övünme */
         if ( room_h != NULL && number_percent() < 35 )
-            say_later( bot, BOT_CH_SAY, NULL, pick( ic_loot, PN(ic_loot) ), number_range( 8, 20 ) );
+            say_later( bot, BOT_CH_SAY, NULL, BOT_PICK(ic_loot), number_range( 8, 20 ) );
         break;
     case BOT_EV_LOGIN:
         if ( current_time - boot_time < 600 )
             break;                                    /* açılışta toplu girişlerde susulur */
         if ( any_h != NULL && number_percent() < 25 )
-            say_later( bot, BOT_CH_KDG, NULL, pick( ooc_login, PN(ooc_login) ), number_range( 120, 360 ) );
+            say_later( bot, BOT_CH_KDG, NULL, BOT_PICK(ooc_login), number_range( 120, 360 ) );
         break;
     case BOT_EV_LOGOUT:
         if ( room_h != NULL && number_percent() < 70 )
-            say_later( bot, BOT_CH_SAY, NULL, pick( ic_logout, PN(ic_logout) ), 2 );
+            say_later( bot, BOT_CH_SAY, NULL, BOT_PICK(ic_logout), 2 );
         else if ( any_h != NULL && number_percent() < 30 )
-            say_later( bot, BOT_CH_KDG, NULL, pick( ooc_logout, PN(ooc_logout) ), 2 );
+            say_later( bot, BOT_CH_KDG, NULL, BOT_PICK(ooc_logout), 2 );
         break;
     case BOT_EV_CABAL:
-        say_later( bot, BOT_CH_YELL, NULL, pick( ic_cabal, PN(ic_cabal) ), number_range( 8, 24 ) );
+        say_later( bot, BOT_CH_YELL, NULL, BOT_PICK(ic_cabal), number_range( 8, 24 ) );
         break;
     case BOT_EV_PK_KILL:
-        say_later( bot, BOT_CH_YELL, other, pick( ic_pk_kill, PN(ic_pk_kill) ), number_range( 8, 24 ) );
+        say_later( bot, BOT_CH_YELL, other, BOT_PICK(ic_pk_kill), number_range( 8, 24 ) );
         break;
     case BOT_EV_PK_TAUNT:
         if ( other != NULL )
         {
-            char out[MAX_STRING_LENGTH];
-            bot_fill_ch( bot, pick( ic_pk_taunt, PN(ic_pk_taunt) ), other, out, sizeof(out), TRUE );
+            char out[MAX_INPUT_LENGTH];
+            bot_fill_ch( bot, BOT_PICK(ic_pk_taunt), other, out, sizeof(out), TRUE );
             bot_talk( bot, BOT_CH_YELL, NULL, out );
         }
         break;
     case BOT_EV_HUMAN_LOGIN:
         if ( other != NULL )
-            say_later( bot, BOT_CH_TELL, other, pick( ooc_human_login, PN(ooc_human_login) ), number_range( 60, 320 ) );
+            say_later( bot, BOT_CH_TELL, other, BOT_PICK(ooc_human_login), number_range( 60, 320 ) );
         break;
     case BOT_EV_HUMAN_ROOM:
         if ( other != NULL )
         {
-            say_later( bot, BOT_CH_SAY, other, pick( ic_room_greet, PN(ic_room_greet) ), number_range( 6, 16 ) );
+            say_later( bot, BOT_CH_SAY, other, BOT_PICK(ic_room_greet), number_range( 6, 16 ) );
             if ( number_percent() < 40 )
                 say_later( bot, BOT_CH_SOCIAL, other, "selamla", number_range( 20, 40 ) );
         }
@@ -809,17 +809,6 @@ void bot_chat_event( BOT_DATA *bot, int event, CHAR_DATA *other )
 /* ---------------------------------------------------------------------
  * boş zaman gevezeliği
  * ------------------------------------------------------------------ */
-static bool immortal_online( void )
-{
-    DESCRIPTOR_DATA *d;
-
-    for ( d = descriptor_list; d != NULL; d = d->next )
-        if ( d->connected == CON_PLAYING && d->character != NULL && IS_IMMORTAL(d->character)
-          && !IS_BOT(d->character) )
-            return TRUE;
-    return FALSE;
-}
-
 static void bot_try_auction( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch;
@@ -861,10 +850,10 @@ void bot_chat_idle( BOT_DATA *bot )
 
     switch ( bot->kisilik )
     {
-    case BOT_K_GEVEZE:  base = 4 * 60 * 3;  break;
-    case BOT_K_SAKIN:   base = 4 * 60 * 14; break;
-    case BOT_K_GIZEMLI: base = 4 * 60 * 10; break;
-    default:            base = 4 * 60 * 6;  break;
+    case BOT_K_GEVEZE:  base = BOT_MIN(3);  break;
+    case BOT_K_SAKIN:   base = BOT_MIN(14); break;
+    case BOT_K_GIZEMLI: base = BOT_MIN(10); break;
+    default:            base = BOT_MIN(6);  break;
     }
     bot->next_chat = bot_pulse + base + number_range( 0, base );
 
@@ -873,7 +862,7 @@ void bot_chat_idle( BOT_DATA *bot )
     any_h  = bot_random_human();
 
     /* odada bir insan varsa selam ver (bir kez) */
-    if ( room_h != NULL && ( bot_pulse - bot->greeted_pulse > 4 * 60 * 10 || str_cmp( bot->last_human, room_h->name ) ) )
+    if ( room_h != NULL && ( bot_pulse - bot->greeted_pulse > BOT_MIN(10) || str_cmp( bot->last_human, room_h->name ) ) )
     {
         bot->greeted_pulse = bot_pulse;
         snprintf( bot->last_human, BOT_NAME_LEN, "%s", room_h->name );
@@ -884,10 +873,10 @@ void bot_chat_idle( BOT_DATA *bot )
         }
     }
 
-    if ( number_percent() < 6 && immortal_online() )
+    if ( number_percent() < 6 && bot_human_immortal() != NULL )
     {
-        char out[MAX_STRING_LENGTH];
-        bot_fill_ch( bot, pick( ic_pray, PN(ic_pray) ), NULL, out, sizeof(out), TRUE );
+        char out[MAX_INPUT_LENGTH];
+        bot_fill_ch( bot, BOT_PICK(ic_pray), NULL, out, sizeof(out), TRUE );
         bot_cmd( bot, "dua %s", out );
         return;
     }
@@ -904,49 +893,49 @@ void bot_chat_idle( BOT_DATA *bot )
 
         if ( roll < 20 )
         {
-            bot_talk( bot, BOT_CH_SOCIAL, room_h, pick( ic_social, PN(ic_social) ) );
+            bot_talk( bot, BOT_CH_SOCIAL, room_h, BOT_PICK(ic_social) );
             return;
         }
         if ( bot->kisilik == BOT_K_ACEMI && roll < 60 )
-            tmpl = pick( ic_acemi, PN(ic_acemi) );
+            tmpl = BOT_PICK(ic_acemi);
         else if ( bot->kisilik == BOT_K_GIZEMLI && roll < 60 )
-            tmpl = pick( ic_gizemli, PN(ic_gizemli) );
+            tmpl = BOT_PICK(ic_gizemli);
         else
-            tmpl = pick( ic_idle_say, PN(ic_idle_say) );
+            tmpl = BOT_PICK(ic_idle_say);
         say_later( bot, BOT_CH_SAY, room_h, tmpl, number_range( 2, 12 ) );
         return;
     }
     if ( area_h != NULL && number_percent() < 55 )
     {
-        say_later( bot, BOT_CH_YELL, NULL, pick( ic_idle_yell, PN(ic_idle_yell) ), number_range( 2, 12 ) );
+        say_later( bot, BOT_CH_YELL, NULL, BOT_PICK(ic_idle_yell), number_range( 2, 12 ) );
         return;
     }
     if ( any_h != NULL && bot_pulse >= bot->next_kd )
     {
-        bot->next_kd = bot_pulse + 4 * 60 * ( bot->kisilik == BOT_K_GEVEZE ? 12 : 25 ) + number_range( 0, 4 * 60 * 10 );
+        bot->next_kd = bot_pulse + BOT_MIN( bot->kisilik == BOT_K_GEVEZE ? 12 : 25 ) + number_range( 0, BOT_MIN(10) );
         if ( number_percent() < 55 )
-            say_later( bot, BOT_CH_KDG, NULL, pick( ooc_kdg_idle, PN(ooc_kdg_idle) ), number_range( 2, 12 ) );
+            say_later( bot, BOT_CH_KDG, NULL, BOT_PICK(ooc_kdg_idle), number_range( 2, 12 ) );
         else if ( !IS_IMMORTAL(any_h) )
-            say_later( bot, BOT_CH_TELL, any_h, pick( ooc_kd_idle, PN(ooc_kd_idle) ), number_range( 2, 12 ) );
+            say_later( bot, BOT_CH_TELL, any_h, BOT_PICK(ooc_kd_idle), number_range( 2, 12 ) );
         return;
     }
     if ( bot_in_group( ch ) && number_percent() < 40 )
     {
-        say_later( bot, BOT_CH_GTELL, NULL, pick( ooc_gtell, PN(ooc_gtell) ), number_range( 2, 12 ) );
+        say_later( bot, BOT_CH_GTELL, NULL, BOT_PICK(ooc_gtell), number_range( 2, 12 ) );
         return;
     }
     if ( ch->cabal != CABAL_NONE && number_percent() < 25 )
     {
-        say_later( bot, BOT_CH_CABAL, NULL, pick( ooc_cabal, PN(ooc_cabal) ), number_range( 2, 12 ) );
+        say_later( bot, BOT_CH_CABAL, NULL, BOT_PICK(ooc_cabal), number_range( 2, 12 ) );
         return;
     }
     if ( number_percent() < 30 )
     {
-        const char *tmpl = bot->kisilik == BOT_K_GIZEMLI ? pick( ic_gizemli, PN(ic_gizemli) )
-                         : bot->kisilik == BOT_K_ACEMI ? pick( ic_acemi, PN(ic_acemi) )
-                         : pick( ic_idle_say, PN(ic_idle_say) );
+        const char *tmpl = bot->kisilik == BOT_K_GIZEMLI ? BOT_PICK(ic_gizemli)
+                         : bot->kisilik == BOT_K_ACEMI ? BOT_PICK(ic_acemi)
+                         : BOT_PICK(ic_idle_say);
         say_later( bot, BOT_CH_SAY, NULL, tmpl, number_range( 2, 12 ) );
     }
     else if ( number_percent() < 30 )
-        bot_talk( bot, BOT_CH_SOCIAL, NULL, pick( ic_social, PN(ic_social) ) );
+        bot_talk( bot, BOT_CH_SOCIAL, NULL, BOT_PICK(ic_social) );
 }

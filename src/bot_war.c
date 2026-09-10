@@ -28,11 +28,6 @@ static int raid_fail_pulse[MAX_CABAL];     /* hedef kabal başına: son başarı
 /* ---------------------------------------------------------------------
  * yardımcılar
  * ------------------------------------------------------------------ */
-static int pct( int cur, int max )
-{
-    return max > 0 ? cur * 100 / max : 100;
-}
-
 static bool pk_capable( CHAR_DATA *ch )
 {
     return ch != NULL && !IS_NPC(ch) && ch->cabal != CABAL_NONE && ch->pcdata->oyuncu_katli == 1
@@ -58,12 +53,13 @@ static bool in_my_area( CHAR_DATA *ch, CHAR_DATA *victim )
         && victim->in_room->area == ch->in_room->area && can_see( ch, victim );
 }
 
-static CHAR_DATA *online_pc_by_name( const char *name )
+/* 'kim' listesinde görünen, adı verilen oyuncu (adalet: char_list'ten gizli oyuncu okunmaz) */
+static CHAR_DATA *online_pc_by_name( CHAR_DATA *viewer, const char *name )
 {
     CHAR_DATA *wch;
 
     for ( wch = char_list; wch != NULL; wch = wch->next )
-        if ( !IS_NPC(wch) && !str_cmp( wch->name, name ) )
+        if ( !IS_NPC(wch) && !str_cmp( wch->name, name ) && visible_in_who( viewer, wch ) )
             return wch;
     return NULL;
 }
@@ -243,7 +239,7 @@ static void bot_cabal_ask( BOT_DATA *bot )
     if ( !bot->pk_istekli || ch->cabal != CABAL_NONE || ch->level < BOT_CABAL_LEVEL
       || ch->pcdata->oyuncu_katli != 1 || bot->leader_cabal > CABAL_NONE )
         return;
-    if ( bot_pulse - bot->cabal_ask_pulse < 4 * 60 * 20 )
+    if ( bot_pulse - bot->cabal_ask_pulse < BOT_MIN(20) )
         return;
     bot->cabal_ask_pulse = bot_pulse;
 
@@ -261,16 +257,37 @@ static void bot_cabal_ask( BOT_DATA *bot )
     bot_talk( bot, BOT_CH_TELL, leader->ch, buf );
 }
 
+/* liderin üyelik isteğine cevapları: {söyle (rol içi), kd (konu dışı)} */
+enum
+{
+    LR_NO_CABAL, LR_NOT_LEADER, LR_ALREADY_US, LR_OTHER_CABAL, LR_NO_PK,
+    LR_LOW_LEVEL, LR_MISFIT, LR_BUSY, LR_ACCEPT
+};
+static const char *leader_reply[][2] =
+{
+    { "Ben de bir kabalın üyesi değilim.",                "ben de bir kabalda değilim ki" },
+    { "Lider ben değilim; ona sor.",                      "ben lider değilim, lidere sor" },
+    { "Zaten bizdensin.",                                 "zaten bizdensin :)" },
+    { "Sen başka bir kabala bağlısın.",                   "sen zaten başka kabaldasın" },
+    { "Önce görevciden katil hakkı almalısın.",           "önce görevciden katlet hakkını al (100 gp), sonra gel" },
+    { "Henüz erken. Biraz daha güçlen, sonra gel.",       "biraz erken, 20 level sonra gel" },
+    { "Senin yolun bizimkiyle uyuşmuyor.",                "senin yolun bizimkine uymuyor kusura bakma" },
+    { "Biraz bekle, önce başkasıyla ilgileniyorum.",      "biraz bekle, önce başkasını alıyorum" },
+    { "Peki. Seni %s saflarına kabul ediyorum; birazdan yeminini alacağım.",
+                                                          "tamam, seni %s kabalına alıyorum, birazdan yemin töreni :)" },
+};
+
 /*
- * Lider bir üyelik isteği duydu (kd/söyle). Yanıt kanalı: konu dışı (kd).
- * Uygunsa 10-25 sn sonra gerçek 'induct' komutu verir.
+ * Lider bir üyelik isteği duydu (kd/söyle). Yanıt kanalı: konu dışı (kd) ya da
+ * söyle. Uygunsa 10-25 sn sonra gerçek 'induct' komutu verir.
  */
 bool bot_leader_handle( BOT_DATA *leader, CHAR_DATA *speaker, int channel )
 {
     CHAR_DATA *ch = leader->ch;
-    const char *reply;
-    char out[MAX_STRING_LENGTH];
+    char out[MAX_INPUT_LENGTH];
     int reply_ch = ( channel == BOT_CH_SAY || channel == BOT_CH_YELL ) ? BOT_CH_SAY : BOT_CH_TELL;
+    int ic = reply_ch == BOT_CH_SAY ? 0 : 1;
+    int which;
 
     if ( ch == NULL || speaker == NULL || IS_NPC(speaker) )
         return FALSE;
@@ -284,33 +301,25 @@ bool bot_leader_handle( BOT_DATA *leader, CHAR_DATA *speaker, int channel )
                                  reply_ch == BOT_CH_SAY ? "Sağ ol, bekliyorum." : "sağ ol, bekliyorum" );
             return TRUE;
         }
-        reply = ch->cabal == CABAL_NONE ? "ben de bir kabalda değilim ki" : "ben lider değilim, lidere sor";
-        if ( reply_ch == BOT_CH_SAY )
-            reply = ch->cabal == CABAL_NONE ? "Ben de bir kabalın üyesi değilim." : "Lider ben değilim; ona sor.";
+        which = ch->cabal == CABAL_NONE ? LR_NO_CABAL : LR_NOT_LEADER;
     }
-    else if ( speaker->cabal == ch->cabal )
-        reply = reply_ch == BOT_CH_SAY ? "Zaten bizdensin." : "zaten bizdensin :)";
-    else if ( speaker->cabal != CABAL_NONE )
-        reply = reply_ch == BOT_CH_SAY ? "Sen başka bir kabala bağlısın." : "sen zaten başka kabaldasın";
-    else if ( speaker->pcdata->oyuncu_katli != 1 )
-        reply = reply_ch == BOT_CH_SAY ? "Önce görevciden katil hakkı almalısın." : "önce görevciden katlet hakkını al (100 gp), sonra gel";
-    else if ( speaker->level < BOT_CABAL_LEVEL )
-        reply = reply_ch == BOT_CH_SAY ? "Henüz erken. Biraz daha güçlen, sonra gel." : "biraz erken, 20 level sonra gel";
-    else if ( !bot_cabal_fits( speaker, ch->cabal ) )
-        reply = reply_ch == BOT_CH_SAY ? "Senin yolun bizimkiyle uyuşmuyor." : "senin yolun bizimkine uymuyor kusura bakma";
-    else if ( leader->induct_id != 0 && leader->induct_id != speaker->id )
-        reply = reply_ch == BOT_CH_SAY ? "Biraz bekle, önce başkasıyla ilgileniyorum." : "biraz bekle, önce başkasını alıyorum";
+    else if ( speaker->cabal == ch->cabal )              which = LR_ALREADY_US;
+    else if ( speaker->cabal != CABAL_NONE )             which = LR_OTHER_CABAL;
+    else if ( speaker->pcdata->oyuncu_katli != 1 )       which = LR_NO_PK;
+    else if ( speaker->level < BOT_CABAL_LEVEL )         which = LR_LOW_LEVEL;
+    else if ( !bot_cabal_fits( speaker, ch->cabal ) )    which = LR_MISFIT;
+    else if ( leader->induct_id != 0 && leader->induct_id != speaker->id ) which = LR_BUSY;
     else
     {
+        which = LR_ACCEPT;
         leader->induct_id    = speaker->id;
-        leader->induct_pulse = bot_pulse + 4 * number_range( 10, 25 );
-        snprintf( out, sizeof(out), reply_ch == BOT_CH_SAY
-                  ? "Peki. Seni %s saflarına kabul ediyorum; birazdan yeminini alacağım."
-                  : "tamam, seni %s kabalına alıyorum, birazdan yemin töreni :)",
-                  cabal_table[ch->cabal].long_name );
-        reply = out;
+        leader->induct_pulse = bot_pulse + BOT_SEC( number_range( 10, 25 ) );
     }
-    bot_queue_reply( leader, speaker->name, reply_ch, 6 + number_range( 0, 8 ), reply );
+    if ( which == LR_ACCEPT )
+        snprintf( out, sizeof(out), leader_reply[which][ic], cabal_table[ch->cabal].long_name );
+    else
+        snprintf( out, sizeof(out), "%s", leader_reply[which][ic] );
+    bot_queue_reply( leader, speaker->name, reply_ch, 6 + number_range( 0, 8 ), out );
     return TRUE;
 }
 
@@ -366,7 +375,7 @@ static CHAR_DATA *bot_pk_candidate( BOT_DATA *bot )
     CHAR_DATA *ch = bot->ch, *wch, *pick = NULL, *revenge;
     int count = 0;
 
-    if ( ( revenge = bot_char_by_id( bot->revenge_id ) ) != NULL && bot_pulse - bot->revenge_pulse < 4 * 60 * 30
+    if ( ( revenge = bot_char_by_id( bot->revenge_id ) ) != NULL && bot_pulse - bot->revenge_pulse < BOT_MIN(30)
       && visible_in_who( ch, revenge ) && pk_target_ok( ch, revenge ) )
         return revenge;
     for ( wch = char_list; wch != NULL; wch = wch->next )
@@ -380,7 +389,7 @@ static CHAR_DATA *bot_pk_candidate( BOT_DATA *bot )
             weight = 2;                                  /* gerçek oyuncu: daha ilginç */
         if ( in_my_area( ch, wch ) )
             weight += 2;
-        if ( last_seen_room( bot, wch->id, 4 * 60 * 30 ) != NULL )
+        if ( last_seen_room( bot, wch->id, BOT_MIN(30) ) != NULL )
             weight += 1;
         count += weight;
         if ( number_range( 1, count ) <= weight )
@@ -398,7 +407,7 @@ static void bot_pk_plan_areas( BOT_DATA *bot, CHAR_DATA *victim )
     int n = 0, i;
 
     bot->pk_area_n = bot->pk_area_i = 0;
-    if ( ( seen = last_seen_room( bot, victim->id, 4 * 60 * 40 ) ) != NULL && seen->area != ch->in_room->area )
+    if ( ( seen = last_seen_room( bot, victim->id, BOT_MIN(40) ) ) != NULL && seen->area != ch->in_room->area )
         bot->pk_areas[n++] = seen->area;
     for ( area = area_first; area != NULL && n < BOT_PK_AREAS; area = area->next )
     {
@@ -425,7 +434,7 @@ static void bot_pk_start( BOT_DATA *bot, CHAR_DATA *victim, const char *why )
 {
     bot->pk_tries     = 0;
     bot->pk_target_id = victim->id;
-    bot->pk_until     = bot_pulse + 4 * 60 * 15;
+    bot->pk_until     = bot_pulse + BOT_MIN(15);
     bot->substate     = 0;
     bot_pk_plan_areas( bot, victim );
     bot_set_state( bot, BOT_ST_PK );
@@ -438,7 +447,7 @@ bool bot_war_opportunity( BOT_DATA *bot )
 {
     CHAR_DATA *ch = bot->ch, *rch;
 
-    if ( !pk_capable( ch ) || ch->fighting != NULL || pct( ch->hit, ch->max_hit ) < 70 )
+    if ( !pk_capable( ch ) || ch->fighting != NULL || bot_pct( ch->hit, ch->max_hit ) < BOT_HP_FIGHT )
         return FALSE;
     if ( bot->state == BOT_ST_FOLLOW || bot->state == BOT_ST_CORPSE )
         return FALSE;
@@ -451,7 +460,7 @@ bool bot_war_opportunity( BOT_DATA *bot )
             /* her karşılaşmada saldırmaz: 5 dakikada bir karar, kişiliğe göre şans; intikam kesin */
             if ( rch->id != bot->revenge_id )
             {
-                if ( bot_pulse - bot->opp_pk_pulse < 4 * 60 * 5 )
+                if ( bot_pulse - bot->opp_pk_pulse < BOT_MIN(5) )
                     return FALSE;
                 bot->opp_pk_pulse = bot_pulse;
                 if ( number_percent() > chance )
@@ -473,7 +482,7 @@ void bot_war_attacked( BOT_DATA *bot, CHAR_DATA *attacker )
         return;
     bot->revenge_id    = attacker->id;
     bot->revenge_pulse = bot_pulse;
-    if ( ch->cabal == CABAL_NONE || bot_pulse - bot->help_call_pulse < 4 * 60 * 3 )
+    if ( ch->cabal == CABAL_NONE || bot_pulse - bot->help_call_pulse < BOT_MIN(3) )
         return;
     bot->help_call_pulse = bot_pulse;
     snprintf( buf, sizeof(buf), "yardım! %s %s'de bana saldırdı", attacker->name, bot_area_name( bot ) );
@@ -492,13 +501,13 @@ bool bot_war_help( BOT_DATA *bot, CHAR_DATA *speaker, const char *text )
     if ( ch == NULL || speaker == NULL || speaker->cabal != ch->cabal || !pk_capable( ch ) )
         return FALSE;
     if ( bot->state == BOT_ST_PK || bot->state == BOT_ST_RAID || bot->state == BOT_ST_FOLLOW
-      || bot->state == BOT_ST_CORPSE || ch->fighting != NULL || pct( ch->hit, ch->max_hit ) < 70 )
+      || bot->state == BOT_ST_CORPSE || ch->fighting != NULL || bot_pct( ch->hit, ch->max_hit ) < BOT_HP_FIGHT )
         return FALSE;
     if ( ( p = strstr( text, "yardım! " ) ) == NULL )
         return FALSE;
     p += strlen( "yardım! " );
     one_argument( (char *) p, name );
-    if ( name[0] == '\0' || ( attacker = online_pc_by_name( capitalize( name ) ) ) == NULL )
+    if ( name[0] == '\0' || ( attacker = online_pc_by_name( ch, capitalize( name ) ) ) == NULL )
         return FALSE;
     if ( !pk_target_ok( ch, attacker ) )
         return FALSE;
@@ -527,10 +536,10 @@ void bot_pk( BOT_DATA *bot )
     ROOM_INDEX_DATA *entry;
 
     if ( victim == NULL || bot_pulse > bot->pk_until || !visible_in_who( ch, victim )
-      || !pk_target_ok( ch, victim ) || pct( ch->hit, ch->max_hit ) < 50 )
+      || !pk_target_ok( ch, victim ) || bot_pct( ch->hit, ch->max_hit ) < BOT_HP_PK_MIN )
     {
         bot->pk_target_id = 0;
-        bot->next_pk = bot_pulse + number_range( 4 * 60 * 10, 4 * 60 * 30 );
+        bot->next_pk = bot_pulse + number_range( BOT_MIN(10), BOT_MIN(30) );
         bot_set_state( bot, BOT_ST_IDLE );
         return;
     }
@@ -555,7 +564,7 @@ void bot_pk( BOT_DATA *bot )
             bot->pk_tries = 0;
             bot->pk_target_id = 0;
             bot->revenge_id = 0;
-            bot->next_pk = bot_pulse + number_range( 4 * 60 * 10, 4 * 60 * 30 );
+            bot->next_pk = bot_pulse + number_range( BOT_MIN(10), BOT_MIN(30) );
             bot_set_state( bot, BOT_ST_IDLE );
             return;
         }
@@ -586,7 +595,7 @@ next_area:
         }
     }
     bot->pk_target_id = 0;
-    bot->next_pk = bot_pulse + number_range( 4 * 60 * 15, 4 * 60 * 40 );
+    bot->next_pk = bot_pulse + number_range( BOT_MIN(15), BOT_MIN(40) );
     bot_set_state( bot, BOT_ST_IDLE );
 }
 
@@ -651,7 +660,7 @@ static bool raid_ready( BOT_DATA *b )
     CHAR_DATA *ch = b->ch;
 
     return ch != NULL && pk_capable( ch ) && ch->level >= BOT_RAID_LEVEL && ch->fighting == NULL
-        && pct( ch->hit, ch->max_hit ) >= 70
+        && bot_pct( ch->hit, ch->max_hit ) >= BOT_HP_FIGHT
         && b->state != BOT_ST_FOLLOW && b->state != BOT_ST_CORPSE && b->state != BOT_ST_RAID
         && b->state != BOT_ST_PK;
 }
@@ -684,7 +693,7 @@ static bool bot_raid_consider( BOT_DATA *bot )
 
         if ( i == cabal || !item_at_home( i ) || cabal_table[i].obj_ptr == NULL )
             continue;
-        if ( bot_pulse - raid_fail_pulse[i] < 4 * 60 * 60 * 12 && raid_fail_pulse[i] != 0 )
+        if ( bot_pulse - raid_fail_pulse[i] < BOT_RAID_FAIL_AVOID && raid_fail_pulse[i] != 0 )
             continue;                                 /* son baskında ölüm: 12 saat uzak dur */
         {
             ROOM_INDEX_DATA *hq = get_room_index( cabal_table[i].room_vnum );
@@ -705,7 +714,7 @@ static bool bot_raid_consider( BOT_DATA *bot )
         return FALSE;
     }
 
-    raid_next_pulse[cabal] = bot_pulse + number_range( 4 * 60 * 90, 4 * 60 * 240 );
+    raid_next_pulse[cabal] = bot_pulse + number_range( BOT_MIN(90), BOT_MIN(240) );
     snprintf( buf, sizeof(buf), "baskın! hedef %s, karargâhta toplanıyoruz", cabal_table[target].short_name );
     bot_talk( bot, BOT_CH_CABAL, NULL, buf );
     bot_log( bot, "baskın başlattı: hedef %s.", cabal_table[target].short_name );
@@ -778,7 +787,6 @@ static bool raid_go( BOT_DATA *bot, ROOM_INDEX_DATA *to )
         return TRUE;
     return FALSE;
 }
-#define raid_go_home( bot, home ) raid_go( (bot), (home) )
 
 static void raid_end( BOT_DATA *bot, const char *why )
 {
@@ -789,152 +797,124 @@ static void raid_end( BOT_DATA *bot, const char *why )
     bot_set_state( bot, BOT_ST_IDLE );
 }
 
-void bot_raid( BOT_DATA *bot )
+/* karargâhta toplanma: lider ve en az bir arkadaş hazırsa (ya da 5 dk geçtiyse) yola çık */
+static bool raid_gathered( BOT_DATA *bot, ROOM_INDEX_DATA *home )
 {
-    CHAR_DATA *ch = bot->ch, *carrier, *rch;
-    ROOM_INDEX_DATA *iroom, *home, *enemy_hq;
-    OBJ_DATA *item;
-    int target = bot->raid_cabal;
-    bool defend;
+    CHAR_DATA *ch = bot->ch, *rch;
+    CHAR_DATA *leader = bot_char_by_id( bot->raid_leader_id );
+    int mates = 0;
 
-    if ( target <= CABAL_NONE || target >= MAX_CABAL || ch->cabal == CABAL_NONE )
-    {
-        raid_end( bot, NULL );
-        return;
-    }
-    defend = ( target == ch->cabal );
-    if ( !defend && raid_fail_pulse[target] > bot->raid_pulse )
-    {
-        raid_end( bot, "arkadaş muhafız bildirdi" );
-        return;
-    }
-    home = get_room_index( cabal_table[ch->cabal].room_vnum );
-    enemy_hq = get_room_index( cabal_table[target].room_vnum );
-    if ( home == NULL || enemy_hq == NULL || bot_pulse - bot->raid_pulse > 4 * 60 * 40 )
-    {
-        raid_end( bot, "süre doldu" );
-        return;
-    }
-    if ( pct( ch->hit, ch->max_hit ) < 35 )
-    {
-        bot_talk( bot, BOT_CH_CABAL, NULL, "ağır yaralıyım, geri çekiliyorum" );
-        raid_end( bot, "yaralı" );
-        return;
-    }
-
-    /* düşman oyuncu odadaysa (baskın/savunma sırasında) çarpış */
     for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
-        if ( rch != ch && pk_target_ok( ch, rch ) && can_see( ch, rch ) && pct( ch->hit, ch->max_hit ) >= 50 )
-        {
-            if ( bot->raid_step % 10 != 2 )
-                bot_chat_event( bot, BOT_EV_PK_TAUNT, rch );
-            bot_attack( bot, rch );
-            return;
-        }
+        if ( rch != ch && !IS_NPC(rch) && rch->cabal == ch->cabal )
+            mates++;
+    if ( bot_pulse - bot->raid_pulse > BOT_MIN(5) )
+        return TRUE;
+    if ( mates < 1 )
+        return FALSE;
+    if ( leader == ch )
+        return TRUE;
+    return leader != NULL && leader->in_room == home && leader->pcdata->bot != NULL
+        && leader->pcdata->bot->raid_step >= 1;
+}
 
-    item = cabal_item_root( target, &iroom, &carrier );
+/* saldırı: 0 toplan, 1 düşman karargâhına, 2 eşyayı al, 3 eve dön */
+static void raid_attack( BOT_DATA *bot, OBJ_DATA *item, ROOM_INDEX_DATA *iroom, CHAR_DATA *carrier,
+                         ROOM_INDEX_DATA *home, ROOM_INDEX_DATA *enemy_hq )
+{
+    CHAR_DATA *ch = bot->ch;
+    char kw[MAX_INPUT_LENGTH];
 
-    if ( !defend )
+    switch ( bot->raid_step )
     {
-        switch ( bot->raid_step )
+    case 0:
+        if ( ch->in_room != home )
         {
-        case 0:                                       /* karargâhta toplan */
-            if ( ch->in_room != home )
-            {
-                if ( !raid_go( bot, home ) )
-                    raid_end( bot, "karargâha yol yok" );
-                return;
-            }
-            {
-                CHAR_DATA *leader = bot_char_by_id( bot->raid_leader_id );
-                int mates = 0;
-
-                for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
-                    if ( rch != ch && !IS_NPC(rch) && rch->cabal == ch->cabal )
-                        mates++;
-                if ( ( leader == ch && mates >= 1 ) || ( leader != NULL && leader->in_room == home && mates >= 1
-                     && leader->pcdata->bot != NULL && leader->pcdata->bot->raid_step >= 1 )
-                  || bot_pulse - bot->raid_pulse > 4 * 60 * 5 )
-                {
-                    if ( leader == ch )
-                        bot_talk( bot, BOT_CH_CABAL, NULL, "hadi, gidiyoruz" );
-                    bot->raid_step = 1;
-                }
-                else if ( bot_cast_buffs( bot ) )
-                    return;
-            }
-            return;
-        case 1:                                       /* düşman karargâhına */
-            if ( item == NULL || ( carrier == NULL && iroom != enemy_hq )
-              || ( carrier != NULL && carrier->cabal != ch->cabal ) )
-            {
-                raid_end( bot, "eşya yerinde değil" );
-                return;
-            }
-            if ( ch->in_room != enemy_hq )
-            {
-                if ( !raid_go( bot, enemy_hq ) )
-                    raid_end( bot, "düşman karargâhına yol yok" );
-                return;
-            }
-            bot->raid_step = 2;
-            bot_chat_event( bot, BOT_EV_PK_TAUNT, NULL );
-            return;
-        case 2:                                       /* eşyayı al */
-            if ( carrier == ch )
-            {
-                bot->raid_step = 3;
-                bot_talk( bot, BOT_CH_CABAL, NULL, "eşya bende, dönüyorum!" );
-                return;
-            }
-            if ( carrier != NULL )
-            {
-                /* bir kabal arkadaşı aldı: eşlik et */
-                if ( carrier->cabal == ch->cabal )
-                    bot->raid_step = 3;
-                else
-                    raid_end( bot, "eşyayı başkası aldı" );
-                return;
-            }
-            if ( iroom != ch->in_room )
-            {
-                raid_end( bot, "eşya burada değil" );
-                return;
-            }
-            if ( !can_see_obj( ch, item ) )
-                return;
-            raid_take_item( bot, item );
-            return;
-        case 3:                                       /* eve dön */
-            if ( ch->in_room != home )
-            {
-                if ( !raid_go_home( bot, home ) )
-                    raid_end( bot, "eve yol yok" );
-                return;
-            }
-            if ( carrier == ch )
-            {
-                char kw[MAX_INPUT_LENGTH];
-
-                bot_obj_keyword( ch, item, ch->carrying, kw, sizeof(kw) );
-                bot_cmd( bot, "bırak %s", kw );
-                if ( item->in_room == home )
-                {
-                    bot_talk( bot, BOT_CH_CABAL, NULL, "eşya karargâhta, güçleri kesildi!" );
-                    bot_log( bot, "%s kabalının eşyasını karargâha getirdi.", cabal_table[target].short_name );
-                    raid_end( bot, "başarılı" );
-                }
-                return;
-            }
-            if ( iroom == home || carrier == NULL )
-                raid_end( bot, "tamamlandı" );
+            if ( !raid_go( bot, home ) )
+                raid_end( bot, "karargâha yol yok" );
             return;
         }
-        raid_end( bot, NULL );
+        if ( raid_gathered( bot, home ) )
+        {
+            if ( bot_char_by_id( bot->raid_leader_id ) == ch )
+                bot_talk( bot, BOT_CH_CABAL, NULL, "hadi, gidiyoruz" );
+            bot->raid_step = 1;
+            return;
+        }
+        bot_cast_buffs( bot );
+        return;
+    case 1:
+        if ( item == NULL || ( carrier == NULL && iroom != enemy_hq )
+          || ( carrier != NULL && carrier->cabal != ch->cabal ) )
+        {
+            raid_end( bot, "eşya yerinde değil" );
+            return;
+        }
+        if ( ch->in_room != enemy_hq )
+        {
+            if ( !raid_go( bot, enemy_hq ) )
+                raid_end( bot, "düşman karargâhına yol yok" );
+            return;
+        }
+        bot->raid_step = 2;
+        bot_chat_event( bot, BOT_EV_PK_TAUNT, NULL );
+        return;
+    case 2:
+        if ( carrier == ch )
+        {
+            bot->raid_step = 3;
+            bot_talk( bot, BOT_CH_CABAL, NULL, "eşya bende, dönüyorum!" );
+            return;
+        }
+        if ( carrier != NULL )
+        {
+            /* bir kabal arkadaşı aldı: eşlik et */
+            if ( carrier->cabal == ch->cabal )
+                bot->raid_step = 3;
+            else
+                raid_end( bot, "eşyayı başkası aldı" );
+            return;
+        }
+        if ( iroom != ch->in_room )
+        {
+            raid_end( bot, "eşya burada değil" );
+            return;
+        }
+        if ( can_see_obj( ch, item ) )
+            raid_take_item( bot, item );
+        return;
+    case 3:
+        if ( ch->in_room != home )
+        {
+            if ( !raid_go( bot, home ) )
+                raid_end( bot, "eve yol yok" );
+            return;
+        }
+        if ( carrier == ch )
+        {
+            bot_obj_keyword( ch, item, ch->carrying, kw, sizeof(kw) );
+            bot_cmd( bot, "bırak %s", kw );
+            if ( item->in_room == home )
+            {
+                bot_talk( bot, BOT_CH_CABAL, NULL, "eşya karargâhta, güçleri kesildi!" );
+                bot_log( bot, "%s kabalının eşyasını karargâha getirdi.", cabal_table[bot->raid_cabal].short_name );
+                raid_end( bot, "başarılı" );
+            }
+            return;
+        }
+        if ( iroom == home || carrier == NULL )
+            raid_end( bot, "tamamlandı" );
         return;
     }
+    raid_end( bot, NULL );
+}
 
-    /* savunma / kurtarma */
+/* savunma / kurtarma (raid_step 10+): eşya evde değilse peşine düş, getir, bırak */
+static void raid_defend( BOT_DATA *bot, OBJ_DATA *item, ROOM_INDEX_DATA *iroom, CHAR_DATA *carrier,
+                         ROOM_INDEX_DATA *home )
+{
+    CHAR_DATA *ch = bot->ch;
+    char kw[MAX_INPUT_LENGTH];
+
     if ( item == NULL || ( iroom == home && carrier == NULL ) )
     {
         if ( bot->raid_step >= 12 )
@@ -946,21 +926,17 @@ void bot_raid( BOT_DATA *bot )
     {
         if ( ch->in_room != home )
         {
-            if ( !raid_go_home( bot, home ) )
+            if ( !raid_go( bot, home ) )
                 raid_end( bot, "eve yol yok" );
             return;
         }
+        bot_obj_keyword( ch, item, ch->carrying, kw, sizeof(kw) );
+        bot_cmd( bot, "bırak %s", kw );
+        if ( item->in_room == home )
         {
-            char kw[MAX_INPUT_LENGTH];
-
-            bot_obj_keyword( ch, item, ch->carrying, kw, sizeof(kw) );
-            bot_cmd( bot, "bırak %s", kw );
-            if ( item->in_room == home )
-            {
-                bot_talk( bot, BOT_CH_CABAL, NULL, "eşyamız yerine döndü!" );
-                bot_log( bot, "kabal eşyasını geri getirdi." );
-                raid_end( bot, "kurtarıldı" );
-            }
+            bot_talk( bot, BOT_CH_CABAL, NULL, "eşyamız yerine döndü!" );
+            bot_log( bot, "kabal eşyasını geri getirdi." );
+            raid_end( bot, "kurtarıldı" );
         }
         return;
     }
@@ -997,6 +973,56 @@ void bot_raid( BOT_DATA *bot )
             raid_take_item( bot, item );
         bot->raid_step = 13;
     }
+}
+
+void bot_raid( BOT_DATA *bot )
+{
+    CHAR_DATA *ch = bot->ch, *carrier, *rch;
+    ROOM_INDEX_DATA *iroom, *home, *enemy_hq;
+    OBJ_DATA *item;
+    int target = bot->raid_cabal;
+    bool defend;
+
+    if ( target <= CABAL_NONE || target >= MAX_CABAL || ch->cabal == CABAL_NONE )
+    {
+        raid_end( bot, NULL );
+        return;
+    }
+    defend = ( target == ch->cabal );
+    if ( !defend && raid_fail_pulse[target] > bot->raid_pulse )
+    {
+        raid_end( bot, "arkadaş muhafız bildirdi" );
+        return;
+    }
+    home = get_room_index( cabal_table[ch->cabal].room_vnum );
+    enemy_hq = get_room_index( cabal_table[target].room_vnum );
+    if ( home == NULL || enemy_hq == NULL || bot_pulse - bot->raid_pulse > BOT_MIN(40) )
+    {
+        raid_end( bot, "süre doldu" );
+        return;
+    }
+    if ( bot_pct( ch->hit, ch->max_hit ) < BOT_HP_RAID_QUIT )
+    {
+        bot_talk( bot, BOT_CH_CABAL, NULL, "ağır yaralıyım, geri çekiliyorum" );
+        raid_end( bot, "yaralı" );
+        return;
+    }
+
+    /* düşman oyuncu odadaysa (baskın/savunma sırasında) çarpış */
+    for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
+        if ( rch != ch && pk_target_ok( ch, rch ) && can_see( ch, rch ) && bot_pct( ch->hit, ch->max_hit ) >= BOT_HP_PK_MIN )
+        {
+            if ( bot->raid_step % 10 != 2 )
+                bot_chat_event( bot, BOT_EV_PK_TAUNT, rch );
+            bot_attack( bot, rch );
+            return;
+        }
+
+    item = cabal_item_root( target, &iroom, &carrier );
+    if ( defend )
+        raid_defend( bot, item, iroom, carrier, home );
+    else
+        raid_attack( bot, item, iroom, carrier, home, enemy_hq );
 }
 
 /*
@@ -1059,7 +1085,7 @@ void bot_war_tick( BOT_DATA *bot )
 
     if ( ch == NULL || ch->in_room == NULL )
         return;
-    if ( bot_pulse - bot->cabal_check_pulse > 4 * 60 * 5 )
+    if ( bot_pulse - bot->cabal_check_pulse > BOT_MIN(5) )
     {
         bot->cabal_check_pulse = bot_pulse;
         bot_leader_check( bot );
@@ -1082,7 +1108,7 @@ bool bot_war_goal( BOT_DATA *bot )
 
     /* yarım kalmış baskın (yolculuk kesildi vb.): kaldığı yerden sürdür */
     if ( bot->raid_cabal > CABAL_NONE && bot->raid_cabal < MAX_CABAL
-      && bot_pulse - bot->raid_pulse < 4 * 60 * 40 && pct( ch->hit, ch->max_hit ) >= 50 )
+      && bot_pulse - bot->raid_pulse < BOT_MIN(40) && bot_pct( ch->hit, ch->max_hit ) >= BOT_HP_PK_MIN )
     {
         bot_set_state( bot, BOT_ST_RAID );
         return TRUE;
@@ -1096,8 +1122,8 @@ bool bot_war_goal( BOT_DATA *bot )
 
         for ( b = bot_list; b != NULL; b = b->next )
             if ( b != bot && b->ch != NULL && b->ch->cabal == ch->cabal && b->state == BOT_ST_RAID
-              && b->raid_cabal != ch->cabal && b->raid_step <= 1 && bot_pulse - b->raid_pulse < 4 * 60 * 8
-              && !( raid_fail_pulse[b->raid_cabal] != 0 && bot_pulse - raid_fail_pulse[b->raid_cabal] < 4 * 60 * 60 * 12 ) )
+              && b->raid_cabal != ch->cabal && b->raid_step <= 1 && bot_pulse - b->raid_pulse < BOT_MIN(8)
+              && !( raid_fail_pulse[b->raid_cabal] != 0 && bot_pulse - raid_fail_pulse[b->raid_cabal] < BOT_RAID_FAIL_AVOID ) )
             {
                 raid_join( bot, b->raid_cabal, b->raid_leader_id );
                 bot_talk( bot, BOT_CH_CABAL, NULL, "ben de geliyorum" );
@@ -1106,8 +1132,8 @@ bool bot_war_goal( BOT_DATA *bot )
     }
 
     /* kendi eşyası çalınmışsa kurtarma */
-    if ( !item_at_home( ch->cabal ) && bot_pulse - bot->raid_pulse > 4 * 60 * 15
-      && pct( ch->hit, ch->max_hit ) >= 70 && ch->level >= BOT_RAID_LEVEL )
+    if ( !item_at_home( ch->cabal ) && bot_pulse - bot->raid_pulse > BOT_MIN(15)
+      && bot_pct( ch->hit, ch->max_hit ) >= BOT_HP_FIGHT && ch->level >= BOT_RAID_LEVEL )
     {
         bot->raid_cabal = ch->cabal;
         bot->raid_leader_id = 0;
@@ -1118,17 +1144,17 @@ bool bot_war_goal( BOT_DATA *bot )
     }
 
     /* baskın: PK soğumasından bağımsız, boştayken 10 dk'da bir değerlendirilir */
-    if ( bot_pulse > bot->next_raid_check && pct( ch->hit, ch->max_hit ) > 85 )
+    if ( bot_pulse > bot->next_raid_check && bot_pct( ch->hit, ch->max_hit ) > BOT_HP_IDLE_PK )
     {
-        bot->next_raid_check = bot_pulse + 4 * 60 * 10;
+        bot->next_raid_check = bot_pulse + BOT_MIN(10);
         if ( bot_debug )
             bot_log( bot, "kabal kararı: baskın değerlendiriliyor." );
         if ( bot_raid_consider( bot ) )
             return TRUE;
     }
-    if ( bot_pulse > bot->next_pk && pct( ch->hit, ch->max_hit ) > 85 )
+    if ( bot_pulse > bot->next_pk && bot_pct( ch->hit, ch->max_hit ) > BOT_HP_IDLE_PK )
     {
-        bot->next_pk = bot_pulse + number_range( 4 * 60 * 20, 4 * 60 * 60 );
+        bot->next_pk = bot_pulse + number_range( BOT_MIN(20), BOT_HOUR(1) );
         if ( bot->pk_istekli || bot->revenge_id != 0 )
         {
             CHAR_DATA *victim = bot_pk_candidate( bot );

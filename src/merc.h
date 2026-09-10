@@ -3248,6 +3248,8 @@ bool	is_number	( char *arg );
 int	number_argument	( char *argument, char *arg );
 int	mult_argument	( char *argument, char *arg);
 char *	one_argument	( char *argument, char *arg_first );
+/* Grup 08 */
+char *	one_argument_n	( const char *argument, char *arg_first, size_t size );
 /* interp-alias.c */
 void 	substitute_alias (DESCRIPTOR_DATA *d, char *input);
 
