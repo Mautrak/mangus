@@ -1298,6 +1298,11 @@ void do_pick( CHAR_DATA *ch, char *argument )
         return;
       }
 
+      if (!IS_SET(obj->value[1],EX_LOCKED))
+      { send_to_char("Kilidi açılmış.\n\r",  ch ); return; }
+      if (IS_SET(obj->value[1],EX_PICKPROOF))
+      { send_to_char("Başaramadın.\n\r",ch); return; }
+
       REMOVE_BIT(obj->value[1],EX_LOCKED);
       act("$p üzerindeki kilidi maymuncukla açtın.",ch,obj,NULL,TO_CHAR);
       act("$n $p üzerindeki kilidi maymuncukla açtı.",ch,obj,NULL,TO_ROOM);
@@ -1315,6 +1320,8 @@ void do_pick( CHAR_DATA *ch, char *argument )
     {send_to_char( "Kilidi açılamaz.\n\r",   ch ); return; }
     if ( !IS_SET(obj->value[1], CONT_LOCKED) )
     { send_to_char("Kilidi açılmış.\n\r",  ch ); return; }
+    if ( IS_SET(obj->value[1], CONT_PICKPROOF) )
+    { send_to_char("Başaramadın.\n\r",ch); return; }
 
     REMOVE_BIT(obj->value[1], CONT_LOCKED);
     act("$p üzerindeki kilidi maymuncukla açtın.",ch,obj,NULL,TO_CHAR);
@@ -1333,6 +1340,8 @@ void do_pick( CHAR_DATA *ch, char *argument )
     { send_to_char( "Kapalı değil.\n\r",ch ); return; }
     if ( !IS_SET(pexit->exit_info, EX_LOCKED) )
     { send_to_char( "Kilidi açılmış.\n\r",  ch ); return; }
+    if ( IS_SET(pexit->exit_info, EX_PICKPROOF) && !IS_IMMORTAL(ch) )
+    { send_to_char( "Başaramadın.\n\r", ch ); return; }
 
     REMOVE_BIT(pexit->exit_info, EX_LOCKED);
     send_to_char( "*Klik*\n\r", ch );
