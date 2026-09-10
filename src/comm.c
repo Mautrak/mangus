@@ -788,9 +788,9 @@ void read_from_buffer( DESCRIPTOR_DATA *d )
      * Do '!' substitution.
      */
     if ( d->incomm[0] == '!' )
-	strcpy( d->incomm, d->inlast );
+	snprintf( d->incomm, sizeof(d->incomm), "%s", d->inlast );
     else
-	strcpy( d->inlast, d->incomm );
+	snprintf( d->inlast, sizeof(d->inlast), "%s", d->incomm );
 
     /*
      * Shift the input buffer.
@@ -2317,26 +2317,6 @@ static size_t colour_expand( char *dst, size_t dstsz, const char *src, CHAR_DATA
     return n;
 }
 
-/*
- * Eski arayüz: kodu string'e yazar, uzunluğunu döndürür.
- */
-int colour( char type, CHAR_DATA *ch, char *string )
-{
-    const char *code = colour_code( type, ch );
-
-    strcpy( string, code );
-    return (int) strlen( code );
-}
-
-/*
- * Eski arayüz: buffer en az MAX_STRING_LENGTH*2 bayt olmalıdır.
- */
-void colourconv( char *buffer, const char *txt, CHAR_DATA *ch )
-{
-    if ( ch->desc && txt )
-	colour_expand( buffer, MAX_STRING_LENGTH * 2, txt, ch );
-    return;
-}
 
 
 /*
