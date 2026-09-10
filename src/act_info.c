@@ -51,8 +51,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <time.h>
-#include <unistd.h>
 #include "merc.h"
+#include "turkish.h"
 #include "bot.h"
 #include "utf8.h"
 #include "password.h"
@@ -70,7 +70,6 @@ DECLARE_DO_FUN( do_say  	);
 DECLARE_DO_FUN( do_scan2  	);
 DECLARE_DO_FUN( do_affects_col 	);
 DECLARE_DO_FUN( do_who_col	);
-DECLARE_DO_FUN( do_autolist_col	);
 
 
 const char *	where_name	[] =
@@ -86,14 +85,16 @@ const char *	where_name	[] =
   "< vücut    >  ",
   "< bel      >  ",
   "< bilek    >  ",
-  "< sol el   >%c ",
-  "< sağ el   >%c ",
+  "< sol el   >",
+  "< sağ el   >",
   "< çift el  >  ",
   "< süzülen  >  ",
   "< dövme    >  ",
   "< saplanmış>  "
 };
 
+
+extern const char *dir_name[];
 
 /* for do_count */
 int max_on = 0;
@@ -113,14 +114,50 @@ bool	check_blind		( CHAR_DATA *ch );
 bool	show_cwear_to_char	( CHAR_DATA *ch, OBJ_DATA *obj );
 
 
+/*
+ * Yuva etiketi: sol/sağ el yuvalarında 'mark' (baskın el için '*') eklenir,
+ * diğerleri tablodaki gibi basılır.
+ */
+static const char *where_label( int iWear, char mark, char *buf, size_t n )
+{
+    if ( iWear == WEAR_LEFT || iWear == WEAR_RIGHT )
+	snprintf( buf, n, "%s%c ", where_name[iWear], mark );
+    else
+	snprintf( buf, n, "%s", where_name[iWear] );
+    return buf;
+}
+
+/* Sözcüğe ünlü uyumlu belirtme ('yi) ya da bulunma ('de) eki takar. */
+static const char *tr_suffixed( const char *word, char *buf, size_t n, bool locative )
+{
+    static const char *acc_vowel[] = { "ı", "i", "u", "ü" };
+    static const char *loc_vowel[] = { "a", "e", "a", "e" };
+    int cls = tr_vowel_class( word );
+    size_t len = strlen( word );
+
+    if ( cls < 0 )
+	cls = 0;
+
+    if ( locative )
+    {
+	/* sert ünsüzden (p ç t k s ş h f) sonra 't' */
+	bool hard = ( len >= 1 && strchr( "ptkshf", word[len - 1] ) != NULL )
+		 || ( len >= 2 && ( !strcmp( word + len - 2, "ç" ) || !strcmp( word + len - 2, "ş" ) ) );
+	snprintf( buf, n, "%s'%c%s", word, hard ? 't' : 'd', loc_vowel[cls] );
+    }
+    else
+	snprintf( buf, n, "%s'%s%s", word, tr_ends_with_vowel( word ) ? "y" : "", acc_vowel[cls] );
+    return buf;
+}
+
 bool show_cwear_to_char( CHAR_DATA *ch, OBJ_DATA *obj )
 {
  char buf[MAX_STRING_LENGTH];
 
-  if ((obj->wear_loc == WEAR_LEFT && LEFT_HANDER(ch))
-	|| (obj->wear_loc == WEAR_RIGHT && RIGHT_HANDER(ch)))
-       snprintf(buf, sizeof(buf),where_name[obj->wear_loc], '*');
-  else snprintf(buf, sizeof(buf),where_name[obj->wear_loc], ' ');
+  where_label( obj->wear_loc,
+	( (obj->wear_loc == WEAR_LEFT && LEFT_HANDER(ch))
+	|| (obj->wear_loc == WEAR_RIGHT && RIGHT_HANDER(ch)) ) ? '*' : ' ',
+	buf, sizeof(buf) );
   send_to_char(buf, ch );
   if ( can_see_obj( ch, obj ) )
 	send_to_char( format_obj_to_char( obj, ch, TRUE ), ch );
@@ -133,242 +170,129 @@ bool show_cwear_to_char( CHAR_DATA *ch, OBJ_DATA *obj )
 
 
 
+#define OBJ_VNUM_MONEY_MAX	5	/* bu vnum'a kadar olanlar para: durum/yaş gösterilmez */
+
+/* Eşyanın etkilerini nitelik / yp-mana-zp / vuruş-zarar toplamlarına ayırır. */
+static void sum_obj_applies( AFFECT_DATA *list, int *nitelik, int *yp, int *zz )
+{
+    AFFECT_DATA *paf;
+
+    for ( paf = list; paf != NULL; paf = paf->next )
+    {
+	switch ( paf->location )
+	{
+	case APPLY_HITROLL: case APPLY_DAMROLL:
+	    *zz += paf->modifier;
+	    break;
+	case APPLY_STR: case APPLY_INT: case APPLY_WIS:
+	case APPLY_DEX: case APPLY_CON: case APPLY_CHA:
+	    *nitelik += paf->modifier;
+	    break;
+	case APPLY_MANA: case APPLY_HIT: case APPLY_MOVE:
+	    *yp += paf->modifier;
+	    break;
+	}
+    }
+}
+
+/* Yıldız rengi: 0 beyaz, <= lo kırmızı, <= hi cam göbeği, üstü magenta. */
+static const char *tier_color( int v, int lo, int hi )
+{
+    if ( v == 0 )	return CLR_WHITE;
+    if ( v <= lo )	return CLR_RED;
+    if ( v <= hi )	return CLR_CYAN;
+    return CLR_MAGENTA;
+}
+
+/* Tampona ekler; taşarsa keser. */
+static void bufcat( char *buf, size_t n, size_t *len, const char *str )
+{
+    *len += snprintf( buf + *len, n - *len, "%s", str );
+    if ( *len >= n )
+	*len = n - 1;
+}
+
 char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
 {
-  static char buf[MAX_STRING_LENGTH];
-  static char buf_con[50],buf_eskime[50], buf_material[50];
-  AFFECT_DATA *paf;
+    static const struct { long bit; long detect; const char *color; const char *tag; } tag_table[] =
+    {
+	{ ITEM_BURIED, 0,            CLR_WHITE,  "[gömülü] "     },
+	{ ITEM_INVIS,  0,            CLR_WHITE,  "[görünmez] "   },
+	{ ITEM_EVIL,   DETECT_EVIL,  CLR_RED,    "[kızıl aura] " },
+	{ ITEM_BLESS,  DETECT_GOOD,  CLR_BLUE,   "[mavi aura] "  },
+	{ ITEM_MAGIC,  DETECT_MAGIC, CLR_YELLOW, "[büyülü] "     },
+	{ ITEM_GLOW,   0,            CLR_CYAN,   "[parlayan] "   },
+	{ ITEM_HUM,    0,            CLR_BROWN,  "[vızıldayan] " },
+    };
+    static char buf[MAX_STRING_LENGTH];
+    char tmp[MAX_INPUT_LENGTH];
+    size_t len = 0, i;
+    int nitelik = 0, yp = 0, zz = 0;
 
-  int OBJ_NITELIK = 0;
-  int OBJ_ZZ_VZ = 0;
-  int OBJ_YP_MANA_HP = 0;
-
-  buf[0] = '\0';
-  buf_con[0] = '\0';
-  buf_eskime[0] = '\0';
-
-  if (obj->pIndexData->vnum > 5)	/* money  etc */
-  {
-    snprintf(buf_con, sizeof(buf_con)," [%s%s%s]",
-      CLR_GREEN,
-      get_cond_alias(obj),
-      CLR_WHITE_BOLD);
-  }
-  else
-  {
-    buf_con[0] = '\0';
-  }
-
-  if (obj->pIndexData->vnum > 5)	/* money  etc */
-  {
-    snprintf(buf_eskime, sizeof(buf_eskime)," [%s%d%s]",
-      CLR_GREEN,
-      esya_kac_gunluk(obj->creation_time),
-      CLR_WHITE_BOLD);
-  }
-  else
-  {
-    buf_eskime[0] = '\0';
-  }
-
-  snprintf(buf_material, sizeof(buf_material)," [%s%s%s]",CLR_GREEN,obj->material,CLR_WHITE_BOLD);
+    buf[0] = '\0';
 
     if ((fShort && (obj->short_descr == NULL || obj->short_descr[0] == '\0'))
     ||  (obj->description == NULL || obj->description[0] == '\0'))
 	return buf;
 
-    if (obj->enchanted)
-	{
-		for (paf = obj->affected; paf != NULL; paf = paf->next)
-		{
-			if(paf->location)
-			{
-				if(paf->location == APPLY_HITROLL || paf->location == APPLY_DAMROLL)
-				{
-					OBJ_ZZ_VZ += paf->modifier;
-				}
-				else if(paf->location == APPLY_STR || paf->location == APPLY_INT || paf->location == APPLY_WIS ||
-						paf->location == APPLY_DEX || paf->location == APPLY_CON || paf->location == APPLY_CHA )
-				{
-					OBJ_NITELIK += paf->modifier;
-				}
-				else if(paf->location == APPLY_MANA || paf->location == APPLY_HIT || paf->location == APPLY_MOVE)
-				{
-					OBJ_YP_MANA_HP += paf->modifier;
-				}
-			}
-		}
-	}
-	else
-	{
-		for (paf = obj->pIndexData->affected; paf != NULL; paf = paf->next)
-		{
-			if(paf->location)
-			{
-				if(paf->location == APPLY_HITROLL || paf->location == APPLY_DAMROLL)
-				{
-					OBJ_ZZ_VZ += paf->modifier;
-				}
-				else if(paf->location == APPLY_STR || paf->location == APPLY_INT || paf->location == APPLY_WIS ||
-						paf->location == APPLY_DEX || paf->location == APPLY_CON || paf->location == APPLY_CHA )
-				{
-					OBJ_NITELIK += paf->modifier;
-				}
-				else if(paf->location == APPLY_MANA || paf->location == APPLY_HIT || paf->location == APPLY_MOVE)
-				{
-					OBJ_YP_MANA_HP += paf->modifier;
-				}
-			}
-		}
-	}
-	
-	
-	strcat( buf, CLR_WHITE );
-  if (IS_IMMORTAL(ch))
-  {
-    snprintf(buf, sizeof(buf),"[%-5d]",obj->pIndexData->vnum);
-  }
-	strcat( buf, "["     );
-	
-	if(OBJ_NITELIK == 0)
-	{
-		strcat( buf, CLR_WHITE );strcat( buf, "*"     );
-	}
-	else if(OBJ_NITELIK <=2)
-	{
-		strcat( buf, CLR_RED );strcat( buf, "*"     );
-	}
-	else if(OBJ_NITELIK <=4)
-	{
-		strcat( buf, CLR_CYAN );strcat( buf, "*"     );
-	}
-	else
-	{
-		strcat( buf, CLR_MAGENTA );strcat( buf, "*"     );
-	}
+    sum_obj_applies( obj->enchanted ? obj->affected : obj->pIndexData->affected,
+		     &nitelik, &yp, &zz );
 
-	if(OBJ_YP_MANA_HP == 0)
-	{
-		strcat( buf, CLR_WHITE );strcat( buf, "*"     );
-	}
-	else if(OBJ_YP_MANA_HP <= 100)
-	{
-		strcat( buf, CLR_RED );strcat( buf, "*"     );
-	}
-	else if(OBJ_YP_MANA_HP <= 300)
-	{
-		strcat( buf, CLR_CYAN );strcat( buf, "*"     );
-	}
-	else
-	{
-		strcat( buf, CLR_MAGENTA );strcat( buf, "*"     );
-	}
-	
-	if(OBJ_ZZ_VZ == 0)
-	{
-		strcat( buf, CLR_WHITE );strcat( buf, "*"     );
-	}
-	else if(OBJ_ZZ_VZ <= 5)
-	{
-		strcat( buf, CLR_RED );strcat( buf, "*"     );
-	}
-	else if(OBJ_ZZ_VZ <= 25)
-	{
-		strcat( buf, CLR_CYAN );strcat( buf, "*"     );
-	}
-	else
-	{
-		strcat( buf, CLR_MAGENTA );strcat( buf, "*"     );
-	}
-	
-	strcat( buf, CLR_WHITE );
-	strcat( buf, "]"     );
-	
+    bufcat( buf, sizeof(buf), &len, CLR_WHITE );
+    if ( IS_IMMORTAL(ch) )
+    {
+	snprintf( tmp, sizeof(tmp), "[%-5d]", obj->pIndexData->vnum );
+	bufcat( buf, sizeof(buf), &len, tmp );
+    }
+    snprintf( tmp, sizeof(tmp), "[%s*%s*%s*%s]",
+	tier_color( nitelik, 2, 4 ), tier_color( yp, 100, 300 ),
+	tier_color( zz, 5, 25 ), CLR_WHITE );
+    bufcat( buf, sizeof(buf), &len, tmp );
 
-    if ( IS_OBJ_STAT(obj, ITEM_BURIED)     )
-		{
-		 strcat( buf, CLR_WHITE );
-     strcat( buf, "[gömülü] "     );//(Gömülü)
-		}
-    if ( IS_OBJ_STAT(obj, ITEM_INVIS)     )
-		{
-		 strcat( buf, CLR_WHITE );
-     strcat( buf, "[görünmez] "     );//(Görünmez)
-		}
-    if ( CAN_DETECT(ch, DETECT_EVIL)
-         && IS_OBJ_STAT(obj, ITEM_EVIL)   )
-		{
-		 strcat( buf, CLR_RED );
-     strcat( buf, "[kızıl aura] "  );
-		}
-    if (CAN_DETECT(ch, DETECT_GOOD)
-    &&  IS_OBJ_STAT(obj,ITEM_BLESS))
-		{
-		 strcat( buf, CLR_BLUE );
-     strcat( buf, "[mavi aura] "  );
-		}
-    if ( CAN_DETECT(ch, DETECT_MAGIC)
-         && IS_OBJ_STAT(obj, ITEM_MAGIC)  )
-		{
-		 strcat( buf, CLR_YELLOW );
-     strcat( buf, "[büyülü] "   );//(Büyülü)
-		}
-    if ( IS_OBJ_STAT(obj, ITEM_GLOW)      )
-		{
-		 strcat( buf, CLR_CYAN );
-     strcat( buf, "[parlayan] "   );//(Parlayan)
-		}
-    if ( IS_OBJ_STAT(obj, ITEM_HUM)       )
-		{
-		 strcat( buf, CLR_BROWN );
-     strcat( buf, "[vızıldayan] "   );//(Vızıldayan)
-		}
-    strcat( buf, CLR_WHITE_BOLD );
-
+    for ( i = 0; i < sizeof(tag_table) / sizeof(tag_table[0]); i++ )
+    {
+	if ( IS_OBJ_STAT(obj, tag_table[i].bit)
+	&&   ( tag_table[i].detect == 0 || CAN_DETECT(ch, tag_table[i].detect) ) )
+	{
+	    bufcat( buf, sizeof(buf), &len, tag_table[i].color );
+	    bufcat( buf, sizeof(buf), &len, tag_table[i].tag );
+	}
+    }
+    bufcat( buf, sizeof(buf), &len, CLR_WHITE_BOLD );
 
     if ( fShort )
     {
-	if ( obj->short_descr != NULL )
+	if ( esya_kac_gunluk(obj->creation_time) > find_material_decay_days(obj) )
+	    bufcat( buf, sizeof(buf), &len, CLR_RED_BOLD );
+	bufcat( buf, sizeof(buf), &len, obj->short_descr );
+	bufcat( buf, sizeof(buf), &len, CLR_WHITE_BOLD );
+
+	snprintf( tmp, sizeof(tmp), " [%s%s%s]", CLR_GREEN, obj->material, CLR_WHITE_BOLD );
+	bufcat( buf, sizeof(buf), &len, tmp );
+	if ( obj->pIndexData->vnum > OBJ_VNUM_MONEY_MAX )
 	{
-    if(esya_kac_gunluk(obj->creation_time) > find_material_decay_days(obj))
-      strcat( buf, CLR_RED_BOLD );
-    strcat( buf, obj->short_descr );
-    strcat( buf, CLR_WHITE_BOLD );
-    strcat( buf, buf_material );
-    strcat( buf, buf_con );
-    strcat( buf, buf_eskime );
+	    snprintf( tmp, sizeof(tmp), " [%s%s%s] [%s%d%s]",
+		CLR_GREEN, get_cond_alias(obj), CLR_WHITE_BOLD,
+		CLR_GREEN, esya_kac_gunluk(obj->creation_time), CLR_WHITE_BOLD );
+	    bufcat( buf, sizeof(buf), &len, tmp );
+	}
+    }
+    else if ( obj->in_room != NULL && IS_WATER( obj->in_room ) )
+    {
+	size_t start = len;
+
+	bufcat( buf, sizeof(buf), &len, obj->short_descr );
+	utf8_upper_first( buf + start, sizeof(buf) - start );
+	len = strlen( buf );
+	switch ( dice(1,3) )
+	{
+	case 1:  bufcat( buf, sizeof(buf), &len, " suyun üstünde yüzüyor." ); break;
+	case 2:  bufcat( buf, sizeof(buf), &len, " suda ilerliyor." );        break;
+	default: bufcat( buf, sizeof(buf), &len, " suda ıslanıyor." );        break;
 	}
     }
     else
-    {
-	if ( obj->description != NULL)
-	{
-	  char tmp[70];
-	  if ( obj->in_room != NULL )
-	  {
-	    if ( IS_WATER( obj->in_room ) )
-	    {
-	      strcpy( tmp, obj->short_descr );
-              utf8_upper_first(tmp, sizeof(tmp));
-              strcat( buf, tmp );
-	      switch(dice(1,3))
-	      {
-          case 1: strcat(buf, " suyun üstünde yüzüyor.");break;
-      		case 2: strcat(buf, " suda ilerliyor.");break;
-      		case 3: strcat(buf, " suda ıslanıyor.");break;
-              }
-            }
-	    else
-		{
-		 strcat( buf, obj->description );
-		}
-          }
-	  else
-	  {
-	    strcat( buf, obj->description );
-	  }
-        }
-    }
+	bufcat( buf, sizeof(buf), &len, obj->description );
 
     return buf;
 }
@@ -495,9 +419,39 @@ void show_list_to_char( OBJ_DATA *list, CHAR_DATA *ch, bool fShort, bool fShowNo
 
 
 
+/* Duruşa göre fiil ve mobilya bayrakları (uyuyor / dinleniyor / oturuyor / duruyor). */
+static const char *pos_verb[] =
+{
+    [POS_SLEEPING] = "uyuyor",   [POS_RESTING]  = "dinleniyor",
+    [POS_SITTING]  = "oturuyor", [POS_STANDING] = "duruyor",
+};
+static const int pos_at_bit[] =
+{
+    [POS_SLEEPING] = SLEEP_AT, [POS_RESTING] = REST_AT,
+    [POS_SITTING]  = SIT_AT,   [POS_STANDING] = STAND_AT,
+};
+static const int pos_on_bit[] =
+{
+    [POS_SLEEPING] = SLEEP_ON, [POS_RESTING] = REST_ON,
+    [POS_SITTING]  = SIT_ON,   [POS_STANDING] = STAND_ON,
+};
+
+/* " masa'da uyuyor." / " taht üzerinde oturuyor." / " çadır içinde dinleniyor." */
+static void furniture_phrase( char *out, size_t n, OBJ_DATA *on, int pos )
+{
+    char tmp[MAX_INPUT_LENGTH];
+
+    if ( IS_SET(on->value[2], pos_at_bit[pos]) )
+	snprintf( out, n, " %s %s.", tr_suffixed( on->short_descr, tmp, sizeof(tmp), TRUE ), pos_verb[pos] );
+    else if ( IS_SET(on->value[2], pos_on_bit[pos]) )
+	snprintf( out, n, " %s üzerinde %s.", on->short_descr, pos_verb[pos] );
+    else
+	snprintf( out, n, " %s içinde %s.", on->short_descr, pos_verb[pos] );
+}
+
 void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
 {
-    char buf[MAX_STRING_LENGTH],message[MAX_STRING_LENGTH];
+    char buf[MAX_STRING_LENGTH],message[MAX_STRING_LENGTH],tmp[MAX_INPUT_LENGTH];
 
     buf[0] = '\0';
 
@@ -510,11 +464,6 @@ void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
   {
 		strcat( buf, "{R[hedef]{x ");
 }
-/*
-    sprintf(message,"(%s) ",race_table[RACE(victim)].name);
-    utf8_upper_first(message + 1, sizeof(message) - 1);
-    strcat(buf,message);
-*/
     if ( RIDDEN(victim)  ) 			strcat( buf, "[binek] "     );
     if ( IS_AFFECTED(victim, AFF_INVISIBLE)   ) strcat( buf, "[görünmez] "      );
     if ( IS_AFFECTED(victim,AFF_IMP_INVIS )   ) strcat( buf, "[gelişmiş] "   );
@@ -592,99 +541,19 @@ void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
   		strcat( buf, " sersemlemiş yatıyor." );
   		break;
     case POS_SLEEPING:
-	if (victim->on != NULL)
-	{
-	    if (IS_SET(victim->on->value[2],SLEEP_AT))
-  	    {
-          sprintf(message," %s'de uyuyor.",victim->on->short_descr);
-		strcat(buf,message);
-	    }
-	    else if (IS_SET(victim->on->value[2],SLEEP_ON))
-	    {
-        sprintf(message," %s üzerinde uyuyor.",victim->on->short_descr);
-		strcat(buf,message);
-	    }
-	    else
-	    {
-        sprintf(message, " %s içinde uyuyor.",victim->on->short_descr);
-		strcat(buf,message);
-	    }
-	}
-	else
-  strcat(buf," burada uyuyor.");
-	break;
     case POS_RESTING:
-        if (victim->on != NULL)
-	{
-            if (IS_SET(victim->on->value[2],REST_AT))
-            {
-              sprintf(message," %s'de dinleniyor.",victim->on->short_descr);
-                strcat(buf,message);
-            }
-            else if (IS_SET(victim->on->value[2],REST_ON))
-            {
-              sprintf(message," %s üzerinde dinleniyor.", victim->on->short_descr);
-                strcat(buf,message);
-            }
-            else
-            {
-              sprintf(message, " %s içinde dinleniyor.",victim->on->short_descr);
-                strcat(buf,message);
-            }
-	}
-        else
-        strcat( buf, " burada dinleniyor." );
-	break;
     case POS_SITTING:
-        if (victim->on != NULL)
-        {
-            if (IS_SET(victim->on->value[2],SIT_AT))
-            {
-              sprintf(message," %s'de oturuyor.",victim->on->short_descr);
-                strcat(buf,message);
-            }
-            else if (IS_SET(victim->on->value[2],SIT_ON))
-            {
-              sprintf(message," %s üzerinde oturuyor.",victim->on->short_descr);
-                strcat(buf,message);
-            }
-            else
-            {
-              sprintf(message, " %s içinde oturuyor.",victim->on->short_descr);
-                strcat(buf,message);
-            }
-        }
-        else
-        strcat(buf, " burada oturuyor.");
-	break;
     case POS_STANDING:
-	if (victim->on != NULL)
-	{
-	    if (IS_SET(victim->on->value[2],STAND_AT))
-	    {
-        sprintf(message," %s'de duruyor.",victim->on->short_descr);
-		strcat(buf,message);
-	    }
-	    else if (IS_SET(victim->on->value[2],STAND_ON))
-	    {
-        sprintf(message," %s üzerinde duruyor.",victim->on->short_descr);
-		strcat(buf,message);
-	    }
-	    else
-	    {
-        sprintf(message," %s içinde duruyor.",victim->on->short_descr);
-		strcat(buf,message);
-	    }
-	}
-	else if (MOUNTED(victim))
-	{
-    sprintf(message," burada, %s'i sürüyor.",PERS(MOUNTED(victim),ch));
-	  strcat(buf, message);
-	}
-  else 
-	  {
-		  strcat( buf, " burada." );
-	  }
+	if ( victim->on != NULL )
+	    furniture_phrase( message, sizeof(message), victim->on, victim->position );
+	else if ( victim->position == POS_STANDING && MOUNTED(victim) )
+	    snprintf( message, sizeof(message), " burada, %s sürüyor.",
+		tr_suffixed( PERS(MOUNTED(victim),ch), tmp, sizeof(tmp), FALSE ) );
+	else if ( victim->position == POS_STANDING )
+	    snprintf( message, sizeof(message), " burada." );
+	else
+	    snprintf( message, sizeof(message), " burada %s.", pos_verb[victim->position] );
+	strcat( buf, message );
 	break;
     case POS_FIGHTING:
     strcat( buf, " burada, " );
@@ -695,8 +564,8 @@ void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
 	else if ( victim->in_room == victim->fighting->in_room )
 	{
 	    strcat( buf, PERS( victim->fighting, ch ) );
-      strcat( buf, "ile dövüşüyor");
-  	    strcat( buf, "." );	}
+	    strcat( buf, " ile dövüşüyor." );
+	}
 	else
   strcat( buf, "kim kaldıysa onunla dövüşüyor??" );
 	break;
@@ -708,21 +577,26 @@ void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
     return;
 }
 
+/*
+ * Bakan, hedefin gerçek durumunu seçebiliyor mu? Önce bilgelik zarı (ölümsüz
+ * her zaman), sonra ırk irfanı; yaratıkların irfanı yoktur.
+ */
+static bool perceives_truly( CHAR_DATA *ch, CHAR_DATA *victim )
+{
+    if ( number_range( 1, 26 ) < get_curr_stat( ch, STAT_WIS ) || IS_IMMORTAL(ch) )
+	return TRUE;
+
+    if ( IS_NPC(ch) || victim->race < 0 || victim->race >= MAX_RACE )
+	return FALSE;
+
+    return number_range( 1, 100 ) < ch->pcdata->familya[victim->race];
+}
+
 char *show_char_to_char_1_health_check(CHAR_DATA *ch , CHAR_DATA *victim)
 {
   int percent;
 
-  // karakterin bilgeligi onemli olsun.
-  // zari tutturursa dogru sonuc ver
-  if( ( number_range(1,26) < get_curr_stat(ch,STAT_WIS) ) || IS_IMMORTAL(ch) )
-  {
-    if ( victim->max_hit > 0 )
-      percent = ( 100 * victim->hit ) / victim->max_hit;
-    else
-      percent = -1;
-  }
-  // irk tanima bilgisi de onemli olsun
-  else if ( number_range(1,100) < ch->pcdata->familya[victim->race] )
+  if ( perceives_truly( ch, victim ) )
   {
     if ( victim->max_hit > 0 )
       percent = ( 100 * victim->hit ) / victim->max_hit;
@@ -776,47 +650,57 @@ char *show_char_to_char_1_alignment(CHAR_DATA *ch , CHAR_DATA *victim)
 {
   int alignment;
 
-  // karakterin bilgeligi onemli olsun.
-  // zari tutturursa dogru sonuc ver
-  if( ( number_range(1,26) < get_curr_stat(ch,STAT_WIS) ) || IS_IMMORTAL(ch) )
-  {
+  if ( perceives_truly( ch, victim ) )
     alignment = victim->alignment;
-  }
-  // irk bilgisi de onemli olsun
-  else if ( number_range(1,100) < ch->pcdata->familya[victim->race] )
-  {
-    alignment = victim->alignment;
-  }
   else
-  {
     alignment = number_range(-1000,1000);
-  }
 
   if (alignment >= 350)
-  {
     return "'iyi' olabilir";
-  }
-  else if (alignment <= -350)
-  {
+  if (alignment <= -350)
     return "'kem' olabilir";
-  }
-  else
-  {
-    return "'yansız' olabilir";
-  }
-
   return "'yansız' olabilir";
 }
 
 
 
+/* Yuva bakan için örtülü mü? Ölümsüz her şeyi görür. */
+static bool slot_hidden( int iWear, bool about, bool hands, CHAR_DATA *viewer )
+{
+    if ( IS_IMMORTAL(viewer) )
+	return FALSE;
+
+    switch ( iWear )
+    {
+    case WEAR_FINGER:
+	return hands;
+    case WEAR_NECK: case WEAR_WRIST: case WEAR_TATTOO:
+    case WEAR_BODY: case WEAR_LEGS:  case WEAR_ARMS: case WEAR_WAIST:
+	return about;
+    }
+    return FALSE;
+}
+
+/* Tek ekipman satırı: yuva adı + (örtülü | görülen eşya | boş). */
+static void show_eq_line( CHAR_DATA *ch, OBJ_DATA *obj, int iWear, bool hidden )
+{
+    char label[MAX_INPUT_LENGTH];
+
+    where_label( iWear, ' ', label, sizeof(label) );
+    if ( hidden )
+	printf_to_char( ch, "%s {DÖrtülü{x\n\r", label );
+    else if ( obj != NULL && can_see_obj( ch, obj ) )
+	printf_to_char( ch, "%s %s\n\r", label, format_obj_to_char( obj, ch, TRUE ) );
+    else
+	printf_to_char( ch, "%s\n\r", label );
+}
+
 void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch )
 {
   OBJ_DATA *obj;
-  int iWear, bolgeye_giyilen_esya_sayisi, i;
+  int iWear, i;
   CHAR_DATA *vict;
-  char buf[MAX_STRING_LENGTH];
-  bool vucuda_giyilen_gizler, ellere_giyilen_gizler;
+  bool about, hands;
 
   vict = is_affected(victim,gsn_doppelganger) ? victim->doppel : victim;
 
@@ -856,131 +740,37 @@ void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch )
   act( "$S kullandıklarına göz atıyorsun:", ch, NULL, victim, TO_CHAR);
   printf_to_char( ch,"\n\r" );
 
-  vucuda_giyilen_gizler = FALSE;
-  ellere_giyilen_gizler = FALSE;
-
-  obj = get_eq_char( vict, WEAR_ABOUT );
-
-  if( obj != NULL )
-  {
-    vucuda_giyilen_gizler = TRUE;
-  }
-
-  obj = get_eq_char( vict, WEAR_HANDS );
-
-  if( obj != NULL )
-  {
-    ellere_giyilen_gizler = TRUE;
-  }
+  /* Pelerin gövde yuvalarını, eldiven parmakları örter. */
+  about = get_eq_char( vict, WEAR_ABOUT ) != NULL;
+  hands = get_eq_char( vict, WEAR_HANDS ) != NULL;
 
   for ( iWear = 0; iWear < MAX_WEAR; iWear++ )
   {
-    if ( iWear==WEAR_FINGER || iWear==WEAR_NECK || iWear==WEAR_WRIST || iWear==WEAR_TATTOO )
-    {
-      for ( obj=vict->carrying; obj != NULL; obj = obj->next_content )
-      {
-        if ( obj->wear_loc == iWear )
-        {
-          if((( obj->wear_loc == WEAR_FINGER && ellere_giyilen_gizler ) ||
-              ( (obj->wear_loc == WEAR_NECK || obj->wear_loc == WEAR_WRIST || obj->wear_loc == WEAR_TATTOO ) && vucuda_giyilen_gizler ) )
-              && !IS_IMMORTAL(ch))
-          {
-            printf_to_char(ch,"%s {DÖrtülü{x\n\r",where_name[obj->wear_loc]);
-          }
-          else
-          {
-            if (can_see_obj( ch, obj ) )
-            {
-              printf_to_char(ch,"%s %s\n\r",where_name[obj->wear_loc],format_obj_to_char( obj, ch, TRUE ));
-            }
-            else
-            {
-              printf_to_char(ch,"%s\n\r",where_name[iWear]);
-            }
-          }
-        }
-      }
+    bool hidden = slot_hidden( iWear, about, hands, ch );
+    bool multi  = ( iWear == WEAR_FINGER || iWear == WEAR_NECK
+		 || iWear == WEAR_WRIST  || iWear == WEAR_TATTOO );
+    bool listed = multi || iWear == WEAR_STUCK_IN
+		 || iWear == WEAR_BODY || iWear == WEAR_LEGS
+		 || iWear == WEAR_ARMS || iWear == WEAR_WAIST;
 
-      bolgeye_giyilen_esya_sayisi = max_can_wear(vict, iWear) - count_worn(vict, iWear);
+    if ( !listed )
+    {
+      show_eq_line( ch, get_eq_char( vict, iWear ), iWear, hidden );
+      continue;
+    }
 
-      if( bolgeye_giyilen_esya_sayisi > 0 )
-      {
-        for( i=1 ; i <= bolgeye_giyilen_esya_sayisi ; i++ )
-        {
-          if((( iWear == WEAR_FINGER && ellere_giyilen_gizler ) ||
-              ( (iWear == WEAR_NECK || iWear == WEAR_WRIST || iWear == WEAR_TATTOO ) && vucuda_giyilen_gizler ) )
-              && !IS_IMMORTAL(ch))
-          {
-            printf_to_char(ch,"%s {DÖrtülü{x\n\r",where_name[iWear]);
-          }
-          else
-          {
-            printf_to_char(ch,"%s\n\r",where_name[iWear]);
-          }
-        }
-      }
-    }
-    else if ( iWear == WEAR_STUCK_IN )
+    for ( obj = vict->carrying; obj != NULL; obj = obj->next_content )
     {
-      for ( obj=vict->carrying; obj != NULL; obj = obj->next_content )
-      {
-        if ( obj->wear_loc == iWear )
-        {
-          if (can_see_obj( ch, obj ) )
-          {
-            printf_to_char(ch,"%s %s\n\r",where_name[obj->wear_loc],format_obj_to_char( obj, ch, TRUE ));
-          }
-        }
-      }
+      if ( obj->wear_loc != iWear )
+	continue;
+      if ( iWear == WEAR_STUCK_IN && !can_see_obj( ch, obj ) )
+	continue;
+      show_eq_line( ch, obj, iWear, hidden );
     }
-    else
-    {
-      if ( iWear==WEAR_BODY || iWear==WEAR_LEGS || iWear==WEAR_ARMS || iWear==WEAR_WAIST )
-      {
-        for ( obj=vict->carrying; obj != NULL; obj = obj->next_content )
-        {
-          if ( obj->wear_loc == iWear )
-          {
-            if( vucuda_giyilen_gizler && !IS_IMMORTAL(ch) )
-            {
-              printf_to_char(ch,"%s {DÖrtülü{x\n\r",where_name[obj->wear_loc]);
-            }
-            else
-            {
-              if (can_see_obj( ch, obj ) )
-              {
-                printf_to_char(ch,"%s %s\n\r",where_name[obj->wear_loc],format_obj_to_char( obj, ch, TRUE ));
-              }
-              else
-              {
-                printf_to_char(ch,"%s\n\r",where_name[iWear]);
-              }
-            }
-          }
-        }
-      }
-      else
-      {
-        if ( ( obj = get_eq_char(vict,iWear)) != NULL )
-        {
-          if (can_see_obj( ch, obj ) )
-          {
-            snprintf(buf, sizeof(buf),where_name[obj->wear_loc], ' ');
-            printf_to_char(ch,"%s %s\n\r",buf,format_obj_to_char( obj, ch, TRUE ));
-          }
-          else
-          {
-            snprintf(buf, sizeof(buf),where_name[iWear], ' ');
-            printf_to_char(ch,"%s\n\r",buf);
-          }
-        }
-        else
-        {
-          snprintf(buf, sizeof(buf),where_name[iWear], ' ');
-          printf_to_char(ch,"%s\n\r",buf);
-        }
-      }
-    }
+
+    if ( multi )
+      for ( i = count_worn( vict, iWear ); i < max_can_wear( vict, iWear ); i++ )
+	show_eq_line( ch, NULL, iWear, hidden );
   }
 
   if ( victim != ch
@@ -1059,7 +849,6 @@ void do_clear( CHAR_DATA *ch, char *argument )
 void do_scroll(CHAR_DATA *ch, char *argument)
 {
     char arg[MAX_INPUT_LENGTH];
-    char buf[100];
     int lines;
 
     one_argument(argument,arg);
@@ -1067,19 +856,16 @@ void do_scroll(CHAR_DATA *ch, char *argument)
     if (arg[0] == '\0')
     {
 	if (ch->lines == 0)
-	    send_to_char("You do not page long messages.\n\r",ch);
+	    send_to_char("Uzun mesajları sayfalamıyorsun.\n\r",ch);
 	else
-	{
-	    snprintf(buf, sizeof(buf),"You currently display %d lines per page.\n\r",
+	    printf_to_char(ch,"Sayfa başına %d satır gösteriyorsun.\n\r",
 		    ch->lines + 2);
-	    send_to_char(buf,ch);
-	}
 	return;
     }
 
     if (!is_number(arg))
     {
-	send_to_char("You must provide a number.\n\r",ch);
+	send_to_char("Bir sayı vermelisin.\n\r",ch);
 	return;
     }
 
@@ -1087,19 +873,18 @@ void do_scroll(CHAR_DATA *ch, char *argument)
 
     if (lines == 0)
     {
-        send_to_char("Paging disabled.\n\r",ch);
+        send_to_char("Sayfalama kapatıldı.\n\r",ch);
         ch->lines = 0;
         return;
     }
 
     if (lines < 10 || lines > 100)
     {
-	send_to_char("You must provide a reasonable number.\n\r",ch);
+	send_to_char("Makul bir sayı vermelisin (10-100).\n\r",ch);
 	return;
     }
 
-    snprintf(buf, sizeof(buf),"Scroll set to %d lines.\n\r",lines);
-    send_to_char(buf,ch);
+    printf_to_char(ch,"Sayfa uzunluğu %d satıra ayarlandı.\n\r",lines);
     ch->lines = lines - 2;
 }
 
@@ -1128,69 +913,54 @@ void do_socials(CHAR_DATA *ch, char *argument)
 /* RT this following section holds all the auto commands from ROM, as well as
    replacements for config */
 
+/* Bayrak aç/kapa komutlarının ortak gövdesi. */
+static void toggle_flag( CHAR_DATA *ch, long *field, long bit,
+			 const char *on_msg, const char *off_msg )
+{
+    if ( IS_SET(*field, bit) )
+    {
+	send_to_char( off_msg, ch );
+	REMOVE_BIT(*field, bit);
+    }
+    else
+    {
+	send_to_char( on_msg, ch );
+	SET_BIT(*field, bit);
+    }
+}
+
+/* 'oto' listesi: etiket, act mi comm mu, bit. */
+static const struct { const char *label; bool comm; long bit; } auto_table[] =
+{
+    { "otodestek", FALSE, PLR_AUTOASSIST },
+    { "otoçıkış",  FALSE, PLR_AUTOEXIT   },
+    { "otoakçe",   FALSE, PLR_AUTOAKCE   },
+    { "otoyağma",  FALSE, PLR_AUTOLOOT   },
+    { "otokurban", FALSE, PLR_AUTOSAC    },
+    { "otodağıt",  FALSE, PLR_AUTOSPLIT  },
+    { "kısa",      TRUE,  COMM_COMPACT   },
+    { "suflör",    TRUE,  COMM_PROMPT    },
+    { "bileşik",   TRUE,  COMM_COMBINE   },
+};
+
 void do_autolist(CHAR_DATA *ch, char *argument)
 {
+    size_t i;
+
     /* lists most player flags */
     if (IS_NPC(ch))
       return;
 
-  send_to_char("oto  durumu\n\r",ch);
+    send_to_char("oto  durumu\n\r",ch);
     send_to_char("---------------------\n\r",ch);
 
-  send_to_char("otodestek       ",ch);
-    if (IS_SET(ch->act,PLR_AUTOASSIST))
-    send_to_char("AÇIK\n\r",ch);
-    else
-    send_to_char("KAPALI\n\r",ch);
+    for ( i = 0; i < sizeof(auto_table) / sizeof(auto_table[0]); i++ )
+    {
+	long field = auto_table[i].comm ? ch->comm : ch->act;
 
-    send_to_char("otoçıkış        ",ch);
-    if (IS_SET(ch->act,PLR_AUTOEXIT))
-    send_to_char("AÇIK\n\r",ch);
-    else
-    send_to_char("KAPALI\n\r",ch);
-
-    send_to_char("otoakçe         ",ch);
-    if (IS_SET(ch->act,PLR_AUTOAKCE))
-    send_to_char("AÇIK\n\r",ch);
-    else
-    send_to_char("KAPALI\n\r",ch);
-
-    send_to_char("otoyağma        ",ch);
-    if (IS_SET(ch->act,PLR_AUTOLOOT))
-    send_to_char("AÇIK\n\r",ch);
-    else
-    send_to_char("KAPALI\n\r",ch);
-
-    send_to_char("otokurban       ",ch);
-    if (IS_SET(ch->act,PLR_AUTOSAC))
-    send_to_char("AÇIK\n\r",ch);
-    else
-    send_to_char("KAPALI\n\r",ch);
-
-    send_to_char("otodağıt        ",ch);
-    if (IS_SET(ch->act,PLR_AUTOSPLIT))
-    send_to_char("AÇIK\n\r",ch);
-    else
-    send_to_char("KAPALI\n\r",ch);
-
-    send_to_char("kısa            ",ch);
-    if (IS_SET(ch->comm,COMM_COMPACT))
-    send_to_char("AÇIK\n\r",ch);
-    else
-    send_to_char("KAPALI\n\r",ch);
-
-    send_to_char("suflör          ",ch);
-    if (IS_SET(ch->comm,COMM_PROMPT))
-    send_to_char("AÇIK\n\r",ch);
-    else
-    send_to_char("KAPALI\n\r",ch);
-
-    send_to_char("bileşik         ",ch);
-    if (IS_SET(ch->comm,COMM_COMBINE))
-    send_to_char("AÇIK\n\r",ch);
-    else
-    send_to_char("KAPALI\n\r",ch);
-
+	printf_to_char( ch, "%-*s%s\n\r", utf8_width( auto_table[i].label, 16 ),
+	    auto_table[i].label, IS_SET(field, auto_table[i].bit) ? "AÇIK" : "KAPALI" );
+    }
 
     if (IS_SET(ch->act,PLR_NOSUMMON))
     send_to_char("Ancak OK aralığının çağrı büyülerinden etkilenebilirsin.\n\r",ch);
@@ -1203,211 +973,101 @@ void do_autolist(CHAR_DATA *ch, char *argument)
 	send_to_char("Takipçileri kabul ediyorsun.\n\r",ch);
 
     if (IS_SET(ch->act,PLR_NOCANCEL))
-    send_to_char("Ancak OK aralığıın iptal büyülerininden etkilenebilirsin.\n\r",ch);
+    send_to_char("Ancak OK aralığının iptal büyülerinden etkilenebilirsin.\n\r",ch);
     else
-    send_to_char("Herkesin iptal büüyüsünden etkilenebilirsin.\n\r",ch);
+    send_to_char("Herkesin iptal büyüsünden etkilenebilirsin.\n\r",ch);
 }
 
 void do_autoassist(CHAR_DATA *ch, char *argument)
 {
     if (IS_NPC(ch))
       return;
-
-    if (IS_SET(ch->act,PLR_AUTOASSIST))
-    {
-      send_to_char("Otodestek kaldırıldı.\n\r",ch);
-      REMOVE_BIT(ch->act,PLR_AUTOASSIST);
-    }
-    else
-    {
-      send_to_char("Otodestek açıldı.\n\r",ch);
-      SET_BIT(ch->act,PLR_AUTOASSIST);
-    }
+    toggle_flag( ch, &ch->act, PLR_AUTOASSIST,
+	"Otodestek açıldı.\n\r", "Otodestek kaldırıldı.\n\r" );
 }
 
 void do_autoexit(CHAR_DATA *ch, char *argument)
 {
     if (IS_NPC(ch))
       return;
-
-    if (IS_SET(ch->act,PLR_AUTOEXIT))
-    {
-      send_to_char("Otoçıkış kaldırıldı.\n\r",ch);
-      REMOVE_BIT(ch->act,PLR_AUTOEXIT);
-    }
-    else
-    {
-      send_to_char("Otoçıkış açıldı.\n\r",ch);
-      SET_BIT(ch->act,PLR_AUTOEXIT);
-    }
+    toggle_flag( ch, &ch->act, PLR_AUTOEXIT,
+	"Otoçıkış açıldı.\n\r", "Otoçıkış kaldırıldı.\n\r" );
 }
 
 void do_autoakce(CHAR_DATA *ch, char *argument)
 {
     if (IS_NPC(ch))
       return;
-
-    if (IS_SET(ch->act,PLR_AUTOAKCE))
-    {
-      send_to_char("Otoakçe kaldırıldı.\n\r",ch);
-      REMOVE_BIT(ch->act,PLR_AUTOAKCE);
-    }
-    else
-    {
-      send_to_char("Otoakçe açıldı.\n\r",ch);
-      SET_BIT(ch->act,PLR_AUTOAKCE);
-    }
+    toggle_flag( ch, &ch->act, PLR_AUTOAKCE,
+	"Otoakçe açıldı.\n\r", "Otoakçe kaldırıldı.\n\r" );
 }
 
 void do_autoloot(CHAR_DATA *ch, char *argument)
 {
     if (IS_NPC(ch))
       return;
-
-    if (IS_SET(ch->act,PLR_AUTOLOOT))
-    {
-      send_to_char("Otoyağma kaldırıldı.\n\r",ch);
-      REMOVE_BIT(ch->act,PLR_AUTOLOOT);
-    }
-    else
-    {
-      send_to_char("Otoyağma açıldı.\n\r",ch);
-      SET_BIT(ch->act,PLR_AUTOLOOT);
-    }
+    toggle_flag( ch, &ch->act, PLR_AUTOLOOT,
+	"Otoyağma açıldı.\n\r", "Otoyağma kaldırıldı.\n\r" );
 }
 
 void do_autosac(CHAR_DATA *ch, char *argument)
 {
     if (IS_NPC(ch))
       return;
-
-    if (IS_SET(ch->act,PLR_AUTOSAC))
-    {
-      send_to_char("Otokurban kaldırıldı.\n\r",ch);
-      REMOVE_BIT(ch->act,PLR_AUTOSAC);
-    }
-    else
-    {
-      send_to_char("Otokurban açıldı.\n\r",ch);
-      SET_BIT(ch->act,PLR_AUTOSAC);
-    }
+    toggle_flag( ch, &ch->act, PLR_AUTOSAC,
+	"Otokurban açıldı.\n\r", "Otokurban kaldırıldı.\n\r" );
 }
 
 void do_autosplit(CHAR_DATA *ch, char *argument)
 {
     if (IS_NPC(ch))
       return;
-
-    if (IS_SET(ch->act,PLR_AUTOSPLIT))
-    {
-      send_to_char("Otodağıt kaldırıldı.\n\r",ch);
-      REMOVE_BIT(ch->act,PLR_AUTOSPLIT);
-    }
-    else
-    {
-      send_to_char("Otodağıt açıldı.\n\r",ch);
-      SET_BIT(ch->act,PLR_AUTOSPLIT);
-    }
+    toggle_flag( ch, &ch->act, PLR_AUTOSPLIT,
+	"Otodağıt açıldı.\n\r", "Otodağıt kaldırıldı.\n\r" );
 }
 
 void do_brief(CHAR_DATA *ch, char *argument)
 {
-    if (IS_SET(ch->comm,COMM_BRIEF))
-    {
-      send_to_char("Özet tanım kapandı.\n\r",ch);
-      REMOVE_BIT(ch->comm,COMM_BRIEF);
-    }
-    else
-    {
-      send_to_char("Özet tanım açıldı.\n\r",ch);
-      SET_BIT(ch->comm,COMM_BRIEF);
-    }
+    toggle_flag( ch, &ch->comm, COMM_BRIEF,
+	"Özet tanım açıldı.\n\r", "Özet tanım kapandı.\n\r" );
 }
 
 void do_compact(CHAR_DATA *ch, char *argument)
 {
-    if (IS_SET(ch->comm,COMM_COMPACT))
-    {
-      printf_to_char(ch,"Kompakt modu kapatıldı.\n\r");
-      REMOVE_BIT(ch->comm,COMM_COMPACT);
-    }
-    else
-    {
-      printf_to_char(ch,"Kompakt modu açıldı.\n\r");
-      SET_BIT(ch->comm,COMM_COMPACT);
-    }
+    toggle_flag( ch, &ch->comm, COMM_COMPACT,
+	"Kompakt modu açıldı.\n\r", "Kompakt modu kapatıldı.\n\r" );
 }
 
 void do_show(CHAR_DATA *ch, char *argument)
 {
-    if (IS_SET(ch->comm,COMM_SHOW_AFFECTS))
-    {
-      printf_to_char(ch,"Etkiler skor tablosunda gösterilmeyecek.\n\r");
-      REMOVE_BIT(ch->comm,COMM_SHOW_AFFECTS);
-    }
-    else
-    {
-      printf_to_char(ch,"Etkiler skor tablosunda gösterilecek.\n\r");
-      SET_BIT(ch->comm,COMM_SHOW_AFFECTS);
-    }
+    toggle_flag( ch, &ch->comm, COMM_SHOW_AFFECTS,
+	"Etkiler skor tablosunda gösterilecek.\n\r",
+	"Etkiler skor tablosunda gösterilmeyecek.\n\r" );
 }
 
 void do_prompt(CHAR_DATA *ch, char *argument)
 {
-
-  if ( argument[0] == '\0' )
+  if ( argument[0] != '\0' )
   {
-    if (IS_SET(ch->comm,COMM_PROMPT))
-    {
-      printf_to_char(ch,"Suflör kapatıldı.\n\r");
-      REMOVE_BIT(ch->comm,COMM_PROMPT);
-    }
-    else
-    {
-      printf_to_char(ch,"Suflör açıldı.\n\r");
-      SET_BIT(ch->comm,COMM_PROMPT);
-    }
-    return;
-  }
-
-  if(argument[0]!='\0')
-  {
-     printf_to_char(ch,"Bu komutla argüman kullanılmaz.\n\r");
+     send_to_char( "Bu komutla argüman kullanılmaz.\n\r", ch );
      return;
   }
-
-  return;
+  toggle_flag( ch, &ch->comm, COMM_PROMPT,
+	"Suflör açıldı.\n\r", "Suflör kapatıldı.\n\r" );
 }
 
 void do_combine(CHAR_DATA *ch, char *argument)
 {
-    if (IS_SET(ch->comm,COMM_COMBINE))
-    {
-      send_to_char("Bileşik nesne kaldırıldı.\n\r",ch);
-      REMOVE_BIT(ch->comm,COMM_COMBINE);
-    }
-    else
-    {
-      send_to_char("Bileşik nesne açıldı.\n\r",ch);
-      SET_BIT(ch->comm,COMM_COMBINE);
-    }
+    toggle_flag( ch, &ch->comm, COMM_COMBINE,
+	"Bileşik nesne açıldı.\n\r", "Bileşik nesne kaldırıldı.\n\r" );
 }
 
 void do_noloot(CHAR_DATA *ch, char *argument)
 {
     if (IS_NPC(ch))
       return;
-
-    if (IS_SET(ch->act,PLR_CANLOOT))
-    {
-      printf_to_char(ch,"Cesedin hırsızlara karşı güvende.\n\r");
-      REMOVE_BIT(ch->act,PLR_CANLOOT);
-    }
-    else
-    {
-      printf_to_char(ch,"Cesedin yağmalanabilir.\n\r");
-      SET_BIT(ch->act,PLR_CANLOOT);
-    }
+    toggle_flag( ch, &ch->act, PLR_CANLOOT,
+	"Cesedin yağmalanabilir.\n\r", "Cesedin hırsızlara karşı güvende.\n\r" );
 }
 
 void do_nofollow(CHAR_DATA *ch, char *argument)
@@ -1415,50 +1075,256 @@ void do_nofollow(CHAR_DATA *ch, char *argument)
     if (IS_NPC(ch))
       return;
     if ( IS_AFFECTED( ch, AFF_CHARM ) )  {
-	send_to_char( "You don't want to leave your beloved master.\n\r",ch);
+	send_to_char( "Sevgili efendinden ayrılmak istemiyorsun.\n\r",ch);
 	return;
     }
 
-    if (IS_SET(ch->act,PLR_NOFOLLOW))
-    {
-      printf_to_char(ch,"Takipçileri kabul etmeye başladın.\n\r");
-      REMOVE_BIT(ch->act,PLR_NOFOLLOW);
-    }
-    else
-    {
-      printf_to_char(ch,"Takipçileri kabul etmiyorsun.\n\r");
-      SET_BIT(ch->act,PLR_NOFOLLOW);
-      die_follower( ch );
-    }
+    toggle_flag( ch, &ch->act, PLR_NOFOLLOW,
+	"Takipçileri kabul etmiyorsun.\n\r", "Takipçileri kabul etmeye başladın.\n\r" );
+    if ( IS_SET(ch->act, PLR_NOFOLLOW) )
+	die_follower( ch );
 }
 
 void do_nosummon(CHAR_DATA *ch, char *argument)
 {
     if (IS_NPC(ch))
-    {
-      if (IS_SET(ch->imm_flags,IMM_SUMMON))
-      {
-        send_to_char("Çağrı büyülerine bağışıklı değilsin.\n\r",ch);
-	REMOVE_BIT(ch->imm_flags,IMM_SUMMON);
-      }
-      else
-      {
-        send_to_char("Çağrı büyülerine bağışıklısın.\n\r",ch);
-	SET_BIT(ch->imm_flags,IMM_SUMMON);
-      }
-    }
+	toggle_flag( ch, &ch->imm_flags, IMM_SUMMON,
+	    "Çağrı büyülerine bağışıklısın.\n\r",
+	    "Çağrı büyülerine bağışıklı değilsin.\n\r" );
     else
+	toggle_flag( ch, &ch->act, PLR_NOSUMMON,
+	    "Yalnız OK aralığının çağrı büyülerine açıksın.\n\r",
+	    "Herkesin çağrı büyüsüne açıksın.\n\r" );
+}
+
+/* Sektör türünün oda başlığındaki Türkçe adı. */
+static const char *sector_name_tr( int sector )
+{
+    static const char *names[] =
     {
-      if (IS_SET(ch->act,PLR_NOSUMMON))
-      {
-        send_to_char("Herkesin çağrı büyüsüne açıksın.\n\r",ch);
-        REMOVE_BIT(ch->act,PLR_NOSUMMON);
-      }
-      else
-      {
-        send_to_char("Yalnız OK aralığının çağrı büyülerine açıksın.\n\r",ch);
-        SET_BIT(ch->act,PLR_NOSUMMON);
-      }
+	[SECT_INSIDE]       = "İçeri", [SECT_CITY]   = "Şehir",  [SECT_FIELD]  = "Ova",
+	[SECT_FOREST]       = "Orman", [SECT_HILLS]  = "Tepe",   [SECT_MOUNTAIN] = "Dağ",
+	[SECT_WATER_SWIM]   = "Su",    [SECT_WATER_NOSWIM] = "Su", [SECT_AIR]  = "Hava",
+	[SECT_DESERT]       = "Çöl",   [SECT_MAX]    = "Zorlu",
+    };
+
+    if ( sector >= 0 && sector < (int) ( sizeof(names) / sizeof(names[0]) ) && names[sector] != NULL )
+	return names[sector];
+    return "*Bilinmeyen*";
+}
+
+/* Yön argümanı: dir_name'in ön eki (k, ku, kuzey...). Değilse -1. */
+static int dir_lookup( const char *arg )
+{
+    int door;
+
+    if ( arg[0] == '\0' )
+	return -1;
+    for ( door = 0; door < 6; door++ )
+	if ( !str_prefix( arg, dir_name[door] ) )
+	    return door;
+    return -1;
+}
+
+/* 'bak' / 'bak auto': oda başlığı, tanım, çıkışlar, eşyalar, kişiler. */
+static void look_room( CHAR_DATA *ch, bool full )
+{
+    printf_to_char( ch, "{y%s{x [%s] [{y%s{x]", ch->in_room->name,
+	sector_name_tr( ch->in_room->sector_type ), ch->in_room->area->name );
+
+    if (IS_IMMORTAL(ch) && (IS_NPC(ch) || IS_SET(ch->act,PLR_HOLYLIGHT)))
+      printf_to_char(ch," [%d]",ch->in_room->vnum);
+
+    send_to_char( "\n\r", ch );
+
+    if ( full || ( IS_PC(ch) && !IS_SET(ch->comm, COMM_BRIEF) ) )
+    {
+      send_to_char( "  ", ch );
+      send_to_char( ch->in_room->description, ch );
+    }
+
+    if ( IS_PC(ch) && IS_SET(ch->act, PLR_AUTOEXIT) )
+    {
+      send_to_char( "\n\r", ch );
+      do_exits( ch, "auto" );
+    }
+
+    show_list_to_char( ch->in_room->contents, ch, FALSE, FALSE );
+    show_char_to_char( ch->in_room->people,   ch );
+}
+
+/* 'bak içine <taşıyıcı>' ve 'incele': taşıyıcının içi. */
+static void look_in_obj( CHAR_DATA *ch, OBJ_DATA *obj )
+{
+    switch ( obj->item_type )
+    {
+      default:
+        send_to_char( "O bir taşıyıcı değil.\n\r", ch );
+        break;
+
+      case ITEM_DRINK_CON:
+        if ( obj->value[1] <= 0 )
+        {
+          send_to_char( "İçi boş.\n\r", ch );
+          break;
+        }
+
+        printf_to_char(ch,"%s %s sıvısıyla dolu.\n\r",obj->value[1] < obj->value[0] / 4 ? "Yarıdan azı" : obj->value[1] < 3 * obj->value[0] / 4 ? "Yarısı"     : "Yarıdan fazlası",liq_table[obj->value[2]].liq_color);
+        break;
+
+      case ITEM_CONTAINER:
+      case ITEM_CORPSE_NPC:
+      case ITEM_CORPSE_PC:
+        if ( IS_SET(obj->value[1], CONT_CLOSED) )
+        {
+          send_to_char( "Kapalı.\n\r", ch );
+          break;
+        }
+
+        act( "$p şunları içeriyor:", ch, obj, NULL, TO_CHAR );
+        show_list_to_char( obj->contains, ch, TRUE, TRUE );
+        break;
+    }
+}
+
+/* Aşk iksiri: bakılan kişiye büyülenir. */
+static void love_potion_trigger( CHAR_DATA *ch, CHAR_DATA *victim )
+{
+    AFFECT_DATA af;
+
+    affect_strip(ch, gsn_love_potion);
+
+    if (ch->master)
+      stop_follower(ch);
+    add_follower(ch, victim);
+    ch->leader = victim;
+
+    af.where = TO_AFFECTS;
+    af.type = gsn_charm_person;
+    af.level = ch->level;
+    af.duration =  number_fuzzy(victim->level / 4);
+    af.bitvector = AFF_CHARM;
+    af.modifier = 0;
+    af.location = 0;
+    affect_to_char(ch, &af);
+
+    act("$n sence de tatlı değil mi?", victim, NULL, ch, TO_VICT);
+    act("$N büyülenmiş gözlerle sana bakıyor.",victim,NULL,ch,TO_CHAR);
+    act("$N büyülenmiş gözlerle $e bakıyor.",victim,NULL,ch,TO_NOTVICT);
+}
+
+/* 'bak <kişi>' */
+static void look_char( CHAR_DATA *ch, CHAR_DATA *victim )
+{
+    show_char_to_char_1( victim, ch );
+
+    if ( is_affected( ch, gsn_love_potion ) && victim != ch )
+	love_potion_trigger( ch, victim );
+}
+
+/*
+ * 'bak <eşya/anahtar>': envanter ve odadaki eşyaların ekstra tanımları,
+ * eşya tanımı, odanın ekstra tanımı. Bir şey basıldıysa (ya da sayı
+ * uyuşmazlığı bildirildiyse) TRUE döner.
+ */
+static bool look_extra( CHAR_DATA *ch, char *arg3, int number )
+{
+    OBJ_DATA *obj;
+    char *pdesc;
+    int count = 0;
+
+    for ( obj = ch->carrying; obj != NULL; obj = obj->next_content )
+    {
+	if ( !can_see_obj( ch, obj ) )
+	    continue;
+
+	if ( ( pdesc = get_extra_descr( arg3, obj->extra_descr ) ) != NULL
+	||   ( pdesc = get_extra_descr( arg3, obj->pIndexData->extra_descr ) ) != NULL )
+	{
+	    if ( ++count == number )
+	    {
+		send_to_char( pdesc, ch );
+		return TRUE;
+	    }
+	    continue;
+	}
+
+	if ( is_name( arg3, obj->name ) && ++count == number )
+	{
+	    send_to_char( "Özel bir şey görmüyorsun.\n\r", ch );
+	    return TRUE;
+	}
+    }
+
+    for ( obj = ch->in_room->contents; obj != NULL; obj = obj->next_content )
+    {
+	if ( can_see_obj( ch, obj ) )
+	{
+	    if ( ( pdesc = get_extra_descr( arg3, obj->extra_descr ) ) != NULL
+	    &&   ++count == number )
+	    {
+		send_to_char( pdesc, ch );
+		return TRUE;
+	    }
+
+	    if ( ( pdesc = get_extra_descr( arg3, obj->pIndexData->extra_descr ) ) != NULL
+	    &&   ++count == number )
+	    {
+		send_to_char( pdesc, ch );
+		return TRUE;
+	    }
+	}
+
+	if ( is_name( arg3, obj->name ) && ++count == number )
+	{
+	    printf_to_char( ch, "%s\n\r", obj->description );
+	    return TRUE;
+	}
+    }
+
+    if ( ( pdesc = get_extra_descr( arg3, ch->in_room->extra_descr ) ) != NULL
+    &&   ++count == number )
+    {
+	send_to_char( pdesc, ch );
+	return TRUE;
+    }
+
+    if ( count > 0 && count != number )
+    {
+	if ( count == 1 )
+	    printf_to_char( ch, "Sadece bir %s görüyorsun.\n\r", arg3 );
+	else
+	    printf_to_char( ch, "Ondan sadece %d tane görüyorsun.\n\r", count );
+	return TRUE;
+    }
+
+    return FALSE;
+}
+
+/* 'bak <yön>' */
+static void look_dir( CHAR_DATA *ch, int door )
+{
+    EXIT_DATA *pexit;
+
+    if ( ( pexit = ch->in_room->exit[door] ) == NULL )
+    {
+	send_to_char( "Özel bir şey yok.\n\r", ch );
+	return;
+    }
+
+    if ( pexit->description != NULL && pexit->description[0] != '\0' )
+	send_to_char( pexit->description, ch );
+    else
+	send_to_char( "Özel bir şey yok.\n\r", ch );
+
+    if ( pexit->keyword    != NULL
+    &&   pexit->keyword[0] != '\0'
+    &&   pexit->keyword[0] != ' ' )
+    {
+	if ( IS_SET(pexit->exit_info, EX_CLOSED) )
+	    act( "$d kapalı.", ch, NULL, pexit->keyword, TO_CHAR );
+	else if ( IS_SET(pexit->exit_info, EX_ISDOOR) )
+	    act( "$d açık.",   ch, NULL, pexit->keyword, TO_CHAR );
     }
 }
 
@@ -1467,12 +1333,10 @@ void do_look( CHAR_DATA *ch, char *argument )
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
   char arg3 [MAX_INPUT_LENGTH];
-  EXIT_DATA *pexit;
   CHAR_DATA *victim;
   OBJ_DATA *obj;
-  char *pdesc;
   int door;
-  int number,count;
+  int number;
 
   if ( ch->desc == NULL )
     return;
@@ -1508,310 +1372,49 @@ void do_look( CHAR_DATA *ch, char *argument )
   argument = one_argument( argument, arg1 );
   argument = one_argument( argument, arg2 );
   number = number_argument(arg1,arg3);
-  count = 0;
 
   if ( arg1[0] == '\0' || !str_cmp( arg1, "auto" ) )
   {
-    /* 'look' or 'look auto' */
-    printf_to_char( ch, "{y%s{x", ch->in_room->name );
-    switch(ch->in_room->sector_type)
-    {
-      case SECT_INSIDE:
-      printf_to_char(ch," [İçeri]");
-      break;
-      case SECT_CITY:
-      printf_to_char(ch," [Şehir]");
-      break;
-      case SECT_FIELD:
-      printf_to_char(ch," [Ova]");
-      break;
-      case SECT_FOREST:
-      printf_to_char(ch," [Orman]");
-      break;
-      case SECT_HILLS:
-      printf_to_char(ch," [Tepe]");
-      break;
-      case SECT_MOUNTAIN:
-      printf_to_char(ch," [Dağ]");
-      break;
-      case SECT_WATER_SWIM:
-      case SECT_WATER_NOSWIM:
-      printf_to_char(ch," [Su]");
-      break;
-      case SECT_AIR:
-      printf_to_char(ch," [Hava]");
-      break;
-      case SECT_DESERT:
-      printf_to_char(ch," [Çöl]");
-      break;
-      case SECT_MAX:
-      printf_to_char(ch," [Zorlu]");
-      break;
-      default:
-      printf_to_char(ch," [*Bilinmeyen*]");
-      break;
-    }
-    printf_to_char(ch," [{y%s{x]",ch->in_room->area->name);
-
-    if (IS_IMMORTAL(ch) && (IS_NPC(ch) || IS_SET(ch->act,PLR_HOLYLIGHT)))
-    {
-      printf_to_char(ch," [%d]",ch->in_room->vnum);
-    }
-
-    printf_to_char( ch , "\n\r" );
-
-    if ( arg1[0] == '\0' || ( IS_PC(ch) && !IS_SET(ch->comm, COMM_BRIEF) ) )
-    {
-      printf_to_char( ch , "  ");
-      printf_to_char( ch , ch->in_room->description );
-    }
-
-    if ( IS_PC(ch) && IS_SET(ch->act, PLR_AUTOEXIT) )
-    {
-      printf_to_char(ch,"\n\r");
-      do_exits( ch, "auto" );
-    }
-
-    show_list_to_char( ch->in_room->contents, ch, FALSE, FALSE );
-    show_char_to_char( ch->in_room->people,   ch );
+    look_room( ch, arg1[0] == '\0' );
     return;
   }
 
-  if ( !str_cmp( arg1, "i" ) || !str_cmp(arg1, "in")  || !str_cmp(arg1,"on"))
+  if ( !str_cmp( arg1, "in" ) || !str_cmp( arg1, "on" )
+  ||   !str_prefix( arg1, "içine" ) || !str_prefix( arg1, "içinde" ) )
   {
-    /* 'look in' */
+    /* 'bak içine <taşıyıcı>' */
     if ( arg2[0] == '\0' )
     {
-      printf_to_char( ch,"Neyin içine bakacaksın?\n\r" );
+      send_to_char( "Neyin içine bakacaksın?\n\r", ch );
       return;
     }
 
     if ( ( obj = get_obj_here( ch, arg2 ) ) == NULL )
     {
-      printf_to_char(ch,"Onu görmüyorsun.\n\r" );
+      send_to_char( "Onu görmüyorsun.\n\r", ch );
       return;
     }
 
-    switch ( obj->item_type )
-    {
-      default:
-        printf_to_char(ch, "O bir taşıyıcı değil.\n\r" );
-        break;
-
-      case ITEM_DRINK_CON:
-        if ( obj->value[1] <= 0 )
-        {
-          printf_to_char(ch,"İçi boş.\n\r" );
-          break;
-        }
-
-        printf_to_char(ch,"%s %s sıvısıyla dolu.\n\r",obj->value[1] < obj->value[0] / 4 ? "Yarıdan azı" : obj->value[1] < 3 * obj->value[0] / 4 ? "Yarısı"     : "Yarıdan fazlası",liq_table[obj->value[2]].liq_color);
-
-        break;
-
-      case ITEM_CONTAINER:
-      case ITEM_CORPSE_NPC:
-      case ITEM_CORPSE_PC:
-        if ( IS_SET(obj->value[1], CONT_CLOSED) )
-        {
-          printf_to_char( ch,"Kapalı.\n\r" );
-          break;
-        }
-
-        act( "$p şunları içeriyor:", ch, obj, NULL, TO_CHAR );
-        show_list_to_char( obj->contains, ch, TRUE, TRUE );
-        break;
-    }
+    look_in_obj( ch, obj );
     return;
   }
 
-  /*
-  * baslangic:
-  * bak <karakter_ismi>
-  */
   if ( ( victim = get_char_room( ch, arg1 ) ) != NULL )
   {
-    show_char_to_char_1( victim, ch );
-
-    /* Love potion */
-
-    if (is_affected(ch, gsn_love_potion) && (victim != ch))
-    {
-      AFFECT_DATA af;
-
-      affect_strip(ch, gsn_love_potion);
-
-      if (ch->master)
-      stop_follower(ch);
-      add_follower(ch, victim);
-      ch->leader = victim;
-
-      af.where = TO_AFFECTS;
-      af.type = gsn_charm_person;
-      af.level = ch->level;
-      af.duration =  number_fuzzy(victim->level / 4);
-      af.bitvector = AFF_CHARM;
-      af.modifier = 0;
-      af.location = 0;
-      affect_to_char(ch, &af);
-
-      act("$n sence de tatlı değil mi?", victim, NULL, ch, TO_VICT);
-      act("$N büyülenmiş gözlerle sana bakıyor.",victim,NULL,ch,TO_CHAR);
-      act("$N büyülenmiş gözlerle $e bakıyor.",victim,NULL,ch,TO_NOTVICT);
-    }
-
-    return;
-  }
-  /*
-  * bitis:
-  * bak <karakter_ismi>
-  */
-
-
-  for ( obj = ch->carrying; obj != NULL; obj = obj->next_content )
-  {
-    if ( can_see_obj( ch, obj ) )
-    {
-      /* player can see object */
-      pdesc = get_extra_descr( arg3, obj->extra_descr );
-      if ( pdesc != NULL )
-      {
-        if (++count == number)
-        {
-          printf_to_char( ch,pdesc );
-          return;
-        }
-        else
-        {
-          continue;
-        }
-      }
-
-      pdesc = get_extra_descr( arg3, obj->pIndexData->extra_descr );
-
-      if ( pdesc != NULL )
-      {
-        if (++count == number)
-        {
-          printf_to_char( ch,pdesc );
-          return;
-        }
-        else
-        {
-          continue;
-        }
-      }
-
-      if ( is_name( arg3, obj->name ) )
-      if (++count == number)
-      {
-      printf_to_char(ch,"Özel bir şey görmüyorsun.\n\r");
-      return;
-      }
-    }
-  }
-
-  for ( obj = ch->in_room->contents; obj != NULL; obj = obj->next_content )
-  {
-    if ( can_see_obj( ch, obj ) )
-    {
-      pdesc = get_extra_descr( arg3, obj->extra_descr );
-      if ( pdesc != NULL )
-      {
-        if (++count == number)
-        {
-          printf_to_char( ch,pdesc );
-          return;
-        }
-      }
-
-      pdesc = get_extra_descr( arg3, obj->pIndexData->extra_descr );
-      if ( pdesc != NULL )
-      {
-        if (++count == number)
-        {
-          printf_to_char( ch,pdesc );
-          return;
-        }
-      }
-    }
-
-    if ( is_name( arg3, obj->name ) )
-    {
-      if (++count == number)
-      {
-        printf_to_char( ch,obj->description );
-        printf_to_char(ch,"\n\r");
-        return;
-      }
-    }
-  }
-
-  pdesc = get_extra_descr(arg3,ch->in_room->extra_descr);
-  if (pdesc != NULL)
-  {
-    if (++count == number)
-    {
-      printf_to_char(ch,pdesc);
-      return;
-    }
-  }
-
-  if (count > 0 && count != number)
-  {
-    if (count == 1)
-      printf_to_char(ch,"Sadece bir %s görüyorsun.\n\r",arg3);
-    else
-      printf_to_char(ch,"Ondan sadece %d tane görüyorsun.\n\r",count);
-
+    look_char( ch, victim );
     return;
   }
 
-  if ( !str_cmp( arg1, "k" ) || !str_cmp( arg1, "kuzey" ) )
-    door = 0;
-  else if ( !str_cmp( arg1, "d" ) || !str_cmp( arg1, "doğu"  ) )
-    door = 1;
-  else if ( !str_cmp( arg1, "g" ) || !str_cmp( arg1, "güney" ) )
-    door = 2;
-  else if ( !str_cmp( arg1, "b" ) || !str_cmp( arg1, "batı"  ) )
-    door = 3;
-  else if ( !str_cmp( arg1, "y" ) || !str_cmp( arg1, "yukarı"    ) )
-    door = 4;
-  else if ( !str_cmp( arg1, "a" ) || !str_cmp( arg1, "aşağı"  ) )
-    door = 5;
-  else
+  if ( look_extra( ch, arg3, number ) )
+    return;
+
+  if ( ( door = dir_lookup( arg1 ) ) < 0 )
   {
-    printf_to_char(ch,"Onu görmüyorsun.\n\r" );
+    send_to_char( "Onu görmüyorsun.\n\r", ch );
     return;
   }
 
-  /* 'look direction' */
-  if ( ( pexit = ch->in_room->exit[door] ) == NULL )
-  {
-    printf_to_char(ch,"Özel bir şey yok.\n\r" );
-    return;
-  }
-
-  if ( pexit->description != NULL && pexit->description[0] != '\0' )
-    printf_to_char( ch, pexit->description );
-  else
-    printf_to_char( ch,"Özel bir şey yok.\n\r" );
-
-  if ( pexit->keyword    != NULL
-      && pexit->keyword[0] != '\0'
-      && pexit->keyword[0] != ' ' )
-  {
-    if ( IS_SET(pexit->exit_info, EX_CLOSED) )
-    {
-      act( "$d kapalı.", ch, NULL, pexit->keyword, TO_CHAR );
-    }
-    else if ( IS_SET(pexit->exit_info, EX_ISDOOR) )
-    {
-      act( "$d açık.",   ch, NULL, pexit->keyword, TO_CHAR );
-    }
-  }
-
-  return;
+  look_dir( ch, door );
 }
 
 /* RT added back for the hell of it */
@@ -1870,8 +1473,7 @@ void do_examine( CHAR_DATA *ch, char *argument )
 	case ITEM_CONTAINER:
 	case ITEM_CORPSE_NPC:
 	case ITEM_CORPSE_PC:
-	    snprintf(buf, sizeof(buf),"in %s",argument);
-	    do_look( ch, buf );
+	    look_in_obj( ch, obj );
 	}
     }
 
@@ -1885,12 +1487,12 @@ void do_examine( CHAR_DATA *ch, char *argument )
  */
 void do_exits( CHAR_DATA *ch, char *argument )
 {
-    extern const char * dir_name[];
     char buf[MAX_STRING_LENGTH];
     EXIT_DATA *pexit;
     bool found;
     bool fAuto;
     int door;
+    size_t len;
 
     fAuto  = !str_cmp( argument, "auto" );
 
@@ -1899,8 +1501,7 @@ void do_exits( CHAR_DATA *ch, char *argument )
 
   if (fAuto)
   {
-    snprintf(buf, sizeof(buf),CLR_CYAN);
-    strcat(buf,"[");
+    snprintf(buf, sizeof(buf), "%s[", CLR_CYAN);
   }
   else if (IS_IMMORTAL(ch))
   {
@@ -1912,60 +1513,42 @@ void do_exits( CHAR_DATA *ch, char *argument )
   }
 
   found = FALSE;
+  len = strlen( buf );
   for ( door = 0; door <= 5; door++ )
   {
-    if ( ( pexit = ch->in_room->exit[door] ) != NULL
-      &&   pexit->u1.to_room != NULL
-      &&   can_see_room(ch,pexit->u1.to_room)
-      &&   !IS_SET(pexit->exit_info, EX_CLOSED) )
-      {
-        found = TRUE;
-        if ( fAuto )
-        {
-          strcat( buf, " " );
-          strcat( buf, dir_name[door] );
-        }
-        else
-        {
-          sprintf( buf + strlen(buf), "%-*s - %s",
-          utf8_width(capitalize( dir_name[door] ), 5), capitalize( dir_name[door] ),
-          room_dark( pexit->u1.to_room )
-          ?  "Zifiri karanlık"
-			: pexit->u1.to_room->name);
-		if (IS_IMMORTAL(ch))
-		    sprintf(buf + strlen(buf),
-			" (oda %d)\n\r",pexit->u1.to_room->vnum);
-		else
-		    sprintf(buf + strlen(buf), "\n\r");
-	    }
-	}
+    bool closed;
 
-	if ( ( pexit = ch->in_room->exit[door] ) != NULL
-	&&   pexit->u1.to_room != NULL
-	&&   can_see_room(ch,pexit->u1.to_room)
-	&&   IS_SET(pexit->exit_info, EX_CLOSED) )
-	{
-	    found = TRUE;
-	    if ( fAuto )
-	    {
-		strcat( buf, " " );
-		strcat( buf, dir_name[door] );
-		strcat( buf, "*" );
-	    }
-	    else
-	    {
-		sprintf( buf + strlen(buf), "%-*s * (%s)",
-		    utf8_width(capitalize( dir_name[door] ), 5), capitalize( dir_name[door] ),
-		    pexit->keyword);
-		if (IS_IMMORTAL(ch))
-		    sprintf(buf + strlen(buf),
-			" (oda %d)\n\r",pexit->u1.to_room->vnum);
-		else
-		    sprintf(buf + strlen(buf), "\n\r");
-	    }
-	}
+    if ( ( pexit = ch->in_room->exit[door] ) == NULL
+    ||   pexit->u1.to_room == NULL
+    ||   !can_see_room( ch, pexit->u1.to_room ) )
+	continue;
 
+    found  = TRUE;
+    closed = IS_SET(pexit->exit_info, EX_CLOSED);
+
+    if ( fAuto )
+    {
+	len += snprintf( buf + len, sizeof(buf) - len, " %s%s",
+	    dir_name[door], closed ? "*" : "" );
+	continue;
     }
+
+    if ( closed )
+	len += snprintf( buf + len, sizeof(buf) - len, "%-*s * (%s)",
+	    utf8_width( capitalize( dir_name[door] ), 5 ), capitalize( dir_name[door] ),
+	    pexit->keyword );
+    else
+	len += snprintf( buf + len, sizeof(buf) - len, "%-*s - %s",
+	    utf8_width( capitalize( dir_name[door] ), 5 ), capitalize( dir_name[door] ),
+	    room_dark( pexit->u1.to_room ) ? "Zifiri karanlık" : pexit->u1.to_room->name );
+
+    if ( IS_IMMORTAL(ch) )
+	len += snprintf( buf + len, sizeof(buf) - len, " (oda %d)\n\r", pexit->u1.to_room->vnum );
+    else
+	len += snprintf( buf + len, sizeof(buf) - len, "\n\r" );
+    if ( len >= sizeof(buf) )
+	len = sizeof(buf) - 1;
+  }
 
     if ( !found )
 	strcat( buf, fAuto ? " hiç" : "Hiç.\n\r" );
@@ -2021,15 +1604,80 @@ void do_worth( CHAR_DATA *ch, char *argument )
     return;
 }
 
+/* Bağışıklık / dayanıklılık / zayıflık satırları (skor ve yaratık skoru ortak). */
+static const struct { const char *label; long imm, res, vuln; } irv_table[] =
+{
+    { "teshir",   IMM_CHARM,     RES_CHARM,     VULN_CHARM     },
+    { "çağrı  ",  IMM_SUMMON,    RES_SUMMON,    VULN_SUMMON    },
+    { "büyü  ",   IMM_MAGIC,     RES_MAGIC,     VULN_MAGIC     },
+    { "silah ",   IMM_WEAPON,    RES_WEAPON,    VULN_WEAPON    },
+    { "ezici ",   IMM_BASH,      RES_BASH,      VULN_BASH      },
+    { "delici  ", IMM_PIERCE,    RES_PIERCE,    VULN_PIERCE    },
+    { "kesici",   IMM_SLASH,     RES_SLASH,     VULN_SLASH     },
+    { "emici  ",  IMM_DROWNING,  RES_DROWNING,  VULN_DROWNING  },
+    { "ateş  ",   IMM_FIRE,      RES_FIRE,      VULN_FIRE      },
+    { "ayaz  ",   IMM_COLD,      RES_COLD,      VULN_COLD      },
+    { "şimşek",   IMM_LIGHTNING, RES_LIGHTNING, VULN_LIGHTNING },
+    { "asit    ", IMM_ACID,      RES_ACID,      VULN_ACID      },
+    { "zehir ",   IMM_POISON,    RES_POISON,    VULN_POISON    },
+    { "negatif",  IMM_NEGATIVE,  RES_NEGATIVE,  VULN_NEGATIVE  },
+    { "kutsal",   IMM_HOLY,      RES_HOLY,      VULN_HOLY      },
+    { "enerji",   IMM_ENERGY,    RES_ENERGY,    VULN_ENERGY    },
+    { "zihin ",   IMM_MENTAL,    RES_MENTAL,    VULN_MENTAL    },
+    { "hastalık", IMM_DISEASE,   RES_DISEASE,   VULN_DISEASE   },
+    { "ışık  ",   IMM_LIGHT,     RES_LIGHT,     VULN_LIGHT     },
+    { "ses    ",  IMM_SOUND,     RES_SOUND,     VULN_SOUND     },
+    { "tahta ",   IMM_WOOD,      RES_WOOD,      VULN_WOOD      },
+    { "gümüş ",   IMM_SILVER,    RES_SILVER,    VULN_SILVER    },
+    { "demir ",   IMM_IRON,      RES_IRON,      VULN_IRON      },
+};
+#define IRV_PER_ROW	6
+#define IRV_LAST_PAD	13	/* eksik satırın kutu kenarına kadar dolgusu */
+
+static void show_irv_rows( CHAR_DATA *ch, CHAR_DATA *who )
+{
+    const int count = (int) ( sizeof(irv_table) / sizeof(irv_table[0]) );
+    int i;
+
+    printf_to_char(ch,"{c| {wBağışıklıklar, Dayanıklılıklar, Zayıflıklar{c                         |{x\n\r");
+    for ( i = 0; i < count; i++ )
+    {
+	printf_to_char( ch, "%s{c%s:%s%s%s",
+	    ( i % IRV_PER_ROW == 0 ) ? "{c| " : " ",
+	    irv_table[i].label,
+	    ( who->imm_flags  & irv_table[i].imm  ) ? "{w+{x" : "{D-{x",
+	    ( who->res_flags  & irv_table[i].res  ) ? "{w+{x" : "{D-{x",
+	    ( who->vuln_flags & irv_table[i].vuln ) ? "{w+{x" : "{D-{x" );
+	if ( i % IRV_PER_ROW == IRV_PER_ROW - 1 )
+	    send_to_char( "{c|{x\n\r", ch );
+    }
+    if ( count % IRV_PER_ROW != 0 )
+	printf_to_char( ch, "%*s{c|{x\n\r", IRV_LAST_PAD, "" );
+}
+
+static const char *sex_name( int sex, bool npc )
+{
+    switch ( sex )
+    {
+    case SEX_NEUTRAL: return "yok";
+    case SEX_MALE:    return "erkek";
+    case SEX_FEMALE:  return npc ? "dişi" : "kadın";
+    }
+    return "";
+}
+
+static const char *pk_flag_name( int oyuncu_katli )
+{
+    return oyuncu_katli == 0 ? "Hayır" : oyuncu_katli == 1 ? "Evet" : "Bug";
+}
+
 void do_score( CHAR_DATA *ch, char *argument )
 {
-	char sex[8];
-	char oyuncukatli[16];
-  char dogumGunu[20];
-  char yonelim_etik[20];
-	sex[0]='\0';
-  CHAR_DATA *victim;
+  char dogumGunu[MAX_INPUT_LENGTH];
+  char yonelim_etik[MAX_INPUT_LENGTH];
   char arg[MAX_INPUT_LENGTH];
+  CHAR_DATA *victim = NULL, *who;
+  const char *sex, *oyuncukatli, *adrenalin;
 
   argument = one_argument(argument,arg);
 
@@ -2038,8 +1686,6 @@ void do_score( CHAR_DATA *ch, char *argument )
      printf_to_char(ch,"Bu komutla argüman kullanılmaz.\n\r");
      return;
   }
-
-  victim = NULL;
 
   if(arg[0]!='\0' && IS_IMMORTAL(ch))
   {
@@ -2051,127 +1697,55 @@ void do_score( CHAR_DATA *ch, char *argument )
         return;
       }
     }
-  }
 
-  if (victim != NULL)
-  {
-    // Mob
-    if(IS_NPC(victim))
+    if ( IS_NPC(victim) )
     {
        mob_score(ch,victim);
        return;
     }
-
-    switch (victim->sex)
-    {
-      case 0:
-        strcpy(sex,"yok");
-        break;
-      case 1:
-        strcpy(sex,"erkek");
-        break;
-      case 2:
-        strcpy(sex,"kadın");
-        break;
-    }
-
-    game_time_to_string(victim->pcdata->birth_time,dogumGunu);
-	
-	if(victim->pcdata->oyuncu_katli == 0)
-	{
-		strcpy(oyuncukatli,"Hayır");
-	}
-	else if(victim->pcdata->oyuncu_katli == 1)
-	{
-		strcpy(oyuncukatli,"Evet");
-	}
-	else
-	{
-		strcpy(oyuncukatli,"Bug");
-	}
-  }
-  else
-  {
-    switch (ch->sex)
-    {
-      case 0:
-        strcpy(sex,"yok");
-        break;
-      case 1:
-        strcpy(sex,"erkek");
-        break;
-      case 2:
-        strcpy(sex,"kadın");
-        break;
-
-    }
-
-  game_time_to_string(ch->pcdata->birth_time,dogumGunu);
-	
-	if(ch->pcdata->oyuncu_katli == 0)
-	{
-		strcpy(oyuncukatli,"Hayır");
-	}
-	else if(ch->pcdata->oyuncu_katli == 1)
-	{
-		strcpy(oyuncukatli,"Evet");
-	}
-	else
-	{
-		strcpy(oyuncukatli,"Bug");
-	}
   }
 
-  snprintf(yonelim_etik, sizeof(yonelim_etik), "%s/%s", IS_GOOD((victim==NULL?ch:victim)) ? "iyi" :	IS_EVIL((victim==NULL?ch:victim)) ? "kem" : "yansız",((victim==NULL?ch:victim)->ethos==1?"tüze":(victim==NULL?ch:victim)->ethos==2?"yansız":"kaos") );
+  who         = ( victim != NULL ) ? victim : ch;
+  sex         = sex_name( who->sex, FALSE );
+  oyuncukatli = pk_flag_name( who->pcdata->oyuncu_katli );
+  adrenalin   = ( who->last_fight_time != -1
+		&& current_time - who->last_fight_time < FIGHT_DELAY_TIME ) ? "Evet" : "Hayır";
+  game_time_to_string( who->pcdata->birth_time, dogumGunu );
+
+  snprintf(yonelim_etik, sizeof(yonelim_etik), "%s/%s",
+	IS_GOOD(who) ? "iyi" : IS_EVIL(who) ? "kem" : "yansız",
+	who->ethos == 1 ? "tüze" : who->ethos == 2 ? "yansız" : "kaos" );
 
   printf_to_char(ch,"{c,---------------------------------------------------------------------,{w\n\r");
-  printf_to_char(ch,"{c|{w%*s%-*s{cDiscord:%-*s|\n\r",utf8_width((victim==NULL?ch:victim)->name, 12), (victim==NULL?ch:victim)->name,utf8_width((victim==NULL?ch:victim)->pcdata->title, 30), (victim==NULL?ch:victim)->pcdata->title,utf8_width((victim==NULL?ch:victim)->pcdata->discord_id, 19), (victim==NULL?ch:victim)->pcdata->discord_id);
+  printf_to_char(ch,"{c|{w%*s%-*s{cDiscord:%-*s|\n\r",utf8_width(who->name, 12), who->name,utf8_width(who->pcdata->title, 30), who->pcdata->title,utf8_width(who->pcdata->discord_id, 19), who->pcdata->discord_id);
   printf_to_char(ch,"{c|-------------------------,-------------------------------------------,{w\n\r");
-  printf_to_char(ch,"{c| Irk     : {w%-*s{c | ZIRH         | PARA                       |\n\r",utf8_width(race_table[(victim==NULL?ch:victim)->race].name[1], 13), race_table[(victim==NULL?ch:victim)->race].name[1]);
-  printf_to_char(ch,"{c| Yaş     : {w%-13d{c | Delici : {w%-4d{c| Akçe        : {w%-7ld{c      |\n\r",get_age(victim==NULL?ch:victim),GET_AC((victim==NULL?ch:victim),AC_PIERCE),(victim==NULL?ch:victim)->silver);
-  printf_to_char(ch,"{c| Cinsiyet: {w%-*s{c | Ezici  : {w%-4d{c| Akçe (Banka): {w%-7ld{c      |\n\r",utf8_width(sex, 13), sex,GET_AC((victim==NULL?ch:victim),AC_BASH),(victim==NULL?ch:victim)->pcdata->bank_s);
-  printf_to_char(ch,"{c| Sınıf   : {w%-*s{c | Kesici : {w%-4d{c|                            |\n\r",utf8_width(class_table[(victim==NULL?ch:victim)->iclass].name[1], 13), class_table[(victim==NULL?ch:victim)->iclass].name[1],GET_AC((victim==NULL?ch:victim),AC_SLASH));
-  printf_to_char(ch,"{c| Yön/Etk : {w%-*s{c | Egzotik: {w%-4d{c|                            |\n\r",utf8_width(yonelim_etik, 13), yonelim_etik,GET_AC((victim==NULL?ch:victim),AC_EXOTIC));
-  printf_to_char(ch,"{c| Doğum   : {w%-*s{c  | Büyü K.: {w%-4d{c|                            |\n\r",utf8_width(dogumGunu, 12), dogumGunu,(victim==NULL?ch:victim)->saving_throw);
+  printf_to_char(ch,"{c| Irk     : {w%-*s{c | ZIRH         | PARA                       |\n\r",utf8_width(race_table[who->race].name[1], 13), race_table[who->race].name[1]);
+  printf_to_char(ch,"{c| Yaş     : {w%-13d{c | Delici : {w%-4d{c| Akçe        : {w%-7ld{c      |\n\r",get_age(who),GET_AC(who,AC_PIERCE),who->silver);
+  printf_to_char(ch,"{c| Cinsiyet: {w%-*s{c | Ezici  : {w%-4d{c| Akçe (Banka): {w%-7ld{c      |\n\r",utf8_width(sex, 13), sex,GET_AC(who,AC_BASH),who->pcdata->bank_s);
+  printf_to_char(ch,"{c| Sınıf   : {w%-*s{c | Kesici : {w%-4d{c|                            |\n\r",utf8_width(class_table[who->iclass].name[1], 13), class_table[who->iclass].name[1],GET_AC(who,AC_SLASH));
+  printf_to_char(ch,"{c| Yön/Etk : {w%-*s{c | Egzotik: {w%-4d{c|                            |\n\r",utf8_width(yonelim_etik, 13), yonelim_etik,GET_AC(who,AC_EXOTIC));
+  printf_to_char(ch,"{c| Doğum   : {w%-*s{c  | Büyü K.: {w%-4d{c|                            |\n\r",utf8_width(dogumGunu, 12), dogumGunu,who->saving_throw);
   printf_to_char(ch,"{c|-------------------------'--------------|----------------------------,{w\n\r");
-  printf_to_char(ch,"{c| Yp    : {w%-7d/%-7d{c | Güç: {w%-2d(%-2d){c  | Pratik : {w%-3d{c               |\n\r",(victim==NULL?ch:victim)->hit,(victim==NULL?ch:victim)->max_hit,(victim==NULL?ch:victim)->perm_stat[STAT_STR],get_curr_stat((victim==NULL)?ch:victim,STAT_STR),((victim==NULL)?ch:victim)->practice);
-  printf_to_char(ch,"{c| Mana  : {w%-7d/%-7d{c | Zek: {w%-2d(%-2d){c  | Eğitim : {w%-3d{c               |\n\r",(victim==NULL?ch:victim)->mana, (victim==NULL?ch:victim)->max_mana,(victim==NULL?ch:victim)->perm_stat[STAT_INT],get_curr_stat((victim==NULL?ch:victim),STAT_INT),(victim==NULL?ch:victim)->train);
-  printf_to_char(ch,"{c| Zp    : {w%-7d/%-7d{c | Bil: {w%-2d(%-2d){c  | Eşya   : {w%-3d / %-4d{c        |\n\r",(victim==NULL?ch:victim)->move, (victim==NULL?ch:victim)->max_move,(victim==NULL?ch:victim)->perm_stat[STAT_WIS],get_curr_stat((victim==NULL?ch:victim),STAT_WIS),(victim==NULL?ch:victim)->carry_number, can_carry_n((victim==NULL?ch:victim)));
-  printf_to_char(ch,"{c| Seviye: {w%-10d{c      | Çev: {w%-2d(%-2d){c  | Ağırlık: {w%-6ld / %-8d{c |\n\r",(victim==NULL?ch:victim)->level,(victim==NULL?ch:victim)->perm_stat[STAT_DEX],get_curr_stat((victim==NULL?ch:victim),STAT_DEX),get_carry_weight((victim==NULL?ch:victim)), can_carry_w((victim==NULL?ch:victim)));
-  printf_to_char(ch,"{c| Kalan : {w%-10d{c      | Bün: {w%-2d(%-2d){c  | GörevP : {w%-5d{c             |\n\r",((victim==NULL?ch:victim)->level + 1) * exp_per_level((victim==NULL?ch:victim),(victim==NULL?ch:victim)->pcdata->points) - (victim==NULL?ch:victim)->exp,(victim==NULL?ch:victim)->perm_stat[STAT_CON],get_curr_stat((victim==NULL?ch:victim),STAT_CON),(victim==NULL?ch:victim)->pcdata->questpoints);
-  printf_to_char(ch,"{c| TP    : {w%-12ld{c    | Kar: {w%-2d(%-2d){c  | GörevZ : {w%-2d{c                |\n\r",(victim==NULL?ch:victim)->exp,(victim==NULL?ch:victim)->perm_stat[STAT_CHA],get_curr_stat((victim==NULL?ch:victim),STAT_CHA),((IS_SET((victim==NULL?ch:victim)->act, PLR_QUESTOR))?((victim==NULL?ch:victim)->pcdata->countdown):((victim==NULL?ch:victim)->pcdata->nextquest)));
-  printf_to_char(ch,"{c| Korkak: {w%-10d{c      | ZZ : {w%-3d{c     | GörevPr: {w%-2d{c                |\n\r",(victim==NULL?ch:victim)->wimpy,GET_DAMROLL((victim==NULL?ch:victim)),(victim==NULL?ch:victim)->pcdata->questpractice);
-  printf_to_char(ch,"{c| Ölüm  : {w%-3d{c             | VZ : {w%-3d{c     | RolP   : {w%-6ld{c            |\n\r",(victim==NULL?ch:victim)->pcdata->death,GET_HITROLL((victim==NULL?ch:victim)), (victim==NULL?ch:victim)->pcdata->rk_puani);
-  printf_to_char(ch,"{c| Din   : {w%-*s{c    | OK : {w%-*s{c  | DinP   : {w%-6ld{c            |\n\r",utf8_width(religion_table[(victim==NULL?ch:victim)->religion].name, 12), religion_table[(victim==NULL?ch:victim)->religion].name, utf8_width(oyuncukatli, 6), oyuncukatli, (victim==NULL?ch:victim)->pcdata->din_puani);
+  printf_to_char(ch,"{c| Yp    : {w%-7d/%-7d{c | Güç: {w%-2d(%-2d){c  | Pratik : {w%-3d{c               |\n\r",who->hit,who->max_hit,who->perm_stat[STAT_STR],get_curr_stat(who,STAT_STR),who->practice);
+  printf_to_char(ch,"{c| Mana  : {w%-7d/%-7d{c | Zek: {w%-2d(%-2d){c  | Eğitim : {w%-3d{c               |\n\r",who->mana, who->max_mana,who->perm_stat[STAT_INT],get_curr_stat(who,STAT_INT),who->train);
+  printf_to_char(ch,"{c| Zp    : {w%-7d/%-7d{c | Bil: {w%-2d(%-2d){c  | Eşya   : {w%-3d / %-4d{c        |\n\r",who->move, who->max_move,who->perm_stat[STAT_WIS],get_curr_stat(who,STAT_WIS),who->carry_number, can_carry_n(who));
+  printf_to_char(ch,"{c| Seviye: {w%-10d{c      | Çev: {w%-2d(%-2d){c  | Ağırlık: {w%-6ld / %-8d{c |\n\r",who->level,who->perm_stat[STAT_DEX],get_curr_stat(who,STAT_DEX),get_carry_weight(who), can_carry_w(who));
+  printf_to_char(ch,"{c| Kalan : {w%-10d{c      | Bün: {w%-2d(%-2d){c  | GörevP : {w%-5d{c             |\n\r",(who->level + 1) * exp_per_level(who,who->pcdata->points) - who->exp,who->perm_stat[STAT_CON],get_curr_stat(who,STAT_CON),who->pcdata->questpoints);
+  printf_to_char(ch,"{c| TP    : {w%-12ld{c    | Kar: {w%-2d(%-2d){c  | GörevZ : {w%-2d{c                |\n\r",who->exp,who->perm_stat[STAT_CHA],get_curr_stat(who,STAT_CHA),((IS_SET(who->act, PLR_QUESTOR))?(who->pcdata->countdown):(who->pcdata->nextquest)));
+  printf_to_char(ch,"{c| Korkak: {w%-10d{c      | ZZ : {w%-3d{c     | GörevPr: {w%-2d{c                |\n\r",who->wimpy,GET_DAMROLL(who),who->pcdata->questpractice);
+  printf_to_char(ch,"{c| Ölüm  : {w%-3d{c             | VZ : {w%-3d{c     | RolP   : {w%-6ld{c            |\n\r",who->pcdata->death,GET_HITROLL(who), who->pcdata->rk_puani);
+  printf_to_char(ch,"{c| Din   : {w%-*s{c    | OK : {w%-*s{c  | DinP   : {w%-6ld{c            |\n\r",utf8_width(religion_table[who->religion].name, 12), religion_table[who->religion].name, utf8_width(oyuncukatli, 6), oyuncukatli, who->pcdata->din_puani);
   printf_to_char(ch,"{c|-------------------------'--------------'----------------------------|{w\n\r");
-  printf_to_char(ch,"{c| {wBağışıklıklar, Dayanıklılıklar, Zayıflıklar{c                         |{x\n\r");
-  printf_to_char(ch,"{c| {cteshir:%s%s%s {cçağrı  :%s%s%s {cbüyü  :%s%s%s {csilah :%s%s%s {cezici :%s%s%s {cdelici  :%s%s%s{c|{x\n\r",((victim==NULL?ch:victim)->imm_flags  & IMM_CHARM)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_CHARM)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_CHARM)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_SUMMON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_SUMMON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_SUMMON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_MAGIC)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_MAGIC)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_MAGIC)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_WEAPON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_WEAPON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_WEAPON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_BASH)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_BASH)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_BASH)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_PIERCE)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_PIERCE)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_PIERCE)?"{w+{x":"{D-{x");
-  printf_to_char(ch,"{c| {ckesici:%s%s%s {cemici  :%s%s%s {cateş  :%s%s%s {cayaz  :%s%s%s {cşimşek:%s%s%s {casit    :%s%s%s{c|{x\n\r",((victim==NULL?ch:victim)->imm_flags  & IMM_SLASH)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_SLASH)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_SLASH)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_DROWNING)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_DROWNING)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_DROWNING)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_FIRE)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_FIRE)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_FIRE)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_COLD)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_COLD)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_COLD)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_LIGHTNING)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_LIGHTNING)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_LIGHTNING)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_ACID)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_ACID)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_ACID)?"{w+{x":"{D-{x");
-  printf_to_char(ch,"{c| {czehir :%s%s%s {cnegatif:%s%s%s {ckutsal:%s%s%s {cenerji:%s%s%s {czihin :%s%s%s {chastalık:%s%s%s{c|{x\n\r",((victim==NULL?ch:victim)->imm_flags  & IMM_POISON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_POISON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_POISON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_NEGATIVE)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_NEGATIVE)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_NEGATIVE)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_HOLY)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_HOLY)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_HOLY)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_ENERGY)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_ENERGY)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_ENERGY)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_MENTAL)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_MENTAL)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_MENTAL)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_DISEASE)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_DISEASE)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_DISEASE)?"{w+{x":"{D-{x");
-  printf_to_char(ch,"{c| {cışık  :%s%s%s {cses    :%s%s%s {ctahta :%s%s%s {cgümüş :%s%s%s {cdemir :%s%s%s             {c|{x\n\r",((victim==NULL?ch:victim)->imm_flags  & IMM_LIGHT)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_LIGHT)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_LIGHT)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_SOUND)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_SOUND)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_SOUND)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_WOOD)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_WOOD)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_WOOD)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_SILVER)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_SILVER)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_SILVER)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->imm_flags  & IMM_IRON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->res_flags  & RES_IRON)?"{w+{x":"{D-{x",((victim==NULL?ch:victim)->vuln_flags  & VULN_IRON)?"{w+{x":"{D-{x");
+  show_irv_rows( ch, who );
   printf_to_char(ch,"{c|---------------------------------------------------------------------|{x\n\r");
-  printf_to_char(ch,"{c| Susuzluk   : {w%-3d{c Açlık    : {w%-3d{c Memleket Özlemi: {w%-3d{c                |\n\r",(victim==NULL?ch:victim)->pcdata->condition[COND_THIRST],(victim==NULL?ch:victim)->pcdata->condition[COND_HUNGER],(victim==NULL?ch:victim)->pcdata->condition[COND_DESIRE]);
-  printf_to_char(ch,"{c| Kana susama: {w%-3d{c Sarhoşluk: {w%-3d{c Adrenalin      : {w%-*s{c              |\n\r",(victim==NULL?ch:victim)->pcdata->condition[COND_BLOODLUST],(victim==NULL?ch:victim)->pcdata->condition[COND_DRUNK],utf8_width((ch->last_fight_time == -1)?"Hayır":(((current_time - ch->last_fight_time) <FIGHT_DELAY_TIME)?"Evet":"Hayır"), 5), (ch->last_fight_time == -1)?"Hayır":(((current_time - ch->last_fight_time) <FIGHT_DELAY_TIME)?"Evet":"Hayır"));
+  printf_to_char(ch,"{c| Susuzluk   : {w%-3d{c Açlık    : {w%-3d{c Memleket Özlemi: {w%-3d{c                |\n\r",who->pcdata->condition[COND_THIRST],who->pcdata->condition[COND_HUNGER],who->pcdata->condition[COND_DESIRE]);
+  printf_to_char(ch,"{c| Kana susama: {w%-3d{c Sarhoşluk: {w%-3d{c Adrenalin      : {w%-*s{c              |\n\r",who->pcdata->condition[COND_BLOODLUST],who->pcdata->condition[COND_DRUNK],utf8_width(adrenalin, 5), adrenalin);
   printf_to_char(ch,"{c'---------------------------------------------------------------------'{x\n\r");
 }
 
 void mob_score(CHAR_DATA *ch,CHAR_DATA *mob)
 {
-	char sex[8];
-	sex[0]='\0';
-	switch (mob->sex)
-	{
-		case 0:
-			strcpy(sex,"yok");
-			break;
-		case 1:
-			strcpy(sex,"erkek");
-			break;
-		case 2:
-			strcpy(sex,"dişi");
-			break;
-
-	}
+	const char *sex = sex_name( mob->sex, TRUE );
 
 	printf_to_char(ch,"{c,---------------------------------------------------------------------,\n\r");
 	printf_to_char(ch,"{c| {w%-*s                                 {c                       |\n\r",utf8_width(mob->short_descr, 12), mob->short_descr);
@@ -2188,11 +1762,7 @@ void mob_score(CHAR_DATA *ch,CHAR_DATA *mob)
 	printf_to_char(ch,"{c| Zp    : {w%-5d/%-5d{c|                |                               |\n\r",mob->move, mob->max_move);
 	printf_to_char(ch,"{c| Seviye: {w%-7ld{c    |                |                               |\n\r",mob->level);
 	printf_to_char(ch,"{c|--------------------'------------------'-----------------------------,{x\n\r");
-  printf_to_char(ch,"{c| {wBağışıklıklar, Dayanıklılıklar, Zayıflıklar{c                         |{x\n\r");
-  printf_to_char(ch,"{c| {cteshir:%s%s%s {cçağrı  :%s%s%s {cbüyü  :%s%s%s {csilah :%s%s%s {cezici :%s%s%s {cdelici  :%s%s%s{c|{x\n\r",(mob->imm_flags  & IMM_CHARM)?"{w+{x":"{D-{x",(mob->res_flags  & RES_CHARM)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_CHARM)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_SUMMON)?"{w+{x":"{D-{x",(mob->res_flags  & RES_SUMMON)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_SUMMON)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_MAGIC)?"{w+{x":"{D-{x",(mob->res_flags  & RES_MAGIC)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_MAGIC)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_WEAPON)?"{w+{x":"{D-{x",(mob->res_flags  & RES_WEAPON)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_WEAPON)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_BASH)?"{w+{x":"{D-{x",(mob->res_flags  & RES_BASH)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_BASH)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_PIERCE)?"{w+{x":"{D-{x",(mob->res_flags  & RES_PIERCE)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_PIERCE)?"{w+{x":"{D-{x");
-  printf_to_char(ch,"{c| {ckesici:%s%s%s {cemici  :%s%s%s {cateş  :%s%s%s {cayaz  :%s%s%s {cşimşek:%s%s%s {casit    :%s%s%s{c|{x\n\r",(mob->imm_flags  & IMM_SLASH)?"{w+{x":"{D-{x",(mob->res_flags  & RES_SLASH)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_SLASH)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_DROWNING)?"{w+{x":"{D-{x",(mob->res_flags  & RES_DROWNING)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_DROWNING)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_FIRE)?"{w+{x":"{D-{x",(mob->res_flags  & RES_FIRE)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_FIRE)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_COLD)?"{w+{x":"{D-{x",(mob->res_flags  & RES_COLD)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_COLD)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_LIGHTNING)?"{w+{x":"{D-{x",(mob->res_flags  & RES_LIGHTNING)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_LIGHTNING)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_ACID)?"{w+{x":"{D-{x",(mob->res_flags  & RES_ACID)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_ACID)?"{w+{x":"{D-{x");
-  printf_to_char(ch,"{c| {czehir :%s%s%s {cnegatif:%s%s%s {ckutsal:%s%s%s {cenerji:%s%s%s {czihin :%s%s%s {chastalık:%s%s%s{c|{x\n\r",(mob->imm_flags  & IMM_POISON)?"{w+{x":"{D-{x",(mob->res_flags  & RES_POISON)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_POISON)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_NEGATIVE)?"{w+{x":"{D-{x",(mob->res_flags  & RES_NEGATIVE)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_NEGATIVE)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_HOLY)?"{w+{x":"{D-{x",(mob->res_flags  & RES_HOLY)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_HOLY)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_ENERGY)?"{w+{x":"{D-{x",(mob->res_flags  & RES_ENERGY)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_ENERGY)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_MENTAL)?"{w+{x":"{D-{x",(mob->res_flags  & RES_MENTAL)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_MENTAL)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_DISEASE)?"{w+{x":"{D-{x",(mob->res_flags  & RES_DISEASE)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_DISEASE)?"{w+{x":"{D-{x");
-  printf_to_char(ch,"{c| {cışık  :%s%s%s {cses    :%s%s%s {ctahta :%s%s%s {cgümüş :%s%s%s {cdemir :%s%s%s             {c|{x\n\r",(mob->imm_flags  & IMM_LIGHT)?"{w+{x":"{D-{x",(mob->res_flags  & RES_LIGHT)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_LIGHT)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_SOUND)?"{w+{x":"{D-{x",(mob->res_flags  & RES_SOUND)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_SOUND)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_WOOD)?"{w+{x":"{D-{x",(mob->res_flags  & RES_WOOD)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_WOOD)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_SILVER)?"{w+{x":"{D-{x",(mob->res_flags  & RES_SILVER)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_SILVER)?"{w+{x":"{D-{x",(mob->imm_flags  & IMM_IRON)?"{w+{x":"{D-{x",(mob->res_flags  & RES_IRON)?"{w+{x":"{D-{x",(mob->vuln_flags  & VULN_IRON)?"{w+{x":"{D-{x");
+  show_irv_rows( ch, mob );
   printf_to_char(ch,"{c'---------------------------------------------------------------------'{x\n\r");
 }
 
@@ -2316,8 +1886,7 @@ void do_help( CHAR_DATA *ch, char *argument )
 	{
 	    if ( pHelp->level >= 0 && str_cmp( argall, "imotd" ) )
 	    {
-		printf_to_char( ch, pHelp->keyword );
-		printf_to_char( ch, "\n\r" );
+		printf_to_char( ch, "%s\n\r", pHelp->keyword );
 	    }
 
 	    /*
@@ -2433,19 +2002,9 @@ void do_whois (CHAR_DATA *ch, char *argument)
 		    IS_SET(wch->act, PLR_WANTED) ? "(ARANIYOR) " : "",CLR_WHITE_BOLD);
 
 	if (IS_NPC(wch))
-		snprintf(titlebuf, sizeof(titlebuf),"Believer of Chronos.");
-	else {
-		char tempbuf[MAX_INPUT_LENGTH];
-		snprintf(tempbuf, sizeof(tempbuf),"%s", wch->pcdata->title );
-		if (strlen(tempbuf) > 45 )
-		 {
-			tempbuf[44] = '\0';
-			free_string(wch->pcdata->title);
-			wch->pcdata->title = str_dup( tempbuf );
-			bug("Title length more than 45",0);
-		 }
-		snprintf(titlebuf, sizeof(titlebuf),"%s%s%s",CLR_WHITE,tempbuf,CLR_WHITE_BOLD);
-	     }
+		snprintf(titlebuf, sizeof(titlebuf),"Tanrılara inanan.");
+	else
+		snprintf(titlebuf, sizeof(titlebuf),"%s%s%s",CLR_WHITE,wch->pcdata->title,CLR_WHITE_BOLD);
 	/*
 	 * Format it up.
 	 */
@@ -2579,8 +2138,7 @@ void do_equipment( CHAR_DATA *ch, char *argument )
       }
       else
       {
-        snprintf(buf, sizeof(buf),where_name[iWear], ' ');
-        printf_to_char(ch,"%s\n\r",buf);
+        printf_to_char( ch, "%s\n\r", where_label( iWear, ' ', buf, sizeof(buf) ) );
       }
     }
   }
@@ -2851,6 +2409,8 @@ else                    msg = "İntihar günahtır!";
 }
 
 
+#define TITLE_MAX_LEN	45	/* lakap üst sınırı (bayt) */
+
 void set_title( CHAR_DATA *ch, char *title )
 {
     char buf[MAX_STRING_LENGTH];
@@ -2861,15 +2421,9 @@ void set_title( CHAR_DATA *ch, char *title )
 	return;
     }
 
-    if ( title[0] != '.' && title[0] != ',' && title[0] != '!' && title[0] != '?' )
-    {
-	buf[0] = ' ';
-	strcpy( buf+1, title );
-    }
-    else
-    {
-	strcpy( buf, title );
-    }
+    snprintf( buf, sizeof(buf), "%s%s",
+	( title[0] != '.' && title[0] != ',' && title[0] != '!' && title[0] != '?' ) ? " " : "",
+	title );
 
     free_string( ch->pcdata->title );
     ch->pcdata->title = str_dup( buf );
@@ -2910,8 +2464,9 @@ void do_title( CHAR_DATA *ch, char *argument )
         return;
     }
 
-    if ( strlen(argument) > 45 )
-        argument[45] = '\0';
+    /* Bayt sınırı UTF-8 harf ortasında kesmesin */
+    if ( strlen(argument) > TITLE_MAX_LEN )
+	utf8_truncate( argument, TITLE_MAX_LEN );
 
     smash_tilde( argument );
     set_title( ch, argument );
@@ -2939,7 +2494,7 @@ void do_description( CHAR_DATA *ch, char *argument )
                 return;
             }
 
-  	    strcpy(buf,ch->description);
+	    snprintf( buf, sizeof(buf), "%s", ch->description );
 
             for (len = strlen(buf); len > 0; len--)
             {
@@ -2956,8 +2511,8 @@ void do_description( CHAR_DATA *ch, char *argument )
                         buf[len + 1] = '\0';
 			free_string(ch->description);
 			ch->description = str_dup(buf);
-      printf_to_char(ch, "Tanımın:\n\r");
-      printf_to_char(ch, ch->description ? ch->description :"(Hiç).\n\r");
+      send_to_char( "Tanımın:\n\r", ch );
+      send_to_char( ch->description ? ch->description : "(Hiç).\n\r", ch );
                         return;
                     }
                 }
@@ -2995,8 +2550,8 @@ void do_description( CHAR_DATA *ch, char *argument )
       SET_BIT(ch->act, PLR_NO_DESCRIPTION);
     }
 
-    printf_to_char(ch, "Tanımın:\n\r");
-    printf_to_char(ch, ch->description ? ch->description : "(Hiç).\n\r");
+    send_to_char( "Tanımın:\n\r", ch );
+    send_to_char( ch->description ? ch->description : "(Hiç).\n\r", ch );
 
     return;
 }
@@ -3163,7 +2718,7 @@ void do_wimpy( CHAR_DATA *ch, char *argument )
 
     one_argument( argument, arg );
 
-    if ((ch->iclass == 9) && (ch->level >=10))
+    if ( ch->iclass == CLASS_SAMURAI && ch->level >= 10 )
 	{
     printf_to_char( ch, "Korkaklık pek sana göre değil!\n\r" );
 
@@ -3294,7 +2849,6 @@ void do_password( CHAR_DATA *ch, char *argument )
 void do_scan(CHAR_DATA *ch, char *argument)
 {
   char dir[MAX_INPUT_LENGTH];
-  char *dir2;
   ROOM_INDEX_DATA *in_room;
   ROOM_INDEX_DATA *to_room;
   EXIT_DATA *exit;	/* pExit */
@@ -3314,22 +2868,14 @@ void do_scan(CHAR_DATA *ch, char *argument)
 	return;
    }
 
-  switch (dir[0])
+  if ( ( door = dir_lookup( dir ) ) < 0 )
     {
-    case 'K':    case 'k':      door = 0;      dir2 = "kuzey";	break;
-    case 'D':    case 'd':      door = 1;      dir2 = "doğu";	break;
-    case 'G':    case 'g':      door = 2;      dir2 = "güney";	break;
-    case 'B':    case 'b':      door = 3;      dir2 = "batı";	break;
-    case 'Y':    case 'y':      door = 4;      dir2 = "yukarı";	break;
-    case 'A':    case 'a':      door = 5;      dir2 = "aşağı";	break;
-    default:
       send_to_char("Bu bir yön değil.\n\r",ch);
       return;
     }
 
-  snprintf(buf, sizeof(buf), "%s yönünü tarıyorsun.\n\r",dir2);
-  send_to_char(buf,ch);
-  snprintf(buf, sizeof(buf), "$n %s yönünü tarıyor.",dir2);
+  printf_to_char(ch, "%s yönünü tarıyorsun.\n\r", dir_name[door]);
+  snprintf(buf, sizeof(buf), "$n %s yönünü tarıyor.", dir_name[door]);
   act(buf,ch,NULL,NULL,TO_ROOM);
 
   if (!check_blind(ch))
@@ -4336,6 +3882,7 @@ void do_who_col( CHAR_DATA *ch, char *argument )
     {
 	CHAR_DATA *wch;
 	CHAR_DATA *dch = who_dch[who_i];
+	OBJ_DATA *tattoo;
 	char const *iclass;
 
 	/*
@@ -4358,7 +3905,8 @@ void do_who_col( CHAR_DATA *ch, char *argument )
 	|| ( fClassRestrict && !rgfClass[wch->iclass])
 	|| ( fRaceRestrict && !rgfRace[RACE(wch)])
         || ( fPKRestrict && is_safe_nomessage(ch,wch) )
-	|| ( fTattoo &&(vnum == get_eq_char(wch,WEAR_TATTOO)->pIndexData->vnum))
+	|| ( fTattoo && ( ( tattoo = get_eq_char( wch, WEAR_TATTOO ) ) == NULL
+			|| tattoo->pIndexData->vnum != vnum ) )
 	    || (fRulerRestrict && wch->cabal != CABAL_RULER )
 	    || (fChaosRestrict && wch->cabal != CABAL_CHAOS)
 	    || (fBattleRestrict && wch->cabal != CABAL_BATTLE)
@@ -4420,16 +3968,8 @@ void do_who_col( CHAR_DATA *ch, char *argument )
 
 	if (IS_NPC(wch))
 		snprintf(titlebuf, sizeof(titlebuf),"Tanrılara inanan.");
-	else {
+	else
 		snprintf(titlebuf, sizeof(titlebuf),"%s", wch->pcdata->title );
-		if (strlen(titlebuf) > 45 )
-		 {
-			free_string(wch->pcdata->title);
-			titlebuf[44] = '\0';
-			wch->pcdata->title = str_dup( titlebuf );
-			bug("Title length more than 45",0);
-		 }
-	     }
 	/*
 	 * Format it up.
 	 */
@@ -4876,15 +4416,15 @@ void do_make_arrow( CHAR_DATA *ch, char *argument )
    }
    else str = "tahta";
 
-   snprintf(buf, sizeof(buf), arrow->name, str );
+   fill_template( buf, sizeof(buf), arrow->name, str );
    free_string( arrow->name );
    arrow->name = str_dup( buf );
 
-   snprintf(buf, sizeof(buf), arrow->short_descr, str );
+   fill_template( buf, sizeof(buf), arrow->short_descr, str );
    free_string( arrow->short_descr );
    arrow->short_descr = str_dup( buf );
 
-   snprintf(buf, sizeof(buf), arrow->description, str );
+   fill_template( buf, sizeof(buf), arrow->description, str );
    free_string( arrow->description );
    arrow->description = str_dup( buf );
 
@@ -4945,7 +4485,7 @@ void do_make_bow( CHAR_DATA *ch, char *argument )
   bow->value[2] = 4 + ch->level / 12;
 
   tohit.where		    = TO_OBJECT;
-  tohit.type               = gsn_make_arrow;
+  tohit.type               = gsn_make_bow;
   tohit.level              = ch->level;
   tohit.duration           = -1;
   tohit.location           = APPLY_HITROLL;
@@ -4954,7 +4494,7 @@ void do_make_bow( CHAR_DATA *ch, char *argument )
   affect_to_obj(bow,&tohit);
 
   todam.where		   = TO_OBJECT;
-  todam.type               = gsn_make_arrow;
+  todam.type               = gsn_make_bow;
   todam.level              = ch->level;
   todam.duration           = -1;
   todam.location           = APPLY_DAMROLL;
@@ -4987,17 +4527,9 @@ void do_nocancel(CHAR_DATA *ch, char *argument)
 {
     if (IS_NPC(ch))
       return;
-
-    if (IS_SET(ch->act,PLR_NOCANCEL))
-    {
-      send_to_char("Başkalarının iptal büyülerini kabul ediyorsun.\n\r",ch);
-      REMOVE_BIT(ch->act,PLR_NOCANCEL);
-    }
-    else
-    {
-      send_to_char("Başkalarının iptal büyülerini kabul etmiyorsun.\n\r",ch);
-      SET_BIT(ch->act,PLR_NOCANCEL);
-    }
+    toggle_flag( ch, &ch->act, PLR_NOCANCEL,
+	"Başkalarının iptal büyülerini kabul etmiyorsun.\n\r",
+	"Başkalarının iptal büyülerini kabul ediyorsun.\n\r" );
 }
 
 
@@ -5059,7 +4591,7 @@ void do_discord( CHAR_DATA *ch, char *argument )
 	while(fgets (line, 30, fp) != NULL)
 	{
 		line[strcspn(line, "\r\n")] = 0;
-		if (!strcmp(arg,line))
+		if (!str_cmp(arg,line))
 		{
 			is_found = 1;
 		}
@@ -5067,6 +4599,7 @@ void do_discord( CHAR_DATA *ch, char *argument )
 	
 	if(is_found == 1)
 	{
+		free_string( ch->pcdata->discord_id );
 		ch->pcdata->discord_id = str_dup( arg );
 		printf_to_char(ch,"Discord kullanıcı ID'si kaydedildi.\n\r");
 	}

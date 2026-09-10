@@ -2986,6 +2986,8 @@ int floating_time	( OBJ_DATA *obj );
 bool may_float		( OBJ_DATA *obj );
 bool cant_float		( OBJ_DATA *obj );
 bool limit_kontrol (CHAR_DATA *ch, OBJ_DATA *obj);
+/* Grup 05 */
+char *fill_template	( char *out, size_t n, const char *tmpl, const char *arg );
 
 /* act_wiz.c */
 void wiznet		(const char *string, CHAR_DATA *ch, OBJ_DATA *obj,
