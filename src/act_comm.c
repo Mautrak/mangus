@@ -51,7 +51,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
-#include <unistd.h>
 
 #include "merc.h"
 #include "bot.h"
@@ -101,7 +100,7 @@ void do_delete( CHAR_DATA *ch, char *argument)
           wiznet("$N intihar etti.",ch,NULL,0,0,0);
 	    ch->last_fight_time = -1;
 	    do_quit_count(ch,"");
-	    unlink(strsave);
+	    remove(strsave);
 	    return;
  	}
     }
@@ -206,6 +205,80 @@ void garble(char *garbled,char *speech)
   garbled[i] = '\0';
 }
 
+/*
+ * Kanal iletisi: afoni (garble) etkisindeyse bozulur, değilse aynen
+ * kopyalanır.
+ */
+static void channel_text( CHAR_DATA *ch, const char *argument, char *buf, size_t size )
+{
+    snprintf( buf, size, "%s", argument );
+    if ( is_affected( ch, gsn_garble ) )
+	garble( buf, buf );
+}
+
+/*
+ * Argümansız kanal komutu kanalı açar/kapar; ele alındıysa TRUE.
+ */
+static bool channel_toggle( CHAR_DATA *ch, const char *argument, int bit, const char *name )
+{
+    if ( argument[0] != '\0' )
+	return FALSE;
+
+    if ( IS_SET( ch->comm, bit ) )
+    {
+	printf_to_char( ch, "%s açıldı.\n\r", name );
+	REMOVE_BIT( ch->comm, bit );
+    }
+    else
+    {
+	printf_to_char( ch, "%s kapandı.\n\r", name );
+	SET_BIT( ch->comm, bit );
+    }
+    return TRUE;
+}
+
+/*
+ * kd / kdcevapla ortak gövdesi: alıcı denetimi, günlük, iletim.
+ */
+static void tell_deliver( CHAR_DATA *ch, CHAR_DATA *victim, char *argument )
+{
+    char buf[MAX_STRING_LENGTH];
+
+    if ( victim == ch )
+    {
+	printf_to_char( ch,"Kendine KD mesajı atamazsın.\n\r" );
+	return;
+    }
+
+    if ( victim->desc == NULL && !IS_NPC(victim) && !IS_BOT(victim))
+    {
+	act("$N bağlantısını kaybetmiş görünüyor...daha sonra tekrar dene.",
+	    ch,NULL,victim,TO_CHAR);
+	snprintf(buf, sizeof(buf),"%s: %s%s%s\n\r",PERS(ch,victim),CLR_RED_BOLD,argument,CLR_NORMAL);
+	utf8_upper_first(buf, sizeof(buf));
+	add_buf(victim->pcdata->buffer,buf);
+	return;
+    }
+
+    if ((IS_SET(victim->comm,COMM_NOKD)) && !IS_IMMORTAL(ch))
+    {
+	act( "$N KD kanalını almıyor.", ch, 0, victim, TO_CHAR );
+	return;
+    }
+
+    write_channel_log(ch,victim,KANAL_KD,argument);
+    channel_text( ch, argument, buf, sizeof(buf) );
+
+    if (!is_affected(ch, gsn_deafen))
+	act_color("$N kd: $C$t$c",ch,buf,victim,TO_CHAR,POS_DEAD, CLR_MAGENTA_BOLD );
+
+    act_color( "$n kd: $C$t$c",ch,buf,victim,TO_VICT,POS_DEAD, CLR_RED_BOLD );
+    if ( IS_BOT(victim) )
+	bot_hear( victim, ch, BOT_CH_TELL, buf );
+
+    victim->reply	= ch;
+}
+
 
 /* RT deaf blocks out all shouts */
 
@@ -256,20 +329,8 @@ void do_immtalk( CHAR_DATA *ch, char *argument )
 {
     DESCRIPTOR_DATA *d;
 
-    if ( argument[0] == '\0' )
-    {
-      if (IS_SET(ch->comm,COMM_NOWIZ))
-      {
-        printf_to_char(ch,"Ölümsüz kanalı açıldı.\n\r");
-	REMOVE_BIT(ch->comm,COMM_NOWIZ);
-      }
-      else
-      {
-        printf_to_char(ch,"Ölümsüz kanalı kapandı.\n\r");
-	SET_BIT(ch->comm,COMM_NOWIZ);
-      }
-      return;
-    }
+    if ( channel_toggle( ch, argument, COMM_NOWIZ, "Ölümsüz kanalı" ) )
+	return;
 
     REMOVE_BIT(ch->comm,COMM_NOWIZ);
 
@@ -292,28 +353,16 @@ void do_immtalk( CHAR_DATA *ch, char *argument )
 
 void do_kd( CHAR_DATA *ch, char *argument )
 {
-    char arg[MAX_INPUT_LENGTH],buf[MAX_STRING_LENGTH];
+    char arg[MAX_INPUT_LENGTH];
     CHAR_DATA *victim;
 
-    if ( argument[0] == '\0' )
-    {
-      if (IS_SET(ch->comm,COMM_NOKD))
-      {
-        printf_to_char(ch,"KD kanalı açıldı.\n\r");
-	REMOVE_BIT(ch->comm,COMM_NOKD);
-      }
-      else
-      {
-        printf_to_char(ch,"KD kanalı kapandı.\n\r");
-	SET_BIT(ch->comm,COMM_NOKD);
-      }
-      return;
-    }
+    if ( channel_toggle( ch, argument, COMM_NOKD, "KD kanalı" ) )
+	return;
 
-	if ( IS_AFFECTED(ch, AFF_CHARM) &&   ch->master != NULL )
+    if ( IS_AFFECTED(ch, AFF_CHARM) &&   ch->master != NULL )
     {
-		printf_to_char( ch , "Teshirliyken kd kanalını kullanamazsın.\n\r" );
-		return;
+	printf_to_char( ch , "Teshirliyken kd kanalını kullanamazsın.\n\r" );
+	return;
     }
 
     if (IS_SET(ch->comm,COMM_NOKD))
@@ -334,59 +383,14 @@ void do_kd( CHAR_DATA *ch, char *argument )
      * Can tell to PC's anywhere, but NPC's only in same room.
      * -- Furey
      */
-     if ( ( victim = get_char_world( ch, arg ) ) == NULL
-     || ( IS_NPC(victim) && victim->in_room != ch->in_room ) )
+    if ( ( victim = get_char_world( ch, arg ) ) == NULL
+    || ( IS_NPC(victim) && victim->in_room != ch->in_room ) )
     {
 	printf_to_char( ch,"Burada değil.\n\r" );
 	return;
     }
 
-	if( victim == ch )
-	{
-		printf_to_char( ch,"Kendine KD mesajı atamazsın.\n\r" );
-		return;
-	}
-
-    if ( victim->desc == NULL && !IS_NPC(victim) && !IS_BOT(victim))
-    {
-	act("$N bağlantısını kaybetmiş görünüyor...daha sonra tekrar dene.",
-	    ch,NULL,victim,TO_CHAR);
-        snprintf(buf, sizeof(buf),"%s: %s%s%s\n\r",PERS(ch,victim),CLR_RED_BOLD,argument,CLR_NORMAL);
-        utf8_upper_first(buf, sizeof(buf));
-        add_buf(victim->pcdata->buffer,buf);
-	return;
-    }
-
-    if ((IS_SET(victim->comm,COMM_NOKD)) && !IS_IMMORTAL(ch))
-    {
-	act( "$N KD kanalını almıyor.", ch, 0, victim, TO_CHAR );
-  	return;
-    }
-
-    write_channel_log(ch,victim,KANAL_KD,argument);
-
-    if (is_affected(ch,gsn_garble))
-      garble(buf,argument);
-    else
-      strcpy(buf,argument);
-
-    /*
-    if (ch->level >= KIDEMLI_OYUNCU_SEVIYESI && victim->level >= KIDEMLI_OYUNCU_SEVIYESI )
-    {
-      ch->pcdata->rk_puani -= 1;
-    }
-    */
-
-   if (!is_affected(ch, gsn_deafen))
-     act_color("$N kd: $C$t$c",ch,buf,victim,TO_CHAR,POS_DEAD, CLR_MAGENTA_BOLD );
-
-   act_color( "$n kd: $C$t$c",ch,buf,victim,TO_VICT,POS_DEAD, CLR_RED_BOLD );
-   if ( IS_BOT(victim) )
-       bot_hear( victim, ch, BOT_CH_TELL, buf );
-
-    victim->reply	= ch;
-
-    return;
+    tell_deliver( ch, victim, argument );
 }
 
 
@@ -399,20 +403,8 @@ void do_kdg( CHAR_DATA *ch, char *argument )
     DESCRIPTOR_DATA *d;
     char buf[MAX_STRING_LENGTH];
 
-    if ( argument[0] == '\0' )
-    {
-	if ( IS_SET( ch->comm, COMM_NOKDG ) )
-	{
-	    printf_to_char( ch, "KDG kanalı açıldı.\n\r" );
-	    REMOVE_BIT( ch->comm, COMM_NOKDG );
-	}
-	else
-	{
-	    printf_to_char( ch, "KDG kanalı kapandı.\n\r" );
-	    SET_BIT( ch->comm, COMM_NOKDG );
-	}
+    if ( channel_toggle( ch, argument, COMM_NOKDG, "KDG kanalı" ) )
 	return;
-    }
 
     if ( IS_SET( ch->comm, COMM_NOKDG ) )
     {
@@ -430,12 +422,11 @@ void do_kdg( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    write_channel_log( ch, NULL, KANAL_KD, argument );
+    /* Ayrı kanal günlüğü yok (data.c KANAL_* 0-6); kd günlüğüne [kdg] etiketiyle yazılır. */
+    snprintf( buf, sizeof(buf), "[kdg] %s", argument );
+    write_channel_log( ch, NULL, KANAL_KD, buf );
 
-    if ( is_affected( ch, gsn_garble ) )
-	garble( buf, argument );
-    else
-	strcpy( buf, argument );
+    channel_text( ch, argument, buf, sizeof(buf) );
 
     if ( !is_affected( ch, gsn_deafen ) )
 	act_color( "[KDG] Sen: $C$t$c", ch, buf, NULL, TO_CHAR, POS_DEAD, CLR_CYAN_BOLD );
@@ -461,7 +452,6 @@ void do_kdg( CHAR_DATA *ch, char *argument )
 
 void do_kdcevapla( CHAR_DATA *ch, char *argument )
 {
-    char buf[MAX_STRING_LENGTH];
     CHAR_DATA *victim;
 
     if (IS_SET(ch->comm,COMM_NOKD))
@@ -470,73 +460,26 @@ void do_kdcevapla( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-	if ( IS_AFFECTED(ch, AFF_CHARM) &&   ch->master != NULL )
+    if ( IS_AFFECTED(ch, AFF_CHARM) &&   ch->master != NULL )
     {
-		printf_to_char( ch , "Teshirliyken kd kanalını kullanamazsın.\n\r" );
-		return;
-    }
-	
-	if ( ( victim = ch->reply ) == NULL )
-    {
-		printf_to_char(ch, "Cevap verebileceğin biri yok.\n\r" );
-		return;
-    }
-	
-    if ( argument[0] == '\0' )
-    {
-		printf_to_char(ch,"Ne mesaj göndereceksin?\n\r");
-		return;
-    }
-
-	if( victim == ch )
-	{
-		printf_to_char( ch,"Kendine KD mesajı atamazsın.\n\r" );
-		return;
-	}
-
-    if ( victim->desc == NULL && !IS_NPC(victim) && !IS_BOT(victim))
-    {
-	act("$N bağlantısını kaybetmiş görünüyor...daha sonra tekrar dene.",
-	    ch,NULL,victim,TO_CHAR);
-        snprintf(buf, sizeof(buf),"%s: %s%s%s\n\r",PERS(ch,victim),CLR_RED_BOLD,argument,CLR_NORMAL);
-        utf8_upper_first(buf, sizeof(buf));
-        add_buf(victim->pcdata->buffer,buf);
+	printf_to_char( ch , "Teshirliyken kd kanalını kullanamazsın.\n\r" );
 	return;
     }
 
-    if ((IS_SET(victim->comm,COMM_NOKD)) && !IS_IMMORTAL(ch))
+    if ( ( victim = ch->reply ) == NULL )
     {
-	act( "$N KD kanalını almıyor.", ch, 0, victim, TO_CHAR );
-  	return;
+	printf_to_char(ch, "Cevap verebileceğin biri yok.\n\r" );
+	return;
     }
 
-    write_channel_log(ch,victim,KANAL_KD,argument);
-
-    if (is_affected(ch,gsn_garble))
-      garble(buf,argument);
-    else
-      strcpy(buf,argument);
-
-    /*
-    if (ch->level >= KIDEMLI_OYUNCU_SEVIYESI && victim->level >= KIDEMLI_OYUNCU_SEVIYESI )
+    if ( argument[0] == '\0' )
     {
-      ch->pcdata->rk_puani -= 1;
+	printf_to_char(ch,"Ne mesaj göndereceksin?\n\r");
+	return;
     }
-    */
 
-   if (!is_affected(ch, gsn_deafen))
-     act_color("$N kd: $C$t$c",ch,buf,victim,TO_CHAR,POS_DEAD, CLR_MAGENTA_BOLD );
-
-   act_color( "$n kd: $C$t$c",ch,buf,victim,TO_VICT,POS_DEAD, CLR_RED_BOLD );
-   if ( IS_BOT(victim) )
-       bot_hear( victim, ch, BOT_CH_TELL, buf );
-
-    victim->reply	= ch;
-
-    return;
+    tell_deliver( ch, victim, argument );
 }
-
-
 
 
 void do_say( CHAR_DATA *ch, char *argument )
@@ -559,11 +502,7 @@ void do_say( CHAR_DATA *ch, char *argument )
     }
 
     write_channel_log(ch,NULL,KANAL_SOYLE,argument);
-
-    if (is_affected(ch,gsn_garble))
-      garble(buf,(char*)argument);
-    else
-      strcpy(buf,argument);
+    channel_text( ch, argument, buf, sizeof(buf) );
 
     for (vch = ch->in_room->people; vch != NULL; vch = vch->next_in_room)
     {
@@ -625,11 +564,7 @@ void do_yell( CHAR_DATA *ch, char *argument )
     }
 
     write_channel_log(ch,NULL,KANAL_HAYKIR,argument);
-
-    if (is_affected(ch,gsn_garble))
-      garble(buf,(char*)argument);
-    else
-      strcpy(buf,argument);
+    channel_text( ch, argument, buf, sizeof(buf) );
 
    if (!is_affected(ch, gsn_deafen))
    act_color("Sen '$C$t$c' diye haykırdın.",
@@ -679,17 +614,22 @@ char buf[MAX_INPUT_LENGTH];
     }
 
     write_channel_log(ch,NULL,KANAL_DUYGU,argument);
-
-    if (is_affected(ch,gsn_garble))
-      garble(buf,(char*)argument);
-    else
-      strcpy(buf,argument);
+    channel_text( ch, argument, buf, sizeof(buf) );
 
     act( "$n $T", ch, NULL, buf, TO_ROOM );
     act( "$n $T", ch, NULL, buf, TO_CHAR );
     return;
 }
 
+
+/* Sınır denetimli ekleme (strcat yerine). */
+static void cat_bounded( char *dst, size_t size, const char *src )
+{
+    size_t len = strlen( dst );
+
+    if ( len < size )
+	snprintf( dst + len, size - len, "%s", src );
+}
 
 void do_pmote( CHAR_DATA *ch, char *argument )
 {
@@ -723,7 +663,7 @@ void do_pmote( CHAR_DATA *ch, char *argument )
 	    continue;
 	}
 
-	strcpy(temp,argument);
+	snprintf(temp, sizeof(temp), "%s", argument);
 	temp[strlen(argument) - strlen(letter)] = '\0';
    	last[0] = '\0';
  	name = vch->name;
@@ -732,7 +672,7 @@ void do_pmote( CHAR_DATA *ch, char *argument )
 	{
 	    if (*letter == '\'' && matches == strlen(vch->name))
 	    {
-		strcat(temp,"r");
+		cat_bounded(temp,sizeof(temp),"r");
 		continue;
 	    }
 
@@ -753,7 +693,7 @@ void do_pmote( CHAR_DATA *ch, char *argument )
 		name++;
 		if (matches == strlen(vch->name))
 		{
-		    strcat(temp,"you");
+		    cat_bounded(temp,sizeof(temp),"you");
 		    last[0] = '\0';
 		    name = vch->name;
 		    continue;
@@ -763,7 +703,7 @@ void do_pmote( CHAR_DATA *ch, char *argument )
 	    }
 
 	    matches = 0;
-	    strcat(temp,last);
+	    cat_bounded(temp,sizeof(temp),last);
 	    strncat(temp,letter,1);
 	    last[0] = '\0';
 	    name = vch->name;
@@ -1826,11 +1766,7 @@ void do_gtell( CHAR_DATA *ch, char *argument )
     }
 
     write_channel_log(ch,NULL,KANAL_GSOYLE,argument);
-
-    if (is_affected(ch,gsn_garble))
-      garble(buf,argument);
-    else
-      strcpy(buf,argument);
+    channel_text( ch, argument, buf, sizeof(buf) );
 
     ch->pcdata->rk_puani -= 1;
 
@@ -1900,16 +1836,13 @@ void do_cb( CHAR_DATA *ch, char *argument )
 
       snprintf(buf, sizeof(buf), "[%s] $n: $C$t$c",cabal_table[ch->cabal].short_name);
 
-    if (is_affected(ch,gsn_garble))
-      garble(buf2,argument);
-    else
-      strcpy(buf2,argument);
+    channel_text( ch, argument, buf2, sizeof(buf2) );
 
     if(!IS_NPC(ch))
       ch->pcdata->rk_puani -= 2;
 
    if (!is_affected(ch, gsn_deafen))
-     act_color(buf, ch, argument, NULL, TO_CHAR,POS_DEAD, CLR_BROWN);
+     act_color(buf, ch, buf2, NULL, TO_CHAR,POS_DEAD, CLR_BROWN);
 
     for ( d = descriptor_list; d != NULL; d = d->next )
     {
@@ -2005,7 +1938,7 @@ char *translate(CHAR_DATA *ch, CHAR_DATA *victim, char *argument)
    {
     if (IS_IMMORTAL(victim))
 	snprintf(trans, sizeof(trans),"(%s) %s",language_table[ch->language].name,argument);
-    else strcpy(trans,argument);
+    else snprintf(trans, sizeof(trans), "%s", argument);
     return trans;
    }
 
@@ -2204,51 +2137,54 @@ ch->pcdata->confirm_remort = FALSE;
 }
 
 
+/*
+ * Kabal karargâh bölgeleri.
+ */
+static const struct
+{
+    int		cabal;
+    const char *area;
+} cabal_area_table[] =
+{
+    { CABAL_RULER,	"Tüze Konağı"	},
+    { CABAL_INVADER,	"İstila"	},
+    { CABAL_CHAOS,	"Kaos"		},
+    { CABAL_SHALAFI,	"Tılsım"	},
+    { CABAL_BATTLE,	"Öfke"		},
+    { CABAL_KNIGHT,	"Şövalye"	},
+    { CABAL_HUNTER,	"Avcı"		},
+    { CABAL_LIONS,	"Aslan"		},
+};
+
+/*
+ * ch'nin bulunduğu bölge bir kabal karargâhıysa o kabal, değilse CABAL_NONE.
+ * Ölümsüzler için her zaman CABAL_NONE.
+ */
+static int cabal_area_of( CHAR_DATA *ch )
+{
+    size_t i;
+
+    if ( ch->in_room == NULL || IS_IMMORTAL(ch) )
+	return CABAL_NONE;
+
+    for ( i = 0; i < sizeof(cabal_area_table) / sizeof(cabal_area_table[0]); i++ )
+	if ( !str_cmp( ch->in_room->area->name, cabal_area_table[i].area ) )
+	    return cabal_area_table[i].cabal;
+
+    return CABAL_NONE;
+}
+
+/* Başka bir kabalın karargâhında mı? */
 bool cabal_area_check(CHAR_DATA *ch)
 {
-   if (ch->in_room == NULL || IS_IMMORTAL(ch))	return FALSE;
+    int cabal = cabal_area_of( ch );
 
-   if ( ch->cabal != CABAL_RULER &&
-	!str_cmp(ch->in_room->area->name,"Tüze Konağı"))
-	return TRUE;
-   else if ( ch->cabal != CABAL_INVADER &&
-	!str_cmp(ch->in_room->area->name,"İstila"))
-	return TRUE;
-   else if ( ch->cabal != CABAL_CHAOS &&
-	!str_cmp(ch->in_room->area->name,"Kaos"))
-	return TRUE;
-   else if ( ch->cabal != CABAL_SHALAFI &&
-	!str_cmp(ch->in_room->area->name,"Tılsım"))
-	return TRUE;
-   else if ( ch->cabal != CABAL_BATTLE &&
-	!str_cmp(ch->in_room->area->name,"Öfke"))
-	return TRUE;
-   else if ( ch->cabal != CABAL_KNIGHT &&
-	!str_cmp(ch->in_room->area->name,"Şövalye"))
-	return TRUE;
-   else if ( ch->cabal != CABAL_HUNTER &&
-	!str_cmp(ch->in_room->area->name,"Avcı"))
-	return TRUE;
-   else if ( ch->cabal != CABAL_LIONS &&
-	!str_cmp(ch->in_room->area->name,"Aslan"))
-	return TRUE;
-   else return FALSE;
+    return cabal != CABAL_NONE && ch->cabal != cabal;
 }
 
 bool is_at_cabal_area(CHAR_DATA *ch)
 {
-   if (ch->in_room == NULL || IS_IMMORTAL(ch))	return FALSE;
-
-   if ( !str_cmp(ch->in_room->area->name,"Tüze Konağı") ||
-	!str_cmp(ch->in_room->area->name,"İstila") ||
-	!str_cmp(ch->in_room->area->name,"Kaos") ||
-	!str_cmp(ch->in_room->area->name,"Tılsım") ||
-	!str_cmp(ch->in_room->area->name,"Öfke") ||
-	!str_cmp(ch->in_room->area->name,"Şövalye") ||
-	!str_cmp(ch->in_room->area->name,"Avcı") ||
-	!str_cmp(ch->in_room->area->name,"Aslan") )
-	return TRUE;
-   else return FALSE;
+    return cabal_area_of( ch ) != CABAL_NONE;
 }
 
 /*
