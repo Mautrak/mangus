@@ -1377,7 +1377,7 @@ void reset_area( AREA_DATA *pArea )
         send_to_char("Yağmur izleri temizliyor.\n\r", ch );
       }
     }
-    for (i=pArea->min_vnum; i<pArea->max_vnum; i++)
+    for (i=pArea->min_vnum; i<=pArea->max_vnum; i++)
     {
       room = get_room_index(i);
       if (room == NULL)
@@ -1425,7 +1425,7 @@ void reset_area( AREA_DATA *pArea )
 
 	    if ( ( pRoomIndex = get_room_index( pReset->arg3 ) ) == NULL )
 	    {
-		bug( "Reset_area: 'R': bad vnum %d.", pReset->arg3 );
+		bug( "Reset_area: 'M': bad room vnum %d.", pReset->arg3 );
 		continue;
 	    }
 
@@ -1480,7 +1480,7 @@ void reset_area( AREA_DATA *pArea )
 
 	    if ( ( pRoomIndex = get_room_index( pReset->arg3 ) ) == NULL )
 	    {
-		bug( "Reset_area: 'R': bad vnum %d.", pReset->arg3 );
+		bug( "Reset_area: 'O': bad room vnum %d.", pReset->arg3 );
 		continue;
 	    }
 
@@ -1491,36 +1491,29 @@ void reset_area( AREA_DATA *pArea )
 		break;
 	    }
 
-	    switch( pObjIndex->vnum )
+	    /* Kabal sunağı/tahtı, kabal eşyası dünyadayken yeniden konmaz. */
 	    {
-		case OBJ_VNUM_RULER_STAND:
-		  ci_vnum = cabal_table[CABAL_RULER].obj_vnum;
-		  break;
-		case OBJ_VNUM_INVADER_SKULL:
-		  ci_vnum = cabal_table[CABAL_INVADER].obj_vnum;
-		  break;
-		case OBJ_VNUM_SHALAFI_ALTAR:
-		  ci_vnum = cabal_table[CABAL_SHALAFI].obj_vnum;
-		  break;
-		case OBJ_VNUM_CHAOS_ALTAR:
-		  ci_vnum = cabal_table[CABAL_CHAOS].obj_vnum;
-		  break;
-		case OBJ_VNUM_KNIGHT_ALTAR:
-		  ci_vnum = cabal_table[CABAL_KNIGHT].obj_vnum;
-		  break;
-		case OBJ_VNUM_LIONS_ALTAR:
-		  ci_vnum = cabal_table[CABAL_LIONS].obj_vnum;
-		  break;
-		case OBJ_VNUM_BATTLE_THRONE:
-		  ci_vnum = cabal_table[CABAL_BATTLE].obj_vnum;
-		  break;
-		case OBJ_VNUM_HUNTER_ALTAR:
-		  ci_vnum = cabal_table[CABAL_HUNTER].obj_vnum;
-		  break;
+		static const struct { int altar_vnum; int cabal; } altar_cabal[] =
+		{
+		    { OBJ_VNUM_RULER_STAND,	CABAL_RULER	},
+		    { OBJ_VNUM_INVADER_SKULL,	CABAL_INVADER	},
+		    { OBJ_VNUM_SHALAFI_ALTAR,	CABAL_SHALAFI	},
+		    { OBJ_VNUM_CHAOS_ALTAR,	CABAL_CHAOS	},
+		    { OBJ_VNUM_KNIGHT_ALTAR,	CABAL_KNIGHT	},
+		    { OBJ_VNUM_LIONS_ALTAR,	CABAL_LIONS	},
+		    { OBJ_VNUM_BATTLE_THRONE,	CABAL_BATTLE	},
+		    { OBJ_VNUM_HUNTER_ALTAR,	CABAL_HUNTER	},
+		};
+		size_t ai;
+
+		for ( ai = 0; ai < sizeof(altar_cabal) / sizeof(altar_cabal[0]); ai++ )
+		    if ( pObjIndex->vnum == altar_cabal[ai].altar_vnum )
+			ci_vnum = cabal_table[altar_cabal[ai].cabal].obj_vnum;
 	    }
 
-	    cabal_item = get_obj_index( ci_vnum );
-	    if ( ci_vnum &&  cabal_item->count > 0 )
+	    if ( ci_vnum != 0
+	    &&   ( cabal_item = get_obj_index( ci_vnum ) ) != NULL
+	    &&   cabal_item->count > 0 )
 	     {
 		last = FALSE;
 		break;
@@ -1764,8 +1757,6 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex , AREA_DATA *	pArea)
     mob->cabal		= CABAL_NONE;
     mob->iclass		= CLASS_CLERIC;
 
-    mob->silver = number_range(mob->level*3,mob->level*20);
-
   mob->act 		= pMobIndex->act | ACT_IS_NPC;
   mob->comm		= COMM_NOCHANNELS|COMM_NOSHOUT|COMM_NOTELL;
   mob->affected_by	= pMobIndex->affected_by;
@@ -1799,6 +1790,8 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex , AREA_DATA *	pArea)
    */
 
   mob->level		= pMobIndex->level;
+  /* Seviye atanmadan hesaplanıyordu (her yaratık 0 gümüşle doğuyordu). */
+  mob->silver		= number_range(mob->level*3,mob->level*20);
   mob->hitroll		= hitroll_damroll_hesapla(pMobIndex->level);
   mob->damroll		= hitroll_damroll_hesapla(pMobIndex->level);
   mob->max_hit		= number_range( yp_tablo[ pMobIndex->level ].min_yp , yp_tablo[ pMobIndex->level ].max_yp );
@@ -1811,34 +1804,9 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex , AREA_DATA *	pArea)
   mob->dam_type		= dam_type_dice();
   mob->status		= 0;
   
-  /* mob icin din ayarlama */
-  
-  if(number_percent()<40)
-  {
-	  mob->religion = 0;
-  }
-  else
-  {
-	  switch(number_range(1,4))
-	  {
-		case 1:
-			mob->religion = 1;
-			break;
-		case 2:
-			mob->religion = 2;
-			break;
-		case 3:
-			mob->religion = 3;
-			break;
-		case 4:
-			mob->religion = 4;
-			break;
-	  }
-	
-  }
-  
-  /* mob icin din ayarlama bitti */
-  
+  /* mob icin din ayarlama: %40 dinsiz, kalanı 1-4 arasında rastgele */
+  mob->religion		= number_percent() < 40 ? 0 : number_range(1,4);
+
   if (mob->dam_type == 0)
     switch(number_range(1,3))
     {
@@ -1847,18 +1815,27 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex , AREA_DATA *	pArea)
     case (3): mob->dam_type = 11;       break;  /* pierce */
     }
   for (i = 0; i < 4; i++)
-    mob->armor[i]	= pMobIndex->ac[i];
-  mob->armor[AC_PIERCE]	= ac_dice(AC_PIERCE,pMobIndex->level);
-  mob->armor[AC_BASH]		= ac_dice(AC_BASH,pMobIndex->level);
-  mob->armor[AC_SLASH]		= ac_dice(AC_SLASH,pMobIndex->level);
-  mob->armor[AC_EXOTIC]	= ac_dice(AC_EXOTIC,pMobIndex->level);
+    mob->armor[i]	= ac_dice(i,pMobIndex->level);
 
-  if( pMobIndex->vnum == MOB_VNUM_ELM_EARTH || pMobIndex->vnum == MOB_VNUM_ELM_AIR || pMobIndex->vnum == MOB_VNUM_ELM_FIRE ||
-      pMobIndex->vnum == MOB_VNUM_ELM_WATER || pMobIndex->vnum == MOB_VNUM_ELM_LIGHT || pMobIndex->vnum == MOB_VNUM_WEAPON ||
-      pMobIndex->vnum == MOB_VNUM_ARMOR || pMobIndex->vnum == MOB_VNUM_DEMON || pMobIndex->vnum == MOB_VNUM_UNDEAD || 
-      pMobIndex->vnum == MOB_VNUM_LION || pMobIndex->vnum == MOB_VNUM_WOLF || pMobIndex->vnum == MOB_VNUM_LESSER_GOLEM || 
-      pMobIndex->vnum == MOB_VNUM_STONE_GOLEM || pMobIndex->vnum == MOB_VNUM_IRON_GOLEM || pMobIndex->vnum == MOB_VNUM_ADAMANTITE_GOLEM || 
-      pMobIndex->vnum == MOB_VNUM_HUNTER || pMobIndex->vnum == MOB_VNUM_SUM_SHADOW || pMobIndex->vnum == MOB_VNUM_DOG )
+  /* Büyüyle çağrılan/özel yaratıklar alan dosyasındaki ırkını korur. */
+  {
+    static const int fixed_race_vnum[] =
+    {
+      MOB_VNUM_ELM_EARTH, MOB_VNUM_ELM_AIR, MOB_VNUM_ELM_FIRE,
+      MOB_VNUM_ELM_WATER, MOB_VNUM_ELM_LIGHT, MOB_VNUM_WEAPON,
+      MOB_VNUM_ARMOR, MOB_VNUM_DEMON, MOB_VNUM_UNDEAD,
+      MOB_VNUM_LION, MOB_VNUM_WOLF, MOB_VNUM_LESSER_GOLEM,
+      MOB_VNUM_STONE_GOLEM, MOB_VNUM_IRON_GOLEM, MOB_VNUM_ADAMANTITE_GOLEM,
+      MOB_VNUM_HUNTER, MOB_VNUM_SUM_SHADOW, MOB_VNUM_DOG,
+    };
+    size_t fi;
+    bool fixed_race = FALSE;
+
+    for ( fi = 0; fi < sizeof(fixed_race_vnum) / sizeof(fixed_race_vnum[0]); fi++ )
+      if ( pMobIndex->vnum == fixed_race_vnum[fi] )
+        fixed_race = TRUE;
+
+  if ( fixed_race )
       {
         mob->race		= pMobIndex->race;
       }
@@ -1876,6 +1853,7 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex , AREA_DATA *	pArea)
             mob->race		= race_dice(mob->level, FALSE);
         }
     }
+  }
 
   mob->off_flags		= race_table[mob->race].off;
   mob->imm_flags		= race_table[mob->race].imm;
@@ -2117,21 +2095,12 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
     {
       if (pObjIndex->vnum == cabal_table[i].obj_vnum)
       {
-        /*
-        if ( count_obj_list( pObjIndex, object_list) > 0 )
-        return(NULL);
-        */
         cabal_table[i].obj_ptr = obj;
         break;
       }
     }
-    if ( ( obj->pIndexData->limit != -1 )  &&
-	 ( obj->pIndexData->count >= obj->pIndexData->limit ) )
 
-    if ( pObjIndex->new_format == 1 )
-       dump_to_scr( "" );
-
-    if ( pObjIndex->new_format == 1 )
+    if ( pObjIndex->new_format )
  	obj->level = pObjIndex->level;
     else
 	obj->level		= UMAX(0,level);
@@ -2270,29 +2239,17 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
                 obj->value[0]	= number_range(1,12)-1;			// weapon type
                 obj->value[1]	= UMAX(1,number_range(level/11,level/9)+3);				// number of dice
                 obj->value[2]	= UMAX(1,number_range(level/8,level/6));					// number of dice, each dice has
-                if(obj->value[0] == 2)//dagger
+                /* Hançer delici, kılıç kesici bir vuruş türü alır (en çok 100 deneme). */
                 {
-                    i=0;
-                    while(i<100)
+                    int want_dam = obj->value[0] == WEAPON_DAGGER ? DAM_PIERCE
+                                 : obj->value[0] == WEAPON_SWORD  ? DAM_SLASH : -1;
+
+                    for ( i = 0; i < 100; i++ )
                     {
                         obj->value[3] = number_range(1,40)-1;
-                        if(attack_table[obj->value[3]].damage == DAM_PIERCE)
+                        if ( want_dam < 0 || attack_table[obj->value[3]].damage == want_dam )
                             break;
                     }
-                }
-                else if(obj->value[0] == 0)//sword
-                {
-                    i=0;
-                    while(i<100)
-                    {
-                        obj->value[3] = number_range(1,40)-1;
-                        if(attack_table[obj->value[3]].damage == DAM_SLASH)
-                            break;
-                    }
-                }
-                else
-                {
-                    obj->value[3] = number_range(1,40)-1;
                 }
                 obj->value[4]   = obj_random_weapon_flag();
                 obj_random_name(obj);
@@ -2359,12 +2316,6 @@ OBJ_DATA *create_object_org( OBJ_INDEX_DATA *pObjIndex, int level, bool Count )
         obj->material	= str_dup(pObjIndex->material);
     }
 
-	/*
-    for (paf = pObjIndex->affected; paf != NULL; paf = paf->next)
-	if ( paf->location == APPLY_SPELL_AFFECT )
-	    affect_to_obj(obj,paf);
-	*/
-	
     obj->next		= object_list;
     object_list		= obj;
     if ( Count )
@@ -3951,6 +3902,7 @@ void load_limited_objects()
   int i;
   DIR *dirp;
   FILE *pfile;
+  OBJ_INDEX_DATA *pIndex;
   char letter;
   char *word;
   char buf[MAX_INPUT_LENGTH];
@@ -3970,8 +3922,7 @@ void load_limited_objects()
   {
     if (strlen(dp->d_name) >= 3)
     {
-      snprintf(buf, sizeof(buf), "%s/",PLAYER_DIR);
-      strcat(buf, dp->d_name);
+      snprintf(buf, sizeof(buf), "%s/%s",PLAYER_DIR, dp->d_name);
       fReadLevel = FALSE;
       tplayed = 0;
       snprintf(log_buf, sizeof(log_buf),"[%s] okunacak.\n\r",buf);
@@ -3982,7 +3933,9 @@ void load_limited_objects()
       }
       else
       {
-        for (letter = fread_letter(pfile);letter != EOF;letter = fread_letter(pfile) )
+        /* fread_letter char döner: EOF'u feof ile yakala (unsigned char'lı
+           platformda (char)EOF != EOF olup döngü hiç bitmiyordu). */
+        for (letter = fread_letter(pfile); !feof(pfile); letter = fread_letter(pfile) )
         {
           if (letter == 'L')
           {
@@ -4051,18 +4004,16 @@ void load_limited_objects()
                 break;
               }
               fread_word(pfile);
-              fBootDb = FALSE;
               vnum = fread_number(pfile);
-              if (get_obj_index(vnum) != NULL)
+              if ( (pIndex = find_obj_index(vnum)) != NULL)
               {
-                get_obj_index(vnum)->count++;
-                if( get_obj_index(vnum)->limit != -1 )
+                pIndex->count++;
+                if( pIndex->limit != -1 )
                 {
                     snprintf(log_buf, sizeof(log_buf),"**** Limit eq in player file: %d.\n",vnum);
                     dump_to_scr( log_buf );
                 }
               }
-              fBootDb = TRUE;
             }
           }
           else fread_to_eol(pfile);
