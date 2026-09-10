@@ -1,19 +1,11 @@
 # -*- coding: utf-8 -*-
 """UTF-8 girdi/çıktı ve Latin-5 (ISO-8859-9) girdi uyumluluğu."""
-import re
-
 import pytest
 
 import mud
 
 NAME = "Denemeutf"
 TURKISH = "çğıöşüÇĞİÖŞÜ"
-
-
-def without_prompt(screen):
-    """Komut istemini at, satır sonlarını normalleştir."""
-    lines = mud.normalise_newlines(screen.text).split("\n")
-    return "\n".join(line for line in lines if not re.match(r"^Yp:.*<.*>", mud.strip_ansi(line)))
 
 
 @pytest.fixture(scope="module")
@@ -43,7 +35,7 @@ def test_latin5_input_gives_same_reply_as_utf8(player):
     utf8_reply = player.command("yardım")
     player.send_raw(b"yard\xfdm\r\n")          # ISO-8859-9: 0xFD = 'ı'
     latin5_reply = player.read_until_prompt(timeout=10.0)
-    assert without_prompt(latin5_reply) == without_prompt(utf8_reply)
+    assert mud.strip_prompt_lines(latin5_reply.text) == mud.strip_prompt_lines(utf8_reply.text)
 
 
 def test_turkish_text_round_trips_through_say(player):

@@ -4,10 +4,12 @@
 * ``MudServer``  : çalışma dizinini hazırlar, sunucuyu başlatır/durdurur.
 * ``MudClient``  : telnet benzeri TCP istemcisi; ``expect``/``read_idle``.
 * ``create_character`` / ``login`` : oturum açma akışları.
+* ``m1_hash`` / ``write_player_file`` : sunucunun okuyabildiği oyuncu dosyası.
 
 Sunucu ``\\n\\r`` satır sonları, UTF-8 metin, ANSI renk dizileri ve
 telnet müzakere baytları (IAC ...) gönderir; istemci bunları ayıklar.
 """
+import hashlib
 import re
 import shutil
 import socket
@@ -28,6 +30,8 @@ CONFIRM_NEW_NAME = "Doğru anladım mı, "
 PASSWORD = "sifre123"      # testlerin ortak parolası (>= 5 karakter)
 # Oyun içi komut istemi: "Yp:20/20 Mp:100/100 Zp:100/100 <0>\x1b[0;37m "
 PROMPT_RE = re.compile(r"Yp:\d+/\d+[^\r\n]*?<\d+>(?:\x1b\[[0-9;]*m)* ")
+# Ekran metninde (ANSI ayıklanmış) yalnızca istemden oluşan satır
+PROMPT_LINE_RE = re.compile(r"^Yp:.*<.*>")
 
 ANSI_RE = re.compile(r"\x1b\[[0-9;?]*[ -/]*[@-~]")
 
@@ -104,6 +108,65 @@ def strip_ansi(text):
 def normalise_newlines(text):
     """Sunucunun ``\\n\\r`` (ve ``\\r\\n``) satır sonlarını ``\\n`` yap."""
     return text.replace("\n\r", "\n").replace("\r\n", "\n").replace("\r", "")
+
+
+def is_prompt_line(line):
+    """Satır (ANSI'li ya da ANSI'siz) yalnızca komut istemi mi?"""
+    return PROMPT_LINE_RE.match(strip_ansi(line)) is not None
+
+
+def strip_prompt_lines(text):
+    """Komut istemi satırlarını at, satır sonlarını normalleştir (ANSI korunur)."""
+    lines = normalise_newlines(text).split("\n")
+    return "\n".join(line for line in lines if not is_prompt_line(line))
+
+
+def capitalize_ascii(name):
+    """src/db.c capitalize(): yalnızca ASCII ilk harf büyütülür ('i' -> 'I'; 'ı', 'ş' olduğu
+    gibi kalır). Oyuncu dosya adı bundan türer."""
+    first = name[:1]
+    return (first.upper() if first.isascii() else first) + name[1:]
+
+
+def m1_hash(password, salt_hex="0123456789abcdef"):
+    """src/password.c ile aynı türetme: SHA256(tuz_hex || parola), sonra 10000 tur
+    SHA256(özet || parola); sonuç '$m1$<tuz>$<özet>'."""
+    pw = password.encode("utf-8")
+    digest = hashlib.sha256(salt_hex.encode("ascii") + pw).digest()
+    for _ in range(10000):
+        digest = hashlib.sha256(digest + pw).digest()
+    return "$m1$%s$%s" % (salt_hex, digest.hex())
+
+
+def write_player_file(server, name, password, level=2, trust=None, room=3700,
+                      hmv=(20, 100, 100), salt_hex="0123456789abcdef"):
+    """Sunucunun okuyabildiği en küçük oyuncu dosyasını yaz (insan / savaşçı).
+
+    ``level`` >= 2 olmalı ki 'ayrıl' dosyayı yeniden yazsın (save.c seviye 1
+    karakterleri kaydetmez); ``trust`` verilirse ölümsüz komutları açılır."""
+    lines = [
+        "#PLAYER",
+        "Name %s~" % name,
+        "Pass %s~" % m1_hash(password, salt_hex),
+        "Race insan~",
+        "Sex  1",
+        "Cla  3",
+        "Levl %d" % level,
+    ]
+    if trust is not None:
+        lines.append("Trust %d" % trust)
+    lines += [
+        "Room %d" % room,
+        "HMV  %d %d %d" % tuple(hmv),
+        "Exp  %d" % (level * 1000),
+        "End",
+        "",
+        "#END",
+        "",
+    ]
+    path = server.player_file(name)
+    path.write_bytes("\n".join(lines).encode("utf-8"))
+    return path
 
 
 def _printable(text, limit=2000):
@@ -262,7 +325,7 @@ class MudServer(object):
         return self.run_dir / "player"
 
     def player_file(self, name):
-        return self.player_dir / (name[:1].upper() + name[1:])
+        return self.player_dir / capitalize_ascii(name)
 
     def connect(self, timeout=10.0):
         return MudClient(self.host, self.port, timeout=timeout, server=self)
@@ -409,10 +472,18 @@ class MudClient(object):
             return combined
         raise MudError("Sayfalayıcı %d sayfadan sonra da bitmedi.\n%s" % (max_pages, self._context()))
 
+    def wait_closed(self, timeout=5.0):
+        """Sunucunun bağlantıyı kapatmasını bekle; kapandıysa True."""
+        deadline = time.monotonic() + timeout
+        while not self.closed_by_server and time.monotonic() < deadline:
+            self._recv_once(0.2)
+        return self.closed_by_server
+
     def quit(self, timeout=5.0):
         """Oyundaysa 'ayrıl' ile çık; her durumda soketi kapat.
 
-        Sunucunun veda iletisi görüldüyse True döndürür."""
+        Sunucunun veda iletisi görüldüyse True döndürür; sunucu bağlantıyı
+        kapattıysa ``closed_by_server`` da True olur."""
         try:
             if self.in_game and not self.closed and not self.closed_by_server:
                 self.send("ayrıl")
@@ -422,10 +493,7 @@ class MudClient(object):
                 except MudError:
                     pass
                 self.in_game = False
-                # sunucunun bağlantıyı kapatmasını kısa süre bekle
-                deadline = time.monotonic() + 2.0
-                while not self.closed_by_server and time.monotonic() < deadline:
-                    self._recv_once(0.2)
+                self.wait_closed(timeout)
         finally:
             self.close()
         return self.quit_ok

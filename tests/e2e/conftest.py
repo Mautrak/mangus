@@ -4,6 +4,7 @@
 * ``server``  : oturum boyunca tek bir Mangus süreci (MANGUS_BIN).
 * ``gate``    : aynı anda tek bağlantı; kapanışlar arasında 0.5 s boşluk.
 * ``client``  : test başına bağlantı fabrikası (otomatik 'ayrıl' + kapatma).
+* ``spawn_server`` : kendi sunucusunu açan testler için damgalı çalışma dizini.
 * ``--update-snapshots`` / ``UPDATE_SNAPSHOTS=1`` : altın dosyaları yenile.
 * Oturum sonunda ``tests/e2e/_runs/report.html`` görsel raporu yazılır.
 """
@@ -30,7 +31,7 @@ import ansi2html  # noqa: E402
 
 CONNECTION_GAP = 0.5      # aynı makineden ardışık bağlantılar arasında bekleme (s)
 KEEP_RUNS = 5             # _runs/ altında saklanacak eski çalışma dizini sayısı
-PASSWORD = "sifre123"     # testlerin kullandığı ortak parola (>= 5 karakter)
+PASSWORD = mud.PASSWORD   # testlerin ortak parolası (tek kaynak: mud.py; fikstür Denemeuc)
 
 
 # --------------------------------------------------------------------------
@@ -69,6 +70,9 @@ def find_binary():
 # --------------------------------------------------------------------------
 # oturum durumu (rapor için)
 # --------------------------------------------------------------------------
+_record_seq = itertools.count(1)     # rapor çapaları: sıralı, çakışmaz
+
+
 class ScreenRecord(object):
     def __init__(self, name, nodeid, raw, status="screen", expected=None, actual=None, diff=""):
         self.name = name
@@ -78,22 +82,40 @@ class ScreenRecord(object):
         self.expected = expected
         self.actual = actual
         self.diff = diff
+        self.seq = next(_record_seq)
 
     @property
     def anchor(self):
         base = "".join(ch if ch.isalnum() else "-" for ch in (self.nodeid + "-" + self.name))
-        return "s-%s-%d" % (base, id(self) % 100000)
+        return "s-%s-%d" % (base, self.seq)
 
 
 class _State(object):
-    server = None
-    run_dir = None
-    binary = None
-    screens = []
-    last_close = 0.0
+    def __init__(self):
+        self.server = None
+        self.run_dir = None
+        self.binary = None
+        self.screens = []
+        self.last_close = 0.0
 
 
 STATE = _State()
+
+
+def run_dir_stamp():
+    return datetime.datetime.now().strftime("%Y%m%d-%H%M%S-%f")
+
+
+def spawn_server(tag, **prepare_kwargs):
+    """Kendi sunucusunu açan testler için: ikiliyi bul (yoksa testi atla), damgalı
+    bir çalışma dizini hazırla ve başlatılmamış ``MudServer`` döndür. Anahtar
+    sözcükler ``MudServer.prepare``'a gider (``bots=True``, ``runtime_dirs=...``)."""
+    binary, error = find_binary()
+    if binary is None:
+        pytest.skip(error)
+    base = STATE.run_dir if STATE.run_dir is not None else RUNS_DIR
+    run_dir = base / ("%s-%s" % (tag, run_dir_stamp()))
+    return mud.MudServer(binary, REPO, run_dir).prepare(**prepare_kwargs)
 
 
 def _prune_runs(keep):
@@ -116,7 +138,7 @@ def server():
         pytest.skip(error)
     RUNS_DIR.mkdir(parents=True, exist_ok=True)
     _prune_runs(KEEP_RUNS - 1)
-    run_dir = RUNS_DIR / datetime.datetime.now().strftime("%Y%m%d-%H%M%S-%f")
+    run_dir = RUNS_DIR / run_dir_stamp()
     srv = mud.MudServer(binary, REPO, run_dir).prepare()
     STATE.server, STATE.run_dir, STATE.binary = srv, run_dir, binary
     srv.start(timeout=30.0)
@@ -319,7 +341,6 @@ def pytest_sessionfinish(session, exitstatus):
     }
     if STATE.server is not None:
         meta["_log"] = STATE.server.log_text()[-20000:]
+    # Tek rapor: _runs/report.html (CI bunu yükler; çalışma dizini meta'da yazılıdır).
     page = ansi2html.render_report(STATE.screens, meta)
     (RUNS_DIR / "report.html").write_text(page, encoding="utf-8")
-    if STATE.run_dir is not None and STATE.run_dir.exists():
-        (STATE.run_dir / "report.html").write_text(page, encoding="utf-8")

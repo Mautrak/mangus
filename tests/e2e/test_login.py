@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Giriş akışları: karakter oluşturma, ayrılma, yeniden giriş, yanlış parola, geçersiz adlar,
 kayıtlı karakter dosyası ve $m1$ parola özeti."""
-import hashlib
 import os
 import re
 from pathlib import Path
@@ -15,43 +14,22 @@ FIXTURE_NAME = "Denemeuc"        # fixtures/Denemeuc ve Denemeuc.legacy: seviye 
 
 PASSWORD = mud.PASSWORD
 PASSWORD_REPROMPT = "Şifre: "
+M1_LINE_RE = re.compile(r"Pass \$m1\$([0-9a-f]{16})\$([0-9a-f]{64})~$")
 
 
-def m1_hash(password, salt_hex):
-    """src/password.c ile aynı türetme: SHA256(tuz_hex || parola), sonra 10000 tur
-    SHA256(özet || parola); sonuç '$m1$<tuz>$<özet>'."""
-    pw = password.encode("utf-8")
-    digest = hashlib.sha256(salt_hex.encode("ascii") + pw).digest()
-    for _ in range(10000):
-        digest = hashlib.sha256(digest + pw).digest()
-    return "$m1$%s$%s" % (salt_hex, digest.hex())
+def quit_and_check(c):
+    """'ayrıl' de; veda iletisi görünmeli ve sunucu bağlantıyı kapatmalı."""
+    assert c.quit(), "'ayrıl' sonrasında veda iletisi görünmedi"
+    assert c.closed_by_server, "'ayrıl' sonrasında sunucu bağlantıyı kapatmadı"
 
 
-def seed_player_file(server, name, password, level=2, salt_hex="0123456789abcdef"):
-    """Sunucunun okuyabildiği en küçük oyuncu dosyasını yaz (seviye >= 2 ki 'ayrıl'
-    dosyayı yeniden yazsın; save.c seviye 1 karakterleri kaydetmez)."""
-    content = (
-        "#PLAYER\n"
-        "Name %s~\n"
-        "Pass %s~\n"
-        "Race insan~\n"
-        "Sex  1\n"
-        "Cla  3\n"
-        "Levl %d\n"
-        "Room 3700\n"
-        "HMV  20 100 100\n"
-        "Exp  %d\n"
-        "End\n\n"
-        "#END\n" % (name, m1_hash(password, salt_hex), level, level * 1000)
-    )
-    path = server.player_file(name)
-    path.write_bytes(content.encode("utf-8"))
-    return path
-
-
-def wait_for_disconnect(c, timeout=5.0):
-    c.read_idle(idle=0.5, max_wait=timeout)
-    return c.closed_by_server
+def assert_m1_password_line(lines, password):
+    """Oyuncu dosyasındaki Pass satırı $m1$ biçiminde ve parolayla uyumlu olmalı."""
+    pass_lines = [line for line in lines if line.startswith("Pass ")]
+    assert pass_lines, "Pass satırı yok:\n%s" % "\n".join(lines)
+    m = M1_LINE_RE.match(pass_lines[0])
+    assert m, "Pass satırı $m1$ biçiminde değil: %r" % pass_lines[0]
+    assert mud.m1_hash(password, m.group(1)) == "$m1$%s$%s" % (m.group(1), m.group(2))
 
 
 def test_create_character_reaches_game(client, new_name, screens):
@@ -71,10 +49,7 @@ def test_quit_closes_connection_and_level_one_is_not_saved(client, new_name, ser
     name = new_name()
     c = client()
     mud.create_character(c, name, PASSWORD)
-    c.send("ayrıl")
-    c.expect(mud.QUIT_MESSAGE, timeout=5.0)
-    c.in_game = False
-    assert wait_for_disconnect(c), "'ayrıl' sonrasında sunucu bağlantıyı kapatmadı"
+    quit_and_check(c)
     assert "%s oyundan ayrıldı." % name in server.log_text()
     # save.c: seviyesi 2'den küçük karakterler diske yazılmaz; yeni karakterin dosyası olmaz.
     assert not server.player_file(name).exists(), (
@@ -109,7 +84,7 @@ def test_wrong_password_is_rejected_and_third_attempt_disconnects(client, new_na
         assert mud.WRONG_PASSWORD in scr.text, "Deneme %d: 'Yanlış şifre.' görünmedi" % attempt
     c2.send("yanlis3")
     c2.expect(mud.WRONG_PASSWORD)
-    assert wait_for_disconnect(c2), "Üçüncü yanlış parolada bağlantı kapanmalı"
+    assert c2.wait_closed(5.0), "Üçüncü yanlış parolada bağlantı kapanmalı"
     # temizlik ve doğrulama: doğru parola hâlâ geçerli
     c3 = client()
     assert "Tekrar bağlanıyor" in mud.login(c3, name, PASSWORD)
@@ -127,7 +102,7 @@ def test_invalid_names_are_rejected(client):
 
 def test_saved_character_login_and_quit_rewrites_m1_password_hash(client, server, new_name):
     name = new_name()
-    path = seed_player_file(server, name, PASSWORD, level=2)
+    path = mud.write_player_file(server, name, PASSWORD, level=2)
     c = client()
     c.wait_greeting()
     c.send(name)
@@ -143,20 +118,13 @@ def test_saved_character_login_and_quit_rewrites_m1_password_hash(client, server
     c.in_game, c.name = True, name
     assert "Mud Okulu Girişi" in entered.plain
     assert name in c.command("skor").plain
-    c.send("ayrıl")
-    c.expect(mud.QUIT_MESSAGE)
-    c.in_game = False
-    assert wait_for_disconnect(c)
+    quit_and_check(c)
 
     content = path.read_bytes().decode("utf-8")
     lines = content.splitlines()
     assert any(line.startswith("LogO ") for line in lines), "Sunucu dosyayı yeniden yazmadı:\n%s" % content
     assert "Levl 2" in lines
-    pass_lines = [line for line in lines if line.startswith("Pass ")]
-    assert pass_lines, "Pass satırı yok:\n%s" % content
-    m = re.match(r"Pass \$m1\$([0-9a-f]{16})\$([0-9a-f]{64})~$", pass_lines[0])
-    assert m, "Pass satırı $m1$ biçiminde değil: %r" % pass_lines[0]
-    assert m1_hash(PASSWORD, m.group(1)) == "$m1$%s$%s" % (m.group(1), m.group(2))
+    assert_m1_password_line(lines, PASSWORD)
 
 
 def install_fixture(server, fixture):
@@ -167,13 +135,6 @@ def install_fixture(server, fixture):
     return dst
 
 
-def quit_and_wait(c):
-    c.send("ayrıl")
-    c.expect(mud.QUIT_MESSAGE)
-    c.in_game = False
-    assert wait_for_disconnect(c)
-
-
 def test_fixture_player_file_logs_in_and_round_trips_m1_hash(client, server):
     path = install_fixture(server, FIXTURE_NAME)
     fixture_pass = [l for l in (FIXTURES / FIXTURE_NAME).read_text(encoding="utf-8").splitlines()
@@ -182,7 +143,7 @@ def test_fixture_player_file_logs_in_and_round_trips_m1_hash(client, server):
     transcript = mud.login(c, FIXTURE_NAME, PASSWORD)
     assert "Mud Okulu Girişi" in transcript
     assert "Denemeuc Acemi" in c.command("skor").plain
-    quit_and_wait(c)
+    quit_and_check(c)
     lines = path.read_bytes().decode("utf-8").splitlines()       # katı: dosya UTF-8
     assert any(l.startswith("LogO ") for l in lines), "dosya yeniden yazılmadı"
     assert fixture_pass in lines, "$m1$ özeti değişmeden korunmalıydı"
@@ -199,10 +160,7 @@ def test_legacy_player_file_login_upgrades_hash_and_latin5_title(client, server)
     skor = c.command("skor")
     skor.raw.decode("utf-8", "strict")
     assert "Işıklı Şövalye" in skor.plain, "Latin-5 ünvan UTF-8'e çevrilmemiş: %r" % skor.plain[:300]
-    quit_and_wait(c)
+    quit_and_check(c)
     lines = path.read_bytes().decode("utf-8").splitlines()       # katı: artık UTF-8
-    pass_line = [l for l in lines if l.startswith("Pass ")][0]
-    m = re.match(r"Pass \$m1\$([0-9a-f]{16})\$([0-9a-f]{64})~$", pass_line)
-    assert m, "Eski özet $m1$ biçimine yükseltilmedi: %r" % pass_line
-    assert m1_hash(PASSWORD, m.group(1)) == "$m1$%s$%s" % (m.group(1), m.group(2))
+    assert_m1_password_line(lines, PASSWORD)
     assert any("Işıklı Şövalye" in l for l in lines if l.startswith("Titl"))
