@@ -529,7 +529,7 @@ static int detect_intent( const char *raw )
 
 static int reply_delay( const char *text )
 {
-    return 8 + number_range( 0, 12 ) + (int) UMIN( strlen( text ), 60 ) / 5;
+    return 8 + number_range( 0, 12 ) + UMIN( (int) strlen( text ), 60 ) / 5;
 }
 
 /* rol içi / konu dışı havuz seçimi */

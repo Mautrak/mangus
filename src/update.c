@@ -2042,7 +2042,7 @@ void update_handler( void )
 	 for (ch = char_list; ch != NULL; ch = ch->next)
             if (!IS_NPC(ch) && ch->in_room != NULL)
                     ch->in_room->area->count =
-                      UMIN(ch->in_room->area->count+1,5000000);
+                      UMIN(ch->in_room->area->count+1,5000000UL);
 	}
 
     }
