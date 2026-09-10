@@ -2702,25 +2702,22 @@ void add_mind(CHAR_DATA *ch, char *str)
 void remove_mind(CHAR_DATA *ch, char *str)
 {
  char buf[MAX_STRING_LENGTH];
- char buff[MAX_STRING_LENGTH];
  char arg[MAX_INPUT_LENGTH];
  char *mind = ch->in_mind;
+ size_t len = 0;
 
  if (!IS_NPC(ch) || ch->in_room == NULL
 	|| mind == NULL || !is_name(str,mind) ) return;
 
+ /* str dışındaki adlar boşlukla yeniden birleştirilir */
  buf[0] = '\0';
  do
   {
    mind = one_argument(mind,arg);
    if (!is_name(str,arg))
-   {
-    if (buf[0] == '\0') strcpy(buff,arg);
-    else snprintf(buff, sizeof(buff),"%s %s",buf,arg);
-    strcpy(buf,buff);
-   }
+    len += snprintf(buf + len, sizeof(buf) - len, "%s%s", len ? " " : "", arg);
   }
- while ( mind[0] != '\0' );
+ while ( mind[0] != '\0' && len < sizeof(buf) );
 
  do_say(ch,"Sonunda intikamımı aldım!");
  free_string(ch->in_mind);
