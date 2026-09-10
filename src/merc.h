@@ -481,6 +481,11 @@ struct	descriptor_data
     int			outtop;
     char *		showstr_head;
     char *		showstr_point;
+    /* Grup 09 */
+    bool		outflow_error;	/* çıktı tamponu taştı; game_loop kapatır */
+    int			outkept;	/* önceki pulse'tan yazılamayıp kalan bayt */
+    int			login_tries;	/* yanlış parola sayacı (nanny) */
+    bool		ethos_intro;	/* etik açıklaması bekliyor (nanny) */
 };
 
 
@@ -3017,6 +3022,8 @@ void	colourconv	( char *buffer, const char *txt, CHAR_DATA *ch );
 
 void	printf_to_char	( CHAR_DATA *, const char *, ... );
 void	bugf		( char *, ... );
+/* Grup 09 */
+#define DEFAULT_PROMPT	"Yp:%h/%H Mp:%m/%M Zp:%v/%V <%o>{x "
 
 /* data.c */
 void ud_data_write (void);
@@ -3303,6 +3310,8 @@ bool gorev_ekipmani_mi (OBJ_DATA *obj);
 /* save.c */
 void	save_char_obj	( CHAR_DATA *ch );
 bool	load_char_obj	( DESCRIPTOR_DATA *d, char *name );
+/* Grup 09 */
+void	init_play_log	( PC_DATA *pc, time_t base, int bonus_minutes );
 
 /* skills.c */
 int     exp_to_level    ( CHAR_DATA *ch, int points );
@@ -3327,7 +3336,9 @@ void	game_time_update ( void );
 void	game_time_to_string ( time_t gameTime , char *buf );
 int		game_time_to_year ( time_t gameTime );
 int     get_age         ( CHAR_DATA *ch );
-int     esya_kac_gunluk ( long esya_yaratilma_zamani );
+int     esya_kac_gunluk ( time_t esya_yaratilma_zamani );
+/* Grup 09 */
+#define GAME_DATE_LEN	20	/* game_time_to_string tamponu ("gün/ay/yıl") */
 int		age_to_num	( int age);
 void	advance_level	( CHAR_DATA *ch );
 void	gain_exp	( CHAR_DATA *ch, int gain );

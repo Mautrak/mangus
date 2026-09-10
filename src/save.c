@@ -58,7 +58,6 @@
 #include "tables.h"
 
 
-
 int wear_convert( int oldwear );
 
 char *print_flags(int flag)
@@ -98,17 +97,15 @@ char *print_flags(int flag)
 static	OBJ_DATA *	rgObjNest	[MAX_NEST];
 
 
-
 /*
  * Local functions.
  */
-void	fwrite_char	( CHAR_DATA *ch,  FILE *fp );
-void	fwrite_obj	( CHAR_DATA *ch,  OBJ_DATA  *obj, FILE *fp, int iNest );
-void	fwrite_kasa ( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest );
-void	fwrite_pet	( CHAR_DATA *pet, FILE *fp);
-void	fread_char	( CHAR_DATA *ch,  FILE *fp );
-void    fread_pet	( CHAR_DATA *ch,  FILE *fp );
-void	fread_obj	( CHAR_DATA *ch,  FILE *fp );
+static void	fwrite_char	( CHAR_DATA *ch,  FILE *fp );
+static void	fwrite_obj_rec	( CHAR_DATA *ch,  OBJ_DATA  *obj, FILE *fp, int iNest, bool kasa );
+static void	fwrite_pet	( CHAR_DATA *pet, FILE *fp);
+static void	fread_char	( CHAR_DATA *ch,  FILE *fp );
+static void	fread_pet	( CHAR_DATA *ch,  FILE *fp );
+static void	fread_obj_rec	( CHAR_DATA *ch,  FILE *fp, bool kasa );
 void	fread_kasa	( CHAR_DATA *ch, FILE *fp );
 
 
@@ -140,14 +137,15 @@ void save_char_obj( CHAR_DATA *ch )
 	    bug("Save_char_obj: fopen",0);
 	    perror(strsave);
  	}
-
-	fprintf(fp,"Lev %2d Trust %2d  %s%s\n",
-	    ch->level, get_trust(ch), ch->name, ch->pcdata->title);
-	fclose( fp );
+	else
+	{
+	    fprintf(fp,"Lev %2d Trust %2d  %s%s\n",
+		ch->level, get_trust(ch), ch->name, ch->pcdata->title);
+	    fclose( fp );
+	}
 	fpReserve = fopen( NULL_FILE, "r" );
-    if ( fpReserve == NULL )
-      bug("save_char_obj: Can't open null file.", 0 );
-
+	if ( fpReserve == NULL )
+	    bug("save_char_obj: Can't open null file.", 0 );
     }
 
     fclose( fpReserve );
@@ -161,17 +159,17 @@ void save_char_obj( CHAR_DATA *ch )
     {
 	fwrite_char( ch, fp );
 	if ( ch->carrying != NULL )
-	    fwrite_obj( ch, ch->carrying, fp, 0 );
+	    fwrite_obj_rec( ch, ch->carrying, fp, 0, FALSE );
 	if ( ch->pcdata->kasa_esyalari != NULL )
-	    fwrite_kasa( ch, ch->pcdata->kasa_esyalari, fp, 0 );
+	    fwrite_obj_rec( ch, ch->pcdata->kasa_esyalari, fp, 0, TRUE );
 	/* save the pets */
 	if (ch->pet != NULL && ch->pet->in_room == ch->in_room)
 	    fwrite_pet(ch->pet,fp);
 	fprintf( fp, "#END\n" );
+	fclose( fp );
+	if ( !platform_replace_file( TEMP_FILE, strsave ) )
+	    bug( "Save_char_obj: oyuncu dosyası yerine konulamadı.", 0 );
     }
-    fclose( fp );
-    if ( !platform_replace_file( TEMP_FILE, strsave ) )
-	bug( "Save_char_obj: oyuncu dosyası yerine konulamadı.", 0 );
     fpReserve = fopen( NULL_FILE, "r" );
     if ( fpReserve == NULL )
       bug("save_char_obj: Can't open null file.", 0 );
@@ -184,7 +182,7 @@ void save_char_obj( CHAR_DATA *ch )
 /*
  * Write the char.
  */
-void fwrite_char( CHAR_DATA *ch, FILE *fp )
+static void fwrite_char( CHAR_DATA *ch, FILE *fp )
 {
     AFFECT_DATA *paf;
     int sn, pos, l;
@@ -212,7 +210,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
 	fprintf( fp, "LnD  %s~\n",	ch->long_descr	);
     if (ch->description[0] != '\0')
     	fprintf( fp, "Desc %s~\n",	ch->description	);
-    if (ch->prompt != NULL || !str_cmp(ch->prompt,"<%hhp %mm %vmv> "))
+    if (ch->prompt != NULL)
         fprintf( fp, "Prom %s~\n",      ch->prompt  	);
     fprintf( fp, "Race %s~\n", race_table[ORG_RACE(ch)].name[0] );
     fprintf( fp, "Sex  %d\n",	ch->sex			);
@@ -386,7 +384,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
 }
 
 /* write a pet */
-void fwrite_pet( CHAR_DATA *pet, FILE *fp)
+static void fwrite_pet( CHAR_DATA *pet, FILE *fp)
 {
     AFFECT_DATA *paf;
 
@@ -422,7 +420,7 @@ void fwrite_pet( CHAR_DATA *pet, FILE *fp)
     	fprintf(fp, "Detect %s\n", print_flags(pet->detection));
     if (pet->comm != 0)
     	fprintf(fp, "Comm %s\n", print_flags(pet->comm));
-    fprintf(fp,"Pos  %d\n", pet->position = POS_FIGHTING ? POS_STANDING : pet->position);
+    fprintf(fp,"Pos  %d\n", pet->position == POS_FIGHTING ? POS_STANDING : pet->position);
     if (pet->saving_throw != 0)
     	fprintf(fp, "Save %d\n", pet->saving_throw);
     if (pet->alignment != pet->pIndexData->alignment)
@@ -459,185 +457,20 @@ void fwrite_pet( CHAR_DATA *pet, FILE *fp)
 }
 
 
-void fwrite_kasa( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
-{
-    EXTRA_DESCR_DATA *ed;
-    AFFECT_DATA *paf;
-    int i;
-
-    /*
-     * Slick recursion to write lists backwards,
-     *   so loading them will load in forwards order.
-     */
-    if ( obj->next_content != NULL )
-	{
-		fwrite_kasa( ch, obj->next_content, fp, iNest );
-	}
-
-    for (i=1;i < MAX_CABAL;i++)
-      if (obj->pIndexData->vnum == cabal_table[i].obj_vnum)
-        return;
-
-    /*
-     * Castrate storage characters.
-     */
-    if ( ((ch->level < 10) && (obj->pIndexData->limit != -1 ))
-    || (obj->item_type == ITEM_KEY && obj->value[0] == 0)
-    || (obj->item_type == ITEM_MAP && !obj->value[0])
-    || ((ch->level < obj->level -3) && (obj->item_type != ITEM_CONTAINER))
-    || ((ch->level > obj->level + 35) && (obj->pIndexData->limit > 1 ))  )
-    {
-	extract_obj( obj );
-	return;
-    }
-
-    if ( gorev_ekipmani_mi( obj ) && strstr(obj->short_descr,ch->name) == NULL )
-  	{
-      act("$p yokoluyor!",ch,obj,NULL,TO_CHAR);
-  	 extract_obj(obj);
-  	 return;
-  	}
-
-    fprintf( fp, "#K\n" );
-    fprintf( fp, "Vnum %d\n",   	obj->pIndexData->vnum		);
-    fprintf( fp, "Cond %d\n",		obj->condition			);
-
-    if (!obj->pIndexData->new_format)
-	fprintf( fp, "Oldstyle\n");
-    if (obj->enchanted)
-	fprintf( fp,"Enchanted\n");
-    fprintf( fp, "Nest %d\n",	iNest	  	     );
-
-    /* these data are only used if they do not match the defaults */
-
-    //if ( obj->name != obj->pIndexData->name)
-    	fprintf( fp, "Name %s~\n",	obj->name		     );
-    //if ( obj->short_descr != obj->pIndexData->short_descr)
-        fprintf( fp, "ShD  %s~\n",	obj->short_descr	     );
-    //if ( obj->description != obj->pIndexData->description)
-        fprintf( fp, "Desc %s~\n",	obj->description	     );
-    //if ( obj->extra_flags != obj->pIndexData->extra_flags)
-        fprintf( fp, "ExtF %d\n",	obj->extra_flags	     );
-    //if ( obj->wear_flags != obj->pIndexData->wear_flags)
-        fprintf( fp, "WeaF %d\n",	obj->wear_flags		     );
-    //if ( obj->item_type != obj->pIndexData->item_type)
-        fprintf( fp, "Ityp %d\n",	obj->item_type		     );
-    //if ( obj->weight != obj->pIndexData->weight)
-        fprintf( fp, "Wt   %d\n",	obj->weight		     );
-		fprintf( fp, "Material   %s~\n",	obj->material		     );
-
-    /* variable data */
-
-    fprintf( fp, "WLoc %d\n",   obj->wear_loc                );
-    if (obj->level != obj->pIndexData->level)
-        fprintf( fp, "Lev  %d\n",	obj->level		     );
-    if (obj->timer != 0)
-        fprintf( fp, "Time %d\n",	obj->timer	     );
-    fprintf( fp, "Cost %d\n",	obj->cost		     );
-    if (obj->value[0] != obj->pIndexData->value[0]
-    ||  obj->value[1] != obj->pIndexData->value[1]
-    ||  obj->value[2] != obj->pIndexData->value[2]
-    ||  obj->value[3] != obj->pIndexData->value[3]
-    ||  obj->value[4] != obj->pIndexData->value[4])
-    	fprintf( fp, "Val  %d %d %d %d %d\n",
-	    obj->value[0], obj->value[1], obj->value[2], obj->value[3],
-	    obj->value[4]	     );
-
-    switch ( obj->item_type )
-    {
-    case ITEM_POTION:
-    case ITEM_SCROLL:
-	if ( obj->value[1] > 0 )
-	{
-	    fprintf( fp, "Spell 1 '%s'\n",
-		skill_table[obj->value[1]].name[0] );
-	}
-
-	if ( obj->value[2] > 0 )
-	{
-	    fprintf( fp, "Spell 2 '%s'\n",
-		skill_table[obj->value[2]].name[0] );
-	}
-
-	if ( obj->value[3] > 0 )
-	{
-	    fprintf( fp, "Spell 3 '%s'\n",
-		skill_table[obj->value[3]].name[0] );
-	}
-
-	break;
-
-    case ITEM_PILL:
-    case ITEM_STAFF:
-    case ITEM_WAND:
-	if ( obj->value[3] > 0 )
-	{
-	    fprintf( fp, "Spell 3 '%s'\n",
-		skill_table[obj->value[3]].name[0] );
-	}
-
-	break;
-    }
-
-    for ( paf = obj->affected; paf != NULL; paf = paf->next )
-    {
-	if (paf->type < 0 || paf->type >= MAX_SKILL)
-	    continue;
-        fprintf( fp, "Affc '%s' %3d %3d %3d %3d %3d %10d\n",
-            skill_table[paf->type].name[0],
-            paf->where,
-            paf->level,
-            paf->duration,
-            paf->modifier,
-            paf->location,
-            paf->bitvector
-            );
-    }
-	
-	for ( paf = obj->affected; paf != NULL; paf = paf->next )
-    {
-		if (paf->type < 0)
-		{
-			fprintf( fp, "Affs %3d %3d %3d %3d %3d %3d %10d\n",
-			paf->type,
-			paf->where,
-			paf->level,
-			paf->duration,
-			paf->modifier,
-			paf->location,
-			paf->bitvector
-			);
-		}
-    }
-		
-    for ( ed = obj->extra_descr; ed != NULL; ed = ed->next )
-    {
-	fprintf( fp, "ExDe %s~ %s~\n",
-	    ed->keyword, ed->description );
-    }
-
-    fprintf( fp, "End\n\n" );
-
-    if ( obj->contains != NULL )
-	fwrite_kasa( ch, obj->contains, fp, iNest + 1 );
-    return;
-}
-
 /*
- * Write an object and its contents.
+ * Eşya kaydı: envanter (#O) ve kişisel kasa (#K) aynı biçimi paylaşır.
+ * Kasa kaydında yaratılma zamanı yazılmaz ve değerler yalnızca prototipten
+ * farklıysa yazılır (dosya biçimi değişmedi). Liste geriye doğru yazılır ki
+ * okunurken sıra korunsun.
  */
-void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
+static void fwrite_obj_rec( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest, bool kasa )
 {
     EXTRA_DESCR_DATA *ed;
     AFFECT_DATA *paf;
     int i;
 
-    /*
-     * Slick recursion to write lists backwards,
-     *   so loading them will load in forwards order.
-     */
     if ( obj->next_content != NULL )
-	fwrite_obj( ch, obj->next_content, fp, iNest );
+	fwrite_obj_rec( ch, obj->next_content, fp, iNest, kasa );
 
     for (i=1;i < MAX_CABAL;i++)
       if (obj->pIndexData->vnum == cabal_table[i].obj_vnum)
@@ -657,15 +490,16 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
     }
 
     if ( gorev_ekipmani_mi( obj ) && strstr(obj->short_descr,ch->name) == NULL )
-  	{
-      act("$p yokoluyor!",ch,obj,NULL,TO_CHAR);
-  	 extract_obj(obj);
-  	 return;
-  	}
+    {
+	act("$p yokoluyor!",ch,obj,NULL,TO_CHAR);
+	extract_obj(obj);
+	return;
+    }
 
-    fprintf( fp, "#O\n" );
+    fprintf( fp, kasa ? "#K\n" : "#O\n" );
     fprintf( fp, "Vnum %d\n",   	obj->pIndexData->vnum		);
     fprintf( fp, "Cond %d\n",		obj->condition			);
+    if ( !kasa )
 	fprintf( fp, "Creation  %lld\n", (long long) obj->creation_time );
 
     if (!obj->pIndexData->new_format)
@@ -674,23 +508,14 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
 	fprintf( fp,"Enchanted\n");
     fprintf( fp, "Nest %d\n",	iNest	  	     );
 
-    /* these data are only used if they do not match the defaults */
-
-    //if ( obj->name != obj->pIndexData->name)
-    	fprintf( fp, "Name %s~\n",	obj->name		     );
-    //if ( obj->short_descr != obj->pIndexData->short_descr)
-        fprintf( fp, "ShD  %s~\n",	obj->short_descr	     );
-    //if ( obj->description != obj->pIndexData->description)
-        fprintf( fp, "Desc %s~\n",	obj->description	     );
-    //if ( obj->extra_flags != obj->pIndexData->extra_flags)
-        fprintf( fp, "ExtF %d\n",	obj->extra_flags	     );
-    //if ( obj->wear_flags != obj->pIndexData->wear_flags)
-        fprintf( fp, "WeaF %d\n",	obj->wear_flags		     );
-    //if ( obj->item_type != obj->pIndexData->item_type)
-        fprintf( fp, "Ityp %d\n",	obj->item_type		     );
-    //if ( obj->weight != obj->pIndexData->weight)
-        fprintf( fp, "Wt   %d\n",	obj->weight		     );
-		fprintf( fp, "Material   %s~\n",	obj->material		     );
+    fprintf( fp, "Name %s~\n",	obj->name		     );
+    fprintf( fp, "ShD  %s~\n",	obj->short_descr	     );
+    fprintf( fp, "Desc %s~\n",	obj->description	     );
+    fprintf( fp, "ExtF %d\n",	obj->extra_flags	     );
+    fprintf( fp, "WeaF %d\n",	obj->wear_flags		     );
+    fprintf( fp, "Ityp %d\n",	obj->item_type		     );
+    fprintf( fp, "Wt   %d\n",	obj->weight		     );
+    fprintf( fp, "Material   %s~\n",	obj->material		     );
 
     /* variable data */
 
@@ -700,13 +525,12 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
     if (obj->timer != 0)
         fprintf( fp, "Time %d\n",	obj->timer	     );
     fprintf( fp, "Cost %d\n",	obj->cost		     );
-    /*
-	if (obj->value[0] != obj->pIndexData->value[0]
+    if ( !kasa
+    ||  obj->value[0] != obj->pIndexData->value[0]
     ||  obj->value[1] != obj->pIndexData->value[1]
     ||  obj->value[2] != obj->pIndexData->value[2]
     ||  obj->value[3] != obj->pIndexData->value[3]
     ||  obj->value[4] != obj->pIndexData->value[4])
-	*/
     	fprintf( fp, "Val  %d %d %d %d %d\n",
 	    obj->value[0], obj->value[1], obj->value[2], obj->value[3],
 	    obj->value[4]	     );
@@ -715,35 +539,16 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
     {
     case ITEM_POTION:
     case ITEM_SCROLL:
-	if ( obj->value[1] > 0 )
-	{
-	    fprintf( fp, "Spell 1 '%s'\n",
-		skill_table[obj->value[1]].name[0] );
-	}
-
-	if ( obj->value[2] > 0 )
-	{
-	    fprintf( fp, "Spell 2 '%s'\n",
-		skill_table[obj->value[2]].name[0] );
-	}
-
-	if ( obj->value[3] > 0 )
-	{
-	    fprintf( fp, "Spell 3 '%s'\n",
-		skill_table[obj->value[3]].name[0] );
-	}
-
+	for ( i = 1; i <= 3; i++ )
+	    if ( obj->value[i] > 0 )
+		fprintf( fp, "Spell %d '%s'\n", i, skill_table[obj->value[i]].name[0] );
 	break;
 
     case ITEM_PILL:
     case ITEM_STAFF:
     case ITEM_WAND:
 	if ( obj->value[3] > 0 )
-	{
-	    fprintf( fp, "Spell 3 '%s'\n",
-		skill_table[obj->value[3]].name[0] );
-	}
-
+	    fprintf( fp, "Spell 3 '%s'\n", skill_table[obj->value[3]].name[0] );
 	break;
     }
 
@@ -761,23 +566,23 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
             paf->bitvector
             );
     }
-	
-	for ( paf = obj->affected; paf != NULL; paf = paf->next )
+
+    for ( paf = obj->affected; paf != NULL; paf = paf->next )
     {
-		if (paf->type < 0)
-		{
-			fprintf( fp, "Affs %3d %3d %3d %3d %3d %3d %10d\n",
-			paf->type,
-			paf->where,
-			paf->level,
-			paf->duration,
-			paf->modifier,
-			paf->location,
-			paf->bitvector
-			);
-		}
+	if (paf->type < 0)
+	{
+	    fprintf( fp, "Affs %3d %3d %3d %3d %3d %3d %10d\n",
+		paf->type,
+		paf->where,
+		paf->level,
+		paf->duration,
+		paf->modifier,
+		paf->location,
+		paf->bitvector
+		);
+	}
     }
-		
+
     for ( ed = obj->extra_descr; ed != NULL; ed = ed->next )
     {
 	fprintf( fp, "ExDe %s~ %s~\n",
@@ -787,11 +592,29 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
     fprintf( fp, "End\n\n" );
 
     if ( obj->contains != NULL )
-	fwrite_obj( ch, obj->contains, fp, iNest + 1 );
+	fwrite_obj_rec( ch, obj->contains, fp, iNest + 1, kasa );
     return;
 }
 
 
+
+/*
+ * Oynama günlüğünü base gününden geriye MAX_TIME_LOG gün için kurar; her
+ * güne bonus_minutes dakika yazılır (yeni/eski oyuncu bonusu 60, PlayLog
+ * okunurken 0).
+ */
+void init_play_log( PC_DATA *pc, time_t base, int bonus_minutes )
+{
+    int l, today, day;
+
+    today = parse_date( base );
+    for ( l = 0; l < MAX_TIME_LOG; l++ )
+    {
+	day = ( 365 + today - l ) % 365;
+	pc->log_date[l] = day ? day : 365;
+	pc->log_time[l] = bonus_minutes;
+    }
+}
 
 /*
  * Load a char and inventory into a new ch structure.
@@ -837,7 +660,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
     ch->progtypes                       = 0;
     ch->extracted                       = FALSE;
     ch->pcdata->points                  = 0;
-    ch->prompt 				= str_dup("<%n: %hhp %mm %vmv Opp:<%o>> ");
+    ch->prompt 				= str_dup( DEFAULT_PROMPT );
     ch->pcdata->confirm_delete		= FALSE;
     ch->pcdata->confirm_remort		= FALSE;
     ch->pcdata->pwd			= str_dup( "" );
@@ -881,24 +704,23 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
     ch->pcdata->yardim_puani = 0;
 
     found = FALSE;
+    found = FALSE;
     fclose( fpReserve );
 
-#ifndef _WIN32
-    /* decompress if .gz file exists */
-    {
-	char buf[MAX_INPUT_LENGTH + 16];
-    snprintf(strsave, sizeof(strsave), "%s%s%s", PLAYER_DIR, capitalize(name),".gz");
-    if ( ( fp = fopen( strsave, "r" ) ) != NULL )
-    {
-	fclose(fp);
-	snprintf(buf, sizeof(buf),"gzip -dfq %s",strsave);
-	if ( system( buf ) != 0 )
-	    log_string( "gzip ile oyuncu dosyası açılamadı." );
-    }
-    }
-#endif
-
     snprintf(strsave, sizeof(strsave), "%s%s", PLAYER_DIR, capitalize( name ) );
+
+    /* sıkıştırılmış (.gz) oyuncu dosyası varsa yerinde açılır (Windows'ta desteklenmez) */
+    {
+	char gzname[MAX_INPUT_LENGTH + 4];
+
+	snprintf( gzname, sizeof(gzname), "%s.gz", strsave );
+	if ( ( fp = fopen( gzname, "r" ) ) != NULL )
+	{
+	    fclose( fp );
+	    if ( !platform_gunzip( strsave ) )
+		log_string( "gzip ile oyuncu dosyası açılamadı." );
+	}
+    }
     if ( ( fp = fopen( strsave, "r" ) ) != NULL )
     {
 	int iNest;
@@ -927,10 +749,10 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
 
 	    word = fread_word( fp );
 	    if      ( !str_cmp( word, "PLAYER" ) ) fread_char ( ch, fp );
-	    else if ( !str_cmp( word, "OBJECT" ) ) fread_obj  ( ch, fp );
-	    else if ( !str_cmp( word, "O"      ) ) fread_obj  ( ch, fp );
+	    else if ( !str_cmp( word, "OBJECT" ) ) fread_obj_rec( ch, fp, FALSE );
+	    else if ( !str_cmp( word, "O"      ) ) fread_obj_rec( ch, fp, FALSE );
 	    else if ( !str_cmp( word, "PET"    ) ) fread_pet  ( ch, fp );
-		else if ( !str_cmp( word, "K"      ) ) fread_kasa  ( ch, fp );
+	    else if ( !str_cmp( word, "K"      ) ) fread_obj_rec( ch, fp, TRUE );
 	    else if ( !str_cmp( word, "END"    ) ) break;
 	    else
 	    {
@@ -975,15 +797,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
 	 */
 	if (IS_SET(ch->pcdata->time_flag, TLP_NOLOG))
 	{
-	    int l, today, day;
-
-	    today = parse_date( current_time );
-	    for (l =0; l < MAX_TIME_LOG; l++)
-	    {
-		day = ((365 + today - l) % 365);
-		ch->pcdata->log_date[l]	= day ? day : 365;
-		ch->pcdata->log_time[l]	= 60;
-	    }
+	    init_play_log( ch->pcdata, current_time, 60 );
 	    REMOVE_BIT(ch->pcdata->time_flag, TLP_NOLOG);
 	}
 
@@ -1010,7 +824,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
   break;				\
 }
 
-void fread_char( CHAR_DATA *ch, FILE *fp )
+static void fread_char( CHAR_DATA *ch, FILE *fp )
 {
     char buf[MAX_STRING_LENGTH];
     const char *word="End";
@@ -1384,15 +1198,9 @@ void fread_char( CHAR_DATA *ch, FILE *fp )
  	    KEY( "Prom",	ch->prompt,		fread_string( fp ) );
 	    if (!str_cmp(word,"PlayLog"))
 	    {
-		int l, d, t, today;
+		int l, d, t;
 
-		today = parse_date( boot_time );
-		for (l =0; l < MAX_TIME_LOG; l++)
-		{
-		  d = ((365 + today - l) % 365);
-		  ch->pcdata->log_date[l]	= d ? d : 365;
-		  ch->pcdata->log_time[l]	= 0;
-		}
+		init_play_log( ch->pcdata, boot_time, 0 );
 		fread_number(fp);	/* read the version */
 		while (1)
 		{
@@ -1548,12 +1356,12 @@ void fread_char( CHAR_DATA *ch, FILE *fp )
 }
 
 /* load a pet from the forgotten reaches */
-void fread_pet( CHAR_DATA *ch, FILE *fp )
+static void fread_pet( CHAR_DATA *ch, FILE *fp )
 {
     char *word;
     CHAR_DATA *pet;
     bool fMatch;
-    int lastlogoff = current_time;
+    time_t lastlogoff = current_time;
     int percent;
 
     /* first entry had BETTER be the vnum or we barf */
@@ -1692,7 +1500,7 @@ void fread_pet( CHAR_DATA *ch, FILE *fp )
 		pet->master = ch;
 		ch->pet = pet;
     		/* adjust hp mana move up  -- here for speed's sake */
-    		percent = (current_time - lastlogoff) * 25 / ( 2 * 60 * 60);
+    		percent = (int) ((current_time - lastlogoff) * 25 / ( 2 * 60 * 60));
 
     		if (percent > 0 && !IS_AFFECTED(ch,AFF_POISON)
     		&&  !IS_AFFECTED(ch,AFF_PLAGUE))
@@ -1754,20 +1562,56 @@ void fread_pet( CHAR_DATA *ch, FILE *fp )
     	    KEY( "ShD",		pet->short_descr,	fread_string(fp));
             KEY( "Silv",        pet->silver,            fread_number( fp ) );
     	    break;
+    	}
 
     	if ( !fMatch )
     	{
     	    bug("Fread_pet: no match.",0);
     	    fread_to_eol(fp);
     	}
-
-    	}
     }
 }
 
 
 
-void fread_obj( CHAR_DATA *ch, FILE *fp )
+/*
+ * Etki satırı: AffD (eski, where'siz), Affc (adlı) ve Affs (sayısal tip).
+ */
+static void fread_obj_affect( OBJ_DATA *obj, FILE *fp, const char *word )
+{
+    AFFECT_DATA *paf;
+
+    paf = new_affect();
+
+    if ( !str_cmp( word, "Affs" ) )
+	paf->type = fread_number( fp );
+    else
+    {
+	int sn = skill_lookup( fread_word( fp ) );
+
+	if ( sn < 0 )
+	    bug( "Fread_obj: unknown skill.", 0 );
+	else
+	    paf->type = sn;
+    }
+
+    if ( str_cmp( word, "AffD" ) )
+	paf->where	= fread_number( fp );
+    paf->level		= fread_number( fp );
+    paf->duration	= fread_number( fp );
+    paf->modifier	= fread_number( fp );
+    paf->location	= fread_number( fp );
+    paf->bitvector	= fread_number( fp );
+    paf->next		= obj->affected;
+    obj->affected	= paf;
+}
+
+/*
+ * Eşya okuma: envanter (#O) ve kişisel kasa (#K) aynı anahtar kümesini
+ * kullanır; kasa eşyası ilk katmanda ch->pcdata->kasa_esyalari listesine
+ * girer, envanter eşyası karaktere verilir.
+ */
+static void fread_obj_rec( CHAR_DATA *ch, FILE *fp, bool kasa )
 {
     OBJ_DATA *obj;
     char *word;
@@ -1812,6 +1656,8 @@ void fread_obj( CHAR_DATA *ch, FILE *fp )
     	obj->description	= str_dup( "" );
     }
 
+    obj->kasada_duruyor = kasa;
+
     fNest		= FALSE;
     fVnum		= TRUE;
     iNest		= 0;
@@ -1826,78 +1672,18 @@ void fread_obj( CHAR_DATA *ch, FILE *fp )
 
 	switch ( UPPER(word[0]) )
 	{
-		case '*':
-			fMatch = TRUE;
-			fread_to_eol( fp );
-			break;
+	case '*':
+	    fMatch = TRUE;
+	    fread_to_eol( fp );
+	    break;
 
-		case 'A':
-			if (!str_cmp(word,"AffD"))
-			{
-				AFFECT_DATA *paf;
-				int sn;
-
-				paf = new_affect();
-
-				sn = skill_lookup(fread_word(fp));
-				if (sn < 0)
-					bug("Fread_obj: unknown skill.",0);
-				else
-					paf->type = sn;
-
-				paf->level	= fread_number( fp );
-				paf->duration	= fread_number( fp );
-				paf->modifier	= fread_number( fp );
-				paf->location	= fread_number( fp );
-				paf->bitvector	= fread_number( fp );
-				paf->next	= obj->affected;
-				obj->affected	= paf;
-				fMatch		= TRUE;
-				break;
-			}
-            if (!str_cmp(word,"Affc"))
-            {
-				AFFECT_DATA *paf;
-				int sn;
-
-				paf = new_affect();
-
-				sn = skill_lookup(fread_word(fp));
-				if (sn < 0)
-					bug("Fread_obj: unknown skill.",0);
-				else
-					paf->type = sn;
-
-				paf->where	= fread_number( fp );
-				paf->level      = fread_number( fp );
-				paf->duration   = fread_number( fp );
-				paf->modifier   = fread_number( fp );
-				paf->location   = fread_number( fp );
-				paf->bitvector  = fread_number( fp );
-				paf->next       = obj->affected;
-				obj->affected   = paf;
-				fMatch          = TRUE;
-				break;
-            }
-			if (!str_cmp(word,"Affs"))
-            {
-				AFFECT_DATA *paf;
-
-				paf = new_affect();
-
-				paf->type 		= fread_number( fp );
-				paf->where		= fread_number( fp );
-				paf->level      = fread_number( fp );
-				paf->duration   = fread_number( fp );
-				paf->modifier   = fread_number( fp );
-				paf->location   = fread_number( fp );
-				paf->bitvector  = fread_number( fp );
-				paf->next       = obj->affected;
-				obj->affected   = paf;
-				fMatch          = TRUE;
-				break;
-            }
-
+	case 'A':
+	    if ( !str_cmp( word, "AffD" ) || !str_cmp( word, "Affc" ) || !str_cmp( word, "Affs" ) )
+	    {
+		fread_obj_affect( obj, fp, word );
+		fMatch = TRUE;
+		break;
+	    }
 	    break;
 
 	case 'C':
@@ -1909,7 +1695,7 @@ void fread_obj( CHAR_DATA *ch, FILE *fp )
 		break;
 	    }
 	    KEY( "Cost",	obj->cost,		fread_number( fp ) );
-		KEY( "Creation",	obj->creation_time,	fread_number( fp ) );
+	    KEY( "Creation",	obj->creation_time,	fread_number( fp ) );
 	    break;
 
 	case 'D':
@@ -1918,7 +1704,6 @@ void fread_obj( CHAR_DATA *ch, FILE *fp )
 	    break;
 
 	case 'E':
-
 	    if ( !str_cmp( word, "Enchanted"))
 	    {
 		obj->enchanted = TRUE;
@@ -1940,6 +1725,7 @@ void fread_obj( CHAR_DATA *ch, FILE *fp )
 		ed->next		= obj->extra_descr;
 		obj->extra_descr	= ed;
 		fMatch = TRUE;
+		break;
 	    }
 
 	    if ( !str_cmp( word, "End" ) )
@@ -1950,8 +1736,8 @@ void fread_obj( CHAR_DATA *ch, FILE *fp )
 		    free_obj(obj);
 		    return;
 		}
-		else if (obj->pIndexData->limit != -1
-			&& get_total_played(ch) < MIN_TIME_LIMIT )
+		if (obj->pIndexData->limit != -1
+		    && get_total_played(ch) < MIN_TIME_LIMIT )
 		{
 		    snprintf(log_buf, sizeof(log_buf), "Ignoring limited %d for %s.",
 			obj->pIndexData->vnum, ch->name );
@@ -1960,37 +1746,51 @@ void fread_obj( CHAR_DATA *ch, FILE *fp )
 		    rgObjNest[iNest] = NULL;
 		    return;
 		}
+
+		if (!new_format)
 		{
-		    if (!new_format)
-		    {
-		    	obj->next	= object_list;
-		    	object_list	= obj;
-		    	obj->pIndexData->count++;
-		    }
-
-		    if (!obj->pIndexData->new_format
-		    && obj->item_type == ITEM_ARMOR
-		    &&  obj->value[1] == 0)
-		    {
-			obj->value[1] = obj->value[0];
-			obj->value[2] = obj->value[0];
-		    }
-		    if (make_new)
-		    {
-			int wear;
-
-			wear = obj->wear_loc;
-			extract_obj(obj);
-
-			obj = create_object(obj->pIndexData,0);
-			obj->wear_loc = wear;
-		    }
-		    if ( iNest == 0 || rgObjNest[iNest-1] == NULL )
-			obj_to_char( obj, ch );
-		    else
-			obj_to_obj( obj, rgObjNest[iNest-1] );
-		    return;
+		    obj->next	= object_list;
+		    object_list	= obj;
+		    obj->pIndexData->count++;
 		}
+
+		if (!obj->pIndexData->new_format
+		&& obj->item_type == ITEM_ARMOR
+		&&  obj->value[1] == 0)
+		{
+		    obj->value[1] = obj->value[0];
+		    obj->value[2] = obj->value[0];
+		}
+		if (make_new)
+		{
+		    /* Eski biçimli eşya prototipten yeniden yaratılır; serbest
+		       bırakılan nesneye (pIndexData, iç içe tablo) dokunulmaz. */
+		    OBJ_INDEX_DATA *pObjIndex = obj->pIndexData;
+		    int wear = obj->wear_loc;
+
+		    extract_obj(obj);
+
+		    obj = create_object(pObjIndex,0);
+		    obj->wear_loc = wear;
+		    obj->kasada_duruyor = kasa;
+		    rgObjNest[iNest] = obj;
+		}
+		if ( iNest == 0 || rgObjNest[iNest-1] == NULL )
+		{
+		    if ( kasa )
+		    {
+			obj->next_content	 = ch->pcdata->kasa_esyalari;
+			ch->pcdata->kasa_esyalari	 = obj;
+			obj->carried_by	 = ch;
+			obj->in_room	 = NULL;
+			obj->in_obj		 = NULL;
+		    }
+		    else
+			obj_to_char( obj, ch );
+		}
+		else
+		    obj_to_obj( obj, rgObjNest[iNest-1] );
+		return;
 	    }
 	    break;
 
@@ -2003,7 +1803,7 @@ void fread_obj( CHAR_DATA *ch, FILE *fp )
 	    KEY( "Level",	obj->level,		fread_number( fp ) );
 	    KEY( "Lev",		obj->level,		fread_number( fp ) );
 	    break;
-	
+
 	case 'M':
 	    KEY( "Material",	obj->material,	fread_string( fp ) );
 	    break;
@@ -2017,6 +1817,7 @@ void fread_obj( CHAR_DATA *ch, FILE *fp )
 		if ( iNest < 0 || iNest >= MAX_NEST )
 		{
 		    bug( "Fread_obj: bad nest %d.", iNest );
+		    iNest = 0;
 		}
 		else
 		{
@@ -2035,7 +1836,6 @@ void fread_obj( CHAR_DATA *ch, FILE *fp )
 		fMatch = TRUE;
 	    }
 	    break;
-
 
 	case 'Q':
 	    KEY( "Quality",	obj->condition,		fread_number( fp ) );
@@ -2119,13 +1919,7 @@ void fread_obj( CHAR_DATA *ch, FILE *fp )
 	    KEY( "Weight",	obj->weight,		fread_number( fp ) );
 	    KEY( "WLoc",	obj->wear_loc,		fread_number( fp ) );
 	    KEY( "Wt",		obj->weight,		fread_number( fp ) );
-	    if ( !str_cmp( word, "Wear" ) )
-	    {
-		obj->wear_loc 	= wear_convert(fread_number( fp ));
-		fMatch = TRUE;
-		break;
-	    }
-	    if ( !str_cmp( word, "Wearloc" ) )
+	    if ( !str_cmp( word, "Wear" ) || !str_cmp( word, "Wearloc" ) )
 	    {
 		obj->wear_loc 	= wear_convert(fread_number( fp ));
 		fMatch = TRUE;
@@ -2138,386 +1932,6 @@ void fread_obj( CHAR_DATA *ch, FILE *fp )
 	if ( !fMatch )
 	{
 	    bug( "Fread_obj: no match.", 0 );
-	    fread_to_eol( fp );
-	}
-    }
-}
-
-
-void fread_kasa( CHAR_DATA *ch, FILE *fp )
-{
-    OBJ_DATA *obj;
-    char *word;
-    int iNest;
-    bool fMatch;
-    bool fNest;
-    bool fVnum;
-    bool first;
-    bool new_format;  /* to prevent errors */
-    bool make_new;    /* update object */
-
-    fVnum = FALSE;
-    obj = NULL;
-    first = TRUE;  /* used to counter fp offset */
-    new_format = FALSE;
-    make_new = FALSE;
-
-    word   = (char *)(feof( fp ) ? "End" : fread_word( fp ));
-    if (!str_cmp(word,"Vnum" ))
-    {
-        int vnum;
-	first = FALSE;  /* fp will be in right place */
-
-        vnum = fread_number( fp );
-        if (  get_obj_index( vnum )  == NULL )
-	{
-            bug( "Fread_kasa: bad vnum %d.", vnum );
-	}
-        else
-	{
-	    obj = create_object_nocount(get_obj_index(vnum),-1);
-	    new_format = TRUE;
-	}
-
-    }
-
-    if (obj == NULL)  /* either not found or old style */
-    {
-    	obj = new_obj();
-    	obj->name		= str_dup( "" );
-    	obj->short_descr	= str_dup( "" );
-    	obj->description	= str_dup( "" );
-    }
-
-	obj->kasada_duruyor = TRUE;
-
-    fNest		= FALSE;
-    fVnum		= TRUE;
-    iNest		= 0;
-
-    for ( ; ; )
-    {
-	if (first)
-	    first = FALSE;
-	else
-	    word   = (char *)(feof( fp ) ? "End" : fread_word( fp ));
-	fMatch = FALSE;
-
-	switch ( UPPER(word[0]) )
-	{
-		case '*':
-			fMatch = TRUE;
-			fread_to_eol( fp );
-			break;
-
-		case 'A':
-			if (!str_cmp(word,"AffD"))
-			{
-				AFFECT_DATA *paf;
-				int sn;
-
-				paf = new_affect();
-
-				sn = skill_lookup(fread_word(fp));
-				if (sn < 0)
-					bug("Fread_obj: unknown skill.",0);
-				else
-					paf->type = sn;
-
-				paf->level	= fread_number( fp );
-				paf->duration	= fread_number( fp );
-				paf->modifier	= fread_number( fp );
-				paf->location	= fread_number( fp );
-				paf->bitvector	= fread_number( fp );
-				paf->next	= obj->affected;
-				obj->affected	= paf;
-				fMatch		= TRUE;
-				break;
-			}
-            if (!str_cmp(word,"Affc"))
-            {
-				AFFECT_DATA *paf;
-				int sn;
-
-				paf = new_affect();
-
-				sn = skill_lookup(fread_word(fp));
-				if (sn < 0)
-					bug("Fread_obj: unknown skill.",0);
-				else
-					paf->type = sn;
-
-				paf->where	= fread_number( fp );
-				paf->level      = fread_number( fp );
-				paf->duration   = fread_number( fp );
-				paf->modifier   = fread_number( fp );
-				paf->location   = fread_number( fp );
-				paf->bitvector  = fread_number( fp );
-				paf->next       = obj->affected;
-				obj->affected   = paf;
-				fMatch          = TRUE;
-				break;
-            }
-			if (!str_cmp(word,"Affs"))
-            {
-				AFFECT_DATA *paf;
-
-				paf = new_affect();
-
-				paf->type 		= fread_number( fp );
-				paf->where		= fread_number( fp );
-				paf->level      = fread_number( fp );
-				paf->duration   = fread_number( fp );
-				paf->modifier   = fread_number( fp );
-				paf->location   = fread_number( fp );
-				paf->bitvector  = fread_number( fp );
-				paf->next       = obj->affected;
-				obj->affected   = paf;
-				fMatch          = TRUE;
-				break;
-            }
-
-	    break;
-
-	case 'C':
-	    if ( !str_cmp( word, "Cond"))
-	    {
-		obj->condition = fread_number(fp);
-		if (obj->condition < 1) obj->condition = 100;
-	 	fMatch 	= TRUE;
-		break;
-	    }
-	    KEY( "Cost",	obj->cost,		fread_number( fp ) );
-	    break;
-
-	case 'D':
-	    KEY( "Description",	obj->description,	fread_string( fp ) );
-	    KEY( "Desc",	obj->description,	fread_string( fp ) );
-	    break;
-
-	case 'E':
-
-	    if ( !str_cmp( word, "Enchanted"))
-	    {
-		obj->enchanted = TRUE;
-	 	fMatch 	= TRUE;
-		break;
-	    }
-
-	    KEY( "ExtraFlags",	obj->extra_flags,	fread_number( fp ) );
-	    KEY( "ExtF",	obj->extra_flags,	fread_number( fp ) );
-
-	    if ( !str_cmp( word, "ExtraDescr" ) || !str_cmp(word,"ExDe"))
-	    {
-		EXTRA_DESCR_DATA *ed;
-
-		ed = new_extra_descr();
-
-		ed->keyword		= fread_string( fp );
-		ed->description		= fread_string( fp );
-		ed->next		= obj->extra_descr;
-		obj->extra_descr	= ed;
-		fMatch = TRUE;
-	    }
-
-	    if ( !str_cmp( word, "End" ) )
-	    {
-		if ( !fNest || !fVnum || obj->pIndexData == NULL)
-		{
-		    bug( "Fread_obj: incomplete object.", 0 );
-		    free_obj(obj);
-		    return;
-		}
-		else if (obj->pIndexData->limit != -1
-			&& get_total_played(ch) < MIN_TIME_LIMIT )
-		{
-		    snprintf(log_buf, sizeof(log_buf), "Ignoring limited %d for %s.",
-			obj->pIndexData->vnum, ch->name );
-		    log_string( log_buf );
-		    extract_obj_nocount(obj);
-		    rgObjNest[iNest] = NULL;
-		    return;
-		}
-		{
-		    if (!new_format)
-		    {
-		    	obj->next	= object_list;
-		    	object_list	= obj;
-		    	obj->pIndexData->count++;
-		    }
-
-		    if (!obj->pIndexData->new_format
-		    && obj->item_type == ITEM_ARMOR
-		    &&  obj->value[1] == 0)
-		    {
-			obj->value[1] = obj->value[0];
-			obj->value[2] = obj->value[0];
-		    }
-		    if (make_new)
-		    {
-			int wear;
-
-			wear = obj->wear_loc;
-			extract_obj(obj);
-
-			obj = create_object(obj->pIndexData,0);
-			obj->wear_loc = wear;
-		    }
-		    if ( iNest == 0 || rgObjNest[iNest-1] == NULL )
-			{
-				obj->next_content	 = ch->pcdata->kasa_esyalari;
-				ch->pcdata->kasa_esyalari	 = obj;
-				obj->carried_by	 = ch;
-				obj->in_room	 = NULL;
-				obj->in_obj		 = NULL;
-			}
-		    else
-			obj_to_obj( obj, rgObjNest[iNest-1] );
-		    return;
-		}
-	    }
-	    break;
-
-	case 'I':
-	    KEY( "ItemType",	obj->item_type,		fread_number( fp ) );
-	    KEY( "Ityp",	obj->item_type,		fread_number( fp ) );
-	    break;
-
-	case 'L':
-	    KEY( "Level",	obj->level,		fread_number( fp ) );
-	    KEY( "Lev",		obj->level,		fread_number( fp ) );
-	    break;
-
-	case 'N':
-	    KEY( "Name",	obj->name,		fread_string( fp ) );
-
-	    if ( !str_cmp( word, "Nest" ) )
-	    {
-		iNest = fread_number( fp );
-		if ( iNest < 0 || iNest >= MAX_NEST )
-		{
-		    bug( "Fread_kasa: bad nest %d.", iNest );
-		}
-		else
-		{
-		    rgObjNest[iNest] = obj;
-		    fNest = TRUE;
-		}
-		fMatch = TRUE;
-	    }
-	    break;
-
-   	case 'O':
-	    if ( !str_cmp( word,"Oldstyle" ) )
-	    {
-		if (obj->pIndexData != NULL && obj->pIndexData->new_format)
-		    make_new = TRUE;
-		fMatch = TRUE;
-	    }
-	    break;
-
-
-	case 'Q':
-	    KEY( "Quality",	obj->condition,		fread_number( fp ) );
-	    break;
-
-	case 'S':
-	    KEY( "ShortDescr",	obj->short_descr,	fread_string( fp ) );
-	    KEY( "ShD",		obj->short_descr,	fread_string( fp ) );
-
-	    if ( !str_cmp( word, "Spell" ) )
-	    {
-		int iValue;
-		int sn;
-
-		iValue = fread_number( fp );
-		sn     = skill_lookup( fread_word( fp ) );
-		if ( iValue < 0 || iValue > 3 )
-		{
-		    bug( "Fread_kasa: bad iValue %d.", iValue );
-		}
-		else if ( sn < 0 )
-		{
-		    bug( "Fread_kasa: unknown skill.", 0 );
-		}
-		else
-		{
-		    obj->value[iValue] = sn;
-		}
-		fMatch = TRUE;
-		break;
-	    }
-
-	    break;
-
-	case 'T':
-	    KEY( "Timer",	obj->timer,		fread_number( fp ) );
-	    KEY( "Time",	obj->timer,		fread_number( fp ) );
-	    break;
-
-	case 'V':
-	    if ( !str_cmp( word, "Values" ) || !str_cmp(word,"Vals"))
-	    {
-		obj->value[0]	= fread_number( fp );
-		obj->value[1]	= fread_number( fp );
-		obj->value[2]	= fread_number( fp );
-		obj->value[3]	= fread_number( fp );
-		if (obj->item_type == ITEM_WEAPON && obj->value[0] == 0)
-		   obj->value[0] = obj->pIndexData->value[0];
-		fMatch		= TRUE;
-		break;
-	    }
-
-	    if ( !str_cmp( word, "Val" ) )
-	    {
-		obj->value[0] 	= fread_number( fp );
-	 	obj->value[1]	= fread_number( fp );
-	 	obj->value[2] 	= fread_number( fp );
-		obj->value[3]	= fread_number( fp );
-		obj->value[4]	= fread_number( fp );
-		fMatch = TRUE;
-		break;
-	    }
-
-	    if ( !str_cmp( word, "Vnum" ) )
-	    {
-		int vnum;
-
-		vnum = fread_number( fp );
-		if ( ( obj->pIndexData = get_obj_index( vnum ) ) == NULL )
-		    bug( "Fread_kasa: bad vnum %d.", vnum );
-		else
-		    fVnum = TRUE;
-		fMatch = TRUE;
-		break;
-	    }
-	    break;
-
-	case 'W':
-	    KEY( "WearFlags",	obj->wear_flags,	fread_number( fp ) );
-	    KEY( "WeaF",	obj->wear_flags,	fread_number( fp ) );
-	    KEY( "Weight",	obj->weight,		fread_number( fp ) );
-	    KEY( "WLoc",	obj->wear_loc,		fread_number( fp ) );
-	    KEY( "Wt",		obj->weight,		fread_number( fp ) );
-	    if ( !str_cmp( word, "Wear" ) )
-	    {
-		obj->wear_loc 	= wear_convert(fread_number( fp ));
-		fMatch = TRUE;
-		break;
-	    }
-	    if ( !str_cmp( word, "Wearloc" ) )
-	    {
-		obj->wear_loc 	= wear_convert(fread_number( fp ));
-		fMatch = TRUE;
-		break;
-	    }
-	    break;
-
-	}
-
-	if ( !fMatch )
-	{
-	    bug( "Fread_kasa: no match.", 0 );
 	    fread_to_eol( fp );
 	}
     }
