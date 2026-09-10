@@ -10,7 +10,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <sys/types.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,18 +18,30 @@
 #include "merc.h"
 #include "interp.h"
 
+/* Dosya yolları area/ dizinine göredir (sunucu orada çalışır). */
+#define UD_DATA_FILE	"../data/ud_data"
+#define KANAL_LOG_DIR	"../log/kanal/"
+#define EVENT_LOG_FILE	"../log/events/events"
+
 extern int max_on;
 extern int max_on_so_far;
 extern int ikikat_tp;
 extern int ikikat_gp;
+
+/* "YYYY/AA/GG SS:DD:ss" damgası. */
+static void fmt_timestamp(char *buf, size_t size, const struct tm *tm)
+{
+	snprintf(buf, size, "%02d/%02d/%02d %02d:%02d:%02d",
+		tm->tm_year + 1900, tm->tm_mon + 1, tm->tm_mday,
+		tm->tm_hour, tm->tm_min, tm->tm_sec);
+}
 
 void ud_data_write(void)
 {
 	FILE *data;
 
 	cevrimici_oyuncu_sayisi();
-	remove("../data/ud_data");
-	data = fopen("../data/ud_data","a");
+	data = fopen(UD_DATA_FILE, "w");
 	if ( data == NULL )
 		return;
 	fprintf(data,"* Cevrimici oyuncu rekoru\n");
@@ -47,7 +59,9 @@ void ud_data_read(void)
 
 	max_on = 0;
 	max_on_so_far  = 0;
-	fp=fopen("../data/ud_data","r");
+	fp = fopen(UD_DATA_FILE, "r");
+	if ( fp == NULL )
+		return;
 
 	for ( ; ; )
 	{
@@ -74,12 +88,27 @@ void ud_data_read(void)
 			return;
 		}
 	}
-	fclose(fp);
-	return;
 }
+
+/* Kanal günlüğü dosya adı ön ekleri (KANAL_* sırasıyla). */
+static const char *const kanal_prefix[] =
+{
+	[KANAL_SOYLE]	= "soyle",
+	[KANAL_KD]	= "kd",
+	[KANAL_ACEMI]	= "acemi",
+	[KANAL_HAYKIR]	= "haykir",
+	[KANAL_IMM]	= "imm",
+	[KANAL_GSOYLE]	= "gsoyle",
+	[KANAL_DUYGU]	= "duygu",
+};
 
 void write_channel_log(CHAR_DATA *ch, CHAR_DATA *vc, int kanal, char *argument)
 {
+	FILE *data;
+	char filename[MAX_STRING_LENGTH];
+	char stamp[64];
+	time_t t = time(NULL);
+	struct tm tm = *localtime(&t);
 
 	if ( argument[0] == '\0' )
 		return;
@@ -87,75 +116,45 @@ void write_channel_log(CHAR_DATA *ch, CHAR_DATA *vc, int kanal, char *argument)
 	if(IS_NPC(ch))
 		return;
 
-	FILE *data;
-	char filename[MAX_STRING_LENGTH];
-	char buf[MAX_STRING_LENGTH+100];
-	time_t t = time(NULL);
-	struct tm tm = *localtime(&t);
-
-	if( kanal<0 || kanal>6 )
+	if ( kanal < 0 || kanal >= (int)(sizeof(kanal_prefix) / sizeof(kanal_prefix[0]))
+	||   kanal_prefix[kanal] == NULL )
 	{
-		snprintf(buf, sizeof(buf), "write_channel_log: hatali kanal %d", kanal );
-		bug(buf,0);
+		bugf("write_channel_log: hatali kanal %d", kanal);
 		return;
 	}
 
-	switch(kanal)
-	{
-		case KANAL_SOYLE:
-			snprintf(filename, sizeof(filename), "../log/kanal/soyle_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
-		case KANAL_KD:
-			snprintf(filename, sizeof(filename), "../log/kanal/kd_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
-		case KANAL_ACEMI:
-			snprintf(filename, sizeof(filename), "../log/kanal/acemi_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
-		case KANAL_HAYKIR:
-			snprintf(filename, sizeof(filename), "../log/kanal/haykir_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
-		case KANAL_IMM:
-			snprintf(filename, sizeof(filename), "../log/kanal/imm_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
-		case KANAL_GSOYLE:
-			snprintf(filename, sizeof(filename), "../log/kanal/gsoyle_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
-		case KANAL_DUYGU:
-			snprintf(filename, sizeof(filename), "../log/kanal/duygu_%d_%02d_%02d",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday);break;
-	}
-
-	if (vc == NULL)
-	{
-
-	}
+	snprintf(filename, sizeof(filename), KANAL_LOG_DIR "%s_%d_%02d_%02d",
+		kanal_prefix[kanal], tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday);
 
 	data = fopen(filename,"a");
 	if ( data == NULL )
 		return;
-	snprintf(buf, sizeof(buf),"%02d/%02d/%02d %02d:%02d:%02d, Oda:%6d, Char: %10s, Victim: %10s, Log: %s\n",tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec,ch->in_room->vnum,ch->name,(vc != NULL)?vc->name:"None",argument);
-	fprintf(data,"%s",buf);
+	fmt_timestamp(stamp, sizeof(stamp), &tm);
+	fprintf(data,"%s, Oda:%6d, Char: %10s, Victim: %10s, Log: %s\n",
+		stamp, ch->in_room->vnum, ch->name,
+		(vc != NULL) ? vc->name : "None", argument);
 	fclose(data);
-	return;
 }
 
 extern char * const month_name[];
 
 void write_event_log(char *argument)
 {
-
-	if ( argument[0] == '\0' )
-	{
-		return;
-	}
-
 	FILE *data;
-	char buf[MAX_STRING_LENGTH+100];
+	char stamp[64];
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
 
-	data = fopen("../log/events/events","a");
+	if ( argument[0] == '\0' )
+		return;
+
+	data = fopen(EVENT_LOG_FILE, "a");
 	if ( data == NULL )
 		return;
 
-	snprintf(buf, sizeof(buf),"%02d/%02d/%02d %02d:%02d:%02d|%ld|%s|%ld|%ld|%s\n",\
-				tm.tm_year + 1900,tm.tm_mon + 1,tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, \
-				time_info.year,month_name[time_info.month-1],time_info.day, time_info.hour, argument);
-	fprintf(data,"%s",buf);
+	fmt_timestamp(stamp, sizeof(stamp), &tm);
+	fprintf(data,"%s|%ld|%s|%ld|%ld|%s\n", stamp,
+		time_info.year, month_name[time_info.month-1],
+		time_info.day, time_info.hour, argument);
 	fclose(data);
-	return;
-
 }

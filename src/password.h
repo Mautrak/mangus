@@ -6,6 +6,7 @@
 #define PASSWORD_H
 
 #include <stdbool.h>
+#include <stddef.h>
 
 #define PWD_MAX_LEN 128
 
@@ -16,6 +17,6 @@ bool        pwd_check(const char *stored, const char *plain);
 /* Saklanan özet eski biçimde mi (crypt(3))? */
 bool        pwd_is_legacy(const char *stored);
 /* SHA-256'nın onaltılık çıktısı (testler için). */
-void        sha256_hex(const void *data, unsigned long len, char out[65]);
+void        sha256_hex(const void *data, size_t len, char out[65]);
 
 #endif

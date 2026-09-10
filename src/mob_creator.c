@@ -12,43 +12,20 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <math.h>
 #include "merc.h"
 #include "interp.h"
 
 int hitroll_damroll_hesapla(int level)
 {
-	int seviyenin_yarisi;
-	int seviyenin_onda_biri;
+	int seviyenin_yarisi    = UMAX(1, level / 2);
+	int seviyenin_onda_biri = UMAX(1, level / 10);
 
-	seviyenin_yarisi = UMAX(1, (ceil) ((float)(level/2)) );
-	seviyenin_onda_biri = UMAX(1, (ceil) ((float)(level/10)) );
-
-	return ( number_range( UMAX(1,seviyenin_yarisi-seviyenin_onda_biri),UMAX(1,seviyenin_yarisi+(2*seviyenin_onda_biri))) );
+	return number_range( UMAX(1, seviyenin_yarisi - seviyenin_onda_biri),
+			     UMAX(1, seviyenin_yarisi + 2 * seviyenin_onda_biri) );
 }
 
-int damage_dice_0(int level)
-{
-	int type, number;
-
-	type   = level*7/4;
-	number = UMIN(type/8 + 1, 5);
-
-	return number;
-}
-
-int damage_dice_1(int level)
-{
-	int type, number;
-
-	type   = level*7/4;
-	number = UMIN(type/8 + 1, 5);
-	type   = UMAX(2, type/number);
-
-	return type;
-}
-
-int damage_dice_2(int level)
+/* Seviyeye göre hasar zarı: out[DICE_NUMBER], out[DICE_TYPE], out[DICE_BONUS]. */
+static void damage_dice(int level, int out[3])
 {
 	int type, number, bonus;
 
@@ -57,59 +34,70 @@ int damage_dice_2(int level)
 	type   = UMAX(2, type/number);
 	bonus  = UMAX(0, level*9/4 - number*type);
 
-	return bonus;
+	out[DICE_NUMBER] = number;
+	out[DICE_TYPE]   = type;
+	out[DICE_BONUS]  = bonus;
 }
 
+int damage_dice_0(int level)
+{
+	int d[3];
+	damage_dice(level, d);
+	return d[DICE_NUMBER];
+}
+
+int damage_dice_1(int level)
+{
+	int d[3];
+	damage_dice(level, d);
+	return d[DICE_TYPE];
+}
+
+int damage_dice_2(int level)
+{
+	int d[3];
+	damage_dice(level, d);
+	return d[DICE_BONUS];
+}
+
+/* Rastgele yaratığın saldırı türü; attack_table'da ada göre bulunur. */
 int dam_type_dice(void)
 {
-	int type=3;
-	switch ( number_range( 1, 7 ) )
+	static const char *const dam_names[] =
+		{ "slash", "pound", "pierce", "beating", "punch", "slap", "crush" };
+	static int dam_index[sizeof(dam_names) / sizeof(dam_names[0])];
+	static bool ready = FALSE;
+	size_t i;
+
+	if (!ready)
 	{
-		case (1): type =  3;       break;  /* slash  */
-		case (2): type =  7;       break;  /* pound  */
-		case (3): type = 11;       break;  /* pierce */
-		case (4): type = 13;       break;  /* beating */
-		case (5): type = 17;       break;  /* punch */
-		case (6): type = 16;       break;  /* slap */
-		case (7): type = 8;        break;  /* crush */
+		for (i = 0; i < sizeof(dam_names) / sizeof(dam_names[0]); i++)
+			dam_index[i] = attack_lookup(dam_names[i]);
+		ready = TRUE;
 	}
 
-	return type;
+	return dam_index[number_range(0, (int)(sizeof(dam_names) / sizeof(dam_names[0])) - 1)];
 }
 
 int ac_dice(int i,int level)
 {
-	int k;
-	switch(i)
-	{
-		case 0:
-		case 1:
-		case 2:
-			k = interpolate( level, 100, -100);
-		break;
-		case 3:
-			k = interpolate( level, 100, 0);
-		break;
-		default:
-			k = interpolate( level, 100, 0);
-	}
-	return k;
+	if (i == AC_PIERCE || i == AC_BASH || i == AC_SLASH)
+		return interpolate( level, 100, -100);
+	return interpolate( level, 100, 0);
 }
 
 int position_dice(void)
 {
-	int dice;
+	int dice = number_range( 1, 100 );
 
-  dice = number_range( 1, 100 );
-
-  if(dice < 50)
-    return POS_STANDING;
-  else if(dice < 75)
-    return POS_SITTING;
-  else if(dice < 90)
-    return POS_RESTING;
-  else
-    return POS_SLEEPING;
+	if(dice < 50)
+		return POS_STANDING;
+	else if(dice < 75)
+		return POS_SITTING;
+	else if(dice < 90)
+		return POS_RESTING;
+	else
+		return POS_SLEEPING;
 }
 
 int sex_dice(void)
@@ -117,43 +105,26 @@ int sex_dice(void)
 	return number_range(1,2);
 }
 
+/*
+ * Rastgele ırk. Düşük seviyede ilk 26, yüksek seviyede ilk 31 ırk aday olur
+ * (tablonun sonundaki "unique" ve nöbetçi hariç); humanoid istenirse yalnızca
+ * humanoid ırklar arasından seçilir.
+ */
 sh_int race_dice(int level, bool humanoid)
 {
-	int irace = 0;
-	if(level<40)
+	int hi = level < 40 ? 26 : 31;
+	int candidates[MAX_RACE];
+	int n = 0, irace;
+
+	for (irace = 1; irace <= hi && irace < MAX_RACE && race_table[irace].name[0] != NULL; irace++)
+		if (!humanoid || race_table[irace].humanoid)
+			candidates[n++] = irace;
+
+	if (n == 0)
 	{
-		if(humanoid == TRUE)
-		{
-			while(TRUE)
-			{
-				irace = number_range(1,26);
-				if(race_table[irace].humanoid == TRUE)
-					break;
-			}
-			return irace;
-		}
-		else
-		{
-			return number_range(1,26);
-		}
+		bug("race_dice: uygun ırk yok, insan seçildi.", 0);
+		return 1;
 	}
-	else
-	{
-		if(humanoid == TRUE)
-		{
-			while(TRUE)
-			{
-				irace = number_range(1,31);
-				if(race_table[irace].humanoid == TRUE)
-					break;
-			}
-			return irace;
-		}
-		else
-		{
-			return number_range(1,31);
-		}
-	}
-	
-	return number_range(1,26);
+
+	return (sh_int) candidates[number_range(0, n - 1)];
 }

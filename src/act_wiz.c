@@ -51,7 +51,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include <limits.h>
 #include "merc.h"
 #include "utf8.h"
 #include "magic.h"
@@ -92,6 +92,245 @@ extern int max_on;
 ROOM_INDEX_DATA *	find_location	( CHAR_DATA *ch, char *arg );
 bool write_to_descriptor  ( int desc, char *txt, int length );
 void update_total_played        ( CHAR_DATA *ch);
+
+/*
+ * Ölümsüz komutlarının ortak iletileri ve yardımcıları.
+ */
+#define MSG_NOT_HERE	"Öyle biri yok.\n\r"
+#define MSG_NOT_ON_NPC	"Yaratıklarda olmaz.\n\r"
+#define MSG_NOT_ON_PC	"Oyuncularda olmaz.\n\r"
+#define MSG_FAILED	"Başaramadın.\n\r"
+#define MSG_OK		"Tamam.\n\r"
+#define MSG_NO_LOCATION	"Öyle bir yer yok.\n\r"
+#define MSG_PRIVATE_ROOM "O oda şu an özel.\n\r"
+
+/* wiz_find_victim bayrakları */
+#define WIZ_ALLOW_NPC	(A)	/* yaratık hedef alınabilir */
+#define WIZ_NEED_TRUST	(B)	/* hedefin güveni ölümsüzünkinden düşük olmalı */
+#define WIZ_SAVE	(C)	/* (ceza tablosu) işlem sonrası oyuncu kaydedilir */
+
+/*
+ * Hedef bulma iskeleti: boş argümanda 'usage', bulunamayan hedefte, yaratıkta
+ * ve yetki yetmezliğinde ileti verip NULL döndürür.
+ */
+static CHAR_DATA *wiz_find_victim( CHAR_DATA *ch, char *arg, const char *usage, int flags )
+{
+    CHAR_DATA *victim;
+
+    if ( arg[0] == '\0' )
+    {
+	send_to_char( usage, ch );
+	return NULL;
+    }
+
+    if ( ( victim = get_char_world( ch, arg ) ) == NULL )
+    {
+	send_to_char( MSG_NOT_HERE, ch );
+	return NULL;
+    }
+
+    if ( !IS_SET(flags, WIZ_ALLOW_NPC) && IS_NPC(victim) )
+    {
+	send_to_char( MSG_NOT_ON_NPC, ch );
+	return NULL;
+    }
+
+    if ( IS_SET(flags, WIZ_NEED_TRUST) && get_trust( victim ) >= get_trust( ch ) )
+    {
+	send_to_char( MSG_FAILED, ch );
+	return NULL;
+    }
+
+    return victim;
+}
+
+/* Hedef özel bir odadaysa ve ölümsüz oraya giremiyorsa TRUE. */
+static bool wiz_room_blocked( CHAR_DATA *ch, ROOM_INDEX_DATA *room )
+{
+    if ( room == NULL || ch->in_room == room )
+	return FALSE;
+    return !is_room_owner( ch, room ) && room_is_private( room )
+	&& !IS_TRUSTED( ch, IMPLEMENTOR );
+}
+
+/* time_t -> "YYYY-AA-GG SS:DD:ss" (statik tampon); 0 için "yok". */
+static const char *fmt_time( time_t t )
+{
+    static char buf[32];
+    struct tm *tm;
+
+    if ( t == 0 )
+	return "yok";
+    tm = localtime( &t );
+    if ( tm == NULL || strftime( buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", tm ) == 0 )
+	return "?";
+    return buf;
+}
+
+/* Bit tablosundaki adları boşlukla ayırarak yazar (statik tampon). */
+static const char *flag_names( const struct flag_type *table, long flags )
+{
+    static char buf[MAX_STRING_LENGTH];
+    size_t len = 0;
+    int i;
+
+    buf[0] = '\0';
+    for ( i = 0; table[i].name != NULL; i++ )
+    {
+	if ( !IS_SET(flags, table[i].bit) )
+	    continue;
+	len += snprintf( buf + len, sizeof(buf) - len, "%s ", table[i].name );
+	if ( len >= sizeof(buf) )
+	    break;
+    }
+    return buf;
+}
+
+static const struct flag_type mprog_flag_names[] =
+{
+    { "bribe",	MPROG_BRIBE,	TRUE },
+    { "speech",	MPROG_SPEECH,	TRUE },
+    { "give",	MPROG_GIVE,	TRUE },
+    { "death",	MPROG_DEATH,	TRUE },
+    { "greet",	MPROG_GREET,	TRUE },
+    { "entry",	MPROG_ENTRY,	TRUE },
+    { "fight",	MPROG_FIGHT,	TRUE },
+    { "area",	MPROG_AREA,	TRUE },
+    { NULL,	0,		FALSE }
+};
+
+static const struct flag_type oprog_flag_names[] =
+{
+    { "get",		OPROG_GET,	TRUE },
+    { "drop",		OPROG_DROP,	TRUE },
+    { "sacrifice",	OPROG_SAC,	TRUE },
+    { "give",		OPROG_GIVE,	TRUE },
+    { "fight",		OPROG_FIGHT,	TRUE },
+    { "death",		OPROG_DEATH,	TRUE },
+    { "speech",		OPROG_SPEECH,	TRUE },
+    { "area",		OPROG_AREA,	TRUE },
+    { NULL,		0,		FALSE }
+};
+
+/*
+ * Yükleme / kopyalama yetki eşikleri: güven düzeyine göre en yüksek eşya
+ * seviyesi ve bedeli.
+ */
+static const struct { int trust; int max_level; int max_cost; } load_limits[] =
+{
+    { GOD,	INT_MAX,	INT_MAX },
+    { IMMORTAL,	20,		1000 },
+    { DEMI,	10,		500 },
+    { ANGEL,	5,		250 },
+    { AVATAR,	0,		100 }
+};
+
+static bool wiz_may_load( CHAR_DATA *ch, int level, int cost )
+{
+    size_t i;
+
+    for ( i = 0; i < sizeof(load_limits) / sizeof(load_limits[0]); i++ )
+	if ( IS_TRUSTED( ch, load_limits[i].trust )
+	&&   level <= load_limits[i].max_level && cost <= load_limits[i].max_cost )
+	    return TRUE;
+    return FALSE;
+}
+
+/*
+ * Ölümsüzün oda değiştirmesi: bamfout duyurusu, taşınma, bamfin duyurusu, bak.
+ */
+static void imm_announce( CHAR_DATA *ch, const char *custom, const char *dflt )
+{
+    CHAR_DATA *rch;
+
+    for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
+    {
+	if ( get_trust( rch ) < ch->invis_level )
+	    continue;
+	if ( custom != NULL && custom[0] != '\0' )
+	    act( "$t", ch, custom, rch, TO_VICT );
+	else
+	    act( dflt, ch, NULL, rch, TO_VICT );
+    }
+}
+
+static void imm_move( CHAR_DATA *ch, ROOM_INDEX_DATA *to )
+{
+    if ( ch->fighting != NULL )
+	stop_fighting( ch, TRUE );
+
+    imm_announce( ch, ch->pcdata != NULL ? ch->pcdata->bamfout : NULL,
+	"$n leaves in a swirling mist." );
+    char_from_room( ch );
+    char_to_room( ch, to );
+    imm_announce( ch, ch->pcdata != NULL ? ch->pcdata->bamfin : NULL,
+	"$n appears in a swirling mist." );
+    do_look( ch, "auto" );
+}
+
+/* Tam iyileştirme: kötü etkileri sök, yp/mp/zp doldur. */
+static void restore_char( CHAR_DATA *ch, CHAR_DATA *victim )
+{
+    const sh_int strip_sns[] = { gsn_plague, gsn_poison, gsn_blindness, gsn_sleep, gsn_curse };
+    size_t i;
+
+    for ( i = 0; i < sizeof(strip_sns) / sizeof(strip_sns[0]); i++ )
+	affect_strip( victim, strip_sns[i] );
+
+    victim->hit  = victim->max_hit;
+    victim->mana = victim->max_mana;
+    victim->move = victim->max_move;
+    update_pos( victim );
+    if ( victim->in_room != NULL )
+	act( "$n has restored you.", ch, NULL, victim, TO_VICT );
+}
+
+/*
+ * Bit açıp kapatan ceza komutları tablosu.
+ */
+enum { PEN_ACT, PEN_COMM };
+
+struct penalty
+{
+    int		field;		/* PEN_ACT: act, PEN_COMM: comm */
+    long	bit;
+    const char *usage;
+    const char *set_victim, *set_imm, *set_wiz;	/* *_wiz: "$N ... %s ..." (%s: kurban adı) */
+    const char *clr_victim, *clr_imm, *clr_wiz;
+    int		flags;		/* WIZ_ALLOW_NPC | WIZ_NEED_TRUST | WIZ_SAVE */
+};
+
+static void wiz_toggle_penalty( CHAR_DATA *ch, char *argument, const struct penalty *p )
+{
+    char arg[MAX_INPUT_LENGTH], buf[MAX_STRING_LENGTH];
+    CHAR_DATA *victim;
+    long *field;
+    bool set;
+
+    one_argument( argument, arg );
+    if ( ( victim = wiz_find_victim( ch, arg, p->usage, p->flags ) ) == NULL )
+	return;
+
+    field = p->field == PEN_ACT ? &victim->act : &victim->comm;
+    set = !IS_SET(*field, p->bit);
+    if ( set )
+	SET_BIT(*field, p->bit);
+    else
+	REMOVE_BIT(*field, p->bit);
+
+    if ( set ? p->set_victim != NULL : p->clr_victim != NULL )
+	send_to_char( set ? p->set_victim : p->clr_victim, victim );
+    send_to_char( set ? p->set_imm : p->clr_imm, ch );
+    if ( set ? p->set_wiz != NULL : p->clr_wiz != NULL )
+    {
+	snprintf( buf, sizeof(buf), set ? p->set_wiz : p->clr_wiz, victim->name );
+	wiznet( buf, ch, NULL, WIZ_PENALTIES, WIZ_SECURE, 0 );
+    }
+
+    if ( IS_SET(p->flags, WIZ_SAVE) )
+	save_char_obj( victim );
+}
+
 
 void do_cabal_scan( CHAR_DATA *ch, char *argument )
 {
@@ -146,12 +385,61 @@ void do_cabal_scan( CHAR_DATA *ch, char *argument )
   return;
 }
 
+/* objlist ölçütleri: where >= 0 ise bit etkisi, değilse konum listesi + enaz. */
+struct objlist_crit
+{
+    const char *name;
+    int		where;
+    int		locations[7];	/* -1 ile biter */
+};
+
+static const struct objlist_crit objlist_crits[] =
+{
+    { "imm",	 TO_IMMUNE, { -1 } },
+    { "res",	 TO_RESIST, { -1 } },
+    { "yp",	 -1, { APPLY_HIT, -1 } },
+    { "mp",	 -1, { APPLY_MANA, -1 } },
+    { "zp",	 -1, { APPLY_MOVE, -1 } },
+    { "zz",	 -1, { APPLY_DAMROLL, -1 } },
+    { "vz",	 -1, { APPLY_HITROLL, -1 } },
+    { "nitelik", -1, { APPLY_STR, APPLY_INT, APPLY_DEX, APPLY_WIS, APPLY_CON, APPLY_CHA, -1 } },
+    { NULL,	 -1, { -1 } }
+};
+
+static bool objlist_match( const AFFECT_DATA *paf, const struct objlist_crit *c, int enaz )
+{
+    int i;
+
+    if ( c->where >= 0 )
+	return paf->bitvector && paf->where == c->where;
+
+    for ( i = 0; c->locations[i] != -1; i++ )
+	if ( paf->location == c->locations[i] && paf->modifier >= enaz )
+	    return TRUE;
+    return FALSE;
+}
+
+/* "<arg> bir sayı olmalıdır" denetimiyle isteğe bağlı sayısal argüman. */
+static bool objlist_number( CHAR_DATA *ch, const char *arg, const char *label, int *out )
+{
+    if ( arg[0] == '\0' )
+	return TRUE;
+    if ( !is_number( (char *) arg ) )
+    {
+	printf_to_char( ch, "%s argümanı bir sayı olmalıdır.\n\r", label );
+	return FALSE;
+    }
+    *out = atoi( arg );
+    return TRUE;
+}
+
 void do_objlist( CHAR_DATA *ch, char *argument )
 {
     char arg1[MAX_INPUT_LENGTH];
     char arg2[MAX_INPUT_LENGTH];
     char arg3[MAX_INPUT_LENGTH];
     char arg4[MAX_INPUT_LENGTH];
+    const struct objlist_crit *crit;
     OBJ_DATA *obj;
     AFFECT_DATA *paf;
     int altseviye = -1;
@@ -162,228 +450,45 @@ void do_objlist( CHAR_DATA *ch, char *argument )
     argument = one_argument( argument, arg2 );
     argument = one_argument( argument, arg3 );
     argument = one_argument( argument, arg4 );
-	
-	if ( arg1[0] == '\0' )
+
+    if ( arg1[0] == '\0' )
+    {
+	send_to_char( "Argumanlar: <imm|res|yp|mp|zp|vz|zz|nitelik> <altseviye> <ustseviye> <enaz>\n\r", ch );
+	return;
+    }
+
+    if ( !objlist_number( ch, arg2, "altseviye", &altseviye )
+    ||   !objlist_number( ch, arg3, "ustseviye", &ustseviye )
+    ||   !objlist_number( ch, arg4, "enaz", &enaz ) )
+	return;
+
+    for ( crit = objlist_crits; crit->name != NULL; crit++ )
+	if ( !str_cmp( arg1, crit->name ) )
+	    break;
+    if ( crit->name == NULL )
+    {
+	do_objlist( ch, "" );
+	return;
+    }
+
+    for ( obj = object_list; obj != NULL; obj = obj->next )
+    {
+	if ( altseviye >= 0 && obj->level < altseviye )
+	    continue;
+	if ( ustseviye >= 0 && obj->level > ustseviye )
+	    continue;
+	if ( !obj->pIndexData->random_object )
+	    continue;
+
+	for ( paf = obj->affected; paf != NULL; paf = paf->next )
 	{
-		printf_to_char(ch,"Argumanlar: <imm|res|yp|mp|zp|vz|zz|nitelik> <altseviye> <ustseviye> <enaz>\n\r" );
-		return;
+	    if ( objlist_match( paf, crit, enaz ) )
+	    {
+		spell_identify( 0, 0, ch, obj, 0 );
+		send_to_char( "\n\r", ch );
+		break;
+	    }
 	}
-
-    if ( arg2[0] != '\0' )
-    {
-        if( is_number(arg2) )
-        {
-            altseviye = atoi(arg2);
-        }
-        else
-        {
-            send_to_char("altseviye argümanı bir sayı olmalıdır.\n\r",ch);
-            return;
-        }
-    }
-
-    if ( arg3[0] != '\0' )
-    {
-        if( is_number(arg3) )
-        {
-            ustseviye = atoi(arg3);
-        }
-        else
-        {
-            send_to_char("ustseviye argümanı bir sayı olmalıdır.\n\r",ch);
-            return;
-        }
-    }
-
-    if ( arg4[0] != '\0' )
-    {
-        if( is_number(arg4) )
-        {
-            enaz = atoi(arg4);
-        }
-        else
-        {
-            send_to_char("enaz argümanı bir sayı olmalıdır.\n\r",ch);
-            return;
-        }
-    }
-
-    if (!strcmp(arg1, "imm"))
-    {
-        for( obj=object_list; obj!=NULL; obj = obj->next )
-        {
-            if( altseviye >= 0 && obj->level < altseviye )
-                continue;
-            if( ustseviye >= 0 && obj->level > ustseviye )
-                continue;
-
-            if(obj->pIndexData->random_object && obj->affected != NULL)
-            {
-                for ( paf = obj->affected; paf != NULL; paf = paf->next )
-                {
-                    if (paf->bitvector && paf->where == TO_IMMUNE)
-                    {
-                        spell_identify( 0, 0, ch, obj ,0);
-                        send_to_char("\n\r",ch);
-                    }
-                }
-            }
-        }
-    }
-    else if (!strcmp(arg1, "res"))
-    {
-        for( obj=object_list; obj!=NULL; obj = obj->next )
-        {
-            if( altseviye >= 0 && obj->level < altseviye )
-                continue;
-            if( ustseviye >= 0 && obj->level > ustseviye )
-                continue;
-
-            if(obj->pIndexData->random_object && obj->affected != NULL)
-            {
-                for ( paf = obj->affected; paf != NULL; paf = paf->next )
-                {
-                    if (paf->bitvector && paf->where == TO_RESIST)
-                    {
-                        spell_identify( 0, 0, ch, obj ,0);
-                        send_to_char("\n\r",ch);
-                    }
-                }
-            }
-        }
-    }
-    else if (!strcmp(arg1, "yp"))
-    {
-        for( obj=object_list; obj!=NULL; obj = obj->next )
-        {
-            if( altseviye >= 0 && obj->level < altseviye )
-                continue;
-            if( ustseviye >= 0 && obj->level > ustseviye )
-                continue;
-
-            if(obj->pIndexData->random_object && obj->affected != NULL)
-            {
-                for ( paf = obj->affected; paf != NULL; paf = paf->next )
-                {
-                    if(paf->location == APPLY_HIT && paf->modifier >= enaz)
-                    {
-                        spell_identify( 0, 0, ch, obj ,0);
-                        send_to_char("\n\r",ch);
-                    }
-                }
-            }
-        }
-    }
-    else if (!strcmp(arg1, "mp"))
-    {
-        for( obj=object_list; obj!=NULL; obj = obj->next )
-        {
-            if( altseviye >= 0 && obj->level < altseviye )
-                continue;
-            if( ustseviye >= 0 && obj->level > ustseviye )
-                continue;
-
-            if(obj->pIndexData->random_object && obj->affected != NULL)
-            {
-                for ( paf = obj->affected; paf != NULL; paf = paf->next )
-                {
-                    if(paf->location == APPLY_MANA && paf->modifier >= enaz)
-                    {
-                        spell_identify( 0, 0, ch, obj ,0);
-                        send_to_char("\n\r",ch);
-                    }
-                }
-            }
-        }
-    }
-    else if (!strcmp(arg1, "zp"))
-    {
-        for( obj=object_list; obj!=NULL; obj = obj->next )
-        {
-            if( altseviye >= 0 && obj->level < altseviye )
-                continue;
-            if( ustseviye >= 0 && obj->level > ustseviye )
-                continue;
-
-            if(obj->pIndexData->random_object && obj->affected != NULL)
-            {
-                for ( paf = obj->affected; paf != NULL; paf = paf->next )
-                {
-                    if(paf->location == APPLY_MOVE && paf->modifier >= enaz)
-                    {
-                        spell_identify( 0, 0, ch, obj ,0);
-                        send_to_char("\n\r",ch);
-                    }
-                }
-            }
-        }
-    }
-    else if (!strcmp(arg1, "zz"))
-    {
-        for( obj=object_list; obj!=NULL; obj = obj->next )
-        {
-            if( altseviye >= 0 && obj->level < altseviye )
-                continue;
-            if( ustseviye >= 0 && obj->level > ustseviye )
-                continue;
-
-            if(obj->pIndexData->random_object && obj->affected != NULL)
-            {
-                for ( paf = obj->affected; paf != NULL; paf = paf->next )
-                {
-                    if(paf->location == APPLY_DAMROLL && paf->modifier >= enaz)
-                    {
-                        spell_identify( 0, 0, ch, obj ,0);
-                        send_to_char("\n\r",ch);
-                    }
-                }
-            }
-        }
-    }
-    else if (!strcmp(arg1, "vz"))
-    {
-        for( obj=object_list; obj!=NULL; obj = obj->next )
-        {
-            if( altseviye >= 0 && obj->level < altseviye )
-                continue;
-            if( ustseviye >= 0 && obj->level > ustseviye )
-                continue;
-
-            if(obj->pIndexData->random_object && obj->affected != NULL)
-            {
-                for ( paf = obj->affected; paf != NULL; paf = paf->next )
-                {
-                    if(paf->location == APPLY_HITROLL && paf->modifier >= enaz)
-                    {
-                        spell_identify( 0, 0, ch, obj ,0);
-                        send_to_char("\n\r",ch);
-                    }
-                }
-            }
-        }
-    }
-    else if (!strcmp(arg1, "nitelik"))
-    {
-        for( obj=object_list; obj!=NULL; obj = obj->next )
-        {
-            if( altseviye >= 0 && obj->level < altseviye )
-                continue;
-            if( ustseviye >= 0 && obj->level > ustseviye )
-                continue;
-
-            if(obj->pIndexData->random_object && obj->affected != NULL)
-            {
-                for ( paf = obj->affected; paf != NULL; paf = paf->next )
-                {
-                    if((paf->location == APPLY_STR || paf->location == APPLY_INT || paf->location == APPLY_DEX ||
-                        paf->location == APPLY_WIS || paf->location == APPLY_CON || paf->location == APPLY_CHA ) && paf->modifier >= enaz)
-                    {
-                        spell_identify( 0, 0, ch, obj ,0);
-                        send_to_char("\n\r",ch);
-                    }
-                }
-            }
-        }
     }
 }
 
@@ -392,8 +497,8 @@ void do_limited( CHAR_DATA *ch, char *argument )
   extern int top_obj_index;
   OBJ_DATA *obj;
   OBJ_INDEX_DATA *obj_index;
+  BUFFER *output;
   char  buf[MAX_STRING_LENGTH];
-  char  output[4 * MAX_STRING_LENGTH];
   int	lCount = 0;
   int	ingameCount;
   int 	nMatch;
@@ -403,15 +508,14 @@ void do_limited( CHAR_DATA *ch, char *argument )
   {
     obj_index = get_obj_index( atoi(argument) );
     if ( obj_index == NULL )  {
-      send_to_char( "Not found.\n\r", ch);
+      send_to_char( "Bulunamadı.\n\r", ch);
       return;
     }
     if ( obj_index->limit == -1 )  {
-      send_to_char( "Thats not a limited item.\n\r", ch );
+      send_to_char( "Bu sınırlı bir eşya değil.\n\r", ch );
       return;
     }
-    nMatch = 0;
-    snprintf(buf, sizeof(buf), "%-*s [%5d]  Limit: %3d  Current: %3d\n\r",
+    snprintf(buf, sizeof(buf), "%-*s [%5d]  Sınır: %3d  Şu an: %3d\n\r",
 		   utf8_width(obj_index->short_descr, 35), obj_index->short_descr,
 		   obj_index->vnum,
 	           obj_index->limit,
@@ -420,120 +524,117 @@ void do_limited( CHAR_DATA *ch, char *argument )
     send_to_char( buf, ch );
     ingameCount = 0;
     for ( obj=object_list; obj != NULL; obj=obj->next )
-	    if ( obj->pIndexData->vnum == obj_index->vnum )
-            {
-	      ingameCount++;
-	      if ( obj->carried_by != NULL )
-		snprintf(buf, sizeof(buf), "Carried by %-*s\n\r", utf8_width(obj->carried_by->name, 30), obj->carried_by->name);
-	      if ( obj->in_room != NULL )
-		snprintf(buf, sizeof(buf), "At %-*s [%d]\n\r", utf8_width(obj->in_room->name, 20), obj->in_room->name, obj->in_room->vnum);
-	      if ( obj->in_obj != NULL )
-		snprintf(buf, sizeof(buf), "In %-*s [%d] \n\r", utf8_width(obj->in_obj->short_descr, 20), obj->in_obj->short_descr, obj->in_obj->pIndexData->vnum);
-	      send_to_char( buf, ch );
-	    }
-    snprintf(buf, sizeof(buf), "  %d found in game. %d should be in pFiles.\n\r",
-			ingameCount, obj_index->count-ingameCount);
-	    send_to_char( buf, ch );
-   return;
+    {
+	if ( obj->pIndexData->vnum != obj_index->vnum )
+	    continue;
+	ingameCount++;
+	if ( obj->carried_by != NULL )
+	    printf_to_char( ch, "Taşıyan: %s\n\r", obj->carried_by->name );
+	else if ( obj->in_room != NULL )
+	    printf_to_char( ch, "Oda: %s [%d]\n\r", obj->in_room->name, obj->in_room->vnum );
+	else if ( obj->in_obj != NULL )
+	    printf_to_char( ch, "İçinde: %s [%d]\n\r", obj->in_obj->short_descr, obj->in_obj->pIndexData->vnum );
+	else
+	    send_to_char( "Hiçlikte.\n\r", ch );
+    }
+    printf_to_char( ch, "  Oyunda %d bulundu, %d oyuncu dosyalarında olmalı.\n\r",
+	ingameCount, obj_index->count - ingameCount );
+    return;
   }
 
   nMatch = 0;
-  output[0] = '\0';
+  output = new_buf();
   for ( vnum = 0; nMatch < top_obj_index; vnum++ )
       if ( ( obj_index = get_obj_index( vnum ) ) != NULL )
       {
         nMatch++;
 	if ( obj_index->limit != -1 )  {
 	  lCount++;
-          snprintf(buf, sizeof(buf), "%-*s [%5d]  Limit: %3d  Current: %3d\n\r",
+          snprintf(buf, sizeof(buf), "%-*s [%5d]  Sınır: %3d  Şu an: %3d\n\r",
 		   utf8_width(obj_index->short_descr, 37), obj_index->short_descr,
 		   obj_index->vnum,
 	           obj_index->limit,
 		   obj_index->count);
 	  utf8_upper_first(buf, sizeof(buf));
-	  strcat( output, buf );
+	  add_buf( output, buf );
 	}
       }
-  snprintf(buf, sizeof(buf), "\n\r%d of %d objects are limited.\n\r", lCount, nMatch );
-  strcat( output, buf );
-  page_to_char(output,ch);
-  return;
+  snprintf(buf, sizeof(buf), "\n\r%d / %d eşya sınırlı.\n\r", lCount, nMatch );
+  add_buf( output, buf );
+  page_to_char( buf_string(output), ch );
+  free_buf( output );
+}
+
+static void wiznet_set( CHAR_DATA *ch, bool on )
+{
+    if ( on )
+    {
+	send_to_char("Wiznet'e hoş geldin!\n\r",ch);
+	SET_BIT(ch->wiznet,WIZ_ON);
+    }
+    else
+    {
+	send_to_char("Wiznet'ten çıkıyorsun.\n\r",ch);
+	REMOVE_BIT(ch->wiznet,WIZ_ON);
+    }
+}
+
+/* only_set: yalnızca açık olanlar; değilse güven düzeyine açık tüm seçenekler. */
+static void wiznet_list( CHAR_DATA *ch, bool only_set )
+{
+    BUFFER *out = new_buf();
+    int flag;
+
+    if ( only_set && !IS_SET(ch->wiznet,WIZ_ON) )
+	add_buf( out, "off " );
+
+    for ( flag = 0; wiznet_table[flag].name != NULL; flag++ )
+    {
+	if ( only_set ? IS_SET(ch->wiznet, wiznet_table[flag].flag)
+		      : wiznet_table[flag].level <= get_trust(ch) )
+	{
+	    add_buf( out, (char *) wiznet_table[flag].name );
+	    add_buf( out, " " );
+	}
+    }
+    add_buf( out, "\n\r" );
+    send_to_char( buf_string(out), ch );
+    free_buf( out );
 }
 
 void do_wiznet( CHAR_DATA *ch, char *argument )
 {
     int flag;
-    char buf[MAX_STRING_LENGTH];
 
     if ( argument[0] == '\0' )
     {
-      	if (IS_SET(ch->wiznet,WIZ_ON))
-      	{
-            send_to_char("Signing off of Wiznet.\n\r",ch);
-            REMOVE_BIT(ch->wiznet,WIZ_ON);
-      	}
-      	else
-      	{
-            send_to_char("Welcome to Wiznet!\n\r",ch);
-            SET_BIT(ch->wiznet,WIZ_ON);
-      	}
+	wiznet_set( ch, !IS_SET(ch->wiznet,WIZ_ON) );
       	return;
     }
 
     if (!str_prefix(argument,"on"))
     {
-	send_to_char("Welcome to Wiznet!\n\r",ch);
-	SET_BIT(ch->wiznet,WIZ_ON);
+	wiznet_set( ch, TRUE );
 	return;
     }
 
     if (!str_prefix(argument,"off"))
     {
-	send_to_char("Signing off of Wiznet.\n\r",ch);
-	REMOVE_BIT(ch->wiznet,WIZ_ON);
+	wiznet_set( ch, FALSE );
 	return;
     }
 
-    /* show wiznet status */
     if (!str_prefix(argument,"status"))
     {
-	buf[0] = '\0';
-
-	if (!IS_SET(ch->wiznet,WIZ_ON))
-	    strcat(buf,"off ");
-
-	for (flag = 0; wiznet_table[flag].name != NULL; flag++)
-	    if (IS_SET(ch->wiznet,wiznet_table[flag].flag))
-	    {
-		strcat(buf,wiznet_table[flag].name);
-		strcat(buf," ");
-	    }
-
-	strcat(buf,"\n\r");
-
-	send_to_char("Wiznet status:\n\r",ch);
-	send_to_char(buf,ch);
+	send_to_char("Wiznet durumu:\n\r",ch);
+	wiznet_list( ch, TRUE );
 	return;
     }
 
     if (!str_prefix(argument,"show"))
-    /* list of all wiznet options */
     {
-	buf[0] = '\0';
-
-	for (flag = 0; wiznet_table[flag].name != NULL; flag++)
-	{
-	    if (wiznet_table[flag].level <= get_trust(ch))
-	    {
-	    	strcat(buf,wiznet_table[flag].name);
-	    	strcat(buf," ");
-	    }
-	}
-
-	strcat(buf,"\n\r");
-
-	send_to_char("Wiznet options available to you are:\n\r",ch);
-	send_to_char(buf,ch);
+	send_to_char("Kullanabileceğin wiznet seçenekleri:\n\r",ch);
+	wiznet_list( ch, FALSE );
 	return;
     }
 
@@ -541,27 +642,20 @@ void do_wiznet( CHAR_DATA *ch, char *argument )
 
     if (flag == -1 || get_trust(ch) < wiznet_table[flag].level)
     {
-	send_to_char("No such option.\n\r",ch);
+	send_to_char("Öyle bir seçenek yok.\n\r",ch);
 	return;
     }
 
     if (IS_SET(ch->wiznet,wiznet_table[flag].flag))
     {
-	snprintf(buf, sizeof(buf),"You will no longer see %s on wiznet.\n\r",
-	        wiznet_table[flag].name);
-	send_to_char(buf,ch);
+	printf_to_char( ch, "Artık wiznet'te %s görmeyeceksin.\n\r", wiznet_table[flag].name );
 	REMOVE_BIT(ch->wiznet,wiznet_table[flag].flag);
-    	return;
     }
     else
     {
-    	snprintf(buf, sizeof(buf),"You will now see %s on wiznet.\n\r",
-		wiznet_table[flag].name);
-	send_to_char(buf,ch);
+	printf_to_char( ch, "Artık wiznet'te %s göreceksin.\n\r", wiznet_table[flag].name );
     	SET_BIT(ch->wiznet,wiznet_table[flag].flag);
-	return;
     }
-
 }
 
 void wiznet(const char *string, CHAR_DATA *ch, OBJ_DATA *obj,
@@ -631,66 +725,53 @@ void do_tick( CHAR_DATA *ch, char *argument )
 }
 
 /* equips a character */
+/* Okul eşyası verir; taşıma sınırı dolduysa FALSE. */
+static bool outfit_give( CHAR_DATA *ch, int vnum, bool zero_cost )
+{
+    OBJ_INDEX_DATA *pObjIndex;
+    OBJ_DATA *obj;
+
+    if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
+    {
+	bug( "outfit_give: eşya yok, vnum %d.", vnum );
+	return TRUE;
+    }
+
+    if ( ch->carry_number + 1 > can_carry_n(ch) )
+    {
+	send_to_char( "Bu kadar çok eşya taşıyamazsın.\n\r", ch );
+	return FALSE;
+    }
+
+    obj = create_object( pObjIndex, 0 );
+    if ( zero_cost )
+	obj->cost = 0;
+    obj->condition = 100;
+    obj_to_char( obj, ch );
+    return TRUE;
+}
+
+/* equips a character */
 void do_outfit ( CHAR_DATA *ch, char *argument )
 {
-    OBJ_DATA *obj;
-    int vnum;
-
     if ((ch->level > 5 || IS_NPC(ch)) && !IS_IMMORTAL(ch))
     {
-	send_to_char("Find it yourself!\n\r",ch);
+	send_to_char("Kendin bul!\n\r",ch);
 	return;
     }
 
-    if (ch->carry_number +  1 > can_carry_n(ch))
-    {
-            send_to_char( "You can't carry that many items.\n\r", ch );
-            return;
-    }
+    if ( get_light_char( ch ) == NULL && !outfit_give( ch, OBJ_VNUM_SCHOOL_BANNER, TRUE ) )
+	return;
 
-    if ( ( obj = get_light_char( ch ) ) == NULL )
-    {
-        obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_BANNER), 0 );
-	obj->cost = 0;
-	obj->condition = 100;
-        obj_to_char( obj, ch );
-    }
+    if ( get_eq_char( ch, WEAR_BODY ) == NULL && !outfit_give( ch, OBJ_VNUM_SCHOOL_VEST, TRUE ) )
+	return;
 
-    if (ch->carry_number +  1 > can_carry_n(ch))
-    {
-            send_to_char( "You can't carry that many items.\n\r", ch );
-            return;
-    }
+    if ( get_wield_char( ch, FALSE ) == NULL
+    &&   !outfit_give( ch, class_table[ch->iclass].weapon, FALSE ) )
+	return;
 
-    if ( ( obj = get_eq_char( ch, WEAR_BODY ) ) == NULL )
-    {
-	obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_VEST), 0 );
-	obj->cost = 0;
-	obj->condition = 100;
-        obj_to_char( obj, ch );
-    }
-
-
-    if (ch->carry_number +  1 > can_carry_n(ch))
-    {
-            send_to_char( "You can't carry that many items.\n\r", ch );
-            return;
-    }
-
-    /* do the weapon thing */
-    if ((obj = get_wield_char(ch,FALSE) ) == NULL)
-    {
-    	vnum = OBJ_VNUM_SCHOOL_SWORD; /* just in case! */
-        vnum = class_table[ch->iclass].weapon;
-    	obj = create_object(get_obj_index(vnum),0);
-	obj->condition = 100;
-     	obj_to_char(obj,ch);
-    }
-
-    obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_SHIELD), 0 );
-    obj->cost = 0;
-    obj->condition = 100;
-    obj_to_char( obj, ch );
+    if ( !outfit_give( ch, OBJ_VNUM_SCHOOL_SHIELD, TRUE ) )
+	return;
 
     send_to_char("Tanrılar sana bazı eşyalar bahşediyor.\n\r",ch);
     send_to_char("Taşıdığın eşyaları görüntülemek için 'envanter' yaz.\n\r",ch);
@@ -701,74 +782,71 @@ void do_outfit ( CHAR_DATA *ch, char *argument )
 /* RT nochannels command, for those spammers */
 void do_nochannels( CHAR_DATA *ch, char *argument )
 {
-    char arg[MAX_INPUT_LENGTH], buf[MAX_STRING_LENGTH];
-    CHAR_DATA *victim;
-
-    one_argument( argument, arg );
-
-    if ( arg[0] == '\0' )
+    static const struct penalty p =
     {
-        send_to_char( "Nochannel whom?", ch );
-        return;
-    }
-
-    if ( ( victim = get_char_world( ch, arg ) ) == NULL )
-    {
-        send_to_char( "They aren't here.\n\r", ch );
-        return;
-    }
-
-    if ( get_trust( victim ) >= get_trust( ch ) )
-    {
-        send_to_char( "You failed.\n\r", ch );
-        return;
-    }
-
-    if ( IS_SET(victim->comm, COMM_NOCHANNELS) )
-    {
-        REMOVE_BIT(victim->comm, COMM_NOCHANNELS);
-        send_to_char( "The gods have restored your channel priviliges.\n\r",
-		      victim );
-        send_to_char( "NOCHANNELS removed.\n\r", ch );
-	snprintf(buf, sizeof(buf),"$N restores channels to %s",victim->name);
-	wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
-    }
-    else
-    {
-        SET_BIT(victim->comm, COMM_NOCHANNELS);
-        send_to_char( "The gods have revoked your channel priviliges.\n\r",
-		       victim );
-        send_to_char( "NOCHANNELS set.\n\r", ch );
-	snprintf(buf, sizeof(buf),"$N revokes %s's channels.",victim->name);
-	wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
-    }
-
-    return;
+	PEN_COMM, COMM_NOCHANNELS, "Kimin kanalları?\n\r",
+	"Tanrılar kanal ayrıcalıklarını geri aldı.\n\r", "NOCHANNELS açıldı.\n\r", "$N %s'ın kanallarını kapattı.",
+	"Tanrılar kanal ayrıcalıklarını geri verdi.\n\r", "NOCHANNELS kaldırıldı.\n\r", "$N %s'ın kanallarını açtı.",
+	WIZ_NEED_TRUST
+    };
+    wiz_toggle_penalty( ch, argument, &p );
 }
 
+
+/* out'a en fazla n bayt ekler (tampon sınırlı). */
+static void smote_append( char *out, size_t size, size_t *len, const char *s, size_t n )
+{
+    if ( *len + n >= size )
+	n = size - 1 - *len;
+    memcpy( out + *len, s, n );
+    *len += n;
+    out[*len] = '\0';
+}
+
+/* text içindeki 'name' geçişlerini "you", "name's" geçişlerini "your" yapar. */
+static void smote_replace( char *out, size_t size, const char *text, const char *name )
+{
+    size_t nlen = strlen( name ), len = 0;
+    const char *p = text, *hit;
+
+    out[0] = '\0';
+    while ( ( hit = strstr( p, name ) ) != NULL )
+    {
+	smote_append( out, size, &len, p, (size_t)(hit - p) );
+	if ( hit[nlen] == '\'' && hit[nlen + 1] == 's' )
+	{
+	    smote_append( out, size, &len, "your", 4 );
+	    p = hit + nlen + 2;
+	}
+	else
+	{
+	    smote_append( out, size, &len, "you", 3 );
+	    p = hit + nlen;
+	}
+    }
+    smote_append( out, size, &len, p, strlen( p ) );
+}
 
 void do_smote(CHAR_DATA *ch, char *argument )
 {
     CHAR_DATA *vch;
-    char *letter,*name;
-    char last[MAX_INPUT_LENGTH], temp[MAX_STRING_LENGTH];
-    size_t matches = 0;
+    char temp[MAX_STRING_LENGTH];
 
     if ( !IS_NPC(ch) && IS_SET(ch->comm, COMM_NOEMOTE) )
     {
-        send_to_char( "You can't show your emotions.\n\r", ch );
+        send_to_char( "Duygularını gösteremezsin.\n\r", ch );
         return;
     }
 
     if ( argument[0] == '\0' )
     {
-        send_to_char( "Emote what?\n\r", ch );
+        send_to_char( "Ne yapıyorsun?\n\r", ch );
         return;
     }
 
     if (strstr(argument,ch->name) == NULL)
     {
-	send_to_char("You must include your name in an smote.\n\r",ch);
+	send_to_char("smote içinde kendi adın geçmeli.\n\r",ch);
 	return;
     }
 
@@ -780,126 +858,56 @@ void do_smote(CHAR_DATA *ch, char *argument )
         if (vch->desc == NULL || vch == ch)
             continue;
 
-        if ((letter = strstr(argument,vch->name)) == NULL)
-        {
+	if ( strstr( argument, vch->name ) == NULL )
+	{
 	    send_to_char(argument,vch);
 	    send_to_char("\n\r",vch);
-            continue;
-        }
+	    continue;
+	}
 
-        strcpy(temp,argument);
-        temp[strlen(argument) - strlen(letter)] = '\0';
-        last[0] = '\0';
-        name = vch->name;
-
-        for (; *letter != '\0'; letter++)
-        {
-            if (*letter == '\'' && matches == strlen(vch->name))
-            {
-                strcat(temp,"r");
-                continue;
-            }
-
-            if (*letter == 's' && matches == strlen(vch->name))
-            {
-                matches = 0;
-                continue;
-            }
-
-            if (matches == strlen(vch->name))
-            {
-                matches = 0;
-            }
-
-            if (*letter == *name)
-            {
-                matches++;
-                name++;
-                if (matches == strlen(vch->name))
-                {
-                    strcat(temp,"you");
-                    last[0] = '\0';
-                    name = vch->name;
-                    continue;
-                }
-                strncat(last,letter,1);
-                continue;
-            }
-
-            matches = 0;
-            strcat(temp,last);
-            strncat(temp,letter,1);
-            last[0] = '\0';
-            name = vch->name;
-        }
-
+	smote_replace( temp, sizeof(temp), argument, vch->name );
 	send_to_char(temp,vch);
 	send_to_char("\n\r",vch);
     }
+}
 
-    return;
+/* bamfin/bamfout ayarı: boş argüman gösterir, argüman ölümsüzün adını içermeli. */
+static void set_bamf( CHAR_DATA *ch, char *argument, char **field, const char *label )
+{
+    if ( IS_NPC(ch) )
+	return;
+
+    smash_tilde( argument );
+
+    if (argument[0] == '\0')
+    {
+	printf_to_char( ch, "%s iletin: %s\n\r", label, *field );
+	return;
+    }
+
+    if ( strstr(argument,ch->name) == NULL)
+    {
+	send_to_char("Kendi adın geçmeli.\n\r",ch);
+	return;
+    }
+
+    free_string( *field );
+    *field = str_dup( argument );
+    printf_to_char( ch, "%s iletin artık: %s\n\r", label, *field );
 }
 
 void do_bamfin( CHAR_DATA *ch, char *argument )
 {
-    char buf[MAX_STRING_LENGTH];
-
     if ( !IS_NPC(ch) )
-    {
-	smash_tilde( argument );
-
-	if (argument[0] == '\0')
-	{
-	    snprintf(buf, sizeof(buf),"Your poofin is %s\n\r",ch->pcdata->bamfin);
-	    send_to_char(buf,ch);
-	    return;
-	}
-
-	if ( strstr(argument,ch->name) == NULL)
-	{
-	    send_to_char("You must include your name.\n\r",ch);
-	    return;
-	}
-
-	free_string( ch->pcdata->bamfin );
-	ch->pcdata->bamfin = str_dup( argument );
-
-        snprintf(buf, sizeof(buf),"Your poofin is now %s\n\r",ch->pcdata->bamfin);
-        send_to_char(buf,ch);
-    }
-    return;
+	set_bamf( ch, argument, &ch->pcdata->bamfin, "Geliş (poofin)" );
 }
 
 
 
 void do_bamfout( CHAR_DATA *ch, char *argument )
 {
-    char buf[MAX_STRING_LENGTH];
-
     if ( !IS_NPC(ch) )
-    {
-        smash_tilde( argument );
-
-        if (argument[0] == '\0')
-        {
-            snprintf(buf, sizeof(buf),"Your poofout is %s\n\r",ch->pcdata->bamfout);
-            send_to_char(buf,ch);
-            return;
-        }
-
-        if ( strstr(argument,ch->name) == NULL)
-        {
-            send_to_char("You must include your name.\n\r",ch);
-            return;
-        }
-
-        free_string( ch->pcdata->bamfout );
-        ch->pcdata->bamfout = str_dup( argument );
-
-        snprintf(buf, sizeof(buf),"Your poofout is now %s\n\r",ch->pcdata->bamfout);
-        send_to_char(buf,ch);
-    }
-    return;
+	set_bamf( ch, argument, &ch->pcdata->bamfout, "Gidiş (poofout)" );
 }
 
 
@@ -910,40 +918,17 @@ void do_deny( CHAR_DATA *ch, char *argument )
     CHAR_DATA *victim;
 
     one_argument( argument, arg );
-    if ( arg[0] == '\0' )
-    {
-	send_to_char( "Deny whom?\n\r", ch );
+    if ( ( victim = wiz_find_victim( ch, arg, "Kime giriş yasağı?\n\r", WIZ_NEED_TRUST ) ) == NULL )
 	return;
-    }
-
-    if ( ( victim = get_char_world( ch, arg ) ) == NULL )
-    {
-	send_to_char( "They aren't here.\n\r", ch );
-	return;
-    }
-
-    if ( IS_NPC(victim) )
-    {
-	send_to_char( "Not on NPC's.\n\r", ch );
-	return;
-    }
-
-    if ( get_trust( victim ) >= get_trust( ch ) )
-    {
-	send_to_char( "You failed.\n\r", ch );
-	return;
-    }
 
     SET_BIT(victim->act, PLR_DENY);
-    send_to_char( "You are denied access!\n\r", victim );
-    snprintf(buf, sizeof(buf),"$N denies access to %s",victim->name);
+    send_to_char( "Girişin yasaklandı!\n\r", victim );
+    snprintf(buf, sizeof(buf),"$N %s'ın girişini yasakladı.",victim->name);
     wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
-    send_to_char( "OK.\n\r", ch );
+    send_to_char( MSG_OK, ch );
     save_char_obj(victim);
     stop_fighting(victim,TRUE);
     do_quit( victim, "" );
-
-    return;
 }
 
 
@@ -1103,11 +1088,10 @@ void do_transfer( CHAR_DATA *ch, char *argument )
 	    return;
 	}
 
-/*	if ( !is_room_owner(ch,location) && room_is_private( location ) */
 	if ( room_is_private( location )
 	&&  get_trust(ch) < MAX_LEVEL)
 	{
-	    send_to_char( "That room is private right now.\n\r", ch );
+	    send_to_char( MSG_PRIVATE_ROOM, ch );
 	    return;
 	}
     }
@@ -1160,11 +1144,10 @@ void do_at( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-/*    if (!is_room_owner(ch,location) && room_is_private( location ) */
     if ( room_is_private( location )
     &&  get_trust(ch) < MAX_LEVEL)
     {
-	send_to_char( "That room is private right now.\n\r", ch );
+	send_to_char( MSG_PRIVATE_ROOM, ch );
 	return;
     }
 
@@ -1198,108 +1181,45 @@ void do_at( CHAR_DATA *ch, char *argument )
 void do_goto( CHAR_DATA *ch, char *argument )
 {
     ROOM_INDEX_DATA *location;
-    CHAR_DATA *rch;
 
     if ( argument[0] == '\0' )
     {
-	send_to_char( "Goto where?\n\r", ch );
+	send_to_char( "Nereye gidiyorsun?\n\r", ch );
 	return;
     }
 
     if ( ( location = find_location( ch, argument ) ) == NULL )
     {
-	send_to_char( "No such location.\n\r", ch );
+	send_to_char( MSG_NO_LOCATION, ch );
 	return;
     }
 
-
-    if ( ch->fighting != NULL )
-	stop_fighting( ch, TRUE );
-
-    for (rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room)
-    {
-	if (get_trust(rch) >= ch->invis_level)
-	{
-	    if (ch->pcdata != NULL && ch->pcdata->bamfout[0] != '\0')
-		act("$t",ch,ch->pcdata->bamfout,rch,TO_VICT);
-	    else
-		act("$n leaves in a swirling mist.",ch,NULL,rch,TO_VICT);
-	}
-    }
-
-    char_from_room( ch );
-    char_to_room( ch, location );
-
-
-    for (rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room)
-    {
-        if (get_trust(rch) >= ch->invis_level)
-        {
-            if (ch->pcdata != NULL && ch->pcdata->bamfin[0] != '\0')
-                act("$t",ch,ch->pcdata->bamfin,rch,TO_VICT);
-            else
-                act("$n appears in a swirling mist.",ch,NULL,rch,TO_VICT);
-        }
-    }
-
-    do_look( ch, "auto" );
-    return;
+    imm_move( ch, location );
 }
 
 void do_violate( CHAR_DATA *ch, char *argument )
 {
     ROOM_INDEX_DATA *location;
-    CHAR_DATA *rch;
 
     if ( argument[0] == '\0' )
     {
-        send_to_char( "Goto where?\n\r", ch );
+        send_to_char( "Nereye gidiyorsun?\n\r", ch );
         return;
     }
 
     if ( ( location = find_location( ch, argument ) ) == NULL )
     {
-        send_to_char( "No such location.\n\r", ch );
+        send_to_char( MSG_NO_LOCATION, ch );
         return;
     }
 
     if (!room_is_private( location ))
     {
-        send_to_char( "That room isn't private, use goto.\n\r", ch );
+        send_to_char( "O oda özel değil, goto kullan.\n\r", ch );
         return;
     }
 
-    if ( ch->fighting != NULL )
-        stop_fighting( ch, TRUE );
-
-    for (rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room)
-    {
-        if (get_trust(rch) >= ch->invis_level)
-        {
-            if (ch->pcdata != NULL && ch->pcdata->bamfout[0] != '\0')
-                act("$t",ch,ch->pcdata->bamfout,rch,TO_VICT);
-            else
-                act("$n leaves in a swirling mist.",ch,NULL,rch,TO_VICT);
-        }
-    }
-
-    char_from_room( ch );
-    char_to_room( ch, location );
-
-
-    for (rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room)
-    {
-        if (get_trust(rch) >= ch->invis_level)
-        {
-            if (ch->pcdata != NULL && ch->pcdata->bamfin[0] != '\0')
-                act("$t",ch,ch->pcdata->bamfin,rch,TO_VICT);
-            else
-                act("$n appears in a swirling mist.",ch,NULL,rch,TO_VICT);
-        }
-    }
-
-    do_look( ch, "auto" );
-    return;
+    imm_move( ch, location );
 }
 
 /* RT to replace the 3 stat commands */
@@ -1389,25 +1309,23 @@ void do_rstat( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-/*    if (!is_room_owner(ch,location) && ch->in_room != location  */
-    if ( ch->in_room != location
-    &&  room_is_private( location ) && !IS_TRUSTED(ch,IMPLEMENTOR))
+    if ( wiz_room_blocked( ch, location ) )
     {
-	send_to_char( "That room is private right now.\n\r", ch );
+	send_to_char( MSG_PRIVATE_ROOM, ch );
 	return;
     }
 
-    if (ch->in_room->affected_by)
+    if (location->affected_by)
     {
 	snprintf(buf, sizeof(buf), "Affected by %s\n\r",
-	    raffect_bit_name(ch->in_room->affected_by));
+	    raffect_bit_name(location->affected_by));
 	send_to_char(buf,ch);
     }
 
-    if (ch->in_room->room_flags)
+    if (location->room_flags)
     {
 	snprintf(buf, sizeof(buf), "Roomflags %s\n\r",
-	    flag_room_name(ch->in_room->room_flags));
+	    flag_room_name(location->room_flags));
 	send_to_char(buf,ch);
     }
 
@@ -1828,27 +1746,8 @@ void do_ostat( CHAR_DATA *ch, char *argument )
             send_to_char(buf,ch);
         }
     }
-    snprintf(buf, sizeof(buf), "Object progs: " );
-    if ( obj->pIndexData->progtypes != 0 )  {
-	if ( IS_SET(obj->progtypes, OPROG_GET ) )
-	   strcat( buf, "get " );
-	if ( IS_SET(obj->progtypes, OPROG_DROP ) )
-	   strcat( buf, "drop " );
-	if ( IS_SET(obj->progtypes, OPROG_SAC ) )
-	   strcat( buf, "sacrifice " );
-	if ( IS_SET(obj->progtypes, OPROG_GIVE ) )
-	   strcat( buf, "give " );
-	if ( IS_SET(obj->progtypes, OPROG_FIGHT ) )
-	   strcat( buf, "fight " );
-	if ( IS_SET(obj->progtypes, OPROG_DEATH ) )
-	   strcat( buf, "death " );
-	if ( IS_SET(obj->progtypes, OPROG_SPEECH ) )
-	   strcat( buf, "speech " );
-	if ( IS_SET(obj->progtypes, OPROG_AREA ) )
-	   strcat( buf, "area " );
-    }
-    strcat( buf, "\n\r" );
-    send_to_char( buf, ch );
+    printf_to_char( ch, "Object progs: %s\n\r",
+	obj->pIndexData->progtypes != 0 ? flag_names( oprog_flag_names, obj->progtypes ) : "" );
     snprintf(buf, sizeof(buf),"Damage condition : %d (%s) ", obj->condition,
 			get_cond_alias(obj) );
     send_to_char(buf,ch);
@@ -1864,9 +1763,9 @@ void do_mobstat( CHAR_DATA *ch, char *argument )
 
   one_argument( argument, arg1 );
 
-  if ( arg1[0] == '\0' )
+  if ( arg1[0] == '\0' || !is_number( arg1 ) )
   {
-    printf_to_char(ch,"Eksik argüman.\n\r");
+    printf_to_char(ch,"Kullanım: mobstat <seviye>\n\r");
     return;
   }
 
@@ -1875,8 +1774,7 @@ void do_mobstat( CHAR_DATA *ch, char *argument )
       if (!IS_NPC(gch))
           continue;
       if (gch->level == atoi(arg1))
-        printf_to_char(ch,"Level: %-3d  Damroll: %-4d  Hitroll: %-4d  Yp: %-6d Mp: %-6d Zp: %-6d\n\r",atoi( arg1 ),gch->damroll,gch->hitroll,gch->hit,gch->mana,gch->move);
-
+        printf_to_char(ch,"Level: %-3d  Damroll: %-4d  Hitroll: %-4d  Yp: %-6d Mp: %-6d Zp: %-6d\n\r",gch->level,gch->damroll,gch->hitroll,gch->hit,gch->mana,gch->move);
   }
 }
 
@@ -1898,16 +1796,16 @@ void do_mstat( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    if ( ( victim = get_char_room( ch, argument ) ) == NULL )
+    if ( ( victim = get_char_room( ch, arg ) ) == NULL )
     {
 	send_to_char( "They aren't here.\n\r", ch );
 	return;
     }
 
-    snprintf(buf, sizeof(buf), "Name: [%s] Reset Zone: [%s] Logon: %s\r",
+    snprintf(buf, sizeof(buf), "Name: [%s] Reset Zone: [%s] Logon: %s\n\r",
 	victim->name,
 	(IS_NPC(victim) &&victim->zone) ? victim->zone->name : "?",
-	ctime( &ch->logon ) );
+	fmt_time( victim->logon ) );
     send_to_char( buf, ch );
 
     snprintf(buf, sizeof(buf),
@@ -2128,32 +2026,11 @@ void do_mstat( CHAR_DATA *ch, char *argument )
 	}
        }
 
-    if ( IS_NPC(victim)  )
-      if ( victim->pIndexData->progtypes != 0 )  {
-        snprintf(buf, sizeof(buf), "Mobile progs: " );
-	if ( IS_SET( victim->progtypes, MPROG_BRIBE ) )
-	  strcat( buf, "bribe " );
-	if ( IS_SET( victim->progtypes, MPROG_SPEECH ) )
-	  strcat( buf, "speech " );
-	if ( IS_SET( victim->progtypes, MPROG_GIVE ) )
-	  strcat( buf, "give " );
-	if ( IS_SET( victim->progtypes, MPROG_DEATH ) )
-	  strcat( buf, "death " );
-	if ( IS_SET( victim->progtypes, MPROG_GREET ) )
-	  strcat( buf, "greet " );
-	if ( IS_SET( victim->progtypes, MPROG_ENTRY ) )
-	  strcat( buf, "entry " );
-	if ( IS_SET( victim->progtypes, MPROG_FIGHT ) )
-	  strcat( buf, "fight " );
-	if ( IS_SET( victim->progtypes, MPROG_AREA ) )
-	  strcat( buf, "area " );
-        strcat( buf, "\n\r" );
-        send_to_char( buf, ch );
-    }
-    snprintf(buf, sizeof(buf), "Last fought: %*s  Last fight time: %s",
+    if ( IS_NPC(victim) && victim->pIndexData->progtypes != 0 )
+	printf_to_char( ch, "Mobile progs: %s\n\r", flag_names( mprog_flag_names, victim->progtypes ) );
+    printf_to_char( ch, "Last fought: %*s  Last fight time: %s\n\r",
 	utf8_width(victim->last_fought!=NULL?victim->last_fought->name:"none", 10), victim->last_fought!=NULL?victim->last_fought->name:"none",
-	ctime( &(victim->last_fight_time) ));
-    send_to_char( buf, ch );
+	fmt_time( victim->last_fight_time ) );
     snprintf(buf, sizeof(buf), "In_mind: [%s] Hunting: [%s]\n\r",
 		victim->in_mind != NULL ? victim->in_mind : "none",
 		victim->hunting != NULL ? victim->hunting->name : "none");
@@ -2448,14 +2325,11 @@ void do_shutdown( CHAR_DATA *ch, char *argument )
 {
     char buf[MAX_STRING_LENGTH];
 
-    if (ch->invis_level < LEVEL_HERO)
     snprintf(buf, sizeof(buf), "Shutdown by %s.", ch->name );
     append_file( ch, (char*)SHUTDOWN_FILE, buf );
-    strcat( buf, "\n\r" );
     if (ch->invis_level < LEVEL_HERO)
     	do_duyuru( ch, buf );
     reboot_uzakdiyarlar(FALSE);
-    return;
 }
 
 void do_protect( CHAR_DATA *ch, char *argument)
@@ -2536,10 +2410,9 @@ void do_snoop( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    if (!is_room_owner(ch,victim->in_room) && ch->in_room != victim->in_room
-    &&  room_is_private(victim->in_room) && !IS_TRUSTED(ch,IMPLEMENTOR))
+    if ( wiz_room_blocked( ch, victim->in_room ) )
     {
-        send_to_char("That character is in a private room.\n\r",ch);
+        send_to_char("O karakter özel bir odada.\n\r",ch);
         return;
     }
 
@@ -2612,10 +2485,9 @@ void do_switch( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    if (!is_room_owner(ch,victim->in_room) && ch->in_room != victim->in_room
-    &&  room_is_private(victim->in_room) && !IS_TRUSTED(ch,IMPLEMENTOR))
+    if ( wiz_room_blocked( ch, victim->in_room ) )
     {
-	send_to_char("That character is in a private room.\n\r",ch);
+	send_to_char("O karakter özel bir odada.\n\r",ch);
 	return;
     }
 
@@ -2634,7 +2506,11 @@ void do_switch( CHAR_DATA *ch, char *argument )
     ch->desc            = NULL;
     /* change communications to match */
     if (ch->prompt != NULL)
+    {
+	if (victim->prompt != NULL)
+	    free_string(victim->prompt);
         victim->prompt = str_dup(ch->prompt);
+    }
     victim->comm = ch->comm;
     victim->lines = ch->lines;
     send_to_char( "Ok.\n\r", victim );
@@ -2677,14 +2553,7 @@ void do_return( CHAR_DATA *ch, char *argument )
 /* trust levels for load and clone */
 bool obj_check (CHAR_DATA *ch, OBJ_DATA *obj)
 {
-    if (IS_TRUSTED(ch,GOD)
-	|| (IS_TRUSTED(ch,IMMORTAL) && obj->level <= 20 && obj->cost <= 1000)
-	|| (IS_TRUSTED(ch,DEMI)	    && obj->level <= 10 && obj->cost <= 500)
-	|| (IS_TRUSTED(ch,ANGEL)    && obj->level <=  5 && obj->cost <= 250)
-	|| (IS_TRUSTED(ch,AVATAR)   && obj->level ==  0 && obj->cost <= 100))
-	return TRUE;
-    else
-	return FALSE;
+    return wiz_may_load( ch, obj->level, obj->cost );
 }
 
 /* for clone, to insure that cloning goes many levels deep */
@@ -2789,11 +2658,7 @@ void do_clone(CHAR_DATA *ch, char *argument )
 	    return;
 	}
 
-	if ((mob->level > 20 && !IS_TRUSTED(ch,GOD))
-	||  (mob->level > 10 && !IS_TRUSTED(ch,IMMORTAL))
-	||  (mob->level >  5 && !IS_TRUSTED(ch,DEMI))
-	||  (mob->level >  0 && !IS_TRUSTED(ch,ANGEL))
-	||  !IS_TRUSTED(ch,AVATAR))
+	if ( !wiz_may_load( ch, mob->level, 0 ) )
 	{
 	    send_to_char(
 		"Your powers are not great enough for such a task.\n\r",ch);
@@ -2942,7 +2807,6 @@ void do_oload( CHAR_DATA *ch, char *argument )
 void do_purge( CHAR_DATA *ch, char *argument )
 {
     char arg[MAX_INPUT_LENGTH];
-    char buf[100];
     CHAR_DATA *victim;
     OBJ_DATA *obj;
     DESCRIPTOR_DATA *d;
@@ -2993,8 +2857,7 @@ void do_purge( CHAR_DATA *ch, char *argument )
 	if (get_trust(ch) <= get_trust(victim))
 	{
 	  send_to_char("Maybe that wasn't a good idea...\n\r",ch);
-	  snprintf(buf, sizeof(buf),"%s tried to purge you!\n\r",ch->name);
-	  send_to_char(buf,victim);
+	  printf_to_char(victim,"%s tried to purge you!\n\r",ch->name);
 	  return;
 	}
 
@@ -3038,9 +2901,9 @@ void do_trust( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    if ( ( level = atoi( arg2 ) ) < 0 || level > 100 )
+    if ( ( level = atoi( arg2 ) ) < 0 || level > MAX_LEVEL )
     {
-	send_to_char( "Level must be 0 (reset) or 1 to 100.\n\r", ch );
+	printf_to_char( ch, "Level must be 0 (reset) or 1 to %d.\n\r", MAX_LEVEL );
 	return;
     }
 
@@ -3066,54 +2929,23 @@ void do_restore( CHAR_DATA *ch, char *argument )
     one_argument( argument, arg );
     if (arg[0] == '\0' || !str_cmp(arg,"room"))
     {
-    /* cure room */
-
         for (vch = ch->in_room->people; vch != NULL; vch = vch->next_in_room)
-        {
-            affect_strip(vch,gsn_plague);
-            affect_strip(vch,gsn_poison);
-            affect_strip(vch,gsn_blindness);
-            affect_strip(vch,gsn_sleep);
-            affect_strip(vch,gsn_curse);
-
-            vch->hit 	= vch->max_hit;
-            vch->mana	= vch->max_mana;
-            vch->move	= vch->max_move;
-            update_pos( vch);
-            act("$n has restored you.",ch,NULL,vch,TO_VICT);
-        }
+	    restore_char( ch, vch );
 
         snprintf(buf, sizeof(buf),"$N restored room %d.",ch->in_room->vnum);
         wiznet(buf,ch,NULL,WIZ_RESTORE,WIZ_SECURE,get_trust(ch));
-
         send_to_char("Room restored.\n\r",ch);
         return;
-
     }
 
     if ( get_trust(ch) >=  MAX_LEVEL - 1 && !str_cmp(arg,"all"))
     {
-    /* cure all */
-
         for (d = descriptor_list; d != NULL; d = d->next)
         {
 	    victim = d->character;
-
 	    if (victim == NULL || IS_NPC(victim))
 		continue;
-
-            affect_strip(victim,gsn_plague);
-            affect_strip(victim,gsn_poison);
-            affect_strip(victim,gsn_blindness);
-            affect_strip(victim,gsn_sleep);
-            affect_strip(victim,gsn_curse);
-
-            victim->hit 	= victim->max_hit;
-            victim->mana	= victim->max_mana;
-            victim->move	= victim->max_move;
-            update_pos( victim);
-	    if (victim->in_room != NULL)
-                act("$n has restored you.",ch,NULL,victim,TO_VICT);
+	    restore_char( ch, victim );
         }
 	send_to_char("All active players restored.\n\r",ch);
 	return;
@@ -3121,286 +2953,95 @@ void do_restore( CHAR_DATA *ch, char *argument )
 
     if ( ( victim = get_char_world( ch, arg ) ) == NULL )
     {
-	send_to_char( "They aren't here.\n\r", ch );
+	send_to_char( MSG_NOT_HERE, ch );
 	return;
     }
 
-    affect_strip(victim,gsn_plague);
-    affect_strip(victim,gsn_poison);
-    affect_strip(victim,gsn_blindness);
-    affect_strip(victim,gsn_sleep);
-    affect_strip(victim,gsn_curse);
-    victim->hit  = victim->max_hit;
-    victim->mana = victim->max_mana;
-    victim->move = victim->max_move;
-    update_pos( victim );
-    act( "$n has restored you.", ch, NULL, victim, TO_VICT );
+    restore_char( ch, victim );
     snprintf(buf, sizeof(buf),"$N restored %s",
 	IS_NPC(victim) ? victim->short_descr : victim->name);
     wiznet(buf,ch,NULL,WIZ_RESTORE,WIZ_SECURE,get_trust(ch));
-    send_to_char( "Ok.\n\r", ch );
-    return;
+    send_to_char( MSG_OK, ch );
 }
 
 
 void do_freeze( CHAR_DATA *ch, char *argument )
 {
-    char arg[MAX_INPUT_LENGTH],buf[MAX_STRING_LENGTH];
-    CHAR_DATA *victim;
-
-    one_argument( argument, arg );
-
-    if ( arg[0] == '\0' )
+    static const struct penalty p =
     {
-	send_to_char( "Freeze whom?\n\r", ch );
-	return;
-    }
-
-    if ( ( victim = get_char_world( ch, arg ) ) == NULL )
-    {
-	send_to_char( "They aren't here.\n\r", ch );
-	return;
-    }
-
-    if ( IS_NPC(victim) )
-    {
-	send_to_char( "Not on NPC's.\n\r", ch );
-	return;
-    }
-
-    if ( get_trust( victim ) >= get_trust( ch ) )
-    {
-	send_to_char( "You failed.\n\r", ch );
-	return;
-    }
-
-    if ( IS_SET(victim->act, PLR_FREEZE) )
-    {
-	REMOVE_BIT(victim->act, PLR_FREEZE);
-	send_to_char( "You can play again.\n\r", victim );
-	send_to_char( "FREEZE removed.\n\r", ch );
-	snprintf(buf, sizeof(buf),"$N thaws %s.",victim->name);
-	wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
-    }
-    else
-    {
-	SET_BIT(victim->act, PLR_FREEZE);
-	send_to_char( "You can't do ANYthing!\n\r", victim );
-	send_to_char( "FREEZE set.\n\r", ch );
-	snprintf(buf, sizeof(buf),"$N puts %s in the deep freeze.",victim->name);
-	wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
-    }
-
-    save_char_obj( victim );
-
-    return;
+	PEN_ACT, PLR_FREEZE, "Kimi donduracaksın?\n\r",
+	"Artık HİÇBİR şey yapamazsın!\n\r", "FREEZE açıldı.\n\r", "$N %s'ı dondurdu.",
+	"Yeniden oynayabilirsin.\n\r", "FREEZE kaldırıldı.\n\r", "$N %s'ın buzunu çözdü.",
+	WIZ_NEED_TRUST | WIZ_SAVE
+    };
+    wiz_toggle_penalty( ch, argument, &p );
 }
 
 
 
 void do_log( CHAR_DATA *ch, char *argument )
 {
+    /* Seviye denetimi yok: tanrılar herkesi günlükleyebilir. */
+    static const struct penalty p =
+    {
+	PEN_ACT, PLR_LOG, "Kimi günlükleyeceksin?\n\r",
+	NULL, "LOG açıldı.\n\r", NULL,
+	NULL, "LOG kaldırıldı.\n\r", NULL,
+	0
+    };
     char arg[MAX_INPUT_LENGTH];
-    CHAR_DATA *victim;
 
     one_argument( argument, arg );
-
-    if ( arg[0] == '\0' )
-    {
-	send_to_char( "Log whom?\n\r", ch );
-	return;
-    }
-
     if ( !str_cmp( arg, "all" ) )
     {
-	if ( fLogAll )
-	{
-	    fLogAll = FALSE;
-	    send_to_char( "Log ALL off.\n\r", ch );
-	}
-	else
-	{
-	    fLogAll = TRUE;
-	    send_to_char( "Log ALL on.\n\r", ch );
-	}
+	fLogAll = !fLogAll;
+	send_to_char( fLogAll ? "Log ALL açık.\n\r" : "Log ALL kapalı.\n\r", ch );
 	return;
     }
 
-    if ( ( victim = get_char_world( ch, arg ) ) == NULL )
-    {
-	send_to_char( "They aren't here.\n\r", ch );
-	return;
-    }
-
-    if ( IS_NPC(victim) )
-    {
-	send_to_char( "Not on NPC's.\n\r", ch );
-	return;
-    }
-
-    /*
-     * No level check, gods can log anyone.
-     */
-    if ( IS_SET(victim->act, PLR_LOG) )
-    {
-	REMOVE_BIT(victim->act, PLR_LOG);
-	send_to_char( "LOG removed.\n\r", ch );
-    }
-    else
-    {
-	SET_BIT(victim->act, PLR_LOG);
-	send_to_char( "LOG set.\n\r", ch );
-    }
-
-    return;
+    wiz_toggle_penalty( ch, argument, &p );
 }
 
 
 
 void do_noemote( CHAR_DATA *ch, char *argument )
 {
-    char arg[MAX_INPUT_LENGTH],buf[MAX_STRING_LENGTH];
-    CHAR_DATA *victim;
-
-    one_argument( argument, arg );
-
-    if ( arg[0] == '\0' )
+    static const struct penalty p =
     {
-	send_to_char( "Noemote whom?\n\r", ch );
-	return;
-    }
-
-    if ( ( victim = get_char_world( ch, arg ) ) == NULL )
-    {
-	send_to_char( "They aren't here.\n\r", ch );
-	return;
-    }
-
-
-    if ( get_trust( victim ) >= get_trust( ch ) )
-    {
-	send_to_char( "You failed.\n\r", ch );
-	return;
-    }
-
-    if ( IS_SET(victim->comm, COMM_NOEMOTE) )
-    {
-	REMOVE_BIT(victim->comm, COMM_NOEMOTE);
-	send_to_char( "You can emote again.\n\r", victim );
-	send_to_char( "NOEMOTE removed.\n\r", ch );
-	snprintf(buf, sizeof(buf),"$N restores emotes to %s.",victim->name);
-	wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
-    }
-    else
-    {
-	SET_BIT(victim->comm, COMM_NOEMOTE);
-	send_to_char( "You can't emote!\n\r", victim );
-	send_to_char( "NOEMOTE set.\n\r", ch );
-	snprintf(buf, sizeof(buf),"$N revokes %s's emotes.",victim->name);
-	wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
-    }
-
-    return;
+	PEN_COMM, COMM_NOEMOTE, "Kimin duyguları?\n\r",
+	"Duygularını gösteremezsin!\n\r", "NOEMOTE açıldı.\n\r", "$N %s'ın duygularını kapattı.",
+	"Yeniden duygu gösterebilirsin.\n\r", "NOEMOTE kaldırıldı.\n\r", "$N %s'ın duygularını açtı.",
+	WIZ_ALLOW_NPC | WIZ_NEED_TRUST
+    };
+    wiz_toggle_penalty( ch, argument, &p );
 }
 
 
 
 void do_noshout( CHAR_DATA *ch, char *argument )
 {
-    char arg[MAX_INPUT_LENGTH],buf[MAX_STRING_LENGTH];
-    CHAR_DATA *victim;
-
-    one_argument( argument, arg );
-
-    if ( arg[0] == '\0' )
+    static const struct penalty p =
     {
-	send_to_char( "Noshout whom?\n\r",ch);
-	return;
-    }
-
-    if ( ( victim = get_char_world( ch, arg ) ) == NULL )
-    {
-	send_to_char( "They aren't here.\n\r", ch );
-	return;
-    }
-
-    if ( IS_NPC(victim) )
-    {
-	send_to_char( "Not on NPC's.\n\r", ch );
-	return;
-    }
-
-    if ( get_trust( victim ) >= get_trust( ch ) )
-    {
-	send_to_char( "You failed.\n\r", ch );
-	return;
-    }
-
-    if ( IS_SET(victim->comm, COMM_NOSHOUT) )
-    {
-	REMOVE_BIT(victim->comm, COMM_NOSHOUT);
-	send_to_char( "You can shout again.\n\r", victim );
-	send_to_char( "NOSHOUT removed.\n\r", ch );
-	snprintf(buf, sizeof(buf),"$N restores shouts to %s.",victim->name);
-	wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
-    }
-    else
-    {
-	SET_BIT(victim->comm, COMM_NOSHOUT);
-	send_to_char( "You can't shout!\n\r", victim );
-	send_to_char( "NOSHOUT set.\n\r", ch );
-	snprintf(buf, sizeof(buf),"$N revokes %s's shouts.",victim->name);
-	wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
-    }
-
-    return;
+	PEN_COMM, COMM_NOSHOUT, "Kimin haykırışı?\n\r",
+	"Haykıramazsın!\n\r", "NOSHOUT açıldı.\n\r", "$N %s'ın haykırışını kapattı.",
+	"Yeniden haykırabilirsin.\n\r", "NOSHOUT kaldırıldı.\n\r", "$N %s'ın haykırışını açtı.",
+	WIZ_NEED_TRUST
+    };
+    wiz_toggle_penalty( ch, argument, &p );
 }
 
 
 
 void do_notell( CHAR_DATA *ch, char *argument )
 {
-    char arg[MAX_INPUT_LENGTH],buf[MAX_STRING_LENGTH];
-    CHAR_DATA *victim;
-
-    one_argument( argument, arg );
-
-    if ( arg[0] == '\0' )
+    static const struct penalty p =
     {
-	send_to_char( "Notell whom?", ch );
-	return;
-    }
-
-    if ( ( victim = get_char_world( ch, arg ) ) == NULL )
-    {
-	send_to_char( "They aren't here.\n\r", ch );
-	return;
-    }
-
-    if ( get_trust( victim ) >= get_trust( ch ) )
-    {
-	send_to_char( "You failed.\n\r", ch );
-	return;
-    }
-
-    if ( IS_SET(victim->comm, COMM_NOTELL) )
-    {
-	REMOVE_BIT(victim->comm, COMM_NOTELL);
-	send_to_char( "You can tell again.\n\r", victim );
-	send_to_char( "NOTELL removed.\n\r", ch );
-	snprintf(buf, sizeof(buf),"$N restores tells to %s.",victim->name);
-	wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
-    }
-    else
-    {
-	SET_BIT(victim->comm, COMM_NOTELL);
-	send_to_char( "You can't tell!\n\r", victim );
-	send_to_char( "NOTELL set.\n\r", ch );
-	snprintf(buf, sizeof(buf),"$N revokes %s's tells.",victim->name);
-	wiznet(buf,ch,NULL,WIZ_PENALTIES,WIZ_SECURE,0);
-    }
-
-    return;
+	PEN_COMM, COMM_NOTELL, "Kimin fısıltısı?\n\r",
+	"Fısıldayamazsın!\n\r", "NOTELL açıldı.\n\r", "$N %s'ın fısıltısını kapattı.",
+	"Yeniden fısıldayabilirsin.\n\r", "NOTELL kaldırıldı.\n\r", "$N %s'ın fısıltısını açtı.",
+	WIZ_ALLOW_NPC | WIZ_NEED_TRUST
+    };
+    wiz_toggle_penalty( ch, argument, &p );
 }
 
 
@@ -3642,7 +3283,7 @@ void do_string( CHAR_DATA *ch, char *argument )
     argument = one_argument( argument, type );
     argument = one_argument( argument, arg1 );
     argument = one_argument( argument, arg2 );
-    strcpy( arg3, argument );
+    snprintf( arg3, sizeof(arg3), "%s", argument );
 
     if ( type[0] == '\0' || arg1[0] == '\0' || arg2[0] == '\0' || arg3[0] == '\0' )
     {
@@ -3695,9 +3336,11 @@ void do_string( CHAR_DATA *ch, char *argument )
 
     	if ( !str_prefix( arg2, "long" ) )
     	{
+	    char buf[MAX_STRING_LENGTH];
+
+	    snprintf( buf, sizeof(buf), "%s\n\r", arg3 );
 	    free_string( victim->long_descr );
-	    strcat(arg3,"\n\r");
-	    victim->long_descr = str_dup( arg3 );
+	    victim->long_descr = str_dup( buf );
 	    return;
     	}
 
@@ -3765,21 +3408,21 @@ void do_string( CHAR_DATA *ch, char *argument )
     	if ( !str_prefix( arg2, "ed" ) || !str_prefix( arg2, "extended"))
     	{
 	    EXTRA_DESCR_DATA *ed;
+	    char buf[MAX_STRING_LENGTH];
 
 	    argument = one_argument( argument, arg3 );
-	    if ( argument == NULL )
+	    if ( arg3[0] == '\0' || argument[0] == '\0' )
 	    {
-	    	send_to_char( "Syntax: oset <object> ed <keyword> <string>\n\r",
+	    	send_to_char( "Syntax: string obj <object> ed <keyword> <string>\n\r",
 		    ch );
 	    	return;
 	    }
 
- 	    strcat(argument,"\n\r");
-
+	    snprintf( buf, sizeof(buf), "%s\n\r", argument );
 	    ed = new_extra_descr();
 
 	    ed->keyword		= str_dup( arg3     );
-	    ed->description	= str_dup( argument );
+	    ed->description	= str_dup( buf );
 	    ed->next		= obj->extra_descr;
 	    obj->extra_descr	= ed;
 	    return;
@@ -3804,7 +3447,7 @@ void do_oset( CHAR_DATA *ch, char *argument )
     smash_tilde( argument );
     argument = one_argument( argument, arg1 );
     argument = one_argument( argument, arg2 );
-    strcpy( arg3, argument );
+    snprintf( arg3, sizeof(arg3), "%s", argument );
 
     if ( arg1[0] == '\0' || arg2[0] == '\0' || arg3[0] == '\0' )
     {
@@ -3916,7 +3559,7 @@ void do_rset( CHAR_DATA *ch, char *argument )
     smash_tilde( argument );
     argument = one_argument( argument, arg1 );
     argument = one_argument( argument, arg2 );
-    strcpy( arg3, argument );
+    snprintf( arg3, sizeof(arg3), "%s", argument );
 
     if ( arg1[0] == '\0' || arg2[0] == '\0' || arg3[0] == '\0' )
     {
@@ -3933,11 +3576,9 @@ void do_rset( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-/*    if (!is_room_owner(ch,location) && ch->in_room != location  */
-    if ( ch->in_room != location
-    &&  room_is_private(location) && !IS_TRUSTED(ch,IMPLEMENTOR))
+    if ( wiz_room_blocked( ch, location ) )
     {
-        send_to_char("That room is private right now.\n\r",ch);
+        send_to_char( MSG_PRIVATE_ROOM, ch );
         return;
     }
 
@@ -3977,41 +3618,40 @@ void do_rset( CHAR_DATA *ch, char *argument )
 
 void do_sockets( CHAR_DATA *ch, char *argument )
 {
-    char buf[2 * MAX_STRING_LENGTH];
-    char buf2[MAX_STRING_LENGTH];
+    BUFFER *output;
+    char buf[MAX_STRING_LENGTH];
     char arg[MAX_INPUT_LENGTH];
     DESCRIPTOR_DATA *d;
-    int count;
-
-    count	= 0;
-    buf[0]	= '\0';
+    int count = 0;
 
     one_argument(argument,arg);
+    output = new_buf();
     for ( d = descriptor_list; d != NULL; d = d->next )
     {
-		if ( d->character != NULL && can_see( ch, d->character )
-		&& (arg[0] == '\0' || is_name(arg,d->character->name)
-				   || (d->original && is_name(arg,d->original->name))))
-		{
-			count++;
-			sprintf( buf + strlen(buf), "[%3d %2d] %s@%s\n\r",
-			d->descriptor,
-			d->connected,
-			d->original  ? d->original->name  : d->character ? d->character->name : "(none)",
-			d->host
-			);
-		}
+	if ( d->character != NULL && can_see( ch, d->character )
+	&& (arg[0] == '\0' || is_name(arg,d->character->name)
+			   || (d->original && is_name(arg,d->original->name))))
+	{
+	    count++;
+	    snprintf( buf, sizeof(buf), "[%3d %2d] %s@%s\n\r",
+		d->descriptor,
+		d->connected,
+		d->original  ? d->original->name  : d->character->name,
+		d->host );
+	    add_buf( output, buf );
+	}
     }
     if (count == 0)
     {
-	send_to_char("No one by that name is connected.\n\r",ch);
+	send_to_char("O adda kimse bağlı değil.\n\r",ch);
+	free_buf( output );
 	return;
     }
 
-    snprintf(buf2, sizeof(buf2), "%d user%s\n\r", count, count == 1 ? "" : "s" );
-    strcat(buf,buf2);
-    page_to_char( buf, ch );
-    return;
+    snprintf(buf, sizeof(buf), "%d kullanıcı\n\r", count );
+    add_buf( output, buf );
+    page_to_char( buf_string(output), ch );
+    free_buf( output );
 }
 
 
@@ -4127,13 +3767,11 @@ void do_force( CHAR_DATA *ch, char *argument )
 	    return;
 	}
 
-    	if (!is_room_owner(ch,victim->in_room)
-	&&  ch->in_room != victim->in_room
-        &&  room_is_private(victim->in_room) && !IS_TRUSTED(ch,IMPLEMENTOR))
-    	{
-            send_to_char("That character is in a private room.\n\r",ch);
-            return;
-        }
+	if ( wiz_room_blocked( ch, victim->in_room ) )
+	{
+	    send_to_char("O karakter özel bir odada.\n\r",ch);
+	    return;
+	}
 
 	if ( get_trust( victim ) >= get_trust( ch ) )
 	{
@@ -4307,29 +3945,19 @@ void do_prefix (CHAR_DATA *ch, char *argument)
     }
 
     ch->prefix = str_dup(argument);
+    send_to_char(buf,ch);
 }
 
 
 
-/* RT nochannels command, for those spammers */
 void do_grant( CHAR_DATA *ch, char *argument )
 {
     char arg[MAX_INPUT_LENGTH];
     CHAR_DATA *victim;
 
     one_argument( argument, arg );
-
-    if ( arg[0] == '\0' )
-    {
-        send_to_char( "Grant whom induct privileges?", ch );
-        return;
-    }
-
-    if ( ( victim = get_char_world( ch, arg ) ) == NULL )
-    {
-        send_to_char( "They aren't here.\n\r", ch );
-        return;
-    }
+    if ( ( victim = wiz_find_victim( ch, arg, "Kime üye alma yetkisi?\n\r", 0 ) ) == NULL )
+	return;
 
     if (IS_SET(victim->act,PLR_CANINDUCT))
     {
@@ -4377,9 +4005,9 @@ void do_advance( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    if ( ( level = atoi( arg2 ) ) < 1 || level > 100 )
+    if ( ( level = atoi( arg2 ) ) < 1 || level > MAX_LEVEL )
     {
-	send_to_char( "Level must be 1 to 100.\n\r", ch );
+	printf_to_char( ch, "Level must be 1 to %d.\n\r", MAX_LEVEL );
 	return;
     }
 
@@ -4390,8 +4018,8 @@ void do_advance( CHAR_DATA *ch, char *argument )
     }
 
 
-    /* Level counting */
-    if (ch->level <= 5 || ch->level > LEVEL_HERO)
+    /* Seviye sayacı: ölümlü 5+ seviyeleri toplamı (kurbanın seviyesi) */
+    if (victim->level <= 5 || victim->level > LEVEL_HERO)
     {
       if (5 < level && level <= LEVEL_HERO)
 	total_levels += level - 5;
@@ -4399,8 +4027,8 @@ void do_advance( CHAR_DATA *ch, char *argument )
     else
     {
       if (5 < level && level <= LEVEL_HERO)
-	total_levels += level - ch->level;
-      else total_levels -= (ch->level - 5);
+	total_levels += level - victim->level;
+      else total_levels -= (victim->level - 5);
     }
 
     /*
@@ -4486,14 +4114,14 @@ void do_ikikat( CHAR_DATA *ch, char *argument )
     ikikat_tp = value;
     if (value != 0)
     {
-      printf_to_char(ch,"İki kat TP %d dakikalığına açıldı.", value);
+      printf_to_char(ch,"İki kat TP %d dakikalığına açıldı.\n\r", value);
       /* event */
       snprintf(eventbuf, sizeof(eventbuf),"İki kat TP %d dakikalığına açıldı.", value);
 	  write_event_log(eventbuf);
     }
     else
     {
-      printf_to_char(ch,"İki kat TP kapatıldı.");
+      printf_to_char(ch,"İki kat TP kapatıldı.\n\r");
       /* event */
 	  write_event_log("İki kat TP etkinliği kapatıldı.");
     }
@@ -4505,16 +4133,16 @@ void do_ikikat( CHAR_DATA *ch, char *argument )
     ikikat_gp = value;
     if (value != 0)
     {
-      printf_to_char(ch,"İki kat GP %d dakikalığına açıldı.", value);
+      printf_to_char(ch,"İki kat GP %d dakikalığına açıldı.\n\r", value);
       /* event */
       snprintf(eventbuf, sizeof(eventbuf),"İki kat GP %d dakikalığına açıldı.", value);
 	  write_event_log(eventbuf);
     }
     else
     {
-      printf_to_char(ch,"İki kat GP kapatıldı.");
+      printf_to_char(ch,"İki kat GP kapatıldı.\n\r");
       /* event */
-	  write_event_log("İki kat TP etkinliği kapatıldı.");
+	  write_event_log("İki kat GP etkinliği kapatıldı.");
     }
     return;
   }
@@ -4534,7 +4162,7 @@ void do_mset( CHAR_DATA *ch, char *argument )
     smash_tilde( argument );
     argument = one_argument( argument, arg1 );
     argument = one_argument( argument, arg2 );
-    strcpy( arg3, argument );
+    snprintf( arg3, sizeof(arg3), "%s", argument );
 
     if ( arg1[0] == '\0' || arg2[0] == '\0' || arg3[0] == '\0' )
     {
@@ -4756,8 +4384,13 @@ void do_mset( CHAR_DATA *ch, char *argument )
 	return;
     }
 	
-	if ( !str_prefix( arg2, "bank" ) )
+    if ( !str_prefix( arg2, "bank" ) )
     {
+	if ( IS_NPC(victim) )
+	{
+	    send_to_char( "Not on NPC's.\n\r", ch );
+	    return;
+	}
 	victim->pcdata->bank_s = value;
 	return;
     }
@@ -5143,7 +4776,7 @@ void do_smite(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if (victim->trust > ch->trust)
+  if (get_trust(victim) > get_trust(ch))
     {
       send_to_char("How dare you!\n\r", ch);
       return;
@@ -5165,26 +4798,27 @@ void do_smite(CHAR_DATA *ch, char *argument)
 
 void do_popularity( CHAR_DATA *ch, char *argument )
 {
-char buf[4 * MAX_STRING_LENGTH];
-char buf2[MAX_STRING_LENGTH];
-AREA_DATA *area;
-extern AREA_DATA *area_first;
-int i;
+    BUFFER *output;
+    char buf[MAX_STRING_LENGTH];
+    AREA_DATA *area;
+    extern AREA_DATA *area_first;
+    int i;
 
-    snprintf(buf, sizeof(buf),"Area popularity statistics (in char * ticks)\n\r" );
+    output = new_buf();
+    add_buf( output, "Area popularity statistics (in char * ticks)\n\r" );
 
     for (area = area_first,i=0; area != NULL; area = area->next,i++) {
       if (area->count >= 5000000)
-        snprintf(buf2, sizeof(buf2),"%-*s overflow       ",utf8_width(area->name, 20), area->name);
+        snprintf(buf, sizeof(buf),"%-*s overflow       ",utf8_width(area->name, 20), area->name);
       else
-        snprintf(buf2, sizeof(buf2),"%-*s %-8lu       ",utf8_width(area->name, 20), area->name,area->count);
+        snprintf(buf, sizeof(buf),"%-*s %-8lu       ",utf8_width(area->name, 20), area->name,area->count);
       if ( i % 2 == 0)
-	strcat( buf, "\n\r" );
-      strcat( buf, buf2 );
+	add_buf( output, "\n\r" );
+      add_buf( output, buf );
     }
-    strcat( buf, "\n\r\n\r");
-    page_to_char( buf, ch );
-    return;
+    add_buf( output, "\n\r\n\r" );
+    page_to_char( buf_string(output), ch );
+    free_buf( output );
 }
 
 void do_ititle( CHAR_DATA *ch, char *argument )
@@ -5214,17 +4848,12 @@ void do_ititle( CHAR_DATA *ch, char *argument )
 	return;
     }
 
-    if ( strlen(argument) > 45 )
-	argument[45] = '\0';
+    utf8_truncate( argument, 45 );
 
     smash_tilde( argument );
     set_title( victim, argument );
     send_to_char( "Ok.\n\r", ch );
 }
-
-/*
- * .gz files are checked for too, just in case.
- */
 
 bool check_parse_name (char* name);
 
@@ -5348,7 +4977,7 @@ void do_rename (CHAR_DATA* ch, char* argument)
 
 	save_char_obj (victim);
 
-	unlink (strsave);
+	remove( strsave );
 	send_to_char ("Character renamed.\n\r",ch);
 	victim->position = POS_STANDING;
 	act ("$n has renamed you to $N!",ch,NULL,victim,TO_VICT);
@@ -5357,38 +4986,17 @@ void do_rename (CHAR_DATA* ch, char* argument)
 
 void do_notitle( CHAR_DATA *ch, char *argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+    static const struct penalty p =
+    {
+	PEN_ACT, PLR_NO_TITLE, "Kullanım:\n\r  notitle <oyuncu>\n\r",
+	"Artık ünvanını değiştiremezsin.\n\r", MSG_OK, NULL,
+	"Ünvanını yeniden değiştirebilirsin.\n\r", MSG_OK, NULL,
+	0
+    };
 
     if ( !IS_IMMORTAL(ch) )
         return;
-    argument = one_argument(argument,arg);
-
-    if ( arg[0] == '\0' )
-    {
-	send_to_char("Usage:\n\r  notitle <player>\n\r", ch);
-	return;
-    }
-
-    if ( (victim = get_char_world(ch ,arg)) == NULL )
-    {
-        send_to_char( "He is not currently playing.\n\r", ch );
-        return;
-    }
-
-   if (IS_SET(victim->act, PLR_NO_TITLE) )
-	{
-   REMOVE_BIT(victim->act,PLR_NO_TITLE);
-   send_to_char("You can change your title again.\n\r",victim);
-   send_to_char( "Ok.\n\r", ch );
-	}
-   else
-	{
-   SET_BIT(victim->act,PLR_NO_TITLE);
-   send_to_char("You won't be able to change your title anymore.\n\r",victim);
-   send_to_char( "Ok.\n\r", ch );
-	}
-   return;
+    wiz_toggle_penalty( ch, argument, &p );
 }
 
 
@@ -5401,20 +5009,9 @@ void do_noaffect( CHAR_DATA *ch, char * argument)
 	 if ( !IS_IMMORTAL(ch) )
         	return;
 
-	 argument = one_argument(argument,arg);
-
-
-	if ( arg[0] == '\0' )
-	{
-	 send_to_char("Usage:\n\r  noaffect <player>\n\r", ch);
-	 return;
-	}
-
-        if ( (victim = get_char_world(ch ,arg)) == NULL )
-        {
-         send_to_char( "He is not currently playing.\n\r", ch );
-         return;
-        }
+	one_argument( argument, arg );
+	if ( ( victim = wiz_find_victim( ch, arg, "Kullanım:\n\r  noaffect <oyuncu>\n\r", WIZ_ALLOW_NPC ) ) == NULL )
+	    return;
 
 
 	for ( paf = victim->affected; paf != NULL; paf = paf_next )
