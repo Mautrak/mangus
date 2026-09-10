@@ -3098,6 +3098,10 @@ void	stop_fighting	( CHAR_DATA *ch, bool fBoth );
 bool    can_kill 	( CHAR_DATA *ch, CHAR_DATA *victim);
 void   gods_protect_msg ( CHAR_DATA *ch, CHAR_DATA *victim);
 CHAR_DATA *  check_guard     (CHAR_DATA *ch, CHAR_DATA *mob);
+/* Grup 03 (martial_art.c) */
+void	victim_yell	( CHAR_DATA *victim, CHAR_DATA *ch,
+			  const char *blind_msg, const char *seen_fmt );
+void	str_fill_name	( char *dst, size_t n, const char *tmpl, const char *name );
 
 /* handler.c */
 AD  	*affect_find (AFFECT_DATA *paf, int sn);
