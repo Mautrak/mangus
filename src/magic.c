@@ -1254,7 +1254,7 @@ void spell_call_lightning( int sn, int level,CHAR_DATA *ch,void *vo,int target)
 	    if (CAN_DETECT(vch, ADET_GROUNDING))
 	    {
         send_to_char("Elektrik düşmanlarında yitip gidiyor.\n\r",vch);
-    		act("Bir yıldırım $S düşmanlarında yitip gidiyor.\n\r",
+    		act("Bir yıldırım $S düşmanlarında yitip gidiyor.",
 			ch, NULL, vch, TO_ROOM);
 		continue;
 	    }
@@ -1497,7 +1497,7 @@ static void chain_strike( CHAR_DATA *ch, CHAR_DATA *vict, int level, int sn )
     if (CAN_DETECT(vict, ADET_GROUNDING))
     {
 	send_to_char("Elektrik düşmanlarında sönüyor.\n\r",vict);
-	act("Bir yıldırım $S düşmanlarında sönüyor.\n\r", ch, NULL, vict, TO_ROOM);
+	act("Bir yıldırım $S düşmanlarında sönüyor.", ch, NULL, vict, TO_ROOM);
 	return;
     }
     if (saves_spell(level,vict,DAM_LIGHTNING))
@@ -2282,7 +2282,7 @@ void spell_earthquake( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 		obj_to_room( corpse, ch->in_room );
 		extract_obj( obj );
 		corpse->timer   = number_range( 25, 40 );
-    act("Deprem nedeniyle $p açığa çıkıyor.\n\r",ch, corpse, NULL, TO_ALL );
+    act("Deprem nedeniyle $p açığa çıkıyor.",ch, corpse, NULL, TO_ALL );
 	}
     }
 
@@ -3351,10 +3351,10 @@ void spell_infravision( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 	if (victim == ch)
   send_to_char("Zaten ısı görüşün var.\n\r",ch);
 else
-  act("$N zaten ısı görüşü var.\n\r",ch,NULL,victim,TO_CHAR);
+  act("$N zaten ısı görüşü var.",ch,NULL,victim,TO_CHAR);
 return;
   }
-  act( "$s gözleri kızıl renkte parlıyor.\n\r", ch, NULL, NULL, TO_ROOM );
+  act( "$s gözleri kızıl renkte parlıyor.", ch, NULL, NULL, TO_ROOM );
 
     af.where	 = TO_AFFECTS;
     af.type      = sn;
@@ -3453,7 +3453,7 @@ void spell_lightning_bolt(int sn,int level,CHAR_DATA *ch,void *vo,int target)
     if (CAN_DETECT(victim, ADET_GROUNDING))
     {
 	send_to_char("Elektrik düşmanlarında sönüp gidiyor.\n\r",victim);
-	act("Bir yıldırım $S düşmanlarında sönüp gidiyor.\n\r",
+	act("Bir yıldırım $S düşmanlarında sönüp gidiyor.",
 		ch, NULL, victim, TO_ROOM);
 	return;
     }
@@ -4556,7 +4556,7 @@ void spell_lightning_breath(int sn,int level,CHAR_DATA *ch,void *vo,int target)
     if (CAN_DETECT(victim, ADET_GROUNDING))
     {
       send_to_char("Elektiriğin gücü düşmanında yitiyor.\n\r",victim);
-    	act("Bir yıldırım topu $S düşmanında yitiyor.\n\r",
+    	act("Bir yıldırım topu $S düşmanında yitiyor.",
 		ch, NULL, victim, TO_ROOM);
 	return;
     }
@@ -4890,7 +4890,7 @@ void spell_corruption( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
     if (IS_AFFECTED(victim,AFF_CORRUPTION))
 	{
-    act("$N zaten çürüyor.\n\r",ch,NULL,victim,TO_CHAR);
+    act("$N zaten çürüyor.",ch,NULL,victim,TO_CHAR);
 	 return;
 	}
 
@@ -5484,8 +5484,8 @@ void spell_animate_object( int sn, int level, CHAR_DATA *ch, void *vo,int target
   af.bitvector	= 0;
   affect_to_char(ch, &af);
 
-  act("Gücünle $p'ye yaşam veriyorsun!\n\r", ch, obj, NULL, TO_CHAR);
-  act("$n gücüyle $p'ye yaşam veriyor!\n\r", ch, obj, NULL, TO_ROOM);
+  act("Gücünle $p'ye yaşam veriyorsun!", ch, obj, NULL, TO_CHAR);
+  act("$n gücüyle $p'ye yaşam veriyor!", ch, obj, NULL, TO_ROOM);
 
   extract_obj( obj );
 	return;
