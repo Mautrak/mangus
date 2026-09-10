@@ -23,7 +23,8 @@ Homebrew ve `gh` `/opt/homebrew/bin` altındadır.
 ## Dizinler
 
 `src/` sunucu · `area/` alan dosyaları ve yardım metinleri · `tests/unit`, `tests/e2e`
-(fikstürler, altın ekranlar) · `script/` (autorun.sh, Discord araçları) · `doc/` belgeler
+(fikstürler, altın ekranlar) · `script/` (autorun.sh, `discord_tools.py`: `DISCORD_TOKEN` ve
+`MANGUS_ROOT` ortam değişkenleriyle) · `doc/` belgeler
 ve lisanslar · `.github/workflows/ci.yml` CI. Çalışma zamanı dizinleri (`player/`, `gods/`,
 `remort/`, `log/`, `data/`) `area/`'ya göre `../` ile bulunur ve açılışta oluşturulur.
 
@@ -37,6 +38,20 @@ ve lisanslar · `.github/workflows/ci.yml` CI. Çalışma zamanı dizinleri (`pl
   yazılır: yerel koşudan sonra `git checkout -- data/ud_data area/area_stat.txt`.
 - Ekran çıktısını değiştiren her değişiklikten sonra snapshot altın dosyalarını
   `--update-snapshots` ile yenile ve farkı gözden geçir.
+
+- `printf_to_char`/`bugf` printf biçim denetimi taşır (`PRINTF_FMT`): veriyi asla biçim olarak
+  geçme (`printf_to_char(ch, "%s", metin)`); `bug()` yalnızca tek tamsayı dönüşümü (`%d`/`%ld`) kabul eder. Ekran/alan
+  metnini şablon olarak doldurmak için `descr_subst`/`str_fill_name`/`prog_subst` kullan.
+- Ortak yardımcılar: `handler.c` `align_index`, `flag_bits_name`, `LIST_UNLINK`; `db.h`
+  `find_*_index`/`read_*_vnum`; `tables.h` `yp_range`, `material_index`; `lookup.h`
+  `name_table_lookup`; `utf8.h` `utf8_fit`; `prog_util.c` mob/obj prog ortak çekirdeği
+  (`prog_subst`, `prog_name_in_text`, `prog_obj_owned_by`). Yenisini yazmadan önce bunlara bak.
+- Açılışta `skill_table_verify` yinelenen SLOT/ad bulursa günlüğe `bug` yazar; tablo boyları
+  `_Static_assert` ile kilitlidir (`MAX_SKILL`, `MAX_LANGUAGE`, `MAX_PC_RACE`).
+- Bot eşikleri (`BOT_HP_*`, `BOT_AVOID_*`, `BOT_MIN/HOUR`) ve yol bulma çekirdeği (`bot_bfs`)
+  `bot.h`/`bot_brain.c`'de tek yerdedir; `act_hera.c` `find_path` de `bot_bfs` kullanır.
+- e2e yardımcıları: `tests/e2e/mud.py` (`m1_hash`, `write_player_file`, `wait_closed`),
+  `conftest.spawn_server`; bot testleri sessiz oda 1203 ve `expect` tabanlı bekleme kullanır.
 
 ## Tuzaklar (gotcha)
 
