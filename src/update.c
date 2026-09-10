@@ -229,6 +229,25 @@ void gain_exp( CHAR_DATA *ch, int gain )
 /*
  * Regeneration stuff.
  */
+/*
+ * Üç yenilenme türünün ortak çarpanları: oda oranı, mobilya, zehir, veba.
+ */
+static int regen_common( CHAR_DATA *ch, int gain, int room_rate, int furniture_value )
+{
+    gain = gain * room_rate / 100;
+
+    if (ch->on != NULL && ch->on->item_type == ITEM_FURNITURE)
+	gain = gain * ch->on->value[furniture_value] / 100;
+
+    if ( IS_AFFECTED(ch, AFF_POISON) )
+	gain /= 4;
+
+    if (IS_AFFECTED(ch, AFF_PLAGUE))
+	gain /= 8;
+
+    return gain;
+}
+
 int hit_gain( CHAR_DATA *ch )
 {
     int gain;
@@ -287,16 +306,7 @@ int hit_gain( CHAR_DATA *ch )
 
     }
 
-    gain = gain * ch->in_room->heal_rate / 100;
-
-    if (ch->on != NULL && ch->on->item_type == ITEM_FURNITURE)
-	gain = gain * ch->on->value[3] / 100;
-
-    if ( IS_AFFECTED(ch, AFF_POISON) )
-	gain /= 4;
-
-    if (IS_AFFECTED(ch, AFF_PLAGUE))
-	gain /= 8;
+    gain = regen_common( ch, gain, ch->in_room->heal_rate, 3 );
 
     if (IS_AFFECTED(ch,AFF_HASTE) )
 	gain /=2 ;
@@ -373,16 +383,7 @@ int mana_gain( CHAR_DATA *ch )
 
     }
 
-    gain = gain * ch->in_room->mana_rate / 100;
-
-    if (ch->on != NULL && ch->on->item_type == ITEM_FURNITURE)
-	gain = gain * ch->on->value[4] / 100;
-
-    if ( IS_AFFECTED( ch, AFF_POISON ) )
-	gain /= 4;
-
-    if (IS_AFFECTED(ch, AFF_PLAGUE))
-        gain /= 8;
+    gain = regen_common( ch, gain, ch->in_room->mana_rate, 4 );
 
     if (IS_AFFECTED(ch,AFF_HASTE) )
         gain /= 2 ;
@@ -428,21 +429,12 @@ int move_gain( CHAR_DATA *ch )
 	    gain = 3;
     }
 
-    gain = gain * ch->in_room->heal_rate/100;
-
-    if (ch->on != NULL && ch->on->item_type == ITEM_FURNITURE)
-	gain = gain * ch->on->value[3] / 100;
-
-    if ( IS_AFFECTED(ch, AFF_POISON) )
-	gain /= 4;
-
-    if (IS_AFFECTED(ch, AFF_PLAGUE))
-        gain /= 8;
+    gain = regen_common( ch, gain, ch->in_room->heal_rate, 3 );
 
     if (IS_AFFECTED(ch,AFF_HASTE) || IS_AFFECTED(ch,AFF_SLOW))
         gain /=2 ;
     if (get_curr_stat(ch,STAT_DEX) > 20)
-	gain *= (14 /10);
+	gain = ( gain * 14 ) / 10;
     if (IS_HARA_KIRI(ch))
 	gain *= 3;
 
@@ -876,42 +868,46 @@ int i;
   return(FALSE);
 }
 
+/*
+ * Oyun takvimi. Milat: sunucu alındıktan sonra oyunun ilk açıldığı gün
+ * (22 Ağustos 2019 00:00:01). Bir oyun saati 5 gerçek dakika; gün 24 saat
+ * (2 gerçek saat), ay 10 gün (20 gerçek saat), yıl 12 ay (10 gerçek gün).
+ */
+#define GAME_EPOCH		1566421201LL
+#define GAME_HOUR_SECS		(5LL * 60)
+#define GAME_DAY_SECS		(24 * GAME_HOUR_SECS)
+#define GAME_MONTH_SECS		(10 * GAME_DAY_SECS)
+#define GAME_YEAR_SECS		(12 * GAME_MONTH_SECS)
+
+/*
+ * t anındaki oyun yılı, ayı, günü (1'den başlar, yukarı yuvarlanır) ve
+ * saati (0-23).
+ */
+static void game_time_parts( time_t t, long *yil, long *ay, long *gun, long *saat )
+{
+	long long x = (long long) t - GAME_EPOCH;
+
+	*yil = (long) ceil( (double) x / (double) GAME_YEAR_SECS );
+	x %= GAME_YEAR_SECS;
+	*ay = (long) ceil( (double) x / (double) GAME_MONTH_SECS );
+	x %= GAME_MONTH_SECS;
+	*gun = (long) ceil( (double) x / (double) GAME_DAY_SECS );
+	x %= GAME_DAY_SECS;
+	*saat = (long) ( x / GAME_HOUR_SECS );
+}
+
 void game_time_update( void )
 {
-/*
-milat: sunucu alindiktan sonra oyunun ilk acildigi gun
-22 agustos 2019 00:00:01
-*/
-	long milat 			= 1566421201;
-	long bir_oyun_saati	= 5 * 60; /* 300 gerçek saniye , 5 gerçek dakika */
-	long bir_oyun_gunu	= 24 * bir_oyun_saati; /* 120 gerçek dakika , 2 gerçek saat*/
-	long bir_oyun_ayi	= 10 * bir_oyun_gunu; /* 20 gerçek saat */
-	long bir_oyun_yili	= 12 * bir_oyun_ayi; /* 240 gerçek saat, 10 gerçek gün */
-	// saatte bir degisiklik oldu mu, bunu yakalamak icin.
-	int previous_hour_calculation;
-
-	long x , eski_gun;
+	long eski_gun = time_info.day;
+	long eski_saat = time_info.hour;
 	char buf[ MAX_STRING_LENGTH ];
 
-	eski_gun = time_info.day;
+	game_time_parts( current_time, &time_info.year, &time_info.month,
+			 &time_info.day, &time_info.hour );
 
-	x = (long)(current_time - milat);
-	time_info.year = ceil( (float)x / (float)bir_oyun_yili );
-
-	x = x % bir_oyun_yili;
-	time_info.month = ceil( (float)x / (float)bir_oyun_ayi );
-
-	x = x % bir_oyun_ayi;
-	time_info.day = ceil( (float)x / (float)bir_oyun_gunu );
-
-	previous_hour_calculation = time_info.hour;
-	x = x % bir_oyun_gunu;
-	time_info.hour = x / bir_oyun_saati;
-
-	if (previous_hour_calculation != time_info.hour)
-	{
+	/* saatte bir değişiklik oldu mu, bunu yakalamak için. */
+	if ( eski_saat != time_info.hour )
 		hourly = true;
-	}
 
 	if( eski_gun != time_info.day )
 	{
@@ -920,48 +916,26 @@ milat: sunucu alindiktan sonra oyunun ilk acildigi gun
 	}
 }
 
+/* buf en az GAME_DATE_LEN bayt olmalıdır. */
 void game_time_to_string( time_t gameTime , char *buf )
 {
-	/* varsayılan değerler */
-	long milat 			= 1566421201;
-	long bir_oyun_saati	= 5 * 60; /* 300 gerçek saniye , 5 gerçek dakika */
-	long bir_oyun_gunu	= 24 * bir_oyun_saati; /* 120 gerçek dakika , 2 gerçek saat, 7200*/
-	long bir_oyun_ayi	= 10 * bir_oyun_gunu; /* 20 gerçek saat, 72000 */
-	long bir_oyun_yili	= 12 * bir_oyun_ayi; /* 240 gerçek saat, 10 gerçek gün, 864000 */
+	long yil, ay, gun, saat;
 
-	long yil , ay , gun , x;
-
-	x = (long)( gameTime - milat );
-	yil = ceil( (float)x / (float)bir_oyun_yili );
-
-	x = x % bir_oyun_yili;
-	ay = ceil( (float)x / (float)bir_oyun_ayi );
-
-	x = x % bir_oyun_ayi;
-	gun = ceil( (float)x / (float)bir_oyun_gunu );
-
-	sprintf( buf, "%ld/%ld/%ld",gun,ay,yil);
+	game_time_parts( gameTime, &yil, &ay, &gun, &saat );
+	snprintf( buf, GAME_DATE_LEN, "%ld/%ld/%ld", gun, ay, yil );
 }
 
 int game_time_to_year( time_t gameTime )
 {
-	/* varsayılan değerler */
-	long milat 			= 1566421201;
-	long bir_oyun_saati	= 5 * 60; /* 300 gerçek saniye , 5 gerçek dakika */
-	long bir_oyun_gunu	= 24 * bir_oyun_saati; /* 120 gerçek dakika , 2 gerçek saat*/
-	long bir_oyun_ayi	= 10 * bir_oyun_gunu; /* 20 gerçek saat */
-	long bir_oyun_yili	= 12 * bir_oyun_ayi; /* 240 gerçek saat, 10 gerçek gün */
+	long yil, ay, gun, saat;
 
-	long yil , x;
-
-	x = (long)( gameTime - milat );
-	yil = ceil( (float)x / (float)bir_oyun_yili );
-	return yil;
+	game_time_parts( gameTime, &yil, &ay, &gun, &saat );
+	return (int) yil;
 }
 
-int esya_kac_gunluk( long esya_yaratilma_zamani )
+int esya_kac_gunluk( time_t esya_yaratilma_zamani )
 {
-	return (int)((float)(current_time - esya_yaratilma_zamani)) / (float)( 5 * 60 * 24 );
+	return (int) ( ( (long long) current_time - esya_yaratilma_zamani ) / GAME_DAY_SECS );
 }
 
 int get_age( CHAR_DATA *ch )
@@ -982,16 +956,15 @@ int age_to_num( int age )
 */
 void weather_update()
 {
-	char buf[MAX_STRING_LENGTH];
+	const char *time_msg = NULL;	/* saat değişimi iletisi */
+	const char *sky_msg = NULL;	/* hava değişimi iletisi */
 	DESCRIPTOR_DATA *d;
 	int diff;
-
-	buf[0] = '\0';
 
 	switch ( time_info.hour )
 	{
 		case  0:
-			strcat( buf, "Yeni bir gün başladı.\n\r" );
+			time_msg = "Yeni bir gün başladı.\n\r";
 			write_event_log("Yeni bir gün başladı.");
 			break;
 
@@ -1001,17 +974,17 @@ void weather_update()
 
 		case  6:
 			weather_info.sunlight = SUN_RISE;
-			strcat( buf, "Güneş doğudan yükseliyor.\n\r" );
+			time_msg = "Güneş doğudan yükseliyor.\n\r";
 			break;
 
 		case 19:
 			weather_info.sunlight = SUN_SET;
-			strcat( buf, "Güneş batıda yavaşça kayboluyor.\n\r" );
+			time_msg = "Güneş batıda yavaşça kayboluyor.\n\r";
 			break;
 
 		case 20:
 			weather_info.sunlight = SUN_DARK;
-			strcat( buf, "Gece başladı.\n\r" );
+			time_msg = "Gece başladı.\n\r";
 			break;
 	}
 
@@ -1046,7 +1019,7 @@ void weather_update()
 			if ( weather_info.mmhg <  990
 			|| ( weather_info.mmhg < 1010 && number_range(0,3) == 0 ) )
 			{
-				strcat( buf, "Gökyüzü bulutlanıyor.\n\r" );
+				sky_msg = "Gökyüzü bulutlanıyor.\n\r";
 				weather_info.sky = SKY_CLOUDY;
 			}
 			break;
@@ -1055,13 +1028,13 @@ void weather_update()
 			if ( weather_info.mmhg <  970
 			|| ( weather_info.mmhg <  990 && number_range(0,3) == 0 ) )
 			{
-				strcat( buf, "Yağmur başladı.\n\r" );
+				sky_msg = "Yağmur başladı.\n\r";
 				weather_info.sky = SKY_RAINING;
 			}
 
 			if ( weather_info.mmhg > 1030 && number_range(0,3) == 0 )
 			{
-				strcat( buf, "Bulutlar dağılıyor.\n\r" );
+				sky_msg = "Bulutlar dağılıyor.\n\r";
 				weather_info.sky = SKY_CLOUDLESS;
 			}
 			break;
@@ -1069,14 +1042,14 @@ void weather_update()
 		case SKY_RAINING:
 			if ( weather_info.mmhg <  970 && number_range(0,3) == 0 )
 			{
-				strcat( buf, "Gökyüzünde şimşekler çakıyor.\n\r" );
+				sky_msg = "Gökyüzünde şimşekler çakıyor.\n\r";
 				weather_info.sky = SKY_LIGHTNING;
 			}
 
 			if ( weather_info.mmhg > 1030
 			|| ( weather_info.mmhg > 1010 && number_range(0,3) == 0 ) )
 			{
-				strcat( buf, "Yağmur dindi.\n\r" );
+				sky_msg = "Yağmur dindi.\n\r";
 				weather_info.sky = SKY_CLOUDY;
 			}
 			break;
@@ -1085,22 +1058,27 @@ void weather_update()
 			if ( weather_info.mmhg > 1010
 			|| ( weather_info.mmhg >  990 && number_range(0,3) == 0 ) )
 			{
-				strcat( buf, "Şimşekler durdu.\n\r" );
+				sky_msg = "Şimşekler durdu.\n\r";
 				weather_info.sky = SKY_RAINING;
 				break;
 			}
 			break;
 	}
 
-	if ( buf[0] != '\0' )
+	if ( time_msg != NULL || sky_msg != NULL )
 	{
-	for ( d = descriptor_list; d != NULL; d = d->next )
-	{
-	if ( d->connected == CON_PLAYING
-	&&   IS_OUTSIDE(d->character)
-	&&   IS_AWAKE(d->character) )
-	send_to_char( buf, d->character );
-	}
+		for ( d = descriptor_list; d != NULL; d = d->next )
+		{
+			if ( d->connected == CON_PLAYING
+			&&   IS_OUTSIDE(d->character)
+			&&   IS_AWAKE(d->character) )
+			{
+				if ( time_msg != NULL )
+					send_to_char( time_msg, d->character );
+				if ( sky_msg != NULL )
+					send_to_char( sky_msg, d->character );
+			}
+		}
 	}
 
 	return;
@@ -1119,6 +1097,26 @@ void ikikat_update( void )
   }
 }
 
+
+/*
+ * Boğma / sopa / vampir dokunuşu geçince kurban uyanır ve kısa süreli
+ * koruma etkisi (guard_sn) alır.
+ */
+static void wake_with_guard( CHAR_DATA *ch, int guard_sn )
+{
+    AFFECT_DATA af;
+
+    REMOVE_BIT(ch->affected_by, AFF_SLEEP);
+    do_wake(ch, "");
+    af.type = guard_sn;
+    af.where = TO_AFFECTS;
+    af.level = ch->level;
+    af.duration = 2 + ch->level / 50;
+    af.modifier = 0;
+    af.bitvector = 0;
+    af.location  = APPLY_NONE;
+    affect_join(ch, &af);
+}
 
 /*
  * Update all chars, including mobs.
@@ -1347,50 +1345,11 @@ void char_update( void )
 		}
 
 		if ( paf->type == gsn_strangle )
-		{
-			AFFECT_DATA neck_af;
-
-			REMOVE_BIT(ch->affected_by, AFF_SLEEP);
-			do_wake(ch, "");
-			neck_af.type = gsn_neckguard;
-			neck_af.where = TO_AFFECTS;
-			neck_af.level = ch->level;
-			neck_af.duration = 2 + ch->level / 50;
-			neck_af.modifier = 0;
-			neck_af.bitvector = 0;
-			neck_af.location  = APPLY_NONE;
-			affect_join(ch, &neck_af);
-		}
+		    wake_with_guard( ch, gsn_neckguard );
 		else if ( paf->type == gsn_blackjack )
-		{
-			AFFECT_DATA head_af;
-
-			REMOVE_BIT(ch->affected_by, AFF_SLEEP);
-			do_wake(ch,"");
-			head_af.type = gsn_headguard;
-			head_af.where = TO_AFFECTS;
-			head_af.level = ch->level;
-			head_af.duration = 2 + ch->level / 50;
-			head_af.modifier = 0;
-			head_af.bitvector = 0;
-			head_af.location  = APPLY_NONE;
-			affect_join(ch, &head_af);
-		}
+		    wake_with_guard( ch, gsn_headguard );
 		else if ( paf->type == gsn_vampiric_touch )
-		{
-			AFFECT_DATA b_af;
-
-			REMOVE_BIT(ch->affected_by, AFF_SLEEP);
-			do_wake(ch, "");
-			b_af.type = gsn_blackguard;
-			b_af.where = TO_AFFECTS;
-			b_af.level = ch->level;
-			b_af.duration = 2 + ch->level / 50;
-			b_af.modifier = 0;
-			b_af.bitvector = 0;
-			b_af.location  = APPLY_NONE;
-			affect_join(ch, &b_af);
-		}
+		    wake_with_guard( ch, gsn_blackguard );
 
 		affect_remove( ch, paf );
 	    }
@@ -1454,7 +1413,7 @@ void char_update( void )
           }
 	}
 
-        if (IS_AFFECTED(ch, AFF_PLAGUE) && ch != NULL)
+        if (IS_AFFECTED(ch, AFF_PLAGUE))
         {
             AFFECT_DATA *af, plague;
             CHAR_DATA *vch;
@@ -1507,8 +1466,7 @@ void char_update( void )
   	      damage( ch, ch, dam + UMAX(ch->max_hit/20, 50), gsn_plague,DAM_DISEASE,TRUE);
 	    else damage( ch, ch, dam, gsn_plague,DAM_DISEASE,FALSE);
         }
-	else if ( IS_AFFECTED(ch, AFF_POISON) && ch != NULL
-	     &&   !IS_AFFECTED(ch,AFF_SLOW))
+	else if ( IS_AFFECTED(ch, AFF_POISON) && !IS_AFFECTED(ch,AFF_SLOW))
 
 	{
 	    AFFECT_DATA *poison;
@@ -1624,11 +1582,10 @@ void obj_update( void )
 {
 	OBJ_DATA *obj;
 	OBJ_DATA *obj_next;
-	OBJ_DATA *t_obj, *pit, *next_obj;
+	OBJ_DATA *t_obj, *pit;
 	int esya_kac_gun, esya_curume_gun_sayisi;
 
 	AFFECT_DATA *paf, *paf_next;
-	static int pit_count = 1;
 
 	for ( obj = object_list; obj != NULL; obj = obj_next )
 	{
@@ -1794,18 +1751,6 @@ void obj_update( void )
 			}
 		}
 
-		pit_count = (pit_count+1) % 120; /* more or less an hour */
-		if (obj->pIndexData->vnum == OBJ_VNUM_PIT && pit_count == 121)
-		{
-			for (t_obj = obj->contains; t_obj != NULL; t_obj = next_obj)
-			{
-				next_obj = t_obj->next_content;
-				obj_from_obj(t_obj);
-				extract_obj(t_obj);
-			}
-		}
-
-
 		if ((obj->item_type == ITEM_CORPSE_PC || obj->wear_loc == WEAR_FLOAT) &&  obj->contains)
 		{   /* save the contents */
 			OBJ_DATA *t_obj, *next_obj;
@@ -1888,6 +1833,9 @@ void aggr_update( void )
 
 	wch_next = wch->next;
 
+	if ( wch->in_room == NULL )
+	    continue;
+
 	if (IS_AFFECTED(wch,AFF_BLOODTHIRST) &&
           IS_AWAKE(wch) && wch->fighting == NULL)
         {
@@ -1925,7 +1873,6 @@ void aggr_update( void )
 
 	if ( IS_NPC(wch)
 	||   wch->level >= LEVEL_IMMORTAL
-	||   wch->in_room == NULL
 	||   wch->in_room->area->empty)
 	    continue;
 
@@ -2245,280 +2192,103 @@ void room_update( void )
     return;
 }
 
+/*
+ * Oda büyüleri: odadaki büyü (room_sn) sürdükçe her tur odadakilere kişisel
+ * etkiyi (sn) bulaştırmayı dener. Etki seviyesi af->level + level_adj,
+ * kurtarma zarı etki seviyesi + save_adj, süre number_range(1, seviye/dur_div
+ * + dur_add).
+ */
+static const struct room_affect_type
+{
+    int		room_bit;	/* AFF_ROOM_* */
+    sh_int *	room_sn;	/* odadaki büyü */
+    sh_int *	sn;		/* bulaşan etki */
+    int		bitvector;	/* AFF_*; 0 ise is_affected(sn) ile denetlenir */
+    int		dam_type;
+    int		level_adj;
+    int		save_adj;
+    int		dur_div;
+    int		dur_add;
+    int		modifier;
+    bool	undead_immune;
+    bool	sleeps;		/* uyanık olanı uyutur, ileti yalnız ona */
+    const char *to_char;
+    const char *to_room;
+} room_affect_table[] =
+{
+    { AFF_ROOM_PLAGUE,	&gsn_black_death,     &gsn_plague,      AFF_PLAGUE, DAM_DISEASE, -1,  0,  2, 1, -5, FALSE, FALSE,
+      "Ateşinin çıktığını hissediyorsun.\n\r",		"$n hasta görünüyor."			},
+    { AFF_ROOM_POISON,	&gsn_deadly_venom,    &gsn_poison,      AFF_POISON, DAM_POISON,  -1,  0,  5, 1, -5, FALSE, FALSE,
+      "Kendini hasta hissediyorsun.\n\r",		"$n çok hasta görünüyor."		},
+    { AFF_ROOM_SLOW,	&gsn_lethargic_mist,  &gsn_slow,        AFF_SLOW,   DAM_OTHER,   -1,  0,  5, 1, -5, FALSE, FALSE,
+      "Acelesiz hareket etmeye başlıyorsun.\n\r",	"$s hareketlerindeki telaş kayboluyor."	},
+    { AFF_ROOM_SLEEP,	&gsn_mysterious_dream, &gsn_sleep,      AFF_SLEEP,  DAM_CHARM,   -1, -4, 10, 1, -5, TRUE,  TRUE,
+      "Uykun geliyor.......zzzzzz.\n\r",		"$n uykuya dalıyor."			},
+    { AFF_ROOM_ESPIRIT,	&gsn_evil_spirit,     &gsn_evil_spirit, 0,          DAM_MENTAL,   0,  2, 30, 0,  0, FALSE, FALSE,
+      "Kendini bu kadar kötü hissetmemiştin.\n\r",	"$s üstüne şerrin gölgesi düşüyor."	},
+};
+
 void room_affect_update( void )
 {
     ROOM_INDEX_DATA *room;
     ROOM_INDEX_DATA *room_next;
+    size_t i;
 
     for ( room = top_affected_room; room ; room = room_next )
     {
 	room_next = room->aff_next;
 
-        while (IS_ROOM_AFFECTED(room, AFF_ROOM_PLAGUE) && room->people != NULL)
-        {
-            AFFECT_DATA *af, plague;
-            CHAR_DATA *vch;
+	for ( i = 0; i < sizeof(room_affect_table) / sizeof(room_affect_table[0]); i++ )
+	{
+	    const struct room_affect_type *t = &room_affect_table[i];
+	    AFFECT_DATA *af, paf;
+	    CHAR_DATA *vch;
 
-            for ( af = room->affected; af != NULL; af = af->next )
-            {
-            	if (af->type == gsn_black_death)
-                    break;
-            }
+	    if ( !IS_ROOM_AFFECTED(room, t->room_bit) || room->people == NULL )
+		continue;
 
-            if (af == NULL)
-            {
-            	REMOVE_BIT(room->affected_by,AFF_ROOM_PLAGUE);
-            	break;
-            }
+	    for ( af = room->affected; af != NULL; af = af->next )
+		if ( af->type == *t->room_sn )
+		    break;
 
-            if (af->level == 1)
-            	af->level = 2;
+	    if ( af == NULL )
+	    {
+		REMOVE_BIT(room->affected_by, t->room_bit);
+		continue;
+	    }
 
-	    plague.where		= TO_AFFECTS;
-            plague.type 		= gsn_plague;
-            plague.level 		= af->level - 1;
-            plague.duration 		= number_range(1,((plague.level/2)+1));
-            plague.location		= APPLY_NONE;
-            plague.modifier 		= -5;
-            plague.bitvector 		= AFF_PLAGUE;
-
-            for ( vch = room->people; vch != NULL; vch = vch->next_in_room)
-            {
-                if (!saves_spell(plague.level ,vch,DAM_DISEASE)
-		&&  !IS_IMMORTAL(vch)
-		&&  !is_safe_rspell(af->level,vch)
-            	&&  !IS_AFFECTED(vch,AFF_PLAGUE) && number_range(0,7) == 0)
-            	{
-                send_to_char("Ateşinin çıktığını hissediyorsun.\n\r",vch);
-                act("$n hasta görünüyor.",vch,NULL,NULL,TO_ROOM);
-            	    affect_join(vch,&plague);
-            	}
-            }
-	 break;
-        }
-
-        while (IS_ROOM_AFFECTED(room, AFF_ROOM_POISON) && room->people != NULL)
-        {
-            AFFECT_DATA *af, paf;
-            CHAR_DATA *vch;
-
-            for ( af = room->affected; af != NULL; af = af->next )
-            {
-            	if (af->type == gsn_deadly_venom)
-                    break;
-            }
-
-            if (af == NULL)
-            {
-            	REMOVE_BIT(room->affected_by,AFF_ROOM_POISON);
-            	break;
-            }
-
-            if (af->level == 1)
-            	af->level = 2;
+	    if ( af->level == 1 )
+		af->level = 2;
 
 	    paf.where		= TO_AFFECTS;
-            paf.type 		= gsn_poison;
-            paf.level 		= af->level - 1;
-            paf.duration 	= number_range(1,((paf.level/5)+1));
-            paf.location	= APPLY_NONE;
-            paf.modifier 	= -5;
-            paf.bitvector 	= AFF_POISON;
+	    paf.type		= *t->sn;
+	    paf.level		= af->level + t->level_adj;
+	    paf.duration	= number_range( 1, paf.level / t->dur_div + t->dur_add );
+	    paf.location	= APPLY_NONE;
+	    paf.modifier	= t->modifier;
+	    paf.bitvector	= t->bitvector;
 
-            for ( vch = room->people; vch != NULL; vch = vch->next_in_room)
-            {
-                if (!saves_spell(paf.level ,vch,DAM_POISON)
-		&&  !IS_IMMORTAL(vch)
-		&&  !is_safe_rspell(af->level,vch)
-            	&&  !IS_AFFECTED(vch,AFF_POISON) && number_range(0,7) == 0)
-            	{
-                send_to_char("Kendini hasta hissediyorsun.\n\r",vch);
-                act("$n çok hasta görünüyor.",vch,NULL,NULL,TO_ROOM);
-            	    affect_join(vch,&paf);
-            	}
-            }
-	 break;
-        }
+	    for ( vch = room->people; vch != NULL; vch = vch->next_in_room )
+	    {
+		if ( saves_spell( paf.level + t->save_adj, vch, t->dam_type )
+		||   IS_IMMORTAL(vch)
+		||   is_safe_rspell( af->level, vch )
+		||   ( t->undead_immune && IS_NPC(vch) && IS_SET(vch->act, ACT_UNDEAD) )
+		||   ( t->bitvector != 0 ? IS_AFFECTED(vch, t->bitvector)
+					 : is_affected(vch, paf.type) )
+		||   number_range(0,7) != 0 )
+		    continue;
 
-        while (IS_ROOM_AFFECTED(room, AFF_ROOM_SLOW) && room->people != NULL)
-        {
-            AFFECT_DATA *af, paf;
-            CHAR_DATA *vch;
-
-            for ( af = room->affected; af != NULL; af = af->next )
-            {
-            	if (af->type == gsn_lethargic_mist)
-                    break;
-            }
-
-            if (af == NULL)
-            {
-            	REMOVE_BIT(room->affected_by,AFF_ROOM_SLOW);
-            	break;
-            }
-
-            if (af->level == 1)
-            	af->level = 2;
-
-	    paf.where		= TO_AFFECTS;
-            paf.type 		= gsn_slow;
-            paf.level 		= af->level - 1;
-            paf.duration 	= number_range(1,((paf.level/5)+1));
-            paf.location	= APPLY_NONE;
-            paf.modifier 	= -5;
-            paf.bitvector 	= AFF_SLOW;
-
-            for ( vch = room->people; vch != NULL; vch = vch->next_in_room)
-            {
-                if (!saves_spell(paf.level ,vch,DAM_OTHER)
-		&&  !IS_IMMORTAL(vch)
-		&&  !is_safe_rspell(af->level,vch)
-            	&&  !IS_AFFECTED(vch,AFF_SLOW) && number_range(0,7) == 0)
-            	{
-                send_to_char("Acelesiz hareket etmeye başlıyorsun.\n\r",vch);
-                act("$s hareketlerindeki telaş kayboluyor.",vch,NULL,NULL,TO_ROOM);
-            	    affect_join(vch,&paf);
-            	}
-            }
-	 break;
-        }
-
-        while (IS_ROOM_AFFECTED(room, AFF_ROOM_SLEEP) && room->people != NULL)
-        {
-            AFFECT_DATA *af, paf;
-            CHAR_DATA *vch;
-
-            for ( af = room->affected; af != NULL; af = af->next )
-            {
-            	if (af->type == gsn_mysterious_dream)
-                    break;
-            }
-
-            if (af == NULL)
-            {
-            	REMOVE_BIT(room->affected_by,AFF_ROOM_SLEEP);
-            	break;
-            }
-
-            if (af->level == 1)
-            	af->level = 2;
-
-	    paf.where		= TO_AFFECTS;
-            paf.type 		= gsn_sleep;
-            paf.level 		= af->level - 1;
-            paf.duration 	= number_range(1,((paf.level/10)+1));
-            paf.location	= APPLY_NONE;
-            paf.modifier 	= -5;
-            paf.bitvector 	= AFF_SLEEP;
-
-            for ( vch = room->people; vch != NULL; vch = vch->next_in_room)
-            {
-                if (!saves_spell(paf.level - 4,vch,DAM_CHARM)
-		&&  !IS_IMMORTAL(vch)
-		&&  !is_safe_rspell(af->level,vch)
-		&&  !(IS_NPC(vch) && IS_SET(vch->act,ACT_UNDEAD) )
-            	&&  !IS_AFFECTED(vch,AFF_SLEEP) && number_range(0,7) == 0)
-            	{
-		  if (IS_AWAKE(vch))
-		   {
-         send_to_char("Uykun geliyor.......zzzzzz.\n\r",vch);
-         act("$n uykuya dalıyor.",vch,NULL,NULL,TO_ROOM);
-		    vch->position = POS_SLEEPING;
-		   }
-          	  affect_join(vch,&paf);
-            	}
-            }
-	 break;
-        }
-
-
-        while (IS_ROOM_AFFECTED(room, AFF_ROOM_ESPIRIT) && room->people != NULL)
-        {
-            AFFECT_DATA *af, paf;
-            CHAR_DATA *vch;
-
-            for ( af = room->affected; af != NULL; af = af->next )
-            {
-            	if (af->type == gsn_evil_spirit)
-                    break;
-            }
-
-            if (af == NULL)
-            {
-            	REMOVE_BIT(room->affected_by,AFF_ROOM_ESPIRIT);
-            	break;
-            }
-
-            if (af->level == 1)
-            	af->level = 2;
-
-	    paf.where		= TO_AFFECTS;
-            paf.type 		= gsn_evil_spirit;
-            paf.level 		= af->level;
-            paf.duration 	= number_range(1,(paf.level/30));
-            paf.location	= APPLY_NONE;
-            paf.modifier 	= 0;
-            paf.bitvector 	= 0;
-
-            for ( vch = room->people; vch != NULL; vch = vch->next_in_room)
-            {
-                if (!saves_spell(paf.level + 2,vch,DAM_MENTAL)
-		&&  !IS_IMMORTAL(vch)
-		&&  !is_safe_rspell(af->level,vch)
-            	&&  !is_affected(vch,gsn_evil_spirit) && number_range(0,7) == 0)
-            	{
-                send_to_char("Kendini bu kadar kötü hissetmemiştin.\n\r",vch);
-                act("$s üstüne şerrin gölgesi düşüyor.",vch,NULL,NULL,TO_ROOM);
-            	    affect_join(vch,&paf);
-            	}
-            }
-	 break;
-        }
-
-/* new ones here
-        while (IS_ROOM_AFFECTED(room, AFF_ROOM_) && room->people != NULL)
-        {
-            AFFECT_DATA *af, paf;
-            CHAR_DATA *vch;
-
-            for ( af = room->affected; af != NULL; af = af->next )
-            {
-            	if (af->type == gsn_)
-                    break;
-            }
-
-            if (af == NULL)
-            {
-            	REMOVE_BIT(room->affected_by,AFF_ROOM_);
-            	break;
-            }
-
-            if (af->level == 1)
-            	af->level = 2;
-
-	    paf.where		= TO_AFFECTS;
-            paf.type 		= gsn_;
-            paf.level 		= af->level - 1;
-            paf.duration 	= number_range(1,((paf.level/5)+1));
-            paf.location	= APPLY_NONE;
-            paf.modifier 	= -5;
-            paf.bitvector 	= AFF_;
-
-            for ( vch = room->people; vch != NULL; vch = vch->next_in_room)
-            {
-                if (!saves_spell(paf.level + 2,vch,DAM_)
-		&&  !IS_IMMORTAL(vch)
-		&&  !is_safe_rspell(af->level,vch)
-            	&&  !IS_AFFECTED(vch,AFF_) && number_range(0,7) == 0)
-            	{
-            	    send_to_char("You feel hot and feverish.\n\r",vch);
-            	    act("$n shivers and looks very ill.",vch,NULL,NULL,TO_ROOM);
-            	    affect_join(vch,&paf);
-            	}
-            }
-	 break;
-        }
-*/
+		if ( !t->sleeps || IS_AWAKE(vch) )
+		{
+		    send_to_char( t->to_char, vch );
+		    act( t->to_room, vch, NULL, NULL, TO_ROOM );
+		    if ( t->sleeps )
+			vch->position = POS_SLEEPING;
+		}
+		affect_join( vch, &paf );
+	    }
+	}
     }
     return;
 }

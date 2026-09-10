@@ -3321,7 +3321,9 @@ void	game_time_update ( void );
 void	game_time_to_string ( time_t gameTime , char *buf );
 int		game_time_to_year ( time_t gameTime );
 int     get_age         ( CHAR_DATA *ch );
-int     esya_kac_gunluk ( long esya_yaratilma_zamani );
+int     esya_kac_gunluk ( time_t esya_yaratilma_zamani );
+/* Grup 09 */
+#define GAME_DATE_LEN	20	/* game_time_to_string tamponu ("gün/ay/yıl") */
 int		age_to_num	( int age);
 void	advance_level	( CHAR_DATA *ch );
 void	gain_exp	( CHAR_DATA *ch, int gain );
