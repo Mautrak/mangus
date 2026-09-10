@@ -794,6 +794,24 @@ void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest )
 
 
 /*
+ * Oynama günlüğünü base gününden geriye MAX_TIME_LOG gün için kurar; her
+ * güne bonus_minutes dakika yazılır (yeni/eski oyuncu bonusu 60, PlayLog
+ * okunurken 0).
+ */
+void init_play_log( PC_DATA *pc, time_t base, int bonus_minutes )
+{
+    int l, today, day;
+
+    today = parse_date( base );
+    for ( l = 0; l < MAX_TIME_LOG; l++ )
+    {
+	day = ( 365 + today - l ) % 365;
+	pc->log_date[l] = day ? day : 365;
+	pc->log_time[l] = bonus_minutes;
+    }
+}
+
+/*
  * Load a char and inventory into a new ch structure.
  */
 bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
@@ -837,7 +855,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
     ch->progtypes                       = 0;
     ch->extracted                       = FALSE;
     ch->pcdata->points                  = 0;
-    ch->prompt 				= str_dup("<%n: %hhp %mm %vmv Opp:<%o>> ");
+    ch->prompt 				= str_dup( DEFAULT_PROMPT );
     ch->pcdata->confirm_delete		= FALSE;
     ch->pcdata->confirm_remort		= FALSE;
     ch->pcdata->pwd			= str_dup( "" );
@@ -975,15 +993,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name )
 	 */
 	if (IS_SET(ch->pcdata->time_flag, TLP_NOLOG))
 	{
-	    int l, today, day;
-
-	    today = parse_date( current_time );
-	    for (l =0; l < MAX_TIME_LOG; l++)
-	    {
-		day = ((365 + today - l) % 365);
-		ch->pcdata->log_date[l]	= day ? day : 365;
-		ch->pcdata->log_time[l]	= 60;
-	    }
+	    init_play_log( ch->pcdata, current_time, 60 );
 	    REMOVE_BIT(ch->pcdata->time_flag, TLP_NOLOG);
 	}
 
@@ -1384,15 +1394,9 @@ void fread_char( CHAR_DATA *ch, FILE *fp )
  	    KEY( "Prom",	ch->prompt,		fread_string( fp ) );
 	    if (!str_cmp(word,"PlayLog"))
 	    {
-		int l, d, t, today;
+		int l, d, t;
 
-		today = parse_date( boot_time );
-		for (l =0; l < MAX_TIME_LOG; l++)
-		{
-		  d = ((365 + today - l) % 365);
-		  ch->pcdata->log_date[l]	= d ? d : 365;
-		  ch->pcdata->log_time[l]	= 0;
-		}
+		init_play_log( ch->pcdata, boot_time, 0 );
 		fread_number(fp);	/* read the version */
 		while (1)
 		{

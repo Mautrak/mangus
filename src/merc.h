@@ -493,6 +493,11 @@ struct	descriptor_data
     int			outtop;
     char *		showstr_head;
     char *		showstr_point;
+    /* Grup 09 */
+    bool		outflow_error;	/* çıktı tamponu taştı; game_loop kapatır */
+    int			outkept;	/* önceki pulse'tan yazılamayıp kalan bayt */
+    int			login_tries;	/* yanlış parola sayacı (nanny) */
+    bool		ethos_intro;	/* etik açıklaması bekliyor (nanny) */
 };
 
 
@@ -3021,6 +3026,8 @@ void	sig_handler		(int sig);
 
 void	printf_to_char	( CHAR_DATA *, const char *, ... );
 void	bugf		( char *, ... );
+/* Grup 09 */
+#define DEFAULT_PROMPT	"Yp:%h/%H Mp:%m/%M Zp:%v/%V <%o>{x "
 
 /* data.c */
 void ud_data_write (void);
@@ -3288,6 +3295,8 @@ bool gorev_ekipmani_mi (OBJ_DATA *obj);
 /* save.c */
 void	save_char_obj	( CHAR_DATA *ch );
 bool	load_char_obj	( DESCRIPTOR_DATA *d, char *name );
+/* Grup 09 */
+void	init_play_log	( PC_DATA *pc, time_t base, int bonus_minutes );
 
 /* skills.c */
 int     exp_to_level    ( CHAR_DATA *ch, int points );
